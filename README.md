@@ -1,4 +1,4 @@
-# PoP
+# PoP — “Platform of Platforms”
 Framework for building Single-Page Application WordPress websites, decentralized crowd-sourced platforms, and social networks
 
 For more info, visit:
