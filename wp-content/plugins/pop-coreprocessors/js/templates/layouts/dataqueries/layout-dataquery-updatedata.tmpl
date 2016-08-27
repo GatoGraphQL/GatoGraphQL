@@ -1,0 +1,9 @@
+{{#with itemObject}}
+	<script type="text/javascript">
+	(function($){
+		{{#each ../fields}}
+			$('.{{../../itemDBKey}}-{{.}}-{{../id}}').html('{{get ../. .}}');
+		{{/each}}
+	})(jQuery);
+	</script>	
+{{/with}}

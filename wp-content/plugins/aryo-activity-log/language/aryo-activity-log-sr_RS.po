@@ -1,0 +1,173 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: ARYO Activity Log\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/activity-log\n"
+"POT-Creation-Date: 2013-08-16 01:53+0200\n"
+"PO-Revision-Date: 2013-11-14 18:58-0000\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: Robert Harm <LL@li.org>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: ../classes/class-aal-activity-log-list-table.php:82
+msgid "Type"
+msgstr "Tip"
+
+#: ../classes/class-aal-activity-log-list-table.php:83
+msgid "Name"
+msgstr "Ime"
+
+#: ../classes/class-aal-activity-log-list-table.php:84
+msgid "Action"
+msgstr "Akcija"
+
+#: ../classes/class-aal-activity-log-list-table.php:85
+msgid "Date"
+msgstr "Datum"
+
+#: ../classes/class-aal-activity-log-list-table.php:99
+#, php-format
+msgid "%s ago"
+msgstr "%s pre"
+
+#: ../classes/class-aal-activity-log-list-table.php:120
+msgid "by "
+msgstr "od strane"
+
+#: ../classes/class-aal-activity-log-list-table.php:127
+#: ../classes/class-aal-activity-log-list-table.php:176
+msgid "Guest"
+msgstr "Gost"
+
+#: ../classes/class-aal-activity-log-list-table.php:187
+msgid "All Users"
+msgstr "Svi korisnici"
+
+#: ../classes/class-aal-activity-log-list-table.php:214
+msgid "All Types"
+msgstr "Svi tipovi"
+
+#: ../classes/class-aal-activity-log-list-table.php:220
+msgid "Filter"
+msgstr "Filter"
+
+#: ../classes/class-aal-admin-ui.php:8 ../classes/class-aal-admin-ui.php:18
+#: ../classes/class-aal-settings.php:30
+msgid "Activity Log"
+msgstr "Activity Log"
+
+#: ../classes/class-aal-settings.php:17
+msgid "Settings"
+msgstr "Postavke"
+
+#: ../classes/class-aal-settings.php:29
+msgid "Activity Log Settings"
+msgstr "Activity Log postavke"
+
+#: ../classes/class-aal-settings.php:51
+msgid "Display Options"
+msgstr "Opcije prikaza"
+
+#: ../classes/class-aal-settings.php:58
+msgid "Keep logs for"
+msgstr "drži logove za"
+
+#: ../classes/class-aal-settings.php:66
+msgid "Forever"
+msgstr "Zauvek"
+
+#: ../classes/class-aal-settings.php:67
+msgid "A year"
+msgstr "Godina"
+
+#: ../classes/class-aal-settings.php:68
+msgid "6 months"
+msgstr "6 meseci"
+
+#: ../classes/class-aal-settings.php:69
+msgid "A month"
+msgstr "Mesec"
+
+#: ../classes/class-aal-settings.php:83
+msgid "ARYO Activity Log Settings"
+msgstr "ARYO Activity Log Settings"
+
+#: ../classes/class-aal-settings.php:109
+msgid "These are some basic settings for Activity Log."
+msgstr "Ovo su neke osnovne postavke za Activity Log."
+
+#: ../language/strings.php:4
+msgid "Post"
+msgstr "Post"
+
+#: ../language/strings.php:5
+msgid "created"
+msgstr "stvoren"
+
+#: ../language/strings.php:6
+msgid "updated"
+msgstr "update-ovan"
+
+#: ../language/strings.php:7
+msgid "deleted"
+msgstr "obrisan"
+
+#: ../language/strings.php:10
+msgid "Attachment"
+msgstr "Attachment"
+
+#: ../language/strings.php:11
+msgid "added"
+msgstr "dodato"
+
+#: ../language/strings.php:14
+msgid "User"
+msgstr "Korisnik"
+
+#: ../language/strings.php:15
+msgid "logged_out"
+msgstr "izlogovan"
+
+#: ../language/strings.php:16
+msgid "logged_in"
+msgstr "ulogovan"
+
+#: ../language/strings.php:17
+msgid "wrong_password"
+msgstr "pogrešna_šifra"
+
+#: ../language/strings.php:20
+msgid "Plugin"
+msgstr "Plugin"
+
+#: ../language/strings.php:21
+msgid "activated"
+msgstr "aktivirano"
+
+#: ../language/strings.php:22
+msgid "deactivated"
+msgstr "deaktivirano"
+
+#: ../language/strings.php:25
+msgid "Widget"
+msgstr "Widget"
+
+#: ../language/strings.php:28
+msgid "Options"
+msgstr "Opcije"
+
+#: ../language/strings.php:31
+msgid "Menu"
+msgstr "Meni"
+
+#: ../language/strings.php:34
+msgid "Taxonomy"
+msgstr "Taxonomy"
+
+#~ msgid "was "
+#~ msgstr "war"

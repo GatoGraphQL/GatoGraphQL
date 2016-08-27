@@ -1,0 +1,12 @@
+<div class="input-group">
+	{{#withModule . "input"}}
+		{{enterModule ../.}}
+	{{/withModule}}
+	<span class="input-group-btn {{classes.input-group-btn}}">
+		{{#each settings-keys.controls}}
+			{{#withModule ../. this}}
+				{{enterModule ../../.}}
+			{{/withModule}}
+		{{/each}}
+	</span>
+</div>

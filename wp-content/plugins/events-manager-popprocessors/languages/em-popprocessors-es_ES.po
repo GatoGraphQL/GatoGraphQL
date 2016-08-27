@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-17 16:21+0800\n"
+"PO-Revision-Date: 2016-07-24 15:05+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././pop-library/formcomponent-inputs/typeaheadmap-formcomponents-inputs.php:30
+msgid "Location(s)"
+msgstr "Ubicación(es)"
+
+#: .././pop-library/formcomponents/typeahead/text-formcomponents-inputs.php:25
+msgid "Name or Address"
+msgstr "Nombre o dirección"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/event-typeaheadcomponent-formcomponents-base.php:21
+msgid "Loading Events"
+msgstr "Cargando eventos"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/event-typeaheadcomponent-formcomponents-base.php:25
+msgid "No Events found"
+msgstr "No se encontraron eventos"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/location-typeaheadcomponent-formcomponents-base.php:42
+msgid "Loading Locations"
+msgstr "Cargando ubicaciones"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/location-typeaheadcomponent-formcomponents-base.php:46
+msgid "No Locations found"
+msgstr "No se encontraron ubicaciones"
+
+#: .././pop-library/processors/abstract-classes/sidebars/messages.php:25
+#: .././pop-library/processors/abstract-classes/viewcomponents/location-buttons-base.php:121
+msgid "No location"
+msgstr "Sin ubicación"
+
+#: .././pop-library/processors/abstract-classes/structures/calendars/controls/button-controls.php:27
+msgid "Previous month"
+msgstr "Mes anterior"
+
+#: .././pop-library/processors/abstract-classes/structures/calendars/controls/button-controls.php:31
+msgid "Next month"
+msgstr "Mes siguiente"
+
+#: .././pop-library/processors/abstract-classes/viewcomponents/location-buttoninners-base.php:44
+#: .././pop-library/processors/viewcomponents/location-buttoninners.php:40
+msgid "Locations"
+msgstr "Ubicaciones"
+
+#: .././pop-library/processors/buttons/buttoninners.php:43
+#: .././pop-library/processors/buttons/buttons.php:72
+msgid "Google Calendar"
+msgstr "Google Calendar"
+
+#: .././pop-library/processors/buttons/buttoninners.php:47
+#: .././pop-library/processors/buttons/buttons.php:76
+msgid "iCal"
+msgstr "iCal"
+
+#: .././pop-library/processors/controls/_buttoninners.php:42
+#: .././pop-library/processors/controls/_buttons.php:58
+msgid "Events"
+msgstr "Eventos"
+
+#: .././pop-library/processors/controls/_buttoninners.php:43
+#: .././pop-library/processors/controls/_buttons.php:59
+msgid "Events Calendar"
+msgstr "Calendario de eventos"
+
+#: .././pop-library/processors/controls/_buttoninners.php:44
+#: .././pop-library/processors/controls/_buttons.php:60
+msgid "Past Events"
+msgstr "Eventos pasados"
+
+#: .././pop-library/processors/createlocation/_messagefeedbacks.php:27
+msgid "Location created successfully!"
+msgstr "Ubicación creada con éxito"
+
+#: .././pop-library/processors/createlocation/_messagefeedbacks.php:28
+#: .././pop-library/processors/createlocation/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "City is missing."
+msgstr "La ciudad no puede ser vacío."
+
+#: .././pop-library/processors/createlocation/_messagefeedbacks.php:29
+msgid "Now adding to your list of Locations."
+msgstr "Añadiendo a su lista de ubicaciones."
+
+#: .././pop-library/processors/createlocation/blockgroups/viewcomponents-deprecated.php:28
+#: .././pop-library/processors/forms/submit-buttons.php:25
+msgid "Add Location"
+msgstr "Añadir ubicación"
+
+#: .././pop-library/processors/createlocation/blocks.php:116
+msgid "Adding Location..."
+msgstr "Añadiendo ubicación..."
+
+#: .././pop-library/processors/createlocation/formcomponents-inputs/select-formcomponents-inputs.php:25
+msgid "Country"
+msgstr "País"
+
+#: .././pop-library/processors/createlocation/formcomponents-inputs/text-formcomponents-inputs.php:40
+msgid "Name"
+msgstr "Nombre"
+
+#: .././pop-library/processors/createlocation/formcomponents-inputs/text-formcomponents-inputs.php:44
+msgid "Address"
+msgstr "Dirección"
+
+#: .././pop-library/processors/createlocation/formcomponents-inputs/text-formcomponents-inputs.php:48
+msgid "City"
+msgstr "Ciudad"
+
+#: .././pop-library/processors/createlocation/formcomponents-inputs/text-formcomponents-inputs.php:52
+msgid "State"
+msgstr "Estado"
+
+#: .././pop-library/processors/createlocation/formcomponents-inputs/text-formcomponents-inputs.php:56
+msgid "Post code"
+msgstr "Código postal"
+
+#: .././pop-library/processors/createlocation/formcomponents-inputs/text-formcomponents-inputs.php:60
+msgid "Region"
+msgstr "Región"
+
+#: .././pop-library/processors/createlocation/messagefeedbacks/messagefeedbacks-layouts.php:28
+msgid "Location added successfully!"
+msgstr "Ubicación añadida con éxito"
+
+#: .././pop-library/processors/createlocation/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "More locations to add?"
+msgstr "¿Más ubicaciones para agregar?"
+
+#: .././pop-library/processors/forms/formgroups.php:39
+msgid ""
+"If you can't find the location in the input below, click on the \"+\" button "
+"to add a new one."
+msgstr ""
+"Si no puede encontrar la ubicación en la entrada debajo, haga click en el "
+"botón \"+\" para añadir una nueva."
+
+#: .././pop-library/processors/locationsmap/blockgroups/viewcomponents-deprecated.php:42
+msgid "Location(s) for:"
+msgstr "Ubicación(es) para:"
+
+#: .././pop-library/processors/viewcomponents/location-buttons.php:141
+msgid "All Locations"
+msgstr "Todos las ubicaciones"
+
+#: .././validation.php:52
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:57
+msgid ""
+"Error: <b>Events Manager for PoP</b> is not installed/activated. Without it, "
+"<b>Events Manager PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>Events Manager for PoP</b> is not installed/activated. Without it, "
+"<b>Events Manager PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=“http://wordpress."
+"org/extend/plugins/pop/“>from here</a>."
+
+#: .././validation.php:61
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>Events Manager for PoP</b> "
+"installed, or otherwise <b>Events Manager Basic Modules for PoP</b> might "
+"not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>latest version</a> of <b>Events Manager for PoP</b> installed, "
+"or otherwise <b>Events Manager Basic Modules for PoP</b> might not function "
+"properly."
+
+#: .././validation.php:65
+msgid ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>Events Manager PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>Events Manager PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=“http://wordpress."
+"org/extend/plugins/pop/“>from here</a>."
+
+#: .././validation.php:69
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Core Processors</b> installed, "
+"or otherwise <b>Events Manager Basic Modules for PoP</b> might not function "
+"properly."
+msgstr ""
+"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>latest version</a> of <b>PoP Core Processors</b> installed, or "
+"otherwise <b>Events Manager Basic Modules for PoP</b> might not function "
+"properly."

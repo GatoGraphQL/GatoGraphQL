@@ -1,0 +1,7 @@
+<input {{#generateId}}{{id}}{{/generateId}} type="text" value="{{range}}" class="form-control {{class}} {{timepicker}}" placeholder="{{placeholder}}">
+<input type="hidden" value="{{value.from}}" name="{{name}}-from" class="{{input-class}} from">
+<input type="hidden" value="{{value.to}}" name="{{name}}-to" class="{{input-class}} to">
+{{#if timepicker}}
+	<input type="hidden" value="{{value.fromtime}}" name="{{name}}-fromtime" class="{{input-class}} fromtime">
+	<input type="hidden" value="{{value.totime}}" name="{{name}}-totime" class="{{input-class}} totime">
+{{/if}}

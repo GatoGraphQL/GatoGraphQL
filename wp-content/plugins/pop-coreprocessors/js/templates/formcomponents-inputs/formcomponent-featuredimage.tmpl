@@ -1,0 +1,7 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="pop-featuredimage" data-merge-template="{{merge-template}}" data-img-size="{{img-size}}">
+	<div class="{{merge-template}} pop-merge" id="{{lastGeneratedId}}-merge">
+		{{#withModule . "featuredimage-inner"}}
+			{{enterModule ../.}}
+		{{/withModule}}
+	</div>
+</div>

@@ -1,0 +1,14 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}">
+	<div class="media">
+		<div class="pull-left">
+			<img {{#generateId group="useravatar"}}{{id}}{{/generateId}} src="{{tls.feedback.user.avatar}}" class="pop-user-avatar img-thumbnail">
+		</div>
+		<div class="media-body">
+			{{#each template-ids.layouts}}
+				{{#withModule ../. this}}
+					{{enterModule ../../.}}
+				{{/withModule}}
+			{{/each}}
+		</div>
+	</div>	
+</div>

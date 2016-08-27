@@ -1,0 +1,9 @@
+{{#with itemObject}}
+	<{{../html-markup}} class="{{../classes.title}}">
+		{{#ifget . ../condition-field}}
+			<a href="{{get . ../url-field}}" {{#if ../titleattr-field}}title="{{{get . ../titleattr-field}}}"{{/if}}>{{{get . ../title-field}}}</a>
+		{{else}}
+			{{{get . ../title-field}}}
+		{{/ifget}}
+	</{{../html-markup}}>
+{{/with}}

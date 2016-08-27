@@ -1,0 +1,736 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: aryo-activity-log 2.2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-10 07:03+0300\n"
+"PO-Revision-Date: 2015-08-10 11:54+0300\n"
+"Language-Team: Nazq\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"Last-Translator: Yakir Sitbon <yakir@pojo.me>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi_FI\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;_c;esc_attr__\n"
+
+#: aryo-activity-log.php:110 aryo-activity-log.php:121
+msgid "Cheatin&#8217; huh?"
+msgstr "Yritätkös huijata, häh?"
+
+#: classes/class-aal-activity-log-list-table.php:100
+msgid "Activities"
+msgstr "Tapahtumat"
+
+#: classes/class-aal-activity-log-list-table.php:111
+msgid "Date"
+msgstr "Päivämäärä"
+
+#: classes/class-aal-activity-log-list-table.php:112
+msgid "Author"
+msgstr "Käyttäjä"
+
+#: classes/class-aal-activity-log-list-table.php:113
+msgid "IP"
+msgstr "IP"
+
+#: classes/class-aal-activity-log-list-table.php:114
+msgid "Type"
+msgstr "Tyyppi"
+
+#: classes/class-aal-activity-log-list-table.php:115
+msgid "Label"
+msgstr "Nimike"
+
+#: classes/class-aal-activity-log-list-table.php:116
+msgid "Action"
+msgstr "Tapahtuma"
+
+#: classes/class-aal-activity-log-list-table.php:117
+msgid "Description"
+msgstr "Kuvaus"
+
+#: classes/class-aal-activity-log-list-table.php:137
+#, php-format
+msgid "%s ago"
+msgstr "%s sitten"
+
+#: classes/class-aal-activity-log-list-table.php:166
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: classes/class-aal-activity-log-list-table.php:172
+#: classes/class-aal-activity-log-list-table.php:291
+msgid "Guest"
+msgstr "Vieras"
+
+#: classes/class-aal-activity-log-list-table.php:215
+msgid "All"
+msgstr "Kaikki"
+
+#: classes/class-aal-activity-log-list-table.php:235
+msgid "Search"
+msgstr "Etsi"
+
+#: classes/class-aal-activity-log-list-table.php:278
+msgid "All Roles"
+msgstr "Kaikki roolit"
+
+#: classes/class-aal-activity-log-list-table.php:302
+msgid "All Users"
+msgstr "Kaikki käyttäjät"
+
+#: classes/class-aal-activity-log-list-table.php:330
+msgid "All Types"
+msgstr "Kaikki tyypit"
+
+#: classes/class-aal-activity-log-list-table.php:356
+msgid "All Actions"
+msgstr "Kaikki tapahtumat"
+
+#: classes/class-aal-activity-log-list-table.php:367
+msgid "All Time"
+msgstr "Koko ajalta"
+
+#: classes/class-aal-activity-log-list-table.php:368
+msgid "Today"
+msgstr "Tänään"
+
+#: classes/class-aal-activity-log-list-table.php:369
+msgid "Yesterday"
+msgstr "Eilen"
+
+#: classes/class-aal-activity-log-list-table.php:370
+msgid "Week"
+msgstr "Viikko"
+
+#: classes/class-aal-activity-log-list-table.php:371
+msgid "Month"
+msgstr "Kuukausi"
+
+#: classes/class-aal-activity-log-list-table.php:378
+msgid "Filter"
+msgstr "Suodata"
+
+#: classes/class-aal-admin-ui.php:16 classes/class-aal-admin-ui.php:26
+#: language/strings.php:5
+msgid "Activity Log"
+msgstr "Tapahtumaloki"
+
+#: classes/class-aal-help.php:20
+msgid "Overview"
+msgstr "Yleiskatsaus"
+
+#: classes/class-aal-help.php:23 classes/class-aal-settings.php:125
+#: classes/class-aal-settings.php:197
+msgid "Notifications"
+msgstr "Ilmoitukset"
+
+#: classes/class-aal-help.php:24
+msgid ""
+"This screen lets you control what will happen once a user on your site does "
+"something you define. For instance, let us assume that you have created a "
+"user on your site\n"
+"                    for your content editor. Now, let's say that every time "
+"that user updates a post, you want to know about it. You can easily do it "
+"from this page."
+msgstr ""
+"Tämä ikkuna antaa sinulle mahdollisuuden hallita mitä tapahtuu, kun käyttäjä "
+"sivustollasi tekee jotain, minkä olet määrittänyt. Esimerkiksi oletetaan, "
+"että olet luonut käyttäjän sivustollesi sisällön muokkausta varten. Nyt, "
+"joka kerta kun tämä käyttäjä päivittää artikkelia, haluat tietää siitä. Voit "
+"helposti tehdä sen tältä sivulta."
+
+#: classes/class-aal-notifications.php:273
+msgid "The AAL notification handler you are trying to register does not exist."
+msgstr ""
+"AAL-ilmoituksenkäsittelijää, jota yrität rekisteröidä, ei ole olemassa."
+
+#: classes/class-aal-settings.php:26
+msgid "GitHub"
+msgstr "GitHub"
+
+#: classes/class-aal-settings.php:29 classes/class-aal-settings.php:44
+msgid "Settings"
+msgstr "Asetukset"
+
+#: classes/class-aal-settings.php:43 classes/class-aal-settings.php:227
+msgid "Activity Log Settings"
+msgstr "Tapahtumalokin Asetukset"
+
+#: classes/class-aal-settings.php:82
+msgid "Display Options"
+msgstr "Näyttöasetukset"
+
+#: classes/class-aal-settings.php:89
+msgid "Keep logs for"
+msgstr "Pidä lokit"
+
+#: classes/class-aal-settings.php:98
+msgid "days."
+msgstr "päivältä."
+
+#: classes/class-aal-settings.php:99 classes/class-aal-settings.php:139
+msgid ""
+"Maximum number of days to keep activity log. Leave blank to keep activity "
+"log forever (not recommended)."
+msgstr ""
+"Suurin määrä päiviä, joiden ajalta pidetään tapahtumalokia. Jätä tyhjäksi "
+"pitääksesi tapahtumalokia ikuisesti (ei suositella)."
+
+#: classes/class-aal-settings.php:106
+msgid "Delete Log Activities"
+msgstr "Poista lokin tapahtumat"
+
+#: classes/class-aal-settings.php:111
+#, php-format
+msgid "<a href=\"%s\" id=\"%s\">Reset Database</a>"
+msgstr "<a href=\"%s\" id=\"%s\">Poista tietokanta</a>"
+
+#: classes/class-aal-settings.php:115
+msgid "Warning: Clicking this will delete all activities from the database."
+msgstr "Varoitus: Klikkaamalla tätä poistat kaikki tapahtumat tietokannasta."
+
+#: classes/class-aal-settings.php:132
+msgid "Notification Events"
+msgstr "Tapahtumailmoitukset"
+
+#: classes/class-aal-settings.php:160
+msgid "Enable?"
+msgstr "Ota käyttöön?"
+
+#: classes/class-aal-settings.php:196
+msgid "General"
+msgstr "Yleinen"
+
+#: classes/class-aal-settings.php:246
+msgid "All activities have been successfully deleted."
+msgstr "Kaikki tapahtumat on poistettu onnistuneesti."
+
+#: classes/class-aal-settings.php:257
+msgid "Are you sure you want to do this action?"
+msgstr "Oletko varma, että haluat tehdä tämän?"
+
+#: classes/class-aal-settings.php:268
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Sinulla ei ole tarvittavia oikeuksia päästäksesi tälle sivulle."
+
+#: classes/class-aal-settings.php:321
+msgid "These are some basic settings for Activity Log."
+msgstr "Nämä ovat perusasetukset Tapahtumalokille."
+
+#: classes/class-aal-settings.php:327
+msgid ""
+"Serve yourself with custom-tailored notifications. First, define your "
+"conditions. Then, choose how the notifications will be sent."
+msgstr ""
+"Tarjoa itsellesi räätälöityjä ilmoituksia. Ensimmäiseksi määritä ehtosi. Sen "
+"jälkeen valitse miten ilmoitukset lähetetään."
+
+#: classes/class-aal-settings.php:426
+msgid "Yes"
+msgstr "Kyllä"
+
+#: classes/class-aal-settings.php:427
+msgid "No"
+msgstr "Ei"
+
+#: classes/class-aal-settings.php:444 language/strings.php:22
+#: notifications/abstract-class-aal-notification-base.php:98
+msgid "User"
+msgstr "Käyttäjä"
+
+#: classes/class-aal-settings.php:445
+#: notifications/abstract-class-aal-notification-base.php:101
+msgid "Action Type"
+msgstr "Tapahtuman tyyppi"
+
+#: classes/class-aal-settings.php:446
+msgid "Action Performed"
+msgstr "Tapahtuman suoritus"
+
+#: classes/class-aal-settings.php:450
+msgid "equals to"
+msgstr "vastaa"
+
+#: classes/class-aal-settings.php:451
+msgid "not equals to"
+msgstr "ei vastaa"
+
+#: classes/class-aal-settings.php:461
+msgid ""
+"A notification will be sent upon a successful match with the following "
+"conditions:"
+msgstr ""
+"Ilmoitus lähetetään, kun tapahtuma vastaa onnistuneesti seuraavia ehtoja:"
+
+#: hooks/class-aal-hook-posts.php:10
+msgid "(no title)"
+msgstr "(ei otsikkoa)"
+
+#: language/strings.php:6
+msgid ""
+"Get aware of any activities that are taking place on your dashboard! Imagine "
+"it like a black-box for your WordPress site. e.g. post was deleted, plugin "
+"was activated, user logged in or logged out - it's all these for you to see."
+msgstr ""
+"Tule tietoiseksi kaikesta toiminnasta, joka tapahtuu ohjausnäkymässäsi! "
+"Kuvittele lisäosaa mustana laatikkona WordPress-sivustollesi. Esim. "
+"artikkeli poistettiin, lisäosa aktivoitiin, käyttäjä kirjautui ulos tai "
+"käyttäjä kirjautui sisään - tämä kaikki sinulle nähtäväksi!"
+
+#: language/strings.php:8
+msgid "Administrator"
+msgstr "Ylläpitäjä"
+
+#: language/strings.php:9
+msgid "Editor"
+msgstr "Päätoimittaja"
+
+#: language/strings.php:12
+msgid "Post"
+msgstr "Artikkeli"
+
+#: language/strings.php:13
+msgid "created"
+msgstr "Luotu"
+
+#: language/strings.php:14
+msgid "updated"
+msgstr "Päivitetty"
+
+#: language/strings.php:15
+msgid "deleted"
+msgstr "Poistettu"
+
+#: language/strings.php:18
+msgid "Attachment"
+msgstr "Liite"
+
+#: language/strings.php:19
+msgid "added"
+msgstr "Lisätty"
+
+#: language/strings.php:23
+msgid "logged_out"
+msgstr "kirjautui_ulos"
+
+#: language/strings.php:24
+msgid "logged_in"
+msgstr "kirjautui_sisään"
+
+#: language/strings.php:25
+msgid "wrong_password"
+msgstr "väärä_salasana"
+
+#: language/strings.php:28
+msgid "Plugin"
+msgstr "Lisäosa"
+
+#: language/strings.php:29
+msgid "activated"
+msgstr "Aktivoitu"
+
+#: language/strings.php:30
+msgid "deactivated"
+msgstr "Deaktivoitu"
+
+#: language/strings.php:31
+msgid "installed"
+msgstr "asennettu"
+
+#: language/strings.php:34
+msgid "Theme"
+msgstr "Teema"
+
+#: language/strings.php:35
+msgid "Theme Customizer"
+msgstr "Teeman muokkain"
+
+#: language/strings.php:38
+msgid "Widget"
+msgstr "Vimpain"
+
+#: language/strings.php:41
+msgid "Options"
+msgstr "Asetukset"
+
+#: language/strings.php:44
+msgid "Menu"
+msgstr "Valikko"
+
+#: language/strings.php:47
+msgid "Taxonomy"
+msgstr "Taksonomia"
+
+#: language/strings.php:50
+msgid "Core"
+msgstr "WP:n ydin"
+
+#: language/strings.php:51
+msgid "WordPress Updated"
+msgstr "WordPress päivitetty"
+
+#: language/strings.php:52
+msgid "WordPress Auto Updated"
+msgstr "WordPress päivitetty automaattisesti"
+
+#: language/strings.php:55
+msgid "Comments"
+msgstr "Kommentit"
+
+#: language/strings.php:56
+msgid "pending"
+msgstr "vireillä"
+
+#: language/strings.php:57
+msgid "approved"
+msgstr "hyväksytty"
+
+#: language/strings.php:58
+msgid "unapproved"
+msgstr "hylätty"
+
+#: language/strings.php:59
+msgid "trashed"
+msgstr "roskakoriin"
+
+#: language/strings.php:60
+msgid "untrashed"
+msgstr "palautettu"
+
+#: language/strings.php:61
+msgid "spammed"
+msgstr "spämmätty"
+
+#: language/strings.php:62
+msgid "unspammed"
+msgstr "ei-spämmätty"
+
+#: language/strings.php:67
+msgid "blogname"
+msgstr "sivuston nimi"
+
+#: language/strings.php:68
+msgid "blogdescription"
+msgstr "sivuston kuvaus"
+
+#: language/strings.php:69
+msgid "siteurl"
+msgstr "sivuston url"
+
+#: language/strings.php:70
+msgid "home"
+msgstr "koti"
+
+#: language/strings.php:71
+msgid "admin_email"
+msgstr "admin_email"
+
+#: language/strings.php:72
+msgid "users_can_register"
+msgstr "users_can_register"
+
+#: language/strings.php:73
+msgid "default_role"
+msgstr "default_role"
+
+#: language/strings.php:74
+msgid "timezone_string"
+msgstr "timezone_string"
+
+#: language/strings.php:75
+msgid "date_format"
+msgstr "date_format"
+
+#: language/strings.php:76
+msgid "time_format"
+msgstr "time_format"
+
+#: language/strings.php:77
+msgid "start_of_week"
+msgstr "start_of_week"
+
+#: language/strings.php:80
+msgid "use_smilies"
+msgstr "use_smilies"
+
+#: language/strings.php:81
+msgid "use_balanceTags"
+msgstr "use_balanceTags"
+
+#: language/strings.php:82
+msgid "default_category"
+msgstr "default_category"
+
+#: language/strings.php:83
+msgid "default_post_format"
+msgstr "default_post_format"
+
+#: language/strings.php:84
+msgid "mailserver_url"
+msgstr "mailserver_url"
+
+#: language/strings.php:85
+msgid "mailserver_login"
+msgstr "mailserver_login"
+
+#: language/strings.php:86
+msgid "mailserver_pass"
+msgstr "mailserver_pass"
+
+#: language/strings.php:87
+msgid "default_email_category"
+msgstr "default_email_category"
+
+#: language/strings.php:88
+msgid "ping_sites"
+msgstr "ping_sites"
+
+#: language/strings.php:91
+msgid "show_on_front"
+msgstr "show_on_front"
+
+#: language/strings.php:92
+msgid "page_on_front"
+msgstr "page_on_front"
+
+#: language/strings.php:93
+msgid "page_for_posts"
+msgstr "page_for_posts"
+
+#: language/strings.php:94
+msgid "posts_per_page"
+msgstr "posts_per_page"
+
+#: language/strings.php:95
+msgid "posts_per_rss"
+msgstr "posts_per_rss"
+
+#: language/strings.php:96
+msgid "rss_use_excerpt"
+msgstr "rss_use_excerpt"
+
+#: language/strings.php:97
+msgid "blog_public"
+msgstr "blog_public"
+
+#: language/strings.php:100
+msgid "default_pingback_flag"
+msgstr "default_pingback_flag"
+
+#: language/strings.php:101
+msgid "default_ping_status"
+msgstr "default_ping_status"
+
+#: language/strings.php:102
+msgid "default_comment_status"
+msgstr "default_comment_status"
+
+#: language/strings.php:103
+msgid "require_name_email"
+msgstr "require_name_email"
+
+#: language/strings.php:104
+msgid "comment_registration"
+msgstr "comment_registration"
+
+#: language/strings.php:105
+msgid "close_comments_for_old_posts"
+msgstr "close_comments_for_old_posts"
+
+#: language/strings.php:106
+msgid "close_comments_days_old"
+msgstr "close_comments_days_old"
+
+#: language/strings.php:107
+msgid "thread_comments"
+msgstr "thread_comments"
+
+#: language/strings.php:108
+msgid "thread_comments_depth"
+msgstr "thread_comments_depth"
+
+#: language/strings.php:109
+msgid "page_comments"
+msgstr "page_comments"
+
+#: language/strings.php:110
+msgid "comments_per_page"
+msgstr "comments_per_page"
+
+#: language/strings.php:111
+msgid "default_comments_page"
+msgstr "default_comments_page"
+
+#: language/strings.php:112
+msgid "comment_order"
+msgstr "comment_order"
+
+#: language/strings.php:113
+msgid "comments_notify"
+msgstr "comments_notify"
+
+#: language/strings.php:114
+msgid "moderation_notify"
+msgstr "moderation_notify"
+
+#: language/strings.php:115
+msgid "comment_moderation"
+msgstr "comment_moderation"
+
+#: language/strings.php:116
+msgid "comment_whitelist"
+msgstr "comment_whitelist"
+
+#: language/strings.php:117
+msgid "comment_max_links"
+msgstr "comment_max_links"
+
+#: language/strings.php:118
+msgid "moderation_keys"
+msgstr "moderation_keys"
+
+#: language/strings.php:119
+msgid "blacklist_keys"
+msgstr "blacklist_keys"
+
+#: language/strings.php:120
+msgid "show_avatars"
+msgstr "show_avatars"
+
+#: language/strings.php:121
+msgid "avatar_rating"
+msgstr "avatar_rating"
+
+#: language/strings.php:122
+msgid "avatar_default"
+msgstr "avatar_default"
+
+#: language/strings.php:125
+msgid "thumbnail_size_w"
+msgstr "thumbnail_size_w"
+
+#: language/strings.php:126
+msgid "thumbnail_size_h"
+msgstr "thumbnail_size_h"
+
+#: language/strings.php:127
+msgid "thumbnail_crop"
+msgstr "thumbnail_crop"
+
+#: language/strings.php:128
+msgid "medium_size_w"
+msgstr "medium_size_w"
+
+#: language/strings.php:129
+msgid "medium_size_h"
+msgstr "medium_size_h"
+
+#: language/strings.php:130
+msgid "large_size_w"
+msgstr "large_size_w"
+
+#: language/strings.php:131
+msgid "large_size_h"
+msgstr "large_size_h"
+
+#: language/strings.php:132
+msgid "uploads_use_yearmonth_folders"
+msgstr "uploads_use_yearmonth_folders"
+
+#: language/strings.php:135
+msgid "permalink_structure"
+msgstr "permalink_structure"
+
+#: language/strings.php:136
+msgid "category_base"
+msgstr "category_base"
+
+#: language/strings.php:137
+msgid "tag_base"
+msgstr "tag_base"
+
+#: language/strings.php:140
+msgid "Export"
+msgstr "Vie"
+
+#: language/strings.php:141
+msgid "downloaded"
+msgstr "ladattu"
+
+#: notifications/abstract-class-aal-notification-base.php:99
+msgid "Object Type"
+msgstr "Objektin tyyppi"
+
+#: notifications/abstract-class-aal-notification-base.php:100
+msgid "Object Name"
+msgstr "Objektin nimi"
+
+#: notifications/abstract-class-aal-notification-base.php:102
+msgid "IP Address"
+msgstr "IP-Osoite"
+
+#: notifications/abstract-class-aal-notification-base.php:121
+msgid "N/A"
+msgstr "N/A"
+
+#: notifications/class-aal-notification-email.php:15
+msgid "Email"
+msgstr "Sähköposti"
+
+#: notifications/class-aal-notification-email.php:16
+msgid "Get notified by Email."
+msgstr "Vastaanota ilmoituksia sähköpostilla."
+
+#: notifications/class-aal-notification-email.php:49
+msgid "New notification from Activity Log"
+msgstr "Uusi ilmoitus Tapahtumalokista"
+
+#: notifications/class-aal-notification-email.php:65
+msgid ""
+"Hi there!\n"
+"\n"
+"A notification condition on [sitename] was matched. Here are the details:\n"
+"\n"
+"[action-details]\n"
+"\n"
+"Sent by ARYO Activity Log"
+msgstr ""
+"Hei!\n"
+"\n"
+"Ilmoitusehto sivustollasi [sitename] täyttyi. Tässä tiedot tapahtumasta:\n"
+"\n"
+"[action-details]\n"
+"\n"
+"Lähettänyt: ARYO-Tapahtumaloki"
+
+#: notifications/class-aal-notification-email.php:67
+msgid "From Email"
+msgstr "Lähettäjä"
+
+#: notifications/class-aal-notification-email.php:67
+msgid "The source Email address"
+msgstr "Lähettäjän sähköpostiosoite"
+
+#: notifications/class-aal-notification-email.php:68
+msgid "To Email"
+msgstr "Vastaanottaja"
+
+#: notifications/class-aal-notification-email.php:68
+msgid "The Email address notifications will be sent to"
+msgstr "Sähköpostiosoite, johon ilmoitukset lähetetään"
+
+#: notifications/class-aal-notification-email.php:69
+msgid "Message"
+msgstr "Viesti"
+
+#: notifications/class-aal-notification-email.php:69
+#, php-format
+msgid "Customize the message using the following placeholders: %s"
+msgstr "Muokkaa viestiä käyttäen seuraavia Shortcodeja: %s"

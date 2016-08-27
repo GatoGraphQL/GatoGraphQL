@@ -1,0 +1,144 @@
+#gdeadmintabs  ul.ui-tabs-nav {
+	border: none;
+	font-size: 13px;
+	height: 23px;
+	list-style: none outside none;
+	margin: 14px 0 0;
+	overflow: visible;
+	padding: 0;
+}
+
+#gdeadmintabs ul.ui-tabs-nav li {
+	display: block;
+	float: left;
+	line-height: 200%;
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	white-space: nowrap;
+	width: auto;
+}
+
+#gdeadmintabs ul.ui-tabs-nav li a {
+	background: none no-repeat scroll 0 50% transparent;
+	display: block;
+	float: left;
+	color: #0074A2;
+	font-weight: 600;
+	position: relative;
+	line-height: 25px;
+	text-decoration: none;
+	padding: 1px 26px 0 0;
+	border-style: none !important;
+}
+
+#gdeadmintabs ul.ui-tabs-nav li.ui-tabs-selected a {
+	color: #000000;
+	outline: 0 !important;
+}
+
+#gdeadmintabs ul.ui-tabs-nav li.ui-tabs-selected a:hover, #gdeadmintabs ul.ui-tabs-nav a:hover {
+	color: #2EA2CC;
+	outline: 0 !important;
+}
+
+fieldset.gde-outer {
+	padding: 10px;
+	border: 1px solid #CCCCCC;
+	margin-top: 8px;
+}
+
+fieldset.gde-outer > legend, fieldset.gde-inner > legend {
+	padding: 0 4px;
+	font-weight: bold;
+	font-size: 1.17em;
+}
+
+.gde-outer > p {
+	margin: 0.4em 15px 1em 10px;
+}
+
+p.gde-frameset {
+	font-style: italic;
+}
+
+fieldset.gde-inner {
+	padding: 10px 0 10px 10px;
+	border-top: 2px solid #333; /* #CCCCCC; */
+	border-bottom: 2px solid #333;
+	/* background-color: #ECECEC; */
+	margin: 8px 0 8px 8px;
+	/* background: url('../img/setting-bg.png') repeat-y #ffffff; */
+}
+
+fieldset.gde-inner table.form-table {
+	margin-top: -0.8em;
+}
+
+fieldset.gde-inner table.form-table tbody tr th {
+	width: 182px;
+}
+
+p.gde-submit {
+	padding: 0;
+	margin: 10px 0 5px;
+}
+
+#toolbuttons td input, #gdet_h, #fs_user, #fs_win, #fs_print, #gdev_t, #gdev_f, #gdev_b, #force, #mask, #docsec td input{
+	margin-left: 3px;
+}
+
+#gdev_t, #gdev_b {
+	margin-top: -6px;
+}
+
+#bgcolor label, #pbcolor label {
+	vertical-align: super;
+}
+
+#toolbuttons td label, #fullscreen td label {
+	margin-right: 10px;
+}
+
+::-webkit-input-placeholder { color: #777777; }
+::-moz-placeholder { color: #777777; } /* firefox 19+ */
+input:-moz-placeholder { color: #777777; }
+
+.gde-fnote {
+	font-style: italic;
+	padding-left: 2px;
+}
+
+.gde-tab, .hide {
+	display: none;
+}
+
+.gde-tab-active {
+	display: block;
+}
+
+.gde-support-warn {
+	margin-top: 1em;
+	-moz-border-radius: 5px;
+	border-radius: 15px;
+	border: 1px solid #CCCCCC;
+	padding: 10px 15px;
+	float: left;
+	background-color: #F9F9F9;
+}
+
+#pro-submit, #profile-submit, #import-submit, #debugsend {
+	margin-bottom: 3em;
+}
+
+.nav-tab {
+	font-size: 13px !important;
+}
+
+h3.gde-fix-h3 {
+	/* fix profile tab heading style (match base h3) */
+	font-size: 1.3em !important;
+	margin: 12px 0 !important;
+}

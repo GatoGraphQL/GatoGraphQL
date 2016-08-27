@@ -1,0 +1,1 @@
+<?php include GD_ThemeManagerUtils::get_thememode_templates_dir(GD_THEME_WASSUP, GD_THEMEMODE_WASSUP_SLIDING).'/mainpagesection.php'; ?>

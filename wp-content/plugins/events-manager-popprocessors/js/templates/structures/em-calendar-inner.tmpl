@@ -1,0 +1,29 @@
+<script type="text/javascript">
+(function($){
+	{{!Format of events data to generate: }}
+	{{!http://arshaw.com/fullcalendar/docs/event_data/Event_Object/}}
+	{{!http://arshaw.com/fullcalendar/docs/event_data/Event_Source_Object/}}
+	var events_data = [];
+	
+	{{#each items}}
+		{{#withItemObject ../itemDBKey this}}
+			events_data.push({
+				id: "{{id}}",
+				title: "{{title}}",
+				start: "{{start-date}}",
+				end: "{{end-date}}",
+				allDay: {{all-day-string}}	
+			});
+		{{/withItemObject}}
+	{{/each}}
+
+	{{! The elements below dont exist yet, we must wait until they are inserted into the DOM }}
+	$(document).one('template:merged', function() {
+
+		var block = popManager.getBlock($('#{{bs.bId}}'));
+		var pageSection = popManager.getPageSection(block);
+		popFullCalendar.addEvents(pageSection, block, events_data);
+	});
+	
+})(jQuery);
+</script>

@@ -1,0 +1,152 @@
+{{#with itemObject}}
+	<div class="layout post-layout preview {{../class}} {{#each cat-slugs}} {{.}}{{/each}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+		{{#withModule ../. "quicklinkgroup-top"}}
+			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/withModule}}
+		{{#compare "abovethumb" ../authors-position operator="in"}}
+			<div class="authors abovethumb {{../classes.authors}} {{../classes.authors-abovethumb}}">
+				{{{../titles.beforeauthors.abovethumb}}}
+				{{#each authors}}
+					{{#if @index}}{{{../../authors-sep}}}{{/if}}
+					{{#withModule ../../. "authors"}}
+						{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.authors.db-key itemObjectId=../this}}
+					{{/withModule}}
+				{{/each}}
+				{{{../titles.afterauthors.abovethumb}}}
+			</div>
+		{{/compare}}
+		<div class="wrapper {{../classes.wrapper}}">
+			<div class="{{../classes.thumb-wrapper}}">
+				{{#withModule ../. "postthumb"}}				
+					<div class="post-thumb {{../../classes.thumb}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				{{#withModule ../. "author-avatar"}}
+					<div class="avatar {{../../classes.avatar}}">					
+						{{enterModule ../../. itemDBKey=../../bs.db-keys.subcomponents.authors.db-key itemObjectId=../authors}}
+					</div>
+				{{/withModule}}
+				{{#if ../template-ids.belowthumb}}
+					<div class="extra {{../classes.belowthumb}}">
+						{{#each ../template-ids.belowthumb}}
+							{{#withModule ../../. this}}
+								<div class="extra-inner">
+									{{enterModule ../../../.}}
+								</div>
+							{{/withModule}}
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+			{{#if ../template-ids.beforecontent}}			
+				<div class="beforecontent {{../classes.beforecontent}}">
+					{{#each ../template-ids.beforecontent}}
+						<div class="inner {{../../classes.beforecontent-inner}}">
+							{{#withModule ../../. this}}
+								{{enterModule ../../../.}}
+							{{/withModule}}
+						</div>
+					{{/each}}
+				</div>
+			{{/if}}
+			<div class="content-body {{../classes.content-body}}">
+				{{#if ../show-date}}
+					<a href="{{get . ../url-field}}" title="{{../titles.date}}" class="date {{../classes.date}}">{{{ondate datetime}}}</a>
+				{{/if}}
+				{{#compare "abovetitle" ../authors-position operator="in"}}
+					<div class="authors abovetitle {{../classes.authors}} {{../classes.authors-abovetitle}}">
+						{{{../titles.beforeauthors.abovetitle}}}
+						{{#each authors}}
+							{{#if @index}}{{{../../authors-sep}}}{{/if}}
+							{{#withModule ../../. "authors"}}
+								{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.authors.db-key itemObjectId=../this}}
+							{{/withModule}}
+						{{/each}}
+						{{{../titles.afterauthors.abovetitle}}}
+					</div>
+				{{/compare}}
+				{{#if ../show-posttitle}}
+					<{{../title-htmlmarkup}} class="title {{../classes.title}}">
+						{{#if ../show-date}}
+							{{{title}}}
+						{{else}}
+							<a href="{{get . ../url-field}}" title="{{{title}}}">{{{title}}}</a>
+						{{/if}}
+					</{{../title-htmlmarkup}}>
+				{{/if}}
+				{{#if ../show-excerpt}}
+					{{#if excerpt}}
+						<p class="excerpt {{../classes.excerpt}}">{{{excerpt}}}</p>
+					{{/if}}
+				{{/if}}
+				{{#if ../template-ids.abovecontent}}
+					<div class="abovecontent {{../classes.abovecontent}}">
+						{{#each ../template-ids.abovecontent}}
+							{{#withModule ../../. this}}
+								{{enterModule ../../../.}}
+							{{/withModule}}
+						{{/each}}
+					</div>
+				{{/if}}
+				{{#withModule ../. "content"}}				
+					<div class="content pop-content {{../../classes.content}} clearfix" {{#generateId context=../../. group="content"}}{{../../id}}-content{{/generateId}}>
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				{{#compare "belowcontent" ../authors-position operator="in"}}
+					<div class="authors belowcontent {{../classes.authors}} {{../classes.authors-belowcontent}}">
+						{{{../titles.beforeauthors.belowcontent}}}
+						{{#each authors}}
+							{{#if @index}}{{{../../authors-sep}}}{{/if}}
+							{{#withModule ../../. "authors"}}
+								{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.authors.db-key itemObjectId=../this}}
+							{{/withModule}}
+						{{/each}}
+						{{{../titles.afterauthors.belowcontent}}}
+					</div>
+				{{/compare}}
+				{{#if ../template-ids.belowcontent}}
+					<div class="extra {{../classes.belowcontent}}">
+						{{#each ../template-ids.belowcontent}}
+							<div class="extra-inner {{../../classes.belowcontent-inner}}">
+								{{#withModule ../../. this}}
+									{{enterModule ../../../.}}
+								{{/withModule}}
+							</div>
+						{{/each}}
+					</div>
+				{{/if}}
+				{{#withModule ../. "quicklinkgroup-bottom"}}
+					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				{{#if ../template-ids.bottom}}
+					<div class="extra {{../classes.bottom}}">
+						{{#each ../template-ids.bottom}}
+							<div class="extra-inner {{../../classes.bottom-inner}}">
+								{{#withModule ../../. this}}
+									{{enterModule ../../../.}}
+								{{/withModule}}
+							</div>
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+			{{#if ../template-ids.aftercontent}}			
+				<div class="aftercontent {{../classes.aftercontent}}">
+					{{#each ../template-ids.aftercontent}}
+						<div class="inner {{../../classes.aftercontent-inner}}">
+							{{#withModule ../../. this}}
+								{{enterModule ../../../.}}
+							{{/withModule}}
+						</div>
+					{{/each}}
+				</div>
+			{{/if}}
+		</div>
+	</div>
+{{/with}}

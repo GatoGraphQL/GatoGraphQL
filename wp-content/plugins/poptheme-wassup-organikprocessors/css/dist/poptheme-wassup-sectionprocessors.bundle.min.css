@@ -1,0 +1,18 @@
+.label-discussions,.label-articles{background-color:#337ab7}.label-discussions[href]:hover,.label-discussions[href]:focus,.label-articles[href]:hover,.label-articles[href]:focus{background-color:#286090}.label-stories{background-color:#5bc0de}.label-stories[href]:hover,.label-stories[href]:focus{background-color:#31b0d5}.label-projects{background-color:#f0ad4e}.label-projects[href]:hover,.label-projects[href]:focus{background-color:#ec971f}.label-featured{background-color:#d9534f}.label-featured[href]:hover,.label-featured[href]:focus{background-color:#c9302c}.label-announcements{background-color:#9c3460}.label-announcements[href]:hover,.label-announcements[href]:focus{background-color:#69302c}.layout.preview.announcements.announcementlinks .authors.belowcontent,
+.layout.preview.discussions.discussionlinks .authors.belowcontent,
+.layout.preview.articles.articlelinks .authors.belowcontent,
+.layout.preview.stories.storylinks .authors.belowcontent,
+.layout.preview.projects.projectlinks .authors.belowcontent,
+.layout.preview.blog.projectlinks
+.authors.belowcontent{display:block}.layout.preview.announcements .authors.belowcontent,
+.layout.preview.announcements.announcementlinks .authors.abovetitle,
+.layout.preview.discussions .authors.belowcontent,
+.layout.preview.discussions.discussionlinks .authors.abovetitle,
+.layout.preview.articles .authors.belowcontent,
+.layout.preview.articles.articlelinks .authors.abovetitle,
+.layout.preview.stories .authors.belowcontent,
+.layout.preview.stories.storylinks .authors.abovetitle,
+.layout.preview.projects .authors.belowcontent,
+.layout.preview.projects.projectlinks .authors.abovetitle,
+.layout.preview.blog
+.authors.belowcontent{display:none}

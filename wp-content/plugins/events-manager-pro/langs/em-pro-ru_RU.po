@@ -1,0 +1,2424 @@
+# @ em-pro
+msgid ""
+msgstr ""
+"Project-Id-Version: Events Manager Pro v1.321\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-05-03 09:53+0100\n"
+"Last-Translator: Marcus Sykes <wp.plugins@netweblogic.com>\n"
+"Language-Team: zink <zink@mail.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:40
+msgid "Title"
+msgstr "Название"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:40
+#: add-ons/bookings-form/attendee-forms.php:267
+#: add-ons/bookings-form/attendee-forms.php:417
+#: add-ons/bookings-form/attendee-forms.php:436
+#: add-ons/bookings-form/attendee-forms.php:448
+#: add-ons/bookings-form/attendee-forms.php:578
+#, php-format
+msgid "Attendee %s"
+msgstr "Участники %s"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:41 add-ons/bookings-form.php:41
+#: add-ons/coupons/coupon.php:53 add-ons/coupons.php:465
+#: add-ons/coupons.php:475 add-ons/coupons.php:700 add-ons/user-fields.php:140
+#: add-ons/user-fields.php:142 emp-install.php:124
+msgid "Name"
+msgstr "Имя"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:61
+#: add-ons/bookings-form/attendee-forms.php:535 add-ons/bookings-form.php:67
+#: add-ons/bookings-form.php:396 add-ons/gateways/gateway.paypal.php:495
+#: emp-install.php:123 emp-install.php:200
+msgid "Default"
+msgstr "по-умолчанию"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:307 add-ons/coupons.php:586
+#: add-ons/coupons.php:597 add-ons/gateways/gateways.transactions.php:93
+msgid "Event"
+msgstr "Семинар"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:308
+msgid "Where"
+msgstr "Где"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:309
+msgid "When"
+msgstr "Когда"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:311
+#, php-format
+msgid "Exported bookings on %s"
+msgstr "Экспортируемые заказы на %s"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:359
+msgid "Split bookings by attendee"
+msgstr "Разделить заказы по участникам"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:360
+msgid ""
+"A row will be created for each space booked and will automatically include "
+"any attendee information associated with that booked ticket."
+msgstr ""
+
+# @ default
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:533
+#: add-ons/bookings-form/attendee-forms.php:705
+msgid "Selected Attendee Form"
+msgstr "Выбранная форма заказа"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:569
+msgid "Ticket"
+msgstr "Билет"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:633 add-ons/bookings-form.php:445
+#: add-ons/gateways.php:524 add-ons/user-fields.php:235
+msgid "Changes Saved"
+msgstr "Изменения сохранены"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:642 add-ons/bookings-form.php:454
+#, php-format
+msgid ""
+"The form <em>%s</em> is now the default booking form. All events without a "
+"pre-defined booking form will start using this form from now on."
+msgstr ""
+"Форма <em>%s </em> теперь по умолчанию форма бронирования. Все события без "
+"заранее определенной формы бронирования начнen использовать эту форму с "
+"данного момента."
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:648 add-ons/bookings-form.php:460
+#, php-format
+msgid "%s Deleted"
+msgstr "%s Удалить"
+
+# @ default
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:648 add-ons/bookings-form.php:391
+#: add-ons/bookings-form.php:460 add-ons/gateways/gateway.php:382
+msgid "Booking Form"
+msgstr "Форма заказа"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:656 add-ons/bookings-form.php:468
+#, php-format
+msgid "Form renamed to <em>%s</em>."
+msgstr "Форма переименована в <em>%s</em>."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:668 add-ons/bookings-form.php:477
+msgid "New form created. You are now editing your new form."
+msgstr "Новая форма создана. Теперь Вы редактируюте новою форму."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:689
+msgid "Attendee Form"
+msgstr "Формы для участников"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:692
+msgid ""
+"If enabled, this form will be shown and required for every space booked."
+msgstr ""
+"Если включено, то данная форма будет показана и обязательна для каждого "
+"заказа"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:695
+msgid "Enable Attendee Forms"
+msgstr "Включить формы"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:707
+#: add-ons/gateways/gateways.transactions.php:257
+msgid "None"
+msgstr "Нет"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:720 add-ons/bookings-form.php:516
+msgid "Make Default"
+msgstr "Сделать по умолчанию"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:720 add-ons/bookings-form.php:516
+msgid ""
+"You are about to make this your default booking form. All events without an "
+"existing specifically chosen booking form will use this new default form "
+"from now on.\n"
+"\n"
+" Are you sure you want to do this?"
+msgstr ""
+"Вы собираетесь сделать эту форму  бронирования  формой по умолчанию. Все "
+"события, которые не выбрали форму бронирования теперь будут использовать эту "
+"новую форму по умолчанию.\n"
+"\n"
+" Вы уверены, что хотите это сделать?"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:729 add-ons/bookings-form.php:525
+#: add-ons/coupons.php:439
+msgid "Add New"
+msgstr "Добавить новый"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:732
+msgid ""
+"This is the default attendee form and will be used for any event where you "
+"have not chosen a speficic form to use."
+msgstr ""
+"Это форма  заказа по умолчанию и будет использоваться для любого "
+"мероприятия, где вы не выбрали другую форму."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:734
+msgid ""
+"If you don't want to ask for attendee information by default, select None as "
+"your booking form and make it the default form."
+msgstr ""
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:738 add-ons/bookings-form.php:533
+msgid "You are now editing "
+msgstr "Вы редактируете"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:743 add-ons/bookings-form.php:538
+msgid "Rename"
+msgstr "Переименовать"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:750 add-ons/bookings-form.php:545
+#: add-ons/coupons.php:489 add-ons/gateways/gateway.offline.php:150
+#: add-ons/gateways/gateway.paypal.php:151
+#: add-ons/gateways/gateways.transactions.php:263
+msgid "Delete"
+msgstr "Удалить"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:750 add-ons/bookings-form.php:545
+msgid ""
+"Are you sure you want to delete this form?\n"
+"\n"
+" All events using this form will start using the default form automatically."
+msgstr ""
+"Вы уверены, что хотите удалить эту форму? \n"
+"\n"
+" Все события, использующие эту форму, автоматически начнут использовать "
+"форму по умолчанию ."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:755 add-ons/bookings-form.php:550
+msgid ""
+"<strong>Important:</strong> When editing this form, to make sure your old "
+"booking information is displayed, make sure new field ids correspond with "
+"the old ones."
+msgstr ""
+"<strong>Важно:</strong> Чтобы уже имеющаяся информация отображалась после "
+"редактирования этой формы, убедитесь, чтобы значения id новых полей "
+"соответствовали старым."
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:759
+msgid "Default Value"
+msgstr "Значение по умолчанию"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:759
+msgid "No attendee form selected. Choose a form, or create a new one above."
+msgstr "Неч участников для этой формы. Выберете форму или создайте новую."
+
+# @ dbem
+#: add-ons/bookings-form.php:42 add-ons/gateways.php:550
+#: add-ons/user-fields.php:144 emp-install.php:125
+msgid "Email"
+msgstr "Email"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:43 add-ons/gateways.php:36 emp-install.php:126
+#: emp-install.php:137
+msgid "Address"
+msgstr "Адрес"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:44 add-ons/gateways.php:38 emp-install.php:127
+#: emp-install.php:139
+msgid "City"
+msgstr "Город"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:45 add-ons/gateways.php:39 emp-install.php:128
+#: emp-install.php:140
+msgid "State/County"
+msgstr "Выберите область"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:46 add-ons/gateways.php:40 emp-install.php:129
+#: emp-install.php:141
+msgid "Zip/Post Code"
+msgstr "почтовый код"
+
+# @ em-pro
+#: add-ons/bookings-form.php:47 add-ons/gateways.php:41 emp-install.php:130
+#: emp-install.php:142
+msgid "Country"
+msgstr "Страна"
+
+# @ dbem
+#: add-ons/bookings-form.php:48 add-ons/gateways.php:42 emp-install.php:131
+#: emp-install.php:143
+msgid "Phone"
+msgstr "Телефон"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:49 add-ons/gateways.php:43 emp-install.php:132
+#: emp-install.php:144
+msgid "Fax"
+msgstr "Факс"
+
+# @ dbem
+#: add-ons/bookings-form.php:50 emp-install.php:133
+msgid "Comment"
+msgstr "Комментарий"
+
+# @ dbem
+#: add-ons/bookings-form.php:340
+#: add-ons/gateways/gateway.authorize.aim.php:407 emp-forms.php:121
+msgid "Yes"
+msgstr "Да"
+
+# @ dbem
+#: add-ons/bookings-form.php:340
+#: add-ons/gateways/gateway.authorize.aim.php:408 emp-forms.php:121
+msgid "No"
+msgstr "Нет"
+
+# @ em-pro
+#: add-ons/bookings-form.php:392
+msgid ""
+"You can choose to use a custom booking form, or leave as is to use the "
+"default booking form."
+msgstr ""
+"Вы можете использовать пользовательскую форму, или оставить все как есть, "
+"чтобы использовать форму заказа по умолчанию."
+
+# @ default
+# @ em-pro
+#: add-ons/bookings-form.php:394 add-ons/bookings-form.php:502
+msgid "Selected Booking Form"
+msgstr "Выбранная формы заказа"
+
+# @ em-pro
+#: add-ons/bookings-form.php:439
+msgid ""
+"You must include an E-mail field type for booking forms to work. These are "
+"used to create the user account and aren't shown to logged in users."
+msgstr ""
+"Вы должны заполнить поля ввода имени и email-адреса, чтобы ваши формы "
+"заказов билета работали. Они используются, чтобы создать учетную запись "
+"пользователя, и другие зарегистрированные пользователи их не видят."
+
+# @ em-pro
+#: add-ons/bookings-form.php:495
+msgid "Booking Form - General Information"
+msgstr "Форма заказа билетов - Общая информация"
+
+# @ em-pro
+#: add-ons/bookings-form.php:498
+msgid "You can customize the fields shown in your booking forms below. "
+msgstr ""
+"Вы можете настроить поля, отображаемые в формах заказа, представленных ниже."
+
+# @ em-pro
+#: add-ons/bookings-form.php:498
+msgid ""
+"It is required that you have at least an email and name field so guest users "
+"can register."
+msgstr ""
+"Вам необходимо ввести хотя бы  имя и email, чтобы гости могли "
+"регистрироваться. Поля для регистрации доступны только для гостей. Если вы "
+"этого не сделаете, это может привести к неправильной работе."
+
+# @ default
+#: add-ons/bookings-form.php:499
+#, php-format
+msgid ""
+"Registration fields are only shown to guest visitors by default. You can "
+"choose to show these fields and make them editable by logged in user in your "
+"<a href=\"%s\">PRO Booking Form Options</a>."
+msgstr ""
+"Поля регистрации видны только гостям. Вы можете выбрать их к показу  и "
+"сделать их редактируемыми для вошедшего в систему пользователя в <a href=\"%s"
+"\">PRO Booking Form Options</a>."
+
+# @ em-pro
+#: add-ons/bookings-form.php:528
+msgid ""
+"This is the default bookings form and will be used for any event where you "
+"have not chosen a speficic form to use."
+msgstr ""
+"Это форма  заказа по умолчанию и будет использоваться для любого "
+"мероприятия, где вы не выбрали другую форму."
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:53 add-ons/coupons.php:469
+#: add-ons/coupons.php:479
+msgid "Discount"
+msgstr "Скидка"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:53 add-ons/coupons.php:466
+#: add-ons/coupons.php:476
+msgid "Code"
+msgstr "Код"
+
+# @ dbem
+#: add-ons/coupons/coupon.php:102
+#, php-format
+msgid "%s is required."
+msgstr "%s обязательно."
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:124
+#, php-format
+msgid "Something went wrong saving your %s."
+msgstr "Что-то пошло не так при сохранинии %s."
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:124 add-ons/coupons/coupon.php:128
+#: add-ons/coupons/coupon.php:133 add-ons/coupons/coupon.php:135
+#: add-ons/coupons/coupon.php:149
+msgid "Coupon"
+msgstr "Купон"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:128 add-ons/coupons/coupon.php:135
+#, php-format
+msgid "Successfully saved %s"
+msgstr "Сохранено %s"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:133
+#, php-format
+msgid "Something went wrong updating your %s."
+msgstr "Что-то пошло не так в обновлении %s."
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:149
+#, php-format
+msgid "Successfully deleted %s"
+msgstr "Удалено %s"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:221 add-ons/coupons/coupon.php:225
+#, php-format
+msgid "%s Off"
+msgstr "%s по купону"
+
+# @ em-pro
+#: add-ons/coupons.php:44 add-ons/coupons.php:589 add-ons/coupons.php:600
+msgid "Original Total Price"
+msgstr "Общая стоимость"
+
+# @ em-pro
+#: add-ons/coupons.php:49 add-ons/coupons.php:590 add-ons/coupons.php:601
+msgid "Coupon Discount"
+msgstr "Купон со скидкой"
+
+# @ em-pro
+#: add-ons/coupons.php:124
+msgid "Invalid coupon code provided"
+msgstr "Неверное условие кода купона"
+
+# @ em-pro
+#: add-ons/coupons.php:161 add-ons/coupons.php:294 add-ons/coupons.php:447
+#: add-ons/coupons.php:450
+msgid "Coupons"
+msgstr "Купоны"
+
+# @ em-pro
+#: add-ons/coupons.php:161
+msgid "Coupons Manager"
+msgstr "Управление купонами"
+
+# @ em-pro
+#: add-ons/coupons.php:205 add-ons/coupons.php:693
+msgid "Coupon Code"
+msgstr "Код купона"
+
+# @ em-pro
+#: add-ons/coupons.php:258
+msgid "Coupon Not Found"
+msgstr "Купон не найден"
+
+# @ em-pro
+#: add-ons/coupons.php:267
+msgid "Coupon Invalid"
+msgstr "Неверный купон"
+
+# @ em-pro
+#: add-ons/coupons.php:295
+msgid "Coupons selected here will be applied to bookings made for this event."
+msgstr ""
+"Купоны выбранные здесь будет применяться к заказам, сделанным для этого "
+"события."
+
+# @ em-pro
+#: add-ons/coupons.php:305
+msgid "No coupons created yet."
+msgstr "Нет купонов"
+
+# @ default
+#: add-ons/coupons.php:308
+msgid ""
+"The following codes will be automatically available to this event as well"
+msgstr ""
+"Следующие коды скидок также будут автоматически доступны на это событие:"
+
+# @ em-pro
+#: add-ons/coupons.php:438
+msgid "Edit Coupons"
+msgstr "Изменить купон"
+
+# @ dbem
+#: add-ons/coupons.php:447
+#, php-format
+msgid "My %s"
+msgstr "Мои %s"
+
+# @ dbem
+#: add-ons/coupons.php:450
+#, php-format
+msgid "All %s"
+msgstr "Все %s"
+
+# @ em-pro
+#: add-ons/coupons.php:467 add-ons/coupons.php:477
+msgid "Created By"
+msgstr "Создал"
+
+# @ em-pro
+#: add-ons/coupons.php:468 add-ons/coupons.php:478 add-ons/coupons.php:706
+msgid "Description"
+msgstr "Описание"
+
+# @ em-pro
+#: add-ons/coupons.php:470 add-ons/coupons.php:480 add-ons/coupons.php:560
+msgid "Uses"
+msgstr "Использует"
+
+# @ em-pro
+#: add-ons/coupons.php:502 add-ons/coupons.php:565
+msgid "Unlimited"
+msgstr "Без ограничений"
+
+# @ dbem
+#: add-ons/coupons.php:513
+msgid "No coupons have been inserted yet!"
+msgstr "Нет добавленых купонов"
+
+# @ dbem
+#: add-ons/coupons.php:530 add-ons/coupons.php:651
+msgid "Unauthorized Access"
+msgstr "Неавторизованный доступ"
+
+# @ dbem
+#: add-ons/coupons.php:530 add-ons/coupons.php:651
+#, php-format
+msgid "You do not have the rights to manage this %s."
+msgstr "У вас нет прав для управления этим %s."
+
+# @ dbem
+#: add-ons/coupons.php:530 add-ons/coupons.php:651
+msgid "coupon"
+msgstr "купог"
+
+# @ em-pro
+#: add-ons/coupons.php:556
+msgid "Coupon Usage History"
+msgstr "История купона"
+
+# @ em-pro
+#: add-ons/coupons.php:558
+#, php-format
+msgid "You are viewing the details of coupon %s - <a href=\"%s\">edit</a>"
+msgstr "Вы смотрите детали купона %s - <a href=\"%s\">изменить</a>"
+
+# @ dbem
+#: add-ons/coupons.php:587 add-ons/coupons.php:598
+msgid "Booker"
+msgstr "Бухгалтер"
+
+# @ dbem
+#: add-ons/coupons.php:588 add-ons/coupons.php:599
+msgid "Spaces"
+msgstr "Места"
+
+# @ dbem
+#: add-ons/coupons.php:591 add-ons/coupons.php:602
+msgid "Final Price"
+msgstr "Окончательно"
+
+# @ dbem
+#: add-ons/coupons.php:626 add-ons/gateways/gateway.offline.php:151
+#: add-ons/gateways/gateway.paypal.php:152
+msgid "Edit/View"
+msgstr "Редактировать/Смотреть"
+
+# @ em-pro
+#: add-ons/coupons.php:639
+msgid "Your coupon hasn't been used yet!"
+msgstr "Ваш купон еще не был использован!"
+
+# @ dbem
+#: add-ons/coupons.php:657
+msgid "required"
+msgstr "обязательно"
+
+# @ em-pro
+#: add-ons/coupons.php:661
+msgid "Edit Coupon"
+msgstr "Изменить купон"
+
+# @ em-pro
+#: add-ons/coupons.php:670
+msgid "Event-Wide Coupon?"
+msgstr "Купон для всех событий?"
+
+# @ em-pro
+#: add-ons/coupons.php:673
+msgid "If checked, all events belonging to you will accept this coupon."
+msgstr "Если выбрано, все ваши события будут принимать этот купон."
+
+# @ em-pro
+#: add-ons/coupons.php:678
+msgid "Site-Wide Coupon?"
+msgstr "Купон для всех сайтов?"
+
+# @ em-pro
+#: add-ons/coupons.php:681
+msgid "All events on this site will accept this coupon."
+msgstr "Все события на этом сайте будет принимать этот купон."
+
+# @ em-pro
+#: add-ons/coupons.php:686
+msgid "Registered Users Only?"
+msgstr "Только зарегистрированные пользователи?"
+
+# @ em-pro
+#: add-ons/coupons.php:689
+msgid "If checked, only logged in users will be able to use this coupon."
+msgstr ""
+"Если опция включена, только авторизированные пользователи смогут "
+"использовать этот купон."
+
+# @ em-pro
+#: add-ons/coupons.php:696
+msgid "This is the code you give to users for them to use when booking."
+msgstr ""
+"Это код, который вы можете дать пользователям для использования при "
+"бронировании."
+
+# @ em-pro
+#: add-ons/coupons.php:712
+msgid "Total Coupons"
+msgstr "Управление купонами"
+
+# @ em-pro
+#: add-ons/coupons.php:715
+msgid "If set, this coupon will only be valid that many times."
+msgstr "Если установлен, этот купон будет действителен некоторое время."
+
+# @ em-pro
+#: add-ons/coupons.php:720
+msgid "Start Date"
+msgstr "Дата начала события"
+
+# @ em-pro
+#: add-ons/coupons.php:725
+msgid "Coupons will only be valid from this date onwards."
+msgstr "Купон будет действовать только с этой даты и далее."
+
+# @ em-pro
+#: add-ons/coupons.php:729
+msgid "End Date"
+msgstr "Дата Окончания События"
+
+# @ em-pro
+#: add-ons/coupons.php:734
+msgid "Coupons will not be valid after this date."
+msgstr "Купон не действителен после этой даты."
+
+# @ dbem
+#: add-ons/coupons.php:739
+msgid "Discount Type"
+msgstr "Тип скидки: "
+
+# @ default
+#: add-ons/coupons.php:742
+msgid "Percentage"
+msgstr "Процент"
+
+# @ em-pro
+#: add-ons/coupons.php:743
+msgid "Fixed Amount"
+msgstr "Размер скидки"
+
+# @ em-pro
+#: add-ons/coupons.php:749
+msgid "Discount Amount"
+msgstr "Размер скидки"
+
+# @ em-pro
+#: add-ons/coupons.php:752
+msgid "Enter a number here only, decimals accepted."
+msgstr "Введите число (только десятичное число)"
+
+# @ default
+#: add-ons/coupons.php:758 add-ons/gateways/gateway.php:424
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+# @ default
+#: add-ons/coupons.php:770
+msgid "Applicable Coupon"
+msgstr "Код купона"
+
+# @ dbem
+#: add-ons/emails.php:170 add-ons/gateways.php:245 emp-forms.php:31
+#: emp-updates.php:82
+msgid "Click to toggle"
+msgstr "Щелкните, чтобы переключить"
+
+# @ em-pro
+#: add-ons/emails.php:170
+msgid "Event Email Reminders"
+msgstr "Напоминание о событии по E-mail"
+
+# @ em-pro
+#: add-ons/emails.php:175
+msgid ""
+"Events Manager can send people that booked a place at your events a reminder "
+"email before it starts."
+msgstr ""
+"Менеджер событий может предупредить людей, которые забронировали места на "
+"ваших мероприятиях  путем напоминаний по электронной почте за некоторое "
+"время до его начала."
+
+# @ em-pro
+#: add-ons/emails.php:176
+#, php-format
+msgid ""
+"We use <a href=\"%s\">WP Cron</a> for scheduling checks for future events, "
+"which relies on site visits to trigger these tasks to run. If you have low "
+"levels of site traffic, this may not happen frequently enough, so you may "
+"want to consider forcing WP-Cron to run every few minutes. For more "
+"information, <a href=\"%s\">read this tutorial</a> on setting up WP Cron."
+msgstr ""
+"Мы используем <a href=\"%s\">WP Cron</a> для напоминания о будущих событиях, "
+"который использует посещения сайта как триггер вызывающий его выполнение. "
+"Если у вас низкий уровень посещения, вы можете форсировать WP-Cron запуская "
+"его каждые несколько минут.  Для получения дополнительной информации, <a "
+"href=\"%s\">читать учебник</a>по настройке WP Cron."
+
+# @ em-pro
+#: add-ons/emails.php:178
+msgid ""
+"<strong>Important!</strong>, you should use SMTP as your email setup if you "
+"are sending automated emails in this way for optimal performance. Other "
+"methods are not suited to sending mass emails."
+msgstr ""
+"<strong> Внимание! </strong>, Вы должны использовать SMTP  настройку "
+"электронной почты,  для оптимальной производительности. Другие методы не "
+"подходят для массовой рассылки писем."
+
+# @ dbem
+#: add-ons/emails.php:181
+msgid "Enable Email Reminders?"
+msgstr "Разрешить напоминание по email?"
+
+# @ dbem
+#: add-ons/emails.php:182
+msgid "Days before reminder"
+msgstr "За дней перед событием"
+
+# @ default
+#: add-ons/emails.php:182
+msgid ""
+"You can choose to send people attending your event x days before the event "
+"starts. Minimum is one day."
+msgstr ""
+"Вы можете выбрать за сколько предупредить людей, посещающих ваши события. "
+"Минимум один день."
+
+# @ dbem
+#: add-ons/emails.php:183
+msgid "Attach ical invite?"
+msgstr "Прикрепить ical приглашение?"
+
+# @ default
+#: add-ons/emails.php:183
+msgid ""
+"If using SMTP in your email settings. You can automatically attach an ical "
+"file which some email clients (e.g. gmail) will render as an invitation they "
+"can add to their calendar."
+msgstr ""
+"При использовании SMTP в вашей электронной почте. Вы можете автоматически "
+"прикрепить ical  файл, который некоторые почтовые клиенты (например, Gmail) "
+"будет показывать как приглашение  добавить в свой календарь."
+
+# @ em-pro
+#: add-ons/emails.php:187
+msgid "WP Cron Time"
+msgstr ""
+
+# @ em-pro
+#: add-ons/emails.php:190
+msgid ""
+"Every day Events Manager automatically checks upcoming events in order to "
+"generate emails. You can choose at what time of day to run this check, if "
+"your site has a lot of traffic, it may help having this run at times of "
+"lower server loads."
+msgstr ""
+"Каждый день менеджер событий автоматически проверяет наличие новых событий в "
+"целях получения электронной почты. Вы можете выбрать, в какое время дня "
+"выполнять эту проверку, если ваш сайт имеет большой трафик."
+
+# @ dbem
+#: add-ons/emails.php:194
+msgid "Reminder subject"
+msgstr "Напоминание"
+
+# @ dbem
+#: add-ons/emails.php:195
+msgid "Approved email"
+msgstr "Подтверждение email"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:155
+msgid "Refunded"
+msgstr "Возвращенные"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:166
+msgid "Voided"
+msgstr "Аннулированные"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:195
+msgid "Credit Card Number"
+msgstr "Номер кредитной карты"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:199
+msgid "Expiry Date"
+msgstr "Дата истечения срока действия"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:218
+msgid "CCV"
+msgstr ""
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:343
+#: add-ons/gateways/gateway.offline.php:386
+#: add-ons/gateways/gateway.paypal.php:452
+msgid "Success Message"
+msgstr "Сообщение об успешном выполнении операции"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:346
+msgid ""
+"The message that is shown to a user when a booking is successful and payment "
+"has been taken."
+msgstr ""
+"Сообщение, которое выдается пользователю, если заказ с платежом выполнен "
+"успешно."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:350
+#: add-ons/gateways/gateway.paypal.php:459
+msgid "Success Free Message"
+msgstr "Сообщение об успешном выполнении операции с бесплатным билетом"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:353
+msgid ""
+"If some cases if you allow a free ticket (e.g. pay at gate) as well as paid "
+"tickets, this message will be shown and the user will not be charged."
+msgstr ""
+"В некоторых случаях, если наряду с платными билетами, вы допускаете и "
+"бесплатные (например, оплата при входе), будет показано это сообщение и "
+"пользователь не будет перенаправлен на сайт PayPal."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:358
+#: add-ons/gateways/gateway.authorize.aim.php:401
+#: add-ons/gateways/gateway.paypal.php:475 add-ons/gateways/gateway.php:382
+#, php-format
+msgid "%s Options"
+msgstr "%s  Параметры"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:359
+#, php-format
+msgid ""
+"Please visit the <a href=\"%s\">documentation</a> for further instructions "
+"on setting up Authorize.net with Events Manager."
+msgstr ""
+"Пожалуйста, посетите <a href=\"%s\">documentation</a> для получения "
+"дальнейших инструкций по настройке Authorize.net с менеджером событий."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:363
+msgid "Mode"
+msgstr "Режим"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:367
+msgid "Sandbox"
+msgstr "Режим тестирования (Песочница)"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:368
+msgid "Live"
+msgstr "по настоящему"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:371
+#, php-format
+msgid ""
+"Please visit <a href=\"%s\">Authorize.net</a> to set up a sandbox account if "
+"you would like to test this gateway out. Alternatively, you can use your "
+"real account in test mode, which you can set on your Authorize.net control "
+"panel."
+msgstr ""
+"Пожалуйста, посетите <a href=\"%s\">Authorize.net</a>, чтобы создать "
+"песочницу если вы хотите проверить этот шлюз. Кроме того, вы можете "
+"использовать свой реальный счет в тестовом режиме, который можно установить "
+"на панели управления Authorize.net."
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:375
+msgid "API Login ID"
+msgstr ""
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:379
+msgid "Transaction key"
+msgstr "Ключ транзакции"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:383
+msgid "Payment Notifications"
+msgstr "Уведомление об оплате"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:384
+msgid ""
+"If you would like to receive notifications from Authorize.net and handle "
+"refunds or voided transactions automatically, you need to enable Silent Post "
+"URL and provide an MD5 Hash in your merchant interface."
+msgstr ""
+"Если вы хотите получать уведомления от Authorize.net и обрабатывать возвраты "
+"или недействительные сделки автоматически, Вам необходимо включить Silent "
+"Post URL и MD5 Hash в вашем Merchant Interface."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:385
+#, php-format
+msgid "Your return url is %s."
+msgstr "Возврат на %s."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:385
+msgid "You can use this as your Silent Post URL."
+msgstr "Вы можете использовать это как ваше Silent Post URL."
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:388
+msgid "Security: MD5 Hash"
+msgstr "Безопасность: MD5 Hash"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:391
+msgid ""
+"This string of text needs to match that in your merchant interface settings."
+msgstr ""
+"Эта строка текста должна соответствовать настройкам Merchant Interface."
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:395
+msgid "User Login ID"
+msgstr "ID пользователя"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:398
+msgid "This is the username you use to log into your merchant interface."
+msgstr ""
+"Это имя пользователя, используемое для входа в свой торговый интерфейс."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:401
+msgid "Advanced"
+msgstr "Дополнительно"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:403
+msgid "Email Customer (on success)"
+msgstr "E-mail клиента (в случае успеха)"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:413
+msgid "Customer Receipt Email Header"
+msgstr "Заголовок письма"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:417
+msgid "Customer Receipt Email Footer"
+msgstr "Окончание письма"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:421
+#: add-ons/gateways/gateway.paypal.php:559
+msgid "Manually approve completed transactions?"
+msgstr "Подтвердить вручную выполненные транзакции?"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:424
+#: add-ons/gateways/gateway.paypal.php:562
+msgid ""
+"By default, when someone pays for a booking, it gets automatically approved "
+"once the payment is confirmed. If you would like to manually verify and "
+"approve bookings, tick this box."
+msgstr ""
+"По умолчанию, когда кто-то оплачивает заказ, он  получает подтверждение "
+"автоматически после завершения платежа. Если вы хотите проверять и "
+"подтверждать заказы вручную, поставьте отметку в этом пукте."
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:425
+#: add-ons/gateways/gateway.paypal.php:563
+#, php-format
+msgid ""
+"Approvals must also be required for all bookings in your <a href=\"%s"
+"\">settings</a> for this to work properly."
+msgstr ""
+"Также в <a href=\"%s\">настрйках</a> должны быть включены требования "
+"подтверждения всех заказов, чтобы  все работало правильно."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:46
+msgid "Payment has been registered."
+msgstr "Платеж был зарегистрирован."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:50
+msgid "Booking is now fully paid and confirmed."
+msgstr "Заказ билетов теперь полностью оплачен и подтвержден."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:57
+msgid ""
+"Please enter a valid payment amount. Numbers only, use negative number to "
+"credit a booking."
+msgstr ""
+"Пожалуйста, введите сумму платежа (только цифры). Используйте отрицательное "
+"число чтобы кредитовать заказ."
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:69
+msgid ""
+"Be aware that by approving a booking awaiting payment, a full payment "
+"transaction will be registered against this booking, meaning that it will be "
+"considered as paid."
+msgstr ""
+"Будьте острожны, подтвердив заказ, ожидающий оплаты, вы зарегистрируете "
+"транзацию проведения платежа напротив этого заказа, что значит, что он будет "
+"считаться оплаченным."
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:148
+#: add-ons/gateways/gateway.paypal.php:150
+msgid "Approve"
+msgstr "Подтвердить"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:149
+msgid "Reject"
+msgstr "Отказать"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:160
+msgid "Add Booking"
+msgstr "Добавить заказ"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:168
+msgid "add booking"
+msgstr "добавить заказ"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:178
+#: add-ons/gateways/gateway.offline.php:203
+msgid "Add Offline Payment"
+msgstr "Добавить офлайновый платеж"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:186
+#: add-ons/gateways/gateways.transactions.php:96
+msgid "Amount"
+msgstr "Количество"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:189
+msgid ""
+"Please enter a valid payment amount (e.g. 10.00). Use negative numbers to "
+"credit a booking."
+msgstr ""
+"Пожалуйста, введите сумму платежа (например, 10,00). Используйте "
+"отрицательное число чтобы кредитовать заказ."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:193
+msgid "Comments"
+msgstr "Комментарии"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:234
+#, php-format
+msgid "Go back to &quot;%s&quot; bookings"
+msgstr "Вернуться в &quot;%s&quot; заказы"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:239
+#, php-format
+msgid "Add Booking For &quot;%s&quot;"
+msgstr "Добавить заказ билетов на &quot;%s&quot;"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:292
+#: add-ons/gateways/gateway.offline.php:295
+msgid "Manual booking."
+msgstr "Ручной резерв"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:301
+msgid "Add another booking"
+msgstr "Добавить ещё заказ"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:343
+msgid "Select a user, or enter a new one below."
+msgstr "Выберите пользователя, или введите нового ниже."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:360
+msgid "Amount Paid"
+msgstr "Оплачиваемая сумма"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:362
+msgid "Fully Paid"
+msgstr "Полностью оплаченный"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:363
+msgid ""
+"If you check this as fully paid, and leave the amount paid blank, it will be "
+"assumed the full payment has been made."
+msgstr ""
+"Если вы проверили что это полностью оплачено, и оставили  уплаченную сумму "
+"пустой, то это будет считаться что полная оплата была сделана."
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:389
+msgid ""
+"The message that is shown to a user when a booking with offline payments is "
+"successful."
+msgstr ""
+"Сообщение, которое выдается пользователю, если заказ с офлайновым платежом "
+"выполнен успешно."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:22
+msgid "Awaiting PayPal Payment"
+msgstr "Ждет оплаты  PayPal "
+
+# @ dbem
+#: add-ons/gateways/gateway.paypal.php:80
+msgid ""
+"To finalize your booking, please click the following button to proceed to "
+"PayPal."
+msgstr "Пожалуйста, нажмите на следующую кнопку, чтобы перейти к PayPal."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:122
+msgid "Resume Payment"
+msgstr "Возобновить платеж"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:418
+msgid "Unknown"
+msgstr "Неизвестен"
+
+# @ default
+#: add-ons/gateways/gateway.paypal.php:420
+msgid "Unprocessed payment needs refund"
+msgstr "Необработанные платежи должны быть возвращены"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:455
+msgid ""
+"The message that is shown to a user when a booking is successful whilst "
+"being redirected to PayPal for payment."
+msgstr ""
+"Сообщение, которое выдается пользователю, если заказ выполнен успешно, пока "
+"он перенапраляется на сайт PayPal для оплаты."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:462
+msgid ""
+"If some cases if you allow a free ticket (e.g. pay at gate) as well as paid "
+"tickets, this message will be shown and the user will not be redirected to "
+"PayPal."
+msgstr ""
+"В некоторых случаях, если наряду с платными билетами, вы допускаете и "
+"бесплатные (например, оплата при входе), будет показано это сообщение и "
+"пользователь не будет перенаправлен на сайт PayPal."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:466
+msgid "Thank You Message"
+msgstr "Сообщение со спасибо"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:469
+msgid ""
+"If you choose to return users to the default Events Manager thank you page "
+"after a user has paid on PayPal, you can customize the thank you message "
+"here."
+msgstr "Здесь можно настроить страницу с благодарностью за платеж."
+
+# @ default
+#: add-ons/gateways/gateway.paypal.php:476
+msgid ""
+"<strong>Important:</strong>In order to connect PayPal with your site, you "
+"need to enable IPN on your account."
+msgstr ""
+"<strong>Важно:</strong> Для того, чтобы подключить PayPal для вашего сайта,  "
+"Вам необходимо включить IPN в вашем счету."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:476
+#, php-format
+msgid "Your return url is %s"
+msgstr "Возврат на %s"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:477
+#, php-format
+msgid ""
+"Please visit the <a href=\"%s\">documentation</a> for further instructions."
+msgstr ""
+"Пожалуйста, посетите <a href=\"%s\">documentation</a> для получения "
+"дальнейших инструкций."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:481
+msgid "PayPal Email"
+msgstr "Email в PayPal"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:487
+msgid "Paypal Currency"
+msgstr "Валюта в PayPal"
+
+# @ dbem
+#: add-ons/gateways/gateway.paypal.php:488
+#, php-format
+msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+msgstr "Установите вашу валюту на странице <a href=\"%s\">настроек</a>."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:492
+msgid "PayPal Language"
+msgstr "Выбрать язык"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:510
+msgid ""
+"PayPal allows you to select a default language users will see. This is also "
+"determined by PayPal which detects the locale of the users browser. The "
+"default would be US."
+msgstr "PayPal позволяет выбрать язык по умолчанию. По умолчанию будет США."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:514
+msgid "PayPal Mode"
+msgstr "Режим PayPal"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:517
+msgid "Live Site"
+msgstr "Сайт"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:518
+msgid "Test Mode (Sandbox)"
+msgstr "Режим тестирования (Песочница)"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:524
+msgid "Return URL"
+msgstr "Вернуть Url"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:527
+msgid ""
+"Once a payment is completed, users will be offered a link to this URL which "
+"confirms to the user that a payment is made. If you would to customize the "
+"thank you page, create a new page and add the link here. For automatic "
+"redirect, you need to turn auto-return on in your PayPal settings."
+msgstr ""
+"После завершения оплаты пользователю будет показана страница с этим URL с "
+"подтверждением оплаты. Если вы хотите, настроить свою страницу, создайте "
+"новую страницу и добавьте ссылку здесь. Для автоматической переадресации, "
+"необходимо включить автоматическое возвращение в ваших настройках PayPal."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:531
+msgid "Cancel URL"
+msgstr "Отмена Url"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:534
+msgid ""
+"Whilst paying on PayPal, if a user cancels, they will be redirected to this "
+"page."
+msgstr ""
+"Если пользователь отменяет платеж на PayPal он будет перенаправлен на эту "
+"страницу."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:538
+msgid "PayPal Page Logo"
+msgstr "Логотип страницы PayPal"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:541
+msgid ""
+"Add your logo to the PayPal payment page. It's highly recommended you link "
+"to a https:// address."
+msgstr ""
+"Добавьте свой логотип на страницу платежа Paypal. Рекомендуется пользоваться "
+"ссылкой на https:// адрес."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:545
+msgid "Border Color"
+msgstr "Цвет рамки"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:548
+msgid ""
+"Provide a hex value color to change the color from the default blue to "
+"another color (e.g. #CCAAAA)."
+msgstr ""
+"Введите шестнадцатеричное значение цвета, чтобы изменить используемый по "
+"умолчанию голубой на новый цвет (например, #CCAAAA)."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:552
+msgid "Delete Bookings Pending Payment"
+msgstr "Удалить заказы, ожидающие оплаты"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:554
+msgid "minutes"
+msgstr "Минут"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:555
+msgid ""
+"Once a booking is started and the user is taken to PayPal, Events Manager "
+"stores a booking record in the database to identify the incoming payment. "
+"These spaces may be considered reserved if you enable <em>Reserved "
+"unconfirmed spaces?</em> in your Events &gt; Settings page. If you would "
+"like these bookings to expire after x minutes, please enter a value above "
+"(note that bookings will be deleted, and any late payments will need to be "
+"refunded manually via PayPal)."
+msgstr ""
+"После того, как заказ будет запущен и пользователь попадает на PayPal, "
+"менеджер по мероприятиям сохранит заказ в базе данных для идентификации "
+"входящих платежей. Эти места можно считат зарезервировнными, если вы "
+"включите <em>Резервировать неподтвержденные места?</em> в настройках вашего "
+"События. Если вы хотели что бы эти заказы аннулировались через х минут, "
+"пожалуйста, введите значение выше (обратите внимание, что заказы будут "
+"удалены, и любые просроченные платежи должны быть возвращены вручную через "
+"PayPal)."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:377
+#, php-format
+msgid "Edit &quot;%s&quot; settings"
+msgstr "Редактировать настройки  &quot;%s&quot;"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:386
+msgid "Gateway Title"
+msgstr "Название шлюза"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:390 add-ons/gateways/gateway.php:400
+#, php-format
+msgid ""
+"Only if you have not enabled quick pay buttons in your <a href=\"%s"
+"\">gateway settings</a>."
+msgstr ""
+"Если вы не включили кнопки быстрой оплаты в <a href=\"%s\">настройка шлюза</"
+"a>,то будут использованы эти параметры."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:391
+msgid ""
+"The user will see this as the text option when choosing a payment method."
+msgstr ""
+"The user will see this as the text option when choosing a payment method."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:396
+msgid "Booking Form Information"
+msgstr "Форма заказа билетов - информация"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:401
+msgid ""
+"If a user chooses to pay with this gateway, or it is selected by default, "
+"this message will be shown just below the selection."
+msgstr ""
+"Если пользователь выбирает платить с этого шлюза, или он установлен по "
+"умолчанию, это сообщение будет показано чуть ниже."
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:409
+msgid "Quick Pay Buttons"
+msgstr "Quick оплата"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:410
+#, php-format
+msgid ""
+"If you have chosen to only use quick pay buttons in your <a href=\"%s"
+"\">gateway settings</a>, these settings below will be used."
+msgstr ""
+"Если вы решили использовать кнопки быстрой оплаты в <a href=\"%s\">настройка "
+"шлюза</a>,то будут использованы эти параметры."
+
+# @ default
+#: add-ons/gateways/gateway.php:414
+msgid "Payment Button"
+msgstr "Оплатить"
+
+# @ dbem
+#: add-ons/gateways/gateway.php:417
+#, php-format
+msgid ""
+"Choose the button text. To use an image instead, enter the full url starting "
+"with %s or %s."
+msgstr ""
+"Выберите текст кнопки. Для использования изображения вместо этого введите "
+"полный URL, начинающийся %s или %s."
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:52 add-ons/gateways.php:319
+msgid "Transactions"
+msgstr "Транзакции"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:94
+msgid "User"
+msgstr "Пользователь"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:95
+msgid "Date"
+msgstr "Дата"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:97
+msgid "Transaction id"
+msgstr "Id транзакции"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:98
+msgid "Gateway"
+msgstr "Шлюз"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:99
+msgid "Status"
+msgstr "Статус"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:100
+msgid "Notes"
+msgstr "Примечание"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:126
+#, php-format
+msgid "%s Rows"
+msgstr "%s Строк"
+
+# @ default
+#: add-ons/gateways/gateways.transactions.php:142
+msgid "Filter"
+msgstr "Фильтр:"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:144
+msgid "Displaying Event"
+msgstr "Отображение событий"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:146
+msgid "Displaying User"
+msgstr "Отображение пользователей"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:230
+#: add-ons/gateways/gateways.transactions.php:239
+#: add-ons/gateways/gateways.transactions.php:248
+msgid "None yet"
+msgstr "Еще нет"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:273
+msgid "No Transactions"
+msgstr "Нет транзакций"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:354
+msgid "Transaction ID"
+msgstr "Id транзакции"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:375
+msgid "Transaction deleted"
+msgstr "Транзакция  удалена"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:379
+msgid "Transaction could not be deleted"
+msgstr "Транзакция не может быть удалена"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways.php:37 emp-install.php:138
+msgid "Address Line 2"
+msgstr "Адрес 2"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways.php:44 emp-install.php:145
+msgid "Company"
+msgstr "Компания"
+
+# @ em-pro
+#: add-ons/gateways.php:50
+msgid ""
+"All transactional history associated with this booking will also be deleted."
+msgstr "Все транзакции, связанные с этой регистрации будут также удалены."
+
+# @ em-pro
+#: add-ons/gateways.php:51
+msgid ""
+"Are you sure you want to delete? This may make your transaction history out "
+"of sync with your payment gateway provider."
+msgstr ""
+"Вы уверены, что хотите удалить? Это может сделать вашу историю транзакций "
+"несинхронизированной с платежной системой."
+
+# @ dbem
+#: add-ons/gateways.php:57
+msgid "Awaiting Online Payment"
+msgstr "Ждет онлайн оплаты"
+
+# @ dbem
+#: add-ons/gateways.php:58
+msgid "Awaiting Offline Payment"
+msgstr "Ждет офлайн оплаты"
+
+# @ em-pro
+#: add-ons/gateways.php:121
+msgid ""
+"Choice of payment method not recognized. If you are seeing this error and "
+"selecting a method of payment, we apologize for the inconvenience. Please "
+"contact us and we'll help you make a booking as soon as possible."
+msgstr ""
+
+# @ default
+#: add-ons/gateways.php:245
+msgid "Payment Gateway Options"
+msgstr "Настройка платежного шлюза"
+
+# @ em-pro
+#: add-ons/gateways.php:249
+msgid "Enable Quick Pay Buttons?"
+msgstr "Разрешить быструю оплату?"
+
+# @ em-pro
+#: add-ons/gateways.php:249
+#, php-format
+msgid ""
+"Only works with gateways that do not require additional payment information "
+"to be submitted (e.g. PayPal and Offline payments). If enabled, the default "
+"booking form submit button is not used, and each gateway will have a button "
+"(or image, see <a href=\"%s\">individual gateway settings</a>) which if "
+"clicked on will submit a booking for that gateway."
+msgstr ""
+"Работает только с шлюзами, которые не требуют дополнительной информацией  о "
+"платеже (например, PayPal и офлайн). Если включено, каждая платежная система "
+"будет представлена своей кнопкой (см. <a href=\"%s\">Установки плат. систем</"
+"a>) "
+
+# @ em-pro
+#: add-ons/gateways.php:250
+msgid "Gateway Label"
+msgstr "метка шлюза"
+
+# @ em-pro
+#: add-ons/gateways.php:250
+msgid ""
+"If you are not using quick pay buttons a drop-down menu will be used, with "
+"this label."
+msgstr ""
+"Если вы не используете кнопки быстрого оплаты то будет использоваться "
+"выпадающее меню."
+
+# @ default
+#: add-ons/gateways.php:260
+msgid "Payment Gateways"
+msgstr "Платежные шлюзы"
+
+# @ default
+#: add-ons/gateways.php:283
+msgid "Gateway updated."
+msgstr "Шлюз обновлен."
+
+# @ default
+#: add-ons/gateways.php:284
+msgid "Gateway not updated."
+msgstr "Шлюз не обновлен."
+
+# @ default
+#: add-ons/gateways.php:285
+msgid "Gateway activated."
+msgstr "Шлюз активирован."
+
+# @ default
+#: add-ons/gateways.php:286
+msgid "Gateway not activated."
+msgstr "Шлюз не активирован"
+
+# @ default
+#: add-ons/gateways.php:287
+msgid "Gateway deactivated."
+msgstr "Шлюз отключен."
+
+# @ default
+#: add-ons/gateways.php:288
+msgid "Gateway not deactivated."
+msgstr "Шлюз не отключен."
+
+# @ default
+#: add-ons/gateways.php:289
+msgid "Gateway activation toggled."
+msgstr "Активация шлюза переключена."
+
+# @ em-pro
+#: add-ons/gateways.php:293
+msgid "Edit Gateways"
+msgstr "Изменить шлюзы"
+
+# @ default
+#: add-ons/gateways.php:305 add-ons/gateways.php:404
+msgid "Bulk Actions"
+msgstr "Групповые операции"
+
+# @ default
+#: add-ons/gateways.php:306 add-ons/gateways.php:405
+msgid "Toggle activation"
+msgstr "Переключить режим активации"
+
+# @ default
+#: add-ons/gateways.php:308
+msgid "Apply"
+msgstr "Применить"
+
+# @ em-pro
+#: add-ons/gateways.php:317
+msgid "Gateway Name"
+msgstr "Название шлюза"
+
+# @ em-pro
+#: add-ons/gateways.php:318 add-ons/gateways.php:378
+msgid "Active"
+msgstr "Активно"
+
+# @ default
+#: add-ons/gateways.php:365
+msgid "Settings"
+msgstr "Настройки"
+
+# @ default
+#: add-ons/gateways.php:368
+msgid "Deactivate"
+msgstr "Отключить"
+
+# @ default
+#: add-ons/gateways.php:370
+msgid "Activate"
+msgstr "Активировать"
+
+# @ em-pro
+#: add-ons/gateways.php:380
+msgid "Inactive"
+msgstr "Неактивно"
+
+# @ em-pro
+#: add-ons/gateways.php:385
+msgid "View transactions"
+msgstr "Показать транзакции"
+
+# @ em-pro
+#: add-ons/gateways.php:394
+msgid "No Payment gateways were found for this install."
+msgstr "Платежные шлюзы для данной установки не обнаружены."
+
+# @ em-pro
+#: add-ons/gateways.php:542
+msgid "Common User Fields for Gateways"
+msgstr "Общие поля пользователя для платежных шлюзов"
+
+# @ em-pro
+#: add-ons/gateways.php:545
+msgid ""
+"In many cases, customer address information is required by gateways for "
+"verification. This section connects your custom fields to commonly used "
+"customer information fields."
+msgstr ""
+"Во многих случаях информация, адрес клиента требуется платежным шлюзам для "
+"проверки. Этот раздел соединяет ваши дополнительные поля  с обычно "
+"используемыми пользовательскими полями информации о клиенте."
+
+# @ em-pro
+#: add-ons/gateways.php:546
+msgid ""
+"After creating user fields above, you should link them up in here so some "
+"gateways can make use of them when processing payments."
+msgstr ""
+"После создания пользовательских полей выше, вы должны связать их здесь, т.к. "
+"некоторые платежные шлюзы могут использовать их при обработке платежей."
+
+# @ em-pro
+#: add-ons/gateways.php:549
+msgid "Name (first/last)"
+msgstr "Имя (имя/фамилия)"
+
+# @ default
+#: add-ons/gateways.php:549
+msgid ""
+"Generated accordingly from user first/last name or full name field. If a "
+"name field isn't provided in your booking form, the username will be used "
+"instead."
+msgstr ""
+"Генерирование имени/фамилии или полного имени. Если поля имя не "
+"предусмотрено в вашей форме, будет использовано имя пользователя (username)"
+
+# @ default
+#: add-ons/gateways.php:550
+msgid "Uses the WordPress account email associated with the user."
+msgstr "Использовать WordPress email пользователя."
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways.php:556 emp-forms.php:353 emp-forms.php:529
+msgid "none selected"
+msgstr "Ничего не выбрано"
+
+# @ em-pro
+#: add-ons/gateways.php:569 emp-forms.php:1162
+msgid "Save Form"
+msgstr "Сохранить"
+
+# @ em-pro
+#: add-ons/user-fields.php:151 add-ons/user-fields.php:154
+msgid "n/a"
+msgstr ""
+
+# @ em-pro
+#: add-ons/user-fields.php:187
+msgid "Further Information"
+msgstr "Дополнительная информация"
+
+# @ em-pro
+#: add-ons/user-fields.php:258
+msgid "User Fields"
+msgstr "Поля профиля пользователя"
+
+# @ em-pro
+#: add-ons/user-fields.php:261
+#, php-format
+msgid ""
+"Registration fields are only shown to guest visitors. If you add new fields "
+"here and save, they will then be available as custom registrations in your "
+"bookings editor, and this information will be accessible and editable on "
+"each user <a href=\"%s\">profile page</a>."
+msgstr ""
+"Только незарегистрированные пользователи видят регистраионные поля.  Если вы "
+"добавите новые поля они будут доступны в качестве пользовательских "
+"регистрационных полей при заказе, и эта информация будет доступна и "
+"редактируема со <a href=\"%s\">страница пользователя</a>."
+
+# @ em-pro
+#: add-ons/user-fields.php:262
+msgid ""
+"<strong>Important:</strong> When editing this form, to make sure your "
+"current user information is displayed, do not change their field names."
+msgstr ""
+"<strong>Важно:</strong> При редактировании этой формы, чтобы показывались "
+"текущие данные пользователя, не меняйте  имена полей."
+
+# @ default
+# @ em-pro
+#: emp-forms.php:11 emp-forms.php:19
+msgid "Forms Editor"
+msgstr "Редактор форм"
+
+# @ em-pro
+#: emp-forms.php:20
+msgid ""
+"On this page you can create/edit various forms used within Events Manager "
+"Pro."
+msgstr ""
+"На этой странице вы можете создавать / редактировать различные формы, "
+"используемые в Менеджере событий."
+
+# @ default
+# @ em-pro
+#: emp-forms.php:31
+msgid "PRO Booking Form Options"
+msgstr "Форма заказа билетов - Pro опции"
+
+# @ em-pro
+#: emp-forms.php:35
+msgid "Show profile fields to logged in users?"
+msgstr "Показать поля профиля для зарегистрированных пользователей?"
+
+# @ em-pro
+#: emp-forms.php:35
+msgid ""
+"When logged in, users usually don't see their profile fields, with this "
+"enabled, users will be able to update their profile fields alongside their "
+"booking. This is particularly useful if the user is missing key information. "
+"Note that this does not include usernames, name, passwords and emails, these "
+"must be modified from their user profile page."
+msgstr ""
+"После входа в систему, пользователи обычно не видят дополнительные поля "
+"своего профиля, с этой опцией, пользователи смогут обновить  их. Это "
+"особенно полезно, если  отсутствует ключевая информация о пользователе. "
+"Обратите внимание, что это не относится к именам, названиям, паролям и "
+"email, они должны быть изменены со страницы профиля пользователя."
+
+# @ em-pro
+#: emp-forms.php:36
+msgid "Make profile fields editable?"
+msgstr "Сделать профиль редактируемым?"
+
+# @ em-pro
+#: emp-forms.php:36
+msgid ""
+"If profile fields are set to show to logged in users, you can also choose "
+"whether or not to make these fields editable or just for viewing reference."
+msgstr ""
+"Если установлен показ полей профиля для зарегистрированных пользователей, вы "
+"также можете выбрать, хотите ли сделать эти поля редактируемыми или только "
+"ссылку для просмотра."
+
+# @ em-pro
+#: emp-forms.php:545
+msgid "You must also add an end date."
+msgstr "Необходимо также добавить дату окончания."
+
+# @ dbem
+#: emp-forms.php:549 emp-forms.php:562
+msgid ""
+"Dates must have correct formatting. Please use the date picker provided."
+msgstr "Даты должны иметь корректный формат. Воспользуйтесь установщиком даты."
+
+# @ dbem
+#: emp-forms.php:555
+msgid "Please provide a later end date."
+msgstr "Необходимо также добавить дату окончания."
+
+# @ em-pro
+#: emp-forms.php:568 emp-forms.php:932
+msgid "You must provide a start date."
+msgstr "Необходимо также добавить дату начала."
+
+# @ em-pro
+#: emp-forms.php:586 emp-forms.php:988
+msgid "You must provide an end time."
+msgstr "Необходимо также добавить время окончания."
+
+# @ em-pro
+#: emp-forms.php:590 emp-forms.php:596 emp-forms.php:978
+msgid ""
+"Please use the time picker provided to select the appropriate time format."
+msgstr "Используйте установщик времени для выбора подходящего формата"
+
+# @ em-pro
+#: emp-forms.php:602 emp-forms.php:998
+msgid "You must provide a start time."
+msgstr "Необходимо также добавить время начала."
+
+# @ dbem
+#: emp-forms.php:634
+msgid "The email address isn&#8217;t correct."
+msgstr "Неправильный email-адрес."
+
+# @ em-pro
+#: emp-forms.php:737
+msgid "Label"
+msgstr "Метка"
+
+# @ em-pro
+#: emp-forms.php:738
+msgid "Field ID"
+msgstr "ID поля"
+
+# @ default
+#: emp-forms.php:738
+msgid ""
+"DO NOT change these values if you want to keep your field settings "
+"associated with previous booking fields."
+msgstr ""
+"НЕ МЕНЯЙТЕ эти значения, если хотите сохранить связь настроек полей с "
+"существвующими полями заказа."
+
+# @ em-pro
+#: emp-forms.php:739
+msgid "Type"
+msgstr "Тип"
+
+# @ em-pro
+#: emp-forms.php:740
+msgid "Required"
+msgstr "обязательно"
+
+# @ em-pro
+#: emp-forms.php:750
+msgid "Select Type"
+msgstr "Выберите тип"
+
+# @ em-pro
+#: emp-forms.php:752
+msgid "Customizable Fields"
+msgstr "Настраиваемые поля"
+
+# @ em-pro
+#: emp-forms.php:770
+msgid "Registration Fields"
+msgstr "Поля для регистрации"
+
+# @ em-pro
+#: emp-forms.php:778
+msgid "Custom Registration Fields"
+msgstr "Настраиваемые регистрационные поля"
+
+# @ em-pro
+#: emp-forms.php:793
+msgid "remove"
+msgstr "удалить"
+
+# @ em-pro
+#: emp-forms.php:793 emp-forms.php:1181 emp-forms.php:1184 emp-forms.php:1248
+msgid "options"
+msgstr "настройки"
+
+# @ em-pro
+#: emp-forms.php:799 emp-forms.php:1007
+msgid "Options"
+msgstr "Настройки"
+
+# @ em-pro
+#: emp-forms.php:802 emp-forms.php:1010
+msgid "Available options, one per line."
+msgstr "Доступные настройки, по одной в строке."
+
+# @ em-pro
+#: emp-forms.php:806
+msgid "Use Default?"
+msgstr "Использовать настройки по умолчанию?"
+
+# @ em-pro
+#: emp-forms.php:810
+msgid "If checked, the first value above will be used."
+msgstr ""
+"Если этот пункт отмечен, то будет использоваться первое значение из "
+"вышеуказанных."
+
+# @ em-pro
+#: emp-forms.php:814
+msgid "Default Text"
+msgstr "Текст по умолчанию"
+
+# @ em-pro
+#: emp-forms.php:816
+msgid "Select ..."
+msgstr "Выберите ..."
+
+# @ em-pro
+#: emp-forms.php:817
+msgid "Shown when a default value isn't selected, selected by default."
+msgstr ""
+"Отображается, когда значение по умолчанию не выбрано, выбирается по "
+"умолчанию."
+
+# @ em-pro
+#: emp-forms.php:821 emp-forms.php:863 emp-forms.php:889 emp-forms.php:955
+#: emp-forms.php:1014 emp-forms.php:1042 emp-forms.php:1063 emp-forms.php:1093
+msgid "Tip Text"
+msgstr "Совет"
+
+# @ em-pro
+#: emp-forms.php:824 emp-forms.php:866 emp-forms.php:892 emp-forms.php:958
+#: emp-forms.php:1017 emp-forms.php:1045 emp-forms.php:1066 emp-forms.php:1096
+msgid ""
+"Will appear next to your field label as a question mark with a popup tip "
+"bubble."
+msgstr ""
+"Будет отображаться рядом с вашим полем метки как знак вопроса и всплывать "
+"при выборе."
+
+# @ em-pro
+#: emp-forms.php:828 emp-forms.php:853 emp-forms.php:1021 emp-forms.php:1049
+#: emp-forms.php:1077 emp-forms.php:1107 emp-forms.php:1140
+msgid "Error Message"
+msgstr "Сообщение об ошибке"
+
+# @ em-pro
+#: emp-forms.php:832 emp-forms.php:857 emp-forms.php:1025
+msgid "This error will show if a value isn't chosen."
+msgstr "Эта ошибка означает, что значение не выбрано."
+
+# @ em-pro
+#: emp-forms.php:833 emp-forms.php:858 emp-forms.php:902 emp-forms.php:912
+#: emp-forms.php:922 emp-forms.php:932 emp-forms.php:968 emp-forms.php:978
+#: emp-forms.php:988 emp-forms.php:998 emp-forms.php:1026 emp-forms.php:1054
+#: emp-forms.php:1082 emp-forms.php:1112 emp-forms.php:1145
+msgid "Default:"
+msgstr "По-умолчанию"
+
+# @ em-pro
+#: emp-forms.php:842
+msgid "Content"
+msgstr "Контент"
+
+# @ em-pro
+#: emp-forms.php:844
+msgid ""
+"This html will be displayed on your form, the label for this field is used "
+"only for reference purposes."
+msgstr ""
+"Этот HTML будет отображаться на вашей форме, метки для этого поля "
+"используется только в справочных целях."
+
+# @ default
+#: emp-forms.php:874
+msgid "Date Range?"
+msgstr "Настройка диапазона дат"
+
+# @ em-pro
+#: emp-forms.php:878
+msgid "If selected, this field will also have an end-date."
+msgstr "Если выбрано, вы должны указать дату окончания."
+
+# @ em-pro
+#: emp-forms.php:882 emp-forms.php:948
+msgid "Separator"
+msgstr "Формат (разделитель) даты"
+
+# @ em-pro
+#: emp-forms.php:885 emp-forms.php:951
+msgid ""
+"This text will appear between the two date fields if this is a date range."
+msgstr "Этот текст появится между двумя полями даты, если это диапазон дат."
+
+# @ em-pro
+#: emp-forms.php:896 emp-forms.php:961
+msgid "Error Messages"
+msgstr "Сообщение ошибки"
+
+# @ em-pro
+#: emp-forms.php:897 emp-forms.php:963
+msgid "Field Required"
+msgstr "Обязательное поле "
+
+# @ em-pro
+#: emp-forms.php:901 emp-forms.php:967
+msgid "This error will show this field is required and no value is entered."
+msgstr ""
+"Эта ошибка будет показывать, что поле является обязательным и его значение "
+"не введено."
+
+# @ em-pro
+#: emp-forms.php:907 emp-forms.php:973
+msgid "Incorrect Formatting"
+msgstr "Некорректный формат"
+
+# @ em-pro
+#: emp-forms.php:911
+msgid "This error will show if an incorrect date format is used."
+msgstr "Эта ошибка означает, что используется неверный формат дат."
+
+# @ em-pro
+#: emp-forms.php:912
+msgid ""
+"Please use the date picker provided to select the appropriate date format."
+msgstr "Используйте установщик даты для выбора правильного формата"
+
+# @ em-pro
+#: emp-forms.php:917
+msgid "End date required"
+msgstr "Дата Окончания События обязательна"
+
+# @ em-pro
+#: emp-forms.php:921
+msgid ""
+"This error will show if the field is a date-range and no end date is "
+"selected."
+msgstr ""
+"Эта ошибка  показана, если поле на попадает во временной диапазон и дата "
+"окончания не выбрано."
+
+# @ em-pro
+#: emp-forms.php:922
+msgid "You must provide an end date."
+msgstr "Вы должны ввести дату окончания."
+
+# @ em-pro
+#: emp-forms.php:927
+msgid "Start date required"
+msgstr "Дата начала события обязательна"
+
+# @ em-pro
+#: emp-forms.php:931
+msgid ""
+"This error will show if the field is a date-range and no start date is "
+"selected."
+msgstr ""
+"Эта ошибка  показана, если поле на попадает во временной диапазон и дата "
+"начала не выбрана."
+
+# @ em-pro
+#: emp-forms.php:940
+msgid "Time Range?"
+msgstr "Интервал времени?"
+
+# @ em-pro
+#: emp-forms.php:944
+msgid "If selected, this field will also have an end-time."
+msgstr "При выборе этого поля вы должны указать время окончания."
+
+# @ em-pro
+#: emp-forms.php:977
+msgid "This error will show if an incorrect time format is used."
+msgstr "Эта ошибка означает, что используется неверный формат времени ."
+
+# @ em-pro
+#: emp-forms.php:983
+msgid "End time required"
+msgstr "Конец окончания обязательно"
+
+# @ em-pro
+#: emp-forms.php:987
+msgid ""
+"This error will show if the field is a time-range and no end time is "
+"selected."
+msgstr ""
+"Эта ошибка  показана, если поле на попадает во временной диапазон и время "
+"окончания не выбрано."
+
+# @ em-pro
+#: emp-forms.php:993
+msgid "Start time required"
+msgstr "Время начала обязательно"
+
+# @ em-pro
+#: emp-forms.php:997
+msgid ""
+"This error will show if the field is a time-range and no start time is "
+"selected."
+msgstr ""
+"Эта ошибка  показана, если поле на попадает во временной диапазон и время "
+"начала не выбрано."
+
+# @ em-pro
+#: emp-forms.php:1035
+msgid "Checked by default?"
+msgstr "Отмечено по умолчанию?"
+
+# @ em-pro
+#: emp-forms.php:1053
+msgid "This error will show if this box is not checked."
+msgstr "Эта ошибка значит, что пункт не был отмечен."
+
+# @ em-pro
+#: emp-forms.php:1070 emp-forms.php:1100
+msgid "Regex"
+msgstr "Регулярное выражение"
+
+# @ em-pro
+#: emp-forms.php:1073 emp-forms.php:1103
+msgid ""
+"By adding a regex expression, you can limit the possible values a user can "
+"input, for example the following only allows numbers: "
+msgstr ""
+"Добавив регулярное выражение, вы можете ограничить значения, которые будет "
+"вводить пользователь. Например, следующее позволяет вводить только цифры:"
+
+# @ em-pro
+#: emp-forms.php:1081 emp-forms.php:1111
+msgid "If the regex above does not match this error will be displayed."
+msgstr ""
+"Эта ошибка означает, что указанное выше регулярное выражение не подходит."
+
+# @ em-pro
+#: emp-forms.php:1126
+msgid "Public Key"
+msgstr "Публичный ключ"
+
+# @ em-pro
+#: emp-forms.php:1129 emp-forms.php:1136
+#, php-format
+msgid "Required, get your keys <a href=\"%s\">here</a>"
+msgstr "Необходимо получить ваши ключ <a href=\"%s\">здесь</a>"
+
+# @ em-pro
+#: emp-forms.php:1133
+msgid "Private Key"
+msgstr "Приватный ключ"
+
+# @ em-pro
+#: emp-forms.php:1144
+msgid "This error will show if the captcha is not correct."
+msgstr "Эта ошибка означает, что введена неправильная captcha."
+
+# @ em-pro
+#: emp-forms.php:1161
+msgid "Add booking field"
+msgstr "Добавить поле заказа"
+
+# @ em-pro
+#: emp-forms.php:1228
+msgid "hide options"
+msgstr "скрыть настройки"
+
+# @ em-pro
+#: emp-install.php:135
+#, php-format
+msgid "Please fill in the field: %s"
+msgstr "Пожалуйста, заполните поле: %s"
+
+# @ em-pro
+#: emp-install.php:155
+msgid "Pay With"
+msgstr "Оплата через"
+
+# @ em-pro
+#: emp-install.php:157
+msgid "PayPal"
+msgstr ""
+
+# @ em-pro
+#: emp-install.php:159
+msgid ""
+"Please wait whilst you are redirected to PayPal to proceed with payment."
+msgstr ""
+"Пожалуйста, подождите, идет перенаправление на Paypal для выполнения платежа."
+
+# @ dbem
+#: emp-install.php:160 emp-install.php:165 emp-install.php:169
+msgid "Booking successful."
+msgstr "Заказ выполнен успешно."
+
+# @ dbem
+#: emp-install.php:162
+msgid ""
+"Thank you for your payment. Your transaction has been completed, and a "
+"receipt for your purchase has been emailed to you along with a seperate "
+"email containing account details to access your booking information on this "
+"site. You may log into your account at www.paypal.com to view details of "
+"this transaction."
+msgstr ""
+"Спасибо за ваш платеж. Ваша транзакция была завершена и квитанция платежа "
+"была выслана на ваш email, наряду с отдельным письмом, содержащим данные "
+"вашей учетной записи, позволяющей посмотреть информацию о вашем заказе на "
+"этом сайте. Вы можете войти под своей учетной записью на www.paypal.com, "
+"чтобы узнать детали этой транзакции."
+
+# @ em-pro
+#: emp-install.php:164 emp-install.php:166
+msgid "Pay Offline"
+msgstr "Офлайновый платеж"
+
+# @ em-pro
+#: emp-install.php:168
+msgid "Credit Card"
+msgstr "Кредитная карта"
+
+# @ dbem
+#: emp-install.php:170
+msgid "Booking successful. You have not been charged for this booking."
+msgstr "Регистрация подтверждена. Вы не платили за этот резерв."
+
+# @ dbem
+#: emp-install.php:174
+msgid ""
+"<br/><br/>-------------------------------<br/>Powered by Events Manager - "
+"http://wp-events-plugin.com"
+msgstr ""
+
+# @ dbem
+#: emp-install.php:175
+msgid ""
+"Dear #_BOOKINGNAME, <br/>This is a reminder about your #_BOOKINGSPACES space/"
+"spaces reserved for #_EVENTNAME.<br/>When : #_EVENTDATES @ #_EVENTTIMES<br/"
+">Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br/>We look forward to seeing "
+"you there!<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+"Уважаемый #_BOOKINGNAME, <br/>Вы зарезервировали #_BOOKINGSPACES мест на "
+"#_EVENTNAME.<br/>Дата : #_EVENTDATES @ #_EVENTTIMES<br/>Место : "
+"#_LOCATIONNAME - #_LOCATIONFULLLINE<br/>Мы ждем Вас. <br/>С уважением,<br/"
+">#_CONTACTNAME"
+
+# @ dbem
+#: emp-updates.php:32
+#, php-format
+msgid "Please enter a valid API key in your <a href=\"%s\">settings page</a>."
+msgstr ""
+"Пожалуйста, введите действительный ключ API в <a href=\"%s\">настройках</a>."
+
+# @ em-pro
+#: emp-updates.php:41
+#, php-format
+msgid ""
+"To access automatic updates, you must update your <a href=\"%s\">Membership "
+"Key</a> for Events Mananager Pro <a href=\"#pro-api\">here</a>. Only admins "
+"see this message."
+msgstr ""
+"Чтобы получать автоматические обноовления, вы должны обновить ваш <a href="
+"\"%s\">Membership Key</a> для Events Mananager Pro <a href=\"#pro-api"
+"\">здесь</a>. Только администраторы видят это сообщение."
+
+# @ em-pro
+#: emp-updates.php:48
+#, php-format
+msgid ""
+"Dev Mode active: Just a friendly reminder that you have added %s to your wp-"
+"config.php file. Only admins see this message, and it will go away when you "
+"remove that line."
+msgstr ""
+"Режим разработки: просто напоминание, что вы добавили в %s  файл wp-config."
+"php Только администраторы видят это сообщение и оно пропадет, как только вы "
+"уберете эту строку."
+
+# @ dbem
+#: emp-updates.php:82
+msgid "Pro Membership Key"
+msgstr "Pro Membership Key"
+
+# @ dbem
+#: emp-updates.php:86
+msgid "Pro Member Key"
+msgstr "Pro Member Key"
+
+# @ dbem
+#: emp-updates.php:86
+#, php-format
+msgid ""
+"Insert your Pro Member Key to access automatic updates you can get your "
+"membership key from <a href=\"%s\">here</a>."
+msgstr ""
+"Введите ваш Pro Member Key, чтобы получать автоматические обнвления. Вы "
+"можете получить ключ <a href=\"%s\">здесь</a>."
+
+# @ em-pro
+#: emp-updates.php:104
+msgid "looking for dev mode options? we moved it into <em>Admin Tools</em>"
+msgstr ""
+
+# @ em-pro
+#: events-manager-pro.php:154
+msgid ""
+"Please make sure you install Events Manager as well. You can search and "
+"install this plugin from your plugin installer or download it <a href="
+"\"http://wordpress.org/extend/plugins/events-manager/\">here</a>."
+msgstr ""
+"Пожалуйста, убедитесь, что у вас также установлен Events Manager. Вы можете "
+"найти и установить его с помощью установщика плагинов или скачать его <a "
+"href=\"http://wordpress.org/extend/plugins/events-manager/\">здесь</a>."
+
+# @ em-pro
+#: events-manager-pro.php:154 events-manager-pro.php:160
+msgid "Only admins see this message."
+msgstr "Только админы видят это сообщение"
+
+# @ em-pro
+#: events-manager-pro.php:160
+msgid ""
+"Please make sure you have the <a href=\"http://wordpress.org/extend/plugins/"
+"events-manager/\">latest version</a> of Events Manager installed, as this "
+"may prevent Pro from functioning properly."
+msgstr ""
+"Убедитесь что у вас  есть <a href=\"http://wordpress.org/extend/plugins/"
+"events-manager/\">последняя версия</a> Events Manager , т.к. это может "
+"помешать работать про версии."

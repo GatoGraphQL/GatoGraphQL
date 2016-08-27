@@ -1,0 +1,120 @@
+.fs-modal {
+	position: fixed;
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	z-index: 100000;
+	display: none;
+	background: rgba(0, 0, 0, 0.6);
+
+	.fs-modal-dialog {
+		background: transparent;
+		position: absolute;
+		left: 50%;
+		margin-left: -298px;
+		padding-bottom: 30px;
+		top: -100%;
+		z-index: 100001;
+		width: 596px;
+		
+		@media (max-width: 650px) {
+			margin-left: -50%;
+			box-sizing: border-box;
+			padding-left: 10px;
+			padding-right: 10px;
+			width: 100%;
+			
+			.fs-modal-panel > h3 > strong {
+				font-size: 1.3em;
+			}
+			
+			li.reason {
+				margin-bottom: 10px;
+				
+				.reason-input {
+					margin-left: 29px;
+				}
+				
+				label {
+					display: table;
+
+					> span {
+						display: table-cell;
+						font-size: 1.3em;
+					}
+				}
+			}
+		}
+	}
+
+	&.active {
+		display: block;
+
+		&:before {
+			display: block;
+		}
+
+		.fs-modal-dialog {
+			top: 10%;
+		}
+	}
+
+	.fs-modal-body,
+	.fs-modal-footer {
+		border: 0;
+		background: #fefefe;
+		padding: 20px;
+	}
+
+	.fs-modal-body {
+		border-bottom: 0;
+
+		h2 {
+			font-size: 20px;
+		}
+		
+		> div {
+			margin-top: 10px;
+
+			h2 {
+				font-weight: bold;
+				font-size: 20px;
+				margin-top: 0;
+			}
+		}
+	}
+
+	.fs-modal-footer {
+		border-top: #eeeeee solid 1px;
+		text-align: right;
+		
+		> .button {
+			margin: 0 7px;
+
+			&:first-child {
+				margin: 0;
+			}
+		}
+	}
+
+	.fs-modal-panel:not(.active) {
+		display: none;
+	}
+	
+	.reason-input {
+		margin:	3px 0 3px 22px;
+		
+		input, textarea {
+			width: 100%;
+		}
+	}
+}
+
+body.has-fs-modal {
+	overflow: hidden;
+}
+
+#the-list .deactivate > .fs-slug {
+	display: none;
+}

@@ -1,0 +1,64 @@
+# Copyright (C) 2015 Public Post Preview
+# This file is distributed under the same license as the Public Post Preview package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Public Post Preview 2.4.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/public-post-"
+"preview\n"
+"POT-Creation-Date: 2015-11-23 18:38:42+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: public-post-preview.php:124
+msgid "Enabled!"
+msgstr ""
+
+#: public-post-preview.php:125
+msgid "Disabled!"
+msgstr ""
+
+#: public-post-preview.php:137
+msgid "Public Preview"
+msgstr ""
+
+#: public-post-preview.php:210
+msgid "Enable public preview"
+msgstr ""
+
+#: public-post-preview.php:215
+msgid "(Copy and share this link.)"
+msgstr ""
+
+#: public-post-preview.php:396
+msgid "The link has been expired!"
+msgstr ""
+
+#: public-post-preview.php:400
+msgid "No Public Preview available!"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Public Post Preview"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://dominikschilling.de/wp-plugins/public-post-preview/en/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Enables you to give a link to anonymous users for public preview of any post "
+"type before it is published."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Dominik Schilling"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://wphelper.de/"
+msgstr ""

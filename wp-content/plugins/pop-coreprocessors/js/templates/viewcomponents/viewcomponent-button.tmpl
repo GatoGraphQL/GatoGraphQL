@@ -1,0 +1,7 @@
+{{#with itemObject}}
+	<a {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} href="{{#if ../url}}{{../url}}{{else}}{{#if ../url-field}}{{get . ../url-field}}{{/if}}{{/if}}" {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../link-class}} {{../btn-class}} {{../class}} target-{{id}}" data-header="{{#withModule ../. 'header'}}{{enterModule ../../.}}{{/withModule}}" title="{{../title}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}} {{#each ../itemobject-params}} {{@key}}="{{get ../. this}}"{{/each}}>
+		{{#withModule ../. "buttoninner"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</a>
+{{/with}}

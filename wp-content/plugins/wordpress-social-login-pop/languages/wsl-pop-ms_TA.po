@@ -1,0 +1,3180 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-06 00:31+0730\n"
+"PO-Revision-Date: 2016-05-06 00:31+0730\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"Language: en_MY\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././validation.php:31
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:36
+msgid "Error: <b>Wordpress Social Login</b> is not installed/activated. Without it, <b>Wordpress Social Login for PoP</b> will not work. Please install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+msgstr "Error: <b>Wordpress Social Login</b> is not installed/activated. Without it, <b>Wordpress Social Login for PoP</b> will not work. Please install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:40
+msgid "Warning: please make sure to have the <a href=\"http://wordpress.org/extend/plugins/pop/\">latest version</a> of <b>Wordpress Social Login</b> installed, or otherwise <b>Wordpress Social Login for PoP</b> might not function properly."
+msgstr "Warning: please make sure to have the <a href=\"http://wordpress.org/extend/plugins/pop/\">latest version</a> of <b>Wordpress Social Login</b> installed, or otherwise <b>Wordpress Social Login for PoP</b> might not function properly."
+
+#: .././library/_functions.php:134
+#: .././library/functions.php:115
+#, fuzzy
+msgid "Log in with"
+msgstr "உள்நுழைய "
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:65
+#, php-format
+msgid "<strong>Please update your email</strong><br/>%s does not provide your email, so we set a random one for you: <em>%s</em>. Please click here to change it to your real email, or you won't receive notifications from the %s website"
+msgstr ""
+
+#~ msgid "Location(s)"
+#~ msgstr "இடம் (கள்)"
+
+#~ msgid "Name or Address"
+#~ msgstr "பெயர் அல்லது முகவரி"
+
+#, fuzzy
+#~ msgid "Loading Events"
+#~ msgstr "வருங்காரியங்கள்"
+
+#, fuzzy
+#~ msgid "No Events found"
+#~ msgstr "உள்ளடக்கம் காணப்படவில்லை."
+
+#, fuzzy
+#~ msgid "Loading Locations"
+#~ msgstr "இருப்பிடம் சேர்க்கிறது... "
+
+#, fuzzy
+#~ msgid "No Locations found"
+#~ msgstr "இருப்பிடமின்றி "
+
+#~ msgid "No Location"
+#~ msgstr "இருப்பிடமின்றி "
+
+#~ msgid "Previous month"
+#~ msgstr "சென்ற மாதம்"
+
+#~ msgid "Next month"
+#~ msgstr "அடுத்த மாதம்"
+
+#~ msgid "Locations"
+#~ msgstr "இடங்கள்"
+
+#~ msgid "Google Calendar"
+#~ msgstr "கூகல் நாள்காட்டி"
+
+#~ msgid "iCal"
+#~ msgstr "iCal"
+
+#~ msgid "Events"
+#~ msgstr "நிகழ்ச்சிகள்"
+
+#, fuzzy
+#~ msgid "Events Calendar"
+#~ msgstr "நாள்காட்டி"
+
+#~ msgid "Past Events"
+#~ msgstr "கடந்துபோன நிகழ்ச்சிகள்"
+
+#~ msgid "Location created successfully!"
+#~ msgstr "இருப்பிடம் வெற்றிகரமாக உருவாக்கப்பட்டது! "
+
+#~ msgid "City is missing."
+#~ msgstr "நகரத்தை காணவில்லை."
+
+#~ msgid "Now adding to your list of Locations."
+#~ msgstr "இப்போது உங்கள் இருப்பிடங்களின் பட்டியலில் சேர்க்கிறது."
+
+#~ msgid "Adding Location..."
+#~ msgstr "இருப்பிடம் சேர்க்கிறது... "
+
+#~ msgid "Add Location"
+#~ msgstr "இடக் கூட்டல்"
+
+#~ msgid "Country"
+#~ msgstr "பார்த்தல்"
+
+#~ msgid "Name"
+#~ msgstr "பெயர்"
+
+#~ msgid "Address"
+#~ msgstr "விலாசம்"
+
+#, fuzzy
+#~ msgid "City"
+#~ msgstr "நகரம்"
+
+#~ msgid "State"
+#~ msgstr "மாநிலம்"
+
+#~ msgid "Post code"
+#~ msgstr "அஞ்சல் குறியீடு"
+
+#~ msgid "Region"
+#~ msgstr "பகுதி"
+
+#, fuzzy
+#~ msgid "Location added successfully!"
+#~ msgstr "இருப்பிடம் வெற்றிகரமாக உருவாக்கப்பட்டது! "
+
+#, fuzzy
+#~ msgid "More locations to add?"
+#~ msgstr "இருப்பிடமின்றி "
+
+#~ msgid ""
+#~ "If you can't find the location in the input below, click on the \"+\" "
+#~ "button to add a new one."
+#~ msgstr ""
+#~ "நீங்கள் கீழே உள்ளீடு கண்டுபிடிக்க முடியவில்லை என்றால், புதிய இடம் சேர்க்க இங்கே \"+\"  "
+#~ "பித்தான் கிளிக் செய்யவும்."
+
+#~ msgid "Location(s) for:"
+#~ msgstr "இருப்பிடம் (கள்):"
+
+#, fuzzy
+#~ msgid "Date/Time"
+#~ msgstr "தேதி / நேரம்"
+
+#~ msgid "Event"
+#~ msgstr "நிகழ்ச்சி"
+
+#~ msgid "Past Event"
+#~ msgstr "கடந்துபோன நிகழ்ச்சி"
+
+#, fuzzy
+#~ msgid "All Locations"
+#~ msgstr "இடங்கள்"
+
+#~ msgid "%s latest posts"
+#~ msgstr "%s சமீபகால சமர்பிப்புகள்"
+
+#~ msgid "%s latest comments"
+#~ msgstr "%s சமீபகால விளக்கக் குறிப்புகள்"
+
+#~ msgid "View %1$s profile and get in touch through %2$s."
+#~ msgstr "%1$s முகக்குறிப்பு பார்வையிட்டு %2$s மூலமாக தொடர்புக் கொள்ளுங்கள்."
+
+#~ msgid "Project"
+#~ msgstr "திட்டப்பணி"
+
+#~ msgid "Story"
+#~ msgstr "கதை"
+
+#~ msgid "Announcement"
+#~ msgstr "அறிவிப்பு"
+
+#~ msgid "Discussion"
+#~ msgstr "கலந்துரையாடல்"
+
+#~ msgid "Featured"
+#~ msgstr "செய்தித்தாளின் தனிச்சிறப்புக் கூறு "
+
+#~ msgid "Resource"
+#~ msgstr "வளம்"
+
+#~ msgid "Loading pure awesomeness"
+#~ msgstr "தூய விழிப்புணர்வு ஏற்றும் "
+
+#~ msgid ""
+#~ "MESYM.com is a platform for environmental movements in Malaysia. There "
+#~ "are many good actions being done out there. Our goal is to bring them "
+#~ "together. We connect the green dots."
+#~ msgstr ""
+#~ "மேசிம்.com மலேஷியாவில் உள்ள சுற்றுச்சூழல் இயக்கங்களில் ஒரு தளம் உள்ளது. அங்கு செய்து "
+#~ "வரப்படுகின்ற பல நல்ல செயல்கள் உள்ளன. எங்கள் இலக்கு, அவற்றை ஒன்றாக கொண்டு வருவது. நாம் "
+#~ "பச்சை புள்ளிகளை இணைக்க வேண்டும்."
+
+#~ msgid ""
+#~ " Join our environmental community and find out who is doing what, where "
+#~ "and when."
+#~ msgstr ""
+#~ "எங்கள் சுற்றுச்சூழல் சமூகத்தில் சேர்ந்து, எங்கே, எப்பொழுது என்ன செய் கிறார்கள் என்று "
+#~ "கண்டுபிடிக்க."
+
+#~ msgid " on %s."
+#~ msgstr "%s மேல்."
+
+#~ msgid "View all %s"
+#~ msgstr "முழுவதுமாகப் பார் %s"
+
+#~ msgid "Add your %s"
+#~ msgstr "உங்களுடைய %s இணையுங்கள்"
+
+#~ msgid "Upcoming Events"
+#~ msgstr "வருங்காரியங்கள்"
+
+#~ msgid "Upcoming and Past Events"
+#~ msgstr "வருங்காரியங்களும் கடந்தகாரியங்களும்"
+
+#~ msgid "Environmental Projects"
+#~ msgstr "சுற்றுப்புறத் திட்டங்கள்"
+
+#~ msgid "Environmental Stories"
+#~ msgstr "சுற்றுப்புறக் கதைகள்"
+
+#~ msgid "Environmental Discussions"
+#~ msgstr "சுற்றுப்புறக் கலந்துரையாடல்கள்"
+
+#~ msgid "Environmental Announcements"
+#~ msgstr "சுற்றுப்புற அறிவிப்புகள்"
+
+#~ msgid "Featured Articles"
+#~ msgstr "முக்கியப்பகுதி கட்டுரைகள்"
+
+#~ msgid "MESYM Blogs"
+#~ msgstr "மேசிம் வலைப்பதிவுகள்"
+
+#~ msgid "Environmental Resources"
+#~ msgstr "சுற்றுப்புற வளங்கள்"
+
+#~ msgid "Organizations"
+#~ msgstr "நிறுவனங்கள்"
+
+#~ msgid "People"
+#~ msgstr "மக்கள்"
+
+#~ msgid "Organization Profile"
+#~ msgstr "நிறுவன சுயவிவரம்"
+
+#~ msgid "Individual Profile"
+#~ msgstr "தனிநபர் சுயவிவரம்"
+
+#~ msgid ""
+#~ "The views expressed in this article/discussion do not necessarily "
+#~ "represent the views of MESYM.com. Comments or opinions expressed are "
+#~ "those of their respective contributors only. MESYM.com is not responsible "
+#~ "for, and disclaims any and all liability for the content of the article/"
+#~ "discussion and related comments."
+#~ msgstr ""
+#~ "இந்த கட்டுரை / விவாதத்தில் வரும் கருத்துகள் அவசியம் மேசிம்.com கருத்துக்களை "
+#~ "பிரதிநிதிப்பவை அல்ல. கருத்துகள் அல்லது வெளிப்படுத்தப்படும் கருத்துகள் மட்டுமே அந்தந்த "
+#~ "பங்களிப்பாளர்களுக்கு உரியவை. மேசிம்.com பொறுப்பு அல்ல. மேலும், கட்டுரை / விவாதம் "
+#~ "தொடர்புடைய கருத்துகளுக்கும் அல்லது உள்ளடக்கங்களுக்கும் அனைத்து பொறுப்பும் ஏற்காது. "
+
+#~ msgid ""
+#~ "MESYM.com source code will soon be open source! Download the software "
+#~ "running MESYM.com and make your own community-building website! Coming "
+#~ "soon..."
+#~ msgstr ""
+#~ "மேசிம்.com மூல குறியீடு விரைவில் திறந்த மூல இருக்கும்! மேசிம்.com இயங்கும் "
+#~ "மென்பொருள் பதிவிறக்க மற்றும் உங்கள் சொந்த சமூகத்தை கட்டி இணைய செய்ய! விரைவில்... "
+
+#~ msgid "Upcoming Event"
+#~ msgstr "வரப்போகிறவைகள்"
+
+#, fuzzy
+#~ msgid "Current Event"
+#~ msgstr "கடந்துபோன நிகழ்ச்சி"
+
+#~ msgid "The dates/time cannot be empty"
+#~ msgstr "தேதி அல்லது நேரம் காலியாக இருக்கக் கூடாது"
+
+#~ msgid "Welcome to %s!"
+#~ msgstr "வரவேற்க %s!"
+
+#~ msgid "Close"
+#~ msgstr "அடைப்பு"
+
+#, fuzzy
+#~ msgid "Ops, this page doesn't exist!"
+#~ msgstr "ஆப்ஸ்! இந்த பக்கம் இருக்கிறதில்லை"
+
+#~ msgid "Latest"
+#~ msgstr "சமீபததி்ய"
+
+#~ msgid "Add new"
+#~ msgstr "புதியதை சேர்க்கவும் "
+
+#, fuzzy
+#~ msgid "Show description"
+#~ msgstr "சுருக்கமான விளக்கம்"
+
+#~ msgid "%sBack"
+#~ msgstr "%sபின்புறம்"
+
+#~ msgid "%sNavigator"
+#~ msgstr "%sதிசையிற் செலுத்தவர்"
+
+#~ msgid "Details"
+#~ msgstr "விவரங்கள்"
+
+#, fuzzy
+#~ msgid "Full view"
+#~ msgstr "முழு அளவு "
+
+#~ msgid "Thumbnail"
+#~ msgstr "சிறு"
+
+#, fuzzy
+#~ msgid "List"
+#~ msgstr "சமீபததி்ய"
+
+#~ msgid "Map"
+#~ msgstr "நிலப்படம்"
+
+#~ msgid "Calendar"
+#~ msgstr "நாள்காட்டி"
+
+#~ msgid "Edit"
+#~ msgstr "பதிப்பு"
+
+#~ msgid "View/Preview"
+#~ msgstr "முற்காட்சி"
+
+#~ msgid "FAQ: Adding Content"
+#~ msgstr "கேள்விகள்:உள்ளடக்கத்தை சேர்ப்பதன்"
+
+#~ msgid "FAQ: Registration"
+#~ msgstr "கேள்விகள்: பதிவீடு"
+
+#~ msgid "The Drivers"
+#~ msgstr "ஓட்டுனர்கள்"
+
+#~ msgid "The Advisors"
+#~ msgstr "ஆலோசகர்கள்"
+
+#~ msgid "The Volunteers"
+#~ msgstr "தொண்டூழியர்கள்"
+
+#, fuzzy
+#~ msgid "Current members"
+#~ msgstr "உறுப்பினர்கள் அடங்கும்? "
+
+#~ msgid "Status"
+#~ msgstr "தகு நிலை "
+
+#, fuzzy
+#~ msgid "Privileges"
+#~ msgstr "சிறு வாழ்க்கைக் குறிப்புகள்"
+
+#, fuzzy
+#~ msgid "Tags"
+#~ msgstr "படங்கள் "
+
+#~ msgid "FAQ: Adding Content in %s"
+#~ msgstr "கேள்விகள்: உள்ளடக்கத்தை சேர்ப்பதன் %s"
+
+#~ msgid "FAQ: Registering in %s"
+#~ msgstr "கேள்விகள்: பதிவு %s"
+
+#, fuzzy
+#~ msgid "What is a member?"
+#~ msgstr "%s ஒரு புதிய உறுப்பினரை பெற்றது! "
+
+#, fuzzy
+#~ msgid "NGO volunteers"
+#~ msgstr "தொண்டூழியர்கள்"
+
+#, fuzzy
+#~ msgid "etc"
+#~ msgstr "தொகுதி"
+
+#, fuzzy
+#~ msgid "What happens when my Organization has members?"
+#~ msgstr "நீங்கள் எந்த  நிறுவனங்களில் உறுப்பினராக இருக்கிரீர்கல்?"
+
+#, fuzzy
+#~ msgid "What is the benefit for my members?"
+#~ msgstr "பதிவு நன்மைகள் என்ன? "
+
+#, fuzzy
+#~ msgid "Latest Content"
+#~ msgstr "உட்பொருள்"
+
+#, fuzzy
+#~ msgid "Our Sponsors"
+#~ msgstr "ஆதரவாளர்கள்"
+
+#~ msgid "Projects"
+#~ msgstr "திட்டங்கள்"
+
+#~ msgid "Stories"
+#~ msgstr "கதைகள்"
+
+#~ msgid "Announcements"
+#~ msgstr "அறிவிப்புகள்"
+
+#~ msgid "Discussions"
+#~ msgstr "கலந்துரையாடல்"
+
+#, fuzzy
+#~ msgid "Links"
+#~ msgstr "லிங்க்ட்டின்"
+
+#~ msgid "Submitting..."
+#~ msgstr "சமர்ப்பிக்கிறது..."
+
+#~ msgid "Publishing Status"
+#~ msgstr "வெளியீட்டு நிலைமை "
+
+#~ msgid "Title*"
+#~ msgstr "தலைப்பு*"
+
+#~ msgid ""
+#~ "'Draft': still editing, please do not publish yet. 'Pending': finished "
+#~ "editing, please publish it immediately! 'Publish': already published, "
+#~ "already online."
+#~ msgstr ""
+#~ "'வரைவு': இன்னும், எடிட்டிங், இன்னும் வெளியிட வேண்டாம். 'மீதமுள்ளது': முடிக்கப்பட்ட "
+#~ "எடிட்டிங், உடனடியாக அதை வெளியிடும்! 'வெளியிடு': ஏற்கனவே ஆன்லைன் வெளியிட்டார். "
+
+#~ msgid "Login/Register"
+#~ msgstr "பதிவு செய் "
+
+#~ msgid "Yay! Your %s was created successfully!"
+#~ msgstr "உங்களுடைய %s வெற்றிகரமாக உருவாக்கப்பட்டது! "
+
+#~ msgid "Yay! Your %s was updated successfully!"
+#~ msgstr "உங்களுடைய %s வெற்றிகரமாக உருவாக்கப்பட்டது! "
+
+#~ msgid "Please %s or register %s / %s to create your %s."
+#~ msgstr "தயவு செய்து %s அல்லது %s / %s உங்கள் %s உருவாக்க பதிவு செய்க."
+
+#~ msgid ""
+#~ "Please <a href=\"%s\">log in</a> with a %s account to create your %s."
+#~ msgstr ""
+#~ "தயவு செய்து <a href=\"%s\">உள்நுழைய</a> உங்கள்%s உருவாக்க ஒரு %s கணக்கில் கொள்க."
+
+#~ msgid "%s updated successfully."
+#~ msgstr "%s வெற்றிகரமாக புதுப்பிக்கப்பட்டன."
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+#~ msgstr "தயவு செய்து <a href=\"%s\">log in</a> மேல் விவரங்களுக்கு %s. "
+
+#~ msgid "Please <a href=\"%s\">log in</a> with a %s account to edit your %s."
+#~ msgstr ""
+#~ "தயவு செய்து <a href=\"%s\">உள்நுழைய</a> உங்கள்%s திருத்துவதற்கான %s கணக்கில் "
+#~ "கொண்டு."
+
+#~ msgid "Ops, it seems you have no rights to edit this %s."
+#~ msgstr "இந்த %s திருத்த உங்களுக்கு எந்த உரிமையும் இல்லை."
+
+#~ msgid "What's going on all over Malaysia."
+#~ msgstr "மலேஷியாவில் என்ன நடக்கிறது. "
+
+#~ msgid "Volunteer for projects from many NGOs, or even start your own!"
+#~ msgstr ""
+#~ "பல அரச சார்பற்ற நிறுவனங்கள் திட்டங்களுக்கு தொண்டர், அல்லது உங்கள் சொந்த தொடங்க!"
+
+#~ msgid ""
+#~ "After volunteering, post your photo blog, share your experience with the "
+#~ "world."
+#~ msgstr ""
+#~ "தன்னார்வ பிறகு, உங்கள் புகைப்படத்தில் வலைப்பதிவு போஸ்ட் உலக உங்கள் அனுபவத்தை பகிர்ந்து."
+
+#~ msgid "Have vacancies? Need green-minded people? Post it here."
+#~ msgstr "காலியிடங்கள்? பச்சை எண்ணம் மக்கள் தேவையா? இங்கே பதிவு."
+
+#~ msgid ""
+#~ "Anything and everything: what do you want to express concerning the "
+#~ "environment situation in Malaysia?"
+#~ msgstr "நீங்கள் என்ன மலேஷியா உள்ள சூழலில் நிலைமை தொடர்பாக வெளிப்படுத்த வேண்டும்?"
+
+#~ msgid ""
+#~ "Browse the living database of Organizations and find out who is doing "
+#~ "what, when and where."
+#~ msgstr ""
+#~ "எங்கள் சுற்றுச்சூழல் சமூகத்தில் சேர்ந்து, எங்கே, எப்பொழுது என்ன செய் கிறார்கள் என்று "
+#~ "கண்டுபிடிக்க."
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "யார் உள்ளடக்கத்தை சேர்க்க முடியும் %s?"
+
+#~ msgid "Anyone."
+#~ msgstr "யாராவது."
+
+#~ msgid "Is it free?"
+#~ msgstr "அது இலவசமானதா?"
+
+#~ msgid "Yes."
+#~ msgstr "ஆமாம்"
+
+#~ msgid "Do I need to log in to add content?"
+#~ msgstr "ஒரு கருத்தை சேர்க்க புகுபதிகை செய்னுமா?"
+
+#~ msgid "Yes, only registered users can add content."
+#~ msgstr "ஆமாம், பதிவு செய்த பயனர்கள் மட்டும் உள்ளடக்கத்தை சேர்க்க முடியும். "
+
+#~ msgid "Do the users of the website also need to log in to read my content?"
+#~ msgstr "இணைய பயனர்களுக்கு என் உள்ளடக்கத்தை வாசிக்க புகுபதிகை செய்ய வேண்டும்? "
+
+#~ msgid "No, anyone can access the website and read all the content."
+#~ msgstr ""
+#~ "இல்லை,  யாரும் வலைத்தளத்தில் நுழைந்து மற்றும் அனைத்து உள்ளடக்கத்தை படிக்க முடியும். "
+
+#~ msgid "Will my content be published immediately?"
+#~ msgstr "என் உள்ளடக்கம் உடனடியாக வெளியிடப்படுமா? "
+
+#~ msgid ""
+#~ "No. Before that, our moderators must approve the content, in order to "
+#~ "avoid spam and inappropriate content."
+#~ msgstr ""
+#~ "இல்லை. அதற்கு முன், எங்கள் மதிப்பீட்டாளர்கள் ஸ்பேம் முறையற்ற உள்ளடக்கம் தவிர்க்கும் "
+#~ "பொருட்டு, உள்ளடக்கத்தை அங்கீகரிக்க வேண்டும். "
+
+#~ msgid "Where will my content appear?"
+#~ msgstr "எங்கே என் உள்ளடக்கம் தோன்றும்? "
+
+#~ msgid ""
+#~ "As soon as it gets published, it will appear in our homepage, in the "
+#~ "corresponding section (Events, Projects, etc), and in your profile.<br/"
+#~ "><br/>In addition, if you are member of any Community, it will also "
+#~ "appear under their profile."
+#~ msgstr ""
+#~ "விரைவில் அது வெளியிடப்படும் விடும் என, அதை நீங்கள் எந்த சமூகத்தின் உறுப்பினராக "
+#~ "இருந்தால், அது தங்கள் சுயவிவரத்தை கீழ் தோன்றும் வேளையில். <br/><br/>தொடர்புடைய "
+#~ "பிரிவில் (நிகழ்வுகள், திட்டங்கள், முதலியன) வைத்து, எங்கள் முகப்பு பக்கத்தில் தோன்றும், "
+#~ "மற்றும் உங்கள் முகக்குறிப்பில் தோன்றும்."
+
+#~ msgid "Can I share my post with more authors?"
+#~ msgstr "நான் பிற ஆசிரியர்கள் உடன் என் கட்டுத்தறியை பகிர்ந்து கொள்ளலாமா?"
+
+#~ msgid ""
+#~ "Yes. In field 'Authors' you can add more users (either Organizations or "
+#~ "Individuals) to own the post. They will both appear as authors and have "
+#~ "full editing access."
+#~ msgstr ""
+#~ "ஆம். 'ஆசிரியர்கள்' துறையில், நீங்கள் பதவியை சொந்தமாக பயனர்கள் (அல்லது நிறுவனங்கள் "
+#~ "அல்லது தனிநபர்கள்) சேர்க்க முடியும். அவர்கள் இருவரும் ஆசிரியர்கள் என தோன்றும் மற்றும் "
+#~ "முழு எடிட்டிங் அணுக வேண்டும். "
+
+#~ msgid "Can I request volunteers?"
+#~ msgstr "நான் தொண்டர்கள் கோரிக்கை செய்யலாமா? "
+
+#~ msgid ""
+#~ "Yes. Choose 'Yes' in field 'Volunteers needed?', each time someone "
+#~ "applies to volunteer for your Project/Event/Announcement you will receive "
+#~ "an email immediately with the person's information.<br/><br/>We do not "
+#~ "engage the volunteer in any way."
+#~ msgstr ""
+#~ "ஆம். 'தொண்டர்கள் தேவை?' புலத்தில் 'ஆம்' தேர்வு செய்க, ஒவ்வொரு முறை யாராவது "
+#~ "உங்களுக்கு நபரின் தகவல்களை உடனடியாக ஒரு மின்னஞ்சல் பெறுவீர்கள் உங்கள் திட்டம் / "
+#~ "நிகழ்வு / அறிவிப்பு மேற்கொள் பொருந்தும். <br/><br/>நாம் எந்த வழியில் தன்னார்வ "
+#~ "ஈடுபட மாட்டோம்."
+
+#~ msgid "Is it free to register in the website?"
+#~ msgstr "இணையதளத்தில் பதிவு செய்ய இலவசமா? "
+
+#~ msgid "What are the benefits of registering?"
+#~ msgstr "பதிவு நன்மைகள் என்ன? "
+
+#~ msgid ""
+#~ "You will be able to post all your content (events, projects, discussions, "
+#~ "etc), look for volunteers, and appear in the User Directory."
+#~ msgstr ""
+#~ "நீங்கள், உங்கள் உள்ளடக்கத்தை (நிகழ்வுகள், திட்டங்கள், விவாதங்கள், போன்றவை) பதிவு "
+#~ "தொண்டர்கள் பார்க்க, மற்றும் பயனர் அடைவுகள் தோன்ற முடியும்."
+
+#~ msgid "What is the User Directory?"
+#~ msgstr "பயனர் அடைவுகள் என்ன? "
+
+#~ msgid ""
+#~ "The User Directory is a database of all Organizations/Individuals in the "
+#~ "country doing something about the environment. Just by signing up in the "
+#~ "website, all your provided information (description, contact details, "
+#~ "facebook page, etc) will appear in this directory, and will be easily "
+#~ "accessible to anyone."
+#~ msgstr ""
+#~ "பயனர் அடைவுகள் சூழல் பற்றி ஏதாவது செய்து, நாட்டின் சகல நிறுவனங்கள் / தனிநபர்கள் ஒரு "
+#~ "தகவல் இல்லை. வெறும் இணையதளத்தில், பதிவு செய்வதன் மூலம், அனைத்து வழங்கிய தகவல் "
+#~ "(விளக்கம், தொடர்பு விவரங்கள், facebook பக்கம், போன்றவை) இந்த அடைவில் தோன்றும், "
+#~ "மற்றும் யாராவது எளிதாக அணுக வேண்டும். "
+
+#~ msgid "What is the difference between Organization/Individual accounts?"
+#~ msgstr "அமைப்பு மற்றும் தனிப்பட்ட கணக்குகள் இடையே என்ன வேறுபாடு உள்ளன?"
+
+#~ msgid ""
+#~ "Organizations can have 'members' in the website, and each piece of "
+#~ "content posted by any member will also appear under the Organization "
+#~ "profile page."
+#~ msgstr ""
+#~ "அமைப்புக்கள் இணையதளத்தில் 'உறுப்பினர்கள்' இருக்க முடியும், மற்றும் எந்த உறுப்பினரும் "
+#~ "உள்ளடக்கத்து ஒவ்வொரு துண்டு அமைப்பு சுயவிவர பக்கம் கீழ் தோன்றும்."
+
+#, fuzzy
+#~ msgid ""
+#~ "<h1>Welcome to MESYM!</h1><strong>MESYM.com</strong> is a crowd-sourced "
+#~ "platform and a living database for environmental movements in Malaysia. "
+#~ "There are many good actions being done out there. Our goal is to bring "
+#~ "them together. <a href=\"%s\">We connect the green dots</a>."
+#~ msgstr ""
+#~ "<div id=\"home-jumbotron\" class=\"jumbotron\"><h1>மேசிமுக்கு வரவேற்கிறோம்! "
+#~ "</h1><strong>மேசிம்.com</strong> மலேஷியாவில் உள்ள சுற்றுச்சூழல் இயக்கங்களில் ஒரு "
+#~ "தளம் உள்ளது. அங்கு செய்து வரப்படுகின்ற பல நல்ல செயல்கள் உள்ளன. எங்கள் இலக்கு, அவற்றை "
+#~ "ஒன்றாக கொண்டு வருவது. <a href=\"%s\">நாம் பச்சை புள்ளிகளை இணைக்க வேண்டும்</a>.</"
+#~ "div>"
+
+#, fuzzy
+#~ msgid "Disclaimer:"
+#~ msgstr "உரிமைத் துறப்பு "
+
+#~ msgid "Categories"
+#~ msgstr "வகையினங்கள்"
+
+#~ msgid "Volunteers Needed?"
+#~ msgstr "தொண்டர்கள் தேவை?"
+
+#~ msgid ""
+#~ "Do you need volunteers? Each time a user applies to volunteer, you will "
+#~ "get a notification email with the volunteer's contact information."
+#~ msgstr ""
+#~ "தொண்டர்கள் தேவை? ஒரு பயனர் தானாகவே முன்வந்து பொருந்தும் ஒவ்வொரு முறையும், நீங்கள் "
+#~ "தன்னார்வ தொடர்புத் தகவல் ஒரு அறிவிப்பு மின்னஞ்சல் கிடைக்கும்."
+
+#~ msgid "Volunteer!"
+#~ msgstr "தொண்டூழியர்!"
+
+#~ msgid "Content"
+#~ msgstr "உட்பொருள்"
+
+#~ msgid "User"
+#~ msgstr "பயனீட்டாளர் "
+
+#~ msgid "Users"
+#~ msgstr "பயனீட்டாளர்"
+
+#~ msgid "Featured article"
+#~ msgstr "முக்கியப்பகுதி கட்டுரை"
+
+#~ msgid "Featured articles"
+#~ msgstr "முக்கியப்பகுதி கட்டுரைகள்"
+
+#~ msgid "Blog entry"
+#~ msgstr "முந்திய பதிவு"
+
+#~ msgid "Blog entries"
+#~ msgstr "முந்திய பதிவுகள்"
+
+#~ msgid "Resources"
+#~ msgstr "வளங்கள்"
+
+#~ msgid "Thought"
+#~ msgstr "சிந்தனை"
+
+#~ msgid "Thoughts"
+#~ msgstr "சிந்தனைகளு"
+
+#~ msgid "Organization"
+#~ msgstr "நிறுவனம்"
+
+#~ msgid "Individual"
+#~ msgstr "நபர்"
+
+#~ msgid "Individuals"
+#~ msgstr "நபர்கள்"
+
+#~ msgid "Sponsor"
+#~ msgstr "ஆதரவாளர்"
+
+#~ msgid "Sponsors"
+#~ msgstr "ஆதரவாளர்கள்"
+
+#~ msgid "Featured Community"
+#~ msgstr "சிறப்பு சமூகம்"
+
+#~ msgid "Featured Communities"
+#~ msgstr "சிறப்பு சமூகங்கள் "
+
+#~ msgid "No %s found."
+#~ msgstr "எந்த %s "
+
+#~ msgid "No more %s found."
+#~ msgstr "இதற்க்கும் மேல் வேர் எந்த %s"
+
+#~ msgid "Please %s or register %s / %s to access your %s."
+#~ msgstr "தயவு செய்து %s அல்லது %s / %s உங்கள் %s அணுக பதிவு செய்க."
+
+#~ msgid ""
+#~ "Your account has no access to this functionality. Please <a href=\"%s"
+#~ "\">log in</a> with a different user account."
+#~ msgstr ""
+#~ "உங்கள் கணக்கு செயல்பாடு அனுமதி இல்லை. தயவு செய்து <a href=\"%s\">உள்நுழைய</a> "
+#~ "வேறொரு பயனர் கணக்குடன். "
+
+#~ msgid ""
+#~ "Your account has no permission to edit this %s. Please <a href=\"%s\">log "
+#~ "in</a> with a different user account."
+#~ msgstr ""
+#~ "உங்கள் கணக்கு இந்த %s திருத்த வேண்டிய அனுமதி உள்ளது. தயவு செய்து <a href=\"%s"
+#~ "\">உள்நுழைய</a> வேறொரு பயனர் கணக்குடன். "
+
+#, fuzzy
+#~ msgid "event"
+#~ msgstr "நிகழ்ச்சி"
+
+#, fuzzy
+#~ msgid "events"
+#~ msgstr "நிகழ்ச்சிகள்"
+
+#, fuzzy
+#~ msgid "past event"
+#~ msgstr "கடந்துபோன நிகழ்ச்சி"
+
+#, fuzzy
+#~ msgid "past Events"
+#~ msgstr "கடந்துபோன நிகழ்ச்சிகள்"
+
+#, fuzzy
+#~ msgid "project"
+#~ msgstr "திட்டப்பணி"
+
+#, fuzzy
+#~ msgid "projects"
+#~ msgstr "திட்டங்கள்"
+
+#, fuzzy
+#~ msgid "content"
+#~ msgstr "உட்பொருள்"
+
+#, fuzzy
+#~ msgid "user"
+#~ msgstr "பயனீட்டாளர் "
+
+#, fuzzy
+#~ msgid "users"
+#~ msgstr "பயனீட்டாளர்"
+
+#, fuzzy
+#~ msgid "story"
+#~ msgstr "கதை"
+
+#, fuzzy
+#~ msgid "stories"
+#~ msgstr "கதைகள்"
+
+#, fuzzy
+#~ msgid "announcement"
+#~ msgstr "அறிவிப்பு"
+
+#, fuzzy
+#~ msgid "announcements"
+#~ msgstr "அறிவிப்புகள்"
+
+#, fuzzy
+#~ msgid "discussion"
+#~ msgstr "கலந்துரையாடல்"
+
+#, fuzzy
+#~ msgid "discussions"
+#~ msgstr "கலந்துரையாடல்"
+
+#, fuzzy
+#~ msgid "featured article"
+#~ msgstr "முக்கியப்பகுதி கட்டுரை"
+
+#, fuzzy
+#~ msgid "featured articles"
+#~ msgstr "முக்கியப்பகுதி கட்டுரைகள்"
+
+#, fuzzy
+#~ msgid "blog entry"
+#~ msgstr "முந்திய பதிவு"
+
+#, fuzzy
+#~ msgid "blog entries"
+#~ msgstr "முந்திய பதிவுகள்"
+
+#, fuzzy
+#~ msgid "resource"
+#~ msgstr "வளம்"
+
+#, fuzzy
+#~ msgid "resources"
+#~ msgstr "வளங்கள்"
+
+#, fuzzy
+#~ msgid "thought"
+#~ msgstr "சிந்தனை"
+
+#, fuzzy
+#~ msgid "thoughts"
+#~ msgstr "சிந்தனைகளு"
+
+#, fuzzy
+#~ msgid "member"
+#~ msgstr "நவம்பர்"
+
+#, fuzzy
+#~ msgid "members"
+#~ msgstr " உறுப்பினர் %s"
+
+#, fuzzy
+#~ msgid "organization"
+#~ msgstr "நிறுவனம்"
+
+#, fuzzy
+#~ msgid "organizations"
+#~ msgstr "நிறுவனங்கள்"
+
+#, fuzzy
+#~ msgid "individual"
+#~ msgstr "நபர்"
+
+#, fuzzy
+#~ msgid "individuals"
+#~ msgstr "நபர்கள்"
+
+#, fuzzy
+#~ msgid "sponsor"
+#~ msgstr "ஆதரவாளர்"
+
+#, fuzzy
+#~ msgid "sponsors"
+#~ msgstr "ஆதரவாளர்கள்"
+
+#, fuzzy
+#~ msgid "featured community"
+#~ msgstr "சிறப்பு சமூகம்"
+
+#, fuzzy
+#~ msgid "featured communities"
+#~ msgstr "சிறப்பு சமூகங்கள் "
+
+#~ msgid "Toggle Navigation"
+#~ msgstr "மாற்று மாலுமி "
+
+#~ msgid "Toggle Browsing History"
+#~ msgstr "மாற்று உலாவல் வரலாறு "
+
+#~ msgid "Facebook"
+#~ msgstr "முகநூல்"
+
+#~ msgid "Twitter"
+#~ msgstr "ட்டுவிட்டர்"
+
+#~ msgid "Email"
+#~ msgstr "மின்னஞ்சல்"
+
+#, fuzzy
+#~ msgid "Toggle Search"
+#~ msgstr "மாற்று பட்டி "
+
+#~ msgid "Featured Organizations"
+#~ msgstr "சிறப்பியல்பு நிறுவனங்கள்"
+
+#~ msgid "The website is currently in beta, please forgive all the bugs."
+#~ msgstr ""
+#~ "வலைத்தளம் தற்போது பீட்டா பதிப்பில், அனைத்து பிழைகள் தயவு செய்து மன்னித்து உள்ளது. "
+
+#~ msgid "About us"
+#~ msgstr "எங்களை பற்றி "
+
+#~ msgid "My Profile"
+#~ msgstr "முகக்குறிப்பு"
+
+#~ msgid "Settings"
+#~ msgstr "அமைப்புகள்"
+
+#, fuzzy
+#~ msgid ""
+#~ "<em>Many thanks to our <strong>Sponsors and Supporters</strong>:</em>"
+#~ msgstr "<em>எங்கள் விளம்பரதாரர்களுக்கு நன்றி</strong>our Sponsors</strong>:</em>"
+
+#~ msgid "Go to %s.com"
+#~ msgstr "%s.com செல்."
+
+#~ msgid "Toggle Full Screen"
+#~ msgstr "முழு திரையை நிலைமாற்று "
+
+#~ msgid "Open in new Window"
+#~ msgstr "புதிய சாளரத்தில் திற "
+
+#~ msgid ""
+#~ "<strong><a href=\"%s\">MESYM.com</a></strong> is a platform for "
+#~ "environmental movements in Malaysia. There are many good actions being "
+#~ "done out there. Our goal is to bring them together. <a href=\"%s\">We "
+#~ "connect the green dots</a>."
+#~ msgstr ""
+#~ "<strong><a href=\"%s\">மேசிம்.com</a></strong> மலேஷியாவில் உள்ள சுற்றுச்சூழல் "
+#~ "இயக்கங்களில் ஒரு தளம் உள்ளது. அங்கு செய்து வரப்படுகின்ற பல நல்ல செயல்கள் உள்ளன. எங்கள் "
+#~ "இலக்கு, அவற்றை ஒன்றாக கொண்டு வருவது. <a href=\"%s\">நாம் பச்சை புள்ளிகளை இணைக்க "
+#~ "வேண்டும்</a>."
+
+#~ msgid "Add a comment for:"
+#~ msgstr "ஒரு கருத்தை சேர்:"
+
+#~ msgid "Send message to:"
+#~ msgstr "தகவல் அனுப்பவும்: "
+
+#~ msgid "Volunteer for:"
+#~ msgstr "தன்னார்வ:"
+
+#~ msgid "In response to:"
+#~ msgstr "பிரதிபலிப்பாக: "
+
+#~ msgid "Ops, there's nothing here!"
+#~ msgstr "இங்கே எதுவும் இல்லை!"
+
+#~ msgid ""
+#~ "<p>We couldn't find anything under this URL...</p><ul class=\"nav pull-"
+#~ "left clearfix\"><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></"
+#~ "ul>"
+#~ msgstr ""
+#~ "<p>இந்த URL கீழ் எதையும் கண்டுபிடிக்க முடியவில்லை...</p><ul class=\"nav pull-"
+#~ "left clearfix\"><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></"
+#~ "ul>"
+
+#~ msgid "Alright, everything set up"
+#~ msgstr "சரி, எல்லாம் அமைக்க பபட்டது"
+
+#~ msgid "Redirecting..."
+#~ msgstr "திசைதிருப்புதல்..."
+
+#, fuzzy
+#~ msgid "Redirecting, please wait..."
+#~ msgstr "திசைதிருப்புதல்..."
+
+#~ msgid "No categories"
+#~ msgstr "பிரிவுகளுன்றி"
+
+#~ msgid "No Categories"
+#~ msgstr "பிரிவுகளுன்றி"
+
+#~ msgid "Section links"
+#~ msgstr "பிரிவில் இணைப்புகள் "
+
+#, fuzzy
+#~ msgid "Members"
+#~ msgstr " உறுப்பினர் %s"
+
+#~ msgid "Post"
+#~ msgstr "சுமத்து"
+
+#~ msgid "Date"
+#~ msgstr "தேதி"
+
+#~ msgid "When"
+#~ msgstr " எப்பொழுது "
+
+#~ msgid "Loading"
+#~ msgstr "ஏற்றுதல்..."
+
+#~ msgid "Problem found in %s"
+#~ msgstr "பிரச்சனை காணப்படும் இடம் இங்கே %s"
+
+#~ msgid ""
+#~ "If you don't mind, please <a href=\"mailto:%s?subject=%s&body={0}"
+#~ "\">notify our admins</a> about this problem."
+#~ msgstr ""
+#~ "உங்களுக்கு ஆட்ச்சேபனை இல்லை என்றால், தயவு செய்து <a href=\"mailto:%s?subject=%"
+#~ "s&body={0}\">எங்கள் நிர்வாகத்துக்கு</a> இந்த பிரச்சினை பற்றி தெரிவிக்கவும்."
+
+#~ msgid "Ops, there was a problem!<br/>Please try again, or reload this page."
+#~ msgstr "ஒரு பிரச்சனை இருந்தது! <br/>மீண்டும் முயலவும், அல்லது இந்த பக்கம் ஏற்றவும். "
+
+#~ msgid "Ops, this is a broken link!"
+#~ msgstr "அச்சச்சோ, இது ஒரு உடைந்த இணைப்பு ஆகிறது!"
+
+#~ msgid "More %s"
+#~ msgstr "இன்னும் மேலும் %s"
+
+#~ msgid "Member %s"
+#~ msgstr " உறுப்பினர் %s"
+
+#~ msgid "Related %s"
+#~ msgstr "தொடர்பான %s"
+
+#~ msgid "Search Results for:"
+#~ msgstr "இதற்க்கு தேடல் முடிவுகள்:"
+
+#~ msgid "Ops, nothing found here!"
+#~ msgstr "அச்சச்சோ, இங்கு எதுவும் இல்லை!"
+
+#~ msgid "Apply"
+#~ msgstr "விண்ணப்பம் செய்"
+
+#~ msgid "From"
+#~ msgstr "இதில் இருந்து"
+
+#~ msgid "To"
+#~ msgstr "நோக்கி "
+
+#~ msgid "Custom Range"
+#~ msgstr "வழக்க வரிசை"
+
+#~ msgid "Su"
+#~ msgstr "ஞாயிற்றுக்கிழமை"
+
+#~ msgid "Mo"
+#~ msgstr "திங்கட்கிழமை"
+
+#~ msgid "Tu"
+#~ msgstr "செவ்வாய்க்கிழமை"
+
+#~ msgid "We"
+#~ msgstr "புதன்கிழமை"
+
+#~ msgid "Th"
+#~ msgstr "வியாழக்கிழமை"
+
+#~ msgid "Fr"
+#~ msgstr "வெள்ளிக்கிழமை"
+
+#~ msgid "Sa"
+#~ msgstr "சனிக்கிழமை"
+
+#~ msgid "January"
+#~ msgstr "ஜனவரி"
+
+#~ msgid "February"
+#~ msgstr "பிப்ரவரி"
+
+#~ msgid "March"
+#~ msgstr "மார்ச்"
+
+#~ msgid "April"
+#~ msgstr "ஏப்ரல்"
+
+#~ msgid "May"
+#~ msgstr "மே"
+
+#~ msgid "June"
+#~ msgstr " ஜூன்"
+
+#~ msgid "July"
+#~ msgstr " ஜூலை"
+
+#~ msgid "August"
+#~ msgstr "ஆகஸ்ட் "
+
+#~ msgid "September"
+#~ msgstr "செப்டம்பர்"
+
+#~ msgid "October"
+#~ msgstr "அக்டோபர்"
+
+#~ msgid "November"
+#~ msgstr "நவம்பர்"
+
+#~ msgid "December"
+#~ msgstr "டிசம்பர்"
+
+#~ msgid "<p>Dear %s,</p>"
+#~ msgstr "<p>அன்புக்குரிய %s,</p>"
+
+#~ msgid ""
+#~ "<br/><hr/><p><a href=\"%s\">MESYM</a><br/>Connecting the green dots.</p>"
+#~ msgstr ""
+#~ "<br/><hr/><p><a href=\"%s\">மேசிம்</a><br/>பச்சை புள்ளிகளை இணைக்கவும்.</p>"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "உங்களுடைய %s வெற்றிகரமாக உருவாக்கப்பட்டது! "
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
+#~ msgstr "<p>உங்களுடைய %s <a href=\"%s\">%s</a>வெற்றிகரமாக உருவாக்கப்பட்டது!</p>"
+
+#~ msgid ""
+#~ "<p>Please notice that the status of the %s is still 'Draft', it must be "
+#~ "changed to 'Pending' to have the website admins publish it.</p>"
+#~ msgstr ""
+#~ "<p>தயவு செய்து %s இன்னும் நிலை வரைவு  என்று கவனிக்க வேண்டும், அதை இணைய நிர்வாகம் "
+#~ "'நிலுவையில் உள்ளதாக' மாற்ற வேண்டும்.</p>"
+
+#~ msgid ""
+#~ "<p>Please wait for our moderators approval. You will receive an email "
+#~ "with the confirmation.</p>"
+#~ msgstr ""
+#~ "<p>தயவு செய்து எங்கள் மதிப்பீட்டாளர்கள் அனுமதிக்காக காத்திருக்க வேண்டும். இதன் உறுதி "
+#~ "ஆக்கம் உங்கள் மின்னஞ்சலுக்கு அனுப்பப்படும்.</p>"
+
+#~ msgid "[%s]: New %s by %s"
+#~ msgstr "[%s]: புதியது %s ஆல் %s"
+
+#~ msgid "A new %s has been submitted on %s:"
+#~ msgstr "ஒரு புதிய %s %s அன்று சமர்ப்பிக்கப்பட்டது:"
+
+#~ msgid "[%s]: %s updated by %s"
+#~ msgstr "[%s]: %s %s மூலம் மேம்படுத்தப்பட்டது "
+
+#~ msgid "%s updated on %s:"
+#~ msgstr "%s  புதுப்பிக்கப்பட்டது %s அன்று:"
+
+#~ msgid "<b>Author:</b> %s"
+#~ msgstr "<b>கதாசிரியர்:</b> %s"
+
+#~ msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+#~ msgstr "<b>கதாசிரியரின்  மின்னஞ்சல்:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+
+#~ msgid "<b>Title:</b> %s"
+#~ msgstr "<b>தலைப்பு:</b> %s"
+
+#~ msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>பெர்மா லிங்க்:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>இணைப்பைத் திருத்து:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Status:</b> %s"
+#~ msgstr "<b> தகுநிலை: <b> %s "
+
+#~ msgid "[%s]: New Profile: %s"
+#~ msgstr "[%s]: புதிய சிறு வாழ்க்கைக் குறிப்பு: %s"
+
+#~ msgid "A Profile was created on %s."
+#~ msgstr "ஒரு பதிவு %s அன்று உருவாக்கப்பட்டது ."
+
+#~ msgid "[%s]: Profile updated: %s"
+#~ msgstr "[%s]: சுயவிவரம் புதுப்பிக்கப்பட்டது: %s"
+
+#~ msgid "Profile updated on %s."
+#~ msgstr "சுயவிவரம் %s அன்ரு புதுப்பிக்கப்பட்டது."
+
+#~ msgid "<b>Profile:</b> %s"
+#~ msgstr "<b>சுயவிவரம்:</b> %s"
+
+#~ msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>சுயவிவர இணைப்பு:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "Your %s was approved!"
+#~ msgstr "உங்களுடைய %s ஏற்றுக் கொள்ளப்பட்டது!"
+
+#~ msgid "<p>Hurray! Your %s <a href=\"%s\">%s</a> was approved!</p>"
+#~ msgstr "<p>மிகு மகிழ்ச்சி ! உங்கள் %s <a href=\"%s\">%s</a> ஒப்புதல் !</p>"
+
+#~ msgid "A new %s was posted about \"%s\""
+#~ msgstr "ஒரு புதிய %s பற்றி  வெளியிடப்பட்டது \"%s\""
+
+#~ msgid ""
+#~ "<p>Your %s <a href=\"%s\">%s</a> has received a new %s: <a href=\"%s\">%"
+#~ "s</a>.</p>"
+#~ msgstr ""
+#~ "<p>உங்கள் %s <a href=\"%s\">%s</a>ஒரு புதிய %s: பெற்றுள்ளது  <a href=\"%s\">%"
+#~ "s</a>.</p>"
+
+#~ msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>ஒரு பதில் உன்டு <a href=\"%s\">%s</a>:</p>"
+
+#~ msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>ஒரு புதிய கருத்து <a href=\"%s\">%s</a>:</p> சேர்க்க ப்பட்டிருக்கிறது"
+
+#~ msgid "<p><u>Author:</u><br/><a href=\"%s\">%s</a></p>"
+#~ msgstr "<p><u>கதாசிரியர்:</u><br/><a href=\"%s\">%s</a></p>"
+
+#~ msgid "<p><u>Comment:</u><br/>%s</p>"
+#~ msgstr "<p><u>விமரிசனம்:</u><br/>%s</p>"
+
+#~ msgid "<p><b><em>In response to:</em></b></p>"
+#~ msgstr "<p><b><em>பதிலாக:</em></b></p>"
+
+#~ msgid "Click here to reply the comment"
+#~ msgstr "கருத்து பதிலுக்கு, இங்கே கிளிக் செய்யவும் "
+
+#~ msgid "%s replied your comment in %s"
+#~ msgstr "%s உங்கள் கருத்துக்கு, பதில் %s"
+
+#~ msgid "New comment added in %s"
+#~ msgstr "புதிய கருத்தை %s இல் சேர்க்கப்பட்டது"
+
+#~ msgid "Draft"
+#~ msgstr "வரைவு"
+
+#~ msgid "Pending to be published"
+#~ msgstr "வெளியிடப்பட வேண்டிய நிலுவையில் "
+
+#~ msgid "Published"
+#~ msgstr "வெளியிடப்பட்ட"
+
+#~ msgid "Download"
+#~ msgstr "பதிவிறக்கம் "
+
+#~ msgid "Set Featured Image"
+#~ msgstr "சிறப்பு படிமம் அமைக்கவும்  "
+
+#~ msgid "Set"
+#~ msgstr "தொகுதி"
+
+#~ msgid "No access allowed"
+#~ msgstr "அணுகல் அனுமதியின்றி"
+
+#~ msgid "There was a problem, please contact the website admin"
+#~ msgstr "ஒரு சிக்கல் ஏற்பட்டது, இணையதளம் நிர்வாகியை அணுகவும் "
+
+#~ msgid "You do not have permissions to edit this attachment"
+#~ msgstr "நீங்கள் இந்த இணைப்பை திருத்த உங்களுக்கு அனுமதி இல்லை "
+
+#~ msgid "Captcha was not generated properly, please refresh page."
+#~ msgstr "கேப்ச்ச ஒழுங்காக உருவாக்கப்படவில்லை, தயவு செய்து பக்கத்தைப் புதுப்பிக்கவும்."
+
+#~ msgid "Captcha is empty."
+#~ msgstr "கேப்ச்ச காலியாக உள்ளது."
+
+#~ msgid "Captcha doesn't match."
+#~ msgstr "கேப்ச்ச பொருந்தவில்லை. "
+
+#~ msgid "Upload media files"
+#~ msgstr "ஊடக கோப்புகளை பதிவேற்ற "
+
+#~ msgid "Source"
+#~ msgstr "ஆதாரம்"
+
+#~ msgid "Additionals"
+#~ msgstr "கூடுதல்"
+
+#~ msgid "Subscribe to our Newsletter?"
+#~ msgstr "எங்கள் செய்திமடல் சந்தா? "
+
+#~ msgid ""
+#~ "Keep up to date with our weekly newsletters, detailing what's going on in "
+#~ "the Malaysian environmental scene: Upcoming Events, latest Projects, "
+#~ "worthy discussions, and much more."
+#~ msgstr ""
+#~ "எதிர்வரும் நிகழ்வுகள், சமீபத்திய திட்டங்கள், தகுதி விவாதங்கள், மற்றும் மிகவும்: மலேசிய "
+#~ "சுற்றுச்சூழல் காட்சியில் என்ன நடக்கிறது விரிவான, எங்கள் வாராந்திர செய்தி தேதி வரை "
+#~ "வைத்திருக்கவும்."
+
+#~ msgid "Email*"
+#~ msgstr "மின்னஞ்சல்*"
+
+#~ msgid "Language"
+#~ msgstr "மொழி"
+
+#~ msgid "The address was not found on the map"
+#~ msgstr "முகவரி வரைபடத்தில் காணப்படவில்லை"
+
+#~ msgid "Name*"
+#~ msgstr "பெயர்*"
+
+#~ msgid "Bank Transfer"
+#~ msgstr "வங்கிப்பணமாற்றம்"
+
+#~ msgid "Booking successful."
+#~ msgstr "வெற்றிகரமான புக்கிங். "
+
+#~ msgid ""
+#~ "Make your payment directly into our bank account. Please use your Order "
+#~ "ID as the payment reference. Once the payment has been done, please send "
+#~ "an email to <a href=\"mailto:info@greendrinks.cn?subject=Bank Transfer"
+#~ "\">info@greendrinks.cn</a> with the Order ID and the Event Booking will "
+#~ "be confirmed."
+#~ msgstr ""
+#~ "எங்கள் வங்கி கணக்கில் நேரடியாக உங்கள் பணத்தை அனுப்பலாம். தயவு செய்து பணம் குறிப்பு "
+#~ "உங்கள் ஒழுங்கு ஐடியாக பயன்படுத்தவும்.  பணம் அனுப்பின பிறகு, தயவு செய்து ஒரு "
+#~ "மின்னஞ்சல் அனுப்பவும் <a href=\"mailto:info@greendrinks.cn?subject=Bank "
+#~ "Transfer\">info@greendrinks.cn</a>ஒழுங்கு ஐடி கொண்டு மற்றும் நிகழ்வு முன்பதிவு "
+#~ "உறுதியாக்கப்படும். "
+
+#~ msgid "Account details"
+#~ msgstr "கணக்கு விவரங்கள்"
+
+#~ msgid "Alipay"
+#~ msgstr "எலிேப"
+
+#~ msgid ""
+#~ "Pay via Alipay, if you don't have an Alipay account, you can also pay "
+#~ "with your debit card or credit card"
+#~ msgstr ""
+#~ "எலிபே வழியாக செலுத்தவும்,  உங்களுக்கு ஒரு எலிபே கணக்கு இல்லை என்றால், நீங்கள் உங்கள் "
+#~ "பற்று அட்டை அல்லது கடன் அட்டை மூலம் பணம் செலுத்த முடியும் "
+
+#~ msgid ""
+#~ "Please wait whilst you are redirected to Alipay to proceed with payment."
+#~ msgstr ""
+#~ "உங்கள் பண வழங்கீடு தொடர எலிபேவுக்கு திருப்பிவிடப்பட்டுள்ளது, அதே நேரத்தில், "
+#~ "காத்திருக்கவும். "
+
+#~ msgid ""
+#~ "Thank you for your payment. Your transaction has been completed, and a "
+#~ "receipt for your purchase has been emailed to you along with a seperate "
+#~ "email containing account details to access your booking information on "
+#~ "this site. You may log into your account at www.paypal.com to view "
+#~ "details of this transaction."
+#~ msgstr ""
+#~ "உங்கள் பணம் செலுத்தலுக்கு நன்றி. உங்கள் பரிவர்த்தனை முடிவடைந்துவிட்டது , உங்கள் "
+#~ "வாங்குதலுக்குகு ஒரு ரசீது இந்த தளத்தில் உங்கள் முன்பதிவு தகவல் அணுக கணக்கு விவரங்கள் "
+#~ "அடங்கிய ஒரு தனி மின்னஞ்சல் சேர்த்து உங்களுக்கு மின்னஞ்சல் அனுப்பப்பட்டது. இந்த கணக்கு "
+#~ "விவரங்களை பார்வையிட www.paypal.comமுக்கு நீங்கள் புகுபதிகை செய்யலாம். "
+
+#~ msgid "Simply come and pay at the Event ;)"
+#~ msgstr "நிகழ்விள் செலுத்தவும்."
+
+#~ msgid "Please select"
+#~ msgstr "தயவு செய்து தேர்ந்தெடுங்கல்"
+
+#~ msgid "Unknown"
+#~ msgstr "அறிவுக் கெட்டாத "
+
+#~ msgid "Unprocessed payment needs refund"
+#~ msgstr "பதப்படுத்தப்படாத பண வழங்கீடு பண மீடடமைப்பு தேவைப்படும்"
+
+#~ msgid "%s Options"
+#~ msgstr "%s விருப்பத்தேர்வுகள்"
+
+#~ msgid ""
+#~ "<strong>Important:</strong>In order to connect Alipay with your site, you "
+#~ "need to configure the return URL."
+#~ msgstr ""
+#~ "<strong>Important:</strong>உங்கள் தளத்தில் Alipay இணைக்க வேண்டும் என்றால், நீங்கள் "
+#~ "ரிட்டன் URL ஐ  உருவாக்க வேண்டும். "
+
+#~ msgid "Your return url is %s"
+#~ msgstr "உங்கள் ரிட்டன் URL %s"
+
+#~ msgid ""
+#~ "Please visit the <a href=\"%s\">documentation</a> for further "
+#~ "instructions."
+#~ msgstr ""
+#~ "தயவு செய்து பார்வையீடுங்கல் <a href=\"%s\">documentation</a> மேல் விவரங்களுக்கு. "
+
+#~ msgid "Alipay account"
+#~ msgstr "எலிபே கணக்கு"
+
+#~ msgid ""
+#~ "Please enter your Alipay Email; this is needed in order to take payment."
+#~ msgstr "உங்கள் Alipay மின்னஞ்சலை உள்ளிடவும்; இது பணம் எடுக்க தேவைப்படுகிறது. "
+
+#~ msgid "Alipay partner ID"
+#~ msgstr "எலிபே பங்குதாரர் ஐடி "
+
+#~ msgid ""
+#~ "Please enter the partner ID. If you don't have one, <a href=\"https://b."
+#~ "alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+#~ msgstr ""
+#~ "பங்குதாரர் ID உள்ளிடுக. உங்களுக்கு இது இல்லை என்றால், <a href=\"https://b.alipay."
+#~ "com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+
+#~ msgid "Alipay security key"
+#~ msgstr "எலிபே பாதுகாப்பு திறவுகோல்"
+
+#~ msgid ""
+#~ "Please enter the security key. If you don't have one, <a href=\"https://b."
+#~ "alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+#~ msgstr ""
+#~ "தயவு செய்து பாதுகாப்பு விசையை உள்ளிடுக.  உங்களுக்கு இது இல்லை என்றால், <a href="
+#~ "\"https://b.alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to "
+#~ "get."
+
+#~ msgid "Payment method"
+#~ msgstr "பணம் செலுத்தும் முறை"
+
+#~ msgid ""
+#~ "Be aware that by approving a booking awaiting payment, a full payment "
+#~ "transaction will be registered against this booking, meaning that it will "
+#~ "be considered as paid."
+#~ msgstr ""
+#~ "ஒரு கட்டணம் ஒப்புதல் பதிவு காத்திருக்கிறது என்பதை அறிந்து கொள்ளவும், ஒரு முழு கட்டண "
+#~ "பரிவர்த்தனை பணம் என கருதப்படும், இந்த முன்பதிவு எதிரான பதிவு என்று எச்சரிக்கையாக "
+#~ "இருக்க வேண்டும். "
+
+#~ msgid "Success Message"
+#~ msgstr "வெற்றி செய்தி"
+
+#~ msgid ""
+#~ "The message that is shown to a user when a booking with bank transfer "
+#~ "payments is successful."
+#~ msgstr ""
+#~ "ஒரு பயனர் வெற்றிகரமாக வங்கி பரிமாற்ற முறைகளை பதிவு செய்துள்ளதை செய்தி "
+#~ "காட்டுகிறது. "
+
+#~ msgid "Customer Message"
+#~ msgstr "வாடிக்கையாளர் செய்தி "
+
+#~ msgid ""
+#~ "Give the customer instructions for paying via Bank Transfer, and let them "
+#~ "know that the Event Booking will be confirmed once the money is received"
+#~ msgstr ""
+#~ "வங்கி மாற்றம் வழியாக செலுத்தும் வாடிக்கையாளர் வழிமுறைகளை வழங்குதல், அவர்களுக்கு பணம் "
+#~ "பெற்றவுடன் முறை நிகழ்வு முன்பதிவு உறுதி வேண்டும் என்று அறிவிக்கவும். "
+
+#~ msgid "Account details title"
+#~ msgstr "கணக்கு விவரங்கள் தலைப்பு"
+
+#~ msgid "Account Name"
+#~ msgstr "கணக்கு பெயர்"
+
+#~ msgid "Account Number"
+#~ msgstr "கணக்கு எண்"
+
+#~ msgid "Sort Code"
+#~ msgstr "வரிசை குறியீடு "
+
+#~ msgid "Bank Name"
+#~ msgstr "வங்கியின் பெயர் "
+
+#~ msgid "IBAN"
+#~ msgstr "IBAN"
+
+#~ msgid "BIC (formerly Swift)"
+#~ msgstr "BIC (முன்பு Swift)"
+
+#~ msgid "Account name: %s"
+#~ msgstr "கணக்கு பெயர்: %s"
+
+#~ msgid "Account number: %s"
+#~ msgstr "கணக்கு எண்: %s"
+
+#~ msgid "Sort code: %s"
+#~ msgstr "வரிசை குறியீடு: %s"
+
+#~ msgid "Bank name: %s"
+#~ msgstr "வங்கியின் பெயர்: %s "
+
+#~ msgid "IBAN: %s"
+#~ msgstr "IBAN: %s"
+
+#~ msgid "BIC (formerly Swift): %s"
+#~ msgstr "BIC (formerly Swift): %s"
+
+#~ msgid "Awaiting %s Payment"
+#~ msgstr "பண வழங்கீடு %s காத்திருக்கிறது"
+
+#~ msgid ""
+#~ "To finalize your booking, please click the following button to proceed to "
+#~ "%s."
+#~ msgstr "உங்கள் முன்பதிவை உறுதி செய்ய, பின்வரும் பொத்தானைக் கிளிக் செய்க %s."
+
+#~ msgid "Resume Payment"
+#~ msgstr "பண வழங்கீடை மீண்டும் தொடரு "
+
+#~ msgid "Approve"
+#~ msgstr "அங்கீகரி"
+
+#~ msgid "Delete"
+#~ msgstr "அழி"
+
+#~ msgid "Edit/View"
+#~ msgstr "பதிப்பி/ பார் "
+
+#~ msgid ""
+#~ "The message that is shown to a user when a booking is successful whilst "
+#~ "being redirected to PayPal for payment."
+#~ msgstr ""
+#~ "ஒரு பயனர் வெற்றிகரமாக முன்பதிவு பரிமாற்ற முறைகளை பதிவு செய்துள்ளதை செய்தி "
+#~ "காட்டுகிறது; அதே நேரத்தில் பேபாலுக்கு திருப்பப்பட்டுள்ளது."
+
+#~ msgid "Success Free Message"
+#~ msgstr "இலவசவெற்றி தகவல்"
+
+#~ msgid ""
+#~ "If some cases if you allow a free ticket (e.g. pay at gate) as well as "
+#~ "paid tickets, this message will be shown and the user will not be "
+#~ "redirected to PayPal."
+#~ msgstr ""
+#~ "சில நேரங்களில் நீங்கள் ஒரு இலவச டிக்கெட் (உதாரனமாக வாயிலில் சம்பளம்), அதே போல் பணம் "
+#~ "கட்டப்பட்ட டிக்கெட் அனுமதிக்க வேண்டும் என்றால், இந்த செய்தி காட்டப்படும் மற்றும் பயனர் "
+#~ "பேபாலுக்கு திருப்பிவிடப்பட முடியாது. "
+
+#~ msgid "Thank You Message"
+#~ msgstr " நன்றி தகவல்"
+
+#~ msgid ""
+#~ "If you choose to return users to the default Events Manager thank you "
+#~ "page after a user has paid on PayPal, you can customize the thank you "
+#~ "message here."
+#~ msgstr ""
+#~ "நீங்கள் பயனர்களை இயல்புநிலை நிகழ்வுகள் மேலாளர்  நன்றி தகவல் பக்கத்துக்கு திரும்ப தேர்வு "
+#~ "செய்தால் ஒரு பயனர் பேபால் மூலம் பணம் செலுத்திய பிறகு, நீங்கள் நன்றி செய்தியை இங்கே "
+#~ "தனிப்பயனாக்கலாம். "
+
+#~ msgid "Return URL"
+#~ msgstr "திருப்பி அனுப்புதல் URL"
+
+#~ msgid ""
+#~ "Once a payment is completed, users will be offered a link to this URL "
+#~ "which confirms to the user that a payment is made. If you would to "
+#~ "customize the thank you page, create a new page and add the link here. "
+#~ "For automatic redirect, you need to turn auto-return on in your PayPal "
+#~ "settings."
+#~ msgstr ""
+#~ "ஒரு கட்டணம் முடிந்தவுடன், பயனர்கள் கட்டணம் செலுத்தும் ஒரு இணைப்பை வழங்கப்படுவார்கள், இந்த "
+#~ "URL அந்த பயனர் கட்டிய பணத்தை உறுதிப்படுத்துகிறது. நீங்கள் பிரயாணப்படும் நன்றி பக்கத்தை "
+#~ "தனிப்பயனாக்க வேண்டும் என்றால், ஒரு புதிய பக்கம் உருவாக்கலாம் மற்றும் இங்கே இணைப்பை "
+#~ "சேர்க்கலாம். தானியங்கி வழிமாற்றுக்கு, நீங்கள் உங்கள் பேபால் அமைப்புகளை தானாக திரும்பி "
+#~ "இயக்க வேண்டும். "
+
+#~ msgid "Cancel URL"
+#~ msgstr "URL ஐ ரத்து"
+
+#~ msgid ""
+#~ "Whilst paying on PayPal, if a user cancels, they will be redirected to "
+#~ "this page."
+#~ msgstr ""
+#~ "பேபால் செலுத்தும் அதே நேரத்தில் ஒரு பயனர் ரத்து செய்தால், அவர்கள் இந்த பக்கத்துக்கு "
+#~ "திருப்பி வைக்கப்படுவார்கள். "
+
+#~ msgid "Delete Bookings Pending Payment"
+#~ msgstr "முன்னேற்பாடு கட்டணம் நிலுவையில் நீக்கு "
+
+#~ msgid "minutes"
+#~ msgstr "நிமிடங்கள்"
+
+#~ msgid ""
+#~ "Once a booking is started and the user is taken to PayPal, Events Manager "
+#~ "stores a booking record in the database to identify the incoming payment. "
+#~ "These spaces may be considered reserved if you enable <em>Reserved "
+#~ "unconfirmed spaces?</em> in your Events &gt; Settings page. If you would "
+#~ "like these bookings to expire after x minutes, please enter a value above "
+#~ "(note that bookings will be deleted, and any late payments will need to "
+#~ "be refunded manually via PayPal)."
+#~ msgstr ""
+#~ "ஒரு பதிவு தொடங்கிய பின், பயனர் பேபால் பக்கத்துக்கு கொண்டு செல்லப்படுவார், நிகழ்வுகள் "
+#~ "மேலாளர் தரவுத்தளத்தில் ஒரு புக்கிங் பதிவு உள்வரும் பணத்தை அடையாளம் காட்ட. நீங்கள் "
+#~ "<em>பாதுகாக்கப்பட்டவை உறுதிப்படுத்தப்படாத இடைவெளிகள்</em> இயக்கினால் இந்த இடைவெளிகள் "
+#~ "உங்கள் நிகழ்வுகள்> அமைப்புகள் பக்கத்தில் <em>உள்ள?</em> முன்பதிவு கருதப்படுகிறது. இந்த "
+#~ "முன்னேற்பாடு X நிமிடங்கள் பிறகு காலாவதியாகிவிடும் விரும்பினால், மேலே ஒரு மதிப்பை "
+#~ "உள்ளிடவும் (முன்னேற்பாடு நீக்கப்படும் குறிப்பு, மற்றும் எந்த தாமதமாக பணம் பேபால் வழியாக "
+#~ "கைமுறையாக திரும்ப வேண்டும்)"
+
+#~ msgid "Manually approve completed transactions?"
+#~ msgstr "கைமுறையாக நடவடிக்கைகளை அங்கீகரிக்க?"
+
+#~ msgid ""
+#~ "By default, when someone pays for a booking, it gets automatically "
+#~ "approved once the payment is confirmed. If you would like to manually "
+#~ "verify and approve bookings, tick this box."
+#~ msgstr ""
+#~ "யாரோ ஒரு பதிவு செலுத்துகிற போது பணம் உறுதி முறை இயல்பாக, அது தானாகவே "
+#~ "ஏற்றுக்கொள்ளப்படும். நீங்கள் கைமுறையாக சரிபார்க்க மற்றும் முன்னேற்பாடு ஒப்புதல் "
+#~ "விரும்புகிறீர்கள் என்றால், இந்த பெட்டியை தேர்ந்தெடுக்கவும். "
+
+#~ msgid ""
+#~ "Approvals must also be required for all bookings in your <a href=\"%s"
+#~ "\">settings</a> for this to work properly."
+#~ msgstr ""
+#~ "அனுமதியும் மேலும் அனைத்து முன்பதிவுக்கு அவசியம் தேவை <a href=\"%s\">settings</"
+#~ "a>இது சரியாக வேலை செய்ய. "
+
+#~ msgid ""
+#~ "<strong>Important:</strong>In order to connect PayPal with your site, you "
+#~ "need to enable IPN on your account."
+#~ msgstr ""
+#~ "<strong>Important:</strong>உங்கள் தளத்தில் பேபால் இணைக்க வேண்டும் என்றால், உங்கள் "
+#~ "கணக்கில் உள்ள IPN செயல்படுத்த வேண்டும். "
+
+#~ msgid "PayPal Email"
+#~ msgstr "பேபால் மின்னஞ்சல் "
+
+#~ msgid "Paypal Currency"
+#~ msgstr "பேபால் நாணயம்"
+
+#~ msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+#~ msgstr "உங்கள் நாணயத்தை இங்கு அமைக்கவும் <a href=\"%s\">settings</a> page."
+
+#~ msgid "PayPal Language"
+#~ msgstr "பேபால் மொழி "
+
+#~ msgid "Default"
+#~ msgstr "கொடா நிலை "
+
+#~ msgid ""
+#~ "PayPal allows you to select a default language users will see. This is "
+#~ "also determined by PayPal which detects the locale of the users browser. "
+#~ "The default would be US."
+#~ msgstr ""
+#~ "பேபால் மொழி பயனர்கள் காணக்கூடிய ஒரு இயல்புநிலை தேர்ந்தெடுக்க அனுமதிக்கிறது. இது "
+#~ "பயனர் உலாவி இடநிலையை கண்டறிந்து பேபால் தீர்மானிக்கப்படுகிறது. இயல்புநிலை "
+#~ "அமெரிக்காவாக இருக்க வேண்டும். "
+
+#~ msgid "PayPal Mode"
+#~ msgstr "பேபால் முறை"
+
+#~ msgid "Live Site"
+#~ msgstr "நேரடி தளம் "
+
+#~ msgid "Test Mode (Sandbox)"
+#~ msgstr "சோதனை முறை (சேன்ட் பாக்ஸ்)"
+
+#~ msgid "PayPal Page Logo"
+#~ msgstr "பேபால் பக்கச் சின்னம் "
+
+#~ msgid ""
+#~ "Add your logo to the PayPal payment page. It's highly recommended you "
+#~ "link to a https:// address."
+#~ msgstr ""
+#~ "பேபால் கட்டணம் பக்கத்தில் உங்கள் லோகோவை இணைக்கவும். நீங்கள் அது ஒரு https://"
+#~ "முகவரிக்கு இணைக்க மிகவும் பரிந்துரைக்கப்படுகிறது. "
+
+#~ msgid "Border Color"
+#~ msgstr "ஓர வண்ணம் "
+
+#~ msgid ""
+#~ "Provide a hex value color to change the color from the default blue to "
+#~ "another color (e.g. #CCAAAA)."
+#~ msgstr ""
+#~ "மற்றொரு நிறம் (எ.கா. #CCAAAA) இயல்புநிலை நீல நிறம் ஆக ஒரு எண்ம மதிப்பு வண்ணம் "
+#~ "வழங்கு . "
+
+#~ msgid "Send Message"
+#~ msgstr "தகவல் அனுப்புதல்"
+
+#~ msgid "Send Email"
+#~ msgstr "மின்னஞ்சல் அனுப்பவும்"
+
+#~ msgid "Subscribe"
+#~ msgstr "சந்தா"
+
+#~ msgid ""
+#~ "Please write an email to <a href=\"mailto:%1$s\">%1$s</a>, or fill in the "
+#~ "form below:"
+#~ msgstr ""
+#~ "ஒரு மின்னஞ்சல் எழுத கொள்ளவும் <a href=\"mailto:%1$s\">%1$s</a>, அல்லது கீழே உள்ள "
+#~ "படிவத்தை பூர்த்தி செய்க:"
+
+#~ msgid ""
+#~ "We will send the info below to the organizers, who should then get in "
+#~ "touch with you."
+#~ msgstr ""
+#~ "நாங்கள் அமைப்பாளர்களுக்கு கீழே கொடுக்கப்பட்டுள்ள தகவலை அனுப்பவோம். அதன் பிறகு அவர்கள் "
+#~ "தொடர்பு கொள்வார்கள். "
+
+#~ msgid "Name is missing."
+#~ msgstr "பெயர் இல்லை."
+
+#~ msgid "Email is missing."
+#~ msgstr "மின்னஞ்சல் காணவில்லை. "
+
+#~ msgid "Message is missing."
+#~ msgstr "தகவல் காணவில்லை. "
+
+#~ msgid "High five! Message sent successfully!"
+#~ msgstr "வாழ்த்துக்கள்! தகவல் வெற்றிகரமாக அனுப்பப்பட்டது! "
+
+#~ msgid "Thanks for contacting us, we will get in touch with you shortly."
+#~ msgstr "எங்களுடன் தொடர்பு  கொண்டதற்க்கு நன்றி."
+
+#~ msgid "Let's keep connecting the green dots."
+#~ msgstr "நாம் பச்சை புள்ளிகளை இணைப்போம்."
+
+#~ msgid "Email sent successfully."
+#~ msgstr "மின்னஞ்சல் வெற்றிகரமாக அனுப்பப்பட்டது. "
+
+#~ msgid "Any more friends who might be interested? Keep sending!"
+#~ msgstr "மேலும் எந்த ஆர்வமுள்ள நண்பர்கள்  உன்டா? மேலும் அனுப்பவும்!"
+
+#~ msgid "To Email is missing."
+#~ msgstr "ஐ நோக்கி மின்னஞ்சல் காணவில்லை. "
+
+#~ msgid "Awesome! Thanks for taking part!"
+#~ msgstr "அற்புதம்! பங்கேற்றதற்கு நன்றி! "
+
+#~ msgid ""
+#~ "We have sent a message with your information to the organizers. They "
+#~ "should contact you soon."
+#~ msgstr ""
+#~ "நாம் உங்கள் தகவல்களை அமைப்பாளர்களுக்கு ஒரு தகவல் மூலமாக அனுப்பினோம். அவர்கள் உங்களை "
+#~ "விரைவில் தொடர்பு கொள்வார்கள். "
+
+#~ msgid "\"Why do you want to volunteer?\" is missing."
+#~ msgstr ""
+#~ "\"நீங்கள் ஏன் தானாகவே முன்வந்து தொண்டூழியம் செய்ய விருப்படுகரீர்கள்?\" காணப்படவில்லை."
+
+#~ msgid "Subscription Successful!"
+#~ msgstr "சந்தா வெற்றி!"
+
+#~ msgid ""
+#~ "To make sure you get the newsletter, please add <strong>%s</strong> in "
+#~ "your contact list. Thanks!"
+#~ msgstr ""
+#~ "நீங்கள் செய்திமடல் பெற உறுதி செய்ய, உங்களது தொடர்பு பட்டியலில் <strong>%s</strong> "
+#~ "சேர்க்க தயவு செய்து. நன்றி!"
+
+#~ msgid "Sending..."
+#~ msgstr "அனுப்புகிறது..."
+
+#, fuzzy
+#~ msgid "Subscribe to our weekly newsletter:"
+#~ msgstr "<p>எங்கள் வார வெளியீடு செய்திமடலுக்கு சந்தா செலுத்துங்கல்:</p>"
+
+#~ msgid "Share by email:"
+#~ msgstr "மின்னஞ்சல் மூலம் பகிர்ந்து கொள் : "
+
+#~ msgid "Topic"
+#~ msgstr "தலைப்பு"
+
+#~ msgid "Your Name*"
+#~ msgstr " உங்களுடைய பெயர்*"
+
+#, fuzzy
+#~ msgid "Your Name"
+#~ msgstr " உங்களுடைய பெயர்*"
+
+#~ msgid "Your Email*"
+#~ msgstr "உங்களுடைய மின்னஞ்சல்*"
+
+#~ msgid "To Email*"
+#~ msgstr "மின்னஞ்சலுக்கு*"
+
+#~ msgid "Subject"
+#~ msgstr "உரிப்பொருள்"
+
+#~ msgid "Your Phone number"
+#~ msgstr " உங்களுடைய தொலைபேசி எண்"
+
+#~ msgid "Message*"
+#~ msgstr "தகவல்*"
+
+#~ msgid "Additional message"
+#~ msgstr "கூடுதல் தகவல்"
+
+#~ msgid "Why do you want to volunteer?*"
+#~ msgstr "நீங்கள் ஏன் ஆர்வ ஊழியராக வேண்டும்?*"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keep up to date with our weekly newsletter, detailing what's going on in "
+#~ "the Malaysian environmental scene: upcoming events, latest projects, "
+#~ "worthy discussions, and much more."
+#~ msgstr ""
+#~ "எதிர்வரும் நிகழ்வுகள், சமீபத்திய திட்டங்கள், தகுதி விவாதங்கள், மற்றும் மிகவும்: மலேசிய "
+#~ "சுற்றுச்சூழல் காட்சியில் என்ன நடக்கிறது விரிவான, எங்கள் வாராந்திர செய்தி தேதி வரை "
+#~ "வைத்திருக்கவும்."
+
+#~ msgid "Insert with Media Player"
+#~ msgstr "மீடியா பிளேயர் நுழைக்க "
+
+#~ msgid "Add external media files, Youtube videos, podcasts, etc"
+#~ msgstr ""
+#~ " வெளிப்புற ஊடக கோப்புகள், YouTube வீடியோக்களை, பாட்காஸ்ட்கள் போன்றறை சேர்க்கவும் "
+
+#~ msgid "Save all changes"
+#~ msgstr "எல்லா மாற்றங்களையும் சேமிக்கவும்"
+
+#~ msgid "Save, Close and Refresh"
+#~ msgstr "சேமி, மூடு மற்றும் புதுப்பி "
+
+#~ msgid "Click here to watch the video"
+#~ msgstr "வீடியோ பார்க்க இங்கே கிளிக் செய்யவும் "
+
+#~ msgid "Do not add"
+#~ msgstr "சேர்க்காதே"
+
+#~ msgid "Add to Resources"
+#~ msgstr "வளங்களுக்கு சேர்க்கவும்"
+
+#~ msgid "Video"
+#~ msgstr "நிகழ்படம்"
+
+#~ msgid "Images"
+#~ msgstr "படங்கள் "
+
+#~ msgid "Podcasts"
+#~ msgstr "எண்ணியல் சாதனங்கள்"
+
+#~ msgid "Documents"
+#~ msgstr "ஆவணங்கள்"
+
+#~ msgid "Yes"
+#~ msgstr "ஆமாம்"
+
+#~ msgid "No"
+#~ msgstr "இல்லை"
+
+#~ msgid " <a href=\"%1$s\" target=\""
+#~ msgstr " <a href=\"%1$s\" target=\""
+
+#~ msgid "%s has a new member!"
+#~ msgstr "%s ஒரு புதிய உறுப்பினரை பெற்றது! "
+
+#~ msgid ""
+#~ "<p>Congratulations! <a href=\"%s\">Your organization has a new member</a>:"
+#~ "</p>"
+#~ msgstr ""
+#~ "<p>நல்வாழ்த்துகள்! <a href=\"%s\">உங்கள் நிறுவனம் ஒரு புதிய உறுப்பினரை "
+#~ "பெற்றுக்கொன்டது</a>:</p>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<li>Determine if the content posted by <b>%s</b> will also appear under %"
+#~ "s. Currently: yes.</li>"
+#~ msgstr "<p>இப்போது முதல், எந்த உள்ளடக்கமும் <b>%s</b> மேலும் கீழ் தோன்றும் %s.</p>"
+
+#~ msgid "Member of"
+#~ msgstr "%s உறுப்பினர் "
+
+#~ msgid "You are not allowed to be a Community member of yourself!"
+#~ msgstr "நீங்கள் ஒரு சமூக உறுப்பினராக இருக்க அனுமதி இல்லை! "
+
+#, fuzzy
+#~ msgid "The user is missing"
+#~ msgstr "தகவல் காணவில்லை. "
+
+#~ msgid "Incorrect URL"
+#~ msgstr "தவறான URL "
+
+#, fuzzy
+#~ msgid "The status has not been set"
+#~ msgstr "சிறப்பு படம் இன்னும் அமைக்கப்படவில்லை"
+
+#, fuzzy
+#~ msgid "Email(s) cannot be empty."
+#~ msgstr "மின்னஞ்சல் காலியாக இருக்க முடியாது "
+
+#, fuzzy
+#~ msgid ""
+#~ "<p><a href=\"%s\">%s</a> is inviting you to <a href=\"%s\">become their "
+#~ "member</a>:</p>"
+#~ msgstr ""
+#~ "<p>உங்கள் %s <a href=\"%s\">%s</a>ஒரு புதிய %s: பெற்றுள்ளது  <a href=\"%s\">%"
+#~ "s</a>.</p>"
+
+#~ msgid "No Organizations"
+#~ msgstr "நிறுவனங்களின்றி"
+
+#~ msgid "No details"
+#~ msgstr "விவரங்களின்றி"
+
+#, fuzzy
+#~ msgid "Show Content from: Organization + Members"
+#~ msgstr "நிறுவன உறுப்பினர்கள்"
+
+#, fuzzy
+#~ msgid "Show Content from: Organization"
+#~ msgstr "சிறப்பியல்பு நிறுவனங்கள்"
+
+#~ msgid "Update successful!"
+#~ msgstr "புதுப்பிப்பு வெற்றியார்ந்தது!"
+
+#~ msgid "Your changes have been saved."
+#~ msgstr "உங்கள் மாற்றங்களை சேமிக்க. "
+
+#, fuzzy
+#~ msgid "User account"
+#~ msgstr "எலிபே கணக்கு"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your Organizations."
+#~ msgstr "தயவு செய்து <a href=\"%s\">log in</a> உங்கள் அமைப்புக்கள் எடிட் செய்ய. "
+
+#, fuzzy
+#~ msgid "Only %s accounts can add Organizations' membership."
+#~ msgstr "%s கணக்குகள் மட்டும் அமைப்புக்கள் 'உறுப்பினர் சேர்க்க முடியும். "
+
+#, fuzzy
+#~ msgid "Invite successful!"
+#~ msgstr "புதுப்பிப்பு வெற்றியார்ந்தது!"
+
+#, fuzzy
+#~ msgid "Please <a href=\"%s\">log in</a> to invite your members."
+#~ msgstr "தயவு செய்து <a href=\"%s\">log in</a> மேல் விவரங்களுக்கு %s. "
+
+#, fuzzy
+#~ msgid "Only %s accounts can invite members."
+#~ msgstr "ஒரே %s கணக்குகள் திருத்தப்பட. "
+
+#, fuzzy
+#~ msgid "Only Organizations can invite members."
+#~ msgstr "நிறுவன உறுப்பினர்கள்"
+
+#, fuzzy
+#~ msgid "Status update successful!"
+#~ msgstr "புதுப்பிப்பு வெற்றியார்ந்தது!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please <a href=\"%s\">log in</a> to update your members' information."
+#~ msgstr "தயவு செய்து <a href=\"%s\">log in</a> உங்கள் அமைப்புக்கள் எடிட் செய்ய. "
+
+#, fuzzy
+#~ msgid "Only %s accounts can edit their members' information."
+#~ msgstr " கணக்குகளை %s அவர்கள் கடவுச்சொல்லை மாற்ற முடியும்."
+
+#, fuzzy
+#~ msgid "Only Organizations can have members."
+#~ msgstr "நிறுவன உறுப்பினர்கள்"
+
+#, fuzzy
+#~ msgid "No members found."
+#~ msgstr "இதற்க்கும் மேல் வேர் எந்த %s"
+
+#, fuzzy
+#~ msgid "No more members found."
+#~ msgstr "கருத்துரைகள் எதுவும் காணப்படவில்லை. "
+
+#, fuzzy
+#~ msgid "Please <a href=\"%s\">log in</a> to see your members."
+#~ msgstr "தயவு செய்து <a href=\"%s\">log in</a> மேல் விவரங்களுக்கு %s. "
+
+#, fuzzy
+#~ msgid "Only %s accounts can have members."
+#~ msgstr "ஒரே %s கணக்குகள் திருத்தப்பட. "
+
+#, fuzzy
+#~ msgid "Invite new members"
+#~ msgstr "உறுப்பினர்கள் அடங்கும்? "
+
+#~ msgid "Do you accept members?"
+#~ msgstr "நீங்கள் உறுப்பினர்களை ஏற்பீர்களா?"
+
+#, fuzzy
+#~ msgid "Status*"
+#~ msgstr "தகு நிலை "
+
+#~ msgid "Last name"
+#~ msgstr "கடைசி பெயர்"
+
+#~ msgid "Contact person"
+#~ msgstr "தொடர்புக் குரியவர் "
+
+#~ msgid "Telephone / Fax"
+#~ msgstr "தொலைபேசி/தொலைநகல்"
+
+#~ msgid ""
+#~ "Become a Community: all the content posted by your members will also "
+#~ "appear under your Organization's profile."
+#~ msgstr ""
+#~ "ஒரு சமூகமாக மாறிவிடுங்கள்: உங்கள் உறுப்பினர்கள் மூலம் அனைத்து உள்ளடக்கத்தை உங்கள் "
+#~ "அமைப்பின் சுயவிவர கீழ் தோன்றும். "
+
+#, fuzzy
+#~ msgid "Organization Name*"
+#~ msgstr "நிறுவனம்"
+
+#, fuzzy
+#~ msgid "Organization Email*"
+#~ msgstr "நிறுவன விவரங்கள்"
+
+#~ msgid "Interests"
+#~ msgstr "ஆர்வங்கள்"
+
+#~ msgid "Organization Categories"
+#~ msgstr "நிறுவன வகையினங்கள்"
+
+#~ msgid "Organization Types"
+#~ msgstr "நிறுவன விதங்கள்"
+
+#, fuzzy
+#~ msgid "Contribute content"
+#~ msgstr "சமூக உள்ளடக்கத்தைக் காண்பி"
+
+#, fuzzy
+#~ msgid "Active"
+#~ msgstr "ஆவணக் காப்பகம்"
+
+#, fuzzy
+#~ msgid "Rejected"
+#~ msgstr "மீளமை"
+
+#, fuzzy
+#~ msgid "Member"
+#~ msgstr "%s உறுப்பினர் "
+
+#, fuzzy
+#~ msgid "Staff"
+#~ msgstr "மாநிலம்"
+
+#, fuzzy
+#~ msgid "Volunteer"
+#~ msgstr "தொண்டூழியர்!"
+
+#, fuzzy
+#~ msgid "Student"
+#~ msgstr "தொகுதி"
+
+#, fuzzy
+#~ msgid "Member of which Organizations"
+#~ msgstr "நிறுவனங்களின்றி"
+
+#~ msgid "Which Organizations are you member of?"
+#~ msgstr "நீங்கள் எந்த  நிறுவனங்களில் உறுப்பினராக இருக்கிரீர்கல்?"
+
+#, fuzzy
+#~ msgid "Loading Organizations"
+#~ msgstr "நிறுவனங்களின்றி"
+
+#, fuzzy
+#~ msgid "Loading Individuals"
+#~ msgstr "நபர்கள்"
+
+#, fuzzy
+#~ msgid "No Organizations found"
+#~ msgstr "எந்த நிறுவனங்களும் கண்டுபிடிக்கப்படவில்லை."
+
+#, fuzzy
+#~ msgid "No Individuals found"
+#~ msgstr "எந்த தனிநபரும் காணப்படவில்லை."
+
+#~ msgid ""
+#~ "Please select the Organizations you are a member of: all your content "
+#~ "will also show under their profiles."
+#~ msgstr ""
+#~ "நீங்கள் உறுப்பினராக இருக்கும் அமைப்புக்களை தேர்வு செய்க: உங்கள் உள்ளடக்கத்தை அவர்களது "
+#~ "சுயவிவரங்கள் கீழ் காண்பிக்கும்."
+
+#~ msgid "Type"
+#~ msgstr "வகை"
+
+#~ msgid "Contact Person"
+#~ msgstr "தொடர்புக் குரியவர் "
+
+#~ msgid "Tel / Fax"
+#~ msgstr "தொலைபேசி/தொலைநகல்"
+
+#~ msgid "Interests:"
+#~ msgstr "ஆர்வங்கள்:"
+
+#~ msgid "we also don't know!"
+#~ msgstr "எங்களுக்கும் தெரியாதவை!"
+
+#~ msgid "Include members?"
+#~ msgstr "உறுப்பினர்கள் அடங்கும்? "
+
+#~ msgid "Connect with"
+#~ msgstr "உடன் இணைக்கவும் "
+
+#~ msgid "Connecting"
+#~ msgstr "இணைத்தல் "
+
+#~ msgid "Or log in using:"
+#~ msgstr "அல்லது இதை பயன்படுத்தி உள்நுழையவும்: "
+
+#~ msgid ""
+#~ "You are already logged in as <a href=\"%s\">%s</a>, <a href=\"%s"
+#~ "\">logout</a>?"
+#~ msgstr ""
+#~ "நீங்கள் ஏற்கனவே என பதிவு <a href=\"%s\">%s</a>, <a href=\"%s\">logout</a>?"
+
+#~ msgid "An undefined error has ocurred"
+#~ msgstr "ஒரு வரையறுக்கப்படாத பிழை ஏற்பட்டது "
+
+#~ msgid "Please supply your username and password."
+#~ msgstr "உங்கள் பயனர் பெயர் மற்றும் கடவுச்சொல்லை வழங்குக. "
+
+#~ msgid "You are not logged in."
+#~ msgstr "நீங்கள் இன்னும் உள்நுழைவு தொடங்கவில்லை."
+
+#~ msgid "There is no user with this username or email."
+#~ msgstr "இந்த பயனர் பெயர் அல்லது மின்னஞ்சல் மூலம் பயனர் எவருமில்லை. "
+
+#~ msgid "Please supply your username or email."
+#~ msgstr "உங்கள் பயனர் பெயர் அல்லது மின்னஞ்சல் வழங்குக. "
+
+#~ msgid "%s: Password Reset"
+#~ msgstr "%s: கடவுச்சொல் மீட்டமை "
+
+#~ msgid "Your user: "
+#~ msgstr "உங்கள் பயனர்: "
+
+#~ msgid "Your new password: "
+#~ msgstr "உங்கள் புதிய கடவுச்சொல்: "
+
+#~ msgid "Click here to log-in: "
+#~ msgstr "உள்நுழைவு இங்கே கிளிக் செய்யவும்: "
+
+#~ msgid "Login to %s"
+#~ msgstr "உள்நுழைய %s"
+
+#~ msgid "The e-mail could not be sent."
+#~ msgstr "மின்னஞ்சல் அனுப்பப்ப முடியவில்லை. "
+
+#~ msgid "Possible reason: your host may have disabled the mail() function."
+#~ msgstr "சாத்தியமான காரணம்: உங்கள் புரவலன் மின்னஞ்சல் () செயல்பாடு முடக்கப்பட்டுள்ளது. "
+
+#~ msgid "<a href=\"%s\">Click here to view it</a>."
+#~ msgstr "<a href=\"%s\" target=\"gd-view\">அதை பார்க்க இங்கே கிளிக் செய்யவும்</a>."
+
+#~ msgid ""
+#~ "The status is still \"Draft\". Please don't forget to change it to "
+#~ "\"Pending\" after finish editing."
+#~ msgstr ""
+#~ "நிலை இன்னும் உள்ளது \"Draft\".  தயவு செய்து திருத்திய பின்னர்  \"Pending\" அதை "
+#~ "மாற்ற மறக்க வேண்டாம். "
+
+#~ msgid "Now waiting for approval from the admins."
+#~ msgstr "இப்போது நிர்வாக அனுமதிக்காக காத்திருக்கிறது."
+
+#~ msgid "View your <a href=\"%s\" target=\"%s\">updated profile</a>."
+#~ msgstr ""
+#~ "உங்கள் பார்வையிடுங்கல் <a href=\"%s\" target=\"%s\">புதுப்பிக்கப்பட்ட சுயவிவரத்தை </"
+#~ "a>."
+
+#~ msgid "... <a href=\"%s\">Read more</a>"
+#~ msgstr "... <a href=\"%s\">மேலும் வாசிக்க</a>."
+
+#~ msgid "Website"
+#~ msgstr "இணைய தளம் "
+
+#~ msgid "LinkedIn"
+#~ msgstr "லிங்க்ட்டின்"
+
+#~ msgid "Youtube"
+#~ msgstr "யூட்டியுப்"
+
+#~ msgid "Next"
+#~ msgstr "அடுத்தது"
+
+#~ msgid "Page not found!"
+#~ msgstr "பக்கம் காணவில்லை!"
+
+#~ msgid "Home"
+#~ msgstr "அகம்"
+
+#~ msgid "Latest published"
+#~ msgstr "சமீபத்தில் வெளியிடப்பட்ட "
+
+#~ msgid "Earliest published"
+#~ msgstr "ஆரம்ப காலத்தில் வெளியிடப்பட்ட "
+
+#~ msgid "Most comments"
+#~ msgstr "பெரும்பாலான விமர்சனங்கள் "
+
+#~ msgid "Less comments"
+#~ msgstr "குறைந்த கருத்துகள் "
+
+#~ msgid "Title ascending"
+#~ msgstr "தலைப்பு ஏறுவரிசையில் "
+
+#~ msgid "Title descending"
+#~ msgstr "தலைப்பு இறங்கும்வரிசையில்"
+
+#~ msgid "Name ascending"
+#~ msgstr "பெயர் ஏறுவரிசையில் "
+
+#~ msgid "Name descending"
+#~ msgstr "பெயர் இறங்கும்வரிசையில் "
+
+#~ msgid "Most active"
+#~ msgstr "மிகவும் சுறுசுறுப்பாக "
+
+#~ msgid "Less active"
+#~ msgstr "குறைந்த செயலில் "
+
+#~ msgid "Recently registered"
+#~ msgstr "சமீபத்தில் பதிவு "
+
+#~ msgid "Early registered"
+#~ msgstr "ஆரம்ப பதிவு "
+
+#~ msgid "Draft (still editing, it will not show up in the website)"
+#~ msgstr "வரைவு (இன்னும் எடிட்டிங், அது இணையதளத்தில் காணப்படாது)"
+
+#~ msgid "Finished editing (request website admins to publish it)"
+#~ msgstr "முடிக்கப்பட்ட எடிட்டிங் (கோரிக்கை வலைத்தளத்தில் நிர்வாகம் வெளியிட)"
+
+#~ msgid "Already published (by website admins)"
+#~ msgstr "ஏற்கனவே வெளியிடப்பட்ட (இணையதள நிர்வாகம் மூலம்) "
+
+#~ msgid "No \"post_id\"? Hmmmm, strange indeed!"
+#~ msgstr "இல்லை \"post_id\"? உண்மையில் விநோதம்! "
+
+#~ msgid "Please %s or register %s / %s to add a comment."
+#~ msgstr "தயவு செய்து %s அல்லது புகுபதிகை செய்க  %s / %s ஒரு கருத்தை சேர்க்க."
+
+#~ msgid "The comment is empty."
+#~ msgstr "கருத்து காலியாக உள்ளது. "
+
+#~ msgid "Please provide the current password."
+#~ msgstr "தற்போதைய கடவுச்சொல்லை வழங்கவும். "
+
+#~ msgid "Current password is incorrect."
+#~ msgstr "தற்போதைய கடவுச்சொல் தவறானது."
+
+#~ msgid "The password cannot be emtpy."
+#~ msgstr "கடவுச்சொல் காலியாக இருக்க முடியாது. "
+
+#~ msgid "The password must be at least 8 characters long."
+#~ msgstr "கடவுச்சொல்லை குறைந்தது எட்டு எழுத்துகள் நீண்ட இருக்க வேண்டும். "
+
+#~ msgid "Please confirm the password."
+#~ msgstr "கடவுச்சொல்லை உறுதிப்படுத்தவும். "
+
+#~ msgid "Passwords do not match."
+#~ msgstr "கடவுச்சொற்கள் பொருந்தவில்லை. "
+
+#~ msgid "Ops, there was a problem: %s"
+#~ msgstr "அச்சச்சோ, ஒரு பிரச்சனை இருந்தது: %s"
+
+#~ msgid "The title cannot be empty"
+#~ msgstr "தலைப்பு வெறுமையாக இருக்க முடியாது "
+
+#~ msgid "The content cannot be empty"
+#~ msgstr "உள்ளடக்கத்தை காலியாக இருக்க முடியாது "
+
+#~ msgid "The Featured Image has not been set"
+#~ msgstr "சிறப்பு படம் இன்னும் அமைக்கப்படவில்லை"
+
+#~ msgid "Your user doesn't have permission for editing."
+#~ msgstr "உங்கள் பயனர் எடிட்டிங் அனுமதி இல்லை. "
+
+#~ msgid "Cheating, huh?"
+#~ msgstr "ஏமாற்றுதல்?"
+
+#~ msgid "Mmmmm, this post seems to have been deleted..."
+#~ msgstr "இந்த இடுகை நீக்கப்பட்டதாக தெரிகிறது..."
+
+#~ msgid "Ops, there was a problem... this is embarrassing, huh?"
+#~ msgstr "ஒரு பிரச்சனை இருந்தது...இந்த சங்கடமாக இருக்கிறதா?"
+
+#~ msgid "The name cannot be empty"
+#~ msgstr "பெயர் காலியாக இருக்க முடியாது "
+
+#~ msgid "The e-mail cannot be empty"
+#~ msgstr "மின்னஞ்சல் காலியாக இருக்க முடியாது "
+
+#~ msgid "The email address isn&#8217;t correct."
+#~ msgstr "மின்னஞ்சல் முகவரி &#8217; சரியானதல்ல. "
+
+#~ msgid "That email address is not allowed!"
+#~ msgstr "அந்த மின்னஞ்சல் முகவரிக்கு அனுமதி இல்லை! "
+
+#~ msgid "The username cannot be empty."
+#~ msgstr "பயனர்பெயர் வெறுமையாக இருக்க முடியாது. "
+
+#~ msgid ""
+#~ "This username is invalid because it uses illegal characters. Please enter "
+#~ "a valid username."
+#~ msgstr ""
+#~ " இந்த பயனர் பெயர் தவறானது ஏனெனில் அது சட்டவிரோத எழுத்துக்களை பயன்படுத்துகிறது. "
+#~ "சரியான பயனர் பெயர் உள்ளிடவும். "
+
+#~ msgid "This username is already registered. Please choose another one."
+#~ msgstr "இந்த பயனர் பெயர் ஏற்கனவே பதிவு செய்யப்பட்டுள்ளது. மற்றொரு பெயர் தேர்வு செய்க. "
+
+#~ msgid "This email is already registered, please choose another one."
+#~ msgstr ""
+#~ "இந்த மின்னஞ்சல் ஏற்கனவே பதிவு செய்யப்பட்டுள்ளது, மற்றொரு மின்னஞ்சல் தேர்வு செய்க. "
+
+#~ msgid "That email address already exists in our system!"
+#~ msgstr "அந்த மின்னஞ்சல் முகவரி ஏற்கனவே எங்கள் அமைப்பில் உல்லது!"
+
+#~ msgid "Comment added successfully!"
+#~ msgstr "கருத்துரை வெற்றிகரமாக சேர்ந்தது! "
+
+#~ msgid "Comment is missing."
+#~ msgstr "கருத்து காணவில்லை. "
+
+#~ msgid "Your comment was added."
+#~ msgstr "உங்கள் கருத்து சேர்க்கப்பட்டது. "
+
+#~ msgid "comments"
+#~ msgstr "கருத்துரைகள்"
+
+#~ msgid "No %s yet."
+#~ msgstr "%s இன்னம் இல்லை."
+
+#~ msgid "That's it, no more %s found."
+#~ msgstr "இதற்க்கும் மேல் வேர் எந்த %s கண்டுபிடிக்கப்படவில்லை."
+
+#~ msgid ""
+#~ "Please log in using your <strong>%s</strong> account to add a comment:"
+#~ msgstr "ஒரு கருத்தை சேர்க்க உங்கள் <strong>%s</strong> பயன்படுத்தி உள்நுழைக: "
+
+#~ msgid "Comment*"
+#~ msgstr "விமரிசனம்*"
+
+#~ msgid "Ops, there were some problems:"
+#~ msgstr "சில பிரச்சனைகள் இருந்தன:"
+
+#~ msgid "Awesome! Your Profile was created successfully!"
+#~ msgstr "அருமை! உங்களுடைய சுயவிவரம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது."
+
+#~ msgid "Already logged in!"
+#~ msgstr "ஏற்கனவே வெளியேற்ற்பட்டது! "
+
+#~ msgid "Please %s first to create a new Profile."
+#~ msgstr "தயவு செய்து %s கள் முதல் ஒரு புதிய சுயவிவரத்தை உருவாக்க தேவை."
+
+#~ msgid "Profile updated successfully."
+#~ msgstr "சுயவிவரம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது."
+
+#~ msgid "Login"
+#~ msgstr "புகுபதிகை"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your Profile."
+#~ msgstr "தயவு செய்து <a href=\"%s\">உள்நுழைய</a> உங்கள் சுயவிவரத்தை திருத்த. "
+
+#~ msgid "Only %s accounts can be edited."
+#~ msgstr "ஒரே %s கணக்குகள் திருத்தப்பட. "
+
+#~ msgid ""
+#~ "Your profile is not of 'Organization' type, so you cannot edit it here."
+#~ msgstr ""
+#~ "உங்கள் சுயவிவரத்தை அமைப்பு 'வகை உள்ளது, எனவே நீங்கள் இங்கே அதை திருத்த முடியாது. "
+
+#~ msgid ""
+#~ "Your profile is not of 'Individual' type, so you cannot edit it here."
+#~ msgstr ""
+#~ "உங்கள் சுயவிவரம் தனிநபராக வகை உள்ளது, எனவே நீங்கள் இங்கே அதை திருத்த முடியாது."
+
+#~ msgid "Display email in your Profile?"
+#~ msgstr "சுயவிவர பக்கத்தில் மின்னஞ்சலை காண்பிக்கலாமா?"
+
+#~ msgid "Short description"
+#~ msgstr "சுருக்கமான விளக்கம்"
+
+#~ msgid "Facebook URL"
+#~ msgstr "பேஸ்புக் URL"
+
+#~ msgid "Twitter URL"
+#~ msgstr "ட்விட்டர் URL"
+
+#~ msgid "LinkedIn URL"
+#~ msgstr "லிங்க்ட்டின் URL"
+
+#~ msgid "Youtube URL"
+#~ msgstr "யூட்டியூப் URL"
+
+#~ msgid "Password updated successfully."
+#~ msgstr "கடவுச்சொல் வெற்றிகரமாக மேம்படுத்தப்பட்டது."
+
+#~ msgid ""
+#~ "Yep, it's good to change it every now and then, with so many crooks "
+#~ "around!"
+#~ msgstr "ஆம், சில நேரங்களில் அதை மாற்றுவது நல்லது, சுற்றி பல திருடர்கள் இருப்பதால்! "
+
+#~ msgid "Please <a href=\"%s\">log in</a> to change your password."
+#~ msgstr "தயவு செய்து <a href=\"%s\">log in</a> உங்கள் கடவுச்சொல்லை மாற்ற. "
+
+#~ msgid "Only %s accounts can change their password."
+#~ msgstr " கணக்குகளை %s அவர்கள் கடவுச்சொல்லை மாற்ற முடியும்."
+
+#, fuzzy
+#~ msgid "Picture updated successfully."
+#~ msgstr "சுயவிவரம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது."
+
+#, fuzzy
+#~ msgid "Please <a href=\"%s\">log in</a> to update your picture."
+#~ msgstr "தயவு செய்து <a href=\"%s\">log in</a> மேல் விவரங்களுக்கு %s. "
+
+#, fuzzy
+#~ msgid "Only %s accounts can update their picture."
+#~ msgstr " கணக்குகளை %s அவர்கள் கடவுச்சொல்லை மாற்ற முடியும்."
+
+#, fuzzy
+#~ msgid "Saving..."
+#~ msgstr "அனுப்புகிறது..."
+
+#~ msgid "Awesome! Your User Account was created successfully!"
+#~ msgstr "வாழ்த்துக்கள்! உங்கள் பயனர் கணக்கு வெற்றிகரமாக உருவாக்கப்பட்டது! "
+
+#~ msgid "Please <a href=\"%s\">click here to log-in</a>."
+#~ msgstr "தயவு செய்து <a href=\"%s\">புகுபதிகை செய்ய இங்கே கிளிக் செய்யவும்</a>"
+
+#~ msgid "User Account updated successfully."
+#~ msgstr "பயனர் கணக்கு வெற்றிகரமாக மேம்படுத்தப்பட்டது. "
+
+#~ msgid "View your <a href=\"%s\">updated user account</a>."
+#~ msgstr " உங்கள் <a href=\"%s\">மேம்படுத்தப்பட்ட பயனர் கணக்கு</a> காண்க."
+
+#~ msgid "Contact info"
+#~ msgstr "தொடர்பு விவரம்"
+
+#~ msgid "Username*"
+#~ msgstr "பயனீட்டாளர் பெயர் *"
+
+#~ msgid "Current Password"
+#~ msgstr "தற்போதைய அடையாளச் சொல்"
+
+#~ msgid "Password*"
+#~ msgstr "அடையாளச் சொல் *"
+
+#~ msgid "New password*"
+#~ msgstr "புதிய அடையாளச் சொல்"
+
+#~ msgid "Repeat password*"
+#~ msgstr "அடையாளச் சொல்லை மீண்டும் ஒப்பி"
+
+#~ msgid "Repeat new password*"
+#~ msgstr "புதிய அடையாளச் சொல்லை மீண்டும் ஒப்பி"
+
+#~ msgid "Website URL"
+#~ msgstr "வலைத்தளத்தின் URL"
+
+#~ msgid "Description"
+#~ msgstr "விளக்கம்"
+
+#~ msgid ""
+#~ "Please be careful to fill-in the email properly! It will not only appear "
+#~ "in the Profile page, but also be used by our system to send all "
+#~ "notifications from the website, eg: log-in information / volunteering "
+#~ "requests / inline contact profile / etc."
+#~ msgstr ""
+#~ "தயவு செய்து மின்னஞ்சலை கவனமாக பூர்த்தி செய்யவும்! இவ்விவரம் முகக்குறிப்பு பக்கத்தில் "
+#~ "மட்டும் தோன்றாது, ஆனால், எல்லா அகப்பக்க நடவடிக்கையும், உதாரணமாக: உள்நுழைவு தகவல்/  "
+#~ "தன்னார்வ கோரிக்கை / இன்லைன் சுயவிவரத்தை / மற்றும் உபயோகப்படுத்தப்படும்."
+
+#~ msgid "Still not there..."
+#~ msgstr "இன்னும் அங்கு இல்லை... "
+
+#~ msgid "Hurray, login successful!"
+#~ msgstr "ஆ, வெற்றிகரமான உள்நுழைவு! "
+
+#~ msgid "Add"
+#~ msgstr "சோ்"
+
+#~ msgid "Ready to connect the green dots?"
+#~ msgstr "பச்சை புள்ளிகளை இணைக்கத் தயாரா?"
+
+#~ msgid "Logged out now"
+#~ msgstr "தற்போது வெளியேறி "
+
+#~ msgid "But please make sure to come back!"
+#~ msgstr "ஆனால் திரும்பி வர உறுதி செய்யுங்கள்! "
+
+#~ msgid "Phew, password reseted..."
+#~ msgstr "கடவுச்சொல் மீட்டமைக்கப்பட்டது... "
+
+#~ msgid "We sent you an email. Please <a href=\"%s\">click here to log in</a>"
+#~ msgstr ""
+#~ "உங்களுக்கு ஒரு மின்னஞ்சல் அனுப்பினோம். தயவு செய்து <a href=\"%s\">புகுபதிகை செய்ய "
+#~ "இங்கே கிளிக் செய்யவும்</a>"
+
+#~ msgid "You are already logged in, please %s first to re-set your password."
+#~ msgstr ""
+#~ "நீங்கள் ஏற்கனவே உள்நுழைந்துள்ளீர்கள், தயவு செய்து %s முதலில் உங்கள் கடவுச்சொல்லை அமைக்க "
+#~ "கொள்ளவும்."
+
+#~ msgid "Lost password"
+#~ msgstr "இழந்த கடவுச்சொல் "
+
+#~ msgid "<p><em>Please log in:</em></p>"
+#~ msgstr "<p><em>தயவு செய்து நுழையவும்:</em></p>"
+
+#~ msgid "Username"
+#~ msgstr "பயனீட்டாளர் பெயர் "
+
+#~ msgid "Password"
+#~ msgstr "அடையாளச் சொல் "
+
+#~ msgid "Username or email"
+#~ msgstr "பயனீட்டாளர் பெயர் அல்லது மின்னஞ்சல்"
+
+#~ msgid "Reset password"
+#~ msgstr "கடவுச்சொல்லை மீட்டமை "
+
+#~ msgid "Yes, please log me out"
+#~ msgstr "ஆம், தயவு செய்து என்னை விடுபதிகை "
+
+#~ msgid "Are you sure you want to log out?"
+#~ msgstr "நிச்சயமாக வெளியேற வேண்டும் என்பதில் உறுதியாக இருக்கிறீர்களா? "
+
+#~ msgid "Title:"
+#~ msgstr "தலைப்பு:"
+
+#~ msgid "Title"
+#~ msgstr "தலைப்பு"
+
+#~ msgid "Source:"
+#~ msgstr "மூலம்:"
+
+#~ msgid "Is resource:"
+#~ msgstr "ஆதாரம் உள்ளது:"
+
+#~ msgid "Description:"
+#~ msgstr "விளக்கம்:"
+
+#~ msgid "Resource type"
+#~ msgstr "வள வகை"
+
+#~ msgid "Is Resource"
+#~ msgstr "வளம்"
+
+#~ msgid "Please copy/paste the html code below into your website."
+#~ msgstr "தயவு செய்து நகலெடுக்க அல்லது உங்கள் வலைத்தளத்தில் கீழே HTML குறியீடு ஒட்டவும். "
+
+#~ msgid "Embed:"
+#~ msgstr "பதித்துவை:"
+
+#, fuzzy
+#~ msgid "Copy Search URL:"
+#~ msgstr "தேடுதல்"
+
+#~ msgid "Embed code"
+#~ msgstr "குறியீடு பதித்துள்ளது "
+
+#, fuzzy
+#~ msgid "Preview:"
+#~ msgstr "முற்காட்சி"
+
+#~ msgid "Add comment"
+#~ msgstr "கருத்தை சேர் "
+
+#, fuzzy
+#~ msgid "Click to Volunteer"
+#~ msgstr "தொண்டூழியர்!"
+
+#~ msgid "Share by email"
+#~ msgstr "மின்னஞ்சல் மூலம் பகிர் "
+
+#~ msgid "Embed"
+#~ msgstr "பதித்துவை"
+
+#~ msgid "Send message"
+#~ msgstr "செய்தியை அனுப்பு "
+
+#~ msgid "Reply"
+#~ msgstr "பதில்"
+
+#~ msgid "Loading data from:<div class=\"template-status-domains\"></div>"
+#~ msgstr "ஏற்றுகிறது தரவு:<div class=\"template-status-domains\"></div>"
+
+#~ msgid "Search"
+#~ msgstr "தேடுதல்"
+
+#~ msgid "Dismiss"
+#~ msgstr "நீக்கு"
+
+#~ msgid "Please write the content here..."
+#~ msgstr "இங்கு உள்ளடக்கத்தை எழுத கொள்ளவும்... "
+
+#~ msgid "Avatar"
+#~ msgstr "அவதாரம்"
+
+#~ msgid "Profile picture"
+#~ msgstr "உருவப்படம்"
+
+#~ msgid "Upload picture"
+#~ msgstr "மேலேற்று"
+
+#~ msgid "Remove"
+#~ msgstr "அகற்று"
+
+#, fuzzy
+#~ msgid "Loading Content"
+#~ msgstr "கேள்விகள்:உள்ளடக்கத்தை சேர்ப்பதன்"
+
+#, fuzzy
+#~ msgid "No Content found"
+#~ msgstr "உள்ளடக்கம் காணப்படவில்லை."
+
+#, fuzzy
+#~ msgid "Loading Suggestions"
+#~ msgstr "தூய விழிப்புணர்வு ஏற்றும் "
+
+#, fuzzy
+#~ msgid "No Results"
+#~ msgstr "முடிவுகளின்றி"
+
+#, fuzzy
+#~ msgid "Loading Users"
+#~ msgstr "ஏற்றுதல்..."
+
+#, fuzzy
+#~ msgid "No Users found"
+#~ msgstr "எந்த %s "
+
+#~ msgid "Submit"
+#~ msgstr "சமர்ப்பித்திடு"
+
+#~ msgid "No results"
+#~ msgstr "முடிவுகளின்றி"
+
+#~ msgid "No more results found"
+#~ msgstr "இதற்க்கும் மேல் வேர் எந்த முடிவுகளும் காணப்படவில்லை"
+
+#~ msgid "Share on %s"
+#~ msgstr "பகிர்ந்து கொள்ளுங்கல் %s"
+
+#~ msgid "Previous"
+#~ msgstr "முந்தைய"
+
+#~ msgid "Toggle menu"
+#~ msgstr "மாற்று பட்டி "
+
+#~ msgid "Quickview"
+#~ msgstr "விரைவு பார்வை"
+
+#~ msgid "Print"
+#~ msgstr "அச்சிடு"
+
+#~ msgid "View"
+#~ msgstr "பார்த்தல்"
+
+#~ msgid "Preview"
+#~ msgstr "முற்காட்சி"
+
+#, fuzzy
+#~ msgid "All Content"
+#~ msgstr "உட்பொருள்"
+
+#, fuzzy
+#~ msgid "Show/Hide information"
+#~ msgstr "காண்பி/காட்சி வகைப்பட்டி மறை"
+
+#, fuzzy
+#~ msgid "Refresh"
+#~ msgstr "வளங்கள்"
+
+#~ msgid "Reset"
+#~ msgstr "மீளமை"
+
+#~ msgid "Open all"
+#~ msgstr "அனைத்தையும் திற"
+
+#~ msgid "Show in Navigator"
+#~ msgstr "மாலுமி உள்ள காட்டவும் "
+
+#, fuzzy
+#~ msgid "Share"
+#~ msgstr "பகிர்ந்து கொள்ளுங்கல் %s"
+
+#, fuzzy
+#~ msgid "Contact/Links"
+#~ msgstr "தொடர்பு விவரம்"
+
+#~ msgid "Load more"
+#~ msgstr "மேலும் ஏற்றுக "
+
+#~ msgid "Type comment here..."
+#~ msgstr "கருத்தை இங்கே தட்டச்சிடு... "
+
+#~ msgid "Captcha*"
+#~ msgstr "பிடித்துக் கொள் *"
+
+#~ msgid "Dates"
+#~ msgstr "தேதிகள்"
+
+#, fuzzy
+#~ msgid "Content*"
+#~ msgstr "உட்பொருள்"
+
+#, fuzzy
+#~ msgid "Featured Image*"
+#~ msgstr "காட்டப்பட படிவம்"
+
+#~ msgid "Picture"
+#~ msgstr "படம்"
+
+#~ msgid "Order by"
+#~ msgstr "வரிசைப்படு"
+
+#, fuzzy
+#~ msgid "Default format"
+#~ msgstr "கொடா நிலை "
+
+#, fuzzy
+#~ msgid "Write a comment..."
+#~ msgstr "கருத்தை இங்கே தட்டச்சிடு... "
+
+#, fuzzy
+#~ msgid "Posted in response / as an addition to"
+#~ msgstr "பிரதிபலிப்பாக: "
+
+#~ msgid "Content:"
+#~ msgstr "உட்பொருள்"
+
+#~ msgid "Search:"
+#~ msgstr "தேடுதல்"
+
+#~ msgid "Search Content with \"%QUERY\""
+#~ msgstr "தேடல் உள்ளடக்கம் "
+
+#~ msgid "Search Users with \"%QUERY\""
+#~ msgstr "கேள்வி தேடல் %s பயனர்"
+
+#~ msgid "Search %s"
+#~ msgstr "தேடுதல் %s"
+
+#~ msgid "Author(s)"
+#~ msgstr "கதாசிரியர்கள்"
+
+#~ msgid "Post title"
+#~ msgstr "தலைப்பு இடுகை"
+
+#~ msgid "Authors"
+#~ msgstr "கதாசிரியர்"
+
+#~ msgid "Users:"
+#~ msgstr "உபயோகிப்பவர்கள்:"
+
+#~ msgid ""
+#~ "Co-authoring this post with other Organizations/Individuals? Select them "
+#~ "all here, they will not only appear as co-owners in the webpage, but will "
+#~ "also be able to edit this post."
+#~ msgstr ""
+#~ "மற்ற ஏதேனும் ஒரு  முகக்குறிப்புக்கு கூட்டுறவு சொந்தமானதா? இந்த மற்ற  முகக்குறிப்பு "
+#~ "இணை உரிமையாளர்களாக தோன்றுவதோடு, இந்த சமர்பிப்புகளை திருத்தவும் முடியும்."
+
+#~ msgid ""
+#~ "Please select all related content, so the reader can easily access this "
+#~ "inter-related information."
+#~ msgstr ""
+#~ "வாசகர் எளிதாக இந்த இடையேயான தொடர்புடைய தகவல் அணுக முடியும் எனவே, நீங்கள் அனைத்து "
+#~ "தொடர்புடைய உள்ளடக்கத்தை மட்டும் தேர்ந்தெடுக்கவும்."
+
+#, fuzzy
+#~ msgid "Save"
+#~ msgstr "சனிக்கிழமை"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "தேதி"
+
+#~ msgid "No items"
+#~ msgstr " பொருள்கல் "
+
+#~ msgid "Nothing here"
+#~ msgstr "இங்கே எதுவுமில்லை"
+
+#, fuzzy
+#~ msgid "No contact details"
+#~ msgstr "கணக்கு விவரங்கள்"
+
+#~ msgid "Google+"
+#~ msgstr "கூகல்+"
+
+#~ msgid "Disclaimer"
+#~ msgstr "உரிமைத் துறப்பு "
+
+#~ msgid "Original URL (for Disclaimer): %s"
+#~ msgstr "அசல் ஊஆரெல் (துறவுரைக்கு): %s"
+
+#~ msgid ""
+#~ "This Profile was created by %s with information available on the "
+#~ "Organization's website."
+#~ msgstr "இந்த பக்கம் %s மூலமாக உருவாக்கப்பட்டது வலைத்தளத்தில் கிடைக்கும் தகவல்உட்கொண்டு."
+
+#~ msgid "Short Description"
+#~ msgstr "சுருக்க விளக்கம்"
+
+#~ msgid "Profile owned by %s?"
+#~ msgstr "முகக்குறிப்பு உரிமையாளர் %s?"
+
+#~ msgid "Display email in the Profile page?"
+#~ msgstr "சுயவிவர பக்கத்தில் மின்னஞ்சலை காண்பிக்க?"
+
+#~ msgid "Organization info"
+#~ msgstr "நிருவன விவரங்கள்"
+
+#~ msgid "Contact number"
+#~ msgstr "தொடர்பு எண்"
+
+#~ msgid "Linkedin"
+#~ msgstr "லிங்க்ட்டின்"
+
+#~ msgid "Register"
+#~ msgstr "பதிவு செய் "
+
+#~ msgid "Add Profile"
+#~ msgstr "முகக்குறிப்பு இணை "
+
+#~ msgid "please wait..."
+#~ msgstr "தயவு செய்து காத்திருக்கவும் "
+
+#~ msgid "Open %s in new window"
+#~ msgstr "புதிய சாளரத்தில் %s திறக்க "
+
+#~ msgid "Full size"
+#~ msgstr "முழு அளவு "
+
+#~ msgid "Maximize"
+#~ msgstr "பெரிதாக்கு"
+
+#~ msgid "Minimize"
+#~ msgstr "குறைவுபடுத்த"
+
+#~ msgid ""
+#~ "<p>If this is not right, please <a href=\"%s\">click here and inform us</"
+#~ "a>.</p>"
+#~ msgstr ""
+#~ "<p>இது பிழை என்றால், தயவுசெய்து  <a href=\"%s\">புகுபதிகை செய்ய இங்கே கிளிக் "
+#~ "செய்யவும்</a>.</p>"
+
+#~ msgid "Contact info / Social media"
+#~ msgstr "தொடர்பு விவரம் / சமூக ஊடகம்"
+
+#~ msgid "My Organizations"
+#~ msgstr "என் நிறுவனங்கள்"
+
+#~ msgid "Individual info"
+#~ msgstr "தனிநபர் விவரங்கள்"
+
+#~ msgid "Full"
+#~ msgstr "நிறைவு"
+
+#~ msgid "404"
+#~ msgstr "404"
+
+#~ msgid "Date and Time"
+#~ msgstr "தேதியும் நேரமும்"
+
+#~ msgid "Ok"
+#~ msgstr "சரி"
+
+#~ msgid "Add an Event"
+#~ msgstr "ஒரு நிகழ்வை சேர்க்கவும் "
+
+#~ msgid "Add a Project"
+#~ msgstr "ஒரு திட்டத்தை சேர்க்கவும் "
+
+#~ msgid "Add a Story"
+#~ msgstr "ஒரு கதையை சேர்க்கவும் "
+
+#~ msgid "Add an Announcement"
+#~ msgstr "ஒரு அறிவிப்பை சேர்க்கவும் "
+
+#~ msgid "Add a Discussion"
+#~ msgstr "ஒரு கலந்துரையாடலை சேர்க்கவும் "
+
+#~ msgid "Recently Registered<span class=\"hidden-xs\"> Users</span>"
+#~ msgstr "சமீபத்தில் பதிவு <span class=\"hidden-xs\">செய்த</span> "
+
+#~ msgid "Add location"
+#~ msgstr "இடக் கூட்டல்"
+
+#~ msgid "Submit comment"
+#~ msgstr "கருத்துரை சமர்ப்பிக்கவும் "
+
+#~ msgid "Profile info"
+#~ msgstr "சுயவிவர தகவல்"
+
+#~ msgid "Social media"
+#~ msgstr "சமூக ஊடகம் "
+
+#~ msgid "Log-in info"
+#~ msgstr "பதிவு விவரம்"
+
+#~ msgid "User info"
+#~ msgstr "பயனர் விவரம்"
+
+#~ msgid "Locations for:"
+#~ msgstr "இதற்க்கு இடங்கள்: "
+
+#~ msgid "Forgot password?"
+#~ msgstr "அடையாளச் சொல்லை மறந்துவிட்டீர்களா?"
+
+#~ msgid "Set new"
+#~ msgstr "புதிய தொகுப்பு "
+
+#~ msgid "Toggle side info"
+#~ msgstr "மாற்று பக்க தகவல் "
+
+#~ msgid "In response to"
+#~ msgstr "பதிலாக"
+
+#~ msgid ""
+#~ "This information is published by %s based on information available on the "
+#~ "following URL: <a href=\"%2$s\">%2$s</a>."
+#~ msgstr ""
+#~ "இந்த தகவல் வெளியிடப்பட்டது %s பின்வரும் URL தகவல் கிடைக்கும் சார்ந்த: <a href=\"%2$s"
+#~ "\">%2$s</a>."
+
+#~ msgid "Organizations: Is Community? (Accepts Members?)"
+#~ msgstr "நிறுவனங்கள்: சமூகம் (உறுப்பினர்களை ஏற்றுக்கொள்ளவும்?)"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "F jS, Y"
+#~ msgstr "F jS, Y"
+
+#~ msgid "F, Y"
+#~ msgstr "F, Y"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "Newer Entries"
+#~ msgstr "புதிய பதிவுகள்"
+
+#~ msgid "Search Results"
+#~ msgstr "தேடுதல் முடிவுகள்"
+
+#~ msgid "Search Results for <strong>&#8216;%s&#8217;</strong></p>"
+#~ msgstr "தேடுதல் முடிவுகள் <strong>&#8216;%s&#8217;</strong></p>"
+
+#~ msgid "Newer Entries &raquo;"
+#~ msgstr "புதிய பதிவுகள் &raquo"
+
+#~ msgid "&laquo; Older Entries"
+#~ msgstr "&laquo; முந்திய பதிவுகள்"
+
+#~ msgid ""
+#~ "<strong>Sorry, we couldn't find any results based on your search query.</"
+#~ "strong>"
+#~ msgstr "<strong>மன்னிக்கவும், நாங்கள் முடிவுகளை கண்டுபிடிக்க இயலவில்லை</strong>"
+
+#~ msgid "Communities"
+#~ msgstr "சமூகம்"
+
+#~ msgid "Howdy, %s!"
+#~ msgstr "ஹலோ, %s!"
+
+#~ msgid "Individual Details"
+#~ msgstr " தனிநபர் விவரங்கள்"
+
+#~ msgid "Show Profile content"
+#~ msgstr "சுயவிவர உள்ளடக்கத்தைக் காண்பி"
+
+#~ msgid "No more Organizations found."
+#~ msgstr "இதற்க்கு மேல் வேர் எந்த நிறுவனங்களும் கண்டுபிடிக்கப்படவில்லை."
+
+#~ msgid "No Communities found."
+#~ msgstr "எந்த சமுதாயமும் கண்டுபிடிக்கப்படவில்லை."
+
+#~ msgid "No more Communities found."
+#~ msgstr "இதற்க்கு மேல் வேர் எந்த சமுதாயமும் கண்டுபிடிக்கப்படவில்லை."
+
+#~ msgid "No more Individuals found."
+#~ msgstr "இதற்க்கு மேல் வேர் எந்த எந்த தனிநபரும் காணப்படவில்லை."
+
+#~ msgid "No Sponsors found."
+#~ msgstr "ஆதரவாளர்கள் காணப்படவில்லை."
+
+#~ msgid "No more Sponsors found."
+#~ msgstr "இதற்க்கு மேல் வேர் எந்த ஆதரவாளர்களும் காணப்படவில்லை."
+
+#~ msgid "No Featured Communities found."
+#~ msgstr "சிறப்பு சமூகங்கள் காணப்படவில்லை."
+
+#~ msgid "No more Featured Communities found."
+#~ msgstr "இதற்க்கு மேல் வேர் எந்த சிறப்பு சமூகங்களும் காணப்படவில்லை."
+
+#~ msgid ""
+#~ "Become a Community? (Accept other Organizations/Individuals as Members)"
+#~ msgstr ""
+#~ " ஒரு சமூகமாக மாரிவிடவா? (உறுப்பினர் போன்ற மற்ற அமைப்புகளையும் / தனி நபரையும் "
+#~ "ஏற்கவும்)"
+
+#~ msgid "No Communities"
+#~ msgstr "சமுதாயமின்றி"
+
+#~ msgid "No Projects found."
+#~ msgstr "எந்த திட்டங்களும் காணப்படவில்லை. "
+
+#~ msgid "No more Content found."
+#~ msgstr "மேலும் வேர் எந்த உள்ளடக்க்ம் காணப்படவில்லை."
+
+#~ msgid "No Profiles found."
+#~ msgstr "விவரக்குறிப்புகள் காணப்படவில்லை."
+
+#~ msgid "No more Profiles found."
+#~ msgstr "வேர் எந்த விவரக்குறிப்புகளும் காணப்படவில்லை."
+
+#~ msgid "No Stories found."
+#~ msgstr "கதைகள்  காணப்படவில்லை."
+
+#~ msgid "No more Stories found."
+#~ msgstr "மேலும் கதைகள்  காணப்படவில்லை."
+
+#~ msgid "No Announcements found."
+#~ msgstr "எந்த அறிவிப்புகளும் காணப்படவில்லை."
+
+#~ msgid "No more Announcements found."
+#~ msgstr "வேர் எந்த அறிவிப்புகளும் காணப்படவில்லை."
+
+#~ msgid "No Discussions found."
+#~ msgstr "கலந்துரையாடல் காணப்படவில்லை."
+
+#~ msgid "No more Discussions found."
+#~ msgstr "வேர் எந்த கலந்துரையாடலும் காணப்படவில்லை."
+
+#~ msgid "No Featured Articles found."
+#~ msgstr "சிறப்பு கட்டுரைகள் காணப்படவில்லை."
+
+#~ msgid "No more Featured Articles found."
+#~ msgstr "வேர் எந்த சிறப்பு கட்டுரைகளும் காணப்படவில்லை."
+
+#~ msgid "No MESYM Blogs found."
+#~ msgstr "மேசிம் வலைப்பதிவுகள் காணப்படவில்லை."
+
+#~ msgid "No more MESYM Blogs found."
+#~ msgstr "வேர் எந்த மேசிம் வலைப்பதிவுகளும் காணப்படவில்லை."
+
+#~ msgid "No Resources found."
+#~ msgstr "வளங்கள் காணப்படவில்லை."
+
+#~ msgid "No more Resources found."
+#~ msgstr "வேர் எந்த வளங்களும் காணப்படவில்லை."
+
+#~ msgid "No more Thoughts, we run out of ideas!"
+#~ msgstr "வேர் எந்த சிந்தனைகளும் காணப்படவில்லை, எந்த வித கருத்தும் தோன்றவில்லை!"
+
+#~ msgid "The Specialists"
+#~ msgstr "நிபுணர்கள்"
+
+#~ msgid ""
+#~ "We sent you an email with your log-in information. Please <a href=\"%s"
+#~ "\">click here to log-in</a>."
+#~ msgstr ""
+#~ "நாங்கள் உங்கள் உள்நுழைவு தகவலை உங்களுக்கு ஒரு மின்னஞ்சல் மூலமாக அனுப்பிநோம்.  தயவு "
+#~ "செய்து <a href=\"%s\">புகுபதிகை செய்ய  இங்கே கிளிக் செய்யவும்</a>."
+
+#~ msgid "Nothing found."
+#~ msgstr "ஒன்றுமே கண்டுபிடிக்கப்படவில்லை."
+
+#~ msgid "Awesome! Your Organization Profile was created successfully!"
+#~ msgstr "அற்புதம்! உங்களுடைய அமைப்பு விவரம் வெற்றிகரமாக உருவாக்கப்பட்டது!"
+
+#~ msgid "Awesome! Your Individual Profile was created successfully!"
+#~ msgstr "அற்புதம்! உங்களுடைய தனி நபர் விவரம் வெற்றிகரமாக உருவாக்கப்பட்டது!"
+
+#~ msgid "... but pssshht, don't tell anyone!"
+#~ msgstr "... ஆனால் உஷ், யாரிடமும் சொல்ல வேண்டாம்!"
+
+#~ msgid "Description*"
+#~ msgstr "விளக்கம்*"
+
+#~ msgid "Year started"
+#~ msgstr "துவங்கிய ஆண்டு"
+
+#~ msgid "Subscribe to MESYM Newsletter?"
+#~ msgstr "மேசிம் செய்திமடலுக்கு குழுசேர்? "
+
+#~ msgid "Become a Community? (Accept Organizations / Individuals as Members)"
+#~ msgstr "ஒரு சமூகம் ஆக? (உறுப்பினர் போன்ற அமைப்புக்கள் / தனி நபர் ஏற்கவும்)"
+
+#~ msgid ""
+#~ "This short description will appear in the Profile hover card, and in each "
+#~ "post/event."
+#~ msgstr ""
+#~ "இந்த குறுகிய விளக்கம் மிதவை அட்டையில் தோன்றும், மற்றும் ஒவ்வொரு சமர்பிப்புகளிலும்/"
+#~ "நிகழ்வுகளிலும் தோன்றும்."
+
+#~ msgid "Stories about this %s"
+#~ msgstr "இதை பற்றி செய்திகள் %s"
+
+#~ msgid "Yay! Your Project was created successfully!"
+#~ msgstr "உங்களுடைய திட்டம் வெற்றிகரமாக மேம்படுத்தப்பட்டது."
+
+#~ msgid "Project updated successfully."
+#~ msgstr "திட்டம் வெற்றிகரமாக மேம்படுத்தப்பட்டது."
+
+#~ msgid "Yay! Your Story was created successfully!"
+#~ msgstr "உங்களுடைய கதை புதுப்பிக்கப்பட்டன."
+
+#~ msgid "Yay! Your Announcement was created successfully!"
+#~ msgstr "உங்களுடைய அறிவிப்பு புதுப்பிக்கப்பட்டன. "
+
+#~ msgid "Announcement updated successfully."
+#~ msgstr "அறிவிப்பு புதுப்பிக்கப்பட்டன. "
+
+#~ msgid "Yay! Your Discussion was created successfully!"
+#~ msgstr " உங்களுடைய கலந்துரையாடல் வெற்றிகரமாக மேம்படுத்தப்பட்டது. "
+
+#~ msgid "Discussion updated successfully."
+#~ msgstr "கலந்துரையாடல் வெற்றிகரமாக மேம்படுத்தப்பட்டது. "
+
+#~ msgid "Yay! Your Event was created successfully!"
+#~ msgstr "உங்களுடைய நிகழ்வு புதுப்பிக்கப்பட்டன. "
+
+#~ msgid "Event updated successfully."
+#~ msgstr "நிகழ்வு வெற்றிகரமாக மேம்படுத்தப்பட்டது. "
+
+#~ msgid ""
+#~ "Is this %s related to any Project(s) and/or Event(s) already existing in "
+#~ "the website? If so, please select them here."
+#~ msgstr ""
+#~ "இந்த %s  ஏற்கனவே எந்த திட்டம் (கள்) மற்றும் / அல்லது நிகழ்வு (கள்)  இணையதளத்தில் "
+#~ "தொடர்பு உள்ளவையா? அப்படியானால், அவற்றை இங்கே தேர்வு செய்க. "
+
+#~ msgid "Owner Profiles"
+#~ msgstr "உரியவருடைய சுயவிவரங்கள் "
+
+#~ msgid "Original URL (Disclaimer)"
+#~ msgstr "அசல் URL (மறுப்பு) "
+
+#~ msgid "Status (Draft / Pending / Publish)"
+#~ msgstr "நிலை (வரைவு / பூர்த்தியாகாத / வெளியிடு)"
+
+#~ msgid ""
+#~ "Volunteers are needed? Please add an additional section in the Content "
+#~ "below, describing what is expected from the volunteers."
+#~ msgstr ""
+#~ "தொண்டர்கள் தேவை? தொண்டர்களிடமிருந்து என்ன எதிர்பார்க்கப்படுகிறது என்பதை விவரிக்கவும். "
+#~ "கீழே உள்ளடக்கத்தை ஒரு கூடுதல் பிரிவில் சேர்க்க கொள்ளவும். "
+
+#~ msgid "Search Profiles"
+#~ msgstr "தேடல் சுயவிவரங்கள் "
+
+#~ msgid "Related Projects/Events:"
+#~ msgstr "தொடர்புடைய திட்டங்கள் / நிகழ்வுகள்: "
+
+#~ msgid "No related Projects or Events"
+#~ msgstr "தொடர்புடைய திட்டங்களும் / நிகழ்வுகளும் எதுவுமில்லை : "
+
+#~ msgid "Add a Resource"
+#~ msgstr "ஒரு மூலத்தை சேர் "
+
+#~ msgid "Add Media Files"
+#~ msgstr "மீடியா கோப்புகளை சேர் "
+
+#~ msgid "Add your Profile"
+#~ msgstr "உங்கள் இணையை சேர்க்கவும் "
+
+#~ msgid "Profile(s)"
+#~ msgstr "சிறு வாழ்க்கைக் குறிப்பு(கள்)"
+
+#~ msgid "Project Details"
+#~ msgstr " திட்ட விவரங்கள்"
+
+#~ msgid "Related Projects/Events"
+#~ msgstr "தொடர்புடைய திட்டங்களும் / நிகழ்வுகளும்"
+
+#~ msgid "Discussion Details"
+#~ msgstr "கலந்துரையாடலின் விவரங்கள்"
+
+#~ msgid "Location"
+#~ msgstr "இடம்"
+
+#~ msgid "more..."
+#~ msgstr "அதிகம்"
+
+#~ msgid "less..."
+#~ msgstr "குறைந்த..."
+
+#~ msgid "Choose a post"
+#~ msgstr "ஒரு பதவியை தேர்வு செய்யவும்"
+
+#~ msgid "There are no posts"
+#~ msgstr "எந்த சமர்பிப்புகளுமில்லை"
+
+#~ msgid "j M Y"
+#~ msgstr "j M Y"
+
+#~ msgid "Create and add Location"
+#~ msgstr "உருவாக்கவும் மற்றும் இருப்பிடம் சேர்க்க "
+
+#~ msgid "No bookings"
+#~ msgstr "முன்பதிவுகளின்றி"
+
+#~ msgid "Please select Topic"
+#~ msgstr "தயவு செய்து தலைப்பை தேர்ந்தெடுக்கவும் "
+
+#~ msgid ""
+#~ " In the meantime, <a href=\"%s\" target=\"gd-preview\">click here to "
+#~ "preview it</a>."
+#~ msgstr ""
+#~ "இதற்கிடையில், <a href=\"%s\" target=\"gd-preview\">அதை முன் பார்க்க இங்கே கிளிக் "
+#~ "செய்யவும்</a>."
+
+#~ msgid "Sidebar"
+#~ msgstr "பக்கப்பட்டி "
+
+#~ msgid "Locations Map"
+#~ msgstr "இடங்கள் வரைபடம் "
+
+#~ msgid "The description cannot be empty"
+#~ msgstr "விளக்கம் காலியாக இருக்க முடியாது "
+
+#~ msgid ""
+#~ "We couldn't find anything under this URL... <a href=\"%s\">Go back to "
+#~ "homepage</a>."
+#~ msgstr ""
+#~ "இந்த URL கீழ் எதையும் கண்டுபிடிக்க முடியவில்லை... <a href=\"%s\">முகப்பு திரும்ப</"
+#~ "a>."
+
+#~ msgid ""
+#~ "No Comments found, <a href=\"#\" class=\"%s\" data-target=\"%s\">click "
+#~ "here to add a comment</a>."
+#~ msgstr ""
+#~ "கருத்துகள் எதுவுமில்லை, <a href=\"#\" class=\"%s\"தரவு இலக்கு =\"%s\">ஒரு "
+#~ "கருத்தை சேர்க்க இங்கே கிளிக்</a>."
+
+#~ msgid "Profiles Quicklinks"
+#~ msgstr "விவரக்குறிப்புகள் விரைவு இணைப்புகள் "
+
+#~ msgid "Upload new"
+#~ msgstr "புதிய மேலேற்று"
+
+#~ msgid "Select"
+#~ msgstr "தேர்ந்தெடு"
+
+#~ msgid "Username or password"
+#~ msgstr "பயனீட்டாளர் பெயரும் அடையாளச் சொல் "
+
+#~ msgid "No Projects/Events referenced"
+#~ msgstr "திட்டங்களும் / நிகழ்வுகளும் குறிப்பிடப்படவில்லை "
+
+#~ msgid "Expand"
+#~ msgstr "விரித்துரை"

@@ -1,0 +1,1088 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-24 14:58+0800\n"
+"PO-Revision-Date: 2016-08-23 03:17+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././library/email.php:37
+#, php-format
+msgid "%s has a new member!"
+msgstr "%s有一个新成员！"
+
+#: .././library/email.php:46
+#, php-format
+msgid ""
+"<p>Congratulations! <a href=\"%s\">Your organization has a new member</a>:</"
+"p>"
+msgstr "<p>恭喜！<a href=\"%s\">您的组织有了一个新的成员</a>：</p>"
+
+#: .././library/email.php:52
+#, php-format
+msgid ""
+"<p>Please <a href=\"%s\">click here to configure the settings of this user "
+"as a member of your Organization</a>:</p>"
+msgstr "<p>请<a href=\"%s\">点击此处以设定您组织新成员的设置</a>：</p>"
+
+#: .././library/email.php:57
+#, php-format
+msgid ""
+"<li>Accept or Reject <b>%s</b> as a member of your Organization. Currently: "
+"accepted.</li>"
+msgstr "<li>接受或拒绝<b>%s</b>作为您的组织成员。目前设定：接受</li>"
+
+#: .././library/email.php:62
+#, php-format
+msgid ""
+"<li>Determine if the content posted by <b>%s</b> will also appear under %s. "
+"Currently: yes.</li>"
+msgstr "<li>确定是否<b>%s</b>张贴的内容也会出现在%s。目前：是的</li>"
+
+#: .././library/email.php:67
+#, php-format
+msgid ""
+"<li>Choose what type of member <b>%s</b> is (Staff, Volunteer, Student, "
+"etc). Currently: 'Member'.</li>"
+msgstr "<li>设定<b>%s</b>的成员类型（员工，志愿者，学生等）。目前：'会员'</li>"
+
+#: .././library/email.php:73
+#, php-format
+msgid ""
+"<p>To view all your current members, and edit their membership settings, "
+"please click on <a href=\"%s\">%s</a>.</p>"
+msgstr ""
+"<p>要查看所有成员或编辑他们的成员类型设置，请点击<a href=\"%s\">%s</a>。</p>"
+
+#: .././library/functions.php:37
+msgid "Log in"
+msgstr "登录"
+
+#: .././library/functions.php:37
+msgid "log in"
+msgstr "登录"
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:145
+#, php-format
+msgid "<strong>%s</strong> has joined <strong>%s</strong>"
+msgstr "<strong>%s</strong>已加入<strong>%s</strong>"
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:153
+msgid "your"
+msgstr "你的"
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:155
+#, php-format
+msgid "<strong>%s</strong> has updated %s membership settings:"
+msgstr "<strong>%s</strong>已更新%s的会员设置："
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:163
+#, php-format
+msgid "<strong>%s</strong> updated the communities"
+msgstr "<strong>%s</strong>已更新社区"
+
+#: .././pop-library/dataload/actionexecuters/library/editmembership.php:46
+msgid "The user is missing"
+msgstr "找不到用户"
+
+#: .././pop-library/dataload/actionexecuters/library/editmembership.php:52
+msgid "Incorrect URL"
+msgstr "不正确的URL"
+
+#: .././pop-library/dataload/actionexecuters/library/editmembership.php:58
+msgid "The status has not been set"
+msgstr "状态尚未设置"
+
+#: .././pop-library/dataload/actionexecuters/library/invitemembers.php:22
+#, php-format
+msgid ""
+"<p><a href=\"%s\">%s</a> is inviting you to <a href=\"%s\">become their "
+"member</a>:</p>"
+msgstr "<p><a href=\"%s\">%s</a>邀请您<a href=\"%s\">成为他们的会员</a>：</p>"
+
+#: .././pop-library/dataload/actionexecuters/library/invitemembers.php:39
+#, php-format
+msgid "How to become %s's member?"
+msgstr "如何成为%s的成员？"
+
+#: .././pop-library/dataload/actionexecuters/library/invitemembers.php:45
+#, php-format
+msgid ""
+"If you do not have an account in %s yet:<br/>Register <a href=\"%s\">as an "
+"Individual</a> / <a href=\"%s\">as an Organization</a>, and while doing so, "
+"select <strong>%s</strong> in section \"My Organizations\"."
+msgstr ""
+"如果你还未在%s上有帐户：<br/>注册<a href=\"%s\">个人档案</a> / <a href=\"%s"
+"\">组织档案</a> ，然后选择<strong>%s</strong>为“我的组织”。"
+
+#: .././pop-library/dataload/actionexecuters/library/invitemembers.php:53
+#, php-format
+msgid ""
+"<p>If you have already have an account in %s:<br/>Go to <a href=\"%s\">%s</"
+"a>, select <strong>%s</strong> and submit.</p>"
+msgstr ""
+"<p>如果您已经拥有%s的帐户：<br/>到<a href=\"%s\">%s</a>，选择<strong>%s</"
+"strong>并提交</p>"
+
+#: .././pop-library/dataload/actionexecuters/library/invitemembers.php:69
+#, php-format
+msgid "%s is inviting you to become their member!"
+msgstr "%s正在邀请您成为其会员！"
+
+#: .././pop-library/dataload/actionexecuters/library/update-mycommunities.php:44
+msgid "You are not allowed to be a Community member of yourself!"
+msgstr "您不可以成为自己的社群会员！"
+
+#: .././pop-library/dataload/actionexecuters/library/update-mycommunities.php:96
+#, php-format
+msgid ""
+"The following Organization(s) will not be active, since they claim you are "
+"not their member: %s."
+msgstr "下面的组织无效，因为他们表示你不是他们的成员：%s。"
+
+#: .././pop-library/processors/abstract-classes/createupdateprofile/structures/forms/createprofileindividual-forminners-base.php:24
+#: .././pop-library/processors/abstract-classes/createupdateprofile/structures/forms/updateprofileindividual-forminners-base.php:23
+msgid "Tell us about yourself"
+msgstr "请自我介绍"
+
+#: .././pop-library/processors/abstract-classes/createupdateprofile/structures/forms/createprofileorganization-forminners-base.php:31
+#: .././pop-library/processors/abstract-classes/createupdateprofile/structures/forms/updateprofileorganization-forminners-base.php:29
+msgid "Organization Name*"
+msgstr "组织名称*"
+
+#: .././pop-library/processors/abstract-classes/createupdateprofile/structures/forms/createprofileorganization-forminners-base.php:32
+#: .././pop-library/processors/abstract-classes/createupdateprofile/structures/forms/updateprofileorganization-forminners-base.php:30
+msgid "Organization Email*"
+msgstr "组织电子邮件*"
+
+#: .././pop-library/processors/abstract-classes/typeahead-base.php:22
+#: .././pop-library/processors/layouts/typeahead.php:40
+msgid "Include members?"
+msgstr "包括会员？"
+
+#: .././pop-library/processors/buttons/buttoninners.php:43
+#: .././pop-library/processors/buttons/buttons.php:71
+msgid "Edit membership"
+msgstr "编辑成员类型"
+
+#: .././pop-library/processors/controls/anchor-controls.php:27
+msgid "Show Content from: Organization + Members"
+msgstr "显示的内容：组织＋组织会员"
+
+#: .././pop-library/processors/controls/anchor-controls.php:31
+msgid "Show Content from: Organization"
+msgstr "显示的内容：组织而已"
+
+#: .././pop-library/processors/controls/anchor-controls.php:46
+#: .././pop-library/processors/controls/anchor-controls.php:60
+#: .././pop-library/processors/formcomponents/typeahead/text-formcomponents-inputs.php:25
+msgid "Organization"
+msgstr "组织团体"
+
+#: .././pop-library/processors/controls/anchor-controls.php:52
+msgid "Members"
+msgstr "会员"
+
+#: .././pop-library/processors/createupdateprofile/blocks/profile-blocks.php:32
+#, php-format
+msgid ""
+"Send an invite for all your physical members to also become your members on "
+"<em><strong>%s</strong></em>:"
+msgstr "邀请您的网下成员也成为您在<em> <strong>%s</strong></em>的成员："
+
+#: .././pop-library/processors/createupdateprofile/blocks/profile-blocks.php:35
+msgid ""
+"<strong>Become a community: </strong>all their content in the website will "
+"also show up under your profile"
+msgstr ""
+"<strong>成为社群：</strong>成员们在网站上的所有内容将同时显示在您的档案上"
+
+#: .././pop-library/processors/createupdateprofile/blocks/profile-blocks.php:36
+msgid ""
+"<strong>Keep them engaged: </strong>all members will receive notifications "
+"of any activity by any member or your Organization"
+msgstr ""
+"<strong>让他们参与：</strong>所有成员将获得您的组织和其中成员活动的通知"
+
+#: .././pop-library/processors/createupdateprofile/blocks/profile-blocks.php:124
+msgid "Submitting..."
+msgstr "呈交中。。。"
+
+#: .././pop-library/processors/createupdateprofile/blocks/profile-blocks.php:134
+msgid "Sending..."
+msgstr "发送中..."
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:47
+msgid "Privileges"
+msgstr "特权"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:51
+msgid "Tags"
+msgstr "标签"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:55
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/select-formcomponents-inputs.php:31
+msgid "Status"
+msgstr "状态"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/select-formcomponents-inputs.php:27
+msgid "Does your organization accept members?"
+msgstr "您的组织是否接受成员？"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:29
+msgid "Last name"
+msgstr "姓氏"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:34
+msgid "Contact person"
+msgstr "联系人"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:39
+msgid "Telephone / Fax"
+msgstr "电话/传真"
+
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:106
+msgid ""
+"Become a Community: all the content posted by your members will also appear "
+"under your Organization's profile."
+msgstr "成为社区：您成员张贴的所有内容也将出现在您组织的档案页。"
+
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:110
+msgid ""
+"Status \"Active\" if the user is truly your member, or \"Rejected\" "
+"otherwise. Rejected users will not appear as your Organization's members, or "
+"contribute content."
+msgstr ""
+"如果此用户确实是您的成员，状态会是“活跃”。如果您已否定他是您的成员，状态会"
+"是“被拒绝”。被拒绝的用户不会在您的档案页上被显示，或者为您的组织贡献内容。"
+
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:114
+msgid "\"Contribute content\" will add the member's content to your profile."
+msgstr "“添加内容”，将把成员的内容添加到您的档案页。"
+
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:118
+msgid "What is the type of relationship from this member to your Organization."
+msgstr "这个成员和您的组织是什么类型的关系？"
+
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:122
+msgid ""
+"All the emails below will receive an invitation to join your Organization as "
+"members."
+msgstr "以下所有的电子邮件都将收到邀请加入您的组织成为成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:33
+msgid "Update successful!"
+msgstr "更新成功！"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:34
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:73
+msgid "Your changes have been saved."
+msgstr "你的修改已被保存。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:36
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:53
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:74
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:96
+msgid "User account"
+msgstr "用户帐号"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:40
+#, php-format
+msgid "Please %s to edit your Organizations."
+msgstr "请%s编辑您的组织。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:45
+#, php-format
+msgid "Only %s accounts can add Organizations' membership."
+msgstr "只有%s的帐户才可以添加组织的成员资格。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:52
+msgid "Invite successful!"
+msgstr "邀请成功！"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:57
+#, php-format
+msgid "Please %s to invite your members."
+msgstr "请%s以邀请您的成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:62
+#, php-format
+msgid "Only %s accounts can invite members."
+msgstr "只有%s的帐户可以邀请成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:66
+msgid "Only Organizations can invite members."
+msgstr "只有组织可以邀请成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:67
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:88
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:110
+msgid ""
+"Your Organization is configured to not accept members. Please edit your user "
+"account to change this setting."
+msgstr "您的组织设定为不接受成员。请编辑您的用户帐户以更改此设置。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:72
+msgid "Status update successful!"
+msgstr "状态更新成功！"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:78
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to update your members' information."
+msgstr "请<a href=\"%s\">登录</a>以更新您的会员信息。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:83
+#, php-format
+msgid "Only %s accounts can edit their members' information."
+msgstr "只有%s的帐户可以修改其成员的资料。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:87
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:109
+msgid "Only Organizations can have members."
+msgstr "只有组织才可以拥有成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:89
+msgid "This user is not a member of your Organization."
+msgstr "这个用户不是您组织的成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:94
+msgid "No members found."
+msgstr "没有相关成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:95
+msgid "No more members found."
+msgstr "没有发现更多的成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:100
+#, php-format
+msgid "Please %s to see your members."
+msgstr "请%s以浏览您的成员。"
+
+#: .././pop-library/processors/createupdateprofile/messagefeedbacks/messagefeedbacks-layouts.php:105
+#, php-format
+msgid "Only %s accounts can have members."
+msgstr "只有%s的帐户可以拥有成员。"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-privileges-filter.php:16
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-tags-filter.php:16
+msgid "(None)"
+msgstr "（没有）"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-privileges.php:18
+msgid "Contribute content"
+msgstr "提供内容"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-status-multiselect.php:18
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-status-select.php:18
+msgid "Active"
+msgstr "活跃"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-status-multiselect.php:19
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-status-select.php:19
+msgid "Rejected"
+msgstr "已被拒绝"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-tags.php:18
+msgid "Member"
+msgstr "会员"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-tags.php:19
+msgid "Staff"
+msgstr "员工"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-tags.php:20
+msgid "Volunteer"
+msgstr "志愿者"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-tags.php:21
+msgid "Student"
+msgstr "学生"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-tags.php:22
+msgid "Teacher/Lecturer"
+msgstr "教师/讲师"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/member-tags.php:23
+msgid "Unknown"
+msgstr "未知"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:104
+msgid "Member of which Organizations"
+msgstr "哪些组织的成员"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:108
+msgid "Are you member of any organization(s)? Which ones?"
+msgstr "你是任何组织的成员吗？哪一些？"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:32
+msgid "Organizations"
+msgstr "组织"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:36
+msgid "Individuals"
+msgstr "个人"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:110
+msgid "Loading Organizations"
+msgstr "加载组织档案"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:114
+msgid "Loading Individuals"
+msgstr "加载个人档案"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:127
+msgid "No Organizations found"
+msgstr "找不到组织档案"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:131
+msgid "No Individuals found"
+msgstr "找不到个人档案"
+
+#: .././pop-library/processors/forms/formgroups.php:87
+msgid ""
+"Please select the organizations you are a member of: all your content will "
+"also show under their profiles."
+msgstr ""
+"请选择您的组织（以成为它们的成员）：您所有的内容也会显示在它们的档案页。"
+
+#: .././pop-library/processors/messages.php:25
+msgid "No Organizations"
+msgstr "没有组织"
+
+#: .././pop-library/processors/widgetries.php:40
+#: .././pop-library/processors/widgetries.php:41
+msgid "Member of"
+msgstr "机构"
+
+#: .././validation.php:45
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:50
+msgid ""
+"Error: <b>User Role Editor</b> is not installed/activated. Without it, "
+"<b>User Role Editor PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>User Role Editor</b> is not installed/activated. Without it, "
+"<b>User Role Editor PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:54
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>User Role Editor</b> installed, or "
+"otherwise <b>User Role Editor PoP Processors</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>User Role Editor</b> installed, or "
+"otherwise <b>User Role Editor PoP Processors</b> might not function properly."
+
+#: .././validation.php:58
+msgid ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>User Role Editor PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>User Role Editor PoP Processors</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:62
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Core Processors</b> installed, "
+"or otherwise <b>User Role Editor PoP Processors</b> might not function "
+"properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Core Processors</b> installed, "
+"or otherwise <b>User Role Editor PoP Processors</b> might not function "
+"properly."
+
+#~ msgid "%s latest posts"
+#~ msgstr "%s 最新帖子"
+
+#~ msgid "%s latest comments"
+#~ msgstr "%s 最新评论"
+
+#~ msgid "View %1$s profile and get in touch through %2$s."
+#~ msgstr "见%1$s 及联络 %2$s."
+
+#~ msgid "Project"
+#~ msgstr "項目"
+
+#~ msgid "Story"
+#~ msgstr "故事"
+
+#~ msgid "Announcement"
+#~ msgstr "公告"
+
+#~ msgid "Discussion"
+#~ msgstr "讨论"
+
+#~ msgid "Featured"
+#~ msgstr "特点"
+
+#~ msgid "Event"
+#~ msgstr "活动"
+
+#~ msgid "Resource"
+#~ msgstr "资源"
+
+#~ msgid ""
+#~ "MESYM.com is a platform for environmental movements in Malaysia. There "
+#~ "are many good actions being done out there. Our goal is to bring them "
+#~ "together. We connect the green dots."
+#~ msgstr ""
+#~ "MESYM.com 是一个推动马来西亚环境保护的平台。这里拥有许多您可以参与的环境保"
+#~ "护活动与项目。我们最主要的目的为聚集这些热爱环境人士在这个平台上。我们把马"
+#~ "来西亚绿色勇士们联系起来。"
+
+#~ msgid ""
+#~ " Join our environmental community and find out who is doing what, where "
+#~ "and when."
+#~ msgstr "现在就参与我们的团队，开始寻找绿色活动，预知更多的详情与时间。"
+
+#~ msgid " on %s."
+#~ msgstr "关于%s."
+
+#~ msgid "View all %s"
+#~ msgstr "见所有 %s"
+
+#~ msgid "Add your %s"
+#~ msgstr "输入%s "
+
+#~ msgid "Upcoming Events"
+#~ msgstr "最新活动"
+
+#~ msgid "Upcoming and Past Events"
+#~ msgstr "最新与过去的活动"
+
+#~ msgid "Environmental Projects"
+#~ msgstr "环境保护活动项目"
+
+#~ msgid "Environmental Stories"
+#~ msgstr "关于环境保护的故事"
+
+#~ msgid "Environmental Discussions"
+#~ msgstr "环境保护讨论事项"
+
+#~ msgid "Environmental Announcements"
+#~ msgstr "环境保护公告"
+
+#~ msgid "Featured Articles"
+#~ msgstr "专栏"
+
+#~ msgid "MESYM Blogs"
+#~ msgstr "MESYM部落格"
+
+#~ msgid "Environmental Resources"
+#~ msgstr "环境资源"
+
+#~ msgid "People"
+#~ msgstr "人"
+
+#~ msgid "Organization Profile"
+#~ msgstr "组织结构"
+
+#~ msgid "Individual Profile"
+#~ msgstr "个人结构"
+
+#~ msgid "Upcoming Event"
+#~ msgstr "最新活动"
+
+#~ msgid "Current Event"
+#~ msgstr "现有活动"
+
+#~ msgid "Past Event"
+#~ msgstr "过往活动"
+
+#~ msgid "The dates/time cannot be empty"
+#~ msgstr "日期与时间不能为空"
+
+#~ msgid ""
+#~ "Aiyoooo, it seems there is nothing here. Where else would you like to go?"
+#~ msgstr "糟糕，无法搜索任何资讯。请到另一个主题"
+
+#~ msgid "Ops, this page doesn't exist!"
+#~ msgstr "不好意思，该网页不存在"
+
+#~ msgid "Latest"
+#~ msgstr "最近"
+
+#~ msgid "Add new"
+#~ msgstr "输入新项目"
+
+#~ msgid "%sBack"
+#~ msgstr "%s回去"
+
+#~ msgid "%sNavigator"
+#~ msgstr "%s导航"
+
+#~ msgid "Details"
+#~ msgstr "详细信息"
+
+#~ msgid "Full view"
+#~ msgstr "全面"
+
+#~ msgid "Thumbnail"
+#~ msgstr "縮略圖"
+
+#~ msgid "Map"
+#~ msgstr "地图"
+
+#~ msgid "Calendar"
+#~ msgstr "日历"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"
+
+#~ msgid "View/Preview"
+#~ msgstr "查看/預覽"
+
+#~ msgid "FAQ: Adding Content"
+#~ msgstr "常见问题：添加内容"
+
+#~ msgid "FAQ: Registration"
+#~ msgstr "常见问题：注册"
+
+#~ msgid "The Drivers"
+#~ msgstr "驾驶人士"
+
+#~ msgid "The Advisors"
+#~ msgstr "顾问"
+
+#~ msgid "The Volunteers"
+#~ msgstr "自愿者"
+
+#~ msgid "Show Help"
+#~ msgstr "协助"
+
+#~ msgid "Current members"
+#~ msgstr "目前成员"
+
+#~ msgid ""
+#~ "The users listed below have declared themselves to be members of your "
+#~ "Organization. You can click on \"Edit Membership\" to edit the settings "
+#~ "for each one of them:"
+#~ msgstr ""
+#~ "下面列出的用户都已声明是您的组织的成員。您可以点击“编辑成員”来设置他们："
+
+#~ msgid "University teachers/students"
+#~ msgstr "大学教授与学生"
+
+#~ msgid "NGO volunteers"
+#~ msgstr "自愿者"
+
+#~ msgid "Company staff"
+#~ msgstr "公司职员"
+
+#~ msgid "Latest Content"
+#~ msgstr "内容"
+
+#~ msgid "Projects"
+#~ msgstr "工程项目"
+
+#~ msgid "Stories"
+#~ msgstr "故事"
+
+#~ msgid "Announcements"
+#~ msgstr "公告"
+
+#~ msgid "Discussions"
+#~ msgstr "讨论"
+
+#~ msgid "Links"
+#~ msgstr "链接"
+
+#~ msgid "Publishing Status"
+#~ msgstr "发布状态"
+
+#~ msgid "Title*"
+#~ msgstr "题目＊"
+
+#~ msgid "Login/Register"
+#~ msgstr "登入／注册"
+
+#~ msgid "Yay! Your %s was created successfully!"
+#~ msgstr "恭喜！您的%s已成功创建"
+
+#~ msgid "Yay! Your %s was updated successfully!"
+#~ msgstr "恭喜！您的%s 已更新"
+
+#~ msgid "Please %s or register %s / %s to create your %s."
+#~ msgstr "请%s 或注册%s / %s创建您的%s"
+
+#~ msgid ""
+#~ "Please <a href=\"%s\">log in</a> with a %s account to create your %s."
+#~ msgstr "请<a href=\"%s\">log in</a> 同时%s户口来创建您的%s"
+
+#~ msgid "%s updated successfully."
+#~ msgstr "%s已更新"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+#~ msgstr "请<a href=\"%s\">登入</a>编辑您的%s"
+
+#~ msgid "Please <a href=\"%s\">log in</a> with a %s account to edit your %s."
+#~ msgstr "请<a href=\"%s\">登入</a> 以及%s 户口以编辑您的 %s."
+
+#~ msgid "Ops, it seems you have no rights to edit this %s."
+#~ msgstr "不好意思, 您无权编辑这%s."
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "谁能编辑内容在%s?"
+
+#~ msgid "Anyone."
+#~ msgstr "任何人"
+
+#~ msgid "Is it free?"
+#~ msgstr "请问是免费的吗？"
+
+#~ msgid "Yes."
+#~ msgstr "是的"
+
+#~ msgid "Do I need to log in to add content?"
+#~ msgstr "我需要登入以添加您的内容吗？"
+
+#~ msgid "Yes, only registered users can add content."
+#~ msgstr "是的，只有注册用户可添加内容"
+
+#~ msgid "Do the users of the website also need to log in to read my content?"
+#~ msgstr "请问本网站读者也需要登入才能阅读我的内容吗？"
+
+#~ msgid "No, anyone can access the website and read all the content."
+#~ msgstr "不需要。任何人都可游览本网页以及阅读内容。"
+
+#~ msgid "Will my content be published immediately?"
+#~ msgstr "请问我的内容会立即发布吗？"
+
+#~ msgid ""
+#~ "No. Before that, our moderators must approve the content, in order to "
+#~ "avoid spam and inappropriate content."
+#~ msgstr ""
+#~ "不会。内容发布之前，我们的版主将会审查内容以防止发布不道德与不符合的内容。"
+
+#~ msgid "Where will my content appear?"
+#~ msgstr "请问我的内容会出现在哪里？"
+
+#~ msgid ""
+#~ "As soon as it gets published, it will appear in our homepage, in the "
+#~ "corresponding section (Events, Projects, etc), and in your profile.<br/"
+#~ "><br/>In addition, if you are member of any Community, it will also "
+#~ "appear under their profile."
+#~ msgstr ""
+#~ "如内容以发布，它将会出现在您的主页里的相关截面（如活动，项目等），以及您的"
+#~ "简介里。<br/><br/>此外，如果您也是社区里的会员，内容也会出现在他们的简介"
+#~ "里。"
+
+#~ msgid "Can I share my post with more authors?"
+#~ msgstr "请问我可以跟更多的作者分享我的帖子吗？"
+
+#~ msgid ""
+#~ "Yes. In field 'Authors' you can add more users (either Organizations or "
+#~ "Individuals) to own the post. They will both appear as authors and have "
+#~ "full editing access."
+#~ msgstr ""
+#~ "当然可以。请在“作者“里添加更多的用户（如组织或个人）来拥有您的帖子。一旦添"
+#~ "加他们为”作者“，他们也能拥有编辑的权限。"
+
+#~ msgid "Can I request volunteers?"
+#~ msgstr "请问我能要求志愿者吗？"
+
+#~ msgid ""
+#~ "Yes. Choose 'Yes' in field 'Volunteers needed?', each time someone "
+#~ "applies to volunteer for your Project/Event/Announcement you will receive "
+#~ "an email immediately with the person's information.<br/><br/>We do not "
+#~ "engage the volunteer in any way."
+#~ msgstr ""
+#~ "是的。请点击“要求志愿者”，任何的志愿者加入您的项目，您会立即收到一封电邮，"
+#~ "电邮里将出现志愿者的基本个人资料。<br/><br/>我们不需要任何的志愿者。"
+
+#~ msgid "Is it free to register in the website?"
+#~ msgstr "请问会员注册是免费的吗？"
+
+#~ msgid "What are the benefits of registering?"
+#~ msgstr "注册为会员会得到什么好处？"
+
+#~ msgid ""
+#~ "You will be able to post all your content (events, projects, discussions, "
+#~ "etc), look for volunteers, and appear in the User Directory."
+#~ msgstr ""
+#~ "您将可发表或发布您的内容（如活动，项目，讨论等），要求志愿者，以及内容出现"
+#~ "在用户的目录里。"
+
+#~ msgid "What is the User Directory?"
+#~ msgstr "什么是会员目录？"
+
+#~ msgid "What is the difference between Organization/Individual accounts?"
+#~ msgstr "请问组织账号与个人账号有什么分别？"
+
+#~ msgid ""
+#~ "Organizations can have 'members' in the website, and each piece of "
+#~ "content posted by any member will also appear under the Organization "
+#~ "profile page."
+#~ msgstr ""
+#~ "组织账号能够拥有自己的会员，以及任何的会员发表将出现在组织的简介里。"
+
+#~ msgid "What's going on all over Malaysia."
+#~ msgstr "马来西亚怎么回事了？"
+
+#~ msgid "Volunteer for projects from many NGOs, or even start your own!"
+#~ msgstr "有来自非政府组织项目的志愿者，或着自己组织项目。"
+
+#~ msgid ""
+#~ "After volunteering, post your photo blog, share your experience with the "
+#~ "world."
+#~ msgstr ""
+#~ "当您参与了志愿者，您可以上传你的照片日记，分享您的感想与经历给全世界"
+
+#~ msgid "Have vacancies? Need green-minded people? Post it here."
+#~ msgstr "有空缺吗？想要认识更多的绿色爱好者？请在这里发帖"
+
+#~ msgid ""
+#~ "Anything and everything: what do you want to express concerning the "
+#~ "environment situation in Malaysia?"
+#~ msgstr "任何事物： 您有什么想表达关于马来西亚的环境保护的形势？"
+
+#~ msgid ""
+#~ "Browse the living database of Organizations and find out who is doing "
+#~ "what, when and where."
+#~ msgstr "游览我们的组织资料库，知道更多活动，时间与地点。"
+
+#~ msgid "Categories"
+#~ msgstr "组别"
+
+#~ msgid "Volunteers Needed?"
+#~ msgstr "需要志愿者？"
+
+#~ msgid ""
+#~ "Do you need volunteers? Each time a user applies to volunteer, you will "
+#~ "get a notification email with the volunteer's contact information."
+#~ msgstr ""
+#~ "您需要志愿者吗？每当用户注册为志愿者，您将收到电邮通知以得到该志愿者的联络"
+#~ "资料。"
+
+#~ msgid "Volunteer!"
+#~ msgstr "志愿者！"
+
+#~ msgid "Events"
+#~ msgstr "活动"
+
+#~ msgid "Past Events"
+#~ msgstr "过往活动"
+
+#~ msgid "Content"
+#~ msgstr "内容"
+
+#~ msgid "User"
+#~ msgstr "用户"
+
+#~ msgid "Users"
+#~ msgstr "用户"
+
+#~ msgid "Featured article"
+#~ msgstr "推荐文章"
+
+#~ msgid "Featured articles"
+#~ msgstr "推荐文章"
+
+#~ msgid "Blog entries"
+#~ msgstr "部落客输入"
+
+#~ msgid "Resources"
+#~ msgstr "资源"
+
+#~ msgid "Individual"
+#~ msgstr "个人"
+
+#~ msgid "Sponsor"
+#~ msgstr "赞助商"
+
+#~ msgid "Sponsors"
+#~ msgstr "赞助商"
+
+#~ msgid "Featured Community"
+#~ msgstr "特色社区"
+
+#~ msgid "Featured Communities"
+#~ msgstr "特色社区"
+
+#~ msgid "No %s found."
+#~ msgstr "无法找到 %s"
+
+#~ msgid "No more %s found."
+#~ msgstr "无法找到 %s"
+
+#~ msgid "Please %s or register %s / %s to access your %s."
+#~ msgstr "请 %s或注册%s / %s 以登入您的%s."
+
+#~ msgid ""
+#~ "Your account has no access to this functionality. Please <a href=\"%s"
+#~ "\">log in</a> with a different user account."
+#~ msgstr "您的户口无法登入。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid ""
+#~ "Your account has no permission to edit this %s. Please <a href=\"%s\">log "
+#~ "in</a> with a different user account."
+#~ msgstr "您的户口无权编辑这%s。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid "<em>Many thanks to <strong>our Sponsors</strong>:</em>"
+#~ msgstr "<em>非常感谢<strong>我们的赞助商</strong>:</em>"
+
+#~ msgid "The website is currently in beta, please forgive all the bugs."
+#~ msgstr "该网站属于测试阶段，如有系统错误，请原谅。"
+
+#~ msgid "About us"
+#~ msgstr "关于我们"
+
+#~ msgid "Send message to:"
+#~ msgstr "发送讯息给："
+
+#~ msgid "Volunteer for:"
+#~ msgstr "志愿者为："
+
+#~ msgid "In response to:"
+#~ msgstr "回复给："
+
+#~ msgid "Ops, there's nothing here!"
+#~ msgstr "不好意思，这里没东西"
+
+#~ msgid "No categories"
+#~ msgstr "无组别"
+
+#~ msgid "No Categories"
+#~ msgstr "无组别"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "加载更多"
+
+#~ msgid "Post"
+#~ msgstr "帖子"
+
+#~ msgid "Date"
+#~ msgstr "日期"
+
+#~ msgid "When"
+#~ msgstr "时间"
+
+#~ msgid "Loading"
+#~ msgstr "加载中"
+
+#~ msgid "More %s"
+#~ msgstr "%s 更多"
+
+#~ msgid "Member %s"
+#~ msgstr "队员%s"
+
+#~ msgid "Related %s"
+#~ msgstr "%s相关"
+
+#~ msgid "Search Results for:"
+#~ msgstr "搜索结果："
+
+#~ msgid "Ops, nothing found here!"
+#~ msgstr "不好意思，没搜索到任何东西"
+
+#~ msgid "Apply"
+#~ msgstr "申请"
+
+#~ msgid "From"
+#~ msgstr "从"
+
+#~ msgid "To"
+#~ msgstr "给"
+
+#~ msgid "Su"
+#~ msgstr "周日"
+
+#~ msgid "Mo"
+#~ msgstr "周一"
+
+#~ msgid "Tu"
+#~ msgstr "周二"
+
+#~ msgid "We"
+#~ msgstr "周三"
+
+#~ msgid "Th"
+#~ msgstr "周四"
+
+#~ msgid "Fr"
+#~ msgstr "周五"
+
+#~ msgid "Sa"
+#~ msgstr "周六"
+
+#~ msgid "January"
+#~ msgstr "一月"
+
+#~ msgid "February"
+#~ msgstr "二月"
+
+#~ msgid "March"
+#~ msgstr "三月"
+
+#~ msgid "April"
+#~ msgstr "四月"
+
+#~ msgid "May"
+#~ msgstr "五月"
+
+#~ msgid "June"
+#~ msgstr "六月"
+
+#~ msgid "July"
+#~ msgstr "七月"
+
+#~ msgid "August"
+#~ msgstr "八月"
+
+#~ msgid "September"
+#~ msgstr "九月"
+
+#~ msgid "October"
+#~ msgstr "十月"
+
+#~ msgid "November"
+#~ msgstr "十一月"
+
+#~ msgid "December"
+#~ msgstr "十二月"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "您的%s成功被创造"
+
+#, fuzzy
+#~ msgid "My Organizations"
+#~ msgstr "Organisasi-organisasi"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "F jS, Y"
+#~ msgstr "F jS, Y"
+
+#~ msgid "F, Y"
+#~ msgstr "F, Y"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "j M Y"
+#~ msgstr "j M Y"

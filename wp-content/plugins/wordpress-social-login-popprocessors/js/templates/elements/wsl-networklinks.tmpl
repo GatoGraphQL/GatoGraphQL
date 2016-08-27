@@ -1,0 +1,7 @@
+<div class="{{class}}">
+	{{#each networklinks}}
+		<a {{#generateId context=../. group="links"}}{{../id}}{{/generateId}} rel="nofollow" href="#" title="{{title}}" data-provider="{{id}}" data-url="{{{url}}}" class="{{../classes.link}} socialmedia-{{short-name}}">
+			<i class="fa {{fontawesome}}"></i>{{title}}
+		</a>
+	{{/each}}
+</div>

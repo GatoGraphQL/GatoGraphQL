@@ -1,0 +1,14 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" data-addmarker-template="{{addmarker-template}}">
+	<div class="{{classes.wrapper}}">
+		<div class="{{classes.map}}">
+			{{#withModule . "map-individual"}}
+				{{enterModule ../.}}
+			{{/withModule}}
+		</div>
+		<div class="{{classes.typeahead}}">
+			{{#withModule . "locations"}}
+				{{enterModule ../.}}
+			{{/withModule}}
+		</div>
+	</div>
+</div>

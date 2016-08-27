@@ -1,0 +1,13 @@
+{{#with itemObject}}
+	<div class="datetime {{../class}}">
+		{{#withModule ../. "layout-downloadlinks"}}
+			<div class="downloadlinks {{../../classes.downloadlinks}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/withModule}}	
+		<div class="calendar">
+			<span class="date"><i class="fa fa-fw fa-calendar"></i>{{dates}}</span>{{{../separator}}}
+			<span class="time"><i class="fa fa-fw fa-clock-o"></i>{{times}}</span>
+		</div>
+	</div>
+{{/with}}

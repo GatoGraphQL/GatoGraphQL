@@ -1,0 +1,5 @@
+{{#each block-settings-ids.blockunits-frame}}
+	{{#withBlock ../. this}}
+		{{enterModule . parentContext=../../.}}
+	{{/withBlock}}
+{{/each}}

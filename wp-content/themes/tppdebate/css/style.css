@@ -1,0 +1,383 @@
+/*---------------------------------------------------------------------------------------------------------------
+ *
+ * MESYM website main .css file
+ *
+ * ---------------------------------------------------------------------------------------------------------------*/
+
+/*
+COLORS used in the Website:
+@background: #4da099; rgb(77, 160, 153)
+@info: #cde6db; rgb(205, 230, 219)
+@info border: #cadcd4; rgb(172, 209, 193)
+@dark-gray button: #4d4d4f; rgb(77, 77, 79);
+@link: #11a939; rgb(17, 169, 57); 
+@light-gray button: #dcddde; rgb(220, 221, 222);
+@font: #7a7a7b; rgb(122, 122, 123);
+@font-darker: #7a7a7b;
+@lightest gray: #f1f1f2; rgb(241, 241, 242);
+*/
+
+.background-screen {
+  display: none;
+}
+body.sliding .background-screen {
+  display: block;
+}
+body.sliding .background-screen,
+body.sliding .loading-screen {
+    background-color: #edf9f7;
+}
+body.sliding .background-screen { 
+  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
+  background: #edf9f7 url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1440x900.png) no-repeat fixed center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+@media (min-width: 1440px) {
+  body.sliding .background-screen { 
+    background-image: url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1920x1080.png);
+  }
+}
+
+body.sliding, 
+body.sliding #ps-side, 
+body.sliding #ps-sideinfo, 
+body.sliding #ps-main > .container-fluid, 
+#ps-addons,
+#ps-background .jumbotron {
+    background-color: transparent;
+}
+.quicklinkgroup-top,
+body.sliding #ps-hover .container-fluid,
+.wp-caption,
+.simpleview .content-body .content .sidebar-widget {
+    background-color: #edf9f7;
+}
+
+/* FullCalendar */
+.fc-view table thead {
+	font-weight: bold;
+	background-color: #dcddde;
+}
+.fc-view.fc-view-month.fc-grid {
+	background-color: #f1f1f2;
+	color: #4d4d4f;
+}
+.fc-event {
+	border: 1px solid #4da099;
+	background-color: #cde6db;
+	text-align: center;
+}
+.fc-row {
+	background-color: #fff;
+}
+.fc-view.fc-view-month.fc-grid {
+	background-color: #fff;
+}
+.fc-other-month {
+	background-color: #f1f1f2;
+}
+
+
+#ps-main .fullview .sidebar,
+#ps-quickview .fullview .sidebar,
+#ps-main .horizontal.sidebar > .pop-structureinner,
+#ps-quickview .horizontal.sidebar > .pop-structureinner {
+  background-color: #cde6db;
+}
+.carousel.widget.widget-info {
+  background-color: #cde6db;
+  border: 1px solid #cadcd4;
+}
+.block-posts-carousel .carousel.widget.widget-info .carousel-row {
+  border-top: 1px dashed #cadcd4;
+}
+/* Add a different color for the Upcoming Events widget */
+.block-events-carousel .carousel.widget.widget-info {
+  background-color: #d9edf7;
+  border: 1px solid #bce8f1;
+}
+.block-posts-carousel.block-events-carousel .carousel.widget.widget-info .carousel-row {
+  border-top: 1px dashed #bce8f1;
+}
+
+.block-posts-carousel .carousel.widget.widget-info .carousel-row:first-child {
+  border-top: 0;
+}
+.blockgroup-home-welcome.jumbotron {
+  /*background-color: #cde6db;*/
+  background-color: #fff;
+  border: 1px solid #cadcd4;
+}
+/*.blockgroup-home-welcome.jumbotron > .blocksection-extensions > .block-homewelcome {
+  background-color: #cde6db;
+}*/
+
+
+#ps-side .nav a {
+    color: #4d4d4f;
+}
+#ps-side .nav a:hover {
+    background-color: #4da099;
+}
+
+a.loading {
+    background-color: rgba(69, 144, 138, 0.3);
+}
+.pop-spinner {
+    background-color: rgba(69, 144, 138, 0.85);
+}
+
+
+/* User Avatar */
+.thumbnail {
+	background-color: #f1f1f2;
+}
+
+
+/* Gallery */
+/*.gallery dl.gallery-item img {
+	background-color: #FFFFFF;
+	border: 1px solid #dcddde;
+}
+.gallery dl.gallery-item img:hover {
+	background-color: #4da099;
+}*/
+.gallery dl.gallery-item:hover {
+  background-color: #4da099;
+}
+
+/* Highlight elements */
+.pop-highlight {
+  -moz-animation: flash 2s ease-out;
+  -moz-animation-iteration-count: 1;
+
+  -webkit-animation: flash 2s ease-out;
+  -webkit-animation-iteration-count: 1;
+
+  -ms-animation: flash 2s ease-out;
+  -ms-animation-iteration-count: 1;
+}
+@-webkit-keyframes flash {
+    0% { background-color:none;}
+    50% { background-color:#4da099;}        
+    100% {background-color:none;}
+}
+@-moz-keyframes flash {
+    0% { background-color:none;}
+    50% { background-color:#4da099;}        
+    100% {background-color:none;}
+}
+@-ms-keyframes flash {
+    0% { background-color:none;}
+    50% { background-color:#4da099;}        
+    100% {background-color:none;}
+}
+
+
+/*body.sliding {
+	background-color: #4da099;
+}*/
+
+
+.nav .active > a:hover {
+	color: #4da099;
+}
+
+
+
+
+/*body.sliding #ps-main > .container-fluid,
+body.sliding #ps-hover .container-fluid {
+  background-color: #f1f1f2;
+}
+body.sliding #ps-side,
+body.sliding #ps-navigator,
+body.sliding #ps-sideinfo {
+  background-color: #4d4d4f;
+}
+#ps-side h1,
+#ps-side h2,
+#ps-side h3,
+#ps-navigator h1,
+#ps-navigator h2,
+#ps-navigator h3,
+#ps-navigator .text-inverse .excerpt,
+#ps-navigator .text-inverse .authors,
+#ps-side .carousel-indicators {
+  color: #f1f1f2;
+}
+#ps-side .block-title,
+#ps-navigator .block-title,
+#ps-sideinfo .block-title,
+#ps-side .description,
+#ps-navigator .description {
+  color: #f1f1f2;
+}*/
+
+#ps-side a.logo img {
+  padding: 10px 0;
+}
+a.logo img:hover {
+	background-color: #4da099;
+}
+#loading-logo {
+  max-width: 300px;
+  margin: 20px;
+}
+@media (min-width: 400px) {
+  #loading-logo {
+    max-width: 360px;
+  }  
+}
+@media (min-width: 500px) {
+  #loading-logo {
+    max-width: 460px;
+  }  
+}
+@media (min-width: 600px) {
+  #loading-logo {
+    max-width: 560px;
+  }  
+}
+@media (min-width: 700px) {
+  #loading-logo {
+    max-width: 660px;
+  }  
+}
+
+#ps-main .fullview > .wrapper h1.title > a {
+    color: #4d4d4f;
+}
+
+/*.side-sections-menu {
+	background-color: #f1f1f2;
+}
+*/
+
+
+.label-none {
+	color: #4d4d4f;
+}
+.label-links {
+  background-color: #36b4a7;
+}
+.label-links[href]:hover,
+.label-links[href]:focus {
+  background-color: #37444e;
+}
+.label-discussions,
+.label-articles {
+  background-color: #337ab7;
+}
+.label-discussions[href]:hover,
+.label-discussions[href]:focus,
+.label-articles[href]:hover,
+.label-articles[href]:focus {
+  background-color: #286090;
+}
+.label-future-events {
+  background-color: #5cb85c;
+}
+.label-future-events[href]:hover,
+.label-future-events[href]:focus {
+  background-color: #449d44;
+}
+.label-current-events {
+  background-color: #ca953a;
+}
+.label-current-events[href]:hover,
+.label-current-events[href]:focus {
+  background-color: #ad953a;
+}
+.label-past-events {
+  background-color: #1ab394;
+}
+.label-past-events[href]:hover,
+.label-past-events[href]:focus {
+  background-color: #199394;
+}
+.label-stories {
+  background-color: #5bc0de;
+}
+.label-stories[href]:hover,
+.label-stories[href]:focus {
+  background-color: #31b0d5;
+}
+.label-projects {
+  background-color: #f0ad4e;
+}
+.label-projects[href]:hover,
+.label-projects[href]:focus {
+  background-color: #ec971f;
+}
+.label-featured {
+  background-color: #d9534f;
+}
+.label-featured[href]:hover,
+.label-featured[href]:focus {
+  background-color: #c9302c;
+}
+.label-announcements {
+  background-color: #9c3460;
+}
+.label-announcements[href]:hover,
+.label-announcements[href]:focus {
+  background-color: #69302c;
+}
+
+#ps-sideinfo .blocksection-controls.top .btn {
+	background-color: #f1f1f2;
+}
+
+.pop-blockgroup > .blocksection-controls.bottom,
+body.embed .pop-blockgroup > .blocksection-controls.right {
+  background-color: #f1f1f2;
+}
+
+
+/*#ps-background .jumbotron {
+  background-color: #f1f1f2;
+}
+*/
+#ps-top.pop-search-visible .nav-quicklink {
+    margin-right: 111px;
+}
+
+#loadingscreen > .title {
+  display: none;
+}
+#loadingscreen .description {
+  margin: 20px 0 40px;
+}
+
+/* Add Content menu in the top: "Discussion" and "as Link" have their own hover:background-color change */
+#ps-top-menu-addcontent li> a:hover {
+    background-color: #4da099;
+}
+
+#notifications-count,
+#ps-top .scroll-notifications .preview.notification-layout {
+    background-color: #4da099;
+}
+
+@media (min-width: 768px) {
+  #ps-background .pop-background-img {
+    max-width: 640px; 
+    max-height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  #ps-background .pop-background-img {
+    max-width: 850px; 
+    max-height: 560px;
+  }
+}
+@media (min-width: 1200px) {
+  #ps-background .pop-background-img {
+    max-width: 940px; 
+    max-height: 640px;
+  }
+}

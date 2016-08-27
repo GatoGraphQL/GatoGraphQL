@@ -1,0 +1,116 @@
+<div class="{{class}} {{runtime-class}} {{#if bs.feedback.stop-fetching}}pop-stopfetching{{/if}}" {{#generateId}}{{id}}{{/generateId}} data-settings-id="{{settings-id}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+
+	{{#withModule . "controlgroup-top"}}
+		<div class="blocksection-controls {{../classes.controlgroup-top}}">
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+			
+	{{#if bs.feedback.title}}
+		<div class="blocksection-title {{classes.blocksection-title}}">
+			<{{title-htmltag}} class="title {{classes.block-title}}">
+				{{#if bs.feedback.title-link}}
+					<a href="{{bs.feedback.title-link}}">{{{bs.feedback.title}}}</a>
+				{{else}}
+					{{{bs.feedback.title}}}
+				{{/if}}
+			</{{title-htmltag}}>
+		</div>
+	{{/if}}
+
+	{{#if add-clearfixdiv}}<div class="clearfix"></div>{{/if}}
+	
+	{{{description-top}}}
+
+	{{#withModule . "controlgroup-bottom"}}
+		<div class="blocksection-controls {{../classes.controlgroup-bottom}}">
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+
+	{{#withModule . "submenu"}}		
+		<div class="blocksection-submenu">
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+
+	{{#if show-filter}}
+		{{#withModule . "filter"}}		
+			<div class="blocksection-filter">
+				{{enterModule ../.}}
+			</div>
+		{{/withModule}}
+	{{/if}}
+
+	{{#if messagefeedback-top}}
+		{{#withModule . "messagefeedback"}}
+			<div class="blocksection-messagefeedback">
+				{{enterModule ../.}}
+			</div>
+		{{/withModule}}
+	{{/if}}
+
+	{{#if show-disabled-layer}}
+		<div class="pop-disabledlayer hidden">
+			<div class="layer"></div>
+			<div class="spinner">
+				<div class="pop-box">
+					<div class="loading alert alert-warning alert-sm">
+						{{{titles.loading}}}
+					</div>
+				</div>
+			</div>
+		</div>
+	{{/if}}
+	{{#withModule . "latestcount"}}
+		<div class="blocksection-latestcount">
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+
+	{{#withModule . "status"}}
+		<div class="blocksection-status">
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+
+	{{{description}}}
+
+	{{!This will be empty for BlockGroup}}
+	{{#if settings-ids.block-inners}}
+		<div class="blocksection-inners clearfix {{classes.blocksection-inners}}">
+			{{#each settings-ids.block-inners}}
+				{{#withBlock ../. this}}
+					{{enterModule ../../. itemDBKey=../../bs.db-keys.db-key items=../../bs.dataset}}
+				{{/withBlock}}
+			{{/each}}
+		</div>
+	{{/if}}
+
+	{{#if messagefeedback-bottom}}
+		{{#withModule . "messagefeedback"}}
+			<div class="blocksection-messagefeedback">
+				{{enterModule ../.}}
+			</div>
+		{{/withModule}}
+	{{/if}}
+
+	{{#withModule . "fetchmore"}}
+		<div class="blocksection-fetchmore">
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+
+	{{#if add-clearfixdiv}}<div class="clearfix"></div>{{/if}}
+
+	{{!Needed to render the BlockGroup}}
+	{{#if template-ids.block-extensions}}
+		<div class="blocksection-extensions clearfix {{classes.blocksection-extensions}}">
+			{{#each template-ids.block-extensions}}
+				{{applyLightTemplate this context=../.}}
+			{{/each}}
+		</div>
+	{{/if}}
+
+	{{{description-bottom}}}
+</div>

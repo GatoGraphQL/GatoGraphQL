@@ -1,0 +1,9 @@
+{{#with itemObject}}
+	<div class="{{../classes.wrapper}}">
+		{{#each ../modules}}
+			<div class="{{../../classes.widget-wrapper}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/each}}
+	</div>
+{{/with}}

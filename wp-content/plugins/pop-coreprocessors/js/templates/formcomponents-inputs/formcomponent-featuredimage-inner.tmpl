@@ -1,0 +1,27 @@
+<div class="featuredimage-container pull-left" {{#generateId}}{{id}}{{/generateId}}>
+	<a {{#generateId group='set'}}{{id}}{{/generateId}} href="#" class="visible-loggedin">
+		{{#if value}}
+			<img src="{{img.src}}" width="{{img.width}}" height="{{img.height}}" class="{{classes.img}}">
+		{{else}}
+			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}">
+		{{/if}}
+	</a>
+	<span class="visible-notloggedin">
+		{{#if value}}
+			<img src="{{img.src}}" width="{{img.width}}" height="{{img.height}}" class="{{classes.img}}">
+		{{else}}
+			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}">
+		{{/if}}
+	</span>
+	<div class="{{classes.options}} visible-loggedin">
+		<a {{#generateId group='set'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn set {{classes.set-btn}}"><span class="glyphicon glyphicon-upload"></span> {{titles.btn-add}}</a>
+		{{#if value}}		
+			<a {{#generateId group='remove'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn remove {{classes.remove-btn}}"><span class="glyphicon glyphicon-remove-sign"></span> {{titles.btn-remove}}</a>
+		{{/if}}
+	</div>
+	<div class="{{classes.options}} visible-notloggedin">
+		{{{titles.usernotloggedin}}}
+	</div>
+</div>
+<input type="hidden" value="{{value}}" name="{{formcomponent-name}}" id="{{lastGeneratedId}}-{{formcomponent-name}}" class="form-control">
+<div class="clearfix"></div>

@@ -1,0 +1,964 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Doc Embedder\n"
+"POT-Creation-Date: 2012-11-20 08:11-0600\n"
+"PO-Revision-Date: 2012-12-12 20:22+0200\n"
+"Last-Translator: Kevin Davis <kev@tnw.org>\n"
+"Language-Team: Kevin Davis <wpp@tnw.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: functions-admin.php:259
+msgid "Import"
+msgstr "Імпорт"
+
+#: functions-admin.php:270
+msgid "Performing full import..."
+msgstr "Виконую повний імпорт ..."
+
+#: functions-admin.php:274 functions-admin.php:299
+msgid "Importing profiles"
+msgstr "Імпортую профілі"
+
+#: functions-admin.php:280 functions-admin.php:294 functions-admin.php:305
+#: functions-admin.php:318
+msgid "done"
+msgstr "зроблено"
+
+#: functions-admin.php:283 functions-admin.php:292 functions-admin.php:308
+#: functions-admin.php:316
+msgid "failed"
+msgstr "помилка"
+
+#: functions-admin.php:289
+msgid "Importing settings"
+msgstr "Імпортую налаштунки"
+
+#: functions-admin.php:312
+msgid "Importing settings... "
+msgstr "Імпортую налаштунки..."
+
+#: functions-admin.php:321 functions-admin.php:593 options.php:138
+msgid "Please select a valid export file to import."
+msgstr "Будь-ласка, виберіть правильний файл експорту для імпорту."
+
+#: functions-admin.php:325
+msgid "All or part of the import failed. See above for information."
+msgstr "Всі або частину імпортування не вдалося. Див. інформацію вище."
+
+#: functions-admin.php:327
+msgid "Import completed successfully."
+msgstr "Імпортування успішно завершено."
+
+#: functions-admin.php:330
+msgid "Return to GDE Settings"
+msgstr "Повернутись до GDE налаштувань"
+
+#: functions-admin.php:407 functions-admin.php:562 options.php:167
+#: libs/tab-advanced.php:141
+msgid "Settings"
+msgstr "Налаштунки"
+
+#: functions-admin.php:416
+msgid "You do not have sufficient permissions to access this page"
+msgstr "Ви не маєте достатньо прав для доступу до цієї сторінки"
+
+#: functions-admin.php:550
+msgid "plugin"
+msgstr "плаґін"
+
+#: functions-admin.php:551
+msgid "Version"
+msgstr "Версія"
+
+#: functions-admin.php:589
+msgid "This profile will be permanently deleted."
+msgstr "Цей профіль буде видалений."
+
+#: functions-admin.php:589 functions-admin.php:590 functions-admin.php:591
+#: functions-admin.php:594
+msgid "Are you sure?"
+msgstr "Ви впевнені?"
+
+#: functions-admin.php:590
+msgid "Settings for this profile will overwrite the default profile."
+msgstr "Налаштування цього профілю буде перезаписано за замовчуванням."
+
+#: functions-admin.php:591
+msgid ""
+"Your profile list will be reset to its original state. All changes will be "
+"lost."
+msgstr ""
+"Ваш список профілю буде скинуто в початковий стан. Всі зміни будуть втрачені."
+
+#: functions-admin.php:594
+msgid ""
+"Any settings or duplicate profile names in this import will overwrite the "
+"current values."
+msgstr ""
+"Будь-які налаштування, або копію профілю імен у цьому імпорту призведе до "
+"втрати поточного значення."
+
+#: functions-admin.php:596
+msgid "Please include a shortcode or message to request support."
+msgstr ""
+"Будь-ласка, вкажіть короткий код або повідомлення, щоб запросити підтримку."
+
+#: functions-admin.php:634
+msgid "Embed file using Google Doc Embedder"
+msgstr "Вставити файл за допомогою Google Doc Embedder"
+
+#: functions-admin.php:651 libs/lib-eddialog.php:85
+msgid "Select the GDE viewer profile to use"
+msgstr "Оберіть профіль GDE viewer для використання"
+
+#: functions-admin.php:784
+msgid ""
+"You are running a pre-release version of Google Doc Embedder. Please watch "
+"this space for important updates."
+msgstr ""
+"Ви працюєте в пре-реліз версії Google Doc Embedder. Будь-ласка, подивіться "
+"важливі оновлення."
+
+#: functions.php:105
+msgid "File not specified, check shortcode syntax"
+msgstr "Файл не вказаний, перевірте синтаксис короткого коду"
+
+#: functions.php:106
+msgid "Requested URL is invalid"
+msgstr "Запитувана URL-адреса є недійсна"
+
+#: functions.php:107
+msgid "Unsupported File Type"
+msgstr "Тип файлу не підтримується"
+
+#: functions.php:108
+msgid "Error retrieving file - if necessary turn off error checking"
+msgstr ""
+"Помилка при завантаженні файлу - При необхідності виключіть перевірку помилок"
+
+#: functions.php:191
+msgid "Unknown"
+msgstr "Невідомий"
+
+#: functions.php:291 gviewer.php:282 libs/lib-setup.php:64
+#: libs/lib-setup.php:112
+msgid "Download"
+msgstr "Завантажити"
+
+#: functions.php:396 view.php:397
+msgid "Error"
+msgstr "Помилка"
+
+#: gviewer.php:73
+msgid "Unable to load profile settings"
+msgstr "Не вдається завантажити налаштування профілю"
+
+#: gviewer.php:108 gviewer.php:120
+msgid "Unable to load requested profile."
+msgstr "Не вдається завантажити необхідний профіль."
+
+#: gviewer.php:216
+msgid "Unable to secure document"
+msgstr "Нездатний забезпечити документ"
+
+#: load.php:8 libs/lib-formsubmit.php:9 libs/lib-secure.php:9
+#: libs/lib-service.php:53 libs/lib-service.php:69 libs/lib-service.php:72
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Ви не маєте достатньо прав для доступу до цієї сторінки."
+
+#: load.php:41
+msgid "Direct access to this file is not permitted."
+msgstr "Прямий доступ до цього файлу не допускається."
+
+#: load.php:61
+msgid "The requested file was not found."
+msgstr "Запитаний файл не знайдений."
+
+#: load.php:66
+msgid "Unable to open the requested file. "
+msgstr "Не вдається відкрити необхідний файл."
+
+#: load.php:83 load.php:87
+msgid "The document file type is not supported."
+msgstr "Тип документу не підтримується."
+
+#: options.php:13 options.php:65
+msgid "Default profile <strong>updated</strong>."
+msgstr "Профіль за замовчуванням <strong>оновлюється</strong>."
+
+#: options.php:15 options.php:50
+msgid "Unable to update profile."
+msgstr "Не вдалося оновити профіль."
+
+#: options.php:28
+msgid "Profile name already exists. Please choose another name."
+msgstr "Профіль з таким  іменем вже існує. Будь ласка, виберіть інше ім'я."
+
+#: options.php:35
+msgid "New profile <strong>created</strong>."
+msgstr "Новий профіль <strong>створено </strong>."
+
+#: options.php:37 options.php:40
+msgid "Unable to create profile."
+msgstr "Не вдається створити профіль."
+
+#: options.php:48
+msgid "Profile <strong>updated</strong>."
+msgstr "Профіль <strong>оновлено</strong>."
+
+#: options.php:58
+msgid "Profile <strong>deleted</strong>."
+msgstr "Профіль <strong>видалено</strong>."
+
+#: options.php:60
+msgid "Unable to delete profile."
+msgstr "Не вдається видалити профіль."
+
+#: options.php:102
+msgid "Unable to enable diagnostic logging."
+msgstr "Не вдається включити журнал діагностики."
+
+#: options.php:114 options.php:116
+msgid "Settings <strong>updated</strong>."
+msgstr "Налаштунки <strong>оновлено</strong>."
+
+#: options.php:176 options.php:189
+msgid "General"
+msgstr "Головне"
+
+#: options.php:181 options.php:194 libs/tab-advanced.php:140
+msgid "Profiles"
+msgstr "Профілі"
+
+#: options.php:202
+msgid "Advanced"
+msgstr "Додатково"
+
+#: options.php:207
+msgid "Support"
+msgstr "Підтримка"
+
+#: options.php:345
+msgid "Help"
+msgstr "Допомога"
+
+#: options.php:371
+msgid "Edit"
+msgstr "Редагувати"
+
+#: options.php:372
+msgid "Delete"
+msgstr "Видалити"
+
+#: options.php:373
+msgid "Make Default"
+msgstr "Створити за умовчанням"
+
+#: view.php:42
+msgid "Invalid URL format"
+msgstr "Невірний формат URL"
+
+#: view.php:398
+msgid ""
+"Unable to retrieve document contents. Please try again or switch to Standard "
+"Viewer."
+msgstr ""
+"Не вдається отримати вміст документа. Будь ласка, спробуйте ще раз або "
+"перейти до стандартного Viewer."
+
+#: js/tb-newwin.php:7
+msgid "View in full screen"
+msgstr "Подивитися у повний монітор"
+
+#: js/tb-newwin.php:11
+msgid "Open in new window"
+msgstr "Відкрити у новому вікні"
+
+#: libs/lib-eddialog.php:8
+msgid "Access denied."
+msgstr "Доступ заборонено."
+
+#: libs/lib-eddialog.php:52
+msgid "Insert Google Doc Embedder Shortcode"
+msgstr "Вставити короткий код Google Doc Embedder"
+
+#: libs/lib-eddialog.php:55
+msgid "Required"
+msgstr "Необхідний"
+
+#: libs/lib-eddialog.php:59
+msgid "URL or Filename"
+msgstr "URL-адреса або ім'я файлу"
+
+#: libs/lib-eddialog.php:60
+msgid "Full URL or filename to append to profile Base URL"
+msgstr "Повна URL-адреса або ім'я файлу для додавання URL до бази профілю"
+
+#: libs/lib-eddialog.php:65
+msgid "Profile Base URL will be prefixed"
+msgstr "База профілю URL повинна мати префікс"
+
+#: libs/lib-eddialog.php:68
+msgid "Unsupported file type"
+msgstr "Непідтримуваний тип файлу"
+
+#: libs/lib-eddialog.php:74
+msgid "Profile"
+msgstr "Профіль"
+
+#: libs/lib-eddialog.php:93
+msgid "Optional (Override Profile Settings)"
+msgstr "Додатково (перевизначити налаштування профілю)"
+
+#: libs/lib-eddialog.php:97 libs/lib-profile.php:185
+msgid "Height"
+msgstr "Висота"
+
+#: libs/lib-eddialog.php:102 libs/lib-profile.php:181
+msgid "Width"
+msgstr "Ширина"
+
+#: libs/lib-eddialog.php:103
+#, php-format
+msgid "Format: 40% or 300px"
+msgstr "Формат: 40% або 300px"
+
+#: libs/lib-eddialog.php:108
+msgid "Start Page #"
+msgstr "Початкова сторінка #"
+
+#: libs/lib-eddialog.php:116
+msgid "Show Download Link"
+msgstr "Показати посилання для скачування"
+
+#: libs/lib-eddialog.php:119
+msgid "Yes"
+msgstr "Так"
+
+#: libs/lib-eddialog.php:120
+msgid "No"
+msgstr "Ні"
+
+#: libs/lib-eddialog.php:126
+msgid "Disable caching (this document is frequently overwritten)"
+msgstr "Виключити кешування (цей документ часто переписуються)"
+
+#: libs/lib-eddialog.php:136
+msgid "Shortcode Preview"
+msgstr "Переглянути короткий код"
+
+#: libs/lib-eddialog.php:144
+msgid "Insert"
+msgstr "Вставити"
+
+#: libs/lib-eddialog.php:148
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: libs/lib-profile.php:12 libs/tab-advanced.php:132 libs/tab-profiles.php:22
+msgid ""
+"Unable to load profile settings. Please re-activate GDE and if the problem "
+"persists, request help using the \"Support\" tab."
+msgstr ""
+"Не вдається завантажити налаштування профілю. Будь-ласка, активуйте повторно "
+"GDE і якщо проблема не усунена, зверніться по \"Допомогую\"."
+
+#: libs/lib-profile.php:25
+msgid "Default Settings"
+msgstr "Налаштування за замовчуванням"
+
+#: libs/lib-profile.php:26
+msgid ""
+"These settings define the default viewer profile, which is used when no "
+"other profile is specified."
+msgstr ""
+"Ці параметри визначають профіль за замовчуванням, який використовується, "
+"коли інший профіль не вказано."
+
+#: libs/lib-profile.php:30
+msgid "Edit Profile"
+msgstr "Редагувати профіль"
+
+#: libs/lib-profile.php:49
+msgid "Viewer Mode"
+msgstr "Режим перегляду"
+
+#: libs/lib-profile.php:53
+msgid "Standard Viewer"
+msgstr "Стандартний перегляд"
+
+#: libs/lib-profile.php:53
+msgid "Embed the basic viewer only"
+msgstr "Вставити тільки основний глядач"
+
+#: libs/lib-profile.php:54
+msgid "Enhanced Viewer"
+msgstr "Розширені засоби перегляду"
+
+#: libs/lib-profile.php:54
+msgid "Enable extended viewer options"
+msgstr "Включити розширені опції перегляду"
+
+#: libs/lib-profile.php:64
+msgid "Enhanced Viewer Settings"
+msgstr "Розширені налаштування перегляду"
+
+#: libs/lib-profile.php:68
+msgid "Toolbar"
+msgstr "Панель інструментів"
+
+#: libs/lib-profile.php:71
+msgid "Remove Toolbar"
+msgstr "Видалити панель інструментів"
+
+#: libs/lib-profile.php:76
+msgid "Use Mobile Toolbar"
+msgstr "Використання мобільної версії панелі інструментів"
+
+#: libs/lib-profile.php:80
+msgid "Mobile Devices Only (Default)"
+msgstr "Тільки мобільні пристрої (за замовчуванням)"
+
+#: libs/lib-profile.php:80
+msgid "Use mobile toolbar when mobile device detected"
+msgstr ""
+"Використовувати мобільну версію панелі інструментів, коли мобільний пристрій "
+"виявлено"
+
+#: libs/lib-profile.php:81
+msgid "Always"
+msgstr "Завжди"
+
+#: libs/lib-profile.php:81
+msgid "Use mobile toolbar for all visitors"
+msgstr "Використання мобільної панелі інструментів для всіх відвідувачів"
+
+#: libs/lib-profile.php:82
+msgid "Never"
+msgstr "Ніколи"
+
+#: libs/lib-profile.php:82
+msgid "Never use mobile toolbar"
+msgstr "Ніколи не використовувати мобільну панель інструментів"
+
+#: libs/lib-profile.php:89
+msgid "Toolbar Items"
+msgstr "Пункти панелі інструментів"
+
+#: libs/lib-profile.php:92
+msgid "Page Numbers"
+msgstr "Номери сторінок"
+
+#: libs/lib-profile.php:93
+msgid "Previous/Next Page"
+msgstr "Попередня/наступна сторінка"
+
+#: libs/lib-profile.php:94
+msgid "Zoom In/Out"
+msgstr "Збільшення In/Out"
+
+#: libs/lib-profile.php:95
+msgid "Full Screen/New Window"
+msgstr "У весь екран/Нове вікно"
+
+#: libs/lib-profile.php:98
+msgid ""
+"Uncheck items to remove from toolbar. Buttons will vary based on file type "
+"and device used."
+msgstr ""
+"Зніміть елементи для видалення з панелі інструментів. Кнопки будуть "
+"варіюватися в залежності від типу файлу і використовуваного пристрою."
+
+#: libs/lib-profile.php:102
+msgid "Full Screen Behavior"
+msgstr "Режим у весь екран"
+
+#: libs/lib-profile.php:106
+msgid "Google-Hosted Page (Default)"
+msgstr "Сторінка Google-Hosted (за умовчанням)"
+
+#: libs/lib-profile.php:108
+msgid "Full Screen Viewer"
+msgstr "Повний перегляд у весь екран"
+
+#: libs/lib-profile.php:112
+msgid "Open in New Window"
+msgstr "Відкрити у новому вікні"
+
+#: libs/lib-profile.php:113
+msgid "Allow Printing"
+msgstr "Дозволяти друкувати"
+
+#: libs/lib-profile.php:118
+msgid "Page Area Background Color"
+msgstr "Колір фону сторінки"
+
+#: libs/lib-profile.php:123
+msgid "None (Transparent)"
+msgstr "Немає (прозорий)"
+
+#: libs/lib-profile.php:128
+msgid "Page Border Color"
+msgstr "Колір межі сторінок (закрайок)"
+
+#: libs/lib-profile.php:133
+msgid "No Border"
+msgstr "Без закрайок"
+
+#: libs/lib-profile.php:138
+msgid "Custom CSS File"
+msgstr "Встановити файл CSS "
+
+#: libs/lib-profile.php:144
+msgid "URL of custom CSS file (may override some of the above options)"
+msgstr ""
+"Встановлення файлу CSS за URL-адресою (може перевизначити деякі з "
+"перерахованих вище варіантів)"
+
+#: libs/lib-profile.php:148
+msgid "Security"
+msgstr "Безпека"
+
+#: libs/lib-profile.php:151
+msgid "Hide ability to select/copy/paste text"
+msgstr "Сховати можливість вибору/копіювати/вставляти текст"
+
+#: libs/lib-profile.php:152
+msgid "Block all download requests for file"
+msgstr "Блокувати всі запити завантаження файлів"
+
+#: libs/lib-profile.php:163
+msgid "Default Language"
+msgstr "Мова за умовчанням"
+
+#: libs/lib-profile.php:175
+msgid "Language of toolbar button tips"
+msgstr "Мова поради кнопки на панелі інструментів"
+
+#: libs/lib-profile.php:179
+msgid "Default Size"
+msgstr "Розмір за замовчуванням"
+
+#: libs/lib-profile.php:190
+msgid "Enter as pixels or percentage (example: 500px or 100%)"
+msgstr "Введіть у вигляді пікселів або відсотків (приклад: 500px або 100%)"
+
+#: libs/lib-profile.php:194
+msgid "File Base URL"
+msgstr "URL файлу бази"
+
+#: libs/lib-profile.php:200
+msgid ""
+"Any file not starting with <code>http</code> will be prefixed by this value"
+msgstr ""
+"Будь-який файл, не починаючи з <code>http</code> буде починатися на цю "
+"величину"
+
+#: libs/lib-profile.php:204
+msgid "Download Link"
+msgstr "Посилання для завантаження"
+
+#: libs/lib-profile.php:208
+msgid "All Users"
+msgstr "Всі користувачі"
+
+#: libs/lib-profile.php:208
+msgid "Download link visible to everyone by default"
+msgstr "Посилання для завантажування видно всім за замовчуванням"
+
+#: libs/lib-profile.php:209
+msgid "Logged-in Users"
+msgstr "Зареєстрованим користувачам"
+
+#: libs/lib-profile.php:209
+msgid "Download link visible to logged-in users"
+msgstr "Посилання для завантажування видно тільки зареєстрованим користувачам"
+
+#: libs/lib-profile.php:210 libs/tab-advanced.php:91
+msgid "None"
+msgstr "Немає"
+
+#: libs/lib-profile.php:210
+msgid "Download link is not visible by default"
+msgstr "Посилання приховано за замовчуванням"
+
+#: libs/lib-profile.php:217
+msgid "Link Text"
+msgstr "Текст посилання"
+
+#: libs/lib-profile.php:220
+msgid "You can further customize text using these dynamic replacements:"
+msgstr "Ви можете налаштувати текст, використовуючи ці динамічні заміни:"
+
+#: libs/lib-profile.php:221
+msgid "filename"
+msgstr "ім'я файлу"
+
+#: libs/lib-profile.php:222
+msgid "file type"
+msgstr "тип файлу"
+
+#: libs/lib-profile.php:223
+msgid "file size"
+msgstr "розмір файлу"
+
+#: libs/lib-profile.php:227
+msgid "Link Position"
+msgstr "Позиція посилання"
+
+#: libs/lib-profile.php:231
+msgid "Above Viewer"
+msgstr "Зверху вікна"
+
+#: libs/lib-profile.php:232
+msgid "Below Viewer"
+msgstr "Під вікном"
+
+#: libs/lib-profile.php:238
+msgid "Link Behavior"
+msgstr "Режим посилання"
+
+#: libs/lib-profile.php:241
+msgid "Force download (bypass browser plugins)"
+msgstr "Можливість завантаження (обхід плагінів для браузерів)"
+
+#: libs/lib-profile.php:242
+msgid "Shorten URL"
+msgstr "Скорочення URL-адреси"
+
+#: libs/lib-profile.php:250 libs/tab-advanced.php:120
+msgid "Save Changes"
+msgstr "Зберегти зміни"
+
+#: libs/lib-setup.php:46 libs/lib-setup.php:292
+msgid "This is the default profile, used when no profile is specified."
+msgstr ""
+"Цей профіль застосований  за замовчуванням, при відсутності інших профілів."
+
+#: libs/lib-setup.php:70
+msgid "Hide document location and text selection, prevent downloads"
+msgstr ""
+"Сховати місцеположення документа та виділення тексту, запобігання "
+"завантаження"
+
+#: libs/lib-setup.php:94
+msgid "Dark-colored theme, example of custom CSS option"
+msgstr "Темні-кольори теми, приклад опцій встановлення CSS "
+
+#: libs/tab-advanced.php:20
+msgid "Plugin Behavior"
+msgstr "Режим плаґіну"
+
+#: libs/tab-advanced.php:25
+msgid "Editor Integration"
+msgstr "Редактор інтеграції"
+
+#: libs/tab-advanced.php:28
+msgid "Disable all editor integration"
+msgstr "Вимкнути всі редактор інтеграції"
+
+#: libs/tab-advanced.php:30
+msgid "Insert shortcode from Media Library by default"
+msgstr "Вставте короткий код з бібліотеки мультимедіа за замовчуванням"
+
+#: libs/tab-advanced.php:32
+msgid "Allow uploads of all supported media types"
+msgstr "Дозволити додавання всіх підтримуваних типів носіїв"
+
+#: libs/tab-advanced.php:37
+msgid "Maximum File Size"
+msgstr "Максимальний розмір файлу"
+
+#: libs/tab-advanced.php:43
+msgid ""
+"Very large files (typically 8-12MB) aren't supported by Google Doc Viewer"
+msgstr "Дуже великі файли (тільки 8-12Mб) не підтримується в Google Doc Viewer"
+
+#: libs/tab-advanced.php:47
+msgid "Error Handling"
+msgstr "Помилка обробки"
+
+#: libs/tab-advanced.php:50
+msgid "Show error messages inline (otherwise, they appear in HTML comments)"
+msgstr ""
+"Показати повідомлення про помилки (в іншому випадку, вони з'являються в HTML "
+"коментуваннях)"
+
+#: libs/tab-advanced.php:51
+msgid "Check for errors before loading viewer"
+msgstr "Перевірте наявність помилок перед завантаженням глядача"
+
+#: libs/tab-advanced.php:53
+msgid "Enable extended diagnostic logging <em>(manually enabled)</em>"
+msgstr ""
+"Ввімкнути запис розширенго журналу діагностики  <em>(включений вручну)</em>"
+
+#: libs/tab-advanced.php:55
+msgid "Enable extended diagnostic logging"
+msgstr "Ввімкнути запис розширенго журналу діагностики"
+
+#: libs/tab-advanced.php:56
+msgid "show log"
+msgstr "Показати пурнал"
+
+#: libs/tab-advanced.php:57
+msgid "clear log"
+msgstr "Очистити журнал"
+
+#: libs/tab-advanced.php:63
+msgid "Version Notifications"
+msgstr "Версія сповіщень"
+
+#: libs/tab-advanced.php:67
+msgid "All Versions"
+msgstr "Всі версії"
+
+#: libs/tab-advanced.php:67
+msgid "You will receive release and beta notifications"
+msgstr "Ви отримаєте реліз і бета повідомлення"
+
+#: libs/tab-advanced.php:68
+msgid "Release Versions Only"
+msgstr "Тільки реліз версії"
+
+#: libs/tab-advanced.php:68
+msgid "You will not receive beta notifications"
+msgstr "Ви не будете отримувати бета повідомлення"
+
+#: libs/tab-advanced.php:77
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: libs/tab-advanced.php:79
+msgid ""
+"To use Google Analytics integration, the GA tracking code must already be "
+"installed on your site."
+msgstr ""
+"Використовуйте Google Analytics, код Google Analytics відстеження має бути "
+"вже встановлений на Вашому сайті."
+
+#: libs/tab-advanced.php:80
+msgid "More Info"
+msgstr "Додаткова інформація"
+
+#: libs/tab-advanced.php:85
+msgid "Event Tracking"
+msgstr "Відстеження подій"
+
+#: libs/tab-advanced.php:89
+msgid "Enabled"
+msgstr "Ввімкнено"
+
+#: libs/tab-advanced.php:89
+msgid "Track events in Google Analytics"
+msgstr "Відстеження подій у Google Analytics"
+
+#: libs/tab-advanced.php:90
+msgid "Enabled (Compatibility Mode)"
+msgstr "Ввімкнено (режим сумісності)"
+
+#: libs/tab-advanced.php:90
+msgid "Track events using older GDE format (< 2.5)"
+msgstr "Трек подій з використанням старого формату GDE (< 2.5)"
+
+#: libs/tab-advanced.php:91
+msgid "Disable Google Analytics integration"
+msgstr "Вимкнути інтеграцію Google Analytics"
+
+#: libs/tab-advanced.php:98
+msgid "Category"
+msgstr "Категорія"
+
+#: libs/tab-advanced.php:106
+msgid "Label"
+msgstr "Мітка"
+
+#: libs/tab-advanced.php:110
+msgid "Document URL"
+msgstr "URL документу"
+
+#: libs/tab-advanced.php:111
+msgid "Document Filename"
+msgstr "Ім'я файлу документа"
+
+#: libs/tab-advanced.php:128
+msgid "Backup and Import"
+msgstr "Резервна копія та імпорт"
+
+#: libs/tab-advanced.php:136
+msgid ""
+"Download a file to your computer containing your profiles, settings, or "
+"both, for backup or migration purposes."
+msgstr ""
+"Завантажте файл на свій комп'ютер, що містить профіль, налаштування, або "
+"обидва, для резервного копіювання і міграції цілей."
+
+#: libs/tab-advanced.php:139
+msgid "All Profiles and Settings"
+msgstr "Всі профілі та налаштування"
+
+#: libs/tab-advanced.php:145
+msgid "Download Export File"
+msgstr "Завантажити файл експорту"
+
+#: libs/tab-advanced.php:153
+msgid "To import, choose a file from your computer:"
+msgstr "Щоб імпортувати, виберіть файл з вашого комп'ютера:"
+
+#: libs/tab-advanced.php:159
+msgid "Upload File and Import"
+msgstr "Завантажити та імпортувати файл"
+
+#: libs/tab-profiles.php:36 libs/tab-profiles.php:49
+msgid "ID"
+msgstr "ID"
+
+#: libs/tab-profiles.php:39 libs/tab-profiles.php:52 libs/tab-profiles.php:105
+msgid "Name"
+msgstr "Ім'я"
+
+#: libs/tab-profiles.php:42 libs/tab-profiles.php:55 libs/tab-profiles.php:121
+msgid "Description"
+msgstr "Опис"
+
+#: libs/tab-profiles.php:94
+msgid "Reset Profiles"
+msgstr "Скинути профіль"
+
+#: libs/tab-profiles.php:101 libs/tab-profiles.php:126
+msgid "Add New Profile"
+msgstr "Додати новий профіль"
+
+#: libs/tab-profiles.php:107
+msgid ""
+"The name (or ID number) is used to select the profile via the shortcode. It "
+"is all lowercase and contains only letters, numbers, and hyphens."
+msgstr ""
+"Ім'я (або ідентифікаційний номер) використовується для вибору профілю через "
+"короткий номер. Це всі рядкові і містить тільки букви, цифри і дефіс."
+
+#: libs/tab-profiles.php:110
+msgid "Parent"
+msgstr "Батьківське"
+
+#: libs/tab-profiles.php:118
+msgid "Select which profile to use as a starting point."
+msgstr ""
+"Виберіть, який профіль буде використовуватися в якості відправної точки."
+
+#: libs/tab-profiles.php:123
+msgid "Describe the profile's purpose, for your own reference (optional)."
+msgstr "Вказати ціль профілю, для власного посилання (опціонально)."
+
+#: libs/tab-support.php:26
+msgid ""
+"Please review the documentation before submitting a request for support:"
+msgstr ""
+"Будь-ласка, ознайомтеся з документацією перед тим як звернутися по допомогу:"
+
+#: libs/tab-support.php:29
+msgid "Plugin FAQ"
+msgstr "Плаґін FAQ"
+
+#: libs/tab-support.php:30
+msgid "Support Forum"
+msgstr "Форум підтримки"
+
+#: libs/tab-support.php:33
+msgid "If you're still experiencing a problem, please complete the form below."
+msgstr ""
+"Якщо ви все ще відчуваєте проблеми, будь ласка, заповніть наведену нижче "
+"форму."
+
+#: libs/tab-support.php:37
+msgid "Support Request"
+msgstr "Запит підтримки"
+
+#: libs/tab-support.php:41
+msgid "Your Name"
+msgstr "Ваше ім'я"
+
+#: libs/tab-support.php:45
+msgid "Your E-mail"
+msgstr "Ваш E-mail"
+
+#: libs/tab-support.php:48
+msgid "A valid email address is required."
+msgstr "Не дійсна адреса електронної пошти."
+
+#: libs/tab-support.php:52
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: libs/tab-support.php:55
+msgid ""
+"If you're having a problem getting a specific document to work, paste the "
+"shortcode you're trying to use here."
+msgstr ""
+"Якщо у вас виникли проблеми, отримуючи конкретний документ, вставте короткий "
+"код для використовування тут."
+
+#: libs/tab-support.php:59
+msgid "Message"
+msgstr "Повідомлення"
+
+#: libs/tab-support.php:65
+msgid "Message Options"
+msgstr "Опції повідомлення"
+
+#: libs/tab-support.php:67
+msgid "Send debug information"
+msgstr "Відіслати налагоджувальної інформації"
+
+#: libs/tab-support.php:68
+msgid "View"
+msgstr "Вигляд"
+
+#: libs/tab-support.php:69
+msgid "Hide"
+msgstr "Приховати"
+
+#: libs/tab-support.php:70
+msgid "Send me a copy"
+msgstr "Надіслати мені копію"
+
+#: libs/tab-support.php:76
+msgid "Debug Information"
+msgstr "Відлагоджувальна інформація"
+
+#: libs/tab-support.php:77
+msgid ""
+"Note: Profile and settings export and diagnostic log (if present) will be "
+"attached."
+msgstr ""
+"Примітка: Профіль та параметри експорту й журналу діагностики (якщо є) буде "
+"прикріплений."
+
+#: libs/tab-support.php:135
+msgid ""
+"I'm less likely to be able to help you if you do not include debug "
+"information."
+msgstr ""
+"Я навряд чи буду в змозі допомогти вам, якщо ви не увімкните налагоджувальну "
+"інформацію."
+
+#: libs/tab-support.php:137
+msgid "Send Request"
+msgstr "Надіслати запит"
+
+#: libs/tab-support.php:141
+msgid "Request Sent"
+msgstr "Запит відправлений"
+
+#: libs/tab-support.php:142
+msgid ""
+"Delivery failed. You can manually send this information to wpp@tnw.org for "
+"help."
+msgstr ""
+"Доставка не вдалася. Ви можете вручну відправити цю інформацію на адресу "
+"wpp@tnw.org для одержання інформації."

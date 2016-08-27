@@ -1,0 +1,2148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Events Manager Pro v2.2.3.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-11-05 16:02+0100\n"
+"Last-Translator: Marcus Sykes <wp.plugins@netweblogic.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"Language: ja_JP\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:40
+#: add-ons/bookings-form.php:40
+#: add-ons/coupons/coupon.php:53
+#: add-ons/coupons.php:465
+#: add-ons/coupons.php:475
+#: add-ons/coupons.php:700
+#: add-ons/user-fields.php:140
+#: add-ons/user-fields.php:142
+#: emp-install.php:124
+msgid "Name"
+msgstr "名前"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:60
+#: add-ons/bookings-form/attendee-forms.php:526
+#: add-ons/bookings-form.php:66
+#: add-ons/bookings-form.php:392
+#: add-ons/gateways/gateway.paypal.php:550
+#: emp-install.php:123
+#: emp-install.php:200
+msgid "Default"
+msgstr "デフォルト"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:258
+#: add-ons/bookings-form/attendee-forms.php:408
+#: add-ons/bookings-form/attendee-forms.php:427
+#: add-ons/bookings-form/attendee-forms.php:439
+#: add-ons/bookings-form/attendee-forms.php:569
+#, php-format
+msgid "Attendee %s"
+msgstr "出席者%s"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:298
+#: add-ons/coupons.php:586
+#: add-ons/coupons.php:597
+#: add-ons/gateways/gateways.transactions.php:93
+msgid "Event"
+msgstr "イベント"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:299
+msgid "Where"
+msgstr "どこで"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:300
+msgid "When"
+msgstr "いつ"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:302
+#, php-format
+msgid "Exported bookings on %s"
+msgstr "%sに予約を出力する"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:350
+msgid "Split bookings by attendee"
+msgstr "出席者で予約を分ける"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:351
+msgid "A row will be created for each space booked and will automatically include any attendee information associated with that booked ticket."
+msgstr "列が予約された定員の為に作られ、予約チケットに関連した出席者の情報を自動的に含みます。"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:524
+#: add-ons/bookings-form/attendee-forms.php:697
+msgid "Selected Attendee Form"
+msgstr "選択された出席者フォーム"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:560
+msgid "Ticket"
+msgstr "チケット"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:624
+#: add-ons/bookings-form.php:441
+#: add-ons/gateways.php:536
+#: add-ons/user-fields.php:235
+msgid "Changes Saved"
+msgstr "変更を保存しました。"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:633
+#: add-ons/bookings-form.php:450
+#, php-format
+msgid "The form <em>%s</em> is now the default booking form. All events without a pre-defined booking form will start using this form from now on."
+msgstr "<em>%s</em>フォームはデフォルトの予約フォームです。事前に定義された予約フォームがないイベントにはこのフォームが使われます。"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:639
+#: add-ons/bookings-form.php:456
+#, php-format
+msgid "%s Deleted"
+msgstr "削除された%s"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:639
+#: add-ons/bookings-form.php:387
+#: add-ons/bookings-form.php:456
+#: add-ons/gateways/gateway.php:317
+msgid "Booking Form"
+msgstr "予約フォーム"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:647
+#: add-ons/bookings-form.php:464
+#, php-format
+msgid "Form renamed to <em>%s</em>."
+msgstr "<em>%s</em>にリネームされたフォーム"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:659
+#: add-ons/bookings-form.php:473
+msgid "New form created. You are now editing your new form."
+msgstr "新しいフォームが作られました。あなたはそれを編集できます。"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:680
+msgid "Attendee Form"
+msgstr "出席者フォーム"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:683
+msgid "This form will be shown and required for every space booked. If you don't want to ask for attendee information, select None as your booking form."
+msgstr "このフォームは表示され、定員予約に必要とされます。もし出席者情報を必要としないなら、予約フォームのようにNoneを選択してください。"
+
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:686
+msgid "Enable Attendee Forms"
+msgstr "可能な出席者フォーム"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:695
+#: add-ons/bookings-form.php:495
+msgid "<strong>Important:</strong> When editing this form, to make sure your old booking information is displayed, make sure new field ids correspond with the old ones."
+msgstr "<strong>重要:</strong>このフォームを編集すると、古い予約情報が表示され、新しいフィールドidが古いものと一致することに注意してください。"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:699
+#: add-ons/gateways/gateways.transactions.php:257
+msgid "None"
+msgstr "None"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:712
+#: add-ons/bookings-form.php:512
+msgid "Make Default"
+msgstr "デフォルトにする"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:712
+#: add-ons/bookings-form.php:512
+msgid ""
+"You are about to make this your default booking form. All events without an existing specifically chosen booking form will use this new default form from now on.\n"
+"\n"
+" Are you sure you want to do this?"
+msgstr ""
+"これをデフォルトの予約フォームにしようとしています。選択された予約フォームがない全てのイベントはこの新しいデフォルトフォームが使われます。\n"
+"\n"
+"この設定にしますか？"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:721
+#: add-ons/bookings-form.php:521
+#: add-ons/coupons.php:439
+msgid "Add New"
+msgstr "新規追加"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:724
+msgid "This is the default attendee form and will be used for any event where you have not chosen a speficic form to use."
+msgstr "これはデフォルトの出席者フォームで、特定のフォームを使う事を選択しない場合はこれが使われます。"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:729
+#: add-ons/bookings-form.php:529
+msgid "You are now editing "
+msgstr "編集しています"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:734
+#: add-ons/bookings-form.php:534
+msgid "Rename"
+msgstr "リネーム"
+
+# @ em-pro
+# @ dbem
+#: add-ons/bookings-form/attendee-forms.php:741
+#: add-ons/bookings-form.php:541
+#: add-ons/coupons.php:489
+#: add-ons/gateways/gateway.offline.php:148
+#: add-ons/gateways/gateway.paypal.php:186
+#: add-ons/gateways/gateways.transactions.php:263
+msgid "Delete"
+msgstr "削除"
+
+# @ default
+#: add-ons/bookings-form/attendee-forms.php:741
+#: add-ons/bookings-form.php:541
+msgid ""
+"Are you sure you want to delete this form?\n"
+"\n"
+" All events using this form will start using the default form automatically."
+msgstr ""
+"このフォームを消去したいのですか？\n"
+"\n"
+"このフォームを使っているすべてのイベントはデフォルトのフォームが自動的に使用されます。"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:749
+msgid "Default Value"
+msgstr "デフォルトの値"
+
+# @ em-pro
+#: add-ons/bookings-form/attendee-forms.php:749
+msgid "No attendee form selected. Choose a form, or create a new one above."
+msgstr "出席者フォームが選択されていません。フォームを選ぶか、新しいものを作ってください。"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:41
+#: add-ons/gateways.php:562
+#: add-ons/user-fields.php:144
+#: emp-install.php:125
+msgid "Email"
+msgstr "メール"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:42
+#: add-ons/gateways.php:39
+#: emp-install.php:126
+#: emp-install.php:137
+msgid "Address"
+msgstr "住所"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:43
+#: add-ons/gateways.php:41
+#: emp-install.php:127
+#: emp-install.php:139
+msgid "City"
+msgstr "都市"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:44
+#: add-ons/gateways.php:42
+#: emp-install.php:128
+#: emp-install.php:140
+msgid "State/County"
+msgstr "州"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:45
+#: add-ons/gateways.php:43
+#: emp-install.php:129
+#: emp-install.php:141
+msgid "Zip/Post Code"
+msgstr "郵便番号"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:46
+#: add-ons/gateways.php:44
+#: emp-install.php:130
+#: emp-install.php:142
+msgid "Country"
+msgstr "国"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:47
+#: add-ons/gateways.php:45
+#: emp-install.php:131
+#: emp-install.php:143
+msgid "Phone"
+msgstr "電話番号"
+
+# @ dbem
+# @ em-pro
+#: add-ons/bookings-form.php:48
+#: add-ons/gateways.php:46
+#: emp-install.php:132
+#: emp-install.php:144
+msgid "Fax"
+msgstr "ファックス"
+
+# @ dbem
+#: add-ons/bookings-form.php:49
+#: emp-install.php:133
+msgid "Comment"
+msgstr "コメント"
+
+# @ dbem
+# @ emp-pro
+#: add-ons/bookings-form.php:336
+#: add-ons/gateways/gateway.authorize.aim.php:404
+#: emp-forms.php:121
+msgid "Yes"
+msgstr "はい"
+
+# @ dbem
+# @ emp-pro
+#: add-ons/bookings-form.php:336
+#: add-ons/gateways/gateway.authorize.aim.php:405
+#: emp-forms.php:121
+msgid "No"
+msgstr "いいえ"
+
+# @ em-pro
+#: add-ons/bookings-form.php:388
+msgid "You can choose to use a custom booking form, or leave as is to use the default booking form."
+msgstr "カスタム予約フォームを使う事を選択することができます。もしくはそのままにしておくことでデフォルトの予約フォームを使うことができます。"
+
+# @ dbem
+#: add-ons/bookings-form.php:390
+#: add-ons/bookings-form.php:498
+msgid "Selected Booking Form"
+msgstr "選択された予約フォーム"
+
+# @ em-pro
+#: add-ons/bookings-form.php:435
+msgid "You must include an E-mail field type for booking forms to work. These are used to create the user account and aren't shown to logged in users."
+msgstr "メールフィールドタイプを、予約フォームを機能させるために含まなければいけません。これらはユーザーアカウントを作るために使われ、ログインユーザーには表示されません。"
+
+# @ em-pro
+#: add-ons/bookings-form.php:491
+msgid "Booking Form - General Information"
+msgstr "予約フォーム-一般情報"
+
+# @ em-pro
+#: add-ons/bookings-form.php:494
+msgid "You can customize the fields shown in your booking forms below. "
+msgstr "予約フォームの下に表示されるフィールドをカスタマイズできます。"
+
+# @ em-pro
+#: add-ons/bookings-form.php:494
+msgid "It is required that you have at least an email and name field so guest users can register. Registration fields are only shown to guest visitors. Not doing so may result in unexpected behaviour."
+msgstr "メールと名前のフィールドがゲストユーザーが認証するために最低でも必要です。認証フィールドはゲストユーザーにのみ表示されます。こうしないことは予期しない動作につながるかもしれません。"
+
+# @ em-pro
+#: add-ons/bookings-form.php:524
+msgid "This is the default bookings form and will be used for any event where you have not chosen a speficic form to use."
+msgstr "これはデフォルトの予約フォームで、特定のフォームを使う事を選択しない場合はこれが使われます。"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:53
+#: add-ons/coupons.php:469
+#: add-ons/coupons.php:479
+msgid "Discount"
+msgstr "割引"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:53
+#: add-ons/coupons.php:466
+#: add-ons/coupons.php:476
+msgid "Code"
+msgstr "コード"
+
+# @ dbem
+#: add-ons/coupons/coupon.php:102
+#, php-format
+msgid "%s is required."
+msgstr "%sが必要です。"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:124
+#, php-format
+msgid "Something went wrong saving your %s."
+msgstr "%sを保存するさい何か問題がありました。"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:124
+#: add-ons/coupons/coupon.php:128
+#: add-ons/coupons/coupon.php:133
+#: add-ons/coupons/coupon.php:135
+#: add-ons/coupons/coupon.php:149
+msgid "Coupon"
+msgstr "クーポン"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:128
+#: add-ons/coupons/coupon.php:135
+#, php-format
+msgid "Successfully saved %s"
+msgstr "%sは正しく保存されました"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:133
+#, php-format
+msgid "Something went wrong updating your %s."
+msgstr "%sを更新する際何か問題がありました。"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:149
+#, php-format
+msgid "Successfully deleted %s"
+msgstr "%sは正しく削除されました"
+
+# @ em-pro
+#: add-ons/coupons/coupon.php:221
+#: add-ons/coupons/coupon.php:225
+#, php-format
+msgid "%s Off"
+msgstr "%s　off"
+
+# @ em-pro
+#: add-ons/coupons.php:44
+#: add-ons/coupons.php:589
+#: add-ons/coupons.php:600
+msgid "Original Total Price"
+msgstr "オリジナルの総額"
+
+# @ em-pro
+#: add-ons/coupons.php:49
+#: add-ons/coupons.php:590
+#: add-ons/coupons.php:601
+msgid "Coupon Discount"
+msgstr "クーポンディスカウント"
+
+# @ em-pro
+#: add-ons/coupons.php:124
+msgid "Invalid coupon code provided"
+msgstr "安定していないクーポンコード"
+
+# @ em-pro
+#: add-ons/coupons.php:161
+#: add-ons/coupons.php:294
+#: add-ons/coupons.php:447
+#: add-ons/coupons.php:450
+msgid "Coupons"
+msgstr "クーポン"
+
+# @ em-pro
+#: add-ons/coupons.php:161
+msgid "Coupons Manager"
+msgstr "クーポンマネージャー"
+
+# @ em-pro
+#: add-ons/coupons.php:205
+#: add-ons/coupons.php:693
+msgid "Coupon Code"
+msgstr "クーポンコード"
+
+# @ em-pro
+#: add-ons/coupons.php:258
+msgid "Coupon Not Found"
+msgstr "クーポンが見つかりません"
+
+# @ em-pro
+#: add-ons/coupons.php:267
+msgid "Coupon Invalid"
+msgstr "クーポンが使用できません"
+
+# @ em-pro
+#: add-ons/coupons.php:295
+msgid "Coupons selected here will be applied to bookings made for this event."
+msgstr "ここで選択されたクーポンはこのイベントで作られた予約に適応されます。"
+
+# @ em-pro
+#: add-ons/coupons.php:305
+msgid "No coupons created yet."
+msgstr "クーポンがまだ作られていません。"
+
+# @ default
+#: add-ons/coupons.php:308
+msgid "The following codes will be automatically available to this event as well"
+msgstr "付属するコードもこのイベントに自動的に利用可能になります"
+
+# @ em-pro
+#: add-ons/coupons.php:438
+msgid "Edit Coupons"
+msgstr "クーポンを編集する"
+
+# @ dbem
+#: add-ons/coupons.php:447
+#, php-format
+msgid "My %s"
+msgstr "マイ%s"
+
+# @ dbem
+#: add-ons/coupons.php:450
+#, php-format
+msgid "All %s"
+msgstr "すべての%s"
+
+# @ em-pro
+#: add-ons/coupons.php:467
+#: add-ons/coupons.php:477
+msgid "Created By"
+msgstr "によって作成"
+
+# @ em-pro
+#: add-ons/coupons.php:468
+#: add-ons/coupons.php:478
+#: add-ons/coupons.php:706
+msgid "Description"
+msgstr "詳細"
+
+# @ em-pro
+#: add-ons/coupons.php:470
+#: add-ons/coupons.php:480
+#: add-ons/coupons.php:560
+msgid "Uses"
+msgstr "使用"
+
+# @ em-pro
+#: add-ons/coupons.php:502
+#: add-ons/coupons.php:565
+msgid "Unlimited"
+msgstr "無制限"
+
+# @ dbem
+#: add-ons/coupons.php:513
+msgid "No coupons have been inserted yet!"
+msgstr "どのクーポンもまだ挿入されていません！"
+
+# @ dbem
+#: add-ons/coupons.php:530
+#: add-ons/coupons.php:651
+msgid "Unauthorized Access"
+msgstr "権限のないアクセス"
+
+# @ dbem
+#: add-ons/coupons.php:530
+#: add-ons/coupons.php:651
+#, php-format
+msgid "You do not have the rights to manage this %s."
+msgstr "あなたはこの%sを管理する権限がありません。"
+
+# @ dbem
+#: add-ons/coupons.php:530
+#: add-ons/coupons.php:651
+msgid "coupon"
+msgstr "クーポン"
+
+# @ em-pro
+#: add-ons/coupons.php:556
+msgid "Coupon Usage History"
+msgstr "クーポン利用履歴"
+
+# @ em-pro
+#: add-ons/coupons.php:558
+#, php-format
+msgid "You are viewing the details of coupon %s - <a href=\"%s\">edit</a>"
+msgstr " あなたはクーポンの詳細を見ています。%s - <a href=\"%s\">編集</a>"
+
+# @ dbem
+#: add-ons/coupons.php:587
+#: add-ons/coupons.php:598
+msgid "Booker"
+msgstr "予約者"
+
+# @ dbem
+#: add-ons/coupons.php:588
+#: add-ons/coupons.php:599
+msgid "Spaces"
+msgstr "定員"
+
+# @ em-pro
+#: add-ons/coupons.php:591
+#: add-ons/coupons.php:602
+msgid "Final Price"
+msgstr "最終価格"
+
+# @ dbem
+#: add-ons/coupons.php:626
+#: add-ons/gateways/gateway.offline.php:149
+#: add-ons/gateways/gateway.paypal.php:187
+msgid "Edit/View"
+msgstr "編集/閲覧"
+
+# @ em-pro
+#: add-ons/coupons.php:639
+msgid "Your coupon hasn't been used yet!"
+msgstr "クーポンはまだ使用されていません！"
+
+# @ dbem
+#: add-ons/coupons.php:657
+msgid "required"
+msgstr "必要"
+
+# @ em-pro
+#: add-ons/coupons.php:661
+msgid "Edit Coupon"
+msgstr "クーポンの編集"
+
+# @ em-pro
+#: add-ons/coupons.php:670
+msgid "Event-Wide Coupon?"
+msgstr "イベントワイドクーポン？"
+
+# @ em-pro
+#: add-ons/coupons.php:673
+msgid "If checked, all events belonging to you will accept this coupon."
+msgstr "もしチェックすると、あなたが管理するすべてのイベントはこのクーポンを受け入れます。"
+
+# @ em-pro
+#: add-ons/coupons.php:678
+msgid "Site-Wide Coupon?"
+msgstr "サイトワイドクーポン？"
+
+# @ em-pro
+#: add-ons/coupons.php:681
+msgid "All events on this site will accept this coupon."
+msgstr "このサイトのすべてのイベントはこのクーポンを受け入れます。"
+
+# @ em-pro
+#: add-ons/coupons.php:686
+msgid "Registerd Users Only?"
+msgstr "認証ユーザーのみ？"
+
+# @ em-pro
+#: add-ons/coupons.php:689
+msgid "If checked, only logged in users will be able to use this coupon."
+msgstr "もしチェックすると、ログインユーザーのみがこのクーポンを使用できます。"
+
+# @ em-pro
+#: add-ons/coupons.php:696
+msgid "This is the code you give to users for them to use when booking."
+msgstr "これはユーザーが予約する際に使用するコードです。"
+
+# @ em-pro
+#: add-ons/coupons.php:712
+msgid "Total Coupons"
+msgstr "総クーポン数"
+
+# @ em-pro
+#: add-ons/coupons.php:715
+msgid "If set, this coupon will only be valid that many times."
+msgstr "設定されると、このクーポンはその回数だけ有効になります。"
+
+# @ em-pro
+#: add-ons/coupons.php:720
+msgid "Start Date"
+msgstr "開始期日"
+
+# @ em-pro
+#: add-ons/coupons.php:725
+msgid "Coupons will only be valid from this date onwards."
+msgstr "クーポンはこの期日から使用できます。"
+
+# @ em-pro
+#: add-ons/coupons.php:729
+msgid "End Date"
+msgstr "終了期日"
+
+# @ em-pro
+#: add-ons/coupons.php:734
+msgid "Coupons not be valid after this date."
+msgstr "クーポンはこの日以降は使用できません。"
+
+# @ em-pro
+#: add-ons/coupons.php:739
+msgid "Discount Type"
+msgstr "値引きの種類"
+
+# @ default
+#: add-ons/coupons.php:742
+msgid "Percentage"
+msgstr "割合"
+
+# @ default
+#: add-ons/coupons.php:743
+msgid "Fixed Amount"
+msgstr "定額"
+
+# @ em-pro
+#: add-ons/coupons.php:749
+msgid "Discount Amount"
+msgstr "値引き"
+
+# @ em-pro
+#: add-ons/coupons.php:752
+msgid "Enter a number here only, decimals accepted."
+msgstr "数字だけを入力してください、小数点は利用できます。"
+
+# @ default
+#: add-ons/coupons.php:758
+#: add-ons/gateways/gateway.php:359
+msgid "Save Changes"
+msgstr "変更を保存する"
+
+# @ default
+#: add-ons/coupons.php:770
+msgid "Applicable Coupon"
+msgstr "適切なクーポン"
+
+# @ dbem
+#: add-ons/emails.php:170
+#: add-ons/gateways.php:257
+#: emp-forms.php:31
+#: emp-updates.php:82
+msgid "Click to toggle"
+msgstr "クリックでトグル"
+
+# @ em-pro
+#: add-ons/emails.php:170
+msgid "Event Email Reminders"
+msgstr "イベントメールリマインダー"
+
+# @ em-pro
+#: add-ons/emails.php:175
+msgid "Events Manager can send people that booked a place at your events a reminder email before it starts."
+msgstr "Events Manager はあなたのイベントに予約した人にそれが始まる前にリマインダーメールを送ることができます。"
+
+# @ em-pro
+#: add-ons/emails.php:176
+#, php-format
+msgid "We use <a href=\"%s\">WP Cron</a> for sheduling checks for future events, which relies on site visits to trigger these tasks to run. If you have low levels of site traffic, this may not happen frequently enough, so you may want to consider forcing WP-Cron to run every few minutes. For more information, <a href=\"%s\">read this tutorial</a> on setting up WP Cron."
+msgstr "私たちはスケジュール確認のために<a href=\"%s\">WP Cron</a>を使います。それはサイト訪問をこのタスクのトリガーとして依存します。もしサイトトラフィックが低ければ、これは頻繁にはおこりません。なのでWP-Cronを数分ごとに起動したいかもしれません。詳細は<a href=\"%s\">このチュートリアルを読んで</a>WP Cron をセットアップしてください。"
+
+# @ em-pro
+#: add-ons/emails.php:178
+msgid "<strong>Important!</strong>, you should use SMTP as your email setup if you are sending automated emails in this way for optimal performance. Other methods are not suited to sending mass emails."
+msgstr "<strong>Important!</strong>,あなたはメールを自動的にこの方法で送りたいのなら、SMTPをメール設定として利用してください。他の方法は大量のメールを送るには不適当です。"
+
+# @ dbem
+#: add-ons/emails.php:181
+msgid "Enable Email Reminders?"
+msgstr "メールリマインダーを有効にしますか？"
+
+# @ dbem
+#: add-ons/emails.php:182
+msgid "Days before reminder"
+msgstr "前日のリマインダー"
+
+# @ default
+#: add-ons/emails.php:182
+msgid "You can choose to send people attending your event x days before the event starts. Minimum is one day."
+msgstr "イベント開始前のx日前に参加者にメールを送ることができます。最小は一日前です。"
+
+# @ dbem
+#: add-ons/emails.php:183
+msgid "Attach ical invite?"
+msgstr "ical 招待を付属させますか？"
+
+# @ default
+#: add-ons/emails.php:183
+msgid "If using SMTP in your email settings. You can automatically attach an ical file which some email clients (e.g. gmail) will render as an invitation they can add to their calendar."
+msgstr "SMTPをメール設定で利用しているなら、いくつかのメールクライアント(例えばGmail)が招待として受け取る、そしてカレンダーに追加できるicalファイルを自動的に添付できます。"
+
+# @ em-pro
+#: add-ons/emails.php:187
+msgid "WP Cron Time"
+msgstr "WP Cron 時間"
+
+# @ em-pro
+#: add-ons/emails.php:190
+msgid "Every day Events Manager automatically checks upcoming events in order to generate emails. You can choose at what time of day to run this check, if your site has a lot of traffic, it may help having this run at times of lower server loads."
+msgstr "毎日Events Managerは、メールを生成するために自動的に最新のイベントを確認します。このチェックを一日のいつやるかを選ぶことができます。もしトラフィックが多いなら、これはサーバー読み込みが少ない時間に行う事を助けるかもしれません。"
+
+# @ dbem
+#: add-ons/emails.php:194
+msgid "Reminder subject"
+msgstr "リマインダー項目"
+
+# @ dbem
+#: add-ons/emails.php:195
+msgid "Approved email"
+msgstr "認証メール"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:152
+msgid "Refunded"
+msgstr "返金"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:163
+msgid "Voided"
+msgstr "無効"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:192
+msgid "Credit Card Number"
+msgstr "クレジットカード番号"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:196
+msgid "Expiry Date"
+msgstr "締切日"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:215
+msgid "CCV"
+msgstr "CCV"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:340
+#: add-ons/gateways/gateway.offline.php:374
+#: add-ons/gateways/gateway.paypal.php:487
+msgid "Success Message"
+msgstr "成功メッセージ"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:343
+msgid "The message that is shown to a user when a booking is successful and payment has been taken."
+msgstr "予約が成功して支払いが行われた時にこのメッセージがユーザーに表示されます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:347
+#: add-ons/gateways/gateway.paypal.php:494
+msgid "Success Free Message"
+msgstr "成功した無料メッセージ"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:350
+msgid "If some cases if you allow a free ticket (e.g. pay at gate) as well as paid tickets, this message will be shown and the user will not be charged."
+msgstr "ケースによって、もし無料チケットを有料チケットと同様に許可したなら（例えば窓口での支払い）、このメッセージが表示され、ユーザーはチャージされないでしょう。"
+
+# @ dbem
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:355
+#: add-ons/gateways/gateway.authorize.aim.php:398
+#: add-ons/gateways/gateway.paypal.php:510
+#: add-ons/gateways/gateway.php:317
+#, php-format
+msgid "%s Options"
+msgstr "%sオプション"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:356
+#, php-format
+msgid "Please visit the <a href=\"%s\">documentation</a> for further instructions on setting up Authorize.net with Events Manager."
+msgstr "<a href=\"%s\">documentation</a> を訪れ、Event ManagerのAuthorize.netの設定の詳細を見てください。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:360
+msgid "Mode"
+msgstr "モード"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:364
+msgid "Sandbox"
+msgstr "サンドボックス"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:365
+msgid "Live"
+msgstr "ライブ"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:368
+#, php-format
+msgid "Please visit <a href=\"%s\">Authorize.net</a> to set up a sandbox account if you would like to test this gateway out. Alternatively, you can use your real account in test mode, which you can set on your Authorize.net control panel."
+msgstr "<a href=\"%s\">Authorize.net</a> を訪れ、このゲートウェイを試したいなら、サンドボックスアカウントを設定してください。代替案として、本当のアカウントをテストモードで使用できます。その場合 Authorize.net のコントロールパネルで設定できます。"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:372
+msgid "API Login ID"
+msgstr "API ログインID"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:376
+msgid "Transaction key"
+msgstr "トランザクションキー"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:380
+msgid "Payment Notifications"
+msgstr "支払い確認"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:381
+msgid "If you would like to receive notifications from Authorize.net and handle refunds or voided transactions automatically, you need to enable Silent Post URL and provide an MD5 Hash in your merchant interface."
+msgstr "もし確認をAuthorize.netから受け取り、返金対応や無効の取引の対応をしたい場合、Silent Post URLを有効にし、あなたのマーチャントインターフェースにあるMD5 Hashを提供しなければいけません。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:382
+#, php-format
+msgid "Your return url is %s."
+msgstr "リターンurlは%sです。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:382
+msgid "You can use this as your Silent Post URL."
+msgstr "これをSilent Post URLとして使用できます。"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:385
+msgid "Security: MD5 Hash"
+msgstr "セキュリティ:MD5 Hash"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:388
+msgid "This string of text needs to match that in your merchant interface settings."
+msgstr "このテキストはマーチャントインターフェース設定と一致する必要があります。"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:392
+msgid "User Login ID"
+msgstr "ユーザーログインID"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:395
+msgid "This is the username you use to log into your merchant interface."
+msgstr "これはあなたのマーチャントインターフェースにログインするためのユーザーネームです。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:398
+msgid "Advanced"
+msgstr "アドバンスド"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:400
+msgid "Email Customer (on success)"
+msgstr "メールカスタマー(成功している）"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:410
+msgid "Customer Receipt Email Header"
+msgstr "カスタマーレシートのメールヘッダー"
+
+# @ emp-pro
+#: add-ons/gateways/gateway.authorize.aim.php:414
+msgid "Customer Receipt Email Footer"
+msgstr "カスタマーレシートのメールフッター"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:418
+#: add-ons/gateways/gateway.paypal.php:645
+msgid "Manually approve completed transactions?"
+msgstr "人力で完了した取引を認証しますか？"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:421
+#: add-ons/gateways/gateway.paypal.php:648
+msgid "By default, when someone pays for a booking, it gets automatically approved once the payment is confirmed. If you would like to manually verify and approve bookings, tick this box."
+msgstr "デフォルトとして、誰かが予約の支払いをした時、支払いが認証されると自動的に認証されます。もし人力で予約を認証したい場合、このボックスを確認してください。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.authorize.aim.php:422
+#: add-ons/gateways/gateway.paypal.php:649
+#, php-format
+msgid "Approvals must also be required for all bookings in your <a href=\"%s\">settings</a> for this to work properly."
+msgstr " <a href=\"%s\">settings</a>でのすべての予約の許可が、これを正しく作動させるために必要です。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:44
+msgid "Payment has been registered."
+msgstr "支払いが確認されました。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:48
+msgid "Booking is now fully paid and confirmed."
+msgstr "予約の支払いが完全に終わり、認証されました。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:55
+msgid "Please enter a valid payment amount. Numbers only, use negative number to credit a booking."
+msgstr "正しい支払額を入力してください。数字のみで、予約にクレジットするために負の数を使用してください。"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:67
+msgid "Be aware that by approving a booking awaiting payment, a full payment transaction will be registered against this booking, meaning that it will be considered as paid."
+msgstr "支払いを待っている予約を許可することで、支払い過程が完全にこなされ、それが支払いとして考えられることに注意してください。"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:146
+#: add-ons/gateways/gateway.paypal.php:185
+msgid "Approve"
+msgstr "許可"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:147
+msgid "Reject"
+msgstr "拒否"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:158
+msgid "Add Booking"
+msgstr "予約の追加"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:166
+msgid "add booking"
+msgstr "予約の追加"
+
+# @ dbem
+#: add-ons/gateways/gateway.offline.php:176
+#: add-ons/gateways/gateway.offline.php:201
+msgid "Add Offline Payment"
+msgstr "オフライン支払いの追加"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:184
+#: add-ons/gateways/gateways.transactions.php:96
+msgid "Amount"
+msgstr "額"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:187
+msgid "Please enter a valid payment amount (e.g. 10.00). Use negative numbers to credit a booking."
+msgstr "正しい支払額を入力してください(例えば10.00)。予約をクレジットするために負の数を使用してください。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:191
+msgid "Comments"
+msgstr "コメント"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:232
+#, php-format
+msgid "Go back to &quot;%s&quot; bookings"
+msgstr "&quot;%s&quot;予約に戻る"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:237
+#, php-format
+msgid "Add Booking For &quot;%s&quot;"
+msgstr "&quot;%s&quot;の為の予約を加える"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:290
+#: add-ons/gateways/gateway.offline.php:293
+msgid "Manual booking."
+msgstr "手動で予約します。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:299
+msgid "Add another booking"
+msgstr "他の予約を追加する"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:331
+msgid "Select a user, or enter a new one below."
+msgstr "ユーザーを選ぶか、新しい人をいかに入力してください。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:348
+msgid "Amount Paid"
+msgstr "支払われた額"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:350
+msgid "Fully Paid"
+msgstr "完全な支払い"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:351
+msgid "If you check this as fully paid, and leave the amount paid blank, it will be assumed the full payment has been made."
+msgstr "もしこれを完全な支払いとしてチェックして、支払額を空白にすると、完全な支払いが行われたと仮定されます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.offline.php:377
+msgid "The message that is shown to a user when a booking with offline payments is successful."
+msgstr "オフライン支払いでの予約が成功した場合に表示されるメッセージです。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:17
+msgid "Awaiting PayPal Payment"
+msgstr "ペイパル支払いを有効にする"
+
+# @ dbem
+#: add-ons/gateways/gateway.paypal.php:115
+msgid "Please click the following button to proceed to PayPal."
+msgstr "以下のボタンをクリックして、ペイパル支払いを有効にしてください。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:157
+msgid "Resume Payment"
+msgstr "支払いの再開"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:453
+msgid "Unknown"
+msgstr "Unknown"
+
+# @ default
+#: add-ons/gateways/gateway.paypal.php:455
+msgid "Unprocessed payment needs refund"
+msgstr "返金が必要な処理されていない支払い"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:490
+msgid "The message that is shown to a user when a booking is successful whilst being redirected to PayPal for payment."
+msgstr "このメッセージは、予約が成功して、ペイパルにリダイレクトされた場合にユーザーに表示されます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:497
+msgid "If some cases if you allow a free ticket (e.g. pay at gate) as well as paid tickets, this message will be shown and the user will not be redirected to PayPal."
+msgstr "ケースによって、もし無料チケットを有料チケットと同様に許可したなら（例えば窓口での支払い）、このメッセージが表示され、ユーザーはペイパルにリダイレクトされないでしょう。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:501
+msgid "Thank You Message"
+msgstr "感謝メッセージ"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:504
+msgid "If you choose to return users to the default Events Manager thank you page after a user has paid on PayPal, you can customize the thank you message here."
+msgstr "もしユーザーが、ペイパルの支払いの後、デフォルトのEvent Managerの感謝ページに戻ることを選択するなら、感謝メッセージをここでカスタマイズできます。"
+
+# @ default
+#: add-ons/gateways/gateway.paypal.php:511
+msgid "<strong>Important:</strong>In order to connect PayPal with your site, you need to enable IPN on your account."
+msgstr "<strong>Important:</strong>あなたのサイトとペイパルをつなげるために、あなたのアカウントのIPNを有効にする必要があります。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:511
+#, php-format
+msgid "Your return url is %s"
+msgstr "リターンurlは%sです。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:512
+#, php-format
+msgid "Please visit the <a href=\"%s\">documentation</a> for further instructions."
+msgstr "<a href=\"%s\">documentation</a>詳細はこちらのリンクまで。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:516
+msgid "PayPal Email"
+msgstr "ペイパルメール"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:522
+msgid "PayPal Site"
+msgstr "ペイパルサイト"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:542
+msgid "Paypal Currency"
+msgstr "ペイパル通貨"
+
+# @ dbem
+#: add-ons/gateways/gateway.paypal.php:543
+#, php-format
+msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+msgstr "<a href=\"%s\">settings</a> pageで通貨を設定してください。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:547
+msgid "PayPal Language"
+msgstr "ペイパル言語"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:596
+msgid "PayPal allows you to select a default language users will see. This is also determined by PayPal which detects the locale of the users browser. The default would be US."
+msgstr "ペイパル上でユーザーが見るデフォルト言語を選択することができます。これはまたユーザーのブラウザの場所を探知して、ペイパルによっても決められます。デフォルトはUSです。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:600
+msgid "PayPal Mode"
+msgstr "ペイパルモード"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:603
+msgid "Live Site"
+msgstr "ライブサイト"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:604
+msgid "Test Mode (Sandbox)"
+msgstr "テストモード(サンドボックス）"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:610
+msgid "Return URL"
+msgstr "リターンURL"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:613
+msgid "Once a payment is completed, users will be offered a link to this URL which confirms to the user that a payment is made. If you would to customize the thank you page, create a new page and add the link here. For automatic redirect, you need to turn auto-return on in your PayPal settings."
+msgstr "支払いが完了すると、ユーザーは支払いが確認されたことを示すこのURLのリンクを得ます。この感謝ページをカスタマイズしたいなら、新しいページを作り、リンクを追加してください。自動的なリダイレクトの為にはペイパル設定のauto-returnを設定する必要があります。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:617
+msgid "Cancel URL"
+msgstr "キャンセルURL"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:620
+msgid "Whilst paying on PayPal, if a user cancels, they will be redirected to this page."
+msgstr "ペイパル支払い中にユーザーがキャンセルすると、このページにリダイレクトされます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:624
+msgid "PayPal Page Logo"
+msgstr "ペイパルページロゴ"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:627
+msgid "Add your logo to the PayPal payment page. It's highly recommended you link to a https:// address."
+msgstr "ペイパル支払いページにあなたのロゴを追加してください。https:// addressをリンクすることは強く推奨されます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:631
+msgid "Border Color"
+msgstr "ボーダーカラー"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:634
+msgid "Provide a hex value color to change the color from the default blue to another color (e.g. #CCAAAA)."
+msgstr "hex単位の色を、デフォルトの青から色を変える為に提供してください。(例えば#CCAAAA)."
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:638
+msgid "Delete Bookings Pending Payment"
+msgstr "支払いが保留の予約を削除する"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:640
+msgid "minutes"
+msgstr "minutes"
+
+# @ em-pro
+#: add-ons/gateways/gateway.paypal.php:641
+msgid "Once a booking is started and the user is taken to PayPal, Events Manager stores a booking record in the database to identify the incoming payment. These spaces may be considered reserved if you enable <em>Reserved unconfirmed spaces?</em> in your Events &gt; Settings page. If you would like these bookings to expire after x minutes, please enter a value above (note that bookings will be deleted, and any late payments will need to be refunded manually via PayPal)."
+msgstr "予約が始まり、ユーザーがペイパルを利用し始めると、Events Manager は支払いの状況を知るために、予約記録をデータベースに保存します。これらの定員は<em>Reserved unconfirmed spaces?</em>を有効にすると、予約として認識されます。もしこれらの予約をx分後に無効にしたいなら、以上の値を入力してください。（予約は削除され、その後の支払いはペイパルを通じて手動で返金される必要がある事に注意してください。）"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:312
+#, php-format
+msgid "Edit &quot;%s&quot; settings"
+msgstr "&quot;%s&quot; の設定の編集"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:321
+msgid "Gateway Title"
+msgstr "ゲートウェイタイトル"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:326
+msgid "The user will see this as the text option when choosing a payment method."
+msgstr "ユーザーは支払い方法を選択する際にこのテキストを見ます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:331
+msgid "Booking Form Information"
+msgstr "予約フォーム情報"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:336
+msgid "If a user chooses to pay with this gateway, or it is selected by default, this message will be shown just below the selection."
+msgstr "ユーザーがこのゲートウェイで支払う事を選ぶか、デフォルトで選ばれている場合、セクションの真下にこのメッセージが表示されます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:344
+msgid "Quick Pay Buttons"
+msgstr "クイックペイボタン"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:345
+#, php-format
+msgid "If you have chosen to only use quick pay buttons in your <a href=\"%s\">gateway settings</a>, these settings below will be used."
+msgstr "<a href=\"%s\">ゲートウェイ設定</a>,でクイックペイボタンを使う事のみを選んだ場合、これらの以下の設定が使われます。"
+
+# @ em-pro
+#: add-ons/gateways/gateway.php:349
+msgid "Payment Button"
+msgstr "支払いボタン"
+
+# @ dbem
+#: add-ons/gateways/gateway.php:352
+#, php-format
+msgid "Choose the button text. To use an image instead, enter the full url starting with %s or %s."
+msgstr "ボタンテキストを選んでください。代わりに画像を使うなら、%s か %s.から始まる完全なurlを入力してください。"
+
+# @ dbem
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:52
+#: add-ons/gateways.php:331
+msgid "Transactions"
+msgstr "取引"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:94
+msgid "User"
+msgstr "ユーザー"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:95
+msgid "Date"
+msgstr "期日"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:97
+msgid "Transaction id"
+msgstr "取引id"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:98
+msgid "Gateway"
+msgstr "ゲートウェイ"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:99
+msgid "Status"
+msgstr "状態"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:100
+msgid "Notes"
+msgstr "ノート"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:126
+#, php-format
+msgid "%s Rows"
+msgstr "%s列"
+
+# @ default
+#: add-ons/gateways/gateways.transactions.php:142
+msgid "Filter"
+msgstr "フィルター"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:144
+msgid "Displaying Event"
+msgstr "表示されているイベント"
+
+# @ dbem
+#: add-ons/gateways/gateways.transactions.php:146
+msgid "Displaying User"
+msgstr "表示されているユーザー"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:230
+#: add-ons/gateways/gateways.transactions.php:239
+#: add-ons/gateways/gateways.transactions.php:248
+msgid "None yet"
+msgstr "だれもいません"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:273
+msgid "No Transactions"
+msgstr "取引がありません"
+
+# @ default
+#: add-ons/gateways/gateways.transactions.php:354
+msgid "Transaction ID"
+msgstr "取引ID"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:375
+msgid "Transaction deleted"
+msgstr "削除された取引"
+
+# @ em-pro
+#: add-ons/gateways/gateways.transactions.php:379
+msgid "Transaction could not be deleted"
+msgstr "削除できない取引"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways.php:40
+#: emp-install.php:138
+msgid "Address Line 2"
+msgstr "住所　２"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways.php:47
+#: emp-install.php:145
+msgid "Company"
+msgstr "会社"
+
+# @ em-pro
+#: add-ons/gateways.php:53
+msgid "All transactional history associated with this booking will also be deleted."
+msgstr "これに関連した全ての取引履歴もすべて削除されます。"
+
+# @ em-pro
+#: add-ons/gateways.php:54
+msgid "Are you sure you want to delete? This may make your transaction history out of sync with your payment gateway provider."
+msgstr "削除したいのですか？これはあなたの支払いゲートウェイプロバイダーと取引履歴の同期をキャンセルしてしまいます。"
+
+# @ em-pro
+#: add-ons/gateways.php:60
+msgid "Awaiting Online Payment"
+msgstr "オンライン支払待ち"
+
+# @ em-pro
+#: add-ons/gateways.php:61
+msgid "Awaiting Offline Payment"
+msgstr "オフライン支払い待ち"
+
+# @ em-pro
+#: add-ons/gateways.php:257
+msgid "Payment Gateway Options"
+msgstr "支払いゲートウェイオプション"
+
+# @ em-pro
+#: add-ons/gateways.php:261
+msgid "Enable Quick Pay Buttons?"
+msgstr "クイックペイボタンを有効にしますか？"
+
+# @ em-pro
+#: add-ons/gateways.php:261
+#, php-format
+msgid "Only works with gateways that do not require additional payment information to be submitted (e.g. PayPal and Offline payments). If enabled, the default booking form submit button is not used, and each gateway will have a button (or image, see <a href=\"%s\">individual gateway settings</a>) which if clicked on will submit a booking for that gateway."
+msgstr "追加の支払い情報を必要としないゲートウェイのみで働きます。（例えばペイパルやオフライン支払）もし有効にすると、デフォルトの予約フォームの決定ボタンは使われず、それぞれのゲートウェイにボタンが表示されます（もしくは画像、<a href=\"%s\">個人のゲートウェイ設定</a>を見てください）。もしクリックされると、そのゲートウェイでの予約が行われます。"
+
+# @ em-pro
+#: add-ons/gateways.php:262
+msgid "Gateway Label"
+msgstr "ゲートウェイラベル"
+
+# @ em-pro
+#: add-ons/gateways.php:262
+msgid "If you are not using quick pay buttons a drop-down menu will be used, with this label."
+msgstr "もしクイックペイボタンを使用していないなら、ドロップダウンメニューがこのラベルとともに使われます"
+
+# @ em-pro
+#: add-ons/gateways.php:272
+msgid "Payment Gateways"
+msgstr "ペイメントゲートウェイ"
+
+# @ default
+#: add-ons/gateways.php:295
+msgid "Gateway updated."
+msgstr "ゲートウェイがアップデートされました。"
+
+# @ default
+#: add-ons/gateways.php:296
+msgid "Gateway not updated."
+msgstr "ゲートウェイはアップデートされていません。"
+
+# @ default
+#: add-ons/gateways.php:297
+msgid "Gateway activated."
+msgstr "ゲートウェイが有効になりました。"
+
+# @ default
+#: add-ons/gateways.php:298
+msgid "Gateway not activated."
+msgstr "ゲートウェイが有効ではありません。"
+
+# @ default
+#: add-ons/gateways.php:299
+msgid "Gateway deactivated."
+msgstr "ゲートウェイが無効になりました。"
+
+# @ default
+#: add-ons/gateways.php:300
+msgid "Gateway not deactivated."
+msgstr "ゲートウェイが無効になっていません。"
+
+# @ default
+#: add-ons/gateways.php:301
+msgid "Gateway activation toggled."
+msgstr "ゲートウェイ有効化がトグルされました。"
+
+# @ em-pro
+#: add-ons/gateways.php:305
+msgid "Edit Gateways"
+msgstr "ゲートウェイを編集する"
+
+# @ default
+#: add-ons/gateways.php:317
+#: add-ons/gateways.php:416
+msgid "Bulk Actions"
+msgstr "バルクアクション"
+
+# @ default
+#: add-ons/gateways.php:318
+#: add-ons/gateways.php:417
+msgid "Toggle activation"
+msgstr "アクティベーションをトグルする"
+
+# @ default
+#: add-ons/gateways.php:320
+msgid "Apply"
+msgstr "適応する"
+
+# @ em-pro
+#: add-ons/gateways.php:329
+msgid "Gateway Name"
+msgstr "ゲートウェイ名"
+
+# @ em-pro
+#: add-ons/gateways.php:330
+#: add-ons/gateways.php:390
+msgid "Active"
+msgstr "アクティブ"
+
+# @ default
+#: add-ons/gateways.php:377
+msgid "Settings"
+msgstr "設定"
+
+# @ default
+#: add-ons/gateways.php:380
+msgid "Deactivate"
+msgstr "無効にする"
+
+# @ default
+#: add-ons/gateways.php:382
+msgid "Activate"
+msgstr "有効化する"
+
+# @ em-pro
+#: add-ons/gateways.php:392
+msgid "Inactive"
+msgstr "有効でない"
+
+# @ em-pro
+#: add-ons/gateways.php:397
+msgid "View transactions"
+msgstr "取引を見る"
+
+# @ em-pro
+#: add-ons/gateways.php:406
+msgid "No Payment gateways where found for this install."
+msgstr "このインストールのための支払いゲートウェイが見つかりません。"
+
+# @ em-pro
+#: add-ons/gateways.php:554
+msgid "Common User Fields for Gateways"
+msgstr "ゲートウェイの一般ユーザーフィールド"
+
+# @ em-pro
+#: add-ons/gateways.php:557
+msgid "In many cases, customer address information is required by gateways for verification. This section connects your custom fields to commonly used customer information fields."
+msgstr "多くの場合、予約者の住所情報がゲートウェイで認証に必要です。このセクションは予約者情報フィールドに使われるあなたのカスタムフィールドに関連しています。"
+
+# @ em-pro
+#: add-ons/gateways.php:558
+msgid "After creating user fields above, you should link them up in here so some gateways can make use of them when processing payments."
+msgstr "ユーザーフィールドを以上に作った後、ゲートウェイがそれらを支払いの処理に使用するために、ここにそれらをリンクすべきです。"
+
+# @ em-pro
+#: add-ons/gateways.php:561
+msgid "Name (first/last)"
+msgstr "名前（名/姓）"
+
+# @ default
+#: add-ons/gateways.php:561
+msgid "Generated accordingly from user first/last name or full name field. If a name field isn't provided in your booking form, the username will be used instead."
+msgstr "ユーザーの名/姓かフルネームによって生成されます。もし名前フィールドが予約フォームにないなら、ユーザーネームが代わりに使われます。"
+
+# @ default
+#: add-ons/gateways.php:562
+msgid "Uses the WordPress account email associated with the user."
+msgstr "ユーザーに関連したWordPressアカウントメールを使用する。"
+
+# @ em-pro
+# @ dbem
+#: add-ons/gateways.php:568
+#: emp-forms.php:351
+#: emp-forms.php:527
+msgid "none selected"
+msgstr "選択されていません"
+
+# @ em-pro
+#: add-ons/user-fields.php:151
+#: add-ons/user-fields.php:154
+msgid "n/a"
+msgstr "n/a"
+
+# @ dbem
+#: add-ons/user-fields.php:187
+msgid "Further Information"
+msgstr "詳細情報"
+
+# @ em-pro
+#: add-ons/user-fields.php:258
+msgid "User Fields"
+msgstr "ユーザーフィールド"
+
+# @ em-pro
+#: add-ons/user-fields.php:261
+#, php-format
+msgid "Registration fields are only shown to guest visitors. If you add new fields here and save, they will then be available as custom registrations in your bookings editor, and this information will be accessible and editable on each user <a href=\"%s\">profile page</a>."
+msgstr "認証フィールドはゲストユーザーにのみ表示されます。ここに新しいフィールドを追加して保存すると、それらはあなたの予約エディター上でカスタム認証として使用されます。また、この情報はそれぞれのユーザー<a href=\"%s\">プロフィール</a>でアクセスしたり編集したりすることができます。"
+
+# @ em-pro
+#: add-ons/user-fields.php:262
+msgid "<strong>Important:</strong> When editing this form, to make sure your current user information is displayed, do not change their field names."
+msgstr "<strong>重要:</strong>このフォームを編集するさい、現在のユーザー情報が表示されているかに気を付けて、そのフィールドネームを変えないでください。"
+
+# @ em-pro
+#: emp-forms.php:11
+#: emp-forms.php:19
+msgid "Forms Editor"
+msgstr "フォームエディター"
+
+# @ em-pro
+#: emp-forms.php:20
+msgid "On this page you can create/edit various forms used within Events Manager Pro."
+msgstr "このページでEvents Manager Proで使用できる多様なフォームの製作や編集ができます。"
+
+# @ em-pro
+#: emp-forms.php:31
+msgid "PRO Booking Form Options"
+msgstr "PRO 予約フォームオプション"
+
+# @ em-pro
+#: emp-forms.php:35
+msgid "Show profile fields to logged in users?"
+msgstr "プロフィールフィールドをログインユーザーに表示しますか？"
+
+# @ em-pro
+#: emp-forms.php:35
+msgid "When logged in, users usually don't see their profile fields, with this enabled, users will be able to update their profile fields alongside their booking. This is particularly useful if the user is missing key information. Note that this does not include usernames, name, passwords and emails, these must be modified from their user profile page."
+msgstr "ログインした際、ユーザーは普通自分のプロフィールフィールドを見ません。有効にすると、ユーザーは予約中にプロフィールフィールドを更新することができるようになります。これは特にユーザーが重要な情報を忘れている時に役に立ちます。これにはユーザーネーム、名前、パスワード、メールアドレスが含まれていないことに注意してください。これらは彼らのユーザーページから管理されなければいけません。"
+
+# @ em-pro
+#: emp-forms.php:36
+msgid "Make profile fields editable?"
+msgstr "プロフィールフィールドを編集可能にしますか？"
+
+# @ em-pro
+#: emp-forms.php:36
+msgid "If profile fields are set to show to logged in users, you can also choose whether or not to make these fields editable or just for viewing reference."
+msgstr "もしプロフィールフィールドがログインユーザーに表示されるよう設定した場合、それらのフィールドを閲覧のみ、または編集可能にするか選択することができます。"
+
+# @ em-pro
+#: emp-forms.php:543
+msgid "You must also add an end date."
+msgstr "あなたは終了期日も追加しなければいけません。"
+
+# @ dbem
+#: emp-forms.php:547
+#: emp-forms.php:560
+msgid "Dates must have correct formatting. Please use the date picker provided."
+msgstr "期日はフォーマッティングを集める必要があります。提供されたデータピッカーを使用してください。"
+
+# @ dbem
+#: emp-forms.php:553
+msgid "Please provide a later end date."
+msgstr "後の終了期日を提供してください。"
+
+# @ em-pro
+#: emp-forms.php:566
+#: emp-forms.php:930
+msgid "You must provide a start date."
+msgstr "開始日時を提供しなければいけません。"
+
+# @ em-pro
+#: emp-forms.php:584
+#: emp-forms.php:986
+msgid "You must provide an end time."
+msgstr "終了日時を提供しなければいけません。"
+
+# @ em-pro
+#: emp-forms.php:588
+#: emp-forms.php:594
+#: emp-forms.php:976
+msgid "Please use the time picker provided to select the appropriate time format."
+msgstr "適切なタイムフォーマットを選択するために、提供されているタイムピッカーを使用してください。"
+
+# @ em-pro
+#: emp-forms.php:600
+#: emp-forms.php:996
+msgid "You must provide a start time."
+msgstr "開始期日を提供しなければいけません。"
+
+# @ dbem
+#: emp-forms.php:632
+msgid "The email address isn&#8217;t correct."
+msgstr "&#8217;tメールアドレスは正しくありません。"
+
+# @ em-pro
+#: emp-forms.php:735
+msgid "Label"
+msgstr "ラベル"
+
+# @ em-pro
+#: emp-forms.php:736
+msgid "Field ID"
+msgstr "フィールドID"
+
+# @ default
+#: emp-forms.php:736
+msgid "DO NOT change these values if you want to keep your field settings associated with previous booking fields."
+msgstr "以前の予約フィールドと関連したフィールドをそのままにしておきたい場合はこれらの値を変えないでください。"
+
+# @ em-pro
+#: emp-forms.php:737
+msgid "Type"
+msgstr "タイプ"
+
+# @ em-pro
+#: emp-forms.php:738
+msgid "Required"
+msgstr "必要"
+
+# @ em-pro
+#: emp-forms.php:748
+msgid "Select Type"
+msgstr "タイプを選ぶ"
+
+# @ em-pro
+#: emp-forms.php:750
+msgid "Customizable Fields"
+msgstr "カスタマイズできるフィールド"
+
+# @ em-pro
+#: emp-forms.php:768
+msgid "Registration Fields"
+msgstr "認証フィールド"
+
+# @ em-pro
+#: emp-forms.php:776
+msgid "Custom Registration Fields"
+msgstr "カスタム認証フィールド"
+
+# @ em-pro
+#: emp-forms.php:791
+msgid "remove"
+msgstr "除外"
+
+# @ em-pro
+#: emp-forms.php:791
+#: emp-forms.php:1179
+#: emp-forms.php:1182
+#: emp-forms.php:1246
+msgid "options"
+msgstr "オプション"
+
+# @ em-pro
+#: emp-forms.php:797
+#: emp-forms.php:1005
+msgid "Options"
+msgstr "オプション"
+
+# @ em-pro
+#: emp-forms.php:800
+#: emp-forms.php:1008
+msgid "Available options, one per line."
+msgstr "利用できるオプションです。１行に一つです。"
+
+# @ em-pro
+#: emp-forms.php:804
+msgid "Use Default?"
+msgstr "デフォルトを使いますか？"
+
+# @ em-pro
+#: emp-forms.php:808
+msgid "If checked, the first value above will be used."
+msgstr "チェックすると、以上の初めの値が使われます。"
+
+# @ em-pro
+#: emp-forms.php:812
+msgid "Default Text"
+msgstr "デフォルトテキスト"
+
+# @ em-pro
+#: emp-forms.php:814
+msgid "Select ..."
+msgstr "選択..."
+
+# @ em-pro
+#: emp-forms.php:815
+msgid "Shown when a default value isn't selected, selected by default."
+msgstr "デフォルトの値が選択されていない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:819
+#: emp-forms.php:861
+#: emp-forms.php:887
+#: emp-forms.php:953
+#: emp-forms.php:1012
+#: emp-forms.php:1040
+#: emp-forms.php:1061
+#: emp-forms.php:1091
+msgid "Tip Text"
+msgstr "Tip テキスト"
+
+# @ em-pro
+#: emp-forms.php:822
+#: emp-forms.php:864
+#: emp-forms.php:890
+#: emp-forms.php:956
+#: emp-forms.php:1015
+#: emp-forms.php:1043
+#: emp-forms.php:1064
+#: emp-forms.php:1094
+msgid "Will appear next to your field label as a question mark with a popup tip bubble."
+msgstr "ポップアップtipの吹き出しとして、あなたのラベルの隣に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:826
+#: emp-forms.php:851
+#: emp-forms.php:1019
+#: emp-forms.php:1047
+#: emp-forms.php:1075
+#: emp-forms.php:1105
+#: emp-forms.php:1138
+msgid "Error Message"
+msgstr "エラーメッセージ"
+
+# @ em-pro
+#: emp-forms.php:830
+#: emp-forms.php:855
+#: emp-forms.php:1023
+msgid "This error will show if a value isn't chosen."
+msgstr "このエラーは値が選択されていない時に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:831
+#: emp-forms.php:856
+#: emp-forms.php:900
+#: emp-forms.php:910
+#: emp-forms.php:920
+#: emp-forms.php:930
+#: emp-forms.php:966
+#: emp-forms.php:976
+#: emp-forms.php:986
+#: emp-forms.php:996
+#: emp-forms.php:1024
+#: emp-forms.php:1052
+#: emp-forms.php:1080
+#: emp-forms.php:1110
+#: emp-forms.php:1143
+msgid "Default:"
+msgstr "デフォルト:"
+
+# @ em-pro
+#: emp-forms.php:840
+msgid "Content"
+msgstr "コンテンツ"
+
+# @ em-pro
+#: emp-forms.php:842
+msgid "This html will be displayed on your form, the label for this field is used only for reference purposes."
+msgstr "このhtmlはフォームに表示され、このラベルは参照目的でのみ使用されます。"
+
+# @ em-pro
+#: emp-forms.php:872
+msgid "Date Range?"
+msgstr "期日の範囲はどうしますか？"
+
+# @ em-pro
+#: emp-forms.php:876
+msgid "If selected, this field will also have an end-date."
+msgstr "選択すると、このフィールドは終了期日を持ちます。"
+
+# @ em-pro
+#: emp-forms.php:880
+#: emp-forms.php:946
+msgid "Seperator"
+msgstr "セパレーター"
+
+# @ em-pro
+#: emp-forms.php:883
+#: emp-forms.php:949
+msgid "This text will appear between the two date fields if this is a date range."
+msgstr "このテキストは、２つの日の間に、それが期日の範囲の場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:894
+#: emp-forms.php:959
+msgid "Error Messages"
+msgstr "エラーメッセージ"
+
+# @ em-pro
+#: emp-forms.php:895
+#: emp-forms.php:961
+msgid "Field Required"
+msgstr "必要とされるフィールド"
+
+# @ em-pro
+#: emp-forms.php:899
+#: emp-forms.php:965
+msgid "This error will show this field is required and no value is entered."
+msgstr "このエラーは、このフィールドが必要で、値が入力されていない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:905
+#: emp-forms.php:971
+msgid "Incorrect Formatting"
+msgstr "正確でないフォーマッティング"
+
+# @ em-pro
+#: emp-forms.php:909
+msgid "This error will show if an incorrect date format is used."
+msgstr "このエラーは正確でない期日フォーマットが使われている時に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:910
+msgid "Please use the date picker provided to select the appropriate date format."
+msgstr "適切な期日フォーマットを選択するために、提供されている期日ピッカーを利用してください。"
+
+# @ em-pro
+#: emp-forms.php:915
+msgid "End date required"
+msgstr "必要な終了期日"
+
+# @ em-pro
+#: emp-forms.php:919
+msgid "This error will show if the field is a date-range and no end date is selected."
+msgstr "このエラーは、フィールドが期日範囲を持ち、終了期日が選択されていない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:920
+msgid "You must provide an end date."
+msgstr "終了期日が必要です。"
+
+# @ em-pro
+#: emp-forms.php:925
+msgid "Start date required"
+msgstr "必要な開始期日"
+
+# @ em-pro
+#: emp-forms.php:929
+msgid "This error will show if the field is a date-range and no start date is selected."
+msgstr "このエラーは、フィールドが期日範囲を持ち、開始期日が選択されていない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:938
+msgid "Time Range?"
+msgstr "タイムレンジはどうしますか？"
+
+# @ em-pro
+#: emp-forms.php:942
+msgid "If selected, this field will also have an end-time."
+msgstr "選択すると、このフィールドは終了期日を持ちます。"
+
+# @ em-pro
+#: emp-forms.php:975
+msgid "This error will show if an incorrect time format is used."
+msgstr "このエラーは正確でない期日フォーマットが使われている場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:981
+msgid "End time required"
+msgstr "必要な終了期日"
+
+# @ em-pro
+#: emp-forms.php:985
+msgid "This error will show if the field is a time-range and no end time is selected."
+msgstr "このエラーは、フィールドが期日範囲を持ち、終了期日が選択されていない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:991
+msgid "Start time required"
+msgstr "必要な開始期日"
+
+# @ em-pro
+#: emp-forms.php:995
+msgid "This error will show if the field is a time-range and no start time is selected."
+msgstr "のエラーは、フィールドが期日範囲を持ち、開始期日が選択されていない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:1033
+msgid "Checked by default?"
+msgstr "デフォルトでチェックされていますか？"
+
+# @ em-pro
+#: emp-forms.php:1051
+msgid "This error will show if this box is not checked."
+msgstr "このエラーはこのボックスがチェックされていない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:1068
+#: emp-forms.php:1098
+msgid "Regex"
+msgstr "Regex"
+
+# @ em-pro
+#: emp-forms.php:1071
+#: emp-forms.php:1101
+msgid "By adding a regex expression, you can limit the possible values a user can input, for example the following only allows numbers: "
+msgstr "regex expressionを追加することで、ユーザーが使用できる値を制限することができます。例えば、数字のみ許可等"
+
+# @ em-pro
+#: emp-forms.php:1079
+#: emp-forms.php:1109
+msgid "If the regex above does not match this error will be displayed."
+msgstr "もし以上のregexが一致しない場合はこのエラーが表示されます。"
+
+# @ em-pro
+#: emp-forms.php:1124
+msgid "Public Key"
+msgstr "パブリックキー"
+
+# @ em-pro
+#: emp-forms.php:1127
+#: emp-forms.php:1134
+#, php-format
+msgid "Required, get your keys <a href=\"%s\">here</a>"
+msgstr "必要です。<a href=\"%s\">here</a>で取得してください。"
+
+# @ em-pro
+#: emp-forms.php:1131
+msgid "Private Key"
+msgstr "プライベートキー"
+
+# @ em-pro
+#: emp-forms.php:1142
+msgid "This error will show if the captcha is not correct."
+msgstr "このエラーはキャプチャが正しくない場合に表示されます。"
+
+# @ em-pro
+#: emp-forms.php:1159
+msgid "Add booking field"
+msgstr "予約フィールドを追加する"
+
+# @ em-pro
+#: emp-forms.php:1160
+msgid "Save Form"
+msgstr "フォームを保存する"
+
+# @ em-pro
+#: emp-forms.php:1226
+msgid "hide options"
+msgstr "オプションを隠す"
+
+# @ em-pro
+#: emp-install.php:135
+#, php-format
+msgid "Please fill in the field: %s"
+msgstr "以下のフィールドを入力してください%s"
+
+# @ em-pro
+#: emp-install.php:155
+msgid "Pay With"
+msgstr "支払い方法"
+
+# @ em-pro
+#: emp-install.php:157
+msgid "PayPal"
+msgstr "ペイパル"
+
+# @ em-pro
+#: emp-install.php:159
+msgid "Please wait whilst you are redirected to PayPal to proceed with payment."
+msgstr "支払いのためにペイパルにリダイレクトされます。少々お待ちください。"
+
+# @ dbem
+#: emp-install.php:160
+#: emp-install.php:165
+#: emp-install.php:169
+msgid "Booking successful."
+msgstr "予約は成功しました。"
+
+# @ em-pro
+#: emp-install.php:162
+msgid "Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you along with a seperate email containing account details to access your booking information on this site. You may log into your account at www.paypal.com to view details of this transaction."
+msgstr "お支払いただきありがとうございます。あなたの取引は完了し、このサイトの予約情報にアクセスするために、アカウント情報と一緒にあなたの取引明細がメールで送られました。あなたはwww.paypal.com のアカウントにアクセスし、この取引の詳細を見ることもできます。"
+
+# @ em-pro
+#: emp-install.php:164
+#: emp-install.php:166
+msgid "Pay Offline"
+msgstr "オフライン支払い"
+
+# @ em-pro
+#: emp-install.php:168
+msgid "Credit Card"
+msgstr "クレジットカード"
+
+# @ dbem
+#: emp-install.php:170
+msgid "Booking successful. You have not been charged for this booking."
+msgstr "予約は成功しました。あなたはこの予約でチャージされていません。"
+
+# @ dbem
+#: emp-install.php:174
+msgid "<br/><br/>-------------------------------<br/>Powered by Events Manager - http://wp-events-plugin.com"
+msgstr "<br/><br/>-------------------------------<br/>Powered by Events Manager - http://wp-events-plugin.com"
+
+# @ dbem
+#: emp-install.php:175
+msgid "Dear #_BOOKINGNAME, <br/>This is a reminder about your #_BOOKINGSPACES space/spaces reserved for #_EVENTNAME.<br/>When : #_EVENTDATES @ #_EVENTTIMES<br/>Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br/>We look forward to seeing you there!<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr "親愛なる#_BOOKINGNAME様 <br/>これは以下の情報に関するリマインダーです。 #_BOOKINGSPACES space/spaces reserved for #_EVENTNAME.<br/>いつ : #_EVENTDATES @ #_EVENTTIMES<br/>どこで : #_LOCATIONNAME - #_LOCATIONFULLLINE<br/>"
+
+# @ em-pro
+#: emp-updates.php:32
+#, php-format
+msgid "Please enter a valid API key in your <a href=\"%s\">settings page</a>."
+msgstr "あなたの <a href=\"%s\">設定画面</a>で、正しいAPIキーを入力してください。"
+
+# @ em-pro
+#: emp-updates.php:41
+#, php-format
+msgid "To access automatic updates, you must update your <a href=\"%s\">Membership Key</a> for Events Mananager Pro <a href=\"#pro-api\">here</a>. Only admins see this message."
+msgstr "自動更新にアクセスするために、 <a href=\"#pro-api\">here</a>のEvent Manager Pro を<a href=\"%s\">Membership Key</a>更新してください。管理者のみがこのメッセージを見ます。"
+
+# @ em-pro
+#: emp-updates.php:48
+#, php-format
+msgid "Dev Mode active: Just a friendly reminder that you have added %s to your wp-config.php file. Only admins see this message, and it will go away when you remove that line."
+msgstr "Devモードが有効です。これは単に%sがあなたのwp-config.php fileに追加されたことへのリマインダーです。管理者のみがこのメッセージを見、この行を削除した時に消えます。"
+
+# @ em-pro
+#: emp-updates.php:82
+msgid "Pro Membership Key"
+msgstr "プロメンバーシップキー"
+
+# @ em-pro
+#: emp-updates.php:86
+msgid "Pro Member Key"
+msgstr "プロメンバーキー"
+
+# @ em-pro
+#: emp-updates.php:86
+#, php-format
+msgid "Insert your Pro Member Key to access automatic updates you can get your membership key from <a href=\"%s\">here</a>."
+msgstr "<a href=\"%s\">here</a>からメンバーシップキーを受け取る自動更新にアクセスするためにプロメンバーキーを挿入してください。"
+
+# @ em-pro
+#: emp-updates.php:104
+msgid "looking for dev mode options? we moved it into <em>Admin Tools</em>"
+msgstr "devモードオプションをさがしていますか？<em>Admin Tools</em>に移動しました。"
+
+# @ em-pro
+#: events-manager-pro.php:154
+msgid "Please make sure you install Events Manager as well. You can search and install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/events-manager/\">here</a>."
+msgstr "Events Manager も同様にインストールされているか確認してください。あなたはこのプラグインをインストーラーで検索してインストールするか<a href=\"http://wordpress.org/extend/plugins/events-manager/\">here</a>でダウンロードすることができます。"
+
+# @ em-pro
+#: events-manager-pro.php:154
+#: events-manager-pro.php:160
+msgid "Only admins see this message."
+msgstr "管理者のみがこのメッセージを見ます。"
+
+# @ em-pro
+#: events-manager-pro.php:160
+msgid "Please make sure you have the <a href=\"http://wordpress.org/extend/plugins/events-manager/\">latest version</a> of Events Manager installed, as this may prevent Pro from functioning properly."
+msgstr "最新のEvents Manager がインストールされているか確認してください。wordpress.org/extend/plugins/events-manager/\">latest version</a>これはProバージョンが正しく機能することを妨げる可能性があります。"
+

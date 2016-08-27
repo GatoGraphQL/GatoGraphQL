@@ -1,0 +1,65 @@
+{{#with itemObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="pop-post-{{id}} post-layout fullview {{../class}} {{#each cat-slugs}} {{.}}{{/each}}">
+		<div class="wrapper {{../classes.wrapper}}">
+			{{#compare ../title-position "top"}}
+				{{#withModule ../. "title"}}
+					{{enterModule ../../.}}
+				{{/withModule}}
+			{{/compare}}
+			<div class="row">
+				{{#withModule ../. "sidebar"}}
+					<div class="sidebar topsidebar {{../../classes.sidebar}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				<div class="content-body {{../classes.content-body}}">
+					{{#if ../template-ids.headers}}
+						<div class="headers {{../classes.headers}}">
+							{{#each ../template-ids.headers}}
+								{{#withModule ../../. this}}
+									<div class="header {{../../../classes.header}}">
+										{{enterModule ../../../.}}
+									</div>
+								{{/withModule}}
+							{{/each}}
+						</div>
+					{{/if}}
+					{{#compare ../title-position "body"}}
+						{{#withModule ../. "title"}}
+							{{enterModule ../../.}}
+						{{/withModule}}
+					{{/compare}}
+					<div class="content pop-content {{../classes.content}} clearfix">
+						{{#if ../template-ids.abovecontent}}
+							<div class="abovecontent {{../classes.abovecontent}}">
+								{{#each ../template-ids.abovecontent}}
+									{{#withModule ../../. this}}
+										{{enterModule ../../../.}}
+									{{/withModule}}
+								{{/each}}
+							</div>
+						{{/if}}
+						<div class="{{../classes.content-inner}}">
+							{{#each ../template-ids.content}}
+								{{#withModule ../../. this}}
+									{{enterModule ../../../.}}
+								{{/withModule}}
+							{{/each}}
+						</div>
+					</div>	
+					{{#if ../template-ids.footers}}
+						<div class="footers {{../classes.footers}}">
+							{{#each ../template-ids.footers}}
+								{{#withModule ../../. this}}
+									<div class="footer {{../../../classes.footer}}">
+										{{enterModule ../../../.}}
+									</div>
+								{{/withModule}}
+							{{/each}}
+						</div>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+{{/with}}

@@ -1,0 +1,7 @@
+{{#with itemObject}}
+	<div {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} class="sidebar {{../class}}">
+		{{#withModule ../. "sidebar-inner"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</div>
+{{/with}}

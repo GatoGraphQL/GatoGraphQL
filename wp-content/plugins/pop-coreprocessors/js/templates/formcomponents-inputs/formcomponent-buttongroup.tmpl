@@ -1,0 +1,7 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="btn-group {{class}}" data-toggle="buttons" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../. template=this}}"{{/each}}>
+	{{#each options}}
+		<label class="{{../classes.input}} {{get ../classes.inputs @key}}  {{#compare @key ../value operator=../compare-by}}active{{/compare}}">
+			<input name="{{../name}}" value="{{@key}}" class="{{../input-class}}" type="{{../type}}" autocomplete="off" {{#compare @key ../value operator=../compare-by}}checked{{/compare}}> {{{this}}}
+		</label>
+	{{/each}}
+</div>

@@ -1,0 +1,408 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-23 00:07+0800\n"
+"PO-Revision-Date: 2016-08-23 00:07+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././config/config.php:44
+msgid "Vote"
+msgstr "Voto"
+
+#: .././config/config.php:57
+msgid "vote"
+msgstr "voto"
+
+#: .././config/config.php:60
+msgid "votes"
+msgstr "votos"
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:66
+#, php-format
+msgid "<strong>%1$s</strong> posted a %2$s after reading <strong>%3$s</strong>"
+msgstr ""
+"<strong>%1$s</strong> ha publicado un %2$s después de leer <strong>%3$s</"
+"strong>"
+
+#: .././plugins/events-manager/library/createupdate-profile-hooks.php:22
+msgid "Your location is missing"
+msgstr "Falta su ubicación"
+
+#: .././plugins/events-manager/library/functions.php:14
+#: .././plugins/events-manager/library/functions.php:27
+msgid "After attending this event"
+msgstr "Después de asistir a este evento"
+
+#: .././plugins/events-manager/pop-library/processors/forms/formgroups.php:55
+msgid ""
+"If you can't find the location in the input below, click on the \"+\" button "
+"to add a new one."
+msgstr ""
+"Si no puede encontrar la ubicación en la entrada debajo, haga click en el "
+"botón “+” para añadir una nueva."
+
+#: .././plugins/events-manager/pop-library/processors/forms/formgroups.php:69
+msgid ""
+"Please select your location(s). You can give as much detail as you want: "
+"your full address, or your city, or if not just your country. We ask for "
+"this information to be able to identify opinion towards TPP by people from "
+"each country."
+msgstr ""
+"Por favor seleccione su ubicación(es). Usted puede dar tanto detalle como "
+"quiera: su dirección completa, o su ciudad, o si no sólo su país. Pedimos "
+"esta información para poder identificar la opinión hacia TPP por la gente de "
+"cada país."
+
+#: .././plugins/user-role-editor/pop-library/functions.php:20
+msgid " + Members"
+msgstr " + Miembros"
+
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/implementations/authorrole-multi.php:15
+msgid "Organizations"
+msgstr "Organizaciones"
+
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/implementations/authorrole-multi.php:16
+msgid "Individuals"
+msgstr "Individuos"
+
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:37
+msgid "Author Role"
+msgstr "Rol del autor"
+
+#: .././plugins/user-role-editor/pop-library/processors/forms/formcomponentgroups.php:37
+msgid "By who:"
+msgstr "Por quién:"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-opinionatedvote.php:44
+#, php-format
+msgid "%1$s after reading “%2$s”"
+msgstr "%1$s después de leer “%2$s\""
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-opinionatedvote.php:93
+#, php-format
+msgid "You have already added your %s"
+msgstr "Ya has añadido a tu %s"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-opinionatedvote.php:98
+#, php-format
+msgid "%s after reading “<a href=\"%s\">%s</a>”"
+msgstr "%s después de leer \"<a href=\"%s\">%s</a>\""
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-opinionatedvote.php:105
+#, php-format
+msgid "%s. <a href=\"%s\" target=\"%s\">Edit?</a>"
+msgstr "%s. <a href=\"%s\" target=\"%s\">Editar?</a>"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-opinionatedvote.php:133
+msgid "Please choose your stance"
+msgstr "Por favor elija su postura"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-opinionatedvote.php:136
+msgid "Cheating, huh?"
+msgstr "Haciendo trampa, ¿eh?"
+
+#: .././pop-library/processors/abstract-classes/layouts/stance.php:22
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:117
+msgid "Stance:"
+msgstr "Postura:"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:212
+msgid "Your thought..."
+msgstr "Tu postura…"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:223
+#: .././pop-library/processors/blocks/misc.php:43
+msgid "Stats"
+msgstr "Estadísticas"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:263
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:604
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:340
+msgid "Full view"
+msgstr "Vista completa"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:267
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:608
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:344
+msgid "Grid"
+msgstr "Cuadrícula"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:271
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:612
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:348
+msgid "List"
+msgstr "Lista"
+
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:616
+#: .././pop-library/processors/buttons/buttons.php:63
+msgid "Edit"
+msgstr "Editar"
+
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:620
+msgid "View/Preview"
+msgstr "Ver/Vista previa"
+
+#: .././pop-library/processors/buttons/button-utils.php:15
+#: .././pop-library/processors/buttons/button-utils.php:24
+msgid "After reading this information"
+msgstr "Después de leer esta información"
+
+#: .././pop-library/processors/buttons/buttoninners.php:51
+#: .././pop-library/processors/buttons/post-buttons.php:111
+#, php-format
+msgid "%s, %s"
+msgstr "%s, %s"
+
+#: .././pop-library/processors/buttons/buttoninners.php:59
+#: .././pop-library/processors/buttons/post-buttons.php:119
+#, php-format
+msgid "Edit your corresponding %s"
+msgstr "Editar su correspondiente %s"
+
+#: .././pop-library/processors/buttons/buttoninners.php:62
+#: .././pop-library/processors/buttons/buttons.php:65
+#: .././pop-library/processors/controls/anchor-controls.php:69
+#: .././pop-library/processors/formcomponents-inputs/implementations/stance-multi.php:15
+msgid "Pro"
+msgstr "A favor"
+
+#: .././pop-library/processors/buttons/buttoninners.php:63
+#: .././pop-library/processors/buttons/buttons.php:66
+#: .././pop-library/processors/controls/anchor-controls.php:70
+#: .././pop-library/processors/formcomponents-inputs/implementations/stance-multi.php:17
+#: .././pop-library/processors/formcomponents-inputs/implementations/stance.php:19
+msgid "Neutral"
+msgstr "Neutral"
+
+#: .././pop-library/processors/buttons/buttoninners.php:64
+#: .././pop-library/processors/buttons/buttons.php:67
+#: .././pop-library/processors/controls/anchor-controls.php:71
+#: .././pop-library/processors/formcomponents-inputs/implementations/stance-multi.php:16
+msgid "Against"
+msgstr "En contra"
+
+#: .././pop-library/processors/buttons/buttons.php:64
+msgid "View"
+msgstr "Ver"
+
+#: .././pop-library/processors/createupdatepost/blocks.php:201
+#, php-format
+msgid "%s..."
+msgstr "%s…"
+
+#: .././pop-library/processors/createupdatepost/blocks.php:254
+msgid "Submitting..."
+msgstr "Enviando…"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:58
+msgid "Write here..."
+msgstr "Escriba aquí..."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:75
+msgid "After reading..."
+msgstr "Despues de leer..."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:91
+msgid ""
+"You can leave 1 general opinion on TPP, and 1 opinion on TPP for each "
+"article on the website. Your opinions can be edited any moment."
+msgstr ""
+"Puede dejar 1 opinión general sobre el TPP, y 1 opinión para el TPP por cada "
+"artículo en el sitio web. Sus opiniones se pueden editar en cualquier "
+"momento."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:113
+msgid "Your stance:"
+msgstr "Tu postura:"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:38
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:60
+msgid "Login/Register"
+msgstr "Iniciar sesión/Registrarse"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:42
+#, php-format
+msgid "Yay! Your %s was created successfully!"
+msgstr "¡Hurra! Su %s se ha creado correctamente!"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:46
+#, php-format
+msgid "Yay! Your %s was updated successfully!"
+msgstr "¡Hurra! Su %s se ha actualizado correctamente!"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:52
+#, php-format
+msgid "Please %s to create your %s."
+msgstr "Por favor, %s para crear su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:58
+#, php-format
+msgid "You need a %s account to create your %s."
+msgstr "Es necesario una cuenta de %s para crear su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:66
+#, php-format
+msgid "%s updated successfully."
+msgstr "%s ha actualizado correctamente."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:72
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+msgstr ""
+"Por favor <a href=“%s”>inicie su sesión de usuario</a> para editar su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:78
+#, php-format
+msgid "You need a %s account to edit your %s."
+msgstr "Es necesario una cuenta de %s para editar su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:85
+#, php-format
+msgid "Ops, it seems you have no rights to edit this %s."
+msgstr "Ops, parece que no tiene derechos para editar este %s."
+
+#: .././pop-library/processors/elements/codes.php:35
+msgid "After reading"
+msgstr "Después de leer"
+
+#: .././pop-library/processors/elements/codes.php:41
+msgid ", after reading"
+msgstr ", después de leer"
+
+#: .././pop-library/processors/elements/codes.php:48
+msgid "Stances on TPP: "
+msgstr "Posturas sobre TPP: "
+
+#: .././pop-library/processors/elements/codes.php:55
+msgid "Article-related stances on TPP: "
+msgstr "Posturas relacionados con artículos sobre TPP: "
+
+#: .././pop-library/processors/elements/codes.php:62
+msgid "Combined: "
+msgstr "Combinadas: "
+
+#: .././pop-library/processors/elements/codes.php:69
+msgid "Stance from our users: "
+msgstr "Postura de nuestros usuarios: "
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/stance.php:18
+msgid "Pro TPP"
+msgstr "A favor del TPP"
+
+#: .././pop-library/processors/formcomponents-inputs/implementations/stance.php:20
+msgid "Against TPP"
+msgstr "En contra del TPP"
+
+#: .././pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:40
+msgid "Stance"
+msgstr "Postura"
+
+#: .././pop-library/processors/layouts/posts/previewpostlayouts.php:315
+msgid "—"
+msgstr "—"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:50
+#, php-format
+msgid "No %s found."
+msgstr "No se han encontrado %s."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:54
+#, php-format
+msgid "No more %s found."
+msgstr "No se han encontrado más %s."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:64
+#, php-format
+msgid "Please %s to access your %s."
+msgstr "Por favor, %s para acceder a su %s."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:71
+#, php-format
+msgid "You need a %s account to access this functionality."
+msgstr "Es necesario una cuenta de %s para acceder a esta funcionalidad."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:77
+#, php-format
+msgid "Your account has no permission to edit this %s."
+msgstr "Su cuenta no tiene permiso para modificar esta %s."
+
+#: .././pop-library/processors/sidebars/widgetries.php:56
+#, php-format
+msgid "%s after reading..."
+msgstr "%s después de leer..."
+
+#: .././pop-library/processors/structures/carousels/carousel-controls.php:69
+msgid "By organizations"
+msgstr "Por organizaciones"
+
+#: .././pop-library/processors/structures/carousels/carousel-controls.php:73
+msgid "By individuals"
+msgstr "Por individuos"
+
+#: .././pop-library/processors/structures/carousels/carousel-controls.php:89
+#, php-format
+msgid "%s by %s"
+msgstr "%s por %s"
+
+#: .././pop-library/processors/structures/tables/tables.php:41
+msgid "Date"
+msgstr "Fecha"
+
+#: .././pop-library/processors/structures/tables/tables.php:42
+msgid "Status"
+msgstr "Estado"
+
+#: .././pop-library/utils.php:10
+msgid "Latest votes"
+msgstr "Últimas votos"
+
+#: .././pop-library/utils.php:18
+msgid "what is your vote?"
+msgstr "¿cuál es tu voto?"
+
+#: .././pop-library/utils.php:21
+msgid "What is your vote?"
+msgstr "¿Cuál es tu voto?"
+
+#: .././validation.php:32
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:37
+msgid ""
+"Error: <b>PoP Theme: Wassup</b> is not installed/activated. Without it, "
+"<b>PoP Theme VotingProcessors Processors</b> will not work. Please install "
+"this plugin from your plugin installer or download it <a href=\"http://"
+"wordpress.org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Theme: Wassup</b> is not installed/activated. Without it, "
+"<b>PoP Theme VotingProcessors Processors</b> will not work. Please install "
+"this plugin from your plugin installer or download it <a href=“http://"
+"wordpress.org/extend/plugins/pop/“>from here</a>."
+
+#: .././validation.php:41
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Theme: Wassup</b> installed, or "
+"otherwise <b>PoP Theme VotingProcessors Processors</b> might not function "
+"properly."
+msgstr ""
+"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>latest version</a> of <b>PoP Theme: Wassup</b> installed, or "
+"otherwise <b>PoP Theme VotingProcessors Processors</b> might not function "
+"properly."
+
+#~ msgid "Agree?"
+#~ msgstr "¿De acuerdo?"

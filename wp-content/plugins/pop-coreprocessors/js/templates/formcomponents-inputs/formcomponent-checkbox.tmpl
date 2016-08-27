@@ -1,0 +1,3 @@
+<label>
+	<input type="checkbox" {{#if value}}checked="checked"{{/if}} name="{{name}}" {{#generateId}}{{id}}{{/generateId}} class="{{class}} {{input-class}}" {{#if readonly}}readonly{{/if}} {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../. template=this}}"{{/each}}> {{{label}}}
+</label>

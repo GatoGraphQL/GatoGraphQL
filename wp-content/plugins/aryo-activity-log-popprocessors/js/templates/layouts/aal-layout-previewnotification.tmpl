@@ -1,0 +1,47 @@
+{{#with itemObject}}
+	<div class="layout notification-layout preview {{../class}} {{status}} target-{{id}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+		{{#withModule ../. "link"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+		{{#withModule ../. "quicklinkgroup-top"}}
+			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/withModule}}
+		<div class="wrapper {{../classes.wrapper}}">
+			<div class="{{../classes.thumb-wrapper}}">
+				{{#withModule ../. "postthumb"}}				
+					<div class="post-thumb {{../../classes.thumb}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				{{#withModule ../. "user-avatar"}}
+					<div class="avatar {{../../classes.avatar}}">					
+						{{enterModule ../../. itemDBKey=../../bs.db-keys.subcomponents.user-id.db-key itemObjectId=../user-id}}
+					</div>
+				{{/withModule}}
+			</div>
+			<div class="content-body {{../classes.content-body}}">
+				<div class="message {{../classes.content}}">
+					{{{message}}}
+				</div>
+				{{#withModule ../. "quicklinkgroup-bottom"}}
+					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				{{#if ../template-ids.bottom}}
+					<div class="extra {{../classes.bottom}}">
+						{{#each ../template-ids.bottom}}
+							<div class="extra-inner {{../../classes.bottom-inner}}">
+								{{#withModule ../../. this}}
+									{{enterModule ../../../.}}
+								{{/withModule}}
+							</div>
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+{{/with}}

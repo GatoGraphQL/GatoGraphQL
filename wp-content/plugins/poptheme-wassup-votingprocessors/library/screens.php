@@ -1,0 +1,6 @@
+<?php
+
+define ('POP_VOTINGPROCESSORS_SCREEN_OPINIONATEDVOTES', 'vt-opinionatedvotes');
+define ('POP_VOTINGPROCESSORS_SCREEN_MYOPINIONATEDVOTES', 'vt-myopinionatedvotes');
+define ('POP_VOTINGPROCESSORS_SCREEN_AUTHOROPINIONATEDVOTES', 'vt-authoropinionatedvotes');
+define ('POP_VOTINGPROCESSORS_SCREEN_SINGLEOPINIONATEDVOTES', 'vt-singleopinionatedvotes');

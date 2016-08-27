@@ -1,0 +1,27 @@
+{{#with itemObject}}
+	{{#ifget . ../condition-field method=../condition-method}}
+		{{#each ../template-ids.layouts}}
+			{{#withModule ../../. this}}
+				{{#if ../../../show-div}}
+					<div class="wrapper {{../../../class}} {{#each ../../../template-ids.class-extensions}}{{applyLightTemplate . context=../../../../.}}{{/each}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>
+						{{enterModule ../../../.}}
+					</div>
+				{{else}}
+					{{enterModule ../../../.}}
+				{{/if}}
+			{{/withModule}}
+		{{/each}}
+	{{else}}
+		{{#each ../template-ids.conditionfailed-layouts}}
+			{{#withModule ../../. this}}
+				{{#if ../../../show-div}}
+					<div class="wrapper {{../../../class}} {{#each ../../../template-ids.class-extensions}}{{applyLightTemplate . context=../../../../.}}{{/each}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>
+						{{enterModule ../../../.}}
+					</div>
+				{{else}}
+					{{enterModule ../../../.}}
+				{{/if}}
+			{{/withModule}}
+		{{/each}}
+	{{/ifget}}
+{{/with}}

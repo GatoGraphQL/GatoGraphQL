@@ -1,0 +1,20 @@
+{{#each items}}
+	{{#if ../layout-grid.row-items}}
+		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row row blockinner-row scroll-row {{../../extend-class}} pop-structureinner">{{/mod}}
+	{{/if}}
+	<div class="pop-elem {{../class}} blockinner-elem scroll-elem {{../layout-grid.class}}">
+		{{#each ../template-ids.layouts}}
+			{{#withModule ../../. this}}
+				{{enterModule ../../../. itemDBKey=../../../itemDBKey itemObjectId=../../.}}
+			{{/withModule}}
+		{{/each}}
+	</div>
+	{{#if ../layout-grid.row-items}}
+		{{#mod @index ../layout-grid.row-items offset=1}}</div>{{/mod}}
+	{{/if}}
+{{/each}}
+{{#if items}}
+	{{#if layout-grid.row-items}}
+		{{#mod items.length layout-grid.row-items}}{{else}}</div>{{/mod}}
+	{{/if}}
+{{/if}}

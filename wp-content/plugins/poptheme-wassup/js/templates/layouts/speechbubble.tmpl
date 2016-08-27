@@ -1,0 +1,9 @@
+{{#with itemObject}}
+	<div class="{{../classes.bubble-wrapper}}">
+		<blockquote class="{{../classes.bubble}}">
+			{{#withModule ../. "layout" itemObjectId=id}}
+				{{enterModule ../../.}}
+			{{/withModule}}
+		</blockquote>
+	</div>
+{{/with}}

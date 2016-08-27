@@ -1,0 +1,952 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Doc Embedder\n"
+"POT-Creation-Date: 2013-01-29 13:40-0600\n"
+"PO-Revision-Date: 2013-08-23 08:25-0600\n"
+"Last-Translator: Kevin Davis <kev@tnw.org>\n"
+"Language-Team: Kevin Davis <wpp@tnw.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: functions-admin.php:266
+msgid "Import"
+msgstr ""
+
+#: functions-admin.php:277
+msgid "Performing full import..."
+msgstr ""
+
+#: functions-admin.php:281 functions-admin.php:306
+msgid "Importing profiles"
+msgstr ""
+
+#: functions-admin.php:287 functions-admin.php:301 functions-admin.php:312
+#: functions-admin.php:325
+msgid "done"
+msgstr ""
+
+#: functions-admin.php:290 functions-admin.php:299 functions-admin.php:315
+#: functions-admin.php:323
+msgid "failed"
+msgstr ""
+
+#: functions-admin.php:296
+msgid "Importing settings"
+msgstr ""
+
+#: functions-admin.php:319
+msgid "Importing settings... "
+msgstr ""
+
+#: functions-admin.php:328 functions-admin.php:571 options.php:141
+msgid "Please select a valid export file to import."
+msgstr ""
+
+#: functions-admin.php:332
+msgid "All or part of the import failed. See above for information."
+msgstr ""
+
+#: functions-admin.php:334
+msgid "Import completed successfully."
+msgstr ""
+
+#: functions-admin.php:337
+msgid "Return to GDE Settings"
+msgstr ""
+
+#: functions-admin.php:414 functions-admin.php:540 options.php:168
+#: libs/tab-advanced.php:143
+msgid "Settings"
+msgstr ""
+
+#: functions-admin.php:423
+msgid "You do not have sufficient permissions to access this page"
+msgstr ""
+
+#: functions-admin.php:528
+msgid "plugin"
+msgstr ""
+
+#: functions-admin.php:529
+msgid "Version"
+msgstr ""
+
+#: functions-admin.php:567
+msgid "This profile will be permanently deleted."
+msgstr ""
+
+#: functions-admin.php:567 functions-admin.php:568 functions-admin.php:569
+#: functions-admin.php:572
+msgid "Are you sure?"
+msgstr ""
+
+#: functions-admin.php:568
+msgid "Settings for this profile will overwrite the default profile."
+msgstr ""
+
+#: functions-admin.php:569
+msgid ""
+"Your profile list will be reset to its original state. All changes will be "
+"lost."
+msgstr ""
+
+#: functions-admin.php:572
+msgid ""
+"Any settings or duplicate profile names in this import will overwrite the "
+"current values."
+msgstr ""
+
+#: functions-admin.php:574
+msgid "Please include a shortcode or message to request support."
+msgstr ""
+
+#: functions-admin.php:612
+msgid "Embed file using Google Doc Embedder"
+msgstr ""
+
+#: functions-admin.php:629 libs/lib-eddialog.php:85
+msgid "Select the GDE viewer profile to use"
+msgstr ""
+
+#: functions-admin.php:780
+msgid ""
+"You are running a pre-release version of Google Doc Embedder. Please watch "
+"this space for important updates."
+msgstr ""
+
+#: functions.php:104
+msgid "File not specified, check shortcode syntax"
+msgstr ""
+
+#: functions.php:105
+msgid "Requested URL is invalid"
+msgstr ""
+
+#: functions.php:106
+msgid "Unsupported File Type"
+msgstr ""
+
+#: functions.php:107
+msgid "Unable to determine file type from URL"
+msgstr ""
+
+#: functions.php:108
+msgid "Error retrieving file - if necessary turn off error checking"
+msgstr ""
+
+#: functions.php:232
+msgid "Unknown"
+msgstr ""
+
+# Megabytes (for file size reporting)
+#: functions.php:234 libs/tab-advanced.php:38
+msgid "MB"
+msgstr ""
+
+#: functions.php:366 gviewer.php:304 libs/lib-setup.php:71
+#: libs/lib-setup.php:121
+msgid "Download"
+msgstr ""
+
+#: functions.php:505 view.php:417
+msgid "Error"
+msgstr ""
+
+#: gviewer.php:78
+msgid "Unable to load profile settings"
+msgstr ""
+
+#: gviewer.php:113 gviewer.php:125
+msgid "Unable to load requested profile."
+msgstr ""
+
+#: gviewer.php:238
+msgid "Unable to secure document"
+msgstr ""
+
+#: gviewer.php:401
+msgid "Setup wasn't able to create the required database tables."
+msgstr ""
+
+#: load.php:8 libs/lib-formsubmit.php:9 libs/lib-secure.php:9
+#: libs/lib-service.php:12 libs/lib-service.php:59 libs/lib-service.php:80
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: load.php:45
+msgid "Direct access to this file is not permitted."
+msgstr ""
+
+#: load.php:71
+msgid "The requested file was not found."
+msgstr ""
+
+#: load.php:76
+msgid "Unable to open the requested file. "
+msgstr ""
+
+#: load.php:92 load.php:96
+msgid "The document file type is not supported."
+msgstr ""
+
+#: options.php:13 options.php:68
+msgid "Default profile <strong>updated</strong>."
+msgstr ""
+
+#: options.php:15 options.php:53
+msgid "Unable to update profile."
+msgstr ""
+
+#: options.php:28
+msgid "Profile name must contain at least one letter."
+msgstr ""
+
+#: options.php:31
+msgid "Profile name already exists. Please choose another name."
+msgstr ""
+
+#: options.php:38
+msgid "New profile <strong>created</strong>."
+msgstr ""
+
+#: options.php:40 options.php:43
+msgid "Unable to create profile."
+msgstr ""
+
+#: options.php:51
+msgid "Profile <strong>updated</strong>."
+msgstr ""
+
+#: options.php:61
+msgid "Profile <strong>deleted</strong>."
+msgstr ""
+
+#: options.php:63
+msgid "Unable to delete profile."
+msgstr ""
+
+#: options.php:105
+msgid "Unable to enable diagnostic logging."
+msgstr ""
+
+#: options.php:117 options.php:119
+msgid "Settings <strong>updated</strong>."
+msgstr ""
+
+#: options.php:177 options.php:190
+msgid "General"
+msgstr ""
+
+#: options.php:182 options.php:195 libs/tab-advanced.php:142
+msgid "Profiles"
+msgstr ""
+
+#: options.php:203
+msgid "Advanced"
+msgstr ""
+
+#: options.php:208
+msgid "Support"
+msgstr ""
+
+#: options.php:349 libs/tab-support.php:29
+msgid "Help"
+msgstr ""
+
+#: options.php:375
+msgid "Edit"
+msgstr ""
+
+#: options.php:376
+msgid "Delete"
+msgstr ""
+
+#: options.php:377
+msgid "Make Default"
+msgstr ""
+
+#: view.php:42
+msgid "Invalid URL format"
+msgstr ""
+
+#: view.php:418
+msgid ""
+"Unable to retrieve document contents. Please try again or switch to Standard "
+"Viewer."
+msgstr ""
+
+#: js/tb-newwin.php:7
+msgid "View in full screen"
+msgstr ""
+
+#: js/tb-newwin.php:11
+msgid "Open in new window"
+msgstr ""
+
+#: libs/lib-eddialog.php:8
+msgid "Access denied."
+msgstr ""
+
+#: libs/lib-eddialog.php:52
+msgid "Insert Google Doc Embedder Shortcode"
+msgstr ""
+
+#: libs/lib-eddialog.php:55
+msgid "Required"
+msgstr ""
+
+#: libs/lib-eddialog.php:59
+msgid "URL or Filename"
+msgstr ""
+
+#: libs/lib-eddialog.php:60
+msgid "Full URL or filename to append to profile Base URL"
+msgstr ""
+
+#: libs/lib-eddialog.php:65
+msgid "Profile Base URL will be prefixed"
+msgstr ""
+
+#: libs/lib-eddialog.php:68
+msgid "Unsupported file type"
+msgstr ""
+
+#: libs/lib-eddialog.php:74
+msgid "Profile"
+msgstr ""
+
+#: libs/lib-eddialog.php:93
+msgid "Optional (Override Profile Settings)"
+msgstr ""
+
+#: libs/lib-eddialog.php:98
+msgid "Use selected profile settings"
+msgstr ""
+
+#: libs/lib-eddialog.php:103 libs/lib-profile.php:201
+msgid "Height"
+msgstr ""
+
+#: libs/lib-eddialog.php:108 libs/lib-profile.php:197
+msgid "Width"
+msgstr ""
+
+#: libs/lib-eddialog.php:109
+#, php-format
+msgid "Format: 40% or 300px"
+msgstr ""
+
+#: libs/lib-eddialog.php:114
+msgid "Start Page #"
+msgstr ""
+
+#: libs/lib-eddialog.php:122
+msgid "Show Download Link"
+msgstr ""
+
+#: libs/lib-eddialog.php:125
+msgid "Yes"
+msgstr ""
+
+#: libs/lib-eddialog.php:126
+msgid "No"
+msgstr ""
+
+#: libs/lib-eddialog.php:132
+msgid "Disable caching (this document is frequently overwritten)"
+msgstr ""
+
+#: libs/lib-eddialog.php:143
+msgid "Shortcode Preview"
+msgstr ""
+
+#: libs/lib-eddialog.php:151
+msgid "Insert"
+msgstr ""
+
+#: libs/lib-eddialog.php:155
+msgid "Cancel"
+msgstr ""
+
+#: libs/lib-profile.php:12 libs/tab-advanced.php:134 libs/tab-profiles.php:20
+msgid ""
+"Unable to load profile settings. Please re-activate GDE and if the problem "
+"persists, request help using the \"Support\" tab."
+msgstr ""
+
+#: libs/lib-profile.php:25
+msgid "Default Settings"
+msgstr ""
+
+#: libs/lib-profile.php:26
+msgid ""
+"These settings define the default viewer profile, which is used when no "
+"other profile is specified."
+msgstr ""
+
+#: libs/lib-profile.php:30
+msgid "Edit Profile"
+msgstr ""
+
+#: libs/lib-profile.php:62
+msgid "Viewer Mode"
+msgstr ""
+
+#: libs/lib-profile.php:66
+msgid "Standard Viewer"
+msgstr ""
+
+#: libs/lib-profile.php:66
+msgid "Embed the basic viewer only"
+msgstr ""
+
+#: libs/lib-profile.php:67
+msgid "Enhanced Viewer"
+msgstr ""
+
+#: libs/lib-profile.php:67
+msgid "Enable extended viewer options"
+msgstr ""
+
+#: libs/lib-profile.php:77
+msgid "Enhanced Viewer Settings"
+msgstr ""
+
+#: libs/lib-profile.php:81
+msgid "Toolbar"
+msgstr ""
+
+#: libs/lib-profile.php:85
+msgid "Remove Toolbar"
+msgstr ""
+
+#: libs/lib-profile.php:90
+msgid "Use Mobile Toolbar"
+msgstr ""
+
+#: libs/lib-profile.php:94
+msgid "Mobile Devices Only (Default)"
+msgstr ""
+
+#: libs/lib-profile.php:94
+msgid "Use mobile toolbar when mobile device detected"
+msgstr ""
+
+#: libs/lib-profile.php:95
+msgid "Always"
+msgstr ""
+
+#: libs/lib-profile.php:95
+msgid "Use mobile toolbar for all visitors"
+msgstr ""
+
+#: libs/lib-profile.php:96
+msgid "Never"
+msgstr ""
+
+#: libs/lib-profile.php:96
+msgid "Never use mobile toolbar"
+msgstr ""
+
+#: libs/lib-profile.php:103
+msgid "Toolbar Items"
+msgstr ""
+
+#: libs/lib-profile.php:106
+msgid "Page Numbers"
+msgstr ""
+
+#: libs/lib-profile.php:107
+msgid "Previous/Next Page"
+msgstr ""
+
+#: libs/lib-profile.php:108
+msgid "Zoom In/Out"
+msgstr ""
+
+#: libs/lib-profile.php:109
+msgid "Full Screen/New Window"
+msgstr ""
+
+#: libs/lib-profile.php:112
+msgid ""
+"Uncheck items to remove from toolbar. Buttons will vary based on file type "
+"and device used."
+msgstr ""
+
+#: libs/lib-profile.php:116
+msgid "Full Screen Behavior"
+msgstr ""
+
+#: libs/lib-profile.php:120
+msgid "Google-Hosted Page (Default)"
+msgstr ""
+
+#: libs/lib-profile.php:122
+msgid "Full Screen Viewer"
+msgstr ""
+
+#: libs/lib-profile.php:127
+msgid "Open in New Window"
+msgstr ""
+
+#: libs/lib-profile.php:128
+msgid "Allow Logged-in Users Only"
+msgstr ""
+
+#: libs/lib-profile.php:129
+msgid "Allow Printing"
+msgstr ""
+
+#: libs/lib-profile.php:134
+msgid "Page Area Background Color"
+msgstr ""
+
+#: libs/lib-profile.php:139
+msgid "None (Transparent)"
+msgstr ""
+
+#: libs/lib-profile.php:144
+msgid "Page Border Color"
+msgstr ""
+
+#: libs/lib-profile.php:149
+msgid "No Border"
+msgstr ""
+
+#: libs/lib-profile.php:154
+msgid "Custom CSS File"
+msgstr ""
+
+#: libs/lib-profile.php:160
+msgid "URL of custom CSS file (may override some of the above options)"
+msgstr ""
+
+#: libs/lib-profile.php:164
+msgid "Security"
+msgstr ""
+
+#: libs/lib-profile.php:167
+msgid "Hide ability to select/copy/paste text"
+msgstr ""
+
+#: libs/lib-profile.php:168
+msgid "Block all download requests for file"
+msgstr ""
+
+#: libs/lib-profile.php:179
+msgid "Default Language"
+msgstr ""
+
+#: libs/lib-profile.php:191
+msgid "Language of toolbar button tips"
+msgstr ""
+
+#: libs/lib-profile.php:195
+msgid "Default Size"
+msgstr ""
+
+#: libs/lib-profile.php:206
+msgid "Enter as pixels or percentage (example: 500px or 100%)"
+msgstr ""
+
+#: libs/lib-profile.php:210
+msgid "File Base URL"
+msgstr ""
+
+#: libs/lib-profile.php:216
+msgid ""
+"Any file not starting with <code>http</code> will be prefixed by this value"
+msgstr ""
+
+#: libs/lib-profile.php:220
+msgid "Download Link"
+msgstr ""
+
+#: libs/lib-profile.php:224
+msgid "All Users"
+msgstr ""
+
+#: libs/lib-profile.php:224
+msgid "Download link visible to everyone by default"
+msgstr ""
+
+#: libs/lib-profile.php:225
+msgid "Logged-in Users"
+msgstr ""
+
+#: libs/lib-profile.php:225
+msgid "Download link visible to logged-in users"
+msgstr ""
+
+#: libs/lib-profile.php:226 libs/tab-advanced.php:93
+msgid "None"
+msgstr ""
+
+#: libs/lib-profile.php:226
+msgid "Download link is not visible by default"
+msgstr ""
+
+#: libs/lib-profile.php:233
+msgid "Link Text"
+msgstr ""
+
+#: libs/lib-profile.php:236
+msgid "You can further customize text using these dynamic replacements:"
+msgstr ""
+
+#: libs/lib-profile.php:237
+msgid "filename"
+msgstr ""
+
+#: libs/lib-profile.php:238
+msgid "file type"
+msgstr ""
+
+#: libs/lib-profile.php:239
+msgid "file size"
+msgstr ""
+
+#: libs/lib-profile.php:243
+msgid "Link Position"
+msgstr ""
+
+#: libs/lib-profile.php:247
+msgid "Above Viewer"
+msgstr ""
+
+#: libs/lib-profile.php:248
+msgid "Below Viewer"
+msgstr ""
+
+#: libs/lib-profile.php:254
+msgid "Link Behavior"
+msgstr ""
+
+#: libs/lib-profile.php:257
+msgid "Force download (bypass browser plugins)"
+msgstr ""
+
+#: libs/lib-profile.php:258
+msgid "Shorten URL"
+msgstr ""
+
+#: libs/lib-profile.php:266 libs/tab-advanced.php:122
+msgid "Save Changes"
+msgstr ""
+
+#: libs/lib-setup.php:52
+msgid "This is the default profile, used when no profile is specified."
+msgstr ""
+
+#: libs/lib-setup.php:77
+msgid "Hide document location and text selection, prevent downloads"
+msgstr ""
+
+#: libs/lib-setup.php:102
+msgid "Dark-colored theme, example of custom CSS option"
+msgstr ""
+
+#: libs/tab-advanced.php:19
+msgid "Plugin Behavior"
+msgstr ""
+
+#: libs/tab-advanced.php:24
+msgid "Editor Integration"
+msgstr ""
+
+#: libs/tab-advanced.php:27
+msgid "Disable all editor integration"
+msgstr ""
+
+#: libs/tab-advanced.php:28
+msgid "Insert shortcode from Media Library by default"
+msgstr ""
+
+#: libs/tab-advanced.php:29
+msgid "Allow uploads of all supported media types"
+msgstr ""
+
+#: libs/tab-advanced.php:34
+msgid "Maximum File Size"
+msgstr ""
+
+#: libs/tab-advanced.php:40
+msgid ""
+"Very large files (typically 8-12MB) aren't supported by Google Doc Viewer"
+msgstr ""
+
+#: libs/tab-advanced.php:44
+msgid "Error Handling"
+msgstr ""
+
+#: libs/tab-advanced.php:47
+msgid "Show error messages inline (otherwise, they appear in HTML comments)"
+msgstr ""
+
+#: libs/tab-advanced.php:48
+msgid "Check for errors before loading viewer"
+msgstr ""
+
+#: libs/tab-advanced.php:50
+msgid "Enable extended diagnostic logging <em>(manually enabled)</em>"
+msgstr ""
+
+#: libs/tab-advanced.php:52
+msgid "Enable extended diagnostic logging"
+msgstr ""
+
+#: libs/tab-advanced.php:54
+msgid "clear log"
+msgstr ""
+
+#: libs/tab-advanced.php:59
+msgid "show log"
+msgstr ""
+
+#: libs/tab-advanced.php:65
+msgid "Version Notifications"
+msgstr ""
+
+#: libs/tab-advanced.php:69
+msgid "All Versions"
+msgstr ""
+
+#: libs/tab-advanced.php:69
+msgid "You will receive release and beta notifications"
+msgstr ""
+
+#: libs/tab-advanced.php:70
+msgid "Release Versions Only"
+msgstr ""
+
+#: libs/tab-advanced.php:70
+msgid "You will not receive beta notifications"
+msgstr ""
+
+#: libs/tab-advanced.php:79
+msgid "Google Analytics"
+msgstr ""
+
+#: libs/tab-advanced.php:81
+msgid ""
+"To use Google Analytics integration, the GA tracking code must already be "
+"installed on your site."
+msgstr ""
+
+#: libs/tab-advanced.php:82
+msgid "More Info"
+msgstr ""
+
+#: libs/tab-advanced.php:87
+msgid "Event Tracking"
+msgstr ""
+
+#: libs/tab-advanced.php:91
+msgid "Enabled"
+msgstr ""
+
+#: libs/tab-advanced.php:91
+msgid "Track events in Google Analytics"
+msgstr ""
+
+#: libs/tab-advanced.php:92
+msgid "Enabled (Compatibility Mode)"
+msgstr ""
+
+#: libs/tab-advanced.php:92
+msgid "Track events using older GDE format (< 2.5)"
+msgstr ""
+
+#: libs/tab-advanced.php:93
+msgid "Disable Google Analytics integration"
+msgstr ""
+
+#: libs/tab-advanced.php:100
+msgid "Category"
+msgstr ""
+
+#: libs/tab-advanced.php:108
+msgid "Label"
+msgstr ""
+
+#: libs/tab-advanced.php:112
+msgid "Document URL"
+msgstr ""
+
+#: libs/tab-advanced.php:113
+msgid "Document Filename"
+msgstr ""
+
+#: libs/tab-advanced.php:130
+msgid "Backup and Import"
+msgstr ""
+
+#: libs/tab-advanced.php:138
+msgid ""
+"Download a file to your computer containing your profiles, settings, or "
+"both, for backup or migration purposes."
+msgstr ""
+
+#: libs/tab-advanced.php:141
+msgid "All Profiles and Settings"
+msgstr ""
+
+#: libs/tab-advanced.php:147
+msgid "Download Export File"
+msgstr ""
+
+#: libs/tab-advanced.php:155
+msgid "To import, choose a file from your computer:"
+msgstr ""
+
+#: libs/tab-advanced.php:161
+msgid "Upload File and Import"
+msgstr ""
+
+#: libs/tab-profiles.php:34 libs/tab-profiles.php:47
+msgid "ID"
+msgstr ""
+
+#: libs/tab-profiles.php:37 libs/tab-profiles.php:50 libs/tab-profiles.php:104
+msgid "Name"
+msgstr ""
+
+#: libs/tab-profiles.php:40 libs/tab-profiles.php:53 libs/tab-profiles.php:120
+msgid "Description"
+msgstr ""
+
+#: libs/tab-profiles.php:92
+msgid "Reset Profiles"
+msgstr ""
+
+#: libs/tab-profiles.php:100 libs/tab-profiles.php:125
+msgid "Add New Profile"
+msgstr ""
+
+#: libs/tab-profiles.php:106
+msgid ""
+"The name (or ID number) is used to select the profile via the shortcode. It "
+"is all lowercase and contains only letters, numbers, and hyphens."
+msgstr ""
+
+#: libs/tab-profiles.php:109
+msgid "Parent"
+msgstr ""
+
+#: libs/tab-profiles.php:117
+msgid "Select which profile to use as a starting point."
+msgstr ""
+
+#: libs/tab-profiles.php:122
+msgid "Describe the profile's purpose, for your own reference (optional)."
+msgstr ""
+
+#: libs/tab-support.php:27
+msgid ""
+"Most support questions have already been answered. Please review these pages "
+"before asking for support:"
+msgstr ""
+
+#: libs/tab-support.php:30
+msgid "Plugin FAQ"
+msgstr ""
+
+#: libs/tab-support.php:37
+msgid "Support Request"
+msgstr ""
+
+#: libs/tab-support.php:38
+msgid ""
+"Requests sent from this form are handled by an actual human, so please don't "
+"send test messages or other spam."
+msgstr ""
+
+#: libs/tab-support.php:42
+msgid "Your Name"
+msgstr ""
+
+#: libs/tab-support.php:46
+msgid "Your E-mail"
+msgstr ""
+
+#: libs/tab-support.php:49
+msgid "A valid email address is required."
+msgstr ""
+
+#: libs/tab-support.php:53
+msgid "Shortcode"
+msgstr ""
+
+#: libs/tab-support.php:56
+msgid ""
+"If you're having a problem getting a specific document to work, paste the "
+"shortcode you're trying to use here."
+msgstr ""
+
+#: libs/tab-support.php:60
+msgid "URL"
+msgstr ""
+
+#: libs/tab-support.php:63
+msgid ""
+"Paste the full web address of a page where I should be able to see the "
+"problem occurring."
+msgstr ""
+
+#: libs/tab-support.php:67
+msgid "Message"
+msgstr ""
+
+#: libs/tab-support.php:73
+msgid "Message Options"
+msgstr ""
+
+#: libs/tab-support.php:75
+msgid "Send debug information"
+msgstr ""
+
+#: libs/tab-support.php:76
+msgid "View"
+msgstr ""
+
+#: libs/tab-support.php:77
+msgid "Hide"
+msgstr ""
+
+#: libs/tab-support.php:78
+msgid "Send me a copy"
+msgstr ""
+
+#: libs/tab-support.php:84
+msgid "Debug Information"
+msgstr ""
+
+#: libs/tab-support.php:85
+msgid ""
+"Note: Profile and settings export and diagnostic log (if present) will be "
+"attached."
+msgstr ""
+
+#: libs/tab-support.php:160
+msgid ""
+"I'm less likely to be able to help you if you do not include debug "
+"information."
+msgstr ""
+
+#: libs/tab-support.php:162
+msgid "Send Request"
+msgstr ""
+
+#: libs/tab-support.php:166
+msgid "Request Sent"
+msgstr ""
+
+#: libs/tab-support.php:167
+msgid ""
+"Delivery failed. You can manually send this information to wpp@tnw.org for "
+"help."
+msgstr ""

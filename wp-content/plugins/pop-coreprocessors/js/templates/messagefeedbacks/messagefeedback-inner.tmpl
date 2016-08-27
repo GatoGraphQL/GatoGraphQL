@@ -1,0 +1,20 @@
+{{#if bs.feedback.show-msgs}}
+	{{#each bs.feedback.msgs}}
+		{{#each ../template-ids.layouts}}
+			{{#withModule ../../. this}}
+				{{enterModule ../../../. feedback-msg=../../.}}
+			{{/withModule}}
+		{{/each}}
+	{{/each}}
+{{/if}}
+{{#if bs.feedback.validate-checkpoints}}
+	{{#if tls.feedback.show-msgs}}
+		{{#each tls.feedback.msgs}}
+			{{#each ../template-ids.layouts}}
+				{{#withModule ../../. this}}
+					{{enterModule ../../../. feedback-msg=../../.}}
+				{{/withModule}}
+			{{/each}}
+		{{/each}}
+	{{/if}}
+{{/if}}

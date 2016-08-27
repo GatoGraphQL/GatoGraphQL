@@ -1,0 +1,10 @@
+body.activity-log_page_activity-log-settings #wpbody h2.aal-page-title::before,
+body.toplevel_page_activity_log_page #wpbody h2.aal-page-title::before {
+    content: "\f321";
+    font: 400 25px/1 dashicons !important;
+    speak: none; /* accessibility thing. do not read the contents of this icon */
+    color: #030303;
+    display: inline-block;
+    padding-right: .2em;
+    vertical-align: -18%;
+}

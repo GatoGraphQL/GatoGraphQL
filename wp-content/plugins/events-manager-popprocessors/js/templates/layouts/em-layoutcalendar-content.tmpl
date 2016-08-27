@@ -1,0 +1,3 @@
+{{#with itemObject}}
+	<span class="hidden-xs hidden-sm"><a href="{{url}}">{{#if volunteers-needed}}<i class="fa fa-fw fa-leaf"></i>{{/if}}<i class="fa fa-fw fa-calendar"></i>{{#if ../show-title}}{{{title}}}{{/if}}</a></span><span class="hidden-md hidden-lg"><a href="#" {{#generateId context=../. group="void-link"}}{{../id}}{{/generateId}}>{{#if volunteers-needed}}<i class="fa fa-fw fa-leaf"></i>{{/if}}<i class="fa fa-fw fa-calendar"></i>{{#if ../show-title}}<span class="visible-xsm visible-xsm-inline-block visible-sm visible-sm-inline-block">{{{title}}}</span>{{/if}}</a></span>
+{{/with}}

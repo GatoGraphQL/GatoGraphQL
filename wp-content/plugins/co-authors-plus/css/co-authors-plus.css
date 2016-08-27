@@ -1,0 +1,110 @@
+.inline-edit-group.inline-edit-coauthors {
+	display: none;
+}
+
+.inline-edit-group.inline-edit-coauthors #coauthors-edit {
+	margin-left: 5em;
+}
+
+#coauthors-list {
+	width: 100%;
+	padding: 0 5px;
+}
+	#coauthors-list td {
+		padding-left:0;
+		padding-right:0;
+		vertical-align: middle;
+		background: #F9F9F9;
+	}
+
+	#coauthors-list .coauthor-row {
+		overflow: hidden;
+	}
+		#coauthors-list .coauthor-tag {
+			width: 200px;
+			display: block;
+			padding: 10px 3px 5px;
+			font-size: 13px;
+			color: #21759B;
+			border-bottom: 1px solid #21759B;
+			cursor: text;
+			float: left;
+		}
+			#coauthors-list .coauthor-tag:hover {
+				cursor: text;
+				background: #EAF2FA;
+				color:#D54E21;
+			}
+			#coauthors-list .ui-state-highlight {
+				border:2px dashed #21759B;
+				height:31px;
+				margin-top:3px;
+				width:200px;
+			}
+			#coauthors-list .ui-sortable-helper .coauthor-tag {
+				cursor: cursor:grabbing;
+  				cursor:-moz-grabbing;
+  				cursor:-webkit-grabbing;
+			}
+		#coauthors-list .coauthor-gravatar {
+			float: right;
+			height: 25px;
+			margin-right: 5px;
+			margin-top: -5px;
+			width: 25px;
+		}
+		#coauthors-list .coauthor-suggest {
+			margin: 5px 0;
+			color: #888;
+			width: 200px;
+			float: left;
+		}
+			#coauthors-list .coauthor-suggest:focus {
+				color: #333;
+			}
+		#coauthors-list .coauthors-author-options {
+			overflow: hidden;
+			padding: 7px 0 0 7px;
+		}
+			#coauthors-list .delete-coauthor {
+				display: block;
+				float: left;
+				padding: 5px;
+				text-decoration: underline;
+				color: #FF0000;
+				font-size: 11px;
+				
+				border: 1px solid transparent;
+			}
+				#coauthors-list .delete-coauthor:hover {
+					cursor: pointer;
+					background: #FF0000;
+					color: #fff;
+					
+					border: 1px solid #FF0000;
+					border-radius: 3px;
+					-moz-border-radius: 3px;
+					-webkit-border-radius: 3px;
+				}
+	#coauthors-loading {
+		margin: 10px 0px 5px 10px;
+	}
+	
+#coauthors-readonly {
+}
+	#coauthors-readonly ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+		#coauthors-readonly ul li {
+		}
+		#coauthors-readonly ul li .avatar {
+			float: left;
+		}
+		#coauthors-readonly ul li .coauthor-tag {
+			display:block;
+			padding: 5px 3px;
+			margin-left: 30px;
+			font-size: 13px;
+		}

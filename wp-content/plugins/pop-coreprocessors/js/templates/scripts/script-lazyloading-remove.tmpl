@@ -1,0 +1,14 @@
+{{#with itemObject}}
+	<script type="text/javascript">
+	(function($){
+		$(document).one('template:merged', function() {
+			var destination = $('div.pop-append-{{../itemObjectDBKey}}-{{id}}');
+			{{!If there is a "Loading data" spinner, hide it.}}
+			var loading = destination.closest('[data-lazyloadingspinner-target]');
+			$(loading.data('lazyloadingspinner-target')).addClass('hidden');
+			// Remove the attr, so this element is not found again
+			loading.attr('data-lazyloadingspinner-target', null);
+		});
+	})(jQuery);
+	</script>
+{{/with}}

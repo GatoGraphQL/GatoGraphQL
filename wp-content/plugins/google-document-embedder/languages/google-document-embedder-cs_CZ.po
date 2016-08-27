@@ -1,0 +1,1254 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Doc Embedder v2.5.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-25 10:14-0600\n"
+"PO-Revision-Date: 2013-06-18 07:33+0100\n"
+"Last-Translator: Atelier Gadjukin <atelier@gadjukin.net>\n"
+"Language-Team: Atelier Gadjukin <atelier@gadjukin.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n"
+"+9)%10>3 ? 2 : 1;\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ gde
+#: functions.php:361 gviewer.php:304 libs/lib-setup.php:71
+#: libs/lib-setup.php:121
+msgid "Download"
+msgstr "Stáhnout"
+
+# @ gde
+#: options.php:208
+msgid "Support"
+msgstr "Podpora"
+
+# @ gde
+#: libs/tab-support.php:27
+msgid ""
+"Please review the documentation before submitting a request for support:"
+msgstr "Prohlédněte si prosím dokumentaci před odesláním požadavku na podporu:"
+
+# @ gde
+#: libs/tab-support.php:30
+msgid "Plugin FAQ"
+msgstr "FAQ Pluginu"
+
+# @ gde
+#: libs/tab-support.php:32
+msgid "If you're still experiencing a problem, please complete the form below."
+msgstr "Pokud stále dochází k problému, vyplňte prosím níže uvedený formulář."
+
+# @ gde
+#: libs/tab-support.php:42
+msgid "Your Name"
+msgstr "Vaše jméno"
+
+# @ gde
+#: libs/tab-support.php:46
+msgid "Your E-mail"
+msgstr "Váš email"
+
+# @ gde
+#: libs/tab-support.php:53
+msgid "Shortcode"
+msgstr "Zkratka"
+
+# @ gde
+#: libs/tab-support.php:56
+msgid ""
+"If you're having a problem getting a specific document to work, paste the "
+"shortcode you're trying to use here."
+msgstr ""
+"Pokud máte nějaký problém s fungováním konkrétního dokumentu, vložte sem "
+"zkratku, kterou se snažíte použít."
+
+# @ gde
+#: libs/tab-support.php:67
+msgid "Message"
+msgstr "Zpráva"
+
+# @ gde
+#: libs/tab-support.php:73
+msgid "Message Options"
+msgstr "Volby zprávy"
+
+# @ gde
+#: libs/tab-support.php:75
+msgid "Send debug information"
+msgstr "Odešlete ladící informace"
+
+# @ gde
+#: libs/tab-support.php:76
+msgid "View"
+msgstr "Zobrazit"
+
+# @ gde
+#: libs/tab-support.php:78
+msgid "Send me a copy"
+msgstr "Poslat kopii mně"
+
+# @ gde
+#: libs/tab-support.php:84
+msgid "Debug Information"
+msgstr "Ladící informace"
+
+# @ gde
+#: libs/tab-support.php:160
+msgid ""
+"I'm less likely to be able to help you if you do not include debug "
+"information."
+msgstr ""
+"Obávám se, že vám nebudu schopen pomoct, pokud nepřiložíte ladící informace."
+
+# @ gde
+#: functions.php:500 view.php:397
+msgid "Error"
+msgstr "Chyba"
+
+# @ gde
+#: functions-admin.php:414 functions-admin.php:540 libs/tab-advanced.php:143
+#: options.php:168
+msgid "Settings"
+msgstr "Nastavení"
+
+# @ gde
+#: functions-admin.php:423
+msgid "You do not have sufficient permissions to access this page"
+msgstr "Nemáte dostatečná oprávnění pro přístup na tuto stránku"
+
+# @ gde
+#: functions-admin.php:528
+msgid "plugin"
+msgstr "plugin"
+
+# @ gde
+#: functions-admin.php:529
+msgid "Version"
+msgstr "Verze"
+
+# @ gde
+#: options.php:349
+msgid "Help"
+msgstr "Pomoc"
+
+# @ gde
+#: libs/lib-profile.php:67
+msgid "Enhanced Viewer"
+msgstr "Rozšířený prohlížeč"
+
+# @ gde
+#: libs/lib-profile.php:195
+msgid "Default Size"
+msgstr "Výchozí velikost"
+
+# @ gde
+#: libs/lib-eddialog.php:108 libs/lib-profile.php:197
+msgid "Width"
+msgstr "Šířka"
+
+# @ gde
+#: libs/lib-eddialog.php:103 libs/lib-profile.php:201
+msgid "Height"
+msgstr "Výška"
+
+# @ gde
+#: libs/lib-profile.php:179
+msgid "Default Language"
+msgstr "Výchozí jazyk"
+
+# @ gde
+#: libs/lib-profile.php:210
+msgid "File Base URL"
+msgstr "URL úložiště souborů"
+
+# @ gde
+#: libs/lib-profile.php:233
+msgid "Link Text"
+msgstr "Text odkazu"
+
+# @ gde
+#: libs/lib-profile.php:236
+msgid "You can further customize text using these dynamic replacements:"
+msgstr "Můžete upravit zobrazovaný text za pomocí těchto zástupců:"
+
+# @ gde
+#: libs/lib-profile.php:237
+msgid "filename"
+msgstr "jméno souboru"
+
+# @ gde
+#: libs/lib-profile.php:238
+msgid "file type"
+msgstr "typ souboru"
+
+# @ gde
+#: libs/lib-profile.php:239
+msgid "file size"
+msgstr "velikost souboru"
+
+# @ gde
+#: libs/lib-profile.php:243
+msgid "Link Position"
+msgstr "Umístění odkazu"
+
+# @ gde
+#: libs/lib-profile.php:247
+msgid "Above Viewer"
+msgstr "Nad prohlížečem"
+
+# @ gde
+#: libs/lib-profile.php:248
+msgid "Below Viewer"
+msgstr "Pod prohlížečem"
+
+# @ gde
+#: libs/lib-profile.php:254
+msgid "Link Behavior"
+msgstr "Chování odkazu"
+
+# @ gde
+#: libs/tab-advanced.php:19
+msgid "Plugin Behavior"
+msgstr "Chování pluginu"
+
+# @ gde
+#: libs/tab-advanced.php:27
+msgid "Disable all editor integration"
+msgstr "Zakázat integraci všech prohlížečů"
+
+# @ gde
+#: libs/tab-advanced.php:29
+msgid "Allow uploads of all supported media types"
+msgstr "Povolit upload všech podporovaných typů souborů"
+
+# @ gde
+#: libs/lib-eddialog.php:55
+msgid "Required"
+msgstr "Vyžadováno"
+
+# @ gde
+#: libs/lib-eddialog.php:59
+msgid "URL or Filename"
+msgstr "URL nebo jméno souboru"
+
+# @ gde
+#: libs/lib-eddialog.php:68
+msgid "Unsupported file type"
+msgstr "Nepodporovaný typ souboru"
+
+# @ gde
+#: libs/lib-eddialog.php:122
+msgid "Show Download Link"
+msgstr "Zobrazit odkaz ke stažení"
+
+# @ gde
+#: libs/lib-eddialog.php:125
+msgid "Yes"
+msgstr "Ano"
+
+# @ gde
+#: libs/lib-eddialog.php:126
+msgid "No"
+msgstr "Ne"
+
+# @ gde
+#: libs/lib-eddialog.php:132
+msgid "Disable caching (this document is frequently overwritten)"
+msgstr "Zakázat ukládání mezipaměti (tento dokument bude často přepisován)"
+
+# @ gde
+#: libs/lib-eddialog.php:143
+msgid "Shortcode Preview"
+msgstr "Náhled zkratky"
+
+# @ gde
+#: libs/lib-eddialog.php:151
+msgid "Insert"
+msgstr "Vložit"
+
+# @ gde
+#: libs/lib-eddialog.php:155
+msgid "Cancel"
+msgstr "Zrušit"
+
+# @ gde
+#: functions-admin.php:266
+msgid "Import"
+msgstr "Import"
+
+# @ gde
+#: functions-admin.php:277
+msgid "Performing full import..."
+msgstr "Provádím úplný import..."
+
+# @ gde
+#: functions-admin.php:281 functions-admin.php:306
+msgid "Importing profiles"
+msgstr "Importované profily"
+
+# @ gde
+#: functions-admin.php:287 functions-admin.php:301 functions-admin.php:312
+#: functions-admin.php:325
+msgid "done"
+msgstr "hotovo"
+
+# @ gde
+#: functions-admin.php:290 functions-admin.php:299 functions-admin.php:315
+#: functions-admin.php:323
+msgid "failed"
+msgstr "selhalo"
+
+# @ gde
+#: functions-admin.php:296
+msgid "Importing settings"
+msgstr "Import nastavení"
+
+# @ gde
+#: functions-admin.php:319
+msgid "Importing settings... "
+msgstr "Importuji nastavení..."
+
+# @ gde
+#: functions-admin.php:328 functions-admin.php:571 options.php:141
+msgid "Please select a valid export file to import."
+msgstr "Vyberte prosím platný exportní soubor pro import."
+
+# @ gde
+#: functions-admin.php:332
+msgid "All or part of the import failed. See above for information."
+msgstr "Všechy nebo část importu selhala, Podívejte se výše na informace."
+
+# @ gde
+#: functions-admin.php:334
+msgid "Import completed successfully."
+msgstr "Import kompletní."
+
+# @ gde
+#: functions-admin.php:337
+msgid "Return to GDE Settings"
+msgstr "Zpět do nastavení GDE"
+
+# @ gde
+#: functions-admin.php:567
+msgid "This profile will be permanently deleted."
+msgstr "Tento profil bude navždy vymazán."
+
+# @ gde
+#: functions-admin.php:567 functions-admin.php:568 functions-admin.php:569
+#: functions-admin.php:572
+msgid "Are you sure?"
+msgstr "Jste si jisti?"
+
+# @ gde
+#: functions-admin.php:568
+msgid "Settings for this profile will overwrite the default profile."
+msgstr "Nastavení tohoto profilu bude přepsáno defaultním profilem."
+
+# @ gde
+#: functions-admin.php:569
+msgid ""
+"Your profile list will be reset to its original state. All changes will be "
+"lost."
+msgstr ""
+"Váš seznam profilů bude vymazán do výchozího stavu. Všechny změny budou "
+"ztraceny."
+
+# @ gde
+#: functions-admin.php:572
+msgid ""
+"Any settings or duplicate profile names in this import will overwrite the "
+"current values."
+msgstr ""
+"Všechna nastavení nebo kopie profilů v tomto importu budou přepsány "
+"současnými hodnotami."
+
+# @ gde
+#: functions-admin.php:574
+msgid "Please include a shortcode or message to request support."
+msgstr "Vložte prosím zkratku nebo zprávu jako požadavek na podporu."
+
+# @ gde
+#: functions-admin.php:612
+msgid "Embed file using Google Doc Embedder"
+msgstr "Vložený soubor použije  GDE"
+
+# @ gde
+#: functions-admin.php:629 libs/lib-eddialog.php:85
+msgid "Select the GDE viewer profile to use"
+msgstr "Vyberte GDE profil který chcete použít"
+
+# @ gde
+#: functions-admin.php:780
+msgid ""
+"You are running a pre-release version of Google Doc Embedder. Please watch "
+"this space for important updates."
+msgstr ""
+"Používáte beta verzi Google Embedder Doc. Prosím sledujte toto místo pro "
+"důležité aktualizace."
+
+# @ gde
+#: functions.php:104
+msgid "File not specified, check shortcode syntax"
+msgstr "Soubor není specifikován, zkotrolujte syntaxi zkratky"
+
+# @ gde
+#: functions.php:105
+msgid "Requested URL is invalid"
+msgstr "Požadavaná URL není platná"
+
+# @ gde
+#: functions.php:106
+msgid "Unsupported File Type"
+msgstr "Nepodporovaný typ souboru"
+
+# @ gde
+#: functions.php:107
+msgid "Error retrieving file - if necessary turn off error checking"
+msgstr "Chyba načítání souboru - v případě potřeby vypnout kontrolu chyb"
+
+# @ gde
+#: functions.php:227
+msgid "Unknown"
+msgstr "Neznámý"
+
+# @ gde
+#: functions.php:229 libs/tab-advanced.php:38
+msgid "MB"
+msgstr "MB"
+
+# @ gde
+#. translators: plugin header field 'Name'
+#: gviewer.php:0
+msgid "Google Doc Embedder"
+msgstr "Google Doc Embedder"
+
+# @ gde
+#. translators: plugin header field 'PluginURI'
+#: gviewer.php:0
+msgid "http://www.davistribe.org/gde/"
+msgstr "http://www.davistribe.org/gde/"
+
+# @ gde
+#. translators: plugin header field 'Description'
+#: gviewer.php:0
+msgid ""
+"Lets you embed MS Office, PDF, TIFF, and many other file types in a web page "
+"using the Google Docs Viewer (no Flash or PDF browser plug-ins required)."
+msgstr ""
+"Pomocí Google Doc Viewer můžete do vašich stránek vložit dokumenty MS "
+"Office, PDF, TIFF a mnoho dalších typů souborů (nepotřebujete pluginy pro "
+"PDF nebo Flash)."
+
+# @ gde
+#. translators: plugin header field 'Author'
+#: gviewer.php:0
+msgid "Kevin Davis"
+msgstr "Kevin Davis"
+
+# @ gde
+#. translators: plugin header field 'AuthorURI'
+#: gviewer.php:0
+msgid "http://www.davistribe.org/"
+msgstr "http://www.davistribe.org/"
+
+# @ gde
+#. translators: plugin header field 'Version'
+#: gviewer.php:0
+msgid "2.5.7"
+msgstr "2.5.7"
+
+# @ gde
+#: gviewer.php:78
+msgid "Unable to load profile settings"
+msgstr "Nelze načíst nastavení profilu"
+
+# @ gde
+#: gviewer.php:113 gviewer.php:125
+msgid "Unable to load requested profile."
+msgstr "Nelze načíst požadovaný profil"
+
+# @ gde
+#: gviewer.php:238
+msgid "Unable to secure document"
+msgstr "Nelze zabezpečit dokument"
+
+# @ gde
+#: gviewer.php:401
+msgid "Setup wasn't able to create the required database tables."
+msgstr "Setup nemůže vytvořit požadovanou tabulku v databázi."
+
+# @ gde
+#: js/tb-newwin.php:7
+msgid "View in full screen"
+msgstr "Zobrazit v celém okně"
+
+# @ gde
+#: js/tb-newwin.php:11
+msgid "Open in new window"
+msgstr "Otevře v novém okně"
+
+# @ gde
+#: libs/lib-eddialog.php:8
+msgid "Access denied."
+msgstr "Přístup odepřen."
+
+# @ gde
+#: libs/lib-eddialog.php:52
+msgid "Insert Google Doc Embedder Shortcode"
+msgstr "Vložte zkratku Google Doc Embedder"
+
+# @ gde
+#: libs/lib-eddialog.php:60
+msgid "Full URL or filename to append to profile Base URL"
+msgstr "Plná URL adresa nebo jméno souboru připojené k výchozí URL adrese"
+
+# @ gde
+#: libs/lib-eddialog.php:65
+msgid "Profile Base URL will be prefixed"
+msgstr "Výchozí URL adresa profilu bude prefixem"
+
+# @ gde
+#: libs/lib-eddialog.php:74
+msgid "Profile"
+msgstr "Profil"
+
+# @ gde
+#: libs/lib-eddialog.php:93
+msgid "Optional (Override Profile Settings)"
+msgstr "Volitelné (přepíše nastavení profilu)"
+
+# @ gde
+#: libs/lib-eddialog.php:98
+msgid "Use selected profile settings"
+msgstr "Použijte nastavení vybraného profilu"
+
+# @ gde
+#: libs/lib-eddialog.php:109
+msgid "Format: 40% or 300px"
+msgstr "Formát: 40% nebo 300px"
+
+# @ gde
+#: libs/lib-eddialog.php:114
+msgid "Start Page #"
+msgstr "První stránka #"
+
+# @ default
+#: libs/lib-formsubmit.php:9 libs/lib-secure.php:9 libs/lib-service.php:12
+#: libs/lib-service.php:59 libs/lib-service.php:77 libs/lib-service.php:80
+#: load.php:8
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Nemáte odpovídající oprávnění k přístupu na tuto stránku."
+
+# @ gde
+#: libs/lib-profile.php:12 libs/tab-advanced.php:134 libs/tab-profiles.php:20
+msgid ""
+"Unable to load profile settings. Please re-activate GDE and if the problem "
+"persists, request help using the \"Support\" tab."
+msgstr ""
+"Nelze načíst nastaevní profilu. Zkuste prosím znovu aktivovat GDE plugin a "
+"pokud problém přetrvá, použijte záložku \"Podpora\". "
+
+# @ gde
+#: libs/lib-profile.php:25
+msgid "Default Settings"
+msgstr "Výchozí nastavení"
+
+# @ gde
+#: libs/lib-profile.php:26
+msgid ""
+"These settings define the default viewer profile, which is used when no "
+"other profile is specified."
+msgstr ""
+"Tato nastavení definují výchozí prohlíček, pokud není zvolený žádný jiný "
+"profil."
+
+# @ gde
+#: libs/lib-profile.php:30
+msgid "Edit Profile"
+msgstr "Upravit profil"
+
+# @ gde
+#: libs/lib-profile.php:62
+msgid "Viewer Mode"
+msgstr "Mód prohlížeče"
+
+# @ gde
+#: libs/lib-profile.php:66
+msgid "Standard Viewer"
+msgstr "Standardní prohlížeč"
+
+# @ gde
+#: libs/lib-profile.php:66
+msgid "Embed the basic viewer only"
+msgstr "Vloží pouze základní prohlížeč"
+
+# @ gde
+#: libs/lib-profile.php:67
+msgid "Enable extended viewer options"
+msgstr "Povolí volby rozšířeného prohlížeče"
+
+# @ gde
+#: libs/lib-profile.php:77
+msgid "Enhanced Viewer Settings"
+msgstr "Nastavení rozšířeného prohlížeče"
+
+# @ gde
+#: libs/lib-profile.php:81
+msgid "Toolbar"
+msgstr "Nástrojový pruh"
+
+# @ gde
+#: libs/lib-profile.php:85
+msgid "Remove Toolbar"
+msgstr "Vyjmout nástrojový pruh"
+
+# @ gde
+#: libs/lib-profile.php:90
+msgid "Use Mobile Toolbar"
+msgstr "Použít Mobilní nástrojovou lištu"
+
+# @ gde
+#: libs/lib-profile.php:94
+msgid "Mobile Devices Only (Default)"
+msgstr "Pouze pro mobilní zařízení (výchozí)"
+
+# @ gde
+#: libs/lib-profile.php:94
+msgid "Use mobile toolbar when mobile device detected"
+msgstr ""
+"Použije mobilní nástrojovou lištu, jakmile je detekováno mobilní zařízení"
+
+# @ gde
+#: libs/lib-profile.php:95
+msgid "Always"
+msgstr "Vždy"
+
+# @ gde
+#: libs/lib-profile.php:95
+msgid "Use mobile toolbar for all visitors"
+msgstr "Použít mobilní nástrojovou lištu pro všechny návštěvníky"
+
+# @ gde
+#: libs/lib-profile.php:96
+msgid "Never"
+msgstr "Nikdy"
+
+# @ gde
+#: libs/lib-profile.php:96
+msgid "Never use mobile toolbar"
+msgstr "Nikdy nepoužít mobilní nástrojovou lištu"
+
+# @ gde
+#: libs/lib-profile.php:103
+msgid "Toolbar Items"
+msgstr "Tlačítka lišty"
+
+# @ gde
+#: libs/lib-profile.php:106
+msgid "Page Numbers"
+msgstr "Čísla stránek"
+
+# @ gde
+#: libs/lib-profile.php:107
+msgid "Previous/Next Page"
+msgstr "Předchozí/Další stránka"
+
+# @ gde
+#: libs/lib-profile.php:108
+msgid "Zoom In/Out"
+msgstr "Zoom In/Out"
+
+# @ gde
+#: libs/lib-profile.php:109
+msgid "Full Screen/New Window"
+msgstr "Celá obrazovka/Nové okno"
+
+# @ gde
+#: libs/lib-profile.php:112
+msgid ""
+"Uncheck items to remove from toolbar. Buttons will vary based on file type "
+"and device used."
+msgstr ""
+"Odškrtnutí položky odstraní tlačítko z lišty. Tlačítka se mohou lišit v "
+"závislosti na typu souboru a zařízení."
+
+# @ gde
+#: libs/lib-profile.php:116
+msgid "Full Screen Behavior"
+msgstr "Chování při celé obrazovce"
+
+# @ gde
+#: libs/lib-profile.php:120
+msgid "Google-Hosted Page (Default)"
+msgstr "Google-Hosted stránka (výchozí)"
+
+# @ gde
+#: libs/lib-profile.php:122
+msgid "Full Screen Viewer"
+msgstr "Prohlížeč pro celou obrazovku"
+
+# @ gde
+#: libs/lib-profile.php:127
+msgid "Open in New Window"
+msgstr "Otevřít v novém okně"
+
+# @ gde
+#: libs/lib-profile.php:128
+msgid "Allow Logged-in Users Only"
+msgstr "Povolit pouze pro přihlášené"
+
+# @ gde
+#: libs/lib-profile.php:129
+msgid "Allow Printing"
+msgstr "Povolit tisk"
+
+# @ gde
+#: libs/lib-profile.php:134
+msgid "Page Area Background Color"
+msgstr "Barva pozadí stránky"
+
+# @ gde
+#: libs/lib-profile.php:139
+msgid "None (Transparent)"
+msgstr "Žádná (průhledná)"
+
+# @ gde
+#: libs/lib-profile.php:144
+msgid "Page Border Color"
+msgstr "Barva orámování stránky"
+
+# @ gde
+#: libs/lib-profile.php:149
+msgid "No Border"
+msgstr "Bez orámování"
+
+# @ gde
+#: libs/lib-profile.php:154
+msgid "Custom CSS File"
+msgstr "Uživatelský CSS soubor"
+
+# @ gde
+#: libs/lib-profile.php:160
+msgid "URL of custom CSS file (may override some of the above options)"
+msgstr ""
+"URL uživatelského souboru se styly (může přepsat některá z výše uvedených "
+"nastavení)"
+
+# @ gde
+#: libs/lib-profile.php:164
+msgid "Security"
+msgstr "Bezpečnost"
+
+# @ gde
+#: libs/lib-profile.php:167
+msgid "Hide ability to select/copy/paste text"
+msgstr "Skrýt možnost vybrat/kopírovat/vložit text"
+
+# @ gde
+#: libs/lib-profile.php:168
+msgid "Block all download requests for file"
+msgstr "Zamezit všem požadavkům o stažení souboru"
+
+# @ gde
+#: libs/lib-profile.php:191
+msgid "Language of toolbar button tips"
+msgstr "Jazyk nápovědy k tlačítkům nástrojové lišty"
+
+# @ gde
+#: libs/lib-profile.php:206
+msgid "Enter as pixels or percentage (example: 500px or 100%)"
+msgstr "Zadejte jako pixely nebo jako procenta (např. 500px nebo 100%)"
+
+# @ gde
+#: libs/lib-profile.php:216
+msgid ""
+"Any file not starting with <code>http</code> will be prefixed by this value"
+msgstr "Předpona <code>http</code> bude doplněna"
+
+# @ gde
+#: libs/lib-profile.php:220
+msgid "Download Link"
+msgstr "Odkaz pro stažení"
+
+# @ gde
+#: libs/lib-profile.php:224
+msgid "All Users"
+msgstr "Všichni návštěvníci"
+
+# @ gde
+#: libs/lib-profile.php:224
+msgid "Download link visible to everyone by default"
+msgstr "Odkaz pro stažení bude viditelný pro každého"
+
+# @ gde
+#: libs/lib-profile.php:225
+msgid "Logged-in Users"
+msgstr "Přihlášený uživatel"
+
+# @ gde
+#: libs/lib-profile.php:225
+msgid "Download link visible to logged-in users"
+msgstr "Odkaz pro stažení bude zobrazen jen po přihlášení"
+
+# @ gde
+#: libs/lib-profile.php:226 libs/tab-advanced.php:93
+msgid "None"
+msgstr "Žádný"
+
+# @ gde
+#: libs/lib-profile.php:226
+msgid "Download link is not visible by default"
+msgstr "Odkaz pro stažení nebude viditelný vůbec"
+
+# @ gde
+#: libs/lib-profile.php:257
+msgid "Force download (bypass browser plugins)"
+msgstr "Přímé stažení (obejde plugin prohlížeče)"
+
+# @ gde
+#: libs/lib-profile.php:258
+msgid "Shorten URL"
+msgstr "Zkrácená URL"
+
+# @ gde
+#: libs/lib-profile.php:266 libs/tab-advanced.php:122
+msgid "Save Changes"
+msgstr "Uložit změny"
+
+# @ gde
+#: libs/lib-setup.php:52
+msgid "This is the default profile, used when no profile is specified."
+msgstr ""
+"Toto je výchozí profil, který je použit, když není žádný profil specifikován."
+
+# @ gde
+#: libs/lib-setup.php:77
+msgid "Hide document location and text selection, prevent downloads"
+msgstr "Skryje umístění dokumentu a textový výběr, ochrana stahování"
+
+# @ gde
+#: libs/lib-setup.php:102
+msgid "Dark-colored theme, example of custom CSS option"
+msgstr "Tmavé téma, příklad uživatelských CSS voleb"
+
+# @ gde
+#: libs/tab-advanced.php:24
+msgid "Editor Integration"
+msgstr "Integrace editoru"
+
+# @ gde
+#: libs/tab-advanced.php:28
+msgid "Insert shortcode from Media Library by default"
+msgstr "Vložit zkratku z Knihovny médií jako výchozí"
+
+# @ gde
+#: libs/tab-advanced.php:34
+msgid "Maximum File Size"
+msgstr "Maximální velikost souboru"
+
+# @ gde
+#: libs/tab-advanced.php:40
+msgid ""
+"Very large files (typically 8-12MB) aren't supported by Google Doc Viewer"
+msgstr ""
+"Velmi velké soubory (typicky 8-12MB) nejsou podporovány Google Doc Viewerem"
+
+# @ gde
+#: libs/tab-advanced.php:44
+msgid "Error Handling"
+msgstr "Zachycování chyb"
+
+# @ gde
+#: libs/tab-advanced.php:47
+msgid "Show error messages inline (otherwise, they appear in HTML comments)"
+msgstr ""
+"Zobrazovat chybové hlášky přímo (jinak se budou zobrazovat v HTML "
+"komentářích)"
+
+# @ gde
+#: libs/tab-advanced.php:48
+msgid "Check for errors before loading viewer"
+msgstr "Otestovat chyby před načtením prohlížeče"
+
+# @ gde
+#: libs/tab-advanced.php:50
+msgid "Enable extended diagnostic logging <em>(manually enabled)</em>"
+msgstr "Povolit rozšířené diagnostické logování <em>(manuálně povolit)</em>"
+
+# @ gde
+#: libs/tab-advanced.php:52
+msgid "Enable extended diagnostic logging"
+msgstr "Povolit rozšířené diagnostické logování"
+
+# @ gde
+#: libs/tab-advanced.php:54
+msgid "clear log"
+msgstr "vyčistit log"
+
+# @ gde
+#: libs/tab-advanced.php:59
+msgid "show log"
+msgstr "zobrazit log"
+
+# @ gde
+#: libs/tab-advanced.php:65
+msgid "Version Notifications"
+msgstr "Sledování verzí"
+
+# @ gde
+#: libs/tab-advanced.php:69
+msgid "All Versions"
+msgstr "Všechny verze"
+
+# @ gde
+#: libs/tab-advanced.php:69
+msgid "You will receive release and beta notifications"
+msgstr "Budete přijímat oznámení o nových a beta verzích"
+
+# @ gde
+#: libs/tab-advanced.php:70
+msgid "Release Versions Only"
+msgstr "Pouze oficiální verze"
+
+# @ gde
+#: libs/tab-advanced.php:70
+msgid "You will not receive beta notifications"
+msgstr "Nebudete přijímat beta verze"
+
+# @ gde
+#: libs/tab-advanced.php:79
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+# @ gde
+#: libs/tab-advanced.php:81
+msgid ""
+"To use Google Analytics integration, the GA tracking code must already be "
+"installed on your site."
+msgstr ""
+"Chcete-li používat službu Google Analytics, musíte mít naistalován sledovací "
+"GA kód na vašem webu."
+
+# @ gde
+#: libs/tab-advanced.php:82
+msgid "More Info"
+msgstr "Více informací"
+
+# @ gde
+#: libs/tab-advanced.php:87
+msgid "Event Tracking"
+msgstr "Sledování událostí"
+
+# @ gde
+#: libs/tab-advanced.php:91
+msgid "Enabled"
+msgstr "Povoleno"
+
+# @ gde
+#: libs/tab-advanced.php:91
+msgid "Track events in Google Analytics"
+msgstr "Sledování událostí v Google Analytics"
+
+# @ gde
+#: libs/tab-advanced.php:92
+msgid "Enabled (Compatibility Mode)"
+msgstr "Povoleno (mód kompatibility)"
+
+# @ gde
+#: libs/tab-advanced.php:92
+msgid "Track events using older GDE format (< 2.5)"
+msgstr "Sledování událostí použije starý GDE formát (< 2.5)"
+
+# @ gde
+#: libs/tab-advanced.php:93
+msgid "Disable Google Analytics integration"
+msgstr "Zakázat Google Analytics integraci"
+
+# @ gde
+#: libs/tab-advanced.php:100
+msgid "Category"
+msgstr "Kategorie"
+
+# @ gde
+#: libs/tab-advanced.php:108
+msgid "Label"
+msgstr "Označení"
+
+# @ gde
+#: libs/tab-advanced.php:112
+msgid "Document URL"
+msgstr "URL dokumentu"
+
+# @ gde
+#: libs/tab-advanced.php:113
+msgid "Document Filename"
+msgstr "Jméno dokumentu"
+
+# @ gde
+#: libs/tab-advanced.php:130
+msgid "Backup and Import"
+msgstr "Záloha a import"
+
+# @ gde
+#: libs/tab-advanced.php:138
+msgid ""
+"Download a file to your computer containing your profiles, settings, or "
+"both, for backup or migration purposes."
+msgstr ""
+"Stáhněte si do počítače soubor s vaším nastavením a profily pro pozdější "
+"migraci nebo jako zálohu."
+
+# @ gde
+#: libs/tab-advanced.php:141
+msgid "All Profiles and Settings"
+msgstr "Všechny profily a nastavení"
+
+# @ gde
+#: libs/tab-advanced.php:142 options.php:182 options.php:195
+msgid "Profiles"
+msgstr "Profily"
+
+# @ gde
+#: libs/tab-advanced.php:147
+msgid "Download Export File"
+msgstr "Stáhnout soubor exportu"
+
+# @ gde
+#: libs/tab-advanced.php:155
+msgid "To import, choose a file from your computer:"
+msgstr "Vyberte soubor pro import"
+
+# @ gde
+#: libs/tab-advanced.php:161
+msgid "Upload File and Import"
+msgstr "Nahrát soubor a importovat"
+
+# @ gde
+#: libs/tab-profiles.php:34 libs/tab-profiles.php:47
+msgid "ID"
+msgstr "ID"
+
+# @ gde
+#: libs/tab-profiles.php:37 libs/tab-profiles.php:50 libs/tab-profiles.php:104
+msgid "Name"
+msgstr "Jméno"
+
+# @ gde
+#: libs/tab-profiles.php:40 libs/tab-profiles.php:53 libs/tab-profiles.php:120
+msgid "Description"
+msgstr "Popis"
+
+# @ gde
+#: libs/tab-profiles.php:83
+msgid "profile_desc"
+msgstr "profile_desc"
+
+# @ gde
+#: libs/tab-profiles.php:92
+msgid "Reset Profiles"
+msgstr "Resetovat profil"
+
+# @ gde
+#: libs/tab-profiles.php:100 libs/tab-profiles.php:125
+msgid "Add New Profile"
+msgstr "Přidat nový profil"
+
+# @ gde
+#: libs/tab-profiles.php:106
+msgid ""
+"The name (or ID number) is used to select the profile via the shortcode. It "
+"is all lowercase and contains only letters, numbers, and hyphens."
+msgstr ""
+"Jméno (nebo ID) profilu které bude použito při použití zkratky pro vložení. "
+"Lze použít malá písmena abecedy bez diakritiky, čísla nebo pomlčky."
+
+# @ gde
+#: libs/tab-profiles.php:109
+msgid "Parent"
+msgstr "Rodič"
+
+# @ gde
+#: libs/tab-profiles.php:117
+msgid "Select which profile to use as a starting point."
+msgstr "Vyberte profil, který bude použit jako výchozí bod."
+
+# @ gde
+#: libs/tab-profiles.php:122
+msgid "Describe the profile's purpose, for your own reference (optional)."
+msgstr "Popište účel a specifikaci vašeho profilu (nepovinné)."
+
+# @ gde
+#: libs/tab-support.php:38
+msgid "Support Request"
+msgstr "Požadavek na podporu"
+
+# @ gde
+#: libs/tab-support.php:49
+msgid "A valid email address is required."
+msgstr "Je třeba zadat platnou emailovou adresu."
+
+# @ gde
+#: libs/tab-support.php:60
+msgid "URL"
+msgstr "URL"
+
+# @ gde
+#: libs/tab-support.php:63
+msgid ""
+"Paste the full web address of a page where I should be able to see the "
+"problem occurring."
+msgstr ""
+"Vložte plnou adresu webu nebo stránky, kde jste se setkali s problémem."
+
+# @ gde
+#: libs/tab-support.php:77
+msgid "Hide"
+msgstr "Skrýt"
+
+# @ gde
+#: libs/tab-support.php:85
+msgid ""
+"Note: Profile and settings export and diagnostic log (if present) will be "
+"attached."
+msgstr ""
+"Poznámka: Profil a nastavení exportu a diagnostický log (pokud existuje) "
+"bude připojen."
+
+# @ gde
+#: libs/tab-support.php:162
+msgid "Send Request"
+msgstr "Odeslat požadavek"
+
+# @ gde
+#: libs/tab-support.php:166
+msgid "Request Sent"
+msgstr "Požadavek odeslán"
+
+# @ gde
+#: libs/tab-support.php:167
+msgid ""
+"Delivery failed. You can manually send this information to wpp@tnw.org for "
+"help."
+msgstr "Doručení selhalo. Můžete zkusit zprávu poslat manuálně na wpp@tnw.org."
+
+# @ gde
+#: load.php:45
+msgid "Direct access to this file is not permitted."
+msgstr "Přímý přístup k tomuto souboru není povolen."
+
+# @ gde
+#: load.php:71
+msgid "The requested file was not found."
+msgstr "Požadovaný soubor nenalezen."
+
+# @ gde
+#: load.php:76
+msgid "Unable to open the requested file. "
+msgstr "Nelze otevřít požadovaný soubor."
+
+# @ gde
+#: load.php:92 load.php:96
+msgid "The document file type is not supported."
+msgstr "Tento typ souboru není podporován."
+
+# @ gde
+#: options.php:13 options.php:68
+msgid "Default profile <strong>updated</strong>."
+msgstr "Výchozí profil <strong>aktualizován</strong>."
+
+# @ gde
+#: options.php:15 options.php:53
+msgid "Unable to update profile."
+msgstr "Nelze aktualizovat profil."
+
+# @ gde
+#: options.php:28
+msgid "Profile name must contain at least one letter."
+msgstr "Jméno  profilu musí obsahovat alespoň jedno písmeno."
+
+# @ gde
+#: options.php:31
+msgid "Profile name already exists. Please choose another name."
+msgstr "Jméno profilu existuje. Zvolte prosím jiné."
+
+# @ gde
+#: options.php:38
+msgid "New profile <strong>created</strong>."
+msgstr "Nový profil <strong>vytvořen</strong>."
+
+# @ gde
+#: options.php:40 options.php:43
+msgid "Unable to create profile."
+msgstr "Nelze vytvořit profil."
+
+# @ gde
+#: options.php:51
+msgid "Profile <strong>updated</strong>."
+msgstr "Profil <strong>aktualizován</strong>."
+
+# @ gde
+#: options.php:61
+msgid "Profile <strong>deleted</strong>."
+msgstr "Profil <strong>smazán</strong>."
+
+# @ gde
+#: options.php:63
+msgid "Unable to delete profile."
+msgstr "Nelze smazat profil."
+
+# @ gde
+#: options.php:105
+msgid "Unable to enable diagnostic logging."
+msgstr "Povolit/zakázat diagnostické logování."
+
+# @ gde
+#: options.php:117 options.php:119
+msgid "Settings <strong>updated</strong>."
+msgstr "Nastavení <strong>aktualizováno</strong>."
+
+# @ gde
+#: options.php:177 options.php:190
+msgid "General"
+msgstr "Hlavní"
+
+# @ gde
+#: options.php:203
+msgid "Advanced"
+msgstr "Rozšířené"
+
+# @ gde
+#: options.php:375
+msgid "Edit"
+msgstr "Upravit"
+
+# @ gde
+#: options.php:376
+msgid "Delete"
+msgstr "Smazat"
+
+# @ gde
+#: options.php:377
+msgid "Make Default"
+msgstr "Nastavit výchozí"
+
+# @ gde
+#: view.php:42
+msgid "Invalid URL format"
+msgstr "Špatný formát URL"
+
+# @ gde
+#: view.php:398
+msgid ""
+"Unable to retrieve document contents. Please try again or switch to Standard "
+"Viewer."
+msgstr ""
+"Nelze získat obsah dokumentu. Zkuste to prosím znovu, nebo použijte "
+"Standardní prohlížeč."

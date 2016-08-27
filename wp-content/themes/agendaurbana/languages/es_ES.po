@@ -1,0 +1,428 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Agenda Urbana\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-27 14:36+0800\n"
+"PO-Revision-Date: 2016-08-27 14:37+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././config/config.php:14
+#, php-format
+msgid "%s on agendaurbana.org. Buenos Aires NO se vende."
+msgstr "%s on agendaurbana.org. Buenos Aires NO se vende."
+
+#: .././config/config.php:15
+#, php-format
+msgid "View all %s"
+msgstr "Ver todos los %s"
+
+#: .././config/config.php:16
+#, php-format
+msgid "Add your %s"
+msgstr "Agregá tu %s"
+
+#: .././config/config.php:55
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: .././config/config.php:68
+msgid "Loading"
+msgstr "Cargando"
+
+#: .././config/config.php:75
+msgid "Loading the website"
+msgstr "Cargando el sitio web"
+
+#: .././config/config.php:92
+#, php-format
+msgid ""
+"<strong>%s</strong> is a crowd-sourced platform to enable people to have "
+"effective participation in issues of citizen, community and/or neighborhood "
+"interest in the City of Buenos Aires (CABA) and its outskirts (constituting "
+"the Metropolitan Area Buenos Aires). <a href=\"%s\">Find out more</a>."
+msgstr ""
+"<strong>%s</strong> es una plataforma abierta para facilitar que sus "
+"habitantes tengan una efectiva participación en las cuestiones de interés "
+"ciudadano, comunal y/o barrial en la Ciudad Autónoma de Buenos Aires (CABA) "
+"y el Conurbano (constituyendo el Área Metropolitana Buenos Aires). <a href="
+"\"%s\">Ver más</a>."
+
+#: .././config/config.php:151
+msgid ""
+"agendaurbana.org is a crowd-sourced platform to enable people to have "
+"effective participation in issues of citizen, community and/or neighborhood "
+"interest in the City of Buenos Aires (CABA) and its outskirts (constituting "
+"the Metropolitan Area Buenos Aires)."
+msgstr ""
+"agendaurbana.org es una plataforma abierta para facilitar que sus habitantes "
+"tengan una efectiva participación en las cuestiones de interés ciudadano, "
+"comunal y/o barrial en la Ciudad Autónoma de Buenos Aires (CABA) y el "
+"Conurbano (constituyendo el Área Metropolitana Buenos Aires)."
+
+#: .././config/config.php:161
+msgid "Highlights"
+msgstr "Destacados"
+
+#: .././config/config.php:166
+msgid "Posts"
+msgstr "Posts"
+
+#: .././config/config.php:176
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:18
+msgid "Articles"
+msgstr "Artículos"
+
+#: .././config/config.php:181
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:19
+msgid "Announcements"
+msgstr "Anuncios"
+
+#: .././config/config.php:186
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:20
+msgid "Resources"
+msgstr "Materiales"
+
+#: .././config/config.php:191
+msgid "Blog"
+msgstr "Blog"
+
+#: .././config/config.php:290
+msgid "Advocacy"
+msgstr "Abogacía"
+
+#: .././config/config.php:291
+msgid "Agriculture"
+msgstr "Agricultura"
+
+#: .././config/config.php:292
+msgid "Civil Rights"
+msgstr "Derechos civiles"
+
+#: .././config/config.php:293
+msgid "Corruption"
+msgstr "Corrupción"
+
+#: .././config/config.php:294
+msgid "Discrimination"
+msgstr "Discriminación"
+
+#: .././config/config.php:295
+msgid "Economics"
+msgstr "Economía"
+
+#: .././config/config.php:296
+msgid "Education"
+msgstr "Educación"
+
+#: .././config/config.php:297
+msgid "Employment"
+msgstr "Empleo"
+
+#: .././config/config.php:298
+msgid "Energy"
+msgstr "Energía"
+
+#: .././config/config.php:299
+msgid "Environment"
+msgstr "Medio ambiente"
+
+#: .././config/config.php:300
+msgid "Food"
+msgstr "Alimentación"
+
+#: .././config/config.php:301
+msgid "Health"
+msgstr "Salud"
+
+#: .././config/config.php:302
+msgid "Housing"
+msgstr "Viviendas"
+
+#: .././config/config.php:303
+msgid "Justice"
+msgstr "Justicia"
+
+#: .././config/config.php:304
+msgid "Law"
+msgstr "Ley"
+
+#: .././config/config.php:305
+msgid "Migration"
+msgstr "Inmigración"
+
+#: .././config/config.php:306
+msgid "Military"
+msgstr "Militar"
+
+#: .././config/config.php:307
+msgid "Politics"
+msgstr "Política"
+
+#: .././config/config.php:308
+msgid "Poverty"
+msgstr "Pobreza"
+
+#: .././config/config.php:309
+msgid "Religion"
+msgstr "Religión"
+
+#: .././config/config.php:310
+msgid "Science/technology"
+msgstr "Ciencia/tecnología"
+
+#: .././config/config.php:311
+msgid "Social Welfare"
+msgstr "Bienestar Social"
+
+#: .././config/config.php:312
+#: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:14
+msgid "Others"
+msgstr "Otros"
+
+#: .././config/config.php:323
+msgid "Association"
+msgstr "Asociación"
+
+#: .././config/config.php:324
+msgid "Community-based organisation"
+msgstr "organización de base comunitaria"
+
+#: .././config/config.php:325
+msgid "Cooperative"
+msgstr "Cooperativa"
+
+#: .././config/config.php:326
+msgid "Corporation/Business"
+msgstr "Corporación/Empresa"
+
+#: .././config/config.php:327
+msgid "Foundation"
+msgstr "Fundación"
+
+#: .././config/config.php:328
+msgid "Governmental organisation"
+msgstr "Organización gubernamental"
+
+#: .././config/config.php:329
+msgid "Informal economy"
+msgstr "Economía informal"
+
+#: .././config/config.php:330
+msgid "Mutual benefit society"
+msgstr "Mutual"
+
+#: .././config/config.php:331
+msgid "Non-governmental organisation"
+msgstr "Organización no gubernamental"
+
+#: .././config/config.php:332
+msgid "Research institute/University"
+msgstr "Instituto de investigación/Universidad"
+
+#: .././config/config.php:333
+msgid "Social enterprise"
+msgstr "Empresa social"
+
+#: .././config/config.php:334
+msgid "Other"
+msgstr "Otro"
+
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:21
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:27
+msgid "Featured"
+msgstr "Destacado"
+
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:24
+msgid "Article"
+msgstr "Artículo"
+
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:25
+msgid "Announcement"
+msgstr "Anuncio"
+
+#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:26
+#: .././plugins/poptheme-wassup/plugins/media-library-assistant/config/config.php:15
+msgid "Resource"
+msgstr "Recurso"
+
+#: .././plugins/poptheme-wassup/plugins/events-manager/config/config.php:25
+msgid "Upcoming Events"
+msgstr "Eventos próximos"
+
+#: .././plugins/poptheme-wassup/plugins/events-manager/config/config.php:30
+msgid "Upcoming and Past Events"
+msgstr "Eventos próximos y pasados"
+
+#: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:11
+msgid "General"
+msgstr "General"
+
+#: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:12
+msgid "Website"
+msgstr "Sitio web"
+
+#: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:13
+msgid "Workshop"
+msgstr "Taller"
+
+#: .././plugins/user-role-editor/config/config.php:15
+msgid "Organizations"
+msgstr "Organizaciones"
+
+#: .././plugins/user-role-editor/config/config.php:20
+msgid "People"
+msgstr "Gente"
+
+#: .././plugins/user-role-editor/config/config.php:25
+msgid "Organization user account"
+msgstr "Cuenta de usuario organización"
+
+#: .././plugins/user-role-editor/config/config.php:30
+msgid "Individual user account"
+msgstr "Cuenta de usuario individual"
+
+#: .././validation.php:42
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:47
+msgid ""
+"Error: <b>PoP Theme: Wassup Processors</b> is not installed/activated. "
+"Without it, <b>Agenda Urbana</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=\"http://wordpress.org/"
+"extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Theme: Wassup Processors</b> is not installed/activated. "
+"Without it, <b>Agenda Urbana</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=“http://wordpress.org/"
+"extend/plugins/pop/“>from here</a>."
+
+#: .././validation.php:51
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Theme: Wassup Processors</b> "
+"installed, or otherwise <b>Agenda Urbana</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>latest version</a> of <b>PoP Theme: Wassup Processors</b> "
+"installed, or otherwise <b>Agenda Urbana</b> might not function properly."
+
+#: .././validation.php:55
+msgid ""
+"Error: <b>Agenda Urbana Environment Constants</b> is not installed/"
+"activated. Without it, <b>Agenda Urbana</b> will not work. Please install "
+"this plugin from your plugin installer or download it <a href=\"http://"
+"wordpress.org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>Agenda Urbana Environment Constants</b> is not installed/"
+"activated. Without it, <b>Agenda Urbana</b> will not work. Please install "
+"this plugin from your plugin installer or download it <a href=“http://"
+"wordpress.org/extend/plugins/pop/“>from here</a>."
+
+#~ msgid ""
+#~ "AgendaUrbana.org is a crowd-sourced platform for the citizens of the city "
+#~ "of Buenos Aires to have a say in matters concerning their city, and their "
+#~ "country."
+#~ msgstr ""
+#~ "AgendaUrbana.org es una plataforma abierta para que los ciudadanos de la "
+#~ "Ciudad de Buenos Aires tengan una voz en asuntos relacionados con su "
+#~ "ciudad y su país."
+
+#, fuzzy
+#~ msgid "Resources Articles"
+#~ msgstr "Artículos Destacados"
+
+#~ msgid "Twitter"
+#~ msgstr "Twitter"
+
+#~ msgid "Projects"
+#~ msgstr "Proyectos"
+
+#~ msgid "Stories"
+#~ msgstr "Historias"
+
+#, fuzzy
+#~ msgid "Clean energy"
+#~ msgstr "Energía limpia"
+
+#, fuzzy
+#~ msgid "Community building"
+#~ msgstr "Construcción comunitaria"
+
+#, fuzzy
+#~ msgid "Decent work"
+#~ msgstr "Trabajo decente"
+
+#, fuzzy
+#~ msgid "Fair trade"
+#~ msgstr "Comercio justo"
+
+#~ msgid "Human rights"
+#~ msgstr "Derechos humanos"
+
+#, fuzzy
+#~ msgid "Legal frameworks"
+#~ msgstr "Los marcos legales"
+
+#, fuzzy
+#~ msgid "Local and alternative currencies"
+#~ msgstr "Las monedas locales y alternativas"
+
+#, fuzzy
+#~ msgid "Marginalised communities"
+#~ msgstr "Las comunidades marginadas"
+
+#, fuzzy
+#~ msgid "Media and public awareness"
+#~ msgstr "Medios de comunicación y concienciación del público"
+
+#, fuzzy
+#~ msgid "Policies for SSE"
+#~ msgstr "Políticas para la SSE"
+
+#, fuzzy
+#~ msgid "Poverty alleviation"
+#~ msgstr "Mitigación de la pobreza"
+
+#, fuzzy
+#~ msgid "Recycling/Waste management"
+#~ msgstr "Reciclaje/Gestión de residuos"
+
+#, fuzzy
+#~ msgid "Research"
+#~ msgstr "Investigación"
+
+#, fuzzy
+#~ msgid "Responsible production"
+#~ msgstr "Producción responsable"
+
+#, fuzzy
+#~ msgid "Responsible tourism"
+#~ msgstr "Turismo responsable"
+
+#, fuzzy
+#~ msgid "Rural development"
+#~ msgstr "Desarrollo Rural"
+
+#, fuzzy
+#~ msgid "Solidarity finance"
+#~ msgstr "Finanzas solidarias"
+
+#, fuzzy
+#~ msgid "Sustainable cities"
+#~ msgstr "Ciudades sostenibles"
+
+#, fuzzy
+#~ msgid "Women and youth empowerment"
+#~ msgstr "Las mujeres y potenciación de los jóvenes"

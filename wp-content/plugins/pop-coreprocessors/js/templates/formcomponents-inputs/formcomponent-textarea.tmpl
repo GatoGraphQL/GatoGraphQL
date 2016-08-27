@@ -1,0 +1,1 @@
+<textarea {{#generateId}}{{id}}{{/generateId}} rows="{{rows}}" name="{{name}}" class="{{class}} {{input-class}} form-control" placeholder="{{placeholder}}" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#if readonly}}readonly{{/if}}>{{value}}</textarea>

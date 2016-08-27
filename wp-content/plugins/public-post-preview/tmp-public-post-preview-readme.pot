@@ -1,0 +1,270 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "Public Post Preview"
+msgstr ""
+
+#. Short description.
+msgid "Enables you to give a link to anonymous users for public preview of a post before it is published."
+msgstr ""
+
+#. Screenshot description.
+msgid "Edit Posts Page"
+msgstr ""
+
+#. Found in description header.
+msgid "Feedback"
+msgstr ""
+
+#. Found in description header.
+msgid "More"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Enables you to give a link to anonymous users for public preview of a post (or any other public post type) before it is published."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Have you ever been writing a post with the help of someone who does not have access to your blog and needed to give them the ability to preview it before publishing? This plugin takes care of that by generating an URL with an expiring nonce that can be given out for public preview."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Sounds pretty good? Install now!</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<em>Previously this plugin was maintained by <a href=\"http://profiles.wordpress.org/sivel/\">Matt Martz</a> and was an idea of <a href=\"http://profiles.wordpress.org/jdingman/\">Jonathan Dingman</a>.</em>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "If you want, you can drop me a line @<a href=\"http://twitter.com/ocean90\">ocean90</a> on Twitter or @<a href=\"https://plus.google.com/+DominikSchilling/\">Dominik Schilling</a> on Google+."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Try also some of my <a href=\"http://profiles.wordpress.org/users/ocean90\">other plugins</a> or visit my site <a href=\"http://wpgrafie.de/\">wpGrafie.de</a>."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<em>Thanks to Hans Dinkelberg for his <a href=\"http://www.flickr.com/photos/uitdragerij/7516234430/\">photo</a>.</em>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Go to the 'Add New' plugins screen in your WordPress admin area"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Search for 'Public Post Preview'"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Click 'Install Now' and activate the plugin"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the <code>public-post-preview</code> directory to the <code>/wp-content/plugins/</code> directory"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' screen in your WordPress admin area"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the downloaded zip file on the 'Add New' plugins screen (see the 'Upload' tab) in your WordPress admin area and activate."
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "Note: There will be NO settings page."
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "For an automatic installation through WordPress:"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "For a manual installation via FTP:"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "To upload the plugin through WordPress, instead of FTP:"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.4.1 (2015-10-13):"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.4 (2014-08-21):"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.3 (2013-11-18):"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.2 (2013-03-15):"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.1.1 (2012-09-19):"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.1 (2012-09-16):"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.0.1 (2012-07-25):"
+msgstr ""
+
+#. Found in change log header.
+msgid "2.0 (2012-07-23):"
+msgstr ""
+
+#. Found in change log header.
+msgid "1.3 (2009-06-30):"
+msgstr ""
+
+#. Found in change log header.
+msgid "1.2 (2009-03-30):"
+msgstr ""
+
+#. Found in change log header.
+msgid "1.1 (2009-03-11):"
+msgstr ""
+
+#. Found in change log header.
+msgid "1.0 (2009-02-20):"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Update text domain to support language packs. Translations are now managed via http://translate.wordpress.org/projects/wp-plugins/public-post-preview."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Supports EditFlow and custom statuses"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Disables comments and pings during public post preview"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Adds <strong>Public Preview</strong> to the list of display states used in the Posts list table"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Prevents flickering of link box on Post edit while loading"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Introduces a filter <code>ppp_preview_link</code>. With the filter you can adjust the preview link."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "If a post has gone live, redirect to it's proper permalink."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Adds the query var <code>_ppp</code> to WordPress SEO by Yoast whitelist."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Based on feedback I have removed the extra metabox and added the preview link to the main Publish metabox."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Only show the checkbox if the post status/post type is good."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Requires WordPress 3.5."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Sorry for the new update. Through a change in 2.1 a filter was applied to each query. The misplaced \"The link has been expired!\" message is now gone. Props Aki Björklund and Jonathan Channon."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Introduces a filter <code>ppp_nonce_life</code>. With the filter you can adjust the expiration of a link. By default a link has a lifetime of 48 hours."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "In some situations (still not sure when) the preview link is rewritten as a permalink which results in an error. The plugin now works in this situations too."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Makes the preview link copyable again"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Support for all public post types"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Saves public preview status via an AJAX request"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "I18n"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Requires at least WordPress 3.3"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Hook in earlier in the post selection process to fix PHP notices"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Add uninstall functionality to remove options from the options table"
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Fix preview URL for scheduled posts on sites with a permalink other than default activated."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Don't limit public previews to posts in draft or pending status.  Just exclude posts in publish status."
+msgstr ""
+
+#. Found in change log list item, changelog list item.
+msgid "Initial Public Release"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "<strong>After some time the preview link returns the message \"The link has been expired!\". Why?</strong>"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "The plugin generates an URL with an expiring nonce. By default a link \"lives\" 48 hours. After 48 hours the link is expired and you need to copy and share a new link which is automatically generated on the same place under the editor."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "<strong>48 hours are not enough to me. Can I extend the nonce time?</strong>"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Yes, of course. You can use the filter <code>ppp_nonce_life</code>. Example for 5 days:"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Or use the <a href=\"https://wordpress.org/plugins/public-post-preview-configurator/\">Public Post Preview Configurator</a>."
+msgstr ""
+
+#. Found in remaining content header.
+msgid "Usage"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "To enable a public post preview check the box below the edit post box."
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "The link will be displayed if the checkbox is checked, just copy and share the link with your friends."
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "To disable a preview just uncheck the box."
+msgstr ""

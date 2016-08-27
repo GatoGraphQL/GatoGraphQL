@@ -1,0 +1,75 @@
+{{#with itemObject}}
+	<div class="layout user-layout preview {{../class}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+		{{#withModule ../. "quicklinkgroup-top"}}
+			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/withModule}}		
+		<div class="wrapper {{../classes.wrapper}}">
+			<div class="{{../classes.avatar-wrapper}}">
+				{{#withModule ../. "useravatar"}}				
+					<div class="avatar {{../../classes.avatar}}">
+						{{enterModule ../../.}}
+
+						{{#if ../../template-ids.avatar-extras}}
+							<div class="avatar-extras">
+								{{#each ../../template-ids.avatar-extras}}
+									{{#withModule ../../../. this}}
+										{{enterModule ../../../../.}}
+									{{/withModule}}
+								{{/each}}
+							</div>
+						{{/if}}
+					</div>
+				{{/withModule}}
+				{{#if ../template-ids.belowavatar}}
+					<div class="extra {{../classes.belowavatar}}">
+						{{#each ../template-ids.belowavatar}}
+							{{#withModule ../../. this}}
+								<div class="extra-inner">
+									{{enterModule ../../../.}}
+								</div>
+							{{/withModule}}
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+			<div class="content-body {{../classes.content-body}}">
+				<{{../title-htmlmarkup}} class="name {{../classes.name}}">
+					{{#if is-profile}}
+						<a href="{{get . ../url-field}}" title="{{{display-name}}}">{{{display-name}}}</a>
+					{{else}}
+						{{{display-name}}}
+					{{/if}}
+					{{#if title}}<br/><small>{{{title}}}</small>{{/if}}
+				</{{../title-htmlmarkup}}>
+				{{#if ../show-short-description}}
+					{{#if short-description-formatted}}
+						<p class="description {{../../classes.short-description}}">{{{short-description-formatted}}}</p>
+					{{/if}}
+				{{/if}}
+				{{#if ../show-excerpt}}
+					{{#if excerpt}}
+						<p class="excerpt {{../../classes.excerpt}}">{{{excerpt}}}</p>
+					{{/if}}
+				{{/if}}
+				{{#if ../template-ids.belowexcerpt}}
+					<div class="extra {{../classes.belowexcerpt}}">
+						{{#each ../template-ids.belowexcerpt}}
+							{{#withModule ../../. this}}
+								<div class="extra-inner">
+									{{enterModule ../../../.}}
+								</div>
+							{{/withModule}}
+						{{/each}}
+					</div>
+				{{/if}}
+				{{#withModule ../. "quicklinkgroup-bottom"}}
+					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+			</div>
+		</div>
+	</div>
+{{/with}}

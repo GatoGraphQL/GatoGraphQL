@@ -1,0 +1,19 @@
+{{#with itemObject}}
+	{{#withget . ../subcomponent-field}}
+		{{#each ../../template-ids.layouts}}
+			{{#withModule ../../../. this}}
+				{{#if ../../../../individual}}
+					{{#each ../../.}}
+						<{{../../../../../html-tag}} class="{{../../../../../class}}"  {{#each ../../../../../previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../../. template=this}}"{{/each}}>
+							{{enterModule ../../../../../. subcomponent=../../../../../subcomponent-field itemObjectId=. context=../.}}
+						</{{../../../../../html-tag}}>
+					{{/each}}
+				{{else}}
+					<{{../../../../html-tag}} class="{{../../../../class}}"  {{#each ../../../../previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../. template=this}}"{{/each}}>
+						{{enterModule ../../../../. subcomponent=../../../../subcomponent-field items=../../.}}
+					</{{../../../../html-tag}}>
+				{{/if}}
+			{{/withModule}}
+		{{/each}}
+	{{/withget}}
+{{/with}}

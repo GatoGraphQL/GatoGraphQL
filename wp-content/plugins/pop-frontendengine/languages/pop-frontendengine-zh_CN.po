@@ -1,0 +1,695 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-24 14:44+0800\n"
+"PO-Revision-Date: 2016-08-22 23:27+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././initialization.php:94
+msgid "Draft"
+msgstr "草案"
+
+#: .././initialization.php:95
+msgid "Pending to be published"
+msgstr "待发布"
+
+#: .././initialization.php:96
+msgid "Published"
+msgstr "已发布"
+
+#: .././initialization.php:102
+msgid "(None)"
+msgstr "（无）"
+
+#: .././initialization.php:108
+#, php-format
+msgid "<small>on</small> %s"
+msgstr "<small>在</small>%s"
+
+#: .././initialization.php:159
+msgid "Download"
+msgstr "下载"
+
+#: .././initialization.php:160
+msgid "Set Featured Image"
+msgstr "设置主要图片"
+
+#: .././initialization.php:161
+msgid "Set"
+msgstr "设置"
+
+#: .././initialization.php:175
+msgid "more..."
+msgstr "更多..."
+
+#: .././initialization.php:176
+msgid "less..."
+msgstr "减少..."
+
+#: .././validation.php:32
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:37
+msgid ""
+"Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without "
+"it, <b>PoP Frontend</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without "
+"it, <b>PoP Frontend</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+
+#: .././validation.php:43
+#, php-format
+msgid ""
+"Error: this version of <b>PoP Frontend</b> requires version %s or bigger of "
+"<b>PoP—Platform of Platforms</b>. Please update this plugin from your plugin "
+"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
+"\">from here</a>."
+msgstr ""
+"Error: this version of <b>PoP Frontend</b> requires version %s or bigger of "
+"<b>PoP—Platform of Platforms</b>. Please update this plugin from your plugin "
+"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
+"\">from here</a>."
+
+#~ msgid "%s latest posts"
+#~ msgstr "%s 最新帖子"
+
+#~ msgid "%s latest comments"
+#~ msgstr "%s 最新评论"
+
+#~ msgid "View %1$s profile and get in touch through %2$s."
+#~ msgstr "见%1$s 及联络 %2$s."
+
+#~ msgid "Project"
+#~ msgstr "項目"
+
+#~ msgid "Story"
+#~ msgstr "故事"
+
+#~ msgid "Announcement"
+#~ msgstr "公告"
+
+#~ msgid "Discussion"
+#~ msgstr "讨论"
+
+#~ msgid "Featured"
+#~ msgstr "特点"
+
+#~ msgid "Event"
+#~ msgstr "活动"
+
+#~ msgid "Resource"
+#~ msgstr "资源"
+
+#~ msgid ""
+#~ "MESYM.com is a platform for environmental movements in Malaysia. There "
+#~ "are many good actions being done out there. Our goal is to bring them "
+#~ "together. We connect the green dots."
+#~ msgstr ""
+#~ "MESYM.com 是一个推动马来西亚环境保护的平台。这里拥有许多您可以参与的环境保"
+#~ "护活动与项目。我们最主要的目的为聚集这些热爱环境人士在这个平台上。我们把马"
+#~ "来西亚绿色勇士们联系起来。"
+
+#~ msgid ""
+#~ " Join our environmental community and find out who is doing what, where "
+#~ "and when."
+#~ msgstr "现在就参与我们的团队，开始寻找绿色活动，预知更多的详情与时间。"
+
+#~ msgid " on %s."
+#~ msgstr "关于%s."
+
+#~ msgid "View all %s"
+#~ msgstr "见所有 %s"
+
+#~ msgid "Add your %s"
+#~ msgstr "输入%s "
+
+#~ msgid "Upcoming Events"
+#~ msgstr "最新活动"
+
+#~ msgid "Upcoming and Past Events"
+#~ msgstr "最新与过去的活动"
+
+#~ msgid "Environmental Projects"
+#~ msgstr "环境保护活动项目"
+
+#~ msgid "Environmental Stories"
+#~ msgstr "关于环境保护的故事"
+
+#~ msgid "Environmental Discussions"
+#~ msgstr "环境保护讨论事项"
+
+#~ msgid "Environmental Announcements"
+#~ msgstr "环境保护公告"
+
+#~ msgid "Featured Articles"
+#~ msgstr "专栏"
+
+#~ msgid "MESYM Blogs"
+#~ msgstr "MESYM部落格"
+
+#~ msgid "Environmental Resources"
+#~ msgstr "环境资源"
+
+#~ msgid "Organizations"
+#~ msgstr "组织"
+
+#~ msgid "People"
+#~ msgstr "人"
+
+#~ msgid "Organization Profile"
+#~ msgstr "组织结构"
+
+#~ msgid "Individual Profile"
+#~ msgstr "个人结构"
+
+#~ msgid "Upcoming Event"
+#~ msgstr "最新活动"
+
+#~ msgid "Current Event"
+#~ msgstr "现有活动"
+
+#~ msgid "Past Event"
+#~ msgstr "过往活动"
+
+#~ msgid "The dates/time cannot be empty"
+#~ msgstr "日期与时间不能为空"
+
+#~ msgid ""
+#~ "Aiyoooo, it seems there is nothing here. Where else would you like to go?"
+#~ msgstr "糟糕，无法搜索任何资讯。请到另一个主题"
+
+#~ msgid "Ops, this page doesn't exist!"
+#~ msgstr "不好意思，该网页不存在"
+
+#~ msgid "Latest"
+#~ msgstr "最近"
+
+#~ msgid "Add new"
+#~ msgstr "输入新项目"
+
+#~ msgid "%sBack"
+#~ msgstr "%s回去"
+
+#~ msgid "%sNavigator"
+#~ msgstr "%s导航"
+
+#~ msgid "Details"
+#~ msgstr "详细信息"
+
+#~ msgid "Full view"
+#~ msgstr "全面"
+
+#~ msgid "Thumbnail"
+#~ msgstr "縮略圖"
+
+#~ msgid "Map"
+#~ msgstr "地图"
+
+#~ msgid "Calendar"
+#~ msgstr "日历"
+
+#~ msgid "Edit"
+#~ msgstr "编辑"
+
+#~ msgid "View/Preview"
+#~ msgstr "查看/預覽"
+
+#~ msgid "FAQ: Adding Content"
+#~ msgstr "常见问题：添加内容"
+
+#~ msgid "FAQ: Registration"
+#~ msgstr "常见问题：注册"
+
+#~ msgid "The Drivers"
+#~ msgstr "驾驶人士"
+
+#~ msgid "The Advisors"
+#~ msgstr "顾问"
+
+#~ msgid "The Volunteers"
+#~ msgstr "自愿者"
+
+#~ msgid "Show Help"
+#~ msgstr "协助"
+
+#~ msgid "Inviting users to become your members"
+#~ msgstr "邀请成为会员"
+
+#~ msgid ""
+#~ "Please click on %s to invite your physical Organization's members to "
+#~ "become your members in the website."
+#~ msgstr "请按 %s来邀请您的组织会员成为网页里您的会员"
+
+#~ msgid "Current members"
+#~ msgstr "目前成员"
+
+#~ msgid ""
+#~ "The users listed below have declared themselves to be members of your "
+#~ "Organization. You can click on \"Edit Membership\" to edit the settings "
+#~ "for each one of them:"
+#~ msgstr ""
+#~ "下面列出的用户都已声明是您的组织的成員。您可以点击“编辑成員”来设置他们："
+
+#~ msgid "Status"
+#~ msgstr "状态"
+
+#~ msgid "Privileges"
+#~ msgstr "特权"
+
+#~ msgid "Tags"
+#~ msgstr "标签"
+
+#~ msgid "University teachers/students"
+#~ msgstr "大学教授与学生"
+
+#~ msgid "NGO volunteers"
+#~ msgstr "自愿者"
+
+#~ msgid "Company staff"
+#~ msgstr "公司职员"
+
+#~ msgid "Latest Content"
+#~ msgstr "内容"
+
+#~ msgid "Projects"
+#~ msgstr "工程项目"
+
+#~ msgid "Stories"
+#~ msgstr "故事"
+
+#~ msgid "Announcements"
+#~ msgstr "公告"
+
+#~ msgid "Discussions"
+#~ msgstr "讨论"
+
+#~ msgid "Links"
+#~ msgstr "链接"
+
+#~ msgid "Submitting..."
+#~ msgstr "呈交中。。。"
+
+#~ msgid "Publishing Status"
+#~ msgstr "发布状态"
+
+#~ msgid "Title*"
+#~ msgstr "题目＊"
+
+#~ msgid "Login/Register"
+#~ msgstr "登入／注册"
+
+#~ msgid "Yay! Your %s was created successfully!"
+#~ msgstr "恭喜！您的%s已成功创建"
+
+#~ msgid "Yay! Your %s was updated successfully!"
+#~ msgstr "恭喜！您的%s 已更新"
+
+#~ msgid "Please %s or register %s / %s to create your %s."
+#~ msgstr "请%s 或注册%s / %s创建您的%s"
+
+#~ msgid ""
+#~ "Please <a href=\"%s\">log in</a> with a %s account to create your %s."
+#~ msgstr "请<a href=\"%s\">log in</a> 同时%s户口来创建您的%s"
+
+#~ msgid "%s updated successfully."
+#~ msgstr "%s已更新"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+#~ msgstr "请<a href=\"%s\">登入</a>编辑您的%s"
+
+#~ msgid "Please <a href=\"%s\">log in</a> with a %s account to edit your %s."
+#~ msgstr "请<a href=\"%s\">登入</a> 以及%s 户口以编辑您的 %s."
+
+#~ msgid "Ops, it seems you have no rights to edit this %s."
+#~ msgstr "不好意思, 您无权编辑这%s."
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "谁能编辑内容在%s?"
+
+#~ msgid "Anyone."
+#~ msgstr "任何人"
+
+#~ msgid "Is it free?"
+#~ msgstr "请问是免费的吗？"
+
+#~ msgid "Yes."
+#~ msgstr "是的"
+
+#~ msgid "Do I need to log in to add content?"
+#~ msgstr "我需要登入以添加您的内容吗？"
+
+#~ msgid "Yes, only registered users can add content."
+#~ msgstr "是的，只有注册用户可添加内容"
+
+#~ msgid "Do the users of the website also need to log in to read my content?"
+#~ msgstr "请问本网站读者也需要登入才能阅读我的内容吗？"
+
+#~ msgid "No, anyone can access the website and read all the content."
+#~ msgstr "不需要。任何人都可游览本网页以及阅读内容。"
+
+#~ msgid "Will my content be published immediately?"
+#~ msgstr "请问我的内容会立即发布吗？"
+
+#~ msgid ""
+#~ "No. Before that, our moderators must approve the content, in order to "
+#~ "avoid spam and inappropriate content."
+#~ msgstr ""
+#~ "不会。内容发布之前，我们的版主将会审查内容以防止发布不道德与不符合的内容。"
+
+#~ msgid "Where will my content appear?"
+#~ msgstr "请问我的内容会出现在哪里？"
+
+#~ msgid ""
+#~ "As soon as it gets published, it will appear in our homepage, in the "
+#~ "corresponding section (Events, Projects, etc), and in your profile.<br/"
+#~ "><br/>In addition, if you are member of any Community, it will also "
+#~ "appear under their profile."
+#~ msgstr ""
+#~ "如内容以发布，它将会出现在您的主页里的相关截面（如活动，项目等），以及您的"
+#~ "简介里。<br/><br/>此外，如果您也是社区里的会员，内容也会出现在他们的简介"
+#~ "里。"
+
+#~ msgid "Can I share my post with more authors?"
+#~ msgstr "请问我可以跟更多的作者分享我的帖子吗？"
+
+#~ msgid ""
+#~ "Yes. In field 'Authors' you can add more users (either Organizations or "
+#~ "Individuals) to own the post. They will both appear as authors and have "
+#~ "full editing access."
+#~ msgstr ""
+#~ "当然可以。请在“作者“里添加更多的用户（如组织或个人）来拥有您的帖子。一旦添"
+#~ "加他们为”作者“，他们也能拥有编辑的权限。"
+
+#~ msgid "Can I request volunteers?"
+#~ msgstr "请问我能要求志愿者吗？"
+
+#~ msgid ""
+#~ "Yes. Choose 'Yes' in field 'Volunteers needed?', each time someone "
+#~ "applies to volunteer for your Project/Event/Announcement you will receive "
+#~ "an email immediately with the person's information.<br/><br/>We do not "
+#~ "engage the volunteer in any way."
+#~ msgstr ""
+#~ "是的。请点击“要求志愿者”，任何的志愿者加入您的项目，您会立即收到一封电邮，"
+#~ "电邮里将出现志愿者的基本个人资料。<br/><br/>我们不需要任何的志愿者。"
+
+#~ msgid "Is it free to register in the website?"
+#~ msgstr "请问会员注册是免费的吗？"
+
+#~ msgid "What are the benefits of registering?"
+#~ msgstr "注册为会员会得到什么好处？"
+
+#~ msgid ""
+#~ "You will be able to post all your content (events, projects, discussions, "
+#~ "etc), look for volunteers, and appear in the User Directory."
+#~ msgstr ""
+#~ "您将可发表或发布您的内容（如活动，项目，讨论等），要求志愿者，以及内容出现"
+#~ "在用户的目录里。"
+
+#~ msgid "What is the User Directory?"
+#~ msgstr "什么是会员目录？"
+
+#~ msgid "What is the difference between Organization/Individual accounts?"
+#~ msgstr "请问组织账号与个人账号有什么分别？"
+
+#~ msgid ""
+#~ "Organizations can have 'members' in the website, and each piece of "
+#~ "content posted by any member will also appear under the Organization "
+#~ "profile page."
+#~ msgstr ""
+#~ "组织账号能够拥有自己的会员，以及任何的会员发表将出现在组织的简介里。"
+
+#~ msgid "What's going on all over Malaysia."
+#~ msgstr "马来西亚怎么回事了？"
+
+#~ msgid "Volunteer for projects from many NGOs, or even start your own!"
+#~ msgstr "有来自非政府组织项目的志愿者，或着自己组织项目。"
+
+#~ msgid ""
+#~ "After volunteering, post your photo blog, share your experience with the "
+#~ "world."
+#~ msgstr ""
+#~ "当您参与了志愿者，您可以上传你的照片日记，分享您的感想与经历给全世界"
+
+#~ msgid "Have vacancies? Need green-minded people? Post it here."
+#~ msgstr "有空缺吗？想要认识更多的绿色爱好者？请在这里发帖"
+
+#~ msgid ""
+#~ "Anything and everything: what do you want to express concerning the "
+#~ "environment situation in Malaysia?"
+#~ msgstr "任何事物： 您有什么想表达关于马来西亚的环境保护的形势？"
+
+#~ msgid ""
+#~ "Browse the living database of Organizations and find out who is doing "
+#~ "what, when and where."
+#~ msgstr "游览我们的组织资料库，知道更多活动，时间与地点。"
+
+#~ msgid "Categories"
+#~ msgstr "组别"
+
+#~ msgid "Volunteers Needed?"
+#~ msgstr "需要志愿者？"
+
+#~ msgid ""
+#~ "Do you need volunteers? Each time a user applies to volunteer, you will "
+#~ "get a notification email with the volunteer's contact information."
+#~ msgstr ""
+#~ "您需要志愿者吗？每当用户注册为志愿者，您将收到电邮通知以得到该志愿者的联络"
+#~ "资料。"
+
+#~ msgid "Volunteer!"
+#~ msgstr "志愿者！"
+
+#~ msgid "Events"
+#~ msgstr "活动"
+
+#~ msgid "Past Events"
+#~ msgstr "过往活动"
+
+#~ msgid "Content"
+#~ msgstr "内容"
+
+#~ msgid "User"
+#~ msgstr "用户"
+
+#~ msgid "Users"
+#~ msgstr "用户"
+
+#~ msgid "Featured article"
+#~ msgstr "推荐文章"
+
+#~ msgid "Featured articles"
+#~ msgstr "推荐文章"
+
+#~ msgid "Blog entry"
+#~ msgstr "部落客输入"
+
+#~ msgid "Blog entries"
+#~ msgstr "部落客输入"
+
+#~ msgid "Resources"
+#~ msgstr "资源"
+
+#~ msgid "Organization"
+#~ msgstr "组织团体"
+
+#~ msgid "Individual"
+#~ msgstr "个人"
+
+#~ msgid "Individuals"
+#~ msgstr "个人"
+
+#~ msgid "Sponsor"
+#~ msgstr "赞助商"
+
+#~ msgid "Sponsors"
+#~ msgstr "赞助商"
+
+#~ msgid "Featured Community"
+#~ msgstr "特色社区"
+
+#~ msgid "Featured Communities"
+#~ msgstr "特色社区"
+
+#~ msgid "No %s found."
+#~ msgstr "无法找到 %s"
+
+#~ msgid "No more %s found."
+#~ msgstr "无法找到 %s"
+
+#~ msgid "Please %s or register %s / %s to access your %s."
+#~ msgstr "请 %s或注册%s / %s 以登入您的%s."
+
+#~ msgid ""
+#~ "Your account has no access to this functionality. Please <a href=\"%s"
+#~ "\">log in</a> with a different user account."
+#~ msgstr "您的户口无法登入。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid ""
+#~ "Your account has no permission to edit this %s. Please <a href=\"%s\">log "
+#~ "in</a> with a different user account."
+#~ msgstr "您的户口无权编辑这%s。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid "Featured Organizations"
+#~ msgstr "精选组织团体"
+
+#~ msgid "<em>Many thanks to <strong>our Sponsors</strong>:</em>"
+#~ msgstr "<em>非常感谢<strong>我们的赞助商</strong>:</em>"
+
+#~ msgid "The website is currently in beta, please forgive all the bugs."
+#~ msgstr "该网站属于测试阶段，如有系统错误，请原谅。"
+
+#~ msgid "About us"
+#~ msgstr "关于我们"
+
+#~ msgid "Send message to:"
+#~ msgstr "发送讯息给："
+
+#~ msgid "Volunteer for:"
+#~ msgstr "志愿者为："
+
+#~ msgid "In response to:"
+#~ msgstr "回复给："
+
+#~ msgid "Ops, there's nothing here!"
+#~ msgstr "不好意思，这里没东西"
+
+#~ msgid "No categories"
+#~ msgstr "无组别"
+
+#~ msgid "No Categories"
+#~ msgstr "无组别"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "加载更多"
+
+#~ msgid "Post"
+#~ msgstr "帖子"
+
+#~ msgid "Date"
+#~ msgstr "日期"
+
+#~ msgid "When"
+#~ msgstr "时间"
+
+#~ msgid "Loading"
+#~ msgstr "加载中"
+
+#~ msgid "More %s"
+#~ msgstr "%s 更多"
+
+#~ msgid "Member %s"
+#~ msgstr "队员%s"
+
+#~ msgid "Related %s"
+#~ msgstr "%s相关"
+
+#~ msgid "Search Results for:"
+#~ msgstr "搜索结果："
+
+#~ msgid "Ops, nothing found here!"
+#~ msgstr "不好意思，没搜索到任何东西"
+
+#~ msgid "Apply"
+#~ msgstr "申请"
+
+#~ msgid "From"
+#~ msgstr "从"
+
+#~ msgid "To"
+#~ msgstr "给"
+
+#~ msgid "Su"
+#~ msgstr "周日"
+
+#~ msgid "Mo"
+#~ msgstr "周一"
+
+#~ msgid "Tu"
+#~ msgstr "周二"
+
+#~ msgid "We"
+#~ msgstr "周三"
+
+#~ msgid "Th"
+#~ msgstr "周四"
+
+#~ msgid "Fr"
+#~ msgstr "周五"
+
+#~ msgid "Sa"
+#~ msgstr "周六"
+
+#~ msgid "January"
+#~ msgstr "一月"
+
+#~ msgid "February"
+#~ msgstr "二月"
+
+#~ msgid "March"
+#~ msgstr "三月"
+
+#~ msgid "April"
+#~ msgstr "四月"
+
+#~ msgid "May"
+#~ msgstr "五月"
+
+#~ msgid "June"
+#~ msgstr "六月"
+
+#~ msgid "July"
+#~ msgstr "七月"
+
+#~ msgid "August"
+#~ msgstr "八月"
+
+#~ msgid "September"
+#~ msgstr "九月"
+
+#~ msgid "October"
+#~ msgstr "十月"
+
+#~ msgid "November"
+#~ msgstr "十一月"
+
+#~ msgid "December"
+#~ msgstr "十二月"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "您的%s成功被创造"
+
+#, fuzzy
+#~ msgid "My Organizations"
+#~ msgstr "Organisasi-organisasi"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "F jS, Y"
+#~ msgstr "F jS, Y"
+
+#~ msgid "F, Y"
+#~ msgstr "F, Y"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "j M Y"
+#~ msgstr "j M Y"

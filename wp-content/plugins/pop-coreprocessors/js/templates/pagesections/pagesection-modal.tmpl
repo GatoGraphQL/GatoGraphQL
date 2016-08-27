@@ -1,0 +1,37 @@
+{{#each block-settings-ids.blockunits}}
+	{{#withBlock ../. this}}
+		<div {{#generateId context=../../. targetId=../../pss.pssId group='modal'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} role="dialog" class="modal {{../../class}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}} aria-hidden="true" aria-labelledby="{{lastGeneratedId context=../../. targetId=../../pss.pssId group='modal'}}">	
+			<div class="pop-modaldialog modal-dialog {{#ifget ../../classes.dialogs template}}{{{get ../../classes.dialogs template}}}{{/ifget}}">
+				<div class="pop-modalcontent modal-content">
+					<div class="modal-header">
+						<button type="button" class="close close-lg" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<div class="pop-header">
+							{{#ifget ../../titles.headers template}}
+								{{{get ../../titles.headers template}}}
+							{{/ifget}}
+							<div class="pop-box {{../../classes.header}}"></div>
+						</div>
+					</div>
+					<div class="pop-modalbody {{#ifget ../../classes.bodies template}}{{{get ../../classes.bodies template}}}{{/ifget}}">
+						{{enterModule . parentContext=../../.}}
+					</div>
+				</div>
+			</div>
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='modal'}}" data-toggle="modal" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" data-title="{{{bs.feedback.title}}}"></a>
+			{{#withSublevel ../../template context=../../pss.feedback.extra-intercept-urls}}
+				{{#withget . ../../../template}}
+					{{#each .}}
+						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="interceptor"}}{{../../../../../../id}}{{../../../../../../tls.feedback.unique-id}}-{{../../../../../this}}-{{@index}}{{/generateId}} href="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='modal'}}" data-toggle="modal" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}"></a>
+					{{/each}}
+				{{/withget}}
+			{{/withSublevel}}
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="destroy-interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='modal'}}" data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{#withSublevel ../../../template}}{{destroyUrl this}}{{/withSublevel}}{{/withSublevel}}" data-intercept-skipstateupdate="true"></a>
+			{{#each ../../template-ids.insideextensions}}
+				{{applyLightTemplate . context=../../../.}}
+			{{/each}}
+		</div>
+	{{/withBlock}}
+{{/each}}
+{{#each template-ids.extensions}}
+	{{applyLightTemplate . context=../.}}
+{{/each}}

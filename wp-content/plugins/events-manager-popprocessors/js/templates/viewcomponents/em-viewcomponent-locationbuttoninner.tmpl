@@ -1,0 +1,15 @@
+{{#with itemObject}}
+	{{#if ../settings-ids.location-layout}}
+		{{#each locations}}
+			{{#if @index}}{{../../separator}}{{/if}}
+			{{#if ../../fontawesome}}
+				<i class="fa {{../../fontawesome}}"></i>
+			{{/if}}
+			{{#withModule ../../. "location-layout"}}
+				{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.locations.db-key itemObjectId=../this}}
+			{{/withModule}}
+		{{/each}}
+	{{else}}
+		{{../titles.locations}}
+	{{/if}}
+{{/with}}

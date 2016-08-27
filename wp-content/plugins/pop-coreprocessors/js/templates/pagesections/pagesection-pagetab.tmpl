@@ -1,0 +1,30 @@
+{{#each block-settings-ids.blockunits}}
+	{{#withBlock ../. this}}
+		<div class="{{../../class}}" {{#generateId context=../../. targetId=../../pss.pssId group='unit'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}}  {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
+			<div class="btn-group">
+				<a {{#generateId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} href="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" role="button" class="pop-pagetab-btn {{../../btn-class}}">
+					{{enterModule . parentContext=../../.}}
+				</a>
+				<button type="button" class="pop-closepagetab-btn {{../../btn-class}} btn-narrow" {{#generateId context=../../. targetId=../../pss.pssId group='remove'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}">
+					<small><span class="glyphicon glyphicon-remove"></span></small>
+				</button>
+			</div>
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="activate-interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" data-title="{{{tls.feedback.title}}}"></a>
+			{{#withSublevel ../../template context=../../pss.feedback.extra-intercept-urls}}
+				{{#withget . ../../../template}}
+					{{#each .}}
+						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="activate-interceptor"}}{{../../../../../../id}}{{../../../../../../tls.feedback.unique-id}}-{{../../../../../this}}-{{@index}}{{/generateId}} data-target="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='pagetab-btn'}}" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}" data-title="{{{../../../tls.feedback.title}}}"></a>
+					{{/each}}
+				{{/withget}}
+			{{/withSublevel}}
+
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="destroy-interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='unit'}}" data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{#withSublevel ../../../template}}{{destroyUrl this}}{{/withSublevel}}{{/withSublevel}}" data-intercept-skipstateupdate="true"></a>
+			{{#each ../../template-ids.insideextensions}}
+				{{applyLightTemplate . context=../../../.}}
+			{{/each}}
+		</div>
+	{{/withBlock}}
+{{/each}}
+{{#each template-ids.extensions}}
+	{{applyLightTemplate . context=../.}}
+{{/each}}

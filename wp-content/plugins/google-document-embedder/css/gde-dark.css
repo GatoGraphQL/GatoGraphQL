@@ -1,0 +1,83 @@
+/*
+ * Sample CSS file to override the appearance of the viewer area.
+ * The below modifies the default viewer style from Google as of 25-May-2012 but is subject to change.
+ *
+ * This is a volatile option (based on Google's whims) so it may break at any time. No warranty is
+ * expressed or implied... Keep an eye on the appearance in case you want to kill this off in the future
+ * when/if things go wonky from sudden Google changes.
+ * 
+ * It's possible to modify just about every part of the viewer appearance using this technique if you 
+ * are CSS savvy (and know your way around Firebug or similar tools, to help you find the appropriate
+ * selectors).
+ */
+
+/* TOOLBAR AREA STYLES *****/
+
+/* toolbar (desktop and mobile) */
+#controlbar {
+	background-color: #000;
+	border: 0;
+}
+
+/* page number text (desktop and mobile) */
+#controlbarPageNumber {
+	color: #ebebeb;
+}
+
+/* toolbar (mobile) */
+.controlbar-mobile {	
+	-moz-border-image: none;
+	text-shadow: none;
+}
+
+/* toolbar buttons (desktop) */
+.toolbar-button-icon {
+	background-image: url("../img/gde-dark-sprites.png");
+}
+
+/* toolbar button mouseover effect (desktop) */
+.goog-toolbar-button-outer-box:hover {
+	background-color: transparent;
+	background-image: none;
+	box-shadow: none;
+	border: 1px solid #000;
+}
+.goog-custom-button-disabled:hover {
+	border: 0 none;
+}
+
+/* toolbar buttons (mobile)	*/
+.mobile-icon-zoom-out {
+	background: url("../img/gde-dark-m-sprites.png") no-repeat 0 0px;
+}
+.mobile-icon-zoom-in {
+	background: url("../img/gde-dark-m-sprites.png") no-repeat 0 -18px;
+}
+.mobile-icon-left {
+	background: url("../img/gde-dark-m-sprites.png") no-repeat 0 -36px;
+}
+.mobile-icon-right {
+	background: url("../img/gde-dark-m-sprites.png") no-repeat 0 -54px;
+}
+
+/* CONTENT AREA STYLES *****/
+
+/* loading text (desktop and mobile) */
+#loading {
+	color: #ebebeb;
+}
+
+/* progress bar border (desktop and mobile) */
+.progress-bar-horizontal {
+	border: 1px solid #0066FF;
+}
+
+/* progress bar meter (desktop and mobile) */
+.progress-bar-thumb {
+	background-color: #0066FF;
+}
+
+/* background of page pane (desktop and mobile) */
+#content-pane  {
+    background-color:  #333;
+}

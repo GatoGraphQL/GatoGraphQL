@@ -1,0 +1,7 @@
+<div class="{{class}} {{runtime-class}} pop-structureinner">
+	{{#each template-ids.layouts}}
+		{{#withModule ../. this}}
+			{{enterModule ../../. itemDBKey=../../itemDBKey itemObjectId=../../items}}
+		{{/withModule}}
+	{{/each}}
+</div>

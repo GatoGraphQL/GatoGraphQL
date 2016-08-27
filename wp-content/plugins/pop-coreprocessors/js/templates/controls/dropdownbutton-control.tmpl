@@ -1,0 +1,13 @@
+<div class="dropdown {{class}}">
+	<button {{#generateId}}{{id}}{{/generateId}} class="dropdown-toggle {{btn-class}}" type="button" data-toggle="dropdown">
+		{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{#if text}}<span class="pop-btn-title">{{{text}}}</span>{{/if}}
+	</button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="{{lastGeneratedId}}">
+		{{#each modules}}
+			<li role="presentation" class="pop-hide-empty">
+				{{! Comment Leo: the itemDBKey/itemObject below might be null (controlgroup) or have a value (quicklinkgorup)}}
+				{{enterModule ../.}}
+			</li>
+		{{/each}}
+	</ul>
+</div>

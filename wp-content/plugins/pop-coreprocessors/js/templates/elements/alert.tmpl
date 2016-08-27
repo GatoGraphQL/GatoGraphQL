@@ -1,0 +1,8 @@
+{{#with itemObject}}
+	<div class="alert alert-message fade in cookie hidden" data-cookieid="cookie{{id}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}}>
+		<button type="button" class="close close-lg" title="{{../titles.dismiss}}" data-dismiss="alert" aria-hidden="true">×</button>
+		{{#withModule ../. "layout"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</div>
+{{/with}}

@@ -1,0 +1,666 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Activity Log\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/activity-log\n"
+"POT-Creation-Date: 2014-04-26 21:46+0200\n"
+"PO-Revision-Date: 2015-05-18 09:24+0200\n"
+"Last-Translator: Yakir Sitbon <yakir@pojo.me>\n"
+"Language-Team: Pojo Team <team@pojo.me>\n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x;_n:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../aryo-activity-log.php:110 ../aryo-activity-log.php:121
+msgid "Cheatin&#8217; huh?"
+msgstr "מרמה, אה?"
+
+#: ../classes/class-aal-activity-log-list-table.php:82
+msgid "Activities"
+msgstr "פעילויות"
+
+#: ../classes/class-aal-activity-log-list-table.php:92
+msgid "Date"
+msgstr "תאריך"
+
+#: ../classes/class-aal-activity-log-list-table.php:93
+msgid "Author"
+msgstr "משתמש"
+
+#: ../classes/class-aal-activity-log-list-table.php:94
+msgid "IP"
+msgstr ""
+
+#: ../classes/class-aal-activity-log-list-table.php:95
+msgid "Type"
+msgstr "סוג"
+
+#: ../classes/class-aal-activity-log-list-table.php:96
+msgid "Label"
+msgstr "תוית"
+
+#: ../classes/class-aal-activity-log-list-table.php:97
+msgid "Action"
+msgstr "פעולה"
+
+#: ../classes/class-aal-activity-log-list-table.php:98
+msgid "Description"
+msgstr "תיאור"
+
+#: ../classes/class-aal-activity-log-list-table.php:118
+#, php-format
+msgid "%s ago"
+msgstr "לפני %s"
+
+#: ../classes/class-aal-activity-log-list-table.php:145
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: ../classes/class-aal-activity-log-list-table.php:151
+#: ../classes/class-aal-activity-log-list-table.php:229
+msgid "Guest"
+msgstr "אורח"
+
+#: ../classes/class-aal-activity-log-list-table.php:240
+msgid "All Users"
+msgstr "כל המשתמשים"
+
+#: ../classes/class-aal-activity-log-list-table.php:267
+msgid "All Types"
+msgstr "כל הסוגים"
+
+#: ../classes/class-aal-activity-log-list-table.php:278
+msgid "All Time"
+msgstr "כל הזמן"
+
+#: ../classes/class-aal-activity-log-list-table.php:279
+msgid "Today"
+msgstr "היום"
+
+#: ../classes/class-aal-activity-log-list-table.php:280
+msgid "Yesterday"
+msgstr "אתמול"
+
+#: ../classes/class-aal-activity-log-list-table.php:281
+msgid "Week"
+msgstr "שבוע"
+
+#: ../classes/class-aal-activity-log-list-table.php:282
+msgid "Month"
+msgstr "חודש"
+
+#: ../classes/class-aal-activity-log-list-table.php:289
+msgid "Filter"
+msgstr "סינון"
+
+#: ../classes/class-aal-admin-ui.php:17 ../classes/class-aal-admin-ui.php:27
+msgid "Activity Log"
+msgstr "יומן פעילות"
+
+#: ../classes/class-aal-help.php:21
+msgid "Overview"
+msgstr "סקירה"
+
+#: ../classes/class-aal-help.php:24 ../classes/class-aal-settings.php:126
+#: ../classes/class-aal-settings.php:198
+msgid "Notifications"
+msgstr "התראות"
+
+#: ../classes/class-aal-help.php:25
+msgid ""
+"This screen lets you control what will happen once a user on your site does something you define. For instance, let us assume that you have created a user on your site\n"
+"                    for your content editor. Now, let's say that every time that user updates a post, you want to know about it. You can easily do it from this page."
+msgstr "עמוד זה מאפשר לך לשלוט במה שיקרה ברגע שמשתמש באתר שלך ביצע את אחד האירועים שהגדרת. לדוגמא, נניח שיצירת משתמשים באתר שלך עם הרשאת עורך ואתה רוצה לדעת כל פעם שהוא פמפרסם פוסט חדש, עכשיו אתה יכול ליצור אירוע כזה בקלות באמצעות מערכת ההתראות."
+
+#: ../classes/class-aal-notifications.php:274
+msgid "The AAL notification handler you are trying to register does not exist."
+msgstr ""
+
+#: ../classes/class-aal-settings.php:27
+msgid "GitHub"
+msgstr ""
+
+#: ../classes/class-aal-settings.php:30 ../classes/class-aal-settings.php:45
+msgid "Settings"
+msgstr "הגדרות"
+
+#: ../classes/class-aal-settings.php:44 ../classes/class-aal-settings.php:228
+msgid "Activity Log Settings"
+msgstr "הגדרות יומן פעילות"
+
+#: ../classes/class-aal-settings.php:83
+msgid "Display Options"
+msgstr "אפשרויות תצוגה"
+
+#: ../classes/class-aal-settings.php:90
+msgid "Keep logs for"
+msgstr "שמירת היסטוריית פעילות למשך"
+
+#: ../classes/class-aal-settings.php:99
+msgid "days."
+msgstr "ימים"
+
+#: ../classes/class-aal-settings.php:100 ../classes/class-aal-settings.php:140
+msgid "Maximum number of days to keep activity log. Leave blank to keep activity log forever (not recommended)."
+msgstr "מספר ימים מרבי כדי לשמור תיעוד יומן הפעילות. השאר ריק כדי לשמור תיעוד יומן הפעילות לנצח (לא מומלץ)"
+
+#: ../classes/class-aal-settings.php:107
+msgid "Delete Log Activities"
+msgstr "מחיקת כל היומן פעילות"
+
+#: ../classes/class-aal-settings.php:112
+#, php-format
+msgid "<a href=\"%s\" id=\"%s\">Reset Database</a>"
+msgstr "<a href=\"%s\" id=\"%s\">איפוס דטאבייס</a>"
+
+#: ../classes/class-aal-settings.php:116
+msgid "Warning: Clicking this will delete all activities from the database."
+msgstr "שימו לב: לחיצה תמחוק את כל הפעילויות מהדטאבייס"
+
+#: ../classes/class-aal-settings.php:133
+msgid "Notification Events"
+msgstr "התראות לאירועים"
+
+#: ../classes/class-aal-settings.php:161
+msgid "Enable?"
+msgstr "לאפשר?"
+
+#: ../classes/class-aal-settings.php:197
+msgid "General"
+msgstr "הגדרות"
+
+#: ../classes/class-aal-settings.php:247
+msgid "All activities have been successfully deleted."
+msgstr "כל הפעילויות נמחקו בהצלחה."
+
+#: ../classes/class-aal-settings.php:258
+msgid "Are you sure you want to do this action?"
+msgstr "בטוח לבצע את פעולת המחיקה?"
+
+#: ../classes/class-aal-settings.php:269
+msgid "You do not have sufficient permissions to access this page."
+msgstr "אין לך הרשאות מספיקות כדי לגשת לעמוד זה."
+
+#: ../classes/class-aal-settings.php:322
+msgid "These are some basic settings for Activity Log."
+msgstr "אלו חלק מההגדרות הבסיסיות של יומן הפעילות."
+
+#: ../classes/class-aal-settings.php:328
+msgid "Serve yourself with custom-tailored notifications. First, define your conditions. Then, choose how the notifications will be sent."
+msgstr "התראות מותאמות אישית ישירות לאימייל שלך. ראשית, הגדר את האירועים. ולאחר מכן תבחר את התראות שישלחו."
+
+#: ../classes/class-aal-settings.php:427
+msgid "Yes"
+msgstr "כן"
+
+#: ../classes/class-aal-settings.php:428
+msgid "No"
+msgstr "לא"
+
+#: ../classes/class-aal-settings.php:445 ../language/strings.php:19
+#: ../notifications/abstract-class-aal-notification-base.php:98
+msgid "User"
+msgstr "משתמש"
+
+#: ../classes/class-aal-settings.php:446
+#: ../notifications/abstract-class-aal-notification-base.php:101
+msgid "Action Type"
+msgstr "סוג פעולה"
+
+#: ../classes/class-aal-settings.php:447
+msgid "Action Performed"
+msgstr "פעולה שבוצעה"
+
+#: ../classes/class-aal-settings.php:451
+msgid "equals to"
+msgstr "שווה ל"
+
+#: ../classes/class-aal-settings.php:452
+msgid "not equals to"
+msgstr "לא שווה ל"
+
+#: ../classes/class-aal-settings.php:462
+msgid "A notification will be sent upon a successful match with the following conditions:"
+msgstr "תישלח התראה אם תהיה התאמה לאחד התנאים הבאים:"
+
+#: ../hooks/class-aal-hook-posts.php:9
+msgid "(no title)"
+msgstr "(ללא כותרת)"
+
+#: ../language/strings.php:6
+msgid "Get aware of any activities that are taking place on your dashboard! Imagine it like a black-box for your WordPress site. e.g. post was deleted, plugin was activated, user logged in or logged out - it's all these for you to see."
+msgstr "תיעוד כל הפעילויות המתרחשות בלוח הבקרה של מערכת וורדפרס. לדוגמא: פוסט נמחק, תוסף הופעל, משתמש התחבר או התנתק מהמערכת - כל זה מתועד בלוח בקרה של התוסף יומן פעילות."
+
+#: ../language/strings.php:9
+msgid "Post"
+msgstr "פוסט"
+
+#: ../language/strings.php:10
+msgid "created"
+msgstr "נוצר"
+
+#: ../language/strings.php:11
+msgid "updated"
+msgstr "עודכן"
+
+#: ../language/strings.php:12
+msgid "deleted"
+msgstr "נמחק"
+
+#: ../language/strings.php:15
+msgid "Attachment"
+msgstr "מדיה"
+
+#: ../language/strings.php:16
+msgid "added"
+msgstr "נוסף"
+
+#: ../language/strings.php:20
+msgid "logged_out"
+msgstr "התנתק"
+
+#: ../language/strings.php:21
+msgid "logged_in"
+msgstr "התחבר"
+
+#: ../language/strings.php:22
+msgid "wrong_password"
+msgstr "סיסמה שגויה"
+
+#: ../language/strings.php:25
+msgid "Plugin"
+msgstr "תוסף"
+
+#: ../language/strings.php:26
+msgid "activated"
+msgstr "מופעל"
+
+#: ../language/strings.php:27
+msgid "deactivated"
+msgstr "מכובה"
+
+#: ../language/strings.php:30
+msgid "Theme"
+msgstr "ערכת עיצוב"
+
+#: ../language/strings.php:31
+msgid "Theme Customizer"
+msgstr "התאמה אישית"
+
+#: ../language/strings.php:34
+msgid "Widget"
+msgstr "וידג'טים"
+
+#: ../language/strings.php:37
+msgid "Options"
+msgstr "הגדרות"
+
+#: ../language/strings.php:40
+msgid "Menu"
+msgstr "תפריט"
+
+#: ../language/strings.php:43
+msgid "Taxonomy"
+msgstr "טקסונומי"
+
+#: ../language/strings.php:48
+msgid "blogname"
+msgstr "שם האתר"
+
+#: ../language/strings.php:49
+msgid "blogdescription"
+msgstr "תיאור אתר"
+
+#: ../language/strings.php:50
+msgid "siteurl"
+msgstr "כתובת האתר"
+
+#: ../language/strings.php:51
+msgid "home"
+msgstr "ראשי"
+
+#: ../language/strings.php:52
+msgid "admin_email"
+msgstr "אימייל מנהל אתר"
+
+#: ../language/strings.php:53
+msgid "users_can_register"
+msgstr ""
+
+#: ../language/strings.php:54
+msgid "default_role"
+msgstr "תפקיד ברירת מחדל"
+
+#: ../language/strings.php:55
+msgid "timezone_string"
+msgstr ""
+
+#: ../language/strings.php:56
+msgid "date_format"
+msgstr "פורמט תאריך"
+
+#: ../language/strings.php:57
+msgid "time_format"
+msgstr "פורמט שעה"
+
+#: ../language/strings.php:58
+msgid "start_of_week"
+msgstr "יום תחילת השבוע"
+
+#: ../language/strings.php:61
+msgid "use_smilies"
+msgstr "שימוש בסמיילי"
+
+#: ../language/strings.php:62
+msgid "use_balanceTags"
+msgstr ""
+
+#: ../language/strings.php:63
+msgid "default_category"
+msgstr "קטגוריה ברירת מחדל"
+
+#: ../language/strings.php:64
+msgid "default_post_format"
+msgstr "פורמט ברירת מחדל"
+
+#: ../language/strings.php:65
+#, fuzzy
+msgid "mailserver_url"
+msgstr "קישור URL"
+
+#: ../language/strings.php:66
+#, fuzzy
+msgid "mailserver_login"
+msgstr "התחברות"
+
+#: ../language/strings.php:67
+msgid "mailserver_pass"
+msgstr ""
+
+#: ../language/strings.php:68
+msgid "default_email_category"
+msgstr "אימייל ברירת מחדל"
+
+#: ../language/strings.php:69
+msgid "ping_sites"
+msgstr ""
+
+#: ../language/strings.php:72
+msgid "show_on_front"
+msgstr "תצוגת עמוד ראשי"
+
+#: ../language/strings.php:73
+msgid "page_on_front"
+msgstr "עמוד ראשי"
+
+#: ../language/strings.php:74
+msgid "page_for_posts"
+msgstr "עמוד פוסטים"
+
+#: ../language/strings.php:75
+msgid "posts_per_page"
+msgstr "מספר פוסטים בעמוד"
+
+#: ../language/strings.php:76
+msgid "posts_per_rss"
+msgstr "מספר פוסטים ב RSS"
+
+#: ../language/strings.php:77
+msgid "rss_use_excerpt"
+msgstr "RSS שימוש בתקציר"
+
+#: ../language/strings.php:78
+msgid "blog_public"
+msgstr ""
+
+#: ../language/strings.php:81
+#, fuzzy
+msgid "default_pingback_flag"
+msgstr "ברירת מחדל"
+
+#: ../language/strings.php:82
+#, fuzzy
+msgid "default_ping_status"
+msgstr "ברירת מחדל"
+
+#: ../language/strings.php:83
+#, fuzzy
+msgid "default_comment_status"
+msgstr "ברירת מחדל"
+
+#: ../language/strings.php:84
+#, fuzzy
+msgid "require_name_email"
+msgstr "שם:"
+
+#: ../language/strings.php:85
+msgid "comment_registration"
+msgstr "תגובות למשתמשים רשומים"
+
+#: ../language/strings.php:86
+#, fuzzy
+msgid "close_comments_for_old_posts"
+msgstr "לאפשר לגולשים להגיב על פוסטים חדשים"
+
+#: ../language/strings.php:87
+msgid "close_comments_days_old"
+msgstr "סגירת תגובות לפוסטים ישנים"
+
+#: ../language/strings.php:88
+msgid "thread_comments"
+msgstr "תגובות משורשרות"
+
+#: ../language/strings.php:89
+msgid "thread_comments_depth"
+msgstr "עומק תגובות משורשרות"
+
+#: ../language/strings.php:90
+msgid "page_comments"
+msgstr "תגובות בעמודים"
+
+#: ../language/strings.php:91
+msgid "comments_per_page"
+msgstr "מספר תגובות בעמוד"
+
+#: ../language/strings.php:92
+#, fuzzy
+msgid "default_comments_page"
+msgstr "ברירת מחדל"
+
+#: ../language/strings.php:93
+msgid "comment_order"
+msgstr "סידור תגובות"
+
+#: ../language/strings.php:94
+msgid "comments_notify"
+msgstr "התראות לתגובות"
+
+#: ../language/strings.php:95
+msgid "moderation_notify"
+msgstr "אישור ידני"
+
+#: ../language/strings.php:96
+msgid "comment_moderation"
+msgstr "אישור תגובות"
+
+#: ../language/strings.php:97
+msgid "comment_whitelist"
+msgstr "תגובות רשימה לבנה"
+
+#: ../language/strings.php:98
+msgid "comment_max_links"
+msgstr "מקסימום קישורים בתגובה"
+
+#: ../language/strings.php:99
+msgid "moderation_keys"
+msgstr ""
+
+#: ../language/strings.php:100
+msgid "blacklist_keys"
+msgstr ""
+
+#: ../language/strings.php:101
+msgid "show_avatars"
+msgstr "הצגת אווטאר"
+
+#: ../language/strings.php:102
+msgid "avatar_rating"
+msgstr "ציון אווטאר"
+
+#: ../language/strings.php:103
+msgid "avatar_default"
+msgstr "אווטאר ברירת מחדל"
+
+#: ../language/strings.php:106
+msgid "thumbnail_size_w"
+msgstr "רוחב תמונה מוקטנת"
+
+#: ../language/strings.php:107
+msgid "thumbnail_size_h"
+msgstr "גובה תמונה מוקטנת"
+
+#: ../language/strings.php:108
+msgid "thumbnail_crop"
+msgstr "חיתוך תמונה מוקטנת"
+
+#: ../language/strings.php:109
+msgid "medium_size_w"
+msgstr "רוחב תמונה בינונית"
+
+#: ../language/strings.php:110
+msgid "medium_size_h"
+msgstr "גובה תמונה בינונית"
+
+#: ../language/strings.php:111
+msgid "large_size_w"
+msgstr "רוחב תמונה גדולה"
+
+#: ../language/strings.php:112
+msgid "large_size_h"
+msgstr "גובה תמונה גדולה"
+
+#: ../language/strings.php:113
+msgid "uploads_use_yearmonth_folders"
+msgstr "סידור מדיה בתיקיות לפי תאריך"
+
+#: ../language/strings.php:116
+msgid "permalink_structure"
+msgstr "מבנה קישורים"
+
+#: ../language/strings.php:117
+msgid "category_base"
+msgstr "קטגוריית בסיס"
+
+#: ../language/strings.php:118
+msgid "tag_base"
+msgstr "תגית בסיס"
+
+#: ../notifications/abstract-class-aal-notification-base.php:99
+msgid "Object Type"
+msgstr "סוג אובייקט"
+
+#: ../notifications/abstract-class-aal-notification-base.php:100
+msgid "Object Name"
+msgstr "שם אובייקט"
+
+#: ../notifications/abstract-class-aal-notification-base.php:102
+msgid "IP Address"
+msgstr "כתובת IP"
+
+#: ../notifications/abstract-class-aal-notification-base.php:121
+msgid "N/A"
+msgstr ""
+
+#: ../notifications/class-aal-notification-email.php:15
+msgid "Email"
+msgstr "אימייל"
+
+#: ../notifications/class-aal-notification-email.php:16
+msgid "Get notified by Email."
+msgstr "לקבל התראות באמצעות האימייל."
+
+#: ../notifications/class-aal-notification-email.php:49
+msgid "New notification from Activity Log"
+msgstr "הודעה חדשה מיומן פעילות באתר שלך"
+
+#: ../notifications/class-aal-notification-email.php:65
+msgid ""
+"Hi there!\n"
+"\n"
+"A notification condition on [sitename] was matched. Here are the details:\n"
+"\n"
+"[action-details]\n"
+"\n"
+"Sent by ARYO Activity Log"
+msgstr ""
+"שלום וברכה!\n"
+"\n"
+"נמצאה התראה חדשה באתר [sitename]. להלן הפרטים:\n"
+"\n"
+"[action-details]\n"
+"\n"
+"נשלח על ידי תוסף יומן פעילות"
+
+#: ../notifications/class-aal-notification-email.php:67
+msgid "From Email"
+msgstr "מאת אימייל"
+
+#: ../notifications/class-aal-notification-email.php:67
+msgid "The source Email address"
+msgstr "מקור כתובת אימייל"
+
+#: ../notifications/class-aal-notification-email.php:68
+msgid "To Email"
+msgstr "אל אימייל"
+
+#: ../notifications/class-aal-notification-email.php:68
+msgid "The Email address notifications will be sent to"
+msgstr "התראות אימייל ישלחו אל"
+
+#: ../notifications/class-aal-notification-email.php:69
+msgid "Message"
+msgstr "הודעה"
+
+#: ../notifications/class-aal-notification-email.php:69
+#, php-format
+msgid "Customize the message using the following placeholders: %s"
+msgstr "התאמה אישית של נוסח ההודעה באמצעות הקיצורים הבאים: %s"
+
+#, fuzzy
+#~ msgid "Me too"
+#~ msgstr "שלח אלי אימייל בכל פעם"
+
+#~ msgid "Items"
+#~ msgstr "פריטים"
+
+#~ msgid "All Dates"
+#~ msgstr "כל הזמן"
+
+#~ msgid "Yakir Sitbon, Maor Chasen, Ariel Klikstein"
+#~ msgstr "יקיר סיטבון, מאור חסן, אריאל קליקשטיין"
+
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#~ msgid "by "
+#~ msgstr "ע\"י"
+
+#~ msgid "ARYO Activity Log Settings"
+#~ msgstr "הגדרות יומן פעילות"
+
+#~ msgid "Forever"
+#~ msgstr "לתמיד"
+
+#~ msgid "A year"
+#~ msgstr "שנה"
+
+#~ msgid "6 months"
+#~ msgstr "6 חודשים"

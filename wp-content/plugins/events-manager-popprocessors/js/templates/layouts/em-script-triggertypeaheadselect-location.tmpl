@@ -1,0 +1,14 @@
+{{#with itemObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} style="display: none;"></div>
+	<script type="text/javascript">
+	(function($){
+		var myself = $('#{{lastGeneratedId context=../.}}');
+		var createlocation = myself.closest('.pop-createlocation');
+		var typeahead = $(createlocation.data('typeahead-target'));
+		var block = popManager.getBlock(typeahead);
+		var pageSection = popManager.getPageSection(block);
+		var location = popManager.getItemObject('{{../itemDBKey}}', '{{id}}');
+		popTypeahead.triggerSelect(pageSection, block, typeahead, location);
+	})(jQuery);
+	</script>
+{{/with}}

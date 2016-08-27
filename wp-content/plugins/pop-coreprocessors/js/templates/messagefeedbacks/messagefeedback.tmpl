@@ -1,0 +1,5 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}} {{class-merge}}">
+	{{#withModule . "inner"}}
+		{{enterModule ../.}}
+	{{/withModule}}
+</div>

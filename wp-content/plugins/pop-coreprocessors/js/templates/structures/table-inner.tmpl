@@ -1,0 +1,11 @@
+{{#each items}}
+	<tr class="pop-structureinner">
+		{{#each ../template-ids.layouts}}
+			{{#withModule ../../. this}}
+				<td>
+					{{enterModule ../../../. itemDBKey=../../../itemDBKey itemObjectId=../../.}}
+				</td>
+			{{/withModule}}
+		{{/each}}
+	</tr>
+{{/each}}

@@ -1,0 +1,1 @@
+<div class="iframe-wrapper" {{#generateId}}{{id}}{{/generateId}}><iframe class="embedpreview {{class}}" width="{{width}}" height="{{height}}" src="{{src}}" frameborder="0" allowfullscreen="true" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../. template=this}}"{{/each}}></iframe></div>

@@ -1,0 +1,14 @@
+{{#with itemObject}}
+	{{#if is-community}}
+		<label>
+			<input type="checkbox" {{#generateId context=../. group="filterbycommunity"}}filterbycommunity-{{id}}{{/generateId}} value="{{id}}" data-target="#{{lastGeneratedId context=../. template=../community-template}}"> {{../titles.includemembers}}
+		</label>
+		<script type="text/javascript">
+		(function($){
+			var checkbox = $('#{{lastGeneratedId context=../. group="filterbycommunity"}}');
+			var json = {{{json .}}};
+			checkbox.data('user-datum', json);
+		})(jQuery);
+		</script>
+	{{/if}}
+{{/with}}

@@ -1,0 +1,12 @@
+<div class="template-form-group {{class}}">
+	{{#withModule . "component"}}
+		{{#if ../label}}
+			<label class="{{../classes.label}}" for="{{name}}">{{{../label}}}</label>
+			{{#if ../info}}<span class="glyphicon glyphicon-info-sign make-tooltip" title="{{../info}}" {{#generateId context=../. group='tooltip'}}{{../id}}-{{id}}{{/generateId}}></span>{{/if}}
+		{{/if}}
+		<div class="{{../classes.formcontrol}}">
+			{{{../description}}}
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+</div>

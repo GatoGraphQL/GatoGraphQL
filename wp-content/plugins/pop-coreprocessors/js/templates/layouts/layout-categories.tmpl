@@ -1,0 +1,7 @@
+{{#with itemObject}}
+	<div class="{{../class}}">
+		{{#withget . ../categories-field}}
+			{{labelize . ../../classes.label}}
+		{{/withget}}
+	</div>
+{{/with}}

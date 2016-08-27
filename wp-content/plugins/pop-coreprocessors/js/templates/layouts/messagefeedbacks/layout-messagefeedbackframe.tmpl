@@ -1,0 +1,8 @@
+{{#with feedback-msg}}
+	<div class="pop-messagefeedback alert {{class}} fade in" {{#generateId context=../.}}{{../id}}{{/generateId}} {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+		{{#if can-close}}<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>{{/if}}
+		{{#withModule ../. "layout"}}
+			{{enterModule ../../. feedback-msg=../.}}
+		{{/withModule}}
+	</div>
+{{/with}}

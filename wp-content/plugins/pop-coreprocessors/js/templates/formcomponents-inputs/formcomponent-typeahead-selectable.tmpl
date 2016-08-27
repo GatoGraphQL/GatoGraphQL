@@ -1,0 +1,29 @@
+<div class="{{typeahead-class}} {{class}}" {{#generateId}}{{id}}{{/generateId}} {{#if max-selected}}data-max-selected="{{max-selected}}"{{/if}} {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="pop-operation {{classes.input}}">
+		{{#withModule . "input"}}
+			{{enterModule ../.}}
+		{{/withModule}}
+	</div>
+	<div {{#generateId group='selectedgroup'}}{{lastGeneratedId}}-content{{/generateId}} class="pop-box {{classes.selected}}" data-input-name="{{input-name}}[]">
+		{{#each value}}
+			{{#withModule ../. "trigger-layout"}}
+				{{enterModule ../../. itemDBKey=../../db-key itemObjectId=../.}}
+			{{/withModule}}
+		{{/each}}
+	</div>
+	{{#if suggestions}}
+		<div class="suggestions {{classes.suggestions}}">
+			{{{titles.suggestions}}}
+			{{#each suggestions}}
+				<a {{#generateId context=../. group="suggestion"}}{{../../id}}-{{../this}}{{/generateId}} href="#" data-objectid="{{this}}" data-db-key="{{../db-key}}" data-target="#{{lastGeneratedId context=../.}}" class="{{../classes.suggestion}}">
+					{{#if ../suggestion-fontawesome}}
+						<i class="fa {{../suggestion-fontawesome}}"></i>
+					{{/if}}
+					{{#withModule ../. "suggestion-layout"}}
+						{{enterModule ../../. itemDBKey=../../db-key itemObjectId=../.}}
+					{{/withModule}}
+				</a>
+			{{/each}}
+		</div>
+	{{/if}}
+</div>

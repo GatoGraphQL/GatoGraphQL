@@ -1,0 +1,1586 @@
+# Translation of Events Manager Pro in Finnish
+# This file is distributed under the same license as the Events Manager Pro package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-03-11 16:38:37+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Events Manager Pro\n"
+
+#: add-ons/bookings-form/attendee-forms.php:40
+msgid "Title"
+msgstr "Otsikko"
+
+#: add-ons/bookings-form/attendee-forms.php:40
+#: add-ons/bookings-form/attendee-forms.php:267
+#: add-ons/bookings-form/attendee-forms.php:417
+#: add-ons/bookings-form/attendee-forms.php:436
+#: add-ons/bookings-form/attendee-forms.php:448
+#: add-ons/bookings-form/attendee-forms.php:578
+msgid "Attendee %s"
+msgstr "Osallistuja %s"
+
+#: add-ons/bookings-form/attendee-forms.php:61
+#: add-ons/bookings-form/attendee-forms.php:535 add-ons/bookings-form.php:67
+#: add-ons/bookings-form.php:396 add-ons/gateways/gateway.paypal.php:495
+#: emp-install.php:123 emp-install.php:200
+msgid "Default"
+msgstr "Oletus"
+
+#: add-ons/bookings-form/attendee-forms.php:308
+msgid "Where"
+msgstr "Missä"
+
+#: add-ons/bookings-form/attendee-forms.php:309
+msgid "When"
+msgstr "Milloin"
+
+#: add-ons/bookings-form/attendee-forms.php:311
+msgid "Exported bookings on %s"
+msgstr "Vietyjä varauksia %s"
+
+#: add-ons/bookings-form/attendee-forms.php:359
+msgid "Split bookings by attendee"
+msgstr "Erottele varaukset osallistujien mukaan"
+
+#: add-ons/bookings-form/attendee-forms.php:360
+msgid "A row will be created for each space booked and will automatically include any attendee information associated with that booked ticket."
+msgstr "Jokaiselle varatulle tilalle tulee oma rivi, johon merkitään automaattisesti kaikki osallistujainformaatio kyseisestä lipunvarauksesta. "
+
+#: add-ons/bookings-form/attendee-forms.php:533
+#: add-ons/bookings-form/attendee-forms.php:705
+msgid "Selected Attendee Form"
+msgstr "Valittu Osallistujalomake"
+
+#: add-ons/bookings-form/attendee-forms.php:569
+msgid "Ticket"
+msgstr "Lippu"
+
+#: add-ons/bookings-form/attendee-forms.php:642 add-ons/bookings-form.php:454
+msgid "The form <em>%s</em> is now the default booking form. All events without a pre-defined booking form will start using this form from now on."
+msgstr "Lomake <em>%s</em> on nyt oletuksena oleva varauslomake. Kaikki tapahtumat ilman ennalta määriteltyä varauslomaketta käyttävät tästä lähtien tätä lomaketta. "
+
+#: add-ons/bookings-form/attendee-forms.php:648 add-ons/bookings-form.php:460
+msgid "%s Deleted"
+msgstr "%s Poistetu"
+
+#: add-ons/bookings-form/attendee-forms.php:648 add-ons/bookings-form.php:391
+#: add-ons/bookings-form.php:460 add-ons/gateways/gateway.php:382
+msgid "Booking Form"
+msgstr "Varauslomake"
+
+#: add-ons/bookings-form/attendee-forms.php:656 add-ons/bookings-form.php:468
+msgid "Form renamed to <em>%s</em>."
+msgstr "Lomake nimetty uudelleen <em>%s</em>."
+
+#: add-ons/bookings-form/attendee-forms.php:668 add-ons/bookings-form.php:477
+msgid "New form created. You are now editing your new form."
+msgstr "Uusi lomake luotu. Muotoilet nyt uutta lomaketta. "
+
+#: add-ons/bookings-form/attendee-forms.php:689
+msgid "Attendee Form"
+msgstr "Osallistujan lomake"
+
+#: add-ons/bookings-form/attendee-forms.php:692
+msgid "If enabled, this form will be shown and required for every space booked."
+msgstr "Jos valittuna, tämä lomake näytetään ja vaaditaan jokaisesta varatusta tilasta. "
+
+#: add-ons/bookings-form/attendee-forms.php:695
+msgid "Enable Attendee Forms"
+msgstr "Salli Osallistujalomakkeet"
+
+#: add-ons/bookings-form/attendee-forms.php:720 add-ons/bookings-form.php:516
+msgid "Make Default"
+msgstr "Ota oletukseksi"
+
+#: add-ons/bookings-form/attendee-forms.php:720 add-ons/bookings-form.php:516
+msgid ""
+"You are about to make this your default booking form. All events without an existing specifically chosen booking form will use this new default form from now on.\n"
+"\n"
+" Are you sure you want to do this?"
+msgstr ""
+"Olet tekemässä tästä oletuksen varauslomaketta. Kaikki tapahtumat, joissa ei ole erikseen valittua varauslomaketta, käyttävät tätä tästä lähtien uutena oletuslomakkeena. \n"
+"\n"
+" Oletko varma, että haluat tehdä niin? "
+
+#: add-ons/bookings-form/attendee-forms.php:729 add-ons/bookings-form.php:525
+#: add-ons/coupons.php:439
+msgid "Add New"
+msgstr "Lisää uusi"
+
+#: add-ons/bookings-form/attendee-forms.php:732
+msgid "This is the default attendee form and will be used for any event where you have not chosen a speficic form to use."
+msgstr "Tämä on oletus osallistujalomake ja sitä käytetään kaikissa tapahtumissa, joihin et ole valinnut toista lomaketta. "
+
+#: add-ons/bookings-form/attendee-forms.php:734
+msgid "If you don't want to ask for attendee information by default, select None as your booking form and make it the default form."
+msgstr "Jos et halua pyytää osallistujainfoa oletuksena, valitse Ei mitään varauslomakkeeksesi ja tee siitä oletuslomake. "
+
+#: add-ons/bookings-form/attendee-forms.php:738 add-ons/bookings-form.php:533
+msgid "You are now editing "
+msgstr "Olet muokkaamassa"
+
+#: add-ons/bookings-form/attendee-forms.php:743 add-ons/bookings-form.php:538
+msgid "Rename"
+msgstr "Muuta nimeä"
+
+#: add-ons/bookings-form/attendee-forms.php:750 add-ons/bookings-form.php:545
+msgid ""
+"Are you sure you want to delete this form?\n"
+"\n"
+" All events using this form will start using the default form automatically."
+msgstr ""
+"Oletko varma, että haluat poistaa tämän lomakkeen? \n"
+"\n"
+" Kaikki tapahtumat, jotka käyttävät tätä lomaketta, alkavat käyttää oletuslomaketta automaattisesti. "
+
+#: add-ons/bookings-form/attendee-forms.php:759
+msgid "Default Value"
+msgstr "Oletusarvo"
+
+#: add-ons/bookings-form/attendee-forms.php:759
+msgid "No attendee form selected. Choose a form, or create a new one above."
+msgstr "Osallistujalomaketta ei ole valittu. Valitse lomake tai luo uusi yläpuolella. "
+
+#: add-ons/bookings-form.php:43 add-ons/gateways.php:36 emp-install.php:126
+#: emp-install.php:137
+msgid "Address"
+msgstr "Osoite"
+
+#: add-ons/bookings-form.php:44 add-ons/gateways.php:38 emp-install.php:127
+#: emp-install.php:139
+msgid "City"
+msgstr "Kaupunki"
+
+#: add-ons/bookings-form.php:45 add-ons/gateways.php:39 emp-install.php:128
+#: emp-install.php:140
+msgid "State/County"
+msgstr "Osavaltio"
+
+#: add-ons/bookings-form.php:46 add-ons/gateways.php:40 emp-install.php:129
+#: emp-install.php:141
+msgid "Zip/Post Code"
+msgstr "Postinumero"
+
+#: add-ons/bookings-form.php:47 add-ons/gateways.php:41 emp-install.php:130
+#: emp-install.php:142
+msgid "Country"
+msgstr "Maa"
+
+#: add-ons/bookings-form.php:49 add-ons/gateways.php:43 emp-install.php:132
+#: emp-install.php:144
+msgid "Fax"
+msgstr "Faksi"
+
+#: add-ons/bookings-form.php:392
+msgid "You can choose to use a custom booking form, or leave as is to use the default booking form."
+msgstr "Voit joko muokata varauslomaketta, tai jättää sen ennalleen, jolloin se käyttää oletuksena olevaa varauslomaketta. "
+
+#: add-ons/bookings-form.php:394 add-ons/bookings-form.php:502
+msgid "Selected Booking Form"
+msgstr "Valittu varauslomake"
+
+#: add-ons/bookings-form.php:439
+msgid "You must include an E-mail field type for booking forms to work. These are used to create the user account and aren't shown to logged in users."
+msgstr "Sisällytä sähköpostikentän tyyppi varauslomakkeisiin, jotta ne toimivat. Tyyppejä tarvitaan käyttäjätilin luomiseen, eivätkä ne näy kirjautuneille käyttäjille. "
+
+#: add-ons/bookings-form.php:498
+msgid "It is required that you have at least an email and name field so guest users can register."
+msgstr "Sähköposti- ja nimikenttä ovat pakollisia vieraskäyttäjien rekisteröitymisessä. "
+
+#: add-ons/bookings-form.php:499
+msgid "Registration fields are only shown to guest visitors by default. You can choose to show these fields and make them editable by logged in user in your <a href=\"%s\">PRO Booking Form Options</a>."
+msgstr "Ilmoittautumiskentät näytetään vieraskäyttäjille oletuksena. Voit valita haluatko näiden kenttien näkyvän ja avata ne kirjautuneiden käyttäjien muokkaukselle menemällä valintoihin  <a href=\"%s\">PRO Booking Form Options</a>."
+
+#: add-ons/bookings-form.php:528
+msgid "This is the default bookings form and will be used for any event where you have not chosen a speficic form to use."
+msgstr "Tämä on oletuksena oleva varauslomake ja sitä käytetään kaikissa tapahtumissa, joihin ei ole valittu erityistä lomaketta. "
+
+#: add-ons/coupons/coupon.php:53 add-ons/coupons.php:469
+#: add-ons/coupons.php:479
+msgid "Discount"
+msgstr "Alennus"
+
+#: add-ons/coupons/coupon.php:53 add-ons/coupons.php:466
+#: add-ons/coupons.php:476
+msgid "Code"
+msgstr "Koodi"
+
+#: add-ons/coupons/coupon.php:102
+msgid "%s is required."
+msgstr "%s vaaditaan. "
+
+#: add-ons/coupons/coupon.php:124
+msgid "Something went wrong saving your %s."
+msgstr "Jokin meni vikaan tallentaessa %s."
+
+#: add-ons/coupons/coupon.php:124 add-ons/coupons/coupon.php:128
+#: add-ons/coupons/coupon.php:133 add-ons/coupons/coupon.php:135
+#: add-ons/coupons/coupon.php:149
+msgid "Coupon"
+msgstr "Kuponki"
+
+#: add-ons/coupons/coupon.php:128 add-ons/coupons/coupon.php:135
+msgid "Successfully saved %s"
+msgstr "Onnistuneesti tallennettu %s"
+
+#: add-ons/coupons/coupon.php:133
+msgid "Something went wrong updating your %s."
+msgstr "Jokin meni vikaan päivittäessä %s."
+
+#: add-ons/coupons/coupon.php:149
+msgid "Successfully deleted %s"
+msgstr "Onnistuneesti poistettu %s"
+
+#: add-ons/coupons/coupon.php:221 add-ons/coupons/coupon.php:225
+msgid "%s Off"
+msgstr "%s Pois päältä"
+
+#: add-ons/coupons.php:44 add-ons/coupons.php:589 add-ons/coupons.php:600
+msgid "Original Total Price"
+msgstr "Alkuperäinen Hinta yhteensä"
+
+#: add-ons/coupons.php:49 add-ons/coupons.php:590 add-ons/coupons.php:601
+msgid "Coupon Discount"
+msgstr "Alennuskoponki"
+
+#: add-ons/coupons.php:124
+msgid "Invalid coupon code provided"
+msgstr "Annettu kuponkikoodi ei toimi"
+
+#: add-ons/coupons.php:161 add-ons/coupons.php:294 add-ons/coupons.php:447
+#: add-ons/coupons.php:450
+msgid "Coupons"
+msgstr "Kupongit"
+
+#: add-ons/coupons.php:161
+msgid "Coupons Manager"
+msgstr "Kuponkihallinta"
+
+#: add-ons/coupons.php:205 add-ons/coupons.php:693
+msgid "Coupon Code"
+msgstr "Kuponkikoodi"
+
+#: add-ons/coupons.php:258
+msgid "Coupon Not Found"
+msgstr "Kuponkia ei ole löydetty"
+
+#: add-ons/coupons.php:267
+msgid "Coupon Invalid"
+msgstr "Kelvoton kuponki"
+
+#: add-ons/coupons.php:295
+msgid "Coupons selected here will be applied to bookings made for this event."
+msgstr "Tässä valittuja kuponkeja sovelletaan tähän tapahtumaan tehtyihin varauksiin.  "
+
+#: add-ons/coupons.php:305
+msgid "No coupons created yet."
+msgstr "Kuponkia ei ole vielä luotu"
+
+#: add-ons/coupons.php:308
+msgid "The following codes will be automatically available to this event as well"
+msgstr "Seuraavat koodit ovat automaattisesti myös tämän tapahtuman käytössä. "
+
+#: add-ons/coupons.php:438
+msgid "Edit Coupons"
+msgstr "Muokkaa kupongit"
+
+#: add-ons/coupons.php:447
+msgid "My %s"
+msgstr "Oma %s"
+
+#: add-ons/coupons.php:450
+msgid "All %s"
+msgstr "Kaikki %s"
+
+#: add-ons/coupons.php:467 add-ons/coupons.php:477
+msgid "Created By"
+msgstr "Tekijä"
+
+#: add-ons/coupons.php:468 add-ons/coupons.php:478 add-ons/coupons.php:706
+msgid "Description"
+msgstr "Kuvaus"
+
+#: add-ons/coupons.php:470 add-ons/coupons.php:480 add-ons/coupons.php:560
+msgid "Uses"
+msgstr "Käyttää"
+
+#: add-ons/coupons.php:502 add-ons/coupons.php:565
+msgid "Unlimited"
+msgstr "Rajoittamaton"
+
+#: add-ons/coupons.php:513
+msgid "No coupons have been inserted yet!"
+msgstr "Kuponkeja ei ole vielä kirjattu sisään!"
+
+#: add-ons/coupons.php:530 add-ons/coupons.php:651
+msgid "Unauthorized Access"
+msgstr "Pääsy kielletty"
+
+#: add-ons/coupons.php:530 add-ons/coupons.php:651
+msgid "You do not have the rights to manage this %s."
+msgstr "Sinulla ei ole oikeuksia hallinnoida tätä %s."
+
+#: add-ons/coupons.php:530 add-ons/coupons.php:651
+msgid "coupon"
+msgstr "kuponki"
+
+#: add-ons/coupons.php:556
+msgid "Coupon Usage History"
+msgstr "Kuponginkäytön historia"
+
+#: add-ons/coupons.php:558
+msgid "You are viewing the details of coupon %s - <a href=\"%s\">edit</a>"
+msgstr "Katselet kupongin %s - <a href=\"%s\">edit</a> yksityiskohtia. "
+
+#: add-ons/coupons.php:587 add-ons/coupons.php:598
+msgid "Booker"
+msgstr "Varaaja"
+
+#: add-ons/coupons.php:591 add-ons/coupons.php:602
+msgid "Final Price"
+msgstr "Lopullinen hinta"
+
+#: add-ons/coupons.php:639
+msgid "Your coupon hasn't been used yet!"
+msgstr "Kuponkiasi ei ole vielä käytetty!"
+
+#: add-ons/coupons.php:657
+msgid "required"
+msgstr "vaaditaan"
+
+#: add-ons/coupons.php:661
+msgid "Edit Coupon"
+msgstr "Muokkaa kuponkia"
+
+#: add-ons/coupons.php:670
+msgid "Event-Wide Coupon?"
+msgstr "Tapahtumakohtainen kuponki?"
+
+#: add-ons/coupons.php:673
+msgid "If checked, all events belonging to you will accept this coupon."
+msgstr "Jos tämä on valittu, kaikki tapahtumasi hyväksyvät tämän kupongin. "
+
+#: add-ons/coupons.php:678
+msgid "Site-Wide Coupon?"
+msgstr "Paikkakohtainen kuponki?"
+
+#: add-ons/coupons.php:681
+msgid "All events on this site will accept this coupon."
+msgstr "Kaikki tämän paikan tapahtumat hyväksyvät tämän kupongin. "
+
+#: add-ons/coupons.php:686
+msgid "Registered Users Only?"
+msgstr "Vain rekisteröityneille käyttäjille?"
+
+#: add-ons/coupons.php:689
+msgid "If checked, only logged in users will be able to use this coupon."
+msgstr "Jos tämä on valittu, vain kirjautuneet käyttäjät voivat käyttää tätä kuponkia. "
+
+#: add-ons/coupons.php:696
+msgid "This is the code you give to users for them to use when booking."
+msgstr "Tämä koodi tulee antaa käyttäjille, jotta he voivat käyttää varausta. "
+
+#: add-ons/coupons.php:712
+msgid "Total Coupons"
+msgstr "Kupongit yhtensä"
+
+#: add-ons/coupons.php:715
+msgid "If set, this coupon will only be valid that many times."
+msgstr "Jos tämä on valittu, tämä kuponki on voimassa vain mainitut kerrat. "
+
+#: add-ons/coupons.php:720
+msgid "Start Date"
+msgstr "Aloistus pvm"
+
+#: add-ons/coupons.php:725
+msgid "Coupons will only be valid from this date onwards."
+msgstr "Kuponki on voimassa tässä mainitusta päivämäärästä lähtien. "
+
+#: add-ons/coupons.php:729
+msgid "End Date"
+msgstr "Lopetus pvm"
+
+#: add-ons/coupons.php:734
+msgid "Coupons will not be valid after this date."
+msgstr "Kuponki ei ole voimassa tämän päivämäärän jälkeen. "
+
+#: add-ons/coupons.php:739
+msgid "Discount Type"
+msgstr "Alennuksen tyyppi"
+
+#: add-ons/coupons.php:742
+msgid "Percentage"
+msgstr "Prosentti"
+
+#: add-ons/coupons.php:743
+msgid "Fixed Amount"
+msgstr "Kiinteä hinta"
+
+#: add-ons/coupons.php:749
+msgid "Discount Amount"
+msgstr "Alennukse määrä"
+
+#: add-ons/coupons.php:752
+msgid "Enter a number here only, decimals accepted."
+msgstr "Lisää tähän vain numero, desimaalit hyväksytään. "
+
+#: add-ons/coupons.php:770
+msgid "Applicable Coupon"
+msgstr "Sopiva kuponki"
+
+#: add-ons/emails.php:170
+msgid "Event Email Reminders"
+msgstr "Tapahtuman sähköpostimuistutukset"
+
+#: add-ons/emails.php:175
+msgid "Events Manager can send people that booked a place at your events a reminder email before it starts."
+msgstr "Events Manager voi lähettää tilaisuudestasi paikan varanneille henkilöille sähköpostimuistutuksen ennen tapahtumaa. "
+
+#: add-ons/emails.php:176
+msgid "We use <a href=\"%s\">WP Cron</a> for scheduling checks for future events, which relies on site visits to trigger these tasks to run. If you have low levels of site traffic, this may not happen frequently enough, so you may want to consider forcing WP-Cron to run every few minutes. For more information, <a href=\"%s\">read this tutorial</a> on setting up WP Cron."
+msgstr "Käytämme <a href=\"%s\">WP Cron</a> tarkistaaksemme tulevia tapahtumia, mikä edellyttää sivulla vierailuita saadakseen nämä tehtävät alkamaan. Jos sinulla on vähän liikennettä sivuillasi, voi olla prosessi ei käynnisty riittävän usein, joten saatat harkita pakotettua WP-Cron -ajoa parin minuutin välien. Lisätietoja <a href=\"%s\">read this tutorial</a> on setting up WP Cron."
+
+#: add-ons/emails.php:178
+msgid "<strong>Important!</strong>, you should use SMTP as your email setup if you are sending automated emails in this way for optimal performance. Other methods are not suited to sending mass emails."
+msgstr "<strong>Important!</strong>, sinun tulisi käyttää SMTP -valintaa sähköpostiasetuksissasi, jos lähetätä automaattisia sähköposteja tällä tavalla optimoidaksesi toiminnot. Muut metodit eivät sovellu suurien sähköpostimäärien lähettämiseen. "
+
+#: add-ons/emails.php:181
+msgid "Enable Email Reminders?"
+msgstr "Salli sähköpostimuistutukset?"
+
+#: add-ons/emails.php:182
+msgid "Days before reminder"
+msgstr "Päiviä ennen muistutusta"
+
+#: add-ons/emails.php:182
+msgid "You can choose to send people attending your event x days before the event starts. Minimum is one day."
+msgstr "Voit valita lähetätkö tapahtumaasi osallistuville muistutuksen x päivää ennen tapahtumaa. Minimiaika on yksi päivä. "
+
+#: add-ons/emails.php:183
+msgid "Attach ical invite?"
+msgstr "Liitä kalenteritiedoston kutsu?"
+
+#: add-ons/emails.php:183
+msgid "If using SMTP in your email settings. You can automatically attach an ical file which some email clients (e.g. gmail) will render as an invitation they can add to their calendar."
+msgstr "Jos käytät SMTP sähköpostiasetuksessasi, voit automaattisesti liittää kalenteritiedoston. Jotkut sähköpostiasiakkaat (esim. gmail) voivat muuntaa sen kutsuksi, jonka voivat lisätä kalenteriinsa. "
+
+#: add-ons/emails.php:187
+msgid "WP Cron Time"
+msgstr "WP Ajastus"
+
+#: add-ons/emails.php:190
+msgid "Every day Events Manager automatically checks upcoming events in order to generate emails. You can choose at what time of day to run this check, if your site has a lot of traffic, it may help having this run at times of lower server loads."
+msgstr "Events Manager tarkistaa päivittäin tulevat tapahtumat ja tekee niistä sähköpostimuistutukset. Voit valita mihin aikaan tarkistus ajetaan. Jos sivuillasi on paljon liikennettä, voi olla helpompi ajaa tarkistus hiljaisempaan serveriaikaan. "
+
+#: add-ons/emails.php:194
+msgid "Reminder subject"
+msgstr "Muistutuksen aihe"
+
+#: add-ons/emails.php:195
+msgid "Approved email"
+msgstr "Hyväksytty sähköposti"
+
+#: add-ons/gateways/gateway.authorize.aim.php:155
+msgid "Refunded"
+msgstr "Maksettu takaisin"
+
+#: add-ons/gateways/gateway.authorize.aim.php:166
+msgid "Voided"
+msgstr "Mitätöity"
+
+#: add-ons/gateways/gateway.authorize.aim.php:195
+msgid "Credit Card Number"
+msgstr "Luottokortin numero"
+
+#: add-ons/gateways/gateway.authorize.aim.php:199
+msgid "Expiry Date"
+msgstr "Erääntymispäiväys"
+
+#: add-ons/gateways/gateway.authorize.aim.php:218
+msgid "CCV"
+msgstr "Luottokortin varmistus"
+
+#: add-ons/gateways/gateway.authorize.aim.php:343
+#: add-ons/gateways/gateway.offline.php:386
+#: add-ons/gateways/gateway.paypal.php:452
+msgid "Success Message"
+msgstr "Onnistuneen tapahtuman viesti"
+
+#: add-ons/gateways/gateway.authorize.aim.php:346
+msgid "The message that is shown to a user when a booking is successful and payment has been taken."
+msgstr "Tämä viesti näkyy käyttäjälle kun varaus on onnistunut ja maksu on veloitettu. "
+
+#: add-ons/gateways/gateway.authorize.aim.php:350
+#: add-ons/gateways/gateway.paypal.php:459
+msgid "Success Free Message"
+msgstr "Ilmainen viesti onnistunut"
+
+#: add-ons/gateways/gateway.authorize.aim.php:353
+msgid "If some cases if you allow a free ticket (e.g. pay at gate) as well as paid tickets, this message will be shown and the user will not be charged."
+msgstr "Jos jossain tapauksessa hyväksyt ilmaisen lipun (tai ovella maksettavan) samaan aikaan kuin maksullisen lipun, tämä viesti näytetään ja käyttäjää ei veloiteta. "
+
+#: add-ons/gateways/gateway.authorize.aim.php:358
+#: add-ons/gateways/gateway.authorize.aim.php:401
+#: add-ons/gateways/gateway.paypal.php:475 add-ons/gateways/gateway.php:382
+msgid "%s Options"
+msgstr "%s Valinnat"
+
+#: add-ons/gateways/gateway.authorize.aim.php:359
+msgid "Please visit the <a href=\"%s\">documentation</a> for further instructions on setting up Authorize.net with Events Manager."
+msgstr "Katso <a href=\"%s\">documentation</a> kohdasta lisäohjeita  Authorize.net with Events Manager."
+
+#: add-ons/gateways/gateway.authorize.aim.php:363
+msgid "Mode"
+msgstr "Moodi"
+
+#: add-ons/gateways/gateway.authorize.aim.php:367
+msgid "Sandbox"
+msgstr "Koeympäristö, hiekkalaatikko"
+
+#: add-ons/gateways/gateway.authorize.aim.php:368
+msgid "Live"
+msgstr "Live"
+
+#: add-ons/gateways/gateway.authorize.aim.php:371
+msgid "Please visit <a href=\"%s\">Authorize.net</a> to set up a sandbox account if you would like to test this gateway out. Alternatively, you can use your real account in test mode, which you can set on your Authorize.net control panel."
+msgstr " visit <a href=\"%s\">Authorize.net</a> to set up a sandbox account if you would like to test this gateway out. Alternatively, you can use your real account in test mode, which you can set on your Authorize.net control panel."
+
+#: add-ons/gateways/gateway.authorize.aim.php:375
+msgid "API Login ID"
+msgstr "API kirjautumistunnus"
+
+#: add-ons/gateways/gateway.authorize.aim.php:379
+msgid "Transaction key"
+msgstr "Maksutapahtuman avain"
+
+#: add-ons/gateways/gateway.authorize.aim.php:383
+msgid "Payment Notifications"
+msgstr "Maksun ilmoitukset"
+
+#: add-ons/gateways/gateway.authorize.aim.php:384
+msgid "If you would like to receive notifications from Authorize.net and handle refunds or voided transactions automatically, you need to enable Silent Post URL and provide an MD5 Hash in your merchant interface."
+msgstr "Jos haluat vastaanottaa ilmoituksia Authorize.net -järjestelmästä ja käsitellä takaisinmaksua tai mitätöityjä maksuja automaattisesti, sinun täytyy sallia Silent Post URL ja hankkia MD5 Hash kaupalliseen käyttöliittymääsi.  "
+
+#: add-ons/gateways/gateway.authorize.aim.php:385
+msgid "Your return url is %s."
+msgstr "Your return url is %s."
+
+#: add-ons/gateways/gateway.authorize.aim.php:385
+msgid "You can use this as your Silent Post URL."
+msgstr "Voit käyttää tätä hiljaisen julkaisun URL."
+
+#: add-ons/gateways/gateway.authorize.aim.php:388
+msgid "Security: MD5 Hash"
+msgstr "Turvallisuus: MD5 Hash"
+
+#: add-ons/gateways/gateway.authorize.aim.php:391
+msgid "This string of text needs to match that in your merchant interface settings."
+msgstr "Tämä tekstiketju ei sovi yhteen "
+
+#: add-ons/gateways/gateway.authorize.aim.php:395
+msgid "User Login ID"
+msgstr "Käyttäjätunnus"
+
+#: add-ons/gateways/gateway.authorize.aim.php:398
+msgid "This is the username you use to log into your merchant interface."
+msgstr "Tämä on käyttäjänimi, jolla kirjaudut sisään myyjäsi käyttöliittymään. "
+
+#: add-ons/gateways/gateway.authorize.aim.php:401
+msgid "Advanced"
+msgstr "Edistynyt"
+
+#: add-ons/gateways/gateway.authorize.aim.php:403
+msgid "Email Customer (on success)"
+msgstr "Sähköpostiasiakas (onnistunut)"
+
+#: add-ons/gateways/gateway.authorize.aim.php:413
+msgid "Customer Receipt Email Header"
+msgstr "Asiakkaan kuitin sähköpostin otsikko"
+
+#: add-ons/gateways/gateway.authorize.aim.php:417
+msgid "Customer Receipt Email Footer"
+msgstr "Asiakkaan kuitin sähköpostin alaotsikko"
+
+#: add-ons/gateways/gateway.authorize.aim.php:425
+#: add-ons/gateways/gateway.paypal.php:563
+msgid "Approvals must also be required for all bookings in your <a href=\"%s\">settings</a> for this to work properly."
+msgstr "Kaikki varaukset vaativat hyväksynnän asetuksissasi <a href=\"%s\">settings</a>, jotta järjestelmä toimisi oikein."
+
+#: add-ons/gateways/gateway.offline.php:57
+msgid "Please enter a valid payment amount. Numbers only, use negative number to credit a booking."
+msgstr "Ole hyvä ja lisää voimassaoleva maksutili. Vain numerot, käytä negatiivisia numeroita antaaksesi varaukselle luottoa. "
+
+#: add-ons/gateways/gateway.offline.php:189
+msgid "Please enter a valid payment amount (e.g. 10.00). Use negative numbers to credit a booking."
+msgstr "Ole hyvä ja lisää käypä maksun summa (esim. 10.00). Käytä negatiivisia numeroita antaaksesi varaukselle luottoa. "
+
+#: add-ons/gateways/gateway.offline.php:234
+msgid "Go back to &quot;%s&quot; bookings"
+msgstr "Mene takaisin &quot;%s&quot; varaukset"
+
+#: add-ons/gateways/gateway.offline.php:292
+#: add-ons/gateways/gateway.offline.php:295
+msgid "Manual booking."
+msgstr "Manuaalinen varaus"
+
+#: add-ons/gateways/gateway.offline.php:301
+msgid "Add another booking"
+msgstr "Lisää toinen varaus"
+
+#: add-ons/gateways/gateway.offline.php:343
+msgid "Select a user, or enter a new one below."
+msgstr "Valitse käyttäjä, tai lisää uusi alapuolella."
+
+#: add-ons/gateways/gateway.offline.php:360
+msgid "Amount Paid"
+msgstr "Maksettu summa"
+
+#: add-ons/gateways/gateway.offline.php:362
+msgid "Fully Paid"
+msgstr "Kaikki maksut maksettu"
+
+#: add-ons/gateways/gateway.offline.php:363
+msgid "If you check this as fully paid, and leave the amount paid blank, it will be assumed the full payment has been made."
+msgstr "Jos valitset Kaikki maksut maksettu ja jätät maksetun summan tyhjäksi, oletetaan, että kaikki maksut on maksettu. "
+
+#: add-ons/gateways/gateway.offline.php:389
+msgid "The message that is shown to a user when a booking with offline payments is successful."
+msgstr "Tämä viesti näytetään käyttäjälle offline-maksun onnistuttua varausta tehdessä. "
+
+#: add-ons/gateways/gateway.paypal.php:22
+msgid "Awaiting PayPal Payment"
+msgstr "Odottaa PayPal -maksua"
+
+#: add-ons/gateways/gateway.paypal.php:80
+msgid "To finalize your booking, please click the following button to proceed to PayPal."
+msgstr "Vahvistaaksesi varauksesi, ole hyvä ja klikkaa seuraavaa nappia edetäksesi PayPal -käyttöliittymään. "
+
+#: add-ons/gateways/gateway.paypal.php:418
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: add-ons/gateways/gateway.paypal.php:420
+msgid "Unprocessed payment needs refund"
+msgstr "Käsittelemätön maksu tarvitsee takaisinmaksun"
+
+#: add-ons/gateways/gateway.paypal.php:455
+msgid "The message that is shown to a user when a booking is successful whilst being redirected to PayPal for payment."
+msgstr "Tämä viesti näytetään käyttäjälle, kun hän on tehnyt onnistuneen varauksen ja hänet on ohjattu PayPal -käyttöliittymään maksua varten. "
+
+#: add-ons/gateways/gateway.paypal.php:462
+msgid "If some cases if you allow a free ticket (e.g. pay at gate) as well as paid tickets, this message will be shown and the user will not be redirected to PayPal."
+msgstr "Jos hyväksyt vapaaliput (tai ovella maksettavat liput) samaan tapahtumaan kuin maksulliset liput, tämä viesti näytetään ja käyttäjää ei ohjata PayPal -käyttöliittymään. "
+
+#: add-ons/gateways/gateway.paypal.php:466
+msgid "Thank You Message"
+msgstr "Kiitosviesti"
+
+#: add-ons/gateways/gateway.paypal.php:469
+msgid "If you choose to return users to the default Events Manager thank you page after a user has paid on PayPal, you can customize the thank you message here."
+msgstr "Jos valitset käyttäjien ohjaamisen oletuksena olevaan Events Manager kiitossivuun PayPal -maksun jälkeen, voit muokata kiitosviestiä tässä. "
+
+#: add-ons/gateways/gateway.paypal.php:476
+msgid "<strong>Important:</strong>In order to connect PayPal with your site, you need to enable IPN on your account."
+msgstr "<strong>Important:</strong> Jotta saisit PayPal -käyttöliittymän liitettyä sivuihisi, sinun pitää sallia IPN tililläsi. "
+
+#: add-ons/gateways/gateway.paypal.php:476
+msgid "Your return url is %s"
+msgstr "Paluusi url on %s"
+
+#: add-ons/gateways/gateway.paypal.php:477
+msgid "Please visit the <a href=\"%s\">documentation</a> for further instructions."
+msgstr "Käy katsomassa <a href=\"%s\">documentation</a> tarkempia ohjeita varten. "
+
+#: add-ons/gateways/gateway.paypal.php:492
+msgid "PayPal Language"
+msgstr "PayPal Kieli"
+
+#: add-ons/gateways/gateway.paypal.php:510
+msgid "PayPal allows you to select a default language users will see. This is also determined by PayPal which detects the locale of the users browser. The default would be US."
+msgstr "PayPal sallii sinun valita oletuskielen, jonka käyttäjät näkevät. Tämän määrittelee PayPal, joka tutkii käyttäjien selaimen sijainnin. Oletuksena on Yhdysvallat. "
+
+#: add-ons/gateways/gateway.paypal.php:524
+msgid "Return URL"
+msgstr "Palauta URL"
+
+#: add-ons/gateways/gateway.paypal.php:527
+msgid "Once a payment is completed, users will be offered a link to this URL which confirms to the user that a payment is made. If you would to customize the thank you page, create a new page and add the link here. For automatic redirect, you need to turn auto-return on in your PayPal settings."
+msgstr "Kun maksu on suoritettu, käyttäjille tarjotaan linkki tähän URL -sijaintiin, mikä vahvistaa käyttäjälle, että maksu on suoritettu. "
+
+#: add-ons/gateways/gateway.paypal.php:531
+msgid "Cancel URL"
+msgstr "Peruuta URL"
+
+#: add-ons/gateways/gateway.paypal.php:534
+msgid "Whilst paying on PayPal, if a user cancels, they will be redirected to this page."
+msgstr "Jos käyttäjä peruuttaa toiminnon ollessaan maksamassa PayPal -käyttöliittymällä, hänet ohjataan tälle sivulle. "
+
+#: add-ons/gateways/gateway.paypal.php:552
+msgid "Delete Bookings Pending Payment"
+msgstr "Poista varaus avoin maksu"
+
+#: add-ons/gateways/gateway.paypal.php:554
+msgid "minutes"
+msgstr "minuutit"
+
+#: add-ons/gateways/gateway.paypal.php:555
+msgid "Once a booking is started and the user is taken to PayPal, Events Manager stores a booking record in the database to identify the incoming payment. These spaces may be considered reserved if you enable <em>Reserved unconfirmed spaces?</em> in your Events &gt; Settings page. If you would like these bookings to expire after x minutes, please enter a value above (note that bookings will be deleted, and any late payments will need to be refunded manually via PayPal)."
+msgstr "Kun varaus on aloitettu ja käyttäjä johdetaan Pay Paliin, Events Manager varastoi varaustiedot tietokannassa tunnistaaksen saapuvan maksun. Nämä tilat voivat olla varattuja jos sallit <em>Reserved unconfirmed spaces?</em> tapahtumat &gt; asetussivulla. Jos haluat näiden varausten vanhentuvan x minuutin kuluttua, ole yvä ja anna arvo yläpuolella (huomaa, että varaukset poistetaan, kaikki myöhässä olevat makstu vaativat pitää maksaa manuaalisesti PayPal -käyttöliittymässä). "
+
+#: add-ons/gateways/gateway.php:386
+msgid "Gateway Title"
+msgstr "Yhdyskäytävän Otsikko"
+
+#: add-ons/gateways/gateway.php:390 add-ons/gateways/gateway.php:400
+msgid "Only if you have not enabled quick pay buttons in your <a href=\"%s\">gateway settings</a>."
+msgstr "Jos et ole sallinut nopean maksun nappeja <a href=\"%s\">gateway settings</a>."
+
+#: add-ons/gateways/gateway.php:391
+msgid "The user will see this as the text option when choosing a payment method."
+msgstr "Käyttäjä näkee tämän tekstivaihtoehtona valitessaan maksutapaa. "
+
+#: add-ons/gateways/gateway.php:396
+msgid "Booking Form Information"
+msgstr "Varauslomakkeen tiedot"
+
+#: add-ons/gateways/gateway.php:401
+msgid "If a user chooses to pay with this gateway, or it is selected by default, this message will be shown just below the selection."
+msgstr "Jos käyttäjä valitsee maksun tätä yhdyskäytävää käyttämällä, tai se on oletuksena, tämä viesti näytetään juuri valinnan alla. "
+
+#: add-ons/gateways/gateway.php:409
+msgid "Quick Pay Buttons"
+msgstr "Pikamaksun napit"
+
+#: add-ons/gateways/gateway.php:410
+msgid "If you have chosen to only use quick pay buttons in your <a href=\"%s\">gateway settings</a>, these settings below will be used."
+msgstr "Jos olet valinnut vain pikanappien käyttämisen <a href=\"%s\">yhdyskäytävän asetuksissa</a>, käytetään alla olevia asetuksia. "
+
+#: add-ons/gateways/gateway.php:414
+msgid "Payment Button"
+msgstr "Maksunappi"
+
+#: add-ons/gateways/gateway.php:417
+msgid "Choose the button text. To use an image instead, enter the full url starting with %s or %s."
+msgstr "Valitse napin teksti. Käyttääksesi sen sijaan kuvaa, syötä täysi url, joka alkaa %s tai %s kanssa."
+
+#: add-ons/gateways/gateways.transactions.php:98
+msgid "Gateway"
+msgstr "Yhdyskäytävä"
+
+#: add-ons/gateways/gateways.transactions.php:126
+msgid "%s Rows"
+msgstr "%s Rivit"
+
+#: add-ons/gateways/gateways.transactions.php:142
+msgid "Filter"
+msgstr "Suodatin"
+
+#: add-ons/gateways/gateways.transactions.php:144
+msgid "Displaying Event"
+msgstr "Näytetään Tapahtuma"
+
+#: add-ons/gateways/gateways.transactions.php:146
+msgid "Displaying User"
+msgstr "Näytetään Käyttäjä"
+
+#: add-ons/gateways/gateways.transactions.php:354
+msgid "Transaction ID"
+msgstr "Maksutapahtuman tunniste"
+
+#: add-ons/gateways/gateways.transactions.php:375
+msgid "Transaction deleted"
+msgstr "Makstutapahtuma poistettu"
+
+#: add-ons/gateways/gateways.transactions.php:379
+msgid "Transaction could not be deleted"
+msgstr "Makstutapahtumaa ei voitu poistaa"
+
+#: add-ons/gateways.php:37 emp-install.php:138
+msgid "Address Line 2"
+msgstr "Osoiterivi 2"
+
+#: add-ons/gateways.php:44 emp-install.php:145
+msgid "Company"
+msgstr "Yritys"
+
+#: add-ons/gateways.php:50
+msgid "All transactional history associated with this booking will also be deleted."
+msgstr "Kaikki tapahtumahistoria liittyen tähän varaukseen poistetaan myös. "
+
+#: add-ons/gateways.php:51
+msgid "Are you sure you want to delete? This may make your transaction history out of sync with your payment gateway provider."
+msgstr "Haluatko varmasti poistaa? Tämä valinta saattaa vaikuttaa maksutietojesi ajantasaisuuteen maksujen yhteyskäytävässä. "
+
+#: add-ons/gateways.php:57
+msgid "Awaiting Online Payment"
+msgstr "Odottaa verkkomaksua"
+
+#: add-ons/gateways.php:58
+msgid "Awaiting Offline Payment"
+msgstr "Odottaa xxx maksua"
+
+#: add-ons/gateways.php:121
+msgid "Choice of payment method not recognized. If you are seeing this error and selecting a method of payment, we apologize for the inconvenience. Please contact us and we'll help you make a booking as soon as possible."
+msgstr "Maksutapaa ei ole tunnistettu. Jos näet tämän virheen ja olet valitsemassa maksutapaa, pahoittelemme harmia. Ole hyvä ja ota meihin yhteyttä, jotta voimme auttaa sinua tekemään varauksen niin pian kuin mahdollista. "
+
+#: add-ons/gateways.php:245
+msgid "Payment Gateway Options"
+msgstr "Maksutapahtuma yhdyskäytävä valinnat"
+
+#: add-ons/gateways.php:249
+msgid "Enable Quick Pay Buttons?"
+msgstr "Salli pikamaksun napit?"
+
+#: add-ons/gateways.php:249
+msgid "Only works with gateways that do not require additional payment information to be submitted (e.g. PayPal and Offline payments). If enabled, the default booking form submit button is not used, and each gateway will have a button (or image, see <a href=\"%s\">individual gateway settings</a>) which if clicked on will submit a booking for that gateway."
+msgstr "Toimii vain niiden yhteyskäytävien kanssa, jotka eivät vaadi maksun lisätietojen antamista (esim. PayPal ja muut kuin verkkomaksut). Jos valittu, oletus varauslomakkeen lähetysnappia ei käytetä ja jokaisella yhdyskäytävällä on oma nappi (tai kuva, katso yhdyskäytävän asetukset <a href=\"%s\">individual gateway settings</a>), joka valittuna lähettää varauksen siihen yhdyskäytävään. "
+
+#: add-ons/gateways.php:250
+msgid "Gateway Label"
+msgstr "Yhdyskäytävän merkki"
+
+#: add-ons/gateways.php:250
+msgid "If you are not using quick pay buttons a drop-down menu will be used, with this label."
+msgstr "Jos et käytä maksun pikanappeja, käytetään vetovalikkoa, jossa on tämä merkki. "
+
+#: add-ons/gateways.php:394
+msgid "No Payment gateways were found for this install."
+msgstr "Maksun yhdyskäytäviä ei löytynyt tätä asennusta varten. "
+
+#: add-ons/gateways.php:542
+msgid "Common User Fields for Gateways"
+msgstr "Yhteiset käyttäjäkentät yhdyskäytäville"
+
+#: add-ons/gateways.php:545
+msgid "In many cases, customer address information is required by gateways for verification. This section connects your custom fields to commonly used customer information fields."
+msgstr "Monessa tapauksessa asiakkaan osoite tarvitaan yhdyskäytävän vahvistamisessa. Tämä osio yhdistää sinun oletuskenttäsi yleisesti käytettyihin asiakastietokenttiin. "
+
+#: add-ons/gateways.php:546
+msgid "After creating user fields above, you should link them up in here so some gateways can make use of them when processing payments."
+msgstr "Kun käyttäjäkentät on luotu yläpuolella, sinun tulisi linkittää ne tähän, jotta jotkin yhdyskäytävät voivat käyttää niitä maksujen prosessoinnissa. "
+
+#: add-ons/gateways.php:549
+msgid "Name (first/last)"
+msgstr "Nimi (etunimi/sukunimi)"
+
+#: add-ons/gateways.php:549
+msgid "Generated accordingly from user first/last name or full name field. If a name field isn't provided in your booking form, the username will be used instead."
+msgstr "Luotu käyttäjän etunimen/sukunimen tai täyden nimikentän mukaisesti. Jos nimikenttä ei ole mukana varauslomakkeessa, käytetään kättäjänimeä sen asemesta. "
+
+#: add-ons/gateways.php:550
+msgid "Uses the WordPress account email associated with the user."
+msgstr "Käyttää WP käyttäjätilin käyttäjään liittyvää sähköpostia. "
+
+#: add-ons/gateways.php:556 emp-forms.php:353 emp-forms.php:529
+msgid "none selected"
+msgstr "ei yhtään valittua"
+
+#: add-ons/gateways.php:569 emp-forms.php:1162
+msgid "Save Form"
+msgstr "Tallenna lomake"
+
+#: add-ons/user-fields.php:151 add-ons/user-fields.php:154
+msgid "n/a"
+msgstr "ei saatavissa"
+
+#: add-ons/user-fields.php:187
+msgid "Further Information"
+msgstr "Lisätietoja"
+
+#: add-ons/user-fields.php:258
+msgid "User Fields"
+msgstr "Käyttäjän kentät"
+
+#: add-ons/user-fields.php:261
+msgid "Registration fields are only shown to guest visitors. If you add new fields here and save, they will then be available as custom registrations in your bookings editor, and this information will be accessible and editable on each user <a href=\"%s\">profile page</a>."
+msgstr "Rekisteröintikentät näkyvät vain vieraskäyttäjille. Jos lisäät uusia kenttiä tähän ja tallennat ne, ne ovat käytettävissä muokattuina ilmoittautumisina varauseditorissasi. Tämä informaatio on tavoitettavissa ja muokattavissa jokaisesta käyttäjästä <a href=\"%s\">profile page</a>."
+
+#: add-ons/user-fields.php:262
+msgid "<strong>Important:</strong> When editing this form, to make sure your current user information is displayed, do not change their field names."
+msgstr "<strong>Tärkeää:</strong> Kun muokkaat tätä lomaketta, varmista, että ajan tasalla olevat käyttäjätietosi näkyvät, äläkä muuta kenttien nimiä. "
+
+#: emp-forms.php:11 emp-forms.php:19
+msgid "Forms Editor"
+msgstr "Muotojen editori"
+
+#: emp-forms.php:20
+msgid "On this page you can create/edit various forms used within Events Manager Pro."
+msgstr "Tällä sivulla voit luoda/muokata erilaisia Events Manager Pron käyttämiä lomakkeita. "
+
+#: emp-forms.php:31
+msgid "PRO Booking Form Options"
+msgstr "PRO Varauslomakkeen vaihtoehdot"
+
+#: emp-forms.php:35
+msgid "Show profile fields to logged in users?"
+msgstr "Näytä profiilikentät kirjautuneille käyttäjille?"
+
+#: emp-forms.php:35
+msgid "When logged in, users usually don't see their profile fields, with this enabled, users will be able to update their profile fields alongside their booking. This is particularly useful if the user is missing key information. Note that this does not include usernames, name, passwords and emails, these must be modified from their user profile page."
+msgstr "Käyttäjät eivät usein näe profiilin kenttiä ollessaan kirjautuneina sisään. Kun tämä on valittu, käyttäjät voivat päivittää profiilikenttiään varauksen edetessä. Tämä on hödyllistä, kun käyttäjältä puuttuu oleellista tietoa. Huomaa, että tämä ei sisällä käyttäjänimiä, nimeä, salasaaa ja sähköpostia. Edellämainittuja muokataan käyttäjäprofiilissa. "
+
+#: emp-forms.php:36
+msgid "Make profile fields editable?"
+msgstr "Tee profiilin kentistä muokattavia?"
+
+#: emp-forms.php:36
+msgid "If profile fields are set to show to logged in users, you can also choose whether or not to make these fields editable or just for viewing reference."
+msgstr "Jos profiilin kentät on säädetty näyttämään kirjautuneita käyttäjiä, voit myös valita haluatko tehdä tämän kentät muokattaviksi vai vaan katsottaviksi. "
+
+#: emp-forms.php:545
+msgid "You must also add an end date."
+msgstr "Sinun tulee myös lisätä päättymispäivä. "
+
+#: emp-forms.php:549 emp-forms.php:562
+msgid "Dates must have correct formatting. Please use the date picker provided."
+msgstr "Päiväyksillä pitää olla oikea muoto. Ole hyvä ja käytä annettua päivämäärän valitsijaa. "
+
+#: emp-forms.php:555
+msgid "Please provide a later end date."
+msgstr "Ole hyvä ja anna myöhäisempi päättymispäivä. "
+
+#: emp-forms.php:568 emp-forms.php:932
+msgid "You must provide a start date."
+msgstr "Alkamispäivä täytyy määritellä. "
+
+#: emp-forms.php:586 emp-forms.php:988
+msgid "You must provide an end time."
+msgstr "Päättymisaika täytyy määritellä. "
+
+#: emp-forms.php:590 emp-forms.php:596 emp-forms.php:978
+msgid "Please use the time picker provided to select the appropriate time format."
+msgstr "Ole hyvä ja käytä annettua päivämääränvalitsijaa valitaksesi sopivat ajankohdat. "
+
+#: emp-forms.php:602 emp-forms.php:998
+msgid "You must provide a start time."
+msgstr "Aloitusaika täytyy määritellä. "
+
+#: emp-forms.php:737
+msgid "Label"
+msgstr "Kyltti"
+
+#: emp-forms.php:738
+msgid "Field ID"
+msgstr "Kentän tunniste"
+
+#: emp-forms.php:739
+msgid "Type"
+msgstr "Tyyppi"
+
+#: emp-forms.php:740
+msgid "Required"
+msgstr "Vaadittu"
+
+#: emp-forms.php:778
+msgid "Custom Registration Fields"
+msgstr "Oletuksena olevat rekisteröitymiskentät"
+
+#: emp-forms.php:821 emp-forms.php:863 emp-forms.php:889 emp-forms.php:955
+#: emp-forms.php:1014 emp-forms.php:1042 emp-forms.php:1063 emp-forms.php:1093
+msgid "Tip Text"
+msgstr "Vinkkiteksti"
+
+#: emp-forms.php:824 emp-forms.php:866 emp-forms.php:892 emp-forms.php:958
+#: emp-forms.php:1017 emp-forms.php:1045 emp-forms.php:1066 emp-forms.php:1096
+msgid "Will appear next to your field label as a question mark with a popup tip bubble."
+msgstr "Tulee näkyviin kenttämerkkisi viereen kysymysmerkkinä pop-up vinkkikuplassa. "
+
+#: emp-forms.php:833 emp-forms.php:858 emp-forms.php:902 emp-forms.php:912
+#: emp-forms.php:922 emp-forms.php:932 emp-forms.php:968 emp-forms.php:978
+#: emp-forms.php:988 emp-forms.php:998 emp-forms.php:1026 emp-forms.php:1054
+#: emp-forms.php:1082 emp-forms.php:1112 emp-forms.php:1145
+msgid "Default:"
+msgstr "Oletus"
+
+#: emp-forms.php:842
+msgid "Content"
+msgstr "Sisältö"
+
+#: emp-forms.php:844
+msgid "This html will be displayed on your form, the label for this field is used only for reference purposes."
+msgstr "Tämä html näytetään lomakkeessasi, tämän kentän merkkiä käytetään vain viitetietona. "
+
+#: emp-forms.php:874
+msgid "Date Range?"
+msgstr "Päivämäärien väli?"
+
+#: emp-forms.php:878
+msgid "If selected, this field will also have an end-date."
+msgstr "Jos tämä on valittu, tällä kentällä on myös päättymispäivä. "
+
+#: emp-forms.php:882 emp-forms.php:948
+msgid "Separator"
+msgstr "Erottaja"
+
+#: emp-forms.php:885 emp-forms.php:951
+msgid "This text will appear between the two date fields if this is a date range."
+msgstr "Tämä teksti ilmestyy kahden päivämäärän väliin, jos tämä on päivämäärävälillä. "
+
+#: emp-forms.php:896 emp-forms.php:961
+msgid "Error Messages"
+msgstr "Virheviestit"
+
+#: emp-forms.php:897 emp-forms.php:963
+msgid "Field Required"
+msgstr "Pakollinen kenttä"
+
+#: emp-forms.php:901 emp-forms.php:967
+msgid "This error will show this field is required and no value is entered."
+msgstr "Tämä virhe näkyy, jos kenttä on pakollinen ja arvoa ei ole annettu. "
+
+#: emp-forms.php:907 emp-forms.php:973
+msgid "Incorrect Formatting"
+msgstr "Väärä formatointi"
+
+#: emp-forms.php:911
+msgid "This error will show if an incorrect date format is used."
+msgstr "Tämä virhe näytetään, jos on käytetty väärää päivämäärämuotoa. "
+
+#: emp-forms.php:912
+msgid "Please use the date picker provided to select the appropriate date format."
+msgstr "Ole hyvä ja käytä päivämäärän valitsijaa valitaksesi oikeian päivämäärän muodon. "
+
+#: emp-forms.php:917
+msgid "End date required"
+msgstr "Päättymispäivä on pakollinen"
+
+#: emp-forms.php:921
+msgid "This error will show if the field is a date-range and no end date is selected."
+msgstr "Tämä virhe näkyy, jos kenttä on päivämäärien rajoissa ja loppupäivämäärää ei ole valittu. "
+
+#: emp-forms.php:922
+msgid "You must provide an end date."
+msgstr "Sinun tulee antaa päättymispäivä."
+
+#: emp-forms.php:927
+msgid "Start date required"
+msgstr "Aloituspäivämäärä vaaditaan. "
+
+#: emp-forms.php:931
+msgid "This error will show if the field is a date-range and no start date is selected."
+msgstr "Tämä virhe näkyy, jos kenttä on päivämäärien rajoissa ja alkupäivämäärää ei ole valittu. "
+
+#: emp-forms.php:940
+msgid "Time Range?"
+msgstr "Aikaväli?"
+
+#: emp-forms.php:944
+msgid "If selected, this field will also have an end-time."
+msgstr "Jos valittu, tällä kentällä on myös päättymisaika. "
+
+#: emp-forms.php:977
+msgid "This error will show if an incorrect time format is used."
+msgstr "Tämä virhe näkyy jos on käytetty väärää aikaformaattia. "
+
+#: emp-forms.php:983
+msgid "End time required"
+msgstr "Päättymisaika vaaditaaan"
+
+#: emp-forms.php:987
+msgid "This error will show if the field is a time-range and no end time is selected."
+msgstr "Tämä virhe näkyy, jos kenttä on aikavälillä ja loppumisaikaa ei ole valittu. "
+
+#: emp-forms.php:993
+msgid "Start time required"
+msgstr "Alkamisaika vaaditaan"
+
+#: emp-forms.php:997
+msgid "This error will show if the field is a time-range and no start time is selected."
+msgstr "Tämä virhe näkyy, jos kenttä on aikavälillä ja alkamisaikaa ei ole valittu. "
+
+#: emp-install.php:155
+msgid "Pay With"
+msgstr "Maksuväline"
+
+#: emp-install.php:157
+msgid "PayPal"
+msgstr "PayPal"
+
+#: emp-install.php:160 emp-install.php:165 emp-install.php:169
+msgid "Booking successful."
+msgstr "Varaus onnistunut. "
+
+#: emp-install.php:168
+msgid "Credit Card"
+msgstr "Luottokortti"
+
+#: emp-install.php:170
+msgid "Booking successful. You have not been charged for this booking."
+msgstr "Varaus onnistunut. Sinua ei ole veloitettu tästä varauksesta. "
+
+#: emp-install.php:174
+msgid "<br/><br/>-------------------------------<br/>Powered by Events Manager - http://wp-events-plugin.com"
+msgstr "<br/><br/>-------------------------------<br/>Powered by Events Manager - http://wp-events-plugin.com"
+
+#: emp-install.php:175
+msgid "Dear #_BOOKINGNAME, <br/>This is a reminder about your #_BOOKINGSPACES space/spaces reserved for #_EVENTNAME.<br/>When : #_EVENTDATES @ #_EVENTTIMES<br/>Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br/>We look forward to seeing you there!<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr "Hyvä #_BOOKINGNAME, <br/> Tämä on muistutus #_BOOKINGSPACES varatuista paikoista tapahtumaan #_EVENTNAME.<br/>Aika : #_EVENTDATES @ #_EVENTTIMES<br/>Paikka : #_LOCATIONNAME - #_LOCATIONFULLLINE<br/>Nähdään!<br/>Ystävällisin terveisin,<br/>#_CONTACTNAME"
+
+#: emp-updates.php:32
+msgid "Please enter a valid API key in your <a href=\"%s\">settings page</a>."
+msgstr "Lisää voimassa oleva API avain asetussivullasi <a href=\"%s\">settings page</a>."
+
+#: emp-updates.php:41
+msgid "To access automatic updates, you must update your <a href=\"%s\">Membership Key</a> for Events Mananager Pro <a href=\"#pro-api\">here</a>. Only admins see this message."
+msgstr "Päästäksesi käsiksi automaattisiin päivityksiin, sinun tulee päivittää <a href=\"%s\">Jäsenyysavain</a> Events Manager Pro <a href=\"#pro-api\">here</a>. Vain hallinnoijat näkevät tämän viestin. "
+
+#: emp-updates.php:104
+msgid "looking for dev mode options? we moved it into <em>Admin Tools</em>"
+msgstr "Etsitkö kehitysmoodin vaihtoehtoja? Siirsimme ne <em>Admin Tools</em>"
+
+#: events-manager-pro.php:154
+msgid "Please make sure you install Events Manager as well. You can search and install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/events-manager/\">here</a>."
+msgstr "Varmista, että asennat Events Managerin myös. Voit etsiä ja asentaa tämän lisäosan lisäosa-asentajasta tai ladata sen <a href=\"http://wordpress.org/extend/plugins/events-manager/\">here</a>."
+
+#: events-manager-pro.php:154 events-manager-pro.php:160
+msgid "Only admins see this message."
+msgstr "Vain hallinnoijat näkevät tämän viesti. "
+
+#: events-manager-pro.php:160
+msgid "Please make sure you have the <a href=\"http://wordpress.org/extend/plugins/events-manager/\">latest version</a> of Events Manager installed, as this may prevent Pro from functioning properly."
+msgstr "Ole hyvä ja varmista <a href=\"http://wordpress.org/extend/plugins/events-manager/\">latest version</a>, että Events Managerin viimeisin versio on asennettu, koska se saattaa estää Pro:ta toimimasta oikein."
+
+#: add-ons/gateways.php:260
+msgid "Payment Gateways"
+msgstr "Maksun yhdyskäytävät"
+
+#: add-ons/bookings-form/attendee-forms.php:307 add-ons/coupons.php:586
+#: add-ons/coupons.php:597 add-ons/gateways/gateways.transactions.php:93
+msgid "Event"
+msgstr "Tapahtuma"
+
+#: add-ons/gateways/gateways.transactions.php:94
+msgid "User"
+msgstr "Käyttäjä"
+
+#: add-ons/gateways/gateways.transactions.php:95
+msgid "Date"
+msgstr "Päiväys"
+
+#: add-ons/gateways/gateway.offline.php:186
+#: add-ons/gateways/gateways.transactions.php:96
+msgid "Amount"
+msgstr "Summa"
+
+#: add-ons/gateways/gateways.transactions.php:97
+msgid "Transaction id"
+msgstr "Maksun tunniste"
+
+#: add-ons/gateways/gateways.transactions.php:99
+msgid "Status"
+msgstr "Tila"
+
+#: add-ons/gateways/gateways.transactions.php:100
+msgid "Notes"
+msgstr "Muistiinpanot"
+
+#: add-ons/gateways/gateways.transactions.php:230
+#: add-ons/gateways/gateways.transactions.php:239
+#: add-ons/gateways/gateways.transactions.php:248
+msgid "None yet"
+msgstr "Ei yhtään vielä"
+
+#: add-ons/bookings-form/attendee-forms.php:707
+#: add-ons/gateways/gateways.transactions.php:257
+msgid "None"
+msgstr ""
+"\t\n"
+"Ei yhtään"
+
+#: add-ons/gateways/gateways.transactions.php:273
+msgid "No Transactions"
+msgstr "Ei maksutapahtumia"
+
+#: add-ons/gateways.php:283
+msgid "Gateway updated."
+msgstr "Yhdyskäytävä päivitetty. "
+
+#: add-ons/gateways.php:284
+msgid "Gateway not updated."
+msgstr "Yhdyskäytävää ei ole päivitetty. "
+
+#: add-ons/gateways.php:285
+msgid "Gateway activated."
+msgstr "Yhdyskäytävä aktivoitu. "
+
+#: add-ons/gateways.php:286
+msgid "Gateway not activated."
+msgstr "Yhdyskäytävä ei ole aktivoitu. "
+
+#: add-ons/gateways.php:287
+msgid "Gateway deactivated."
+msgstr "Yhdyskäytävä otettu pois käytöstä. "
+
+#: add-ons/gateways.php:288
+msgid "Gateway not deactivated."
+msgstr "Yhdyskäytävää ei ole otettu pois käytöstä. "
+
+#: add-ons/gateways.php:289
+msgid "Gateway activation toggled."
+msgstr "Yhdyskäytävän aktivointi kytketty. "
+
+#: add-ons/gateways.php:293
+msgid "Edit Gateways"
+msgstr "Muokkaa yhdyskäytäviä. "
+
+#: add-ons/gateways.php:305 add-ons/gateways.php:404
+msgid "Bulk Actions"
+msgstr "Ryhmätoiminnot"
+
+#: add-ons/gateways.php:306 add-ons/gateways.php:405
+msgid "Toggle activation"
+msgstr "Kytkennän aktivointi"
+
+#: add-ons/gateways.php:308
+msgid "Apply"
+msgstr "Käytä"
+
+#: add-ons/gateways.php:317
+msgid "Gateway Name"
+msgstr "Yhdyskäytävän Nimi"
+
+#: add-ons/gateways.php:318 add-ons/gateways.php:378
+msgid "Active"
+msgstr "Aktiivinen"
+
+#: add-ons/gateways/gateways.transactions.php:52 add-ons/gateways.php:319
+msgid "Transactions"
+msgstr "Maksutapahtumat"
+
+#: add-ons/gateways.php:365
+msgid "Settings"
+msgstr "Asetukset"
+
+#: add-ons/gateways.php:368
+msgid "Deactivate"
+msgstr "Deaktivoi"
+
+#: add-ons/gateways.php:370
+msgid "Activate"
+msgstr "Aktivoi"
+
+#: add-ons/gateways.php:380
+msgid "Inactive"
+msgstr "Toimeton"
+
+#: add-ons/gateways.php:385
+msgid "View transactions"
+msgstr "Katso maksutapahtumat"
+
+#: add-ons/gateways/gateway.offline.php:46
+msgid "Payment has been registered."
+msgstr "Maksu on rekisteröity. "
+
+#: add-ons/gateways/gateway.offline.php:50
+msgid "Booking is now fully paid and confirmed."
+msgstr "Maksu on nyt täysin maksettu ja vahvistettu. "
+
+#: emp-install.php:164 emp-install.php:166
+msgid "Pay Offline"
+msgstr "Maksa muutoin kuin verkkomaksuna. "
+
+#: add-ons/gateways/gateway.offline.php:178
+#: add-ons/gateways/gateway.offline.php:203
+msgid "Add Offline Payment"
+msgstr "Lisää offline-maksu"
+
+#: add-ons/gateways/gateway.offline.php:193
+msgid "Comments"
+msgstr "Kommentteja"
+
+#: add-ons/coupons.php:588 add-ons/coupons.php:599
+msgid "Spaces"
+msgstr "Tilat"
+
+#: add-ons/bookings-form.php:50 emp-install.php:133
+msgid "Comment"
+msgstr "Kommentti"
+
+#: add-ons/gateways/gateway.offline.php:148
+#: add-ons/gateways/gateway.paypal.php:150
+msgid "Approve"
+msgstr "Hyväksy"
+
+#: add-ons/gateways/gateway.offline.php:149
+msgid "Reject"
+msgstr "Hylkää"
+
+#: add-ons/bookings-form/attendee-forms.php:750 add-ons/bookings-form.php:545
+#: add-ons/coupons.php:489 add-ons/gateways/gateway.offline.php:150
+#: add-ons/gateways/gateway.paypal.php:151
+#: add-ons/gateways/gateways.transactions.php:263
+msgid "Delete"
+msgstr "Poista"
+
+#: add-ons/coupons.php:626 add-ons/gateways/gateway.offline.php:151
+#: add-ons/gateways/gateway.paypal.php:152
+msgid "Edit/View"
+msgstr "Muokkaa/Katsele"
+
+#: add-ons/gateways/gateway.offline.php:69
+msgid "Be aware that by approving a booking awaiting payment, a full payment transaction will be registered against this booking, meaning that it will be considered as paid."
+msgstr "Huomaa, että hyväksyessäsi vajaan maksusuorituksen, täysi maksu rekisteröidään tälle varaukselle ja sitä pidetään täysin maksettuna. "
+
+#: add-ons/gateways/gateway.offline.php:160
+msgid "Add Booking"
+msgstr "Lisää varaus"
+
+#: add-ons/gateways/gateway.offline.php:168
+msgid "add booking"
+msgstr "lisää varaus"
+
+#: emp-install.php:162
+msgid "Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you along with a seperate email containing account details to access your booking information on this site. You may log into your account at www.paypal.com to view details of this transaction."
+msgstr "Kiitoksia maksusuosituksesta. Maksutapahtumasi on suoritettu ja kuitti ostoksestasi on lähetetty sinulle sähköpostina erillisen vahvistusviestin kanssa, johon on kirjattu yksityiskohdat siitä, miten pääset katsomaan varausinformaatiotasi täällä. Voit kirjautua tilillesi osoitteessa www.paypal.com katsoaksesi yksityiskohtia tästä maksutapahtumasta. "
+
+#: add-ons/gateways/gateway.paypal.php:481
+msgid "PayPal Email"
+msgstr "PayPal sähköposti"
+
+#: add-ons/gateways/gateway.paypal.php:487
+msgid "Paypal Currency"
+msgstr "PayPal rahayksikkö"
+
+#: add-ons/gateways/gateway.paypal.php:488
+msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+msgstr "Valitse rahayksikkö seuraavassa <a href=\"%s\">settings</a> page."
+
+#: add-ons/gateways/gateway.paypal.php:514
+msgid "PayPal Mode"
+msgstr "PayPal -tila"
+
+#: add-ons/gateways/gateway.paypal.php:517
+msgid "Live Site"
+msgstr "Tuotantoympäristö"
+
+#: add-ons/gateways/gateway.paypal.php:518
+msgid "Test Mode (Sandbox)"
+msgstr "Kokeiluympäristö (hiekkalaatikko)"
+
+#: add-ons/gateways/gateway.paypal.php:538
+msgid "PayPal Page Logo"
+msgstr "PayPal Sivu Logo"
+
+#: add-ons/gateways/gateway.paypal.php:541
+msgid "Add your logo to the PayPal payment page. It's highly recommended you link to a https:// address."
+msgstr "Lisää logosi PayPal maksusivulle. On suositeltavaa, että linkität sen osoitteeseen https:// address."
+
+#: add-ons/gateways/gateway.paypal.php:545
+msgid "Border Color"
+msgstr "Rajan väri"
+
+#: add-ons/gateways/gateway.paypal.php:548
+msgid "Provide a hex value color to change the color from the default blue to another color (e.g. #CCAAAA)."
+msgstr "Anna heksa-arvoväri muuttaaksesi väriä oletussinisestä toiseen väriin  (e.g. #CCAAAA)."
+
+#: add-ons/gateways/gateway.authorize.aim.php:421
+#: add-ons/gateways/gateway.paypal.php:559
+msgid "Manually approve completed transactions?"
+msgstr "Hyväksy tapahtuneet maksutapahtumat manuaalisesti?"
+
+#: add-ons/gateways/gateway.authorize.aim.php:424
+#: add-ons/gateways/gateway.paypal.php:562
+msgid "By default, when someone pays for a booking, it gets automatically approved once the payment is confirmed. If you would like to manually verify and approve bookings, tick this box."
+msgstr "Kun joku maksaa varauksesta, oletuksena on, että se hyväksytään automaattisesti, kun maksu on vahvistettu. Jos haluat vahvistaa manuaalisesti tai hyväksyä varauksia, valitse tämä. "
+
+#: emp-forms.php:634
+msgid "The email address isn&#8217;t correct."
+msgstr "Sähköpostiosoite isn&#8217;t on virheellinen."
+
+#: add-ons/bookings-form.php:340 add-ons/gateways/gateway.authorize.aim.php:407
+#: emp-forms.php:121
+msgid "Yes"
+msgstr "Kyllä"
+
+#: add-ons/bookings-form.php:340 add-ons/gateways/gateway.authorize.aim.php:408
+#: emp-forms.php:121
+msgid "No"
+msgstr "Ei"
+
+#: add-ons/bookings-form/attendee-forms.php:633 add-ons/bookings-form.php:445
+#: add-ons/gateways.php:524 add-ons/user-fields.php:235
+msgid "Changes Saved"
+msgstr "Muutokset tallennettu"
+
+#: add-ons/bookings-form.php:495
+msgid "Booking Form - General Information"
+msgstr "Varauslomake - Yleistieto"
+
+#: add-ons/bookings-form.php:498
+msgid "You can customize the fields shown in your booking forms below. "
+msgstr "Voit muokata varauslomakkeessa näkyvät kentät alapuolella.  "
+
+#: add-ons/bookings-form/attendee-forms.php:755 add-ons/bookings-form.php:550
+msgid "<strong>Important:</strong> When editing this form, to make sure your old booking information is displayed, make sure new field ids correspond with the old ones."
+msgstr "<strong>Tärkeää:</strong> Kun muokkaat tätä lomaketta, jotta vanha varaustieto pysyisi näkyvissä, varmista, että tämän kentän tunnisteet vastaavat vanhoja. "
+
+#: emp-forms.php:738
+msgid "DO NOT change these values if you want to keep your field settings associated with previous booking fields."
+msgstr "ÄLÄ muuta näitä arvoja, jos haluat pitää kenttien asetukset yhdistettynä aikaisempiin varauskenttiin. "
+
+#: emp-forms.php:750
+msgid "Select Type"
+msgstr "Valitse tyyppi"
+
+#: emp-forms.php:752
+msgid "Customizable Fields"
+msgstr "Muokattavia kenttiä"
+
+#: emp-forms.php:770
+msgid "Registration Fields"
+msgstr "Ilmoittautumiskentät"
+
+#: emp-forms.php:793
+msgid "remove"
+msgstr "poista"
+
+#: emp-forms.php:793 emp-forms.php:1181 emp-forms.php:1184 emp-forms.php:1248
+msgid "options"
+msgstr "valinnat"
+
+#: emp-forms.php:799 emp-forms.php:1007
+msgid "Options"
+msgstr "Valinnat"
+
+#: emp-forms.php:802 emp-forms.php:1010
+msgid "Available options, one per line."
+msgstr "Mahdolliset valinnat, yksi per rivi. "
+
+#: emp-forms.php:806
+msgid "Use Default?"
+msgstr "Käytä oletuksia?"
+
+#: emp-forms.php:810
+msgid "If checked, the first value above will be used."
+msgstr "Jos valittu, ensimmäinen arvo ylhäältä on käytössä. "
+
+#: emp-forms.php:814
+msgid "Default Text"
+msgstr "Oletusteksti"
+
+#: emp-forms.php:816
+msgid "Select ..."
+msgstr "Valitse ..."
+
+#: emp-forms.php:817
+msgid "Shown when a default value isn't selected, selected by default."
+msgstr "Tämä näytetään, kun oletusarvo ei ole valittu, valitaan oletuksena. "
+
+#: emp-forms.php:828 emp-forms.php:853 emp-forms.php:1021 emp-forms.php:1049
+#: emp-forms.php:1077 emp-forms.php:1107 emp-forms.php:1140
+msgid "Error Message"
+msgstr "Virheilmoitus"
+
+#: emp-forms.php:832 emp-forms.php:857 emp-forms.php:1025
+msgid "This error will show if a value isn't chosen."
+msgstr "Tämä virheilmoitus tulee jos arvoa ei ole valittu."
+
+#: emp-forms.php:1035
+msgid "Checked by default?"
+msgstr "Tarkista oletuksena?"
+
+#: emp-forms.php:1053
+msgid "This error will show if this box is not checked."
+msgstr "Tämä virhe näkyy jos tämä laatikkoa ei ole merkitty. "
+
+#: emp-forms.php:1070 emp-forms.php:1100
+msgid "Regex"
+msgstr "Säännöllinen lauseke"
+
+#: emp-forms.php:1073 emp-forms.php:1103
+msgid "By adding a regex expression, you can limit the possible values a user can input, for example the following only allows numbers: "
+msgstr "Lisäämällä säännöllisen lausekkeen voit rajoittaa "
+
+#: emp-forms.php:1081 emp-forms.php:1111
+msgid "If the regex above does not match this error will be displayed."
+msgstr "Jos säännöllinen lauseke yllä ei sovi yhteen, tämä virhe näkyy. "
+
+#: emp-forms.php:1133
+msgid "Private Key"
+msgstr "Yksityinen avain"
+
+#: emp-forms.php:1129 emp-forms.php:1136
+msgid "Required, get your keys <a href=\"%s\">here</a>"
+msgstr "Pakollinen, hanki avaimesi täältä <a href=\"%s\">here</a>"
+
+#: emp-forms.php:1126
+msgid "Public Key"
+msgstr "Yleinen avain"
+
+#: emp-forms.php:1144
+msgid "This error will show if the captcha is not correct."
+msgstr "Tämä virhe tulee näkyviin, kun kuvavarmennus ei ole onnistunut. "
+
+#: emp-forms.php:1161
+msgid "Add booking field"
+msgstr "Lisää varauskenttä"
+
+#: emp-forms.php:1228
+msgid "hide options"
+msgstr "piilota valinnat"
+
+#: emp-install.php:135
+msgid "Please fill in the field: %s"
+msgstr "Ole hyvä täytä kenttä: %s"
+
+#: add-ons/bookings-form/attendee-forms.php:41 add-ons/bookings-form.php:41
+#: add-ons/coupons/coupon.php:53 add-ons/coupons.php:465
+#: add-ons/coupons.php:475 add-ons/coupons.php:700 add-ons/user-fields.php:140
+#: add-ons/user-fields.php:142 emp-install.php:124
+msgid "Name"
+msgstr "Nimi"
+
+#: add-ons/bookings-form.php:42 add-ons/gateways.php:550
+#: add-ons/user-fields.php:144 emp-install.php:125
+msgid "Email"
+msgstr "Sähköposti"
+
+#: add-ons/bookings-form.php:48 add-ons/gateways.php:42 emp-install.php:131
+#: emp-install.php:143
+msgid "Phone"
+msgstr "Puhelin"
+
+#: emp-updates.php:48
+msgid "Dev Mode active: Just a friendly reminder that you have added %s to your wp-config.php file. Only admins see this message, and it will go away when you remove that line."
+msgstr "Kehitysmoodi aktiivinen: Ystävällinen muistutus siitä, että olet lisännyt %s tiedostoosi wp-config.php file. Vain hallinnoijat näkevät tämän viestin, joka häviää, kun poistat kyseisen rivin. "
+
+#: add-ons/emails.php:170 add-ons/gateways.php:245 emp-forms.php:31
+#: emp-updates.php:82
+msgid "Click to toggle"
+msgstr "Klikkaa merkataksesi"
+
+#: emp-updates.php:82
+msgid "Pro Membership Key"
+msgstr "Pro Jäsenyysavain"
+
+#: emp-updates.php:86
+msgid "Pro Member Key"
+msgstr "Pro Jäsenavain"
+
+#: emp-updates.php:86
+msgid "Insert your Pro Member Key to access automatic updates you can get your membership key from <a href=\"%s\">here</a>."
+msgstr "Lisää Pro Jäsenavaimesi päästäksesi käsiksi automaattisiin päivityksiin. Saat jäsenyysavaimesi sijainnista <a href=\"%s\">here</a>."
+
+#: add-ons/gateways/gateway.php:377
+msgid "Edit &quot;%s&quot; settings"
+msgstr "Muokkaa &quot;%s&quot; asetukset"
+
+#: add-ons/coupons.php:758 add-ons/gateways/gateway.php:424
+msgid "Save Changes"
+msgstr "Tallenna muutokset"
+
+#: add-ons/gateways/gateway.offline.php:239
+msgid "Add Booking For &quot;%s&quot;"
+msgstr "Lisää varaus &quot;%s&quot;"
+
+#: add-ons/gateways/gateway.paypal.php:122
+msgid "Resume Payment"
+msgstr "Jatka maksutapahtumaa"
+
+#: emp-install.php:159
+msgid "Please wait whilst you are redirected to PayPal to proceed with payment."
+msgstr "Ole hvä ja odota kunnes sinut ohjataa PayPal -käyttöliittymään suorittamaan maksu. "

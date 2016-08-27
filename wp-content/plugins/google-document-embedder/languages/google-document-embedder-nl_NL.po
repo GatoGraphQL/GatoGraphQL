@@ -1,0 +1,1022 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Doc Embedder\n"
+"POT-Creation-Date: 2013-01-29 13:40-0600\n"
+"PO-Revision-Date: 2013-11-29 19:11+0100\n"
+"Last-Translator: Niko Strijbol <strijbol.niko@gmail.com>\n"
+"Language-Team: Niko Strijbol <strijbol.niko@gmail.com>\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Generator: Poedit 1.5.7\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: functions-admin.php:266
+msgid "Import"
+msgstr "Importeren"
+
+#: functions-admin.php:277
+msgid "Performing full import..."
+msgstr "Volledige import uitvoeren..."
+
+#: functions-admin.php:281 functions-admin.php:306
+msgid "Importing profiles"
+msgstr "Profielen importeren"
+
+#: functions-admin.php:287 functions-admin.php:301 functions-admin.php:312
+#: functions-admin.php:325
+msgid "done"
+msgstr "klaar"
+
+#: functions-admin.php:290 functions-admin.php:299 functions-admin.php:315
+#: functions-admin.php:323
+msgid "failed"
+msgstr "mislukt"
+
+#: functions-admin.php:296
+msgid "Importing settings"
+msgstr "Instellingen importeren"
+
+#: functions-admin.php:319
+msgid "Importing settings... "
+msgstr "Instellingen importeren..."
+
+#: functions-admin.php:328 functions-admin.php:571 options.php:141
+msgid "Please select a valid export file to import."
+msgstr "Selecteer een geldige exportbestand om te importeren."
+
+#: functions-admin.php:332
+msgid "All or part of the import failed. See above for information."
+msgstr ""
+"Alles of stukken van het importeren zijn mislukt. Zie hierboven voor meer "
+"informatie."
+
+#: functions-admin.php:334
+msgid "Import completed successfully."
+msgstr "Importeren is volledig succesvol."
+
+#: functions-admin.php:337
+msgid "Return to GDE Settings"
+msgstr "Ga terug naar GDE-instellingen"
+
+#: functions-admin.php:414 functions-admin.php:540 options.php:168
+#: libs/tab-advanced.php:143
+msgid "Settings"
+msgstr "Instellingen"
+
+#: functions-admin.php:423
+msgid "You do not have sufficient permissions to access this page"
+msgstr "Je hebt onvoldoende rechten voor toegang tot deze pagina"
+
+#: functions-admin.php:528
+msgid "plugin"
+msgstr "plug-in"
+
+#: functions-admin.php:529
+msgid "Version"
+msgstr "Versie"
+
+#: functions-admin.php:567
+msgid "This profile will be permanently deleted."
+msgstr "Dit profiel zal volledig verwijderd worden."
+
+#: functions-admin.php:567 functions-admin.php:568 functions-admin.php:569
+#: functions-admin.php:572
+msgid "Are you sure?"
+msgstr "Weet je het zeker?"
+
+#: functions-admin.php:568
+msgid "Settings for this profile will overwrite the default profile."
+msgstr ""
+"Instellingen voor dit profiel zullen de standaardinstelling overschrijven."
+
+#: functions-admin.php:569
+msgid ""
+"Your profile list will be reset to its original state. All changes will be "
+"lost."
+msgstr ""
+"Je profiel lijst zal teruggezet worden naar de originele instellingen. Alle "
+"aanpassingen gaan verloren."
+
+#: functions-admin.php:572
+msgid ""
+"Any settings or duplicate profile names in this import will overwrite the "
+"current values."
+msgstr ""
+"Elke instelling of dubbel profielnamen die geïmporteerd worden zullen "
+"bestaande waarden overschrijven."
+
+#: functions-admin.php:574
+msgid "Please include a shortcode or message to request support."
+msgstr "Graag inclusief de shortcode of bericht om hulp te verkrijgen."
+
+#: functions-admin.php:612
+msgid "Embed file using Google Doc Embedder"
+msgstr "Bestand insluiten met Google Doc Embedder"
+
+#: functions-admin.php:629 libs/lib-eddialog.php:85
+msgid "Select the GDE viewer profile to use"
+msgstr "Selecteer het GDE-viewerprofiel voor gebruik"
+
+#: functions-admin.php:780
+msgid ""
+"You are running a pre-release version of Google Doc Embedder. Please watch "
+"this space for important updates."
+msgstr ""
+"Je gebruikt een pre-release versie van Google Doc Embedder. Kijk hier om "
+"informatie te zien over belangrijke updates"
+
+#: functions.php:104
+msgid "File not specified, check shortcode syntax"
+msgstr "Bestand niet gespecificieerd, controleer de shortcode-syntax"
+
+#: functions.php:105
+msgid "Requested URL is invalid"
+msgstr "Aangevraagde URL is foutief"
+
+#: functions.php:106
+msgid "Unsupported File Type"
+msgstr "Niet ondersteund bestandstype"
+
+#: functions.php:107
+msgid "Unable to determine file type from URL"
+msgstr "Kan bestandstype niet verkrijgen van URL"
+
+#: functions.php:108
+msgid "Error retrieving file - if necessary turn off error checking"
+msgstr "Fout met ophalen van bestand - schakel indien nodig foutcontrole uit"
+
+#: functions.php:232
+msgid "Unknown"
+msgstr "Onbekend"
+
+# Megabytes (for file size reporting)
+#: functions.php:234 libs/tab-advanced.php:38
+msgid "MB"
+msgstr "MB"
+
+#: functions.php:366 gviewer.php:304 libs/lib-setup.php:71
+#: libs/lib-setup.php:121
+msgid "Download"
+msgstr "Downloaden"
+
+#: functions.php:505 view.php:417
+msgid "Error"
+msgstr "Fout"
+
+#: gviewer.php:78
+msgid "Unable to load profile settings"
+msgstr "Niet in staat de profielopties te laden"
+
+#: gviewer.php:113 gviewer.php:125
+msgid "Unable to load requested profile."
+msgstr "Niet in staat het gevraagde profiel te laden."
+
+#: gviewer.php:238
+msgid "Unable to secure document"
+msgstr "Niet in staat het document te beveiligen"
+
+#: gviewer.php:401
+msgid "Setup wasn't able to create the required database tables."
+msgstr "Setup kon de vereiste databasetabellen niet aanmaken."
+
+#: load.php:8 libs/lib-formsubmit.php:9 libs/lib-secure.php:9
+#: libs/lib-service.php:12 libs/lib-service.php:59 libs/lib-service.php:80
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Je hebt onvoldoende toegangsrechten voor deze pagina."
+
+#: load.php:45
+msgid "Direct access to this file is not permitted."
+msgstr "Directe toegang tot dit bestand is niet toegestaan."
+
+#: load.php:71
+msgid "The requested file was not found."
+msgstr "Gevraagde bestand is niet gevonden."
+
+#: load.php:76
+msgid "Unable to open the requested file. "
+msgstr "Het is niet mogelijk het gevraagde bestand te openen."
+
+#: load.php:92 load.php:96
+msgid "The document file type is not supported."
+msgstr "Het document-bestandstype wordt niet ondersteund."
+
+#: options.php:13 options.php:68
+msgid "Default profile <strong>updated</strong>."
+msgstr "Standaardprofiel <strong>bijgewerkt</strong>."
+
+#: options.php:15 options.php:53
+msgid "Unable to update profile."
+msgstr "Niet mogelijk het profiel bij te werken."
+
+#: options.php:28
+msgid "Profile name must contain at least one letter."
+msgstr "Profielnaam moet minstens een letter bevatten."
+
+#: options.php:31
+msgid "Profile name already exists. Please choose another name."
+msgstr "Profielnaam bestaat al. Kies een andere naam."
+
+#: options.php:38
+msgid "New profile <strong>created</strong>."
+msgstr "Nieuw profiel <strong>aangemaakt</strong>."
+
+#: options.php:40 options.php:43
+msgid "Unable to create profile."
+msgstr "Niet mogelijk een een profiel aan te maken"
+
+#: options.php:51
+msgid "Profile <strong>updated</strong>."
+msgstr "Profiel <strong>bijgewerkt</strong>."
+
+#: options.php:61
+msgid "Profile <strong>deleted</strong>."
+msgstr "Profiel <strong>verwijderd</strong>."
+
+#: options.php:63
+msgid "Unable to delete profile."
+msgstr "Het is niet mogelijk het profiel te verwijderen."
+
+#: options.php:105
+msgid "Unable to enable diagnostic logging."
+msgstr "Het is niet mogelijk de diagnostische logging in te schakelen."
+
+#: options.php:117 options.php:119
+msgid "Settings <strong>updated</strong>."
+msgstr "Instellingen <strong>bijgewerkt</strong>."
+
+#: options.php:177 options.php:190
+msgid "General"
+msgstr "Algemeen"
+
+#: options.php:182 options.php:195 libs/tab-advanced.php:142
+msgid "Profiles"
+msgstr "Profiel"
+
+#: options.php:203
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+#: options.php:208
+msgid "Support"
+msgstr "Ondersteuning"
+
+#: options.php:349 libs/tab-support.php:29
+msgid "Help"
+msgstr "Help"
+
+#: options.php:375
+msgid "Edit"
+msgstr "Bewerken"
+
+#: options.php:376
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: options.php:377
+msgid "Make Default"
+msgstr "Als Standaard Instellen"
+
+#: view.php:42
+msgid "Invalid URL format"
+msgstr "Foutief URL-formaat"
+
+#: view.php:418
+msgid ""
+"Unable to retrieve document contents. Please try again or switch to Standard "
+"Viewer."
+msgstr ""
+"Het is niet mogelijk om de inhoud van het document op te halen. Probeer "
+"opnieuw of schakel naar de standaardviewer."
+
+#: js/tb-newwin.php:7
+msgid "View in full screen"
+msgstr "Bekijken in volledig scherm"
+
+#: js/tb-newwin.php:11
+msgid "Open in new window"
+msgstr "Openen in een nieuw scherm"
+
+#: libs/lib-eddialog.php:8
+msgid "Access denied."
+msgstr "Toegang geweigerd."
+
+#: libs/lib-eddialog.php:52
+msgid "Insert Google Doc Embedder Shortcode"
+msgstr "Google Doc Embedder-shortcode Invoegen"
+
+#: libs/lib-eddialog.php:55
+msgid "Required"
+msgstr "Verplicht"
+
+#: libs/lib-eddialog.php:59
+msgid "URL or Filename"
+msgstr "URL of bestandsnaam"
+
+#: libs/lib-eddialog.php:60
+msgid "Full URL or filename to append to profile Base URL"
+msgstr ""
+"Volledige URL of bestandnaam dat toegevoegd wordt aan het Base URL-profiel"
+
+#: libs/lib-eddialog.php:65
+msgid "Profile Base URL will be prefixed"
+msgstr "Base URL-profiel wordt vooraf gegaan door"
+
+#: libs/lib-eddialog.php:68
+msgid "Unsupported file type"
+msgstr "Niet-ondersteund bestandstype"
+
+#: libs/lib-eddialog.php:74
+msgid "Profile"
+msgstr "Profiel"
+
+#: libs/lib-eddialog.php:93
+msgid "Optional (Override Profile Settings)"
+msgstr "Optioneel (Profielopties Overschrijven)"
+
+#: libs/lib-eddialog.php:98
+msgid "Use selected profile settings"
+msgstr "Gebruik geselecteerde profielopties"
+
+#: libs/lib-eddialog.php:103 libs/lib-profile.php:201
+msgid "Height"
+msgstr "Hoogte"
+
+#: libs/lib-eddialog.php:108 libs/lib-profile.php:197
+msgid "Width"
+msgstr "Breedte"
+
+#: libs/lib-eddialog.php:109
+#, php-format
+msgid "Format: 40% or 300px"
+msgstr "Formaat: 40% of 300px"
+
+#: libs/lib-eddialog.php:114
+msgid "Start Page #"
+msgstr "Start Pagina #"
+
+#: libs/lib-eddialog.php:122
+msgid "Show Download Link"
+msgstr "Downloadlink tonen"
+
+#: libs/lib-eddialog.php:125
+msgid "Yes"
+msgstr "Ja"
+
+#: libs/lib-eddialog.php:126
+msgid "No"
+msgstr "Nee"
+
+#: libs/lib-eddialog.php:132
+msgid "Disable caching (this document is frequently overwritten)"
+msgstr "Caching uitschakelen (als dit document vaak wordt overschreven)"
+
+#: libs/lib-eddialog.php:143
+msgid "Shortcode Preview"
+msgstr "Shortcode Preview"
+
+#: libs/lib-eddialog.php:151
+msgid "Insert"
+msgstr "Invoegen"
+
+#: libs/lib-eddialog.php:155
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: libs/lib-profile.php:12 libs/tab-advanced.php:134 libs/tab-profiles.php:20
+msgid ""
+"Unable to load profile settings. Please re-activate GDE and if the problem "
+"persists, request help using the \"Support\" tab."
+msgstr ""
+"Niet mogelijk om de profielopties te laden. Heractiveer GDE en als de "
+"problemen blijven, vraag dan hulp aan via het \"Ondersteuning\"stabblad."
+
+#: libs/lib-profile.php:25
+msgid "Default Settings"
+msgstr "Standaardinstellingen"
+
+#: libs/lib-profile.php:26
+msgid ""
+"These settings define the default viewer profile, which is used when no "
+"other profile is specified."
+msgstr ""
+"Deze instellingen definiëren de standaardprofielopties, die worden gebruikt "
+"als er geen specifiek profiel is opgegeven."
+
+#: libs/lib-profile.php:30
+msgid "Edit Profile"
+msgstr "Profiel Bewerken"
+
+#: libs/lib-profile.php:62
+msgid "Viewer Mode"
+msgstr "Viewermodus"
+
+#: libs/lib-profile.php:66
+msgid "Standard Viewer"
+msgstr "Standaardviewer"
+
+#: libs/lib-profile.php:66
+msgid "Embed the basic viewer only"
+msgstr "Enkel de basisviewer insluiten"
+
+#: libs/lib-profile.php:67
+msgid "Enhanced Viewer"
+msgstr "Geavanceerde Viewer"
+
+#: libs/lib-profile.php:67
+msgid "Enable extended viewer options"
+msgstr "Uitgebreide vieweropties inschakelen"
+
+#: libs/lib-profile.php:77
+msgid "Enhanced Viewer Settings"
+msgstr "Vieweropties Inschakelen"
+
+#: libs/lib-profile.php:81
+msgid "Toolbar"
+msgstr "Werkbalk"
+
+#: libs/lib-profile.php:85
+msgid "Remove Toolbar"
+msgstr "Werkbalk Verwijderen"
+
+#: libs/lib-profile.php:90
+msgid "Use Mobile Toolbar"
+msgstr "Mobiele Werkbalk gebruiken"
+
+#: libs/lib-profile.php:94
+msgid "Mobile Devices Only (Default)"
+msgstr "Enkel Bij Mobiele Apparaten (Standaard)"
+
+#: libs/lib-profile.php:94
+msgid "Use mobile toolbar when mobile device detected"
+msgstr "Gebruik mobiele werkbalk als er een mobiel apparaat wordt gedetecteerd"
+
+#: libs/lib-profile.php:95
+msgid "Always"
+msgstr "Altijd"
+
+#: libs/lib-profile.php:95
+msgid "Use mobile toolbar for all visitors"
+msgstr "Mobiele werkbalk voor alle gebruikers gebruiken"
+
+#: libs/lib-profile.php:96
+msgid "Never"
+msgstr "Nooit"
+
+#: libs/lib-profile.php:96
+msgid "Never use mobile toolbar"
+msgstr "Mobiele werkbalk nooit gebruiken"
+
+#: libs/lib-profile.php:103
+msgid "Toolbar Items"
+msgstr "Werkbalkitems"
+
+#: libs/lib-profile.php:106
+msgid "Page Numbers"
+msgstr "Paginanummers"
+
+#: libs/lib-profile.php:107
+msgid "Previous/Next Page"
+msgstr "Vorige/Volgende Pagina"
+
+#: libs/lib-profile.php:108
+msgid "Zoom In/Out"
+msgstr "In-/Uitzoomen"
+
+#: libs/lib-profile.php:109
+msgid "Full Screen/New Window"
+msgstr "Volledige scherm/Nieuw scherm"
+
+#: libs/lib-profile.php:112
+msgid ""
+"Uncheck items to remove from toolbar. Buttons will vary based on file type "
+"and device used."
+msgstr ""
+"Vink items uit als ze verwijderd moeten worden van de werkbalk. De knoppen "
+"zullen variëren, afhankelijk van het bestandstype en het gebruikte apparaat."
+
+#: libs/lib-profile.php:116
+msgid "Full Screen Behavior"
+msgstr "Gedrag Bij Volledig Scherm"
+
+#: libs/lib-profile.php:120
+msgid "Google-Hosted Page (Default)"
+msgstr "Google-Hosted pagina (Standaard)"
+
+#: libs/lib-profile.php:122
+msgid "Full Screen Viewer"
+msgstr "Volledig schermviewer"
+
+#: libs/lib-profile.php:127
+msgid "Open in New Window"
+msgstr "Openen in een nieuwe pagina"
+
+#: libs/lib-profile.php:128
+msgid "Allow Logged-in Users Only"
+msgstr "Enkel Ingelogde Gebruikers Toestaan"
+
+#: libs/lib-profile.php:129
+msgid "Allow Printing"
+msgstr "Printen Toestaan"
+
+#: libs/lib-profile.php:134
+msgid "Page Area Background Color"
+msgstr "Pagina-achtergrondkleur"
+
+#: libs/lib-profile.php:139
+msgid "None (Transparent)"
+msgstr "Geen (transparant)"
+
+#: libs/lib-profile.php:144
+msgid "Page Border Color"
+msgstr "Paginarandkleur"
+
+#: libs/lib-profile.php:149
+msgid "No Border"
+msgstr "Geen kleur"
+
+#: libs/lib-profile.php:154
+msgid "Custom CSS File"
+msgstr "Aangepast CSS-bestand"
+
+#: libs/lib-profile.php:160
+msgid "URL of custom CSS file (may override some of the above options)"
+msgstr ""
+"URL van het aangepaste CSS-bestand (enkele van de bovenstaande opties kunnen "
+"worden overschreven) "
+
+#: libs/lib-profile.php:164
+msgid "Security"
+msgstr "Beveiliging"
+
+#: libs/lib-profile.php:167
+msgid "Hide ability to select/copy/paste text"
+msgstr "Selecteren/kopiëren/plakken van teksten verbergen"
+
+#: libs/lib-profile.php:168
+msgid "Block all download requests for file"
+msgstr "Blokeer alle downloadaanvragen voor het bestand"
+
+#: libs/lib-profile.php:179
+msgid "Default Language"
+msgstr "Standaardtaal"
+
+#: libs/lib-profile.php:191
+msgid "Language of toolbar button tips"
+msgstr "Taal van de werkbalktips"
+
+#: libs/lib-profile.php:195
+msgid "Default Size"
+msgstr "Standaardgrootte"
+
+#: libs/lib-profile.php:206
+msgid "Enter as pixels or percentage (example: 500px or 100%)"
+msgstr "Voer in als pixels of percentage (voorbeeld: 500px of 100%)"
+
+#: libs/lib-profile.php:210
+msgid "File Base URL"
+msgstr "Basis Bestand-URL"
+
+#: libs/lib-profile.php:216
+msgid ""
+"Any file not starting with <code>http</code> will be prefixed by this value"
+msgstr ""
+"Elk bestand dat niet begint met <code>http</code> zal deze waarde erbij "
+"krijgen"
+
+#: libs/lib-profile.php:220
+msgid "Download Link"
+msgstr "Downloadlink"
+
+#: libs/lib-profile.php:224
+msgid "All Users"
+msgstr "Alle Gebruikers"
+
+#: libs/lib-profile.php:224
+msgid "Download link visible to everyone by default"
+msgstr "Downloadlink standaard voor iedereen zichtbaar"
+
+#: libs/lib-profile.php:225
+msgid "Logged-in Users"
+msgstr "Ingelogde Gebruikers"
+
+#: libs/lib-profile.php:225
+msgid "Download link visible to logged-in users"
+msgstr "Downloadlink zichtbaar voor ingelogde gebruikers"
+
+#: libs/lib-profile.php:226 libs/tab-advanced.php:93
+msgid "None"
+msgstr "Geen"
+
+#: libs/lib-profile.php:226
+msgid "Download link is not visible by default"
+msgstr "Downloadlink is niet standaard zichtbaar"
+
+#: libs/lib-profile.php:233
+msgid "Link Text"
+msgstr "Linktekst"
+
+#: libs/lib-profile.php:236
+msgid "You can further customize text using these dynamic replacements:"
+msgstr ""
+"Je kan de tekst verder aanpassen voor het gebruik van deze dynamische "
+"vervangingen:"
+
+#: libs/lib-profile.php:237
+msgid "filename"
+msgstr "bestandsnaam"
+
+#: libs/lib-profile.php:238
+msgid "file type"
+msgstr "bestandstype"
+
+#: libs/lib-profile.php:239
+msgid "file size"
+msgstr "bestandsgrootte"
+
+#: libs/lib-profile.php:243
+msgid "Link Position"
+msgstr "Linklocatie"
+
+#: libs/lib-profile.php:247
+msgid "Above Viewer"
+msgstr "Boven Viewer"
+
+#: libs/lib-profile.php:248
+msgid "Below Viewer"
+msgstr "Onder Viewer"
+
+#: libs/lib-profile.php:254
+msgid "Link Behavior"
+msgstr "Linkgedrag"
+
+#: libs/lib-profile.php:257
+msgid "Force download (bypass browser plugins)"
+msgstr "Download forceren (negeer browserplug-ins)"
+
+#: libs/lib-profile.php:258
+msgid "Shorten URL"
+msgstr "URL Korter Maken"
+
+#: libs/lib-profile.php:266 libs/tab-advanced.php:122
+msgid "Save Changes"
+msgstr "Wijzigingen Opslaan"
+
+#: libs/lib-setup.php:52
+msgid "This is the default profile, used when no profile is specified."
+msgstr "Dit is het standaardprofiel, als er geen profiel is gespecifiëerd."
+
+#: libs/lib-setup.php:77
+msgid "Hide document location and text selection, prevent downloads"
+msgstr "Verberg de documentlocatie en de textselecties, voorkom downloads"
+
+#: libs/lib-setup.php:102
+msgid "Dark-colored theme, example of custom CSS option"
+msgstr "Donker-gekleurd thema, voorbeeld van de aangepast CSS-optie"
+
+#: libs/tab-advanced.php:19
+msgid "Plugin Behavior"
+msgstr "Plug-ingedrag"
+
+#: libs/tab-advanced.php:24
+msgid "Editor Integration"
+msgstr "Bewerkerintegratie"
+
+#: libs/tab-advanced.php:27
+msgid "Disable all editor integration"
+msgstr "Alle integratie met de tekstbewerker uitschakelen"
+
+#: libs/tab-advanced.php:28
+msgid "Insert shortcode from Media Library by default"
+msgstr "Standaard shortcode invoegen vanuit de Mediabibliotheek"
+
+#: libs/tab-advanced.php:29
+msgid "Allow uploads of all supported media types"
+msgstr "Uploaden van alle ondersteunde mediatypes toestaan"
+
+#: libs/tab-advanced.php:34
+msgid "Maximum File Size"
+msgstr "Maximale bestandsgrootte"
+
+#: libs/tab-advanced.php:40
+msgid ""
+"Very large files (typically 8-12MB) aren't supported by Google Doc Viewer"
+msgstr ""
+"Erg grote bestanden (meestal 8-12 MB) worden niet ondersteund door de Google "
+"Doc Viewer"
+
+#: libs/tab-advanced.php:44
+msgid "Error Handling"
+msgstr "Handelingsfout"
+
+#: libs/tab-advanced.php:47
+msgid "Show error messages inline (otherwise, they appear in HTML comments)"
+msgstr ""
+"Toon foutmeldingen inline (anders worden ze getoond als HTML-commentaren)"
+
+#: libs/tab-advanced.php:48
+msgid "Check for errors before loading viewer"
+msgstr "Controleer op fouten voordat de viewer geladen wordt"
+
+#: libs/tab-advanced.php:50
+msgid "Enable extended diagnostic logging <em>(manually enabled)</em>"
+msgstr ""
+"Schakel de uitgebreide diagnotische logging in <em>(handmatig inschakelen)</"
+"em>"
+
+#: libs/tab-advanced.php:52
+msgid "Enable extended diagnostic logging"
+msgstr "Inschakelen van de uitgebreide logging"
+
+#: libs/tab-advanced.php:54
+msgid "clear log"
+msgstr "log wissen"
+
+#: libs/tab-advanced.php:59
+msgid "show log"
+msgstr "log tonen"
+
+#: libs/tab-advanced.php:65
+msgid "Version Notifications"
+msgstr "Versieberichten"
+
+#: libs/tab-advanced.php:69
+msgid "All Versions"
+msgstr "Alle Versies"
+
+#: libs/tab-advanced.php:69
+msgid "You will receive release and beta notifications"
+msgstr "Je krijgt een bericht voor elke release- en betaversie"
+
+#: libs/tab-advanced.php:70
+msgid "Release Versions Only"
+msgstr "Alleen Releaseversie's"
+
+#: libs/tab-advanced.php:70
+msgid "You will not receive beta notifications"
+msgstr "Je krijgt geen betaberichten"
+
+#: libs/tab-advanced.php:79
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: libs/tab-advanced.php:81
+msgid ""
+"To use Google Analytics integration, the GA tracking code must already be "
+"installed on your site."
+msgstr ""
+"Om Google Analytics-integratie te gebruiken, moet de GA-tracking code "
+"geïnstalleerd zijn op je site."
+
+#: libs/tab-advanced.php:82
+msgid "More Info"
+msgstr "Meer Informatie"
+
+#: libs/tab-advanced.php:87
+msgid "Event Tracking"
+msgstr "Event Tracking"
+
+#: libs/tab-advanced.php:91
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: libs/tab-advanced.php:91
+msgid "Track events in Google Analytics"
+msgstr "Events in Google Analytics traceren"
+
+#: libs/tab-advanced.php:92
+msgid "Enabled (Compatibility Mode)"
+msgstr "Inschakelen (Compatibliteitsmodus)"
+
+#: libs/tab-advanced.php:92
+msgid "Track events using older GDE format (< 2.5)"
+msgstr "Track events met oudere GDE-formaat (<2.5)"
+
+#: libs/tab-advanced.php:93
+msgid "Disable Google Analytics integration"
+msgstr "Uitschakelen van Google Analytics-integratie"
+
+#: libs/tab-advanced.php:100
+msgid "Category"
+msgstr "Categorie"
+
+#: libs/tab-advanced.php:108
+msgid "Label"
+msgstr "Label"
+
+#: libs/tab-advanced.php:112
+msgid "Document URL"
+msgstr "Document-URL"
+
+#: libs/tab-advanced.php:113
+msgid "Document Filename"
+msgstr "Documentnaam"
+
+#: libs/tab-advanced.php:130
+msgid "Backup and Import"
+msgstr "Back-up en importeren"
+
+#: libs/tab-advanced.php:138
+msgid ""
+"Download a file to your computer containing your profiles, settings, or "
+"both, for backup or migration purposes."
+msgstr ""
+"Download een bestand naar je computer met uw profielen, instellingen, of "
+"beiden, voor back-up of migratiedoeleinden."
+
+#: libs/tab-advanced.php:141
+msgid "All Profiles and Settings"
+msgstr "Alle profielen en instellingen."
+
+#: libs/tab-advanced.php:147
+msgid "Download Export File"
+msgstr "Exportbestand Downloaden"
+
+#: libs/tab-advanced.php:155
+msgid "To import, choose a file from your computer:"
+msgstr "Om te importeren, kies een bestand van je computer:"
+
+#: libs/tab-advanced.php:161
+msgid "Upload File and Import"
+msgstr "Bestand uploaden en importeren"
+
+#: libs/tab-profiles.php:34 libs/tab-profiles.php:47
+msgid "ID"
+msgstr "ID"
+
+#: libs/tab-profiles.php:37 libs/tab-profiles.php:50 libs/tab-profiles.php:104
+msgid "Name"
+msgstr "Naam"
+
+#: libs/tab-profiles.php:40 libs/tab-profiles.php:53 libs/tab-profiles.php:120
+msgid "Description"
+msgstr "Beschrijving"
+
+#: libs/tab-profiles.php:92
+msgid "Reset Profiles"
+msgstr "Rrofielen Resetten"
+
+#: libs/tab-profiles.php:100 libs/tab-profiles.php:125
+msgid "Add New Profile"
+msgstr "Nieuw Profiel Toevoegen"
+
+#: libs/tab-profiles.php:106
+msgid ""
+"The name (or ID number) is used to select the profile via the shortcode. It "
+"is all lowercase and contains only letters, numbers, and hyphens."
+msgstr ""
+"De naam (of ID-nummer) dat gebruikt wordt voor het selecteren via de "
+"shortcode. Dit zijn alleen kleine letters en mag alleen letters, cijfers en "
+"streepjes bevatten."
+
+#: libs/tab-profiles.php:109
+msgid "Parent"
+msgstr "Parent"
+
+#: libs/tab-profiles.php:117
+msgid "Select which profile to use as a starting point."
+msgstr "Selecteer welk profiel gebruikt wordt als startpunt."
+
+#: libs/tab-profiles.php:122
+msgid "Describe the profile's purpose, for your own reference (optional)."
+msgstr ""
+"Beschrijf het doel van het profiel, voor je eigen referentie (optioneel)."
+
+#: libs/tab-support.php:27
+msgid ""
+"Most support questions have already been answered. Please review these pages "
+"before asking for support:"
+msgstr ""
+"Meeste ondersteuningsvragen zijn al beantwoord. Bekijk a.u.b. deze pagina's "
+"voordat u om hulp vraagt:"
+
+#: libs/tab-support.php:30
+msgid "Plugin FAQ"
+msgstr "Plug-in-FAQ"
+
+#: libs/tab-support.php:37
+msgid "Support Request"
+msgstr "Ondersteuningsaanvraag"
+
+#: libs/tab-support.php:38
+msgid ""
+"Requests sent from this form are handled by an actual human, so please don't "
+"send test messages or other spam."
+msgstr ""
+"Verzoeken verstuurd met dit formulier worden behandeld door een echte mens, "
+"dus zend a.u.b. geen testberichten of andere spam."
+
+#: libs/tab-support.php:42
+msgid "Your Name"
+msgstr "Je naam"
+
+#: libs/tab-support.php:46
+msgid "Your E-mail"
+msgstr "Je e-mailadres"
+
+#: libs/tab-support.php:49
+msgid "A valid email address is required."
+msgstr "Een geldig e-mailadres is verplicht."
+
+#: libs/tab-support.php:53
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: libs/tab-support.php:56
+msgid ""
+"If you're having a problem getting a specific document to work, paste the "
+"shortcode you're trying to use here."
+msgstr ""
+"Als je een probleem hebt met een specifiek document, plak dan de shortcode "
+"hier in die je probeert te gebruiken."
+
+#: libs/tab-support.php:60
+msgid "URL"
+msgstr "URL"
+
+#: libs/tab-support.php:63
+msgid ""
+"Paste the full web address of a page where I should be able to see the "
+"problem occurring."
+msgstr ""
+"Plak het volledige webadres van een pagina waar ik het probleem moet zien."
+
+#: libs/tab-support.php:67
+msgid "Message"
+msgstr "Bericht"
+
+#: libs/tab-support.php:73
+msgid "Message Options"
+msgstr "Berichtopties"
+
+#: libs/tab-support.php:75
+msgid "Send debug information"
+msgstr "Stuur debuginformatie"
+
+#: libs/tab-support.php:76
+msgid "View"
+msgstr "Tonen"
+
+#: libs/tab-support.php:77
+msgid "Hide"
+msgstr "Verbergen"
+
+#: libs/tab-support.php:78
+msgid "Send me a copy"
+msgstr "Stuur me een kopie"
+
+#: libs/tab-support.php:84
+msgid "Debug Information"
+msgstr "Debuginformatie"
+
+#: libs/tab-support.php:85
+msgid ""
+"Note: Profile and settings export and diagnostic log (if present) will be "
+"attached."
+msgstr ""
+"Opmerking: profiel en instellingen exporteren en diagnose log (indien "
+"aanwezig) worden bijgevoegd."
+
+#: libs/tab-support.php:160
+msgid ""
+"I'm less likely to be able to help you if you do not include debug "
+"information."
+msgstr ""
+"Als je geen debuginformatie meestuurt, is het minder waarschijnlijk dat ik "
+"je kan helpen."
+
+#: libs/tab-support.php:162
+msgid "Send Request"
+msgstr "Verzoek Sturen"
+
+#: libs/tab-support.php:166
+msgid "Request Sent"
+msgstr "Verzoek Verstuurd"
+
+#: libs/tab-support.php:167
+msgid ""
+"Delivery failed. You can manually send this information to wpp@tnw.org for "
+"help."
+msgstr ""
+"Afleveren mislukt. U kan de informatie ook handmatig opsturen aan wpp@tnw."
+"org voor hulp."
+
+#~ msgid ""
+#~ "Please review the documentation before submitting a request for support:"
+#~ msgstr ""
+#~ "Lees de documentatie voordat er een verzoek tot ondersteuning gedaan "
+#~ "wordt."
+
+#~ msgid "Support Forum"
+#~ msgstr "Support Forum"
+
+#~ msgid ""
+#~ "If you're still experiencing a problem, please complete the form below."
+#~ msgstr ""
+#~ "Als je nog altijd een probleem hebt, vul dan het onderstaande formulier "
+#~ "in."

@@ -1,0 +1,28 @@
+<div class="{{class}}" {{#generateId}}{{id}}{{/generateId}}>
+	<div class="media">
+		<div class="pull-left">
+			<div class="top-useravatar-container">
+				{{#if add-link}}
+					<a href="{{tls.feedback.user.url}}" class="pop-user-url user-avatar thumbnail">
+						<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar">
+					</a>
+				{{else}}
+					<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar">
+				{{/if}}
+			</div>
+		</div>
+		<div class="media-body">
+			<{{name-htmlmarkup}} class="media-heading">
+				<small>{{{titles.top}}}</small><br/>
+				{{#if add-link}}
+					<a href="{{tls.feedback.user.url}}" class="pop-user-url">
+						<span class="pop-user-name">{{{tls.feedback.user.name}}}</span>
+					</a>
+				{{else}}
+					<span class="pop-user-name">{{{tls.feedback.user.name}}}</span>
+				{{/if}}
+			</{{name-htmlmarkup}}>
+			{{{titles.bottom}}}
+		</div>
+	</div>
+</div>

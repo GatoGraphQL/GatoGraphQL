@@ -1,0 +1,40 @@
+{{#with itemObject}}
+	<div class="{{../class}}">
+		{{#if ../show-join}}
+			{{#compare locations.length 1 operator=">"}}
+				<a {{#generateId context=../.}}{{../../id}}-{{../id}}{{/generateId}} href="{{#if ../url-field}}{{{get . ../url-field}}}{{else}}{{addParam ../url ../locationsfield-name locations}}{{/if}}" data-append-intercepturl="#{{../bs.bId}}" {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../link-class}} {{../btn-class}}" data-header="{{#withModule ../. 'header'}}{{enterModule ../../.}}{{/withModule}}" title="{{{../title}}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+					{{#if ../show-each}}
+						<span class="all-locations-titlelink">{{{../titles.locations}}}</span>
+					{{else}}
+						{{#withModule ../. "buttoninner"}}
+							{{enterModule ../../.}}
+						{{/withModule}}
+					{{/if}}
+				</a>{{{../join-separator}}}
+			{{/compare}}
+		{{/if}}
+		{{#if ../show-each}}
+			{{#each locations}}
+				{{#if @index}}{{{../../each-separator}}}{{/if}}
+				<a {{#generateId context=../../.}}{{../../../id}}-{{../../id}}-{{this}}{{/generateId}} href="{{addParam ../../url ../../locationsfield-name this}}" data-append-intercepturl="#{{../../bs.bId}}" {{#if ../../linktarget}}target="{{../../linktarget}}"{{/if}} class="{{../../link-class}} {{../../btn-class}}" data-header="{{#withModule ../../. 'header'}}{{enterModule ../../../.}}{{/withModule}}" title="{{{../../title}}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
+					{{#if ../../fontawesome}}
+						<i class="fa {{../../fontawesome}}"></i>
+					{{/if}}
+					{{#withModule ../../. "location-layout"}}
+						{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.locations.db-key itemObjectId=../this}}
+					{{/withModule}}
+				</a>
+				{{#withModule ../../. "location-complement"}}
+					{{{../../../complement-separator}}}
+					{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.locations.db-key itemObjectId=../this}}
+				{{/withModule}}
+			{{/each}}	
+		{{/if}}
+		{{#withModule ../. "map-script-resetmarkers"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+		{{#withModule ../. "map-script"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</div>
+{{/with}}

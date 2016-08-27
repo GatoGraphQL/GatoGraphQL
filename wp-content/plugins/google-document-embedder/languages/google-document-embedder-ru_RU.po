@@ -1,0 +1,962 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Doc Embedder\n"
+"POT-Creation-Date: 2012-11-20 08:11-0600\n"
+"PO-Revision-Date: 2012-12-12 20:24+0200\n"
+"Last-Translator: Kevin Davis <kev@tnw.org>\n"
+"Language-Team: Kevin Davis <wpp@tnw.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: functions-admin.php:259
+msgid "Import"
+msgstr "Импорт"
+
+#: functions-admin.php:270
+msgid "Performing full import..."
+msgstr "Делаю полный импорт ..."
+
+#: functions-admin.php:274 functions-admin.php:299
+msgid "Importing profiles"
+msgstr "Импортирую профили"
+
+#: functions-admin.php:280 functions-admin.php:294 functions-admin.php:305
+#: functions-admin.php:318
+msgid "done"
+msgstr "готово"
+
+#: functions-admin.php:283 functions-admin.php:292 functions-admin.php:308
+#: functions-admin.php:316
+msgid "failed"
+msgstr "ошибка"
+
+#: functions-admin.php:289
+msgid "Importing settings"
+msgstr "Импортирую настройки"
+
+#: functions-admin.php:312
+msgid "Importing settings... "
+msgstr "Импортирую настройки..."
+
+#: functions-admin.php:321 functions-admin.php:593 options.php:138
+msgid "Please select a valid export file to import."
+msgstr "Пожалуйста, выберите правильный файл экспорта для импорта."
+
+#: functions-admin.php:325
+msgid "All or part of the import failed. See above for information."
+msgstr "Все или часть импорта не удалось. См. информацию выше."
+
+#: functions-admin.php:327
+msgid "Import completed successfully."
+msgstr "Импорт успешно завершен."
+
+#: functions-admin.php:330
+msgid "Return to GDE Settings"
+msgstr "Вернуться к настройкам GDE"
+
+#: functions-admin.php:407 functions-admin.php:562 options.php:167
+#: libs/tab-advanced.php:141
+msgid "Settings"
+msgstr "Настройки"
+
+#: functions-admin.php:416
+msgid "You do not have sufficient permissions to access this page"
+msgstr "Вы не имеете достаточно прав для доступа к этой странице"
+
+#: functions-admin.php:550
+msgid "plugin"
+msgstr "плагин"
+
+#: functions-admin.php:551
+msgid "Version"
+msgstr "Версия"
+
+#: functions-admin.php:589
+msgid "This profile will be permanently deleted."
+msgstr "Этот профиль будет удален."
+
+#: functions-admin.php:589 functions-admin.php:590 functions-admin.php:591
+#: functions-admin.php:594
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+#: functions-admin.php:590
+msgid "Settings for this profile will overwrite the default profile."
+msgstr "Настройки этого профиля будут переписаны по умолчанию."
+
+#: functions-admin.php:591
+msgid ""
+"Your profile list will be reset to its original state. All changes will be "
+"lost."
+msgstr ""
+"Ваш список профиля будет сброшено в исходное состояние. Все изменения будут "
+"потеряны."
+
+#: functions-admin.php:594
+msgid ""
+"Any settings or duplicate profile names in this import will overwrite the "
+"current values."
+msgstr ""
+"Любые настройки, или копии названия профиля после импорта приведет к потере "
+"текущего значения."
+
+#: functions-admin.php:596
+msgid "Please include a shortcode or message to request support."
+msgstr ""
+"Пожалуйста, укажите короткий код или сообщение, чтобы сделать запрос в "
+"поддержку."
+
+#: functions-admin.php:634
+msgid "Embed file using Google Doc Embedder"
+msgstr "Вставить файл с помощью Google Doc Embedder"
+
+#: functions-admin.php:651 libs/lib-eddialog.php:85
+msgid "Select the GDE viewer profile to use"
+msgstr "Выберите профиль GDE viewer для использования"
+
+#: functions-admin.php:784
+msgid ""
+"You are running a pre-release version of Google Doc Embedder. Please watch "
+"this space for important updates."
+msgstr ""
+"Вы работаете в пре-релиз версии Google Doc Embedder. Пожалуйста, посмотрите "
+"важные обновления."
+
+#: functions.php:105
+msgid "File not specified, check shortcode syntax"
+msgstr "Файл не указан, проверьте синтаксис короткого кода"
+
+#: functions.php:106
+msgid "Requested URL is invalid"
+msgstr "Запрашиваемая ссылка недействительна"
+
+#: functions.php:107
+msgid "Unsupported File Type"
+msgstr "Тип файла не поддерживается"
+
+#: functions.php:108
+msgid "Error retrieving file - if necessary turn off error checking"
+msgstr ""
+"Ошибка при загрузке файла - При необходимости выключите проверку ошибок"
+
+#: functions.php:191
+msgid "Unknown"
+msgstr "Неизвестный"
+
+#: functions.php:291 gviewer.php:282 libs/lib-setup.php:64
+#: libs/lib-setup.php:112
+msgid "Download"
+msgstr "Скачать"
+
+#: functions.php:396 view.php:397
+msgid "Error"
+msgstr "Ошибка"
+
+#: gviewer.php:73
+msgid "Unable to load profile settings"
+msgstr "Не удается загрузить настройки профиля"
+
+#: gviewer.php:108 gviewer.php:120
+msgid "Unable to load requested profile."
+msgstr "Не удается загрузить требуемый профиль."
+
+#: gviewer.php:216
+msgid "Unable to secure document"
+msgstr "Невозможно отобразить документ"
+
+#: load.php:8 libs/lib-formsubmit.php:9 libs/lib-secure.php:9
+#: libs/lib-service.php:53 libs/lib-service.php:69 libs/lib-service.php:72
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Вы не имеете достаточно прав для доступа к этой странице."
+
+#: load.php:41
+msgid "Direct access to this file is not permitted."
+msgstr "Прямой доступ к этому файлу не допускается."
+
+#: load.php:61
+msgid "The requested file was not found."
+msgstr "Запрошенный файл не найден."
+
+#: load.php:66
+msgid "Unable to open the requested file. "
+msgstr "Не удается открыть необходимый файл."
+
+#: load.php:83 load.php:87
+msgid "The document file type is not supported."
+msgstr "Тип документа не поддерживается."
+
+#: options.php:13 options.php:65
+msgid "Default profile <strong>updated</strong>."
+msgstr "Профиль по умолчанию <strong>обновлен</strong>."
+
+#: options.php:15 options.php:50
+msgid "Unable to update profile."
+msgstr "Не удалось обновить профиль."
+
+#: options.php:28
+msgid "Profile name already exists. Please choose another name."
+msgstr ""
+"Профиль с таким именем уже существует. Пожалуйста, выберите другое имя."
+
+#: options.php:35
+msgid "New profile <strong>created</strong>."
+msgstr "Новый профиль <strong>создан </strong>."
+
+#: options.php:37 options.php:40
+msgid "Unable to create profile."
+msgstr "Невозможно создать профиль."
+
+#: options.php:48
+msgid "Profile <strong>updated</strong>."
+msgstr "Профиль <strong>обновлен</strong>."
+
+#: options.php:58
+msgid "Profile <strong>deleted</strong>."
+msgstr "Профиль <strong>удален</strong>."
+
+#: options.php:60
+msgid "Unable to delete profile."
+msgstr "Не удается удалить профиль."
+
+#: options.php:102
+msgid "Unable to enable diagnostic logging."
+msgstr "Не удается включить журнал диагностики."
+
+#: options.php:114 options.php:116
+msgid "Settings <strong>updated</strong>."
+msgstr "Настройки <strong>обновлены</strong>."
+
+#: options.php:176 options.php:189
+msgid "General"
+msgstr "Главное"
+
+#: options.php:181 options.php:194 libs/tab-advanced.php:140
+msgid "Profiles"
+msgstr "Профили"
+
+#: options.php:202
+msgid "Advanced"
+msgstr "Дополнительно"
+
+#: options.php:207
+msgid "Support"
+msgstr "Поддержка"
+
+#: options.php:345
+msgid "Help"
+msgstr "Помощь"
+
+#: options.php:371
+msgid "Edit"
+msgstr "Редактировать"
+
+#: options.php:372
+msgid "Delete"
+msgstr "Удалить"
+
+#: options.php:373
+msgid "Make Default"
+msgstr "Создать по умолчанию"
+
+#: view.php:42
+msgid "Invalid URL format"
+msgstr "Неверный формат URL"
+
+#: view.php:398
+msgid ""
+"Unable to retrieve document contents. Please try again or switch to Standard "
+"Viewer."
+msgstr ""
+"Не удается получить содержимое документа. Пожалуйста, попробуйте еще раз или "
+"перейти к стандартному Viewer."
+
+#: js/tb-newwin.php:7
+msgid "View in full screen"
+msgstr "Просмотр во весь экран"
+
+#: js/tb-newwin.php:11
+msgid "Open in new window"
+msgstr "Открыть в новом окне"
+
+#: libs/lib-eddialog.php:8
+msgid "Access denied."
+msgstr "Доступ запрещен."
+
+#: libs/lib-eddialog.php:52
+msgid "Insert Google Doc Embedder Shortcode"
+msgstr "Вставить короткий код Google Doc Embedder"
+
+#: libs/lib-eddialog.php:55
+msgid "Required"
+msgstr "Необходимый"
+
+#: libs/lib-eddialog.php:59
+msgid "URL or Filename"
+msgstr "URL-адрес или имя файла"
+
+#: libs/lib-eddialog.php:60
+msgid "Full URL or filename to append to profile Base URL"
+msgstr "Полное имя файла или URL для добавления в базу профилей"
+
+#: libs/lib-eddialog.php:65
+msgid "Profile Base URL will be prefixed"
+msgstr "URL базы профиля должен иметь префикс"
+
+#: libs/lib-eddialog.php:68
+msgid "Unsupported file type"
+msgstr "Неподдерживаемый тип файла"
+
+#: libs/lib-eddialog.php:74
+msgid "Profile"
+msgstr "Профиль"
+
+#: libs/lib-eddialog.php:93
+msgid "Optional (Override Profile Settings)"
+msgstr "Дополнительно (переопределить настройки профиля)"
+
+#: libs/lib-eddialog.php:97 libs/lib-profile.php:185
+msgid "Height"
+msgstr "Высота"
+
+#: libs/lib-eddialog.php:102 libs/lib-profile.php:181
+msgid "Width"
+msgstr "Ширина"
+
+#: libs/lib-eddialog.php:103
+#, php-format
+msgid "Format: 40% or 300px"
+msgstr "Формат: 40% або 300px"
+
+#: libs/lib-eddialog.php:108
+msgid "Start Page #"
+msgstr "Стартовая страница #"
+
+#: libs/lib-eddialog.php:116
+msgid "Show Download Link"
+msgstr "Показывать ссылку для скачивания"
+
+#: libs/lib-eddialog.php:119
+msgid "Yes"
+msgstr "Да"
+
+#: libs/lib-eddialog.php:120
+msgid "No"
+msgstr "Нет"
+
+#: libs/lib-eddialog.php:126
+msgid "Disable caching (this document is frequently overwritten)"
+msgstr "Отключить кэширование (этот документ часто переписывается)"
+
+#: libs/lib-eddialog.php:136
+msgid "Shortcode Preview"
+msgstr "Посмотреть короткий код"
+
+#: libs/lib-eddialog.php:144
+msgid "Insert"
+msgstr "Вставить"
+
+#: libs/lib-eddialog.php:148
+msgid "Cancel"
+msgstr "Отмена"
+
+#: libs/lib-profile.php:12 libs/tab-advanced.php:132 libs/tab-profiles.php:22
+msgid ""
+"Unable to load profile settings. Please re-activate GDE and if the problem "
+"persists, request help using the \"Support\" tab."
+msgstr ""
+"Не удается загрузить настройки профиля. Пожалуйста, включите повторно GDE и "
+"если проблема не устранена, обратитесь за \"Помощью\"."
+
+#: libs/lib-profile.php:25
+msgid "Default Settings"
+msgstr "Настройки по умолчанию"
+
+#: libs/lib-profile.php:26
+msgid ""
+"These settings define the default viewer profile, which is used when no "
+"other profile is specified."
+msgstr ""
+"Эти параметры профиля установлены по умолчанию, когда другой профиль не "
+"создан."
+
+#: libs/lib-profile.php:30
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+#: libs/lib-profile.php:49
+msgid "Viewer Mode"
+msgstr "Режим просмотра"
+
+#: libs/lib-profile.php:53
+msgid "Standard Viewer"
+msgstr "Стандартный просмотр"
+
+#: libs/lib-profile.php:53
+msgid "Embed the basic viewer only"
+msgstr "Вставить только основной Viewer "
+
+#: libs/lib-profile.php:54
+msgid "Enhanced Viewer"
+msgstr "Расширенные средства просмотра"
+
+#: libs/lib-profile.php:54
+msgid "Enable extended viewer options"
+msgstr "Включить расширенные опции просмотра"
+
+#: libs/lib-profile.php:64
+msgid "Enhanced Viewer Settings"
+msgstr "Расширенные настройки просмотра"
+
+#: libs/lib-profile.php:68
+msgid "Toolbar"
+msgstr "Панель инструментов"
+
+#: libs/lib-profile.php:71
+msgid "Remove Toolbar"
+msgstr "Удалить панель инструментов"
+
+#: libs/lib-profile.php:76
+msgid "Use Mobile Toolbar"
+msgstr "Использовать мобильную версию панели инструментов"
+
+#: libs/lib-profile.php:80
+msgid "Mobile Devices Only (Default)"
+msgstr "Только мобильные устройства (по умолчанию)"
+
+#: libs/lib-profile.php:80
+msgid "Use mobile toolbar when mobile device detected"
+msgstr ""
+"Использовать мобильные панели инструментов, когда мобильное устройство "
+"обнаружено"
+
+#: libs/lib-profile.php:81
+msgid "Always"
+msgstr "Всегда"
+
+#: libs/lib-profile.php:81
+msgid "Use mobile toolbar for all visitors"
+msgstr "Использовать мобильную версию панели инструментов для всех посетителей"
+
+#: libs/lib-profile.php:82
+msgid "Never"
+msgstr "Никогда"
+
+#: libs/lib-profile.php:82
+msgid "Never use mobile toolbar"
+msgstr "Никогда не использовать мобильную версию панели инструментов"
+
+#: libs/lib-profile.php:89
+msgid "Toolbar Items"
+msgstr "Пункты панели инструментов"
+
+#: libs/lib-profile.php:92
+msgid "Page Numbers"
+msgstr "Номера страниц"
+
+#: libs/lib-profile.php:93
+msgid "Previous/Next Page"
+msgstr "Предыдущая/следующая страница"
+
+#: libs/lib-profile.php:94
+msgid "Zoom In/Out"
+msgstr "Увеличение In/Out"
+
+#: libs/lib-profile.php:95
+msgid "Full Screen/New Window"
+msgstr "Во весь экран/Новое окно"
+
+#: libs/lib-profile.php:98
+msgid ""
+"Uncheck items to remove from toolbar. Buttons will vary based on file type "
+"and device used."
+msgstr ""
+"Снимите элементы для удаления из панели инструментов. Кнопки будут "
+"варьироваться в зависимости от типа файла и используемого устройства."
+
+#: libs/lib-profile.php:102
+msgid "Full Screen Behavior"
+msgstr "Режим во весь экран"
+
+#: libs/lib-profile.php:106
+msgid "Google-Hosted Page (Default)"
+msgstr "Страница Google-Hosted (по умолчанию)"
+
+#: libs/lib-profile.php:108
+msgid "Full Screen Viewer"
+msgstr "Просмотр во весь экран"
+
+#: libs/lib-profile.php:112
+msgid "Open in New Window"
+msgstr "Открыть в новом окне"
+
+#: libs/lib-profile.php:113
+msgid "Allow Printing"
+msgstr "Разрешать печатать"
+
+#: libs/lib-profile.php:118
+msgid "Page Area Background Color"
+msgstr "Цвет фона страницы"
+
+#: libs/lib-profile.php:123
+msgid "None (Transparent)"
+msgstr "Нет (прозрачный)"
+
+#: libs/lib-profile.php:128
+msgid "Page Border Color"
+msgstr "Цвет границы страниц"
+
+#: libs/lib-profile.php:133
+msgid "No Border"
+msgstr "Без границ"
+
+#: libs/lib-profile.php:138
+msgid "Custom CSS File"
+msgstr "Настраиваемый файл CSS "
+
+#: libs/lib-profile.php:144
+msgid "URL of custom CSS file (may override some of the above options)"
+msgstr ""
+"Настраиваемая ссылка файла CSS (может переопределить некоторые из "
+"перечисленных выше вариантов)"
+
+#: libs/lib-profile.php:148
+msgid "Security"
+msgstr "Безопасность"
+
+#: libs/lib-profile.php:151
+msgid "Hide ability to select/copy/paste text"
+msgstr "Скрыть возможность выбора/копировать/вставлять текст"
+
+#: libs/lib-profile.php:152
+msgid "Block all download requests for file"
+msgstr "Блокировать все запросы для скачивания файлов"
+
+#: libs/lib-profile.php:163
+msgid "Default Language"
+msgstr "Язык по умолчанию"
+
+#: libs/lib-profile.php:175
+msgid "Language of toolbar button tips"
+msgstr "Язык кнопки подсказки на панели инструментов"
+
+#: libs/lib-profile.php:179
+msgid "Default Size"
+msgstr "Размер по умолчанию"
+
+#: libs/lib-profile.php:190
+msgid "Enter as pixels or percentage (example: 500px or 100%)"
+msgstr "Введите в виде пикселей или процентов (например: 500px или 100%)"
+
+#: libs/lib-profile.php:194
+msgid "File Base URL"
+msgstr "Ссылка файла базы"
+
+#: libs/lib-profile.php:200
+msgid ""
+"Any file not starting with <code>http</code> will be prefixed by this value"
+msgstr ""
+"Любой файл, не начиная с <code>http</code> будет начинаться с этого значения"
+
+#: libs/lib-profile.php:204
+msgid "Download Link"
+msgstr "Ссылка для скачивания"
+
+#: libs/lib-profile.php:208
+msgid "All Users"
+msgstr "Все пользователи"
+
+#: libs/lib-profile.php:208
+msgid "Download link visible to everyone by default"
+msgstr "Ссылка для скачивания видна всем по умолчанию"
+
+#: libs/lib-profile.php:209
+msgid "Logged-in Users"
+msgstr "Для зарегистрированных пользователей"
+
+#: libs/lib-profile.php:209
+msgid "Download link visible to logged-in users"
+msgstr "Ссылка для скачивания видна только зарегистрированным пользователям"
+
+#: libs/lib-profile.php:210 libs/tab-advanced.php:91
+msgid "None"
+msgstr "Нет"
+
+#: libs/lib-profile.php:210
+msgid "Download link is not visible by default"
+msgstr "Ссылки скрыты по умолчанию"
+
+#: libs/lib-profile.php:217
+msgid "Link Text"
+msgstr "Текст ссылки"
+
+#: libs/lib-profile.php:220
+msgid "You can further customize text using these dynamic replacements:"
+msgstr "Вы можете настроить текст, используя эти динамические замены:"
+
+#: libs/lib-profile.php:221
+msgid "filename"
+msgstr "имя файла"
+
+#: libs/lib-profile.php:222
+msgid "file type"
+msgstr "тип файла"
+
+#: libs/lib-profile.php:223
+msgid "file size"
+msgstr "размер файла"
+
+#: libs/lib-profile.php:227
+msgid "Link Position"
+msgstr "Позиция ссылки"
+
+#: libs/lib-profile.php:231
+msgid "Above Viewer"
+msgstr "Вверху окна"
+
+#: libs/lib-profile.php:232
+msgid "Below Viewer"
+msgstr "Под окном"
+
+#: libs/lib-profile.php:238
+msgid "Link Behavior"
+msgstr "Режим ссылки"
+
+#: libs/lib-profile.php:241
+msgid "Force download (bypass browser plugins)"
+msgstr "Возможность загрузки (обход плагинов для браузеров)"
+
+#: libs/lib-profile.php:242
+msgid "Shorten URL"
+msgstr "Сокращение URL-адреса"
+
+#: libs/lib-profile.php:250 libs/tab-advanced.php:120
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: libs/lib-setup.php:46 libs/lib-setup.php:292
+msgid "This is the default profile, used when no profile is specified."
+msgstr "Это профиль по умолчанию, используемый при отсутствии других профилей."
+
+#: libs/lib-setup.php:70
+msgid "Hide document location and text selection, prevent downloads"
+msgstr ""
+"Скрыть местоположение документа и выделение текста, предотвращения загрузки"
+
+#: libs/lib-setup.php:94
+msgid "Dark-colored theme, example of custom CSS option"
+msgstr "Темные-цвета темы, пример установки опции CSS "
+
+#: libs/tab-advanced.php:20
+msgid "Plugin Behavior"
+msgstr "Режим плагина"
+
+#: libs/tab-advanced.php:25
+msgid "Editor Integration"
+msgstr "Встроенный редактор"
+
+#: libs/tab-advanced.php:28
+msgid "Disable all editor integration"
+msgstr "Выключить все редакторы"
+
+#: libs/tab-advanced.php:30
+msgid "Insert shortcode from Media Library by default"
+msgstr "Вставьте короткий код из библиотеки мультимедиа по умолчанию"
+
+#: libs/tab-advanced.php:32
+msgid "Allow uploads of all supported media types"
+msgstr "Разрешить добавление всех поддерживаемых типов носителей"
+
+#: libs/tab-advanced.php:37
+msgid "Maximum File Size"
+msgstr "Максимальный размер файла"
+
+#: libs/tab-advanced.php:43
+msgid ""
+"Very large files (typically 8-12MB) aren't supported by Google Doc Viewer"
+msgstr "Большой размер (тольки 8-12Mб) не поддерживается Google Doc Viewer"
+
+#: libs/tab-advanced.php:47
+msgid "Error Handling"
+msgstr "Ошибка обработки"
+
+#: libs/tab-advanced.php:50
+msgid "Show error messages inline (otherwise, they appear in HTML comments)"
+msgstr ""
+"Показывать сообщения об ошибках (в противном случае, они будут в HTML "
+"записях)"
+
+#: libs/tab-advanced.php:51
+msgid "Check for errors before loading viewer"
+msgstr "Проверить наличие ошибок просмотра перед загрузкой"
+
+#: libs/tab-advanced.php:53
+msgid "Enable extended diagnostic logging <em>(manually enabled)</em>"
+msgstr ""
+"Включить запись расширенного журнала диагностики  <em>(включен вручную)</em>"
+
+#: libs/tab-advanced.php:55
+msgid "Enable extended diagnostic logging"
+msgstr "Включить запись расширенного журнала диагностики"
+
+#: libs/tab-advanced.php:56
+msgid "show log"
+msgstr "Показать журнал"
+
+#: libs/tab-advanced.php:57
+msgid "clear log"
+msgstr "Очистить журнал"
+
+#: libs/tab-advanced.php:63
+msgid "Version Notifications"
+msgstr "Версия уведомлений"
+
+#: libs/tab-advanced.php:67
+msgid "All Versions"
+msgstr "Все версии"
+
+#: libs/tab-advanced.php:67
+msgid "You will receive release and beta notifications"
+msgstr "Вы получите релиз и бету уведомления"
+
+#: libs/tab-advanced.php:68
+msgid "Release Versions Only"
+msgstr "Только релиз"
+
+#: libs/tab-advanced.php:68
+msgid "You will not receive beta notifications"
+msgstr "Вы не будете получать бета сообщение"
+
+#: libs/tab-advanced.php:77
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: libs/tab-advanced.php:79
+msgid ""
+"To use Google Analytics integration, the GA tracking code must already be "
+"installed on your site."
+msgstr ""
+"Используйте Google Analytics, код Google Analytics отслеживания должен быть "
+"уже установлен на Вашем сайте."
+
+#: libs/tab-advanced.php:80
+msgid "More Info"
+msgstr "Дополнительная информация"
+
+#: libs/tab-advanced.php:85
+msgid "Event Tracking"
+msgstr "Отслеживать события"
+
+#: libs/tab-advanced.php:89
+msgid "Enabled"
+msgstr "Включено"
+
+#: libs/tab-advanced.php:89
+msgid "Track events in Google Analytics"
+msgstr "Отслеживание событий в Google Analytics"
+
+#: libs/tab-advanced.php:90
+msgid "Enabled (Compatibility Mode)"
+msgstr "Включен (режим совместимости)"
+
+#: libs/tab-advanced.php:90
+msgid "Track events using older GDE format (< 2.5)"
+msgstr "Трек событий с использованием старого формата GDE (< 2.5)"
+
+#: libs/tab-advanced.php:91
+msgid "Disable Google Analytics integration"
+msgstr "Отключить интеграцию Google Analytics"
+
+#: libs/tab-advanced.php:98
+msgid "Category"
+msgstr "Категория"
+
+#: libs/tab-advanced.php:106
+msgid "Label"
+msgstr "Метка"
+
+#: libs/tab-advanced.php:110
+msgid "Document URL"
+msgstr "Ссылка документа"
+
+#: libs/tab-advanced.php:111
+msgid "Document Filename"
+msgstr "Имя документа"
+
+#: libs/tab-advanced.php:128
+msgid "Backup and Import"
+msgstr "Резерв и импорт"
+
+#: libs/tab-advanced.php:136
+msgid ""
+"Download a file to your computer containing your profiles, settings, or "
+"both, for backup or migration purposes."
+msgstr ""
+"Скачайте файл на свой компьютер, содержащий профиль, настройки, или оба для "
+"резервной копия."
+
+#: libs/tab-advanced.php:139
+msgid "All Profiles and Settings"
+msgstr "Все профили и настройки"
+
+#: libs/tab-advanced.php:145
+msgid "Download Export File"
+msgstr "Скачать файл экспорта"
+
+#: libs/tab-advanced.php:153
+msgid "To import, choose a file from your computer:"
+msgstr "Чтобы импортировать, выберите файл с вашего компьютера:"
+
+#: libs/tab-advanced.php:159
+msgid "Upload File and Import"
+msgstr "Скачать и импортировать файл"
+
+#: libs/tab-profiles.php:36 libs/tab-profiles.php:49
+msgid "ID"
+msgstr "ID"
+
+#: libs/tab-profiles.php:39 libs/tab-profiles.php:52 libs/tab-profiles.php:105
+msgid "Name"
+msgstr "Имя"
+
+#: libs/tab-profiles.php:42 libs/tab-profiles.php:55 libs/tab-profiles.php:121
+msgid "Description"
+msgstr "Описание"
+
+#: libs/tab-profiles.php:94
+msgid "Reset Profiles"
+msgstr "Сброс профиля"
+
+#: libs/tab-profiles.php:101 libs/tab-profiles.php:126
+msgid "Add New Profile"
+msgstr "Добавить новый профиль"
+
+#: libs/tab-profiles.php:107
+msgid ""
+"The name (or ID number) is used to select the profile via the shortcode. It "
+"is all lowercase and contains only letters, numbers, and hyphens."
+msgstr ""
+"Имя (или ID) используется для выбора профиля через короткий номер. Это все "
+"строчные и содержит только буквы, цифры и дефис."
+
+#: libs/tab-profiles.php:110
+msgid "Parent"
+msgstr "Родитель"
+
+#: libs/tab-profiles.php:118
+msgid "Select which profile to use as a starting point."
+msgstr ""
+"Выберите, какой профиль будет использоваться в качестве отправной точки."
+
+#: libs/tab-profiles.php:123
+msgid "Describe the profile's purpose, for your own reference (optional)."
+msgstr "Указать цель профиля, собственная ссылка (опционально)."
+
+#: libs/tab-support.php:26
+msgid ""
+"Please review the documentation before submitting a request for support:"
+msgstr ""
+"Пожалуйста, ознакомьтесь с документацией перед отправкой запроса в поддержку:"
+
+#: libs/tab-support.php:29
+msgid "Plugin FAQ"
+msgstr "FAQ Плагина"
+
+#: libs/tab-support.php:30
+msgid "Support Forum"
+msgstr "Форум поддержки"
+
+#: libs/tab-support.php:33
+msgid "If you're still experiencing a problem, please complete the form below."
+msgstr ""
+"Если вы все еще испытываете проблемы, пожалуйста, заполните приведенную ниже "
+"форму."
+
+#: libs/tab-support.php:37
+msgid "Support Request"
+msgstr "Запрос поддержки"
+
+#: libs/tab-support.php:41
+msgid "Your Name"
+msgstr "Ваше имя"
+
+#: libs/tab-support.php:45
+msgid "Your E-mail"
+msgstr "Ваш E-mail"
+
+#: libs/tab-support.php:48
+msgid "A valid email address is required."
+msgstr "Неправильный электронный адрес."
+
+#: libs/tab-support.php:52
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: libs/tab-support.php:55
+msgid ""
+"If you're having a problem getting a specific document to work, paste the "
+"shortcode you're trying to use here."
+msgstr ""
+"Если у вас возникли проблемы, получая конкретный документ, вставьте короткий "
+"код для использования здесь."
+
+#: libs/tab-support.php:59
+msgid "Message"
+msgstr "Сообщение"
+
+#: libs/tab-support.php:65
+msgid "Message Options"
+msgstr "Опции сообщения"
+
+#: libs/tab-support.php:67
+msgid "Send debug information"
+msgstr "Отправить отладочную информацию"
+
+#: libs/tab-support.php:68
+msgid "View"
+msgstr "Вид"
+
+#: libs/tab-support.php:69
+msgid "Hide"
+msgstr "Скрыть"
+
+#: libs/tab-support.php:70
+msgid "Send me a copy"
+msgstr "Отправить себе копию"
+
+#: libs/tab-support.php:76
+msgid "Debug Information"
+msgstr "Отладочная информация"
+
+#: libs/tab-support.php:77
+msgid ""
+"Note: Profile and settings export and diagnostic log (if present) will be "
+"attached."
+msgstr ""
+"Примечание: Профиль и параметры экспорта и журнала диагностики (если есть) "
+"будет прикреплен."
+
+#: libs/tab-support.php:135
+msgid ""
+"I'm less likely to be able to help you if you do not include debug "
+"information."
+msgstr "Я вряд ли помогу Вам, если вы не включите отладочную информацию."
+
+#: libs/tab-support.php:137
+msgid "Send Request"
+msgstr "Отправить запрос"
+
+#: libs/tab-support.php:141
+msgid "Request Sent"
+msgstr "Запрос отправлен"
+
+#: libs/tab-support.php:142
+msgid ""
+"Delivery failed. You can manually send this information to wpp@tnw.org for "
+"help."
+msgstr ""
+"Доставка не удалась. Вы можете вручную отправить эту информацию на адрес "
+"wpp@tnw.org для получения помощи."

@@ -1,0 +1,99 @@
+<?php
+/**---------------------------------------------------------------------------------------------------------------
+ *
+ * Template Manager (Handlebars)
+ *
+ * ---------------------------------------------------------------------------------------------------------------*/
+
+define ('GD_TEMPLATE_BLOCK_PAGETABS_PROJECT_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-project-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_PROJECTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-projectlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-story-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-storylink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-announcement-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-announcementlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-discussion-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-discussionlink-create'));
+
+class GD_Custom_Template_Processor_CustomTabBlocks extends GD_Template_Processor_TabBlocksBase {
+	
+	function get_templates_to_process() {
+	
+		return array(
+			GD_TEMPLATE_BLOCK_PAGETABS_PROJECT_CREATE,
+			GD_TEMPLATE_BLOCK_PAGETABS_PROJECTLINK_CREATE,
+			GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE,
+			GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE,
+			GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE,
+			GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE,
+			GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE,
+			GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE,
+		);
+	}
+
+	function get_title($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_PAGETABS_PROJECT_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_PROJECTLINK_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE:
+
+				$pages = array(
+					GD_TEMPLATE_BLOCK_PAGETABS_PROJECT_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECT,
+					GD_TEMPLATE_BLOCK_PAGETABS_PROJECTLINK_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECTLINK,
+					GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDSTORY,
+					GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDSTORYLINK,
+					GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDANNOUNCEMENT,
+					GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDANNOUNCEMENTLINK,
+					GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDDISCUSSION,
+					GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDDISCUSSIONLINK,
+				);
+				return get_the_title($pages[$template_id]);
+		}
+		
+		return parent::get_title($template_id);
+	}
+
+	protected function get_iohandler($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_PAGETABS_PROJECT_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_PROJECTLINK_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE:
+			case GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE:
+
+				$iohandlers = array(
+					GD_TEMPLATE_BLOCK_PAGETABS_PROJECT_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDPROJECT,
+					GD_TEMPLATE_BLOCK_PAGETABS_PROJECTLINK_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDPROJECTLINK,
+					GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDSTORY,
+					GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDSTORYLINK,
+					GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDANNOUNCEMENT,
+					GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDANNOUNCEMENTLINK,
+					GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDDISCUSSION,
+					GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE => GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDDISCUSSIONLINK,
+				);
+				if ($iohandler = $iohandlers[$template_id]) {
+					return $iohandler;
+				}
+				break;
+		}
+		
+		return parent::get_iohandler($template_id);
+	}
+}
+
+
+/**---------------------------------------------------------------------------------------------------------------
+ * Initialization
+ * ---------------------------------------------------------------------------------------------------------------*/
+new GD_Custom_Template_Processor_CustomTabBlocks();

@@ -1,0 +1,12 @@
+<form {{#generateId}}{{id}}{{/generateId}} action="{{action}}" class="{{class}} {{runtime-class}} clearfix" role="form" method="{{method}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	{{{description}}}
+	<div class="form-inner {{class-merge}} clearfix">
+		{{#withModule . "inner"}}
+			{{enterModule ../. itemDBKey=../itemDBKey itemObjectId=../items items=../items}}
+		{{/withModule}}
+	</div>
+	{{{description-bottom}}}
+</form>
+{{#ifget bs.feedback.intercept-urls template}}
+	<a data-target="#{{lastGeneratedId}}" {{interceptAttr}} {{#generateId group='interceptor'}}{{id}}{{/generateId}} href="#" data-intercept-url="{{#withSublevel template context=bs.feedback.intercept-urls}}{{get . ../template}}{{/withSublevel}}"></a>
+{{/ifget}}

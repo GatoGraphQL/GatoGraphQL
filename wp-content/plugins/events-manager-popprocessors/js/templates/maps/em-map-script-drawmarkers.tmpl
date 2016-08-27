@@ -1,0 +1,12 @@
+<script type="text/javascript">
+(function($){
+	$(document).one('template:merged', function() {
+
+		var mapDiv = $('#{{lastGeneratedId template=mapdiv-template}}');
+		var block = popManager.getBlock(mapDiv);
+		var pageSection = popManager.getPageSection(block);
+
+		popMapRuntime.drawMarkers(pageSection, block, mapDiv);
+	});
+})(jQuery);
+</script>
