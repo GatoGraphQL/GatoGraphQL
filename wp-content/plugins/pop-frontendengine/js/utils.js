@@ -115,7 +115,7 @@ function splitParams(params) {
     var splitParams = {};
     var e,
         d = function (s) { return decodeURIComponent(s).replace(/\+/g, " "); },
-        // Hack GreenDrinks: must decode the URI
+        // Change PoP: must decode the URI
         //q = window.location.search.substring(1),
         q = decodeURI(params),
         r = /([^&=]+)=?([^&]*)/g;
@@ -144,7 +144,7 @@ function splitParams(params) {
         }
     }
     
-    // Hack GreenDrinks: convert all values to string
+    // Change PoP: convert all values to string
     return splitParams;
 }
 

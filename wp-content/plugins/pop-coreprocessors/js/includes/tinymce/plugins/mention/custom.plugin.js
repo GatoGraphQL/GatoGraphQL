@@ -100,7 +100,7 @@
                 break;
 
             // ---------------------------------------------
-            // Hack GreenDrinks: The plug-in does not allow to input values just by typing them,
+            // Hack PoP Plug-in: The plug-in does not allow to input values just by typing them,
             // as in without pressing on the dropdown-menu option. This is a problem for the hastags ('#'),
             // because the user does not need to press on it, they just type it. 
             // So, for that case, when pressing a space, do a cleanUp, we assume the user has already chosen the word

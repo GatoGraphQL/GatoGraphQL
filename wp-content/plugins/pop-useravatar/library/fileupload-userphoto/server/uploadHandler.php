@@ -43,7 +43,7 @@ class UploadHandler {
     
 		$this->options = array(
             'script_url' => $this->get_full_url().'/',
-            // Hack GreenDrinks
+            // Change PoP
             'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']).$this->vars['user_upload_original_path'],
             'upload_url' => $this->get_full_url().$this->vars['user_upload_original_path'],
             'user_dirs' => false,
@@ -51,7 +51,7 @@ class UploadHandler {
             'param_name' => 'files',
             // Set the following option to 'POST', if your server does not support
             // DELETE requests. This is a parameter sent to the client:
-            // Hack GreenDrinks: change from DELETE to POST
+            // Change PoP: change from DELETE to POST
             'delete_type' => 'POST',
             'access_control_allow_origin' => '*',
             'access_control_allow_credentials' => false,
@@ -88,7 +88,7 @@ class UploadHandler {
             'max_file_size' => null,
             'min_file_size' => 1,
             // The maximum number of files for the upload directory:
-            // Hack GreenDrinks: set number of files to 1
+            // Change PoP: set number of files to 1
             'max_number_of_files' => 1,
             // Defines which files are handled as image files:
             'image_file_types' => '/\.(gif|jpe?g|png)$/i',
@@ -127,7 +127,7 @@ class UploadHandler {
             )
         );
         
-        // Hack GreenDrinks
+        // Change PoP
         // Crop the needed thumbs
         $thumb_sizes = $this->vars['avatar_sizes'];
         // Important: sort them from the largest to the smallest size, otherwise it fails on code "if ($scale >= 1) {"
@@ -157,7 +157,7 @@ class UploadHandler {
 
     protected function initialize() {
     
-		// Hack GreenDrinks: all headers below
+		// Change PoP: all headers below
 		header('Pragma: no-cache');
 		header('Cache-Control: no-store, no-cache, must-revalidate');
 		header('Content-Disposition: inline; filename="files.json"');
@@ -189,7 +189,7 @@ class UploadHandler {
 
     protected function get_full_url() {
 
-        // Hack GreenDrinks: added the HTTP_X_FORWARDED_PROTO bit:
+        // Change PoP: added the HTTP_X_FORWARDED_PROTO bit:
         // in some setups HTTP_X_FORWARDED_PROTO might contain 
         // a comma-separated list e.g. http,https
         // so check for https existence
@@ -266,7 +266,7 @@ class UploadHandler {
             .$this->get_singular_param_name()
             .'='.rawurlencode($file->name);
         
-        // Hack GreenDrinks
+        // Change PoP
     	$file->deleteUrl .= '&upload_path='.$this->vars['upload_path'];
             
         $file->deleteType = $this->options['delete_type'];
@@ -277,7 +277,7 @@ class UploadHandler {
             $file->deleteWithCredentials = true;
         }
 
-        // Hack GreenDrinks: add also the width/height, needed for PhotoSwipe
+        // Change PoP: add also the width/height, needed for PhotoSwipe
         // Comment Leo 14/02/2016: we don't reference to "original" pic anymore, so no need to send the dimensions
         // $file_path = $this->get_upload_path($file->name);
         // if ($originalSize = getimagesize($file_path)) {
@@ -480,7 +480,7 @@ class UploadHandler {
         // Also remove control characters and spaces (\x00..\x20) around the filename:
         $name = trim(basename(stripslashes($name)), ".\x00..\x20");
 
-        // Hack GreenDrinks: it is not really replacing spaces in the name, so do it now
+        // Change PoP: it is not really replacing spaces in the name, so do it now
         $name = str_replace(' ', '-', $name);
 
         // Use a timestamp for empty filenames:
@@ -493,7 +493,7 @@ class UploadHandler {
             $name .= '.'.$matches[1];
         }
 
-        // Hack GreenDrinks: added from uploadHandlerS3.php
+        // Change PoP: added from uploadHandlerS3.php
         if (function_exists('exif_imagetype')) {
             switch(exif_imagetype($file_path)){
                 case IMAGETYPE_JPEG:
@@ -510,7 +510,7 @@ class UploadHandler {
             if (!empty($extensions)) {
                 $parts = explode('.', $name);
                 $extIndex = count($parts) - 1;
-                // Hack GreenDrinks: if the filename ext is in uppercase (eg: JPG) transform to lowercase, because somehow uploading to AWS S3 will transform it to lowercase, so standardize
+                // Change PoP: if the filename ext is in uppercase (eg: JPG) transform to lowercase, because somehow uploading to AWS S3 will transform it to lowercase, so standardize
                 // $ext = strtolower(@$parts[$extIndex]);
                 $ext = @$parts[$extIndex];
                 if (!in_array($ext, $extensions)) {
@@ -611,7 +611,7 @@ class UploadHandler {
             $max_width / $img_width,
             $max_height / $img_height
         );
-        // Hack GreenDrinks: Originally the condition below is:
+        // Change PoP: Originally the condition below is:
         // if ($scale >= 1) {
         // But then, it doesn't work generating the first avatar with image size 150,
         // which is the same as as the "thumb"
@@ -1205,7 +1205,7 @@ class UploadHandler {
             return $this->delete($print_response);
         }
         
-        // Hack GreenDrinks: Create the folders if they don't exist first
+        // Change PoP: Create the folders if they don't exist first
         if (!file_exists($this->vars['user_upload_thumb_fullpath'])) {
             @mkdir($this->vars['user_upload_thumb_fullpath'], 0777 ,true);
         }
@@ -1292,7 +1292,7 @@ class UploadHandler {
             $response[$file_name] = $success;
         }
         
-		// // Hack GreenDrinks: Delete folders
+		// // Change PoP: Delete folders
 		// if (file_exists($this->vars['user_upload_thumb_fullpath'])) {
 		// 	rmdir($this->vars['user_upload_thumb_fullpath']);
   //           rmdir($this->vars['user_upload_original_fullpath']);

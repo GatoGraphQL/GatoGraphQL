@@ -193,7 +193,7 @@ class EM_Gateways_Transactions{
 		<?php
 	}
 
-	// Hack GreenDrinks: it is 9 columns by default, not 7		
+	// Hack PoP Plug-in: it is 9 columns by default, not 7		
 	function print_transactions($transactions, $columns=9){
 		ob_start();
 		if($transactions) {
@@ -273,7 +273,7 @@ class EM_Gateways_Transactions{
 				<?php
 			}
 		} else {
-			// Hack GreenDrinks: $columns is already a number
+			// Hack PoP Plug-in: $columns is already a number
 			//$columncount = count($columns);
 			$columncount = $columns;
 			?>

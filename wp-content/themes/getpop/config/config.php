@@ -270,17 +270,17 @@ function gd_get_logo_impl($gd_logo) {
 
 	if (GetPoP_Utils::is_demo()) {
 
-		$large = array(GETPOP_ASSETS_URI.'/img/popdemo-logo.png', 600, 340, 'image/png');
-		$large_inverse = array(GETPOP_ASSETS_URI.'/img/popdemo-logo.png', 600, 340, 'image/png');
-		$large_white = array(GETPOP_ASSETS_URI.'/img/popdemo-logo-whitebg.png', 600, 340, 'image/png');
-		$small = array(GETPOP_ASSETS_URI.'/img/popdemo-logo-square.png', 150, 150, 'image/png');
+		$large = array(GETPOP_ASSETS_URI.'/img/popdemo-logo.png', 640, 250, 'image/png');
+		$large_inverse = array(GETPOP_ASSETS_URI.'/img/popdemo-logo.png', 640, 250, 'image/png');
+		$large_white = array(GETPOP_ASSETS_URI.'/img/popdemo-logo-whitebg.png', 640, 250, 'image/png');
+		$small = array(GETPOP_ASSETS_URI.'/img/pop-logo-favicon.png', 150, 150, 'image/png');
 	}
 	else {
 
-		$large = array(GETPOP_ASSETS_URI.'/img/pop-logo.png', 600, 240, 'image/png');
-		$large_inverse = array(GETPOP_ASSETS_URI.'/img/pop-logo.png', 600, 240, 'image/png');
-		$large_white = array(GETPOP_ASSETS_URI.'/img/pop-logo-whitebg.png', 600, 240, 'image/png');
-		$small = array(GETPOP_ASSETS_URI.'/img/pop-logo-square.png', 150, 150, 'image/png');
+		$large = array(GETPOP_ASSETS_URI.'/img/pop-logo.png', 640, 250, 'image/png');
+		$large_inverse = array(GETPOP_ASSETS_URI.'/img/pop-logo.png', 640, 250, 'image/png');
+		$large_white = array(GETPOP_ASSETS_URI.'/img/pop-logo-whitebg.png', 640, 250, 'image/png');
+		$small = array(GETPOP_ASSETS_URI.'/img/pop-logo-favicon.png', 150, 150, 'image/png');
 	}
 
 	return array(
@@ -295,18 +295,19 @@ function gd_login_logo_impl($gd_logo) {
 
 	// Modify the dimensions of the logo for the wp logged out page (http://m3l.localhost/wp-login.php?loggedout=true)
 	$gd_logo[1] = 300;
-	$gd_logo[2] = 120;
+	$gd_logo[2] = 300;
 		
 	return $gd_logo;
 }
 add_filter('gd_images_background', 'gd_images_background_impl');
+add_filter('gd_images_loading', 'gd_images_background_impl');
 function gd_images_background_impl($img) {
 
 	if (GetPoP_Utils::is_demo()) {
-		return GETPOP_ASSETS_URI.'/img/popdemo-logo.png';
+		return GETPOP_ASSETS_URI.'/img/popdemo-logo-horizontal.png';
 	}
 
-	return GETPOP_ASSETS_URI.'/img/pop-logo.png';
+	return GETPOP_ASSETS_URI.'/img/pop-logo-horizontal.png';
 }
 
 /**---------------------------------------------------------------------------------------------------------------

@@ -74,7 +74,7 @@ class EM_Locations extends EM_Object {
 		if( $count ){
 			return apply_filters('em_locations_get_array', count($wpdb->get_col($sql)), $args);	
 		}
-		// Hack GreenDrinks: somehow filter 'em_locations_get_sql' disappeared, we need it for the dataloader-locationlist, so here it's added again
+		// Hack PoP Plug-in: somehow filter 'em_locations_get_sql' disappeared, we need it for the dataloader-locationlist, so here it's added again
 		// $results = $wpdb->get_results($sql, ARRAY_A);
 		$results = $wpdb->get_results(apply_filters('gd_em_locations_get_sql', $sql), ARRAY_A);
 		

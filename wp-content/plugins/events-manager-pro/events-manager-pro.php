@@ -58,7 +58,7 @@ class EM_Pro {
 			add_action('init', array($this, 'install'),2);
 	    }
 		//Add extra Styling/JS
-		// Hack GreenDrinks: this must be a bug, changed dbem_disable_css to dbem_css_limit (as in events-manager.php)
+		// Hack PoP Plug-in: this must be a bug, changed dbem_disable_css to dbem_css_limit (as in events-manager.php)
 		//if( !get_option('dbem_disable_css') ){
 	    if( !get_option('dbem_css_limit') ){
 			add_action('wp_head', array(&$this,'wp_head'));
@@ -172,7 +172,7 @@ class EM_Pro {
 
 	function admin_head(){
 	
-		// Hack GreenDrinks: replaced:
+		// Hack PoP Plug-in: replaced:
 		/*background:url(<?php echo plugins_url('includes/images/cross.png',__FILE__); ?> */
 		//with
 		/*background:url(includes/images/cross.png)*/

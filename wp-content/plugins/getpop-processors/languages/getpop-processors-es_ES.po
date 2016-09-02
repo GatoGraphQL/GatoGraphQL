@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-21 11:54+0800\n"
-"PO-Revision-Date: 2016-08-21 11:55+0800\n"
+"POT-Creation-Date: 2016-08-28 00:06+0800\n"
+"PO-Revision-Date: 2016-08-28 00:06+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -319,23 +319,27 @@ msgstr "Sitios web PoP en el mundo:"
 msgid " | "
 msgstr " | "
 
-#: .././pop-library/processors/elements/codes.php:140
+#: .././pop-library/processors/elements/codes.php:142
 msgid "Download"
 msgstr "Descargar"
 
-#: .././pop-library/processors/elements/codes.php:140
+#: .././pop-library/processors/elements/codes.php:142
 msgid "(coming soon)"
 msgstr "(próximamente)"
 
-#: .././pop-library/processors/elements/codes.php:147
+#: .././pop-library/processors/elements/codes.php:149
 msgid "Latest version:"
 msgstr "Ultima versión:"
 
-#: .././pop-library/processors/elements/codes.php:160
+#: .././pop-library/processors/elements/codes.php:162
 msgid "Download is disabled"
 msgstr "La descarga está deshabilitada"
 
 #: .././pop-library/processors/elements/codes.php:180
+msgid "Open in GitHub"
+msgstr "Abrir en GitHub"
+
+#: .././pop-library/processors/elements/codes.php:200
 msgid ""
 "The same page can be open in many different containers, such as sidebars, "
 "floating windows, modal windows, or your own creations."
@@ -344,33 +348,33 @@ msgstr ""
 "como barras laterales, ventanas flotantes, ventanas modales, o sus propias "
 "creaciones."
 
-#: .././pop-library/processors/elements/codes.php:184
+#: .././pop-library/processors/elements/codes.php:204
 #, php-format
 msgid "Open “%s”..."
 msgstr "Abrir \"%s\"..."
 
-#: .././pop-library/processors/elements/codes.php:193
+#: .././pop-library/processors/elements/codes.php:213
 msgid "In a sidebar"
 msgstr "En una barra lateral"
 
-#: .././pop-library/processors/elements/codes.php:203
+#: .././pop-library/processors/elements/codes.php:223
 msgid "In a floating window"
 msgstr "En una ventana flotante"
 
-#: .././pop-library/processors/elements/codes.php:213
+#: .././pop-library/processors/elements/codes.php:233
 msgid "In a modal window"
 msgstr "En una ventana modal"
 
-#: .././pop-library/processors/elements/codes.php:222
-#: .././pop-library/processors/elements/codes.php:325
+#: .././pop-library/processors/elements/codes.php:242
+#: .././pop-library/processors/elements/codes.php:345
 msgid "Source: "
 msgstr "Fuente: "
 
-#: .././pop-library/processors/elements/codes.php:228
+#: .././pop-library/processors/elements/codes.php:248
 msgid "API"
 msgstr "API"
 
-#: .././pop-library/processors/elements/codes.php:231
+#: .././pop-library/processors/elements/codes.php:251
 msgid ""
 "The PoP engine automatically provides the Wordpress website of its own API. "
 "The response’s JSON code can be fed to any third-party websites, mobile phone "
@@ -381,7 +385,7 @@ msgstr ""
 "sitios de terceros, mobile apps, etc., eliminando la necesidad de implementar "
 "aplicaciones adicionales en el servidor."
 
-#: .././pop-library/processors/elements/codes.php:233
+#: .././pop-library/processors/elements/codes.php:253
 #, php-format
 msgid ""
 "There is no need for the developer to implement API endpoints: just by adding "
@@ -392,11 +396,11 @@ msgstr ""
 "API: sólo mediante la adición de <em><strong>%s=%s</strong> a la dirección "
 "URL, todas y cada página web ya es su propio endpoint</em>."
 
-#: .././pop-library/processors/elements/codes.php:289
+#: .././pop-library/processors/elements/codes.php:309
 msgid "Decentralized"
 msgstr "Descentralizado"
 
-#: .././pop-library/processors/elements/codes.php:292
+#: .././pop-library/processors/elements/codes.php:312
 msgid ""
 "The structure of the JSON code produced by the PoP engine is the same for all "
 "PoP websites, allowing them to communicate among themselves, fetching and "
@@ -406,20 +410,20 @@ msgstr ""
 "todos los sitios web, permitiéndoles de comunicarse entre sí, extrayendo y "
 "procesando datos de otros sitios en tiempo real."
 
-#: .././pop-library/processors/elements/codes.php:295
+#: .././pop-library/processors/elements/codes.php:315
 msgid "PoP allows to: "
 msgstr "PoP permite:"
 
-#: .././pop-library/processors/elements/codes.php:296
+#: .././pop-library/processors/elements/codes.php:316
 msgid "Decentralize a website’s data sources into several websites"
 msgstr ""
 "Descentralizar las fuentes de datos de un sitio web en varios sitios web"
 
-#: .././pop-library/processors/elements/codes.php:297
+#: .././pop-library/processors/elements/codes.php:317
 msgid "Aggregate data from other, independent PoP websites"
 msgstr "Agregar los datos de otros sitios web PoP, independientes"
 
-#: .././pop-library/processors/elements/codes.php:298
+#: .././pop-library/processors/elements/codes.php:318
 msgid ""
 "Easily implement microservices: a PoP website can be composed of atomic "
 "components, each of them fed with data coming from its own server"
@@ -428,7 +432,7 @@ msgstr ""
 "de componentes atómicos, cada uno de ellos alimentado con los datos "
 "procedentes de su propio servidor"
 
-#: .././pop-library/processors/elements/codes.php:300
+#: .././pop-library/processors/elements/codes.php:320
 msgid ""
 "<strong>PoP provides support for POST requests:</strong> user-generated "
 "content, such as creating a post or adding a comment, will be stored on the "
@@ -438,7 +442,7 @@ msgstr ""
 "usuario, tal como la creación de un post o añadir un comentario, se almacena "
 "en el sitio web fuente/agregado."
 
-#: .././pop-library/processors/elements/codes.php:331
+#: .././pop-library/processors/elements/codes.php:351
 msgid ""
 "Similar to Wordpress, the PoP framework has themes, however these are "
 "implemented using Handlebars templates. Each theme can, itself, have "
@@ -453,7 +457,7 @@ msgstr ""
 "html en otros sitios web, para ofrecer alternativas de presentación a los "
 "usuarios, etc."
 
-#: .././pop-library/processors/elements/codes.php:333
+#: .././pop-library/processors/elements/codes.php:353
 #, php-format
 msgid ""
 "The theme mode is specified by adding parameter <em><strong>%s</strong></em> "
@@ -462,19 +466,19 @@ msgstr ""
 "El modo del “theme” se especifica añadiendo el parámetro <em><strong>%s</"
 "strong></em> en la URL."
 
-#: .././pop-library/processors/elements/codes.php:348
+#: .././pop-library/processors/elements/codes.php:368
 msgid "“Embeddable” theme mode"
 msgstr "Modo de “theme” para insertar en sitios web"
 
-#: .././pop-library/processors/elements/codes.php:354
+#: .././pop-library/processors/elements/codes.php:374
 msgid "“Printable” theme mode"
 msgstr "Modo de “theme” para imprimir"
 
-#: .././pop-library/processors/elements/codes.php:370
+#: .././pop-library/processors/elements/codes.php:390
 msgid "Tabbed Browsing"
 msgstr "Navegación por pestañas"
 
-#: .././pop-library/processors/elements/codes.php:371
+#: .././pop-library/processors/elements/codes.php:391
 msgid ""
 "Similar to a browser, the website keeps all pages open, and uses tabs to "
 "switch among all of them."
@@ -482,11 +486,11 @@ msgstr ""
 "Similar a un navegador web, el sitio mantiene todas las páginas abiertas, y "
 "utiliza pestañas para alternar entre todas ellas."
 
-#: .././pop-library/processors/elements/codes.php:377
+#: .././pop-library/processors/elements/codes.php:397
 msgid "Support for Communities"
 msgstr "Soporte para Comunidades"
 
-#: .././pop-library/processors/elements/codes.php:378
+#: .././pop-library/processors/elements/codes.php:398
 msgid ""
 "The website allows for two types of user account: “Individuals” and "
 "“Organizations”. The Organizations account type allows to have members, and "
@@ -497,11 +501,11 @@ msgstr ""
 "miembros, y todo el contenido de sus miembros aparece también en el perfil de "
 "la organización."
 
-#: .././pop-library/processors/elements/codes.php:391
+#: .././pop-library/processors/elements/codes.php:411
 msgid "Highlights, and Up/Down voting posts"
 msgstr "Destacados, y votación"
 
-#: .././pop-library/processors/elements/codes.php:392
+#: .././pop-library/processors/elements/codes.php:412
 msgid ""
 "Any user can highlight meaningful bits of information from each post, making "
 "it easier for other users to understand the essence of the post. These ones "
@@ -512,11 +516,11 @@ msgstr ""
 "entender la esencia del post. Otros usuarios pueden, a su vez, votar para "
 "mostrar si están en acuerdo o desacuerdo con el extracto."
 
-#: .././pop-library/processors/elements/codes.php:398
+#: .././pop-library/processors/elements/codes.php:418
 msgid "Co-authoring and inter-linking posts"
 msgstr "Co-autoría y inter-vinculación de contenido"
 
-#: .././pop-library/processors/elements/codes.php:399
+#: .././pop-library/processors/elements/codes.php:419
 msgid ""
 "When creating content, users are allowed to select any number of co-authors, "
 "which will not only be displayed on the corresponding post, but also will "
@@ -528,11 +532,11 @@ msgstr ""
 "editar el post. Además, se pueden seleccionar aquéllos posts que estén "
 "relacionados, y éstos aparecerán vinculados entre sí."
 
-#: .././pop-library/processors/elements/codes.php:405
+#: .././pop-library/processors/elements/codes.php:425
 msgid "Different levels of content moderation"
 msgstr "Diferentes niveles de moderación de contenido"
 
-#: .././pop-library/processors/elements/codes.php:406
+#: .././pop-library/processors/elements/codes.php:426
 msgid ""
 "Content posted by the users can be published immediately, or await for "
 "admin’s approval for publishing. In case the post is published immediately, a "
@@ -545,11 +549,11 @@ msgstr ""
 "inapropiado\" permiten a la comunidad de usuarios moderar el contenido en el "
 "sitio web."
 
-#: .././pop-library/processors/elements/codes.php:412
+#: .././pop-library/processors/elements/codes.php:432
 msgid "Following users and recommending posts"
 msgstr "Seguir usuarios y recomendar posts"
 
-#: .././pop-library/processors/elements/codes.php:413
+#: .././pop-library/processors/elements/codes.php:433
 msgid ""
 "Users can have followers, who will receive notifications following the user’s "
 "activity, such as when recommending a post, posting a new article, adding a "
@@ -559,11 +563,11 @@ msgstr ""
 "notificaciones sobre la actividad del usuario, tales como cuando recomienda "
 "un post, publica un nuevo artículo, añade un comentario, etc."
 
-#: .././pop-library/processors/elements/codes.php:419
+#: .././pop-library/processors/elements/codes.php:439
 msgid "Real time updates"
 msgstr "Actualizaciones en tiempo real"
 
-#: .././pop-library/processors/elements/codes.php:420
+#: .././pop-library/processors/elements/codes.php:440
 msgid ""
 "Whenever there is a new post added to the website, all users concurrently "
 "browsing the website (either logged in or not) will receive an automatic "
@@ -573,11 +577,11 @@ msgstr ""
 "sitio web concurrentemente (ya sea estén logueados o no) recibirán una "
 "actualización en forma automática."
 
-#: .././pop-library/processors/elements/codes.php:443
+#: .././pop-library/processors/elements/codes.php:463
 msgid "@Mentions and #Hashtags"
 msgstr "@Menciones y #Hashtags"
 
-#: .././pop-library/processors/elements/codes.php:444
+#: .././pop-library/processors/elements/codes.php:464
 msgid ""
 "When creating a post or adding a comment, the user can mention any other "
 "user, and this person will receive a notification, and add Twitter-like "
@@ -587,11 +591,11 @@ msgstr ""
 "usuario, y esta persona recibirá una notificación. También se pueden añadir "
 "hashtags como en Twitter."
 
-#: .././pop-library/processors/elements/codes.php:481
+#: .././pop-library/processors/elements/codes.php:501
 msgid "Fully cacheable"
 msgstr "Totalmente cacheable"
 
-#: .././pop-library/processors/elements/codes.php:482
+#: .././pop-library/processors/elements/codes.php:502
 msgid ""
 "Most pages in the website are cached, independently if the user is logged in "
 "or not. This can be done because these pages have been stripped of all user "
@@ -611,11 +615,11 @@ msgstr ""
 "del usuario (por ejemplo, \"Editar mi perfil\", \"Mis eventos\", etc.) son no "
 "almacenadas en caché."
 
-#: .././pop-library/processors/elements/codes.php:488
+#: .././pop-library/processors/elements/codes.php:508
 msgid "Different levels of cache"
 msgstr "Diferentes niveles de caché"
 
-#: .././pop-library/processors/elements/codes.php:489
+#: .././pop-library/processors/elements/codes.php:509
 msgid ""
 "In addition to caching the HTML response, the website caches the settings for "
 "all similar posts. This way, upon requesting two posts belonging to the same "
@@ -629,11 +633,11 @@ msgstr ""
 "configuración almacenados en caché y sólo necesita extraer los datos de los "
 "objetos de la base de datos."
 
-#: .././pop-library/processors/elements/codes.php:495
+#: .././pop-library/processors/elements/codes.php:515
 msgid "Lazy loading"
 msgstr "Carga “lazy”"
 
-#: .././pop-library/processors/elements/codes.php:496
+#: .././pop-library/processors/elements/codes.php:516
 msgid ""
 "Selected content, such as comments added to a post, can be loaded only after "
 "the page has loaded, allowing for a faster initial page load."
@@ -642,11 +646,11 @@ msgstr ""
 "pueden ser cargados sólo después de que haya cargado la página web, lo que "
 "permite una rápida carga de la página inicial."
 
-#: .././pop-library/processors/elements/codes.php:502
+#: .././pop-library/processors/elements/codes.php:522
 msgid "Extra information added to the URL, hidden to the user"
 msgstr "Información adicional agregada a la URL, oculta al usuario"
 
-#: .././pop-library/processors/elements/codes.php:503
+#: .././pop-library/processors/elements/codes.php:523
 msgid ""
 "When the user clicks on a link, PoP intercepts the request to submit it using "
 "AJAX. PoP can add extra parameters to the URL, which are not in the original "
@@ -657,11 +661,11 @@ msgstr ""
 "no están en el enlace original (y por lo tanto ocultos al usuario), tales "
 "como: idioma, theme, timestamp, etc."
 
-#: .././pop-library/processors/elements/codes.php:509
+#: .././pop-library/processors/elements/codes.php:529
 msgid "Deep linking for functionalities"
 msgstr "Deep linking de funcionalidades"
 
-#: .././pop-library/processors/elements/codes.php:511
+#: .././pop-library/processors/elements/codes.php:531
 #, php-format
 msgid ""
 "Whenever possible, functionalities in the website are executed using a "
@@ -677,11 +681,11 @@ msgstr ""
 "añadir un comentario a un post, enlaces para abrir el mapa de ubicación, "
 "enlaces para contactar un usuario."
 
-#: .././pop-library/processors/elements/codes.php:519
+#: .././pop-library/processors/elements/codes.php:539
 msgid "Fully crawlable by Google and other search engines"
 msgstr "Totalmente indexable por Google y otros motores de búsqueda"
 
-#: .././pop-library/processors/elements/codes.php:521
+#: .././pop-library/processors/elements/codes.php:541
 #, php-format
 msgid ""
 "Even though the data is sent using JSON, and the website is rendered using "
@@ -701,11 +705,11 @@ msgstr ""
 "de interceptar la petición), por lo que el motor de búsqueda nunca va a "
 "recuperar una página en formato JSON, sólo en HTML."
 
-#: .././pop-library/processors/elements/codes.php:530
+#: .././pop-library/processors/elements/codes.php:550
 msgid "Background pre-loading of data"
 msgstr "Pre-carga de datos en segundo plano"
 
-#: .././pop-library/processors/elements/codes.php:532
+#: .././pop-library/processors/elements/codes.php:552
 #, php-format
 msgid ""
 "The software pre-loads specified pages, running in the background, so they "
@@ -721,15 +725,15 @@ msgstr ""
 "estas páginas han sido pre-cargadas, si es posible, su código se almacena en "
 "el navegador usando el almacenamiento local “Local Storage”."
 
-#: .././pop-library/processors/elements/codes.php:533
+#: .././pop-library/processors/elements/codes.php:553
 msgid ", "
 msgstr ", "
 
-#: .././pop-library/processors/elements/codes.php:540
+#: .././pop-library/processors/elements/codes.php:560
 msgid "Quick server’s response"
 msgstr "Rápida respuesta del servidor"
 
-#: .././pop-library/processors/elements/codes.php:541
+#: .././pop-library/processors/elements/codes.php:561
 msgid ""
 "Themes based on PoP implement their layouts using Handlebars templates, which "
 "are cached by the browser. These templates generate the HTML in the front-"
@@ -742,11 +746,11 @@ msgstr ""
 "servidor envíe sólo los datos de configuración y de objetos de base de datos, "
 "lo que permite acelerar la comunicación entre el cliente y el servidor."
 
-#: .././pop-library/processors/elements/codes.php:547
+#: .././pop-library/processors/elements/codes.php:567
 msgid "Compatible with Wordpress’ legacy code"
 msgstr "Compatible con el código heredado de Wordpress"
 
-#: .././pop-library/processors/elements/codes.php:548
+#: .././pop-library/processors/elements/codes.php:568
 msgid ""
 "PoP requires plug-ins to provide their data query results in a given format, "
 "so they must implement some functionality to adapt it for PoP. However, this "
@@ -757,11 +761,11 @@ msgstr ""
 "funciones para adaptarse a PoP. Sin embargo, esta integración es mínima, y ​​se "
 "puede proporcionar en un plug-in adicional."
 
-#: .././pop-library/processors/elements/codes.php:564
+#: .././pop-library/processors/elements/codes.php:584
 msgid "Niche social networks/crowd-sourced websites"
 msgstr "Redes sociales de nicho/Sitios web crowd-sourced"
 
-#: .././pop-library/processors/elements/codes.php:565
+#: .././pop-library/processors/elements/codes.php:585
 msgid ""
 "PoP offers plenty of crowd-sourcing and social networking features, such as: "
 "user content creation, user profiles, recommending and sharing posts, "
@@ -774,11 +778,11 @@ msgstr ""
 "tiempo real, cuenta de usuario para una comunidad, mecanismo de moderación "
 "del contenido, etc."
 
-#: .././pop-library/processors/elements/codes.php:571
+#: .././pop-library/processors/elements/codes.php:591
 msgid "APIs for Wordpress websites"
 msgstr "APIs para sitios web Wordpress"
 
-#: .././pop-library/processors/elements/codes.php:572
+#: .././pop-library/processors/elements/codes.php:592
 msgid ""
 "Any Wordpress website which needs an API to allow third parties to interact "
 "with it, can implement the PoP engine and use its API."
@@ -786,11 +790,11 @@ msgstr ""
 "Cualquier sitio web Wordpress que necesita una API para permitir a terceros "
 "que interactúan con él, puede implementar el API del PoP engine."
 
-#: .././pop-library/processors/elements/codes.php:578
+#: .././pop-library/processors/elements/codes.php:598
 msgid "Server back-end for mobile apps"
 msgstr "Servidor back-end para aplicaciones móviles"
 
-#: .././pop-library/processors/elements/codes.php:579
+#: .././pop-library/processors/elements/codes.php:599
 msgid ""
 "Similarly, PoP allows any Wordpress website to export its data for its own "
 "mobile app, without the need to implement yet another application for the "
@@ -800,11 +804,11 @@ msgstr ""
 "datos para su propia mobile app, sin la necesidad de implementar una nueva "
 "aplicación en el back-end."
 
-#: .././pop-library/processors/elements/codes.php:585
+#: .././pop-library/processors/elements/codes.php:605
 msgid "Decentralized websites"
 msgstr "Sitios web descentralizados"
 
-#: .././pop-library/processors/elements/codes.php:586
+#: .././pop-library/processors/elements/codes.php:606
 msgid ""
 "PoP allows a website to decentralize its data sources, getting data from all "
 "of them as needed, in real time."
@@ -812,11 +816,11 @@ msgstr ""
 "Pop permite a un sitio web descentralizar sus fuentes de datos, pudiendo "
 "obtener datos de todos ellos, según sea necesario, en tiempo real."
 
-#: .././pop-library/processors/elements/codes.php:592
+#: .././pop-library/processors/elements/codes.php:612
 msgid "Content aggregators"
 msgstr "Agregadores de contenidos"
 
-#: .././pop-library/processors/elements/codes.php:593
+#: .././pop-library/processors/elements/codes.php:613
 msgid ""
 "Inversely, a PoP website can fetch data from other, independent websites, so "
 "becoming an aggregator."
@@ -824,11 +828,11 @@ msgstr ""
 "A la inversa, un sitio web PoP puede extraer datos de otros, independientes, "
 "sitios web, convirtiéndose así en un agregador."
 
-#: .././pop-library/processors/elements/codes.php:599
+#: .././pop-library/processors/elements/codes.php:619
 msgid "Microservices"
 msgstr "Microservices"
 
-#: .././pop-library/processors/elements/codes.php:600
+#: .././pop-library/processors/elements/codes.php:620
 msgid ""
 "Being able to decentralize its data sources enables applications to be "
 "divided into atomic modules, each one of them executing just a specific "
@@ -839,11 +843,11 @@ msgstr ""
 "funcionalidad específica. PoP a continuación reúne los datos de todos los "
 "módulos."
 
-#: .././pop-library/processors/elements/codes.php:616
+#: .././pop-library/processors/elements/codes.php:636
 msgid "Faster initial load"
 msgstr "Carga inicial más rápida"
 
-#: .././pop-library/processors/elements/codes.php:617
+#: .././pop-library/processors/elements/codes.php:637
 msgid ""
 "PoP takes its time to load initially, because it loads the whole "
 "application’s javascript files. A better way would be to load only whatever "
@@ -853,11 +857,11 @@ msgstr ""
 "javascript de toda la aplicación. Una mejor manera sería cargar sólo los "
 "archivos que se necesitan y cargar el resto después."
 
-#: .././pop-library/processors/elements/codes.php:623
+#: .././pop-library/processors/elements/codes.php:643
 msgid "Standalone components/plug-ins"
 msgstr "Componentes independientes/plug-ins"
 
-#: .././pop-library/processors/elements/codes.php:624
+#: .././pop-library/processors/elements/codes.php:644
 msgid ""
 "In addition to creating themes, PoP can also be used to create plug-ins. This "
 "way, Wordpress websites can benefit from components implemented using PoP "
@@ -870,11 +874,11 @@ msgstr ""
 "implementar: comentarios en línea, creación de contenido por el usuario desde "
 "el front-end, notificaciones de usuario, campo de búsqueda/acceso rápido, etc."
 
-#: .././pop-library/processors/elements/codes.php:630
+#: .././pop-library/processors/elements/codes.php:650
 msgid "Multiple data sources for components"
 msgstr "Múltiples fuentes de datos para componentes"
 
-#: .././pop-library/processors/elements/codes.php:631
+#: .././pop-library/processors/elements/codes.php:651
 msgid ""
 "Components will be able to load data from several websites concurrently. This "
 "way, the events calendar will be able to fetch events, in real time, from "
@@ -884,11 +888,11 @@ msgstr ""
 "tiempo. De esta manera, el calendario de eventos podrá mostrar eventos, en "
 "tiempo real, provenientes de muchos sitios web diferentes."
 
-#: .././pop-library/processors/elements/codes.php:637
+#: .././pop-library/processors/elements/codes.php:657
 msgid "“Attend event” functionality"
 msgstr "Funcionalidad “Asistir al evento”"
 
-#: .././pop-library/processors/elements/codes.php:638
+#: .././pop-library/processors/elements/codes.php:658
 msgid ""
 "The plug-in used currently for events is <strong>Events Manager</strong>, "
 "which allows users to attend events, however the implementation for PoP has "
@@ -898,11 +902,11 @@ msgstr ""
 "strong>, el cual permite a los usuarios de asistir a eventos, sin embargo la "
 "implementación de esta funcionalidad para PoP aún no se ha hecho."
 
-#: .././pop-library/processors/elements/codes.php:644
+#: .././pop-library/processors/elements/codes.php:664
 msgid "Volunteering platform"
 msgstr "Plataforma de voluntariado"
 
-#: .././pop-library/processors/elements/codes.php:645
+#: .././pop-library/processors/elements/codes.php:665
 msgid ""
 "Currently, when applying to volunteer for a project, a form is shown for the "
 "user to input his or her information, which is then sent to the project "
@@ -921,20 +925,20 @@ msgstr ""
 "Después de ser voluntario, el usuario verá la experiencia aparecer en su "
 "página de perfil, y se le enviarán notificaciones a su red de usuarios."
 
-#: .././pop-library/processors/elements/codes.php:651
+#: .././pop-library/processors/elements/codes.php:671
 msgid "Messaging"
 msgstr "Mensajería"
 
-#: .././pop-library/processors/elements/codes.php:652
+#: .././pop-library/processors/elements/codes.php:672
 msgid "PoP will enable users to send and read messages within the website."
 msgstr ""
 "PoP permitirá a los usuarios enviar y leer mensajes dentro del sitio web."
 
-#: .././pop-library/processors/elements/codes.php:658
+#: .././pop-library/processors/elements/codes.php:678
 msgid "Integration with WooCommerce for a marketplace"
 msgstr "Integración con WooCommerce para un mercado"
 
-#: .././pop-library/processors/elements/codes.php:659
+#: .././pop-library/processors/elements/codes.php:679
 msgid ""
 "After integrating with <strong>WooCommerce</strong>, users will be able to "
 "upload and sell products in a PoP website. Even more, PoP aggregators will be "
@@ -946,19 +950,19 @@ msgstr ""
 "agregadores PoP podrán vender productos de sus sitios web agregados, "
 "generando un mercado descentralizado."
 
-#: .././pop-library/processors/elements/codes.php:665
+#: .././pop-library/processors/elements/codes.php:685
 msgid "Integration with bbPress for forums"
 msgstr "Integración con bbPress para forums"
 
-#: .././pop-library/processors/elements/codes.php:666
+#: .././pop-library/processors/elements/codes.php:686
 msgid "As said, to add user forums in PoP."
 msgstr "Como dicho, para agregar foros de usuario en PoP."
 
-#: .././pop-library/processors/elements/codes.php:672
+#: .././pop-library/processors/elements/codes.php:692
 msgid "Create an app for PoP"
 msgstr "Crear un app para PoP"
 
-#: .././pop-library/processors/elements/codes.php:673
+#: .././pop-library/processors/elements/codes.php:693
 msgid ""
 "Because all PoP websites understand the same JSON code, a single mobile app "
 "could serve pretty much all of them. Even more, once PoP becomes a standalone "

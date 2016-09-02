@@ -215,23 +215,23 @@ class GetPoP_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_P
 
 		if (in_array($blockunit, $details)) {
 
-			return __('Details', 'poptheme-wassup-sectionprocessors');
+			return __('Details', 'getpop-processors');
 		}
 		elseif (in_array($blockunit, $fullviews)) {
 			
-			return __('Full view', 'poptheme-wassup-sectionprocessors');
+			return __('Full view', 'getpop-processors');
 		}
 		elseif (in_array($blockunit, $thumbnails)) {
 			
-			return __('Thumbnail', 'poptheme-wassup-sectionprocessors');
+			return __('Thumbnail', 'getpop-processors');
 		}
 		elseif (in_array($blockunit, $lists)) {
 			
-			return __('List', 'poptheme-wassup-sectionprocessors');
+			return __('List', 'getpop-processors');
 		}
 		elseif (in_array($blockunit, $maps)) {
 			
-			return __('Map', 'poptheme-wassup-sectionprocessors');
+			return __('Map', 'getpop-processors');
 		}
 
 		return parent::get_panel_header_title($blockgroup, $blockunit);

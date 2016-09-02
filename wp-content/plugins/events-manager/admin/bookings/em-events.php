@@ -36,7 +36,7 @@ function em_bookings_events_table() {
 			$scope = "future";
 	}
 	$owner = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
-	// Hack GreenDrinks: allow args to be overriden (to restrict Events to ones owned by the user + co-authored ones)
+	// Hack PoP Plug-in: allow args to be overriden (to restrict Events to ones owned by the user + co-authored ones)
 	// $events = EM_Events::get( array('scope'=>$scope, 'limit'=>$limit, 'offset' => $offset, 'order'=>$order, 'bookings'=>true, 'owner' => $owner ) );
 	$args = array('scope'=>$scope, 'limit'=>$limit, 'offset' => $offset, 'order'=>$order, 'bookings'=>true, 'owner' => $owner );
 	$args = apply_filters('gd_em_bookings_events_table_args', $args);

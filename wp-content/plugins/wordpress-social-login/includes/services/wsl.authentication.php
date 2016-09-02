@@ -863,7 +863,7 @@ function wsl_process_login_authenticate_wp_user( $user_id, $provider, $redirect_
 		// Set WP auth cookie
 		wp_set_auth_cookie( $user_id, true );
 
-		// Hack GreenDrinks: set the current user. Otherwise, calling is_user_logged_in() returns false, and we won't know in the toplevel feedback that the user is logged in
+		// Hack PoP Plug-in: set the current user. Otherwise, calling is_user_logged_in() returns false, and we won't know in the toplevel feedback that the user is logged in
 		wp_set_current_user($user_id);
 
 		// let keep it std
@@ -885,7 +885,7 @@ function wsl_process_login_authenticate_wp_user( $user_id, $provider, $redirect_
 	// > this will give a complete report on what wsl did : database queries and fired hooks
 	// wsl_display_dev_mode_debugging_area(); die(); // ! keep this line commented unless you know what you are doing :)
 
-	// Hack GreenDrinks: comment everything below, since we'll be logging in using the platform of platforms. No redirection is needed, and the code cannot die either.
+	// Hack PoP Plug-in: comment everything below, since we'll be logging in using the platform of platforms. No redirection is needed, and the code cannot die either.
 	// // That's it. We done.
 	// wp_safe_redirect( $redirect_to );
 

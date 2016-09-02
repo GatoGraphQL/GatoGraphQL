@@ -132,41 +132,61 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 				}
 
 				// Downloads
-				$left = sprintf(
-					'<p><a href="%s" target="_blank" class="btn btn-block btn-primary btn-lg %s" %s><i class="fa fa-fw fa-download"></i>%s</a></p>',
-					GETPOP_URL_DOWNLOADLINK ? GETPOP_URL_DOWNLOADLINK : '#',
-					GETPOP_URL_DOWNLOADLINK ? '' : 'disabled',
-					GETPOP_URL_DOWNLOADLINK ? '' : 'disabled="disabled"',
-					__('Download', 'getpop-processors').(GETPOP_URL_DOWNLOADLINK ? '' : ' '.sprintf('<small>%s</small>', __('(coming soon)', 'getpop-processors')))
-				);
+				if (GETPOP_URL_DOWNLOADLINK || !GETPOP_URL_GITHUBREPOSITORY) {
+					
+					$left = sprintf(
+						'<p><a href="%s" target="_blank" class="btn btn-block btn-primary btn-lg %s" %s><i class="fa fa-fw fa-download"></i>%s</a></p>',
+						GETPOP_URL_DOWNLOADLINK ? GETPOP_URL_DOWNLOADLINK : '#',
+						GETPOP_URL_DOWNLOADLINK ? '' : 'disabled',
+						GETPOP_URL_DOWNLOADLINK ? '' : 'disabled="disabled"',
+						__('Download', 'getpop-processors').(GETPOP_URL_DOWNLOADLINK ? '' : ' '.sprintf('<small>%s</small>', __('(coming soon)', 'getpop-processors')))
+					);
 
-				if (GETPOP_URL_DOWNLOADLINK) {
+					if (GETPOP_URL_DOWNLOADLINK) {
 
-					$right = sprintf(
-						'<p><strong><em>%s</em></strong> %s</p>',
-						__('Latest version:', 'getpop-processors'),
-						apply_filters(
-							'GetPoP_Template_Processor_Codes:demodownloads:download:version',
-							pop_version()
-						)
+						$right = sprintf(
+							'<p><strong><em>%s</em></strong> %s</p>',
+							__('Latest version:', 'getpop-processors'),
+							apply_filters(
+								'GetPoP_Template_Processor_Codes:demodownloads:download:version',
+								pop_version()
+							)
+						);
+					}
+					else {
+
+						$right = sprintf(
+							'<p>%s</p>',
+							apply_filters(
+								'GetPoP_Template_Processor_Codes:demodownloads:disableddownload:description',
+								__('Download is disabled', 'getpop-processors')
+							)
+						);
+					}
+
+					$code .= sprintf(
+						$row,
+						$left,
+						$right
 					);
 				}
-				else {
 
-					$right = sprintf(
-						'<p>%s</p>',
-						apply_filters(
-							'GetPoP_Template_Processor_Codes:demodownloads:disableddownload:description',
-							__('Download is disabled', 'getpop-processors')
-						)
+				// GitHub
+				if (GETPOP_URL_GITHUBREPOSITORY) {
+
+					$left = sprintf(
+						'<p><a href="%s" target="_blank" class="btn btn-block btn-warning btn-lg"><i class="fa fa-fw fa-github"></i>%s</a></p>',
+						GETPOP_URL_GITHUBREPOSITORY,
+						__('Open in GitHub', 'getpop-processors')
+					);
+					$right = '';
+
+					$code .= sprintf(
+						$row,
+						$left,
+						$right
 					);
 				}
-
-				$code .= sprintf(
-					$row,
-					$left,
-					$right
-				);
 
 				return $code;
 

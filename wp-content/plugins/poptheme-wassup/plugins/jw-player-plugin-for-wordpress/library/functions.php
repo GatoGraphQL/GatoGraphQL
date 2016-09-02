@@ -59,7 +59,7 @@ function gd_jwp6_attachment_fields_to_edit($form_fields, $post) {
 
 function gd_jwp6_add_media_tabs($tabs) {
 	
-	// Hack GreenDrinks: unset the original tab "jwp6_media_external", instead use a customized version
+	// Change PoP: unset the original tab "jwp6_media_external", instead use a customized version
 	//$tabs["jwp6_media_external"] = 'Add External Media';
 	
 	$tabs = array('gd_jwp6_media_external' => __('External media files', 'poptheme-wassup'));
@@ -472,11 +472,11 @@ add_filter('gd_comments_content', array('JWP6_Shortcode', 'the_content_filter'),
 //     $key = get_option(JWP6 . 'license_key');
 //     if ($key || null === JWP6_PLAYER_LOCATION) {
 //         echo '<script type="text/javascript">';
-//         // Hack GreenDrinks: extra line
+//         // Change PoP: extra line
 //         echo 'if (jwplayer) { ';
 //         if ( $key ) echo "jwplayer.key='$key';";
 //         if ( null === JWP6_PLAYER_LOCATION ) echo 'jwplayer.defaults = { "ph": 2 };';
-//         // Hack GreenDrinks: extra line
+//         // Change PoP: extra line
 //         echo ' }';
 //         echo '</script>';
 //     }

@@ -48,7 +48,7 @@ class EM_Coupons extends EM_Object {
 		add_action('em_bookings_table_cols_template', array('EM_Coupons', 'em_bookings_table_cols_template'),10,1);
 		add_filter('em_bookings_table_rows_col_coupon', array('EM_Coupons', 'em_bookings_table_rows_col_coupon'), 10, 3);
 		//add css for coupon field
-		// Hack GreenDrinks: these 2 actions below, only execute if not limiting the css, as in events-manager-pro.php
+		// Hack PoP Plug-in: these 2 actions below, only execute if not limiting the css, as in events-manager-pro.php
 		if( !get_option('dbem_css_limit') ){
 			add_action('wp_head',array('EM_Coupons', 'wp_head'));
 			add_action('admin_head',array('EM_Coupons', 'wp_head'));

@@ -90,8 +90,8 @@ function gd_ure_add_filtercomponent_communityusers($filtercomponents) {
 	if (gd_ure_is_community($author) && $vars['source'] == GD_URE_URLPARAM_CONTENTSOURCE_COMMUNITY) {
 
 		// Add it after the search
-		global $gd_filtercomponent_search, $gd_ure_filtercomponent_communityusers;
-		array_splice($filtercomponents, array_search($gd_filtercomponent_search, $filtercomponents)+1, 0, array($gd_ure_filtercomponent_communityusers));
+		global $gd_filtercomponent_search, $gd_ure_filtercomponent_communities_post, $gd_ure_filtercomponent_communityusers;
+		array_splice($filtercomponents, array_search($gd_filtercomponent_search, $filtercomponents)+1, 0, array($gd_ure_filtercomponent_communities_post, $gd_ure_filtercomponent_communityusers));
 	}
 	return $filtercomponents;
 }

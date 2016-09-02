@@ -231,7 +231,7 @@ class DS_Public_Post_Preview {
 	  * @param  WP_Post $post  The post object.
 	  * @return string         The generated public preview link.
 	  */
-	// Hack GreenDrinks: change from private to public so we can also access it
+	// Change PoP: change from private to public so we can also access it
 	// private static function get_preview_link( $post ) {
 	public static function get_preview_link( $post ) {
 		if ( 'page' == $post->post_type ) {
@@ -520,7 +520,7 @@ class DS_Public_Post_Preview {
 	 *
 	 * @return array The post ids. (Empty array if no ids are registered.)
 	 */
-	// Hack GreenDrinks: change from private to public so we can also access it
+	// Change PoP: change from private to public so we can also access it
 	// private static function get_preview_post_ids() {
 	public static function get_preview_post_ids() {
 		return get_option( 'public_post_preview', array() );
@@ -533,7 +533,7 @@ class DS_Public_Post_Preview {
 	 *
 	 * @return array The post ids. (Empty array if no ids are registered.)
 	 */
-	// Hack GreenDrinks: change from private to public so we can also access it
+	// Change PoP: change from private to public so we can also access it
 	// private static function set_preview_post_ids( $post_ids = array( )) {
 	public static function set_preview_post_ids( $post_ids = array( )) {
 		return update_option( 'public_post_preview', $post_ids );

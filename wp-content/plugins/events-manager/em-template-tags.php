@@ -233,7 +233,7 @@ function em_events_admin($args = array()){
 		    $args_views['draft'] = array('status'=>null, 'owner' =>get_current_user_id(), 'scope' => 'all', 'recurring'=>'include');
 		    $args_views['past'] = array('status'=>'all', 'owner' =>get_current_user_id(), 'scope' => 'past');
 		    $args_views['future'] = array('status'=>'1', 'owner' =>get_current_user_id(), 'scope' => 'future');
-		    // Hack GreenDrinks: allow to modify the $args_views (and show events also from co-authors)
+		    // Hack PoP Plug-in: allow to modify the $args_views (and show events also from co-authors)
 			$args_views['pending'] = apply_filters('gd_em_events_admin_pending_count_args', $args_views['pending'], $EM_Event);
 			$args_views['draft'] = apply_filters('gd_em_events_admin_draft_count_args', $args_views['draft'], $EM_Event);
 			$args_views['past'] = apply_filters('gd_em_events_admin_past_count_args', $args_views['past'], $EM_Event);
@@ -262,7 +262,7 @@ function em_events_admin($args = array()){
 				}
 				$args['status'] = $status;
 			}
-			// Hack GreenDrinks: allow to modify the $args (and show events also from co-authors)
+			// Hack PoP Plug-in: allow to modify the $args (and show events also from co-authors)
 			$args = apply_filters('gd_em_events_admin_args', $args, $EM_Event);	
 			
 			$events_count = EM_Events::count( $args ); //count events without limits for pagination

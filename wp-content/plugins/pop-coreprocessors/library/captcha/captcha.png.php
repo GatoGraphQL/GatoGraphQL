@@ -118,7 +118,7 @@ header('Content-Type: image/jpeg');// defining the image type to be shown in bro
 imagejpeg($image);//showing the image
 imagedestroy($image);//destroying the image instance
 
-// Hack GreenDrinks: choose where to place the code in the SESSION
+// Hack PoP Plug-in: choose where to place the code in the SESSION
 $session = isset($_REQUEST['session']) ? $_REQUEST['session'] : 'code';
 GD_CaptchaUtils::set_session_code($session, $code);
 

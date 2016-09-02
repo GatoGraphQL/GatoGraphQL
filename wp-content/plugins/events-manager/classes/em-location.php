@@ -907,7 +907,7 @@ class EM_Location extends EM_Object {
 					    $args['format'] = get_option('dbem_location_event_list_item_format');
 						$args['limit'] = get_option('dbem_location_event_list_limit');
 						$args['page'] = (!empty($_REQUEST['pno']) && is_numeric($_REQUEST['pno']) )? $_REQUEST['pno'] : 1;
-					    // Hack GreenDrinks: added line below to also account for post_id
+					    // Hack PoP Plug-in: added line below to also account for post_id
 						$args['post_id'] = !empty($_REQUEST['post_id']) ? $_REQUEST['post_id'] : '';
 					    $replace = EM_Events::output($args);
 					} else {

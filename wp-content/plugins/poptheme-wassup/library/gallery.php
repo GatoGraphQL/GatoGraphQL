@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// // Override what sizes can be chosen for the Gallery: this was added using a Hack GreenDrinks
+// // Override what sizes can be chosen for the Gallery: this was added using a Change PoP
 // add_filter('pop_galleryimage_size_names_choose', 'pop_galleryimage_size_names_choose');
 // function pop_galleryimage_size_names_choose($sizes) {
 
@@ -76,7 +76,7 @@ function gd_post_gallery($output, $attr) {
 		'icontag'    => $html5 ? 'div'        : 'dt',
 		'captiontag' => $html5 ? 'figcaption' : 'dd',
 		'columns'    => 3,
-		// Hack GreenDrinks: change the default size to "thumb-pagewide"
+		// Change PoP: change the default size to "thumb-pagewide"
 		// 'size'       => 'thumbnail',
 		'size'       => 'thumb-pagewide',
 		'include'    => '',
@@ -139,7 +139,7 @@ function gd_post_gallery($output, $attr) {
 	 *                    Defaults to false if the theme supports HTML5 galleries.
 	 *                    Otherwise, defaults to true.
 	 */
-	// Hack GreenDrinks: commented all code below, no need to override anything
+	// Change PoP: commented all code below, no need to override anything
 	// Instead, use the following gallery_div:
 	$size_class = sanitize_html_class( $size );
 	$output = "<div class='gallery gallery-size-{$size_class}'>";
@@ -182,7 +182,7 @@ function gd_post_gallery($output, $attr) {
 
 	$i = 0;
 	foreach ( $attachments as $id => $attachment ) {
-		// Hack GreenDrinks: always add the link to the file
+		// Change PoP: always add the link to the file
 		// All lines below commented
 		// if ( ! empty( $link ) && 'file' === $link )
 			$image_output = wp_get_attachment_link( $id, $size, false, false );
@@ -210,14 +210,14 @@ function gd_post_gallery($output, $attr) {
 		}
 		$output .= "</{$itemtag}>";
 
-		// Hack GreenDrinks: no need to add the <br/>, we want all images all fitting in a row, adjusted by screen size
+		// Change PoP: no need to add the <br/>, we want all images all fitting in a row, adjusted by screen size
 		// Lines below commented
 		// if ( ! $html5 && $columns > 0 && ++$i % $columns == 0 ) {
 		// 	$output .= '<br style="clear: both" />';
 		// }
 	}
 
-	// Hack GreenDrinks: no need to add the <br/>, we want all images all fitting in a row, adjusted by screen size
+	// Change PoP: no need to add the <br/>, we want all images all fitting in a row, adjusted by screen size
 	// Lines below commented
 	// if ( ! $html5 && $columns > 0 && $i % $columns !== 0 ) {
 	// 	$output .= "

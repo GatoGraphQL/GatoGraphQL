@@ -1036,7 +1036,7 @@ class EM_Object {
 		}
 		
 		if( !$can_manage && !$is_owner && !empty($error_msg) ){
-			// Hack GreenDrinks: add a hook to not add the error message yet (since later on we overrid can_manage function)
+			// Hack PoP Plug-in: add a hook to not add the error message yet (since later on we overrid can_manage function)
 			// $this->add_error($error_msg);
 			$add_error = apply_filters('gd_em_can_manage_add_error', true, $this, $owner_capability, $admin_capability, $user_to_check);
 			if ($add_error)

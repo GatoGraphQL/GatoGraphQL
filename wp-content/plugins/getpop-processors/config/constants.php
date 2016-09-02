@@ -9,5 +9,6 @@ define ('GETPOP_PROCESSORS_PAGE_HOME', false);
 //--------------------------------------------------------
 define ('GETPOP_URL_DEMOWEBSITE', false);
 define ('GETPOP_URL_DOWNLOADLINK', false);
+define ('GETPOP_URL_GITHUBREPOSITORY', false);
 define ('GETPOP_URL_EXTERNALWEBSITEDOMAIN', false);
 define ('GETPOP_URL_EXTERNALWEBSITENAME', false);

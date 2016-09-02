@@ -62,7 +62,7 @@ function pop_useravatar_avatar_sizes($sizes) {
 // }
 function gd_get_useravatar_photoinfo($user_id, $use_default = true) {
 
-	// Hack GreenDrinks: If the function has a filter, then execute this one instead
+	// Change PoP: If the function has a filter, then execute this one instead
 	// This way we allow the AWS logic to take over
 	if (has_filter('gd_get_useravatar_photoinfo:override')) {
 		return apply_filters('gd_get_useravatar_photoinfo:override', array(), $user_id);

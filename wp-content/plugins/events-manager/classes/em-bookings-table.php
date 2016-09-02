@@ -196,7 +196,7 @@ class EM_Bookings_Table{
 			$EM_Person = $this->get_person();
 			if( $EM_Person !== false ){
 				$args = array('person'=>$EM_Person->ID,'scope'=>$this->scope,'status'=>$this->get_status_search(),'order'=>$this->order,'orderby'=>$this->orderby);
-				// Hack GreenDrinks: allow $args to be overriden
+				// Hack PoP Plug-in: allow $args to be overriden
 				$args = apply_filters('gd_em_get_bookings_person_args', $args);
 				$this->bookings_count = EM_Bookings::count($args);
 				$this->bookings = EM_Bookings::get(array_merge($args, array('limit'=>$this->limit,'offset'=>$this->offset)));
@@ -216,7 +216,7 @@ class EM_Bookings_Table{
 				//bookings for an event
 				$args = array('event'=>$EM_Event->event_id,'scope'=>false,'status'=>$this->get_status_search(),'order'=>$this->order,'orderby'=>$this->orderby);
 				$args['owner'] = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
-				// Hack GreenDrinks: allow $args to be overriden
+				// Hack PoP Plug-in: allow $args to be overriden
 				$args = apply_filters('gd_em_get_bookings_event_args', $args);
 				$this->bookings_count = EM_Bookings::count($args);
 				$this->bookings = EM_Bookings::get(array_merge($args, array('limit'=>$this->limit,'offset'=>$this->offset)));
@@ -225,7 +225,7 @@ class EM_Bookings_Table{
 				//all bookings for a status
 				$args = array('status'=>$this->get_status_search(),'scope'=>$this->scope,'order'=>$this->order,'orderby'=>$this->orderby);
 				$args['owner'] = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
-				// Hack GreenDrinks: allow $args to be overriden
+				// Hack PoP Plug-in: allow $args to be overriden
 				$args = apply_filters('gd_em_get_bookings_args', $args);								
 				$this->bookings_count = EM_Bookings::count($args);
 				$this->bookings = EM_Bookings::get(array_merge($args, array('limit'=>$this->limit,'offset'=>$this->offset)));

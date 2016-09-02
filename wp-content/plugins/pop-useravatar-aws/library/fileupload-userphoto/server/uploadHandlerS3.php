@@ -54,7 +54,7 @@ class UploadHandlerS3 {
 
         $this->bucket = POP_FILEUPLOAD_AWS_WORKINGBUCKET;
 
-        // Hack GreenDrinks
+        // Change PoP
         $this->prefix = $this->vars['upload_dir'];
         $this->originalprefix = $this->vars['upload_originaldir'];
         $this->thumbprefix = $this->vars['upload_thumbdir'];
@@ -115,7 +115,7 @@ class UploadHandlerS3 {
             'max_file_size' => null,
             'min_file_size' => 1,
             // The maximum number of files for the upload directory:
-            // Hack GreenDrinks: set number of files to 1
+            // Change PoP: set number of files to 1
             'max_number_of_files' => 1,
             // Defines which files are handled as image files:
             'image_file_types' => '/\.(gif|jpe?g|png)$/i',
@@ -129,7 +129,7 @@ class UploadHandlerS3 {
             // Set to 0 to use the GD library to scale and orient images,
             // set to 1 to use imagick (if installed, falls back to GD),
             // set to 2 to use the ImageMagick convert binary directly:
-            // Hack GreenDrinks: originally this was set to "1", however it fails in AWS, it gives a 500 Internal Server Error, so changed to "0" instead
+            // Change PoP: originally this was set to "1", however it fails in AWS, it gives a 500 Internal Server Error, so changed to "0" instead
             'image_library' => 0,
             // Uncomment the following to define an array of resource limits
             // for imagick:
@@ -172,7 +172,7 @@ class UploadHandlerS3 {
             ) 
         );
         
-        // Hack GreenDrinks
+        // Change PoP
         $thumb_sizes = $this->vars['avatar_sizes'];
         // Important: sort them from the largest to the smallest size, otherwise it fails on code "if ($scale >= 1) {"
         // (Somehow it takes the img_width/height from the previous step, then the scale is < 1 or something like that)
@@ -223,7 +223,7 @@ class UploadHandlerS3 {
 
     protected function get_full_url() {
 
-        // Hack GreenDrinks: added the HTTP_X_FORWARDED_PROTO bit:
+        // Change PoP: added the HTTP_X_FORWARDED_PROTO bit:
         // in some setups HTTP_X_FORWARDED_PROTO might contain 
         // a comma-separated list e.g. http,https
         // so check for https existence
@@ -307,10 +307,10 @@ class UploadHandlerS3 {
             $file->deleteWithCredentials = true;
         }
         
-        // Hack GreenDrinks
+        // Change PoP
         $file->deleteUrl .= '&upload_path='.$this->vars['upload_path'];
 
-        // Hack GreenDrinks: add also the width/height, needed for PhotoSwipe
+        // Change PoP: add also the width/height, needed for PhotoSwipe
         // Comment Leo 14/02/2016: we don't reference to "original" pic anymore, so no need to send the dimensions
         // $file_path = $this->get_upload_path($file->name);
         // if ($originalSize = getimagesize($file_path)) {
@@ -553,7 +553,7 @@ class UploadHandlerS3 {
         // Also remove control characters and spaces (\x00..\x20) around the filename:
         $name = trim(basename(stripslashes($name)), ".\x00..\x20");
 
-        // Hack GreenDrinks: it is not really replacing spaces in the name, so do it now
+        // Change PoP: it is not really replacing spaces in the name, so do it now
         $name = str_replace(' ', '-', $name);
 
         // Use a timestamp for empty filenames:
@@ -581,7 +581,7 @@ class UploadHandlerS3 {
             if (!empty($extensions)) {
                 $parts = explode('.', $name);
                 $extIndex = count($parts) - 1;
-                // Hack GreenDrinks: if the filename ext is in uppercase (eg: JPG) transform to lowercase, because somehow uploading to AWS S3 will transform it to lowercase, so standardize
+                // Change PoP: if the filename ext is in uppercase (eg: JPG) transform to lowercase, because somehow uploading to AWS S3 will transform it to lowercase, so standardize
                 // $ext = strtolower(@$parts[$extIndex]);
                 $ext = @$parts[$extIndex];
                 if (!in_array($ext, $extensions)) {
@@ -804,12 +804,12 @@ class UploadHandlerS3 {
             $max_width / $img_width,
             $max_height / $img_height
         );
-        // Hack GreenDrinks: Originally the condition below is:
+        // Change PoP: Originally the condition below is:
         // if ($scale >= 1) {
         // But then, it doesn't work generating the first avatar with image size 150,
         // which is the same as as the "thumb"
         if ($scale > 1) {
-            // Hack GreenDrinks: the copied image does not have the right ACL, so fix it here
+            // Change PoP: the copied image does not have the right ACL, so fix it here
             // if ($image_oriented) {
             //     return $write_func($src_img, $new_file_path, $image_quality);
             // }
@@ -866,7 +866,7 @@ class UploadHandlerS3 {
                 break;
         }
 
-        // Hack GreenDrinks: the code below fails to upload to S3
+        // Change PoP: the code below fails to upload to S3
         // Hack provided in https://gist.github.com/tim-peterson/8172999 (cassianotartari commented on Sep 25, 2014)
         // $success = imagecopyresampled(
         //     $new_img,
@@ -1227,7 +1227,7 @@ class UploadHandlerS3 {
                 else {
                     move_uploaded_file($uploaded_file, $file_path);
 
-                    // Hack GreenDrinks: the file uploaded has ACL set as private. Make it 'public-read'
+                    // Change PoP: the file uploaded has ACL set as private. Make it 'public-read'
                     // Taken from https://gist.github.com/tim-peterson/8172999 (adc-tcarvalho commented on Sep 23, 2014)
                     $key = $this->originalprefix . basename($file_path);
                     $this->s3->putObjectAcl(array(

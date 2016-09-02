@@ -100,7 +100,7 @@ class AAL_Maintenance {
 }
 
 register_activation_hook( ACTIVITY_LOG_BASE, array( 'AAL_Maintenance', 'activate' ) );
-// Hack GreenDrinks: do NOT remove tables if the plug-in is uninstalled, all the notifications will be there!
+// Hack PoP Plug-in: do NOT remove tables if the plug-in is uninstalled, all the notifications will be there!
 // register_uninstall_hook( ACTIVITY_LOG_BASE, array( 'AAL_Maintenance', 'uninstall' ) );
 
 // MU installer for new blog.

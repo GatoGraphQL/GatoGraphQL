@@ -22,7 +22,7 @@ function get_coauthors( $post_id = 0 ) {
 					$coauthors[] = $post_author;
 			}
 		} else if ( !$coauthors_plus->force_guest_authors ) {
-			// Hack GreenDrinks: for old posts, the plugin didn't save the Author in the terms, so it's missing
+			// Hack PoP Plug-in: for old posts, the plugin didn't save the Author in the terms, so it's missing
 			// This creates a bug: for WPUF frontend, global $post is the page to edit the post, and not the post, so it takes that one
 			// Ask before if there's a $post_id, since this one is the right one for the post
 			if ( !is_admin()) {

@@ -5,3 +5,6 @@ if (class_exists('acf'))
 
 if(defined('AAL_POP_VERSION'))
 	require_once 'aryo-activity-log-pop/load.php';
+	
+// if (class_exists('EM_Event'))	
+// 	require_once 'events-manager/load.php';

@@ -10,7 +10,7 @@
 if( ! function_exists( 'wsl_render_notice_page' ) ) {
 	function wsl_render_notice_page( $message ) {
 
-		// Hack GreenDrinks: no HTML here. Instead, add the message to the global errors
+		// Change PoP: no HTML here. Instead, add the message to the global errors
 		GD_TemplateManager_Utils::$errors[] = $message;
 	}
 }
@@ -18,7 +18,7 @@ if( ! function_exists( 'wsl_render_notice_page' ) ) {
 if( ! function_exists( 'wsl_render_error_page' ) ) {
 	function wsl_render_error_page( $message, $notes = null, $provider = null, $api_error = null, $php_exception = null ) {
 
-		// Hack GreenDrinks: only keep 'wsl_clear_user_php_session' and add the message to the global errors
+		// Change PoP: only keep 'wsl_clear_user_php_session' and add the message to the global errors
 		GD_TemplateManager_Utils::$errors[] = $message;
 
 		# keep these 2 LOC

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// Hack GreenDrinks
+// Change PoP
 define ('POP_USERAVATAR_FILENAME', 'useravatar_filename');
 
 
@@ -22,7 +22,7 @@ function user_avatar_admin_print_styles() {
 	global $hook_suffix;
 	wp_enqueue_script("thickbox");
 	wp_enqueue_style("thickbox");
-	// Hack GreenDrinks
+	// Change PoP
 	// wp_enqueue_style('user-avatar', plugins_url('/user-avatar/css/user-avatar.css'), 'css');
 	wp_enqueue_style('user-avatar', plugins_url('/pop-useravatar/css/user-avatar.css'), 'css');
 }
@@ -40,7 +40,7 @@ function user_avatar_init(){
 	wp_enqueue_style( 'wp-admin' );
 	wp_enqueue_style( 'colors' );
 	wp_enqueue_style( 'ie' );
-	// Hack GreenDrinks
+	// Change PoP
 	// wp_enqueue_style('user-avatar', plugins_url('/user-avatar/css/user-avatar.css'), 'css');
 	wp_enqueue_style('user-avatar', plugins_url('/pop-useravatar/css/user-avatar.css'), 'css');
 	wp_enqueue_style('imgareaselect');
@@ -61,7 +61,7 @@ function user_avatar_core_set_avatar_constants() {
 	
 	global $bp;
 
-	// Hack GreenDrinks: Save the user avatar filename in the DB?
+	// Change PoP: Save the user avatar filename in the DB?
 	// Added as an option, because the logic for checking for the file in the hard-drive has been also implemented,
 	// yet it doesn't work as fast when hosting the avatars on AWS S3
 	if (!defined('POP_USERAVATAR_USEMETA')) {
@@ -74,7 +74,7 @@ function user_avatar_core_set_avatar_constants() {
 	if ( !defined( 'USER_AVATAR_URL' ) )
 		define( 'USER_AVATAR_URL', user_avatar_core_avatar_url() );
 
-	// Hack GreenDrinks: commented because not used
+	// Change PoP: commented because not used
 	// if ( !defined( 'USER_AVATAR_THUMB_WIDTH' ) )
 	// 	define( 'USER_AVATAR_THUMB_WIDTH', 50 );
 
@@ -87,7 +87,7 @@ function user_avatar_core_set_avatar_constants() {
 	if ( !defined( 'USER_AVATAR_FULL_HEIGHT' ) )
 		define( 'USER_AVATAR_FULL_HEIGHT', 150 );
 
-	// Hack GreenDrinks: User photo dimensions, resized from the original image without cropping
+	// Change PoP: User photo dimensions, resized from the original image without cropping
 	if ( !defined( 'USER_AVATAR_PHOTO_MAXHEIGHT' ) )
 		define( 'USER_AVATAR_PHOTO_MAXHEIGHT', 600 );
 	if ( !defined( 'USER_AVATAR_PHOTO_MAXWIDTH' ) )
@@ -108,7 +108,7 @@ function user_avatar_core_set_avatar_constants() {
 		
 		
 	// set the language 
-	// Hack GreenDrinks: comment
+	// Change PoP: comment
 	// load_plugin_textdomain( 'user-avatar', false , basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
@@ -444,7 +444,7 @@ function user_avatar_add_photo_step3($uid) {
 		return true;
 	}
 
-	// Hack GreenDrinks: externalize content into a separate function
+	// Change PoP: externalize content into a separate function
 	gd_user_avatar_add_photo($uid, $original_file, $_POST);
 	
 	/* Remove the original */
@@ -469,7 +469,7 @@ function user_avatar_add_photo_step3($uid) {
 <?php	
 }	
 
-// Hack GreenDrinks: remove spaces, trim, etc
+// Change PoP: remove spaces, trim, etc
 // Function copied from BlueImp uploadHandler.php: protected function trim_file_name($file_path, $name, $size, $type, $error, $index, $content_range)
 function gd_useravatar_trim_file_name($file_path, $name) {
     
@@ -478,7 +478,7 @@ function gd_useravatar_trim_file_name($file_path, $name) {
     // Also remove control characters and spaces (\x00..\x20) around the filename:
     $name = trim(basename(stripslashes($name)), ".\x00..\x20");
 
-    // Hack GreenDrinks: it is not really replacing spaces in the name, so do it now
+    // Change PoP: it is not really replacing spaces in the name, so do it now
     $name = str_replace(' ', '-', $name);
 
     // Use a timestamp for empty filenames:
@@ -513,7 +513,7 @@ function gd_useravatar_trim_file_name($file_path, $name) {
         if (!empty($extensions)) {
             $parts = explode('.', $name);
             $extIndex = count($parts) - 1;
-            // Hack GreenDrinks: if the filename ext is in uppercase (eg: JPG) transform to lowercase, because somehow uploading to AWS S3 will transform it to lowercase, so standardize
+            // Change PoP: if the filename ext is in uppercase (eg: JPG) transform to lowercase, because somehow uploading to AWS S3 will transform it to lowercase, so standardize
             // $ext = strtolower(@$parts[$extIndex]);
             $ext = @$parts[$extIndex];
             if (!in_array($ext, $extensions)) {
@@ -525,16 +525,16 @@ function gd_useravatar_trim_file_name($file_path, $name) {
     return $name;
 }
 
-// Hack GreenDrinks: externalize content into a separate function
+// Change PoP: externalize content into a separate function
 function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
 	
-	// Hack GreenDrinks: variable $filepath changed, variable $folderpath and $filename are new
+	// Change PoP: variable $filepath changed, variable $folderpath and $filename are new
 	// Comment Leo 05/02/2016: to add compatibility to the structure for both AWS and non-AWS versions,
 	// keep the name of the file as the original, and regenerate the structure from the folders, with each folder containing 1 file 
 	
 	$filename = basename($original_file);//"{$uid}_".time();
 
-	// Hack GreenDrinks: remove spaces, trim, etc
+	// Change PoP: remove spaces, trim, etc
 	// Function copied from BlueImp uploadHandler.php
 	$filename = gd_useravatar_trim_file_name($original_file, $filename);
 
@@ -554,7 +554,7 @@ function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
 	// Create the structure again
 	mkdir($folderpath);
 
-	// Hack GreenDrinks: create extra folder also
+	// Change PoP: create extra folder also
 	mkdir($originalpath);
 	mkdir($thumbpath);
 	mkdir($photopath);
@@ -570,7 +570,7 @@ function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
 		$cropinfo['width'] = $cropinfo['height'] = $file_size_min;
 	}
 	
-	// Hack GreenDrinks: copy the original, resize the original, crop the thumb
+	// Change PoP: copy the original, resize the original, crop the thumb
 	copy($original_file, $original);
 	$image = wp_get_image_editor( $original_file );
 	if ( ! is_wp_error( $image ) ) {
@@ -579,13 +579,13 @@ function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
 	}
 	$thumb = wp_crop_image( $original_file, $cropinfo['x1'], $cropinfo['y1'], $cropinfo['width'], $cropinfo['height'], USER_AVATAR_FULL_WIDTH, USER_AVATAR_FULL_HEIGHT, false, $thumb );	
 	
-	// Hack GreenDrinks: create extra avatars
+	// Change PoP: create extra avatars
 	gd_useravatar_save_avatars($original_file, $filename, $folderpath, $thumb);
 
 	// Save the user meta with the avatar filename
 	gd_useravatar_save_filename($uid, $filename);
 	
-	// Hack GreenDrinks: allow for further actions, eg: uploading the image to S3
+	// Change PoP: allow for further actions, eg: uploading the image to S3
 	do_action('gd_user_avatar', $uid, $folderpath, $filename, $original, $thumb, $photo);
 }	
 /**
@@ -595,7 +595,7 @@ function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
  * @param mixed $uid
  * @return void
  */
-// Hack GreenDrinks: directly delete the folder using the recursive function below
+// Change PoP: directly delete the folder using the recursive function below
 // recursive function taken from https://secure.php.net/manual/en/function.rmdir.php
 // function user_avatar_delete_files($uid)
 // {
@@ -662,14 +662,14 @@ function user_avatar_fetch_avatar_filter( $avatar, $user, $size, $default, $alt 
 		$user_avatar = user_avatar_fetch_avatar( array( 'item_id' => $id, 'width' => $size, 'height' => $size, 'alt' => $alt ) );
 		if($user_avatar)
 			return $user_avatar;
-	// Hack GreenDrinks: all below commented, only 1 line at the end including a filter to change the result
+	// Change PoP: all below commented, only 1 line at the end including a filter to change the result
 	// 	else
 	// 		return !empty( $avatar ) ? $avatar : $default;
 	// else:
 	// 	return !empty( $avatar ) ? $avatar : $default;
 	endif;
 	// for good measure 
-	// Hack GreenDrinks: add filter to change default result
+	// Change PoP: add filter to change default result
 	return apply_filters('gd_avatar_default', (!empty( $avatar ) ? $avatar : $default), $user, $size, $default, $alt);
 }
 
@@ -693,7 +693,7 @@ function user_avatar_fetch_avatar( $args = '' ) {
 		'object'		=> "user",		// user/group/blog/custom type (if you use filters)
 		'type'			=> 'full',		// thumb or full
 		'avatar_dir'	=> false,		// Specify a custom avatar directory for your object
-		// Hack GreenDrinks: changed from false to 150
+		// Change PoP: changed from false to 150
 		'width'			=> 150,		// Custom width (int)
 		'height'		=> 150,		// Custom height (int)
 		'class'			=> '',			// Custom <img> class (string)
@@ -708,11 +708,11 @@ function user_avatar_fetch_avatar( $args = '' ) {
 	$params = wp_parse_args( $args, $defaults );
 	extract( $params, EXTR_SKIP );
 
-	// Hack GreenDrinks: comment unneeded code
+	// Change PoP: comment unneeded code
 	// if($width > 50)
 	// 	$type = "full";
 		
-	// Hack GreenDrinks: comment unneeded code
+	// Change PoP: comment unneeded code
 	// $avatar_size = ( 'full' == $type ) ? '-bpfull' : '-bpthumb';
 	$class .= " avatar ";
 	$class .= " avatar-". $width ." ";
@@ -731,7 +731,7 @@ function user_avatar_fetch_avatar( $args = '' ) {
 	if ( !empty( $css_id ) )
 		$css_id = " id=\"".esc_attr($css_id)."\"";
 	
-	// Hack GreenDrinks: comment unneeded code
+	// Change PoP: comment unneeded code
 	$html_width = " width=\"".esc_attr($width)."\"";
 	// // Set avatar width
 	// if ( $width )
@@ -739,7 +739,7 @@ function user_avatar_fetch_avatar( $args = '' ) {
 	// else
 	// 	$html_width = ( 'thumb' == $type ) ? ' width="' . esc_attr(USER_AVATAR_THUMB_WIDTH) . '"' : ' width="' . esc_attr(USER_AVATAR_FULL_WIDTH) . '"';
 
-	// Hack GreenDrinks: comment unneeded code
+	// Change PoP: comment unneeded code
 	$html_height = " height=\"".esc_attr($height)."\"";
 	// Set avatar height
 	// if ( $height )
@@ -748,28 +748,28 @@ function user_avatar_fetch_avatar( $args = '' ) {
 	// 	$html_height = ( 'thumb' == $type ) ? ' height="' . esc_attr(USER_AVATAR_THUMB_HEIGHT) . '"' : ' height="' . esc_attr(USER_AVATAR_FULL_HEIGHT) . '"';
 	
 
-	// Hack GreenDrinks: all of it pretty much
+	// Change PoP: all of it pretty much
 	if ($avatar_data = user_avatar_avatar_exists($item_id, array('size' => $width))):
 
 		$avatar_url = $avatar_data['url'];
 		
-		// Hack GreenDrinks: comment all code below, unneeded
-		// // Hack GreenDrinks: this is a bugs, it must use USER_AVATAR_URL where the path can be overriden
+		// Change PoP: comment all code below, unneeded
+		// // Change PoP: this is a bugs, it must use USER_AVATAR_URL where the path can be overriden
 		// // Also already point to folder "/thumb"
 		// //$avatar_src = get_site_url()."/wp-content/uploads/avatars/".$item_id."/".$avatar_img;
 		// $avatar_src = USER_AVATAR_URL.$item_id."/thumb/".$avatar_img;
 		// if(function_exists('is_subdomain_install') && !is_subdomain_install())
-		// 	// Hack GreenDrinks: same problems with this line here			
+		// 	// Change PoP: same problems with this line here			
 		// 	//$avatar_src = "/wp-content/uploads/avatars/".$item_id."/".$avatar_img;
 		// 	$avatar_src = "/".USER_AVATAR_UPLOAD_PATH.$item_id."/thumb/".$avatar_img;
 		
-		// // Hack GreenDrinks: add /thumb
+		// // Change PoP: add /thumb
 		// $avatar_folder_dir = USER_AVATAR_UPLOAD_PATH."{$item_id}/thumb/";		
 		// $file_time = filemtime ($avatar_folder_dir."/".$avatar_img);
 		
 		// $avatar_url = plugins_url('/user-avatar/user-avatar-pic.php')."?src=".$avatar_src ."&w=".$width."&id=".$item_id."&random=".$file_time;
 		
-		// Hack GreenDrinks: add a filter for the response, so we can add a hook to replace the string
+		// Change PoP: add a filter for the response, so we can add a hook to replace the string
 		// So all the code below has been modified
 		$avatar = '';
 
@@ -787,13 +787,13 @@ function user_avatar_fetch_avatar( $args = '' ) {
 	endif;
 }
 
-// Hack GreenDrinks
+// Change PoP
 function gd_useravatar_avatar_sizes() {
 
 	return apply_filters('gd_useravatar_avatar_sizes', array());
 }
 
-// Hack GreenDrinks
+// Change PoP
 function gd_useravatar_save_avatars($original_file, $filename, $dest_filepath, $cropped_file = null/*, $check_exists = false*/) {
 	
 	// Crop them to make them square
@@ -930,7 +930,7 @@ function user_avatar_form($profile)
  * @param mixed $id
  * @return void
  */
-// Hack GreenDrinks: add the $size
+// Change PoP: add the $size
 function user_avatar_avatar_exists($id, $args = ''){
 
 	$defaults = array(
@@ -941,7 +941,7 @@ function user_avatar_avatar_exists($id, $args = ''){
 	// Compare defaults to passed and extract
 	$params = wp_parse_args( $args, $defaults );
 
-	// Hack GreenDrinks: If the function has a filter, then execute this one instead
+	// Change PoP: If the function has a filter, then execute this one instead
 	// This way we allow the AWS logic to take over
 	if (has_filter('user_avatar_avatar_exists:override')) {
 		return apply_filters('user_avatar_avatar_exists:override', false, $id, $params);

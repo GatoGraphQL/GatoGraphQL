@@ -5,7 +5,7 @@ class AAL_PoP_Hooks {
 	
 	public function __construct() {
 
-		// Hack GreenDrinks: comment all original hooks, use my own implementations instead
+		// Hack PoP Plug-in: comment all original hooks, use my own implementations instead
 		// // Load abstract class.
 		// include( plugin_dir_path( ACTIVITY_LOG__FILE__ ) . '/hooks/abstract-class-aal-hook-base.php' );
 

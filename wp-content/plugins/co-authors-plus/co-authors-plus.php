@@ -576,7 +576,7 @@ class coauthors_plus {
 	function posts_join_filter( $join, $query ){
 		global $wpdb;
 
-		// Hack GreenDrinks (again): what matters is if we're filtering by author, so check on this one condition on the query (in addition to if it's the author page)
+		// Hack PoP Plug-in (again): what matters is if we're filtering by author, so check on this one condition on the query (in addition to if it's the author page)
 		// if( $query->is_author() ) {		
 		if ($query->is_author() || $query->query_vars['author']) {
 
@@ -589,7 +589,7 @@ class coauthors_plus {
 			// Check to see that JOIN hasn't already been added. Props michaelingp and nbaxley
 			$term_relationship_join = " INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id)";
 
-			// Hack GreenDrinks: allow for Co-Authors plus to work together with categories
+			// Hack PoP Plug-in: allow for Co-Authors plus to work together with categories
 			// Solution found here: http://wordpress.org/support/topic/plugin-co-authors-plus-cant-query-posts-for-category-and-author-together
 			if ($query->get('cat')) {
 				$term_relationship_join = " INNER JOIN {$wpdb->term_relationships} AS coauthor_relationships ON ({$wpdb->posts}.ID = coauthor_relationships.object_id) INNER JOIN {$wpdb->term_taxonomy} AS coauthor_taxonomy ON (coauthor_relationships.term_taxonomy_id = coauthor_taxonomy.term_taxonomy_id)";			
@@ -614,7 +614,7 @@ class coauthors_plus {
 	function posts_where_filter( $where, $query ){
 		global $wpdb;
 
-		// Hack GreenDrinks (again): what matters is if we're filtering by author, so check on this one condition on the query (in addition to if it's the author page)
+		// Hack PoP Plug-in (again): what matters is if we're filtering by author, so check on this one condition on the query (in addition to if it's the author page)
 		// if ( $query->is_author() ) {
 		if ($query->is_author() || $query->query_vars['author']) {
 
@@ -622,7 +622,7 @@ class coauthors_plus {
 				return $where;
 
 			
-			// Hack GreenDrinks: if more than 1 author, then do the replacement for each one of them
+			// Hack PoP Plug-in: if more than 1 author, then do the replacement for each one of them
 			// if ( $query->get( 'author_name' ) )
 			// 	$author_name = sanitize_title( $query->get( 'author_name' ) );
 			// else {
@@ -646,10 +646,10 @@ class coauthors_plus {
 				}
 			}
 
-			// Hack GreenDrinks: move outside, so it can have many terms for each author, without overriding
+			// Hack PoP Plug-in: move outside, so it can have many terms for each author, without overriding
 			$this->having_terms = '';
 
-			// Hack GreenDrinks: addition of the for loop, to do this for each author
+			// Hack PoP Plug-in: addition of the for loop, to do this for each author
 			foreach ($author_names as $author_name) {
 
 				$terms = array();
@@ -674,32 +674,32 @@ class coauthors_plus {
 
 				if ( !empty( $terms ) ) {
 					$terms_implode = '';
-					// Hack GreenDrinks: move outside, so it can have many terms for each author, without overriding
+					// Hack PoP Plug-in: move outside, so it can have many terms for each author, without overriding
 					// $this->having_terms = '';
 					foreach( $terms as $term ) {
 						$terms_implode .= '(' . $wpdb->term_taxonomy . '.taxonomy = \''. $this->coauthor_taxonomy.'\' AND '. $wpdb->term_taxonomy .'.term_id = \''. $term->term_id .'\') OR ';
 						$this->having_terms .= ' ' . $wpdb->term_taxonomy .'.term_id = \''. $term->term_id .'\' OR ';
 					}
 					$terms_implode = rtrim( $terms_implode, ' OR' );
-					// Hack GreenDrinks: move outside, so it can have many terms for each author, without overriding
+					// Hack PoP Plug-in: move outside, so it can have many terms for each author, without overriding
 					// $this->having_terms = rtrim( $this->having_terms, ' OR' );
 
 					$where = preg_replace( '/(\b(?:' . $wpdb->posts . '\.)?post_author\s*=\s*(\d+))/', '(' . $maybe_both_query . ' ' . $terms_implode . ')', $where, 1 ); #' . $wpdb->postmeta . '.meta_id IS NOT NULL AND
-					// Hack GreenDrinks: addition line below: when users are selected thru query_vars['author'], the WHERE statement is an IN, not an =
+					// Hack PoP Plug-in: addition line below: when users are selected thru query_vars['author'], the WHERE statement is an IN, not an =
 					$where = preg_replace( '/(\b(?:' . $wpdb->posts . '\.)?post_author\s*IN\s*\(([,0123456789]+\)))/', '(' . $maybe_both_query . ' ' . $terms_implode . ')', $where, 1 ); #' . $wpdb->postmeta . '.meta_id IS NOT NULL AND
 
-					// Hack GreenDrinks: allow for Co-Authors plus to work together with categories
+					// Hack PoP Plug-in: allow for Co-Authors plus to work together with categories
 					// Solution found here: http://wordpress.org/support/topic/plugin-co-authors-plus-cant-query-posts-for-category-and-author-together
 					if ($query->get('cat')) {
 
-						// Hack GreenDrinks: when users are selected thru query_vars['author'], the WHERE statement is an IN, not an =
+						// Hack PoP Plug-in: when users are selected thru query_vars['author'], the WHERE statement is an IN, not an =
 						$where = preg_replace( '/(\b(?:' . $wpdb->posts . '\.)?post_author\s*=\s*(\d+))/', '($1 OR (coauthor_taxonomy.taxonomy = \''. $this->coauthor_taxonomy.'\' AND coauthor_taxonomy.term_id = \''. $term->term_id .'\'))', $where, 1); #' . $wpdb->postmeta . '.meta_id IS NOT NULL AND
 						$where = preg_replace( '/(\b(?:' . $wpdb->posts . '\.)?post_author\s*IN\s*\(([,0123456789]+\)))/', '($1 OR (coauthor_taxonomy.taxonomy = \''. $this->coauthor_taxonomy.'\' AND coauthor_taxonomy.term_id = \''. $term->term_id .'\'))', $where, 1); #' . $wpdb->postmeta . '.meta_id IS NOT NULL AND
 					}
 				}
 			}
 
-			// Hack GreenDrinks: move outside, so it can have many terms for each author, without overriding
+			// Hack PoP Plug-in: move outside, so it can have many terms for each author, without overriding
 			$this->having_terms = rtrim( $this->having_terms, ' OR' );
 		}
 		return $where;
@@ -711,7 +711,7 @@ class coauthors_plus {
 	function posts_groupby_filter( $groupby, $query ) {
 		global $wpdb;
 
-		// Hack GreenDrinks (again): what matters is if we're filtering by author, so check on this one condition on the query (in addition to if it's the author page)
+		// Hack PoP Plug-in (again): what matters is if we're filtering by author, so check on this one condition on the query (in addition to if it's the author page)
 		// if( $query->is_author() ) {
 		if ($query->is_author() || $query->query_vars['author']) {
 

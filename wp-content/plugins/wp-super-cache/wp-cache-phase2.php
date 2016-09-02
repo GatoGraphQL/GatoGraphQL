@@ -372,24 +372,24 @@ function wp_cache_maybe_dynamic( &$buffer ) {
 	} else {
 		wp_cache_debug( 'wp_cache_maybe_dynamic: returned $buffer', 4 );
 		
-		// Hack GreenDrinks: even if the page is not to be cached, it must though still apply the compression
+		// Hack PoP Plug-in: even if the page is not to be cached, it must though still apply the compression
 		// This is because we cannot use the apache/php compression anymore if enabled in WP Super Cache,
 		// but then it must apply it everywhere. Otherwise, pages in $cache_rejected_uri, eg: /my-content, will not be compressed
 		global $cache_compression, $wp_cache_gzip_encoding;
 		if ( $cache_compression && $wp_cache_gzip_encoding ) {
-			wp_cache_debug( "Hack GreenDrinks: Gzipping buffer.", 5 );
+			wp_cache_debug( "Hack PoP Plug-in: Gzipping buffer.", 5 );
 			wp_cache_add_to_buffer( $buffer, "Compression = gzip" );
 			$gzdata = gzencode( $buffer, 6, FORCE_GZIP );
 			$gzsize = function_exists( 'mb_strlen' ) ? mb_strlen( $gzdata, '8bit' ) : strlen( $gzdata );
 			if ( !headers_sent() && $gzdata) {
-				wp_cache_debug( "Hack GreenDrinks: Writing gzip content headers. Sending buffer to browser", 5 );
+				wp_cache_debug( "Hack PoP Plug-in: Writing gzip content headers. Sending buffer to browser", 5 );
 				header( 'Content-Encoding: ' . $wp_cache_gzip_encoding );
 				header( 'Vary: Accept-Encoding, Cookie' );
 				header( 'Content-Length: ' . $gzsize );
 				return $gzdata;
 			} 
 		}
-		// End Hack GreenDrinks
+		// End Hack PoP Plug-in
 
 		return $buffer;
 	}

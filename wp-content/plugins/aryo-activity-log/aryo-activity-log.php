@@ -96,7 +96,7 @@ final class AAL_Main {
 		
 		//$this->_setup_freemius();
 		
-		// Hack GreenDrinks: initialize everything using filters, and after the plugins have loaded, to allow these to be overriden
+		// Hack PoP Plug-in: initialize everything using filters, and after the plugins have loaded, to allow these to be overriden
 		// Set the priority long enough to allow other plugins to add their filter before
 		add_action ('plugins_loaded', array($this, 'pop_init'), 1000);
 		// $this->ui            = new AAL_Admin_Ui();
@@ -112,7 +112,7 @@ final class AAL_Main {
 		add_action( 'plugins_loaded', array( &$this, 'load_textdomain' ) );
 	}
 
-	// Hack GreenDrinks: allow to override the classes below. Needed to override the Hooks implementations
+	// Hack PoP Plug-in: allow to override the classes below. Needed to override the Hooks implementations
 	function pop_init() {
 
 		$ui_class = apply_filters('PoP:AAL_Main:ui:classname', 'AAL_Admin_Ui');
