@@ -65,7 +65,7 @@ In this repository, PoP ships with a theme called “Wassup”, under plug-in "p
 
 ### Installing your first website
 
-Install following DB dump, created from the PoP Demo (https://demo.getpop.org), to have your your first PoP website up and running quickly:
+Install the following DB dump, created from the PoP Demo (https://demo.getpop.org), to have your your first PoP website up and running quickly:
 
   wp-content/plugins/pop-demo-environment/install/pop_demo.sql
 
