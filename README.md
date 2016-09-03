@@ -108,16 +108,17 @@ To have a website consume data coming from other domains, crossdomain access mus
 
 Theme "wassup" implements some features for which some files from WordPress have had to be hacked. The corresponding issues will be added to TRAC soon, asking core developers to implement needed changes. But for the time being, add the following hacks, to make everything work.
 
-1. Do not allow users to access wp-login.php
+1. Requirement: Do not allow users to access wp-login.php
 
  Hack: added `do_action('gd_wp_login');` just below `require( dirname(__FILE__) . '/wp-load.php' );` in file wp-login.php
 
-2. Since there is no page reload when the user logs in, the button to open the media manager above the editor must always be there, independently of the user being logged in or not, and make it hidden when user is not logged in.
+2. Requirement: Since there is no page reload when the user logs in, the button to open the media manager above the editor must always be there, independently of the user being logged in or not, and make it hidden when user is not logged in.
 
  Hack: added `$set = apply_filters('gd_wp_editor_set', $set);` just above `if ( self::$this_tinymce ) {` in file wp-includes/class-wp-editor.php
 
-3. Show 2 buttons above the editor to open the media manager: "Add File/Image", and "Add Image/Gallery"
-Why hack: there is a bug currently in WordPress: 1) click on "Add Image/Gallery" works fine; 2) click on "Add File/Image" works fine; 3) click on "Add Image/Gallery" does not switch the tab to the Image Gallery.
+3. Requirement: Show 2 buttons above the editor to open the media manager: "Add File/Image", and "Add Image/Gallery"
+
+ Why hack: there is a bug currently in WordPress: 1) click on "Add Image/Gallery" works fine; 2) click on "Add File/Image" works fine; 3) click on "Add Image/Gallery" does not switch the tab to the Image Gallery.
 
  Hack: added `if (options.state) { workflow.setState(options.state); }` just above `wp.media.frame = workflow;` in file wp-includes/js/media-editor.js, and the corresponding `,(b.state)&&(c.setState(b.state))` after `&&(c=this.add(a,b))` in the minified version the file, wp-includes/js/media-editor.min.js
 
@@ -182,16 +183,16 @@ _**Notice:** the procedure below is quite ugly, it works for me but I see how it
  The .sh scripts copy all files to minimize to this folder, from where it minimizes them. The structure of this folder must be created in advance, under folder defined in POP_APP_MIN_FOLDER (eg: /Users/john/Sites/min/PoP/), as follows:
  
  for each theme:
-	
-		 apps/THEME-NAME/css/
-		 apps/THEME-NAME/js/
-		 themes/THEME-NAME/css/
-		 themes/THEME-NAME/js/
-		 
+  
+      apps/THEME-NAME/css/
+      apps/THEME-NAME/js/
+      themes/THEME-NAME/css/
+      themes/THEME-NAME/js/
+     
  for each plug-in:
-	
-		 plugins/PLUGIN-NAME/css/
-		 plugins/PLUGIN-NAME/js/
+  
+      plugins/PLUGIN-NAME/css/
+      plugins/PLUGIN-NAME/js/
 
 #### Generating minified files
 
@@ -262,7 +263,7 @@ When having different environments (DEV, STAGING, PROD), implementing the naming
 
 Please check in plug-in "pop-demo-environment" for an example of this.
 
-## Context (or how and why it was born)
+## How and why PoP was created: some context
 
 Some 4 years ago, I started using WordPress, and I immediately fell in love with it. I particularly loved the idea of installing plug-ins, these pieces of software contributed by the community, allowing me to not have to implement a given functionality; instead, I'd search for it among the many available plug-ins, and most likely than not I would find what I neededd.
 
