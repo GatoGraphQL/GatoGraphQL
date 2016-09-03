@@ -28,7 +28,7 @@ class GetPoP_Validation {
 		}
 
 		// The Theme is valid for both the GetPoP website and the GetPoP Demo website
-		if(!defined('GETPOP_ENVIRONMENT_VERSION') && !defined('GETPOPDEMO_ENVIRONMENT_VERSION')){
+		if(!defined('GETPOP_ENVIRONMENT_VERSION') && !defined('GETPOPDEMO_ENVIRONMENT_VERSION') && !defined('POPDEMO_ENVIRONMENT_VERSION')){
 
 			add_action('admin_notices',array($this,'plugins_env_warning'));
 			add_action('network_admin_notices',array($this,'plugins_env_warning'));

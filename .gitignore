@@ -41,5 +41,23 @@ wp-content/plugins/advanced-custom-fields-pro/
 wp-content/plugins/gravityforms/
 
 .htaccess
-environment-constants.php
-environment-config.php
+#environment-constants.php
+#environment-config.php
+
+# Include all the environment-constants from plug-in "pop-demo-environment"
+#!wp-content/plugins/pop-demo-environment/plugins/amazon-s3-and-cloudfront/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/aryo-activity-log-pop/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/events-manager-popprocessors/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/pop-aws/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/pop-coreprocessors/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/pop-useravatar-aws/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/pop-wpapi/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup/plugins/events-manager/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup/plugins/gravityforms/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup/plugins/jw-player-plugin-for-wordpress/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup/plugins/media-library-assistant/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup-categoryprocessors/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup-hosts/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/poptheme-wassup-sectionprocessors/config/environment-constants.php
+#!wp-content/plugins/pop-demo-environment/plugins/user-role-editor/config/environment-constants.php
