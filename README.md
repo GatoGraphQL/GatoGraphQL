@@ -60,13 +60,49 @@ In this repository, PoP ships with a theme called “Wassup”, under plug-in "p
 
 ## Installation
 
-To have your first website up and running quickly, I have prepared a few implementations, under repository PoP-implementations. These different implementations demonstrate how the framework can be customized for different uses.
-
-Each implementation is a bundle of: a plug-in with all the constants defined, and the corresponding database.
-
 1. Install the latest version of WordPress
 2. Download/Clone the PoP repository on the same folder
-3. (Optional) Download one of the PoP implementations' plug-ins into wp-content/plugins folder, and install the corresponding database.
+
+### Installing your first website
+
+Install following DB dump, created from the PoP Demo (https://demo.getpop.org), to have your your first PoP website up and running quickly:
+
+  wp-content/plugins/pop-demo-environment/install/pop_demo.sql
+
+The script will: create the DB, create the user and assign the permissions, and populate the tables with demo data. 
+
+This demo website is configured to run under http://popdemo.localhost
+
+wp-config configuration:
+
+    /** MySQL database */
+    define('DB_NAME', 'pop_demo');
+
+    /** MySQL database username */
+    define('DB_USER', 'pop_demo');
+
+    /** MySQL database password */
+    define('DB_PASSWORD', 'pop_demo');
+
+Admin user: 
+
+    Log in: http://popdemo.localhost/en/log-in/
+    Username: pop_demo
+    Password: pop_demo
+
+### Decentralization: enabling crossdomain
+
+To have a website consume data coming from other domains, crossdomain access must be allowed. For this, edit your .htaccess file like this:
+
+    <IfModule mod_headers.c>
+      SetEnvIf Origin "http(s)?://(.+\.)?(source-website.localhost|aggregator-website.localhost)$" AccessControlAllowOrigin=$0
+      Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+
+      # Allow for cross-domain setting of cookies, so decentralized log-in also works
+      Header set Access-Control-Allow-Credentials true
+      Header add Access-Control-Allow-Methods GET
+      Header add Access-Control-Allow-Methods POST
+    </IfModule>
 
 ### Hacks: WordPress
 
@@ -165,7 +201,7 @@ Before deploying the website to PROD, run the corresponding .sh script files to 
     bash -x $POP_APP_PATH/wp-content/themes/THEME-NAME/build/minify.sh
     bash -x $POP_APP_PATH/wp-content/apps/THEME-NAME/build/minify.sh
 
-(You can also only execute the minify.sh file included in PoP-implementations, which itself executs all minify.sh files from all plug-ins and themes)
+(You can take a look at file wp-content/plugins/pop-demo-environment/install/minify.sh, which itself executs all minify.sh files from all plug-ins and its theme)
 
 In addition, increase the version number of the affected:
 
@@ -178,26 +214,26 @@ Increasing the version number will guarantee that the latest version of the file
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
-    Constant: `POP_SERVER_USECACHE`
+    Constant: POP_SERVER_USECACHE
     Values: true|false
     Description: Create and re-use a cache of the settings of the requested page.
 
-    Constant: `POP_SERVER_USEMINIFIEDFILES`
+    Constant: POP_SERVER_USEMINIFIEDFILES
     Values: true|false
     Description: Include all .js and .css files, or the bundled and minified version.
 
-    Constant: `POP_SERVER_TEMPLATEDEFINITION_TYPE`
+    Constant: POP_SERVER_TEMPLATEDEFINITION_TYPE
     Values: 0|1|2
     Description: Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
       0: Use the original name of each module
       1: Use both
       2: Use the base36 counter number
 
-    Constant: `POP_SERVER_COMPACTJSKEYS`
+    Constant: POP_SERVER_COMPACTJSKEYS
     Values: true|false
     Description: Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
-    Constant: `POP_SERVER_USELOCALSTORAGE`
+    Constant: POP_SERVER_USELOCALSTORAGE
     Values: true|false
     Description: Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
@@ -224,7 +260,7 @@ When having different environments (DEV, STAGING, PROD), implementing the naming
 - All constants related to the application environment must be defined in files named "environment-constants.php" 
 - All logic related to the application environment must be defined in files named "environment-config.php"
 
-Please check in PoP-implementations for an example of this.
+Please check in plug-in "pop-demo-environment" for an example of this.
 
 ## Context (or how and why it was born)
 
