@@ -104,6 +104,18 @@ To have a website consume data coming from other domains, crossdomain access mus
       Header add Access-Control-Allow-Methods POST
     </IfModule>
 
+### Why have I included the 3-rd party plug-ins also?
+
+Dependencies should normally not be added to the repository, however it has been done for two reasons:
+
+1. I want to make it easy for anyone to download the source code and be able to run the website immediately (I even added a DB dump)
+2. I discovered some bugs, which were fixed
+
+This can/will be fixed in the future:
+
+- Using composer + wpackagist.org + WordPress-core-installer for managing dependencies
+- Submitting bug fixes to the plug-in authors, and send them the code fixing the issue
+
 ### Hacks: WordPress
 
 Theme "wassup" implements some features for which some files from WordPress have had to be hacked. The corresponding issues will be added to TRAC soon, asking core developers to implement needed changes. But for the time being, add the following hacks, to make everything work.
