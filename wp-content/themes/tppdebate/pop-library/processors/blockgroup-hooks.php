@@ -16,8 +16,10 @@ class TPPDebate_BlockGroupHooks {
 			array($this, 'home_topblockgroups')
 		);
 		add_filter(
-			'GD_Template_Processor_MainBlockGroups:blockgroups:author_tops',
-			array($this, 'author_topblockgroups')
+			'GD_Template_Processor_MainBlockGroups:blockgroups:tops',
+			array($this, 'authorortag_topblockgroups'),
+			10,
+			2
 		);
 
 		// Change the Blockgroups to show on the Homepage
@@ -59,11 +61,16 @@ class TPPDebate_BlockGroupHooks {
 		);
 	}
 
-	function author_topblockgroups($blockgroups) {
+	function authorortag_topblockgroups($blockgroups, $template_id) {
 
-		return array(
-			VOTINGPROCESSORS_TEMPLATE_BLOCKGROUP_AUTHOR_TOP
-		);
+		if ($template_id == GD_TEMPLATE_BLOCKGROUP_AUTHOR) {
+			
+			return array(
+				VOTINGPROCESSORS_TEMPLATE_BLOCKGROUP_AUTHOR_TOP
+			);
+		}
+
+		return $blockgroups;
 	}
 }
 

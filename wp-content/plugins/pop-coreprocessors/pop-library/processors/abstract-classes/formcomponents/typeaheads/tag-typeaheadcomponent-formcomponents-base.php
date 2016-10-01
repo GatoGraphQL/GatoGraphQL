@@ -9,7 +9,7 @@ class GD_Template_Processor_TagTypeaheadComponentFormComponentsBase extends GD_T
 
 	protected function get_value_key($template_id, $atts) {
 
-		return 'name';
+		return 'namedescription';//'name';
 	}
 	function get_template_source($template_id, $atts) {
 
@@ -17,9 +17,9 @@ class GD_Template_Processor_TagTypeaheadComponentFormComponentsBase extends GD_T
 	}
 	protected function get_tokenizer_keys($template_id, $atts) {
 
-		return array('name');
+		// return array('name');
+		return array('namedescription');
 	}
-
 
 	protected function get_source_filter($template_id, $atts) {
 

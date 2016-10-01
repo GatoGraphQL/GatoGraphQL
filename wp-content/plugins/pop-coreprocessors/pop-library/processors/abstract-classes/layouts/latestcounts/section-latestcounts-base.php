@@ -25,6 +25,11 @@ class GD_Template_Processor_SectionLatestCountsBase extends GD_Template_Processo
 				$ret[] = 'single'.$post->ID;
 				$pre = 'single-';
 			}
+			elseif ($this->is_tag($template_id, $atts)) {
+
+				$ret[] = 'tag'.get_queried_object_id();
+				$pre = 'tag-';
+			}
 
 			foreach ($section_classes as $section_class) {
 				
@@ -47,6 +52,11 @@ class GD_Template_Processor_SectionLatestCountsBase extends GD_Template_Processo
 	}
 
 	function is_author($template_id, $atts) {
+
+		return false;
+	}
+
+	function is_tag($template_id, $atts) {
 
 		return false;
 	}

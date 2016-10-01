@@ -108,6 +108,42 @@ class Wassup_URE_PageSectionSettingsProcessor extends Wassup_PageSectionSettings
 		}
 	}
 
+	// function add_sideinfo_tag_blockunits(&$ret, $template_id) {
+
+	// 	$vars = GD_TemplateManager_Utils::get_vars();
+	// 	$target = $vars['target'];
+	// 	$add = 
+	// 		($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN)/* ||
+	// 		($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW)*/;
+	// 	if ($add) {
+
+	// 		$blockgroups = $frames = array();
+	// 		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+	// 		$page_sidebars = array(
+	// 			POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCKGROUP_TAGMAINALLCONTENT_SIDEBAR,
+	// 			POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCKGROUP_TAGALLCONTENT_SIDEBAR,
+	// 			POPTHEME_WASSUP_PAGE_WEBPOSTS => GD_TEMPLATE_BLOCKGROUP_TAGWEBPOSTS_SIDEBAR,
+	// 		);
+	// 		if ($sidebar = $page_sidebars[$page_id]) {
+	// 			$blockgroups[] = $sidebar;
+	// 		}
+
+	// 		// Frames: PageSection ControlGroups
+	// 		if ($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+
+	// 			$frames[] = GD_TEMPLATE_BLOCK_PAGECONTROL_TAGSIDEBAR;
+	// 		}
+
+	// 		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+
+	// 		// Add frames only if not fetching data for the block
+	// 		if (!$vars['fetching-json-data']) {
+
+	// 			GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+	// 		}
+	// 	}
+	// }
+
 	function add_sideinfo_page_blockunits(&$ret, $template_id) {
 
 		$vars = GD_TemplateManager_Utils::get_vars();

@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_LATESTCOUNT_FARMS', PoP_ServerUtils::get_template_definition('latestcount-farms'));
 define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_FARMS', PoP_ServerUtils::get_template_definition('latestcount-author-farms'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_FARMS', PoP_ServerUtils::get_template_definition('latestcount-tag-farms'));
 
 class PoPThemeWassup_OrganikProcessors_Template_Processor_SectionLatestCounts extends GD_Template_Processor_SectionLatestCountsBase {
 
@@ -15,6 +16,7 @@ class PoPThemeWassup_OrganikProcessors_Template_Processor_SectionLatestCounts ex
 		return array(
 			GD_TEMPLATE_LATESTCOUNT_FARMS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_FARMS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_FARMS,
 		);
 	}
 
@@ -23,6 +25,7 @@ class PoPThemeWassup_OrganikProcessors_Template_Processor_SectionLatestCounts ex
 		$cats = array(
 			GD_TEMPLATE_LATESTCOUNT_FARMS => POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_FARMS => POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_FARMS => POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS,
 		);
 		if ($cat = $cats[$template_id]) {
 				
@@ -37,6 +40,7 @@ class PoPThemeWassup_OrganikProcessors_Template_Processor_SectionLatestCounts ex
 		$cats = array(
 			GD_TEMPLATE_LATESTCOUNT_FARMS => POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_FARMS => POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_FARMS => POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS,
 		);
 		if ($cat = $cats[$template_id]) {
 				
@@ -54,6 +58,7 @@ class PoPThemeWassup_OrganikProcessors_Template_Processor_SectionLatestCounts ex
 			
 			case GD_TEMPLATE_LATESTCOUNT_FARMS:
 			case GD_TEMPLATE_LATESTCOUNT_AUTHOR_FARMS:
+			case GD_TEMPLATE_LATESTCOUNT_TAG_FARMS:
 
 				$ret[] = 'post-'.POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS;
 				$ret[] = 'post-'.POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMLINKS;
@@ -73,6 +78,18 @@ class PoPThemeWassup_OrganikProcessors_Template_Processor_SectionLatestCounts ex
 		}
 	
 		return parent::is_author($template_id, $atts);
+	}
+
+	function is_tag($template_id, $atts) {
+
+		switch ($template_id) {
+			
+			case GD_TEMPLATE_LATESTCOUNT_TAG_FARMS:
+				
+				return true;
+		}
+	
+		return parent::is_tag($template_id, $atts);
 	}
 }
 

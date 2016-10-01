@@ -295,9 +295,9 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 }
 
 
-#ps-background .jumbotron {
+/*#ps-background .jumbotron {
   background-color: #eff4c1;
-}
+}*/
 
 #notifications-count,
 #ps-top .scroll-notifications .preview.notification-layout {
@@ -308,22 +308,19 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
     background-color: #6acada;
 }
 
-/*.blockgroup-hometop .block-projects-scrollmap > .blocksection-controls {
-  display: none;
-}
-.blockgroup-hometop .block-projects-scrollmap > .blocksection-title {
-  text-align: center;
-}*/
 .blockgroup-hometop .block-projects-scrollmap > .blocksection-title h3,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-title h3 {
+.blockgroup-authortop .block-projects-scrollmap > .blocksection-title h3,
+.blockgroup-tag .block-projects-scrollmap > .blocksection-title h3 {
   margin: 5px 0;
 }
 .blockgroup-hometop .block-projects-scrollmap > .blocksection-title a,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-title a {
+.blockgroup-authortop .block-projects-scrollmap > .blocksection-title a,
+.blockgroup-tag .block-projects-scrollmap > .blocksection-title a {
   color: #454c0f;
 }
 .blockgroup-hometop .block-projects-scrollmap > .blocksection-inners,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-inners {
+.blockgroup-authortop .block-projects-scrollmap > .blocksection-inners,
+.blockgroup-tag .block-projects-scrollmap > .blocksection-inners {
   border: 1px solid #dcddde;
 }
 .block-events-carousel .pop-elem .col-xsm-8 {

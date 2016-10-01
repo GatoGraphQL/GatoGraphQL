@@ -16,6 +16,7 @@ class GD_Template_Processor_TagTypeaheadComponentLayoutsBase extends GD_Template
 
 	function get_data_fields($template_id, $atts) {
 	
-		return array('name', 'symbol');
+		// return array('name', 'symbol');
+		return array('namedescription', 'symbol');
 	}
 }

@@ -34,6 +34,10 @@ class PoPThemeWassup_DataLoad_FilterHooks {
 			'gd_template:filter-posts:filtercomponents',
 			array($this, 'posts_filtercomponents')
 		);
+		// add_filter(
+		// 	'gd_template:filter-tagposts:filtercomponents',
+		// 	array($this, 'posts_filtercomponents')
+		// );
 		
 	}
 

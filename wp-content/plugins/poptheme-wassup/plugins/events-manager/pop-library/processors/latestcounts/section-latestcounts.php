@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_LATESTCOUNT_EVENTS', PoP_ServerUtils::get_template_definition('latestcount-events'));
 define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS', PoP_ServerUtils::get_template_definition('latestcount-author-events'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS', PoP_ServerUtils::get_template_definition('latestcount-tag-events'));
 
 class GD_EM_Template_Processor_SectionLatestCounts extends GD_Template_Processor_SectionLatestCountsBase {
 
@@ -15,6 +16,7 @@ class GD_EM_Template_Processor_SectionLatestCounts extends GD_Template_Processor
 		return array(
 			GD_TEMPLATE_LATESTCOUNT_EVENTS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS,
 		);
 	}
 
@@ -24,6 +26,7 @@ class GD_EM_Template_Processor_SectionLatestCounts extends GD_Template_Processor
 			
 			case GD_TEMPLATE_LATESTCOUNT_EVENTS:
 			case GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS:
+			case GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS:
 				
 				return __('event', 'poptheme-wassup');
 		}
@@ -37,6 +40,7 @@ class GD_EM_Template_Processor_SectionLatestCounts extends GD_Template_Processor
 			
 			case GD_TEMPLATE_LATESTCOUNT_EVENTS:
 			case GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS:
+			case GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS:
 				
 				return __('events', 'poptheme-wassup');
 		}
@@ -52,6 +56,7 @@ class GD_EM_Template_Processor_SectionLatestCounts extends GD_Template_Processor
 			
 			case GD_TEMPLATE_LATESTCOUNT_EVENTS:
 			case GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS:
+			case GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS:
 				
 				$ret[] = EM_POST_TYPE_EVENT.'-'.POPTHEME_WASSUP_EM_CAT_ALL;
 				$ret[] = EM_POST_TYPE_EVENT.'-'.POPTHEME_WASSUP_EM_CAT_FUTURE;
@@ -73,6 +78,18 @@ class GD_EM_Template_Processor_SectionLatestCounts extends GD_Template_Processor
 		}
 	
 		return parent::is_author($template_id, $atts);
+	}
+
+	function is_tag($template_id, $atts) {
+
+		switch ($template_id) {
+			
+			case GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS:
+				
+				return true;
+		}
+	
+		return parent::is_tag($template_id, $atts);
 	}
 }
 

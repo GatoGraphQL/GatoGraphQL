@@ -43,6 +43,20 @@ class GD_DataLoad_FieldProcessor_Tags extends GD_DataLoad_FieldProcessor {
 				$value = $tag->name;
 				break;
 
+			case 'namedescription' :
+				$value = $tag->name;
+				
+				// If there's a description, then use it
+				if ($tag->description) {
+
+					$value = sprintf(
+						__('%1$s (%2$s)', 'pop-wpapi'),
+						$value,
+						$tag->description
+					);
+				}
+				break;
+
 			case 'slug' :
 				$value = $tag->slug;
 				break;

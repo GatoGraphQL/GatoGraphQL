@@ -26,11 +26,6 @@ define ('GD_TEMPLATE_BLOCK_MENU_BODY_ABOUT', PoP_ServerUtils::get_template_defin
 
 class GD_Template_Processor_CustomMenuBlocks extends GD_Template_Processor_MenuBlocksBase {
 
-	// function get_template_url_path() {
-
-	// 	return GD_Template_CustomProcessor::get_custom_template_url_path();
-	// }
-	
 	function get_templates_to_process() {
 	
 		return array(
@@ -103,23 +98,6 @@ class GD_Template_Processor_CustomMenuBlocks extends GD_Template_Processor_MenuB
 		return $ret;
 	}
 
-	// protected function get_controlgroup_top($template_id) {
-
-	// 	// Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
-	// 	$vars = GD_TemplateManager_Utils::get_vars();
-	// 	if (!$vars['fetching-json-quickview']) {
-
-	// 		switch ($template_id) {
-
-	// 			case GD_TEMPLATE_BLOCK_MENU_SIDEBAR_ABOUT:
-
-	// 				return GD_TEMPLATE_CONTROLGROUP_TOGGLESIDEINFO_BACK;
-	// 		}
-	// 	}
-
-	// 	return parent::get_controlgroup_top($template_id);
-	// }
-
 	function get_menu($template_id) {
 
 		$menus = array(
@@ -174,11 +152,6 @@ class GD_Template_Processor_CustomMenuBlocks extends GD_Template_Processor_MenuB
 
 				$this->append_att(GD_TEMPLATE_LAYOUT_MENU_INDENT, $atts, 'class', 'nav nav-condensed');
 				break;
-
-			// case GD_TEMPLATE_BLOCK_MENU_TOP_ADDNEW:
-
-			// 	$this->add_att(GD_TEMPLATE_LAYOUT_MENU_DROPDOWNBUTTON_TOP, $atts, 'dropdownmenu-class', 'nav nav-condensed');
-			// 	break;
 			
 			case GD_TEMPLATE_BLOCK_MENU_SIDE_SECTIONS:
 			case GD_TEMPLATE_BLOCK_MENU_SIDE_SECTIONS_MULTITARGET:

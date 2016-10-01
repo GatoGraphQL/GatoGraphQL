@@ -12,6 +12,8 @@ define ('GD_TEMPLATE_FILTER_OPINIONATEDVOTES_AUTHORROLE', PoP_ServerUtils::get_t
 define ('GD_TEMPLATE_FILTER_OPINIONATEDVOTES_STANCE', PoP_ServerUtils::get_template_definition('filter-opinionatedvotes-stance'));
 define ('GD_TEMPLATE_FILTER_AUTHOROPINIONATEDVOTES_STANCE', PoP_ServerUtils::get_template_definition('filter-authoropinionatedvotes-stance'));
 define ('GD_TEMPLATE_FILTER_OPINIONATEDVOTES_GENERALSTANCE', PoP_ServerUtils::get_template_definition('filter-opinionatedvotes-generalstance'));
+define ('GD_TEMPLATE_FILTER_TAGOPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('filter-tagopinionatedvotes'));
+define ('GD_TEMPLATE_FILTER_TAGOPINIONATEDVOTES_STANCE', PoP_ServerUtils::get_template_definition('filter-tagopinionatedvotes-stance'));
 
 class VotingProcessors_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersBase {
 
@@ -25,6 +27,8 @@ class VotingProcessors_Template_Processor_CustomFilters extends GD_Template_Proc
 			GD_TEMPLATE_FILTER_OPINIONATEDVOTES_STANCE,
 			GD_TEMPLATE_FILTER_AUTHOROPINIONATEDVOTES_STANCE,
 			GD_TEMPLATE_FILTER_OPINIONATEDVOTES_GENERALSTANCE,
+			GD_TEMPLATE_FILTER_TAGOPINIONATEDVOTES,
+			GD_TEMPLATE_FILTER_TAGOPINIONATEDVOTES_STANCE,
 		);
 	}
 	
@@ -38,6 +42,8 @@ class VotingProcessors_Template_Processor_CustomFilters extends GD_Template_Proc
 			GD_TEMPLATE_FILTER_OPINIONATEDVOTES_STANCE => GD_TEMPLATE_FILTERINNER_OPINIONATEDVOTES_STANCE,
 			GD_TEMPLATE_FILTER_AUTHOROPINIONATEDVOTES_STANCE => GD_TEMPLATE_FILTERINNER_AUTHOROPINIONATEDVOTES_STANCE,
 			GD_TEMPLATE_FILTER_OPINIONATEDVOTES_GENERALSTANCE => GD_TEMPLATE_FILTERINNER_OPINIONATEDVOTES_GENERALSTANCE,
+			GD_TEMPLATE_FILTER_TAGOPINIONATEDVOTES => GD_TEMPLATE_FILTERINNER_TAGOPINIONATEDVOTES,
+			GD_TEMPLATE_FILTER_TAGOPINIONATEDVOTES_STANCE => GD_TEMPLATE_FILTERINNER_TAGOPINIONATEDVOTES_STANCE,
 		);
 
 		if ($inner = $inners[$template_id]) {

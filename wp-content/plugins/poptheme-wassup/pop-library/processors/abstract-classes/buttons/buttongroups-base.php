@@ -109,6 +109,7 @@ class GD_Template_Processor_CustomButtonGroupsBase extends GD_Template_Processor
 
 			case POP_SCREEN_SECTIONCALENDAR:
 			case POP_SCREEN_AUTHORSECTIONCALENDAR:
+			case POP_SCREEN_TAGSECTIONCALENDAR:
 			
 				return array(
 					GD_TEMPLATEFORMAT_CALENDAR => array(),

@@ -62,6 +62,21 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 			}
 		}
 
+		// Tag page blocks
+		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+
+			$pageblockgroups = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGEVENTS,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGPASTEVENTS,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGEVENTSCALENDAR,
+			);
+			foreach ($pageblockgroups as $page => $blockgroup) {
+				
+				// Also Default
+				$ret[$page]['blockgroups']['default'] = $blockgroup;
+			}
+		}
+
 		return $ret;
 	}
 
@@ -93,7 +108,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				POPTHEME_WASSUP_EM_PAGE_EDITEVENTLINK => GD_TEMPLATE_BLOCK_EVENTLINK_UPDATE,
 
 				// Others
-				POP_EM_POPPROCESSORS_PAGE_LOCATIONS  => GD_TEMPLATE_BLOCK_LOCATIONS_SCROLL,
+				POP_EM_POPPROCESSORS_PAGE_LOCATIONS => GD_TEMPLATE_BLOCK_LOCATIONS_SCROLL,
 			);
 			foreach ($pageblocks_allothers as $page => $block) {
 				$ret[$page]['blocks']['default'] = $block;
@@ -120,9 +135,9 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 			$default_format_mycontent = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_MYCONTENT);
 
 			$pageblocks_typeahead = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_TYPEAHEAD,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_TYPEAHEAD,
-				POP_EM_POPPROCESSORS_PAGE_LOCATIONS  => GD_TEMPLATE_BLOCK_LOCATIONS_TYPEAHEAD,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_TYPEAHEAD,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_TYPEAHEAD,
+				POP_EM_POPPROCESSORS_PAGE_LOCATIONS => GD_TEMPLATE_BLOCK_LOCATIONS_TYPEAHEAD,
 			);
 			foreach ($pageblocks_typeahead as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_TYPEAHEAD] = $block;
@@ -132,8 +147,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_details = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_DETAILS,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_DETAILS,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_DETAILS,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_DETAILS,
 			);
 			foreach ($pageblocks_details as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
@@ -143,8 +158,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_simpleview = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW,
 			);
 			foreach ($pageblocks_simpleview as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_SIMPLEVIEW] = $block;
@@ -154,8 +169,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_fullview = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_FULLVIEW,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_FULLVIEW,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_FULLVIEW,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_FULLVIEW,
 			);
 			foreach ($pageblocks_fullview as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_FULLVIEW] = $block;
@@ -165,8 +180,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_thumbnail = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_THUMBNAIL,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_THUMBNAIL,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL,
 			);
 			foreach ($pageblocks_thumbnail as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
@@ -176,8 +191,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_list = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_LIST,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_LIST,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_LIST,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_LIST,
 			);
 			foreach ($pageblocks_list as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
@@ -187,8 +202,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_map = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP,
 			);
 			foreach ($pageblocks_map as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
@@ -198,8 +213,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_navigator = array(						
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_NAVIGATOR,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_NAVIGATOR,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR,
 			);
 			foreach ($pageblocks_navigator as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_NAVIGATOR] = $block;
@@ -209,8 +224,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_addons = array(						
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS,
 			);
 			foreach ($pageblocks_addons as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_ADDONS] = $block;
@@ -220,7 +235,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_carousels = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL,
 			);
 			foreach ($pageblocks_carousels as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_CAROUSEL] = $block;
@@ -231,7 +246,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 			}
 			
 			$pageblocks_calendar = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR  => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR,
 			);
 			foreach ($pageblocks_calendar as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_CALENDAR] = $block;
@@ -241,7 +256,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_calendar_map = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR  => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDARMAP,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDARMAP,
 			);
 			foreach ($pageblocks_calendar_map as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
@@ -251,7 +266,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_navigator = array(						
-				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR  => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR,
 			);
 			foreach ($pageblocks_navigator as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_NAVIGATOR] = $block;
@@ -261,7 +276,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_addons = array(						
-				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR  => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS,
 			);
 			foreach ($pageblocks_addons as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_ADDONS] = $block;
@@ -313,8 +328,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 			$default_format_authorsectioncalendar = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_AUTHORSECTIONCALENDAR);
 			
 			$pageblocks_details = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS,
 			);
 			foreach ($pageblocks_details as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
@@ -324,8 +339,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_simpleview = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
 			);
 			foreach ($pageblocks_simpleview as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_SIMPLEVIEW] = $block;
@@ -335,8 +350,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_fullview = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
 			);
 			foreach ($pageblocks_fullview as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_FULLVIEW] = $block;
@@ -346,8 +361,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_thumbnail = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL,
 			);
 			foreach ($pageblocks_thumbnail as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
@@ -357,8 +372,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_list = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_LIST,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_LIST,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST,
 			);
 			foreach ($pageblocks_list as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
@@ -368,8 +383,8 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_map = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP,
-				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS  => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
 			);
 			foreach ($pageblocks_map as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
@@ -379,7 +394,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_carousels = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTS  => GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL,
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL,
 			);
 			foreach ($pageblocks_carousels as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_CAROUSEL] = $block;
@@ -390,7 +405,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 			}
 
 			$pageblocks_calendar = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR  => GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR,
 			);
 			foreach ($pageblocks_calendar as $page => $block) {
 				
@@ -401,12 +416,119 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				}
 			}
 			$pageblocks_calendarmap = array(
-				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR  => GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP,
 			);
 			foreach ($pageblocks_calendarmap as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
 
 				if ($default_format_authorsectioncalendar == GD_TEMPLATEFORMAT_MAP) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+		}
+
+		// Tag page blocks
+		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+
+			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_TAGSECTION);
+			$default_format_sectioncalendar = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_TAGSECTIONCALENDAR);
+
+			$pageblocks_details = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_DETAILS,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS,
+			);
+			foreach ($pageblocks_details as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_DETAILS) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_simpleview = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW,
+			);
+			foreach ($pageblocks_simpleview as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_SIMPLEVIEW] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_SIMPLEVIEW) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_fullview = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW,
+			);
+			foreach ($pageblocks_fullview as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_FULLVIEW] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_FULLVIEW) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_thumbnail = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL,
+			);
+			foreach ($pageblocks_thumbnail as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_THUMBNAIL) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_list = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_LIST,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_LIST,
+			);
+			foreach ($pageblocks_list as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_LIST) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_map = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
+			);
+			foreach ($pageblocks_map as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_MAP) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+
+			$pageblocks_carousels = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL,
+			);
+			foreach ($pageblocks_carousels as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_CAROUSEL] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_CAROUSEL) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+
+			$pageblocks_calendar = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDAR,
+			);
+			foreach ($pageblocks_calendar as $page => $block) {
+				
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_CALENDAR] = $block;
+
+				if ($default_format_sectioncalendar == GD_TEMPLATEFORMAT_CALENDAR) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_calendarmap = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP,
+			);
+			foreach ($pageblocks_calendarmap as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
+
+				if ($default_format_sectioncalendar == GD_TEMPLATEFORMAT_MAP) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}

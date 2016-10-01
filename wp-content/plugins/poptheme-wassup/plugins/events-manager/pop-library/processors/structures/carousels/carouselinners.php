@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_CAROUSELINNER_EVENTS', PoP_ServerUtils::get_template_definition('carouselinner-events'));
 define ('GD_TEMPLATE_CAROUSELINNER_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('carouselinner-authorevents'));
+define ('GD_TEMPLATE_CAROUSELINNER_TAGEVENTS', PoP_ServerUtils::get_template_definition('carouselinner-tagevents'));
 
 class GD_EM_Template_Processor_CustomCarouselInners extends GD_Template_Processor_CarouselInnersBase {
 
@@ -15,6 +16,7 @@ class GD_EM_Template_Processor_CustomCarouselInners extends GD_Template_Processo
 		return array(
 			GD_TEMPLATE_CAROUSELINNER_EVENTS,
 			GD_TEMPLATE_CAROUSELINNER_AUTHOREVENTS,
+			GD_TEMPLATE_CAROUSELINNER_TAGEVENTS,
 		);
 	}
 
@@ -24,6 +26,7 @@ class GD_EM_Template_Processor_CustomCarouselInners extends GD_Template_Processo
 
 			case GD_TEMPLATE_CAROUSELINNER_EVENTS:
 			case GD_TEMPLATE_CAROUSELINNER_AUTHOREVENTS:
+			case GD_TEMPLATE_CAROUSELINNER_TAGEVENTS:
 
 				// Check if this value has already been set-up from above. Eg: Upcoming Events for TPP Debate
 				// is 1x1, not 1x3
@@ -57,6 +60,7 @@ class GD_EM_Template_Processor_CustomCarouselInners extends GD_Template_Processo
 
 			case GD_TEMPLATE_CAROUSELINNER_EVENTS:
 			case GD_TEMPLATE_CAROUSELINNER_AUTHOREVENTS:
+			case GD_TEMPLATE_CAROUSELINNER_TAGEVENTS:
 
 				// Allow to override. Eg: TPP Debate needs a different format
 				$layout = apply_filters('GD_EM_Template_Processor_CustomCarouselInners:layout', GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_LIST/*GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL*/, $template_id);

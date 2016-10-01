@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_FARMS', PoP_ServerUtils::get_template_definition('sidebarinner-section-farms'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFARMS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagfarms'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORFARMS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorfarms'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYFARMS', PoP_ServerUtils::get_template_definition('sidebarinner-section-myfarms'));
 
@@ -15,6 +16,7 @@ class OP_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 	
 		return array(
 			GD_TEMPLATE_SIDEBARINNER_SECTION_FARMS, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFARMS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORFARMS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYFARMS,
 		);
@@ -30,6 +32,12 @@ class OP_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_SECTIONWITHMAP;
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_FARMS;
+				break;
+					
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFARMS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTIONWITHMAP;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGFARMS;
 				break;
 					
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORFARMS:

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-27 13:15+0800\n"
-"PO-Revision-Date: 2016-08-27 14:57+0800\n"
+"POT-Creation-Date: 2016-09-27 14:20+0200\n"
+"PO-Revision-Date: 2016-09-27 14:20+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -82,13 +82,15 @@ msgstr "Ancho"
 #: .././library/gallery.php:46
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:263
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:372
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:242
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:149
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:289
 #: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:22
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:38
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:565
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:755
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:759
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:535
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:358
 msgid "Thumbnail"
 msgstr "Miniatura"
 
@@ -590,6 +592,7 @@ msgstr "Desplazarse hacia abajo para cargar más resultados"
 
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:251
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:360
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:230
 #: .././plugins/user-role-editor/library/functions.php:32
 #: .././plugins/user-role-editor/library/functions.php:47
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:141
@@ -599,57 +602,66 @@ msgstr "Desplazarse hacia abajo para cargar más resultados"
 #: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:21
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:39
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:549
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:739
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:743
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:519
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:346
 msgid "Details"
 msgstr "Detalles"
 
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:255
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:364
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:234
 #: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:18
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:35
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:553
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:743
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:747
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:523
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:350
 msgid "Feed"
 msgstr "Feed"
 
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:259
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:368
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:238
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:36
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:557
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:747
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:751
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:527
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:354
 msgid "Extended"
 msgstr "Extendido"
 
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:267
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:376
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:246
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:153
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:293
 #: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:23
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:37
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:573
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:763
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:767
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:543
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:362
 msgid "List"
 msgstr "Lista"
 
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:271
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:380
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:250
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:157
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:297
 #: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:20
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:41
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:577
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:767
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:771
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:547
 msgid "Map"
 msgstr "Mapa"
 
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:275
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:384
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:36
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:254
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:40
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:40
 msgid "Calendar"
 msgstr "Calendario"
@@ -657,7 +669,7 @@ msgstr "Calendario"
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:388
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:301
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:42
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:771
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:775
 #: .././pop-library/processors/buttons/buttons.php:60
 #: .././pop-library/processors/buttons/buttons.php:62
 #: .././pop-library/processors/buttons/buttons.php:63
@@ -665,7 +677,7 @@ msgid "Edit"
 msgstr "Editar"
 
 #: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:39
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:52
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:58
 #: .././pop-library/processors/controls/anchor-controls.php:43
 msgid "as Link"
 msgstr "como Enlace"
@@ -674,19 +686,19 @@ msgstr "como Enlace"
 msgid "Event link"
 msgstr "Enlace a Evento"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:40
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:46
 msgid "Past Events"
 msgstr "Eventos Pasados"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:44
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:50
 msgid "My Past Events"
 msgstr "Mis Eventos Pasados"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:48
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:54
 msgid "Add Event"
 msgstr "Añadir Evento"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:56
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:62
 msgid "Toggle Map"
 msgstr "Alternar Mapa"
 
@@ -760,12 +772,12 @@ msgstr "Detalles del evento"
 msgid "Event link details"
 msgstr "Detalles del enlace al evento"
 
-#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:28
+#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:31
 #: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:47
 msgid "event"
 msgstr "evento"
 
-#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:41
+#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:45
 #: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:48
 msgid "events"
 msgstr "eventos"
@@ -853,11 +865,11 @@ msgstr "Viernes"
 msgid "Saturday"
 msgstr "Sábado"
 
-#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:55
+#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:60
 msgid "Events"
 msgstr "Eventos"
 
-#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:56
+#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:61
 msgid "Upcoming Events"
 msgstr "Eventos próximos"
 
@@ -1250,7 +1262,7 @@ msgstr "Tel / Fax"
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:145
 #: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:285
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:561
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:751
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:755
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:531
 msgid "Full view"
 msgstr "Vista completa"
@@ -1485,45 +1497,52 @@ msgstr "enlace por"
 msgid "Volunteer!"
 msgstr "Ofrecerse como voluntario"
 
-#: .././pop-library/processors/blockgroups/blockgroups-main.php:201
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:221
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:387
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:78
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:236
+msgid "Latest content"
+msgstr "Contenido más reciente"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:235
 #: .././pop-library/processors/structures/tables/tables.php:59
 msgid "Content"
 msgstr "Contenido"
 
-#: .././pop-library/processors/blockgroups/blockgroups-main.php:202
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:236
 msgid "My Content"
 msgstr "Mi Contenido"
 
-#: .././pop-library/processors/blockgroups/blockgroups-main.php:203
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:237
 msgid "Add Content"
 msgstr "Agregar Contenido"
 
-#: .././pop-library/processors/blockgroups/blockgroups-main.php:210
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:244
 #, php-format
 msgid "%s:"
 msgstr "%s:"
 
-#: .././pop-library/processors/blockgroups/blockgroups-main.php:231
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:265
 msgid ""
 "Aiyoooo, it seems there is nothing here. Where else would you like to go?"
 msgstr "Aiyoooo, parece que no hay nada aquí. ¿Dónde más le gustaría ir?"
 
-#: .././pop-library/processors/blockgroups/blockgroups-main.php:251
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:285
 msgid "Ops, this page doesn't exist!"
 msgstr "Ops, esta página no existe!"
 
-#: .././pop-library/processors/blockgroups/blockgroups.php:63
+#: .././pop-library/processors/blockgroups/blockgroups.php:66
 msgid "Show description"
 msgstr "Mostrar descripción"
 
-#: .././pop-library/processors/blockgroups/blockgroups.php:118
-#: .././pop-library/processors/blockgroups/blockgroups.php:119
-#: .././pop-library/processors/blockgroups/blockgroups.php:418
+#: .././pop-library/processors/blockgroups/blockgroups.php:121
+#: .././pop-library/processors/blockgroups/blockgroups.php:122
+#: .././pop-library/processors/blockgroups/blockgroups.php:461
 #: .././templates/hover.php:4 .././templates/navigator.php:4
 msgid "Close"
 msgstr "Cerrar"
 
-#: .././pop-library/processors/blockgroups/blockgroups.php:456
+#: .././pop-library/processors/blockgroups/blockgroups.php:512
 msgid "Log in or Register"
 msgstr "Iniciar sesión o Registrarse"
 
@@ -1537,44 +1556,38 @@ msgstr "%sAtrás"
 msgid "%sNavigator"
 msgstr "%sNavegador"
 
-#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:387
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:77
-msgid "Latest content"
-msgstr "Contenido más reciente"
-
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:569
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:759
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:763
 #: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:539
 msgid "Grid"
 msgstr "Cuadrícula"
-
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:82
-#: .././pop-library/processors/blocks/sections.php:2815
-#, php-format
-msgid "Content tagged with “#%s”"
-msgstr "Contenido etiquetado con \"#%s\""
 
 #: .././pop-library/processors/blocks/contents.php:42
 msgid "Go to Full Profile "
 msgstr "Ir al perfil completo"
 
-#: .././pop-library/processors/blocks/sections.php:2112
+#: .././pop-library/processors/blocks/sections-utils.php:38
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
+#: .././pop-library/processors/blocks/sections.php:2409
 msgid "View all Content "
 msgstr "Ver todo el contenido"
 
-#: .././pop-library/processors/blocks/sections.php:2835
+#: .././pop-library/processors/blocks/sections.php:3237
 msgid "Latest Content"
 msgstr "Contenido más reciente"
 
-#: .././pop-library/processors/blocks/sections.php:2839
+#: .././pop-library/processors/blocks/sections.php:3241
 msgid "Our Sponsors"
 msgstr "Nuestros patrocinadores"
 
-#: .././pop-library/processors/blocks/sections.php:2843
+#: .././pop-library/processors/blocks/sections.php:3245
 msgid "Our Supporters"
 msgstr "Quiénes nos apoyan"
 
-#: .././pop-library/processors/blocks/sections.php:2850
+#: .././pop-library/processors/blocks/sections.php:3252
 msgid "Who we are"
 msgstr "Quiénes somos"
 
@@ -1939,11 +1952,11 @@ msgstr "Alternar pantalla completa"
 msgid "Open in new window"
 msgstr "Abrir en Nueva ventana"
 
-#: .././pop-library/processors/pagesections/tabpane-pagesections.php:862
+#: .././pop-library/processors/pagesections/tabpane-pagesections.php:871
 msgid "Ops, there's nothing here!"
 msgstr "Ops, no se encontró nada aquí!"
 
-#: .././pop-library/processors/pagesections/tabpane-pagesections.php:864
+#: .././pop-library/processors/pagesections/tabpane-pagesections.php:873
 msgid "<p>We couldn't find anything under this URL...</p>"
 msgstr "<p>No hemos encontrado nada bajo este URL...</p>"
 
@@ -1981,7 +1994,7 @@ msgstr "Usuarios"
 msgid "Date"
 msgstr "Fecha"
 
-#: .././pop-library/utils.php:142
+#: .././pop-library/utils.php:143
 #, php-format
 msgid "Welcome to %s!"
 msgstr "Bienvenidos a %s!"
@@ -2117,6 +2130,9 @@ msgstr ""
 "Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
 "plugins/pop/“>latest version</a> of <b>PhotoSwipe for PoP</b> installed, or "
 "otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#~ msgid "Content tagged with “#%s”"
+#~ msgstr "Contenido etiquetado con \"#%s\""
 
 #~ msgid "Section(s)"
 #~ msgstr "Sección(es)"

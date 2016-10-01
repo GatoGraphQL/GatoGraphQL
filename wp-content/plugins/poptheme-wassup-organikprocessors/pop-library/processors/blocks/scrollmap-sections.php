@@ -7,7 +7,7 @@
 
 define ('GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-farms-scrollmap'));
 define ('GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorfarms-scrollmap'));
-
+define ('GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagfarms-scrollmap'));
 
 class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Processor_ScrollMapBlocksBase {
 
@@ -16,6 +16,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 		return array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP,
 		);
 	}
 
@@ -24,6 +25,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 		$inner_templates = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP => GD_TEMPLATE_SCROLL_FARMS_MAP,		
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP => GD_TEMPLATE_SCROLL_FARMS_MAP,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP => GD_TEMPLATE_SCROLL_FARMS_MAP,
 		);
 
 		return $inner_templates[$template_id];
@@ -35,6 +37,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 			
 				return true;
 		}
@@ -49,6 +52,10 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
 
 				return GD_Template_Processor_CustomSectionBlocksUtils::get_author_title();
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+
+				return GD_Template_Processor_CustomSectionBlocksUtils::get_tag_title();
 		}
 		
 		return parent::get_title($template_id);
@@ -65,6 +72,10 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 				case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
 
 					return GD_TEMPLATE_SUBMENU_AUTHOR;
+
+				case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+
+					return GD_TEMPLATE_SUBMENU_TAG;
 			}
 		}
 		
@@ -78,6 +89,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 			
 				return true;
 		}
@@ -96,6 +108,10 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
 			
 				return GD_TEMPLATE_FILTER_AUTHORFARMS;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+			
+				return GD_TEMPLATE_FILTER_TAGFARMS;
 		}
 		
 		return parent::get_filter_template($template_id);
@@ -116,6 +132,11 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_author_dataloadsource($template_id);
 				break;
 
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+
+				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_tag_dataloadsource($template_id);
+				break;
+
 			default:
 
 				$ret = parent::get_dataload_source($template_id, $atts);
@@ -125,8 +146,8 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 		// Add the format attr
 		$maps = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP,
-
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP,
 		);
 		if (in_array($template_id, $maps)) {
 			
@@ -158,6 +179,14 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 					return $page;
 				}
 				break;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+			
+				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
+
+					return $page;
+				}
+				break;
 		}
 	
 		return parent::get_block_page($template_id);
@@ -171,6 +200,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 
 				$ret['cat'] = POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS;
 				break;
@@ -182,6 +212,11 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
 
 				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_authorcontent($ret);
+				break;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+
+				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
 				break;
 		}
 
@@ -211,6 +246,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 			
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST;
 		}
@@ -229,6 +265,10 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
 
 				return GD_TEMPLATE_LATESTCOUNT_AUTHOR_FARMS;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+
+				return GD_TEMPLATE_LATESTCOUNT_TAG_FARMS;
 		}
 
 		return parent::get_latestcount_template($template_id);
@@ -240,6 +280,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 
 				return GD_TEMPLATE_MESSAGEFEEDBACK_FARMS;
 		}
@@ -253,6 +294,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 			
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 
 				return 'bottom';
 		}
@@ -269,8 +311,9 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 			
 				return GD_DATALOADER_POSTLIST;
 		}
@@ -286,6 +329,7 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 		$maps = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP,
 		);
 
 		// Important: set always this value, because the IOHandler used by all different blocks is the same!

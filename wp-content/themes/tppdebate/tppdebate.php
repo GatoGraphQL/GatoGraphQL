@@ -3,7 +3,7 @@
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('TPPDEBATE_VERSION', 0.397);
+define ('TPPDEBATE_VERSION', 0.402);
 
 define ('TPPDEBATE_DIR', STYLESHEETPATH);
 define ('TPPDEBATE_DIR_RESOURCES', TPPDEBATE_DIR.'/resources');

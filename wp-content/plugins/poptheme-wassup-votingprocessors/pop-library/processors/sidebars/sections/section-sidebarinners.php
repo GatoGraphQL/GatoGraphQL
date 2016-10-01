@@ -14,6 +14,8 @@ define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOROPINIONATEDVOTES_STANCE', PoP_Se
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_OPINIONATEDVOTES_GENERALSTANCE', PoP_ServerUtils::get_template_definition('sidebarinner-section-opinionatedvotes-generalstance'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOROPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('sidebarinner-section-authoropinionatedvotes'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOROPINIONATEDVOTES_STANCE', PoP_ServerUtils::get_template_definition('sidebarinner-section-authoropinionatedvotes-stance'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGOPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagopinionatedvotes'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGOPINIONATEDVOTES_STANCE', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagopinionatedvotes-stance'));
 
 class PoPVP_Template_Processor_CustomSectionSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 	
@@ -29,6 +31,8 @@ class PoPVP_Template_Processor_CustomSectionSidebarInners extends GD_Template_Pr
 			GD_TEMPLATE_SIDEBARINNER_SECTION_OPINIONATEDVOTES_GENERALSTANCE,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOROPINIONATEDVOTES,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOROPINIONATEDVOTES_STANCE,
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGOPINIONATEDVOTES, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGOPINIONATEDVOTES_STANCE,
 		);
 	}
 
@@ -78,6 +82,18 @@ class PoPVP_Template_Processor_CustomSectionSidebarInners extends GD_Template_Pr
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_OPINIONATEDVOTES;
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_OPINIONATEDVOTES_GENERALSTANCE;
+				break;
+					
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGOPINIONATEDVOTES:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGOPINIONATEDVOTES;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGOPINIONATEDVOTES;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGOPINIONATEDVOTES_STANCE:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGOPINIONATEDVOTES;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGOPINIONATEDVOTES_STANCE;
 				break;
 					
 			case GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_OPINIONATEDVOTES:

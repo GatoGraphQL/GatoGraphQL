@@ -5,18 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('carouselcontrols-opinionatedvotes'));
 define ('GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYORGANIZATIONS', PoP_ServerUtils::get_template_definition('carouselcontrols-opinionatedvotes-byorganizations'));
 define ('GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYINDIVIDUALS', PoP_ServerUtils::get_template_definition('carouselcontrols-opinionatedvotes-byindividuals'));
 define ('GD_TEMPLATE_CAROUSELCONTROLS_AUTHOROPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('carouselcontrols-authoropinionatedvotes'));
+define ('GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('carouselcontrols-tagopinionatedvotes'));
 
 class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Template_Processor_CarouselControlsBase {
 
 	function get_templates_to_process() {
 	
 		return array(
+			GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES,
 			GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYORGANIZATIONS,
 			GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYINDIVIDUALS,
 			GD_TEMPLATE_CAROUSELCONTROLS_AUTHOROPINIONATEDVOTES,
+			GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES,
 		);
 	}
 
@@ -24,9 +28,11 @@ class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Temp
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES:
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYORGANIZATIONS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYINDIVIDUALS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHOROPINIONATEDVOTES:
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES:
 
 				return 'btn btn-link btn-compact';
 		}
@@ -38,9 +44,11 @@ class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Temp
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES:
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYORGANIZATIONS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYINDIVIDUALS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHOROPINIONATEDVOTES:
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES:
 
 				return GD_URLPARAM_TARGET_QUICKVIEW;
 		}
@@ -51,9 +59,11 @@ class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Temp
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES:
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYORGANIZATIONS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYINDIVIDUALS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHOROPINIONATEDVOTES:
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES:
 
 				return 'btn btn-link btn-compact';
 		}
@@ -63,6 +73,10 @@ class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Temp
 	function get_title($template_id) {
 
 		switch ($template_id) {
+
+			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES:
+
+				return get_the_title(POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES);
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYORGANIZATIONS:
 
@@ -91,6 +105,15 @@ class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Temp
 					gd_navigation_menu_item(POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES, true).PoPTheme_Wassup_VotingProcessors_Utils::get_latestvotes_title(),//__('Latest thoughts on TPP', 'poptheme-wassup-votingprocessors'),
 					$name
 				);
+
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES:
+
+				$name = single_tag_title('', false);
+				return sprintf(
+					__('%s tagged with “%s”', 'poptheme-wassup-votingprocessors'),
+					gd_navigation_menu_item(POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES, true).PoPTheme_Wassup_VotingProcessors_Utils::get_latestvotes_title(),
+					$name
+				);
 		}
 
 		return parent::get_title($template_id);
@@ -98,6 +121,10 @@ class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Temp
 	protected function get_title_link($template_id) {
 
 		switch ($template_id) {
+
+			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES:
+
+				return get_permalink(POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES);
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_OPINIONATEDVOTES_BYORGANIZATIONS:
 
@@ -118,6 +145,19 @@ class VotingProcessors_Template_Processor_CustomCarouselControls extends GD_Temp
 				// Allow URE to override adding "+Members" param
 				return apply_filters(
 					'VotingProcessors_Template_Processor_CustomCarouselControls:authoropinionatedvotes:titlelink',
+					GD_TemplateManager_Utils::add_tab($url, $page_ids[$template_id])
+				);
+
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES:
+
+				global $gd_template_settingsmanager;
+				$url = get_tag_link(get_queried_object_id());
+				$page_ids = array(
+					GD_TEMPLATE_CAROUSELCONTROLS_TAGOPINIONATEDVOTES => POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES,
+				);
+				
+				return apply_filters(
+					'VotingProcessors_Template_Processor_CustomCarouselControls:tagopinionatedvotes:titlelink',
 					GD_TemplateManager_Utils::add_tab($url, $page_ids[$template_id])
 				);
 		}

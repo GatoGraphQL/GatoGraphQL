@@ -54,7 +54,12 @@ class PoP_Mentions {
       $content = get_post_field('post_content', $post_id);
 
       // $append = true because we will also add tags to this post extracted from comments posted under this post
-      wp_set_post_tags($post_id, $this->get_hashtags_from_content($content), true);
+      $tags = $this->get_hashtags_from_content($content);
+      wp_set_post_tags($post_id, implode(', ', $tags), true);
+
+      // Allow Events Manager to also add its own tags with its own taxonomy
+      // This is needed so we can search using parameter 'tag' with events, using the common slug
+      do_action('PoP_Mentions:post_tags:add', $post_id, $tags);
 
       // Extract all user_nicenames and notify them they were tagged
       // Get the previous ones, as to send an email only to the new ones
@@ -86,7 +91,7 @@ class PoP_Mentions {
   function generate_comment_tags($comment_id, $comment) {
 
     // $append = true because the tags are added to the post from the comment
-    wp_set_post_tags($comment->comment_post_ID, $this->get_hashtags_from_content($comment->comment_content), true);
+    wp_set_post_tags($comment->comment_post_ID, implode(', ', $this->get_hashtags_from_content($comment->comment_content)), true);
 
     if ($user_nicenames = $this->get_user_nicenames_from_content($comment->comment_content)) {
 
@@ -109,7 +114,7 @@ class PoP_Mentions {
   // this function returns an array of hashtags from a given content - used by generate_tags()
   function get_hashtags_from_content( $content ) {
     preg_match_all( $this->regex_general, $content, $matches );
-    return implode(', ', $matches[1]);
+    return $matches[1];
   }
   
   // this function returns an array of user_nicenames from a given content - used by generate_tags()

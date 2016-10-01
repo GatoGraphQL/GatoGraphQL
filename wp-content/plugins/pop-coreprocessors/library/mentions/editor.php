@@ -134,7 +134,7 @@ function gd_jquery_constants_mentions_manager_impl($jquery_constants) {
        'url' => $tags_fetchurl,
        'baseline' => $tags_baselineurl,
        'template' => GD_TEMPLATE_LAYOUTTAG_MENTION_COMPONENT,
-       'key' => 'name',
+       'key' => 'namedescription',// 'name',
       ),
     ),
   );

@@ -42,36 +42,36 @@ define ('GD_TEMPLATE_BLOCK_FARMS_SCROLL_ADDONS', PoP_ServerUtils::get_template_d
  * Details: Thumb, title and excerpt
  --------------------------------------------*/
 define ('GD_TEMPLATE_BLOCK_FARMS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-farms-scroll-details'));
-
 define ('GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-authorfarms-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-tagfarms-scroll-details'));
 
 /*--------------------------------------------
  * Simple Post
  --------------------------------------------*/
 define ('GD_TEMPLATE_BLOCK_FARMS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-farms-scroll-simpleview'));
-
 define ('GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-authorfarms-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-tagfarms-scroll-simpleview'));
 
 /*--------------------------------------------
  * Full Post
  --------------------------------------------*/
 define ('GD_TEMPLATE_BLOCK_FARMS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-farms-scroll-fullview'));
-
 define ('GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-authorfarms-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-tagfarms-scroll-fullview'));
 
 /*--------------------------------------------
  * Thumbnail
  --------------------------------------------*/
 define ('GD_TEMPLATE_BLOCK_FARMS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-farms-scroll-thumbnail'));
-
 define ('GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-authorfarms-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-tagfarms-scroll-thumbnail'));
 
 /*--------------------------------------------
  * List
  --------------------------------------------*/
 define ('GD_TEMPLATE_BLOCK_FARMS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-farms-scroll-list'));
-
 define ('GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-authorfarms-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-tagfarms-scroll-list'));
 
 class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionBlocksBase {
 
@@ -96,22 +96,14 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST,
+
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST,
 		);
 	}
-
-	// protected function get_block_inner_templates($template_id) {
-
-	// 	global $gd_template_processor_manager;
-
-	// 	$ret = parent::get_block_inner_templates($template_id);
-
-	// 	if ($block_inner_template = $this->get_block_inner_template($template_id)) {
-
-	// 		$ret[] = $block_inner_template;
-	// 	}
-
-	// 	return $ret;
-	// }
 
 	protected function get_block_inner_template($template_id) {
 
@@ -160,13 +152,20 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS => GD_TEMPLATE_SCROLL_FARMS_DETAILS,
-			
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW => GD_TEMPLATE_SCROLL_FARMS_SIMPLEVIEW,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW => GD_TEMPLATE_SCROLL_AUTHORFARMS_FULLVIEW,
-			
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL => GD_TEMPLATE_SCROLL_FARMS_THUMBNAIL,
-			
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST => GD_TEMPLATE_SCROLL_FARMS_LIST,
+
+			/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+			 * Tag blocks
+			 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS => GD_TEMPLATE_SCROLL_FARMS_DETAILS,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW => GD_TEMPLATE_SCROLL_FARMS_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW => GD_TEMPLATE_SCROLL_FARMS_FULLVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL => GD_TEMPLATE_SCROLL_FARMS_THUMBNAIL,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST => GD_TEMPLATE_SCROLL_FARMS_LIST,
 		);
 
 		return $inner_templates[$template_id];
@@ -181,6 +180,14 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
+
+				return GD_Template_Processor_CustomSectionBlocksUtils::get_author_title();
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
 
 				return GD_Template_Processor_CustomSectionBlocksUtils::get_author_title();
 		}
@@ -203,6 +210,14 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 				case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
 
 					return GD_TEMPLATE_SUBMENU_AUTHOR;
+
+				case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+				case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+				case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+				case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+				case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+
+					return GD_TEMPLATE_SUBMENU_TAG;
 			}
 		}
 		
@@ -229,6 +244,12 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
 			
 				return true;
 		}
@@ -273,6 +294,14 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			
 				return GD_TEMPLATE_FILTER_AUTHORFARMS;
 
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+			
+				return GD_TEMPLATE_FILTER_TAGFARMS;
+
 			case GD_TEMPLATE_BLOCK_MYFARMS_TABLE_EDIT:
 			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW:
 			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW:
@@ -302,6 +331,15 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_author_dataloadsource($template_id);
 				break;
 
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+
+				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_tag_dataloadsource($template_id);
+				break;
+
 			default:
 
 				$ret = parent::get_dataload_source($template_id, $atts);
@@ -314,30 +352,30 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 		);
 		$details = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_DETAILS,
-
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS,
 		);
 		$simpleviews = array(
 			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW,			
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_SIMPLEVIEW,			
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW,
 		);
 		$fullviews = array(
 			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW,
-			
-			GD_TEMPLATE_BLOCK_FARMS_SCROLL_FULLVIEW,
-			
+			GD_TEMPLATE_BLOCK_FARMS_SCROLL_FULLVIEW,			
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW,
 		);
 		$thumbnails = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_THUMBNAIL,
-
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL,
 		);
 		$lists = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_LIST,
-
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST,
 		);
 		$typeaheads = array(
 			GD_TEMPLATE_BLOCK_FARMS_TYPEAHEAD,
@@ -400,6 +438,18 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 					return $page;
 				}
 				break;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+			
+				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
+
+					return $page;
+				}
+				break;
 		}
 	
 		return parent::get_block_page($template_id);
@@ -432,6 +482,12 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
 
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+
 				$ret['cat'] = POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS;
 				break;
 
@@ -458,16 +514,27 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 
 				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_authorcontent($ret);
 				break;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+
+				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
+				break;
 		}
 
 		$simpleviews = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_SIMPLEVIEW,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW,			
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW,			
 			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW,
 		);
 		$fullviews = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_FULLVIEW,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW,			
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW,			
 			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW,
 		);
 
@@ -491,18 +558,23 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_SIMPLEVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
 
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
 
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST;
 
@@ -533,6 +605,13 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
 
 				return GD_TEMPLATE_LATESTCOUNT_AUTHOR_FARMS;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+
+				return GD_TEMPLATE_LATESTCOUNT_TAG_FARMS;
 		}
 
 		return parent::get_latestcount_template($template_id);
@@ -556,6 +635,12 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
 
 				return GD_TEMPLATE_MESSAGEFEEDBACK_FARMS;
 
@@ -590,6 +675,12 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
 			
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+			
 				return 'bottom';
 		}
 
@@ -605,11 +696,6 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS:
-			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW:
-			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW:
-			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
-			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_MYFARMS_TABLE_EDIT:
 			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW:
 			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW:
@@ -621,7 +707,17 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_ADDONS:
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_FARMS_SCROLL_LIST:
-			
+			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
+
 				return GD_DATALOADER_POSTLIST;
 		}
 
@@ -640,29 +736,31 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_ADDONS,
 		);
 		$details = array(
-			GD_TEMPLATE_BLOCK_FARMS_SCROLL_DETAILS,
-			
+			GD_TEMPLATE_BLOCK_FARMS_SCROLL_DETAILS,			
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS,
 		);
 		$simpleviews = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_SIMPLEVIEW,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW,			
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW,			
 			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW,
 		);
 		$fullviews = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_FULLVIEW,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW,			
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW,			
 			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW,
 		);
 		$thumbnails = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_THUMBNAIL,
-
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL,
 		);
 		$lists = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_LIST,
-
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST,
 		);
 		$tables = array(
 			GD_TEMPLATE_BLOCK_MYFARMS_TABLE_EDIT,
@@ -776,6 +874,12 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_THUMBNAIL,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_LIST,
+
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL,
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST,
 		);
 		if (in_array($template_id, $tables)) {
 			$class = 'tableblock';

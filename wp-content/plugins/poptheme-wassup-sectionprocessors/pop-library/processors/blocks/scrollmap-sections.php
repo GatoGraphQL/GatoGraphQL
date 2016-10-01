@@ -9,6 +9,8 @@ define ('GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP', PoP_ServerUtils::get_template_de
 define ('GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-projects-horizontalscrollmap'));
 define ('GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorprojects-scrollmap'));
 define ('GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorprojects-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagprojects-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagprojects-horizontalscrollmap'));
 
 
 class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Template_Processor_ScrollMapBlocksBase {
@@ -20,6 +22,8 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP,	
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP,	
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP,
 		);
 	}
 
@@ -31,6 +35,8 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 
 				return true;
 		}
@@ -43,9 +49,11 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 		$inner_templates = array(
 
 			GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP => GD_TEMPLATE_SCROLL_PROJECTS_MAP,		
-			GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP => GD_TEMPLATE_SCROLL_PROJECTS_HORIZONTALMAP,		
+			GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP => GD_TEMPLATE_SCROLL_PROJECTS_HORIZONTALMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP => GD_TEMPLATE_SCROLL_PROJECTS_MAP,
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP => GD_TEMPLATE_SCROLL_PROJECTS_HORIZONTALMAP,
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP => GD_TEMPLATE_SCROLL_PROJECTS_MAP,
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP => GD_TEMPLATE_SCROLL_PROJECTS_HORIZONTALMAP,
 		);
 
 		return $inner_templates[$template_id];
@@ -59,6 +67,14 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			// case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
 
 				return GD_Template_Processor_CustomSectionBlocksUtils::get_author_title();
+
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+
+				return gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS, true).sprintf(
+					__('Projects tagged with “#%s”', 'poptheme-wassup'),
+					single_tag_title('', false)
+				);
+				// return '<i class="fa fa-fw fa-hashtag"></i>'.single_tag_title('', false);
 		}
 		
 		return parent::get_title($template_id);
@@ -90,6 +106,7 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			// case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
 			// case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
 			
 				return true;
 		}
@@ -106,6 +123,13 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			
 				global $author;
 				$url = get_author_posts_url($author);
+				$page = $this->get_block_page($template_id);
+				return GD_TemplateManager_Utils::add_tab($url, $page);
+
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
+			
+				$url = get_tag_link(get_queried_object_id());
 				$page = $this->get_block_page($template_id);
 				return GD_TemplateManager_Utils::add_tab($url, $page);
 		}
@@ -126,6 +150,11 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
 			
 				return GD_TEMPLATE_FILTER_AUTHORPROJECTS;
+
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
+			
+				return GD_TEMPLATE_FILTER_TAGPROJECTS;
 		}
 		
 		return parent::get_filter_template($template_id);
@@ -147,6 +176,12 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_author_dataloadsource($template_id);
 				break;
 
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
+
+				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_tag_dataloadsource($template_id);
+				break;
+
 			default:
 
 				$ret = parent::get_dataload_source($template_id, $atts);
@@ -156,10 +191,12 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 		$maps = array(
 			GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP,
 		);
 		$horizontalmaps = array(
 			GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP,
 		);
 
 		if (in_array($template_id, $maps)) {
@@ -197,6 +234,15 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 					return $page;
 				}
 				break;
+
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
+			
+				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
+
+					return $page;
+				}
+				break;
 		}
 	
 		return parent::get_block_page($template_id);
@@ -212,6 +258,8 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 
 				$ret['cat'] = POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS;
 				break;
@@ -225,6 +273,12 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			
 				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_authorcontent($ret);
 				break;
+
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
+			
+				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
+				break;
 		}
 
 		// If they are horizontal, then bring all the results, until we fix how to place the load more button inside of the horizontal scrolling div
@@ -232,6 +286,7 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 
 				$ret['limit'] = '-1';
 				break;
@@ -246,11 +301,13 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 
 			case GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
 			
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST;
 
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 		
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKMAPPOSTLIST;
 		}
@@ -271,6 +328,11 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
 
 				return GD_TEMPLATE_LATESTCOUNT_AUTHOR_PROJECTS;
+
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
+
+				return GD_TEMPLATE_LATESTCOUNT_TAG_PROJECTS;
 		}
 
 		return parent::get_latestcount_template($template_id);
@@ -284,6 +346,8 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 
 				return GD_TEMPLATE_MESSAGEFEEDBACK_PROJECTS;
 		}
@@ -299,6 +363,7 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			// case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
 			// case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
 
 				return 'bottom';
 		}
@@ -319,6 +384,8 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 			
 				return GD_DATALOADER_POSTLIST;
 		}
@@ -332,6 +399,7 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 			
 				return 'horizontal';
 		}
@@ -346,10 +414,12 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 		$maps = array(
 			GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP,
 		);
 		$horizontalmaps = array(
 			GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP,
 		);
 
 		// Important: set always this value, because the IOHandler used by all different blocks is the same!
@@ -380,6 +450,8 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP:
 
 				$this->append_att($template_id, $atts, 'class', 'block-projects-scrollmap');
 				break;

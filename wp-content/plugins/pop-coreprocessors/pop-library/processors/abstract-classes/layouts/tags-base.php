@@ -14,6 +14,7 @@ class GD_Template_Processor_TagLayoutsBase extends GD_Template_ProcessorBase {
 
 	function get_data_fields($template_id, $atts) {
 	
-		return array('url', 'name', 'symbol');
+		// return array('url', 'name', 'symbol');
+		return array('url', 'namedescription', 'symbol');
 	}
 }

@@ -18,6 +18,7 @@ define ('GD_TEMPLATE_CONTROLGROUP_BLOCKRELOAD', PoP_ServerUtils::get_template_de
 define ('GD_TEMPLATE_CONTROLGROUP_BLOCKLOADLATEST', PoP_ServerUtils::get_template_definition('controlgroup-blockloadlatest'));
 define ('GD_TEMPLATE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-quickviewblockpostlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_SUBMENUPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-submenupostlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_SUBMENUPOSTLISTMAIN', PoP_ServerUtils::get_template_definition('controlgroup-submenupostlistmain'));
 define ('GD_TEMPLATE_CONTROLGROUP_USERLIST', PoP_ServerUtils::get_template_definition('controlgroup-userlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_BLOCKUSERLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockuserlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLIST', PoP_ServerUtils::get_template_definition('controlgroup-submenuuserlist'));
@@ -70,6 +71,7 @@ class GD_Template_Processor_CustomControlGroups extends GD_Template_Processor_Co
 			GD_TEMPLATE_CONTROLGROUP_BLOCKLOADLATEST,
 			GD_TEMPLATE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST,
 			GD_TEMPLATE_CONTROLGROUP_SUBMENUPOSTLIST,
+			GD_TEMPLATE_CONTROLGROUP_SUBMENUPOSTLISTMAIN,
 			GD_TEMPLATE_CONTROLGROUP_USERLIST,
 			GD_TEMPLATE_CONTROLGROUP_BLOCKUSERLIST,
 			GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLIST,
@@ -206,6 +208,7 @@ class GD_Template_Processor_CustomControlGroups extends GD_Template_Processor_Co
 				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE;
 				break;
 
+			case GD_TEMPLATE_CONTROLGROUP_SUBMENUPOSTLISTMAIN:
 			case GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLISTMAIN:
 
 				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER;

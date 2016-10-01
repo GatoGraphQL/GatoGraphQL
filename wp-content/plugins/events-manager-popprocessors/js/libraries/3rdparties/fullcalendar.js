@@ -21,7 +21,7 @@ popFullCalendar = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
+		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		var pageSectionPage = popManager.getPageSectionPage(block);
 		pageSectionPage.one('destroy', function() {

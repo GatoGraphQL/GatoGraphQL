@@ -43,6 +43,42 @@ class Wassup_EM_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 		}
 	}
 
+	function add_sideinfo_tag_blockunits(&$ret, $template_id) {
+
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$target = $vars['target'];
+		$add = 
+			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN)/* ||
+			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW)*/;
+		if ($add) {
+
+			$blockgroups = $frames = array();
+			$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+			$page_sidebars = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCKGROUP_TAG_EVENTS_SIDEBAR,
+				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCKGROUP_TAG_PASTEVENTS_SIDEBAR,
+				POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCKGROUP_TAG_EVENTS_CALENDAR_SIDEBAR,
+			);
+			if ($sidebar = $page_sidebars[$page_id]) {
+				$blockgroups[] = $sidebar;
+			}
+
+			// Frames: PageSection ControlGroups
+			if ($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+
+				$frames[] = GD_TEMPLATE_BLOCK_PAGECONTROL_TAGSIDEBAR;
+			}
+
+			GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+
+			// Add frames only if not fetching data for the block
+			if (!$vars['fetching-json-data']) {
+
+				GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+			}
+		}
+	}
+
 	function add_sideinfo_single_blockunits(&$ret, $template_id) {
 
 		$vars = GD_TemplateManager_Utils::get_vars();
@@ -253,6 +289,85 @@ class Wassup_EM_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 
 		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
 		GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
+	}
+
+	function add_tag_blockunits(&$ret, $template_id) {
+
+		global $gd_template_settingsmanager;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$fetching_json_data = $vars['fetching-json-data'];
+		$target = $vars['target'];
+
+		$blocks = $blockgroups = $frames = array();
+
+		// If passing parameter 'tab' then deal with the corresponding page
+		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+		switch ($page_id) {
+
+			/*********************************************
+			 * Sections
+			 *********************************************/
+			case POPTHEME_WASSUP_EM_PAGE_EVENTS:
+			case POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR:
+			case POPTHEME_WASSUP_EM_PAGE_PASTEVENTS:
+
+				$add = 
+					($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_TAG && $target == GD_URLPARAM_TARGET_ADDONS) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_MODALS_TAG && $target == GD_URLPARAM_TARGET_MODALS);
+				if ($add) {
+			
+					if ($fetching_json_data) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+						break;
+					}
+					$blocktypes = array(
+						POPTHEME_WASSUP_EM_PAGE_EVENTS => POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED,
+						POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_CALENDAR,
+						POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED,
+					);
+
+					// Allow the ThemeStyle to decide if to include block (eg: Swift) or blockgroup (eg: Expansive)
+					$type = apply_filters($blocktypes[$page_id], POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
+					if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+					}
+					elseif ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCKGROUP) {
+					
+						$blockgroups[] = $gd_template_settingsmanager->get_page_blockgroup($page_id, GD_SETTINGS_HIERARCHY_TAG);	
+					}
+				}
+				break;
+		}
+
+		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+		GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
+
+		switch ($page_id) {
+
+			case POPTHEME_WASSUP_EM_PAGE_EVENTS:
+			case POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR:
+			case POPTHEME_WASSUP_EM_PAGE_PASTEVENTS:
+
+				// Frames: PageSection ControlGroups
+				if ($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_TAGCONTROL;
+				}
+				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWTAGCONTROL;
+				}
+				break;
+		}
+
+		// Add frames only if not fetching data for the block
+		if (!$fetching_json_data) {
+			GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+		}
 	}
 
 	function add_page_blockunits(&$ret, $template_id) {

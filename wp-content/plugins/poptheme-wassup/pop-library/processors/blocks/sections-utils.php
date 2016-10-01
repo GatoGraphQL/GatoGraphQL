@@ -24,6 +24,38 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 		return $ret;
 	}
 
+	public static function get_tag_title($add_description = true, $add_sublevel = true) {
+
+		$ret = '<i class="fa fa-fw fa-hashtag"></i>'.single_tag_title('', false);
+
+		if ($add_description) {
+			
+			// tag_description wraps the description in a <p>, remove it
+			$description = trim(str_replace(array('<p>', '</p>'), '', tag_description()));
+			if ($description) {
+
+				$ret = sprintf(
+					__('%1$s (%2$s)', 'poptheme-wassup'),
+					$ret,
+					$description
+				);
+			}
+		}
+
+		if ($add_sublevel) {
+
+			if ($page_id = GD_TemplateManager_Utils::get_hierarchy_page_id()) {
+
+				$ret = sprintf(
+					'<small>%s <i class="fa fa-fw fa-angle-double-right"></i></small> %s',
+					$ret,
+					get_the_title($page_id)
+				);
+			}
+		}
+		return $ret;
+	}
+
 	public static function get_single_title() {
 
 		global $post;
@@ -77,6 +109,22 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 		return $ret;
 	}
 
+	public static function get_tag_dataloadsource($template_id) {
+
+		// These are the Profile Blocks, they will always be used inside an is_author() page
+		// Then, point them not the is_page() page, but to the author url (mesym.com/u/mesym) and
+		// an attr "tab" indicating this page through its path. This way, users can go straight to their 
+		// information by typing their url: mesym.com/u/mesym?tab=events. Also good for future API
+
+		global $gd_template_settingsmanager;
+		$url = get_tag_link(get_queried_object_id());
+		$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG);
+		$ret = GD_TemplateManager_Utils::add_tab($url, $page_id);
+		$ret = apply_filters('GD_Template_Processor_CustomSectionBlocks:get_dataload_source:tag', $ret);
+
+		return $ret;
+	}
+
 	public static function get_single_dataloadsource($template_id) {
 
 		// Similar for single pages, the url will be /announcements/we-re-launching-again/?tab=content
@@ -99,6 +147,13 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 		$authors = apply_filters('gd_template:dataload_query_args:authors', array($author));
 		$ret['author'] = implode(',', $authors);
 		// }
+	}
+
+	public static function add_dataloadqueryargs_tagcontent(&$ret) {
+
+		// $tag_id = get_queried_object_id();
+		$tag = get_queried_object();
+		$ret['tag'] = $tag->slug;
 	}
 
 	public static function add_dataloadqueryargs_authorfollowers(&$ret) {

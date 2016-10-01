@@ -12,6 +12,7 @@ define ('GD_TEMPLATE_BLOCKGROUP_SINGLEPOST', PoP_ServerUtils::get_template_defin
 define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR', PoP_ServerUtils::get_template_definition('blockgroup-author'));
 define ('GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION', PoP_ServerUtils::get_template_definition('blockgroup-authordescription'));
 define ('GD_TEMPLATE_BLOCKGROUP_AUTHORSUMMARY', PoP_ServerUtils::get_template_definition('blockgroup-authorsummary'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG', PoP_ServerUtils::get_template_definition('blockgroup-tag'));
 
 class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 
@@ -25,6 +26,7 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 			GD_TEMPLATE_BLOCKGROUP_AUTHOR,
 			GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION,
 			GD_TEMPLATE_BLOCKGROUP_AUTHORSUMMARY,
+			GD_TEMPLATE_BLOCKGROUP_TAG,
 		);
 	}
 
@@ -54,6 +56,10 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 				case GD_TEMPLATE_BLOCKGROUP_AUTHOR:
 				case GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION:
+
+					return GD_TEMPLATE_CONTROLGROUP_SHARE;
+
+				case GD_TEMPLATE_BLOCKGROUP_TAG:
 
 					return GD_TEMPLATE_CONTROLGROUP_SHARE;
 			}
@@ -94,6 +100,7 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHORSUMMARY:
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
 
 				$blocktarget = $this->get_activeblock_selector($template_id, $atts);
 				if ($controlgroup_top = $this->get_controlgroup_top($template_id)) {		
@@ -126,6 +133,11 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 				$this->append_att($template_id, $atts, 'class', 'blockgroup-author-description');
 				break;
+
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
+
+				$this->append_att($template_id, $atts, 'class', 'blockgroup-tag');
+				break;
 		}
 		
 		return parent::init_atts($template_id, $atts);
@@ -150,6 +162,10 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 				case GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION:		
 					
 					return GD_TEMPLATE_SUBMENU_AUTHOR;
+			
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
+
+				return GD_TEMPLATE_SUBMENU_TAG;
 			}
 		}
 		
@@ -157,6 +173,8 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 	}
 
 	function init_atts_blockgroup_block($blockgroup, $blockgroup_block, &$blockgroup_block_atts, $blockgroup_atts) {
+
+		global $gd_template_settingsmanager;
 		
 		// Hide the Title
 		switch ($blockgroup) {
@@ -188,6 +206,22 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 				$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', 'col-xs-12');
 				if ($blockgroup_block == GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT) {
 					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'title', '');		
+				}
+				break;
+		
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
+
+				$type = apply_filters(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED, POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
+				if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK) {
+
+					$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+					if ($blockgroup_block == $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG)) {
+						
+						// Change the block title from the #hashtag to Latest, because this blockgroup will assume that name
+						$title = gd_navigation_menu_item(POP_WPAPI_PAGE_ALLCONTENT, true).__('Latest content', 'poptheme-wassup');
+						$this->add_att($blockgroup_block, $blockgroup_block_atts, 'title', $title);
+						$this->add_att($blockgroup_block, $blockgroup_block_atts, 'title-htmltag', 'h2');
+					}
 				}
 				break;
 		}
@@ -261,6 +295,15 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 				global $author;
 				return get_the_author_meta('display_name', $author);
+		
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
+
+				// return gd_navigation_menu_item(POP_WPAPI_PAGE_ALLCONTENT, true).sprintf(
+				// 	__('Content tagged with “#%s”', 'poptheme-wassup'),
+				// 	single_tag_title('', false)
+				// );
+				// return '<i class="fa fa-fw fa-hashtag"></i>'.single_tag_title('', false);
+				return GD_Template_Processor_CustomSectionBlocksUtils::get_tag_title(true, false);
 		}
 		
 		return parent::get_title($template_id);
@@ -272,6 +315,7 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 			case GD_TEMPLATE_BLOCKGROUP_HOME:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR:
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
 
 				return array_merge(
 					$this->get_blockgroup_blockgroups($template_id),
@@ -342,13 +386,19 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR:
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
 
 				// Allow the ThemeStyle to decide if to include block (eg: Swift) or blockgroup (eg: Expansive)
 				$type = apply_filters(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED, POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
 				if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK) {
+
+					$hierarchies = array(
+						GD_TEMPLATE_BLOCKGROUP_AUTHOR => GD_SETTINGS_HIERARCHY_AUTHOR,
+						GD_TEMPLATE_BLOCKGROUP_TAG => GD_SETTINGS_HIERARCHY_TAG,
+					);
 				
 					$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
-					if ($block = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
+					if ($block = $gd_template_settingsmanager->get_page_block($page_id, $hierarchies[$template_id])) {
 						$ret[] = $block;
 					}
 				}
@@ -392,17 +442,24 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR:
+			case GD_TEMPLATE_BLOCKGROUP_TAG:
+
+				$tops = array(
+					GD_TEMPLATE_BLOCKGROUP_AUTHOR => GD_TEMPLATE_BLOCKGROUP_AUTHOR_TOP,
+					GD_TEMPLATE_BLOCKGROUP_TAG => GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA,
+				);
 
 				// Allow TPPDebate to override this
-				if ($author_tops = apply_filters(
-					'GD_Template_Processor_MainBlockGroups:blockgroups:author_tops', 
+				if ($template_tops = apply_filters(
+					'GD_Template_Processor_MainBlockGroups:blockgroups:tops', 
 					array(
-						GD_TEMPLATE_BLOCKGROUP_AUTHOR_TOP
-					)
+						$tops[$template_id],
+					),
+					$template_id
 				)) {
 					$ret = array_merge(
 						$ret,
-						$author_tops
+						$template_tops
 					);
 				}
 				
@@ -410,9 +467,14 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 				// Allow the ThemeStyle to decide if to include block (eg: Swift) or blockgroup (eg: Expansive)
 				$type = apply_filters(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED, POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
 				if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCKGROUP) {
+
+					$hierarchies = array(
+						GD_TEMPLATE_BLOCKGROUP_AUTHOR => GD_SETTINGS_HIERARCHY_AUTHOR,
+						GD_TEMPLATE_BLOCKGROUP_TAG => GD_SETTINGS_HIERARCHY_TAG,
+					);
 				
 					$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
-					if ($blockgroup = $gd_template_settingsmanager->get_page_blockgroup($page_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
+					if ($blockgroup = $gd_template_settingsmanager->get_page_blockgroup($page_id, $hierarchies[$template_id])) {
 						$ret[] = $blockgroup;
 					}
 				}

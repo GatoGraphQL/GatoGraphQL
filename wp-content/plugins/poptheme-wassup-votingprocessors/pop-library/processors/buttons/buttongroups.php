@@ -8,6 +8,7 @@
 define ('GD_TEMPLATE_BUTTONGROUP_OPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('buttongroup-opinionatedvotes'));
 define ('GD_TEMPLATE_BUTTONGROUP_MYOPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('buttongroup-myopinionatedvotes'));
 define ('GD_TEMPLATE_BUTTONGROUP_AUTHOROPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('buttongroup-authoropinionatedvotes'));
+define ('GD_TEMPLATE_BUTTONGROUP_TAGOPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('buttongroup-tagopinionatedvotes'));
 
 class PoPVP_Template_Processor_ButtonGroups extends GD_Template_Processor_CustomButtonGroupsBase {
 
@@ -17,6 +18,7 @@ class PoPVP_Template_Processor_ButtonGroups extends GD_Template_Processor_Custom
 			GD_TEMPLATE_BUTTONGROUP_OPINIONATEDVOTES,
 			GD_TEMPLATE_BUTTONGROUP_MYOPINIONATEDVOTES,
 			GD_TEMPLATE_BUTTONGROUP_AUTHOROPINIONATEDVOTES,
+			GD_TEMPLATE_BUTTONGROUP_TAGOPINIONATEDVOTES,
 		);
 	}
 
@@ -26,6 +28,7 @@ class PoPVP_Template_Processor_ButtonGroups extends GD_Template_Processor_Custom
 			GD_TEMPLATE_BUTTONGROUP_OPINIONATEDVOTES => POP_VOTINGPROCESSORS_SCREEN_OPINIONATEDVOTES,
 			GD_TEMPLATE_BUTTONGROUP_MYOPINIONATEDVOTES => POP_VOTINGPROCESSORS_SCREEN_MYOPINIONATEDVOTES,
 			GD_TEMPLATE_BUTTONGROUP_AUTHOROPINIONATEDVOTES => POP_VOTINGPROCESSORS_SCREEN_AUTHOROPINIONATEDVOTES,
+			GD_TEMPLATE_BUTTONGROUP_TAGOPINIONATEDVOTES => POP_VOTINGPROCESSORS_SCREEN_TAGOPINIONATEDVOTES,
 		);
 		if ($screen = $screens[$template_id]) {
 			return $screen;
@@ -42,6 +45,7 @@ class PoPVP_Template_Processor_ButtonGroups extends GD_Template_Processor_Custom
 			
 			case POP_VOTINGPROCESSORS_SCREEN_OPINIONATEDVOTES:
 			case POP_VOTINGPROCESSORS_SCREEN_AUTHOROPINIONATEDVOTES:
+			case POP_VOTINGPROCESSORS_SCREEN_TAGOPINIONATEDVOTES:
 			case POP_VOTINGPROCESSORS_SCREEN_SINGLEOPINIONATEDVOTES:
 
 				return array(

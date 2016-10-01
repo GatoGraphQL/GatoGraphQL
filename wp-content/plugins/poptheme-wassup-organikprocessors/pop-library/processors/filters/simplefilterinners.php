@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_FARMS', PoP_ServerUtils::get_template_definition('simplefilterinner-farms'));
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORFARMS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorfarms'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGFARMS', PoP_ServerUtils::get_template_definition('simplefilterinner-tagfarms'));
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYFARMS', PoP_ServerUtils::get_template_definition('simplefilterinner-myfarms'));
 
 class OP_Template_Processor_CustomSimpleFilterInners extends GD_Template_Processor_SimpleFilterInnersBase {
@@ -15,6 +16,7 @@ class OP_Template_Processor_CustomSimpleFilterInners extends GD_Template_Process
 	
 		return array(
 			GD_TEMPLATE_SIMPLEFILTERINNER_FARMS,
+			GD_TEMPLATE_SIMPLEFILTERINNER_TAGFARMS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORFARMS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_MYFARMS,
 		);
@@ -24,6 +26,7 @@ class OP_Template_Processor_CustomSimpleFilterInners extends GD_Template_Process
 
 		$filters = array(
 			GD_TEMPLATE_SIMPLEFILTERINNER_FARMS => GD_FILTER_FARMS,
+			GD_TEMPLATE_SIMPLEFILTERINNER_TAGFARMS => GD_FILTER_TAGFARMS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORFARMS => GD_FILTER_AUTHORFARMS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_MYFARMS => GD_FILTER_MYFARMS,
 		);

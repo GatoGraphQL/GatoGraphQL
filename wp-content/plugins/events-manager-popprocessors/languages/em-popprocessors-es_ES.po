@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-17 16:21+0800\n"
-"PO-Revision-Date: 2016-07-24 15:05+0800\n"
+"POT-Creation-Date: 2016-09-27 14:14+0200\n"
+"PO-Revision-Date: 2016-09-27 14:14+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -69,34 +69,6 @@ msgstr "Google Calendar"
 msgid "iCal"
 msgstr "iCal"
 
-#: .././pop-library/processors/controls/_buttoninners.php:42
-#: .././pop-library/processors/controls/_buttons.php:58
-msgid "Events"
-msgstr "Eventos"
-
-#: .././pop-library/processors/controls/_buttoninners.php:43
-#: .././pop-library/processors/controls/_buttons.php:59
-msgid "Events Calendar"
-msgstr "Calendario de eventos"
-
-#: .././pop-library/processors/controls/_buttoninners.php:44
-#: .././pop-library/processors/controls/_buttons.php:60
-msgid "Past Events"
-msgstr "Eventos pasados"
-
-#: .././pop-library/processors/createlocation/_messagefeedbacks.php:27
-msgid "Location created successfully!"
-msgstr "Ubicación creada con éxito"
-
-#: .././pop-library/processors/createlocation/_messagefeedbacks.php:28
-#: .././pop-library/processors/createlocation/messagefeedbacks/messagefeedbacks-layouts.php:27
-msgid "City is missing."
-msgstr "La ciudad no puede ser vacío."
-
-#: .././pop-library/processors/createlocation/_messagefeedbacks.php:29
-msgid "Now adding to your list of Locations."
-msgstr "Añadiendo a su lista de ubicaciones."
-
 #: .././pop-library/processors/createlocation/blockgroups/viewcomponents-deprecated.php:28
 #: .././pop-library/processors/forms/submit-buttons.php:25
 msgid "Add Location"
@@ -133,6 +105,10 @@ msgstr "Código postal"
 #: .././pop-library/processors/createlocation/formcomponents-inputs/text-formcomponents-inputs.php:60
 msgid "Region"
 msgstr "Región"
+
+#: .././pop-library/processors/createlocation/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "City is missing."
+msgstr "La ciudad no puede ser vacío."
 
 #: .././pop-library/processors/createlocation/messagefeedbacks/messagefeedbacks-layouts.php:28
 msgid "Location added successfully!"
@@ -209,3 +185,18 @@ msgstr ""
 "plugins/pop/“>latest version</a> of <b>PoP Core Processors</b> installed, or "
 "otherwise <b>Events Manager Basic Modules for PoP</b> might not function "
 "properly."
+
+#~ msgid "Events"
+#~ msgstr "Eventos"
+
+#~ msgid "Events Calendar"
+#~ msgstr "Calendario de eventos"
+
+#~ msgid "Past Events"
+#~ msgstr "Eventos pasados"
+
+#~ msgid "Location created successfully!"
+#~ msgstr "Ubicación creada con éxito"
+
+#~ msgid "Now adding to your list of Locations."
+#~ msgstr "Añadiendo a su lista de ubicaciones."

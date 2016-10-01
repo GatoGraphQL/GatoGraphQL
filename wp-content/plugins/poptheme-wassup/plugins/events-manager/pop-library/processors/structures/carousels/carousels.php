@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_CAROUSEL_EVENTS', PoP_ServerUtils::get_template_definition('carousel-events'));
 define ('GD_TEMPLATE_CAROUSEL_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('carousel-authorevents'));
+define ('GD_TEMPLATE_CAROUSEL_TAGEVENTS', PoP_ServerUtils::get_template_definition('carousel-tagevents'));
 
 class GD_EM_Template_Processor_CustomCarousels extends GD_Template_Processor_CarouselsBase {
 
@@ -15,6 +16,7 @@ class GD_EM_Template_Processor_CustomCarousels extends GD_Template_Processor_Car
 		return array(
 			GD_TEMPLATE_CAROUSEL_EVENTS,
 			GD_TEMPLATE_CAROUSEL_AUTHOREVENTS,
+			GD_TEMPLATE_CAROUSEL_TAGEVENTS,
 		);
 	}
 
@@ -24,6 +26,7 @@ class GD_EM_Template_Processor_CustomCarousels extends GD_Template_Processor_Car
 
 			case GD_TEMPLATE_CAROUSEL_EVENTS:
 			case GD_TEMPLATE_CAROUSEL_AUTHOREVENTS:
+			case GD_TEMPLATE_CAROUSEL_TAGEVENTS:
 
 				$this->append_att($template_id, $atts, 'class', 'slide');
 				$this->append_att($template_id, $atts, 'class', 'widget widget-info');
@@ -44,6 +47,10 @@ class GD_EM_Template_Processor_CustomCarousels extends GD_Template_Processor_Car
 			case GD_TEMPLATE_CAROUSEL_AUTHOREVENTS:
 
 				return GD_TEMPLATE_CAROUSELINNER_AUTHOREVENTS;
+
+			case GD_TEMPLATE_CAROUSEL_TAGEVENTS:
+
+				return GD_TEMPLATE_CAROUSELINNER_TAGEVENTS;
 		}
 
 		return parent::get_inner_template($template_id);
@@ -55,6 +62,7 @@ class GD_EM_Template_Processor_CustomCarousels extends GD_Template_Processor_Car
 
 			case GD_TEMPLATE_CAROUSEL_EVENTS:
 			case GD_TEMPLATE_CAROUSEL_AUTHOREVENTS:
+			case GD_TEMPLATE_CAROUSEL_TAGEVENTS:
 
 				return 'static';
 		}
@@ -74,6 +82,10 @@ class GD_EM_Template_Processor_CustomCarousels extends GD_Template_Processor_Car
 			case GD_TEMPLATE_CAROUSEL_AUTHOREVENTS:
 
 				return GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS;
+
+			case GD_TEMPLATE_CAROUSEL_TAGEVENTS:
+
+				return GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS;
 		}
 
 		return parent::get_controls_top_template($template_id);

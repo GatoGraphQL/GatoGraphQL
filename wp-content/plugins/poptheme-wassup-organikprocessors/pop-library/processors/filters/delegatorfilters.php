@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORFARMS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorfarms'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGFARMS', PoP_ServerUtils::get_template_definition('delegatorfilter-tagfarms'));
 define ('GD_TEMPLATE_DELEGATORFILTER_MYFARMS', PoP_ServerUtils::get_template_definition('delegatorfilter-myfarms'));
 define ('GD_TEMPLATE_DELEGATORFILTER_FARMS', PoP_ServerUtils::get_template_definition('delegatorfilter-farms'));
 
@@ -15,6 +16,7 @@ class OP_Template_Processor_CustomDelegatorFilters extends GD_Template_Processor
 	
 		return array(
 			GD_TEMPLATE_DELEGATORFILTER_AUTHORFARMS,
+			GD_TEMPLATE_DELEGATORFILTER_TAGFARMS,
 			GD_TEMPLATE_DELEGATORFILTER_MYFARMS,
 			GD_TEMPLATE_DELEGATORFILTER_FARMS,
 		);
@@ -24,6 +26,7 @@ class OP_Template_Processor_CustomDelegatorFilters extends GD_Template_Processor
 
 		$inners = array(
 			GD_TEMPLATE_DELEGATORFILTER_AUTHORFARMS => GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORFARMS,
+			GD_TEMPLATE_DELEGATORFILTER_TAGFARMS => GD_TEMPLATE_SIMPLEFILTERINNER_TAGFARMS,
 			GD_TEMPLATE_DELEGATORFILTER_MYFARMS => GD_TEMPLATE_SIMPLEFILTERINNER_MYFARMS,
 			GD_TEMPLATE_DELEGATORFILTER_FARMS => GD_TEMPLATE_SIMPLEFILTERINNER_FARMS,
 		);

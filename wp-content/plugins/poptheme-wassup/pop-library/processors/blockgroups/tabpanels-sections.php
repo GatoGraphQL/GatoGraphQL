@@ -72,16 +72,19 @@ class GD_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Proce
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_HOMEALLCONTENT:
+			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT:
+			// case GD_TEMPLATE_BLOCKGROUP_TABPANEL_HOMEALLCONTENT:
 
 				return gd_navigation_menu_item(POP_WPAPI_PAGE_ALLCONTENT, true).__('Latest content', 'poptheme-wassup');
 
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT:
 
-				return gd_navigation_menu_item(POP_WPAPI_PAGE_ALLCONTENT, true).sprintf(
-					__('Content tagged with “#%s”', 'poptheme-wassup'),
-					single_tag_title('', false)
-				);
+				// return gd_navigation_menu_item(POP_WPAPI_PAGE_ALLCONTENT, true).sprintf(
+				// 	__('Content tagged with “#%s”', 'poptheme-wassup'),
+				// 	single_tag_title('', false)
+				// );
+				// return '<i class="fa fa-fw fa-hashtag"></i>'.single_tag_title('', false);
+				return GD_Template_Processor_CustomSectionBlocksUtils::get_tag_title();
 		}
 		
 		return parent::get_title($template_id);
@@ -494,7 +497,8 @@ class GD_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Proce
 
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT:
 				
-				return GD_TEMPLATE_FILTER_TAGALLCONTENT;
+				return GD_TEMPLATE_FILTER_TAGWILDCARDPOSTS;
+				// return GD_TEMPLATE_FILTER_TAGALLCONTENT;
 
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_LINKS:
 				

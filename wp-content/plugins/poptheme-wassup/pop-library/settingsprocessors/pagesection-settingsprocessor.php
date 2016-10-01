@@ -67,22 +67,41 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 		$vars = GD_TemplateManager_Utils::get_vars();
 		$fetching_json_data = $vars['fetching-json-data'];
 		$target = $vars['target'];
-		$add = 
-			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN) ||
-			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW);
-		if ($add) {
+		// If passing parameter 'tab' then deal with the corresponding page
+		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+		switch ($page_id) {
 
-			$blockgroups = $frames = array();
-			
-			$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_TAGSECTION_ALLCONTENT_SIDEBAR;
-			$frames[] = GD_TEMPLATE_BLOCK_PAGECONTROL_PAGESIDEBAR;
+			case POP_COREPROCESSORS_PAGE_MAIN:
+			case POP_WPAPI_PAGE_ALLCONTENT:
+			case POPTHEME_WASSUP_PAGE_WEBPOSTS:
+			// case POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG:
 
-			GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
-			
-			// Add frames only if not fetching data for the block
-			if (!$vars['fetching-json-data']) {
-				GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
-			}
+				$add = 
+					($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN)/* ||
+					($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW)*/;
+				if ($add) {
+
+					$blockgroups = $frames = array();
+					
+					// $blockgroups[] = GD_TEMPLATE_BLOCKGROUP_TAGSECTION_ALLCONTENT_SIDEBAR;
+			 		$page_sidebars = array(
+			 			POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCKGROUP_TAG_MAINALLCONTENT_SIDEBAR,
+			 			POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCKGROUP_TAG_ALLCONTENT_SIDEBAR,
+			 			POPTHEME_WASSUP_PAGE_WEBPOSTS => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+			 		);
+			 		if ($sidebar = $page_sidebars[$page_id]) {
+			 			$blockgroups[] = $sidebar;
+			 		}
+					$frames[] = GD_TEMPLATE_BLOCK_PAGECONTROL_TAGSIDEBAR;
+
+					GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+					
+					// Add frames only if not fetching data for the block
+					if (!$vars['fetching-json-data']) {
+						GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+					}
+				}
+				break;
 		}
 	}
 
@@ -567,45 +586,93 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 		$fetching_json_data = $vars['fetching-json-data'];
 		$target = $vars['target'];
 		$blocks = $blockgroups = $frames = array();
+
+		// If passing parameter 'tab' then deal with the corresponding page
 		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+		switch ($page_id) {
 
-		$add = 
-			($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) ||
-			($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) ||
-			($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_TAG && $target == GD_URLPARAM_TARGET_ADDONS) ||
-			($template_id == GD_TEMPLATE_PAGESECTION_MODALS_TAG && $target == GD_URLPARAM_TARGET_MODALS);
-		if ($add) {
-			
-			if ($fetching_json_data) {
+			// case POP_WPAPI_PAGE_ALLCONTENT:
+			case POP_COREPROCESSORS_PAGE_MAIN:
+			// case POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG:
 
-				$blocks[] = $gd_template_settingsmanager->get_page_block($page_id);
-			}
-			else {
+				$add = 
+					($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) ||
+					// ($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_TAG && $target == GD_URLPARAM_TARGET_ADDONS) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_MODALS_TAG && $target == GD_URLPARAM_TARGET_MODALS);
+				if ($add) {
 
-				// Allow the ThemeStyle to decide if to include block (eg: Swift) or blockgroup (eg: Expansive)
-				$type = apply_filters(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED, POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
-				if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK) {
+					if ($fetching_json_data) {
 
-					$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+					}
+					else {
+
+						$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_TAG;
+					}
 				}
-				elseif ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCKGROUP) {
-				
-					$blockgroups[] = $gd_template_settingsmanager->get_page_blockgroup($page_id, GD_SETTINGS_HIERARCHY_TAG);	
-				}
-			}
+				elseif ($template_id == GD_TEMPLATE_PAGESECTION_NAVIGATOR && $target == GD_URLPARAM_TARGET_NAVIGATOR) {
 
-			GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
-			GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
+					$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, null, GD_TEMPLATEFORMAT_NAVIGATOR);
+				}
+				// elseif ($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_TAG && $target == GD_URLPARAM_TARGET_ADDONS) {
+
+				// 	$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, null, GD_TEMPLATEFORMAT_ADDONS);
+				// }
+				break;
+
+			// case POP_COREPROCESSORS_PAGE_MAIN:
+			case POP_WPAPI_PAGE_ALLCONTENT:
+			case POPTHEME_WASSUP_PAGE_WEBPOSTS:
+			// case POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG:
+
+				$add = 
+					($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_TAG && $target == GD_URLPARAM_TARGET_ADDONS) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_MODALS_TAG && $target == GD_URLPARAM_TARGET_MODALS);
+				if ($add) {
+
+					if ($fetching_json_data) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+					}
+					else {
+
+						// Allow the ThemeStyle to decide if to include block (eg: Swift) or blockgroup (eg: Expansive)
+						$type = apply_filters(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED, POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
+						if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK) {
+
+							$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+						}
+						elseif ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCKGROUP) {
+						
+							$blockgroups[] = $gd_template_settingsmanager->get_page_blockgroup($page_id, GD_SETTINGS_HIERARCHY_TAG);	
+						}
+					}
+				}
+				break;
 		}
 
-		// Frames: PageSection ControlGroups
-		if ($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+		GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
 
-			$frames[] = GD_TEMPLATE_BLOCK_TAGCONTROL;
-		}
-		elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
+		switch ($page_id) {
 
-			$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWTAGCONTROL;
+			case POP_COREPROCESSORS_PAGE_MAIN:
+			case POP_WPAPI_PAGE_ALLCONTENT:
+			case POPTHEME_WASSUP_PAGE_WEBPOSTS:
+
+				// Frames: PageSection ControlGroups
+				if ($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_TAGCONTROL;
+				}
+				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWTAGCONTROL;
+				}
+				break;
 		}
 
 		// Add frames only if not fetching data for the block

@@ -41,15 +41,18 @@ body.sliding #ps-navigator {
 	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
 	box-shadow: 0 0 5px rgba(0, 0, 0, .2);
 }
-/*body.swift */#ps-side .nav>li>a/*,
-body.swift #ps-sideinfo .nav>li>a*/ {
-	font-size: 12px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+@media (min-width: 768px) {
+	/*body.swift */#ps-side .nav>li>a/*,
+	body.swift #ps-sideinfo .nav>li>a*/ {
+		font-size: 12px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 }
 body.swift #ps-main .pop-outerblock.blockgroup-home:before,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost:before,
 body.swift #ps-main .pop-outerblock.blockgroup-author:before,
+body.swift #ps-main .pop-outerblock.blockgroup-tag:before,
 body.swift #ps-main .pop-outerblock.controlblock:before,
 body.swift #ps-main .pop-outerblock.feed:before,
 body.expansive #ps-main .simpleview > .scroll-inner:before,
@@ -57,6 +60,7 @@ body.expansive #ps-main .fullview > .scroll-inner:before,
 body.swift #ps-main .pop-outerblock.blockgroup-home:after,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost:after,
 body.swift #ps-main .pop-outerblock.blockgroup-author:after,
+body.swift #ps-main .pop-outerblock.blockgroup-tag:after,
 body.swift #ps-main .pop-outerblock.controlblock:after,
 body.swift #ps-main .pop-outerblock.feed:after,
 body.expansive #ps-main .simpleview > .scroll-inner:after,
@@ -67,6 +71,7 @@ body.expansive #ps-main .fullview > .scroll-inner:after {
 body.swift #ps-main .pop-outerblock.blockgroup-home:after,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost:after,
 body.swift #ps-main .pop-outerblock.blockgroup-author:after,
+body.swift #ps-main .pop-outerblock.blockgroup-tag:after,
 body.swift #ps-main .pop-outerblock.controlblock:after,
 body.swift #ps-main .pop-outerblock.feed:after,
 body.expansive #ps-main .simpleview > .scroll-inner:after,
@@ -76,8 +81,10 @@ body.expansive #ps-main .fullview > .scroll-inner:after {
 body.swift #ps-main .pop-outerblock.blockgroup-home,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost,
 body.swift #ps-main .pop-outerblock.blockgroup-author,
+body.swift #ps-main .pop-outerblock.blockgroup-tag,
 body.swift #ps-main .pop-outerblock.controlblock,
 body.swift #ps-main .pop-outerblock.feed,
+body.swift #ps-main .pop-outerblock.calendar,
 body.swift #ps-main .pop-outerblock.block-singleabout-content,
 body.swift #ps-main .pop-outerblock.block-single-content,
 body.swift #ps-quickview .pop-outerblock.blockgroup-home,
@@ -893,6 +900,9 @@ h4 .pop-spinner {
 #ps-side li.menu-item-parent.pop-parentmenu-2ndlevel > a.pop-multitarget-link {
 	padding-left: 3px;
 }
+.nav>li.pop-hidden-multitarget>a.pop-multitarget-link {
+	display: none;
+}
 
 #ps-side li.menu-item-parent.pop-parentmenu-2ndlevel > a {
 	padding-left: 50px;
@@ -1264,6 +1274,7 @@ body.nooverflow {
 .offcanvas.top,
 .offcanvas.main,
 .offcanvas.pagetabs,
+.offcanvas.background,
 #ps-main .blocksection-controls.top,
 #ps-sideinfo .blocksection-controls.top,
 .pop-loading.top-level,
@@ -1547,13 +1558,22 @@ body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-co
 	left: 0;
 }
 .pagesection-group.active-top.active-side-xs .offcanvas.top,
+.pagesection-group.active-side-xs .offcanvas.top,
 .pagesection-group.active-main.active-side-xs .offcanvas.main,
+.pagesection-group.active-side-xs .offcanvas.main,
 .pagesection-group.active-pagetabs.active-side-xs .offcanvas.pagetabs,
+.pagesection-group.active-side-xs .offcanvas.pagetabs,
 .pagesection-group.active-pagetabs-xs.active-side-xs .offcanvas.pagetabs,
+.pagesection-group.active-side-xs .offcanvas.pagetabs,
 .pagesection-group.active-top.active-navigator-xs .offcanvas.top,
+.pagesection-group.active-navigator-xs .offcanvas.top,
 .pagesection-group.active-main.active-navigator-xs .offcanvas.main,
+.pagesection-group.active-navigator-xs .offcanvas.main,
 .pagesection-group.active-pagetabs.active-navigator-xs .offcanvas.pagetabs,
-.pagesection-group.active-pagetabs-xs.active-navigator-xs .offcanvas.pagetabs {
+.pagesection-group.active-navigator-xs .offcanvas.pagetabs,
+.pagesection-group.active-pagetabs-xs.active-navigator-xs .offcanvas.pagetabs,
+.pagesection-group.active-navigator-xs .offcanvas.pagetabs,
+.pagesection-group.active-side-xs .offcanvas.background {
 	left: 100%;
 }
 .pagesection-group.active-sideinfo-xs .offcanvas.sideinfo,
@@ -2905,12 +2925,19 @@ body.expansive .layoutauthor,
 body.expansive .content-single {
 	padding: 30px 15px;
 }*/
-/*body.swift */.fullview > .wrapper > .row > .content-body {
-	padding: 30px 57px; /* With 57px, the width of the content inside is exactly 480px */
-}
+/*body.swift */.fullview > .wrapper > .row > .content-body,
 /*body.swift */.layoutauthor,
 /*body.swift */.content-single {
-	padding: 30px 41px; /* With 41px, the width of the content inside is exactly 480px */
+	padding: 30px 10px;
+}
+@media (min-width: 700px) {
+	/*body.swift */.fullview > .wrapper > .row > .content-body {
+		padding: 30px 57px; /* With 57px, the width of the content inside is exactly 480px */
+	}
+	/*body.swift */.layoutauthor,
+	/*body.swift */.content-single {
+		padding: 30px 41px; /* With 41px, the width of the content inside is exactly 480px */
+	}
 }
 /*#ps-quickview .layoutauthor,
 #ps-quickview .content-single {

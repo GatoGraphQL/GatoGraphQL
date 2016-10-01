@@ -27,7 +27,10 @@ define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_MAINALLCONTENT', PoP_ServerUtils
 define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-allcontent'));
 define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLUSERS', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-allusers'));
 
+define ('GD_TEMPLATE_SIDEBARINNER_TAGSECTION_MAINALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-tagsection-mainallcontent'));
 define ('GD_TEMPLATE_SIDEBARINNER_TAGSECTION_ALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-tagsection-allcontent'));
+define ('GD_TEMPLATE_SIDEBARINNER_TAGSECTION_WEBPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-tagsection-webposts'));
+
 define ('GD_TEMPLATE_SIDEBARINNER_HOMESECTION_ALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-homesection-allcontent'));
 
 class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Processor_SidebarInnersBase {
@@ -49,7 +52,9 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTLINKS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYHIGHLIGHTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTS,
+			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_MAINALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_ALLCONTENT,
+			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_WEBPOSTS,
 			GD_TEMPLATE_SIDEBARINNER_HOMESECTION_ALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_MAINALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLCONTENT,
@@ -145,10 +150,22 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_MYWEBPOSTS;
 				break;
 
+			case GD_TEMPLATE_SIDEBARINNER_TAGSECTION_MAINALLCONTENT:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGMAINALLCONTENT;
+				break;
+
 			case GD_TEMPLATE_SIDEBARINNER_TAGSECTION_ALLCONTENT:
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGALLCONTENT;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_TAGSECTION_WEBPOSTS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGWEBPOSTS;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_HOMESECTION_ALLCONTENT:

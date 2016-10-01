@@ -7,8 +7,10 @@
 
 define ('GD_TEMPLATE_LATESTCOUNT_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('latestcount-webpostlinks'));
 define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('latestcount-author-webpostlinks'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('latestcount-tag-webpostlinks'));
 define ('GD_TEMPLATE_LATESTCOUNT_WEBPOSTS', PoP_ServerUtils::get_template_definition('latestcount-webposts'));
 define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTS', PoP_ServerUtils::get_template_definition('latestcount-author-webposts'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS', PoP_ServerUtils::get_template_definition('latestcount-tag-webposts'));
 
 class PoPThemeWassup_Template_Processor_SectionLatestCounts extends GD_Template_Processor_SectionLatestCountsBase {
 
@@ -17,8 +19,10 @@ class PoPThemeWassup_Template_Processor_SectionLatestCounts extends GD_Template_
 		return array(
 			GD_TEMPLATE_LATESTCOUNT_WEBPOSTLINKS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTLINKS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS,
 			GD_TEMPLATE_LATESTCOUNT_WEBPOSTS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS,
 		);
 	}
 
@@ -27,8 +31,10 @@ class PoPThemeWassup_Template_Processor_SectionLatestCounts extends GD_Template_
 		$cats = array(
 			GD_TEMPLATE_LATESTCOUNT_WEBPOSTLINKS => POPTHEME_WASSUP_CAT_WEBPOSTLINKS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTLINKS => POPTHEME_WASSUP_CAT_WEBPOSTLINKS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS => POPTHEME_WASSUP_CAT_WEBPOSTLINKS,
 			GD_TEMPLATE_LATESTCOUNT_WEBPOSTS => POPTHEME_WASSUP_CAT_WEBPOSTS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTS => POPTHEME_WASSUP_CAT_WEBPOSTS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS => POPTHEME_WASSUP_CAT_WEBPOSTS,
 		);
 		if ($cat = $cats[$template_id]) {
 				
@@ -43,8 +49,10 @@ class PoPThemeWassup_Template_Processor_SectionLatestCounts extends GD_Template_
 		$cats = array(
 			GD_TEMPLATE_LATESTCOUNT_WEBPOSTLINKS => POPTHEME_WASSUP_CAT_WEBPOSTLINKS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTLINKS => POPTHEME_WASSUP_CAT_WEBPOSTLINKS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS => POPTHEME_WASSUP_CAT_WEBPOSTLINKS,
 			GD_TEMPLATE_LATESTCOUNT_WEBPOSTS => POPTHEME_WASSUP_CAT_WEBPOSTS,
 			GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTS => POPTHEME_WASSUP_CAT_WEBPOSTS,
+			GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS => POPTHEME_WASSUP_CAT_WEBPOSTS,
 		);
 		if ($cat = $cats[$template_id]) {
 				
@@ -62,12 +70,14 @@ class PoPThemeWassup_Template_Processor_SectionLatestCounts extends GD_Template_
 			
 			case GD_TEMPLATE_LATESTCOUNT_WEBPOSTLINKS:
 			case GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTLINKS:
+			case GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS:
 
 				$ret[] = 'post-'.POPTHEME_WASSUP_CAT_WEBPOSTLINKS;
 				break;
 
 			case GD_TEMPLATE_LATESTCOUNT_WEBPOSTS:
 			case GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTS:
+			case GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS:
 				
 				$ret[] = 'post-'.POPTHEME_WASSUP_CAT_WEBPOSTS;
 				$ret[] = 'post-'.POPTHEME_WASSUP_CAT_WEBPOSTLINKS;
@@ -92,6 +102,19 @@ class PoPThemeWassup_Template_Processor_SectionLatestCounts extends GD_Template_
 		}
 	
 		return parent::is_author($template_id, $atts);
+	}
+
+	function is_tag($template_id, $atts) {
+
+		switch ($template_id) {
+			
+			case GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS:
+			case GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS:
+				
+				return true;
+		}
+	
+		return parent::is_tag($template_id, $atts);
 	}
 }
 

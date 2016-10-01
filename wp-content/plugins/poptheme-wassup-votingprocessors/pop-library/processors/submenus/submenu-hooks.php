@@ -18,6 +18,12 @@ class PoPTheme_VotingProcessors_SubmenuHooks {
 			2
 		);
 		add_filter(
+			'GD_Template_Processor_CustomSubMenus:tag:blockgroupitems', 
+			array($this, 'tagsubmenu_blockunits'),
+			0,
+			2
+		);
+		add_filter(
 			'GD_Template_Processor_CustomSubMenus:single:blockgroupitems', 
 			array($this, 'singlesubmenu_blockunits'),
 			0,
@@ -35,6 +41,25 @@ class PoPTheme_VotingProcessors_SubmenuHooks {
 				GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOROPINIONATEDVOTES_AGAINST,
 			);
 			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOROPINIONATEDVOTES] = $opinionatedvote_subheaders;
+			if (in_array($current_blockgroup, $opinionatedvote_subheaders)) {
+
+				$blockunits[$current_blockgroup] = array();
+			}
+		}
+		
+		return $blockunits;
+	}
+
+	function tagsubmenu_blockunits($blockunits, $current_blockgroup) {
+
+		if (POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES) {
+			
+			$opinionatedvote_subheaders = array(
+				GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGOPINIONATEDVOTES_PRO,
+				GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGOPINIONATEDVOTES_NEUTRAL,
+				GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGOPINIONATEDVOTES_AGAINST,
+			);
+			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGOPINIONATEDVOTES] = $opinionatedvote_subheaders;
 			if (in_array($current_blockgroup, $opinionatedvote_subheaders)) {
 
 				$blockunits[$current_blockgroup] = array();

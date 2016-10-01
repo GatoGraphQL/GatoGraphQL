@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_CAROUSELINNER_OPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('carouselinner-opinionatedvotes'));
 define ('GD_TEMPLATE_CAROUSELINNER_AUTHOROPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('carouselinner-authoropinionatedvotes'));
+define ('GD_TEMPLATE_CAROUSELINNER_TAGOPINIONATEDVOTES', PoP_ServerUtils::get_template_definition('carouselinner-tagopinionatedvotes'));
 
 class VotingProcessors_Template_Processor_CustomCarouselInners extends GD_Template_Processor_CarouselInnersBase {
 
@@ -15,6 +16,7 @@ class VotingProcessors_Template_Processor_CustomCarouselInners extends GD_Templa
 		return array(
 			GD_TEMPLATE_CAROUSELINNER_OPINIONATEDVOTES,
 			GD_TEMPLATE_CAROUSELINNER_AUTHOROPINIONATEDVOTES,
+			GD_TEMPLATE_CAROUSELINNER_TAGOPINIONATEDVOTES,
 		);
 	}
 
@@ -24,6 +26,7 @@ class VotingProcessors_Template_Processor_CustomCarouselInners extends GD_Templa
 
 			case GD_TEMPLATE_CAROUSELINNER_OPINIONATEDVOTES:
 			case GD_TEMPLATE_CAROUSELINNER_AUTHOROPINIONATEDVOTES:
+			case GD_TEMPLATE_CAROUSELINNER_TAGOPINIONATEDVOTES:
 
 				return array(
 					'row-items' => 1, 
@@ -43,6 +46,7 @@ class VotingProcessors_Template_Processor_CustomCarouselInners extends GD_Templa
 
 			case GD_TEMPLATE_CAROUSELINNER_OPINIONATEDVOTES:
 			case GD_TEMPLATE_CAROUSELINNER_AUTHOROPINIONATEDVOTES:
+			case GD_TEMPLATE_CAROUSELINNER_TAGOPINIONATEDVOTES:
 
 				$ret[] = GD_TEMPLATE_LAYOUT_PREVIEWPOST_OPINIONATEDVOTE_CONTENTAUTHORREFERENCED;
 				break;

@@ -136,9 +136,9 @@ class GD_DataLoader_EventList extends GD_DataLoader_PostListBase {
     	$query['array'] = true;
 
     	// Add filter to only bring the ids and nothing else
-		add_filter('em_events_get_sql', array($this, 'em_events_get_sql'));
+		// add_filter('em_events_get_sql', array($this, 'em_events_get_sql'));
     	$results = $this->execute_query($query);
-		remove_filter('em_events_get_sql', array($this, 'em_events_get_sql'));
+		// remove_filter('em_events_get_sql', array($this, 'em_events_get_sql'));
 
     	$ret = array();
     	foreach ($results as $key => $value) {
@@ -148,19 +148,20 @@ class GD_DataLoader_EventList extends GD_DataLoader_PostListBase {
     	return $ret;
 	}
 
-	function em_events_get_sql($sql) {
+	// Comment Leo 16/09/2016: commented because it screws it up when adding tags, it just destroys the resulting SQL
+	// function em_events_get_sql($sql) {
 
-		// Modify the $sql to bring only the ids field
-		$parts = explode(' FROM ', $sql);
+	// 	// Modify the $sql to bring only the ids field
+	// 	$parts = explode(' FROM ', $sql);
 
-		// Copied from EM_Events::get() (em-events.php)
-		$events_table = EM_EVENTS_TABLE;
-		$post_id_field = $events_table.'.post_id';
+	// 	// Copied from EM_Events::get() (em-events.php)
+	// 	$events_table = EM_EVENTS_TABLE;
+	// 	$post_id_field = $events_table.'.post_id';
 
-		$sql = "SELECT " . $post_id_field . " FROM " . $parts[1];
+	// 	$sql = "SELECT " . $post_id_field . " FROM " . $parts[1];
 
-		return $sql;
-	}
+	// 	return $sql;
+	// }
 	
 	function get_database_key() {
 	

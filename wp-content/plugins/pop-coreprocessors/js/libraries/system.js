@@ -73,7 +73,7 @@ popSystem = {
 	initDelegatorFilter : function(args) {
 
 		var t = this;
-		var targets = args.targets;
+		var delegatorPageSection = args.pageSection, targets = args.targets;
 
 		// Initialize Filters
 		targets.submit(function(e) {
@@ -98,6 +98,9 @@ popSystem = {
 
 					popManager.filter(pageSection, block, form);
 				}
+
+				// For mobile phone version: must get the active pageSection back to main
+				popPageSectionManager.close(delegatorPageSection, 'xs');
 			}
 		});
 	},

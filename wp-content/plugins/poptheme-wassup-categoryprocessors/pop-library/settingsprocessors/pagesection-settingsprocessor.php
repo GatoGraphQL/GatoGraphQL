@@ -50,6 +50,37 @@ class PoPTheme_Wassup_CategoryProcessors_PageSectionSettingsProcessor extends Wa
 		}
 	}
 
+	function add_sideinfo_tag_blockunits(&$ret, $template_id) {
+
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$target = $vars['target'];
+		$add = 
+			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN)/* ||
+			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW)*/;
+		if ($add) {
+
+			$blockgroups = $frames = array();
+			$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+			$page_sidebars = array(
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS00 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS01 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS02 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS03 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS04 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS05 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS06 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS07 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS08 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS09 => GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR,
+			);
+			if ($sidebar = $page_sidebars[$page_id]) {
+				$blockgroups[] = $sidebar;
+			}
+
+			GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+		}
+	}
+
 	function add_sideinfo_page_blockunits(&$ret, $template_id) {
 
 		$vars = GD_TemplateManager_Utils::get_vars();
@@ -187,6 +218,94 @@ class PoPTheme_Wassup_CategoryProcessors_PageSectionSettingsProcessor extends Wa
 
 		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
 		GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
+	}
+
+	function add_tag_blockunits(&$ret, $template_id) {
+
+		global $gd_template_settingsmanager;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$fetching_json_data = $vars['fetching-json-data'];
+		$target = $vars['target'];
+
+		$blocks = $blockgroups = $frames = array();
+
+		// If passing parameter 'tab' then deal with the corresponding page
+		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+		switch ($page_id) {
+
+			/*********************************************
+			 * Sections
+			 *********************************************/
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS00:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS01:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS02:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS03:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS04:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS05:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS06:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS07:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS08:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS09:
+
+				$add = 
+					($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_TAG && $target == GD_URLPARAM_TARGET_ADDONS) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_MODALS_TAG && $target == GD_URLPARAM_TARGET_MODALS);
+				if ($add) {
+			
+					if ($fetching_json_data) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+						break;
+					}
+					
+					// Allow the ThemeStyle to decide if to include block (eg: Swift) or blockgroup (eg: Expansive)
+					$type = apply_filters(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED, POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
+					if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+					}
+					elseif ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCKGROUP) {
+					
+						$blockgroups[] = $gd_template_settingsmanager->get_page_blockgroup($page_id, GD_SETTINGS_HIERARCHY_TAG);	
+					}
+				}
+				break;
+		}
+
+		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+		GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
+
+		switch ($page_id) {
+
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS00:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS01:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS02:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS03:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS04:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS05:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS06:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS07:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS08:
+			case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS09:
+
+				// Frames: PageSection ControlGroups
+				if ($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_TAGCONTROL;
+				}
+				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWTAGCONTROL;
+				}
+				break;
+		}
+
+		// Add frames only if not fetching data for the block
+		if (!$fetching_json_data) {
+			GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+		}
 	}
 
 	function add_page_blockunits(&$ret, $template_id) {

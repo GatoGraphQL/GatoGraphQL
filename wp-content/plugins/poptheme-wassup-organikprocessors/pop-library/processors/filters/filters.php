@@ -8,6 +8,7 @@
 define ('GD_TEMPLATE_FILTER_AUTHORFARMS', PoP_ServerUtils::get_template_definition('filter-authorfarms'));
 define ('GD_TEMPLATE_FILTER_MYFARMS', PoP_ServerUtils::get_template_definition('filter-myfarms'));
 define ('GD_TEMPLATE_FILTER_FARMS', PoP_ServerUtils::get_template_definition('filter-farms'));
+define ('GD_TEMPLATE_FILTER_TAGFARMS', PoP_ServerUtils::get_template_definition('filter-tagfarms'));
 
 class OP_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersBase {
 
@@ -17,6 +18,7 @@ class OP_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersB
 			GD_TEMPLATE_FILTER_FARMS,
 			GD_TEMPLATE_FILTER_AUTHORFARMS,
 			GD_TEMPLATE_FILTER_MYFARMS,
+			GD_TEMPLATE_FILTER_TAGFARMS,
 		);
 	}
 	
@@ -24,6 +26,7 @@ class OP_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersB
 
 		$inners = array(
 			GD_TEMPLATE_FILTER_FARMS => GD_TEMPLATE_FILTERINNER_FARMS,
+			GD_TEMPLATE_FILTER_TAGFARMS => GD_TEMPLATE_FILTERINNER_TAGFARMS,
 			GD_TEMPLATE_FILTER_AUTHORFARMS => GD_TEMPLATE_FILTERINNER_AUTHORFARMS,
 			GD_TEMPLATE_FILTER_MYFARMS => GD_TEMPLATE_FILTERINNER_MYFARMS,
 		);

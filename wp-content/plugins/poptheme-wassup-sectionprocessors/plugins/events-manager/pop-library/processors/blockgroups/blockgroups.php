@@ -26,15 +26,21 @@ class PoPTheme_Wassup_SectionProcessors_EM_Processor_BlockGroups extends GD_Temp
 				
 			case GD_TEMPLATE_BLOCKGROUP_HOME_EVENTPROJECTWIDGETAREA:
 
-				$ret[] = GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL;
 				$ret[] = GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP;
+				$ret[] = GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL;
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_EVENTPROJECTWIDGETAREA:
 
-				$ret[] = GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL;
+				// Add the members only for communities
+				global $author;
+				if (gd_ure_is_community($author)) {
+
+					$ret[] = GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL;
+				}
+
 				$ret[] = GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP;
-				$ret[] = GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL;
+				$ret[] = GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL;
 				break;
 		}
 

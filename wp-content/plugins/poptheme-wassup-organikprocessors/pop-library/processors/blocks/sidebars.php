@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_BLOCK_SECTION_FARMS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-farms-sidebar'));
 define ('GD_TEMPLATE_BLOCK_SECTION_MYFARMS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-myfarms-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAGSECTION_FARMS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tagsection-farms-sidebar'));
 define ('GD_TEMPLATE_BLOCK_AUTHORFARMS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authorfarms-sidebar'));
 define ('GD_TEMPLATE_BLOCK_SINGLE_FARM_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-farm-sidebar'));
 
@@ -17,6 +18,7 @@ class OP_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_Cu
 		return array(
 			GD_TEMPLATE_BLOCK_SECTION_FARMS_SIDEBAR,
 			GD_TEMPLATE_BLOCK_SECTION_MYFARMS_SIDEBAR,
+			GD_TEMPLATE_BLOCK_TAGSECTION_FARMS_SIDEBAR,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SIDEBAR,
 			GD_TEMPLATE_BLOCK_SINGLE_FARM_SIDEBAR,
 		);
@@ -29,6 +31,10 @@ class OP_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_Cu
 			case GD_TEMPLATE_BLOCK_SECTION_FARMS_SIDEBAR:
 
 				return GD_TEMPLATE_FILTER_FARMS;
+
+			case GD_TEMPLATE_BLOCK_TAGSECTION_FARMS_SIDEBAR:
+
+				return GD_TEMPLATE_FILTER_TAGFARMS;
 
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SIDEBAR:
 
@@ -51,6 +57,7 @@ class OP_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_Cu
 
 		$block_inners = array(
 			GD_TEMPLATE_BLOCK_SECTION_FARMS_SIDEBAR => GD_TEMPLATE_SIDEBAR_SECTION_FARMS,
+			GD_TEMPLATE_BLOCK_TAGSECTION_FARMS_SIDEBAR => GD_TEMPLATE_SIDEBAR_SECTION_TAGFARMS,
 			GD_TEMPLATE_BLOCK_AUTHORFARMS_SIDEBAR => GD_TEMPLATE_SIDEBAR_SECTION_AUTHORFARMS,
 			GD_TEMPLATE_BLOCK_SECTION_MYFARMS_SIDEBAR => GD_TEMPLATE_SIDEBAR_SECTION_MYFARMS,
 			GD_TEMPLATE_BLOCK_SINGLE_FARM_SIDEBAR => $vertical ? GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_FARM : GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_FARM,

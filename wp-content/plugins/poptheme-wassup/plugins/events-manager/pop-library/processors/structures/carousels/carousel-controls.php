@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_CAROUSELCONTROLS_EVENTS', PoP_ServerUtils::get_template_definition('carouselcontrols-events'));
 define ('GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('carouselcontrols-authorevents'));
+define ('GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS', PoP_ServerUtils::get_template_definition('carouselcontrols-tagevents'));
 
 class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Processor_CarouselControlsBase {
 
@@ -15,6 +16,7 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 		return array(
 			GD_TEMPLATE_CAROUSELCONTROLS_EVENTS,
 			GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS,
+			GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS,
 		);
 	}
 
@@ -24,6 +26,7 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_EVENTS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS:
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS:
 
 				return 'btn btn-link btn-compact';
 		}
@@ -37,6 +40,7 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_EVENTS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS:
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS:
 
 				return 'btn btn-link btn-compact';
 		}
@@ -49,6 +53,7 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_EVENTS:
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS:
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS:
 
 				return gd_navigation_menu_item(POPTHEME_WASSUP_EM_PAGE_EVENTS, true).sprintf(
 						'<span class="hidden-sm hidden-md hidden-lg">%s</span><span class="hidden-xs">%s</span>',
@@ -73,6 +78,15 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 				$url = get_author_posts_url($author);
 				$page_ids = array(
 					GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS => POPTHEME_WASSUP_EM_PAGE_EVENTS,
+				);
+				return GD_TemplateManager_Utils::add_tab($url, $page_ids[$template_id]);
+
+			case GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS:
+
+				global $gd_template_settingsmanager;
+				$url = get_tag_link(get_queried_object_id());
+				$page_ids = array(
+					GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS => POPTHEME_WASSUP_EM_PAGE_EVENTS,
 				);
 				return GD_TemplateManager_Utils::add_tab($url, $page_ids[$template_id]);
 		}

@@ -118,7 +118,7 @@ class Wassup_PageSectionSettingsManager {
 		elseif (is_home() || is_front_page()) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
 		}
-		elseif (is_tag()) {
+		elseif (!$page_id && is_tag()) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 		}
 		$hierarchy = $this->get_hierarchy($hierarchy);

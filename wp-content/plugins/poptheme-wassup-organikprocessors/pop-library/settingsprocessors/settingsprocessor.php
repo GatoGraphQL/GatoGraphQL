@@ -58,6 +58,19 @@ class PoPTheme_Wassup_OrganikProcessors_Template_SettingsProcessor extends GD_Te
 			}
 		}
 
+		// Tag page blocks
+		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+
+			$pageblockgroups = array(
+				POPTHEME_WASSUP_ORGANIKPROCESSORS_PAGE_FARMS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGFARMS,
+			);
+			foreach ($pageblockgroups as $page => $blockgroup) {
+				
+				// Also Default
+				$ret[$page]['blockgroups']['default'] = $blockgroup;
+			}
+		}
+
 		return $ret;
 	}
 
@@ -292,6 +305,73 @@ class PoPTheme_Wassup_OrganikProcessors_Template_SettingsProcessor extends GD_Te
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
 
 				if ($default_format_authorsection == GD_TEMPLATEFORMAT_MAP) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+		}
+
+		// Tag page blocks
+		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+
+			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_TAGSECTION);
+			
+			$pageblocks_details = array(
+				POPTHEME_WASSUP_ORGANIKPROCESSORS_PAGE_FARMS  => GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_DETAILS,
+			);
+			foreach ($pageblocks_details as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_DETAILS) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_simpleview = array(
+				POPTHEME_WASSUP_ORGANIKPROCESSORS_PAGE_FARMS  => GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW,
+			);
+			foreach ($pageblocks_simpleview as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_SIMPLEVIEW] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_SIMPLEVIEW) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_fullview = array(
+				POPTHEME_WASSUP_ORGANIKPROCESSORS_PAGE_FARMS  => GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW,
+			);
+			foreach ($pageblocks_fullview as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_FULLVIEW] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_FULLVIEW) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_thumbnail = array(
+				POPTHEME_WASSUP_ORGANIKPROCESSORS_PAGE_FARMS  => GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL,
+			);
+			foreach ($pageblocks_thumbnail as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_THUMBNAIL) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_list = array(
+				POPTHEME_WASSUP_ORGANIKPROCESSORS_PAGE_FARMS  => GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST,
+			);
+			foreach ($pageblocks_list as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_LIST) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_map = array(
+				POPTHEME_WASSUP_ORGANIKPROCESSORS_PAGE_FARMS  => GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP,
+			);
+			foreach ($pageblocks_map as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_MAP) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}

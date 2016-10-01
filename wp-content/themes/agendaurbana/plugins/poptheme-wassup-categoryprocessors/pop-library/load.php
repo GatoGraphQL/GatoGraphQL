@@ -7,3 +7,4 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 require_once 'sectionfilter-hooks.php';
+require_once 'blockgroup-hooks.php';

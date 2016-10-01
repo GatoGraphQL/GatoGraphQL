@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-22 23:49+0800\n"
-"PO-Revision-Date: 2016-08-22 23:56+0800\n"
+"POT-Creation-Date: 2016-09-27 14:22+0200\n"
+"PO-Revision-Date: 2016-09-27 14:23+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: zh\n"
@@ -89,31 +89,37 @@ msgstr "部落格"
 
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:312
 #: .././pop-library/processors/blockgroups/tabpanels-sections.php:548
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:290
 msgid "Details"
 msgstr "详细信息"
 
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:316
 #: .././pop-library/processors/blockgroups/tabpanels-sections.php:552
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:294
 msgid "Feed"
 msgstr "提要式"
 
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:320
 #: .././pop-library/processors/blockgroups/tabpanels-sections.php:556
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:298
 msgid "Extended"
 msgstr "扩展式"
 
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:324
 #: .././pop-library/processors/blockgroups/tabpanels-sections.php:560
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:302
 msgid "Thumbnail"
 msgstr "縮略圖"
 
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:328
 #: .././pop-library/processors/blockgroups/tabpanels-sections.php:564
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:306
 msgid "List"
 msgstr "陈列式"
 
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:332
 #: .././pop-library/processors/blockgroups/tabpanels-sections.php:568
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:310
 msgid "Map"
 msgstr "地图"
 
@@ -121,15 +127,20 @@ msgstr "地图"
 msgid "Edit"
 msgstr "编辑"
 
-#: .././pop-library/processors/blocks/sections.php:1619
+#: .././pop-library/processors/blocks/scrollmap-sections.php:74
+#, php-format
+msgid "Projects tagged with “#%s”"
+msgstr "标记为“#%s”的项目"
+
+#: .././pop-library/processors/blocks/sections.php:2031
 msgid "The Drivers"
 msgstr "驾驶人士"
 
-#: .././pop-library/processors/blocks/sections.php:1624
+#: .././pop-library/processors/blocks/sections.php:2036
 msgid "The Advisors"
 msgstr "顾问"
 
-#: .././pop-library/processors/blocks/sections.php:1629
+#: .././pop-library/processors/blocks/sections.php:2041
 msgid "The Volunteers"
 msgstr "自愿者"
 

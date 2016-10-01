@@ -6,6 +6,8 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_EVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-eventlinks'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-authoreventlinks'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TAGEVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-tageventlinks'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_MYEVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-myeventlinks'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDEVENT', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addevent'));
 
@@ -17,6 +19,8 @@ class GD_EM_Template_Processor_CustomControlButtonGroups extends GD_Template_Pro
 	
 		return array(
 			GD_TEMPLATE_CONTROLBUTTONGROUP_EVENTLINKS,
+			GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS,
+			GD_TEMPLATE_CONTROLBUTTONGROUP_TAGEVENTLINKS,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_MYEVENTLINKS,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_ADDEVENT,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLEMAP,
@@ -33,6 +37,18 @@ class GD_EM_Template_Processor_CustomControlButtonGroups extends GD_Template_Pro
 
 				// $ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR;
 				$ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS;
+				break;
+		
+			case GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS:
+
+				// $ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR;
+				$ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS;
+				break;
+		
+			case GD_TEMPLATE_CONTROLBUTTONGROUP_TAGEVENTLINKS:
+
+				// $ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR;
+				$ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS;
 				break;
 		
 			case GD_TEMPLATE_CONTROLBUTTONGROUP_ADDEVENT:

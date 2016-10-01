@@ -636,6 +636,15 @@ class GD_Template_Processor_CustomTabPanePageSections extends GD_Template_Proces
 				break;
 				
 			case GD_TEMPLATE_PAGESECTION_NAVIGATOR:
+
+				if (is_page()) {
+					PoPTheme_Wassup_PageSectionSettingsUtils::add_page_blockunits($ret, $template_id);
+				}
+				elseif (is_tag()) {
+					PoPTheme_Wassup_PageSectionSettingsUtils::add_tag_blockunits($ret, $template_id);
+				}
+				break;
+
 			case GD_TEMPLATE_PAGESECTION_HOVER:
 			case GD_TEMPLATE_PAGESECTION_PAGE:
 			case GD_TEMPLATE_PAGESECTION_ADDONS_PAGE:

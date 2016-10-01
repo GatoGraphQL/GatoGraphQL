@@ -44,6 +44,139 @@ class VotingProcessors_PageSectionSettingsProcessor extends Wassup_PageSectionSe
 		}
 	}
 
+	function add_tag_blockunits(&$ret, $template_id) {
+
+		global $gd_template_settingsmanager;
+
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$target = $vars['target'];
+		$fetching_json = $vars['fetching-json'];
+		$fetching_json_data = $vars['fetching-json-data'];
+		$submitted_data = $fetching_json_data && doing_post();
+
+		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+		if (!$page_id) return;
+		
+		$blocks = $blockgroups = $frames = array();
+
+		switch ($page_id) {
+			
+			/*********************************************
+			 * Sections
+			 *********************************************/
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_BYORGANIZATIONS:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_BYINDIVIDUALS:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_PRO:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_AGAINST:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_NEUTRAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_PRO_GENERAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_AGAINST_GENERAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_NEUTRAL_GENERAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_PRO_ARTICLE:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_AGAINST_ARTICLE:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_NEUTRAL_ARTICLE:
+
+				$add = 
+					($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_TAG && $target == GD_URLPARAM_TARGET_ADDONS) ||
+					($template_id == GD_TEMPLATE_PAGESECTION_MODALS_TAG && $target == GD_URLPARAM_TARGET_MODALS);
+				if ($add) {
+
+					if ($fetching_json_data) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+						break;
+					}
+
+					// Allow the ThemeStyle to decide if to include block (eg: Swift) or blockgroup (eg: Expansive)
+					$type = apply_filters(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_FEED, POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK);
+					if ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCK) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, GD_SETTINGS_HIERARCHY_TAG);
+					}
+					elseif ($type == POP_BLOCKTYPE_SETTINGSPROCESSORS_BLOCKGROUP) {
+					
+						$blockgroups[] = $gd_template_settingsmanager->get_page_blockgroup($page_id, GD_SETTINGS_HIERARCHY_TAG);	
+					}
+				}
+				break;
+		}
+
+		GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
+		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+
+		switch ($page_id) {
+			
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_BYORGANIZATIONS:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_BYINDIVIDUALS:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_PRO:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_AGAINST:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_NEUTRAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_PRO_GENERAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_AGAINST_GENERAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_NEUTRAL_GENERAL:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_PRO_ARTICLE:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_AGAINST_ARTICLE:
+			case POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_NEUTRAL_ARTICLE:
+
+				// Frames: PageSection ControlGroups
+				if ($template_id == GD_TEMPLATE_PAGESECTION_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_TAGCONTROL;
+				}
+				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWTAGCONTROL;
+				}
+				break;
+		}
+
+		// Add frames only if not fetching data for the block
+		if (!$fetching_json_data) {
+			GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+		}
+	}
+
+	function add_sideinfo_tag_blockunits(&$ret, $template_id) {
+
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$target = $vars['target'];
+		$add = 
+			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN)/* ||
+			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG && $target == GD_URLPARAM_TARGET_QUICKVIEW)*/;
+		if ($add) {
+
+			$blockgroups = $frames = array();
+			$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
+			$page_sidebars = array(
+				POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES => GD_TEMPLATE_BLOCKGROUP_TAG_OPINIONATEDVOTES_SIDEBAR,
+				POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_PRO => GD_TEMPLATE_BLOCKGROUP_TAG_OPINIONATEDVOTES_STANCE_SIDEBAR,
+				POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_NEUTRAL => GD_TEMPLATE_BLOCKGROUP_TAG_OPINIONATEDVOTES_STANCE_SIDEBAR,
+				POPTHEME_WASSUP_VOTINGPROCESSORS_PAGE_OPINIONATEDVOTES_AGAINST => GD_TEMPLATE_BLOCKGROUP_TAG_OPINIONATEDVOTES_STANCE_SIDEBAR,
+			);
+			if ($sidebar = $page_sidebars[$page_id]) {
+				$blockgroups[] = $sidebar;
+			}
+
+			// Frames: PageSection ControlGroups
+			if ($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG && $target == GD_URLPARAM_TARGET_MAIN) {
+
+				$frames[] = GD_TEMPLATE_BLOCK_PAGECONTROL_TAGSIDEBAR;
+			}
+
+			GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
+
+			// Add frames only if not fetching data for the block
+			if (!$vars['fetching-json-data']) {
+
+				GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+			}
+		}
+	}
+
 	function add_sideinfo_single_blockunits(&$ret, $template_id) {
 
 		$vars = GD_TemplateManager_Utils::get_vars();

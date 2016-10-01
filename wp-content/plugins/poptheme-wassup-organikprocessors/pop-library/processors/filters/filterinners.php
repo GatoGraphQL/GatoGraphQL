@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_FILTERINNER_FARMS', PoP_ServerUtils::get_template_definition('filterinner-farms'));
 define ('GD_TEMPLATE_FILTERINNER_AUTHORFARMS', PoP_ServerUtils::get_template_definition('filterinner-authorfarms'));
+define ('GD_TEMPLATE_FILTERINNER_TAGFARMS', PoP_ServerUtils::get_template_definition('filterinner-tagfarms'));
 define ('GD_TEMPLATE_FILTERINNER_MYFARMS', PoP_ServerUtils::get_template_definition('filterinner-myfarms'));
 
 class OP_Template_Processor_CustomFilterInners extends GD_Template_Processor_FilterInnersBase {
@@ -15,6 +16,7 @@ class OP_Template_Processor_CustomFilterInners extends GD_Template_Processor_Fil
 	
 		return array(
 			GD_TEMPLATE_FILTERINNER_FARMS,
+			GD_TEMPLATE_FILTERINNER_TAGFARMS,
 			GD_TEMPLATE_FILTERINNER_AUTHORFARMS,
 			GD_TEMPLATE_FILTERINNER_MYFARMS,
 		);
@@ -24,6 +26,7 @@ class OP_Template_Processor_CustomFilterInners extends GD_Template_Processor_Fil
 
 		$filters = array(
 			GD_TEMPLATE_FILTERINNER_FARMS => GD_FILTER_FARMS,
+			GD_TEMPLATE_FILTERINNER_TAGFARMS => GD_FILTER_TAGFARMS,
 			GD_TEMPLATE_FILTERINNER_AUTHORFARMS => GD_FILTER_AUTHORFARMS,
 			GD_TEMPLATE_FILTERINNER_MYFARMS => GD_FILTER_MYFARMS,
 		);

@@ -18,6 +18,8 @@ define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_TOP', PoP_ServerUtils::get_template_defin
 define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION', PoP_ServerUtils::get_template_definition('blockgroup-author-description'));
 define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA', PoP_ServerUtils::get_template_definition('blockgroup-author-widgetarea'));
 
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA', PoP_ServerUtils::get_template_definition('blockgroup-tag-widgetarea'));
+
 define ('GD_TEMPLATE_BLOCKGROUP_WHOWEARE', PoP_ServerUtils::get_template_definition('blockgroup-whoweare'));
 define ('GD_TEMPLATE_BLOCKGROUP_OURSPONSORS', PoP_ServerUtils::get_template_definition('blockgroup-oursponsors'));
 
@@ -39,6 +41,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			GD_TEMPLATE_BLOCKGROUP_AUTHOR_TOP,
 			GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION,
 			GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA,
+			GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA,
 			GD_TEMPLATE_BLOCKGROUP_WHOWEARE,
 			GD_TEMPLATE_BLOCKGROUP_OURSPONSORS,
 		);
@@ -183,22 +186,62 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 				$ret[] = GD_TEMPLATE_BLOCK_BLOG_CAROUSEL;
 				$ret[] = GD_TEMPLATE_BLOCK_NEWSLETTER;
 				break;
-				
-			case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
-
-				$ret[] = GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL;
-				$ret[] = GD_TEMPLATE_BLOCK_USERS_CAROUSEL;
-				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION:
 
 				$ret[] = GD_TEMPLATE_BLOCK_AUTHOR_CONTENT;
 				break;
 				
+			case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
+
+				// $ret[] = GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL;
+				// $ret[] = GD_TEMPLATE_BLOCK_USERS_CAROUSEL;
+				// Add the blocks
+				if ($blocks = apply_filters('GD_Template_Processor_CustomBlockGroups:blocks:home_widgetarea', array(), $template_id)) {
+					
+					$ret = array_merge(
+						$ret,
+						$blocks
+					);
+				}
+				break;
+				
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA:
 
-				$ret[] = GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL;
-				$ret[] = GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL;
+				// $blocks = array();
+
+				// // Add the members only for communities
+				// global $author;
+				// if (gd_ure_is_community($author)) {
+				
+				// 	$blocks[] = GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL;
+				// }
+
+				// $blocks[] = GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL;
+
+				// Add the blocks
+				if ($blocks = apply_filters('GD_Template_Processor_CustomBlockGroups:blocks:author_widgetarea', array(), $template_id)) {
+					
+					$ret = array_merge(
+						$ret,
+						$blocks
+					);
+				}
+				break;
+				
+			case GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA:
+
+				// $blocks = array();
+				// $blocks[] = GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL;
+
+				// Allow to add the Featured Carousel
+				if ($blocks = apply_filters('GD_Template_Processor_CustomBlockGroups:blocks:tag_widgetarea', array(), $template_id)) {
+					
+					$ret = array_merge(
+						$ret,
+						$blocks
+					);
+				}
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_WHOWEARE:
@@ -248,25 +291,24 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 				$ret[] = GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME;
 
 				// Allow MESYM to override this
-				$ret[] = apply_filters(
+				if ($widgetarea = apply_filters(
 					'GD_Template_Processor_CustomBlockGroups:hometop:blockgroups:widget',
 					GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA
-				);
+				)) {
+					$ret[] = $widgetarea;
+				}
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_TOP:
 
 				$ret[] = GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION;
-
-				// Add the widget area only for communities
-				global $author;
-				if (gd_ure_is_community($author)) {
 					
-					// Allow MESYM to override this
-					$ret[] = apply_filters(
-						'GD_Template_Processor_CustomBlockGroups:authortop:blockgroups:widget',
-						GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA
-					);
+				// Allow MESYM to override this
+				if ($widgetarea = apply_filters(
+					'GD_Template_Processor_CustomBlockGroups:authortop:blockgroups:widget',
+					GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA
+				)) {
+					$ret[] = $widgetarea;
 				}
 				break;
 		}
@@ -299,14 +341,15 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
-			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA:
+			// case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
+			// case GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA:
 
-				// Allow the ThemeStyle Expansive to make it into 2 columns
-				if (apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
-					$ret['blocksection-extensions'] = 'row';
-				}
-				break;
+			// 	// Allow the ThemeStyle Expansive to make it into 2 columns
+			// 	if (apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
+			// 		$ret['blocksection-extensions'] = 'row';
+			// 	}
+			// 	break;
+
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEACCOUNT:
 			case GD_TEMPLATE_BLOCKGROUP_HOME_BLOGNEWSLETTER:
 
@@ -423,22 +466,35 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
-
-				if ($blockgroup_block == GD_TEMPLATE_BLOCK_USERS_CAROUSEL) {
-
-					// Make it lazy-load
-					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'content-loaded', false);
-				}
-				break;
-		
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA:
+			case GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA:
 
-				// The 2 blocks inside: don't show if they are empty and showing them in rows
-				if (!apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
-					
-					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'hidden-if-empty', true);
-				}
+				// External Injection
+				$blockgroup_block_atts = apply_filters('GD_Template_Processor_CustomBlockGroups:blocks:atts', $blockgroup_block_atts, $blockgroup_block, $blockgroup, $blockgroup_atts, $this);
 				break;
+
+			// case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
+
+			// 	if ($blockgroup_block == GD_TEMPLATE_BLOCK_USERS_CAROUSEL) {
+
+			// 		// Make it lazy-load
+			// 		$this->add_att($blockgroup_block, $blockgroup_block_atts, 'content-loaded', false);
+			// 	}
+			// 	break;
+		
+			// case GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA:
+
+			// 	// The 2 blocks inside: don't show if they are empty and showing them in rows
+			// 	if (!apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
+					
+			// 		$this->add_att($blockgroup_block, $blockgroup_block_atts, 'hidden-if-empty', true);
+			// 	}
+			// 	break;
+
+			// case GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA:
+
+			// 	$this->add_att($blockgroup_block, $blockgroup_block_atts, 'hidden-if-empty', true);
+			// 	break;
 		
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEACCOUNT:
 
@@ -476,21 +532,33 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 
 		switch ($blockgroup) {
 
-			case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
-			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA:
+			// case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
 
-				// Allow the ThemeStyle Expansive to make it into 2 columns
-				if (apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
+			// 	// Allow the ThemeStyle Expansive to make it into 2 columns
+			// 	if (apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
 				
-					$classes = array(
-						GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL => 'col-sm-8',
-						GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL => 'col-sm-8',
-						GD_TEMPLATE_BLOCK_USERS_CAROUSEL => 'col-sm-4',
-						GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL => 'col-sm-4',
-					);
-					$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', $classes[$blockgroup_block]);
-				}
-				break;
+			// 		$classes = array(
+			// 			GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL => 'col-sm-8',
+			// 			GD_TEMPLATE_BLOCK_USERS_CAROUSEL => 'col-sm-4',
+			// 		);
+			// 		$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', $classes[$blockgroup_block]);
+			// 	}
+			// 	break;
+
+			// case GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA:
+
+			// 	// Allow the ThemeStyle Expansive to make it into 2 columns
+			// 	if (apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
+				
+			// 		// Only if it is a community there will be 2 columns: events and members. Otherwise, only events.
+			// 		global $author;
+			// 		$classes = array(
+			// 			GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL => gd_ure_is_community($author) ? 'col-sm-8 col-sm-pull-4' : 'col-sm-12',
+			// 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL => 'col-sm-4 col-sm-push-8',
+			// 		);
+			// 		$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', $classes[$blockgroup_block]);
+			// 	}
+			// 	break;
 
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME:
 			case GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME:

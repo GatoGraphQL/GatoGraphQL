@@ -145,19 +145,19 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 			}
 		}
 
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
 
-			$pageblockgroups = array(
-				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT,
-			);
-			foreach ($pageblockgroups as $page => $blockgroup) {
+		// 	$pageblockgroups = array(
+		// 		POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT,
+		// 	);
+		// 	foreach ($pageblockgroups as $page => $blockgroup) {
 				
-				// Also Default
-				$ret[$page]['blockgroups']['default'] = $blockgroup;
-			}
-		}
+		// 		// Also Default
+		// 		$ret[$page]['blockgroups']['default'] = $blockgroup;
+		// 	}
+		// }
 		// Page or Blocks inserted in Home
-		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
 
 			// Page blocks: Home counts as a type of Page (it shows the same blocks)
 			if ($hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
@@ -218,6 +218,22 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_COREPROCESSORS_PAGE_FOLLOWERS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWERS,
 				POP_COREPROCESSORS_PAGE_FOLLOWINGUSERS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWINGUSERS,
 				POP_COREPROCESSORS_PAGE_RECOMMENDEDPOSTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORRECOMMENDEDPOSTS,
+			);
+			foreach ($pageblockgroups as $page => $blockgroup) {
+				
+				// Also Default
+				$ret[$page]['blockgroups']['default'] = $blockgroup;
+			}
+		}
+
+		// Tag page blocks
+		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+
+			$pageblockgroups = array(
+				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGMAINALLCONTENT,
+				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT,
+				POPTHEME_WASSUP_PAGE_WEBPOSTLINKS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGLINKS,
+				POPTHEME_WASSUP_PAGE_WEBPOSTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGWEBPOSTS,
 			);
 			foreach ($pageblockgroups as $page => $blockgroup) {
 				
@@ -789,10 +805,24 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 
 		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
 	
-			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_SECTION);
+			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_TAGSECTION);
 			
+			$pageblocks_navigator = array(
+				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_NAVIGATOR,
+				// POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_NAVIGATOR,
+			);
+			foreach ($pageblocks_navigator as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_NAVIGATOR] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_NAVIGATOR) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
 			$pageblocks_details = array(
+				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGMAINALLCONTENT_SCROLL_DETAILS,
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_DETAILS,
+				POPTHEME_WASSUP_PAGE_WEBPOSTLINKS  => GD_TEMPLATE_BLOCK_TAGLINKS_SCROLL_DETAILS,
+				POPTHEME_WASSUP_PAGE_WEBPOSTS  => GD_TEMPLATE_BLOCK_TAGWEBPOSTS_SCROLL_DETAILS,
 			);
 			foreach ($pageblocks_details as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
@@ -802,7 +832,10 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				}
 			}
 			$pageblocks_simpleview = array(
+				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGMAINALLCONTENT_SCROLL_SIMPLEVIEW,
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_SIMPLEVIEW,
+				POPTHEME_WASSUP_PAGE_WEBPOSTLINKS  => GD_TEMPLATE_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW,
+				POPTHEME_WASSUP_PAGE_WEBPOSTS  => GD_TEMPLATE_BLOCK_TAGWEBPOSTS_SCROLL_SIMPLEVIEW,
 			);
 			foreach ($pageblocks_simpleview as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_SIMPLEVIEW] = $block;
@@ -812,7 +845,10 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				}
 			}
 			$pageblocks_fullview = array(
+				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGMAINALLCONTENT_SCROLL_FULLVIEW,
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_FULLVIEW,
+				POPTHEME_WASSUP_PAGE_WEBPOSTLINKS  => GD_TEMPLATE_BLOCK_TAGLINKS_SCROLL_FULLVIEW,
+				POPTHEME_WASSUP_PAGE_WEBPOSTS  => GD_TEMPLATE_BLOCK_TAGWEBPOSTS_SCROLL_FULLVIEW,
 			);
 			foreach ($pageblocks_fullview as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_FULLVIEW] = $block;
@@ -822,7 +858,10 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				}
 			}
 			$pageblocks_thumbnail = array(
+				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGMAINALLCONTENT_SCROLL_THUMBNAIL,
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_THUMBNAIL,
+				POPTHEME_WASSUP_PAGE_WEBPOSTLINKS  => GD_TEMPLATE_BLOCK_TAGLINKS_SCROLL_THUMBNAIL,
+				POPTHEME_WASSUP_PAGE_WEBPOSTS  => GD_TEMPLATE_BLOCK_TAGWEBPOSTS_SCROLL_THUMBNAIL,
 			);
 			foreach ($pageblocks_thumbnail as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
@@ -832,7 +871,10 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				}
 			}
 			$pageblocks_list = array(
+				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGMAINALLCONTENT_SCROLL_LIST,
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_LIST,
+				POPTHEME_WASSUP_PAGE_WEBPOSTLINKS  => GD_TEMPLATE_BLOCK_TAGLINKS_SCROLL_LIST,
+				POPTHEME_WASSUP_PAGE_WEBPOSTS  => GD_TEMPLATE_BLOCK_TAGWEBPOSTS_SCROLL_LIST,
 			);
 			foreach ($pageblocks_list as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;

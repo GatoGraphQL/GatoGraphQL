@@ -8,8 +8,10 @@
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_LOCATIONS', PoP_ServerUtils::get_template_definition('simplefilterinner-locations'));
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_EVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-events'));
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorevents'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-tagevents'));
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_EVENTSCALENDAR', PoP_ServerUtils::get_template_definition('simplefilterinner-eventscalendar'));
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTSCALENDAR', PoP_ServerUtils::get_template_definition('simplefilterinner-authoreventscalendar'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTSCALENDAR', PoP_ServerUtils::get_template_definition('simplefilterinner-tageventscalendar'));
 define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYEVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-myevents'));
 
 class GD_EM_Template_Processor_CustomSimpleFilterInners extends GD_Template_Processor_SimpleFilterInnersBase {
@@ -20,8 +22,10 @@ class GD_EM_Template_Processor_CustomSimpleFilterInners extends GD_Template_Proc
 			GD_TEMPLATE_SIMPLEFILTERINNER_LOCATIONS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_EVENTS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTS,
+			GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_EVENTSCALENDAR,
 			GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTSCALENDAR,
+			GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTSCALENDAR,
 			GD_TEMPLATE_SIMPLEFILTERINNER_MYEVENTS,
 		);
 	}
@@ -32,8 +36,10 @@ class GD_EM_Template_Processor_CustomSimpleFilterInners extends GD_Template_Proc
 			GD_TEMPLATE_SIMPLEFILTERINNER_LOCATIONS => GD_FILTER_LOCATIONS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_EVENTS => GD_FILTER_EVENTS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTS => GD_FILTER_AUTHOREVENTS,
+			GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTS => GD_FILTER_TAGEVENTS,
 			GD_TEMPLATE_SIMPLEFILTERINNER_EVENTSCALENDAR => GD_FILTER_EVENTSCALENDAR,
 			GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTSCALENDAR => GD_FILTER_AUTHOREVENTSCALENDAR,
+			GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTSCALENDAR => GD_FILTER_TAGEVENTSCALENDAR,
 			GD_TEMPLATE_SIMPLEFILTERINNER_MYEVENTS => GD_FILTER_MYEVENTS,
 		);
 		if ($filter = $filters[$template_id]) {

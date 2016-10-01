@@ -22,6 +22,9 @@ define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_
 define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorevents-scrollmap'));
 define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorpastevents-scrollmap'));
 
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagevents-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagpastevents-scrollmap'));
+
 define ('GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-whoweare-scrollmap'));
 
 class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Template_Processor_ScrollMapBlocksBase {
@@ -41,6 +44,8 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP,
 		);
 	}
@@ -61,6 +66,8 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP => GD_TEMPLATE_SCROLL_PASTEVENTS_MAP,
 			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP => GD_TEMPLATE_SCROLL_EVENTS_MAP,
 			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP => GD_TEMPLATE_SCROLL_PASTEVENTS_MAP,
+			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP => GD_TEMPLATE_SCROLL_EVENTS_MAP,
+			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP => GD_TEMPLATE_SCROLL_PASTEVENTS_MAP,
 		);
 
 		return $inner_templates[$template_id];
@@ -94,6 +101,8 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 
 				return true;
 		}
@@ -111,6 +120,11 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
 
 				return GD_Template_Processor_CustomSectionBlocksUtils::get_author_title();
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+
+				return GD_Template_Processor_CustomSectionBlocksUtils::get_tag_title();
 
 			case GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:
@@ -137,6 +151,11 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 				case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
 
 					return GD_TEMPLATE_SUBMENU_AUTHOR;
+
+				case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+				case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+
+					return GD_TEMPLATE_SUBMENU_TAG;
 
 				case GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
 				case GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:
@@ -171,6 +190,9 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
+			
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 
 			// case GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP:
 			
@@ -206,6 +228,11 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
 
 				return GD_TEMPLATE_FILTER_AUTHOREVENTS;
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+
+				return GD_TEMPLATE_FILTER_TAGEVENTS;
 		}
 		
 		return parent::get_filter_template($template_id);
@@ -228,11 +255,17 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
-			case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
+			// case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
 			
 				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_author_dataloadsource($template_id);
+				break;
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+			
+				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_tag_dataloadsource($template_id);
 				break;
 
 			case GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
@@ -267,6 +300,9 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
 
+			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
+
 			GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP,
 		);
 		if (in_array($template_id, $maps)) {
@@ -295,11 +331,20 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
 
-			case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
+			// case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
 
 				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
+
+					return $page;
+				}
+				break;
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+
+				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
 
 					return $page;
 				}
@@ -327,11 +372,17 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 		switch ($template_id) {
 
 			// Filter by the Profile/Community
-			case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
+			// case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
 
 				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_authorcontent($ret);
+				break;
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+
+				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
 				break;
 
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
@@ -365,33 +416,6 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 				break;
 		}
 
-		// $maps = array(
-		// 	GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP,
-		// 	GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP,
-
-		// 	GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP,
-		// 	GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP,
-
-		// 	GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP,
-		// 	GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP,
-		// 	GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP,
-		// 	GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP,
-
-		// 	GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP,
-		// 	GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP,
-
-		// 	GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP,
-		// 	GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
-
-		// 	GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP,
-		// );
-
-		// if (in_array($template_id, $maps)) {
-			
-		// 	// Maps: bring twice the data (eg: normally 12, bring 24)
-		// 	$ret['limit'] = get_option('posts_per_page') * 2;
-		// }
-
 		return $ret;
 	}
 
@@ -402,7 +426,17 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP:
 
-				return GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST;
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKEVENTLIST;
+
+			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
+
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHOREVENTLIST;
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+
+				return GD_TEMPLATE_CONTROLGROUP_TAGBLOCKEVENTLIST;
 
 			case GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP:
@@ -414,7 +448,6 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
 
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKUSERLIST;
-
 		}
 
 		return parent::get_controlgroup_top($template_id);
@@ -431,6 +464,10 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 
 				return GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS;
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+
+				return GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS;
 		}
 
 		return parent::get_latestcount_template($template_id);
@@ -442,11 +479,13 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			
 				return GD_TEMPLATE_MESSAGEFEEDBACK_EVENTS;
 
 			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 
 				return GD_TEMPLATE_MESSAGEFEEDBACK_PASTEVENTS;
 
@@ -478,6 +517,9 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
+
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 			
 			case GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP:
@@ -501,11 +543,13 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			
 				return GD_DATALOADER_EVENTLIST;
 
 			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 
 				return GD_DATALOADER_PASTEVENTLIST;
 
@@ -560,6 +604,9 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 	
 			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
+	
+			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
 
 			GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP,
 		);
@@ -600,10 +647,12 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 		$past = array(
 			GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
 		);
 		$future = array(
 			GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
 		);
 		if (in_array($template_id, $past)) {
 			$daterange_class = 'daterange-past opens-right';

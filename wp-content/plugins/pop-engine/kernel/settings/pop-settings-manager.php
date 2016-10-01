@@ -126,10 +126,10 @@ class GD_Template_SettingsManager {
 			global $post;
 			$page_id = $post->ID;
 		}
-		elseif (is_home() || is_front_page()) {
+		elseif (!$page_id && (is_home() || is_front_page())) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
 		}
-		elseif (is_tag()) {
+		elseif (!$page_id && is_tag()) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 		}
 		$hierarchy = $this->get_hierarchy($hierarchy);
@@ -164,7 +164,7 @@ class GD_Template_SettingsManager {
 		elseif (is_home() || is_front_page()) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
 		}
-		elseif (is_tag()) {
+		elseif (!$page_id && is_tag()) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 		}
 		$hierarchy = $this->get_hierarchy($hierarchy);

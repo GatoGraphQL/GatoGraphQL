@@ -7,6 +7,8 @@
 
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR', PoP_ServerUtils::get_template_definition('custombuttoncontrol-calendar'));
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-pastevents'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-authorpastevents'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-tagpastevents'));
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-mypastevents'));
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENT', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addevent'));
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENTLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addeventlink'));
@@ -20,6 +22,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 		return array(
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS,
+			GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS,
+			GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_MYPASTEVENTS,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENT,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENTLINK,
@@ -36,6 +40,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 				return __('Calendar', 'poptheme-wassup');
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
 
 				return __('Past Events', 'poptheme-wassup');
 
@@ -67,6 +73,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 				return gd_navigation_menu_item(POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR, false);
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
 
 				return gd_navigation_menu_item(POPTHEME_WASSUP_EM_PAGE_PASTEVENTS, false);
 
@@ -110,6 +118,17 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 				
 				return get_permalink($page);
 		
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+
+				global $author;
+				$url = get_author_posts_url($author);
+				return GD_TemplateManager_Utils::add_tab($url, POPTHEME_WASSUP_EM_PAGE_PASTEVENTS);
+		
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
+
+				$url = get_tag_link(get_queried_object_id());
+				return GD_TemplateManager_Utils::add_tab($url, POPTHEME_WASSUP_EM_PAGE_PASTEVENTS);
+
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP:
 
 				// Assume there is only one .collapse.map in this block
@@ -157,6 +176,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
 
 				$this->append_att($template_id, $atts, 'class', 'btn btn-link btn-compact');

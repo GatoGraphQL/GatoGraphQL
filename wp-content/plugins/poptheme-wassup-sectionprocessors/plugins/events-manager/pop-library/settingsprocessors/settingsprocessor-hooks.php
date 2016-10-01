@@ -54,6 +54,24 @@ class PoPTheme_Wassup_SectionProcessors_EM_Template_SettingsProcessorHooks {
 			}
 		}
 
+		// Tag page blocks
+		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+
+			$pageblocks_map = array(
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP,
+			);
+			foreach ($pageblocks_map as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
+			}
+
+			$pageblocks_horizontalmap = array(
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP,
+			);
+			foreach ($pageblocks_horizontalmap as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;
+			}
+		}
+
 		return $ret;	
 	}
 }

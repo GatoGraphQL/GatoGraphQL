@@ -71,6 +71,10 @@ class GD_DataLoader_PostListBase extends GD_DataLoader_List {
 			$query['author'] = $author;
 		}
 
+		if ($tag = $vars['tag']) {
+			$query['tag'] = $tag;
+		}
+
 		// post__not_in to remove posts in the Hierarchy (eg: remove current Single post for Block Related)
 		if ($post_not_in = $vars['post__not_in']) {
 

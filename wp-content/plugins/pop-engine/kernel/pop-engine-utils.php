@@ -242,16 +242,21 @@ class GD_TemplateManager_Utils {
 		elseif (is_home() || is_front_page()) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
 		}
-		elseif (is_tag()) {
-			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
-		}
-		elseif (is_author() || is_single()) {
+		// elseif (is_tag()) {
+		// 	$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
+		// }
+		elseif (is_author() || is_single() || is_tag()) {
 			// Get the page from the tab attr
 			$vars = GD_TemplateManager_Utils::get_vars();
 			$tab = $vars['tab'];
 			if ($tab) {
 				$page = get_page_by_path($tab);
 				$page_id = $page->ID;
+			}
+			else {
+				if (is_tag()) {
+					$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
+				}
 			}
 		}
 

@@ -12,6 +12,12 @@ define ('GD_TEMPLATE_SIDEBARINNER_SECTION_DISCUSSIONS', PoP_ServerUtils::get_tem
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_FEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-featured'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_BLOG', PoP_ServerUtils::get_template_definition('sidebarinner-section-blog'));
 
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGPROJECTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagprojects'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagstories'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagannouncements'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGDISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagdiscussions'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagfeatured'));
+
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPROJECTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorprojects'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorstories'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorannouncements'));
@@ -34,6 +40,11 @@ class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Templat
 			GD_TEMPLATE_SIDEBARINNER_SECTION_DISCUSSIONS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_FEATURED, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_BLOG, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGPROJECTS, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES,
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGANNOUNCEMENTS, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGDISCUSSIONS, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFEATURED, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPROJECTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORSTORIES,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORANNOUNCEMENTS,
@@ -86,6 +97,36 @@ class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Templat
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_SECTION;
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_BLOG;
+				break;
+					
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGPROJECTS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTIONWITHMAP;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGPROJECTS;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGSTORIES;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGANNOUNCEMENTS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGANNOUNCEMENTS;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGDISCUSSIONS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGDISCUSSIONS;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFEATURED:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGFEATURED;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPROJECTS:

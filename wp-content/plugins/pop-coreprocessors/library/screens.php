@@ -19,6 +19,7 @@ define ('POP_SCREEN_SINGLESECTION', 'singlesection');
 define ('POP_SCREEN_USERS', 'users');
 define ('POP_SCREEN_SINGLEUSERS', 'singleusers');
 define ('POP_SCREEN_TAGSECTION', 'tag');
+define ('POP_SCREEN_TAGSECTIONCALENDAR', 'tagsectioncalendar');
 define ('POP_SCREEN_TAGS', 'tags');
 define ('POP_SCREEN_HIGHLIGHTS', 'highlights');
 define ('POP_SCREEN_MYHIGHLIGHTS', 'myhighlights');

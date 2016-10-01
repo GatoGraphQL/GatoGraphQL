@@ -17,6 +17,12 @@ class PoPTheme_Wassup_SectionProcessors_SubmenuHooks {
 			0,
 			2
 		);
+		add_filter(
+			'GD_Template_Processor_CustomSubMenus:tag:blockgroupitems', 
+			array($this, 'tagsubmenu_blockunits'),
+			0,
+			2
+		);
 	}
 
 	function singleauthorsubmenu_blockunits($blockunits, $current_blockgroup) {
@@ -44,6 +50,36 @@ class PoPTheme_Wassup_SectionProcessors_SubmenuHooks {
 		// If the values for the constants were kept in false (eg: Projects not needed for TPP Debate) then don't add them
 		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS) {
 			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORPROJECTS] = array();
+		}
+		
+		return $blockunits;
+	}
+
+	function tagsubmenu_blockunits($blockunits, $current_blockgroup) {
+
+		// Under Posts
+		$add = array();
+		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ANNOUNCEMENTS) {
+			$add[] = GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGANNOUNCEMENTS;
+		}
+		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_DISCUSSIONS) {
+			$add[] = GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGDISCUSSIONS;
+		}
+		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_STORIES) {
+			$add[] = GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSTORIES;
+		}
+		if ($add) {
+			array_splice($blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGWEBPOSTS], 0, 0, $add);
+
+			if (in_array($current_blockgroup, $add)) {
+
+				$blockunits[$current_blockgroup] = array();
+			}
+		}
+
+		// If the values for the constants were kept in false (eg: Projects not needed for TPP Debate) then don't add them
+		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS) {
+			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGPROJECTS] = array();
 		}
 		
 		return $blockunits;
