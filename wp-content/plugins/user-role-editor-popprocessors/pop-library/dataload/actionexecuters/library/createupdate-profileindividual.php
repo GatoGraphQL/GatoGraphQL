@@ -41,7 +41,7 @@ class GD_CreateUpdate_ProfileIndividual extends GD_URE_CreateUpdate_Profile {
 		parent::additionals($user_id, $form_data);
 		do_action('gd_createupdate_profileindividual:additionals', $user_id, $form_data);	
 	}
-	protected function createuser($errors, $form_data) {
+	protected function createuser(&$errors, $form_data) {
 
 		$user_id = parent::createuser($errors, $form_data);
 

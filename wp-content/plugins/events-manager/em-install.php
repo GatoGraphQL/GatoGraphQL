@@ -88,13 +88,42 @@ function em_sort_out_table_nu_keys($table_name, $clean_keys = array()){
 	}
 	//add new keys
 	foreach($new_keys as $key){
-		$wpdb->query("ALTER TABLE $table_name ADD INDEX ($key)");
+		if( preg_match('/\(/', $key) ){
+			$wpdb->query("ALTER TABLE $table_name ADD INDEX $key");
+		}else{
+			$wpdb->query("ALTER TABLE $table_name ADD INDEX ($key)");
+		}
 	}
 }
 
+/**
+ * Since WP 4.2 tables are created with utf8mb4 collation. This creates problems when storing content in previous utf8 tables such as when using emojis. 
+ * This function checks whether the table in WP was changed 
+ * @return boolean
+ */
+function em_check_utf8mb4_tables(){
+		global $wpdb, $em_check_utf8mb4_tables;
+		
+		if( $em_check_utf8mb4_tables || $em_check_utf8mb4_tables === false ) return $em_check_utf8mb4_tables;
+		
+		$column = $wpdb->get_row( "SHOW FULL COLUMNS FROM {$wpdb->posts} WHERE Field='post_content';" );
+		if ( ! $column ) {
+			return false;
+		}
+		
+		//if this doesn't become true further down, that means we couldn't find a correctly converted utf8mb4 posts table 
+		$em_check_utf8mb4_tables = false;
+		
+		if ( $column->Collation ) {
+			list( $charset ) = explode( '_', $column->Collation );
+			$em_check_utf8mb4_tables = ( 'utf8mb4' === strtolower( $charset ) );
+		}
+		return $em_check_utf8mb4_tables;
+		
+}
+
 function em_create_events_table() {
-	global  $wpdb, $user_level, $user_ID;
-	get_currentuserinfo();
+	global  $wpdb;
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 	$table_name = $wpdb->prefix.'em_events';
@@ -162,6 +191,7 @@ function em_create_events_table() {
 		dbDelta($sql);
 	}
 	em_sort_out_table_nu_keys($table_name, array('event_status','post_id','blog_id','group_id','location_id'));
+	if( em_check_utf8mb4_tables() ) maybe_convert_table_to_utf8mb4( $table_name );
 }
 
 function em_create_events_meta_table(){
@@ -182,6 +212,7 @@ function em_create_events_meta_table(){
 
 	dbDelta($sql);
 	em_sort_out_table_nu_keys($table_name, array('object_id','meta_key'));
+	if( em_check_utf8mb4_tables() ) maybe_convert_table_to_utf8mb4( $table_name );
 }
 
 function em_create_locations_table() {
@@ -233,7 +264,12 @@ function em_create_locations_table() {
 			$wpdb->query("UPDATE ".$table_name." SET location_status=1");
 		}
 	}
-	em_sort_out_table_nu_keys($table_name, array('location_state','location_region','location_country','post_id','blog_id'));
+	if( em_check_utf8mb4_tables() ){
+		maybe_convert_table_to_utf8mb4( $table_name );
+		em_sort_out_table_nu_keys($table_name, array('location_state (location_state(191))','location_region (location_region(191))','location_country','post_id','blog_id'));
+	}else{
+		em_sort_out_table_nu_keys($table_name, array('location_state','location_region','location_country','post_id','blog_id'));
+	}
 }
 
 function em_create_bookings_table() {
@@ -258,6 +294,7 @@ function em_create_bookings_table() {
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($sql);
 	em_sort_out_table_nu_keys($table_name, array('event_id','person_id','booking_status'));
+	if( em_check_utf8mb4_tables() ) maybe_convert_table_to_utf8mb4( $table_name );
 }
 
 
@@ -290,6 +327,7 @@ function em_create_tickets_table() {
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($sql);
 	em_sort_out_table_nu_keys($table_name, array('event_id'));
+	if( em_check_utf8mb4_tables() ) maybe_convert_table_to_utf8mb4( $table_name );
 }
 
 //Add the categories table
@@ -310,6 +348,7 @@ function em_create_tickets_bookings_table() {
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($sql);
 	em_sort_out_table_nu_keys($table_name, array('booking_id','ticket_id'));
+	if( em_check_utf8mb4_tables() ) maybe_convert_table_to_utf8mb4( $table_name );
 }
 
 function em_add_options() {
@@ -427,11 +466,11 @@ function em_add_options() {
 		'dbem_events_page_title' => __('Events','events-manager'),
 		'dbem_events_page_scope' => 'future',
 		'dbem_events_page_search_form' => 1,
-		'dbem_event_list_item_format_header' => '<table cellpadding="0" cellspacing="0" class="events-table" >
+		'dbem_event_list_item_format_header' => '<table class="events-table" >
     <thead>
         <tr>
-			<th class="event-time" width="150">'.__('Date/Time','events-manager').'</th>
-			<th class="event-description" width="*">'.__('Event','events-manager').'</th>
+			<th class="event-time" scope="col">'.__('Date/Time','events-manager').'</th>
+			<th class="event-description" scope="col">'.__('Event','events-manager').'</th>
 		</tr>
    	</thead>
     <tbody>',
@@ -565,11 +604,12 @@ function em_add_options() {
 		//iCal Stuff
 		'dbem_ical_limit' => 0,
 		'dbem_ical_scope' => "future",
-		'dbem_ical_description_format' => "#_EVENTNAME - #_LOCATIONNAME - #_EVENTDATES - #_EVENTTIMES",
+		'dbem_ical_description_format' => "#_EVENTNAME",
 		'dbem_ical_real_description_format' => "#_EVENTEXCERPT",
-		'dbem_ical_location_format' => "#_LOCATION",
+		'dbem_ical_location_format' => "#_LOCATIONNAME, #_LOCATIONFULLLINE, #_LOCATIONCOUNTRY",
 		//Google Maps
 		'dbem_gmap_is_active'=> 1,
+		'dbem_google_maps_browser_key'=> '',
 		'dbem_map_default_width'=> '400px', //eventually will use %
 		'dbem_map_default_height'=> '300px',
 		'dbem_location_baloon_format' => '<strong>#_LOCATIONNAME</strong><br/>#_LOCATIONADDRESS - #_LOCATIONTOWN<br/><a href="#_LOCATIONPAGEURL">'.__('Events', 'events-manager').'</a>',
@@ -914,6 +954,15 @@ function em_add_options() {
 	    $wpdb->query('DELETE FROM '.$wpdb->postmeta." WHERE (meta_key='_event_date_created' OR meta_key='_event_date_modified') AND post_id IN (SELECT ID FROM ".$wpdb->posts." WHERE post_type='".EM_POST_TYPE_EVENT."' OR post_type='event-recurring')");
 	    $wpdb->query('ALTER TABLE '. $wpdb->prefix.'em_bookings CHANGE event_id event_id BIGINT(20) UNSIGNED NULL');
 	}
+	if( get_option('dbem_version') != '' && get_option('dbem_version') < 5.66 ){
+		if( get_option('dbem_ical_description_format') == "#_EVENTNAME - #_LOCATIONNAME - #_EVENTDATES - #_EVENTTIMES" ) update_option('dbem_ical_description_format',"#_EVENTNAME");
+		if( get_option('dbem_ical_location_format') == "#_LOCATION" ) update_option('dbem_ical_location_format', "#_LOCATIONNAME, #_LOCATIONFULLLINE, #_LOCATIONCOUNTRY");
+		$old_values = array(
+			'dbem_ical_description_format' => "#_EVENTNAME - #_LOCATIONNAME - #_EVENTDATES - #_EVENTTIMES",
+			'dbem_ical_location_format' => "#_LOCATION",			
+		);
+	}
+		
 	//set time localization for first time depending on current settings
 	if( get_option('dbem_time_24h','not set') == 'not set'){
 		//Localise vars regardless

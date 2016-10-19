@@ -157,11 +157,11 @@ class EM_Ticket extends EM_Object{
 		if( empty($post) ){
 		    $post = $_REQUEST;
 		}
-		do_action('em_location_get_post_pre', $this, $post);
+		do_action('em_ticket_get_post_pre', $this, $post);
 		$this->ticket_id = ( !empty($post['ticket_id']) && is_numeric($post['ticket_id']) ) ? $post['ticket_id']:'';
 		$this->event_id = ( !empty($post['event_id']) && is_numeric($post['event_id']) ) ? $post['event_id']:'';
-		$this->ticket_name = ( !empty($post['ticket_name']) ) ? wp_kses_data(stripslashes($post['ticket_name'])):'';
-		$this->ticket_description = ( !empty($post['ticket_description']) ) ? wp_kses(stripslashes($post['ticket_description']), $allowedposttags):'';
+		$this->ticket_name = ( !empty($post['ticket_name']) ) ? wp_kses_data(wp_unslash($post['ticket_name'])):'';
+		$this->ticket_description = ( !empty($post['ticket_description']) ) ? wp_kses(wp_unslash($post['ticket_description']), $allowedposttags):'';
 		//spaces and limits
 		$this->ticket_min = ( !empty($post['ticket_min']) && is_numeric($post['ticket_min']) ) ? $post['ticket_min']:'';
 		$this->ticket_max = ( !empty($post['ticket_max']) && is_numeric($post['ticket_max']) ) ? $post['ticket_max']:'';
@@ -235,8 +235,7 @@ class EM_Ticket extends EM_Object{
 		$missing_fields = Array ();
 		$this->errors = array();
 		foreach ( $this->required_fields as $field ) {
-			$true_field = $this->fields[$field]['name'];
-			if ( $this->$true_field == "") {
+			if ( $this->$field == "") {
 				$missing_fields[] = $field;
 			}
 		}

@@ -88,19 +88,19 @@ class EM_Tickets_Bookings extends EM_Object implements Iterator{
 				//previously booked ticket, so let's just reset spaces/prices and replace it
 				$this->tickets_bookings[$EM_Ticket_Booking->ticket_id]->ticket_booking_spaces = $EM_Ticket_Booking->get_spaces();
 				$this->tickets_bookings[$EM_Ticket_Booking->ticket_id]->ticket_booking_price = $EM_Ticket_Booking->get_price();
-				return apply_filters('em_tickets_bookings_add',true,$this);
+				return apply_filters('em_tickets_bookings_add', true, $this, $EM_Ticket_Booking);
 			}elseif( $EM_Ticket_Booking->get_spaces() > 0 ){
 				//new ticket in booking
 				$this->tickets_bookings[$EM_Ticket_Booking->ticket_id] = $EM_Ticket_Booking;
 				$this->get_spaces(true);
 				$this->get_price();
-				return apply_filters('em_tickets_bookings_add',true,$this);
+				return apply_filters('em_tickets_bookings_add', true, $this, $EM_Ticket_Booking);
 			}
 		} else {
 			$this->add_error(get_option('dbem_booking_feedback_full'));
-			return apply_filters('em_tickets_bookings_add',false,$this);
+			return apply_filters('em_tickets_bookings_add', false, $this, $EM_Ticket_Booking);
 		}
-		return apply_filters('em_tickets_bookings_add',false,$this);
+		return apply_filters('em_tickets_bookings_add', false, $this, $EM_Ticket_Booking);
 	}
 	
 	/**
@@ -152,6 +152,7 @@ class EM_Tickets_Bookings extends EM_Object implements Iterator{
 	 */
 	function delete(){
 		global $wpdb;
+		$result = false;
 		if( $this->get_booking()->can_manage() ){
 			$result = $wpdb->query("DELETE FROM ".EM_TICKETS_BOOKINGS_TABLE." WHERE booking_id='{$this->get_booking_id()}'");
 			//echo "<pre>";print_r($this->get_booking());echo "</pre>";

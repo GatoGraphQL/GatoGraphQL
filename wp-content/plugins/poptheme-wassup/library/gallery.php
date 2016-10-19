@@ -44,6 +44,7 @@ function pop_image_size_names_choose($sizes) {
 	return array(
 		'thumb-pagewide' => __('Wide', 'pop-coreprocessors'),
 		'thumbnail' => __('Thumbnail', 'pop-coreprocessors'),
+		'full'      => __('Full Size'),
 	);
 }
 add_filter( 'media_view_settings', 'pop_media_view_settings_defaultthumb');

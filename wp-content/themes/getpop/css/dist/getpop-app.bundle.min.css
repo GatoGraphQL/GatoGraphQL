@@ -539,7 +539,9 @@ solid #dcddde;-webkit-box-shadow:0 2px 4px #ccc;-moz-box-shadow:0 2px 4px #ccc;b
 10px}@media (min-width: 700px){.fullview>.wrapper>.row>.content-body{padding:30px
 57px}.layoutauthor,.content-single{padding:30px
 41px}}.block-single-content>.blocksection-inners>hr{margin-right:15px;margin-left:15px}.fullview.nodescription>.wrapper>.row>.content-body{padding:0}.alert.form-horizontal .form-group:last-child{margin-bottom:0}.media-modal .screen-reader-text{display:none}.comment-layout{margin-bottom:10px}.blockgroup-home .block-newsletter .form-group{margin-bottom:5px}#ps-top .visiblesearch-hidden,
-#ps-top.pop-search-visible .visiblesearch-visible{display:block !important}#ps-top .visiblesearch-visible,
+#ps-top.pop-search-visible .visiblesearch-visible{display:block !important}#ps-top .visiblesearch-hidden.hidden,
+#ps-top.pop-search-visible .visiblesearch-visible.hidden,
+#ps-top .visiblesearch-visible,
 #ps-top.pop-search-visible .visiblesearch-hidden{display:none !important}#ps-top.pop-search-visible .visiblesearch-visible-right{position:absolute;right:0}#ps-top.pop-search-visible .nav-quicklink{margin-right:148px;padding-left:5px;padding-right:5px}@media (min-width: 768px){#ps-top .visiblesearch-hidden,
 #ps-top.pop-search-visible .visiblesearch-visible,
 #ps-top .visiblesearch-visible,
@@ -734,7 +736,7 @@ solid #bce8f1;margin:0
 14px;line-height:14px}.carousel-indicators>div:hover{background-color:#db902e;color:#fff}.tt-suggestion.tt-cursor,.tt-suggestion.tt-is-under-cursor{color:#fff;background-color:rgba(195, 165, 51, 0.7)}.tt-suggestion.tt-cursor a,
 .tt-suggestion.tt-is-under-cursor
 a{color:#fff}.background-screen{display:none}body.sliding .background-screen{display:block}body.sliding .background-screen,
-body.sliding .loading-screen{background-color:#fcf9eb}body.sliding .background-screen{background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}@media (min-width: 1440px){body.sliding .background-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png)}}body.sliding,
+body.sliding .loading-screen{background-color:#fcf9eb}body.sliding .background-screen{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}body.sliding.getpop .background-screen{background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center}@media (min-width: 1440px){body.sliding .background-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png)}}body.sliding.getpop-demo .background-screen{background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center}@media (min-width: 1440px){body.sliding.getpop-demo .background-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png)}}body.sliding,
 body.sliding #ps-side,
 body.sliding #ps-sideinfo,
 body.sliding #ps-main > .container-fluid,

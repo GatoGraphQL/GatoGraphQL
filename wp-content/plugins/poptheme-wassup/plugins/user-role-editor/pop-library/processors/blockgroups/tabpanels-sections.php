@@ -248,7 +248,7 @@ class GD_URE_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_P
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 
 		$details = array(
 			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_DETAILS,
@@ -301,7 +301,7 @@ class GD_URE_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_P
 			return __('Edit', 'poptheme-wassup');
 		}
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 
 	function init_atts($template_id, &$atts) {

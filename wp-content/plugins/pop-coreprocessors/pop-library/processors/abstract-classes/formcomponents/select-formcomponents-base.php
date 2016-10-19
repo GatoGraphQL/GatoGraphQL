@@ -36,7 +36,7 @@ class GD_Template_Processor_SelectFormComponentsBase extends GD_Template_Process
 		$input = $this->get_input($template_id, $atts);
 		$options = $addlabel ? $input->get_all_values($label) : $input->get_all_values();
 
-		$ret['value'] = $input->get_output_value(array());
+		$ret['value'] = $input->get_output_value(/*array()*/);
 
 		// Title: either the label or the placeholder, whichever is available
 		// $ret['title'] = $ret['label'] ? $ret['label'] : $ret['placeholder'];

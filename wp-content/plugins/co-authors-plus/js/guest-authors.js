@@ -1,8 +1,8 @@
-jQuery(document).ready(function($){
-	$('.reassign-option').on('click',function(){
-		$('#wpbody-content input#submit').addClass('button-primary').removeAttr('disabled');
+jQuery( document ).ready(function( $ ){
+	$( '.reassign-option' ).on( 'click',function(){
+		$( '#wpbody-content input#submit' ).addClass( 'button-primary' ).removeAttr( 'disabled' );
 	});
-	$('#leave-assigned-to').select2({
+	$( '#leave-assigned-to' ).select2({
 		minimumInputLength: 2,
 		width: 'copy',
 		multiple: false,
@@ -13,7 +13,7 @@ jQuery(document).ready(function($){
 				return {
 					q: term,
 					action: 'search_coauthors_to_assign',
-					guest_author: $('#id').val()
+					guest_author: $( '#id' ).val()
 				};
 			},
 			results: function( data, page ) {
@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
 		formatSelection: function( object, container ) {
 			return object.display_name;
 		}
-	}).on('change', function() {
-		$('#reassign-another').trigger('click');
+	}).on( 'change', function() {
+		$( '#reassign-another' ).trigger( 'click' );
 	});
 });

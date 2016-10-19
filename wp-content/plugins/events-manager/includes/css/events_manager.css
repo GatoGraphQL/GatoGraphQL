@@ -1,5 +1,6 @@
 div#em-loading { position:absolute; width:100%; height:100%; background:#FFFFFF url(../images/loading.gif) 50% 50% no-repeat; left:0px; top:0px; opacity:0.8; filter:alpha(opacity=80); z-index:99998; }
 .em-search-ajax { position:relative; }
+.em-wrapper label span.screen-reader-text, #em-wrapper label span.screen-reader-text { clip: rect(1px 1px 1px 1px); position: absolute !important; height: 1px; width: 1px; overflow: hidden; }
 /* Warnings */
 	.em-warning { margin:10px 0px; padding:10px; color:#333; border-radius:3px; display:block !important; }
 	.em-warning p { margin:10px 0px !important; padding:0px; color:#333 }
@@ -10,7 +11,6 @@ div#em-loading { position:absolute; width:100%; height:100%; background:#FFFFFF 
 	
 /* Search Form */
 	.em-search div { display:inline; }
-	.em-search label { display:none; }
 	.em-search .hidden { display:none !important; }
 	/* Custom Search CSS */
 		div.css-search { margin-bottom:20px; }	
@@ -72,12 +72,18 @@ div#em-loading { position:absolute; width:100%; height:100%; background:#FFFFFF 
 			div.css-search div.em-search-location, div.em-search-location-meta { margin:0px; padding: 0px; }
 			div.css-search div.em-search-advanced, div.css-search div.em-search-options { padding:5px 8px; }
 			div.css-search div.em-search-advanced > div { clear:both; }
-			div.css-search div.em-search-advanced label { display:block; float:left; min-width:100px; }
+			div.css-search div.em-search-advanced label > span { display:block; float:left; min-width:100px; }
 			div.css-search div.em-search-advanced .em-search-submit { margin:10px 0px; }
 			div.css-search.no-search-main div.em-search-advanced.visible div { display:inline; clear:none; }
 			div.css-search.no-search-main div.em-search-advanced.visible label { display:none; }
 			div.css-search div.em-search-options { text-align:right; }
-	
+
+/* Events List */
+	.css-events-list table.events-table { border-spacing: 0px; border-collapse: collapse; }
+	.css-events-list table.events-table td { padding:0px; }
+	.css-events-list table.events-table th.event-time { width:150px; }
+	.css-events-list table.events-table th.event-description { width:auto; }
+
 /* Booking Form */
 	.em-booking { margin:15px 0px 10px 0px; position:relative; }
 	.em-booking-form  { position:relative; clear:left; }

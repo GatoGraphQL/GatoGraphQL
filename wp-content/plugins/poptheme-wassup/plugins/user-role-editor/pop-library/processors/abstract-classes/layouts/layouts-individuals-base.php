@@ -7,7 +7,7 @@
 
 class GD_URE_Custom_Template_Processor_ProfileIndividualLayoutsBase extends GD_Template_ProcessorBase {
 
-	function get_template_source() {
+	function get_template_source($template_id, $atts) {
 	
 		return GD_TEMPLATESOURCE_LAYOUT_PROFILEINDIVIDUAL_DETAILS;
 	}

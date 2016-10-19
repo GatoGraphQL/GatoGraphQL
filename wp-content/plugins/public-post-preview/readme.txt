@@ -3,8 +3,8 @@ Contributors: ocean90
 Tags: public, post, preview, posts, custom post types, draft
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VR8YU922B7K46
 Requires at least: 3.5
-Tested up to: 4.4
-Stable tag: 2.4.1
+Tested up to: 4.6
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,17 +16,7 @@ Enables you to give a link to anonymous users for public preview of a post (or a
 
 Have you ever been writing a post with the help of someone who does not have access to your blog and needed to give them the ability to preview it before publishing? This plugin takes care of that by generating an URL with an expiring nonce that can be given out for public preview.
 
-**Sounds pretty good? Install now!**
-
-*Previously this plugin was maintained by [Matt Martz](http://profiles.wordpress.org/sivel/) and was an idea of [Jonathan Dingman](http://profiles.wordpress.org/jdingman/).*
-
-= Feedback =
-If you want, you can drop me a line @[ocean90](http://twitter.com/ocean90) on Twitter or @[Dominik Schilling](https://plus.google.com/+DominikSchilling/) on Google+.
-
-= More =
-Try also some of my [other plugins](http://profiles.wordpress.org/users/ocean90) or visit my site [wpGrafie.de](http://wpgrafie.de/).
-
-*Thanks to Hans Dinkelberg for his [photo](http://www.flickr.com/photos/uitdragerij/7516234430/).*
+*Previously this plugin was maintained by [Matt Martz](http://profiles.wordpress.org/sivel/) and was an idea of [Jonathan Dingman](http://profiles.wordpress.org/jdingman/). Thanks to Hans Dinkelberg for his [photo](http://www.flickr.com/photos/uitdragerij/7516234430/).*
 
 == Installation ==
 
@@ -60,6 +50,11 @@ To upload the plugin through WordPress, instead of FTP:
 
 == Frequently Asked Questions ==
 
+**I can't find the option for preview links. Where is it?**
+
+The checkbox is only available for non-published posts and once a post was saved as a draft.
+
+
 **After some time the preview link returns the message "The link has been expired!". Why?**
 
 The plugin generates an URL with an expiring nonce. By default a link "lives" 48 hours. After 48 hours the link is expired and you need to copy and share a new link which is automatically generated on the same place under the editor.
@@ -77,6 +72,11 @@ function my_nonce_life() {
 Or use the [Public Post Preview Configurator](https://wordpress.org/plugins/public-post-preview-configurator/).
 
 == Change Log ==
+= 2.5.0 (2016-04-05): =
+* Auto select preview link on focus. Props [@JeroenSormani](https://github.com/JeroenSormani).
+* Remove preview status from posts which are trashed or after scheduled posts are published.
+* Add support for paged posts.
+
 = 2.4.1 (2015-10-13): =
 * Update text domain to support language packs. Translations are now managed via http://translate.wordpress.org/projects/wp-plugins/public-post-preview.
 

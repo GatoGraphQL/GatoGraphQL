@@ -118,7 +118,7 @@ class GD_URE_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Temp
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 
 		$details = array(
 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS,
@@ -157,7 +157,7 @@ class GD_URE_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Temp
 			return __('Map', 'poptheme-wassup');
 		}
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 	function get_panel_header_tooltip($blockgroup, $blockunit) {
 
@@ -165,7 +165,7 @@ class GD_URE_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Temp
 
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORMEMBERS:
 				
-				return $this->get_panel_header_title($blockgroup, $blockunit);
+				return $this->get_panel_header_title($blockgroup, $blockunit, $atts);
 		}
 
 		return parent::get_panel_header_tooltip($blockgroup, $blockunit);

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-27 14:20+0200\n"
-"PO-Revision-Date: 2016-09-27 14:20+0200\n"
+"PO-Revision-Date: 2016-10-11 18:20+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -1892,7 +1892,7 @@ msgstr "Alternar búsqueda"
 #: .././pop-library/processors/pagesections/pagesections.php:436
 #, php-format
 msgid "Powered by <a href=\"%s\">the PoP framework</a>"
-msgstr "Implementado con <a href=“%s”>the PoP framework</a>"
+msgstr "Implementado con <a href=\"%s\">the PoP framework</a>"
 
 #: .././pop-library/processors/pagesections/pagesections.php:439
 msgid "About us"

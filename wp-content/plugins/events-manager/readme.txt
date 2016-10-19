@@ -1,11 +1,11 @@
 === Events Manager ===
 Contributors: netweblogic, nutsmuggler
 Donate link: http://wp-events-plugin.com
-Tags: events, event, event registration, event calendar, events calendar, event management, paypal, registration, ticket, tickets, ticketing, tickets, theme, widget, locations, maps, booking, attendance, attendee, buddypress, calendar, gigs, payment, payments, sports,
+Tags: bookings, buddypress, calendar, event, event management, events, google maps, maps, locations, registration, registration, tickets
 Text Domain: events-manager
 Requires at least: 3.5
-Tested up to: 4.4
-Stable tag: 5.6.2
+Tested up to: 4.6.1
+Stable tag: 5.6.6.1
 
 Fully featured event registration management including recurring events, locations management, calendar, Google map integration, booking management
 
@@ -99,6 +99,76 @@ See our [FAQ](http://wp-events-plugin.com/documentation/faq/) page, which is upd
 6. Manage attendees with various booking reports
 
 == Changelog ==
+= 5.6.6.1 =
+* fixed search forms disappearing in latest update when Styling Options for search forms are turned off (props @factchecker)
+
+= 5.6.6 =
+* improvements to ical formatting, including static/unique UIDs, more accurate locations with geo coordinates, categories and featured image
+* replaced code using stripslashes() with wp_unslash() (kudos @webaware)
+* removed use of jQuery.live() on settings page
+* tweaked event search form elements and events list table to be ADA compliant
+* added $EM_Ticket_Booking to em_tickets_bookings_add filter arguments
+* removed translations of weekdays within EM and using WP translations instead,
+* changed calendar templates to stop using ucfirst() to uppercase month first letters since it breaks some languages and the languages that need it don't capitalize their months anyway 
+* fixed anonymous event submitter info not showing in recurring event admin area
+* fixed wrong nav id in BuddyPress (kudos @lyevalley)
+* fixed 'no location' checkbox not remaining checked if event submission returns a validation error
+* tweaked templates/forms/event/location.php and added some extra output sanitization
+* fixed 404 errors in calendar links to eventful day list for a specific location
+* fixed syncing of tables when WP uses utf8mb4 collation which causes errors when saving emojis in post content
+* fixed WP 4.6 PHP warnings and featured image problems when using a theme that limits specific CPTs to use thumbnails
+* fixed action typo in EM_Ticket::get_post() from em_location_get_post_pre to em_ticket_get_post_pre
+* fixed location not showing up in admin area within dropdown if previously assigned to an event but not available to user due to permission changes
+
+= 5.6.5 =
+* added option to add Google Maps API key
+* fixed category image uploader not working properly on some specific setups
+* fixed display issues of first/last names mixing middle names in booking admin tables under no-user mode
+* fixed #_TAGSLUG not being parsed
+* fixed blank space in email triggering validation errors when booking
+* fixed 'view bookings' ticket link pointing to back-end when on front-end
+
+= 5.6.4 = 
+* fixed WP FullCalendar (versions using FC 2.x library) not showing events outside current month
+* fixed long events not showing on last day in WP FullCalendar
+* fixed event category and tag pages 404ing when slugs match taxonomy slugs and these pages aren't parents of events page
+* fixed image upload buttons not working properly on category add/edit pages
+
+= 5.6.3 = 
+* fixed events disappearing from calendar with WP FullCalendar plugin
+* fixed PHP warning for delete booking when a user can't manage booking
+* removed our EM_PHPMailer class and started using the one shipped with WordPress
+* added %passwordurl% placeholder for new user registration email template
+* added check for whether categories are enabled in many areas of code potentially avoiding a array_map PHP notice
+* fixed preview mode duplicating tickets
+* fixed widget formats stripping certain HTML elements
+* fixed erratic date picker range behaviour when adjusting a start date later than the end date 
+* fixed original image getting deleted when modifying duplicated event image
+* fixed orderby not including event_date_created and event_date_modified since 5.6.2
+* fixed PHP warning when calling #_ATT to a non-existent attribute
+* changed event debug meta box to display when WP_DEBUG_DISPLAY is also true rather than just WP_DEBUG
+* fixed front-end submission false validation errors when submitting events with bookings enabled
+* changed headers to new h1 standard on WP Dashboard pages
+* fixed bookings admin viewer table not showing specific ticket bookings on front-end
+* fixed ML hooking into em_event_save_meta and messing up the internal hook pointer by triggering it again
+* fixed translated options PHP fatal error in rare occasions/setups
+* fixed deprecated get_currentuserinfo notice in WP 4.5
+* fixed PHP 7 division by zero warning
+* fixed PHP 7 "array to string" notice
+* fixed PHP 7 issues with EM_Ticket validation
+* fixed grouped events list not showing long events on each group provided limit=0 is also supplied
+* fixed apostrophes not passing email validation
+* fixed buddypress fatal error when booking with notifications disabled,
+* fixed buddypress activity stream items being created twice for new bookings
+* fixed booking admin notes not being added in the front-end
+* updated google maps api version and removed deprecated sensor parameter
+* fixed searches not working for search terms containing apostrophes
+* fixed blank settings pages due to 4.5 code changes to wp_get_referer()
+* added em_bookings_deleted action which will execute when one or more bookings are deleted
+* added em_bookings_delete filter for when a group of bookings are deleted with event(s)
+* fixed EM_Bookings->delete() not deleting bookings properly
+* deprecated use of EM_Event->delete_bookings() and EM_Event->delete_tickets() in favor of EM_Event->EM_Bookings->delete()
+
 = 5.6.2 =
 * changed translation gettext domain from dbem to events-manager inline with new wordpress.org translation features
 * fixed EM_CSV_DELIMITER not being included in headers, added filter em_csv_delimiter to override EM_CSV_DELIMITER

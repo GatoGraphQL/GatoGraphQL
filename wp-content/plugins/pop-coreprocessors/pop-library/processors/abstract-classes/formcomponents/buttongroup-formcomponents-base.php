@@ -39,7 +39,7 @@ class GD_Template_Processor_ButtonGroupFormComponentsBase extends GD_Template_Pr
 	
 		$input = $this->get_input($template_id, $atts);
 		$options = $input->get_all_values();
-		$ret['value'] = $input->get_output_value(array());
+		$ret['value'] = $input->get_output_value(/*array()*/);
 		$ret['options'] = $options;
 		if ($btnclass = $this->get_att($template_id, $atts, 'btn-class')) {
 			$ret[GD_JS_CLASSES/*'classes'*/]['input'] = $btnclass;

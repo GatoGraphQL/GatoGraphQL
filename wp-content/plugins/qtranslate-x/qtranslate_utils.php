@@ -200,17 +200,21 @@ function qtranxf_parseURL($url) {
 function qtranxf_buildURL($urlinfo,$homeinfo) {
 	//qtranxf_dbg_log('qtranxf_buildURL: $urlinfo:',$urlinfo);
 	//qtranxf_dbg_log('qtranxf_buildURL: $homeinfo:',$homeinfo);
-	$url = (empty($urlinfo['scheme']) ? $homeinfo['scheme'] : $urlinfo['scheme']).'://';
-	if(!empty($urlinfo['user'])){
-		$url .= $urlinfo['user'];
-		if(!empty($urlinfo['pass'])) $url .= ':'.$urlinfo['pass'];
-		$url .= '@';
-	}elseif(!empty($homeinfo['user'])){
-		$url .= $homeinfo['user'];
-		if(!empty($homeinfo['pass'])) $url .= ':'.$homeinfo['pass'];
-		$url .= '@';
+	if(empty($urlinfo['host'])){//relative path stays relative
+		$url = '';
+	}else{
+		$url = (empty($urlinfo['scheme']) ? $homeinfo['scheme'] : $urlinfo['scheme']).'://';
+		if(!empty($urlinfo['user'])){
+			$url .= $urlinfo['user'];
+			if(!empty($urlinfo['pass'])) $url .= ':'.$urlinfo['pass'];
+			$url .= '@';
+		}elseif(!empty($homeinfo['user'])){
+			$url .= $homeinfo['user'];
+			if(!empty($homeinfo['pass'])) $url .= ':'.$homeinfo['pass'];
+			$url .= '@';
+		}
+		$url .= empty($urlinfo['host']) ? $homeinfo['host'] : $urlinfo['host'];
 	}
-	$url .= empty($urlinfo['host']) ? $homeinfo['host'] : $urlinfo['host'];
 	if(!empty($urlinfo['path-base'])) $url .= $urlinfo['path-base'];
 	if(!empty($urlinfo['wp-path'])) $url .= $urlinfo['wp-path'];
 	if(!empty($urlinfo['query'])) $url .= '?'.$urlinfo['query'];
@@ -501,7 +505,15 @@ function qtranxf_getLanguageName($lang = ''){
 		return $q_config['language-names'][$lang] = $q_config['language_name'][$lang];
 	}
 	$n = $translations->entries[$locale]->translations[0];
-	return $q_config['language-names'][$lang] = mb_convert_case($n,MB_CASE_TITLE);
+	if(empty($q_config['language_name_case'])){//Camel Case by default
+		if(function_exists('mb_convert_case')){// module 'mbstring' may not be installed by default: https://wordpress.org/support/topic/qtranslate_utilsphp-on-line-504
+			$n = mb_convert_case($n,MB_CASE_TITLE);
+		}else{
+			$msg = 'qTranslate-X: Enable PHP module "mbstring" to get names of languages printed in "Camel Case" or disable option \'Show language names in "Camel Case"\' on admin page '.admin_url('options-general.php?page=qtranslate-x#general').'. You may find more information at http://php.net/manual/en/mbstring.installation.php, or search for PHP installation options on control panel of your server provider.';
+			error_log($msg);
+		}
+	}
+	return $q_config['language-names'][$lang] = $n;
 }
 
 function qtranxf_isEnabled($lang) {

@@ -134,11 +134,12 @@ function wpfc_em_ajax() {
     $_REQUEST['month'] = false; //no need for these two, they are the original month and year requested
     $_REQUEST['year'] = false;
     
-    //get the year and month to show, which would be the month/year between start and end request params
-    $month_diff =  $_REQUEST['end'] - $_REQUEST['start'];
-    $month_ts = $_REQUEST['start'] + ($month_diff/2); //get a 'mid-month' timestamp to get year and month
-    $year = (int) date ( "Y", $month_ts );
-    $month = (int) date ( "m", $month_ts );
+    //get the month/year between the start/end dates and feed these to EM
+    $scope_start = strtotime(substr($_REQUEST['start'],0,10));
+    $scope_end = strtotime(substr($_REQUEST['end'],0,10));
+    $scope_middle = $scope_start + ($scope_end - $scope_start)/2;
+    $month = date('n', $scope_middle);
+    $year = date('Y', $scope_middle);
 
 	$args = array ('month'=>$month, 'year'=>$year, 'owner'=>false, 'status'=>1, 'orderby'=>'event_start_time, event_name'); //since wpfc handles date sorting we only care about time and name ordering here
 	$args['number_of_weeks'] = 6; //WPFC always has 6 weeks
@@ -179,7 +180,7 @@ function wpfc_em_ajax() {
 		foreach( $cell_data['events'] as $EM_Event ){
 			$color = $borderColor = $orig_color;
 			$textColor = '#fff';
-			if ( !empty ( $EM_Event->get_categories()->categories )) {
+			if ( get_option('dbem_categories_enabled') && !empty ( $EM_Event->get_categories()->categories )) {
 				foreach($EM_Event->get_categories()->categories as $EM_Category){
 					/* @var $EM_Category EM_Category */
 					if( $EM_Category->get_color() != '' ){
@@ -204,7 +205,15 @@ function wpfc_em_ajax() {
 				}
 				if( $event_day_counts[$date] <= $limit ){
 					$title = $EM_Event->output(get_option('dbem_emfc_full_calendar_event_format', '#_EVENTNAME'), 'raw');
-					$event_array = array ("title" => $title, "color" => $color, 'textColor'=>$textColor, 'borderColor'=>$borderColor, "start" => date('Y-m-d\TH:i:s', $EM_Event->start), "end" => date('Y-m-d\TH:i:s', $EM_Event->end), "url" => $EM_Event->get_permalink(), 'post_id' => $EM_Event->post_id, 'event_id' => $EM_Event->event_id, 'allDay' => $EM_Event->event_all_day == true );
+					$allDay = $EM_Event->event_all_day == true;
+					if( $allDay ){
+						$start_date = date('Y-m-d\TH:i:s', $EM_Event->start);
+						$end_date = date('Y-m-d\T00:00:00', $EM_Event->end + (60*60*24)); //on all day events the end date/time is next day of end date at 00:00:00 - see end attribute on http://fullcalendar.io/docs/event_data/Event_Object/
+					}else{
+						$start_date = date('Y-m-d\TH:i:s', $EM_Event->start);
+						$end_date = date('Y-m-d\TH:i:s', $EM_Event->end);						
+					}
+					$event_array = array ("title" => $title, "color" => $color, 'textColor'=>$textColor, 'borderColor'=>$borderColor, "start" => $start_date, "end" => $end_date, "url" => $EM_Event->get_permalink(), 'post_id' => $EM_Event->post_id, 'event_id' => $EM_Event->event_id, 'allDay' => $allDay );
 					if( $args['long_events'] == 0 ) $event_array['end'] = $event_array['start']; //if long events aren't wanted, make the end date same as start so it shows this way on the calendar
 					$events[] = apply_filters('wpfc_events_event', $event_array, $EM_Event);
 					$event_ids[] = $EM_Event->event_id;

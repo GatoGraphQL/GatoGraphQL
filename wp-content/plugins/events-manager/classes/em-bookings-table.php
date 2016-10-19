@@ -226,7 +226,7 @@ class EM_Bookings_Table{
 				$args = array('status'=>$this->get_status_search(),'scope'=>$this->scope,'order'=>$this->order,'orderby'=>$this->orderby);
 				$args['owner'] = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
 				// Hack PoP Plug-in: allow $args to be overriden
-				$args = apply_filters('gd_em_get_bookings_args', $args);								
+				$args = apply_filters('gd_em_get_bookings_args', $args);
 				$this->bookings_count = EM_Bookings::count($args);
 				$this->bookings = EM_Bookings::get(array_merge($args, array('limit'=>$this->limit,'offset'=>$this->offset)));
 				//Now let's create events and bookings for this instead of giving each booking an event

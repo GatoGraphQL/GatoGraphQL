@@ -159,7 +159,11 @@ add_filter('em_event_save','bp_em_record_activity_event_save', 10, 2);
  * @return boolean
  */
 function bp_em_record_activity_booking_save( $result, $EM_Booking ){
+	/* @todo this isn't good at detecting status changes. */ 
 	if( !empty($EM_Booking->event_id) && $result ){
+		$action_type = 'new_booking';
+		if( !empty($EM_Booking->last_bp_activity) && $EM_Booking->last_bp_activity == $action_type ) return $result; //prevent duplicates
+		$EM_Booking->last_bp_activity = $action_type;
 		$rejected_statuses = array(0,2,3); //these statuses apply to rejected/cancelled bookings
 		$user = $EM_Booking->get_person();
 		$member_link = bp_core_get_user_domain($user->ID);
@@ -167,7 +171,6 @@ function bp_em_record_activity_booking_save( $result, $EM_Booking ){
 		$event_link = $EM_Booking->get_event()->output('#_EVENTLINK');
 		$status = $EM_Booking->booking_status;
 		$EM_Event = $EM_Booking->get_event();
-		$action_type = 'new_booking';
 		if( empty($EM_Event->group_id) ){
 			if( $status == 1 || (!get_option('dbem_bookings_approval') && $status < 2) ){
 				$action = sprintf(__('%s is attending %s.','events-manager'), $user_link, $event_link );

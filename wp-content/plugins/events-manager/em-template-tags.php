@@ -189,7 +189,7 @@ function em_event_form($args = array()){
 			//Give a default location & category
 			$default_cat = get_option('dbem_default_category');
 			$default_loc = get_option('dbem_default_location');
-			if( is_numeric($default_cat) && $default_cat > 0 && !empty($EM_Event->get_categories()->categories) ){
+			if( get_option('dbem_categories_enabled') && is_numeric($default_cat) && $default_cat > 0 && !empty($EM_Event->get_categories()->categories) ){
 				$EM_Category = new EM_Category($default_cat);
 				$EM_Event->get_categories()->categories[] = $EM_Category;
 			}

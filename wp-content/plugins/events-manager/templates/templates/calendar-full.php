@@ -17,7 +17,7 @@ $col_max = count($calendar['row_headers']); //each time this collumn number is r
 	<thead>
 		<tr>
 			<td><a class="em-calnav full-link em-calnav-prev" href="<?php echo esc_url($calendar['links']['previous_url']); ?>">&lt;&lt;</a></td>
-			<td class="month_name" colspan="5"><?php echo esc_html(ucfirst(date_i18n(get_option('dbem_full_calendar_month_format'), $calendar['month_start']))); ?></td>
+			<td class="month_name" colspan="5"><?php echo esc_html(date_i18n(get_option('dbem_full_calendar_month_format'), $calendar['month_start'])); ?></td>
 			<td><a class="em-calnav full-link em-calnav-next" href="<?php echo esc_url($calendar['links']['next_url']); ?>">&gt;&gt;</a></td>
 		</tr>
 	</thead>

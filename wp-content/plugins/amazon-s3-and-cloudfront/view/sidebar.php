@@ -8,7 +8,6 @@
 
 		<ul>
 			<li><?php echo wptexturize( __( 'Upload existing Media Library to S3', 'amazon-s3-and-cloudfront' ) ); // xss ok ?></li>
-			<li><?php echo wptexturize( __( 'Find & replace file URLs in content', 'amazon-s3-and-cloudfront' ) ); // xss ok ?></li>
 			<li><?php echo wptexturize( __( 'Manage S3 files in WordPress', 'amazon-s3-and-cloudfront' ) ); // xss ok ?></li>
 			<li><?php echo wptexturize( __( 'Assets addon - Serve your CSS & JS from S3/CloudFront', 'amazon-s3-and-cloudfront' ) ); // xss ok ?></li>
 			<li><?php echo wptexturize( __( 'WooCommerce addon', 'amazon-s3-and-cloudfront' ) ); // xss ok ?></li>

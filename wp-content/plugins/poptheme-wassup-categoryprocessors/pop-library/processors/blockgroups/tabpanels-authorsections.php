@@ -491,7 +491,7 @@ class CPP_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Templat
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 
 		$details = array(
 			GD_TEMPLATE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS,
@@ -575,7 +575,7 @@ class CPP_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Templat
 			return __('List', 'poptheme-wassup-organikprocessors');
 		}
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 	function get_panel_header_tooltip($blockgroup, $blockunit) {
 
@@ -592,7 +592,7 @@ class CPP_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Templat
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS08:
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS09:
 				
-				return $this->get_panel_header_title($blockgroup, $blockunit);
+				return $this->get_panel_header_title($blockgroup, $blockunit, $atts);
 		}
 
 		return parent::get_panel_header_tooltip($blockgroup, $blockunit);

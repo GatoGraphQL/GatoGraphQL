@@ -1,20 +1,12 @@
 <?php 
 /**
+ * Deprecated - see em-actions.php - this will be removed at some point in 6.0
  * Check if there's any admin-related actions to take for bookings. All actions are caught here.
  * @return null
+ * @todo remove in 6.0
  */
 function em_admin_actions_bookings() {
-  	global $dbem_form_add_message;   
-	global $dbem_form_delete_message; 
-	global $wpdb, $EM_Booking, $EM_Event, $EM_Notices;
-	
-	if( is_object($EM_Booking) && !empty($_REQUEST['action']) && $EM_Booking->can_manage('manage_bookings','manage_others_bookings') ) {
-		if( $_REQUEST['action'] == 'bookings_add_note' && wp_verify_nonce($_REQUEST['_wpnonce'],'bookings_add_note') ){
-			$EM_Booking->add_note($_REQUEST['booking_note']);
-			function em_booking_save_notification(){ global $EM_Booking; ?><div class="updated"><p><strong><?php echo $EM_Booking->feedback_message; ?></strong></p></div><?php }
-			add_action ( 'admin_notices', 'em_booking_save_notification' );
-		}
-	}
+	global $EM_Event;	
 	if( is_object($EM_Event) && !empty($_REQUEST['action']) ){
 		if( $_REQUEST['action'] == 'bookings_export_csv' && wp_verify_nonce($_REQUEST['_wpnonce'],'bookings_export_csv') ){
 			$EM_Event->get_bookings()->export_csv();
@@ -37,10 +29,10 @@ function em_bookings_page(){
 		em_bookings_single();
 	}elseif( !empty($_REQUEST['person_id']) ){
 		em_bookings_person();
-	}elseif( !empty($_REQUEST['event_id']) ){
-		em_bookings_event();
 	}elseif( !empty($_REQUEST['ticket_id']) ){
 		em_bookings_ticket();
+	}elseif( !empty($_REQUEST['event_id']) ){
+		em_bookings_event();
 	}else{
 		em_bookings_dashboard();
 	}
@@ -54,12 +46,7 @@ function em_bookings_dashboard(){
 	?>
 	<div class='wrap em-bookings-dashboard'>
 		<?php if( is_admin() ): ?>
-		<div id='icon-users' class='icon32'>
-			<br/>
-		</div>
-  		<h2>
-  			<?php esc_html_e('Event Bookings Dashboard', 'events-manager'); ?>
-  		</h2>
+  		<h1><?php esc_html_e('Event Bookings Dashboard', 'events-manager'); ?></h1>
   		<?php else: echo $EM_Notices; ?>
   		<?php endif; ?>
   		<div class="em-bookings-recent">
@@ -94,20 +81,18 @@ function em_bookings_event(){
 	}
 	$localised_start_date = date_i18n('D d M Y', $EM_Event->start);
 	$localised_end_date = date_i18n('D d M Y', $EM_Event->end);
+	$header_button_classes = is_admin() ? 'page-title-action':'button add-new-h2';
 	?>
 	<div class='wrap'>
-		<div id='icon-users' class='icon32'>
-			<br/>
-		</div>
-  		<h2>
+		<?php if( is_admin() ): ?><h1><?php else: ?><h2><?php endif; ?>		
   			<?php echo sprintf(__('Manage %s Bookings', 'events-manager'), "'{$EM_Event->event_name}'"); ?>
-  			<a href="<?php echo $EM_Event->get_permalink(); ?>" class="button add-new-h2"><?php echo sprintf(__('View %s','events-manager'), __('Event', 'events-manager')) ?></a>
-  			<a href="<?php echo $EM_Event->get_edit_url(); ?>" class="button add-new-h2"><?php echo sprintf(__('Edit %s','events-manager'), __('Event', 'events-manager')) ?></a>
+  			<a href="<?php echo $EM_Event->get_permalink(); ?>" class="<?php echo $header_button_classes; ?>"><?php echo sprintf(__('View %s','events-manager'), __('Event', 'events-manager')) ?></a>
+  			<a href="<?php echo $EM_Event->get_edit_url(); ?>" class="<?php echo $header_button_classes; ?>"><?php echo sprintf(__('Edit %s','events-manager'), __('Event', 'events-manager')) ?></a>
   			<?php if( locate_template('plugins/events-manager/templates/csv-event-bookings.php', false) ): //support for legacy template ?>
-  			<a href='<?php echo EM_ADMIN_URL ."&amp;page=events-manager-bookings&amp;action=bookings_export_csv&amp;_wpnonce=".wp_create_nonce('bookings_export_csv')."&amp;event_id=".$EM_Event->event_id ?>' class="button add-new-h2"><?php esc_html_e('Export CSV','events-manager')?></a>
+  			<a href='<?php echo EM_ADMIN_URL ."&amp;page=events-manager-bookings&amp;action=bookings_export_csv&amp;_wpnonce=".wp_create_nonce('bookings_export_csv')."&amp;event_id=".$EM_Event->event_id ?>' class="<?php echo $header_button_classes; ?>"><?php esc_html_e('Export CSV','events-manager')?></a>
   			<?php endif; ?>
   			<?php do_action('em_admin_event_booking_options_buttons'); ?>
-  		</h2>
+		<?php if( !is_admin() ): ?></h2><?php else: ?></h1><?php endif; ?>
   		<?php if( !is_admin() ) echo $EM_Notices; ?>  
 		<div>
 			<p><strong><?php esc_html_e('Event Name','events-manager'); ?></strong> : <?php echo esc_html($EM_Event->event_name); ?></p>
@@ -153,16 +138,15 @@ function em_bookings_ticket(){
 		<?php
 		return false;
 	}
+	$header_button_classes = is_admin() ? 'page-title-action':'button add-new-h2';
 	?>
 	<div class='wrap'>
-		<div id='icon-users' class='icon32'>
-			<br/>
-		</div>
-  		<h2>
+		<?php if( is_admin() ): ?><h1><?php else: ?><h2><?php endif; ?>
   			<?php echo sprintf(__('Ticket for %s', 'events-manager'), "'{$EM_Event->name}'"); ?>
-  			<a href="<?php echo $EM_Event->get_edit_url(); ?>" class="button add-new-h2"><?php esc_html_e('View/Edit Event','events-manager') ?></a>
-  			<a href="<?php echo $EM_Event->get_bookings_url(); ?>" class="button add-new-h2"><?php esc_html_e('View Event Bookings','events-manager') ?></a>
-  		</h2> 
+  			<a href="<?php echo $EM_Event->get_edit_url(); ?>" class="<?php echo $header_button_classes; ?>"><?php esc_html_e('View/Edit Event','events-manager') ?></a>
+  			<a href="<?php echo $EM_Event->get_bookings_url(); ?>" class="<?php echo $header_button_classes; ?>"><?php esc_html_e('View Event Bookings','events-manager') ?></a>
+  		
+		<?php if( !is_admin() ): ?></h2><?php else: ?></h1><?php endif; ?>
   		<?php if( !is_admin() ) echo $EM_Notices; ?>
 		<div>
 			<table>
@@ -177,7 +161,6 @@ function em_bookings_ticket(){
 				<?php do_action('em_booking_admin_ticket_row', $EM_Ticket); ?>
 			</table>
 		</div>
-		<div class="icon32" id="icon-bookings"><br></div>
 		<h2><?php esc_html_e('Bookings','events-manager'); ?></h2>
 		<?php
 		$EM_Bookings_Table = new EM_Bookings_Table();
@@ -203,10 +186,10 @@ function em_bookings_single(){
 	}
 	?>
 	<div class='wrap' id="em-bookings-admin-booking">
-		<div class="icon32" id="icon-bookings"><br></div>
-  		<h2>
+		<?php if( is_admin() ): ?><h1><?php else: ?><h2><?php endif; ?>		
   			<?php esc_html_e('Edit Booking', 'events-manager'); ?>
-  		</h2>
+		<?php if( !is_admin() ): ?></h2><?php else: ?></h1><?php endif; ?>
+  		<?php if( !is_admin() ) echo $EM_Notices; ?>
   		<div id="poststuff" class="metabox-holder">
 	  		<div id="post-body">
 				<div id="post-body-content">
@@ -505,20 +488,18 @@ function em_bookings_person(){
 		<?php
 		return false;
 	}
+	$header_button_classes = is_admin() ? 'page-title-action':'button add-new-h2';
 	?>
 	<div class='wrap'>
-		<div id='icon-users' class='icon32'>
-			<br/>
-		</div>
-  		<h2>
+		<?php if( is_admin() ): ?><h1><?php else: ?><h2><?php endif; ?>
   			<?php esc_html_e('Manage Person\'s Booking', 'events-manager'); ?>
   			<?php if( current_user_can('edit_users') ) : ?>
-  			<a href="<?php echo admin_url('user-edit.php?user_id='.$EM_Person->ID); ?>" class="button add-new-h2"><?php esc_html_e('Edit User','events-manager') ?></a>
+  			<a href="<?php echo admin_url('user-edit.php?user_id='.$EM_Person->ID); ?>" class="<?php echo $header_button_classes; ?>"><?php esc_html_e('Edit User','events-manager') ?></a>
   			<?php endif; ?>
   			<?php if( current_user_can('delete_users') ) : ?>
-  			<a href="<?php echo wp_nonce_url( admin_url("users.php?action=delete&amp;user=$EM_Person->ID"), 'bulk-users' ); ?>" class="button add-new-h2"><?php esc_html_e('Delete User','events-manager') ?></a>
+  			<a href="<?php echo wp_nonce_url( admin_url("users.php?action=delete&amp;user=$EM_Person->ID"), 'bulk-users' ); ?>" class="<?php echo $header_button_classes; ?>"><?php esc_html_e('Delete User','events-manager') ?></a>
   			<?php endif; ?>
-  		</h2>
+		<?php if( !is_admin() ): ?></h2><?php else: ?></h1><?php endif; ?>
   		<?php if( !is_admin() ) echo $EM_Notices; ?>
 		<?php do_action('em_bookings_person_header'); ?>
   		<div id="poststuff" class="metabox-holder has-right-sidebar">
@@ -537,7 +518,6 @@ function em_bookings_person(){
 		</div>
 		<br style="clear:both;" />
 		<?php do_action('em_bookings_person_body_1'); ?>
-		<div class="icon32" id="icon-bookings"><br></div>
 		<h2><?php esc_html_e('Past And Present Bookings','events-manager'); ?></h2>
 		<?php
 		$EM_Bookings_Table = new EM_Bookings_Table();

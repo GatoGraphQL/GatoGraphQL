@@ -98,7 +98,8 @@ class EM_Widget extends WP_Widget {
 		    }
 		    //balance tags and sanitize output formats
 		    if( in_array($key, array('format', 'no_events_text', 'all_events_text')) ){
-		        $new_instance[$key] = force_balance_tags(wp_kses_post($new_instance[$key]));
+		        if( is_multisite() && !is_super_admin() ) $new_instance[$key] = wp_kses_post($new_instance[$key]); //for multisite
+		        $new_instance[$key] = force_balance_tags($new_instance[$key]);
 		    }
     	}
     	return $new_instance;

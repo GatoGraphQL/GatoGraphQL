@@ -25,7 +25,7 @@ $args = !empty($args) ? $args:array(); /* @var $args array */
 			<button type="submit" class="em-search-submit loading">
 				<?php //before you ask, this hack is necessary thanks to stupid IE7 ?>
 				<!--[if IE 7]><span><![endif]-->
-				<img src="<?php echo EM_DIR_URI; ?>includes/images/search-mag.png" />
+				<img src="<?php echo EM_DIR_URI; ?>includes/images/search-mag.png" alt="<?php esc_attr_e('Search', 'events-manager'); ?>" />
 				<!--[if IE 7]></span><![endif]-->
 			</button>
 			<?php endif; ?>

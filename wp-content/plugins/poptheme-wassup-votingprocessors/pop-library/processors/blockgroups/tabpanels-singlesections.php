@@ -307,7 +307,7 @@ class VotingProcessors_Template_Processor_SingleSectionTabPanelBlockGroups exten
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 
 		// $details = array(
 		// 	GD_TEMPLATE_BLOCK_SINGLERELATEDOPINIONATEDVOTECONTENT_SCROLL_DETAILS,
@@ -348,7 +348,7 @@ class VotingProcessors_Template_Processor_SingleSectionTabPanelBlockGroups exten
 			return __('List', 'poptheme-wassup-votingprocessors');
 		}
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 	function get_panel_header_tooltip($blockgroup, $blockunit) {
 
@@ -359,7 +359,7 @@ class VotingProcessors_Template_Processor_SingleSectionTabPanelBlockGroups exten
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDOPINIONATEDVOTECONTENT_AGAINST:
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDOPINIONATEDVOTECONTENT_NEUTRAL:
 				
-				return $this->get_panel_header_title($blockgroup, $blockunit);
+				return $this->get_panel_header_title($blockgroup, $blockunit, $atts);
 		}
 
 		return parent::get_panel_header_tooltip($blockgroup, $blockunit);

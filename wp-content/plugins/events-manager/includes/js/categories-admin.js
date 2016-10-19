@@ -38,10 +38,12 @@ jQuery(document).ready(function($) {
 	    var fileurl;
 
 		if (formfield != null) {
-			fileurl = $('img',html).attr('src');
+			var img = $(html).find('img');
+			fileurl = img.attr('src');
 			$('#category-image').val(fileurl);
+			$('#category-image-img img').attr('src', fileurl);
 			//get the attachment id if possible
-			var fileIdClass = $('img',html).attr('class');
+			var fileIdClass = img.attr('class');
 			var pattern = /wp\-image\-[0-9]+/;
 			var fileIdFull = pattern.exec(fileIdClass);
 			if( fileIdFull[0] != '' ){

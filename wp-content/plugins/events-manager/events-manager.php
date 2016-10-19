@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Events Manager
-Version: 5.6.2
+Version: 5.6.6.1
 Plugin URI: http://wp-events-plugin.com
 Description: Event registration and booking management for WordPress. Recurring events, locations, google maps, rss, ical, booking registration and more!
 Author: Marcus Sykes
@@ -10,7 +10,7 @@ Text Domain: events-manager
 */
 
 /*
-Copyright (c) 2015, Marcus Sykes
+Copyright (c) 2016, Marcus Sykes
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 // Setting constants
-define('EM_VERSION', 5.62); //self expanatory
+define('EM_VERSION', 5.6624); //self expanatory
 define('EM_PRO_MIN_VERSION', 2.392); //self expanatory
 define('EM_PRO_MIN_VERSION_CRITICAL', 2.377); //self expanatory
 define('EM_DIR', dirname( __FILE__ )); //an absolute path to this directory
@@ -320,6 +320,10 @@ class EM_Scripts_and_Styles {
 			'show24hours' => get_option('dbem_time_24h'),
 			'is_ssl' => is_ssl(),
 		);
+		//maps api key
+		if( get_option('dbem_gmap_is_active') && get_option('dbem_google_maps_browser_key') ){
+			$em_localized_js['google_maps_api'] = get_option('dbem_google_maps_browser_key');
+		}
 		//debug mode
 		if( defined('WP_DEBUG') && WP_DEBUG ) $em_localized_js['ui_css'] = plugins_url('includes/css/jquery-ui.css', __FILE__);
 		//booking-specific stuff
@@ -586,6 +590,10 @@ class EM_MS_Globals {
 			add_filter('pre_update_option_'.$global_option_name, array(&$this, 'pre_update_option_'.$global_option_name), 1,2);
 			add_action('add_option_'.$global_option_name, array(&$this, 'add_option_'.$global_option_name), 1,1);
 		}
+		//if we're in MS Global mode, the categories option currently resides in the main blog, consider moving this to a network setting in the future
+		if( EM_MS_GLOBAL ){
+		    add_filter('pre_option_dbem_categories_enabled', array(&$this, 'pre_option_dbem_categories_enabled'), 1,1);
+		}
 	}
 	function get_globals(){
 		$globals = array(
@@ -621,6 +629,17 @@ class EM_MS_Globals {
 		}
 		return $value[0];
 	}
+	/**
+	 * Returns the option of the main site in this network, this function should only be fired if in MS Global mode.
+	 * @param int $value
+	 * @return int
+	 */
+	function pre_option_dbem_categories_enabled($value){
+	    if( !is_main_site() ){ //only alter value if not on main site already
+	        $value = get_blog_option(get_current_site()->blog_id, 'dbem_categories_enabled') ? 1:0; //return a number since false will not circumvent pre_option_ filter
+	    }
+	    return $value;
+	}
 }
 if( is_multisite() ){
 	global $EM_MS_Globals;
@@ -634,7 +653,7 @@ if( is_multisite() ){
  * @uses locate_template()
  * @return string
  */
-function em_locate_template( $template_name, $load=false, $args = array() ) {
+function em_locate_template( $template_name, $load=false, $the_args = array() ) {
 	//First we check if there are overriding tempates in the child or parent theme
 	$located = locate_template(array('plugins/events-manager/'.$template_name));
 	if( !$located ){
@@ -642,9 +661,9 @@ function em_locate_template( $template_name, $load=false, $args = array() ) {
 			$located = EM_DIR.'/templates/'.$template_name;
 		}
 	}
-	$located = apply_filters('em_locate_template', $located, $template_name, $load, $args);
+	$located = apply_filters('em_locate_template', $located, $template_name, $load, $the_args);
 	if( $located && $load ){
-		if( is_array($args) ) extract($args);
+		if( is_array($the_args) ) extract($the_args);
 		include($located);
 	}
 	return $located;

@@ -195,7 +195,7 @@ class GetPoP_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_P
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 
 		$details = array(
 			GD_TEMPLATE_BLOCK_WHOWEARE_SCROLL_DETAILS,
@@ -234,7 +234,7 @@ class GetPoP_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_P
 			return __('Map', 'getpop-processors');
 		}
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 
 	function init_atts_blockgroup_block($blockgroup, $blockgroup_block, &$blockgroup_block_atts, $blockgroup_atts) {

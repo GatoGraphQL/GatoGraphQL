@@ -32,16 +32,27 @@ body.sliding .loading-screen {
     background-color: #fcf9eb;
 }
 body.sliding .background-screen { 
-  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
+body.sliding.getpop .background-screen { 
+  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
+  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;
+}
 @media (min-width: 1440px) {
   body.sliding .background-screen { 
     background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png);
+  }
+}
+body.sliding.getpop-demo .background-screen { 
+  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
+  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;
+}
+@media (min-width: 1440px) {
+  body.sliding.getpop-demo .background-screen { 
+    background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png);
   }
 }
 

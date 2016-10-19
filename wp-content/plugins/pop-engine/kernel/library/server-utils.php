@@ -8,8 +8,8 @@
 class PoP_ServerUtils {
 
 	// Counter: cannot start with a number, or the id will get confused
-	// First number is 9, when we increase for first time it will be 10, that is "a" in base 36
-	protected static $templatedefinition_counter = 9;
+	// First number is 10, that is "a" in base 36
+	protected static $templatedefinition_counter = 10;
 	
 	/**
 	 * Function used to create a definition for a template. Needed for reducing the filesize of the html generated for PROD
@@ -32,31 +32,45 @@ class PoP_ServerUtils {
 			return $template_id;
 		}
 
-		// Increase the counter by 1.
-		self::$templatedefinition_counter++;
+		// Comment Leo: Fix here! The array should be injectable, each plug-in should add its reserved names
+		// Reserved definitions: those which are used with the mirroring, and which can conflict with a generated definition
+		// Eg: define ('GD_TEMPLATE_FORMCOMPONENT_COMMENTID', PoP_ServerUtils::get_template_definition('cid', true));
+		$reserved = array(
+			'pid', // post id
+			'uid', // user id
+			'lid', // location id
+			'cid', // comment id
+			'tag',
+		);
+		do {
 
-		// If we reach a number whose base 36 conversion starts with a number, and not a letter, then skip
-		if (self::$templatedefinition_counter == 36) {
+			// Convert the number to base 36 to save chars
+			$counter = base_convert(self::$templatedefinition_counter, 10, 36);
 
-			// 36 in base 10 = 10 in base 36
-			// 360 in base 10 = a0 in base 36
-			self::$templatedefinition_counter = 360;
-		}
-		elseif (self::$templatedefinition_counter == 1296) {
+			// Increase the counter by 1.
+			self::$templatedefinition_counter++;
 
-			// 1296 in base 10 = 100 in base 36
-			// 12960 in base 10 = a00 in base 36
-			self::$templatedefinition_counter = 12960;
-		}
-		elseif (self::$templatedefinition_counter == 46656) {
+			// If we reach a number whose base 36 conversion starts with a number, and not a letter, then skip
+			if (self::$templatedefinition_counter == 36) {
 
-			// 46656 in base 10 = 1000 in base 36
-			// 466560 in base 10 = a000 in base 36
-			self::$templatedefinition_counter = 466560;
-		}
+				// 36 in base 10 = 10 in base 36
+				// 360 in base 10 = a0 in base 36
+				self::$templatedefinition_counter = 360;
+			}
+			elseif (self::$templatedefinition_counter == 1296) {
 
-		// Convert the number to base 36 to save chars
-		$counter = base_convert(self::$templatedefinition_counter, 10, 36);
+				// 1296 in base 10 = 100 in base 36
+				// 12960 in base 10 = a00 in base 36
+				self::$templatedefinition_counter = 12960;
+			}
+			elseif (self::$templatedefinition_counter == 46656) {
+
+				// 46656 in base 10 = 1000 in base 36
+				// 466560 in base 10 = a000 in base 36
+				self::$templatedefinition_counter = 466560;
+			}
+		} 
+		while (in_array($counter, $reserved));
 
 		// Type 2: Use base36 $counter as the definition
 		if ($templatedefinition_type === 2) {

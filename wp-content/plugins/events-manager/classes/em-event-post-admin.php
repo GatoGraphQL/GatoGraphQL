@@ -122,7 +122,7 @@ class EM_Event_Post_Admin{
         		   if( key($wp_filter[$tag]) == $wp_filter_priority ) break; 
         		}while ( next($wp_filter[$tag]) !== false );
         		//save categories in case of default category
-				$EM_Event->get_categories()->save();
+        		if( get_option('dbem_categories_enabled') ) $EM_Event->get_categories()->save();
 				//continue whether all went well or not
 				if( !$get_meta || !$validate_meta || !$save_meta ){
 					//failed somewhere, set to draft, don't publish
@@ -238,7 +238,7 @@ class EM_Event_Post_Admin{
 		if(get_option('dbem_locations_enabled', true)){
 			add_meta_box('em-event-where', __('Where','events-manager'), array('EM_Event_Post_Admin','meta_box_location'),EM_POST_TYPE_EVENT, 'normal','high');
 		}
-		if( defined('WP_DEBUG') && WP_DEBUG ){
+		if( defined('WP_DEBUG') && WP_DEBUG && defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY ){
 			add_meta_box('em-event-meta', 'Event Meta (debugging only)', array('EM_Event_Post_Admin','meta_box_metadump'),EM_POST_TYPE_EVENT, 'normal','high');
 		}
 		if( get_option('dbem_rsvp_enabled', true) && $EM_Event->can_manage('manage_bookings','manage_others_bookings') ){
@@ -455,6 +455,9 @@ class EM_Event_Recurring_Post_Admin{
 		if( empty($EM_Event) && !empty($post) ){
 			$EM_Event = em_get_event($post->ID, 'post_id');
 		}
+		if( !empty($EM_Event->event_owner_anonymous) ){
+			add_meta_box('em-event-anonymous', __('Anonymous Submitter Info','events-manager'), array('EM_Event_Post_Admin','meta_box_anonymous'),'event-recurring', 'side','high');
+		}
 		add_meta_box('em-event-recurring', __('Recurrences','events-manager'), array('EM_Event_Recurring_Post_Admin','meta_box_recurrence'),'event-recurring', 'normal','high');
 		//add_meta_box('em-event-meta', 'Event Meta (debugging only)', array('EM_Event_Post_Admin','meta_box_metadump'),'event-recurring', 'normal','high');
 		add_meta_box('em-event-where', __('Where','events-manager'), array('EM_Event_Post_Admin','meta_box_location'),'event-recurring', 'normal','high');
@@ -467,7 +470,7 @@ class EM_Event_Recurring_Post_Admin{
 		if( EM_MS_GLOBAL && !is_main_site() && get_option('dbem_categories_enabled') ){
 			add_meta_box('em-event-categories', __('Site Categories','events-manager'), array('EM_Event_Post_Admin','meta_box_ms_categories'),'event-recurring', 'side','low');
 		}
-		if( defined('WP_DEBUG') && WP_DEBUG ){
+		if( defined('WP_DEBUG') && WP_DEBUG && defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY ){
 		    add_meta_box('em-event-meta', 'Event Meta (debugging only)', array('EM_Event_Post_Admin','meta_box_metadump'),'event-recurring', 'normal','high');
 		}
 	}

@@ -473,7 +473,7 @@ msgstr "ID"
 
 #: template-tags.php:136
 msgid " and "
-msgstr "und"
+msgstr " und "
 
 #: co-authors-plus.php:342
 msgid "<strong>Note:</strong> To edit post authors, please enable javascript or use a javascript-capable browser"

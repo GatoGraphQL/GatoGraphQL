@@ -5,8 +5,14 @@
      *
      */
     class EM_Notices implements Iterator {
-    	var $set_cookies = true;
-        var $notices = array('errors'=>array(), 'infos'=>array(), 'alerts'=>array(), 'confirms'=>array());
+    	/**
+    	 * If object has been displayed, this gets set to true, can be checked to avoid duplicates.
+    	 * @var boolean
+    	 * @since 5.5.7
+    	 */
+    	public $displayed = false;
+    	public $set_cookies = true;
+		public $notices = array('errors'=>array(), 'infos'=>array(), 'alerts'=>array(), 'confirms'=>array());
         
         function __construct( $set_cookies = true ){
         	//Grab from cookie, if it exists
@@ -57,6 +63,7 @@
             if(count($this->notices['confirms']) > 0){
                 $string .= "<div class='em-warning em-warning-confirms updated'>{$this->get_confirms()}</div>";
             }
+            $this->displayed = true;
             return ($string !== false) ? "<div class='statusnotice'>".$string."</div>" : '';
         }
         

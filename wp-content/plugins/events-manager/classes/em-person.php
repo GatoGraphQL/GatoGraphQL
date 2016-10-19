@@ -24,7 +24,7 @@ class EM_Person extends WP_User{
 		}else{
 			parent::__construct($person_id);
 		}
-		$this->phone = wp_kses_data(get_metadata('user', $this->ID, 'dbem_phone', true)); //extra field for EM
+		$this->phone = get_metadata('user', $this->ID, 'dbem_phone', true); //extra field for EM
 		do_action('em_person',$this, $person_id, $username);
 	}
 	

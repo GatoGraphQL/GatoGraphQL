@@ -71,6 +71,7 @@ add_action( 'xprofile_screen_display_profile', 'bp_em_remove_screen_notification
  */
 function bp_em_add_booking_notification($result, $EM_Booking){
 	global $bp;
+	if( !function_exists('bp_notifications_add_notification') ) return $result; //no need if notifications are disabled
 	if( get_option('dbem_bookings_approval') && $EM_Booking->get_status() == 0 ){
 		$action = 'pending_booking';
 	}elseif( $EM_Booking->get_status() == 1 || (get_option('dbem_bookings_approval') && $EM_Booking->get_status() == 0) ){

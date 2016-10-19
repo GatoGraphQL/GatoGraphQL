@@ -5,6 +5,8 @@ $import = false;
 
 // which form are we submitting (uses nonce for security and identification)
 if ( isset( $_POST['_general_default'] ) ) {
+	check_admin_referer('update-default-opts', '_general_default');
+
 	// updating default profile
 	$tabid = "gentab";
 	
@@ -15,6 +17,9 @@ if ( isset( $_POST['_general_default'] ) ) {
 		gde_show_msg( __('Unable to update profile.', 'google-document-embedder'), true );
 	}
 } elseif ( isset( $_POST['_profiles_new'] ) ) {
+
+	check_admin_referer('update-profile-opts', '_profile_edit');
+
 	// new profile creation
 	global $wpdb;
 	$tabid = "protab";
@@ -72,6 +77,9 @@ if ( isset( $_POST['_general_default'] ) ) {
 		$noload = "gentab";
 	}
 } elseif ( isset( $_POST['_advanced'] ) ) {
+
+	check_admin_referer('update-adv-opts', '_advanced');
+
 	// updated advanced options (global)
 	$tabid = "advtab";
 	
@@ -118,32 +126,6 @@ if ( isset( $_POST['_general_default'] ) ) {
 	} else {
 		gde_show_msg( __('Settings <strong>updated</strong>.', 'google-document-embedder') );	// not true, but avoids confusion in case where no changes were made
 		gde_dx_log('Settings update failed - maybe no changes');
-	}
-} elseif ( isset( $_POST['_advanced_import'] ) ) {
-	$valid = false;
-	
-	// check import file validity
-	if ( isset( $_FILES['import'] ) && ! empty( $_FILES['import'] ) ) {
-		if ( $_FILES['import']['size'] > 0  && is_uploaded_file( $_FILES['import']['tmp_name'] ) && preg_match( '/json$/i', $_FILES['import']['name'] ) ) {
-			// file OK, check for json content
-			$json = json_decode( file_get_contents( $_FILES['import']['tmp_name'] ), true );
-			if ( $json !== null && is_array( $json ) ) {
-				// check for supported content
-				if ( isset( $json['profiles'] ) || isset( $json['settings'] ) || isset( $json[0]['profile_id'] ) || isset( $json['ed_disable'] ) ) {
-					$valid = true;
-				}
-			}
-		}
-	}
-	
-	if ( ! $valid ) {
-		$tabid = "advtab";
-		gde_show_msg( __('Please select a valid export file to import.', 'google-document-embedder'), true );
-	} else {
-		// process and import
-		$import = true;
-		$noload = "gentab";
-		gde_import( $json );
 	}
 }
 

@@ -24,11 +24,12 @@ class CoAuthors_Template_Filters {
 	}
 
 	function filter_the_author_rss( $the_author ) {
-		if ( !is_feed() || !function_exists( 'coauthors' ) )
+		if ( ! is_feed() || ! function_exists( 'coauthors' ) ) {
 			return $the_author;
+		}
 
-		$coauthors = (array)get_coauthors();
-		if( count($coauthors) >= 1 && isset($coauthors[0]->display_name) ) {
+		$coauthors = (array) get_coauthors();
+		if ( count( $coauthors ) >= 1 && isset( $coauthors[0]->display_name ) ) {
 			return $coauthors[0]->display_name;
 		} else {
 			return $the_author;
@@ -39,11 +40,10 @@ class CoAuthors_Template_Filters {
 		$coauthors = get_coauthors();
 
 		// remove the first guest author who is added to the first dc:creator element
-		array_shift($coauthors);
+		array_shift( $coauthors );
 
-		foreach( $coauthors as $coauthor ) {
-			echo "		<dc:creator><![CDATA[" . $coauthor->display_name . "]]></dc:creator>\n";
+		foreach ( $coauthors as $coauthor ) {
+			echo '      <dc:creator><![CDATA[' . esc_html( $coauthor->display_name ) . "]]></dc:creator>\n";
 		}
 	}
-
 }

@@ -7,7 +7,7 @@
 
 class GD_URE_Template_Processor_MemberTagsLayoutsBase extends GD_Template_ProcessorBase {
 
-	function get_template_source($template_id) {
+	function get_template_source($template_id, $atts) {
 	
 		return GD_TEMPLATESOURCE_LAYOUTUSER_MEMBERTAGS;
 	}

@@ -76,7 +76,7 @@ function em_init_actions() {
 				}else{
 					$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_anonymous_result_success')), true);
 				}
-				$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : wp_get_referer();
+				$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : em_wp_get_referer();
 				$redirect = em_add_get_params($redirect, array('success'=>1), false, false);
 				wp_redirect( $redirect );
 				exit();
@@ -89,7 +89,7 @@ function em_init_actions() {
 			$event = $EM_Event->duplicate();
 			if( $event === false ){
 				$EM_Notices->add_error($EM_Event->errors, true);
-				wp_redirect( wp_get_referer() );
+				wp_redirect( em_wp_get_referer() );
 			}else{
 				$EM_Notices->add_confirm($EM_Event->feedback_message, true);
 				wp_redirect( $event->get_edit_url() );
@@ -112,7 +112,7 @@ function em_init_actions() {
 				$message = ( !empty($EM_Event->errors) ) ? $EM_Event->errors : sprintf(__('%s could not be deleted.','events-manager'),$plural);
 				$EM_Notices->add_error( $message, true );		
 			}
-			wp_redirect( wp_get_referer() );
+			wp_redirect( em_wp_get_referer() );
 			exit();
 		}elseif( $_REQUEST['action'] == 'event_detach' && wp_verify_nonce($_REQUEST['_wpnonce'],'event_detach_'.get_current_user_id().'_'.$EM_Event->event_id) ){ 
 			//Detach event and move on
@@ -121,7 +121,7 @@ function em_init_actions() {
 			}else{
 				$EM_Notices->add_error( $EM_Event->errors, true );			
 			}
-			wp_redirect(wp_get_referer());
+			wp_redirect(em_wp_get_referer());
 			exit();
 		}elseif( $_REQUEST['action'] == 'event_attach' && !empty($_REQUEST['undo_id']) && wp_verify_nonce($_REQUEST['_wpnonce'],'event_attach_'.get_current_user_id().'_'.$EM_Event->event_id) ){ 
 			//Detach event and move on
@@ -130,7 +130,7 @@ function em_init_actions() {
 			}else{
 				$EM_Notices->add_error( $EM_Event->errors, true );
 			}
-			wp_redirect(wp_get_referer());
+			wp_redirect(em_wp_get_referer());
 			exit();
 		}
 		
@@ -161,7 +161,7 @@ function em_init_actions() {
 			//Grab and validate submitted data
 			if ( $EM_Location->get_post() && $EM_Location->save() ) { //EM_location gets the location if submitted via POST and validates it (safer than to depend on JS)
 				$EM_Notices->add_confirm($EM_Location->feedback_message, true);
-				$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : wp_get_referer();
+				$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : em_wp_get_referer();
 				wp_redirect( $redirect );
 				exit();
 			}else{
@@ -202,7 +202,7 @@ function em_init_actions() {
 					$location_cond = " AND location_private=0";		    
 				}
 				$location_cond = apply_filters('em_actions_locations_search_cond', $location_cond);
-				$term = (isset($_REQUEST['term'])) ? '%'.$_REQUEST['term'].'%' : '%'.$_REQUEST['q'].'%';
+				$term = (isset($_REQUEST['term'])) ? '%'.$wpdb->esc_like(wp_unslash($_REQUEST['term'])).'%' : '%'.$wpdb->esc_like(wp_unslash($_REQUEST['q'])).'%';
 				$sql = $wpdb->prepare("
 					SELECT 
 						location_id AS `id`,
@@ -378,7 +378,7 @@ function em_init_actions() {
 			if( $EM_Booking->can_manage('manage_bookings','manage_others_bookings') ){
 				if ($EM_Booking->get_post(true) && $EM_Booking->validate(true) && $EM_Booking->save(false) ){
 					$EM_Notices->add_confirm( $EM_Booking->feedback_message, true );
-					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : wp_get_referer();
+					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : em_wp_get_referer();
 					wp_redirect( $redirect );
 					exit();
 				}else{
@@ -403,7 +403,7 @@ function em_init_actions() {
 						}
 					}
 					$EM_Notices->add_confirm( $EM_Booking->feedback_message, true );
-					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : wp_get_referer();
+					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : em_wp_get_referer();
 					wp_redirect( $redirect );
 					exit();
 				}else{
@@ -421,7 +421,7 @@ function em_init_actions() {
 				    }else{
 				        $EM_Notices->add_confirm( _x('No emails to send for this booking.', 'bookings', 'events-manager'), true );
 				    }
-					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : wp_get_referer();
+					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : em_wp_get_referer();
 					wp_redirect( $redirect );
 					exit();
 				}else{
@@ -440,7 +440,7 @@ function em_init_actions() {
 			    	$wpdb->update(EM_BOOKINGS_TABLE, array('booking_meta'=> serialize($EM_Booking->booking_meta)), array('booking_id'=>$EM_Booking->booking_id))
 				){
 					$EM_Notices->add_confirm( $EM_Booking->feedback_message, true );
-					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : wp_get_referer();
+					$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : em_wp_get_referer();
 					wp_redirect( $redirect );
 					exit();
 				}else{
@@ -450,7 +450,18 @@ function em_init_actions() {
 				}	
 			}
 			do_action('em_booking_modify_person', $EM_Event, $EM_Booking);
+		}elseif( $_REQUEST['action'] == 'bookings_add_note' && $EM_Booking->can_manage('manage_bookings','manage_others_bookings') ) {
+			em_verify_nonce('bookings_add_note');
+			if( $EM_Booking->add_note(wp_unslash($_REQUEST['booking_note'])) ){
+				$EM_Notices->add_confirm($EM_Booking->feedback_message, true);
+				$redirect = !empty($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : em_wp_get_referer();
+				wp_redirect( $redirect );
+				exit();
+			}else{
+				$EM_Notices->add_error($EM_Booking->errors);
+			}
 		}
+	
 		if( $result && defined('DOING_AJAX') ){
 			$return = array('result'=>true, 'message'=>$feedback);
 			header( 'Content-Type: application/javascript; charset=UTF-8', true ); //add this for HTTP -> HTTPS requests which assume it's a cross-site request

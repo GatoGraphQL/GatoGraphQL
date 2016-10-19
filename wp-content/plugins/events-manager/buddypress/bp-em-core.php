@@ -269,7 +269,7 @@ class BP_EM_Component extends BP_Component {
 				'screen_function' => 'bp_em_group_events', 
 				'position' => 50, 
 				'user_has_access' => $user_access, 
-				'item_css_id' => 'forums' 
+				'item_css_id' => 'events' 
 			));
 		}
 	}

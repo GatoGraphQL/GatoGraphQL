@@ -125,10 +125,10 @@ function em_ms_admin_options_page() {
 	<style type="text/css">.postbox h3 { cursor:pointer; }</style>
 	<div class="wrap">		
 		<div id='icon-options-general' class='icon32'><br /></div>
+		<h1 id="em-options-title"><?php _e ( 'Event Manager Options', 'events-manager'); ?></h1>
 		<h2 class="nav-tab-wrapper">
 			<a href="#" id="em-menu-general" class="nav-tab nav-tab-active"><?php esc_html_e('General','events-manager'); ?></a>
 		</h2>
-		<h3 id="em-options-title"><?php _e ( 'Event Manager Options', 'events-manager'); ?></h3>
 		<?php echo $EM_Notices; ?>
 		<form id="em-options-form" method="post" action="">
 			<div class="metabox-holder">         

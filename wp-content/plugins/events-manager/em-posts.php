@@ -24,8 +24,8 @@ function wp_events_plugin_after_setup_theme(){
 		global $_wp_theme_features;
 		if( !empty($_wp_theme_features['post-thumbnails']) ){
 			//either leave as true, or add our cpts to this
-			if( is_array($_wp_theme_features['post-thumbnails']) ){
-				$post_thumbnails = array_shift($_wp_theme_features['post-thumbnails']);
+			if( !empty($_wp_theme_features['post-thumbnails'][0]) && is_array($_wp_theme_features['post-thumbnails'][0]) ){
+				$post_thumbnails = $_wp_theme_features['post-thumbnails'][0];
 				//add to featured image post types for specific themes
 				$post_thumbnails[] = EM_POST_TYPE_EVENT;
 				$post_thumbnails[] = 'event-recurring';
@@ -33,7 +33,8 @@ function wp_events_plugin_after_setup_theme(){
 				add_theme_support('post-thumbnails', $post_thumbnails);
 			}
 		}else{
-			add_theme_support('post-thumbnails'); //need to add this for themes that don't have it. 
+			$post_thumbnails = array(EM_POST_TYPE_EVENT, 'event-recurring', EM_POST_TYPE_LOCATION);
+			add_theme_support('post-thumbnails', $post_thumbnails); //need to add this for themes that don't have it. 
 		}
 	}
 }

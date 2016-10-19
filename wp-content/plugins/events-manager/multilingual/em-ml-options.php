@@ -227,7 +227,7 @@ class EM_ML_Options {
 	public static function get_option($option, $lang = false, $return_original = true){
 		if( self::is_option_translatable($option) ){
 			$option_langs = get_option($option.'_ml', array());
-			if( empty($lang) ) $lang = self::$current_language;
+			if( empty($lang) ) $lang = EM_ML::$current_language;
 			if( !empty($option_langs[$lang]) ){
 				return $option_langs[$lang];
 			}

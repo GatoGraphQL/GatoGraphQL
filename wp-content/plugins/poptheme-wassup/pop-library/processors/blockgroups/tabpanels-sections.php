@@ -654,7 +654,7 @@ class GD_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Proce
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 	// function get_panel_header_tooltip($blockgroup, $blockunit) {
 
 		$details = array(
@@ -779,7 +779,7 @@ class GD_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Proce
 		// 	return __('View/Preview', 'poptheme-wassup');
 		// }
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 
 	function init_atts($template_id, &$atts) {

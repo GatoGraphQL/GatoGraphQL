@@ -1,0 +1,5984 @@
+# Translation of Events Manager in Turkish
+# This file is distributed under the same license as the Events Manager package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-12-18 15:25+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.4\n"
+"Project-Id-Version: Events Manager\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Marcus Sykes <wp.plugins@netweblogic.com>\n"
+"Language-Team: \n"
+"Language: tr_TR\n"
+
+#: templates/forms/location/where.php:6
+msgid "If you're using the Google Maps, the more detail you provide, the more accurate Google can be at finding your location. If your address isn't being found, please <a href='http://maps.google.com'>try it on maps.google.com</a> by adding all the fields below separated by commas."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:172 admin/settings/tabs/formats.php:180
+msgid "Events with multiple dates will appear on each of those dates in the calendar."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:132
+msgid "By default, events that have an end date later than today will be included in searches, set this to yes to consider events that started 'yesterday' as past."
+msgstr ""
+
+#: classes/em-categories-taxonomy.php:53
+msgid "Color"
+msgstr ""
+
+#: classes/em-categories-taxonomy.php:61
+msgid "Image"
+msgstr ""
+
+#: classes/em-object.php:1441
+msgid "There was an error uploading the image."
+msgstr ""
+
+#: multilingual/em-ml-admin.php:24 multilingual/em-ml-admin.php:33
+msgid "Translated Event Information"
+msgstr ""
+
+#: multilingual/em-ml-admin.php:52
+msgid "This is a translated event, therefore your time, location and booking information is handled by your original event translation."
+msgstr ""
+
+#: multilingual/em-ml-admin.php:53 multilingual/em-ml-admin.php:70
+msgid "See original translation."
+msgstr ""
+
+#: multilingual/em-ml-admin.php:69
+msgid "This is a translated event, therefore address information is handled by the original location translation."
+msgstr ""
+
+#: multilingual/em-ml-admin.php:81
+msgid "Below are translations for your tickets. If left blank, the language of the original event will be used."
+msgstr ""
+
+#: admin/settings/tabs/general.php:200
+msgid "Disable  WordPress Thumbnails?"
+msgstr ""
+
+#: admin/settings/tabs/general.php:200
+msgid "If set to yes, full sized images will be used and HTML width and height attributes will be used to determine the size."
+msgstr ""
+
+#: admin/settings/tabs/general.php:200
+msgid "Setting this to yes will also make your images crop efficiently with the %s feature in the %s plugin."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:30
+msgid "This is sent when a person's booking is pending. If approvals are enabled, this is sent out when a user first submits their booking."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:46
+msgid "This will be sent to event admins when a booking is rejected."
+msgstr ""
+
+#: em-install.php:334
+msgid "Now there are #_BOOKEDSPACES spaces reserved, #_AVAILABLESPACES are still available."
+msgstr ""
+
+#: em-install.php:340 em-install.php:341 em-install.php:342 em-install.php:343
+msgid "The following booking is %s :"
+msgstr ""
+
+#: admin/em-bookings.php:467
+msgctxt "[Date] - [Name] wrote"
+msgid "%1$s - %2$s wrote"
+msgstr ""
+
+#: admin/settings/tabs/general.php:66
+msgid "Select yes to select location from a drop-down menu; location selection will be faster, but you will lose the ability to insert locations with events"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:37 admin/settings/tabs/formats.php:263
+#: admin/settings/tabs/pages.php:131 admin/settings/tabs/pages.php:282
+msgid "Override Excerpts with Formats?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:26 admin/settings/tabs/formats.php:252
+msgid "These formats can be used on %s pages or on other areas of your site displaying an %s."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:30 admin/settings/tabs/formats.php:256
+msgid "The format of a single %s page title."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:32
+msgid "The format used to display %s content on single pages or elsewhere on your site."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:36 admin/settings/tabs/formats.php:262
+msgid "%s Excerpts"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:37 admin/settings/tabs/formats.php:263
+msgid "These formats can be used when WordPress automatically displays %s excerpts on your site and %s is enabled in your %s settings tab."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:41 admin/settings/tabs/formats.php:267
+msgid "%s excerpt"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:41 admin/settings/tabs/formats.php:267
+msgid "Used if an excerpt has been defined."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:42 admin/settings/tabs/formats.php:268
+msgid "%s excerpt fallback"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:42 admin/settings/tabs/formats.php:268
+msgid "Used if an excerpt has not been defined."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:67
+msgid "Enter a number."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:102
+msgid "Distance Values"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:102
+msgid "The numerical units shown to those searching by distance. Use comma-separated numbers, such as \"25,50,100\"."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:258 admin/settings/tabs/formats.php:309
+#: admin/settings/tabs/formats.php:347
+msgid "The format of a single %s page."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:11
+msgid "This setting is not applicable when using payment gateways, see individual gateways for approval settings."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:161
+msgid "Event Reapproved"
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:31
+msgid "If you enable tips, this information will be shown, which can include HTML."
+msgstr ""
+
+#: classes/em-event.php:619
+msgid "Please specify what days of the week this event should occur on."
+msgstr ""
+
+#: templates/emails/bookingsummary.php:13 templates/emails/bookingtickets.php:7
+msgid "Quantity"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:50
+#: templates/forms/event/bookings-ticket-form.php:51
+#: templates/forms/event/bookings-ticket-form.php:69
+#: templates/forms/event/bookings-ticket-form.php:70
+#: templates/forms/event/bookings.php:145
+#: templates/forms/event/bookings.php:146
+msgctxt "before or after"
+msgid "%s the event starts"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:50
+#: templates/forms/event/bookings-ticket-form.php:69
+#: templates/forms/event/bookings.php:145
+msgid "Before"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:51
+#: templates/forms/event/bookings-ticket-form.php:70
+#: templates/forms/event/bookings.php:146
+msgid "After"
+msgstr ""
+
+#: templates/forms/event/bookings.php:148
+msgid "at"
+msgstr ""
+
+#: templates/forms/event-editor.php:109 templates/forms/location-editor.php:65
+msgid "Submit %s"
+msgstr ""
+
+#: templates/forms/event-editor.php:111 templates/forms/location-editor.php:67
+msgid "Update %s"
+msgstr ""
+
+#: widgets/em-events.php:179 widgets/em-locations.php:118
+msgid "The list is wrapped in a %s tag, so if an %s tag is not wrapping the formats below it will be added automatically."
+msgstr ""
+
+#: widgets/em-locations.php:124
+msgid "No Locations message"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:111
+msgid "In single ticket mode, users can only create one ticket per event (and will not see options to add more tickets)."
+msgstr ""
+
+#: admin/em-options.php:370
+msgid "The maximum allowed width for images uploads"
+msgstr ""
+
+#: admin/em-options.php:371
+msgid "The minimum allowed width for images uploads"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:15
+msgid "Events page grouping header"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:15
+msgid "Choose how to format your group headings."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:15
+msgid "#s will be replaced by the date format below"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:16
+msgid "Events page grouping date format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:16
+msgid "Choose how to format your group heading dates. Leave blank for default."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:30
+msgid "This is only used when showing events from other blogs."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:67
+msgid "Default distance"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:68
+msgid "Default distance unit"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:100
+msgid "Show distance options?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:107
+msgid "Default Country"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:107
+msgid "Search form will be pre-selected with this country, if searching by country is disabled above, only search results from this country will be returned."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:297
+msgid "Default %s color"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:380
+msgid "RSS Scope"
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:13
+msgid "If you choose the Event post type whilst Events Manager is activated, you can also visit the <a href=\"%s\">Events Manager settings page</a> for a few more options when displaying event information on your calendar."
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:22
+msgid "Full Calendar Options"
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:24
+msgid "Looking for the rest of the FullCalendar Options? They've moved <a href=\"%s\">here</a>, the options below are for overriding specific bits relevant to Events Manager."
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:28
+msgid "Override calendar on events page?"
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:28
+msgid "If set to yes, the FullCalendar will be used instead of the standard calendar on the events page."
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:29
+msgid "Override calendar shortcode?"
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:29
+msgid "Overrides the default calendar shortcode. You can also use [events_fullcalendar] instead."
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:30
+msgid "Event title format"
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:30
+msgid "HTML is not accepted."
+msgstr ""
+
+#: admin/settings/wpfc-admin.php:31
+msgid "Event tooltips format"
+msgstr ""
+
+#: classes/em-categories-taxonomy.php:70
+msgid "Remove Image"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:115
+msgctxt "events"
+msgid "Future <span class=\"count\">(%s)</span>"
+msgid_plural "Future <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: em-install.php:378
+msgid "Within"
+msgstr ""
+
+#: templates/templates/search/geo.php:13
+msgid "We are going to use %s for searching."
+msgstr ""
+
+#: templates/templates/search/geo.php:13
+msgid "If this is incorrect, click cancel and try a more specific address."
+msgstr ""
+
+#: admin/em-help.php:33
+msgid "Tag Related Placeholders"
+msgstr ""
+
+#: admin/em-options.php:21 admin/settings/tabs/formats.php:297
+msgctxt "hex format"
+msgid "Colors must be in a valid %s format, such as #FF00EE."
+msgstr ""
+
+#: admin/em-options.php:21
+msgid "This setting was not changed."
+msgstr ""
+
+#: admin/settings/tabs/general.php:42
+msgid "Please enter your Location ID, or leave blank for no location."
+msgstr ""
+
+#: admin/settings/tabs/general.php:50
+msgid "Please enter your Location ID."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:149 admin/settings/tabs/general.php:111
+msgid "Please add a User ID."
+msgstr ""
+
+#: admin/settings/tabs/general.php:227
+msgid "Styling Options"
+msgstr ""
+
+#: admin/settings/tabs/general.php:230
+msgid "Events Manager imposes a minimal amount of styling on websites so that your themes can take over."
+msgstr ""
+
+#: admin/settings/tabs/general.php:231
+msgid "Below are some additional options for individual pages and sections, which you can turn on to enforce custom styling provided by the plugin or off if you want to do your own custom styling."
+msgstr ""
+
+#: admin/settings/tabs/general.php:235
+msgid "Search forms"
+msgstr ""
+
+#: admin/settings/tabs/general.php:239
+msgid "Event/Location admin pages"
+msgstr ""
+
+#: admin/settings/tabs/general.php:240
+msgid "Booking admin pages"
+msgstr ""
+
+#: admin/settings/tabs/general.php:241
+msgid "Events list page"
+msgstr ""
+
+#: admin/settings/tabs/general.php:242
+msgid "Locations list page"
+msgstr ""
+
+#: admin/settings/tabs/general.php:243
+msgid "Event booking forms"
+msgstr ""
+
+#: admin/settings/tabs/general.php:244
+msgid "Categories list page"
+msgstr ""
+
+#: admin/settings/tabs/general.php:245
+msgid "Tags list page"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:225
+msgid "Show locations search?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:225
+msgid "If set to yes, a search form will appear just above your list of locations."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:551
+msgid "This page is where people that have made bookings for an event can go and view their previous bookings."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:600
+msgid "Users with the relevant permissions can manage their own events and bookings to these events on the following pages."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:54
+msgid "Main Search Fields"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:59 admin/settings/tabs/formats.php:66
+#: admin/settings/tabs/formats.php:89 admin/settings/tabs/formats.php:95
+#: admin/settings/tabs/formats.php:101 admin/settings/tabs/formats.php:108
+#: admin/settings/tabs/formats.php:114 admin/settings/tabs/formats.php:120
+#: admin/settings/tabs/formats.php:126
+msgid "Label"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:63 admin/settings/tabs/formats.php:98
+msgid "Geolocation Search"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:65
+msgid "Show geolocation search?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:73
+msgid "Advanced Search Fields"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:75
+msgid "Enable advanced fields?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:75
+msgid "Enables additional advanced search fields such as dates, country, etc."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:79
+msgid "If there's no fields to show in the main search section, this button will be used instead at the bottom of the advanced fields."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:80
+msgid "Hidden by default?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:80
+msgid "If set to yes, advanced search fields will be hidden by default and can be revealed by clicking the \"Advanced Search\" link."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:81
+msgid "Show label"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:81 admin/settings/tabs/formats.php:82
+#: admin/settings/tabs/formats.php:89 admin/settings/tabs/formats.php:95
+#: admin/settings/tabs/formats.php:101 admin/settings/tabs/formats.php:108
+#: admin/settings/tabs/formats.php:114 admin/settings/tabs/formats.php:120
+#: admin/settings/tabs/formats.php:126
+msgid "Appears as the label for this search option."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:82
+msgid "Hide label"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:86 em-install.php:383
+msgid "Dates"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:96
+msgid "Categories dropdown label"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:111 em-install.php:394
+msgid "Region"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:117 em-install.php:397
+msgid "State/County"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:123 em-install.php:400
+msgid "City/Town"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:70
+msgid "Maximum spaces per booking"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:70
+msgid "If the user tries to make a booking with spaces that exceeds the maximum number of spaces per booking."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:70
+msgid "%d will be replaced by a number."
+msgstr ""
+
+#: admin/em-options.php:395
+msgid "edit"
+msgstr ""
+
+#: em-install.php:371
+msgid "Show Advanced Search"
+msgstr ""
+
+#: em-install.php:372
+msgid "Hide Advanced Search"
+msgstr ""
+
+#: em-install.php:376
+msgid "Near..."
+msgstr ""
+
+#: em-install.php:663
+msgid "You cannot book more than %d spaces for this event."
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:28
+msgctxt "spaces per booking"
+msgid "At least"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:30
+#: templates/forms/event/bookings-ticket-form.php:35
+msgid "spaces per booking"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:33
+msgctxt "spaces per booking"
+msgid "At most"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:54
+#: templates/forms/event/bookings-ticket-form.php:73
+msgctxt "time"
+msgid "at"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:59
+msgid "Available until"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:84
+msgid "Available for"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:86
+msgid "Everyone"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:87
+msgid "Logged In Users"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:88
+msgid "Guest Users"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:92
+msgid "Restrict to"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:107
+msgid "Show Advanced Options"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:107
+msgid "Hide Advanced Options"
+msgstr ""
+
+#: templates/forms/event/bookings.php:21
+msgid "Ticket Options"
+msgstr ""
+
+#: templates/forms/event/bookings.php:105
+msgid "Close Ticket Editor"
+msgstr ""
+
+#: templates/forms/event/bookings.php:122
+msgid "Event Options"
+msgstr ""
+
+#: templates/forms/event/bookings.php:129
+msgid "Maximum Spaces Per Booking"
+msgstr ""
+
+#: templates/forms/event/bookings.php:131
+msgid "If set, the total number of spaces for a single booking to this event cannot exceed this amount."
+msgstr ""
+
+#: templates/forms/event/bookings.php:131
+msgid "Leave blank for no limit."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:379
+msgid "RSS limit"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:445
+msgid "Default map width"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:445 admin/settings/tabs/formats.php:446
+msgid "Can be in form of pixels or a percentage such as %s or %s."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:446
+msgid "Default map height"
+msgstr ""
+
+#: admin/em-options.php:367
+msgid "These settings will only apply to the image uploading if using our front-end forms. In your WP admin area, images are handled by WordPress."
+msgstr ""
+
+#: em-install.php:504 em-install.php:526 em-install.php:546
+msgid "Upcoming Events"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:76
+msgid "Note that assigning a %s page above will override this archive if the URLs collide (which is the default setting, and is recommended for maximum plugin compatibility). You can have both at the same time, but you must ensure that your page and %s slugs are different."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:231
+msgid "Note that assigning a %s page above will override this archive if the URLs collide (which is the default settings, and is recommended for maximum plugin compatibility). You can have both at the same time, but you must ensure that your page and %s slugs are different."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:167 admin/settings/tabs/formats.php:176
+msgid "Month format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:167 admin/settings/tabs/formats.php:176
+msgid "The format of the month/year header of the calendar."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:227
+msgid "iCal Description"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:227
+msgid "The description of the event that will appear in the calendar."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:228
+msgid "iCal Location"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:228
+msgid "The location information that will appear in the calendar."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:114
+msgid "Show member-only tickets?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:114
+msgid "%s must be set to yes for this to work."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:114
+msgid "If there are member-only tickets, you can choose whether or not to show these tickets to guests."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:116
+msgid "If guests cannot make bookings, they will be asked to register in order to book. However, enabling this will still show available tickets."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:97
+msgid "Registration Email Templates"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:100
+msgid "This is only applicable when %s is not active."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:101
+msgid "When a guest user makes a booking for the first time in Events Manager, a new user account is created for them and they are sent their credentials in a separate email, which can be modified below."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:107
+msgid "Registration email subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:108
+msgid "Registration email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:108
+msgid "%s is replaced by username and %s is replaced by the user password."
+msgstr ""
+
+#: em-install.php:347
+msgid "You have successfully created an account at %s"
+msgstr ""
+
+#: em-install.php:348
+msgid "You can log into our site here : %s"
+msgstr ""
+
+#: em-install.php:351
+msgid "To view your bookings, please visit %s after logging in."
+msgstr ""
+
+#: templates/emails/bookingsummary.php:25
+msgid "Sub Total"
+msgstr ""
+
+#: templates/emails/bookingsummary.php:29
+msgid "Discounts Before Taxes"
+msgstr ""
+
+#: templates/emails/bookingsummary.php:38
+msgid "Taxes"
+msgstr ""
+
+#: templates/emails/bookingsummary.php:43
+msgid "Discounts (After Taxes)"
+msgstr ""
+
+#: templates/forms/event/recurring-when.php:63
+#: templates/forms/event/when-with-recurring.php:69
+msgid "Each event spans %s day(s)"
+msgstr ""
+
+#: classes/em-booking.php:805 em-actions.php:397 em-actions.php:420
+msgid "Email Sent."
+msgstr "E-posta Gönderildi."
+
+#: classes/em-booking.php:809 classes/em-booking.php:810 em-actions.php:402
+#: em-actions.php:429
+msgid "ERROR : Email Not Sent."
+msgstr "HATA: E-posta Gönderilmedi."
+
+#: em-actions.php:399 em-actions.php:422
+msgctxt "bookings"
+msgid "No emails to send for this booking."
+msgstr "Bu rezervasyon için gönderilecek e-posta yok."
+
+#: admin/settings/tabs/formats.php:229
+msgid "iCal Scope"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:10
+msgid "By using formats, you can control how your %s are displayed from within the Events Manager <a href='#formats' class='nav-tab-link' rel='#em-menu-formats'>Formatting</a> tab above without having to edit your theme files."
+msgstr "Yukarıdaki <a href='#formats' class='nav-tab-link' rel='#em-menu-formats'>Formatlama</a> tabındaki formatları kullanarak,  tema dosyalarınızı edit etmeye gerek kalmadan %s Event Manager'daki görünümlerini kontrol edebilirsiniz. "
+
+#: admin/settings/tabs/pages.php:121
+msgid "Event archives scope"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:340 admin/settings/tabs/pages.php:444
+msgid "%s are a <a href=\"%s\" target=\"_blank\">WordPress custom taxonomy</a>."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:341 admin/settings/tabs/pages.php:445
+msgid "%s can be displayed just like normal WordPress custom taxonomies in an archive-style format, however Events Manager by default allows you to completely change the standard look of these archives and use our own <a href=\"%s\">custom formatting</a> methods."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:344 admin/settings/tabs/pages.php:448
+msgid "Due to how we change how this custom taxonomy is displayed when overriding with formats it is strongly advised that you assign a %s page below, which increases compatibility with various plugins and themes."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:345 admin/settings/tabs/pages.php:449
+msgid "<a href=\"%s\">See some more information</a> on how %s work when overriding with formats."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:337 admin/settings/tabs/formats.php:339
+#: admin/settings/tabs/formats.php:340 admin/settings/tabs/formats.php:341
+#: admin/settings/tabs/formats.php:342 admin/settings/tabs/pages.php:454
+#: admin/settings/tabs/pages.php:456 em-install.php:543 em-install.php:1037
+msgid "Tags"
+msgstr "Etiketler"
+
+#: admin/settings/tabs/pages.php:528
+msgid "When listing tags, this order is applied."
+msgstr "Etiketler listelenirken bu sıra kullanılır."
+
+#: admin/settings/tabs/pages.php:533
+msgid "Controls how many events belonging to a tag are shown per page when using placeholders such as %s. Leave blank for no limit."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:229 admin/settings/tabs/formats.php:380
+msgid "Choose to show events within a specific time range."
+msgstr "Belli bir zaman aralığındaki etkinlikleri göstermek için seçin."
+
+#: admin/settings/tabs/formats.php:278 admin/settings/tabs/formats.php:319
+#: admin/settings/tabs/formats.php:357
+msgid "Single %s Format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:279 admin/settings/tabs/formats.php:320
+#: admin/settings/tabs/formats.php:358
+msgid "The settings below are used when using the %s placeholder"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:282 admin/settings/tabs/formats.php:323
+#: admin/settings/tabs/formats.php:361
+msgid "Next event format"
+msgstr "Sonraki etkinlik formatı"
+
+#: admin/settings/tabs/formats.php:282 admin/settings/tabs/formats.php:323
+#: admin/settings/tabs/formats.php:361
+msgid "The format of the next upcoming event in this %s."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:137
+msgid "Users with accounts (which would be created by other means when this mode is enabled) will still be able to log in and make bookings linked to their account as normal."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:142
+msgid "Allow bookings with registered emails?"
+msgstr "Kayıtlı e-postalarla rezervasyon yapılabilsin mi?"
+
+#: admin/settings/tabs/bookings.php:142
+msgid "By default, if a guest tries to book an event using the email of a user account on your site they will be asked to log in, selecting yes will bypass this security measure."
+msgstr "Eğer bir ziyaretçi sitenizdeki bir etkinliğe bir kullanıcı hesabının e-postası ile rezervasyon yaptırmaya çalışırsa, varsayılan olarak giriş yapması istenir, Evet seçeneği seçildiğinde bu güvenlik kuralı atlanır."
+
+#: admin/settings/tabs/bookings.php:142
+msgid "<strong>Warning : </strong> By enabling this, registered users will not be able to see bookings they make as guests in their \"My Bookings\" page."
+msgstr ""
+
+#: em-install.php:508 em-install.php:514
+msgid "No events in this location"
+msgstr "Bu mekanda etkinlik yok"
+
+#: em-install.php:547 em-install.php:552
+msgid "No events with this tag"
+msgstr "Bu etikete sahip etkinlik yok"
+
+#: templates/forms/event/group.php:40
+msgid "Select a group you admin to attach this event to it. Note that all other admins of that group can modify the booking."
+msgstr ""
+
+#: templates/forms/event/location.php:71
+msgid "Reset this form to create a location or search again."
+msgstr "Bir mekan yaratmak ya da yeniden arama yapmak için bu formu temizleyin."
+
+#: templates/tables/events.php:24
+msgid "Draft"
+msgstr "Taslak"
+
+#: admin/settings/tabs/pages.php:6
+msgid "If you choose 'Pages' then %s will be shown using your theme default page template, alternatively choose from page templates that come with your specific theme."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:8
+msgid "If you would like to add extra classes to your body html tag when a single %s page is displayed, enter it here. May be useful or necessary if your theme requires special class names for specific templates."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:9
+msgid "Same concept as the body classes option, but some themes also use the <code>post_class()</code> function within page content to differentiate styling between post types."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:11
+msgid "Theme Templates"
+msgstr "Tema Şablonları"
+
+#: admin/settings/tabs/pages.php:42 admin/settings/tabs/pages.php:201
+msgid "Body Classes"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:43 admin/settings/tabs/pages.php:202
+msgid "Post Classes"
+msgstr ""
+
+#: admin/em-bookings.php:246
+msgid "Edit Details"
+msgstr "Detayları düzenle"
+
+#: admin/settings/tabs/bookings.php:78
+msgid "Booking already made"
+msgstr "Daha önce rezervasyon yapılmıştı"
+
+#: admin/settings/tabs/emails.php:18
+msgid "Event Admin/Owner Emails"
+msgstr "Etkinlik Yöneticisi/Sahibi E-postaları"
+
+#: admin/settings/tabs/emails.php:53
+msgid "Booked User Emails"
+msgstr "Rezervasyon Yaptıran Kullanıcı E-postaları"
+
+#: admin/settings/tabs/emails.php:120
+msgid "Event Admin Emails"
+msgstr "Etkinlik Yöneticisi E-postaları"
+
+#: admin/settings/tabs/emails.php:150
+msgid "Event Submitter Emails"
+msgstr "Etkinlik Kaydedenlerin E-postaları"
+
+#: admin/em-options.php:395
+msgid "A test email will be sent to your account email - %s"
+msgstr "Hesabınızın e-posta adresine bir test e-postası gönderilecek - %s"
+
+#: classes/em-booking.php:690
+msgid "Personal details have successfully been modified."
+msgstr "Kişisel bilgileriniz başarıyla değiştirildi."
+
+#: em-install.php:668
+msgid "Already Booked"
+msgstr "Daha önce rezervasyon yapılmış"
+
+#: templates/placeholders/locationmap.php:21
+#: templates/templates/map-global.php:13
+msgid "Loading Map...."
+msgstr "Harita yükleniyor..."
+
+#: templates/placeholders/locationmap.php:35
+msgid "Map Unavailable"
+msgstr "Harita Bulunamadı"
+
+#: templates/tables/events.php:12 templates/tables/locations.php:4
+msgid "Add New"
+msgstr "Yeni Ekle"
+
+#: templates/tables/events.php:19
+msgid "Upcoming"
+msgstr "Gelecek"
+
+#: templates/tables/locations.php:13
+msgid "All %s"
+msgstr ""
+
+#: templates/tables/locations.php:88
+msgid "No locations have been inserted yet!"
+msgstr "Henüz mekan girilmedi!"
+
+#: templates/templates/bookings-event-printable.php:13
+#: templates/templates/bookings-event-printable.php:18
+msgid "Bookings for %s"
+msgstr ""
+
+#: templates/templates/bookings-event-printable.php:21
+msgid "Bookings data"
+msgstr "Rezervasyon verileri"
+
+#: templates/templates/bookings-event-printable.php:49
+msgid "Available"
+msgstr ""
+
+#: templates/templates/my-bookings.php:85
+msgid "You do not have any bookings."
+msgstr "Hiç rezervasyonunuz yok."
+
+#: templates/templates/my-bookings.php:96
+msgid "Please <a href=\"%s\">Log In</a> to view your bookings."
+msgstr "Rezervasyonlarınızı görüntülemek için lütfen <a href=\"%s\">Giriş</a> yapın."
+
+#: widgets/em-calendar.php:17
+msgid "Display your events in a calendar widget."
+msgstr "Etkinliklerinizi bir takvim widget'ında gösterin. "
+
+#: widgets/em-calendar.php:18
+msgid "Events Calendar"
+msgstr "Etkinlik Takvimi"
+
+#: widgets/em-calendar.php:60 widgets/em-events.php:113
+#: widgets/em-locations.php:84
+msgid "Title"
+msgstr "Başlık"
+
+#: admin/settings/tabs/formats.php:172 admin/settings/tabs/formats.php:180
+#: widgets/em-calendar.php:64
+msgid "Show Long Events?"
+msgstr ""
+
+#: widgets/em-calendar.php:68 widgets/em-events.php:158
+msgid "Category IDs"
+msgstr ""
+
+#: widgets/em-calendar.php:70 widgets/em-events.php:160
+msgid "1,2,3 or 2 (0 = all)"
+msgstr ""
+
+#: widgets/em-events.php:22 widgets/em-events.php:81
+msgid "all events"
+msgstr "tüm etkinlikler"
+
+#: widgets/em-events.php:23
+msgid "No events"
+msgstr "Etkinlik yok"
+
+#: widgets/em-events.php:26
+msgid "start date, start time, event name"
+msgstr "başlangıç tarihi, başlangıç saati, etkinlik adı"
+
+#: widgets/em-events.php:27
+msgid "name, start date, start time"
+msgstr "isim, başlangıç tarihi, başlangıç saati"
+
+#: widgets/em-events.php:28
+msgid "name, end date, end time"
+msgstr "isim, bitiş tarihi, bitiş saati"
+
+#: widgets/em-events.php:29
+msgid "end date, end time, event name"
+msgstr "bitiş tarihi, bitiş saati, etkinlik adı"
+
+#: widgets/em-events.php:31
+msgid "Display a list of events on Events Manager."
+msgstr "Events Manager'da etkinliklerin listesini göster "
+
+#: widgets/em-events.php:117
+msgid "Number of events"
+msgstr "Etkinlik sayısı"
+
+#: widgets/em-events.php:122
+msgid "Scope"
+msgstr ""
+
+#: widgets/em-events.php:132 widgets/em-locations.php:102
+msgid "Order By"
+msgstr ""
+
+#: widgets/em-events.php:142
+msgid "Order"
+msgstr ""
+
+#: widgets/em-events.php:181 widgets/em-locations.php:120
+msgid "List item format"
+msgstr ""
+
+#: widgets/em-events.php:163
+msgid "Show all events link at bottom?"
+msgstr "Tüm etkinliklerin linki en altta gösterilsin mi?"
+
+#: widgets/em-events.php:167
+msgid "All events link text?"
+msgstr "Tüm etkinliklere link yazısı?"
+
+#: widgets/em-locations.php:13
+msgid "Event Locations"
+msgstr "Etkinlik Mekanları"
+
+#: widgets/em-locations.php:22
+msgid "Event start date/time, location name"
+msgstr "Etkinlik başlangıç tarihi/saati, mekan adı"
+
+#: widgets/em-locations.php:25
+msgid "Display a list of event locations on Events Manager."
+msgstr "Events Manager'da etkinlik mekanlarının bir listesini göster."
+
+#: widgets/em-locations.php:18
+msgid "No locations"
+msgstr ""
+
+#: widgets/em-locations.php:88
+msgid "Show number of locations"
+msgstr "Mekan sayısını göster"
+
+#: widgets/em-locations.php:92
+msgid "Scope of the locations"
+msgstr ""
+
+#: widgets/em-locations.php:112
+msgid "Order of the locations"
+msgstr ""
+
+#: admin/bookings/em-cancelled.php:38 admin/bookings/em-cancelled.php:40
+#: admin/bookings/em-confirmed.php:39 admin/bookings/em-confirmed.php:41
+#: admin/bookings/em-pending.php:53 admin/bookings/em-pending.php:55
+#: admin/bookings/em-person.php:40 admin/bookings/em-person.php:42
+#: admin/bookings/em-rejected.php:38 admin/bookings/em-rejected.php:40
+#: admin/settings/tabs/formats.php:56 em-install.php:368 em-install.php:374
+#: events-manager.php:346
+msgid "Search"
+msgstr ""
+
+#: admin/bookings/em-cancelled.php:49 admin/bookings/em-confirmed.php:50
+#: admin/bookings/em-events.php:54 admin/bookings/em-pending.php:64
+#: admin/bookings/em-person.php:51 admin/bookings/em-rejected.php:49
+#: templates/tables/locations.php:21
+msgid "Bulk Actions"
+msgstr ""
+
+#: admin/bookings/em-cancelled.php:52 admin/bookings/em-confirmed.php:53
+#: admin/bookings/em-pending.php:67 admin/bookings/em-pending.php:132
+#: admin/bookings/em-person.php:54 admin/bookings/em-person.php:115
+#: admin/bookings/em-rejected.php:52 admin/bookings/em-rejected.php:111
+#: classes/em-bookings-table.php:608 classes/em-bookings-table.php:625
+#: classes/em-bookings-table.php:634
+msgid "Approve"
+msgstr "Onayla"
+
+#: admin/bookings/em-cancelled.php:55 admin/bookings/em-confirmed.php:56
+#: admin/bookings/em-pending.php:70 admin/bookings/em-person.php:57
+#: admin/bookings/em-rejected.php:55
+msgid "Decline"
+msgstr "Reddet"
+
+#: admin/bookings/em-cancelled.php:84 admin/bookings/em-confirmed.php:85
+#: admin/bookings/em-pending.php:99 admin/bookings/em-rejected.php:84
+msgid "Booker"
+msgstr ""
+
+#: admin/bookings/em-cancelled.php:85 admin/bookings/em-confirmed.php:86
+#: admin/bookings/em-pending.php:103 admin/bookings/em-rejected.php:85
+#: classes/em-bookings-table.php:82
+#: templates/forms/bookingform/booking-fields.php:20
+#: templates/templates/bookings-event-printable.php:25
+msgid "E-mail"
+msgstr "E-posta"
+
+#: admin/bookings/em-cancelled.php:86 admin/bookings/em-confirmed.php:87
+#: admin/bookings/em-pending.php:104 admin/bookings/em-rejected.php:86
+#: templates/templates/bookings-event-printable.php:26
+msgid "Phone number"
+msgstr "Telefon numarası"
+
+#: admin/bookings/em-cancelled.php:87 admin/bookings/em-confirmed.php:88
+#: admin/bookings/em-pending.php:105 admin/bookings/em-person.php:87
+#: admin/bookings/em-rejected.php:87 admin/em-bookings.php:172
+#: admin/em-bookings.php:322 classes/em-bookings-table.php:84
+#: classes/em-tickets.php:215 templates/forms/event/bookings-ticket-form.php:22
+#: templates/templates/bookings-event-printable.php:27
+#: templates/templates/my-bookings.php:41
+msgid "Spaces"
+msgstr ""
+
+#: admin/bookings/em-cancelled.php:111 admin/bookings/em-person.php:121
+msgid "Restore"
+msgstr ""
+
+#: admin/bookings/em-cancelled.php:112 admin/bookings/em-confirmed.php:119
+#: admin/bookings/em-pending.php:135 admin/bookings/em-person.php:126
+#: admin/bookings/em-rejected.php:112 classes/em-bookings-table.php:611
+#: classes/em-bookings-table.php:620 classes/em-bookings-table.php:627
+#: classes/em-bookings-table.php:636
+msgid "Edit/View"
+msgstr "Düzenle/Görüntüle"
+
+#: admin/bookings/em-cancelled.php:113 admin/bookings/em-confirmed.php:118
+#: admin/bookings/em-pending.php:134 admin/bookings/em-person.php:127
+#: admin/bookings/em-rejected.php:113 classes/em-bookings-table.php:610
+#: classes/em-bookings-table.php:619 classes/em-bookings-table.php:626
+#: classes/em-bookings-table.php:635 classes/em-event-posts-admin.php:232
+#: templates/buddypress/group-events.php:101
+#: templates/buddypress/my-group-events.php:95
+#: templates/buddypress/my-group-events.php:132
+#: templates/forms/event/bookings.php:66 templates/tables/events.php:111
+#: templates/tables/events.php:145
+msgid "Delete"
+msgstr "Sil"
+
+#: admin/bookings/em-cancelled.php:125
+msgid "No cancelled bookings."
+msgstr "İptal edilmiş rezervasyon yok."
+
+#: admin/bookings/em-confirmed.php:114 admin/bookings/em-person.php:118
+#: classes/em-bookings-table.php:617
+msgid "Unapprove"
+msgstr ""
+
+#: admin/bookings/em-confirmed.php:116 admin/bookings/em-pending.php:133
+#: admin/bookings/em-person.php:124 classes/em-bookings-table.php:609
+#: classes/em-bookings-table.php:618
+msgid "Reject"
+msgstr ""
+
+#: admin/bookings/em-confirmed.php:131 admin/bookings/em-person.php:139
+msgid "No confirmed bookings."
+msgstr "Onaylanmış rezervasyon yok."
+
+#: admin/bookings/em-events.php:13 em-functions.php:207
+msgid "Past events"
+msgstr "Geçmiş etkinlikler"
+
+#: admin/bookings/em-events.php:14 em-functions.php:205
+msgid "All events"
+msgstr "Tüm etkinlikler"
+
+#: admin/bookings/em-events.php:15 em-functions.php:206
+msgid "Future events"
+msgstr "Gelecek etkinlikler"
+
+#: admin/bookings/em-events.php:29 templates/tables/events.php:26
+msgid "Past Events"
+msgstr "Geçmiş Etkinlikler"
+
+#: admin/bookings/em-events.php:32
+msgid "All Events"
+msgstr "Tüm Etkinlikler"
+
+#: admin/bookings/em-events.php:35
+msgid "Future Events"
+msgstr "Gelecek Etkinlikler "
+
+#: admin/bookings/em-events.php:55 templates/tables/locations.php:23
+msgid "Delete selected"
+msgstr "Seçileni sil"
+
+#: admin/bookings/em-events.php:57 templates/tables/locations.php:26
+msgid "Apply"
+msgstr "Uygula"
+
+#: admin/bookings/em-events.php:69 classes/em-bookings-table.php:409
+msgid "Filter"
+msgstr "Filtrele"
+
+#: admin/bookings/em-events.php:87
+msgid "no events"
+msgstr "etkinlik yok"
+
+#: admin/bookings/em-events.php:94 admin/bookings/em-pending.php:101
+#: admin/bookings/em-person.php:86 admin/em-bookings.php:104
+#: admin/em-bookings.php:105 admin/em-ms-options.php:155
+#: admin/em-options.php:474 admin/settings/tabs/formats.php:25
+#: admin/settings/tabs/formats.php:36 admin/settings/tabs/formats.php:37
+#: admin/settings/tabs/formats.php:41 admin/settings/tabs/formats.php:42
+#: admin/settings/tabs/formats.php:224 admin/settings/tabs/formats.php:270
+#: admin/settings/tabs/formats.php:278 admin/settings/tabs/formats.php:311
+#: admin/settings/tabs/formats.php:319 admin/settings/tabs/formats.php:349
+#: admin/settings/tabs/formats.php:357 admin/settings/tabs/general.php:11
+#: admin/settings/tabs/general.php:37 admin/settings/tabs/pages.php:36
+#: admin/settings/tabs/pages.php:53 admin/settings/tabs/pages.php:74
+#: admin/settings/tabs/pages.php:75 classes/em-bookings-table.php:79
+#: classes/em-event-posts-admin.php:166 classes/em-event-posts-admin.php:168
+#: classes/em-event-posts-admin.php:245 classes/em-event-posts-admin.php:303
+#: classes/em-event-posts-admin.php:305 classes/em-event.php:787
+#: classes/em-event.php:800 classes/em-event.php:871 em-actions.php:107
+#: em-actions.php:612 em-install.php:434 em-install.php:483 em-posts.php:145
+#: templates/buddypress/group-events.php:105
+#: templates/forms/event-editor.php:12 templates/forms/event-editor.php:109
+#: templates/forms/event-editor.php:111 templates/templates/my-bookings.php:39
+msgid "Event"
+msgstr "Etkinlik"
+
+#: admin/bookings/em-events.php:95 templates/buddypress/group-events.php:44
+#: templates/buddypress/my-group-events.php:45 templates/tables/events.php:63
+msgid "Date and time"
+msgstr "Tarih ve saat"
+
+#: admin/bookings/em-events.php:121 templates/forms/event/bookings.php:38
+msgid "Booked Spaces"
+msgstr "Rezerve Edilmiş Yerler"
+
+#: admin/bookings/em-events.php:123 classes/em-booking.php:132
+#: classes/em-bookings-table.php:54 classes/em-event-posts-admin.php:221
+#: classes/em-event.php:266 em-install.php:341
+#: templates/buddypress/group-events.php:95
+#: templates/buddypress/my-group-events.php:89 templates/tables/events.php:21
+#: templates/tables/events.php:105
+msgid "Pending"
+msgstr "Beklemede"
+
+#: admin/bookings/em-pending.php:147
+msgid "No pending bookings."
+msgstr "Bekleyen rezervasyon yok."
+
+#: admin/bookings/em-person.php:88 admin/em-bookings.php:290
+#: admin/em-bookings.php:300 classes/em-bookings-table.php:85
+#: templates/templates/my-bookings.php:42
+msgid "Status"
+msgstr "Durum"
+
+#: admin/bookings/em-rejected.php:125
+msgid "No rejected bookings."
+msgstr "Reddedilmiş rezervasyon yok."
+
+#: admin/em-admin.php:38 admin/em-admin.php:301 admin/em-bookings.php:132
+#: admin/em-bookings.php:181 admin/em-options.php:295
+#: buddypress/bp-em-activity.php:45 buddypress/bp-em-activity.php:47
+#: classes/em-event-posts-admin.php:218
+#: templates/buddypress/group-events.php:92
+#: templates/buddypress/my-group-events.php:86 templates/tables/events.php:102
+msgid "Bookings"
+msgstr "Rezervasyonlar"
+
+#: admin/em-admin.php:40
+msgid "Events Manager Settings"
+msgstr "Events Manager Ayarları"
+
+#: admin/em-admin.php:40 admin/em-admin.php:247
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: admin/em-admin.php:41 admin/em-help.php:10
+msgid "Getting Help for Events Manager"
+msgstr ""
+
+#: admin/em-admin.php:41
+msgid "Help"
+msgstr "Yardım"
+
+#: admin/em-admin.php:45 admin/em-ms-locations.php:26
+#: admin/em-ms-options.php:167 admin/settings/tabs/formats.php:239
+#: admin/settings/tabs/formats.php:242 admin/settings/tabs/formats.php:244
+#: admin/settings/tabs/formats.php:245 admin/settings/tabs/formats.php:246
+#: admin/settings/tabs/formats.php:247 admin/settings/tabs/pages.php:21
+#: admin/settings/tabs/pages.php:217 admin/settings/tabs/pages.php:219
+#: classes/em-location-posts-admin.php:38 em-actions.php:185 em-install.php:483
+#: em-install.php:485 em-install.php:1013 em-install.php:1072 em-posts.php:236
+#: em-posts.php:239 em-posts.php:241 templates/tables/locations.php:10
+#: templates/tables/locations.php:13
+msgid "Locations"
+msgstr "Mekanlar"
+
+#: admin/em-admin.php:113 classes/em-people.php:35 events-manager.php:729
+msgid "Events Manager"
+msgstr "Events Manager"
+
+#: admin/em-admin.php:114
+msgid "Update Blogs"
+msgstr "Blogları Güncelle"
+
+#: admin/em-admin.php:147
+msgid "<p>Events Manager is ready to go! It is highly recommended you read the <a href='%s'>Getting Started</a> guide on our site, as well as checking out the <a href='%s'>Settings Page</a>. <a href='%s' title='Don't show this advice again'>Dismiss</a></p>"
+msgstr ""
+
+#: admin/em-admin.php:162
+msgid "Uh Oh! For some reason WordPress could not create an events page for you (or you just deleted it). Not to worry though, all you have to do is create an empty page, name it whatever you want, and select it as your events page in your <a href=\"%s\">settings page</a>. Sorry for the extra step! If you know what you are doing, you may have done this on purpose, if so <a href=\"%s\">ignore this message</a>"
+msgstr "Amanın! Bir nedenle WordPress size bir etkinlik sayfası yaratamadı (veya siz onu sildiniz). Neyse ki endişeye mahal yok, tüm yapmanız gereken boş bir sayfa oluşturmak, istediğiniz adı vermek ve bu sayfayı <a href=\"%s\">ayarlar sayfası</a>nda etkinlikler sayfanız olarak işaretlemek. Size iş çıkardığımız için üzgünüz. Ne yaptığınızı biliyorsanız ve bunu bilerek yapmışsanız <a href=\"%s\">bu mesajı görmezden gelin</a>"
+
+#: admin/em-admin.php:171
+msgid "There is a newer version of Events Manager Pro which is recommended for this current version of Events Manager as new features have been added. Please go to the plugin website and download the latest update."
+msgstr "Events Manager Pro'nun Events Manager'ın mevcut sürümüne yeni özellikler eklenmiş daha yeni bir sürümü var. Lütfen plugin web sitesine gidin ve son güncellemeleri yükleyin."
+
+#: admin/em-admin.php:182
+msgid "MultiSite options have moved <a href=\"%s\">here</a>. <a href=\"%s\">Dismiss message</a>"
+msgstr ""
+
+#: admin/em-admin.php:194
+msgid "Whilst they will still appear using placeholders, you need to <a href=\"%s\">migrate your location and event images</a> in order for them to appear in your edit forms and media library. <a href=\"%s\">Dismiss message</a>"
+msgstr ""
+
+#: admin/em-admin.php:202
+msgid "Dev Mode active: Just a friendly reminder that you are updating to development versions. Only admins see this message, and it will go away when you disable this <a href=\"#pro-api\">here</a> in your settings."
+msgstr ""
+
+#: admin/em-admin.php:212
+msgid "It looks like you have WPML enabled on your site. We advise you also install our extra <a href=\"%s\">Events Manager WPML Connector</a> plugin which helps the two work better together. <a href=\"%s\">Dismiss message</a>"
+msgstr ""
+
+#: admin/em-admin.php:231
+msgid "This page corresponds to the <strong>Events Manager</strong> %s page. Its content will be overridden by Events Manager, although if you include the word CONTENTS (exactly in capitals) and surround it with other text, only CONTENTS will be overwritten. If you want to change the way your events look, go to the <a href='%s'>settings</a> page. "
+msgstr ""
+
+#: admin/em-admin.php:231 admin/em-ms-options.php:158
+#: admin/settings/tabs/formats.php:5 admin/settings/tabs/formats.php:9
+#: admin/settings/tabs/pages.php:19 admin/settings/tabs/pages.php:59
+#: buddypress/bp-em-activity.php:66 buddypress/bp-em-core.php:12
+#: buddypress/bp-em-core.php:53 buddypress/bp-em-core.php:81
+#: buddypress/bp-em-core.php:149 buddypress/bp-em-core.php:192
+#: buddypress/bp-em-core.php:243 buddypress/bp-em-core.php:265
+#: buddypress/screens/profile.php:27 em-actions.php:107 em-install.php:427
+#: em-install.php:478 em-install.php:557 em-install.php:558 em-install.php:575
+#: em-install.php:593 em-install.php:1000 em-posts.php:141 em-posts.php:144
+#: em-posts.php:146 em-template-tags.php:141 widgets/em-events.php:13
+msgid "Events"
+msgstr "Etkinlikler"
+
+#: admin/em-admin.php:254 admin/em-options.php:603
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: admin/em-bookings.php:61
+msgid "Event Bookings Dashboard"
+msgstr "Etkinlik Rezervasyonları Paneli"
+
+#: admin/em-bookings.php:66
+msgid "Recent Bookings"
+msgstr "Son Rezervasyonlar"
+
+#: admin/em-bookings.php:75
+msgid "Events With Bookings Enabled"
+msgstr "Rezervasyon Özelliği Olan Ertkinlikler"
+
+#: admin/em-bookings.php:91 admin/em-bookings.php:152 admin/em-bookings.php:200
+#: admin/em-bookings.php:504 admin/em-bookings.php:559
+#: templates/forms/event-editor.php:12 templates/forms/location-editor.php:11
+msgid "Unauthorized Access"
+msgstr "Giriş Yetkisi Yok"
+
+#: admin/em-bookings.php:91 admin/em-bookings.php:200 admin/em-bookings.php:504
+#: admin/em-bookings.php:559
+msgid "You do not have the rights to manage this event."
+msgstr "Bu etkinliği yönetmek için yetkiniz yok."
+
+#: admin/em-bookings.php:103
+msgid "Manage %s Bookings"
+msgstr ""
+
+#: admin/em-bookings.php:104
+msgid "View %s"
+msgstr ""
+
+#: admin/em-bookings.php:105
+msgid "Edit %s"
+msgstr ""
+
+#: admin/em-bookings.php:107
+msgid "Export CSV"
+msgstr "CSV Olarak Dışa Aktar"
+
+#: admin/em-bookings.php:113 admin/settings/tabs/pages.php:569
+#: templates/forms/event-editor.php:44
+msgid "Event Name"
+msgstr "Etkinlik Adı"
+
+#: admin/em-bookings.php:115
+msgid "Availability"
+msgstr ""
+
+#: admin/em-bookings.php:116
+msgid "Spaces confirmed"
+msgstr ""
+
+#: admin/em-bookings.php:118
+msgid "Available spaces"
+msgstr "Boş yerler"
+
+#: admin/em-bookings.php:122 templates/templates/my-bookings.php:40
+msgid "Date"
+msgstr "Tarih"
+
+#: admin/em-bookings.php:128 admin/em-ms-options.php:159
+#: admin/em-options.php:492 admin/settings/tabs/formats.php:251
+#: admin/settings/tabs/formats.php:262 admin/settings/tabs/formats.php:263
+#: admin/settings/tabs/formats.php:267 admin/settings/tabs/formats.php:268
+#: admin/settings/tabs/general.php:59 admin/settings/tabs/general.php:70
+#: admin/settings/tabs/pages.php:195 admin/settings/tabs/pages.php:213
+#: admin/settings/tabs/pages.php:229 admin/settings/tabs/pages.php:230
+#: classes/em-event-posts-admin.php:174 classes/em-event-posts-admin.php:311
+#: classes/em-location-posts-admin.php:47
+#: classes/em-location-posts-admin.php:49 classes/em-location.php:401
+#: classes/em-location.php:408 em-actions.php:185 em-install.php:460
+#: em-posts.php:240 templates/buddypress/group-events.php:43
+#: templates/buddypress/my-group-events.php:44
+#: templates/forms/location-editor.php:32
+#: templates/forms/location-editor.php:65
+#: templates/forms/location-editor.php:67 templates/tables/events.php:62
+msgid "Location"
+msgstr "Mekan"
+
+#: admin/em-bookings.php:152
+msgid "You do not have the rights to manage this ticket."
+msgstr "Bu bileti yönetmeye yetkiniz yok."
+
+#: admin/em-bookings.php:162
+msgid "Ticket for %s"
+msgstr ""
+
+#: admin/em-bookings.php:163
+msgid "View/Edit Event"
+msgstr "Etkinliği Görüntüle/Düzenle"
+
+#: admin/em-bookings.php:164
+msgid "View Event Bookings"
+msgstr "Etkinlik Rezervasyonlarını Görüntüle"
+
+#: admin/em-bookings.php:169 admin/em-bookings.php:224
+#: admin/settings/tabs/pages.php:248 admin/settings/tabs/pages.php:299
+#: admin/settings/tabs/pages.php:399 admin/settings/tabs/pages.php:502
+#: classes/em-booking.php:711 classes/em-bookings-table.php:76
+#: classes/em-event-post-admin.php:267 classes/em-person.php:95
+#: classes/em-person.php:97 em-install.php:336
+#: templates/buddypress/group-events.php:42
+#: templates/buddypress/my-group-events.php:42
+#: templates/forms/bookingform/booking-fields.php:12
+#: templates/forms/event/bookings-ticket-form.php:13
+#: templates/forms/event-editor.php:33 templates/tables/events.php:60
+#: templates/tables/locations.php:43 templates/tables/locations.php:54
+#: templates/templates/bookings-event-printable.php:24
+msgid "Name"
+msgstr "İsim"
+
+#: admin/em-bookings.php:170 multilingual/em-ml-admin.php:87
+#: templates/forms/event/bookings-ticket-form.php:17
+msgid "Description"
+msgstr "Açıklama"
+
+#: admin/em-bookings.php:171 admin/em-bookings.php:323
+#: admin/em-bookings.php:364 classes/em-tickets.php:215
+#: templates/emails/bookingsummary.php:15 templates/emails/bookingtickets.php:9
+#: templates/forms/event/bookings-ticket-form.php:20
+#: templates/forms/event/bookings.php:34
+msgid "Price"
+msgstr "Fiyat"
+
+#: admin/em-bookings.php:173
+msgid "Min"
+msgstr "Minimum"
+
+#: admin/em-bookings.php:174
+msgid "Max"
+msgstr "Maksimum"
+
+#: admin/em-bookings.php:175
+msgid "Start"
+msgstr "Başlangıç"
+
+#: admin/em-bookings.php:176
+msgid "End"
+msgstr "Bitiş"
+
+#: admin/em-bookings.php:208
+msgid "Edit Booking"
+msgstr "Rezervasyonlari Düzenle"
+
+#: admin/em-bookings.php:215
+msgid "Event Details"
+msgstr "Etkinlik Detayları"
+
+#: admin/em-bookings.php:226 admin/settings/tabs/formats.php:136
+#: em-install.php:433 em-install.php:455
+msgid "Date/Time"
+msgstr "Tarih/Saat"
+
+#: admin/em-bookings.php:239 admin/em-bookings.php:529
+msgid "Personal Details"
+msgstr "Kişisel Bilgiler"
+
+#: admin/em-bookings.php:279 em-install.php:335
+msgid "Booking Details"
+msgstr "Rezervasyon Detayları"
+
+#: admin/em-bookings.php:292
+msgid "Change"
+msgstr "Değiştir"
+
+#: admin/em-bookings.php:293
+msgid "Resend Email"
+msgstr "Tekrar E-posta Gönder"
+
+#: admin/em-bookings.php:307
+msgid "Send Email"
+msgstr "E-posta Gönder"
+
+#: admin/em-bookings.php:257 admin/em-bookings.php:308
+#: admin/em-bookings.php:422
+msgid "Submit Changes"
+msgstr "Değişiklikleri Kaydet"
+
+#: admin/em-bookings.php:258 admin/em-bookings.php:309
+#: admin/em-bookings.php:423 admin/em-options.php:221 admin/em-options.php:238
+#: admin/settings/tabs/bookings.php:81 em-install.php:671
+#: templates/templates/my-bookings.php:69
+msgid "Cancel"
+msgstr "İptal"
+
+#: admin/em-bookings.php:314
+msgid "<strong>Notes:</strong> Ticket availability not taken into account when approving new bookings (i.e. you can overbook)."
+msgstr "<strong>Not:</strong> Yeni rezervasyonları onaylarken bilet durumu hesaba katılmaz (yani çifte rezervasyon oluşabilir)."
+
+#: admin/em-bookings.php:321 classes/em-tickets.php:215
+msgid "Ticket Type"
+msgstr "Bilet Türü"
+
+#: admin/em-bookings.php:397 templates/emails/bookingsummary.php:51
+msgid "Total Price"
+msgstr "Toplam Fiyat"
+
+#: admin/em-bookings.php:365
+msgid "%d Spaces"
+msgstr ""
+
+#: admin/em-bookings.php:379
+msgid "Tax"
+msgstr "Vergi"
+
+#: admin/em-bookings.php:407 templates/forms/bookingform/booking-fields.php:26
+#: templates/templates/bookings-event-printable.php:28
+msgid "Comment"
+msgstr "Yorum"
+
+#: admin/em-bookings.php:417
+msgid "Modify Booking"
+msgstr "Rezervasyonu Değiştir"
+
+#: admin/em-bookings.php:420
+msgid "<strong>Notes:</strong> Ticket availability not taken into account (i.e. you can overbook). Emails are not resent automatically."
+msgstr ""
+
+#: admin/em-bookings.php:459
+msgid "Booking Notes"
+msgstr "Rezervasyon Notları"
+
+#: admin/em-bookings.php:462
+msgid "You can add private notes below for internal reference that only event managers will see."
+msgstr "Aşağıya referans için sadece etkinlik yöneticilerinin görebileceği özel notlar ekleyebilirsiniz."
+
+#: admin/em-bookings.php:514
+msgid "Manage Person's Booking"
+msgstr "Kişinin Rezervasyonlarını Yönet"
+
+#: admin/em-bookings.php:516
+msgid "Edit User"
+msgstr "Kullanıcıyı Düzenle"
+
+#: admin/em-bookings.php:519
+msgid "Delete User"
+msgstr "Kullanıcıyı Sil"
+
+#: admin/em-bookings.php:541
+msgid "Past And Present Bookings"
+msgstr "Geçmiş ve Güncel Rezervasyonlar"
+
+#: admin/em-help.php:25
+msgid "Placeholders for customizing event pages"
+msgstr ""
+
+#: admin/em-help.php:26
+msgid "In the <a href='%s'>settings page</a>, you'll find various textboxes where you can edit how event information looks, such as for event and location lists. Using the placeholders below, you can choose what information should be displayed."
+msgstr ""
+
+#: admin/em-help.php:28 admin/em-ms-options.php:59 admin/em-options.php:263
+msgid "Event Related Placeholders"
+msgstr ""
+
+#: admin/em-help.php:31 admin/em-ms-options.php:62 admin/em-options.php:266
+msgid "Category Related Placeholders"
+msgstr ""
+
+#: admin/em-help.php:36 admin/em-ms-options.php:60 admin/em-options.php:264
+msgid "Location Related Placeholders"
+msgstr ""
+
+#: admin/em-help.php:39 admin/em-ms-options.php:61 admin/em-options.php:265
+msgid "Booking Related Placeholders"
+msgstr ""
+
+#: admin/em-ms-locations.php:36
+msgid "Add location"
+msgstr "Mekan ekle"
+
+#: admin/em-ms-locations.php:39
+msgid "Edit location"
+msgstr "Mekanı düzenle"
+
+#: admin/em-ms-options.php:6
+msgid "Update Network"
+msgstr "Ağı Güncelle"
+
+#: admin/em-ms-options.php:31
+msgid "To update your network blogs with the latest Events Manager automatically, click the update button below."
+msgstr "Ağa bağlı bloglarınızı son Events Manager ile otomatik olarak güncellemek için aşağıdaki güncelle butonuna tıklayın."
+
+#: admin/em-ms-options.php:34
+msgid "Update"
+msgstr "Güncelle"
+
+#: admin/em-ms-options.php:63 admin/em-options.php:267
+msgid "This accepts %s and %s placeholders."
+msgstr ""
+
+#: admin/em-ms-options.php:64 admin/em-ms-options.php:65
+#: admin/em-options.php:268 admin/em-options.php:269
+msgid "This accepts %s placeholders."
+msgstr ""
+
+#: admin/em-ms-options.php:66 admin/em-options.php:270
+msgid "This accepts %s, %s and %s placeholders."
+msgstr ""
+
+#: admin/em-ms-options.php:69 admin/em-ms-options.php:192
+#: admin/em-options.php:273 admin/em-options.php:344
+msgid "Save Changes"
+msgstr "Değişiklikleri Kaydet"
+
+#: admin/em-ms-options.php:69 admin/em-options.php:273
+#: classes/em-bookings-table.php:53
+msgid "All"
+msgstr "Tüm"
+
+#: events-manager.php:368
+msgid "Collapse All"
+msgstr "Tümünü Kapa"
+
+#: events-manager.php:369
+msgid "Expand All"
+msgstr "Tümunü Aç"
+
+#: admin/em-ms-options.php:129 admin/em-options.php:291
+#: admin/settings/tabs/bookings.php:6
+msgid "General"
+msgstr "Genel"
+
+#: admin/em-ms-options.php:131 admin/em-options.php:299
+msgid "Event Manager Options"
+msgstr "Event Manager Seçenekleri"
+
+#: admin/em-ms-options.php:141 admin/em-options.php:365
+#: admin/em-options.php:391 admin/em-options.php:464 admin/em-options.php:579
+#: admin/settings/tabs/bookings.php:6 admin/settings/tabs/bookings.php:23
+#: admin/settings/tabs/bookings.php:41 admin/settings/tabs/bookings.php:93
+#: admin/settings/tabs/bookings.php:107 admin/settings/tabs/bookings.php:131
+#: admin/settings/tabs/emails.php:9 admin/settings/tabs/emails.php:97
+#: admin/settings/tabs/emails.php:117 admin/settings/tabs/formats.php:5
+#: admin/settings/tabs/formats.php:51 admin/settings/tabs/formats.php:136
+#: admin/settings/tabs/formats.php:158 admin/settings/tabs/formats.php:239
+#: admin/settings/tabs/formats.php:293 admin/settings/tabs/formats.php:334
+#: admin/settings/tabs/formats.php:371 admin/settings/tabs/formats.php:433
+#: admin/settings/tabs/general.php:5 admin/settings/tabs/general.php:93
+#: admin/settings/tabs/general.php:148 admin/settings/tabs/general.php:227
+#: admin/settings/tabs/general.php:256 admin/settings/tabs/pages.php:14
+#: admin/settings/tabs/pages.php:36 admin/settings/tabs/pages.php:53
+#: admin/settings/tabs/pages.php:195 admin/settings/tabs/pages.php:213
+#: admin/settings/tabs/pages.php:336 admin/settings/tabs/pages.php:440
+#: admin/settings/tabs/pages.php:541 admin/settings/wpfc-admin.php:22
+msgid "Click to toggle"
+msgstr ""
+
+#: admin/em-ms-options.php:141
+msgid "Multi Site Options"
+msgstr "Çoklu Site Seçenekleri"
+
+#: admin/em-ms-options.php:145
+msgid "Enable global tables mode?"
+msgstr ""
+
+#: admin/em-ms-options.php:145
+msgid "Setting this to yes will make all events save in the main site event tables (EM must also be activated). This allows you to share events across different blogs, such as showing events in your network whilst allowing users to display and manage their events within their own blog. Bear in mind that activating this will mean old events created on the sub-blogs will not be accessible anymore, and if you switch back they will be but new events created during global events mode will only remain on the main site."
+msgstr ""
+
+#: admin/em-ms-options.php:150
+msgid "%s belonging to other sub-sites will have an extra slug prepended to it so that your main site can differentiate between its own %s and those belonging to other sites in your network."
+msgstr ""
+
+#: admin/em-ms-options.php:151
+msgid "When displaying global %s on the main site you have the option of users viewing the %s details on the main site or being directed to the sub-site."
+msgstr ""
+
+#: admin/em-ms-options.php:152
+msgid "Displays %s from all sites on the network by default. You can still restrict %s by blog using shortcodes and template tags coupled with the <code>blog</code> attribute. Requires global tables to be turned on."
+msgstr ""
+
+#: admin/em-ms-options.php:153
+msgid "You <strong>must</strong> have assigned a %s page in your <a href=\"%s\">main blog settings</a> for this to work."
+msgstr ""
+
+#: admin/em-ms-options.php:155 admin/em-ms-options.php:159
+#: admin/settings/tabs/bookings.php:6 admin/settings/tabs/bookings.php:23
+#: admin/settings/tabs/bookings.php:93 admin/settings/tabs/bookings.php:107
+msgid "%s Options"
+msgstr ""
+
+#: admin/em-ms-options.php:156
+msgid "Display global events on main blog?"
+msgstr "Global etkinlikler ana blogda görünsün mü?"
+
+#: admin/em-ms-options.php:156 admin/em-ms-options.php:157
+#: admin/em-ms-options.php:158 admin/em-options.php:476
+#: admin/em-options.php:477 admin/em-options.php:478 admin/em-options.php:479
+#: admin/em-options.php:480 admin/em-options.php:481
+#: admin/settings/tabs/formats.php:273 admin/settings/tabs/formats.php:275
+#: admin/settings/tabs/formats.php:283 admin/settings/tabs/formats.php:314
+#: admin/settings/tabs/formats.php:316 admin/settings/tabs/formats.php:324
+#: admin/settings/tabs/formats.php:352 admin/settings/tabs/formats.php:354
+#: admin/settings/tabs/formats.php:362 admin/settings/tabs/pages.php:41
+#: admin/settings/tabs/pages.php:44 admin/settings/tabs/pages.php:45
+#: admin/settings/tabs/pages.php:75 admin/settings/tabs/pages.php:76
+#: admin/settings/tabs/pages.php:130 admin/settings/tabs/pages.php:131
+#: admin/settings/tabs/pages.php:133 admin/settings/tabs/pages.php:608
+#: events-manager.php:436 events-manager.php:437 events-manager.php:438
+#: events-manager.php:439 events-manager.php:440 events-manager.php:441
+msgid "events"
+msgstr "etkinlikler"
+
+#: admin/em-ms-options.php:157 admin/em-ms-options.php:166
+msgid "Link sub-site %s directly to sub-site?"
+msgstr ""
+
+#: admin/em-ms-options.php:157 admin/em-ms-options.php:158
+#: admin/em-options.php:505 admin/em-options.php:506
+#: admin/settings/tabs/formats.php:26 admin/settings/tabs/formats.php:30
+#: admin/settings/tabs/formats.php:32 admin/settings/tabs/formats.php:37
+#: admin/settings/tabs/general.php:34 admin/settings/tabs/general.php:35
+#: admin/settings/tabs/pages.php:42 admin/settings/tabs/pages.php:45
+#: admin/settings/tabs/pages.php:76 admin/settings/tabs/pages.php:137
+#: classes/em-event-post-admin.php:133 classes/em-event.php:782
+#: classes/em-event.php:796
+msgid "event"
+msgstr "etkinlik"
+
+#: admin/em-ms-options.php:158 admin/em-ms-options.php:167
+msgid "Global %s slug"
+msgstr ""
+
+#: admin/em-ms-options.php:158 admin/em-ms-options.php:167
+msgid "Example:"
+msgstr "Örnek:"
+
+#: admin/em-ms-options.php:160
+msgid "Locations on main blog?"
+msgstr "Ana blog'daki mekanlar mı?"
+
+#: admin/em-ms-options.php:160 admin/em-ms-options.php:165
+#: admin/em-ms-options.php:166 admin/em-ms-options.php:167
+#: admin/em-options.php:494 admin/em-options.php:495 admin/em-options.php:496
+#: admin/em-options.php:497 admin/em-options.php:498 admin/em-options.php:499
+#: admin/settings/tabs/formats.php:244 admin/settings/tabs/formats.php:245
+#: admin/settings/tabs/formats.php:246 admin/settings/tabs/formats.php:247
+#: admin/settings/tabs/pages.php:200 admin/settings/tabs/pages.php:203
+#: admin/settings/tabs/pages.php:204 admin/settings/tabs/pages.php:221
+#: admin/settings/tabs/pages.php:230 admin/settings/tabs/pages.php:231
+#: admin/settings/tabs/pages.php:281 admin/settings/tabs/pages.php:282
+#: admin/settings/tabs/pages.php:283 admin/settings/tabs/pages.php:326
+#: admin/settings/tabs/pages.php:616 classes/em-location.php:414
+#: events-manager.php:450 events-manager.php:451 events-manager.php:452
+#: events-manager.php:453 events-manager.php:454 events-manager.php:455
+#: events-manager.php:456
+msgid "locations"
+msgstr "mekanlar"
+
+#: admin/em-ms-options.php:160
+msgid "If you would prefer all your locations to belong to your main blog, users in sub-sites will still be able to create locations, but the actual locations are created and reside in the main blog."
+msgstr ""
+
+#: admin/em-ms-options.php:165
+msgid "Display global %s on main blog?"
+msgstr ""
+
+#: admin/em-ms-options.php:166 admin/em-ms-options.php:167
+#: admin/settings/tabs/formats.php:252 admin/settings/tabs/formats.php:256
+#: admin/settings/tabs/formats.php:258 admin/settings/tabs/formats.php:263
+#: admin/settings/tabs/formats.php:282 admin/settings/tabs/general.php:67
+#: admin/settings/tabs/general.php:68 admin/settings/tabs/pages.php:201
+#: admin/settings/tabs/pages.php:204 admin/settings/tabs/pages.php:231
+#: admin/settings/tabs/pages.php:287 classes/em-location-post-admin.php:95
+#: classes/em-location.php:396 classes/em-location.php:406
+#: templates/forms/location-editor.php:11
+msgid "location"
+msgstr "mekan"
+
+#: admin/em-options.php:69
+msgid "Changes saved."
+msgstr "Değişiklikler kaydedildi."
+
+#: admin/em-options.php:141
+msgid "Settings have been reset back to default. Your events, locations and categories have not been modified."
+msgstr "Ayarlar varsayılanlara döndürüldü. Etkinlikleriniz, mekanlarınız ve kategorileriniz değiştirilmedi."
+
+#: admin/em-options.php:151 admin/em-options.php:161
+msgid "If there are any new updates, you should now see them in your Plugins or Updates admin pages."
+msgstr "Eğer yeni bir güncelleme varsa, artık onları admin sayfalarınızdaki Plugins veya Updates bölümlerinde görebilirsiniz."
+
+#: admin/em-options.php:161
+msgid "Checking for dev versions."
+msgstr ""
+
+#: admin/em-options.php:171
+msgid "Events Manager Test Email"
+msgstr "Events Manager Test E-postası"
+
+#: admin/em-options.php:172
+msgid "Congratulations! Your email settings work."
+msgstr "Tebrikler! E-posta ayarlarınız çalışıyor."
+
+#: admin/em-options.php:197
+msgid "Email sent successfully to %s"
+msgstr ""
+
+#: admin/em-options.php:202
+msgid "Email not sent."
+msgstr "E-posta gönderilmedi."
+
+#: admin/em-options.php:216 admin/em-options.php:220
+msgid "Reset Events Manager"
+msgstr ""
+
+#: admin/em-options.php:217
+msgid "Are you sure you want to reset Events Manager?"
+msgstr ""
+
+#: admin/em-options.php:218
+msgid "All your settings, including email templates and template formats for Events Manager will be deleted."
+msgstr "E-posta şablonlarıniz ve Events Manager şablon formatlarınız da dahil olmak üzere tüm ayarlarınız silinecektir."
+
+#: admin/em-options.php:232
+msgid "Uninstall Events Manager"
+msgstr "Events Manager'ı Kaldır"
+
+#: admin/em-options.php:233
+msgid "Are you sure you want to uninstall Events Manager?"
+msgstr "Events Manager'ı kaldırmak istediğinizden emin misiniz?"
+
+#: admin/em-options.php:234
+msgid "All your settings and events will be permanently deleted. This cannot be undone."
+msgstr "Tüm ayarlarıniz ve etkinlikleriniz kalıcı olarak silinecek. Bu işlem geri alınamaz."
+
+#: admin/em-options.php:235
+msgid "If you just want to deactivate the plugin, <a href=\"%s\">go to your plugins page</a>."
+msgstr "Eğer plugin'i deaktive etmek isterseniz <a href=\"%s\">plugins sayfasına gidin</a>."
+
+#: admin/em-options.php:237
+msgid "Uninstall and Deactivate"
+msgstr "Kaldır ve Deaktive Et"
+
+#: admin/em-options.php:292 admin/settings/tabs/formats.php:37
+#: admin/settings/tabs/formats.php:263 admin/settings/tabs/pages.php:11
+msgid "Pages"
+msgstr "Sayfalar"
+
+#: admin/em-options.php:293
+msgid "Formatting"
+msgstr "Formatlama"
+
+#: admin/em-options.php:297
+msgid "Emails"
+msgstr "E-postalar"
+
+#: admin/settings/tabs/general.php:5
+msgid "General Options"
+msgstr "Genel Seçenekler"
+
+#: admin/settings/tabs/general.php:8
+msgid "Disable thumbnails?"
+msgstr ""
+
+#: admin/settings/tabs/general.php:8
+msgid "Select yes to disable Events Manager from enabling thumbnails (some themes may already have this enabled, which we cannot be turned off here)."
+msgstr ""
+
+#: admin/settings/tabs/general.php:11 admin/settings/tabs/general.php:59
+#: admin/settings/tabs/general.php:76
+msgid "%s Settings"
+msgstr ""
+
+#: admin/settings/tabs/general.php:15
+msgid "Enable recurrence?"
+msgstr "Mükerrer olsun mu?"
+
+#: admin/settings/tabs/general.php:15
+msgid "Select yes to enable the recurrence features feature"
+msgstr "Mükerrer özelliklerini etkinleştirmek için eveti seçin"
+
+#: admin/settings/tabs/general.php:16
+msgid "Enable bookings?"
+msgstr "Rezervasyon yapılabilsin mi?"
+
+#: admin/settings/tabs/general.php:16
+msgid "Select yes to allow bookings and tickets for events."
+msgstr "Etkinlikler için rezervasyon ve bilet özelliklerini etkinleştirmek için eveti seçin."
+
+#: admin/settings/tabs/general.php:17
+msgid "Enable tags?"
+msgstr "Etiketler olsun mu?"
+
+#: admin/settings/tabs/general.php:17
+msgid "Select yes to enable the tag features"
+msgstr "Etiket özelliğini etkinleştirmek için eveti seçin"
+
+#: admin/settings/tabs/general.php:19
+msgid "Enable categories?"
+msgstr "Kategoriler olsun mu?"
+
+#: admin/settings/tabs/general.php:19
+msgid "Select yes to enable the category features"
+msgstr "Kategori özelliklerini etkinleştirmek için eveti seçin"
+
+#: admin/settings/tabs/general.php:23
+msgid "no default category"
+msgstr "varsayılan kategori yok"
+
+#: admin/settings/tabs/general.php:28
+msgid "Default Category"
+msgstr "Varsayılan Kategori"
+
+#: admin/settings/tabs/formats.php:13 admin/settings/tabs/general.php:29
+#: admin/settings/tabs/pages.php:558 admin/settings/tabs/pages.php:606
+#: admin/settings/tabs/pages.php:614 admin/settings/tabs/pages.php:622
+#: classes/em-event-posts-admin.php:199 classes/em-event-posts-admin.php:333
+msgid "None"
+msgstr "Hiçbiri"
+
+#: admin/settings/tabs/general.php:30
+msgid "This option allows you to select the default category when adding an event."
+msgstr "Bu seçenek yeni bir etkinlik eklerken varsayılan kategoriyi seçmenizi sağlar."
+
+#: admin/settings/tabs/general.php:30
+msgid "If an event does not have a category assigned when editing, this one will be assigned automatically."
+msgstr "Bir etkinliği düzenlerken eğer atanmış bir kategori yoksa, bu, otomatik olarak atanacaktır."
+
+#: admin/settings/tabs/general.php:34 admin/settings/tabs/general.php:67
+msgid "Enable %s attributes?"
+msgstr ""
+
+#: admin/settings/tabs/general.php:34 admin/settings/tabs/general.php:67
+msgid "Select yes to enable the attributes feature"
+msgstr ""
+
+#: admin/settings/tabs/general.php:35 admin/settings/tabs/general.php:68
+msgid "Enable %s custom fields?"
+msgstr ""
+
+#: admin/settings/tabs/general.php:35 admin/settings/tabs/general.php:68
+msgid "Custom fields are the same as attributes, except you cannot restrict specific values, users can add any kind of custom field name/value pair. Only available in the WordPress admin area."
+msgstr ""
+
+#: admin/settings/tabs/general.php:37 admin/settings/tabs/general.php:70
+msgid "%s Attributes"
+msgstr ""
+
+#: admin/settings/tabs/general.php:37
+msgid "You can also add event attributes here, one per line in this format <code>#_ATT{key}</code>. They will not appear on event pages unless you insert them into another template below, but you may want to store extra information about an event for other uses. <a href='%s'>More information on placeholders.</a>"
+msgstr ""
+
+#: admin/settings/tabs/general.php:45
+msgid "no default location"
+msgstr "varsayılan mekan yok"
+
+#: admin/settings/tabs/general.php:42 admin/settings/tabs/general.php:50
+msgid "Default Location"
+msgstr "Varsayılan Mekan"
+
+#: admin/settings/tabs/general.php:42 admin/settings/tabs/general.php:50
+msgid "This option allows you to select the default location when adding an event."
+msgstr "Bu seçenek yeni bir etkinlik eklerken varsayılan mekanı seçmenizi sağlar."
+
+#: admin/settings/tabs/general.php:42 admin/settings/tabs/general.php:50
+msgid "(not applicable with event ownership on presently, coming soon!)"
+msgstr "(Şu an için etkinlik sahibi olarak uygulanamaz. Pek yakında...)"
+
+#: admin/settings/tabs/general.php:54
+msgid "Default Location Country"
+msgstr "Varsayılan Mekan Ülkesi"
+
+#: admin/settings/tabs/formats.php:107 admin/settings/tabs/general.php:54
+msgid "no default country"
+msgstr "varsayılan mekan ülkesi yok"
+
+#: admin/settings/tabs/general.php:54
+msgid "If you select a default country, that will be pre-selected when creating a new location."
+msgstr "Eğer bir varsayılan ülke seçerseniz, yeni bir mekan oluşturduğunuzda bu ülke seçili olarak gelecektir."
+
+#: admin/settings/tabs/general.php:63
+msgid "Enable locations?"
+msgstr ""
+
+#: admin/settings/tabs/general.php:63
+msgid "If you disable locations, bear in mind that you should remove your location page, shortcodes and related placeholders from your <a href=\"#formats\" class=\"nav-tab-link\" rel=\"#em-menu-formats\">formats</a>."
+msgstr ""
+
+#: admin/settings/tabs/general.php:65
+msgid "Require locations for events?"
+msgstr "Etkinlikler için mekan gerekli mi?"
+
+#: admin/settings/tabs/general.php:65
+msgid "Setting this to no will allow you to submit events without locations. You can use the <code>{no_location}...{/no_location}</code> or <code>{has_location}..{/has_location}</code> conditional placeholder to selectively display location information."
+msgstr ""
+
+#: admin/settings/tabs/general.php:66
+msgid "Use dropdown for locations?"
+msgstr ""
+
+#: admin/settings/tabs/general.php:70
+msgid "You can also add location attributes here, one per line in this format <code>#_LATT{key}</code>. They will not appear on location pages unless you insert them into another template below, but you may want to store extra information about an event for other uses. <a href='%s'>More information on placeholders.</a>"
+msgstr ""
+
+#: admin/em-options.php:503 admin/settings/tabs/general.php:76
+#: admin/settings/tabs/pages.php:541
+msgid "Other"
+msgstr "Diğer"
+
+#: admin/settings/tabs/general.php:80
+msgid "Show some love?"
+msgstr "Bize kıyak yapar mısın?"
+
+#: admin/settings/tabs/general.php:80
+msgid "Hundreds of free hours have gone into making this free plugin, show your support and add a small link to the plugin website at the bottom of your event pages."
+msgstr "Bu ücretsiz plugin'in hazırlanması için binlerce saat harcandı; desteğinizi göstermek için etkinlikler sayfanızın altına plugin web sitesinin küçük bir linkini ekleyin."
+
+#: admin/settings/tabs/general.php:93
+msgid "Event Submission Forms"
+msgstr "Etkinlik Ekleme Formları"
+
+#: admin/settings/tabs/general.php:97
+msgid "You can allow users to publicly submit events on your blog by using the %s shortcode, and enabling anonymous submissions below."
+msgstr "Kullanıcılarınıza %s shortcode'unu kullanarak ve aşağıdaki anonim eklemeleri etkin hale getirerek blogunuza etkinlik ekleme izni verebilirsiniz."
+
+#: admin/settings/tabs/general.php:100
+msgid "Use Visual Editor?"
+msgstr "Görsel Editör Kullanılsın mı?"
+
+#: admin/settings/tabs/general.php:100
+msgid "Users can now use the WordPress editor for easy HTML entry in the submission form."
+msgstr "Artık kullanıcılarınız ekleme formundaki kolay HTML girişleri için WordPress editörünü kullanabilirler."
+
+#: admin/settings/tabs/general.php:101
+msgid "Show form again?"
+msgstr "Formu yeniden göstersin mi?"
+
+#: admin/settings/tabs/general.php:101
+msgid "When a user submits their event, you can display a new event form again."
+msgstr "Bir kullanıcı etkinlik eklediğinde tekrar yeni bir etkinlik formu gösterebilirsiniz."
+
+#: admin/settings/tabs/general.php:102 admin/settings/tabs/general.php:115
+msgid "Success Message"
+msgstr "İşlem Tamam Mesajı"
+
+#: admin/settings/tabs/general.php:102
+msgid "Customize the message your user sees when they submitted their event."
+msgstr "Kullanıcılarınızın bir etkinlik eklediğinde görecekleri mesajı özelleştirin."
+
+#: admin/settings/tabs/general.php:103
+msgid "Successfully Updated Message"
+msgstr "Başarıyla Güncellendi Mesajı"
+
+#: admin/settings/tabs/general.php:103
+msgid "Customize the message your user sees when they resubmit/update their event."
+msgstr "Kullanıcılarınızın bir etkinlik güncellediklerinde/yeniden eklediklerinde görecekleri mesajı özelleştirin."
+
+#: admin/settings/tabs/general.php:106
+msgid "Anonymous event submissions"
+msgstr "Anonim etkinlik kayıtları"
+
+#: admin/settings/tabs/general.php:109
+msgid "Allow anonymous event submissions?"
+msgstr "Anonim etkinlik kayıtlarına izin verilsin mi?"
+
+#: admin/settings/tabs/general.php:109
+msgid "Would you like to allow users to submit bookings anonymously? If so, you can use the new [event_form] shortcode or <code>em_event_form()</code> template tag with this enabled."
+msgstr "Kullanıcıların anonim olarak rezervasyon yaptırabilmelerine izin vermek ister misiniz? Eğer isterseniz, yeni [event_form] shortcode'unu veya <code>em_event_form()</code> şablon etiketini kullanbilirsiniz."
+
+#: admin/settings/tabs/general.php:111 admin/settings/tabs/general.php:113
+msgid "Guest Default User"
+msgstr "Varsayılan Konuk Kullanıcı"
+
+#: admin/settings/tabs/general.php:111 admin/settings/tabs/general.php:113
+msgid "Events require a user to own them. In order to allow events to be submitted anonymously you need to assign that event a specific user. We recommend you create a \"Anonymous\" subscriber with a very good password and use that. Guests will have the same event permissions as this user when submitting."
+msgstr "Etkinliklerin bir kullanıcıya ait olması gerekmektedir. Aonim kullanıcıların etkinlik eklemesine izin vermek istiyorsanız bu etkinlikleri belli kir kullanıcıya atamalısınız. \"Anonim\" adlı bir kullanıcı oluşturmanızı ve güvenli bir şifreli ile kullanmanızı öneririz. Konuklar etkinlik eklerken bu kullanıcı ile aynı etkinlik izinlerine sahip olacaktır."
+
+#: admin/settings/tabs/general.php:115
+msgid "Anonymous submitters cannot see or modify their event once submitted. You can customize the success message they see here."
+msgstr "Anonim olarak ekleme yapanlar, ekleme yaptıktan sonra etkinliklerini düzenleyemez ya da göremez. Görecekleri işlem tamamlandı mesajını burada özelleştirebilirsiniz."
+
+#: admin/settings/tabs/general.php:148
+msgid "Performance Optimization"
+msgstr "Performans Optimizasyonu"
+
+#: admin/em-options.php:579 admin/settings/tabs/general.php:148
+#: admin/settings/tabs/general.php:227
+msgid "Advanced"
+msgstr "Gelişmiş"
+
+#: admin/settings/tabs/general.php:151
+msgid "In the boxes below, you are expected to write the page IDs. For multiple pages, use comma-separated values e.g. 1,2,3. Entering 0 means EVERY page, -1 means the home page."
+msgstr "Aşağıdaki kutulara sayfa IDlerini yazmanız gerekmektedir. Birden çok sayfa için, 1,2,3 gibi virgülle ayrılmış değerler girin. 0 HER sayfa, -1 ana sayfa anlamına gelir."
+
+#: admin/settings/tabs/general.php:154
+msgid "This section allows you to configure parts of this plugin that will improve performance on your site and increase page speeds by reducing extra files from being unnecessarily included on pages as well as reducing server loads where possible. This only applies to pages outside the admin area."
+msgstr ""
+
+#: admin/settings/tabs/general.php:155
+msgid "Warning!"
+msgstr "Uyarı!"
+
+#: admin/settings/tabs/general.php:155
+msgid "This is for advanced users, you should know what you're doing here or things will not work properly. For more information on how these options work see our <a href=\"%s\" target=\"_blank\">optimization recommendations</a>"
+msgstr ""
+
+#: admin/settings/tabs/general.php:159
+msgid "JavaScript Files"
+msgstr "JavaScript Dosyaları"
+
+#: admin/settings/tabs/general.php:160
+msgid "If you are not using it already, we recommend you try the <a href=\"%s\" target=\"_blank\">Use Google Libraries</a> plugin, because without further optimization options below it already significantly reduces the number of files needed to display your Event pages and will most likely speed up your overall website loading time."
+msgstr ""
+
+#: admin/settings/tabs/general.php:163
+msgid "Limit JS file loading?"
+msgstr "JS dosya yükleme sınırlansın mı?"
+
+#: admin/settings/tabs/general.php:163
+msgid "Prevent unnecessary loading of JavaScript files on pages where they are not needed."
+msgstr "Gerekli olmayan sayfalardaki gereksiz JavaScript yüklemelerini engeller."
+
+#: admin/settings/tabs/general.php:168
+msgid "Aside from pages we automatically generate and include certain jQuery files, if you are using Widgets, Shortcode or PHP to display specific items you may need to tell us where you are using them for them to work properly. Below are options for you to include specific jQuery dependencies only on certain pages."
+msgstr ""
+
+#: admin/settings/tabs/general.php:173
+msgid "General JS"
+msgstr ""
+
+#: admin/settings/tabs/general.php:173
+msgid "Loads our own JS file if no other dependencies are already loaded, which is still needed for many items generated by EM using JavaScript such as Calendars, Maps and Booking Forms/Buttons"
+msgstr ""
+
+#: admin/settings/tabs/general.php:174
+msgid "Search Forms"
+msgstr ""
+
+#: admin/settings/tabs/general.php:174
+msgid "Include pages where you use shortcodes or widgets to display event search forms."
+msgstr ""
+
+#: admin/settings/tabs/general.php:175
+msgid "Event Edit and Submission Forms"
+msgstr "Etkinlik Düzenleme ve Ekleme Formları"
+
+#: admin/settings/tabs/general.php:175 admin/settings/tabs/general.php:176
+msgid "Include pages where you use shortcode or PHP to display event submission forms."
+msgstr "Etkinlik ekleme formlarını göstermek için shortcode veya PHP kullandığınız sayfaları kapsar."
+
+#: admin/settings/tabs/general.php:176
+msgid "Booking Management Pages"
+msgstr "Rezervasyon Yönetimi Sayfaları"
+
+#: admin/settings/tabs/general.php:180
+msgid "CSS File"
+msgstr "CSS Dosyası"
+
+#: admin/settings/tabs/general.php:183
+msgid "Limit loading of our CSS files?"
+msgstr "CSS dosyalarının yüklemesi sınırlandırılsın mı?"
+
+#: admin/settings/tabs/general.php:183
+msgid "Enabling this will prevent us from loading our CSS file on every page, and will only load on specific pages generated by Events Manager."
+msgstr "Bunu aktif hale getirmek her sayfaya CSS dosyası yüklenmesini engeller ve sadece Events Manager tarafından oluşturulan belli sayfalara yüklenmesini sağlar."
+
+#: admin/settings/tabs/general.php:190
+msgid "Include on"
+msgstr ""
+
+#: admin/settings/tabs/general.php:190
+msgid "Our CSS file will only be INCLUDED on all of these pages."
+msgstr ""
+
+#: admin/settings/tabs/general.php:191
+msgid "Exclude on"
+msgstr ""
+
+#: admin/settings/tabs/general.php:191
+msgid "Our CSS file will be EXCLUDED on all of these pages. Takes precedence over inclusion rules."
+msgstr ""
+
+#: admin/settings/tabs/general.php:197
+msgid "Thumbnails"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:5
+msgid "Many themes display extra meta information on post pages such as 'posted by' or 'post date' information, which may not be desired. Usually, page templates contain less clutter."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:7
+msgid "Be aware that some themes will not work with this option, if so (or you want to make your own changes), you can create a file named <code>single-%s.php</code> <a href='#'>as shown on the WordPress codex</a>, and leave this set to Posts."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:14
+msgid "Permalink Slugs"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:16
+msgid "You can change the permalink structure of your events, locations, categories and tags here. Be aware that you may want to set up redirects if you change your permalink structures to maintain SEO rankings."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:19 admin/settings/tabs/pages.php:21
+#: admin/settings/tabs/pages.php:24 admin/settings/tabs/pages.php:27
+msgid "e.g. %s - you can use / Separators too"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:293 admin/settings/tabs/pages.php:24
+#: admin/settings/tabs/pages.php:336 admin/settings/tabs/pages.php:340
+#: admin/settings/tabs/pages.php:341 em-posts.php:91 em-posts.php:94
+msgid "Event Categories"
+msgstr "Etkinlik Kategorileri"
+
+#: admin/settings/tabs/formats.php:334 admin/settings/tabs/pages.php:27
+#: admin/settings/tabs/pages.php:440 admin/settings/tabs/pages.php:444
+#: admin/settings/tabs/pages.php:445 em-posts.php:54 em-posts.php:57
+msgid "Event Tags"
+msgstr "Etkinlik Etiketleri"
+
+#: admin/settings/tabs/pages.php:36 admin/settings/tabs/pages.php:195
+#: admin/settings/tabs/pages.php:541
+msgid "%s Pages"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:41 admin/settings/tabs/pages.php:200
+msgid "Display %s as"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:11
+msgid "Posts"
+msgstr "Gönderiler"
+
+#: admin/settings/tabs/pages.php:44 admin/settings/tabs/pages.php:130
+#: admin/settings/tabs/pages.php:203 admin/settings/tabs/pages.php:281
+#: admin/settings/tabs/pages.php:363 admin/settings/tabs/pages.php:467
+msgid "Override with Formats?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:45 admin/settings/tabs/pages.php:204
+msgid "Enable Comments?"
+msgstr "Yorumlara İzin Verilsin mi?"
+
+#: admin/settings/tabs/pages.php:45 admin/settings/tabs/pages.php:204
+msgid "If you would like to disable comments entirely, disable this, otherwise you can disable comments on each single %s. Note that %s with comments enabled will still be until you resave them."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:37 admin/settings/tabs/formats.php:263
+#: admin/settings/tabs/pages.php:53 admin/settings/tabs/pages.php:213
+msgid "%s List/Archives"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:57
+msgid "Events page"
+msgstr "Etkinlikler sayfası"
+
+#: admin/settings/tabs/pages.php:59 admin/settings/tabs/pages.php:219
+#: admin/settings/tabs/pages.php:352 admin/settings/tabs/pages.php:456
+msgid "[No %s Page]"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:61
+msgid "This option allows you to select which page to use as an events page. If you do not select an events page, to display event lists you can enable event archives or use the appropriate shortcodes and/or template tags."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:66
+msgid "Show events search?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:66
+msgid "If set to yes, a search form will appear just above your list of events."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:67
+msgid "Display calendar in events page?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:67
+msgid "This options allows to display the calendar in the events page, instead of the default list. It is recommended not to display both the calendar widget and a calendar page."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:67
+msgid "If you would like to show events that span over more than one day, see the Calendar section on this page."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:68
+msgid "Disable title rewriting?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:68
+msgid "Some WordPress themes don't follow best practices when generating navigation menus, and so the automatic title rewriting feature may cause problems, if your menus aren't working correctly on the event pages, try setting this to 'Yes', and provide an appropriate HTML title format below."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:69
+msgid "Event Manager titles"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:69
+msgid "This only setting only matters if you selected 'Yes' to above. You will notice the events page titles aren't being rewritten, and you have a new title underneath the default page name. This is where you control the HTML of this title. Make sure you keep the #_PAGETITLE placeholder here, as that's what is rewritten by events manager. To control what's rewritten in this title, see settings further down for page titles."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:74 admin/settings/tabs/pages.php:229
+msgid "WordPress %s Archives"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:75 admin/settings/tabs/pages.php:230
+msgid "%s custom post types can have archives, just like normal WordPress posts. If enabled, should you visit your base slug url %s and you will see an post-formatted archive of previous %s"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:81 admin/settings/tabs/pages.php:236
+msgid "Enable Archives?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:81 admin/settings/tabs/pages.php:236
+msgid "Allow WordPress post-style archives."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:86
+msgid "Default event archive ordering"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:91
+msgid "Order by start date, start time"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:92
+msgid "Order by name"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:201 admin/settings/tabs/formats.php:402
+#: admin/settings/tabs/pages.php:103 admin/settings/tabs/pages.php:106
+#: admin/settings/tabs/pages.php:161 admin/settings/tabs/pages.php:259
+#: admin/settings/tabs/pages.php:262 admin/settings/tabs/pages.php:310
+#: admin/settings/tabs/pages.php:313 admin/settings/tabs/pages.php:412
+#: admin/settings/tabs/pages.php:415 admin/settings/tabs/pages.php:515
+#: admin/settings/tabs/pages.php:518 admin/settings/tabs/pages.php:582
+#: admin/settings/tabs/pages.php:585 widgets/em-events.php:146
+#: widgets/em-locations.php:114
+msgid "Ascending"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:202 admin/settings/tabs/formats.php:403
+#: admin/settings/tabs/pages.php:104 admin/settings/tabs/pages.php:107
+#: admin/settings/tabs/pages.php:162 admin/settings/tabs/pages.php:260
+#: admin/settings/tabs/pages.php:263 admin/settings/tabs/pages.php:311
+#: admin/settings/tabs/pages.php:314 admin/settings/tabs/pages.php:413
+#: admin/settings/tabs/pages.php:416 admin/settings/tabs/pages.php:516
+#: admin/settings/tabs/pages.php:519 admin/settings/tabs/pages.php:583
+#: admin/settings/tabs/pages.php:586 widgets/em-events.php:147
+#: widgets/em-locations.php:115
+msgid "Descending"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:217 admin/settings/tabs/formats.php:422
+#: admin/settings/tabs/pages.php:117 admin/settings/tabs/pages.php:181
+msgid "When Events Manager displays lists of events the default behavior is ordering by start date in ascending order. To change this, modify the values above."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:126 admin/settings/tabs/pages.php:277
+#: admin/settings/tabs/pages.php:359 admin/settings/tabs/pages.php:463
+msgid "General settings"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:132
+msgid "Are current events past events?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:133 admin/settings/tabs/pages.php:283
+msgid "Include in WordPress Searches?"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:133 admin/settings/tabs/pages.php:283
+msgid "Allow %s to appear in the built-in search results."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:137 admin/settings/tabs/pages.php:287
+#: admin/settings/tabs/pages.php:387 admin/settings/tabs/pages.php:490
+msgid "Default %s list options"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:138 admin/settings/tabs/pages.php:288
+#: admin/settings/tabs/pages.php:388 admin/settings/tabs/pages.php:491
+msgid "These can be overridden when using shortcode or template tags."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:184 admin/settings/tabs/formats.php:383
+#: admin/settings/tabs/pages.php:142
+msgid "Default event list ordering"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:388 admin/settings/tabs/pages.php:147
+msgid "Order by start date, start time, then event name"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:389 admin/settings/tabs/pages.php:148
+msgid "Order by name, start date, then start time"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:390 admin/settings/tabs/pages.php:149
+msgid "Order by name, end date, then end time"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:391 admin/settings/tabs/pages.php:150
+msgid "Order by end date, end time, then event name"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:204 admin/settings/tabs/formats.php:405
+#: admin/settings/tabs/pages.php:164
+msgid "All Ascending"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:207 admin/settings/tabs/formats.php:408
+#: admin/settings/tabs/pages.php:167
+msgid "All Descending"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:185
+msgid "Event list scope"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:185
+msgid "Only show events starting within a certain time limit on the events page. Default is future events with no end time limit."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:186 admin/settings/tabs/pages.php:205
+#: admin/settings/tabs/pages.php:430 admin/settings/tabs/pages.php:533
+msgid "Event List Limits"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:186
+msgid "This will control how many events are shown on one list by default."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:205
+msgid "Controls how many events being held at a location are shown per page when using placeholders such as %s. Leave blank for no limit."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:217 admin/settings/tabs/pages.php:350
+#: admin/settings/tabs/pages.php:454 admin/settings/tabs/pages.php:555
+#: admin/settings/tabs/pages.php:604 admin/settings/tabs/pages.php:612
+#: admin/settings/tabs/pages.php:620
+msgid "%s page"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:221
+msgid "This option allows you to select which page to use as the %s page. If you do not select a %s page, to display lists you can enable archives or use the appropriate shortcodes and/or template tags."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:241 admin/settings/tabs/pages.php:366
+#: admin/settings/tabs/pages.php:470
+msgid "Default archive ordering"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:246 admin/settings/tabs/pages.php:247
+#: admin/settings/tabs/pages.php:248 admin/settings/tabs/pages.php:297
+#: admin/settings/tabs/pages.php:298 admin/settings/tabs/pages.php:299
+#: admin/settings/tabs/pages.php:397 admin/settings/tabs/pages.php:398
+#: admin/settings/tabs/pages.php:399 admin/settings/tabs/pages.php:400
+#: admin/settings/tabs/pages.php:401 admin/settings/tabs/pages.php:500
+#: admin/settings/tabs/pages.php:501 admin/settings/tabs/pages.php:502
+#: admin/settings/tabs/pages.php:503 admin/settings/tabs/pages.php:504
+#: admin/settings/tabs/pages.php:569 admin/settings/tabs/pages.php:570
+#: admin/settings/tabs/pages.php:571
+msgid "Order by %s"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:104 admin/settings/tabs/pages.php:246
+#: admin/settings/tabs/pages.php:297 classes/em-location-posts-admin.php:58
+#: em-install.php:391 templates/tables/locations.php:46
+#: templates/tables/locations.php:57
+msgid "Country"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:247 admin/settings/tabs/pages.php:298
+#: classes/em-location-posts-admin.php:56
+msgid "Town"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:292 admin/settings/tabs/pages.php:392
+#: admin/settings/tabs/pages.php:495 admin/settings/tabs/pages.php:564
+msgid "Default list ordering"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:326 admin/settings/tabs/pages.php:429
+#: admin/settings/tabs/pages.php:532
+msgid "List Limits"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:326 admin/settings/tabs/pages.php:429
+#: admin/settings/tabs/pages.php:532
+msgid "This will control how many %s are shown on one list by default."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:299 admin/settings/tabs/formats.php:301
+#: admin/settings/tabs/formats.php:302 admin/settings/tabs/formats.php:303
+#: admin/settings/tabs/formats.php:304 admin/settings/tabs/pages.php:350
+#: admin/settings/tabs/pages.php:352 em-install.php:465 em-install.php:523
+#: em-install.php:1025 em-install.php:1087
+msgid "Categories"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:354 admin/settings/tabs/pages.php:458
+msgid "This option allows you to select which page to use as the %s page."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:301 admin/settings/tabs/formats.php:302
+#: admin/settings/tabs/formats.php:303 admin/settings/tabs/formats.php:304
+#: admin/settings/tabs/pages.php:344 admin/settings/tabs/pages.php:345
+#: admin/settings/tabs/pages.php:354 admin/settings/tabs/pages.php:363
+#: admin/settings/tabs/pages.php:429 events-manager.php:459
+#: events-manager.php:460
+msgid "categories"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:363
+msgid "Setting this to yes will make categories display as a page rather than an archive."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:382
+msgid "When listing events for a category, this order is applied."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:297 admin/settings/tabs/formats.php:308
+#: admin/settings/tabs/formats.php:309 admin/settings/tabs/formats.php:323
+#: admin/settings/tabs/pages.php:387
+msgid "category"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:397 admin/settings/tabs/pages.php:500
+#: classes/em-categories-taxonomy.php:19
+msgid "ID"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:398 admin/settings/tabs/pages.php:501
+msgid "Count"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:400 admin/settings/tabs/pages.php:503
+msgid "Slug"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:425
+msgid "When listing categories, this order is applied."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:430
+msgid "Controls how many events belonging to a category are shown per page when using placeholders such as %s. Leave blank for no limit."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:339 admin/settings/tabs/formats.php:340
+#: admin/settings/tabs/formats.php:341 admin/settings/tabs/formats.php:342
+#: admin/settings/tabs/pages.php:448 admin/settings/tabs/pages.php:449
+#: admin/settings/tabs/pages.php:458 admin/settings/tabs/pages.php:467
+#: admin/settings/tabs/pages.php:532
+msgid "tags"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:543
+msgid "These pages allow you to provide an event management interface outside the admin area on whatever page you want on your website. Bear in mind that this is overridden by BuddyPress if activated."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:550 buddypress/bp-em-notifications.php:24
+#: buddypress/bp-em-notifications.php:26 buddypress/bp-em-notifications.php:33
+#: buddypress/bp-em-notifications.php:35 buddypress/bp-em-notifications.php:41
+#: buddypress/bp-em-notifications.php:43 em-install.php:705 em-install.php:1049
+#: em-install.php:1102
+msgid "My Bookings"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:555
+msgid "My bookings"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:560
+msgid "Users can view their bookings for other events on this page."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:560 events-manager.php:433
+#: events-manager.php:434
+msgid "bookings"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:570
+msgid "Start Date"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:571 classes/em-bookings-table.php:86
+msgid "Booking Date"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:599
+msgid "Front-end management pages"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:604
+msgid "Edit events"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:608 admin/settings/tabs/pages.php:616
+msgid "Users can view, add and edit their %s on this page."
+msgstr ""
+
+#: admin/settings/tabs/pages.php:612
+msgid "Edit locations"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:620
+msgid "Manage bookings"
+msgstr ""
+
+#: admin/settings/tabs/pages.php:624
+msgid "Users can manage bookings for their events on this page."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:9 admin/settings/tabs/formats.php:242
+#: admin/settings/tabs/formats.php:299 admin/settings/tabs/formats.php:337
+msgid "%s Page"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:10
+msgid "These formats will be used on your events page. This will also be used if you do not provide specified formats in other event lists, like in shortcodes."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:13
+#: templates/forms/event/recurring-when.php:13
+#: templates/forms/event/when-with-recurring.php:35
+msgid "Yearly"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:13
+#: templates/forms/event/recurring-when.php:13
+#: templates/forms/event/when-with-recurring.php:35
+msgid "Monthly"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:13
+#: templates/forms/event/recurring-when.php:13
+#: templates/forms/event/when-with-recurring.php:35
+msgid "Weekly"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:13
+#: templates/forms/event/recurring-when.php:13
+#: templates/forms/event/when-with-recurring.php:35
+msgid "Daily"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:14
+msgid "Events page grouping"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:14
+msgid "If you choose a group by mode, your events page will display events in groups of your chosen time range."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:16 admin/settings/tabs/formats.php:139
+msgid "Date and Time formats follow the <a href=\"%s\">WordPress time formatting conventions</a>"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:17 admin/settings/tabs/formats.php:272
+#: admin/settings/tabs/formats.php:313 admin/settings/tabs/formats.php:351
+msgid "Default event list format header"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:17 admin/settings/tabs/formats.php:272
+#: admin/settings/tabs/formats.php:313 admin/settings/tabs/formats.php:351
+msgid "This content will appear just above your code for the default event list format. Default is blank"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:18
+msgid "Default event list format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:18
+msgid "The format of any events in a list."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:19 admin/settings/tabs/formats.php:274
+#: admin/settings/tabs/formats.php:315 admin/settings/tabs/formats.php:353
+msgid "Default event list format footer"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:19 admin/settings/tabs/formats.php:274
+#: admin/settings/tabs/formats.php:315 admin/settings/tabs/formats.php:353
+msgid "This content will appear just below your code for the default event list format. Default is blank"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:20 widgets/em-events.php:185
+msgid "No events message"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:20
+msgid "The message displayed when no events are available."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:21
+msgid "List events by date title"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:21
+msgid "If viewing a page for events on a specific date, this is the title that would show up. To insert date values, use <a href=\"http://www.php.net/manual/en/function.date.php\">PHP time format characters</a>  with a <code>#</code> symbol before them, i.e. <code>#m</code>, <code>#M</code>, <code>#j</code>, etc.<br/>"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:25 admin/settings/tabs/formats.php:251
+#: admin/settings/tabs/formats.php:306 admin/settings/tabs/formats.php:344
+msgid "Single %s Page"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:51
+msgid "Search Form"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:79
+msgid "Search button text"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:58
+msgid "Show text search?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:59 admin/settings/tabs/formats.php:66
+msgid "Appears within the input box."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:88
+msgid "Show date range?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:94
+msgid "Show categories?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:96 admin/settings/tabs/formats.php:109
+#: admin/settings/tabs/formats.php:115 admin/settings/tabs/formats.php:121
+#: admin/settings/tabs/formats.php:127
+msgid "Appears as the first default search option."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:106
+msgid "Show countries?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:109
+msgid "All countries text"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:113
+msgid "Show regions?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:115
+msgid "All regions text"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:119
+msgid "Show states?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:121
+msgid "All states text"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:125
+msgid "Show towns/cities?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:127
+msgid "All towns/cities text"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:144
+msgid "Date Format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:144 admin/settings/tabs/formats.php:147
+msgid "For use with the %s placeholder"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:145
+msgid "Date Picker Format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:145
+msgid "Same as <em>Date Format</em>, but this is used for the datepickers used by Events Manager. This uses a slightly different format to the others on here, for a list of characters to use, visit the <a href=\"%s\">jQuery formatDate reference</a>"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:90 admin/settings/tabs/formats.php:146
+msgid "Date Separator"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:90 admin/settings/tabs/formats.php:146
+#: admin/settings/tabs/formats.php:148
+msgid "For when start/end %s are present, this will separate the two (include spaces here if necessary)."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:90 admin/settings/tabs/formats.php:146
+msgid "dates"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:147
+msgid "Time Format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:148
+msgid "Time Separator"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:148
+msgid "times"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:149
+msgid "All Day Message"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:149
+msgid "If an event lasts all day, this text will show if using the %s placeholder"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:150
+msgid "Use 24h Format?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:150
+msgid "When creating events, would you like your times to be shown in 24 hour format?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:158 widgets/em-calendar.php:13
+msgid "Calendar"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:162
+msgid "Link directly to event on day with single event?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:162
+msgid "If a calendar day has only one event, you can force a direct link to the event (recommended to avoid duplicate content)."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:163
+msgid "Show list on day with single event?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:163
+msgid "By default, if a calendar day only has one event, it display a single event when clicking on the link of that calendar date. If you select Yes here, you will get always see a list of events."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:165
+msgid "Small Calendar"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:168
+msgid "Event titles"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:168
+msgid "The format of the title, corresponding to the text that appears when hovering on an eventful calendar day."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:169
+msgid "Title separator"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:169
+msgid "The separator appearing on the above title when more than one events are taking place on the same day."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:170
+msgid "Abbreviated weekdays"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:170
+msgid "The calendar headings uses abbreviated weekdays"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:171 admin/settings/tabs/formats.php:179
+msgid "Initial lengths"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:171 admin/settings/tabs/formats.php:179
+msgid "Shorten the calendar headings containing the days of the week, use 0 for the full name."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:174
+msgid "Full Calendar"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:177
+msgid "Event format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:177
+msgid "The format of each event when displayed in the full calendar. Remember to include <code>li</code> tags before and after the event."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:178
+msgid "Abbreviated weekdays?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:178
+msgid "Use abbreviations, e.g. Friday = Fri. Useful for certain languages where abbreviations differ from full names."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:182
+msgid "Calendar Day Event List Settings"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:189
+msgid "Order by event name, then event start time"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:190
+msgid "Order by event start time, then event name"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:221
+msgid "Calendar events/day limit"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:221
+msgid "Limits the number of events on each calendar day. Leave blank for no limit."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:222
+msgid "More Events message"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:222
+msgid "Text with link to calendar day page with all events for that day if there are more events than the limit above, leave blank for no link as the day number is also a link."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:224
+msgid "iCal Feed Settings"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:226
+msgid "iCal Title"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:226
+msgid "The title that will appear in the calendar."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:230
+msgid "iCal Limit"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:230 admin/settings/tabs/formats.php:379
+msgid "Limits the number of future events shown (0 = unlimited)."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:244 admin/settings/tabs/formats.php:301
+#: admin/settings/tabs/formats.php:339
+msgid "%s list header format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:244 admin/settings/tabs/formats.php:301
+#: admin/settings/tabs/formats.php:339
+msgid "This content will appear just above your code for the %s list format below. Default is blank"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:245 admin/settings/tabs/formats.php:302
+#: admin/settings/tabs/formats.php:340
+msgid "%s list item format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:245 admin/settings/tabs/formats.php:302
+#: admin/settings/tabs/formats.php:340
+msgid "The format of a single %s in a list."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:246 admin/settings/tabs/formats.php:303
+#: admin/settings/tabs/formats.php:341
+msgid "%s list footer format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:246 admin/settings/tabs/formats.php:303
+#: admin/settings/tabs/formats.php:341
+msgid "This content will appear just below your code for the %s list format above. Default is blank"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:247 admin/settings/tabs/formats.php:275
+#: admin/settings/tabs/formats.php:283 admin/settings/tabs/formats.php:304
+#: admin/settings/tabs/formats.php:316 admin/settings/tabs/formats.php:324
+#: admin/settings/tabs/formats.php:342 admin/settings/tabs/formats.php:354
+#: admin/settings/tabs/formats.php:362
+msgid "No %s message"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:247 admin/settings/tabs/formats.php:304
+#: admin/settings/tabs/formats.php:342
+msgid "The message displayed when no %s are available."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:30 admin/settings/tabs/formats.php:256
+#: admin/settings/tabs/formats.php:308 admin/settings/tabs/formats.php:346
+msgid "Single %s title format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:32 admin/settings/tabs/formats.php:258
+#: admin/settings/tabs/formats.php:309 admin/settings/tabs/formats.php:347
+msgid "Single %s page format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:270 admin/settings/tabs/formats.php:311
+#: admin/settings/tabs/formats.php:349
+msgid "%s List Formats"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:273 admin/settings/tabs/formats.php:314
+#: admin/settings/tabs/formats.php:352
+msgid "Default %s list format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:273
+msgid "The format of the events the list inserted in the location page through the %s element."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:275 admin/settings/tabs/formats.php:283
+#: admin/settings/tabs/formats.php:316 admin/settings/tabs/formats.php:324
+#: admin/settings/tabs/formats.php:362
+msgid "The message to be displayed in the list generated by %s when no events are available."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:92 admin/settings/tabs/formats.php:306
+#: em-install.php:387 templates/buddypress/my-group-events.php:107
+msgid "Category"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:308
+msgid "The format of a single category page title."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:314
+msgid "The format of the events the list inserted in the category page through the %s element."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:344
+msgid "Tag"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:346 admin/settings/tabs/formats.php:347
+#: admin/settings/tabs/formats.php:361 admin/settings/tabs/pages.php:490
+msgid "tag"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:346
+msgid "The format of a single tag page title."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:352
+msgid "The format of the events the list inserted in the tag page through the <code>#_TAGNEXTEVENTS</code>, <code>#_TAGNEXTEVENTS</code> and <code>#_TAGALLEVENTS</code> element."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:354
+msgid "The message to be displayed in the list generated by <code>#_TAGNEXTEVENTS</code>, <code>#_TAGNEXTEVENTS</code> and <code>#_TAGALLEVENTS</code> when no events are available."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:371
+msgid "RSS"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:375
+msgid "RSS main title"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:375
+msgid "The main title of your RSS events feed."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:376
+msgid "RSS main description"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:376
+msgid "The main description of your RSS events feed."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:377
+msgid "RSS title format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:377
+msgid "The format of the title of each item in the events RSS feed."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:378
+msgid "RSS description format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:378
+msgid "The format of the description of each item in the events RSS feed."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:433
+msgid "Maps"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:435
+msgid "You can use Google Maps to show where your events are located. For more information on using maps, <a href=\"%s\">see our documentation</a>."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:439
+msgid "Enable Google Maps integration?"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:441 em-functions.php:721
+msgid "Yes"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:442 em-functions.php:721
+msgid "No"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:443
+msgid "Check this option to enable Goggle Map integration."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:449
+msgid "Global Map Format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:450
+msgid "If you use the %s <a href=\"%s\">shortcode</a>, you can display a map of all your locations and events, the settings below will be used."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:453 admin/settings/tabs/formats.php:460
+msgid "Location balloon format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:453 admin/settings/tabs/formats.php:460
+msgid "The format of the text appearing in the balloon describing the location."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:453
+msgid "Event."
+msgstr ""
+
+#: admin/settings/tabs/formats.php:456
+msgid "Single Location/Event Map Format"
+msgstr ""
+
+#: admin/settings/tabs/formats.php:457
+msgid "If you use the <code>#_LOCATIONMAP</code> <a href=\"%s\">placeholder</a> when displaying individual event and location information, the settings below will be used."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:10
+msgid "Allow guest bookings?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:10
+msgid "If enabled, guest visitors can supply an email address and a user account will automatically be created for them along with their booking. They will be also be able to log back in with that newly created account."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:11
+msgid "Approval Required?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:11
+msgid "Bookings will not be confirmed until the event administrator approves it."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:12
+msgid "Reserved unconfirmed spaces?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:12
+msgid "By default, event spaces become unavailable once there are enough CONFIRMED bookings. To reserve spaces even if unapproved, choose yes."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:13
+msgid "Can users cancel their booking?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:13
+msgid "If enabled, users can cancel their bookings themselves from their bookings page."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:14
+msgid "Allow overbooking when approving?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:14
+msgid "If you get a lot of pending bookings and you decide to allow more bookings than spaces allow, setting this to yes will allow you to override the event space limit when manually approving."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:15
+msgid "Allow double bookings?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:15
+msgid "If enabled, users can book an event more than once."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:23
+msgid "Pricing"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:28
+msgid "Currency"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:28
+msgid "Choose your currency for displaying event pricing."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:29
+msgid "Thousands Separator"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:30
+msgid "Decimal Point"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:31
+msgid "Currency Format"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:31
+msgid "Choose how prices are displayed. <code>@</code> will be replaced by the currency symbol, and <code>#</code> will be replaced by the number."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:32
+msgid "Tax Rate"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:32
+msgid "Add a tax rate to your ticket prices (entering 10 will add 10% to the ticket price)."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:33
+msgid "Add tax to ticket price?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:33
+msgid "When displaying ticket prices and booking totals, include the tax automatically?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:41
+msgid "Customize Feedback Messages"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:43
+msgid "Below you will find texts that will be displayed to users in various areas during the bookings process, particularly on booking forms."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:45
+msgid "My Bookings messages"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:47 em-install.php:684 em-install.php:692
+msgid "Booking Cancelled"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:47
+msgid "When a user cancels their booking, this message will be displayed confirming the cancellation."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:48
+msgid "Booking Cancellation Warning"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:48
+msgid "When a user chooses to cancel a booking, this warning is displayed for them to confirm."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:50
+msgid "Booking form texts/messages"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:52
+msgid "Bookings disabled"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:52
+msgid "An event with no bookings."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:53
+msgid "Bookings closed"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:53
+msgid "Bookings have closed (e.g. event has started)."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:54
+msgid "Fully booked"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:54
+msgid "Event is fully booked."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:55
+msgid "Already attending"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:55
+msgid "If already attending and double bookings are disabled, this message will be displayed, followed by a link to the users booking page."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:56
+msgid "Manage bookings link text"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:56
+msgid "Link text used for link to user bookings."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:58
+msgid "Booking form feedback messages"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:59
+msgid "When a booking is made by a user, a feedback message is shown depending on the result, which can be customized below."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:61
+msgid "Successful booking"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:61
+msgid "When a booking is registered and confirmed."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:62
+msgid "Successful pending booking"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:62
+msgid "When a booking is registered but pending."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:63
+msgid "Not enough spaces"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:63
+msgid "When a booking cannot be made due to lack of spaces."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:64
+msgid "Errors"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:64
+msgid "When a booking cannot be made due to an error when filling the form. Below this, there will be a dynamic list of errors."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:65
+msgid "Email Exists"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:65
+msgid "When a guest tries to book using an email registered with a user account."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:66
+msgid "User must log in"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:66
+msgid "When a user must log in before making a booking."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:67
+msgid "Error mailing user"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:67
+msgid "If a booking is made and an email cannot be sent, this is added to the success message."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:68
+msgid "Already booked"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:68
+msgid "If the user made a previous booking and cannot double-book."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:69
+msgid "No spaces booked"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:69
+msgid "If the user tries to make a booking without requesting any spaces."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:69 em-install.php:670
+msgid "Sold Out"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:72
+msgid "Booking button feedback messages"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:73
+msgid "When the %s placeholder, the below texts will be used."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:75
+msgid "User can book"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:76
+msgid "Booking in progress"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:77
+msgid "Booking complete"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:79
+msgid "Booking error"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:80
+msgid "Event fully booked"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:82
+msgid "Cancelation in progress"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:83
+msgid "Cancelation complete"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:84
+msgid "Cancelation error"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:93
+msgid "Booking Form"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:97
+msgid "Display login form?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:97
+msgid "Choose whether or not to display a login form in the booking form area to remind your members to log in before booking."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:98
+msgid "Submit button text"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:98
+msgid "The text used by the submit button. To use an image instead, enter the full url starting with %s or %s."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:107
+msgid "Ticket"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:111
+msgid "Single ticket mode?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:112
+msgid "Show ticket table in single ticket mode?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:112
+msgid "If you prefer a ticket table like with multiple tickets, even for single ticket events, enable this."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:113 admin/settings/tabs/bookings.php:114
+msgid "Show unavailable tickets?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:113
+msgid "You can choose whether or not to show unavailable tickets to visitors."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:116
+msgid "Show multiple tickets if logged out?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:118
+msgid "Ticket Price (Descending)"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:119
+msgid "Ticket Price (Ascending)"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:120
+msgid "Ticket Name (Ascending)"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:121
+msgid "Ticket Name (Descending)"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:123
+msgid "Order Tickets By"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:123
+msgid "Choose which order your tickets appear."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:131 admin/settings/tabs/emails.php:100
+msgid "No-User Booking Mode"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:135
+msgid "By default, when a booking is made by a user, this booking is tied to a user account, if the user is not registered nor logged in and guest bookings are enabled, an account will be created for them."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:136
+msgid "The option below allows you to disable user accounts and assign all bookings to a parent user, yet you will still see the supplied booking personal information for each booking. When this mode is enabled, extra booking information about the person is stored alongside the booking record rather than as a WordPress user."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:138
+msgid "<strong>Warning : </strong> Various features afforded to users with an account will not be available, e.g. viewing bookings. Once you enable this and select a user, modifying these values will prevent older non-user bookings from displaying the correct information."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:141
+msgid "Enable No-User Booking Mode?"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:141
+msgid "This disables user registrations for bookings."
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:149 admin/settings/tabs/bookings.php:151
+msgid "Assign bookings to"
+msgstr ""
+
+#: admin/settings/tabs/bookings.php:149 admin/settings/tabs/bookings.php:151
+msgid "Choose a parent user to assign bookings to. People making their booking will be unaware of this and will never have access to those user details. This should be a subscriber user you do not use to log in with yourself."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:9
+msgid "Booking Email Templates"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:14
+msgid "You can disable this email by leaving the subject blank."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:15
+msgid "Email events admin?"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:15
+msgid "If you would like every event booking confirmation email sent to an administrator write their email here (leave blank to not send an email)."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:15
+msgid "For multiple emails, separate by commas (e.g. email1@test.com,email2@test.com,etc.)"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:16
+msgid "Email event owner?"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:16
+msgid "Check this option if you want the event contact to receive an email when someone books places. An email will be sent when a booking is first made (regardless if confirmed or pending)"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:105
+msgid "Disable new registration email?"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:105
+msgid "Check this option if you want to prevent the WordPress registration email from going out when a user anonymously books an event."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:38
+msgid "An email will be sent to the event contact if someone cancels their booking."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:21 admin/settings/tabs/emails.php:56
+msgid "Confirmed booking email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:22 admin/settings/tabs/emails.php:57
+msgid "This is sent when a person's booking is confirmed. This will be sent automatically if approvals are required and the booking is approved. If approvals are disabled, this is sent out when a user first submits their booking."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:25 admin/settings/tabs/emails.php:60
+msgid "Booking confirmed email subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:26 admin/settings/tabs/emails.php:61
+msgid "Booking confirmed email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:29 admin/settings/tabs/emails.php:64
+msgid "Pending booking email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:65
+msgid "This will be sent to the person when they first submit their booking. Not relevant if bookings don't require approval."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:33 admin/settings/tabs/emails.php:68
+msgid "Booking pending email subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:34 admin/settings/tabs/emails.php:69
+msgid "Booking pending email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:45 admin/settings/tabs/emails.php:72
+msgid "Rejected booking email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:73
+msgid "This will be sent automatically when a booking is rejected. Not relevant if bookings don't require approval."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:49 admin/settings/tabs/emails.php:76
+msgid "Booking rejected email subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:50 admin/settings/tabs/emails.php:77
+msgid "Booking rejected email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:37 admin/settings/tabs/emails.php:80
+msgid "Booking cancelled"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:81
+msgid "This will be sent when a user cancels their booking."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:41 admin/settings/tabs/emails.php:84
+msgid "Booking cancelled email subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:42 admin/settings/tabs/emails.php:85
+msgid "Booking cancelled email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:117
+msgid "Event Submission Templates"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:122
+msgid "Administrator Email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:122
+msgid "Event submission notifications will be sent to emails added here."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:122
+msgid "If left blank, no emails will be sent. Separate emails with commas for more than one email."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:126
+msgid "Event Submitted"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:127
+msgid "An email will be sent to your administrator emails when an event is submitted and pending approval."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:130
+msgid "Event submitted subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:130 admin/settings/tabs/emails.php:138
+#: admin/settings/tabs/emails.php:146 admin/settings/tabs/emails.php:157
+#: admin/settings/tabs/emails.php:165
+msgid "If left blank, this email will not be sent."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:131
+msgid "Event submitted email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:134
+msgid "Event Re-Submitted"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:135 admin/settings/tabs/emails.php:162
+msgid "When a user modifies a previously published event, it will be put back into pending review status and will not be published until you re-approve it."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:138
+msgid "Event resubmitted subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:139
+msgid "Event resubmitted email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:142
+msgid "Event Published"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:143
+msgid "An email will be sent to an administrator of your choice when an event is published by users who are not administrators."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:146
+msgid "Event published subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:147
+msgid "Event published email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:153 em-install.php:422 em-install.php:424
+msgid "Event Approved"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:154
+msgid "An email will be sent to the event owner when their event is approved. Users requiring event approval do not have the <code>publish_events</code> capability."
+msgstr ""
+
+#: admin/settings/tabs/emails.php:157
+msgid "Event approved subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:158
+msgid "Event approved email"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:165
+msgid "Event reapproved subject"
+msgstr ""
+
+#: admin/settings/tabs/emails.php:166
+msgid "Event reapproved email"
+msgstr ""
+
+#: admin/em-options.php:365
+msgid "Image Sizes"
+msgstr ""
+
+#: admin/em-options.php:370
+msgid "Maximum width (px)"
+msgstr ""
+
+#: admin/em-options.php:371
+msgid "Minimum width (px)"
+msgstr ""
+
+#: admin/em-options.php:372
+msgid "Maximum height (px)"
+msgstr ""
+
+#: admin/em-options.php:372
+msgid "The maximum allowed height for images uploaded, in pixels"
+msgstr ""
+
+#: admin/em-options.php:373
+msgid "Minimum height (px)"
+msgstr ""
+
+#: admin/em-options.php:373
+msgid "The minimum allowed height for images uploaded, in pixels"
+msgstr ""
+
+#: admin/em-options.php:374
+msgid "Maximum size (bytes)"
+msgstr ""
+
+#: admin/em-options.php:374
+msgid "The maximum allowed size for images uploaded, in bytes"
+msgstr ""
+
+#: admin/em-options.php:391
+msgid "Email Settings"
+msgstr ""
+
+#: admin/em-options.php:394
+msgid "Before you save your changes, you can quickly send yourself a test email by clicking this button."
+msgstr ""
+
+#: admin/em-options.php:396 admin/em-options.php:447
+msgid "Test Email Settings"
+msgstr ""
+
+#: admin/em-options.php:402
+msgid "Notification sender name"
+msgstr ""
+
+#: admin/em-options.php:402
+msgid "Insert the display name of the notification sender."
+msgstr ""
+
+#: admin/em-options.php:403
+msgid "Notification sender address"
+msgstr ""
+
+#: admin/em-options.php:403
+msgid "Insert the address of the notification sender."
+msgstr ""
+
+#: admin/em-options.php:404
+msgid "Mail sending method"
+msgstr ""
+
+#: admin/em-options.php:404
+msgid "PHP mail function"
+msgstr ""
+
+#: admin/em-options.php:404
+msgid "Select the method to send email notification."
+msgstr ""
+
+#: admin/em-options.php:405
+msgid "Send HTML Emails?"
+msgstr ""
+
+#: admin/em-options.php:405
+msgid "If set to yes, your emails will be sent in HTML format, otherwise plaintext."
+msgstr ""
+
+#: admin/em-options.php:405
+msgid "Depending on server settings, some sending methods may ignore this settings."
+msgstr ""
+
+#: admin/em-options.php:406
+msgid "Add br tags to HTML emails?"
+msgstr ""
+
+#: admin/em-options.php:406
+msgid "If HTML emails are enabled, br tags will automatically be added for new lines."
+msgstr ""
+
+#: admin/em-options.php:410
+msgid "The port through which you e-mail notifications will be sent. Make sure the firewall doesn't block this port"
+msgstr ""
+
+#: admin/em-options.php:411
+msgid "Use SMTP authentication?"
+msgstr ""
+
+#: admin/em-options.php:411
+msgid "SMTP authentication is often needed. If you use Gmail, make sure to set this parameter to Yes"
+msgstr ""
+
+#: admin/em-options.php:412
+msgid "The SMTP host. Usually it corresponds to 'localhost'. If you use Gmail, set this value to 'ssl://smtp.gmail.com:465'."
+msgstr ""
+
+#: admin/em-options.php:413
+msgid "SMTP username"
+msgstr ""
+
+#: admin/em-options.php:413
+msgid "Insert the username to be used to access your SMTP server."
+msgstr ""
+
+#: admin/em-options.php:414
+msgid "SMTP password"
+msgstr ""
+
+#: admin/em-options.php:414
+msgid "Insert the password to be used to access your SMTP server"
+msgstr ""
+
+#: admin/em-options.php:446
+msgid "Checking..."
+msgstr ""
+
+#: admin/em-options.php:464
+msgid "User Capabilities"
+msgstr ""
+
+#: admin/em-options.php:468
+msgid "Warning: Changing these values may result in exposing previously hidden information to all users."
+msgstr ""
+
+#: admin/em-options.php:474 admin/em-options.php:484 admin/em-options.php:492
+#: admin/em-options.php:503
+msgid "%s Capabilities"
+msgstr ""
+
+#: admin/em-options.php:476 admin/em-options.php:486 admin/em-options.php:494
+msgid "Users can publish %s and skip any admin approval"
+msgstr ""
+
+#: admin/em-options.php:477 admin/em-options.php:487 admin/em-options.php:495
+msgid "User can delete other users %s"
+msgstr ""
+
+#: admin/em-options.php:478 admin/em-options.php:488 admin/em-options.php:496
+msgid "User can edit other users %s"
+msgstr ""
+
+#: admin/em-options.php:479 admin/em-options.php:489 admin/em-options.php:497
+msgid "User can delete their own %s"
+msgstr ""
+
+#: admin/em-options.php:480 admin/em-options.php:490 admin/em-options.php:498
+msgid "User can create and edit %s"
+msgstr ""
+
+#: admin/em-options.php:481 admin/em-options.php:499
+msgid "User can view private %s"
+msgstr ""
+
+#: admin/em-options.php:484 em-posts.php:192
+msgid "Recurring Event"
+msgstr ""
+
+#: admin/em-options.php:486 admin/em-options.php:487 admin/em-options.php:488
+#: admin/em-options.php:489 admin/em-options.php:490 events-manager.php:444
+#: events-manager.php:445 events-manager.php:446 events-manager.php:447
+#: events-manager.php:448
+msgid "recurring events"
+msgstr ""
+
+#: admin/em-options.php:500
+msgid "User can use other user locations for their events."
+msgstr ""
+
+#: admin/em-options.php:505
+msgid "User can delete %s categories and tags."
+msgstr ""
+
+#: admin/em-options.php:506
+msgid "User can edit %s categories and tags."
+msgstr ""
+
+#: admin/em-options.php:508
+msgid "User can manage other users individual bookings and event booking settings."
+msgstr ""
+
+#: admin/em-options.php:509
+msgid "User can use and manage bookings with their events."
+msgstr ""
+
+#: admin/em-options.php:510
+msgid "User can upload images along with their events and locations."
+msgstr ""
+
+#: admin/em-options.php:469
+msgid "You can now give fine grained control with regards to what your users can do with events. Each user role can have perform different sets of actions."
+msgstr ""
+
+#: admin/em-options.php:516
+msgid "Apply global capabilities?"
+msgstr ""
+
+#: admin/em-options.php:516
+msgid "If set to yes the capabilities will be applied all your network blogs and you will not be able to set custom capabilities each blog. You can select no later and visit specific blog settings pages to add/remove capabilities."
+msgstr ""
+
+#: admin/em-options.php:579
+msgid "Admin Tools"
+msgstr ""
+
+#: admin/em-options.php:583
+msgid "Development Versions &amp; Updates"
+msgstr ""
+
+#: admin/em-options.php:584
+msgid "We're always making improvements, adding features and fixing bugs between releases. We incrementally make these changes in between updates and make it available as a development version. You can download these manually, but we've made it easy for you. <strong>Warning:</strong> Development versions are not always fully tested before release, use wisely!"
+msgstr ""
+
+#: admin/em-options.php:586
+msgid "Enable Dev Updates?"
+msgstr ""
+
+#: admin/em-options.php:586
+msgid "If enabled, the latest dev version will always be checked instead of the latest stable version of the plugin."
+msgstr ""
+
+#: admin/em-options.php:588
+msgid "Re-Check Updates"
+msgstr ""
+
+#: admin/em-options.php:589
+msgid "If you would like to check and see if there is a new stable update."
+msgstr ""
+
+#: admin/em-options.php:592
+msgid "Check Dev Versions"
+msgstr ""
+
+#: admin/em-options.php:593
+msgid "If you would like to download a dev version, but just as a one-off, you can force a dev version check by clicking the button below. If there is one available, it should appear in your plugin updates page as a regular update."
+msgstr ""
+
+#: admin/em-options.php:599
+msgid "Uninstall/Reset"
+msgstr ""
+
+#: admin/em-options.php:600
+msgid "Use the buttons below to uninstall Events Manager completely from your system or reset Events Manager to original settings and keep your event data."
+msgstr ""
+
+#: admin/em-options.php:604
+msgid "Reset"
+msgstr ""
+
+#: buddypress/bp-em-activity.php:115 buddypress/bp-em-activity.php:133
+msgid "%s added the event %s"
+msgstr ""
+
+#: buddypress/bp-em-activity.php:144
+msgid "%s added the event %s to %s."
+msgstr ""
+
+#: buddypress/bp-em-activity.php:89 buddypress/bp-em-activity.php:173
+msgid "%s is attending %s."
+msgstr ""
+
+#: buddypress/bp-em-activity.php:96 buddypress/bp-em-activity.php:175
+msgid "%s will not be attending %s anymore."
+msgstr ""
+
+#: buddypress/bp-em-activity.php:87 buddypress/bp-em-activity.php:182
+msgid "%s is attending %s of the group %s."
+msgstr ""
+
+#: buddypress/bp-em-activity.php:94 buddypress/bp-em-activity.php:184
+msgid "%s will not be attending %s of group %s anymore."
+msgstr ""
+
+#: buddypress/bp-em-core.php:53
+msgid "Search %s..."
+msgstr ""
+
+#: buddypress/bp-em-core.php:92 buddypress/bp-em-core.php:200
+msgid "My Profile"
+msgstr ""
+
+#: buddypress/bp-em-core.php:101 buddypress/bp-em-core.php:207
+#: buddypress/screens/attending.php:23 templates/buddypress/profile.php:31
+msgid "Events I'm Attending"
+msgstr ""
+
+#: buddypress/bp-em-core.php:112 buddypress/bp-em-core.php:215
+#: buddypress/screens/my-events.php:32 templates/buddypress/profile.php:7
+msgid "My Events"
+msgstr ""
+
+#: buddypress/bp-em-core.php:124 buddypress/bp-em-core.php:224
+#: buddypress/screens/my-locations.php:32
+msgid "My Locations"
+msgstr ""
+
+#: buddypress/bp-em-core.php:136 buddypress/bp-em-core.php:233
+#: buddypress/screens/my-bookings.php:36
+msgid "My Event Bookings"
+msgstr ""
+
+#: buddypress/bp-em-groups.php:144 buddypress/bp-em-groups.php:145
+msgid "Group Ownership"
+msgstr ""
+
+#: buddypress/bp-em-notifications.php:24
+msgid "You have a pending booking"
+msgstr ""
+
+#: buddypress/bp-em-notifications.php:26
+msgid "You have %s pending bookings"
+msgstr ""
+
+#: buddypress/bp-em-notifications.php:33
+msgid "You have a confirmed booking"
+msgstr ""
+
+#: buddypress/bp-em-notifications.php:35
+msgid "You have %s confirmed bookings"
+msgstr ""
+
+#: buddypress/bp-em-notifications.php:41
+msgid "A user cancelled a booking"
+msgstr ""
+
+#: buddypress/bp-em-notifications.php:43
+msgid "%s users cancelled bookings."
+msgstr ""
+
+#: buddypress/screens/group-events.php:20
+#: buddypress/screens/my-group-events.php:20
+msgid "Group Events"
+msgstr ""
+
+#: buddypress/screens/my-events.php:47 em-events.php:178
+msgid "Reschedule Events"
+msgstr ""
+
+#: buddypress/screens/my-events.php:49 classes/em-event.php:1588
+#: em-events.php:180 em-posts.php:150
+msgid "Edit Event"
+msgstr ""
+
+#: buddypress/screens/my-events.php:52 em-events.php:183 em-posts.php:147
+#: templates/buddypress/profile.php:24
+msgid "Add Event"
+msgstr ""
+
+#: buddypress/screens/my-locations.php:46 em-events.php:189 em-posts.php:242
+msgid "Add Location"
+msgstr ""
+
+#: buddypress/screens/my-locations.php:48 classes/em-location.php:870
+#: em-events.php:191 em-posts.php:245
+msgid "Edit Location"
+msgstr ""
+
+#: buddypress/screens/profile.php:11
+msgid "You are currently viewing your public page, this is what other users will see."
+msgstr ""
+
+#: classes/em-booking.php:133 classes/em-event.php:267
+msgid "Approved"
+msgstr ""
+
+#: classes/em-booking.php:134 classes/em-bookings-table.php:57
+#: em-install.php:343
+msgid "Rejected"
+msgstr ""
+
+#: classes/em-booking.php:135 classes/em-bookings-table.php:56
+#: em-install.php:342 em-install.php:651 em-install.php:673
+msgid "Cancelled"
+msgstr ""
+
+#: classes/em-booking.php:136
+msgid "Awaiting Online Payment"
+msgstr ""
+
+#: classes/em-booking.php:137
+msgid "Awaiting Payment"
+msgstr ""
+
+#: classes/em-booking.php:186 classes/em-ticket-booking.php:69
+#: classes/em-ticket.php:129
+msgid "Changes saved"
+msgstr ""
+
+#: classes/em-booking.php:194
+msgid "Your booking has been recorded"
+msgstr ""
+
+#: classes/em-booking.php:198 classes/em-booking.php:199
+#: classes/em-booking.php:207 classes/em-booking.php:218
+#: classes/em-tickets-bookings.php:69 classes/em-tickets-bookings.php:70
+msgid "There was a problem saving the booking."
+msgstr ""
+
+#: classes/em-booking.php:220
+msgid "You cannot manage this %s."
+msgstr ""
+
+#: classes/em-booking.php:220 classes/em-booking.php:743
+#: classes/em-booking.php:746 classes/em-bookings.php:124
+#: classes/em-tickets-bookings.php:165 em-install.php:667 em-install.php:669
+msgid "Booking"
+msgstr ""
+
+#: classes/em-booking.php:273
+msgid "You are trying to book a non-existent ticket for this event."
+msgstr ""
+
+#: classes/em-booking.php:624 classes/em-booking.php:632
+msgid "Guest User"
+msgstr ""
+
+#: classes/em-booking.php:628 classes/em-booking.php:703
+msgid "Not Supplied"
+msgstr ""
+
+#: classes/em-booking.php:743
+msgid "%s deleted"
+msgstr ""
+
+#: classes/em-booking.php:746
+msgid "%s could not be deleted"
+msgstr ""
+
+#: classes/em-booking.php:792
+msgid "Not approved, spaces full."
+msgstr ""
+
+#: classes/em-booking.php:801
+msgid "Booking %s."
+msgstr ""
+
+#: classes/em-booking.php:815 classes/em-booking.php:816
+msgid "Booking could not be %s."
+msgstr ""
+
+#: classes/em-booking.php:856
+msgid "Booking note successfully added."
+msgstr ""
+
+#: classes/em-booking.php:1025
+msgid "Confirmation email could not be sent to admin. Registrant should have gotten their email (only admin see this warning)."
+msgstr ""
+
+#: classes/em-bookings-table.php:55 em-install.php:340
+msgid "Confirmed"
+msgstr ""
+
+#: classes/em-bookings-table.php:58
+msgid "Needs Attention"
+msgstr ""
+
+#: classes/em-bookings-table.php:59
+msgid "Incomplete Bookings"
+msgstr ""
+
+#: classes/em-bookings-table.php:77
+msgid "First Name"
+msgstr ""
+
+#: classes/em-bookings-table.php:78
+msgid "Last Name"
+msgstr ""
+
+#: classes/em-bookings-table.php:80
+msgid "Event Date(s)"
+msgstr ""
+
+#: classes/em-bookings-table.php:81
+msgid "Event Time(s)"
+msgstr ""
+
+#: classes/em-bookings-table.php:83
+msgid "Phone Number"
+msgstr ""
+
+#: classes/em-bookings-table.php:87
+msgid "Total"
+msgstr ""
+
+#: classes/em-bookings-table.php:88
+msgid "Booking ID"
+msgstr ""
+
+#: classes/em-bookings-table.php:89
+msgid "Booking Comment"
+msgstr ""
+
+#: classes/em-bookings-table.php:92 templates/forms/event/bookings.php:33
+msgid "Ticket Name"
+msgstr ""
+
+#: classes/em-bookings-table.php:93
+msgid "Ticket Description"
+msgstr ""
+
+#: classes/em-bookings-table.php:94
+msgid "Ticket Price"
+msgstr ""
+
+#: classes/em-bookings-table.php:95
+msgid "Ticket ID"
+msgstr ""
+
+#: classes/em-bookings-table.php:103
+msgid "Actions"
+msgstr ""
+
+#: classes/em-bookings-table.php:261
+msgid "Bookings Table Settings"
+msgstr ""
+
+#: classes/em-bookings-table.php:263
+msgid "Modify what information is displayed in this booking table."
+msgstr ""
+
+#: classes/em-bookings-table.php:266
+msgid "Columns to show"
+msgstr ""
+
+#: classes/em-bookings-table.php:267
+msgid "Drag items to or from the left column to add or remove them."
+msgstr ""
+
+#: classes/em-bookings-table.php:290 events-manager.php:331
+msgid "Export Bookings"
+msgstr ""
+
+#: classes/em-bookings-table.php:292
+msgid "Select the options below and export all the bookings you have currently filtered (all pages) into a CSV spreadsheet format."
+msgstr ""
+
+#: classes/em-bookings-table.php:294
+msgid "Split bookings by ticket type"
+msgstr ""
+
+#: classes/em-bookings-table.php:295
+msgid "If your events have multiple tickets, enabling this will show a separate row for each ticket within a booking."
+msgstr ""
+
+#: classes/em-bookings-table.php:299
+msgid "Columns to export"
+msgstr ""
+
+#: classes/em-bookings-table.php:376
+msgid "Export these bookings."
+msgstr ""
+
+#: classes/em-bookings-table.php:391
+msgid "%s Rows"
+msgstr ""
+
+#: classes/em-bookings-table.php:411
+msgid "Displaying Event"
+msgstr ""
+
+#: classes/em-bookings-table.php:413
+msgid "Displaying User"
+msgstr ""
+
+#: classes/em-bookings-table.php:464
+msgid "No bookings."
+msgstr ""
+
+#: classes/em-bookings.php:124
+msgid "%s created."
+msgstr ""
+
+#: classes/em-bookings.php:311 classes/em-bookings.php:317
+msgid "Bookings %s. Mails Sent."
+msgstr ""
+
+#: classes/em-bookings.php:321
+msgid "An error occurred."
+msgstr ""
+
+#: classes/em-categories-taxonomy.php:56
+msgid "Choose a color for your category. You can access this using the %s placeholder."
+msgstr ""
+
+#: classes/em-categories-taxonomy.php:68
+msgid "Choose/Upload Image"
+msgstr ""
+
+#: classes/em-categories-taxonomy.php:73
+msgid "Choose an image for your category, which can be displayed using the %s placeholder."
+msgstr ""
+
+#: classes/em-event-post-admin.php:38
+msgid "WARNING: This is a recurring event."
+msgstr ""
+
+#: classes/em-event-post-admin.php:39
+msgid "Modifications to this event will cause all recurrences of this event to be deleted and recreated and previous bookings will be deleted! You can edit individual recurrences and disassociate them with this recurring event."
+msgstr ""
+
+#: classes/em-event-post-admin.php:42
+msgid "WARNING: This is a recurrence in a set of recurring events."
+msgstr ""
+
+#: classes/em-event-post-admin.php:43
+msgid "If you update this event data and save, it could get overwritten if you edit the recurring event template. To make it an independent, <a href=\"%s\">detach it</a>."
+msgstr ""
+
+#: classes/em-event-post-admin.php:44
+msgid "To manage the whole set, <a href=\"%s\">edit the recurring event template</a>."
+msgstr ""
+
+#: classes/em-event-post-admin.php:49
+msgid "WARNING: This is a event belonging to the group \"%s\". Other group admins can also modify this event."
+msgstr ""
+
+#: classes/em-event-post-admin.php:131
+msgid "Your event details are incorrect and recurrences cannot be created, please correct these errors first:"
+msgstr ""
+
+#: classes/em-event-post-admin.php:133 classes/em-location-post-admin.php:95
+msgid "Your %s details are incorrect and cannot be published, please correct these errors first:"
+msgstr ""
+
+#: classes/em-event-post-admin.php:235
+msgid "Anonymous Submitter Info"
+msgstr ""
+
+#: classes/em-event-post-admin.php:237 em-actions.php:614
+#: templates/forms/event-editor.php:52
+msgid "When"
+msgstr ""
+
+#: classes/em-event-post-admin.php:239 classes/em-event-post-admin.php:460
+#: classes/em-location-post-admin.php:159 em-actions.php:613
+#: templates/forms/event-editor.php:66
+msgid "Where"
+msgstr ""
+
+#: classes/em-event-post-admin.php:245 classes/em-event-post-admin.php:462
+#: multilingual/em-ml-admin.php:27 templates/forms/event-editor.php:98
+msgid "Bookings/Registration"
+msgstr ""
+
+#: classes/em-event-post-admin.php:247
+msgid "Bookings Stats"
+msgstr ""
+
+#: classes/em-event-post-admin.php:251 classes/em-event-post-admin.php:465
+#: classes/em-location-post-admin.php:162 multilingual/em-ml-admin.php:21
+#: multilingual/em-ml-admin.php:38
+msgid "Attributes"
+msgstr ""
+
+#: classes/em-event-post-admin.php:254 classes/em-event-post-admin.php:468
+msgid "Site Categories"
+msgstr ""
+
+#: classes/em-event-post-admin.php:266
+msgid "This event was submitted by a guest. You will find their details in the <em>Anonymous Submitter Info</em> box"
+msgstr ""
+
+#: classes/em-event-post-admin.php:312
+msgid "No categories available, <a href=\"%s\">create one here first</a>"
+msgstr ""
+
+#: classes/em-event-post-admin.php:458
+msgid "Recurrences"
+msgstr ""
+
+#: classes/em-event-post.php:186 classes/em-event-post.php:189
+#: classes/em-event-post.php:194 classes/em-event-post.php:205
+#: classes/em-event-post.php:208 classes/em-event-post.php:213
+msgid "View all posts in %s"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:144
+msgid "View all categories"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:166 classes/em-event-posts-admin.php:168
+#: classes/em-event-posts-admin.php:303 classes/em-event-posts-admin.php:305
+#: classes/em-location-posts-admin.php:47
+#: classes/em-location-posts-admin.php:49
+msgid "%s ID"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:175 classes/em-event-posts-admin.php:312
+msgid "Date and Time"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:176 classes/em-event-posts-admin.php:313
+msgid "Owner"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:219
+#: templates/buddypress/group-events.php:93
+#: templates/buddypress/my-group-events.php:87 templates/tables/events.php:103
+#: templates/templates/bookings-event-printable.php:44
+msgid "Booked"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:226
+#: templates/buddypress/group-events.php:127
+#: templates/buddypress/my-group-events.php:126 templates/tables/events.php:139
+msgid "WARNING! You will delete ALL recurrences of this event, including booking history associated with any event in this recurrence. To keep booking information, go to the relevant single event and save it to detach it from this recurrence series."
+msgstr ""
+
+#: classes/em-event-posts-admin.php:232
+#: templates/buddypress/group-events.php:131
+#: templates/buddypress/my-group-events.php:130 templates/tables/events.php:143
+msgid "Edit Recurring Events"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:232
+msgid "Detach"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:245
+#: templates/buddypress/group-events.php:105
+msgid "Duplicate %s"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:245
+#: templates/buddypress/group-events.php:106
+msgid "Duplicate"
+msgstr ""
+
+#: classes/em-event-posts-admin.php:277
+msgid "Modifications to these events will cause all recurrences of each event to be deleted and recreated and previous bookings will be deleted! You can edit individual recurrences and detach them from recurring events by visiting the <a href=\"%s\">events page</a>."
+msgstr ""
+
+#: classes/em-event.php:557 classes/em-event.php:562 classes/em-event.php:565
+msgid "%s is required."
+msgstr ""
+
+#: classes/em-event.php:557
+msgid "Event name"
+msgstr ""
+
+#: classes/em-event.php:562
+msgid "A valid email"
+msgstr ""
+
+#: classes/em-event.php:565
+msgid "Your name"
+msgstr ""
+
+#: classes/em-event.php:586 classes/em-event.php:588
+msgid "Events cannot start after they end."
+msgstr ""
+
+#: classes/em-event.php:588
+msgid "For recurring events that end the following day, ensure you make your event last 1 or more days."
+msgstr ""
+
+#: classes/em-event.php:593 classes/em-event.php:600
+msgid "Dates must have correct formatting. Please use the date picker provided."
+msgstr ""
+
+#: classes/em-event.php:612 classes/em-ticket-booking.php:113
+#: classes/em-ticket.php:248
+msgid "Missing fields: "
+msgstr ""
+
+#: classes/em-event.php:616
+msgid "Since the event is repeated, you must specify an event end date greater than the start date."
+msgstr ""
+
+#: classes/em-event.php:721
+msgid "There were some errors saving your location."
+msgstr ""
+
+#: classes/em-event.php:721
+msgid "It will not be displayed on the website listings, to correct this you must <a href=\"%s\">edit your location</a> directly."
+msgstr ""
+
+#: classes/em-event.php:782 classes/em-location.php:396
+msgid "Something went wrong saving your %s to the index table. Please inform a site administrator about this."
+msgstr ""
+
+#: classes/em-event.php:787 classes/em-event.php:800
+#: classes/em-location.php:401 classes/em-location.php:408
+msgid "Successfully saved %s"
+msgstr ""
+
+#: classes/em-event.php:796 classes/em-location.php:406
+msgid "Something went wrong updating your %s to the index table. Please inform a site administrator about this."
+msgstr ""
+
+#: classes/em-event-post-admin.php:377 classes/em-event.php:833
+msgid "Something went wrong with the recurrence update..."
+msgstr ""
+
+#: classes/em-event-post-admin.php:377 classes/em-event.php:833
+msgid "There was a problem saving the recurring events."
+msgstr ""
+
+#: classes/em-event.php:871
+msgid "%s successfully duplicated."
+msgstr ""
+
+#: classes/em-event.php:1742 templates/forms/bookingform/ticket-single.php:37
+#: templates/forms/bookingform/tickets-list.php:45
+msgid "N/A"
+msgstr ""
+
+#: classes/em-event.php:1752
+msgid "Profile"
+msgstr ""
+
+#: classes/em-event.php:1968
+msgid "Event detached."
+msgstr ""
+
+#: classes/em-event.php:1968
+msgid "Undo"
+msgstr ""
+
+#: classes/em-event.php:1972
+msgid "Event could not be detached."
+msgstr ""
+
+#: classes/em-event.php:1986
+msgid "Event re-attached to recurrence."
+msgstr ""
+
+#: classes/em-event.php:1989
+msgid "Event could not be attached."
+msgstr ""
+
+#: classes/em-event.php:2334
+msgid "Sunday"
+msgstr ""
+
+#: classes/em-event.php:2334
+msgid "Monday"
+msgstr ""
+
+#: classes/em-event.php:2334
+msgid "Tuesday"
+msgstr ""
+
+#: classes/em-event.php:2334
+msgid "Wednesday"
+msgstr ""
+
+#: classes/em-event.php:2334
+msgid "Thursday"
+msgstr ""
+
+#: classes/em-event.php:2334
+msgid "Friday"
+msgstr ""
+
+#: classes/em-event.php:2334
+msgid "Saturday"
+msgstr ""
+
+#: classes/em-event.php:2335
+msgid "the first %s of the month"
+msgstr ""
+
+#: classes/em-event.php:2335
+msgid "the second %s of the month"
+msgstr ""
+
+#: classes/em-event.php:2335
+msgid "the third %s of the month"
+msgstr ""
+
+#: classes/em-event.php:2335
+msgid "the fourth %s of the month"
+msgstr ""
+
+#: classes/em-event.php:2335
+msgid "the last %s of the month"
+msgstr ""
+
+#: classes/em-event.php:2336
+msgid "From %1$s to %2$s"
+msgstr ""
+
+#: classes/em-event.php:2338
+msgid "everyday"
+msgstr ""
+
+#: classes/em-event.php:2340
+msgid "every %s days"
+msgstr ""
+
+#: classes/em-event.php:2349
+msgid "every week"
+msgstr ""
+
+#: classes/em-event.php:2351
+msgid "every %s weeks"
+msgstr ""
+
+#: classes/em-event.php:2364
+msgid "every %s months"
+msgstr ""
+
+#: classes/em-event.php:2367
+msgid "every year"
+msgstr ""
+
+#: classes/em-event.php:2369
+msgid "every %s years"
+msgstr ""
+
+#: classes/em-location-posts-admin.php:55 em-install.php:493
+#: templates/tables/locations.php:44 templates/tables/locations.php:55
+msgid "Address"
+msgstr ""
+
+#: classes/em-location-posts-admin.php:57 templates/tables/locations.php:45
+#: templates/tables/locations.php:56
+msgid "State"
+msgstr ""
+
+#: classes/em-location.php:106
+msgid "The location address"
+msgstr ""
+
+#: classes/em-location.php:106
+msgid "The location town"
+msgstr ""
+
+#: classes/em-location.php:106
+msgid "The country"
+msgstr ""
+
+#: classes/em-location.php:257 widgets/em-locations.php:23
+msgid "Location name"
+msgstr ""
+
+#: classes/em-location.php:257 classes/em-location.php:273
+#: classes/em-location.php:275
+msgid " is required."
+msgstr ""
+
+#: classes/em-location.php:414
+msgid "You do not have permission to create/edit %s."
+msgstr ""
+
+#: classes/em-mailer.php:62
+msgid "Could not send email."
+msgstr ""
+
+#: classes/em-mailer.php:123
+msgid "Please supply a valid email format."
+msgstr ""
+
+#: classes/em-object.php:1462
+msgid "The image file is too big! Maximum size:"
+msgstr ""
+
+#: classes/em-object.php:1469
+msgid "The image is too big! Maximum size allowed:"
+msgstr ""
+
+#: classes/em-object.php:1472
+msgid "The image is too small! Minimum size allowed:"
+msgstr ""
+
+#: classes/em-object.php:1475
+msgid "The image is in a wrong format!"
+msgstr ""
+
+#: classes/em-people.php:25
+msgid "User deleted by administrators"
+msgstr ""
+
+#: classes/em-booking.php:713 classes/em-people.php:35
+#: classes/em-person.php:100 templates/forms/bookingform/booking-fields.php:16
+msgid "Phone"
+msgstr ""
+
+#: classes/em-booking.php:712 classes/em-event-post-admin.php:268
+#: classes/em-person.php:99 em-install.php:337
+#: templates/forms/event-editor.php:37
+msgid "Email"
+msgstr ""
+
+#: classes/em-ticket-booking.php:78
+msgid "Ticket booking created"
+msgstr ""
+
+#: classes/em-ticket-booking.php:85 classes/em-ticket-booking.php:86
+#: classes/em-ticket-booking.php:91 classes/em-ticket-booking.php:92
+msgid "There was a problem saving the ticket booking."
+msgstr ""
+
+#: classes/em-ticket.php:57
+msgid "Standard Ticket"
+msgstr ""
+
+#: classes/em-ticket.php:134
+msgid "Ticket created"
+msgstr ""
+
+#: classes/em-ticket.php:137 classes/em-ticket.php:138
+#: classes/em-ticket.php:143 classes/em-ticket.php:144
+msgid "There was a problem saving the ticket."
+msgstr ""
+
+#: classes/em-ticket.php:244
+msgid "Please enter a valid ticket price e.g. 10.50 (no currency signs)"
+msgstr ""
+
+#: classes/em-ticket.php:446
+msgid "You cannot delete a ticket that has a booking on it."
+msgstr ""
+
+#: classes/em-tickets-bookings.php:165 templates/forms/event-editor.php:12
+#: templates/forms/location-editor.php:11
+msgid "You do not have the rights to manage this %s."
+msgstr ""
+
+#: classes/em-tickets.php:116
+msgid "You cannot delete tickets if there are any bookings associated with them. Please delete these bookings first."
+msgstr ""
+
+#: classes/em-tickets.php:147
+msgid "Standard"
+msgstr ""
+
+#: em-actions.php:31
+msgid "No ticket id provided"
+msgstr ""
+
+#: em-actions.php:109
+msgid "%s successfully deleted."
+msgstr ""
+
+#: em-actions.php:112
+msgid "%s could not be deleted."
+msgstr ""
+
+#: em-actions.php:186
+msgid "%s successfully deleted"
+msgstr ""
+
+#: em-actions.php:337
+msgid "You must log in to cancel your booking."
+msgstr ""
+
+#: em-actions.php:616
+msgid "Exported booking on %s"
+msgstr ""
+
+#: em-debug.php:18
+msgid "<li>No events in this location</li>"
+msgstr ""
+
+#: em-debug.php:44
+msgid "You are in Events Manager debug mode. To turn debug mode off, go to the <a href=\"%s\">settings</a> page."
+msgstr ""
+
+#: templates/tables/locations.php:10
+msgid "My %s"
+msgstr ""
+
+#: em-functions.php:97
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "Görünen %1$s&#8211;%2$s arasında %3$s"
+
+#: em-functions.php:208
+msgid "Today's events"
+msgstr ""
+
+#: em-functions.php:209
+msgid "Tomorrow's events"
+msgstr ""
+
+#: em-functions.php:210
+msgid "Events this month"
+msgstr ""
+
+#: em-functions.php:211
+msgid "Events next month"
+msgstr ""
+
+#: em-functions.php:212
+msgid "Events current and next month"
+msgstr ""
+
+#: em-functions.php:213
+msgid "Events within 2 months"
+msgstr ""
+
+#: em-functions.php:214
+msgid "Events within 3 months"
+msgstr ""
+
+#: em-functions.php:215
+msgid "Events within 6 months"
+msgstr ""
+
+#: em-functions.php:216
+msgid "Events within 12 months"
+msgstr ""
+
+#: em-functions.php:256
+msgid "Mon"
+msgstr ""
+
+#: em-functions.php:256
+msgid "Tue"
+msgstr ""
+
+#: em-functions.php:256
+msgid "Wed"
+msgstr ""
+
+#: em-functions.php:256
+msgid "Thu"
+msgstr ""
+
+#: em-functions.php:256
+msgid "Fri"
+msgstr ""
+
+#: em-functions.php:256
+msgid "Sat"
+msgstr ""
+
+#: em-functions.php:256
+msgid "Sun"
+msgstr ""
+
+#: em-functions.php:267
+msgid "Trying to perform an illegal action."
+msgstr ""
+
+#: classes/em-booking.php:650 em-functions.php:419
+msgid "<strong>ERROR</strong>: Please type your e-mail address."
+msgstr ""
+
+#: classes/em-booking.php:653 em-functions.php:421
+msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
+msgstr ""
+
+#: em-functions.php:409
+msgid "<strong>ERROR</strong>: Please enter a username."
+msgstr ""
+
+#: em-functions.php:411
+msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
+msgstr ""
+
+#: em-functions.php:414
+msgid "<strong>ERROR</strong>: This username is already registered, please choose another one."
+msgstr ""
+
+#: em-functions.php:424
+msgid "<strong>ERROR</strong>: This email is already registered, please choose another one."
+msgstr ""
+
+#: em-functions.php:444
+msgid "<strong>ERROR</strong>: Couldn&#8217;t register you... please contact the <a href=\"mailto:%s\">webmaster</a> !"
+msgstr ""
+
+#: em-functions.php:480
+msgid "New user registration on your blog %s:"
+msgstr ""
+
+#: em-functions.php:481
+msgid "Username: %s"
+msgstr ""
+
+#: em-functions.php:482
+msgid "E-mail: %s"
+msgstr ""
+
+#: em-functions.php:483
+msgid "[%s] New User Registration"
+msgstr ""
+
+#: em-install.php:346
+msgid "[%s] Your username and password"
+msgstr ""
+
+#: em-functions.php:640
+msgid "If translations are left blank, the default value will be used."
+msgstr ""
+
+#: em-functions.php:687
+msgid "If left blank, the default value will be used."
+msgstr ""
+
+#: em-install.php:320
+msgid "Dear #_BOOKINGNAME, <br/>You have successfully reserved #_BOOKINGSPACES space/spaces for #_EVENTNAME.<br/>When : #_EVENTDATES @ #_EVENTTIMES<br/>Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+
+#: em-install.php:321
+msgid "Dear #_BOOKINGNAME, <br/>You have requested #_BOOKINGSPACES space/spaces for #_EVENTNAME.<br/>When : #_EVENTDATES @ #_EVENTTIMES<br/>Where : #_LOCATIONNAME - #_LOCATIONFULLLINE<br/>Your booking is currently pending approval by our administrators. Once approved you will receive an automatic confirmation.<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+
+#: em-install.php:322
+msgid "Dear #_BOOKINGNAME, <br/>Your requested booking for #_BOOKINGSPACES spaces at #_EVENTNAME on #_EVENTDATES has been rejected.<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+
+#: em-install.php:323
+msgid "Dear #_BOOKINGNAME, <br/>Your requested booking for #_BOOKINGSPACES spaces at #_EVENTNAME on #_EVENTDATES has been cancelled.<br/>Yours faithfully,<br/>#_CONTACTNAME"
+msgstr ""
+
+#: em-install.php:324
+msgid "Dear #_CONTACTNAME, <br/>Your event #_EVENTNAME on #_EVENTDATES has been approved.<br/>You can view your event here: #_EVENTURL"
+msgstr ""
+
+#: em-install.php:325
+msgid "A new event has been submitted by #_CONTACTNAME.<br/>Name : #_EVENTNAME <br/>Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Please visit #_EDITEVENTURL to review this event for approval."
+msgstr ""
+
+#: em-install.php:327
+msgid "A new event has been published by #_CONTACTNAME.<br/>Name : #_EVENTNAME <br/>Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Edit this event - #_EDITEVENTURL <br/> View this event - #_EVENTURL"
+msgstr ""
+
+#: em-install.php:329
+msgid "A previously published event has been modified by #_CONTACTNAME, and this event is now unpublished and pending your approval.<br/>Name : #_EVENTNAME <br/>Date : #_EVENTDATES <br/>Time : #_EVENTTIMES <br/>Please visit #_EDITEVENTURL to review this event for approval."
+msgstr ""
+
+#: em-install.php:386
+msgid "All Categories"
+msgstr ""
+
+#: em-install.php:390
+msgid "All Countries"
+msgstr ""
+
+#: em-install.php:393
+msgid "All Regions"
+msgstr ""
+
+#: em-install.php:396
+msgid "All States"
+msgstr ""
+
+#: em-install.php:399
+msgid "All Cities/Towns"
+msgstr ""
+
+#: em-install.php:409 em-install.php:413
+msgid "You have successfully submitted your event, which will be published pending approval."
+msgstr ""
+
+#: em-install.php:410
+msgid "You have successfully updated your event, which will be republished pending approval."
+msgstr ""
+
+#: em-install.php:416
+msgid "Submitted Event Awaiting Approval"
+msgstr ""
+
+#: em-install.php:418
+msgid "Re-Submitted Event Awaiting Approval"
+msgstr ""
+
+#: em-install.php:420
+msgid "Published Event"
+msgstr ""
+
+#: em-install.php:477
+msgid "All Day"
+msgstr ""
+
+#: em-install.php:478 em-install.php:485 em-install.php:523 em-install.php:543
+msgid "No %s"
+msgstr ""
+
+#: em-install.php:527 em-install.php:533
+msgid "No events in this category"
+msgstr ""
+
+#: em-install.php:609
+msgid "more..."
+msgstr ""
+
+#: em-install.php:639
+msgid "Send your booking"
+msgstr ""
+
+#: em-install.php:644
+msgid "Online bookings are not available for this event."
+msgstr ""
+
+#: em-install.php:645
+msgid "Bookings are closed for this event."
+msgstr ""
+
+#: em-install.php:646
+msgid "This event is fully booked."
+msgstr ""
+
+#: em-install.php:647
+msgid "You are currently attending this event."
+msgstr ""
+
+#: em-install.php:648
+msgid "Manage my bookings"
+msgstr ""
+
+#: em-install.php:650
+msgid "Are you sure you want to cancel your booking?"
+msgstr ""
+
+#: em-install.php:651
+msgid "Booking %s"
+msgstr ""
+
+#: em-install.php:652
+msgid "Booking successful, pending confirmation (you will also receive an email once confirmed)."
+msgstr ""
+
+#: em-install.php:653
+msgid "Booking successful."
+msgstr ""
+
+#: em-install.php:654
+msgid "Booking cannot be made, not enough spaces available!"
+msgstr ""
+
+#: em-install.php:655
+msgid "You must log in or register to make a booking."
+msgstr ""
+
+#: em-install.php:656
+msgid "However, there were some problems whilst sending confirmation emails to you and/or the event contact person. You may want to contact them directly and letting them know of this error."
+msgstr ""
+
+#: em-install.php:657
+msgid "Booking could not be created"
+msgstr ""
+
+#: em-install.php:658
+msgid "This email already exists in our system, please log in to register to proceed with your booking."
+msgstr ""
+
+#: em-install.php:659
+msgid "A new user account has been created for you. Please check your email for access details."
+msgstr ""
+
+#: em-install.php:660
+msgid "There was a problem creating a user account, please contact a website administrator."
+msgstr ""
+
+#: em-install.php:661
+msgid "You already have booked a seat at this event."
+msgstr ""
+
+#: em-install.php:662
+msgid "You must request at least one space to book an event."
+msgstr ""
+
+#: em-install.php:665
+msgid "Book Now"
+msgstr ""
+
+#: em-install.php:666
+msgid "Booking..."
+msgstr ""
+
+#: em-install.php:667
+msgid "%s Submitted"
+msgstr ""
+
+#: em-install.php:669 em-install.php:674
+msgid "%s Error. Try again?"
+msgstr ""
+
+#: em-install.php:672
+msgid "Canceling..."
+msgstr ""
+
+#: em-install.php:674
+msgid "Cancellation"
+msgstr ""
+
+#: em-install.php:678 em-install.php:686
+msgid "Booking Pending"
+msgstr ""
+
+#: em-install.php:682 em-install.php:688
+msgid "Booking Rejected"
+msgstr ""
+
+#: em-install.php:680 em-install.php:690
+msgid "Booking Confirmed"
+msgstr ""
+
+#: em-install.php:712 templates/buddypress/group-events.php:29
+#: templates/buddypress/my-group-events.php:30
+#: templates/buddypress/profile.php:22
+msgid "No Events"
+msgstr ""
+
+#: em-posts.php:55 em-posts.php:58
+msgid "Event Tag"
+msgstr ""
+
+#: em-posts.php:59
+msgid "Search Event Tags"
+msgstr ""
+
+#: em-posts.php:60
+msgid "Popular Event Tags"
+msgstr ""
+
+#: em-posts.php:61
+msgid "All Event Tags"
+msgstr ""
+
+#: em-posts.php:62
+msgid "Parent Event Tags"
+msgstr ""
+
+#: em-posts.php:63
+msgid "Parent Event Tag:"
+msgstr ""
+
+#: em-posts.php:64
+msgid "Edit Event Tag"
+msgstr ""
+
+#: em-posts.php:65
+msgid "Update Event Tag"
+msgstr ""
+
+#: em-posts.php:66
+msgid "Add New Event Tag"
+msgstr ""
+
+#: em-posts.php:67
+msgid "New Event Tag Name"
+msgstr ""
+
+#: em-posts.php:68
+msgid "Separate event tags with commas"
+msgstr ""
+
+#: em-posts.php:69 em-posts.php:106
+msgid "Add or remove events"
+msgstr ""
+
+#: em-posts.php:70
+msgid "Choose from most used event tags"
+msgstr ""
+
+#: em-posts.php:92 em-posts.php:95
+msgid "Event Category"
+msgstr ""
+
+#: em-posts.php:96
+msgid "Search Event Categories"
+msgstr ""
+
+#: em-posts.php:97
+msgid "Popular Event Categories"
+msgstr ""
+
+#: em-posts.php:98
+msgid "All Event Categories"
+msgstr ""
+
+#: em-posts.php:99
+msgid "Parent Event Categories"
+msgstr ""
+
+#: em-posts.php:100
+msgid "Parent Event Category:"
+msgstr ""
+
+#: em-posts.php:101
+msgid "Edit Event Category"
+msgstr ""
+
+#: em-posts.php:102
+msgid "Update Event Category"
+msgstr ""
+
+#: em-posts.php:103
+msgid "Add New Event Category"
+msgstr ""
+
+#: em-posts.php:104
+msgid "New Event Category Name"
+msgstr ""
+
+#: em-posts.php:105
+msgid "Separate event categories with commas"
+msgstr ""
+
+#: em-posts.php:107
+msgid "Choose from most used event categories"
+msgstr ""
+
+#: em-posts.php:142
+msgid "Display events on your blog."
+msgstr ""
+
+#: em-posts.php:148
+msgid "Add New Event"
+msgstr ""
+
+#: em-posts.php:149 em-posts.php:196 em-posts.php:244
+#: templates/forms/event/bookings.php:64
+msgid "Edit"
+msgstr ""
+
+#: buddypress/bp-em-activity.php:64 em-posts.php:151
+msgid "New Event"
+msgstr ""
+
+#: em-posts.php:152 em-posts.php:199 em-posts.php:247
+#: templates/tables/locations.php:76
+msgid "View"
+msgstr ""
+
+#: em-posts.php:153
+msgid "View Event"
+msgstr ""
+
+#: em-posts.php:154 templates/tables/events.php:29
+#: templates/tables/events.php:34
+msgid "Search Events"
+msgstr ""
+
+#: em-posts.php:155
+msgid "No Events Found"
+msgstr ""
+
+#: em-posts.php:156
+msgid "No Events Found in Trash"
+msgstr ""
+
+#: em-posts.php:157
+msgid "Parent Event"
+msgstr ""
+
+#: em-posts.php:188 em-posts.php:191 em-posts.php:193
+msgid "Recurring Events"
+msgstr ""
+
+#: em-posts.php:189
+msgid "Recurring Events Template"
+msgstr ""
+
+#: em-posts.php:194 em-posts.php:200
+msgid "Add Recurring Event"
+msgstr ""
+
+#: em-posts.php:195
+msgid "Add New Recurring Event"
+msgstr ""
+
+#: em-posts.php:197
+msgid "Edit Recurring Event"
+msgstr "Mükerrer Etkinliği Düzenle"
+
+#: em-posts.php:198
+msgid "New Recurring Event"
+msgstr "Yeni Mükerrer Etkinlik"
+
+#: em-posts.php:201
+msgid "Search Recurring Events"
+msgstr ""
+
+#: em-posts.php:202
+msgid "No Recurring Events Found"
+msgstr ""
+
+#: em-posts.php:203
+msgid "No Recurring Events Found in Trash"
+msgstr ""
+
+#: em-posts.php:204
+msgid "Parent Recurring Event"
+msgstr ""
+
+#: em-posts.php:237
+msgid "Display locations on your blog."
+msgstr ""
+
+#: em-posts.php:243
+msgid "Add New Location"
+msgstr ""
+
+#: em-posts.php:246
+msgid "New Location"
+msgstr ""
+
+#: em-posts.php:248
+msgid "View Location"
+msgstr ""
+
+#: em-posts.php:249
+msgid "Search Locations"
+msgstr ""
+
+#: em-posts.php:250
+msgid "No Locations Found"
+msgstr ""
+
+#: em-posts.php:251
+msgid "No Locations Found in Trash"
+msgstr ""
+
+#: em-posts.php:252
+msgid "Parent Location"
+msgstr ""
+
+#: em-template-tags.php:286
+msgid "You must log in to view and manage your events."
+msgstr ""
+
+#: em-template-tags.php:396
+msgid "You must log in to view and manage your locations."
+msgstr "Mekanlarınızı görüntülemek ve yönetmek için giriş yapmalısınız."
+
+#: em-template-tags.php:444
+msgid "You must log in to view and manage your bookings."
+msgstr "Rezervasyonlarınızı görüntülemek ve yönetmek için giriş yapmalısınız. "
+
+#: events-manager.php:328
+msgid "Please wait while the booking is being submitted."
+msgstr "Rezervasyonunuz kaydedilirken lütfen bekleyin."
+
+#: events-manager.php:329
+msgid "Save Ticket"
+msgstr "Bileti Kaydet"
+
+#: events-manager.php:332
+msgid "Save Settings"
+msgstr "Ayarları Kaydet"
+
+#: events-manager.php:333
+msgid "Are you sure you want to delete?"
+msgstr "Silmek istediğinizden emin misiniz?"
+
+#: events-manager.php:347
+msgid "Searching..."
+msgstr "Arıyor..."
+
+#: events-manager.php:348
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: events-manager.php:353
+msgid "Are you sure you want to reschedule this recurring event? If you do this, you will lose all booking information and the old recurring events will be deleted."
+msgstr ""
+
+#: events-manager.php:354
+msgid "Are you sure you want to detach this event? By doing so, this event will be independent of the recurring set of events."
+msgstr ""
+
+#: events-manager.php:355
+msgid "This cannot be undone."
+msgstr "Bu işlem geri alınamaz."
+
+#: events-manager.php:355
+msgid "All events will be moved to trash."
+msgstr "Tüm etkinlikler çöpe atılacaktır."
+
+#: events-manager.php:356
+msgid "Are you sure you want to delete all recurrences of this event?"
+msgstr ""
+
+#: events-manager.php:359
+msgid "Are you sure you want to disable bookings? If you do this and save, you will lose all previous bookings. If you wish to prevent further bookings, reduce the number of spaces available to the amount of bookings you currently have"
+msgstr ""
+
+#: events-manager.php:433
+msgid "You do not have permission to manage others %s"
+msgstr ""
+
+#: events-manager.php:434
+msgid "You do not have permission to manage %s"
+msgstr ""
+
+#: events-manager.php:436 events-manager.php:444 events-manager.php:450
+msgid "You do not have permission to publish %s"
+msgstr ""
+
+#: events-manager.php:437 events-manager.php:445 events-manager.php:451
+msgid "You do not have permission to delete others %s"
+msgstr ""
+
+#: events-manager.php:438 events-manager.php:446 events-manager.php:452
+#: events-manager.php:459
+msgid "You do not have permission to delete %s"
+msgstr ""
+
+#: events-manager.php:439 events-manager.php:447 events-manager.php:453
+msgid "You do not have permission to edit others %s"
+msgstr ""
+
+#: events-manager.php:440 events-manager.php:448 events-manager.php:454
+#: events-manager.php:460
+msgid "You do not have permission to edit %s"
+msgstr ""
+
+#: events-manager.php:441 events-manager.php:455
+msgid "You cannot read private %s"
+msgstr ""
+
+#: events-manager.php:456
+msgid "You cannot view others %s"
+msgstr ""
+
+#: events-manager.php:462
+msgid "You do not have permission to upload images"
+msgstr ""
+
+#: templates/buddypress/my-group-events.php:100 templates/tables/events.php:116
+msgid "Duplicate this event"
+msgstr "Bu etkinliğin aynısını oluştur"
+
+#: templates/buddypress/profile.php:44
+msgid "Not attending any events yet."
+msgstr "Henüz hiçbir etkinliğe kayıt yaptırmadınız."
+
+#: templates/forms/bookingform/login.php:8
+msgid "Log in if you already have an account with us."
+msgstr "Eğer bu sitede bir hesabınız varsa lütfen giriş yapın."
+
+#: em-install.php:349 templates/forms/bookingform/login.php:10
+msgid "Username"
+msgstr "Kullanıcı adı"
+
+#: em-install.php:350 templates/forms/bookingform/login.php:14
+msgid "Password"
+msgstr "Şifre"
+
+#: templates/forms/bookingform/login.php:18
+msgid "Log In"
+msgstr "Giriş"
+
+#: templates/forms/bookingform/login.php:19
+msgid "Remember Me"
+msgstr "Beni Hatırla"
+
+#: templates/forms/bookingform/login.php:34
+msgid "Sign Up"
+msgstr "Kayıt Ol"
+
+#: templates/forms/bookingform/login.php:38
+msgid "Password Lost and Found"
+msgstr ""
+
+#: templates/forms/bookingform/login.php:38
+msgid "Lost your password?"
+msgstr "Şifrenizi mi unuttunuz?"
+
+#: templates/forms/event/attributes.php:43
+msgid "You don't have any custom attributes defined in any of your Events Manager template settings. Please add them the <a href='%s'>settings page</a>"
+msgstr ""
+
+#: templates/forms/event/attributes.php:50
+#: templates/forms/location/attributes.php:50
+msgid "Deprecated Attributes"
+msgstr ""
+
+#: templates/forms/event/attributes.php:51
+msgid "If you see any attributes under here, that means they're not used in Events Manager formats. To add them, you need to add the custom attribute again to a formatting option in the settings page. To remove any of these deprecated attributes, give it a blank value and save."
+msgstr ""
+
+#: templates/forms/event/attributes.php:83
+#: templates/forms/location/attributes.php:83
+msgid "In order to use attributes, you must define some in your templates, otherwise they'll never show. Go to Events > Settings > General to add attribute placeholders."
+msgstr ""
+
+#: templates/forms/event/booking-stats.php:12
+msgid "Available Spaces"
+msgstr "Boş Yer"
+
+#: templates/forms/event/booking-stats.php:13
+msgid "Confirmed Spaces"
+msgstr "Ayrılmış Yer"
+
+#: templates/forms/event/booking-stats.php:14
+msgid "Pending Spaces"
+msgstr "Bekleyen Yer Ayırtmalar"
+
+#: templates/forms/event/booking-stats.php:27
+msgid "manage bookings"
+msgstr "biletleri yönet"
+
+#: templates/forms/event/booking-stats.php:28
+msgid "printable view"
+msgstr "basılabilir görünüm"
+
+#: templates/forms/event/booking-stats.php:30
+msgid "export csv"
+msgstr "csv olarak dışa aktar"
+
+#: templates/forms/event/booking-stats.php:20
+msgid "No responses yet!"
+msgstr "Henüz hiç yanıt verilmedi!"
+
+#: templates/forms/event/bookings.php:7
+msgid "Enable registration for this event"
+msgstr "Bu etkinliğe kayıt işlemini etkinleştir"
+
+#: templates/forms/event/bookings.php:28
+msgid "Tickets"
+msgstr "Biletler"
+
+#: templates/forms/event/bookings.php:29
+msgid "You can have single or multiple tickets, where certain tickets become available under certain conditions, e.g. early bookings, group discounts, maximum bookings per ticket, etc."
+msgstr "Erken rezervasyon, grup indirimi, bilet başına maksimum kişi sayısı gibi belli şartlar doğrultusunda bir ya da birden çok bilet alabilirsiniz"
+
+#: templates/forms/event/bookings.php:29
+msgid "Basic HTML is allowed in ticket labels and descriptions."
+msgstr "Bilet etiketleri ve açıklamalarda temel HTML kullanılabilir."
+
+#: templates/forms/event/bookings.php:35
+msgid "Min/Max"
+msgstr "Minimum/Maksimum"
+
+#: templates/forms/event/bookings.php:36
+msgid "Start/End"
+msgstr "Başlangıç/Bitiş"
+
+#: templates/forms/event/bookings.php:37
+msgid "Avail. Spaces"
+msgstr "Boş Yer"
+
+#: templates/forms/event/bookings.php:45
+msgid "Add new ticket"
+msgstr "Yeni bilet ekle"
+
+#: templates/forms/event/bookings.php:73
+msgid "Free"
+msgstr "Ücretsiz"
+
+#: templates/forms/event/bookings.php:68
+msgid "View Bookings"
+msgstr "Satılan Biletleri Görüntüle"
+
+#: templates/forms/event/bookings.php:124
+msgid "Total Spaces"
+msgstr "Toplam Yer"
+
+#: templates/forms/event/bookings.php:126
+msgid "Individual tickets with remaining spaces will not be available if total booking spaces reach this limit. Leave blank for no limit."
+msgstr "Toplam satılan bilet sayısı bu limite ulaştığında kalan yer sayısı görünmeyecektir. Eğer limit koymayacaksanız boş bırakın."
+
+#: templates/forms/event/bookings.php:134
+msgid "Booking Cut-Off Date"
+msgstr "Son Bilet Satın Alma Tarihi"
+
+#: templates/forms/event/bookings.php:152
+msgid "This is the definite date after which bookings will be closed for this event, regardless of individual ticket settings above. Default value will be the event start date."
+msgstr "Bu tarih, yukarıdaki bilet ayarlarına bakılmaksızın bu etkinlik için bilet satın almanın kapanması için belirlenen tarihtir. Varsayılan değer etkinlik başlangıç tarihi olacaktır."
+
+#: templates/forms/event/categories-public.php:13
+msgid "Category:"
+msgstr "Kategori:"
+
+#: templates/forms/event/featured-image-public.php:13
+msgid "No image uploaded for this event yet"
+msgstr "Bu etkinlik için henüz hiçbir görsel yüklenmedi"
+
+#: templates/forms/event/featured-image-public.php:16
+#: templates/forms/location/featured-image-public.php:16
+msgid "Upload/change picture"
+msgstr "Fotoğraf yükle/değiştir"
+
+#: templates/forms/event/featured-image-public.php:19
+#: templates/forms/location/featured-image-public.php:19
+msgid "Delete Image?"
+msgstr "Görsel silinsin mi?"
+
+#: templates/forms/event/group.php:22
+msgid "Not a Group Event"
+msgstr ""
+
+#: templates/forms/event/group.php:43
+msgid "As a site admin, you see all group events, users will only be able to choose groups they are admins of."
+msgstr ""
+
+#: templates/forms/event/group.php:47
+msgid "No groups defined yet."
+msgstr "Henüz hiçbir grup tanımlanmadı."
+
+#: templates/forms/event/location.php:9
+msgid "This event does not have a physical location."
+msgstr "Bu etkinliğin fiziki bir mekanı yok."
+
+#: templates/forms/event/location.php:32
+msgid "Location:"
+msgstr "Mekan:"
+
+#: templates/forms/event/location.php:35
+msgid "No Location"
+msgstr "Mekansız"
+
+#: templates/forms/event/location.php:65
+msgid "Location Name:"
+msgstr "Mekan Adı:"
+
+#: templates/forms/event/location.php:70
+msgid "Create a location or start typing to search a previously created location."
+msgstr "Yeni bir mekan oluşturun ya da daha önce oluşturulmuş bir mekanı aramak için adını yazın."
+
+#: templates/forms/event/location.php:71
+msgid "You cannot edit saved locations here."
+msgstr "Buraya kaydedilmiş mekanları düzenleyemezsiniz."
+
+#: templates/forms/event/location.php:75 templates/forms/location/where.php:11
+msgid "Address:"
+msgstr "Adres:"
+
+#: templates/forms/event/location.php:81 templates/forms/location/where.php:17
+msgid "City/Town:"
+msgstr "Şehir:"
+
+#: templates/forms/event/location.php:87 templates/forms/location/where.php:23
+msgid "State/County:"
+msgstr "Ülke:"
+
+#: templates/forms/event/location.php:93 templates/forms/location/where.php:29
+msgid "Postcode:"
+msgstr "Posta kodu:"
+
+#: templates/forms/event/location.php:99 templates/forms/location/where.php:35
+msgid "Region:"
+msgstr "Bölge:"
+
+#: templates/forms/event/location.php:105 templates/forms/location/where.php:42
+msgid "Country:"
+msgstr "Ülke:"
+
+#: templates/forms/event/location.php:108 templates/forms/location/where.php:45
+msgid "none selected"
+msgstr "hiçbiri seçili değil"
+
+#: templates/forms/map-container.php:3
+msgid "Location not found"
+msgstr "Mekan bulunamadı"
+
+#: templates/forms/event/recurring-when.php:10
+#: templates/forms/event/when-with-recurring.php:32
+msgid "This event repeats"
+msgstr "Bu etkinliğin tekrarı var"
+
+#: templates/forms/event/recurring-when.php:17
+#: templates/forms/event/when-with-recurring.php:39
+msgid "every"
+msgstr "her"
+
+#: templates/forms/event/recurring-when.php:19
+#: templates/forms/event/when-with-recurring.php:41
+msgid "day"
+msgstr "gün"
+
+#: templates/forms/event/recurring-when.php:20
+#: templates/forms/event/when-with-recurring.php:42
+msgid "days"
+msgstr "gün"
+
+#: templates/forms/event/recurring-when.php:21
+#: templates/forms/event/when-with-recurring.php:43
+msgid "week on"
+msgstr ""
+
+#: templates/forms/event/recurring-when.php:22
+#: templates/forms/event/when-with-recurring.php:44
+msgid "weeks on"
+msgstr ""
+
+#: templates/forms/event/recurring-when.php:23
+#: templates/forms/event/when-with-recurring.php:45
+msgid "month on the"
+msgstr ""
+
+#: templates/forms/event/recurring-when.php:24
+#: templates/forms/event/when-with-recurring.php:46
+msgid "months on the"
+msgstr ""
+
+#: templates/forms/event/recurring-when.php:25
+#: templates/forms/event/when-with-recurring.php:47
+msgid "year"
+msgstr "yıl"
+
+#: templates/forms/event/recurring-when.php:26
+#: templates/forms/event/when-with-recurring.php:48
+msgid "years"
+msgstr ""
+
+#: templates/forms/event/recurring-when.php:36
+#: templates/forms/event/when-with-recurring.php:59
+msgid "first"
+msgstr "ilk"
+
+#: templates/forms/event/recurring-when.php:36
+#: templates/forms/event/when-with-recurring.php:59
+msgid "second"
+msgstr "ikinci"
+
+#: templates/forms/event/recurring-when.php:36
+#: templates/forms/event/when-with-recurring.php:59
+msgid "third"
+msgstr "üçüncü"
+
+#: templates/forms/event/recurring-when.php:36
+#: templates/forms/event/when-with-recurring.php:59
+msgid "fourth"
+msgstr "dördüncü"
+
+#: templates/forms/event/recurring-when.php:36
+#: templates/forms/event/when-with-recurring.php:59
+msgid "last"
+msgstr "son"
+
+#: templates/forms/event/recurring-when.php:43
+#: templates/forms/event/when-with-recurring.php:66
+msgid "of each month"
+msgstr "her ayın 'ı"
+
+#: templates/forms/event/recurring-when.php:48
+#: templates/forms/event/when-with-recurring.php:13
+msgid "Recurrences span from "
+msgstr "tarihinden itibaren mükerrer"
+
+#: templates/forms/event/recurring-when.php:51
+#: templates/forms/event/recurring-when.php:58
+#: templates/forms/event/when-with-recurring.php:17
+#: templates/forms/event/when-with-recurring.php:18
+#: templates/forms/event/when-with-recurring.php:26
+#: templates/forms/event/when.php:11 templates/forms/event/when.php:18
+msgid "to"
+msgstr "a kadar"
+
+#: templates/forms/event/recurring-when.php:56
+#: templates/forms/event/when-with-recurring.php:23
+msgid "Events start from"
+msgstr "'de başlayan etkinlikler"
+
+#: templates/forms/event/recurring-when.php:60
+#: templates/forms/event/when-with-recurring.php:28
+#: templates/forms/event/when.php:20
+msgid "All day"
+msgstr "Tüm gün"
+
+#: templates/forms/event/bookings-ticket-form.php:48
+#: templates/forms/event/bookings-ticket-form.php:67
+#: templates/forms/event/bookings.php:84 templates/forms/event/bookings.php:89
+#: templates/forms/event/bookings.php:143
+msgid "day(s)"
+msgstr "gün(ler)"
+
+#: templates/forms/event/recurring-when.php:65
+#: templates/forms/event/when-with-recurring.php:71
+msgid "For a recurring event, a one day event will be created on each recurring date within this date range."
+msgstr "Mükerrer etkinlikler için bu tarih aralığında her tekrar için bir günlük etkinlik oluşturulacaktır."
+
+#: templates/forms/event/when-with-recurring.php:11
+msgid "This is a recurring event."
+msgstr "Bu tekrar eden bir etkinliktir. "
+
+#: templates/forms/event/when-with-recurring.php:14
+#: templates/forms/event/when.php:8
+msgid "From "
+msgstr ""
+
+#: templates/forms/event/when-with-recurring.php:24
+#: templates/forms/event/when.php:16
+msgid "Event starts at"
+msgstr "Etkinlik 'de başlar"
+
+#: templates/forms/event/when.php:23
+msgid "This event spans every day between the beginning and end date, with start/end times applying to each day."
+msgstr "Bu etkinlik başlangıç ve bitiş tarihleri arasında her gün başlangıç ve bitiş saatleri arasında gerçekleşir."
+
+#: templates/forms/event-editor.php:30
+msgid "Your Details"
+msgstr "Kişisel Bilgileriniz"
+
+#: templates/forms/event-editor.php:48
+msgid "The event name. Example: Birthday party"
+msgstr "Etkinlik adı. Örnek: Doğum günü partisi"
+
+#: templates/forms/event-editor.php:72 templates/forms/location-editor.php:37
+msgid "Details"
+msgstr "Detaylar"
+
+#: templates/forms/event-editor.php:80
+msgid "Details about the event."
+msgstr "Etkinlik detayları"
+
+#: templates/forms/event-editor.php:80
+msgid "HTML allowed."
+msgstr ""
+
+#: templates/forms/event-editor.php:90
+msgid "Event Image"
+msgstr "Etkinlik görseli"
+
+#: templates/forms/location/attributes.php:43
+msgid "You don't have any custom attributes defined in any of your Locations Manager template settings. Please add them the <a href='%s'>settings page</a>"
+msgstr ""
+
+#: templates/forms/location/attributes.php:51
+msgid "If you see any attributes under here, that means they're not used in Locations Manager formats. To add them, you need to add the custom attribute again to a formatting option in the settings page. To remove any of these deprecated attributes, give it a blank value and save."
+msgstr ""
+
+#: templates/forms/location/featured-image-public.php:13
+msgid "No image uploaded for this location yet"
+msgstr "Bu mekan için henüz hiçbir görsel yüklenmedi"
+
+#: templates/forms/location-editor.php:25
+msgid "Location Name"
+msgstr "Mekan Adı"
+
+#: templates/forms/location-editor.php:29
+msgid "The name of the location"
+msgstr "Mekanın adı"
+
+#: templates/forms/location-editor.php:44
+msgid "Details about the location."
+msgstr "Mekan detayları"
+
+#: templates/forms/location-editor.php:44
+msgid "HTML Allowed."
+msgstr "HTML Kullanılabilir"
+
+#: templates/forms/location-editor.php:52
+msgid "Location Image"
+msgstr "Mekan Fotoğrafı"
+
+#: templates/forms/event/bookings-ticket-form.php:13
+msgid "Enter a ticket name."
+msgstr "Bir bilet adı girin."
+
+#: templates/forms/event/bookings-ticket-form.php:22
+msgid "Enter a maximum number of spaces (required)."
+msgstr "Maksimum yer/bilet sayısı girin (gerekli)."
+
+#: templates/forms/event/bookings-ticket-form.php:40
+msgid "Available from"
+msgstr ""
+
+#: templates/forms/event/bookings-ticket-form.php:39
+#: templates/forms/event/bookings-ticket-form.php:58
+msgid "Add a start or end date (or both) to impose time constraints on ticket availability. Leave either blank for no upper/lower limit."
+msgstr "Bilet satış süresini belirlemek için bir başlangıç veya bitiş tarihi (ya da ikisini de) girin. Böyle bir sınırlama yoksa boş bırakın."
+
+#: em-install.php:384
+msgid "and"
+msgstr "ve"
+
+#: templates/forms/event/bookings-ticket-form.php:28
+#: templates/forms/event/bookings-ticket-form.php:33
+msgid "Leave either blank for no upper/lower limit."
+msgstr "Alt veya üst sınır yoksa boş bırakın."
+
+#: templates/forms/event/bookings-ticket-form.php:79
+msgid "Required?"
+msgstr "Gerekli mi?"
+
+#: templates/forms/event/bookings-ticket-form.php:79
+msgid "If checked every booking must select one or the minimum number of this ticket."
+msgstr "Seçili ise her rezervasyonda bu biletten bir adet veya minimum bilet sayısı seçilmelidir."

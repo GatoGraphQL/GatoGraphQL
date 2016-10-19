@@ -5,6 +5,7 @@
  *
  */
 
+global $wpdb;
 
 if (!defined('ABSPATH') || !defined('WP_UNINSTALL_PLUGIN')) {
 	 exit();  // silence is golden

@@ -8,7 +8,7 @@ Author: Kevin Davis, Dan Lester
 Author URI: https://wordpress.org/plugins/google-document-embedder/
 Text Domain: google-document-embedder
 Domain Path: /languages/
-Version: 2.6
+Version: 2.6.2
 License: GPLv2
 */
 
@@ -38,7 +38,7 @@ License: GPLv2
  */
 
 // boring init junk
-$gde_ver 				= "2.6";
+$gde_ver 				= "2.6.2";
 $gde_db_ver 			= "1.2";		// update also in gde_activate()
 
 require_once( plugin_dir_path( __FILE__ ) . 'functions.php' );

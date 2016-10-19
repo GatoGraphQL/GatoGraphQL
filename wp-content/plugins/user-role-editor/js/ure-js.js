@@ -1,3 +1,5 @@
+var ure_obj = {selected_group: 'all', caps_counter: null};
+
 // get/post via jQuery
 (function ($) {
     $.extend({
@@ -28,14 +30,29 @@ function ure_ui_button_text(caption) {
 }
 
 
+function ure_select_selectable_element(selectable_container, elements_to_select) {
+    // add unselecting class to all elements in the styleboard canvas except the ones to select
+    jQuery(".ui-selected", selectable_container).not(elements_to_select).removeClass("ui-selected").addClass("ui-unselecting");    
+    // add ui-selecting class to the elements to select
+    jQuery(elements_to_select).not(".ui-selected").addClass("ui-selecting");
+    // trigger the mouse stop event (this will select all .ui-selecting elements, and deselect all .ui-unselecting elements)
+    selectable_container.data("ui-selectable")._mouseStop(null);
+}
+
+
 jQuery(function ($) {
 
-    $('#ure_select_all').button({
-        label: ure_data.select_all
-    }).click(function (event) {
-        event.preventDefault();
-        ure_select_all(1);
-    });
+    ure_count_caps_in_groups();
+    ure_sizes_update();
+    $('#ure_select_all_caps').click(ure_auto_select_caps);
+    $('#ure_caps_groups_list').selectable({
+        selected: function( event, ui ) {
+            // do not allow multiple selection
+            $(ui.selected).siblings().removeClass("ui-selected");
+            ure_caps_refresh(ui.selected.id);
+        }
+    });            
+    ure_select_selectable_element($('#ure_caps_groups_list'), $('#ure_caps_group_all'));
 
     if (typeof ure_current_role === 'undefined' || 'administrator' !== ure_current_role) {
         $('#ure_unselect_all').button({
@@ -75,7 +92,7 @@ jQuery(function ($) {
             modal: true,
             autoOpen: true,
             closeOnEscape: true,
-            width: 400,
+            width: 450,
             height: 230,
             resizable: false,
             title: ure_data.add_new_role_title,
@@ -131,7 +148,7 @@ jQuery(function ($) {
             modal: true,
             autoOpen: true,
             closeOnEscape: true,
-            width: 400,
+            width: 450,
             height: 230,
             resizable: false,
             title: ure_data.rename_role_title,
@@ -444,6 +461,42 @@ function ure_select_all(selected) {
 // end of ure_select_all()
 
 
+function ure_apply_selection(cb_id) {
+    var qfilter = jQuery('#quick_filter').val();
+    var parent_div = jQuery('#ure_cap_div_'+ cb_id);
+    var disabled = jQuery('#'+ cb_id).attr('disabled');
+    var result = false;
+    if (parent_div.hasClass(ure_obj.selected_group) && // make selection inside currently selected group of capabilities only
+        !parent_div.hasClass('hidden') && disabled!=='disabled') {   // select not hidden and not disabled checkboxes (capabilities) only
+        //  if quick filter is not empty, then apply selection to the tagged element only
+        if (qfilter==='' || parent_div.hasClass('ure_tag')) {            
+            result = true;
+        }
+    }
+    
+    return result;
+}
+
+
+function ure_auto_select_caps(event) {
+    jQuery(function($) {                
+        if (event.shiftKey) {
+            $('.ure-cap-cb').each(function () {   // reverse selection
+                if (ure_apply_selection(this.id)) {
+                    $(this).prop('checked', !$(this).prop('checked'));
+                }
+            });
+        } else {    
+            $('.ure-cap-cb').each(function () { // switch On/Off all checkboxes
+                if (ure_apply_selection(this.id)) {
+                    $(this).prop('checked', $('#ure_select_all_caps').prop('checked'));
+                }
+            });
+        }
+    });
+}
+
+
 function ure_turn_caps_readable(user_id) {
     var ure_object = 'user';
     if (user_id === 0) {
@@ -479,14 +532,14 @@ function ure_role_change(role_name) {
 
 
 function ure_filter_capabilities(cap_id) {
-    var div_list = jQuery("div[id^='ure_div_cap_']");
+    var div_list = jQuery('.ure-cap-div');
     for (i = 0; i < div_list.length; i++) {
         if (cap_id !== '' && div_list[i].id.substr(11).indexOf(cap_id) !== -1) {
-            div_list[i].ure_tag = true;
+            jQuery('#'+ div_list[i].id).addClass('ure_tag');
             div_list[i].style.color = '#27CF27';
         } else {
             div_list[i].style.color = '#000000';
-            div_list[i].ure_tag = false;
+            jQuery('#'+ div_list[i].id).removeClass('ure_tag');
         }
     }
     ;
@@ -501,3 +554,129 @@ function ure_hide_pro_banner() {
 
 }
 // end of ure_hide_this_banner()
+
+
+function ure_caps_refresh_all() {
+    jQuery('.ure-cap-div').each(function () {
+        if (jQuery(this).hasClass('hidden') && !jQuery(this).hasClass('deprecated')) {
+            jQuery(this).removeClass('hidden');
+        }
+    });
+}
+
+
+function ure_caps_refresh_for_group(group_id) {
+    var show_deprecated = jQuery('#ure_show_deprecated_caps').attr('checked');
+    jQuery('.ure-cap-div').each(function () {
+        var el = jQuery(this);
+        if (el.hasClass(group_id)) {
+            if (el.hasClass('hidden')) {
+                if (el.hasClass('blocked')) {
+                    return;
+                }
+                if (el.hasClass('deprecated')) {
+                    if (group_id==='deprecated' || show_deprecated) {
+                        el.removeClass('hidden');
+                    }
+                } else {                    
+                    el.removeClass('hidden');
+                }                
+            }
+        } else {
+            if (!el.hasClass('hidden')) {
+                el.addClass('hidden');
+            }
+        }
+    });    
+}
+
+
+function ure_caps_refresh(group) {
+
+    var group_id = group.substr(15);
+    ure_obj.selected_group = group_id;
+    if (group_id === 'all') {
+        ure_caps_refresh_all();
+    } else {
+        ure_caps_refresh_for_group(group_id);
+    }    
+    ure_change_caps_columns_quant();
+} 
+
+
+function ure_validate_columns(columns) {    
+    if (columns==1 || ure_obj.selected_group=='all') {  
+        return columns;
+    }
+    
+    // Do not split list on columns in case it contains less then < 25 capabilities
+    for (i=0; i<ure_obj.caps_counter.length; i++) {
+        if (ure_obj.caps_counter[i].id==ure_obj.selected_group) {
+            if (ure_obj.caps_counter[i].total<=25) {
+                columns = 1;
+            }
+            break;
+        }
+    }
+    
+    return columns;
+}
+
+
+function ure_change_caps_columns_quant() {
+    var selected_index = parseInt(jQuery('#caps_columns_quant').val());
+    var columns = ure_validate_columns(selected_index);
+    var el = jQuery('#ure_caps_list');
+    el.css('-moz-column-count', columns);
+    el.css('-webkit-column-count', columns);
+    el.css('column-count', columns);
+
+}
+
+
+function ure_init_caps_counter() {
+    ure_obj.caps_counter = new Array();
+    jQuery('#ure_caps_groups_list li').each(function() {
+        var group_id = jQuery(this).attr('id').substr(15);
+        group_counter = {'id': group_id, 'total': 0, 'granted':0};
+        ure_obj.caps_counter.push(group_counter);
+    });
+    
+}
+
+
+function ure_count_caps_in_groups() {    
+    ure_init_caps_counter();    
+    
+    jQuery('.ure-cap-div').each(function () {
+        var cap_div = jQuery(this);
+        var capability = cap_div.attr('id').substr(12);
+        for (i=0; i<ure_obj.caps_counter.length; i++) {
+            if (cap_div.hasClass(ure_obj.caps_counter[i].id)) {
+                ure_obj.caps_counter[i].total++;
+                if (jQuery('#'+ capability).is(':checked')) {
+                    ure_obj.caps_counter[i].granted++;
+                }
+            }                            
+        }
+    });
+    
+    for (i=0; i<ure_obj.caps_counter.length; i++) {
+        var el = jQuery('#ure_caps_group_'+ ure_obj.caps_counter[i].id);
+        var value = el.text() +' ('+ ure_obj.caps_counter[i].total +'/'+ ure_obj.caps_counter[i].granted +')';
+        
+        el.text(value);
+    }
+    
+}
+
+
+function ure_sizes_update() {
+    var width = jQuery('#ure_caps_td').css('width');
+    jQuery('#ure_caps_list_container').css('width', width);
+}
+
+
+jQuery(window).resize(function() {
+   ure_sizes_update(); 
+});

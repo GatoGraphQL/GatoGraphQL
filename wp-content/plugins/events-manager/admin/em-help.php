@@ -6,8 +6,7 @@ function em_admin_help_page(){
 	global $wpdb;
 	?>
 	<div class="wrap">
-		<div id="icon-events" class="icon32"><br /></div>
-		<h2><?php _e('Getting Help for Events Manager','events-manager'); ?></h2>
+		<h1><?php _e('Getting Help for Events Manager','events-manager'); ?></h1>
 		<div class="em-docs">
 			<h2>Where To Get Help</h3>
 			<p>

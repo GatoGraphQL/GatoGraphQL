@@ -91,8 +91,11 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 		return parent::is_hidden($template_id, $atts);
 	}
 
-	function get_value($template_id, $atts) {
+	function get_value($template_id, $atts_or_nothing = array()) {
 	
+		// $atts_or_nothing: Needed to call get_value from GD_FilterComponent::function get_filterformcomponent_value() which doesn't have $atts
+		$atts = $atts_or_nothing;
+		
 		// When submitting the form, if user is logged in, then use these values. 
 		// Otherwise, use the values sent in the form
 		if (doing_post() && is_user_logged_in()) {

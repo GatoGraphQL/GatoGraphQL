@@ -3,7 +3,7 @@ Contributors: danlester, k3davis
 Tags: doc, docx, pdf, ppt, pptx, xls, office, powerpoint, google, document, embed
 Author URI: https://wordpress.org/plugins/google-document-embedder/
 Requires at least: 3.5
-Tested up to: 4.4
+Tested up to: 4.6
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -142,6 +142,17 @@ specific features at this time, but it will function normally in this environmen
 5. TinyMCE Editor integration
 
 == Changelog ==
+
+= 2.6.2 =
+
+Additional checks to protect against XSS/CSRF vulnerability reported by Tristan Madani.
+
+Removed settings and profile import/export feature to reduce support and development requirements of this plugin.
+
+= 2.6.1 =
+
+Works with WP4.6.
+Fixed a potential cross-site security vulnerability.
 
 = 2.6 =
 

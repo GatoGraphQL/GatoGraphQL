@@ -14,14 +14,14 @@
     <a href="http://role-editor.com">
         <div id="ure-icon" class="icon32"><br></div>        
     </a>    
-    <h2><?php esc_html_e('User Role Editor - Options', 'user-role-editor'); ?></h2>            
+    <h1><?php esc_html_e('User Role Editor - Options', 'user-role-editor'); ?></h1>
 
     <div id="ure_tabs" style="clear: left;">
         <ul>
             <li><a href="#ure_tabs-1"><?php esc_html_e('General', 'user-role-editor');?></a></li>
 <?php
 if (!$license_key_only) {
-    if ($this->lib->is_pro() || !$this->lib->multisite) {
+    if ($this->lib->is_pro() || !$multisite) {
 ?>
             <li><a href="#ure_tabs-2"><?php esc_html_e('Additional Modules', 'user-role-editor'); ?></a></li>
 <?php
@@ -29,7 +29,7 @@ if (!$license_key_only) {
 ?>
             <li><a href="#ure_tabs-3"><?php esc_html_e('Default Roles', 'user-role-editor'); ?></a></li>
 <?php
-    if ( $this->lib->multisite && ($this->lib->is_pro() || is_super_admin()) ) {
+    if ($multisite && ($this->lib->is_pro() || is_super_admin())) {
 ?>
             <li><a href="#ure_tabs-4"><?php esc_html_e('Multisite', 'user-role-editor'); ?></a></li>
 <?php
@@ -103,14 +103,14 @@ if (!$license_key_only) {
     </div> <!-- ure_tabs-1 -->
 <?php
 if (!$license_key_only) {
-    if ($this->lib->is_pro() || !$this->lib->multisite) {
+    if ($this->lib->is_pro() || !$multisite) {
 ?>
     
     <div id="ure_tabs-2">
         <form name="ure_additional_modules" method="post" action="<?php echo $link; ?>?page=settings-<?php echo URE_PLUGIN_FILE; ?>" >
             <table id="ure_addons">
 <?php
-if (!$this->lib->multisite) {
+if (!$multisite) {
 ?>
                 <tr>
                     <td>
@@ -142,9 +142,9 @@ if (!$this->lib->multisite) {
     <div id="ure_tabs-3">
         <form name="ure_default_roles" method="post" action="<?php echo $link; ?>?page=settings-<?php echo URE_PLUGIN_FILE; ?>" >
 <?php 
-    if (!$this->lib->multisite) {
+    if (!$multisite) {
         esc_html_e('Primary default role: ', 'user-role-editor');
-        echo $this->lib->role_default_html;
+        echo $view->role_default_html;
 ?>
         <hr>
 <?php
@@ -155,7 +155,7 @@ if (!$this->lib->multisite) {
             <?php $this->lib->show_other_default_roles(); ?>
         </div>
 <?php 
-    if ($this->lib->multisite) {
+    if ($multisite) {
         echo '<p>'. esc_html__('Note for multisite environment: take into account that other default roles should exist at the site, in order to be assigned to the new registered users.', 'user-role-editor') .'</p>';
     }
 ?>
@@ -169,7 +169,7 @@ if (!$this->lib->multisite) {
     </div> <!-- ure_tabs-3 -->   
     
 <?php
-    if ( $this->lib->multisite && ($this->lib->is_pro() || is_super_admin())) {
+    if ( $multisite && ($this->lib->is_pro() || is_super_admin())) {
 ?>
     <div id="ure_tabs-4">
         <div id="ure-settings-form-ms">

@@ -260,9 +260,10 @@ class EM_Bookings extends EM_Object implements Iterator{
 		if( count($booking_ids) > 0 ){
 			//Delete bookings and ticket bookings
 			$result_tickets = $wpdb->query("DELETE FROM ". EM_TICKETS_BOOKINGS_TABLE ." WHERE booking_id IN (".implode(',',$booking_ids).");");
-			$result = $wpdb->query("DELETE FROM ".EM_BOOKINGS_TABLE." WHERE event_id IN (".implode(',',$booking_ids).")");
+			$result = $wpdb->query("DELETE FROM ".EM_BOOKINGS_TABLE." WHERE booking_id IN (".implode(',',$booking_ids).")");
 		}
-		return ($result !== false && $result_tickets !== false);
+		do_action('em_bookings_deleted', $result, $booking_ids);
+		return apply_filters('em_bookings_delete', $result !== false && $result_tickets !== false, $booking_ids, $this);
 	}
 
 	
@@ -572,6 +573,8 @@ class EM_Bookings extends EM_Object implements Iterator{
 	
 
 	//List of patients in the patient database, that a user can choose and go on to edit any previous treatment data, or add a new admission.
+	//Deprecated
+	//@todo remove in 6.0
 	function export_csv() {
 		global $EM_Event;
 		if($EM_Event->event_id != $this->event_id ){

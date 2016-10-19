@@ -219,7 +219,11 @@ class EM_Locations extends EM_Object {
 		//search locations
 		if( !empty($args['search']) ){
 			$like_search = array($locations_table.'.post_content','location_name','location_address','location_town','location_postcode','location_state','location_region','location_country');
-			$conditions['search'] = "(".implode(" LIKE '%{$args['search']}%' OR ", $like_search). "  LIKE '%{$args['search']}%')";
+			$like_search_string = '%'.$wpdb->esc_like($args['search']).'%';
+			$like_search_strings = array();
+			foreach( $like_search as $v ) $like_search_strings[] = $like_search_string;
+			$like_search_sql = "(".implode(" LIKE %s OR ", $like_search). "  LIKE %s)";
+			$conditions['search'] = $wpdb->prepare($like_search_sql, $like_search_strings);
 		}
 		//eventful locations
 		if( true == $args['eventful'] ){

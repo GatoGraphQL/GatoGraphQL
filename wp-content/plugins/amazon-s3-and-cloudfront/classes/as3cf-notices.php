@@ -13,23 +13,17 @@ class AS3CF_Notices {
 	private $as3cf;
 
 	/**
-	 * @var string
-	 */
-	private $plugin_file_path;
-
-	/**
 	 * Make this class a singleton
 	 *
 	 * Use this instead of __construct()
 	 *
 	 * @param Amazon_S3_And_CloudFront $as3cf
-	 * @param string                   $plugin_file_path
 	 *
 	 * @return AS3CF_Notices
 	 */
-	public static function get_instance( $as3cf, $plugin_file_path ) {
+	public static function get_instance( $as3cf ) {
 		if ( ! isset( static::$instance ) ) {
-			static::$instance = new static( $as3cf, $plugin_file_path );
+			static::$instance = new static( $as3cf );
 		}
 
 		return static::$instance;
@@ -39,11 +33,9 @@ class AS3CF_Notices {
 	 * Constructor
 	 *
 	 * @param Amazon_S3_And_CloudFront $as3cf
-	 * @param string                   $plugin_file_path
 	 */
-	protected function __construct( $as3cf, $plugin_file_path ) {
-		$this->as3cf            = $as3cf;
-		$this->plugin_file_path = $plugin_file_path;
+	protected function __construct( $as3cf ) {
+		$this->as3cf = $as3cf;
 
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'network_admin_notices', array( $this, 'admin_notices' ) );
@@ -82,6 +74,8 @@ class AS3CF_Notices {
 			'class'                 => '', // Extra classes for the notice
 			'show_callback'         => false, // Callback to display extra info on notices. Passing a callback automatically handles show/hide toggle.
 			'callback_args'         => array(), // Arguments to pass to the callback.
+			'lock_key'              => '', // If lock key set, do not show message until lock released.
+			'pre_render_callback'   => false, // Callback to call before notice render.
 		);
 
 		$notice                 = array_intersect_key( array_merge( $defaults, $args ), $defaults );
@@ -92,7 +86,7 @@ class AS3CF_Notices {
 		if ( $notice['custom_id'] ) {
 			$notice['id'] = $notice['custom_id'];
 		} else {
-			$notice['id'] = apply_filters( 'as3cf_notice_id_prefix', 'as3cf-notice-' ) . sha1( $notice['message'] );
+			$notice['id'] = apply_filters( 'as3cf_notice_id_prefix', 'as3cf-notice-' ) . sha1( trim( $notice['message'] ) . trim( $notice['lock_key'] ) );
 		}
 
 		if ( isset( $notice['only_show_on_tab'] ) && false !== $notice['only_show_on_tab'] ) {
@@ -377,8 +371,16 @@ class AS3CF_Notices {
 			return;
 		}
 
+		if ( ! empty( $notice['lock_key'] ) && class_exists( 'AS3CF_Tool' ) && AS3CF_Tool::lock_key_exists( $notice['lock_key'] ) ) {
+			return;
+		}
+
 		if ( 'info' === $notice['type'] ) {
 			$notice['type'] = 'notice-info';
+		}
+
+		if ( ! empty( $notice['pre_render_callback'] ) && is_callable( $notice['pre_render_callback'] ) ) {
+			call_user_func( $notice['pre_render_callback'] );
 		}
 
 		$this->as3cf->render_view( 'notice', $notice );
@@ -424,8 +426,11 @@ class AS3CF_Notices {
 		$version = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : $GLOBALS['aws_meta']['amazon-s3-and-cloudfront']['version'];
 		$suffix  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-		// Enqueue notice.js globally as notices can be dismissed on any admin page
-		$src = plugins_url( 'assets/js/notice' . $suffix . '.js', $this->plugin_file_path );
+		// Enqueue notice.css & notice.js globally as some notices can be shown & dismissed on any admin page.
+		$src = plugins_url( 'assets/css/notice.css', $this->as3cf->get_plugin_file_path() );
+		wp_enqueue_style( 'as3cf-notice', $src, array(), $version );
+		
+		$src = plugins_url( 'assets/js/notice' . $suffix . '.js', $this->as3cf->get_plugin_file_path() );
 		wp_enqueue_script( 'as3cf-notice', $src, array( 'jquery' ), $version, true );
 
 		wp_localize_script( 'as3cf-notice', 'as3cf_notice', array(

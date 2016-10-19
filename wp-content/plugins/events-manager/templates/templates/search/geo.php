@@ -5,7 +5,10 @@
 		/* This general search will find matches within event_name, event_notes, and the location_name, address, town, state and country. */
 		
 	?>
-	<input type="text" name="geo" class="em-search-geo" value="<?php echo esc_attr($args['geo']); ?>"/>
+	<label>
+		<span class="screen-reader-text"><?php echo esc_html($args['geo_label']); ?></span>
+		<input type="text" name="geo" class="em-search-geo" value="<?php echo esc_attr($args['geo']); ?>"/>
+	</label>
 	<input type="hidden" name="near" class="em-search-geo-coords" value="<?php echo esc_attr($args['near']); ?>" />
 	<div id="em-search-geo-attr" ></div>
 	<script type="text/javascript">

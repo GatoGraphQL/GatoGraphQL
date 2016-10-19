@@ -23,15 +23,15 @@ class GD_FormInput_YesNo extends GD_FormInput_Select {
 		return $values;
 	}	
 	
-	function get_default_value($conf) {
+	function get_default_value(/*$conf*/) {
 	
 		return false;
 	}
 
-	function get_value($conf) {
+	function get_value(/*$conf, */$output=false) {
 
 		// Return false / true bools
-		$value = parent::get_value($conf);
+		$value = parent::get_value(/*$conf*/);
 		if ($value == 'true') {
 			return true;
 		}
@@ -39,9 +39,9 @@ class GD_FormInput_YesNo extends GD_FormInput_Select {
 		return false;
 	}
 
-	function get_output_value($conf) {
+	function get_output_value(/*$conf*/) {
 
 		// Return the parent => return values as string instead of boolean, so we can use javascript .indexOf function to load correctly selected values
-		return parent::get_value($conf, true);
+		return parent::get_value(/*$conf, */true);
 	}	
 }

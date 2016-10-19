@@ -145,7 +145,7 @@ class PoPTheme_Wassup_Utils {
 		);
 		if ($add_tagline) {
 			$welcometitle = sprintf(
-				'%s<br/><small>%s</small>',
+				'<span class="welcometitle">%s</span><br/><small class="tagline">%s</small>',
 				$welcometitle,
 				get_bloginfo('description')
 			);

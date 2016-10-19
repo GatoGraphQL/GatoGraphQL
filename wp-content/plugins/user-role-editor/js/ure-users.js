@@ -1,6 +1,8 @@
 /* User Role Editor for users.php */
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function() {        
+    jQuery('#move_from_no_role_content').append(ure_users_data.to +' <select id="ure_new_role" name="ure_new_role"></select>');
+    var ure_new_role = jQuery('#ure_new_role');
     var options = jQuery("#new_role > option").clone();
     jQuery('#ure_new_role').empty().append(options);
     if (jQuery('#ure_new_role option[value="no_rights"]').length === 0) {
@@ -8,18 +10,18 @@ jQuery(document).ready(function() {
     }
 
     // Exclude change role to
-    jQuery('#selectBox option[value=""]').remove();
+    jQuery('#ure_new_role option[value=""]').remove();
     var new_role = jQuery('#new_role').find(":selected").val();
     if (new_role.length > 0) {
-        jQuery("#ure_new_role").val(new_role);
+        ure_new_role.val(new_role);
     }
-    jQuery('#ure_new_role').trigger('updated');
+    ure_new_role.trigger('updated');    
 });
 
 
 
 function ure_move_users_from_no_role_dialog() {    
-
+    
     jQuery('#move_from_no_role_dialog').dialog({
         dialogClass: 'wp-dialog',
         modal: true,
@@ -32,7 +34,7 @@ function ure_move_users_from_no_role_dialog() {
         'buttons': {
             'OK': function () {
                 ure_move_users_from_no_role();
-
+                jQuery(this).dialog('close');
             },
             Cancel: function () {
                 jQuery(this).dialog('close');
@@ -45,7 +47,7 @@ function ure_move_users_from_no_role_dialog() {
   
   
 function ure_move_users_from_no_role() {
-    new_role = jQuery('#ure_new_role').find(":selected").val();
+    var new_role = jQuery('#ure_new_role').find(":selected").val();
     if (new_role.length==0) {
         alert(ure_users_data.provide_new_role_caption);
         return;

@@ -15,7 +15,7 @@ $col_count = absint($col_count); //now we know it's a number
 		</div>
 		<div class="ticket-description">
 			<label><?php esc_html_e('Description','events-manager') ?></label>
-			<textarea name="em_tickets[<?php echo $col_count; ?>][ticket_description]" class="ticket_description"><?php echo esc_html(stripslashes($EM_Ticket->ticket_description)) ?></textarea>
+			<textarea name="em_tickets[<?php echo $col_count; ?>][ticket_description]" class="ticket_description"><?php echo esc_html(wp_unslash($EM_Ticket->ticket_description)) ?></textarea>
 		</div>
 		<div class="ticket-price"><label><?php esc_html_e('Price','events-manager') ?></label><input type="text" name="em_tickets[<?php echo $col_count; ?>][ticket_price]" class="ticket_price" value="<?php echo esc_attr($EM_Ticket->get_price_precise()) ?>" /></div>
 		<div class="ticket-spaces">

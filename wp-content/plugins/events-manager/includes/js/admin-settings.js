@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
 		open_close.text(EM.open_text);
 	});
 	$('.nav-tab-wrapper .nav-tab').click(function(){
-		$('.nav-tab-wrapper .nav-tab').removeClass('nav-tab-active');
+		$('.nav-tab-wrapper .nav-tab').removeClass('nav-tab-active').blur();
 		$(this).addClass('nav-tab-active');
 	});
 	var navUrl = document.location.toString();
@@ -80,7 +80,7 @@ jQuery(document).ready(function($){
 		}
 	}).trigger('change');
 	//For rewrite titles
-	$('input:radio[name=dbem_disable_title_rewrites]').live('change',function(){
+	$('input:radio[name=dbem_disable_title_rewrites]').on('change',function(){
 		checked_check = $('input:radio[name=dbem_disable_title_rewrites]:checked');
 		if( checked_check.val() == 1 ){
 			$('#dbem_title_html_row').show();

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amazon-web-services\n"
 "Report-Msgid-Bugs-To: nom@deliciousbrains.com\n"
-"POT-Creation-Date: 2016-03-08 12:09+0000\n"
+"POT-Creation-Date: 2016-09-29 12:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,7 +144,11 @@ msgstr ""
 msgid "cURL compiled without"
 msgstr ""
 
-#: classes/aws-compatibility-check.php:69
+#: classes/aws-compatibility-check.php:55
+msgid "the function curl_multi_exec disabled"
+msgstr ""
+
+#: classes/aws-compatibility-check.php:73
 msgid ""
 "The official Amazon&nbsp;Web&nbsp;Services SDK requires PHP 5.3.3+ and cURL "
 "7.16.2+ compiled with OpenSSL and zlib. Your server currently has"

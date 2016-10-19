@@ -1,9 +1,9 @@
 === WP Offload S3 Lite ===
 Contributors: bradt, deliciousbrains
 Tags: uploads, amazon, s3, amazon s3, mirror, admin, media, cdn, cloudfront
-Requires at least: 3.7
-Tested up to: 4.4
-Stable tag: 1.0.2
+Requires at least: 4.4
+Tested up to: 4.6.1
+Stable tag: 1.1.1
 License: GPLv3
 
 Copies files to Amazon S3 as they are uploaded to the Media Library. Optionally configure Amazon CloudFront for faster delivery.
@@ -21,7 +21,6 @@ If you're adding this plugin to a site that's been around for a while, your exis
 **PRO Upgrade with Email Support and More Features**
 
 * Upload existing Media Library to Amazon S3
-* Find & replace file URLs in content
 * Control Amazon S3 files from the Media Library
 * [Assets addon](https://deliciousbrains.com/wp-offload-s3/?utm_source=wordpress.org&utm_medium=web&utm_content=desc&utm_campaign=os3-free-plugin#assets-addon) - Serve your CSS & JS from Amazon S3/CloudFront
 * [WooCommerce addon](https://deliciousbrains.com/wp-offload-s3/?utm_source=wordpress.org&utm_medium=web&utm_content=desc&utm_campaign=os3-free-plugin#woocommerce-addon)
@@ -58,16 +57,49 @@ You can see the minimum requirements [here](https://deliciousbrains.com/wp-offlo
 
 == Upgrade Notice ==
 
+= 1.1 =
+This is a major change, which ensures S3 URLs are no longer saved in post content. Instead, local URLs are filtered on page generation and replaced with the S3 version. If you depend on the S3 URLs being stored in post content you will need to make modifications to support this version.
+
 = 0.6 =
 This version requires PHP 5.3.3+ and the Amazon Web Services plugin
 
-= 0.6.1 =
-This version requires PHP 5.3.3+ and the Amazon Web Services plugin
-
-= 0.6.2 =
-This version requires PHP 5.3.3+ and the Amazon Web Services plugin
-
 == Changelog ==
+
+= WP Offload S3 Lite 1.1.1 - 2016-10-17 =
+* New: Filter post excerpts - S3 URLs will no longer be saved to the database
+* Bug fix: PHP 5.3 Fatal error: Using $this when not in object context
+* Bug fix: Query string parameters incorrectly encoded for Media Library items
+
+= WP Offload S3 Lite 1.1 - 2016-09-29 =
+* New: Filter post content. S3 URLs will no longer be saved to the database
+* New: Upgrade routine to replace all S3 URLs in content with local URLs
+* New: Support for theme custom logos
+* New: Control the ACL for intermediate image sizes using the `as3cf_upload_acl_sizes` filter
+* Bug fix: File names containing special characters double encoded
+* Bug fix: `srcset` not working for file names containing special characters
+* Bug fix: Incorrect placeholder text for 'Path' option
+* Bug fix: Objects in root of bucket not deleted when removed from the Media Library
+* Bug fix: No longer use deprecated functions in WordPress 4.6
+* Bug fix: Don't delete local file when 'Remove Files From Server' enabled and upload to S3 fails
+
+= WP Offload S3 Lite 1.0.5 - 2016-09-01 =
+* New: Compatibility with WordPress 4.6
+* Improvement: No longer delete plugin data on uninstall. Manual removal possible, as per this [doc](https://deliciousbrains.com/wp-offload-s3/doc/uninstall/)
+
+= WP Offload S3 Lite 1.0.4 - 2016-05-30 =
+* New: Now using simpler Force HTTPS setting, removed redundant Always Use HTTP setting
+* New: `as3cf_cloudfront_path_parts` filter allows changing served CloudFront path (useful when distribution pulls subdirectory)
+* Improvement: Better compatibility with non-standard notices from other plugins and themes
+* Improvement: Added basic auth and proxy info to diagnostic info
+* Improvement: Added `allow_url_fopen` status to diagnostic info
+* Improvement: Added memory usage to diagnostic info
+* Improvement: Ensure notice text is 800px or less in width
+* Improvement: Reduced database queries on settings screen
+* Bug fix: Properly handle _wp_attachment_data metadata when it is a serialized WP_Error
+
+= WP Offload S3 Lite 1.0.3 - 2016-03-23 =
+* Bug fix: Don't replace srcset URLs when Rewrite File URLs option disabled
+* Bug fix: Fatal error: Cannot redeclare as3cf_get_secure_attachment_url()
 
 = WP Offload S3 Lite 1.0.2 - 2016-03-08 =
 * Bug fix: Uninstall would run even if pro plugin installed
@@ -84,7 +116,7 @@ This version requires PHP 5.3.3+ and the Amazon Web Services plugin
 * Improvement: Far future expiration header set by default
 * Improvement: Newly created bucket now immediately appears in the bucket list
 * Improvement: Cleanup user meta on uninstall
-* Improvement: WP Retina 2x integration [removed](https://deliciousbrains.com/wp-offload-s3/doc/copy-hidpi-2x-images-support/)
+* Improvement: WP Retina 2x integration removed
 * Bug fix: Year/Month folder structure on S3 not created if the 'Organise my uploads into month and year-based folders' WordPress setting is disabled
 * Bug fix: Responsive srcset PHP notices
 * Bug fix: Compatibility addon notices displayed to non-admin users

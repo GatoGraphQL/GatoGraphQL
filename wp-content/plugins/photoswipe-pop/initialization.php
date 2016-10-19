@@ -37,6 +37,8 @@ class PhotoSwipe_PoP_Initialization {
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 
 			$dist_uri = $uri.'/dist';
+
+			// https://github.com/dimsemenov/PhotoSwipe/releases
 			wp_register_script('photoswipe', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe.min.js', null, null);
 			wp_register_script('photoswipe-skin', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe-ui-default.min.js', null, null);
 			wp_register_script('photoswipe-pop', $dist_uri.'/photoswipe-pop.bundle.min.js', array('jquery', 'pop', 'photoswipe'), PHOTOSWIPEPOP_VERSION, true);

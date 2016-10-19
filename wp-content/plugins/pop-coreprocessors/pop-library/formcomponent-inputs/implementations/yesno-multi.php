@@ -23,11 +23,11 @@ class GD_FormInput_MultiYesNo extends GD_FormInput_MultiSelect {
 		return $values;
 	}	
 	
-	function get_value($conf) {
+	function get_value(/*$conf, */$output=false) {
 
 		// Return false / true bools
 		$value = array();
-		foreach (parent::get_value($conf) as $v) {
+		foreach (parent::get_value(/*$conf*/) as $v) {
 
 			if ($v == 'true') {
 				$value[] = true;
@@ -40,9 +40,9 @@ class GD_FormInput_MultiYesNo extends GD_FormInput_MultiSelect {
 		return $value;
 	}	
 
-	function get_output_value($conf) {
+	function get_output_value(/*$conf*/) {
 
 		// Return the parent => return values as string instead of boolean, so we can use javascript .indexOf function to load correctly selected values
-		return parent::get_value($conf, true);
+		return parent::get_value(/*$conf, */true);
 	}	
 }

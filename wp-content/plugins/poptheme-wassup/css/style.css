@@ -3067,6 +3067,8 @@ body.expansive .content-single {
 #ps-top.pop-search-visible .visiblesearch-visible {
   display: block !important;
 }
+#ps-top .visiblesearch-hidden.hidden,
+#ps-top.pop-search-visible .visiblesearch-visible.hidden,
 #ps-top .visiblesearch-visible,
 #ps-top.pop-search-visible .visiblesearch-hidden {
   display: none !important;

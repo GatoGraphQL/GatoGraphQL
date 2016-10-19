@@ -369,7 +369,7 @@ popFunctions = {
 			modal.on('show.bs.modal', function(e) {
 
 				var link = $(e.relatedTarget);
-				var url = t.getUrl(link);
+				var url = t.getUrl(link, true);
 				url = popManager.getEmbedUrl(url);
 				t.embedPreview(pageSection, block, iframe, url);
 			});

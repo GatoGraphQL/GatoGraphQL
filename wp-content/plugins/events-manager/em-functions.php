@@ -253,7 +253,7 @@ function em_get_hour_format(){
 }
 
 function em_get_days_names(){
-	return array (1 => __ ( 'Mon' ), 2 => __ ( 'Tue' ), 3 => __ ( 'Wed' ), 4 => __ ( 'Thu' ), 5 => __ ( 'Fri' ), 6 => __ ( 'Sat' ), 0 => __ ( 'Sun' ) );
+	return array (1 => translate( 'Mon' ), 2 => translate( 'Tue' ), 3 => translate( 'Wed' ), 4 => translate( 'Thu' ), 5 => translate( 'Fri' ), 6 => translate( 'Sat' ), 0 => translate( 'Sun' ) );
 }
 
 /**
@@ -265,6 +265,20 @@ function em_verify_nonce($action, $nonce_name='_wpnonce'){
 		if( !wp_verify_nonce($_REQUEST[$nonce_name], $action) ) check_admin_referer('trigger_error');
 	}else{
 		if( !wp_verify_nonce($_REQUEST[$nonce_name], $action) ) exit( __('Trying to perform an illegal action.','events-manager') );
+	}
+}
+
+/**
+ * Since WP 4.5 em_wp_get_referer() returns false if URL is the same. We use it to get a safe referrer url, so we use the new wp_get_raw_referer() argument instead.
+ * @since 5.6.3
+ * @return string 
+ */
+function em_wp_get_referer(){
+	if( function_exists('wp_get_raw_referer') ){
+		//do essentially what em_wp_get_referer does, but potentially returning the same url as before
+		return wp_validate_redirect(wp_get_raw_referer(), false );
+	}else{
+		return wp_get_referer();
 	}
 }
 
@@ -340,14 +354,15 @@ function em_booking_add_registration( $EM_Booking ){
     $registration = true;
     if( ((!is_user_logged_in() && get_option('dbem_bookings_anonymous')) || EM_Bookings::is_registration_forced()) && !get_option('dbem_bookings_registration_disable') ){
     	//find random username - less options for user, less things go wrong
-    	$username_root = explode('@', wp_kses_data($_REQUEST['user_email']));
+    	$user_email = trim(wp_unslash($_REQUEST['user_email'])); //otherwise may fail validation
+    	$username_root = explode('@', wp_kses_data($user_email));
     	$username_root = $username_rand = sanitize_user($username_root[0], true);
     	while( username_exists($username_rand) ) {
     		$username_rand = $username_root.rand(1,1000);
     	}
     	$_REQUEST['dbem_phone'] = (!empty($_REQUEST['dbem_phone'])) ? wp_kses_data($_REQUEST['dbem_phone']):''; //fix to prevent warnings
     	$_REQUEST['user_name'] = (!empty($_REQUEST['user_name'])) ? wp_kses_data($_REQUEST['user_name']):''; //fix to prevent warnings
-    	$user_data = array('user_login' => $username_rand, 'user_email'=> $_REQUEST['user_email'], 'user_name'=> $_REQUEST['user_name'], 'dbem_phone'=> $_REQUEST['dbem_phone']);
+    	$user_data = array('user_login' => $username_rand, 'user_email'=> $user_email, 'user_name'=> $_REQUEST['user_name'], 'dbem_phone'=> $_REQUEST['dbem_phone']);
     	$id = em_register_new_user($user_data);
     	if( is_numeric($id) ){
     		$EM_Person = new EM_Person($id);
@@ -470,8 +485,8 @@ function em_new_user_notification() {
 	//Copied out of /wp-includes/pluggable.php
 	$user = new WP_User($user_id);
 
-	$user_login = stripslashes($user->user_login);
-	$user_email = stripslashes($user->user_email);
+	$user_login = wp_unslash($user->user_login);
+	$user_email = wp_unslash($user->user_email);
 
 	// The blogname option is escaped with esc_html on the way into the database in sanitize_option
 	// we want to reverse this for the plain text arena of emails.
@@ -492,7 +507,13 @@ function em_new_user_notification() {
 		em_locate_template('emails/new-user.php', true);
 		$message = ob_get_clean();
 	}
-    $message  = str_replace(array('%password%','%username%'), array($plaintext_pass, $user_login), $message);
+	//for WP 4.4, regenerate password link can be used
+	$set_password_url = '';
+	if( function_exists('get_password_reset_key')){
+	    $key = get_password_reset_key( $user );
+	    $set_password_url = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
+	}
+    $message  = str_replace(array('%password%','%username%','%passwordurl%'), array($plaintext_pass, $user_login, $set_password_url), $message);
 	global $EM_Mailer;
 	return $EM_Mailer->send(get_option('dbem_bookings_email_registration_subject'), $message, $user_email);
 }
@@ -566,13 +587,13 @@ function em_get_search_form_defaults($args = array()){
 	$args = array_merge($search_args, $args);
 	//overwrite with $_REQUEST defaults in event of a submitted search
 	if( isset($_REQUEST['geo']) ) $args['geo'] = $_REQUEST['geo']; //if geo search string requested, use that for search form
-	if( isset($_REQUEST['near']) ) $args['near'] = stripslashes($_REQUEST['near']); //if geo search string requested, use that for search form
-	if( isset($_REQUEST['em_search']) ) $args['search'] = stripslashes($_REQUEST['em_search']); //if geo search string requested, use that for search form
+	if( isset($_REQUEST['near']) ) $args['near'] = wp_unslash($_REQUEST['near']); //if geo search string requested, use that for search form
+	if( isset($_REQUEST['em_search']) ) $args['search'] = wp_unslash($_REQUEST['em_search']); //if geo search string requested, use that for search form
 	if( isset($_REQUEST['category']) ) $args['category'] = $_REQUEST['category']; //if state requested, use that for searching
-	if( isset($_REQUEST['country']) ) $args['country'] = stripslashes($_REQUEST['country']); //if country requested, use that for searching
-	if( isset($_REQUEST['region']) ) $args['region'] = stripslashes($_REQUEST['region']); //if region requested, use that for searching
-	if( isset($_REQUEST['state']) ) $args['state'] = stripslashes($_REQUEST['state']); //if state requested, use that for searching
-	if( isset($_REQUEST['town']) ) $args['town'] = stripslashes($_REQUEST['town']); //if state requested, use that for searching
+	if( isset($_REQUEST['country']) ) $args['country'] = wp_unslash($_REQUEST['country']); //if country requested, use that for searching
+	if( isset($_REQUEST['region']) ) $args['region'] = wp_unslash($_REQUEST['region']); //if region requested, use that for searching
+	if( isset($_REQUEST['state']) ) $args['state'] = wp_unslash($_REQUEST['state']); //if state requested, use that for searching
+	if( isset($_REQUEST['town']) ) $args['town'] = wp_unslash($_REQUEST['town']); //if state requested, use that for searching
 	if( isset($_REQUEST['near_unit']) ) $args['near_unit'] = $_REQUEST['near_unit']; //if state requested, use that for searching
 	if( isset($_REQUEST['near_distance']) ) $args['near_distance'] = $_REQUEST['near_distance']; //if state requested, use that for searching
 	if( !empty($_REQUEST['scope']) && !is_array($_REQUEST['scope'])){ 

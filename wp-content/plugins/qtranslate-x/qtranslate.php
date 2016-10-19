@@ -3,7 +3,7 @@
 Plugin Name: qTranslate-X
 Plugin URI: http://wordpress.org/plugins/qtranslate-x/
 Description: Adds user-friendly and database-friendly multilingual content support.
-Version: 3.4.6.4
+Version: 3.4.6.8
 Author: qTranslate Team
 Author URI: http://qtranslatexteam.wordpress.com/about
 Tags: multilingual, multi, language, admin, tinymce, Polyglot, bilingual, widget, switcher, professional, human, translation, service, qTranslate, zTranslate, mqTranslate, qTranslate Plus, WPML
@@ -51,54 +51,58 @@ GitHub Branch: master
 */
 /* Default Language Contributors
 	=============================
-	ar by Mohamed Magdy
-	de by Qian Qin
-	es by June
-	eu by Xabier Arrabal
-	fi by Tatu Siltanen
-	fr by Damien Choizit
-	gl by Andrés Bott
-	it by Lorenzo De Tomasi
-	ja by Brian Parker
-	nl by RobV
-	pt(pt_PT) by netolazaro, Pedro Mendonça
-	pb(pt_BR) by Pedro Mendonça
-	ro hu by Jani Monoses
-	sv by bear3556, johdah
-	vi by hathhai
-	zh(zh_CN) by Junyan Chen
-	ua(uk) Vadym Volos (https://google.com/+VadymVolos https://wordpress.org/support/profile/vadim-v)
+	'ar' by Mohamed Magdy
+	'de' by Qian Qin
+	'cy' by Marc Heatley - properdesign.rs
+	'ca' by Xavier Arbiell <xavier@arbiell.com>
+	'es' by June
+	'eu' by Xabier Arrabal
+	'fi' by Tatu Siltanen, Jyrki Vanamo <jyrki.vanamo@steep.fi> https://github.com/jvanamo
+	'fr' by Damien Choizit
+	'gl' by Andrés Bott
+	'it' by Lorenzo De Tomasi
+	'ja' by Brian Parker
+	'lt' by Vytas M.
+	'nl' by RobV
+	'pt'(pt_PT) by netolazaro, Pedro Mendonça
+	'pb'(pt_BR) by Pedro Mendonça
+	'ro'(hu) by Jani Monoses
+	'sk' by Andrej Leitner <andrej.leitner@gmail.com>
+	'sv' by bear3556, johdah
+	'vi' by hathhai
+	'zh'(zh_CN) by Junyan Chen
+	'ua'(uk) Vadym Volos (https://google.com/+VadymVolos https://wordpress.org/support/profile/vadim-v)
 
 
 	Plugin Translation Contributors
 	===============================
-	ar by Nedal Elghamry
-	az_AZ by Rashad Aliyev, evlenirikbiz
-	bg_BG by Dimitar Mitev
-	cz by by bengo
-	da_DK by Jan Christensen, meviper
-	de_DE by Robert Skiba, Michel Weimerskirch, Maurizio Omissoni, Qian Qin
-	el_GR by Marios Bekatoros
-	eo    by Chuck Smith
-	es_CA by Carlos Sanz
-	es_ES by Alejandro Urrutia
-	fr_FR by eriath, Florent
-	hu_HU by Németh Balázs
-	id_ID by Masino Sinaga
-	it_IT by Simone Montrucchio, Maurizio Omissoni, shecky
-	ja by dapperdanman1400
-	mk_MK by Pavle Boskoski
-	ms_MY by Lorna Timbah, webgrrrl
-	nl_NL by Marius Siroen, BlackDex
-	pl_PL by Bronislaw Gracz
-	pt_BR by Marcelo Paoli
-	pt_PT by Pedro Mendonça, claudiotereso
-	ro_RO by Puiu Ionut, ipuiu
-	ru_RU by Dimitri Don, viaestvita
-	sr_RS by Borisa Djuraskovic
-	sv_SE by Tor-Bjorn Fjellner, tobi
-	tr_TR by ali, freeuser
-	zh_CN by silverfox
+	'ar'    by Nedal Elghamry
+	'az_AZ' by Rashad Aliyev, evlenirikbiz
+	'bg_BG' by Dimitar Mitev
+	'cz by' by bengo
+	'da_DK' by Jan Christensen, meviper
+	'de_DE' by Robert Skiba, Michel Weimerskirch, Maurizio Omissoni, Qian Qin
+	'el_GR' by Marios Bekatoros
+	'eo'    by Chuck Smith
+	'es_CA' by Carlos Sanz
+	'es_ES' by Alejandro Urrutia
+	'fr_FR' by eriath, Florent
+	'hu_HU' by Németh Balázs
+	'id_ID' by Masino Sinaga
+	'it_IT' by Simone Montrucchio, Maurizio Omissoni, shecky
+	'ja'    by dapperdanman1400
+	'mk_MK' by Pavle Boskoski
+	'ms_MY' by Lorna Timbah, webgrrrl
+	'nl_NL' by Marius Siroen, BlackDex
+	'pl_PL' by Bronislaw Gracz
+	'pt_BR' by Marcelo Paoli
+	'pt_PT' by Pedro Mendonça, claudiotereso
+	'ro_RO' by Puiu Ionut, ipuiu
+	'ru_RU' by Denis K, Dimitri Don, viaestvita
+	'sr_RS' by Borisa Djuraskovic
+	'sv_SE' by Tor-Bjorn Fjellner, tobi
+	'tr_TR' by ali, freeuser
+	'zh_CN' by silverfox
 
 	Sponsored Features
 	==================
@@ -118,7 +122,7 @@ if ( ! function_exists( 'add_filter' ) ) {
  * Designed as interface for other plugin integration. The documentation is available at
  * https://qtranslatexteam.wordpress.com/integration/
  */
-define('QTX_VERSION','3.4.6.4');
+define('QTX_VERSION','3.4.6.8');
 
 if ( ! defined( 'QTRANSLATE_FILE' ) ) {
 	define( 'QTRANSLATE_FILE', __FILE__ );

@@ -211,7 +211,7 @@ class OP_Custom_Template_Processor_SectionTabPanelBlockGroups extends GD_Templat
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 
 		$details = array(
 			GD_TEMPLATE_BLOCK_FARMS_SCROLL_DETAILS,
@@ -274,7 +274,7 @@ class OP_Custom_Template_Processor_SectionTabPanelBlockGroups extends GD_Templat
 		// 	return __('View/Preview', 'poptheme-wassup-organikprocessors');
 		// }
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 
 	function init_atts($template_id, &$atts) {

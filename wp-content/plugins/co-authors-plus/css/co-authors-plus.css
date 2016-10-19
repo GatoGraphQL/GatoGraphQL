@@ -73,14 +73,14 @@
 				text-decoration: underline;
 				color: #FF0000;
 				font-size: 11px;
-				
+
 				border: 1px solid transparent;
 			}
 				#coauthors-list .delete-coauthor:hover {
 					cursor: pointer;
 					background: #FF0000;
 					color: #fff;
-					
+
 					border: 1px solid #FF0000;
 					border-radius: 3px;
 					-moz-border-radius: 3px;
@@ -89,7 +89,7 @@
 	#coauthors-loading {
 		margin: 10px 0px 5px 10px;
 	}
-	
+
 #coauthors-readonly {
 }
 	#coauthors-readonly ul {

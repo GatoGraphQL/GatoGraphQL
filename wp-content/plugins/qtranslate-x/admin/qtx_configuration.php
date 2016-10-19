@@ -184,9 +184,11 @@ function qtranxf_conf() {
 ?>
 <h2><?php _e('Language Management (qTranslate Configuration)', 'qtranslate') ?></h2>
 <p class="qtranxs_heading" style="font-size: small"><?php printf(__('For help on how to configure qTranslate correctly, take a look at the <a href="%1$s">qTranslate FAQ</a> and the <a href="%2$s">Support Forum</a>.', 'qtranslate')
-  , 'https://qtranslatexteam.wordpress.com/faq/'
+	, 'https://qtranslatexteam.wordpress.com/faq/'
 //, 'https://wordpress.org/plugins/qtranslate-x/faq/'
-  , 'https://wordpress.org/support/plugin/qtranslate-x');
+	, 'http://qtranslate-x.com/support/'
+//, 'https://wordpress.org/support/plugin/qtranslate-x'
+	);
 	echo '<br><small><em>';
 	printf(__('Plugin development is supported through your %sdonations to the development team%s.','qtranslate'),'<a href="https://qtranslatexteam.wordpress.com/donations/" target="_blank">', '</a>') ?></em></small></p>
 <?php if(isset($_GET['config_inspector'])) {
@@ -246,8 +248,8 @@ echo ' '; printf(__('Please, read %sIntegration Guide%s for more information.', 
 						echo '<td><label title="' . $q_config['language_name'][$language] . '"><input type="radio" name="default_language" value="' . $language . '"';
 						checked($language,$q_config['default_language']);
 						echo ' />';
-						echo ' <a href="'.add_query_arg('moveup', $language, $clean_uri).'"><img src="'.$pluginurl.'arrowup.png" alt="up" /></a>';
-						echo ' <a href="'.add_query_arg('movedown', $language, $clean_uri).'"><img src="'.$pluginurl.'arrowdown.png" alt="down" /></a>';
+						echo ' <a href="'.add_query_arg('moveup', $language, $clean_uri).'"><img src="'.$pluginurl.'img/arrowup.png" alt="up" /></a>';
+						echo ' <a href="'.add_query_arg('movedown', $language, $clean_uri).'"><img src="'.$pluginurl.'img/arrowdown.png" alt="down" /></a>';
 						echo ' <img src="' . $flag_location.$q_config['flag'][$language] . '" alt="' . $q_config['language_name'][$language] . '" /> ';
 						echo ' '.$q_config['language_name'][$language];
 						echo '</label></td>';
@@ -319,6 +321,13 @@ echo ' '; printf(__('Please, read %sIntegration Guide%s for more information.', 
 					<br/>
 					<label for="show_alternative_content"><input type="checkbox" name="show_alternative_content" id="show_alternative_content" value="1"<?php checked($q_config['show_alternative_content']) ?>/> <?php _e('Show content in an alternative language when translation is not available for the selected language.', 'qtranslate') ?></label>
 					<p class="qtranxs_notes"><?php printf(__('When a page or a post with an untranslated content is viewed, a message with a list of other available languages is displayed, in which languages are ordered as defined by option "%s". If this option is on, then the content of the first available language will also be shown, instead of the expected language, for the sake of user convenience.', 'qtranslate'), __('Default Language / Order', 'qtranslate')) ?></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"><?php _e('Language Names', 'qtranslate') ?></th>
+				<td>
+					<label for="camel_case"><input type="checkbox" name="camel_case" id="camel_case" value="1"<?php checked(!isset($q_config['language_name_case']) || !$q_config['language_name_case']) ?>/> <?php _e('Show language names in "Camel Case".', 'qtranslate') ?></label>
+					<p class="qtranxs_notes"><?php printf(__('Define how to display translated language names, whenever languages need to be listed, for example, in "%s" statement.', 'qtranslate'), __('Not Available Message', 'qtranslate')) ?></p>
 				</td>
 			</tr>
 			<tr valign="top">

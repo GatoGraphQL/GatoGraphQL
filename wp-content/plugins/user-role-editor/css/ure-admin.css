@@ -21,12 +21,8 @@
   text-align: right;
 }
 
-.form_color_row {
-  float: left;
-  display: block;  
-  margin-bottom: 5px;
-  width: 100%;
-  clear: both;
+.nowrap {
+    white-space: nowrap;
 }
 
 img.input_radio {
@@ -51,47 +47,68 @@ input.warning:hover, a.warning:hover {
 	color: red;
 }
 
-.fli {
-  float: left;
-  display: inline;
-}
-
-#foldersdiv {
-  border-style:solid;
-  border-width:1px;
-  height:300px;
-  width: 450px;
-  overflow:auto;
-  padding:0.5em 0.9em;
-  margin-top: 5px;
-  margin-bottom: 0px;
-  white-space: nowrap;
-}
-
 #ure_container {
-    float: left;
+    display: table;
     width: 100%;
 }
 
-.ure-sidebar {
-  float: right;
+.ure-table {
+    display: table;
 }
 
-#ure_greetings {
-  max-width: 250px;
+.ure-table-cell {
+    display: table-cell;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+#ure-sidebar {
+  width: 270px;
+  padding-left: 20px;
 }
 
 .hidden {
 	display: none;
 }
 
+#user_role_editor {
+    
+}
+
+
 #ure_form_controls {
-  float: left;
+}
+
+#ure_role_selector {    
+    padding: 10px 0 0 10px;    
+}
+
+#ure_user_caps_header {
+    padding: 10px 0 0 10px;
+    font-size: 16px;
+}
+
+#ure_user_caps_title {        
+    font-weight: bold;
+}
+
+#ure_role_select_label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ure-caps-option {
+    padding-left: 20px;
+}
+
+#ure_caps_container {
+    width: 100%;
+    
 }
 
 #ure_toolbar {
-  float: right;
-  margin-left: 5px;  
+  margin-top: 10px;
   border: 1px solid #dfdfdf;
   -webkit-box-shadow: inset 0 1px 0 #fff;
   box-shadow: inset 0 1px 0 #fff;
@@ -99,23 +116,18 @@ input.warning:hover, a.warning:hover {
   border-radius: 3px;
   background: #f5f5f5;
   padding: 5px;
-  max-width: 145px;
 }
 
 .ure_toolbar_button {
-  width: 143px;
+  width: 100%;
+  margin-bottom: 3px;
 }
 
 #ure_update {
-  margin-top: 10px;
-  margin-bottom: 10px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-
-#ure_update_user {
-  margin-top: 190px;
-  margin-bottom: 190px;
-}
-
 
 #ure_service_tools {
   margin-top: 10px;
@@ -140,37 +152,47 @@ input.warning:hover, a.warning:hover {
   margin-bottom: 5px;
 }
 
-.ure-user-roles {
-	vertical-align: text-top; 
-	padding-right: 10px; 
-	padding-top: 5px; 
-	font-size: 1.1em; 
-	border-top: 1px solid #ccc; 
-	border-right: 1px solid #ccc;
-	min-width: 120px;
+#ure_user_roles {
+    vertical-align: text-top; 
+    padding-right: 10px; 
+    padding-top: 5px; 
+    font-size: 1.1em; 
+    border-top: 1px solid #cccccc; 
+    border-right: 1px solid #cccccc;
+    min-width: 200px;
+    width: 20%;
+}
+
+.ure-user-role-section-title {
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    font-weight: bold;
 }
 
 /* Multipe select */
-.countLabel 
-{
+.countLabel {
     color:Gray;
     font-style:italic;
 }
 
-.storageBox 
-{
+.storageBox {
     display:none;
 }
 
-.copiedOption
-{
+.copiedOption {
     background-color:Yellow;
 }
 
-#ure-icon {
-    background-image: url("../images/user-role-editor-page-icon.png");
-    background-position: 0 0;
+.ure-caps-cell {
+    vertical-align:top;
+    padding-top: 5px;
 }
+
+
+.ure-cap-div {
+    white-space: nowrap;
+}
+
 
 #other_default_roles {
     display: block;
@@ -184,4 +206,80 @@ input.warning:hover, a.warning:hover {
 #ure_admin_menu_access_table tr:hover {
     background-color: #2ea2cc;
     color: #ffffff;
+}
+
+#ure_caps_groups_td {
+    padding:0 10px 0 10px;
+    min-width:25%;
+    border-right: 1px solid #cccccc; 
+}
+
+#ure_caps_td {
+    width:60%; 
+    padding-left: 10px;  
+}
+
+#ure_toolbar_td {
+    width: 15%;
+    min-width:200px;
+    padding-left: 10px;
+}
+
+
+#ure_editor_options {
+    margin-bottom: 10px;
+}
+
+#ure_caps_groups_title {
+    min-width: 250px; 
+    vertical-align:middle;
+    border-bottom: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;    
+}
+
+#ure_caps_select {
+    vertical-align:middle;
+    border-bottom: 1px solid #cccccc;
+    padding: 5px 5px 5px 10px;
+}
+
+#ure_toolbar_title {    
+    border-bottom: 1px solid #cccccc;
+}
+
+#ure_caps_groups_list .ui-selecting { 
+    background: #DDDDDD; 
+}
+
+#ure_caps_groups_list .ui-selected { 
+    background: #CCCCCC; 
+    color: #444444; 
+}
+
+#ure_caps_groups_list li {
+    min-height: 20px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.plugins {
+    color: #444444;
+}
+
+
+#ure_caps_list_container {
+    float: left;
+    width: 100%;
+    overflow: auto;
+    min-height: 600px;
+    max-height: 720px;
+}
+
+#ure_caps_list {
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    column-count: 1;
+    column-width: auto;
+    display: inline-block;
+    min-width: 100%;        
 }

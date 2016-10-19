@@ -2,8 +2,8 @@
 /*
  * Stuff specific for User Role Editor WordPress plugin
  * Author: Vladimir Garagulya
- * Author email: vladimir@shinephp.com
- * Author URI: http://shinephp.com
+ * Author email: support@role-editor.com
+ * Author URI: https://www.role-editor.com
  * 
 */
 
@@ -13,36 +13,32 @@
  */
 class Ure_Lib extends URE_Base_Lib {
 
-	public $roles = null;     
-	public $notification = '';   // notification message to show on page
-	public $apply_to_all = 0; 
+    const  TRANSIENT_EXPIRATION = 600;
 
-   
-	protected $capabilities_to_save = null; 
-	protected $current_role = '';
-	protected $wp_default_role = '';
-	protected $current_role_name = '';  
-	protected $user_to_edit = ''; 
-	protected $show_deprecated_caps = false; 
-	protected $caps_readable = false;
-	protected $hide_pro_banner = false;	
-	protected $full_capabilities = false;
-	public $ure_object = 'role';  // what to process, 'role' or 'user'  
-	public    $role_default_html = '';
-	protected $role_to_copy_html = '';
-	protected $role_select_html = '';
-	protected $role_delete_html = '';
-	protected $capability_remove_html = '';
-	protected $advert = null;
- protected $role_additional_options = null;
- protected $bbpress = null; // reference to the URE_bbPress class instance
+    protected $roles = null;
+    protected $notification = '';   // notification message to show on page
+    protected $apply_to_all = 0;
+    protected $current_role = '';
+    protected $capabilities_to_save = null;
+    protected $wp_default_role = '';
+    protected $current_role_name = '';
+    protected $user_to_edit = '';
+    protected $show_deprecated_caps = false;
+    protected $caps_readable = false;
+    protected $caps_columns_quant = 1;
+    protected $hide_pro_banner = false;
+    protected $full_capabilities = false;
+    protected $ure_object = 'role';  // what to process, 'role' or 'user'      
+    protected $advert = null;
+    protected $role_additional_options = null;
+    protected $bbpress = null; // reference to the URE_bbPress class instance
+    
+    // when allow_edit_users_to_not_super_admin option is turned ON, we set this property to true 
+    // when we raise single site admin permissions up to the superadmin for the 'Add new user' new-user.php page
+    // User_Role_Editor::allow_add_user_as_superadmin()
+    protected $raised_permissions = false; 
  
- // when allow_edit_users_to_not_super_admin option is turned ON, we set this property to true 
- // when we raise single site admin permissions up to the superadmin for the 'Add new user' new-user.php page
- // User_Role_Editor::allow_add_user_as_superadmin()
- public $raised_permissions = false; 
- 
- public $debug = false;
+    protected $debug = false;
  
   
   
@@ -51,7 +47,7 @@ class Ure_Lib extends URE_Base_Lib {
      * @param string $options_id
      * 
      */
-    public function __construct($options_id) {
+    protected function __construct($options_id) {
                                            
         parent::__construct($options_id); 
         $this->debug = defined('URE_DEBUG') && (URE_DEBUG==1 || URE_DEBUG==true);
@@ -61,7 +57,7 @@ class Ure_Lib extends URE_Base_Lib {
         $this->upgrade();
     }
     // end of __construct()
-
+    
     
     public static function get_instance($options_id = '') {
         
@@ -76,7 +72,7 @@ class Ure_Lib extends URE_Base_Lib {
         return self::$instance;
     }
     // end of get_instance()
-    
+        
     
     protected function upgrade() {
         
@@ -108,7 +104,33 @@ class Ure_Lib extends URE_Base_Lib {
     // end of get_ure_object();
     
     
-    protected function get_ure_caps() {
+    
+    public function set_notification($value) {
+        
+        $this->notification = $value;
+        
+    }
+    // end of esc_html()
+    
+    
+    public function set_apply_to_all($value) {
+        
+        
+        $this->apply_to_all = !empty($value) ? 1 : 0;
+        
+    }
+    // end of set_apply_to_all()
+
+
+    public function set_raised_permissions($value) {
+        
+        $this->raised_permissions = !empty($value) ? true : false;
+        
+    }
+    // end of set_raised_permissions()
+    
+    
+    public function get_ure_caps() {
         
         $ure_caps = array(
             'ure_edit_roles' => 1,
@@ -236,7 +258,7 @@ class Ure_Lib extends URE_Base_Lib {
                  $enable_simple_admin_for_multisite) {
                 $key_capability = URE_KEY_CAPABILITY;
             } else {
-                $key_capability = 'manage_network_users';
+                $key_capability = 'manage_network_plugins';
             }
         }
                 
@@ -279,185 +301,65 @@ class Ure_Lib extends URE_Base_Lib {
         
     }
     // end of editor()
-
     
-    protected function advertisement() {
-
-        if (!$this->is_pro()) {
-            $this->advert = new ure_Advertisement();
-            $this->advert->display();
-        }
-    }
-    // end of advertisement()
-
     
-    protected function output_role_edit_dialogs() {
-?>        
-<script language="javascript" type="text/javascript">
-
-  var ure_current_role = '<?php echo $this->current_role; ?>';
-  var ure_current_role_name  = '<?php echo $this->current_role_name; ?>';
-
-</script>
-
-<!-- popup dialogs markup -->
-<div id="ure_add_role_dialog" class="ure-modal-dialog" style="padding: 10px;">
-  <form id="ure_add_role_form" name="ure_add_role_form" method="POST">    
-    <div class="ure-label"><?php esc_html_e('Role name (ID): ', 'user-role-editor'); ?></div>
-    <div class="ure-input"><input type="text" name="user_role_id" id="user_role_id" size="25"/></div>
-    <div class="ure-label"><?php esc_html_e('Display Role Name: ', 'user-role-editor'); ?></div>
-    <div class="ure-input"><input type="text" name="user_role_name" id="user_role_name" size="25"/></div>
-    <div class="ure-label"><?php esc_html_e('Make copy of: ', 'user-role-editor'); ?></div>
-    <div class="ure-input"><?php echo $this->role_to_copy_html; ?></div>        
-  </form>
-</div>
-
-<div id="ure_rename_role_dialog" class="ure-modal-dialog" style="padding: 10px;">
-  <form id="ure_rename_role_form" name="ure_rename_role_form" method="POST">
-    <div class="ure-label"><?php esc_html_e('Role name (ID): ', 'user-role-editor'); ?></div>
-    <div class="ure-input"><input type="text" name="ren_user_role_id" id="ren_user_role_id" size="25" disabled /></div>
-    <div class="ure-label"><?php esc_html_e('Display Role Name: ', 'user-role-editor'); ?></div>
-    <div class="ure-input"><input type="text" name="ren_user_role_name" id="ren_user_role_name" size="25"/></div>    
-  </form>
-</div>
-
-<div id="ure_delete_role_dialog" class="ure-modal-dialog">
-  <div style="padding:10px;">
-    <div class="ure-label"><?php esc_html_e('Select Role:', 'user-role-editor');?></div>
-    <div class="ure-input"><?php echo $this->role_delete_html; ?></div>
-  </div>
-</div>
-
-<?php
-if ($this->multisite && !is_network_admin()) {
-?>
-<div id="ure_default_role_dialog" class="ure-modal-dialog">
-  <div style="padding:10px;">
-    <?php echo $this->role_default_html; ?>
-  </div>  
-</div>
-<?php
-}
-?>
-
-<div id="ure_delete_capability_dialog" class="ure-modal-dialog">
-  <div style="padding:10px;">
-    <div class="ure-label"><?php esc_html_e('Delete:', 'user-role-editor');?></div>
-    <div class="ure-input"><?php echo $this->capability_remove_html; ?></div>
-  </div>  
-</div>
-
-<div id="ure_add_capability_dialog" class="ure-modal-dialog">
-  <div style="padding:10px;">
-    <div class="ure-label"><?php esc_html_e('Capability name (ID): ', 'user-role-editor'); ?></div>
-    <div class="ure-input"><input type="text" name="capability_id" id="capability_id" size="25"/></div>
-  </div>  
-</div>     
-
-<?php        
+    private function get_ure_container_width() {
         
+        $width = ($this->ure_object == 'user') ? 1300 : 1150;
+        if ($this->is_pro()) {
+            $width -= 200;
+        }
+        
+        return $width;
     }
-    // end of output_role_edit_dialogs()
-    
-    
-    protected function output_user_caps_edit_dialogs() {
-    
-
-    }
-    // end of output_user_caps_edit_dialogs()
-    
-    
-    protected function output_confirmation_dialog() {
-?>
-<div id="ure_confirmation_dialog" class="ure-modal-dialog">
-    <div id="ure_cd_html" style="padding:10px;"></div>
-</div>
-<?php
-    }
-    // end of output_confirmation_dialog()
+    // end of get_ure_container_width()
     
 
     protected function show_editor() {
-    $container_width = ($this->ure_object == 'user') ? 1400 : 1200;
-    
-    $this->show_message($this->notification);
+        //$container_width = $this->get_ure_container_width();
+        $this->show_message($this->notification);
+        if ($this->ure_object == 'user') {
+            $view = new URE_User_View();
+        } else {
+            $this->set_current_role();
+            $view = new URE_Role_View();
+            $view->role_edit_prepare_html();
+        }
+        ?>
+        <div class="wrap">
+            <h1><?php _e('User Role Editor', 'user-role-editor'); ?></h1>
+            <div id="ure_container">                
+                <div id="user_role_editor" class="ure-table-cell" >
+                    <form id="ure_form" method="post" action="<?php echo URE_WP_ADMIN_URL . URE_PARENT . '?page=users-' . URE_PLUGIN_FILE; ?>" >			
+                        <div id="ure_form_controls">
+        <?php
+        $view->display();
+        wp_nonce_field('user-role-editor', 'ure_nonce');
+        ?>
+                            <input type="hidden" name="action" value="update" />
+                        </div>      
+                    </form>		      
+<?php
+        if (!$this->is_pro()) {
+            $view->advertise_pro();
+        }
 ?>
-<div class="wrap">
-		  <div id="ure-icon" class="icon32"><br/></div>
-    <h2><?php _e('User Role Editor', 'user-role-editor'); ?></h2>
-    <div id="ure_container" style="min-width: <?php echo $container_width;?>px;">
-        <div class="ure-sidebar" >
-            <?php
-            $this->advertisement();
+                </div>
+<?php
+        if (!$this->is_pro()) {
+            $view->advertise_commercials();
+        }
+        $view->display_edit_dialogs();
+        do_action('ure_dialogs_html');
+        $view->output_confirmation_dialog();
 ?>            
+            </div>
         </div>
-
-        <div class="has-sidebar" >
-            <form id="ure_form" method="post" action="<?php echo URE_WP_ADMIN_URL . URE_PARENT.'?page=users-'.URE_PLUGIN_FILE;?>" >			
-                <div id="ure_form_controls">
-<?php
-                    wp_nonce_field('user-role-editor', 'ure_nonce');
-                    if ($this->ure_object == 'user') {
-                        require_once(URE_PLUGIN_DIR . 'includes/ure-user-edit.php');
-                    } else {
-                        $this->set_current_role();
-                        $this->role_edit_prepare_html();
-                        require_once(URE_PLUGIN_DIR . 'includes/ure-role-edit.php');
-                    }
-?>
-                    <input type="hidden" name="action" value="update" />
-                </div>      
-            </form>		      
-<?php	
-    $this->advertise_pro_version();	
-	
-    if ($this->ure_object == 'role') {
-        $this->output_role_edit_dialogs();
-    } else {
-        $this->output_user_caps_edit_dialogs();
-    }
-    do_action('ure_dialogs_html');
-    
-    $this->output_confirmation_dialog();
-?>
-        </div>          
-    </div>
-</div>
-<?php
-        
+        <?php
     }
     // end of show_editor()
+     
     
-
-	// content of User Role Editor Pro advertisement slot - for direct call
-	protected function advertise_pro_version() {
-		if ($this->is_pro()) {
-			return;
-		}
-?>		
-			<div id="ure_pro_advertisement" style="clear:left;display:block; float: left;">
-				<a href="https://www.role-editor.com?utm_source=UserRoleEditor&utm_medium=banner&utm_campaign=Plugins " target="_new" >
-<?php 
-	if ($this->hide_pro_banner) {
-		echo 'User Role Editor Pro: extended functionality, no advertisement - from $29.</a>';
-	} else {
-?>
-					<img src="<?php echo URE_PLUGIN_URL;?>images/user-role-editor-pro-728x90.jpg" alt="User Role Editor Pro" 
-						 title="More functionality and premium support with Pro version of User Role Editor."/>
-				</a><br />
-				<label for="ure_hide_pro_banner">
-					<input type="checkbox" name="ure_hide_pro_banner" id="ure_hide_pro_banner" onclick="ure_hide_pro_banner();"/>&nbsp;Thanks, hide this banner.
-				</label>
-<?php 
-	}
-?>
-			</div>  			
-<?php		
-		
-	}
-	// end of advertise_pro_version()
-	
-	
     // validate information about user we intend to edit
     protected function check_user_to_edit() {
 
@@ -500,16 +402,16 @@ if ($this->multisite && !is_network_admin()) {
         
     }
     // end of init_current_role_name()
-
-    
+        
+                
     /**
      *  prepare capabilities from user input to save at the database
      */
     protected function prepare_capabilities_to_save() {
         $this->capabilities_to_save = array();
         foreach ($this->full_capabilities as $available_capability) {
-            $cap_id = str_replace(' ', URE_SPACE_REPLACER, $available_capability['inner']);
-            if (isset($_POST[$cap_id])) {
+            $cap_id_esc = URE_Capability::escape($available_capability['inner']);
+            if (isset($_POST[$cap_id_esc])) {
                 $this->capabilities_to_save[$available_capability['inner']] = true;
             }
         }
@@ -604,9 +506,9 @@ if ($this->multisite && !is_network_admin()) {
                 $this->put_option('ure_hide_pro_banner', 1);	
                 $this->flush_options();				
             } else if ($action == 'add-new-capability') {
-                $this->notification = $this->add_new_capability();
+                $this->notification = URE_Capability::add();
             } else if ($action == 'delete-user-capability') {
-                $this->notification = $this->delete_capability();
+                $this->notification = URE_Capability::delete();
             } else if ($action == 'roles_restore_note') {
                 $this->notification = esc_html__('User Roles are restored to WordPress default values. ', 'user-role-editor');
             } else if ($action == 'update') {
@@ -626,15 +528,31 @@ if ($this->multisite && !is_network_admin()) {
     // end of process_user_request()
 
 	
-	protected function set_apply_to_all() {
-    if (isset($_POST['ure_apply_to_all'])) {
-        $this->apply_to_all = 1;
-    } else {
-        $this->apply_to_all = 0;
+    protected function get_apply_to_all_from_post() {
+        if (isset($_POST['ure_apply_to_all'])) {
+            $this->apply_to_all = 1;
+        } else {
+            $this->apply_to_all = 0;
+        }
     }
-}
-	// end of set_apply_to_all()
-	
+    // end of get_apply_to_all_from_post()
+
+    
+    protected function get_caps_columns_quant() {
+        if (isset($_POST['caps_columns_quant']) && in_array($_POST['caps_columns_quant'], array(1,2,3))) {
+            $value = (int) $_POST['caps_columns_quant'];
+            set_site_transient('ure_caps_columns_quant', $value, self::TRANSIENT_EXPIRATION);
+        } else {
+            $value = get_site_transient('ure_caps_columns_quant');
+            if ($value===false) {
+                $value = 1;
+            }
+        }
+        
+        $this->caps_columns_quant = $value;
+    }
+    // end of get_apply_to_all_from_post()
+    
 
     public function get_default_role() {
         $this->wp_default_role = get_option('default_role');
@@ -646,12 +564,12 @@ if ($this->multisite && !is_network_admin()) {
         $this->caps_readable = get_site_transient('ure_caps_readable');
         if (false === $this->caps_readable) {
             $this->caps_readable = $this->get_option('ure_caps_readable');
-            set_site_transient('ure_caps_readable', $this->caps_readable, 600);
+            set_site_transient('ure_caps_readable', $this->caps_readable, self::TRANSIENT_EXPIRATION);
         }
         $this->show_deprecated_caps = get_site_transient('ure_show_deprecated_caps');
         if (false === $this->show_deprecated_caps) {
             $this->show_deprecated_caps = $this->get_option('ure_show_deprecated_caps');
-            set_site_transient('ure_caps_readable', $this->caps_readable, 600);
+            set_site_transient('ure_caps_readable', $this->caps_readable, self::TRANSIENT_EXPIRATION);
         }
 
         $this->hide_pro_banner = $this->get_option('ure_hide_pro_banner', 0);
@@ -667,27 +585,24 @@ if ($this->multisite && !is_network_admin()) {
             $this->ure_object = 'role';
         }
 
-        $this->set_apply_to_all();
+        $this->get_apply_to_all_from_post();
+        $this->get_caps_columns_quant();
 
         return true;
     }
     // end of editor_init0()
 
-
+    
     public function editor_init1() {
 
-        if (!isset($this->roles) || !$this->roles) {
-            // get roles data from database
-            $this->roles = $this->get_user_roles();
-        }
-
+        $this->roles = $this->get_user_roles();
         $this->init_full_capabilities();
         if (empty($this->role_additional_options)) {
             $this->role_additional_options = URE_Role_Additional_Options::get_instance($this);
         }
         
         if (!$this->is_pro()) {
-            require_once(URE_PLUGIN_DIR . 'includes/class-advertisement.php');
+            require_once(URE_PLUGIN_DIR . 'includes/classes/advertisement.php');
         }
         
     }
@@ -785,7 +700,7 @@ if ($this->multisite && !is_network_admin()) {
     public function get_user_roles() {
 
         global $wp_roles;
-
+        
         if (!isset($wp_roles)) {
             $wp_roles = new WP_Roles();
         }                
@@ -803,6 +718,30 @@ if ($this->multisite && !is_network_admin()) {
         return $this->roles;
     }
     // end of get_user_roles()
+    
+    
+    /**
+     * Respect 'editable_roles' filter, when needed
+     * @return array
+     */
+    public function get_editable_user_roles() {
+                
+        if (empty($this->roles)) {
+            $this->get_user_roles();
+        }
+        if ($this->bbpress!==null) {
+            remove_filter('editable_roles', 'bbp_filter_blog_editable_roles');
+        }
+        $roles = apply_filters('editable_roles', $this->roles);
+        if ($this->bbpress!==null) {
+            add_filter('editable_roles', 'bbp_filter_blog_editable_roles');
+        }
+        
+        return $roles;
+
+    }
+    // end of get_editable_user_roles()
+    
      
 /*    
     // restores User Roles from the backup record
@@ -926,7 +865,7 @@ if ($this->multisite && !is_network_admin()) {
      * @global wpdb $wpdb   - WP database object
      * @return array 
      */
-    protected function get_roles_can_delete() {
+    public function get_roles_can_delete() {
 
         $default_role = get_option('default_role');
         $standard_roles = array('administrator', 'editor', 'author', 'contributor', 'subscriber');
@@ -964,86 +903,9 @@ if ($this->multisite && !is_network_admin()) {
      * @return array 
      */
     public function get_built_in_wp_caps() {
-        $wp_version = get_bloginfo('version');
         
-        $caps = array();
-        $caps['switch_themes'] = 1;
-        $caps['edit_themes'] = 1;
-        $caps['activate_plugins'] = 1;
-        $caps['edit_plugins'] = 1;
-        $caps['edit_users'] = 1;
-        $caps['edit_files'] = 1;
-        $caps['manage_options'] = 1;
-        $caps['moderate_comments'] = 1;
-        $caps['manage_categories'] = 1;
-        $caps['manage_links'] = 1;
-        $caps['upload_files'] = 1;
-        $caps['import'] = 1;
-        $caps['unfiltered_html'] = 1;
-        $caps['edit_posts'] = 1;
-        $caps['edit_others_posts'] = 1;
-        $caps['edit_published_posts'] = 1;
-        $caps['publish_posts'] = 1;
-        $caps['edit_pages'] = 1;
-        $caps['read'] = 1;
-        $caps['level_10'] = 1;
-        $caps['level_9'] = 1;
-        $caps['level_8'] = 1;
-        $caps['level_7'] = 1;
-        $caps['level_6'] = 1;
-        $caps['level_5'] = 1;
-        $caps['level_4'] = 1;
-        $caps['level_3'] = 1;
-        $caps['level_2'] = 1;
-        $caps['level_1'] = 1;
-        $caps['level_0'] = 1;
-        $caps['edit_others_pages'] = 1;
-        $caps['edit_published_pages'] = 1;
-        $caps['publish_pages'] = 1;
-        $caps['delete_pages'] = 1;
-        $caps['delete_others_pages'] = 1;
-        $caps['delete_published_pages'] = 1;
-        $caps['delete_posts'] = 1;
-        $caps['delete_others_posts'] = 1;
-        $caps['delete_published_posts'] = 1;
-        $caps['delete_private_posts'] = 1;
-        $caps['edit_private_posts'] = 1;
-        $caps['read_private_posts'] = 1;
-        $caps['delete_private_pages'] = 1;
-        $caps['edit_private_pages'] = 1;
-        $caps['read_private_pages'] = 1;
-        $caps['unfiltered_upload'] = 1;
-        $caps['edit_dashboard'] = 1;
-        $caps['update_plugins'] = 1;
-        $caps['delete_plugins'] = 1;
-        $caps['install_plugins'] = 1;
-        $caps['update_themes'] = 1;
-        $caps['install_themes'] = 1;
-        $caps['update_core'] = 1;
-        $caps['list_users'] = 1;
-        $caps['remove_users'] = 1;
-                
-        if (version_compare($wp_version, '4.4', '<')) {
-            $caps['add_users'] = 1;  // removed from WP v. 4.4.
-        }
-        
-        $caps['promote_users'] = 1;
-        $caps['edit_theme_options'] = 1;
-        $caps['delete_themes'] = 1;
-        $caps['export'] = 1;
-        $caps['delete_users'] = 1;
-        $caps['create_users'] = 1;
-        if ($this->multisite) {
-            $caps['manage_network'] = 1;
-            $caps['manage_sites'] = 1;
-            $caps['create_sites'] = 1;
-            $caps['manage_network_users'] = 1;
-            $caps['manage_network_themes'] = 1;
-            $caps['manage_network_plugins'] = 1;
-            $caps['manage_network_options'] = 1;
-        }
-                
-        $caps = apply_filters('ure_built_in_wp_caps', $caps);
+        $caps_groups = URE_Capabilities_Groups_Manager::get_instance();                
+        $caps = $caps_groups->get_built_in_wp_caps();
         
         return $caps;
     }
@@ -1057,8 +919,7 @@ if ($this->multisite && !is_network_admin()) {
      * @global wpdb $wpdb
      * @return array 
      */
-    protected function get_caps_to_remove() 
-    {
+    public function get_caps_to_remove() {
         global $wp_roles;
 
         // build full capabilities list from all roles except Administrator 
@@ -1100,60 +961,7 @@ if ($this->multisite && !is_network_admin()) {
         return $caps_to_remove;
     }
     // end of get_caps_to_remove()
-
     
-    /**
-     * Build HTML for select drop-down list from capabilities we can remove
-     * 
-     * @return string
-     */
-    protected function caps_to_remove_prepare_html() {
-        
-        $caps_to_remove = $this->get_caps_to_remove();
-        if (!empty($caps_to_remove) && is_array($caps_to_remove) && count($caps_to_remove) > 0) {
-            $html = '<select id="remove_user_capability" name="remove_user_capability" width="200" style="width: 200px">';
-            foreach (array_keys($caps_to_remove) as $key) {
-                $html .= '<option value="' . $key . '">' . $key . '</option>';
-            }
-            $html .= '</select>';
-        } else {
-            $html = '';
-        }
-
-        $this->capability_remove_html = $html;
-    }
-    // end of caps_to_remove_prepare_html()
-    
-
-    /**
-     * returns array of deprecated capabilities
-     * 
-     * @return array 
-     */
-    protected function get_deprecated_caps() 
-    {
-
-        $dep_caps = array(
-            'level_0' => 0,
-            'level_1' => 0,
-            'level_2' => 0,
-            'level_3' => 0,
-            'level_4' => 0,
-            'level_5' => 0,
-            'level_6' => 0,
-            'level_7' => 0,
-            'level_8' => 0,
-            'level_9' => 0,
-            'level_10' => 0,
-            'edit_files' => 0);
-        if ($this->multisite) {
-            $dep_caps['unfiltered_html'] = 0;
-        }
-
-        return $dep_caps;
-    }
-    // end of get_deprecated_caps()
-
     
     /**
      * Return true if $capability is included to the list of capabilities allowed for the single site administrator
@@ -1161,7 +969,7 @@ if ($this->multisite && !is_network_admin()) {
      * @param boolean $ignore_super_admin - if 
      * @return boolean
      */
-    protected function block_cap_for_single_admin($capability, $ignore_super_admin=false) {
+    public function block_cap_for_single_admin($capability, $ignore_super_admin=false) {
         
         if (!$this->is_pro()) {    // this functionality is for the Pro version only.
             return false;
@@ -1187,233 +995,6 @@ if ($this->multisite && !is_network_admin()) {
         return $block_this_cap;
     }
     // end of block_cap_for_single_admin()
-    
-    
-    /**
-     * output HTML-code for capabilities list
-     * @param boolean $core - if true, then show WordPress core capabilities, else custom (plugins and themes created)
-     * @param boolean $for_role - if true, it is role capabilities list, else - user specific capabilities list
-     * @param boolean $edit_mode - if false, capabilities checkboxes are shown as disable - readonly mode
-     */
-    protected function show_capabilities($core = true, $for_role = true, $edit_mode=true) {
-                
-        if ($this->multisite && !is_super_admin()) {
-            $help_links_enabled = $this->get_option('enable_help_links_for_simple_admin_ms', 1);
-        } else {
-            $help_links_enabled = true;
-        }
-        
-        $onclick_for_admin = '';
-        if (!( $this->multisite && is_super_admin() )) {  // do not limit SuperAdmin for multi-site
-            if ($core && 'administrator' == $this->current_role) {
-                $onclick_for_admin = 'onclick="ure_turn_it_back(this)"';
-            }
-        }
-
-        if ($core) {
-            $quant = count($this->get_built_in_wp_caps());
-            $deprecated_caps = $this->get_deprecated_caps();
-        } else {
-            $quant = count($this->full_capabilities) - count($this->get_built_in_wp_caps());
-            $deprecated_caps = array();
-        }
-        $quant_in_column = (int) $quant / 3;
-        $printed_quant = 0;
-        $printed_total = 0;
-        foreach ($this->full_capabilities as $capability) {            
-            if ($core) {
-                if (!$capability['wp_core']) { // show WP built-in capabilities 1st
-                    continue;
-                }
-            } else {
-                if ($capability['wp_core']) { // show plugins and themes added capabilities
-                    continue;
-                }
-            }
-            if (!$this->show_deprecated_caps && isset($deprecated_caps[$capability['inner']])) {
-                $hidden_class = 'class="hidden"';
-            } else {
-                $hidden_class = '';
-            }
-            if (isset($deprecated_caps[$capability['inner']])) {
-                $label_style = 'style="color:#BBBBBB;"';
-            } else {
-                $label_style = '';
-            }
-            if ($this->multisite && $this->block_cap_for_single_admin($capability['inner'], true)) {
-                if (is_super_admin()) {
-                    if (!is_network_admin()) {
-                        $label_style = 'style="color: red;"';
-                    }
-                } else {
-                    $hidden_class = 'class="hidden"';
-                }
-            }
-            $checked = '';
-            $disabled = '';
-            if ($for_role) {
-                if (isset($this->roles[$this->current_role]['capabilities'][$capability['inner']]) &&
-                        !empty($this->roles[$this->current_role]['capabilities'][$capability['inner']])) {
-                    $checked = 'checked="checked"';
-                }
-            } else {
-                if (empty($edit_mode)) {
-                    $disabled = 'disabled="disabled"';
-                } else {
-                    $disabled = '';
-                }
-                if ($this->user_can($capability['inner'])) {
-                    $checked = 'checked="checked"';
-                    if (!isset($this->user_to_edit->caps[$capability['inner']])) {
-                        $disabled = 'disabled="disabled"';
-                    }
-                }
-            }
-            $cap_id = str_replace(' ', URE_SPACE_REPLACER, $capability['inner']);
-            echo '<div id="ure_div_cap_'. $cap_id.'" '. $hidden_class .'><input type="checkbox" name="' . $cap_id . '" id="' . 
-                    $cap_id . '" value="' . $capability['inner'] .'" '. $checked . ' ' . $disabled . ' ' . $onclick_for_admin . '>';
-            if (empty($hidden_class)) {
-                if ($this->caps_readable) {
-                    $cap_ind = 'human';
-                    $cap_ind_alt = 'inner';
-                } else {
-                    $cap_ind = 'inner';
-                    $cap_ind_alt = 'human';
-                }
-                $help_link = $help_links_enabled ? $this->capability_help_link($capability['inner']) : '';
-                echo '<label for="' . $cap_id . '" title="' . $capability[$cap_ind_alt] . '" ' . $label_style . ' > ' . 
-                     $capability[$cap_ind] . '</label> ' . $help_link . '</div>';
-                $printed_quant++;
-                $printed_total++;
-                if ($printed_quant>=$quant_in_column) {
-                    $printed_quant = 0;
-                    echo '</td>';
-                    if ($printed_total<$quant) {
-                        echo '<td style="vertical-align:top;">';
-                    }
-                }
-            }  else {   // if (empty($hidden_class
-                echo '</div>';
-            } // if (empty($hidden_class
-        }
-    }
-    // end of show_capabilities()
-
-
-    /**
-     * output HTML code to create URE toolbar
-     * 
-     * @param string $this->current_role
-     * @param boolean $role_delete
-     * @param boolean $capability_remove
-     */
-    protected function toolbar($role_delete = false, $capability_remove = false) {
-        $caps_access_restrict_for_simple_admin = $this->get_option('caps_access_restrict_for_simple_admin', 0);
-        if ($caps_access_restrict_for_simple_admin) {
-            $add_del_role_for_simple_admin = $this->get_option('add_del_role_for_simple_admin', 1);
-        } else {
-            $add_del_role_for_simple_admin = 1;
-        }
-        $super_admin = is_super_admin();
-        
-?>	
-        <div id="ure_toolbar" >
-           <button id="ure_select_all" class="ure_toolbar_button">Select All</button>
-<?php
-        if ('administrator' != $this->current_role) {
-?>   
-               <button id="ure_unselect_all" class="ure_toolbar_button">Unselect All</button> 
-               <button id="ure_reverse_selection" class="ure_toolbar_button">Reverse</button> 
-<?php
-        }
-        if ($this->ure_object == 'role') {
-?>              
-               <hr />
-               <div id="ure_update">
-                <button id="ure_update_role" class="ure_toolbar_button button-primary" >Update</button> 
-<?php
-            do_action('ure_role_edit_toolbar_update');
-?>                                   
-               </div>
-<?php
-            if (!$this->multisite || $super_admin || $add_del_role_for_simple_admin) { // restrict single site admin
-?>
-               <hr />               
-<?php 
-                if (current_user_can('ure_create_roles')) {
-?>
-               <button id="ure_add_role" class="ure_toolbar_button">Add Role</button>
-<?php
-                }
-?>
-               <button id="ure_rename_role" class="ure_toolbar_button">Rename Role</button>   
-<?php
-            }   // restrict single site admin
-            if (!$this->multisite || $super_admin || !$caps_access_restrict_for_simple_admin) { // restrict single site admin
-                if (current_user_can('ure_create_capabilities')) {
-?>
-               <button id="ure_add_capability" class="ure_toolbar_button">Add Capability</button>
-<?php
-                }
-            }   // restrict single site admin
-            
-            if (!$this->multisite || $super_admin || $add_del_role_for_simple_admin) { // restrict single site admin
-                if (!empty($role_delete) && current_user_can('ure_delete_roles')) {
-?>  
-                   <button id="ure_delete_role" class="ure_toolbar_button">Delete Role</button>
-<?php
-                }
-            } // restrict single site admin
-            
-            if (!$this->multisite || $super_admin || !$caps_access_restrict_for_simple_admin) { // restrict single site admin            
-                if ($capability_remove && current_user_can('ure_delete_capabilities')) {
-?>
-                   <button id="ure_delete_capability" class="ure_toolbar_button">Delete Capability</button>
-<?php
-                }
-                if ($this->multisite && !is_network_admin()) {  // Show for single site for WP multisite only
-?>
-               <hr />
-               <button id="ure_default_role" class="ure_toolbar_button">Default Role</button>
-               <hr />
-<?php
-                }
-?>
-               <div id="ure_service_tools">
-<?php
-                do_action('ure_role_edit_toolbar_service');
-                if (!$this->multisite || 
-                    (is_main_site( get_current_blog_id()) || (is_network_admin() && is_super_admin()))
-                   ) {
-                    if (current_user_can('ure_reset_roles')) {
-?>                   
-                  <button id="ure_reset_roles_button" class="ure_toolbar_button" style="color: red;" title="Reset Roles to its original state">Reset</button> 
-<?php
-                    }
-                }
-?>
-               </div>
-            <?php
-            }   // restrict single site admin
-        } else {
-            ?>
-               
-               <hr />
-            	 <div id="ure_update_user">
-                <button id="ure_update_role" class="ure_toolbar_button button-primary">Update</button> 
-<?php
-    do_action('ure_user_edit_toolbar_update');
-?>                   
-                
-            	 </div>	 
-            <?php
-        }
-            ?>
-           
-        </div>  
-        <?php
-    }
-    // end of toolbar()
     
     
     /**
@@ -1660,10 +1241,26 @@ if ($this->multisite && !is_network_admin()) {
     // end of add_wordpress_caps()
     
     
-    protected function add_custom_post_type_caps() {
-               
-        global $wp_roles;
+    /**
+     * Return all available post types except non-public WordPress built-in post types
+     * 
+     * @return array
+     */
+    public function _get_post_types() {
+        $post_types = get_transient('ure_public_post_types');
+        if (empty($post_types)) {
+            $all_post_types = get_post_types();
+            $internal_post_types = get_post_types(array('public'=>false, '_builtin'=>true));
+            $post_types = array_diff($all_post_types, $internal_post_types);
+            set_transient('ure_public_post_types', $post_types, 30);
+        }
         
+        return $post_types;
+    }
+    // end of _get_post_types()
+    
+    
+    public function get_edit_post_capabilities() {
         $capabilities = array(
             'create_posts',
             'edit_posts',
@@ -1678,28 +1275,43 @@ if ($this->multisite && !is_network_admin()) {
             'delete_others_posts'
         );
         
-        $post_types = get_post_types(array('_builtin'=>false), 'objects');
+        return $capabilities;
+    }
+    // end of get_edit_post_capabilities();
+    
+    
+    protected function add_custom_post_type_caps() {
+               
+        global $wp_roles;
+        
+        $capabilities = $this->get_edit_post_capabilities();        
+        $post_types = get_post_types(array(), 'objects');
+        $_post_types = $this->_get_post_types();
         // do not forget attachment post type as it may use the own capabilities set
         $attachment_post_type = get_post_type_object('attachment');
         if ($attachment_post_type->cap->edit_posts!=='edit_posts') {
             $post_types['attachment'] = $attachment_post_type;
         }
         
-        foreach($post_types as $post_type) {            
+        foreach($post_types as $post_type) {
+            if (!isset($_post_types[$post_type->name])) {
+                continue;
+            }
             if (!isset($post_type->cap)) {
                 continue;
             }
             foreach($capabilities as $capability) {
-                if (isset($post_type->cap->$capability)) {
-                    $cap_to_check = $post_type->cap->$capability;
-                    $this->add_capability_to_full_caps_list($cap_to_check);
-                    if (!$this->multisite &&
-                        isset($wp_roles->role_objects['administrator']) && 
-                        !isset($wp_roles->role_objects['administrator']->capabilities[$cap_to_check])) {
-                        // admin should be capable to edit any posts
-                        $wp_roles->role_objects['administrator']->add_cap($cap_to_check, true);
-                    }
-                }
+                if (!isset($post_type->cap->$capability)) {
+                    continue;                    
+                }    
+                $cap_to_check = $post_type->cap->$capability;
+                $this->add_capability_to_full_caps_list($cap_to_check);
+                if (!$this->multisite &&
+                    isset($wp_roles->role_objects['administrator']) && 
+                    !isset($wp_roles->role_objects['administrator']->capabilities[$cap_to_check])) {
+                    // admin should be capable to edit any posts
+                    $wp_roles->role_objects['administrator']->add_cap($cap_to_check, true);
+                }                
             }                        
         }
         
@@ -1723,8 +1335,11 @@ if ($this->multisite && !is_network_admin()) {
      * Add capabilities for URE permissions system in case some were excluded from Administrator role
      * 
      */
-    protected function add_ure_caps() {        
-        
+    protected function add_ure_caps() {
+        $key_capability = $this->get_key_capability();
+        if (!current_user_can($key_capability)) {
+            return;
+        }
         $ure_caps = $this->get_ure_caps();
         foreach(array_keys($ure_caps) as $cap) {
             $this->add_capability_to_full_caps_list($cap);
@@ -1734,8 +1349,8 @@ if ($this->multisite && !is_network_admin()) {
     // end of add_ure_caps()
     
     
-    protected function init_full_capabilities() {
-        
+    public function init_full_capabilities() {
+                
         $this->built_in_wp_caps = $this->get_built_in_wp_caps();
         $this->full_capabilities = array();
         $this->add_roles_caps();
@@ -1823,8 +1438,19 @@ if ($this->multisite && !is_network_admin()) {
     
     
     protected function last_check_before_update() {
+        global $current_user;
+        
         if (empty($this->roles) || !is_array($this->roles) || count($this->roles)==0) { // Nothing to save - something goes wrong - stop ...
             return false;
+        }
+        
+        $key_capability = $this->get_key_capability();
+        $user_is_ure_admin = current_user_can($key_capability);
+        if (!$user_is_ure_admin) {
+            if (in_array($this->current_role, $current_user->roles)) {
+                // do not allow to a user update his own role if he does not have full access to the User Role Editor
+                return false;
+            }
         }
         
         return true;
@@ -1844,6 +1470,7 @@ if ($this->multisite && !is_network_admin()) {
         }
         
         $this->capabilities_to_save = $this->remove_caps_not_allowed_for_single_admin($this->capabilities_to_save);
+        $this->roles[$this->current_role]['name'] = $this->current_role_name;
         $this->roles[$this->current_role]['capabilities'] = $this->capabilities_to_save;
         $option_name = $wpdb->prefix . 'user_roles';
 
@@ -1872,12 +1499,10 @@ if ($this->multisite && !is_network_admin()) {
         if (!$this->last_check_before_update()) {
             return false;
         }
-        if (!empty($this->current_role)) {
-            if (!isset($this->roles[$this->current_role])) {
-                $this->roles[$this->current_role]['name'] = $this->current_role_name;
-            }
+        if (!empty($this->current_role)) {            
+            $this->roles[$this->current_role]['name'] = $this->current_role_name;
             $this->roles[$this->current_role]['capabilities'] = $this->capabilities_to_save;
-        }        
+        }
 
         $serialized_roles = serialize($this->roles);
         foreach ($this->blog_ids as $blog_id) {
@@ -1971,7 +1596,8 @@ if ($this->multisite && !is_network_admin()) {
      * @return boolean
      */
     protected function update_roles() {
-
+        global $wp_roles;
+        
         if ($this->multisite && is_super_admin() && $this->apply_to_all) {  // update Role for the all blogs/sites in the network (permitted to superadmin only)
             if (!$this->multisite_update_roles()) {
                 return false;
@@ -1982,6 +1608,9 @@ if ($this->multisite && !is_network_admin()) {
             }
         }
 
+        // refresh global $wp_roles
+        $wp_roles = new WP_Roles();
+        
         return true;
     }
     // end of update_roles()
@@ -2437,6 +2066,7 @@ if ($this->multisite && !is_network_admin()) {
             }
         }
         $user->update_user_level_from_caps();
+        do_action('profile_update', $user->ID, $user);  // in order other plugins may hook to the user permissions update
         
         if ($this->apply_to_all) { // apply update to the all network
             if (!$this->network_update_user($user)) {
@@ -2450,93 +2080,31 @@ if ($this->multisite && !is_network_admin()) {
 
     
     /**
-     * Add new capability
+     * Returns administrator role ID
      * 
-     * @global WP_Roles $wp_roles
      * @return string
-     */
-    protected function add_new_capability() {
-        global $wp_roles;
-
-        if (!current_user_can('ure_create_capabilities')) {
-            return esc_html__('Insufficient permissions to work with User Role Editor','user-role-editor');
-        }
-        $mess = '';
-        if (isset($_POST['capability_id']) && $_POST['capability_id']) {
-            $user_capability = $_POST['capability_id'];
-            // sanitize user input for security
-            $valid_name = preg_match('/[A-Za-z0-9_\-]*/', $user_capability, $match);
-            if (!$valid_name || ($valid_name && ($match[0] != $user_capability))) { // some non-alphanumeric charactes found!    
-                return 'Error! ' . esc_html__('Error: Capability name must contain latin characters and digits only!', 'user-role-editor');
-                ;
-            }
-
-            if ($user_capability) {
-                $user_capability = strtolower($user_capability);
-                if (!isset($wp_roles)) {
-                    $wp_roles = new WP_Roles();
-                }
-                $wp_roles->use_db = true;
-                $administrator = $wp_roles->get_role('administrator');
-                if (!$administrator->has_cap($user_capability)) {
-                    $wp_roles->add_cap('administrator', $user_capability);
-                    $mess = sprintf(esc_html__('Capability %s is added successfully', 'user-role-editor'), $user_capability);
-                } else {
-                    $mess = sprintf('Error! ' . esc_html__('Capability %s exists already', 'user-role-editor'), $user_capability);
-                }
-            }
-        }
-
-        return $mess;
-    }
-    // end of add_new_capability()
-
-    
-    /**
-     * Delete capability
-     * 
-     * @global wpdb $wpdb
-     * @global WP_Roles $wp_roles
-     * @return string - information message
-     */
-    protected function delete_capability() {
-        global $wpdb, $wp_roles;
-
+     */        
+    public function get_admin_role() {
         
-        if (!current_user_can('ure_delete_capabilities')) {
-            return esc_html__('Insufficient permissions to work with User Role Editor','user-role-editor');
-        }
-        $mess = '';
-        if (!empty($_POST['user_capability_id'])) {
-            $capability_id = $_POST['user_capability_id'];
-            $caps_to_remove = $this->get_caps_to_remove();
-            if (!is_array($caps_to_remove) || count($caps_to_remove) == 0 || !isset($caps_to_remove[$capability_id])) {
-                return sprintf(esc_html__('Error! You do not have permission to delete this capability: %s!', 'user-role-editor'), $capability_id);
-            }
-
-            // process users
-            $usersId = $wpdb->get_col("SELECT $wpdb->users.ID FROM $wpdb->users");
-            foreach ($usersId as $user_id) {
-                $user = get_user_to_edit($user_id);
-                if ($user->has_cap($capability_id)) {
-                    $user->remove_cap($capability_id);
+        if (isset($this->roles['administrator'])) {
+            $admin_role_id = 'administrator';
+        } else {        
+            // go through all roles and select one with max quant of capabilities included
+            $max_caps = -1;
+            $admin_role_id = '';
+            foreach(array_keys($this->roles) as $role_id) {
+                $caps = count($this->roles[$role_id]['capabilities']);
+                if ($caps>$max_caps) {
+                    $max_caps = $caps;
+                    $admin_role_id = $role_id;
                 }
             }
-
-            // process roles
-            foreach ($wp_roles->role_objects as $wp_role) {
-                if ($wp_role->has_cap($capability_id)) {
-                    $wp_role->remove_cap($capability_id);
-                }
-            }
-
-            $mess = sprintf(esc_html__('Capability %s was removed successfully', 'user-role-editor'), $capability_id);
-        }
-
-        return $mess;
+        }        
+        
+        return $admin_role_id;
     }
-    // end of remove_capability()
-
+    // end get_admin_role()
+            
     
     /**
      * Returns text presentation of user roles
@@ -2560,34 +2128,6 @@ if ($this->multisite && !is_network_admin()) {
         return $output;
     }
     // end of roles_text()
-    
-
-    /**
-     * display opening part of the HTML box with title and CSS style
-     * 
-     * @param string $title
-     * @param string $style 
-     */
-    protected function display_box_start($title, $style = '') {
-        ?>
-        			<div class="postbox" style="float: left; <?php echo $style; ?>">
-        				<h3 style="cursor:default;"><span><?php echo $title ?></span></h3>
-        				<div class="inside">
-        <?php
-    }
-    // 	end of display_box_start()
-
-
-    /**
-     * close HTML box opened by display_box_start() call
-     */
-    function display_box_end() {
-        ?>
-        				</div>
-        			</div>
-        <?php
-    }
-    // end of display_box_end()
     
     
     public function about() {
@@ -2632,125 +2172,18 @@ if ($this->multisite && !is_network_admin()) {
     // end of set_current_role()
     
     
-    protected function show_admin_role_allowed() {
+    public function show_admin_role_allowed() {
         $show_admin_role = $this->get_option('show_admin_role', 0);
         $show_admin_role = ((defined('URE_SHOW_ADMIN_ROLE') && URE_SHOW_ADMIN_ROLE==1) || $show_admin_role==1) && $this->user_is_admin();
         
         return $show_admin_role;
     }
     // end of show_admin_role()
-    
-    
-    public function role_default_prepare_html($select_width=200) {
-                        
-        if (!isset($this->roles) || !$this->roles) {
-            // get roles data from database
-            $this->roles = $this->get_user_roles();
-        }
         
-        $caps_access_restrict_for_simple_admin = $this->get_option('caps_access_restrict_for_simple_admin', 0);
-        $show_admin_role = $this->show_admin_role_allowed();
-        if ($select_width>0) {
-            $select_style = 'style="width: '. $select_width .'px"';
-        } else {
-            $select_style = '';
-        }
-        $this->role_default_html = '<select id="default_user_role" name="default_user_role" '. $select_style .'>';
-        foreach ($this->roles as $key => $value) {
-            $selected = $this->option_selected($key, $this->wp_default_role);
-            $disabled = ($key==='administrator' && $caps_access_restrict_for_simple_admin && !is_super_admin()) ? 'disabled' : '';
-            if ($show_admin_role || $key != 'administrator') {
-                $translated_name = esc_html__($value['name'], 'user-role-editor');  // get translation from URE language file, if exists
-                if ($translated_name === $value['name']) { // get WordPress internal translation
-                    $translated_name = translate_user_role($translated_name);
-                }
-                $translated_name .= ' (' . $key . ')';                
-                $this->role_default_html .= '<option value="' . $key . '" ' . $selected .' '. $disabled .'>' . $translated_name . '</option>';
-            }
-        }
-        $this->role_default_html .= '</select>';
-        
-    }
-    // end of role_default_prepare_html()
-    
-    
-    private function role_delete_prepare_html() {
-        $roles_can_delete = $this->get_roles_can_delete();
-        if ($roles_can_delete && count($roles_can_delete) > 0) {
-            $this->role_delete_html = '<select id="del_user_role" name="del_user_role" width="200" style="width: 200px">';
-            foreach ($roles_can_delete as $key => $value) {
-                $this->role_delete_html .= '<option value="' . $key . '">' . esc_html__($value, 'user-role-editor') . '</option>';
-            }
-            $this->role_delete_html .= '<option value="-1" style="color: red;">' . esc_html__('Delete All Unused Roles', 'user-role-editor') . '</option>';
-            $this->role_delete_html .= '</select>';
-        } else {
-            $this->role_delete_html = '';
-        }
-    }
-    // end of role_delete_prepare_html()
-    
-    
-    private function role_select_copy_prepare_html($select_width=200) {
-        $caps_access_restrict_for_simple_admin = $this->get_option('caps_access_restrict_for_simple_admin', 0);
-        $show_admin_role = $this->show_admin_role_allowed();
-        $this->role_to_copy_html = '<select id="user_role_copy_from" name="user_role_copy_from" style="width: '. $select_width .'px">
-            <option value="none" selected="selected">' . esc_html__('None', 'user-role-editor') . '</option>';
-        $this->role_select_html = '<select id="user_role" name="user_role" onchange="ure_role_change(this.value);">';
-        foreach ($this->roles as $key => $value) {
-            $selected1 = $this->option_selected($key, $this->current_role);
-            $disabled = ($key==='administrator' && $caps_access_restrict_for_simple_admin && !is_super_admin()) ? 'disabled' : '';
-            if ($show_admin_role || $key != 'administrator') {
-                $translated_name = esc_html__($value['name'], 'user-role-editor');  // get translation from URE language file, if exists
-                if ($translated_name === $value['name']) { // get WordPress internal translation
-                    $translated_name = translate_user_role($translated_name);
-                }
-                $translated_name .= ' (' . $key . ')';                
-                $this->role_select_html .= '<option value="' . $key . '" ' . $selected1 .' '. $disabled .'>' . $translated_name . '</option>';
-                $this->role_to_copy_html .= '<option value="' . $key .'" '. $disabled .'>' . $translated_name . '</option>';
-            }
-        }
-        $this->role_select_html .= '</select>';
-        $this->role_to_copy_html .= '</select>';
-    }
-    // end of role_select_copy_prepare_html()
-    
-    
-    public function role_edit_prepare_html($select_width=200) {
-        
-        $this->role_select_copy_prepare_html($select_width);
-        if ($this->multisite && !is_network_admin()) {
-            $this->role_default_prepare_html($select_width);
-        }        
-        $this->role_delete_prepare_html();                
-        $this->caps_to_remove_prepare_html();
-    }
-    // end of role_edit_prepare_html()
-    
-    
-    public function user_primary_role_dropdown_list($user_roles) {
-?>        
-        <select name="primary_role" id="primary_role">
-<?php
-        // Compare user role against currently editable roles
-        $user_roles = array_intersect( array_values( $user_roles ), array_keys( get_editable_roles() ) );
-        $user_primary_role  = array_shift( $user_roles );
-
-        // print the full list of roles with the primary one selected.
-        wp_dropdown_roles($user_primary_role);
-
-        // print the 'no role' option. Make it selected if the user has no role yet.        
-        $selected = ( empty($user_primary_role) ) ? 'selected="selected"' : '';
-        echo '<option value="" '. $selected.'>' . esc_html__('&mdash; No role for this site &mdash;') . '</option>';
-?>
-        </select>
-<?php        
-    }
-    // end of user_primary_role_dropdown_list()
-    
     
     // returns true if $user has $capability assigned through the roles or directly
     // returns true if user has role with name equal $capability
-    protected function user_can($capability) {
+    public function user_can($capability) {
         
         if (isset($this->user_to_edit->caps[$capability])) {
             return true;
@@ -2827,7 +2260,7 @@ if ($this->multisite && !is_network_admin()) {
     // end of get_current_role()
     
     
-    protected function get_edit_user_caps_mode() {
+    public function get_edit_user_caps_mode() {
         if ($this->multisite && is_super_admin()) {
             return 1;
         }
@@ -2881,5 +2314,17 @@ if ($this->multisite && !is_network_admin()) {
     }
     // end of get_assign_role()
     
+    
+    public function get_ure_page_url() {
+        $page_url = URE_WP_ADMIN_URL . URE_PARENT . '?page=users-' . URE_PLUGIN_FILE;
+        $object = $this->get_request_var('object', 'get');
+        $user_id = $this->get_request_var('user_id', 'get', 'int');
+        if ($object=='user' && $user_id>0) {
+            $page_url .= '&object=user&user_id='. $user_id;
+        }
+        
+        return $page_url;
+    }
+    // end of get_ure_page_url()
 }
 // end of URE_Lib class

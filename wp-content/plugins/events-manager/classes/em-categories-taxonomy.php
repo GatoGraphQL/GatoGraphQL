@@ -31,7 +31,7 @@ class EM_Categories_Taxonomy{
 	
 	public static function admin_init(){
 		global $pagenow;
-		if($pagenow == 'edit-tags.php' && !empty($_GET['taxonomy']) && $_GET['taxonomy'] == EM_TAXONOMY_CATEGORY){
+		if( ($pagenow == 'edit-tags.php' || $pagenow == 'term.php') && !empty($_GET['taxonomy']) && $_GET['taxonomy'] == EM_TAXONOMY_CATEGORY){
 			wp_enqueue_style( 'farbtastic' );
 			wp_enqueue_style( 'thickbox' );
 			

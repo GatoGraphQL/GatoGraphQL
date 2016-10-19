@@ -194,7 +194,7 @@ class GD_EM_Template_Processor_TagSectionTabPanelBlockGroups extends GD_Template
 
 		return parent::get_panel_header_fontawesome($blockgroup, $blockunit);
 	}
-	function get_panel_header_title($blockgroup, $blockunit) {
+	function get_panel_header_title($blockgroup, $blockunit, $atts) {
 
 		$details = array(
 			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_DETAILS,
@@ -254,7 +254,7 @@ class GD_EM_Template_Processor_TagSectionTabPanelBlockGroups extends GD_Template
 			return __('Calendar', 'poptheme-wassup');
 		}
 
-		return parent::get_panel_header_title($blockgroup, $blockunit);
+		return parent::get_panel_header_title($blockgroup, $blockunit, $atts);
 	}
 	function get_panel_header_tooltip($blockgroup, $blockunit) {
 
@@ -264,7 +264,7 @@ class GD_EM_Template_Processor_TagSectionTabPanelBlockGroups extends GD_Template
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGPASTEVENTS:
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGEVENTSCALENDAR:
 				
-				return $this->get_panel_header_title($blockgroup, $blockunit);
+				return $this->get_panel_header_title($blockgroup, $blockunit, $atts);
 		}
 
 		return parent::get_panel_header_tooltip($blockgroup, $blockunit);

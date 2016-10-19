@@ -38,7 +38,7 @@ class GD_Template_Processor_EditorFormComponentsBase extends GD_Template_Process
 		);
 	}
 
-	function propagate_data_settings_components($ret, $template_id, $atts) {
+	function propagate_data_settings_components(&$ret, $template_id, $atts) {
 	
 		// Important: the MENTION_COMPONENT (eg: GD_TEMPLATE_LAYOUTUSER_MENTION_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
 		// but it applies to @Mentions, which doesn't need these parameters, however these, here, upset the whole get_data_settings

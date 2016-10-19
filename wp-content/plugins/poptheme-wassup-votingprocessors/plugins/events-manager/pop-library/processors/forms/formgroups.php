@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('VOTINGPROCESSORS_EM_TEMPLATE_FORMCOMPONENTGROUP_TYPEAHEADMAP', 'votingprocessors-em-formcomponentgroup-locationsmap');
+define ('VOTINGPROCESSORS_EM_TEMPLATE_FORMCOMPONENTGROUP_TYPEAHEADMAP', PoP_ServerUtils::get_template_definition('votingprocessors-em-formcomponentgroup-locationsmap'));
 
 class VotingProcessors_EM_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

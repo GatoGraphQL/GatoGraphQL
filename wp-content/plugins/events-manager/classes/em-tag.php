@@ -120,6 +120,9 @@ class EM_Tag extends EM_Object {
 				case '#_TAGID':
 					$replace = $this->term_id;
 					break;
+				case '#_TAGSLUG':
+					$replace = $this->slug;
+					break;
 				case '#_TAGLINK':
 				case '#_TAGURL':
 					$link = $this->get_url();

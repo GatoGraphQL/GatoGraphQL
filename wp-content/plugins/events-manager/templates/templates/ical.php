@@ -3,6 +3,8 @@
 $summary_format = str_replace ( ">", "&gt;", str_replace ( "<", "&lt;", get_option ( 'dbem_ical_description_format' ) ) );
 $description_format = str_replace ( ">", "&gt;", str_replace ( "<", "&lt;", get_option ( 'dbem_ical_real_description_format') ) );
 $location_format = str_replace ( ">", "&gt;", str_replace ( "<", "&lt;", get_option ( 'dbem_ical_location_format' ) ) );
+$parsed_url = parse_url(get_bloginfo('url'));
+$site_domain = preg_replace('/^www./', '', $parsed_url['host']);
 
 //figure out limits
 $ical_limit = get_option('dbem_ical_limit');
@@ -43,24 +45,25 @@ while ( count($EM_Events) > 0 ){
 		//formats
 		$summary = $EM_Event->output($summary_format,'ical');
 		$description = $EM_Event->output($description_format,'ical');
-		$location = $EM_Event->output($location_format, 'ical');
+		$location = $geo = $apple_geo = $apple_location = $apple_location_title = $categories = false;
+		if( $EM_Event->location_id ){
+			$location = $EM_Event->output($location_format, 'ical');
+			if( $EM_Event->get_location()->location_latitude || $EM_Event->get_location()->location_longitude ){
+				$geo = $EM_Event->get_location()->location_latitude.";".$EM_Event->get_location()->location_longitude;
+			}
+			$apple_location = $EM_Event->output('#_LOCATIONFULLLINE, #_LOCATIONCOUNTRY', 'ical');
+			$apple_location_title = $EM_Event->get_location()->location_name;
+			$apple_geo = !empty($geo) ? $geo:'0,0';
+		}
+		$categories = array();
+		foreach( $EM_Event->get_categories() as $EM_Category ){ /* @var EM_Category $EM_Category */
+			$categories[] = $EM_Category->name;
+		}
+		$image = $EM_Event->get_image_url();
 		
-		//create a UID
-		$UID = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-	        // 32 bits for "time_low"
-	        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
-	        // 16 bits for "time_mid"
-	        mt_rand( 0, 0xffff ),
-	        // 16 bits for "time_hi_and_version",
-	        // four most significant bits holds version number 4
-	        mt_rand( 0, 0x0fff ) | 0x4000,
-	        // 16 bits, 8 bits for "clk_seq_hi_res",
-	        // 8 bits for "clk_seq_low",
-	        // two most significant bits holds zero and one for variant DCE1.1
-	        mt_rand( 0, 0x3fff ) | 0x8000,
-	        // 48 bits for "node"
-	        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
-	    );
+		//create a UID, make it unique and update independent
+		$UID = $EM_Event->event_id . '@' . $site_domain;
+		if( is_multisite() ) $UID = absint($EM_Event->blog_id) . '-' . $UID;
 		
 //output ical item		
 $output = "
@@ -69,14 +72,38 @@ UID:{$UID}
 DTSTART{$dateStart}
 DTEND{$dateEnd}
 DTSTAMP:{$dateModified}
+URL:{$EM_Event->get_permalink()}
 SUMMARY:{$summary}";
+//Description if available
 if( $description ){
     $output .= "
 DESCRIPTION:{$description}";
 }
+//add featured image if exists
+if( $image ){
+    $output .= "
+ATTACH;FMTTYPE=image/jpeg:".esc_url_raw($image);
+}
+//add categories if there are any
+if( !empty($categories) ){
+    $output .= "
+CATEGORIES:".implode(',', $categories);
+}
+//Location if there is one
+if( $location ){
+	$output .= "
+LOCATION:{$location}";
+	//geo coordinates if they exist
+	if( $geo ){
+	$output .= "
+GEO:{$geo}";
+	}
+	//create apple-compatible feature for locations
+	$output .= "
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS={$apple_location};X-APPLE-RADIUS=100;X-TITLE={$apple_location_title}:geo:{$apple_geo}";
+}
+//end the event
 $output .= "
-LOCATION:{$location}
-URL:{$EM_Event->get_permalink()}
 END:VEVENT";
 
 		//clean up new lines, rinse and repeat

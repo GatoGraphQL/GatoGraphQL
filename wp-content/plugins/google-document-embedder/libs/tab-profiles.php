@@ -65,10 +65,10 @@
 			$cls = '';
 		}
 ?>
-					<tr id="profile-<?php echo $p['profile_id']; ?>"<?php echo $cls; ?>>
+					<tr id="profile-<?php echo esc_attr($p['profile_id']); ?>"<?php echo $cls; ?>>
 						<td class="proid column-proid">
 							<strong>
-								<a href=""><?php echo $p['profile_id']; ?></a>
+								<a href=""><?php echo esc_html($p['profile_id']); ?></a>
 							</strong><br>
 							<div class="row-actions" style="padding-bottom: 5px;">
 <?php
@@ -77,10 +77,10 @@
 							</div>
 						</td>
 						<td class="name column-name">
-							<?php echo $p['profile_name']; ?>
+							<?php echo esc_html($p['profile_name']); ?>
 						</td>
 						<td class="description column-description">
-							<?php _e($p['profile_desc'], 'google-document-embedder'); ?>
+							<?php _e(esc_html($p['profile_desc']), 'google-document-embedder'); ?>
 						</td>
 					</tr>
 <?php

@@ -65,7 +65,7 @@ global $EM_Event, $post, $allowedposttags, $EM_Ticket, $col_count;
 									<?php if( count($EM_Ticket->get_bookings()->bookings) == 0 ): ?>
 									| <a href="<?php bloginfo('wpurl'); ?>/wp-load.php" class="ticket-actions-delete"><?php esc_html_e('Delete','events-manager'); ?></a>
 									<?php else: ?>
-									| <a href="<?php echo EM_ADMIN_URL; ?>&amp;page=events-manager-bookings&ticket_id=<?php echo $EM_Ticket->ticket_id ?>"><?php esc_html_e('View Bookings','events-manager'); ?></a>
+									| <a href="<?php echo esc_url(add_query_arg('ticket_id', $EM_Ticket->ticket_id, $EM_Event->get_bookings_url())); ?>"><?php esc_html_e('View Bookings','events-manager'); ?></a>
 									<?php endif; ?>
 								</div>
 							</td>

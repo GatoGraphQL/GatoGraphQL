@@ -19,6 +19,10 @@
 			t.checkbox.bind( 'change', function() {
 				t.change();
 			} );
+
+			t.link.find( 'input' ).on( 'focus', function() {
+				$( this ).select();
+			} );
 		},
 
 		/**
@@ -66,7 +70,7 @@
 		 * @since  2.0.0
 		 *
 		 * @param  {Object}  data     The data to send.
-		 * @param  {Object}  callback Callback function for a successfull request.
+		 * @param  {Object}  callback Callback function for a successful request.
 		 */
 		request : function( data, callback ) {
 			$.ajax( {
