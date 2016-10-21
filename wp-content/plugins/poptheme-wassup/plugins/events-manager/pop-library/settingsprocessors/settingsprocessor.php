@@ -212,6 +212,16 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
+			$pageblocks_horizontalmap = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP,
+			);
+			foreach ($pageblocks_horizontalmap as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_HORIZONTALMAP) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
 			$pageblocks_navigator = array(						
 				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_SCROLL_NAVIGATOR,
 				POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR,
@@ -393,6 +403,16 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
+			$pageblocks_horizontalmap = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP,
+			);
+			foreach ($pageblocks_horizontalmap as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_HORIZONTALMAP) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
 			$pageblocks_carousels = array(
 				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL,
 			);
@@ -496,6 +516,16 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
 
 				if ($default_format_section == GD_TEMPLATEFORMAT_MAP) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_horizontalmap = array(
+				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP,
+			);
+			foreach ($pageblocks_horizontalmap as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_HORIZONTALMAP) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}

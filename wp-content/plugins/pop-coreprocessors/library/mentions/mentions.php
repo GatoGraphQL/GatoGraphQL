@@ -90,8 +90,14 @@ class PoP_Mentions {
 
   function generate_comment_tags($comment_id, $comment) {
 
+    $tags = $this->get_hashtags_from_content($comment->comment_content);
+
     // $append = true because the tags are added to the post from the comment
-    wp_set_post_tags($comment->comment_post_ID, implode(', ', $this->get_hashtags_from_content($comment->comment_content)), true);
+    wp_set_post_tags($comment->comment_post_ID, implode(', ', $tags), true);
+
+    // Allow Events Manager to also add its own tags with its own taxonomy
+    // This is needed so we can search using parameter 'tag' with events, using the common slug
+    do_action('PoP_Mentions:post_tags:add', $comment->comment_post_ID, $tags);
 
     if ($user_nicenames = $this->get_user_nicenames_from_content($comment->comment_content)) {
 

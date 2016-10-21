@@ -3,6 +3,7 @@
 // Pages
 //--------------------------------------------------------
 define ('GETPOP_PROCESSORS_PAGE_CONTACTABOUTUS', false);
+define ('GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS', false);
 define ('GETPOP_PROCESSORS_PAGE_HOME', false);
 
 // URLs

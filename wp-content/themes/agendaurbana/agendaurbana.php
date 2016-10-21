@@ -3,7 +3,7 @@
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('AGENDAURBANA_VERSION', 0.406);
+define ('AGENDAURBANA_VERSION', 0.407);
 
 define ('AGENDAURBANA_DIR', STYLESHEETPATH);
 define ('AGENDAURBANA_DIR_RESOURCES', AGENDAURBANA_DIR.'/resources');

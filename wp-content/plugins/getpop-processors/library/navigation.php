@@ -17,6 +17,11 @@ function getpop_processors_navigation_menu_item_icon($icon, $menu_item_object_id
 
 			$fontawesome = 'fa-smile-o';
 			break;
+
+		case GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS:
+
+			$fontawesome = 'fa-star';
+			break;
 	}
 
 	// Important: do not replace the \' below for quotes, otherwise the "Share by email" and "Embed" buttons

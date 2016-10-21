@@ -36,6 +36,7 @@ class GetPoP_Processors_Template_SettingsProcessor extends GD_Template_SettingsP
 
 			$pageblocks = array(
 				GETPOP_PROCESSORS_PAGE_CONTACTABOUTUS => GD_TEMPLATE_BLOCK_CONTACTABOUTUS,
+				GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS => GD_TEMPLATE_BLOCK_DEMODOWNLOADS,
 			);
 			foreach ($pageblocks as $page => $block) {
 				

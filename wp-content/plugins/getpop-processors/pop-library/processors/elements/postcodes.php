@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_POSTCODE_CONTACTABOUTUS', PoP_ServerUtils::get_template_definition('postcode-contact-aboutus'));
+define ('GD_TEMPLATE_POSTCODE_DEMODOWNLOADS', PoP_ServerUtils::get_template_definition('postcode-demodownloads'));
 
 class GetPoP_Template_Processor_PostCodes extends GD_Template_Processor_PostCodesBase {
 
@@ -13,6 +14,7 @@ class GetPoP_Template_Processor_PostCodes extends GD_Template_Processor_PostCode
 	
 		return array(
 			GD_TEMPLATE_POSTCODE_CONTACTABOUTUS,
+			GD_TEMPLATE_POSTCODE_DEMODOWNLOADS,
 		);
 	}
 
@@ -20,6 +22,7 @@ class GetPoP_Template_Processor_PostCodes extends GD_Template_Processor_PostCode
 
 		$post_ids = array(
 			GD_TEMPLATE_POSTCODE_CONTACTABOUTUS => GETPOP_PROCESSORS_PAGE_CONTACTABOUTUS,
+			GD_TEMPLATE_POSTCODE_DEMODOWNLOADS => GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS,
 		);
 		if ($post_id = $post_ids[$template_id]) {
 

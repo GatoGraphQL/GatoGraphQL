@@ -25,6 +25,7 @@ class GetPoP_Processors_PageSectionSettingsProcessor extends Wassup_PageSectionS
 				 *********************************************/
 				case GETPOP_PROCESSORS_PAGE_HOME:
 				case GETPOP_PROCESSORS_PAGE_CONTACTABOUTUS:
+				case GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS:
 
 					$blocks[] = GD_TEMPLATE_BLOCK_EMPTYSIDEINFO;
 					break;
@@ -60,6 +61,7 @@ class GetPoP_Processors_PageSectionSettingsProcessor extends Wassup_PageSectionS
 				break;
 			
 			case GETPOP_PROCESSORS_PAGE_CONTACTABOUTUS:
+			case GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE) {
 
@@ -73,6 +75,7 @@ class GetPoP_Processors_PageSectionSettingsProcessor extends Wassup_PageSectionS
 
 			case GETPOP_PROCESSORS_PAGE_HOME:
 			case GETPOP_PROCESSORS_PAGE_CONTACTABOUTUS:
+			case GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN) {
 
@@ -106,6 +109,8 @@ class GetPoP_Processors_PageSectionSettingsProcessor extends Wassup_PageSectionS
 
 			case GETPOP_PROCESSORS_PAGE_HOME:
 			case GETPOP_PROCESSORS_PAGE_CONTACTABOUTUS:
+			case GETPOP_PROCESSORS_PAGE_DEMODOWNLOADS:
+			
 				$add = 
 					($template_id == GD_TEMPLATE_PAGESECTION_PAGETABS_PAGE && $target == GD_URLPARAM_TARGET_MAIN) ||
 					($template_id == GD_TEMPLATE_PAGESECTION_ADDONTABS_PAGE && $target == GD_URLPARAM_TARGET_ADDONS);

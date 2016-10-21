@@ -46,4 +46,7 @@ h2.title{margin-top:30px}@media (min-width: 768px){.blockgroup-websitefeatures h
 h2.title{margin-top:50px}@media (min-width: 992px){.blockgroup-websitefeatures
 h2.title{margin-top:60px}}.blockgroup-websitefeatures .first-item
 h2.title{margin-top:20px}.blockgroup-websitefeatures .calendar .fc-toolbar
-h2{font-size:26px;margin-bottom:5px}@media (min-width: 768px){#ps-background .pop-background-img{max-width:500px}}#ps-background .pop-background-img{margin-bottom:10px}#loading-logo{max-width:500px}
+h2{font-size:26px;margin-bottom:5px}@media (min-width: 768px){#ps-background .pop-background-img{max-width:500px}}#ps-background .pop-background-img{margin-bottom:10px}#loading-logo{max-width:500px}.blockgroup-hometop .block-events-scrollmap > .blocksection-title a,
+.blockgroup-authortop .block-events-scrollmap > .blocksection-title a,
+.blockgroup-tag .block-events-scrollmap > .blocksection-title
+a{color:#4d4d4f}
