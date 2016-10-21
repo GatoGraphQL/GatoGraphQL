@@ -615,7 +615,8 @@ solid #bce8f1;margin:0
 -1px 10px}.content-body.simpleview > .abovecontent .event-datelocation,
 .content-body.simpleview > .abovecontent
 .locationvolunteer{padding:5px;position:relative}div.wp-media-buttons{float:none}div.wp-media-buttons .button.pop-mediabutton{width:100%;margin-bottom:5px;font-weight:700}div.wp-media-buttons .button.pop-mediabutton.insert-media{width:50%}div.wp-media-buttons .insert-media{display:none}div.wp-media-buttons .insert-media.pop-mediabutton{display:inline-block}div.wp-media-buttons
-.button{margin:0}.gallery dl.gallery-item{display:inline-block}.gallery.gallery-size-thumbnail dl.gallery-item{margin-bottom:0}.simpleview .gallery.gallery-size-thumbnail,
+.button{margin:0}.gallery dl.gallery-item{display:inline-block}.gallery.gallery-size-thumbnail dl.gallery-item{margin-bottom:0}.content-single .gallery.gallery-size-thumbnail,
+.simpleview .gallery.gallery-size-thumbnail,
 .simpleview .gallery.gallery-size-thumb-gallery dl.gallery-item{margin:0
 -3px}.gallery.gallery-size-thumbnail dt.gallery-icon,
 .gallery.gallery-size-thumb-gallery dl.gallery-item{background-color:#FFF;border:1px

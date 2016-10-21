@@ -217,7 +217,9 @@ class DS_Public_Post_Preview {
 	 * @param WP_Post $post The post object.
 	 * @return string The generated public preview link.
 	 */
-	private static function get_preview_link( $post ) {
+	// Hack PoP Plug-in: change from private to public so we can also access it
+	// private static function get_preview_link( $post ) {
+	public static function get_preview_link( $post ) {
 		if ( 'page' == $post->post_type ) {
 			$args = array(
 				'page_id'    => $post->ID,
@@ -591,7 +593,9 @@ class DS_Public_Post_Preview {
 	 *
 	 * @return array The post ids. (Empty array if no ids are registered.)
 	 */
-	private static function get_preview_post_ids() {
+	// Hack PoP Plug-in: change from private to public so we can also access it
+	// private static function get_preview_post_ids() {
+	public static function get_preview_post_ids() {
 		return get_option( 'public_post_preview', array() );
 	}
 
@@ -603,7 +607,9 @@ class DS_Public_Post_Preview {
 	 * @param array $post_ids List of post IDs that have a preview.
 	 * @return array The post ids. (Empty array if no ids are registered.)
 	 */
-	private static function set_preview_post_ids( $post_ids = array() ) {
+	// Hack PoP Plug-in: change from private to public so we can also access it
+	// private static function set_preview_post_ids( $post_ids = array( )) {
+	public static function set_preview_post_ids( $post_ids = array( )) {
 		return update_option( 'public_post_preview', $post_ids );
 	}
 

@@ -4075,6 +4075,7 @@ div.wp-media-buttons .button {
 }*/
 
 /* Gallery "thumb-gallery" */
+.content-single .gallery.gallery-size-thumbnail,
 .simpleview .gallery.gallery-size-thumbnail,
 .simpleview .gallery.gallery-size-thumb-gallery dl.gallery-item {
 	/* .gallery-size-thumb-gallery: -3px = 2px padding + 1px border => img can keep its 480px of width, useful for .simpleview */
