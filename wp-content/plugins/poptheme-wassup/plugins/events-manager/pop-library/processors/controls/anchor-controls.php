@@ -122,7 +122,12 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 
 				global $author;
 				$url = get_author_posts_url($author);
-				return GD_TemplateManager_Utils::add_tab($url, POPTHEME_WASSUP_EM_PAGE_PASTEVENTS);
+				// Allow URE to add the ContentSource
+				return apply_filters(
+					'GD_EM_Template_Processor_CustomAnchorControls:pastevents:url',
+					GD_TemplateManager_Utils::add_tab($url, POPTHEME_WASSUP_EM_PAGE_PASTEVENTS),
+					$author
+				);
 		
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
 

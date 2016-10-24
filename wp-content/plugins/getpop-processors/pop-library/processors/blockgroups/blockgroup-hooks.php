@@ -25,6 +25,12 @@ class GetPoP_Processors_BlockGroupHooks {
 			'PoPTheme_Wassup_EM_BlockGroupHooks:sidebar_blockgroup_blocks:include_screengroups',
 			array($this, 'include_screengroups')
 		);
+		add_filter(
+			'GD_Template_Processor_SidebarBlockGroupsBase:blocks', 
+			array($this, 'get_sidebar_blockgroup_blocks'),
+			0,
+			4
+		);
 
 		// Show only the Sections menu in the Blockgroup Side
 		add_filter(
@@ -58,6 +64,13 @@ class GetPoP_Processors_BlockGroupHooks {
 	function include_screengroups($screengroups) {
 
 		return array();
+	}
+
+	function get_sidebar_blockgroup_blocks($blocks, $screengroup, $screen, $template_id) {
+
+		// Add the Newsletter to all BlockGroups in the Sideinfo
+		$blocks[] = GD_TEMPLATE_BLOCK_NEWSLETTER;
+		return $blocks;
 	}
 }
 

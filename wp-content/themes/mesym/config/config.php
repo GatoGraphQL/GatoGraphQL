@@ -146,11 +146,11 @@ function gd_email_info_email_impl($email) {
 /**---------------------------------------------------------------------------------------------------------------
  * googleanalytics.php
  * ---------------------------------------------------------------------------------------------------------------*/
-add_filter('gd_googleanalytics_key', 'gd_googleanalytics_key_impl');
-function gd_googleanalytics_key_impl($key) {
+// add_filter('gd_googleanalytics_key', 'gd_googleanalytics_key_impl');
+// function gd_googleanalytics_key_impl($key) {
 	
-	return 'UA-40228107-1';
-}
+// 	return 'UA-40228107-1';
+// }
 
 /**---------------------------------------------------------------------------------------------------------------
  * socialmedia.php

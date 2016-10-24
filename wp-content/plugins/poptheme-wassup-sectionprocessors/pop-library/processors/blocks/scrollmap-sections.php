@@ -299,8 +299,12 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP:
+
+				// Allow URE to add the ContentSource switch
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORPOSTLIST;
+
+			case GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP:
 			
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST;

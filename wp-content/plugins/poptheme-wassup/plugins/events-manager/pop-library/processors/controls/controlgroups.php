@@ -55,10 +55,27 @@ class GD_EM_Template_Processor_CustomControlGroups extends GD_Template_Processor
 				
 			case GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHOREVENTLIST:
 
-				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS;
-				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCK;
-				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER;
-				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE;
+				// Allow URE to add the Switch Organization/Organization+Members if the author is an organization
+				$layouts = apply_filters(
+					'GD_EM_Template_Processor_CustomControlGroups:blockauthoreventlist:layouts',
+					array(
+						GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS,
+						GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCK,
+						GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER,
+						GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE
+					)
+				);
+				if ($layouts) {
+					$ret = array_merge(
+						$ret,
+						$layouts
+					);
+				}
+
+				// $ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS;
+				// $ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCK;
+				// $ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER;
+				// $ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE;
 				break;
 				
 			case GD_TEMPLATE_CONTROLGROUP_BLOCKTAGEVENTLIST:

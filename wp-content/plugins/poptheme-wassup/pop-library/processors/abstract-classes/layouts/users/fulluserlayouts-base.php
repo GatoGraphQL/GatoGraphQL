@@ -9,6 +9,11 @@ class GD_Template_Processor_CustomFullUserLayoutsBase extends GD_Template_Proces
 
 	function get_title_template($template_id) {
 
+		// Allow URE to Change it, to inject the (Organization / Organization+Members) links
+		// return apply_filters(
+		// 	'GD_Template_Processor_CustomFullUserLayoutsBase:title_template',
+		// 	GD_TEMPLATE_LAYOUT_FULLUSERTITLE
+		// );
 		return GD_TEMPLATE_LAYOUT_FULLUSERTITLE;
 	}
 

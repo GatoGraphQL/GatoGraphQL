@@ -20,7 +20,7 @@ popDateRange = {
 			autoApply: true,
 			linkedCalendars: false,
 			// showDropdowns: true,
-			showWeekNumbers: true,
+			showWeekNumbers: false,
 			timePicker: false,			
 			// opens: 'left',
 			buttonClasses: ['btn'],

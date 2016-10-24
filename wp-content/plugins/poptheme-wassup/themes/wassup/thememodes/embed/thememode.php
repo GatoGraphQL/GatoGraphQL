@@ -38,6 +38,9 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple {
 		array_splice($pagesections, array_search(GD_TEMPLATE_PAGESECTION_SIDE, $pagesections), 1);
 		array_splice($pagesections, array_search(GD_TEMPLATE_PAGESECTION_NAVIGATOR, $pagesections), 1);
 
+		// Replace the TopSimple with TopEmbed
+		array_splice($pagesections, array_search(GD_TEMPLATE_PAGESECTION_TOPSIMPLE, $pagesections), 1, array(GD_TEMPLATE_PAGESECTION_TOPEMBED));
+
 		return $pagesections;
 	}
 

@@ -523,6 +523,9 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 		return parent::get_controlgroup_top($template_id);
 	}
 
+	// Comment Leo 23/10/2016: Events Manager does not accept "loading_latest()" since it does not handle query_arg "date_query" and can't query by post's published date either...
+	// So then no need for the latestcount template
+	/*
 	function get_latestcount_template($template_id) {
 	
 		switch ($template_id) {
@@ -545,6 +548,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 		return parent::get_latestcount_template($template_id);
 	}
+	*/
 
 	protected function get_messagefeedback($template_id) {
 	
@@ -623,7 +627,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
-			
+
 				return GD_DATALOADER_EVENTLIST;
 
 			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP:

@@ -16,7 +16,11 @@ function popwassup_oembed_unsupported($content) {
 	// however we need to still use oEmbed in this case, since using SimpleView
 	// so for these cases, set an external $post_ID, where the cache will be saved
 	// Can use the Homepage page
-	if (is_tag() && defined('POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG')) {
+	if (is_home() || is_front_page() && defined('POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME')) {
+
+		$GLOBALS['wp_embed']->post_ID = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
+	}
+	elseif (is_tag() && defined('POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG')) {
 
 		$GLOBALS['wp_embed']->post_ID = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 	}

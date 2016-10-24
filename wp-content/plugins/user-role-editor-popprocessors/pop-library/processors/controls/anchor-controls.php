@@ -35,30 +35,34 @@ class GD_URE_Template_Processor_AnchorControls extends GD_Template_Processor_Anc
 	}
 	function get_text($template_id, $atts) {
 
-		$placeholder = '<span class="hidden-xsm hidden-sm">%1$s</span><span class="visible-xsm visible-xsm-inline-block">%2$s</span><span class="hidden-xs">%2$s</span>';
+		// $placeholder = '<span class="hidden-xsm hidden-sm">%1$s</span><span class="visible-xsm visible-xsm-inline-block">%2$s</span><span class="hidden-xs">%2$s</span>';
 		switch ($template_id) {
 
 			case GD_URE_TEMPLATE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
 			
-				return sprintf(
-					$placeholder,
-					'<i class="fa fa-fw fa-institution"></i>',
-					__('Organization', 'ure-popprocessors')
-				).
+				return '<i class="fa fa-fw fa-institution"></i>'.
 				'+'.
-				sprintf(
-					$placeholder,
-					'<i class="fa fa-fw fa-users"></i>',
-					__('Members', 'ure-popprocessors')
-				);
+				'<i class="fa fa-fw fa-users"></i>';
+				// return sprintf(
+				// 	$placeholder,
+				// 	'<i class="fa fa-fw fa-institution"></i>',
+				// 	__('Organization', 'ure-popprocessors')
+				// ).
+				// '+'.
+				// sprintf(
+				// 	$placeholder,
+				// 	'<i class="fa fa-fw fa-users"></i>',
+				// 	__('Members', 'ure-popprocessors')
+				// );
 
 			case GD_URE_TEMPLATE_ANCHORCONTROL_CONTENTSOURCEORGANIZATION:
 			
-				return sprintf(
-					$placeholder,
-					'<i class="fa fa-fw fa-institution"></i>',
-					__('Organization', 'ure-popprocessors')
-				);
+				return '<i class="fa fa-fw fa-institution"></i>';
+				// return sprintf(
+				// 	$placeholder,
+				// 	'<i class="fa fa-fw fa-institution"></i>',
+				// 	__('Organization', 'ure-popprocessors')
+				// );
 		}
 
 		return parent::get_text($template_id, $atts);

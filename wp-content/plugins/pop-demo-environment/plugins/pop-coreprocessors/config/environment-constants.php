@@ -47,3 +47,4 @@ define ('POP_COREPROCESSORS_PAGE_UNDODOWNVOTEPOST', 20217);
 // API Keys
 //--------------------------------------------------------
 define ('POP_COREPROCESSORS_APIKEY_GOOGLEMAPS', 'AIzaSyBoq9kHZ1Cmxt6PWnbDvYiz-H2L0Bntf0Y');
+define ('POP_COREPROCESSORS_APIKEY_GOOGLEANALYTICS', false);

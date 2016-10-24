@@ -244,8 +244,12 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+
+				// Allow URE to add the ContentSource switch
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORPOSTLIST;
+
+			case GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
 			
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST;

@@ -13,6 +13,7 @@ define ('GD_TEMPLATE_CONTROLGROUP_COMMENTS', PoP_ServerUtils::get_template_defin
 define ('GD_TEMPLATE_CONTROLGROUP_TAGLIST', PoP_ServerUtils::get_template_definition('controlgroup-taglist'));
 define ('GD_TEMPLATE_CONTROLGROUP_TRENDINGTAGLIST', PoP_ServerUtils::get_template_definition('controlgroup-trendingtaglist'));
 define ('GD_TEMPLATE_CONTROLGROUP_POSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-postlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockauthorpostlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockpostlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_BLOCKRELOAD', PoP_ServerUtils::get_template_definition('controlgroup-blockreload'));
 define ('GD_TEMPLATE_CONTROLGROUP_BLOCKLOADLATEST', PoP_ServerUtils::get_template_definition('controlgroup-blockloadlatest'));
@@ -66,6 +67,7 @@ class GD_Template_Processor_CustomControlGroups extends GD_Template_Processor_Co
 			GD_TEMPLATE_CONTROLGROUP_TAGLIST,
 			GD_TEMPLATE_CONTROLGROUP_TRENDINGTAGLIST,
 			GD_TEMPLATE_CONTROLGROUP_POSTLIST,
+			GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORPOSTLIST,
 			GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST,
 			GD_TEMPLATE_CONTROLGROUP_BLOCKRELOAD,
 			GD_TEMPLATE_CONTROLGROUP_BLOCKLOADLATEST,
@@ -167,6 +169,25 @@ class GD_Template_Processor_CustomControlGroups extends GD_Template_Processor_Co
 				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP;
 				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER;
 				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE;
+				break;
+
+			case GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORPOSTLIST:
+
+				// Allow URE to add the Switch Organization/Organization+Members if the author is an organization
+				$layouts = apply_filters(
+					'GD_Template_Processor_CustomControlGroups:blockauthorpostlist:layouts',
+					array(
+						GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCK,
+						GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER,
+						GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE
+					)
+				);
+				if ($layouts) {
+					$ret = array_merge(
+						$ret,
+						$layouts
+					);
+				}
 				break;
 
 			case GD_TEMPLATE_CONTROLGROUP_BLOCKPOSTLIST:

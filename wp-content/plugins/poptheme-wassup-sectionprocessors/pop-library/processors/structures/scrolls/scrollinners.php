@@ -38,12 +38,12 @@ define ('GD_TEMPLATE_SCROLLINNER_PROJECTS_DETAILS', PoP_ServerUtils::get_templat
 define ('GD_TEMPLATE_SCROLLINNER_STORIES_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-stories-details'));
 define ('GD_TEMPLATE_SCROLLINNER_BLOG_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-blog-details'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-announcements-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-discussions-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_PROJECTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-projects-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-stories-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-featured-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_BLOG_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-blog-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-announcements-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-discussions-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_PROJECTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-projects-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-stories-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-featured-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_BLOG_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-blog-simpleview'));
 
 define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-announcements-fullview'));
 define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-discussions-fullview'));

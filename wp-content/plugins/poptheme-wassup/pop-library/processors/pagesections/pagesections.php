@@ -31,6 +31,7 @@ define ('GD_TEMPLATE_PAGESECTION_BACKGROUND', PoP_ServerUtils::get_template_defi
  * THEMES: Print
  * ---------------------------------------------------------------------------------------------------------------*/
 define ('GD_TEMPLATE_PAGESECTION_TOPSIMPLE', PoP_ServerUtils::get_template_definition('pagesection-topsimple', true));
+define ('GD_TEMPLATE_PAGESECTION_TOPEMBED', PoP_ServerUtils::get_template_definition('pagesection-topembed', true));
 
 /**---------------------------------------------------------------------------------------------------------------
  * ThemeMode/Style Hooks
@@ -46,6 +47,7 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 			GD_TEMPLATE_PAGESECTION_SIDE,
 			GD_TEMPLATE_PAGESECTION_BACKGROUND,
 			GD_TEMPLATE_PAGESECTION_TOPSIMPLE,
+			GD_TEMPLATE_PAGESECTION_TOPEMBED,
 		);
 	}
 
@@ -66,6 +68,7 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 				return GD_TEMPLATESOURCE_PAGESECTION_BACKGROUND;
 
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+			case GD_TEMPLATE_PAGESECTION_TOPEMBED:
 
 				return GD_TEMPLATESOURCE_PAGESECTION_TOPSIMPLE;				
 		}
@@ -82,8 +85,9 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 			case GD_TEMPLATE_PAGESECTION_TOP:
 			case GD_TEMPLATE_PAGESECTION_SIDE:
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+			case GD_TEMPLATE_PAGESECTION_TOPEMBED:
 
-				$this->add_jsmethod($ret, 'offcanvasToggle', 'togglenav');
+				// $this->add_jsmethod($ret, 'offcanvasToggle', 'togglenav');
 				$this->add_jsmethod($ret, 'offcanvasToggle', 'togglenavigator');
 				$this->add_jsmethod($ret, 'offcanvasToggle', 'togglepagetabs');
 				break;
@@ -91,7 +95,19 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 		switch ($template_id) {
 
 			case GD_TEMPLATE_PAGESECTION_TOP:
+			case GD_TEMPLATE_PAGESECTION_SIDE:
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+
+				// Comment Leo 24/10/2016: This is the only difference between GD_TEMPLATE_PAGESECTION_TOPSIMPLE and GD_TEMPLATE_PAGESECTION_TOPEMBED:
+				// the Embed does not use the Side, as such do not execute this JS below which will add class "active-side" and so create a bug
+				$this->add_jsmethod($ret, 'offcanvasToggle', 'togglenav');
+				break;
+		}
+		switch ($template_id) {
+
+			case GD_TEMPLATE_PAGESECTION_TOP:
+			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+			case GD_TEMPLATE_PAGESECTION_TOPEMBED:
 
 				$this->add_jsmethod($ret, 'doNothing', 'void-link');
 				$this->add_jsmethod($ret, 'tooltip', 'logo');
@@ -123,6 +139,7 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 				break;
 
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+			case GD_TEMPLATE_PAGESECTION_TOPEMBED:
 
 				$this->add_jsmethod($ret, 'fullscreen', 'fullscreen');
 				$this->add_jsmethod($ret, 'fullscreen', 'fullscreen-xs');
@@ -210,6 +227,7 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 
 			case GD_TEMPLATE_PAGESECTION_TOP:
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+			case GD_TEMPLATE_PAGESECTION_TOPEMBED:
 
 				return GD_TEMPLATEID_PAGESECTIONID_TOP;
 
@@ -320,6 +338,7 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 		switch ($template_id) {
 
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+			case GD_TEMPLATE_PAGESECTION_TOPEMBED:
 
 				return GD_DATALOAD_IOHANDLER_PAGESECTION_FRAMETOPSIMPLE;
 		}
@@ -338,6 +357,8 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 
 		switch ($template_id) {
 
+			// Comment Leo 24/10/2016: This is the only difference between GD_TEMPLATE_PAGESECTION_TOPSIMPLE and GD_TEMPLATE_PAGESECTION_TOPEMBED:
+			// the Embed does not use the Side, as such do not execute this JS below which will add class "active-side" and so create a bug
 			case GD_TEMPLATE_PAGESECTION_TOP:
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
 
@@ -485,6 +506,7 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 				break;
 
 			case GD_TEMPLATE_PAGESECTION_TOPSIMPLE:
+			case GD_TEMPLATE_PAGESECTION_TOPEMBED:
 
 				// Generate the small logo
 				$logo_sizes = array(
