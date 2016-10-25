@@ -1356,7 +1356,7 @@ popManager = {
 		// Scroll Top to show the "Submitting" message
 		var modal = block.closest('.modal');
 		if (modal.length == 0) {
-			t.scrollToElem(pageSection, block, true);
+			t.scrollToElem(pageSection, block.children('.blocksection-status').first(), true);
 		}
 		else {
 			modal.animate({ scrollTop: 0 }, 'fast');
