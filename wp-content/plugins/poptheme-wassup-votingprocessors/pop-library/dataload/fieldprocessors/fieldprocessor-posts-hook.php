@@ -44,7 +44,7 @@ class VotingProcessors_DataLoad_FieldProcessor_Posts_Hook extends GD_DataLoad_Fi
 			case 'content' :
 
 				// Add the quotes around the content for the OpinionatedVoted
-				if (gd_get_the_main_category($fieldprocessor->get_id($post)) == POPTHEME_WASSUP_VOTINGPROCESSORS_CAT_OPINIONATEDVOTES) {
+				if (POPTHEME_WASSUP_VOTINGPROCESSORS_CAT_OPINIONATEDVOTES && (gd_get_the_main_category($fieldprocessor->get_id($post)) == POPTHEME_WASSUP_VOTINGPROCESSORS_CAT_OPINIONATEDVOTES)) {
 					
 					// Remove the embed functionality, and then add again
 					$wp_embed = $GLOBALS['wp_embed'];

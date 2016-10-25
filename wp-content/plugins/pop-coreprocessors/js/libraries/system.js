@@ -1270,7 +1270,7 @@ popSystem = {
 
 		// Capture all internal/external links
 		var imgRegex = new RegExp(/\.(gif|jpg|jpeg|tiff|png)$/i);
-		var otherRegex = new RegExp(/\.(pdf|css|js|zip|tar)$/i);
+		var otherRegex = new RegExp(/\.(pdf|css|js|zip|tar|ppt|pptx|doc|docx|xls|xlsx)$/i);
 
 		var allowedAnchors = [];
 		$.each(M.ALLOWED_URLS, function(index, domain) {

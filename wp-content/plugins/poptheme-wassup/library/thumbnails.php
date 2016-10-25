@@ -10,6 +10,12 @@
  * Thumb sizes
  * ---------------------------------------------------------------------------------------------------------------*/
 
+add_action('after_setup_theme','gd_thumb_enable');
+function gd_thumb_enable(){
+	add_theme_support('post-thumbnails');
+}
+
+
 function gd_custom_thumb_sizes() {
 
 	// add_image_size('thumb-lg', 620, 360, true);
