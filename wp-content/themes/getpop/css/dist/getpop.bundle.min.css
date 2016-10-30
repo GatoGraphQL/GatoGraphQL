@@ -37,16 +37,15 @@ a{color:#4d4d4f}#ps-side .nav a:hover{background-color:#db902e}a.loading{backgro
 flash{0%{background-color:none}50%{background-color:#db902e}100%{background-color:none}}@-moz-keyframes
 flash{0%{background-color:none}50%{background-color:#db902e}100%{background-color:none}}@-ms-keyframes
 flash{0%{background-color:none}50%{background-color:#db902e}100%{background-color:none}}a.logo img:hover{background-color:#db902e}.nav .active>a:hover{color:#db902e}#ps-main .fullview > .wrapper h1.title>a{color:#4d4d4f}#ps-sideinfo .blocksection-controls.top
-.btn{background-color:#f1f1f2}.pop-blockgroup > .blocksection-controls.bottom,
-body.embed .pop-blockgroup>.blocksection-controls.right{background-color:#f1f1f2}#notifications-count,
-#ps-top .scroll-notifications .preview.notification-layout{background-color:#db902e}#ps-top-menu-addcontent li>a:hover{background-color:#db902e}.blockgroup-websitefeatures>.blocksection-extensions>.pop-block>.blocksection-title>h1.title{text-align:center;border-bottom:2px solid #db902e;padding-bottom:10px}.blockgroup-websitefeatures h1.title,
-.blockgroup-websitefeatures
-h2.title{margin-top:30px}@media (min-width: 768px){.blockgroup-websitefeatures h1.title,
-.blockgroup-websitefeatures
-h2.title{margin-top:50px}@media (min-width: 992px){.blockgroup-websitefeatures
-h2.title{margin-top:60px}}.blockgroup-websitefeatures .first-item
-h2.title{margin-top:20px}.blockgroup-websitefeatures .calendar .fc-toolbar
+.btn{background-color:#f1f1f2}#notifications-count,
+#ps-top .scroll-notifications .preview.notification-layout{background-color:#db902e}#ps-top-menu-addcontent li>a:hover{background-color:#db902e}.mainsections>.blocksection-extensions>.pop-block>.blocksection-title>h1.title{text-align:center;border-bottom:2px solid #db902e;padding-bottom:10px}.mainsections > .blocksection-extensions h1.title,
+.mainsections > .blocksection-extensions
+h2.title{margin-top:30px}@media (min-width: 768px){.mainsections > .blocksection-extensions h1.title,
+.mainsections > .blocksection-extensions
+h2.title{margin-top:50px}@media (min-width: 992px){.mainsections > .blocksection-extensions
+h2.title{margin-top:60px}}.mainsections > .blocksection-extensions .first-item
+h2.title{margin-top:20px}.mainsections > .blocksection-extensions .calendar .fc-toolbar
 h2{font-size:26px;margin-bottom:5px}@media (min-width: 768px){#ps-background .pop-background-img{max-width:500px}}#ps-background .pop-background-img{margin-bottom:10px}#loading-logo{max-width:500px}.blockgroup-hometop .block-events-scrollmap > .blocksection-title a,
 .blockgroup-authortop .block-events-scrollmap > .blocksection-title a,
 .blockgroup-tag .block-events-scrollmap > .blocksection-title
-a{color:#4d4d4f}
+a{color:#4d4d4f}.bottom-documentation{margin-top:15px}

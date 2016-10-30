@@ -61,9 +61,14 @@ function gd_custom_fetchpagesection_settings($fetchpagesection_settings) {
 		'noparams-reload-url' => true,
 		'updateDocument' => true,
 		'maybeRedirect' => true,
+		// 'activeLinks' => true,
 	);
 	$settings_append = array(			
 		'operation' => GD_URLPARAM_OPERATION_APPEND,
+	);
+	$settings_activeappend = array(			
+		'operation' => GD_URLPARAM_OPERATION_APPEND,
+		'activeLinks' => true,
 	);
 
 	return array_merge(
@@ -71,8 +76,8 @@ function gd_custom_fetchpagesection_settings($fetchpagesection_settings) {
 		array(
 			GD_TEMPLATEID_PAGESECTIONID_MAIN => $settings_main,
 			GD_TEMPLATEID_PAGESECTIONID_HOVER => $settings_main,
-			GD_TEMPLATEID_PAGESECTIONID_PAGETABS => $settings_main,
-			GD_TEMPLATEID_PAGESECTIONID_SIDEINFO => $settings_append,
+			GD_TEMPLATEID_PAGESECTIONID_PAGETABS => $settings_append, //$settings_main,
+			GD_TEMPLATEID_PAGESECTIONID_SIDEINFO => $settings_activeappend,
 			GD_TEMPLATEID_PAGESECTIONID_ADDONTABS => $settings_append,
 			GD_TEMPLATEID_PAGESECTIONID_ADDONS => $settings_append,
 			GD_TEMPLATEID_PAGESECTIONID_MODALS => $settings_append,

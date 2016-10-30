@@ -6,6 +6,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+// require_once 'poptheme-wassup-categoryprocessors/load.php';
+
 if (class_exists("RGForms"))	
 	require_once 'gravityforms/load.php';
 

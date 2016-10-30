@@ -435,7 +435,7 @@ class PoPTheme_Wassup_OrganikProcessors_PageSectionSettingsProcessor extends Was
 				}
 				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWPAGE && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
 
-					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL;
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWPAGECONTROL;//GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL;
 				}
 				break;
 

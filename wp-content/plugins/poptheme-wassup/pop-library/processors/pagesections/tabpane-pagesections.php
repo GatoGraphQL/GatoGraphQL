@@ -35,7 +35,7 @@ define ('GD_TEMPLATE_PAGESECTION_ADDONS_AUTHOR', PoP_ServerUtils::get_template_d
 define ('GD_TEMPLATE_PAGESECTION_ADDONS_404', PoP_ServerUtils::get_template_definition('addons-404', true));
 
 define ('GD_TEMPLATE_PAGESECTION_HOME', PoP_ServerUtils::get_template_definition('home', true));
-define ('GD_TEMPLATE_PAGESECTION_TAG', PoP_ServerUtils::get_template_definition('tag', true));
+define ('GD_TEMPLATE_PAGESECTION_TAG', PoP_ServerUtils::get_template_definition('tagpage', true));
 define ('GD_TEMPLATE_PAGESECTION_PAGE', PoP_ServerUtils::get_template_definition('page', true));
 define ('GD_TEMPLATE_PAGESECTION_SINGLE', PoP_ServerUtils::get_template_definition('single', true));
 define ('GD_TEMPLATE_PAGESECTION_AUTHOR', PoP_ServerUtils::get_template_definition('author', true));

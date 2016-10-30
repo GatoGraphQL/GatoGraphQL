@@ -51,6 +51,7 @@ class GetPoP_Initialization {
 			wp_dequeue_script('em-popprocessors');
 			wp_dequeue_script('wsl-popprocessors');
 			wp_dequeue_script('photoswipe-pop');
+			wp_dequeue_script('pop-prettyprint');
 			wp_dequeue_script('poptheme-wassup');
 
 			// De-register all templates

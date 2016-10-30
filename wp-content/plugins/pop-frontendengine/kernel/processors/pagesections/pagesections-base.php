@@ -667,7 +667,7 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		}
 
 		// Allow to add more stuff. Eg: submenu.
-		$block_atts = apply_filters('GD_Template_Processor_PageSectionsBase:get_atts_block_initial', $block_atts, $template_id, $subcomponent);
+		$block_atts = apply_filters('GD_Template_Processor_PageSectionsBase:get_atts_block_initial', $block_atts, $template_id, $subcomponent, $this);
 		return $block_atts;
 	}	
 

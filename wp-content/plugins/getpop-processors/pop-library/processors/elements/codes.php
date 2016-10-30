@@ -13,8 +13,9 @@ define ('GD_TEMPLATE_CODE_DESIGNPRINCIPLES_DESCENTRALIZATION', PoP_ServerUtils::
 define ('GD_TEMPLATE_CODE_DEMODOWNLOADS', PoP_ServerUtils::get_template_definition('code-demodownloads'));
 define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_PAGECONTAINERS', PoP_ServerUtils::get_template_definition('code-websitefeatures-pagecontainers'));
 define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_THEMEMODES', PoP_ServerUtils::get_template_definition('code-websitefeatures-thememodes'));
-define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_ADDITIONALS', PoP_ServerUtils::get_template_definition('code-websitefeatures-additionals'));
+define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_SOCIALNETWORK', PoP_ServerUtils::get_template_definition('code-websitefeatures-socialnetwork'));
 define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_UNDERTHEHOOD', PoP_ServerUtils::get_template_definition('code-websitefeatures-underthehood'));
+define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_ADVANTAGES', PoP_ServerUtils::get_template_definition('code-websitefeatures-advantages'));
 define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_IDEALFORIMPLEMENTING', PoP_ServerUtils::get_template_definition('code-websitefeatures-idealforimplementing'));
 define ('GD_TEMPLATE_CODE_WEBSITEFEATURES_TODOS', PoP_ServerUtils::get_template_definition('code-websitefeatures-todos'));
 
@@ -31,8 +32,9 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 			GD_TEMPLATE_CODE_DEMODOWNLOADS,
 			GD_TEMPLATE_CODE_WEBSITEFEATURES_PAGECONTAINERS,
 			GD_TEMPLATE_CODE_WEBSITEFEATURES_THEMEMODES,
-			GD_TEMPLATE_CODE_WEBSITEFEATURES_ADDITIONALS,
+			GD_TEMPLATE_CODE_WEBSITEFEATURES_SOCIALNETWORK,
 			GD_TEMPLATE_CODE_WEBSITEFEATURES_UNDERTHEHOOD,
+			GD_TEMPLATE_CODE_WEBSITEFEATURES_ADVANTAGES,
 			GD_TEMPLATE_CODE_WEBSITEFEATURES_IDEALFORIMPLEMENTING,
 			GD_TEMPLATE_CODE_WEBSITEFEATURES_TODOS,
 		);
@@ -375,7 +377,7 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 						)
 					);
 
-			case GD_TEMPLATE_CODE_WEBSITEFEATURES_ADDITIONALS:
+			case GD_TEMPLATE_CODE_WEBSITEFEATURES_SOCIALNETWORK:
 
 				$in = $this->get_att($template_id, $atts, 'firstitem-open') ? 'in' : '';
 				$panel_class = $this->get_att($template_id, $atts, 'panel-class');
@@ -385,10 +387,10 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 					'<div class="panel-group" id="additionalfeatures" role="tablist" aria-multiselectable="true">%s</div>',
 						sprintf(
 							$col,
-							'mf-heading-1',
-							'mf-collapse-1',
-							__('Tabbed Browsing', 'getpop-processors'),
-							__('Similar to a browser, the website keeps all pages open, and uses tabs to switch among all of them.', 'getpop-processors'),
+							'mf-heading-0',
+							'mf-collapse-0',
+							__('@Mentions and #Hashtags', 'getpop-processors'),
+							__('When creating a post or adding a comment, the user can mention any other user, and this person will receive a notification, and add Twitter-like hashtags.', 'getpop-processors'),
 							$in
 						).sprintf(
 							$col,
@@ -397,19 +399,40 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 							__('Support for Communities', 'getpop-processors'),
 							__('The website allows for two types of user account: “Individuals” and “Organizations”. The Organizations account type allows to have members, and all content from their members also shows on the Organization’s profile.', 'getpop-processors'),
 							''
-						)/*.sprintf(
-							$col,
-							'mf-heading-3',
-							'mf-collapse-3',
-							__('Built-in content types + Links', 'getpop-processors'),
-							__('The software has built-in support for the following post types: quick posts, articles, announcements, projects, stories and events, each of these featuring its own characteristics. In addition, all content types can also be added as “links”, that is, instead of having to copy/paste content from other websites, one can simply embed their link directly from their external source.', 'getpop-processors'),
-							''
-						)*/.sprintf(
+						).sprintf(
 							$col,
 							'mf-heading-4',
 							'mf-collapse-4',
 							__('Highlights, and Up/Down voting posts', 'getpop-processors'),
 							__('Any user can highlight meaningful bits of information from each post, making it easier for other users to understand the essence of the post. These ones can, in turn, be up/down voted by all users, showing support or lack of it.', 'getpop-processors'),
+							''
+						).sprintf(
+							$col,
+							'mf-heading-10',
+							'mf-collapse-10',
+							__('Submission of links', 'getpop-processors'),
+							__('In addition to creating posts, users can also submit a URL link. The corresponding webpage will be embedded in a post, if possible (only available for HTTPS websites).', 'getpop-processors'),
+							''
+						).sprintf(
+							$col,
+							'mf-heading-9',
+							'mf-collapse-9',
+							__('User notifications', 'getpop-processors'),
+							__('Users receive real-time notifications concernig any activity related to them (eg: a comment added to the user’s article, the user having a new follower, etc), and any activity by users belonging to their network, which is composed by their followed users, and those users who are members of the same organizations.', 'getpop-processors'),
+							''
+						).sprintf(
+							$col,
+							'mf-heading-7',
+							'mf-collapse-7',
+							__('Following users and recommending posts', 'getpop-processors'),
+							__('Users can follow other users, thus receiving notifications of their activities, and recommend posts, giving a notification to the user’s network.', 'getpop-processors'),
+							''
+						).sprintf(
+							$col,//$col_extra,
+							'mf-heading-8',
+							'mf-collapse-8',
+							__('Real time updates', 'getpop-processors'),
+							__('Whenever there is a new post added to the website, all users concurrently browsing the website (either logged in or not) will receive an automatic update', 'getpop-processors'),
 							''
 						).sprintf(
 							$col,
@@ -427,41 +450,24 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 							''
 						).sprintf(
 							$col,
-							'mf-heading-7',
-							'mf-collapse-7',
-							__('Following users and recommending posts', 'getpop-processors'),
-							__('Users can have followers, who will receive notifications following the user’s activity, such as when recommending a post, posting a new article, adding a comment, etc.', 'getpop-processors'),
+							'mf-heading-11',
+							'mf-collapse-11',
+							__('Maximizing visibility of content', 'getpop-processors'),
+							sprintf(
+								__('Most content in the website is always visible. Only user-specific pages (such as <a href="%s">%s</a> or <a href="%s">%s</a>) require the user to log-in to be shown. When the user logs out, only the tabs corresponding to these user-specific pages will close, all other tabs will remain open.', 'getpop-processors'),
+								get_permalink(POP_WPAPI_PAGE_MYCONTENT),
+								get_the_title(POP_WPAPI_PAGE_MYCONTENT),
+								get_permalink(POP_WPAPI_PAGE_EDITAVATAR),
+								get_the_title(POP_WPAPI_PAGE_EDITAVATAR)
+							),
 							''
-						).sprintf(
-							$col,//$col_extra,
-							'mf-heading-8',
-							'mf-collapse-8',
-							__('Real time updates', 'getpop-processors'),
-							__('Whenever there is a new post added to the website, all users concurrently browsing the website (either logged in or not) will receive an automatic update', 'getpop-processors'),
-							''
-							// sprintf(
-							// 	'<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>',
-							// 	// __('General notifications', 'getpop-processors'),
-							// 	// __('Actions requested by the user, such as updating their profile if needed', 'getpop-processors'),
-							// 	// __('When they are followed by someone else, or someone from their network follows another user or joins an organization', 'getpop-processors'),
-							// 	__('Someone adding a comment on, or creating a post related to, the user’s post', 'getpop-processors'),
-							// 	__('Someone replying to a comment by the user', 'getpop-processors'),
-							// 	__('Creation of a new post, recommendation a post or addition of a comment by other users from his/her network', 'getpop-processors'),
-							// 	__('Others', 'getpop-processors')
-							// )
-						)/*.sprintf(
+						).
+						sprintf(
 							$col,
-							'mf-heading-9',
-							'mf-collapse-9',
-							__('Replying to a post with another post', 'getpop-processors'),
-							__('In addition to adding comments, any user can reply to a post with another post.', 'getpop-processors'),
-							''
-						)*/.sprintf(
-							$col,
-							'mf-heading-9',
-							'mf-collapse-9',
-							__('@Mentions and #Hashtags', 'getpop-processors'),
-							__('When creating a post or adding a comment, the user can mention any other user, and this person will receive a notification, and add Twitter-like hashtags.', 'getpop-processors'),
+							'mf-heading-1',
+							'mf-collapse-1',
+							__('Tabbed Browsing', 'getpop-processors'),
+							__('Similar to a browser, the website keeps all pages open, and uses tabs to switch among all of them.', 'getpop-processors'),
 							''
 						)
 					);
@@ -499,7 +505,13 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 							'uth-heading-1',
 							'uth-collapse-1',
 							__('Fully cacheable', 'getpop-processors'),
-							__('Most pages in the website are cached, independently if the user is logged in or not. This can be done because these pages have been stripped of all user information related to the page (eg: has the user recommended it?), so that the response is always the same for all users. All user information related to the page is loaded on a subsequent, immediate request.<br/><br/>Only those pages which show user-specific information (such as “Edit my profile”, “My events”, etc) are not cached.', 'getpop-processors'),
+							sprintf(
+								__('Most pages in the website are cached, independently if the user is logged in or not. This can be done because these pages have been stripped of all user information related to the page (eg: has the user recommended it?), so that the response is always the same for all users. All user information related to the page is loaded on a subsequent, immediate request.<br/><br/>Only those pages which show user-specific information (such as <a href="%s">%s</a>, <a href="%s">%s</a>, etc) are not cached.', 'getpop-processors'),
+								get_permalink(POP_WPAPI_PAGE_MYCONTENT),
+								get_the_title(POP_WPAPI_PAGE_MYCONTENT),
+								get_permalink(POP_WPAPI_PAGE_EDITAVATAR),
+								get_the_title(POP_WPAPI_PAGE_EDITAVATAR)
+							),
 							$in
 						).sprintf(
 							$col,
@@ -566,6 +578,50 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 							'uth-collapse-9',
 							__('Compatible with Wordpress’ legacy code', 'getpop-processors'),
 							__('PoP requires plug-ins to provide their data query results in a given format, so they must implement some functionality to adapt it for PoP. However, this integration is minimal, and can be provided in an additional plug-in.', 'getpop-processors'),
+							''
+						)
+					);
+			
+			case GD_TEMPLATE_CODE_WEBSITEFEATURES_ADVANTAGES:
+
+				$in = $this->get_att($template_id, $atts, 'firstitem-open') ? 'in' : '';
+				$panel_class = $this->get_att($template_id, $atts, 'panel-class');
+				$col = '<div class="'.$panel_class.'"><div class="panel-heading" role="tab" id="%1$s"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#advantages" href="#%2$s" aria-expanded="true" aria-controls="%2$s">%3$s</a></h4></div><div id="%2$s" class="panel-collapse collapse %5$s" role="tabpanel" aria-labelledby="%1$s"><div class="panel-body">%4$s</div></div></div>';
+				$link = '<a href="%s">%s</a>';
+				$linktarget = '<a href="%s" target="%s">%s</a>';
+				return sprintf(
+					'<div class="panel-group" id="advantages" role="tablist" aria-multiselectable="true">%s</div>',
+						sprintf(
+							$col,
+							'adv-heading-1',
+							'adv-collapse-1',
+							__('SEO friendly', 'getpop-processors'),
+							sprintf(
+								__('PoP is SEO friendly because a unique URL serves both the website and the API: crawlers can both find the information, and know what is its URL, without having to <a href="%s">implement artificial artifacts</a> to match these two, such as the (now deprecated) practice of adding "!#" in the URL string as previously <a href="%s">suggested by Google</a>.', 'getpop-processors'),
+								'https://www.smashingmagazine.com/2011/09/searchable-dynamic-content-with-ajax-crawling/',
+								'https://developers.google.com/webmasters/ajax-crawling/docs/getting-started'
+							),
+							$in
+						).sprintf(
+							$col,
+							'adv-heading-2',
+							'adv-collapse-2',
+							__('Documentation-less API', 'getpop-processors'),
+							__('The API automatically provided by PoP does not need to be documented, because simply removing parameter “output=json” from the corresponding URL will render the website, printing all information as provided through the API for GET requests, and displaying the corresponding form with the required fields for POST operations.', 'getpop-processors'),
+							''
+						).sprintf(
+							$col,
+							'adv-heading-3',
+							'adv-collapse-3',
+							__('Separation of concerns, code reusability and team collaboration', 'getpop-processors'),
+							__('The modularity of PoP allows for creating components which comprise multiple distinct modules, each of these implementing a specific functionality (or concern). Well-separated modules can be reused, both within their component and by other components, as well as developed and updated independently. Components can thus be improved or modified without having to know the details of, or having to make changes to, other components. Work can be properly and efficiently split among team members, both at the component level, by assigning different modules to different people, as well as within the module level, by splitting work for a single module into back-end and front-end coding to be done by different people.', 'getpop-processors'),
+							''
+						).sprintf(
+							$col,
+							'adv-heading-4',
+							'adv-collapse-4',
+							__('One unique server-side development for several client-side implementations', 'getpop-processors'),
+							__('The API exposed by PoP can be used by any allowed system or application, such as third-party websites, mobile phone apps, components from the own website, etc.', 'getpop-processors'),
 							''
 						)
 					);
@@ -708,10 +764,11 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 				$this->append_att($template_id, $atts, 'class', 'readable');
 				break;
 		
-			case GD_TEMPLATE_CODE_WEBSITEFEATURES_ADDITIONALS:
+			case GD_TEMPLATE_CODE_WEBSITEFEATURES_SOCIALNETWORK:
 			case GD_TEMPLATE_CODE_WEBSITEFEATURES_IDEALFORIMPLEMENTING:
 			case GD_TEMPLATE_CODE_WEBSITEFEATURES_TODOS:
 			case GD_TEMPLATE_CODE_WEBSITEFEATURES_UNDERTHEHOOD:
+			case GD_TEMPLATE_CODE_WEBSITEFEATURES_ADVANTAGES:
 
 				$this->add_att($template_id, $atts, 'firstitem-open', true);
 				$this->add_att($template_id, $atts, 'panel-class', 'panel panel-info');

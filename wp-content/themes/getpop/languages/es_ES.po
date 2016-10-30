@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 01:52+0800\n"
-"PO-Revision-Date: 2016-08-18 01:52+0800\n"
+"POT-Creation-Date: 2016-10-30 11:57+0100\n"
+"PO-Revision-Date: 2016-10-30 11:57+0100\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -109,231 +109,222 @@ msgstr "Artículos Destacados"
 msgid "PoP Blog"
 msgstr "PoP Blog"
 
-#: .././config/config.php:313
+#: .././config/config.php:323
 msgid "Animals & Pets"
 msgstr "Animales y Mascotas"
 
-#: .././config/config.php:314
+#: .././config/config.php:324
 msgid "Art & Photography"
 msgstr "Arte y Fotografía"
 
-#: .././config/config.php:315
+#: .././config/config.php:325
 msgid "Business & Finance"
 msgstr "Finanzas y Negocios"
 
-#: .././config/config.php:316
+#: .././config/config.php:326
 msgid "Computers & Electronics"
 msgstr "Computadoras y Electrónica"
 
-#: .././config/config.php:317
+#: .././config/config.php:327
 msgid "Cooking, Food & Beverage"
 msgstr "Cocina, Alimentación y bebidas"
 
-#: .././config/config.php:318 .././config/config.php:347
+#: .././config/config.php:328 .././config/config.php:357
 msgid "Education"
 msgstr "Educación"
 
-#: .././config/config.php:319
+#: .././config/config.php:329
 msgid "Entertainment & TV"
 msgstr "Entretenimiento y TV"
 
-#: .././config/config.php:320
+#: .././config/config.php:330
 msgid "Fashion & Style"
 msgstr "Estilo de moda"
 
-#: .././config/config.php:321
+#: .././config/config.php:331
 msgid "Health & Fitness"
 msgstr "Salud y estado físico"
 
-#: .././config/config.php:322
+#: .././config/config.php:332
 msgid "Home & Gardening"
 msgstr "Casa y jardinería"
 
-#: .././config/config.php:323
+#: .././config/config.php:333
 msgid "International"
 msgstr "Internacional"
 
-#: .././config/config.php:324
+#: .././config/config.php:334
 msgid "Lifestyle"
 msgstr "Estilo de vida"
 
-#: .././config/config.php:325
+#: .././config/config.php:335
 msgid "Medical"
 msgstr "Medicina"
 
-#: .././config/config.php:326
+#: .././config/config.php:336
 msgid "Music"
 msgstr "Música"
 
-#: .././config/config.php:327
+#: .././config/config.php:337
 msgid "News & Politics"
 msgstr "Noticias y política"
 
-#: .././config/config.php:328
+#: .././config/config.php:338
 msgid "Religion"
 msgstr "Religión"
 
-#: .././config/config.php:329
+#: .././config/config.php:339
 msgid "Science & Nature"
 msgstr "Ciencia y Naturaleza"
 
-#: .././config/config.php:330
+#: .././config/config.php:340
 msgid "Sports & Recreation"
 msgstr "Deportes y recreación"
 
-#: .././config/config.php:331 .././config/config.php:369
-#: .././config/config.php:391
+#: .././config/config.php:341 .././config/config.php:379
+#: .././config/config.php:401
 msgid "Other"
 msgstr "Otro"
 
-#: .././config/config.php:344
+#: .././config/config.php:354
 msgid "Clean energy"
 msgstr "Energía limpia"
 
-#: .././config/config.php:345
+#: .././config/config.php:355
 msgid "Community building"
 msgstr "Construcción comunitaria"
 
-#: .././config/config.php:346
+#: .././config/config.php:356
 msgid "Decent work"
 msgstr "Trabajo decente"
 
-#: .././config/config.php:348
+#: .././config/config.php:358
 msgid "Environmental protection"
 msgstr "Protección del medio ambiente"
 
-#: .././config/config.php:349
+#: .././config/config.php:359
 msgid "Fair trade"
 msgstr "Comercio justo"
 
-#: .././config/config.php:350
+#: .././config/config.php:360
 msgid "Food and agriculture"
 msgstr "Alimentación y agricultura"
 
-#: .././config/config.php:351
+#: .././config/config.php:361
 msgid "Healthcare"
 msgstr "Cuidado de la salud"
 
-#: .././config/config.php:352
+#: .././config/config.php:362
 msgid "Human rights"
 msgstr "Derechos humanos"
 
-#: .././config/config.php:353
+#: .././config/config.php:363
 msgid "Legal frameworks"
 msgstr "Los marcos legales"
 
-#: .././config/config.php:354
+#: .././config/config.php:364
 msgid "Local and alternative currencies"
 msgstr "Las monedas locales y alternativas"
 
-#: .././config/config.php:355
+#: .././config/config.php:365
 msgid "Marginalised communities"
 msgstr "Las comunidades marginadas"
 
-#: .././config/config.php:356
+#: .././config/config.php:366
 msgid "Media and public awareness"
 msgstr "Medios de comunicación y concienciación del público"
 
-#: .././config/config.php:357
+#: .././config/config.php:367
 msgid "Open source technologies"
 msgstr "Tecnologías de código abierto"
 
-#: .././config/config.php:358
+#: .././config/config.php:368
 msgid "Policies for SSE"
 msgstr "Políticas para la SSE"
 
-#: .././config/config.php:359
+#: .././config/config.php:369
 msgid "Poverty alleviation"
 msgstr "Mitigación de la pobreza"
 
-#: .././config/config.php:360
+#: .././config/config.php:370
 msgid "Recycling/Waste management"
 msgstr "Reciclaje/Gestión de residuos"
 
-#: .././config/config.php:361
+#: .././config/config.php:371
 msgid "Research"
 msgstr "Investigación"
 
-#: .././config/config.php:362
+#: .././config/config.php:372
 msgid "Responsible production"
 msgstr "Producción responsable"
 
-#: .././config/config.php:363
+#: .././config/config.php:373
 msgid "Responsible tourism"
 msgstr "Turismo responsable"
 
-#: .././config/config.php:364
+#: .././config/config.php:374
 msgid "Rural development"
 msgstr "Desarrollo Rural"
 
-#: .././config/config.php:365
+#: .././config/config.php:375
 msgid "Social welfare"
 msgstr "Bienestar Social"
 
-#: .././config/config.php:366
+#: .././config/config.php:376
 msgid "Solidarity finance"
 msgstr "Finanzas solidarias"
 
-#: .././config/config.php:367
+#: .././config/config.php:377
 msgid "Sustainable cities"
 msgstr "Ciudades sostenibles"
 
-#: .././config/config.php:368
+#: .././config/config.php:378
 msgid "Women and youth empowerment"
 msgstr "Las mujeres y potenciación de los jóvenes"
 
-#: .././config/config.php:380
+#: .././config/config.php:390
 msgid "Association"
 msgstr "Asociación"
 
-#: .././config/config.php:381
+#: .././config/config.php:391
 msgid "Community-based organisation"
 msgstr "organización de base comunitaria"
 
-#: .././config/config.php:382
+#: .././config/config.php:392
 msgid "Cooperative"
 msgstr "Cooperativa"
 
-#: .././config/config.php:383
+#: .././config/config.php:393
 msgid "Corporation/Business"
 msgstr "Corporación/Empresa"
 
-#: .././config/config.php:384
+#: .././config/config.php:394
 msgid "Foundation"
 msgstr "Fundación"
 
-#: .././config/config.php:385
+#: .././config/config.php:395
 msgid "Governmental organisation"
 msgstr "Organización gubernamental"
 
-#: .././config/config.php:386
+#: .././config/config.php:396
 msgid "Informal economy"
 msgstr "Economía informal"
 
-#: .././config/config.php:387
+#: .././config/config.php:397
 msgid "Mutual benefit society"
 msgstr "Mutual"
 
-#: .././config/config.php:388
+#: .././config/config.php:398
 msgid "Non-governmental organisation"
 msgstr "Organización no gubernamental"
 
-#: .././config/config.php:389
+#: .././config/config.php:399
 msgid "Research institute/University"
 msgstr "Instituto de investigación/Universidad"
 
-#: .././config/config.php:390
+#: .././config/config.php:400
 msgid "Social enterprise"
 msgstr "Empresa social"
-
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:15
-msgid "Resources"
-msgstr "Materiales"
-
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:18
-#: .././plugins/poptheme-wassup/plugins/media-library-assistant/config/config.php:15
-msgid "Resource"
-msgstr "Recurso"
 
 #: .././plugins/poptheme-wassup/plugins/events-manager/config/config.php:25
 msgid "Upcoming Events"
@@ -359,6 +350,10 @@ msgstr "Taller"
 msgid "Others"
 msgstr "Otros"
 
+#: .././plugins/poptheme-wassup/plugins/media-library-assistant/config/config.php:15
+msgid "Resource"
+msgstr "Recurso"
+
 #: .././plugins/user-role-editor/config/config.php:15
 msgid "Organizations"
 msgstr "Organizaciones"
@@ -375,11 +370,11 @@ msgstr "Cuenta de usuario organización"
 msgid "Individual user account"
 msgstr "Cuenta de usuario individual"
 
-#: .././validation.php:69
+#: .././validation.php:92
 msgid "Only admins see this message."
 msgstr "Only admins see this message."
 
-#: .././validation.php:74
+#: .././validation.php:97
 msgid ""
 "Error: <b>PoP Theme: Wassup Processors</b> is not installed/activated. "
 "Without it, <b>GetPoP</b> will not work. Please install this plugin from "
@@ -391,7 +386,7 @@ msgstr ""
 "your plugin installer or download it <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">from here</a>."
 
-#: .././validation.php:78
+#: .././validation.php:101
 msgid ""
 "Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">latest version</a> of <b>PoP Theme: Wassup Processors</b> "
@@ -401,7 +396,7 @@ msgstr ""
 "plugins/pop/\">latest version</a> of <b>PoP Theme: Wassup Processors</b> "
 "installed, or otherwise <b>RIPESS</b> might not function properly."
 
-#: .././validation.php:82
+#: .././validation.php:105
 msgid ""
 "Error: either <b>GetPoP Environment Constants</b> or <b>GetPoP Demo "
 "Environment Constants</b> must be installed/activated. Without any of these, "
@@ -414,7 +409,7 @@ msgstr ""
 "your plugin installer or download it <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">from here</a>."
 
-#: .././validation.php:86
+#: .././validation.php:109
 msgid ""
 "Error: <b>GetPoP Processors</b> is not installed/activated. Without it, "
 "<b>GetPoP</b> will not work. Please install this plugin from your plugin "
@@ -426,7 +421,7 @@ msgstr ""
 "your plugin installer or download it <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">from here</a>."
 
-#: .././validation.php:90
+#: .././validation.php:113
 msgid ""
 "Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">latest version</a> of <b>GetPoP Processors</b> installed, or "
@@ -435,6 +430,31 @@ msgstr ""
 "Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">latest version</a> of <b>PoP Theme: Wassup Processors</b> "
 "installed, or otherwise <b>RIPESS</b> might not function properly."
+
+#: .././validation.php:117
+msgid ""
+"Error: <b>GetPoP Demo Processors</b> is not installed/activated. Without it, "
+"<b>GetPoP</b> will not work. Please install this plugin from your plugin "
+"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
+"\">from here</a>."
+msgstr ""
+"Error: <b>GetPoP Demo Processors</b> is not installed/activated. Without it, "
+"<b>GetPoP</b> will not work. Please install this plugin from your plugin "
+"installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."
+
+#: .././validation.php:121
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>GetPoP Demo Processors</b> "
+"installed, or otherwise <b>GetPoP</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>latest version</a> of <b>GetPoP Demo Processors</b> installed, "
+"or otherwise <b>GetPoP</b> might not function properly."
+
+#~ msgid "Resources"
+#~ msgstr "Materiales"
 
 #~ msgid "Powered by <a href=\"%s\">the PoP framework</a>"
 #~ msgstr "Implementado con <a href=\"%s\">the PoP framework</a>"

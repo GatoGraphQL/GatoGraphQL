@@ -36,7 +36,7 @@ class GetPoP_Template_Processor_TopLevelCarouselBlockGroups extends GD_Template_
 
 			case GD_TEMPLATE_BLOCKGROUP_CAROUSEL_WEBSITEFEATURES_MORE:
 
-				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_ADDITIONALS;
+				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_SOCIALNETWORK;
 				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_UNDERTHEHOOD;
 				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_IDEALFORIMPLEMENTING;
 				// $ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_TODOS;
@@ -81,7 +81,7 @@ class GetPoP_Template_Processor_TopLevelCarouselBlockGroups extends GD_Template_
 
 				switch ($blockunit) {
 
-					case GD_TEMPLATE_BLOCK_WEBSITEFEATURES_ADDITIONALS:
+					case GD_TEMPLATE_BLOCK_WEBSITEFEATURES_SOCIALNETWORK:
 
 						return __('More features', 'getpop-processors');
 
@@ -137,7 +137,7 @@ class GetPoP_Template_Processor_TopLevelCarouselBlockGroups extends GD_Template_
 
 				switch ($blockunit) {
 
-					case GD_TEMPLATE_BLOCK_WEBSITEFEATURES_ADDITIONALS;
+					case GD_TEMPLATE_BLOCK_WEBSITEFEATURES_SOCIALNETWORK;
 						
 						return true;
 				}

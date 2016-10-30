@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GETPOP_TEMPLATE_BLOCKGROUP_HOMESECTION_ALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('getpop-blockgroup-homesection-allcontent-sidebar'));
+define ('GETPOP_TEMPLATE_BLOCKGROUP_DOCUMENTATION_SIDEBAR', PoP_ServerUtils::get_template_definition('getpop-blockgroup-documentation-sidebar'));
 
 class GetPoP_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_SidebarBlockGroupsBase {
 
@@ -13,6 +14,7 @@ class GetPoP_Template_Processor_SidebarBlockGroups extends GD_Template_Processor
 	
 		return array(
 			GETPOP_TEMPLATE_BLOCKGROUP_HOMESECTION_ALLCONTENT_SIDEBAR,
+			GETPOP_TEMPLATE_BLOCKGROUP_DOCUMENTATION_SIDEBAR,
 		);
 	}
 
@@ -28,6 +30,11 @@ class GetPoP_Template_Processor_SidebarBlockGroups extends GD_Template_Processor
 				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_IDEALFORIMPLEMENTING;
 				// $ret[] = GD_TEMPLATE_BLOCK_NEWSLETTER;
 				break;
+
+			case GETPOP_TEMPLATE_BLOCKGROUP_DOCUMENTATION_SIDEBAR:
+
+				$ret[] = GD_TEMPLATE_BLOCK_MENU_SIDEBAR_DOCUMENTATION;
+				break;
 		}
 
 		return $ret;
@@ -37,6 +44,7 @@ class GetPoP_Template_Processor_SidebarBlockGroups extends GD_Template_Processor
 
 		$screens = array(
 			GETPOP_TEMPLATE_BLOCKGROUP_HOMESECTION_ALLCONTENT_SIDEBAR => POP_SCREEN_HOME,
+			GETPOP_TEMPLATE_BLOCKGROUP_DOCUMENTATION_SIDEBAR => POP_SCREEN_ABOUT,
 		);
 		if ($screen = $screens[$template_id]) {
 
@@ -51,6 +59,7 @@ class GetPoP_Template_Processor_SidebarBlockGroups extends GD_Template_Processor
 		switch ($template_id) {
 
 			case GETPOP_TEMPLATE_BLOCKGROUP_HOMESECTION_ALLCONTENT_SIDEBAR:
+			case GETPOP_TEMPLATE_BLOCKGROUP_DOCUMENTATION_SIDEBAR:
 
 				return POP_SCREENGROUP_CONTENTREAD;
 		}

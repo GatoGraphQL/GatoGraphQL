@@ -416,7 +416,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 				}
 				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWSINGLE && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
 
-					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL;
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWPAGECONTROL;//GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL;
 				}
 				break;
 		}
@@ -1096,7 +1096,14 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			case POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_SPONSORUS:
 			case POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_OURSPONSORS:
 
-				$frames[] = GD_TEMPLATE_BLOCK_PAGECONTROL_ABOUT;
+				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN) {
+					
+					$frames[] = GD_TEMPLATE_BLOCK_PAGEWITHSIDECONTROL;
+				}
+				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWPAGE && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWPAGECONTROL;
+				}
 				break;
 
 			case POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES:
@@ -1129,7 +1136,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 				}
 				elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWPAGE && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
 
-					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL;
+					$frames[] = GD_TEMPLATE_BLOCK_QUICKVIEWPAGECONTROL;//GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL;
 				}
 				break;
 

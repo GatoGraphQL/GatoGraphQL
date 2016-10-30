@@ -336,6 +336,13 @@ popManager = {
 				t.renderPageSection(pageSection);
 
 				t.pageSectionInitialized(pageSection);
+
+				// Add "active" to current links in corresponding links
+				var settings = t.getFetchPageSectionSettings(pageSection);
+				if (settings.activeLinks) {
+
+					t.activeLinks(pageSection);
+				}
 			});
 
 			// Possibly the server will bring back a different URL to the one loaded. 
@@ -606,6 +613,13 @@ popManager = {
 		popJSLibraryManager.execute('pageSectionNewDOMsBeforeInitialize', args);
 
 		t.initPageSectionBranches(pageSection, newDOMs, options);
+			
+		// Paint the active links in the newDOMs
+		var settings = t.getFetchPageSectionSettings(pageSection);
+		if (settings.activeLinks) {
+
+			t.activeLinks(newDOMs);
+		}
 
 		popJSLibraryManager.execute('pageSectionNewDOMsInitialized', args);
 	},
@@ -1246,15 +1260,19 @@ popManager = {
 		// Update the title in the page
 		t.documentTitle = unescapeHtml(feedback[M.URLPARAM_TITLE]);
 		document.title = t.documentTitle;
+	},
 
-		// Update the body classes
-		// $('body').attr('class', mainPageSectionParams[M.DATALOAD_INTERNALPARAMS][M.URLPARAM_CLASS]);
+	activeLinks : function(elems) {
 
-		$('.menu-item').removeClass('active');
+		var t = this;
+		// Source can be params or topLevelFeedback
+		var feedback = t.getTopLevelFeedback();
+
+		// $('.menu-item').removeClass('active');
 		var parentPageId = feedback[M.URLPARAM_PARENTPAGEID];
 		if (parentPageId) {
 
-			$('.menu-item-object-id-'+parentPageId).each(function() {
+			elems.find('.menu-item-object-id-'+parentPageId).each(function() {
 
 				var menuItem = $(this);
 				menuItem.addClass('active');
@@ -1267,14 +1285,6 @@ popManager = {
 					collapse.collapse('show');
 				});
 			});
-
-			// for iPad: emulate an 'onmouseout' event, so the dropdown is closed
-			// var clicked = $('.template-clicked');
-			// if (clicked.length) {
-
-			// 	clicked.trigger('mouseout');				
-			// 	clicked.removeClass('template-clicked');
-			// }
 		}
 	},
 
@@ -1866,6 +1876,7 @@ popManager = {
 		if (settings.updateDocument) {
 
 			if (!options.skipPushState) {
+				
 				var topLevelFeedback = t.getTopLevelFeedback();
 				popBrowserHistory.pushState(topLevelFeedback[M.URLPARAM_URL]);
 			}

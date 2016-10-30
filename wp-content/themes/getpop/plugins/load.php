@@ -10,7 +10,7 @@
 // require_once 'pop-coreprocessors/load.php';
 // require_once 'events-manager-popprocessors/load.php';
 require_once 'poptheme-wassup/load.php';
-require_once 'poptheme-wassup-categoryprocessors/load.php';	
+// require_once 'poptheme-wassup-categoryprocessors/load.php';	
 // require_once 'poptheme-wassup-hosts/load.php';
 // require_once 'aryo-activity-log-pop/load.php';
 

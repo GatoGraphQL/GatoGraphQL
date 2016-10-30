@@ -40,7 +40,7 @@ class PoP_ServerUtils {
 			'uid', // user id
 			'lid', // location id
 			'cid', // comment id
-			'tag',
+			// 'tag', // for the pageSection; commented since renaming it to tagpage because of problems with prettify
 		);
 		do {
 

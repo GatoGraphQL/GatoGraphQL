@@ -71,6 +71,23 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 		return parent::get_title($template_id);
 	}
 
+	protected function get_controlgroup_top($template_id) {
+
+		// Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$vars['fetching-json-quickview']) {
+
+			switch ($template_id) {
+
+				case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+
+					return GD_TEMPLATE_CONTROLGROUP_SHARE;
+			}
+		}
+
+		return parent::get_controlgroup_top($template_id);
+	}
+
 	protected function get_sidebars_by_category() {
 
 		return apply_filters(
@@ -272,12 +289,17 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
-			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
 
 				global $post;
 				$url = get_permalink($post->ID);
 				$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_SINGLE);
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);
+
+			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+
+				// Needed to be able to Share the page (eg: Share on Twitter on https://getpop.org/en/documentation/modularity/)
+				global $post;
+				return get_permalink($post->ID);
 		}
 	
 		return parent::get_dataload_source($template_id, $atts);

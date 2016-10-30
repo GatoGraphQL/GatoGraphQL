@@ -241,11 +241,11 @@ body.sliding #ps-sideinfo {
   background-color: #f1f1f2;
 }
 
-.pop-blockgroup > .blocksection-controls.bottom,
+/*.pop-blockgroup > .blocksection-controls.bottom,
 body.embed .pop-blockgroup > .blocksection-controls.right {
   background-color: #f1f1f2;
 }
-
+*/
 /*#ps-background .jumbotron {
   background-color: #f1f1f2;
 }*/
@@ -261,35 +261,35 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 
 /* Styles particular to GetPoP */
 
-.blockgroup-websitefeatures > .blocksection-extensions > .pop-block > .blocksection-title > h1.title {
+.mainsections > .blocksection-extensions > .pop-block > .blocksection-title > h1.title {
     text-align: center;
     border-bottom: 2px solid #db902e;
     padding-bottom: 10px;
 }
-.blockgroup-websitefeatures h1.title,
-.blockgroup-websitefeatures h2.title {
+.mainsections > .blocksection-extensions h1.title,
+.mainsections > .blocksection-extensions h2.title {
 
   margin-top: 30px;
 }
 @media (min-width: 768px) {
-  .blockgroup-websitefeatures h1.title,
-  .blockgroup-websitefeatures h2.title {
+  .mainsections > .blocksection-extensions h1.title,
+  .mainsections > .blocksection-extensions h2.title {
 
     margin-top: 50px;
   }
 @media (min-width: 992px) {
-  .blockgroup-websitefeatures h2.title {
+  .mainsections > .blocksection-extensions h2.title {
 
     margin-top: 60px;
   }
 }
-.blockgroup-websitefeatures .first-item h2.title {
+.mainsections > .blocksection-extensions .first-item h2.title {
 
   margin-top: 20px;
 }
 
 /* Make the calendar's month name smaller */
-.blockgroup-websitefeatures .calendar .fc-toolbar h2 {
+.mainsections > .blocksection-extensions .calendar .fc-toolbar h2 {
     font-size: 26px;
     margin-bottom: 5px;
 }
@@ -312,4 +312,8 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 .blockgroup-authortop .block-events-scrollmap > .blocksection-title a,
 .blockgroup-tag .block-events-scrollmap > .blocksection-title a {
   color: #4d4d4f;
+}
+
+.bottom-documentation {
+  margin-top: 15px;
 }

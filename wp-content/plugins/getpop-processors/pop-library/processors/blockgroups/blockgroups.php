@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_GETPOP_TEMPLATE_BLOCKGROUP_HOME', PoP_ServerUtils::get_template_definition('blockgroup-getpop-home'));
+define ('GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW', PoP_ServerUtils::get_template_definition('blockgroup-getpop-overview'));
 define ('GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES', PoP_ServerUtils::get_template_definition('blockgroup-getpop-websitefeatures'));
 define ('GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK', PoP_ServerUtils::get_template_definition('blockgroup-getpop-websiteframework'));
 define ('GD_GETPOP_TEMPLATE_BLOCKGROUP_DESIGNPRINCIPLES', PoP_ServerUtils::get_template_definition('blockgroup-getpop-designprinciples'));
@@ -17,6 +18,7 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 	
 		return array(
 			GD_GETPOP_TEMPLATE_BLOCKGROUP_HOME,
+			GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW,
 			GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES,
 			GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK,
 			GD_GETPOP_TEMPLATE_BLOCKGROUP_DESIGNPRINCIPLES,
@@ -31,12 +33,22 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_HOME:
 
 				return array(
-					GD_TEMPLATE_BLOCK_DEMODOWNLOADS,
+					GD_TEMPLATE_BLOCK_WHATISIT,
+					// GD_TEMPLATE_BLOCK_DISCOVER,
+					// GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK,
+					// GD_GETPOP_TEMPLATE_BLOCKGROUP_DESIGNPRINCIPLES,
+					// GD_TEMPLATE_BLOCK_WEBSITEFEATURES_UNDERTHEHOOD,
+					GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES,
+					GD_GETPOP_TEMPLATE_BLOCKGROUP_CONTACT,
+				);
+
+			case GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW:
+
+				return array(
 					GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK,
 					GD_GETPOP_TEMPLATE_BLOCKGROUP_DESIGNPRINCIPLES,
 					GD_TEMPLATE_BLOCK_WEBSITEFEATURES_UNDERTHEHOOD,
-					GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES,
-					GD_GETPOP_TEMPLATE_BLOCKGROUP_CONTACT,
+					GD_TEMPLATE_BLOCK_WEBSITEFEATURES_ADVANTAGES,
 				);
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES:
@@ -77,19 +89,37 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_HOME:
 
-				$ret[] = GD_TEMPLATE_BLOCK_DEMODOWNLOADS;
+				$ret[] = GD_TEMPLATE_BLOCK_WHATISIT;
+				// $ret[] = GD_TEMPLATE_BLOCK_DISCOVER;
+				// $ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_UNDERTHEHOOD;
+				break;
+
+			case GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW:
+
 				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_UNDERTHEHOOD;
+				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFEATURES_ADVANTAGES;
 				break;
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES:
 
-				$blocks = array(
-					GD_TEMPLATE_BLOCK_WEBSITEFEATURES_PAGECONTAINERS,
-					GD_TEMPLATE_BLOCK_WEBSITEFEATURES_THEMEMODES,
-					GD_TEMPLATE_BLOCK_DISCUSSION_CREATE,
-					GD_TEMPLATE_BLOCK_WEBPOSTS_SCROLL_THUMBNAIL,
-					GD_TEMPLATE_BLOCK_EVERYTHING_QUICKLINKS,
-					GD_TEMPLATE_BLOCK_WEBSITEFEATURES_ADDITIONALS,
+				$blocks = array();
+
+				// If the external website domain was specified, then add the Events Calendar
+				if (GETPOP_URL_EXTERNALWEBSITEDOMAIN) {
+
+					$blocks[] = GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR;
+				}
+
+				$blocks = array_merge(
+					$blocks,
+					array(
+						GD_TEMPLATE_BLOCK_WEBSITEFEATURES_PAGECONTAINERS,
+						GD_TEMPLATE_BLOCK_WEBSITEFEATURES_THEMEMODES,
+						GD_TEMPLATE_BLOCK_DISCUSSION_CREATE,
+						GD_TEMPLATE_BLOCK_WEBPOSTS_SCROLL_THUMBNAIL,
+						GD_TEMPLATE_BLOCK_EVERYTHING_QUICKLINKS,
+						GD_TEMPLATE_BLOCK_WEBSITEFEATURES_SOCIALNETWORK,
+					)
 				);
 
 				// Allow to override with custom blocks
@@ -104,7 +134,8 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK:
 
-				$ret[] = GD_TEMPLATE_BLOCK_WEBSITEFRAMEWORK;
+				// Comment Leo 28/10/2016: switching from the hardcoded block using a Code template, to another using a PostCode template
+				$ret[] = GD_TEMPLATE_BLOCK_FRAMEWORK; //GD_TEMPLATE_BLOCK_WEBSITEFRAMEWORK;
 				break;
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_CONTACT:
@@ -125,10 +156,16 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_HOME:
 
-				$ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK;
-				$ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_DESIGNPRINCIPLES;
+				// $ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK;
+				// $ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_DESIGNPRINCIPLES;
 				$ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES;
 				$ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_CONTACT;
+				break;
+
+			case GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW:
+
+				$ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK;
+				$ret[] = GD_GETPOP_TEMPLATE_BLOCKGROUP_DESIGNPRINCIPLES;
 				break;
 
 			// case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK:
@@ -146,9 +183,30 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 		return $ret;
 	}
 
+	protected function get_controlgroup_top($template_id) {
+
+		// Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$vars['fetching-json-quickview']) {
+
+			switch ($template_id) {
+
+				case GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW:
+
+					return GD_TEMPLATE_CONTROLGROUP_SHARE;
+			}
+		}
+
+		return parent::get_controlgroup_top($template_id);
+	}
+
 	function get_title($template_id) {
 
 		switch ($template_id) {
+
+			case GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW:
+
+				return get_the_title(GETPOP_PROCESSORS_PAGE_DOCUMENTATION_OVERVIEW);
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK:
 
@@ -160,7 +218,8 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES:
 
-				return __('Front-end features', 'getpop-processors');
+				// return __('Front-end features', 'getpop-processors');
+				return __('Features', 'getpop-processors');
 		
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_CONTACT:
 
@@ -190,8 +249,9 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 		switch ($template_id) {
 		
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_HOME:
+			case GD_GETPOP_TEMPLATE_BLOCKGROUP_OVERVIEW:
 		
-				$this->append_att($template_id, $atts, 'class', 'blockgroup-websitefeatures');
+				$this->append_att($template_id, $atts, 'class', 'mainsections');
 				break;
 		}
 			
@@ -219,7 +279,8 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFRAMEWORK:
 
-				if ($blockgroup_block == GD_TEMPLATE_BLOCK_WEBSITEFRAMEWORK) {
+				// if ($blockgroup_block == GD_TEMPLATE_BLOCK_WEBSITEFRAMEWORK) {
+				if ($blockgroup_block == GD_TEMPLATE_BLOCK_FRAMEWORK) {
 
 					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'title', '');
 				}
@@ -237,10 +298,8 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 					
 					$title = __('Example #1: decentralized calendar', 'getpop-processors');
 					$description = sprintf(
-						// '<pre class="breakable">%s</pre>',
 						'<p class="bg-warning text-warning">%s</p>',
 						sprintf(
-							// __('The data feeding the calendar below is not coming from <strong>%1$s</strong>, but from another website, <strong><a href="%2$s" target="_blank">%4$s</a>’s <a href="%3$s" target="_blank">calendar</a></strong> (<strong>%2$s</strong>). Clicking on a link inside the calendar, even though it points to %2$s, the page loads inside the PoP aggregator website.', 'getpop-processors'),
 							__('The data feeding the calendar below is not coming from <strong>%1$s</strong>, but from another website, <a href="%3$s" target="_blank">%4$s</a> (<strong>%2$s</strong>). Even though pointing to %2$s, clicking on a link inside the calendar opens the page locally, not in a new tab.', 'getpop-processors'),
 							get_site_url(),
 							GETPOP_URL_EXTERNALWEBSITEDOMAIN,
@@ -362,6 +421,25 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'show-filter', true);
 					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'filter-visible', true);
 				}
+				elseif ($blockgroup_block == GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR) {
+
+					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'dataloadsource-domain', GETPOP_URL_EXTERNALWEBSITEDOMAIN);
+					
+					$title = __('Decentralized', 'getpop-processors');
+					$description = sprintf(
+						'<p class="bg-warning text-warning">%s</p>',
+						sprintf(
+							__('The calendar below is natively displaying data from a different website (<a href="%1$s" target="_blank">%2$s</a>). Even though pointing to %3$s, clicking on a link inside the calendar opens the page locally, not in a new tab.', 'getpop-processors'),
+							str_replace(get_site_url(), GETPOP_URL_EXTERNALWEBSITEDOMAIN, get_permalink(POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR)),
+							GETPOP_URL_EXTERNALWEBSITENAME,
+							GETPOP_URL_EXTERNALWEBSITEDOMAIN
+						)
+					);
+					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'description-top', $description);
+					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'title-htmltag', 'h2');
+					$this->add_att($blockgroup_block, $blockgroup_block_atts, 'title', $title);
+					$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', 'first-item');
+				}
 				break;
 		
 			case GD_GETPOP_TEMPLATE_BLOCKGROUP_CONTACT:
@@ -384,21 +462,21 @@ class GetPoP_Template_Processor_CustomBlockGroups extends GD_Template_Processor_
 		return parent::init_atts_blockgroup_block($blockgroup, $blockgroup_block, $blockgroup_block_atts, $blockgroup_atts);
 	}
 
-	function init_atts_blockgroup_blockgroup($blockgroup, $blockgroup_blockgroup, &$blockgroup_blockgroup_atts, $blockgroup_atts) {
+	// function init_atts_blockgroup_blockgroup($blockgroup, $blockgroup_blockgroup, &$blockgroup_blockgroup_atts, $blockgroup_atts) {
 
-		switch ($blockgroup) {
+	// 	switch ($blockgroup) {
 
-			case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES:
+	// 		case GD_GETPOP_TEMPLATE_BLOCKGROUP_WEBSITEFEATURES:
 
-				if ($blockgroup_blockgroup == GD_TEMPLATE_BLOCKGROUP_TABPANEL_WEBSITEFEATURES_FORMATS) {
+	// 			if ($blockgroup_blockgroup == GD_TEMPLATE_BLOCKGROUP_TABPANEL_WEBSITEFEATURES_FORMATS) {
 
-					$this->append_att($blockgroup_blockgroup, $blockgroup_blockgroup_atts, 'class', 'first-item');
-				}
-				break;
-		}
+	// 				$this->append_att($blockgroup_blockgroup, $blockgroup_blockgroup_atts, 'class', 'first-item');
+	// 			}
+	// 			break;
+	// 	}
 
-		return parent::init_atts_blockgroup_blockgroup($blockgroup, $blockgroup_blockgroup, $blockgroup_blockgroup_atts, $blockgroup_atts);
-	}
+	// 	return parent::init_atts_blockgroup_blockgroup($blockgroup, $blockgroup_blockgroup, $blockgroup_blockgroup_atts, $blockgroup_atts);
+	// }
 }
 
 /**---------------------------------------------------------------------------------------------------------------

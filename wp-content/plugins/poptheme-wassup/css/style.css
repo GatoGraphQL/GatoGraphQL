@@ -2782,10 +2782,19 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 	padding-top: 3px;
 	color: #fff;
 }
-.pagesection-group.active-side .framesection-navbar-title {
-	left: 51px;
-}
 
+/* Title on the frametop simple/embed */
+.pagesection-group.active-side .framesection-navbar-title {
+	left: 88px; /* logo icon + hamburguer menu icon */
+}
+@media (min-width: 768px) {
+	.pagesection-group.active-side .framesection-navbar-title {
+		left: 51px; /* no logo icon, so only hamburguer menu icon */
+	}
+}
+body.embed .pagesection-group .framesection-navbar-title {
+	left: 51px; /* no hamburguer menu icon in embed, so only logo icon */
+}
 
 .pop-home-latesteverything {
 	margin-top: 20px;

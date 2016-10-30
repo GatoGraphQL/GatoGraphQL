@@ -61,8 +61,7 @@ a{color:#454c0f}#ps-side .nav a:hover{background-color:#6acada}a.loading{backgro
 flash{0%{background-color:none}50%{background-color:#6acada}100%{background-color:none}}@-moz-keyframes
 flash{0%{background-color:none}50%{background-color:#6acada}100%{background-color:none}}@-ms-keyframes
 flash{0%{background-color:none}50%{background-color:#6acada}100%{background-color:none}}a.logo img:hover{background-color:#6acada}.nav .active>a:hover{color:#6acada}#ps-main .fullview > .wrapper h1.title>a{color:#454c0f}#ps-sideinfo .blocksection-controls.top
-.btn{background-color:#eff4c1}.pop-blockgroup > .blocksection-controls.bottom,
-body.embed .pop-blockgroup>.blocksection-controls.right{background-color:#eff4c1}#notifications-count,
+.btn{background-color:#eff4c1}#notifications-count,
 #ps-top .scroll-notifications .preview.notification-layout{background-color:#6acada}#ps-top-menu-addcontent li>a:hover{background-color:#6acada}.blockgroup-hometop .block-projects-scrollmap > .blocksection-title h3,
 .blockgroup-authortop .block-projects-scrollmap > .blocksection-title h3,
 .blockgroup-tag .block-projects-scrollmap > .blocksection-title
