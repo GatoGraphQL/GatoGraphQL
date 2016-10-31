@@ -61,7 +61,7 @@ function gd_custom_fetchpagesection_settings($fetchpagesection_settings) {
 		'noparams-reload-url' => true,
 		'updateDocument' => true,
 		'maybeRedirect' => true,
-		// 'activeLinks' => true,
+		'activeLinks' => true,
 	);
 	$settings_append = array(			
 		'operation' => GD_URLPARAM_OPERATION_APPEND,

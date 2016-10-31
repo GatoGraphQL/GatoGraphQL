@@ -23,6 +23,7 @@ class PoP_PrettyPrint_Initialization {
 			// CDN
 			// https://github.com/google/code-prettify
 			wp_register_script('code-prettify', 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=false&skin=desert', null, null);
+			// wp_register_script('code-prettify', 'https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.js', null, null);
 		}
 		else {
 
@@ -54,6 +55,7 @@ class PoP_PrettyPrint_Initialization {
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 
 			// No need to include any file here, since the skin is already selected as a parameter when loading the .js file
+			// wp_register_style('code-prettify', 'https://cdn.rawgit.com/google/code-prettify/master/styles/desert.css', null, null);
 		}
 		else {
 

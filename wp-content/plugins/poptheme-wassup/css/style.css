@@ -874,6 +874,9 @@ h4 .pop-spinner {
     /*padding-left: 30px;*/
     padding-left: 35px;
 }
+#ps-sideinfo li.menu-item-parent > a {
+    padding-left: 30px;
+}
 
 /* The login blockgroup needs the title to show it in the tab, but it must not show in the page since the login block also has it */
 .blockgroup-login > .blocksection-title {
