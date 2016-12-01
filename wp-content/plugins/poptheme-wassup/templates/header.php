@@ -70,7 +70,7 @@
 	  <script src="<?php echo get_stylesheet_directory_uri() ?>/js/includes/respond.min.js"></script>
 	<![endif]-->	
 </head>
-<body class="pop-loading-initial <?php echo gd_classes_body() ?>">
+<body id="body" class="pop-loadingframe pop-loadingjs <?php echo gd_classes_body() ?>">
 	<?php // Comment Leo 10/08/2016: commented changing the title to "Loading", because Google shows this temporary title in its search results ?>
 	<?php /* ?><script type="text/javascript">document.title="<?php echo gd_get_initial_document_title() ?>";</script> <?php */ ?>
 	<div id="wrapper" class="pop-fullscreen">

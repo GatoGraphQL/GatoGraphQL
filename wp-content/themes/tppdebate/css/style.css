@@ -24,7 +24,7 @@ body.sliding .background-screen {
   display: block;
 }
 body.sliding .background-screen,
-body.sliding .loading-screen {
+body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
     background-color: #edf9f7;
 }
 body.sliding .background-screen { 

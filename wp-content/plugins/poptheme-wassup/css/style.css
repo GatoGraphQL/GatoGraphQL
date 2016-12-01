@@ -163,6 +163,10 @@ body {
 .loadinglogo {
 	text-align: center;
 	padding: 15px 5px;
+	display: none;
+}
+body.pop-loadingjs .loadinglogo {
+	display: block;
 }
 .loadinglogo .img-responsive {
 	display: initial;
@@ -186,8 +190,12 @@ body {
 	/* Below everything else, including the offcanvas background */
 	z-index: 50;
 }
-body.pop-loading-initial .loading-screen {
+/* Do not allow the user to click yet, because JS not yet initialized, by placing the loading-screen div with a transparent background on top of everything */
+body.pop-loadingjs .loading-screen {
 	display: block;
+}
+body.sliding.pop-loadingjs .loading-screen {
+    background-color: transparent;
 }
 
 .pop-messagefeedback .media {

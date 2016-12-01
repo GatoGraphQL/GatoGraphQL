@@ -382,13 +382,16 @@ popManager = {
 			});
 
 			// Step 2: remove the "loading" screen
-			$('body').removeClass('pop-loading-initial');
+			$('#body').removeClass('pop-loadingframe');
 
 			// Step 3: execute JS
 			$.each(pageSections, function(index, pageSection) {
 
 				t.pageSectionInitialized(pageSection);
 			});
+
+			// Step 4: remove the "loading" screen
+			$('#body').removeClass('pop-loadingjs');
 
 			// Comment Leo 01/12/2016: not needed anymore, since externalizing 'activeLinks' as a JS method to run on the Menu Blocks
 			// $.each(memory.settings.configuration, function(pssId, psConfiguration) {
@@ -427,7 +430,7 @@ popManager = {
 		// Comment Leo 01/12/2016: this logic was moved up
 		// // After everything is ready, remove the initial loading screen
 		// $(document).ready(function($){
-		// 	$('body').removeClass('pop-loading-initial');
+		// 	$('body').removeClass('pop-loadingframe');
 		// });
 	},
 

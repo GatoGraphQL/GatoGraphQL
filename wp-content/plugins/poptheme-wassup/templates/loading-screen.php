@@ -4,7 +4,7 @@
 	<p>
 		<img id="loading-logo" class="img-responsive" src="<?php echo apply_filters('gd_images_loading', $gd_logo[0]) ?>">
 	</p>
-	<p>
+	<p class="loadingmsg">
 		<i class="fa fa-lg fa-spinner fa-spin"></i>
 		<?php 
 			printf(

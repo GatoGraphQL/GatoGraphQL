@@ -58,9 +58,7 @@ popFullCalendar = {
 			windowResize();
 		});
 
-		// Trigger needed to add Events the first time
-		// targets.triggerHandler('initialize');
-		t.execCalendar(pageSection, /*pageSectionPage, */block, targets, 'new');
+		t.execCalendar(pageSection, block, targets, 'new');
 	},
 
 
