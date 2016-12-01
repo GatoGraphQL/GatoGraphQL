@@ -27,9 +27,13 @@ COLORS used in the Website:
 body.sliding .background-screen {
   display: block;
 }
-body.sliding .background-screen,
-body.sliding .loading-screen {
+body.sliding.getpop-demo .background-screen,
+body.sliding.getpop-demo .loading-screen {
     background-color: #fcf9eb;
+}
+body.sliding.getpop .background-screen,
+body.sliding.getpop .loading-screen {
+    background-color: #babfc4;
 }
 body.sliding .background-screen { 
   -webkit-background-size: cover;
@@ -39,20 +43,20 @@ body.sliding .background-screen {
 }
 body.sliding.getpop .background-screen { 
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;
+  background: #babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png?version=0.139) no-repeat fixed center;
 }
 @media (min-width: 1440px) {
   body.sliding .background-screen { 
-    background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png);
+    background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png?version=0.139);
   }
 }
 body.sliding.getpop-demo .background-screen { 
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;
+  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png?version=0.139) no-repeat fixed center;
 }
 @media (min-width: 1440px) {
   body.sliding.getpop-demo .background-screen { 
-    background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png);
+    background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png?version=0.139);
   }
 }
 
@@ -115,7 +119,7 @@ body.sliding #ps-hover .container-fluid,
 }
 .blockgroup-home-welcome.jumbotron {
   background-color: #fff;
-  border: 1px solid #db902e;
+  border: 1px solid #b94f5a;
 }
 /*.blockgroup-home-welcome.jumbotron > .blocksection-extensions > .block-homewelcome {
   background-color: #fff;
@@ -263,7 +267,7 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 
 .mainsections > .blocksection-extensions > .pop-block > .blocksection-title > h1.title {
     text-align: center;
-    border-bottom: 2px solid #db902e;
+    border-bottom: 2px solid #b94f5a;
     padding-bottom: 10px;
 }
 .mainsections > .blocksection-extensions h1.title,

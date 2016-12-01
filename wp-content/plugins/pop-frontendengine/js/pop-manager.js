@@ -40,6 +40,7 @@ popManager = {
 	userdatabase : {},
 	firstLoad : {},
 	documentTitle : null, // We keep a copy of the document title, so we can add the notification number in it
+	// progress : 0,
 
 	//-------------------------------------------------
 	// PUBLIC but NOT EXPOSED functions
@@ -297,6 +298,29 @@ popManager = {
 		return t.firstLoad[popManager.getSettingsId(pageSection)];
 	},
 
+	// setProgress : function() {
+
+	// 	var t = this;
+
+	// 	// setTimeout is needed to make it work. Taken from https://stackoverflow.com/questions/30285185/why-doesnt-progress-bar-dynamically-change-unlike-text
+	// 	// Every 100ms check the progress and update the progress-bar
+	// 	setTimeout(function () {
+
+	// 		// document.getElementById('loadingprogress').style.width = t.progress+'%';
+	// 		var width = t.progress+'%';
+	// 		$('#loadingprogress')
+	// 			.css('width', width)
+	// 			.attr('aria-valuenow', t.progress)
+	// 			.find('.percent')
+	// 				.text(t.progress);
+
+	// 		// Don't stop until reaching 100%
+	// 		if (t.progress < 100) {
+	// 			t.setProgress();
+	// 		}
+	// 	}, 100);
+	// },
+
 	init : function() {
 	
 		var t = this;
@@ -315,9 +339,17 @@ popManager = {
 
 			// Obtain what pageSections to merge from the configuration
 			var memory = t.getMemory();
+
+			// Keep the pageSection DOM elems
+			var pageSections = [];
+
+			// Comment Leo 01/12/2016: Split the logic below into 2: first render all the pageSections (t.renderPageSection(pageSection)),
+			// and then execute all JS on them (t.pageSectionInitialized(pageSection)), and in between remove the "loading" screen
+			// this way, the first paint is much faster, for a better user experience
+			// Step 0: initialize the pageSection
 			$.each(memory.settings.configuration, function(pssId, psConfiguration) {
 
-				var psId = psConfiguration[M.JS_FRONTENDID];//psConfiguration['frontend-id'];
+				var psId = psConfiguration[M.JS_FRONTENDID];
 				var pageSection = $('#'+psId);
 
 				// Before anything: add the settings-id to the div (so we can access below getPageSectionId)
@@ -327,23 +359,50 @@ popManager = {
 				t.initPageSectionSettings(pageSection, psConfiguration);
 
 				// Insert into the Runtime to generate the ID
-				// t.addPageSectionIds(pageSection, psConfiguration.template);
 				t.addPageSectionIds(pageSection, psConfiguration[M.JS_TEMPLATE]);
 
 				// Allow plugins to catch events for the rendering
 				t.initPageSection(pageSection);
 
+				pageSections.push(pageSection);
+			});
+
+
+			// // Progress bar
+			// var delta = 100/pageSections.length; 
+			// t.setProgress();
+
+			// Step 1: render the pageSection
+			$.each(pageSections, function(index, pageSection) {
+
+				// // Re-calculate the progress
+				// t.progress = parseInt(delta*(index+1));
+
 				t.renderPageSection(pageSection);
+			});
+
+			// Step 2: remove the "loading" screen
+			$('body').removeClass('pop-loading-initial');
+
+			// Step 3: execute JS
+			$.each(pageSections, function(index, pageSection) {
 
 				t.pageSectionInitialized(pageSection);
-
-				// Add "active" to current links in corresponding links
-				var settings = t.getFetchPageSectionSettings(pageSection);
-				if (settings.activeLinks) {
-
-					t.activeLinks(pageSection);
-				}
 			});
+
+			// Comment Leo 01/12/2016: not needed anymore, since externalizing 'activeLinks' as a JS method to run on the Menu Blocks
+			// $.each(memory.settings.configuration, function(pssId, psConfiguration) {
+
+			// 	var psId = psConfiguration[M.JS_FRONTENDID];
+			// 	var pageSection = $('#'+psId);
+
+			// 	// Add "active" to current links in corresponding links
+			// 	var settings = t.getFetchPageSectionSettings(pageSection);
+			// 	if (settings.activeLinks) {
+
+			// 		t.activeLinks(pageSection);
+			// 	}
+			// });
 
 			// Possibly the server will bring back a different URL to the one loaded. 
 			// Eg: when loading https://www.mesym.com/add-event/, it will instead bring back https://www.mesym.com/add-event/#2342354569
@@ -365,10 +424,11 @@ popManager = {
 			t.backgroundLoad(t.getTopLevelFeedback()[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
 		}
 
-		// After everything is ready, remove the initial loading screen
-		$(document).ready(function($){
-			$('body').removeClass('pop-loading-initial');
-		});
+		// Comment Leo 01/12/2016: this logic was moved up
+		// // After everything is ready, remove the initial loading screen
+		// $(document).ready(function($){
+		// 	$('body').removeClass('pop-loading-initial');
+		// });
 	},
 
 	expandJSKeys : function(context) {
@@ -614,12 +674,13 @@ popManager = {
 
 		t.initPageSectionBranches(pageSection, newDOMs, options);
 			
-		// Paint the active links in the newDOMs
-		var settings = t.getFetchPageSectionSettings(pageSection);
-		if (settings.activeLinks) {
+		// Comment Leo 01/12/2016: not needed anymore, since externalizing 'activeLinks' as a JS method to run on the Menu Blocks
+		// // Paint the active links in the newDOMs
+		// var settings = t.getFetchPageSectionSettings(pageSection);
+		// if (settings.activeLinks) {
 
-			t.activeLinks(newDOMs);
-		}
+		// 	t.activeLinks(newDOMs);
+		// }
 
 		popJSLibraryManager.execute('pageSectionNewDOMsInitialized', args);
 	},
@@ -1262,31 +1323,31 @@ popManager = {
 		document.title = t.documentTitle;
 	},
 
-	activeLinks : function(elems) {
+	// activeLinks : function(elems) {
 
-		var t = this;
-		// Source can be params or topLevelFeedback
-		var feedback = t.getTopLevelFeedback();
+	// 	var t = this;
+	// 	// Source can be params or topLevelFeedback
+	// 	var feedback = t.getTopLevelFeedback();
 
-		// $('.menu-item').removeClass('active');
-		var parentPageId = feedback[M.URLPARAM_PARENTPAGEID];
-		if (parentPageId) {
+	// 	// $('.menu-item').removeClass('active');
+	// 	var parentPageId = feedback[M.URLPARAM_PARENTPAGEID];
+	// 	if (parentPageId) {
 
-			elems.find('.menu-item-object-id-'+parentPageId).each(function() {
+	// 		elems.find('.menu-item-object-id-'+parentPageId).each(function() {
 
-				var menuItem = $(this);
-				menuItem.addClass('active');
-				menuItem.parents('.menu-item').addClass('active');
+	// 			var menuItem = $(this);
+	// 			menuItem.addClass('active');
+	// 			menuItem.parents('.menu-item').addClass('active');
 
-				// If inside a collapse (with class 'pop-showactive'), open it
-				// Needed for the Side Sections Menu
-				jQuery(document).ready( function($) {
-					var collapse = menuItem.closest('.collapse.pop-showactive').not('.in');
-					collapse.collapse('show');
-				});
-			});
-		}
-	},
+	// 			// If inside a collapse (with class 'pop-showactive'), open it
+	// 			// Needed for the Side Sections Menu
+	// 			jQuery(document).ready( function($) {
+	// 				var collapse = menuItem.closest('.collapse.pop-showactive').not('.in');
+	// 				collapse.collapse('show');
+	// 			});
+	// 		});
+	// 	}
+	// },
 
 	hideMessages : function(pageSection) {
 

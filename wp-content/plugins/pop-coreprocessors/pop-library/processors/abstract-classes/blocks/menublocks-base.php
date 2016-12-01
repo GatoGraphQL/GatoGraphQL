@@ -25,4 +25,14 @@ class GD_Template_Processor_MenuBlocksBase extends GD_Template_Processor_BlocksB
 
 		return GD_DATALOADER_MENU;
 	}
+
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);	
+
+		// Add "active" to current links in corresponding links
+		$this->add_jsmethod($ret, 'activeLinks');		
+		
+		return $ret;
+	}
 }

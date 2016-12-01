@@ -4326,3 +4326,12 @@ form.pop-filterform-instantaneous {
 	    display: block;
 	}
 }
+
+/* Remove the transition of the progress-bar for the loadingprogress, or it doesn't work. Solution from https://stackoverflow.com/questions/30285185/why-doesnt-progress-bar-dynamically-change-unlike-text */
+/*
+.progress #loadingprogress.progress-bar {
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+}
+*/

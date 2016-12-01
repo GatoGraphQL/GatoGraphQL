@@ -42,9 +42,9 @@ function pop_image_size_names_choose($sizes) {
 
 	// In the front-end, limit the user what sizes can be selected, to fit our layout perfectly
 	return array(
+		'full'      => __('Full Size'),
 		'thumb-pagewide' => __('Wide', 'pop-coreprocessors'),
 		'thumbnail' => __('Thumbnail', 'pop-coreprocessors'),
-		'full'      => __('Full Size'),
 	);
 }
 add_filter( 'media_view_settings', 'pop_media_view_settings_defaultthumb');

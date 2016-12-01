@@ -34,15 +34,15 @@ class GD_DataLoad_IOHandler_Calendar extends GD_DataLoad_IOHandler_List {
 		$ret[GD_URLPARAM_YEAR] = $year;
 		$ret[GD_URLPARAM_MONTH] = $month;
 
-		// If the Limit is not set, then bring all results
-		// This is needed so that for Events Calendar, we can still use GD_DATALOAD_IOHANDLER_CALENDAR
-		// to get Events for the FullView scroll on offcanvas-main, which must be paged
-		if (!isset($atts[GD_URLPARAM_LIMIT])) {
-			$ret[GD_URLPARAM_LIMIT] = 0;
-		}
+		// // If the Limit is not set, then bring all results
+		// // This is needed so that for Events Calendar, we can still use GD_DATALOAD_IOHANDLER_CALENDAR
+		// // to get Events for the FullView scroll on offcanvas-main, which must be paged
+		// if (!isset($atts[GD_URLPARAM_LIMIT])) {
+		// 	$ret[GD_URLPARAM_LIMIT] = 0;
+		// }
 
 		// Always bring all results
-		// $ret[GD_URLPARAM_LIMIT] = 0;	
+		$ret[GD_URLPARAM_LIMIT] = 0;
 
 		return $ret;
 	}
@@ -58,12 +58,8 @@ class GD_DataLoad_IOHandler_Calendar extends GD_DataLoad_IOHandler_List {
 		$ret[GD_DATALOAD_VISIBLEPARAMS][GD_URLPARAM_YEAR] = $vars[GD_URLPARAM_YEAR];
 		$ret[GD_DATALOAD_VISIBLEPARAMS][GD_URLPARAM_MONTH] = $vars[GD_URLPARAM_MONTH];
 
-		// Unset what is not needed anymore
-		// unset($ret[GD_DATALOAD_PARAMS][GD_URLPARAM_PAGED]);
-		// unset($ret[GD_DATALOAD_PARAMS][GD_URLPARAM_LIMIT]);
-
 		// Never stop fetching! (Or otherwise it doesn't allow to go prev/next with Calendar buttons)
-		// $ret[GD_DATALOAD_INTERNALPARAMS]['stop-fetching'] = false;
+		$ret[GD_URLPARAM_STOPFETCHING] = false;
 
 		return $ret;
 	}

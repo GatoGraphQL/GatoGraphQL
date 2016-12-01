@@ -14,8 +14,9 @@
 .navbar .nav .sub-menu>li>a{font-family:Rockwell,Rokkit,Verdana;font-size:17px;padding:14px
 14px;line-height:14px}.carousel-indicators>div:hover{background-color:#db902e;color:#fff}.tt-suggestion.tt-cursor,.tt-suggestion.tt-is-under-cursor{color:#fff;background-color:rgba(195, 165, 51, 0.7)}.tt-suggestion.tt-cursor a,
 .tt-suggestion.tt-is-under-cursor
-a{color:#fff}.background-screen{display:none}body.sliding .background-screen{display:block}body.sliding .background-screen,
-body.sliding .loading-screen{background-color:#fcf9eb}body.sliding .background-screen{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}body.sliding.getpop .background-screen{background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center}@media (min-width: 1440px){body.sliding .background-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png)}}body.sliding.getpop-demo .background-screen{background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center}@media (min-width: 1440px){body.sliding.getpop-demo .background-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png)}}body.sliding,
+a{color:#fff}.background-screen{display:none}body.sliding .background-screen{display:block}body.sliding.getpop-demo .background-screen,
+body.sliding.getpop-demo .loading-screen{background-color:#fcf9eb}body.sliding.getpop .background-screen,
+body.sliding.getpop .loading-screen{background-color:#babfc4}body.sliding .background-screen{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}body.sliding.getpop .background-screen{background:#babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png?version=0.139) no-repeat fixed center}@media (min-width: 1440px){body.sliding .background-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png?version=0.139)}}body.sliding.getpop-demo .background-screen{background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png?version=0.139) no-repeat fixed center}@media (min-width: 1440px){body.sliding.getpop-demo .background-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png?version=0.139)}}body.sliding,
 body.sliding #ps-side,
 body.sliding #ps-sideinfo,
 body.sliding #ps-main > .container-fluid,
@@ -31,14 +32,14 @@ solid #db902e;background-color:#d9edf7;text-align:center}.fc-row{background-colo
 #ps-main .horizontal.sidebar > .pop-structureinner,
 #ps-quickview .horizontal.sidebar>.pop-structureinner{background-color:#d9edf7}.carousel.widget.widget-info{background-color:#d9edf7;border:1px
 solid #bce8f1}.block-posts-carousel .carousel.widget.widget-info .carousel-row{border-top:1px dashed #bce8f1}.block-posts-carousel .carousel.widget.widget-info .carousel-row:first-child{border-top:0}.blockgroup-home-welcome.jumbotron{background-color:#fff;border:1px
-solid #db902e}.blockgroup-home-welcomeaccount.well{background-color:#d9edf7;border:1px
+solid #b94f5a}.blockgroup-home-welcomeaccount.well{background-color:#d9edf7;border:1px
 solid #bce8f1}#ps-side .nav
 a{color:#4d4d4f}#ps-side .nav a:hover{background-color:#db902e}a.loading{background-color:rgba(219,144,46,0.3)}.pop-spinner{background-color:rgba(219,144,46,0.85)}.thumbnail{background-color:#f1f1f2}.gallery dl.gallery-item:hover{background-color:#db902e}.pop-highlight{-moz-animation:flash 2s ease-out;-moz-animation-iteration-count:1;-webkit-animation:flash 2s ease-out;-webkit-animation-iteration-count:1;-ms-animation:flash 2s ease-out;-ms-animation-iteration-count:1}@-webkit-keyframes
 flash{0%{background-color:none}50%{background-color:#db902e}100%{background-color:none}}@-moz-keyframes
 flash{0%{background-color:none}50%{background-color:#db902e}100%{background-color:none}}@-ms-keyframes
 flash{0%{background-color:none}50%{background-color:#db902e}100%{background-color:none}}a.logo img:hover{background-color:#db902e}.nav .active>a:hover{color:#db902e}#ps-main .fullview > .wrapper h1.title>a{color:#4d4d4f}#ps-sideinfo .blocksection-controls.top
 .btn{background-color:#f1f1f2}#notifications-count,
-#ps-top .scroll-notifications .preview.notification-layout{background-color:#db902e}#ps-top-menu-addcontent li>a:hover{background-color:#db902e}.mainsections>.blocksection-extensions>.pop-block>.blocksection-title>h1.title{text-align:center;border-bottom:2px solid #db902e;padding-bottom:10px}.mainsections > .blocksection-extensions h1.title,
+#ps-top .scroll-notifications .preview.notification-layout{background-color:#db902e}#ps-top-menu-addcontent li>a:hover{background-color:#db902e}.mainsections>.blocksection-extensions>.pop-block>.blocksection-title>h1.title{text-align:center;border-bottom:2px solid #b94f5a;padding-bottom:10px}.mainsections > .blocksection-extensions h1.title,
 .mainsections > .blocksection-extensions
 h2.title{margin-top:30px}@media (min-width: 768px){.mainsections > .blocksection-extensions h1.title,
 .mainsections > .blocksection-extensions

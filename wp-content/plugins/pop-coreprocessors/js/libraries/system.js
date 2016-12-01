@@ -12,6 +12,38 @@ popSystem = {
 		t.links();
 	},
 
+	activeLinks : function(args) {
+
+		var t = this;
+		var pageSection = args.pageSection, targets = args.targets;
+
+		// Only if the pageSection allows activeLinks (eg: side menu does not, or otherwise that link will remain always painted)
+		var settings = popManager.getFetchPageSectionSettings(pageSection);
+		if (settings.activeLinks) {
+
+			// Source can be params or topLevelFeedback
+			var feedback = popManager.getTopLevelFeedback();
+
+			var parentPageId = feedback[M.URLPARAM_PARENTPAGEID];
+			if (parentPageId) {
+
+				targets.find('.menu-item-object-id-'+parentPageId).each(function() {
+
+					var menuItem = $(this);
+					menuItem.addClass('active');
+					menuItem.parents('.menu-item').addClass('active');
+
+					// // If inside a collapse (with class 'pop-showactive'), open it
+					// // Needed for the Side Sections Menu
+					// jQuery(document).ready( function($) {
+					// 	var collapse = menuItem.closest('.collapse.pop-showactive').not('.in');
+					// 	collapse.collapse('show');
+					// });
+				});
+			}
+		}
+	},
+
 	fullscreen : function(args) {
 
 		var t = this;
@@ -1521,4 +1553,4 @@ popSystem = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popSystem, ['documentInitialized', 'newWindow', 'fullscreen', 'clickURLParam', 'initDelegatorFilter', 'initBlockGroupFilter', 'initBlockFilter', 'reloadBlockGroup', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'displayBlockDatasetCount', 'clearDatasetCount', 'clearDatasetCountOnUserLoggedOut', 'replicateTopLevel', 'replicatePageSection', 'closePageSection', 'closePageSectionOnTabShown', 'onDestroyPageSwitchTab', 'closePageTab', 'resetOnSuccess', 'resetOnUserLogout', 'closeMessageFeedbacksOnPageSectionOpen', 'closePageSectionOnSuccess', 'destroyPageOnUserLoggedOut', 'destroyPageOnUserNoRole', 'refetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedInOut', 'deleteBlockFeedbackValueOnUserLoggedInOut', 'scrollTopOnUserLoggedInOut', 'refetchBlockGroupOnUserLoggedIn', 'destroyPageOnSuccess', 'destroyPage', 'initFilter', 'interceptForm', 'forms', /*'initBlockProxyFilter', */'clearInput', 'makeAlwaysRefetchBlock', 'scrollHandler']);
+popJSLibraryManager.register(popSystem, ['documentInitialized', 'activeLinks', 'newWindow', 'fullscreen', 'clickURLParam', 'initDelegatorFilter', 'initBlockGroupFilter', 'initBlockFilter', 'reloadBlockGroup', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'displayBlockDatasetCount', 'clearDatasetCount', 'clearDatasetCountOnUserLoggedOut', 'replicateTopLevel', 'replicatePageSection', 'closePageSection', 'closePageSectionOnTabShown', 'onDestroyPageSwitchTab', 'closePageTab', 'resetOnSuccess', 'resetOnUserLogout', 'closeMessageFeedbacksOnPageSectionOpen', 'closePageSectionOnSuccess', 'destroyPageOnUserLoggedOut', 'destroyPageOnUserNoRole', 'refetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedInOut', 'deleteBlockFeedbackValueOnUserLoggedInOut', 'scrollTopOnUserLoggedInOut', 'refetchBlockGroupOnUserLoggedIn', 'destroyPageOnSuccess', 'destroyPage', 'initFilter', 'interceptForm', 'forms', /*'initBlockProxyFilter', */'clearInput', 'makeAlwaysRefetchBlock', 'scrollHandler']);

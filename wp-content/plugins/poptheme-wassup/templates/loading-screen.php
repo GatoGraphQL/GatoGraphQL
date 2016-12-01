@@ -14,4 +14,11 @@
 			); 
 		?>
 	</p>
+	<?php /*
+	<div class="progress" style="max-width: 500px; margin: auto;">
+		<div id="loadingprogress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
+			<span class="sr-only"><span class="percent">0</span><?php _e('%', 'poptheme-wassup'); ?></span>
+		</div>
+	</div>
+	*/ ?>
 </div>
