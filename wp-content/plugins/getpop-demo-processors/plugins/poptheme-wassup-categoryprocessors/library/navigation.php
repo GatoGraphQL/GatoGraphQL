@@ -8,10 +8,22 @@ function getpop_cpp_navigation_menu_item_icon($icon, $menu_item_object_id, $html
 
 	switch ($menu_item_object_id) {
 
-		case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS00:
-		case POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_MYCATEGORYPOSTS00:
+		case GETPOPDEMO_PAGE_ARTICLES:
+		case GETPOPDEMO_PAGE_MYARTICLES:
 
-			$fontawesome = 'fa-book'; // Resources
+			$fontawesome = 'fa-comment';
+			break;
+
+		case GETPOPDEMO_PAGE_ANNOUNCEMENTS:
+		case GETPOPDEMO_PAGE_MYANNOUNCEMENTS:
+
+			$fontawesome = 'fa-bullhorn';
+			break;
+
+		case GETPOPDEMO_PAGE_RESOURCES:
+		case GETPOPDEMO_PAGE_MYRESOURCES:
+
+			$fontawesome = 'fa-book';
 			break;
 	}
 

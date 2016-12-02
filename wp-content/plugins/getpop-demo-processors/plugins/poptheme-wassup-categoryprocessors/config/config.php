@@ -9,13 +9,19 @@ function getpop_categoryprocessors_catname($name, $cat_id, $format) {
 
 	switch ($cat_id) {
 
-		case POPTHEME_WASSUP_CATEGORYPROCESSORS_CAT_CATEGORYPOSTS00:
+		case GETPOPDEMO_CAT_ARTICLES:
+		case GETPOPDEMO_CAT_ANNOUNCEMENTS:
+		case GETPOPDEMO_CAT_RESOURCES:
 
 			$plurals = array(
-				POPTHEME_WASSUP_CATEGORYPROCESSORS_CAT_CATEGORYPOSTS00 => __('Resources', 'getpop'),
+				GETPOPDEMO_CAT_ARTICLES => __('Articles', 'getpop-demo-processors'),
+				GETPOPDEMO_CAT_ANNOUNCEMENTS => __('Announcements', 'getpop-demo-processors'), 
+				GETPOPDEMO_CAT_RESOURCES => __('Resources', 'getpop-demo-processors'), 
 			);
 			$singulars = array(
-				POPTHEME_WASSUP_CATEGORYPROCESSORS_CAT_CATEGORYPOSTS00 => __('Resource', 'getpop'),
+				GETPOPDEMO_CAT_ARTICLES => __('Article', 'getpop-demo-processors'),
+				GETPOPDEMO_CAT_ANNOUNCEMENTS => __('Announcement', 'getpop-demo-processors'), 
+				GETPOPDEMO_CAT_RESOURCES => __('Resource', 'getpop-demo-processors'), 
 			);
 			return ($format == 'plural' || $format == 'plural-lc') ? $plurals[$cat_id] : $singulars[$cat_id];
 	}
