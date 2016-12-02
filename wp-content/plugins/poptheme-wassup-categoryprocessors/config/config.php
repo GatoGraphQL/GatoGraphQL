@@ -43,9 +43,17 @@ function categoryprocessors_postname($name, $post_id) {
 
 	if (get_post_type($post_id) == 'post') {
 
-		$cat_id = gd_get_the_main_category($post_id);
-		if (in_array($cat_id, PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats())) {
-			return gd_get_categoryname($cat_id);
+		// All categories in this plug-in are secondary to "Posts"
+		if (gd_get_the_main_category($post_id) == POPTHEME_WASSUP_CAT_WEBPOSTS) {
+
+			$cats = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats();
+			$post_cats = get_the_category($post_id);
+			for ($i=0; $i < count($post_cats); $i++) { 
+				$cat = $post_cats[$i];
+				if (in_array($cat->term_id, $cats)) {
+					return gd_get_categoryname($cat->term_id);
+				}
+			}
 		}
 	}
 
@@ -58,11 +66,19 @@ function categoryprocessors_posticon($icon, $post_id) {
 
 	if (get_post_type($post_id) == 'post') {
 
-		$cat_id = gd_get_the_main_category($post_id);
-		if (in_array($cat_id, PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats())) {
+		// All categories in this plug-in are secondary to "Posts"
+		if (gd_get_the_main_category($post_id) == POPTHEME_WASSUP_CAT_WEBPOSTS) {
 
-			$cat_pages = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_pages();
-			return gd_navigation_menu_item($cat_pages[$cat_id], false);
+			$cats = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats();
+			$post_cats = get_the_category($post_id);
+			for ($i=0; $i < count($post_cats); $i++) { 
+				$cat = $post_cats[$i];
+				if (in_array($cat->term_id, $cats)) {
+
+					$cat_pages = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_pages();
+					return gd_navigation_menu_item($cat_pages[$cat->term_id], false);
+				}
+			}
 		}
 	}
 
