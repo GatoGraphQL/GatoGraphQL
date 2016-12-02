@@ -18,4 +18,5 @@ cp $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/libraries/ma
 cp $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/libraries/3rdparties/fullcalendar.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries/
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
-wget -O $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/events-manager-popprocessors.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries&f=create-location.js,map.js,typeahead-map.js,map-collection.js,fullcalendar.js"
+wget -O $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/events-manager-popprocessors.bundle.orig.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries&f=create-location.js,map.js,typeahead-map.js,map-collection.js,fullcalendar.js"
+uglifyjs $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/events-manager-popprocessors.bundle.orig.min.js -o $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/events-manager-popprocessors.bundle.min.js -c warnings=false -m

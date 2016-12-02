@@ -23,8 +23,8 @@ cp $POP_APP_PATH/wp-content/plugins/poptheme-wassup/plugins/wordpress-social-log
 cp $POP_APP_PATH/wp-content/plugins/poptheme-wassup/plugins/jw-player-plugin-for-wordpress/js/jwp6-scripts.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/js/libraries/
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
-wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/poptheme-wassup.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/js/libraries&f=custom-functions.js,ure-communities.js,ure-aal-functions.js"
-
+wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/poptheme-wassup.bundle.orig.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/js/libraries&f=custom-functions.js,ure-communities.js,ure-aal-functions.js"
+uglifyjs $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/poptheme-wassup.bundle.orig.min.js -o $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/poptheme-wassup.bundle.min.js -c warnings=false -m
 
 ###########################
 # CSS
