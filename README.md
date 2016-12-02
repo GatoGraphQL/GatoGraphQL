@@ -104,7 +104,7 @@ To have a website consume data coming from other domains, crossdomain access mus
       Header add Access-Control-Allow-Methods POST
     </IfModule>
 
-### Why have I included the 3-rd party plug-ins also?
+### Why have 3-rd party plug-ins been included also?
 
 Dependencies should normally not be added to the repository, however it has been done for two reasons:
 
@@ -133,6 +133,12 @@ Theme "wassup" implements some features for which some files from WordPress have
  Why hack: there is a bug currently in WordPress: 1) click on "Add Image/Gallery" works fine; 2) click on "Add File/Image" works fine; 3) click on "Add Image/Gallery" does not switch the tab to the Image Gallery.
 
  Hack: added `if (options.state) { workflow.setState(options.state); }` just above `wp.media.frame = workflow;` in file wp-includes/js/media-editor.js, and the corresponding `,(b.state)&&(c.setState(b.state))` after `&&(c=this.add(a,b))` in the minified version the file, wp-includes/js/media-editor.min.js
+ 
+4. Requirement: change the default thumbnail size in the Media Manager from "full" to a custom size "wide"
+
+ Why hack: the "wide" thumbnail size is 480px wide, perfect for the wassup theme. This size needs to be selected by default when adding the Media Manager, and use of the "full" size discouraged (it is kept there, only for when the image is smaller than the "wide" size, so full size is used instead)
+ 
+ Hack: Replace `selected( $value, 'full' )` with `selected( $value, 'thumb-pagewide' )` in function `wp_print_media_templates()` in file `wp-includes/media-template.php`, in the script template with id `tmpl-attachment-display-settings`
 
 ### Hacks: Plug-ins
 
@@ -176,9 +182,13 @@ _**Notice:** the procedure below is quite ugly, it works for me but I see how it
 
 1. Install Google's minimizer Min in your webserver
 
- To bundle and minify files, I'm using Google's minimizer Min (), deployed under https://min.localhost/, and executing a script that makes a request and saves the output of the minified file to disk.
+ To bundle and minify files, I'm using [Google's minimizer Min](https://github.com/mrclay/minify), deployed under https://min.localhost/, and executing a script that makes a request and saves the output of the minified file to disk.
+ 
+2. Install UglifyJS
 
-2. Define the environment variables used in minify.sh: POP_APP_PATH, POP_APP_MIN_PATH and POP_APP_MIN_FOLDER
+ To further reduce the file size of the bundled libraries JS file, I use [UglifyJS](https://github.com/mishoo/UglifyJS2)
+
+3. Define the environment variables used in minify.sh: POP_APP_PATH, POP_APP_MIN_PATH and POP_APP_MIN_FOLDER
 
  For Mac:
 
@@ -190,7 +200,7 @@ _**Notice:** the procedure below is quite ugly, it works for me but I see how it
     
       and save
 
-3. Create the folder structure needed by minify.sh, under POP_APP_MIN_FOLDER:
+4. Create the folder structure needed by minify.sh, under POP_APP_MIN_FOLDER:
 
  The .sh scripts copy all files to minimize to this folder, from where it minimizes them. The structure of this folder must be created in advance, under folder defined in POP_APP_MIN_FOLDER (eg: /Users/john/Sites/min/PoP/), as follows:
  
