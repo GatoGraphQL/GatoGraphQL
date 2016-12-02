@@ -61,7 +61,7 @@ function ure_aal_pop_notification_get_usernetwork_conditions($user_network_condi
 			
 			$communitymembers = array_merge(
 				$communitymembers,
-				PoPTheme_Wassup_URE_Template_Processor_SectionBlocksUtils::get_community_members($community)
+				URE_CommunityUtils::get_community_members($community)
 			);
 		}
 

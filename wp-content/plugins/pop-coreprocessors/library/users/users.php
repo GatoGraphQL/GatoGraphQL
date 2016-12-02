@@ -39,6 +39,29 @@ function gd_get_user_shortdescription($user_id) {
 }
 
 /**---------------------------------------------------------------------------------------------------------------
+ * user followers and network
+ * ---------------------------------------------------------------------------------------------------------------*/
+
+function get_user_followers($user_id) {
+
+	if ($followers = GD_MetaManager::get_user_meta($user_id, GD_METAKEY_PROFILE_FOLLOWEDBY)) {
+
+		return $followers;
+	}
+
+	return array();
+}
+function get_user_networkusers($user_id) {
+
+	// Allow URE to override with the same-community users
+	return apply_filters(
+		'get_user_networkusers',
+		get_user_followers($user_id),
+		$user_id
+	);
+}
+
+/**---------------------------------------------------------------------------------------------------------------
  * User IDs
  * ---------------------------------------------------------------------------------------------------------------*/
 

@@ -10,6 +10,11 @@ define ('GD_EMAIL_TEMPLATE_EMAIL', 'email.html');
 define ('GD_EMAIL_TEMPLATE_EMAILBODY', 'emailbody.html');
 define ('GD_EMAIL_TEMPLATE_BUTTON', 'button.html');
 
+function gd_sendemail_skip($post_id) {
+
+	// Check if for a given type of post the email must not be sent (eg: Highlights)
+	return apply_filters('create_post:skip_sendemail', false, $post_id);
+}
 function gd_email_notifications_email(){
 	
 	// By default, use the admin_email, but this can be overriden
@@ -162,7 +167,7 @@ add_action('gd_createupdate_post:create', 'gd_sendemail_to_users_from_post_creat
 function gd_sendemail_to_users_from_post_create($post_id) {
 
 	// Check if for a given type of post the email must not be sent (eg: Highlights)
-	if (apply_filters('create_post:skip_sendemail', false, $post_id)) {
+	if (gd_sendemail_skip($post_id)) {
 		return;
 	}
 
@@ -831,6 +836,94 @@ function gd_email_donotsend($send) {
 	// Returning in such a weird fashion, because on file wp-includes/user.php from WP 4.3.1 it validates like this:
 	// if ( ! empty( $send_email_change_email ) ) {
 	return array();
+}
+
+
+/**---------------------------------------------------------------------------------------------------------------
+ * User's network notification emails: post created
+ * ---------------------------------------------------------------------------------------------------------------*/
+// Send an email to all post owners's network when a post is published
+add_action('gd_createupdate_post:update', 'gd_sendemail_to_usersnetwork_from_post_update', 10, 3);
+function gd_sendemail_to_usersnetwork_from_post_update($post_id, $atts, $log) {
+
+	$old_status = $log['previous-status'];
+
+	// Send email if the updated post has been published
+	if (get_post_status($post_id) == 'publish' && $old_status != 'publish') {
+		gd_sendemail_to_usersnetwork_from_post($post_id);
+	}
+}
+add_action('gd_createupdate_post:create', 'gd_sendemail_to_usersnetwork_from_post_create', 10, 1);
+function gd_sendemail_to_usersnetwork_from_post_create($post_id) {
+
+	// Send email if the created post has been published
+	if (get_post_status($post_id) == 'publish') {
+		gd_sendemail_to_usersnetwork_from_post($post_id);
+	}
+}
+function gd_sendemail_to_usersnetwork_from_post($post_id) {
+
+	// Check if for a given type of post the email must not be sent (eg: Highlights)
+	if (gd_sendemail_skip($post_id)) {
+		return;
+	}
+
+	// No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
+	$post_html = gd_sendemail_get_posthtml($post_id);
+	$footer = sprintf(
+		'<p><small>%s</small></p>',
+		__('You are receiving this notification for belonging to this author’s network. Soon you will be able to configure your notification email’s preferences.', 'pop-coreprocessors')
+	);
+	$allnetworkusers = array();
+	$authors = gd_get_postauthors($post_id);
+	foreach ($authors as $author) {
+
+		// Get all the author's network's users (followers + members of same communities)
+		$networkusers = get_user_networkusers($author);
+
+		// Do not send email to the authors of the post, they know already!
+		$networkusers = array_diff($networkusers, $authors);
+
+		// If post has co-authors, and these have the same follower, then do not send the same email to the follower for each co-author
+		if ($networkusers = array_diff($networkusers, $allnetworkusers)) {
+
+			$allnetworkusers = array_merge(
+				$allnetworkusers,
+				$networkusers
+			);
+
+			$emails = $names = array();
+			foreach ($networkusers as $networkuser) {
+
+				$emails[] = get_the_author_meta( 'user_email', $networkuser );
+				$names[] = get_the_author_meta( 'display_name', $networkuser );
+			}
+
+			$author_name = get_the_author_meta('display_name', $author);
+			$author_url = get_author_posts_url($author);
+			$post_name = gd_get_postname($post_id);
+			$post_title = get_the_title($post_id);
+			$subject = sprintf(
+				__('%s has created a new %s: “%s”', 'pop-coreprocessors'), 
+				$author_name,
+				$post_name,
+				$post_title
+			);
+			$content = sprintf( 
+				'<p>%s</p>', 
+				sprintf(
+					__('<strong><a href="%s">%s</a></strong> has created a new %s:', 'pop-coreprocessors'), 
+					$author_url,
+					$author_name,
+					$post_name
+				)
+			);
+			$content .= $post_html;
+			$content .= $footer;
+
+			gd_sendemail_to_users($emails, $names, $subject, $content, true);
+		}			
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

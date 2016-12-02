@@ -11,6 +11,30 @@ function gd_ure_get_communities($user_id) {
 	return GD_MetaManager::get_user_meta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES);
 }
 
+// Hook the user's network function, adding the users belonging to the same communities as the user
+add_filter('get_user_networkusers', 'gd_ure_get_user_networkusers', 10, 2);
+function gd_ure_get_user_networkusers($usernetwork, $user_id) {
+
+	if ($communities = gd_ure_get_communities_status_active($user_id)) {
+
+		// Get all the active members of those communities
+		foreach ($communities as $community) {
+			
+			$community_members = URE_CommunityUtils::get_community_members($community);
+			$usernetwork = array_merge(
+				$usernetwork,
+				$community_members
+			);
+		}
+
+		// Remove duplicates
+		$usernetwork = array_unique($usernetwork);
+	}
+
+	return $usernetwork;
+}
+
+
 // function gd_ure_get_communitymembers($community) {
 
 // 	$key = GD_MetaManager::get_meta_key(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES, GD_META_TYPE_USER);
@@ -149,14 +173,18 @@ function gd_ure_find_community_metavalues($community, $values, $extract_metavalu
 function gd_ure_get_communities_status_active($user_id) {
 
 	// Filter the community roles where the user is accepted as a member
-	$community_status = GD_MetaManager::get_user_meta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
-	$statusactive_communities = array_values(array_filter(array_map('gd_ure_get_communities_status_active_filter', $community_status)));
-	
-	// Get the communities the user says he/she belongs to
-	$userchosen_communities = GD_MetaManager::get_user_meta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES);
+	if ($community_status = GD_MetaManager::get_user_meta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS)) {
+		
+		$statusactive_communities = array_values(array_filter(array_map('gd_ure_get_communities_status_active_filter', $community_status)));
+		
+		// Get the communities the user says he/she belongs to
+		$userchosen_communities = GD_MetaManager::get_user_meta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES);
 
-	// Return the intersection of these 2
-	return array_intersect($statusactive_communities, $userchosen_communities);
+		// Return the intersection of these 2
+		return array_intersect($statusactive_communities, $userchosen_communities);
+	}
+
+	return array();
 }
 
 function gd_ure_get_communities_status_active_filter($value) {

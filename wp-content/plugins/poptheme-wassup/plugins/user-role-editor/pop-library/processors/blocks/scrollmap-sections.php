@@ -207,7 +207,7 @@ class GD_URE_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templ
 				// If the profile is not a community, then return no users at all (Eg: an Organization opting out from having members)
 				if (gd_ure_is_community($author)) {
 					
-					PoPTheme_Wassup_URE_Template_Processor_SectionBlocksUtils::add_dataloadqueryargs_communitymembers($ret, $author);
+					URE_CommunityUtils::add_dataloadqueryargs_communitymembers($ret, $author);
 				}
 				break;
 		}

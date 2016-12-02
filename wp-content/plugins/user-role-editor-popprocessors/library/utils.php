@@ -6,7 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 
-class PoPTheme_Wassup_URE_Template_Processor_SectionBlocksUtils {
+class URE_CommunityUtils {
 
 	public static function add_dataloadqueryargs_communitymembers(&$ret, $community_id) {
 
