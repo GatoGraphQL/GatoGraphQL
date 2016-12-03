@@ -25,9 +25,7 @@ body.sliding .background-screen {
 }
 body.sliding .background-screen,
 body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
-    background-color: #eff8fb;
-}
-body.sliding .background-screen { 
+  background-color: #eff8fb;
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
   background: #eff8fb url(https://assets.agendaurbana.org/wp-content/themes/agendaurbana/img/agendaurbana-bg-1440x900.png) no-repeat fixed center;
   -webkit-background-size: cover;
@@ -36,7 +34,8 @@ body.sliding .background-screen {
   background-size: cover;
 }
 @media (min-width: 1440px) {
-  body.sliding .background-screen { 
+  body.sliding .background-screen,
+  body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
     background-image: url(https://assets.agendaurbana.org/wp-content/themes/agendaurbana/img/agendaurbana-bg-1920x1080.png);
   }
 }
@@ -267,4 +266,41 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 }*/
 #loadingscreen .description {
   margin: 20px 0 40px;
+}
+
+.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-title h3,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-title h3,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-title h3 {
+  margin: 5px 0;
+}
+.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-title a,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-title a,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-title a {
+  color: #15354f;
+}
+.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-inners,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-inners,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-inners {
+  border: 1px solid #dcddde;
+}
+
+.layout.preview.conflictos > .wrapper > .content-body > .authors.belowcontent,
+.layout.preview.conflictos.conflictolinks .authors.abovetitle {
+  display: none;
+}
+.conflictolinks .visible-link,
+.layout.preview.conflictos.conflictolinks > .wrapper > .content-body > .authors.belowcontent {
+  display: block;
+}
+.conflictolinks .visible-link.inline {
+  display: inline-block;
+}
+.layout.preview.conflictos.conflictolinks .content-body.simpleview > .authors.abovetitle {
+  display: block;
+}
+.layout.preview.conflictos > .wrapper > .content-body.simpleview > .abovecontent {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    /* Using -1px for left/right margin, so the featured image has exactly 500px (col-sm-10 in container 588px wide and no padding-left) */
+    margin: 0 -1px 10px;
 }

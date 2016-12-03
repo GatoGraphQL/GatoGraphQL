@@ -15,16 +15,16 @@ function agendaurbana_categoryprocessors_catname($name, $cat_id, $format) {
 		case AGENDAURBANA_CAT_FEATURED:
 
 			$plurals = array(
-				AGENDAURBANA_CAT_ARTICLES => __('Articles', 'agendaurbana'),
-				AGENDAURBANA_CAT_ANNOUNCEMENTS => __('Announcements', 'agendaurbana'), 
-				AGENDAURBANA_CAT_RESOURCES => __('Resources', 'agendaurbana'), 
-				AGENDAURBANA_CAT_FEATURED => __('Featured', 'agendaurbana'), 
+				AGENDAURBANA_CAT_ARTICLES => __('Articles', 'agendaurbana-processors'),
+				AGENDAURBANA_CAT_ANNOUNCEMENTS => __('Announcements', 'agendaurbana-processors'), 
+				AGENDAURBANA_CAT_RESOURCES => __('Resources', 'agendaurbana-processors'), 
+				AGENDAURBANA_CAT_FEATURED => __('Featured', 'agendaurbana-processors'), 
 			);
 			$singulars = array(
-				AGENDAURBANA_CAT_ARTICLES => __('Article', 'agendaurbana'),
-				AGENDAURBANA_CAT_ANNOUNCEMENTS => __('Announcement', 'agendaurbana'), 
-				AGENDAURBANA_CAT_RESOURCES => __('Resource', 'agendaurbana'), 
-				AGENDAURBANA_CAT_FEATURED => __('Featured', 'agendaurbana'), 
+				AGENDAURBANA_CAT_ARTICLES => __('Article', 'agendaurbana-processors'),
+				AGENDAURBANA_CAT_ANNOUNCEMENTS => __('Announcement', 'agendaurbana-processors'), 
+				AGENDAURBANA_CAT_RESOURCES => __('Resource', 'agendaurbana-processors'), 
+				AGENDAURBANA_CAT_FEATURED => __('Featured', 'agendaurbana-processors'), 
 			);
 			return ($format == 'plural' || $format == 'plural-lc') ? $plurals[$cat_id] : $singulars[$cat_id];
 	}

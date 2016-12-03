@@ -5,21 +5,21 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_PROJECT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-project'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-locationpost'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-story'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-discussion'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-blog'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-announcement'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-featured'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PROJECT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-project'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-locationpost'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-story'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-discussion'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-blog'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-announcement'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-featured'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PROJECT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-project'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-locationpost'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-story'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-discussion'));
 define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-blog'));
@@ -31,19 +31,19 @@ class GD_Custom_Template_Processor_CustomPostLayoutSidebarInners extends GD_Temp
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_PROJECT,
+			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_STORY,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_DISCUSSION,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_BLOG,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_ANNOUNCEMENT,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_FEATURED,
-			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PROJECT,
+			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STORY,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_DISCUSSION,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_BLOG,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_ANNOUNCEMENT,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_FEATURED,
-			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PROJECT,
+			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STORY,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_DISCUSSION,
 			GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_BLOG,
@@ -58,12 +58,12 @@ class GD_Custom_Template_Processor_CustomPostLayoutSidebarInners extends GD_Temp
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_PROJECT:
-			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PROJECT:
+			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST:
+			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
 
 				$ret = array_merge(
 					$ret,
-					Custom_FullViewSidebarSettings::get_components(GD_SIDEBARSECTION_PROJECT)
+					Custom_FullViewSidebarSettings::get_components(GD_SIDEBARSECTION_LOCATIONPOST)
 				);
 				break;
 
@@ -113,11 +113,11 @@ class GD_Custom_Template_Processor_CustomPostLayoutSidebarInners extends GD_Temp
 				break;
 			
 
-			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PROJECT:
+			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST:
 
 				$ret = array_merge(
 					$ret,
-					Custom_FullViewSidebarSettings::get_components(GD_COMPACTSIDEBARSECTION_PROJECT)
+					Custom_FullViewSidebarSettings::get_components(GD_COMPACTSIDEBARSECTION_LOCATIONPOST)
 				);
 				break;
 
@@ -169,13 +169,13 @@ class GD_Custom_Template_Processor_CustomPostLayoutSidebarInners extends GD_Temp
 
 		switch ($template_id) {
 			
-			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PROJECT:
+			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STORY:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_DISCUSSION:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_BLOG:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_ANNOUNCEMENT:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_FEATURED:
-			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PROJECT:
+			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STORY:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_DISCUSSION:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_BLOG:
@@ -192,7 +192,7 @@ class GD_Custom_Template_Processor_CustomPostLayoutSidebarInners extends GD_Temp
 
 		switch ($template_id) {
 			
-			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PROJECT:
+			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STORY:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_DISCUSSION:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_BLOG:
@@ -201,7 +201,7 @@ class GD_Custom_Template_Processor_CustomPostLayoutSidebarInners extends GD_Temp
 			
 				return 'col-xsm-4';
 			
-			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PROJECT:
+			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STORY:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_DISCUSSION:
 			case GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_BLOG:

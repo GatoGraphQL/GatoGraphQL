@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PROJECT_CATEGORIES', PoP_ServerUtils::get_template_definition('layout-project-categories'));
+define ('GD_TEMPLATE_LAYOUT_LOCATIONPOST_CATEGORIES', PoP_ServerUtils::get_template_definition('layout-locationpost-categories'));
 define ('GD_TEMPLATE_LAYOUT_DISCUSSION_CATEGORIES', PoP_ServerUtils::get_template_definition('layout-discussion-categories'));
 
 class GD_Custom_Template_Processor_Layouts extends GD_Template_Processor_CategoriesLayoutsBase {
@@ -13,7 +13,7 @@ class GD_Custom_Template_Processor_Layouts extends GD_Template_Processor_Categor
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_LAYOUT_PROJECT_CATEGORIES,
+			GD_TEMPLATE_LAYOUT_LOCATIONPOST_CATEGORIES,
 			GD_TEMPLATE_LAYOUT_DISCUSSION_CATEGORIES
 		);
 	}
@@ -22,9 +22,9 @@ class GD_Custom_Template_Processor_Layouts extends GD_Template_Processor_Categor
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUT_PROJECT_CATEGORIES:
+			case GD_TEMPLATE_LAYOUT_LOCATIONPOST_CATEGORIES:
 
-				return 'projectcategories-strings';
+				return 'locationpostcategories-strings';
 
 			case GD_TEMPLATE_LAYOUT_DISCUSSION_CATEGORIES:
 

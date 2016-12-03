@@ -28,7 +28,7 @@ define ('GD_CONSTANT_PLACEHOLDER_DESCRIPTIONADDYOUR', sprintf($description, __('
 // 		'pages' => array(
 // 			// POPTHEME_WASSUP_PAGE_WEBPOSTLINKS => POPTHEME_WASSUP_PAGE_ADDWEBPOSTLINK,
 // 			POPTHEME_WASSUP_EM_PAGE_EVENTS => POPTHEME_WASSUP_EM_PAGE_ADDEVENT,
-// 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECT,
+// 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOST,
 // 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_STORIES => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDSTORY,
 // 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ANNOUNCEMENTS => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDANNOUNCEMENT,
 // 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_DISCUSSIONS => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDDISCUSSION,
@@ -39,7 +39,7 @@ define ('GD_CONSTANT_PLACEHOLDER_DESCRIPTIONADDYOUR', sprintf($description, __('
 // 		'descriptions' => array(
 // 			// POPTHEME_WASSUP_PAGE_WEBPOSTLINKS => __('A compilation of links about environmental issues from all over the internet.', 'mesym'),
 // 			POPTHEME_WASSUP_EM_PAGE_EVENTS => __('What\'s going on all over Malaysia.', 'mesym'),
-// 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS => __('Volunteer for projects from many NGOs, or even start your own!', 'mesym'),
+// 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS => __('Volunteer for projects from many NGOs, or even start your own!', 'mesym'),
 // 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_STORIES => __('After volunteering, post your photo blog, share your experience with the world.', 'mesym'),
 // 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ANNOUNCEMENTS => __('Have vacancies? Need green-minded people? Post it here.', 'mesym'),
 // 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_DISCUSSIONS => __('Anything and everything: what do you want to express concerning the environment situation in Malaysia?', 'mesym'),
@@ -231,7 +231,7 @@ function gd_header_page_description_impl($description, $page_id) {
 			$description = sprintf(GD_CONSTANT_PLACEHOLDER_DESCRIPTIONVIEWALL, __('Posts', 'mesym'));
 			break;
 
-		case POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS:
+		case POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS:
 
 			$description = sprintf(GD_CONSTANT_PLACEHOLDER_DESCRIPTIONVIEWALL, __('Environmental Projects', 'mesym'));
 			break;

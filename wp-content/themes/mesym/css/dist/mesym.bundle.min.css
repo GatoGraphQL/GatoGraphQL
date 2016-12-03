@@ -62,14 +62,18 @@ flash{0%{background-color:none}50%{background-color:#6acada}100%{background-colo
 flash{0%{background-color:none}50%{background-color:#6acada}100%{background-color:none}}@-ms-keyframes
 flash{0%{background-color:none}50%{background-color:#6acada}100%{background-color:none}}a.logo img:hover{background-color:#6acada}.nav .active>a:hover{color:#6acada}#ps-main .fullview > .wrapper h1.title>a{color:#454c0f}#ps-sideinfo .blocksection-controls.top
 .btn{background-color:#eff4c1}#notifications-count,
-#ps-top .scroll-notifications .preview.notification-layout{background-color:#6acada}#ps-top-menu-addcontent li>a:hover{background-color:#6acada}.blockgroup-hometop .block-projects-scrollmap > .blocksection-title h3,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-title h3,
-.blockgroup-tag .block-projects-scrollmap > .blocksection-title
+#ps-top .scroll-notifications .preview.notification-layout{background-color:#6acada}#ps-top-menu-addcontent li>a:hover{background-color:#6acada}.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-title h3,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-title h3,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-title
 h3{margin:5px
-0}.blockgroup-hometop .block-projects-scrollmap > .blocksection-title a,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-title a,
-.blockgroup-tag .block-projects-scrollmap > .blocksection-title
-a{color:#454c0f}.blockgroup-hometop .block-projects-scrollmap > .blocksection-inners,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-inners,
-.blockgroup-tag .block-projects-scrollmap>.blocksection-inners{border:1px
-solid #dcddde}.block-events-carousel .pop-elem .col-xsm-8{padding-left:0}
+0}.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-title a,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-title a,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-title
+a{color:#454c0f}.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-inners,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-inners,
+.blockgroup-tag .block-locationposts-scrollmap>.blocksection-inners{border:1px
+solid #dcddde}.block-events-carousel .pop-elem .col-xsm-8{padding-left:0}.layout.preview.projects > .wrapper > .content-body > .authors.belowcontent,
+.layout.preview.projects.projectlinks
+.authors.abovetitle{display:none}.projectlinks .visible-link,.layout.preview.projects.projectlinks>.wrapper>.content-body>.authors.belowcontent{display:block}.projectlinks .visible-link.inline{display:inline-block}.layout.preview.projects.projectlinks .content-body.simpleview>.authors.abovetitle{display:block}.layout.preview.projects>.wrapper>.content-body.simpleview>.abovecontent{background-color:#d9edf7;border:1px
+solid #bce8f1;margin:0
+-1px 10px}

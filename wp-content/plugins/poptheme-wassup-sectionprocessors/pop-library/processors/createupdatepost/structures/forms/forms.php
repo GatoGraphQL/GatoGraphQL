@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_PROJECT_UPDATE', PoP_ServerUtils::get_template_definition('form-project-update'));
-define ('GD_TEMPLATE_FORM_PROJECTLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-projectlink-update'));
-define ('GD_TEMPLATE_FORM_PROJECT_CREATE', PoP_ServerUtils::get_template_definition('form-project-create'));
-define ('GD_TEMPLATE_FORM_PROJECTLINK_CREATE', PoP_ServerUtils::get_template_definition('form-projectlink-create'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('form-locationpost-update'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-locationpostlink-update'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('form-locationpost-create'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('form-locationpostlink-create'));
 define ('GD_TEMPLATE_FORM_STORY_UPDATE', PoP_ServerUtils::get_template_definition('form-story-update'));
 define ('GD_TEMPLATE_FORM_STORYLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-storylink-update'));
 define ('GD_TEMPLATE_FORM_STORY_CREATE', PoP_ServerUtils::get_template_definition('form-story-create'));
@@ -29,10 +29,10 @@ class GD_Custom_Template_Processor_CreateUpdatePostForms extends GD_Template_Pro
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_FORM_PROJECT_UPDATE,
-			GD_TEMPLATE_FORM_PROJECTLINK_UPDATE,
-			GD_TEMPLATE_FORM_PROJECT_CREATE,
-			GD_TEMPLATE_FORM_PROJECTLINK_CREATE,
+			GD_TEMPLATE_FORM_LOCATIONPOST_UPDATE,
+			GD_TEMPLATE_FORM_LOCATIONPOSTLINK_UPDATE,
+			GD_TEMPLATE_FORM_LOCATIONPOST_CREATE,
+			GD_TEMPLATE_FORM_LOCATIONPOSTLINK_CREATE,
 			GD_TEMPLATE_FORM_STORY_UPDATE,
 			GD_TEMPLATE_FORM_STORYLINK_UPDATE,
 			GD_TEMPLATE_FORM_STORY_CREATE,
@@ -53,10 +53,10 @@ class GD_Custom_Template_Processor_CreateUpdatePostForms extends GD_Template_Pro
 	function get_inner_template($template_id) {
 
 		$inners = array(
-			GD_TEMPLATE_FORM_PROJECT_UPDATE => GD_TEMPLATE_FORMINNER_PROJECT_UPDATE,
-			GD_TEMPLATE_FORM_PROJECTLINK_UPDATE => GD_TEMPLATE_FORMINNER_PROJECTLINK_UPDATE,
-			GD_TEMPLATE_FORM_PROJECT_CREATE => GD_TEMPLATE_FORMINNER_PROJECT_CREATE,
-			GD_TEMPLATE_FORM_PROJECTLINK_CREATE => GD_TEMPLATE_FORMINNER_PROJECTLINK_CREATE,
+			GD_TEMPLATE_FORM_LOCATIONPOST_UPDATE => GD_TEMPLATE_FORMINNER_LOCATIONPOST_UPDATE,
+			GD_TEMPLATE_FORM_LOCATIONPOSTLINK_UPDATE => GD_TEMPLATE_FORMINNER_LOCATIONPOSTLINK_UPDATE,
+			GD_TEMPLATE_FORM_LOCATIONPOST_CREATE => GD_TEMPLATE_FORMINNER_LOCATIONPOST_CREATE,
+			GD_TEMPLATE_FORM_LOCATIONPOSTLINK_CREATE => GD_TEMPLATE_FORMINNER_LOCATIONPOSTLINK_CREATE,
 			GD_TEMPLATE_FORM_STORY_UPDATE => GD_TEMPLATE_FORMINNER_STORY_UPDATE,
 			GD_TEMPLATE_FORM_STORYLINK_UPDATE => GD_TEMPLATE_FORMINNER_STORYLINK_UPDATE,
 			GD_TEMPLATE_FORM_STORY_CREATE => GD_TEMPLATE_FORMINNER_STORY_CREATE,
@@ -85,10 +85,10 @@ class GD_Custom_Template_Processor_CreateUpdatePostForms extends GD_Template_Pro
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_FORM_PROJECT_UPDATE:
-			case GD_TEMPLATE_FORM_PROJECTLINK_UPDATE:
-			case GD_TEMPLATE_FORM_PROJECT_CREATE:
-			case GD_TEMPLATE_FORM_PROJECTLINK_CREATE:
+			case GD_TEMPLATE_FORM_LOCATIONPOST_UPDATE:
+			case GD_TEMPLATE_FORM_LOCATIONPOSTLINK_UPDATE:
+			case GD_TEMPLATE_FORM_LOCATIONPOST_CREATE:
+			case GD_TEMPLATE_FORM_LOCATIONPOSTLINK_CREATE:
 			case GD_TEMPLATE_FORM_STORY_UPDATE:
 			case GD_TEMPLATE_FORM_STORYLINK_UPDATE:
 			case GD_TEMPLATE_FORM_STORY_CREATE:

@@ -16,7 +16,7 @@ function wassupsp_main_linkcategories($cats) {
 		$cats,
 		array_filter(
 			array(
-				POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTLINKS,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTLINKS,
 				
 				POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORIES,
 				POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORYLINKS,
@@ -36,12 +36,24 @@ function gd_custom_multilayout_labels($labels) {
 	$label = '<span class="label label-%s">%s</span>';
 
 	// If the values for the constants were kept in false (eg: Projects not needed for TPP Debate) then don't add them
-	if (POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS) {
+	// if (POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS) {
 
-		$labels['post-'.POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS] = sprintf(
+	// 	$labels['post-'.POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS] = sprintf(
+	// 		$label,
+	// 		'locationposts',
+	// 		gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS, true).__('Location post', 'poptheme-wassup-sectionprocessors')
+	// 	);
+	// }
+	$cat_pages = array(
+		POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS,
+	);
+	foreach ($cat_pages as $cat => $page) {
+
+		$category = get_category($cat);
+		$labels['post-'.$cat] = sprintf(
 			$label,
-			'projects',
-			gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS, true).__('Project', 'poptheme-wassup-sectionprocessors')
+			$category->slug,
+			gd_navigation_menu_item($page, true).gd_get_categoryname($cat)
 		);
 	}
 	if (POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORIES) {
@@ -88,7 +100,7 @@ function gd_postname_impl($name, $post_id) {
 		switch ($cat_id) {
 
 			case POPTHEME_WASSUP_VOTINGPROCESSORS_CAT_OPINIONATEDVOTES:
-			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS:
+			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS:
 			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORIES:
 			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_ANNOUNCEMENTS:
 			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_DISCUSSIONS:
@@ -105,8 +117,9 @@ function sectionprocessors_catname($name, $cat_id, $format) {
 
 	switch ($cat_id) {
 
-		case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS:
-			return ($format == 'plural' || $format == 'plural-lc') ? __('Projects', 'poptheme-wassup-sectionprocessors') : __('Project', 'poptheme-wassup-sectionprocessors');
+		// Comment Leo 03/12/2016: this must be set by the theme, since changing from 'Project' to the abstract 'Location post'
+		// case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS:
+		// 	return ($format == 'plural' || $format == 'plural-lc') ? __('Location posts', 'poptheme-wassup-sectionprocessors') : __('Location post', 'poptheme-wassup-sectionprocessors');
 
 		case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORIES:
 			return ($format == 'plural' || $format == 'plural-lc') ? __('Stories', 'poptheme-wassup-sectionprocessors') : __('Story', 'poptheme-wassup-sectionprocessors');
@@ -134,8 +147,8 @@ function gd_posticon_impl($icon, $post_id) {
 
 		switch (gd_get_the_main_category($post_id)) {
 
-			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS:
-				return gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS, false);
+			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS:
+				return gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS, false);
 
 			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORIES:
 				return gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_STORIES, false);
@@ -165,8 +178,8 @@ function gd_post_parentpageid_impl($pageid, $post_id) {
 
 		switch (gd_get_the_main_category($post_id)) {
 
-			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS:
-				return POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS;
+			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS:
+				return POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS;
 
 			case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORIES:
 				return POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_STORIES;
@@ -194,13 +207,13 @@ function gd_createupdateutils_cat_edit_url($url, $cat, $post_id) {
 	$post = get_post($post_id);
 	switch ($cat) {
 
-		case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTS:
+		case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS:
 			
-			if (POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTLINKS && has_category(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTLINKS, $post)) {
+			if (POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTLINKS && has_category(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTLINKS, $post)) {
 
-				return get_permalink(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITPROJECTLINK);
+				return get_permalink(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITLOCATIONPOSTLINK);
 			}
-			return get_permalink(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITPROJECT);
+			return get_permalink(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITLOCATIONPOST);
 
 		case POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_STORIES:
 			

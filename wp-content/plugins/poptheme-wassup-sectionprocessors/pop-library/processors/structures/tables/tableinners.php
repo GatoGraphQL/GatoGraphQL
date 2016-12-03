@@ -7,7 +7,7 @@
 
 define ('GD_TEMPLATE_TABLEINNER_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('tableinner-myannouncements'));
 define ('GD_TEMPLATE_TABLEINNER_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('tableinner-mydiscussions'));
-define ('GD_TEMPLATE_TABLEINNER_MYPROJECTS', PoP_ServerUtils::get_template_definition('tableinner-myprojects'));
+define ('GD_TEMPLATE_TABLEINNER_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('tableinner-mylocationposts'));
 define ('GD_TEMPLATE_TABLEINNER_MYSTORIES', PoP_ServerUtils::get_template_definition('tableinner-mystories'));
 
 class GD_Custom_Template_Processor_TableInners extends GD_Template_Processor_TableInnersBase {
@@ -17,7 +17,7 @@ class GD_Custom_Template_Processor_TableInners extends GD_Template_Processor_Tab
 		return array(
 			GD_TEMPLATE_TABLEINNER_MYANNOUNCEMENTS,
 			GD_TEMPLATE_TABLEINNER_MYDISCUSSIONS,
-			GD_TEMPLATE_TABLEINNER_MYPROJECTS,
+			GD_TEMPLATE_TABLEINNER_MYLOCATIONPOSTS,
 			GD_TEMPLATE_TABLEINNER_MYSTORIES,
 		);
 	}
@@ -43,9 +43,9 @@ class GD_Custom_Template_Processor_TableInners extends GD_Template_Processor_Tab
 				$ret[] = GD_TEMPLATE_LAYOUTPOST_STATUS;
 				break;
 
-			case GD_TEMPLATE_TABLEINNER_MYPROJECTS:
+			case GD_TEMPLATE_TABLEINNER_MYLOCATIONPOSTS:
 
-				$ret[] = GD_TEMPLATE_LAYOUT_PREVIEWPOST_PROJECT_EDIT;
+				$ret[] = GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT;
 				$ret[] = GD_TEMPLATE_LAYOUTPOST_DATE;
 				$ret[] = GD_TEMPLATE_LAYOUTPOST_STATUS;
 				break;

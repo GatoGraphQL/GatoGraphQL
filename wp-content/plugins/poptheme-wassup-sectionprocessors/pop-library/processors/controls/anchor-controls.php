@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addproject'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addprojectlink'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addlocationpost'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addlocationpostlink'));
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addstory'));
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addstorylink'));
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addannouncement'));
@@ -19,8 +19,8 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT,
-			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK,
+			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST,
+			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT,
@@ -34,28 +34,32 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
 		
-				return __('Add Project', 'poptheme-wassup');
+				// return __('Add Location post', 'poptheme-wassup-sectionprocessors');
+				return sprintf(
+					__('Add %s', 'poptheme-wassup-sectionprocessors'), 
+					gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS)
+				);
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY:
 		
-				return __('Add Story', 'poptheme-wassup');
+				return __('Add Story', 'poptheme-wassup-sectionprocessors');
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT:
 		
-				return __('Add Announcement', 'poptheme-wassup');
+				return __('Add Announcement', 'poptheme-wassup-sectionprocessors');
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSION:
 		
-				return __('Add Article', 'poptheme-wassup');
+				return __('Add Article', 'poptheme-wassup-sectionprocessors');
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSIONLINK:
 		
-				return __('as Link', 'poptheme-wassup');
+				return __('as Link', 'poptheme-wassup-sectionprocessors');
 		}
 
 		return parent::get_label($template_id, $atts);
@@ -64,14 +68,14 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSION:
 
 				return 'fa-plus';
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSIONLINK:
@@ -85,8 +89,8 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT:
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT:
@@ -95,8 +99,8 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSIONLINK:
 
 				$pages = array(
-					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECT,
-					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECTLINK,
+					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOST,
+					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOSTLINK,
 					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDSTORY,
 					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDSTORYLINK,
 					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDANNOUNCEMENT,
@@ -115,8 +119,8 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT:
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT:
@@ -137,7 +141,7 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSION:
@@ -145,7 +149,7 @@ class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 				$this->append_att($template_id, $atts, 'class', 'btn btn-primary');
 				break;
 
-			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK:
+			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENTLINK:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSIONLINK:

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_PROJECT_CREATE', PoP_ServerUtils::get_template_definition('action-project-create'));
-define ('GD_TEMPLATE_ACTION_PROJECTLINK_CREATE', PoP_ServerUtils::get_template_definition('action-projectlink-create'));
-define ('GD_TEMPLATE_ACTION_PROJECT_UPDATE', PoP_ServerUtils::get_template_definition('action-project-update'));
-define ('GD_TEMPLATE_ACTION_PROJECTLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-projectlink-update'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('action-locationpost-create'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('action-locationpostlink-create'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('action-locationpost-update'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-locationpostlink-update'));
 define ('GD_TEMPLATE_ACTION_STORY_CREATE', PoP_ServerUtils::get_template_definition('action-story-create'));
 define ('GD_TEMPLATE_ACTION_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('action-storylink-create'));
 define ('GD_TEMPLATE_ACTION_STORY_UPDATE', PoP_ServerUtils::get_template_definition('action-story-update'));
@@ -29,10 +29,10 @@ class GD_Custom_Template_Processor_CreateUpdatePostActions extends GD_Template_P
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_ACTION_PROJECT_CREATE,
-			GD_TEMPLATE_ACTION_PROJECTLINK_CREATE,
-			GD_TEMPLATE_ACTION_PROJECT_UPDATE,
-			GD_TEMPLATE_ACTION_PROJECTLINK_UPDATE,
+			GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE,
+			GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE,
+			GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE,
+			GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE,
 			GD_TEMPLATE_ACTION_STORY_CREATE,
 			GD_TEMPLATE_ACTION_STORYLINK_CREATE,
 			GD_TEMPLATE_ACTION_STORY_UPDATE,
@@ -54,15 +54,15 @@ class GD_Custom_Template_Processor_CreateUpdatePostActions extends GD_Template_P
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_ACTION_PROJECT_CREATE:
-			case GD_TEMPLATE_ACTION_PROJECT_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE:
 
-				return GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_PROJECT;
+				return GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_LOCATIONPOST;
 
-			case GD_TEMPLATE_ACTION_PROJECTLINK_CREATE:
-			case GD_TEMPLATE_ACTION_PROJECTLINK_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE:
 
-				return GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_PROJECTLINK;
+				return GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_LOCATIONPOSTLINK;
 
 			case GD_TEMPLATE_ACTION_STORY_CREATE:
 			case GD_TEMPLATE_ACTION_STORY_UPDATE:
@@ -107,8 +107,8 @@ class GD_Custom_Template_Processor_CreateUpdatePostActions extends GD_Template_P
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_ACTION_PROJECT_CREATE:
-			case GD_TEMPLATE_ACTION_PROJECTLINK_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE:
 			case GD_TEMPLATE_ACTION_STORY_CREATE:
 			case GD_TEMPLATE_ACTION_STORYLINK_CREATE:
 			case GD_TEMPLATE_ACTION_ANNOUNCEMENT_CREATE:
@@ -119,8 +119,8 @@ class GD_Custom_Template_Processor_CreateUpdatePostActions extends GD_Template_P
 
 				return GD_DATALOAD_IOHANDLER_ADDPOST;
 					
-			case GD_TEMPLATE_ACTION_PROJECT_UPDATE:
-			case GD_TEMPLATE_ACTION_PROJECTLINK_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE:
 			case GD_TEMPLATE_ACTION_STORY_UPDATE:
 			case GD_TEMPLATE_ACTION_STORYLINK_UPDATE:
 			case GD_TEMPLATE_ACTION_ANNOUNCEMENT_UPDATE:
@@ -140,10 +140,10 @@ class GD_Custom_Template_Processor_CreateUpdatePostActions extends GD_Template_P
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_ACTION_PROJECT_CREATE:
-			case GD_TEMPLATE_ACTION_PROJECTLINK_CREATE:
-			case GD_TEMPLATE_ACTION_PROJECT_UPDATE:
-			case GD_TEMPLATE_ACTION_PROJECTLINK_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE:
 			case GD_TEMPLATE_ACTION_STORY_CREATE:
 			case GD_TEMPLATE_ACTION_STORYLINK_CREATE:
 			case GD_TEMPLATE_ACTION_STORY_UPDATE:
@@ -170,21 +170,21 @@ class GD_Custom_Template_Processor_CreateUpdatePostActions extends GD_Template_P
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_ACTION_PROJECT_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE:
 			
-				return GD_TEMPLATE_BLOCK_PROJECT_CREATE;
+				return GD_TEMPLATE_BLOCK_LOCATIONPOST_CREATE;
 
-			case GD_TEMPLATE_ACTION_PROJECTLINK_CREATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE:
 			
-				return GD_TEMPLATE_BLOCK_PROJECTLINK_CREATE;
+				return GD_TEMPLATE_BLOCK_LOCATIONPOSTLINK_CREATE;
 			
-			case GD_TEMPLATE_ACTION_PROJECT_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE:
 			
-				return GD_TEMPLATE_BLOCK_PROJECT_UPDATE;
+				return GD_TEMPLATE_BLOCK_LOCATIONPOST_UPDATE;
 
-			case GD_TEMPLATE_ACTION_PROJECTLINK_UPDATE:
+			case GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE:
 			
-				return GD_TEMPLATE_BLOCK_PROJECTLINK_UPDATE;
+				return GD_TEMPLATE_BLOCK_LOCATIONPOSTLINK_UPDATE;
 			
 			case GD_TEMPLATE_ACTION_STORY_CREATE:
 			

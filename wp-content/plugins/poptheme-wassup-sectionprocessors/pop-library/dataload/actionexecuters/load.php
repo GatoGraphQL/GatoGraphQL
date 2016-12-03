@@ -1,7 +1,7 @@
 <?php
 
-require_once 'project-createupdate.php';
-require_once 'projectlink-createupdate.php';
+require_once 'locationpost-createupdate.php';
+require_once 'locationpostlink-createupdate.php';
 require_once 'announcement-createupdate.php';
 require_once 'announcementlink-createupdate.php';
 require_once 'discussion-createupdate.php';

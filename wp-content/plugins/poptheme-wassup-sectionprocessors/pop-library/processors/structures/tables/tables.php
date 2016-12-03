@@ -7,7 +7,7 @@
 
 define ('GD_TEMPLATE_TABLE_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('table-myannouncements'));
 define ('GD_TEMPLATE_TABLE_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('table-mydiscussions'));
-define ('GD_TEMPLATE_TABLE_MYPROJECTS', PoP_ServerUtils::get_template_definition('table-myprojects'));
+define ('GD_TEMPLATE_TABLE_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('table-mylocationposts'));
 define ('GD_TEMPLATE_TABLE_MYSTORIES', PoP_ServerUtils::get_template_definition('table-mystories'));
 
 class GD_Custom_Template_Processor_Tables extends GD_Template_Processor_TablesBase {
@@ -17,7 +17,7 @@ class GD_Custom_Template_Processor_Tables extends GD_Template_Processor_TablesBa
 		return array(
 			GD_TEMPLATE_TABLE_MYANNOUNCEMENTS,
 			GD_TEMPLATE_TABLE_MYDISCUSSIONS,
-			GD_TEMPLATE_TABLE_MYPROJECTS,
+			GD_TEMPLATE_TABLE_MYLOCATIONPOSTS,
 			GD_TEMPLATE_TABLE_MYSTORIES,
 		);
 	}
@@ -28,13 +28,13 @@ class GD_Custom_Template_Processor_Tables extends GD_Template_Processor_TablesBa
 
 			case GD_TEMPLATE_TABLE_MYANNOUNCEMENTS:
 			case GD_TEMPLATE_TABLE_MYDISCUSSIONS:
-			case GD_TEMPLATE_TABLE_MYPROJECTS:
+			case GD_TEMPLATE_TABLE_MYLOCATIONPOSTS:
 			case GD_TEMPLATE_TABLE_MYSTORIES:
 
 				$inners = array(
 					GD_TEMPLATE_TABLE_MYANNOUNCEMENTS => GD_TEMPLATE_TABLEINNER_MYANNOUNCEMENTS,
 					GD_TEMPLATE_TABLE_MYDISCUSSIONS => GD_TEMPLATE_TABLEINNER_MYDISCUSSIONS,
-					GD_TEMPLATE_TABLE_MYPROJECTS => GD_TEMPLATE_TABLEINNER_MYPROJECTS,
+					GD_TEMPLATE_TABLE_MYLOCATIONPOSTS => GD_TEMPLATE_TABLEINNER_MYLOCATIONPOSTS,
 					GD_TEMPLATE_TABLE_MYSTORIES => GD_TEMPLATE_TABLEINNER_MYSTORIES,
 				);
 
@@ -64,9 +64,9 @@ class GD_Custom_Template_Processor_Tables extends GD_Template_Processor_TablesBa
 				$ret[] = __('Status', 'poptheme-wassup-sectionprocessors');
 				break;
 
-			case GD_TEMPLATE_TABLE_MYPROJECTS:
+			case GD_TEMPLATE_TABLE_MYLOCATIONPOSTS:
 
-				$ret[] = __('Project', 'poptheme-wassup-sectionprocessors');
+				$ret[] = gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS); //__('Location post', 'poptheme-wassup-sectionprocessors');
 				$ret[] = __('Date', 'poptheme-wassup-sectionprocessors');
 				$ret[] = __('Status', 'poptheme-wassup-sectionprocessors');
 				break;

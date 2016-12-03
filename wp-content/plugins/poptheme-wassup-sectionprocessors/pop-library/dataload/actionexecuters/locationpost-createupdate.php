@@ -5,22 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDPROJECT', 'tabs-page-addproject');
+define ('GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_LOCATIONPOST', 'createupdate-locationpost');
 
-class GD_DataLoad_TabIOHandler_AddProjectPage extends GD_DataLoad_TabIOHandler_Page {
+class GD_DataLoad_ActionExecuter_CreateUpdate_LocationPost extends GD_DataLoad_ActionExecuter_CreateUpdate_Post {
 
     function get_name() {
-
-		return GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDPROJECT;
+    
+		return GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_LOCATIONPOST;
 	}
 
-	function get_title() {
+	function get_createupdate() {
 
-		return get_the_title(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECT);
+		return new GD_CreateUpdate_LocationPost();
 	}
 }
 	
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_TabIOHandler_AddProjectPage();
+new GD_DataLoad_ActionExecuter_CreateUpdate_LocationPost();

@@ -48,8 +48,8 @@ class PoPTheme_Wassup_SectionProcessors_SubmenuHooks {
 		}
 
 		// If the values for the constants were kept in false (eg: Projects not needed for TPP Debate) then don't add them
-		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS) {
-			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORPROJECTS] = array();
+		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS) {
+			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORLOCATIONPOSTS] = array();
 		}
 		
 		return $blockunits;
@@ -78,8 +78,8 @@ class PoPTheme_Wassup_SectionProcessors_SubmenuHooks {
 		}
 
 		// If the values for the constants were kept in false (eg: Projects not needed for TPP Debate) then don't add them
-		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS) {
-			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGPROJECTS] = array();
+		if (POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS) {
+			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGLOCATIONPOSTS] = array();
 		}
 		
 		return $blockunits;

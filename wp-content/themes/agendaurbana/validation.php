@@ -1,6 +1,7 @@
 <?php
 
 define('POPTHEME_WASSUP_SECTIONPROCESSORS_MIN_VERSION', 0.1);
+define('AGENDAURBANA_PROCESSORS_MIN_VERSION', 0.1);
 
 class AgendaUrbana_Validation {
 
@@ -24,6 +25,26 @@ class AgendaUrbana_Validation {
 			
 			add_action('admin_notices',array($this,'version_warning'));
 			add_action('network_admin_notices',array($this,'version_warning'));
+		}
+
+		// Validate that SDG-SSE Processors is installed
+		if(!defined('AGENDAURBANA_PROCESSORS_VERSION')){
+
+			add_action('admin_notices',array($this,'processors_install_warning'));
+			add_action('network_admin_notices',array($this,'processors_install_warning'));
+			// Comment Leo: allow the theme to initialize, so that we can access the back-end in case of error, eg: to enable the needed plug-ins
+			// $success = false;
+		}
+		elseif(!defined('AGENDAURBANA_PROCESSORS_INITIALIZED')){
+
+			// The admin notice will come from another failing plug-in, no need to repeat it here
+			// Comment Leo: allow the theme to initialize, so that we can access the back-end in case of error, eg: to enable the needed plug-ins
+			// $success = false;
+		}
+		elseif(AGENDAURBANA_PROCESSORS_VERSION < AGENDAURBANA_PROCESSORS_MIN_VERSION){
+			
+			add_action('admin_notices',array($this,'processors_version_warning'));
+			add_action('network_admin_notices',array($this,'processors_version_warning'));
 		}
 
 		if(!defined('AGENDAURBANA_ENVIRONMENT_VERSION')){
@@ -53,5 +74,13 @@ class AgendaUrbana_Validation {
 	function plugins_env_warning(){
 		
 		$this->admin_notice(__('Error: <b>Agenda Urbana Environment Constants</b> is not installed/activated. Without it, <b>Agenda Urbana</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'));
+	}
+	function processors_install_warning(){
+		
+		$this->admin_notice(__('Error: <b>Agenda Urbana Processors</b> is not installed/activated. Without it, <b>Agenda Urbana</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'));
+	}
+	function processors_version_warning(){
+		
+		$this->admin_notice(__('Warning: please make sure to have the <a href="http://wordpress.org/extend/plugins/pop/">latest version</a> of <b>Agenda Urbana Processors</b> installed, or otherwise <b>Agenda Urbana</b> might not function properly.','ps-pop'));
 	}
 }

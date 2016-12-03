@@ -1,20 +1,26 @@
 <?php
-
 /**---------------------------------------------------------------------------------------------------------------
  *
- * Configuration
+ * Data Load Library
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDLOCATIONPOST', 'tabs-page-addlocationpost');
 
-/**---------------------------------------------------------------------------------------------------------------
- * Override with custom blocks
- * ---------------------------------------------------------------------------------------------------------------*/
-add_filter('GD_Template_Processor_CustomBlockGroups:blocks:whoweare', 'agendaurbana_custom_blocks_whoweare', 100);
-function agendaurbana_custom_blocks_whoweare($blocks) {
+class GD_DataLoad_TabIOHandler_AddLocationPostPage extends GD_DataLoad_TabIOHandler_Page {
 
-	return array(
-		GD_TEMPLATE_BLOCK_WHOWEARE_CORE_SCROLL,
-		GD_TEMPLATE_BLOCK_WHOWEARE_VOLUNTEERS_SCROLL,
-	);
+    function get_name() {
+
+		return GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDLOCATIONPOST;
+	}
+
+	function get_title() {
+
+		return get_the_title(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOST);
+	}
 }
+	
+/**---------------------------------------------------------------------------------------------------------------
+ * Initialize
+ * ---------------------------------------------------------------------------------------------------------------*/
+new GD_DataLoad_TabIOHandler_AddLocationPostPage();

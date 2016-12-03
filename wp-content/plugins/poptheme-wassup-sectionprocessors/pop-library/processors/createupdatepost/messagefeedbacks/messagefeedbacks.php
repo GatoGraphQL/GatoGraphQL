@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_PROJECT_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-project-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_PROJECT_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-project-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-locationpost-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-locationpost-update'));
 define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORY_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-story-create'));
 define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORY_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-story-update'));
 define ('GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-announcement-create'));
@@ -21,8 +21,8 @@ class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbacks extends 
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_MESSAGEFEEDBACK_PROJECT_CREATE,
-			GD_TEMPLATE_MESSAGEFEEDBACK_PROJECT_UPDATE,
+			GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_CREATE,
+			GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE,
 			GD_TEMPLATE_MESSAGEFEEDBACK_STORY_CREATE,
 			GD_TEMPLATE_MESSAGEFEEDBACK_STORY_UPDATE,
 			GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE,
@@ -37,8 +37,8 @@ class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbacks extends 
 	function get_inner_template($template_id) {
 
 		$inners = array(
-			GD_TEMPLATE_MESSAGEFEEDBACK_PROJECT_CREATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_PROJECT_CREATE,
-			GD_TEMPLATE_MESSAGEFEEDBACK_PROJECT_UPDATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_PROJECT_UPDATE,
+			GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_CREATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOCATIONPOST_CREATE,
+			GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOCATIONPOST_UPDATE,
 			GD_TEMPLATE_MESSAGEFEEDBACK_STORY_CREATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_STORY_CREATE,
 			GD_TEMPLATE_MESSAGEFEEDBACK_STORY_UPDATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_STORY_UPDATE,
 			GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_ANNOUNCEMENT_CREATE,

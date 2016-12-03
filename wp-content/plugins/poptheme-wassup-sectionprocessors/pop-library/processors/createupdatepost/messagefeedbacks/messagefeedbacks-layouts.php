@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-project-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-project-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-locationpost-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-locationpost-update'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-story-create'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-story-update'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-announcement-create'));
@@ -21,8 +21,8 @@ class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbackLayouts ex
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_CREATE,
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_UPDATE,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_CREATE,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_CREATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_UPDATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE,
@@ -39,8 +39,8 @@ class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbackLayouts ex
 		$ret = parent::get_messages($template_id, $atts);
 
 		$names = array(
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_CREATE => __('Project', 'poptheme-wassup-sectionprocessors'),
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_UPDATE => __('Project', 'poptheme-wassup-sectionprocessors'),
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_CREATE => gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS), //__('Location post', 'poptheme-wassup-sectionprocessors'),
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE => gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS), //__('Location post', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_CREATE => __('Story', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_UPDATE => __('Story', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE => __('Announcement', 'poptheme-wassup-sectionprocessors'),
@@ -51,14 +51,14 @@ class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbackLayouts ex
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED_UPDATE => __('Featured', 'poptheme-wassup-sectionprocessors'),
 		);
 		$creates = array(
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_CREATE,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_CREATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_CREATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSION_CREATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED_CREATE,
 		);
 		$updates = array(
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECT_UPDATE,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_UPDATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_UPDATE,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSION_UPDATE,

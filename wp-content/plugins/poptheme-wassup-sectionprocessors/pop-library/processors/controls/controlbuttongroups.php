@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDPROJECT', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addproject'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDLOCATIONPOST', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addlocationpost'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDSTORY', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addstory'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDANNOUNCEMENT', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addannouncement'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDDISCUSSION', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-adddiscussion'));
@@ -15,7 +15,7 @@ class SectionProcessors_Template_Processor_ControlButtonGroups extends GD_Templa
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_CONTROLBUTTONGROUP_ADDPROJECT,
+			GD_TEMPLATE_CONTROLBUTTONGROUP_ADDLOCATIONPOST,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_ADDSTORY,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_ADDANNOUNCEMENT,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_ADDDISCUSSION,
@@ -28,10 +28,10 @@ class SectionProcessors_Template_Processor_ControlButtonGroups extends GD_Templa
 	
 		switch ($template_id) {
 		
-			case GD_TEMPLATE_CONTROLBUTTONGROUP_ADDPROJECT:
+			case GD_TEMPLATE_CONTROLBUTTONGROUP_ADDLOCATIONPOST:
 
-				$ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECT;
-				$ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDPROJECTLINK;
+				$ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST;
+				$ret[] = GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK;
 				break;
 		
 			case GD_TEMPLATE_CONTROLBUTTONGROUP_ADDSTORY:

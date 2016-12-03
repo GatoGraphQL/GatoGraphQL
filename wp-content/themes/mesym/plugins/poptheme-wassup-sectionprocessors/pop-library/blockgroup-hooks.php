@@ -59,8 +59,8 @@ class MESYM_SectionProcessors_BlockGroupHooks {
 				$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'hidden-if-empty', true);
 
 				if (
-					$blockgroup_block == GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP ||
-					$blockgroup_block == GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP
+					$blockgroup_block == GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP ||
+					$blockgroup_block == GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP
 					) {
 
 					// Format
@@ -77,7 +77,7 @@ class MESYM_SectionProcessors_BlockGroupHooks {
 					// Hide if block is empty
 					$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'hidden-if-empty', true);
 				}
-				elseif ($blockgroup_block == GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP) {
+				elseif ($blockgroup_block == GD_TEMPLATE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP) {
 
 					// Make lazy-load
 					$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'content-loaded', false);	
@@ -103,7 +103,7 @@ class MESYM_SectionProcessors_BlockGroupHooks {
 	function hometop_widget_firstblocks($blocks) {
 
 		// Add the Blockgroup which has the Featured widget
-		$blocks[] = GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP;
+		$blocks[] = GD_TEMPLATE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP;
 		return $blocks;
 	}
 
@@ -117,7 +117,7 @@ class MESYM_SectionProcessors_BlockGroupHooks {
 	function authortop_widget_firstblocks($blocks) {
 
 		// Add the Blockgroup which has the Featured widget
-		$blocks[] = GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP;
+		$blocks[] = GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP;
 		return $blocks;
 	}
 
@@ -131,7 +131,7 @@ class MESYM_SectionProcessors_BlockGroupHooks {
 	function tagtop_widget_firstblocks($blocks) {
 
 		// Add the Blockgroup which has the Featured widget
-		$blocks[] = GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP;
+		$blocks[] = GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP;
 		return $blocks;
 	}
 }

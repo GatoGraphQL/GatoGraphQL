@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_MAILCHIMP_STYLE_ANCHOR', 'word-wrap:break-word;color:#60b31c;font-weight:normal;text-decoration:underline;');
+define ('GD_CUSTOM_MAILCHIMP_STYLE_ANCHOR', 'word-wrap:break-word;color:#7a7a7b;font-weight:normal;text-decoration:underline;');
 define ('GD_CUSTOM_RSS_URLPARAM_CAMPAIGN_WEEKLY', 'weekly');
 define ('GD_CUSTOM_RSS_URLPARAM_CAMPAIGNWEEKLY_IMAGEWIDTH', '132');
 

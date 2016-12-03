@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_PROJECT', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-project'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-locationpost'));
 define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_STORY', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-story'));
 define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_DISCUSSION', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-discussion'));
 define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_BLOG', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-blog'));
@@ -17,7 +17,7 @@ class GD_Template_Processor_CustomVerticalSingleSidebarInners extends GD_Templat
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_PROJECT,
+			GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST,
 			GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_STORY,
 			GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_DISCUSSION,
 			GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_BLOG,
@@ -32,11 +32,11 @@ class GD_Template_Processor_CustomVerticalSingleSidebarInners extends GD_Templat
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_PROJECT:
+			case GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST:
 
 				$ret = array_merge(
 					$ret,
-					Custom_FullViewSidebarSettings::get_components(GD_SIDEBARSECTION_PROJECT)
+					Custom_FullViewSidebarSettings::get_components(GD_SIDEBARSECTION_LOCATIONPOST)
 				);
 				break;
 

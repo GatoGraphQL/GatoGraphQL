@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Agenda Urbana\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-27 14:36+0800\n"
-"PO-Revision-Date: 2016-08-27 14:37+0800\n"
+"POT-Creation-Date: 2016-12-03 22:09+0800\n"
+"PO-Revision-Date: 2016-12-03 22:10+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -79,17 +79,17 @@ msgid "Posts"
 msgstr "Posts"
 
 #: .././config/config.php:176
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:18
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:18
 msgid "Articles"
 msgstr "Artículos"
 
 #: .././config/config.php:181
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:19
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:19
 msgid "Announcements"
 msgstr "Anuncios"
 
 #: .././config/config.php:186
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:20
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:20
 msgid "Resources"
 msgstr "Materiales"
 
@@ -186,7 +186,7 @@ msgid "Social Welfare"
 msgstr "Bienestar Social"
 
 #: .././config/config.php:312
-#: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:14
+#: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:15
 msgid "Others"
 msgstr "Otros"
 
@@ -196,7 +196,7 @@ msgstr "Asociación"
 
 #: .././config/config.php:324
 msgid "Community-based organisation"
-msgstr "organización de base comunitaria"
+msgstr "Organización de base comunitaria"
 
 #: .././config/config.php:325
 msgid "Cooperative"
@@ -238,23 +238,31 @@ msgstr "Empresa social"
 msgid "Other"
 msgstr "Otro"
 
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:21
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:27
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:21
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:27
 msgid "Featured"
 msgstr "Destacado"
 
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:24
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:24
 msgid "Article"
 msgstr "Artículo"
 
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:25
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:25
 msgid "Announcement"
 msgstr "Anuncio"
 
-#: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:26
+#: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:26
 #: .././plugins/poptheme-wassup/plugins/media-library-assistant/config/config.php:15
 msgid "Resource"
 msgstr "Recurso"
+
+#: .././plugins/_poptheme-wassup-sectionprocessors/config/config.php:17
+msgid "Social conflicts"
+msgstr "Conflictos sociales"
+
+#: .././plugins/_poptheme-wassup-sectionprocessors/config/config.php:20
+msgid "Social conflict"
+msgstr "Conflicto social"
 
 #: .././plugins/poptheme-wassup/plugins/events-manager/config/config.php:25
 msgid "Upcoming Events"
@@ -269,12 +277,16 @@ msgid "General"
 msgstr "General"
 
 #: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:12
-msgid "Website"
-msgstr "Sitio web"
+msgid "Events"
+msgstr "Eventos"
 
 #: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:13
-msgid "Workshop"
-msgstr "Taller"
+msgid "Social Conflicts"
+msgstr "Conflictos Sociales"
+
+#: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:14
+msgid "Website"
+msgstr "Sitio web"
 
 #: .././plugins/user-role-editor/config/config.php:15
 msgid "Organizations"
@@ -292,11 +304,11 @@ msgstr "Cuenta de usuario organización"
 msgid "Individual user account"
 msgstr "Cuenta de usuario individual"
 
-#: .././validation.php:42
+#: .././validation.php:63
 msgid "Only admins see this message."
 msgstr "Only admins see this message."
 
-#: .././validation.php:47
+#: .././validation.php:68
 msgid ""
 "Error: <b>PoP Theme: Wassup Processors</b> is not installed/activated. "
 "Without it, <b>Agenda Urbana</b> will not work. Please install this plugin "
@@ -308,7 +320,7 @@ msgstr ""
 "from your plugin installer or download it <a href=“http://wordpress.org/"
 "extend/plugins/pop/“>from here</a>."
 
-#: .././validation.php:51
+#: .././validation.php:72
 msgid ""
 "Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">latest version</a> of <b>PoP Theme: Wassup Processors</b> "
@@ -318,7 +330,7 @@ msgstr ""
 "plugins/pop/“>latest version</a> of <b>PoP Theme: Wassup Processors</b> "
 "installed, or otherwise <b>Agenda Urbana</b> might not function properly."
 
-#: .././validation.php:55
+#: .././validation.php:76
 msgid ""
 "Error: <b>Agenda Urbana Environment Constants</b> is not installed/"
 "activated. Without it, <b>Agenda Urbana</b> will not work. Please install "
@@ -329,6 +341,31 @@ msgstr ""
 "activated. Without it, <b>Agenda Urbana</b> will not work. Please install "
 "this plugin from your plugin installer or download it <a href=“http://"
 "wordpress.org/extend/plugins/pop/“>from here</a>."
+
+#: .././validation.php:80
+msgid ""
+"Error: <b>Agenda Urbana Processors</b> is not installed/activated. Without "
+"it, <b>Agenda Urbana</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>Agenda Urbana Processors</b> is not installed/activated. Without "
+"it, <b>Agenda Urbana</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."
+
+#: .././validation.php:84
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>Agenda Urbana Processors</b> "
+"installed, or otherwise <b>Agenda Urbana</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>latest version</a> of <b>Agenda Urbana Processors</b> "
+"installed, or otherwise <b>Agenda Urbana</b> might not function properly."
+
+#~ msgid "Workshop"
+#~ msgstr "Taller"
 
 #~ msgid ""
 #~ "AgendaUrbana.org is a crowd-sourced platform for the citizens of the city "

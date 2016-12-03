@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_PROJECTCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-projectcategories'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-locationpostcategories'));
 define ('GD_TEMPLATE_FORMCOMPONENT_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-discussioncategories'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_PROJECTCATEGORIES', PoP_ServerUtils::get_template_definition('projectcategories', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('locationpostcategories', true));
 define ('GD_TEMPLATE_FILTERFORMCOMPONENT_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('discussioncategories', true));
 
 class GD_Custom_Template_Processor_MultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
@@ -15,9 +15,9 @@ class GD_Custom_Template_Processor_MultiSelectFormComponentInputs extends GD_Tem
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_FORMCOMPONENT_PROJECTCATEGORIES,
+			GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES,
 			GD_TEMPLATE_FORMCOMPONENT_DISCUSSIONCATEGORIES,
-			GD_TEMPLATE_FILTERFORMCOMPONENT_PROJECTCATEGORIES,
+			GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES,
 			GD_TEMPLATE_FILTERFORMCOMPONENT_DISCUSSIONCATEGORIES,
 		);
 	}
@@ -26,7 +26,7 @@ class GD_Custom_Template_Processor_MultiSelectFormComponentInputs extends GD_Tem
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_FILTERFORMCOMPONENT_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES:
 			case GD_TEMPLATE_FILTERFORMCOMPONENT_DISCUSSIONCATEGORIES:
 
 				return true;
@@ -39,9 +39,9 @@ class GD_Custom_Template_Processor_MultiSelectFormComponentInputs extends GD_Tem
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_FORMCOMPONENT_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES:
 			case GD_TEMPLATE_FORMCOMPONENT_DISCUSSIONCATEGORIES:
-			case GD_TEMPLATE_FILTERFORMCOMPONENT_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES:
 			case GD_TEMPLATE_FILTERFORMCOMPONENT_DISCUSSIONCATEGORIES:
 			
 				return __('Categories', 'poptheme-wassup-sectionprocessors');
@@ -57,10 +57,10 @@ class GD_Custom_Template_Processor_MultiSelectFormComponentInputs extends GD_Tem
 		// Set the inputs and labels
 		switch ($template_id) {
 		
-			case GD_TEMPLATE_FORMCOMPONENT_PROJECTCATEGORIES:
-			case GD_TEMPLATE_FILTERFORMCOMPONENT_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES:
+			case GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES:
 			
-				return new GD_FormInput_ProjectCategories($options);
+				return new GD_FormInput_LocationPostCategories($options);
 				
 			case GD_TEMPLATE_FORMCOMPONENT_DISCUSSIONCATEGORIES:
 			case GD_TEMPLATE_FILTERFORMCOMPONENT_DISCUSSIONCATEGORIES:
@@ -77,9 +77,9 @@ class GD_Custom_Template_Processor_MultiSelectFormComponentInputs extends GD_Tem
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_FORMCOMPONENT_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES:
 				
-				$ret[] = array('key' => 'value', 'field' => 'projectcategories');
+				$ret[] = array('key' => 'value', 'field' => 'locationpostcategories');
 				break;
 
 			case GD_TEMPLATE_FORMCOMPONENT_DISCUSSIONCATEGORIES:

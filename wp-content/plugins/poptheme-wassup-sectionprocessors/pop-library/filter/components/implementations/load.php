@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-require_once 'filtercomponent-projectcategories.php';
+require_once 'filtercomponent-locationpostcategories.php';
 require_once 'filtercomponent-discussioncategories.php';
 // require_once 'filtercomponent-individualinterests.php';
 // require_once 'filtercomponent-organizationcategories.php';

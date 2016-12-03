@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTWRAPPER_PROJECT_CATEGORIES', PoP_ServerUtils::get_template_definition('layoutwrapper-project-categories'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES', PoP_ServerUtils::get_template_definition('layoutwrapper-locationpost-categories'));
 define ('GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES', PoP_ServerUtils::get_template_definition('layoutwrapper-discussion-categories'));
 
 class GD_Custom_Template_Processor_WidgetWrappers extends GD_Template_Processor_ConditionWrapperBase {
@@ -13,7 +13,7 @@ class GD_Custom_Template_Processor_WidgetWrappers extends GD_Template_Processor_
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_LAYOUTWRAPPER_PROJECT_CATEGORIES,
+			GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES,
 			GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES,
 		);
 	}
@@ -24,9 +24,9 @@ class GD_Custom_Template_Processor_WidgetWrappers extends GD_Template_Processor_
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUTWRAPPER_PROJECT_CATEGORIES:
+			case GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
 
-				$ret[] = GD_TEMPLATE_LAYOUT_PROJECT_CATEGORIES;
+				$ret[] = GD_TEMPLATE_LAYOUT_LOCATIONPOST_CATEGORIES;
 				break;
 
 			case GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES:
@@ -44,7 +44,7 @@ class GD_Custom_Template_Processor_WidgetWrappers extends GD_Template_Processor_
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUTWRAPPER_PROJECT_CATEGORIES:
+			case GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
 			case GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES:
 
 				$ret[] = GD_CUSTOM_TEMPLATE_MESSAGE_NOCATEGORIES;
@@ -58,9 +58,9 @@ class GD_Custom_Template_Processor_WidgetWrappers extends GD_Template_Processor_
 
 		switch ($template_id) {
 					
-			case GD_TEMPLATE_LAYOUTWRAPPER_PROJECT_CATEGORIES:
+			case GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
 
-				return 'has-projectcategories';
+				return 'has-locationpostcategories';
 					
 			case GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES:
 

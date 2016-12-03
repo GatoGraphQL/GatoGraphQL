@@ -6,7 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_ANNOUNCEMENT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-announcement-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PROJECT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-project-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-locationpost-simpleview'));
 // define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_FEATURED_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-featured-simpleview'));
 // define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_DISCUSSION_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-discussion-simpleview'));
 // define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_STORY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-story-simpleview'));
@@ -18,7 +18,7 @@ class PoPSF_Template_Processor_SimpleViewPreviewPostLayouts extends GD_Template_
 	
 		return array(
 			// GD_TEMPLATE_LAYOUT_PREVIEWPOST_ANNOUNCEMENT_SIMPLEVIEW,
-			GD_TEMPLATE_LAYOUT_PREVIEWPOST_PROJECT_SIMPLEVIEW,
+			GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW,
 			// GD_TEMPLATE_LAYOUT_PREVIEWPOST_FEATURED_SIMPLEVIEW,
 			// GD_TEMPLATE_LAYOUT_PREVIEWPOST_DISCUSSION_SIMPLEVIEW,
 			// GD_TEMPLATE_LAYOUT_PREVIEWPOST_STORY_SIMPLEVIEW,
@@ -31,7 +31,7 @@ class PoPSF_Template_Processor_SimpleViewPreviewPostLayouts extends GD_Template_
 		switch ($template_id) {
 
 			// case GD_TEMPLATE_LAYOUT_PREVIEWPOST_ANNOUNCEMENT_SIMPLEVIEW:
-			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_PROJECT_SIMPLEVIEW:
+			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW:
 			// case GD_TEMPLATE_LAYOUT_PREVIEWPOST_FEATURED_SIMPLEVIEW:
 			// case GD_TEMPLATE_LAYOUT_PREVIEWPOST_DISCUSSION_SIMPLEVIEW:
 			// case GD_TEMPLATE_LAYOUT_PREVIEWPOST_STORY_SIMPLEVIEW:
@@ -49,7 +49,7 @@ class PoPSF_Template_Processor_SimpleViewPreviewPostLayouts extends GD_Template_
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_PROJECT_SIMPLEVIEW:
+			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW:
 
 				$ret[] = GD_TEMPLATE_MULTICOMPONENT_LOCATIONVOLUNTEER;
 				break;

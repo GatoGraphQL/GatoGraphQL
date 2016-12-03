@@ -5,24 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_PROJECT', 'createupdate-project');
+define ('GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDLOCATIONPOSTLINK', 'tabs-page-addlocationpostlink');
 
-class GD_DataLoad_ActionExecuter_CreateUpdate_Project extends GD_DataLoad_ActionExecuter_CreateUpdate_Post {
+class GD_DataLoad_TabIOHandler_AddLocationPostLinkPage extends GD_DataLoad_TabIOHandler_Page {
 
     function get_name() {
-    
-		return GD_DATALOAD_ACTIONEXECUTER_CREATEUPDATE_PROJECT;
+
+		return GD_DATALOAD_IOHANDLER_TABS_PAGE_ADDLOCATIONPOSTLINK;
 	}
 
-	function get_createupdate() {
+	function get_title() {
 
-		// global $gd_createupdate_project;
-		// return $gd_createupdate_project;
-		return new GD_CreateUpdate_Project();
+		return get_the_title(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOSTLINK);
 	}
 }
 	
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_ActionExecuter_CreateUpdate_Project();
+new GD_DataLoad_TabIOHandler_AddLocationPostLinkPage();

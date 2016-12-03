@@ -306,11 +306,11 @@ a.logo img:hover {
 .label-stories[href]:focus {
   background-color: #31b0d5;
 }
-.label-projects {
+.label-locationposts {
   background-color: #f0ad4e;
 }
-.label-projects[href]:hover,
-.label-projects[href]:focus {
+.label-locationposts[href]:hover,
+.label-locationposts[href]:focus {
   background-color: #ec971f;
 }
 .label-featured {

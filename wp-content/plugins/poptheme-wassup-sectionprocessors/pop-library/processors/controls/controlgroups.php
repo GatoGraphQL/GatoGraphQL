@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLGROUP_MYPROJECTLIST', PoP_ServerUtils::get_template_definition('controlgroup-myprojectlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYLOCATIONPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-mylocationpostlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_MYSTORYLIST', PoP_ServerUtils::get_template_definition('controlgroup-mystorylist'));
 define ('GD_TEMPLATE_CONTROLGROUP_MYANNOUNCEMENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-myannouncementlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_MYDISCUSSIONLIST', PoP_ServerUtils::get_template_definition('controlgroup-mydiscussionlist'));
@@ -15,7 +15,7 @@ class SectionProcessors_Template_Processor_ControlGroups extends GD_Template_Pro
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_CONTROLGROUP_MYPROJECTLIST,
+			GD_TEMPLATE_CONTROLGROUP_MYLOCATIONPOSTLIST,
 			GD_TEMPLATE_CONTROLGROUP_MYSTORYLIST,
 			GD_TEMPLATE_CONTROLGROUP_MYANNOUNCEMENTLIST,
 			GD_TEMPLATE_CONTROLGROUP_MYDISCUSSIONLIST,
@@ -30,13 +30,13 @@ class SectionProcessors_Template_Processor_ControlGroups extends GD_Template_Pro
 
 		switch ($template_id) {
 				
-			case GD_TEMPLATE_CONTROLGROUP_MYPROJECTLIST:
+			case GD_TEMPLATE_CONTROLGROUP_MYLOCATIONPOSTLIST:
 			case GD_TEMPLATE_CONTROLGROUP_MYSTORYLIST:
 			case GD_TEMPLATE_CONTROLGROUP_MYANNOUNCEMENTLIST:
 			case GD_TEMPLATE_CONTROLGROUP_MYDISCUSSIONLIST:
 
 				$addposts = array(
-					GD_TEMPLATE_CONTROLGROUP_MYPROJECTLIST => GD_TEMPLATE_CONTROLBUTTONGROUP_ADDPROJECT,
+					GD_TEMPLATE_CONTROLGROUP_MYLOCATIONPOSTLIST => GD_TEMPLATE_CONTROLBUTTONGROUP_ADDLOCATIONPOST,
 					GD_TEMPLATE_CONTROLGROUP_MYSTORYLIST => GD_TEMPLATE_CONTROLBUTTONGROUP_ADDSTORY,
 					GD_TEMPLATE_CONTROLGROUP_MYANNOUNCEMENTLIST => GD_TEMPLATE_CONTROLBUTTONGROUP_ADDANNOUNCEMENT,
 					GD_TEMPLATE_CONTROLGROUP_MYDISCUSSIONLIST => GD_TEMPLATE_CONTROLBUTTONGROUP_ADDDISCUSSION,

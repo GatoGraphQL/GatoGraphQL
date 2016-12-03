@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-projects'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-locationposts'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORIES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-stories'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-announcements'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-discussions'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED', PoP_ServerUtils::get_template_definition('layout-messagefeedback-featured'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_BLOG', PoP_ServerUtils::get_template_definition('layout-messagefeedback-blog'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_THOUGHTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-thoughts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPROJECTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-myprojects'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mylocationposts'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYSTORIES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mystories'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-myannouncements'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mydiscussions'));
@@ -22,14 +22,14 @@ class GD_Custom_Template_Processor_CustomListMessageFeedbackLayouts extends GD_T
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECTS,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOSTS,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORIES,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENTS,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSIONS,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_BLOG,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_THOUGHTS,
-			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPROJECTS,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLOCATIONPOSTS,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYSTORIES,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYANNOUNCEMENTS,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYDISCUSSIONS,
@@ -40,7 +40,7 @@ class GD_Custom_Template_Processor_CustomListMessageFeedbackLayouts extends GD_T
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPROJECTS:
+			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLOCATIONPOSTS:
 			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYSTORIES:
 			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYANNOUNCEMENTS:
 			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYDISCUSSIONS:
@@ -57,11 +57,14 @@ class GD_Custom_Template_Processor_CustomListMessageFeedbackLayouts extends GD_T
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PROJECTS:
-			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPROJECTS:
+			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOSTS:
+			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLOCATIONPOSTS:
 			
-				$name = __('project', 'poptheme-wassup-sectionprocessors');
-				$names = __('projects', 'poptheme-wassup-sectionprocessors');
+				// $name = __('locationpost', 'poptheme-wassup-sectionprocessors');
+				// $names = __('locationposts', 'poptheme-wassup-sectionprocessors');
+				$cat = POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS;
+				$name = gd_get_categoryname($cat, 'lc');
+				$names = gd_get_categoryname($cat, 'plural-lc');
 				break;
 
 			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORIES:

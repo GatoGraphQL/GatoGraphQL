@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_PROJECT_CATEGORIES', PoP_ServerUtils::get_template_definition('widget-project-categories'));
+define ('GD_TEMPLATE_WIDGET_LOCATIONPOST_CATEGORIES', PoP_ServerUtils::get_template_definition('widget-locationpost-categories'));
 define ('GD_TEMPLATE_WIDGET_DISCUSSION_CATEGORIES', PoP_ServerUtils::get_template_definition('widget-discussion-categories'));
 
-define ('GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO', PoP_ServerUtils::get_template_definition('widgetcompact-project-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO', PoP_ServerUtils::get_template_definition('widgetcompact-locationpost-info'));
 define ('GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO', PoP_ServerUtils::get_template_definition('widgetcompact-discussion-info'));
 define ('GD_TEMPLATE_WIDGETCOMPACT_STORYINFO', PoP_ServerUtils::get_template_definition('widgetcompact-story-info'));
 define ('GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO', PoP_ServerUtils::get_template_definition('widgetcompact-announcement-info'));
@@ -20,10 +20,10 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_WIDGET_PROJECT_CATEGORIES,
+			GD_TEMPLATE_WIDGET_LOCATIONPOST_CATEGORIES,
 			GD_TEMPLATE_WIDGET_DISCUSSION_CATEGORIES,
 
-			GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO,
+			GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO,
 			GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO,
 			GD_TEMPLATE_WIDGETCOMPACT_STORYINFO,
 			GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO,
@@ -38,9 +38,9 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGET_PROJECT_CATEGORIES:
+			case GD_TEMPLATE_WIDGET_LOCATIONPOST_CATEGORIES:
 
-				$ret[] = GD_TEMPLATE_LAYOUTWRAPPER_PROJECT_CATEGORIES;
+				$ret[] = GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES;
 				break;
 
 			case GD_TEMPLATE_WIDGET_DISCUSSION_CATEGORIES:
@@ -48,7 +48,7 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 				$ret[] = GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES;
 				break;
 
-			case GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO:
+			case GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO:
 
 				if (PoPTheme_Wassup_Utils::add_categories()) {
 					$ret[] = GD_TEMPLATE_LAYOUTWRAPPER_CATEGORIES;
@@ -88,9 +88,9 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 		$menu = __('Section links', 'poptheme-wassup-sectionprocessors');
 
 		$titles = array(
-			GD_TEMPLATE_WIDGET_PROJECT_CATEGORIES => $categories,
+			GD_TEMPLATE_WIDGET_LOCATIONPOST_CATEGORIES => $categories,
 			GD_TEMPLATE_WIDGET_DISCUSSION_CATEGORIES => $categories,
-			GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO => __('Project', 'poptheme-wassup-sectionprocessors'),
+			GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO => gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS), //__('Location post', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO => __('Article', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_WIDGETCOMPACT_STORYINFO => __('Story', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO => __('Announcement', 'poptheme-wassup-sectionprocessors'),
@@ -104,9 +104,9 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 
 		$categories = 'fa-info-circle';
 		$fontawesomes = array(
-			GD_TEMPLATE_WIDGET_PROJECT_CATEGORIES => $categories,
+			GD_TEMPLATE_WIDGET_LOCATIONPOST_CATEGORIES => $categories,
 			GD_TEMPLATE_WIDGET_DISCUSSION_CATEGORIES => $categories,
-			GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO => gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS, false),
+			GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO => gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS, false),
 			GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO => gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_DISCUSSIONS, false),
 			GD_TEMPLATE_WIDGETCOMPACT_STORYINFO => gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_STORIES, false),
 			GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO => gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ANNOUNCEMENTS, false),
@@ -121,7 +121,7 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO:
+			case GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_STORYINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO:
@@ -137,7 +137,7 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO:
+			case GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_STORYINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO:
@@ -153,7 +153,7 @@ class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO:
+			case GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_STORYINFO:
 			case GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO:

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECT_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-project-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-projectlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-locationpost-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-locationpostlink-create'));
 define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-discussion-create'));
 define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-discussionlink-create'));
 define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_STORY_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-story-create'));
@@ -20,8 +20,8 @@ class GD_Custom_Template_Processor_ButtonInners extends GD_Template_Processor_Bu
 	function get_templates_to_process() {
 	
 		return array(
-			GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECT_CREATE,
-			GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECTLINK_CREATE,
+			GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOST_CREATE,
+			GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOSTLINK_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSION_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSIONLINK_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_STORY_CREATE,
@@ -35,8 +35,8 @@ class GD_Custom_Template_Processor_ButtonInners extends GD_Template_Processor_Bu
 	function get_fontawesome($template_id, $atts) {
 
 		$icons = array(
-			GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECT_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECT,
-			GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECTLINK_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECTLINK,
+			GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOST_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOST,
+			GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOSTLINK_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOSTLINK,
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSION_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDDISCUSSION,
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSIONLINK_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDDISCUSSIONLINK,
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_STORY_CREATE => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDSTORY,
@@ -56,8 +56,8 @@ class GD_Custom_Template_Processor_ButtonInners extends GD_Template_Processor_Bu
 	function get_btn_title($template_id) {
 		
 		$titles = array(
-			GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECT_CREATE => __('Project', 'poptheme-wassup-sectionprocessors'),
-			GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECTLINK_CREATE => __('as Link', 'poptheme-wassup-sectionprocessors'),//__('Project link', 'poptheme-wassup-sectionprocessors'),
+			GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOST_CREATE => gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS), //__('Location post', 'poptheme-wassup-sectionprocessors'),
+			GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOSTLINK_CREATE => __('as Link', 'poptheme-wassup-sectionprocessors'),//__('Location post link', 'poptheme-wassup-sectionprocessors'),
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSION_CREATE => __('Article', 'poptheme-wassup-sectionprocessors'),
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSIONLINK_CREATE => __('as Link', 'poptheme-wassup-sectionprocessors'),//__('Article link', 'poptheme-wassup-sectionprocessors'),
 			GD_CUSTOM_TEMPLATE_BUTTONINNER_STORY_CREATE => __('Story', 'poptheme-wassup-sectionprocessors'),

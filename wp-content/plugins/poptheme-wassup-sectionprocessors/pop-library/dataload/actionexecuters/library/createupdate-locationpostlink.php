@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-class GD_CreateUpdate_ProjectLink extends GD_CreateUpdate_Project {
+class GD_CreateUpdate_LocationPostLink extends GD_CreateUpdate_LocationPost {
 
 	protected function get_categories($form_data) {
 
 		$ret = parent::get_categories($form_data);
-		$ret[] = POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_PROJECTLINKS;
+		$ret[] = POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTLINKS;
 		return $ret;
 	}
 

@@ -9,8 +9,9 @@ function gd_gf_contactus_topics_impl($topics) {
 
 	return array(
 		__('General', 'agendaurbana'),
+		__('Events', 'agendaurbana'),
+		__('Social Conflicts', 'agendaurbana'),
 		__('Website', 'agendaurbana'),
-		__('Workshop', 'agendaurbana'),
 		__('Others', 'agendaurbana'),
 	);
 }

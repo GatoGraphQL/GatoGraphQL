@@ -147,7 +147,11 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 				if ($template_id == GD_TEMPLATE_PAGESECTION_ADDONS_PAGE) {
 
 					$replicable[] = GD_TEMPLATE_BLOCK_CONTACTUSER;
-					$replicable[] = GD_TEMPLATE_BLOCK_VOLUNTEER;
+					
+					// Only if enabled
+					if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+						$replicable[] = GD_TEMPLATE_BLOCK_VOLUNTEER;
+					}
 					$replicable[] = GD_TEMPLATE_BLOCK_FLAG;
 				}
 				elseif ($template_id == GD_TEMPLATE_PAGESECTION_HOVER) {
@@ -200,7 +204,12 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 				if ($template_id == GD_TEMPLATE_PAGESECTION_ADDONTABS_PAGE) {
 
 					$replicable[] = GD_TEMPLATE_BLOCK_ADDONTABS_CONTACTUSER;
-					$replicable[] = GD_TEMPLATE_BLOCK_ADDONTABS_VOLUNTEER;
+
+					// Only if enabled
+					if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+						$replicable[] = GD_TEMPLATE_BLOCK_ADDONTABS_VOLUNTEER;
+					}
+					
 					$replicable[] = GD_TEMPLATE_BLOCK_ADDONTABS_FLAG;
 				}
 				break;		

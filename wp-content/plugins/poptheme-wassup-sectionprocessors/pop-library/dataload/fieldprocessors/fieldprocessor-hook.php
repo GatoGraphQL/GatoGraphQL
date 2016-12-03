@@ -20,8 +20,8 @@ class GD_Custom_DataLoad_FieldProcessor_Hook extends GD_DataLoad_FieldProcessor_
 
 		switch ($field) {
 
-			case 'addproject-url':
-			case 'addprojectlink-url':
+			case 'addlocationpost-url':
+			case 'addlocationpostlink-url':
 			case 'adddiscussion-url':
 			case 'adddiscussionlink-url':
 			case 'addstory-url':
@@ -33,8 +33,8 @@ class GD_Custom_DataLoad_FieldProcessor_Hook extends GD_DataLoad_FieldProcessor_
 			case 'addeventlink-url':
 
 				$pages = array(
-					'addproject-url' => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECT,
-					'addprojectlink-url' => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDPROJECTLINK,
+					'addlocationpost-url' => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOST,
+					'addlocationpostlink-url' => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOSTLINK,
 					'adddiscussion-url' => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDDISCUSSION,
 					'adddiscussionlink-url' => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDDISCUSSIONLINK,
 					'addstory-url' => POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDSTORY,

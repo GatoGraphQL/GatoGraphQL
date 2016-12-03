@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS', PoP_ServerUtils::get_template_definition('widget-form-projectdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-projectlinkdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS', PoP_ServerUtils::get_template_definition('widget-form-locationpostdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-locationpostlinkdetails'));
 define ('GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS', PoP_ServerUtils::get_template_definition('widget-form-discussiondetails'));
 define ('GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-discussionlinkdetails'));
 define ('GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS', PoP_ServerUtils::get_template_definition('widget-form-announcementdetails'));
@@ -20,8 +20,8 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS,		
-			GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS,		
+			GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS,		
+			GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS,		
 			GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS,
 			GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS,
 			GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS,
@@ -38,10 +38,10 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 	
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS:
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
 
-				// $ret[] = GD_TEMPLATE_FORMCOMPONENTGROUP_PROJECTCATEGORIES;
+				// $ret[] = GD_TEMPLATE_FORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES;
 				if (PoPTheme_Wassup_Utils::add_categories()) {
 					$ret[] = GD_TEMPLATE_FORMCOMPONENTGROUP_CATEGORIES;
 				}
@@ -56,7 +56,7 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 				}
 
 				// Comment Leo 16/01/2016: There's no need to ask for the LinkAccess since we don't show it anyway
-				// if ($template_id == GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS) {
+				// if ($template_id == GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS) {
 				// 	$ret[] = GD_TEMPLATE_FORMCOMPONENTGROUP_LINKACCESS;
 				// }
 				break;
@@ -131,9 +131,10 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 
 	function get_menu_title($template_id, $atts) {
 
+		$locationpost = gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS);
 		$titles = array(
-			GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS => __('Project details', 'poptheme-wassup-sectionprocessors'),	
-			GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS => __('Project link details', 'poptheme-wassup-sectionprocessors'),	
+			GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS => sprintf(__('%s details', 'poptheme-wassup-sectionprocessors'), $locationpost), //__('Location post details', 'poptheme-wassup-sectionprocessors'),	
+			GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS => sprintf(__('%s link details', 'poptheme-wassup-sectionprocessors'), $locationpost), //__('Location post link details', 'poptheme-wassup-sectionprocessors'),	
 			GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS => __('Article details', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS => __('Article link details', 'poptheme-wassup-sectionprocessors'),
 			GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS => __('Announcement details', 'poptheme-wassup-sectionprocessors'),
@@ -150,8 +151,8 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS:
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS:
@@ -174,8 +175,8 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS:
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS:
@@ -193,8 +194,8 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS:
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS:
 			case GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS:
@@ -213,8 +214,8 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS:
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
 
 				// Have the widgets open in the Addons
 				if (PoPTheme_Wassup_Utils::get_addcontent_target() == GD_URLPARAM_TARGET_ADDONS) {
@@ -230,8 +231,8 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTDETAILS:
-			case GD_TEMPLATE_WIDGET_FORM_PROJECTLINKDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS:
+			case GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
 
 				// Typeahead map: make it small
 				$this->add_att(GD_EM_TEMPLATE_FORMCOMPONENT_TYPEAHEADMAP, $atts, 'wrapper-class', '');

@@ -190,7 +190,7 @@ function gd_header_page_description_impl($description, $page_id) {
 			$description = sprintf(GD_CONSTANT_PLACEHOLDER_DESCRIPTIONVIEWALL, __('Posts', 'getpop'));
 			break;
 
-		case POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS:
+		case POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS:
 
 			$description = sprintf(GD_CONSTANT_PLACEHOLDER_DESCRIPTIONVIEWALL, __('Projects', 'getpop'));
 			break;

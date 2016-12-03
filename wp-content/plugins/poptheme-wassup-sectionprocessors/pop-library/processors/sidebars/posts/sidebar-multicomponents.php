@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_PROJECT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-project'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_LOCATIONPOST', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-locationpost'));
 define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_STORY', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-story'));
 define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_DISCUSSION', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-discussion'));
 define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_BLOG', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-blog'));
@@ -17,7 +17,7 @@ class GD_Custom_Template_Processor_PostMultipleSidebarComponents extends GD_Temp
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_SIDEBARMULTICOMPONENT_PROJECT,
+			GD_TEMPLATE_SIDEBARMULTICOMPONENT_LOCATIONPOST,
 			GD_TEMPLATE_SIDEBARMULTICOMPONENT_STORY,
 			GD_TEMPLATE_SIDEBARMULTICOMPONENT_DISCUSSION,
 			GD_TEMPLATE_SIDEBARMULTICOMPONENT_BLOG,
@@ -39,9 +39,9 @@ class GD_Custom_Template_Processor_PostMultipleSidebarComponents extends GD_Temp
 				$ret[] = GD_TEMPLATE_WIDGETCOMPACT_POST_AUTHORS;
 				break;
 
-			case GD_TEMPLATE_SIDEBARMULTICOMPONENT_PROJECT:
+			case GD_TEMPLATE_SIDEBARMULTICOMPONENT_LOCATIONPOST:
 
-				$ret[] = GD_TEMPLATE_WIDGETCOMPACT_PROJECTINFO;
+				$ret[] = GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO;
 				$ret[] = GD_TEMPLATE_WIDGETWRAPPER_REFERENCES;
 				$ret[] = GD_TEMPLATE_WIDGETCOMPACT_POST_AUTHORS;
 				break;

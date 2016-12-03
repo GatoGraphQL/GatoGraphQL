@@ -1,7 +1,7 @@
 <?php
 
-require_once 'add-project.php';
-require_once 'add-projectlink.php';
+require_once 'add-locationpost.php';
+require_once 'add-locationpostlink.php';
 require_once 'add-discussion.php';
 require_once 'add-discussionlink.php';
 require_once 'add-story.php';

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_PROJECTCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponentgroup-projectcategories'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponentgroup-locationpostcategories'));
 define ('GD_TEMPLATE_FORMCOMPONENTGROUP_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponentgroup-discussioncategories'));
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_PROJECTCATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-projectcategories'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-locationpostcategories'));
 define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-discussioncategories'));
 
 class GD_Custom_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {
@@ -16,9 +16,9 @@ class GD_Custom_Template_Processor_FormGroups extends GD_Template_Processor_Form
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_FORMCOMPONENTGROUP_PROJECTCATEGORIES,
+			GD_TEMPLATE_FORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES,
 			GD_TEMPLATE_FORMCOMPONENTGROUP_DISCUSSIONCATEGORIES,
-			GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_PROJECTCATEGORIES,
+			GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES,
 			GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DISCUSSIONCATEGORIES,
 		);
 	}
@@ -30,7 +30,7 @@ class GD_Custom_Template_Processor_FormGroups extends GD_Template_Processor_Form
 
 		switch ($template_id) {
 			
-			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES:
 			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DISCUSSIONCATEGORIES:
 
 				$ret .= ' col-sm-2';
@@ -45,7 +45,7 @@ class GD_Custom_Template_Processor_FormGroups extends GD_Template_Processor_Form
 
 		switch ($template_id) {
 			
-			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES:
 			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DISCUSSIONCATEGORIES:
 
 				$ret .= ' col-sm-10';
@@ -59,13 +59,13 @@ class GD_Custom_Template_Processor_FormGroups extends GD_Template_Processor_Form
 
 		switch ($template_id) {
 				
-			case GD_TEMPLATE_FORMCOMPONENTGROUP_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES:
 
-				return GD_TEMPLATE_FORMCOMPONENT_PROJECTCATEGORIES;
+				return GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES;
 
-			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES:
 
-				return GD_TEMPLATE_FILTERFORMCOMPONENT_PROJECTCATEGORIES;
+				return GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES;
 
 			case GD_TEMPLATE_FORMCOMPONENTGROUP_DISCUSSIONCATEGORIES:
 			
@@ -83,8 +83,8 @@ class GD_Custom_Template_Processor_FormGroups extends GD_Template_Processor_Form
 
 		switch ($template_id) {
 				
-			case GD_TEMPLATE_FORMCOMPONENTGROUP_PROJECTCATEGORIES:
-			// case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_PROJECTCATEGORIES:
+			case GD_TEMPLATE_FORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES:
+			// case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES:
 			case GD_TEMPLATE_FORMCOMPONENTGROUP_DISCUSSIONCATEGORIES:
 			// case GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DISCUSSIONCATEGORIES:
 			

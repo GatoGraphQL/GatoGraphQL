@@ -50,6 +50,9 @@ function gd_sendemail( $to, $subject, $msg ) {
 	// Allow to send HTML emails
 	// add_filter('wp_mail_content_type','set_html_content_type');
 
+	// Get rid of html code in the subject
+	$subject = wp_specialchars_decode($subject);
+	
 	wp_mail( $to, $subject, $msg, $headers );
 
 	// Remove filter as explained in http://codex.wordpress.org/Function_Reference/wp_mail
@@ -912,7 +915,7 @@ function gd_sendemail_to_usersnetwork_from_post($post_id) {
 			$content = sprintf( 
 				'<p>%s</p>', 
 				sprintf(
-					__('<strong><a href="%s">%s</a></strong> has created a new %s:', 'pop-coreprocessors'), 
+					__('<b><a href="%s">%s</a></b> has created a new %s:', 'pop-coreprocessors'), 
 					$author_url,
 					$author_name,
 					$post_name

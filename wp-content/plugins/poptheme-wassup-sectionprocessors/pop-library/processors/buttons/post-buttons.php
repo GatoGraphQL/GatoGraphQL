@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-project-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_PROJECTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-projectlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-locationpost-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-locationpostlink-create'));
 define ('GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-discussion-create'));
 define ('GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-discussionlink-create'));
 define ('GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-story-create'));
@@ -20,8 +20,8 @@ class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_
 	function get_templates_to_process() {
 	
 		return array(
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE,
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECTLINK_CREATE,
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE,
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE,
@@ -35,8 +35,8 @@ class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_
 	function get_buttoninner_template($template_id) {
 
 		$buttoninners = array(
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE => GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECT_CREATE,
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECTLINK_CREATE => GD_CUSTOM_TEMPLATE_BUTTONINNER_PROJECTLINK_CREATE,
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE => GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOST_CREATE,
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE => GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOSTLINK_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE => GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSION_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE => GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSIONLINK_CREATE,
 			GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE => GD_CUSTOM_TEMPLATE_BUTTONINNER_STORY_CREATE,
@@ -57,8 +57,8 @@ class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_
 
 		switch ($template_id) {
 					
-			case GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE:
-			case GD_CUSTOM_TEMPLATE_BUTTON_PROJECTLINK_CREATE:
+			case GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE:
+			case GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE:
 			case GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE:
 			case GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE:
 			case GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE:
@@ -77,8 +77,8 @@ class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_
 
 		switch ($template_id) {
 					
-			case GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE:
-			case GD_CUSTOM_TEMPLATE_BUTTON_PROJECTLINK_CREATE:
+			case GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE:
+			case GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE:
 			case GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE:
 			case GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE:
 			case GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE:
@@ -103,8 +103,8 @@ class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_
 
 	// 	switch ($template_id) {
 					
-	// 		case GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE:
-	// 		case GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE:
+	// 		case GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE:
+	// 		case GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE:
 	// 		case GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE:
 	// 		case GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE:
 	// 		case GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE:
@@ -121,9 +121,10 @@ class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_
 
 	function get_title($template_id) {
 
+		$link = __('%s link', 'poptheme-wassup-sectionprocessors');
 		$titles = array(
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE => __('Project', 'poptheme-wassup-sectionprocessors'),
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECTLINK_CREATE => __('Project link', 'poptheme-wassup-sectionprocessors'),
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE => gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS), //__('Location post', 'poptheme-wassup-sectionprocessors'),
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE => sprintf($link, gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS)), //__('Location post link', 'poptheme-wassup-sectionprocessors'),
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE => __('Article', 'poptheme-wassup-sectionprocessors'),
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE => __('Article link', 'poptheme-wassup-sectionprocessors'),
 			GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE => __('Story', 'poptheme-wassup-sectionprocessors'),
@@ -143,8 +144,8 @@ class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_
 	function get_url_field($template_id) {
 
 		$fields = array(
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECT_CREATE => 'addproject-url',
-			GD_CUSTOM_TEMPLATE_BUTTON_PROJECTLINK_CREATE => 'addprojectlink-url',
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE => 'addlocationpost-url',
+			GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE => 'addlocationpostlink-url',
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE => 'adddiscussion-url',
 			GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE => 'adddiscussionlink-url',
 			GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE => 'addstory-url',

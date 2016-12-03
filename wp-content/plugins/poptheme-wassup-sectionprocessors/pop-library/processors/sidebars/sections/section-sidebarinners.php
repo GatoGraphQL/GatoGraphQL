@@ -5,26 +5,26 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_PROJECTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-projects'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-locationposts'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_STORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-stories'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-announcements'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_DISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-discussions'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_FEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-featured'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_BLOG', PoP_ServerUtils::get_template_definition('sidebarinner-section-blog'));
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGPROJECTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagprojects'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-taglocationposts'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagstories'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagannouncements'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGDISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagdiscussions'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagfeatured'));
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPROJECTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorprojects'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorlocationposts'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorstories'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorannouncements'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORDISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authordiscussions'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORFEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorfeatured'));
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYPROJECTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-myprojects'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mylocationposts'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-mystories'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-myannouncements'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mydiscussions'));
@@ -34,23 +34,23 @@ class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Templat
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_SIDEBARINNER_SECTION_PROJECTS, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_LOCATIONPOSTS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_STORIES,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_ANNOUNCEMENTS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_DISCUSSIONS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_FEATURED, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_BLOG, 
-			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGPROJECTS, 
+			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGLOCATIONPOSTS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGANNOUNCEMENTS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGDISCUSSIONS, 
 			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFEATURED, 
-			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPROJECTS,
+			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORLOCATIONPOSTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORSTORIES,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORANNOUNCEMENTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORDISCUSSIONS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORFEATURED,
-			GD_TEMPLATE_SIDEBARINNER_SECTION_MYPROJECTS,
+			GD_TEMPLATE_SIDEBARINNER_SECTION_MYLOCATIONPOSTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYSTORIES,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYANNOUNCEMENTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYDISCUSSIONS,
@@ -63,10 +63,10 @@ class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Templat
 
 		switch ($template_id) {
 					
-			case GD_TEMPLATE_SIDEBARINNER_SECTION_PROJECTS:
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_LOCATIONPOSTS:
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_SECTIONWITHMAP;
-				$ret[] = GD_TEMPLATE_DELEGATORFILTER_PROJECTS;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_LOCATIONPOSTS;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_STORIES:
@@ -99,10 +99,10 @@ class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Templat
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_BLOG;
 				break;
 					
-			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGPROJECTS:
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGLOCATIONPOSTS:
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTIONWITHMAP;
-				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGPROJECTS;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGLOCATIONPOSTS;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES:
@@ -129,10 +129,10 @@ class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Templat
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGFEATURED;
 				break;
 
-			case GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPROJECTS:
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORLOCATIONPOSTS:
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_AUTHORSECTIONWITHMAP;
-				$ret[] = GD_TEMPLATE_DELEGATORFILTER_AUTHORPROJECTS;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_AUTHORLOCATIONPOSTS;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORSTORIES:
@@ -159,10 +159,10 @@ class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Templat
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_AUTHORFEATURED;
 				break;
 
-			case GD_TEMPLATE_SIDEBARINNER_SECTION_MYPROJECTS:
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_MYLOCATIONPOSTS:
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_MYCONTENT;
-				$ret[] = GD_TEMPLATE_DELEGATORFILTER_MYPROJECTS;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_MYLOCATIONPOSTS;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_MYSTORIES:

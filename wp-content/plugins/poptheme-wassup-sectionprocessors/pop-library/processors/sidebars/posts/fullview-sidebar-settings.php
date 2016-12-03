@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_SIDEBARSECTION_PROJECT', 'project');
+define ('GD_SIDEBARSECTION_LOCATIONPOST', 'locationpost');
 define ('GD_SIDEBARSECTION_DISCUSSION', 'discussion');
 define ('GD_SIDEBARSECTION_STORY', 'story');
 define ('GD_SIDEBARSECTION_ANNOUNCEMENT', 'announcement');
 define ('GD_SIDEBARSECTION_FEATURED', 'featured');
 define ('GD_SIDEBARSECTION_BLOG', 'blog');
 
-define ('GD_COMPACTSIDEBARSECTION_PROJECT', 'compact-project');
+define ('GD_COMPACTSIDEBARSECTION_LOCATIONPOST', 'compact-locationpost');
 define ('GD_COMPACTSIDEBARSECTION_DISCUSSION', 'compact-discussion');
 define ('GD_COMPACTSIDEBARSECTION_STORY', 'compact-story');
 define ('GD_COMPACTSIDEBARSECTION_ANNOUNCEMENT', 'compact-announcement');
@@ -27,7 +27,7 @@ class Custom_FullViewSidebarSettings {
 
 		switch ($section) {
 
-			case GD_SIDEBARSECTION_PROJECT:
+			case GD_SIDEBARSECTION_LOCATIONPOST:
 
 				$ret[] = GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE;//GD_TEMPLATE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE;//GD_TEMPLATE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE;				
 				$ret[] = GD_TEMPLATE_POSTSOCIALMEDIA_POSTWRAPPER;
@@ -97,7 +97,7 @@ class Custom_FullViewSidebarSettings {
 				break;
 
 
-			case GD_COMPACTSIDEBARSECTION_PROJECT:
+			case GD_COMPACTSIDEBARSECTION_LOCATIONPOST:
 
 				// Only if the Volunteering is enabled
 				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
@@ -106,7 +106,7 @@ class Custom_FullViewSidebarSettings {
 				else {
 					$ret[] = GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE;
 				}
-				$ret[] = GD_TEMPLATE_SIDEBARMULTICOMPONENT_PROJECT;
+				$ret[] = GD_TEMPLATE_SIDEBARMULTICOMPONENT_LOCATIONPOST;
 				break;
 
 			case GD_COMPACTSIDEBARSECTION_ANNOUNCEMENT:

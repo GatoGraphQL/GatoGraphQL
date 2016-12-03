@@ -15,11 +15,11 @@
 .label-stories[href]:focus {
   background-color: #31b0d5;
 }
-.label-projects {
+.label-locationposts {
   background-color: #f0ad4e;
 }
-.label-projects[href]:hover,
-.label-projects[href]:focus {
+.label-locationposts[href]:hover,
+.label-locationposts[href]:focus {
   background-color: #ec971f;
 }
 .label-featured {
@@ -45,8 +45,8 @@
 .layout.preview.articles.articlelinks .authors.abovetitle,
 .layout.preview.stories > .wrapper > .content-body > .authors.belowcontent,
 .layout.preview.stories.storylinks .authors.abovetitle,
-.layout.preview.projects > .wrapper > .content-body > .authors.belowcontent,
-.layout.preview.projects.projectlinks .authors.abovetitle,
+.layout.preview.locationposts > .wrapper > .content-body > .authors.belowcontent,
+.layout.preview.locationposts.locationpostlinks .authors.abovetitle,
 .layout.preview.featured > .wrapper > .content-body > .authors.belowcontent,
 .layout.preview.blog > .wrapper > .content-body > .authors.belowcontent {
   display: none;
@@ -55,30 +55,30 @@
 .discussionlinks .visible-link,
 .articlelinks .visible-link,
 .storylinks .visible-link,
-.projectlinks .visible-link,
+.locationpostlinks .visible-link,
 .layout.preview.announcements.announcementlinks > .wrapper > .content-body > .authors.belowcontent,
 .layout.preview.discussions.discussionlinks > .wrapper > .content-body > .authors.belowcontent,
 .layout.preview.articles.articlelinks > .wrapper > .content-body > .authors.belowcontent,
 .layout.preview.stories.storylinks > .wrapper > .content-body > .authors.belowcontent,
-.layout.preview.projects.projectlinks > .wrapper > .content-body > .authors.belowcontent {
+.layout.preview.locationposts.locationpostlinks > .wrapper > .content-body > .authors.belowcontent {
   display: block;
 }
 .announcementlinks .visible-link.inline,
 .discussionlinks .visible-link.inline,
 .articlelinks .visible-link.inline,
 .storylinks .visible-link.inline,
-.projectlinks .visible-link.inline {
+.locationpostlinks .visible-link.inline {
   display: inline-block;
 }
 .layout.preview.announcements.announcementlinks .content-body.simpleview > .authors.abovetitle,
 .layout.preview.discussions.discussionlinks .content-body.simpleview > .authors.abovetitle,
 .layout.preview.articles.articlelinks .content-body.simpleview > .authors.abovetitle,
 .layout.preview.stories.storylinks .content-body.simpleview > .authors.abovetitle,
-.layout.preview.projects.projectlinks .content-body.simpleview > .authors.abovetitle {
+.layout.preview.locationposts.locationpostlinks .content-body.simpleview > .authors.abovetitle {
   display: block;
 }
 
-.layout.preview.projects > .wrapper > .content-body.simpleview > .abovecontent,
+.layout.preview.locationposts > .wrapper > .content-body.simpleview > .abovecontent,
 .layout.preview.announcements > .wrapper > .content-body.simpleview > .abovecontent > .wrapper,
 .layout.preview.articles > .wrapper > .content-body.simpleview > .abovecontent > .wrapper,
 .layout.preview.discussions > .wrapper > .content-body.simpleview > .abovecontent > .wrapper,
@@ -91,6 +91,6 @@
     margin: 0 -1px 10px;
 }
 
-.block-projects-scrollmap {
+.block-locationposts-scrollmap {
   margin-bottom: 20px;
 }

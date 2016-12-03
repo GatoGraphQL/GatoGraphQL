@@ -22,14 +22,14 @@ class PoPTheme_Wassup_SectionProcessors_EM_Template_SettingsProcessorHooks {
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
 
 			$pageblocks_map = array(
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_PROJECTS_SCROLLMAP,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_LOCATIONPOSTS_SCROLLMAP,
 			);
 			foreach ($pageblocks_map as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
 			}
 
 			$pageblocks_horizontalmap = array(
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_PROJECTS_HORIZONTALSCROLLMAP,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP,
 			);
 			foreach ($pageblocks_horizontalmap as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;
@@ -40,14 +40,14 @@ class PoPTheme_Wassup_SectionProcessors_EM_Template_SettingsProcessorHooks {
 		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_AUTHOR) {
 
 			$pageblocks_map = array(
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_AUTHORPROJECTS_SCROLLMAP,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP,
 			);
 			foreach ($pageblocks_map as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
 			}
 
 			$pageblocks_horizontalmap = array(
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_AUTHORPROJECTS_HORIZONTALSCROLLMAP,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP,
 			);
 			foreach ($pageblocks_horizontalmap as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;
@@ -58,14 +58,14 @@ class PoPTheme_Wassup_SectionProcessors_EM_Template_SettingsProcessorHooks {
 		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
 
 			$pageblocks_map = array(
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_TAGPROJECTS_SCROLLMAP,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP,
 			);
 			foreach ($pageblocks_map as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
 			}
 
 			$pageblocks_horizontalmap = array(
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_PROJECTS  => GD_TEMPLATE_BLOCK_TAGPROJECTS_HORIZONTALSCROLLMAP,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP,
 			);
 			foreach ($pageblocks_horizontalmap as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;

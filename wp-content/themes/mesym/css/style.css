@@ -308,21 +308,42 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
     background-color: #6acada;
 }
 
-.blockgroup-hometop .block-projects-scrollmap > .blocksection-title h3,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-title h3,
-.blockgroup-tag .block-projects-scrollmap > .blocksection-title h3 {
+.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-title h3,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-title h3,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-title h3 {
   margin: 5px 0;
 }
-.blockgroup-hometop .block-projects-scrollmap > .blocksection-title a,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-title a,
-.blockgroup-tag .block-projects-scrollmap > .blocksection-title a {
+.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-title a,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-title a,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-title a {
   color: #454c0f;
 }
-.blockgroup-hometop .block-projects-scrollmap > .blocksection-inners,
-.blockgroup-authortop .block-projects-scrollmap > .blocksection-inners,
-.blockgroup-tag .block-projects-scrollmap > .blocksection-inners {
+.blockgroup-hometop .block-locationposts-scrollmap > .blocksection-inners,
+.blockgroup-authortop .block-locationposts-scrollmap > .blocksection-inners,
+.blockgroup-tag .block-locationposts-scrollmap > .blocksection-inners {
   border: 1px solid #dcddde;
 }
 .block-events-carousel .pop-elem .col-xsm-8 {
   padding-left: 0;
+}
+
+.layout.preview.projects > .wrapper > .content-body > .authors.belowcontent,
+.layout.preview.projects.projectlinks .authors.abovetitle {
+  display: none;
+}
+.projectlinks .visible-link,
+.layout.preview.projects.projectlinks > .wrapper > .content-body > .authors.belowcontent {
+  display: block;
+}
+.projectlinks .visible-link.inline {
+  display: inline-block;
+}
+.layout.preview.projects.projectlinks .content-body.simpleview > .authors.abovetitle {
+  display: block;
+}
+.layout.preview.projects > .wrapper > .content-body.simpleview > .abovecontent {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    /* Using -1px for left/right margin, so the featured image has exactly 500px (col-sm-10 in container 588px wide and no padding-left) */
+    margin: 0 -1px 10px;
 }

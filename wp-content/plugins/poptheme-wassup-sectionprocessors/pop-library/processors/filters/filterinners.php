@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERINNER_PROJECTS', PoP_ServerUtils::get_template_definition('filterinner-projects'));
-define ('GD_TEMPLATE_FILTERINNER_AUTHORPROJECTS', PoP_ServerUtils::get_template_definition('filterinner-authorprojects'));
-define ('GD_TEMPLATE_FILTERINNER_TAGPROJECTS', PoP_ServerUtils::get_template_definition('filterinner-tagprojects'));
+define ('GD_TEMPLATE_FILTERINNER_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filterinner-locationposts'));
+define ('GD_TEMPLATE_FILTERINNER_AUTHORLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filterinner-authorlocationposts'));
+define ('GD_TEMPLATE_FILTERINNER_TAGLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filterinner-taglocationposts'));
 define ('GD_TEMPLATE_FILTERINNER_STORIES', PoP_ServerUtils::get_template_definition('filterinner-stories'));
 define ('GD_TEMPLATE_FILTERINNER_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('filterinner-authorstories'));
 define ('GD_TEMPLATE_FILTERINNER_TAGSTORIES', PoP_ServerUtils::get_template_definition('filterinner-tagstories'));
@@ -20,7 +20,7 @@ define ('GD_TEMPLATE_FILTERINNER_TAGDISCUSSIONS', PoP_ServerUtils::get_template_
 define ('GD_TEMPLATE_FILTERINNER_FEATURED', PoP_ServerUtils::get_template_definition('filterinner-featured'));
 define ('GD_TEMPLATE_FILTERINNER_TAGFEATURED', PoP_ServerUtils::get_template_definition('filterinner-tagfeatured'));
 define ('GD_TEMPLATE_FILTERINNER_BLOG', PoP_ServerUtils::get_template_definition('filterinner-blog'));
-define ('GD_TEMPLATE_FILTERINNER_MYPROJECTS', PoP_ServerUtils::get_template_definition('filterinner-myprojects'));
+define ('GD_TEMPLATE_FILTERINNER_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filterinner-mylocationposts'));
 define ('GD_TEMPLATE_FILTERINNER_MYSTORIES', PoP_ServerUtils::get_template_definition('filterinner-mystories'));
 define ('GD_TEMPLATE_FILTERINNER_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('filterinner-myannouncements'));
 define ('GD_TEMPLATE_FILTERINNER_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('filterinner-mydiscussions'));
@@ -30,9 +30,9 @@ class GD_Custom_Template_Processor_CustomFilterInners extends GD_Template_Proces
 	function get_templates_to_process() {
 	
 		return array(
-			GD_TEMPLATE_FILTERINNER_PROJECTS,
-			GD_TEMPLATE_FILTERINNER_AUTHORPROJECTS,
-			GD_TEMPLATE_FILTERINNER_TAGPROJECTS,
+			GD_TEMPLATE_FILTERINNER_LOCATIONPOSTS,
+			GD_TEMPLATE_FILTERINNER_AUTHORLOCATIONPOSTS,
+			GD_TEMPLATE_FILTERINNER_TAGLOCATIONPOSTS,
 			GD_TEMPLATE_FILTERINNER_STORIES,
 			GD_TEMPLATE_FILTERINNER_AUTHORSTORIES,
 			GD_TEMPLATE_FILTERINNER_ANNOUNCEMENTS,
@@ -42,7 +42,7 @@ class GD_Custom_Template_Processor_CustomFilterInners extends GD_Template_Proces
 			GD_TEMPLATE_FILTERINNER_FEATURED,
 			GD_TEMPLATE_FILTERINNER_TAGFEATURED,
 			GD_TEMPLATE_FILTERINNER_BLOG,
-			GD_TEMPLATE_FILTERINNER_MYPROJECTS,
+			GD_TEMPLATE_FILTERINNER_MYLOCATIONPOSTS,
 			GD_TEMPLATE_FILTERINNER_MYSTORIES,
 			GD_TEMPLATE_FILTERINNER_MYANNOUNCEMENTS,
 			GD_TEMPLATE_FILTERINNER_MYDISCUSSIONS,
@@ -52,9 +52,9 @@ class GD_Custom_Template_Processor_CustomFilterInners extends GD_Template_Proces
 	function get_filter($template_id) {
 
 		$filters = array(
-			GD_TEMPLATE_FILTERINNER_PROJECTS => GD_FILTER_PROJECTS,
-			GD_TEMPLATE_FILTERINNER_AUTHORPROJECTS => GD_FILTER_AUTHORPROJECTS,
-			GD_TEMPLATE_FILTERINNER_TAGPROJECTS => GD_FILTER_TAGPROJECTS,
+			GD_TEMPLATE_FILTERINNER_LOCATIONPOSTS => GD_FILTER_LOCATIONPOSTS,
+			GD_TEMPLATE_FILTERINNER_AUTHORLOCATIONPOSTS => GD_FILTER_AUTHORLOCATIONPOSTS,
+			GD_TEMPLATE_FILTERINNER_TAGLOCATIONPOSTS => GD_FILTER_TAGLOCATIONPOSTS,
 			GD_TEMPLATE_FILTERINNER_STORIES => GD_FILTER_STORIES,
 			GD_TEMPLATE_FILTERINNER_AUTHORSTORIES => GD_FILTER_AUTHORSTORIES,
 			GD_TEMPLATE_FILTERINNER_TAGSTORIES => GD_FILTER_TAGSTORIES,
@@ -67,7 +67,7 @@ class GD_Custom_Template_Processor_CustomFilterInners extends GD_Template_Proces
 			GD_TEMPLATE_FILTERINNER_FEATURED => GD_FILTER_FEATURED,				
 			GD_TEMPLATE_FILTERINNER_TAGFEATURED => GD_FILTER_TAGFEATURED,				
 			GD_TEMPLATE_FILTERINNER_BLOG => GD_FILTER_BLOG,
-			GD_TEMPLATE_FILTERINNER_MYPROJECTS => GD_FILTER_MYPROJECTS,
+			GD_TEMPLATE_FILTERINNER_MYLOCATIONPOSTS => GD_FILTER_MYLOCATIONPOSTS,
 			GD_TEMPLATE_FILTERINNER_MYSTORIES => GD_FILTER_MYSTORIES,
 			GD_TEMPLATE_FILTERINNER_MYANNOUNCEMENTS => GD_FILTER_MYANNOUNCEMENTS,
 			GD_TEMPLATE_FILTERINNER_MYDISCUSSIONS => GD_FILTER_MYDISCUSSIONS,
