@@ -15,7 +15,9 @@ function gd_user_contactmethods() {
 				'linkedin' => __( 'Linkedin' ),
 				'facebook' => __( 'Facebook'), 
 				'twitter' => __( 'Twitter'),
-				'youtube' => __( 'Youtube')
+				'youtube' => __( 'Youtube'),
+				'instagram' => __( 'Instagram'),
+				'blog' => __( 'Blog'),
 				);
 	
 	return $contact;
@@ -73,6 +75,8 @@ function custom_save_extra_user_profile_fields( $user_id ) {
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_TWITTER, esc_attr($_POST['twitter']), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_LINKEDIN, esc_attr($_POST['linkedin']), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_YOUTUBE, esc_attr($_POST['youtube']), true );
+	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, esc_attr($_POST['instagram']), true );
+	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_BLOG, esc_attr($_POST['blog']), true );
 	
 	// The $display_name also works for nickname: it is needed for searching (can search nickname, but not display_name)
 	$display_name = calculate_best_display_name($user_id);

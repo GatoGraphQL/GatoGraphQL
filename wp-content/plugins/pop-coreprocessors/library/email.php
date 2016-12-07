@@ -51,7 +51,8 @@ function gd_sendemail( $to, $subject, $msg ) {
 	// add_filter('wp_mail_content_type','set_html_content_type');
 
 	// Get rid of html code in the subject
-	$subject = wp_specialchars_decode($subject);
+	// $subject = wp_specialchars_decode($subject);
+	$subject = html_entity_decode(wp_kses_data($subject)); //decode entities, but run kses first just in case users use placeholders containing html
 	
 	wp_mail( $to, $subject, $msg, $headers );
 

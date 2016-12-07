@@ -52,12 +52,20 @@ class GD_URE_Template_Processor_MultiSelectFormComponentInputs extends GD_Templa
 			case GD_URE_TEMPLATE_FORMCOMPONENT_ORGANIZATIONCATEGORIES:
 			case GD_URE_TEMPLATE_FILTERFORMCOMPONENT_ORGANIZATIONCATEGORIES:
 			
-				return __('Organization Categories', 'poptheme-wassup');
+				// Allow AgendaUrbana to Override
+				return apply_filters(
+					'GD_URE_Template_Processor_MultiSelectFormComponentInputs:label:categories',
+					__('Organization Categories', 'poptheme-wassup')
+				);
 				
 			case GD_URE_TEMPLATE_FORMCOMPONENT_ORGANIZATIONTYPES:
 			case GD_URE_TEMPLATE_FILTERFORMCOMPONENT_ORGANIZATIONTYPES:
 
-				return __('Organization Types', 'poptheme-wassup');
+				// Allow AgendaUrbana to Override
+				return apply_filters(
+					'GD_URE_Template_Processor_MultiSelectFormComponentInputs:label:types',
+					__('Organization Types', 'poptheme-wassup')
+				);
 		}
 		
 		return parent::get_label_text($template_id, $atts);

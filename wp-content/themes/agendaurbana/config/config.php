@@ -281,7 +281,6 @@ function gd_images_welcome_impl($img) {
  * ---------------------------------------------------------------------------------------------------------------*/
 add_filter('wassup_categories', 'agendaurbanatheme_categories');
 add_filter('wassup_individualinterests', 'agendaurbanatheme_categories');
-add_filter('wassup_organizationcategories', 'agendaurbanatheme_categories');
 function agendaurbanatheme_categories($categories) {
 
 	$categories = array_merge(
@@ -316,22 +315,88 @@ function agendaurbanatheme_categories($categories) {
 	return $categories;
 }
 
+add_filter('wassup_organizationcategories', 'agendaurbanatheme_organizationcategories');
+function agendaurbanatheme_organizationcategories($categories) {
+
+	$categories = array_merge(
+		$categories,
+		array(
+			sanitize_title('Communes 1 to 15') => __('Communes 1 to 15', 'agendaurbana'),
+			sanitize_title('Commune 1') => __('Commune 1', 'agendaurbana'),
+			sanitize_title('Commune 2') => __('Commune 2', 'agendaurbana'),
+			sanitize_title('Commune 3') => __('Commune 3', 'agendaurbana'),
+			sanitize_title('Commune 4') => __('Commune 4', 'agendaurbana'),
+			sanitize_title('Commune 5') => __('Commune 5', 'agendaurbana'),
+			sanitize_title('Commune 6') => __('Commune 6', 'agendaurbana'),
+			sanitize_title('Commune 7') => __('Commune 7', 'agendaurbana'),
+			sanitize_title('Commune 8') => __('Commune 8', 'agendaurbana'),
+			sanitize_title('Commune 9') => __('Commune 9', 'agendaurbana'),
+			sanitize_title('Commune 10') => __('Commune 10', 'agendaurbana'),
+			sanitize_title('Commune 11') => __('Commune 11', 'agendaurbana'),
+			sanitize_title('Commune 12') => __('Commune 12', 'agendaurbana'),
+			sanitize_title('Commune 13') => __('Commune 13', 'agendaurbana'),
+			sanitize_title('Commune 14') => __('Commune 14', 'agendaurbana'),
+			sanitize_title('Commune 15') => __('Commune 15', 'agendaurbana'),
+			sanitize_title('CABA') => __('CABA', 'agendaurbana'),
+			sanitize_title('Metropolitan Area Buenos Aires (CABA + Greater Buenos Aires)') => __('Metropolitan Area Buenos Aires (CABA + Greater Buenos Aires)', 'agendaurbana'),
+			sanitize_title('Conurbanos CABA and La Plata') => __('Conurbanos CABA and La Plata', 'agendaurbana'),
+			sanitize_title('National') => __('National', 'agendaurbana'),
+			sanitize_title('Latin American') => __('Latin American', 'agendaurbana'),
+			sanitize_title('World') => __('World', 'agendaurbana'),
+			// sanitize_title('Advocacy') => __('Advocacy', 'agendaurbana'),
+			// sanitize_title('Agriculture') => __('Agriculture', 'agendaurbana'),
+			// sanitize_title('Civil Rights') => __('Civil Rights', 'agendaurbana'),
+			// sanitize_title('Corruption') => __('Corruption', 'agendaurbana'),
+			// sanitize_title('Discrimination') => __('Discrimination', 'agendaurbana'),
+			// sanitize_title('Economics') => __('Economics', 'agendaurbana'),
+			// sanitize_title('Education') => __('Education', 'agendaurbana'),
+			// sanitize_title('Employment') => __('Employment', 'agendaurbana'),
+			// sanitize_title('Energy') => __('Energy', 'agendaurbana'),
+			// sanitize_title('Environment') => __('Environment', 'agendaurbana'),
+			// sanitize_title('Food') => __('Food', 'agendaurbana'),
+			// sanitize_title('Health') => __('Health', 'agendaurbana'),
+			// sanitize_title('Housing') => __('Housing', 'agendaurbana'),
+			// sanitize_title('Justice') => __('Justice', 'agendaurbana'),
+			// sanitize_title('Law') => __('Law', 'agendaurbana'),
+			// sanitize_title('Migration') => __('Migration', 'agendaurbana'),
+			// sanitize_title('Military') => __('Military', 'agendaurbana'),
+			// sanitize_title('Politics') => __('Politics', 'agendaurbana'),
+			// sanitize_title('Poverty') => __('Poverty', 'agendaurbana'),
+			// sanitize_title('Religion') => __('Religion', 'agendaurbana'),
+			// sanitize_title('Science/technology') => __('Science/technology', 'agendaurbana'),
+			// sanitize_title('Social Welfare') => __('Social Welfare', 'agendaurbana'),
+			// sanitize_title('Others') => __('Others', 'agendaurbana'),
+		)
+	);
+
+	return $categories;
+}
+
 add_filter('wassup_organizationtypes', 'agendaurbanatheme_organizationtypes');
 function agendaurbanatheme_organizationtypes($types) {
 
 	return array(
-		sanitize_title('Association') => __('Association', 'agendaurbana'),
-		sanitize_title('Community-based organisation') => __('Community-based organisation', 'agendaurbana'),
-		sanitize_title('Cooperative') => __('Cooperative', 'agendaurbana'),
-		sanitize_title('Corporation/Business') => __('Corporation/Business', 'agendaurbana'),
-		sanitize_title('Foundation') => __('Foundation', 'agendaurbana'),
-		sanitize_title('Governmental organisation') => __('Governmental organisation', 'agendaurbana'),
-		sanitize_title('Informal economy') => __('Informal economy', 'agendaurbana'),
-		sanitize_title('Mutual benefit society') => __('Mutual benefit society', 'agendaurbana'),
-		sanitize_title('Non-governmental organisation') => __('Non-governmental organisation', 'agendaurbana'),
-		sanitize_title('Research institute/University') => __('Research institute/University', 'agendaurbana'),
-		sanitize_title('Social enterprise') => __('Social enterprise', 'agendaurbana'),
-		sanitize_title('Other') => __('Other', 'agendaurbana'),
+		sanitize_title('Community Advisory Council') => __('Community Advisory Council', 'agendaurbana'),
+		sanitize_title('Official') => __('Official', 'agendaurbana'),
+		sanitize_title('Newspaper (media)') => __('Newspaper (media)', 'agendaurbana'),
+		sanitize_title('Political (ideologies, militancy)') => __('Political (ideologies, militancy)', 'agendaurbana'),
+		sanitize_title('Clustering of Network Nodes') => __('Clustering of Network Nodes', 'agendaurbana'),
+		sanitize_title('Thematic (specialty on a topic)') => __('Thematic (specialty on a topic)', 'agendaurbana'),
+		sanitize_title('Territorial (defense of places)') => __('Territorial (defense of places)', 'agendaurbana'),
+		sanitize_title('Radio Station (live)') => __('Radio Station (live)', 'agendaurbana'),
+		sanitize_title('Archive of Radio or TV Programs') => __('Archive of Radio or TV Programs', 'agendaurbana'),
+		// sanitize_title('Association') => __('Association', 'agendaurbana'),
+		// sanitize_title('Community-based organisation') => __('Community-based organisation', 'agendaurbana'),
+		// sanitize_title('Cooperative') => __('Cooperative', 'agendaurbana'),
+		// sanitize_title('Corporation/Business') => __('Corporation/Business', 'agendaurbana'),
+		// sanitize_title('Foundation') => __('Foundation', 'agendaurbana'),
+		// sanitize_title('Governmental organisation') => __('Governmental organisation', 'agendaurbana'),
+		// sanitize_title('Informal economy') => __('Informal economy', 'agendaurbana'),
+		// sanitize_title('Mutual benefit society') => __('Mutual benefit society', 'agendaurbana'),
+		// sanitize_title('Non-governmental organisation') => __('Non-governmental organisation', 'agendaurbana'),
+		// sanitize_title('Research institute/University') => __('Research institute/University', 'agendaurbana'),
+		// sanitize_title('Social enterprise') => __('Social enterprise', 'agendaurbana'),
+		// sanitize_title('Other') => __('Other', 'agendaurbana'),
 	);
 }
 

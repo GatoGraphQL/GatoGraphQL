@@ -30,6 +30,16 @@ class GD_Custom_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor
 			case 'contact':
 			
 				$value = parent::get_value($resultitem, $field);
+				if ($blog = $this->get_value($user, 'blog')) {
+			
+					$value[] = array(
+						'tooltip' => __('Blog', 'poptheme-wassup'),
+						'url' => maybe_add_http($blog),
+						'text' => $blog,
+						'target' => '_blank',
+						'fontawesome' => 'fa-pencil',
+					);
+				}
 				if ($facebook = $this->get_value($user, 'facebook')) {
 			
 					$value[] = array(
@@ -70,6 +80,16 @@ class GD_Custom_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor
 						'fontawesome' => 'fa-youtube',
 					);
 				}
+				if ($instagram = $this->get_value($user, 'instagram')) {
+			
+					$value[] = array(
+						'tooltip' => __('Instagram', 'poptheme-wassup'),
+						'url' => maybe_add_http($instagram),
+						'text' => $instagram,
+						'target' => '_blank',
+						'fontawesome' => 'fa-instagram',
+					);
+				}
 				break;
 
 			case 'facebook':
@@ -90,6 +110,16 @@ class GD_Custom_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor
 			case 'youtube':
 
 				$value = GD_MetaManager::get_user_meta($this->get_id($user), GD_METAKEY_PROFILE_YOUTUBE, true);
+				break;
+
+			case 'instagram':
+
+				$value = GD_MetaManager::get_user_meta($this->get_id($user), GD_METAKEY_PROFILE_INSTAGRAM, true);
+				break;
+
+			case 'blog':
+
+				$value = GD_MetaManager::get_user_meta($this->get_id($user), GD_METAKEY_PROFILE_BLOG, true);
 				break;
 
 			// case 'allcontent-tab-url':

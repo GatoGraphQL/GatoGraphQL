@@ -19,11 +19,18 @@ class GD_Template_Processor_CreateUpdateProfileFormsUtils {
 		$extra_components_contactinfo = array(
 			GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_DISPLAYEMAIL
 		);
-		$extra_components_socialmedia = array(
-			GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_FACEBOOK,
-			GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_TWITTER,
-			GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_LINKEDIN,
-			GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_YOUTUBE
+
+		// Allow AgendaUrbana to remove LinkedIn
+		$extra_components_socialmedia = apply_filters(
+			'GD_Template_Processor_CreateUpdateProfileFormsUtils:socialmedia',
+			array(
+				GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_BLOG,
+				GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_FACEBOOK,
+				GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_TWITTER,
+				GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_LINKEDIN,
+				GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_YOUTUBE,
+				GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_INSTAGRAM,
+			)
 		);
 		array_splice($components, array_search(GD_TEMPLATE_FORMCOMPONENTGROUP_CUU_DESCRIPTION, $components), 0, $extra_components_beforedesc);
 		// array_splice($components, array_search(GD_TEMPLATE_FORMCOMPONENTGROUP_CUU_USERURL, $components), 0, $extra_components_contactinfo);

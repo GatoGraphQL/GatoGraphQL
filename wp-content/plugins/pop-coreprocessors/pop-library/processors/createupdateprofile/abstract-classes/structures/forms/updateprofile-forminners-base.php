@@ -29,6 +29,8 @@ class GD_Template_Processor_UpdateProfileFormInnersBase extends GD_Template_Proc
 		$this->add_att(GD_TEMPLATE_FORMCOMPONENT_CUP_TWITTER, $atts, 'load-itemobject-value', true);
 		$this->add_att(GD_TEMPLATE_FORMCOMPONENT_CUP_LINKEDIN, $atts, 'load-itemobject-value', true);
 		$this->add_att(GD_TEMPLATE_FORMCOMPONENT_CUP_YOUTUBE, $atts, 'load-itemobject-value', true);
+		$this->add_att(GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM, $atts, 'load-itemobject-value', true);
+		$this->add_att(GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG, $atts, 'load-itemobject-value', true);
 
 		// Allow to initialize the Locations Map from Events Manager
 		$extra_layouts = apply_filters('gd_template:updateprofile:extralayouts', array());

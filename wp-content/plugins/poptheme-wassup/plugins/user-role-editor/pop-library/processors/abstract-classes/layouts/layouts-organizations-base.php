@@ -23,11 +23,16 @@ class GD_URE_Custom_Template_Processor_ProfileOrganizationLayoutsBase extends GD
 
 		$ret[GD_JS_CLASSES/*'classes'*/]['label'] = 'label-info';
 		$ret[GD_JS_CLASSES/*'classes'*/]['label2'] = 'label-primary';
-		$ret[GD_JS_TITLES/*'titles'*/] = array(				
-			'types' => __('Type', 'poptheme-wassup'),
-			'categories' => __('Categories', 'poptheme-wassup'),
-			'contactperson' => __('Contact Person', 'poptheme-wassup'),
-			'number' => __('Tel / Fax', 'poptheme-wassup'),
+		
+		// Allow Agenda Urbana to override the titles
+		$ret[GD_JS_TITLES/*'titles'*/] = apply_filters(
+			'GD_URE_Custom_Template_Processor_ProfileOrganizationLayoutsBase:titles',
+			array(				
+				'types' => __('Type', 'poptheme-wassup'),
+				'categories' => __('Categories', 'poptheme-wassup'),
+				'contactperson' => __('Contact Person', 'poptheme-wassup'),
+				'number' => __('Tel / Fax', 'poptheme-wassup'),
+			)
 		);
 		
 		return $ret;

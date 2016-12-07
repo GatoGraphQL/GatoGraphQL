@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Agenda Urbana\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 22:09+0800\n"
-"PO-Revision-Date: 2016-12-03 22:10+0800\n"
+"POT-Creation-Date: 2016-12-07 22:05+0800\n"
+"PO-Revision-Date: 2016-12-07 22:05+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -97,146 +97,222 @@ msgstr "Materiales"
 msgid "Blog"
 msgstr "Blog"
 
-#: .././config/config.php:290
+#: .././config/config.php:289
 msgid "Advocacy"
 msgstr "Abogacía"
 
-#: .././config/config.php:291
+#: .././config/config.php:290
 msgid "Agriculture"
 msgstr "Agricultura"
 
-#: .././config/config.php:292
+#: .././config/config.php:291
 msgid "Civil Rights"
 msgstr "Derechos civiles"
 
-#: .././config/config.php:293
+#: .././config/config.php:292
 msgid "Corruption"
 msgstr "Corrupción"
 
-#: .././config/config.php:294
+#: .././config/config.php:293
 msgid "Discrimination"
 msgstr "Discriminación"
 
-#: .././config/config.php:295
+#: .././config/config.php:294
 msgid "Economics"
 msgstr "Economía"
 
-#: .././config/config.php:296
+#: .././config/config.php:295
 msgid "Education"
 msgstr "Educación"
 
-#: .././config/config.php:297
+#: .././config/config.php:296
 msgid "Employment"
 msgstr "Empleo"
 
-#: .././config/config.php:298
+#: .././config/config.php:297
 msgid "Energy"
 msgstr "Energía"
 
-#: .././config/config.php:299
+#: .././config/config.php:298
 msgid "Environment"
 msgstr "Medio ambiente"
 
-#: .././config/config.php:300
+#: .././config/config.php:299
 msgid "Food"
 msgstr "Alimentación"
 
-#: .././config/config.php:301
+#: .././config/config.php:300
 msgid "Health"
 msgstr "Salud"
 
-#: .././config/config.php:302
+#: .././config/config.php:301
 msgid "Housing"
 msgstr "Viviendas"
 
-#: .././config/config.php:303
+#: .././config/config.php:302
 msgid "Justice"
 msgstr "Justicia"
 
-#: .././config/config.php:304
+#: .././config/config.php:303
 msgid "Law"
 msgstr "Ley"
 
-#: .././config/config.php:305
+#: .././config/config.php:304
 msgid "Migration"
 msgstr "Inmigración"
 
-#: .././config/config.php:306
+#: .././config/config.php:305
 msgid "Military"
 msgstr "Militar"
 
-#: .././config/config.php:307
+#: .././config/config.php:306
 msgid "Politics"
 msgstr "Política"
 
-#: .././config/config.php:308
+#: .././config/config.php:307
 msgid "Poverty"
 msgstr "Pobreza"
 
-#: .././config/config.php:309
+#: .././config/config.php:308
 msgid "Religion"
 msgstr "Religión"
 
-#: .././config/config.php:310
+#: .././config/config.php:309
 msgid "Science/technology"
 msgstr "Ciencia/tecnología"
 
-#: .././config/config.php:311
+#: .././config/config.php:310
 msgid "Social Welfare"
 msgstr "Bienestar Social"
 
-#: .././config/config.php:312
+#: .././config/config.php:311
 #: .././plugins/poptheme-wassup/plugins/gravityforms/config/config.php:15
 msgid "Others"
 msgstr "Otros"
 
-#: .././config/config.php:323
-msgid "Association"
-msgstr "Asociación"
-
 #: .././config/config.php:324
-msgid "Community-based organisation"
-msgstr "Organización de base comunitaria"
+msgid "Communes 1 to 15"
+msgstr "Comunas 1 a 15"
 
 #: .././config/config.php:325
-msgid "Cooperative"
-msgstr "Cooperativa"
+msgid "Commune 1"
+msgstr "Comuna 1"
 
 #: .././config/config.php:326
-msgid "Corporation/Business"
-msgstr "Corporación/Empresa"
+msgid "Commune 2"
+msgstr "Comuna 2"
 
 #: .././config/config.php:327
-msgid "Foundation"
-msgstr "Fundación"
+msgid "Commune 3"
+msgstr "Comuna 3"
 
 #: .././config/config.php:328
-msgid "Governmental organisation"
-msgstr "Organización gubernamental"
+msgid "Commune 4"
+msgstr "Comuna 4"
 
 #: .././config/config.php:329
-msgid "Informal economy"
-msgstr "Economía informal"
+msgid "Commune 5"
+msgstr "Comuna 5"
 
 #: .././config/config.php:330
-msgid "Mutual benefit society"
-msgstr "Mutual"
+msgid "Commune 6"
+msgstr "Comuna 6"
 
 #: .././config/config.php:331
-msgid "Non-governmental organisation"
-msgstr "Organización no gubernamental"
+msgid "Commune 7"
+msgstr "Comuna 7"
 
 #: .././config/config.php:332
-msgid "Research institute/University"
-msgstr "Instituto de investigación/Universidad"
+msgid "Commune 8"
+msgstr "Comuna 8"
 
 #: .././config/config.php:333
-msgid "Social enterprise"
-msgstr "Empresa social"
+msgid "Commune 9"
+msgstr "Comuna 9"
 
 #: .././config/config.php:334
-msgid "Other"
-msgstr "Otro"
+msgid "Commune 10"
+msgstr "Comuna 10"
+
+#: .././config/config.php:335
+msgid "Commune 11"
+msgstr "Comuna 11"
+
+#: .././config/config.php:336
+msgid "Commune 12"
+msgstr "Comuna 12"
+
+#: .././config/config.php:337
+msgid "Commune 13"
+msgstr "Comuna 13"
+
+#: .././config/config.php:338
+msgid "Commune 14"
+msgstr "Comuna 14"
+
+#: .././config/config.php:339
+msgid "Commune 15"
+msgstr "Comuna 15"
+
+#: .././config/config.php:340
+msgid "CABA"
+msgstr "CABA"
+
+#: .././config/config.php:341
+msgid "Metropolitan Area Buenos Aires (CABA + Greater Buenos Aires)"
+msgstr "Área Metropolitana Buenos Aires (CABA + Gran Buenos Aires)"
+
+#: .././config/config.php:342
+msgid "Conurbanos CABA and La Plata"
+msgstr "Conurbanos CABA y La Plata"
+
+#: .././config/config.php:343
+msgid "National"
+msgstr "Nacional"
+
+#: .././config/config.php:344
+msgid "Latin American"
+msgstr "Latinoamericano"
+
+#: .././config/config.php:345
+msgid "World"
+msgstr "Mundial"
+
+#: .././config/config.php:379
+msgid "Community Advisory Council"
+msgstr "Consejo Consultivo Comunal"
+
+#: .././config/config.php:380
+msgid "Official"
+msgstr "Oficial"
+
+#: .././config/config.php:381
+msgid "Newspaper (media)"
+msgstr "Periódico (medio de información)"
+
+#: .././config/config.php:382
+msgid "Political (ideologies, militancy)"
+msgstr "Político (ideologías, militancia)"
+
+#: .././config/config.php:383
+msgid "Clustering of Network Nodes"
+msgstr "Agrupamiento de nodos de la Red"
+
+#: .././config/config.php:384
+msgid "Thematic (specialty on a topic)"
+msgstr "Temático (especialidad en temas)"
+
+#: .././config/config.php:385
+msgid "Territorial (defense of places)"
+msgstr "Territorial (defensa de lugares)"
+
+#: .././config/config.php:386
+msgid "Radio Station (live)"
+msgstr "Emisora de Radio (en vivo)"
+
+#: .././config/config.php:387
+msgid "Archive of Radio or TV Programs"
+msgstr "Archivo de Programas de Radio o TV"
 
 #: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:21
 #: .././plugins/_poptheme-wassup-categoryprocessors/config/config.php:27
@@ -363,6 +439,48 @@ msgstr ""
 "Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
 "plugins/pop/“>latest version</a> of <b>Agenda Urbana Processors</b> "
 "installed, or otherwise <b>Agenda Urbana</b> might not function properly."
+
+#~ msgid "All Communes of the Autonomous City of Buenos Aires"
+#~ msgstr "Todas las Comunas de la Ciudad Autónoma de Buenos Aires"
+
+#~ msgid "Autonomous City of Buenos Aires"
+#~ msgstr "Ciudad Autónoma de Buenos Aires"
+
+#~ msgid "Association"
+#~ msgstr "Asociación"
+
+#~ msgid "Community-based organisation"
+#~ msgstr "Organización de base comunitaria"
+
+#~ msgid "Cooperative"
+#~ msgstr "Cooperativa"
+
+#~ msgid "Corporation/Business"
+#~ msgstr "Corporación/Empresa"
+
+#~ msgid "Foundation"
+#~ msgstr "Fundación"
+
+#~ msgid "Governmental organisation"
+#~ msgstr "Organización gubernamental"
+
+#~ msgid "Informal economy"
+#~ msgstr "Economía informal"
+
+#~ msgid "Mutual benefit society"
+#~ msgstr "Mutual"
+
+#~ msgid "Non-governmental organisation"
+#~ msgstr "Organización no gubernamental"
+
+#~ msgid "Research institute/University"
+#~ msgstr "Instituto de investigación/Universidad"
+
+#~ msgid "Social enterprise"
+#~ msgstr "Empresa social"
+
+#~ msgid "Other"
+#~ msgstr "Otro"
 
 #~ msgid "Workshop"
 #~ msgstr "Taller"

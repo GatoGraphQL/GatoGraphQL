@@ -17,8 +17,9 @@ popDateRange = {
 			// There's a bug: if these are set, then first time we click on "Today" it doesn't work
 			// startDate: moment(),
 			// endDate: moment(),
+			autoUpdateInput: false,
 			autoApply: true,
-			linkedCalendars: false,
+			linkedCalendars: true,
 			// showDropdowns: true,
 			showWeekNumbers: false,
 			timePicker: false,			
@@ -90,16 +91,22 @@ popDateRange = {
 				$.extend(daterange_settings, timePicker);
 			}
 
+			// Update the value in the input when clicking "Apply". It works together with autoUpdateInput=false, because
+			// otherwise it also updates the value when clicking on Cancel
+			daterange.on('apply.daterangepicker', function(ev, picker) {
+				$(this).val(picker.startDate.format(picker.locale.format) + ' - ' + picker.endDate.format(picker.locale.format));
+			});
 			daterange.daterangepicker(
 				daterange_settings,
 				t.callback
 			);
 
-			// Since daterangepicker v2.1.11, it also sets the initial value on the input, but without actually calling 'apply', so the values on the hidden inputs are not set
-			// To fix it, just remove the initial value, which is wrong anyway
-			if (!daterange.siblings('.from').val()) {
-				daterange.val('');
-			}
+			// Comment Leo 05/12/2016: commented since adding autoUpdateInput=false
+			// // Since daterangepicker v2.1.11, it also sets the initial value on the input, but without actually calling 'apply', so the values on the hidden inputs are not set
+			// // To fix it, just remove the initial value, which is wrong anyway
+			// if (!daterange.siblings('.from').val()) {
+			// 	daterange.val('');
+			// }
 		});
 	},
 
@@ -111,7 +118,7 @@ popDateRange = {
 
 		var t = this;
 		var dateinput = t.element;
-		
+
 		dateinput.siblings('.from').val(start.format('YYYY-MM-DD'));
 		dateinput.siblings('.to').val(end.format('YYYY-MM-DD'));
 

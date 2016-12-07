@@ -10,6 +10,8 @@ define ('GD_TEMPLATE_FORMCOMPONENT_CUP_FACEBOOK', PoP_ServerUtils::get_template_
 define ('GD_TEMPLATE_FORMCOMPONENT_CUP_TWITTER', PoP_ServerUtils::get_template_definition('formcomponent-cup-twitter'));
 define ('GD_TEMPLATE_FORMCOMPONENT_CUP_LINKEDIN', PoP_ServerUtils::get_template_definition('formcomponent-cup-linkedin'));
 define ('GD_TEMPLATE_FORMCOMPONENT_CUP_YOUTUBE', PoP_ServerUtils::get_template_definition('formcomponent-cup-youtube'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM', PoP_ServerUtils::get_template_definition('formcomponent-cup-instagram'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG', PoP_ServerUtils::get_template_definition('formcomponent-cup-blog'));
 
 class GD_Template_Processor_CreateUpdateProfileTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 
@@ -20,7 +22,9 @@ class GD_Template_Processor_CreateUpdateProfileTextFormComponentInputs extends G
 			GD_TEMPLATE_FORMCOMPONENT_CUP_FACEBOOK,
 			GD_TEMPLATE_FORMCOMPONENT_CUP_TWITTER,
 			GD_TEMPLATE_FORMCOMPONENT_CUP_LINKEDIN,
-			GD_TEMPLATE_FORMCOMPONENT_CUP_YOUTUBE
+			GD_TEMPLATE_FORMCOMPONENT_CUP_YOUTUBE,
+			GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM,
+			GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG,
 		);
 	}
 
@@ -51,6 +55,16 @@ class GD_Template_Processor_CreateUpdateProfileTextFormComponentInputs extends G
 
 				// return '<i class="fa fa-fw fa-youtube"></i>'.__('Youtube URL', 'pop-coreprocessors');
 				return __('Youtube URL', 'pop-coreprocessors');
+
+			case GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM:
+
+				// return '<i class="fa fa-fw fa-instagram"></i>'.__('Instagram URL', 'pop-coreprocessors');
+				return __('Instagram URL', 'pop-coreprocessors');
+
+			case GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG:
+
+				// return '<i class="fa fa-fw fa-youtube"></i>'.__('Blog URL', 'pop-coreprocessors');
+				return __('Blog URL', 'pop-coreprocessors');
 		}
 		
 		return parent::get_label_text($template_id, $atts);
@@ -109,6 +123,16 @@ class GD_Template_Processor_CreateUpdateProfileTextFormComponentInputs extends G
 				
 				$ret[] = array('key' => 'value', 'field' => 'youtube');
 				break;
+
+			case GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM:
+				
+				$ret[] = array('key' => 'value', 'field' => 'instagram');
+				break;
+
+			case GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG:
+				
+				$ret[] = array('key' => 'value', 'field' => 'blog');
+				break;
 		}
 		
 		return $ret;
@@ -123,6 +147,8 @@ class GD_Template_Processor_CreateUpdateProfileTextFormComponentInputs extends G
 			GD_TEMPLATE_FORMCOMPONENT_CUP_TWITTER => __('Twitter URL', 'pop-coreprocessors'),
 			GD_TEMPLATE_FORMCOMPONENT_CUP_LINKEDIN => __('LinkedIn URL', 'pop-coreprocessors'),
 			GD_TEMPLATE_FORMCOMPONENT_CUP_YOUTUBE => __('Youtube URL', 'pop-coreprocessors'),
+			GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM => __('Instagram URL', 'pop-coreprocessors'),
+			GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG => __('Blog URL', 'pop-coreprocessors'),
 		);
 		if ($placeholder = $placeholders[$template_id]) {
 

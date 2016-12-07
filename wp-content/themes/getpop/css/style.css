@@ -27,17 +27,17 @@ COLORS used in the Website:
 body.sliding .background-screen {
   display: block;
 }
-body.sliding.getpop-demo .background-screen,
-body.sliding.getpop-demo .loading-screen {
-  background-color: #fcf9eb;
-  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;
-}
 body.sliding.getpop .background-screen,
 body.sliding.getpop .loading-screen {
   background-color: #babfc4;
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
   background: #babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;
+}
+body.sliding.getpop-demo .background-screen,
+body.sliding.getpop-demo .loading-screen {
+  background-color: #fcf9eb;
+  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
+  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;
 }
 body.sliding .background-screen { 
   -webkit-background-size: cover;
@@ -61,6 +61,15 @@ body.sliding.pop-loadingjs.getpop .loading-screen,
 body.sliding.pop-loadingjs.getpop-demo .loading-screen {
   background: transparent;
   background-color: transparent;
+}
+
+body.sliding.pop-loadingframe.pop-loadingjs.getpop .loading-screen {
+    background-color: #babfc4;
+    background: #babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;
+}
+body.sliding.pop-loadingframe.pop-loadingjs.getpop-demo .loading-screen {
+    background-color: #fcf9eb;
+    background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;
 }
 
 body.sliding, 
