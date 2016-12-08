@@ -94,6 +94,12 @@ class GD_DataLoad_IOHandler_List extends GD_DataLoad_IOHandler_Query {
 		$limit = $vars[GD_URLPARAM_LIMIT];
 		$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_LIMIT] = $limit;
 
+		// If it is lazy load or Pop, no need to calculate show-msg / paged / stop-fetching / etc
+		if ($iohandler_atts[GD_DATALOAD_CONTENTLOADED] === false) {
+
+			return $ret;
+		}
+
 		$paged = $vars[GD_URLPARAM_PAGED];
 								
 		// Show error message if no items
@@ -124,12 +130,6 @@ class GD_DataLoad_IOHandler_List extends GD_DataLoad_IOHandler_Query {
 		
 		// // Hide Block?
 		// $ret[GD_URLPARAM_HIDEBLOCK] = empty($dataset) && $iohandler_atts[GD_URLPARAM_HIDDENIFEMPTY];
-
-		// If it is lazy load or Pop, no need to calculate paged / stop-fetching / etc
-		if ($iohandler_atts[GD_DATALOAD_CONTENTLOADED] === false) {
-
-			return $ret;
-		}
 
 		// stop-fetching is loaded twice: in the params and in the feedback. This is because we can't access the params from the .tmpl files
 		// (the params object is created only when initializing JS => after rendering the html with Handlebars so it's not available by then)

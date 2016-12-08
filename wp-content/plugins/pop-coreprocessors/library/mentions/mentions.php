@@ -26,7 +26,16 @@ class PoP_Mentions {
     // * A hashtag can contain any UTF-8 alphanumeric character, plus the underscore symbol. That's expressed with the character class [0-9_\p{L}]*, based on http://stackoverflow.com/a/5767106/1441613
     // * A hashtag can't be only numeric, it must have at least one alpahanumeric character or the underscore symbol. That condition is checked by ([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*), similar to http://stackoverflow.com/a/1051998/1441613
     // * Finally, the modifier 'u' is added to ensure that the strings are treated as UTF-8
-    $this->regex_general =  '/(?<!\w)#([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)/u';
+    // $this->regex_general =  '/(?<!\w)#([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)/u';
+    // Solution taken from a combination of:
+      // 1. https://stackoverflow.com/questions/1563844/best-hashtag-regex:
+      // Use: '/(?<=\s|^)#(\w*[A-Za-z_]+\w*)/';
+      // 2. https://stackoverflow.com/questions/37920638/regex-pattern-to-match-hashtag-but-not-in-html-attributes
+      // "Regex pattern to match hashtag, but not in HTML attributes"
+      // /#[a-z0-9_]+(?![^<]*>)/
+      // What the negative lookahead does is makes sure that there is a < between the hashtag and the next >.
+    // So then I took the regex from #1, and applied the negative lookahead: +(?![^<]*>)
+    $this->regex_general =  '/(?<=\s|^)#(\w*[A-Za-z_]+\w*)+(?![^<]*>)/';
 
     // Allow also underscore ("_"), dash ("-") and dots ("."), but only when they are not the final char (@pedro.perez. = pedro.perez). Eg: greenpeace-asia
     // Regex taken from https://stackoverflow.com/questions/13639478/how-do-i-extract-words-starting-with-a-hash-tag-from-a-string-into-an-array
@@ -38,11 +47,13 @@ class PoP_Mentions {
     if (!is_admin()) {
       // Can't use filter "the_content" because it doesn't work with page How to use website on MESYM
       // So quick fix: ignore for pages. Since the_content does not pass the post_id, we use another hook
-      add_filter('pop_content', array($this, 'process_content_post'), 9999, 2);      
+      // Execute on 'pop_content_pre' so we do it before doing wpautop, or otherwise the hashtags after <p> don't work
+      add_filter('pop_content_pre', array($this, 'process_content_post'), 9999, 2);      
 
       // Comment Leo 08/05/2016: Do not enable for excerpts, because somehow sometimes it fails (eg: with MESYM Documentary Night event) deleting everything
       // add_filter('pop_excerpt', array($this, 'process_content_post'), 9999, 2);      
-      add_filter('gd_comments_content', array($this, 'process_content'), 9999);      
+      // Execute before wpautop
+      add_filter('gd_comments_content', array($this, 'process_content'), 5);      
     }
   }
   

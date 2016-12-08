@@ -156,7 +156,9 @@ class GD_DataLoad_FieldProcessor_Posts extends GD_DataLoad_FieldProcessor {
 			
 			case 'content' :
 				//$value = esc_attr(apply_filters('the_content', $post->post_content));
-				$value = apply_filters('the_content', $post->post_content);
+				$value = $post->post_content;
+				$value = apply_filters('pop_content_pre', $value, $this->get_id($post));
+				$value = apply_filters('the_content', $value);
 				$value = apply_filters('pop_content', $value, $this->get_id($post));
 				break;
 

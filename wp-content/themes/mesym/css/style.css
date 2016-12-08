@@ -16,6 +16,11 @@ COLORS used in the Website:
 @lightest gray: #eff4c1; rgb(241, 241, 242);
 */
 
+.pop-background-img {
+  margin-bottom: 20px;
+  border: 1px dashed #454c0f;
+  border-radius: 30px;
+}
 .background-screen {
   display: none;
 }
@@ -24,19 +29,18 @@ body.sliding .background-screen {
 }
 body.sliding .background-screen,
 body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
-    background-color: #eff4c1;
-}
-body.sliding .background-screen { 
+  background-color: #eff4c1;
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #eff4c1 url(https://assets.mesym.com/wp-content/themes/mesym/img/mesym-bg-1440x900.png) no-repeat fixed center;
+  background: #eff4c1 url(https://assets.mesym.com/wp-content/themes/mesym/img/mesym-bg-1440x900.jpg?version=1) no-repeat fixed center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 @media (min-width: 1440px) {
-  body.sliding .background-screen { 
-    background-image: url(https://assets.mesym.com/wp-content/themes/mesym/img/mesym-bg-1920x1080.png);
+  body.sliding .background-screen,
+  body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
+    background-image: url(https://assets.mesym.com/wp-content/themes/mesym/img/mesym-bg-1920x1080.jpg?version=1);
   }
 }
 
