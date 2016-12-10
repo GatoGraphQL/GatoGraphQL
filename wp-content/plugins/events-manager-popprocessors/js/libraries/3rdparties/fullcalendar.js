@@ -28,6 +28,19 @@ popFullCalendar = {
 
 			targets.fullCalendar('destroy');
 		});
+		
+		// If when opening the page, the pageSectionPage is not active (eg: alt+click on the link), then the calendar will not show up
+		// So gotta call method 'render' whenever that page is first opened
+		if (pageSectionPage.hasClass('tab-pane') && !popManager.isActive(pageSectionPage)) {
+
+			// if (pageSectionPage.hasClass('tab-pane')) {
+
+			pageSectionPage.one('shown.bs.tabpane', function() {
+				
+				targets.fullCalendar('render');
+			});
+			// }
+		}
 
 		// When re-rendering a block, check if the operation is REPLACE (= filtering), then delete all the current events
 		block.on('beforeMerge', function(e, options) {

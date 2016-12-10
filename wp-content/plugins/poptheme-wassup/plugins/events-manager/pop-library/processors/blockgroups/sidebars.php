@@ -187,7 +187,8 @@ class GD_EM_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_
 				);
 				if ($inners[$blockgroup] == $blockgroup_block) {
 
-					$mainblock_taget = '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners > .content-single';
+					// Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
+					$mainblock_taget = '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners > .content-single';
 
 					// Make the block be collapsible, open it when the main feed is reached, with waypoints
 					$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', 'collapse');

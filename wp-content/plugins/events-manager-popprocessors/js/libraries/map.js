@@ -76,7 +76,8 @@ popMap = {
 			targets.each(function() {
 
 				var map = $(this);
-				t.addMarkers(pageSection, block, map, status.reload);
+				// t.addMarkers(pageSection, block, map, status.reload);
+				t.functionHiddenMap('addmarkers', pageSection, block, map, status);
 			});
 		});
 
@@ -127,6 +128,7 @@ popMap = {
 	triggerShowMap : function(pageSection, block, map) {
 
 		var t = this;
+
 		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
 		if (!popManager.isHidden(map)) {
 		
@@ -134,30 +136,72 @@ popMap = {
 		}
 		else {
 
-			// If in particular it is hidden because the pageSection is not visible from the pageSectionGroup, 
-			// then initialize it when the pageSection opens
-			if (popPageSectionManager.execIsHidden(pageSection)) {
+			t.functionHiddenMap('trigger', pageSection, block, map);
+		}
+	},
 
-				popPageSectionManager.getGroup(pageSection).one('on.bs.pagesection-group:pagesection-'+pageSection.attr('id')+':opened', function() {
+	functionHiddenMap : function(functionName, pageSection, block, map, status) {
 
-					// Make sure the block still exists! (It could've been destroyed by the time of the trigger)
-					block = $('#'+block.attr('id'));
-					if (block.length) {
-						t.execTriggerShowMap(pageSection, block, map);
+		var t = this;
+
+		var pageSectionPage = popManager.getPageSectionPage(block);
+
+		// If in particular it is hidden because the pageSection is not visible from the pageSectionGroup, 
+		// then initialize it when the pageSection opens
+		if (popPageSectionManager.execIsHidden(pageSection)) {
+
+			popPageSectionManager.getGroup(pageSection).one('on.bs.pagesection-group:pagesection-'+pageSection.attr('id')+':opened', function() {
+
+				// Make sure the block still exists! (It could've been destroyed by the time of the trigger)
+				block = $('#'+block.attr('id'));
+				if (block.length) {
+					
+					// Call again this same function, to make sure that the map is still not hidden by 1 of the other conditions (eg: pageSectionTab not active AND map inside a collapse)
+					// t.execTriggerShowMap(pageSection, block, map);
+					if (functionName == 'trigger') {
+						t.triggerShowMap(pageSection, block, map);
 					}
-				});
-			}
+					else if (functionName == 'addmarkers') {
+						t.addMarkers(pageSection, block, map, status.reload);
+					}
+				}
+			});
+		}
 
-			// If not visible because in a collapsed bootstrap element, wait until it opens
-			// This happens with the Locations Map in Create Individual Profile (initially minimized)
-			else if (map.parents('.collapse').not('.in').length) {
+		// If not visible because in a collapsed bootstrap element, wait until it opens
+		// This happens with the Locations Map in Create Individual Profile (initially minimized)
+		else if (map.parents('.collapse').not('.in').length) {
+			
+			var collapse = map.parents('.collapse').not('.in');
+			collapse.one('shown.bs.collapse', function() {
+
+				// Call again this same function, to make sure that the map is still not hidden by 1 of the other conditions (eg: pageSectionTab not active AND map inside a collapse)
+				// t.execTriggerShowMap(pageSection, block, map);
+				if (functionName == 'trigger') {
+					t.triggerShowMap(pageSection, block, map);
+				}
+				else if (functionName == 'addmarkers') {
+					t.addMarkers(pageSection, block, map, status.reload);
+				}
+			});
+		}
+
+		// If when opening the page, the pageSectionPage is not active (eg: alt+click on the link), then the map will not show up
+		else if (pageSectionPage.hasClass('tab-pane') && !popManager.isActive(pageSectionPage)) {
+
+			// if (pageSectionPage.hasClass('tab-pane')) {
+
+			pageSectionPage.one('shown.bs.tabpane', function() {
 				
-				var collapse = map.parents('.collapse').not('.in');
-				collapse.one('shown.bs.collapse', function() {
-
-					t.execTriggerShowMap(pageSection, block, map);
-				});
-			}
+				// t.execTriggerShowMap(pageSection, block, map);
+				if (functionName == 'trigger') {
+					t.triggerShowMap(pageSection, block, map);
+				}
+				else if (functionName == 'addmarkers') {
+					t.addMarkers(pageSection, block, map, status.reload);
+				}
+			});
+			// }
 		}
 	},
 

@@ -1441,6 +1441,15 @@ popSystem = {
 						if (loadingmsg_target != null) {
 							options['loadingmsg-target'] = loadingmsg_target;
 						}
+						// Possible options: e.shiftKey, e.altKey, e.metaKey
+						// e.ctrlkey is not an option, since Mac shows a contextual menu, doesn't do the link
+						if (e.altKey) {
+							
+							// Open the tab but don't focus on it
+							options.silentDocument = true;
+							options['js-args'].inactivePane = true;
+						}
+    
 						
 						popManager.fetch(url, options);
 					}

@@ -66,8 +66,13 @@ class GD_Template_Processor_TabPanePageSectionsBase extends GD_Template_Processo
 
 		// 2 possibilities: with the merge container (eg: main) or without it (eg: quickview)
 		$id = $this->get_frontend_id($template_id, $atts);
-		$ret[] = '#'.$id.'-merge > div.tab-pane.active > div.pop-block';
-		$ret[] = '#'.$id.' > div.tab-pane.active > div.pop-block';
+
+		// Comment Leo 10/12/2016: in the past, we did .tab-pane.active, however that doesn't work anymore for when alt+click to open a link
+		// So instead, just pick the last added .tab-pane
+		// $ret[] = '#'.$id.'-merge > div.tab-pane.active > div.pop-block';
+		// $ret[] = '#'.$id.' > div.tab-pane.active > div.pop-block';
+		$ret[] = '#'.$id.'-merge > div.tab-pane:last-child > div.pop-block';
+		$ret[] = '#'.$id.' > div.tab-pane:last-child > div.pop-block';
 
 		return $ret;
 	}

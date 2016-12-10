@@ -22,6 +22,7 @@ function gd_themewassup_jquery_constants_templatemanager_impl($jquery_constants)
 	$jquery_constants['PS_SIDEINFO_ID'] = GD_TEMPLATEID_PAGESECTIONID_SIDEINFO;
 	$jquery_constants['PS_HOVER_ID'] = GD_TEMPLATEID_PAGESECTIONID_HOVER;
 	$jquery_constants['PS_ADDONS_ID'] = GD_TEMPLATEID_PAGESECTIONID_ADDONS;
+	$jquery_constants['PS_ADDONTABS_ID'] = GD_TEMPLATEID_PAGESECTIONID_ADDONTABS;
 	$jquery_constants['PS_MODALS_ID'] = GD_TEMPLATEID_PAGESECTIONID_MODALS;
 
 	return $jquery_constants;

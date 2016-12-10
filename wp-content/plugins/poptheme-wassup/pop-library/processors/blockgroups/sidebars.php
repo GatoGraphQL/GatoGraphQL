@@ -215,9 +215,10 @@ class GD_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_Sid
 					case GD_TEMPLATE_BLOCK_HOMESECTION_ALLCONTENT_SIDEBAR:
 					case GD_TEMPLATE_BLOCK_TAGSECTION_MAINALLCONTENT_SIDEBAR:
 
+						// Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
 						$mainblock_targets = array(
-							GD_TEMPLATE_BLOCK_HOMESECTION_ALLCONTENT_SIDEBAR => '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter',
-							GD_TEMPLATE_BLOCK_TAGSECTION_MAINALLCONTENT_SIDEBAR => '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter',
+							GD_TEMPLATE_BLOCK_HOMESECTION_ALLCONTENT_SIDEBAR => '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter',
+							GD_TEMPLATE_BLOCK_TAGSECTION_MAINALLCONTENT_SIDEBAR => '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter',
 						);
 						$mainblock_target = $mainblock_targets[$blockgroup_block];
 
@@ -242,7 +243,8 @@ class GD_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_Sid
 				);
 				if ($inners[$blockgroup] == $blockgroup_block) {
 
-					$mainblock_taget = '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners > .content-single';
+					// Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
+					$mainblock_taget = '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners > .content-single';
 
 					// Make the block be collapsible, open it when the main feed is reached, with waypoints
 					$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', 'collapse');

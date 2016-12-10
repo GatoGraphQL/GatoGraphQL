@@ -19,6 +19,7 @@ wp-content/plugins/hello.php
 wp-admin/
 wp-includes/
 wp-content/languages/
+wp-content/pop-cache/
 
 /index.php
 /wp-activate.php

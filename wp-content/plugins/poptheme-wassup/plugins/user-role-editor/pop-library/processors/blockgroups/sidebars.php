@@ -257,7 +257,8 @@ class GD_URE_Template_Processor_SidebarBlockGroups extends GD_Template_Processor
 					case GD_TEMPLATE_BLOCK_AUTHOR_SIDEBAR_ORGANIZATION:
 					case GD_TEMPLATE_BLOCK_AUTHOR_SIDEBAR_INDIVIDUAL:
 
-						$mainblock_taget = '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
+						// Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
+						$mainblock_taget = '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 
 						// Make the block be collapsible, open it when the main feed is reached, with waypoints
 						$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', 'collapse');

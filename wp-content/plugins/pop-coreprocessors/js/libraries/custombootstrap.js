@@ -78,6 +78,19 @@ popCustomBootstrap = {
 		return false;		
 	},
 
+	isActive : function(args) {
+	
+		var t = this;
+		var targets = args.targets;
+
+		if (targets.hasClass('tab-pane') && !targets.hasClass('active')) {
+
+			return false;
+		}
+
+		return true;		
+	},
+
 	activeTabLink : function(args) {
 	
 		var t = this;
@@ -102,8 +115,18 @@ popCustomBootstrap = {
 
 			t.clickPageTab(pageSection, pageTabBtn);
 		});	
-		// Already trigger it so as to set the current pageTab as active
-		targets.trigger('click');
+
+		targets.each(function() {
+
+			// Already trigger it so as to set the current pageTab as active
+			var target = $(this);
+
+			// But only if the tab has not been marked as inactive
+			if (target.closest('.pop-pagesection-page').find('.pop-pagetab-btn').not('.pop-inactive').length) {
+				
+				target.trigger('click');
+			}
+		});
 	},
 
 	customQuickView : function(args) {
@@ -444,22 +467,39 @@ popCustomBootstrap = {
 		}
 	},
 
-	// The functions below are invoked in popCustomFunctions
-	activateSideTabpanes : function(pageSection, newDOMs) {
+	activatePageTabs : function(pageSection, newDOMs, inactivePane) {
 
 		var t = this;
 
-		if (newDOMs.filter('.tab-pane').length) {
+		// Mark tabs as inactive
+		if (inactivePane) {
+
+			newDOMs.filter('.pop-pagesection-page').find('.pop-pagetab-btn').addClass('pop-inactive');
+		}
+	},
+
+	// The functions below are invoked in popCustomFunctions
+	activateSideTabpanes : function(pageSection, newDOMs, inactivePane) {
+
+		var t = this;
+
+		var tabPane = newDOMs.filter('.tab-pane');
+		if (tabPane.length) {
 			
 			var firstLoad = popManager.isFirstLoad(pageSection);
 			
-			// activate the new tabpane
-			if (!firstLoad) {
-				newDOMs.siblings('.tab-pane').removeClass('active');
+			// activate the new tabpane if not marked as inactive
+			if (!inactivePane) {
+
+				if (!firstLoad) {
+					newDOMs.siblings('.tab-pane').removeClass('active');
+				}
+
+				tabPane.addClass('active');
 			}
 
 			// Functions to trigger when the top level of the tabPanes is open (not for, say, the Content/Members in a Profile page)
-			newDOMs.filter('.tab-pane').addClass('active').on('shown.bs.tabpane', function() {
+			tabPane.on('shown.bs.tabpane', function() {
 				
 				// Allow the pageSection to remain closed. eg: for the pageTabs in embed 
 				var openmode = popPageSectionManager.getOpenMode(pageSection);
@@ -467,20 +507,22 @@ popCustomBootstrap = {
 					popPageSectionManager.open(pageSection);
 					popManager.scrollTop(pageSection);
 				}
-			});			
-			if (!firstLoad) {
+			});		
+
+			if (!inactivePane && !firstLoad) {
 				popManager.scrollTop(pageSection);
 			}
 		}
 	},
-	activateQuickviewTabpanes : function(pageSection, newDOMs) {
+	activateQuickviewTabpanes : function(pageSection, newDOMs, inactivePane) {
 
 		var t = this;
 
-		if (newDOMs.filter('.tab-pane').length) {
+		var tabPane = newDOMs.filter('.tab-pane');
+		if (tabPane.length) {
 		
 			// activate the new tabpane
-			newDOMs.filter('.tab-pane').addClass('active').siblings('.tab-pane').removeClass('active');
+			tabPane.addClass('active').siblings('.tab-pane').removeClass('active');
 		}
 	},
 	activateModals : function(pageSection, newDOMs) {
@@ -506,25 +548,31 @@ popCustomBootstrap = {
 			});
 		}
 	},
-	activateTabPanes : function(pageSection, newDOMs, removeTheather, sides) {
+	activateTabPanes : function(pageSection, newDOMs, inactivePane, removeTheather, sides) {
 
 		var t = this;
 
 		// Only if tabPanes were actually drawn (eg: calling Background Load pages will bring only replicable tabPanes, no actual tabPane yet)
-		if (newDOMs.filter('.tab-pane').length) {
+		var tabPane = newDOMs.filter('.tab-pane');
+		if (tabPane.length) {
 		
 			var firstLoad = popManager.isFirstLoad(pageSection);
-				
+
 			// save position and hide the previous tabPane
-			if (!firstLoad) {
-				var previousTabPane = newDOMs.siblings('.tab-pane.active');
-				t.savePosition(pageSection, previousTabPane);
-				previousTabPane.removeClass('active');
+			if (!inactivePane) {
+
+				if (!firstLoad) {
+					var previousTabPane = newDOMs.siblings('.tab-pane.active');
+					t.savePosition(pageSection, previousTabPane);
+					previousTabPane.removeClass('active');
+				}
+
+				tabPane.addClass('active');
 			}
 
 			// activate the new tabpane
 			// Functions to trigger when the top level of the tabPanes is open (not for, say, the Content/Members in a Profile page)
-			newDOMs.filter('.tab-pane').addClass('active')
+			tabPane
 				.on('show.bs.tabpane', function() {
 
 					// Using 'show.bs.tabpane' instead of 'hide.bs.tabpane' on the tabPane being hidden, because somehow that doesn't work! (related to how we intercept the links, Bootstrap gets confused and doesn't send the relatedTarget in the event to hide.bs.tab)
@@ -541,7 +589,8 @@ popCustomBootstrap = {
 					t.newPageSectionJS(pageSection, removeTheather, sides, tabPane);
 				});
 
-			if (!firstLoad) {
+			if (!inactivePane && !firstLoad) {
+
 				t.newPageSectionJS(pageSection, removeTheather, sides);
 			}
 		}
@@ -604,5 +653,5 @@ popCustomBootstrap = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popCustomBootstrap, ['initDocument', 'runScriptsBefore', 'pageSectionNewDOMsInitialized', 'activeTabLink', 'isHidden'], true);
+popJSLibraryManager.register(popCustomBootstrap, ['initDocument', 'runScriptsBefore', 'pageSectionNewDOMsInitialized', 'activeTabLink', 'isHidden', 'isActive'], true);
 popJSLibraryManager.register(popCustomBootstrap, ['customQuickView', 'destroyPageOnModalClose', 'customCloseModals', 'activatePageTab']);

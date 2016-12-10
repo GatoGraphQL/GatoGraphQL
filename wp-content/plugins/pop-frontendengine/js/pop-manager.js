@@ -704,7 +704,22 @@ popManager = {
 		var blockBranches = jsSettings['initjs-blockbranches'];
 		if (blockBranches) {
 
-			t.initBlockBranches(pageSection, $(blockBranches.join(',')).not('.'+M.JS_INITIALIZED), options);
+			var branches = $(blockBranches.join(',')).not('.'+M.JS_INITIALIZED);
+			t.initBlockBranches(pageSection, branches, options);
+			// var pageSectionPage = newDOMs.filter('.pop-pagesection-page');
+			// if (pageSectionPage.length && !t.isActive(pageSectionPage)) {
+
+			// 	// Initialize the blocks only when the pageSectionPage becomes active
+			// 	if (pageSectionPage.hasClass('tab-pane')) {
+
+			// 		pageSectionPage.one('shown.bs.tabpane', function() {
+			// 			t.initBlockBranches(pageSection, branches, options);
+			// 		});
+			// 	}
+			// }
+			// else {
+			// 	t.initBlockBranches(pageSection, branches, options);				
+			// }
 		}
 
 		// Delete the session ids at the end of the rendering
@@ -1276,6 +1291,23 @@ popManager = {
 		$.each(executed, function(index, value) {
 			if (value) {
 				ret = true;
+				return -1;
+			}
+		});
+
+		return ret;
+	},
+
+	isActive : function(elem) {
+
+		var t = this;
+		// if (elem.hasClass('active')) return true;
+
+		var executed = popJSLibraryManager.execute('isActive', {targets: elem});
+		var ret = true;
+		$.each(executed, function(index, value) {
+			if (!value) {
+				ret = false;
 				return -1;
 			}
 		});

@@ -92,21 +92,22 @@ class GD_Template_Processor_CustomDelegatorFilters extends GD_Template_Processor
 
 	function get_block_target($template_id, $atts) {
 
+		// Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
 		switch ($template_id) {
 			
 			// Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
 			case GD_TEMPLATE_DELEGATORFILTER_HOMEALLCONTENT:
 				
-				return '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';
+				return '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';
 			
 			// Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
 			case GD_TEMPLATE_DELEGATORFILTER_AUTHORMAINALLCONTENT:
 				
-				return '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
+				return '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 
 			case GD_TEMPLATE_DELEGATORFILTER_TAGMAINALLCONTENT:
 				
-				return '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel.active > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter';
+				return '#'.GD_TEMPLATEID_PAGESECTIONID_MAIN.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter';
 		}
 
 		return parent::get_block_target($template_id, $atts);
