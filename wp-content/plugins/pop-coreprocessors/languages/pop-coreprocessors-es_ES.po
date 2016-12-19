@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-05 17:34+0800\n"
-"PO-Revision-Date: 2016-12-05 17:37+0800\n"
+"POT-Creation-Date: 2016-12-16 15:58+0800\n"
+"PO-Revision-Date: 2016-12-16 15:58+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -182,289 +182,6 @@ msgstr ""
 "i>Vimeo, <i class=“fa fa-fw fa-vine”></i>Vine, <i class=“fa fa-fw fa-"
 "youtube”></i>YouTube, y otros.</p>"
 
-#: .././library/email.php:93
-#, php-format
-msgid "<p>Dear %s,</p>"
-msgstr "<p>Estimado/a %s,</p>"
-
-#: .././library/email.php:96
-msgid "<p>Howdy!</p>"
-msgstr "<p>¡Hola!</p>"
-
-#: .././library/email.php:181 .././library/email.php:186
-#, php-format
-msgid "Your %s was created successfully!"
-msgstr "Tu %s se ha creado con éxito"
-
-#: .././library/email.php:191
-#, php-format
-msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
-msgstr "<p>Tu %s <a href=\"%s\">%s</a> fue creado con éxito!</p>"
-
-#: .././library/email.php:207
-#, php-format
-msgid ""
-"Please notice that the status of the %s is <strong>'Draft'</strong>, so it "
-"won't be published online."
-msgstr ""
-"Por favor, tenga en cuenta que el estado del %s es <strong>'borrador'</"
-"strong>, de modo que no será publicado."
-
-#: .././library/email.php:214
-msgid ""
-"<p>Please wait for our moderators approval. You will receive an email with "
-"the confirmation.</p>"
-msgstr ""
-"<p>Por favor espere a que nuestros moderadores aprueben su post. Recibirás "
-"un correo electrónico con la confirmación.</p>"
-
-#: .././library/email.php:250
-#, php-format
-msgid "[%s]: New %s by %s"
-msgstr "[%s]: Nuevo %s por %s"
-
-#: .././library/email.php:251
-#, php-format
-msgid "A new %s has been submitted on %s:"
-msgstr "Se ha creado un nuevo %s en %s:"
-
-#: .././library/email.php:254
-#, php-format
-msgid "[%s]: %s updated by %s"
-msgstr "[%s]: %s actualizado por %s"
-
-#: .././library/email.php:255
-#, php-format
-msgid "%s updated on %s:"
-msgstr "%s actualizado en %s:"
-
-#: .././library/email.php:259
-#, php-format
-msgid "<b>Author:</b> %s"
-msgstr "<b>Autor:</b> %s"
-
-#: .././library/email.php:260
-#, php-format
-msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
-msgstr "<b>Correo electrónico del autor:</b> <a href=\"mailto:%1$s\">%1$s</a>"
-
-#: .././library/email.php:261
-#, php-format
-msgid "<b>Title:</b> %s"
-msgstr "<b>Titulo:</b> %s"
-
-#: .././library/email.php:262
-#, php-format
-msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
-msgstr "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
-
-#: .././library/email.php:263
-#, php-format
-msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
-msgstr "<b>Enlace de edición:</b> <a href=\"%1$s\">%1$s</a>"
-
-#: .././library/email.php:264
-#, php-format
-msgid "<b>Status:</b> %s"
-msgstr "<b>Estado:</b> %s"
-
-#: .././library/email.php:301
-#, php-format
-msgid "[%s]: New Profile: %s"
-msgstr "[%s]: Nuevo perfil: %s"
-
-#: .././library/email.php:302
-#, php-format
-msgid "A Profile was created on %s."
-msgstr "Un perfil fue creado en %s."
-
-#: .././library/email.php:305
-#, php-format
-msgid "[%s]: Profile updated: %s"
-msgstr "[%s]: Perfil actualizado: %s"
-
-#: .././library/email.php:306
-#, php-format
-msgid "Profile updated on %s."
-msgstr "Perfil actualizado en %s."
-
-#: .././library/email.php:310
-#, php-format
-msgid "<b>Profile:</b> %s"
-msgstr "<b>Perfil:</b> %s"
-
-#: .././library/email.php:311
-#, php-format
-msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
-msgstr "<b>Enlace al perfil:</b> <a href=\"%1$s\">%1$s</a>"
-
-#: .././library/email.php:319
-#, php-format
-msgid "Welcome to %s!"
-msgstr "¡Bienvenido a %s!"
-
-#: .././library/email.php:326
-msgid ""
-"<p>Your user account was created successfully. This is your public profile "
-"page:</p>"
-msgstr ""
-"<p>Tu cuenta de usuario se ha creado con éxito. Esta es la página con tu "
-"perfil público</p> "
-
-#: .././library/email.php:333
-msgid "Now you can share your content/activities with our community:"
-msgstr "Ahora puedes compartir tu contenido/actividades con nuestra comunidad:"
-
-#: .././library/email.php:354
-#, php-format
-msgid "About %s"
-msgstr "Acerca de %s"
-
-#: .././library/email.php:531
-#, php-format
-msgid "A new %s was posted referencing \"%s\""
-msgstr "Un nuevo %s fue publicado haciendo referencia a \"%s\""
-
-#: .././library/email.php:536
-#, php-format
-msgid "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
-msgstr ""
-"<p>Tu %s <a href=\"%s\">%s</a> ha recibido una referencia por un nuevo %s:</"
-"p>"
-
-#: .././library/email.php:559
-#, php-format
-msgid "Your %s was approved!"
-msgstr "¡Tu %s fue aprobado!"
-
-#: .././library/email.php:561
-#, php-format
-msgid "<p>Hurray! Your %s was approved!</p>"
-msgstr "<p>¡Hurra! Tu %s fue aprobado.</p>"
-
-#: .././library/email.php:595
-#, php-format
-msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
-msgstr "<p>Hay una respuesta a un comentario de <a href=\"%s\">%s</a>:</p>"
-
-#: .././library/email.php:596
-#, php-format
-msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
-msgstr "<p>Un nuevo comentario ha sido añadido a <a href=\"%s\">%s</a>:</p>"
-
-#: .././library/email.php:610 .././library/email.php:773
-#: .././pop-library/processors/abstract-classes/viewcomponents/replycomment-headers-base.php:43
-#: .././pop-library/processors/comments/blockgroups.php:131
-msgid "In response to:"
-msgstr "En respuesta a:"
-
-#: .././library/email.php:619 .././library/email.php:780
-msgid "Click here to reply the comment"
-msgstr "Haga clic aquí para responder el comentario"
-
-#: .././library/email.php:636
-#, php-format
-msgid "%s replied your comment in “%s”"
-msgstr " %s ha contestado tu comentario en “%s”"
-
-#: .././library/email.php:685
-#, php-format
-msgid "New comment added in “%s”"
-msgstr "Nuevo comentario añadido en “%s”"
-
-#: .././library/email.php:720
-#, php-format
-msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
-msgstr "<p><a href=\"%s\">%s</a> te ha mencionado en %s:</p>"
-
-#: .././library/email.php:733
-#, php-format
-msgid "You were mentioned in %1$s “%2$s”"
-msgstr "Has sido mencionado en %1$s “%2$s”"
-
-#: .././library/email.php:756
-msgid ""
-"<p><a href=\"%1$s\">%2$s</a> mentioned you in a comment from %3$s <a href="
-"\"%4%s\">%5$s</a>:</p>"
-msgstr ""
-"<p><a href=“%1$s”>%2$s</a> te ha mencionado en un comentario en %3$s <a "
-"href=“%4$s”>%5$s</a>:</p>"
-
-#: .././library/email.php:793
-#, php-format
-msgid "You were mentioned in a comment from %1$s “%2$s”"
-msgstr "Has sido mencionado en un comentario en %1$s “%2$s”"
-
-#: .././library/email.php:812
-msgid "Password reset code"
-msgstr "Código de restablecimiento de contraseña"
-
-#: .././library/email.php:817
-msgid "Retrieve password"
-msgstr "Recuperar contraseña"
-
-#: .././library/email.php:822
-#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:50
-msgid "Password reset successful"
-msgstr "Restablecimiento de contraseña exitoso"
-
-#: .././library/email.php:825
-msgid "Your password has been changed successfully."
-msgstr "Tu contraseña ha sido cambiada con éxito."
-
-#: .././library/email.php:827
-#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:24
-#, php-format
-msgid "Please <a href=\"%s\">click here to log-in</a>."
-msgstr "Por favor, <a href=\"%s\">haga click aquí para iniciar sesión</a>."
-
-#: .././library/email.php:879
-msgid ""
-"You are receiving this notification for belonging to this author’s network. "
-"Soon you will be able to configure your notification email’s preferences."
-msgstr ""
-"Estás recibiendo esta notificación por pertenecer a la red de este autor. "
-"Pronto podrás configurar tus preferencias de notificaciones en tu correo "
-"electrónico."
-
-#: .././library/email.php:911
-#, php-format
-msgid "%s has created a new %s: “%s”"
-msgstr "%s creó un nuevo %s: “%s”"
-
-#: .././library/email.php:919
-#, php-format
-msgid "<b><a href=\"%s\">%s</a></b> has created a new %s:"
-msgstr "<b><a href=\"%s\">%s</a></b> creó un nuevo %s:"
-
-#: .././library/email.php:944
-msgid "You have a new follower!"
-msgstr "¡Tienes un nuevo seguidor!"
-
-#: .././library/email.php:947
-#, php-format
-msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
-msgstr "<p>¡Felicitaciones! <a href=\"%s\">Tienes un nuevo seguidor</a>:</p>"
-
-#: .././library/email.php:953
-msgid ""
-"<p>This user will receive notifications following your activity, such as "
-"recommending content, posting a new discussion or comment, and others.</p>"
-msgstr ""
-"<p>Este usuario recibirá notificaciones sobre tu actividad, tales como "
-"recomendar contenido, publicar un nuevo artículo ó comentario, entre otros.</"
-"p>"
-
-#: .././library/email.php:969
-#, php-format
-msgid "Your %s was recommended!"
-msgstr "¡Tu %s fue recomendado!"
-
-#: .././library/email.php:971
-#, php-format
-msgid "<p>Your %1$s <a href=\"%2$s\">%3$s</a> was recommended by:</p>"
-msgstr "<p>Tu %1$s <a href=“%2$s”>%3$s</a> fue recomendado por:</p>"
-
 #: .././library/login/login.php:22
 #: .././pop-library/processors/login/forms/submit-buttons.php:31
 msgid "Log in"
@@ -586,16 +303,16 @@ msgstr "<p>¡Has sido invitado a unirte a %s!</p>"
 msgid "What is %s?"
 msgstr "¿Qué es %s?"
 
-#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:66
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:65
 msgid "Check it out here"
 msgstr "Averigüálo aquí"
 
-#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:90
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:79
 #, php-format
 msgid "%s is inviting you to join %s!"
 msgstr "¡%s te está invitando a unirte a %s!"
 
-#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:98
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:87
 #, php-format
 msgid "You have been invited to join %s!"
 msgstr "¡Has sido invitado a unirte a %s!"
@@ -869,6 +586,11 @@ msgstr "Siguiente"
 #: .././pop-library/processors/abstract-classes/structures/menus/segmentedbuttonlayouts-base.php:58
 msgid "Toggle menu"
 msgstr "Abrir/Cerrar el menú"
+
+#: .././pop-library/processors/abstract-classes/viewcomponents/replycomment-headers-base.php:43
+#: .././pop-library/processors/comments/blockgroups.php:131
+msgid "In response to:"
+msgstr "En respuesta a:"
 
 #: .././pop-library/processors/blocks/blocks.php:35
 #, php-format
@@ -1179,13 +901,10 @@ msgstr "Enviando…"
 msgid "Awesome! Your User Account was created successfully!"
 msgstr "¡Buenísimo! Tu cuenta de usuario se ha creado con éxito"
 
-#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:17
-msgid ""
-"Please add the following emails to your contact list, to make sure you "
-"receive our notifications:"
-msgstr ""
-"Por favor, añadí los siguientes emails a tu lista de contactos, para "
-"asegurar de que recibas nuestras notificaciones:"
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:22
+#, php-format
+msgid "Please <a href=\"%s\">click here to log-in</a>."
+msgstr "Por favor, <a href=\"%s\">haga click aquí para iniciar sesión</a>."
 
 #: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:14
 msgid "User Account updated successfully."
@@ -1534,6 +1253,10 @@ msgstr ""
 "Te hemos enviado un email con un código. Por favor, copiálo y <a href=\"%s"
 "\">pegálo aquí</a>."
 
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:50
+msgid "Password reset successful"
+msgstr "Restablecimiento de contraseña exitoso"
+
 #: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:52
 #, php-format
 msgid "Please <a href=\"%s\">click here to log in</a>."
@@ -1761,6 +1484,196 @@ msgstr ""
 #: .././js/includes/cdn/moment.2.10.6.min.js:6
 msgid "\n"
 msgstr "\n"
+
+#~ msgid "<p>Dear %s,</p>"
+#~ msgstr "<p>Estimado/a %s,</p>"
+
+#~ msgid "<p>Howdy!</p>"
+#~ msgstr "<p>¡Hola!</p>"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "Tu %s se ha creado con éxito"
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
+#~ msgstr "<p>Tu %s <a href=\"%s\">%s</a> fue creado con éxito!</p>"
+
+#~ msgid ""
+#~ "Please notice that the status of the %s is <strong>'Draft'</strong>, so "
+#~ "it won't be published online."
+#~ msgstr ""
+#~ "Por favor, tenga en cuenta que el estado del %s es <strong>'borrador'</"
+#~ "strong>, de modo que no será publicado."
+
+#~ msgid ""
+#~ "<p>Please wait for our moderators approval. You will receive an email "
+#~ "with the confirmation.</p>"
+#~ msgstr ""
+#~ "<p>Por favor espere a que nuestros moderadores aprueben su post. "
+#~ "Recibirás un correo electrónico con la confirmación.</p>"
+
+#~ msgid "[%s]: New %s by %s"
+#~ msgstr "[%s]: Nuevo %s por %s"
+
+#~ msgid "A new %s has been submitted on %s:"
+#~ msgstr "Se ha creado un nuevo %s en %s:"
+
+#~ msgid "[%s]: %s updated by %s"
+#~ msgstr "[%s]: %s actualizado por %s"
+
+#~ msgid "%s updated on %s:"
+#~ msgstr "%s actualizado en %s:"
+
+#~ msgid "<b>Author:</b> %s"
+#~ msgstr "<b>Autor:</b> %s"
+
+#~ msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+#~ msgstr ""
+#~ "<b>Correo electrónico del autor:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+
+#~ msgid "<b>Title:</b> %s"
+#~ msgstr "<b>Titulo:</b> %s"
+
+#~ msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Enlace de edición:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Status:</b> %s"
+#~ msgstr "<b>Estado:</b> %s"
+
+#~ msgid "[%s]: New Profile: %s"
+#~ msgstr "[%s]: Nuevo perfil: %s"
+
+#~ msgid "A Profile was created on %s."
+#~ msgstr "Un perfil fue creado en %s."
+
+#~ msgid "[%s]: Profile updated: %s"
+#~ msgstr "[%s]: Perfil actualizado: %s"
+
+#~ msgid "Profile updated on %s."
+#~ msgstr "Perfil actualizado en %s."
+
+#~ msgid "<b>Profile:</b> %s"
+#~ msgstr "<b>Perfil:</b> %s"
+
+#~ msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Enlace al perfil:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "Welcome to %s!"
+#~ msgstr "¡Bienvenido a %s!"
+
+#~ msgid ""
+#~ "<p>Your user account was created successfully. This is your public "
+#~ "profile page:</p>"
+#~ msgstr ""
+#~ "<p>Tu cuenta de usuario se ha creado con éxito. Esta es la página con tu "
+#~ "perfil público</p> "
+
+#~ msgid "Now you can share your content/activities with our community:"
+#~ msgstr ""
+#~ "Ahora puedes compartir tu contenido/actividades con nuestra comunidad:"
+
+#~ msgid "About %s"
+#~ msgstr "Acerca de %s"
+
+#~ msgid "A new %s was posted referencing \"%s\""
+#~ msgstr "Un nuevo %s fue publicado haciendo referencia a \"%s\""
+
+#~ msgid ""
+#~ "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
+#~ msgstr ""
+#~ "<p>Tu %s <a href=\"%s\">%s</a> ha recibido una referencia por un nuevo %s:"
+#~ "</p>"
+
+#~ msgid "Your %s was approved!"
+#~ msgstr "¡Tu %s fue aprobado!"
+
+#~ msgid "<p>Hurray! Your %s was approved!</p>"
+#~ msgstr "<p>¡Hurra! Tu %s fue aprobado.</p>"
+
+#~ msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>Hay una respuesta a un comentario de <a href=\"%s\">%s</a>:</p>"
+
+#~ msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>Un nuevo comentario ha sido añadido a <a href=\"%s\">%s</a>:</p>"
+
+#~ msgid "Click here to reply the comment"
+#~ msgstr "Haga clic aquí para responder el comentario"
+
+#~ msgid "%s replied your comment in “%s”"
+#~ msgstr " %s ha contestado tu comentario en “%s”"
+
+#~ msgid "New comment added in “%s”"
+#~ msgstr "Nuevo comentario añadido en “%s”"
+
+#~ msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
+#~ msgstr "<p><a href=\"%s\">%s</a> te ha mencionado en %s:</p>"
+
+#~ msgid "You were mentioned in %1$s “%2$s”"
+#~ msgstr "Has sido mencionado en %1$s “%2$s”"
+
+#~ msgid ""
+#~ "<p><a href=\"%1$s\">%2$s</a> mentioned you in a comment from %3$s <a href="
+#~ "\"%4%s\">%5$s</a>:</p>"
+#~ msgstr ""
+#~ "<p><a href=“%1$s”>%2$s</a> te ha mencionado en un comentario en %3$s <a "
+#~ "href=“%4$s”>%5$s</a>:</p>"
+
+#~ msgid "You were mentioned in a comment from %1$s “%2$s”"
+#~ msgstr "Has sido mencionado en un comentario en %1$s “%2$s”"
+
+#~ msgid "Password reset code"
+#~ msgstr "Código de restablecimiento de contraseña"
+
+#~ msgid "Retrieve password"
+#~ msgstr "Recuperar contraseña"
+
+#~ msgid "Your password has been changed successfully."
+#~ msgstr "Tu contraseña ha sido cambiada con éxito."
+
+#~ msgid ""
+#~ "You are receiving this notification for belonging to this author’s "
+#~ "network. Soon you will be able to configure your notification email’s "
+#~ "preferences."
+#~ msgstr ""
+#~ "Estás recibiendo esta notificación por pertenecer a la red de este autor. "
+#~ "Pronto podrás configurar tus preferencias de notificaciones en tu correo "
+#~ "electrónico."
+
+#~ msgid "%s has created a new %s: “%s”"
+#~ msgstr "%s creó un nuevo %s: “%s”"
+
+#~ msgid "<b><a href=\"%s\">%s</a></b> has created a new %s:"
+#~ msgstr "<b><a href=\"%s\">%s</a></b> creó un nuevo %s:"
+
+#~ msgid "You have a new follower!"
+#~ msgstr "¡Tienes un nuevo seguidor!"
+
+#~ msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
+#~ msgstr ""
+#~ "<p>¡Felicitaciones! <a href=\"%s\">Tienes un nuevo seguidor</a>:</p>"
+
+#~ msgid ""
+#~ "<p>This user will receive notifications following your activity, such as "
+#~ "recommending content, posting a new discussion or comment, and others.</p>"
+#~ msgstr ""
+#~ "<p>Este usuario recibirá notificaciones sobre tu actividad, tales como "
+#~ "recomendar contenido, publicar un nuevo artículo ó comentario, entre "
+#~ "otros.</p>"
+
+#~ msgid "Your %s was recommended!"
+#~ msgstr "¡Tu %s fue recomendado!"
+
+#~ msgid "<p>Your %1$s <a href=\"%2$s\">%3$s</a> was recommended by:</p>"
+#~ msgstr "<p>Tu %1$s <a href=“%2$s”>%3$s</a> fue recomendado por:</p>"
+
+#~ msgid ""
+#~ "Please add the following emails to your contact list, to make sure you "
+#~ "receive our notifications:"
+#~ msgstr ""
+#~ "Por favor, añadí los siguientes emails a tu lista de contactos, para "
+#~ "asegurar de que recibas nuestras notificaciones:"
 
 #~ msgid "DD/MM/YYYY h:mm A"
 #~ msgstr "DD/MM/YYYY H:mm"

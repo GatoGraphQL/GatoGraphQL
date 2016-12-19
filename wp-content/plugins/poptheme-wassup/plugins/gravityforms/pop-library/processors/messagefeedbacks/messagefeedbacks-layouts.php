@@ -75,7 +75,7 @@ class GD_GF_Template_Processor_MessageFeedbackLayouts extends GD_Template_Proces
 				$ret['success-header'] = __('Subscription Successful!', 'poptheme-wassup');
 				$ret['success'] = sprintf(
 					__("To make sure you get the newsletter, please add <strong>%s</strong> in your contact list. Thanks!", 'poptheme-wassup'),
-					gd_email_newsletter_email()
+					PoPTheme_Wassup_EmailSender_Utils::get_newsletter_email()
 				);
 				break;
 		}

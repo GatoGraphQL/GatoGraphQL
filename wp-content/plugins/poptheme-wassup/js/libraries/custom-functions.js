@@ -28,6 +28,44 @@ popCustomFunctions = {
 		}	
 	},
 
+	// ctrlTab : function() {
+
+	// 	var t = this;
+
+	// 	// Switch tabs when the user presses ctrl+tab keys
+	// 	// Code copied from https://stackoverflow.com/questions/2878983/capture-key-press-without-placing-an-input-element-on-the-page
+	// 	document.onkeydown = function(evt) {
+
+	// 		evt = evt || window.event;
+
+	// 		// Don't allow the browser to do its own browser tab switching
+	// 		evt.preventDefault();
+
+	// 		// Tab's keyCode: 9
+	// 		if (evt.ctrlKey && evt.keyCode == 9) {
+
+	// 			// Find the current tab and then switch to next/previous one. Make sure there at least 2 tabs
+	// 			var pageSection = $('#'+M.PS_PAGETABS_ID);
+	// 			var tabs = pageSection.find('a.pop-pagetab-btn');
+	// 			if (tabs.length > 1) {
+
+	// 				var current = tabs.filter('.active');
+	// 				if (current.length) {
+
+	// 					popSystem.switchTab(current);
+	// 				}
+	// 			}
+	// 		}
+	// 	};
+	// },
+
+	// documentInitialized : function() {
+	
+	// 	var t = this;
+
+	// 	t.ctrlTab();
+	// },
+
 	pageSectionInitialized : function(args) {
 	
 		var t = this;
@@ -51,47 +89,67 @@ popCustomFunctions = {
 		var pageSection = args.pageSection, newDOMs = args.newDOMs, inactivePane = args.inactivePane;
 		var psId = pageSection.attr('id');
 
+		// If there are no other tabs open, then the inactive is invalidated, make it active anyway (or nothing will open)
+		inactivePane = (inactivePane === true) && (newDOMs.siblings('.pop-pagesection-page').length > 0);
+
 		// Comment Leo 10/04/2014: firstLoad var will prevent from executing .scrollTop initially, when the perfectScrollbar
 		// is still not initialized (pageSectionNewDOMsBeforeInitialize executes before documentInitialized - check perfectscrollbar.js)
 		var firstLoad = popManager.isFirstLoad(pageSection);
 		var tabPane = newDOMs.filter('.tab-pane');
 
-		// If there are no other tabs open, then the inactive is invalidated, make it active anyway (or nothing will open)
-		inactivePane = inactivePane && newDOMs.siblings('.pop-pagesection-page').length;
+		var pageTabs = [M.PS_PAGETABS_ID, M.PS_ADDONTABS_ID];
+		var mainTabPanes = [M.PS_MAIN_ID, M.PS_ADDONS_ID];
+		if (mainTabPanes.indexOf(psId) > -1) {
 
-		// Make the new tabPane visible only if it hasn't been marked inactive
-		if (!inactivePane) {
-			tabPane.addClass('active');
-		}
+			// Make the new tabPane visible only if it hasn't been marked inactive
+			if (!inactivePane) {
+				tabPane.addClass('active');
+			}
+			else {
+				// If inactive, then open the pageTabs, so the user can see the new tab
+				if (psId == M.PS_MAIN_ID) {
+					var mainPageTabs = $('#'+M.PS_PAGETABS_ID);
+					popPageSectionManager.open(mainPageTabs);
+					popPageSectionManager.open(mainPageTabs, 'xs');
+				}
+			}
 
-		// For the Addons: each time a tab is open, if the window is minimized then maximize it
-		if (psId == M.PS_ADDONS_ID) {
-			
-			// Functions to trigger when the top level of the tabPanes is open (not for, say, the Content/Members in a Profile page)
-			tabPane.on('shown.bs.tabpane', function() {
+			// For the Addons: each time a tab is open, if the window is minimized then maximize it
+			if (psId == M.PS_ADDONS_ID) {
 				
-				t.handleWindow(pageSection, 'minimized');
-			});
-			if (!inactivePane && !firstLoad) {
-				t.handleWindow(pageSection, 'minimized');
+				// Functions to trigger when the top level of the tabPanes is open (not for, say, the Content/Members in a Profile page)
+				tabPane.on('shown.bs.tabpane', function() {
+					
+					t.handleWindow(pageSection, 'minimized');
+				});
+				if (!inactivePane && !firstLoad) {
+					t.handleWindow(pageSection, 'minimized');
+				}
+			}
+			// If not, check if the addon window is fullsize, if so maximize it
+			else {
+
+				var addonsPageSection = $('#'+M.PS_ADDONS_ID);
+				tabPane.on('shown.bs.tabpane', function() {
+					
+					t.handleWindow(addonsPageSection, 'fullsize');
+				});
+				if (!inactivePane && !firstLoad) {
+					t.handleWindow(addonsPageSection, 'fullsize');
+				}
 			}
 		}
-		// If not, check if the addon window is fullsize, if so maximize it
-		else {
+		else if (pageTabs.indexOf(psId) > -1) {
 
-			var addonsPageSection = $('#'+M.PS_ADDONS_ID);
-			tabPane.on('shown.bs.tabpane', function() {
+			if (inactivePane) {
 				
-				t.handleWindow(addonsPageSection, 'fullsize');
-			});
-			if (!inactivePane && !firstLoad) {
-				t.handleWindow(addonsPageSection, 'fullsize');
+				// While opening the pageTabs pageSection, also highlight the tab
+				newDOMs.filter('.pop-pagesection-page').find('.pop-pagetab-btn').addClass('pop-highlight');
 			}
 		}
 
 		// Only do it for the pageSections that have tab-content in its merge target container
 		var tabPanes = [M.PS_MAIN_ID, M.PS_HOVER_ID, M.PS_ADDONS_ID, M.PS_FRAME_NAVIGATOR_ID];
-		var pageTabs = [M.PS_PAGETABS_ID, M.PS_ADDONTABS_ID];
 		var quickviews = [M.PS_QUICKVIEW_ID, M.PS_QUICKVIEWINFO_ID];
 		var sides = [M.PS_SIDEINFO_ID];
 		var modals = [M.PS_MODALS_ID];
@@ -194,4 +252,4 @@ popCustomFunctions = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popCustomFunctions, ['addPageSectionIds', 'pageSectionNewDOMsBeforeInitialize'], true);
-popJSLibraryManager.register(popCustomFunctions, ['pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser']);
+popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser']);

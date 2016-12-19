@@ -7,7 +7,7 @@ class PoPEngine_Installation {
 		$saved_version = get_option('PoP:version');
 		if ($version > $saved_version || !$saved_version){
 		 	
-			do_action('PoP:install');
+			do_action('PoP:install', $version);
 			
 			//Update Version	
 			update_option('PoP:version', $version);

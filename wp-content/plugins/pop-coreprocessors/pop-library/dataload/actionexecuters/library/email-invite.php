@@ -111,7 +111,7 @@ class GD_EmailInvite {
 
 			$subject = $this->get_email_subject($form_data);
 			$content = $this->get_email_content($form_data);
-			gd_sendemail_to_users($emails, array(), $subject, $content, true);
+			sendemail_to_users($emails, array(), $subject, $content, true);
 		}
 
 		return $emails;

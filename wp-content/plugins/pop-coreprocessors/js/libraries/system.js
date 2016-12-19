@@ -1443,13 +1443,12 @@ popSystem = {
 						}
 						// Possible options: e.shiftKey, e.altKey, e.metaKey
 						// e.ctrlkey is not an option, since Mac shows a contextual menu, doesn't do the link
-						if (e.altKey) {
+						if (e.metaKey) {
 							
 							// Open the tab but don't focus on it
 							options.silentDocument = true;
 							options['js-args'].inactivePane = true;
 						}
-    
 						
 						popManager.fetch(url, options);
 					}

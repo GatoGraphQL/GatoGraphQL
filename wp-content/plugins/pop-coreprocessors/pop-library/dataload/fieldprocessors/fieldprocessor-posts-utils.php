@@ -13,7 +13,7 @@ class GD_DataLoad_FieldProcessor_Posts_Utils {
 		return sprintf(
 			'<em>%2$s</em><a href="%1$s">%1$s</a>',
 			$post->post_content,
-			__('Source: ', 'poptheme-wassup')
+			__('Source: ', 'pop-coreprocessors')
 		);
 	}
 
@@ -114,7 +114,7 @@ class GD_DataLoad_FieldProcessor_Posts_Utils {
 				$messages[] = sprintf(
 					'<a href="%s" class="btn btn-primary" data-toggle="collapse"><i class="fa fa-fw fa-link"></i>%s</a>',
 					'#'.$collapse_id,
-					__('Load link', 'poptheme-wassup')
+					__('Load link', 'pop-coreprocessors')
 				);
 
 				$script = sprintf(
@@ -133,7 +133,7 @@ class GD_DataLoad_FieldProcessor_Posts_Utils {
 		$messages[] = sprintf(
 			'<a href="%s" class="btn btn-default" target="_blank"><i class="fa fa-fw fa-external-link"></i>%s</a>',
 			$url,
-			__('Open link in new tab', 'poptheme-wassup')
+			__('Open link in new tab', 'pop-coreprocessors')
 		);
 
 		$content .= sprintf(

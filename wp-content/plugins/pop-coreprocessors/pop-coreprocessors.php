@@ -13,8 +13,8 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 define ('POP_COREPROCESSORS_VERSION', 0.203);
 define ('POP_COREPROCESSORS_DIR', dirname(__FILE__));
-define ('POP_COREPROCESSORS_CACHE_DIR', WP_CONTENT_DIR.'/cache');
-define ('POP_COREPROCESSORS_CACHE_POPDIR', POP_COREPROCESSORS_CACHE_DIR.'/pop');
+// define ('POP_COREPROCESSORS_CACHE_DIR', WP_CONTENT_DIR.'/cache');
+// define ('POP_COREPROCESSORS_CACHE_POPDIR', POP_COREPROCESSORS_CACHE_DIR.'/pop');
 
 define ('POP_COREPROCESSORS_LIB', POP_COREPROCESSORS_DIR.'/library' );
 define ('POP_COREPROCESSORS_PLUGINS_DIR', POP_COREPROCESSORS_LIB.'/plugins');

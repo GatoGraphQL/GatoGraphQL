@@ -9,7 +9,7 @@ class GD_InviteUsers extends GD_EmailInvite {
 
 	protected function get_email_content($form_data) {
 
-		$website_html = gd_sendemail_get_websitehtml();//PoP_EmailUtils::get_website_html();
+		$website_html = PoP_EmailTemplates_Factory::get_instance()->get_websitehtml();//PoP_EmailUtils::get_website_html();
 		
 		// Maybe the user is logged in, maybe not
 		if ($sender_name = $form_data['sender-name']) {
@@ -60,21 +60,10 @@ class GD_InviteUsers extends GD_EmailInvite {
 			)
 		);
 		$content .= gd_get_website_description();
+		$content .= '<br/><br/>';
 
-		if ($email_template = gd_email_template_folder()) {
-
-			$btn_title = __('Check it out here', 'pop-coreprocessors');
-
-			ob_start();
-			include ($email_template . GD_EMAIL_TEMPLATE_BUTTON);
-			$button = ob_get_clean();
-			$content .= '<br/><br/>';
-			$content .= str_replace(
-				array('{{TITLE}}', '{{URL}}'), 
-				array($btn_title, get_site_url()), 
-				$button
-			);
-		}
+		$btn_title = __('Check it out here', 'pop-coreprocessors');
+		$content .= PoP_EmailTemplates_Factory::get_instance()->get_buttonhtml($btn_title, get_site_url());
 
 		return $content;
 	}

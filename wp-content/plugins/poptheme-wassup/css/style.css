@@ -1663,8 +1663,10 @@ body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-co
 	.pagesection-group.active-pagetabs .offcanvas.addons,
 	.pagesection-group.active-top.active-pagetabs .offcanvas.addontabs,
 	.pagesection-group.active-top.active-pagetabs-xs .offcanvas.addontabs,
+	.pagesection-group.active-top.active-pagetabs.active-pagetabs-xs .offcanvas.addontabs,
 	.pagesection-group.active-top.active-pagetabs .offcanvas.addons,
-	.pagesection-group.active-top.active-pagetabs-xs .offcanvas.addons {
+	.pagesection-group.active-top.active-pagetabs-xs .offcanvas.addons,
+	.pagesection-group.active-top.active-pagetabs.active-pagetabs-xs .offcanvas.addons {
 		top: auto;
 	}
 

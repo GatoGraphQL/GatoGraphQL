@@ -120,6 +120,7 @@ class PoP_Engine {
 
 		// Allow extra functionalities. Eg: Save the logged-in user meta information
 		do_action('PoP_Engine:output:end');
+		do_action('PoP_Engine:rendered');
 	}
 
 	function output_end() {
@@ -175,6 +176,7 @@ class PoP_Engine {
 
 		// Allow extra functionalities. Eg: Save the logged-in user meta information
 		do_action('PoP_Engine:output_json:end');
+		do_action('PoP_Engine:rendered');
 	}
 
 	function check_redirect($addoutput) {

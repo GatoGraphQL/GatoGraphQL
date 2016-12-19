@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-22 18:50+0800\n"
-"PO-Revision-Date: 2016-08-22 23:18+0800\n"
+"POT-Creation-Date: 2016-12-16 15:58+0800\n"
+"PO-Revision-Date: 2016-12-16 15:58+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: zh\n"
@@ -179,261 +179,6 @@ msgstr ""
 "i>Twitter，<i class=“fa fa-fw fa-vimeo”></i> Vimeo，<i class=“fa fa-fw fa-"
 "vine“></i>Vine，<i class=”fa fa-fw fa-youtube“></i>YouTube，和其他。</p>"
 
-#: .././library/email.php:84
-#, php-format
-msgid "<p>Dear %s,</p>"
-msgstr "<p>亲爱的%s，</p>"
-
-#: .././library/email.php:87
-msgid "<p>Howdy!</p>"
-msgstr "<p>您好！</p>"
-
-#: .././library/email.php:172 .././library/email.php:177
-#, php-format
-msgid "Your %s was created successfully!"
-msgstr "您的%s成功被创造"
-
-#: .././library/email.php:182
-#, php-format
-msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
-msgstr "<p>您%s的<a href=\"%s\">%s</a>创建成功！</p>"
-
-#: .././library/email.php:198
-#, php-format
-msgid ""
-"Please notice that the status of the %s is <strong>'Draft'</strong>, so it "
-"won't be published online."
-msgstr "请注意，%s的状态还是<strong>“草稿”</strong>，所以还未在网上发布。"
-
-#: .././library/email.php:205
-msgid ""
-"<p>Please wait for our moderators approval. You will receive an email with "
-"the confirmation.</p>"
-msgstr "<p>请等待我们的版主批准。您将收到一封电子邮件确认。</p>"
-
-#: .././library/email.php:241
-#, php-format
-msgid "[%s]: New %s by %s"
-msgstr "[%s]：新%s,作者为%s"
-
-#: .././library/email.php:242
-#, php-format
-msgid "A new %s has been submitted on %s:"
-msgstr "新的%s在%s被提交："
-
-#: .././library/email.php:245
-#, php-format
-msgid "[%s]: %s updated by %s"
-msgstr "[%s]：%s被%s更新"
-
-#: .././library/email.php:246
-#, php-format
-msgid "%s updated on %s:"
-msgstr "%s在%s被更新："
-
-#: .././library/email.php:250
-#, php-format
-msgid "<b>Author:</b> %s"
-msgstr "<b>作者：</b>%s"
-
-#: .././library/email.php:251
-#, php-format
-msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
-msgstr "<b>作者电子邮件：</b><a href=\"mailto:%1$s\">％1$s</a>"
-
-#: .././library/email.php:252
-#, php-format
-msgid "<b>Title:</b> %s"
-msgstr "<b>标题：</b>%s"
-
-#: .././library/email.php:253
-#, php-format
-msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
-msgstr "<b>永久链接：</b><a href=\"%1$s\">％1$s</a>"
-
-#: .././library/email.php:254
-#, php-format
-msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
-msgstr "<b>修改链接：</b><a href=\"%1$s\">％1$s</a>"
-
-#: .././library/email.php:255
-#, php-format
-msgid "<b>Status:</b> %s"
-msgstr "<b>状态：</b>%s"
-
-#: .././library/email.php:292
-#, php-format
-msgid "[%s]: New Profile: %s"
-msgstr "[%s]：新的档案：%s"
-
-#: .././library/email.php:293
-#, php-format
-msgid "A Profile was created on %s."
-msgstr "个人档案在%s被创建。"
-
-#: .././library/email.php:296
-#, php-format
-msgid "[%s]: Profile updated: %s"
-msgstr "[%s]：个人档案已被更新：%s"
-
-#: .././library/email.php:297
-#, php-format
-msgid "Profile updated on %s."
-msgstr "个人档案更新%s。"
-
-#: .././library/email.php:301
-#, php-format
-msgid "<b>Profile:</b> %s"
-msgstr "<b>档案：</b>%s"
-
-#: .././library/email.php:302
-#, php-format
-msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
-msgstr "<b>个人档案链接：</b><a href=\"%1$s\">％1$s</a>"
-
-#: .././library/email.php:310
-#, php-format
-msgid "Welcome to %s!"
-msgstr "欢迎来到%s！"
-
-#: .././library/email.php:317
-msgid ""
-"<p>Your user account was created successfully. This is your public profile "
-"page:</p>"
-msgstr "<p>您的用户帐户已成功创建。这是您的档案页：</p>"
-
-#: .././library/email.php:324
-msgid "Now you can share your content/activities with our community:"
-msgstr "您可以与我们的社群分享您的内容/活动："
-
-#: .././library/email.php:345
-#, php-format
-msgid "About %s"
-msgstr "关于%s"
-
-#: .././library/email.php:522
-#, php-format
-msgid "A new %s was posted referencing \"%s\""
-msgstr "一个新的%s被张贴引用“%s”"
-
-#: .././library/email.php:527
-#, php-format
-msgid "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
-msgstr "<p>您的%s<a href=\"%s\">%s</a>已经被新的%s引用：</p>"
-
-#: .././library/email.php:550
-#, php-format
-msgid "Your %s was approved!"
-msgstr "您的%s已被批准！"
-
-#: .././library/email.php:552
-#, php-format
-msgid "<p>Hurray! Your %s was approved!</p>"
-msgstr "<p>耶！您的%s已被批准！</p>"
-
-#: .././library/email.php:586
-#, php-format
-msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
-msgstr "<p><a href=\"%s\">%s</a>的评论有个回应：</p>"
-
-#: .././library/email.php:587
-#, php-format
-msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
-msgstr "<p>一个新的评论已被添加到<a href=\"%s\">%s</a>：</p>"
-
-#: .././library/email.php:601 .././library/email.php:764
-#: .././pop-library/processors/abstract-classes/viewcomponents/replycomment-headers-base.php:43
-#: .././pop-library/processors/comments/blockgroups.php:131
-msgid "In response to:"
-msgstr "回复给："
-
-#: .././library/email.php:610 .././library/email.php:771
-msgid "Click here to reply the comment"
-msgstr "点击此处回复评论"
-
-#: .././library/email.php:627
-#, php-format
-msgid "%s replied your comment in “%s”"
-msgstr "%s在“%s”回答您的评论"
-
-#: .././library/email.php:676
-#, php-format
-msgid "New comment added in “%s”"
-msgstr "新评论被添加于“%s”"
-
-#: .././library/email.php:711
-#, php-format
-msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
-msgstr "<p><a href=\"%s\">%s</a>在%s提到您：</p>"
-
-#: .././library/email.php:724
-#, php-format
-msgid "You were mentioned in %s “%s”"
-msgstr "您在题目为“%2$s”的%1$s被提到"
-
-#: .././library/email.php:747
-#, php-format
-msgid ""
-"<p><a href=\"%s\">%s</a> mentioned you in a comment from %s <a href=\"%s\">"
-"%s</a>:</p>"
-msgstr ""
-"<p><a href=\"%1$s\">%2$s</a>在题目为<a href=\"%4$s\">%5$s</a>的%3$s的评论中提"
-"到您：</p>"
-
-#: .././library/email.php:784
-#, php-format
-msgid "You were mentioned in a comment from %s “%s”"
-msgstr "您在题目为“%2$s”的%1$s的评论中被提到"
-
-#: .././library/email.php:803
-msgid "Password reset code"
-msgstr "密码重置码"
-
-#: .././library/email.php:808
-msgid "Retrieve password"
-msgstr "找回密码"
-
-#: .././library/email.php:813
-#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:50
-msgid "Password reset successful"
-msgstr "密码重置成功"
-
-#: .././library/email.php:816
-msgid "Your password has been changed successfully."
-msgstr "您的密码已被更改成功。"
-
-#: .././library/email.php:818
-#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:24
-#, php-format
-msgid "Please <a href=\"%s\">click here to log-in</a>."
-msgstr "请<a href=\"%s\">点击这里登录</a>。"
-
-#: .././library/email.php:847
-msgid "You have a new follower!"
-msgstr "您有一个新的追随者！"
-
-#: .././library/email.php:850
-#, php-format
-msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
-msgstr "<p>恭喜！ <a href=\"%s\">您有一个新的追随者</a>：</p>"
-
-#: .././library/email.php:856
-msgid ""
-"<p>This user will receive notifications following your activity, such as "
-"recommending content, posting a new discussion or comment, and others.</p>"
-msgstr ""
-"<p>此用户将会收到您的活动通知，如推荐内容，新讨论或评论发布，等等。</p>"
-
-#: .././library/email.php:872
-#, php-format
-msgid "Your %s was recommended!"
-msgstr "您的%s被推荐了！"
-
-#: .././library/email.php:874
-#, php-format
-msgid "<p>Your %s <a href=\"%s\">%s</a> was recommended by:</p>"
-msgstr "<p>您题目为<a href=\"%2$s\">%3$s</a>的%1$s已被推荐：</p>"
-
 #: .././library/login/login.php:22
 #: .././pop-library/processors/login/forms/submit-buttons.php:31
 msgid "Log in"
@@ -552,16 +297,16 @@ msgstr "您已经给予<em><strong>%s</strong></em>好评。"
 msgid "What is %s?"
 msgstr "什么是%s？"
 
-#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:66
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:65
 msgid "Check it out here"
 msgstr "这里查看"
 
-#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:90
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:79
 #, php-format
 msgid "%s is inviting you to join %s!"
 msgstr "%s邀请你加入%s！"
 
-#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:98
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:87
 #, php-format
 msgid "You have been invited to join %s!"
 msgstr "您已被邀请加入%s！"
@@ -835,6 +580,11 @@ msgstr "下一个"
 msgid "Toggle menu"
 msgstr "切换菜单"
 
+#: .././pop-library/processors/abstract-classes/viewcomponents/replycomment-headers-base.php:43
+#: .././pop-library/processors/comments/blockgroups.php:131
+msgid "In response to:"
+msgstr "回复给："
+
 #: .././pop-library/processors/blocks/blocks.php:35
 #, php-format
 msgid ""
@@ -1098,29 +848,39 @@ msgstr "您的用户档案不是“个人”的类型，所以您不能在这里
 msgid "Show email in your user profile?"
 msgstr "把电子邮件显示在用户档案？"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:33
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:37
 msgid "Short description"
 msgstr "简介"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:38
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:122
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:42
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:146
 msgid "Facebook URL"
 msgstr "Facebook网址"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:43
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:123
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:47
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:147
 msgid "Twitter URL"
 msgstr "Twitter的网址"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:48
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:124
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:52
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:148
 msgid "LinkedIn URL"
 msgstr "LinkedIn网址"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:53
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:125
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:57
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:149
 msgid "Youtube URL"
 msgstr "YouTube网址"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:62
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:150
+msgid "Instagram URL"
+msgstr ""
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:67
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:151
+msgid "Blog URL"
+msgstr ""
 
 #: .././pop-library/processors/createupdateuser/abstract-classes/createupdateuser-blocks-base.php:12
 #: .././pop-library/processors/createupdateuser/blocks.php:100
@@ -1131,11 +891,10 @@ msgstr "呈交中。。。"
 msgid "Awesome! Your User Account was created successfully!"
 msgstr "用户帐户已成功创建！"
 
-#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:17
-msgid ""
-"Please add the following emails to your contact list, to make sure you "
-"receive our notifications:"
-msgstr "请添加以下电子邮件到您的联系人列表，以确保您会收到我们的通知："
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:22
+#, php-format
+msgid "Please <a href=\"%s\">click here to log-in</a>."
+msgstr "请<a href=\"%s\">点击这里登录</a>。"
 
 #: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:14
 msgid "User Account updated successfully."
@@ -1477,6 +1236,10 @@ msgstr ""
 "我们给您送了一封电子邮件，里面有个代码。请复制并<a href=\"%s\">粘贴在这里</"
 "a>。"
 
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:50
+msgid "Password reset successful"
+msgstr "密码重置成功"
+
 #: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:52
 #, php-format
 msgid "Please <a href=\"%s\">click here to log in</a>."
@@ -1696,6 +1459,166 @@ msgstr ""
 #: .././js/includes/cdn/moment.2.10.6.min.js:6
 msgid "\n"
 msgstr "\n"
+
+#~ msgid "<p>Dear %s,</p>"
+#~ msgstr "<p>亲爱的%s，</p>"
+
+#~ msgid "<p>Howdy!</p>"
+#~ msgstr "<p>您好！</p>"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "您的%s成功被创造"
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
+#~ msgstr "<p>您%s的<a href=\"%s\">%s</a>创建成功！</p>"
+
+#~ msgid ""
+#~ "Please notice that the status of the %s is <strong>'Draft'</strong>, so "
+#~ "it won't be published online."
+#~ msgstr "请注意，%s的状态还是<strong>“草稿”</strong>，所以还未在网上发布。"
+
+#~ msgid ""
+#~ "<p>Please wait for our moderators approval. You will receive an email "
+#~ "with the confirmation.</p>"
+#~ msgstr "<p>请等待我们的版主批准。您将收到一封电子邮件确认。</p>"
+
+#~ msgid "[%s]: New %s by %s"
+#~ msgstr "[%s]：新%s,作者为%s"
+
+#~ msgid "A new %s has been submitted on %s:"
+#~ msgstr "新的%s在%s被提交："
+
+#~ msgid "[%s]: %s updated by %s"
+#~ msgstr "[%s]：%s被%s更新"
+
+#~ msgid "%s updated on %s:"
+#~ msgstr "%s在%s被更新："
+
+#~ msgid "<b>Author:</b> %s"
+#~ msgstr "<b>作者：</b>%s"
+
+#~ msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+#~ msgstr "<b>作者电子邮件：</b><a href=\"mailto:%1$s\">％1$s</a>"
+
+#~ msgid "<b>Title:</b> %s"
+#~ msgstr "<b>标题：</b>%s"
+
+#~ msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>永久链接：</b><a href=\"%1$s\">％1$s</a>"
+
+#~ msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>修改链接：</b><a href=\"%1$s\">％1$s</a>"
+
+#~ msgid "<b>Status:</b> %s"
+#~ msgstr "<b>状态：</b>%s"
+
+#~ msgid "[%s]: New Profile: %s"
+#~ msgstr "[%s]：新的档案：%s"
+
+#~ msgid "A Profile was created on %s."
+#~ msgstr "个人档案在%s被创建。"
+
+#~ msgid "[%s]: Profile updated: %s"
+#~ msgstr "[%s]：个人档案已被更新：%s"
+
+#~ msgid "Profile updated on %s."
+#~ msgstr "个人档案更新%s。"
+
+#~ msgid "<b>Profile:</b> %s"
+#~ msgstr "<b>档案：</b>%s"
+
+#~ msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>个人档案链接：</b><a href=\"%1$s\">％1$s</a>"
+
+#~ msgid "Welcome to %s!"
+#~ msgstr "欢迎来到%s！"
+
+#~ msgid ""
+#~ "<p>Your user account was created successfully. This is your public "
+#~ "profile page:</p>"
+#~ msgstr "<p>您的用户帐户已成功创建。这是您的档案页：</p>"
+
+#~ msgid "Now you can share your content/activities with our community:"
+#~ msgstr "您可以与我们的社群分享您的内容/活动："
+
+#~ msgid "About %s"
+#~ msgstr "关于%s"
+
+#~ msgid "A new %s was posted referencing \"%s\""
+#~ msgstr "一个新的%s被张贴引用“%s”"
+
+#~ msgid ""
+#~ "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
+#~ msgstr "<p>您的%s<a href=\"%s\">%s</a>已经被新的%s引用：</p>"
+
+#~ msgid "Your %s was approved!"
+#~ msgstr "您的%s已被批准！"
+
+#~ msgid "<p>Hurray! Your %s was approved!</p>"
+#~ msgstr "<p>耶！您的%s已被批准！</p>"
+
+#~ msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p><a href=\"%s\">%s</a>的评论有个回应：</p>"
+
+#~ msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>一个新的评论已被添加到<a href=\"%s\">%s</a>：</p>"
+
+#~ msgid "Click here to reply the comment"
+#~ msgstr "点击此处回复评论"
+
+#~ msgid "%s replied your comment in “%s”"
+#~ msgstr "%s在“%s”回答您的评论"
+
+#~ msgid "New comment added in “%s”"
+#~ msgstr "新评论被添加于“%s”"
+
+#~ msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
+#~ msgstr "<p><a href=\"%s\">%s</a>在%s提到您：</p>"
+
+#~ msgid "You were mentioned in %s “%s”"
+#~ msgstr "您在题目为“%2$s”的%1$s被提到"
+
+#~ msgid ""
+#~ "<p><a href=\"%s\">%s</a> mentioned you in a comment from %s <a href=\"%s"
+#~ "\">%s</a>:</p>"
+#~ msgstr ""
+#~ "<p><a href=\"%1$s\">%2$s</a>在题目为<a href=\"%4$s\">%5$s</a>的%3$s的评论"
+#~ "中提到您：</p>"
+
+#~ msgid "You were mentioned in a comment from %s “%s”"
+#~ msgstr "您在题目为“%2$s”的%1$s的评论中被提到"
+
+#~ msgid "Password reset code"
+#~ msgstr "密码重置码"
+
+#~ msgid "Retrieve password"
+#~ msgstr "找回密码"
+
+#~ msgid "Your password has been changed successfully."
+#~ msgstr "您的密码已被更改成功。"
+
+#~ msgid "You have a new follower!"
+#~ msgstr "您有一个新的追随者！"
+
+#~ msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
+#~ msgstr "<p>恭喜！ <a href=\"%s\">您有一个新的追随者</a>：</p>"
+
+#~ msgid ""
+#~ "<p>This user will receive notifications following your activity, such as "
+#~ "recommending content, posting a new discussion or comment, and others.</p>"
+#~ msgstr ""
+#~ "<p>此用户将会收到您的活动通知，如推荐内容，新讨论或评论发布，等等。</p>"
+
+#~ msgid "Your %s was recommended!"
+#~ msgstr "您的%s被推荐了！"
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was recommended by:</p>"
+#~ msgstr "<p>您题目为<a href=\"%2$s\">%3$s</a>的%1$s已被推荐：</p>"
+
+#~ msgid ""
+#~ "Please add the following emails to your contact list, to make sure you "
+#~ "receive our notifications:"
+#~ msgstr "请添加以下电子邮件到您的联系人列表，以确保您会收到我们的通知："
 
 #~ msgid "More %s"
 #~ msgstr "%s 更多"

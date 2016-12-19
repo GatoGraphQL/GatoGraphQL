@@ -28,6 +28,9 @@ if (class_exists('User_Role_Editor'))
 if (defined('POP_USERAVATAR_AWS_VERSION')) {
 	require_once 'pop-useravatar-aws/load.php';		
 }
+if (defined('POP_MAILER_AWS_VERSION')) {
+	require_once 'pop-mailer-aws/load.php';		
+}
 
 
 // // if (class_exists('Amazon_S3_And_CloudFront')) {

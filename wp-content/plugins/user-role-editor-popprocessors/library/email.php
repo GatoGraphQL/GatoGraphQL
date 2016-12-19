@@ -27,7 +27,7 @@ function gd_ure_sendemail_community_newmember($user_id, $communities) {
 	if (!$communities) return;
 
 	$author_name = get_the_author_meta( 'display_name', $user_id);
-	$user_html = gd_sendemail_get_userhtml($user_id);
+	$user_html = PoP_EmailTemplates_Factory::get_instance()->get_userhtml($user_id);
 	
 	foreach ($communities as $community) {
 
@@ -76,6 +76,6 @@ function gd_ure_sendemail_community_newmember($user_id, $communities) {
 		);
 	
 		$email = get_the_author_meta('user_email', $community);	
-		gd_sendemail_to_users($email, $community_name, $subject, $content);	
+		sendemail_to_users($email, $community_name, $subject, $content);	
 	}
 }

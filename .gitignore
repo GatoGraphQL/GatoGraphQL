@@ -20,6 +20,7 @@ wp-admin/
 wp-includes/
 wp-content/languages/
 wp-content/pop-cache/
+wp-content/pop-serviceworkers/
 
 /index.php
 /wp-activate.php

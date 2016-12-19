@@ -327,8 +327,10 @@ body.sliding .pagesection-group.active-navigator.active-sideinfo .pop-error.top-
 .pagesection-group.active-pagetabs .offcanvas.addons,
 .pagesection-group.active-top.active-pagetabs .offcanvas.addontabs,
 .pagesection-group.active-top.active-pagetabs-xs .offcanvas.addontabs,
+.pagesection-group.active-top.active-pagetabs.active-pagetabs-xs .offcanvas.addontabs,
 .pagesection-group.active-top.active-pagetabs .offcanvas.addons,
-.pagesection-group.active-top.active-pagetabs-xs
+.pagesection-group.active-top.active-pagetabs-xs .offcanvas.addons,
+.pagesection-group.active-top.active-pagetabs.active-pagetabs-xs
 .offcanvas.addons{top:auto}.pagesection-group.active-addontabs .window.fullsize .offcanvas.addontabs,
 .pagesection-group.active-addons .window.fullsize
 .offcanvas.addons{width:100%}.pagesection-group.active-addontabs .window.minimized .offcanvas.addontabs,

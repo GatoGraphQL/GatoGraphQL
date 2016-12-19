@@ -1,6 +1,7 @@
 <?php
 
 define('POP_COREPROCESSORS_MIN_VERSION', 0.1);
+define('POP_EMAILSENDER_MIN_VERSION', 0.1);
 define('EM_POPPROCESSORS_MIN_VERSION', 0.1);
 define('URE_POPPROCESSORS_MIN_VERSION', 0.1);
 define('PHOTOSWIPEPOP_MIN_VERSION', 0.1);
@@ -25,6 +26,23 @@ class PoPTheme_Wassup_Validation {
 			
 			add_action('admin_notices',array($this,'version_warning'));
 			add_action('network_admin_notices',array($this,'version_warning'));
+		}
+
+		if(!defined('POP_EMAILSENDER_VERSION')){
+
+			add_action('admin_notices',array($this,'emailsender_install_warning'));
+			add_action('network_admin_notices',array($this,'emailsender_install_warning'));
+			$success = false;
+		}
+		elseif(!defined('POP_EMAILSENDER_INITIALIZED')){
+
+			// The admin notice will come from another failing plug-in, no need to repeat it here
+			$success = false;
+		}
+		elseif(POP_EMAILSENDER_MIN_VERSION > POP_EMAILSENDER_VERSION){
+			
+			add_action('admin_notices',array($this,'emailsender_version_warning'));
+			add_action('network_admin_notices',array($this,'emailsender_version_warning'));
 		}
 
 		// Events Manager
@@ -96,6 +114,14 @@ class PoPTheme_Wassup_Validation {
 	function version_warning(){
 		
 		$this->admin_notice(__('Warning: please make sure to have the <a href="http://wordpress.org/extend/plugins/pop/">latest version</a> of <b>PoP Core Processors</b> installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly.','ps-pop'));
+	}
+	function emailsender_install_warning(){
+		
+		$this->admin_notice(__('Error: <b>PoP Email Sender</b> is not installed/activated. Without it, <b>PoP Theme: Wassup</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'));
+	}
+	function emailsender_version_warning(){
+		
+		$this->admin_notice(__('Warning: please make sure to have the <a href="http://wordpress.org/extend/plugins/pop/">latest version</a> of <b>PoP Email Sender</b> installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly.','ps-pop'));
 	}
 	function em_install_warning(){
 		

@@ -53,7 +53,7 @@ class GD_Template_Processor_GFForms extends GD_Template_Processor_FormsBase {
 
 				$email = apply_filters(
 					'GD_Template_Processor_GFForms:contactus:email',
-					gd_email_info_email()
+					PoP_EmailSender_Utils::get_from_email()
 				);
 
 				// Add the description. Allow Organik Fundraising to override the message

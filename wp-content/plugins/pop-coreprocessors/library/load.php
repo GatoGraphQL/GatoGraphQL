@@ -41,7 +41,7 @@ require_once POP_COREPROCESSORS_LIB.'/date.php';
 require_once POP_COREPROCESSORS_LIB.'/multiselect.php';
 require_once POP_COREPROCESSORS_LIB.'/default-filters.php';
 require_once POP_COREPROCESSORS_LIB.'/editor.php';
-require_once POP_COREPROCESSORS_LIB.'/email.php';
+// require_once POP_COREPROCESSORS_LIB.'/email/load.php';
 // require_once POP_COREPROCESSORS_LIB.'/email-utils.php';
 require_once POP_COREPROCESSORS_LIB.'/embed.php';
 // require_once POP_COREPROCESSORS_LIB.'/file.php';

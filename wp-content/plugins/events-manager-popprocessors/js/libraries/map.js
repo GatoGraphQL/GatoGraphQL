@@ -77,7 +77,7 @@ popMap = {
 
 				var map = $(this);
 				// t.addMarkers(pageSection, block, map, status.reload);
-				t.functionHiddenMap('addmarkers', pageSection, block, map, status);
+				t.triggerAddMarkers(pageSection, block, map, status);
 			});
 		});
 
@@ -136,11 +136,40 @@ popMap = {
 		}
 		else {
 
-			t.functionHiddenMap('trigger', pageSection, block, map);
+			t.pendingTriggerMap('showmap', pageSection, block, map);
 		}
 	},
 
-	functionHiddenMap : function(functionName, pageSection, block, map, status) {
+	triggerAddMarkers : function(pageSection, block, map, status) {
+
+		var t = this;
+
+		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
+		if (!popManager.isHidden(map)) {
+		
+			t.addMarkers(pageSection, block, map, status.reload);
+		}
+		else {
+
+			t.pendingTriggerMap('addmarkers', pageSection, block, map, status);
+		}
+	},
+
+	triggerFunction : function(functionName, pageSection, block, map, status) {
+
+		var t = this;
+					
+		// Call again this same function, to make sure that the map is still not hidden by 1 of the other conditions (eg: pageSectionTab not active AND map inside a collapse)
+		// t.execTriggerShowMap(pageSection, block, map);
+		if (functionName == 'showmap') {
+			t.triggerShowMap(pageSection, block, map);
+		}
+		else if (functionName == 'addmarkers') {
+			t.triggerAddMarkers(pageSection, block, map, status);
+		}
+	},
+
+	pendingTriggerMap : function(functionName, pageSection, block, map, status) {
 
 		var t = this;
 
@@ -156,14 +185,7 @@ popMap = {
 				block = $('#'+block.attr('id'));
 				if (block.length) {
 					
-					// Call again this same function, to make sure that the map is still not hidden by 1 of the other conditions (eg: pageSectionTab not active AND map inside a collapse)
-					// t.execTriggerShowMap(pageSection, block, map);
-					if (functionName == 'trigger') {
-						t.triggerShowMap(pageSection, block, map);
-					}
-					else if (functionName == 'addmarkers') {
-						t.addMarkers(pageSection, block, map, status.reload);
-					}
+					t.triggerFunction(functionName, pageSection, block, map, status);
 				}
 			});
 		}
@@ -175,14 +197,7 @@ popMap = {
 			var collapse = map.parents('.collapse').not('.in');
 			collapse.one('shown.bs.collapse', function() {
 
-				// Call again this same function, to make sure that the map is still not hidden by 1 of the other conditions (eg: pageSectionTab not active AND map inside a collapse)
-				// t.execTriggerShowMap(pageSection, block, map);
-				if (functionName == 'trigger') {
-					t.triggerShowMap(pageSection, block, map);
-				}
-				else if (functionName == 'addmarkers') {
-					t.addMarkers(pageSection, block, map, status.reload);
-				}
+				t.triggerFunction(functionName, pageSection, block, map, status);
 			});
 		}
 
@@ -193,13 +208,7 @@ popMap = {
 
 			pageSectionPage.one('shown.bs.tabpane', function() {
 				
-				// t.execTriggerShowMap(pageSection, block, map);
-				if (functionName == 'trigger') {
-					t.triggerShowMap(pageSection, block, map);
-				}
-				else if (functionName == 'addmarkers') {
-					t.addMarkers(pageSection, block, map, status.reload);
-				}
+				t.triggerFunction(functionName, pageSection, block, map, status);
 			});
 			// }
 		}

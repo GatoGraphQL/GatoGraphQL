@@ -36,25 +36,23 @@ function gd_ppp_preview_link($post_id) {
 	return null;
 }
 
-add_filter('gd_createupdate_post:create', 'gd_ppp_add_public_preview', 10, 1);
+add_filter('gd_createupdate_post', 'gd_ppp_add_public_preview', 10, 1);
 function gd_ppp_add_public_preview($post_id) {
 
-	if (in_array(get_post_status($post_id), array('draft', 'pending'))) {
-		$preview_post_ids = DS_Public_Post_Preview::get_preview_post_ids();
-		$preview_post_ids[] = $post_id;
-		DS_Public_Post_Preview::set_preview_post_ids( $preview_post_ids );
-	}
-}
-
-// Also in update for if the user changed status from Published to Draft/Pending
-add_filter('gd_createupdate_post:update', 'gd_ppp_update_public_preview', 10, 1);
-function gd_ppp_update_public_preview($post_id) {
-
-	if (in_array(get_post_status($post_id), array('draft', 'pending'))) {
+	$post_status = get_post_status($post_id);
+	if (in_array($post_status, array('draft', 'pending', 'publish'))) {
 
 		$preview_post_ids = DS_Public_Post_Preview::get_preview_post_ids();
-		if (!in_array($post_id, $preview_post_ids)) {
+		// Add the post to have "public preview"
+		if (in_array($post_status, array('draft', 'pending')) && !in_array($post_id, $preview_post_ids)) {
+
 			$preview_post_ids[] = $post_id;
+			DS_Public_Post_Preview::set_preview_post_ids( $preview_post_ids );
+		}
+		// Remove it, so published posts don't have the "public preview" enabled anymore
+		elseif (($post_status == 'publish') && in_array($post_id, $preview_post_ids)) {
+
+			array_splice($preview_post_ids, array_search($post_id, $preview_post_ids), 1);
 			DS_Public_Post_Preview::set_preview_post_ids( $preview_post_ids );
 		}
 	}

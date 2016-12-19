@@ -99,7 +99,7 @@ function gd_gf_email_layout( $notification, $form, $entry ) {
 		}
 	}
 
-	$notification['message'] = gd_email_addframe($title, $notification['message'], $names, GD_EMAIL_TEMPLATE_EMAILBODY);
+	$notification['message'] = PoP_EmailTemplates_Factory::get_instance()->add_emailframe($title, $notification['message'], $names, GD_EMAIL_TEMPLATE_EMAILBODY);
 
 	return $notification;
 }

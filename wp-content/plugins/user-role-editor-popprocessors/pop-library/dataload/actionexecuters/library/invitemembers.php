@@ -15,8 +15,8 @@ class GD_InviteMembers extends GD_EmailInvite {
 		$author_url = get_author_posts_url($user_id);
 		$author_name = get_the_author_meta( 'display_name', $user_id);
 		
-		$user_html = gd_sendemail_get_userhtml($user_id);//PoP_EmailUtils::get_user_html($user_id);
-		$website_html = gd_sendemail_get_websitehtml();//PoP_EmailUtils::get_website_html();
+		$user_html = PoP_EmailTemplates_Factory::get_instance()->get_userhtml($user_id);//PoP_EmailUtils::get_user_html($user_id);
+		$website_html = PoP_EmailTemplates_Factory::get_instance()->get_websitehtml();//PoP_EmailUtils::get_website_html();
 
 		$content = sprintf(
 			__( '<p><a href="%s">%s</a> is inviting you to <a href="%s">become their member</a>:</p>', 'ure-popprocessors'),
@@ -66,7 +66,7 @@ class GD_InviteMembers extends GD_EmailInvite {
 		// The user must be always logged in, so we will have the user_id
 		$user_id = $form_data['user_id'];
 		return sprintf( 
-			__( '%s is inviting you to become their member!' ), 
+			__('%s is inviting you to become their member!', 'ure-popprocessors'), 
 			get_the_author_meta('display_name', $user_id)
 		);
 	}
