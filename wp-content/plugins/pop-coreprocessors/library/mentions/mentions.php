@@ -35,7 +35,8 @@ class PoP_Mentions {
       // /#[a-z0-9_]+(?![^<]*>)/
       // What the negative lookahead does is makes sure that there is a < between the hashtag and the next >.
     // So then I took the regex from #1, and applied the negative lookahead: +(?![^<]*>)
-    $this->regex_general =  '/(?<=\s|^)#(\w*[A-Za-z_]+\w*)+(?![^<]*>)/';
+    // Comment Leo 20/12/2016: Also added characther \x{A0} (https://unicodelookup.com/# /1) in addition to \s, since it appears sometimes between hashtags and would not be recognized
+    $this->regex_general =  '/(?<=\s|\x{A0}|^)#(\w*[A-Za-z_]+\w*)+(?![^<]*>)/';
 
     // Allow also underscore ("_"), dash ("-") and dots ("."), but only when they are not the final char (@pedro.perez. = pedro.perez). Eg: greenpeace-asia
     // Regex taken from https://stackoverflow.com/questions/13639478/how-do-i-extract-words-starting-with-a-hash-tag-from-a-string-into-an-array

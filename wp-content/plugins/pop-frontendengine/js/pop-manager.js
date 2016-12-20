@@ -333,6 +333,9 @@ popManager = {
 			// Initialize Settings, Feedback and Data
 			t.initTopLevelJson();
 
+			// Make sure the localStorage has no stale entries
+			t.initLocalStorage();
+
 			// Log in the user immediately, before rendering the HTML. This way, conditional wrappers can access the state of the user
 			// being logged in, such as for "isUserIdSameAsLoggedInUser"
 			popUserAccount.initialLogin();
@@ -1666,6 +1669,28 @@ popManager = {
 	// 		t.getTopLevelFeedback()[M.UNIQUEID] = source.settings[M.UNIQUEID];
 	// 	}
 	// },
+
+	initLocalStorage : function() {
+
+		// Delete all stale entries
+		if (M.USELOCALSTORAGE && Modernizr.localstorage) {
+				
+			var latest = localStorage['PoP:version'];
+			if (!latest || (latest != M.VERSION)){
+
+				// Delete all stale entries: all those starting with the website URL
+				// Solution taken from https://stackoverflow.com/questions/7591893/html5-localstorage-jquery-delete-localstorage-keys-starting-with-a-certain-wo
+				Object.keys(localStorage).forEach(function(key) { 
+					if (key.startsWith(M.HOME_URL)) {
+						localStorage.removeItem(key); 
+					} 
+				}); 
+
+				// Save the current version
+				localStorage['PoP:version'] = M.VERSION;
+			}
+		}
+	},
 
 	getStoredData : function(localStorageKey) {
 
