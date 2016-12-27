@@ -11,7 +11,6 @@ Author URI: https://getpop.org/u/leo/
 define('URE_POPPROCESSORS_VERSION', 0.102);
 define('URE_POPPROCESSORS_URE_VERSION', '4.19.1');
 define('URE_POPPROCESSORS_DIR', dirname(__FILE__));
-define('URE_POPPROCESSORS_URI', plugins_url('', __FILE__));
 
 class URE_PoPProcessors {
 
@@ -22,6 +21,8 @@ class URE_PoPProcessors {
 	}
 
 	function init(){
+
+		define('URE_POPPROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

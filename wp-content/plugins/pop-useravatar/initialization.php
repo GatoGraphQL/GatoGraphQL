@@ -23,6 +23,11 @@ class PoP_UserAvatar_Initialization {
 		}
 
 		/**---------------------------------------------------------------------------------------------------------------
+		 * Load the Plug-ins Library
+		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once 'plugins/load.php';
+
+		/**---------------------------------------------------------------------------------------------------------------
 		 * Load the PoP Library
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		require_once 'pop-library/load.php';
@@ -66,7 +71,7 @@ class PoP_UserAvatar_Initialization {
 		wp_enqueue_script('fileupload-ui');			
 		wp_enqueue_script('fileupload-process');				
 		wp_enqueue_script('fileupload-validate');	
-		wp_register_script('fileupload-locale', apply_filters('gd_fileupload-userphoto_locale', $js_folder .'/locales/fileupload/locale.js'), array('fileupload'), null);
+		wp_register_script('fileupload-locale', pop_useravatar_get_locale_jsfile(), array('fileupload'), null);
 		wp_enqueue_script('fileupload-locale');	
 
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {

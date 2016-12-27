@@ -39,6 +39,7 @@ wget -O $POP_APP_PATH/wp-content/themes/getpop/js/dist/getpop-app.templates.bund
 rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/*.js
 cp $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/popfrontend.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/pop-coreprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/
+cp $POP_APP_PATH/wp-content/plugins/pop-serviceworkers/js/dist/pop-serviceworkers.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/aryo-activity-log-popprocessors/js/dist/aryo-activity-log-popprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-useravatar/js/dist/pop-useravatar.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/events-manager-popprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/
@@ -48,7 +49,7 @@ cp $POP_APP_PATH/wp-content/plugins/pop-prettyprint/js/dist/pop-prettyprint.bund
 cp $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/poptheme-wassup.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop/js/libraries/
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
-wget -O $POP_APP_PATH/wp-content/themes/getpop/js/dist/getpop-app.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/apps/getpop/js/libraries&f=popfrontend.bundle.min.js,pop-coreprocessors.bundle.min.js,aryo-activity-log-popprocessors.bundle.min.js,pop-useravatar.bundle.min.js,events-manager-popprocessors.bundle.min.js,wordpress-social-login-popprocessors.bundle.min.js,photoswipe-pop.bundle.min.js,pop-prettyprint.bundle.min.js,poptheme-wassup.bundle.min.js"
+wget -O $POP_APP_PATH/wp-content/themes/getpop/js/dist/getpop-app.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/apps/getpop/js/libraries&f=popfrontend.bundle.min.js,pop-coreprocessors.bundle.min.js,pop-serviceworkers.bundle.min.js,aryo-activity-log-popprocessors.bundle.min.js,pop-useravatar.bundle.min.js,events-manager-popprocessors.bundle.min.js,wordpress-social-login-popprocessors.bundle.min.js,photoswipe-pop.bundle.min.js,pop-prettyprint.bundle.min.js,poptheme-wassup.bundle.min.js"
 
 
 ###########################

@@ -16,13 +16,22 @@ class GD_Template_Processor_StatusBase extends GD_Template_ProcessorBase {
 	
 		$ret = parent::get_template_configuration($template_id, $atts);
 		
+		// Error: allow for status-specific message, or a general one
+		$ret[GD_JS_TITLES/*'titles'*/]['error'] = sprintf(
+			// status = 0 => User is offline
+			'<span class="errormsg status-0 hidden">%s</span>',
+			GD_CONSTANT_OFFLINE_MSG
+		).sprintf(
+			// General message
+			'<span class="errormsg general hidden">%s</span>',
+			GD_CONSTANT_ERROR_MSG
+		);
 		$loading = sprintf(
 			'%s %s', 
 			$this->get_att($template_id, $atts, 'loading-spinner'),
 			$this->get_att($template_id, $atts, 'loading-msg')
 		);
 		$ret[GD_JS_TITLES/*'titles'*/]['loading'] = $loading;
-		$ret[GD_JS_TITLES/*'titles'*/]['error'] = GD_CONSTANT_ERROR_MSG;
 		$ret[GD_JS_TITLES/*'titles'*/]['retry'] = GD_CONSTANT_RETRY_MSG;
 
 		return $ret;

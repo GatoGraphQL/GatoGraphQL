@@ -19,9 +19,9 @@ define ('POP_COREPROCESSORS_DIR', dirname(__FILE__));
 define ('POP_COREPROCESSORS_LIB', POP_COREPROCESSORS_DIR.'/library' );
 define ('POP_COREPROCESSORS_PLUGINS_DIR', POP_COREPROCESSORS_LIB.'/plugins');
 
-define ('POP_COREPROCESSORS_URI', plugins_url('', __FILE__));
-define ('POP_COREPROCESSORS_URI_LIB', POP_COREPROCESSORS_URI.'/library' );
-define ('POP_COREPROCESSORS_URI_PLUGINSLIB', POP_COREPROCESSORS_URI_LIB.'/plugins' );
+// Needed for the Captcha, to make sure the plugins_url points to the website and not to a CDN (as will be hooked in by pop-aws)
+define ('POP_COREPROCESSORS_PHPURI', plugins_url('', __FILE__));
+define ('POP_COREPROCESSORS_PHPURI_LIB', POP_COREPROCESSORS_PHPURI.'/library' );
 
 class PoP_CoreProcessors {
 
@@ -36,6 +36,9 @@ class PoP_CoreProcessors {
 		return POP_COREPROCESSORS_VERSION;
 	}
 	function init(){
+
+		define ('POP_COREPROCESSORS_URI', plugins_url('', __FILE__));
+		define ('POP_COREPROCESSORS_URI_LIB', POP_COREPROCESSORS_URI.'/library' );
 
 		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {

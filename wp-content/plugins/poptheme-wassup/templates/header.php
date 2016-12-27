@@ -66,8 +66,9 @@
 	<?php /* For Bootstrap v3.0: http://getbootstrap.com/getting-started/ */ ?>
 	<?php /* HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries */ ?>
 	<!--[if lt IE 9]>
-	  <script src="<?php echo get_stylesheet_directory_uri() ?>/js/includes/html5shiv.js"></script>
-	  <script src="<?php echo get_stylesheet_directory_uri() ?>/js/includes/respond.min.js"></script>
+		<?php foreach (get_compatibility_js_files() as $file) : ?>
+			<script src="<?php echo $file ?>"></script>
+		<?php endforeach; ?>
 	<![endif]-->	
 </head>
 <body id="body" class="pop-loadingframe pop-loadingjs <?php echo gd_classes_body() ?>">

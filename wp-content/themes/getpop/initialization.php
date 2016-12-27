@@ -46,6 +46,7 @@ class GetPoP_Initialization {
 			// De-register all dependencies, and add instead a bundle of all of them
 			wp_dequeue_script('pop');
 			wp_dequeue_script('pop-coreprocessors');
+			wp_dequeue_script('pop-serviceworkers');
 			wp_dequeue_script('aal-popprocessors');
 			wp_dequeue_script('pop-useravatar');
 			wp_dequeue_script('em-popprocessors');
@@ -64,7 +65,7 @@ class GetPoP_Initialization {
 			wp_dequeue_script('poptheme-wassup-templates');
 			// wp_dequeue_script('poptheme-wassup-votingprocessors-templates');
 
-			$folder = GETPOP_URI.'/js/dist';
+			$folder = GETPOP_ASSETS_URI.'/js/dist';
 			
 			// Register mega-bundle for the templates
 			wp_register_script('getpop-templates-app', $folder.'/getpop-app.templates.bundle.min.js', array(), GETPOP_VERSION, true);
@@ -83,7 +84,7 @@ class GetPoP_Initialization {
 
 	function register_styles() {
 
-		$folder = GETPOP_URI.'/css';
+		$folder = GETPOP_ASSETS_URI.'/css';
 		
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 
@@ -117,7 +118,7 @@ class GetPoP_Initialization {
 			wp_dequeue_style('poptheme-wassup-sectionprocessors');
 			wp_dequeue_style('getpop');
 
-			$folder = GETPOP_URI.'/css/dist';
+			$folder = GETPOP_ASSETS_URI.'/css/dist';
 			wp_register_style('getpop-app', $folder.'/getpop-app.bundle.min.css', array('bootstrap'), GETPOP_VERSION);
 			wp_enqueue_style('getpop-app');
 		}

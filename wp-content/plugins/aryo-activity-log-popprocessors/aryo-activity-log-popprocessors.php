@@ -10,7 +10,6 @@ Author URI: https://getpop.org/u/leo/
 
 define('AAL_POPPROCESSORS_VERSION', 0.106);
 define('AAL_POPPROCESSORS_DIR', dirname(__FILE__));
-define('AAL_POPPROCESSORS_URI', plugins_url('', __FILE__));
 
 class AAL_PoPProcessors {
 
@@ -21,6 +20,8 @@ class AAL_PoPProcessors {
 	}
 
 	function init(){
+
+		define('AAL_POPPROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

@@ -14,9 +14,6 @@ Author URI: https://getpop.org/u/leo/
 define ('POP_USERAVATAR_AWS_VERSION', 0.101);
 define ('POP_USERAVATAR_AWS_DIR', dirname(__FILE__));
 
-define ('POP_USERAVATAR_AWS_URI', plugins_url('', __FILE__));
-define ('POP_USERAVATAR_AWS_URI_LIB', POP_USERAVATAR_AWS_URI.'/library' );
-
 class PoP_UserAvatar_AWS {
 
 	function __construct() {
@@ -30,6 +27,9 @@ class PoP_UserAvatar_AWS {
 		return POP_USERAVATAR_AWS_VERSION;
 	}
 	function init(){
+
+		define ('POP_USERAVATAR_AWS_URI', plugins_url('', __FILE__));
+		define ('POP_USERAVATAR_AWS_URI_LIB', POP_USERAVATAR_AWS_URI.'/library' );
 
 		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {

@@ -40,7 +40,7 @@ class TPPDebate_Initialization {
 
 	function register_styles() {
 
-		$folder = TPPDEBATE_URI.'/css';
+		$folder = TPPDEBATE_ASSETS_URI.'/css';
 		
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 
@@ -71,6 +71,7 @@ class TPPDebate_Initialization {
 			// De-register all dependencies, and add instead a bundle of all of them
 			wp_dequeue_script('pop');
 			wp_dequeue_script('pop-coreprocessors');
+			wp_dequeue_script('pop-serviceworkers');
 			wp_dequeue_script('aal-popprocessors');
 			wp_dequeue_script('pop-useravatar');
 			wp_dequeue_script('em-popprocessors');
@@ -88,7 +89,7 @@ class TPPDebate_Initialization {
 			wp_dequeue_script('poptheme-wassup-templates');
 			wp_dequeue_script('poptheme-wassup-votingprocessors-templates');
 
-			$folder = TPPDEBATE_URI.'/js/dist';
+			$folder = TPPDEBATE_ASSETS_URI.'/js/dist';
 			
 			// Register mega-bundle for the templates
 			wp_register_script('tppdebate-templates-app', $folder.'/tppdebate-app.templates.bundle.min.js', array(), TPPDEBATE_VERSION, true);
@@ -118,7 +119,7 @@ class TPPDebate_Initialization {
 			wp_dequeue_style('poptheme-wassup-votingprocessors');
 			wp_dequeue_style('tppdebate');
 
-			$folder = TPPDEBATE_URI.'/css/dist';
+			$folder = TPPDEBATE_ASSETS_URI.'/css/dist';
 			wp_register_style('tppdebate-app', $folder.'/tppdebate-app.bundle.min.css', array('bootstrap'), TPPDEBATE_VERSION);
 			wp_enqueue_style('tppdebate-app');
 		}

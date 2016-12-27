@@ -29,17 +29,17 @@ body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
 }
 body.sliding .background-screen { 
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #edf9f7 url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1440x900.png) no-repeat fixed center;
+  /*background: #edf9f7 url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1440x900.png) no-repeat fixed center;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-@media (min-width: 1440px) {
+/*@media (min-width: 1440px) {
   body.sliding .background-screen { 
     background-image: url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1920x1080.png);
   }
-}
+}*/
 
 body.sliding, 
 body.sliding #ps-side, 
@@ -380,4 +380,8 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
     max-width: 940px; 
     max-height: 640px;
   }
+}
+
+#loadingscreen h1 > .tagline {
+    display: none;
 }

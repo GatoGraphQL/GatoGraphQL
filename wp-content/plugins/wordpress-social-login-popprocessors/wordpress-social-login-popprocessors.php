@@ -10,7 +10,6 @@ Author URI: https://getpop.org/u/leo/
 
 define('WSL_POPPROCESSORS_VERSION', 0.102);
 define('WSL_POPPROCESSORS_DIR', dirname(__FILE__));
-define('WSL_POPPROCESSORS_URI', plugins_url('', __FILE__));
 
 class WSL_PoPProcessors {
 
@@ -21,6 +20,8 @@ class WSL_PoPProcessors {
 	}
 
 	function init(){
+
+		define('WSL_POPPROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

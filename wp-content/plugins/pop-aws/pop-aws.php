@@ -14,21 +14,23 @@ Author URI: https://getpop.org/u/leo/
 define ('POP_AWS_VERSION', 0.101);
 define ('POP_AWS_DIR', dirname(__FILE__));
 
-define ('POP_AWS_URI', plugins_url('', __FILE__));
-define ('POP_AWS_URI_LIB', POP_AWS_URI.'/library' );
-
 class PoP_AWS {
 
 	function __construct() {
 		
-		add_action('plugins_loaded', array($this,'init'), 35);
-		add_action('PoP:version', array($this,'version'), 35);
+		// Priority 5: just after PoP Engine, and before everything else (except the "website-environment" plug-ins), 
+		// so we can set the POP_AWS_CDN_ASSETS_URI constant in plugin_url before all other plug-ins need it
+		add_action('plugins_loaded', array($this,'init'), 6);
+		add_action('PoP:version', array($this,'version'), 6);
 	}
 	function version($version){
 
 		return POP_AWS_VERSION;
 	}
 	function init(){
+
+		// define ('POP_AWS_URI', plugins_url('', __FILE__));
+		// define ('POP_AWS_URI_LIB', POP_AWS_URI.'/library' );
 
 		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {

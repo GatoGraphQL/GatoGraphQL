@@ -18,9 +18,6 @@ define ('POPTHEME_WASSUP_TEMPLATES', POPTHEME_WASSUP_DIR.'/templates');
 define ('POPTHEME_WASSUP_THEMES', POPTHEME_WASSUP_DIR.'/themes');
 define ('POPTHEME_WASSUP_PLUGINS', POPTHEME_WASSUP_DIR.'/plugins');
 
-define ('POPTHEME_WASSUP_URI', plugins_url('', __FILE__));
-define ('POPTHEME_WASSUP_PLUGINSURI', POPTHEME_WASSUP_URI.'/plugins');
-
 class PoPTheme_Wassup {
 
 	function __construct() {
@@ -40,7 +37,10 @@ class PoPTheme_Wassup {
 	}
 
 	function init(){
-		
+
+		define ('POPTHEME_WASSUP_URI', plugins_url('', __FILE__));
+		define ('POPTHEME_WASSUP_PLUGINSURI', POPTHEME_WASSUP_URI.'/plugins');
+
 		if ($this->validate()) {
 			
 			$this->initialize();

@@ -15,7 +15,7 @@
 14px;line-height:14px}.carousel-indicators>div:hover{background-color:#4da099;color:#fff}.tt-suggestion.tt-cursor,.tt-suggestion.tt-is-under-cursor{color:#fff;background-color:rgba(69, 144, 138, 0.7)}.tt-suggestion.tt-cursor a,
 .tt-suggestion.tt-is-under-cursor
 a{color:#fff}.background-screen{display:none}body.sliding .background-screen{display:block}body.sliding .background-screen,
-body.sliding.pop-loadingframe.pop-loadingjs .loading-screen{background-color:#edf9f7}body.sliding .background-screen{background:#edf9f7 url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1440x900.png) no-repeat fixed center;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}@media (min-width: 1440px){body.sliding .background-screen{background-image:url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1920x1080.png)}}body.sliding,
+body.sliding.pop-loadingframe.pop-loadingjs .loading-screen{background-color:#edf9f7}body.sliding .background-screen{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}body.sliding,
 body.sliding #ps-side,
 body.sliding #ps-sideinfo,
 body.sliding #ps-main > .container-fluid,
@@ -42,4 +42,4 @@ img{padding:10px
 .btn{background-color:#f1f1f2}#ps-top.pop-search-visible .nav-quicklink{margin-right:111px}#loadingscreen>.title{display:none}#loadingscreen
 .description{margin:20px
 0 40px}#ps-top-menu-addcontent li>a:hover{background-color:#4da099}#notifications-count,
-#ps-top .scroll-notifications .preview.notification-layout{background-color:#4da099}@media (min-width: 768px){#ps-background .pop-background-img{max-width:640px;max-height:400px}}@media (min-width: 992px){#ps-background .pop-background-img{max-width:850px;max-height:560px}}@media (min-width: 1200px){#ps-background .pop-background-img{max-width:940px;max-height:640px}}
+#ps-top .scroll-notifications .preview.notification-layout{background-color:#4da099}@media (min-width: 768px){#ps-background .pop-background-img{max-width:640px;max-height:400px}}@media (min-width: 992px){#ps-background .pop-background-img{max-width:850px;max-height:560px}}@media (min-width: 1200px){#ps-background .pop-background-img{max-width:940px;max-height:640px}}#loadingscreen h1>.tagline{display:none}

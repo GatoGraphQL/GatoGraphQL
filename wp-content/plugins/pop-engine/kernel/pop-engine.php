@@ -170,6 +170,19 @@ class PoP_Engine {
 
 		// Keep the variable for later use, if needed
 		$this->json = $json;
+
+		// Set the ETag-header? This is needed for the Service Workers
+		if (apply_filters('PoP_Engine:output_json:add_etag_header', false)) {
+
+			// The same page will have different hashs only because of those random elements added each time,
+			// such as the unique_id and the current_time. So remove these to generate the hash
+			$differentiators = array(
+				POP_CONSTANT_UNIQUE_ID,
+				POP_CONSTANT_CURRENTTIMESTAMP,
+			);
+			$commoncode = str_replace($differentiators, '', $json['json']);
+			header("ETag: ".wp_hash($commoncode));
+		}
 		
 		// Skip returning 'crawlable-data', no need for JSON request
 		echo $json['json'];

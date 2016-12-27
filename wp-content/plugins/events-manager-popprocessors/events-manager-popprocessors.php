@@ -11,7 +11,6 @@ Author URI: https://getpop.org/u/leo/
 define('EM_POPPROCESSORS_VERSION', 0.105);
 define('EM_POPPROCESSORS_EM_VERSION', 5.61);
 define('EM_POPPROCESSORS_DIR', dirname(__FILE__));
-define('EM_POPPROCESSORS_URI', plugins_url('', __FILE__));
 
 class EM_PoPProcessors {
 
@@ -22,6 +21,8 @@ class EM_PoPProcessors {
 	}
 
 	function init(){
+
+		define('EM_POPPROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

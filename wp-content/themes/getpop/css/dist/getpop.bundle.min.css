@@ -15,10 +15,8 @@
 14px;line-height:14px}.carousel-indicators>div:hover{background-color:#db902e;color:#fff}.tt-suggestion.tt-cursor,.tt-suggestion.tt-is-under-cursor{color:#fff;background-color:rgba(195, 165, 51, 0.7)}.tt-suggestion.tt-cursor a,
 .tt-suggestion.tt-is-under-cursor
 a{color:#fff}.background-screen{display:none}body.sliding .background-screen{display:block}body.sliding.getpop .background-screen,
-body.sliding.getpop .loading-screen{background-color:#babfc4;background:#babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center}body.sliding.getpop-demo .background-screen,
-body.sliding.getpop-demo .loading-screen{background-color:#fcf9eb;background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center}body.sliding .background-screen{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}@media (min-width: 1440px){body.sliding.getpop .background-screen,
-body.sliding.getpop .loading-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png)}}@media (min-width: 1440px){body.sliding.getpop-demo .background-screen,
-body.sliding.getpop-demo .loading-screen{background-image:url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png)}}body.sliding.pop-loadingjs.getpop .loading-screen,
+body.sliding.getpop .loading-screen{background-color:#babfc4}body.sliding.getpop-demo .background-screen,
+body.sliding.getpop-demo .loading-screen{background-color:#fcf9eb}body.sliding .background-screen{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}body.sliding.pop-loadingjs.getpop .loading-screen,
 body.sliding.pop-loadingjs.getpop-demo .loading-screen{background:transparent;background-color:transparent}body.sliding.pop-loadingframe.pop-loadingjs.getpop .loading-screen{background-color:#babfc4;background:#babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center}body.sliding.pop-loadingframe.pop-loadingjs.getpop-demo .loading-screen{background-color:#fcf9eb;background:#fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center}body.sliding,
 body.sliding #ps-side,
 body.sliding #ps-sideinfo,
@@ -52,4 +50,4 @@ h2.title{margin-top:20px}.mainsections > .blocksection-extensions .calendar .fc-
 h2{font-size:26px;margin-bottom:5px}@media (min-width: 768px){#ps-background .pop-background-img{max-width:500px}}#ps-background .pop-background-img{margin-bottom:10px}#loading-logo{max-width:500px}.blockgroup-hometop .block-events-scrollmap > .blocksection-title a,
 .blockgroup-authortop .block-events-scrollmap > .blocksection-title a,
 .blockgroup-tag .block-events-scrollmap > .blocksection-title
-a{color:#4d4d4f}.bottom-documentation{margin-top:15px}
+a{color:#4d4d4f}.bottom-documentation{margin-top:15px}#loadingscreen h1>.tagline{display:none}

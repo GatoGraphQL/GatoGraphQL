@@ -29,7 +29,7 @@ class AAL_PoP_API extends AAL_API {
 				'array'    			=> false,
 				'fields' 			=> '*',
 				'user_id'    		=> '',
-				'hist_time'    		=> current_time('timestamp'),
+				'hist_time'    		=> POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/,
 				'hist_time_compare'	=> '<',
 				'order'				=> 'ASC',
 				'orderby'			=> '',

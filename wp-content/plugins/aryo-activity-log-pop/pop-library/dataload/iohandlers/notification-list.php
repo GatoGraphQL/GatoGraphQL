@@ -29,7 +29,7 @@ class GD_DataLoad_IOHandler_NotificationList extends GD_DataLoad_IOHandler_List 
 		}
 
 		// Baseline: return now
-		return current_time('timestamp');
+		return POP_CONSTANT_CURRENTTIMESTAMP;//current_time('timestamp');
 	}
 
 	function get_hist_time_compare($atts, $iohandler_atts) {

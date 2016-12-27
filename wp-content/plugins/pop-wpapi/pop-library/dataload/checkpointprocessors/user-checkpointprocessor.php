@@ -11,6 +11,7 @@ define ('GD_DATALOAD_CHECKPOINT_USERLOGGEDIN', 'checkpoint-userloggedin');
 define ('GD_DATALOAD_CHECKPOINT_USERLOGGEDIN_SUBMIT', 'checkpoint-userloggedin-submit');
 define ('GD_DATALOAD_CHECKPOINT_USERNOTLOGGEDIN_SUBMIT', 'checkpoint-usernotloggedin-submit');
 define ('GD_DATALOAD_CHECKPOINT_USERCANEDIT', 'checkpoint-usercanedit');
+define ('GD_DATALOAD_CHECKPOINT_ISADMINISTRATOR', 'checkpoint-isadministrator');
 
 class GD_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProcessor {
 
@@ -21,7 +22,8 @@ class GD_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProcesso
 			GD_DATALOAD_CHECKPOINT_USERLOGGEDIN,
 			GD_DATALOAD_CHECKPOINT_USERLOGGEDIN_SUBMIT,
 			GD_DATALOAD_CHECKPOINT_USERNOTLOGGEDIN_SUBMIT,
-			GD_DATALOAD_CHECKPOINT_USERCANEDIT
+			GD_DATALOAD_CHECKPOINT_USERCANEDIT,
+			GD_DATALOAD_CHECKPOINT_ISADMINISTRATOR,
 		);
 	}
 
@@ -63,6 +65,14 @@ class GD_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProcesso
 				if (!gd_current_user_can_edit($post_id)) {
 					
 					return new WP_Error('usercannotedit');
+				}
+				break;
+
+			case GD_DATALOAD_CHECKPOINT_ISADMINISTRATOR:
+
+				if (!has_role('administrator')) {
+					
+					return new WP_Error('userisnotadmin');
 				}
 				break;
 		}

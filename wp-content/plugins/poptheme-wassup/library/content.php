@@ -13,6 +13,9 @@ function gd_posts_menuorder() {
     add_post_type_support( 'post', 'page-attributes' );
 }
 
+// Make the tinymce always rich edit, also if user is logged out, or accessing the website using wget (so we can use wget to call /system/popinstall and save the service-workers.js file properly)
+add_filter( 'user_can_richedit', '__return_true', 999999);
+
 // function gd_get_plaincontent_categories() {
 
 // 	// Do not accept html tags or short codes in the Highlights (as they are entered by the user)

@@ -10,7 +10,6 @@ Author URI: https://getpop.org/u/leo/
 
 define('AAL_POP_VERSION', 0.101);
 define('AAL_POP_DIR', dirname(__FILE__));
-define('AAL_POP_URI', plugins_url('', __FILE__));
 
 define( 'AAL_POP_LOG__FILE__', __FILE__ );
 define( 'AAL_POP_LOG_BASE', plugin_basename( AAL_POP_LOG__FILE__ ) );
@@ -28,6 +27,8 @@ class AAL_PoP {
 	}
 
 	function init(){
+
+		define('AAL_POP_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

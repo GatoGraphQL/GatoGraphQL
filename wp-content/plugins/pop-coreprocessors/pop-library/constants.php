@@ -7,6 +7,7 @@
 
 define ('GD_CONSTANT_LOADING_MSG', __('Loading', 'pop-coreprocessors'));
 define ('GD_CONSTANT_ERROR_MSG', '<i class="fa fa-fw fa-warning"></i>'.__('Ops, there was a connection problem.', 'pop-coreprocessors'));
+define ('GD_CONSTANT_OFFLINE_MSG', '<i class="fa fa-fw fa-warning"></i>'.__('It seems you are offline.', 'pop-coreprocessors'));
 define ('GD_CONSTANT_RETRY_MSG', __('Retry', 'pop-coreprocessors'));
 define ('GD_CONSTANT_LOADING_SPINNER', '<i class="fa fa-fw fa-spinner fa-spin"></i>');
 define ('GD_CONSTANT_AUTHORS_SEPARATOR', '<span class="preview-author-sep">|</span>');
@@ -77,11 +78,17 @@ function gd_popcore_jquery_constants_templatemanager_impl($jquery_constants) {
 		GD_CONSTANT_ERROR_MSG,
 		GD_CONSTANT_RETRY_MSG
 	);
-	$jquery_constants['ERROR_404'] = sprintf(
-		'%s<br/>%s',
-		__('Ops, this is a broken link.', 'pop-coreprocessors'),
-		$msg_holder
+	$jquery_constants['ERROR_OFFLINE'] = sprintf(
+		'%s <a href="{0}">%s</a>',
+		GD_CONSTANT_OFFLINE_MSG,
+		GD_CONSTANT_RETRY_MSG
 	);
+	$jquery_constants['ERROR_404'] = __('Ops, this is a broken link.', 'pop-coreprocessors');
+	// $jquery_constants['ERROR_404'] = sprintf(
+	// 	'%s<br/>%s',
+	// 	__('Ops, this is a broken link.', 'pop-coreprocessors'),
+	// 	$msg_holder
+	// );
 	// Template Manager Status Error messages
 	// $msg_holder = sprintf(
 	// 	__('If you don\'t mind, please <a href="mailto:%s?subject=%s&body={0}">notify our admins</a> about this problem.', 'pop-coreprocessors'),

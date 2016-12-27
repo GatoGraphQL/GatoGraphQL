@@ -23,3 +23,34 @@ function add_gd_admin_stylesheet() {
 // 	return $stylesheet . "?version=" . pop_version();
 // }
 
+function get_compatibility_js_files() {
+
+	$files = array();
+	if (PoP_Frontend_ServerUtils::use_minified_files()) {
+
+		$files[] = 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js';
+		$files[] = 'https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js';
+	}
+	else {
+
+		$files[] = POPTHEME_WASSUP_URI.'/js/compat/html5shiv.min.js';
+		$files[] = POPTHEME_WASSUP_URI.'/js/compat/respond.min.js';
+	}
+
+	return $files;
+}
+
+
+/**---------------------------------------------------------------------------------------------------------------
+ * Inline styles
+ * ---------------------------------------------------------------------------------------------------------------*/
+if (!is_admin()) {
+	add_action( 'wp_head', 'pop_header_inlinestyles');
+}
+function pop_header_inlinestyles() {
+
+	if ($inlinestyles = apply_filters('pop_header_inlinestyles:styles', '')) {
+
+		printf('<style type="text/css">%s</style>', $inlinestyles);
+	}
+}

@@ -70,3 +70,9 @@ function gd_get_the_main_category($post_id = null, $return_id = true) {
 
 	return apply_filters('gd_get_the_main_category', $cat, $post_id, $return_id);
 }
+
+function get_reloadurl_linkattrs() {
+
+	// Allow PoP Service Workers to add its own parameter
+	return apply_filters('get_reloadurl_linkattrs', 'data-reloadurl="true"');
+}

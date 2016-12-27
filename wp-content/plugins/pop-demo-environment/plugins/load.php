@@ -24,6 +24,12 @@ if (defined('POP_USERAVATAR_AWS_VERSION')) {
 if (defined('POP_MAILER_AWS_VERSION')) {
 	require_once 'pop-mailer-aws/load.php';		
 }
+if (defined('POP_SYSTEM_VERSION')) {
+	require_once 'pop-system/load.php';		
+}
+if (defined('POP_SERVICEWORKERS_VERSION')) {
+	require_once 'pop-serviceworkers/load.php';		
+}
 
 if (class_exists('User_Role_Editor'))		
 	require_once 'user-role-editor/load.php';

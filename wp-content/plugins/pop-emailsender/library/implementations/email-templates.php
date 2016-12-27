@@ -15,11 +15,11 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates {
 		// Message
 		if ($names) {
 			return sprintf(
-				__('<p>Dear %s,</p>', 'pop-coreprocessors'), 
+				__('<p>Dear %s,</p>', 'pop-emailsender'), 
 				implode(', ', $names)
 			);
 		}
-		return __('<p>Howdy!</p>', 'pop-coreprocessors');
+		return __('<p>Howdy!</p>', 'pop-emailsender');
 	}
 
 	function get_emailframe_footer($title, $names, $template) {

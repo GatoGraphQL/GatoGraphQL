@@ -10,6 +10,7 @@ popSystem = {
 		var t = this;
 
 		t.links();
+		t.onlineOffline();
 	},
 
 	activeLinks : function(args) {
@@ -335,6 +336,29 @@ popSystem = {
 		})
 	},
 
+	addOpenTab : function(args) {
+
+		var t = this;
+		var pageSection = args.pageSection, targets = args.targets, addOpenTab = args.addOpenTab;
+
+		// Allow function openTabs to set this attr in false, so this value is not added yet once again since it's already open
+		// It's needed for opening Add Post pages, which have different hashtags to differentiate them, so otherwise opening one Add Page
+		// and reloading the page will open one page again, then 2, then 4, etc
+		if (addOpenTab === false) {
+			return;
+		}
+
+		targets.each(function() {
+			
+			var link = $(this);
+			
+			var params = t.getDestroyPageTabParams(pageSection, link);
+
+			// Add the url to the session tabs, so next session they can be re-opened
+			popManager.addOpenTab(params.url, params.target);
+		});
+	},
+
 	closePageTab : function(args) {
 
 		var t = this;
@@ -345,13 +369,13 @@ popSystem = {
 			e.preventDefault();
 			var link = $(this);
 			
-			// URL: take it from 'data-url' on the link (eg: Page Tab), or if it doesn't exist,
-			// from the corresponding paramsscope URL (eg: blockunit-frame controls to close a page)
-			var url = link.data('url') || popManager.getBlock(link).data('paramsscope-url');
-			var target = link.attr('target') || popManager.getFrameTarget(pageSection);
+			var params = t.getDestroyPageTabParams(pageSection, link);
+
+			// Remove the tab from the open sessions
+			popManager.removeOpenTab(params.url, params.target);
 
 			// destroy the PageTab
-			popManager.triggerDestroyTarget(url, target);
+			popManager.triggerDestroyTarget(params.url, params.target);
 		});
 	},
 
@@ -889,6 +913,18 @@ popSystem = {
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
 
+	getDestroyPageTabParams : function(pageSection, link) {
+
+		var t = this;
+			
+		// URL: take it from 'data-url' on the link (eg: Page Tab), or if it doesn't exist,
+		// from the corresponding paramsscope URL (eg: blockunit-frame controls to close a page)
+		return {
+			url: link.data('url') || popManager.getBlock(link).data('paramsscope-url'),
+			target: link.attr('target') || popManager.getFrameTarget(pageSection)
+		};
+	},
+
 	filterBlockGroup : function(pageSection, blockGroup, filter) {
 
 		var t = this;
@@ -1112,19 +1148,29 @@ popSystem = {
 		// Comment Leo 26/10/2015: the URL is not the intercepted one but the original one. These 2 differ when intercepting without params
 		// Eg: adding a new comment, https://www.mesym.com/add-comment/?pid=19604, url to intercept is https://www.mesym.com/add-comment/
 		// var url = interceptUrl;
+		var tlFeedback = popManager.getTopLevelFeedback();
 		var url = link.data('original-url');
 		if (generateUniqueId) {
-			
-			popManager.generateUniqueId();			
-			if (addUniqueId) {
 
-				url = popManager.addUniqueId(url);
+			// function openTabs(): It might be the case that we're calling a an Add Post page with a unique-id and that page doesn't exist
+			// That is because the saved URL contains the hashtag, so after refreshing the page, it will intercept again that URL
+			// So if the URL already has an ID, use that one. Otherwise, it makes a mess, adding hashtags on top of each other
+			// (something like /add-post/#asddk8980808234#fdkwwp4234355) and it creats mess opening way many tabs when refreshing the page, one for each new URL
+			if (addUniqueId && url.indexOf('#') > -1) {
+				tlFeedback[M.UNIQUEID] = url.substr(url.indexOf('#')+1);
+			}
+			else {
+			
+				popManager.generateUniqueId();			
+				if (addUniqueId) {
+
+					url = popManager.addUniqueId(url);
+				}
 			}
 		}
 		var title = link.data('title');
 
 		// Set new values, coming from the intercepted link
-		var tlFeedback = popManager.getTopLevelFeedback();
 		tlFeedback[M.URLPARAM_TITLE] = title;
 		tlFeedback[M.URLPARAM_PARENTPAGEID] = null;
 		tlFeedback[M.URLPARAM_URL] = url;
@@ -1296,6 +1342,45 @@ popSystem = {
 		return addspinner;
 	},
 
+	// modifyURL : function(options, url, anchor) {
+	
+	// 	var t = this;
+
+	// 	// Allow to have custom-functions.js provide the implementation of this function
+	// 	popJSLibraryManager.execute('modifyOptions', {options: options, url: url, anchor: anchor});
+	// 	var ret = false;
+	// 	$.each(executed, function(index, value) {
+	// 		if (value) {
+	// 			url = value;
+	// 			return -1;
+	// 		}
+	// 	});
+		
+	// 	return url;
+	// },
+
+	onlineOffline : function() {
+		
+		var t = this;
+		window.addEventListener('online', t.checkOnlineOffline);
+		window.addEventListener('offline', t.checkOnlineOffline);
+
+		// Already execute it
+		t.checkOnlineOffline();
+	},
+
+	checkOnlineOffline : function() {
+		
+		var t = this;
+
+		// Add a class to the body with the status online/offline
+		if (navigator.onLine){
+			$('#body').addClass('online').removeClass('offline');
+		} else {
+			$('#body').addClass('offline').removeClass('online');
+		}
+	},
+
 	links : function() {
 
 		var t = this;
@@ -1449,6 +1534,10 @@ popSystem = {
 							options.silentDocument = true;
 							options['js-args'].inactivePane = true;
 						}
+
+						// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
+						// options = t.modifyOptions(options, url, anchor);
+						popJSLibraryManager.execute('modifyOptions', {options: options, url: url, anchor: anchor});
 						
 						popManager.fetch(url, options);
 					}
@@ -1561,4 +1650,4 @@ popSystem = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popSystem, ['documentInitialized', 'activeLinks', 'newWindow', 'fullscreen', 'clickURLParam', 'initDelegatorFilter', 'initBlockGroupFilter', 'initBlockFilter', 'reloadBlockGroup', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'displayBlockDatasetCount', 'clearDatasetCount', 'clearDatasetCountOnUserLoggedOut', 'replicateTopLevel', 'replicatePageSection', 'closePageSection', 'closePageSectionOnTabShown', 'onDestroyPageSwitchTab', 'closePageTab', 'resetOnSuccess', 'resetOnUserLogout', 'closeMessageFeedbacksOnPageSectionOpen', 'closePageSectionOnSuccess', 'destroyPageOnUserLoggedOut', 'destroyPageOnUserNoRole', 'refetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedInOut', 'deleteBlockFeedbackValueOnUserLoggedInOut', 'scrollTopOnUserLoggedInOut', 'refetchBlockGroupOnUserLoggedIn', 'destroyPageOnSuccess', 'destroyPage', 'initFilter', 'interceptForm', 'forms', /*'initBlockProxyFilter', */'clearInput', 'makeAlwaysRefetchBlock', 'scrollHandler']);
+popJSLibraryManager.register(popSystem, ['documentInitialized', 'activeLinks', 'newWindow', 'fullscreen', 'clickURLParam', 'initDelegatorFilter', 'initBlockGroupFilter', 'initBlockFilter', 'reloadBlockGroup', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'displayBlockDatasetCount', 'clearDatasetCount', 'clearDatasetCountOnUserLoggedOut', 'replicateTopLevel', 'replicatePageSection', 'closePageSection', 'closePageSectionOnTabShown', 'onDestroyPageSwitchTab', 'addOpenTab', 'closePageTab', 'resetOnSuccess', 'resetOnUserLogout', 'closeMessageFeedbacksOnPageSectionOpen', 'closePageSectionOnSuccess', 'destroyPageOnUserLoggedOut', 'destroyPageOnUserNoRole', 'refetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedInOut', 'deleteBlockFeedbackValueOnUserLoggedInOut', 'scrollTopOnUserLoggedInOut', 'refetchBlockGroupOnUserLoggedIn', 'destroyPageOnSuccess', 'destroyPage', 'initFilter', 'interceptForm', 'forms', /*'initBlockProxyFilter', */'clearInput', 'makeAlwaysRefetchBlock', 'scrollHandler']);

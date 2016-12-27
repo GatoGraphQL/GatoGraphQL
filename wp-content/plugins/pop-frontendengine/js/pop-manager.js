@@ -419,15 +419,20 @@ popManager = {
 			// 	popBrowserHistory.replaceState(topLevelFeedback[M.URLPARAM_URL]);
 			// }
 
-			// Update URL: it will remove the unwanted items, eg: mode=embed (so that if the user clicks on the newWindow btn, it opens properly)
-			popBrowserHistory.replaceState(t.getTopLevelFeedback()[M.URLPARAM_URL]);
-			t.updateDocument();
+			var topLevelFeedback = t.getTopLevelFeedback();
+			var url = topLevelFeedback[M.URLPARAM_URL];
+			if (!topLevelFeedback[M.URLPARAM_SILENTDOCUMENT]) {
+				
+				// Update URL: it will remove the unwanted items, eg: mode=embed (so that if the user clicks on the newWindow btn, it opens properly)
+				popBrowserHistory.replaceState(url);
+				t.updateDocument();
+			}
 
 			t.documentInitialized();
 
 			// If the server requested to extra load more URLs
 			t.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
-			t.backgroundLoad(t.getTopLevelFeedback()[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
+			t.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
 		}
 
 		// Comment Leo 01/12/2016: this logic was moved up
@@ -591,7 +596,7 @@ popManager = {
 
 			$.each(targets, function(index, target) {
 
-				popManager.fetch(url, $.extend({target: target}, options));
+				t.fetch(url, $.extend({target: target}, options));
 			});
 		});
 	},
@@ -658,7 +663,16 @@ popManager = {
 
 		// Open the corresponding offcanvas section
 		// We use .pop-item to differentiate from 'full' and 'empty' pageSectionPages (eg: in pagesection-tabpane-source we need the empty one to close the sideInfo and then be deleted when the tab is closed)
-		if (newDOMs.filter('.pop-pagesection-page').length) {
+		var pageSectionPage = newDOMs.filter('.pop-pagesection-page');
+		if (pageSectionPage.length) {
+
+			// Add the 'fetch-url', 'url' and 'target' as data attributes, so we keep track of the URL that produced the code for the opening page, to be used 
+			// when updated stale json content from the Service Workers
+			if (options['fetch-params']) {
+				$.each(options['fetch-params'], function(key, value) {
+					pageSectionPage.data(key, value);
+				});
+			}
 
 			// Allow the pageSection to remain closed. eg: for the pageTabs in embed 
 			// var openmode = pageSection.data('pagesection-openmode') || 'automatic';
@@ -1692,8 +1706,127 @@ popManager = {
 		}
 	},
 
+	// Comment Leo 25/12/2016: cannot use .click(), because then we can't pass the options, and all of them (silentDocument, inactivePane, addOpenTab) are important
+	// openTabs : function() {
+
+	// 	var t = this;
+
+	// 	var tabs = t.getOpenTabs();
+	// 	$.each(tabs, function(target, urls) {
+
+	// 		// If on the main pageSection...
+	// 		if (target == M.URLPARAM_TARGET_MAIN) {
+
+	// 			// Do not re-open the one URL the user opened
+	// 			var pos = urls.indexOf(window.location.href);
+	// 			if (pos !== -1) {
+					
+	// 				// Remove the entry
+	// 				urls.splice(pos, 1);
+	// 			}
+	// 		}
+
+	// 		// Open all tabs
+	// 		$.each(urls, function(index, url) {
+
+	// 			// Use click instead of fetch so that it can be intercepted (eg: for Add Post in the addons pageSection, no need to fetch it from the server)
+	// 			t.click(url, target);
+	// 		});
+	// 	});
+	// },
+	openTabs : function() {
+
+		var t = this;
+
+		// Get all the tabs open from the previous session, and open them already		
+		var options = {
+			silentDocument: true,
+			'js-args': {
+				inactivePane: true,
+
+				// Do not store these tabs again when they come back from the fetch
+				addOpenTab: false
+			}
+		};
+
+		var tabs = t.getOpenTabs();
+		$.each(tabs, function(target, urls) {
+
+			// Open the tab on the corresponding target
+			options.target = target;
+
+			// If on the main pageSection...
+			if (target == M.URLPARAM_TARGET_MAIN) {
+
+				// Do not re-open the one URL the user opened
+				var pos = urls.indexOf(window.location.href);
+				if (pos !== -1) {
+					
+					// Remove the entry
+					urls.splice(pos, 1);
+				}
+			}
+
+			// Open all tabs
+			$.each(urls, function(index, url) {
+
+				t.fetch(url, options);
+			});
+		});
+	},
+
+	getOpenTabs : function() {
+
+		var t = this;
+		return t.getStoredData('PoP:openTabs') || {};
+	},
+
+	addOpenTab : function(url, target) {
+
+		var t = this;
+		var tabs = t.getOpenTabs();
+		tabs[target] = tabs[target] || [];
+		if (tabs[target].indexOf(url) > -1) {
+
+			// The entry already exists
+			return false;			
+		}
+
+		tabs[target].push(url);
+		t.storeData('PoP:openTabs', tabs);
+
+		return true;
+	},
+
+	removeOpenTab : function(url, target) {
+
+		var t = this;
+		var tabs = t.getOpenTabs();
+		tabs[target] = tabs[target] || [];
+		var pos = tabs[target].indexOf(url);
+		if (pos === -1) {
+
+			return false;
+		}
+			
+		// Remove the entry
+		tabs[target].splice(pos, 1);
+		t.storeData('PoP:openTabs', tabs);
+
+		return true;
+	},
+
+	replaceOpenTab : function(fromURL, toURL, target) {
+
+		var t = this;
+		if (t.removeOpenTab(fromURL, target)) {
+			t.addOpenTab(toURL, target);
+		}
+	},
+
 	getStoredData : function(localStorageKey) {
 
+		var t = this;
 		// Check if a response is stored in local storage for that combination of URL and params
 		// if (options.localStorage && Modernizr.localstorage) {
 		if (M.USELOCALSTORAGE && Modernizr.localstorage) {
@@ -1721,6 +1854,7 @@ popManager = {
 
 	storeData : function(localStorageKey, value, expires) {
 
+		var t = this;
 		if (M.USELOCALSTORAGE && Modernizr.localstorage) {
 				
 			var stored = {
@@ -1771,8 +1905,18 @@ popManager = {
 		// params.loading.push(url);
 
 		// Add a param to tell the back-end we are doing ajax
+		// Important: do not change the order in which these attributes are added, or it can ruin other things,
+		// eg: adding the get_precache_list pages for BACKGROUND_LOAD in plugins/poptheme-wassup/themes/wassup/thememodes/simple/thememode.php
 		var target = t.getTarget(pageSection);
-		var fetchUrl = add_query_arg(M.URLPARAM_TARGET, target, url);
+
+		// Remove any hashtag the url may have (eg: /add-post/#1482655583982)
+		// Needed for when reopening the previous session tabs, and an Add Post page with such a hashtag was open
+		// Otherwise, below it makes mess, it doesn't add the needed parameters to the URL
+		var fetchUrl = url;
+		if (fetchUrl.indexOf('#') > -1) {
+			fetchUrl = fetchUrl.substr(0, fetchUrl.indexOf('#'));
+		}
+		fetchUrl = add_query_arg(M.URLPARAM_TARGET, target, fetchUrl);
 		fetchUrl = add_query_arg(M.URLPARAM_MODULE, M.URLPARAM_MODULE_SETTINGSDATA, fetchUrl);
 		fetchUrl = add_query_arg(M.URLPARAM_OUTPUT, M.URLPARAM_OUTPUT_JSON, fetchUrl);
 
@@ -1822,10 +1966,17 @@ popManager = {
 
 				// Addition of the URL to retrieve local information back when it comes back
 				// http://stackoverflow.com/questions/11467201/jquery-statuscode-404-how-to-get-jqxhr-url
-				jqXHR.url = settings.url;
+				// Comment Leo 25/12/2016: set the original url (which might include a hashtag, as in /add-post/#1482655583982)
+				// and not the settings.url, which is the actual URL we're sending to. This way, we can $.ajax concurrently to the same URL
+				// twice, since they had different hashtags (as in when having 2 Add Post tabs open, and get all reopened with openTabs())
+				jqXHR.url = url;//settings.url;
 
 				// Save the fetchUrl to retrieve it under 'complete'
 				params.url[jqXHR.url] = url;
+				params.target[jqXHR.url] = target;
+
+				// Keep the URL being fetched for updating stale json content using Service Workers
+				params['fetch-url'][jqXHR.url] = settings.url;
 
 				// Save the url being loaded
 				params.loading.push(url);
@@ -1839,10 +1990,12 @@ popManager = {
 
 				// Everything below can be executed even if the deferred object executed in .processPageSectionResponse
 				// has not resolved yet. 
-				var fetchedUrl = params.url[jqXHR.url];
+				var url = params.url[jqXHR.url];
 				delete params.url[jqXHR.url];
+				delete params.target[jqXHR.url];
+				delete params['fetch-url'][jqXHR.url];
 
-				params.loading.splice(params.loading.indexOf(fetchedUrl), 1);
+				params.loading.splice(params.loading.indexOf(url), 1);
 
 				t.handleLoadingStatus(pageSection, 'remove', options);
 
@@ -1857,27 +2010,46 @@ popManager = {
 					// 	callbacks.push(options['urlfetched-callback']);
 					// }
 					// $.each(callbacks, function(index, callback) {
-					var handler = 'urlfetched:'+escape(fetchedUrl);
+					var handler = 'urlfetched:'+escape(url);
 					$.each(options['urlfetched-callbacks'], function(index, callback) {
 
 						$(document).one(handler, callback);
 					});
 				}
 
-				t.triggerURLFetched(fetchedUrl);
+				t.triggerURLFetched(url);
 
 				// Remove the Disabled Layer over a block
 				if (options['disable-layer']) {
 					options['disable-layer'].children('.pop-disabledlayer').addClass('hidden');
 				}
 			},			
-			success: function(response){
+			success: function(response, textStatus, jqXHR){
 
 				// The server might have requested to load extra URLs (eg: forcedserverload_fields)
 				t.backgroundLoad(response.feedback.toplevel[M.URLPARAM_BACKGROUNDLOADURLS]);
 
 				// Hide the error message
 				error.addClass('hidden');
+
+				// If the original URL had a hashtag (eg: /add-post/#1482655583982), the returning url
+				// will also have one (using is_multipleopen() => add_unique_id), but not the same one, then 
+				// replace the original one with the new one in PoP:openTabs, or otherwise it will keep adding new tabs to the openTabs, 
+				// which are the same tab but duplicated for having different hashtags in the URL
+				var url = params.url[jqXHR.url];
+				var feedbackURL = response.feedback.toplevel[M.URLPARAM_URL];
+				var target = params.target[jqXHR.url];
+				if (url != feedbackURL) {
+					t.replaceOpenTab(url, feedbackURL, target);
+				}
+
+				// Add the fetched URL to the options, so we keep track of the URL that produced the code for the opening page, to be used 
+				// when updated stale json content from the Service Workers
+				options['fetch-params'] = {
+					url: url,
+					target: target,
+					'fetch-url': params['fetch-url'][jqXHR.url]
+				};
 
 				// Local storage? Save the response as a string
 				// Save it at the end, because sometimes the localStorage fails (lack of space?) and it stops the flow of the JS
@@ -2132,10 +2304,18 @@ popManager = {
 	getError : function(url, jqXHR, textStatus, errorThrown) {
 
 		var t = this;
-		if (jqXHR.status == 404) {
+		if (jqXHR.status === 0) { // status = 0 => user is offline
+			
+			return M.ERROR_OFFLINE.format(url);
+		}
+		else if (jqXHR.status == 404) {
 			
 			return M.ERROR_404;
 		}
+		// else if (jqXHR.status >= 500) {
+			
+		// 	return M.ERROR_500PLUS;
+		// }
 		return M.ERROR_MSG.format(url);
 	},
 
@@ -2294,6 +2474,33 @@ popManager = {
 		}
 
 		return post_data;
+	},
+
+	handleBlockError : function(error, jqXHR, options) {
+
+		var t = this;
+
+		// First show status-specific error messages, then the general one
+		// Is the user offline? (status = 0 => user is offline) Show the right message
+		var msgSelectors = ['.errormsg.status-'+jqXHR.status, '.errormsg.general'];
+		$.each(msgSelectors, function(index, msgSelector) {
+			
+			var msg = error.find(msgSelector);
+			if (msg.length) {
+			
+				// Show that one message and disable the others
+				msg.removeClass('hidden').siblings('.errormsg').addClass('hidden');
+
+				// Stop iterating the msgSelectors, we found the one message we wanted
+				return false;
+			}
+		});
+
+		// Allow the "loading" and "error" message to not show up. Eg: for loadLatest, which is executed automatically
+		if (!options['skip-status']) {
+			error.removeClass('hidden');
+			t.scrollTop(error);
+		}
 	},
 
 	executeFetchBlock : function(pageSection, block, options) {
@@ -2480,11 +2687,7 @@ popManager = {
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 
-				// Allow the "loading" and "error" message to not show up. Eg: for loadLatest, which is executed automatically
-				if (!options['skip-status']) {
-					error.removeClass('hidden');
-					t.scrollTop(error);
-				}
+				t.handleBlockError(error, jqXHR, options);
 				t.triggerEvent(pageSection, block, 'fetchFailed');
 			},
 			complete: function(jqXHR) {
@@ -3243,7 +3446,9 @@ popManager = {
 		var t = this;
 
 		return {
-			url: [],
+			url: {},
+			target: {},
+			'fetch-url': {},
 			loading: []
 		};
 	},
@@ -3657,15 +3862,16 @@ popManager = {
 		return url;
 	},
 
-	click : function(url, container) {
+	click : function(url, target, container) {
 	
 		var t = this;
+		target = target || '';
 		container = container || $('body');
 		
 		// Create a new '<a' element with the url as href, and "click" it
 		// We do this instead of popManager.fetchMainPageSection(datum.url); so that it can be intercepted
 		// So this is needed for the Top Quicklinks/Search
-		var linkHtml = '<a href="'+url+'" class="hidden"></a>';
+		var linkHtml = '<a href="'+url+'" target="'+target+'" class="hidden"></a>';
 		var link = $(linkHtml).appendTo(container);
 		link.trigger('click');
 	},

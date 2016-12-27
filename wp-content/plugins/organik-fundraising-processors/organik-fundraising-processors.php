@@ -12,8 +12,6 @@ Author URI: https://fundraising.organik.org.my/u/leo/
 // Constants Definition
 //-------------------------------------------------------------------------------------
 define ('ORGANIKFUNDRAISING_PROCESSORS_VERSION', 0.102);
-
-define ('ORGANIKFUNDRAISING_PROCESSORS_URI', plugins_url('', __FILE__));
 define ('ORGANIKFUNDRAISING_PROCESSORS_DIR', dirname(__FILE__));
 
 class OrganikFundraising_Processors {
@@ -30,6 +28,8 @@ class OrganikFundraising_Processors {
 	}
 
 	function init(){
+
+		define ('ORGANIKFUNDRAISING_PROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

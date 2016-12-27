@@ -49,17 +49,17 @@ class PoP_EmailSender_Hooks {
 		$status = get_post_status($post_id);
 		
 		$post_name = gd_get_postname($post_id);
-		$subject = sprintf(__('Your %s was created successfully!', 'pop-coreprocessors'), $post_name);
+		$subject = sprintf(__('Your %s was created successfully!', 'pop-emailsender'), $post_name);
 		$content = ($status == 'publish') ? 
 			sprintf( 
 				'<p>%s</p>', 
 				sprintf(
-					__('Your %s was created successfully!', 'pop-coreprocessors'), 
+					__('Your %s was created successfully!', 'pop-emailsender'), 
 					$post_name
 				)
 			) :
 			sprintf( 
-				__( '<p>Your %s <a href="%s">%s</a> was created successfully!</p>', 'pop-coreprocessors'), 
+				__( '<p>Your %s <a href="%s">%s</a> was created successfully!</p>', 'pop-emailsender'), 
 				$post_name,
 				get_edit_post_link($post_id),
 				get_the_title($post_id)
@@ -74,8 +74,8 @@ class PoP_EmailSender_Hooks {
 			$content .= sprintf(
 				'<p><em>%s</em></p>', 
 				sprintf(
-					// __('Please notice that the status of the %s is still <strong>\'Draft\'</strong>, it must be changed to <strong>\'Finished editing\'</strong> to have the website admins publish it.', 'pop-coreprocessors'), 
-					__('Please notice that the status of the %s is <strong>\'Draft\'</strong>, so it won\'t be published online.', 'pop-coreprocessors'), 
+					// __('Please notice that the status of the %s is still <strong>\'Draft\'</strong>, it must be changed to <strong>\'Finished editing\'</strong> to have the website admins publish it.', 'pop-emailsender'), 
+					__('Please notice that the status of the %s is <strong>\'Draft\'</strong>, so it won\'t be published online.', 'pop-emailsender'), 
 					$post_name
 				)
 			);
@@ -112,26 +112,26 @@ class PoP_EmailSender_Hooks {
 
 		if ($type == 'create') {
 			$subject = sprintf(
-				__('[%s]: New %s by %s', 'pop-coreprocessors'), 
+				__('[%s]: New %s by %s', 'pop-emailsender'), 
 				$blogname, 
 				$post_name, 
 				$author_name
 			);
 			$msg = sprintf(
-				__('A new %s has been submitted on %s:', 'pop-coreprocessors'), 
+				__('A new %s has been submitted on %s:', 'pop-emailsender'), 
 				$post_name, 
 				$blogname
 			);
 		}
 		elseif ($type == 'update') {
 			$subject = sprintf(
-				__('[%s]: %s updated by %s', 'pop-coreprocessors'), 
+				__('[%s]: %s updated by %s', 'pop-emailsender'), 
 				$blogname, 
 				$post_name, 
 				$author_name 
 			);
 			$msg = sprintf(
-				__('%s updated on %s:', 'pop-coreprocessors'), 
+				__('%s updated on %s:', 'pop-emailsender'), 
 				$post_name, 
 				$blogname
 			);
@@ -139,27 +139,27 @@ class PoP_EmailSender_Hooks {
 
 		$msg .= "<br/><br/>";
 		$msg .= sprintf( 
-			__('<b>Author:</b> %s', 'pop-coreprocessors'), 
+			__('<b>Author:</b> %s', 'pop-emailsender'), 
 			$author_name 
 		) . "<br/>";
 		$msg .= sprintf( 
-			__('<b>Author Email:</b> <a href="mailto:%1$s">%1$s</a>', 'pop-coreprocessors'), 
+			__('<b>Author Email:</b> <a href="mailto:%1$s">%1$s</a>', 'pop-emailsender'), 
 			$author_email
 		) . "<br/>";
 		$msg .= sprintf(
-			__('<b>Title:</b> %s', 'pop-coreprocessors'), 
+			__('<b>Title:</b> %s', 'pop-emailsender'), 
 			get_the_title($post_id)
 		) . "<br/>";
 		$msg .= sprintf(
-			__('<b>Permalink:</b> <a href="%1$s">%1$s</a>', 'pop-coreprocessors'), 
+			__('<b>Permalink:</b> <a href="%1$s">%1$s</a>', 'pop-emailsender'), 
 			$permalink 
 		) . "<br/>";
 		$msg .= sprintf(
-			__('<b>Edit Link:</b> <a href="%1$s">%1$s</a>', 'pop-coreprocessors'), 
+			__('<b>Edit Link:</b> <a href="%1$s">%1$s</a>', 'pop-emailsender'), 
 			admin_url('post.php?action=edit&post='.$post_id)
 		) . "<br/>";
 		$msg .= sprintf(
-			__('<b>Status:</b> %s', 'pop-coreprocessors'), 
+			__('<b>Status:</b> %s', 'pop-emailsender'), 
 			get_post_status($post_id)
 		);
 
@@ -186,17 +186,17 @@ class PoP_EmailSender_Hooks {
 		$user_name = get_the_author_meta('display_name', $user_id);
 
 		if ($type == 'create') {
-			$subject = sprintf( __( '[%s]: New Profile: %s', 'pop-coreprocessors' ), $blogname, $user_name );
-			$msg = sprintf( __( 'A Profile was created on %s.', 'pop-coreprocessors' ), $blogname );
+			$subject = sprintf( __( '[%s]: New Profile: %s', 'pop-emailsender' ), $blogname, $user_name );
+			$msg = sprintf( __( 'A Profile was created on %s.', 'pop-emailsender' ), $blogname );
 		}
 		elseif ($type == 'update') {
-			$subject = sprintf( __( '[%s]: Profile updated: %s', 'pop-coreprocessors' ), $blogname, $user_name );
-			$msg = sprintf( __( 'Profile updated on %s.', 'pop-coreprocessors' ), $blogname );
+			$subject = sprintf( __( '[%s]: Profile updated: %s', 'pop-emailsender' ), $blogname, $user_name );
+			$msg = sprintf( __( 'Profile updated on %s.', 'pop-emailsender' ), $blogname );
 		}
 
 		$msg .= "<br/><br/>";
-		$msg .= sprintf( __( '<b>Profile:</b> %s', 'pop-coreprocessors' ), $user_name ) . "<br/>";
-		$msg .= sprintf( __( '<b>Profile link:</b> <a href="%1$s">%1$s</a>', 'pop-coreprocessors' ), $permalink );
+		$msg .= sprintf( __( '<b>Profile:</b> %s', 'pop-emailsender' ), $user_name ) . "<br/>";
+		$msg .= sprintf( __( '<b>Profile link:</b> <a href="%1$s">%1$s</a>', 'pop-emailsender' ), $permalink );
 
 		PoP_EmailSender_Utils::send_email($to, $subject, $msg);
 	}
@@ -207,21 +207,21 @@ class PoP_EmailSender_Hooks {
 
 		$blogname = get_bloginfo( 'name' );
 		$subject = sprintf(
-			__('Welcome to %s!', 'pop-coreprocessors'), 
+			__('Welcome to %s!', 'pop-emailsender'), 
 			$blogname
 		);
 		$msg = sprintf(
 			'<h1>%s</h1>', 
 			$subject
 		);
-		$msg .= __('<p>Your user account was created successfully. This is your public profile page:</p>', 'pop-coreprocessors');
+		$msg .= __('<p>Your user account was created successfully. This is your public profile page:</p>', 'pop-emailsender');
 		$msg .= PoP_EmailTemplates_Factory::get_instance()->get_userhtml($user_id);
 
 		if ($pages = apply_filters('sendemail_userwelcome:create_pages', array())) {
 
 			$msg .= sprintf(
 				'<br/><p>%s</p>',
-				__('Now you can share your content/activities with our community:', 'pop-coreprocessors')
+				__('Now you can share your content/activities with our community:', 'pop-emailsender')
 			);
 			$msg .= '<ul>';
 			foreach ($pages as $createpage) {
@@ -242,7 +242,7 @@ class PoP_EmailSender_Hooks {
 		$msg .= sprintf(
 			'<h2>%s</h2>', 
 			sprintf(
-				__('About %s', 'pop-coreprocessors'),
+				__('About %s', 'pop-emailsender'),
 				$blogname
 			)
 		);
@@ -303,12 +303,12 @@ class PoP_EmailSender_Hooks {
 				$reference_title = get_the_title($reference_post_id);
 
 				$reference_subject = sprintf( 
-					__( 'A new %s was posted referencing "%s"', 'pop-coreprocessors' ), 
+					__( 'A new %s was posted referencing "%s"', 'pop-emailsender' ), 
 					$post_name, 
 					$reference_title 
 				);
 				$reference_content = sprintf( 
-					__( '<p>Your %s <a href="%s">%s</a> has been referenced by a new %s:</p>', 'pop-coreprocessors'), 
+					__( '<p>Your %s <a href="%s">%s</a> has been referenced by a new %s:</p>', 'pop-emailsender'), 
 					$reference_post_name,
 					$reference_url,
 					$reference_title,
@@ -330,9 +330,9 @@ class PoP_EmailSender_Hooks {
 		$title = get_the_title($post_id);
 		$post_html = PoP_EmailTemplates_Factory::get_instance()->get_posthtml($post_id);
 
-		$subject = sprintf( __( 'Your %s was approved!', 'pop-coreprocessors' ), $post_name );
+		$subject = sprintf( __( 'Your %s was approved!', 'pop-emailsender' ), $post_name );
 		$content = sprintf( 
-			__( '<p>Hurray! Your %s was approved!</p>', 'pop-coreprocessors'), 
+			__( '<p>Hurray! Your %s was approved!</p>', 'pop-emailsender'), 
 			$post_name
 		);
 		$content .= $post_html;
@@ -365,8 +365,8 @@ class PoP_EmailSender_Hooks {
 		}
 
 		$intro = $is_response ?
-			__( '<p>There is a response to a comment from <a href="%s">%s</a>:</p>', 'pop-coreprocessors') :
-			__( '<p>A new comment has been added to <a href="%s">%s</a>:</p>', 'pop-coreprocessors');
+			__( '<p>There is a response to a comment from <a href="%s">%s</a>:</p>', 'pop-emailsender') :
+			__( '<p>A new comment has been added to <a href="%s">%s</a>:</p>', 'pop-emailsender');
 
 		$content = sprintf( 
 			$intro,
@@ -380,13 +380,13 @@ class PoP_EmailSender_Hooks {
 			
 			$content .= sprintf(
 				'<em>%s</em>',
-				__('In response to:', 'pop-coreprocessors')
+				__('In response to:', 'pop-emailsender')
 			);
 			$content .= PoP_EmailTemplates_Factory::get_instance()->get_commenthtml($parent);
 			$content .= '<br/>';
 		}
 
-		$btn_title = __( 'Click here to reply the comment', 'pop-coreprocessors');
+		$btn_title = __( 'Click here to reply the comment', 'pop-emailsender');
 		$content .= PoP_EmailTemplates_Factory::get_instance()->get_buttonhtml($btn_title, $url);
 
 		// Possibly the title has html entities, these must be transformed again for the subjects below
@@ -398,7 +398,7 @@ class PoP_EmailSender_Hooks {
 
 			if ($parent->user_id != $comment->user_id) {
 				$subject = sprintf( 
-					__( '%s replied your comment in “%s”', 'pop-coreprocessors' ), 
+					__( '%s replied your comment in “%s”', 'pop-emailsender' ), 
 					$comment->comment_author, 
 					$title 
 				);
@@ -447,7 +447,7 @@ class PoP_EmailSender_Hooks {
 		);
 
 		$subject = sprintf( 
-			__( 'New comment added in “%s”', 'pop-coreprocessors' ), 
+			__( 'New comment added in “%s”', 'pop-emailsender' ), 
 			$title
 		);
 		PoP_EmailSender_Utils::sendemail_to_users_from_post($post_ids, $subject, $content, $exclude_authors);
@@ -481,7 +481,7 @@ class PoP_EmailSender_Hooks {
 		$post_name = gd_get_postname($post_id, 'lc');
 
 		$content = sprintf( 
-			__( '<p><a href="%s">%s</a> mentioned you in %s:</p>', 'pop-coreprocessors'),
+			__( '<p><a href="%s">%s</a> mentioned you in %s:</p>', 'pop-emailsender'),
 			get_author_posts_url($post->post_author),
 			get_the_author_meta('display_name', $post->post_author),
 			$post_name
@@ -494,7 +494,7 @@ class PoP_EmailSender_Hooks {
 		$title = html_entity_decode($title);
 
 		$subject = sprintf( 
-			__( 'You were mentioned in %1$s “%2$s”', 'pop-coreprocessors' ), 
+			__( 'You were mentioned in %1$s “%2$s”', 'pop-emailsender' ), 
 			$post_name,
 			$title
 		);
@@ -516,7 +516,7 @@ class PoP_EmailSender_Hooks {
 		$post_name = gd_get_postname($comment->comment_post_ID, 'lc');
 
 		$content = sprintf( 
-			__( '<p><a href="%1$s">%2$s</a> mentioned you in a comment from %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-coreprocessors'),
+			__( '<p><a href="%1$s">%2$s</a> mentioned you in a comment from %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-emailsender'),
 			get_author_posts_url($comment->user_id),
 			get_the_author_meta('display_name', $comment->user_id),
 			$post_name,
@@ -533,20 +533,20 @@ class PoP_EmailSender_Hooks {
 			
 			$content .= sprintf(
 				'<em>%s</em>',
-				__('In response to:', 'pop-coreprocessors')
+				__('In response to:', 'pop-emailsender')
 			);
 			$content .= PoP_EmailTemplates_Factory::get_instance()->get_commenthtml($parent);
 			$content .= '<br/>';
 		}
 
-		$btn_title = __( 'Click here to reply the comment', 'pop-coreprocessors');
+		$btn_title = __( 'Click here to reply the comment', 'pop-emailsender');
 		$content .= PoP_EmailTemplates_Factory::get_instance()->get_buttonhtml($btn_title, $url);
 		
 		// Possibly the title has html entities, these must be transformed again for the subjects below
 		$title = html_entity_decode($title);
 
 		$subject = sprintf( 
-			__( 'You were mentioned in a comment from %1$s “%2$s”', 'pop-coreprocessors' ), 
+			__( 'You were mentioned in a comment from %1$s “%2$s”', 'pop-emailsender' ), 
 			$post_name,
 			$title
 		);
@@ -566,20 +566,20 @@ class PoP_EmailSender_Hooks {
 	}
 	function retrieve_password_title($title) {
 
-		return __('Password reset code', 'pop-coreprocessors');
+		return __('Password reset code', 'pop-emailsender');
 	}
 	function retrievepasswordmessage($message, $key, $user_login, $user_data) {
 
-		return PoP_EmailTemplates_Factory::get_instance()->add_emailframe(__('Retrieve password', 'pop-coreprocessors'), $message, $user_data->display_name);
+		return PoP_EmailTemplates_Factory::get_instance()->add_emailframe(__('Retrieve password', 'pop-emailsender'), $message, $user_data->display_name);
 	}
 	function lostpasswordreset($user_id) {
 
-		$subject = __('Password reset successful', 'pop-coreprocessors');
+		$subject = __('Password reset successful', 'pop-emailsender');
 		$msg = sprintf(
 			'<p>%s %s</p>',
-			__('Your password has been changed successfully.', 'pop-coreprocessors'),
+			__('Your password has been changed successfully.', 'pop-emailsender'),
 			sprintf(
-				__('Please <a href="%s">click here to log-in</a>.', 'pop-coreprocessors'),
+				__('Please <a href="%s">click here to log-in</a>.', 'pop-emailsender'),
 				wp_login_url()
 			)
 		);
@@ -634,7 +634,7 @@ class PoP_EmailSender_Hooks {
 		$post_title = get_the_title($post_id);
 		$footer = sprintf(
 			'<p><small>%s</small></p>',
-			__('You are receiving this notification for belonging to this author’s network. Soon you will be able to configure your notification email’s preferences.', 'pop-coreprocessors')
+			__('You are receiving this notification for belonging to this author’s network. Soon you will be able to configure your notification email’s preferences.', 'pop-emailsender')
 		);
 		$allnetworkusers = array();
 		$authors = gd_get_postauthors($post_id);
@@ -664,7 +664,7 @@ class PoP_EmailSender_Hooks {
 				$author_name = get_the_author_meta('display_name', $author);
 				$author_url = get_author_posts_url($author);
 				$subject = sprintf(
-					__('%s has created a new %s: “%s”', 'pop-coreprocessors'), 
+					__('%s has created a new %s: “%s”', 'pop-emailsender'), 
 					$author_name,
 					$post_name,
 					$post_title
@@ -672,7 +672,7 @@ class PoP_EmailSender_Hooks {
 				$content = sprintf( 
 					'<p>%s</p>', 
 					sprintf(
-						__('<b><a href="%s">%s</a></b> has created a new %s:', 'pop-coreprocessors'), 
+						__('<b><a href="%s">%s</a></b> has created a new %s:', 'pop-emailsender'), 
 						$author_url,
 						$author_name,
 						$post_name
@@ -696,16 +696,16 @@ class PoP_EmailSender_Hooks {
 		
 		$target_url = get_author_posts_url($target_id);
 		$target_name = get_the_author_meta( 'display_name', $target_id);
-		$subject = sprintf(__( 'You have a new follower!', 'pop-coreprocessors'), $target_name);
+		$subject = sprintf(__( 'You have a new follower!', 'pop-emailsender'), $target_name);
 		
 		$content = sprintf(
-			__( '<p>Congratulations! <a href="%s">You have a new follower</a>:</p>', 'pop-coreprocessors'),
+			__( '<p>Congratulations! <a href="%s">You have a new follower</a>:</p>', 'pop-emailsender'),
 			GD_TemplateManager_Utils::add_tab($target_url, POP_COREPROCESSORS_PAGE_FOLLOWERS)
 		);
 		$content .= $user_html;
 
 		$content .= '<br/>';
-		$content .= __('<p>This user will receive notifications following your activity, such as recommending content, posting a new discussion or comment, and others.</p>', 'pop-coreprocessors');
+		$content .= __('<p>This user will receive notifications following your activity, such as recommending content, posting a new discussion or comment, and others.</p>', 'pop-emailsender');
 
 		$email = get_the_author_meta('user_email', $target_id);	
 		PoP_EmailSender_Utils::sendemail_to_users($email, $target_name, $subject, $content);
@@ -722,7 +722,7 @@ class PoP_EmailSender_Hooks {
 		$post_name = gd_get_postname($post_id);
 		$subject = sprintf(__( 'Your %s was recommended!'), $post_name);
 		$content = sprintf( 
-			__( '<p>Your %1$s <a href="%2$s">%3$s</a> was recommended by:</p>', 'pop-coreprocessors'), 
+			__( '<p>Your %1$s <a href="%2$s">%3$s</a> was recommended by:</p>', 'pop-emailsender'), 
 			$post_name,
 			get_permalink($post_id),
 			get_the_title($post_id)

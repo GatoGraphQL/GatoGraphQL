@@ -5,6 +5,8 @@
 bash -x $POP_APP_PATH/wp-content/plugins/pop-frontendengine/build/minify.sh
 #PoP Core Processors
 bash -x $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/build/minify.sh
+#PoP ServiceWorkers
+bash -x $POP_APP_PATH/wp-content/plugins/pop-serviceworkers/build/minify.sh
 #PoP Theme Wassup
 bash -x $POP_APP_PATH/wp-content/plugins/poptheme-wassup/build/minify.sh
 #UserAvatar-PoP

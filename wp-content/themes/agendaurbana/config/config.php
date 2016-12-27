@@ -198,7 +198,7 @@ function gd_header_page_description_impl($description, $page_id) {
 add_filter('gd_get_favicon', 'agendaurbana_get_favicon');
 function agendaurbana_get_favicon($favicon) {
 
-	return AGENDAURBANA_URI.'/img/favicon.ico';
+	return AGENDAURBANA_ASSETS_URI.'/img/favicon.ico';
 }
 
 
@@ -406,5 +406,5 @@ function agendaurbanatheme_organizationtypes($types) {
 add_filter('GD_Template_Processor_EmbedPreviewLayouts:get_frame_src', 'agendaurbanatheme_embedemptysource');
 function agendaurbanatheme_embedemptysource($src) {
 
-	return AGENDAURBANA_URI.'/img/iframebg.jpg';
+	return AGENDAURBANA_ASSETS_URI.'/img/iframebg.jpg';
 }

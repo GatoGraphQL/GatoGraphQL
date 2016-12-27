@@ -57,12 +57,12 @@ function gd_em_event_output_show_condition_add_date_condition($show_condition = 
 
 	if ($condition == 'is_today'){
 
-		$today = date('Y-m-d', current_time('timestamp'));		
+		$today = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/);		
 		$show_condition = gd_em_event_event_on_given_day($today, $event);
 	}
 	elseif ($condition == 'is_tomorrow'){
 
-		$tomorrow = date('Y-m-d', current_time('timestamp')+86400);	// add a day
+		$tomorrow = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/+86400);	// add a day
 		$show_condition = gd_em_event_event_on_given_day($tomorrow, $event);
 	}
 	

@@ -42,10 +42,23 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_COREPROCESSORS_PAGE_UNDOUPVOTEPOST => true,
 				POP_COREPROCESSORS_PAGE_DOWNVOTEPOST => true,
 				POP_COREPROCESSORS_PAGE_UNDODOWNVOTEPOST => true,
+				// POP_SYSTEM_PAGE_SYSTEM_POPINSTALL => true,
 			);
 		}
 
 		return parent::silent_document($hierarchy);
+	}
+
+	function is_appshell($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES => true,
+			);
+		}
+
+		return parent::is_appshell($hierarchy);
 	}
 
 	function store_local($hierarchy) {
@@ -92,13 +105,14 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 
 				POP_WPAPI_PAGE_EDITPROFILE => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
 				POP_COREPROCESSORS_PAGE_MYPROFILE => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_STATIC),
-				// Allow the Change Password checkpoints to be override. Eg: by adding only non-WSL users
+				// Allow the Change Password checkpoints to be overriden. Eg: by adding only non-WSL users
 				POP_WPAPI_PAGE_CHANGEPASSWORDPROFILE => apply_filters(
 					'Wassup_Template_SettingsProcessor:checkpoints',
 					Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_STATIC),
 					$hierarchy,
 					POP_WPAPI_PAGE_CHANGEPASSWORDPROFILE
 				),
+				// POP_SYSTEM_PAGE_SYSTEM_POPINSTALL => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_ISADMINISTRATOR),
 
 				POPTHEME_WASSUP_PAGE_EDITWEBPOSTLINK => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_CANEDIT),
 				POPTHEME_WASSUP_PAGE_EDITHIGHLIGHT => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_CANEDIT),
@@ -328,6 +342,7 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_WPAPI_PAGE_LOSTPWDRESET => GD_TEMPLATE_ACTION_LOSTPWDRESET,
 				POP_WPAPI_PAGE_LOGOUT => GD_TEMPLATE_ACTION_LOGOUT,
 				POP_WPAPI_PAGE_CHANGEPASSWORDPROFILE => GD_TEMPLATE_ACTION_USER_CHANGEPASSWORD,
+				// POP_SYSTEM_PAGE_SYSTEM_POPINSTALL => GD_TEMPLATE_ACTION_SYSTEM_POPINSTALL,
 				POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA => null,
 				POP_WPAPI_PAGE_EDITAVATAR => GD_TEMPLATE_ACTION_USERAVATAR_UPDATE,
 				POPTHEME_WASSUP_PAGE_ADDWEBPOSTLINK => GD_TEMPLATE_ACTION_WEBPOSTLINK_CREATE,

@@ -32,7 +32,7 @@ class GD_DataLoad_IOHandler_Query extends GD_DataLoad_IOHandler_Block {
 		$ret[GD_URLPARAM_LIMIT] = $limit ? intval($limit) : $posts_per_page; 
 
 		// Timestamp needed for the loadLatest block
-		// $ret[GD_URLPARAM_TIMESTAMP] = $timestamp ? $timestamp : current_time('timestamp'); 
+		// $ret[GD_URLPARAM_TIMESTAMP] = $timestamp ? $timestamp : POP_CONSTANT_CURRENTTIMESTAMP;//current_time('timestamp'); 
 		$ret[GD_URLPARAM_TIMESTAMP] = $atts[GD_URLPARAM_TIMESTAMP]; 
 
 		if ($atts['post-status']) {

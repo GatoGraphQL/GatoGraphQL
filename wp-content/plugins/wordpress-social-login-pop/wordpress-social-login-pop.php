@@ -10,7 +10,6 @@ Author URI: https://getpop.org/u/leo/
 
 define('WSL_POP_VERSION', 0.101);
 define('WSL_POP_DIR', dirname(__FILE__));
-define('WSL_POP_URI', plugins_url('', __FILE__));
 
 /**---------------------------------------------------------------------------------------------------------------
  * Includes: load it initially, as to override the functions from WSL
@@ -26,6 +25,8 @@ class WSL_PoP {
 	}
 
 	function init(){
+
+		define('WSL_POP_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

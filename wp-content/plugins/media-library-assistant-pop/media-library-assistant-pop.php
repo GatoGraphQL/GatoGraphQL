@@ -11,7 +11,6 @@ Author URI: http://getpop.org/u/leo/
 define('MLAPOP_VERSION', 1.0);
 define('MLAPOP_EM_VERSION', 5.61);
 define('MLAPOP_DIR', dirname(__FILE__));
-define('MLAPOP_URI', plugins_url('', __FILE__));
 
 class MLA_PoP {
 
@@ -22,6 +21,8 @@ class MLA_PoP {
 	}
 
 	function init(){
+
+		define('MLAPOP_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

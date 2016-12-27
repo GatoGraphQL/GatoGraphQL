@@ -12,8 +12,6 @@ Author URI: https://getpop.org/u/leo/
 // Constants Definition
 //-------------------------------------------------------------------------------------
 define ('GETPOP_PROCESSORS_VERSION', 0.102);
-
-define ('GETPOP_PROCESSORS_URI', plugins_url('', __FILE__));
 define ('GETPOP_PROCESSORS_DIR', dirname(__FILE__));
 
 class GetPoP_Processors {
@@ -30,6 +28,8 @@ class GetPoP_Processors {
 	}
 
 	function init(){
+
+		define ('GETPOP_PROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

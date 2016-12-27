@@ -563,6 +563,8 @@ body.pop-loadingjs .loading-screen {
 
 	position: relative;
 }
+/* Service Workers message to the user to refresh the page */
+.pop-sw-message.page-level,
 .pop-loading,
 .pop-error {
 
@@ -575,6 +577,11 @@ body.pop-loadingjs .loading-screen {
 	position: fixed;
 	top: 0;
 	left: 50%;
+}
+.pop-sw-message.page-level {
+	position: fixed;
+	bottom: 0;
+	left: 50%;	
 }
 /* Do not show under the 'disabled' layer */
 /*.pop-block.pop-disabled .pop-loading,
@@ -596,11 +603,21 @@ body.pop-loadingjs .loading-screen {
 	width: 180px;
 	margin-left: -90px;
 }
+.pop-sw-message.page-level,
 .pop-error.top-level {
 
-	width: 450px;
-	margin-left: -225px;
+	width: 400px;
+	margin-left: -200px;
 }
+@media (min-width: 768px) {
+	.pop-sw-message.page-level,
+	.pop-error.top-level {
+
+		width: 450px;
+		margin-left: -225px;
+	}
+}
+.pop-sw-message.page-level,
 .pop-error.alert {
 	margin-bottom: 0;
 }
@@ -734,6 +751,8 @@ body.loggedin .visible-notloggedin,
 .visible-organization,
 .visible-individual,
 .wp-media-buttons,
+body.offline .wp-media-buttons, /* Don't show the Media buttons when the website is offline */
+body.loggedin.offline .wp-media-buttons,
 .loggedin-btn {
 	display: none !important;
 }

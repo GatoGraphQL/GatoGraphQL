@@ -112,12 +112,7 @@ class PoPFrontend_Initialization {
 		);
 
 		$homeurl = get_site_url();
-		$allowed_urls = array_unique(apply_filters(
-			'gd_templatemanager:allowed_urls',
-			array(
-				$homeurl,
-			)
-		));
+		$allowed_urls = PoP_Frontend_ServerUtils::get_allowed_urls();
 		
 		// Default one: do not send, so that it doesn't show up in the Embed URL
 		$vars = GD_TemplateManager_Utils::get_vars();

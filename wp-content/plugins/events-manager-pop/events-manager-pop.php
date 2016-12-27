@@ -10,7 +10,6 @@ Author URI: https://getpop.org/u/leo/
 
 define('EMPOP_VERSION', 0.101);
 define('EMPOP_DIR', dirname(__FILE__));
-define('EMPOP_URI', plugins_url('', __FILE__));
 
 class EM_PoP {
 
@@ -21,6 +20,8 @@ class EM_PoP {
 	}
 
 	function init(){
+
+		define('EMPOP_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

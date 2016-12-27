@@ -387,8 +387,7 @@ function gd_em_single_event_is_future() {
 	// global $EM_Event;
 	global $post;
 	$EM_Event = em_get_event($post);
-	// return $EM_Event->start > current_time('timestamp');
-	return current_time('timestamp') < $EM_Event->end;
+	return POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/ < $EM_Event->end;
 }
 function gd_em_single_event_is_past() {
 
@@ -418,8 +417,7 @@ add_filter('em_event_get_categories', 'gd_em_event_get_categories_addtimeframeca
 function gd_em_event_get_categories_addtimeframecategory($EM_Categories, $EM_Event) {
 
 	// Add future or past category?
-	// $is_future = $EM_Event->start > current_time('timestamp');
-	$now = current_time('timestamp');
+	$now = POP_CONSTANT_CURRENTTIMESTAMP;//current_time('timestamp');
 	$is_future = $now < $EM_Event->end;
 	$is_current = ($EM_Event->start <= $now) && $is_future;
 	$future_cat = POPTHEME_WASSUP_EM_CAT_FUTURE;

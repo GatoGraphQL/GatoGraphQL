@@ -24,4 +24,15 @@ class PoP_Frontend_ServerUtils {
 
 		return true;
 	}
+
+	public static function get_allowed_urls() {
+
+		$homeurl = get_site_url();
+		return array_unique(apply_filters(
+			'gd_templatemanager:allowed_urls',
+			array(
+				$homeurl,
+			)
+		));
+	}
 }

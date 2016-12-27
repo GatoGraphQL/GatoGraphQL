@@ -30,7 +30,7 @@ class GD_DataLoad_IOHandler_LatestNotificationList extends GD_DataLoad_IOHandler
 		}
     
 		// User not logged in => return now
-		// return current_time('timestamp');
+		// return POP_CONSTANT_CURRENTTIMESTAMP;//current_time('timestamp');
 		return parent::get_hist_time($atts, $iohandler_atts);
 	}
 

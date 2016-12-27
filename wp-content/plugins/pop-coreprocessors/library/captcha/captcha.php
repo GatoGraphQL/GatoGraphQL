@@ -11,7 +11,7 @@ class GD_Captcha {
 
 	public static function get_image_src($session) {
 
-		$folder = POP_COREPROCESSORS_URI_LIB.'/captcha';
+		$folder = POP_COREPROCESSORS_PHPURI_LIB.'/captcha';
 		return sprintf($folder.'/captcha.png.php?rand=%s&session=%s', rand(), $session);
 	}
 

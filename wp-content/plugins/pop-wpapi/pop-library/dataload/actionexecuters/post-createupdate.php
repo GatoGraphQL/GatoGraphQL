@@ -14,7 +14,7 @@ class GD_DataLoad_ActionExecuter_CreateUpdate_Post extends GD_DataLoad_ActionExe
 			$success_string = sprintf(
 				__('<a href="%s" %s>Click here to view it</a>.', 'pop-wpapi'), 
 				get_permalink($post_id),
-				'data-reloadurl="true"'
+				get_reloadurl_linkattrs()
 			);
 		}
 		elseif ($status == 'draft') {

@@ -15,8 +15,6 @@ define ('POP_MAILER_AWS_VERSION', 0.101);
 define ('POP_MAILER_AWS_DIR', dirname(__FILE__));
 define ('POP_MAILER_AWS_DIR_RESOURCES', POP_MAILER_AWS_DIR.'/resources');
 
-define ('POP_MAILER_AWS_URI', plugins_url('', __FILE__));
-
 class PoP_Mailer_AWS {
 
 	function __construct() {
@@ -30,6 +28,8 @@ class PoP_Mailer_AWS {
 		add_action('plugins_loaded', array($this,'init'), 50);
 	}
 	function init(){
+
+		define ('POP_MAILER_AWS_URI', plugins_url('', __FILE__));
 
 		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {

@@ -216,6 +216,33 @@ class Wassup_PageSectionSettingsManager {
 		return $silent;
 	}
 
+	function is_appshell($page_id = null, $hierarchy = null) {
+
+		if (!$page_id && is_page()) {
+			
+			global $post;
+			$page_id = $post->ID;
+		}
+
+		$hierarchy = $this->get_hierarchy($hierarchy);
+		
+		global $gd_template_settingsprocessor_manager;
+		if (!($processor = $gd_template_settingsprocessor_manager->get_processor_by_page($page_id, $hierarchy))) {
+		
+			return false;
+		}
+
+		// If we get an array, then it defines the value on a page by page basis
+		// Otherwise, it's true/false, just return it
+		$appshell = $processor->is_appshell($hierarchy);
+		if (is_array($appshell)) {
+
+			return $appshell[$page_id];
+		}
+
+		return $appshell;
+	}
+
 	function store_local($page_id = null, $hierarchy = null) {
 
 		if (!$page_id && is_page()) {

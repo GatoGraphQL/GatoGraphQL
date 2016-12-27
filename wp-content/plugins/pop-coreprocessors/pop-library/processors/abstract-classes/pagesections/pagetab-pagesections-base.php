@@ -55,6 +55,7 @@ class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processo
 		// $this->add_jsmethod($ret, 'replicateMultipleTopLevel', 'replicate-interceptor', true);
 		$this->add_jsmethod($ret, 'activatePageTab', 'activate-interceptor');
 		$this->add_jsmethod($ret, 'onDestroyPageSwitchTab', 'remove');
+		$this->add_jsmethod($ret, 'addOpenTab', 'remove');
 		$this->add_jsmethod($ret, 'closePageTab', 'remove');
 
 		return $ret;

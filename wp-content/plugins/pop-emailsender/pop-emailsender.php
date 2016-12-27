@@ -14,8 +14,6 @@ Author URI: https://getpop.org/u/leo/
 define ('POP_EMAILSENDER_VERSION', 0.101);
 define ('POP_EMAILSENDER_DIR', dirname(__FILE__));
 
-define ('POP_EMAILSENDER_URI', plugins_url('', __FILE__));
-
 class PoP_EmailSender {
 
 	function __construct() {
@@ -24,6 +22,8 @@ class PoP_EmailSender {
 		add_action('plugins_loaded', array($this,'init'), 40);
 	}
 	function init(){
+
+		define ('POP_EMAILSENDER_URI', plugins_url('', __FILE__));
 
 		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {

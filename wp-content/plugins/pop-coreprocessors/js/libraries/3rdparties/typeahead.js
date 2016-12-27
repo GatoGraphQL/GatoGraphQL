@@ -131,7 +131,7 @@ popTypeahead = {
 				
 				var selected = $(this);
 				var typeahead = selected.closest('.pop-typeahead');
-				popManager.click(datum.url, typeahead);
+				popManager.click(datum.url, '', typeahead);
 			});
 		});
 	},
@@ -185,7 +185,7 @@ popTypeahead = {
 		var val = input.typeahead('val');
 		if (val) {
 			url = url.replace('%QUERY', input.typeahead('val'));
-			popManager.click(url, typeahead);
+			popManager.click(url, '', typeahead);
 		}
 	},
 

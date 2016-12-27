@@ -31,13 +31,13 @@ body.sliding.getpop .background-screen,
 body.sliding.getpop .loading-screen {
   background-color: #babfc4;
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;
+  /*background: #babfc4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;*/
 }
 body.sliding.getpop-demo .background-screen,
 body.sliding.getpop-demo .loading-screen {
   background-color: #fcf9eb;
   /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;
+  /*background: #fcf9eb url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;*/
 }
 body.sliding .background-screen { 
   -webkit-background-size: cover;
@@ -45,7 +45,7 @@ body.sliding .background-screen {
   -o-background-size: cover;
   background-size: cover;
 }
-@media (min-width: 1440px) {
+/*@media (min-width: 1440px) {
   body.sliding.getpop .background-screen,
   body.sliding.getpop .loading-screen {
     background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1920x1080.png);
@@ -56,7 +56,7 @@ body.sliding .background-screen {
   body.sliding.getpop-demo .loading-screen { 
     background-image: url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1920x1080.png);
   }
-}
+}*/
 body.sliding.pop-loadingjs.getpop .loading-screen,
 body.sliding.pop-loadingjs.getpop-demo .loading-screen {
   background: transparent;
@@ -332,4 +332,8 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 
 .bottom-documentation {
   margin-top: 15px;
+}
+
+#loadingscreen h1 > .tagline {
+    display: none;
 }

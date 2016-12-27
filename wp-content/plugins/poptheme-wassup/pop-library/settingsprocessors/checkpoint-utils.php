@@ -10,6 +10,7 @@ define ('WASSUP_CHECKPOINT_NOTLOGGEDIN', 'checkpoint-notloggedin');
 define ('WASSUP_CHECKPOINT_LOGGEDIN_STATIC', 'checkpoint-loggedin-static');
 define ('WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER', 'checkpoint-loggedin-datafromserver');
 define ('WASSUP_CHECKPOINT_LOGGEDIN_CANEDIT', 'checkpoint-loggedin-canedit');
+define ('WASSUP_CHECKPOINT_LOGGEDIN_ISADMINISTRATOR', 'checkpoint-loggedin-isadministrator');
 
 class Wassup_SettingsProcessor_CheckpointUtils {
 
@@ -60,6 +61,14 @@ class Wassup_SettingsProcessor_CheckpointUtils {
 				),
 				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER
 			);
+			$loggedin_isadmin = array(
+				'checkpoints' => array(
+					GD_DATALOAD_CHECKPOINT_USERLOGGEDIN,
+					// GD_DATALOAD_CHECKPOINT_PROFILEACCESS,
+					GD_DATALOAD_CHECKPOINT_ISADMINISTRATOR,
+				),
+				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER
+			);
 
 			switch ($name) {
 
@@ -81,6 +90,10 @@ class Wassup_SettingsProcessor_CheckpointUtils {
 
 				case WASSUP_CHECKPOINT_LOGGEDIN_CANEDIT:
 					$checkpoint = $loggedin_canedit;
+					break;
+
+				case WASSUP_CHECKPOINT_LOGGEDIN_ISADMINISTRATOR:
+					$checkpoint = $loggedin_isadmin;
 					break;
 			}
 		}

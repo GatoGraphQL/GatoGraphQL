@@ -60,5 +60,6 @@ require_once POP_COREPROCESSORS_LIB.'/socialmedia.php';
 require_once POP_COREPROCESSORS_LIB.'/template.php';
 require_once POP_COREPROCESSORS_LIB.'/translation.php';
 require_once POP_COREPROCESSORS_LIB.'/viewers.php';
+require_once POP_COREPROCESSORS_LIB.'/scripts-and-styles.php';
 // require_once POP_COREPROCESSORS_LIB.'/walker/load.php';
 

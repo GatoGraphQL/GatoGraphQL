@@ -10,7 +10,6 @@ Author URI: https://getpop.org/u/leo/
 
 define('POP_PRETTYPRINT_VERSION', 0.102);
 define('POP_PRETTYPRINT_DIR', dirname(__FILE__));
-define('POP_PRETTYPRINT_URI', plugins_url('', __FILE__));
 
 class PoP_PrettyPrint {
 
@@ -21,6 +20,8 @@ class PoP_PrettyPrint {
 	}
 
 	function init(){
+
+		define('POP_PRETTYPRINT_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

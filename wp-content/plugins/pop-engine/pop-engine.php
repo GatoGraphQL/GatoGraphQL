@@ -23,19 +23,24 @@ class PoPEngine {
 	function __construct(){
 		
 		// Allow the Theme to override definitions. Eg: POP_METAKEY_PREFIX
-		add_action('plugins_loaded', array($this, 'init'), 10);
+		// Load before anything else
+		add_action('plugins_loaded', array($this, 'init'), 0);
 	}
 	function init(){
 		
-		add_action('admin_init', array($this, 'install'));
+		add_action('admin_init', array($this, 'install'), 10, 0);
 		$this->initialize();
 		define('POP_ENGINE_INITIALIZED', true);
 	}
-	function install(){
+	function install($force = false){
 
 		require_once 'installation.php';
 		$installation = new PoPEngine_Installation();
-		return $installation->install();	
+
+		if ($force) {
+			return $installation->install();	
+		}
+		return $installation->maybe_install();	
 	}	
 	function initialize(){
 
@@ -48,4 +53,6 @@ class PoPEngine {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoPEngine();
+// Make it global so that the installation can be called from outside (eg: PoP System)
+global $pop_engine;
+$pop_engine = new PoPEngine();

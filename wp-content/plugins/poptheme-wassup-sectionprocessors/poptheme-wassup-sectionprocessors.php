@@ -12,11 +12,7 @@ Author URI: https://getpop.org/u/leo/
 // Constants Definition
 //-------------------------------------------------------------------------------------
 define ('POPTHEME_WASSUP_SECTIONPROCESSORS_VERSION', 0.102);
-
-define ('POPTHEME_WASSUP_SECTIONPROCESSORS_URI', plugins_url('', __FILE__));
 define ('POPTHEME_WASSUP_SECTIONPROCESSORS_DIR', dirname(__FILE__));
-
-// define ('POPTHEME_WASSUP_SECTIONPROCESSORS_URI', plugins_url('', __FILE__));
 
 class PoPTheme_Wassup_SectionProcessors {
 
@@ -32,6 +28,8 @@ class PoPTheme_Wassup_SectionProcessors {
 	}
 
 	function init(){
+
+		define ('POPTHEME_WASSUP_SECTIONPROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

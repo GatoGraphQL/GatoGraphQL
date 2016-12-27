@@ -45,11 +45,15 @@ if (class_exists('User_Role_Editor'))
 if (function_exists('wpsupercache_site_admin') && defined('WP_CACHE') && WP_CACHE)
 	require_once 'wp-super-cache/load.php';	
 
+if (defined('POP_SYSTEM_VERSION')) {
+	require_once 'pop-system/load.php';		
+}
+
 if (defined('POP_EMAILSENDER_INITIALIZED')) {
 	require_once 'pop-emailsender/load.php';		
 }
 
-if (defined('POP_MAILER_AWS_INITIALIZED')) {
+if (defined('POP_MAILER_AWS_VERSION')) {
 	require_once 'pop-mailer-aws/load.php';		
 }
 
@@ -59,6 +63,10 @@ if (defined('POP_USERAVATAR_AWS_INITIALIZED')) {
 
 if (defined('POP_USERAVATAR_VERSION')) {
 	require_once 'pop-useravatar/load.php';		
+}
+
+if (defined('POP_SERVICEWORKERS_INITIALIZED')) {
+	require_once 'pop-serviceworkers/load.php';		
 }
 
 if (defined('AAL_POP_VERSION')) {

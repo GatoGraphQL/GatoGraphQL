@@ -52,11 +52,7 @@ class PoP_CoreProcessors_Initialization {
 		 ----------------------------- */
 
 		// For GMaps.js
-		$googlemaps_url = 'https://maps.google.com/maps/api/js';
-		if (POP_COREPROCESSORS_APIKEY_GOOGLEMAPS) {
-			$googlemaps_url .= '?key='.POP_COREPROCESSORS_APIKEY_GOOGLEMAPS;
-		}
-		wp_register_script('googlemaps', $googlemaps_url, null, null);
+		wp_register_script('googlemaps', get_googlemaps_url(), null, null);
 		wp_enqueue_script('googlemaps');
 
 

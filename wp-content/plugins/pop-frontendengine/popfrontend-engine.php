@@ -13,7 +13,6 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 define ('POP_FRONTENDENGINE_VERSION', 0.119);
 define ('POP_FRONTENDENGINE_DIR', dirname(__FILE__));
-define ('POP_FRONTENDENGINE_URI', plugins_url('', __FILE__));
 
 class PoPFrontend {
 
@@ -28,6 +27,9 @@ class PoPFrontend {
 		return POP_FRONTENDENGINE_VERSION;
 	}
 	function init(){
+
+		// Allow other plug-ins to modify the plugins_url path (eg: pop-aws adding the CDN)
+		define ('POP_FRONTENDENGINE_URI', plugins_url('', __FILE__));
 
 		if ($this->validate()) {
 			

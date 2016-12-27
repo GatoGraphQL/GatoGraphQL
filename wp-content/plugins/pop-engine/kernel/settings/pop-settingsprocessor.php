@@ -54,6 +54,11 @@ class GD_Template_SettingsProcessorBase {
 		return false;
 	}
 
+	function is_appshell($hierarchy) {
+
+		return false;
+	}
+
 	function store_local($hierarchy) {
 
 		return false;

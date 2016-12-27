@@ -12,8 +12,6 @@ Author URI: https://getpop.org/u/leo/
 // Constants Definition
 //-------------------------------------------------------------------------------------
 define ('POPTHEME_WASSUP_VOTINGPROCESSORS_VERSION', 0.107);
-
-define ('POPTHEME_WASSUP_VOTINGPROCESSORS_URI', plugins_url('', __FILE__));
 define ('POPTHEME_WASSUP_VOTINGPROCESSORS_DIR', dirname(__FILE__));
 
 class PoPTheme_Wassup_VotingProcessors {
@@ -30,6 +28,8 @@ class PoPTheme_Wassup_VotingProcessors {
 	}
 
 	function init(){
+
+		define ('POPTHEME_WASSUP_VOTINGPROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

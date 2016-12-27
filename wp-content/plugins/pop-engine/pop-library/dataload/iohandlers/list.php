@@ -46,7 +46,7 @@ class GD_DataLoad_IOHandler_List extends GD_DataLoad_IOHandler_Query {
 
 		// Needed to loadLatest, to know from what time to get results
 		// Needed also if data-load or content-loaded == false.
-		$ret[GD_URLPARAM_TIMESTAMP] = current_time('timestamp');
+		$ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_CURRENTTIMESTAMP;//current_time('timestamp');
 
 		// If data not loaded, then "stop-fetching" as to not show the Load More button
 		if ($iohandler_atts[GD_DATALOAD_LOAD] === false) {

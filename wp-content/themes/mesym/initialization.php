@@ -40,7 +40,7 @@ class MESYM_Initialization {
 
 	function register_styles() {
 
-		$folder = MESYM_URI.'/css';
+		$folder = MESYM_ASSETS_URI.'/css';
 		
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 
@@ -71,6 +71,7 @@ class MESYM_Initialization {
 			// De-register all dependencies, and add instead a bundle of all of them
 			wp_dequeue_script('pop');
 			wp_dequeue_script('pop-coreprocessors');
+			wp_dequeue_script('pop-serviceworkers');
 			wp_dequeue_script('aal-popprocessors');
 			wp_dequeue_script('pop-useravatar');
 			wp_dequeue_script('em-popprocessors');
@@ -88,7 +89,7 @@ class MESYM_Initialization {
 			wp_dequeue_script('poptheme-wassup-templates');
 			// wp_dequeue_script('poptheme-wassup-votingprocessors-templates');
 
-			$folder = MESYM_URI.'/js/dist';
+			$folder = MESYM_ASSETS_URI.'/js/dist';
 			
 			// Register mega-bundle for the templates
 			wp_register_script('mesym-templates-app', $folder.'/mesym-app.templates.bundle.min.js', array(), MESYM_VERSION, true);
@@ -117,7 +118,7 @@ class MESYM_Initialization {
 			wp_dequeue_style('poptheme-wassup-categoryprocessors');
 			wp_dequeue_style('mesym');
 
-			$folder = MESYM_URI.'/css/dist';
+			$folder = MESYM_ASSETS_URI.'/css/dist';
 			wp_register_style('mesym-app', $folder.'/mesym-app.bundle.min.css', array('bootstrap'), MESYM_VERSION);
 			wp_enqueue_style('mesym-app');
 		}

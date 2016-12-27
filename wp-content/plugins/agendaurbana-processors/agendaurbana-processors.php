@@ -12,8 +12,6 @@ Author URI: https://getpop.org/
 // Constants Definition
 //-------------------------------------------------------------------------------------
 define ('AGENDAURBANA_PROCESSORS_VERSION', 0.102);
-
-define ('AGENDAURBANA_PROCESSORS_URI', plugins_url('', __FILE__));
 define ('AGENDAURBANA_PROCESSORS_DIR', dirname(__FILE__));
 
 class AgendaUrbana_Processors {
@@ -30,6 +28,8 @@ class AgendaUrbana_Processors {
 	}
 
 	function init(){
+
+		define ('AGENDAURBANA_PROCESSORS_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

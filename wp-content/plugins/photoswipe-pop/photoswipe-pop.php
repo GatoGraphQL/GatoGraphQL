@@ -11,7 +11,6 @@ Author URI: https://getpop.org/u/leo/
 define('PHOTOSWIPEPOP_VERSION', 0.101);
 define('PHOTOSWIPEPOP_PHOTOSWIPE_VERSION', '4.1.1');
 define('PHOTOSWIPEPOP_DIR', dirname(__FILE__));
-define('PHOTOSWIPEPOP_URI', plugins_url('', __FILE__));
 
 class PhotoSwipe_PoP {
 
@@ -22,6 +21,8 @@ class PhotoSwipe_PoP {
 	}
 
 	function init(){
+
+		define('PHOTOSWIPEPOP_URI', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

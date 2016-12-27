@@ -232,7 +232,7 @@ function gd_header_page_description_impl($description, $page_id) {
 add_filter('gd_get_favicon', 'getpop_get_favicon');
 function getpop_get_favicon($favicon) {
 
-	return GETPOP_URI.'/img/favicon.ico';
+	return GETPOP_ASSETS_URI.'/img/favicon.ico';
 }
 
 
@@ -409,5 +409,5 @@ function getpoptheme_organizationtypes($types) {
 add_filter('GD_Template_Processor_EmbedPreviewLayouts:get_frame_src', 'getpoptheme_embedemptysource');
 function getpoptheme_embedemptysource($src) {
 
-	return GETPOP_URI.'/img/iframebg.jpg';
+	return GETPOP_ASSETS_URI.'/img/iframebg.jpg';
 }
