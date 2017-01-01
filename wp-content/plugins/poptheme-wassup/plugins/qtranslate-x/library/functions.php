@@ -57,6 +57,18 @@ function gd_fileupload_userphoto_locale_impl($locale_path) {
  * Add language to Ajax url
  * ---------------------------------------------------------------------------------------------------------------*/
 
+// Add the locale to the home url
+add_filter('gd_templatemanager:homelocale_url', 'pop_qtrans_homelocale_url');
+function pop_qtrans_homelocale_url($url) {
+
+	// home_url() already contains the language information
+	return trailingslashit(home_url());
+}
+
+/**---------------------------------------------------------------------------------------------------------------
+ * Add language to Ajax url
+ * ---------------------------------------------------------------------------------------------------------------*/
+
 // add_filter("gd_ajax_url", "gd_qtrans_ajax_url");	 
 // function gd_qtrans_ajax_url($ajaxurl) {
 

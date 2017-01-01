@@ -5,6 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+// define ('POP_HOOK_PAGETABS_ADDOPENTAB', 'GD_Template_Processor_PageTabPageSectionsBase:js:addopentab');
+
 class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processor_BootstrapPageSectionsBase {
 
 	function get_template_source($template_id, $atts) {
@@ -55,7 +57,11 @@ class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processo
 		// $this->add_jsmethod($ret, 'replicateMultipleTopLevel', 'replicate-interceptor', true);
 		$this->add_jsmethod($ret, 'activatePageTab', 'activate-interceptor');
 		$this->add_jsmethod($ret, 'onDestroyPageSwitchTab', 'remove');
+
+		// addOpenTab only if needed. Eg: do not do it in the Embed/Print
+		// if (apply_filters(POP_HOOK_PAGETABS_ADDOPENTAB, true)) {
 		$this->add_jsmethod($ret, 'addOpenTab', 'remove');
+		// }
 		$this->add_jsmethod($ret, 'closePageTab', 'remove');
 
 		return $ret;

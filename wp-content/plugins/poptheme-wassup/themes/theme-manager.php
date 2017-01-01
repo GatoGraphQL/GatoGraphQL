@@ -28,6 +28,39 @@ class PoPTheme_Wassup_Manager {
 		add_filter(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_CALENDAR, array($this, 'get_settingsprocessors_blocktype_calendar'));
 		add_filter(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_MAP, array($this, 'get_settingsprocessors_blocktype_map'));
 		add_filter(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_CALENDARMAP, array($this, 'get_settingsprocessors_blocktype_calendarmap'));
+		
+		// openTabs
+		// add_filter(POP_HOOK_SW_APPSHELL_REOPENTABS, array($this, 'reopenTabs'));
+		// add_filter(POP_HOOK_PAGETABS_ADDOPENTAB, array($this, 'addOpenTab'));
+		add_filter(POP_HOOK_POPFRONTEND_KEEPOPENTABS, array($this, 'keepOpenTabs'));
+	}
+
+	// function addOpenTab($bool) {
+
+	// 	$filtername = sprintf(
+	// 		'%s:%s',
+	// 		POP_HOOK_PAGETABS_ADDOPENTAB,
+	// 		GD_TemplateManager_Utils::get_theme()->get_name()
+	// 	);
+	// 	return apply_filters($filtername, $bool);
+	// }
+	// function reopenTabs($bool) {
+
+	// 	$filtername = sprintf(
+	// 		'%s:%s',
+	// 		POP_HOOK_SW_APPSHELL_REOPENTABS,
+	// 		GD_TemplateManager_Utils::get_theme()->get_name()
+	// 	);
+	// 	return apply_filters($filtername, $bool);
+	// }
+	function keepOpenTabs($bool) {
+
+		$filtername = sprintf(
+			'%s:%s',
+			POP_HOOK_POPFRONTEND_KEEPOPENTABS,
+			GD_TemplateManager_Utils::get_theme()->get_name()
+		);
+		return apply_filters($filtername, $bool);
 	}
 
 	function get_settingsprocessors_blocktype_feed($type) {

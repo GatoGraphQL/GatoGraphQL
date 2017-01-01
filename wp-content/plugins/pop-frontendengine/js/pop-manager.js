@@ -188,7 +188,7 @@ popManager = {
 		var scope = pageSectionPage.data('paramsscope');
 		if (scope == M.SETTINGS_PARAMSSCOPE_URL) {
 			
-			var url = options.url || ''+window.location.href;
+			var url = options.url || t.getTopLevelFeedback()[M.URLPARAM_URL];//''+window.location.href;
 			if (!t.runtimeMemory.url[url]) {
 			
 				// Create a new instance for this URL
@@ -948,7 +948,10 @@ popManager = {
 		var t = this;
 		options = options || {};
 		
-		t.initBlockRuntimeMemory(pageSection, block, options);
+		// Do an extend of $options, so that the same object is not used for initializing 2 different blocks.
+		// Eg: we don't to change the options.url on the same object for newRuntimePage. That could lead to 2 different blocks using the same URL,
+		// it happens when doing openTabs with more than 2 tabs, it does it so quick that the calendar on the right all point to the same URL
+		t.initBlockRuntimeMemory(pageSection, block, $.extend({}, options));
 
 		// Allow scripts and others to perform certain action after the runtimeMemory was generated
 		t.initializeBlock(pageSection, block, options);
@@ -1737,6 +1740,7 @@ popManager = {
 	openTabs : function() {
 
 		var t = this;
+		if (!M.KEEP_OPEN_TABS) return;
 
 		// Get all the tabs open from the previous session, and open them already		
 		var options = {
@@ -1749,6 +1753,21 @@ popManager = {
 			}
 		};
 
+		var current = window.location.href;
+		
+		// Special case for the homepage: the link must have the final '/'
+		if (current == M.HOME_URL) {
+			current = M.HOME_URL+'/';
+		}
+
+		// Special case for qTranslateX: if we are loading the homepage, without the language information
+		// (eg: https://kuwang.com.ar), and a tab with the language is open (eg: https://kuwang.com.ar/es/)
+		// then have it removed, or the homepage will be open twice. For that, we assume the current does have
+		// the language information, so it will be removed below
+		if (current == M.HOME_URL+'/' && M.HOMELOCALE_URL) {
+			current = M.HOMELOCALE_URL;
+		}
+
 		var tabs = t.getOpenTabs();
 		$.each(tabs, function(target, urls) {
 
@@ -1759,7 +1778,7 @@ popManager = {
 			if (target == M.URLPARAM_TARGET_MAIN) {
 
 				// Do not re-open the one URL the user opened
-				var pos = urls.indexOf(window.location.href);
+				var pos = urls.indexOf(current);
 				if (pos !== -1) {
 					
 					// Remove the entry
@@ -1778,12 +1797,16 @@ popManager = {
 	getOpenTabs : function() {
 
 		var t = this;
+		if (!M.KEEP_OPEN_TABS) return {};
+
 		return t.getStoredData('PoP:openTabs') || {};
 	},
 
 	addOpenTab : function(url, target) {
 
 		var t = this;
+		if (!M.KEEP_OPEN_TABS) return false;
+
 		var tabs = t.getOpenTabs();
 		tabs[target] = tabs[target] || [];
 		if (tabs[target].indexOf(url) > -1) {
@@ -1801,6 +1824,8 @@ popManager = {
 	removeOpenTab : function(url, target) {
 
 		var t = this;
+		if (!M.KEEP_OPEN_TABS) return false;
+
 		var tabs = t.getOpenTabs();
 		tabs[target] = tabs[target] || [];
 		var pos = tabs[target].indexOf(url);
@@ -1819,6 +1844,8 @@ popManager = {
 	replaceOpenTab : function(fromURL, toURL, target) {
 
 		var t = this;
+		if (!M.KEEP_OPEN_TABS) return;
+
 		if (t.removeOpenTab(fromURL, target)) {
 			t.addOpenTab(toURL, target);
 		}
@@ -3845,7 +3872,8 @@ popManager = {
 
 		// If the block doesn't have a filtering url (eg: the Author Description, https://www.mesym.com/p/leo/?tab=description) then use the current browser url
 		if (!url && use_pageurl) {
-			url = window.location.href;
+			// url = window.location.href;
+			url = t.getTopLevelFeedback()[M.URLPARAM_URL];
 		}
 
 		// Add only the 'visible' params to the URL

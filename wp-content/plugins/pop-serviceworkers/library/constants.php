@@ -39,6 +39,7 @@ function pop_sw_jquery_constants($jquery_constants) {
 
 
 add_filter('get_reloadurl_linkattrs', 'pop_sw_reloadurl_linkattrs');
+add_filter('GD_DataLoad_ActionExecuter_CreateUpdate_User:success_msg:linkattrs', 'pop_sw_reloadurl_linkattrs');
 function pop_sw_reloadurl_linkattrs($params) {
 
 	$params .= ' data-sw-networkfirst="true"';

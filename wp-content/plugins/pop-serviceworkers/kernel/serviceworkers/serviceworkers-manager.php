@@ -19,7 +19,6 @@ class PoP_ServiceWorkers_Manager {
 
 		return 'lib';
 	}
-	
 
 	function get_filepath($filename){
 
@@ -35,6 +34,43 @@ class PoP_ServiceWorkers_Manager {
         $contents = file_get_contents(POP_SERVICEWORKERS_ASSETS_DIR.'/js/sw-registrar.js');
         $contents = str_replace('$enabledSw', json_encode($this->json_for_sw_registrations()), $contents);
         return $contents;
+    }
+
+	private function manifest() {
+
+		$json = array();
+		
+		$blogname = get_bloginfo('name');
+		if ($short_name = apply_filters('PoP_ServiceWorkers_Manager:manifest:short_name', $blogname)) {
+			$json['short_name'] = $short_name;
+		}
+		if ($name = apply_filters('PoP_ServiceWorkers_Manager:manifest:name', $blogname)) {
+			$json['name'] = $name;
+		}
+		if ($icons = apply_filters('PoP_ServiceWorkers_Manager:manifest:icons', array())) {
+			$json['icons'] = $icons;
+		}
+		if ($start_url = apply_filters('PoP_ServiceWorkers_Manager:manifest:start_url', get_site_url())) {
+			$json['start_url'] = $start_url;
+		}
+		if ($display = apply_filters('PoP_ServiceWorkers_Manager:manifest:display', 'standalone')) {
+			$json['display'] = $display;
+		}
+		if ($orientation = apply_filters('PoP_ServiceWorkers_Manager:manifest:orientation', 'portrait')) {
+			$json['orientation'] = $orientation;
+		}
+		if ($theme_color = apply_filters('PoP_ServiceWorkers_Manager:manifest:theme_color', '#fff')) {
+			$json['theme_color'] = $theme_color;
+		}
+		if ($background_color = apply_filters('PoP_ServiceWorkers_Manager:manifest:background_color', '#fff')) {
+			$json['background_color'] = $background_color;
+		}
+
+		return $json;
+
+		// $contents = file_get_contents(POP_SERVICEWORKERS_ASSETS_DIR.'/js/manifest.json');
+  //       $contents = str_replace($configuration, $values, $contents);
+  //       return $contents;
     }
 
 	private function htaccess() {
@@ -66,6 +102,9 @@ class PoP_ServiceWorkers_Manager {
 		// Service Worker .js file
 		$sw_contents = $pop_serviceworkers_job_manager->render_sw($this->scope);
 		$this->save_file($this->get_filepath('service-worker.js'), $sw_contents);
+
+		// Manifest.json
+		$this->save_file($this->get_filepath('manifest.json'), json_encode($this->manifest(), JSON_UNESCAPED_SLASHES));
 
 		// Copy the dependencies
 		$dependencies = $pop_serviceworkers_job_manager->get_dependencies($this->scope);

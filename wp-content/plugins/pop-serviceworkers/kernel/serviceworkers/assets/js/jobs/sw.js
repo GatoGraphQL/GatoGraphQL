@@ -220,12 +220,17 @@ self.addEventListener('fetch', event => {
     return localforage.getItem(key).then(function(previousETag) {
 
       // Compare the ETag of the response, with the previous one, saved in the IndexedDB
-      if (!previousETag || (ETag == previousETag)) {
+      if (ETag == previousETag) {
         return null;
       }
 
       // Save the new value
       return localforage.setItem(key, ETag).then(function() {
+
+        // If there was no previous ETag, then send no notification to the user
+        if (!previousETag) {
+          return null;
+        }
 
         // Send a message to the client
         return self.clients.matchAll().then(function (clients) {

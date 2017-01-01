@@ -14,6 +14,10 @@ class GD_ThemeMode_Wassup_Simple extends GD_WassupThemeMode_Base {
 		// Hooks to allow the thememodes to do some functionality
 		add_filter(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD.':'.$this->get_theme()->get_name().':'.$this->get_name(), array($this, 'background_load'));
 		add_filter(POP_HOOK_TOPLEVEL_FRAMEPAGESECTIONS.':'.$this->get_theme()->get_name().':'.$this->get_name(), array($this, 'get_framepagesections'), 10, 2);
+		// add_filter(POP_HOOK_SW_APPSHELL_REOPENTABS.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
+		// add_filter(POP_HOOK_PAGETABS_ADDOPENTAB.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
+		
+		add_filter(POP_HOOK_POPFRONTEND_KEEPOPENTABS.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
 
 		// add_filter('PoP_ServiceWorkers_Job_CacheResources:precache', array($this, 'get_precache_list'), 10, 2);
 		

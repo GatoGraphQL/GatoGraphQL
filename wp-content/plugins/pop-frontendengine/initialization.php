@@ -1,6 +1,7 @@
 <?php
 
 define ('POP_HOOK_POPFRONTEND_BACKGROUNDLOAD', 'popfrontend-backgroundload');
+define ('POP_HOOK_POPFRONTEND_KEEPOPENTABS', 'popfrontend-keepopentabs');
 
 class PoPFrontend_Initialization {
 
@@ -82,7 +83,7 @@ class PoPFrontend_Initialization {
 	}
 
 	function get_jquery_constants() {
-	
+
 		// Define all jQuery constants
 		//---------------------------------------------------------------------------------	
 		$status = array(
@@ -119,6 +120,7 @@ class PoPFrontend_Initialization {
 		$themestyle = $vars['themestyle-isdefault'] ? '' : $vars['themestyle'];
 		// $allowed_urls = PoP_FrontendEngine_Utils::get_allowed_urls();
 		$background_load = apply_filters(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD, array());
+		$keepopentabs = apply_filters(POP_HOOK_POPFRONTEND_KEEPOPENTABS, true);
 		$multilayout_labels = apply_filters('gd_templatemanager:multilayout_labels', array());
 		$multilayout_keyfields = apply_filters('gd_templatemanager:multilayout_keyfields', array(
 			'posts' => array('post-type', 'cat'),
@@ -137,6 +139,7 @@ class PoPFrontend_Initialization {
 			'USELOCALSTORAGE' => (PoP_Frontend_ServerUtils::use_local_storage() ? true : ''),
 			// This URL is needed to retrieve the user data, if the user is logged in
 			'BACKGROUND_LOAD' => $background_load,
+			'KEEP_OPEN_TABS' => $keepopentabs ? true : '',
 			'USERLOGGEDIN_DATA_PAGEURL' => get_permalink(POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA),
 			'USERLOGGEDIN_LOADINGMSG_TARGET' => apply_filters('gd_templatemanager:userloggedin_loadingmsg_target', null),
 			// Define variable below to be overriden by WP Super Cache (if plugin disabled, it won't break anything)
@@ -172,6 +175,11 @@ class PoPFrontend_Initialization {
 			'STRING_LESS' => __('less...', 'pop-frontendengine'),
 			'ONDATE' => $ondate,
 		);
+
+		// Allow qTrans to add the language information
+		if ($homelocaleurl = apply_filters('gd_templatemanager:homelocale_url', null)) {
+			$jquery_constants['HOMELOCALE_URL'] = $homelocaleurl;
+		}		
 
 		// External page, to load aggregated PoP URLs into the browser
 		if (POP_FRONTENDENGINE_PAGE_EXTERNAL) {

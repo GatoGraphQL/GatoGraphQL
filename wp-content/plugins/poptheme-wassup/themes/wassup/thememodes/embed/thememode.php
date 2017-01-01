@@ -15,6 +15,9 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple {
 
 		// Hooks to allow the thememodes to do some functionality
 		add_filter(POP_HOOK_BLOCKSBASE_FILTERINGBYSHOWFILTER.':'.$this->get_theme()->get_name().':'.$this->get_name(), array($this, 'filteringby_showfilter'));
+		// add_filter(POP_HOOK_SW_APPSHELL_REOPENTABS.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
+		// add_filter(POP_HOOK_PAGETABS_ADDOPENTAB.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
+		// add_filter(POP_HOOK_POPFRONTEND_KEEPOPENTABS.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
 
 		parent::__construct();
 	}

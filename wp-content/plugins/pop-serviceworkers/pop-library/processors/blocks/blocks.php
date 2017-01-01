@@ -5,6 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+// define ('POP_HOOK_SW_APPSHELL_REOPENTABS', 'PoPSW_Template_Processor_Blocks:appshell:reopenTabs');
+
 define ('GD_TEMPLATE_BLOCK_APPSHELL', PoP_ServerUtils::get_template_definition('block-appshell'));
 
 class PoPSW_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase {
@@ -26,7 +28,13 @@ class PoPSW_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase {
 
 				// This is all this block does: load the external url defined in parameter "url"
 				$this->add_jsmethod($ret, 'fetchBrowserURL');
+
+				// reopen previous session tabs only if enabled. Eg: GetPoP will be disabled, because with the iframe on it,
+				// it keeps opening them time and again and makes the whole page unloadable
+				// Also, do not open in Embed/Print
+				// if (apply_filters(POP_HOOK_SW_APPSHELL_REOPENTABS, true)) {
 				$this->add_jsmethod($ret, 'reopenTabs');
+				// }
 				break;
 		}
 		

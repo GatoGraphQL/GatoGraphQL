@@ -8,6 +8,7 @@ class PoP_ServiceWorkers_Initialization {
 		if (!is_admin()) {
 
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
+			add_action('wp_head', array($this, 'header'));
 		}
 
 		/**---------------------------------------------------------------------------------------------------------------
@@ -40,6 +41,16 @@ class PoP_ServiceWorkers_Initialization {
 		 * Load the Library
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		require_once 'library/load.php';
+	}
+
+	function header() {
+
+		// Print the reference to the manifest file
+		global $pop_serviceworkers_manager;
+		printf(
+			'<link rel="manifest" href="%s">',
+			$pop_serviceworkers_manager->get_fileurl('manifest.json')
+		);
 	}
 
 	function register_scripts() {

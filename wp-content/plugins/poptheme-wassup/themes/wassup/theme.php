@@ -36,7 +36,10 @@ class GD_Theme_Wassup extends GD_ThemeBase {
 		add_filter(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_CALENDAR.':'.$this->get_name(), array($this, 'get_settingsprocessors_blocktype_calendar'));
 		add_filter(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_MAP.':'.$this->get_name(), array($this, 'get_settingsprocessors_blocktype_map'));
 		add_filter(POP_HOOK_SETTINGSPROCESSORS_BLOCKTYPE_CALENDARMAP.':'.$this->get_name(), array($this, 'get_settingsprocessors_blocktype_calendarmap'));
-
+		
+		// add_filter(POP_HOOK_SW_APPSHELL_REOPENTABS.':'.$this->get_name(), array($this, 'reopenTabs'));
+		// add_filter(POP_HOOK_PAGETABS_ADDOPENTAB.':'.$this->get_name(), array($this, 'addOpenTab'));
+		add_filter(POP_HOOK_POPFRONTEND_KEEPOPENTABS.':'.$this->get_name(), array($this, 'keepOpenTabs'));
 
 		parent::__construct();
 	}
@@ -69,6 +72,36 @@ class GD_Theme_Wassup extends GD_ThemeBase {
 		);
 	}
 
+	// function addOpenTab($bool) {
+
+	// 	$filtername = sprintf(
+	// 		'%s:%s:%s',
+	// 		POP_HOOK_PAGETABS_ADDOPENTAB,
+	// 		$this->get_name(),
+	// 		$this->get_themestyle()->get_name()
+	// 	);
+	// 	return apply_filters($filtername, $bool);
+	// }
+	// function reopenTabs($bool) {
+
+	// 	$filtername = sprintf(
+	// 		'%s:%s:%s',
+	// 		POP_HOOK_SW_APPSHELL_REOPENTABS,
+	// 		$this->get_name(),
+	// 		$this->get_themestyle()->get_name()
+	// 	);
+	// 	return apply_filters($filtername, $bool);
+	// }
+	function keepOpenTabs($bool) {
+
+		$filtername = sprintf(
+			'%s:%s:%s',
+			POP_HOOK_POPFRONTEND_KEEPOPENTABS,
+			$this->get_name(),
+			$this->get_thememode()->get_name()
+		);
+		return apply_filters($filtername, $bool);
+	}
 	function get_settingsprocessors_blocktype_feed($type) {
 
 		$filtername = sprintf(
