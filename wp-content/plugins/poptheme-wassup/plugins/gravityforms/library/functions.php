@@ -15,6 +15,6 @@ function poptheme_wassup_gf_remove_tinymce() {
 		remove_filter( 'tiny_mce_before_init',  array( 'GFForms', 'modify_tiny_mce_4' ), 20 );
 
 		// Remove the addition of GF scripts in the front-end that we shall never need
-		remove_action( 'init', array( 'RGForms', 'init' ) );
+		remove_action( 'wp_enqueue_scripts', array( 'RGForms', 'enqueue_scripts' ), 11 );
 	}
 }

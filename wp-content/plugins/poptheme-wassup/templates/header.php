@@ -5,6 +5,10 @@
 	<?php /* For Bootstrap v3.0: http://getbootstrap.com/getting-started/ */ ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<?php if (is_ssl()) : ?>
+		<?php /* Avoid insecure HTTP requests over HTTPS. Taken from https://developers.google.com/web/fundamentals/security/prevent-mixed-content/fixing-mixed-content */ ?>
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<?php endif; ?>
 	<?php $title = gd_get_document_title(); ?>
 	<?php $encoded_title = esc_html($title); ?>
 	<?php $site_name = get_bloginfo('name'); ?>

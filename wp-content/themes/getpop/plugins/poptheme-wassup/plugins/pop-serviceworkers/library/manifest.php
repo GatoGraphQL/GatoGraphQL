@@ -33,10 +33,10 @@ class GetPoP_ServiceWorkers_Hooks_Manifest {
 
     	if (GetPoP_Utils::is_demo()) {
 
-    		return '#fcf9eb';
+    		return '#fcec8c';
     	}
 
-        return '#babfc4';
+        return '#a2dfe4';
     }
 }
     

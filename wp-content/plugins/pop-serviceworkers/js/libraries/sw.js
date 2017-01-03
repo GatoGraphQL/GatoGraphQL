@@ -1,6 +1,9 @@
 (function($){
 popServiceWorkers = {
 
+	// Keep a list of all open pages, as a pair key=url value=pageSectionPage
+	pages: {},
+
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
@@ -15,7 +18,21 @@ popServiceWorkers = {
 				var message = JSON.parse(event.data);
 				if (message.type === 'refresh') {
 
-					$(document).triggerHandler('popServiceWorkers:refreshed:'+message.url);
+					// If there is a pageSectionPage for that URL
+					if (t.pages[message.url]) {
+
+						// Retrieve it
+						var pageSectionPage = $('#'+t.pages[message.url]);
+
+						// Make sure the pageSectionPage is still in the DOM: if it still has its data attributes then it's there
+						// If it's removed, that becomes undefined
+						if (pageSectionPage && pageSectionPage.data('fetch-url')) {
+						
+							// Show the message, then delete the entry from the pages, it's not needed anymore
+							t.showRefreshMessage(pageSectionPage);
+							delete t.pages[message.url];
+						}
+					}
 				}
 			};
 		}
@@ -38,14 +55,14 @@ popServiceWorkers = {
 				// Make the pageSectionPage react when the url gets refreshed from stale json content from the Service Workers
 				var url = pageSectionPage.data('fetch-url');
 				if (url) {
-					$(document).one('popServiceWorkers:refreshed:'+url, function() {
+					
+					// Make the pageSectionPage refresh if the URL has a message
+					t.pages[url] = pageSectionPage.attr('id');
 
-						// Make sure the pageSectionPage is still in the DOM: if it still has its data attributes then it's there
-						// If it's removed, that becomes undefined
-						if (pageSectionPage.data('fetch-url')) {
-						
-							t.showRefreshMessage(pageSectionPage);
-						}		
+					// If closing the tab, delete the entry
+					pageSectionPage.one('destroy', function() {
+				
+						delete t.pages[url];
 					});
 				}
 			}

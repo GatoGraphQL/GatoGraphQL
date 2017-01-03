@@ -581,7 +581,8 @@ body.pop-loadingjs .loading-screen {
 .pop-sw-message.page-level {
 	position: fixed;
 	bottom: 0;
-	left: 50%;	
+	left: 50%;
+	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
 }
 /* Do not show under the 'disabled' layer */
 /*.pop-block.pop-disabled .pop-loading,
@@ -1289,6 +1290,10 @@ body.nooverflow {
 #ps-main .blocksection-controls.top,
 #ps-sideinfo .blocksection-controls.top {
 	position: fixed;
+}
+#ps-main .blocksection-controls.top {
+	position: fixed;
+	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
 }
 .pagesection-group .offcanvas.scrollable {
 	overflow: scroll; /* Needed for Waypoints */

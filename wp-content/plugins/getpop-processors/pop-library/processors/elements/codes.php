@@ -387,11 +387,18 @@ class GetPoP_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 					'<div class="panel-group" id="additionalfeatures" role="tablist" aria-multiselectable="true">%s</div>',
 						sprintf(
 							$col,
+							'mf-heading-z',
+							'mf-collapse-z',
+							__('Offline first', 'getpop-processors'),
+							__('Once loaded, all content is cached in the browser, able to be accessed again even if the user is offline, or has a flakey internet connection.', 'getpop-processors'),
+							$in
+						).sprintf(
+							$col,
 							'mf-heading-0',
 							'mf-collapse-0',
 							__('@Mentions and #Hashtags', 'getpop-processors'),
 							__('When creating a post or adding a comment, the user can mention any other user, and this person will receive a notification, and add Twitter-like hashtags.', 'getpop-processors'),
-							$in
+							''
 						).sprintf(
 							$col,
 							'mf-heading-2',
