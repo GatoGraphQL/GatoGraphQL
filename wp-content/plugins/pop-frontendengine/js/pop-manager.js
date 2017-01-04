@@ -1768,7 +1768,7 @@ popManager = {
 			current = M.HOMELOCALE_URL;
 		}
 
-		var tabs = t.getOpenTabs();
+		var tabs = t.getScreenOpenTabs();
 		$.each(tabs, function(target, urls) {
 
 			// Open the tab on the corresponding target
@@ -1794,6 +1794,23 @@ popManager = {
 		});
 	},
 
+	getOpenTabsKey : function() {
+
+		var t = this;
+		
+		// The open tabs are saved for the combination of locale (language), theme and thememode
+		return M.LOCALE+'|'+M.THEME+'|'+M.THEMEMODE;
+	},
+
+	getScreenOpenTabs : function() {
+
+		var t = this;
+		var tabs = t.getOpenTabs();
+		var key = t.getOpenTabsKey();
+
+		return tabs[key] || {};
+	},
+
 	getOpenTabs : function() {
 
 		var t = this;
@@ -1808,14 +1825,16 @@ popManager = {
 		if (!M.KEEP_OPEN_TABS) return false;
 
 		var tabs = t.getOpenTabs();
-		tabs[target] = tabs[target] || [];
-		if (tabs[target].indexOf(url) > -1) {
+		var key = t.getOpenTabsKey();
+		tabs[key] = tabs[key] || {};
+		tabs[key][target] = tabs[key][target] || [];
+		if (tabs[key][target].indexOf(url) > -1) {
 
 			// The entry already exists
 			return false;			
 		}
 
-		tabs[target].push(url);
+		tabs[key][target].push(url);
 		t.storeData('PoP:openTabs', tabs);
 
 		return true;
@@ -1827,15 +1846,25 @@ popManager = {
 		if (!M.KEEP_OPEN_TABS) return false;
 
 		var tabs = t.getOpenTabs();
-		tabs[target] = tabs[target] || [];
-		var pos = tabs[target].indexOf(url);
+		var key = t.getOpenTabsKey();
+		tabs[key] = tabs[key] || {};
+		tabs[key][target] = tabs[key][target] || [];
+		var pos = tabs[key][target].indexOf(url);
 		if (pos === -1) {
 
 			return false;
 		}
 			
 		// Remove the entry
-		tabs[target].splice(pos, 1);
+		tabs[key][target].splice(pos, 1);
+		if (!tabs[key][target].length) {
+
+			delete tabs[key][target];
+			if (!tabs[key].length) {
+
+				delete tabs[key];
+			}
+		}
 		t.storeData('PoP:openTabs', tabs);
 
 		return true;

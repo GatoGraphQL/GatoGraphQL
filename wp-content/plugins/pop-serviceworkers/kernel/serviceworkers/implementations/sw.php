@@ -26,6 +26,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
 
         return array(
             'localforage' => POP_SERVICEWORKERS_ASSETS_DIR.'/js/dependencies/localforage.1.4.3.min.js',
+            'utils' => POP_SERVICEWORKERS_ASSETS_DIR.'/js/jobs/lib/utils.js',
         );
     }
 
@@ -43,6 +44,22 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['$outputJSON'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
         $configuration['$origins'] = PoP_Frontend_ServerUtils::get_allowed_urls();
 
+        // Thememodes for the appshell
+        global $gd_theme_manager;
+        $theme = $gd_theme_manager->get_theme();
+        $configuration['$themes'] = array(
+            'params' => array(
+                'theme' => GD_URLPARAM_THEME,
+                'thememode' => GD_URLPARAM_THEMEMODE,
+            ),
+            'default' => $gd_theme_manager->get_default_themename(),
+            'themes' => array(
+                $theme->get_name() => array(
+                    'default' => $theme->get_default_thememodename(),
+                ),
+            ),
+        );
+
         $resourceTypes = array('static', 'json', 'html');
         $configuration['$excludedPaths'] = $configuration['$cacheItems'] = $configuration['$strategies'] = array();
         foreach ($resourceTypes as $resourceType) {
@@ -50,7 +67,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             $configuration['$excludedPaths'][$resourceType] = array_unique($this->get_excluded_paths($resourceType));
             $configuration['$cacheItems'][$resourceType] = array_unique($this->get_precache_list($resourceType));
             $configuration['$strategies'][$resourceType] = $this->get_strategies($resourceType);
-            $configuration['$ignore'][$resourceType] = $this->get_ignore($resourceType);
+            $configuration['$ignore'][$resourceType] = $this->get_ignored_params($resourceType);
         }
 
         return $configuration;
@@ -62,7 +79,14 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
 
     	 // Add the offline and appshell pages
         if ($resourceType == 'html') {
-            $precache = array_values($this->get_appshell_pages());
+            foreach ($this->get_appshell_pages() as $locale => $themes) {
+                foreach ($themes as $theme => $thememodes) {
+                    foreach ($thememodes as $thememode => $url) {
+
+                        $precache[] = $url;
+                    }
+                }
+            }
         }
         // elseif ($resourceType == 'json') {
         //     $precache = array_values($this->get_offline_pages());
@@ -86,7 +110,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         );
     }
 
-    protected function get_ignore($resourceType) {
+    protected function get_ignored_params($resourceType) {
 
         $ignore = array();
         if ($resourceType == 'json') {
@@ -95,10 +119,11 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             // All the layout loaders (eg: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) belong here
             // It can be resolved to all silent_document pages without a checkpoint
             return apply_filters(
-                'PoP_ServiceWorkers_Job_Fetch:ignore:'.$resourceType,
+                'PoP_ServiceWorkers_Job_Fetch:ignoredparams:'.$resourceType,
                 array(
-                    '?'.POP_SW_URLPARAM_NETWORKFIRST.'=true',
-                    '&'.POP_SW_URLPARAM_NETWORKFIRST.'=true',
+                    POP_SW_URLPARAM_NETWORKFIRST,
+                    // '?'.POP_SW_URLPARAM_NETWORKFIRST.'=true',
+                    // '&'.POP_SW_URLPARAM_NETWORKFIRST.'=true',
                 )
             );
         }
@@ -111,7 +136,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $strategies = array();
         if ($resourceType == 'json') {
 
-            $endsWith = $this->get_ignore($resourceType);
+            $hasParams = $this->get_ignored_params($resourceType);
         
             // Hook in the paths to include
             // All the layout loaders (eg: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) belong here
@@ -121,9 +146,9 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
                     'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith',
                     array()
                 ),
-                'endsWith' => apply_filters(
-                    'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:endsWith',
-                    $endsWith
+                'hasParams' => apply_filters(
+                    'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:hasParams',
+                    $hasParams
                 ),
             );
         }
@@ -158,15 +183,54 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
     //     );
     // }
 
+    protected function get_locales() {
+        
+        // Allow qTrans to modify this
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:locales',
+            array(get_locale())
+        );
+    }
+
+    protected function get_appshell_url($page, $locale, $themename, $thememodename) {
+
+        // Allow qTrans to modify this
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:appshell_url',
+            add_query_arg(
+                GD_URLPARAM_THEMEMODE, 
+                $thememodename, 
+                add_query_arg(
+                    GD_URLPARAM_THEME, 
+                    $themename, 
+                    get_permalink($page)
+                )
+            ),
+            $locale
+        );
+    }
+
     protected function get_appshell_pages() {
         
         $pages = array();
         if (POP_SERVICEWORKERS_PAGE_APPSHELL) {
+            
+            global $gd_theme_manager;
 
-            $pages[get_locale()] = get_permalink(POP_SERVICEWORKERS_PAGE_APPSHELL);
+            // Just pre-cache the appshell for the default theme, and all of its thememodes
+            $themes = array($gd_theme_manager->get_theme());
+            foreach ($this->get_locales() as $locale) {
+
+                foreach ($themes as $theme) {
+                    
+                    foreach ($theme->get_thememodes() as $thememode) {
+                        
+                        $pages[$locale][$theme->get_name()][$thememode->get_name()] = $this->get_appshell_url(POP_SERVICEWORKERS_PAGE_APPSHELL, $locale, $theme->get_name(), $thememode->get_name());
+                    }
+                }
+            }
         }
 
-        // Allow qTrans to modify this
         return apply_filters(
             'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
             $pages

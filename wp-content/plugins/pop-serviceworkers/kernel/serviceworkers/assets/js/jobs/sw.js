@@ -2,6 +2,7 @@
 'use strict';
 
 importScripts('./$dependenciesFolder/localforage.1.4.3.min.js');
+importScripts('./$dependenciesFolder/utils.js');
 
 const SW_STRATEGIES_CACHEFIRST = 1;
 const SW_STRATEGIES_CACHEFIRSTTHENREFRESH = 2;
@@ -16,6 +17,7 @@ var config = {
     all: $localesByURL,
     default: $defaultLocale
   },
+  themes: $themes,
   outputJSON: $outputJSON,
   origins: $origins,
   strategies: $strategies,
@@ -106,12 +108,12 @@ self.addEventListener('fetch', event => {
     var resourceTypeCriteria = {
       'html': {
         // For 'html' case: make sure it doesn't have output=JSON, because in that case, we're trying to see the JSON on the browser, then no need to use the appshell
-        isNotInitialJSON: request.url.indexOf($outputJSON) === -1
+        isNotInitialJSON: request.url.indexOf(opts.outputJSON) === -1
       },
       'json': {},
       'static': {
         // Do not handla dynamic images, eg: the Captcha: wp-content/plugins/pop-coreprocessors/library/captcha/captcha.png.php
-        isNotDynamic: !request.url.endsWith('.php')
+        isNotDynamic: !request.url.endsWith('.php') && request.url.indexOf('.php?') === -1
       }
     };
 
@@ -160,19 +162,25 @@ self.addEventListener('fetch', event => {
     // then can still fetch it (the appshell page, not the requested page) and cache it
     if (resourceType === 'html') {
       // For HTML use a different URL: the appshell page
-      request = new Request(opts.appshellPages[opts.locales.current]);
+
+      // The different appshells are a combination of locale, theme and thememode
+      var params = getParams(request.url);
+      var theme = params[opts.themes.params.theme] || opts.themes.default;
+      var thememode = params[opts.themes.params.thememode] || opts.themes.themes[theme].default;
+      request = new Request(opts.appshellPages[opts.locales.current][theme][thememode]);
     }
     else if (resourceType === 'json') {
 
       // Remove the ignore strings, we don't want to send it to the server, it was added to the URL
       // only to bypass the Cache First strategy
-      // For convenience, the URL must finish with this string
-      var ignore = opts.ignore[resourceType];
-      ignore.forEach(function(str) {
-        if (request.url.endsWith(str)) {
-          request = new Request(request.url.substr(0, request.url.indexOf(str)));
-        }
-      });
+      // // For convenience, the URL must finish with this string
+      // var ignore = opts.ignore[resourceType];
+      // ignore.forEach(function(str) {
+      //   if (request.url.endsWith(str)) {
+      //     request = new Request(request.url.substr(0, request.url.indexOf(str)));
+      //   }
+      // });
+      request = new Request(stripIgnoredUrlParameters(request.url, opts.ignore[resourceType]));
     }
     
     return request;
@@ -189,7 +197,8 @@ self.addEventListener('fetch', event => {
       var networkFirst = opts.strategies[resourceType].networkFirst;
       var criteria = {
         startsWith: networkFirst.startsWith.some(path => request.url.startsWith(path)),
-        endsWith: networkFirst.endsWith.some(path => request.url.endsWith(path)),
+        // endsWith: networkFirst.endsWith.some(path => request.url.endsWith(path)),
+        hasParams: stripIgnoredUrlParameters(request.url, networkFirst.hasParams) != request.url
       }
       var successCriteria = Object.keys(criteria).filter(criteriaKey => criteria[criteriaKey]);
       if (successCriteria.length) {

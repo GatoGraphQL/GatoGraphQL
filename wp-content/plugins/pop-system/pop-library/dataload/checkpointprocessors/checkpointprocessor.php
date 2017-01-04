@@ -53,7 +53,7 @@ class PoPSystem_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProce
 				}
 
 				// Validate the user's IP
-				$ip = $_SERVER['REMOTE_ADDR'];
+				$ip = get_client_ip();
 				if (!$ip) {
 					
 					return new WP_Error('systemaccessipempty');

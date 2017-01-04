@@ -114,6 +114,9 @@ class PoPFrontend_Initialization {
 
 		$homeurl = get_site_url();
 		$allowed_urls = PoP_Frontend_ServerUtils::get_allowed_urls();
+
+		// Locale is needed to store the Open Tabs under the right language
+		$locale = apply_filters('gd_templatemanager:locale', get_locale());
 		
 		// Default one: do not send, so that it doesn't show up in the Embed URL
 		$vars = GD_TemplateManager_Utils::get_vars();
@@ -135,6 +138,7 @@ class PoPFrontend_Initialization {
 			'INITIAL_URL' => GD_TemplateManager_Utils::get_current_url(), // Needed to always identify which was the first URL loaded
 			'ALLOWED_URLS' => $allowed_urls,
 			'VERSION' => pop_version(),
+			'LOCALE' => $locale,
 			'COMPACT_JS_KEYS' => PoP_ServerUtils::compact_js_keys(),
 			'USELOCALSTORAGE' => (PoP_Frontend_ServerUtils::use_local_storage() ? true : ''),
 			// This URL is needed to retrieve the user data, if the user is logged in
@@ -144,6 +148,8 @@ class PoPFrontend_Initialization {
 			'USERLOGGEDIN_LOADINGMSG_TARGET' => apply_filters('gd_templatemanager:userloggedin_loadingmsg_target', null),
 			// Define variable below to be overriden by WP Super Cache (if plugin disabled, it won't break anything)
 			'AJAXURL' => apply_filters('gd_ajax_url', admin_url('admin-ajax.php')),
+			'THEME' => $vars['theme'],
+			'THEMEMODE' => $vars['thememode'],
 			'THEMESTYLE' => $themestyle,
 			'ERROR_MESSAGE' => '<div class="alert alert-danger alert-block fade in"><button type="button" class="close" data-dismiss="alert">x</button>{0}</div>',
 			'POSTSTATUS' => array(

@@ -33,6 +33,16 @@ class GD_ThemeBase {
 		return '';
 	}
 
+	function get_thememodes() {
+
+		return $this->thememodes;
+	}
+
+	function get_themestyles() {
+
+		return $this->themestyles;
+	}
+
 	function get_default_thememodename() {
 
 		return null;

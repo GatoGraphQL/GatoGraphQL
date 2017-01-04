@@ -13,9 +13,19 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks {
 		// 	'PoP_ServiceWorkers_Job_Fetch:offline_pages',
 		// 	array($this, 'get_offline_pages')
 		// );
+		// add_filter(
+		// 	'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
+		// 	array($this, 'get_appshell_pages')
+		// );
 		add_filter(
-			'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
-			array($this, 'get_appshell_pages')
+			'PoP_ServiceWorkers_Job_Fetch:locales',
+			array($this, 'get_locales')
+		);
+		add_filter(
+			'PoP_ServiceWorkers_Job_Fetch:appshell_url',
+			array($this, 'get_appshell_url'),
+			10,
+			2
 		);
 		add_filter(
 			'PoP_ServiceWorkers_Job_Fetch:locales_byurl',
@@ -37,39 +47,55 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks {
 	// 	return $pages;
 	// }
 
-	function get_appshell_pages($pages) {
+	// function get_appshell_pages($pages) {
 
-		if ($localepages = $this->get_localepages_from_page(POP_SERVICEWORKERS_PAGE_APPSHELL)) {
-			return $localepages;
+	// 	if ($localepages = $this->get_localepages_from_page(POP_SERVICEWORKERS_PAGE_APPSHELL)) {
+	// 		return $localepages;
+	// 	}
+
+	// 	return $pages;
+	// }
+
+	function get_locales($locales) {
+
+		global $q_config;
+		if ($languages = $q_config['enabled_languages']) {
+
+			return $languages;
 		}
 
-		return $pages;
+		return $locales;
 	}
 
-	protected function get_localepages_from_page($page, $addjson = false) {
+	function get_appshell_url($url, $lang) {
 
-		$pages = array();
-		if ($page) {
+		return qtranxf_convertURL($url, $lang);
+	}
 
-			global $q_config;
-			if ($languages = $q_config['enabled_languages']) {
+	// protected function get_localepages_from_page($page, $addjson = false) {
+
+	// 	$pages = array();
+	// 	if ($page) {
+
+	// 		global $q_config;
+	// 		if ($languages = $q_config['enabled_languages']) {
 			
-				// Ignore what has been given here, add the qTrans languages instead
-				$url = get_permalink($page);
-				if ($addjson) {
+	// 			// Ignore what has been given here, add the qTrans languages instead
+	// 			$url = get_permalink($page);
+	// 			if ($addjson) {
 					
-					// Add the output=json because the offline will always be called from inside the website, so by then it must all be json
-		            $url = add_query_arg(GD_URLPARAM_OUTPUT, GD_URLPARAM_OUTPUT_JSON, $url);
-				}
-				foreach ($languages as $lang) {
+	// 				// Add the output=json because the offline will always be called from inside the website, so by then it must all be json
+	// 	            $url = add_query_arg(GD_URLPARAM_OUTPUT, GD_URLPARAM_OUTPUT_JSON, $url);
+	// 			}
+	// 			foreach ($languages as $lang) {
 					
-					$pages[$lang] = qtranxf_convertURL($url, $lang);
-				}
-			}
-		}
+	// 				$pages[$lang] = qtranxf_convertURL($url, $lang);
+	// 			}
+	// 		}
+	// 	}
 
-		return $pages;
-	}
+	// 	return $pages;
+	// }
 
 	function get_locales_byurl($locales) {
 

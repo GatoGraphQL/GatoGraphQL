@@ -19,7 +19,7 @@ class PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils {
 			$loggedin_systemaccesvalid = array(
 				'checkpoints' => array(
 					POP_SYSTEM_DATALOAD_CHECKPOINT_SYSTEMACCESSKEYVALID,
-					// POP_SYSTEM_DATALOAD_CHECKPOINT_SYSTEMACCESSIPVALID,
+					POP_SYSTEM_DATALOAD_CHECKPOINT_SYSTEMACCESSIPVALID,
 				),
 				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER
 			);
