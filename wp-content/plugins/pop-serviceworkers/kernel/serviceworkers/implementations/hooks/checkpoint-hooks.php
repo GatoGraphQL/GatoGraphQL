@@ -10,20 +10,20 @@ class PoP_ServiceWorkers_Hooks_Checkpoints {
     function __construct() {
 
         add_filter(
-            'PoP_ServiceWorkers_Job_Fetch:exclude',
-            array($this, 'get_excluded_paths'),
+            'PoP_ServiceWorkers_Job_Fetch:exclude:partial',
+            array($this, 'get_excluded_partialpaths'),
             10,
             2
         );
 
         $resourceType = 'json';
         add_filter(
-            'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith',
-            array($this, 'get_networkfirst_json_paths')
+            'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith:partial',
+            array($this, 'get_networkfirst_json_partialpaths')
         );
     }
 
-    function get_networkfirst_json_paths($paths) {
+    function get_networkfirst_json_partialpaths($paths) {
         
         // It is basically all pages configured as silent_document which are not appshell and do not have any checkpoint (as in, no user state required)
         // Eg: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS and all the other loaders
@@ -52,14 +52,15 @@ class PoP_ServiceWorkers_Hooks_Checkpoints {
         foreach ($pages as $page) {
             $checkpoint_settings = $gd_template_settingsmanager->get_page_checkpoints($page);
             if (!$checkpoint_settings['type']) {
-                $paths[] = get_permalink($page);
+                // $paths[] = get_permalink($page);
+                $paths[] = GD_TemplateManager_Utils::get_page_path($page);
             }
         }
         
         return $paths;
     }
 
-    function get_excluded_paths($excluded, $resourceType) {
+    function get_excluded_partialpaths($excluded, $resourceType) {
         
         // Exclude all the dynamic pages: those needing user state
         if ($resourceType == 'json') {
@@ -80,7 +81,8 @@ class PoP_ServiceWorkers_Hooks_Checkpoints {
                     if (!$page) continue;
                     if (in_array($settings['type'], $dynamic_types)) {
                     
-                        $excluded[] = get_permalink($page);
+                        // $excluded[] = get_permalink($page);
+                        $excluded[] = GD_TemplateManager_Utils::get_page_path($page);
                     }
                 }
             }

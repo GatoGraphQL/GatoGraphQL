@@ -61,10 +61,15 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         );
 
         $resourceTypes = array('static', 'json', 'html');
-        $configuration['$excludedPaths'] = $configuration['$cacheItems'] = $configuration['$strategies'] = array();
+        // $configuration['$excludedPaths'] = array(
+        //     'full' => array(),
+        //     'partial' => array(),
+        // );
+        $configuration['$excludedFullPaths'] = $configuration['$excludedPartialPaths'] = $configuration['$cacheItems'] = $configuration['$strategies'] = array();
         foreach ($resourceTypes as $resourceType) {
 
-            $configuration['$excludedPaths'][$resourceType] = array_unique($this->get_excluded_paths($resourceType));
+            $configuration['$excludedFullPaths'][$resourceType] = array_unique($this->get_excluded_fullpaths($resourceType));
+            $configuration['$excludedPartialPaths'][$resourceType] = array_unique($this->get_excluded_partialpaths($resourceType));
             $configuration['$cacheItems'][$resourceType] = array_unique($this->get_precache_list($resourceType));
             $configuration['$strategies'][$resourceType] = $this->get_strategies($resourceType);
             $configuration['$ignore'][$resourceType] = $this->get_ignored_params($resourceType);
@@ -100,11 +105,21 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         );
     }
 
-    protected function get_excluded_paths($resourceType) {
+    protected function get_excluded_fullpaths($resourceType) {
         
         // Hook in the resources to exclude
         return apply_filters(
-            'PoP_ServiceWorkers_Job_Fetch:exclude',
+            'PoP_ServiceWorkers_Job_Fetch:exclude:full',
+            array(),
+            $resourceType
+        );
+    }
+
+    protected function get_excluded_partialpaths($resourceType) {
+        
+        // Hook in the resources to exclude
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:exclude:partial',
             array(),
             $resourceType
         );
@@ -142,9 +157,15 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             // All the layout loaders (eg: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) belong here
             // It can be resolved to all silent_document pages without a checkpoint
             $strategies['networkFirst'] = array(
-                'startsWith' => apply_filters(
-                    'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith',
-                    array()
+                'startsWith' => array(
+                    'full' => apply_filters(
+                        'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith:full',
+                        array()
+                    ),
+                    'partial' => apply_filters(
+                        'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith:partial',
+                        array()
+                    ),
                 ),
                 'hasParams' => apply_filters(
                     'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:hasParams',

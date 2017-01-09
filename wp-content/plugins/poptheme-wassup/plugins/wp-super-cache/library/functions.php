@@ -80,7 +80,8 @@ $wp_super_cache_comments = false;
 add_filter('wp_cache_eof_tags', 'gd_wp_cache_eof_tags_json_response');
 function gd_wp_cache_eof_tags_json_response() {
 
-	return '/(}|])/i';
+	// }|]: JSON file can also be cached
+	return '/(<\/html>|<\/rss>|<\/feed>|<\/urlset|<\?xml|}|])/i';
 }
 
 /**---------------------------------------------------------------------------------------------------------------
@@ -97,8 +98,8 @@ function gd_wp_cache_deletecache() {
 /**---------------------------------------------------------------------------------------------------------------
  * Allow to override what files to ignore to cache: all the ones with checkpoint needed
  * ---------------------------------------------------------------------------------------------------------------*/
-// Priority 100: execute after the GD_Template_CustomSettingsProcessor gets initialized
-add_action('PoP:install', 'gd_wp_cache_set_rejected_uri');
+// Priority 20: After the config file has been created
+add_action('PoP:system-install', 'gd_wp_cache_set_rejected_uri', 20);
 function gd_wp_cache_set_rejected_uri() {
 
 	// Check if we have rejected uris, if so replace them in wp-cache-config.php
@@ -113,8 +114,12 @@ function gd_wp_cache_set_rejected_uri() {
 		);
 		$pop_cache_rejected_uri = "array('".implode("', '", $rejected_uris)."')";
 		
-		// Taken from http://z9.io/wp-super-cache-developers/
-		global $wp_cache_config_file;
-		wp_cache_replace_line('^ *\$cache_rejected_uri', "\$cache_rejected_uri = " . $pop_cache_rejected_uri . ";", $wp_cache_config_file);
+		// // Taken from http://z9.io/wp-super-cache-developers/
+		// global $wp_cache_config_file;
+		// wp_cache_replace_line('^ *\$cache_rejected_uri', "\$cache_rejected_uri = " . $pop_cache_rejected_uri . ";", $wp_cache_config_file);
+
+		// Do it on the pop cache config file instead, so that different websites can keep different configurations
+		global $pop_wp_cache_config_file;
+		wp_cache_replace_line('^ *\$cache_rejected_uri', "\$cache_rejected_uri = " . $pop_cache_rejected_uri . ";", $pop_wp_cache_config_file);
 	}
 }

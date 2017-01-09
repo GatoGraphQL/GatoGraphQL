@@ -32,16 +32,18 @@ class PoPEngine {
 		$this->initialize();
 		define('POP_ENGINE_INITIALIZED', true);
 	}
-	function install($force = false){
+	function install(){
 
 		require_once 'installation.php';
 		$installation = new PoPEngine_Installation();
+		return $installation->install();
+	}
+	function system_install(){
 
-		if ($force) {
-			return $installation->install();	
-		}
-		return $installation->maybe_install();	
-	}	
+		require_once 'installation.php';
+		$installation = new PoPEngine_Installation();
+		return $installation->system_install();
+	}
 	function initialize(){
 
 		require_once 'initialization.php';

@@ -18,10 +18,16 @@ define ('POP_SERVICEWORKERS_ASSETS_DIR', POP_SERVICEWORKERS_DIR.'/kernel/service
 class PoP_ServiceWorkers {
 
 	function __construct() {
+
+		/**---------------------------------------------------------------------------------------------------------------
+		 * WP Overrides
+		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once dirname(__FILE__).'/wp-includes/load.php';
 		
 		// Priority: after PoP WP Processors loaded
 		add_action('plugins_loaded', array($this,'init'), 30);
-		add_action('PoP:install', array($this,'install'), 10, 1);
+		// add_action('PoP:install', array($this,'install'), 10, 1);
+		add_action('PoP:system-install', array($this,'system_install'));
 	}
 	function init(){
 
@@ -48,11 +54,11 @@ class PoP_ServiceWorkers {
 		$validation = new PoP_ServiceWorkers_Validation();
 		return $validation->validate();	
 	}
-	function install($version){
+	function system_install(){
 
 		require_once 'installation.php';
 		$installation = new PoP_ServiceWorkers_Installation();
-		return $installation->install($version);	
+		return $installation->system_install();	
 	}	
 	function initialize(){
 

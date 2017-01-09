@@ -19,7 +19,7 @@ function pop_awss3_allowedurl($allowed_urls) {
 	}
 
 	$domain = $as3cf->get_s3_url_domain($bucket, $region);
-	$domain = $scheme . '://' . $domain . '/';
+	$domain = $scheme . '://' . $domain;
 
 	$allowed_urls[] = $domain;
 

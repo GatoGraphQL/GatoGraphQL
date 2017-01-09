@@ -11,11 +11,16 @@ const SW_STRATEGIES_NETWORKFIRST = 3;
 var config = {
   version: $version,
   cacheItems: $cacheItems,
-  excludedPaths: $excludedPaths,
+  excludedPaths: {
+    full: $excludedFullPaths,
+    partial: $excludedPartialPaths
+  },
   appshellPages: $appshellPages,
   locales: {
     all: $localesByURL,
-    default: $defaultLocale
+    default: $defaultLocale,
+    current: null,
+    domain: null
   },
   themes: $themes,
   outputJSON: $outputJSON,
@@ -93,7 +98,9 @@ self.addEventListener('fetch', event => {
     var resourceType = getResourceType(request);
     var url = new URL(request.url);
     var criteria = {
-      isNotExcluded: !opts.excludedPaths[resourceType].some(path => request.url.startsWith(path)),
+      isNotExcluded: !opts.excludedPaths.full[resourceType].some(path => request.url.startsWith(path)),
+      // The pages do not included the locale domain, so add it before doing the comparison
+      isPageNotExcluded: !opts.excludedPaths.partial[resourceType].some(path => request.url.startsWith(opts.locales.domain+path)),
       isGETRequest: request.method === 'GET',
       // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com)
       isFromMyOriginsOrPrecached: (opts.origins.indexOf(url.origin) > -1 || opts.cacheItems[resourceType].indexOf(url) > -1)
@@ -122,11 +129,27 @@ self.addEventListener('fetch', event => {
     return !failingCriteria.length;
   }
 
+  function getCurrentDomain(event, opts) {
+    
+    return Object.keys(opts.locales.all).filter(path => event.request.url.startsWith(path));
+  }
+
+  function getLocaleDomain(event, opts) {
+    
+    var currentDomain = getCurrentDomain(event, opts);
+    if (currentDomain.length) {
+      return currentDomain[0];
+    }
+
+    // Return the default domain
+    return Object.keys(opts.locales.all).filter(function(key) {return opts.locales.all[key] === opts.locales.default})[0];
+  }
+
   function getLocale(event, opts) {
     
-    var currentLocales = Object.keys(opts.locales.all).filter(path => event.request.url.startsWith(path));
-    if (currentLocales.length) {
-      return opts.locales.all[currentLocales[0]];
+    var currentDomain = getCurrentDomain(event, opts);
+    if (currentDomain.length) {
+      return opts.locales.all[currentDomain];
     }
     return opts.locales.default;
   }
@@ -135,6 +158,7 @@ self.addEventListener('fetch', event => {
     
     // Find the current locale and set it on the configuration object
     opts.locales.current = getLocale(event, opts);
+    opts.locales.domain = getLocaleDomain(event, opts);
     return opts;
   }
 
@@ -196,7 +220,9 @@ self.addEventListener('fetch', event => {
 
       var networkFirst = opts.strategies[resourceType].networkFirst;
       var criteria = {
-        startsWith: networkFirst.startsWith.some(path => request.url.startsWith(path)),
+        startsWith: networkFirst.startsWith.full.some(path => request.url.startsWith(path)),
+        // The pages do not included the locale domain, so add it before doing the comparison
+        pageStartsWith: networkFirst.startsWith.partial.some(path => request.url.startsWith(opts.locales.domain+path)),
         // endsWith: networkFirst.endsWith.some(path => request.url.endsWith(path)),
         hasParams: stripIgnoredUrlParameters(request.url, networkFirst.hasParams) != request.url
       }
@@ -301,9 +327,10 @@ self.addEventListener('fetch', event => {
       );
     }
   }
+  config = initOpts(config, event);
   if (shouldHandleFetch(event, config)) {
 
-    onFetch(event, initOpts(config, event));
+    onFetch(event, config);
   }
 
 });

@@ -1,7 +1,7 @@
 <?php
 class PoP_ServiceWorkers_Installation {
 
-	function install($version){
+	function system_install(){
 
 		// Do not install immediately, but do it only at the end of everything, so that the precache list
 		// can have added all the resources from the footer too

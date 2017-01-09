@@ -42,11 +42,6 @@ class PoP_ServiceWorkers_Job {
         return array();
     }
 
-    // function renderable() {
-
-    //     return false;
-    // }
-
     public function get_sw_codereplacements() {
         
         global $pop_serviceworkers_manager;
@@ -63,15 +58,5 @@ class PoP_ServiceWorkers_Job {
         // );
         return array();
     }
-
-    // public function get_precache_list() {
-        
-    //     return array();
-    // }
-
-    // public function get_excluded_paths() {
-
-    //     return array();
-    // }
 }
 

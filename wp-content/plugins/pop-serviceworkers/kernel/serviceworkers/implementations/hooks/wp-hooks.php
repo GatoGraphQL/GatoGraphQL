@@ -29,8 +29,8 @@ class PoP_ServiceWorkers_Hooks_WP {
             2
         );
         add_filter(
-            'PoP_ServiceWorkers_Job_Fetch:exclude',
-            array($this, 'get_excluded_paths'),
+            'PoP_ServiceWorkers_Job_Fetch:exclude:full',
+            array($this, 'get_excluded_fullpaths'),
             10,
             2
         );
@@ -100,7 +100,7 @@ class PoP_ServiceWorkers_Hooks_WP {
         return $precache;
     }
 
-    function get_excluded_paths($excluded, $resourceType) {
+    function get_excluded_fullpaths($excluded, $resourceType) {
         
         if ($resourceType == 'json' || $resourceType == 'html') {
             

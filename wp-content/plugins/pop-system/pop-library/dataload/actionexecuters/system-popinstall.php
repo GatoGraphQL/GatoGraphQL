@@ -17,7 +17,7 @@ class GD_DataLoad_ActionExecuter_SystemPoPInstall extends GD_DataLoad_ActionExec
 	function execute(&$block_data_settings, $block_atts, &$block_execution_bag) {
 
 		global $pop_engine;
-		$pop_engine->install(true);
+		$pop_engine->system_install();
 
 		$success_msg = __('PoP:install executed.', 'pop-system');
 		return array(

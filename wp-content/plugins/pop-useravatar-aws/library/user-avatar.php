@@ -71,6 +71,6 @@ add_filter('gd_templatemanager:allowed_urls', 'pop_useravatar_allowedurl');
 function pop_useravatar_allowedurl($allowed_urls) {
 
 	global $useravatar_aws_pop_override;
-	$allowed_urls[] = $useravatar_aws_pop_override->get_bucket_url();
+	$allowed_urls[] = untrailingslashit($useravatar_aws_pop_override->get_bucket_url());
 	return $allowed_urls;
 }

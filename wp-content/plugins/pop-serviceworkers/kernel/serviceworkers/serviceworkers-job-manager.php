@@ -27,53 +27,6 @@ class PoP_ServiceWorkers_Job_Manager {
 		return $this->jobs[$scope];
 	}
 
-	// function get_precache_list($scope) {
-
-	// 	$resources = array();
-	// 	foreach ($this->jobs[$scope] as $job) {
-
-	// 		$resources = array_merge(
-	// 			$resources,
-	// 			$job->get_precache_list()
-	// 		);
-	// 	}
-
-	// 	// return array_unique($resources);
-	// 	return $resources;
-	// }
-
-	// function get_excluded_paths($scope) {
-
-	// 	$excluded = array(admin_url(), content_url(), includes_url());
-	// 	foreach ($this->jobs[$scope] as $job) {
-
-	// 		$excluded = array_merge(
-	// 			$excluded,
-	// 			$job->get_excluded_paths()
-	// 		);
-	// 	}
-
-	// 	return array_unique($excluded);
-	// }
-
-  //   public function get_sw_configuration($scope) {
-        
-  //       $configuration = array(
-  //           '$debug' => true,
-  //           '$resources' => $this->get_precache_list($scope),
-  //           '$excludedPaths' => $this->get_excluded_paths($scope),
-  //       );
-
-  //       foreach ($this->jobs[$scope] as $job) {
-
-		// 	$configuration = array_merge(
-		// 		$configuration,
-		// 		$job->get_sw_configuration()
-		// 	);
-		// }
-  //       return $configuration;
-  //   }
-
 	public function get_dependencies($scope) {
 
 		$dependencies = array();
@@ -120,20 +73,6 @@ class PoP_ServiceWorkers_Job_Manager {
         }
         return $contents;
     }
-    // private function render($path, $replacements) {
-
-    //     $contents = file_get_contents($path);
-    //     $incremental_hash = hash_init('md5');
-    //     hash_update($incremental_hash, $contents);
-    //     foreach ($replacements as $key => $replacement) {
-    //         $value = json_encode($replacement);
-    //         hash_update($incremental_hash, $value);
-    //         $contents = str_replace($key, $value, $contents);
-    //     }
-    //     $version = json_encode(hash_final($incremental_hash));
-    //     $contents = str_replace('$version', $version, $contents);
-    //     return $contents;
-    // }
 }
 	
 /**---------------------------------------------------------------------------------------------------------------

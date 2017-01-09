@@ -97,13 +97,19 @@ popServiceWorkers = {
 
 		var t = this;
 
-		// Get all the tabs open from the previous session, and open them already		
-		$(document).on('initialized.pop.document', function() {
-		// Do it on document ready to give time to initialize the interceptors
-		// $(document).ready( function() {
-			
-			popManager.openTabs();
-		});
+		// Do it only if Service Workers are supported. This is not really needed to re-open the tabs,
+		// but then all of them will be fetched from the network again, giving some connection trouble
+		// to the user and making the initial load slow
+		if ('serviceWorker' in navigator) {
+
+			// Get all the tabs open from the previous session, and open them already		
+			$(document).on('initialized.pop.document', function() {
+			// Do it on document ready to give time to initialize the interceptors
+			// $(document).ready( function() {
+				
+				popManager.openTabs();
+			});
+		}
 	},
 
 	//-------------------------------------------------
