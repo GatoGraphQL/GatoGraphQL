@@ -7,7 +7,7 @@
 
 define ('GD_TEMPLATE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY', PoP_ServerUtils::get_template_definition('buttonwrapper-userpostactivity'));
 
-class GD_Template_Processor_FeedButtonWrappers extends GD_Template_Processor_ConditionWrapperBase {
+class GD_Template_Processor_FeedButtonWrappers extends GD_Template_Processor_ShowIfNotEmptyConditionWrapperBase {
 
 	function get_templates_to_process() {
 	
@@ -41,6 +41,18 @@ class GD_Template_Processor_FeedButtonWrappers extends GD_Template_Processor_Con
 		}
 
 		return parent::get_condition_field($template_id);
+	}
+
+	function get_textfield_template($template_id, $atts) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
+
+				return GD_TEMPLATE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY;
+		}
+
+		return parent::get_textfield_template($template_id, $atts);
 	}
 
 	function init_atts($template_id, &$atts) {

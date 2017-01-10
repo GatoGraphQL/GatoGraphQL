@@ -69,6 +69,16 @@ class GD_Template_Processor_ConditionWrapperBase extends GD_Template_ProcessorBa
 		return null;
 	}
 
+	function get_conditionsucceeded_class($template_id, $atts) {
+		
+		return '';
+	}
+
+	function get_conditionfailed_class($template_id, $atts) {
+		
+		return '';
+	}
+
 	function get_template_configuration($template_id, $atts) {
 
 		$ret = parent::get_template_configuration($template_id, $atts);
@@ -84,6 +94,12 @@ class GD_Template_Processor_ConditionWrapperBase extends GD_Template_ProcessorBa
 		}
 		if ($condition_method = $this->get_condition_method($template_id)) {
 			$ret['condition-method'] = $condition_method;
+		}
+		if ($classs = $this->get_conditionsucceeded_class($template_id, $atts)) {
+			$ret[GD_JS_CLASSES]['succeeded'] = $classs;
+		}
+		if ($classs = $this->get_conditionfailed_class($template_id, $atts)) {
+			$ret[GD_JS_CLASSES]['failed'] = $classs;
 		}
 
 		if ($layouts = $this->get_layouts($template_id)) {

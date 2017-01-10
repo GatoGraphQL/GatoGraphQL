@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-16 15:48+0800\n"
-"PO-Revision-Date: 2016-12-16 15:48+0800\n"
+"PO-Revision-Date: 2017-01-09 21:26+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -1484,7 +1484,7 @@ msgstr "El post al que se hace referencia no está publicado aún"
 #: .././pop-library/dataload/actionexecuters/referencepermalink-createupdate-base.php:17
 #, php-format
 msgid "<a href=\"%s\" %s>Click here to view it</a>."
-msgstr "<a href=“%s” %s>Haga clic aquí para visualizarlo</a>."
+msgstr "<a href=\"%s\" %s>Haga clic aquí para visualizarlo</a>."
 
 #: .././pop-library/dataload/actionexecuters/referencepermalink-createupdate-base.php:24
 msgid ""
@@ -2075,8 +2075,8 @@ msgid ""
 msgstr ""
 "Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
 "<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
-"plugin installer or download it <a href=“http://wordpress.org/extend/plugins/"
-"pop/“>from here</a>."
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
 
 #: .././validation.php:98
 msgid ""

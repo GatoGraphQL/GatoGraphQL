@@ -7,6 +7,13 @@
  
 class PoPTheme_Wassup_DataQuery_PostHook extends GD_DataQuery_PostHookBase {
 
+	function get_nocachefields() {
+
+		return array(
+			'userpostactivity-count',
+		);
+	}
+
 	function get_lazylayouts() {
 
 		return array(

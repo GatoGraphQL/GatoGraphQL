@@ -36,6 +36,9 @@ class GD_Template_Processor_ButtonInnersBase extends GD_Template_ProcessorBase {
 	function get_btntitle_class($template_id, $atts) {
 		return null;
 	}
+	function get_textfield_class($template_id, $atts) {
+		return null;
+	}
 
 	function get_data_fields($template_id, $atts) {
 
@@ -70,6 +73,13 @@ class GD_Template_Processor_ButtonInnersBase extends GD_Template_ProcessorBase {
 
 				$ret['textfield-close'] = $textfield_close;
 			}
+			if ($classs = $this->get_att($template_id, $atts, 'textfield-class')) {
+
+				// This class will very likely be "pop-show-notempty". We add it here so that in file
+				// layout-dataquery-updatedata.tmpl we can ask if (target.hasClass('pop-show-notempty'))
+				// and only then check for all ancestors, thus avoiding extra DOM traversing when not needed (aka when that class is not set)
+				$ret[GD_JS_CLASSES]['text-field'] = $classs;
+			}
 		}
 
 		// if ($glyphicon = $this->get_glyphicon($template_id)) {
@@ -80,5 +90,11 @@ class GD_Template_Processor_ButtonInnersBase extends GD_Template_ProcessorBase {
 		}
 		
 		return $ret;
+	}
+
+	function init_atts($template_id, &$atts) {
+
+		$this->append_att($template_id, $atts, 'textfield-class', $this->get_textfield_class($template_id, $atts));
+		return parent::init_atts($template_id, $atts);
 	}
 }

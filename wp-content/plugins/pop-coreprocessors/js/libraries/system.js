@@ -371,8 +371,11 @@ popSystem = {
 			
 			var params = t.getDestroyPageTabParams(pageSection, link);
 
-			// Remove the tab from the open sessions
-			popManager.removeOpenTab(params.url, params.target);
+			// Comment Leo 10/01/2017: this line has been moved to triggerDestroyTarget so it's executed even
+			// if the user did not click on the close button, eg: after adding a comment, the window self destroys,
+			// but the Add Comment tab remained open for the next session!
+			// // Remove the tab from the open sessions
+			// popManager.removeOpenTab(params.url, params.target);
 
 			// destroy the PageTab
 			popManager.triggerDestroyTarget(params.url, params.target);

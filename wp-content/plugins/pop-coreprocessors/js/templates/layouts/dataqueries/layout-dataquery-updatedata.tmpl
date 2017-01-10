@@ -1,8 +1,18 @@
 {{#with itemObject}}
 	<script type="text/javascript">
+	var targets, value, removeHidden;
 	(function($){
 		{{#each ../fields}}
-			$('.{{../../itemDBKey}}-{{.}}-{{../id}}').html('{{get ../. .}}');
+			{{! Set the value on the targets}}
+			targets = $('.{{../../itemDBKey}}-{{.}}-{{../id}}');
+			value = '{{get ../. .}}';
+			targets.html(value);
+
+			{{! If the counter on the target was 0 and made hidden, unhide it if the new value is more than 0 (eg: userpostactivity-count)}}
+			removeHidden = targets.filter('.pop-show-notempty');
+			if (removeHidden.length && value && parseInt(value) > 0) {
+				removeHidden.parents('.pop-show-notempty').addBack('.pop-show-notempty').removeClass('hidden');
+			}
 		{{/each}}
 	})(jQuery);
 	</script>	

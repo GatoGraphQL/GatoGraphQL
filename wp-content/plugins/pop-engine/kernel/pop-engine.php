@@ -181,6 +181,18 @@ class PoP_Engine {
 				POP_CONSTANT_CURRENTTIMESTAMP,
 			);
 			$commoncode = str_replace($differentiators, '', $json['json']);
+
+			// Also replace all those tags with content that, even if it's different, should not alter the output
+			// Eg: comments-count. Because adding a comment does not delete the cache, then the comments-count is allowed
+			// to be shown stale. So if adding a new comment, there's no need for the user to receive the
+			// "This page has been updated, click here to refresh it." notification
+			// Because we already got the JSON, then remove entries of the type:
+			// "userpostactivity-count":1, (if there are more elements after)
+			// and
+			// "userpostactivity-count":1
+			$nocache_fields = $json['nocache-fields'];
+			$commoncode = preg_replace('/"('.implode('|', $nocache_fields).')":[0-9]+,?/', '', $commoncode);
+
 			header("ETag: ".wp_hash($commoncode));
 		}
 		
@@ -284,6 +296,9 @@ class PoP_Engine {
 
 		// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
 		$json['cachedsettings'] = $cachedsettings;
+
+		// Give the nocache-fields back also, to properly generate the ETag
+		$json['nocache-fields'] = $data['nocache-fields'];
 
 		return $json;
 	}
@@ -607,7 +622,7 @@ class PoP_Engine {
 		$toplevel_feedback = $toplevel_iohandler->get_feedback($checkpoint, array(), $request, $toplevel_iohandler_atts, null, $toplevel_atts);
 		
 		// Save all database elements here, under dataloader
-		$database = $userdatabase = array();
+		$database = $userdatabase = $nocache_fields = array();
 
 		// Save all the BACKGROUND_LOAD urls to send back to the browser, to load immediately again (needed to fetch non-cacheable data-fields)
 		$backgroundload_urls = array();
@@ -702,18 +717,28 @@ class PoP_Engine {
 					}
 				}
 				if ($forceserverload['ids']) {
-					
+
+					$forceserverload['fields'] = array_unique($forceserverload['fields']);
+
 					$url = get_permalink($dataquery->get_noncacheable_page());
 					$url = add_query_arg($objectid_fieldname, $forceserverload['ids'], $url);
-					$url = add_query_arg('fields', array_unique($forceserverload['fields']), $url);
+					$url = add_query_arg('fields', $forceserverload['fields'], $url);
 					$url = add_query_arg(GD_URLPARAM_FORMAT, GD_TEMPLATEFORMAT_UPDATEDATA, $url);
 					$backgroundload_urls[urldecode($url)] = array(GD_URLPARAM_TARGET_MAIN);
+
+					// Keep the nocache fields to remove those from the code when generating the ETag
+					$nocache_fields = array_merge(
+						$nocache_fields,
+						$forceserverload['fields']
+					);
 				}
 				if ($lazyload['ids']) {
 
+					$lazyload['layouts'] = array_unique($lazyload['layouts']);
+
 					$url = get_permalink($dataquery->get_cacheable_page());
 					$url = add_query_arg($objectid_fieldname, $lazyload['ids'], $url);
-					$url = add_query_arg('layouts', array_unique($lazyload['layouts']), $url);
+					$url = add_query_arg('layouts', $lazyload['layouts'], $url);
 					$url = add_query_arg(GD_URLPARAM_FORMAT, GD_TEMPLATEFORMAT_REQUESTLAYOUTS, $url);
 					$backgroundload_urls[urldecode($url)] = array(GD_URLPARAM_TARGET_MAIN);
 				}
@@ -801,8 +826,9 @@ class PoP_Engine {
 			'params' => $target_params,
 			'feedback' => array(
 				'block' => $block_feedback,
-				'toplevel' => $toplevel_feedback
-			)
+				'toplevel' => $toplevel_feedback,
+			),
+			'nocache-fields' => $nocache_fields,
 		);
 
 		if (!$vars['pagesection']) {

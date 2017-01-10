@@ -748,6 +748,9 @@ popManager = {
 		var t = this;
 		target = target || M.URLPARAM_TARGET_MAIN;
 
+		// Remove the tab from the open sessions
+		t.removeOpenTab(url, target);
+
 		// Intercept url+'!destroy' and this should call the corresponding destroy for the page
 		// Call the interceptor to 
 		popURLInterceptors.intercept(t.getDestroyUrl(url), {target: target});
