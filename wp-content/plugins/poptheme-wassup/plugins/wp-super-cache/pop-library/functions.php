@@ -22,10 +22,10 @@ add_filter('gd_wp_cache_set_rejected_uri', 'gd_wp_cache_set_rejected_uri_checkpo
 function gd_wp_cache_set_rejected_uri_checkpoints($rejected_uris) {
 
 	// Only if the type if GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER. The Static type can be cached since it contains no data
-	// Type GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_NULL was added as to reject NEVERCACHE pages, even though they need no checkpoint validation (Eg: Notifications)
+	// Type GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER was added as to reject NEVERCACHE pages, even though they need no checkpoint validation (Eg: Notifications)
 	$reject_types = array(
 		GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER,
-		GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_NULL,
+		GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER,
 	);
 	
 	// All the files with a checkpoint must not be cached

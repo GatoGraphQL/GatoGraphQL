@@ -200,6 +200,13 @@ class PoPFrontend_Initialization {
 	}
 
 	function add_jquery() {
+
+		// When embedding a post using oEmbed, it creates the post url + /embed/ at the end, however
+		// the scripts are not loaded, so doing popManager.init(); fails and gives a JS error
+		// So do nothing when this post is an embed
+		if (is_embed()) {
+			return;
+		}
 	
 		// // Define all jQuery functions
 		// $gd_jquery_functions = array_unique(apply_filters('gd_jquery_functions', array()));	

@@ -67,43 +67,57 @@ function pop_wpsc_removeforcomments($post_id) {
 }
 function pop_wpsc_deletecommentscache($post_id) {
 	
-	if (POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) {
+	// if (POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) {
 		
-		// Code copied from function wp_cache_phase2_clean_cache($file_prefix)
-		global $cache_path, $blog_cache_dir, $file_prefix, $blog_id;
-		
-		if( !wp_cache_writers_entry() )
-			return false;
-		
-		// Check that the path is in the cache URI
-		$path = GD_TemplateManager_Utils::get_page_path(POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS);
+	// Code copied from function wp_cache_phase2_clean_cache($file_prefix)
+	global $cache_path, $blog_cache_dir, $file_prefix, $blog_id;
+	
+	if( !wp_cache_writers_entry() )
+		return false;
+	
+	// Comment Leo 11/01/2017: do not check the path, only the parameters, so that any page that has pid=$post_id gets deleted
+	// For sure there are 2 such pages: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS and POP_WPAPI_PAGE_LOADERS_POSTS_FIELDS
+	// Check that the path is in the cache URI
+	// $path = GD_TemplateManager_Utils::get_page_path(POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS);
 
-		// Check that the param 'pid' with the right post_id is in the URI
-		$regex = '/[\?|&]'.'pid'.'\[[0-9]\]='.$post_id.'/';
+	// Check that the param 'pid' with the right post_id is in the URI
+	// It can be of the shape pid=$post_id, pid[]=$post_id, or pid[3]=$post_id
+	// Example of hit: 
+	// "uri":"localhost\/en\/add-comment\/?pid=23787&target=addons&module=settingsdata&output=json&theme=wassup&thememode=sliding&themestyle=swift&settingsformat="
+	// Explanation of the regex:
+		// These 2 below wouldn't work! So it's not done:
+		// Such regex that didn't work: $regex = '/"uri":"(.*)[\?|&]'.'pid'.'(\[[0-9]+\])?='.$post_id.'(&|")/';
+		// - search in field "uri":"
+		// - then anything
+	// - before 'pid' there's either ? or &
+	// - after 'pid' can have =, []=, or [number]=
+	// - then must have $post_id
+	// - then, it must either have & or be the end
+	$regex = '/[\?|&]'.'pid'.'(\[[0-9]+\])?='.$post_id.'(&|")/';
 
-		// wp_cache_debug( "wp_cache_phase2_clean_cache: Cleaning cache in $blog_cache_dir" );
-		if ( $handle = @opendir( $blog_cache_dir ) ) { 
-			while ( false !== ($file = @readdir($handle))) {
-				if ( strpos( $file, $file_prefix ) !== false ) {
-					if ( strpos( $file, '.html' ) ) {
-						// delete old legacy files immediately
-						// wp_cache_debug( "wp_cache_phase2_clean_cache: Deleting obsolete legacy cache+meta files: $file" );
-						// @unlink( $blog_cache_dir . $file);
-						// @unlink( $blog_cache_dir . 'meta/' . str_replace( '.html', '.meta', $file ) );
-					} else {
-						$meta = json_decode( wp_cache_get_legacy_cache( $blog_cache_dir . 'meta/' . $file ), true );
-						if ( $meta[ 'blog_id' ] == /*$wpdb->blogid*/$blog_id && strpos($meta['uri'], $path) !== false && preg_match($regex, $meta['uri']) ) {
-							wp_cache_debug( "pop_wpsc_removeforcomments: Deleting file: $file with uri " . $meta['uri'] );
-							@unlink( $blog_cache_dir . $file );
-							@unlink( $blog_cache_dir . 'meta/' . $file );
-						}
+	// wp_cache_debug( "wp_cache_phase2_clean_cache: Cleaning cache in $blog_cache_dir" );
+	if ( $handle = @opendir( $blog_cache_dir ) ) { 
+		while ( false !== ($file = @readdir($handle))) {
+			if ( strpos( $file, $file_prefix ) !== false ) {
+				if ( strpos( $file, '.html' ) ) {
+					// delete old legacy files immediately
+					// wp_cache_debug( "wp_cache_phase2_clean_cache: Deleting obsolete legacy cache+meta files: $file" );
+					// @unlink( $blog_cache_dir . $file);
+					// @unlink( $blog_cache_dir . 'meta/' . str_replace( '.html', '.meta', $file ) );
+				} else {
+					$meta = json_decode( wp_cache_get_legacy_cache( $blog_cache_dir . 'meta/' . $file ), true );
+					if ( $meta[ 'blog_id' ] == /*$wpdb->blogid*/$blog_id && /*strpos($meta['uri'], $path) !== false && */preg_match($regex, $meta['uri']) ) {
+						wp_cache_debug( "pop_wpsc_removeforcomments: Deleting file: $file with uri " . $meta['uri'] );
+						@unlink( $blog_cache_dir . $file );
+						@unlink( $blog_cache_dir . 'meta/' . $file );
 					}
 				}
 			}
-			closedir($handle);
 		}
-		wp_cache_writers_exit();
+		closedir($handle);
 	}
+	wp_cache_writers_exit();
+	// }
 }
 // Comment Leo 10/01/2017: we can't add it again, since it will then be executed, even if adding after the supposed priority is gone past
 // // Priority 11: it can't call wp_cache_post_edit on priority 10 anymore during the current execution
@@ -136,6 +150,9 @@ add_action('gd_update_mycommunities:update', 'gd_wp_cache_user_edit', 0, 0);
 
 // When updating a user membership
 add_action('GD_EditMembership:update', 'gd_wp_cache_user_edit', 0, 0);
+
+// Comment Leo 11/01/2017: this one is not needed, since we're not showing this number anywhere, so no need to delete the cache
+// add_action('gd_followuser', 'gd_wp_cache_user_edit', 0, 0);
 function gd_wp_cache_user_edit() {
 
 	// Delete the cache when the information is updated

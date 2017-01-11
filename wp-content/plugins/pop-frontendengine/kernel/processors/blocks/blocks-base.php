@@ -492,6 +492,11 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 			global $gd_template_settingsmanager;
 			$checkpoint_settings = $gd_template_settingsmanager->get_page_checkpoints($page);
 			$type = $checkpoint_settings['type'];
+			
+			// Important: do NOT add GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER, since this never needs checkpoint validation
+			if ($type == GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER) {
+				return null;
+			}
 			if ((doing_post() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER) {
 
 				return $type;

@@ -250,7 +250,6 @@ class PoPFrontend_Template_Processor_TopLevelsBase extends GD_Template_Processor
 			'iohandler' => $iohandler,
 			'iohandler-atts' => array(
 				GD_DATALOAD_CHECKPOINTS => $this->get_checkpoints($template_id, $atts),
-				// GD_DATALOAD_GETUSERINFO => $this->get_user_info($template_id, $atts)
 			)
 		);
 	}
@@ -303,19 +302,6 @@ class PoPFrontend_Template_Processor_TopLevelsBase extends GD_Template_Processor
 	protected function get_checkpoints($template_id, $atts) {
 		
 		return GD_TemplateManager_Utils::get_checkpoints();
-		// global $gd_template_settingsmanager;
-		// $checkpoint_settings = $gd_template_settingsmanager->get_page_checkpoints();
-		// return $checkpoint_settings['checkpoints'];
 	}
-	/***********************************************************/
-	/** Repeated from "parent" class! */
-	/***********************************************************/
-	// protected function get_user_info($template_id, $atts) {
-			
-	// 	// By default, if implementing (user) checkpoints, then retrieve the user info
-	// 	return GD_TemplateManager_Utils::page_requires_user_state();
-	// 	// $checkpoints = $this->get_checkpoints($template_id, $atts);
-	// 	// return !is_null($checkpoints) && !empty($checkpoints);
-	// }
 }
 

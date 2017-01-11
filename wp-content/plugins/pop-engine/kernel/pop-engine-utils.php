@@ -47,7 +47,6 @@ class GD_TemplateManager_Utils {
 
 	public static function get_checkpoints() {
 
-		// If there are checkpoints, then the webpage is not cacheable
 		global $gd_template_settingsmanager;
 		$checkpoint_settings = $gd_template_settingsmanager->get_page_checkpoints();
 		return $checkpoint_settings['checkpoints'];
@@ -55,9 +54,14 @@ class GD_TemplateManager_Utils {
 
 	public static function page_requires_user_state() {
 
-		// If there are checkpoints, then the webpage is not cacheable
-		$checkpoints = self::get_checkpoints();
-		return !empty($checkpoints);
+		// // If there are checkpoints, then the webpage is not cacheable
+		// $checkpoints = self::get_checkpoints();
+		// return !empty($checkpoints);
+		global $gd_template_settingsmanager;
+		$checkpoint_settings = $gd_template_settingsmanager->get_page_checkpoints();
+		$type = $checkpoint_settings['type'];
+		$checkpoints = $checkpoint_settings['checkpoints'];
+		return (doing_post() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER || $type == GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER;
 	}
 
 	public static function limit_results($results) {

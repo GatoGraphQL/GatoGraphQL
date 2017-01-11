@@ -16,7 +16,7 @@ class GD_DataQuery_Tag extends GD_DataQuery {
 
 	function get_noncacheable_page() {
 
-		return POP_WPAPI_PAGE_LOADERS_TAGS_DATA;
+		return POP_WPAPI_PAGE_LOADERS_TAGS_FIELDS;
 	}
 	function get_cacheable_page() {
 

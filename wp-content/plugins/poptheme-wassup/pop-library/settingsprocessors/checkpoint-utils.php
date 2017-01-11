@@ -23,12 +23,13 @@ class Wassup_SettingsProcessor_CheckpointUtils {
 			// Hack: just by having the type GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER,
 			// these pages will never by cached by WP Super Cache, even if no checkpoints needed
 			// However, add one (fake) checkpoint, so that function get_user_info($template_id, $atts) in toplevels-base.php still concludes the user log in information must be brought in
-			// Comment Leo 10/03/2016: added type GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_NULL just for the nevercache type of pages, which need to checkpoint validation
+			// Comment Leo 10/03/2016: added type GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER just for the nevercache type of pages, which need to checkpoint validation
+			// Comment Leo 11/01/2017: no need to add the alwaystrue checkpoint anymore, since page_requires_user_state (depended by get_user_info($template_id, $atts)) also check the validation type, not just if it has checkpoints or not
 			$nevercache = array(
 				'checkpoints' => array(
-					GD_DATALOAD_CHECKPOINT_ALWAYSTRUE,
+					// GD_DATALOAD_CHECKPOINT_ALWAYSTRUE,
 				),
-				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_NULL,//GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER,
+				'type' => GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER,//GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER,
 			);
 			$notloggedin = array(
 				'checkpoints' => array(

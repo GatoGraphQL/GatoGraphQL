@@ -6,7 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // Always true checkpoint: it's used to pretend we have a checkpoint, but actually we don't need it. Use to make the system retrieve the logged-in information
-define ('GD_DATALOAD_CHECKPOINT_ALWAYSTRUE', 'checkpoint-alwaystrue');
+// define ('GD_DATALOAD_CHECKPOINT_ALWAYSTRUE', 'checkpoint-alwaystrue');
 define ('GD_DATALOAD_CHECKPOINT_USERLOGGEDIN', 'checkpoint-userloggedin');
 define ('GD_DATALOAD_CHECKPOINT_USERLOGGEDIN_SUBMIT', 'checkpoint-userloggedin-submit');
 define ('GD_DATALOAD_CHECKPOINT_USERNOTLOGGEDIN_SUBMIT', 'checkpoint-usernotloggedin-submit');
@@ -18,7 +18,7 @@ class GD_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProcesso
 	function get_checkpoints_to_process() {
 
 		return array(
-			GD_DATALOAD_CHECKPOINT_ALWAYSTRUE,
+			// GD_DATALOAD_CHECKPOINT_ALWAYSTRUE,
 			GD_DATALOAD_CHECKPOINT_USERLOGGEDIN,
 			GD_DATALOAD_CHECKPOINT_USERLOGGEDIN_SUBMIT,
 			GD_DATALOAD_CHECKPOINT_USERNOTLOGGEDIN_SUBMIT,

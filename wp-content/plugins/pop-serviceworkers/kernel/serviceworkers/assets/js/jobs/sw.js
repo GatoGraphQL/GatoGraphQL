@@ -67,12 +67,14 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   function onActivate(event, opts) {
-    return caches.keys()
+    var p1 = localforage.clear(); // Delete all ETag entries in the DB
+    var p2 = caches.keys()
       .then(cacheKeys => {
         var oldCacheKeys = cacheKeys.filter(key => !key.startsWith(opts.version));
         var deletePromises = oldCacheKeys.map(oldKey => caches.delete(oldKey));
         return Promise.all(deletePromises);
       });
+    return Promise.all([p1, p2]);
   }
 
   event.waitUntil(

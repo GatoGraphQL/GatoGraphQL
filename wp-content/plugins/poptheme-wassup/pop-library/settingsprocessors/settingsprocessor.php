@@ -25,10 +25,10 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 
 			return array(
 				POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES => true,
-				POP_WPAPI_PAGE_LOADERS_POSTS_DATA => true,
-				POP_WPAPI_PAGE_LOADERS_USERS_DATA => true,
-				POP_WPAPI_PAGE_LOADERS_COMMENTS_DATA => true,
-				POP_WPAPI_PAGE_LOADERS_TAGS_DATA => true,
+				POP_WPAPI_PAGE_LOADERS_POSTS_FIELDS => true,
+				POP_WPAPI_PAGE_LOADERS_USERS_FIELDS => true,
+				POP_WPAPI_PAGE_LOADERS_COMMENTS_FIELDS => true,
+				POP_WPAPI_PAGE_LOADERS_TAGS_FIELDS => true,
 				POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS => true,
 				POP_WPAPI_PAGE_LOADERS_USERS_LAYOUTS => true,
 				POP_WPAPI_PAGE_LOADERS_COMMENTS_LAYOUTS => true,
@@ -81,10 +81,10 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			return array(
-				POP_WPAPI_PAGE_LOADERS_POSTS_DATA => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
-				POP_WPAPI_PAGE_LOADERS_USERS_DATA => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
-				POP_WPAPI_PAGE_LOADERS_COMMENTS_DATA => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
-				POP_WPAPI_PAGE_LOADERS_TAGS_DATA => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
+				// POP_WPAPI_PAGE_LOADERS_POSTS_FIELDS => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
+				// POP_WPAPI_PAGE_LOADERS_USERS_FIELDS => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
+				// POP_WPAPI_PAGE_LOADERS_COMMENTS_FIELDS => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
+				// POP_WPAPI_PAGE_LOADERS_TAGS_FIELDS => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NEVERCACHE),
 
 				POP_WPAPI_PAGE_LOSTPWD => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NOTLOGGEDIN),
 				POP_WPAPI_PAGE_LOSTPWDRESET => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_NOTLOGGEDIN),
@@ -530,10 +530,10 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				}
 
 				$pageblocks_updatedata = array(
-					POP_WPAPI_PAGE_LOADERS_POSTS_DATA => GD_TEMPLATE_BLOCK_DATAQUERY_ALLCONTENT_CONTENT_UPDATEDATA,
-					POP_WPAPI_PAGE_LOADERS_USERS_DATA => GD_TEMPLATE_BLOCK_DATAQUERY_ALLUSERS_CONTENT_UPDATEDATA,
-					POP_WPAPI_PAGE_LOADERS_COMMENTS_DATA => GD_TEMPLATE_BLOCK_DATAQUERY_COMMENTS_CONTENT_UPDATEDATA,
-					POP_WPAPI_PAGE_LOADERS_TAGS_DATA => GD_TEMPLATE_BLOCK_DATAQUERY_TAGS_CONTENT_UPDATEDATA,
+					POP_WPAPI_PAGE_LOADERS_POSTS_FIELDS => GD_TEMPLATE_BLOCK_DATAQUERY_ALLCONTENT_CONTENT_UPDATEDATA,
+					POP_WPAPI_PAGE_LOADERS_USERS_FIELDS => GD_TEMPLATE_BLOCK_DATAQUERY_ALLUSERS_CONTENT_UPDATEDATA,
+					POP_WPAPI_PAGE_LOADERS_COMMENTS_FIELDS => GD_TEMPLATE_BLOCK_DATAQUERY_COMMENTS_CONTENT_UPDATEDATA,
+					POP_WPAPI_PAGE_LOADERS_TAGS_FIELDS => GD_TEMPLATE_BLOCK_DATAQUERY_TAGS_CONTENT_UPDATEDATA,
 				);
 				foreach ($pageblocks_updatedata as $page => $block) {
 					$ret[$page]['blocks'][GD_TEMPLATEFORMAT_UPDATEDATA] = $block;
