@@ -1,7 +1,7 @@
 {{#with itemObject}}
 	{{#withSublevel ../thumb.name}}
 		<div class="post-thumb {{../../class}}">
-			<a href="{{get ../. ../../url-field}}" class="{{../../classes.link}}" {{#each ../../itemobject-params}} {{@key}}="{{get ../../. this}}"{{/each}}>
+			<a href="{{get ../. ../../url-field}}" class="{{../../classes.link}}" target="{{../../link-target}}" {{#each ../../itemobject-params}} {{@key}}="{{get ../../. this}}"{{/each}}>
 				<img src="{{src}}" class="{{../../classes.img}}" alt="{{{../title}}}" width="{{width}}" height="{{height}}">
 			</a>
 			{{#if description}}<p class="post-thumb-description"><small>{{description}}</small></p>{{/if}}

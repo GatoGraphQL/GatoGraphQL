@@ -174,7 +174,8 @@ body.sliding .pagesection-group.active-navigator.active-sideinfo .pop-error.top-
 .offcanvas.main{width:66.66%}.quickviewpagesection-group.active-main.active-sideinfo
 .offcanvas.sideinfo{width:33.33%}body.nooverflow{overflow-x:hidden}.pagesection-group .offcanvas,
 #ps-main .blocksection-controls.top,
-#ps-sideinfo .blocksection-controls.top{position:fixed}#ps-main .blocksection-controls.top{position:fixed;-webkit-transform:translateZ(0)}.pagesection-group
+#ps-sideinfo .blocksection-controls.top{position:fixed}#ps-main .blocksection-controls.top,
+#ps-sideinfo .blocksection-controls.top{position:fixed;-webkit-transform:translateZ(0)}.pagesection-group
 .offcanvas.scrollable{overflow:scroll;overflow-y:hidden;overflow-x:hidden}.offcanvas.hover,
 .offcanvas.side,
 .offcanvas.navigator,

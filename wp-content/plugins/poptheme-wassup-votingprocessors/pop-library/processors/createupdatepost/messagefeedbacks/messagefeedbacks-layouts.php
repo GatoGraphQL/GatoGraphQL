@@ -85,6 +85,9 @@ class VotingProcessors_Template_Processor_CreateUpdatePostFormMessageFeedbackLay
 				__('Ops, it seems you have no rights to edit this %s.', 'poptheme-wassup-votingprocessors'),
 				$name
 			);
+
+			// The link doesn't contain the nonce
+			$ret['nonceinvalid'] = __('Incorrect URL', 'pop-wpapi');
 		}
 
 		return $ret;

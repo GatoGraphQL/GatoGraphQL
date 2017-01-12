@@ -104,6 +104,22 @@ class GD_Custom_Template_Processor_PostThumbLayouts extends GD_Template_Processo
 		return parent::get_url_field($template_id);
 	}
 
+	function get_linktarget($template_id, $atts) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
+
+				if (PoPTheme_Wassup_Utils::get_addcontent_target() == GD_URLPARAM_TARGET_ADDONS) {
+					
+					return GD_URLPARAM_TARGET_ADDONS;
+				}
+				break;
+		}
+
+		return parent::get_linktarget($template_id, $atts);
+	}
+
 	function get_extra_thumb_layouts($template_id) {
 
 		$ret = parent::get_extra_thumb_layouts($template_id);

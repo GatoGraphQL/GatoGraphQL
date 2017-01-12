@@ -37,7 +37,7 @@
 			<div class="content-body {{../classes.content-body}}">
 				<{{../title-htmlmarkup}} class="name {{../classes.name}}">
 					{{#if is-profile}}
-						<a href="{{get . ../url-field}}" title="{{{display-name}}}">{{{display-name}}}</a>
+						<a href="{{get . ../url-field}}" title="{{{display-name}}}" target="{{../link-target}}">{{{display-name}}}</a>
 					{{else}}
 						{{{display-name}}}
 					{{/if}}

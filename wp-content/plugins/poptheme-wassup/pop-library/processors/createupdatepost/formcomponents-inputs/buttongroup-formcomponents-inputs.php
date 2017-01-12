@@ -130,6 +130,20 @@ class GD_Template_Processor_CreateUpdatePostButtonGroupFormComponentInputs exten
 		
 		return $ret;
 	}
+
+	function get_compareby($template_id, $atts) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_FORMCOMPONENT_BUTTONGROUP_WEBPOSTSECTIONS:
+				
+				// Even though it's multiple, it needs to do the 'in' comparison because it sends more than 1 value:
+				// the WebPost category + the secondary category (Article, Announcement, etc)
+				return 'in';
+		}
+		
+		return parent::get_compareby($template_id, $atts);
+	}
 }
 
 

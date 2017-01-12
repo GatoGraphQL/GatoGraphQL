@@ -121,6 +121,26 @@ class GD_Custom_Template_Processor_CustomPreviewPostLayouts extends GD_Template_
 		return parent::get_url_field($template_id);
 	}
 
+	function get_linktarget($template_id, $atts) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_ANNOUNCEMENT_EDIT:
+			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
+			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_DISCUSSION_EDIT:
+			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_FEATURED_EDIT:
+			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_STORY_EDIT:
+
+				if (PoPTheme_Wassup_Utils::get_addcontent_target() == GD_URLPARAM_TARGET_ADDONS) {
+					
+					return GD_URLPARAM_TARGET_ADDONS;
+				}
+				break;
+		}
+
+		return parent::get_linktarget($template_id, $atts);
+	}
+
 	function get_quicklinkgroup_bottom($template_id) {
 
 		switch ($template_id) {

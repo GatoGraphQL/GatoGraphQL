@@ -80,6 +80,18 @@ popServiceWorkers = {
 		}
 	},
 
+	modifyFetchBlockOptions : function(args) {
+	
+		var t = this;
+		var options = args.options, url = args.url;
+
+		// if doing reload, load straight from the server if the user has connection (Network First strategy)
+		if (options.reload) {
+			options['onetime-post-data'] = options['onetime-post-data'] ? options['onetime-post-data']+'&' : '';
+			options['onetime-post-data'] += M.SW_URLPARAM_NETWORKFIRST+'=true';
+		}
+	},
+
 	fetchBrowserURL : function(args) {
 
 		var t = this;
@@ -131,4 +143,4 @@ popServiceWorkers = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyOptions', 'fetchBrowserURL', 'reopenTabs']);
+popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyOptions', 'modifyFetchBlockOptions', 'fetchBrowserURL', 'reopenTabs']);

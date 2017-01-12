@@ -22,7 +22,7 @@ class PoP_ServiceWorkers {
 		/**---------------------------------------------------------------------------------------------------------------
 		 * WP Overrides
 		 * ---------------------------------------------------------------------------------------------------------------*/
-		require_once dirname(__FILE__).'/wp-includes/load.php';
+		// require_once dirname(__FILE__).'/wp-includes/load.php';
 		
 		// Priority: after PoP WP Processors loaded
 		add_action('plugins_loaded', array($this,'init'), 30);

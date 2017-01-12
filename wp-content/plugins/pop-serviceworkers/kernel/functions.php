@@ -8,5 +8,8 @@ function pop_sw_add_etag_header($bool) {
 	// If the page does not require user state, then it can be cached using Service Workers,
 	// so only then add the ETag header
 	// If it does require user state, then we're never caching that page, and adding the ETag will be for nothing
-	return !GD_TemplateManager_Utils::page_requires_user_state();
+	return apply_filters(
+		'pop_sw_add_etag_header',
+		!GD_TemplateManager_Utils::page_requires_user_state()
+	);
 }

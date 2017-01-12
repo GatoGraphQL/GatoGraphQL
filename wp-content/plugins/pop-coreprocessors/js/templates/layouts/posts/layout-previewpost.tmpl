@@ -73,7 +73,7 @@
 						{{#if ../show-date}}
 							{{{title}}}
 						{{else}}
-							<a href="{{get . ../url-field}}" title="{{{title}}}">{{{title}}}</a>
+							<a href="{{get . ../url-field}}" title="{{{title}}}" target="{{../link-target}}">{{{title}}}</a>
 						{{/if}}
 					</{{../title-htmlmarkup}}>
 				{{/if}}

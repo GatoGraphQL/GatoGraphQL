@@ -1539,7 +1539,6 @@ popSystem = {
 						}
 
 						// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
-						// options = t.modifyOptions(options, url, anchor);
 						popJSLibraryManager.execute('modifyOptions', {options: options, url: url, anchor: anchor});
 						
 						popManager.fetch(url, options);

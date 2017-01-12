@@ -22,11 +22,18 @@ define ('GD_CONSTANT_PLACEHOLDER_DESCRIPTIONADDYOUR', sprintf($description, __('
 add_filter('PopThemeWassup_AAL_Template_Processor_BackgroundColorStyleLayouts:bgcolor', 'getpop_aal_bgcolor', 100, 2);
 function getpop_aal_bgcolor($color, $template_id) {
 
-	switch ($template_id) {
+	if (GetPoP_Utils::is_demo()) {
+		
+		switch ($template_id) {
 
-		case GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
+			case GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
 
-			return '#db902e';
+				return '#f4ce79';
+
+			case GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES:
+
+				return '#db902e';
+		}
 	}
 
 	return $color;

@@ -77,6 +77,9 @@ class VotingProcessors_Template_Processor_CustomListMessageFeedbackLayouts exten
 				__('Your account has no permission to edit this %s.', 'poptheme-wassup-votingprocessors'),
 				$name
 			);
+
+			// The link doesn't contain the nonce
+			$ret['nonceinvalid'] = __('Incorrect URL', 'pop-wpapi');
 		}
 
 		return $ret;

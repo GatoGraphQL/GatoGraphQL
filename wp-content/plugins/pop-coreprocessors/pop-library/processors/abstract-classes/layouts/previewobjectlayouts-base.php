@@ -22,6 +22,11 @@ class GD_Template_Processor_PreviewObjectLayoutsBase extends GD_Template_Process
 		return 'h4';
 	}
 
+	function get_linktarget($template_id, $atts) {
+
+		return '';
+	}
+
 	function get_quicklinkgroup_top($template_id) {
 
 		return null;
@@ -69,6 +74,9 @@ class GD_Template_Processor_PreviewObjectLayoutsBase extends GD_Template_Process
 		$ret['url-field'] = $this->get_url_field($template_id);
 		if ($this->show_excerpt($template_id)) {
 			$ret['show-excerpt'] = true;
+		}
+		if ($target = $this->get_linktarget($template_id, $atts)) {
+			$ret['link-target'] = $target;
 		}
 
 		if ($quicklinkgroup_top = $this->get_quicklinkgroup_top($template_id)) {

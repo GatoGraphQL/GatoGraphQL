@@ -20,7 +20,11 @@ class GD_DataLoad_IOHandler_EditPost extends GD_DataLoad_IOHandler_Form {
 
 		$pid = $_REQUEST['pid'];
 		$ret[GD_DATALOAD_PARAMS]['pid'] = $pid;
-		$ret[GD_DATALOAD_PARAMS]['_wpnonce'] = gd_create_nonce(GD_NONCE_EDITURL, $pid);
+
+		// If the user is sending the '_wpnonce', because has sent a POST editing a post, then use that one, and make the nonce validation with it
+		// $ret[GD_DATALOAD_PARAMS]['_wpnonce'] = isset($_REQUEST['_wpnonce']) ? $_REQUEST['_wpnonce'] : gd_create_nonce(GD_NONCE_EDITURL, $pid);
+		// The nonce must be passed already in the link, otherwise it will not work
+		$ret[GD_DATALOAD_PARAMS]['_wpnonce'] = $_REQUEST['_wpnonce'] ?? '';
 		
 		return $ret;
 	}

@@ -20,6 +20,7 @@ class GD_CreateUpdate_WebPost extends GD_CustomCreateUpdate_Post {
 			$sections
 		);
 		// }
+		
 		return $categories;
 	}
 

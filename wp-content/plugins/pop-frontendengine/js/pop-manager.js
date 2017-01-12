@@ -2574,6 +2574,9 @@ popManager = {
 			return;
 		}
 
+		// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
+		popJSLibraryManager.execute('modifyFetchBlockOptions', {options: options, url: fetchUrl});
+
 		// If the params are already sent in the options, then use it
 		// It's needed for loading the 'Edit Event' page, where the params are provided by the collapse in attr data-params
 		// Override the post-data in the params, and then use it time and again (needed for the Navigator, it will set the filtering fields of the intercepted url into its post-data and send these again and again on waypoint scroll down - its own filter fields are empty!)

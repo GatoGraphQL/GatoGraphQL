@@ -36,6 +36,11 @@ class GD_Template_Processor_PostThumbLayoutsBase extends GD_Template_ProcessorBa
 		return 'url';
 	}
 
+	function get_linktarget($template_id, $atts) {
+
+		return '';
+	}
+
 	function get_thumb_name($template_id, $atts) {
 
 		return 'thumb-sm';
@@ -61,6 +66,9 @@ class GD_Template_Processor_PostThumbLayoutsBase extends GD_Template_ProcessorBa
 		$ret['thumb'] = array(
 			'name' => $this->get_thumb_name($template_id, $atts)
 		);
+		if ($target = $this->get_linktarget($template_id, $atts)) {
+			$ret['link-target'] = $target;
+		}
 		$ret[GD_JS_CLASSES/*'classes'*/]['img'] = $this->get_thumb_img_class($template_id);
 		if ($link_class = $this->get_thumb_link_class($template_id)) {
 			$ret[GD_JS_CLASSES/*'classes'*/]['link'] = $link_class;

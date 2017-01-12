@@ -1291,7 +1291,8 @@ body.nooverflow {
 #ps-sideinfo .blocksection-controls.top {
 	position: fixed;
 }
-#ps-main .blocksection-controls.top {
+#ps-main .blocksection-controls.top,
+#ps-sideinfo .blocksection-controls.top {
 	position: fixed;
 	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
 }

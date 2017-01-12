@@ -89,6 +89,9 @@ class GD_EM_Template_Processor_CreateUpdatePostFormMessageFeedbackLayouts extend
 				__('Ops, it seems you have no rights to edit this %s.', 'poptheme-wassup'),
 				$name
 			);
+
+			// The link doesn't contain the nonce
+			$ret['nonceinvalid'] = __('Incorrect URL', 'pop-wpapi');
 		}
 
 		return $ret;
