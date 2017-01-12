@@ -106,22 +106,6 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 		return $ret;
 	}
 
-	// function get_js_setting($template_id, $atts) {
-
-	// 	$ret = parent::get_js_setting($template_id, $atts);
-
-	// 	switch ($template_id) {
-
-	// 		case GD_TEMPLATE_BLOCK_LATESTCOUNTS:
-
-	// 			// Needed to set the notifications count on the tab
-	// 			$ret['datasetcount-target'] = '#'.AAL_PoPProcessors_NotificationUtils::get_notificationcount_id();//$target;
-	// 			break;
-	// 	}
-
-	// 	return $ret;
-	// }
-
 	protected function get_dataload_query_args($template_id, $atts) {
 
 		$ret = parent::get_dataload_query_args($template_id, $atts);
@@ -178,22 +162,6 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 
 		return parent::get_block_page($template_id);
 	}
-
-	// protected function get_dataload_query_args($template_id, $atts) {
-
-	// 	$ret = parent::get_dataload_query_args($template_id, $atts);
-		
-	// 	switch ($template_id) {
-
-	// 		case GD_TEMPLATE_BLOCK_LATESTCOUNTS:
-
-	// 			// Limit: bring everything
-	// 			$ret['limit'] = -1;
-	// 			break;
-	// 	}
-
-	// 	return $ret;
-	// }
 
 	protected function get_iohandler($template_id) {
 

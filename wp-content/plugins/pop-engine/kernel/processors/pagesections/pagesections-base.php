@@ -221,6 +221,32 @@ class PoP_Processor_PageSectionsBase extends PoP_ProcessorBase {
 		return $ret;
 	}
 
+	function get_runtime_datasettings($template_id, $atts) {
+			
+		global $gd_template_processor_manager;
+		
+		$settings_id = $this->get_settings_id($template_id);
+		$data_setting = $this->get_runtime_datasetting($template_id, $atts);
+		$ret = array(
+			$settings_id => $data_setting
+		);
+
+		// In the Hierarchy Processor, all subcomponent templates are blocks
+		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+		
+			$component_processor = $gd_template_processor_manager->get_processor($component);
+			$component_atts = $atts[$component];
+			$component_settings_id = $component_processor->get_settings_id($component);
+			
+			$component_ret = $component_processor->get_runtime_datasettings($component, $component_atts);
+			
+			// Place all block configurations below $block_id
+			$ret[$component_settings_id] = $component_ret;
+		}
+
+		return $ret;
+	}
+
 	function get_modules($template_id) {
 			
 		if ($blocks = $this->get_blocks($template_id)) {
@@ -319,11 +345,12 @@ class PoP_Processor_PageSectionsBase extends PoP_ProcessorBase {
 		$block_processor = $gd_template_processor_manager->get_processor($subcomponent);
 
 		// Filter
-		if ($filter = $block_processor->get_filter_template($subcomponent)) {
+		$filter = $block_processor->get_filter_template($subcomponent);
+		// if ($filter = $block_processor->get_filter_template($subcomponent)) {
 
-			$filter_processor = $gd_template_processor_manager->get_processor($filter);
-			$filter_object = $filter_processor->get_filter_object($filter);
-		}
+		// 	$filter_processor = $gd_template_processor_manager->get_processor($filter);
+		// 	$filter_object = $filter_processor->get_filter_object($filter);
+		// }
 
 		$block_atts = array(
 			
@@ -347,7 +374,7 @@ class PoP_Processor_PageSectionsBase extends PoP_ProcessorBase {
 			'filter' => $filter,
 
 			// Filter Object
-			'filter-object' => $filter_object,
+			// 'filter-object' => $filter_object,
 		);
 		return $block_atts;
 	}	

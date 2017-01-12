@@ -86,6 +86,22 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 		}
 		return null;
 	}
+
+	protected function get_block_title($template_id, $atts) {
+
+		// If the title has been set in the $atts by a parent, use it
+		// Otherwise, use the local template level. This bizarre solution is used, instead of directly
+		// overriding the value of 'title' in the $atts, since the title is dynamic (eg: get_permalink($page))
+		// however it is saved in the static cache. So then the assumption is that, if the title is set
+		// from above, then it shall be static, otherwise this same level can be runtime
+		$title = $this->get_att($template_id, $atts, 'title');
+		if (!is_null($title)) { // $title = '' is valid
+
+			return $title;
+		}
+		return $this->get_title($template_id);
+	}
+
 	
 	//-------------------------------------------------
 	// PUBLIC Overriding Functions
@@ -175,7 +191,41 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 		// IOHandler atts
 		$ret['iohandler-atts'][GD_URLPARAM_HIDDENIFEMPTY] = $this->get_att($template_id, $atts, 'hidden-if-empty');
 
-		if ($title = $this->get_att($template_id, $atts, 'title')) {
+		// Comment Leo 12/01/2017: moved to function get_runtime_datasetting($template_id, $atts) below
+		// if ($title = $this->get_att($template_id, $atts, 'title')) {
+			
+		// 	$ret['iohandler-atts']['title'] = $title;
+
+		// 	if ($this->get_att($template_id, $atts, 'add-titlelink')) {
+
+		// 		if ($title_link = $this->get_title_link($template_id)) { 
+
+		// 			$ret['iohandler-atts']['title-link'] = $title_link;
+		// 		}
+		// 	}
+		// }
+		
+		return $ret;
+	}
+
+	function get_runtime_datasetting($template_id, $atts) {
+
+		$ret = parent::get_runtime_datasetting($template_id, $atts);
+
+		/***********************************************************/
+		/** Repeated from "parent" class! */
+		/***********************************************************/
+		if ($dataload_atts = $this->get_runtime_dataload_query_args($template_id, $atts)) {
+			$ret['dataload-atts'] = $dataload_atts;
+		}
+	
+		// Comment Leo 12/01/2017: This should ideally belong under a function `init_runtime_atts`, since
+		// the title can depend on the page (eg: get_permalink($page)). This was not done, under the assumption that,
+		// when setting the title from above, it will be static (eg: '', or 'Calendar', but never get_permalink($page))
+		// In any case, we can't use the $atts to set the title on this same template level, so change the logic
+		// in function get_title
+		// if ($title = $this->get_att($template_id, $atts, 'title')) {
+		if ($title = $this->get_block_title($template_id, $atts)) {
 			
 			$ret['iohandler-atts']['title'] = $title;
 
@@ -363,10 +413,16 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 		
 		$this->add_att($template_id, $atts, 'show-filter', true);
 		// $this->add_att($template_id, $atts, 'show-controls', true);
-		if ($title = $this->get_title($template_id)) {
 
-			$this->add_att($template_id, $atts, 'title', $title);
-		}
+		// Comment Leo 12/01/2017: This should ideally belong under a function `init_runtime_atts`, since
+		// the title can depend on the page (eg: get_permalink($page)). This was not done, under the assumption that,
+		// when setting the title from above, it will be static (eg: '', or 'Calendar', but never get_permalink($page))
+		// In any case, we can't use the $atts to set the title on this same template level, so change the logic
+		// in function get_title
+		// if ($title = $this->get_title($template_id)) {
+
+		// 	$this->add_att($template_id, $atts, 'title', $title);
+		// }
 		
 		// Initialize leaves and branches to init JS
 		$this->add_att($template_id, $atts, 'initjs-blockbranches', array());
@@ -558,6 +614,14 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 	/** Repeated from "parent" class! */
 	/***********************************************************/
 	protected function get_dataload_query_args($template_id, $atts) {
+
+		return array();
+	}
+
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
 
 		return array();
 	}	

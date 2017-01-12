@@ -459,11 +459,6 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 
 		$ret = parent::get_dataload_query_args($template_id, $atts);
 		
-		$myposts_query_args = array(					
-			'author' => get_current_user_id(), // Logged-in author			
-			'post-status' => array('publish', 'draft', 'pending') // Any post type
-		);
-		
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_FARMS_TYPEAHEAD:
@@ -488,22 +483,63 @@ class OP_Template_Processor_SectionBlocks extends GD_Template_Processor_SectionB
 			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_LIST:
 
+			case GD_TEMPLATE_BLOCK_MYFARMS_TABLE_EDIT:
+			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW:
+			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW:
+
 				$ret['cat'] = POPTHEME_WASSUP_ORGANIKPROCESSORS_CAT_FARMS;
 				break;
+		}
+
+		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_MYFARMS_TABLE_EDIT:
 			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW:
 			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW:
 			
-				$ret = array_merge(
-					$ret,
-					$this->get_dataload_query_args(GD_TEMPLATE_BLOCK_FARMS_SCROLL_NAVIGATOR, $atts),
-					$myposts_query_args
-				);
+				$ret['post-status'] = array('publish', 'draft', 'pending'); // Any post type
 				break;
 		}
 
+		$simpleviews = array(
+			GD_TEMPLATE_BLOCK_FARMS_SCROLL_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_SIMPLEVIEW,			
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_SIMPLEVIEW,			
+			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW,
+		);
+		$fullviews = array(
+			GD_TEMPLATE_BLOCK_FARMS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_FULLVIEW,			
+			GD_TEMPLATE_BLOCK_TAGFARMS_SCROLL_FULLVIEW,			
+			GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW,
+		);
+
+		// Bring only 3 items for the fullview
+		if (in_array($template_id, $fullviews) || in_array($template_id, $simpleviews)) {
+			
+			$ret['limit'] = 6;
+		}
+
+		// Allow to override the limit by $atts (eg: for the Website Features, Filter section)
+		if ($limit = $this->get_att($template_id, $atts, 'limit')) {
+			$ret['limit'] = $limit;
+		}
+
+		return $ret;
+	}
+
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
+
+		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
+		
 		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_MYFARMS_TABLE_EDIT:
+			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_SIMPLEVIEWPREVIEW:
+			case GD_TEMPLATE_BLOCK_MYFARMS_SCROLL_FULLVIEWPREVIEW:
+			
+				$ret['author'] = get_current_user_id(); // Logged-in author
+				break;
 
 			// Filter by the Profile/Community
 			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLL_DETAILS:

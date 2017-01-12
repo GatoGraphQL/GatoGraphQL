@@ -268,6 +268,24 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 				break;
 		}
 
+		// If they are horizontal, then bring all the results, until we fix how to place the load more button inside of the horizontal scrolling div
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
+
+				$ret['limit'] = '-1';
+				break;
+		}
+
+		return $ret;
+	}
+
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
+
+		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
+		
 		switch ($template_id) {
 
 			// Filter by the Profile/Community
@@ -281,17 +299,6 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 			case GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
 			
 				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
-				break;
-		}
-
-		// If they are horizontal, then bring all the results, until we fix how to place the load more button inside of the horizontal scrolling div
-		switch ($template_id) {
-
-			case GD_TEMPLATE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
-			case GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-			case GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-
-				$ret['limit'] = '-1';
 				break;
 		}
 

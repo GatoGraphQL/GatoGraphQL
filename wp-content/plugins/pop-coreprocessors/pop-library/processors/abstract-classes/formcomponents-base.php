@@ -87,8 +87,13 @@ class GD_Template_Processor_FormComponentsBase extends GD_Template_ProcessorBase
 		
 		// Add the Filter the input belongs to (if there is such a filter, it must not be the case, eg: Edit My Profile form)
 		global $gd_template_processor_manager;
-		if ($filter_object = $atts['filter-object']) {
-			$options['filter'] = $filter_object;
+		// if ($filter_object = $atts['filter-object']) {
+		// 	$options['filter'] = $filter_object;
+		// }
+		if ($filter = $atts['filter']) {
+
+			$filter_processor = $gd_template_processor_manager->get_processor($filter);
+			$options['filter'] = $filter_processor->get_filter_object($filter);
 		}
 
 		return $options;

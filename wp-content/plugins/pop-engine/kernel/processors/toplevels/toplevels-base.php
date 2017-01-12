@@ -123,7 +123,6 @@ class PoP_Processor_TopLevelsBase extends PoP_ProcessorBase {
 		);
 	}
 
-
 	function get_data_settings($template_id, $atts) {
 			
 		global $gd_template_processor_manager;
@@ -135,6 +134,22 @@ class PoP_Processor_TopLevelsBase extends PoP_ProcessorBase {
 			
 			$module_atts = $atts[$module];
 			$ret[$module] = $gd_template_processor_manager->get_processor($module)->get_data_settings($module, $module_atts);
+		}
+		
+		return $ret;
+	}
+
+	function get_runtime_datasettings($template_id, $atts) {
+			
+		global $gd_template_processor_manager;
+
+		$ret = array(
+			$template_id => $this->get_runtime_datasetting($template_id, $atts)
+		);
+		foreach ($this->get_modules($template_id) as $module) {
+			
+			$module_atts = $atts[$module];
+			$ret[$module] = $gd_template_processor_manager->get_processor($module)->get_runtime_datasettings($module, $module_atts);
 		}
 		
 		return $ret;

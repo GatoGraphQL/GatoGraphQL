@@ -206,20 +206,6 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 				break;
 		}
 
-		switch ($template_id) {
-
-			// Filter by the Profile/Community
-			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
-
-				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_authorcontent($ret);
-				break;
-
-			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
-
-				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
-				break;
-		}
-
 		// $maps = array(
 		// 	GD_TEMPLATE_BLOCK_FARMS_SCROLLMAP,
 
@@ -236,6 +222,27 @@ class OP_Template_Processor_ScrollMapSectionBlocks extends GD_EM_Template_Proces
 		// if ($limit = $this->get_att($template_id, $atts, 'limit')) {
 		// 	$ret['limit'] = $limit;
 		// }
+
+		return $ret;
+	}
+
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
+
+		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
+		
+		switch ($template_id) {
+
+			// Filter by the Profile/Community
+			case GD_TEMPLATE_BLOCK_AUTHORFARMS_SCROLLMAP:
+
+				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_authorcontent($ret);
+				break;
+
+			case GD_TEMPLATE_BLOCK_TAGFARMS_SCROLLMAP:
+
+				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
+				break;
+		}
 
 		return $ret;
 	}

@@ -54,8 +54,13 @@ class GD_Template_Processor_FilterInnersBase extends GD_Template_Processor_FormI
 				
 		$ret = parent::get_template_configuration($template_id, $atts);			
 
+		global $gd_template_processor_manager;
+
 		// Add more Attributes
-		$filter_object = $atts['filter-object'];
+		// $filter_object = $atts['filter-object'];
+		$filter = $atts['filter'];
+		$filter_processor = $gd_template_processor_manager->get_processor($filter);
+		$filter_object = $filter_processor->get_filter_object($filter);
 		$ret['filter-name'] = $filter_object->get_name();
 		$ret['input-class'] = GD_FILTER_NAME_INPUT;
 		$ret['filtering-field'] = GD_FILTER_FILTERING_FIELD;				

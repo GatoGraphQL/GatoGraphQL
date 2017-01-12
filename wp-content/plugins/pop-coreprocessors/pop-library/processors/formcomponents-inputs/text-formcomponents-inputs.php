@@ -172,7 +172,12 @@ class GD_Template_Processor_TextFormComponentInputs extends GD_Template_Processo
 
 			case GD_TEMPLATE_FORMCOMPONENT_FILTERNAME:
 
-				$filter_object = $atts['filter-object'];
+				global $gd_template_processor_manager;
+
+				// $filter_object = $atts['filter-object'];
+				$filter = $atts['filter'];
+				$filter_processor = $gd_template_processor_manager->get_processor($filter);
+				$filter_object = $filter_processor->get_filter_object($filter);
 				$this->add_att($template_id, $atts, 'selected', $filter_object->get_name());
 				$this->add_att($template_id, $atts, 'name', GD_FILTER_FILTERING_FIELD);
 				$this->append_att($template_id, $atts, 'class', GD_FILTER_NAME_INPUT);

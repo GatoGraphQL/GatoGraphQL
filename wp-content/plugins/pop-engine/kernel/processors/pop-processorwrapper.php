@@ -139,6 +139,11 @@ class PoP_ProcessorBaseWrapper {
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}
 
+	function get_runtime_datafields($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
 	function get_dataload_extend($template_id, $atts) {
 	
 		return $this->process($template_id, $atts, __FUNCTION__);
@@ -160,6 +165,16 @@ class PoP_ProcessorBaseWrapper {
 	}
 
 	function get_data_settings($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+	
+	function get_runtime_datasetting($template_id, $atts) {
+
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
+	function get_runtime_datasettings($template_id, $atts) {
 	
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}

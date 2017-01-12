@@ -90,9 +90,13 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_data_setting($template_id, $atts) {
+	// Comment Leo 12/01/2017: make the Intercept URLs be runtime instead of static, since it contains information
+	// given through the URL, which cannot not cached in the static file
+	// function get_data_setting($template_id, $atts) {
+	function get_runtime_datasetting($template_id, $atts) {
 
-		$ret = parent::get_data_setting($template_id, $atts);
+		// $ret = parent::get_data_setting($template_id, $atts);
+		$ret = parent::get_runtime_datasetting($template_id, $atts);
 
 		// Save the intercepted url in the feedback <= this way we can save the placeholder in the configuration,
 		// indicating to get the url from the feedback, so we can cache the settings without these particular-page attribute

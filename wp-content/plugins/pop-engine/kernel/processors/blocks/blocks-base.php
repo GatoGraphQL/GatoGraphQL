@@ -121,6 +121,17 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 		return $ret;
 	}
 
+	function get_runtime_datasetting($template_id, $atts) {
+
+		$ret = parent::get_runtime_datasetting($template_id, $atts);
+	
+		if ($dataload_atts = $this->get_runtime_dataload_query_args($template_id, $atts)) {
+			$ret['dataload-atts'] = $dataload_atts;
+		}
+
+		return $ret;
+	}
+
 	function get_database_key($template_id, $atts) {
 
 		$ret = parent::get_database_key($template_id, $atts);
@@ -220,6 +231,10 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 		return null;
 	}
 	protected function get_dataload_query_args($template_id, $atts) {
+
+		return array();
+	}
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
 
 		return array();
 	}

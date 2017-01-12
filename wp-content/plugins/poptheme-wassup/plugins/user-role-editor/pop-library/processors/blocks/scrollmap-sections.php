@@ -198,6 +198,13 @@ class GD_URE_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templ
 				break;
 		}
 
+		return $ret;
+	}
+
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
+
+		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
+		
 		switch ($template_id) {
 
 			// Members of the Community

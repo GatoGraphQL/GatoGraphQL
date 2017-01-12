@@ -42,6 +42,11 @@ class GD_Template_CacheProcessor {
 			// $filename .= '-target_'.$target;
 			$filename .= '-'.$target;
 		}
+		if ($pagesection = $vars['pagesection']) {
+			
+			// $filename .= '-target_'.$target;
+			$filename .= '-'.$pagesection;
+		}
 		if ($tab = $vars['tab']) {
 			
 			// $filename .= '-tab_'.$tab;

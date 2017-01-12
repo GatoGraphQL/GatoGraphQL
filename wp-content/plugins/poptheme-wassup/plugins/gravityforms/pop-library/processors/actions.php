@@ -26,9 +26,12 @@ class GD_Template_Processor_GFActions extends GD_Template_Processor_ActionsBase 
 		);
 	}
 	
-	function get_data_setting($template_id, $atts) {
+	// Comment Leo 12/01/2017: make it runtime instead of static, since it needs to validate if the user is logged in
+	// function get_data_setting($template_id, $atts) {
+	function get_runtime_datasetting($template_id, $atts) {
 
-		$ret = parent::get_data_setting($template_id, $atts);
+		// $ret = parent::get_data_setting($template_id, $atts);
+		$ret = parent::get_runtime_datasetting($template_id, $atts);
 	
 		switch ($template_id) {
 				

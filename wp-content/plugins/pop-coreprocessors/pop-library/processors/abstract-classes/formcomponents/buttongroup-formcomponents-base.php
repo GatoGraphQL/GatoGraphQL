@@ -12,13 +12,6 @@ class GD_Template_Processor_ButtonGroupFormComponentsBase extends GD_Template_Pr
 		return GD_TEMPLATESOURCE_FORMCOMPONENT_BUTTONGROUP;
 	}
 
-	function is_multiple($template_id, $atts) {
-
-		// multiple == true => checkbox type
-		// multiple == false => radio type
-		return false;
-	}
-
 	function get_inputbtn_class($template_id, $atts) {
 
 		return 'btn btn-default';
@@ -27,6 +20,20 @@ class GD_Template_Processor_ButtonGroupFormComponentsBase extends GD_Template_Pr
 	function get_inputbtn_classes($template_id, $atts) {
 
 		return array();
+	}
+
+	function is_multiple($template_id, $atts) {
+
+		// multiple == true => checkbox type
+		// multiple == false => radio type
+		return false;
+	}
+
+	function get_compareby($template_id, $atts) {
+
+		// multiple == true => checkbox type
+		// multiple == false => radio type
+		return $this->is_multiple($template_id, $atts) ? 'in' : 'eq';
 	}
 
 	function get_template_configuration($template_id, $atts) {
@@ -52,14 +59,13 @@ class GD_Template_Processor_ButtonGroupFormComponentsBase extends GD_Template_Pr
 			// Add '[]' to the name, coming from the multiselect
 			$ret['name'] .= '[]';
 			$ret['type'] = 'checkbox';
-			$ret['compare-by'] = 'in';
 		}
 		else {
 
 			$ret['multiple'] = false;
 			$ret['type'] = 'radio';
-			$ret['compare-by'] = 'eq';
 		}
+		$ret['compare-by'] = $this->get_compareby($template_id, $atts);
 				
 		return $ret;
 	}

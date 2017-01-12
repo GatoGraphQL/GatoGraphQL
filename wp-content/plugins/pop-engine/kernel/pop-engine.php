@@ -255,15 +255,34 @@ class PoP_Engine {
 		}
 
 		$initial_atts = array();
-		$atts = $processor->init_atts($template_id, $initial_atts);
+		
+		// Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
+		// Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
+		// First check if there's a cache stored
+		if (!doing_post() && PoP_ServerUtils::use_cache()) {
+			
+			$atts = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_ATTS, true);
+
+			// If there is no cached one, generate the atts and cache it
+			if (!$atts) {
+
+				$atts = $processor->init_atts($template_id, $initial_atts);
+				$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_ATTS, $atts, true);
+			}
+		}
+		else {
+			$atts = $processor->init_atts($template_id, $initial_atts);
+		}
 				
 		// Templates: What templates must be executed after call to loadMore is back with data:
 		// CB: list of templates to merge
 		$cachedsettings = false;
 		if (in_array('settings', $output_items)) {
 
+			// Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
+			// Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
 			// First check if there's a cache stored
-			if (PoP_ServerUtils::use_cache()) {
+			if (!doing_post() && PoP_ServerUtils::use_cache()) {
 				
 				$settings = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SETTINGS);
 
@@ -392,7 +411,7 @@ class PoP_Engine {
 
 	private function get_data($toplevel_template_id, $toplevel_processor, $toplevel_atts, $formatter, $request = array()) {
 			
-		global $gd_template_processor_manager, $gd_dataload_manager, $gd_dataload_iohandle_manager, $gd_dataload_actionexecution_manager, $gd_dataquery_manager;
+		global $gd_template_processor_manager, $gd_dataload_manager, $gd_dataload_iohandle_manager, $gd_dataload_actionexecution_manager, $gd_dataquery_manager, $gd_template_cachemanager;
 
 		$vars = GD_TemplateManager_Utils::get_vars();
 
@@ -408,7 +427,28 @@ class PoP_Engine {
 		$subcomponent_data_fields = array();
 		$crawlable_data = array();
 
-		$data_settings = $toplevel_processor->get_data_settings($toplevel_template_id, $toplevel_atts);
+		// Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
+		// Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
+		// First check if there's a cache stored
+		if (!doing_post() && PoP_ServerUtils::use_cache()) {
+			
+			$static_datasettings = $gd_template_cachemanager->get_cache($toplevel_template_id, POP_CACHETYPE_DATASETTINGS, true);
+
+			// If there is no cached one, generate the atts and cache it
+			if (!$static_datasettings) {
+				$static_datasettings = $toplevel_processor->get_data_settings($toplevel_template_id, $toplevel_atts);
+				$gd_template_cachemanager->store_cache($toplevel_template_id, POP_CACHETYPE_DATASETTINGS, $static_datasettings, true);
+			}
+		}
+		else {
+			$static_datasettings = $toplevel_processor->get_data_settings($toplevel_template_id, $toplevel_atts);
+		}
+
+		$runtime_datasettings = $toplevel_processor->get_runtime_datasettings($toplevel_template_id, $toplevel_atts);
+		$data_settings = array_merge_recursive(
+			$static_datasettings,
+			$runtime_datasettings
+		);
 		$toplevel_settings_id = $toplevel_processor->get_settings_id($toplevel_template_id);
 
 		// Needed for topLevel feedback
@@ -531,9 +571,14 @@ class PoP_Engine {
 				);
 				
 				// Also include the filter
-				if ($filter_object = $block_atts['filter-object']) {
+				// if ($filter_object = $block_atts['filter-object']) {
 					
-					$dataload_atts[GD_DEFINITIONS_FILTEROBJECT] = $filter_object;
+				// 	$dataload_atts[GD_DEFINITIONS_FILTEROBJECT] = $filter_object;
+				// }	
+				if ($filter = $block_atts['filter']) {
+					
+					$filter_processor = $gd_template_processor_manager->get_processor($filter);
+					$dataload_atts[GD_DEFINITIONS_FILTEROBJECT] = $filter_processor->get_filter_object($filter);
 				}	
 
 				// The dataload-extend is independent of the dataloader of the block.

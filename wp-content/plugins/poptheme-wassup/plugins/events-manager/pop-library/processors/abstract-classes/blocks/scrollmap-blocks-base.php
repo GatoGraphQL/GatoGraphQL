@@ -66,20 +66,6 @@ class GD_EM_Template_Processor_ScrollMapBlocksBase extends GD_Template_Processor
 		return $ret;
 	}
 
-	// function get_data_setting($template_id, $atts) {
-
-	// 	$ret = parent::get_data_setting($template_id, $atts);
-
-	// 	// $format = GD_TEMPLATEFORMAT_MAP;
-	// 	// if ($format) {
-	// 	// 	$ret['iohandler-atts'][GD_URLPARAM_FORMAT] = $format;
-	// 	// }
-		
-	// 	$ret['iohandler-atts'][GD_URLPARAM_FORMAT] = GD_TEMPLATEFORMAT_MAP;
-
-	// 	return $ret;
-	// }
-
 	function get_map_direction($template_id, $atts) {
 
 		return 'vertical';

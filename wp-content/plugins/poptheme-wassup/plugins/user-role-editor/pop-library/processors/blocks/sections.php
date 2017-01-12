@@ -442,11 +442,6 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 
 		$ret = parent::get_dataload_query_args($template_id, $atts);
 		
-		$myposts_query_args = array(					
-			'author' => get_current_user_id(), // Logged-in author			
-			'post-status' => array('publish', 'draft', 'pending') // Any post type
-		);
-
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL:
@@ -489,6 +484,29 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 				break;
 		}
 
+		$fullviews = array(
+			GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW,
+
+			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW,
+
+			GD_TEMPLATE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW,
+		);
+
+		// Bring only 3 items for the fullview
+		if (in_array($template_id, $fullviews)) {
+			
+			$ret['limit'] = 6;
+		}
+
+		return $ret;
+	}
+
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
+
+		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
+		
 		switch ($template_id) {
 
 			// Members of the Community
@@ -523,22 +541,6 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 					);
 				}
 				break;
-		}
-
-		$fullviews = array(
-			GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW,
-			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW,
-			GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW,
-
-			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW,
-
-			GD_TEMPLATE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW,
-		);
-
-		// Bring only 3 items for the fullview
-		if (in_array($template_id, $fullviews)) {
-			
-			$ret['limit'] = 6;
 		}
 
 		return $ret;

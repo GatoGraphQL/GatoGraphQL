@@ -420,6 +420,24 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 		$ret = parent::get_dataload_query_args($template_id, $atts);
 		
+		// If they are horizontal, then bring all the results, until we fix how to place the load more button inside of the horizontal scrolling div
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
+
+				$ret['limit'] = '-1';
+				break;
+		}
+
+		return $ret;
+	}
+
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
+
+		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
+		
 		switch ($template_id) {
 
 			// Filter by the Profile/Community
@@ -466,17 +484,6 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
 
 				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_downvotedby($ret);
-				break;
-		}
-
-		// If they are horizontal, then bring all the results, until we fix how to place the load more button inside of the horizontal scrolling div
-		switch ($template_id) {
-
-			case GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
-			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
-			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
-
-				$ret['limit'] = '-1';
 				break;
 		}
 
@@ -740,8 +747,12 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP:
 			
 				// Search: don't bring anything unless we're filtering (no results initially)
-				global $gd_filter_manager;
-				$filter_object = $atts['filter-object'];
+				global $gd_template_processor_manager, $gd_filter_manager;
+				// $filter_object = $atts['filter-object'];
+				if ($filter = $atts['filter']) {
+					$filter_processor = $gd_template_processor_manager->get_processor($filter);
+					$filter_object = $filter_processor->get_filter_object($filter);
+				}
 				if (!$gd_filter_manager->filteringby($filter_object)) {
 
 					$this->add_att($template_id, $atts, 'data-load', false);						

@@ -7,6 +7,8 @@
 
 define ('POP_CACHE_EXT', '.json');
 define ('POP_CACHETYPE_SETTINGS', 'settings');
+define ('POP_CACHETYPE_DATASETTINGS', 'data-settings');
+define ('POP_CACHETYPE_ATTS', 'atts');
 
 class GD_Template_CacheManager {
 
@@ -26,12 +28,17 @@ class GD_Template_CacheManager {
 
 	function install() {
 
-		$cachesettings_dir = POP_CACHE_DIR.'/'.POP_CACHETYPE_SETTINGS;
+		$this->restore($this->get_cache_dir(POP_CACHETYPE_SETTINGS));
+		$this->restore($this->get_cache_dir(POP_CACHETYPE_DATASETTINGS));
+		$this->restore($this->get_cache_dir(POP_CACHETYPE_ATTS));
+	}
 
-		if (file_exists($cachesettings_dir)) {
+	function restore($cache_dir) {
+
+		if (file_exists($cache_dir)) {
 			
 			// Delete all cached files
-			foreach(glob("{$cachesettings_dir}/*") as $file) {
+			foreach(glob("{$cache_dir}/*") as $file) {
 				if (is_file($file)) {
 					unlink($file);
 				}
@@ -44,22 +51,27 @@ class GD_Template_CacheManager {
 		// }
 	}
 
-	function get_cache_dir() {
+	private function get_cache_dir($type) {
 
-		return POP_CACHE_DIR.'/'.POP_CACHETYPE_SETTINGS;
+		return POP_CACHE_DIR.'/'.$type;
 	}
 
-	function create_cache_dir() {
+	private function get_file($filename, $type) {
 
-		$cachesettings_dir = $this->get_cache_dir();
-		if (!file_exists($cachesettings_dir)) {
+		return $this->get_cache_dir($type).'/'.$filename.POP_CACHE_EXT;
+	}
+
+	function create_cache_dir($type) {
+
+		$cache_dir = $this->get_cache_dir($type);
+		if (!file_exists($cache_dir)) {
 			
 			// Create the settings folder
-			@mkdir($cachesettings_dir, 0777, true);
+			@mkdir($cache_dir, 0777, true);
 		}			
 	}
 
-	function get_cache($template_id, $type) {
+	function get_cache($template_id, $type, $decode = false) {
 
 		global $gd_template_cacheprocessor_manager;
 		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
@@ -77,41 +89,52 @@ class GD_Template_CacheManager {
 				// Replace the placeholder for the uniqueId with the current uniqueId
 				$contents = str_replace(POP_CONSTANT_UNIQUE_ID_CACHEPLACEHOLDER, POP_CONSTANT_UNIQUE_ID, $contents);
 
-				return $contents;
+				if ($decode) {
+					// Treat it as an array, not an object
+					$contents_or_object = json_decode($contents, true);
+				}
+				else {
+					$contents_or_object = $contents;
+				}
+
+				return $contents_or_object;
 			}
 		}
 
 		return false;
 	}
 
-	function store_cache($template_id, $type, $contents) {
+	function store_cache($template_id, $type, $contents_or_object, $encode = false) {
 
 		global $gd_template_cacheprocessor_manager;
 		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
 		
 			return false;
 		}
+
 		if ($filename = $processor->get_cache_filename($template_id)) {
 
 			$file = $this->get_file($filename, $type);
-			$this->save_file($file, $contents);
+
+			if ($encode) {
+				$contents = json_encode($contents_or_object);
+			}
+			else {
+				$contents = $contents_or_object;
+			}
+			$this->save_file($type, $file, $contents);
 		}
 
 		return false;
 	}
 
-	private function get_file($filename, $type) {
-
-		return POP_CACHE_DIR.'/'.$type.'/'.$filename.POP_CACHE_EXT;
-	}
-
-	private function save_file($file, $contents) {
+	private function save_file($type, $file, $contents) {
 
 		// Replace the uniqueId with the placeholder to keep the saved settings uniqueId-independent
 		$contents = str_replace(POP_CONSTANT_UNIQUE_ID, POP_CONSTANT_UNIQUE_ID_CACHEPLACEHOLDER, $contents);
 
 		// Make sure the directory exists
-		$this->create_cache_dir();
+		$this->create_cache_dir($type);
 
 		// Open the file, write content and close it
 		$handle = fopen($file, "wb");

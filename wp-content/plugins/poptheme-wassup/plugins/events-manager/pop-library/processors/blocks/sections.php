@@ -810,6 +810,50 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 
 		$ret = parent::get_dataload_query_args($template_id, $atts);
 		
+		$simpleviews = array(
+			GD_TEMPLATE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW,
+			
+			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
+			
+			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW,
+			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW,
+			
+			GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+			GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
+		);
+		$fullviews = array(
+			GD_TEMPLATE_BLOCK_EVENTS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_FULLVIEW,
+			
+			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
+			
+			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW,
+			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW,
+			
+			GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW,
+			GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW,
+		);
+		$carousels = array(
+			GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL,
+			GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL,
+			GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL,
+		);
+
+		if (in_array($template_id, $simpleviews) || in_array($template_id, $fullviews) || in_array($template_id, $carousels)) {
+			
+			$ret['limit'] = 6;
+		}
+
+		return $ret;
+	}
+
+	protected function get_runtime_dataload_query_args($template_id, $atts) {
+
+		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
+		
 		$myevents_query_args = array(
 			'author' => get_current_user_id(),
 			'status' => 'all' // Any post type
@@ -877,47 +921,6 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 				// PoPCore_Template_Processor_SectionBlocksUtils::add_dataloadqueryargs_allcontent_bysingletag($ret);
 				break;
 		}
-
-		$simpleviews = array(
-			GD_TEMPLATE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW,
-			GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW,
-			
-			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
-			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
-			
-			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW,
-			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW,
-			
-			GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
-			GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW,
-		);
-		$fullviews = array(
-			GD_TEMPLATE_BLOCK_EVENTS_SCROLL_FULLVIEW,
-			GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_FULLVIEW,
-			
-			GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW,
-			GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
-			
-			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW,
-			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW,
-			
-			GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW,
-			GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW,
-		);
-		$carousels = array(
-			GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL,
-			GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL,
-			GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL,
-		);
-
-		if (in_array($template_id, $simpleviews) || in_array($template_id, $fullviews) || in_array($template_id, $carousels)) {
-			
-			$ret['limit'] = 6;
-		}
-		// elseif (in_array($template_id, $fullviews)) {
-			
-		// 	$ret['limit'] = 3;
-		// }
 
 		return $ret;
 	}

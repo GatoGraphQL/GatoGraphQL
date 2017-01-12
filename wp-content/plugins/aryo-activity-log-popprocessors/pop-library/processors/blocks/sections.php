@@ -201,9 +201,6 @@ class AAL_PoPProcessors_Template_Processor_SectionBlocks extends GD_Template_Pro
 				$notifications_query_args = array(
 					'limit' => get_option('posts_per_page') * 2,
 				);
-				// if (is_user_logged_in()) {
-				// 	$notifications_query_args['user_id'] = get_current_user_id();
-				// }
 				
 				$ret = array_merge(
 					$ret,

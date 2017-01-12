@@ -134,6 +134,11 @@ class PoP_ProcessorBase {
 		return array();
 	}
 
+	function get_runtime_datafields($template_id, $atts) {
+	
+		return array();
+	}
+
 	function get_dataload_extend($template_id, $atts) {
 	
 		return null;
@@ -203,7 +208,7 @@ class PoP_ProcessorBase {
 		);
 
 		// If this level has data-fields, add them
-		if ($data_fields = $this->get_compiled_data_fields($template_id, $atts)) {
+		if ($data_fields = $this->get_compiled_data_fields(/*'static', */$template_id, $atts)) {
 
 			$ret['data-fields'] = $data_fields;
 		}
@@ -217,6 +222,31 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
+	function get_runtime_datasetting($template_id, $atts) {
+
+		// By default return nothing at the last level
+		$ret = array(
+			// 'data-fields' => array()
+		);
+
+		// If this level has data-fields, add them
+		// if ($data_fields = $this->get_compiled_data_fields('runtime', $template_id, $atts)) {
+		if ($data_fields = $this->get_runtime_datafields($template_id, $atts)) {
+
+			$ret['data-fields'] = $data_fields;
+		}
+
+		// Comment Leo 12/01/2017: I still don't see an use fo the $dataload_extend for runtime_datasettings,
+		// so do nothing for the time being until need arises
+		// // If this level has dataload-extend, add it
+		// if ($dataload_extend = $this->get_dataload_extend($template_id, $atts)) {
+
+		// 	$ret['dataload-extend'] = $dataload_extend;
+		// }
+
+		return $ret;
+	}
+
 	function get_data_settings($template_id, $atts) {
 	
 		// It is built in stages so that they can be customized by different templates
@@ -224,10 +254,25 @@ class PoP_ProcessorBase {
 		$ret = $this->get_data_setting($template_id, $atts);
 
 		// Propagate down to the components
-		$ret = $this->propagate_data_settings_components($ret, $template_id, $atts);
+		$ret = $this->propagate_data_settings_components('static', $ret, $template_id, $atts);
 
 		// Propagate down to the subcomponent modules
-		$ret = $this->propagate_data_settings_subcomponent_modules($ret, $template_id, $atts);
+		$ret = $this->propagate_data_settings_subcomponent_modules('static', $ret, $template_id, $atts);
+		
+		return $ret;
+	}
+
+	function get_runtime_datasettings($template_id, $atts) {
+	
+		// It is built in stages so that they can be customized by different templates
+		// Eg: Typeahead doesn't need to propagate components
+		$ret = $this->get_runtime_datasetting($template_id, $atts);
+
+		// Propagate down to the components
+		$ret = $this->propagate_data_settings_components('runtime', $ret, $template_id, $atts);
+
+		// Propagate down to the subcomponent modules
+		$ret = $this->propagate_data_settings_subcomponent_modules('runtime', $ret, $template_id, $atts);
 		
 		return $ret;
 	}
@@ -428,55 +473,91 @@ class PoP_ProcessorBase {
 
 	protected function get_compiled_data_fields($template_id, $atts) {
 	
-		// Return the data-fields as coming from all different sources (eg: Subcomponent modules keys are also data-fields)
 		$data_fields = $this->get_data_fields($template_id, $atts);
+		
+		// Make sure to always return the 'id'			
+		$base = array('id'); 
+
+		// Return the data-fields as coming from all different sources (eg: Subcomponent modules keys are also data-fields)
 		$subcomponent_modules_data_fields = array_keys($this->get_subcomponent_modules($template_id));
 
 		return array_merge(
-			array(
-				'id' // Make sure to always return the 'id'
-			),
+			$base,
 			$data_fields,
 			$subcomponent_modules_data_fields
 		);
 	}
 
-	protected function propagate_data_settings_components(&$ret, $template_id, $atts) {
+	// protected function get_compiled_data_fields($mode, $template_id, $atts) {
+	
+	// 	$data_fields = $base = $subcomponent_modules_data_fields = array();
+	// 	if ($mode == 'static') {
+
+	// 		$data_fields = $this->get_data_fields($template_id, $atts);
+			
+	// 		// Make sure to always return the 'id'			
+	// 		$base[] = 'id'; 
+
+	// 		// Return the data-fields as coming from all different sources (eg: Subcomponent modules keys are also data-fields)
+	// 		$subcomponent_modules_data_fields = array_keys($this->get_subcomponent_modules($template_id));
+	// 	}
+	// 	elseif ($mode == 'runtime') {
+
+	// 		$data_fields = $this->get_runtime_datafields($template_id, $atts);
+	// 	}
+
+	// 	return array_merge(
+	// 		$base,
+	// 		$data_fields,
+	// 		$subcomponent_modules_data_fields
+	// 	);
+	// }
+
+	protected function propagate_data_settings_components($mode, &$ret, $template_id, $atts) {
 	
 		global $gd_template_processor_manager;
 		
 		// Exclude the subcomponent modules here
 		foreach ($this->get_modulecomponents($template_id, array('modules'/*, 'decorated-template'*/)) as $component) {
 
-			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_data_settings($component, $atts)) {
+			if ($mode == 'static') {
+				$component_ret = $gd_template_processor_manager->get_processor($component)->get_data_settings($component, $atts);
+			}
+			elseif ($mode == 'runtime') {
+				$component_ret = $gd_template_processor_manager->get_processor($component)->get_runtime_datasettings($component, $atts);
+			}
+			if ($component_ret) {
 
-				// Dataloader must be unique, so set only once (if set more than once, they must be the same!)
-				if ($ret['dataloader'] && $component_ret['dataloader']) {
-					
-					// They must be the same, if not, raise exception
-					if ($ret['dataloader'] != $component_ret['dataloader']) {
-						throw new Exception('Different dataloaders!');
+				if ($mode == 'static') {
+
+					// Dataloader must be unique, so set only once (if set more than once, they must be the same!)
+					if ($ret['dataloader'] && $component_ret['dataloader']) {
+						
+						// They must be the same, if not, raise exception
+						if ($ret['dataloader'] != $component_ret['dataloader']) {
+							throw new Exception('Different dataloaders!');
+						}
+
+						// Delete so it can be copied again when doing merge (otherwise, it creates an array)
+						unset($ret['dataloader']);
 					}
+					// Do the same for its subcomponents
+					if ($ret['subcomponents'] && $component_ret['subcomponents']) {
 
-					// Delete so it can be copied again when doing merge (otherwise, it creates an array)
-					unset($ret['dataloader']);
-				}
-				// Do the same for its subcomponents
-				if ($ret['subcomponents'] && $component_ret['subcomponents']) {
+						foreach ($ret['subcomponents'] as $subcomponent => $subcomponent_settings) {
 
-					foreach ($ret['subcomponents'] as $subcomponent => $subcomponent_settings) {
+							if ($component_ret['subcomponents'][$subcomponent]) {
 
-						if ($component_ret['subcomponents'][$subcomponent]) {
+								if ($ret['subcomponents'][$subcomponent]['dataloader'] && $component_ret['subcomponents'][$subcomponent]['dataloader']) {
 
-							if ($ret['subcomponents'][$subcomponent]['dataloader'] && $component_ret['subcomponents'][$subcomponent]['dataloader']) {
+									// They must be the same, if not, raise exception
+									if ($ret['subcomponents'][$subcomponent]['dataloader'] != $component_ret['subcomponents'][$subcomponent]['dataloader']) {
+										throw new Exception('Different dataloaders! Subcomponent: ' . $subcomponent . ' Dataloaders: ' . $ret['subcomponents'][$subcomponent]['dataloader'] . ' and ' . $component_ret['subcomponents'][$subcomponent]['dataloader']);
+									}
 
-								// They must be the same, if not, raise exception
-								if ($ret['subcomponents'][$subcomponent]['dataloader'] != $component_ret['subcomponents'][$subcomponent]['dataloader']) {
-									throw new Exception('Different dataloaders! Subcomponent: ' . $subcomponent . ' Dataloaders: ' . $ret['subcomponents'][$subcomponent]['dataloader'] . ' and ' . $component_ret['subcomponents'][$subcomponent]['dataloader']);
+									// Delete so it can be copied again when doing merge (otherwise, it creates an array)
+									unset($ret['subcomponents'][$subcomponent]['dataloader']);
 								}
-
-								// Delete so it can be copied again when doing merge (otherwise, it creates an array)
-								unset($ret['subcomponents'][$subcomponent]['dataloader']);
 							}
 						}
 					}
@@ -501,12 +582,14 @@ class PoP_ProcessorBase {
 			}
 		}
 		// Array Merge appends values when under numeric keys, so we gotta filter duplicates out
-		$ret['data-fields'] = array_unique($ret['data-fields']);
+		if ($ret['data-fields']) {
+			$ret['data-fields'] = array_unique($ret['data-fields']);
+		}
 
 		return $ret;
 	}
 
-	protected function propagate_data_settings_subcomponent_modules(&$ret, $template_id, $atts) {
+	protected function propagate_data_settings_subcomponent_modules($mode, &$ret, $template_id, $atts) {
 	
 		global $gd_template_processor_manager;
 		
@@ -524,12 +607,19 @@ class PoP_ProcessorBase {
 			);
 			foreach ($subcomponent_modules as $subcomponent_module) {
 
-				$subcomponent_module_data_settings = $gd_template_processor_manager->get_processor($subcomponent_module)->get_data_settings($subcomponent_module, $atts);
-
-				$subcomponent_modules_data_settings = array_merge_recursive(
-					$subcomponent_modules_data_settings,
-					$subcomponent_module_data_settings
-				);
+				if ($mode == 'static') {
+					$subcomponent_module_data_settings = $gd_template_processor_manager->get_processor($subcomponent_module)->get_data_settings($subcomponent_module, $atts);
+				}
+				elseif ($mode == 'runtime') {
+					$subcomponent_module_data_settings = $gd_template_processor_manager->get_processor($subcomponent_module)->get_runtime_datasettings($subcomponent_module, $atts);
+				}				
+				// $subcomponent_module_data_settings = $gd_template_processor_manager->get_processor($subcomponent_module)->get_data_settings($subcomponent_module, $atts);
+				if ($subcomponent_module_data_settings) {
+					$subcomponent_modules_data_settings = array_merge_recursive(
+						$subcomponent_modules_data_settings,
+						$subcomponent_module_data_settings
+					);
+				}
 			}
 			$subcomponent_modules_data_settings['data-fields'] = array_unique($subcomponent_modules_data_settings['data-fields']);
 			
@@ -539,9 +629,11 @@ class PoP_ProcessorBase {
 
 				$ret['subcomponents'][$subcomponent_id_field] = array(
 					'data-fields' => array(),
-					'dataloader' => $subcomponent_dataloader_name,
-					'subcomponents' => array()
+					'subcomponents' => array(),
 				);
+				if ($mode == 'static') {
+					$ret['subcomponents'][$subcomponent_id_field]['dataloader'] = $subcomponent_dataloader_name;
+				}
 			}
 			
 			$ret['subcomponents'][$subcomponent_id_field]['data-fields'] = array_unique(
@@ -566,12 +658,14 @@ class PoP_ProcessorBase {
 				if ($subcomponent_settings['subcomponents']) {
 					foreach ($subcomponent_settings['subcomponents'] as $subcomponent_subcomponent => $subcomponent_subcomponent_settings) {
 
-						if (is_array($subcomponent_subcomponent_settings['dataloader'])) {
-							$subcomponent_subcomponent_settings_dataloader_names = array_unique($subcomponent_subcomponent_settings['dataloader']);
-							if (count($subcomponent_subcomponent_settings_dataloader_names) > 1) {
-								throw new Exception('Different dataloaders!');
+						if ($mode == 'static') {
+							if (is_array($subcomponent_subcomponent_settings['dataloader'])) {
+								$subcomponent_subcomponent_settings_dataloader_names = array_unique($subcomponent_subcomponent_settings['dataloader']);
+								if (count($subcomponent_subcomponent_settings_dataloader_names) > 1) {
+									throw new Exception('Different dataloaders!');
+								}
+								$ret['subcomponents'][$subcomponent]['subcomponents'][$subcomponent_subcomponent]['dataloader'] = $subcomponent_subcomponent_settings_dataloader_names[0];
 							}
-							$ret['subcomponents'][$subcomponent]['subcomponents'][$subcomponent_subcomponent]['dataloader'] = $subcomponent_subcomponent_settings_dataloader_names[0];
 						}
 						$subcomponent_subcomponent_settings['data-fields'] = array_unique($subcomponent_subcomponent_settings['data-fields']);
 					}
