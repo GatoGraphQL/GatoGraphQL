@@ -337,24 +337,24 @@ popFunctions = {
 		});
 	},
 
-	embedCode : function(args) {
+	// embedCode : function(args) {
 
-		var t = this;
+	// 	var t = this;
 
-		var targets = args.targets;
-		targets.each(function() {
+	// 	var targets = args.targets;
+	// 	targets.each(function() {
 
-			var input = $(this);
-			var modal = input.closest('.modal');
-			modal.on('show.bs.modal', function(e) {
+	// 		var input = $(this);
+	// 		var modal = input.closest('.modal');
+	// 		modal.on('show.bs.modal', function(e) {
 
-				var link = $(e.relatedTarget);
-				var url = t.getUrl(link, true);
-				url = popManager.getEmbedUrl(url);
-				t.execReplaceCode(input, url);
-			});
-		});
-	},
+	// 			var link = $(e.relatedTarget);
+	// 			var url = t.getUrl(link, true);
+	// 			url = popManager.getEmbedUrl(url);
+	// 			t.execReplaceCode(input, url);
+	// 		});
+	// 	});
+	// },
 
 	modalReloadEmbedPreview : function(args) {
 
@@ -365,12 +365,28 @@ popFunctions = {
 
 			var iframe = $(this);
 			var block = popManager.getBlock(iframe);
+
+			// Embed is the default urlType, but API also enabled
+			var jsSettings = popManager.getJsSettings(pageSection, block, iframe);
+			var urlType = jsSettings['url-type'] || 'embed';
 			var modal = block.closest('.modal');
 			modal.on('show.bs.modal', function(e) {
 
+				// Important: once the modal opens, we need to find the iframe again, because the iframe
+				// object will change all the time, being regenerated in function embedPreview
+				// So the original iframe will be used only once, on the first execution, and never again
+				if (block.data('embed-iframe')) {
+					iframe = $(block.data('embed-iframe'));
+				}
+
 				var link = $(e.relatedTarget);
 				var url = t.getUrl(link, true);
-				url = popManager.getEmbedUrl(url);
+				if (urlType == 'embed') {
+					url = popManager.getEmbedUrl(url);
+				}
+				else if (urlType == 'api') {
+					url = popManager.getAPIUrl(url);
+				}
 				t.embedPreview(pageSection, block, iframe, url);
 			});
 		});
@@ -400,15 +416,30 @@ popFunctions = {
 
 		var t = this;
 
-		var targets = args.targets;
+		var pageSection = args.pageSection, targets = args.targets;
 		targets.each(function() {
 
 			var input = $(this);
+			var block = popManager.getBlock(input);
+			
+			// Default: Copy Search URL (ie: do nothing else to the url)
+			var jsSettings = popManager.getJsSettings(pageSection, block, input);
+			var urlType = jsSettings['url-type'] || '';
 			var modal = input.closest('.modal');
 			modal.on('show.bs.modal', function(e) {
 
 				var link = $(e.relatedTarget);
-				t.execReplaceCode(input, t.getUrl(link));
+				var url = t.getUrl(link);
+
+				// Maybe the URL type is none, then leave the URL as it is (eg: Copy Search URL),
+				// or it may need to add extra params, like embed or api
+				if (urlType == 'embed') {
+					url = popManager.getEmbedUrl(url);
+				}
+				else if (urlType == 'api') {
+					url = popManager.getAPIUrl(url);
+				}
+				t.execReplaceCode(input, url);
 			});
 		});
 	},
@@ -705,6 +736,10 @@ popFunctions = {
 		var merged = popManager.mergeTargetTemplate(pageSection, block, template, options);
 		popManager.runJSMethods(pageSection, block, template, 'full');
 
+		// Set the new iframe id on the block
+		var iframeid = popJSRuntimeManager.getLastGeneratedId(popManager.getSettingsId(pageSection), popManager.getSettingsId(block), template);
+		block.data('embed-iframe', '#'+iframeid);
+
 		return merged;
 	},
 
@@ -775,4 +810,4 @@ popFunctions = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popFunctions, ['expandJSKeys', 'showmore', 'hideEmpty', 'imageResponsive', 'printWindow', 'copyHeader', 'fillURLParamInput', 'fillAddonInput', 'fillModalInput', 'fillAddonURLInput', 'fillModalURLInput', 'switchTargetClass', 'doNothing', 'fetchMore', 'fetchMoreDisable', 'saveLastClicked', 'retrySendRequest', 'highlight', 'replaceCode', 'modalReloadEmbedPreview', 'reloadEmbedPreview', 'embedCode', 'socialmedia', 'mediaplayer', 'reset', 'browserUrl', 'smallScreenHideCollapse', 'cookies', 'cookieToggleClass', 'sortable', 'onActionThenClick', 'beep']);
+popJSLibraryManager.register(popFunctions, ['expandJSKeys', 'showmore', 'hideEmpty', 'imageResponsive', 'printWindow', 'copyHeader', 'fillURLParamInput', 'fillAddonInput', 'fillModalInput', 'fillAddonURLInput', 'fillModalURLInput', 'switchTargetClass', 'doNothing', 'fetchMore', 'fetchMoreDisable', 'saveLastClicked', 'retrySendRequest', 'highlight', 'replaceCode', 'modalReloadEmbedPreview', 'reloadEmbedPreview'/*, 'embedCode'*/, 'socialmedia', 'mediaplayer', 'reset', 'browserUrl', 'smallScreenHideCollapse', 'cookies', 'cookieToggleClass', 'sortable', 'onActionThenClick', 'beep']);

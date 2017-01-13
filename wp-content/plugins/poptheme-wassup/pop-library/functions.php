@@ -24,6 +24,7 @@ function get_custom_unique_blockgroups($blockgroups) {
 
 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL;
 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL;
+	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_API_MODAL;
 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL;
 
 	return $blockgroups;

@@ -43,6 +43,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['$defaultLocale'] = $this->get_default_locale();
         $configuration['$outputJSON'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
         $configuration['$origins'] = PoP_Frontend_ServerUtils::get_allowed_urls();
+        $configuration['$cacheBustParam'] = POP_SW_URLPARAM_CACHEBUST;
 
         // Thememodes for the appshell
         global $gd_theme_manager;

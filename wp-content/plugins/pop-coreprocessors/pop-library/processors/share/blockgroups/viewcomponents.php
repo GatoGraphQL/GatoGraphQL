@@ -5,6 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 define ('GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL', PoP_ServerUtils::get_template_definition('blockgroup-embed-modal'));
+define ('GD_TEMPLATE_BLOCKGROUP_API_MODAL', PoP_ServerUtils::get_template_definition('blockgroup-api-modal'));
 define ('GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL', PoP_ServerUtils::get_template_definition('blockgroup-copysearchurl-modal'));
 
 class GD_Template_Processor_ShareModalBlockGroups extends GD_Template_Processor_FormModalViewComponentBlockGroupsBase {
@@ -13,6 +14,7 @@ class GD_Template_Processor_ShareModalBlockGroups extends GD_Template_Processor_
 	
 		return array(
 			GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL,
+			GD_TEMPLATE_BLOCKGROUP_API_MODAL,
 			GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL,
 		);
 	}
@@ -25,6 +27,12 @@ class GD_Template_Processor_ShareModalBlockGroups extends GD_Template_Processor_
 
 				return array(
 					GD_TEMPLATE_BLOCK_EMBED
+				);
+
+			case GD_TEMPLATE_BLOCKGROUP_API_MODAL:
+
+				return array(
+					GD_TEMPLATE_BLOCK_API
 				);
 
 			case GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL:
@@ -45,6 +53,10 @@ class GD_Template_Processor_ShareModalBlockGroups extends GD_Template_Processor_
 
 				return __('Embed:', 'pop-coreprocessors');
 
+			case GD_TEMPLATE_BLOCKGROUP_API_MODAL:
+
+				return __('API Data:', 'pop-coreprocessors');
+
 			case GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL:
 
 				return __('Copy Search URL:', 'pop-coreprocessors');
@@ -60,6 +72,10 @@ class GD_Template_Processor_ShareModalBlockGroups extends GD_Template_Processor_
 			case GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL:
 
 				return 'fa-code';
+
+			case GD_TEMPLATE_BLOCKGROUP_API_MODAL:
+
+				return 'fa-cog';
 		
 			case GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL:
 
@@ -74,11 +90,18 @@ class GD_Template_Processor_ShareModalBlockGroups extends GD_Template_Processor_
 		switch ($blockgroup) {
 
 			case GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL:
+			case GD_TEMPLATE_BLOCKGROUP_API_MODAL:
+
+				$urlTypes = array(
+					GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL => 'embed',
+					GD_TEMPLATE_BLOCKGROUP_API_MODAL => 'api',
+				);
 
 				// Since we're in a modal, make the embedPreview get reloaded when opening the modal
 				$this->merge_pagesection_jsmethod_att(GD_TEMPLATE_LAYOUT_EMBEDPREVIEW, $blockgroup_block_atts, array('modalReloadEmbedPreview'));
 				$this->add_att(GD_TEMPLATE_LAYOUT_EMBEDPREVIEW, $blockgroup_block_atts, 'template-cb', true);
 				$this->append_att(GD_TEMPLATE_LAYOUT_EMBEDPREVIEW, $blockgroup_block_atts, 'class', GD_TEMPLATE_LAYOUT_EMBEDPREVIEW.' pop-merge');
+				$this->add_att(GD_TEMPLATE_LAYOUT_EMBEDPREVIEW, $blockgroup_block_atts, 'url-type', $urlTypes[$blockgroup]);
 				break;
 		}
 

@@ -60,6 +60,7 @@ class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor
 				$ret[] = GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL;
 				$ret[] = GD_TEMPLATE_ANCHORCONTROL_EMBED;
 				$ret[] = GD_TEMPLATE_ANCHORCONTROL_PRINT;
+				$ret[] = GD_TEMPLATE_ANCHORCONTROL_API;
 				break;
 
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_PAGEWITHSIDEOPTIONS:

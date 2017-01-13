@@ -12,6 +12,7 @@ define ('GD_TEMPLATE_ANCHORCONTROL_CURRENTURL', PoP_ServerUtils::get_template_de
 define ('GD_TEMPLATE_ANCHORCONTROL_SUBMENUTOGGLE_XS', PoP_ServerUtils::get_template_definition('anchorcontrol-submenutoggle-xs'));
 define ('GD_TEMPLATE_ANCHORCONTROL_PRINT', PoP_ServerUtils::get_template_definition('anchorcontrol-print'));
 define ('GD_TEMPLATE_ANCHORCONTROL_EMBED', PoP_ServerUtils::get_template_definition('anchorcontrol-embed'));
+define ('GD_TEMPLATE_ANCHORCONTROL_API', PoP_ServerUtils::get_template_definition('anchorcontrol-api'));
 define ('GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('anchorcontrol-copysearchurl'));
 define ('GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL', PoP_ServerUtils::get_template_definition('anchorcontrol-sharebyemail'));
 define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('anchorcontrol-invitenewusers'));
@@ -38,6 +39,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			GD_TEMPLATE_ANCHORCONTROL_SUBMENUTOGGLE_XS,
 			GD_TEMPLATE_ANCHORCONTROL_PRINT,
 			GD_TEMPLATE_ANCHORCONTROL_EMBED,
+			GD_TEMPLATE_ANCHORCONTROL_API,
 			GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL,
 			GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL,
 			GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS,
@@ -81,6 +83,10 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			case GD_TEMPLATE_ANCHORCONTROL_EMBED:
 
 				return __('Embed', 'pop-coreprocessors');
+
+			case GD_TEMPLATE_ANCHORCONTROL_API:
+
+				return __('API Data', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL:
 
@@ -191,6 +197,10 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 
 				return 'fa-code';
 
+			case GD_TEMPLATE_ANCHORCONTROL_API:
+
+				return 'fa-cog';
+
 			case GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL:
 
 				return 'fa-link';
@@ -263,11 +273,13 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				return get_permalink(POP_COREPROCESSORS_PAGE_INVITENEWUSERS);
 
 			case GD_TEMPLATE_ANCHORCONTROL_EMBED:
+			case GD_TEMPLATE_ANCHORCONTROL_API:
 			case GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL:
 			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
 
 				$modals = array(
 					GD_TEMPLATE_ANCHORCONTROL_EMBED => GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL,
+					GD_TEMPLATE_ANCHORCONTROL_API => GD_TEMPLATE_BLOCKGROUP_API_MODAL,
 					GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL => GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL,
 					GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL => GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL,
 				);
@@ -386,6 +398,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				break;
 
 			case GD_TEMPLATE_ANCHORCONTROL_EMBED:
+			case GD_TEMPLATE_ANCHORCONTROL_API:
 			case GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL:
 			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
 

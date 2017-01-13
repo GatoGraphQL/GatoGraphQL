@@ -8,6 +8,21 @@
 
 define ('POP_SW_URLPARAM_NETWORKFIRST', 'sw-networkfirst');
 
+/** 
+ * Important: this same value must be set in the .htaccess to make an internal redirect, so the cache bust parameter
+ * is ignored when doing the request, so allowing WP Super Cache to return a cached version
+ * .htaccess code:
+ * 
+ * 	# case: leading and trailing parameters
+ * 	RewriteCond %{QUERY_STRING} ^(.+)&sw-cachebust=[0-9a-z]+&(.+)$ [NC]
+ * 	RewriteRule (.*) /$1?%1&%2 [L]
+ * 	# case: leading-only, trailing-only or no additional parameters
+ * 	RewriteCond %{QUERY_STRING} ^(.+)&sw-cachebust=[0-9a-z]+$|^cachebust=[0-9a-z]+&?(.*)$ [NC]
+ * 	RewriteRule (.*) /$1?%1 [L]
+ * 
+ */
+define ('POP_SW_URLPARAM_CACHEBUST', 'sw-cachebust');
+
 add_filter('gd_jquery_constants', 'pop_sw_jquery_constants');
 function pop_sw_jquery_constants($jquery_constants) {
 

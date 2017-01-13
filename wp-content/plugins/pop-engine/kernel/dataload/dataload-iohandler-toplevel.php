@@ -49,7 +49,10 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 
 			if ($datastructure = $vars[GD_URLPARAM_DATASTRUCTURE]) {
 				$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_DATASTRUCTURE] = $datastructure;
-			}	
+			}
+			if ($idformat = $vars[POP_URLPARAM_IDFORMAT]) {
+				$ret[GD_DATALOAD_PARAMS][POP_URLPARAM_IDFORMAT] = $idformat;
+			}
 
 			// Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
 			if (!$main_vars['theme-isdefault']) {

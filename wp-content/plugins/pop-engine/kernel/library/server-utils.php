@@ -5,6 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('POP_URLPARAM_IDFORMAT', 'idformat');
+define ('POP_URLPARAM_IDFORMAT_ORIGINAL', 'original');
+define ('POP_URLPARAM_IDFORMAT_SHORT', 'short');
+
 class PoP_ServerUtils {
 
 	// Counter: cannot start with a number, or the id will get confused
@@ -16,6 +20,15 @@ class PoP_ServerUtils {
 	 * Instead of using the name of the $template_id, we use a unique number in base 36, so the name will occupy much lower size
 	 */
 	public static function get_template_definition($template_id, $mirror = false) {
+
+		// If passing param idformat=original then keep it as it is. Needed for the Embed, so that the user gets the real stuff
+		// Coment Leo 13/01/2017: get_vars() can't function properly since it references objects which have not been initialized yet,
+		// when called at the very beginning. So then access the request directly
+		// $vars = GD_TemplateManager_Utils::get_vars();
+		// if ($vars['idformat'] == POP_URLPARAM_IDFORMAT_ORIGINAL) {
+		if ($_REQUEST[POP_URLPARAM_IDFORMAT] == POP_URLPARAM_IDFORMAT_ORIGINAL) {
+			return $template_id;
+		}
 
 		// Mirror: it simply returns the $template_id again. It confirms in the code that this decision is deliberate 
 		// (not calling function get_template_definition could also be that the developer forgot about it)

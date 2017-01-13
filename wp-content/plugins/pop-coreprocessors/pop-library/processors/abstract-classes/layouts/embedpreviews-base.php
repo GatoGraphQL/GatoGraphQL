@@ -25,6 +25,19 @@ class GD_Template_Processor_EmbedPreviewLayoutsBase extends GD_Template_Processo
 		return '400';
 	}
 
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		// For if executing JS method `modalReloadEmbedPreview`, eg: set by a parent template, such as GD_TEMPLATE_BLOCKGROUP_API_MODAL
+		if ($urlType = $this->get_att($template_id, $atts, 'url-type')) {
+			
+			$ret['url-type'] = $urlType;
+		}
+
+		return $ret;
+	}
+
 	function get_template_configuration($template_id, $atts) {
 	
 		$ret = parent::get_template_configuration($template_id, $atts);	

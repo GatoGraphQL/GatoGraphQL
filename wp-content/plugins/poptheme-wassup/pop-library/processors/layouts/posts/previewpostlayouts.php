@@ -317,7 +317,7 @@ class GD_Template_Processor_CustomPreviewPostLayouts extends GD_Template_Process
 
 			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
 
-				$ret[] = GD_TEMPLATE_LAYOUT_REFERENCES_ADDONS;
+				$ret[] = GD_TEMPLATE_WIDGET_REFERENCES_LINE;
 				break;
 
 			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_DETAILS:

@@ -3,7 +3,7 @@
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('MESYM_VERSION', 0.328);
+define ('MESYM_VERSION', 0.329);
 
 define ('MESYM_DIR', STYLESHEETPATH);
 define ('MESYM_DIR_RESOURCES', MESYM_DIR.'/resources');

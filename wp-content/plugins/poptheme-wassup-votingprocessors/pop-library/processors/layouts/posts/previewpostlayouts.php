@@ -198,7 +198,7 @@ class VotingProcessors_Template_Processor_CustomPreviewPostLayouts extends GD_Te
 
 			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_OPINIONATEDVOTE_EDIT:
 
-				$ret[] = GD_TEMPLATE_LAYOUT_REFERENCES_ADDONS;
+				$ret[] = GD_TEMPLATE_WIDGET_REFERENCES_LINE;
 				break;
 		}
 

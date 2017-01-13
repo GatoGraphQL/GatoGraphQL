@@ -44,7 +44,23 @@ class GD_Template_Processor_ShareTextareaFormComponentInputs extends GD_Template
 
 				// Because the method depends on modal.on('shown.bs.modal'), we need to run it before the modal is open for the first time
 				// (when it would initialize the JS, so then this first execution would be lost otherwise)
-				$this->add_jsmethod($ret, 'embedCode');
+				$this->add_jsmethod($ret, 'replaceCode'/*'embedCode'*/);
+				break;
+		}
+
+		return $ret;
+	}
+
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+					
+			case GD_TEMPLATE_FORMCOMPONENT_EMBEDCODE:
+			
+				// Needed for JS method `replaceCode`
+				$ret['url-type'] = 'embed';
 				break;
 		}
 

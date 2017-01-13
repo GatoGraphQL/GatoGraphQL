@@ -3973,6 +3973,21 @@ popManager = {
 		return url;
 	},
 
+	getAPIUrl : function(url) {
+	
+		var t = this;
+
+		// Add the corresponding parameters, like this:
+		// $url?output=json&module=data&idformat=original
+		// Add idformat=original so that the developers get a consistent name, which will not change with software updates,
+		// and also so that they can understand what data it is
+		url = add_query_arg(M.URLPARAM_OUTPUT, M.URLPARAM_OUTPUT_JSON, url);
+		url = add_query_arg(M.URLPARAM_MODULE, M.URLPARAM_MODULE_DATA, url);
+		url = add_query_arg(M.URLPARAM_IDFORMAT, M.URLPARAM_IDFORMAT_ORIGINAL, url);
+
+		return url;
+	},
+
 	getPrintUrl : function(url) {
 	
 		var t = this;

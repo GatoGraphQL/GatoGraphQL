@@ -9,6 +9,8 @@ define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA', PoP_Se
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-sharebyemail-previewdropdown'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-embed-socialmedia'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-embed-socialmedia-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-api-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-api-socialmedia-previewdropdown'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-volunteer-full'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-volunteer-previewdropdown'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-flag-socialmedia'));
@@ -29,6 +31,8 @@ class GD_Template_Processor_ViewComponentButtonInners extends GD_Template_Proces
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN,
+			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA,
+			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA,
@@ -83,6 +87,14 @@ class GD_Template_Processor_ViewComponentButtonInners extends GD_Template_Proces
 
 				return 'fa-fw fa-code';
 
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA:
+
+				return 'fa-fw fa-cog fa-lg';
+
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN:
+
+				return 'fa-fw fa-cog';
+
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN:
 			case GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG:
@@ -134,6 +146,10 @@ class GD_Template_Processor_ViewComponentButtonInners extends GD_Template_Proces
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
 
 				return __('Embed', 'pop-coreprocessors');
+
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN:
+
+				return __('API Data', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:			
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:

@@ -61,6 +61,11 @@ class GD_Template_CacheProcessor {
 			// $filename .= '-datastructure_'.$datastructure;
 			$filename .= '-'.$datastructure;
 		}
+		if ($idformat = $vars['idformat']) {
+			
+			// $filename .= '-datastructure_'.$datastructure;
+			$filename .= '-'.$idformat;
+		}
 		if ($theme = $vars['theme']) {
 			
 			// $filename .= '-theme_'.$theme;

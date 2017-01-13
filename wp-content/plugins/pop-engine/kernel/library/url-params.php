@@ -13,6 +13,11 @@ define ('GD_URLPARAM_PAGESECTION_SETTINGSID', 'pagesection');
 define ('GD_URLPARAM_OUTPUT', 'output');
 define ('GD_URLPARAM_OUTPUT_JSON', 'json');
 define ('GD_URLPARAM_DATASTRUCTURE', 'datastructure');
+
+define ('POP_URLPARAM_IDFORMAT', 'idformat');
+define ('POP_URLPARAM_IDFORMAT_ORIGINAL', 'original');
+define ('POP_URLPARAM_IDFORMAT_SHORT', 'short');
+
 define ('GD_URLPARAM_FORMAT', 'format');
 define ('GD_URLPARAM_THEME', 'theme');
 // Comment Leo 19/02/2016: Renamed GD_URLPARAM_THEMEMODE from 'mode' to 'thememode', because plug-in Wordpress Social Login

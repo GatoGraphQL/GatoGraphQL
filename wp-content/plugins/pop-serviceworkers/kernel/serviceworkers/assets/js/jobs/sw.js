@@ -27,6 +27,9 @@ var config = {
   origins: $origins,
   strategies: $strategies,
   ignore: $ignore,
+  params: {
+    cachebust: $cacheBustParam
+  }
 };
 
 function cacheName(key, opts) {
@@ -212,6 +215,19 @@ self.addEventListener('fetch', event => {
     return request;
   }
 
+  function getCacheBustRequest(request, opts) {
+
+    var url = new URL(request.url);
+
+    // Put in a cache-busting parameter to ensure we're caching a fresh response.
+    if (url.search) {
+      url.search += '&';
+    }
+    url.search += opts.params.cachebust + '=' + Date.now();
+
+    return new Request(url.toString());
+  }
+
   function getStrategy(request, opts) {
     
     var strategy = '';
@@ -298,12 +314,17 @@ self.addEventListener('fetch', event => {
     // Allow to modify the request, fetching content from a different URL
     request = getRequest(request, opts);
 
+    // Add the cache buster param for JSON responses, no need for static assets or for the initial appshell load (if this one changes, then the version will change and get downloaded and cached again)
+    var cacheBustRequest = getCacheBustRequest(request, opts);
+
     if (strategy === SW_STRATEGIES_CACHEFIRST || strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
     
+      // Bust the cache. Taken from https://developers.google.com/web/showcase/2015/service-workers-iowa
+
       /* Load immediately from the Cache */
       event.respondWith(
         fetchFromCache(request)
-          .catch(() => fetch(request))
+          .catch(() => fetch(request)) 
           .then(response => addToCache(cacheKey, request, response))
       );
 
@@ -313,7 +334,7 @@ self.addEventListener('fetch', event => {
       never get updated under the same filename, the Media Manager will upload them with a different filename the 2nd time) */
       if (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
         event.waitUntil(
-          fetch(request)
+          fetch(cacheBustRequest)
             .then(response => refresh(request, response))
             .then(response => addToCache(cacheKey, request, response))
         );
@@ -322,7 +343,7 @@ self.addEventListener('fetch', event => {
     else if (strategy === SW_STRATEGIES_NETWORKFIRST) {
 
       event.respondWith(
-        fetch(request)
+        fetch(cacheBustRequest)
           .then(response => addToCache(cacheKey, request, response))
           .catch(() => fetchFromCache(request))
           .catch(function(err) {/*console.log(err)*/})

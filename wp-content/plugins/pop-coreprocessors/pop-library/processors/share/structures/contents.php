@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_CONTENT_EMBEDPREVIEW', PoP_ServerUtils::get_template_definition('content-embedpreview'));
 define ('GD_TEMPLATE_CONTENT_EMBED', PoP_ServerUtils::get_template_definition('content-embed'));
+define ('GD_TEMPLATE_CONTENT_API', PoP_ServerUtils::get_template_definition('content-api'));
 define ('GD_TEMPLATE_CONTENT_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('content-copysearchurl'));
 
 class GD_Template_Processor_ShareContents extends GD_Template_Processor_ContentsBase {
@@ -16,6 +17,7 @@ class GD_Template_Processor_ShareContents extends GD_Template_Processor_Contents
 		return array(
 			GD_TEMPLATE_CONTENT_EMBEDPREVIEW,
 			GD_TEMPLATE_CONTENT_EMBED,
+			GD_TEMPLATE_CONTENT_API,
 			GD_TEMPLATE_CONTENT_COPYSEARCHURL,
 		);
 	}
@@ -39,6 +41,7 @@ class GD_Template_Processor_ShareContents extends GD_Template_Processor_Contents
 				);
 
 			case GD_TEMPLATE_CONTENT_COPYSEARCHURL:
+			case GD_TEMPLATE_CONTENT_API:
 
 				return sprintf(
 					'<p><em>%s</em></p>',
@@ -60,6 +63,10 @@ class GD_Template_Processor_ShareContents extends GD_Template_Processor_Contents
 			case GD_TEMPLATE_CONTENT_EMBED:
 
 				return GD_TEMPLATE_CONTENTINNER_EMBED;
+
+			case GD_TEMPLATE_CONTENT_API:
+
+				return GD_TEMPLATE_CONTENTINNER_API;
 
 			case GD_TEMPLATE_CONTENT_COPYSEARCHURL:
 

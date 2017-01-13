@@ -36,6 +36,8 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 	
 	$jquery_constants['URLPARAM_OUTPUT'] = GD_URLPARAM_OUTPUT;
 	$jquery_constants['URLPARAM_OUTPUT_JSON'] = GD_URLPARAM_OUTPUT_JSON;
+	$jquery_constants['URLPARAM_IDFORMAT'] = POP_URLPARAM_IDFORMAT;
+	$jquery_constants['URLPARAM_IDFORMAT_ORIGINAL'] = POP_URLPARAM_IDFORMAT_ORIGINAL;
 	
 	$jquery_constants['URLPARAM_PAGED'] = GD_URLPARAM_PAGED;
 	$jquery_constants['URLPARAM_OPERATION_APPEND'] = GD_URLPARAM_OPERATION_APPEND;

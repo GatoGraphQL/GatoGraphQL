@@ -228,6 +228,10 @@ class PoP_Engine {
 
 					$redirect = add_query_arg(GD_URLPARAM_DATASTRUCTURE, $datastructure, $redirect);
 				}
+				if ($idformat = $_REQUEST[POP_URLPARAM_IDFORMAT]) {
+
+					$redirect = add_query_arg(POP_URLPARAM_IDFORMAT, $idformat, $redirect);
+				}
 			}
 
 			wp_redirect($redirect); exit;

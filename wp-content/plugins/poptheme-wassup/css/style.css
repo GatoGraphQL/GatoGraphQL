@@ -420,6 +420,9 @@ body.pop-loadingjs .loading-screen {
 .socialmedia-embed:hover {
 	background-color: #642dcd;
 }
+.socialmedia-api:hover {
+	background-color: #1d9d74;
+}
 .socialmedia-flag:hover {
 	background-color: #6992dc;
 }
@@ -1897,6 +1900,7 @@ body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-co
   right: 0;
   z-index: 750;
   padding: 5px 10px;
+  -webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
 }
 #ps-addons .window-controls > a {
   padding-left: 5px;
