@@ -15,7 +15,13 @@ var config = {
     full: $excludedFullPaths,
     partial: $excludedPartialPaths
   },
-  appshellPages: $appshellPages,
+  appshell: {
+    pages: $appshellPages,
+    params: {
+      precached: $appshellPrecachedParams,
+      fromserver: $appshellFromServerParams
+    }
+  },
   locales: {
     all: $localesByURL,
     default: $defaultLocale,
@@ -194,9 +200,22 @@ self.addEventListener('fetch', event => {
 
       // The different appshells are a combination of locale, theme and thememode
       var params = getParams(request.url);
-      var theme = params[opts.themes.params.theme] || opts.themes.default;
-      var thememode = params[opts.themes.params.thememode] || opts.themes.themes[theme].default;
-      request = new Request(opts.appshellPages[opts.locales.current][theme][thememode]);
+      var theme = params[opts.appshell.params.precached.theme] || opts.themes.default;
+      var thememode = params[opts.appshell.params.precached.thememode] || (opts.themes.themes[theme] ? opts.themes.themes[theme].default : '');
+
+      // The initial appshell URL has the params that we have precached
+      var url = opts.appshell.pages[opts.locales.current][theme][thememode];
+
+      // In addition, there are other params that, if provided by the user, they must be added to the URL
+      // These params are not originally precached in any appshell URL, so such page will have to be retrieved from the server
+      opts.appshell.params.fromserver.forEach(function(param) {
+
+        // If the param was passed in the URL, then add it along
+        if (params[param]) {
+          url += '&'+param+'='+params[param];
+        }
+      });
+      request = new Request(url);
     }
     else if (resourceType === 'json') {
 

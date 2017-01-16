@@ -1801,8 +1801,19 @@ popManager = {
 
 		var t = this;
 		
-		// The open tabs are saved for the combination of locale (language), theme and thememode
-		return M.LOCALE+'|'+M.THEME+'|'+M.THEMEMODE;
+		// The open tabs are saved for the combination of locale (language), theme and thememode for sure
+		// var key = M.LOCALE+'|'+M.THEME+'|'+M.THEMEMODE;
+
+		// Comment Leo 16/01/2017: we can all params set in the topLevel feedback directly
+		var key = M.LOCALE;
+
+		// Also add all the other "From Server" params if initially set (eg: themestyle, settingsformat, mangled)
+		var params = t.getTopLevelFeedback()[M.DATALOAD_PARAMS];
+		$.each(params, function(param, value) {
+			key += '|'+param+'='+value;
+		});
+
+		return key;
 	},
 
 	getScreenOpenTabs : function() {
@@ -3978,12 +3989,15 @@ popManager = {
 		var t = this;
 
 		// Add the corresponding parameters, like this:
-		// $url?output=json&module=data&idformat=original
-		// Add idformat=original so that the developers get a consistent name, which will not change with software updates,
+		// $url?output=json&module=data&mangled=false
+		// Add mangled=false so that the developers get a consistent name, which will not change with software updates,
 		// and also so that they can understand what data it is
-		url = add_query_arg(M.URLPARAM_OUTPUT, M.URLPARAM_OUTPUT_JSON, url);
-		url = add_query_arg(M.URLPARAM_MODULE, M.URLPARAM_MODULE_DATA, url);
-		url = add_query_arg(M.URLPARAM_IDFORMAT, M.URLPARAM_IDFORMAT_ORIGINAL, url);
+		$.each(M.API_URLPARAMS, function(param, value) {
+			url = add_query_arg(param, value, url);
+		});
+		// url = add_query_arg(M.URLPARAM_OUTPUT, M.URLPARAM_OUTPUT_JSON, url);
+		// url = add_query_arg(M.URLPARAM_MODULE, M.URLPARAM_MODULE_DATA, url);
+		// url = add_query_arg(M.URLPARAM_JSONOUTPUT, M.URLPARAM_JSONOUTPUT_ORIGINAL, url);
 
 		return url;
 	},

@@ -5,15 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_URLPARAM_IDFORMAT', 'idformat');
-define ('POP_URLPARAM_IDFORMAT_ORIGINAL', 'original');
-define ('POP_URLPARAM_IDFORMAT_SHORT', 'short');
-
 class PoP_ServerUtils {
 
 	// Counter: cannot start with a number, or the id will get confused
 	// First number is 10, that is "a" in base 36
 	protected static $templatedefinition_counter = 10;
+
+	public static function is_not_mangled() {
+
+		// By default, it is mangled, if not mangled then param "mangled" must have value "none"
+		// Coment Leo 13/01/2017: get_vars() can't function properly since it references objects which have not been initialized yet,
+		// when called at the very beginning. So then access the request directly
+		return $_REQUEST[POP_URLPARAM_MANGLED] == POP_URLPARAM_MANGLED_NONE;
+	}
+
+	public static function is_mangled() {
+
+		return !self::is_not_mangled();
+	}
 	
 	/**
 	 * Function used to create a definition for a template. Needed for reducing the filesize of the html generated for PROD
@@ -21,12 +30,8 @@ class PoP_ServerUtils {
 	 */
 	public static function get_template_definition($template_id, $mirror = false) {
 
-		// If passing param idformat=original then keep it as it is. Needed for the Embed, so that the user gets the real stuff
-		// Coment Leo 13/01/2017: get_vars() can't function properly since it references objects which have not been initialized yet,
-		// when called at the very beginning. So then access the request directly
-		// $vars = GD_TemplateManager_Utils::get_vars();
-		// if ($vars['idformat'] == POP_URLPARAM_IDFORMAT_ORIGINAL) {
-		if ($_REQUEST[POP_URLPARAM_IDFORMAT] == POP_URLPARAM_IDFORMAT_ORIGINAL) {
+		// If not mangled, then that's it, use the original $template_id
+		if (self::is_not_mangled()) {
 			return $template_id;
 		}
 
@@ -115,6 +120,12 @@ class PoP_ServerUtils {
 	 * Use 'modules' or 'm' in the JS context. Used to compress the file size in PROD
 	 */
 	public static function compact_js_keys() {
+
+		// Do not compact if not mangled
+		if (self::is_not_mangled()) {
+
+			return false;
+		}
 
 		if (defined('POP_SERVER_COMPACTJSKEYS')) {
 			return POP_SERVER_COMPACTJSKEYS;

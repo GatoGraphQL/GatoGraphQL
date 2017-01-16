@@ -45,13 +45,15 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 			$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_THEME] = $vars[GD_URLPARAM_THEME];
 			$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_THEMEMODE] = $vars[GD_URLPARAM_THEMEMODE];
 			$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_THEMESTYLE] = $vars[GD_URLPARAM_THEMESTYLE];
-			$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_SETTINGSFORMAT] = $vars[GD_URLPARAM_FORMAT];
 
-			if ($datastructure = $vars[GD_URLPARAM_DATASTRUCTURE]) {
-				$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_DATASTRUCTURE] = $datastructure;
+			if ($format = $vars[GD_URLPARAM_FORMAT]) {
+				$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_SETTINGSFORMAT] = $format;
 			}
-			if ($idformat = $vars[POP_URLPARAM_IDFORMAT]) {
-				$ret[GD_DATALOAD_PARAMS][POP_URLPARAM_IDFORMAT] = $idformat;
+			// if ($datastructure = $vars[GD_URLPARAM_DATASTRUCTURE]) {
+			// 	$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_DATASTRUCTURE] = $datastructure;
+			// }
+			if ($mangled = $vars[POP_URLPARAM_MANGLED]) {
+				$ret[GD_DATALOAD_PARAMS][POP_URLPARAM_MANGLED] = $mangled;
 			}
 
 			// Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)

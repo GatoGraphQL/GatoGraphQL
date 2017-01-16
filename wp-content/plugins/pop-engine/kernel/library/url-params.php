@@ -14,9 +14,8 @@ define ('GD_URLPARAM_OUTPUT', 'output');
 define ('GD_URLPARAM_OUTPUT_JSON', 'json');
 define ('GD_URLPARAM_DATASTRUCTURE', 'datastructure');
 
-define ('POP_URLPARAM_IDFORMAT', 'idformat');
-define ('POP_URLPARAM_IDFORMAT_ORIGINAL', 'original');
-define ('POP_URLPARAM_IDFORMAT_SHORT', 'short');
+define ('POP_URLPARAM_MANGLED', 'mangled');
+define ('POP_URLPARAM_MANGLED_NONE', 'none');
 
 define ('GD_URLPARAM_FORMAT', 'format');
 define ('GD_URLPARAM_THEME', 'theme');

@@ -61,10 +61,11 @@ class GD_Template_CacheProcessor {
 			// $filename .= '-datastructure_'.$datastructure;
 			$filename .= '-'.$datastructure;
 		}
-		if ($idformat = $vars['idformat']) {
+		if ($mangled = $vars['mangled']) {
 			
-			// $filename .= '-datastructure_'.$datastructure;
-			$filename .= '-'.$idformat;
+			// By default it is mangled. To make it non-mangled, url must have param "mangled=none",
+			// so only in these exceptional cases the filename will add this parameter
+			$filename .= '-'.$mangled;
 		}
 		if ($theme = $vars['theme']) {
 			

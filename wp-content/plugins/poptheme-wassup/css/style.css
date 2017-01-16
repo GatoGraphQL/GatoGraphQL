@@ -4372,3 +4372,7 @@ form.pop-filterform-instantaneous {
           transition: none;
 }
 */
+
+iframe.embedpreview {
+	background-color: #fff;
+}

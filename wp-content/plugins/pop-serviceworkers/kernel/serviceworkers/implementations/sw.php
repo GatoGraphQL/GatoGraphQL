@@ -39,6 +39,15 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         // $configuration['$offlineImage'] = $this->get_offline_image();
         // $configuration['$offlinePages'] = $this->get_offline_pages();
         $configuration['$appshellPages'] = $this->get_appshell_pages();
+        $configuration['$appshellPrecachedParams'] = array(
+            'theme' => GD_URLPARAM_THEME,
+            'thememode' => GD_URLPARAM_THEMEMODE,
+        );
+        $configuration['$appshellFromServerParams'] = array(
+            GD_URLPARAM_THEMESTYLE,
+            GD_URLPARAM_SETTINGSFORMAT,
+            POP_URLPARAM_MANGLED,
+        );
         $configuration['$localesByURL'] = $this->get_locales_byurl();
         $configuration['$defaultLocale'] = $this->get_default_locale();
         $configuration['$outputJSON'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
@@ -49,10 +58,10 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         global $gd_theme_manager;
         $theme = $gd_theme_manager->get_theme();
         $configuration['$themes'] = array(
-            'params' => array(
-                'theme' => GD_URLPARAM_THEME,
-                'thememode' => GD_URLPARAM_THEMEMODE,
-            ),
+            // 'params' => array(
+            //     'theme' => GD_URLPARAM_THEME,
+            //     'thememode' => GD_URLPARAM_THEMEMODE,
+            // ),
             'default' => $gd_theme_manager->get_default_themename(),
             'themes' => array(
                 $theme->get_name() => array(

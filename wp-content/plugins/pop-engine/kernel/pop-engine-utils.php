@@ -83,7 +83,7 @@ class GD_TemplateManager_Utils {
 	public static function get_current_url() {
 
 		// Strip the Target and Output off it, users don't need to see those
-		$url = remove_query_arg(array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE, POP_URLPARAM_IDFORMAT), full_url());
+		$url = remove_query_arg(array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE, POP_URLPARAM_MANGLED), full_url());
 
 		// Comment Leo 25/09/2015: strip the 'thememode' and 'theme' always, and add it again through DATALOAD_PUSHURLATTS
 		// This way, we can add these also when intercepting URLs in the front-end (eg: switching tabs in embed mode, https://www.mesym.com/projects/?format=full&mode=embed)
@@ -317,7 +317,7 @@ class GD_TemplateManager_Utils {
 		$target = $_REQUEST[GD_URLPARAM_TARGET];
 		$module = $_REQUEST[GD_URLPARAM_MODULE];
 		$datastructure = $_REQUEST[GD_URLPARAM_DATASTRUCTURE];
-		$idformat = $_REQUEST[POP_URLPARAM_IDFORMAT];
+		$mangled = $_REQUEST[POP_URLPARAM_MANGLED];
 		// $mode = $_REQUEST[GD_URLPARAM_MODE];
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
@@ -362,7 +362,7 @@ class GD_TemplateManager_Utils {
 			'target' => $target,
 			'module' => $module,
 			'datastructure' => $datastructure,
-			'idformat' => $idformat,
+			'mangled' => $mangled,
 			'format' => $format,
 			'settingsformat' => $settingsformat,
 			'tab' => $tab,
