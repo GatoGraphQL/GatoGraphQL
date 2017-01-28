@@ -66,7 +66,7 @@ self.addEventListener('install', event => {
           });
         }))
       })
-    }))    
+    }))  
   }
 
   event.waitUntil(
@@ -270,7 +270,7 @@ self.addEventListener('fetch', event => {
       }
       else {
 
-        strategy = SW_STRATEGIES_CACHEFIRSTTHENREFRESH;        
+        strategy = SW_STRATEGIES_CACHEFIRSTTHENREFRESH;    
       }
     }
     else if (resourceType === 'html' || resourceType === 'static') {

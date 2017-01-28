@@ -171,8 +171,8 @@ body.pop-loadingframe .loadinglogo {
 .loadinglogo .img-responsive {
 	display: initial;
 }
-.loading-screen,
-.background-screen {
+.loading-screen/*,
+.background-screen*/ {
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -180,7 +180,7 @@ body.pop-loadingframe .loadinglogo {
 	right: 0;
 }
 .loading-screen {
-	background-color: #f1f1f2;
+	/*background-color: #f1f1f2;*/
 	/* Over topnav */
 	z-index: 1110;
 	display: none;
@@ -193,7 +193,10 @@ body.pop-loadingframe .loadinglogo {
 /* Do not allow the user to click yet, because JS not yet initialized, by placing the loading-screen div with a transparent background on top of everything */
 body.pop-loadingjs .loading-screen {
 	display: block;
-    background-color: transparent;
+    /*background-color: transparent;*/
+}
+body.pop-loadingframe.pop-loadingjs #pagesection-group {
+	display: none;
 }
 
 .pop-messagefeedback .media {

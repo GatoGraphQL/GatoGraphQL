@@ -147,8 +147,6 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
                 'PoP_ServiceWorkers_Job_Fetch:ignoredparams:'.$resourceType,
                 array(
                     POP_SW_URLPARAM_NETWORKFIRST,
-                    // '?'.POP_SW_URLPARAM_NETWORKFIRST.'=true',
-                    // '&'.POP_SW_URLPARAM_NETWORKFIRST.'=true',
                 )
             );
         }
@@ -161,7 +159,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $strategies = array();
         if ($resourceType == 'json') {
 
-            $hasParams = $this->get_ignored_params($resourceType);
+            // $hasParams = $this->get_ignored_params($resourceType);
         
             // Hook in the paths to include
             // All the layout loaders (eg: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) belong here
@@ -179,7 +177,10 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
                 ),
                 'hasParams' => apply_filters(
                     'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:hasParams',
-                    $hasParams
+                    // $hasParams
+                    array(
+                        POP_SW_URLPARAM_NETWORKFIRST,
+                    )
                 ),
             );
         }

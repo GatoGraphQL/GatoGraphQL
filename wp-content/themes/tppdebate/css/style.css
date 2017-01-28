@@ -17,29 +17,24 @@ COLORS used in the Website:
 @lightest gray: #f1f1f2; rgb(241, 241, 242);
 */
 
-.background-screen {
+/*.background-screen {
   display: none;
 }
 body.sliding .background-screen {
   display: block;
-}
-body.sliding .background-screen,
-body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
+}*/
+/*body.sliding .background-screen,*/
+body.sliding/*,
+body.sliding.pop-loadingframe.pop-loadingjs .loading-screen*/ {
     background-color: #edf9f7;
 }
-body.sliding .background-screen { 
-  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  /*background: #edf9f7 url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1440x900.png) no-repeat fixed center;*/
+body.sliding { 
+/*body.sliding .background-screen { */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-/*@media (min-width: 1440px) {
-  body.sliding .background-screen { 
-    background-image: url(https://cdn.tppdebate.org/wp-content/themes/tppdebate/img/tppdebate-bg-1920x1080.png);
-  }
-}*/
 
 body.sliding, 
 body.sliding #ps-side, 

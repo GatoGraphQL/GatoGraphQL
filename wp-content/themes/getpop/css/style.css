@@ -21,42 +21,41 @@ COLORS used in the Website:
   background-color: #db902e;
 }*/
 
-.background-screen {
+/*.background-screen {
   display: none;
 }
 body.sliding .background-screen {
   display: block;
-}
-body.sliding.getpop .background-screen,
-body.sliding.getpop .loading-screen {
+}*/
+/*body.sliding.getpop .background-screen,*/
+body.sliding.getpop/*,
+body.sliding.getpop .loading-screen*/ {
   background-color: #a2dfe4;
-  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  /*background: #a2dfe4 url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-bg-1440x900.png) no-repeat fixed center;*/
 }
-body.sliding.getpop-demo .background-screen,
-body.sliding.getpop-demo .loading-screen {
+/*body.sliding.getpop-demo .background-screen,*/
+body.sliding.getpop-demo/*,
+body.sliding.getpop-demo .loading-screen*/ {
   background-color: #fcec8c;
-  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  /*background: #fcec8c url(https://assets.getpop.org/wp-content/themes/getpop/img/getpop-demo-bg-1440x900.png) no-repeat fixed center;*/
 }
-body.sliding .background-screen { 
+/*body.sliding .background-screen { */
+body.sliding { 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-body.sliding.pop-loadingjs.getpop .loading-screen,
+/*body.sliding.pop-loadingjs.getpop .loading-screen,
 body.sliding.pop-loadingjs.getpop-demo .loading-screen {
   background: transparent;
   background-color: transparent;
-}
+}*/
 
-body.sliding.pop-loadingframe.pop-loadingjs.getpop .loading-screen {
+/*body.sliding.pop-loadingframe.pop-loadingjs.getpop .loading-screen {
     background-color: #a2dfe4;
 }
 body.sliding.pop-loadingframe.pop-loadingjs.getpop-demo .loading-screen {
     background-color: #fcec8c;
-}
+}*/
 
 body.sliding, 
 body.sliding #ps-side, 

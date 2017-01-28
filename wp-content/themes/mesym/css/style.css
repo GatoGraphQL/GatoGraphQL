@@ -21,28 +21,21 @@ COLORS used in the Website:
   border: 1px dashed #454c0f;
   border-radius: 30px;
 }
-.background-screen {
+/*.background-screen {
   display: none;
 }
 body.sliding .background-screen {
   display: block;
-}
-body.sliding .background-screen,
-body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
+}*/
+/*body.sliding .background-screen,*/
+body.sliding/*,
+body.sliding.pop-loadingframe.pop-loadingjs .loading-screen*/ {
   background-color: #eff4c1;
-  /* Pay attention that we are referencing the image in PROD! Should fix this to point to own environment */
-  /*background: #eff4c1 url(https://assets.mesym.com/wp-content/themes/mesym/img/mesym-bg-1440x900.jpg) no-repeat fixed center;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-/*@media (min-width: 1440px) {
-  body.sliding .background-screen,
-  body.sliding.pop-loadingframe.pop-loadingjs .loading-screen {
-    background-image: url(https://assets.mesym.com/wp-content/themes/mesym/img/mesym-bg-1920x1080.jpg);
-  }
-}*/
 
 body.sliding, 
 body.sliding #ps-side, 
