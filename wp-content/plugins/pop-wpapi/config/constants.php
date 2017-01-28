@@ -12,7 +12,7 @@ define ('POP_WPAPI_IMAGE_NOFEATUREDIMAGEPOST', false);
 
 // Days
 //--------------------------------------------------------
-define ('POP_WPAPI_DAYS_TRENDINGTAGS', 7); // 7 days by default for Trending Tags
+define ('POP_WPAPI_DAYS_TRENDINGTAGS', 14); // 14 days by default for Trending Tags
 
 // Pages
 //--------------------------------------------------------
