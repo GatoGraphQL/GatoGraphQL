@@ -66,6 +66,15 @@ class GD_Template_Processor_CustomButtonGroupsBase extends GD_Template_Processor
 		// We can initially have a common format scheme depending on the screen
 		$screen = $this->get_headersdata_screen($template_id, $atts);
 		switch ($screen) {
+
+			case POP_SCREEN_TAGS:
+			case POP_SCREEN_AUTHORTAGS:
+
+				$formats = array(
+					GD_TEMPLATEFORMAT_DETAILS => array(),
+					GD_TEMPLATEFORMAT_LIST => array(),
+				);
+				return $formats;
 			
 			case POP_SCREEN_SECTION:
 			case POP_SCREEN_AUTHORSECTION:
@@ -93,6 +102,7 @@ class GD_Template_Processor_CustomButtonGroupsBase extends GD_Template_Processor
 			case POP_SCREEN_USERS:
 			case POP_SCREEN_AUTHORUSERS:
 			case POP_SCREEN_SINGLEUSERS:
+			case POP_SCREEN_TAGUSERS:
 
 				$formats = array(
 					GD_TEMPLATEFORMAT_FULLVIEW => array()

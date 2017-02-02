@@ -25,9 +25,9 @@ class FullUserSidebarSettings {
 				// $ret[] = GD_TEMPLATE_WIDGET_AUTHOR_AVATARORIGINAL;
 				$ret[] = GD_TEMPLATE_LAYOUT_AUTHOR_USERPHOTO;
 				// Don't add for the quickview since we can't open a modal on top of a modal
-				if (!$fetching_quickview) {
+				// if (!$fetching_quickview) {
 					$ret[] = GD_TEMPLATE_USERSOCIALMEDIA;
-				}
+				// }
 				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL;
 				$ret[] = GD_TEMPLATE_WIDGETWRAPPER_AUTHOR_CONTACT;
 				$ret[] = GD_TEMPLATE_EM_WIDGET_USERLOCATIONSMAP;

@@ -231,11 +231,11 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 				
 			case GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA:
 
-				// $blocks = array();
-				// $blocks[] = GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL;
+				$blocks = array();
+				$blocks[] = GD_TEMPLATE_BLOCK_TAG_CONTENT;
 
 				// Allow to add the Featured Carousel
-				if ($blocks = apply_filters('GD_Template_Processor_CustomBlockGroups:blocks:tag_widgetarea', array(), $template_id)) {
+				if ($blocks = apply_filters('GD_Template_Processor_CustomBlockGroups:blocks:tag_widgetarea', $blocks, $template_id)) {
 					
 					$ret = array_merge(
 						$ret,

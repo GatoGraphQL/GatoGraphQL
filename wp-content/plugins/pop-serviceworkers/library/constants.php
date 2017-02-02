@@ -23,6 +23,15 @@ define ('POP_SW_URLPARAM_NETWORKFIRST', 'sw-networkfirst');
  */
 define ('POP_SW_URLPARAM_CACHEBUST', 'sw-cachebust');
 
+add_filter('GD_TemplateManager_Utils:current_url:remove_params', 'pop_sw_remove_urlparams');
+function pop_sw_remove_urlparams($remove_params) {
+
+	$remove_params[] = POP_SW_URLPARAM_NETWORKFIRST;
+	$remove_params[] = POP_SW_URLPARAM_CACHEBUST;
+
+	return $remove_params;
+}
+
 add_filter('gd_jquery_constants', 'pop_sw_jquery_constants');
 function pop_sw_jquery_constants($jquery_constants) {
 

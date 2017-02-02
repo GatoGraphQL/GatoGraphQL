@@ -9,6 +9,8 @@ define ('GD_TEMPLATE_BLOCKGROUP_FOLLOWUSER', PoP_ServerUtils::get_template_defin
 define ('GD_TEMPLATE_BLOCKGROUP_UNFOLLOWUSER', PoP_ServerUtils::get_template_definition('blockgroup-unfollowuser'));
 define ('GD_TEMPLATE_BLOCKGROUP_RECOMMENDPOST', PoP_ServerUtils::get_template_definition('blockgroup-recommendpost'));
 define ('GD_TEMPLATE_BLOCKGROUP_UNRECOMMENDPOST', PoP_ServerUtils::get_template_definition('blockgroup-unrecommendpost'));
+define ('GD_TEMPLATE_BLOCKGROUP_SUBSCRIBETOTAG', PoP_ServerUtils::get_template_definition('blockgroup-subscribetotag'));
+define ('GD_TEMPLATE_BLOCKGROUP_UNSUBSCRIBEFROMTAG', PoP_ServerUtils::get_template_definition('blockgroup-unsubscribefromtag'));
 define ('GD_TEMPLATE_BLOCKGROUP_UPVOTEPOST', PoP_ServerUtils::get_template_definition('blockgroup-upvotepost'));
 define ('GD_TEMPLATE_BLOCKGROUP_UNDOUPVOTEPOST', PoP_ServerUtils::get_template_definition('blockgroup-undoupvotepost'));
 define ('GD_TEMPLATE_BLOCKGROUP_DOWNVOTEPOST', PoP_ServerUtils::get_template_definition('blockgroup-downvotepost'));
@@ -23,6 +25,8 @@ class GD_Template_Processor_FunctionsBlockGroups extends GD_Template_Processor_L
 			GD_TEMPLATE_BLOCKGROUP_UNFOLLOWUSER,
 			GD_TEMPLATE_BLOCKGROUP_RECOMMENDPOST,
 			GD_TEMPLATE_BLOCKGROUP_UNRECOMMENDPOST,
+			GD_TEMPLATE_BLOCKGROUP_SUBSCRIBETOTAG,
+			GD_TEMPLATE_BLOCKGROUP_UNSUBSCRIBEFROMTAG,
 			GD_TEMPLATE_BLOCKGROUP_UPVOTEPOST,
 			GD_TEMPLATE_BLOCKGROUP_UNDOUPVOTEPOST,
 			GD_TEMPLATE_BLOCKGROUP_DOWNVOTEPOST,
@@ -58,6 +62,18 @@ class GD_Template_Processor_FunctionsBlockGroups extends GD_Template_Processor_L
 
 				$ret[] = GD_TEMPLATE_ACTION_UNRECOMMENDPOST;
 				$ret[] = GD_TEMPLATE_BLOCKDATA_UNRECOMMENDPOST;
+				break;
+
+			case GD_TEMPLATE_BLOCKGROUP_SUBSCRIBETOTAG:
+
+				$ret[] = GD_TEMPLATE_ACTION_SUBSCRIBETOTAG;
+				$ret[] = GD_TEMPLATE_BLOCKDATA_SUBSCRIBETOTAG;
+				break;
+
+			case GD_TEMPLATE_BLOCKGROUP_UNSUBSCRIBEFROMTAG:
+
+				$ret[] = GD_TEMPLATE_ACTION_UNSUBSCRIBEFROMTAG;
+				$ret[] = GD_TEMPLATE_BLOCKDATA_UNSUBSCRIBEFROMTAG;
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_UPVOTEPOST:

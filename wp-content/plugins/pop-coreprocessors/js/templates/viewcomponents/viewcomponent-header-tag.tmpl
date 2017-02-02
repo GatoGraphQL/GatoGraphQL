@@ -1,0 +1,2 @@
+{{! It will be printed inside data-header attr, so we can't use "double quotes" but only 'single quotes'}}
+{{#with itemObject}}<h4 class='media-heading'>{{#if ../header-show-url}}<a href='{{url}}'>{{{symbol}}}{{{namedescription}}}</a>{{else}}{{{symbol}}}{{{namedescription}}}{{/if}}</h4>{{/with}}

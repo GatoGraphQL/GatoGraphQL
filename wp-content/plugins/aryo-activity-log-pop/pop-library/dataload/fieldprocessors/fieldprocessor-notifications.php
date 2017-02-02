@@ -202,6 +202,26 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 						}
 						break;
 
+					case 'Taxonomy':
+
+						switch ($notification->object_subtype) {
+
+							case 'Tag':
+
+								switch ($notification->action) {
+
+									case AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG:
+										$value = gd_navigation_menu_item(POP_COREPROCESSORS_PAGE_SUBSCRIBERS, false);
+										break;
+
+									case AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG:
+										$value = 'fa-remove';
+										break;
+								}
+								break;
+						}
+						break;
+
 					case 'Comments':
 
 						switch ($notification->action) {
@@ -298,6 +318,32 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 						}
 						break;
 
+					case 'Taxonomy':
+
+						switch ($notification->object_subtype) {
+
+							case 'Tag':
+
+								switch ($notification->action) {
+
+									case AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG:
+									case AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG:
+
+										$value = get_tag_link($notification->object_id);
+										break;
+
+									default:
+										$value = get_tag_link($notification->object_id);
+										break;
+								}
+								break;
+
+							default:
+								$value = get_term_link($notification->object_id);
+								break;
+						}
+						break;
+
 					case 'Comments':
 
 						switch ($notification->action) {
@@ -361,6 +407,26 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 											AAL_POP_ACTION_POST_CREATEDPENDINGPOST => __('<strong>%1$s</strong> created “pending” %2$s <strong>%3$s</strong>', 'aal-pop'),
 											AAL_POP_ACTION_POST_CREATEDDRAFTPOST => __('<strong>%1$s</strong> created “draft” %2$s <strong>%3$s</strong>', 'aal-pop'),
 										);
+
+										// If the post has #hashtags the user is subscribed to, then add it as part of the message (the notification may appear only because of the #hashtag)
+										$post_tags = wp_get_post_tags($notification->object_id, array('fields' => 'ids'));
+										$user_hashtags = GD_MetaManager::get_user_meta(get_current_user_id(), GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
+										if ($intersected_tags = array_intersect($post_tags, $user_hashtags)) {
+
+											$tags = array();
+											foreach ($intersected_tags as $tag_id) {
+												
+												$tag = get_tag($tag_id);
+												$tags[] = PoP_TagUtils::get_tag_symbol().$tag->name;
+											}
+											foreach ($messages as $action => $message) {
+												$messages[$action] = sprintf(
+													__('%1$s (<em>tags: <strong>%2$s</strong></em>)', 'aal-pop'),
+													$message,
+													implode(__(', ', 'aal-pop'), $tags)
+												);
+											}
+										}
 									}
 								}
 								$value = sprintf(
@@ -478,6 +544,44 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 									$messages[$notification->action],
 									get_the_author_meta('display_name', $notification->user_id)
 								);
+								break;
+
+							default:
+
+								$value = $notification->object_name;
+								break;
+						}
+						break;
+
+					case 'Taxonomy':
+
+						switch ($notification->object_subtype) {
+
+							case 'Tag':
+
+								switch ($notification->action) {
+
+									case AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG:
+									case AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG:
+
+										$messages = array(
+											AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG => __('<strong>%s</strong> subscribed to <strong>%s</strong>', 'aal-pop'),
+											AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG => __('<strong>%s</strong> unsubscribed from <strong>%s</strong>', 'aal-pop'),
+										);
+										
+										$tag = get_tag($notification->object_id);
+										$value = sprintf(
+											$messages[$notification->action],
+											get_the_author_meta('display_name', $notification->user_id),
+											PoP_TagUtils::get_tag_symbol().$tag->name
+										);
+										break;
+
+									default:
+
+										$value = $notification->object_name;
+										break;
+								}
 								break;
 
 							default:

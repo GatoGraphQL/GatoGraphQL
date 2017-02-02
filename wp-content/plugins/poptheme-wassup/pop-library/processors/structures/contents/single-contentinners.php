@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_CONTENTINNER_AUTHOR', PoP_ServerUtils::get_template_definition('contentinner-author'));
+// define ('GD_TEMPLATE_CONTENTINNER_TAG', PoP_ServerUtils::get_template_definition('contentinner-tag'));
 define ('GD_TEMPLATE_CONTENTINNER_SINGLE', PoP_ServerUtils::get_template_definition('contentinner-single'));
 define ('GD_TEMPLATE_CONTENTINNER_LINKSINGLE', PoP_ServerUtils::get_template_definition('contentinner-linksingle'));
 define ('GD_TEMPLATE_CONTENTINNER_HIGHLIGHTSINGLE', PoP_ServerUtils::get_template_definition('contentinner-highlightsingle'));
@@ -20,6 +21,7 @@ class GD_Template_Processor_SingleContentInners extends GD_Template_Processor_Co
 	
 		return array(
 			GD_TEMPLATE_CONTENTINNER_AUTHOR,
+			// GD_TEMPLATE_CONTENTINNER_TAG,
 			GD_TEMPLATE_CONTENTINNER_SINGLE,
 			GD_TEMPLATE_CONTENTINNER_LINKSINGLE,
 			GD_TEMPLATE_CONTENTINNER_HIGHLIGHTSINGLE,
@@ -40,6 +42,11 @@ class GD_Template_Processor_SingleContentInners extends GD_Template_Processor_Co
 
 				$ret[] = GD_TEMPLATE_LAYOUTAUTHOR_CONTENT;
 				break;
+
+			// case GD_TEMPLATE_CONTENTINNER_TAG:
+
+			// 	$ret[] = GD_TEMPLATE_LAYOUTTAG_CONTENT;
+			// 	break;
 
 			case GD_TEMPLATE_CONTENTINNER_SINGLE:
 			case GD_TEMPLATE_CONTENTINNER_HIGHLIGHTSINGLE:

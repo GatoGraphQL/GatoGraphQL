@@ -6,5 +6,6 @@ require_once 'wrappers.php';
 
 require_once 'posts/load.php';
 require_once 'users/load.php';
+require_once 'tags/load.php';
 require_once 'menus/load.php';
 require_once 'sections/load.php';

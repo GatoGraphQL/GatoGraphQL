@@ -9,6 +9,8 @@ define ('GD_TEMPLATE_LAYOUT_FOLLOWUSER_STYLES', PoP_ServerUtils::get_template_de
 define ('GD_TEMPLATE_LAYOUT_UNFOLLOWUSER_STYLES', PoP_ServerUtils::get_template_definition('layout-unfollowuser-styles'));
 define ('GD_TEMPLATE_LAYOUT_RECOMMENDPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-recommendposts-styles'));
 define ('GD_TEMPLATE_LAYOUT_UNRECOMMENDPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-unrecommendposts-styles'));
+define ('GD_TEMPLATE_LAYOUT_SUBSCRIBETOTAG_STYLES', PoP_ServerUtils::get_template_definition('layout-subscribetotag-styles'));
+define ('GD_TEMPLATE_LAYOUT_UNSUBSCRIBEFROMTAG_STYLES', PoP_ServerUtils::get_template_definition('layout-unsubscribefromtag-styles'));
 define ('GD_TEMPLATE_LAYOUT_UPVOTEPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-upvoteposts-styles'));
 define ('GD_TEMPLATE_LAYOUT_UNDOUPVOTEPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-undoupvoteposts-styles'));
 define ('GD_TEMPLATE_LAYOUT_DOWNVOTEPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-downvoteposts-styles'));
@@ -23,6 +25,8 @@ class GD_Template_Processor_ShowHideElemMultiStyleLayouts extends GD_Template_Pr
 			GD_TEMPLATE_LAYOUT_UNFOLLOWUSER_STYLES,
 			GD_TEMPLATE_LAYOUT_RECOMMENDPOST_STYLES,
 			GD_TEMPLATE_LAYOUT_UNRECOMMENDPOST_STYLES,
+			GD_TEMPLATE_LAYOUT_SUBSCRIBETOTAG_STYLES,
+			GD_TEMPLATE_LAYOUT_UNSUBSCRIBEFROMTAG_STYLES,
 			GD_TEMPLATE_LAYOUT_UPVOTEPOST_STYLES,
 			GD_TEMPLATE_LAYOUT_UNDOUPVOTEPOST_STYLES,
 			GD_TEMPLATE_LAYOUT_DOWNVOTEPOST_STYLES,
@@ -58,6 +62,18 @@ class GD_Template_Processor_ShowHideElemMultiStyleLayouts extends GD_Template_Pr
 
 				$ret[] = GD_TEMPLATE_LAYOUT_UNRECOMMENDPOST_HIDE_STYLES;
 				$ret[] = GD_TEMPLATE_LAYOUT_RECOMMENDPOST_SHOW_STYLES;
+				break;
+
+			case GD_TEMPLATE_LAYOUT_SUBSCRIBETOTAG_STYLES:
+
+				$ret[] = GD_TEMPLATE_LAYOUT_SUBSCRIBETOTAG_HIDE_STYLES;
+				$ret[] = GD_TEMPLATE_LAYOUT_UNSUBSCRIBEFROMTAG_SHOW_STYLES;
+				break;
+
+			case GD_TEMPLATE_LAYOUT_UNSUBSCRIBEFROMTAG_STYLES:
+
+				$ret[] = GD_TEMPLATE_LAYOUT_UNSUBSCRIBEFROMTAG_HIDE_STYLES;
+				$ret[] = GD_TEMPLATE_LAYOUT_SUBSCRIBETOTAG_SHOW_STYLES;
 				break;
 
 			case GD_TEMPLATE_LAYOUT_UPVOTEPOST_STYLES:

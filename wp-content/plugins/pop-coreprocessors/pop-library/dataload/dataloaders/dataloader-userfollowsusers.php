@@ -16,7 +16,12 @@ class GD_DataLoader_UserFollowsUsers extends GD_DataLoader_User {
 	
 	function get_data_ids($vars = array(), $is_main_query = false) {
 	
-		return GD_MetaManager::get_user_meta(get_current_user_id(), GD_METAKEY_PROFILE_FOLLOWSUSERS);
+		if (!is_user_logged_in()) {
+			return array();
+		}
+		$ids = GD_MetaManager::get_user_meta(get_current_user_id(), GD_METAKEY_PROFILE_FOLLOWSUSERS);
+
+		return $ids ? $ids : array();
 	}
 }
 	

@@ -383,12 +383,6 @@ class GD_Template_Processor_CustomTabPanePageSections extends GD_Template_Proces
 			case GD_TEMPLATE_PAGESECTION_ADDONS_SINGLE:
 			case GD_TEMPLATE_PAGESECTION_ADDONS_AUTHOR:
 			case GD_TEMPLATE_PAGESECTION_ADDONS_404:
-			case GD_TEMPLATE_PAGESECTION_HOME:
-			case GD_TEMPLATE_PAGESECTION_TAG:
-			case GD_TEMPLATE_PAGESECTION_PAGE:
-			case GD_TEMPLATE_PAGESECTION_SINGLE:
-			case GD_TEMPLATE_PAGESECTION_AUTHOR:
-			case GD_TEMPLATE_PAGESECTION_404:
 			case GD_TEMPLATE_PAGESECTION_SIDEINFO_EMPTY:
 			case GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG:
 			case GD_TEMPLATE_PAGESECTION_SIDEINFO_PAGE:
@@ -398,6 +392,21 @@ class GD_Template_Processor_CustomTabPanePageSections extends GD_Template_Proces
 
 				$this->add_jsmethod($ret, 'scrollbarVertical');
 				break;
+		}
+		if (PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar()) {
+
+			switch ($template_id) {
+
+				case GD_TEMPLATE_PAGESECTION_HOME:
+				case GD_TEMPLATE_PAGESECTION_TAG:
+				case GD_TEMPLATE_PAGESECTION_PAGE:
+				case GD_TEMPLATE_PAGESECTION_SINGLE:
+				case GD_TEMPLATE_PAGESECTION_AUTHOR:
+				case GD_TEMPLATE_PAGESECTION_404:
+
+					$this->add_jsmethod($ret, 'scrollbarVertical');
+					break;
+			}
 		}
 
 		switch ($template_id) {

@@ -10,8 +10,8 @@ add_action('AAL_PoP_Hooks', 'ure_aal_pop_hooks');
 function ure_aal_pop_hooks() {
 
 	// Assign them in a global variable, so their methods can be invoked from outside
-	global $ure_aal_pop_hook_user;
-	$ure_aal_pop_hook_user = new URE_AAL_PoP_Hook_User();
+	global $ure_aal_pop_hook_users;
+	$ure_aal_pop_hook_users = new URE_AAL_PoP_Hook_Users();
 }
 
 /**---------------------------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ function ure_aal_pop_notification_get_usernetwork_conditions($user_network_condi
 /**---------------------------------------------------------------------------------------------------------------
  * Hook into the API: Notification Actions
  * ---------------------------------------------------------------------------------------------------------------*/
-add_filter('AAL_PoP_API:notifications:userplusnetwork:actions', 'ure_aal_pop_notification_get_userplusnetwork_actions');
+add_filter('AAL_PoP_API:notifications:userplusnetwork-user:actions', 'ure_aal_pop_notification_get_userplusnetwork_actions');
 function ure_aal_pop_notification_get_userplusnetwork_actions($actions) {
 
 	// User + Network Notifications:

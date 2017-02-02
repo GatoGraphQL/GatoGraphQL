@@ -8,6 +8,7 @@
 define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-postshare'));
 define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-usershare'));
 define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-usercontactinfo'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-tagshare'));
 
 class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Processor_DropdownButtonControlsBase {
 
@@ -17,6 +18,7 @@ class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Process
 			GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE,
 			GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE,
 			GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO,
+			GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE,
 		);
 	}
 
@@ -56,6 +58,16 @@ class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Process
 
 				$ret[] = GD_TEMPLATE_LAYOUTUSER_QUICKLINKS;
 				break;
+
+			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
+
+				$ret[] = GD_TEMPLATE_TAGSOCIALMEDIA_FB_PREVIEW;
+				$ret[] = GD_TEMPLATE_TAGSOCIALMEDIA_TWITTER_PREVIEW;
+				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_PREVIEWDROPDOWN;
+				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN;
+				$ret[] = GD_TEMPLATE_BUTTON_PRINT_PREVIEWDROPDOWN;
+				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN;
+				break;
 		}
 		
 		return $ret;
@@ -68,6 +80,7 @@ class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Process
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
+			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
 
 				return 'btn btn-compact btn-link';
 		}
@@ -81,6 +94,7 @@ class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Process
 
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
 
 				// return __('Share', 'pop-coreprocessors');
 				return __('Options', 'pop-coreprocessors');
@@ -99,6 +113,7 @@ class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Process
 
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
+			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
 
 				// return 'fa-share';
 				return 'fa-angle-down';
@@ -118,6 +133,7 @@ class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Process
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
+			case GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
 
 				$this->append_att($template_id, $atts, 'class', 'pull-right');
 				break;

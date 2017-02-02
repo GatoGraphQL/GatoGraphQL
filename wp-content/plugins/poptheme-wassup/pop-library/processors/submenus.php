@@ -102,9 +102,10 @@ class GD_Template_Processor_CustomSubMenus extends GD_Template_Processor_SubMenu
 				// $ret[GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION] = array();
 				$main_subheaders = array(
 					GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION,
+					GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORRECOMMENDEDPOSTS,
 					GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWERS,
 					GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWINGUSERS,
-					GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORRECOMMENDEDPOSTS,
+					GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORSUBSCRIBEDTOTAGS,
 				);
 				$ret[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORMAINALLCONTENT] = $main_subheaders;
 				if (in_array($current_blockgroup, $main_subheaders)) {
@@ -143,7 +144,13 @@ class GD_Template_Processor_CustomSubMenus extends GD_Template_Processor_SubMenu
 
 				$ret = array();
 				
-				$ret[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGMAINALLCONTENT] = array();
+				$main_subheaders = array(
+					GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSUBSCRIBERS,
+				);
+				$ret[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGMAINALLCONTENT] = $main_subheaders;
+				if (in_array($current_blockgroup, $main_subheaders)) {
+					$ret[$current_blockgroup] = array();	
+				}
 
 				if (POPTHEME_WASSUP_PAGE_WEBPOSTS) {
 					$ret[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGWEBPOSTS] = array();

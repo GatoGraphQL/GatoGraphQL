@@ -101,7 +101,10 @@ function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field) {
 		GD_METAKEY_PROFILE_UPVOTESPOSTS,
 		GD_METAKEY_PROFILE_DOWNVOTESPOSTS,
 	);
-	if (in_array($key, $userfunction_keys) || in_array($key, $postfunction_keys)) {
+	$termfunction_keys = array(
+		GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS,
+	);
+	if (in_array($key, $userfunction_keys) || in_array($key, $postfunction_keys) || in_array($key, $termfunction_keys)) {
 
 		$user_id = str_replace('user_', '', $post_id);
 
@@ -171,6 +174,31 @@ function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field) {
 				// Update the counter
 				$count = GD_MetaManager::get_post_meta($target_id, $count_metakey, true);
 				GD_MetaManager::update_post_meta($target_id, $count_metakey, ($count - 1), true);
+			}
+		}
+		elseif (in_array($key, $termfunction_keys)) {
+
+			// For each one of this (user/post), add the current $user_id as the one who follows/recommends them
+			if ($key == GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS) {
+
+				$value_metakey = GD_METAKEY_TERM_SUBSCRIBEDBY;
+				$count_metakey = GD_METAKEY_TERM_SUBSCRIBERSCOUNT;
+			}
+			foreach ($additions as $target_id) {
+
+				GD_MetaManager::add_term_meta($target_id, $value_metakey, $user_id);
+
+				// Update the counter
+				$count = GD_MetaManager::get_term_meta($target_id, $count_metakey, true);
+				GD_MetaManager::update_term_meta($target_id, $count_metakey, ($count + 1), true);
+			}
+			foreach ($deletions as $target_id) {
+
+				GD_MetaManager::delete_term_meta($target_id, $value_metakey, $user_id);
+
+				// Update the counter
+				$count = GD_MetaManager::get_term_meta($target_id, $count_metakey, true);
+				GD_MetaManager::update_term_meta($target_id, $count_metakey, ($count - 1), true);
 			}
 		}
 	}

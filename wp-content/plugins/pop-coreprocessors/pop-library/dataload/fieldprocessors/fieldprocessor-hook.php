@@ -12,6 +12,7 @@ class GD_DataLoad_FieldProcessor_Hook extends GD_DataLoad_FieldProcessor_HookBas
 		return array(
 			GD_DATALOAD_FIELDPROCESSOR_POSTS,
 			GD_DATALOAD_FIELDPROCESSOR_USERS,
+			GD_DATALOAD_FIELDPROCESSOR_TAGS,
 		);
 	}
 

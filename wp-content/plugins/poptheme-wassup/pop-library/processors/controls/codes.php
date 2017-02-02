@@ -13,7 +13,6 @@ class GD_Template_Processor_CustomCodes extends GD_Template_Processor_CodesBase 
 	
 		return array(
 			GD_TEMPLATE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL,
-			// GD_TEMPLATE_CODE_RECOMMENDUNRECOMMENDPOST_LABEL,
 		);
 	}
 
@@ -22,12 +21,10 @@ class GD_Template_Processor_CustomCodes extends GD_Template_Processor_CodesBase 
 		switch ($template_id) {
 
 			case GD_TEMPLATE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
-			// case GD_TEMPLATE_CODE_RECOMMENDUNRECOMMENDPOST_LABEL:
 
 				// Allow TPP Debate website to override this label with "Agree?"
 				$labels = array(
 					GD_TEMPLATE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL => apply_filters('GD_Template_Processor_CustomCodes:updownvote:label', __('Important?', 'poptheme-wassup')),
-					// GD_TEMPLATE_CODE_RECOMMENDUNRECOMMENDPOST_LABEL => __('Recommend', 'poptheme-wassup'),
 				);
 
 				return sprintf(

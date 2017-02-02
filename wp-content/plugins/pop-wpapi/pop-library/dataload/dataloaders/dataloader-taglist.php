@@ -59,6 +59,10 @@ class GD_DataLoader_TagList extends GD_DataLoader_List {
 
 		$query['orderby'] = isset( $vars['orderby'] ) ? $vars['orderby'] : 'name';
 		$query['order'] = isset( $vars['order'] ) ? $vars['order'] : 'ASC';
+
+		if ($meta_query = $vars['meta-query']) {
+			$query['meta_query'] = $meta_query;
+		}
 		
 		return $query;
 	}

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-22 16:48+0800\n"
-"PO-Revision-Date: 2016-08-22 16:56+0800\n"
+"POT-Creation-Date: 2017-02-02 15:45+0800\n"
+"PO-Revision-Date: 2017-02-02 15:46+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -35,27 +35,27 @@ msgstr "Esta URL es incorrecta."
 msgid "This notification does not exist."
 msgstr "Esta notificación no existe."
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:340
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:386
 #, php-format
 msgid "<strong>%1$s</strong> co-authored %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> co-creó %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:341
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:387
 #, php-format
 msgid "<strong>%1$s</strong> co-authored “pending” %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> co-creó “pendiente” %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:342
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:388
 #, php-format
 msgid "<strong>%1$s</strong> co-authored “draft” %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> co-creó “borrador” %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:352
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:398
 #, php-format
 msgid "<strong>%1$s</strong> mentioned you in %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> te ha mencionado en %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:353
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:399
 #, php-format
 msgid ""
 "<strong>%1$s</strong> mentioned you in “pending” %2$s <strong>%3$s</strong>"
@@ -63,7 +63,7 @@ msgstr ""
 "<strong>%1$s</strong> te ha mencionado en “pendiente” %2$s <strong>%3$s</"
 "strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:354
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:400
 #, php-format
 msgid ""
 "<strong>%1$s</strong> mentioned you in “draft” %2$s <strong>%3$s</strong>"
@@ -71,42 +71,51 @@ msgstr ""
 "<strong>%1$s</strong> te ha mencionado en “borrador” %2$s <strong>%3$s</"
 "strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:360
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:406
 #, php-format
 msgid "<strong>%1$s</strong> created %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> creó %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:361
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:407
 #, php-format
 msgid "<strong>%1$s</strong> created “pending” %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> creó “pendiente” %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:362
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:408
 #, php-format
 msgid "<strong>%1$s</strong> created “draft” %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> creó “borrador” %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:388
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:424
+#, php-format
+msgid "%1$s (<em>tags: <strong>%2$s</strong></em>)"
+msgstr "%1$s (<em>tags: <strong>%2$s</strong></em>)"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:426
+msgid ", "
+msgstr ", "
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:454
 #, php-format
 msgid "<strong>%1$s</strong> updated %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> modificó %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:389
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:455
 #, php-format
 msgid "<strong>%1$s</strong> updated “pending” %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> modificó “pendiente” %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:390
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:456
 #, php-format
 msgid "<strong>%1$s</strong> updated “draft” %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> modificó “borrador” %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:391
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:457
 #, php-format
 msgid "<strong>%1$s</strong> removed %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> removió %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:393
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:459
 #, php-format
 msgid ""
 "<strong>%1$s</strong> posted content related to %2$s <strong>%3$s</strong>"
@@ -114,47 +123,46 @@ msgstr ""
 "<strong>%1$s</strong> posteó contenido relacionado a %2$s <strong>%3$s</"
 "strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:394
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:460
 #, php-format
 msgid "<strong>%1$s</strong> has recommended %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> ha recomendado %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:395
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:461
 #, php-format
 msgid "<strong>%1$s</strong> stopped recommending %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> dejó de recomendar %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:396
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:462
 #, php-format
 msgid "<strong>%1$s</strong> upvoted %2$s <strong>%3$s</strong>"
 msgstr "<strong>%1$s</strong> está de acuerdo con %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:397
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:463
 #, php-format
 msgid "<strong>%1$s</strong> stopped upvoting %2$s <strong>%3$s</strong>"
 msgstr ""
-"<strong>%1$s</strong> dejó de estar de acuerdo con %2$s <strong>%3$s</"
-"strong>"
+"<strong>%1$s</strong> dejó de estar de acuerdo con %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:398
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:464
 #, php-format
 msgid "<strong>%1$s</strong> downvoted %2$s <strong>%3$s</strong>"
 msgstr ""
 "<strong>%1$s</strong> está en desacuerdo con %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:399
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:465
 #, php-format
 msgid "<strong>%1$s</strong> stopped downvoting %2$s <strong>%3$s</strong>"
 msgstr ""
 "<strong>%1$s</strong> dejó de estar en desacuerdo con %2$s <strong>%3$s</"
 "strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:415
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:481
 #, php-format
 msgid "Your %1$s <strong>%2$s</strong> was approved"
 msgstr "Tu %1$s <strong>%2$s</strong> ha sido aprobado"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:416
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:482
 #, php-format
 msgid ""
 "Your %1$s <strong>%2$s</strong> was sent back to “draft”, please review it"
@@ -162,12 +170,12 @@ msgstr ""
 "Tu %1$s <strong>%2$s</strong> ha sido puesto como “borrador”, por favor "
 "revéalo"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:417
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:483
 #, php-format
 msgid "Your %1$s <strong>%2$s</strong> was deleted"
 msgstr "Tu %1$s <strong>%2$s</strong> ha sido eliminado"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:418
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:484
 #, php-format
 msgid ""
 "Your %1$s <strong>%2$s</strong> was deleted for not adhering to our content "
@@ -176,21 +184,21 @@ msgstr ""
 "Tu %1$s <strong>%2$s</strong> ha sido eliminado por no adherir a nuestras "
 "reglas de contenido"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:442
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:508
 #, php-format
 msgid "<strong>%s</strong> is now following %s"
 msgstr "<strong>%s</strong> está siguiendo a %s"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:443
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:509
 #, php-format
 msgid "<strong>%s</strong> stopped following %s"
 msgstr "<strong>%s</strong> dejó de seguir a %s"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:447
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:513
 msgid "you"
 msgstr "usted"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:458
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:524
 #, php-format
 msgid ""
 "<strong>Welcome to %s, %s!</strong><br/>Check out here what is the purpose "
@@ -199,32 +207,42 @@ msgstr ""
 "<strong>Bienvenido a %s, %s!</strong><br/>Vea aquí cuál es el propósito de "
 "este sitio web"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:471
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:537
 #, php-format
 msgid "<strong>%s</strong> changed the password"
 msgstr "<strong>%s</strong> modificó su contraseña"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:472
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:538
 #, php-format
 msgid "<strong>%s</strong> updated the user profile"
 msgstr "<strong>%s</strong> modificó su perfil de usuario"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:473
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:539
 #, php-format
 msgid "<strong>%s</strong> updated the user photo"
 msgstr "<strong>%s</strong> modificó su foto de usuario"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:474
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:540
 #, php-format
 msgid "<strong>%s</strong> logged in"
 msgstr "<strong>%s</strong> se logueó"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:475
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:541
 #, php-format
 msgid "<strong>%s</strong> logged out"
 msgstr "<strong>%s</strong> se deslogueó"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:498
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:568
+#, php-format
+msgid "<strong>%s</strong> subscribed to <strong>%s</strong>"
+msgstr "<strong>%s</strong> se suscribió a <strong>%s</strong>"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:569
+#, php-format
+msgid "<strong>%s</strong> unsubscribed from <strong>%s</strong>"
+msgstr "<strong>%s</strong> se desuscribió de <strong>%s</strong>"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:602
 #, php-format
 msgid ""
 "Your comment on %1$s <strong>%2$s</strong> was deleted for not adhering to "
@@ -233,21 +251,20 @@ msgstr ""
 "Tu comentario en %1$s <strong>%2$s</strong> fue eliminado por no adherir a "
 "nuestras reglas de contenido"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:512
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:616
 #, php-format
 msgid "<strong>%1$s</strong> commented in %2$s <strong>%3$s</strong>"
 msgstr ""
 "<strong>%1$s</strong> agregó un comentario en %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:517
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:621
 #, php-format
 msgid ""
 "<strong>%1$s</strong> replied to your comment in %2$s <strong>%3$s</strong>"
 msgstr ""
-"<strong>%1$s</strong> respondió a su comentario en %2$s <strong>%3$s</"
-"strong>"
+"<strong>%1$s</strong> respondió a su comentario en %2$s <strong>%3$s</strong>"
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:525
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-notifications.php:629
 #, php-format
 msgid ""
 "<strong>%1$s</strong> mentioned you in a comment in %2$s <strong>%3$s</"

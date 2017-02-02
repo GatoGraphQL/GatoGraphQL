@@ -22,6 +22,10 @@ define ('GD_TEMPLATE_BUTTON_RECOMMENDPOST_FULL', PoP_ServerUtils::get_template_d
 define ('GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-recommendpost-preview'));
 define ('GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL', PoP_ServerUtils::get_template_definition('button-unrecommendpost-full'));
 define ('GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-unrecommendpost-preview'));
+define ('GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL', PoP_ServerUtils::get_template_definition('button-subscribetotag-full'));
+define ('GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW', PoP_ServerUtils::get_template_definition('button-subscribetotag-preview'));
+define ('GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL', PoP_ServerUtils::get_template_definition('button-unsubscribefromtag-full'));
+define ('GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW', PoP_ServerUtils::get_template_definition('button-unsubscribefromtag-preview'));
 define ('GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-upvotepost-preview'));
 define ('GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL', PoP_ServerUtils::get_template_definition('button-sidebar-upvotepost-full'));
 define ('GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-undoupvotepost-preview'));
@@ -53,6 +57,10 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW,
 			GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL,
 			GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW,
+			GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL,
+			GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW,
+			GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL,
+			GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW,
 			GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW,
 			GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL,
 			GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW,
@@ -112,6 +120,10 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 					GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW => GD_TEMPLATE_BUTTONINNER_RECOMMENDPOST_PREVIEW,
 					GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL => GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_FULL,
 					GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW => GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW,
+					GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL => GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_FULL,
+					GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW => GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW,
+					GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL => GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL,
+					GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW => GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW,
 					GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW => GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_PREVIEW,
 					GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL => GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_FULL,
 					GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW => GD_TEMPLATE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW,
@@ -175,6 +187,16 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
 
 				return 'unrecommendpost-url';
+					
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL:
+				
+				return 'subscribetotag-url';
+
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
+
+				return 'unsubscribefromtag-url';
 
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
@@ -267,6 +289,16 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
 		
 				return __('Recommended', 'pop-coreprocessors');
+			
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
+
+				return __('Subscribe', 'pop-coreprocessors');
+
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
+		
+				return __('Subscribed', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
@@ -361,6 +393,8 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL:
 			case GD_TEMPLATE_BUTTON_RECOMMENDPOST_FULL:
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
 			case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL:
 			case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_FULL:
@@ -373,6 +407,8 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW:
 			case GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_PREVIEW:
@@ -416,6 +452,18 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 
 				$ret .= ' '.GD_CLASS_UNRECOMMENDPOST;
 				break;
+			
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
+
+				$ret .= ' '.GD_CLASS_SUBSCRIBETOTAG;
+				break;
+
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
+
+				$ret .= ' '.GD_CLASS_UNSUBSCRIBEFROMTAG;
+				break;
 
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
@@ -452,6 +500,10 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			case GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
 			case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
@@ -464,6 +516,37 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 				$ret .= ' pop-functionbutton';
 				break;
 		}
+		
+		switch ($template_id) {
+					
+			case GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL:
+			case GD_TEMPLATE_BUTTON_FOLLOWUSER_PREVIEW:
+			case GD_TEMPLATE_BUTTON_RECOMMENDPOST_FULL:
+			case GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
+			case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_FULL:
+
+				$ret .= ' pop-functionaction';
+				break;
+
+			case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL:
+			case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
+			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL:
+			case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_FULL:
+
+				$ret .= ' pop-functionunaction';
+				break;
+		}
 
 		// Make the classes 'active' as to make them appear as they've been clicked from the previous state
 		switch ($template_id) {
@@ -472,6 +555,8 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
 			case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
+			case GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
 			case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL:
 			case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
@@ -483,125 +568,6 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 
 		return $ret;
 	}
-
-	// function init_atts($template_id, &$atts) {
-
-	// 	switch ($template_id) {
-					
-	// 		// case GD_TEMPLATE_BUTTON_POSTCOMMENTS:
-
-	// 		// 	// Do not show the 'Loading' message on top
-	// 		// 	// $this->merge_att($template_id, $atts, 'params', array(
-	// 		// 	// 	'data-loadingmsg-target' => '',
-	// 		// 	// 	'data-addspinner' => true,
-	// 		// 	// ));
-	// 		// 	$this->append_att($template_id, $atts, 'class', 'pop-functionbutton');
-	// 		// 	break;
-
-	// 		case GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL:
-
-	// 			$this->append_att($template_id, $atts, 'class', 'pop-hidden-print');
-	// 			break;
-	// 	}
-
-	// 	switch ($template_id) {
-					
-	// 		case GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL:
-	// 		case GD_TEMPLATE_BUTTON_FOLLOWUSER_PREVIEW:
-				
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_FOLLOWUSER);
-	// 			break;
-
-	// 		case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW:
-
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_UNFOLLOWUSER);
-	// 			break;
-			
-	// 		case GD_TEMPLATE_BUTTON_RECOMMENDPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW:
-
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_RECOMMENDPOST);
-	// 			break;
-
-	// 		case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
-
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_UNRECOMMENDPOST);
-	// 			break;
-
-	// 		case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
-
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_UPVOTEPOST);
-	// 			break;
-
-	// 		case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL:
-
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_UNDOUPVOTEPOST);
-	// 			break;
-
-	// 		case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_FULL:
-
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_DOWNVOTEPOST);
-	// 			break;
-
-	// 		case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_FULL:
-
-	// 			$this->append_att($template_id, $atts, 'class', GD_CLASS_UNDODOWNVOTEPOST);
-	// 			break;
-	// 	}
-		
-	// 	switch ($template_id) {
-					
-	// 		case GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL:
-	// 		case GD_TEMPLATE_BUTTON_FOLLOWUSER_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_RECOMMENDPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_DOWNVOTEPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_FULL:
-
-	// 			// Do not show the 'Loading' message on top
-	// 			// $this->merge_att($template_id, $atts, 'params', array(
-	// 			// 	'data-loadingmsg-target' => '',
-	// 			// 	'data-addspinner' => true,
-	// 			// ));
-	// 			$this->append_att($template_id, $atts, 'class', 'pop-functionbutton');
-	// 			break;
-	// 	}
-
-	// 	// Make the classes 'active' as to make them appear as they've been clicked from the previous state
-	// 	switch ($template_id) {
-					
-	// 		case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL:
-	// 		case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
-	// 		case GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_FULL:
-
-	// 			$this->append_att($template_id, $atts, 'class', 'active');
-	// 			break;
-	// 	}
-		
-	// 	return parent::init_atts($template_id, $atts);
-	// }
 }
 
 /**---------------------------------------------------------------------------------------------------------------

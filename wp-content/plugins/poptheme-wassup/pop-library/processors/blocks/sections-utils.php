@@ -156,6 +156,18 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 		$ret['tag'] = $tag->slug;
 	}
 
+	public static function add_dataloadqueryargs_tagsubscribers(&$ret) {
+
+		$tag_id = get_queried_object_id();
+		if (!isset($ret['meta-query'])) { $ret['meta-query'] = array(); }
+		
+		$ret['meta-query'][] = array(
+			'key' => GD_MetaManager::get_meta_key(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, GD_META_TYPE_USER),
+			'value' => $tag_id,
+			'compare' => 'IN'
+		);
+	}
+
 	public static function add_dataloadqueryargs_authorfollowers(&$ret) {
 
 		global $author;
@@ -179,6 +191,20 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 		// And the Organization must've accepted it by leaving the Show As Member privilege on
 		$ret['meta-query'][] = array(
 			'key' => GD_MetaManager::get_meta_key(GD_METAKEY_PROFILE_FOLLOWEDBY, GD_META_TYPE_USER),
+			'value' => $author,
+			'compare' => 'IN'
+		);
+	}
+
+	public static function add_dataloadqueryargs_authorsubscribedtotags(&$ret) {
+
+		global $author;
+		if (!isset($ret['meta-query'])) { $ret['meta-query'] = array(); }
+		
+		// It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
+		// And the Organization must've accepted it by leaving the Show As Member privilege on
+		$ret['meta-query'][] = array(
+			'key' => GD_MetaManager::get_meta_key(GD_METAKEY_TERM_SUBSCRIBEDBY, GD_META_TYPE_TERM),
 			'value' => $author,
 			'compare' => 'IN'
 		);

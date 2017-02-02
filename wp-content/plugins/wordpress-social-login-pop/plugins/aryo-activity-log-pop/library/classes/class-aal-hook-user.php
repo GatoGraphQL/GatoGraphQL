@@ -1,7 +1,20 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class WSL_AAL_PoP_Hook_User extends AAL_Hook_Base {
+class WSL_AAL_PoP_Hook_Users extends AAL_Hook_Base {
+
+	public function __construct() {
+
+		// Prompt the user to change the email
+		add_action(
+			'wsl_hook_process_login_after_wp_insert_user', 
+			array($this, 'request_change_email'),
+			20, // Execute after the User Welcome Message
+			2
+		);
+
+		parent::__construct();
+	}
 
 	public function request_change_email($user_id, $provider) {
 
@@ -28,19 +41,6 @@ class WSL_AAL_PoP_Hook_User extends AAL_Hook_Base {
 			'object_id'   => $user_id,
 			'object_name' => get_the_author_meta('display_name', $user_id),//$description,
 		) );
-	}
-
-	public function __construct() {
-
-		// Prompt the user to change the email
-		add_action(
-			'wsl_hook_process_login_after_wp_insert_user', 
-			array($this, 'request_change_email'),
-			20, // Execute after the User Welcome Message
-			2
-		);
-
-		parent::__construct();
 	}
 
 }

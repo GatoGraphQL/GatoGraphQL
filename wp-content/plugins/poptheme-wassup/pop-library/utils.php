@@ -42,7 +42,6 @@ class PoPTheme_Wassup_Utils {
 				break;
 				
 			case POP_SCREEN_NOTIFICATIONS:
-			case POP_SCREEN_TAGS:
 			case POP_SCREEN_HIGHLIGHTS:
 			case POP_SCREEN_SINGLEHIGHLIGHTS:
 
@@ -52,6 +51,9 @@ class PoPTheme_Wassup_Utils {
 			case POP_SCREEN_USERS:
 			case POP_SCREEN_AUTHORUSERS:
 			case POP_SCREEN_SINGLEUSERS:
+			case POP_SCREEN_TAGUSERS:
+			case POP_SCREEN_TAGS:
+			case POP_SCREEN_AUTHORTAGS:
 
 				$format = GD_TEMPLATEFORMAT_DETAILS;
 				break;
@@ -153,5 +155,10 @@ class PoPTheme_Wassup_Utils {
 
 		// Allow Organik Fundraising to override the welcome title
 		return apply_filters('PoPTheme_Wassup_Utils:welcome_title', $welcometitle);
+	}
+
+	public static function add_mainpagesection_scrollbar() {
+
+		return apply_filters('PoPTheme_Wassup_Utils:add_mainpagesection_scrollbar', false);
 	}
 }

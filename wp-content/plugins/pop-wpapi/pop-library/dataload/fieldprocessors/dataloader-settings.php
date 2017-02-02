@@ -13,6 +13,7 @@ $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_SINGLE, GD_DATALOAD_FIE
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_EDITPOST, GD_DATALOAD_FIELDPROCESSOR_POSTS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_NOPOSTS, GD_DATALOAD_FIELDPROCESSOR_POSTS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_USERLIST, GD_DATALOAD_FIELDPROCESSOR_USERS);
+$gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_TAG, GD_DATALOAD_FIELDPROCESSOR_TAGS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_TAGLIST, GD_DATALOAD_FIELDPROCESSOR_TAGS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_TRENDINGTAGLIST, GD_DATALOAD_FIELDPROCESSOR_TAGS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_NOUSERS, GD_DATALOAD_FIELDPROCESSOR_USERS);

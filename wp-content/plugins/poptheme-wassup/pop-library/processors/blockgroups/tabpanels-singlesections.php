@@ -350,7 +350,6 @@ class GD_Template_Processor_SingleSectionTabPanelBlockGroups extends GD_Template
 
 	function get_title($template_id) {
 
-		global $gd_template_settingsmanager;
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDCONTENT:

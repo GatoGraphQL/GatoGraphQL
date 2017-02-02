@@ -17,9 +17,11 @@ define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER', PoP_ServerUti
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postrecommendunrecommend'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postupvoteundoupvote'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postdownvoteundodownvote'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-tagsubscribetounsubscribefrom'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSHARE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-usershare'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERCONTACTINFO', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-usercontactinfo'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-comments'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-tagshare'));
 
 class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 
@@ -38,9 +40,11 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE,
+			GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSHARE,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERCONTACTINFO,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS,
+			GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE,
 		);
 	}
 
@@ -114,6 +118,12 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 				$ret[] = GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW;
 				break;
 
+			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM:
+
+				$ret[] = GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW;
+				$ret[] = GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW;
+				break;
+
 			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSHARE:
 
 				$ret[] = GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE;
@@ -128,24 +138,15 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 
 				$ret[] = GD_TEMPLATE_BUTTON_POSTCOMMENTS;
 				break;
+
+			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE:
+
+				$ret[] = GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE;
+				break;
 		}
 		
 		return $ret;
 	}
-
-	// function init_atts($template_id, &$atts) {
-
-	// 	switch ($template_id) {
-		
-	// 		case GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND:
-
-	// 			// Needed for hiding the Recommend/Unrecommend when not needed, eg: Highlight
-	// 			$this->append_att($template_id, $atts, 'class', 'pop-recommendunrecommend');
-	// 			break;
-	// 	}
-			
-	// 	return parent::init_atts($template_id, $atts);
-	// }
 }
 
 /**---------------------------------------------------------------------------------------------------------------

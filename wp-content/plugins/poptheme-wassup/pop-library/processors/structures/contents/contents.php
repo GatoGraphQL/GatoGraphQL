@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_CONTENT_AUTHOR', PoP_ServerUtils::get_template_definition('content-author'));
+// define ('GD_TEMPLATE_CONTENT_TAG', PoP_ServerUtils::get_template_definition('content-tag'));
 define ('GD_TEMPLATE_CONTENT_SINGLE', PoP_ServerUtils::get_template_definition('content-single'));
 define ('GD_TEMPLATE_CONTENT_USERPOSTINTERACTION', PoP_ServerUtils::get_template_definition('content-userpostinteraction'));
 define ('GD_TEMPLATE_CONTENT_POSTHEADER', PoP_ServerUtils::get_template_definition('content-postheader'));
@@ -28,6 +29,7 @@ class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase 
 	
 		return array(
 			GD_TEMPLATE_CONTENT_AUTHOR,
+			// GD_TEMPLATE_CONTENT_TAG,
 			GD_TEMPLATE_CONTENT_SINGLE,
 			GD_TEMPLATE_CONTENT_USERPOSTINTERACTION,
 			GD_TEMPLATE_CONTENT_POSTHEADER,
@@ -48,6 +50,7 @@ class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase 
 
 		$inners = array(
 			GD_TEMPLATE_CONTENT_AUTHOR => GD_TEMPLATE_CONTENTINNER_AUTHOR,
+			// GD_TEMPLATE_CONTENT_TAG => GD_TEMPLATE_CONTENTINNER_TAG,
 			// GD_TEMPLATE_CONTENT_SINGLE => GD_TEMPLATE_CONTENTINNER_SINGLE,		
 			// GD_TEMPLATE_CONTENT_USERPOSTINTERACTION => GD_TEMPLATE_CONTENTINNER_USERPOSTINTERACTION,		
 			GD_TEMPLATE_CONTENT_POSTHEADER => GD_TEMPLATE_CONTENTINNER_POSTHEADER,		

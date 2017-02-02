@@ -332,6 +332,18 @@ function gd_em_singlesectiontabpanelblockgroups_blocks($blockgroup_blocks, $bloc
 
 	return $blockgroup_blocks;
 }
+add_filter('GD_Template_Processor_TagSectionTabPanelBlockGroups:blocks', 'gd_em_tagsectiontabpanelblockgroups_blocks', 10, 2);
+function gd_em_tagsectiontabpanelblockgroups_blocks($blockgroup_blocks, $blockgroup) {
+
+	$blockgroup_blockmaps = array(
+		GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSUBSCRIBERS => GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
+	);
+	if ($map = $blockgroup_blockmaps[$blockgroup]) {
+		$blockgroup_blocks[] = $map;
+	}
+
+	return $blockgroup_blocks;
+}
 add_filter('GD_Template_Processor_TopLevelCarouselBlockGroups:blockgroup_blocks', 'gd_em_websitefeatures_whoweare_blockgroups_blocks', 10, 2);
 add_filter('GetPoP_Template_Processor_SectionTabPanelBlockGroups:blockgroup_blocks', 'gd_em_websitefeatures_whoweare_blockgroups_blocks', 10, 2);
 function gd_em_websitefeatures_whoweare_blockgroups_blocks($blockgroup_blocks, $template_id) {
@@ -359,6 +371,18 @@ function gd_em_singlesectiontabpanelblockgroups_panelheaders($panelheaders, $blo
 		GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERECOMMENDEDBY => GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP,
 		GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEUPVOTEDBY => GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP,
 		GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEDOWNVOTEDBY => GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP,
+	);
+	if ($map = $blockgroup_blockmaps[$blockgroup]) {
+		$panelheaders[$map] = array();
+	}
+
+	return $panelheaders;
+}
+add_filter('GD_Template_Processor_TagSectionTabPanelBlockGroups:panel_headers', 'gd_em_tagsectiontabpanelblockgroups_panelheaders', 10, 2);
+function gd_em_tagsectiontabpanelblockgroups_panelheaders($panelheaders, $blockgroup) {
+
+	$blockgroup_blockmaps = array(
+		GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSUBSCRIBERS => GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
 	);
 	if ($map = $blockgroup_blockmaps[$blockgroup]) {
 		$panelheaders[$map] = array();

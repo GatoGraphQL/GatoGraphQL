@@ -57,6 +57,17 @@ class Wassup_EM_Template_SettingsProcessorHooks {
 			}
 		}
 
+		// Tag page blocks
+		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
+
+			$pageblocks_map = array(
+				POP_COREPROCESSORS_PAGE_SUBSCRIBERS => GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
+			);
+			foreach ($pageblocks_map as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
+			}
+		}
+
 		return $ret;	
 	}
 }

@@ -8,6 +8,7 @@
 
 define ('GD_META_TYPE_POST', 'post');
 define ('GD_META_TYPE_USER', 'user');
+define ('GD_META_TYPE_TERM', 'term');
 define ('GD_META_TYPE_COMMENT', 'comment');
 
 class GD_MetaManager {
@@ -75,6 +76,30 @@ class GD_MetaManager {
 	public static function delete_post_meta($post_id, $key, $value = null, $unique = false) {
 		
 		delete_post_meta($post_id, self::get_meta_key($key, GD_META_TYPE_POST), $value, $unique);
+	}
+
+	public static function get_term_meta($term_id, $key, $single = false) {
+
+		return get_term_meta( $term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $single );
+	}
+	public static function update_term_meta($term_id, $key, $values, $single = false) {
+		
+		$values = self::normalize_values($values);
+
+		// Add the values as independent values so each one of them can be searched using EXISTS on WP_Query
+		delete_term_meta( $term_id, self::get_meta_key($key, GD_META_TYPE_TERM));
+		foreach ($values as $value) {
+		
+			add_term_meta( $term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $value, $single );	
+		}
+	}
+	public static function add_term_meta($term_id, $key, $value, $unique = false) {
+		
+		add_term_meta($term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $value, $unique);
+	}
+	public static function delete_term_meta($term_id, $key, $value = null, $unique = false) {
+		
+		delete_term_meta($term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $value, $unique);
 	}
 
 	public static function get_user_meta($user_id, $key, $single = false) {

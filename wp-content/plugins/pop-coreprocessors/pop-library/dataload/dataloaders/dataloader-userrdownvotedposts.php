@@ -15,8 +15,13 @@ class GD_DataLoader_UserDownvotesPosts extends GD_DataLoader_Post {
 	}
 	
 	function get_data_ids($vars = array(), $is_main_query = false) {
-	
-		return GD_MetaManager::get_user_meta(get_current_user_id(), GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
+
+		if (!is_user_logged_in()) {
+			return array();
+		}
+		$ids = GD_MetaManager::get_user_meta(get_current_user_id(), GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
+
+		return $ids ? $ids : array();
 	}
 }
 	

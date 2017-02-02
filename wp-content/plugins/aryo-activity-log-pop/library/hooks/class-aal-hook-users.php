@@ -3,7 +3,35 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 
-class AAL_PoP_Hook_User extends AAL_Hook_Base {
+class AAL_PoP_Hook_Users extends AAL_Hook_Base {
+
+	public function __construct() {
+
+		// Welcome message given to user upon creating an account
+		add_action('gd_createupdate_user:additionals_create', array($this, 'welcome_message'));
+
+		// Follows/Unfollows user
+		add_action('gd_followuser', array($this, 'follows_user'));
+		add_action('gd_unfollowuser', array($this, 'unfollows_user'));
+
+		// Changed password
+		add_action('gd_changepassword_user', array($this, 'changed_password'), 10, 1);
+
+		// Updated profile
+		add_action('gd_createupdate_user:additionals_update', array($this, 'updated_profile'), 10, 1);
+
+		// Updated photo
+		add_action('gd_useravatar_update:additionals', array($this, 'updated_photo'), 10, 1);
+
+		// Logged in/out
+		add_action('gd:user:loggedin', array($this, 'logged_in'), 10, 1);
+		add_action('gd:user:loggedout', array($this, 'logged_out'), 10, 1);
+
+		// When a user is deleted from the system, delete all notifications from/for the user
+		add_action('delete_user', array($this, 'delete_user'), 10, 1);
+
+		parent::__construct();
+	}
 
 	public function welcome_message($user_id) {
 
@@ -81,34 +109,6 @@ class AAL_PoP_Hook_User extends AAL_Hook_Base {
 	public function delete_user($user_id) {
 
 		AAL_Main::instance()->api->clear_user($user_id);
-	}
-
-	public function __construct() {
-
-		// Welcome message given to user upon creating an account
-		add_action('gd_createupdate_user:additionals_create', array($this, 'welcome_message'));
-
-		// Follows/Unfollows user
-		add_action('gd_followuser', array($this, 'follows_user'));
-		add_action('gd_unfollowuser', array($this, 'unfollows_user'));
-
-		// Changed password
-		add_action('gd_changepassword_user', array($this, 'changed_password'), 10, 1);
-
-		// Updated profile
-		add_action('gd_createupdate_user:additionals_update', array($this, 'updated_profile'), 10, 1);
-
-		// Updated photo
-		add_action('gd_useravatar_update:additionals', array($this, 'updated_photo'), 10, 1);
-
-		// Logged in/out
-		add_action('gd:user:loggedin', array($this, 'logged_in'), 10, 1);
-		add_action('gd:user:loggedout', array($this, 'logged_out'), 10, 1);
-
-		// When a user is deleted from the system, delete all notifications from/for the user
-		add_action('delete_user', array($this, 'delete_user'), 10, 1);
-
-		parent::__construct();
 	}
 
 }

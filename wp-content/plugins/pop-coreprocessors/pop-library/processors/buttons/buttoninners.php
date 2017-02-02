@@ -21,6 +21,10 @@ define ('GD_TEMPLATE_BUTTONINNER_RECOMMENDPOST_PREVIEW', PoP_ServerUtils::get_te
 define ('GD_TEMPLATE_BUTTONINNER_RECOMMENDPOST_FULL', PoP_ServerUtils::get_template_definition('buttoninner-sidebar-recommendpost-full'));
 define ('GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-unrecommendpost-preview'));
 define ('GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_FULL', PoP_ServerUtils::get_template_definition('buttoninner-sidebar-unrecommendpost-full'));
+define ('GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-subscribetotag-preview'));
+define ('GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_FULL', PoP_ServerUtils::get_template_definition('buttoninner-sidebar-subscribetotag-full'));
+define ('GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-unsubscribefromtag-preview'));
+define ('GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL', PoP_ServerUtils::get_template_definition('buttoninner-sidebar-unsubscribefromtag-full'));
 define ('GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-upvotepost-preview'));
 define ('GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_FULL', PoP_ServerUtils::get_template_definition('viewcomponentuttoninner-sidebar-upvotepost-full'));
 define ('GD_TEMPLATE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-undoupvotepost-preview'));
@@ -51,6 +55,10 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 			GD_TEMPLATE_BUTTONINNER_RECOMMENDPOST_FULL,
 			GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW,
 			GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_FULL,
+			GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW,
+			GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_FULL,
+			GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW,
+			GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL,
 			GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_PREVIEW,
 			GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_FULL,
 			GD_TEMPLATE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW,
@@ -70,6 +78,8 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 			case GD_TEMPLATE_BUTTONINNER_UNFOLLOWUSER_FULL:
 			case GD_TEMPLATE_BUTTONINNER_RECOMMENDPOST_FULL:
 			case GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_FULL:
+			case GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
 			case GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_FULL:
 			case GD_TEMPLATE_BUTTONINNER_UNDOUPVOTEPOST_FULL:
 			case GD_TEMPLATE_BUTTONINNER_DOWNVOTEPOST_FULL:
@@ -115,6 +125,11 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 			case GD_TEMPLATE_BUTTONINNER_FOLLOWUSER_FULL:
 			case GD_TEMPLATE_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
 			case GD_TEMPLATE_BUTTONINNER_UNFOLLOWUSER_FULL:
+
+			case GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW:
+			case GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
 				
 				return 'fa-fw fa-hand-o-right';
 
@@ -188,30 +203,12 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 
 				return __('Recommend', 'pop-coreprocessors');
 
-			// case GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:			
-			// case GD_TEMPLATE_BUTTONINNER_UNRECOMMENDPOST_FULL:
+			case GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_PREVIEW:			
+			case GD_TEMPLATE_BUTTONINNER_SUBSCRIBETOTAG_FULL:
+			case GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_PREVIEW:			
+			case GD_TEMPLATE_BUTTONINNER_UNSUBSCRIBEFROMTAG_FULL:
 
-			// 	return __('Recommended', 'pop-coreprocessors');
-
-			// case GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_PREVIEW:
-			// case GD_TEMPLATE_BUTTONINNER_UPVOTEPOST_FULL:
-
-			// 	return __('Up-vote', 'pop-coreprocessors');
-
-			// case GD_TEMPLATE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW:
-			// case GD_TEMPLATE_BUTTONINNER_UNDOUPVOTEPOST_FULL:
-
-			// 	return __('Up-voted', 'pop-coreprocessors');
-
-			// case GD_TEMPLATE_BUTTONINNER_DOWNVOTEPOST_PREVIEW:
-			// case GD_TEMPLATE_BUTTONINNER_DOWNVOTEPOST_FULL:
-
-			// 	return __('Down-vote', 'pop-coreprocessors');
-
-			// case GD_TEMPLATE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW:
-			// case GD_TEMPLATE_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
-
-			// 	return __('Down-voted', 'pop-coreprocessors');
+				return __('Subscribe', 'pop-coreprocessors');
 		}
 
 		return parent::get_btn_title($template_id);

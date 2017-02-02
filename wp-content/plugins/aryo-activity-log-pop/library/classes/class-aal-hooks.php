@@ -38,10 +38,11 @@ class AAL_PoP_Hooks {
 		// new AAL_Hook_Comments();
 
 		// Assign them in a global variable, so their methods can be invoked from outside (eg: function welcome_message can be invoked from WSL)
-		global $aal_pop_hook_user, $aal_pop_hook_posts, $aal_pop_hook_comments;
-		$aal_pop_hook_user = new AAL_PoP_Hook_User();
+		global $aal_pop_hook_users, $aal_pop_hook_posts, $aal_pop_hook_comments, $aal_pop_hook_tags;
+		$aal_pop_hook_users = new AAL_PoP_Hook_Users();
 		$aal_pop_hook_posts = new AAL_PoP_Hook_Posts();
 		$aal_pop_hook_comments = new AAL_PoP_Hook_Comments();
+		$aal_pop_hook_tags = new AAL_PoP_Hook_Tags();
 
 		// Allow for more hooks
 		do_action('AAL_PoP_Hooks');

@@ -27,7 +27,8 @@ function gd_get_document_title() {
     $content = single_cat_title("", false);
   }
   elseif ( is_tag() ) { 
-    $content = gd_content_tag_query();
+    // $content = gd_content_tag_query();
+    $content = PoP_TagUtils::get_tag_symbol().single_tag_title("", false);
   }
   elseif ( is_404() ) { 
     $content = __('Ops, nothing found here!', 'pop-engine'); 

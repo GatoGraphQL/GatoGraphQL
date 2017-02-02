@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 18:09+0800\n"
-"PO-Revision-Date: 2016-12-24 18:09+0800\n"
+"POT-Creation-Date: 2017-02-02 15:47+0800\n"
+"PO-Revision-Date: 2017-02-02 15:50+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -199,6 +199,10 @@ msgstr "Subir archivos"
 msgid "Set"
 msgstr "Establecer"
 
+#: .././library/mentions/tinymce.php:64
+msgid "#Hashtags"
+msgstr "#Hashtags"
+
 #: .././library/multiselect.php:12
 msgid "None selected"
 msgstr "Ninguna seleccionada"
@@ -334,6 +338,15 @@ msgstr "La funcionalidad no se puede aplicar en este post."
 msgid "You have already recommended <em><strong>%s</strong></em>."
 msgstr "Ya has recomendado <em><strong>%s</strong></em>."
 
+#: .././pop-library/dataload/actionexecuters/library/subscribetotag.php:25
+#, php-format
+msgid "You have already subscribed to <em><strong>%s</strong></em>."
+msgstr "Ya te has suscrito a <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/subscribetounsubscribefromtag.php:22
+msgid "The requested topic/tag does not exist."
+msgstr "El tag/tópico solicitado no existe."
+
 #: .././pop-library/dataload/actionexecuters/library/undo-downvotepost.php:24
 #, php-format
 msgid "You had not down-voted <em><strong>%s</strong></em>."
@@ -355,6 +368,11 @@ msgstr "No estabas siguiendo <em><strong>%s</strong></em>."
 msgid "You had not recommended <em><strong>%s</strong></em>."
 msgstr "No habías recomendado <em><strong>%s</strong></em>."
 
+#: .././pop-library/dataload/actionexecuters/library/unsubscribefromtag.php:25
+#, php-format
+msgid "You had not subscribed to <em><strong>%s</strong></em>."
+msgstr "No estabas suscrito a <em><strong>%s</strong></em>."
+
 #: .././pop-library/dataload/actionexecuters/library/update-user-metavalue.php:15
 msgid "This URL is incorrect."
 msgstr "Esta URL es incorrecta."
@@ -372,6 +390,11 @@ msgstr "El usuario solicitado no existe."
 #, php-format
 msgid "You have recommended <em><strong>%s</strong></em>."
 msgstr "Has recomendado <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/subscribetotag.php:33
+#, php-format
+msgid "You have subscribed to <em><strong>%s</strong></em>."
+msgstr "Te has suscrito a <em><strong>%s</strong></em>."
 
 #: .././pop-library/dataload/actionexecuters/undo-downvotepost.php:32
 #, php-format
@@ -392,6 +415,11 @@ msgstr "Has dejado de seguir a <em><strong>%s</strong></em>."
 #, php-format
 msgid "You have stopped recommending <em><strong>%s</strong></em>."
 msgstr "Has dejado de recomendar <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/unsubscribefromtag.php:33
+#, php-format
+msgid "You have unsubscribed from <em><strong>%s</strong></em>."
+msgstr "Te has desuscrito de <em><strong>%s</strong></em>."
 
 #: .././pop-library/dataload/actionexecuters/upvotepost.php:32
 #, php-format
@@ -570,6 +598,10 @@ msgstr "Ir al permalink"
 msgid "Pending"
 msgstr "Pendiente"
 
+#: .././pop-library/processors/abstract-classes/layouts/taginfo-base.php:25
+msgid "Count"
+msgstr "Número"
+
 #: .././pop-library/processors/abstract-classes/layouts/userquicklinks-base.php:22
 msgid "No contact channels"
 msgstr "Sin métodos de contacto"
@@ -605,82 +637,91 @@ msgstr ""
 "Enviar una invitación a tus amigos/colegas/etc para unirse a <em><strong>%s</"
 "strong></em>:"
 
-#: .././pop-library/processors/blocks/blocks.php:258
+#: .././pop-library/processors/blocks/blocks.php:226
 #: .././pop-library/processors/comments/blocks.php:175
 #: .././pop-library/processors/login/blocks.php:142
 msgid "Sending..."
 msgstr "Enviando..."
 
-#: .././pop-library/processors/buttons/buttoninners.php:152
-#: .././pop-library/processors/buttons/buttons.php:224
+#: .././pop-library/processors/buttons/buttoninners.php:167
+#: .././pop-library/processors/buttons/buttons.php:246
 msgid "Quickview"
 msgstr "Vista rápida"
 
-#: .././pop-library/processors/buttons/buttoninners.php:156
-#: .././pop-library/processors/buttons/buttons.php:229
-#: .././pop-library/processors/controls/anchor-controls.php:79
+#: .././pop-library/processors/buttons/buttoninners.php:171
+#: .././pop-library/processors/buttons/buttons.php:251
+#: .././pop-library/processors/controls/anchor-controls.php:81
 msgid "Print"
 msgstr "Imprimir"
 
-#: .././pop-library/processors/buttons/buttoninners.php:160
-#: .././pop-library/processors/buttons/buttons.php:233
+#: .././pop-library/processors/buttons/buttoninners.php:175
+#: .././pop-library/processors/buttons/buttons.php:255
 msgid "Edit"
 msgstr "Editar"
 
-#: .././pop-library/processors/buttons/buttoninners.php:164
-#: .././pop-library/processors/buttons/buttons.php:237
+#: .././pop-library/processors/buttons/buttoninners.php:179
+#: .././pop-library/processors/buttons/buttons.php:259
 msgid "View"
 msgstr "Ver"
 
-#: .././pop-library/processors/buttons/buttoninners.php:168
-#: .././pop-library/processors/buttons/buttons.php:241
+#: .././pop-library/processors/buttons/buttoninners.php:183
+#: .././pop-library/processors/buttons/buttons.php:263
 msgid "Preview"
 msgstr "Previsualizar"
 
-#: .././pop-library/processors/buttons/buttoninners.php:172
-#: .././pop-library/processors/buttons/buttons.php:245
-#: .././pop-library/processors/controls/anchor-controls.php:75
+#: .././pop-library/processors/buttons/buttoninners.php:187
+#: .././pop-library/processors/buttons/buttons.php:267
+#: .././pop-library/processors/controls/anchor-controls.php:77
 msgid "Permalink"
 msgstr "Permalink"
 
-#: .././pop-library/processors/buttons/buttoninners.php:177
-#: .././pop-library/processors/buttons/buttons.php:254
+#: .././pop-library/processors/buttons/buttoninners.php:192
+#: .././pop-library/processors/buttons/buttons.php:276
 msgid "Follow"
 msgstr "Seguir"
 
-#: .././pop-library/processors/buttons/buttoninners.php:182
-#: .././pop-library/processors/buttons/buttons.php:259
+#: .././pop-library/processors/buttons/buttoninners.php:197
+#: .././pop-library/processors/buttons/buttons.php:281
 msgid "Following"
 msgstr "Siguiendo"
 
-#: .././pop-library/processors/buttons/buttoninners.php:189
-#: .././pop-library/processors/buttons/buttons.php:264
+#: .././pop-library/processors/buttons/buttoninners.php:204
+#: .././pop-library/processors/buttons/buttons.php:286
 msgid "Recommend"
 msgstr "Recomendar"
 
-#: .././pop-library/processors/buttons/buttons.php:249
+#: .././pop-library/processors/buttons/buttoninners.php:211
+#: .././pop-library/processors/buttons/buttons.php:296
+msgid "Subscribe"
+msgstr "Subscribirse"
+
+#: .././pop-library/processors/buttons/buttons.php:271
 #: .././pop-library/processors/comments/structures/scrolls/widgetries.php:58
 #: .././pop-library/processors/comments/structures/scrolls/widgetries.php:59
 msgid "Comments"
 msgstr "Comentarios"
 
-#: .././pop-library/processors/buttons/buttons.php:269
+#: .././pop-library/processors/buttons/buttons.php:291
 msgid "Recommended"
 msgstr "Recomendado"
 
-#: .././pop-library/processors/buttons/buttons.php:274
+#: .././pop-library/processors/buttons/buttons.php:301
+msgid "Subscribed"
+msgstr "Suscrito"
+
+#: .././pop-library/processors/buttons/buttons.php:306
 msgid "Up-vote"
 msgstr "De acuerdo"
 
-#: .././pop-library/processors/buttons/buttons.php:279
+#: .././pop-library/processors/buttons/buttons.php:311
 msgid "Up-voted"
 msgstr "Estoy de acuerdo"
 
-#: .././pop-library/processors/buttons/buttons.php:284
+#: .././pop-library/processors/buttons/buttons.php:316
 msgid "Down-vote"
 msgstr "En desacuerdo"
 
-#: .././pop-library/processors/buttons/buttons.php:289
+#: .././pop-library/processors/buttons/buttons.php:321
 msgid "Down-voted"
 msgstr "Estoy en desacuerdo"
 
@@ -736,65 +777,75 @@ msgstr "Por favor %s para añadir un comentario."
 msgid "You need a %s account to add a comment."
 msgstr "Necesitás una cuenta de %s para añadir un comentario."
 
-#: .././pop-library/processors/controls/anchor-controls.php:63
+#: .././pop-library/processors/controls/anchor-controls.php:65
 msgid "Toggle compact/full form"
 msgstr "Alternar formulario compacto/extendido"
 
-#: .././pop-library/processors/controls/anchor-controls.php:67
+#: .././pop-library/processors/controls/anchor-controls.php:69
 msgid "Expand"
 msgstr "Ampliar"
 
-#: .././pop-library/processors/controls/anchor-controls.php:71
+#: .././pop-library/processors/controls/anchor-controls.php:73
 msgid "Filter"
 msgstr "Filtrar"
 
-#: .././pop-library/processors/controls/anchor-controls.php:83
-#: .././pop-library/processors/viewcomponents/buttoninners.php:136
-#: .././pop-library/processors/viewcomponents/post-buttons.php:126
-#: .././pop-library/processors/viewcomponents/user-buttons.php:72
+#: .././pop-library/processors/controls/anchor-controls.php:85
+#: .././pop-library/processors/viewcomponents/buttoninners.php:148
+#: .././pop-library/processors/viewcomponents/post-buttons.php:137
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:59
+#: .././pop-library/processors/viewcomponents/user-buttons.php:78
 msgid "Embed"
 msgstr "Insertar código HTML"
 
-#: .././pop-library/processors/controls/anchor-controls.php:87
-#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:25
+#: .././pop-library/processors/controls/anchor-controls.php:89
+#: .././pop-library/processors/viewcomponents/buttoninners.php:152
+#: .././pop-library/processors/viewcomponents/post-buttons.php:142
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:64
+#: .././pop-library/processors/viewcomponents/user-buttons.php:83
+msgid "API Data"
+msgstr "Data API"
+
+#: .././pop-library/processors/controls/anchor-controls.php:93
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:27
 msgid "Copy Search URL"
 msgstr "Copiar URL de búsqueda"
 
-#: .././pop-library/processors/controls/anchor-controls.php:91
-#: .././pop-library/processors/viewcomponents/buttoninners.php:132
-#: .././pop-library/processors/viewcomponents/post-buttons.php:121
-#: .././pop-library/processors/viewcomponents/user-buttons.php:67
+#: .././pop-library/processors/controls/anchor-controls.php:97
+#: .././pop-library/processors/viewcomponents/buttoninners.php:144
+#: .././pop-library/processors/viewcomponents/post-buttons.php:132
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:54
+#: .././pop-library/processors/viewcomponents/user-buttons.php:73
 msgid "Share by email"
 msgstr "Compartir por email"
 
-#: .././pop-library/processors/controls/anchor-controls.php:95
+#: .././pop-library/processors/controls/anchor-controls.php:101
 msgid "Invite your friends to join!"
 msgstr "¡Invitá a tus amigos a unirse!"
 
-#: .././pop-library/processors/controls/anchor-controls.php:101
+#: .././pop-library/processors/controls/anchor-controls.php:107
 msgid "Close"
 msgstr "Cerrar"
 
-#: .././pop-library/processors/controls/anchor-controls.php:107
+#: .././pop-library/processors/controls/anchor-controls.php:113
 msgid "Toggle sidebar"
 msgstr "Abrir/Cerrar barra lateral"
 
-#: .././pop-library/processors/controls/anchor-controls.php:111
+#: .././pop-library/processors/controls/anchor-controls.php:117
 msgid "Go back"
 msgstr "Volver"
 
-#: .././pop-library/processors/controls/anchor-controls.php:115
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:124
+#: .././pop-library/processors/controls/anchor-controls.php:121
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:161
 msgid "Facebook"
 msgstr "Facebook"
 
-#: .././pop-library/processors/controls/anchor-controls.php:119
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:131
+#: .././pop-library/processors/controls/anchor-controls.php:125
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:170
 msgid "Twitter"
 msgstr "Twitter"
 
-#: .././pop-library/processors/controls/anchor-controls.php:123
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:145
+#: .././pop-library/processors/controls/anchor-controls.php:129
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:188
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
@@ -806,15 +857,15 @@ msgstr "Refrescar"
 msgid "Reset"
 msgstr "Resetear"
 
-#: .././pop-library/processors/controls/dropdownbutton-controls.php:162
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:163
 msgid "Reply with..."
 msgstr "Responder con…"
 
-#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:84
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:100
 msgid "Options"
 msgstr "Opciones"
 
-#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:88
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:104
 msgid "Contact/Links"
 msgstr "Contacto/enlaces"
 
@@ -1153,44 +1204,52 @@ msgstr "Guardar"
 msgid "Update"
 msgstr "Guardar cambios"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:43
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:47
 msgid "follow users"
 msgstr "seguir a usuarios"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:44
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:48
 msgid "stop following users"
 msgstr "dejar de seguir a usuarios"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:45
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:49
 msgid "recommend posts"
 msgstr "recomendar posts"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:46
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:50
 msgid "stop recommending posts"
 msgstr "dejar de recomendar posts"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:47
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:51
+msgid "subscribe to tags/topics"
+msgstr "suscribirse a tags/tópicos"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:52
+msgid "unsubscribe from tags/topics"
+msgstr "desuscribirse de tags/tópicos"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:53
 msgid "up-vote posts"
 msgstr "expresar estar de acuerdo con un post"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:48
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:54
 msgid "stop up-voting posts"
 msgstr "dejar de estar de acuerdo con un post"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:49
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:55
 msgid "down-vote posts"
 msgstr "expresar estar en desacuerdo con un post"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:50
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:56
 msgid "stop down-voting posts"
 msgstr "dejar de estar en desacuerdo con un post"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:56
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:62
 #, php-format
 msgid "Please %s to %s."
 msgstr "Por favor %s para %s."
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:64
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:70
 #, php-format
 msgid "You need a %s account to access this functionality."
 msgstr "Necesitás una cuenta de %s para acceder a esta funcionalidad."
@@ -1347,27 +1406,35 @@ msgstr "Es recurso"
 msgid "Invite successful!"
 msgstr "¡Invitación enviada con éxito!"
 
-#: .././pop-library/processors/share/blockgroups/viewcomponents.php:46
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:54
 msgid "Embed:"
 msgstr "Insertar código HTML:"
 
-#: .././pop-library/processors/share/blockgroups/viewcomponents.php:50
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:58
+msgid "API Data:"
+msgstr "Data API:"
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:62
 msgid "Copy Search URL:"
 msgstr "Copiar URL de la búsqueda:"
+
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:31
+msgid "Copy URL"
+msgstr "Copiar URL"
 
 #: .././pop-library/processors/share/formcomponents-inputs/textarea-formcomponents-inputs.php:26
 msgid "Embed code"
 msgstr "Insertar código"
 
-#: .././pop-library/processors/share/structures/contents.php:31
+#: .././pop-library/processors/share/structures/contents.php:33
 msgid "Preview:"
 msgstr "Vista previa:"
 
-#: .././pop-library/processors/share/structures/contents.php:38
+#: .././pop-library/processors/share/structures/contents.php:40
 msgid "Please copy/paste the html code below into your website."
 msgstr "Por favor, copiá y pegá el siguiente código HTML en tu sitio web."
 
-#: .././pop-library/processors/share/structures/contents.php:45
+#: .././pop-library/processors/share/structures/contents.php:48
 msgid "Please select and copy (Ctrl + C) the URL below."
 msgstr "Por favor, seleccioná y copiá (Ctrl + C) la URL aquí abajo."
 
@@ -1387,7 +1454,7 @@ msgstr "Respuestas"
 msgid "Contact info"
 msgstr "Información de contacto"
 
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:138
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:179
 msgid "Google+"
 msgstr "Google+"
 
@@ -1404,30 +1471,30 @@ msgid "Logout?"
 msgstr "¿Finalizar sesión?"
 
 #: .././pop-library/processors/viewcomponents/addcomment-post-buttons.php:76
-#: .././pop-library/processors/viewcomponents/buttoninners.php:151
+#: .././pop-library/processors/viewcomponents/buttoninners.php:167
 msgid "Write a comment"
 msgstr "Escribir un comentario"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:120
-#: .././pop-library/processors/viewcomponents/post-buttons.php:132
+#: .././pop-library/processors/viewcomponents/buttoninners.php:132
+#: .././pop-library/processors/viewcomponents/post-buttons.php:148
 msgid "Volunteer!"
 msgstr "¡Ofrecerme como voluntario!"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:124
-#: .././pop-library/processors/viewcomponents/post-buttons.php:137
+#: .././pop-library/processors/viewcomponents/buttoninners.php:136
+#: .././pop-library/processors/viewcomponents/post-buttons.php:153
 msgid "Flag"
 msgstr "Marcar como inapropiado"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:128
+#: .././pop-library/processors/viewcomponents/buttoninners.php:140
 msgid "Click to Volunteer"
 msgstr "Ofrecerme como voluntario"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:142
-#: .././pop-library/processors/viewcomponents/user-buttons.php:77
+#: .././pop-library/processors/viewcomponents/buttoninners.php:158
+#: .././pop-library/processors/viewcomponents/user-buttons.php:88
 msgid "Send message"
 msgstr "Enviar Mensaje"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:146
+#: .././pop-library/processors/viewcomponents/buttoninners.php:162
 msgid "Reply"
 msgstr "Respuesta"
 

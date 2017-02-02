@@ -79,6 +79,7 @@ define ('GD_TEMPLATESOURCE_LAYOUT_PAGETAB', 'layout-pagetab');
 define ('GD_TEMPLATESOURCE_LAYOUT_POPOVER', 'layout-popover');
 define ('GD_TEMPLATESOURCE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL', 'layout-postadditional-multilayout-label');
 define ('GD_TEMPLATESOURCE_LAYOUT_POSTSTATUSDATE', 'layout-poststatusdate');
+define ('GD_TEMPLATESOURCE_LAYOUT_TAGINFO', 'layout-taginfo');
 define ('GD_TEMPLATESOURCE_LAYOUT_POSTTHUMB', 'layout-postthumb');
 define ('GD_TEMPLATESOURCE_LAYOUT_PREVIEWPOST', 'layout-previewpost');
 define ('GD_TEMPLATESOURCE_LAYOUT_PREVIEWUSER', 'layout-previewuser');
@@ -127,5 +128,6 @@ define ('GD_TEMPLATESOURCE_VIEWCOMPONENT_HEADER_COMMENTPOST', 'viewcomponent-hea
 define ('GD_TEMPLATESOURCE_VIEWCOMPONENT_HEADER_POST', 'viewcomponent-header-post');
 define ('GD_TEMPLATESOURCE_VIEWCOMPONENT_HEADER_REPLYCOMMENT', 'viewcomponent-header-replycomment');
 define ('GD_TEMPLATESOURCE_VIEWCOMPONENT_HEADER_USER', 'viewcomponent-header-user');
+define ('GD_TEMPLATESOURCE_VIEWCOMPONENT_HEADER_TAG', 'viewcomponent-header-tag');
 define ('GD_TEMPLATESOURCE_WIDGET', 'widget');
 

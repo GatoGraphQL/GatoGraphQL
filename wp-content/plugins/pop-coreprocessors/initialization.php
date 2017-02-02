@@ -300,6 +300,7 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('layout-messagefeedback-tmpl', $folder.'layout-messagefeedback.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-messagefeedbackframe-tmpl', $folder.'layout-messagefeedbackframe.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-poststatusdate-tmpl', $folder.'layout-poststatusdate.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		wp_enqueue_script('layout-taginfo-tmpl', $folder.'layout-taginfo.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-subcomponent-tmpl', $folder.'layout-subcomponent.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-marker-tmpl', $folder.'layout-marker.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-multiple-tmpl', $folder.'layout-multiple.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
@@ -352,6 +353,7 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('viewcomponent-header-replycomment-tmpl', $folder.'viewcomponent-header-replycomment.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('viewcomponent-header-post-tmpl', $folder.'viewcomponent-header-post.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('viewcomponent-header-user-tmpl', $folder.'viewcomponent-header-user.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		wp_enqueue_script('viewcomponent-header-tag-tmpl', $folder.'viewcomponent-header-tag.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('widget-tmpl', $folder.'widget.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 	}
 

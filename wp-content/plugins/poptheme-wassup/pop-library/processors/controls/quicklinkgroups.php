@@ -19,6 +19,7 @@ define ('GD_TEMPLATE_QUICKLINKGROUP_USER', PoP_ServerUtils::get_template_definit
 define ('GD_TEMPLATE_QUICKLINKGROUP_USERBOTTOM', PoP_ServerUtils::get_template_definition('quicklinkgroup-userbottom'));
 define ('GD_TEMPLATE_QUICKLINKGROUP_USER_EDITMEMBERS', PoP_ServerUtils::get_template_definition('quicklinkgroup-user-editmembers'));
 define ('GD_TEMPLATE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST', PoP_ServerUtils::get_template_definition('quicklinkgroup-updownvoteundoupdownvotepost'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_TAG', PoP_ServerUtils::get_template_definition('quicklinkgroup-tag'));
 
 class GD_Template_Processor_CustomQuicklinkGroups extends GD_Template_Processor_ControlGroupsBase {
 
@@ -39,7 +40,7 @@ class GD_Template_Processor_CustomQuicklinkGroups extends GD_Template_Processor_
 			GD_TEMPLATE_QUICKLINKGROUP_USERCOMPACT,
 			GD_TEMPLATE_QUICKLINKGROUP_USER_EDITMEMBERS,
 			GD_TEMPLATE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST,
-			// GD_TEMPLATE_QUICKLINKGROUP_POSTRECOMMENDUNRECOMMEND,
+			GD_TEMPLATE_QUICKLINKGROUP_TAG,
 		);
 	}
 
@@ -93,12 +94,6 @@ class GD_Template_Processor_CustomQuicklinkGroups extends GD_Template_Processor_
 					$modules
 				);
 				break;
-
-			// case GD_TEMPLATE_QUICKLINKGROUP_POSTRECOMMENDUNRECOMMEND:
-
-			// 	$ret[] = GD_TEMPLATE_CODE_RECOMMENDUNRECOMMENDPOST_LABEL;
-			// 	$ret[] = GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND;
-			// 	break;
 
 			case GD_TEMPLATE_QUICKLINKGROUP_POSTEDIT:
 
@@ -168,6 +163,11 @@ class GD_Template_Processor_CustomQuicklinkGroups extends GD_Template_Processor_
 
 				$ret[] = GD_URE_TEMPLATE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP;
 				break;
+				
+			case GD_TEMPLATE_QUICKLINKGROUP_TAG:
+
+				$ret[] = GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE;
+				break;
 		}
 
 		return $ret;
@@ -187,13 +187,11 @@ class GD_Template_Processor_CustomQuicklinkGroups extends GD_Template_Processor_
 
 			case GD_TEMPLATE_QUICKLINKGROUP_HIGHLIGHTCONTENT:
 			case GD_TEMPLATE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
-			// case GD_TEMPLATE_QUICKLINKGROUP_POSTRECOMMENDUNRECOMMEND:
 
 				// Make the level below also a 'btn-group' so it shows inline
 				$downlevels = array(
 					GD_TEMPLATE_QUICKLINKGROUP_HIGHLIGHTCONTENT => GD_TEMPLATE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST,
 					GD_TEMPLATE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST => GD_TEMPLATE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL,
-					// GD_TEMPLATE_QUICKLINKGROUP_POSTRECOMMENDUNRECOMMEND => GD_TEMPLATE_CODE_RECOMMENDUNRECOMMENDPOST_LABEL,
 				);			
 				// $this->append_att($downlevels[$template_id], $atts, 'class', 'btn-group bg-warning');
 				$this->append_att($downlevels[$template_id], $atts, 'class', 'btn-group');

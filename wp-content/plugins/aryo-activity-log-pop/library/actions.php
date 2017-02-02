@@ -36,6 +36,9 @@ define ('AAL_POP_ACTION_USER_CHANGEDPASSWORD', 'changed_password');
 define ('AAL_POP_ACTION_USER_UPDATEDPROFILE', 'updated_profile');
 define ('AAL_POP_ACTION_USER_UPDATEDPHOTO', 'updated_photo');
 
+define ('AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG', 'subscribed_to_tag');
+define ('AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG', 'unsubscribed_from_tag');
+
 define ('AAL_POP_ACTION_USER_LOGGEDIN', 'logged_in');
 define ('AAL_POP_ACTION_USER_LOGGEDOUT', 'logged_out');
 

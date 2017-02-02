@@ -12,6 +12,8 @@ define ('GD_CLASS_FOLLOWUSER', 'pop-followuser');
 define ('GD_CLASS_UNFOLLOWUSER', 'pop-unfollowuser');
 define ('GD_CLASS_RECOMMENDPOST', 'pop-recommendpost');
 define ('GD_CLASS_UNRECOMMENDPOST', 'pop-unrecommendpost');
+define ('GD_CLASS_SUBSCRIBETOTAG', 'pop-subscribetotag');
+define ('GD_CLASS_UNSUBSCRIBEFROMTAG', 'pop-unsubscribefromtag');
 define ('GD_CLASS_UPVOTEPOST', 'pop-upvotepost');
 define ('GD_CLASS_UNDOUPVOTEPOST', 'pop-undoupvotepost');
 define ('GD_CLASS_DOWNVOTEPOST', 'pop-downvotepost');

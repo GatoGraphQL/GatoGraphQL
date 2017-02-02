@@ -6,9 +6,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('POP_EMAIL_MAIN', 'main');
+
 class PoP_EmailSender_Hooks {
 
+	// Needed to keep track of what users have an email sent to, to not duplicate email sending
+	private $sent_emails;
+
 	function __construct() {
+
+		$this->sent_emails = array();
 
 		add_action('gd_createupdate_post:update', array($this, 'sendemail_to_users_from_post_referencesupdate'), 10, 3);
 		add_action('gd_createupdate_post:create', array($this, 'sendemail_to_users_from_post_referencescreate'), 10, 1);
@@ -25,6 +32,8 @@ class PoP_EmailSender_Hooks {
 		add_filter('send_email_change_email', array($this, 'donotsend'), 100000, 1);
 		add_action('gd_createupdate_post:update', array($this, 'sendemail_to_usersnetwork_from_post_update'), 10, 3);
 		add_action('gd_createupdate_post:create', array($this, 'sendemail_to_usersnetwork_from_post_create'), 10, 1);
+		add_action('gd_createupdate_post:update', array($this, 'sendemail_to_subscribedtagusers_from_post_update'), 10, 3);
+		add_action('gd_createupdate_post:create', array($this, 'sendemail_to_subscribedtagusers_from_post_create'), 10, 1);
 		add_action('gd_followuser', array($this, 'followuser'), 10, 1);
 		add_action('gd_recommendpost', array($this, 'recommendpost'), 10, 1);
 		add_action('gd_createupdate_profile:additionals_create', array($this, 'sendemail_to_admin_createuser'), 100, 1);
@@ -683,6 +692,140 @@ class PoP_EmailSender_Hooks {
 
 				PoP_EmailSender_Utils::sendemail_to_users($emails, $names, $subject, $content, true);
 			}			
+		}
+
+		// Add the users to the list of users who got an email sent to
+		if (!$this->sent_emails[POP_EMAIL_MAIN]) {
+			$this->sent_emails[POP_EMAIL_MAIN] = array();
+		}
+		$this->sent_emails[POP_EMAIL_MAIN] = array_merge(
+			$this->sent_emails[POP_EMAIL_MAIN],
+			$allnetworkusers
+		);
+	}
+
+	/**---------------------------------------------------------------------------------------------------------------
+	 * Subscribed tags/topics: post created
+	 * ---------------------------------------------------------------------------------------------------------------*/
+	// Send an email to all post owners's network when a post is published
+	function sendemail_to_subscribedtagusers_from_post_update($post_id, $atts, $log) {
+
+		$old_status = $log['previous-status'];
+
+		// Send email if the updated post has been published
+		if (get_post_status($post_id) == 'publish' && $old_status != 'publish') {
+			$this->sendemail_to_subscribedtagusers_from_post($post_id);
+		}
+	}
+	function sendemail_to_subscribedtagusers_from_post_create($post_id) {
+
+		// Send email if the created post has been published
+		if (get_post_status($post_id) == 'publish') {
+			$this->sendemail_to_subscribedtagusers_from_post($post_id);
+		}
+	}
+	protected function sendemail_to_subscribedtagusers_from_post($post_id) {
+
+		// Check if for a given type of post the email must not be sent (eg: Highlights)
+		if (PoP_EmailSender_Utils::sendemail_skip($post_id)) {
+			return;
+		}
+
+		// Do not send for RIPESS
+		if (!apply_filters('PoP_EmailSender_Hooks:sendemail_to_subscribedtagusers_from_post:enabled', true)) {
+			return;
+		}
+
+		// If the post has tags...
+		if ($post_tags = wp_get_post_tags($post_id, array('fields' => 'ids'))) {
+
+			$post_tag_names = $tag_subscribedusers = $previoustags_subscribers = array();
+			foreach ($post_tags as $tag_id) {
+
+				$tag = get_tag($tag_id);
+				$post_tag_names[] = $tag->name;
+				
+				// Get all the users who subscribed to each tag
+				if ($tag_subscribers = GD_MetaManager::get_term_meta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
+				
+					// From those, remove all users who got an email in previous email function, usersnetwork
+					$tag_subscribers = array_diff($tag_subscribers, $this->sent_emails[POP_EMAIL_MAIN]);
+					
+					// Also remove all users who are subscribed to a previous tag
+					$tag_subscribers = array_diff($tag_subscribers, $previoustags_subscribers);
+
+					if ($tag_subscribers) {
+
+						$tag_subscribedusers[$tag_id] = $tag_subscribers;
+						$previoustags_subscribers = array_merge(
+							$previoustags_subscribers,
+							$tag_subscribers
+						);
+					}
+				}
+			}
+
+			// Send the email to the subscribed users
+			if ($tag_subscribedusers) {
+
+				// Add the users to the list of users who got an email sent to
+				if (!$this->sent_emails[POP_EMAIL_MAIN]) {
+					$this->sent_emails[POP_EMAIL_MAIN] = array();
+				}
+
+				// No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
+				$post_html = PoP_EmailTemplates_Factory::get_instance()->get_posthtml($post_id);
+				$post_name = gd_get_postname($post_id);
+				$post_title = get_the_title($post_id);
+				$footer = sprintf(
+					'<p><small>%s</small></p>',
+					__('You are receiving this notification for having subscribed to tags/topics added in this post. Soon you will be able to configure your notification email’s preferences.', 'pop-emailsender')
+				);
+
+				$authors = gd_get_postauthors($post_id);
+				$author = $authors[0];
+				$author_name = get_the_author_meta('display_name', $author);
+				$author_url = get_author_posts_url($author);
+				
+				foreach ($tag_subscribedusers as $tag_id => $subscribedusers) {
+
+					$emails = $names = array();
+					foreach ($subscribedusers as $subscribeduser) {
+
+						$emails[] = get_the_author_meta('user_email', $subscribeduser);
+						$names[] = get_the_author_meta('display_name', $subscribeduser);
+					}
+
+					$tag = get_tag($tag_id);
+					$subject = sprintf(
+						__('There’s a new %s with tag “%s”: “%s”', 'pop-emailsender'), 
+						$post_name,
+						$tag->name,
+						$post_title
+					);
+					
+					$content = sprintf( 
+						'<p>%s</p>', 
+						sprintf(
+							__('<b><a href="%s">%s</a></b> has created a new %s, tagged with <b><i>%s</i></b>:', 'pop-emailsender'), 
+							$author_url,
+							$author_name,
+							$post_name,
+							implode(__(', ', 'pop-emailsender'), $post_tag_names)
+						)
+					);
+					$content .= $post_html;
+					$content .= $footer;
+
+					PoP_EmailSender_Utils::sendemail_to_users($emails, $names, $subject, $content, true);
+
+					// Add the users to the list of users who got an email sent to
+					$this->sent_emails[POP_EMAIL_MAIN] = array_merge(
+						$this->sent_emails[POP_EMAIL_MAIN],
+						$subscribedusers
+					);
+				}
+			}
 		}
 	}
 

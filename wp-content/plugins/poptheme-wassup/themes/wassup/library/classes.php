@@ -23,15 +23,18 @@ function gd_wassup_theme_body_class($body_classes) {
 			$body_classes[] = GD_THEMEMODE_WASSUP_SLIDING;
 		}
 
-		// Add the offcanvas class when appropriate
-		$offcanvas = array(
-			GD_THEMEMODE_WASSUP_SIMPLE,
-			GD_THEMEMODE_WASSUP_EMBED,
-			GD_THEMEMODE_WASSUP_SLIDING,
-		);
-		if (in_array($thememode, $offcanvas)) {
+		if (PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar()) {
+		
+			// Add the offcanvas class when appropriate
+			$offcanvas = array(
+				GD_THEMEMODE_WASSUP_SIMPLE,
+				GD_THEMEMODE_WASSUP_EMBED,
+				GD_THEMEMODE_WASSUP_SLIDING,
+			);
+			if (in_array($thememode, $offcanvas)) {
 
-			$body_classes[] = 'nooverflow';
+				$body_classes[] = 'non-scrollable';
+			}
 		}
 	}
 	

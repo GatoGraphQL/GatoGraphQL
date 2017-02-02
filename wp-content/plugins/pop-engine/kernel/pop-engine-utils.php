@@ -83,7 +83,11 @@ class GD_TemplateManager_Utils {
 	public static function get_current_url() {
 
 		// Strip the Target and Output off it, users don't need to see those
-		$url = remove_query_arg(array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE, POP_URLPARAM_MANGLED), full_url());
+		$remove_params = apply_filters(
+			'GD_TemplateManager_Utils:current_url:remove_params',
+			array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE, POP_URLPARAM_MANGLED)
+		);
+		$url = remove_query_arg($remove_params, full_url());
 
 		// Comment Leo 25/09/2015: strip the 'thememode' and 'theme' always, and add it again through DATALOAD_PUSHURLATTS
 		// This way, we can add these also when intercepting URLs in the front-end (eg: switching tabs in embed mode, https://www.mesym.com/projects/?format=full&mode=embed)

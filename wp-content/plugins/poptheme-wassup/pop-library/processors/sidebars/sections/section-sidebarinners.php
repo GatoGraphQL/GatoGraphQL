@@ -17,6 +17,7 @@ define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ALLUSERS_NOFILTER', PoP_ServerUtils::g
 
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TRENDINGTAGS', PoP_ServerUtils::get_template_definition('sidebarinner-section-trendingtags'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tags'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORTAGS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authortags'));
 
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-section-mycontent'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTLINKS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mywebpostlinks'));
@@ -48,6 +49,7 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 			GD_TEMPLATE_SIDEBARINNER_SECTION_ALLUSERS_NOFILTER,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_TRENDINGTAGS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_TAGS,
+			GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORTAGS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTLINKS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYHIGHLIGHTS,
@@ -71,11 +73,19 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 			// Trending Tags has no filter
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_TRENDINGTAGS:
 				
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGS;
 				$ret[] = GD_TEMPLATE_CODE_TRENDINGTAGSDESCRIPTION;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_TAGS:
 
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGS;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_WILDCARDTAGS;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORTAGS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_AUTHORTAGS;
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_WILDCARDTAGS;
 				break;
 					

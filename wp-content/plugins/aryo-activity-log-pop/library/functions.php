@@ -49,6 +49,14 @@ function pop_aal_init_caps($caps_settings) {
 		)
 	);
 }
+
+// add_filter('aal_notification_get_object_types', 'pop_aal_notification_get_object_types');
+// function pop_aal_notification_get_object_types($object_types) {
+
+// 	$object_types[] = 'Tag';
+// 	return $object_types;
+// }
+
 /**---------------------------------------------------------------------------------------------------------------
  * Actions
  * ---------------------------------------------------------------------------------------------------------------*/

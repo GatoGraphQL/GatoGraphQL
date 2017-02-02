@@ -24,16 +24,6 @@ class GD_Template_Processor_UserAccountBlockGroups extends GD_Template_Processor
 
 			case GD_TEMPLATE_BLOCKGROUP_LOGGEDINUSERDATA:
 
-				// Allow Aryo to add the "Latest Notifications" block
-				// $blocks = apply_filters(
-				// 	'GD_Template_Processor_UserAccountBlockGroups:blockgroup_blocks',
-				// 	array(
-				// 		GD_TEMPLATE_BLOCKDATA_FOLLOWSUSERS,
-				// 		GD_TEMPLATE_BLOCKDATA_RECOMMENDSPOSTS,
-				// 		GD_TEMPLATE_BLOCKDATA_UPVOTESPOSTS,
-				// 		GD_TEMPLATE_BLOCKDATA_DOWNVOTESPOSTS,
-				// 	)
-				// );
 				$ret = array_merge(
 					$ret,
 					GD_Template_Processor_UserAccountUtils::get_loggedinuserdata_blocks()

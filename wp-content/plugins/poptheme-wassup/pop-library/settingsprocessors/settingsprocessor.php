@@ -38,6 +38,8 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_COREPROCESSORS_PAGE_UNFOLLOWUSER => true,
 				POP_COREPROCESSORS_PAGE_RECOMMENDPOST => true,
 				POP_COREPROCESSORS_PAGE_UNRECOMMENDPOST => true,
+				POP_COREPROCESSORS_PAGE_SUBSCRIBETOTAG => true,
+				POP_COREPROCESSORS_PAGE_UNSUBSCRIBEFROMTAG => true,
 				POP_COREPROCESSORS_PAGE_UPVOTEPOST => true,
 				POP_COREPROCESSORS_PAGE_UNDOUPVOTEPOST => true,
 				POP_COREPROCESSORS_PAGE_DOWNVOTEPOST => true,
@@ -122,6 +124,8 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_COREPROCESSORS_PAGE_UNFOLLOWUSER => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
 				POP_COREPROCESSORS_PAGE_RECOMMENDPOST => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
 				POP_COREPROCESSORS_PAGE_UNRECOMMENDPOST => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
+				POP_COREPROCESSORS_PAGE_SUBSCRIBETOTAG => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
+				POP_COREPROCESSORS_PAGE_UNSUBSCRIBEFROMTAG => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
 				POP_COREPROCESSORS_PAGE_UPVOTEPOST => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
 				POP_COREPROCESSORS_PAGE_UNDOUPVOTEPOST => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
 				POP_COREPROCESSORS_PAGE_DOWNVOTEPOST => Wassup_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER),
@@ -149,6 +153,8 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_COREPROCESSORS_PAGE_UNFOLLOWUSER => GD_TEMPLATE_BLOCKGROUP_UNFOLLOWUSER,
 				POP_COREPROCESSORS_PAGE_RECOMMENDPOST => GD_TEMPLATE_BLOCKGROUP_RECOMMENDPOST,
 				POP_COREPROCESSORS_PAGE_UNRECOMMENDPOST => GD_TEMPLATE_BLOCKGROUP_UNRECOMMENDPOST,
+				POP_COREPROCESSORS_PAGE_SUBSCRIBETOTAG => GD_TEMPLATE_BLOCKGROUP_SUBSCRIBETOTAG,
+				POP_COREPROCESSORS_PAGE_UNSUBSCRIBEFROMTAG => GD_TEMPLATE_BLOCKGROUP_UNSUBSCRIBEFROMTAG,
 				POP_COREPROCESSORS_PAGE_UPVOTEPOST => GD_TEMPLATE_BLOCKGROUP_UPVOTEPOST,
 				POP_COREPROCESSORS_PAGE_UNDOUPVOTEPOST => GD_TEMPLATE_BLOCKGROUP_UNDOUPVOTEPOST,
 				POP_COREPROCESSORS_PAGE_DOWNVOTEPOST => GD_TEMPLATE_BLOCKGROUP_DOWNVOTEPOST,
@@ -231,6 +237,7 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POPTHEME_WASSUP_PAGE_WEBPOSTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORWEBPOSTS,
 				POP_COREPROCESSORS_PAGE_FOLLOWERS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWERS,
 				POP_COREPROCESSORS_PAGE_FOLLOWINGUSERS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWINGUSERS,
+				POP_COREPROCESSORS_PAGE_SUBSCRIBEDTO => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORSUBSCRIBEDTOTAGS,
 				POP_COREPROCESSORS_PAGE_RECOMMENDEDPOSTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORRECOMMENDEDPOSTS,
 			);
 			foreach ($pageblockgroups as $page => $blockgroup) {
@@ -248,6 +255,7 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT,
 				POPTHEME_WASSUP_PAGE_WEBPOSTLINKS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGLINKS,
 				POPTHEME_WASSUP_PAGE_WEBPOSTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGWEBPOSTS,
+				POP_COREPROCESSORS_PAGE_SUBSCRIBERS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSUBSCRIBERS,
 			);
 			foreach ($pageblockgroups as $page => $blockgroup) {
 				
@@ -356,6 +364,8 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				POP_COREPROCESSORS_PAGE_UNFOLLOWUSER => GD_TEMPLATE_ACTION_UNFOLLOWUSER,
 				POP_COREPROCESSORS_PAGE_RECOMMENDPOST => GD_TEMPLATE_ACTION_RECOMMENDPOST,
 				POP_COREPROCESSORS_PAGE_UNRECOMMENDPOST => GD_TEMPLATE_ACTION_UNRECOMMENDPOST,
+				POP_COREPROCESSORS_PAGE_SUBSCRIBETOTAG => GD_TEMPLATE_ACTION_SUBSCRIBETOTAG,
+				POP_COREPROCESSORS_PAGE_UNSUBSCRIBEFROMTAG => GD_TEMPLATE_ACTION_UNSUBSCRIBEFROMTAG,
 				POP_COREPROCESSORS_PAGE_UPVOTEPOST => GD_TEMPLATE_ACTION_UPVOTEPOST,
 				POP_COREPROCESSORS_PAGE_UNDOUPVOTEPOST => GD_TEMPLATE_ACTION_UNDOUPVOTEPOST,
 				POP_COREPROCESSORS_PAGE_DOWNVOTEPOST => GD_TEMPLATE_ACTION_DOWNVOTEPOST,
@@ -416,16 +426,6 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				if ($default_format_users == GD_TEMPLATEFORMAT_CAROUSEL) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
-			}
-			$pageblocks_taglist = array(
-				POP_WPAPI_PAGE_TRENDINGTAGS  => GD_TEMPLATE_BLOCK_TRENDINGTAGS_SCROLL_LIST,
-			);
-			foreach ($pageblocks_taglist as $page => $block) {
-				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
-
-				// if ($default_format_tags == GD_TEMPLATEFORMAT_LIST) {
-				$ret[$page]['blocks']['default'] = $block;
-				// }
 			}
 			$pageblocks_thumbnail = array(
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_ALLCONTENT_SCROLL_THUMBNAIL,
@@ -644,6 +644,17 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 						$ret[$page]['blocks']['default'] = $block;
 					}
 				}
+				$pageblocks_tagdetails = array(
+					POP_WPAPI_PAGE_TAGS  => GD_TEMPLATE_BLOCK_TAGS_SCROLL_DETAILS,
+					POP_WPAPI_PAGE_TRENDINGTAGS  => GD_TEMPLATE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS,
+				);
+				foreach ($pageblocks_tagdetails as $page => $block) {
+					$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
+
+					if ($default_format_tags == GD_TEMPLATEFORMAT_DETAILS) {
+						$ret[$page]['blocks']['default'] = $block;
+					}
+				}
 				$pageblocks_simpleview = array(
 					POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_ALLCONTENT_SCROLL_SIMPLEVIEW,
 					POP_WPAPI_PAGE_SEARCHPOSTS => GD_TEMPLATE_BLOCK_SEARCHPOSTS_SCROLL_SIMPLEVIEW,
@@ -735,6 +746,7 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				}
 				$pageblocks_taglist = array(
 					POP_WPAPI_PAGE_TAGS  => GD_TEMPLATE_BLOCK_TAGS_SCROLL_LIST,
+					POP_WPAPI_PAGE_TRENDINGTAGS  => GD_TEMPLATE_BLOCK_TRENDINGTAGS_SCROLL_LIST,
 				);
 				foreach ($pageblocks_taglist as $page => $block) {
 					$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
@@ -821,6 +833,7 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_TAG) {
 	
 			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_TAGSECTION);
+			$default_format_tagusers = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_TAGUSERS);
 			
 			$pageblocks_navigator = array(
 				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_NAVIGATOR,
@@ -843,6 +856,16 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
 
 				if ($default_format_section == GD_TEMPLATEFORMAT_DETAILS) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_userdetails = array(
+				POP_COREPROCESSORS_PAGE_SUBSCRIBERS => GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLL_DETAILS,
+			);
+			foreach ($pageblocks_userdetails as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
+
+				if ($default_format_tagusers == GD_TEMPLATEFORMAT_DETAILS) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
@@ -872,6 +895,16 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
+			$pageblocks_userfullview = array(
+				POP_COREPROCESSORS_PAGE_SUBSCRIBERS => GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLL_FULLVIEW,
+			);
+			foreach ($pageblocks_userfullview as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_FULLVIEW] = $block;
+
+				if ($default_format_tagusers == GD_TEMPLATEFORMAT_FULLVIEW) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
 			$pageblocks_thumbnail = array(
 				POP_COREPROCESSORS_PAGE_MAIN => GD_TEMPLATE_BLOCK_TAGMAINALLCONTENT_SCROLL_THUMBNAIL,
 				POP_WPAPI_PAGE_ALLCONTENT => GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_THUMBNAIL,
@@ -882,6 +915,16 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
 
 				if ($default_format_section == GD_TEMPLATEFORMAT_THUMBNAIL) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_userthumbnail = array(
+				POP_COREPROCESSORS_PAGE_SUBSCRIBERS => GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLL_THUMBNAIL,
+			);
+			foreach ($pageblocks_userthumbnail as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
+
+				if ($default_format_tagusers == GD_TEMPLATEFORMAT_THUMBNAIL) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
@@ -898,12 +941,23 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
+			$pageblocks_userlist = array(
+				POP_COREPROCESSORS_PAGE_SUBSCRIBERS => GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLL_LIST,
+			);
+			foreach ($pageblocks_userlist as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
+
+				if ($default_format_tagusers == GD_TEMPLATEFORMAT_LIST) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
 		}
 
 		// Author page blocks
 		elseif ($hierarchy == GD_SETTINGS_HIERARCHY_AUTHOR) {
 
 			$default_format_authorusers = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_AUTHORUSERS);
+			$default_format_authortags = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_AUTHORTAGS);
 			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_SECTION);
 			$default_format_users = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_USERS);
 			$default_format_highlights = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_HIGHLIGHTS);
@@ -951,7 +1005,17 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 			foreach ($pageblocks_userdetails as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
 
-				if ($default_format_users == GD_TEMPLATEFORMAT_DETAILS) {
+				if ($default_format_authorusers == GD_TEMPLATEFORMAT_DETAILS) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_tagdetails = array(
+				POP_COREPROCESSORS_PAGE_SUBSCRIBEDTO  => GD_TEMPLATE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS,
+			);
+			foreach ($pageblocks_tagdetails as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_DETAILS] = $block;
+
+				if ($default_format_authortags == GD_TEMPLATEFORMAT_DETAILS) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
@@ -1000,7 +1064,7 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 			foreach ($pageblocks_userfullview as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_FULLVIEW] = $block;
 
-				if ($default_format_users == GD_TEMPLATEFORMAT_FULLVIEW) {
+				if ($default_format_authorusers == GD_TEMPLATEFORMAT_FULLVIEW) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
@@ -1035,7 +1099,7 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 			foreach ($pageblocks_userthumbnail as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_THUMBNAIL] = $block;
 
-				if ($default_format_users == GD_TEMPLATEFORMAT_THUMBNAIL) {
+				if ($default_format_authorusers == GD_TEMPLATEFORMAT_THUMBNAIL) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
@@ -1060,7 +1124,17 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 			foreach ($pageblocks_userlist as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
 
-				if ($default_format_users == GD_TEMPLATEFORMAT_LIST) {
+				if ($default_format_authorusers == GD_TEMPLATEFORMAT_LIST) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_taglist = array(
+				POP_COREPROCESSORS_PAGE_SUBSCRIBEDTO  => GD_TEMPLATE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST,
+			);
+			foreach ($pageblocks_taglist as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
+
+				if ($default_format_authortags == GD_TEMPLATEFORMAT_LIST) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}

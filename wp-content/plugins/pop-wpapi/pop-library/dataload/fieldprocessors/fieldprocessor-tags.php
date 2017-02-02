@@ -36,7 +36,7 @@ class GD_DataLoad_FieldProcessor_Tags extends GD_DataLoad_FieldProcessor {
 				break;	
 
 			case 'symbol' :
-				$value = PoP_MentionUtils::show_tag_symbol() ? '#' : '';
+				$value = PoP_TagUtils::get_tag_symbol();
 				break;
 
 			case 'name' :
@@ -44,17 +44,7 @@ class GD_DataLoad_FieldProcessor_Tags extends GD_DataLoad_FieldProcessor {
 				break;
 
 			case 'namedescription' :
-				$value = $tag->name;
-				
-				// If there's a description, then use it
-				if ($tag->description) {
-
-					$value = sprintf(
-						__('%1$s (%2$s)', 'pop-wpapi'),
-						$value,
-						$tag->description
-					);
-				}
+				$value = PoP_TagUtils::get_tag_namedescription($tag);
 				break;
 
 			case 'slug' :

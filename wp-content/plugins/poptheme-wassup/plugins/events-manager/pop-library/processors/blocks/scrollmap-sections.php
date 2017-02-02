@@ -28,6 +28,8 @@ define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_d
 define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagpastevents-scrollmap'));
 define ('GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagevents-horizontalscrollmap'));
 
+define ('GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagsubscribers-scrollmap'));
+
 define ('GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-whoweare-scrollmap'));
 
 class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Template_Processor_ScrollMapBlocksBase {
@@ -52,6 +54,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP,
 		);
 	}
@@ -77,6 +80,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP => GD_TEMPLATE_SCROLL_EVENTS_MAP,
 			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP => GD_TEMPLATE_SCROLL_PASTEVENTS_MAP,
 			GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP => GD_TEMPLATE_SCROLL_EVENTS_HORIZONTALMAP,
+			GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP => GD_TEMPLATE_SCROLL_ALLUSERS_MAP,
 		);
 
 		return $inner_templates[$template_id];
@@ -95,6 +99,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				return true;
 		}
@@ -135,6 +140,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				return GD_Template_Processor_CustomSectionBlocksUtils::get_tag_title();
 
@@ -166,6 +172,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 				case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 				case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+				case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 					return GD_TEMPLATE_SUBMENU_TAG;
 
@@ -205,6 +212,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 			// case GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP:
 			
@@ -249,6 +257,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				return GD_TEMPLATE_FILTER_WILDCARDUSERS;
 
@@ -304,6 +313,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 			
 				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_tag_dataloadsource($template_id);
 				break;
@@ -342,6 +352,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
 
 			GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP,
 		);
@@ -394,6 +405,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
 
@@ -454,6 +466,11 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
 
 				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagcontent($ret);
+				break;
+		
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
+
+				GD_Template_Processor_CustomSectionBlocksUtils::add_dataloadqueryargs_tagsubscribers($ret);
 				break;
 
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
@@ -523,6 +540,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKUSERLIST;
 		}
@@ -584,6 +602,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
 			// case GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				return GD_TEMPLATE_MESSAGEFEEDBACK_USERS;
 
@@ -607,6 +626,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 			
 			case GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP:
@@ -651,6 +671,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				return GD_DATALOADER_USERLIST;
 
@@ -711,6 +732,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 	
 			GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP,
 			GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP,
+			GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
 
 			GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP,
 		);

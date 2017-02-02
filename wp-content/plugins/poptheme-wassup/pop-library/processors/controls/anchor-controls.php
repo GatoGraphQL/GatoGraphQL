@@ -9,6 +9,7 @@ define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ', PoP_ServerUtils::get_te
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ACCOUNTFAQ', PoP_ServerUtils::get_template_definition('custombuttoncontrol-accountfaq'));
 define ('GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOST', PoP_ServerUtils::get_template_definition('buttoncontrol-addwebpost'));
 define ('GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK', PoP_ServerUtils::get_template_definition('buttoncontrol-addwebpostlink'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TAGSLINK', PoP_ServerUtils::get_template_definition('buttoncontrol-tagslink'));
 
 class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_AnchorControlsBase {
 
@@ -19,6 +20,7 @@ class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_A
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ACCOUNTFAQ,
 			GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOST,
 			GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK,
+			GD_TEMPLATE_ANCHORCONTROL_TAGSLINK,
 		);
 	}
 
@@ -41,6 +43,10 @@ class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_A
 			case GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK:
 
 				return __('as Link', 'poptheme-wassup');
+		
+			case GD_TEMPLATE_ANCHORCONTROL_TAGSLINK:
+
+				return __('View all tags', 'poptheme-wassup');
 		}
 
 		return parent::get_label($template_id, $atts);
@@ -61,6 +67,10 @@ class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_A
 			case GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK:
 
 				return 'fa-link';
+
+			case GD_TEMPLATE_ANCHORCONTROL_TAGSLINK:
+
+				return 'fa-hashtag';
 		}
 
 		return parent::get_fontawesome($template_id, $atts);
@@ -73,12 +83,14 @@ class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_A
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
 			case GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOST:
 			case GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK:
+			case GD_TEMPLATE_ANCHORCONTROL_TAGSLINK:
 
 				$pages = array(
 					GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ => POPTHEME_WASSUP_PAGE_ADDCONTENTFAQ,
 					GD_TEMPLATE_CUSTOMANCHORCONTROL_ACCOUNTFAQ => POPTHEME_WASSUP_PAGE_ACCOUNTFAQ,
 					GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOST => POPTHEME_WASSUP_PAGE_ADDWEBPOST,
 					GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK => POPTHEME_WASSUP_PAGE_ADDWEBPOSTLINK,
+					GD_TEMPLATE_ANCHORCONTROL_TAGSLINK => POP_WPAPI_PAGE_TAGS,
 				);
 				$page = $pages[$template_id];
 				
@@ -114,6 +126,7 @@ class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_A
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
+			case GD_TEMPLATE_ANCHORCONTROL_TAGSLINK:
 
 				return null;
 		}
@@ -140,6 +153,12 @@ class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_A
 
 				$this->append_att($template_id, $atts, 'class', 'btn btn-info aslink');
 				break;
+
+			case GD_TEMPLATE_ANCHORCONTROL_TAGSLINK:
+
+				$this->append_att($template_id, $atts, 'class', 'btn btn-link btn-compact');
+				break;
+
 		}
 
 		return parent::init_atts($template_id, $atts);

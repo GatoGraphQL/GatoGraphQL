@@ -1,7 +1,19 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class URE_AAL_PoP_Hook_User extends AAL_Hook_Base {
+class URE_AAL_PoP_Hook_Users extends AAL_Hook_Base {
+
+	public function __construct() {
+
+		add_action('gd_update_mycommunities:update', array($this, 'joined_communities'), 10, 3);
+		add_action('gd_custom_createupdate_profile:additionals_create', array($this, 'new_user_communities'), 10, 2);
+		add_action('GD_EditMembership:update', array($this, 'community_updated_user_membership'), 10, 2);
+
+		// Updated communities
+		add_action('gd_update_mycommunities:update', array($this, 'updated_communities'), 10, 1);
+
+		parent::__construct();
+	}
 
 	public function joined_communities($user_id, $form_data, $operationlog) {
 
@@ -59,18 +71,6 @@ class URE_AAL_PoP_Hook_User extends AAL_Hook_Base {
 			'object_id'   => $object_id,
 			'object_name' => get_the_author_meta('display_name', $object_id),
 		) );
-	}
-
-	public function __construct() {
-
-		add_action('gd_update_mycommunities:update', array($this, 'joined_communities'), 10, 3);
-		add_action('gd_custom_createupdate_profile:additionals_create', array($this, 'new_user_communities'), 10, 2);
-		add_action('GD_EditMembership:update', array($this, 'community_updated_user_membership'), 10, 2);
-
-		// Updated communities
-		add_action('gd_update_mycommunities:update', array($this, 'updated_communities'), 10, 1);
-
-		parent::__construct();
 	}
 
 }

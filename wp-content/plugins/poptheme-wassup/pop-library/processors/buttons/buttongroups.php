@@ -18,6 +18,8 @@ define ('GD_TEMPLATE_BUTTONGROUP_HOMESECTION', PoP_ServerUtils::get_template_def
 define ('GD_TEMPLATE_BUTTONGROUP_AUTHORSECTION', PoP_ServerUtils::get_template_definition('buttongroup-authorsection'));
 define ('GD_TEMPLATE_BUTTONGROUP_AUTHORSECTIONWITHMAP', PoP_ServerUtils::get_template_definition('buttongroup-authorsectionwithmap'));
 define ('GD_TEMPLATE_BUTTONGROUP_AUTHORUSERS', PoP_ServerUtils::get_template_definition('buttongroup-authorusers'));
+define ('GD_TEMPLATE_BUTTONGROUP_TAGS', PoP_ServerUtils::get_template_definition('buttongroup-tags'));
+define ('GD_TEMPLATE_BUTTONGROUP_AUTHORTAGS', PoP_ServerUtils::get_template_definition('buttongroup-authortags'));
 
 class GD_Custom_Template_Processor_ButtonGroups extends GD_Template_Processor_CustomButtonGroupsBase {
 
@@ -37,6 +39,8 @@ class GD_Custom_Template_Processor_ButtonGroups extends GD_Template_Processor_Cu
 			GD_TEMPLATE_BUTTONGROUP_AUTHORSECTION,
 			GD_TEMPLATE_BUTTONGROUP_AUTHORSECTIONWITHMAP,
 			GD_TEMPLATE_BUTTONGROUP_AUTHORUSERS,
+			GD_TEMPLATE_BUTTONGROUP_TAGS,
+			GD_TEMPLATE_BUTTONGROUP_AUTHORTAGS,
 		);
 	}
 
@@ -56,6 +60,8 @@ class GD_Custom_Template_Processor_ButtonGroups extends GD_Template_Processor_Cu
 			GD_TEMPLATE_BUTTONGROUP_AUTHORSECTION => POP_SCREEN_AUTHORSECTION,
 			GD_TEMPLATE_BUTTONGROUP_AUTHORSECTIONWITHMAP => POP_SCREEN_AUTHORSECTION,
 			GD_TEMPLATE_BUTTONGROUP_AUTHORUSERS => POP_SCREEN_AUTHORUSERS,
+			GD_TEMPLATE_BUTTONGROUP_TAGS => POP_SCREEN_TAGS,
+			GD_TEMPLATE_BUTTONGROUP_AUTHORTAGS => POP_SCREEN_AUTHORTAGS,
 		);
 		if ($screen = $screens[$template_id]) {
 			return $screen;

@@ -32,6 +32,7 @@ define ('GD_TEMPLATE_CONTROLBUTTONGROUP_HOMEOPTIONS', PoP_ServerUtils::get_templ
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWHOMEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-quickviewhomeoptions'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TAGOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-tagoptions'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWTAGOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-quickviewtagoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ALLTAGSLINK', PoP_ServerUtils::get_template_definition('controlbuttongroup-alltagslink'));
 
 class GD_Template_Processor_ControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 
@@ -70,6 +71,7 @@ class GD_Template_Processor_ControlButtonGroups extends GD_Template_Processor_Co
 			GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWAUTHOROPTIONS,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_TAGOPTIONS,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWTAGOPTIONS,
+			GD_TEMPLATE_CONTROLBUTTONGROUP_ALLTAGSLINK,
 		);
 	}
 
@@ -227,6 +229,11 @@ class GD_Template_Processor_ControlButtonGroups extends GD_Template_Processor_Co
 			case GD_TEMPLATE_CONTROLBUTTONGROUP_ADDRELATEDPOST:
 				
 				$ret[] = GD_TEMPLATE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST;
+				break;
+
+			case GD_TEMPLATE_CONTROLBUTTONGROUP_ALLTAGSLINK:
+
+				$ret[] = GD_TEMPLATE_ANCHORCONTROL_TAGSLINK;
 				break;
 		}
 		

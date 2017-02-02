@@ -24,6 +24,7 @@ require_once 'userphoto-base.php';
 require_once 'authorcontact-base.php';
 require_once 'pagetabs-base.php';
 require_once 'postadditionals-base.php';
+require_once 'taginfo-base.php';
 require_once 'tags-base.php';
 require_once 'postdates-base.php';
 require_once 'poststatus-base.php';

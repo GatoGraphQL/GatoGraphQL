@@ -147,6 +147,36 @@ class AAL_PoP_API extends AAL_API {
 					$user_id
 				);
 
+				// Posts which have a #hastag that the user is subscribed to
+				$posthashashtagtheuserissubscribedto_where = sprintf(
+					'
+						SELECT 
+							object_id 
+						FROM 
+							%2$s
+						INNER JOIN
+							%3$s
+						ON
+							%2$s.term_taxonomy_id = %3$s.term_taxonomy_id
+						WHERE
+							%3$s.term_id in (
+								SELECT 
+									meta_value 
+								FROM 
+									%4$s
+								WHERE
+										user_id = %1$s
+									AND
+										meta_key = "%5$s"
+							)
+					',
+					$user_id,
+					$wpdb->term_relationships,
+					$wpdb->term_taxonomy,
+					$wpdb->usermeta,
+					GD_MetaManager::get_meta_key(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, GD_META_TYPE_USER)
+				);
+
 				// User-network: followed users + communities user is part of
 				// Allow User Role Editor to hook into it, to add the Communities (GD_URE_METAKEY_PROFILE_COMMUNITIES)
 				$user_plus_network_where = "1=1";
@@ -216,8 +246,12 @@ class AAL_PoP_API extends AAL_API {
 					);
 				}
 
-				// Posts authored by the user, or where the user has ever added a comment, or where the user has been tagged (either post or comment), but exclude the user him/herself
-				// (The user can recommend or post comments in his/her own posts)
+				// Posts which fulfil any of the following conditions:
+				// - authored by the user, 
+				// - where the user has ever added a comment, 
+				// - where the user has been tagged (either post or comment), 
+				// - have a #hastag that the user is subscribed to, 
+				// but exclude the user him/herself (the user can recommend or post comments in his/her own posts)
 				$useractivityposts_where = sprintf(
 					'
 						(
@@ -235,14 +269,16 @@ class AAL_PoP_API extends AAL_API {
 												post_author = %1$s
 											OR
 												ID in (
-													SELECT 
-														post_id 
-													FROM 
-														%5$s
-													WHERE
-															meta_key = "%6$s"
-														AND
-															meta_value = %1$s
+														SELECT 
+															post_id 
+														FROM 
+															%5$s
+														WHERE
+																meta_key = "%6$s"
+															AND
+																meta_value = %1$s
+													UNION
+														%9$s
 												)
 											)
 											
@@ -286,7 +322,8 @@ class AAL_PoP_API extends AAL_API {
 					$wpdb->postmeta,
 					GD_MetaManager::get_meta_key(GD_METAKEY_POST_TAGGEDUSERS, GD_META_TYPE_POST),
 					$wpdb->commentmeta,
-					GD_MetaManager::get_meta_key(GD_METAKEY_COMMENT_TAGGEDUSERS, GD_META_TYPE_COMMENT)
+					GD_MetaManager::get_meta_key(GD_METAKEY_COMMENT_TAGGEDUSERS, GD_META_TYPE_COMMENT),
+					$posthashashtagtheuserissubscribedto_where
 				);
 
 				// Posts authored by the user, on any post_status, not just published
@@ -310,9 +347,12 @@ class AAL_PoP_API extends AAL_API {
 					$wpdb->activity_log
 				);
 
-				// Comments from someone else replying to a comment by the user,
-				// or posting a comment in a post by the user, or comment tagging the user, 
-				// or a comment in a post where the user is tagged
+				// Comments:
+				// - from someone else replying to a comment by the user,
+				// posting a comment in a post by the user, 
+				// comment tagging the user, 
+				// comment in a post where the user is tagged,
+				// comment in a post with a #hashtag the user is subscribed to
 				$useractivitycomments_where = sprintf(
 					'
 						(
@@ -356,6 +396,8 @@ class AAL_PoP_API extends AAL_API {
 																meta_key = "%6$s"
 															AND
 																meta_value = %1$s
+													UNION
+														%9$s
 													)
 												)
 											OR
@@ -383,7 +425,8 @@ class AAL_PoP_API extends AAL_API {
 					$wpdb->postmeta,
 					GD_MetaManager::get_meta_key(GD_METAKEY_COMMENT_TAGGEDUSERS, GD_META_TYPE_POST),
 					$wpdb->commentmeta,
-					GD_MetaManager::get_meta_key(GD_METAKEY_COMMENT_TAGGEDUSERS, GD_META_TYPE_COMMENT)
+					GD_MetaManager::get_meta_key(GD_METAKEY_COMMENT_TAGGEDUSERS, GD_META_TYPE_COMMENT),
+					$posthashashtagtheuserissubscribedto_where
 				);
 
 				// Comments added by the user
@@ -402,25 +445,6 @@ class AAL_PoP_API extends AAL_API {
 					$wpdb->comments,
 					$wpdb->activity_log
 				);
-				// $usercomments_where = sprintf(
-				// 	'
-				// 		(
-				// 			%3$s.user_id != %1$s
-				// 		AND
-				// 			%3$s.object_id in (
-				// 				SELECT 
-				// 					comment_ID 
-				// 				FROM 
-				// 					%2$s
-				// 				WHERE
-				// 					user_id = %1$s
-				// 			)
-				// 		)
-				// 	',
-				// 	$user_id,
-				// 	$wpdb->comments,
-				// 	$wpdb->activity_log
-				// );
 
 				//----------------------------------
 				// Notifications
@@ -455,14 +479,14 @@ class AAL_PoP_API extends AAL_API {
 					);
 				}
 
-				// User + Network Notifications:
+				// User actions: User + Network Notifications:
 				// Notify the user when:
 				// - Someone from the network follows a user
 				// - By Hook: Someone from the network joins a community (URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY)
 				// - Anyone follows the user
 				// - By Hook: Anyone joined the user (user = community) (URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY)
 				$userplusnetwork_notification_actions = apply_filters(
-					'AAL_PoP_API:notifications:userplusnetwork:actions',
+					'AAL_PoP_API:notifications:userplusnetwork-user:actions',
 					array(
 						AAL_POP_ACTION_USER_FOLLOWSUSER,
 						// AAL_POP_ACTION_USER_UNFOLLOWSUSER,
@@ -483,6 +507,38 @@ class AAL_PoP_API extends AAL_API {
 							%2$s
 						',
 						array_to_quoted_string($userplusnetwork_notification_actions),
+						$user_plus_network_where,
+						$wpdb->activity_log
+					);
+				}
+
+				// Tags actions: User + Network Notifications:
+				// Notify the user when:
+				// - Someone from the network subscribes to a #hashtag
+				$userplusnetwork_notification_tag_actions = apply_filters(
+					'AAL_PoP_API:notifications:userplusnetwork-tag:actions',
+					array(
+						AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG,
+						AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG,
+					)
+				);
+				if ($actions) {
+					$userplusnetwork_notification_tag_actions = array_intersect($userplusnetwork_notification_tag_actions, $actions);
+				}
+				if ($userplusnetwork_notification_tag_actions) {
+					$sql_where_user_ors[] = sprintf(
+						'
+							%3$s.object_type = "Taxonomy"
+						AND
+							%3$s.object_subtype = "Tag"
+						AND
+							%3$s.action in (
+								%1$s
+							)
+						AND
+							%2$s
+						',
+						array_to_quoted_string($userplusnetwork_notification_tag_actions),
 						$user_plus_network_where,
 						$wpdb->activity_log
 					);
@@ -671,7 +727,8 @@ class AAL_PoP_API extends AAL_API {
 				
 				// Comment Notifications:
 				// Notify the user when:
-				// - Someone from the network comments, or anyone comments in a post the user has activity in
+				// - Someone from the network comments, 
+				// - Anyone comments in a post the user has activity in
 				$usercommentsplusnetwork_notification_actions = apply_filters(
 					'AAL_PoP_API:notifications:usercommentsplusnetwork:actions',
 					array(

@@ -50,17 +50,6 @@ class GD_Template_Processor_LoginBlockGroups extends GD_Template_Processor_ListB
 
 			case GD_TEMPLATE_BLOCKGROUP_LOGIN:
 
-				// // Allow WSL to add the FB/Twitter Login
-				// $blocks = apply_filters(
-				// 	'GD_Template_Processor_LoginBlockGroups:blockgroup_blocks',
-				// 	array(
-				// 		GD_TEMPLATE_BLOCK_LOGIN,
-				// 		GD_TEMPLATE_BLOCK_FOLLOWSUSERS,
-				// 		GD_TEMPLATE_BLOCK_RECOMMENDSPOSTS,
-				// 		GD_TEMPLATE_BLOCK_UPVOTESPOSTS,
-				// 		GD_TEMPLATE_BLOCK_DOWNVOTESPOSTS,
-				// 	)
-				// );
 				$ret[] = GD_TEMPLATE_BLOCK_LOGIN;
 				$ret = array_merge(
 					$ret,

@@ -10,8 +10,8 @@ add_action('AAL_PoP_Hooks', 'wsl_aal_pop_hooks');
 function wsl_aal_pop_hooks() {
 
 	// Assign them in a global variable, so their methods can be invoked from outside
-	global $wsl_aal_pop_hook_user, $wsl_aal_pop_hook_posts;
-	$wsl_aal_pop_hook_user = new WSL_AAL_PoP_Hook_User();
+	global $wsl_aal_pop_hook_users, $wsl_aal_pop_hook_posts;
+	$wsl_aal_pop_hook_users = new WSL_AAL_PoP_Hook_Users();
 	$wsl_aal_pop_hook_posts = new WSL_AAL_PoP_Hook_Posts();
 }
 

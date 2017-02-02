@@ -7,6 +7,7 @@
 
 define ('GD_TEMPLATE_BLOCK_AUTHOR_CONTENT', PoP_ServerUtils::get_template_definition('block-author-content'));
 define ('GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT', PoP_ServerUtils::get_template_definition('block-author-summarycontent'));
+define ('GD_TEMPLATE_BLOCK_TAG_CONTENT', PoP_ServerUtils::get_template_definition('block-tag-content'));
 define ('GD_TEMPLATE_BLOCK_SINGLE_CONTENT', PoP_ServerUtils::get_template_definition('block-single-content'));
 define ('GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT', PoP_ServerUtils::get_template_definition('block-singleinteraction-content'));
 define ('GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT', PoP_ServerUtils::get_template_definition('block-singleabout-content'));
@@ -20,6 +21,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 		return array(
 			GD_TEMPLATE_BLOCK_AUTHOR_CONTENT,
 			GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT,
+			GD_TEMPLATE_BLOCK_TAG_CONTENT,
 			GD_TEMPLATE_BLOCK_SINGLE_CONTENT,
 			GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT,
 			GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
@@ -55,6 +57,10 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 				global $author;
 				return get_the_author_meta('display_name', $author);
+
+			// case GD_TEMPLATE_BLOCK_TAG_CONTENT:
+
+			// 	return GD_Template_Processor_CustomSectionBlocksUtils::get_tag_title(true, false);
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
@@ -127,6 +133,11 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				if (PoPTheme_Wassup_Utils::author_fulldescription()) {
 					$ret[] = GD_TEMPLATE_CONTENT_AUTHOR;
 				}
+				break;
+
+			case GD_TEMPLATE_BLOCK_TAG_CONTENT:
+
+				$ret[] = GD_TEMPLATE_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL;
 				break;
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
@@ -205,20 +216,6 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 		// $sidebar = '';
 		switch ($template_id) {
 
-			// case GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT:
-			// case GD_TEMPLATE_BLOCK_AUTHOR_CONTENT:
-
-			// 	global $author;
-			// 	if (gd_ure_is_organization($author)) {
-
-			// 		$sidebar = GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION;
-			// 	}
-			// 	elseif (gd_ure_is_individual($author)) {
-					
-			// 		$sidebar = GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL;
-			// 	}
-				// break;
-
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 
 				$this->append_att($template_id, $atts, 'class', 'block-single-content');
@@ -288,6 +285,12 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR);
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);
 
+			case GD_TEMPLATE_BLOCK_TAG_CONTENT:
+
+				$url = get_tag_link(get_queried_object_id());
+				$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG);
+				return GD_TemplateManager_Utils::add_tab($url, $page_id);
+
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 
 				global $post;
@@ -313,6 +316,10 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 			case GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT:
 
 				return GD_DATALOADER_AUTHOR;
+
+			case GD_TEMPLATE_BLOCK_TAG_CONTENT:
+
+				return GD_DATALOADER_TAG;
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 			case GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT:
