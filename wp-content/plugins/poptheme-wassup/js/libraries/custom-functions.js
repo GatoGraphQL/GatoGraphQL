@@ -219,6 +219,36 @@ popCustomFunctions = {
 		return t.addURLParams(add_query_arg(M.URLPARAM_ACTION, M.URLPARAM_ACTION_PRINT, add_query_arg(M.URLPARAM_THEMEMODE, M.THEMEMODE_WASSUP_PRINT, url)));
 	},
 
+	scrollTop : function(args) {
+
+		var t = this;
+		var elem = args.elem, top = args.top, animate = args.animate;
+
+		// If the element is the mainPageSection, and not of the perfectScrollbar type (defined in function PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar())...
+		if (elem.attr('id') == M.PS_MAIN_ID && !elem.hasClass('perfect-scrollbar')) {
+
+			window.scrollTo(0, top);
+			return true;
+		}
+
+		return false;
+	},
+
+	getPosition : function(args) {
+
+		var t = this;
+		var elem = args.elem;
+
+		// If the element is the mainPageSection, and not of the perfectScrollbar type (defined in function PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar())...
+		if (elem.attr('id') == M.PS_MAIN_ID && !elem.hasClass('perfect-scrollbar')) {
+
+			// Return the height of the body
+			return body.scrollTop;
+		}
+
+		return 0;
+	},
+
 	//-------------------------------------------------
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
@@ -252,4 +282,4 @@ popCustomFunctions = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popCustomFunctions, ['addPageSectionIds', 'pageSectionNewDOMsBeforeInitialize'], true);
-popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser']);
+popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser', 'getPosition', 'scrollTop']);

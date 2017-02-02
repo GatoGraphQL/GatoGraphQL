@@ -36,10 +36,15 @@ body.sliding #ps-navigator {
 #ps-navigator .description {
 	color: #f1f1f2;
 }
-/*body.swift */#ps-side {
+#ps-side {
 	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
 	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
 	box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+}
+#ps-sideinfo {
+	-webkit-box-shadow: 0 0 5px rgba(77, 77, 79, .2);
+	-moz-box-shadow: 0 0 5px rgba(77, 77, 79, .2);
+	box-shadow: 0 0 5px rgba(77, 77, 79, .2);
 }
 @media (min-width: 768px) {
 	/*body.swift */#ps-side .nav>li>a/*,
@@ -195,7 +200,9 @@ body.pop-loadingjs .loading-screen {
 	display: block;
     /*background-color: transparent;*/
 }
-body.pop-loadingframe.pop-loadingjs #pagesection-group {
+/* The top has a background color, so don't show it while showing the loading screen */
+body.pop-loadingframe.pop-loadingjs #ps-top,
+body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	display: none;
 }
 
@@ -852,16 +859,20 @@ body.loggedin .loggedin-btn {
 }
 
 /* By default, show the positive functionality: follow user, etc. When user logs in, their styles should override these */
+.pop-functionaction/*,
 .pop-followuser,
 .pop-recommendpost,
+.pop-subscribetotag,
 .pop-upvotepost,
-.pop-downvotepost {
+.pop-downvotepost*/ {
 	display: block;
 }
+.pop-functionunaction/*,
 .pop-unfollowuser,
 .pop-unrecommendpost,
+.pop-unsubscribefromtag,
 .pop-undoupvotepost,
-.pop-undodownvotepost {
+.pop-undodownvotepost*/ {
 	display: none;
 }
 
@@ -1084,10 +1095,6 @@ span.twitter-typeahead {
 	padding: 0;
 }
 
-body.sliding {
-	 overflow: hidden;
-}
-
 
 #quickview-modal .modal-body {
 	padding-top: 0;
@@ -1288,8 +1295,11 @@ body.sliding .pagesection-group.active-top.active-pagetabs.active-navigator-xs .
 
 /* pageSections (offcanvas) visibility */
 /*html,*/
-body.nooverflow {
+body.non-scrollable {
   overflow-x: hidden;  /*Prevent scroll on narrow devices  */
+}
+body.non-scrollable.sliding {
+	overflow: hidden;
 }
 
 .pagesection-group .offcanvas,
@@ -1302,7 +1312,8 @@ body.nooverflow {
 	position: fixed;
 	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
 }
-.pagesection-group .offcanvas.scrollable {
+.pagesection-group .offcanvas.scrollable,
+body.non-scrollable .pagesection-group .offcanvas.main {
 	overflow: scroll; /* Needed for Waypoints */
 	overflow-y: hidden;
 	overflow-x: hidden;
@@ -1878,12 +1889,20 @@ body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-co
 #ps-sideinfo .blocksection-controls.top {
 	z-index: 400;
 }
-.pagesection-group .offcanvas.main {
+body.non-scrollable .pagesection-group .offcanvas.main {
 	z-index: 200;
 }
 .pagesection-group .offcanvas.background {
 	z-index: 100;
 }
+
+body .pagesection-group .offcanvas.main {
+	position: absolute;
+}
+body.non-scrollable .pagesection-group .offcanvas.main {
+	position: fixed;
+}
+
 
 /* Forms inside the addons window: emulate the col-sm/col-xs from Bootstrap for fullsize/maximized states */
 @media (min-width: 768px) {
@@ -1948,11 +1967,11 @@ body.sliding #ps-hover .container-fluid {
 }
 
 /* When doing waypoints scrollVertical on a map (eg: Organik Fundraising Farms Map), the scroll property cuts the left part of the scroll. Add the white background here, always */
-.pop-block-scrollmap.vertical > .blocksection-inners {
+/*.pop-block-scrollmap.vertical > .blocksection-inners {
 	margin-left: -15px;
 	padding-left: 15px;
 	background-color: #fff;
-}
+}*/
 .pop-block-scrollmap.vertical .blocksection-inners>div.scroll,
 .pop-block-calendarmap .blocksection-inners>div.calendar {
 	float: left;
@@ -4378,4 +4397,13 @@ form.pop-filterform-instantaneous {
 
 iframe.embedpreview {
 	background-color: #fff;
+}
+
+/* prettyPrint for theme "desert", which adds background-color #333. Before prettyPrint is run, the font is not visible, since it's also #333 (coming from bootstrap) */
+pre.prettyprint {
+	color: #fff;
+}
+
+.layout-tag-details h4 {
+	margin-top: 0;
 }

@@ -2323,20 +2323,30 @@ popManager = {
 
 		var t = this;
 
-		// Try perfectScrollbar if available
-		if (popPerfectScrollbar.scrollTop(elem, top, animate)) {
-			return;
-		}
-
-		// Try modal if available
-		if (popBootstrap.scrollTop(elem)) {
-			return;
-		}
+		// This will call functions from perfectScrollbar, bootstrap modal, and custom functions
+		popJSLibraryManager.execute('scrollTop', {elem: elem, top: top, animate: animate});
 	},
 	getPosition : function(elem) {
 
 		var t = this;
-		return popPerfectScrollbar.getPosition(elem);
+
+		// Allow to have custom-functions.js provide the implementation of this function for the main pageSection, and perfectScrollbar also
+		var executed = popJSLibraryManager.execute('getPosition', {elem: elem});
+		var ret = 0;
+		$.each(executed, function(index, value) {
+			if (value) {
+				ret = value;
+				return -1;
+			}
+		});
+		
+		return ret;
+
+		// if (elem.hasClass('perfect-scrollbar')) {
+		// 	return popPerfectScrollbar.getPosition(elem);
+		// }
+
+		// return 0;
 	},
 
 	getSettingsId : function(objectOrId) {

@@ -214,9 +214,10 @@ popBootstrap = {
 		}, closeTime);
 	},
 
-	scrollTop : function(elem) {
+	scrollTop : function(args) {
 
 		var t = this;
+		var elem = args.elem, top = args.top, animate = args.animate;
 
 		// Try modal if available
 		var modal = elem.closest('.modal').addBack('.modal');
@@ -234,4 +235,4 @@ popBootstrap = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popBootstrap, ['modal', 'closeModals', 'popover', 'contentPopover', 'tooltip', 'openParentCollapse', 'alertCloseOnTimeout']);
+popJSLibraryManager.register(popBootstrap, ['modal', 'closeModals', 'popover', 'contentPopover', 'tooltip', 'openParentCollapse', 'alertCloseOnTimeout', 'scrollTop']);

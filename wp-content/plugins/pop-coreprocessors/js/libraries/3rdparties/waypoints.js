@@ -137,6 +137,8 @@ popWaypoints = {
 		var t = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 
+		var offset = 0;
+
 		// var waypoint = block.find('.waypoint[data-toggle="theater"]').addBack('.waypoint[data-toggle="theater"]');
 		jQuery(document).ready( function($) {	
 
@@ -161,7 +163,16 @@ popWaypoints = {
 							popPageSectionManager.theater(false);
 						}
 					}, 
-					context: opts.context
+					context: opts.context,
+					offset: opts.context ? 0 : function() {
+
+						// Comment 30/01/2017: since removing perfectScrollbar from the mainPageSection, and switching to body, we can't use the context 'pop-waypoints-context' anymore
+						// Then, we gotta add an offset for the main pageSection: it has an offset with regards to the body (eg: top => 45px, top+pagetabs => 80px),
+						// Needed for the Projects Map waypointsTeater
+						var target = this.element;
+						var pageSection = popManager.getPageSection(target);
+						return pageSection.offset().top;
+					}
 				});		
 				t.destroy(pageSection, block, waypoint);
 			});			

@@ -38,6 +38,24 @@ popPerfectScrollbar = {
 		});
 	},
 
+	getPosition : function(args) {
+
+		var t = this;
+		var elem = args.elem;
+		var scrollbar = elem.closest('.perfect-scrollbar').addBack('.perfect-scrollbar');
+		if (scrollbar.length) {
+			
+			var offsetReference = scrollbar.children('.perfect-scrollbar-offsetreference');
+			if (offsetReference.length) {
+			
+				// Multiply by -1 to make it positive
+				return offsetReference.position().top * -1;
+			}
+		}
+
+		return 0;
+	},
+
 	//-------------------------------------------------
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
@@ -102,26 +120,10 @@ popPerfectScrollbar = {
 		return false;
 	},
 
-	getPosition : function(elem) {
+	scrollTop : function(args) {
 
 		var t = this;
-		var scrollbar = elem.closest('.perfect-scrollbar').addBack('.perfect-scrollbar');
-		if (scrollbar.length) {
-			
-			var offsetReference = scrollbar.children('.perfect-scrollbar-offsetreference');
-			if (offsetReference.length) {
-			
-				// Multiply by -1 to make it positive
-				return offsetReference.position().top * -1;
-			}
-		}
-
-		return 0;
-	},
-
-	scrollTop : function(elem, top, animate) {
-
-		var t = this;
+		var elem = args.elem, top = args.top, animate = args.animate;
 		top = top || 0;
 
 		var scrollbar = elem.closest('.perfect-scrollbar').addBack('.perfect-scrollbar');
@@ -141,4 +143,4 @@ popPerfectScrollbar = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popPerfectScrollbar, [/*'documentInitialized'*/ 'scrollbarHorizontal', 'scrollbarVertical']);
+popJSLibraryManager.register(popPerfectScrollbar, [/*'documentInitialized'*/ 'scrollbarHorizontal', 'scrollbarVertical', 'getPosition', 'scrollTop']);
