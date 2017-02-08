@@ -5,27 +5,29 @@ Framework for building Single-Page Application WordPress websites, decentralized
 
 For more info, visit:
 
-- **GetPoP website:** https://getpop.org
-- **Demo:** https://demo.getpop.org
+- **PoP website:** https://getpop.org
+- **PoP demo:** https://demo.getpop.org
 
 - - -
 
-Below is a summary. For a properly detailed description, please go to https://getpop.org
+Below is a summary. For a properly detailed description, please visit [PoP's documentation page](https://getpop.org/en/documentation/overview/).
 
 ## What is PoP?
 
-PoP creates Single-Page Application websites, by combining Wordpress and Handlebars into an MVC architecture framework:
+PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_application) websites, by combining [Wordpress](https://wordpress.org) and [Handlebars](http://handlebarsjs.com/) into an [MVC architecture](https://en.wikipedia.org/wiki/Model-view-controller) framework:
 
 - Wordpress is the model/back-end
 - Handlebars templates are the view/front-end
 - the PoP engine is the controller
+
+![How it works](https://uploads.getpop.org/wp-content/uploads/2016/10/Step-5-640x301.png)
 
 ## Design principles
 
 1. PoP provides the WordPress website of its own API:
 
  - Available via HTTP
- - Simply by adding to any URL: output=json
+ - By adding parameter `output=json` to any URL
 
 2. Decentralized
 
@@ -42,8 +44,8 @@ PoP creates Single-Page Application websites, by combining Wordpress and Handleb
 
 ## Installation
 
-1. Install the latest version of WordPress
-2. Download/Clone the PoP repository on the same folder
+1. Install the [latest version](https://wordpress.org/latest.zip) of WordPress
+2. Download/Clone this repository on the same folder
 3. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID ([there's an issue](https://github.com/leoloso/PoP/issues/38) to do this through scripts)
 4. Activate all plug-ins and the theme
 
