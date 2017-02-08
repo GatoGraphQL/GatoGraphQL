@@ -49,6 +49,37 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 3. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID ([there's an issue](https://github.com/leoloso/PoP/issues/38) to do this through scripts)
 4. Activate all plug-ins and the theme
 
+## Configuration
+
+PoP allows the configuration of the following properties, done in file wp-config.php:
+
+    Constant: POP_SERVER_USECACHE
+    Values: true|false
+    Description: Create and re-use a cache of the settings of the requested page.
+
+    Constant: POP_SERVER_USEMINIFIEDFILES
+    Values: true|false
+    Description: Include the mangled, minified and bundled together version of all .js, .tmpl.js and .css files.
+
+    Constant: POP_SERVER_TEMPLATEDEFINITION_TYPE
+    Values: 0|1|2
+    Description: Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
+      0: Use the original name of each module
+      1: Use both
+      2: Use the base36 counter number
+
+    Constant: POP_SERVER_COMPACTJSKEYS
+    Values: true|false
+    Description: Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
+
+    Constant: POP_SERVER_USELOCALSTORAGE
+    Values: true|false
+    Description: Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
+
+    Constant: POP_SERVER_FORCESSL
+    Values: true|false
+    Description: If true, it will always redirect to HTTPS when accessing over HTTP
+
 ### Decentralization: enabling crossdomain
 
 To have a website consume data coming from other domains, crossdomain access must be allowed. For this, edit your .htaccess file like this:
@@ -63,9 +94,9 @@ To have a website consume data coming from other domains, crossdomain access mus
       Header add Access-Control-Allow-Methods POST
     </IfModule>
 
-### Mangling, Minifying and Bundling of .css, .js and .tmpl.js files
+## Optimization
 
-PoP allows to include either all registered .css, .js and .tmpl.js files from all plug-ins (suitable for DEV environment),  or 1 .css + 1 .js + 1 .tmpl.js mangled, minified and bundled versions of all those files (suitable for PROD environment):
+PoP allows to mangle, minify and bundle together all required .css, .js and .tmpl.js files (suitable for PROD environment), both at the plug-in and website levels:
 
 - **At the plug-in level** (it generates 1.js + 1 .tmpl.js + 1.css files per plug-in): execute `bash -x plugins/PLUGIN-NAME/build/minify.sh` for each plugin
 - **At the website level** (it generates 1.js + 1 .tmpl.js + 1.css files for the whole website): execute `bash -x themes/THEME-NAME/build/minify.sh` for the theme
@@ -109,31 +140,4 @@ And configuration:
   
       plugins/PLUGIN-NAME/css/
       plugins/PLUGIN-NAME/js/
-
-## Configuration
-
-PoP allows the configuration of the following properties, done in file wp-config.php:
-
-    Constant: POP_SERVER_USECACHE
-    Values: true|false
-    Description: Create and re-use a cache of the settings of the requested page.
-
-    Constant: POP_SERVER_USEMINIFIEDFILES
-    Values: true|false
-    Description: Include all .js and .css files, or the bundled and minified version.
-
-    Constant: POP_SERVER_TEMPLATEDEFINITION_TYPE
-    Values: 0|1|2
-    Description: Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
-      0: Use the original name of each module
-      1: Use both
-      2: Use the base36 counter number
-
-    Constant: POP_SERVER_COMPACTJSKEYS
-    Values: true|false
-    Description: Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
-
-    Constant: POP_SERVER_USELOCALSTORAGE
-    Values: true|false
-    Description: Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
