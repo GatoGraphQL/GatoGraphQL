@@ -61,26 +61,24 @@ To have a website consume data coming from other domains, crossdomain access mus
 
 ### Mangling, Minifying and Bundling of .css, .js and .tmpl.js files
 
-PoP allows to include either all registered .css, .js and .tmpl.js files from all plug-ins (suitable for DEV environment),  or 1 .css + 1 .js + 1 .tmpl.js bundled and minified versions of all those files (suitable for PROD environment). In wp-config.php:
+PoP allows to include either all registered .css, .js and .tmpl.js files from all plug-ins (suitable for DEV environment),  or 1 .css + 1 .js + 1 .tmpl.js mangled, minified and bundled versions of all those files (suitable for PROD environment):
 
-`define('POP_SERVER_USEMINIFIEDFILES', true);`
+- **At the plug-in level** (it generates 1.js + 1 .tmpl.js + 1.css files per plug-in): execute `bash -x plugins/PLUGIN-NAME/build/minify.sh` for each plugin
+- **At the website level** (it generates 1.js + 1 .tmpl.js + 1.css files for the whole website): execute `bash -x themes/THEME-NAME/build/minify.sh` for the theme
 
-The bundling and minifying of files is done in 2 places:
-
-- **At the plug-in level:** it generates 1.js + 1 .tmpl.js + 1.css files per plug-in. Input files are defined in plugins/PLUGIN-NAME/build/minify.sh
-- **At the website level:** it generates 1.js + 1 .tmpl.js + 1.css files for the whole website. Input files are defined in themes/THEME-NAME/build/minify.sh
-
-The procedure is as follows (_the current procedure, explained below, is not very pretty... I'll welcome anyone proposing a better solution_)
+Executing the `minify.sh` scripts requires the following software (_the current procedure, explained below, is not very pretty... I'll welcome anyone proposing a better solution_):
  
-1. Install UglifyJS
+1. UglifyJS
 
  To further reduce the file size of the bundled libraries JS file, I use [UglifyJS](https://github.com/mishoo/UglifyJS2)
 
-2. Install Google's minimizer Min in your webserver
+2. Google's minimizer Min
 
  To bundle and minify files, I'm using [Google's minimizer Min](https://github.com/mrclay/minify), deployed under https://min.localhost/, and executing a script that makes a request and saves the output of the minified file to disk.
 
-3. Define the environment variables used in minify.sh: POP_APP_PATH, POP_APP_MIN_PATH and POP_APP_MIN_FOLDER
+And configuration:
+
+1. Define the environment variables used in `minify.sh`: `POP_APP_PATH`, `POP_APP_MIN_PATH` and `POP_APP_MIN_FOLDER`.
 
  For Mac:
 
@@ -92,9 +90,9 @@ The procedure is as follows (_the current procedure, explained below, is not ver
     
       and save
 
-4. Create the folder structure needed by minify.sh, under POP_APP_MIN_FOLDER:
+2. Create the folder structure needed by `minify.sh`, under `POP_APP_MIN_FOLDER`:
 
- The .sh scripts copy all files to minimize to this folder, from where it minimizes them. The structure of this folder must be created in advance, under folder defined in POP_APP_MIN_FOLDER (eg: /Users/john/Sites/min/PoP/), as follows:
+ The .sh scripts copy all files to minimize to this folder, from where it minimizes them. The structure of this folder must be created in advance, under folder defined in `POP_APP_MIN_FOLDER` (eg: /Users/john/Sites/min/PoP/), as follows:
  
  for each theme:
   
