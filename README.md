@@ -34,11 +34,12 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 ## What can be implemented with it?
 
-- Niche/decentralized social network
-- Decentralized market-places
+- Niche social networks
+- Decentralized websites
 - Content aggregators
 - Server back-end for mobile apps
 - Microservices
+- APIs for Wordpress websites
 
 ## Installation
 
