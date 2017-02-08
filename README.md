@@ -52,32 +52,19 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
-    Constant: `POP_SERVER_USECACHE`
-    Values: true|false
-    Description: Create and re-use a cache of the settings of the requested page.
+- `POP_SERVER_USECACHE` (_true|false_): Create and re-use a cache of the settings of the requested page.
 
-    Constant: `POP_SERVER_USEMINIFIEDFILES`
-    Values: true|false
-    Description: Include the mangled, minified and bundled together version of all .js, .tmpl.js and .css files.
+- `POP_SERVER_USEMINIFIEDFILES` (_true|false_): Include the mangled, minified and bundled together version of all .js, .tmpl.js and .css files.
 
-    Constant: `POP_SERVER_TEMPLATEDEFINITION_TYPE`
-    Values: 0|1|2
-    Description: Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
-      0: Use the original name of each module
-      1: Use both
-      2: Use the base36 counter number
+- `POP_SERVER_TEMPLATEDEFINITION_TYPE` (_0|1|2_): Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
 
-    Constant: `POP_SERVER_COMPACTJSKEYS`
-    Values: true|false
-    Description: Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
+  0: Use the original name of each module. 1: Use both. 2: Use the base36 counter number.
 
-    Constant: `POP_SERVER_USELOCALSTORAGE`
-    Values: true|false
-    Description: Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
+- `POP_SERVER_COMPACTJSKEYS` (_true|false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
-    Constant: `POP_SERVER_FORCESSL`
-    Values: true|false
-    Description: Redirect to HTTPS whenever accessing over HTTP
+- `POP_SERVER_USELOCALSTORAGE` (_true|false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
+
+- `POP_SERVER_FORCESSL` (_true|false_): Redirect to HTTPS whenever accessing over HTTP
 
 ### Decentralization: enabling crossdomain
 
@@ -110,15 +97,11 @@ Executing the `minify.sh` scripts requires the following software (_I'll welcome
 
  To bundle and minify files. The min webserver must be deployed under http://min.localhost/.
 
-The following environment variables are used in `minify.sh`: `POP_APP_PATH`, `POP_APP_MIN_PATH` and `POP_APP_MIN_FOLDER`. To set their values, for Mac:
-
-      sudo nano ~/.bash_profile, then add:
+The following environment variables are used in `minify.sh`: `POP_APP_PATH`, `POP_APP_MIN_PATH` and `POP_APP_MIN_FOLDER`. To set their values, for Mac, execute `sudo nano ~/.bash_profile`, then add and save:
     
       export POP_APP_PATH=path to your website (eg: "/Users/john/Sites/PoP")
       export POP_APP_MIN_PATH=path to Google's min website (eg: "/Users/john/Sites/min")
       export POP_APP_MIN_FOLDER=path to folder in min, used for copy files to minimize (eg: "PoP", with the folder being /Users/john/Sites/min/PoP/)
-    
-      and save
 
 The `minify.sh` script copies all files to minimize under folder `POP_APP_MIN_FOLDER`, from where it minimizes them. The structure of this folder must be created in advance, as follows:
  
