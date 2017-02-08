@@ -8,9 +8,7 @@ For more info, visit:
 - **PoP website:** https://getpop.org
 - **PoP demo:** https://demo.getpop.org
 
-- - -
-
-Below is a summary. For a properly detailed description, please visit [PoP's documentation page](https://getpop.org/en/documentation/overview/).
+Below is a technical summary. For a more in-depth description, please visit [PoP's documentation page](https://getpop.org/en/documentation/overview/).
 
 ## What is PoP?
 
@@ -101,21 +99,17 @@ PoP allows to mangle, minify and bundle together all required .css, .js and .tmp
 - **At the plug-in level** (it generates 1.js + 1 .tmpl.js + 1.css files per plug-in): execute `bash -x plugins/PLUGIN-NAME/build/minify.sh` for each plugin
 - **At the website level** (it generates 1.js + 1 .tmpl.js + 1.css files for the whole website): execute `bash -x themes/THEME-NAME/build/minify.sh` for the theme
 
-Executing the `minify.sh` scripts requires the following software (_the current procedure, explained below, is not very pretty... I'll welcome anyone proposing a better solution_):
+Executing the `minify.sh` scripts requires the following software (_I'll welcome anyone proposing a better way to do this_):
  
-1. UglifyJS
+1. [UglifyJS](https://github.com/mishoo/UglifyJS2)
 
- To further reduce the file size of the bundled libraries JS file, I use [UglifyJS](https://github.com/mishoo/UglifyJS2)
+ To mangle and so further reduce the file size of the bundled JS file
 
-2. Google's minimizer Min
+2. [Google's minimizer Min](https://github.com/mrclay/minify)
 
- To bundle and minify files, I'm using [Google's minimizer Min](https://github.com/mrclay/minify), deployed under https://min.localhost/, and executing a script that makes a request and saves the output of the minified file to disk.
+ To bundle and minify files. The min webserver must be deployed under https://min.localhost/.
 
-And configuration:
-
-1. Define the environment variables used in `minify.sh`: `POP_APP_PATH`, `POP_APP_MIN_PATH` and `POP_APP_MIN_FOLDER`.
-
- For Mac:
+The following environment variables are used in `minify.sh`: `POP_APP_PATH`, `POP_APP_MIN_PATH` and `POP_APP_MIN_FOLDER`. To set their values, for Mac:
 
       sudo nano ~/.bash_profile, then add:
     
@@ -125,9 +119,7 @@ And configuration:
     
       and save
 
-2. Create the folder structure needed by `minify.sh`, under `POP_APP_MIN_FOLDER`:
-
- The .sh scripts copy all files to minimize to this folder, from where it minimizes them. The structure of this folder must be created in advance, under folder defined in `POP_APP_MIN_FOLDER` (eg: /Users/john/Sites/min/PoP/), as follows:
+The `minify.sh` script copies all files to minimize under folder `POP_APP_MIN_FOLDER`, from where it minimizes them. The structure of this folder must be created in advance, as follows:
  
  for each theme:
   
