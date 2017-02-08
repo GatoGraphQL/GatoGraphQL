@@ -1,3 +1,5 @@
+![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
+
 # PoP — “Platform of Platforms”
 Framework for building Single-Page Application WordPress websites, decentralized crowd-sourced platforms, and social networks
 
@@ -6,11 +8,11 @@ For more info, visit:
 - **GetPoP website:** https://getpop.org
 - **Demo:** https://demo.getpop.org
 
-## Intro
+- - -
 
-This section is a summary. For a properly detailed description, please go to https://getpop.org
+Below is a summary. For a properly detailed description, please go to https://getpop.org
 
-### What is PoP?
+## What is PoP?
 
 PoP creates Single-Page Application websites, by combining Wordpress and Handlebars into an MVC architecture framework:
 
@@ -18,7 +20,7 @@ PoP creates Single-Page Application websites, by combining Wordpress and Handleb
 - Handlebars templates are the view/front-end
 - the PoP engine is the controller
 
-### Design principles
+## Design principles
 
 1. PoP provides the WordPress website of its own API:
 
@@ -30,19 +32,13 @@ PoP creates Single-Page Application websites, by combining Wordpress and Handleb
  - All PoP websites can communicate among themselves
  - Fetch/process data in real time
 
-### What can be implemented with it?
+## What can be implemented with it?
 
 - Niche/decentralized social network
 - Decentralized market-places
 - Content aggregators
 - Server back-end for mobile apps
 - Microservices
-
-## PoP Themes
-
-To create a clearcut MVC separation of layers, PoP sends a JSON code to the front-end, which is then transformed into HTML. As such, PoP does not use WordPress' hierarchy templates (archive.php, single.php, home.php, etc), and replaces these with Handlebars templates in the front-end. 
-
-Additionaly, most logic from the website is implemented in plug-ins (eg: `poptheme-wassup` and `getpop-demo-processors`), and very little on the theme (eg: `getpop-demo`). This is because PoP enables WordPress websites to export their data to 3rd parties, in the format they need it. Since a WordPress website cannot have more than 1 active theme, then this logic must be implemented in plug-ins.
 
 ## Installation
 
@@ -112,7 +108,7 @@ The procedure is as follows (_the current procedure, explained below, is not ver
       plugins/PLUGIN-NAME/css/
       plugins/PLUGIN-NAME/js/
 
-## Configuration constants
+## Configuration
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
