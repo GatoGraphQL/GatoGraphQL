@@ -44,6 +44,8 @@ PoP creates Single-Page Application websites, by combining Wordpress and Handleb
 
 1. Install the latest version of WordPress
 2. Download/Clone the PoP repository on the same folder
+3. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID ([there's an issue](https://github.com/leoloso/PoP/issues/38) to do this through scripts)
+4. Activate all plug-ins and the theme
 
 ### Decentralization: enabling crossdomain
 
