@@ -219,19 +219,23 @@ popCustomFunctions = {
 		return t.addURLParams(add_query_arg(M.URLPARAM_ACTION, M.URLPARAM_ACTION_PRINT, add_query_arg(M.URLPARAM_THEMEMODE, M.THEMEMODE_WASSUP_PRINT, url)));
 	},
 
+	scrollToElem : function(args) {
+
+		var t = this;
+		var elem = args.elem, position = args.position, animate = args.animate;
+
+		var pageSection = popManager.getPageSection(position);
+		var top = position.offset().top - pageSection.offset().top;
+		
+		return t.execScrollTop(elem, top, animate);
+	},
+
 	scrollTop : function(args) {
 
 		var t = this;
 		var elem = args.elem, top = args.top, animate = args.animate;
 
-		// If the element is the mainPageSection, and not of the perfectScrollbar type (defined in function PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar())...
-		if (elem.attr('id') == M.PS_MAIN_ID && !elem.hasClass('perfect-scrollbar')) {
-
-			window.scrollTo(0, top);
-			return true;
-		}
-
-		return false;
+		return t.execScrollTop(elem, top, animate);
 	},
 
 	getPosition : function(args) {
@@ -252,6 +256,25 @@ popCustomFunctions = {
 	//-------------------------------------------------
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
+
+	execScrollTop : function(elem, top, animate) {
+
+		var t = this;
+
+		// If the element is the mainPageSection, and not of the perfectScrollbar type (defined in function PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar())...
+		if (elem.attr('id') == M.PS_MAIN_ID && !elem.hasClass('perfect-scrollbar')) {
+
+			if (animate) {
+				$(document.body).animate({ scrollTop: top }, 'fast');
+			}
+			else {
+				window.scrollTo(0, top);
+			}
+			return true;
+		}
+
+		return false;
+	},
 
 	addURLParams : function(url) {
 	
@@ -282,4 +305,4 @@ popCustomFunctions = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popCustomFunctions, ['addPageSectionIds', 'pageSectionNewDOMsBeforeInitialize'], true);
-popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser', 'getPosition', 'scrollTop']);
+popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser', 'getPosition', 'scrollToElem', 'scrollTop']);

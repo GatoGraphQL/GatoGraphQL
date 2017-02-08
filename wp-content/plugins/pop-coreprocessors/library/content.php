@@ -47,19 +47,6 @@ add_filter( 'the_content', 'trim', 1);
 //            $str
 // );}
 
-add_filter('excerpt_more', 'gd_excerpt_more', 10000, 1);
-function gd_excerpt_more($excerpt_more) {
-  return '...';
-}
-function gd_header_page_description() {
-  global $post;
-  return apply_filters('gd_header_page_description', '', $post->ID);
-}
-
-function gd_header_site_description() {
-  return apply_filters('gd_header_site_description', '');
-}
-
 /**
  * Adds the word "More" before the Title. Used for adding "More Actions", "More Events", etc blocks after a Single post
  */
@@ -87,93 +74,37 @@ function gd_header_site_description() {
 //   return $title;
 // }
 
-function gd_get_post_description() {
 
-	global $post;
-  $excerpt = $post->post_excerpt;
-  // Comment Leo 23/05: not using get_the_excerpt because of the applied filters, eg: adding a disclaimer at the very top
-  // $excerpt = get_the_excerpt();
-
-	// If the excerpt is empty, return the post content instead
-	if (!$excerpt) {
-
-		global $post;
-		// 300 characters long is good enough, remove all whitespaces, remove shortcodes
-		$excerpt = str_replace(array("\n\r", "\n", "\r", "\t"), array(' ', '', '', ' '), wp_trim_excerpt(limit_string(strip_tags(strip_shortcodes($post->post_content)), 300)));
-	}
-
-	return esc_html($excerpt);
-}
-
-function gd_get_initial_document_title() {
-  
-  return apply_filters('gd_get_initial_document_title', get_bloginfo('name'));
-}
 
 function gd_get_website_description($addhomelink = true) {
   
   return apply_filters('gd_get_website_description', get_bloginfo('description'), $addhomelink);
 }
 
-function gd_content_tag_query() {
-  $nice_tag_query = get_query_var('tag'); // tags in current query
-  $nice_tag_query = str_replace(' ', '+', $nice_tag_query); // get_query_var returns ' ' for AND, replace by +
-  $tag_slugs = preg_split('%[,+]%', $nice_tag_query, -1, PREG_SPLIT_NO_EMPTY); // create array of tag slugs
-  $tag_ops = preg_split('%[^,+]*%', $nice_tag_query, -1, PREG_SPLIT_NO_EMPTY); // create array of operators
+// function gd_content_tag_query() {
+//   $nice_tag_query = get_query_var('tag'); // tags in current query
+//   $nice_tag_query = str_replace(' ', '+', $nice_tag_query); // get_query_var returns ' ' for AND, replace by +
+//   $tag_slugs = preg_split('%[,+]%', $nice_tag_query, -1, PREG_SPLIT_NO_EMPTY); // create array of tag slugs
+//   $tag_ops = preg_split('%[^,+]*%', $nice_tag_query, -1, PREG_SPLIT_NO_EMPTY); // create array of operators
 
-  $tag_ops_counter = 0;
-  $nice_tag_query = '';
+//   $tag_ops_counter = 0;
+//   $nice_tag_query = '';
 
-  foreach ($tag_slugs as $tag_slug) { 
-    $tag = get_term_by('slug', $tag_slug ,'post_tag');
-    // prettify tag operator, if any
-    if ( isset($tag_ops[$tag_ops_counter]) && $tag_ops[$tag_ops_counter] == ',') {
-      $tag_ops[$tag_ops_counter] = ', ';
-    } elseif ( isset($tag_ops[$tag_ops_counter]) && $tag_ops[$tag_ops_counter] == '+') {
-      $tag_ops[$tag_ops_counter] = ' + ';
-    } else {
-      $tag_ops[$tag_ops_counter] = '';
-    }
-    // concatenate display name and prettified operators
-    $nice_tag_query = $nice_tag_query.$tag->name.$tag_ops[$tag_ops_counter];
-    $tag_ops_counter += 1;
-  }
-   return $nice_tag_query;
-}
+//   foreach ($tag_slugs as $tag_slug) { 
+//     $tag = get_term_by('slug', $tag_slug ,'post_tag');
+//     // prettify tag operator, if any
+//     if ( isset($tag_ops[$tag_ops_counter]) && $tag_ops[$tag_ops_counter] == ',') {
+//       $tag_ops[$tag_ops_counter] = ', ';
+//     } elseif ( isset($tag_ops[$tag_ops_counter]) && $tag_ops[$tag_ops_counter] == '+') {
+//       $tag_ops[$tag_ops_counter] = ' + ';
+//     } else {
+//       $tag_ops[$tag_ops_counter] = '';
+//     }
+//     // concatenate display name and prettified operators
+//     $nice_tag_query = $nice_tag_query.$tag->name.$tag_ops[$tag_ops_counter];
+//     $tag_ops_counter += 1;
+//   }
+//    return $nice_tag_query;
+// }
 
-function gd_get_document_thumb($size = 'large') {
 
-  if (is_single() || is_page()) {
-    global $post;
-    $post_thumb_id = gd_get_thumb_id($post->ID);
-    $thumb = wp_get_attachment_image_src( $post_thumb_id, $size);
-    $thumb_mime_type = get_post_mime_type($post_thumb_id);
-  }
-  elseif (is_author()) {
-
-    global $author;
-    // $avatar = get_avatar($author, 150);
-    // $avatar_original = gd_user_avatar_original_file($avatar, $author, 150);
-    $userphoto = gd_get_useravatar_photoinfo($author);
-    $thumb = array($userphoto['src'], $userphoto['width'], $userphoto['height']);
-    $thumb_mime_type = '';
-  }
-  else {
-
-    // For pages, use the website logo
-    $thumb = gd_logo($size);
-    $thumb_mime_type = $thumb[3];
-  }
-
-  // If there's no thumb (eg: a page doesn't have Featured Image) then return nothing
-  if (!$thumb[0]) {
-    return null;
-  }
-
-  return array(
-    'src' => $thumb[0],
-    'width' => $thumb[1],
-    'height' => $thumb[2],
-    'mime-type' => $thumb_mime_type
-  );
-}

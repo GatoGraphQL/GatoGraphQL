@@ -27,9 +27,9 @@ class PoP_CoreProcessors {
 
 	function __construct() {
 		
-		// Priority: after PoP WP Processors loaded
-		add_action('plugins_loaded', array($this,'init'), 30);
-		add_action('PoP:version', array($this,'version'), 30);
+		// Priority: after PoP WP Processors and PoP Bootstrap Processors loaded
+		add_action('plugins_loaded', array($this,'init'), 32);
+		add_action('PoP:version', array($this,'version'), 32);
 	}
 	function version($version){
 

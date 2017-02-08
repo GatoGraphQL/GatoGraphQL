@@ -30,6 +30,11 @@ class PoPFrontend_Initialization {
 		require_once 'library/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
+		 * Load the PoP Library
+		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once 'pop-library/load.php';
+
+		/**---------------------------------------------------------------------------------------------------------------
 		 * Kernel
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		require_once 'kernel/load.php';
@@ -42,7 +47,10 @@ class PoPFrontend_Initialization {
 		
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 			
-			wp_register_script('pop', $dist_js_folder . '/popfrontend.bundle.min.js', array('jquery', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
+			wp_register_script('pop-templates', $dist_js_folder . '/pop-frontendengine.templates.bundle.min.js', array(), POP_FRONTENDENGINE_VERSION, true);
+			wp_enqueue_script('pop-templates');
+			
+			wp_register_script('pop', $dist_js_folder . '/pop-frontendengine.bundle.min.js', array('jquery', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
 			wp_enqueue_script('pop');
 		}
 		else {
@@ -75,11 +83,22 @@ class PoPFrontend_Initialization {
 			// Sortable needed for the Typeahead
 			wp_register_script('pop', $js_folder.'/pop-manager.js', array('jquery', 'pop-utils', 'pop-pagesection-manager', 'pop-history', 'pop-interceptors', 'pop-jslibrary-manager', 'pop-jsruntime-manager', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
 			wp_enqueue_script('pop');
+
+			/** Templates Sources */
+			$this->enqueue_templates_scripts();
 		}
 	
 		// Print all jQuery functions constants
 		$jquery_constants = $this->get_jquery_constants();
 		wp_localize_script('pop', 'M', $jquery_constants);
+	}
+
+	function enqueue_templates_scripts() {
+
+		$folder = POP_FRONTENDENGINE_URI.'/js/dist/templates/';
+
+		wp_enqueue_script('pagesectionextension-replicable-tmpl', $folder.'pagesectionextension-replicable.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		wp_enqueue_script('pagesectionextension-frame-tmpl', $folder.'pagesectionextension-frame.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 	}
 
 	function get_jquery_constants() {

@@ -1378,9 +1378,9 @@ popSystem = {
 
 		// Add a class to the body with the status online/offline
 		if (navigator.onLine){
-			$('#body').addClass('online').removeClass('offline');
+			$(document.body).addClass('online').removeClass('offline');
 		} else {
-			$('#body').addClass('offline').removeClass('online');
+			$(document.body).addClass('offline').removeClass('online');
 		}
 	},
 

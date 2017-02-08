@@ -1,5 +1,12 @@
 
 ###########################
+# JS TEMPLATES
+###########################
+rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/templates/*.tmpl.js
+cp $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/templates/*.tmpl.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/templates/
+wget -O $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/pop-frontendengine.templates.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/templates&f=pagesectionextension-replicable.tmpl.js,pagesectionextension-frame.tmpl.js"
+
+###########################
 # JS LIBRARIES
 ###########################
 
@@ -15,5 +22,5 @@ cp pop-manager.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengi
 cp utils.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/libraries/
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
-wget -O $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/popfrontend.bundle.orig.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/libraries&f=helpers.handlebars.js,utils.js,jslibrary-manager.js,jsruntime-manager.js,pagesection-manager.js,history.js,interceptors.js,pop-manager.js"
-uglifyjs $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/popfrontend.bundle.orig.min.js -o $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/popfrontend.bundle.min.js -c warnings=false -m
+wget -O $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/pop-frontendengine.bundle.orig.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/libraries&f=helpers.handlebars.js,utils.js,jslibrary-manager.js,jsruntime-manager.js,pagesection-manager.js,history.js,interceptors.js,pop-manager.js"
+uglifyjs $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/pop-frontendengine.bundle.orig.min.js -o $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/pop-frontendengine.bundle.min.js -c warnings=false -m

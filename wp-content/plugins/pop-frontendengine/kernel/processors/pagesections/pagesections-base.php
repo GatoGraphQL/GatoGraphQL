@@ -570,7 +570,6 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 	function get_extra_blocks($template_id) {
 			
 		global $gd_template_processor_manager;
-		
 		$ret = array();
 		// In the Hierarchy Processor, all subcomponent templates are blocks
 		foreach ($this->get_modulecomponents($template_id, array('modules')) as $component) {

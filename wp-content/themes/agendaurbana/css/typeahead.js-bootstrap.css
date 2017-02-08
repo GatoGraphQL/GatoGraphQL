@@ -1,9 +1,0 @@
-.tt-suggestion.tt-cursor,
-.tt-suggestion.tt-is-under-cursor {
-  color: #fff;
-  background-color: rgba(21, 53, 79, 0.7);
-}
-.tt-suggestion.tt-cursor a,
-.tt-suggestion.tt-is-under-cursor a {
-  color: #fff;
-}

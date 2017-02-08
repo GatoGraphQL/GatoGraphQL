@@ -2,12 +2,12 @@ rm $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/templates/*.tmpl.
 cd $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/templates/
 
 handlebars blockgroups/blockgroup-blockunits.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-blockunits.tmpl.js
-handlebars blockgroups/bootstrap/blockgroup-carousel.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-carousel.tmpl.js
-handlebars blockgroups/bootstrap/blockgroup-collapsepanelgroup.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-collapsepanelgroup.tmpl.js
-handlebars blockgroups/bootstrap/blockgroup-tabpanel.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-tabpanel.tmpl.js
-handlebars blockgroups/bootstrap/blockgroup-viewcomponent.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-viewcomponent.tmpl.js
+# handlebars blockgroups/bootstrap/blockgroup-carousel.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-carousel.tmpl.js
+# handlebars blockgroups/bootstrap/blockgroup-collapsepanelgroup.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-collapsepanelgroup.tmpl.js
+# handlebars blockgroups/bootstrap/blockgroup-tabpanel.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-tabpanel.tmpl.js
+# handlebars blockgroups/bootstrap/blockgroup-viewcomponent.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-viewcomponent.tmpl.js
 handlebars blocks/block-bare.tmpl -m --extension=tmpl -f ../dist/templates/block-bare.tmpl.js
-handlebars blocks/block.tmpl -m --extension=tmpl -f ../dist/templates/block.tmpl.js
+# handlebars blocks/block.tmpl -m --extension=tmpl -f ../dist/templates/block.tmpl.js
 handlebars buttons/buttongroup.tmpl -m --extension=tmpl -f ../dist/templates/buttongroup.tmpl.js
 handlebars buttons/button.tmpl -m --extension=tmpl -f ../dist/templates/button.tmpl.js
 handlebars buttons/buttoninner.tmpl -m --extension=tmpl -f ../dist/templates/buttoninner.tmpl.js
@@ -97,12 +97,12 @@ handlebars layouts/users/layout-previewuser.tmpl -m --extension=tmpl -f ../dist/
 handlebars layouts/users/layout-useravatar.tmpl -m --extension=tmpl -f ../dist/templates/layout-useravatar.tmpl.js
 handlebars messagefeedbacks/messagefeedback-inner.tmpl -m --extension=tmpl -f ../dist/templates/messagefeedback-inner.tmpl.js
 handlebars messagefeedbacks/messagefeedback.tmpl -m --extension=tmpl -f ../dist/templates/messagefeedback.tmpl.js
-handlebars pagesections/pagesection-modal.tmpl -m --extension=tmpl -f ../dist/templates/pagesection-modal.tmpl.js
-handlebars pagesections/pagesection-pagetab.tmpl -m --extension=tmpl -f ../dist/templates/pagesection-pagetab.tmpl.js
+# handlebars pagesections/pagesection-modal.tmpl -m --extension=tmpl -f ../dist/templates/pagesection-modal.tmpl.js
+# handlebars pagesections/pagesection-pagetab.tmpl -m --extension=tmpl -f ../dist/templates/pagesection-pagetab.tmpl.js
 handlebars pagesections/pagesection-plain.tmpl -m --extension=tmpl -f ../dist/templates/pagesection-plain.tmpl.js
-handlebars pagesections/pagesection-tabpane.tmpl -m --extension=tmpl -f ../dist/templates/pagesection-tabpane.tmpl.js
-handlebars pagesections/pagesectionextension-frame.tmpl -m --extension=tmpl -f ../dist/templates/pagesectionextension-frame.tmpl.js
-handlebars pagesections/pagesectionextension-replicable.tmpl -m --extension=tmpl -f ../dist/templates/pagesectionextension-replicable.tmpl.js
+# handlebars pagesections/pagesection-tabpane.tmpl -m --extension=tmpl -f ../dist/templates/pagesection-tabpane.tmpl.js
+# handlebars pagesections/pagesectionextension-frame.tmpl -m --extension=tmpl -f ../dist/templates/pagesectionextension-frame.tmpl.js
+# handlebars pagesections/pagesectionextension-replicable.tmpl -m --extension=tmpl -f ../dist/templates/pagesectionextension-replicable.tmpl.js
 handlebars scripts/script-append-comment.tmpl -m --extension=tmpl -f ../dist/templates/script-append-comment.tmpl.js
 handlebars scripts/script-lazyloading-remove.tmpl -m --extension=tmpl -f ../dist/templates/script-lazyloading-remove.tmpl.js
 handlebars sidebars/widget.tmpl -m --extension=tmpl -f ../dist/templates/widget.tmpl.js

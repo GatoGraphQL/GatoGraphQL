@@ -10,11 +10,6 @@ define ('GD_SOCIALMEDIA_PROVIDER_LINKEDIN', 'linkedin');
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-function gd_twitter_user() {
-
-	return apply_filters('gd_twitter_user', '');
-}
-
 function gd_socialmedia_provider_settings() {
 
 	return apply_filters('gd_socialmedia:providers', array());

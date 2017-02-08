@@ -201,7 +201,7 @@ popFunctions = {
 			}
 
 			// If no target provided, use the body
-			var target = $(button.data('target')) || $('body');
+			var target = $(button.data('target')) || $(document.body);
 
 			// By default, add class
 			var mode = button.data('mode') || 'add';

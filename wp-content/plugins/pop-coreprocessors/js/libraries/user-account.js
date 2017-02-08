@@ -141,11 +141,11 @@ popUserAccount = {
 			// Add all role classes to the body (remove all other ones first)
 			$.each(M.ROLES, function(index, role) {
 
-				$('body').removeClass(role);
+				$(document.body).removeClass(role);
 			});
 			$.each(t.roles, function(index, role) {
 
-				$('body').addClass(role);
+				$(document.body).addClass(role);
 			});
 
 			updates.roles = t.roles;
@@ -159,11 +159,11 @@ popUserAccount = {
 			// Add all role classes to the body (remove all other ones first)
 			$.each(M.USERATTRIBUTES, function(index, userattribute) {
 
-				$('body').removeClass(userattribute);
+				$(document.body).removeClass(userattribute);
 			});
 			$.each(t.userattributes, function(index, userattribute) {
 
-				$('body').addClass(userattribute);
+				$(document.body).addClass(userattribute);
 			});
 
 			updates.userattributes = t.userattributes;
@@ -188,7 +188,7 @@ popUserAccount = {
 
 			t.loggedin = loggedin;
 
-			var name, body = $('body');
+			var name, body = $(document.body);
 			if (t.loggedin) {					
 
 				// Save the user id in the DOM, so we can remove the class when the user logs out (we won't have the ID then)

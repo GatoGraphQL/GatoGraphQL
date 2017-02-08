@@ -19,8 +19,6 @@ wp-content/plugins/hello.php
 wp-admin/
 wp-includes/
 wp-content/languages/
-wp-content/pop-cache/
-wp-content/pop-serviceworkers/
 
 /index.php
 /wp-activate.php
@@ -39,9 +37,3 @@ wp-content/pop-serviceworkers/
 
 wp-content/themes/twentyfifteen/
 
-wp-content/plugins/advanced-custom-fields-pro/
-wp-content/plugins/gravityforms/
-
-.htaccess
-#environment-constants.php
-#environment-config.php

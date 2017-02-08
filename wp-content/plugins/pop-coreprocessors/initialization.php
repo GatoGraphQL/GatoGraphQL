@@ -80,7 +80,7 @@ class PoP_CoreProcessors_Initialization {
 			// Uncaught Error: cannot call methods on button prior to initialization; attempted to call method 'loading'
 
 			// https://getbootstrap.com/getting-started/#download
-			wp_register_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js', array('jquery', 'jquery-ui-dialog'), null);
+			// wp_register_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js', array('jquery', 'jquery-ui-dialog'), null);
 			
 			// https://github.com/carhartl/jquery-cookie/releases
 			wp_register_script('jquery.cookie', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js', array('jquery'), null);
@@ -105,7 +105,7 @@ class PoP_CoreProcessors_Initialization {
 			wp_register_script('handlebars', $cdn_js_folder . '/handlebars.runtime.4.0.5.min.js', null, null);
 			wp_register_script('gmaps', $cdn_js_folder . '/gmaps.0.4.24.min.js', array('googlemaps'), null);
 			
-			wp_register_script('bootstrap', $cdn_js_folder . '/bootstrap.3.3.7.min.js', array('jquery', 'jquery-ui-dialog'), null);
+			// wp_register_script('bootstrap', $cdn_js_folder . '/bootstrap.3.3.7.min.js', array('jquery', 'jquery-ui-dialog'), null);
 			wp_register_script('jquery.cookie', $cdn_js_folder . '/jquery.cookie.1.4.1.min.js', array('jquery'), null);
 			wp_register_script('moment', $cdn_js_folder . '/moment.2.15.1.min.js', array('jquery'), null);
 			wp_register_script('waypoints', $cdn_js_folder . '/jquery.waypoints.4.0.1.min.js', array('jquery'), null);
@@ -120,7 +120,7 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('handlebars');
 		wp_enqueue_script('gmaps');
 
-		wp_enqueue_script('bootstrap');
+		// wp_enqueue_script('bootstrap');
 		wp_enqueue_script('jquery.cookie');
 		wp_enqueue_script('moment');
 		wp_enqueue_script('waypoints');
@@ -153,31 +153,31 @@ class PoP_CoreProcessors_Initialization {
 			wp_register_script('jquery-dynamic-max-height', $includes_js_folder . '/jquery.dynamicmaxheight.min.js', array('jquery'));
 			wp_enqueue_script('jquery-dynamic-max-height');
 
-			wp_register_script('pop-custombootstrap', $libraries_js_folder.'/custombootstrap.js', array('jquery', 'pop', 'bootstrap'), POP_COREPROCESSORS_VERSION, true);
-			wp_enqueue_script('pop-custombootstrap');
+			// wp_register_script('pop-custombootstrap', $libraries_js_folder.'/custombootstrap.js', array('jquery', 'pop', 'bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			// wp_enqueue_script('pop-custombootstrap');
 
 			wp_register_script('pop-system', $libraries_js_folder.'/system.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-system');
 
-			wp_register_script('pop-coreprocessors-bootstrap', $libraries_js_folder.'/bootstrap.js', array('jquery', 'pop', 'bootstrap'), POP_COREPROCESSORS_VERSION, true);
-			wp_enqueue_script('pop-coreprocessors-bootstrap');
+			// wp_register_script('pop-bootstrapprocessors-bootstrap', $libraries_js_folder.'/bootstrap.js', array('jquery', 'pop', 'bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			// wp_enqueue_script('pop-bootstrapprocessors-bootstrap');
 
-			wp_register_script('pop-coreprocessors-bootstrap-carousel', $libraries_js_folder.'/bootstrap-carousel.js', array('jquery', 'pop', 'pop-coreprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			wp_register_script('pop-coreprocessors-bootstrap-carousel', $libraries_js_folder.'/bootstrap-carousel.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-bootstrap-carousel');
 
 			wp_register_script('pop-coreprocessors-window', $libraries_js_folder.'/window.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-window');
 
-			wp_register_script('pop-coreprocessors-modals', $libraries_js_folder.'/modals.js', array('jquery', 'pop', 'pop-coreprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			wp_register_script('pop-coreprocessors-modals', $libraries_js_folder.'/modals.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-modals');
 
-			wp_register_script('pop-coreprocessors-functions', $libraries_js_folder.'/functions.js', array('jquery', 'pop', 'pop-coreprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			wp_register_script('pop-coreprocessors-functions', $libraries_js_folder.'/functions.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-functions');
 
-			wp_register_script('pop-coreprocessors-blockfunctions', $libraries_js_folder.'/block-functions.js', array('jquery', 'pop', 'pop-coreprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			wp_register_script('pop-coreprocessors-blockfunctions', $libraries_js_folder.'/block-functions.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-blockfunctions');
 
-			wp_register_script('pop-coreprocessors-controls', $libraries_js_folder.'/controls.js', array('jquery', 'pop', 'pop-coreprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			wp_register_script('pop-coreprocessors-controls', $libraries_js_folder.'/controls.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-controls');
 
 			wp_register_script('pop-coreprocessors-waypoints', $libraries_js_folder.'/3rdparties/waypoints.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
@@ -192,7 +192,7 @@ class PoP_CoreProcessors_Initialization {
 			wp_register_script('pop-coreprocessors-daterange', $libraries_js_folder.'/3rdparties/daterange.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-daterange');
 
-			wp_register_script('pop-coreprocessors-typeahead', $libraries_js_folder.'/3rdparties/typeahead.js', array('jquery', 'pop', 'pop-coreprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+			wp_register_script('pop-coreprocessors-typeahead', $libraries_js_folder.'/3rdparties/typeahead.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-typeahead');
 
 			wp_register_script('pop-coreprocessors-googleanalytics', $libraries_js_folder.'/3rdparties/analytics.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
@@ -231,10 +231,10 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('block-bare-tmpl', $folder.'block-bare.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('block-tmpl', $folder.'block.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('blockgroup-blockunits-tmpl', $folder.'blockgroup-blockunits.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('blockgroup-carousel-tmpl', $folder.'blockgroup-carousel.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('blockgroup-collapsepanelgroup-tmpl', $folder.'blockgroup-collapsepanelgroup.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('blockgroup-tabpanel-tmpl', $folder.'blockgroup-tabpanel.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('blockgroup-viewcomponent-tmpl', $folder.'blockgroup-viewcomponent.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('blockgroup-carousel-tmpl', $folder.'blockgroup-carousel.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('blockgroup-collapsepanelgroup-tmpl', $folder.'blockgroup-collapsepanelgroup.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('blockgroup-tabpanel-tmpl', $folder.'blockgroup-tabpanel.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('blockgroup-viewcomponent-tmpl', $folder.'blockgroup-viewcomponent.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('button-control-tmpl', $folder.'button-control.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('buttongroup-tmpl', $folder.'buttongroup.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('button-tmpl', $folder.'button.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
@@ -269,11 +269,11 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('formcomponent-typeahead-selectable-tmpl', $folder.'formcomponent-typeahead-selectable.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('formgroup-tmpl', $folder.'formgroup.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('pagesection-plain-tmpl', $folder.'pagesection-plain.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('pagesection-pagetab-tmpl', $folder.'pagesection-pagetab.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('pagesection-tabpane-tmpl', $folder.'pagesection-tabpane.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('pagesection-modal-tmpl', $folder.'pagesection-modal.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('pagesectionextension-replicable-tmpl', $folder.'pagesectionextension-replicable.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('pagesectionextension-frame-tmpl', $folder.'pagesectionextension-frame.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('pagesection-pagetab-tmpl', $folder.'pagesection-pagetab.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('pagesection-tabpane-tmpl', $folder.'pagesection-tabpane.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('pagesection-modal-tmpl', $folder.'pagesection-modal.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('pagesectionextension-replicable-tmpl', $folder.'pagesectionextension-replicable.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		// wp_enqueue_script('pagesectionextension-frame-tmpl', $folder.'pagesectionextension-frame.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('hideifempty-tmpl', $folder.'hideifempty.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('latestcount-tmpl', $folder.'latestcount.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-maxheight-tmpl', $folder.'layout-maxheight.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
@@ -379,16 +379,16 @@ class PoP_CoreProcessors_Initialization {
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 			
 			// CDN
-			wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);
+			// wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);
 			wp_register_style('daterangepicker', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.css', null, null);
 		}
 		else {
 
 			// Locally stored files
-			wp_register_style('bootstrap', $cdn_css_folder . '/bootstrap.3.3.7.min.css', null, null);
+			// wp_register_style('bootstrap', $cdn_css_folder . '/bootstrap.3.3.7.min.css', null, null);
 			wp_register_style('daterangepicker', $cdn_css_folder . '/daterangepicker.2.1.24.min.css', null, null);
 		}
-		wp_enqueue_style('bootstrap');
+		// wp_enqueue_style('bootstrap');
 		wp_enqueue_style('daterangepicker');
 
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {

@@ -280,7 +280,7 @@ class GD_FileUpload_UserPhoto {
 	function get_action_url() {
 		
 		// Allow to replace this URL, mainly to change the avatar sizes as needed by the specific website
-		return apply_filters('GD_FileUpload_UserPhoto:action_url', POP_USERAVATAR_URI_LIB.'/fileupload-userphoto/server/index.php?upload_path=' . $this->upload_path, $this->upload_path);
+		return apply_filters('GD_FileUpload_UserPhoto:action_url', POP_USERAVATAR_ORIGINURI_LIB.'/fileupload-userphoto/server/index.php?upload_path=' . $this->upload_path, $this->upload_path);
 	}
 }
 

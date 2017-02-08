@@ -13,6 +13,8 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 define ('POP_USERAVATAR_VERSION', 0.103);
 define ('POP_USERAVATAR_DIR', dirname(__FILE__));
+define ('POP_USERAVATAR_ORIGINURI', plugins_url('', __FILE__));
+define ('POP_USERAVATAR_ORIGINURI_LIB', POP_USERAVATAR_ORIGINURI.'/library' );
 
 class PoP_UserAvatar {
 

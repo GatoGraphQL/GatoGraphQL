@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 15:58+0800\n"
-"PO-Revision-Date: 2016-12-16 15:58+0800\n"
+"POT-Creation-Date: 2017-02-08 11:38+0800\n"
+"PO-Revision-Date: 2017-02-08 11:38+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: zh\n"
@@ -196,6 +196,11 @@ msgstr "上传媒体文件"
 msgid "Set"
 msgstr "设定"
 
+#: .././library/mentions/tinymce.php:64
+#, fuzzy
+msgid "#Hashtags"
+msgstr "井号标签"
+
 #: .././library/multiselect.php:12
 msgid "None selected"
 msgstr "未选择"
@@ -230,14 +235,18 @@ msgid "Ops, there was a connection problem."
 msgstr "对不起，连接出现了问题。"
 
 #: .././pop-library/constants.php:10
+msgid "It seems you are offline."
+msgstr ""
+
+#: .././pop-library/constants.php:11
 msgid "Retry"
 msgstr "对不起，连接出现了问题。"
 
-#: .././pop-library/constants.php:82
+#: .././pop-library/constants.php:86
 msgid "Ops, this is a broken link."
 msgstr "对不起，这是一个错误的链接。"
 
-#: .././pop-library/constants.php:109
+#: .././pop-library/constants.php:116
 msgid ""
 "Ops, the upload failed. Let's fix this: please save your post as 'Draft', "
 "refresh the browser window, and try again."
@@ -324,6 +333,16 @@ msgstr "所申请的功能不能被使用在这个帖子上。"
 msgid "You have already recommended <em><strong>%s</strong></em>."
 msgstr "你已经推荐了<em><strong>%s</strong></em>。"
 
+#: .././pop-library/dataload/actionexecuters/library/subscribetotag.php:25
+#, fuzzy, php-format
+msgid "You have already subscribed to <em><strong>%s</strong></em>."
+msgstr "您已经给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/library/subscribetounsubscribefromtag.php:22
+#, fuzzy
+msgid "The requested topic/tag does not exist."
+msgstr "所寻找的帖子不存在。"
+
 #: .././pop-library/dataload/actionexecuters/library/undo-downvotepost.php:24
 #, php-format
 msgid "You had not down-voted <em><strong>%s</strong></em>."
@@ -344,6 +363,11 @@ msgstr "你并未追随<em><strong>%s</strong></em>。"
 msgid "You had not recommended <em><strong>%s</strong></em>."
 msgstr "你并未推荐<em><strong>%s</strong></em>。"
 
+#: .././pop-library/dataload/actionexecuters/library/unsubscribefromtag.php:25
+#, fuzzy, php-format
+msgid "You had not subscribed to <em><strong>%s</strong></em>."
+msgstr "你并未给予<em><strong>%s</strong></em>好评。"
+
 #: .././pop-library/dataload/actionexecuters/library/update-user-metavalue.php:15
 msgid "This URL is incorrect."
 msgstr "此网址不正确。"
@@ -361,6 +385,11 @@ msgstr "您所寻找的用户已不存在。"
 #, php-format
 msgid "You have recommended <em><strong>%s</strong></em>."
 msgstr "你已经推荐的<em><strong>%s</strong></em>的。"
+
+#: .././pop-library/dataload/actionexecuters/subscribetotag.php:33
+#, fuzzy, php-format
+msgid "You have subscribed to <em><strong>%s</strong></em>."
+msgstr "你已经给予<em><strong>%s</strong></em>好评。"
 
 #: .././pop-library/dataload/actionexecuters/undo-downvotepost.php:32
 #, php-format
@@ -381,6 +410,11 @@ msgstr "您已经停止追随<em><strong>%s</strong></em>。"
 #, php-format
 msgid "You have stopped recommending <em><strong>%s</strong></em>."
 msgstr "您已停止推荐<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/unsubscribefromtag.php:33
+#, fuzzy, php-format
+msgid "You have unsubscribed from <em><strong>%s</strong></em>."
+msgstr "你已经给予<em><strong>%s</strong></em>好评。"
 
 #: .././pop-library/dataload/actionexecuters/upvotepost.php:32
 #, php-format
@@ -559,6 +593,10 @@ msgstr "转到永久链接"
 msgid "Pending"
 msgstr "待发布"
 
+#: .././pop-library/processors/abstract-classes/layouts/taginfo-base.php:25
+msgid "Count"
+msgstr ""
+
 #: .././pop-library/processors/abstract-classes/layouts/userquicklinks-base.php:22
 msgid "No contact channels"
 msgstr "没有联络渠道"
@@ -592,82 +630,92 @@ msgid ""
 "strong></em>:"
 msgstr "邀请您的朋友/同事/等加盟<em><strong>%s</strong></em>："
 
-#: .././pop-library/processors/blocks/blocks.php:258
+#: .././pop-library/processors/blocks/blocks.php:226
 #: .././pop-library/processors/comments/blocks.php:175
 #: .././pop-library/processors/login/blocks.php:142
 msgid "Sending..."
 msgstr "发送中..."
 
-#: .././pop-library/processors/buttons/buttoninners.php:152
-#: .././pop-library/processors/buttons/buttons.php:224
+#: .././pop-library/processors/buttons/buttoninners.php:167
+#: .././pop-library/processors/buttons/buttons.php:246
 msgid "Quickview"
 msgstr "快速浏览"
 
-#: .././pop-library/processors/buttons/buttoninners.php:156
-#: .././pop-library/processors/buttons/buttons.php:229
-#: .././pop-library/processors/controls/anchor-controls.php:79
+#: .././pop-library/processors/buttons/buttoninners.php:171
+#: .././pop-library/processors/buttons/buttons.php:251
+#: .././pop-library/processors/controls/anchor-controls.php:81
 msgid "Print"
 msgstr "打印"
 
-#: .././pop-library/processors/buttons/buttoninners.php:160
-#: .././pop-library/processors/buttons/buttons.php:233
+#: .././pop-library/processors/buttons/buttoninners.php:175
+#: .././pop-library/processors/buttons/buttons.php:255
 msgid "Edit"
 msgstr "编辑"
 
-#: .././pop-library/processors/buttons/buttoninners.php:164
-#: .././pop-library/processors/buttons/buttons.php:237
+#: .././pop-library/processors/buttons/buttoninners.php:179
+#: .././pop-library/processors/buttons/buttons.php:259
 msgid "View"
 msgstr "浏览"
 
-#: .././pop-library/processors/buttons/buttoninners.php:168
-#: .././pop-library/processors/buttons/buttons.php:241
+#: .././pop-library/processors/buttons/buttoninners.php:183
+#: .././pop-library/processors/buttons/buttons.php:263
 msgid "Preview"
 msgstr "预览"
 
-#: .././pop-library/processors/buttons/buttoninners.php:172
-#: .././pop-library/processors/buttons/buttons.php:245
-#: .././pop-library/processors/controls/anchor-controls.php:75
+#: .././pop-library/processors/buttons/buttoninners.php:187
+#: .././pop-library/processors/buttons/buttons.php:267
+#: .././pop-library/processors/controls/anchor-controls.php:77
 msgid "Permalink"
 msgstr "永久链接"
 
-#: .././pop-library/processors/buttons/buttoninners.php:177
-#: .././pop-library/processors/buttons/buttons.php:254
+#: .././pop-library/processors/buttons/buttoninners.php:192
+#: .././pop-library/processors/buttons/buttons.php:276
 msgid "Follow"
 msgstr "跟随"
 
-#: .././pop-library/processors/buttons/buttoninners.php:182
-#: .././pop-library/processors/buttons/buttons.php:259
+#: .././pop-library/processors/buttons/buttoninners.php:197
+#: .././pop-library/processors/buttons/buttons.php:281
 msgid "Following"
 msgstr "在跟随"
 
-#: .././pop-library/processors/buttons/buttoninners.php:189
-#: .././pop-library/processors/buttons/buttons.php:264
+#: .././pop-library/processors/buttons/buttoninners.php:204
+#: .././pop-library/processors/buttons/buttons.php:286
 msgid "Recommend"
 msgstr "推荐"
 
-#: .././pop-library/processors/buttons/buttons.php:249
+#: .././pop-library/processors/buttons/buttoninners.php:211
+#: .././pop-library/processors/buttons/buttons.php:296
+#, fuzzy
+msgid "Subscribe"
+msgstr "订阅"
+
+#: .././pop-library/processors/buttons/buttons.php:271
 #: .././pop-library/processors/comments/structures/scrolls/widgetries.php:58
 #: .././pop-library/processors/comments/structures/scrolls/widgetries.php:59
 msgid "Comments"
 msgstr "评论"
 
-#: .././pop-library/processors/buttons/buttons.php:269
+#: .././pop-library/processors/buttons/buttons.php:291
 msgid "Recommended"
 msgstr "被推荐"
 
-#: .././pop-library/processors/buttons/buttons.php:274
+#: .././pop-library/processors/buttons/buttons.php:301
+msgid "Subscribed"
+msgstr ""
+
+#: .././pop-library/processors/buttons/buttons.php:306
 msgid "Up-vote"
 msgstr "给予好评"
 
-#: .././pop-library/processors/buttons/buttons.php:279
+#: .././pop-library/processors/buttons/buttons.php:311
 msgid "Up-voted"
 msgstr "好评"
 
-#: .././pop-library/processors/buttons/buttons.php:284
+#: .././pop-library/processors/buttons/buttons.php:316
 msgid "Down-vote"
 msgstr "给予劣评"
 
-#: .././pop-library/processors/buttons/buttons.php:289
+#: .././pop-library/processors/buttons/buttons.php:321
 msgid "Down-voted"
 msgstr "劣评"
 
@@ -723,65 +771,75 @@ msgstr "请%s以添加评论。"
 msgid "You need a %s account to add a comment."
 msgstr "你需要一个%s的帐户以添加评论。"
 
-#: .././pop-library/processors/controls/anchor-controls.php:63
+#: .././pop-library/processors/controls/anchor-controls.php:65
 msgid "Toggle compact/full form"
 msgstr "切换成简洁型/全格式"
 
-#: .././pop-library/processors/controls/anchor-controls.php:67
+#: .././pop-library/processors/controls/anchor-controls.php:69
 msgid "Expand"
 msgstr "扩大"
 
-#: .././pop-library/processors/controls/anchor-controls.php:71
+#: .././pop-library/processors/controls/anchor-controls.php:73
 msgid "Filter"
 msgstr "筛选"
 
-#: .././pop-library/processors/controls/anchor-controls.php:83
-#: .././pop-library/processors/viewcomponents/buttoninners.php:136
-#: .././pop-library/processors/viewcomponents/post-buttons.php:126
-#: .././pop-library/processors/viewcomponents/user-buttons.php:72
+#: .././pop-library/processors/controls/anchor-controls.php:85
+#: .././pop-library/processors/viewcomponents/buttoninners.php:148
+#: .././pop-library/processors/viewcomponents/post-buttons.php:137
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:59
+#: .././pop-library/processors/viewcomponents/user-buttons.php:78
 msgid "Embed"
 msgstr "嵌入"
 
-#: .././pop-library/processors/controls/anchor-controls.php:87
-#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:25
+#: .././pop-library/processors/controls/anchor-controls.php:89
+#: .././pop-library/processors/viewcomponents/buttoninners.php:152
+#: .././pop-library/processors/viewcomponents/post-buttons.php:142
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:64
+#: .././pop-library/processors/viewcomponents/user-buttons.php:83
+msgid "API Data"
+msgstr ""
+
+#: .././pop-library/processors/controls/anchor-controls.php:93
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:27
 msgid "Copy Search URL"
 msgstr "复制搜索网址"
 
-#: .././pop-library/processors/controls/anchor-controls.php:91
-#: .././pop-library/processors/viewcomponents/buttoninners.php:132
-#: .././pop-library/processors/viewcomponents/post-buttons.php:121
-#: .././pop-library/processors/viewcomponents/user-buttons.php:67
+#: .././pop-library/processors/controls/anchor-controls.php:97
+#: .././pop-library/processors/viewcomponents/buttoninners.php:144
+#: .././pop-library/processors/viewcomponents/post-buttons.php:132
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:54
+#: .././pop-library/processors/viewcomponents/user-buttons.php:73
 msgid "Share by email"
 msgstr "通过电子邮件分享"
 
-#: .././pop-library/processors/controls/anchor-controls.php:95
+#: .././pop-library/processors/controls/anchor-controls.php:101
 msgid "Invite your friends to join!"
 msgstr "邀请你的朋友加入"
 
-#: .././pop-library/processors/controls/anchor-controls.php:101
+#: .././pop-library/processors/controls/anchor-controls.php:107
 msgid "Close"
 msgstr "关闭"
 
-#: .././pop-library/processors/controls/anchor-controls.php:107
+#: .././pop-library/processors/controls/anchor-controls.php:113
 msgid "Toggle sidebar"
 msgstr "切换侧边栏"
 
-#: .././pop-library/processors/controls/anchor-controls.php:111
+#: .././pop-library/processors/controls/anchor-controls.php:117
 msgid "Go back"
 msgstr "回去"
 
-#: .././pop-library/processors/controls/anchor-controls.php:115
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:124
+#: .././pop-library/processors/controls/anchor-controls.php:121
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:161
 msgid "Facebook"
 msgstr "Facebook"
 
-#: .././pop-library/processors/controls/anchor-controls.php:119
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:131
+#: .././pop-library/processors/controls/anchor-controls.php:125
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:170
 msgid "Twitter"
 msgstr "Twitter"
 
-#: .././pop-library/processors/controls/anchor-controls.php:123
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:145
+#: .././pop-library/processors/controls/anchor-controls.php:129
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:188
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
@@ -793,15 +851,15 @@ msgstr "刷新"
 msgid "Reset"
 msgstr "重启"
 
-#: .././pop-library/processors/controls/dropdownbutton-controls.php:162
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:163
 msgid "Reply with..."
 msgstr "回复用…"
 
-#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:84
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:100
 msgid "Options"
 msgstr "选项"
 
-#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:88
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:104
 msgid "Contact/Links"
 msgstr "联系/链接"
 
@@ -1132,44 +1190,52 @@ msgstr "保存"
 msgid "Update"
 msgstr "更新"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:43
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:47
 msgid "follow users"
 msgstr "跟随用户"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:44
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:48
 msgid "stop following users"
 msgstr "取消跟随用户"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:45
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:49
 msgid "recommend posts"
 msgstr "推荐帖子"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:46
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:50
 msgid "stop recommending posts"
 msgstr "取消推荐"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:47
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:51
+msgid "subscribe to tags/topics"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:52
+msgid "unsubscribe from tags/topics"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:53
 msgid "up-vote posts"
 msgstr "给予好评"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:48
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:54
 msgid "stop up-voting posts"
 msgstr "取消好评"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:49
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:55
 msgid "down-vote posts"
 msgstr "给予劣评"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:50
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:56
 msgid "stop down-voting posts"
 msgstr "取消劣评"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:56
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:62
 #, php-format
 msgid "Please %s to %s."
 msgstr "请%s来%s。"
 
-#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:64
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:70
 #, php-format
 msgid "You need a %s account to access this functionality."
 msgstr "您需要 %s 帐户以使用这个功能"
@@ -1318,27 +1384,36 @@ msgstr "是资源"
 msgid "Invite successful!"
 msgstr "邀请成功！"
 
-#: .././pop-library/processors/share/blockgroups/viewcomponents.php:46
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:54
 msgid "Embed:"
 msgstr "嵌入："
 
-#: .././pop-library/processors/share/blockgroups/viewcomponents.php:50
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:58
+msgid "API Data:"
+msgstr ""
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:62
 msgid "Copy Search URL:"
 msgstr "复制搜索网址："
+
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:31
+#, fuzzy
+msgid "Copy URL"
+msgstr "复制搜索网址"
 
 #: .././pop-library/processors/share/formcomponents-inputs/textarea-formcomponents-inputs.php:26
 msgid "Embed code"
 msgstr "嵌入代码"
 
-#: .././pop-library/processors/share/structures/contents.php:31
+#: .././pop-library/processors/share/structures/contents.php:33
 msgid "Preview:"
 msgstr "预览："
 
-#: .././pop-library/processors/share/structures/contents.php:38
+#: .././pop-library/processors/share/structures/contents.php:40
 msgid "Please copy/paste the html code below into your website."
 msgstr "请复制/粘贴下面的HTML代码到您的网站。"
 
-#: .././pop-library/processors/share/structures/contents.php:45
+#: .././pop-library/processors/share/structures/contents.php:48
 msgid "Please select and copy (Ctrl + C) the URL below."
 msgstr "请选择并复制（Ctrl + C）下面的网址。"
 
@@ -1358,7 +1433,7 @@ msgstr "回复"
 msgid "Contact info"
 msgstr "联系方式"
 
-#: .././pop-library/processors/socialmedia/socialmedia-items.php:138
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:179
 msgid "Google+"
 msgstr "Google+"
 
@@ -1375,90 +1450,86 @@ msgid "Logout?"
 msgstr "登出？"
 
 #: .././pop-library/processors/viewcomponents/addcomment-post-buttons.php:76
-#: .././pop-library/processors/viewcomponents/buttoninners.php:151
+#: .././pop-library/processors/viewcomponents/buttoninners.php:167
 msgid "Write a comment"
 msgstr "写个评论"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:120
-#: .././pop-library/processors/viewcomponents/post-buttons.php:132
+#: .././pop-library/processors/viewcomponents/buttoninners.php:132
+#: .././pop-library/processors/viewcomponents/post-buttons.php:148
 msgid "Volunteer!"
 msgstr "志愿者！"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:124
-#: .././pop-library/processors/viewcomponents/post-buttons.php:137
+#: .././pop-library/processors/viewcomponents/buttoninners.php:136
+#: .././pop-library/processors/viewcomponents/post-buttons.php:153
 msgid "Flag"
 msgstr "提出警告"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:128
+#: .././pop-library/processors/viewcomponents/buttoninners.php:140
 msgid "Click to Volunteer"
 msgstr "点击此处当志愿者"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:142
-#: .././pop-library/processors/viewcomponents/user-buttons.php:77
+#: .././pop-library/processors/viewcomponents/buttoninners.php:158
+#: .././pop-library/processors/viewcomponents/user-buttons.php:88
 msgid "Send message"
 msgstr "发信息"
 
-#: .././pop-library/processors/viewcomponents/buttoninners.php:146
+#: .././pop-library/processors/viewcomponents/buttoninners.php:162
 msgid "Reply"
 msgstr "回复"
 
-#: .././validation.php:51
+#: .././validation.php:32
 msgid "Only admins see this message."
 msgstr "Only admins see this message."
 
-#: .././validation.php:56
+#: .././validation.php:37
 msgid ""
-"Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
-"<b>PoP Core Processors</b> will not work. Please install this plugin from "
-"your plugin installer or download it <a href=\"http://wordpress.org/extend/"
-"plugins/pop/\">from here</a>."
+"Error: <b>PoP Bootstrap Processors</b> is not installed/activated. Without "
+"it, <b>PoP Core Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=\"http://wordpress.org/"
+"extend/plugins/pop/\">from here</a>."
 msgstr ""
-"Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
-"<b>PoP Core Processors</b> will not work. Please install this plugin from "
-"your plugin installer or download it <a href=\"http://wordpress.org/extend/"
-"plugins/pop/\">from here</a>."
+"Error: <b>PoP Bootstrap Processors</b> is not installed/activated. Without "
+"it, <b>PoP Core Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=“http://wordpress.org/"
+"extend/plugins/pop/“>from here</a>."
 
-#: .././validation.php:62
+#: .././validation.php:43
 #, php-format
 msgid ""
 "Error: this version of <b>PoP Core Processors</b> requires version %s or "
-"bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
-"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
+"your plugin installer or download it <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">from here</a>."
 msgstr ""
 "Error: this version of <b>PoP Core Processors</b> requires version %s or "
-"bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
-"plugin installer or download it <a href=\"http://wordpress.org/extend/"
-"plugins/pop/\">from here</a>."
+"bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
+"your plugin installer or download it <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>from here</a>."
 
-#: .././validation.php:69
-msgid ""
-"Error: <b>PoP WP API</b> is not installed/activated. Without it, <b>PoP Core "
-"Processors</b> will not work. Please install this plugin from your plugin "
-"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
-"\">from here</a>."
-msgstr ""
-"Error: <b>PoP WP API</b> is not installed/activated. Without it, <b>PoP Core "
-"Processors</b> will not work. Please install this plugin from your plugin "
-"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
-"\">from here</a>."
+#~ msgid ""
+#~ "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+#~ "<b>PoP Core Processors</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"http://wordpress.org/"
+#~ "extend/plugins/pop/\">from here</a>."
+#~ msgstr ""
+#~ "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+#~ "<b>PoP Core Processors</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"http://wordpress.org/"
+#~ "extend/plugins/pop/\">from here</a>."
 
-#: .././validation.php:75
-#, php-format
-msgid ""
-"Error: this version of <b>PoP Core Processors</b> requires version %s or "
-"bigger of <b>PoP WP API</b>. Please update this plugin from your plugin "
-"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
-"\">from here</a>."
-msgstr ""
-"Error: this version of <b>PoP Core Processors</b> requires version %s or "
-"bigger of <b>PoP WP API</b>. Please update this plugin from your plugin "
-"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
-"\">from here</a>."
+#~ msgid ""
+#~ "Error: this version of <b>PoP Core Processors</b> requires version %s or "
+#~ "bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+#~ "plugin installer or download it <a href=\"http://wordpress.org/extend/"
+#~ "plugins/pop/\">from here</a>."
+#~ msgstr ""
+#~ "Error: this version of <b>PoP Core Processors</b> requires version %s or "
+#~ "bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+#~ "plugin installer or download it <a href=\"http://wordpress.org/extend/"
+#~ "plugins/pop/\">from here</a>."
 
-#: .././js/includes/cdn/moment.2.10.6.min.js:6
-msgid "\n"
-msgstr "\n"
+#~ msgid "\n"
+#~ msgstr "\n"
 
 #~ msgid "<p>Dear %s,</p>"
 #~ msgstr "<p>亲爱的%s，</p>"

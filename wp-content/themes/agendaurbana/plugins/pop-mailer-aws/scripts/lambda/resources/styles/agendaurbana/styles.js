@@ -1,1 +1,0 @@
-{"page":{"background-color":"#eff8fb"},"body":{"background-color":"#ffffff"},"h1":{"color":"#15354f"},"h2":{"color":"#15354f"},"h3":{"color":"#15354f"},"h4":{"color":"#808080"},"p":{"color":"#15354f"},"a":{"color":"#42c1ec"}}

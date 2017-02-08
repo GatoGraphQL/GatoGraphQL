@@ -385,7 +385,7 @@ popManager = {
 			});
 
 			// Step 2: remove the "loading" screen
-			$('#body').removeClass('pop-loadingframe');
+			$(document.body).removeClass('pop-loadingframe');
 
 			// Step 3: execute JS
 			$.each(pageSections, function(index, pageSection) {
@@ -394,7 +394,7 @@ popManager = {
 			});
 
 			// Step 4: remove the "loading" screen
-			$('#body').removeClass('pop-loadingjs');
+			$(document.body).removeClass('pop-loadingjs');
 
 			// Comment Leo 01/12/2016: not needed anymore, since externalizing 'activeLinks' as a JS method to run on the Menu Blocks
 			// $.each(memory.settings.configuration, function(pssId, psConfiguration) {
@@ -438,7 +438,7 @@ popManager = {
 		// Comment Leo 01/12/2016: this logic was moved up
 		// // After everything is ready, remove the initial loading screen
 		// $(document).ready(function($){
-		// 	$('body').removeClass('pop-loadingframe');
+		// 	$(document.body).removeClass('pop-loadingframe');
 		// });
 	},
 
@@ -1894,9 +1894,10 @@ popManager = {
 		}
 	},
 
-	getStoredData : function(localStorageKey) {
+	getStoredData : function(localStorageKey, use_version) {
 
 		var t = this;
+
 		// Check if a response is stored in local storage for that combination of URL and params
 		// if (options.localStorage && Modernizr.localstorage) {
 		if (M.USELOCALSTORAGE && Modernizr.localstorage) {
@@ -1907,15 +1908,23 @@ popManager = {
 				// Transform the string back into JSON
 				stored = $.parseJSON(stored);
 
-				// Make sure the response was generated for the current version of the software
-				// And also check if it has not expired
-				if ((stored.version == M.VERSION) && (typeof stored.expires == 'undefined' || stored.expires > Date.now())){
+				if (use_version) {
+
+					// Make sure the response was generated for the current version of the software
+					// And also check if it has not expired
+					if ((stored.version == M.VERSION) && (typeof stored.expires == 'undefined' || stored.expires > Date.now())){
+
+						return stored.value;
+					}
+
+					// The entry is stale (either different version, or entry expired), so delete it
+					delete localStorage[localStorageKey];
+					return null;
+				}
+				else {
 
 					return stored.value;
 				}
-
-				// The entry is stale (either different version, or entry expired), so delete it
-				delete localStorage[localStorageKey];
 			}
 		}
 
@@ -2314,10 +2323,11 @@ popManager = {
 		// 	}
 		// }
 
-		// Try perfectScrollbar if available
-		if (popPerfectScrollbar.scrollToElem(elem, position, animate)) {
-			return;
-		}
+		// // Try perfectScrollbar if available
+		// if (popPerfectScrollbar.scrollToElem(elem, position, animate)) {
+		// 	return;
+		// }
+		popJSLibraryManager.execute('scrollToElem', {elem: elem, position: position, animate: animate});
 	},
 	scrollTop : function(elem, top, animate) {
 
@@ -3950,7 +3960,7 @@ popManager = {
 	
 		var t = this;
 		target = target || '';
-		container = container || $('body');
+		container = container || $(document.body);
 		
 		// Create a new '<a' element with the url as href, and "click" it
 		// We do this instead of popManager.fetchMainPageSection(datum.url); so that it can be intercepted

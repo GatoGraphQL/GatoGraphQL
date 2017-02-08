@@ -226,7 +226,7 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	/* Display it on the layer with index 1001.
        Make sure this is the highest z-index value
        used by layers on that page */
-    z-index:10001;
+    z-index:501;
      
     /* make it cover the whole screen */
     position: absolute; 
@@ -240,7 +240,7 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 }
 .pop-disabledlayer > .spinner {
     
-    z-index:10002;
+    z-index:502;
     position: absolute; 
     text-align: center;	
 	width: 100%;
@@ -581,7 +581,7 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 .pop-loading,
 .pop-error {
 
-	z-index: 2000;
+	z-index: 580;
 	text-align: center;
 }
 .pop-loading.top-level,
@@ -1449,6 +1449,27 @@ body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-co
 }
 .pagesection-group.active-top .offcanvas.addontabs {
 	top: 145px;
+}
+.pagesection-group+.pagesection-group-after {
+    position: fixed;
+    top: 0;
+    z-index: 470;
+}
+@media (min-width: 768px) {
+	.pagesection-group+.pagesection-group-after {
+	    left: 66.6%;
+	}
+}
+@media (min-width: 992px) {
+	.pagesection-group+.pagesection-group-after {
+	    left: 75%;
+	}
+}
+body.non-scrollable .pagesection-group+.pagesection-group-after {
+	position: relative;
+    top: auto;
+    z-index: auto;
+    left: auto;
 }
 .pagesection-group.active-top+.pagesection-group-after {
 	padding-top: 45px;
@@ -3492,18 +3513,18 @@ body.expansive .content-single {
 	color: #fff;
 }
 
-.pop-block.pop-functionalblock > .blocksection-messagefeedback {
+body.non-scrollable .pop-block.pop-functionalblock > .blocksection-messagefeedback {
 	z-index: 650; /* Below 'hover' pagesection (for if clicking on "login" in the messagefeedback) */
 	position: relative;
 	float: right;
 }
 @media (min-width: 768px) {
-	.pop-block.pop-functionalblock > .blocksection-messagefeedback {
+	body.non-scrollable .pop-block.pop-functionalblock > .blocksection-messagefeedback {
 		max-width: 33%;
 	}
 }
 @media (min-width: 992px) {
-	.pop-block.pop-functionalblock > .blocksection-messagefeedback {
+	body.non-scrollable .pop-block.pop-functionalblock > .blocksection-messagefeedback {
 		max-width: 25%;
 	}
 }

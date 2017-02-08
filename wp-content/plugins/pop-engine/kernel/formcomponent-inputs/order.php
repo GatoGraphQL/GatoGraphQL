@@ -26,14 +26,14 @@ class GD_FormInput_Order extends GD_FormInput_Select {
 	// 	return $orderby.'|'.$order;
 	// }	
 
-	function get_default_value(/*$conf*/) {
+	// function get_default_value(/*$conf*/) {
 
-		// The default value can be set-up outside, eg: in blocks-contents.php or hierarchy.php (eg: to show newest profiles in homepage)
-		$orderby = $conf['orderby'];
-		$order = $conf['order'];
+	// 	// The default value can be set-up outside, eg: in blocks-contents.php or hierarchy.php (eg: to show newest profiles in homepage)
+	// 	$orderby = $conf['orderby'];
+	// 	$order = $conf['order'];
 
-		return $orderby.'|'.$order;
-	}	
+	// 	return $orderby.'|'.$order;
+	// }	
 
 	function get_value(/*$conf, */$output = false) {
 

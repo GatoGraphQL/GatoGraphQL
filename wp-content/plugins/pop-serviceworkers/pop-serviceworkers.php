@@ -24,8 +24,8 @@ class PoP_ServiceWorkers {
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		// require_once dirname(__FILE__).'/wp-includes/load.php';
 		
-		// Priority: after PoP WP Processors loaded
-		add_action('plugins_loaded', array($this,'init'), 30);
+		// Priority: after PoP Core Processors loaded
+		add_action('plugins_loaded', array($this,'init'), 35);
 		// add_action('PoP:install', array($this,'install'), 10, 1);
 		add_action('PoP:system-install', array($this,'system_install'));
 	}

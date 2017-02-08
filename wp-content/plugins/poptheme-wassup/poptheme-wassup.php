@@ -17,6 +17,8 @@ define ('POPTHEME_WASSUP_DIR', dirname(__FILE__));
 define ('POPTHEME_WASSUP_TEMPLATES', POPTHEME_WASSUP_DIR.'/templates');
 define ('POPTHEME_WASSUP_THEMES', POPTHEME_WASSUP_DIR.'/themes');
 define ('POPTHEME_WASSUP_PLUGINS', POPTHEME_WASSUP_DIR.'/plugins');
+define ('POPTHEME_WASSUP_ORIGINURI', plugins_url('', __FILE__));
+define ('POPTHEME_WASSUP_ORIGINURI_PLUGINS', POPTHEME_WASSUP_ORIGINURI.'/plugins');
 
 class PoPTheme_Wassup {
 

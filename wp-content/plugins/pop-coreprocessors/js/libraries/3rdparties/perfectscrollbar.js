@@ -96,9 +96,10 @@ popPerfectScrollbar = {
 		scrollbar.perfectScrollbar('update');
 	},
 
-	scrollToElem : function(elem, position, animate) {
+	scrollToElem : function(args) {
 
 		var t = this;
+		var elem = args.elem, position = args.position, animate = args.animate;
 		var scrollbar = elem.closest('.perfect-scrollbar').addBack('.perfect-scrollbar');
 		if (scrollbar.length) {
 			
@@ -143,4 +144,4 @@ popPerfectScrollbar = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popPerfectScrollbar, [/*'documentInitialized'*/ 'scrollbarHorizontal', 'scrollbarVertical', 'getPosition', 'scrollTop']);
+popJSLibraryManager.register(popPerfectScrollbar, [/*'documentInitialized'*/ 'scrollbarHorizontal', 'scrollbarVertical', 'getPosition', 'scrollToElem', 'scrollTop']);

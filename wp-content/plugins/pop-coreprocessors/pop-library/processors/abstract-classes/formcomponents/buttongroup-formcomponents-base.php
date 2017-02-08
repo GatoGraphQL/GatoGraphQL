@@ -36,6 +36,19 @@ class GD_Template_Processor_ButtonGroupFormComponentsBase extends GD_Template_Pr
 		return $this->is_multiple($template_id, $atts) ? 'in' : 'eq';
 	}
 
+	function get_template_runtimeconfiguration($template_id, $atts) {
+
+		$ret = parent::get_template_runtimeconfiguration($template_id, $atts);
+		
+		// The value goes into the runtime configuration and not the configuration, so that the configuration can be cached without particular values attached.
+		// Eg: calling https://www.mesym.com/add-discussion/?related[]=19373 would initiate the value to 19373 and cache it
+		// This way, take all particular stuff to any one URL out from its settings 
+		$input = $this->get_input($template_id, $atts);
+		$ret['value'] = $input->get_output_value(/*array()*/);
+
+		return $ret;
+	}
+
 	function get_template_configuration($template_id, $atts) {
 
 		$ret = parent::get_template_configuration($template_id, $atts);
@@ -46,7 +59,7 @@ class GD_Template_Processor_ButtonGroupFormComponentsBase extends GD_Template_Pr
 	
 		$input = $this->get_input($template_id, $atts);
 		$options = $input->get_all_values();
-		$ret['value'] = $input->get_output_value(/*array()*/);
+		// $ret['value'] = $input->get_output_value(/*array()*/);
 		$ret['options'] = $options;
 		if ($btnclass = $this->get_att($template_id, $atts, 'btn-class')) {
 			$ret[GD_JS_CLASSES/*'classes'*/]['input'] = $btnclass;

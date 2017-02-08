@@ -58,6 +58,8 @@ class PoP_ServerUtils {
 			'uid', // user id
 			'lid', // location id
 			'cid', // comment id
+			'fa', // to avoid template with class "fa"
+			'btn', // to avoid template with class "btn"
 			// 'tag', // for the pageSection; commented since renaming it to tagpage because of problems with prettify
 		);
 		do {
