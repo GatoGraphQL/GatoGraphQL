@@ -108,7 +108,7 @@ Executing the `minify.sh` scripts requires the following software (_I'll welcome
 
 2. [Google's minimizer Min](https://github.com/mrclay/minify)
 
- To bundle and minify files. The min webserver must be deployed under https://min.localhost/.
+ To bundle and minify files. The min webserver must be deployed under http://min.localhost/.
 
 The following environment variables are used in `minify.sh`: `POP_APP_PATH`, `POP_APP_MIN_PATH` and `POP_APP_MIN_FOLDER`. To set their values, for Mac:
 
