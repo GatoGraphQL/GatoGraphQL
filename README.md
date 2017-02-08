@@ -63,9 +63,9 @@ To have a website consume data coming from other domains, crossdomain access mus
       Header add Access-Control-Allow-Methods POST
     </IfModule>
 
-### Improvements for deploying to PROD
+### Mangling, Minifying and Bundling of .css, .js and .tmpl.js files
 
-PoP allows to include either all registered .css and .js files from all plug-ins (suitable for DEV environment),  or 1 .css + 1 .js + 1 .tmpl.js bundled and minified versions of all those files (suitable for PROD environment). In wp-config.php:
+PoP allows to include either all registered .css, .js and .tmpl.js files from all plug-ins (suitable for DEV environment),  or 1 .css + 1 .js + 1 .tmpl.js bundled and minified versions of all those files (suitable for PROD environment). In wp-config.php:
 
 `define('POP_SERVER_USEMINIFIEDFILES', true);`
 
@@ -74,17 +74,15 @@ The bundling and minifying of files is done in 2 places:
 - **At the plug-in level:** it generates 1.js + 1 .tmpl.js + 1.css files per plug-in. Input files are defined in plugins/PLUGIN-NAME/build/minify.sh
 - **At the website level:** it generates 1.js + 1 .tmpl.js + 1.css files for the whole website. Input files are defined in themes/THEME-NAME/build/minify.sh
 
-#### Bundle and minify .js and .css files
-
-_**Notice:** the current procedure is quite ugly. I'll welcome anyone proposing a better solution_
-
-1. Install Google's minimizer Min in your webserver
-
- To bundle and minify files, I'm using [Google's minimizer Min](https://github.com/mrclay/minify), deployed under https://min.localhost/, and executing a script that makes a request and saves the output of the minified file to disk.
+The procedure is as follows (_the current procedure, explained below, is not very pretty... I'll welcome anyone proposing a better solution_)
  
-2. Install UglifyJS
+1. Install UglifyJS
 
  To further reduce the file size of the bundled libraries JS file, I use [UglifyJS](https://github.com/mishoo/UglifyJS2)
+
+2. Install Google's minimizer Min in your webserver
+
+ To bundle and minify files, I'm using [Google's minimizer Min](https://github.com/mrclay/minify), deployed under https://min.localhost/, and executing a script that makes a request and saves the output of the minified file to disk.
 
 3. Define the environment variables used in minify.sh: POP_APP_PATH, POP_APP_MIN_PATH and POP_APP_MIN_FOLDER
 
