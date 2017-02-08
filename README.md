@@ -52,32 +52,32 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
-    Constant: POP_SERVER_USECACHE
+    Constant: `POP_SERVER_USECACHE`
     Values: true|false
     Description: Create and re-use a cache of the settings of the requested page.
 
-    Constant: POP_SERVER_USEMINIFIEDFILES
+    Constant: `POP_SERVER_USEMINIFIEDFILES`
     Values: true|false
     Description: Include the mangled, minified and bundled together version of all .js, .tmpl.js and .css files.
 
-    Constant: POP_SERVER_TEMPLATEDEFINITION_TYPE
+    Constant: `POP_SERVER_TEMPLATEDEFINITION_TYPE`
     Values: 0|1|2
     Description: Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
       0: Use the original name of each module
       1: Use both
       2: Use the base36 counter number
 
-    Constant: POP_SERVER_COMPACTJSKEYS
+    Constant: `POP_SERVER_COMPACTJSKEYS`
     Values: true|false
     Description: Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
-    Constant: POP_SERVER_USELOCALSTORAGE
+    Constant: `POP_SERVER_USELOCALSTORAGE`
     Values: true|false
     Description: Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
-    Constant: POP_SERVER_FORCESSL
+    Constant: `POP_SERVER_FORCESSL`
     Values: true|false
-    Description: If true, it will always redirect to HTTPS when accessing over HTTP
+    Description: Redirect to HTTPS whenever accessing over HTTP
 
 ### Decentralization: enabling crossdomain
 
