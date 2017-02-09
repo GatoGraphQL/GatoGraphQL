@@ -44,8 +44,13 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 ## Installation
 
 1. Install the [latest version](https://wordpress.org/latest.zip) of WordPress
-2. Download/Clone this repository on the same folder
-3. Install and activate the following plugins, to make available some functionalities which depend on them (_even though they are not mandatory, **PoP has yet not been tested without them**_):
+2. Download/clone this repository on the same folder
+3. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID ([there's an issue](https://github.com/leoloso/PoP/issues/38) to do this through scripts)
+4. Activate all plug-ins and the theme
+
+### Required 3rd-party plugins
+
+Install and activate the following plugins, which are integrated with PoP (_not all of them are mandatory, however **PoP has yet not been tested without them**_):
  - [Events Manager](https://wordpress.org/plugins/events-manager/): for the events and locations
  - [User Role Editor](https://wordpress.org/plugins/user-role-editor/): for the organization/individual account types
  - [Co-Authors Plus](https://wordpress.org/plugins/co-authors-plus/): for adding co-authors to the posts
@@ -55,8 +60,6 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
  - [qTranslate X](https://wordpress.org/plugins/qtranslate-x/): multi-language
  - [WP Super Cache](https://wordpress.org/plugins/wp-super-cache/): for caching the website
  - (Commercial) [Gravity Forms](http://www.gravityforms.com/): for sending messages, newsletter, flagging, volunteering, etc
-4. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID ([there's an issue](https://github.com/leoloso/PoP/issues/38) to do this through scripts)
-5. Activate all plug-ins and the theme
 
 ## Configuration
 
