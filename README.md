@@ -45,7 +45,7 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 1. Install the [latest version](https://wordpress.org/latest.zip) of WordPress
 2. Download/Clone this repository on the same folder
-3. Install and activate the following plugins, to make available some functionalities which depend on them (_please notice that, even though in theory they are not mandatory, **PoP has yet not been tested without them**._):
+3. Install and activate the following plugins, to make available some functionalities which depend on them (_even though they are not mandatory, **PoP has yet not been tested without them**_):
  - [Events Manager](https://wordpress.org/plugins/events-manager/): for the events and locations
  - [User Role Editor](https://wordpress.org/plugins/user-role-editor/): for the organization/individual account types
  - [Co-Authors Plus](https://wordpress.org/plugins/co-authors-plus/): for adding co-authors to the posts
