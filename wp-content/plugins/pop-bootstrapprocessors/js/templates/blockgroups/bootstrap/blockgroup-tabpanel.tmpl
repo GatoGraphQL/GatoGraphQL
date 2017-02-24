@@ -6,7 +6,7 @@
 					{{#if ../intercept}}
 						<a {{#generateId context=../. group='tablink'}}{{../id}}-{{settings-id}}{{/generateId}} href="{{#with ../bs.feedback.intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}">
 					{{else}}
-						<a href="#{{lastGeneratedId context=../. group=bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../. group=bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
+						<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
 					{{/if}}
 						{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}<span class="tab-title">{{{title}}}</span>{{#if subheaders}} <span class="caret"></span>{{/if}}
 					</a>
@@ -17,7 +17,7 @@
 									{{#if ../../intercept}}
 										<a href="{{#with ../../bs.feedback.intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}">
 									{{else}}
-										<a href="#{{lastGeneratedId context=../../. group=bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../../. group=bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
+										<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
 									{{/if}}
 										{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}<span class="tab-subtitle">{{{title}}}</span>
 									</a>
@@ -32,7 +32,7 @@
 	{{#compare panel-header-type "btn-group"}}
 		<div id="{{lastGeneratedId group=bootstrap-type}}-panel-title" class="{{panelheader-class}}" role="group" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 			{{#each panel-headers}}
-				<a class="{{#compare ../active settings-id}}active{{else}}{{#each subheaders}}{{#compare ../../active settings-id}}active{{/compare}}{{/each}}{{/compare}} {{../classes.panelheader-item}}" {{#if ../intercept}} href="{{#with ../bs.feedback.intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../. group=bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../. group=bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab"{{/if}}>
+				<a class="{{#compare ../active settings-id}}active{{else}}{{#each subheaders}}{{#compare ../../active settings-id}}active{{/compare}}{{/each}}{{/compare}} {{../classes.panelheader-item}}" {{#if ../intercept}} href="{{#with ../bs.feedback.intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab"{{/if}}>
 					{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 				</a>
 				{{#if subheaders}}
@@ -42,7 +42,7 @@
 							{{#each subheaders}}
 								<li role="presentation" class="{{#compare ../../active settings-id}}active{{/compare}}">
 									<a {{#if ../../intercept}}
-										href="{{#with ../../bs.feedback.intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../../. group=bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../../. group=bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab" {{/if}}</a>
+										href="{{#with ../../bs.feedback.intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab" {{/if}}</a>
 										{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 									</a>
 								</li>
@@ -63,7 +63,7 @@
 							{{#if ../intercept}}
 								<a href="{{#with ../bs.feedback.intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}">
 							{{else}}
-								<a href="#{{lastGeneratedId context=../. group=bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../. group=bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
+								<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
 							{{/if}}
 								{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 							</a>
@@ -73,7 +73,7 @@
 								{{#if ../../intercept}}
 									<a href="{{#with ../../bs.feedback.intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../settings-id}}{{/withSublevel}}{{/with}}">
 								{{else}}
-									<a href="#{{lastGeneratedId context=../../. group=bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../../. group=bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
+									<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{settings-id}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{settings-id}}" role="tab" data-toggle="tab">
 								{{/if}}
 									{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 								</a>
@@ -87,11 +87,11 @@
 	{{#if settings-ids.blockunits}}
 		<div class="tab-content">
 			{{#each settings-ids.blockunits}}
-				<div id="{{lastGeneratedId context=../. group=bootstrap-type}}-{{this}}" role="tabpanel" class="tab-pane {{../classes.bootstrap-component}} {{#compare ../active this}}active{{/compare}} {{../panel-class}} {{get ../custom-panel-class this}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
-					<div id="{{lastGeneratedId context=../. group=bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}">
+				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" role="tabpanel" class="tab-pane {{../classes.bootstrap-component}} {{#compare ../active this}}active{{/compare}} {{../panel-class}} {{get ../custom-panel-class this}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
+					<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}">
 						{{#withBlock ../root-context this}}
 							{{enterModule . parentContext=../../.}}
-							<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=bootstrap-type}}-{{../this}}" data-toggle="tab" role="tab" data-intercept-url="{{#withSublevel ../../template context=../../bs.feedback.intercept-urls}}{{get . ../template}}{{/withSublevel}}"></a>
+							<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="tab" role="tab" data-intercept-url="{{#withSublevel ../../template context=../../bs.feedback.intercept-urls}}{{get . ../template}}{{/withSublevel}}"></a>
 						{{/withBlock}}
 					</div>
 				</div>

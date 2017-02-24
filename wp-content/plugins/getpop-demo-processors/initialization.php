@@ -4,6 +4,11 @@ class GetPoPDemo_Processors_Initialization {
 	function initialize(){
 
 		load_plugin_textdomain('getpop-demo-processors', false, dirname(plugin_basename(__FILE__)).'/languages');
+
+		/**---------------------------------------------------------------------------------------------------------------
+		 * Global Variables and Configuration from CUSTOM folder
+		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once 'config/load.php';
 		
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Load the PoP Library

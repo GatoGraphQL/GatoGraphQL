@@ -86,6 +86,7 @@ function gd_custom_fetchpagesection_settings($fetchpagesection_settings) {
 			GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWMAIN => $settings_append,
 			GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWSIDEINFO => $settings_append,
 			GD_TEMPLATEID_PAGESECTIONID_OPERATIONAL => $settings_append, // Operational: do not update browser URL. Eg: for "Follow user" page
+			GD_TEMPLATEID_PAGESECTIONID_COMPONENTS => $settings_append, // Operational: do not update browser URL. Eg: for "Follow user" page
 		)
 	);
 }

@@ -216,10 +216,11 @@ function windowResize() {
     evt.initUIEvent('resize', true, false, window, 0);
     window.dispatchEvent(evt);
 
+    // Comment Leo 22/02/2017: Waypoints seems to already process this event already
     // Allow others to also react. Eg: waypoints
-    jQuery(document).ready( function($) {
-        $(window).triggerHandler('resized');
-    });
+    // jQuery(document).ready( function($) {
+    //     $(window).triggerHandler('resized');
+    // });
 }
 
 // Taken from http://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript

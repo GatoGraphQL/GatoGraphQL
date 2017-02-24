@@ -9,7 +9,7 @@
 					<small><span class="glyphicon glyphicon-remove"></span></small>
 				</button>
 			</div>
-			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="activate-interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" data-title="{{{tls.feedback.title}}}"></a>
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="activate-interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" data-title="{{{../../tls.feedback.title}}}"></a>
 			{{#withSublevel ../../template context=../../pss.feedback.extra-intercept-urls}}
 				{{#withget . ../../../template}}
 					{{#each .}}

@@ -65,6 +65,10 @@ class GD_Template_Processor_EditorFormComponentsBase extends GD_Template_Process
 
 			return $rows;
 		}
+		elseif ($rows = $this->get_att($template_id, $atts, 'editor-rows')) {
+
+			return $rows;
+		}
 		return 0;
 	}
 

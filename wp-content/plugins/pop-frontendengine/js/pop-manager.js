@@ -970,6 +970,9 @@ popManager = {
 	
 			var block = $(this);
 			
+			// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
+			popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
+			
 			t.runScriptsBefore(pageSection, newDOMs);
 			
 			// This won't execute again the JS on the block when adding newDOMs, because by then
@@ -1373,12 +1376,19 @@ popManager = {
 	updateDocument : function() {
 
 		var t = this;
-		// Source can be params or topLevelFeedback
-		var feedback = t.getTopLevelFeedback();
 
 		// Update the title in the page
-		t.documentTitle = unescapeHtml(feedback[M.URLPARAM_TITLE]);
-		document.title = t.documentTitle;
+		t.updateTitle(t.getTopLevelFeedback()[M.URLPARAM_TITLE]);
+	},
+
+	updateTitle : function(title) {
+
+		var t = this;
+
+		if (title) {
+			t.documentTitle = unescapeHtml(title);
+			document.title = t.documentTitle;
+		}
 	},
 
 	// activeLinks : function(elems) {
@@ -1407,15 +1417,15 @@ popManager = {
 	// 	}
 	// },
 
-	hideMessages : function(pageSection) {
+	// hideMessages : function(pageSection) {
 
-		var t = this;
-		var status = popPageSectionManager.getPageSectionStatus(pageSection);
-		var loading = status.find('.pop-loading');
-		var error = status.find('.pop-error');
-		loading.addClass('hidden');
-		error.addClass('hidden');
-	},
+	// 	var t = this;
+	// 	var status = popPageSectionManager.getPageSectionStatus(pageSection);
+	// 	var loading = status.find('.pop-loading');
+	// 	var error = status.find('.pop-error');
+	// 	loading.addClass('hidden');
+	// 	error.addClass('hidden');
+	// },
 
 	executeSetFilterBlockParams : function(pageSection, block, filter) {
 	
@@ -2447,8 +2457,12 @@ popManager = {
 
 		// Add 'items' from the dataset, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
 		options.extendContext = {
-			items: memory.dataset[pssId][bsId]
+			items: memory.dataset[pssId][bsId],
+			ignorePSRuntimeId: true
 		};
+
+		// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
+		popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 
 		// If it has an Aggregator, add the class of the subscribed template block
 		// if (t.getAggregatorBlockData(pageSection, block)) {
@@ -2976,7 +2990,7 @@ popManager = {
 				}
 				catch(err) {
 					// Do nothing
-					// console.log(err.message);
+					console.log(err.message);
 					// console.trace();
 				}
 			});
@@ -3378,13 +3392,6 @@ popManager = {
 				if (replaceFromFeedback && replaceStr != feedback[replaceFromFeedback]) {
 					replaceFrom = replaceFrom.replace(new RegExp(replaceStr, 'g'), feedback[replaceFromFeedback]);
 				}
-
-				// var replaceWithId = replacement['replace-with-id'];
-				// if (replaceWithId) {
-				// 	// var newId = popJSRuntimeManager.addTemplateId(pssId, bsId, template, template, id);
-				// 	var newId = popJSRuntimeManager.addTemplateId(pssId, bsId, template, null, id);
-				// 	replaceFrom = replaceFrom.replace(new RegExp(replaceStr, 'g'), newId);
-				// }
 			});
 
 			var overrideWhere = override;
@@ -3419,6 +3426,8 @@ popManager = {
 		var templatePath = t.getTemplatePath(pageSection, target, templateName);
 		if (templatePath.length) {
 			var block = t.getBlock(target);
+			// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
+			// popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 			// var pssId = t.getSettingsId(pageSection);
 			// var bsId = t.getSettingsId(block);
 			// var psId = pageSection.attr('id');
@@ -4318,7 +4327,15 @@ popManager = {
 			return '';
 		}
 
-		return template(context);		
+		try {
+			return template(context);
+		}
+		catch(err) {
+			// Do nothing
+			console.log('Error in '+templateName+': '+err.message);
+			// console.trace();
+		}
+		return '';
 	},
 
 	getItemObject : function(itemDBKey, itemObjectId) {

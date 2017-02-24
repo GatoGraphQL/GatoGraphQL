@@ -257,7 +257,7 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 
 /* Styles particular to GetPoP */
 
-.mainsections > .blocksection-extensions > .pop-block > .blocksection-title > h1.title {
+/*.mainsections > .blocksection-extensions > .pop-block > .blocksection-title > h1.title {
     text-align: center;
     border-bottom: 2px solid #b94f5a;
     padding-bottom: 10px;
@@ -278,11 +278,7 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 
     margin-top: 60px;
   }
-}
-.mainsections > .blocksection-extensions .first-item h2.title {
-
-  margin-top: 20px;
-}
+}*/
 
 /* Make the calendar's month name smaller */
 .mainsections > .blocksection-extensions .calendar .fc-toolbar h2 {

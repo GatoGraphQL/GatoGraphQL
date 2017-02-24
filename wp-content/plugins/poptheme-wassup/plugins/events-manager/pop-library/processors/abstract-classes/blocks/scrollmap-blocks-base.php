@@ -75,9 +75,18 @@ class GD_EM_Template_Processor_ScrollMapBlocksBase extends GD_Template_Processor
 
 		global $gd_template_processor_manager;
 
+		$this->append_att($template_id, $atts, 'class', 'map');
 		$this->append_att($template_id, $atts, 'class', 'pop-block-map');
 		$this->append_att($template_id, $atts, 'class', 'pop-block-scrollmap');
-		$this->append_att($template_id, $atts, 'class', 'map');
+
+		if ($this->is_usermap_block($template_id)) {
+
+			$this->append_att($template_id, $atts, 'class', 'pop-block-userscrollmap');
+		}
+		elseif ($this->is_postmap_block($template_id)) {
+
+			$this->append_att($template_id, $atts, 'class', 'pop-block-postscrollmap');
+		}
 		
 		// By default the scrollmap is vertical
 		$mapblock_inner_template = $this->get_block_inner_template($template_id);

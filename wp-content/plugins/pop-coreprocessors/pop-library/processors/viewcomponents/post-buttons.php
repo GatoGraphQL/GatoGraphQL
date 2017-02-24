@@ -150,7 +150,7 @@ class GD_Template_Processor_PostViewComponentButtons extends GD_Template_Process
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
 
-				return __('Flag', 'pop-coreprocessors');
+				return __('Flag as inappropriate', 'pop-coreprocessors');
 		}
 		
 		return parent::get_title($template_id);

@@ -51,7 +51,7 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
 		if (!$page_id) return;
 		
-		$blocks = $blockgroups = $replicable = array();
+		$blocks = $blockgroups = $replicable = $frames = array();
 
 		switch ($page_id) {
 
@@ -87,7 +87,8 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 			 *-------------------------------------------*/
 			case POPTHEME_WASSUP_GF_PAGE_SHAREBYEMAIL:
 			
-				if ($template_id == GD_TEMPLATE_PAGESECTION_OPERATIONAL) {
+				// if ($template_id == GD_TEMPLATE_PAGESECTION_OPERATIONAL) {
+				if ($template_id == GD_TEMPLATE_PAGESECTION_COMPONENTS) {
 
 					if ($submitted_data) {
 
@@ -162,9 +163,31 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 				break;
 		}
 
+		// Frames: PageSection ControlGroups
+		switch ($page_id) {
+
+			case POPTHEME_WASSUP_GF_PAGE_CONTACTUSER:
+			case POPTHEME_WASSUP_GF_PAGE_VOLUNTEER:
+			case POPTHEME_WASSUP_GF_PAGE_FLAG:
+			case POPTHEME_WASSUP_GF_PAGE_SHAREBYEMAIL:
+			case POPTHEME_WASSUP_GF_PAGE_CONTACTUS:
+			case POPTHEME_WASSUP_GF_PAGE_NEWSLETTER:
+
+				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE) {
+
+					$frames[] = GD_TEMPLATE_BLOCK_PAGECONTROL;
+				}
+				break;
+		}
+
 		GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
 		GD_TemplateManager_Utils::add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
 		GD_TemplateManager_Utils::add_blocks($ret, $replicable, GD_TEMPLATEBLOCKSETTINGS_REPLICABLE);
+
+		// Add frames only if not fetching data for the block
+		if (!$fetching_json_data) {
+			GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
+		}
 	}
 
 	function add_pagetab_blockunits(&$ret, $template_id) {
@@ -181,18 +204,25 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 			case POPTHEME_WASSUP_GF_PAGE_CONTACTUSER:
 			case POPTHEME_WASSUP_GF_PAGE_VOLUNTEER:
 			case POPTHEME_WASSUP_GF_PAGE_FLAG:
+			case POPTHEME_WASSUP_GF_PAGE_SHAREBYEMAIL:
+			case POPTHEME_WASSUP_GF_PAGE_CONTACTUS:
+			case POPTHEME_WASSUP_GF_PAGE_NEWSLETTER:
 
-				$add = 
-					($template_id == GD_TEMPLATE_PAGESECTION_PAGETABS_PAGE && $target == GD_URLPARAM_TARGET_MAIN) ||
-					($template_id == GD_TEMPLATE_PAGESECTION_ADDONTABS_PAGE && $target == GD_URLPARAM_TARGET_ADDONS);
-				if ($add) {
+				if ($template_id == GD_TEMPLATE_PAGESECTION_ADDONTABS_PAGE && $target == GD_URLPARAM_TARGET_ADDONS) {
 
 					$tabs = array(
 						POPTHEME_WASSUP_GF_PAGE_CONTACTUSER => GD_TEMPLATE_BLOCK_ADDONTABS_CONTACTUSER,
 						POPTHEME_WASSUP_GF_PAGE_VOLUNTEER => GD_TEMPLATE_BLOCK_ADDONTABS_VOLUNTEER,
 						POPTHEME_WASSUP_GF_PAGE_FLAG => GD_TEMPLATE_BLOCK_ADDONTABS_FLAG,
+						POPTHEME_WASSUP_GF_PAGE_SHAREBYEMAIL => GD_TEMPLATE_BLOCK_ADDONTABS_SHAREBYEMAIL,
+						POPTHEME_WASSUP_GF_PAGE_CONTACTUS => GD_TEMPLATE_BLOCK_ADDONTABS_CONTACTUS,
+						POPTHEME_WASSUP_GF_PAGE_NEWSLETTER => GD_TEMPLATE_BLOCK_ADDONTABS_NEWSLETTER,
 					);
 					$blocks[] = $tabs[$page_id];
+				}
+				elseif ($template_id == GD_TEMPLATE_PAGESECTION_PAGETABS_PAGE && $target == GD_URLPARAM_TARGET_MAIN) {
+
+					$blocks[] = GD_TEMPLATE_BLOCK_PAGETABS_PAGE;
 				}
 				break;
 

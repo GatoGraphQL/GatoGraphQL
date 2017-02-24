@@ -1,20 +1,20 @@
 <div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="panel-group">
 	{{#each settings-ids.blockunits}}
-		<div class="panel panel-default">
+		<div class="{{../classes.panel}}">
 			{{#compare ../panel-header-type "heading"}}
 				<div class="panel-heading">
-					{{#if ../intercept}}
-						<a href="{{#with ../bs.feedback.intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../this}}{{/withSublevel}}{{/with}}">
+					{{#if ../../intercept}}
+						<a href="{{#with ../../bs.feedback.intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../../this}}{{/withSublevel}}{{/with}}">
 					{{else}}
-						<a href="#{{lastGeneratedId context=../. group=bootstrap-type}}-{this}}" data-toggle="collapse" data-parent="#{{lastGeneratedId context=../. group=bootstrap-type}}">
+						<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="collapse" {{#if ../../close-parent}}data-parent="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}"{{/if}}>
 					{{/if}}
-						<h3 class="panel-title collapsepanelgroup-title">
-							{{{get ../icon ../this}}}{{get ../panel-title this}}
-						</h3>
+						<{{../../html-tags.title}} class="{{../../classes.title}}">
+							{{#ifget ../../icon ../this}}{{{get ../../icon ../this}}}{{/ifget}}{{{get ../../panel-title ../this}}}
+						</{{../../html-tags.title}}>
 					</a>
 				</div>
 			{{/compare}}
-			<div id="{{lastGeneratedId context=../. group=bootstrap-type}}-{{this}}" class="panel-collapse collapse {{../classes.bootstrap-component}} {{#compare ../active this}}in{{/compare}} {{../panel-class}} {{get ../custom-panel-class this}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>				
+			<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" class="panel-collapse collapse {{../classes.bootstrap-component}} {{#compare ../active this}}in{{/compare}} {{../panel-class}} {{get ../custom-panel-class this}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>				
 				{{#if ../dropdown-items}}
 					<div class="dropdown pull-left">
 						<a href="#" class="dropdown-toggle close close-sm" data-toggle="dropdown" role="button">{{{../titles.dropdown}}}</a>
@@ -39,15 +39,15 @@
 				{{/if}}	
 				{{#compare ../panel-header-type "panel"}}
 					<div class="panel-heading">
-						<h3 class="panel-title collapsepanelgroup-title">
-							{{{get ../icon ../this}}}{{get ../panel-title this}}
-						</h3>
+						<{{../../html-tags.title}} class="{{../../classes.title}}">
+							{{#ifget ../../icon ../this}}{{{get ../../icon ../this}}}{{/ifget}}{{{get ../../panel-title ../this}}}
+						</{{../../html-tags.title}}>
 					</div>
 				{{/compare}}
-				<div id="{{lastGeneratedId context=../. group=bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}">
+				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.body}}">
 					{{#withBlock ../root-context this}}
 						{{enterModule . parentContext=../../.}}
-						<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=bootstrap-type}}-{{../this}}" data-toggle="collapse" data-parent="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}" data-intercept-url="{{#withSublevel ../../template context=../../bs.feedback.intercept-urls}}{{get . ../template}}{{/withSublevel}}"></a>
+						<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="collapse" {{#if ../../close-parent}}data-parent="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}"{{/if}} data-intercept-url="{{#withSublevel ../../template context=../../bs.feedback.intercept-urls}}{{get . ../template}}{{/withSublevel}}"></a>
 					{{/withBlock}}
 				</div>
 			</div>

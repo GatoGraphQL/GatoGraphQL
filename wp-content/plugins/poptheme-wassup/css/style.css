@@ -1,6 +1,8 @@
 /* Extra classes to add to the body for specific items (locale, WP quicklink bar, Filtering by location) */
 /* Also the role is added */
-
+#background-screen {
+	display: none;
+}
 #ps-sideinfo {
 	padding-top: 10px;
 }
@@ -91,6 +93,7 @@ body.swift #ps-main .pop-outerblock.controlblock,
 body.swift #ps-main .pop-outerblock.feed,
 body.swift #ps-main .pop-outerblock.calendar,
 body.swift #ps-main .pop-outerblock.block-singleabout-content,
+body.swift #ps-main .pop-outerblock > .blocksection-extensions > .block-singleabout-content,
 body.swift #ps-main .pop-outerblock.block-single-content,
 body.swift #ps-quickview .pop-outerblock.blockgroup-home,
 body.swift #ps-quickview .pop-outerblock.blockgroup-singlepost,
@@ -191,10 +194,10 @@ body.pop-loadingframe .loadinglogo {
 	display: none;
 	overflow: hidden;
 }
-.background-screen {
-	/* Below everything else, including the offcanvas background */
+/* Below everything else, including the offcanvas background */
+/*.background-screen {
 	z-index: 50;
-}
+}*/
 /* Do not allow the user to click yet, because JS not yet initialized, by placing the loading-screen div with a transparent background on top of everything */
 body.pop-loadingjs .loading-screen {
 	display: block;
@@ -770,8 +773,10 @@ body.loggedin.offline .wp-media-buttons,
 .loggedin-btn {
 	display: none !important;
 }
+.visible-loggedin.visible-always,
 body.loggedin .visible-loggedin,
 .visible-notloggedin,
+body.loggedin .visible-notloggedin.visible-always,
 body.community .visible-community,
 body.organization .visible-organization,
 body.individual .visible-individual,
@@ -1142,9 +1147,9 @@ span.twitter-typeahead {
 .offcanvas-collapse.panel-collapse .panel-heading {
 	padding-top: 0;
 }
-.panel-title.collapsepanelgroup-title {
+/*.panel-title.collapsepanelgroup-title {
 	font-size: 24px;
-}
+}*/
 
 .post-layout .media,
 .user-layout .media {
@@ -2485,6 +2490,15 @@ div.mce-tooltip {
 	margin-top: 0px;
 	padding-bottom: 0;
 	padding-top: 0;
+}
+
+.line > .scroll-inner .pop-blockinner-row {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid #f1f1f2;
+}
+.line > .scroll-inner .pop-blockinner-row:last-child {
+    border-bottom: 0;
 }
 
 /* Fix formatting for the comments (with their responses) inside the top notifications => remove all spacing in between */
@@ -3929,12 +3943,18 @@ body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
 .pop-block-scrollmap.horizontal .mapdetails.scrollable > .scroll-inner > .pop-blockinner-row {
  	display: inline-block;
     vertical-align: top;
-    width: 320px;
     white-space: normal;
     margin-left: 0;
     margin-right: 0;
     border-top: 0;
+    width: 320px;
 }
+/*.pop-block-scrollmap.pop-block-userscrollmap.horizontal .mapdetails.scrollable > .scroll-inner > .pop-blockinner-row {
+ 	width: 200px;
+}*/
+/*.pop-block-scrollmap.pop-block-postscrollmap.horizontal .mapdetails.scrollable > .scroll-inner > .pop-blockinner-row {
+ 	width: 320px;
+}*/
 .pop-block-scrollmap.horizontal .pop-map {
  	height: 400px;
  }
@@ -4428,3 +4448,4 @@ pre.prettyprint {
 .layout-tag-details h4 {
 	margin-top: 0;
 }
+

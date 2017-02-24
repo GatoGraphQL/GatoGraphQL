@@ -82,7 +82,7 @@
 		<div class="loading-screen">
 			<?php include POPTHEME_WASSUP_TEMPLATES.'/loading-screen.php' ?>
 		</div>
-		<!--div class="background-screen"></div-->
+		<div id="background-screen" class="background-screen"></div>
 		<?php 
 		// Include the Theme Header
 		$vars = GD_TemplateManager_Utils::get_vars();

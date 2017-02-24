@@ -15,7 +15,6 @@ define ('GD_TEMPLATESOURCE_LAYOUT_LOCATIONADDRESS', 'em-layout-locationaddress')
 define ('GD_TEMPLATESOURCE_LAYOUT_LOCATIONNAME', 'em-layout-locationname');
 define ('GD_TEMPLATESOURCE_LAYOUT_LOCATIONS', 'em-layout-locations');
 define ('GD_TEMPLATESOURCE_LAYOUTCALENDAR_CONTENT_POPOVER', 'em-layoutcalendar-content');
-define ('GD_TEMPLATESOURCE_LAYOUTCALENDAR_CONTENT_POPOVER', 'em-layoutcalendar-content');
 define ('GD_TEMPLATESOURCE_LAYOUTEVENT_TABLECOL', 'em-layoutevent-tablecol');
 define ('GD_TEMPLATESOURCE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT', 'em-layoutlocation-typeahead-component');
 define ('GD_TEMPLATESOURCE_LAYOUTLOCATION_TYPEAHEAD_SELECTED', 'em-layoutlocation-typeahead-selected');

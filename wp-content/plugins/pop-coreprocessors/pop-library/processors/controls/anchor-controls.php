@@ -16,6 +16,7 @@ define ('GD_TEMPLATE_ANCHORCONTROL_API', PoP_ServerUtils::get_template_definitio
 define ('GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('anchorcontrol-copysearchurl'));
 define ('GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL', PoP_ServerUtils::get_template_definition('anchorcontrol-sharebyemail'));
 define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('anchorcontrol-invitenewusers'));
+define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('anchorcontrol-share-invitenewusers'));
 define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGE', PoP_ServerUtils::get_template_definition('anchorcontrol-closepage'));
 define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBTN', PoP_ServerUtils::get_template_definition('anchorcontrol-closepagebtn'));
 define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBOTTOM', PoP_ServerUtils::get_template_definition('anchorcontrol-closepagebottom'));
@@ -23,9 +24,14 @@ define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO', PoP_ServerUtils::get_te
 define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFO', PoP_ServerUtils::get_template_definition('anchorcontrol-togglesideinfo'));
 define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS', PoP_ServerUtils::get_template_definition('anchorcontrol-togglesideinfoxs'));
 define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK', PoP_ServerUtils::get_template_definition('anchorcontrol-togglesideinfoxs-back'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS', PoP_ServerUtils::get_template_definition('anchorcontrol-toggletabs'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS', PoP_ServerUtils::get_template_definition('anchorcontrol-toggletabsxs'));
 define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK', PoP_ServerUtils::get_template_definition('anchorcontrol-share-facebook'));
 define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER', PoP_ServerUtils::get_template_definition('anchorcontrol-share-twitter'));
 define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN', PoP_ServerUtils::get_template_definition('anchorcontrol-share-linkedin'));
+define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK', PoP_ServerUtils::get_template_definition('anchorcontrol-fixedshare-facebook'));
+define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER', PoP_ServerUtils::get_template_definition('anchorcontrol-fixedshare-twitter'));
+define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN', PoP_ServerUtils::get_template_definition('anchorcontrol-fixedshare-linkedin'));
 
 class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorControlsBase {
 
@@ -43,6 +49,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL,
 			GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL,
 			GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS,
+			GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS,
 			GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGE,
 			GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBTN,
 			GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBOTTOM,
@@ -50,9 +57,14 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFO,
 			GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS,
 			GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK,
+			GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS,
+			GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS,
 			GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK,
 			GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER,
 			GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN,
+			GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK,
+			GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER,
+			GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN,
 		);
 	}
 
@@ -93,8 +105,12 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				return __('Copy Search URL', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
-
+			
 				return __('Share by email', 'pop-coreprocessors');
+			
+			case GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
+
+				return __('Email', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS:
 
@@ -116,15 +132,23 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 
 				return __('Go back', 'pop-coreprocessors');
 
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS:
+
+				return __('Toggle tabs', 'pop-coreprocessors');
+
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
 
 				return __('Facebook', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER:
 
 				return __('Twitter', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN:
 
 				return __('LinkedIn', 'pop-coreprocessors');
 
@@ -172,6 +196,11 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
 
 				return 'glyphicon-arrow-left';
+
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS:
+
+				return 'glyphicon-time';
 		}
 
 		return parent::get_icon($template_id);
@@ -206,6 +235,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				return 'fa-link';
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
+			case GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
 
 				return 'fa-envelope';
 		
@@ -214,14 +244,17 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				return 'fa-user-plus';
 		
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
 
 				return 'fa-facebook';
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER:
 
 				return 'fa-twitter';
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN:
 
 				return 'fa-linkedin';
 		}
@@ -269,6 +302,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				return null;
 
 			case GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS:
+			case GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
 
 				return get_permalink(POP_COREPROCESSORS_PAGE_INVITENEWUSERS);
 
@@ -295,6 +329,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 		switch ($template_id) {
 
 			case GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS:
+			case GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
 
 				return GD_URLPARAM_TARGET_MODALS;
 		
@@ -335,6 +370,28 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				$this->merge_att($template_id, $atts, 'params', array(
 					'data-toggle' => 'offcanvas-toggle',
 					'data-target' => '#'.GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWSIDEINFO,
+				));
+				break;
+
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS:
+
+				$xs = array(
+					GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS,
+				);
+				if (in_array($template_id, $xs)) {
+					$mode = 'xs';
+					$classs = 'hidden-sm hidden-md hidden-lg';
+				}
+				else {
+					$mode = '';
+					$classs = 'hidden-xs';
+				}
+				$this->append_att($template_id, $atts, 'class', $classs);
+				$this->merge_att($template_id, $atts, 'params', array(
+					'data-toggle' => 'offcanvas-toggle',
+					'data-target' => '#'.GD_TEMPLATEID_PAGESECTIONID_PAGETABS,
+					'data-mode' => $mode,
 				));
 				break;
 
@@ -383,18 +440,43 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				break;
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER:
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN:
 
 				$providers = array(
 					GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK => GD_SOCIALMEDIA_PROVIDER_FACEBOOK,
+					GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK => GD_SOCIALMEDIA_PROVIDER_FACEBOOK,
 					GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER => GD_SOCIALMEDIA_PROVIDER_TWITTER,
+					GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER => GD_SOCIALMEDIA_PROVIDER_TWITTER,
 					GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN => GD_SOCIALMEDIA_PROVIDER_LINKEDIN,
+					GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN => GD_SOCIALMEDIA_PROVIDER_LINKEDIN,
 				);
 				$this->merge_att($template_id, $atts, 'params', array(
 					'data-provider' => $providers[$template_id],
 					'data-blocktarget' => $this->get_att($template_id, $atts, 'block-target')
 				));
+
+				$fixed = array(
+					GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK,
+					GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER,
+					GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN,
+				);
+				if (in_array($template_id, $fixed)) {
+
+					// Share the website URL
+					$title = sprintf(
+						'%s | %s',
+						get_bloginfo('name'),
+						get_bloginfo('description')
+					);
+					$this->merge_att($template_id, $atts, 'params', array(
+						'data-shareurl' => trailingslashit(home_url()),
+						'data-sharetitle' => str_replace(array('"', "'"), '', $title),
+					));
+				}
 				break;
 
 			case GD_TEMPLATE_ANCHORCONTROL_EMBED:
@@ -460,8 +542,12 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 				break;
 
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER:
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN:
+			case GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN:
+
 				$this->add_jsmethod($ret, 'controlSocialMedia');
 				break;
 
@@ -476,6 +562,8 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS:
 			// case GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFO_BACK:
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS:
 				$this->add_jsmethod($ret, 'offcanvasToggle');
 				break;
 		}

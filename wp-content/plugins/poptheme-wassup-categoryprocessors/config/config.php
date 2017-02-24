@@ -13,7 +13,7 @@ function categoryprocessors_skipcategories($cats) {
 	// The following categories can never be the main one
 	return array_merge(
 		$cats,
-		PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats()
+		PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS))
 	);
 }
 
@@ -46,7 +46,7 @@ function categoryprocessors_postname($name, $post_id) {
 		// All categories in this plug-in are secondary to "Posts"
 		if (gd_get_the_main_category($post_id) == POPTHEME_WASSUP_CAT_WEBPOSTS) {
 
-			$cats = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats();
+			$cats = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS));
 			$post_cats = get_the_category($post_id);
 			for ($i=0; $i < count($post_cats); $i++) { 
 				$cat = $post_cats[$i];
@@ -69,7 +69,7 @@ function categoryprocessors_posticon($icon, $post_id) {
 		// All categories in this plug-in are secondary to "Posts"
 		if (gd_get_the_main_category($post_id) == POPTHEME_WASSUP_CAT_WEBPOSTS) {
 
-			$cats = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats();
+			$cats = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS));
 			$post_cats = get_the_category($post_id);
 			for ($i=0; $i < count($post_cats); $i++) { 
 				$cat = $post_cats[$i];
@@ -91,9 +91,9 @@ function categoryprocessors_post_parentpageid($pageid, $post_id) {
 	if (get_post_type($post_id) == 'post') {
 
 		$cat_id = gd_get_the_main_category($post_id);
-		if (in_array($cat_id, PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats())) {
+		if (in_array($cat_id, PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS)))) {
 
-			$cat_pages = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_pages();
+			$cat_pages = PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_pages(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS));
 			return $cat_pages[$cat_id];
 		}
 	}

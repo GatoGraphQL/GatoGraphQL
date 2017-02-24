@@ -15,6 +15,7 @@ define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SUBMENU_XS', PoP_ServerUtils::get_templa
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RESETEDITOR', PoP_ServerUtils::get_template_definition('controlbuttongroup-reseteditor'));
 // define ('GD_TEMPLATE_CONTROLBUTTONGROUP_OPENALL', PoP_ServerUtils::get_template_definition('controlbuttongroup-openall'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SHARE', PoP_ServerUtils::get_template_definition('controlbuttongroup-share'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_FIXEDSHARE', PoP_ServerUtils::get_template_definition('controlbuttongroup-fixedshare'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE', PoP_ServerUtils::get_template_definition('controlbuttongroup-resultsshare'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLESIDEINFO_BACK', PoP_ServerUtils::get_template_definition('controlbuttongroup-togglesideinfo-back'));
 define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDCOMMENT', PoP_ServerUtils::get_template_definition('controlbuttongroup-addcomment'));
@@ -52,6 +53,7 @@ class GD_Template_Processor_ControlButtonGroups extends GD_Template_Processor_Co
 			// GD_TEMPLATE_CONTROLBUTTONGROUP_NAVIGATEBLOCK,
 			// GD_TEMPLATE_CONTROLBUTTONGROUP_NAVIGATEBLOCKGROUP,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_SHARE,
+			GD_TEMPLATE_CONTROLBUTTONGROUP_FIXEDSHARE,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE,
 			// GD_TEMPLATE_CONTROLBUTTONGROUP_BODYSECTION,
 			GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLESIDEINFO_BACK,
@@ -145,6 +147,11 @@ class GD_Template_Processor_ControlButtonGroups extends GD_Template_Processor_Co
 			case GD_TEMPLATE_CONTROLBUTTONGROUP_SHARE:
 
 				$ret[] = GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE;
+				break;
+
+			case GD_TEMPLATE_CONTROLBUTTONGROUP_FIXEDSHARE:
+
+				$ret[] = GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE;
 				break;
 
 			case GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE:

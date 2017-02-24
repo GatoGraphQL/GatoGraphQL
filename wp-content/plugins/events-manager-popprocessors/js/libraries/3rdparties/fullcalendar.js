@@ -313,6 +313,7 @@ popFullCalendar = {
 			var dbKeys = popManager.getDatabaseKeys(pageSection, block);
 			var itemDBKey = dbKeys['db-key'];
 			html = '';
+			popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 			$.each(layouts, function(index, layout) {
 				html += popManager.getTemplateHtml(pageSection, block, layout, options, itemDBKey, eventId);
 			});

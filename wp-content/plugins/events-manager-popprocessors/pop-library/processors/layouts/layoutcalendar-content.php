@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTCALENDAR_CONTENT_POPOVER', PoP_ServerUtils::get_template_definition('em-layoutcalendar-content'));
+define ('GD_TEMPLATE_LAYOUTCALENDAR_CONTENT_POPOVER', PoP_ServerUtils::get_template_definition('em-layoutcalendar-content-popover'));
 
 class GD_Template_Processor_CalendarContentLayouts extends GD_Template_Processor_CalendarContentLayoutsBase {
 

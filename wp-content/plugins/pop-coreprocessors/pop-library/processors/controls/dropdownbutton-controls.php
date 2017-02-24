@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-share'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-fixedshare'));
 define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-resultsshare'));
 define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-addrelatedpost'));
 define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_PAGEWITHSIDEOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-pagewithsideoptions'));
@@ -24,6 +25,7 @@ class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor
 	
 		return array(
 			GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE,
+			GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE,
 			GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE,
 			GD_TEMPLATE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST,
 			GD_TEMPLATE_DROPDOWNBUTTONCONTROL_PAGEWITHSIDEOPTIONS,
@@ -43,6 +45,13 @@ class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor
 		$ret = parent::get_modules($template_id);
 	
 		switch ($template_id) {
+
+			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE:
+
+				$ret[] = GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK;
+				$ret[] = GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER;
+				$ret[] = GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS;
+				break;
 		
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
@@ -102,6 +111,10 @@ class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor
 
 		switch ($template_id) {
 		
+			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE:
+
+				return 'btn btn-default btn-block';
+
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
 
@@ -128,6 +141,7 @@ class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
 
@@ -156,6 +170,13 @@ class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor
 	function get_label($template_id, $atts) {
 
 		switch ($template_id) {
+
+			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE:
+
+				return apply_filters(
+					'GD_Template_Processor_DropdownButtonControls:label:fixedshare',
+					__('Share with your friends', 'pop-coreprocessors')
+				).' <span class="caret"></span>';
 
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
 

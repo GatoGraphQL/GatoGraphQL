@@ -292,7 +292,16 @@ table .media .media-body {
 .btn-inverse:focus,
 .btn-inverse:active,
 .btn-inverse.active,
-.open .dropdown-toggle.btn-inverse {
+.open .dropdown-toggle.btn-inverse,
+.btn-inverse.active.focus, 
+.btn-inverse.active:focus, 
+.btn-inverse.active:hover, 
+.btn-inverse:active.focus, 
+.btn-inverse:active:focus, 
+.btn-inverse:active:hover, 
+.open>.dropdown-toggle.btn-inverse.focus, 
+.open>.dropdown-toggle.btn-inverse:focus, 
+.open>.dropdown-toggle.btn-inverse:hover {
   color: #fff;
   background-color: #5a5a5b;
   border-color: #333;

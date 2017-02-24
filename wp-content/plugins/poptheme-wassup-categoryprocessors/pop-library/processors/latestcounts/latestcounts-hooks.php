@@ -18,7 +18,7 @@ class PoPThemeWassup_CategoryProcessors_LatestCounts_Hooks {
 
 	function get_allcontent_classes($classes) {
 
-		foreach (PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats() as $section_class) {
+		foreach (PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS)) as $section_class) {
 			$classes[] = 'post-'.$section_class;
 		}
 

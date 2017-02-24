@@ -348,6 +348,7 @@ popTypeahead = {
 
 			// Generate the code and append
 			var options = {extendContext: context}
+			popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 			var html = popManager.getTemplateHtml(pageSection, block, template, options);
 			popManager.mergeHtml(html, typeahead.find('.pop-box'));
 			popManager.runJSMethods(pageSection, block, template, 'last');

@@ -72,6 +72,8 @@ define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST', PoP_ServerUtils::get_templa
 define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-organizations-scroll-list'));
 define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-individuals-scroll-list'));
 
+// define ('GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-organizationmembers-scroll-list'));
+
 define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-authormembers-scroll-list'));
 
 /*********************************************
@@ -106,6 +108,7 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST,
+			// GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST,
 			
 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS,
 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW,
@@ -185,6 +188,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST => GD_TEMPLATE_SCROLL_ORGANIZATIONS_LIST,
 			GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST => GD_TEMPLATE_SCROLL_INDIVIDUALS_LIST,
 			
+			// GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST => GD_TEMPLATE_SCROLL_ORGANIZATIONMEMBERS_LIST,
+
 			/*********************************************
 			 * My Content Full Post Previews
 			 *********************************************/
@@ -237,6 +242,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST:
 
+			// case GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST:
+
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_THUMBNAIL:
@@ -286,6 +293,7 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST:
+			// case GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST:
 			
 				return GD_TEMPLATE_FILTER_ORGANIZATIONS;
 
@@ -366,6 +374,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST,
+
+			// GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST,
 
 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_LIST,
 		);
@@ -467,6 +477,7 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST:
+			// case GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST:
 			
 				$ret['role'] = GD_URE_ROLE_ORGANIZATION;
 				break;
@@ -498,6 +509,16 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 		if (in_array($template_id, $fullviews)) {
 			
 			$ret['limit'] = 6;
+		}
+
+		// Allow to override the limit by $atts (eg: for the Website Features, Filter section)
+		if ($limit = $this->get_att($template_id, $atts, 'limit')) {
+			$ret['limit'] = $limit;
+		}
+
+		// Allow to override the include by $atts (eg: for GetPoP Organization Membes demonstration)
+		if ($include = $this->get_att($template_id, $atts, 'include')) {
+			$ret['include'] = $include;
 		}
 
 		return $ret;
@@ -713,6 +734,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST:
 
+			// case GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST:
+
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_THUMBNAIL:
@@ -759,6 +782,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST:
 			
+			// case GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST:
+
 				return GD_TEMPLATE_MESSAGEFEEDBACK_ORGANIZATIONS;
 
 			case GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR:
@@ -803,6 +828,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST:
+
+			// case GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST:
 
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW:
@@ -895,6 +922,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST:
 
+			// case GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST:
+
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_THUMBNAIL:
@@ -957,6 +986,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST,
+
+			// GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST,
 
 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_LIST,
 		);
@@ -1075,6 +1106,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST,
 			GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST,
+
+			// GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST,
 			
 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS,
 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW,

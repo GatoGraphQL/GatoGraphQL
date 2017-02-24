@@ -72,6 +72,9 @@ popMap = {
 
 		// Hook the standalone map to the block activity
 		block.on('fetchCompleted', function(e, status) {
+			
+			// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
+			popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 
 			targets.each(function() {
 
@@ -297,7 +300,9 @@ popMap = {
 		$.each(markersInfo.markersOpen, function(index, markerId) {
 
 			markerPos = markersInfo.markersPos[markerId];
-			gMap.markers[markerPos].setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
+			if (gMap.markers[markerPos]) {
+				gMap.markers[markerPos].setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
+			}
 		});
 	},
 
@@ -494,7 +499,9 @@ popMap = {
 		// No need to remove the marker from the map, or update markersPos, because .setMap(null) simply hides the marker, not delete it
 		markerPos = markersInfo.markersPos[markerId];
 
-		gMap.markers[markerPos].setMap(null);
+		if (gMap.markers[markerPos]) {
+			gMap.markers[markerPos].setMap(null);
+		}
 
 		// Zoom
 		t.zoom(pageSection, block, map);

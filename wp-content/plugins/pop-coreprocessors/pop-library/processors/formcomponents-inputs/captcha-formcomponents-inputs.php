@@ -44,6 +44,12 @@ class GD_Template_Processor_CaptchaFormComponentInputs extends GD_Template_Proce
 
 		// Captcha: visible only if user not logged in
 		$this->append_att($template_id, $atts, 'class', 'visible-notloggedin');
+
+		// If we don't use the loggedinuser-data, then show the inputs always
+		if (!PoP_FormUtils::use_loggedinuser_data()) {
+			$this->append_att($template_id, $atts, 'class', 'visible-always');
+		}
+		
 		return parent::init_atts($template_id, $atts);
 	}
 }

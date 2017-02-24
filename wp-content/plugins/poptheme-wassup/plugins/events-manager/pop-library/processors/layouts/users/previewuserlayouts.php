@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-profile-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-profile-horizontalmapdetails'));
 define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-profile-mapdetails'));
 
 class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Processor_CustomPreviewUserLayoutsBase {
@@ -14,6 +15,7 @@ class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Proc
 	
 		return array(
 			GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS,
+			GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS,
 			GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS,
 		);
 	}
@@ -23,6 +25,7 @@ class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Proc
 		switch ($template_id) {
 
 			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS:
+			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS:
 			case GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS:
 
 				return GD_TEMPLATE_QUICKLINKGROUP_USERBOTTOM;
@@ -36,6 +39,7 @@ class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Proc
 		switch ($template_id) {
 
 			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS:
+			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS:
 			case GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS:
 
 				return GD_TEMPLATE_QUICKLINKGROUP_USER;
@@ -51,6 +55,7 @@ class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Proc
 		switch ($template_id) {
 
 			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS:
+			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS:
 
 				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS;
 				break;
@@ -73,9 +78,25 @@ class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Proc
 			case GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS:
 			
 				return GD_TEMPLATE_LAYOUT_USERAVATAR_120_RESPONSIVE;
+			
+			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS:
+			
+				return GD_TEMPLATE_LAYOUT_USERAVATAR_40;
 		}
 
 		return parent::get_useravatar_template($template_id);
+	}
+
+	function horizontal_media_layout($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS:
+
+				return true;
+		}
+
+		return parent::horizontal_media_layout($template_id);
 	}
 
 	// function show_short_description($template_id) {
@@ -98,6 +119,7 @@ class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Proc
 		switch ($template_id) {
 
 			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS:
+			case GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS:
 			case GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS:
 
 				$ret[GD_JS_CLASSES/*'classes'*/]['quicklinkgroup-bottom'] = 'icon-only pull-right';

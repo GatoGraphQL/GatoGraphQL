@@ -6,7 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // Embed
-define ('GD_TEMPLATE_LAYOUT_EMBEDPREVIEW', PoP_ServerUtils::get_template_definition('layout-embedpreview'));
+define ('GD_TEMPLATE_LAYOUT_EMBEDPREVIEW', PoP_ServerUtils::get_template_definition('layout-urlembedpreview'));
 define ('GD_TEMPLATE_LAYOUT_USERINPUTEMBEDPREVIEW', PoP_ServerUtils::get_template_definition('layout-userinputembedpreview'));
 
 class GD_Template_Processor_EmbedPreviewLayouts extends GD_Template_Processor_EmbedPreviewLayoutsBase {
@@ -18,7 +18,7 @@ class GD_Template_Processor_EmbedPreviewLayouts extends GD_Template_Processor_Em
 			GD_TEMPLATE_LAYOUT_USERINPUTEMBEDPREVIEW,
 		);
 	}
-	function get_frame_src($template_id) {
+	function get_frame_src($template_id, $atts) {
 
 		switch ($template_id) {
 			
@@ -27,7 +27,7 @@ class GD_Template_Processor_EmbedPreviewLayouts extends GD_Template_Processor_Em
 				return apply_filters('GD_Template_Processor_EmbedPreviewLayouts:get_frame_src', '');
 		}
 
-		return parent::get_frame_src($template_id);
+		return parent::get_frame_src($template_id, $atts);
 	}
 }
 

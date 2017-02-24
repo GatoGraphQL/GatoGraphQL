@@ -25,6 +25,7 @@ define ('GD_TEMPLATE_CONTROLGROUP_BLOCKUSERLIST', PoP_ServerUtils::get_template_
 define ('GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLIST', PoP_ServerUtils::get_template_definition('controlgroup-submenuuserlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLISTMAIN', PoP_ServerUtils::get_template_definition('controlgroup-submenuuserlistmain'));
 define ('GD_TEMPLATE_CONTROLGROUP_SHARE', PoP_ServerUtils::get_template_definition('controlgroup-share'));
+define ('GD_TEMPLATE_CONTROLGROUP_FIXEDSHARE', PoP_ServerUtils::get_template_definition('controlgroup-fixedshare'));
 // define ('GD_TEMPLATE_CONTROLGROUP_NAVIGATORPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-navigatorpostlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_MYPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-mypostlist'));
 define ('GD_TEMPLATE_CONTROLGROUP_MYBLOCKPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-myblockpostlist'));
@@ -79,6 +80,7 @@ class GD_Template_Processor_CustomControlGroups extends GD_Template_Processor_Co
 			GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLIST,
 			GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLISTMAIN,
 			GD_TEMPLATE_CONTROLGROUP_SHARE,
+			GD_TEMPLATE_CONTROLGROUP_FIXEDSHARE,
 			// GD_TEMPLATE_CONTROLGROUP_NAVIGATORPOSTLIST,
 			// GD_TEMPLATE_CONTROLGROUP_USERLAYOUT,
 			GD_TEMPLATE_CONTROLGROUP_MYPOSTLIST,
@@ -243,6 +245,11 @@ class GD_Template_Processor_CustomControlGroups extends GD_Template_Processor_Co
 				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_SUBMENU_XS;
 				// }
 				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_SHARE;
+				break;
+
+			case GD_TEMPLATE_CONTROLGROUP_FIXEDSHARE:
+
+				$ret[] = GD_TEMPLATE_CONTROLBUTTONGROUP_FIXEDSHARE;
 				break;
 
 			// case GD_TEMPLATE_CONTROLGROUP_NAVIGATORPOSTLIST:

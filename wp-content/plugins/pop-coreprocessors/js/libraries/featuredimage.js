@@ -117,6 +117,7 @@ popFeaturedImage = {
 		
 		// Run again the Handlebars template to re-print the image with the new data
 		var template = featuredImage.data('merge-template');
+		popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 		popManager.mergeTargetTemplate(pageSection, block, template, options);
 		popManager.runJSMethods(pageSection, block, template, 'full');
 	},

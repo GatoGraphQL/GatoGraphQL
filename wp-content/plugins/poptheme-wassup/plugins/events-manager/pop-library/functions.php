@@ -344,13 +344,13 @@ function gd_em_tagsectiontabpanelblockgroups_blocks($blockgroup_blocks, $blockgr
 
 	return $blockgroup_blocks;
 }
-add_filter('GD_Template_Processor_TopLevelCarouselBlockGroups:blockgroup_blocks', 'gd_em_websitefeatures_whoweare_blockgroups_blocks', 10, 2);
-add_filter('GetPoP_Template_Processor_SectionTabPanelBlockGroups:blockgroup_blocks', 'gd_em_websitefeatures_whoweare_blockgroups_blocks', 10, 2);
-function gd_em_websitefeatures_whoweare_blockgroups_blocks($blockgroup_blocks, $template_id) {
+// add_filter('GD_Template_Processor_TopLevelCarouselBlockGroups:blockgroup_blocks', 'gd_em_websitefeatures_whoweare_blockgroups_blocks', 10, 2);
+// add_filter('GetPoP_Template_Processor_SectionTabPanelBlockGroups:blockgroup_blocks', 'gd_em_websitefeatures_whoweare_blockgroups_blocks', 10, 2);
+// function gd_em_websitefeatures_whoweare_blockgroups_blocks($blockgroup_blocks, $template_id) {
 
-	$blockgroup_blocks[] = GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP;
-	return $blockgroup_blocks;
-}
+// 	$blockgroup_blocks[] = GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP;
+// 	return $blockgroup_blocks;
+// }
 add_filter('GD_Template_Processor_TopLevelCarouselBlockGroups:panel_header_title', 'gd_em_websitefeatures_whoweare_panelheadertitle', 10, 2);
 function gd_em_websitefeatures_whoweare_panelheadertitle($title, $blockunit) {
 

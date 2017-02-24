@@ -10,6 +10,7 @@ define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ALLCONTENT', PoP_ServerUtils::get_temp
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('sidebarinner-section-webpostlinks'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_HIGHLIGHTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-highlights'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_WEBPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-webposts'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_POSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-posts'));
 
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_SEARCHUSERS', PoP_ServerUtils::get_template_definition('sidebarinner-section-searchusers'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ALLUSERS', PoP_ServerUtils::get_template_definition('sidebarinner-section-allusers'));
@@ -23,6 +24,7 @@ define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYCONTENT', PoP_ServerUtils::get_templ
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTLINKS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mywebpostlinks'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-myhighlights'));
 define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mywebposts'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-myposts'));
 
 define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_MAINALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-mainallcontent'));
 define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-allcontent'));
@@ -44,6 +46,7 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 			GD_TEMPLATE_SIDEBARINNER_SECTION_WEBPOSTLINKS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_HIGHLIGHTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_WEBPOSTS,
+			GD_TEMPLATE_SIDEBARINNER_SECTION_POSTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_SEARCHUSERS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_ALLUSERS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_ALLUSERS_NOFILTER,
@@ -54,6 +57,7 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTLINKS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYHIGHLIGHTS,
 			GD_TEMPLATE_SIDEBARINNER_SECTION_MYWEBPOSTS,
+			GD_TEMPLATE_SIDEBARINNER_SECTION_MYPOSTS,
 			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_MAINALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_ALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_WEBPOSTS,
@@ -119,6 +123,12 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_WEBPOSTS;
 				break;
 
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_POSTS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_SECTION;//GD_TEMPLATE_BUTTONGROUP_WEBPOSTS;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_POSTS;
+				break;
+
 			case GD_TEMPLATE_SIDEBARINNER_SECTION_SEARCHUSERS:
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_USERS;//GD_TEMPLATE_BUTTONGROUP_SEARCHUSERS;
@@ -158,6 +168,12 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_MYCONTENT;//GD_TEMPLATE_BUTTONGROUP_MYWEBPOSTS;
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_MYWEBPOSTS;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_SECTION_MYPOSTS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_MYCONTENT;//GD_TEMPLATE_BUTTONGROUP_MYWEBPOSTS;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_MYPOSTS;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_TAGSECTION_MAINALLCONTENT:

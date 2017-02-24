@@ -1,0 +1,1 @@
+<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_COMPONENTS ?>" class="components pop-merge <?php echo GD_TEMPLATE_PAGESECTION_COMPONENTS ?>"></div>

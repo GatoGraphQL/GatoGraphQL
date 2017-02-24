@@ -44,11 +44,14 @@ popControls = {
 
 			e.preventDefault();
 			var control = $(this);
-			var url = t.getBlockFilteringUrl(pageSection, control, true);
+
+			// Allow to set a fixed URL (eg: to share the website url), if not, take it from the block
+			var url = control.data('shareurl') ? control.data('shareurl') : t.getBlockFilteringUrl(pageSection, control, true);
+			var title = control.data('sharetitle') ? control.data('sharetitle') : popManager.documentTitle;
 
 			var provider = control.data('provider');
 			var settings = M.SOCIALMEDIA[provider];
-			var shareUrl = settings['share-url'].replace(new RegExp('%url%', 'g'), encodeURIComponent(url)).replace(new RegExp('%title%', 'g'), encodeURIComponent(popManager.documentTitle));
+			var shareUrl = settings['share-url'].replace(new RegExp('%url%', 'g'), encodeURIComponent(url)).replace(new RegExp('%title%', 'g'), encodeURIComponent(title));
 
 			popSystem.openSocialMedia(shareUrl);
 		});

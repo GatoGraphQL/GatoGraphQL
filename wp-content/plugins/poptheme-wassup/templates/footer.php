@@ -16,6 +16,9 @@
 		</div>
 		<?php
 		
+		// Include the 'Components' panel
+		include POPTHEME_WASSUP_TEMPLATES.'/components.php';
+
 		// Include the 'Modals' panel
 		include POPTHEME_WASSUP_TEMPLATES.'/modals.php';
 

@@ -129,7 +129,24 @@ class GD_URE_Custom_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_Field
 					}
 					return false;
 				}
-				break;																													
+				break;	
+			
+			case 'members':
+
+				if (gd_ure_is_organization($fieldprocessor->get_id($user))) {
+					return URE_CommunityUtils::get_community_members($fieldprocessor->get_id($user));
+				}
+				break;	
+			
+			case 'has-members':
+
+				if (gd_ure_is_organization($fieldprocessor->get_id($user))) {	
+					if ($fieldprocessor->get_value($user, 'members')) {
+						return true;
+					}
+					return false;
+				}
+				break;																												
 		}
 
 		return parent::get_value($user, $field, $fieldprocessor);

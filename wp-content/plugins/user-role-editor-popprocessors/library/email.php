@@ -76,6 +76,6 @@ function gd_ure_sendemail_community_newmember($user_id, $communities) {
 		);
 	
 		$email = get_the_author_meta('user_email', $community);	
-		sendemail_to_users($email, $community_name, $subject, $content);	
+		PoP_EmailSender_Utils::sendemail_to_users($email, $community_name, $subject, $content);	
 	}
 }

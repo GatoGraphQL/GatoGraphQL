@@ -61,6 +61,7 @@ define ('GD_TEMPLATESOURCE_LAYOUT_CATEGORIES', 'layout-categories');
 define ('GD_TEMPLATESOURCE_LAYOUT_COMMENT', 'layout-comment');
 define ('GD_TEMPLATESOURCE_LAYOUT_DATAQUERY_UPDATEDATA', 'layout-dataquery-updatedata');
 define ('GD_TEMPLATESOURCE_LAYOUT_EMBEDPREVIEW', 'layout-embedpreview');
+define ('GD_TEMPLATESOURCE_LAYOUT_INITJSDELAY', 'layout-initjs-delay');
 define ('GD_TEMPLATESOURCE_LAYOUT_FULLOBJECTTITLE', 'layout-fullobjecttitle');
 define ('GD_TEMPLATESOURCE_LAYOUT_FULLVIEW', 'layout-fullview');
 define ('GD_TEMPLATESOURCE_LAYOUT_FULLUSER', 'layout-fulluser');

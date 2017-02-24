@@ -303,7 +303,6 @@ class GD_Template_Processor_CustomPreviewPostLayouts extends GD_Template_Process
 				$ret[] = GD_TEMPLATE_LAYOUT_PUBLISHED;
 				break;
 
-			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_LIST:
 			case GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_THUMBNAIL:
 
 				$ret[] = GD_TEMPLATE_LAYOUT_PUBLISHED;

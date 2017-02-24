@@ -17,6 +17,7 @@ require_once 'useravatarlayouts-base.php';
 require_once 'popoverlayouts-base.php';
 require_once 'segmentedbutton-links-base.php';
 require_once 'embedpreviews-base.php';
+require_once 'initjs-delays-base.php';
 require_once 'reloadembedpreviewconnectors-base.php';
 require_once 'published-base.php';
 // require_once 'singlelayouts-base.php';

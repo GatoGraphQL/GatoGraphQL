@@ -95,6 +95,8 @@ define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_LIST', PoP_ServerUtils::get_template_defi
 define ('GD_TEMPLATE_SCROLL_WEBPOSTS_LIST', PoP_ServerUtils::get_template_definition('scroll-webposts-list'));
 define ('GD_TEMPLATE_SCROLL_TAGS_LIST', PoP_ServerUtils::get_template_definition('scroll-tags-list'));
 
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_LINE', PoP_ServerUtils::get_template_definition('scroll-webposts-line'));
+
 define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_LIST', PoP_ServerUtils::get_template_definition('scroll-searchusers-list'));
 define ('GD_TEMPLATE_SCROLL_ALLUSERS_LIST', PoP_ServerUtils::get_template_definition('scroll-allusers-list'));
 define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_LIST', PoP_ServerUtils::get_template_definition('scroll-authorfollowers-list'));
@@ -172,10 +174,10 @@ class GD_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsB
 			GD_TEMPLATE_SCROLL_SEARCHUSERS_LIST,
 			GD_TEMPLATE_SCROLL_ALLUSERS_LIST,
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_LIST,
-			GD_TEMPLATE_SCROLL_WEBPOSTS_LIST,
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_LIST,
 			GD_TEMPLATE_SCROLL_AUTHORSUBSCRIBEDTOTAGS_LIST,
 			GD_TEMPLATE_SCROLL_TAGS_LIST,
+			GD_TEMPLATE_SCROLL_WEBPOSTS_LINE,
 			// GD_TEMPLATE_SCROLL_AUTHORALLCONTENT_SIMPLEVIEW,
 			// GD_TEMPLATE_SCROLL_AUTHORLINKS_SIMPLEVIEW,
 			// GD_TEMPLATE_SCROLL_AUTHORWEBPOSTS_SIMPLEVIEW,
@@ -266,6 +268,7 @@ class GD_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsB
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_LIST => GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWERS_LIST,
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_LIST => GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWINGUSERS_LIST,
 			GD_TEMPLATE_SCROLL_AUTHORSUBSCRIBEDTOTAGS_LIST => GD_TEMPLATE_SCROLLINNER_AUTHORSUBSCRIBEDTOTAGS_LIST,
+			GD_TEMPLATE_SCROLL_WEBPOSTS_LINE => GD_TEMPLATE_SCROLLINNER_WEBPOSTS_LINE,
 			// GD_TEMPLATE_SCROLL_AUTHORALLCONTENT_SIMPLEVIEW => GD_TEMPLATE_SCROLLINNER_AUTHORALLCONTENT_SIMPLEVIEW,
 			// GD_TEMPLATE_SCROLL_AUTHORLINKS_SIMPLEVIEW => GD_TEMPLATE_SCROLLINNER_AUTHORLINKS_SIMPLEVIEW,
 			// GD_TEMPLATE_SCROLL_AUTHORWEBPOSTS_SIMPLEVIEW => GD_TEMPLATE_SCROLLINNER_AUTHORWEBPOSTS_SIMPLEVIEW,
@@ -338,6 +341,9 @@ class GD_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsB
 		$independentitem_lists = array(
 			GD_TEMPLATE_SCROLL_HIGHLIGHTS_LIST,
 			// GD_TEMPLATE_SCROLL_WEBPOSTS_LIST,
+		);
+		$lines = array(
+			GD_TEMPLATE_SCROLL_WEBPOSTS_LINE,
 		);
 		$details = array(
 			GD_TEMPLATE_SCROLL_SEARCHPOSTS_DETAILS,
@@ -451,6 +457,9 @@ class GD_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsB
 		}
 		elseif (in_array($template_id, $independentitem_lists)) {
 			$extra_class = 'list independent';
+		}
+		elseif (in_array($template_id, $lines)) {
+			$extra_class = 'line';
 		}
 		$this->append_att($template_id, $atts, 'class', $extra_class);
 

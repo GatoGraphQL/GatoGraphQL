@@ -51,4 +51,25 @@ class GD_Template_Processor_SidebarBlockGroupsBase extends GD_Template_Processor
 
 		return $ret;
 	}
+
+	function get_blockgroup_blockgroups($template_id) {
+
+		$ret = parent::get_blockgroup_blockgroups($template_id);
+
+		// Allow to add the customized Blog block in GetPoP
+		if ($blockgroups = apply_filters(
+				'GD_Template_Processor_SidebarBlockGroupsBase:blockgroups',
+				array(),
+				$this->get_screengroup($template_id),
+				$this->get_screen($template_id),
+				$template_id
+			)) {
+			$ret = array_merge(
+				$ret,
+				$blockgroups
+			);
+		}
+
+		return $ret;
+	}
 }

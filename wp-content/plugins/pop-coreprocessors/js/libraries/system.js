@@ -557,9 +557,13 @@ popSystem = {
 
 			targets.each(function() {
 				var target = $(this);
-				var jsSettings = popManager.getJsSettings(pageSection, block, target);
-				var animate = jsSettings['scrolltop-animate'] || false;
-				popManager.scrollToElem(target, target, animate);
+
+				// Comment Leo 15/02/2017: Make sure the target still exists, because it may have been destroyed already but the hook still stays on
+				if ($('#'+target.attr('id')).length) {
+					var jsSettings = popManager.getJsSettings(pageSection, block, target);
+					var animate = jsSettings['scrolltop-animate'] || false;
+					popManager.scrollToElem(target, target, animate);
+				}
 			});
 		});
 	},
@@ -882,6 +886,11 @@ popSystem = {
 
 				// Allow other components to clear themselves. Eg: editor
 				targets.triggerHandler('clear');
+			}
+
+			// If there is feedback, scroll to it
+			if (blockFeedback['show-msgs'] && blockFeedback['msgs'] && blockFeedback['msgs'].length) {
+				popManager.scrollToElem(pageSection, block.children('.blocksection-messagefeedback').first(), true);
 			}
 
 			popManager.maybeRedirect(blockFeedback);

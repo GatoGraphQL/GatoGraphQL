@@ -56,8 +56,22 @@ popCustomBootstrap = {
 		t.activateNestedComponents(pageSection, newDOMs);
 
 		// t.handleHistoryState(pageSection, newDOMs);
+		// t.handleEvents(pageSection, newDOMs);
 		t.showComponentInitializeJS(pageSection, newDOMs);
 		t.triggerTabPaneEvents(newDOMs);
+	},
+
+	onBootstrapEventWindowResize : function(args) {
+
+		var t = this;
+		var targets = args.targets;
+
+		// Whenever any of this events are trigger, resize the window to refresh Waypoints
+		// For the collapse also calculate when closing, because it may be that no other collapse panel is opening
+		// For tabPane and carousel, since another one is opening, the resize shall be triggered then
+		targets.find('.collapse').addBack('.collapse').on('shown.bs.collapse hidden.bs.collapse', windowResize);
+		targets.find('.tab-pane').addBack('.tab-pane').on('shown.bs.tabpane', windowResize);
+		targets.find('.carousel').addBack('.carousel').on('slid.bs.carousel', windowResize);
 	},
 		
 	isHidden : function(args) {
@@ -252,11 +266,15 @@ popCustomBootstrap = {
 				'force-init': true
 			};
 			
-			// If the relatedTarget has intercept-url, then pass it along initBlock to know what URL this tabPane must handle
-			var url = component.data('intercept-url');
+			// 1. If the relatedTarget has intercept-url, then pass it along initBlock to know what URL this tabPane must handle
+			// 2. Otherwise, if we are initializing a lazy block, using initjs_blockbranches, then the paramsscope-url must point to that original URL, and not to the URL in the topLevelFeedback at the moment the initialization takes place.
+			// Otherwise, when initializing GetPoP decentralized calendar, it takes the url to be /loggedinuser-data/, which was the last url accessed before initializing the module
+			// Simply get the paramsscope-url from data attribute 'original-url'
+			var url = component.data('intercept-url') || component.data('original-url');
 			if (url) {
 				options.url = url;
 			}
+
 			popManager.initBlockBranches(pageSection, blocks, options);
 			
 			// Pass the event originating everything (e). This way, we can already execute JS code
@@ -580,7 +598,15 @@ popCustomBootstrap = {
 					// Save the position of the tabPane being hidden for when clicking back into this tab scroll directly to that position
 					var tabPane = $(this);
 					var previousTabPane = tabPane.siblings('.active');
-					t.savePosition(pageSection, previousTabPane);
+
+					// Comment Leo 15/02/2017: if it has no active tabPanes, then the clicked on tabPane is the one currently active
+					// So then save its current position, so that below, when doing newPageSectionJS, it scrolls to where it already is (otherwise, it may go to the top)
+					if (previousTabPane.length) {
+						t.savePosition(pageSection, previousTabPane);
+					}
+					// else {
+					// 	t.savePosition(pageSection, tabPane);
+					// }
 				})
 				.on('shown.bs.tabpane', function() {
 				
@@ -627,12 +653,26 @@ popCustomBootstrap = {
 		popBootstrap.closeModals();
 
 		// Scroll Top / Last position
-		var pos = 0, theater;
+		var theater;
 		if (tabPane) {
-			pos = tabPane.data('lastposition') || 0;
+			
+			// If the tabPane had saved a position...
+			if (tabPane.data('lastposition')) {
+
+				// Scroll to it
+				popManager.scrollTop(pageSection, tabPane.data('lastposition'));
+
+				// Delete the position, since now the tabPane is active. It will be regenerated when switching out to another tabPane
+				// Otherwise, if opening the hover pageSection and close, and this tabPane was always active, it will once again scroll it to that previous position
+				tabPane.data('lastposition', null);
+			}
 			theater = tabPane.data('theater') || false;
+			tabPane.data('theater', null);
 		}
-		popManager.scrollTop(pageSection, pos);
+		else {
+			// New pageSection, so scroll to the top
+			popManager.scrollTop(pageSection, 0);
+		}
 
 		// Remove theater mode?
 		if (removeTheather && !theater) {
@@ -654,4 +694,4 @@ popCustomBootstrap = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popCustomBootstrap, ['initDocument', 'runScriptsBefore', 'pageSectionNewDOMsInitialized', 'activeTabLink', 'isHidden', 'isActive'], true);
-popJSLibraryManager.register(popCustomBootstrap, ['customQuickView', 'destroyPageOnModalClose', 'customCloseModals', 'activatePageTab']);
+popJSLibraryManager.register(popCustomBootstrap, ['customQuickView', 'destroyPageOnModalClose', 'customCloseModals', 'activatePageTab', 'onBootstrapEventWindowResize']);

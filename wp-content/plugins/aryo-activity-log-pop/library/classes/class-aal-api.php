@@ -489,7 +489,7 @@ class AAL_PoP_API extends AAL_API {
 					'AAL_PoP_API:notifications:userplusnetwork-user:actions',
 					array(
 						AAL_POP_ACTION_USER_FOLLOWSUSER,
-						// AAL_POP_ACTION_USER_UNFOLLOWSUSER,
+						AAL_POP_ACTION_USER_UNFOLLOWSUSER,
 					)
 				);
 				if ($actions) {
@@ -1319,6 +1319,7 @@ class AAL_PoP_API extends AAL_API {
 					'AAL_PoP_API:additional_notificatios:markasread:users:actions',
 					array(
 						AAL_POP_ACTION_USER_FOLLOWSUSER,
+						AAL_POP_ACTION_USER_UNFOLLOWSUSER,
 					)
 				);
 				$sameuser_actions = apply_filters(

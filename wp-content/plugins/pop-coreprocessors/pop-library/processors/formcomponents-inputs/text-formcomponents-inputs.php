@@ -107,13 +107,17 @@ class GD_Template_Processor_TextFormComponentInputs extends GD_Template_Processo
 			case GD_TEMPLATE_FORMCOMPONENT_TARGETTITLE:
 
 				// fill the input when a new Addon PageSection is created
-				$this->add_jsmethod($ret, 'fillAddonInput');
+				if ($atts['replicable']) {
+					$this->add_jsmethod($ret, 'fillAddonInput');
+				}
 				break;
 
 			case GD_TEMPLATE_FORMCOMPONENT_TARGETURL:
 
 				// fill the input when a new Addon PageSection is created
-				$this->add_jsmethod($ret, 'fillAddonURLInput');
+				if ($atts['replicable']) {
+					$this->add_jsmethod($ret, 'fillAddonURLInput');
+				}
 				break;
 
 			case GD_TEMPLATE_FORMCOMPONENT_BROWSERURL:
@@ -186,6 +190,11 @@ class GD_Template_Processor_TextFormComponentInputs extends GD_Template_Processo
 			case GD_TEMPLATE_FORMCOMPONENT_SENDERNAME:
 				
 				$this->append_att($template_id, $atts, 'class', 'visible-notloggedin');
+
+				// If we don't use the loggedinuser-data, then show the inputs always
+				if (!PoP_FormUtils::use_loggedinuser_data()) {
+					$this->append_att($template_id, $atts, 'class', 'visible-always');
+				}
 				break;
 		}
 		

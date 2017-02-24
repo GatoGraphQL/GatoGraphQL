@@ -10,8 +10,8 @@
 	{{/compare}}
 	<div class="carousel-inner" role="listbox">
 		{{#each settings-ids.blockunits}}
-			<div id="{{lastGeneratedId context=../. group=bootstrap-type}}-{{this}}" class="item {{#compare ../active this}}active{{/compare}} {{../panel-class}} {{get ../custom-panel-class this}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
-				<div id="{{lastGeneratedId context=../. group=bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}">
+			<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" class="item {{#compare ../active this}}active{{/compare}} {{../panel-class}} {{get ../custom-panel-class this}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
+				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}">
 					{{#compare ../panel-header-type "indicators-internal"}}
 						<div class="carousel-indicators {{../panelheader-class}}" {{#each ../panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 							{{#each ../../panel-headers}}

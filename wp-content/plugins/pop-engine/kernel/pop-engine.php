@@ -60,6 +60,9 @@ class PoP_Engine {
 	}
 
 	function output() {
+
+		do_action('PoP_Engine:beginning');	
+		do_action('PoP_Engine:output:beginning');
 	
 		// Check first if there is any redirection to be done (user logged in when should not / etc)
 		// Commented, because php has already been written to buffer when calling get_header() in page.php. So the call
@@ -136,7 +139,10 @@ class PoP_Engine {
 	function output_json() {
 
 		// Indicate that this is a json response in the HTTP Header
-		header('Content-type: application/json');	
+		header('Content-type: application/json');
+
+		do_action('PoP_Engine:beginning');	
+		do_action('PoP_Engine:output_json:beginning');	
 
 		$template_id = $this->get_toplevel_template_id();
 

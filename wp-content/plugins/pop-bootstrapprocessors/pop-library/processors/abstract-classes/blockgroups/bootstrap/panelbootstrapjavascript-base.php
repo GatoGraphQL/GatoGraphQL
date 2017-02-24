@@ -51,7 +51,10 @@ class GD_Template_Processor_PanelBootstrapJavascriptBlockGroupsBase extends GD_T
 
 	function get_panel_params($template_id, $atts) {
 
-		return array();
+		// Parameter needed to know what was the loaded URL, as to initialize lazy components (eg: collapse first time it opens)
+		return array(
+			'data-original-url' => GD_TemplateManager_Utils::get_current_url(),
+		);
 	}
 
 	function get_custom_panel_class($template_id, $atts) {
@@ -70,9 +73,13 @@ class GD_Template_Processor_PanelBootstrapJavascriptBlockGroupsBase extends GD_T
 		$blockunits = $this->get_blockgroup_blockunits($template_id);
 		foreach ($blockunits as $blockunit) {
 			
-			$blockunit_processor = $gd_template_processor_manager->get_processor($blockunit);
-			$blockunit_settings_id = $blockunit_processor->get_settings_id($blockunit);
-			$ret[$blockunit_settings_id]['data-initjs-targets'] = '#'.$atts['block-id'].'-'.$blockunit_settings_id.'-container > div.pop-block';
+			$blockunit_settings_id = $gd_template_processor_manager->get_processor($blockunit)->get_settings_id($blockunit);
+			$frontend_id = GD_TemplateManager_Utils::get_frontend_id($atts['block-id'], $this->get_bootstrapcomponent_type($template_id));
+			$ret[$blockunit_settings_id]['data-initjs-targets'] = sprintf(
+				'%s > %s',
+				'#'.$frontend_id.'-'.$blockunit_settings_id.'-container',
+				'div.pop-block'
+			);
 		}
 
 		return $ret;
@@ -97,15 +104,24 @@ class GD_Template_Processor_PanelBootstrapJavascriptBlockGroupsBase extends GD_T
 
 		$ret = array();
 		
-		$id = $atts['block-id'];
+		// $frontend_id = $atts['block-id'];
+		// $frontend_id = GD_TemplateManager_Utils::get_frontend_id($atts['block-id'], $this->get_bootstrapcomponent_type($template_id));
 		$blockunits = $this->get_blockgroup_blockunits($template_id);
 		foreach ($blockunits as $blockunit) {
 			
 			$blockunit_settings_id = $gd_template_processor_manager->get_processor($blockunit)->get_settings_id($blockunit);
+			$frontend_id = GD_TemplateManager_Utils::get_frontend_id($atts['block-id'], $this->get_bootstrapcomponent_type($template_id));
+			$container_frontend_id = GD_TemplateManager_Utils::get_frontend_id($atts['block-id'], $this->get_bootstrapcomponent_type($template_id));
+			// $ret[] = sprintf(
+			// 	'%s > %s > %s',
+			// 	'#'.$frontend_id.'-'.$blockunit_settings_id.'.'.$this->get_panelactive_class($template_id),
+			// 	'#'.$frontend_id.'-'.$blockunit_settings_id.'-container',
+			// 	'div.pop-block'
+			// );
 			$ret[] = sprintf(
 				'%s > %s > %s',
-				'#'.$id.'-'.$blockunit_settings_id.'.'.$this->get_panelactive_class($template_id),
-				'#'.$id.'-'.$blockunit_settings_id.'-container',
+				'#'.$frontend_id.'-'.$blockunit_settings_id.'.'.$this->get_panelactive_class($template_id),
+				'#'.$container_frontend_id.'-'.$blockunit_settings_id.'-container',
 				'div.pop-block'
 			);
 		}

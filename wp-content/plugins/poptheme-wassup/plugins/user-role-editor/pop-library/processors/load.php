@@ -12,6 +12,7 @@ require_once 'controls/load.php';
 require_once 'createupdateprofile/load.php';
 require_once 'layouts/load.php';
 require_once 'messagefeedbacks/load.php';
+require_once 'elements/load.php';
 require_once 'filters/load.php';
 require_once 'forms/load.php';
 require_once 'formcomponents-inputs/load.php';

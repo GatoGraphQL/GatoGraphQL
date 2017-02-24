@@ -52,6 +52,7 @@ handlebars layouts/layout-author-userphoto.tmpl -m --extension=tmpl -f ../dist/t
 handlebars layouts/layout-authorcontent.tmpl -m --extension=tmpl -f ../dist/templates/layout-authorcontent.tmpl.js
 handlebars layouts/layout-categories.tmpl -m --extension=tmpl -f ../dist/templates/layout-categories.tmpl.js
 handlebars layouts/layout-embedpreview.tmpl -m --extension=tmpl -f ../dist/templates/layout-embedpreview.tmpl.js
+handlebars layouts/layout-initjs-delay.tmpl -m --extension=tmpl -f ../dist/templates/layout-initjs-delay.tmpl.js
 handlebars layouts/layout-fullobjecttitle.tmpl -m --extension=tmpl -f ../dist/templates/layout-fullobjecttitle.tmpl.js
 handlebars layouts/layout-marker.tmpl -m --extension=tmpl -f ../dist/templates/layout-marker.tmpl.js
 handlebars layouts/layout-menu-collapsesegmentedbutton.tmpl -m --extension=tmpl -f ../dist/templates/layout-menu-collapsesegmentedbutton.tmpl.js

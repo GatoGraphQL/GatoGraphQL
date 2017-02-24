@@ -35,6 +35,7 @@ require_once POP_COREPROCESSORS_LIB.'/captcha/load.php';
 require_once POP_COREPROCESSORS_LIB.'/classes.php';
 require_once POP_COREPROCESSORS_LIB.'/comments.php';
 require_once POP_COREPROCESSORS_LIB.'/content.php';
+require_once POP_COREPROCESSORS_LIB.'/form-utils.php';
 // require_once POP_COREPROCESSORS_LIB.'/formatting.php';
 require_once POP_COREPROCESSORS_LIB.'/dataload.php';
 require_once POP_COREPROCESSORS_LIB.'/date.php';

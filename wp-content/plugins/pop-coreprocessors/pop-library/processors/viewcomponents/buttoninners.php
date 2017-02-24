@@ -133,7 +133,7 @@ class GD_Template_Processor_ViewComponentButtonInners extends GD_Template_Proces
 
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN:
 
-				return __('Flag', 'pop-coreprocessors');
+				return __('Flag as inappropriate', 'pop-coreprocessors');
 			
 			case GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG:
 

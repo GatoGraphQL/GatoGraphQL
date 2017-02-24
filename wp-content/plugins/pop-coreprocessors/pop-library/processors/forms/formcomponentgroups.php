@@ -176,6 +176,11 @@ class GD_Template_Processor_FormComponentGroups extends GD_Template_Processor_Fo
 			case GD_TEMPLATE_FORMCOMPONENTGROUP_SENDERNAME:
 				
 				$this->append_att($template_id, $atts, 'class', 'visible-notloggedin');
+
+				// If we don't use the loggedinuser-data, then show the inputs always
+				if (!PoP_FormUtils::use_loggedinuser_data()) {
+					$this->append_att($template_id, $atts, 'class', 'visible-always');
+				}
 				break;
 
 			case GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:

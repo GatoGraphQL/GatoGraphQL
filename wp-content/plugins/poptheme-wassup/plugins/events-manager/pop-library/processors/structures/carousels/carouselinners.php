@@ -30,9 +30,9 @@ class GD_EM_Template_Processor_CustomCarouselInners extends GD_Template_Processo
 
 				// Check if this value has already been set-up from above. Eg: Upcoming Events for TPP Debate
 				// is 1x1, not 1x3
-				if ($grid = $this->get_att($template_id, $atts, 'layout-grid')) {
-					return $grid;
-				}
+				// if ($grid = $this->get_att($template_id, $atts, 'layout-grid')) {
+				// 	return $grid;
+				// }
 
 				return apply_filters(
 					'GD_EM_Template_Processor_CustomCarouselInners:grid', 

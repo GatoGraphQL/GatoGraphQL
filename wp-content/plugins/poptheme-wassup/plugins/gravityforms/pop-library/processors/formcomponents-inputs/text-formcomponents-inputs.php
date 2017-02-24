@@ -98,7 +98,7 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 		
 		// When submitting the form, if user is logged in, then use these values. 
 		// Otherwise, use the values sent in the form
-		if (doing_post() && is_user_logged_in()) {
+		if (PoP_FormUtils::use_loggedinuser_data() && doing_post() && is_user_logged_in()) {
 				
 			$current_user = wp_get_current_user();
 			switch ($template_id) {
@@ -131,6 +131,11 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 			case GD_GF_TEMPLATE_FORMCOMPONENT_EMAIL:
 				
 				$this->append_att($template_id, $atts, 'class', 'visible-notloggedin');
+
+				// If we don't use the loggedinuser-data, then show the inputs always
+				if (!PoP_FormUtils::use_loggedinuser_data()) {
+					$this->append_att($template_id, $atts, 'class', 'visible-always');
+				}
 				break;
 		}
 		

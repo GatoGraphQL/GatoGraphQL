@@ -733,10 +733,11 @@ popFunctions = {
 
 		// Run again the Handlebars template to re-print the image with the new data
 		var template = iframe.data('templateid');
+		popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 		var merged = popManager.mergeTargetTemplate(pageSection, block, template, options);
 		popManager.runJSMethods(pageSection, block, template, 'full');
 
-		// Set the new iframe id on the block
+		// Set the Block URL to indicate from where the session-ids must be retrieved
 		var iframeid = popJSRuntimeManager.getLastGeneratedId(popManager.getSettingsId(pageSection), popManager.getSettingsId(block), template);
 		block.data('embed-iframe', '#'+iframeid);
 

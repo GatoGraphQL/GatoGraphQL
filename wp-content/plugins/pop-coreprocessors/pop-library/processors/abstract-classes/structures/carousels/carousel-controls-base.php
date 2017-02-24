@@ -51,12 +51,17 @@ class GD_Template_Processor_CarouselControlsBase extends GD_Template_ProcessorBa
 
 		return null;
 	}
+	protected function get_html_tag($template_id, $atts) {
+
+		return 'h4';
+	}
 
 	function get_template_configuration($template_id, $atts) {
 
 		$ret = parent::get_template_configuration($template_id, $atts);
 
 		$ret['carousel-template'] = $this->get_att($template_id, $atts, 'carousel-template');
+		$ret['html-tag'] = $this->get_att($template_id, $atts, 'html-tag');
 
 		if ($control_class = $this->get_control_class($template_id)) {
 			$ret[GD_JS_CLASSES/*'classes'*/]['control'] = $control_class;
@@ -69,7 +74,7 @@ class GD_Template_Processor_CarouselControlsBase extends GD_Template_ProcessorBa
 		}
 		if ($title = $this->get_title($template_id)) {
 
-			if ($title_class = $this->get_title_class($template_id)) {
+			if ($title_class = $this->get_att($template_id, $atts, 'title-class')) {
 				$ret[GD_JS_CLASSES/*'classes'*/]['title'] = $title_class;
 			}
 			if ($target = $this->get_target($template_id, $atts)) {
@@ -89,11 +94,19 @@ class GD_Template_Processor_CarouselControlsBase extends GD_Template_ProcessorBa
 		if ($title = $this->get_title($template_id)) {
 			$ret['title'] = $title;
 
-			if ($title_link = $this->get_title_link($template_id)) {
+			if ($title_link = $this->get_att($template_id, $atts, 'title-link')) {
 				$ret['title-link'] = $title_link;
 			}
 		}
 
 		return $ret;
+	}
+
+	function init_atts($template_id, &$atts) {
+
+		$this->add_att($template_id, $atts, 'title-class', $this->get_title_class($template_id));
+		$this->add_att($template_id, $atts, 'title-link', $this->get_title_link($template_id));
+		$this->add_att($template_id, $atts, 'html-tag', $this->get_html_tag($template_id, $atts));
+		return parent::init_atts($template_id, $atts);
 	}
 }

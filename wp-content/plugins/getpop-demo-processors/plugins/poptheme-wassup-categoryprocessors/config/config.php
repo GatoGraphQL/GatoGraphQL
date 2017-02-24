@@ -4,8 +4,8 @@
  * Custom Libraries
  * ---------------------------------------------------------------------------------------------------------------*/
 
-add_filter('gd_catname', 'getpop_categoryprocessors_catname', 10, 3);
-function getpop_categoryprocessors_catname($name, $cat_id, $format) {
+add_filter('gd_catname', 'getpopdemo_categoryprocessors_catname', 10, 3);
+function getpopdemo_categoryprocessors_catname($name, $cat_id, $format) {
 
 	switch ($cat_id) {
 

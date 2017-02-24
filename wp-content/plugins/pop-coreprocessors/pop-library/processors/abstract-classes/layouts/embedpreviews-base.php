@@ -12,17 +12,36 @@ class GD_Template_Processor_EmbedPreviewLayoutsBase extends GD_Template_Processo
 		return GD_TEMPLATESOURCE_LAYOUT_EMBEDPREVIEW;
 	}
 
-	function get_frame_src($template_id) {
+	function get_frame_src($template_id, $atts) {
 
 		return '';
 	}
-	function get_frame_width($template_id) {
+	function get_frame_width($template_id, $atts) {
 
 		return '100%';
 	}
-	function get_frame_height($template_id) {
+	function get_frame_height($template_id, $atts) {
 
 		return '400';
+	}
+	function print_source($template_id, $atts) {
+
+		return false;
+	}
+	function get_source_title($template_id, $atts) {
+
+		return sprintf(
+			'<em>%s</em>',
+			__('Source:', 'pop-coreprocessors')
+		);
+	}
+	function get_source_target($template_id, $atts) {
+
+		return '_blank';
+	}
+	function get_header($template_id, $atts) {
+
+		return '';
 	}
 
 	function get_js_setting($template_id, $atts) {
@@ -42,9 +61,17 @@ class GD_Template_Processor_EmbedPreviewLayoutsBase extends GD_Template_Processo
 	
 		$ret = parent::get_template_configuration($template_id, $atts);	
 
-		$ret['width'] = $this->get_frame_width($template_id);
-		$ret['height'] = $this->get_frame_height($template_id);
-		$ret['src'] = $this->get_frame_src($template_id);
+		$ret['width'] = $this->get_frame_width($template_id, $atts);
+		$ret['height'] = $this->get_frame_height($template_id, $atts);
+		$ret['src'] = $this->get_frame_src($template_id, $atts);
+		if ($this->print_source($template_id, $atts)) {
+			$ret['print-source'] = true;
+			$ret[GD_JS_TITLES/*'titles'*/]['source'] = $this->get_source_title($template_id, $atts);
+			$ret['targets']['source'] = $this->get_source_target($template_id, $atts);
+		}
+		if ($header = $this->get_header($template_id, $atts)) {
+			$ret[GD_JS_TITLES/*'titles'*/]['header'] = $header;
+		}
 		
 		return $ret;
 	}	

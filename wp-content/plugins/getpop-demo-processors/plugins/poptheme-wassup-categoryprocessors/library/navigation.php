@@ -3,8 +3,8 @@
 /**---------------------------------------------------------------------------------------------------------------
  * navigation.php
  * ---------------------------------------------------------------------------------------------------------------*/
-add_filter('gd_navigation_menu_item_icon', 'getpop_cpp_navigation_menu_item_icon', 10, 3); 
-function getpop_cpp_navigation_menu_item_icon($icon, $menu_item_object_id, $html = true) {
+add_filter('gd_navigation_menu_item_icon', 'getpopdemo_cpp_navigation_menu_item_icon', 10, 3); 
+function getpopdemo_cpp_navigation_menu_item_icon($icon, $menu_item_object_id, $html = true) {
 
 	switch ($menu_item_object_id) {
 

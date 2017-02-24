@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: MESYM\n"
+"Project-Id-Version: PoP Category Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-07 18:34+0800\n"
-"PO-Revision-Date: 2016-08-07 18:34+0800\n"
+"POT-Creation-Date: 2017-02-24 18:24+0800\n"
+"PO-Revision-Date: 2017-02-24 18:24+0800\n"
 "Last-Translator: Leo\n"
-"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,63 +17,72 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
-#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:559
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:918
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:991
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:1689
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:963
 msgid "Details"
 msgstr "Detalles"
 
-#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:563
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:922
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:995
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:1693
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:967
 msgid "Feed"
 msgstr "Feed"
 
-#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:567
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:926
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:999
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:1697
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:971
 msgid "Extended"
 msgstr "Extendido"
 
-#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:571
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:930
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:1003
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:1701
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:975
 msgid "Thumbnail"
 msgstr "Miniatura"
 
-#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:575
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:934
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:1007
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:1705
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:979
 msgid "List"
 msgstr "Lista"
 
-#: .././pop-library/processors/blockgroups/tabpanels-sections.php:938
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:1709
 msgid "Edit"
 msgstr "Editar"
 
-#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:151
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:262
 #, php-format
 msgid "No %s found."
 msgstr "No se han encontrado %s."
 
-#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:155
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:266
 #, php-format
 msgid "No more %s found."
 msgstr "No se han encontrado más %s."
 
-#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:161
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:272
 msgid "Login/Register"
 msgstr "Iniciar sesión/Registrarse"
 
-#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:165
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:276
 #, php-format
 msgid "Please %s to access your %s."
 msgstr "Por favor, %s para acceder a su %s."
 
-#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:172
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:283
 #, php-format
 msgid "You need a %s account to access this functionality."
 msgstr "Es necesario una cuenta de %s para acceder a esta funcionalidad."
 
-#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:178
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:289
 #, php-format
 msgid "Your account has no permission to edit this %s."
 msgstr "Su cuenta no tiene permiso para modificar esta %s."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:294
+msgid "Incorrect URL"
+msgstr "URL incorrecta"
 
 #: .././validation.php:32
 msgid "Only admins see this message."

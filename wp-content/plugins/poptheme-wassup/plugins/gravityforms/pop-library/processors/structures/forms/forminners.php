@@ -232,6 +232,22 @@ class GD_Template_Processor_GFFormInners extends GD_Template_Processor_FormInner
 				$this->add_att(GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTERNAME, $atts, 'name', $fieldnames['name']);
 				break;
 		}
+
+		// switch ($template_id) {
+
+		// 	case GD_TEMPLATE_FORMINNER_CONTACTUS:
+		// 	case GD_TEMPLATE_FORMINNER_CONTACTUSER:
+		// 	case GD_TEMPLATE_FORMINNER_SHAREBYEMAIL:
+		// 	case GD_TEMPLATE_FORMINNER_VOLUNTEER:
+		// 	case GD_TEMPLATE_FORMINNER_FLAG:
+
+		// 		// If we can't use the user loggedin-data, then gotta show the captcha always
+		// 		if (!PoP_FormUtils::use_loggedinuser_data()) {
+		// 			$this->append_att(GD_TEMPLATE_FORMCOMPONENTGROUP_CAPTCHA, $atts, 'class', 'visible-always');
+		// 			$this->append_att(GD_TEMPLATE_FORMCOMPONENT_CAPTCHA, $atts, 'class', 'visible-always');
+		// 		}
+		// 		break;
+		// }
 		
 		return parent::init_atts($template_id, $atts);
 	}

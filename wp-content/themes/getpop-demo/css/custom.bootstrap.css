@@ -84,6 +84,10 @@ h3,
   text-decoration: none;
   background-color: #db902e;
 }
+.dropdown-menu .active > a:hover,
+.nav .dropdown-menu .active > a:hover {
+  color: #fff;
+}
 
 /* Top navbars */
 .navbar {

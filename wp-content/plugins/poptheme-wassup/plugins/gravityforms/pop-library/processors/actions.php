@@ -42,7 +42,7 @@ class GD_Template_Processor_GFActions extends GD_Template_Processor_ActionsBase 
 			case GD_TEMPLATE_ACTION_FLAG:
 
 				// Check if needed to validate Captcha
-				if (!is_user_logged_in()) {
+				if (!(PoP_FormUtils::use_loggedinuser_data() && is_user_logged_in())) {
 					$ret['iohandler-atts'][GD_DATALOAD_IOHANDLER_FORM_VALIDATECAPTCHA] = true;
 				}
 				break;

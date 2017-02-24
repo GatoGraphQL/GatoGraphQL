@@ -43,7 +43,7 @@ class GD_EmailInvite {
 			}
 		}
 
-		if (is_user_logged_in()) {
+		if (PoP_FormUtils::use_loggedinuser_data() && is_user_logged_in()) {
 
 			$user_id = get_current_user_id();
 			$sender_name = get_the_author_meta('display_name', $user_id);
@@ -52,6 +52,7 @@ class GD_EmailInvite {
 		else {
 
 			$sender_name = trim($gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_SENDERNAME)->get_value(GD_TEMPLATE_FORMCOMPONENT_SENDERNAME, $atts));
+			$captcha = $gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_CAPTCHA)->get_value(GD_TEMPLATE_FORMCOMPONENT_CAPTCHA, $atts);
 			$user_id = $sender_url = '';
 		}
 		$additional_msg = trim($gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_ADDITIONALMESSAGE)->get_value(GD_TEMPLATE_FORMCOMPONENT_ADDITIONALMESSAGE, $atts));
@@ -61,8 +62,8 @@ class GD_EmailInvite {
 			'sender-name' => $sender_name,
 			'sender-url' => $sender_url,
 			'additional-msg' => $additional_msg,
+			'captcha' => $captcha,
 		);
-
 		
 		return $form_data;
 	}	
@@ -91,6 +92,17 @@ class GD_EmailInvite {
 
 		// Re-assign the non-invalid emails to the form_data
 		$form_data['emails'] = array_diff($emails, $invalid_emails);
+
+		// Validate the captcha
+		if (!PoP_FormUtils::use_loggedinuser_data() || !is_user_logged_in()) {
+			
+			$captcha = $form_data['captcha'];
+			
+			$captcha_validation = GD_Captcha::validate($captcha['input'], $captcha['session']);
+			if (is_wp_error($captcha_validation)) {
+				$errors[] = $captcha_validation->get_error_message();
+			}
+		}
 	}
 
 	/** Function to override */
@@ -111,7 +123,7 @@ class GD_EmailInvite {
 
 			$subject = $this->get_email_subject($form_data);
 			$content = $this->get_email_content($form_data);
-			sendemail_to_users($emails, array(), $subject, $content, true);
+			PoP_EmailSender_Utils::sendemail_to_users($emails, array(), $subject, $content, true);
 		}
 
 		return $emails;

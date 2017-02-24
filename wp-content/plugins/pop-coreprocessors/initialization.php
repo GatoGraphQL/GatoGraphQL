@@ -287,6 +287,7 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('layout-dataquery-updatedata-tmpl', $folder.'layout-dataquery-updatedata.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-categories-tmpl', $folder.'layout-categories.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-embedpreview-tmpl', $folder.'layout-embedpreview.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		wp_enqueue_script('layout-initjs-delay-tmpl', $folder.'layout-initjs-delay.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-fullobjecttitle-tmpl', $folder.'layout-fullobjecttitle.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-fullview-tmpl', $folder.'layout-fullview.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-fulluser-tmpl', $folder.'layout-fulluser.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);

@@ -1,0 +1,9 @@
+<div {{#generateId}}{{id}}{{/generateId}}></div>
+<script type="text/javascript">
+(function($){
+	var block = popManager.getBlock($('#{{bs.bId}}'));
+	block.one("js:initialized", function() { 
+		$("#{{lastGeneratedId}}").html('{{#withModule . "layout"}}{{enterModule ../.}}{{/withModule}}'); 
+	});
+})(jQuery);
+</script>

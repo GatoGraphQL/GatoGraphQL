@@ -248,11 +248,7 @@ popURLInterceptors = {
 					}
 
 					// If it has a title (eg: pageTabs), then also update the browser title
-					var title = interceptor.data('title');
-					if (title) {
-						t.documentTitle = unescapeHtml(title);
-						document.title = popManager.documentTitle;
-					}
+					popManager.updateTitle(interceptor.data('title'));
 					return -1;
 				}
 			});

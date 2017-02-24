@@ -29,6 +29,7 @@ popTypeaheadMap = {
 
 					// Add it to DOM => Execute it => the markerData will be added to popMap.markers
 					// popJSRuntimeManager.deleteBlockLastSessionIds(pageSection, block, template);
+					popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 					var html = popManager.getTemplateHtml(pageSection, block, template);					
 					popManager.mergeHtml(html, typeaheadMap);
 					popManager.runJSMethods(pageSection, /*pageSectionPage, */block, template, 'last');

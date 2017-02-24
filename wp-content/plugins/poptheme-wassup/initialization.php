@@ -137,7 +137,7 @@ class PoPTheme_Wassup_Initialization {
 			// CDN
 			wp_register_style('perfect-scrollbar', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.5/css/perfect-scrollbar.min.css', null, null);
 			wp_register_style('fileupload', 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/css/jquery.fileupload.min.css', null, null);
-			wp_register_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css', null, null);
+			wp_register_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', null, null);
 			wp_register_style('daterangepicker', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.11/daterangepicker.min.css', null, null);
 		}
 		else {
@@ -145,7 +145,7 @@ class PoPTheme_Wassup_Initialization {
 			// Locally stored files
 			wp_register_style('perfect-scrollbar', $cdn_css_folder . '/perfect-scrollbar.0.6.5.css', null, null);
 			wp_register_style('fileupload', $cdn_css_folder . '/jquery.fileupload.9.5.7.min.css', null, null);
-			wp_register_style('font-awesome', $cdn_css_folder . '/font-awesome.4.5.0.min.css', null, null);
+			wp_register_style('font-awesome', $cdn_css_folder . '/font-awesome.4.7.0.min.css', null, null);
 			wp_register_style('daterangepicker', $cdn_css_folder . '/daterangepicker.2.1.11.min.css', null, null);
 		}
 		wp_enqueue_style('perfect-scrollbar');

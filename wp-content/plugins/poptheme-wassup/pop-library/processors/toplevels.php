@@ -136,6 +136,7 @@ class GD_Template_Processor_CustomTopLevels extends GD_Template_Processor_TopLev
 
 		// Always add the Operational pageSection
 		$ret[] = GD_TEMPLATE_PAGESECTION_OPERATIONAL;
+		$ret[] = GD_TEMPLATE_PAGESECTION_COMPONENTS;
 
 		// Add pageSections respective to the provided target
 		$target = $vars['target'];

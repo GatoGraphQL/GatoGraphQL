@@ -20,9 +20,14 @@ class GD_Template_Processor_Manager {
 
 		// Get the wrapper, there will always be one since there's s a wrapper for GD_Template_ProcessorBase
 		global $gd_template_processorwrapper_manager;
-		return $gd_template_processorwrapper_manager->get_processorwrapper($processor);
+		$processorwrapper = $gd_template_processorwrapper_manager->get_processorwrapper($processor);
 
-		// return $processor;
+		// If it is null, so then there's an error in the code
+		if (is_null($processorwrapper)) {
+			throw new Exception(sprintf('No Processor for $template_id \'%s\'', $template_id));
+		}
+
+		return $processorwrapper;
 	}
 	
 	function add($processor, $templates_to_process) {

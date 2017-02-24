@@ -161,7 +161,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			case GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME:
 
 				$ret[] = GD_TEMPLATE_BLOCK_HOMEWELCOME;
-				$ret[] = GD_TEMPLATE_BLOCK_NEWSLETTER;
+				// $ret[] = GD_TEMPLATE_BLOCK_NEWSLETTER;
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME:
@@ -499,8 +499,8 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEACCOUNT:
 
 				$classes = array(
-					GD_TEMPLATE_BLOCK_MENU_HOME_USERNOTLOGGEDIN => 'col-md-6',//'col-md-4',
-					GD_TEMPLATE_BLOCK_NEWSLETTER => 'col-md-6',//'col-md-8',
+					GD_TEMPLATE_BLOCK_MENU_HOME_USERNOTLOGGEDIN => 'col-md-6',
+					GD_TEMPLATE_BLOCK_NEWSLETTER => 'col-md-6',
 				);
 				$class = $classes[$blockgroup_block];
 				$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', $class);
@@ -566,7 +566,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 
 				if (
 					($blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME && $blockgroup_block == GD_TEMPLATE_BLOCK_USERLOGGEDINWELCOME) ||
-					(($blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME || $blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_BLOGNEWSLETTER) && $blockgroup_block == GD_TEMPLATE_BLOCK_NEWSLETTER)
+					((/*$blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME || */$blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_BLOGNEWSLETTER) && $blockgroup_block == GD_TEMPLATE_BLOCK_NEWSLETTER)
 					) {
 
 					$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', 'well well-sm');

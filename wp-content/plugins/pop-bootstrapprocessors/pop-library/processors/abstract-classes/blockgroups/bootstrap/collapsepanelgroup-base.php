@@ -28,6 +28,32 @@ class GD_Template_Processor_CollapsePanelGroupBlockGroupsBase extends GD_Templat
 
 		return 'collapse';
 	}
+
+	function get_paneltitle_htmltag($template_id) {
+
+		return 'h3';
+	}
+
+	function get_paneltitle_class($template_id) {
+
+		// return 'panel-title collapsepanelgroup-title';
+		return 'panel-title';
+	}
+
+	function get_outerpanel_class($template_id) {
+
+		return 'panel panel-default';
+	}
+
+	function get_panelbody_class($template_id) {
+
+		return 'panel-body';
+	}
+
+	function close_parent($template_id) {
+
+		return true;
+	}
 	
 	function get_template_configuration($template_id, $atts) {
 	
@@ -36,6 +62,31 @@ class GD_Template_Processor_CollapsePanelGroupBlockGroupsBase extends GD_Templat
 		if ($dropdown_items = $this->get_dropdown_items($template_id)) {
 			
 			$ret['dropdown-items'] = $dropdown_items;
+		}
+
+		if ($title_htmltag = $this->get_paneltitle_htmltag($template_id)) {
+			
+			$ret['html-tags']['title'] = $title_htmltag;
+		}
+
+		if ($close_parent = $this->close_parent($template_id)) {
+			
+			$ret['close-parent'] = true;
+		}
+
+		if ($body_class = $this->get_panelbody_class($template_id)) {
+			
+			$ret[GD_JS_CLASSES/*'classes'*/]['body'] = $body_class;
+		}
+
+		if ($title_class = $this->get_paneltitle_class($template_id)) {
+			
+			$ret[GD_JS_CLASSES/*'classes'*/]['title'] = $title_class;
+		}
+
+		if ($panel_class = $this->get_outerpanel_class($template_id)) {
+			
+			$ret[GD_JS_CLASSES/*'classes'*/]['panel'] = $panel_class;
 		}
 		
 		return $ret;

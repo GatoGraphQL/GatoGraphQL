@@ -21,6 +21,28 @@ add_filter('GD_Template_Processor_CustomBlockGroups:homewelcometitle', 'gd_qtran
 // function gd_qtransx_welcome_languagelinks($title, $template_id) {
 function gd_qtransx_welcome_languagelinks($title) {
 
+	// Add the language links
+	$shortnames = array(
+		'en' => 'EN',
+		'ms' => 'BM',
+		'es' => 'ES',
+	);
+	if ($items = get_qtransx_languageitems($shortnames)) {
+		$title .= sprintf(
+			// Comment Leo 02/07/2016: Changed for ThemeStyle Swift
+			// '&nbsp;&nbsp;&nbsp;<small>%s</small>',
+			'<br/><small>%s</small>',
+			implode('&nbsp;', $items)
+		);
+	}
+
+	return $title;
+}
+
+function get_qtransx_languageitems($shortnames = array()) {
+
+	$items = array();
+
 	global $q_config;
 	$languages = $q_config['enabled_languages'];
 	
@@ -29,13 +51,7 @@ function gd_qtransx_welcome_languagelinks($title) {
 		
 		$current = qtranxf_getLanguage();
 		$url = trailingslashit(home_url());
-		$shortnames = array(
-			'en' => 'EN',
-			'ms' => 'BM',
-			'es' => 'ES',
-		);
 
-		$items = array();
 		foreach($languages as $lang) {
 			$name = qtranxf_getLanguageName($lang);
 			$shortname = $shortnames[$lang] ? $shortnames[$lang] : $name;
@@ -52,15 +68,7 @@ function gd_qtransx_welcome_languagelinks($title) {
 				);
 			}
 		}
-		if ($items) {
-			$title .= sprintf(
-				// Comment Leo 02/07/2016: Changed for ThemeStyle Swift
-				// '&nbsp;&nbsp;&nbsp;<small>%s</small>',
-				'<br/><small>%s</small>',
-				implode('&nbsp;', $items)
-			);
-		}
 	}
 
-	return $title;
+	return $items;
 }

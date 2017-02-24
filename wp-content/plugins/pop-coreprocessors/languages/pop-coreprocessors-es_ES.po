@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 11:37+0800\n"
-"PO-Revision-Date: 2017-02-08 11:37+0800\n"
+"POT-Creation-Date: 2017-02-25 03:08+0800\n"
+"PO-Revision-Date: 2017-02-25 03:08+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -278,12 +278,12 @@ msgstr "Ahora estás siguiendo a <em><strong>%s</strong></em>."
 msgid "You have already down-voted <em><strong>%s</strong></em>."
 msgstr "Ya has expresado estar en desacuerdo con <em><strong>%s</strong></em>."
 
-#: .././pop-library/dataload/actionexecuters/library/email-invite.php:83
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:84
 #, php-format
 msgid "The following emails are invalid: <strong>%s</strong>"
 msgstr "Los siguientes emails son inválidos: <strong>%s</strong>"
 
-#: .././pop-library/dataload/actionexecuters/library/email-invite.php:89
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:90
 msgid "Email(s) cannot be empty."
 msgstr "Correo(s) electrónico(s) no puede estar vacío."
 
@@ -443,6 +443,7 @@ msgid "Website"
 msgstr "Sitio web"
 
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users-hook.php:69
+#: .././pop-library/processors/controls/anchor-controls.php:113
 #: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:45
 msgid "Email"
 msgstr "Correo electrónico"
@@ -495,7 +496,7 @@ msgstr "Descartar"
 msgid "Load more"
 msgstr "Cargar más"
 
-#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:165
+#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:169
 msgid "Please write the content here..."
 msgstr "Por favor, escriba el contenido aquí..."
 
@@ -551,6 +552,10 @@ msgstr "No se encontraron usuarios"
 #: .././pop-library/processors/abstract-classes/forms/submit-buttons-base.php:16
 msgid "Submit"
 msgstr "Enviar"
+
+#: .././pop-library/processors/abstract-classes/layouts/embedpreviews-base.php:35
+msgid "Source:"
+msgstr "Origen:"
 
 #: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:32
 msgid "post"
@@ -650,7 +655,7 @@ msgstr "Vista rápida"
 
 #: .././pop-library/processors/buttons/buttoninners.php:171
 #: .././pop-library/processors/buttons/buttons.php:251
-#: .././pop-library/processors/controls/anchor-controls.php:81
+#: .././pop-library/processors/controls/anchor-controls.php:93
 msgid "Print"
 msgstr "Imprimir"
 
@@ -671,7 +676,7 @@ msgstr "Previsualizar"
 
 #: .././pop-library/processors/buttons/buttoninners.php:187
 #: .././pop-library/processors/buttons/buttons.php:267
-#: .././pop-library/processors/controls/anchor-controls.php:77
+#: .././pop-library/processors/controls/anchor-controls.php:89
 msgid "Permalink"
 msgstr "Permalink"
 
@@ -777,19 +782,19 @@ msgstr "Por favor %s para añadir un comentario."
 msgid "You need a %s account to add a comment."
 msgstr "Necesitás una cuenta de %s para añadir un comentario."
 
-#: .././pop-library/processors/controls/anchor-controls.php:65
+#: .././pop-library/processors/controls/anchor-controls.php:77
 msgid "Toggle compact/full form"
 msgstr "Alternar formulario compacto/extendido"
 
-#: .././pop-library/processors/controls/anchor-controls.php:69
+#: .././pop-library/processors/controls/anchor-controls.php:81
 msgid "Expand"
 msgstr "Ampliar"
 
-#: .././pop-library/processors/controls/anchor-controls.php:73
+#: .././pop-library/processors/controls/anchor-controls.php:85
 msgid "Filter"
 msgstr "Filtrar"
 
-#: .././pop-library/processors/controls/anchor-controls.php:85
+#: .././pop-library/processors/controls/anchor-controls.php:97
 #: .././pop-library/processors/viewcomponents/buttoninners.php:148
 #: .././pop-library/processors/viewcomponents/post-buttons.php:137
 #: .././pop-library/processors/viewcomponents/tag-buttons.php:59
@@ -797,7 +802,7 @@ msgstr "Filtrar"
 msgid "Embed"
 msgstr "Insertar código HTML"
 
-#: .././pop-library/processors/controls/anchor-controls.php:89
+#: .././pop-library/processors/controls/anchor-controls.php:101
 #: .././pop-library/processors/viewcomponents/buttoninners.php:152
 #: .././pop-library/processors/viewcomponents/post-buttons.php:142
 #: .././pop-library/processors/viewcomponents/tag-buttons.php:64
@@ -805,12 +810,12 @@ msgstr "Insertar código HTML"
 msgid "API Data"
 msgstr "Data API"
 
-#: .././pop-library/processors/controls/anchor-controls.php:93
+#: .././pop-library/processors/controls/anchor-controls.php:105
 #: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:27
 msgid "Copy Search URL"
 msgstr "Copiar URL de búsqueda"
 
-#: .././pop-library/processors/controls/anchor-controls.php:97
+#: .././pop-library/processors/controls/anchor-controls.php:109
 #: .././pop-library/processors/viewcomponents/buttoninners.php:144
 #: .././pop-library/processors/viewcomponents/post-buttons.php:132
 #: .././pop-library/processors/viewcomponents/tag-buttons.php:54
@@ -818,33 +823,37 @@ msgstr "Copiar URL de búsqueda"
 msgid "Share by email"
 msgstr "Compartir por email"
 
-#: .././pop-library/processors/controls/anchor-controls.php:101
+#: .././pop-library/processors/controls/anchor-controls.php:117
 msgid "Invite your friends to join!"
 msgstr "¡Invitá a tus amigos a unirse!"
 
-#: .././pop-library/processors/controls/anchor-controls.php:107
+#: .././pop-library/processors/controls/anchor-controls.php:123
 msgid "Close"
 msgstr "Cerrar"
 
-#: .././pop-library/processors/controls/anchor-controls.php:113
+#: .././pop-library/processors/controls/anchor-controls.php:129
 msgid "Toggle sidebar"
 msgstr "Abrir/Cerrar barra lateral"
 
-#: .././pop-library/processors/controls/anchor-controls.php:117
+#: .././pop-library/processors/controls/anchor-controls.php:133
 msgid "Go back"
 msgstr "Volver"
 
-#: .././pop-library/processors/controls/anchor-controls.php:121
+#: .././pop-library/processors/controls/anchor-controls.php:138
+msgid "Toggle tabs"
+msgstr "Abrir/Cerrar pestañas"
+
+#: .././pop-library/processors/controls/anchor-controls.php:143
 #: .././pop-library/processors/socialmedia/socialmedia-items.php:161
 msgid "Facebook"
 msgstr "Facebook"
 
-#: .././pop-library/processors/controls/anchor-controls.php:125
+#: .././pop-library/processors/controls/anchor-controls.php:148
 #: .././pop-library/processors/socialmedia/socialmedia-items.php:170
 msgid "Twitter"
 msgstr "Twitter"
 
-#: .././pop-library/processors/controls/anchor-controls.php:129
+#: .././pop-library/processors/controls/anchor-controls.php:153
 #: .././pop-library/processors/socialmedia/socialmedia-items.php:188
 msgid "LinkedIn"
 msgstr "LinkedIn"
@@ -857,7 +866,11 @@ msgstr "Refrescar"
 msgid "Reset"
 msgstr "Resetear"
 
-#: .././pop-library/processors/controls/dropdownbutton-controls.php:163
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:178
+msgid "Share with your friends"
+msgstr "Compartí con tus amigos"
+
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:184
 msgid "Reply with..."
 msgstr "Responder con…"
 
@@ -1145,7 +1158,7 @@ msgid "Users"
 msgstr "Usuarios"
 
 #: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:64
-#: .././pop-library/processors/forms/formcomponentgroups.php:228
+#: .././pop-library/processors/forms/formcomponentgroups.php:233
 msgid "Co-authors"
 msgstr "Co-autores"
 
@@ -1153,16 +1166,16 @@ msgstr "Co-autores"
 msgid "Users:"
 msgstr "Usuarios:"
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:186
+#: .././pop-library/processors/forms/formcomponentgroups.php:191
 msgid "Type post title..."
 msgstr "Escribir título del post..."
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:187
-#: .././pop-library/processors/forms/formcomponentgroups.php:188
+#: .././pop-library/processors/forms/formcomponentgroups.php:192
+#: .././pop-library/processors/forms/formcomponentgroups.php:193
 msgid "Type name..."
 msgstr "Escribir el nombre…"
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:197
+#: .././pop-library/processors/forms/formcomponentgroups.php:202
 msgid ""
 "Type emails here, separated by space or comma (\" \" or \",\"), or 1 email "
 "per line"
@@ -1170,7 +1183,7 @@ msgstr ""
 "Escriba los emails aquí, separados por espacio o coma (\" \" or \",\"), ó 1 "
 "email por línea"
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:212
+#: .././pop-library/processors/forms/formcomponentgroups.php:217
 msgid ""
 "Co-authoring this post with other users? Select them all here, they will not "
 "only appear as co-owners in the webpage, but will also be able to edit this "
@@ -1180,7 +1193,7 @@ msgstr ""
 "aquí, los mismos no sólo aparecerán como co-autores en la página web, sino "
 "también serán capaces de editar este post."
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:216
+#: .././pop-library/processors/forms/formcomponentgroups.php:221
 msgid ""
 "Please select all related content, so the reader can easily access this "
 "inter-related information."
@@ -1482,7 +1495,7 @@ msgstr "¡Ofrecerme como voluntario!"
 
 #: .././pop-library/processors/viewcomponents/buttoninners.php:136
 #: .././pop-library/processors/viewcomponents/post-buttons.php:153
-msgid "Flag"
+msgid "Flag as inappropriate"
 msgstr "Marcar como inapropiado"
 
 #: .././pop-library/processors/viewcomponents/buttoninners.php:140
@@ -1526,6 +1539,9 @@ msgstr ""
 "bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
 "your plugin installer or download it <a href=“http://wordpress.org/extend/"
 "plugins/pop/“>from here</a>."
+
+#~ msgid "Flag"
+#~ msgstr "Marcar como inapropiado"
 
 #~ msgid ""
 #~ "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "

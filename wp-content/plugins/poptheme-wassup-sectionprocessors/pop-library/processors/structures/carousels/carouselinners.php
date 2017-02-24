@@ -25,9 +25,9 @@ class GD_Custom_Template_Processor_CarouselInners extends GD_Template_Processor_
 			case GD_TEMPLATE_CAROUSELINNER_BLOG:
 			case GD_TEMPLATE_CAROUSELINNER_FEATURED:
 
-				if ($grid = $this->get_att($template_id, $atts, 'layout-grid')) {
-					return $grid;
-				}
+				// if ($grid = $this->get_att($template_id, $atts, 'layout-grid')) {
+				// 	return $grid;
+				// }
 
 				return array(
 					'row-items' => 1, 

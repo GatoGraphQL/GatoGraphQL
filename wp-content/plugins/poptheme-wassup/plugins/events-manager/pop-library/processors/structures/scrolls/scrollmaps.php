@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_SCROLL_ALLUSERS_MAP', PoP_ServerUtils::get_template_definition('scroll-allusers-map'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_HORIZONTALMAP', PoP_ServerUtils::get_template_definition('scroll-allusers-horizontalmap'));
 define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_MAP', PoP_ServerUtils::get_template_definition('scroll-searchusers-map'));
 define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_MAP', PoP_ServerUtils::get_template_definition('scroll-authorfollowers-map'));
 define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_MAP', PoP_ServerUtils::get_template_definition('scroll-authorfollowingusers-map'));
@@ -23,6 +24,7 @@ class GD_EM_Template_Processor_CustomScrollMaps extends GD_Template_Processor_Sc
 	
 		return array(
 			GD_TEMPLATE_SCROLL_ALLUSERS_MAP,
+			GD_TEMPLATE_SCROLL_ALLUSERS_HORIZONTALMAP,
 			GD_TEMPLATE_SCROLL_SEARCHUSERS_MAP,
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_MAP,
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_MAP,
@@ -39,6 +41,7 @@ class GD_EM_Template_Processor_CustomScrollMaps extends GD_Template_Processor_Sc
 
 		$inners = array(
 			GD_TEMPLATE_SCROLL_ALLUSERS_MAP => GD_TEMPLATE_SCROLLINNER_ALLUSERS_MAP,
+			GD_TEMPLATE_SCROLL_ALLUSERS_HORIZONTALMAP => GD_TEMPLATE_SCROLLINNER_ALLUSERS_HORIZONTALMAP,
 			GD_TEMPLATE_SCROLL_SEARCHUSERS_MAP => GD_TEMPLATE_SCROLLINNER_SEARCHUSERS_MAP,
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_MAP => GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWERS_MAP,
 			GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_MAP => GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWINGUSERS_MAP,

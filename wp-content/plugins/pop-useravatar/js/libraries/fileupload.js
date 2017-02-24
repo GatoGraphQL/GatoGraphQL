@@ -33,6 +33,8 @@ popFileUpload = {
 					var rows = $();
 					
 					var data = {o: o, locale: locale};
+					// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
+					popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 					var html = popManager.getHtml(templateName, data);
 					var row = $(html);
 
@@ -51,6 +53,8 @@ popFileUpload = {
 
 					var data = $.extend({}, targetConfiguration, {o: o, locale: locale});
 
+					// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
+					popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
 					var html = popManager.getHtml(templateName, data);
 					var row = $(html);
 

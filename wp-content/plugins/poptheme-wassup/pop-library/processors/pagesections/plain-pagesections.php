@@ -9,11 +9,13 @@
  * All IDs
  * ---------------------------------------------------------------------------------------------------------------*/
 define ('GD_TEMPLATEID_PAGESECTIONID_OPERATIONAL', 'ps-operational');
+define ('GD_TEMPLATEID_PAGESECTIONID_COMPONENTS', 'ps-components');
 
 /**---------------------------------------------------------------------------------------------------------------
  * All PageSections
  * ---------------------------------------------------------------------------------------------------------------*/
 define ('GD_TEMPLATE_PAGESECTION_OPERATIONAL', PoP_ServerUtils::get_template_definition('operational', true));
+define ('GD_TEMPLATE_PAGESECTION_COMPONENTS', PoP_ServerUtils::get_template_definition('components', true));
 
 class GD_Template_Processor_CustomPlainPageSections extends GD_Template_Processor_PlainPageSectionsBase {
 
@@ -21,6 +23,7 @@ class GD_Template_Processor_CustomPlainPageSections extends GD_Template_Processo
 	
 		return array(
 			GD_TEMPLATE_PAGESECTION_OPERATIONAL,
+			GD_TEMPLATE_PAGESECTION_COMPONENTS,
 		);
 	}
 
@@ -31,6 +34,10 @@ class GD_Template_Processor_CustomPlainPageSections extends GD_Template_Processo
 			case GD_TEMPLATE_PAGESECTION_OPERATIONAL:
 
 				return GD_TEMPLATEID_PAGESECTIONID_OPERATIONAL;
+
+			case GD_TEMPLATE_PAGESECTION_COMPONENTS:
+
+				return GD_TEMPLATEID_PAGESECTIONID_COMPONENTS;
 		}
 
 		return parent::get_id($template_id, $atts);
@@ -44,6 +51,7 @@ class GD_Template_Processor_CustomPlainPageSections extends GD_Template_Processo
 		switch ($template_id) {
 
 			case GD_TEMPLATE_PAGESECTION_OPERATIONAL:
+			case GD_TEMPLATE_PAGESECTION_COMPONENTS:
 				
 				PoPTheme_Wassup_PageSectionSettingsUtils::add_page_blockunits($ret, $template_id);
 				break;
@@ -54,7 +62,8 @@ class GD_Template_Processor_CustomPlainPageSections extends GD_Template_Processo
 			switch ($template_id) {
 
 				// Add the blockunits to be replicated on runtime. Only when first loading the website
-				case GD_TEMPLATE_PAGESECTION_OPERATIONAL:
+				// case GD_TEMPLATE_PAGESECTION_OPERATIONAL:
+				case GD_TEMPLATE_PAGESECTION_COMPONENTS:
 
 					// Special case: Add the blocks for Unique blocks directly, without using function add_blocks
 					// since that function removes the uniqueblocks

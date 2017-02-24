@@ -247,9 +247,25 @@ Handlebars.registerHelper('generateId', function(options) {
 	var isIdUnique = options.hash.idUnique || context[M.JS_ISIDUNIQUE];//context['is-id-unique'];
 	var group = options.hash.group;
 	var id = options.fn(this);
+	var ignorePSRuntimeId = context.ignorePSRuntimeId;
+	
+	// Print also the block URL. Needed to know under what URL to save the session-ids.
+	// Set the URL before calling addTemplateId, where it will be needed
+	var url = options.hash.addURL ? context.tls.feedback[M.URLPARAM_URL] : '';
+	if (url) {
+		popJSRuntimeManager.setBlockURL(url);
+	}
 
-	var generatedId = popJSRuntimeManager.addTemplateId(pssId, targetId, template, id, group, fixed, isIdUnique);
-	return new Handlebars.SafeString('id="'+generatedId+'" data-templateid="'+template+'"');
+	var generatedId = popJSRuntimeManager.addTemplateId(pssId, targetId, template, id, group, fixed, isIdUnique, ignorePSRuntimeId);
+	var items = [];
+	items.push('id="'+generatedId+'"'); 
+	items.push('data-templateid="'+template+'"');
+	
+	// For the block, also add the URL on which it was first generated (not initialized... it can be initialized later on)
+	if (url) {
+		items.push('data-toplevel-url="'+url+'"');
+	}
+	return new Handlebars.SafeString(items.join(' '));
 });
 Handlebars.registerHelper('lastGeneratedId', function(options) {
 
@@ -286,13 +302,14 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var bs = prevContext.bs;
 	var itemObject = prevContext.itemObject;
 	var itemObjectDBKey = prevContext.itemObjectDBKey;
+	var ignorePSRuntimeId = prevContext.ignorePSRuntimeId;
 	
 	// The following values, if passed as a param, then these take priority. Otherwise, use them from the previous context
 	var itemDBKey = (typeof options.hash.itemDBKey != 'undefined') ? options.hash.itemDBKey : prevContext.itemDBKey;
 	var items = (typeof options.hash.items != 'undefined') ? options.hash.items : prevContext.items;
 
 	// Add all these vars to the context for this template
-	var extend = {itemObject: itemObject, itemObjectDBKey: itemObjectDBKey, itemDBKey: itemDBKey, items: items, tls: tls, pss: pss, bs: bs};
+	var extend = {itemObject: itemObject, itemObjectDBKey: itemObjectDBKey, itemDBKey: itemDBKey, items: items, tls: tls, pss: pss, bs: bs, ignorePSRuntimeId: ignorePSRuntimeId};
 	
 	var pssId = pss.pssId;
 	var psId = pss.psId;
