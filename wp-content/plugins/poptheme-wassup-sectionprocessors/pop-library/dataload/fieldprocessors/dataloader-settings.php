@@ -7,6 +7,7 @@ function gd_custom_customdataloadersettings_init() {
 	global $gd_dataloader_fieldprocessor_manager;
 
 	$gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_POSTLIST, GD_CUSTOM_DATALOAD_FIELDPROCESSOR_POSTS);
+	$gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_PAGELIST, GD_CUSTOM_DATALOAD_FIELDPROCESSOR_POSTS);
 	$gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_FIXEDPOSTLIST, GD_CUSTOM_DATALOAD_FIELDPROCESSOR_POSTS);
 	$gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_SECONDPOSTLIST, GD_CUSTOM_DATALOAD_FIELDPROCESSOR_POSTS);
 	$gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_SINGLE, GD_CUSTOM_DATALOAD_FIELDPROCESSOR_POSTS);

@@ -77,8 +77,6 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_USELOCALSTORAGE` (_true|false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
-- `POP_SERVER_FORCESSL` (_true|false_): Redirect to HTTPS whenever accessing over HTTP
-
 ### Decentralization: enabling crossdomain
 
 To have a website consume data coming from other domains, crossdomain access must be allowed. For this, edit your .htaccess file like this:

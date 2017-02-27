@@ -5,6 +5,7 @@ global $gd_dataloader_fieldprocessor_manager;
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_AUTHOR, GD_DATALOAD_FIELDPROCESSOR_USERS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_MENU, GD_DATALOAD_FIELDPROCESSOR_MENU);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_POSTLIST, GD_DATALOAD_FIELDPROCESSOR_POSTS);
+$gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_PAGELIST, GD_DATALOAD_FIELDPROCESSOR_POSTS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_FIXEDPOSTLIST, GD_DATALOAD_FIELDPROCESSOR_POSTS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_SECONDPOSTLIST, GD_DATALOAD_FIELDPROCESSOR_POSTS);
 $gd_dataloader_fieldprocessor_manager->add(GD_DATALOADER_CONVERTIBLEPOSTLIST, GD_DATALOAD_FIELDPROCESSOR_POSTS_DELEGATOR);

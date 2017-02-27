@@ -306,10 +306,6 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
   color: #4d4d4f;
 }
 
-.bottom-documentation {
-  margin-top: 15px;
-}
-
 #loadingscreen h1 > .tagline {
     display: none;
 }

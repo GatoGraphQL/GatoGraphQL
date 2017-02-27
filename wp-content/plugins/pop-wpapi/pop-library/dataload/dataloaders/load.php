@@ -10,6 +10,7 @@ require_once 'dataloader-list.php';
 require_once 'dataloader-postlist-base.php';
 require_once 'dataloader-menu.php';
 require_once 'dataloader-postlist.php';
+require_once 'dataloader-pagelist.php';
 require_once 'dataloader-secondpostlist.php';
 require_once 'dataloader-convertiblepostlist.php';
 require_once 'dataloader-secondconvertiblepostlist.php';

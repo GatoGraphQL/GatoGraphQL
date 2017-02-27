@@ -41,4 +41,4 @@ flash{0%{background-color:none}50%{background-color:#db902e}100%{background-colo
 h2{font-size:26px;margin-bottom:5px}@media (min-width: 768px){#ps-background .pop-background-img{max-width:500px}}#ps-background .pop-background-img{margin-bottom:10px}#loading-logo{max-width:500px}.blockgroup-hometop .block-events-scrollmap > .blocksection-title a,
 .blockgroup-authortop .block-events-scrollmap > .blocksection-title a,
 .blockgroup-tag .block-events-scrollmap > .blocksection-title
-a{color:#4d4d4f}.bottom-documentation{margin-top:15px}#loadingscreen h1>.tagline{display:none}
+a{color:#4d4d4f}#loadingscreen h1>.tagline{display:none}

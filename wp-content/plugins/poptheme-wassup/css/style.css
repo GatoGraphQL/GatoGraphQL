@@ -92,6 +92,7 @@ body.swift #ps-main .pop-outerblock.blockgroup-tag,
 body.swift #ps-main .pop-outerblock.controlblock,
 body.swift #ps-main .pop-outerblock.feed,
 body.swift #ps-main .pop-outerblock.calendar,
+body.swift #ps-main .pop-outerblock.menu,
 body.swift #ps-main .pop-outerblock.block-singleabout-content,
 body.swift #ps-main .pop-outerblock > .blocksection-extensions > .block-singleabout-content,
 body.swift #ps-main .pop-outerblock.block-single-content,
@@ -2396,7 +2397,6 @@ button.fetchmore-btn {
 /* Give the same padding to these 2 (eg: mesym.com/u/leo/): #ps-main .nav>li>a is the tabs placed on the left, .btn-compact is the controlgroup placed on the right*/
 #ps-main .nav>li>a {
 	padding: 5px 3px;
-	color: #4d4d4f;
 }
 .btn-compact {
 	padding: 5px;

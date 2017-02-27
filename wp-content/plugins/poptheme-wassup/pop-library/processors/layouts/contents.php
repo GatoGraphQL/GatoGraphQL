@@ -8,6 +8,7 @@
 define ('GD_TEMPLATE_LAYOUT_CONTENT_POST', PoP_ServerUtils::get_template_definition('layout-content-post'));
 define ('GD_TEMPLATE_LAYOUT_CONTENT_POSTCOMPACT', PoP_ServerUtils::get_template_definition('layout-content-postcompact'));
 define ('GD_TEMPLATE_LAYOUT_CONTENT_COMMENT', PoP_ServerUtils::get_template_definition('layout-content-comment'));
+define ('GD_TEMPLATE_LAYOUT_CONTENT_PAGE', PoP_ServerUtils::get_template_definition('layout-content-page'));
 
 class GD_Template_Processor_ContentLayouts extends GD_Template_Processor_ContentLayoutsBase {
 
@@ -17,6 +18,7 @@ class GD_Template_Processor_ContentLayouts extends GD_Template_Processor_Content
 			GD_TEMPLATE_LAYOUT_CONTENT_POST,
 			GD_TEMPLATE_LAYOUT_CONTENT_POSTCOMPACT,
 			GD_TEMPLATE_LAYOUT_CONTENT_COMMENT,
+			GD_TEMPLATE_LAYOUT_CONTENT_PAGE,
 		);
 	}	
 
