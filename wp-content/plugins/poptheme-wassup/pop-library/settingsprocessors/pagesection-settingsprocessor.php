@@ -849,7 +849,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			case POP_WPAPI_PAGE_LOADERS_COMMENTS_LAYOUTS:
 			case POP_WPAPI_PAGE_LOADERS_TAGS_LAYOUTS:
 
-				if ($template_id == GD_TEMPLATE_PAGESECTION_OPERATIONAL) {
+				if ($template_id == GD_TEMPLATE_PAGESECTION_COMPONENTS) {
 			
 					$blocks[] = $gd_template_settingsmanager->get_page_block($page_id);
 					break;
