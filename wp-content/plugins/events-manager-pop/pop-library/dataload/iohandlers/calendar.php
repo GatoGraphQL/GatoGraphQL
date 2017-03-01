@@ -18,7 +18,7 @@ class GD_DataLoad_IOHandler_Calendar extends GD_DataLoad_IOHandler_List {
     function get_vars($atts, $iohandler_atts) {
     
 		$ret = parent::get_vars($atts, $iohandler_atts);
-		$today = time();
+		$today = POP_CONSTANT_TIME;
 
 		$year = $atts[GD_URLPARAM_YEAR] ? $atts[GD_URLPARAM_YEAR] : date('Y', $today);
 		// Format 'n': do not include leading zeros

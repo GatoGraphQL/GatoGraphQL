@@ -80,7 +80,7 @@ function generateRandomString($length = 6, $addtime = true) {
     }
 
     if ($addtime) {
-    	$randomString .= time();
+    	$randomString .= POP_CONSTANT_TIME;
     }
     return $randomString;
 }

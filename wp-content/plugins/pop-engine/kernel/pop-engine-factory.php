@@ -25,6 +25,10 @@ class PoP_Engine_Factory {
 	public static function output_end() {
 		self::$instance->output_end();
 	}
+
+	// public static function generate_json() {
+	// 	self::$instance->generate_json();
+	// }
 }
 
 // For HTML Output: call output function on the footer (it won't get called for JSON output)

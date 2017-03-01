@@ -2,6 +2,7 @@
 
 $engine = PoP_Engine_Factory::get_instance();
 $engine->check_redirect(false);
+$engine->generate_json();
 
 get_header();
 

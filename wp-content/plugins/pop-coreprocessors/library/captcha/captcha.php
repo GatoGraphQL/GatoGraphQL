@@ -12,7 +12,7 @@ class GD_Captcha {
 	public static function get_image_src($session) {
 
 		$folder = POP_COREPROCESSORS_PHPURI_LIB.'/captcha';
-		return sprintf($folder.'/captcha.png.php?rand=%s&session=%s', rand(), $session);
+		return sprintf($folder.'/captcha.png.php?rand=%s&session=%s', POP_CONSTANT_RAND, $session);
 	}
 
 	public static function validate($captcha, $session) {

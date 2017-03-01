@@ -59,40 +59,98 @@ class PoP_Engine {
 		return null;
 	}
 
-	function output() {
+	function send_etag_header($json) {
 
-		do_action('PoP_Engine:beginning');	
-		do_action('PoP_Engine:output:beginning');
-	
-		// Check first if there is any redirection to be done (user logged in when should not / etc)
-		// Commented, because php has already been written to buffer when calling get_header() in page.php. So the call
-		// is done in page.php / page-json.php instead (and only there because in the other templates there's nothing to redirect)
-		// $this->check_redirect($template_id, false);
+		// Set the ETag-header? This is needed for the Service Workers
+		// Comment Leo 01/03/2017: it had been sent only for JSON requests, but also added for the first, loading_frame() request,
+		// so that also that one can be properly validated
+		// Comment Leo 01/03/2017: Always send the ETag, because it's needed to use together with the Control-Cache header
+		// to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
+		if (true/*apply_filters('PoP_Engine:output_json:add_etag_header', false)*/) {
 
-		// Important: do NOT move this piece of code from here! Doing so, the wpEditor might stop rendering well
-		// It must be rendered first, before any other wp_editor is invoked, because of these lines of code:
-		// if ( $first_run )
-		// $mceInit = array_merge( self::$first_init, $mceInit );
-		// in file wp-includes/class-wp-editor.php
-		// Otherwise it won't generate and print properly the settings
-		// Just generate the code to load all needed scripts, the actual html code with the wpEditor is not needed
-		// (it will be used on other wpEditors, instantiated in formcomponents-inputs.php)
-		ob_start();
-		wp_editor('', GD_TEMPLATESETTINGS_EDITOR_NAME);
-		ob_get_clean();
+			// The same page will have different hashs only because of those random elements added each time,
+			// such as the unique_id and the current_time. So remove these to generate the hash
+			$differentiators = array(
+				POP_CONSTANT_UNIQUE_ID,
+				POP_CONSTANT_CURRENTTIMESTAMP,
+				POP_CONSTANT_RAND,
+				POP_CONSTANT_TIME,
+			);
+			$commoncode = str_replace($differentiators, '', $json['json']);
 
-		global $gd_template_processor_manager;
+			// Also replace all those tags with content that, even if it's different, should not alter the output
+			// Eg: comments-count. Because adding a comment does not delete the cache, then the comments-count is allowed
+			// to be shown stale. So if adding a new comment, there's no need for the user to receive the
+			// "This page has been updated, click here to refresh it." notification
+			// Because we already got the JSON, then remove entries of the type:
+			// "userpostactivity-count":1, (if there are more elements after)
+			// and
+			// "userpostactivity-count":1
+			$nocache_fields = $json['nocache-fields'];
+			$commoncode = preg_replace('/"('.implode('|', $nocache_fields).')":[0-9]+,?/', '', $commoncode);
+			header("ETag: ".wp_hash($commoncode));
+		}
+	}
 
-		// Get the top level template, tied to WP Conditional tags
+	function generate_json() {
+
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$fetching_json = $vars['fetching-json'];
+
+		$output_items = array();
+		if ($fetching_json) {
+
+			// What items to fetch
+			// Give different response depending on the target: Hierarchy / Block / Item
+			if ($vars['fetching-json-settingsdata']) {
+
+				// PageSection target: bring everything
+				$output_items = array('settings', 'data');
+			}
+			elseif ($vars['fetching-json-settings']) {
+				
+				// Bring only the settings
+				$output_items = array('settings');
+			}
+			elseif ($vars['fetching-json-data']) {
+				
+				// Block target: bring only the data, no need for the settings
+				$output_items = array('data');
+			}
+		}
+		else {
+
+			// Bring everything
+			$output_items = array('settings', 'data');
+		}
+
 		$template_id = $this->get_toplevel_template_id();
-
-		if (!($json = $this->get_json($template_id))) {
+		if (!($json = $this->get_json($template_id, $output_items))) {
 
 			return;
 		}
 
-		// Keep the variable for later use
+		// Keep the variable for later use, if needed
 		$this->json = $json;
+
+		// Send the ETag-header
+		$this->send_etag_header($json);
+	}
+
+	function output() {
+		
+		if (!$this->json) {
+
+			return;
+		}
+
+		do_action('PoP_Engine:beginning');	
+		do_action('PoP_Engine:output:beginning');
+	
+		// $this->generate_json();
+		ob_start();
+		wp_editor('', GD_TEMPLATESETTINGS_EDITOR_NAME);
+		ob_get_clean();	
 
 		// If the current request is done by a crawler, then directly return the result for the crawler and nothing else.
 		// Nothing to fear, since WP Super Cache will not cache this result
@@ -108,9 +166,9 @@ class PoP_Engine {
 			;
 			printf(
 				$output,
-				$json['cachedsettings'] ? "true" : "false",
+				$this->json['cachedsettings'] ? "true" : "false",
 				GD_TEMPLATEID_TOPLEVEL_SETTINGSID,
-				$json['json']
+				$this->json['json']
 			);
 		}
 
@@ -140,70 +198,19 @@ class PoP_Engine {
 
 		// Indicate that this is a json response in the HTTP Header
 		header('Content-type: application/json');
-
-		do_action('PoP_Engine:beginning');	
-		do_action('PoP_Engine:output_json:beginning');	
-
-		$template_id = $this->get_toplevel_template_id();
-
-		// Check first if there is any redirection to be done (user logged in when should not / etc)
-		// Commented, because php has already been written to buffer when calling get_header() in page.php. So the call
-		// is done in page.php / page-json.php instead (and only there because in the other templates there's nothing to redirect)
-		// $this->check_redirect($template_id, true);
-
-		// Give different response depending on the target: Hierarchy / Block / Item
-		$vars = GD_TemplateManager_Utils::get_vars();
-		if ($vars['fetching-json-settingsdata']) {
-
-			// PageSection target: bring everything
-			$output_items = array();
-		}
-		elseif ($vars['fetching-json-settings']) {
-			
-			// Bring only the settings
-			$output_items = array('settings');
-		}
-		elseif ($vars['fetching-json-data']) {
-			
-			// Block target: bring only the data, no need for the settings
-			$output_items = array('data');
-		}
 		
-		if (!($json = $this->get_json($template_id, $output_items))) {
+		if (!$this->json) {
 
 			return;
 		}
 
-		// Keep the variable for later use, if needed
-		$this->json = $json;
+		do_action('PoP_Engine:beginning');	
+		do_action('PoP_Engine:output_json:beginning');	
 
-		// Set the ETag-header? This is needed for the Service Workers
-		if (apply_filters('PoP_Engine:output_json:add_etag_header', false)) {
-
-			// The same page will have different hashs only because of those random elements added each time,
-			// such as the unique_id and the current_time. So remove these to generate the hash
-			$differentiators = array(
-				POP_CONSTANT_UNIQUE_ID,
-				POP_CONSTANT_CURRENTTIMESTAMP,
-			);
-			$commoncode = str_replace($differentiators, '', $json['json']);
-
-			// Also replace all those tags with content that, even if it's different, should not alter the output
-			// Eg: comments-count. Because adding a comment does not delete the cache, then the comments-count is allowed
-			// to be shown stale. So if adding a new comment, there's no need for the user to receive the
-			// "This page has been updated, click here to refresh it." notification
-			// Because we already got the JSON, then remove entries of the type:
-			// "userpostactivity-count":1, (if there are more elements after)
-			// and
-			// "userpostactivity-count":1
-			$nocache_fields = $json['nocache-fields'];
-			$commoncode = preg_replace('/"('.implode('|', $nocache_fields).')":[0-9]+,?/', '', $commoncode);
-
-			header("ETag: ".wp_hash($commoncode));
-		}
+		// $this->generate_json();
 		
 		// Skip returning 'crawlable-data', no need for JSON request
-		echo $json['json'];
+		echo $this->json['json'];
 
 		// Allow extra functionalities. Eg: Save the logged-in user meta information
 		do_action('PoP_Engine:output_json:end');
@@ -255,14 +262,14 @@ class PoP_Engine {
 		$formatter = GD_TemplateManager_Utils::get_datastructure_formatter();
 		$request = $_REQUEST;
 
-		// If passing no setting items, then bring everything
-		if (empty($output_items)) {
+		// // If passing no setting items, then bring everything
+		// if (empty($output_items)) {
 
-			$output_items = array(
-				'settings',
-				'data'
-			);
-		}
+		// 	$output_items = array(
+		// 		'settings',
+		// 		'data'
+		// 	);
+		// }
 
 		$initial_atts = array();
 		
@@ -485,6 +492,7 @@ class PoP_Engine {
 
 			$pagesection_processor = $gd_template_processor_manager->get_processor($pagesection_template_id);
 			$pagesection_atts = $toplevel_atts[$pagesection_template_id];		
+			
 			$pagesection_data_settings = $data_settings[$pagesection_template_id];
 			$pagesection_settings_id = $pagesection_processor->get_settings_id($pagesection_template_id);
 

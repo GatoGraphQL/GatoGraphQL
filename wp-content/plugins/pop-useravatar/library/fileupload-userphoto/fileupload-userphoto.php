@@ -16,7 +16,7 @@ class GD_FileUpload_UserPhoto {
 		GD_FileUpload_UserPhoto_Manager_Factory::get_instance()->add($this);
 	
 		// New one, create random
-		$this->upload_path = "_" . time() . "_" . rand();
+		$this->upload_path = "_" . POP_CONSTANT_TIME . "_" . POP_CONSTANT_RAND;
 	}
 
 	function get_upload_path() {
