@@ -20,17 +20,29 @@ class AAL_PoPProcessors_ProcessorHooks {
 		);
 	}
 
+	protected function enable_latestnotifications() {
+
+		return apply_filters(
+			'AAL_PoPProcessors_ProcessorHooks:latestnotifications:enabled',
+			true
+		);
+	}
+
 	function get_loggedinuserdata_blocks($blocks) {
 
-		// Add the Notifications since the last user time the user fetched content from website
-		$blocks[] = GD_TEMPLATE_BLOCKDATA_LATESTNOTIFICATIONS;
+		// Add the Notifications since the last time the user fetched content from website
+		if ($this->enable_latestnotifications()) {
+			$blocks[] = GD_TEMPLATE_BLOCKDATA_LATESTNOTIFICATIONS;
+		}
 		return $blocks;
 	}
 
 	function get_login_blocks($blocks) {
 
-		// Add the Notifications since the last user time the user fetched content from website
-		$blocks[] = GD_TEMPLATE_BLOCK_LATESTNOTIFICATIONS;
+		// Add the Notifications since the last time the user fetched content from website
+		if ($this->enable_latestnotifications()) {
+			$blocks[] = GD_TEMPLATE_BLOCK_LATESTNOTIFICATIONS;
+		}
 		return $blocks;
 	}
 }

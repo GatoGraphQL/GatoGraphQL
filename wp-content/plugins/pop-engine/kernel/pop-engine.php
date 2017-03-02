@@ -94,11 +94,15 @@ class PoP_Engine {
 
 	function generate_json() {
 
+		do_action('PoP_Engine:beginning');	
+
 		$vars = GD_TemplateManager_Utils::get_vars();
 		$fetching_json = $vars['fetching-json'];
 
 		$output_items = array();
 		if ($fetching_json) {
+
+			do_action('PoP_Engine:output_json:beginning');	
 
 			// What items to fetch
 			// Give different response depending on the target: Hierarchy / Block / Item
@@ -119,6 +123,8 @@ class PoP_Engine {
 			}
 		}
 		else {
+
+			do_action('PoP_Engine:output:beginning');
 
 			// Bring everything
 			$output_items = array('settings', 'data');
@@ -143,9 +149,6 @@ class PoP_Engine {
 
 			return;
 		}
-
-		do_action('PoP_Engine:beginning');	
-		do_action('PoP_Engine:output:beginning');
 
 		// If the current request is done by a crawler, then directly return the result for the crawler and nothing else.
 		// Nothing to fear, since WP Super Cache will not cache this result
@@ -198,9 +201,6 @@ class PoP_Engine {
 
 			return;
 		}
-
-		do_action('PoP_Engine:beginning');	
-		do_action('PoP_Engine:output_json:beginning');	
 
 		// Skip returning 'crawlable-data', no need for JSON request
 		echo $this->json['json'];

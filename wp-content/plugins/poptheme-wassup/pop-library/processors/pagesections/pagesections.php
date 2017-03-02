@@ -250,12 +250,12 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 
 		if (GD_TemplateManager_Utils::loading_frame()) {
 			
-			$blockgroups = $blocks_main = array();
+			$blockgroups = $blocks = array();
 			switch ($template_id) {
 
 				case GD_TEMPLATE_PAGESECTION_TOP:
 
-					$blocks_main = array(
+					$blocks = array(
 						GD_TEMPLATE_BLOCK_MENU_TOP_ADDNEW,
 						GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERLOGGEDIN,
 						GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERNOTLOGGEDIN,
@@ -283,7 +283,7 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 
 			// Merge all blocks with the ones set by the parent
 			$this->add_blockgroups($ret, $blockgroups, GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUP);
-			$this->add_blocks($ret, $blocks_main, GD_TEMPLATEBLOCKSETTINGS_MAIN);
+			$this->add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
 		}
 		else {
 

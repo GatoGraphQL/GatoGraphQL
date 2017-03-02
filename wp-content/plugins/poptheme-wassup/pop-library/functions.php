@@ -33,7 +33,9 @@ function get_custom_unique_blockgroups($blockgroups) {
 add_filter('GD_TemplateManager_Utils:get_unique_blocks', 'get_custom_unique_blocks');
 function get_custom_unique_blocks($blocks) {
 
-	$blocks[] = GD_TEMPLATE_BLOCK_LATESTCOUNTS;
+	if (apply_filters('poptheme_wassup_loadlatest', true)) {
+		$blocks[] = GD_TEMPLATE_BLOCK_LATESTCOUNTS;
+	}
 
 	return $blocks;
 }
