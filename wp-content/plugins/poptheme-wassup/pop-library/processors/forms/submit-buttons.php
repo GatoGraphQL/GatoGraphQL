@@ -22,7 +22,7 @@ class PoPTheme_Wassup_Template_Processor_SubmitButtons extends GD_Template_Proce
 
 			case GD_TEMPLATE_SUBMITBUTTON_INSTANTANEOUSSEARCH:
 
-				return __('Search', 'pop-coreprocessors');
+				return __('Search', 'poptheme-wassup');
 		}
 
 		return parent::get_label($template_id, $atts);

@@ -12,8 +12,8 @@
 
 // 	// Remove all other sizes, only keep below 2 which have a perfect fit for a Gallery
 // 	return array(
-// 		'thumb-pagewide' => __('Wide', 'pop-coreprocessors'),
-// 		'thumbnail' => __('Thumbnail', 'pop-coreprocessors'),
+// 		'thumb-pagewide' => __('Wide', 'poptheme-wassup'),
+// 		'thumbnail' => __('Thumbnail', 'poptheme-wassup'),
 // 	);
 // }
 
@@ -21,11 +21,11 @@
 // add_filter('image_size_names_choose', 'pop_image_size_names_choose', 1000);
 // function pop_image_size_names_choose($sizes) {
 
-// 	$sizes['thumb-pagewide'] = __('Wide', 'pop-coreprocessors');
+// 	$sizes['thumb-pagewide'] = __('Wide', 'poptheme-wassup');
 // 	return $sizes;
 // 	// return array(
-// 	// 	'thumb-pagewide' => __('Wide', 'pop-coreprocessors'),
-// 	// 	'thumbnail' => __('Thumbnail', 'pop-coreprocessors'),
+// 	// 	'thumb-pagewide' => __('Wide', 'poptheme-wassup'),
+// 	// 	'thumbnail' => __('Thumbnail', 'poptheme-wassup'),
 // 	// );
 // }
 
@@ -36,15 +36,15 @@ function pop_image_size_names_choose($sizes) {
 	if (is_admin()) {
 
 		// In the back-end, add the thumb-pagewide to the list of options
-		$sizes['thumb-pagewide'] = __('Wide', 'pop-coreprocessors');
+		$sizes['thumb-pagewide'] = __('Wide', 'poptheme-wassup');
 		return $sizes;
 	}
 
 	// In the front-end, limit the user what sizes can be selected, to fit our layout perfectly
 	return array(
 		'full'      => __('Full Size'),
-		'thumb-pagewide' => __('Wide', 'pop-coreprocessors'),
-		'thumbnail' => __('Thumbnail', 'pop-coreprocessors'),
+		'thumb-pagewide' => __('Wide', 'poptheme-wassup'),
+		'thumbnail' => __('Thumbnail', 'poptheme-wassup'),
 	);
 }
 add_filter( 'media_view_settings', 'pop_media_view_settings_defaultthumb');

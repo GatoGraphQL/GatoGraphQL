@@ -11,7 +11,7 @@ class GD_Template_Processor_ScrollMapsBase extends GD_Template_Processor_Scrolls
 
 		return sprintf(
 			'<div class="pop-scrollformore bg-warning text-warning text-center row scroll-row"><small>%s</small></div>',
-			__('Scroll down to load more results', 'pop-coreprocessors')
+			__('Scroll down to load more results', 'poptheme-wassup')
 		);
 	}
 	

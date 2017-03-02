@@ -146,11 +146,6 @@ class PoP_Engine {
 
 		do_action('PoP_Engine:beginning');	
 		do_action('PoP_Engine:output:beginning');
-	
-		// $this->generate_json();
-		ob_start();
-		wp_editor('', GD_TEMPLATESETTINGS_EDITOR_NAME);
-		ob_get_clean();	
 
 		// If the current request is done by a crawler, then directly return the result for the crawler and nothing else.
 		// Nothing to fear, since WP Super Cache will not cache this result
@@ -207,8 +202,6 @@ class PoP_Engine {
 		do_action('PoP_Engine:beginning');	
 		do_action('PoP_Engine:output_json:beginning');	
 
-		// $this->generate_json();
-		
 		// Skip returning 'crawlable-data', no need for JSON request
 		echo $this->json['json'];
 

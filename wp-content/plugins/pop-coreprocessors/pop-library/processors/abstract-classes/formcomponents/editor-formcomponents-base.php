@@ -114,9 +114,10 @@ class GD_Template_Processor_EditorFormComponentsBase extends GD_Template_Process
 			$options['textarea_rows'] = $rows;
 		}
 
-		ob_start();
-		wp_editor($value, $editor_id, $options);
-		$code = ob_get_clean();
+		// ob_start();
+		// wp_editor($value, $editor_id, $options);
+		// $code = ob_get_clean();
+		$code = PoP_EditorUtils::get_editor_code($editor_id, $value, $options);
 
 		// Keep a backup copy, since it contains the string to be replaced. Since MESYM v4.0, the configuration for the formcomponent
 		// is loaded at the beginning and used forever, so after executing 'replacestr-from-itemobject' this configuration (with the string to be replaced) changes

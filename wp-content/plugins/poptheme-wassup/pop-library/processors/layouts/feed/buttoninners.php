@@ -24,8 +24,8 @@ class GD_Template_Processor_FeedButtonInners extends GD_Template_Processor_Butto
 
 				return sprintf(
 					'<span class="collapsed">%s</span><span class="expanded">%s</span>',
-					__('Show comments, responses and highlights', 'pop-coreprocessors'),
-					__('Hide comments, responses and highlights', 'pop-coreprocessors')
+					__('Show comments, responses and highlights', 'poptheme-wassup'),
+					__('Hide comments, responses and highlights', 'poptheme-wassup')
 				);
 		}
 
@@ -51,7 +51,7 @@ class GD_Template_Processor_FeedButtonInners extends GD_Template_Processor_Butto
 
 			case GD_TEMPLATE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
 		
-				return __('(', 'pop-coreprocessors');
+				return __('(', 'poptheme-wassup');
 		}
 		
 		return parent::get_textfield_open($template_id, $atts);
@@ -62,7 +62,7 @@ class GD_Template_Processor_FeedButtonInners extends GD_Template_Processor_Butto
 
 			case GD_TEMPLATE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
 		
-				return __(')', 'pop-coreprocessors');
+				return __(')', 'poptheme-wassup');
 		}
 		
 		return parent::get_textfield_close($template_id, $atts);

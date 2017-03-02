@@ -35,7 +35,7 @@ class GD_Template_Processor_FeedButtons extends GD_Template_Processor_ButtonsBas
 
 			case GD_TEMPLATE_BUTTON_TOGGLEUSERPOSTACTIVITY:
 
-				return __('Comments, responses and highlights', 'pop-coreprocessors');
+				return __('Comments, responses and highlights', 'poptheme-wassup');
 		}
 		
 		return parent::get_title($template_id);

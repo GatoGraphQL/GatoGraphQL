@@ -849,6 +849,9 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			case POP_WPAPI_PAGE_LOADERS_COMMENTS_LAYOUTS:
 			case POP_WPAPI_PAGE_LOADERS_TAGS_LAYOUTS:
 
+				// Added in Components instead of Operational because GD_TEMPLATE_BLOCK_LATESTCOUNTS is added as a unique block,
+				// and this is the block requesting the data served by POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS 
+				// if ($template_id == GD_TEMPLATE_PAGESECTION_OPERATIONAL) {
 				if ($template_id == GD_TEMPLATE_PAGESECTION_COMPONENTS) {
 			
 					$blocks[] = $gd_template_settingsmanager->get_page_block($page_id);
