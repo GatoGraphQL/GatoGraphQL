@@ -657,7 +657,8 @@ popCustomBootstrap = {
 		if (tabPane) {
 			
 			// If the tabPane had saved a position...
-			if (tabPane.data('lastposition')) {
+			// If lastposition = 0 it must work also, so comparing to 'undefined'
+			if (typeof tabPane.data('lastposition') != 'undefined') {
 
 				// Scroll to it
 				popManager.scrollTop(pageSection, tabPane.data('lastposition'));

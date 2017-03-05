@@ -11,12 +11,16 @@ function gd_ppp_createupdate_add_preview_link($success_string, $post_id, $status
 	if (in_array($status, array('draft', 'pending'))) {
 				
 		$previewurl = gd_ppp_preview_link($post_id);
+
+		// Allow to inject data-sw-networkfirst="true"
+		$previewurl_params = apply_filters('gd_ppp_previewurl_link_params', '');
 		if ($previewurl) {
 			$success_string .= sprintf(
-				' <a href="%1$s" target="%2$s" class="btn btn-xs btn-primary"><i class="fa fa-fw fa-eye"></i>%3$s</a>', 
+				' <a href="%1$s" target="%2$s" class="btn btn-xs btn-primary" %4$s><i class="fa fa-fw fa-eye"></i>%3$s</a>', 
 				$previewurl, 
 				GD_URLPARAM_TARGET_QUICKVIEW,
-				__('Preview', 'poptheme-wassup')
+				__('Preview', 'poptheme-wassup'),
+				$previewurl_params
 			);
 		}
 	}

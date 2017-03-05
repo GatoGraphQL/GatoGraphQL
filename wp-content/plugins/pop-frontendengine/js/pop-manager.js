@@ -1766,20 +1766,7 @@ popManager = {
 			}
 		};
 
-		var current = window.location.href;
-		
-		// Special case for the homepage: the link must have the final '/'
-		if (current == M.HOME_URL) {
-			current = M.HOME_URL+'/';
-		}
-
-		// Special case for qTranslateX: if we are loading the homepage, without the language information
-		// (eg: https://kuwang.com.ar), and a tab with the language is open (eg: https://kuwang.com.ar/es/)
-		// then have it removed, or the homepage will be open twice. For that, we assume the current does have
-		// the language information, so it will be removed below
-		if (current == M.HOME_URL+'/' && M.HOMELOCALE_URL) {
-			current = M.HOMELOCALE_URL;
-		}
+		var currentURL = t.getTabsCurrentURL();
 
 		var tabs = t.getScreenOpenTabs();
 		$.each(tabs, function(target, urls) {
@@ -1791,7 +1778,7 @@ popManager = {
 			if (target == M.URLPARAM_TARGET_MAIN) {
 
 				// Do not re-open the one URL the user opened
-				var pos = urls.indexOf(current);
+				var pos = urls.indexOf(currentURL);
 				if (pos !== -1) {
 					
 					// Remove the entry
@@ -1805,6 +1792,28 @@ popManager = {
 				t.fetch(url, options);
 			});
 		});
+	},
+
+	getTabsCurrentURL : function() {
+
+		var t = this;
+		
+		var currentURL = window.location.href;
+		
+		// Special case for the homepage: the link must have the final '/'
+		if (currentURL == M.HOME_URL) {
+			currentURL = M.HOME_URL+'/';
+		}
+
+		// Special case for qTranslateX: if we are loading the homepage, without the language information
+		// (eg: https://kuwang.com.ar), and a tab with the language is open (eg: https://kuwang.com.ar/es/)
+		// then have it removed, or the homepage will be open twice. For that, we assume the current does have
+		// the language information, so it will be removed below
+		if (currentURL == M.HOME_URL+'/' && M.HOMELOCALE_URL) {
+			currentURL = M.HOMELOCALE_URL;
+		}
+
+		return currentURL;
 	},
 
 	getOpenTabsKey : function() {
@@ -1833,6 +1842,19 @@ popManager = {
 		var key = t.getOpenTabsKey();
 
 		return tabs[key] || {};
+	},
+
+	keepScreenOpenTab : function(url, target) {
+
+		// Function executed to only keep a given tab open and close all the others.
+		// Used for the alert "Do you want to open the previous session tabs?" 
+		// If clicking cancel, then remove all other tabs, for next time that the user opens the browser
+		var t = this;
+		var tabs = t.getOpenTabs();
+		var key = t.getOpenTabsKey();
+
+		tabs[key][target] = [url];
+		t.storeData('PoP:openTabs', tabs);
 	},
 
 	getOpenTabs : function() {

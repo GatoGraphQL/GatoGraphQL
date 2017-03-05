@@ -4,6 +4,7 @@
 // Load Plugin-specific Libraries
 //-------------------------------------------------------------------------------------
 
+require_once 'pop-bootstrapprocessors/load.php';
 require_once 'pop-coreprocessors/load.php';
 
 if (class_exists('acf'))	

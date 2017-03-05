@@ -568,6 +568,22 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 
 		return $ret;
 	}
+
+	function init_atts($template_id, &$atts) {
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_BUTTON_POSTPREVIEW:
+
+				// Allow to add data-sw-networkfirst="true"
+				if ($params = apply_filters('GD_Template_Processor_Buttons:postpreview:params', array())) {
+					$this->merge_att($template_id, $atts, 'params', $params);
+				}
+				break;
+		}
+			
+		return parent::init_atts($template_id, $atts);
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

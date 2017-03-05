@@ -580,13 +580,46 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 
 	position: relative;
 }
+
+/*.pop-sw-message.website-level .btn-group.sessiontabs {
+	margin: 0 5px;
+}
+.pop-sw-message.website-level .btn-group.sessiontabs+.checkbox {
+	display: inline-block;
+}*/
+.pop-sw-message.website-level.sessiontabs .btn-group {
+	margin: 0 5px;
+}
+.pop-sw-message.website-level.sessiontabs .checkbox {
+	display: inline-block;
+}
+.pop-sw-message.website-level.sessiontabs .checkbox input[type=checkbox] {
+	margin-left: -15px;
+}
+
 /* Service Workers message to the user to refresh the page */
+.pop-sw-message.website-level,
+.pop-sw-message.page-level,
+.pop-loading,
+.pop-error {
+
+	text-align: center;
+}
 .pop-sw-message.page-level,
 .pop-loading,
 .pop-error {
 
 	z-index: 580;
-	text-align: center;
+}
+.pop-sw-message.website-level {
+
+	/* On top of offcanvas.hover */
+	z-index: 720;
+}
+.pop-sw-message.website-level.topmost {
+
+	/* On top of offcanvas.hover */
+	z-index: 750;
 }
 .pop-loading.top-level,
 .pop-error.top-level {
@@ -595,7 +628,8 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	top: 0;
 	left: 50%;
 }
-.pop-sw-message.page-level {
+.pop-sw-message.page-level,
+.pop-sw-message.website-level {
 	position: fixed;
 	bottom: 0;
 	left: 50%;
@@ -622,6 +656,7 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	margin-left: -90px;
 }
 .pop-sw-message.page-level,
+.pop-sw-message.website-level,
 .pop-error.top-level {
 
 	width: 400px;
@@ -629,13 +664,15 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 }
 @media (min-width: 768px) {
 	.pop-sw-message.page-level,
+	.pop-sw-message.website-level,
 	.pop-error.top-level {
 
-		width: 450px;
-		margin-left: -225px;
+		width: 500px;
+		margin-left: -250px;
 	}
 }
 .pop-sw-message.page-level,
+.pop-sw-message.website-level,
 .pop-error.alert {
 	margin-bottom: 0;
 }

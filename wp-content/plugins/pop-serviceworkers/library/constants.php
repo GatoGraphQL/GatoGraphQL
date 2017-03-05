@@ -7,6 +7,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('POP_SW_URLPARAM_NETWORKFIRST', 'sw-networkfirst');
+define ('POP_SW_IDS_CHECKBOX_REMEMBER', 'sw-remember');
 
 /** 
  * Important: this same value must be set in the .htaccess to make an internal redirect, so the cache bust parameter
@@ -36,6 +37,9 @@ add_filter('gd_jquery_constants', 'pop_sw_jquery_constants');
 function pop_sw_jquery_constants($jquery_constants) {
 
 	$jquery_constants['SW_URLPARAM_NETWORKFIRST'] = POP_SW_URLPARAM_NETWORKFIRST;
+	$jquery_constants['SW_IDS_CHECKBOX_REMEMBER'] = POP_SW_IDS_CHECKBOX_REMEMBER;
+
+
 
 	// Allow the PoPTheme Wassup indicate in which pagesections will show the "Please refresh this page" message
 	$jquery_constants['SW_MAIN_PAGESECTIONS'] = apply_filters('pop_sw_main_pagesection_ids', array());
@@ -47,8 +51,10 @@ function pop_sw_jquery_constants($jquery_constants) {
 	add_filter('get_reloadurl_linkattrs', 'pop_sw_reloadurl_linkattrs');
 
 	// The message html to be appended to the pageSection
+	$msg_placeholder = '<div class="pop-sw-message %s alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" aria-hidden="true" data-dismiss="alert">×</button>%s</div>';
 	$message = sprintf(
-		'<div class="pop-sw-message page-level alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" aria-hidden="true" data-dismiss="alert">×</button>%s</div>',
+		$msg_placeholder,
+		'page-level',
 		sprintf(
 			__('This page has been updated, <a href="%s" target="%s" %s>click here to refresh it</a>.', 'pop-serviceworkers'),
 			'{0}',
@@ -56,7 +62,67 @@ function pop_sw_jquery_constants($jquery_constants) {
 			$reloadurl_linkattrs
 		)
 	);
-	$jquery_constants['SW_MESSAGE'] = apply_filters('pop_sw_message', $message);
+	$jquery_constants['SW_MESSAGES_PAGEUPDATED'] = apply_filters('pop_sw_message:pageupdated', $message);
+
+	// The "there is a new SW" message html to be appended to the status
+	// 'topmost': show on top of any other message
+	$message = sprintf(
+		$msg_placeholder,
+		'website-level topmost',
+		sprintf(
+			__('There is a new version of the website, <a href="%s" target="%s">click here to reload it</a>.', 'pop-serviceworkers'),
+			'{0}',
+			GD_URLPARAM_TARGET_FULL
+		)
+	);
+	$jquery_constants['SW_MESSAGES_WEBSITEUPDATED'] = apply_filters('pop_sw_message:websiteupdated', $message);
+
+	// Re-open tabs? Add 'data-dismiss="alert"' so that it always closes the alert, either pressing accept or cancel
+	$btn_placeholder = '<button type="button" class="btn btn-default" aria-hidden="true" data-dismiss="alert" %s>%s</button>';
+	$btns = 
+		'<div class="btn-group btn-group-sm">'.
+			sprintf(
+				$btn_placeholder,
+				'onclick="{0}"',
+				__('Accept', 'pop-serviceworkers')
+			).
+			sprintf(
+				$btn_placeholder,
+				'onclick="{1}"',
+				__('Cancel', 'pop-serviceworkers')
+			).
+		'</div>';
+	$checkbox = sprintf(
+		'<div class="checkbox">'.
+			'<label>'.
+				'<input type="checkbox" id="%s">%s'.
+			'</label>'.
+		'</div>',
+		POP_SW_IDS_CHECKBOX_REMEMBER,
+		__('Remember', 'pop-serviceworkers')
+	);
+
+	$formgroup_placeholder = '%s';//'<div class="form-group">%s</div>';
+	$message = sprintf(
+		$msg_placeholder,
+		'website-level sessiontabs',
+		sprintf(
+			'%s%s%s',//'<div class="form-inline">%s%s%s</div>',
+			sprintf(
+				$formgroup_placeholder,
+				__('Reopen previous session tabs?', 'pop-serviceworkers')
+			),
+			sprintf(
+				$formgroup_placeholder,
+				$btns
+			),
+			sprintf(
+				$formgroup_placeholder,
+				$checkbox
+			)
+		)
+	);
+	$jquery_constants['SW_MESSAGES_REOPENTABS'] = apply_filters('pop_sw_message:reopentabs', $message);
 
 	return $jquery_constants;
 }

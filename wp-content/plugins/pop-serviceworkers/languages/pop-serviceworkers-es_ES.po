@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-27 16:29+0800\n"
-"PO-Revision-Date: 2016-12-27 16:29+0800\n"
+"POT-Creation-Date: 2017-03-05 18:04+0800\n"
+"PO-Revision-Date: 2017-03-05 18:05+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
-#: .././library/constants.php:23
+#: .././library/constants.php:59
 #, php-format
 msgid ""
 "This page has been updated, <a href=\"%s\" target=\"%s\" %s>click here to "
@@ -26,18 +26,43 @@ msgstr ""
 "Esta página ha sido actualizada, <a href=\"%s\" target=\"%s\" %s>haga click "
 "aquí para refrescarla</a>."
 
+#: .././library/constants.php:73
+#, php-format
+msgid ""
+"There is a new version of the website, <a href=\"%s\" target=\"%s\">click "
+"here to reload it</a>."
+msgstr ""
+"Hay una nueva versión del sitio web, <a href=“%s” target=“%s”>haga click "
+"aquí para recargarlo</a>."
+
+#: .././library/constants.php:87
+msgid "Accept"
+msgstr "Aceptar"
+
+#: .././library/constants.php:92
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .././library/constants.php:102
+msgid "Remember"
+msgstr "Recordar"
+
+#: .././library/constants.php:113
+msgid "Reopen previous session tabs?"
+msgstr "Abrir tabs de la sesión anterior?"
+
 #: .././validation.php:32
 msgid "Only admins see this message."
 msgstr "Only admins see this message."
 
 #: .././validation.php:37
 msgid ""
-"Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
 "<b>PoP Service Workers</b> will not work. Please install this plugin from "
 "your plugin installer or download it <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">from here</a>."
 msgstr ""
-"Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
 "<b>PoP Service Workers</b> will not work. Please install this plugin from "
 "your plugin installer or download it <a href=“http://wordpress.org/extend/"
 "plugins/pop/“>from here</a>."
@@ -46,12 +71,12 @@ msgstr ""
 #, php-format
 msgid ""
 "Error: this version of <b>PoP Service Workers</b> requires version %s or "
-"bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+"bigger of <b>PoP Core Processors</b>. Please update this plugin from your "
 "plugin installer or download it <a href=\"http://wordpress.org/extend/"
 "plugins/pop/\">from here</a>."
 msgstr ""
 "Error: this version of <b>PoP Service Workers</b> requires version %s or "
-"bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+"bigger of <b>PoP Core Processors</b>. Please update this plugin from your "
 "plugin installer or download it <a href=“http://wordpress.org/extend/plugins/"
 "pop/“>from here</a>."
 
@@ -70,9 +95,6 @@ msgstr ""
 
 #~ msgid "Apply"
 #~ msgstr "Aplicar"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
 
 #~ msgid "From"
 #~ msgstr "Desde"
@@ -142,9 +164,6 @@ msgstr ""
 
 #~ msgid "November"
 #~ msgstr "Noviembre"
-
-#~ msgid "December"
-#~ msgstr "Diciembre"
 
 #~ msgid "Add Photo/File"
 #~ msgstr "Añadir Foto/Archivo"

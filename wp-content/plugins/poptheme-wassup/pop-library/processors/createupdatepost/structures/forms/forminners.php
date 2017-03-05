@@ -57,8 +57,6 @@ class Wassup_Template_Processor_CreateUpdatePostFormInners extends Wassup_Templa
 
 			case GD_TEMPLATE_FORMINNER_HIGHLIGHT_CREATE:
 			case GD_TEMPLATE_FORMINNER_HIGHLIGHT_UPDATE:
-			case GD_TEMPLATE_FORMINNER_WEBPOST_CREATE:
-			case GD_TEMPLATE_FORMINNER_WEBPOST_UPDATE:
 
 				return null;
 		}

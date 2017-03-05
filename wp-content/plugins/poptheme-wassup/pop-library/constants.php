@@ -5,6 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('POP_IDS_APPSTATUS', 'app-status');
 define ('GD_INTERCEPT_TARGET_NAVIGATOR', 'navigator');
 
 add_filter('gd_jquery_constants', 'gd_themewassup_jquery_constants_templatemanager_impl');
@@ -12,6 +13,10 @@ function gd_themewassup_jquery_constants_templatemanager_impl($jquery_constants)
 
 	// $jquery_constants['INTERCEPT_TARGET_NAVIGATOR'] = GD_INTERCEPT_TARGET_NAVIGATOR;
 
+	// Website Status ID
+	$jquery_constants['IDS_APPSTATUS'] = POP_IDS_APPSTATUS;
+
+	// pageSection IDs
 	$jquery_constants['PS_MAIN_ID'] = GD_TEMPLATEID_PAGESECTIONID_MAIN;
 	$jquery_constants['PS_TOP_ID'] = GD_TEMPLATEID_PAGESECTIONID_TOP;
 	$jquery_constants['PS_QUICKVIEW_ID'] = GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWMAIN;

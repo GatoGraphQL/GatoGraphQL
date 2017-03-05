@@ -23,7 +23,11 @@
 		$status,
 		GD_TEMPLATEID_PAGESECTIONID_NAVIGATOR
 	);
-?>
-<?php echo $mainpagesection_status ?>
-<?php echo $quickview_status ?>
-<?php echo $navigator_status ?>
+
+printf(
+	'<div id="%s">%s%s%s</div>',
+	POP_IDS_APPSTATUS,
+	$mainpagesection_status,
+	$quickview_status,
+	$navigator_status
+);
