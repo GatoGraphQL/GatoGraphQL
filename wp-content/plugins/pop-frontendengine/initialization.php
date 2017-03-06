@@ -47,8 +47,8 @@ class PoPFrontend_Initialization {
 		
 		if (PoP_Frontend_ServerUtils::use_minified_files()) {
 			
-			wp_register_script('pop-templates', $dist_js_folder . '/pop-frontendengine.templates.bundle.min.js', array(), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-templates');
+			wp_register_script('pop-frontendengine-templates', $dist_js_folder . '/pop-frontendengine.templates.bundle.min.js', array(), POP_FRONTENDENGINE_VERSION, true);
+			wp_enqueue_script('pop-frontendengine-templates');
 			
 			wp_register_script('pop', $dist_js_folder . '/pop-frontendengine.bundle.min.js', array('jquery', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
 			wp_enqueue_script('pop');

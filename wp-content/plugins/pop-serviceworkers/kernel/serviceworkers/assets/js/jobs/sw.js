@@ -44,7 +44,9 @@ function cacheName(key, opts) {
 
 function addToCache(cacheKey, request, response) {
   // If coming from function refresh, response might be null
-  if (response !== null && response.ok) {
+  // Comment Leo 06/03/2017: calling addToCache before refresh now, so no need to ask if response is not null
+  // if (response !== null && response.ok) {
+  if (response.ok) {
     var copy = response.clone();
     caches.open(cacheKey).then( cache => {
       cache.put(request, copy);
@@ -354,8 +356,11 @@ self.addEventListener('fetch', event => {
       if (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
         event.waitUntil(
           fetch(cacheBustRequest)
-            .then(response => refresh(request, response))
+            // Comment Leo 06/03/2017: 1st save the cache back (even without checking the ETag), and only then call refresh,
+            // because somehow sometimes the response ETag different than the stored one, it was saved, but nevertheless the 
+            // SW cache returned the previous content!
             .then(response => addToCache(cacheKey, request, response))
+            .then(response => refresh(request, response))
         );
       }
     }

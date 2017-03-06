@@ -87,7 +87,20 @@ class GD_Template_CacheManager {
 				$contents = file_get_contents($file);
 
 				// Replace the placeholder for the uniqueId with the current uniqueId
-				$contents = str_replace(POP_CONSTANT_UNIQUE_ID_CACHEPLACEHOLDER, POP_CONSTANT_UNIQUE_ID, $contents);
+				// Comment Leo 06/03/2017: do the same with all dynamic constants, so that we can generate a proper ETag also when retrieving the cached value
+				$from = array(
+					POP_CACHEPLACEHOLDER_UNIQUE_ID,
+					POP_CACHEPLACEHOLDER_CURRENTTIMESTAMP,
+					POP_CACHEPLACEHOLDER_RAND,
+					POP_CACHEPLACEHOLDER_TIME,
+				);
+				$to = array(
+					POP_CONSTANT_UNIQUE_ID,
+					POP_CONSTANT_CURRENTTIMESTAMP,
+					POP_CONSTANT_RAND,
+					POP_CONSTANT_TIME,
+				);
+				$contents = str_replace($from, $to, $contents);
 
 				if ($decode) {
 					// Treat it as an array, not an object
@@ -131,7 +144,20 @@ class GD_Template_CacheManager {
 	private function save_file($type, $file, $contents) {
 
 		// Replace the uniqueId with the placeholder to keep the saved settings uniqueId-independent
-		$contents = str_replace(POP_CONSTANT_UNIQUE_ID, POP_CONSTANT_UNIQUE_ID_CACHEPLACEHOLDER, $contents);
+		// Comment Leo 06/03/2017: do the same with all dynamic constants, so that we can generate a proper ETag also when retrieving the cached value
+		$from = array(
+			POP_CONSTANT_UNIQUE_ID,
+			POP_CONSTANT_CURRENTTIMESTAMP,
+			POP_CONSTANT_RAND,
+			POP_CONSTANT_TIME,
+		);
+		$to = array(
+			POP_CACHEPLACEHOLDER_UNIQUE_ID,
+			POP_CACHEPLACEHOLDER_CURRENTTIMESTAMP,
+			POP_CACHEPLACEHOLDER_RAND,
+			POP_CACHEPLACEHOLDER_TIME,
+		);
+		$contents = str_replace($from, $to, $contents);
 
 		// Make sure the directory exists
 		$this->create_cache_dir($type);

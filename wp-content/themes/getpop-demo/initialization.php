@@ -57,6 +57,7 @@ class GetPoPDemo_Initialization {
 			wp_dequeue_script('poptheme-wassup');
 
 			// De-register all templates
+			wp_dequeue_script('pop-frontendengine-templates');
 			wp_dequeue_script('pop-baseprocessors-templates');
 			wp_dequeue_script('pop-bootstrapprocessors-templates');
 			wp_dequeue_script('pop-coreprocessors-templates');
