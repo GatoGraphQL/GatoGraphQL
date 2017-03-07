@@ -29,12 +29,10 @@ class PoPSW_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase {
 				// This is all this block does: load the external url defined in parameter "url"
 				$this->add_jsmethod($ret, 'fetchBrowserURL');
 
-				// reopen previous session tabs only if enabled. Eg: GetPoP will be disabled, because with the iframe on it,
-				// it keeps opening them time and again and makes the whole page unloadable
-				// Also, do not open in Embed/Print
-				// if (apply_filters(POP_HOOK_SW_APPSHELL_REOPENTABS, true)) {
-				$this->add_jsmethod($ret, 'reopenTabs');
-				// }
+				// Comment Leo 07/03/2017: commented because it was taken out of SW, so that this JS function is executed always, SW or not, in pop-coreprocessors/js/libraries/tabs.js
+				// // reopen previous session tabs only if enabled. Eg: GetPoP will be disabled, because with the iframe on it,
+				// // it keeps opening them time and again and makes the whole page unloadable
+				// $this->add_jsmethod($ret, 'reopenTabs');
 				break;
 		}
 		

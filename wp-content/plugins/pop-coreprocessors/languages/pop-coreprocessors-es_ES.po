@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 03:08+0800\n"
-"PO-Revision-Date: 2017-02-25 03:08+0800\n"
+"POT-Creation-Date: 2017-03-07 12:25+0800\n"
+"PO-Revision-Date: 2017-03-07 12:25+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -38,7 +38,7 @@ msgstr "Post"
 msgid "Apply"
 msgstr "Aplicar"
 
-#: .././library/date.php:31
+#: .././library/date.php:31 .././library/tabs.php:29
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -138,19 +138,19 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: .././library/editor.php:187
+#: .././library/editor/editor.php:187
 msgid "Add Photo/File"
 msgstr "Añadir Foto/Archivo"
 
-#: .././library/editor.php:193
+#: .././library/editor/editor.php:193
 msgid "Add Image Gallery"
 msgstr "Añadir Galería de Imágenes"
 
-#: .././library/editor.php:201
+#: .././library/editor/editor.php:201
 msgid "Embed Youtube videos, Tweets or others"
 msgstr "Agregar videos de Youtube, Twits y otros"
 
-#: .././library/editor.php:207
+#: .././library/editor/editor.php:207
 msgid ""
 "<p>To embed a video or another object, simply place its URL into the content "
 "area. Make sure the URL is on its own line and not hyperlinked. For example:"
@@ -214,6 +214,18 @@ msgstr "seleccionadas"
 #: .././library/multiselect.php:14
 msgid "All selected"
 msgstr "Todas seleccionadas"
+
+#: .././library/tabs.php:24
+msgid "Accept"
+msgstr "Aceptar"
+
+#: .././library/tabs.php:39
+msgid "Remember"
+msgstr "Recordar"
+
+#: .././library/tabs.php:50
+msgid "Reopen previous session tabs?"
+msgstr "Abrir tabs de la sesión anterior?"
 
 #: .././library/users/user-registration.php:43
 msgid "Title"
@@ -496,7 +508,7 @@ msgstr "Descartar"
 msgid "Load more"
 msgstr "Cargar más"
 
-#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:169
+#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:170
 msgid "Please write the content here..."
 msgstr "Por favor, escriba el contenido aquí..."
 

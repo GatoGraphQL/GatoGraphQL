@@ -57,6 +57,7 @@ require_once POP_COREPROCESSORS_LIB.'/navigation.php';
 require_once POP_COREPROCESSORS_LIB.'/nonces.php';
 require_once POP_COREPROCESSORS_LIB.'/redirects.php';
 require_once POP_COREPROCESSORS_LIB.'/rss.php';
+require_once POP_COREPROCESSORS_LIB.'/tabs.php';
 require_once POP_COREPROCESSORS_LIB.'/socialmedia.php';
 require_once POP_COREPROCESSORS_LIB.'/template.php';
 require_once POP_COREPROCESSORS_LIB.'/translation.php';

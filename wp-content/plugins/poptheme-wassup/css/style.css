@@ -581,42 +581,42 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	position: relative;
 }
 
-/*.pop-sw-message.website-level .btn-group.sessiontabs {
+/*.pop-notificationmsg.website-level .btn-group.sessiontabs {
 	margin: 0 5px;
 }
-.pop-sw-message.website-level .btn-group.sessiontabs+.checkbox {
+.pop-notificationmsg.website-level .btn-group.sessiontabs+.checkbox {
 	display: inline-block;
 }*/
-.pop-sw-message.website-level.sessiontabs .btn-group {
+.pop-notificationmsg.website-level.sessiontabs .btn-group {
 	margin: 0 5px;
 }
-.pop-sw-message.website-level.sessiontabs .checkbox {
+.pop-notificationmsg.website-level.sessiontabs .checkbox {
 	display: inline-block;
 }
-.pop-sw-message.website-level.sessiontabs .checkbox input[type=checkbox] {
+.pop-notificationmsg.website-level.sessiontabs .checkbox input[type=checkbox] {
 	margin-left: -15px;
 }
 
 /* Service Workers message to the user to refresh the page */
-.pop-sw-message.website-level,
-.pop-sw-message.page-level,
+.pop-notificationmsg.website-level,
+.pop-notificationmsg.page-level,
 .pop-loading,
 .pop-error {
 
 	text-align: center;
 }
-.pop-sw-message.page-level,
+.pop-notificationmsg.page-level,
 .pop-loading,
 .pop-error {
 
 	z-index: 580;
 }
-.pop-sw-message.website-level {
+.pop-notificationmsg.website-level {
 
 	/* On top of offcanvas.hover */
 	z-index: 720;
 }
-.pop-sw-message.website-level.topmost {
+.pop-notificationmsg.website-level.topmost {
 
 	/* On top of offcanvas.hover */
 	z-index: 750;
@@ -628,8 +628,8 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	top: 0;
 	left: 50%;
 }
-.pop-sw-message.page-level,
-.pop-sw-message.website-level {
+.pop-notificationmsg.page-level,
+.pop-notificationmsg.website-level {
 	position: fixed;
 	bottom: 0;
 	left: 50%;
@@ -655,24 +655,24 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	width: 180px;
 	margin-left: -90px;
 }
-.pop-sw-message.page-level,
-.pop-sw-message.website-level,
+.pop-notificationmsg.page-level,
+.pop-notificationmsg.website-level,
 .pop-error.top-level {
 
 	width: 400px;
 	margin-left: -200px;
 }
 @media (min-width: 768px) {
-	.pop-sw-message.page-level,
-	.pop-sw-message.website-level,
+	.pop-notificationmsg.page-level,
+	.pop-notificationmsg.website-level,
 	.pop-error.top-level {
 
 		width: 500px;
 		margin-left: -250px;
 	}
 }
-.pop-sw-message.page-level,
-.pop-sw-message.website-level,
+.pop-notificationmsg.page-level,
+.pop-notificationmsg.website-level,
 .pop-error.alert {
 	margin-bottom: 0;
 }

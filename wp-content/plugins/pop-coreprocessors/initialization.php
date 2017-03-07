@@ -204,6 +204,9 @@ class PoP_CoreProcessors_Initialization {
 			wp_register_script('pop-coreprocessors-featuredimage', $libraries_js_folder.'/featuredimage.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-featuredimage');
 
+			wp_register_script('pop-coreprocessors-tabs', $libraries_js_folder.'/tabs.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+			wp_enqueue_script('pop-coreprocessors-tabs');
+
 			wp_register_script('pop-coreprocessors-editor', $libraries_js_folder.'/editor.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-editor');
 
