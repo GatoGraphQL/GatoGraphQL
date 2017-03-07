@@ -124,6 +124,7 @@ self.addEventListener('fetch', event => {
       return false;
     }
 
+
     // resourceType-specific criteria
     var resourceTypeCriteria = {
       'html': {
@@ -178,9 +179,12 @@ self.addEventListener('fetch', event => {
   function getResourceType(request) {
     
     var acceptHeader = request.headers.get('Accept');
+
     var resourceType = 'static';
 
-    if (acceptHeader.indexOf('text/html') !== -1) {
+    // Make sure that it is not a static resource that is being requested
+    var resourceExtensions = ['txt', 'ico', 'xml', 'xsl', 'css', 'js', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'otf', 'jpg', 'jpeg', 'png', 'gif', 'pdf'];
+    if (acceptHeader.indexOf('text/html') !== -1 && !resourceExtensions.some(extension => request.url.endsWith('.'+extension) || request.url.indexOf('.'+extension+'?') > -1)) {
       resourceType = 'html';
     } 
     else if (acceptHeader.indexOf('application/json') !== -1) {
