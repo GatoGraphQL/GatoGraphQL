@@ -74,7 +74,7 @@ class PoP_ServiceWorkers_Manager {
     }
 
 	private function htaccess() {
-        $contents = file_get_contents(POP_SERVICEWORKERS_ASSETS_DIR.'/.htaccess');
+        $contents = file_get_contents(POP_SERVICEWORKERS_ASSETS_DIR.'/htaccess');
         $contents = str_replace('$scope', $this->scope, $contents);
         return $contents;
     }
