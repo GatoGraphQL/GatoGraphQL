@@ -508,7 +508,7 @@ class PoP_EmailSender_Hooks {
 			$title
 		);
 
-		PoP_EmailSender_Utils::sendemail_to_taggedusers($newly_taggedusers_ids, $subject, $content);
+		self::sendemail_to_taggedusers($newly_taggedusers_ids, $subject, $content);
 	}
 
 	function sendemail_to_users_tagged_in_comment($comment_id, $taggedusers_ids) {
@@ -560,7 +560,7 @@ class PoP_EmailSender_Hooks {
 			$title
 		);
 
-		PoP_EmailSender_Utils::sendemail_to_taggedusers($taggedusers_ids, $subject, $content);
+		self::sendemail_to_taggedusers($taggedusers_ids, $subject, $content);
 	}
 
 	/**---------------------------------------------------------------------------------------------------------------

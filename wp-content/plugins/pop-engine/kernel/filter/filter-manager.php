@@ -96,7 +96,7 @@ class GD_Filter_Manager {
 			    $tag_slug = $tag->slug;
 			}
 			else {
-				$query['tag'];
+				$tag_slug = $query['tag'];
 			}
 			$tag_item = array(
 				'taxonomy' => 'post_tag',

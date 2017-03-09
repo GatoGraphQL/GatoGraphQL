@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PoP Theme Wassup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-24 18:25+0800\n"
-"PO-Revision-Date: 2017-02-24 18:25+0800\n"
+"PO-Revision-Date: 2017-03-09 15:10+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
@@ -1840,7 +1840,7 @@ msgstr "("
 
 #: .././pop-library/processors/layouts/feed/buttoninners.php:65
 msgid ")"
-msgstr "="
+msgstr ")"
 
 #: .././pop-library/processors/layouts/feed/buttons.php:38
 msgid "Comments, responses and highlights"
