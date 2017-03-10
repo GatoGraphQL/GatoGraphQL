@@ -94,6 +94,13 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 
 				// Fetch latest notifications every 30 seconds
 				$this->add_jsmethod($ret, 'timeoutLoadLatestBlock');
+
+				// Allow Service Workers to inject js function 'resetTimestamp'
+				if ($extra_jsmethods = apply_filters('GD_Core_Template_Processor_Blocks:jsmethod:latestcounts', array())) {
+					foreach ($extra_jsmethods as $extra_jsmethod) {
+						$this->add_jsmethod($ret, $extra_jsmethod);	
+					}
+				}
 				break;
 
 			case GD_TEMPLATE_BLOCK_EXTERNAL:

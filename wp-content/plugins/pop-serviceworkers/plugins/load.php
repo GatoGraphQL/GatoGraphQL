@@ -4,6 +4,8 @@
 // Load Plugin-specific Libraries
 //-------------------------------------------------------------------------------------
 
+require_once 'pop-coreprocessors/load.php';
+
 if (defined('QTX_VERSION'))
 	require_once 'qtranslate-x/load.php';
 

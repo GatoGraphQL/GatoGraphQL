@@ -114,6 +114,27 @@ popServiceWorkers = {
 		});
 	},
 
+	resetTimestamp : function(args) {
+
+		var t = this;
+		var pageSection = args.pageSection, block = args.block;
+
+		// Only if SW supported
+		if ('serviceWorker' in navigator) {
+
+			// Reset the timestamp in the block params to the current timestamp
+			// That is because SW caches the 'html' resource, with its first timestamp, so it keeps
+			// sending the request to see how many new posts there are from that pretty old date,
+			// producing messages like "View new 17 posts"
+			var blockParams = popManager.getBlockParams(pageSection, block);
+
+			// Timestamp is provided in seconds, function Date.now() returns in milliseconds, so make the translation
+			// Also, rounding the current timestamp to the second increases chances that different users might be served the same response by hitting the cache
+			// Solution taken from https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
+			blockParams[M.URLPARAM_TIMESTAMP] = Math.floor(Date.now()/1000);
+		}
+	},
+
 	//-------------------------------------------------
 	// PRIVATE functions
 	//-------------------------------------------------
@@ -132,4 +153,4 @@ popServiceWorkers = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyOptions', 'modifyFetchBlockOptions', 'fetchBrowserURL']);
+popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyOptions', 'modifyFetchBlockOptions', 'fetchBrowserURL', 'resetTimestamp']);
