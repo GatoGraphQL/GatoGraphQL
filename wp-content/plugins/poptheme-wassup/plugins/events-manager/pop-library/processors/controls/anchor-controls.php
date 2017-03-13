@@ -14,6 +14,8 @@ define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENT', PoP_ServerUtils::get_templat
 define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENTLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addeventlink'));
 
 define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP', PoP_ServerUtils::get_template_definition('anchorcontrol-togglemap'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP', PoP_ServerUtils::get_template_definition('anchorcontrol-toggleauthormap'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP', PoP_ServerUtils::get_template_definition('anchorcontrol-toggletagmap'));
 
 class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processor_AnchorControlsBase {
 
@@ -28,6 +30,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENT,
 			GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENTLINK,
 			GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP,
+			GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP,
+			GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP,
 		);
 	}
 
@@ -58,6 +62,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 				return __('as Link', 'poptheme-wassup');
 
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP:
 
 				return __('Toggle Map', 'poptheme-wassup');
 		}
@@ -91,6 +97,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 				return 'fa-link';
 		
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP:
 
 				return 'fa-map-marker';
 		}
@@ -135,6 +143,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 				return GD_TemplateManager_Utils::add_tab($url, POPTHEME_WASSUP_EM_PAGE_PASTEVENTS);
 
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP:
 
 				// Assume there is only one .collapse.map in this block
 				return '#'.$atts['block-id'].' > .blocksection-inners .collapse.map';
@@ -166,6 +176,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 		switch ($template_id) {
 
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP:
 
 				// It will add class "in" through .js if there is no cookie
 				$this->add_jsmethod($ret, 'cookieToggleClass');
@@ -199,6 +211,8 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 				break;
 		
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP:
 
 				$this->append_att($template_id, $atts, 'class', 'pop-togglemap-btn');
 				$this->append_att($template_id, $atts, 'class', 'btn btn-default btn-sm');
@@ -211,6 +225,18 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 					'data-cookietarget' => '#'.$atts['block-id'].' > .blocksection-inners .collapse.map',
 					'data-cookiecollapse' => 'show',
 					'data-togglecookiebtn' => 'self',
+				));
+				break;
+		}
+
+		switch ($template_id) {
+
+			// The map is initially toggled non-visible
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP:
+			case GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP:
+
+				$this->merge_att($template_id, $atts, 'params', array(
+					'data-initial' => 'set',
 				));
 				break;
 		}

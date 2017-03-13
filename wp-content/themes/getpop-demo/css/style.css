@@ -300,8 +300,9 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
   max-width: 500px;
 }
 
-.blockgroup-hometop .block-events-scrollmap > .blocksection-title a,
-.blockgroup-authortop .block-events-scrollmap > .blocksection-title a,
+.blockgroup-home .pop-block.calendar > .blocksection-title a,
+.blockgroup-home .block-events-scrollmap > .blocksection-title a,
+.blockgroup-author .block-events-scrollmap > .blocksection-title a,
 .blockgroup-tag .block-events-scrollmap > .blocksection-title a {
   color: #4d4d4f;
 }

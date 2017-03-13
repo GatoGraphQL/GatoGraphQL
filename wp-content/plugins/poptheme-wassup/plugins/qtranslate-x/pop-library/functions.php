@@ -26,12 +26,14 @@ function gd_qtransx_welcome_languagelinks($title) {
 		'en' => 'EN',
 		'ms' => 'BM',
 		'es' => 'ES',
+		'zh' => 'ZH',
 	);
 	if ($items = get_qtransx_languageitems($shortnames)) {
 		$title .= sprintf(
-			// Comment Leo 02/07/2016: Changed for ThemeStyle Swift
-			// '&nbsp;&nbsp;&nbsp;<small>%s</small>',
-			'<br/><small>%s</small>',
+			// // Comment Leo 02/07/2016: Changed for ThemeStyle Swift
+			// // '&nbsp;&nbsp;&nbsp;<small>%s</small>',
+			// '<br/><small>%s</small>',
+			'<span class="language-links">%s</span>',
 			implode('&nbsp;', $items)
 		);
 	}

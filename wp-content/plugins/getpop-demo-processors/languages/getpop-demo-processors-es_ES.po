@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-02 18:02+0800\n"
-"PO-Revision-Date: 2016-12-02 18:02+0800\n"
+"POT-Creation-Date: 2017-03-14 04:46+0800\n"
+"PO-Revision-Date: 2017-03-14 04:48+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -40,6 +40,66 @@ msgstr "Anuncio"
 #: .././plugins/poptheme-wassup-categoryprocessors/config/config.php:24
 msgid "Resource"
 msgstr "Recurso"
+
+#: .././pop-library/processors/blockgroups/_carousels.php:98
+#, php-format
+msgid "%sList"
+msgstr "%sLista"
+
+#: .././pop-library/processors/blockgroups/_carousels.php:105
+#, php-format
+msgid "%sFull view"
+msgstr "%sVista completa"
+
+#: .././pop-library/processors/blockgroups/_carousels.php:124
+msgid "More features"
+msgstr "Más características"
+
+#: .././pop-library/processors/blockgroups/_carousels.php:128
+msgid "Under the hood"
+msgstr "Bajo el capó"
+
+#: .././pop-library/processors/blockgroups/_carousels.php:132
+msgid "Ideal for implementing..."
+msgstr "Ideal para la implementación de..."
+
+#: .././pop-library/processors/blockgroups/_carousels.php:204
+msgid "Different formats to display results"
+msgstr "Diferentes formatos para mostrar los resultados"
+
+#: .././pop-library/processors/blockgroups/_carousels.php:208
+msgid "We are not finished yet..."
+msgstr "Aún no hemos terminado..."
+
+#: .././pop-library/processors/blockgroups/_carousels.php:221
+msgid ""
+"Posts and users can be visualized in different formats. Eg: as a list of "
+"items, full view into each, in a Google map, or you can create your own "
+"visualizations."
+msgstr ""
+"Posts and users can be visualized in different formats. Eg: as a list of "
+"items, full view into each, in a Google map, or you can create your own "
+"visualizations."
+
+#: .././pop-library/processors/blockgroups/collapses.php:83
+msgid "Events Calendar"
+msgstr "Calendario de eventos"
+
+#: .././pop-library/processors/blockgroups/collapses.php:84
+msgid ""
+"Find out about upcoming happenings such as workshops, conferences, film "
+"festivals, and more."
+msgstr ""
+"Informáte sobre los próximos acontecimientos, como talleres, conferencias, "
+"festivales de cine y más."
+
+#: .././pop-library/processors/blockgroups/collapses.php:89
+msgid "Events Map"
+msgstr "Mapa de Eventos"
+
+#: .././pop-library/processors/blockgroups/collapses.php:90
+msgid "Or, if you prefer, you can browse the events by their location."
+msgstr "O, si preferís, podés explorar los eventos por su ubicación."
 
 #: .././validation.php:32
 msgid "Only admins see this message."
@@ -206,36 +266,6 @@ msgstr ""
 #~ "sitio web diferente (<a href=\"%1$s\" target=\"_blank\">%2$s</a>). A pesar "
 #~ "de que apunta a %3$s, al hacer clic en un enlace dentro del calendario la "
 #~ "página se abre localmente, no en una nueva pestaña."
-
-#~ msgid "%sList"
-#~ msgstr "%sLista"
-
-#~ msgid "%sFull view"
-#~ msgstr "%sVista completa"
-
-#~ msgid "More features"
-#~ msgstr "Más características"
-
-#~ msgid "Under the hood"
-#~ msgstr "Bajo el capó"
-
-#~ msgid "Ideal for implementing..."
-#~ msgstr "Ideal para la implementación de..."
-
-#~ msgid "Different formats to display results"
-#~ msgstr "Diferentes formatos para mostrar los resultados"
-
-#~ msgid "We are not finished yet..."
-#~ msgstr "Aún no hemos terminado..."
-
-#~ msgid ""
-#~ "Posts and users can be visualized in different formats. Eg: as a list of "
-#~ "items, full view into each, in a Google map, or you can create your own "
-#~ "visualizations."
-#~ msgstr ""
-#~ "Posts and users can be visualized in different formats. Eg: as a list of "
-#~ "items, full view into each, in a Google map, or you can create your own "
-#~ "visualizations."
 
 #~ msgid ""
 #~ "Posts and users can be visualized in different formats. Eg: as a list or "
@@ -1213,12 +1243,6 @@ msgstr ""
 
 #~ msgid "iCal"
 #~ msgstr "iCal"
-
-#~ msgid "Events"
-#~ msgstr "Eventos"
-
-#~ msgid "Events Calendar"
-#~ msgstr "Calendario de eventos"
 
 #~ msgid "Past Events"
 #~ msgstr "Eventos pasados"

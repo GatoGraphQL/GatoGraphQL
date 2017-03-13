@@ -1853,6 +1853,8 @@ popManager = {
 		var tabs = t.getOpenTabs();
 		var key = t.getOpenTabsKey();
 
+		// Remove all other targets also, so that it delets open pages in addons pageSection
+		tabs[key] = {};
 		tabs[key][target] = [url];
 		t.storeData('PoP:openTabs', tabs);
 	},

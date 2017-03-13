@@ -153,25 +153,23 @@ class Wassup_EM_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 			switch ($page_id) {
 
 				case POPTHEME_WASSUP_EM_PAGE_EVENTS:
-
-					$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_SIDEBAR;
-					break;
-
+				case POPTHEME_WASSUP_EM_PAGE_PASTEVENTS:
 				case POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR:
 
 					// For the permanent Sideinfo's Events Calendar
 					if ($fetching_json_data) {
 
 						$blocks[] = $gd_template_settingsmanager->get_page_block($page_id);
-						break;
 					}
+					else {
 
-					$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_CALENDAR_SIDEBAR;
-					break;
-
-				case POPTHEME_WASSUP_EM_PAGE_PASTEVENTS:
-
-					$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_SECTION_PASTEVENTS_SIDEBAR;
+						$sidebars = array(
+							POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_SIDEBAR,
+							POPTHEME_WASSUP_EM_PAGE_PASTEVENTS => GD_TEMPLATE_BLOCKGROUP_SECTION_PASTEVENTS_SIDEBAR,
+							POPTHEME_WASSUP_EM_PAGE_EVENTSCALENDAR => GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_CALENDAR_SIDEBAR,
+						);
+						$blockgroups[] = $sidebars[$page_id];
+					}
 					break;
 
 				case POPTHEME_WASSUP_EM_PAGE_MYEVENTS:

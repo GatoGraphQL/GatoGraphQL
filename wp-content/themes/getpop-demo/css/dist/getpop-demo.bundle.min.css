@@ -38,7 +38,8 @@ flash{0%{background-color:none}50%{background-color:#db902e}100%{background-colo
 flash{0%{background-color:none}50%{background-color:#db902e}100%{background-color:none}}a.logo img:hover{background-color:#db902e}.nav .active>a:hover{color:#db902e}#ps-main .fullview > .wrapper h1.title>a{color:#4d4d4f}#ps-sideinfo .blocksection-controls.top
 .btn{background-color:#f1f1f2}#notifications-count,
 #ps-top .scroll-notifications .preview.notification-layout{background-color:#db902e}#ps-top-menu-addcontent li>a:hover{background-color:#db902e}.mainsections > .blocksection-extensions .calendar .fc-toolbar
-h2{font-size:26px;margin-bottom:5px}@media (min-width: 768px){#ps-background .pop-background-img{max-width:500px}}#ps-background .pop-background-img{margin-bottom:10px}#loading-logo{max-width:500px}.blockgroup-hometop .block-events-scrollmap > .blocksection-title a,
-.blockgroup-authortop .block-events-scrollmap > .blocksection-title a,
+h2{font-size:26px;margin-bottom:5px}@media (min-width: 768px){#ps-background .pop-background-img{max-width:500px}}#ps-background .pop-background-img{margin-bottom:10px}#loading-logo{max-width:500px}.blockgroup-home .pop-block.calendar > .blocksection-title a,
+.blockgroup-home .block-events-scrollmap > .blocksection-title a,
+.blockgroup-author .block-events-scrollmap > .blocksection-title a,
 .blockgroup-tag .block-events-scrollmap > .blocksection-title
 a{color:#4d4d4f}#loadingscreen h1>.tagline{display:none}

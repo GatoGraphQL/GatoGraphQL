@@ -288,6 +288,11 @@ function gd_images_background_impl($img) {
 
 	return GETPOPDEMO_ASSETS_URI.'/img/popdemo-logo-horizontal.png';
 }
+add_filter('gd_images_welcome', 'gd_images_welcome_impl');
+function gd_images_welcome_impl($img) {
+
+	return GETPOPDEMO_ASSETS_URI.'/img/guy.png';
+}
 
 /**---------------------------------------------------------------------------------------------------------------
  * Link Categories

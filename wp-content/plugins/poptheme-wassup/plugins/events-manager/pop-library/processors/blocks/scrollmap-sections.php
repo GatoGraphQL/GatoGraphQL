@@ -390,6 +390,15 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP:
+			case GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
+
+				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
+
+					return $page;
+				}
+				break;
+
 			// These are the Profile Blocks, they will always be used inside an is_author() page
 			// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
 			// an attr "tab" indicating this page through its path. This way, users can go straight to their 
@@ -539,14 +548,19 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 				return GD_TEMPLATE_CONTROLGROUP_TAGBLOCKEVENTLIST;
 			
 			case GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
+				
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKMAPPOSTLIST;
+			
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+			
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST;
+			
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
 
-				return GD_TEMPLATE_CONTROLGROUP_BLOCKMAPPOSTLIST;
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST;
 
 			case GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP:
-			case GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
@@ -556,6 +570,10 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
 
 				return GD_TEMPLATE_CONTROLGROUP_BLOCKUSERLIST;
+		
+			case GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP:
+		
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKMAPUSERLIST;
 		}
 
 		return parent::get_controlgroup_top($template_id);

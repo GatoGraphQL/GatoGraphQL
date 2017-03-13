@@ -27,13 +27,14 @@ class PoPTheme_Wassup_EM_BlockGroupHooks {
 				POP_SCREENGROUP_CONTENTREAD,
 			)
 		);
-		$exclude_screens = array(
-			// POP_SCREEN_AUTHORSECTIONCALENDAR,
-			POP_SCREEN_SECTIONCALENDAR,
-		);
-		if (in_array($screengroup, $include_screengroups) && !in_array($screen, $exclude_screens)) {
+		// $exclude_screens = array(
+		// 	// POP_SCREEN_AUTHORSECTIONCALENDAR,
+		// 	POP_SCREEN_SECTIONCALENDAR,
+		// );
+		if (in_array($screengroup, $include_screengroups)/* && !in_array($screen, $exclude_screens)*/) {
 			
-			$blocks[] = GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS;
+			// $blocks[] = GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS;
+			$blocks[] = GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS;
 		}
 
 		return $blocks;

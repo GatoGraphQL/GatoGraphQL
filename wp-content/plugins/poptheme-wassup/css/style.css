@@ -1707,6 +1707,7 @@ body.non-scrollable .pagesection-group+.pagesection-group-after {
 .pagesection-group.active-main.active-sideinfo-xs .offcanvas.main,
 .pagesection-group.active-main.active-sideinfo-xs #ps-main .blocksection-controls.top {
 	left: -100%;
+	right: auto;
 }
 .pagesection-group.active-side-xs.active-sideinfo-xs .offcanvas.sideinfo,
 .pagesection-group.active-navigator-xs.active-sideinfo-xs .offcanvas.sideinfo,
@@ -1714,6 +1715,7 @@ body.non-scrollable .pagesection-group+.pagesection-group-after {
 .pagesection-group.active-main.active-navigator-xs.active-sideinfo-xs .offcanvas.sideinfo,
 .pagesection-group.active-main.background-side-xs.active-sideinfo-xs .offcanvas.sideinfo {
 	right: -100%;
+	left: auto;
 }
 
 
@@ -2800,18 +2802,27 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 	max-width: 50%;
 }
 
-.blockgroup-home-welcome .top-expand {
-	margin: 0;
-    margin-top: 1px; /* Somehow if not adding this, it shows a line on the mobile phone version. So hide it by pulling the whole thing down 1 px */
-    margin-bottom: -15px;
-}
-.top-expand {
+/*.blockgroup-home-welcome .top-expand {*/
+	/*margin: 0;*/
+    /*margin-top: 1px; *//* Somehow if not adding this, it shows a line on the mobile phone version. So hide it by pulling the whole thing down 1 px */
+    /*margin-bottom: -15px;*/
+/*}*/
+/*.top-expand {
     text-align: center;
-}
-@media (min-width: 768px) {
+}*/
+/*@media (min-width: 768px) {
 	.blockgroup-home-welcome .top-expand {
 	    margin-top: -5px;
 	}
+}*/
+
+.blockgroup-home-welcome .top-expand {
+    /*margin-top: -10px;*/
+    margin-top: 0;
+    border-radius: 6px;
+    padding: 5px 0;
+    background-color: #fff;
+    margin-bottom: 30px;
 }
 .top-expand > a,
 .top-expand > a:hover,
@@ -2830,23 +2841,22 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 .bottom-collapse {
 	margin-top: 0;
 }
-.top-collapse {
+.blockgroup-author .top-collapse {
 	position: absolute;
 	z-index: 100;
-	left: 0;
 	margin: 0;
+	/* For mobile phone place on the left because it falls on top of the "options" floating button, and for iPad there's more space so move to the right*/
+	left: 0;
 }
 @media (min-width: 768px) {
-	/* For mobile phone place on the left because it falls on top of the "options" floating button, and for iPad there's more space so move to the right*/
-	.top-collapse {
-	    left: auto;
+	.blockgroup-author .top-collapse {
 	    right: 0;
+	    left: auto;
 	}
 }
-.welcome-description {
+/*.welcome-description {
 	font-size: 18px;
-	/*text-align: center;*/
-}
+}*/
 
 .blockgroup-author .blockgroup-author-description > .top-expand {
 	margin: 0 0 10px;
@@ -2860,35 +2870,55 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 .blockgroup-author .blocksection-submenu .submenu-group {
 	margin-bottom: 10px;
 }
-.blockgroup-home-welcome.jumbotron {
+.blockgroup-home-welcome .jumbotron {
+	background-color: #fff;
+	/*margin-top: -10px;*/
+}
+.blockgroup-home-welcome .top-collapse {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 5px;
+}
+.blockgroup-home-welcome .language-links {
+    position: absolute;
+    margin-left: 5px;
+    top: 0;
+    left: 0;
+}
+/*.blockgroup-home-welcome .block-homewelcome {
+	position: static;
+	margin-bottom: 0;
+}*/
+/*.blockgroup-home-welcome.jumbotron {
 	margin-top: -15px;
 	margin-bottom: 20px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-}
-/*body.swift */.blockgroup-home-welcome.jumbotron {
+}*/
+/*body.swift *//*.blockgroup-home-welcome.jumbotron {
 	padding: 15px 30px 20px;
-}
+}*/
 /*body.expansive .blockgroup-home-welcome.jumbotron {
 	padding-top: 15px;
 	padding-bottom: 20px;
 }
 */
-.blockgroup-home-welcome.jumbotron p {
+/*.blockgroup-home-welcome.jumbotron p {
     margin-bottom: 10px;
     font-size: 15px;
     font-weight: normal;
-}
-.blockgroup-home-welcome.jumbotron h1 {
+}*/
+/*.blockgroup-home-welcome.jumbotron h1 {
 	text-align: center;
-}
-@media screen and (min-width: 768px) {
+}*/
+/*@media screen and (min-width: 768px) {
 	.blockgroup-home-welcome.jumbotron .h1, 
 	.blockgroup-home-welcome.jumbotron h1 {
 		font-size: 50px;
 	}
 }
-
+*/
 #ps-background .jumbotron {
   margin-bottom: 0;
 }
@@ -4486,3 +4516,41 @@ pre.prettyprint {
 	margin-top: 0;
 }
 
+/* Rotate the collapse link arrow down when opening the collapse */
+.collapselink .collapse-arrow {
+	-webkit-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+}
+.collapselink.collapsed .collapse-arrow {
+	-moz-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+}
+
+
+
+
+.pop-blockgroup.collapse-hometop > .blocksection-extensions > .panel-group > .panel {
+    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+}
+
+.pop-blockgroup.collapse-hometop > .blocksection-extensions > .panel-group > .panel.panel-default>.panel-heading {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+
+#ps-sideinfo .addons > .scroll-inner .pop-blockinner-row {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid #f1f1f2;
+}
+#ps-sideinfo .addons > .scroll-inner .pop-blockinner-row:last-child {
+    border-bottom: 0;
+}

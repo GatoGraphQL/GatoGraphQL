@@ -67,7 +67,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 				);
 				$markups = array(
 					GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME => 'h2',
-					GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME => 'h2',
+					GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME => 'h4',
 					GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME => 'h2',
 					GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG => 'h2',
 					GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION => 'h4',
@@ -89,41 +89,41 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 					$titles[$template_id].' <i class="fa fa-angle-down"></i>'
 				);
 
-				$welcomeblocks = array(
-					GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME,
-					GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME,
-					GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME,
-					GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG,
-				);
-				if (in_array($template_id, $welcomeblocks)) {
+				// $welcomeblocks = array(
+				// 	GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME,
+				// 	GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME,
+				// 	GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME,
+				// 	GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG,
+				// );
+				// if (in_array($template_id, $welcomeblocks)) {
 				
-					// Allow qTrans to add the language links
-					$welcometitle = apply_filters(
-						'GD_Template_Processor_CustomBlockGroups:homewelcometitle',
-						$welcometitle,
-						$template_id
-					);
-				}
+				// 	// Allow qTrans to add the language links
+				// 	$welcometitle = apply_filters(
+				// 		'GD_Template_Processor_CustomBlockGroups:homewelcometitle',
+				// 		$welcometitle,
+				// 		$template_id
+				// 	);
+				// }
 				$frontend_id = $this->get_frontend_id($template_id, $atts);
 				$welcome = sprintf(
-					'<%1$s id="%2$s" class="top-expand">%3$s</%1$s>',
+					'<%1$s id="%2$s" class="top-expand text-center">%3$s</%1$s>',
 					$markups[$template_id],
 					$frontend_id.'-expand',
 					$welcometitle
 				);
-				$close = '';
-				if (in_array($template_id, $welcomeblocks)) {
-					$target = '#'.$frontend_id.'>.blocksection-extensions';
-					$close = sprintf(
-						'<h3 id="%s" class="bottom-collapse"><a data-toggle="collapse" href="%s" aria-expanded="false" title="%s" class="close">%s</a></h3>',
-						$frontend_id.'-collapsebottom',
-						$target,
-						__('Close', 'poptheme-wassup'),
-						'<i class="fa fa-close"></i>'.__('Close', 'poptheme-wassup')
-					);
-				}
+				// $close = '';
+				// if (in_array($template_id, $welcomeblocks)) {
+				// 	$target = '#'.$frontend_id.'>.blocksection-extensions';
+				// 	$close = sprintf(
+				// 		'<h3 id="%s" class="bottom-collapse"><a data-toggle="collapse" href="%s" aria-expanded="false" title="%s" class="close">%s</a></h3>',
+				// 		$frontend_id.'-collapsebottom',
+				// 		$target,
+				// 		__('Close', 'poptheme-wassup'),
+				// 		'<i class="fa fa-close"></i>'.__('Close', 'poptheme-wassup')
+				// 	);
+				// }
 
-				return $welcome.$close;
+				return $welcome;/*.$close;*/
 		}
 		
 		return parent::get_description_bottom($template_id, $atts);
@@ -288,7 +288,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 
 			case GD_TEMPLATE_BLOCKGROUP_HOME_TOP:
 
-				$ret[] = GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME;
+				$ret[] = GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME; //GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME;
 
 				// Allow MESYM to override this
 				if ($widgetarea = apply_filters(
@@ -418,13 +418,13 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			case GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME:
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG:
 			
-				$this->append_att($template_id, $atts, 'class', 'blockgroup-home-welcome jumbotron');
+				$this->append_att($template_id, $atts, 'class', 'blockgroup-home-welcome');
 		
 				// Set the params for the cookie: show the welcome message, until the user clicks on "Close"
 				$frontend_id = $this->get_frontend_id($template_id, $atts);
 				$target = '#'.$frontend_id.'>.blocksection-extensions';
 				$deletecookiebtn = '#'.$frontend_id.'-expand>a';
-				$setcookiebtn = '#'.$frontend_id.'-collapse>a, #'.$frontend_id.'-collapsebottom>a';
+				$setcookiebtn = '#'.$frontend_id.'-collapse>a';/*, #'.$frontend_id.'-collapsebottom>a';*/
 				$this->merge_att($template_id, $atts, 'params', array(
 					'data-cookieid' => $template_id,
 					'data-cookietarget' => $target,
@@ -448,19 +448,31 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION:
 
+				$is_home = ($blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME || $blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME || $blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME || $blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG);
+
 				if (
-					(($blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME || $blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME || $blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME || $blockgroup == GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG) && $blockgroup_block == GD_TEMPLATE_BLOCK_HOMEWELCOME) 
+					($is_home && $blockgroup_block == GD_TEMPLATE_BLOCK_HOMEWELCOME) 
 					||
 					($blockgroup == GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION)
 					) {
 					$target = '#'.$this->get_frontend_id($blockgroup, $blockgroup_atts).'>.blocksection-extensions';
 					$description = sprintf(
-						'<h3 id="%s" class="top-collapse"><a data-toggle="collapse" href="%s" aria-expanded="false" class="close" title="%s">%s</a></h3>',
+						'<span id="%s" class="top-collapse"><a data-toggle="collapse" href="%s" aria-expanded="false" class="close" title="%s">%s</a></span>',
 						$this->get_frontend_id($blockgroup, $blockgroup_atts).'-collapse',
 						$target,
 						__('Close', 'poptheme-wassup'),
-						'<i class="fa fa-close"></i>'// $close_texts[$blockgroup]
+						'<i class="fa fa-close"></i>'
 					);
+
+					if ($is_home) {
+						
+						// Allow qTrans to add the language links
+						$description = apply_filters(
+							'GD_Template_Processor_CustomBlockGroups:homewelcometitle',
+							$description,
+							$blockgroup
+						);
+					}
 					$this->append_att($blockgroup_block, $blockgroup_block_atts, 'description', $description);	
 				}
 				break;
@@ -532,6 +544,20 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 
 		switch ($blockgroup) {
 
+			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME:
+			case GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME:
+			case GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME:
+			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG:
+
+				if ($blockgroup_block == GD_TEMPLATE_BLOCK_HOMEWELCOME) {
+					
+					$this->append_att($blockgroup_block, $blockgroup_block_atts, 'class', 'jumbotron text-center');
+				}
+				break;
+		}
+
+		switch ($blockgroup) {
+
 			// case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
 
 			// 	// Allow the ThemeStyle Expansive to make it into 2 columns
@@ -561,7 +587,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			// 	break;
 
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME:
-			case GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME:
+			// case GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME:
 			case GD_TEMPLATE_BLOCKGROUP_HOME_BLOGNEWSLETTER:
 
 				if (

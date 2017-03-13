@@ -747,6 +747,8 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS:
+			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS:
 			case GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
 
 				// Make explicit that it is "page" hierarchy, since the Events Calendar is embedded everywhere in the sideinfo
@@ -847,6 +849,11 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 			$ret['limit'] = 6;
 		}
 
+		// Allow to override the limit by $atts (eg: for the Website Features, Filter section)
+		if ($limit = $this->get_att($template_id, $atts, 'limit')) {
+			$ret['limit'] = $limit;
+		}
+
 		return $ret;
 	}
 
@@ -929,13 +936,19 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS:
+			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS:
+			case GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
+
+				return GD_TEMPLATE_CONTROLGROUP_SHARE;
+
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW:
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_LIST:
 			
-					return GD_TEMPLATE_CONTROLGROUP_BLOCKEVENTLIST;
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKEVENTLIST;
 
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
@@ -943,7 +956,7 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_LIST:
 			
-					return GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHOREVENTLIST;
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHOREVENTLIST;
 
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW:
@@ -951,7 +964,7 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_LIST:
 
-					return GD_TEMPLATE_CONTROLGROUP_BLOCKTAGEVENTLIST;
+				return GD_TEMPLATE_CONTROLGROUP_BLOCKTAGEVENTLIST;
 
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW:

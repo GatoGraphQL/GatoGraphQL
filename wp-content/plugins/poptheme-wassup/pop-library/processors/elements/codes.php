@@ -37,26 +37,33 @@ class GD_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 
 			case GD_TEMPLATE_CODE_HOMEWELCOME:
 
+				// $code = sprintf(
+				// 	'<h4>%s</h4>',
+				// 	// Allow qTrans to add the language links
+				// 	apply_filters(
+				// 		'GD_Template_Processor_CustomBlockGroups:homewelcometitle',
+				// 		PoPTheme_Wassup_Utils::get_welcome_title(),
+				// 		$template_id
+				// 	)
+				// );
 				$code = sprintf(
-					'<h1>%s</h1>',
-					// Allow qTrans to add the language links
-					apply_filters(
-						'GD_Template_Processor_CustomBlockGroups:homewelcometitle',
-						PoPTheme_Wassup_Utils::get_welcome_title(),
-						$template_id
-					)
+					'<h3 class="media-heading">%s</h3>',
+					PoPTheme_Wassup_Utils::get_welcome_title(false)
 				);
-				$code .= sprintf(
-					'<div class="welcome-description">%s</div>',
-					gd_get_website_description(false)
-				);
+				// $code .= sprintf(
+				// 	'<div class="welcome-description">%s</div>',
+				// 	gd_get_website_description(false)
+				// );
+				$imgcode = '';
 				if ($img = gd_images_welcome()) {
 
-					$code .= sprintf(
+					$imgcode = sprintf(
 						'<img src="%s" class="img-responsive">',
 						$img
 					);
 				}
+				$code .= apply_filters('GD_Template_Processor_Codes:description:welcome_image', $imgcode);
+				$code .= gd_get_website_description(false);
 				// $code .= '<hr/>';
 
 				if ($websitecontent = apply_filters('GD_Template_Processor_Codes:home_welcome:content', array())) {

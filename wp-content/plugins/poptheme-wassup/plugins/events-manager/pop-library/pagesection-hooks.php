@@ -139,7 +139,8 @@ class PoPTheme_Wassup_EM_PageSectionHooks {
 
 	function get_atts_block_initial_sideinfo($ret, $subcomponent, $processor) {
 
-		if ($subcomponent == GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS) {
+		// if ($subcomponent == GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS) {
+		if ($subcomponent == GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS) {
 			
 			// Make the block lazy load
 			$processor->add_att($subcomponent, $ret, 'content-loaded', false);
@@ -147,6 +148,10 @@ class PoPTheme_Wassup_EM_PageSectionHooks {
 			// Add the link
 			$processor->add_att($subcomponent, $ret, 'title-htmltag', 'h4');
 			$processor->add_att($subcomponent, $ret, 'add-titlelink', true);
+			
+			// For the Events scroll
+			$processor->add_att($subcomponent, $ret, 'limit', 6);
+			$processor->add_att($subcomponent, $ret, 'show-fetchmore', false);
 		}		
 
 		return $ret;

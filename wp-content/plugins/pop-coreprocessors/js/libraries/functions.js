@@ -559,7 +559,7 @@ popFunctions = {
 			
 				// After click on dismiss, Set the cookie
 				var cookie = $(this).parent('.cookie');
-				$.cookie(cookie.data('cookieid'), "dismissed", { expires: 90, path: "/" });
+				$.cookie(cookie.data('cookieid'), "set", { expires: 90, path: "/" });
 			});	
 		});	
 	},
@@ -605,7 +605,7 @@ popFunctions = {
 				var selector = container.data('setcookiebtn');
 				var btn = (selector == 'self' ? container : $(selector));
 				btn.click(function(e){
-					$.cookie(cookieid, "dismissed", { expires: 180, path: "/" });
+					$.cookie(cookieid, "set", { expires: 180, path: "/" });
 				});	
 			}			
 			// Toggle cookie when clicking on the corresponding btn
@@ -617,7 +617,7 @@ popFunctions = {
 						$.cookie(cookieid, null, { expires: -1, path: "/" });
 					}
 					else {
-						$.cookie(cookieid, "dismissed", { expires: 180, path: "/" });
+						$.cookie(cookieid, "set", { expires: 180, path: "/" });
 					}
 				});	
 			}		
@@ -663,7 +663,10 @@ popFunctions = {
 		var t = this;
 
 		var cookieid = container.data('cookieid');
-		if (!$.cookie(cookieid)) {
+
+		// Values for initial: 'set' or 'notset'. Default 'notset' => It will add the class to the target if the cookie does not exist
+		var initial = container.data('initial') || 'notset';
+		if ((initial == 'set' && $.cookie(cookieid)) || (initial == 'notset' && !$.cookie(cookieid))) {
 
 			var target = $(container.data('cookietarget'));
 
