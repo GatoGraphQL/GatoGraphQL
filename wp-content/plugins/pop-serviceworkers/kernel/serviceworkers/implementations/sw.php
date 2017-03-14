@@ -45,7 +45,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         );
         $configuration['$appshellFromServerParams'] = array(
             GD_URLPARAM_THEMESTYLE,
-            GD_URLPARAM_SETTINGSFORMAT,
+            GD_URLPARAM_FORMAT, // Initially, this is a proxy for GD_URLPARAM_SETTINGSFORMAT
             POP_URLPARAM_MANGLED,
         );
         $configuration['$localesByURL'] = $this->get_locales_byurl();

@@ -214,7 +214,6 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 			}
 			$pageblocks_horizontalmap = array(
 				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP,
-				POP_WPAPI_PAGE_ALLUSERS => GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP,
 			);
 			foreach ($pageblocks_horizontalmap as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;

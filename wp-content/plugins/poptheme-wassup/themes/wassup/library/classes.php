@@ -28,8 +28,8 @@ function gd_wassup_theme_body_class($body_classes) {
 			// Add the offcanvas class when appropriate
 			$offcanvas = array(
 				GD_THEMEMODE_WASSUP_SIMPLE,
-				GD_THEMEMODE_WASSUP_EMBED,
 				GD_THEMEMODE_WASSUP_SLIDING,
+				GD_THEMEMODE_WASSUP_EMBED,
 			);
 			if (in_array($thememode, $offcanvas)) {
 

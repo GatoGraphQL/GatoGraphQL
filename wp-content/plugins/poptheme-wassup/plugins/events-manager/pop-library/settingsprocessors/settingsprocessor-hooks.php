@@ -29,6 +29,13 @@ class Wassup_EM_Template_SettingsProcessorHooks {
 			foreach ($pageblocks_map as $page => $block) {
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MAP] = $block;
 			}
+
+			$pageblocks_horizontalmap = array(
+				POP_WPAPI_PAGE_ALLUSERS => GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP,
+			);
+			foreach ($pageblocks_horizontalmap as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_HORIZONTALMAP] = $block;
+			}
 		}
 
 		// Author page blocks

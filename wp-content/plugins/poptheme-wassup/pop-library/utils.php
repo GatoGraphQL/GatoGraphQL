@@ -159,6 +159,13 @@ class PoPTheme_Wassup_Utils {
 
 	public static function add_mainpagesection_scrollbar() {
 
+		// Comment Leo 14/03/2017: The embed must be scrollable, because the fullscreen scrollbar doesn't work! Otherwise, it can't allow fullscreen mode
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if ($vars['theme'] == GD_THEME_WASSUP && $vars['thememode'] == GD_THEMEMODE_WASSUP_EMBED) {
+			
+			return true;
+		}
+
 		return apply_filters('PoPTheme_Wassup_Utils:add_mainpagesection_scrollbar', false);
 	}
 }

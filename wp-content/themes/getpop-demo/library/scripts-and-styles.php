@@ -23,7 +23,8 @@ function getpopdemo_inlinestyles($styles) {
 	// 	}
 	// ';
 	$styles .= '
-		body.sliding {
+		body.sliding,
+		body.embed #background-screen {
 		  background: #fcec8c url('.GETPOPDEMO_ASSETS_URI.'/img/getpop-demo-bg-1920x1080-2.png) no-repeat fixed center;
 		}
 	';
