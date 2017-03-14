@@ -23,6 +23,7 @@ class GD_Theme_Wassup extends GD_ThemeBase {
 		
 		add_filter(POP_HOOK_POPMANAGERUTILS_EMBEDURL.':'.$this->get_name(), array($this, 'get_embed_url'));
 		add_filter(POP_HOOK_POPMANAGERUTILS_PRINTURL.':'.$this->get_name(), array($this, 'get_print_url'));
+		add_filter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->get_name(), array($this, 'is_main_scrollable'));
 
 		// ThemeStyle
 		add_filter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE.':'.$this->get_name(), array($this, 'get_pagesectionside_logosize'));
@@ -282,6 +283,18 @@ class GD_Theme_Wassup extends GD_ThemeBase {
 
 		// Also add param to print automatically
 		return $this->add_url_params(add_query_arg(GD_URLPARAM_ACTION, GD_URLPARAM_ACTION_PRINT, add_query_arg(GD_URLPARAM_THEMEMODE, GD_THEMEMODE_WASSUP_PRINT, $url)));
+	}
+
+	function is_main_scrollable($value) {
+
+		// Forward the filter to be processed by the ThemeMode
+		$filtername = sprintf(
+			'%s:%s:%s',
+			POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN,
+			$this->get_name(),
+			$this->get_thememode()->get_name()
+		);
+		return apply_filters($filtername, $value);
 	}
 
 

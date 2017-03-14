@@ -15,6 +15,7 @@ class PoPTheme_Wassup_Manager {
 		
 		add_filter(POP_HOOK_POPMANAGERUTILS_EMBEDURL, array($this, 'get_embed_url'));
 		add_filter(POP_HOOK_POPMANAGERUTILS_PRINTURL, array($this, 'get_print_url'));
+		add_filter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN, array($this, 'is_main_scrollable'));
 
 		// ThemeStyle
 		add_filter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE, array($this, 'get_pagesectionside_logosize'));
@@ -234,6 +235,15 @@ class PoPTheme_Wassup_Manager {
 			GD_TemplateManager_Utils::get_theme()->get_name()
 		);
 		return apply_filters($filtername, $url);
+	}
+	function is_main_scrollable($value) {
+
+		$filtername = sprintf(
+			'%s:%s',
+			POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN,
+			GD_TemplateManager_Utils::get_theme()->get_name()
+		);
+		return apply_filters($filtername, $value);
 	}
 }
 

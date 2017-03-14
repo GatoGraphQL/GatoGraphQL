@@ -18,6 +18,9 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple {
 		// add_filter(POP_HOOK_SW_APPSHELL_REOPENTABS.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
 		// add_filter(POP_HOOK_PAGETABS_ADDOPENTAB.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
 		add_filter(POP_HOOK_POPFRONTEND_KEEPOPENTABS.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_false');
+		
+		// The embed must make the main pageSection scrollable using perfect-scrollbar, so that the fullscreen mode works fine
+		add_filter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->get_theme()->get_name().':'.$this->get_name(), '__return_true');
 
 		parent::__construct();
 	}
