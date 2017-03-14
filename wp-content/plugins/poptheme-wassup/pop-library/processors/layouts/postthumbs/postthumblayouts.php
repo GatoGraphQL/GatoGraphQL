@@ -180,6 +180,18 @@ class GD_Custom_Template_Processor_PostThumbLayouts extends GD_Template_Processo
 				break;
 		}
 
+		switch ($template_id) {
+			
+			case GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDFEED:
+			case GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
+			case GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
+			case GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
+
+				// Style to add a background-image while loading the feed image
+				$this->append_att($template_id, $atts, 'class', 'thumb-feed');
+				break;
+		}
+
 		return parent::init_atts($template_id, $atts);
 	}
 }

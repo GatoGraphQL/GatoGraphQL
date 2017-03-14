@@ -24,6 +24,7 @@ if (!defined('POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG')) {
 //--------------------------------------------------------
 define ('POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST', false);
 define ('POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEWEBPOSTPOST', false);
+define ('POPTHEME_WASSUP_IMAGE_FEEDBACKGROUND', false);
 
 // Categories
 //--------------------------------------------------------

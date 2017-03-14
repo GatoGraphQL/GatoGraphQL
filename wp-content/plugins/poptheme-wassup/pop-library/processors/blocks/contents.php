@@ -202,6 +202,11 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 		switch ($template_id) {
 
+			case GD_TEMPLATE_BLOCK_TAG_CONTENT:
+
+				$this->append_att($template_id, $atts, 'class', 'block-tag-content');
+				break;
+
 			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
 
 				$this->append_att($template_id, $atts, 'class', 'block-singleabout-content');
@@ -210,11 +215,6 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 					$this->append_att($inner, $atts, 'class', 'col-xs-12');
 				}
 				break;
-		}
-
-		// Because the print already prints the sideinfo, must hide the compactsidebar
-		// $sidebar = '';
-		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 
@@ -224,21 +224,6 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				global $post;
 				$this->append_att($template_id, $atts, 'runtime-class', $post->post_type.'-'.$post->ID);
 				$this->append_att($template_id, $atts, 'runtime-class', get_post_status($post->ID));
-
-				// $post_type = get_post_type();
-				// if ($post_type == EM_POST_TYPE_EVENT) {
-
-				// 	$sidebar = gd_em_single_event_is_future() ? GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT : GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT;
-				// 	$bottomsidebar = GD_TEMPLATE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL;
-				// }
-				// elseif ($post_type == 'post') {
-
-				// 	$cat = gd_get_the_main_category();
-				// 	$cats_sidebar = $this->get_sidebars_by_category();
-				// 	$sidebar = $cats_sidebar[$cat];
-				// 	$cats_sidebar = $this->get_bottomsidebars_by_category();
-				// 	$bottomsidebar = $cats_sidebar[$cat];
-				// }
 				break;
 
 			case GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT:
@@ -246,12 +231,6 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				$this->append_att($template_id, $atts, 'class', 'block-singleinteraction-content');
 				break;
 		}
-		// if ($sidebar) {
-		// 	$this->append_att($sidebar, $atts, 'class', 'pop-hidden-print');
-		// }
-		// if ($bottomsidebar) {
-		// 	$this->append_att($bottomsidebar, $atts, 'class', 'pop-hidden-print');
-		// }
 		
 		return parent::init_atts($template_id, $atts);
 	}

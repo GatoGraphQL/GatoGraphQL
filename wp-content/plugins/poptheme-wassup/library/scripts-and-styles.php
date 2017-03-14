@@ -54,3 +54,33 @@ function pop_header_inlinestyles() {
 		printf('<style type="text/css">%s</style>', $inlinestyles);
 	}
 }
+
+
+/**---------------------------------------------------------------------------------------------------------------
+ * Inline styles implementation
+ * ---------------------------------------------------------------------------------------------------------------*/
+add_filter('pop_header_inlinestyles:styles', 'wassup_inlinestyles');
+function wassup_inlinestyles($styles) {
+
+	// If the feed background image has been defined, then set the style
+	if (POPTHEME_WASSUP_IMAGE_FEEDBACKGROUND) {
+		
+		$img = wp_get_attachment_image_src(POPTHEME_WASSUP_IMAGE_FEEDBACKGROUND, 'thumb-feed');
+		$styles .= sprintf(
+			'
+				.thumb-feed {
+					background-image: url(\'%s\');
+					width: %spx;
+					height: %spx;
+					background-repeat: no-repeat;
+					background-size: contain;
+				}
+			',
+			$img[0],
+			$img[1],
+			$img[2]
+		);
+	}
+
+	return $styles;
+}
