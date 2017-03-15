@@ -41,7 +41,7 @@ popTabs = {
 					popManager.openTabs();
 				}
 				else {
-					popManager.keepScreenOpenTab(window.location.href, M.URLPARAM_TARGET_MAIN);
+					popManager.keepScreenOpenTab(popManager.getTabsCurrentURL(), M.URLPARAM_TARGET_MAIN);
 				}
 			}
 			else {
@@ -51,7 +51,8 @@ popTabs = {
 				var param1 = 'popTabs.openTabs()';
 
 				// Comment Leo 03/03/2017: using window.location.href instead of popManager.getTopLevelFeedback()[M.URLPARAM_URL] because with the appshell it would produce the appshel URL ("http://localhost/en/loaders/appshell/")
-				var param2 = 'popTabs.keepScreenOpenTab(\'{0}\', \'{1}\')'.format(window.location.href, M.URLPARAM_TARGET_MAIN);
+				// Comment Leo 16/03/2017: use popManager.getTabsCurrentURL() instead of window.location.href, so that if it is https://getpop.org it gets transformed to https://getpop.org/en/, or otherwise the message asking to reopen the tabs, when loading the homepage, keeps appearing
+				var param2 = 'popTabs.keepScreenOpenTab(\'{0}\', \'{1}\')'.format(popManager.getTabsCurrentURL(), M.URLPARAM_TARGET_MAIN);
 				status.prepend(M.TABS_REOPENMSG.format(param1, param2));
 				// popManager.openTabs();
 			}
