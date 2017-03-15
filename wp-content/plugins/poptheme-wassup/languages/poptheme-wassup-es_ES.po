@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Theme Wassup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 18:25+0800\n"
-"PO-Revision-Date: 2017-03-09 15:10+0800\n"
+"POT-Creation-Date: 2017-03-15 10:46+0800\n"
+"PO-Revision-Date: 2017-03-15 10:46+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
@@ -600,6 +600,10 @@ msgstr "Ubicación(es) para:"
 msgid "Add location"
 msgstr "Añadir ubicación"
 
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:159
+msgid "View all"
+msgstr "Ver todos"
+
 #: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:14
 #: .././plugins/events-manager/pop-library/processors/structures/scrolls/scrollmaps.php:77
 msgid "Scroll down to load more results"
@@ -677,7 +681,7 @@ msgstr "Mapa"
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:275
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:384
 #: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:254
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:40
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:44
 #: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:40
 msgid "Calendar"
 msgstr "Calendario"
@@ -693,7 +697,7 @@ msgid "Edit"
 msgstr "Editar"
 
 #: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:39
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:58
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:62
 #: .././pop-library/processors/controls/anchor-controls.php:45
 msgid "as Link"
 msgstr "como Enlace"
@@ -702,19 +706,19 @@ msgstr "como Enlace"
 msgid "Event link"
 msgstr "Enlace a Evento"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:46
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:50
 msgid "Past Events"
 msgstr "Eventos Pasados"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:50
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:54
 msgid "My Past Events"
 msgstr "Mis Eventos Pasados"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:54
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:58
 msgid "Add Event"
 msgstr "Añadir Evento"
 
-#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:62
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:68
 msgid "Toggle Map"
 msgstr "Alternar Mapa"
 
@@ -805,7 +809,7 @@ msgstr "evento"
 msgid "events"
 msgstr "eventos"
 
-#: .././plugins/events-manager/pop-library/processors/layouts/posts/previewpostlayouts.php:395
+#: .././plugins/events-manager/pop-library/processors/layouts/posts/previewpostlayouts.php:394
 #: .././pop-library/processors/layouts/posts/previewpostlayouts.php:697
 msgid "posted by"
 msgstr "publicado por"
@@ -1190,7 +1194,7 @@ msgstr ""
 "Por favor, añada los siguientes emails a tu lista de contactos, para "
 "asegurar de que recibas nuestras notificaciones:"
 
-#: .././plugins/public-post-preview/library/functions.php:19
+#: .././plugins/public-post-preview/library/functions.php:22
 #: .././pop-library/processors/createupdatepost/forms/formgroups.php:38
 msgid "Preview"
 msgstr "Vista previa"
@@ -1570,14 +1574,12 @@ msgstr "Ops, esta página no existe!"
 msgid "Show description"
 msgstr "Mostrar descripción"
 
-#: .././pop-library/processors/blockgroups/blockgroups.php:121
-#: .././pop-library/processors/blockgroups/blockgroups.php:122
-#: .././pop-library/processors/blockgroups/blockgroups.php:461
+#: .././pop-library/processors/blockgroups/blockgroups.php:463
 #: .././templates/hover.php:4 .././templates/navigator.php:4
 msgid "Close"
 msgstr "Cerrar"
 
-#: .././pop-library/processors/blockgroups/blockgroups.php:512
+#: .././pop-library/processors/blockgroups/blockgroups.php:524
 msgid "Log in or Register"
 msgstr "Iniciar sesión o Registrarse"
 
@@ -1606,23 +1608,23 @@ msgstr "Ir al perfil completo"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: .././pop-library/processors/blocks/sections.php:2525
+#: .././pop-library/processors/blocks/sections.php:2529
 msgid "View all Content "
 msgstr "Ver todo el contenido"
 
-#: .././pop-library/processors/blocks/sections.php:3398
+#: .././pop-library/processors/blocks/sections.php:3402
 msgid "Latest Content"
 msgstr "Contenido más reciente"
 
-#: .././pop-library/processors/blocks/sections.php:3402
+#: .././pop-library/processors/blocks/sections.php:3406
 msgid "Our Sponsors"
 msgstr "Nuestros patrocinadores"
 
-#: .././pop-library/processors/blocks/sections.php:3406
+#: .././pop-library/processors/blocks/sections.php:3410
 msgid "Our Supporters"
 msgstr "Quiénes nos apoyan"
 
-#: .././pop-library/processors/blocks/sections.php:3413
+#: .././pop-library/processors/blocks/sections.php:3417
 msgid "Who we are"
 msgstr "Quiénes somos"
 
@@ -1768,16 +1770,16 @@ msgstr "Detalles del Enlace"
 msgid "Post details"
 msgstr "Detalles del Post"
 
-#: .././pop-library/processors/elements/codes.php:68
+#: .././pop-library/processors/elements/codes.php:75
 msgid "Here you will find:"
 msgstr "Aquí encontrarás:"
 
-#: .././pop-library/processors/elements/codes.php:105
+#: .././pop-library/processors/elements/codes.php:112
 msgid "Many thanks to our sponsors and supporters."
 msgstr ""
 "Muchas gracias a nuestros patrocinadores y todos aquéllos que nos apoyan."
 
-#: .././pop-library/processors/elements/codes.php:109
+#: .././pop-library/processors/elements/codes.php:116
 #, php-format
 msgid ""
 "If you or your organization wishes to participate, please visit <a href=\"%s"
@@ -1786,20 +1788,20 @@ msgstr ""
 "Si usted o su organización desean participar, por favor visite <a href=\"%s"
 "\">%s</a>."
 
-#: .././pop-library/processors/elements/codes.php:129
+#: .././pop-library/processors/elements/codes.php:136
 msgid "Loading data"
 msgstr "Cargando datos"
 
-#: .././pop-library/processors/elements/codes.php:138
+#: .././pop-library/processors/elements/codes.php:145
 msgid "Many thanks to our volunteers."
 msgstr "Muchas gracias a nuestros voluntarios."
 
-#: .././pop-library/processors/elements/codes.php:142
+#: .././pop-library/processors/elements/codes.php:149
 #, php-format
 msgid "If you'd like to join us, please visit <a href=\"%s\">%s</a>."
 msgstr "Si desea unirse a nosotros, por favor visite <a href=\"%s\">%s</a>."
 
-#: .././pop-library/processors/elements/codes.php:155
+#: .././pop-library/processors/elements/codes.php:162
 #, php-format
 msgid ""
 "<strong>#Trending tags are:</strong><br/>Those tags which appear in the "
@@ -2037,7 +2039,7 @@ msgstr "Usuarios"
 msgid "Date"
 msgstr "Fecha"
 
-#: .././pop-library/utils.php:145
+#: .././pop-library/utils.php:147
 #, php-format
 msgid "Welcome to %s!"
 msgstr "Bienvenidos a %s!"

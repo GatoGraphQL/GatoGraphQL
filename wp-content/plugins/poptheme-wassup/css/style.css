@@ -4555,3 +4555,8 @@ pre.prettyprint {
 #ps-sideinfo .addons > .scroll-inner .pop-blockinner-row:last-child {
     border-bottom: 0;
 }
+
+.collapse-hometop .pop-block.calendar .fc-event {
+	max-height: 16px;
+	overflow: hidden;
+}

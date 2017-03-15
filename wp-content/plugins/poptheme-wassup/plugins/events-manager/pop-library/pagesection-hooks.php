@@ -152,6 +152,13 @@ class PoPTheme_Wassup_EM_PageSectionHooks {
 			// For the Events scroll
 			$processor->add_att($subcomponent, $ret, 'limit', 6);
 			$processor->add_att($subcomponent, $ret, 'show-fetchmore', false);
+
+			$link = sprintf(
+				'<div class="text-center"><a href="%s" class="btn btn-link">%s</a></div>',
+				get_permalink(POPTHEME_WASSUP_EM_PAGE_EVENTS),
+				__('View all', 'poptheme-wassup')
+			);
+			$processor->add_att($subcomponent, $ret, 'description-bottom', $link);
 		}		
 
 		return $ret;

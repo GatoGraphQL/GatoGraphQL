@@ -146,11 +146,11 @@ class GetPoPDemo_Template_Processor_TopLevelCollapseBlockGroups extends GD_Templ
 
 							$this->add_att($blockgroup_block, $blockgroup_block_atts, 'collapsible', true);
 						}
-						elseif ($blockgroup_block == GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR) {
+						// elseif ($blockgroup_block == GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR) {
 
-							// Do not show the Title in the Calendar, it looks ugly
-							$this->add_att(GD_TEMPLATE_LAYOUTCALENDAR_CONTENT_POPOVER, $blockgroup_block_atts, 'show-title', false);
-						}
+						// 	// Do not show the Title in the Calendar, it looks ugly
+						// 	$this->add_att(GD_TEMPLATE_LAYOUTCALENDAR_CONTENT_POPOVER, $blockgroup_block_atts, 'show-title', false);
+						// }
 						break;
 				}
 				break;
