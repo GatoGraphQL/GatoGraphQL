@@ -131,7 +131,8 @@ popServiceWorkers = {
 			// Timestamp is provided in seconds, function Date.now() returns in milliseconds, so make the translation
 			// Also, rounding the current timestamp to the second increases chances that different users might be served the same response by hitting the cache
 			// Solution taken from https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
-			blockParams[M.URLPARAM_TIMESTAMP] = Math.floor(Date.now()/1000);
+			// Also add the timezone difference in seconds, to synchronize the right time in both server and client
+			blockParams[M.URLPARAM_TIMESTAMP] = Math.floor(Date.now()/1000) + (M.GMT_OFFSET * 60 * 60);
 		}
 	},
 

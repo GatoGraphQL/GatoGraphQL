@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Theme Wassup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-15 10:46+0800\n"
-"PO-Revision-Date: 2017-03-15 10:46+0800\n"
+"POT-Creation-Date: 2017-03-15 11:22+0800\n"
+"PO-Revision-Date: 2017-03-15 11:22+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
@@ -601,8 +601,8 @@ msgid "Add location"
 msgstr "Añadir ubicación"
 
 #: .././plugins/events-manager/pop-library/pagesection-hooks.php:159
-msgid "View all"
-msgstr "Ver todos"
+msgid "View all events"
+msgstr "Ver todos los eventos"
 
 #: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:14
 #: .././plugins/events-manager/pop-library/processors/structures/scrolls/scrollmaps.php:77
@@ -2197,6 +2197,9 @@ msgstr ""
 "Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
 "plugins/pop/“>latest version</a> of <b>PhotoSwipe for PoP</b> installed, or "
 "otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#~ msgid "View all"
+#~ msgstr "Ver todos"
 
 #~ msgid "Content tagged with “#%s”"
 #~ msgstr "Contenido etiquetado con \"#%s\""

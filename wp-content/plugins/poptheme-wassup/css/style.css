@@ -4559,4 +4559,5 @@ pre.prettyprint {
 .collapse-hometop .pop-block.calendar .fc-event {
 	max-height: 16px;
 	overflow: hidden;
+    word-break: break-all;
 }

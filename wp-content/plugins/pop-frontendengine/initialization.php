@@ -175,6 +175,7 @@ class PoPFrontend_Initialization {
 			'AJAXURL' => apply_filters('gd_ajax_url', admin_url('admin-ajax.php')),
 			// 'THEME' => $vars['theme'],
 			// 'THEMEMODE' => $vars['thememode'],
+			'GMT_OFFSET' => get_option('gmt_offset'),
 			'THEMESTYLE' => $themestyle,
 			'ERROR_MESSAGE' => '<div class="alert alert-danger alert-block fade in"><button type="button" class="close" data-dismiss="alert">x</button>{0}</div>',
 			'POSTSTATUS' => array(

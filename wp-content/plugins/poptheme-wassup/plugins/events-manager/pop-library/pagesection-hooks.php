@@ -156,7 +156,7 @@ class PoPTheme_Wassup_EM_PageSectionHooks {
 			$link = sprintf(
 				'<div class="text-center"><a href="%s" class="btn btn-link">%s</a></div>',
 				get_permalink(POPTHEME_WASSUP_EM_PAGE_EVENTS),
-				__('View all', 'poptheme-wassup')
+				__('View all events', 'poptheme-wassup')
 			);
 			$processor->add_att($subcomponent, $ret, 'description-bottom', $link);
 		}		

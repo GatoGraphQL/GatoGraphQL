@@ -315,7 +315,11 @@ self.addEventListener('fetch', event => {
           clients.forEach(function (client) {
             var message = {
               type: 'refresh',
-              url: response.url
+              // Comment Leo 16/03/2017: Use the request.url for the key, instead of the response.url, because sometimes these 2 are different.
+              // Eg: https://getpop.org for request, https://getpop.org/en/ for response
+              // When this happens, the notification to the user to refresh the page doesn't appear because it was generated using the request url
+              // url: response.url
+              url: request.url
             };
        
             client.postMessage(JSON.stringify(message));
