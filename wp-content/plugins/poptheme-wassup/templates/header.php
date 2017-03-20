@@ -79,7 +79,9 @@
 <body id="body" class="pop-loadingframe pop-loadingjs <?php echo gd_classes_body() ?>">
 	<?php // Comment Leo 10/08/2016: commented changing the title to "Loading", because Google shows this temporary title in its search results ?>
 	<?php /* ?><script type="text/javascript">document.title="<?php echo gd_get_initial_document_title() ?>";</script> <?php */ ?>
-	<div id="wrapper" class="pop-fullscreen">
+	<div id="wrapper" class="pop-fullscreen" style="display: none;">
+		<?php /* Show content only if JS enabled. Show basic HTML content for fallback in div "crawlable-data" */ ?>
+		<script type="text/javascript">document.getElementById("wrapper").style.display = "block";</script>
 		<div class="loading-screen">
 			<?php include POPTHEME_WASSUP_TEMPLATES.'/loading-screen.php' ?>
 		</div>

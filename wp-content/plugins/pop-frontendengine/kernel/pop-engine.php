@@ -9,9 +9,11 @@ class PoPFrontend_Engine extends PoP_Engine {
 
 	function output_end() {
 	
-		// Seach Engine Crawlable data
+		// Seach Engine Crawlable data + Fallback for non-JS browsers
+		$div_id = 'fallback';
 		printf(
-			'<div class="hidden searchengine-crawlable"><div class="crawlable-items">%s</div><div class="runtime-crawlable-items">%s</div><div class="crawlable-data">%s</div></div>',
+			'<div id="%1$s" class="searchengine-crawlable"><script type="text/javascript">document.getElementById("%1$s").style.display = "none";</script><div class="crawlable-items">%2$s</div><div class="runtime-crawlable-items">%3$s</div><div class="crawlable-data">%4$s</div></div>',
+			$div_id,
 			$this->json['crawlable-items'],
 			$this->json['runtime-crawlable-items'],
 			$this->json['crawlable-data']
