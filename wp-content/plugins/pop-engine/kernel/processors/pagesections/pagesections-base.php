@@ -187,6 +187,50 @@ class PoP_Processor_PageSectionsBase extends PoP_ProcessorBase {
 		return $ret;
 	}
 
+	function get_template_crawlableitems($template_id, $atts) {
+		
+		global $gd_template_processor_manager;
+
+		$ret = $this->get_template_crawlableitem($template_id, $atts);
+
+		// Override the parent to add the 'extra-blocks'
+		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+		
+			$component_atts = $atts[$component];
+			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_template_crawlableitems($component, $component_atts)) {
+			
+				$ret = array_merge(
+					$ret,
+					$component_ret
+				);
+			}
+		}
+		
+		return $ret;
+	}
+
+	function get_template_runtimecrawlableitems($template_id, $atts) {
+		
+		global $gd_template_processor_manager;
+
+		$ret = $this->get_template_runtimecrawlableitem($template_id, $atts);
+
+		// Override the parent to add the 'extra-blocks'
+		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+		
+			$component_atts = $atts[$component];
+			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_template_runtimecrawlableitems($component, $component_atts)) {
+			
+				$ret = array_merge(
+					$ret,
+					$component_ret
+				);
+			}
+		}
+		
+		return $ret;
+	}
+
 	function get_data_setting($template_id, $atts) {
 
 		$ret = parent::get_data_setting($template_id, $atts);

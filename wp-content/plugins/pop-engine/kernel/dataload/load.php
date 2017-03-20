@@ -14,6 +14,7 @@ require_once 'dataload-fieldprocessor-manager.php';
 require_once 'dataload-datastructure-formatter.php';
 require_once 'dataload-crawlabledataprinter-manager.php';
 require_once 'dataload-crawlabledataprinter.php';
+require_once 'dataload-crawlabledataprinter-hookbase.php';
 require_once 'dataload-iohandler.php';
 require_once 'dataload-iohandler-checkpoint.php';
 require_once 'dataload-iohandler-toplevel.php';

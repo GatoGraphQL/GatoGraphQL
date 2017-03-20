@@ -21,6 +21,19 @@ class AAL_Template_SettingsProcessor extends GD_Template_SettingsProcessorBase {
 		return parent::silent_document($hierarchy);
 	}
 
+	function needs_target_id($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POP_AAL_PAGE_NOTIFICATIONS_MARKASREAD => true,
+				POP_AAL_PAGE_NOTIFICATIONS_MARKASUNREAD => true,
+			);
+		}
+
+		return parent::needs_target_id($hierarchy);
+	}
+
 	function get_checkpoints($hierarchy) {
 
 		$ret = array();

@@ -59,6 +59,16 @@ class GD_Template_SettingsProcessorBase {
 		return false;
 	}
 
+	function is_functional($hierarchy) {
+
+		return false;
+	}
+
+	function needs_target_id($hierarchy) {
+
+		return false;
+	}
+
 	function store_local($hierarchy) {
 
 		return false;

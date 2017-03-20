@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-05 18:04+0800\n"
-"PO-Revision-Date: 2017-03-14 18:20+0800\n"
+"POT-Creation-Date: 2017-03-20 19:12+0800\n"
+"PO-Revision-Date: 2017-03-20 19:13+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -17,39 +17,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
-#: .././library/constants.php:59
+#: .././library/constants.php:58
 #, php-format
 msgid ""
-"This page has been updated, <a href=\"%s\" target=\"%s\" %s>click here to "
-"refresh it</a>."
+"This page has been updated, please <a href=\"%s\" target=\"%s\" %s>click "
+"here to refresh it</a>."
 msgstr ""
-"Esta página ha sido actualizada, <a href=\"%s\" target=\"%s\" %s>haga click "
-"aquí para refrescarla</a>."
+"Esta página ha sido actualizada, por favor <a href=\"%s\" target=\"%s\" "
+"%s>haga click aquí para refrescarla</a>."
 
-#: .././library/constants.php:73
+#: .././library/constants.php:72
 #, php-format
 msgid ""
-"There is a new version of the website, <a href=\"%s\" target=\"%s\">click "
-"here to reload it</a>."
+"There is a new version of the website, please <a href=\"%s\" target=\"%s"
+"\">click here to reload it</a>."
 msgstr ""
-"Hay una nueva versión del sitio web, <a href=\"%s\" target=\"%s\">haga click "
-"aquí para recargarlo</a>."
-
-#: .././library/constants.php:87
-msgid "Accept"
-msgstr "Aceptar"
-
-#: .././library/constants.php:92
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: .././library/constants.php:102
-msgid "Remember"
-msgstr "Recordar"
-
-#: .././library/constants.php:113
-msgid "Reopen previous session tabs?"
-msgstr "Abrir tabs de la sesión anterior?"
+"Hay una nueva versión del sitio web, por favor <a href=\"%s\" target=\"%s"
+"\">haga click aquí para recargarlo</a>."
 
 #: .././validation.php:32
 msgid "Only admins see this message."
@@ -79,6 +63,18 @@ msgstr ""
 "bigger of <b>PoP Core Processors</b>. Please update this plugin from your "
 "plugin installer or download it <a href=“http://wordpress.org/extend/plugins/"
 "pop/“>from here</a>."
+
+#~ msgid "Accept"
+#~ msgstr "Aceptar"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid "Remember"
+#~ msgstr "Recordar"
+
+#~ msgid "Reopen previous session tabs?"
+#~ msgstr "Abrir tabs de la sesión anterior?"
 
 #~ msgid "Captcha was not generated properly, please refresh page."
 #~ msgstr ""

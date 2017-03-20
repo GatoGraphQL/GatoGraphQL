@@ -63,6 +63,58 @@ class PoPTheme_Wassup_Template_SettingsProcessor extends GD_Template_SettingsPro
 		return parent::is_appshell($hierarchy);
 	}
 
+	function is_functional($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				// Comment Leo 19/03/2017: Allow Google to find these pages
+				// POPTHEME_WASSUP_PAGE_ADDCONTENTFAQ => true,
+				// POPTHEME_WASSUP_PAGE_ACCOUNTFAQ => true,
+				POP_COREPROCESSORS_PAGE_DESCRIPTION => true,
+				POP_COREPROCESSORS_PAGE_MAIN => true,
+				POP_COREPROCESSORS_PAGE_SUMMARY => true,
+				POP_COREPROCESSORS_PAGE_RELATEDCONTENT => true,
+				POP_COREPROCESSORS_PAGE_POSTAUTHORS => true,
+				POP_COREPROCESSORS_PAGE_FOLLOWERS => true,
+				POP_COREPROCESSORS_PAGE_FOLLOWINGUSERS => true,
+				POP_COREPROCESSORS_PAGE_SUBSCRIBERS => true,
+				POP_COREPROCESSORS_PAGE_RECOMMENDEDPOSTS => true,
+				POP_COREPROCESSORS_PAGE_RECOMMENDEDBY => true,
+				POP_COREPROCESSORS_PAGE_UPVOTEDBY => true,
+				POP_COREPROCESSORS_PAGE_DOWNVOTEDBY => true,
+			);
+		}
+
+		return parent::is_functional($hierarchy);
+	}
+
+	function needs_target_id($hierarchy) {
+
+		$ret = array();
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POPTHEME_WASSUP_PAGE_EDITWEBPOSTLINK => true,
+				POPTHEME_WASSUP_PAGE_EDITHIGHLIGHT => true,
+				POPTHEME_WASSUP_PAGE_EDITWEBPOST => true,
+				POP_COREPROCESSORS_PAGE_FOLLOWUSER => true,
+				POP_COREPROCESSORS_PAGE_UNFOLLOWUSER => true,
+				POP_COREPROCESSORS_PAGE_RECOMMENDPOST => true,
+				POP_COREPROCESSORS_PAGE_UNRECOMMENDPOST => true,
+				POP_COREPROCESSORS_PAGE_SUBSCRIBETOTAG => true,
+				POP_COREPROCESSORS_PAGE_UNSUBSCRIBEFROMTAG => true,
+				POP_COREPROCESSORS_PAGE_UPVOTEPOST => true,
+				POP_COREPROCESSORS_PAGE_UNDOUPVOTEPOST => true,
+				POP_COREPROCESSORS_PAGE_DOWNVOTEPOST => true,
+				POP_COREPROCESSORS_PAGE_UNDODOWNVOTEPOST => true,
+			);
+		}
+	
+		return parent::needs_target_id($hierarchy);
+	}
+
 	function store_local($hierarchy) {
 
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {

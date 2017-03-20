@@ -58,4 +58,25 @@ class GD_Template_Processor_AnchorControlsBase extends GD_Template_Processor_Con
 
 		return $ret;
 	}
+
+	function get_template_runtimecrawlableitem($template_id, $atts) {
+	
+		$ret = parent::get_template_runtimecrawlableitem($template_id, $atts);
+
+		$runtimeconfiguration = $this->get_template_runtimeconfiguration($template_id, $atts);
+		$configuration = $this->get_template_configuration($template_id, $atts);
+		if ($href = $runtimeconfiguration['href']) {
+
+			// Add it only if the href is not pointing to an anchor
+			if (substr($href, 0, 1) != '#') {
+				$ret[] = sprintf(
+					'<a href="%s">%s</a>',
+					$href,
+					$runtimeconfiguration['text'] ?? $configuration['text'] ?? $configuration['label'] ?? $href
+				);
+			}
+		}
+		
+		return $ret;
+	}
 }

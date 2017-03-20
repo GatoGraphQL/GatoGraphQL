@@ -94,7 +94,12 @@ class GD_Template_Processor_CarouselControlsBase extends GD_Template_ProcessorBa
 		if ($title = $this->get_title($template_id)) {
 			$ret['title'] = $title;
 
-			if ($title_link = $this->get_att($template_id, $atts, 'title-link')) {
+			// Check if the title_link has been overwritten. If so, use that one. It works
+			// only for setting general value, eg: '', and not runtime-specific ones, since
+			// it will be cached in pop-cache atts
+			$title_link = $this->get_att($template_id, $atts, 'title-link');
+			$title_link = isset($title_link) ? $title_link : $this->get_title_link($template_id);
+			if ($title_link) {
 				$ret['title-link'] = $title_link;
 			}
 		}
@@ -102,10 +107,31 @@ class GD_Template_Processor_CarouselControlsBase extends GD_Template_ProcessorBa
 		return $ret;
 	}
 
+	function get_template_runtimecrawlableitem($template_id, $atts) {
+	
+		$ret = parent::get_template_runtimecrawlableitem($template_id, $atts);
+
+		$runtimeconfiguration = $this->get_template_runtimeconfiguration($template_id, $atts);
+		if ($title = $runtimeconfiguration['title']) {
+
+			if ($title_link = $runtimeconfiguration['title-link']) {
+				$ret[] = sprintf(
+					'<a href="%s">%s</a>',
+					$title_link,
+					$title
+				);
+			}
+			else {
+				$ret[] = $title;
+			}
+		}
+		
+		return $ret;
+	}
+
 	function init_atts($template_id, &$atts) {
 
 		$this->add_att($template_id, $atts, 'title-class', $this->get_title_class($template_id));
-		$this->add_att($template_id, $atts, 'title-link', $this->get_title_link($template_id));
 		$this->add_att($template_id, $atts, 'html-tag', $this->get_html_tag($template_id, $atts));
 		return parent::init_atts($template_id, $atts);
 	}

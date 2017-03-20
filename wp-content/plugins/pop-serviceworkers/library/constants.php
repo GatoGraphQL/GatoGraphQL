@@ -55,7 +55,7 @@ function pop_sw_jquery_constants($jquery_constants) {
 		$msg_placeholder,
 		'page-level',
 		sprintf(
-			__('This page has been updated, <a href="%s" target="%s" %s>click here to refresh it</a>.', 'pop-serviceworkers'),
+			__('This page has been updated, please <a href="%s" target="%s" %s>click here to refresh it</a>.', 'pop-serviceworkers'),
 			'{0}',
 			'{1}',
 			$reloadurl_linkattrs
@@ -69,7 +69,7 @@ function pop_sw_jquery_constants($jquery_constants) {
 		$msg_placeholder,
 		'website-level topmost',
 		sprintf(
-			__('There is a new version of the website, <a href="%s" target="%s">click here to reload it</a>.', 'pop-serviceworkers'),
+			__('There is a new version of the website, please <a href="%s" target="%s">click here to reload it</a>.', 'pop-serviceworkers'),
 			'{0}',
 			GD_URLPARAM_TARGET_FULL
 		)

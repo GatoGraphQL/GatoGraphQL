@@ -137,6 +137,44 @@ class PoPFrontend_Template_Processor_TopLevelsBase extends GD_Template_Processor
 		
 		return $ret;
 	}
+
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
+	function get_template_crawlableitems($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$ret = array();
+		foreach ($this->get_modules($template_id) as $module) {
+			
+			$ret = array_merge(
+				$ret,
+				$gd_template_processor_manager->get_processor($module)->get_template_crawlableitems($module, $atts[$module])
+			);
+		}
+
+		return $ret;
+	}
+
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
+	function get_template_runtimecrawlableitems($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$ret = array();
+		foreach ($this->get_modules($template_id) as $module) {
+			
+			$ret = array_merge(
+				$ret,
+				$gd_template_processor_manager->get_processor($module)->get_template_runtimecrawlableitems($module, $atts[$module])
+			);
+		}
+
+		return $ret;
+	}
 	
 	function get_templates_sources($template_id, $atts) {
 	

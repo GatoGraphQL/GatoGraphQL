@@ -9,8 +9,18 @@ class GD_Template_Processor_ScrollMapsBase extends GD_Template_Processor_Scrolls
 
 	protected function get_description($template_id, $atts) {
 
+		$placeholder = '<div class="pop-scrollformore bg-warning text-warning text-center row scroll-row"><small>%s</small></div>';
+		$direction = $this->get_att($template_id, $atts, 'direction');
+		if ($direction == 'horizontal') {
+
+			return sprintf(
+				$placeholder,
+				__('Scroll right to load more results', 'poptheme-wassup')
+			);
+		}
+
 		return sprintf(
-			'<div class="pop-scrollformore bg-warning text-warning text-center row scroll-row"><small>%s</small></div>',
+			$placeholder,
 			__('Scroll down to load more results', 'poptheme-wassup')
 		);
 	}

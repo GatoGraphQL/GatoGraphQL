@@ -29,7 +29,7 @@ class GetPoPDemo_Initialization {
 		 * Scripts and styles
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		// If it is a search engine, there's no need to output the scripts or initialize popManager
-		if (!is_admin() && !GD_TemplateManager_Utils::is_search_engine()) {
+		if (!is_admin()/* && !GD_TemplateManager_Utils::is_search_engine()*/) {
 
 			// Execute after PoP and PoP-Theme Wassup
 			add_action('wp_enqueue_scripts', array($this, 'register_combined_app_scripts'), 2000);

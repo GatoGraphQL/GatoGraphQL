@@ -34,20 +34,20 @@ class GD_Custom_Template_Processor_CustomScrollMaps extends GD_Template_Processo
 		return parent::get_inner_template($template_id);
 	}
 
-	protected function get_description($template_id, $atts) {
+	// protected function get_description($template_id, $atts) {
 
-		switch ($template_id) {
+	// 	switch ($template_id) {
 			
-			case GD_TEMPLATE_SCROLL_LOCATIONPOSTS_MAP:
+	// 		case GD_TEMPLATE_SCROLL_LOCATIONPOSTS_MAP:
 			
-				return sprintf(
-					'<div class="pop-scrollformore bg-warning text-warning text-center row scroll-row"><small>%s</small></div>',
-					__('Scroll down to load more results', 'poptheme-wassup-sectionprocessors')
-				);
-		}
+	// 			return sprintf(
+	// 				'<div class="pop-scrollformore bg-warning text-warning text-center row scroll-row"><small>%s</small></div>',
+	// 				__('Scroll down to load more results', 'poptheme-wassup-sectionprocessors')
+	// 			);
+	// 	}
 	
-		return parent::get_description($template_id, $atts);
-	}
+	// 	return parent::get_description($template_id, $atts);
+	// }
 }
 
 /**---------------------------------------------------------------------------------------------------------------

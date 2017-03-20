@@ -170,4 +170,33 @@ class GD_Template_Processor_SubMenusBase extends GD_Template_ProcessorBase {
 		
 		return $ret;
 	}
+
+	function get_template_runtimecrawlableitem($template_id, $atts) {
+
+		$ret = parent::get_template_runtimecrawlableitem($template_id, $atts);
+
+		// Add the header links
+		foreach ($this->get_blockunititems($template_id, $atts) as $header_blockunit => $subheader_blockunits) {
+
+			$ret[] = sprintf(
+				'<a href="%s">%s</a>',
+				$this->get_blockunititem_url($template_id, $header_blockunit),
+				$this->get_blockunititem_title($template_id, $header_blockunit)
+			);
+			
+			if ($subheader_blockunits) {
+
+				foreach ($subheader_blockunits as $subheader_blockunit) {
+
+					$ret[] = sprintf(
+						'<a href="%s">%s</a>',
+						$this->get_blockunititem_url($template_id, $subheader_blockunit),
+						$this->get_blockunititem_title($template_id, $subheader_blockunit)
+					);
+				}
+			}
+		}
+	
+		return $ret;
+	}	
 }

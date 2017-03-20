@@ -108,6 +108,61 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 		return $ret;
 	}
 
+	function get_template_crawlableitem($template_id, $atts) {
+
+		$ret = parent::get_template_crawlableitem($template_id, $atts);
+
+		$configuration = $this->get_template_configuration($template_id, $atts);
+
+		// Important: add them in this order (top, center, bottom) because we might open an html tag
+		// in top and close it in the bottom (eg: GETPOP_TEMPLATE_CODEBLOCK_OFFLINEFIRST)
+		if ($description_top = $configuration['description-top']) {
+			$ret[] = $description_top;
+		}
+		if ($description = $configuration[GD_JS_DESCRIPTION]) {
+			$ret[] = $description;
+		}
+		if ($description_bottom = $configuration['description-bottom']) {
+			$ret[] = $description_bottom;
+		}
+	
+		return $ret;
+	}	
+
+	function get_template_runtimecrawlableitem($template_id, $atts) {
+
+		$ret = parent::get_template_runtimecrawlableitem($template_id, $atts);
+
+		// Add once again the Block Title (like in the parent), but also adding the corresponding html-tag
+		if ($title = $this->get_block_title($template_id, $atts)) {
+			
+			$title_htmltag = $this->get_att($template_id, $atts, 'title-htmltag');
+			$title = sprintf(
+				'<%1$s>%2$s</%1$s>',
+				$title_htmltag,
+				$title
+			);
+
+			if ($this->get_att($template_id, $atts, 'add-titlelink')) {
+
+				$title_link = $this->get_title_link($template_id);
+			}
+
+			if ($title_link) {
+				$ret[] = sprintf(
+					'<a href="%s">%s</a>',
+					$title_link,
+					$title
+				);
+			}
+			else {
+				$ret[] = $title;
+			}
+		}
+	
+		return $ret;
+	}	
+
 	function init_atts($template_id, &$atts) {
 
 		global $gd_template_processor_manager;

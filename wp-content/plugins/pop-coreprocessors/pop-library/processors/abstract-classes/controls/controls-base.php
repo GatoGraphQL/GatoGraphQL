@@ -55,6 +55,19 @@ class GD_Template_Processor_ControlsBase extends GD_Template_ProcessorBase {
 		return $ret;
 	}
 
+	function get_template_runtimecrawlableitem($template_id, $atts) {
+	
+		$ret = parent::get_template_runtimecrawlableitem($template_id, $atts);
+
+		$runtimeconfiguration = $this->get_template_runtimeconfiguration($template_id, $atts);
+		if ($text = $runtimeconfiguration['text']) {
+
+			$ret[] = $text;
+		}
+		
+		return $ret;
+	}
+
 	function get_template_configuration($template_id, $atts) {
 
 		$ret = parent::get_template_configuration($template_id, $atts);

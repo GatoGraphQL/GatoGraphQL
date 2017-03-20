@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Theme Wassup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-15 11:22+0800\n"
-"PO-Revision-Date: 2017-03-15 11:22+0800\n"
+"POT-Creation-Date: 2017-03-20 19:14+0800\n"
+"PO-Revision-Date: 2017-03-20 19:14+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
@@ -103,26 +103,31 @@ msgid "Linkedin"
 msgstr "Linkedin"
 
 #: .././library/user-registration.php:16
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:25
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:46
 msgid "Facebook"
 msgstr "Facebook"
 
 #: .././library/user-registration.php:17
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:33
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:56
 msgid "Twitter"
 msgstr "Twitter"
 
 #: .././library/user-registration.php:18
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:49
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:76
 msgid "Youtube"
 msgstr "Youtube"
 
 #: .././library/user-registration.php:19
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:57
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:86
 msgid "Instagram"
 msgstr "Instagram"
 
 #: .././library/user-registration.php:20
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:65
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:36
 msgid "Blog"
 msgstr "Blog"
@@ -604,8 +609,11 @@ msgstr "Añadir ubicación"
 msgid "View all events"
 msgstr "Ver todos los eventos"
 
-#: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:14
-#: .././plugins/events-manager/pop-library/processors/structures/scrolls/scrollmaps.php:77
+#: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:18
+msgid "Scroll right to load more results"
+msgstr "Desplazarse hacia la derecha para cargar más resultados"
+
+#: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:24
 msgid "Scroll down to load more results"
 msgstr "Desplazarse hacia abajo para cargar más resultados"
 
@@ -1238,6 +1246,39 @@ msgstr "Estatus:"
 msgid "Tags:"
 msgstr "Etiquetas:"
 
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:19
+#, php-format
+msgid "<p>%s: %s</p>"
+msgstr "<p>%s: %s</p>"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:20
+msgid ", "
+msgstr ", "
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:25
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:33
+msgid "Contact Person"
+msgstr "Persona de contacto"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:33
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:31
+msgid "Type"
+msgstr "Tipo"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:41
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:32
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:65
+#: .././pop-library/processors/sidebars/posts/widgetries.php:95
+#: .././pop-library/processors/sidebars/posts/widgetries.php:96
+msgid "Categories"
+msgstr "Categorías"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:49
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-individuals-base.php:27
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:50
+msgid "Interests"
+msgstr "Intereses"
+
 #: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:16
 msgid "Charity"
 msgstr "Caridad"
@@ -1269,26 +1310,6 @@ msgstr "Empresa social"
 #: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:23
 msgid "Youth"
 msgstr "Jóvenes"
-
-#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-individuals-base.php:27
-#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:50
-msgid "Interests"
-msgstr "Intereses"
-
-#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:31
-msgid "Type"
-msgstr "Tipo"
-
-#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:32
-#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:65
-#: .././pop-library/processors/sidebars/posts/widgetries.php:95
-#: .././pop-library/processors/sidebars/posts/widgetries.php:96
-msgid "Categories"
-msgstr "Categorías"
-
-#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:33
-msgid "Contact Person"
-msgstr "Persona de contacto"
 
 #: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:34
 msgid "Tel / Fax"
@@ -1510,6 +1531,12 @@ msgstr ""
 "Tenga en cuenta que el estado sigue siendo \"Borrador\", por lo que el "
 "artículo no se verá publicado."
 
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:18
+#, php-format
+msgid "<a href=\"%1$s\">%2$s: %1$s</a>"
+msgstr "<a href=“%1$s”>%2$s: %1$s</a>"
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:41
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:66
 msgid "LinkedIn"
 msgstr "LinkedIn"
@@ -2066,12 +2093,12 @@ msgstr "%s últimos posts"
 msgid "%s latest comments"
 msgstr "%s últimos comentarios"
 
-#: .././templates/header.php:45
+#: .././templates/header.php:46
 #, php-format
 msgid "View %1$s profile and get in touch through %2$s."
 msgstr "Ver el perfil de %1$s y ponerse en contacto a través de %2$s."
 
-#: .././templates/header.php:48
+#: .././templates/header.php:49
 #, php-format
 msgid "Entries tagged “%1$s” in %2$s."
 msgstr "Entradas con la etiqueta \"%1$s\" en %2$s."

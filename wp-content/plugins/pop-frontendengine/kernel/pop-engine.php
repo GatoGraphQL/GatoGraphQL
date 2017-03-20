@@ -7,6 +7,17 @@
 
 class PoPFrontend_Engine extends PoP_Engine {
 
+	function output_end() {
+	
+		// Seach Engine Crawlable data
+		printf(
+			'<div class="hidden searchengine-crawlable"><div class="crawlable-items">%s</div><div class="runtime-crawlable-items">%s</div><div class="crawlable-data">%s</div></div>',
+			$this->json['crawlable-items'],
+			$this->json['runtime-crawlable-items'],
+			$this->json['crawlable-data']
+		);
+	}
+
 	protected function get_json_settings($template_id, $atts) {
 	
 		global $gd_template_processor_manager;
@@ -30,6 +41,22 @@ class PoPFrontend_Engine extends PoP_Engine {
 		
 		return $json_settings;
 	}
+
+	protected function get_crawlable_items($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$processor = $gd_template_processor_manager->get_processor($template_id);
+		return $processor->get_template_crawlableitems($template_id, $atts);
+	}
+
+	protected function get_runtime_crawlable_items($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$processor = $gd_template_processor_manager->get_processor($template_id);
+		return $processor->get_template_runtimecrawlableitems($template_id, $atts);
+	}	
 }
 
 /**---------------------------------------------------------------------------------------------------------------

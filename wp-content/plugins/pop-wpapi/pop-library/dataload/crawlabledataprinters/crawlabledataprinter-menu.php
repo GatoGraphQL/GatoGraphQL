@@ -5,41 +5,34 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_DATALOAD_CRAWLABLEDATAPRINTER_TAG', 'crawlabledataprinter-tag');
+define ('GD_DATALOAD_CRAWLABLEDATAPRINTER_MENU', 'crawlabledataprinter-menu');
  
-class GD_DataLoad_CrawlableDataPrinter_Tag extends GD_DataLoad_CrawlableDataPrinter {
+class GD_DataLoad_CrawlableDataPrinter_Menu extends GD_DataLoad_CrawlableDataPrinter {
 
 	function get_name() {
 	
-		return GD_DATALOAD_CRAWLABLEDATAPRINTER_TAG;
+		return GD_DATALOAD_CRAWLABLEDATAPRINTER_MENU;
 	}
 	
 	function get_crawlable_data($dataitem) {
 
 		$output = parent::get_crawlable_data($dataitem);
 		$elems = array();
-		if ($dataitem['name']) {
+		if ($items = wp_get_nav_menu_items($dataitem['id'])) {
+			foreach ($items as $menu_item) {
 
-			if ($dataitem['url']) {
+				// If it is the divider, then skip
+				if ($menu_item->url == '#') continue;
+
+				$title = apply_filters('the_title', $menu_item->title, $menu_item->object_id);
 				$elems[] = 
 					sprintf(
-						'<a href="%1$s">%2$s</a>',
-						$dataitem['url'], 
-						$dataitem['name']
+						'<a href="%1$s" alt="%2$s">%3$s</a>',
+						$menu_item->url, 
+						$menu_item->title,
+						$title
 					);
 			}
-			else {
-				$elems[] = $dataitem['name'];
-			}
-		}
-
-		if ($dataitem['namedescription']) {
-
-			$elems[] = $dataitem['namedescription'];
-		}
-		if ($dataitem['description']) {
-
-			$elems[] = $dataitem['description'];
 		}
 
 		$output .= implode('<br/>', $elems);
@@ -51,4 +44,4 @@ class GD_DataLoad_CrawlableDataPrinter_Tag extends GD_DataLoad_CrawlableDataPrin
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_CrawlableDataPrinter_Tag();
+new GD_DataLoad_CrawlableDataPrinter_Menu();

@@ -7,6 +7,32 @@
 
 class Wassup_GF_Template_SettingsProcessor extends GD_Template_SettingsProcessorBase {
 
+	function is_functional($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POPTHEME_WASSUP_GF_PAGE_SHAREBYEMAIL => true,
+			);
+		}
+
+		return parent::is_functional($hierarchy);
+	}
+
+	function needs_target_id($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POPTHEME_WASSUP_GF_PAGE_CONTACTUSER => true,
+				POPTHEME_WASSUP_GF_PAGE_VOLUNTEER => true,
+				POPTHEME_WASSUP_GF_PAGE_FLAG => true,
+			);
+		}
+
+		return parent::needs_target_id($hierarchy);
+	}
+
 	function get_page_blockgroups($hierarchy, $include_common = true) {
 
 		$ret = array();

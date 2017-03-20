@@ -26,10 +26,24 @@ class GD_Template_Processor_CodesBase extends GD_Template_ProcessorBase {
 
 		$ret = parent::get_template_configuration($template_id, $atts);
 	
-		global $gd_template_processor_manager;
-		
 		$ret['code'] = $this->get_code($template_id, $atts);
 		$ret['html-tag'] = $this->get_html_tag($template_id, $atts);
+		
+		return $ret;
+	}
+
+	function get_template_crawlableitem($template_id, $atts) {
+
+		$ret = parent::get_template_crawlableitem($template_id, $atts);
+		
+		$configuration = $this->get_template_configuration($template_id, $atts);
+	
+		// Only allow the specified tags, strip all the rest, eg: iframe.
+		$ret[] = PoP_CrawlableDataPrinter_Utils::strip_content_tags(sprintf(
+			'<%1$s>%2$s</%1$s>',
+			$configuration['html-tag'],
+			$configuration['code']
+		));
 		
 		return $ret;
 	}

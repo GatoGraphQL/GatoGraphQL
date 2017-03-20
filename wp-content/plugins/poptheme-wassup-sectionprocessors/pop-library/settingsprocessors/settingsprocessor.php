@@ -44,6 +44,28 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 		return parent::get_checkpoints($hierarchy);
 	}
 
+	function needs_target_id($hierarchy) {
+
+		$ret = array();
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITLOCATIONPOST => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITLOCATIONPOSTLINK => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITSTORY => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITSTORYLINK => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITANNOUNCEMENT => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITANNOUNCEMENTLINK => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITDISCUSSION => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITDISCUSSIONLINK => true,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITFEATURED => true,
+			);
+		}
+	
+		return parent::needs_target_id($hierarchy);
+	}
+
 	function get_page_blockgroups($hierarchy, $include_common = true) {
 
 		$ret = array();

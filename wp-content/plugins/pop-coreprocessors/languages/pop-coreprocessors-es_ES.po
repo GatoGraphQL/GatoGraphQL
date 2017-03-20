@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 12:25+0800\n"
-"PO-Revision-Date: 2017-03-07 12:25+0800\n"
+"POT-Creation-Date: 2017-03-20 19:14+0800\n"
+"PO-Revision-Date: 2017-03-20 19:14+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -438,6 +438,15 @@ msgstr "Te has desuscrito de <em><strong>%s</strong></em>."
 msgid "You have up-voted <em><strong>%s</strong></em>."
 msgstr "Has expresado estar de acuerdo con <em><strong>%s</strong></em>."
 
+#: .././pop-library/dataload/crawlabledataprinters/_crawlabledataprinter-posts-hook.php:22
+#, php-format
+msgid "<p>%s: %s</p>"
+msgstr "<p>%s: %s</p>"
+
+#: .././pop-library/dataload/crawlabledataprinters/_crawlabledataprinter-posts-hook.php:23
+msgid "Link"
+msgstr "Enlace"
+
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-posts-utils.php:16
 msgid "Source: "
 msgstr "Fuente: "
@@ -654,7 +663,7 @@ msgstr ""
 "Enviar una invitación a tus amigos/colegas/etc para unirse a <em><strong>%s</"
 "strong></em>:"
 
-#: .././pop-library/processors/blocks/blocks.php:226
+#: .././pop-library/processors/blocks/blocks.php:233
 #: .././pop-library/processors/comments/blocks.php:175
 #: .././pop-library/processors/login/blocks.php:142
 msgid "Sending..."
@@ -1579,9 +1588,6 @@ msgstr ""
 
 #~ msgid "\n"
 #~ msgstr "\n"
-
-#~ msgid "<p>Dear %s,</p>"
-#~ msgstr "<p>Estimado/a %s,</p>"
 
 #~ msgid "<p>Howdy!</p>"
 #~ msgstr "<p>¡Hola!</p>"

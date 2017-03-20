@@ -203,6 +203,26 @@ class PoP_ProcessorBaseWrapper {
 	
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}	
+	
+	function get_template_crawlableitems($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
+	function get_template_crawlableitem($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}	
+	
+	function get_template_runtimecrawlableitems($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
+	function get_template_runtimecrawlableitem($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}	
 }
 
 /**---------------------------------------------------------------------------------------------------------------

@@ -5,6 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
  
+define ('GD_DATALOAD_CRAWLABLEDATAPRINTER_FILTER', 'gd_template:dataload_crawlabledataprinter:%s');
+
 class GD_DataLoad_CrawlableDataPrinter {
 
 	function __construct() {
@@ -19,7 +21,15 @@ class GD_DataLoad_CrawlableDataPrinter {
 	}
 	
 	function get_crawlable_data($dataitem) {
-	
-		return '';
+
+		// Let the hooks add their own data
+		return apply_filters(
+			sprintf(
+				GD_DATALOAD_CRAWLABLEDATAPRINTER_FILTER, 
+				$this->get_name()
+			),
+			'',
+			$dataitem
+		);
 	}
 }	

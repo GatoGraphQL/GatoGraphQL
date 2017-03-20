@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-01 11:44+0800\n"
-"PO-Revision-Date: 2017-01-01 11:44+0800\n"
+"POT-Creation-Date: 2017-03-20 19:13+0800\n"
+"PO-Revision-Date: 2017-03-20 19:13+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -16,6 +16,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
+
+#: .././library/tag-utils.php:30
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
 
 #: .././library/utils.php:11
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:139
@@ -273,14 +278,24 @@ msgstr "Ahora la espera de la aprobación de los administradores."
 msgid "View your <a href=\"%s\" target=\"%s\" %s>updated profile</a>."
 msgstr "Ver su <a href=\"%s\" target=\"%s\" %s>perfil actualizado</a>."
 
-#: .././pop-library/dataload/fieldprocessors/fieldprocessor-tags.php:53
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:84
 #, php-format
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
+msgid "<p>%s: %s</p>"
+msgstr "<p>%s: %s</p>"
 
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:85
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:98
 #: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:121
 msgid "Website"
 msgstr "Sitio web"
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:108
+#, php-format
+msgid "<p><a href=\"%1$s\" alt=\"%2$s\">%3$s: %1$s</a></p>"
+msgstr "<p><a href=“%1$s” alt=“%2$s”>%3$s: %1$s</a></p>"
 
 #: .././pop-library/formcomponent-inputs/implementations/orderpost.php:18
 msgid "Latest published"

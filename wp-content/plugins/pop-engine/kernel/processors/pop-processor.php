@@ -290,23 +290,6 @@ class PoP_ProcessorBase {
 		$ret = array(
 			$settings_id => $this->get_template_configuration($template_id, $atts)
 		);
-
-		// // If decorating another component, we will use its template_configuration, but with this level settings_id
-		// if ($decorated_template = $this->get_decorated_template($template_id)) {
-
-		// 	$decorated_processor = $gd_template_processor_manager->get_processor($decorated_template);
-		// 	$decorated_ret = $decorated_processor->get_template_configurations($decorated_template, $atts);
-		// 	$decorated_settings_id = $decorated_processor->get_settings_id($decorated_template);
-
-		// 	// Extract the configuration from under the decoranted component settings id key, and place (later) under this level key
-		// 	// Override with $ret[$settings_id] as to keep it's 'id'
-		// 	$ret[$settings_id] = array_merge(
-		// 		$decorated_ret[$decorated_settings_id],
-		// 		$ret[$settings_id]
-		// 	);
-
-		// 	return $ret;
-		// }
 		
 		$components_ret = array();
 		foreach ($this->get_modulecomponents($template_id, array('modules', 'subcomponent-modules')) as $component) {
@@ -347,14 +330,7 @@ class PoP_ProcessorBase {
 
 	function get_template_configuration($template_id, $atts) {
 	
-		// global $gd_template_processor_manager, $gd_dataload_manager;
-
 		$ret = array();
-		// // If decorating another component, bring this one's result, but still use "my" id and name
-		// if ($decorated_template = $this->get_decorated_template($template_id)) {
-			
-		// 	$ret = $gd_template_processor_manager->get_processor($decorated_template)->get_template_configuration($decorated_template, $atts);
-		// }
 
 		// Template configuration for each level: 
 		// For decorated templates, it will already bring the template, calling once again so that it can be overridden
@@ -372,32 +348,6 @@ class PoP_ProcessorBase {
 		if ($runtimeconfiguration = $this->get_template_runtimeconfiguration($template_id, $atts)) {
 			$ret[$template_id] = $runtimeconfiguration;
 		}
-
-		// $decorated_template = $this->get_decorated_template($template_id);
-
-		// // If decorating another component, we will use its template_configuration
-		// if ($decorated_template) {
-			
-		// 	$decorated_processor = $gd_template_processor_manager->get_processor($decorated_template);
-		// 	$decorated_ret = $decorated_processor->get_template_runtimeconfigurations($decorated_template, $atts);
-
-		// 	if ($decorated_ret) {
-
-		// 		$ret = array_merge(
-		// 			$ret,
-		// 			$decorated_ret
-		// 		);
-
-		// 		if ($ret[$decorated_template]) {
-
-		// 			// Extract the configuration from under the decoranted component settings id key, and place (later) under this level key
-		// 			// Override with $ret[$settings_id] as to keep it's 'id'
-		// 			$ret[$template_id] = $ret[$decorated_template];
-		// 			unset($ret[$decorated_template]);
-		// 		}
-		// 	}
-		// 	return $ret;
-		// }
 
 		foreach ($this->get_modulecomponents($template_id) as $component) {
 		
@@ -417,6 +367,56 @@ class PoP_ProcessorBase {
 	}
 
 	function get_template_runtimeconfiguration($template_id, $atts) {
+	
+		return array();
+	}	
+	
+	function get_template_crawlableitems($template_id, $atts) {
+		
+		global $gd_template_processor_manager;
+
+		$ret = $this->get_template_crawlableitem($template_id, $atts);
+
+		foreach ($this->get_modulecomponents($template_id) as $component) {
+		
+			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_template_crawlableitems($component, $atts)) {
+			
+				$ret = array_merge(
+					$ret,
+					$component_ret
+				);
+			}
+		}
+		
+		return $ret;
+	}
+
+	function get_template_crawlableitem($template_id, $atts) {
+	
+		return array();
+	}	
+
+	function get_template_runtimecrawlableitems($template_id, $atts) {
+		
+		global $gd_template_processor_manager;
+
+		$ret = $this->get_template_runtimecrawlableitem($template_id, $atts);
+		
+		foreach ($this->get_modulecomponents($template_id) as $component) {
+		
+			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_template_runtimecrawlableitems($component, $atts)) {
+			
+				$ret = array_merge(
+					$ret,
+					$component_ret
+				);
+			}
+		}
+		
+		return $ret;
+	}
+
+	function get_template_runtimecrawlableitem($template_id, $atts) {
 	
 		return array();
 	}	

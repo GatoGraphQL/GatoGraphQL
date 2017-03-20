@@ -56,6 +56,22 @@ class GD_Template_Processor_FormsBase extends GD_Template_Processor_StructuresBa
 		return $ret;
 	}
 
+	function get_template_crawlableitem($template_id, $atts) {
+
+		$ret = parent::get_template_crawlableitem($template_id, $atts);
+		
+		$configuration = $this->get_template_configuration($template_id, $atts);
+	
+		if ($description = $configuration[GD_JS_DESCRIPTION]) {
+			$ret[] = $description;
+		}
+		if ($description_bottom = $configuration['description-bottom']) {
+			$ret[] = $description_bottom;
+		}
+		
+		return $ret;
+	}
+
 	function get_intercept_urls($template_id, $atts) {
 
 		$ret = parent::get_intercept_urls($template_id, $atts);

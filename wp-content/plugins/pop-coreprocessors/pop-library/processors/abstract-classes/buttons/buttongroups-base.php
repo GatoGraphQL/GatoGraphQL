@@ -98,6 +98,37 @@ class GD_Template_Processor_ButtonGroupsBase extends GD_Template_ProcessorBase {
 		return $ret;
 	}
 
+	function get_template_runtimecrawlableitem($template_id, $atts) {
+	
+		$ret = parent::get_template_runtimecrawlableitem($template_id, $atts);
+
+		// Add the header links
+		$runtimeconfiguration = $this->get_template_runtimeconfiguration($template_id, $atts);
+		if ($headers = $runtimeconfiguration['headers']) {
+
+			foreach ($headers as $header) {
+
+				$ret[] = sprintf(
+					'<a href="%s">%s</a>',
+					$header['url'],
+					$header['title']
+				);
+
+				if ($subheaders = $header['subheaders']) {
+					foreach ($subheaders as $subheader) {
+						$ret[] = sprintf(
+							'<a href="%s">%s</a>',
+							$subheader['url'],
+							$subheader['title']
+						);
+					}
+				}
+			}
+		}
+		
+		return $ret;
+	}
+
 	function get_template_configuration($template_id, $atts) {
 	
 		$ret = parent::get_template_configuration($template_id, $atts);

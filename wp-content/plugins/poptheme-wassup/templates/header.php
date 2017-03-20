@@ -18,7 +18,8 @@
 	<?php endif ?>	
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'poptheme-wassup' ), esc_html( get_bloginfo('name'), 1 ) ) ?>" />
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url') ?>" title="<?php printf( __( '%s latest comments', 'poptheme-wassup' ), esc_html( get_bloginfo('name'), 1 ) ) ?>" />
-	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />	
+	<?php /* This outputs site_url( 'xmlrpc.php' ), and because the xmlrpc.php is blocked, no need to add it	 */ ?>
+	<?php /* <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />	 */ ?>
 	<link rel="shortcut icon" href="<?php echo gd_get_favicon() ?>" />
 	<?php /* meta for Facebook / Twitter / Google Search */ ?>
 	<meta name="twitter:card" content="summary">

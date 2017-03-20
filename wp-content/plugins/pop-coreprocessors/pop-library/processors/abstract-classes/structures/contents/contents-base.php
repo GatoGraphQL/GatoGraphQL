@@ -29,6 +29,19 @@ class GD_Template_Processor_ContentsBase extends GD_Template_Processor_Structure
 		return $ret;
 	}
 
+	function get_template_crawlableitem($template_id, $atts) {
+
+		$ret = parent::get_template_crawlableitem($template_id, $atts);
+		
+		$configuration = $this->get_template_configuration($template_id, $atts);
+	
+		if ($description = $configuration[GD_JS_DESCRIPTION]) {
+			$ret[] = $description;
+		}
+		
+		return $ret;
+	}
+
 	function init_atts($template_id, &$atts) {
 
 		$this->add_att($template_id, $atts, 'description', $this->get_description($template_id, $atts));		

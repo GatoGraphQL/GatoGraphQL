@@ -30,6 +30,20 @@ class Wassup_URE_Template_SettingsProcessor extends GD_Template_SettingsProcesso
 		return parent::get_checkpoints($hierarchy);
 	}
 
+	function needs_target_id($hierarchy) {
+
+		$ret = array();
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POP_URE_POPPROCESSORS_PAGE_EDITMEMBERSHIP => true,
+			);
+		}
+	
+		return parent::needs_target_id($hierarchy);
+	}
+
 	function get_page_blockgroups($hierarchy, $include_common = true) {
 
 		$ret = array();

@@ -150,32 +150,25 @@ class PoP_Engine {
 			return;
 		}
 
-		// If the current request is done by a crawler, then directly return the result for the crawler and nothing else.
-		// Nothing to fear, since WP Super Cache will not cache this result
-		// If it is not the crawler, then do include the crawlable-data in the results, because the WP Super Cache will return 
-		// the cached version of the page if it exists
-		if (!GD_TemplateManager_Utils::is_search_engine()) {
+		// // If the current request is done by a crawler, then directly return the result for the crawler and nothing else.
+		// // Nothing to fear, since WP Super Cache will not cache this result
+		// // If it is not the crawler, then do include the crawlable-data in the results, because the WP Super Cache will return 
+		// // the cached version of the page if it exists
+		// if (!GD_TemplateManager_Utils::is_search_engine()) {
 
-			$output = 
-				// Tell the front-end if the settings are from the cache
-				'<script type="text/javascript">var POP_CACHED_SETTINGS = %s;</script>'.
-				// Template Hierarchy JSON Settings and Data
-				'<script type="application/json" id="%s">%s</script>'
-			;
-			printf(
-				$output,
-				$this->json['cachedsettings'] ? "true" : "false",
-				GD_TEMPLATEID_TOPLEVEL_SETTINGSID,
-				$this->json['json']
-			);
-		}
-
-		// // Seach Engine Crawlable data
-		// $output = '<div class="hidden searchengine-crawlable-data">%s</div>';
-		// printf(
-		// 	$output,
-		// 	$json['crawlable-data']
-		// );
+		$output = 
+			// Tell the front-end if the settings are from the cache
+			'<script type="text/javascript">var POP_CACHED_SETTINGS = %s;</script>'.
+			// Template Hierarchy JSON Settings and Data
+			'<script type="application/json" id="%s">%s</script>'
+		;
+		printf(
+			$output,
+			$this->json['cachedsettings'] ? "true" : "false",
+			GD_TEMPLATEID_TOPLEVEL_SETTINGSID,
+			$this->json['json']
+		);
+		// }
 
 		// Allow extra functionalities. Eg: Save the logged-in user meta information
 		do_action('PoP_Engine:output:end');
@@ -184,12 +177,7 @@ class PoP_Engine {
 
 	function output_end() {
 	
-		// Seach Engine Crawlable data
-		$output = '<div class="hidden searchengine-crawlable-data">%s</div>';
-		printf(
-			$output,
-			$this->json['crawlable-data']
-		);
+		// Implemented in pop-frontendengine
 	}
 
 	function output_json() {
@@ -306,12 +294,24 @@ class PoP_Engine {
 					$settings = json_encode($this->get_json_settings($template_id, $atts));
 					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings);
 				}
+
+				// Crawlable items
+				$crawlableitems = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_CRAWLABLEITEMS);
+
+				// If there is no cached one, generate it and cache it
+				if (!$crawlableitems) {
+
+					$crawlableitems = implode("\n", $this->get_crawlable_items($template_id, $atts));
+					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_CRAWLABLEITEMS, $crawlableitems);
+				}
 			}
 			else {
 				$settings = json_encode($this->get_json_settings($template_id, $atts));
+				$crawlableitems = implode("\n", $this->get_crawlable_items($template_id, $atts));
 			}
 
 			$runtimesettings = $this->get_json_runtimesettings($template_id, $atts);
+			$runtimecrawlableitems = implode("\n", $this->get_runtime_crawlable_items($template_id, $atts));
 		}
 
 		// Data = dataset (data-ids) + feedback + database
@@ -321,7 +321,7 @@ class PoP_Engine {
 			$data = $this->get_data($template_id, $processor, $atts, $formatter, $request);
 		}
 
-		$json = $formatter->get_formatted_data($settings, $runtimesettings, $data);
+		$json = $formatter->get_formatted_data($settings, $runtimesettings, $crawlableitems, $runtimecrawlableitems, $data);
 
 		// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
 		$json['cachedsettings'] = $cachedsettings;
@@ -356,8 +356,8 @@ class PoP_Engine {
 
 		// Templates: What templates must be executed after call to loadMore is back with data:
 		// CB: list of templates to merge
-		$json_settings['configuration'] = $processor->get_template_configurations($template_id, $atts);
 		$json_settings['db-keys'] = $processor->get_database_keys($template_id, $atts);
+		$json_settings['configuration'] = $processor->get_template_configurations($template_id, $atts);
 
 		// Comment Leo 12/06/2016: Not needed, since we can't merge this info into M.ALLOWED_URLS because not all query-domains are initially loaded, so for those not loaded the "click" will not be intercepted
 		// $json_settings['query-domains'] = $processor->get_query_domains($template_id, $atts);
@@ -370,7 +370,18 @@ class PoP_Engine {
 		
 		return $json_settings;
 	}
+
+	protected function get_crawlable_items($template_id, $atts) {
 	
+		// Implemented in pop-frontendengine
+		return array();
+	}
+
+	protected function get_runtime_crawlable_items($template_id, $atts) {
+	
+		// Implemented in pop-frontendengine
+		return array();
+	}	
 	
 	private function combine_ids_datafields(&$ids_data_fields, $dataloader_name, $ids, $data_fields) {
 
@@ -878,7 +889,7 @@ class PoP_Engine {
 			'dataset' => $dataset_ids,
 			'database' => $database,
 			'userdatabase' => $userdatabase,
-			'crawlable-data' => $crawlable_data,
+			'crawlable-data' => implode("\n", $crawlable_data),
 			'params' => $target_params,
 			'feedback' => array(
 				'block' => $block_feedback,

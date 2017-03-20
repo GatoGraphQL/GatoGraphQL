@@ -78,4 +78,23 @@ class GD_Template_Processor_ViewComponentButtonsBase extends GD_Template_Process
 		
 		return $ret;
 	}
+
+	function get_template_crawlableitem($template_id, $atts) {
+
+		$ret = parent::get_template_crawlableitem($template_id, $atts);
+		
+		$configuration = $this->get_template_configuration($template_id, $atts);
+	
+		if ($url = $configuration['url']) {
+			if ($title = $configuration['title']) {
+				$ret[] = sprintf(
+					'<a href="%s">%s</a>',
+					$url,
+					$title
+				);
+			}
+		}
+		
+		return $ret;
+	}
 }

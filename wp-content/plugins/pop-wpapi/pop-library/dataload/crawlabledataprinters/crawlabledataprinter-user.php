@@ -35,15 +35,18 @@ class GD_DataLoad_CrawlableDataPrinter_User extends GD_DataLoad_CrawlableDataPri
 
 		if ($dataitem['avatar']) {
 
+			$avatar = sprintf(
+				'<img src="%s" width="%s" height="%s">',
+				$dataitem['avatar']['src'], 
+				$dataitem['avatar']['width'], 
+				$dataitem['avatar']['height']
+			);
 			if ($dataitem['url']) {
-				$elems[] = 
-					sprintf(
-						'<a href="%s" '.($dataitem['alt'] ? sprintf('alt="%s"', $dataitem['alt']) : '' ).'><img src="%s" width="%s" height="%s"</a>',
-						$dataitem['url'], 
-						$dataitem['avatar']['src'], 
-						$dataitem['avatar']['width'], 
-						$dataitem['avatar']['height']
-					);
+				$elems[] = sprintf(
+					'<a href="%s" '.($dataitem['alt'] ? sprintf('alt="%s"', $dataitem['alt']) : '' ).'>%s</a>',
+					$dataitem['url'], 
+					$avatar
+				);
 			}
 			else {
 				$elems[] = $dataitem['avatar'];
@@ -52,18 +55,21 @@ class GD_DataLoad_CrawlableDataPrinter_User extends GD_DataLoad_CrawlableDataPri
 
 		if ($dataitem['userphoto']) {
 
+			$userphoto = sprintf(
+				'<img src="%s" width="%s" height="%s">',
+				$dataitem['userphoto']['src'], 
+				$dataitem['userphoto']['width'], 
+				$dataitem['userphoto']['height']
+			);
 			if ($dataitem['url']) {
-				$elems[] = 
-					sprintf(
-						'<a href="%s" '.($dataitem['alt'] ? sprintf('alt="%s"', $dataitem['alt']) : '' ).'><img src="%s" width="%s" height="%s"</a>',
-						$dataitem['url'], 
-						$dataitem['userphoto']['src'], 
-						$dataitem['userphoto']['width'], 
-						$dataitem['userphoto']['height']
-					);
+				$elems[] = sprintf(
+					'<a href="%s" '.($dataitem['alt'] ? sprintf('alt="%s"', $dataitem['alt']) : '' ).'>%s</a>',
+					$dataitem['url'], 
+					$userphoto
+				);
 			}
 			else {
-				$elems[] = $dataitem['userphoto'];
+				$elems[] = $userphoto;
 			}
 		}
 
@@ -72,6 +78,39 @@ class GD_DataLoad_CrawlableDataPrinter_User extends GD_DataLoad_CrawlableDataPri
 		}
 		if ($dataitem['description-formatted']) {
 			$elems[] = $dataitem['description-formatted'];
+		}
+		if ($dataitem['username']) {
+			$elems[] = sprintf(
+				__('<p>%s: %s</p>', 'poptheme-wassup'),
+				__('Username', 'poptheme-wassup'),
+				$dataitem['username']
+			);
+		}
+		if ($dataitem['excerpt']) {
+			$elems[] = $dataitem['excerpt'];
+		}
+
+		if ($dataitem['user-url']) {
+
+			$elems[] = sprintf(
+				'<a href="%1$s">%2$s: %1$s</a>',
+				$dataitem['user-url'],
+				__('Website', 'poptheme-wassup')
+			);
+		}
+
+		// Contact: any of the 2 data-fields will do
+		$contact = $dataitem['contact'] ?? $dataitem['contact-small'];
+		if ($contact) {
+
+			foreach ($contact as $contactitem) {
+				$elems[] = sprintf(
+					__('<p><a href="%1$s" alt="%2$s">%3$s: %1$s</a></p>', 'pop-wpapi'),
+					$contactitem['url'],
+					$contactitem['tooltip'] ?? '',
+					$contactitem['text'] ?? $contactitem['tooltip'] ?? ''
+				);
+			}
 		}
 
 		$output .= implode('<br/>', $elems);

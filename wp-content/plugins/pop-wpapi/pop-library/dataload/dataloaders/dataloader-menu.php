@@ -19,6 +19,11 @@ class GD_DataLoader_Menu extends GD_DataLoader {
 		return 1;
 	}
 
+	function get_crawlabledata_printer() {
+	
+		return GD_DATALOAD_CRAWLABLEDATAPRINTER_MENU;
+	}
+
 	function get_data_ids($vars = array(), $is_main_query = false) {
 	
 		$menu = $vars['menu'];
