@@ -21,7 +21,7 @@ define ('GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUPREPLICABLE', 'blockgroup-replicable'
 
 class PoP_Engine {
 
-	var $json;
+	var $json, $atts;
 
 	function __construct() {
 
@@ -92,55 +92,57 @@ class PoP_Engine {
 		}
 	}
 
+	function get_output_items() {
+
+		// What items to fetch
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if ($vars['fetching-json']) {
+
+			// Give different response depending on the target: Hierarchy / Block / Item
+			if ($vars['fetching-json-settingsdata']) {
+
+				// PageSection target: bring everything
+				return array('settings', 'data');
+			}
+			elseif ($vars['fetching-json-settings']) {
+				
+				// Bring only the settings
+				return array('settings');
+			}
+			elseif ($vars['fetching-json-data']) {
+				
+				// Block target: bring only the data, no need for the settings
+				return array('data');
+			}
+		}
+
+		// Bring everything
+		return array('settings', 'data');
+	}
+
 	function generate_json() {
 
 		do_action('PoP_Engine:beginning');	
 
 		$vars = GD_TemplateManager_Utils::get_vars();
-		$fetching_json = $vars['fetching-json'];
-
-		$output_items = array();
-		if ($fetching_json) {
+		if ($vars['fetching-json']) {
 
 			do_action('PoP_Engine:output_json:beginning');	
-
-			// What items to fetch
-			// Give different response depending on the target: Hierarchy / Block / Item
-			if ($vars['fetching-json-settingsdata']) {
-
-				// PageSection target: bring everything
-				$output_items = array('settings', 'data');
-			}
-			elseif ($vars['fetching-json-settings']) {
-				
-				// Bring only the settings
-				$output_items = array('settings');
-			}
-			elseif ($vars['fetching-json-data']) {
-				
-				// Block target: bring only the data, no need for the settings
-				$output_items = array('data');
-			}
 		}
 		else {
 
 			do_action('PoP_Engine:output:beginning');
-
-			// Bring everything
-			$output_items = array('settings', 'data');
 		}
 
 		$template_id = $this->get_toplevel_template_id();
-		if (!($json = $this->get_json($template_id, $output_items))) {
+		$output_items = $this->get_output_items();
+		if (!($this->json = $this->get_json($template_id, $output_items))) {
 
 			return;
 		}
 
-		// Keep the variable for later use, if needed
-		$this->json = $json;
-
 		// Send the ETag-header
-		$this->send_etag_header($json);
+		$this->send_etag_header($this->json);
 	}
 
 	function output() {
@@ -232,7 +234,7 @@ class PoP_Engine {
 		}
 	}
 
-	private function get_json($template_id, $output_items = array()) {
+	protected function get_json($template_id, $output_items) {
 
 		global $gd_template_processor_manager, $gd_template_cachemanager;
 		if (!($processor = $gd_template_processor_manager->get_processor($template_id))) {
@@ -271,6 +273,9 @@ class PoP_Engine {
 		else {
 			$atts = $processor->init_atts($template_id, $initial_atts);
 		}
+
+		// Save it to be used by the children class
+		$this->atts = $atts;
 				
 		// Templates: What templates must be executed after call to loadMore is back with data:
 		// CB: list of templates to merge
@@ -294,24 +299,13 @@ class PoP_Engine {
 					$settings = json_encode($this->get_json_settings($template_id, $atts));
 					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings);
 				}
-
-				// Crawlable items
-				$crawlableitems = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_CRAWLABLEITEMS);
-
-				// If there is no cached one, generate it and cache it
-				if (!$crawlableitems) {
-
-					$crawlableitems = implode("\n", $this->get_crawlable_items($template_id, $atts));
-					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_CRAWLABLEITEMS, $crawlableitems);
-				}
 			}
 			else {
+
 				$settings = json_encode($this->get_json_settings($template_id, $atts));
-				$crawlableitems = implode("\n", $this->get_crawlable_items($template_id, $atts));
 			}
 
 			$runtimesettings = $this->get_json_runtimesettings($template_id, $atts);
-			$runtimecrawlableitems = implode("\n", $this->get_runtime_crawlable_items($template_id, $atts));
 		}
 
 		// Data = dataset (data-ids) + feedback + database
@@ -321,7 +315,7 @@ class PoP_Engine {
 			$data = $this->get_data($template_id, $processor, $atts, $formatter, $request);
 		}
 
-		$json = $formatter->get_formatted_data($settings, $runtimesettings, $crawlableitems, $runtimecrawlableitems, $data);
+		$json = $formatter->get_formatted_data($settings, $runtimesettings, $data);
 
 		// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
 		$json['cachedsettings'] = $cachedsettings;
@@ -370,18 +364,6 @@ class PoP_Engine {
 		
 		return $json_settings;
 	}
-
-	protected function get_crawlable_items($template_id, $atts) {
-	
-		// Implemented in pop-frontendengine
-		return array();
-	}
-
-	protected function get_runtime_crawlable_items($template_id, $atts) {
-	
-		// Implemented in pop-frontendengine
-		return array();
-	}	
 	
 	private function combine_ids_datafields(&$ids_data_fields, $dataloader_name, $ids, $data_fields) {
 

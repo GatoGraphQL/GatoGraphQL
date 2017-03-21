@@ -18,7 +18,7 @@ class GD_DataLoad_DataStructureFormatter {
 		return '';
 	}
 	
-	function get_formatted_data($settings, $runtimesettings, $crawlableitems, $runtimecrawlableitems, $data) {
+	function get_formatted_data($settings, $runtimesettings, $data) {
 	
 		return array();
 	}

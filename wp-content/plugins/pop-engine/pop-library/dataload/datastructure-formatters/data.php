@@ -15,7 +15,7 @@ class GD_DataLoad_DataStructureFormatter_Data extends GD_DataLoad_DataStructureF
 	}
 	
 	// Return only the settings
-	function get_formatted_data($settings, $runtimesettings, $crawlableitems, $runtimecrawlableitems, $data) {
+	function get_formatted_data($settings, $runtimesettings, $data) {
 	
 		return array('json' => json_encode($data));
 	}

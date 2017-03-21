@@ -14,7 +14,7 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 		return GD_DATALOAD_DATASTRUCTURE_DEFAULT;
 	}
 
-	function get_formatted_data($settings, $runtimesettings, $crawlableitems, $runtimecrawlableitems, $data) {
+	function get_formatted_data($settings, $runtimesettings, $data) {
 	
 		// Combine Settings, Data and Feedback into 1 unique Structure, so that it can be delivered under 1 single JSON for the ajax load
 		$json = array();
@@ -57,10 +57,8 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 			'json' => $json
 		);
 
-		// Add all crawlable information: data and settings
+		// Add the crawlable data
 		$ret['crawlable-data'] = $data['crawlable-data'];
-		$ret['crawlable-items'] = $crawlableitems;
-		$ret['runtime-crawlable-items'] = $runtimecrawlableitems;
 
 		return $ret;
 	}

@@ -15,7 +15,7 @@ class GD_DataLoad_DataStructureFormatter_Results extends GD_DataLoad_DataStructu
 	}
 	
 	// Just return the first content of the DB (disregard dbKey)
-	function get_formatted_data($settings, $runtimesettings, $crawlableitems, $runtimecrawlableitems, $data) {
+	function get_formatted_data($settings, $runtimesettings, $data) {
 	
 		$dbcontent = array_values($data['database']);
 		// $dbcontent = array_merge(

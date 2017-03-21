@@ -5,7 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_CACHE_EXT', '.json');
+define ('POP_CACHE_EXT_JSON', '.json');
+define ('POP_CACHE_EXT_HTML', '.html');
 define ('POP_CACHETYPE_SETTINGS', 'settings');
 define ('POP_CACHETYPE_DATASETTINGS', 'data-settings');
 define ('POP_CACHETYPE_ATTS', 'atts');
@@ -58,9 +59,9 @@ class GD_Template_CacheManager {
 		return POP_CACHE_DIR.'/'.$type;
 	}
 
-	private function get_file($filename, $type) {
+	private function get_file($filename, $type, $ext = POP_CACHE_EXT_JSON) {
 
-		return $this->get_cache_dir($type).'/'.$filename.POP_CACHE_EXT;
+		return $this->get_cache_dir($type).'/'.$filename.$ext;
 	}
 
 	function create_cache_dir($type) {
@@ -73,7 +74,7 @@ class GD_Template_CacheManager {
 		}			
 	}
 
-	function get_cache($template_id, $type, $decode = false) {
+	function get_cache($template_id, $type, $decode = false, $ext = POP_CACHE_EXT_JSON) {
 
 		global $gd_template_cacheprocessor_manager;
 		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
@@ -82,7 +83,7 @@ class GD_Template_CacheManager {
 		}			
 		if ($filename = $processor->get_cache_filename($template_id)) {
 
-			$file = $this->get_file($filename, $type);
+			$file = $this->get_file($filename, $type, $ext);
 			if (file_exists($file)) {
 
 				// Return the file contents
@@ -119,7 +120,7 @@ class GD_Template_CacheManager {
 		return false;
 	}
 
-	function store_cache($template_id, $type, $contents_or_object, $encode = false) {
+	function store_cache($template_id, $type, $contents_or_object, $encode = false, $ext = POP_CACHE_EXT_JSON) {
 
 		global $gd_template_cacheprocessor_manager;
 		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
@@ -129,7 +130,7 @@ class GD_Template_CacheManager {
 
 		if ($filename = $processor->get_cache_filename($template_id)) {
 
-			$file = $this->get_file($filename, $type);
+			$file = $this->get_file($filename, $type, $ext);
 
 			if ($encode) {
 				$contents = json_encode($contents_or_object);
