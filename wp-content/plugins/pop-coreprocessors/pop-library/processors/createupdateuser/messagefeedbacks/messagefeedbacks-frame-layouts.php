@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-user-changepassword'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYPREFERENCES', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-mypreferences'));
 
 class GD_Template_Processor_UserMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 
@@ -13,7 +14,7 @@ class GD_Template_Processor_UserMessageFeedbackFrameLayouts extends GD_Template_
 	
 		return array(
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_USER_CHANGEPASSWORD,
-			// GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_USERAVATAR_UPDATE,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYPREFERENCES,
 		);
 	}
 
@@ -21,7 +22,7 @@ class GD_Template_Processor_UserMessageFeedbackFrameLayouts extends GD_Template_
 
 		$layouts = array(
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_USER_CHANGEPASSWORD => GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USER_CHANGEPASSWORD,
-			// GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_USERAVATAR_UPDATE => GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USERAVATAR_UPDATE,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYPREFERENCES => GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPREFERENCES,
 		);
 
 		if ($layout = $layouts[$template_id]) {

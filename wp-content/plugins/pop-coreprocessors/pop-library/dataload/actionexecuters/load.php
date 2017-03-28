@@ -14,6 +14,7 @@ require_once 'downvotepost.php';
 require_once 'undo-downvotepost.php';
 require_once 'email-invite.php';
 require_once 'inviteusers.php';
+require_once 'update-mypreferences.php';
 
 require_once 'library/load.php';
 require_once 'settings/load.php';

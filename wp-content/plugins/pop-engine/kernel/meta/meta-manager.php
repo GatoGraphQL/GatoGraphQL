@@ -58,7 +58,7 @@ class GD_MetaManager {
 
 		return get_post_meta( $post_id, self::get_meta_key($key, GD_META_TYPE_POST), $single );
 	}
-	public static function update_post_meta($post_id, $key, $values, $single = false) {
+	public static function update_post_meta($post_id, $key, $values, $single = false, $boolean = false) {
 
 		$values = self::normalize_values($values);
 
@@ -66,6 +66,8 @@ class GD_MetaManager {
 		delete_post_meta( $post_id, self::get_meta_key($key, GD_META_TYPE_POST));
 		foreach ($values as $value) {
 		
+			// If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
+			if ($boolean && !$value) continue;
 			add_post_meta( $post_id, self::get_meta_key($key, GD_META_TYPE_POST), $value, $single );	
 		}
 	}
@@ -82,7 +84,7 @@ class GD_MetaManager {
 
 		return get_term_meta( $term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $single );
 	}
-	public static function update_term_meta($term_id, $key, $values, $single = false) {
+	public static function update_term_meta($term_id, $key, $values, $single = false, $boolean = false) {
 		
 		$values = self::normalize_values($values);
 
@@ -90,6 +92,8 @@ class GD_MetaManager {
 		delete_term_meta( $term_id, self::get_meta_key($key, GD_META_TYPE_TERM));
 		foreach ($values as $value) {
 		
+			// If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
+			if ($boolean && !$value) continue;
 			add_term_meta( $term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $value, $single );	
 		}
 	}
@@ -106,7 +110,7 @@ class GD_MetaManager {
 
 		return get_user_meta( $user_id, self::get_meta_key($key, GD_META_TYPE_USER), $single );
 	}
-	public static function update_user_meta($user_id, $key, $values, $single = false) {
+	public static function update_user_meta($user_id, $key, $values, $single = false, $boolean = false) {
 		
 		$values = self::normalize_values($values);
 
@@ -114,6 +118,8 @@ class GD_MetaManager {
 		delete_user_meta( $user_id, self::get_meta_key($key, GD_META_TYPE_USER));
 		foreach ($values as $value) {
 		
+			// If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
+			if ($boolean && !$value) continue;
 			add_user_meta( $user_id, self::get_meta_key($key, GD_META_TYPE_USER), $value, $single );	
 		}
 	}
@@ -130,7 +136,7 @@ class GD_MetaManager {
 
 		return get_comment_meta( $comment_id, self::get_meta_key($key, GD_META_TYPE_COMMENT), $single );
 	}
-	public static function update_comment_meta($comment_id, $key, $values, $single = false) {
+	public static function update_comment_meta($comment_id, $key, $values, $single = false, $boolean = false) {
 		
 		$values = self::normalize_values($values);
 
@@ -138,6 +144,8 @@ class GD_MetaManager {
 		delete_comment_meta( $comment_id, self::get_meta_key($key, GD_META_TYPE_COMMENT));
 		foreach ($values as $value) {
 		
+			// If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
+			if ($boolean && !$value) continue;
 			add_comment_meta( $comment_id, self::get_meta_key($key, GD_META_TYPE_COMMENT), $value, $single );	
 		}
 	}

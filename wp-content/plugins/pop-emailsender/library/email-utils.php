@@ -135,6 +135,8 @@ class PoP_EmailSender_Utils {
 		}
 
 		self::sendemail_to_users($emails, $names, $subject, $content, true);
+
+		return $authors;
 	}
 
 	public static function sendemail_to_user($user_id, $subject, $msg) {

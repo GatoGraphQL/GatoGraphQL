@@ -42,8 +42,9 @@ class PoP_Mentions {
     // Regex taken from https://stackoverflow.com/questions/13639478/how-do-i-extract-words-starting-with-a-hash-tag-from-a-string-into-an-array
     $this->regex_users =    '/(?<!\w)@([a-z0-9-._]+[a-z0-9])/iu';
     
-    add_action('save_post', array($this, 'generate_post_tags'), 9999);
-    add_action('wp_insert_comment', array($this, 'generate_comment_tags'), 9999, 2);
+    // Save the tags immediately
+    add_action('save_post', array($this, 'generate_post_tags'), 0);
+    add_action('wp_insert_comment', array($this, 'generate_comment_tags'), 0, 2);
     
     if (!is_admin()) {
       // Can't use filter "the_content" because it doesn't work with page How to use website on MESYM

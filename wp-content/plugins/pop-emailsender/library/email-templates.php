@@ -97,6 +97,16 @@ class PoP_EmailSender_Templates {
 		return '';
 	}
 
+	function get_commentcontenthtml($comment) {
+
+		return '';
+	}
+
+	function get_taghtml($tag_id) {
+
+		return '';
+	}
+
 	function get_websitehtml() {
 
 		return '';

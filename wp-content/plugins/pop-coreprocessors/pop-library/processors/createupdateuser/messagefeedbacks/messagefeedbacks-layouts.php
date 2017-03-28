@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('layout-messagefeedback-user-changepassword'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPREFERENCES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mypreferences'));
 
 class GD_Template_Processor_UserMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 
@@ -13,7 +14,7 @@ class GD_Template_Processor_UserMessageFeedbackLayouts extends GD_Template_Proce
 	
 		return array(
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USER_CHANGEPASSWORD,
-			// GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USERAVATAR_UPDATE,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPREFERENCES,
 		);
 	}
 
@@ -47,24 +48,24 @@ class GD_Template_Processor_UserMessageFeedbackLayouts extends GD_Template_Proce
 				);
 				break;
 
-			// case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USERAVATAR_UPDATE:
+			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPREFERENCES:
 
-			// 	$ret['success-header'] = __('Picture updated successfully.', 'pop-coreprocessors');
-			// 	$ret['success'] = __('Such a good shot!', 'pop-coreprocessors');
+				$ret['success-header'] = __('Preferences saved.', 'pop-coreprocessors');
+				$ret['success'] = '';
 
-			// 	$ret['checkpoint-error-header'] = __('Login', 'pop-coreprocessors');
+				$ret['checkpoint-error-header'] = __('Login', 'pop-coreprocessors');
 
-			// 	// User not yet logged in
-			// 	$ret['usernotloggedin'] = sprintf(
-			// 		__('Please <a href="%s">log in</a> to update your picture.', 'pop-coreprocessors'),
-			// 		wp_login_url()
-			// 	);
-			// 	// User has no access to this functionality (eg: logged in with Facebook)
-			// 	$ret['usernoprofileaccess'] = sprintf(
-			// 		__('Only %s accounts can update their picture.', 'pop-coreprocessors'),
-			// 		get_bloginfo('name')
-			// 	);
-			// 	break;
+				// User not yet logged in
+				$ret['usernotloggedin'] = sprintf(
+					__('Please <a href="%s">log in</a> to save your preferences.', 'pop-coreprocessors'),
+					wp_login_url()
+				);
+				// User has no access to this functionality (eg: logged in with Facebook)
+				$ret['usernoprofileaccess'] = sprintf(
+					__('Only %s accounts can save preferences.', 'pop-coreprocessors'),
+					get_bloginfo('name')
+				);
+				break;
 		}
 
 		return $ret;

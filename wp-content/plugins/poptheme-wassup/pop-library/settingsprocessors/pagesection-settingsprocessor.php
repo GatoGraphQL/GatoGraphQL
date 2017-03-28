@@ -278,6 +278,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 				case POP_COREPROCESSORS_PAGE_MYPROFILE:
 				case POP_COREPROCESSORS_PAGE_SUMMARY:
 				case POP_COREPROCESSORS_PAGE_UPVOTEDBY:
+				case POP_COREPROCESSORS_PAGE_MYPREFERENCES:
 
 					$blocks[] = GD_TEMPLATE_BLOCK_EMPTYSIDEINFO;
 					break;		
@@ -916,6 +917,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			 * Profiles Create/Update
 			 *********************************************/
 			case POP_WPAPI_PAGE_EDITAVATAR:
+			case POP_COREPROCESSORS_PAGE_MYPREFERENCES:
 
 				$add = ($template_id == GD_TEMPLATE_PAGESECTION_PAGE);
 				if ($add) {
@@ -1186,6 +1188,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			// case POP_COREPROCESSORS_PAGE_RELATEDCONTENT:
 			case POP_COREPROCESSORS_PAGE_SUMMARY:
 			case POP_COREPROCESSORS_PAGE_UPVOTEDBY:
+			case POP_COREPROCESSORS_PAGE_MYPREFERENCES:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN) {
 
@@ -1305,6 +1308,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			case POP_WPAPI_PAGE_SEARCHUSERS:
 			case POP_COREPROCESSORS_PAGE_SUMMARY:
 			case POP_COREPROCESSORS_PAGE_UPVOTEDBY:
+			case POP_COREPROCESSORS_PAGE_MYPREFERENCES:
 
 				$add = 
 					($template_id == GD_TEMPLATE_PAGESECTION_PAGETABS_PAGE && $target == GD_URLPARAM_TARGET_MAIN) ||

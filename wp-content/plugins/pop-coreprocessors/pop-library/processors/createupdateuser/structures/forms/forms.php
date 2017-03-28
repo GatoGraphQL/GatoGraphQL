@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_FORM_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('form-user-changepwd'));
+define ('GD_TEMPLATE_FORM_MYPREFERENCES', PoP_ServerUtils::get_template_definition('form-mypreferences'));
 
 class GD_Template_Processor_UserForms extends GD_Template_Processor_FormsBase {
 
@@ -13,7 +14,7 @@ class GD_Template_Processor_UserForms extends GD_Template_Processor_FormsBase {
 	
 		return array(
 			GD_TEMPLATE_FORM_USER_CHANGEPASSWORD,
-			// GD_TEMPLATE_FORM_USERAVATAR_UPDATE,
+			GD_TEMPLATE_FORM_MYPREFERENCES,
 		);
 	}
 
@@ -25,12 +26,26 @@ class GD_Template_Processor_UserForms extends GD_Template_Processor_FormsBase {
 
 				return GD_TEMPLATE_FORMINNER_USER_CHANGEPASSWORD;
 
-			// case GD_TEMPLATE_FORM_USERAVATAR_UPDATE:
+			case GD_TEMPLATE_FORM_MYPREFERENCES:
 
-			// 	return GD_TEMPLATE_FORMINNER_USERAVATAR_UPDATE;
+				return GD_TEMPLATE_FORMINNER_MYPREFERENCES;
 		}
 
 		return parent::get_inner_template($template_id);
+	}
+
+	function init_atts($template_id, &$atts) {
+	
+		switch ($template_id) {
+
+			case GD_TEMPLATE_FORM_MYPREFERENCES:			
+
+				// For security reasons: delete passwords (more since introducing Login block in offcanvas, so that it will stay there forever and other users could re-login using the exisiting filled-in info)
+				$this->append_att($template_id, $atts, 'class', 'form-mypreferences');
+				break;
+		}
+		
+		return parent::init_atts($template_id, $atts);
 	}
 }
 

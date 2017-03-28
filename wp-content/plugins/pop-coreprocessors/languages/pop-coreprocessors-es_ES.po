@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-20 19:14+0800\n"
-"PO-Revision-Date: 2017-03-20 19:14+0800\n"
+"POT-Creation-Date: 2017-03-28 17:13+0800\n"
+"PO-Revision-Date: 2017-03-28 17:22+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -241,6 +241,102 @@ msgid "Display email in the Profile page?"
 msgstr ""
 "¿Hacer tu dirección de correo electrónico visible a todos los usuarios?"
 
+#: .././library/users/user-registration.php:60
+msgid "User preferences"
+msgstr "Preferencias de usuario"
+
+#: .././library/users/user-registration.php:61
+#: .././pop-library/processors/createupdateuser/forms/codes.php:35
+msgid "Email notifications"
+msgstr "Notificaciones por email"
+
+#: .././library/users/user-registration.php:62
+#: .././pop-library/processors/createupdateuser/forms/codes.php:48
+msgid "General:"
+msgstr "General:"
+
+#: .././library/users/user-registration.php:65
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:52
+msgid "New content is posted on the website"
+msgstr "Nuevo contenido is agregado al sitio web"
+
+#: .././library/users/user-registration.php:71
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:57
+#, php-format
+msgid "Special announcements from %s"
+msgstr "Anuncio especial de %s"
+
+#: .././library/users/user-registration.php:77
+#: .././pop-library/processors/createupdateuser/forms/codes.php:49
+msgid "A user on my network:"
+msgstr "Un usuario en mi red:"
+
+#: .././library/users/user-registration.php:80
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:63
+msgid "Created content"
+msgstr "Contenido"
+
+#: .././library/users/user-registration.php:86
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:67
+msgid "Recommended content"
+msgstr "Contenido recomendado"
+
+#: .././library/users/user-registration.php:92
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:71
+msgid "Follows another user"
+msgstr "Sigue a otro usuario"
+
+#: .././library/users/user-registration.php:98
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:75
+msgid "Subscribed to a topic"
+msgstr "Suscrito a un tópico"
+
+#: .././library/users/user-registration.php:104
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:79
+msgid "Added a comment"
+msgstr "Añadió un comentario"
+
+#: .././library/users/user-registration.php:110
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:83
+msgid "Up/down-voted a highlight"
+msgstr "Evaluó un destacado"
+
+#: .././library/users/user-registration.php:116
+#: .././pop-library/processors/createupdateuser/forms/codes.php:50
+msgid "A topic I am subscribed to:"
+msgstr "Un tópico al que estoy suscrito:"
+
+#: .././library/users/user-registration.php:119
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:87
+msgid "Has new content"
+msgstr "Tiene nuevo contenido"
+
+#: .././library/users/user-registration.php:125
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:91
+msgid "Has a comment added"
+msgstr "Tiene un comentario añadido"
+
+#: .././library/users/user-registration.php:131
+#: .././pop-library/processors/createupdateuser/forms/codes.php:36
+msgid "Email digests"
+msgstr "Resúmenes por email"
+
+#: .././library/users/user-registration.php:134
+msgid "(Coming soon) New content posted on the website (daily)"
+msgstr "(Próximamente) Nuevo contenido agregado al sitio web (diario)"
+
+#: .././library/users/user-registration.php:140
+msgid "(Coming soon) Upcoming events (bi-weekly)"
+msgstr "(Próximamente) Eventos próximos (2 veces x semana)"
+
+#: .././library/users/user-registration.php:146
+msgid "(Coming soon) Activity from users on my network (daily)"
+msgstr "(Próximamente) Actividad de los usuarios en mi red (diario)"
+
+#: .././library/users/user-registration.php:152
+msgid "(Coming soon) Activity on my subscribed topics (daily)"
+msgstr "(Próximamente) Actividad en mis tópicos subscriptos (diario)"
+
 #: .././pop-library/constants.php:8
 msgid "Loading"
 msgstr "Cargando"
@@ -432,6 +528,10 @@ msgstr "Has dejado de recomendar <em><strong>%s</strong></em>."
 #, php-format
 msgid "You have unsubscribed from <em><strong>%s</strong></em>."
 msgstr "Te has desuscrito de <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/update-mypreferences.php:30
+msgid "You have successfully updated your preferences."
+msgstr "Has editado editado tus preferencias en forma exitosa."
 
 #: .././pop-library/dataload/actionexecuters/upvotepost.php:32
 #, php-format
@@ -921,6 +1021,7 @@ msgid "Profile updated successfully."
 msgstr "Perfil actualizado satisfactoriamente."
 
 #: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:28
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:56
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -982,7 +1083,7 @@ msgid "Blog URL"
 msgstr "URL de tu Blog"
 
 #: .././pop-library/processors/createupdateuser/abstract-classes/createupdateuser-blocks-base.php:12
-#: .././pop-library/processors/createupdateuser/blocks.php:100
+#: .././pop-library/processors/createupdateuser/blocks.php:101
 msgid "Submitting..."
 msgstr "Enviando…"
 
@@ -1003,6 +1104,26 @@ msgstr "Cuenta de usuario actualizada satisfactoriamente."
 #, php-format
 msgid "View your <a href=\"%s\">updated user account</a>."
 msgstr "Ver tu <a href=\"%s\">cuenta de usuario actualizada</a>."
+
+#: .././pop-library/processors/createupdateuser/blocks.php:96
+msgid "Saving..."
+msgstr "Guardando…"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:95
+msgid "New content posted on the website (daily)"
+msgstr "Nuevo contenido agregado al sitio web (diario)"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:99
+msgid "Upcoming events (bi-weekly)"
+msgstr "Eventos próximos (2 veces x semana)"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:103
+msgid "Activity from users on my network (daily)"
+msgstr "Actividad de los usuarios en mi red (diario)"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:107
+msgid "Activity on my subscribed topics (daily)"
+msgstr "Actividad en mis tópicos subscriptos (diario)"
 
 #: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:41
 msgid "Username"
@@ -1045,7 +1166,7 @@ msgstr "URL de tu sitio web"
 msgid "Description"
 msgstr "Descripción"
 
-#: .././pop-library/processors/createupdateuser/forms/formgroups.php:81
+#: .././pop-library/processors/createupdateuser/forms/formgroups.php:125
 msgid ""
 "Please be careful to fill-in the email properly! It will not only appear in "
 "the profile page, but also be used by our system to send you notifications."
@@ -1054,30 +1175,50 @@ msgstr ""
 "perfil de usuario, sino también será utilizado por nuestro sistema para "
 "enviarte notificaciones."
 
-#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:28
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:29
 msgid "Password updated successfully."
 msgstr "Contraseña actualizada satisfactoriamente."
 
-#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:29
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:30
 msgid ""
 "Yep, it's good to change it every now and then, with so many crooks around!"
 msgstr "Sí, es bueno cambiarla cada tanto, con tantos ladrones sueltos!"
 
-#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:31
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:32
 msgid "Ops, there is a problem:"
 msgstr "Ops, hay un problema:"
 
-#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:35
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:36
 #, php-format
 msgid "Please <a href=\"%s\">log in</a> to change your password."
 msgstr ""
 "Por favor, <a href=\"%s\">iniciá tu sesión</a> para cambiar tu contraseña."
 
-#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:40
-#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:45
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:41
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:46
 #, php-format
 msgid "Only %s accounts can change their password."
 msgstr "Sólo cuentas de %s pueden cambiar contraseña."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:53
+msgid "Preferences saved."
+msgstr "Preferencias guardadas."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:60
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to save your preferences."
+msgstr ""
+"Por favor <a href=\"%s\">iniciá tu sesión</a> para editar tus preferencias."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:65
+#, php-format
+msgid "Only %s accounts can save preferences."
+msgstr "Sólo cuentas de  %s pueden editar preferencias."
+
+#: .././pop-library/processors/createupdateuser/structures/forms/forminners.php:104
+#, php-format
+msgid "(Coming soon) %s"
+msgstr "(Próximamente) %s"
 
 #: .././pop-library/processors/formcomponents-inputs/captcha-formcomponents-inputs.php:25
 msgid "Captcha"
@@ -1875,10 +2016,6 @@ msgstr ""
 
 #~ msgid "Such a good shot!"
 #~ msgstr "¡Qué buena foto!"
-
-#~ msgid "Please <a href=\"%s\">log in</a> to update your picture."
-#~ msgstr ""
-#~ "Por favor <a href=\"%s\">iniciá tu sesión</a> para actualizar tu foto."
 
 #~ msgid "Only %s accounts can update their picture."
 #~ msgstr "Solo cuentas de %s pueden actualizar la foto."

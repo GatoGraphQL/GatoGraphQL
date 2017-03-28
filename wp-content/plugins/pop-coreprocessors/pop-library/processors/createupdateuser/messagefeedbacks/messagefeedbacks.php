@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_MESSAGEFEEDBACK_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('messagefeedback-user-changepassword'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYPREFERENCES', PoP_ServerUtils::get_template_definition('messagefeedback-mypreferences'));
 
 class GD_Template_Processor_UserMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 
@@ -13,7 +14,7 @@ class GD_Template_Processor_UserMessageFeedbacks extends GD_Template_Processor_M
 	
 		return array(
 			GD_TEMPLATE_MESSAGEFEEDBACK_USER_CHANGEPASSWORD,
-			// GD_TEMPLATE_MESSAGEFEEDBACK_USERAVATAR_UPDATE,
+			GD_TEMPLATE_MESSAGEFEEDBACK_MYPREFERENCES,
 		);
 	}
 
@@ -21,7 +22,7 @@ class GD_Template_Processor_UserMessageFeedbacks extends GD_Template_Processor_M
 
 		$inners = array(
 			GD_TEMPLATE_MESSAGEFEEDBACK_USER_CHANGEPASSWORD => GD_TEMPLATE_MESSAGEFEEDBACKINNER_USER_CHANGEPASSWORD,
-			// GD_TEMPLATE_MESSAGEFEEDBACK_USERAVATAR_UPDATE => GD_TEMPLATE_MESSAGEFEEDBACKINNER_USERAVATAR_UPDATE,
+			GD_TEMPLATE_MESSAGEFEEDBACK_MYPREFERENCES => GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYPREFERENCES,
 		);
 
 		if ($inner = $inners[$template_id]) {

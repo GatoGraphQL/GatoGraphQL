@@ -32,6 +32,7 @@ define ('POP_COREPROCESSORS_PAGE_INVITENEWUSERS', false);
 define ('POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES', false);
 define ('POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA', false);
 define ('POP_COREPROCESSORS_PAGE_MYPROFILE', false);
+define ('POP_COREPROCESSORS_PAGE_MYPREFERENCES', false);
 
 // Functionality Pages
 //--------------------------------------------------------
@@ -54,4 +55,5 @@ define ('POP_COREPROCESSORS_APIKEY_GOOGLEANALYTICS', false);
 // Placeholders for ad-hoc values
 //--------------------------------------------------------
 define ('POP_COREPROCESSORS_HASHTAGS_EDITORACCESS', array());
+define ('POP_COREPROCESSORS_PREFERENCES_GRANTDEFAULT_VERSION', false);
 

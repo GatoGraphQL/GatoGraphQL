@@ -82,6 +82,11 @@ function popcore_navigation_menu_item_icon($icon, $menu_item_object_id, $html = 
 			$fontawesome = 'fa-user';
 			break;
 
+		case POP_COREPROCESSORS_PAGE_MYPREFERENCES:
+
+			$fontawesome = 'fa-cog';
+			break;
+
 		case POP_COREPROCESSORS_PAGE_INVITENEWUSERS:
 
 			$fontawesome = 'fa-user-plus';

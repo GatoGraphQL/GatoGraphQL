@@ -51,6 +51,7 @@ require_once POP_COREPROCESSORS_LIB.'/gallery.php';
 require_once POP_COREPROCESSORS_LIB.'/googleanalytics.php';
 require_once POP_COREPROCESSORS_LIB.'/hide_admin_bar.php';
 require_once POP_COREPROCESSORS_LIB.'/login/login.php';
+require_once POP_COREPROCESSORS_LIB.'/preferences/load.php';
 require_once POP_COREPROCESSORS_LIB.'/media/media.php';
 require_once POP_COREPROCESSORS_LIB.'/meta/load.php';
 require_once POP_COREPROCESSORS_LIB.'/navigation.php';

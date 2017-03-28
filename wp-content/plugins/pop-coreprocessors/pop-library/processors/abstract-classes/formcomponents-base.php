@@ -129,6 +129,11 @@ class GD_Template_Processor_FormComponentsBase extends GD_Template_ProcessorBase
 			$this->add_att($template_id, $atts, 'selected', '');
 		}
 
+		if ($this->get_att($template_id, $atts, 'disabled')) {
+
+			$this->append_att($template_id, $atts, 'class', 'disabled');
+		}
+
 		return parent::init_atts($template_id, $atts);
 	}
 
@@ -190,7 +195,12 @@ class GD_Template_Processor_FormComponentsBase extends GD_Template_ProcessorBase
 		$ret['label'] = $this->get_att($template_id, $atts, 'label');
 		// $ret['info'] = $this->get_info($template_id, $atts);
 
-		$ret['readonly'] = $this->get_att($template_id, $atts, 'readonly');
+		if ($this->get_att($template_id, $atts, 'readonly')) {
+			$ret['readonly'] = true;
+		}
+		if ($this->get_att($template_id, $atts, 'disabled')) {
+			$ret['disabled'] = true;
+		}
 
 		return $ret;
 	}

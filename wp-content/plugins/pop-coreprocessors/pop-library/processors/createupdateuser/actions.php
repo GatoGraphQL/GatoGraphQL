@@ -5,6 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('GD_TEMPLATE_ACTION_MYPREFERENCES', PoP_ServerUtils::get_template_definition('action-mypreferences'));
 define ('GD_TEMPLATE_ACTION_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('action-user-changepwd'));
 
 class GD_Template_Processor_UserActions extends GD_Template_Processor_ActionsBase {
@@ -13,7 +14,7 @@ class GD_Template_Processor_UserActions extends GD_Template_Processor_ActionsBas
 	
 		return array(
 			GD_TEMPLATE_ACTION_USER_CHANGEPASSWORD,
-			// GD_TEMPLATE_ACTION_USERAVATAR_UPDATE,
+			GD_TEMPLATE_ACTION_MYPREFERENCES,
 		);
 	}
 
@@ -25,9 +26,9 @@ class GD_Template_Processor_UserActions extends GD_Template_Processor_ActionsBas
 
 				return GD_DATALOAD_ACTIONEXECUTER_CHANGEPASSWORD_USER;
 
-			// case GD_TEMPLATE_ACTION_USERAVATAR_UPDATE:
+			case GD_TEMPLATE_ACTION_MYPREFERENCES:
 
-			// 	return GD_DATALOAD_ACTIONEXECUTER_USERAVATAR_UPDATE;
+				return GD_DATALOAD_ACTIONEXECUTER_MYPREFERENCES_UPDATE;
 		}
 
 		return parent::get_actionexecuter($template_id);
@@ -38,7 +39,7 @@ class GD_Template_Processor_UserActions extends GD_Template_Processor_ActionsBas
 		switch ($template_id) {
 
 			case GD_TEMPLATE_ACTION_USER_CHANGEPASSWORD:
-			// case GD_TEMPLATE_ACTION_USERAVATAR_UPDATE:
+			case GD_TEMPLATE_ACTION_MYPREFERENCES:
 
 				return GD_DATALOAD_IOHANDLER_FORM;
 		}
@@ -54,9 +55,9 @@ class GD_Template_Processor_UserActions extends GD_Template_Processor_ActionsBas
 
 				return GD_TEMPLATE_BLOCK_USER_CHANGEPASSWORD;
 
-			// case GD_TEMPLATE_ACTION_USERAVATAR_UPDATE:
+			case GD_TEMPLATE_ACTION_MYPREFERENCES:
 
-			// 	return GD_TEMPLATE_BLOCK_USERAVATAR_UPDATE;
+				return GD_TEMPLATE_BLOCK_MYPREFERENCES;
 		}
 
 		return parent::get_settings_id($template_id);
