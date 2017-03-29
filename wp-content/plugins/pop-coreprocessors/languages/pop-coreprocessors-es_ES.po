@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 17:13+0800\n"
-"PO-Revision-Date: 2017-03-28 17:22+0800\n"
+"POT-Creation-Date: 2017-03-29 10:37+0800\n"
+"PO-Revision-Date: 2017-03-29 10:37+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -258,7 +258,7 @@ msgstr "General:"
 #: .././library/users/user-registration.php:65
 #: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:52
 msgid "New content is posted on the website"
-msgstr "Nuevo contenido is agregado al sitio web"
+msgstr "Nuevo contenido es agregado al sitio web"
 
 #: .././library/users/user-registration.php:71
 #: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:57
@@ -278,8 +278,8 @@ msgstr "Contenido"
 
 #: .././library/users/user-registration.php:86
 #: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:67
-msgid "Recommended content"
-msgstr "Contenido recomendado"
+msgid "Recommends content"
+msgstr "Recomienda contenido"
 
 #: .././library/users/user-registration.php:92
 #: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:71

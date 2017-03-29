@@ -12,6 +12,7 @@ define ('POP_EMAIL_FOLLOWSUSER', 'followsuser');
 define ('POP_EMAIL_RECOMMENDSPOST', 'recommendspost');
 define ('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
 define ('POP_EMAIL_UPDOWNVOTEDPOST', 'updownvotedpost');
+// define ('POP_EMAIL_JOINSCOMMUNITIES', 'joinscommunities');
 // define ('POP_EMAIL_USERMENTIONED', 'usermentioned');
 
 class PoP_EmailSender_Hooks {
@@ -28,6 +29,7 @@ class PoP_EmailSender_Hooks {
 			POP_EMAIL_RECOMMENDSPOST => array(),
 			POP_EMAIL_SUBSCRIBEDTOTOPIC => array(),
 			POP_EMAIL_UPDOWNVOTEDPOST => array(),
+			// POP_EMAIL_JOINSCOMMUNITIES => array(),
 			// POP_EMAIL_USERMENTIONED => array(),
 		);
 		
@@ -98,6 +100,8 @@ class PoP_EmailSender_Hooks {
 		// EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST:
 		add_action('gd_upvotepost', array($this, 'emailnotifications_network_upvotedpost'), 10, 1);
 		add_action('gd_downvotepost', array($this, 'emailnotifications_network_downvotedpost'), 10, 1);
+		// URE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
+		// add_action('gd_update_mycommunities:update', array($this, 'emailnotifications_network_joinscommunity'), 10, 3);
 		
 		// // EMAILNOTIFICATIONS_DIGESTS_DAILY_NEWCONTENT:
 		// add_action('', array($this, 'emailnotifications_digests_daily_newcontent'), 10, 1);
@@ -119,6 +123,13 @@ class PoP_EmailSender_Hooks {
 				get_permalink(POP_COREPROCESSORS_PAGE_MYPREFERENCES)
 			)
 		);
+	}
+
+	protected function get_user_networkusers($user_id) {
+
+		// Allow URE to also add communities' members to the list of users who will receive a notification
+		// This way, if PoP does something, then Leo will get a notification (Leo is member of PoP)
+		return apply_filters('PoP_EmailSender_Hooks:networkusers', get_user_networkusers($user_id), $user_id);
 	}
 	/**---------------------------------------------------------------------------------------------------------------
 	 * User's network notification emails: post created
@@ -156,14 +167,14 @@ class PoP_EmailSender_Hooks {
 		$post_html = PoP_EmailTemplates_Factory::get_instance()->get_posthtml($post_id);
 		$post_name = gd_get_postname($post_id);
 		$post_title = get_the_title($post_id);
-		$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the authors’ network.', 'pop-emailsender'));
+		$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
 
 		// $allnetworkusers = array();
 		$authors = gd_get_postauthors($post_id);
 		foreach ($authors as $author) {
 
 			// Get all the author's network's users (followers + members of same communities)
-			$networkusers = get_user_networkusers($author);
+			$networkusers = $this->get_user_networkusers($author);
 
 			// Do not send email to the authors of the post, they know already!
 			$networkusers = array_diff($networkusers, $authors);
@@ -504,7 +515,7 @@ class PoP_EmailSender_Hooks {
 		}
 
 		// Get all the author's network's users (followers + members of same communities)
-		$networkusers = get_user_networkusers($comment->user_id);
+		$networkusers = $this->get_user_networkusers($comment->user_id);
 		if ($networkusers = array_diff($networkusers, $this->sent_emails[POP_EMAIL_ADDEDCOMMENT])) {
 
 			// Keep only the users with the corresponding preference on
@@ -533,7 +544,7 @@ class PoP_EmailSender_Hooks {
 
 				$content .= PoP_EmailTemplates_Factory::get_instance()->get_commentcontenthtml($comment);
 
-				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the authors’ network.', 'pop-emailsender'));
+				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
 				$content .= $footer;
 				
 				// Possibly the title has html entities, these must be transformed again for the subjects below
@@ -634,7 +645,7 @@ class PoP_EmailSender_Hooks {
 		$user_id = get_current_user_id();
 
 		// Get the current user's network's users (followers + members of same communities)
-		$networkusers = get_user_networkusers($user_id);
+		$networkusers = $this->get_user_networkusers($user_id);
 		if ($networkusers = array_diff($networkusers, $this->sent_emails[POP_EMAIL_FOLLOWSUSER])) {
 
 			// Keep only the users with the corresponding preference on
@@ -664,7 +675,7 @@ class PoP_EmailSender_Hooks {
 				$target_html = PoP_EmailTemplates_Factory::get_instance()->get_userhtml($target_id);
 				$content .= $target_html;
 
-				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the authors’ network.', 'pop-emailsender'));
+				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
 				$content .= $footer;
 				
 				PoP_EmailSender_Utils::sendemail_to_users($emails, $names, $subject, $content);
@@ -682,7 +693,7 @@ class PoP_EmailSender_Hooks {
 		$user_id = get_current_user_id();
 
 		// Get the current user's network's users (followers + members of same communities)
-		$networkusers = get_user_networkusers($user_id);
+		$networkusers = $this->get_user_networkusers($user_id);
 		if ($networkusers = array_diff($networkusers, $this->sent_emails[POP_EMAIL_RECOMMENDSPOST])) {
 
 			// Keep only the users with the corresponding preference on
@@ -712,7 +723,7 @@ class PoP_EmailSender_Hooks {
 				$post_html = PoP_EmailTemplates_Factory::get_instance()->get_posthtml($post_id);
 				$content .= $post_html;
 
-				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the authors’ network.', 'pop-emailsender'));
+				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
 				$content .= $footer;
 				
 				PoP_EmailSender_Utils::sendemail_to_users($emails, $names, $subject, $content);
@@ -730,7 +741,7 @@ class PoP_EmailSender_Hooks {
 		$user_id = get_current_user_id();
 
 		// Get the current user's network's users (followers + members of same communities)
-		$networkusers = get_user_networkusers($user_id);
+		$networkusers = $this->get_user_networkusers($user_id);
 		if ($networkusers = array_diff($networkusers, $this->sent_emails[POP_EMAIL_SUBSCRIBEDTOTOPIC])) {
 
 			// Keep only the users with the corresponding preference on
@@ -761,7 +772,7 @@ class PoP_EmailSender_Hooks {
 				$tag_html = PoP_EmailTemplates_Factory::get_instance()->get_taghtml($tag_id);
 				$content .= $tag_html;
 
-				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the authors’ network.', 'pop-emailsender'));
+				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
 				$content .= $footer;
 				
 				PoP_EmailSender_Utils::sendemail_to_users($emails, $names, $subject, $content);
@@ -787,7 +798,7 @@ class PoP_EmailSender_Hooks {
 		$user_id = get_current_user_id();
 
 		// Get the current user's network's users (followers + members of same communities)
-		$networkusers = get_user_networkusers($user_id);
+		$networkusers = $this->get_user_networkusers($user_id);
 		if ($networkusers = array_diff($networkusers, $this->sent_emails[POP_EMAIL_UPDOWNVOTEDPOST])) {
 
 			// Keep only the users with the corresponding preference on
@@ -804,7 +815,7 @@ class PoP_EmailSender_Hooks {
 				$post_html = PoP_EmailTemplates_Factory::get_instance()->get_posthtml($post_id);
 				$post_name = gd_get_postname($post_id);
 				$post_title = get_the_title($post_id);
-				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the authors’ network.', 'pop-emailsender'));
+				$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
 
 				$authors = gd_get_postauthors($post_id);
 				$author = $authors[0];
@@ -836,6 +847,65 @@ class PoP_EmailSender_Hooks {
 			}			
 		}
 	}
+	// function emailnotifications_network_joinscommunity($user_id, $form_data, $operationlog) {
+
+	// 	if (!$communities = $operationlog['new-communities']) return;
+
+	// 	// Get the current user's network's users (followers + members of same communities)
+	// 	$networkusers = $this->get_user_networkusers($user_id);
+	// 	if ($networkusers = array_diff($networkusers, $this->sent_emails[POP_EMAIL_JOINSCOMMUNITIES])) {
+
+	// 		// Keep only the users with the corresponding preference on
+	// 		if ($networkusers = PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_URE_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY, $networkusers)) {
+
+	// 			$emails = $names = array();
+	// 			foreach ($networkusers as $networkuser) {
+
+	// 				$emails[] = get_the_author_meta( 'user_email', $networkuser );
+	// 				$names[] = get_the_author_meta( 'display_name', $networkuser );
+	// 			}
+
+	// 			$user_url = get_author_posts_url($user_id);
+	// 			$user_name = get_the_author_meta( 'display_name', $user_id);
+	// 			$community_names = array();
+	// 			foreach ($communities as $community) {
+
+	// 				$community_names[] = get_the_author_meta( 'display_name', $community);
+	// 			}
+	// 			$subject = sprintf(
+	// 				__( '%s has joined %s', 'pop-emailsender'), 
+	// 				$user_name,
+	// 				implode(
+	// 					__(', ', 'pop-emailsender'),
+	// 					$community_names
+	// 				)
+	// 			);
+				
+	// 			$content = sprintf(
+	// 				__( '<p><a href="%s">%s</a> has joined:</p>', 'pop-emailsender'),
+	// 				$user_url,
+	// 				$user_name
+	// 			);
+
+	// 			$instance = PoP_EmailTemplates_Factory::get_instance();
+	// 			foreach ($communities as $community) {
+
+	// 				$content .= $instance->get_userhtml($community);
+	// 			}
+
+	// 			$footer = $this->get_preferences_footer(__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
+	// 			$content .= $footer;
+				
+	// 			PoP_EmailSender_Utils::sendemail_to_users($emails, $names, $subject, $content);
+
+	// 			// Add the users to the list of users who got an email sent to
+	// 			$this->sent_emails[POP_EMAIL_JOINSCOMMUNITIES] = array_merge(
+	// 				$this->sent_emails[POP_EMAIL_JOINSCOMMUNITIES],
+	// 				$networkusers
+	// 			);
+	// 		}			
+	// 	}
+	// }
 	// function emailnotifications_digests_daily_newcontent($post_id) {
 
 	// }

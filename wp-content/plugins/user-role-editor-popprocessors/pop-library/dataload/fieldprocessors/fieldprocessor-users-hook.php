@@ -105,6 +105,13 @@ class GD_URE_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcess
 
 				$communities = $fieldprocessor->get_value($resultitem, 'active-communities');
 				return !empty($communities);																												
+		
+			case 'pref-emailnotif-network-joinscommunity':
+
+				$metakeys = array(
+					'pref-emailnotif-network-joinscommunity' => GD_URE_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
+				);
+				return GD_MetaManager::get_user_meta($fieldprocessor->get_id($user), $metakeys[$field], true);
 		}
 
 		return parent::get_value($user, $field, $fieldprocessor);

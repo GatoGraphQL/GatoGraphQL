@@ -17,6 +17,12 @@ function gd_ure_get_user_networkusers($usernetwork, $user_id) {
 
 	if ($communities = gd_ure_get_communities_status_active($user_id)) {
 
+		// // Add the communities also to the user's network
+		// $usernetwork = array_merge(
+		// 	$usernetwork,
+		// 	$communities
+		// );
+
 		// Get all the active members of those communities
 		foreach ($communities as $community) {
 			

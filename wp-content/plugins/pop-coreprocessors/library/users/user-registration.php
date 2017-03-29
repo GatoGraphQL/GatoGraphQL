@@ -83,7 +83,7 @@ function extra_user_profile_fields( $user ) {
 	</td>
 	</tr>
 	<tr>
-	<th><label for="display_email"><?php _e('Recommended content', 'pop-coreprocessors') ?></label></th>
+	<th><label for="display_email"><?php _e('Recommends content', 'pop-coreprocessors') ?></label></th>
 	<td>
 	<?php echo GD_AdminUtils::form_dropdown('network_recommendedpost', gd_build_select_options(array('Yes', 'No')), isset($_POST['network_recommendedpost']) ? $_POST['network_recommendedpost'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
 	</td>
@@ -112,6 +112,15 @@ function extra_user_profile_fields( $user ) {
 	<?php echo GD_AdminUtils::form_dropdown('network_updownvotedpost', gd_build_select_options(array('Yes', 'No')), isset($_POST['network_updownvotedpost']) ? $_POST['network_updownvotedpost'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
 	</td>
 	</tr>
+	<?php /* Comment Leo 20/03/2017: Horrible Fix: this should be externalized into user-role-editor-popprocessors */ ?>
+	<?php if (class_exists('User_Role_Editor') && defined('URE_POPPROCESSORS_INITIALIZED')) : ?>
+		<tr>
+		<th><label for="display_email"><?php _e('Joins a community', 'pop-coreprocessors') ?></label></th>
+		<td>
+		<?php echo GD_AdminUtils::form_dropdown('network_joinscommunity', gd_build_select_options(array('Yes', 'No')), isset($_POST['network_joinscommunity']) ? $_POST['network_joinscommunity'] : (GD_MetaManager::get_user_meta($user->ID, GD_URE_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
+		</td>
+		</tr>
+	<?php endif; ?>
 	</table>	
 	<h5><?php _e('A topic I am subscribed to:', 'pop-coreprocessors') ?></h5>		
 	<table class="form-table">
@@ -177,6 +186,11 @@ function save_extra_user_profile_fields( $user_id ) {
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC, (isset($_POST['network_subscribedtotopic']) && $_POST['network_subscribedtotopic'] == "yes"), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT, (isset($_POST['network_addedcomment']) && $_POST['network_addedcomment'] == "yes"), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST, (isset($_POST['network_updownvotedpost']) && $_POST['network_updownvotedpost'] == "yes"), true );
+
+	/* Comment Leo 20/03/2017: Horrible Fix: this should be externalized into user-role-editor-popprocessors */
+	if (class_exists('User_Role_Editor') && defined('URE_POPPROCESSORS_INITIALIZED')) : 
+		GD_MetaManager::update_user_meta($user_id, GD_URE_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY, (isset($_POST['network_joinscommunity']) && $_POST['network_joinscommunity'] == "yes"), true );
+	endif;
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST, (isset($_POST['subscribedtotopic_createdpost']) && $_POST['subscribedtotopic_createdpost'] == "yes"), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT, (isset($_POST['subscribedtotopic_addedcomment']) && $_POST['subscribedtotopic_addedcomment'] == "yes"), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYCONTENT, (isset($_POST['emaildigests_dailycontent']) && $_POST['emaildigests_dailycontent'] == "yes"), true );

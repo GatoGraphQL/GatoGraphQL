@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MESYM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 07:43+0800\n"
-"PO-Revision-Date: 2016-07-24 14:58+0800\n"
+"POT-Creation-Date: 2017-03-29 13:17+0800\n"
+"PO-Revision-Date: 2017-03-29 13:20+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -103,6 +103,26 @@ msgstr "<strong>%s</strong> ha actualizado los ajustes de membresía de %s:"
 msgid "<strong>%s</strong> updated the communities"
 msgstr "<strong>%s</strong> ha actualizado las comunidades"
 
+#: .././plugins/pop-emailsender/library/implementations/email-hooks.php:55
+#, php-format
+msgid "%s has joined %s"
+msgstr "%s se convirtió en miembro de %s"
+
+#: .././plugins/pop-emailsender/library/implementations/email-hooks.php:58
+msgid ", "
+msgstr ", "
+
+#: .././plugins/pop-emailsender/library/implementations/email-hooks.php:64
+#, php-format
+msgid "<p><a href=\"%s\">%s</a> has joined:</p>"
+msgstr "<p><a href=“%s”>%s</a> se convirtió en miembro de:</p>"
+
+#: .././plugins/pop-emailsender/library/implementations/email-hooks.php:75
+msgid ""
+"You are receiving this notification for belonging to the user’s network."
+msgstr ""
+"Estás recibiendo esta notificación por pertenecer a la red de este usuario."
+
 #: .././pop-library/dataload/actionexecuters/library/editmembership.php:46
 msgid "The user is missing"
 msgstr "El usuario no se encuentra"
@@ -200,16 +220,6 @@ msgstr "Mostrar contenido de: Organización+Miembros"
 msgid "Show Content from: Organization"
 msgstr "Mostrar contenido de: Organización"
 
-#: .././pop-library/processors/controls/anchor-controls.php:46
-#: .././pop-library/processors/controls/anchor-controls.php:60
-#: .././pop-library/processors/formcomponents/typeahead/text-formcomponents-inputs.php:25
-msgid "Organization"
-msgstr "Organización"
-
-#: .././pop-library/processors/controls/anchor-controls.php:52
-msgid "Members"
-msgstr "Miembros"
-
 #: .././pop-library/processors/createupdateprofile/blocks/profile-blocks.php:32
 #, php-format
 msgid ""
@@ -244,15 +254,19 @@ msgstr "Enviando…"
 msgid "Sending..."
 msgstr "Enviando…"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:47
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/checkbox-formcomponents-inputs.php:26
+msgid "Joins an organization"
+msgstr "Se convierte en miembro de una organización"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:48
 msgid "Privileges"
 msgstr "Privilegios"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:51
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:53
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:55
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/multiselect-formcomponents-inputs.php:57
 #: .././pop-library/processors/createupdateprofile/formcomponents-inputs/select-formcomponents-inputs.php:31
 msgid "Status"
 msgstr "Estado"
@@ -273,7 +287,7 @@ msgstr "Persona de contacto"
 msgid "Telephone / Fax"
 msgstr "Teléfono / Fax"
 
-#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:106
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:111
 msgid ""
 "Become a Community: all the content posted by your members will also appear "
 "under your Organization's profile."
@@ -281,7 +295,7 @@ msgstr ""
 "Convertirse en una comunidad: todo el contenido publicado por sus miembros "
 "también aparecerá en el perfil de su organización."
 
-#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:110
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:115
 msgid ""
 "Status \"Active\" if the user is truly your member, or \"Rejected\" "
 "otherwise. Rejected users will not appear as your Organization's members, or "
@@ -291,16 +305,16 @@ msgstr ""
 "\" en caso contrario. Usuarios rechazados no aparecerán como miembros de su "
 "organización, ni aportarán contenidos."
 
-#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:114
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:119
 msgid "\"Contribute content\" will add the member's content to your profile."
 msgstr ""
 "\"Contribuir contenido\" agregará el contenido del miembro a su perfil."
 
-#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:118
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:123
 msgid "What is the type of relationship from this member to your Organization."
 msgstr "¿Cuál es el tipo de relación de este miembro a su Organización?"
 
-#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:122
+#: .././pop-library/processors/createupdateprofile/forms/formgroups.php:127
 msgid ""
 "All the emails below will receive an invitation to join your Organization as "
 "members."
@@ -480,6 +494,10 @@ msgstr "No se encontraron Organizaciones"
 msgid "No Individuals found"
 msgstr "No se encontraron individuos"
 
+#: .././pop-library/processors/formcomponents/typeahead/text-formcomponents-inputs.php:25
+msgid "Organization"
+msgstr "Organización"
+
 #: .././pop-library/processors/forms/formgroups.php:87
 msgid ""
 "Please select the organizations you are a member of: all your content will "
@@ -545,3 +563,6 @@ msgstr ""
 "Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
 "plugins/pop/“>latest version</a> of <b>PoP Core Processors</b> installed, or "
 "otherwise <b>User Role Editor PoP Processors</b> might not function properly."
+
+#~ msgid "Members"
+#~ msgstr "Miembros"

@@ -93,6 +93,7 @@ class GD_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcessor_H
 			case 'pref-emailnotif-network-subscribedtotopic':
 			case 'pref-emailnotif-network-addedcomment':
 			case 'pref-emailnotif-network-updownvotedpost':
+			// case 'pref-emailnotif-network-joinscommunity':
 			case 'pref-emailnotif-subscribedtopic-createdpost':
 			case 'pref-emailnotif-subscribedtopic-addedcomment':
 			case 'pref-emaildigests-dailynewcontent':
@@ -109,6 +110,7 @@ class GD_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcessor_H
 					'pref-emailnotif-network-subscribedtotopic' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC,
 					'pref-emailnotif-network-addedcomment' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT,
 					'pref-emailnotif-network-updownvotedpost' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST,
+					// 'pref-emailnotif-network-joinscommunity' => GD_URE_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
 					'pref-emailnotif-subscribedtopic-createdpost' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST,
 					'pref-emailnotif-subscribedtopic-addedcomment' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
 					'pref-emaildigests-dailynewcontent' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYCONTENT,

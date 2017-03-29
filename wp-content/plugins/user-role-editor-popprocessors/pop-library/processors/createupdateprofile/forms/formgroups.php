@@ -19,6 +19,9 @@ define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERPRIVILEGES', PoP_ServerU
 define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERTAGS', PoP_ServerUtils::get_template_definition('ure-filterformcomponentgroup-membertags'));
 define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERSTATUS', PoP_ServerUtils::get_template_definition('ure-filterformcomponentgroup-memberstatus'));
 
+// My Preferences
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-emailnotifications-network-joinscommunity'));
+
 class GD_URE_Template_Processor_ProfileFormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 
 	function get_templates_to_process() {
@@ -36,6 +39,7 @@ class GD_URE_Template_Processor_ProfileFormGroups extends GD_Template_Processor_
 			GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERPRIVILEGES,
 			GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERTAGS,
 			GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERSTATUS,
+			GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
 		);
 	}
 	
@@ -87,6 +91,7 @@ class GD_URE_Template_Processor_ProfileFormGroups extends GD_Template_Processor_
 			GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERPRIVILEGES => GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERPRIVILEGES,
 			GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERTAGS => GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERTAGS,
 			GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERSTATUS => GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERSTATUS,
+			GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY => GD_URE_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
 		);
 
 		if ($component = $components[$template_id]) {
@@ -123,6 +128,18 @@ class GD_URE_Template_Processor_ProfileFormGroups extends GD_Template_Processor_
 		}
 		
 		return parent::get_info($template_id, $atts);
+	}
+
+	function use_component_configuration($template_id) {
+
+		switch ($template_id) {
+
+			case GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
+				
+				return false;
+		}
+
+		return parent::use_component_configuration($template_id);
 	}
 }
 
