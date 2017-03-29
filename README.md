@@ -55,7 +55,7 @@ Install and activate the following plugins, which are integrated with PoP (_not 
  - [User Role Editor](https://wordpress.org/plugins/user-role-editor/): for the organization/individual account types
  - [Co-Authors Plus](https://wordpress.org/plugins/co-authors-plus/): for adding co-authors to the posts
  - [Public Post Preview](https://wordpress.org/plugins/public-post-preview/): for previewing draft posts
- - [Aryo Activity Log](https://wordpress.org/plugins/aryo-activity-log/): for the notifications (_warning: this plugin had to be modified to make it work with PoP—otherwise it breaks it—, please ask me to send you the hacked version_)
+ - [Aryo Activity Log](https://github.com/leoloso/aryo-activity-log): for the notifications (_please notice: this plugin has been forked, to make it work with PoP. The original plugin is [here](https://wordpress.org/plugins/aryo-activity-log/)._)
  - [WordPress Social Login](https://wordpress.org/plugins/wordpress-social-login/): for allowing users to log-in with Facebook, Twitter, etc accounts
  - [qTranslate X](https://wordpress.org/plugins/qtranslate-x/): multi-language
  - [WP Super Cache](https://wordpress.org/plugins/wp-super-cache/): for caching the website
