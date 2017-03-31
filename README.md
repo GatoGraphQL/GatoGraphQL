@@ -128,3 +128,8 @@ The `minify.sh` script copies all files to minimize under folder `POP_APP_MIN_FO
       plugins/PLUGIN-NAME/css/
       plugins/PLUGIN-NAME/js/
 
+## Want to help?
+
+We are looking for developers who want to become involved. Chere here the issues we need your help with:
+
+https://github.com/leoloso/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
