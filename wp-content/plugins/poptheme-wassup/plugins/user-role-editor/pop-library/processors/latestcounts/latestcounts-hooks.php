@@ -22,7 +22,7 @@ class PoPThemeWassup_URE_LatestCounts_Hooks {
 
 		// Add all the members of the organization, if the author is an organization, and we're on the Organization+Members page
 		$vars = GD_TemplateManager_Utils::get_vars();
-		if (gd_ure_is_community($author) && $vars['source'] == GD_URE_URLPARAM_CONTENTSOURCE_COMMUNITY) {
+		if (gd_ure_is_community($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 				
 			if ($members = gd_ure_get_activecontributingcontentcommunitymembers($author)) {
 				foreach ($members as $member) {

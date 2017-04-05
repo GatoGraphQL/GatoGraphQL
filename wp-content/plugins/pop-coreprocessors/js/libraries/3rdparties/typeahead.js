@@ -184,7 +184,7 @@ popTypeahead = {
 		var url = popManager.getQueryUrl(pageSection, block);
 		var val = input.typeahead('val');
 		if (val) {
-			url = url.replace('%QUERY', input.typeahead('val'));
+			url = url.replace(M.JSPLACEHOLDER_QUERY/*'%QUERY'*/, input.typeahead('val'));
 			popManager.click(url, '', typeahead);
 		}
 	},
@@ -227,6 +227,19 @@ popTypeahead = {
 				
 				var layout = datasetunit['layout'];
 				datasetunit.template = popManager.getScriptTemplate(layout);
+
+				// Allow plug-ins to modify the url: allow pop-cdn to hook in the CDN
+				var args = {};
+				if (datasetunit.prefetch) {
+					args.url = datasetunit.prefetch;
+					popJSLibraryManager.execute('typeaheadPrefetchURL', args);
+					datasetunit.prefetch = args.url;
+				}
+				if (datasetunit.remote) {
+					args.url = datasetunit.remote;
+					popJSLibraryManager.execute('typeaheadRemoteURL', args);
+					datasetunit.remote = args.url;
+				}
 			});
 
 			// Version 0.10.1: http://twitter.github.io/typeahead.js/examples/
@@ -266,7 +279,7 @@ popTypeahead = {
 				if (datasetunit.remote) {
 					options.remote = {
 						url: datasetunit.remote,
-						wildcard: '%QUERY'
+						wildcard: M.JSPLACEHOLDER_QUERY/*'%QUERY'*/
 					};
 				}
 				var bloodhound = new Bloodhound(options);
@@ -284,7 +297,7 @@ popTypeahead = {
 							$.each(staticSuggestion, function(key, value) {
 
 								if (typeof value == 'string') {
-									value = value.replace('%QUERY', query);
+									value = value.replace(M.JSPLACEHOLDER_QUERY/*'%QUERY'*/, query);
 								}						
 								suggestion[key] = value;
 							});

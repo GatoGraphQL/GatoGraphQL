@@ -5,8 +5,6 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_METAKEY_USER_LASTACCESS', 'lastaccess');
-
 class GD_TemplateManager_UserMetaUtils {
 
 	public static function save_user_meta() {

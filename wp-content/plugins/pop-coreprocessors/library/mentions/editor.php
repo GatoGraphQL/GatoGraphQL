@@ -59,13 +59,22 @@ add_filter('gd_jquery_constants', 'gd_jquery_constants_mentions_manager_impl');
 function gd_jquery_constants_mentions_manager_impl($jquery_constants) {
 
   global $gd_filter_manager, $gd_filtercomponent_name, $gd_filtercomponent_orderuser, $gd_filtercomponent_search, $gd_filtercomponent_ordertag;
-  $query_wildcard = urlencode('%QUERY');
+  $query_wildcard = urlencode(GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/);
 
   $gd_filter_wildcardusers = $gd_filter_manager->get_filter(GD_FILTER_WILDCARDUSERS);
-  $users_url = get_permalink(POP_WPAPI_PAGE_ALLUSERS);
+  $users_url = get_permalink(POP_WPAPI_PAGE_ALLUSERS);  
   $gd_filter_wildcardtags = $gd_filter_manager->get_filter(GD_FILTER_WILDCARDTAGS);
   $tags_url = get_permalink(POP_WPAPI_PAGE_TAGS);
   
+  // // Add a hook, so we can use the content CDN
+  // $users_url = apply_filters(
+  //   'pop_mentions:url:users',
+  //   $users_url
+  // );
+  // $tags_url = apply_filters(
+  //   'pop_mentions:url:tags',
+  //   $tags_url
+  // );
   // -------------------------------
   // User URL
   // -------------------------------

@@ -583,6 +583,22 @@ popManager = {
 		$(document).triggerHandler('initialized.pop.document');
 	},
 
+	pageSectionFetchSuccess : function(pageSection, response) {
+	
+		var t = this;
+
+		popJSLibraryManager.execute('pageSectionFetchSuccess', {pageSection: pageSection, response: response});
+		pageSection.triggerHandler('fetched.pop.pageSection');
+	},
+
+	blockFetchSuccess : function(pageSection, block, response) {
+	
+		var t = this;
+
+		popJSLibraryManager.execute('blockFetchSuccess', {pageSection: pageSection, block: block, response: response});
+		block.triggerHandler('fetched.pop.block');
+	},
+
 	backgroundLoad : function(urls) {
 	
 		var t = this;
@@ -2017,18 +2033,26 @@ popManager = {
 		// var silent = (mode == 'silent');
 		// params.loading.push(url);
 
-		// Add a param to tell the back-end we are doing ajax
-		// Important: do not change the order in which these attributes are added, or it can ruin other things,
-		// eg: adding the get_precache_list pages for BACKGROUND_LOAD in plugins/poptheme-wassup/themes/wassup/thememodes/simple/thememode.php
 		var target = t.getTarget(pageSection);
+
+		// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
+		// Also, re-take the URL from the args, so plugins can also modify it. Eg: routing through a CDN with pop-cdn
+		var args = {
+			options: options, 
+			url: url
+		};
+		popJSLibraryManager.execute('modifyFetchArgs', args);
+		var fetchUrl = args.url;
 
 		// Remove any hashtag the url may have (eg: /add-post/#1482655583982)
 		// Needed for when reopening the previous session tabs, and an Add Post page with such a hashtag was open
 		// Otherwise, below it makes mess, it doesn't add the needed parameters to the URL
-		var fetchUrl = url;
 		if (fetchUrl.indexOf('#') > -1) {
 			fetchUrl = fetchUrl.substr(0, fetchUrl.indexOf('#'));
 		}
+		// Add a param to tell the back-end we are doing ajax
+		// Important: do not change the order in which these attributes are added, or it can ruin other things,
+		// eg: adding the get_precache_list pages for BACKGROUND_LOAD in plugins/poptheme-wassup/themes/wassup/thememodes/simple/thememode.php
 		fetchUrl = add_query_arg(M.URLPARAM_TARGET, target, fetchUrl);
 		fetchUrl = add_query_arg(M.URLPARAM_MODULE, M.URLPARAM_MODULE_SETTINGSDATA, fetchUrl);
 		fetchUrl = add_query_arg(M.URLPARAM_OUTPUT, M.URLPARAM_OUTPUT_JSON, fetchUrl);
@@ -2137,7 +2161,10 @@ popManager = {
 					options['disable-layer'].children('.pop-disabledlayer').addClass('hidden');
 				}
 			},			
-			success: function(response, textStatus, jqXHR){
+			success: function(response, textStatus, jqXHR) {
+
+				// Allow pop-cdn to incorporate the thumbprint values in the topLevelFeedback before backgroundLoad
+				t.pageSectionFetchSuccess(pageSection, response);
 
 				// The server might have requested to load extra URLs (eg: forcedserverload_fields)
 				t.backgroundLoad(response.feedback.toplevel[M.URLPARAM_BACKGROUNDLOADURLS]);
@@ -2152,6 +2179,7 @@ popManager = {
 				var url = params.url[jqXHR.url];
 				var feedbackURL = response.feedback.toplevel[M.URLPARAM_URL];
 				var target = params.target[jqXHR.url];
+				
 				if (url != feedbackURL) {
 					t.replaceOpenTab(url, feedbackURL, target);
 				}
@@ -2643,8 +2671,17 @@ popManager = {
 			return;
 		}
 
+		// Default type: GET
+		var type = options.type || 'GET';
+
 		// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
-		popJSLibraryManager.execute('modifyFetchBlockOptions', {options: options, url: fetchUrl});
+		var args = {
+			options: options, 
+			url: fetchUrl,
+			type: type
+		};
+		popJSLibraryManager.execute('modifyFetchBlockArgs', args);
+		fetchUrl = args.url;
 
 		// If the params are already sent in the options, then use it
 		// It's needed for loading the 'Edit Event' page, where the params are provided by the collapse in attr data-params
@@ -2734,9 +2771,6 @@ popManager = {
 		// Hide buttons / set loading msg
 		t.triggerEvent(pageSection, block, 'beforeFetch', [options]);
 
-		// Default type: GET
-		var type = options.type || 'GET';
-
 		// When doing refetch, and initializing the data (aka doing GET, not POST), then show the 'disabled' layer
 		if (options['show-disabled-layer']) {
 			block.children('.pop-disabledlayer').removeClass('hidden');
@@ -2778,7 +2812,10 @@ popManager = {
 				}
 				// }
 			},	
-			success: function(response, textStatus, jqXHR){
+			success: function(response, textStatus, jqXHR) {
+
+				// Allow pop-cdn to incorporate the thumbprint values in the topLevelFeedback before backgroundLoad
+				t.blockFetchSuccess(pageSection, block, response);
 
 				// Start loading extra urls
 				t.backgroundLoad(response.feedback.toplevel[M.URLPARAM_BACKGROUNDLOADURLS]);

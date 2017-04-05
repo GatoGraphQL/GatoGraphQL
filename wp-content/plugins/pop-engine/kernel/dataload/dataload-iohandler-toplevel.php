@@ -34,12 +34,19 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 
 		// Send the current selected theme back
 		$ret[GD_DATALOAD_PARAMS] = array();
-		$ret[GD_DATALOAD_PUSHURLATTS] = array();
 
 		// Push URL Atts: attributes that must be added to the URL in the browser. Sent this way so that we can add these
-		// also when switching tabPanes (format=fullview, etc)
+		// also when switching tabPanes (format=fullview, etc)			
+		$ret[GD_DATALOAD_PUSHURLATTS] = array();
 
 		if (GD_TemplateManager_Utils::loading_frame()) {
+
+			// Comment Leo 05/04/2017: Create the params array only in the loading_frame()
+			// Before it was outside, and calling the initial-frames page brought params=[], 
+			// and this was overriding the params in the topLevelFeedback removing all info there
+
+			// Add the version to the topLevel feedback to be sent in the URL params
+			$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_VERSION] = pop_version();
 
 			// Send the current selected theme back
 			$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_THEME] = $vars[GD_URLPARAM_THEME];
@@ -52,8 +59,8 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 			// if ($datastructure = $vars[GD_URLPARAM_DATASTRUCTURE]) {
 			// 	$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_DATASTRUCTURE] = $datastructure;
 			// }
-			if ($mangled = $vars[POP_URLPARAM_MANGLED]) {
-				$ret[GD_DATALOAD_PARAMS][POP_URLPARAM_MANGLED] = $mangled;
+			if ($mangled = $vars[GD_URLPARAM_MANGLED]) {
+				$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_MANGLED] = $mangled;
 			}
 
 			// Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
@@ -108,7 +115,7 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 
 		$ret[GD_URLPARAM_TITLE] = gd_get_document_title();
 
-		// Allow plugins to keep adding stuff. In particular: language from qTranslate
+		// Allow plugins to keep adding stuff. Eg: language from qTranslate
 		return apply_filters('GD_DataLoad_TopLevelIOHandler:feedback', $ret);
 	}
 }

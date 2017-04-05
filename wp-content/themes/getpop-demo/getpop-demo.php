@@ -3,7 +3,7 @@
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('GETPOPDEMO_VERSION', 0.227);
+define ('GETPOPDEMO_VERSION', 0.231);
 
 define ('GETPOPDEMO_DIR', STYLESHEETPATH);
 define ('GETPOPDEMO_DIR_RESOURCES', GETPOPDEMO_DIR.'/resources');
@@ -34,8 +34,8 @@ class GetPoPDemo {
 	function init_constants() {
 
 		// If we have a CDN URI, then use it for the assets
-		if (defined('POP_AWS_CDN_ASSETS_URI') && POP_AWS_CDN_ASSETS_URI) {
-			define ('GETPOPDEMO_ASSETS_URI', str_replace(get_site_url(), POP_AWS_CDN_ASSETS_URI, GETPOPDEMO_URI));
+		if (defined('POP_CDN_ASSETS_URI') && POP_CDN_ASSETS_URI) {
+			define ('GETPOPDEMO_ASSETS_URI', str_replace(get_site_url(), POP_CDN_ASSETS_URI, GETPOPDEMO_URI));
 		}
 		else {
 			define ('GETPOPDEMO_ASSETS_URI', GETPOPDEMO_URI);

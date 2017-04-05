@@ -73,7 +73,7 @@ class GD_Template_Processor_QuicklinksBlocks extends GD_Template_Processor_Block
 
 				$searchcontent_url = get_permalink(POP_WPAPI_PAGE_SEARCHPOSTS);
 				$filter_params = array(
-					$gd_filtercomponent_search->get_name() => '%QUERY'
+					$gd_filtercomponent_search->get_name() => GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/
 				);
 				$searchcontent_url = $gd_filter_manager->add_filter_params($searchcontent_url, $gd_filter_wildcardposts, $filter_params);
 

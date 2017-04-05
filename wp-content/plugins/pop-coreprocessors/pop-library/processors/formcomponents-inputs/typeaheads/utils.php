@@ -7,7 +7,7 @@
 
 class GD_StaticSearchUtils {
 
-	public static function get_content_search_url($query_wildcard = '%QUERY') {
+	public static function get_content_search_url($query_wildcard = GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/) {
 
 		global $gd_filter_manager, $gd_filtercomponent_search;
 
@@ -21,7 +21,7 @@ class GD_StaticSearchUtils {
 		return $gd_filter_manager->add_filter_params($searchcontent_url, $gd_filter_wildcardposts, $filter_params);
 	}
 
-	public static function get_users_search_url($query_wildcard = '%QUERY') {
+	public static function get_users_search_url($query_wildcard = GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/) {
 
 		global $gd_filter_manager, $gd_filtercomponent_name;
 

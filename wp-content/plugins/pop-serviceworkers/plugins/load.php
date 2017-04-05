@@ -11,4 +11,7 @@ if (defined('QTX_VERSION'))
 
 // if (function_exists('wpsupercache_site_admin') && defined('WP_CACHE') && WP_CACHE)
 // 	require_once 'wp-super-cache/load.php';	
-	
+
+if (defined('POP_CDNCORE_INITIALIZED')) {
+	require_once 'pop-cdn-core/load.php';		
+}

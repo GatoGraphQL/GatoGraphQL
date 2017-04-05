@@ -69,6 +69,9 @@ class GD_CreateUpdate_Profile extends GD_CreateUpdate_User {
 
 		parent::createupdateuser($user_id, $form_data);
 
+		// Last Edited: needed for the user thumbprint
+		GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_LASTEDITED, POP_CONSTANT_CURRENTTIMESTAMP);
+
 		GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $form_data['display_email'], true);
 		GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $form_data['short_description'], true);
 

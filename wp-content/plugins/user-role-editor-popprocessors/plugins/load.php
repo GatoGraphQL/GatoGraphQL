@@ -8,3 +8,8 @@ if(defined('AAL_POP_VERSION'))
 	
 if (defined('POP_EMAILSENDER_INITIALIZED'))
 	require_once 'pop-emailsender/load.php';		
+	
+// if (defined('POP_CDN_INITIALIZED')) {
+// 	require_once 'pop-cdn/load.php';		
+// }
+

@@ -39,14 +39,14 @@ class GD_Template_Processor_StaticTypeaheadComponentFormComponentInputs extends 
 
 				global $gd_filter_manager, $gd_filtercomponent_search, $gd_filtercomponent_name;
 
-				$query_wildcard = '%QUERY';
+				$query_wildcard = GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/;
 				$ret[] = array(
-					'title' => gd_navigation_menu_item(POP_WPAPI_PAGE_ALLCONTENT, true).__('Content with ', 'pop-coreprocessors').'"%QUERY"',
+					'title' => gd_navigation_menu_item(POP_WPAPI_PAGE_ALLCONTENT, true).__('Content with ', 'pop-coreprocessors').'"'.GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/.'"',
 					'value' => $query_wildcard,
 					'url' => GD_StaticSearchUtils::get_content_search_url($query_wildcard),
 				);
 				$ret[] = array(
-					'title' => gd_navigation_menu_item(POP_WPAPI_PAGE_ALLUSERS, true).__('Users with ', 'pop-coreprocessors').'"%QUERY"',
+					'title' => gd_navigation_menu_item(POP_WPAPI_PAGE_ALLUSERS, true).__('Users with ', 'pop-coreprocessors').'"'.GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/.'"',
 					'value' => $query_wildcard,
 					'url' => GD_StaticSearchUtils::get_users_search_url($query_wildcard),
 				);

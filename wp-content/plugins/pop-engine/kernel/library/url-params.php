@@ -10,12 +10,13 @@ define ('POP_UNIQUEID', 'unique-id');
 
 define ('GD_URLPARAM_PAGESECTION_SETTINGSID', 'pagesection');
 
+define ('GD_URLPARAM_VERSION', 'v');
 define ('GD_URLPARAM_OUTPUT', 'output');
 define ('GD_URLPARAM_OUTPUT_JSON', 'json');
 define ('GD_URLPARAM_DATASTRUCTURE', 'datastructure');
 
-define ('POP_URLPARAM_MANGLED', 'mangled');
-define ('POP_URLPARAM_MANGLED_NONE', 'none');
+define ('GD_URLPARAM_MANGLED', 'mangled');
+define ('GD_URLPARAM_MANGLED_NONE', 'none');
 
 define ('GD_URLPARAM_FORMAT', 'format');
 define ('GD_URLPARAM_THEME', 'theme');
@@ -31,6 +32,8 @@ define ('GD_URLPARAM_ACTION', 'action');
 define ('GD_URLPARAM_ACTION_LATEST', 'latest');
 // define ('GD_URLPARAM_SKIPPARAMS', 'skipparams');
 
+define ('GD_URLPARAM_LAYOUTS', 'layouts');
+define ('GD_URLPARAM_FIELDS', 'fields');
 
 define ('GD_URLPARAM_BACKGROUNDLOADURLS', 'backgroundload-urls');
 

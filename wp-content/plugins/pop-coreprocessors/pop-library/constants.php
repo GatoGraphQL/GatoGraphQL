@@ -40,10 +40,14 @@ define ('GD_TEMPLATECALLBACK_ACTION_LOADCONTENT', 'loadcontent');
 define ('GD_TEMPLATECALLBACK_ACTION_REFETCH', 'refetch');
 define ('GD_TEMPLATECALLBACK_ACTION_RESET', 'reset');
 
+define ('GD_JSPLACEHOLDER_QUERY', '*QUERY*'); // Replaced from '%QUERY' because using '%' gives a JS error (Uncaught URIError: URI malformed) on function splitParams in utils.js when trying to add yet another parameter on that URL 
+
 
 add_filter('gd_jquery_constants', 'gd_popcore_jquery_constants_templatemanager_impl');
 function gd_popcore_jquery_constants_templatemanager_impl($jquery_constants) {
 
+	$jquery_constants['JSPLACEHOLDER_QUERY'] = GD_JSPLACEHOLDER_QUERY;
+	
 	// ------------------------------------------
 	// Constants from PoP (plugins/pop/kernel/library/constants.php)
 	// ------------------------------------------

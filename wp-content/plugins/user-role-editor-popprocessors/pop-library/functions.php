@@ -15,10 +15,10 @@ function gd_ure_templatemanager_utils_vars($vars) {
 		global $author;
 		if (gd_ure_is_organization($author)) {
 
-			$source = $_REQUEST[GD_URE_URLPARAM_CONTENTSOURCE];
+			$source = $_REQUEST[GD_URLPARAM_URECONTENTSOURCE];
 			$sources = array(
-				GD_URE_URLPARAM_CONTENTSOURCE_ORGANIZATION,
-				GD_URE_URLPARAM_CONTENTSOURCE_COMMUNITY,
+				GD_URLPARAM_URECONTENTSOURCE_ORGANIZATION,
+				GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
 			);
 			if (!in_array($source, $sources)) {
 				$source = gd_ure_get_default_contentsource();

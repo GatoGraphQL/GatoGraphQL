@@ -93,6 +93,15 @@ popMentions = {
 			}
 			if (url) {
 
+				// Allow plug-ins to modify the url: allow pop-cdn to hook in the CDN
+				var args = {
+					url: url,
+					delimiter: delimiter,
+					query: query
+				};
+				popJSLibraryManager.execute('mentionsSource', args);
+				url = args.url;
+
 				// Start processing with the results from the previous lookup, as to not keep the user waiting for the response to come back
 				// Base case: [], for if the first load has not finished yet
 				var previousData = t.previousData[delimiter] || [];

@@ -46,13 +46,13 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['$appshellFromServerParams'] = array(
             GD_URLPARAM_THEMESTYLE,
             GD_URLPARAM_FORMAT, // Initially, this is a proxy for GD_URLPARAM_SETTINGSFORMAT
-            POP_URLPARAM_MANGLED,
+            GD_URLPARAM_MANGLED,
         );
         $configuration['$localesByURL'] = $this->get_locales_byurl();
         $configuration['$defaultLocale'] = $this->get_default_locale();
         $configuration['$outputJSON'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
         $configuration['$origins'] = PoP_Frontend_ServerUtils::get_allowed_urls();
-        $configuration['$cacheBustParam'] = POP_SW_URLPARAM_CACHEBUST;
+        $configuration['$cacheBustParam'] = GD_URLPARAM_SWCACHEBUST;
 
         // Thememodes for the appshell
         global $gd_theme_manager;
@@ -84,6 +84,15 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             $configuration['$strategies'][$resourceType] = $this->get_strategies($resourceType);
             $configuration['$ignore'][$resourceType] = $this->get_ignored_params($resourceType);
         }
+
+        // These values will be overriden in wp-content/plugins/pop-serviceworkers/plugins/pop-cdn-core/library/serviceworkers/sw-hooks.php,
+        // but must declare here the empty values so that, if the plug-in is not activated, it still replaces those values in service-worker.js
+        $configuration['$contentCDNOriginalDomain'] = get_site_url();
+        $configuration['$contentCDNDomain'] = '';
+        $configuration['$contentCDNParams'] = array();
+        
+        // Allow to hook the CDN configuration
+        $configuration = apply_filters('PoP_ServiceWorkers_Job_SW:configuration', $configuration);
 
         return $configuration;
     }
@@ -146,7 +155,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             return apply_filters(
                 'PoP_ServiceWorkers_Job_Fetch:ignoredparams:'.$resourceType,
                 array(
-                    POP_SW_URLPARAM_NETWORKFIRST,
+                    GD_URLPARAM_SWNETWORKFIRST,
                 )
             );
         }
@@ -179,7 +188,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
                     'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:hasParams',
                     // $hasParams
                     array(
-                        POP_SW_URLPARAM_NETWORKFIRST,
+                        GD_URLPARAM_SWNETWORKFIRST,
                     )
                 ),
             );

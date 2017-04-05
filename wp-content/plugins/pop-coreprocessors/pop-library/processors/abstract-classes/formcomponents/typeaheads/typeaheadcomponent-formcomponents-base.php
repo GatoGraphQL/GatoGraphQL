@@ -68,6 +68,13 @@ class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Temp
 			$url = $gd_filter_manager->add_filter_params($url, $filter_object, $filter_params);		
 		}
 
+		// // Hooks to allow pop-cdn to replace the domain with the CDN
+		// $url = apply_filters(
+		// 	'GD_Template_Processor_TypeaheadComponentFormComponentsBase:source-url', 
+		// 	$url,
+		// 	$template_id
+		// );
+
 		return $url;
 	}
 	protected function get_prefetch_url($template_id, $atts) {

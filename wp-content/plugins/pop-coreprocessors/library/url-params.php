@@ -20,7 +20,7 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 	$jquery_constants['URLPARAM_ACTION_LATEST'] = GD_URLPARAM_ACTION_LATEST;	
 	$jquery_constants['URLPARAM_ACTION_PRINT'] = GD_URLPARAM_ACTION_PRINT;	
 	// $jquery_constants['URLPARAM_SKIPPARAMS'] = GD_URLPARAM_SKIPPARAMS;	
-
+	
 	$jquery_constants['URLPARAM_THEMEMODE'] = GD_URLPARAM_THEMEMODE;	
 	$jquery_constants['URLPARAM_THEMESTYLE'] = GD_URLPARAM_THEMESTYLE;	
 
@@ -36,10 +36,7 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 	
 	$jquery_constants['URLPARAM_OUTPUT'] = GD_URLPARAM_OUTPUT;
 	$jquery_constants['URLPARAM_OUTPUT_JSON'] = GD_URLPARAM_OUTPUT_JSON;
-	
-	// $jquery_constants['URLPARAM_JSONOUTPUT'] = POP_URLPARAM_JSONOUTPUT;
-	// $jquery_constants['URLPARAM_JSONOUTPUT_ORIGINAL'] = POP_URLPARAM_JSONOUTPUT_ORIGINAL;
-	
+		
 	$jquery_constants['URLPARAM_PAGED'] = GD_URLPARAM_PAGED;
 	$jquery_constants['URLPARAM_OPERATION_APPEND'] = GD_URLPARAM_OPERATION_APPEND;
 	$jquery_constants['URLPARAM_OPERATION_PREPEND'] = GD_URLPARAM_OPERATION_PREPEND;

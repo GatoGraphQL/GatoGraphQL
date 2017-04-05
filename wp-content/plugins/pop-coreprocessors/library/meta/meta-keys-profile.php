@@ -6,6 +6,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('GD_METAKEY_PROFILE_LASTEDITED', 'lastedited');
+
 define ('GD_METAKEY_PROFILE_TITLE', 'title');
 define ('GD_METAKEY_PROFILE_DISPLAYEMAIL', 'display_email');
 define ('GD_METAKEY_PROFILE_SHORTDESCRIPTION', 'shortdescription');

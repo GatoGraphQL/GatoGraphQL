@@ -47,6 +47,7 @@ class GetPoPDemo_Initialization {
 			wp_dequeue_script('pop');
 			wp_dequeue_script('pop-bootstrapprocessors');
 			wp_dequeue_script('pop-coreprocessors');
+			wp_dequeue_script('pop-cdn-core');
 			wp_dequeue_script('pop-serviceworkers');
 			wp_dequeue_script('aal-popprocessors');
 			wp_dequeue_script('pop-useravatar');

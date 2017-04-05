@@ -43,6 +43,7 @@ rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/*.js
 cp $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/pop-frontendengine.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-bootstrapprocessors/js/dist/pop-bootstrapprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/pop-coreprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
+cp $POP_APP_PATH/wp-content/plugins/pop-cdn-core/js/dist/pop-cdn-core.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-serviceworkers/js/dist/pop-serviceworkers.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/aryo-activity-log-popprocessors/js/dist/aryo-activity-log-popprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-useravatar/js/dist/pop-useravatar.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
@@ -52,7 +53,7 @@ cp $POP_APP_PATH/wp-content/plugins/photoswipe-pop/js/dist/photoswipe-pop.bundle
 cp $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/poptheme-wassup.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
-wget -O $POP_APP_PATH/wp-content/themes/getpop-demo/js/dist/getpop-demo-app.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries&f=pop-frontendengine.bundle.min.js,pop-bootstrapprocessors.bundle.min.js,pop-coreprocessors.bundle.min.js,pop-serviceworkers.bundle.min.js,aryo-activity-log-popprocessors.bundle.min.js,pop-useravatar.bundle.min.js,events-manager-popprocessors.bundle.min.js,wordpress-social-login-popprocessors.bundle.min.js,photoswipe-pop.bundle.min.js,poptheme-wassup.bundle.min.js"
+wget -O $POP_APP_PATH/wp-content/themes/getpop-demo/js/dist/getpop-demo-app.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries&f=pop-frontendengine.bundle.min.js,pop-bootstrapprocessors.bundle.min.js,pop-coreprocessors.bundle.min.js,pop-cdn-core.bundle.min.js,pop-serviceworkers.bundle.min.js,aryo-activity-log-popprocessors.bundle.min.js,pop-useravatar.bundle.min.js,events-manager-popprocessors.bundle.min.js,wordpress-social-login-popprocessors.bundle.min.js,photoswipe-pop.bundle.min.js,poptheme-wassup.bundle.min.js"
 
 
 ###########################

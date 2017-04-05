@@ -87,7 +87,7 @@ function gd_ure_add_filtercomponent_communityusers($filtercomponents) {
 
 	// Check if the user is showing the community. If showing organization, then no need for this
 	$vars = GD_TemplateManager_Utils::get_vars();
-	if (gd_ure_is_community($author) && $vars['source'] == GD_URE_URLPARAM_CONTENTSOURCE_COMMUNITY) {
+	if (gd_ure_is_community($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
 		// Add it after the search
 		global $gd_filtercomponent_search, $gd_ure_filtercomponent_communities_post, $gd_ure_filtercomponent_communityusers;
@@ -105,7 +105,7 @@ function gd_ure_profile_organization_dataloadquery_addmembers($authors) {
 	global $author;
 	// Check if the user is showing the community. If showing organization, then no need for this
 	$vars = GD_TemplateManager_Utils::get_vars();
-	if (gd_ure_is_community($author) && $vars['source'] == GD_URE_URLPARAM_CONTENTSOURCE_COMMUNITY) {
+	if (gd_ure_is_community($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 		
 		$authors = array_merge(
 			$authors,

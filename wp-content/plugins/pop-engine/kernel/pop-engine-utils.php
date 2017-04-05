@@ -27,6 +27,7 @@ class GD_TemplateManager_Utils {
 	public static function add_jsonoutput_results_params($url, $format) {
 
 		// Retrieve the dataload-source that will produce the data. Add the params to the URL
+		$url = add_query_arg(GD_URLPARAM_VERSION, pop_version(), $url);
 		$url = add_query_arg(GD_URLPARAM_OUTPUT, GD_URLPARAM_OUTPUT_JSON, $url);
 		// It is needed to add the target=block so that we filter modules in hierarchy.php function get_modules to only process the main one
 		$url = add_query_arg(GD_URLPARAM_MODULE, GD_URLPARAM_MODULE_DATA, $url);
@@ -85,7 +86,7 @@ class GD_TemplateManager_Utils {
 		// Strip the Target and Output off it, users don't need to see those
 		$remove_params = apply_filters(
 			'GD_TemplateManager_Utils:current_url:remove_params',
-			array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE, POP_URLPARAM_MANGLED)
+			array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_VERSION, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE, GD_URLPARAM_MANGLED)
 		);
 		$url = remove_query_arg($remove_params, full_url());
 
@@ -321,7 +322,7 @@ class GD_TemplateManager_Utils {
 		$target = $_REQUEST[GD_URLPARAM_TARGET];
 		$module = $_REQUEST[GD_URLPARAM_MODULE];
 		$datastructure = $_REQUEST[GD_URLPARAM_DATASTRUCTURE];
-		$mangled = $_REQUEST[POP_URLPARAM_MANGLED];
+		$mangled = $_REQUEST[GD_URLPARAM_MANGLED];
 		// $mode = $_REQUEST[GD_URLPARAM_MODE];
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];

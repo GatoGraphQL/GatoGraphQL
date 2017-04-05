@@ -13,7 +13,7 @@ class GD_URE_TemplateManager_Utils {
 		// Add the source only if it's not the default one
 		if ($source != gd_ure_get_default_contentsource()) {
 
-			$url = add_query_arg(GD_URE_URLPARAM_CONTENTSOURCE, $source, $url);
+			$url = add_query_arg(GD_URLPARAM_URECONTENTSOURCE, $source, $url);
 		}
 
 		return $url;

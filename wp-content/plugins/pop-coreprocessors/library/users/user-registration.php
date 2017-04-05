@@ -9,6 +9,7 @@
 add_action('show_user_profile', 'extra_user_profile_fields', 1);
 add_action('edit_user_profile', 'extra_user_profile_fields', 1);
 
+add_action( 'edit_user_created_user', 'save_extra_user_info', 10, 1);
 add_action( 'personal_options_update', 'save_extra_user_profile_fields' );
 add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields' );
 
@@ -166,13 +167,20 @@ function extra_user_profile_fields( $user ) {
 	</table>
 <?php
 } 
- 
+
+function save_extra_user_info( $user_id ) {
+
+	if (!is_admin()) return;
+
+	// Last Edited: needed for the user thumbprint
+	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_LASTEDITED, POP_CONSTANT_CURRENTTIMESTAMP);
+}
+
 function save_extra_user_profile_fields( $user_id ) {
 
 	if (!is_admin()) return;
 
-	// Is community?
-	$user = get_user_by('id', $user_id);
+	save_extra_user_info( $user_id );
 	
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_TITLE, $_POST['title'], true);
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $_POST['short_description'], true);

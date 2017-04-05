@@ -25,7 +25,8 @@ class GD_Template_CacheProcessor {
 
 	protected function add_vars($filename) {
 
-		$vars = GD_TemplateManager_Utils::get_vars();		
+		$vars = GD_TemplateManager_Utils::get_vars();
+
 		if ($output = $vars['output']) {	
 
 			// output is important to differentiate between first load (loading also the frames) and all subsequent output=json requests
@@ -81,6 +82,15 @@ class GD_Template_CacheProcessor {
 			
 			$filename .= '-'.str_replace('-', '', $themestyle);
 		}
+		// Comment Leo 05/04/2017: do also add the version, because otherwise there are PHP errors
+		// happening from stale configuration that is not deleted, and still served, after a new version is deployed
+		// By adding the version, that will not happen anymore
+		$filename .= '-'.str_replace('.', '', pop_version());
+
+		// Comment Leo 05/04/2017: Also add the template-definition type, for 2 reasons:
+		// 1. It allows to create the 2 versions (DEV/PROD) of the configuration files, to compare/debug them side by side
+		// 2. It allows to switch from DEV/PROD without having to delete the pop-cache
+		$filename .= '-'.POP_SERVER_TEMPLATEDEFINITION_TYPE;
 
 		// Allow for plug-ins to add their own vars. Eg: URE source parameter
 		$filename = apply_filters('GD_Template_CacheProcessor:add_vars', $filename);

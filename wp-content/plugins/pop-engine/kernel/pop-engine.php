@@ -224,9 +224,9 @@ class PoP_Engine {
 
 					$redirect = add_query_arg(GD_URLPARAM_DATASTRUCTURE, $datastructure, $redirect);
 				}
-				if ($mangled = $_REQUEST[POP_URLPARAM_MANGLED]) {
+				if ($mangled = $_REQUEST[GD_URLPARAM_MANGLED]) {
 
-					$redirect = add_query_arg(POP_URLPARAM_MANGLED, $mangled, $redirect);
+					$redirect = add_query_arg(GD_URLPARAM_MANGLED, $mangled, $redirect);
 				}
 			}
 
@@ -668,6 +668,7 @@ class PoP_Engine {
 		}
 
 		// Finally, after executing all block feedbacks, produce the toplevel feedback (do it at the end, so it's also valid when the user logs in (actionexecuter "Log in" being a block))
+		// Also needed here for the CDN: after adding a post, bring the new value for the POST THUMBPRINT in that same response
 		$toplevel_feedback = $toplevel_iohandler->get_feedback($checkpoint, array(), $request, $toplevel_iohandler_atts, null, $toplevel_atts);
 		
 		// Save all database elements here, under dataloader
@@ -746,13 +747,19 @@ class PoP_Engine {
 					$dataitem_fields = array_keys($dataitem_entries);
 
 					// Intersect these with the fields that must be loaded from server
-					if ($intersect = array_intersect($dataitem_fields, $forceserverload_fields)) {
+					// Comment Leo 31/03/2017: do it only if we are not currently in the noncacheable_page 
+					// If we are, then we came here loading a backgroundload-url, and we don't need to load it again
+					// Otherwise, it would create an infinite loop, since the fields loaded here are, exactly, those defined in the noncacheable_fields
+					// Eg: https://www.mesym.com/en/loaders/posts/data/?pid[0]=21636&pid[1]=21632&pid[2]=21630&pid[3]=21628&pid[4]=21624&pid[5]=21622&fields[0]=recommendpost-count&fields[1]=recommendpost-count-plus1&fields[2]=userpostactivity-count&format=updatedata
+					if (!is_page($dataquery->get_noncacheable_page())) {
+						if ($intersect = array_intersect($dataitem_fields, $forceserverload_fields)) {
 
-						$forceserverload['ids'][] = $dataitem_id;
-						$forceserverload['fields'] = array_merge(
-							$forceserverload['fields'],
-							$intersect
-						);
+							$forceserverload['ids'][] = $dataitem_id;
+							$forceserverload['fields'] = array_merge(
+								$forceserverload['fields'],
+								$intersect
+							);
+						}
 					}
 
 					// Intersect these with the lazyload fields
@@ -771,7 +778,7 @@ class PoP_Engine {
 
 					$url = get_permalink($dataquery->get_noncacheable_page());
 					$url = add_query_arg($objectid_fieldname, $forceserverload['ids'], $url);
-					$url = add_query_arg('fields', $forceserverload['fields'], $url);
+					$url = add_query_arg(GD_URLPARAM_FIELDS, $forceserverload['fields'], $url);
 					$url = add_query_arg(GD_URLPARAM_FORMAT, GD_TEMPLATEFORMAT_UPDATEDATA, $url);
 					$backgroundload_urls[urldecode($url)] = array(GD_URLPARAM_TARGET_MAIN);
 
@@ -787,7 +794,7 @@ class PoP_Engine {
 
 					$url = get_permalink($dataquery->get_cacheable_page());
 					$url = add_query_arg($objectid_fieldname, $lazyload['ids'], $url);
-					$url = add_query_arg('layouts', $lazyload['layouts'], $url);
+					$url = add_query_arg(GD_URLPARAM_LAYOUTS, $lazyload['layouts'], $url);
 					$url = add_query_arg(GD_URLPARAM_FORMAT, GD_TEMPLATEFORMAT_REQUESTLAYOUTS, $url);
 					$backgroundload_urls[urldecode($url)] = array(GD_URLPARAM_TARGET_MAIN);
 				}

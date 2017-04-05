@@ -63,7 +63,7 @@ class GD_Template_Processor_UserTypeaheadComponentFormComponentInputs extends GD
 		
 		// Add the query from typeahead.js to filter (http://twitter.github.io/typeahead.js/examples/)
 		global $gd_filtercomponent_name;
-		$url = add_query_arg($gd_filtercomponent_name->get_name(), '%QUERY', $url);
+		$url = add_query_arg($gd_filtercomponent_name->get_name(), GD_JSPLACEHOLDER_QUERY/*'%QUERY'*/, $url);
 
 		return $url;
 	}

@@ -35,22 +35,72 @@ var config = {
   ignore: $ignore,
   params: {
     cachebust: $cacheBustParam
-  }
+  },
+  contentCDN: {
+    params: $contentCDNParams,
+    domains: {
+      cdn: $contentCDNDomain,
+      original: $contentCDNOriginalDomain
+    }
+  },
+  previousRequestURLs: {}
 };
 
 function cacheName(key, opts) {
   return `${opts.version}-${key}`;
 }
 
-function addToCache(cacheKey, request, response) {
+/**
+ * This function returns the Original URL from which the Content CDN URL originated
+ * Eg:
+ * Final (request) url: https://content.getpop.org/en/posts/?v=0.455&tp=893932274398
+ * Alias (original) url: https://getpop.org/en/posts/
+ */
+function getOriginalURL(url, opts) {
+
+  // If the current URL is pointing to the Content CDN
+  if (opts.contentCDN.domains.cdn && url.substr(0, opts.contentCDN.domains.cdn.length) == opts.contentCDN.domains.cdn) {
+  
+    // Replace the domain, from the CDN one to the original one
+    url = opts.contentCDN.domains.original + url.substr(opts.contentCDN.domains.cdn.length);
+  
+    // Remove the unneeded parameters, eg: "v" (version), "tp" (thumbprint)
+    url = stripIgnoredUrlParameters(url, opts.contentCDN.params);
+  }
+
+  return url;
+}
+
+function addToCache(cacheKey, request, response, opts) {
   // If coming from function refresh, response might be null
   // Comment Leo 06/03/2017: calling addToCache before refresh now, so no need to ask if response is not null
   // if (response !== null && response.ok) {
   if (response.ok) {
+
+    // Add to the cache
     var copy = response.clone();
     caches.open(cacheKey).then( cache => {
       cache.put(request, copy);
     });
+
+    // Save an entry on IndexedDB for the alias URL to point to this request
+    var original = getOriginalURL(request.url, opts);
+    if (original != request.url) {
+
+      // First save the previous alias where the info was stored, so we can also send a message later on, on function 'refresh'
+      localforage.getItem('Alias-'+original).then( previousRequestURL => {
+
+        // Add the previous URL in the opts, for use in function `refresh`
+        if (previousRequestURL && previousRequestURL != request.url) {
+          opts.previousRequestURLs[request.url] = previousRequestURL;
+        }
+
+        // Set the new request on that position
+        if (previousRequestURL != request.url) {
+          localforage.setItem('Alias-'+original, request.url);
+        }
+      });          
+    }
   }
   return response;
 }
@@ -123,7 +173,6 @@ self.addEventListener('fetch', event => {
     if (failingCriteria.length) {
       return false;
     }
-
 
     // resourceType-specific criteria
     var resourceTypeCriteria = {
@@ -287,14 +336,17 @@ self.addEventListener('fetch', event => {
     return strategy;
   }
 
-  function refresh(request, response) {
+  function refresh(request, response, opts) {
 
     var ETag = response.headers.get('ETag');
     if (!ETag) {
       return null;
     }
     
-    var key = 'ETag-'+response.url;
+    // Comment Leo 04/04/2017: use the original URL instead of the response.url, so that 2 responses with different thumbprints
+    // are considered the same URL. Otherwise, it won't find the other one, and won't show the refresh message
+    // var key = response.url;
+    var key = 'ETag-'+getOriginalURL(request.url, opts);
     return localforage.getItem(key).then(function(previousETag) {
 
       // Compare the ETag of the response, with the previous one, saved in the IndexedDB
@@ -319,10 +371,21 @@ self.addEventListener('fetch', event => {
               // Eg: https://getpop.org for request, https://getpop.org/en/ for response
               // When this happens, the notification to the user to refresh the page doesn't appear because it was generated using the request url
               // url: response.url
+              // // Comment Leo 04/04/2017: after adding the PoP CDN, the request URL will have the thumbprint param
+              // // However, if the page was open immediately using the cached version, and then there is a newer version
+              // // after being fetched with a different thumbprint, then it wouldn't find that tab
+              // // So then use original URL so it can always be found
+              // url: getOriginalURL(request.url, opts)
               url: request.url
             };
-       
             client.postMessage(JSON.stringify(message));
+
+            // If there was a previousRequestURL, also send to that one
+            if (opts.previousRequestURLs[request.url]) {
+              message.url = opts.previousRequestURLs[request.url];
+              client.postMessage(JSON.stringify(message));
+              delete opts.previousRequestURLs[request.url];
+            }
           });
           return response;
         });
@@ -342,6 +405,11 @@ self.addEventListener('fetch', event => {
 
     // Allow to modify the request, fetching content from a different URL
     request = getRequest(request, opts);
+    var fetchOpts = {};
+    // var origin = (new URL(request.url)).origin;
+    // if (opts.origins.indexOf(origin) > -1) {
+    //   fetchOpts.mode = 'cors';
+    // }
 
     // Add the cache buster param for JSON responses, no need for static assets or for the initial appshell load (if this one changes, then the version will change and get downloaded and cached again)
     var cacheBustRequest = getCacheBustRequest(request, opts);
@@ -353,8 +421,15 @@ self.addEventListener('fetch', event => {
       /* Load immediately from the Cache */
       event.respondWith(
         fetchFromCache(request)
-          .catch(() => fetch(request)) 
-          .then(response => addToCache(cacheKey, request, response))
+          // Check if an alternate version of the same URL has cached this result
+          // Needed for integrating SW with the content CDN (pop-cdn)
+          // Eg: if there is no content under https://content.getpop.org/en/loaders/posts/layouts/?...&v=0.358&tp=1487686590
+          // maybe there is under a previous version, like https://content.getpop.org/en/loaders/posts/layouts/?...&v=0.358&tp=1487683333
+          // then use that one
+          // We obtain the URL for this alternate request under the Alias URL in IndexedDB
+          .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL)))) 
+          .catch(() => fetch(request, fetchOpts)) 
+          .then(response => addToCache(cacheKey, request, response, opts))
       );
 
       /* Bring fresh content from the server, and show a message to the user if the cached content is stale */
@@ -363,20 +438,20 @@ self.addEventListener('fetch', event => {
       never get updated under the same filename, the Media Manager will upload them with a different filename the 2nd time) */
       if (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
         event.waitUntil(
-          fetch(cacheBustRequest)
+          fetch(cacheBustRequest, fetchOpts)
             // Comment Leo 06/03/2017: 1st save the cache back (even without checking the ETag), and only then call refresh,
             // because somehow sometimes the response ETag different than the stored one, it was saved, but nevertheless the 
             // SW cache returned the previous content!
-            .then(response => addToCache(cacheKey, request, response))
-            .then(response => refresh(request, response))
+            .then(response => addToCache(cacheKey, request, response, opts))
+            .then(response => refresh(request, response, opts))
         );
       }
     }
     else if (strategy === SW_STRATEGIES_NETWORKFIRST) {
 
       event.respondWith(
-        fetch(cacheBustRequest)
-          .then(response => addToCache(cacheKey, request, response))
+        fetch(cacheBustRequest, fetchOpts)
+          .then(response => addToCache(cacheKey, request, response, opts))
           .catch(() => fetchFromCache(request))
           .catch(function(err) {/*console.log(err)*/})
       );

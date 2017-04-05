@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_SW_URLPARAM_NETWORKFIRST', 'sw-networkfirst');
+define ('GD_URLPARAM_SWNETWORKFIRST', 'sw-networkfirst');
 // define ('POP_SW_IDS_CHECKBOX_REMEMBER', 'sw-remember');
 
 /** 
@@ -22,13 +22,13 @@ define ('POP_SW_URLPARAM_NETWORKFIRST', 'sw-networkfirst');
  * 	RewriteRule (.*) /$1?%1 [L]
  * 
  */
-define ('POP_SW_URLPARAM_CACHEBUST', 'sw-cachebust');
+define ('GD_URLPARAM_SWCACHEBUST', 'sw-cachebust');
 
 add_filter('GD_TemplateManager_Utils:current_url:remove_params', 'pop_sw_remove_urlparams');
 function pop_sw_remove_urlparams($remove_params) {
 
-	$remove_params[] = POP_SW_URLPARAM_NETWORKFIRST;
-	$remove_params[] = POP_SW_URLPARAM_CACHEBUST;
+	$remove_params[] = GD_URLPARAM_SWNETWORKFIRST;
+	$remove_params[] = GD_URLPARAM_SWCACHEBUST;
 
 	return $remove_params;
 }
@@ -36,7 +36,7 @@ function pop_sw_remove_urlparams($remove_params) {
 add_filter('gd_jquery_constants', 'pop_sw_jquery_constants');
 function pop_sw_jquery_constants($jquery_constants) {
 
-	$jquery_constants['SW_URLPARAM_NETWORKFIRST'] = POP_SW_URLPARAM_NETWORKFIRST;
+	$jquery_constants['SW_URLPARAM_NETWORKFIRST'] = GD_URLPARAM_SWNETWORKFIRST;
 	// $jquery_constants['SW_IDS_CHECKBOX_REMEMBER'] = POP_SW_IDS_CHECKBOX_REMEMBER;
 
 

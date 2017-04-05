@@ -78,18 +78,23 @@ popServiceWorkers = {
 		}
 	},
 
-	modifyOptions : function(args) {
+	modifyFetchArgs : function(args) {
 	
 		var t = this;
-		var options = args.options, url = args.url, anchor = args.anchor;
+		var options = args.options;//, anchor = args.anchor;
 
-		if (anchor.data('sw-networkfirst')) {
-			options.params = options.params || {};
-			options.params[M.SW_URLPARAM_NETWORKFIRST] = 'true';
+		if (options['js-args']) {
+			
+			anchor = options['js-args'].relatedTarget;
+
+			if (anchor && anchor.data('sw-networkfirst')) {
+				options.params = options.params || {};
+				options.params[M.SW_URLPARAM_NETWORKFIRST] = 'true';
+			}
 		}
 	},
 
-	modifyFetchBlockOptions : function(args) {
+	modifyFetchBlockArgs : function(args) {
 	
 		var t = this;
 		var options = args.options, url = args.url;
@@ -154,4 +159,4 @@ popServiceWorkers = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyOptions', 'modifyFetchBlockOptions', 'fetchBrowserURL', 'resetTimestamp']);
+popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyFetchArgs', 'modifyFetchBlockArgs', 'fetchBrowserURL', 'resetTimestamp']);

@@ -24,7 +24,7 @@ class GD_URE_Custom_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_Field
 			// 	$url = get_author_posts_url($fieldprocessor->get_id($user));
 			// 	$value = GD_TemplateManager_Utils::add_tab($url, POP_COREPROCESSORS_PAGE_SUMMARY);
 			// 	if (gd_ure_is_community($fieldprocessor->get_id($user))) {
-			// 		$value = GD_URE_TemplateManager_Utils::add_source($value, GD_URE_URLPARAM_CONTENTSOURCE_ORGANIZATION);
+			// 		$value = GD_URE_TemplateManager_Utils::add_source($value, GD_URLPARAM_URECONTENTSOURCE_ORGANIZATION);
 			// 	}
 			// 	return $value;
 			

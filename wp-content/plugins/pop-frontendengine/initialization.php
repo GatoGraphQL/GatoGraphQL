@@ -65,6 +65,9 @@ class PoPFrontend_Initialization {
 			wp_register_script('pop-utils', $js_folder.'/utils.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
 			wp_enqueue_script('pop-utils');
 
+			wp_register_script('pop-compatibility', $js_folder.'/compatibility.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
+			wp_enqueue_script('pop-compatibility');
+
 			wp_register_script('pop-jslibrary-manager', $js_folder.'/jslibrary-manager.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
 			wp_enqueue_script('pop-jslibrary-manager');
 
@@ -155,7 +158,7 @@ class PoPFrontend_Initialization {
 		$api_urlparams = apply_filters('gd_templatemanager:api_urlparams', array(
 			GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
 			GD_URLPARAM_MODULE => GD_URLPARAM_MODULE_DATA,
-			POP_URLPARAM_MANGLED => POP_URLPARAM_MANGLED_NONE,
+			GD_URLPARAM_MANGLED => GD_URLPARAM_MANGLED_NONE,
 		));
 		$jquery_constants = array(
 			'HOME_URL' => $homeurl,

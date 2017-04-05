@@ -1150,7 +1150,32 @@ popSystem = {
 		var interceptUrl = link.data('intercept-url');
 		var target = popManager.getFrameTarget(pageSection);
 		var replicableMemory = popManager.getReplicableMemory(interceptUrl, target);
-		memory.feedback.toplevel = $.extend({}, replicableMemory.feedback.toplevel);
+
+		// Comment Leo 05/04/2017: doing the line below deleted the topLevelFeedback params,
+		// and that was a problem since it had all values added on loading_frame(): version, theme, thememode, etc
+		// So now iterating all the fields, and setting the value by copy
+		// memory.feedback.toplevel = $.extend({}, replicableMemory.feedback.toplevel);
+		var tlFeedback = popManager.getTopLevelFeedback();
+		// var tlFeedback = memory.feedback.toplevel;
+		$.each(replicableMemory.feedback.toplevel, function(key, value) {
+
+			// If it is an empty array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
+			// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
+			if ($.type(value) == 'array' && value.length == 0) {
+				// do Nothing
+			}
+			else if ($.type(value) == 'object') {
+
+				// If it is an object, extend it. If not, just assign the value
+				if (!tlFeedback[key]) {
+					tlFeedback[key] = {};
+				}
+				$.extend(tlFeedback[key], value);
+			}
+			else {
+				tlFeedback[key] = value;
+			}
+		});
 		// popManager.maybeRestoreUniqueId(memory);
 
 		// Generate a new uniqueId
@@ -1160,7 +1185,6 @@ popSystem = {
 		// Comment Leo 26/10/2015: the URL is not the intercepted one but the original one. These 2 differ when intercepting without params
 		// Eg: adding a new comment, https://www.mesym.com/add-comment/?pid=19604, url to intercept is https://www.mesym.com/add-comment/
 		// var url = interceptUrl;
-		var tlFeedback = popManager.getTopLevelFeedback();
 		var url = link.data('original-url');
 		if (generateUniqueId) {
 
@@ -1354,23 +1378,6 @@ popSystem = {
 		return addspinner;
 	},
 
-	// modifyURL : function(options, url, anchor) {
-	
-	// 	var t = this;
-
-	// 	// Allow to have custom-functions.js provide the implementation of this function
-	// 	popJSLibraryManager.execute('modifyOptions', {options: options, url: url, anchor: anchor});
-	// 	var ret = false;
-	// 	$.each(executed, function(index, value) {
-	// 		if (value) {
-	// 			url = value;
-	// 			return -1;
-	// 		}
-	// 	});
-		
-	// 	return url;
-	// },
-
 	onlineOffline : function() {
 		
 		var t = this;
@@ -1547,9 +1554,6 @@ popSystem = {
 							options['js-args'].inactivePane = true;
 						}
 
-						// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
-						popJSLibraryManager.execute('modifyOptions', {options: options, url: url, anchor: anchor});
-						
 						popManager.fetch(url, options);
 					}
 				}

@@ -16,7 +16,7 @@ add_filter('gd_em_rss:author', 'gd_em_rss_author', 10, 2);
 function gd_em_rss_author($output, $EM_Event) {
 
 	// Add also the URL of the author, and give it mailchimp's formatting
-	if ($_REQUEST[GD_RSS_URLPARAM_CAMPAIGN] == GD_CUSTOM_RSS_URLPARAM_CAMPAIGN_WEEKLY) {
+	if ($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] == GD_URLPARAM_RSSCAMPAIGN_WEEKLY) {
 
 		$url = $EM_Event->output('#_EVENTAUTHORURL');
 		// $url = GD_TemplateManager_Utils::add_tab($url, POP_COREPROCESSORS_PAGE_DESCRIPTION);

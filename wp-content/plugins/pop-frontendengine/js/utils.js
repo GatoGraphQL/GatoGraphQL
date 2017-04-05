@@ -25,26 +25,6 @@ var removeQueryFields = function (url, args) {
     return parts[0] + (length ? parts[length].slice(1) : '');
 }
 
-//first, checks if it isn't implemented yet
-if (!String.prototype.format) {
-  String.prototype.format = function() {
-    var args = arguments;
-    return this.replace(/{(\d+)}/g, function(match, number) { 
-      return typeof args[number] != 'undefined'
-        ? args[number]
-        : match
-      ;
-    });
-  };
-}
-
-if (typeof String.prototype.startsWith != 'function') {
-  // see below for better implementation!
-  String.prototype.startsWith = function (str){
-    return this.indexOf(str) == 0;
-  };
-}
-
 // function hashCode(str){
 //     var hash = 0;
 //     if (str.length == 0) return hash;
@@ -148,6 +128,20 @@ function splitParams(params) {
     return splitParams;
 }
 
+function searchInObject(obj, value) {
+
+  // Iterate the object values, check if any of them is the value we are comparing to
+  // Taken from https://stackoverflow.com/questions/7306669/how-to-get-all-properties-values-of-a-javascript-object-without-knowing-the-key
+  for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          if (obj[key] == value) {
+            return true;
+          }
+      }
+  }
+  return false;
+};
+
 // Returns a random integer between min and max
 // Using Math.round() will give you a non-uniform distribution!
 function getRandomInt(min, max) {
@@ -190,23 +184,23 @@ function counterNext() {
     return counter;
 }
 
-function gd_clone(elems) {
+// function gd_clone(elems) {
 
-    // Because we can't do deep $.extend (it has circular recursions), we must step on the first level for each object
-    // And to a flat clone
-    var cloned = {};
-    jQuery.each(elems, function(key, value){
+//     // Because we can't do deep $.extend (it has circular recursions), we must step on the first level for each object
+//     // And to a flat clone
+//     var cloned = {};
+//     jQuery.each(elems, function(key, value){
 
-        if (jQuery.type( value ) === "array") {
-            cloned[key] = jQuery.extend({}, value);
-        }
-        else {
-            cloned[key] = value;
-        }
-    });
+//         if (jQuery.type( value ) === "array") {
+//             cloned[key] = jQuery.extend({}, value);
+//         }
+//         else {
+//             cloned[key] = value;
+//         }
+//     });
 
-    return cloned;
-}
+//     return cloned;
+// }
 
 function windowResize() {
 
@@ -221,11 +215,6 @@ function windowResize() {
     // jQuery(document).ready( function($) {
     //     $(window).triggerHandler('resized');
     // });
-}
-
-// Taken from http://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
-if (!Date.now) {
-    Date.now = function() { return new Date().getTime(); }
 }
 
 // Taken from https://stackoverflow.com/questions/2723140/validating-url-with-jquery-without-the-validate-plugin
