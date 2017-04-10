@@ -43,9 +43,11 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 ## Installation
 
+_**Important:** PoP is currently not very smooth to install, it's a slightly lengthy manual process. We hope soon we will have scripts automating the process. If you would like to help us, that would be very welcome! [More info here](https://github.com/leoloso/PoP/issues/49)._
+
 1. Install the [latest version](https://wordpress.org/latest.zip) of WordPress
 2. Download/clone this repository on the same folder
-3. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID ([there's an issue](https://github.com/leoloso/PoP/issues/38) to do this through scripts)
+3. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID
 4. Activate all plug-ins and the theme
 
 ### Required 3rd-party plugins
@@ -91,7 +93,18 @@ To have a website consume data coming from other domains, crossdomain access mus
       Header add Access-Control-Allow-Methods POST
     </IfModule>
 
+### Integration between the Content CDN and Service Workers
+
+To allow the website's service-worker.js be able to cache content coming from the content CDN, access to reading the ETag header must be granted:
+
+    <IfModule mod_headers.c>
+      Header add Access-Control-Allow-Headers ETag
+      Header add Access-Control-Expose-Headers ETag
+    </IfModule>
+
 ## Optimization
+
+_**Important:** Similar to the installation process, there is room for improvement for the optimization process. If you would like to help us, please [check here](https://github.com/leoloso/PoP/issues/49)._
 
 PoP allows to mangle, minify and bundle together all required .css, .js and .tmpl.js files (suitable for PROD environment), both at the plug-in and website levels:
 
