@@ -5,7 +5,7 @@ Framework for building Single-Page Application WordPress websites, decentralized
 
 For more info, visit:
 
-- **PoP website:** <a href="https://getpop.org" rel="me">https://getpop.org</a>
+- **PoP website:** <span><a href="https://getpop.org" rel="me">https://getpop.org</a></span>
 - **PoP demo:** https://demo.getpop.org
 
 Below is a technical summary. For a more in-depth description, please visit [PoP's documentation page](https://getpop.org/en/documentation/overview/).
