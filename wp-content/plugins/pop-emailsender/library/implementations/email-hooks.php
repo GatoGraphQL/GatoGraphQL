@@ -49,8 +49,8 @@ class PoP_EmailSender_Hooks {
 		//----------------------------------------------------------------------
 		// Password lost
 		add_action('retrieve_password_key', array($this, 'retrieve_password_key'));
-		add_filter('retrieve_password_title', 'retrieve_password_title');
-		add_filter('retrieve_password_message', 'retrievepasswordmessage', 999999, 4);
+		add_filter('retrieve_password_title', array($this, 'retrieve_password_title'));
+		add_filter('retrieve_password_message', array($this, 'retrievepasswordmessage'), 999999, 4);
 		add_action('gd_lostpasswordreset', array($this, 'lostpasswordreset'), 10, 1);
 		add_filter('send_password_change_email', array($this, 'donotsend'), 100000, 1);
 		add_filter('send_email_change_email', array($this, 'donotsend'), 100000, 1);
@@ -1541,7 +1541,7 @@ class PoP_EmailSender_Hooks {
 	}
 	function retrievepasswordmessage($message, $key, $user_login, $user_data) {
 
-		return PoP_EmailTemplates_Factory::get_instance()->add_emailframe(__('Retrieve password', 'pop-emailsender'), $message, $user_data->display_name);
+		return PoP_EmailTemplates_Factory::get_instance()->add_emailframe(__('Retrieve password', 'pop-emailsender'), $message, array($user_data->display_name));
 	}
 	function lostpasswordreset($user_id) {
 
