@@ -55,8 +55,17 @@ class PoP_Engine {
 			
 			return GD_TEMPLATE_TOPLEVEL_404;
 		}
+		// Comment Leo 12/04/2017: there is a problem, in which calling 
+		// https://www.mesym.com/en/stories/ attempts to load the "stories" category template
+		// (even though stories is located under category "posts"). When that happens, since
+		// PoP currently doesn't support categories, then simply treat it as a 404
+		elseif (is_category() || is_archive()) {
+			
+			return GD_TEMPLATE_TOPLEVEL_404;
+		}
 
-		return null;
+		// It shouldn't reach here... something went wrong
+		throw new Exception(sprintf('No toplevel template_id for this request (%s)', full_url()));
 	}
 
 	function send_etag_header($json) {
