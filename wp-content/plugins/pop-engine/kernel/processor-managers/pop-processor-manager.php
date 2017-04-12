@@ -24,7 +24,7 @@ class GD_Template_Processor_Manager {
 
 		// If it is null, so then there's an error in the code
 		if (is_null($processorwrapper)) {
-			throw new Exception(sprintf('No Processor for $template_id \'%s\'', $template_id));
+			throw new Exception(sprintf('No Processor for $template_id \'%s\' (%s)', $template_id, full_url()));
 		}
 
 		return $processorwrapper;

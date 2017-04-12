@@ -28,7 +28,7 @@ class PoP_CDNCore_Thumbprint_Manager {
         
         $thumbprint = $this->thumbprints[$name];
         if (!$thumbprint) {
-        	throw new Exception(sprintf('Error: there is no thumbprint with name \'%s\'', $name));
+        	throw new Exception(sprintf('Error: there is no thumbprint with name \'%s\' (%s)', $name, full_url()));
         }
 		$query = $thumbprint->get_query();
         

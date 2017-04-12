@@ -30,7 +30,7 @@ class GD_DataLoad_FieldProcessor_Posts_Delegator extends GD_DataLoad_FieldProces
 
 		$fieldprocessors = $this->get_fieldprocessors();
 		if (!$fieldprocessor_name = $fieldprocessors[$post_type]) {
-			throw new Exception(sprintf('No Fieldprocessor for post type \'%s\'', $post_type));
+			throw new Exception(sprintf('No Fieldprocessor for post type \'%s\' (%s)', $post_type, full_url()));
 		}
 
 		return $gd_dataload_fieldprocessor_manager->get($fieldprocessor_name);

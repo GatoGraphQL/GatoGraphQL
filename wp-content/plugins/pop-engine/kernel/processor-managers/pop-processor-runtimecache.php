@@ -28,7 +28,7 @@ class GD_Template_ProcessorRuntimeCache {
 		if (!$pagesection) {
 
 			// If there's no pagesection, it means the $atts argument arrived empty, that's an error
-			throw new Exception("Error Processing Request: pagesection empty", 1);
+			throw new Exception(sprintf('Error Processing Request: pagesection empty (%s)', full_url()));
 		}
 
 		// $pagesection = $this->get_pagesection($pagesection);

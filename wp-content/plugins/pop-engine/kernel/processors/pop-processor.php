@@ -437,7 +437,7 @@ class PoP_ProcessorBase {
 
 			// If processor not found, there there's an error in the code, throw exception
 			if (!$processor) {
-				throw new Exception(sprintf('No processor for template \'%s\' loaded by template_id \'%s\'', $component, $template_id));
+				throw new Exception(sprintf('No processor for template \'%s\' loaded by template_id \'%s\' (%s)', $component, $template_id, full_url()));
 			}
 			$atts = $gd_template_processor_manager->get_processor($component)->init_atts($component, $atts);
 		}

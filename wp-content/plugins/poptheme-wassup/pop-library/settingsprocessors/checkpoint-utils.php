@@ -105,7 +105,7 @@ class Wassup_SettingsProcessor_CheckpointUtils {
 
 		// If there is no checkpoint, then $name failed to find it, which is a bug, so raise an exception
 		if (!$checkpoint) {
-			throw new Exception(sprintf('No checkpoint found with hierarchy \'%s\' and name \'%s\'', $hierarchy, $name));
+			throw new Exception(sprintf('No checkpoint found with hierarchy \'%s\' and name \'%s\' (%s)', $hierarchy, $name, full_url()));
 		}
 
 		return $checkpoint;
