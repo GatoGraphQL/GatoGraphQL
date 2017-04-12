@@ -70,13 +70,13 @@ class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Te
 
 			case GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP:
 
-				return gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS, true).sprintf(
+				return 
+					gd_navigation_menu_item(POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS, true).
 					sprintf(
 						__('%s tagged with “#%s”', 'poptheme-wassup'), 
-						gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS, 'plural')
-					), //__('Location posts tagged with “#%s”', 'poptheme-wassup'),
-					single_tag_title('', false)
-				);
+						gd_get_categoryname(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_LOCATIONPOSTS, 'plural'),
+						single_tag_title('', false)
+					);
 				// return '<i class="fa fa-fw fa-hashtag"></i>'.single_tag_title('', false);
 		}
 		
