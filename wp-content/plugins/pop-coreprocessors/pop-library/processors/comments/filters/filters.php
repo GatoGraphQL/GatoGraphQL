@@ -18,8 +18,6 @@ class GD_Template_Processor_CommentFilters extends GD_Template_Processor_Filters
 	
 	function get_inner_template($template_id) {
 
-		$ret = parent::get_block_inner_templates($template_id);
-
 		$inners = array(
 			GD_TEMPLATE_FILTER_COMMENTS => GD_TEMPLATE_FILTERINNER_COMMENTS,
 		);
