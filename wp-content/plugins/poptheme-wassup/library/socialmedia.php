@@ -6,7 +6,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-function gd_twitter_user() {
+function gd_twitter_user($add_at = true) {
 
-	return apply_filters('gd_twitter_user', '');
+	if ($handle = apply_filters('gd_twitter_user', '')) {
+		return $add_at ? '@'.$handle : $handle;
+	}
+
+	return '';
 }
