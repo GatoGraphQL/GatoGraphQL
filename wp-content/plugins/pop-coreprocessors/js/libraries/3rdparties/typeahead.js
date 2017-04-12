@@ -224,7 +224,6 @@ popTypeahead = {
 
 			// Retrieve the compiled template from "template-name"
 			$.each(dataset, function(index, datasetunit) {
-				
 				var layout = datasetunit['layout'];
 				datasetunit.template = popManager.getScriptTemplate(layout);
 

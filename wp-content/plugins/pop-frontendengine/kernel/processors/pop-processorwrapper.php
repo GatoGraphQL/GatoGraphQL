@@ -75,6 +75,11 @@ class GD_Template_ProcessorBaseWrapper extends PoP_ProcessorBaseWrapper {
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}
 
+	function get_js_runtimesettings($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
 	function get_pagesection_jsmethods($template_id, $atts) {
 	
 		return $this->process($template_id, $atts, __FUNCTION__);

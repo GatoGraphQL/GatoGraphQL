@@ -97,6 +97,20 @@ class PoPFrontend_Engine extends PoP_Engine {
 		return $json_settings;
 	}
 
+	protected function get_json_runtimesettings($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$json_runtimesettings = parent::get_json_runtimesettings($template_id, $atts);
+
+		// Otherwise, get the dynamic configuration
+		$processor = $gd_template_processor_manager->get_processor($template_id);
+
+		$json_runtimesettings['js-settings'] = $processor->get_js_runtimesettings($template_id, $atts);
+		
+		return $json_runtimesettings;
+	}
+
 	protected function get_crawlable_items($template_id, $atts) {
 	
 		global $gd_template_processor_manager;

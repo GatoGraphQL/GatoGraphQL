@@ -3828,6 +3828,7 @@ popManager = {
 
 			$.extend(memory.runtimesettings['query-url'][pssId], response.runtimesettings['query-url'][pssId]);
 			$.extend(memory.runtimesettings.configuration[pssId], response.runtimesettings.configuration[pssId]);
+			$.extend(memory.runtimesettings['js-settings'][pssId], response.runtimesettings['js-settings'][pssId]);
 			// $.extend(memory.settings['query-url'][pssId], response.settings['query-url'][pssId]);
 			$.extend(memory.settings['js-settings'][pssId], response.settings['js-settings'][pssId]);
 			$.extend(memory.settings.jsmethods.pagesection[pssId], response.settings.jsmethods.pagesection[pssId]);
@@ -3994,6 +3995,12 @@ popManager = {
 
 		return configuration[elsId] || {};
 	},
+
+	// getRuntimeJSSettings : function(pageSection, block) {
+	
+	// 	var t = this;
+	// 	return t.getRuntimeSettings(pageSection, block, 'js-settings');
+	// },
 
 	getDatabaseKeys : function(pageSection, block) {
 	
@@ -4190,10 +4197,21 @@ popManager = {
 		var pssId = t.getSettingsId(pageSection);
 		var bsId = t.getSettingsId(block);
 		var jsSettingsId = t.getTemplateOrObjectSettingsId(el);
+
+		// Combine the JS settings and the runtime JS settings together
 		var settings = t.getSettings(pageSection, block, 'js-settings');
+		var runtimeSettings = t.getRuntimeSettings(pageSection, block, 'js-settings');
 
-		return settings[jsSettingsId] || {};
-
+		var jsSettings = {};
+		if (settings[jsSettingsId]) {
+			$.extend(jsSettings, settings[jsSettingsId]);
+		}
+		if (runtimeSettings[jsSettingsId]) {
+			// Make it deep, because in the typeahead, the thumbprint info is saved under ['dataset']['thumbprint'], so key 'dataset' must not be overriden
+			$.extend(true, jsSettings, runtimeSettings[jsSettingsId]);
+		}
+		return jsSettings;
+		// return settings[jsSettingsId] || {};
 	},
 	getPageSectionJsMethods : function(pageSection) {
 	

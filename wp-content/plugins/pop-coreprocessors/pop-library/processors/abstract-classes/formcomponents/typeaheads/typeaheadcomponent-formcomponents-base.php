@@ -38,7 +38,7 @@ class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Temp
 		$query = $this->get_thumbprint_query($template_id, $atts);
 		$results = $this->execute_thumbprint($query);
 
-		return $results[0];
+		return (int) $results[0];
 	}
 	protected function get_typeahead_dataload_source($template_id, $atts) {
 		
@@ -107,6 +107,18 @@ class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Temp
 
 		return __('No Results', 'pop-coreprocessors');
 	}
+
+	function get_js_runtimesetting($template_id, $atts) {
+
+		$ret = parent::get_js_runtimesetting($template_id, $atts);
+
+		// Dataset
+		$ret['dataset'] = array(
+			'thumbprint' => $this->get_thumbprint($template_id, $atts)
+		);
+
+		return $ret;
+	}
 	
 	function get_js_setting($template_id, $atts) {
 
@@ -124,7 +136,7 @@ class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Temp
 			'valueKey' => $this->get_value_key($template_id, $atts),
 			'limit' => $this->get_limit($template_id, $atts),
 			'tokenizerKeys' => $this->get_tokenizer_keys($template_id, $atts),
-			'thumbprint' => $this->get_thumbprint($template_id, $atts)
+			// 'thumbprint' => $this->get_thumbprint($template_id, $atts)
 		);
 
 		// Static suggestions: no need for remote/prefetch

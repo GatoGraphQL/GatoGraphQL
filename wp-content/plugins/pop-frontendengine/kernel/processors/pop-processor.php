@@ -290,6 +290,11 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		return array();
 	}
 
+	function get_js_runtimesetting($template_id, $atts) {
+
+		return array();
+	}
+
 	function get_js_setting_key($template_id, $atts) {
 
 		return $template_id;
@@ -335,6 +340,33 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		foreach ($this->get_modulecomponents($template_id) as $component) {
 		
 			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_js_settings($component, $atts)) {
+			
+				// Do NOT use array_merge_recursive, because then for MultipleLayout, since they reference to the same submodules (eg: author layout),
+				// and since the key is the ID, that js-settings will be generated many times and appended time and again
+				// Right now, it is generating the same js-settings and overriding it... nothing to do about it (eg: 6 times generated for a MultipleLayout with 6 Layouts)
+				$ret = array_merge(
+					$ret,
+					$component_ret
+				);
+			}
+		}
+		
+		return $ret;
+	}
+
+	function get_js_runtimesettings($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$ret = array();
+
+		if ($js_setting = $this->get_js_runtimesetting($template_id, $atts)) {
+			$ret[$this->get_js_setting_key($template_id, $atts)] = $js_setting;
+		}
+
+		foreach ($this->get_modulecomponents($template_id) as $component) {
+		
+			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_js_runtimesettings($component, $atts)) {
 			
 				// Do NOT use array_merge_recursive, because then for MultipleLayout, since they reference to the same submodules (eg: author layout),
 				// and since the key is the ID, that js-settings will be generated many times and appended time and again

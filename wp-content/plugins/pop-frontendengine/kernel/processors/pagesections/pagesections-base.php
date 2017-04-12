@@ -478,6 +478,29 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		return $ret;
 	}
 
+	function get_js_runtimesettings($template_id, $atts) {
+			
+		global $gd_template_processor_manager;
+
+		$ret = array();		
+		if ($js_setting = $this->get_js_runtimesetting($template_id, $atts)) {
+
+			$ret[$this->get_js_setting_key($template_id, $atts)] = $js_setting;
+		}
+
+		// In the Hierarchy Processor, all subcomponent templates are blocks
+		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+		
+			$component_processor = $gd_template_processor_manager->get_processor($component);
+			$component_atts = $atts[$component];
+			$component_settings_id = $component_processor->get_settings_id($component);
+
+			$ret[$component_settings_id] = $component_processor->get_js_runtimesettings($component, $component_atts);
+		}
+
+		return $ret;
+	}
+
 	function get_pagesection_jsmethods($template_id, $atts) {
 			
 		global $gd_template_processor_manager;
