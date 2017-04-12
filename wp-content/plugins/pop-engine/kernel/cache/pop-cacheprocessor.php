@@ -181,7 +181,9 @@ class GD_Template_CacheProcessor {
 			case GD_TEMPLATE_TOPLEVEL_404:
 
 				// 404 is pretty much unique
-				return $this->add_vars('404');
+				// Comment Leo 12/04/2017: calling it "404" fails, must use letters
+				// return $this->add_vars('404');
+				return $this->add_vars('fourohfour');
 		}
 
 		return false;
