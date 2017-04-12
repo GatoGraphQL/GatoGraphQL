@@ -66,7 +66,7 @@ function wassup_inlinestyles($styles) {
 	if (POPTHEME_WASSUP_IMAGE_FEEDBACKGROUND) {
 		
 		$img = wp_get_attachment_image_src(POPTHEME_WASSUP_IMAGE_FEEDBACKGROUND, 'thumb-feed');
-		$styles .= sprintf(
+		$style = sprintf(
 			'
 				.thumb-feed {
 					background-image: url(\'%s\');
@@ -79,6 +79,25 @@ function wassup_inlinestyles($styles) {
 			$img[0],
 			$img[1],
 			$img[2]
+		);
+		// Keeping 468x267px for the thumb only works when the viewport is on the restricted sizes below
+		// Otherwise, it may make the picture stick out of the column, making it very ugly
+		// Specially with mobile phone, it makes the app have to scroll left to right
+		$styles .= sprintf(
+			'
+			@media (min-width: 544px) and (max-width: 767px) {
+				%s
+			}
+			',
+			$style
+		);
+		$styles .= sprintf(
+			'
+			@media (min-width: 1200px) {
+				%s
+			}
+			',
+			$style
 		);
 	}
 

@@ -3550,24 +3550,11 @@ body.expansive .content-single {
 	}
 }
 
-.datetime > .calendar > .date {
-    font-size: 115%;
-}
-.details .datetime > .calendar > .date {
-    font-size: 125%;
-}
-.simpleview .datetime > .calendar > .date {
-    font-size: 170%;
-    font-weight: 700;
-}
-/*.simpleview .datetime > .calendar {
-    
-}*/
 /* Place the Event date/time on top of the featured image, only if the post has one (obviously) */
 .simpleview .abovecontent>.wrapper-featuredimage+.event-datelocation .datetime,
 .simpleview .abovecontent>.wrapper-featuredimage+.pop-multilayout .event-datelocation .datetime {
     position: absolute;
-    top: -66px;/*-46px;*/
+    top: -56px;
     left: 5px;
     right: 5px;
     background-color: #fff;
@@ -3575,10 +3562,30 @@ body.expansive .content-single {
     border: 1px dotted #4d4d4f;
     padding: 2px 10px;
     margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .simpleview .datetime {
     position: relative;
 }
+
+.datetime > .calendar > .date {
+    font-size: 115%;
+}
+.details .datetime > .calendar > .date {
+    font-size: 125%;
+}
+@media (min-width: 768px) {
+	.simpleview .datetime > .calendar > .date {
+	    font-size: 170%;
+	    font-weight: 700;
+	}
+	.simpleview .abovecontent>.wrapper-featuredimage+.event-datelocation .datetime,
+	.simpleview .abovecontent>.wrapper-featuredimage+.pop-multilayout .event-datelocation .datetime {
+	    top: -66px;
+	}
+}
+
 
 .preview-author,
 .preview-author-sep {
