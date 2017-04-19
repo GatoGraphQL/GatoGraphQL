@@ -106,7 +106,7 @@ add_filter('GD_Template_Processor_CustomSubMenus:author:blockgroupitems', 'gd_ur
 function gd_ure_profile_community_add_members_tab($blockunititems) {
 
 	global $author;
-	if (gd_ure_is_community($author)) {
+	if (gd_ure_is_community($author) && POP_URE_POPPROCESSORS_PAGE_MEMBERS) {
 		
 		// Place the Members tab before the Followers tab
 		// unset($blockunititems[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWERS]);

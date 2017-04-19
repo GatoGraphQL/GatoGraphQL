@@ -27,19 +27,22 @@ class Wassup_EM_SubmenuHooks {
 	function singleauthorsubmenu_blockunits($blockunits, $current_blockgroup) {
 
 		// Events
-		$event_subheaders = array(
-			GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTSCALENDAR,
-			GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORPASTEVENTS,
-		);
-		$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTS] = array_merge(
-			array(
-				GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTS,
-			),
-			$event_subheaders
-		);
-		if (in_array($current_blockgroup, $event_subheaders)) {
+		if (POPTHEME_WASSUP_EM_PAGE_EVENTS) {
+			
+			$event_subheaders = array(
+				GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTSCALENDAR,
+				GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORPASTEVENTS,
+			);
+			$blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTS] = array_merge(
+				array(
+					GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTS,
+				),
+				$event_subheaders
+			);
+			if (in_array($current_blockgroup, $event_subheaders)) {
 
-			$blockunits[$current_blockgroup] = array();
+				$blockunits[$current_blockgroup] = array();
+			}
 		}
 		
 		return $blockunits;
