@@ -26,6 +26,7 @@ require_once 'oembed.php';
 require_once 'socialmedia.php';
 require_once 'theme.php';
 require_once 'rest-api.php';
+require_once 'rss.php';
 
 require_once 'avatars/load.php';
 require_once 'meta/load.php';

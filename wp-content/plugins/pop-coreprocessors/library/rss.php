@@ -6,8 +6,6 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URLPARAM_RSSCAMPAIGN', 'campaign');
-
 /**---------------------------------------------------------------------------------------------------------------
  * Add the Featured Image to the feed
  * Taken from http://code.tutsplus.com/tutorials/extending-the-default-wordpress-rss-feed--wp-27935
@@ -40,7 +38,6 @@ function gd_rss_print_featured_image($post_id) {
 		?>
 		<media:content url="<?php echo $img_attr[0] ?>" type="<?php echo $featuredimage->post_mime_type; ?>" medium="image" width="<?php echo $img_attr[1] ?>" height="<?php echo $img_attr[2] ?>">
 			<media:description type="plain"><![CDATA[<?php echo $featuredimage->post_title; ?>]]></media:description>
-			<?php/*<media:copyright><?php echo get_the_author(); ?></media:copyright>*/?>
 		</media:content>
 		<?php
 	}
@@ -71,6 +68,7 @@ function gd_rss_filter($query) {
 		// $query->set('category__not_in', $category_not_in);
         // $query->set('post_type', $post_types);
 
+	 	$query->set('post_type', gd_dataload_posttypes());
 	 	$tax_query = array_merge(
 			array(
 				'relation' => 'OR'
