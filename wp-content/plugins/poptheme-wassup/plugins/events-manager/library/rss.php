@@ -98,7 +98,8 @@ function pop_em_rss_template_args($args) {
 add_filter( 'em_events_build_sql_conditions', 'pop_em_rss_events_build_sql_conditions',1,2);
 function pop_em_rss_events_build_sql_conditions($conditions, $args){
     
-    if (!empty($args['scope'])) {
+   	// Somehow the scope could be an array, so `preg_match` below would fail, so make sure it is not an array
+    if (!empty($args['scope']) && !is_array($args['scope'])) {
 
     	// Check if it suits the regex, and if so, get how many days
 		$regex_pattern = "/^([2-6])-days$/";
