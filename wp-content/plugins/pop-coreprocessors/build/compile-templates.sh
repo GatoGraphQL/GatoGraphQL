@@ -7,6 +7,7 @@ handlebars blockgroups/blockgroup-blockunits.tmpl -m --extension=tmpl -f ../dist
 # handlebars blockgroups/bootstrap/blockgroup-tabpanel.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-tabpanel.tmpl.js
 # handlebars blockgroups/bootstrap/blockgroup-viewcomponent.tmpl -m --extension=tmpl -f ../dist/templates/blockgroup-viewcomponent.tmpl.js
 handlebars blocks/block-bare.tmpl -m --extension=tmpl -f ../dist/templates/block-bare.tmpl.js
+handlebars blocks/block-description.tmpl -m --extension=tmpl -f ../dist/templates/block-description.tmpl.js
 # handlebars blocks/block.tmpl -m --extension=tmpl -f ../dist/templates/block.tmpl.js
 handlebars buttons/buttongroup.tmpl -m --extension=tmpl -f ../dist/templates/buttongroup.tmpl.js
 handlebars buttons/button.tmpl -m --extension=tmpl -f ../dist/templates/button.tmpl.js

@@ -472,9 +472,12 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 						get_bloginfo('name'),
 						get_bloginfo('description')
 					);
+					// Allow parent modules to override the share url and the title (eg: GetPoP Campaign)
+					$this->add_att($template_id, $atts, 'title', $title);
+					$this->add_att($template_id, $atts, 'share-url', trailingslashit(home_url()));
 					$this->merge_att($template_id, $atts, 'params', array(
-						'data-shareurl' => trailingslashit(home_url()),
-						'data-sharetitle' => str_replace(array('"', "'"), '', $title),
+						'data-shareurl' => $this->get_att($template_id, $atts, 'share-url'),
+						'data-sharetitle' => str_replace(array('"', "'"), '', $this->get_att($template_id, $atts, 'title')),
 					));
 				}
 				break;

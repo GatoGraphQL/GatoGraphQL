@@ -34,13 +34,13 @@ class PoP_BaseProcessors_Validation {
 	}
 	function install_warning(){
 		
-		$this->admin_notice(__('Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, <b>PoP Base Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'));
+		$this->admin_notice(__('Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, <b>PoP Base Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'));
 	}
 	function version_warning(){
 		
 		$this->admin_notice(
 			sprintf(
-				__('Error: this version of <b>PoP Base Processors</b> requires version %s or bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'),
+				__('Error: this version of <b>PoP Base Processors</b> requires version %s or bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'),
 				POP_FRONTENDENGINE_MIN_VERSION
 			)
 		);

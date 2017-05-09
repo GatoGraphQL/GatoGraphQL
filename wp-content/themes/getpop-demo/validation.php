@@ -66,22 +66,22 @@ class GetPoPDemo_Validation {
 	}
 	function install_warning(){
 		
-		$this->admin_notice(__('Error: <b>PoP Theme: Wassup Processors</b> is not installed/activated. Without it, <b>GetPoP</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','getpop-demo'));
+		$this->admin_notice(__('Error: <b>PoP Theme: Wassup Processors</b> is not installed/activated. Without it, <b>GetPoP</b> will not work. Please install this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','getpop-demo'));
 	}
 	function version_warning(){
 		
-		$this->admin_notice(__('Warning: please make sure to have the <a href="http://wordpress.org/extend/plugins/pop/">latest version</a> of <b>PoP Theme: Wassup Processors</b> installed, or otherwise <b>GetPoP Demo</b> might not function properly.','getpop-demo'));
+		$this->admin_notice(__('Warning: please make sure to have the <a href="https://github.com/leoloso/PoP/">latest version</a> of <b>PoP Theme: Wassup Processors</b> installed, or otherwise <b>GetPoP Demo</b> might not function properly.','getpop-demo'));
 	}
 	function plugins_env_warning(){
 		
-		$this->admin_notice(__('Error: <b>GetPoP Demo Environment Constants</b> must be installed/activated. Without it, <b>GetPoP Demo</b> will not work. Please install the corresponding plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','getpop-demo'));
+		$this->admin_notice(__('Error: <b>GetPoP Demo Environment Constants</b> must be installed/activated. Without it, <b>GetPoP Demo</b> will not work. Please install the corresponding plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','getpop-demo'));
 	}
 	function processorsdemo_install_warning(){
 		
-		$this->admin_notice(__('Error: <b>GetPoP Demo Processors</b> is not installed/activated. Without it, <b>GetPoP Demo</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','getpop-demo'));
+		$this->admin_notice(__('Error: <b>GetPoP Demo Processors</b> is not installed/activated. Without it, <b>GetPoP Demo</b> will not work. Please install this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','getpop-demo'));
 	}
 	function processorsdemo_version_warning(){
 		
-		$this->admin_notice(__('Warning: please make sure to have the <a href="http://wordpress.org/extend/plugins/pop/">latest version</a> of <b>GetPoP Demo Processors</b> installed, or otherwise <b>GetPoP Demo</b> might not function properly.','getpop-demo'));
+		$this->admin_notice(__('Warning: please make sure to have the <a href="https://github.com/leoloso/PoP/">latest version</a> of <b>GetPoP Demo Processors</b> installed, or otherwise <b>GetPoP Demo</b> might not function properly.','getpop-demo'));
 	}
 }

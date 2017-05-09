@@ -33,10 +33,10 @@ class PhotoSwipe_PoP_Validation {
 	}
 	function install_warning(){
 		
-		$this->admin_notice(__('Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without it, <b>PhotoSwipe for PoP</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'));
+		$this->admin_notice(__('Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without it, <b>PhotoSwipe for PoP</b> will not work. Please install this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'));
 	}
 	function version_warning(){
 		
-		$this->admin_notice(__('Warning: please make sure to have the <a href="http://wordpress.org/extend/plugins/pop/">latest version</a> of <b>PoP—Platform of Platforms</b> installed, or otherwise <b>PhotoSwipe PoP</b> might not function properly.','ps-pop'));
+		$this->admin_notice(__('Warning: please make sure to have the <a href="https://github.com/leoloso/PoP/">latest version</a> of <b>PoP—Platform of Platforms</b> installed, or otherwise <b>PhotoSwipe PoP</b> might not function properly.','ps-pop'));
 	}
 }

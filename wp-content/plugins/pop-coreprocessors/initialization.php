@@ -232,12 +232,9 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('alert-tmpl', $folder.'alert.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('anchor-control-tmpl', $folder.'anchor-control.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('block-bare-tmpl', $folder.'block-bare.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		wp_enqueue_script('block-description-tmpl', $folder.'block-description.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('block-tmpl', $folder.'block.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('blockgroup-blockunits-tmpl', $folder.'blockgroup-blockunits.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('blockgroup-carousel-tmpl', $folder.'blockgroup-carousel.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('blockgroup-collapsepanelgroup-tmpl', $folder.'blockgroup-collapsepanelgroup.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('blockgroup-tabpanel-tmpl', $folder.'blockgroup-tabpanel.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('blockgroup-viewcomponent-tmpl', $folder.'blockgroup-viewcomponent.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('button-control-tmpl', $folder.'button-control.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('buttongroup-tmpl', $folder.'buttongroup.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('button-tmpl', $folder.'button.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
@@ -272,11 +269,6 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('formcomponent-typeahead-selectable-tmpl', $folder.'formcomponent-typeahead-selectable.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('formgroup-tmpl', $folder.'formgroup.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('pagesection-plain-tmpl', $folder.'pagesection-plain.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('pagesection-pagetab-tmpl', $folder.'pagesection-pagetab.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('pagesection-tabpane-tmpl', $folder.'pagesection-tabpane.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('pagesection-modal-tmpl', $folder.'pagesection-modal.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('pagesectionextension-replicable-tmpl', $folder.'pagesectionextension-replicable.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		// wp_enqueue_script('pagesectionextension-frame-tmpl', $folder.'pagesectionextension-frame.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('hideifempty-tmpl', $folder.'hideifempty.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('latestcount-tmpl', $folder.'latestcount.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('layout-maxheight-tmpl', $folder.'layout-maxheight.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);

@@ -1,4 +1,4 @@
-<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="panel-group">
+<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="panel-group {{class}}">
 	{{#each settings-ids.blockunits}}
 		<div class="{{../classes.panel}}">
 			{{#compare ../panel-header-type "heading"}}

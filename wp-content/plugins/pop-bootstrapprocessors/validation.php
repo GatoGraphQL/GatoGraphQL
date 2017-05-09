@@ -53,26 +53,26 @@ class PoP_BootstrapProcessors_Validation {
 	}
 	function install_warning(){
 		
-		$this->admin_notice(__('Error: <b>PoP Base Processors</b> is not installed/activated. Without it, <b>PoP Bootstrap Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'));
+		$this->admin_notice(__('Error: <b>PoP Base Processors</b> is not installed/activated. Without it, <b>PoP Bootstrap Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'));
 	}
 	function version_warning(){
 		
 		$this->admin_notice(
 			sprintf(
-				__('Error: this version of <b>PoP Bootstrap Processors</b> requires version %s or bigger of <b>PoP Base Processors</b>. Please update this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'),
+				__('Error: this version of <b>PoP Bootstrap Processors</b> requires version %s or bigger of <b>PoP Base Processors</b>. Please update this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'),
 				POP_BASEPROCESSORS_MIN_VERSION
 			)
 		);
 	}
 	function wpapi_install_warning(){
 		
-		$this->admin_notice(__('Error: <b>PoP WP API</b> is not installed/activated. Without it, <b>PoP Core Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'));
+		$this->admin_notice(__('Error: <b>PoP WP API</b> is not installed/activated. Without it, <b>PoP Core Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'));
 	}
 	function wpapi_version_warning(){
 		
 		$this->admin_notice(
 			sprintf(
-				__('Error: this version of <b>PoP Core Processors</b> requires version %s or bigger of <b>PoP WP API</b>. Please update this plugin from your plugin installer or download it <a href="http://wordpress.org/extend/plugins/pop/">from here</a>.','ps-pop'),
+				__('Error: this version of <b>PoP Core Processors</b> requires version %s or bigger of <b>PoP WP API</b>. Please update this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'),
 				POP_WPAPI_MIN_VERSION
 			)
 		);

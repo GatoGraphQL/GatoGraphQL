@@ -8,6 +8,7 @@
 define ('GD_TEMPLATESOURCE_ALERT', 'alert');
 define ('GD_TEMPLATESOURCE_BLOCK', 'block');
 define ('GD_TEMPLATESOURCE_BLOCK_BARE', 'block-bare');
+define ('GD_TEMPLATESOURCE_BLOCK_DESCRIPTION', 'block-description');
 define ('GD_TEMPLATESOURCE_BLOCKGROUP_BLOCKUNITS', 'blockgroup-blockunits');
 // define ('GD_TEMPLATESOURCE_BLOCKGROUP_CAROUSEL', 'blockgroup-carousel');
 // define ('GD_TEMPLATESOURCE_BLOCKGROUP_COLLAPSEPANELGROUP', 'blockgroup-collapsepanelgroup');
