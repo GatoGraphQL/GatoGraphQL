@@ -22,6 +22,22 @@ class Wassup_Template_Processor_FormWidgets extends GD_Template_Processor_Widget
 		);
 	}
 
+	function is_collapsible_open($template_id, $atts) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_WIDGET_FORM_FEATUREDIMAGE:
+
+				// Have the widgets open in the Addons
+				if (PoPTheme_Wassup_Utils::get_addcontent_target() == GD_URLPARAM_TARGET_ADDONS) {
+					return true;
+				}
+				break;
+		}
+
+		return parent::is_collapsible_open($template_id, $atts);
+	}
+
 	function get_layouts($template_id) {
 
 		$ret = parent::get_layouts($template_id);
