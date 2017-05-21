@@ -212,7 +212,7 @@ class PoPFrontend_Initialization {
 		);
 
 		// Allow qTrans to add the language information
-		if ($homelocaleurl = apply_filters('gd_templatemanager:homelocale_url', null)) {
+		if ($homelocaleurl = apply_filters('gd_templatemanager:homelocale_url', $homeurl)) {
 			$jquery_constants['HOMELOCALE_URL'] = $homelocaleurl;
 		}		
 

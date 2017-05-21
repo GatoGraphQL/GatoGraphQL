@@ -70,7 +70,8 @@ add_filter('gd_templatemanager:homelocale_url', 'pop_qtrans_homelocale_url');
 function pop_qtrans_homelocale_url($url) {
 
 	// home_url() already contains the language information
-	return trailingslashit(home_url());
+	// return trailingslashit(home_url());
+	return home_url();
 }
 
 /**---------------------------------------------------------------------------------------------------------------

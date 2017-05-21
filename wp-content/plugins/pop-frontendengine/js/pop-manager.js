@@ -1826,7 +1826,7 @@ popManager = {
 		// then have it removed, or the homepage will be open twice. For that, we assume the current does have
 		// the language information, so it will be removed below
 		if (currentURL == M.HOME_URL+'/' && M.HOMELOCALE_URL) {
-			currentURL = M.HOMELOCALE_URL;
+			currentURL = M.HOMELOCALE_URL+'/';
 		}
 
 		return currentURL;

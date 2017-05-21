@@ -91,7 +91,7 @@ popCDNThumbprints = {
         // The pages do not included the locale domain, so add it before doing the comparison
         pageStartsWith: entries.startsWith.partial.some(function(path) {
           
-          return url.startsWith(M.HOMELOCALE_URL+path);
+          return url.startsWith(M.HOMELOCALE_URL+'/'+path);
         }),
 
         // Check if the combination of key=>value is present as a param in the URL
