@@ -23,9 +23,17 @@ function getpopdemo_inlinestyles($styles) {
 	// 	}
 	// ';
 	$styles .= '
-		body.sliding,
-		body.embed #background-screen {
-		  background: #fcec8c url('.GETPOPDEMO_ASSETS_URI.'/img/getpop-demo-bg-1920x1080-2.png) no-repeat fixed center;
+		@media screen {
+			body.sliding,
+			body.embed #background-screen {
+			  background: #fcec8c url('.GETPOPDEMO_ASSETS_URI.'/img/getpop-demo-bg-1440x900-2.png) no-repeat fixed center;
+			}
+		}
+		@media screen and (min-width: 1440px), screen and (min-height: 900px) {
+			body.sliding,
+			body.embed #background-screen {
+			  background-image: url('.GETPOPDEMO_ASSETS_URI.'/img/getpop-demo-bg-1920x1080-2.png);
+			}
 		}
 	';
 
