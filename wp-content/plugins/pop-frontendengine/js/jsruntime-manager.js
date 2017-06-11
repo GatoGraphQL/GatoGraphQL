@@ -19,20 +19,20 @@ popJSRuntimeManager = {
 		t.blockURL = url;
 	},
 
-	initPageSectionVarPaths : function(vars, pssId, template, group) {
+	// initPageSectionVarPaths : function(vars, pssId, template, group) {
 	
-		var t = this;
+	// 	var t = this;
 
-		if (!vars[pssId]) {
-			vars[pssId] = {};
-		}
-		if (!vars[pssId][template]) {
-			vars[pssId][template] = {};
-		}
-		if (!vars[pssId][template][group]) {
-			vars[pssId][template][group] = [];
-		}
-	},
+	// 	if (!vars[pssId]) {
+	// 		vars[pssId] = {};
+	// 	}
+	// 	if (!vars[pssId][template]) {
+	// 		vars[pssId][template] = {};
+	// 	}
+	// 	if (!vars[pssId][template][group]) {
+	// 		vars[pssId][template][group] = [];
+	// 	}
+	// },
 	initBlockVarPaths : function(vars, url, pssId, targetId, template, group) {
 	
 		var t = this;

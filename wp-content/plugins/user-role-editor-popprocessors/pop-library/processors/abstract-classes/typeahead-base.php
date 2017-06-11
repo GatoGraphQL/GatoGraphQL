@@ -31,14 +31,14 @@ class GD_URE_Template_Processor_TypeaheadLayoutsBase extends GD_Template_Process
 
 		$ret = parent::get_template_configuration($template_id, $atts);
 	
-		switch ($template_id) {
+		// switch ($template_id) {
 
-			case GD_URE_TEMPLATE_LAYOUTUSER_TYPEAHEAD_SELECTED_FILTERBYCOMMUNITY:		
+		// 	case GD_URE_TEMPLATE_LAYOUTUSER_TYPEAHEAD_SELECTED_FILTERBYCOMMUNITY:		
 
-				$ret[GD_JS_TITLES/*'titles'*/]['includemembers'] = $this->get_title($template_id, $atts);
-				$ret['community-template'] = $this->get_community_template($template_id, $atts);
-				break;
-		}
+		$ret[GD_JS_TITLES/*'titles'*/]['includemembers'] = $this->get_title($template_id, $atts);
+		$ret['community-template'] = $this->get_community_template($template_id, $atts);
+		// 		break;
+		// }
 		
 		return $ret;
 	}

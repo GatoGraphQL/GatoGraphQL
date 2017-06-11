@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('GETPOPDEMO_PROCESSORS_VERSION', 0.102);
+define ('GETPOPDEMO_PROCESSORS_VERSION', 0.103);
 define ('GETPOPDEMO_PROCESSORS_DIR', dirname(__FILE__));
 
 class GetPoPDemo_Processors {

@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_ENGINE_VERSION', 0.102);
+define ('POP_ENGINE_VERSION', 0.103);
 define ('POP_ENGINE_DIR', dirname(__FILE__));
 
 define ('POP_ENGINE_LIB', POP_ENGINE_DIR.'/library' );

@@ -376,12 +376,15 @@ popManager = {
 			// t.setProgress();
 
 			// Step 1: render the pageSection
+			var options = {
+				'serverside-rendering': M.USESERVERSIDERENDERING
+			}
 			$.each(pageSections, function(index, pageSection) {
 
 				// // Re-calculate the progress
 				// t.progress = parseInt(delta*(index+1));
 
-				t.renderPageSection(pageSection);
+				t.renderPageSection(pageSection, options);
 			});
 
 			// Step 2: remove the "loading" screen
@@ -453,6 +456,9 @@ popManager = {
 			// Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
 			if (context[M.JS_MODULES]) {
 				context.modules = context[M.JS_MODULES];
+			}
+			if (context['bs'] && context['bs']['db-keys'] && context['bs']['db-keys'][M.JS_SUBCOMPONENTS]) {
+				context['bs']['db-keys'].subcomponents = context['bs']['db-keys'][M.JS_SUBCOMPONENTS];
 			}
 			if (context[M.JS_TEMPLATE]) {
 				context.template = context[M.JS_TEMPLATE];
@@ -621,36 +627,7 @@ popManager = {
 	
 		var t = this;
 
-		// pageSection.on('bufferMerged', function(e, buffer) {
-		// 	var pageSection = $(this);
-		// 	t.runBuffer(pageSection, buffer);
-		// });
-		// pageSection.on('destroy', function(e) {
-		// 	var pageSection = $(this);
-		// 	// t.destroyTemplate(pageSection);
-		// 	t.destroyElemBranchScripts(pageSection, pageSection);
-		// });
-
-		// pageSection.on('statePopped', function(e) {
-
-		// 	var pageSection = $(this);
-		// 	// t.handleEvents('statePopped', pageSection, pageSection);
-		// 	t.pageSectionNewDOMsInitialized(pageSection, pageSection);
-		// });
-		// pageSection.on('beforeStatePop', function(e) {
-
-		// 	var pageSection = $(this);
-		// 	t.popState(pageSection);
-		// 	t.destroyPageSection(pageSection);
-		// });
-
 		t.firstLoad[t.getSettingsId(pageSection)] = true;
-
-		// pageSection.on('rendered', function(e, newDOMs) {
-
-		// 	var pageSection = $(this);
-		// 	t.pageSectionRendered(pageSection, newDOMs);
-		// });
 
 		popJSLibraryManager.execute('initPageSection', {pageSection: pageSection});
 		pageSection.triggerHandler('initialize');
@@ -1380,14 +1357,14 @@ popManager = {
 	// 	return block.hasClass('template-aggregator');
 	// },
 
-	getSettingsTemplate : function(elem) {
+	// getSettingsTemplate : function(elem) {
 
-		var t = this;
-		if (elem.data('templateid')) {
-			return elem;
-		}
-		return elem.closest('data-templateid');
-	},
+	// 	var t = this;
+	// 	if (elem.data('templateid')) {
+	// 		return elem;
+	// 	}
+	// 	return elem.closest('data-templateid');
+	// },
 
 	updateDocument : function() {
 
@@ -3320,7 +3297,21 @@ popManager = {
 		// 	$.extend(options, settings.options);
 		// }
 
-		var newDOMs = t.renderTarget(pageSection, pageSection, options);
+		// If doing server-side rendering, then no need to render the view using javascript templates,
+		// however we must still identify the newDOMs as to execute the JS on the elements
+		var newDOMs;
+		if (options['serverside-rendering']) {
+
+			// Trigger 'template:merged' for the Events Map to add the markers
+			// It must come before the next line, which will execute the JS on all elements
+			// (Eg: then layout-initjs-delay.tmpl works fine)
+			t.triggerHTMLMerged();
+
+			newDOMs = t.getPageSectionDOMs(pageSection);
+		}
+		else {
+			newDOMs = t.renderTarget(pageSection, pageSection, options);
+		}
 
 		// Sometimes no newDOMs are actually produced. Eg: when calling /userloggedin-data
 		// So then do not call pageSectionRendered, or it can make mess (eg: it scrolls up when /userloggedin-data comes back)
@@ -3328,6 +3319,29 @@ popManager = {
 
 			t.pageSectionRendered(pageSection, newDOMs, options);
 		}
+	},
+
+	getPageSectionDOMs : function(pageSection) {
+	
+		var t = this;
+
+		// And having set-up all the handlers, we can trigger the handler
+		// pageSection.triggerHandler('beforeMerge', [options]);
+
+		var templates_cbs = t.getTemplatesCbs(pageSection, pageSection);
+		var targetContainers = $();
+		var newDOMs = $();
+		$.each(templates_cbs, function(index, templateName) {
+
+			// The DOMs are the existing elements on the pageSection merge target container
+			var targetContainer = t.getMergeTarget(pageSection, templateName);
+			targetContainers.add(targetContainer);
+			newDOMs = newDOMs.add(targetContainer.children());
+		});
+
+		t.triggerRendered(pageSection, newDOMs, targetContainers);
+
+		return newDOMs;
 	},
 
 	renderTarget : function(pageSection, target, options) {
@@ -3377,10 +3391,12 @@ popManager = {
 		var targetConfiguration = t.getPageSectionConfiguration(pageSection);
 		
 		// Go down all levels of the configuration, until finding the level for the template-cb
-		$.each(templatePath, function(index, pathLevel) {
+		if (templatePath) {
+			$.each(templatePath, function(index, pathLevel) {
 
-			targetConfiguration = targetConfiguration[pathLevel];
-		});
+				targetConfiguration = targetConfiguration[pathLevel];
+			});
+		}
 
 		// We reached the target configuration. Now override with the new values
 		return targetConfiguration;

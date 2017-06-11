@@ -24,8 +24,8 @@ $sideinfo_templates = array(
 		<div class="modal-content">
 			<div class="modal-body">
 				<div id="<?php echo GD_TEMPLATEID_QUICKVIEWPAGESECTIONGROUP_ID ?>" class="pop-pagesection-group quickviewpagesection-group row">
-					<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWMAIN ?>" data-frametarget="<?php echo GD_URLPARAM_TARGET_QUICKVIEW ?>" data-offcanvas="main" class="offcanvas main tab-content pop-merge  <?php echo GD_TEMPLATEID_PAGESECTIONSETTINGSID_QUICKVIEWMAIN ?> <?php echo implode(' ', $pagesection_templates); ?>"></div>
-					<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWSIDEINFO ?>" data-frametarget="<?php echo GD_URLPARAM_TARGET_QUICKVIEW ?>" data-offcanvas="sideinfo" data-pagesection-openmode="manual" class="offcanvas sideinfo tab-content pop-merge <?php echo GD_TEMPLATEID_PAGESECTIONSETTINGSID_QUICKVIEWSIDEINFO ?> <?php echo implode(' ', $sideinfo_templates); ?>"></div>
+					<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWMAIN ?>" data-frametarget="<?php echo GD_URLPARAM_TARGET_QUICKVIEW ?>" data-offcanvas="main" class="offcanvas main tab-content pop-merge  <?php echo GD_TEMPLATEID_PAGESECTIONSETTINGSID_QUICKVIEWMAIN ?> <?php echo implode(' ', $pagesection_templates); ?>"><?php echo PoP_ServerSideRendering_Factory::get_instance()->render_pagesection(GD_TEMPLATEID_PAGESECTIONSETTINGSID_QUICKVIEWMAIN, GD_URLPARAM_TARGET_QUICKVIEW) ?></div>
+					<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_QUICKVIEWSIDEINFO ?>" data-frametarget="<?php echo GD_URLPARAM_TARGET_QUICKVIEW ?>" data-offcanvas="sideinfo" data-pagesection-openmode="manual" class="offcanvas sideinfo tab-content pop-merge <?php echo GD_TEMPLATEID_PAGESECTIONSETTINGSID_QUICKVIEWSIDEINFO ?> <?php echo implode(' ', $sideinfo_templates); ?>"><?php echo PoP_ServerSideRendering_Factory::get_instance()->render_pagesection(GD_TEMPLATEID_PAGESECTIONSETTINGSID_QUICKVIEWSIDEINFO, GD_URLPARAM_TARGET_QUICKVIEW) ?></div>
 				</div>
 			</div>
 		</div>

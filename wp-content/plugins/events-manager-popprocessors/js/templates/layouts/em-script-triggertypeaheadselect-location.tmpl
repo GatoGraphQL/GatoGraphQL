@@ -2,13 +2,16 @@
 	<div {{#generateId context=../.}}{{../id}}{{/generateId}} style="display: none;"></div>
 	<script type="text/javascript">
 	(function($){
-		var myself = $('#{{lastGeneratedId context=../.}}');
-		var createlocation = myself.closest('.pop-createlocation');
-		var typeahead = $(createlocation.data('typeahead-target'));
-		var block = popManager.getBlock(typeahead);
-		var pageSection = popManager.getPageSection(block);
-		var location = popManager.getItemObject('{{../itemDBKey}}', '{{id}}');
-		popTypeahead.triggerSelect(pageSection, block, typeahead, location);
+		{{! Comment Leo 11/06/2017: do it inside "template:merged", so that it works also for server-side rendering (object popManager is only available at the end)}}
+		$(document).one('template:merged', function() {
+			var myself = $('#{{lastGeneratedId context=../.}}');
+			var createlocation = myself.closest('.pop-createlocation');
+			var typeahead = $(createlocation.data('typeahead-target'));
+			var block = popManager.getBlock(typeahead);
+			var pageSection = popManager.getPageSection(block);
+			var location = popManager.getItemObject('{{../itemDBKey}}', '{{id}}');
+			popTypeahead.triggerSelect(pageSection, block, typeahead, location);
+		});
 	})(jQuery);
 	</script>
 {{/with}}

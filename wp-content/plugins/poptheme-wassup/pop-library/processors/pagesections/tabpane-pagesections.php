@@ -131,8 +131,14 @@ class GD_Template_Processor_CustomTabPanePageSections extends GD_Template_Proces
 						// Allow URE to add the Organization/Community content source attribute
 						$url = apply_filters('GD_Template_Processor_TabPanePageSections:get_extra_intercept_urls:author', $url);
 					}
+					
+					// Comment Leo 10/06/2017: With handlebars 4.0.10, function #each has a bug: if provided an array with only 1 element,
+					// it doesn't advance the context (it was failing in line "{{#each .}}" in files wp-content/plugins/pop-bootstrapprocessors/js/templates/pagesections/pagesection-pagetab.tmpl pagesection-tabpane.tmpl and pagesection-modal.tmpl - that line is supposed to be on the 5th path down the context, but it was actually found only on the 4th after the #each)
+					// To fix the problem, pass an object instead of an array, and it works fine
+					// Reported bug: https://github.com/wycats/handlebars.js/issues/1300
+					// // Comment Leo 10/06/2017: switched back to handlebars 4.0.5, so can comment the key below
 					$ret[$template_id] = array(
-						$url
+						'a' => $url,
 					);
 				}
 				break;

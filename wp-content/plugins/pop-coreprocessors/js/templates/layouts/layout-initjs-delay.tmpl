@@ -1,9 +1,12 @@
 <div {{#generateId}}{{id}}{{/generateId}}></div>
 <script type="text/javascript">
 (function($){
-	var block = popManager.getBlock($('#{{bs.bId}}'));
-	block.one("js:initialized", function() { 
-		$("#{{lastGeneratedId}}").html('{{#withModule . "layout"}}{{enterModule ../.}}{{/withModule}}'); 
+	{{! Comment Leo 11/06/2017: do it inside "template:merged", so that it works also for server-side rendering (object popManager is only available at the end)}}
+	$(document).one('template:merged', function() {
+		var block = popManager.getBlock($('#{{bs.bId}}'));
+		block.one("js:initialized", function() { 
+			$("#{{lastGeneratedId}}").html('{{#withModule . "layout"}}{{enterModule ../.}}{{/withModule}}'); 
+		});
 	});
 })(jQuery);
 </script>

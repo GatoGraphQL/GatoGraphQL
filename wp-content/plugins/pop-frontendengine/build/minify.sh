@@ -4,7 +4,7 @@
 ###########################
 rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/templates/*.tmpl.js
 cp $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/templates/*.tmpl.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/templates/
-wget -O $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/pop-frontendengine.templates.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/templates&f=pagesectionextension-replicable.tmpl.js,pagesectionextension-frame.tmpl.js"
+wget -O $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/pop-frontendengine.templates.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/templates&f=pagesectionextension-replicable.tmpl.js,pagesectionextension-frame.tmpl.js,extension-appendableclass.tmpl.js"
 
 ###########################
 # JS LIBRARIES

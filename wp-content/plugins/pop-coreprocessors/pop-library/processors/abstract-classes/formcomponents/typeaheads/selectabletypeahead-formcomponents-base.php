@@ -37,9 +37,8 @@ class GD_Template_Processor_SelectableTypeaheadFormComponentsBase extends GD_Tem
 		// Initialize typeahead value? (for both replicable/frontend and back-end)
 		if ($this->get_att($template_id, $atts, 'initialize-value')) {
 			
-			// If in replicable, then make it get its value from the request in the front-end
-			// if ($this->get_general_att($atts, 'load-itemobject-value') === false) {
-			if ($atts['replicable']) {
+			// If in replicable, or rendering the html server-side, then make it get its value from the request in the front-end
+			if ($atts['replicable'] || PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 
 				$this->add_jsmethod($ret, 'fillTypeahead');
 
@@ -150,7 +149,7 @@ class GD_Template_Processor_SelectableTypeaheadFormComponentsBase extends GD_Tem
 			
 			// If in replicable, then make it get its value from the request in the front-end
 			// if ($this->get_general_att($atts, 'load-itemobject-value') === false) {
-			if ($atts['replicable']) {
+			if ($atts['replicable'] || PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 
 				global $gd_dataload_manager;
 				$dataloader = $gd_dataload_manager->get($this->get_dataloader($template_id));

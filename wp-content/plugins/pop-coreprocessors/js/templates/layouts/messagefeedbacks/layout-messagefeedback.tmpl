@@ -15,7 +15,7 @@
 			{{#each codes}}
 				{{#if @index}}<br/>{{/if}}
 				{{#ifget ../../messages this}}
-					{{{get ../../../messages ../this}}}
+					{{{get ../../messages .}}}
 				{{/ifget}}
 			{{/each}}
 			{{#if codes}}{{#if strings}}<br/>{{/if}}{{/if}}

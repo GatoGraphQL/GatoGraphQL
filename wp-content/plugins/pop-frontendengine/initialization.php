@@ -30,14 +30,14 @@ class PoPFrontend_Initialization {
 		require_once 'library/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
-		 * Load the PoP Library
-		 * ---------------------------------------------------------------------------------------------------------------*/
-		require_once 'pop-library/load.php';
-
-		/**---------------------------------------------------------------------------------------------------------------
 		 * Kernel
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		require_once 'kernel/load.php';
+
+		/**---------------------------------------------------------------------------------------------------------------
+		 * Load the PoP Library
+		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once 'pop-library/load.php';
 	}
 
 	function register_scripts() {
@@ -100,42 +100,22 @@ class PoPFrontend_Initialization {
 
 		$folder = POP_FRONTENDENGINE_URI.'/js/dist/templates/';
 
-		wp_enqueue_script('pagesectionextension-replicable-tmpl', $folder.'pagesectionextension-replicable.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('pagesectionextension-frame-tmpl', $folder.'pagesectionextension-frame.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
+		wp_enqueue_script('pagesectionextension-replicable-tmpl', $folder.'pagesectionextension-replicable.tmpl.js', array('handlebars'), POP_FRONTENDENGINE_VERSION, true);
+		wp_enqueue_script('pagesectionextension-frame-tmpl', $folder.'pagesectionextension-frame.tmpl.js', array('handlebars'), POP_FRONTENDENGINE_VERSION, true);
+		wp_enqueue_script('extension-appendableclass-tmpl', $folder.'extension-appendableclass.tmpl.js', array('handlebars'), POP_FRONTENDENGINE_VERSION, true);
 	}
 
 	function get_jquery_constants() {
 
 		// Define all jQuery constants
 		//---------------------------------------------------------------------------------	
-		$status = array(
-			'class' => array(
-				'draft' => 'label-info',
-				'pending' => 'label-warning',
-				'publish' => 'label-success'
-			),
-			'text' => array(
-				'draft' => __('Draft', 'pop-frontendengine'),
-				'pending' => __('Pending to be published', 'pop-frontendengine'),
-				'publish' => __('Published', 'pop-frontendengine')
-			)
-		);
-		// Allow to override: allow URE to add its Member Status
-		$status = apply_filters('gd_templatemanager:status_settings', $status);
-		$labelize_classes = array(
-			__('(None)', 'pop-frontendengine') => 'label-none',
-		);
-		$labelize_classes = apply_filters('gd_templatemanager:labelize_classes', $labelize_classes);
 		$ondate = sprintf(
-			apply_filters(
-				'gd_templatemanager:ondate', 
-				__('<small>on</small> %s', 'pop-frontendengine')
-			),
+			PoP_Frontend_ConfigurationUtils::get_ondate_string(),
 			'{0}'
 		);
 
 		$homeurl = get_site_url();
-		$allowed_urls = PoP_Frontend_ServerUtils::get_allowed_urls();
+		$allowed_urls = PoP_Frontend_ConfigurationUtils::get_allowed_urls();
 
 		// Locale is needed to store the Open Tabs under the right language
 		$locale = apply_filters('gd_templatemanager:locale', get_locale());
@@ -143,16 +123,10 @@ class PoPFrontend_Initialization {
 		// Default one: do not send, so that it doesn't show up in the Embed URL
 		$vars = GD_TemplateManager_Utils::get_vars();
 		$themestyle = $vars['themestyle-isdefault'] ? '' : $vars['themestyle'];
-		// $allowed_urls = PoP_FrontendEngine_Utils::get_allowed_urls();
 		$background_load = apply_filters(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD, array());
 		$keepopentabs = apply_filters(POP_HOOK_POPFRONTEND_KEEPOPENTABS, true);
-		$multilayout_labels = apply_filters('gd_templatemanager:multilayout_labels', array());
-		$multilayout_keyfields = apply_filters('gd_templatemanager:multilayout_keyfields', array(
-			'posts' => array('post-type', 'cat'),
-			'locations' => array('post-type', 'cat'),
-			'users' => array('role'),
-			// 'notifications' => POP_MULTILAYOUT_TYPE_NOTIFICATION,
-		));
+		$multilayout_labels = PoP_Frontend_ConfigurationUtils::get_multilayout_labels();
+		$multilayout_keyfields = PoP_Frontend_ConfigurationUtils::get_multilayout_keyfields();
 		$domcontainer_id = apply_filters('gd_templatemanager:domcontainer_id', GD_TEMPLATEID_PAGESECTIONID_CONTAINER);
 		$addanchorspinner = apply_filters('gd_templatemanager:add_anchor_spinner', true);
 		$api_urlparams = apply_filters('gd_templatemanager:api_urlparams', array(
@@ -169,6 +143,7 @@ class PoPFrontend_Initialization {
 			'API_URLPARAMS' => $api_urlparams,
 			'COMPACT_JS_KEYS' => PoP_ServerUtils::compact_js_keys(),
 			'USELOCALSTORAGE' => (PoP_Frontend_ServerUtils::use_local_storage() ? true : ''),
+			'USESERVERSIDERENDERING' => (PoP_Frontend_ServerUtils::use_serverside_rendering() ? true : ''),
 			// This URL is needed to retrieve the user data, if the user is logged in
 			'BACKGROUND_LOAD' => $background_load,
 			'KEEP_OPEN_TABS' => $keepopentabs ? true : '',
@@ -185,8 +160,8 @@ class PoPFrontend_Initialization {
 				'PUBLISH' => 'publish',
 				'PENDING' => 'pending',
 			),
-			'STATUS' => $status,
-			'LABELIZE_CLASSES' => $labelize_classes,
+			'STATUS' => PoP_Frontend_ConfigurationUtils::get_status_settings(),
+			'LABELIZE_CLASSES' => PoP_Frontend_ConfigurationUtils::get_labelize_classes(),
 			'ROLES' => gd_roles(),
 			'USERATTRIBUTES' => gd_user_attributes(),
 			'LABELS' => array(
@@ -206,8 +181,8 @@ class PoPFrontend_Initialization {
 				'MULTIPLE' => GD_CONSTANT_REPLICATETYPE_MULTIPLE,
 				'SINGLE' => GD_CONSTANT_REPLICATETYPE_SINGLE,
 			),
-			'STRING_MORE' => __('more...', 'pop-frontendengine'),
-			'STRING_LESS' => __('less...', 'pop-frontendengine'),
+			'STRING_MORE' => GD_STRING_MORE,
+			'STRING_LESS' => GD_STRING_LESS,
 			'ONDATE' => $ondate,
 		);
 
@@ -237,12 +212,24 @@ class PoPFrontend_Initialization {
 			return;
 		}
 	
-		// // Define all jQuery functions
-		// $gd_jquery_functions = array_unique(apply_filters('gd_jquery_functions', array()));	
-		// $gd_jquery_functions[] = 'popManager.init';
-		// $gd_jquery_functions_inner = implode('(); ', $gd_jquery_functions) . '();';
+		// Comment Leo 10/06/2017: If doing the server-side rendering, then we must print all the generated IDs to run all JS methods,
+		// before calling popManager.init()
+		if (PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 
-		// printf( '<script type="text/javascript">%s</script>', $gd_jquery_functions_inner);
+			$popJSRuntimeManager = PoP_ServerSide_Libraries_Factory::get_jsruntime_instance();
+			printf(
+			'<script type="text/javascript">%s</script>', 
+				sprintf(
+					'popJSRuntimeManager[\'full-session-ids\'] = %s;',
+					json_encode($popJSRuntimeManager->getSessionIds('full'))
+				).
+				PHP_EOL.
+				sprintf(
+					'popJSRuntimeManager[\'last-session-ids\'] = %s;',
+					json_encode($popJSRuntimeManager->getSessionIds('last'))
+				)
+			);
+		}
 
 		// Comment Leo 22/08/2016: I don't know why 'add_query' is executing even if it is a search engine
 		// Because of that, I added the JS code: `if (popManager) { }`

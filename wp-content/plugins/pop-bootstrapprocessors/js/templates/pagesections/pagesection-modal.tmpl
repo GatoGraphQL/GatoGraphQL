@@ -21,7 +21,7 @@
 			{{#withSublevel ../../template context=../../pss.feedback.extra-intercept-urls}}
 				{{#withget . ../../../template}}
 					{{#each .}}
-						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="interceptor"}}{{../../../../../../id}}{{../../../../../../tls.feedback.unique-id}}-{{../../../../../this}}-{{@index}}{{/generateId}} href="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='modal'}}" data-toggle="modal" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}"></a>
+						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="interceptor"}}{{../../../../../id}}{{../../../../../tls.feedback.unique-id}}-{{../../../../this}}-{{@index}}{{/generateId}} href="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='modal'}}" data-toggle="modal" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}"></a>
 					{{/each}}
 				{{/withget}}
 			{{/withSublevel}}

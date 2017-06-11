@@ -8,8 +8,9 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('WSL_POPPROCESSORS_VERSION', 0.102);
+define('WSL_POPPROCESSORS_VERSION', 0.103);
 define('WSL_POPPROCESSORS_DIR', dirname(__FILE__));
+define('WSL_POPPROCESSORS_PHPTEMPLATES_DIR', WSL_POPPROCESSORS_DIR.'/php-templates/compiled');
 
 class WSL_PoPProcessors {
 

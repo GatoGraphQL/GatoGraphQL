@@ -107,7 +107,7 @@ class GD_Template_Processor_TextFormComponentInputs extends GD_Template_Processo
 			case GD_TEMPLATE_FORMCOMPONENT_TARGETTITLE:
 
 				// fill the input when a new Addon PageSection is created
-				if ($atts['replicable']) {
+				if ($atts['replicable'] || PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 					$this->add_jsmethod($ret, 'fillAddonInput');
 				}
 				break;
@@ -115,7 +115,7 @@ class GD_Template_Processor_TextFormComponentInputs extends GD_Template_Processo
 			case GD_TEMPLATE_FORMCOMPONENT_TARGETURL:
 
 				// fill the input when a new Addon PageSection is created
-				if ($atts['replicable']) {
+				if ($atts['replicable'] || PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 					$this->add_jsmethod($ret, 'fillAddonURLInput');
 				}
 				break;

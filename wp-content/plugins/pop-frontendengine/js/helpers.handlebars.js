@@ -1,9 +1,9 @@
-Handlebars.registerHelper('breaklines', function(text) {
-    text = Handlebars.Utils.escapeExpression(text);
-    text = text.toString();
-    text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
-    return new Handlebars.SafeString(text);
-});
+// Handlebars.registerHelper('breaklines', function(text) {
+//     text = Handlebars.Utils.escapeExpression(text);
+//     text = text.toString();
+//     text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+//     return new Handlebars.SafeString(text);
+// });
 
 Handlebars.registerHelper('showmore', function(str, options) {
 
@@ -63,20 +63,20 @@ Handlebars.registerHelper('ondate', function(date, options) {
     return new Handlebars.SafeString(M.ONDATE.format(date));     
 });
 
-Handlebars.registerHelper('img', function(imageData, options) {
+// Handlebars.registerHelper('img', function(imageData, options) {
 
-    var url = options.hash.url,
-    	title = options.hash.title || "",
-    	alt = options.hash.alt || "",
-    	classs = options.hash.class || "",
-    	ret = "";
+//     var url = options.hash.url,
+//     	title = options.hash.title || "",
+//     	alt = options.hash.alt || "",
+//     	classs = options.hash.class || "",
+//     	ret = "";
         
-	if (url) { ret += '<a href="'+url+'" title="'+title+'">'; }
-	ret += '<img src="'+imageData.src+'" width="'+imageData.width+'" height="'+imageData.height+'" alt="'+alt+'" class="'+classs+'">';
-	if (url) { ret += '</a>'; }
+// 	if (url) { ret += '<a href="'+url+'" title="'+title+'">'; }
+// 	ret += '<img src="'+imageData.src+'" width="'+imageData.width+'" height="'+imageData.height+'" alt="'+alt+'" class="'+classs+'">';
+// 	if (url) { ret += '</a>'; }
 
-    return new Handlebars.SafeString ( ret );
-});
+//     return new Handlebars.SafeString ( ret );
+// });
 
 Handlebars.registerHelper('addParam', function(url, param, value, options) {
 
@@ -110,25 +110,25 @@ Handlebars.registerHelper('labelize', function(strings, label, /*clear,*/ option
 	if (strings) {
 		for (var i = 0; i < strings.length; i++) {
 			extra_class = M.LABELIZE_CLASSES[strings[i]] ? M.LABELIZE_CLASSES[strings[i]] : '';
-			ret += '<span class="label '+label+' '+extra_class+'">'+strings[i]+'</span>\n';
+			ret += '<span class="label '+label+' '+extra_class+'">'+strings[i]+'</span> ';
 		}
 	}
 
 	return new Handlebars.SafeString ( ret );
 });
 
-Handlebars.registerHelper('infoButton', function(id, itemObjectId, options) {
+// Handlebars.registerHelper('infoButton', function(id, itemObjectId, options) {
 
-	var classs = options.hash.classs || '';
-	var ret = '<a class="'+classs+'" data-toggle="collapse" href="#'+id+'-'+itemObjectId+'" role="button"><span class="glyphicon glyphicon-info-sign"></span></a>';
-	return new Handlebars.SafeString ( ret );
-});
-Handlebars.registerHelper('infoCollapse', function(id, itemObjectId, options) {
+// 	var classs = options.hash.classs || '';
+// 	var ret = '<a class="'+classs+'" data-toggle="collapse" href="#'+id+'-'+itemObjectId+'" role="button"><span class="glyphicon glyphicon-info-sign"></span></a>';
+// 	return new Handlebars.SafeString ( ret );
+// });
+// Handlebars.registerHelper('infoCollapse', function(id, itemObjectId, options) {
 
-	var content = options.fn(this);
-	var ret = '<div class="collapse" id="'+id+'-'+itemObjectId+'">'+content+'</div>';
-	return new Handlebars.SafeString ( ret );
-});
+// 	var content = options.fn(this);
+// 	var ret = '<div class="collapse" id="'+id+'-'+itemObjectId+'">'+content+'</div>';
+// 	return new Handlebars.SafeString ( ret );
+// });
 
 Handlebars.registerHelper('mod', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
@@ -148,7 +148,8 @@ Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
         throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
 
-    operator = options.hash.operator || "==";
+    var operator = options.hash.operator || "==";
+    // var context = options.hash.context || this;
 
     var operators = {
         // function eq: allows to compare a string against a bool, then "true" == true (eg: for the Yes/No Select)
@@ -171,9 +172,9 @@ Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
     var result = operators[operator](lvalue,rvalue);
 
     if( result ) {
-        return options.fn(this);
+        return options.fn(this/*context*/);
     } else {
-        return options.inverse(this);
+        return options.inverse(this/*context*/);
     }
 
 });
@@ -222,8 +223,10 @@ Handlebars.registerHelper('withget', function(db, index, options) {
 
 	var context = db[index];
 
-	// Expand the JS Keys
-	popManager.expandJSKeys(context);
+	// Expand the JS Keys. Do it only if it's an object, not an array
+	if (jQuery.type(context) === 'object') {
+		popManager.expandJSKeys(context);
+	}
 
 	return options.fn(context);
 });
@@ -496,19 +499,21 @@ Handlebars.registerHelper('layoutLabel', function(itemDBKey, itemObject, options
 	return M.MULTILAYOUT_LABELS[key] || '';
 });
 
-Handlebars.registerHelper('withOptions', function(context, options) {
+// Handlebars.registerHelper('withOptions', function(context, options) {
 
-	if (typeof context != 'undefined') {
+// 	if (typeof context != 'undefined') {
 
-		// Read all hash options, and add them to the Context
-		jQuery.extend(context, options.hash);
+// 		// Read all hash options, and add them to the Context
+// 		jQuery.extend(context, options.hash);
 
-		// Expand the JS Keys
-		popManager.expandJSKeys(context);
+// 		// Expand the JS Keys. Do it only if it's an object, not an array
+// 		if (jQuery.type(context) === 'object') {
+// 			popManager.expandJSKeys(context);
+// 		}
 
-		return options.fn(context);
-	}
-});
+// 		return options.fn(context);
+// 	}
+// });
 
 Handlebars.registerHelper('withBlock', function(context, blockSettingsId, options) {
 
@@ -561,8 +566,10 @@ Handlebars.registerHelper('withSublevel', function(sublevel, options) {
 
 	var context = options.hash.context || this;
 
-	// Expand the JS Keys
-	popManager.expandJSKeys(context);
+	// Expand the JS Keys. Do it only if it's an object, not an array
+	if (jQuery.type(context) === 'object') {
+		popManager.expandJSKeys(context);
+	}
 
 	return options.fn(context[sublevel]);
 });

@@ -71,7 +71,9 @@ class PoP_CoreProcessors_Initialization {
 			wp_register_script('modernizr', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', null, null);
 
 			// http://handlebarsjs.com/installation.html
-			wp_register_script('handlebars', 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.runtime.min.js', null, null);
+			// // Comment Leo: Version 4.0.10 has a bug (https://github.com/wycats/handlebars.js/issues/1300) that make the application not work correctly
+			wp_register_script('handlebars', 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.runtime.min.js', null, null);
+			// wp_register_script('handlebars', 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.runtime.min.js', null, null);
 
 			// https://github.com/hpneo/gmaps/releases
 			wp_register_script('gmaps', 'https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js', array('googlemaps'), null);
@@ -102,7 +104,9 @@ class PoP_CoreProcessors_Initialization {
 			// Local files
 			wp_register_script('perfect-scrollbar', $cdn_js_folder . '/perfect-scrollbar.jquery.0.6.11.min.js', null, null);
 			wp_register_script('modernizr', $cdn_js_folder . '/modernizr.2.8.3.min.js', null, null);
-			wp_register_script('handlebars', $cdn_js_folder . '/handlebars.runtime.4.0.5.min.js', null, null);
+			// // Comment Leo: Version 4.0.10 has a bug (https://github.com/wycats/handlebars.js/issues/1300) that make the application not work correctly
+			wp_register_script('handlebars', $cdn_js_folder . '/handlebars.runtime.4.0.10.min.js', null, null);
+			// wp_register_script('handlebars', $cdn_js_folder . '/handlebars.runtime.4.0.5.min.js', null, null);
 			wp_register_script('gmaps', $cdn_js_folder . '/gmaps.0.4.24.min.js', array('googlemaps'), null);
 			
 			// wp_register_script('bootstrap', $cdn_js_folder . '/bootstrap.3.3.7.min.js', array('jquery', 'jquery-ui-dialog'), null);
@@ -335,7 +339,6 @@ class PoP_CoreProcessors_Initialization {
 		wp_enqueue_script('script-lazyloading-remove-tmpl', $folder.'script-lazyloading-remove.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('scroll-inner-tmpl', $folder.'scroll-inner.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('scroll-tmpl', $folder.'scroll.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
-		wp_enqueue_script('extension-appendableclass-tmpl', $folder.'extension-appendableclass.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('sm-item-tmpl', $folder.'sm-item.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('sm-tmpl', $folder.'sm.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
 		wp_enqueue_script('status-tmpl', $folder.'status.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);

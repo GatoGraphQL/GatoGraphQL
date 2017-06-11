@@ -9,6 +9,13 @@ class PoPFrontend_Engine extends PoP_Engine {
 
 	var $crawlableitems, $runtimecrawlableitems;
 
+	protected function add_crawlable_data() {
+
+		// Get the crawlable data only if not doing the server-side rendering
+		// Otherwise, we already have the final HTML, so the crawlable data serves no purpose
+		return !PoP_Frontend_ServerUtils::use_serverside_rendering();
+	}
+
 	function get_output_items() {
 
 		$output_items = parent::get_output_items();
@@ -18,7 +25,9 @@ class PoPFrontend_Engine extends PoP_Engine {
 		if (!$vars['fetching-json']) {
 
 			// Include the 'crawlable' when loading the frame
-			$output_items[] = 'crawlable';
+			if ($this->add_crawlable_data()) {
+				$output_items[] = 'crawlable';
+			}
 		}
 
 		return $output_items;
@@ -27,14 +36,17 @@ class PoPFrontend_Engine extends PoP_Engine {
 	function output_end() {
 	
 		// Seach Engine Crawlable data + Fallback for non-JS browsers
-		$div_id = 'fallback';
-		printf(
-			'<div id="%1$s" class="searchengine-crawlable"><script type="text/javascript">document.getElementById("%1$s").style.display = "none";</script><div class="crawlable-items">%2$s</div><div class="runtime-crawlable-items">%3$s</div><div class="crawlable-data">%4$s</div></div>',
-			$div_id,
-			$this->crawlableitems, // $this->json['crawlable-items'],
-			$this->runtimecrawlableitems, // $this->json['runtime-crawlable-items'],
-			$this->json['crawlable-data']
-		);
+		if ($this->add_crawlable_data()) {
+			
+			$div_id = 'fallback';
+			printf(
+				'<div id="%1$s" class="searchengine-crawlable"><script type="text/javascript">document.getElementById("%1$s").style.display = "none";</script><div class="crawlable-items">%2$s</div><div class="runtime-crawlable-items">%3$s</div><div class="crawlable-data">%4$s</div></div>',
+				$div_id,
+				$this->crawlableitems,
+				$this->runtimecrawlableitems,
+				$this->json['crawlable-data']
+			);
+		}
 	}
 
 	protected function get_json($template_id, $output_items) {

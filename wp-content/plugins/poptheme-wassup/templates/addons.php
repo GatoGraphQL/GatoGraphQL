@@ -25,12 +25,12 @@
 			<a id="<?php echo GD_TemplateManager_Utils::get_frontend_id(GD_TEMPLATEID_PAGESECTIONID_ADDONS, 'window-minimize') ?>" data-target="#<?php echo $addons_window_id ?>" data-toggle="window-minimize" href="#" class="minimize close" title="<?php _e('Minimize', 'poptheme-wassup') ?>"><span class="glyphicon glyphicon-minus"></span></a>
 		</div>		
 		<div class="container-fluid perfect-scrollbar-offsetreference">
-			<div class="tab-content pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_ADDONS ?>-merge"></div>
+			<div class="tab-content pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_ADDONS ?>-merge"><?php echo PoP_ServerSideRendering_Factory::get_instance()->render_pagesection(GD_TEMPLATEID_PAGESECTIONSETTINGSID_ADDONS, GD_URLPARAM_TARGET_ADDONS) ?></div>
 		</div>
 	</div>
 	<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_ADDONTABS ?>" data-frametarget="<?php echo GD_URLPARAM_TARGET_ADDONS ?>" data-merge-container="#<?php echo GD_TEMPLATEID_PAGESECTIONID_ADDONTABS ?>-merge" data-offcanvas="addontabs" class="offcanvas pop-waypoints-context scrollable addontabs perfect-scrollbar horizontal pop-merge <?php echo implode(' ', $addontabs_templates); ?> navbar navbar-main navbar-addons">
 		<div class="perfect-scrollbar-offsetreference">
-			<div class="pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_ADDONTABS ?>-merge"></div>
+			<div class="pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_ADDONTABS ?>-merge"><?php echo PoP_ServerSideRendering_Factory::get_instance()->render_pagesection(GD_TEMPLATEID_PAGESECTIONSETTINGSID_ADDONTABS, GD_URLPARAM_TARGET_ADDONS) ?></div>
 		</div>
 	</div>
 </div>

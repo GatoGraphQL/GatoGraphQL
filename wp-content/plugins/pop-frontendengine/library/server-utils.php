@@ -25,14 +25,12 @@ class PoP_Frontend_ServerUtils {
 		return true;
 	}
 
-	public static function get_allowed_urls() {
+	public static function use_serverside_rendering() {
 
-		$homeurl = get_site_url();
-		return array_values(array_unique(apply_filters(
-			'gd_templatemanager:allowed_urls',
-			array(
-				$homeurl,
-			)
-		)));
+		if (defined('POP_SERVER_USESERVERSIDERENDERING')) {
+			return POP_SERVER_USESERVERSIDERENDERING;
+		}
+
+		return true;
 	}
 }

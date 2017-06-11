@@ -12,7 +12,7 @@
 			{{#withSublevel ../../template context=../../pss.feedback.extra-intercept-urls}}
 				{{#withget . ../../../template}}
 					{{#each .}}
-						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="interceptor"}}{{../../../../../../id}}{{../../../../../../tls.feedback.unique-id}}-{{../../../../../this}}-{{@index}}{{/generateId}} href="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='tab'}}" data-toggle="tab" role="tab" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}" data-title="{{{../../../tls.feedback.title}}}"></a>
+						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="interceptor"}}{{../../../../../id}}{{../../../../../tls.feedback.unique-id}}-{{../../../../this}}-{{@index}}{{/generateId}} href="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='tab'}}" data-toggle="tab" role="tab" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}" data-title="{{{../../../tls.feedback.title}}}"></a>
 					{{/each}}
 				{{/withget}}
 			{{/withSublevel}}

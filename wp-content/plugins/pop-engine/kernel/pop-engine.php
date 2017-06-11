@@ -243,6 +243,11 @@ class PoP_Engine {
 		}
 	}
 
+	protected function add_crawlable_data() {
+
+		return false;
+	}
+
 	protected function get_json($template_id, $output_items) {
 
 		global $gd_template_processor_manager, $gd_template_cachemanager;
@@ -657,10 +662,14 @@ class PoP_Engine {
 				$block_feedback[$pagesection_settings_id][$block_settings_id] = $feedback;
 				$params = $iohandler->get_params($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts);
 				$target_params[$pagesection_settings_id][$block_settings_id] = $params;
-				$crawlable_data = array_merge(
-					$crawlable_data,
-					$iohandler->get_crawlable_data($feedback, $params, $block_data_settings)
-				);
+				// Allow to turn on/off getting the crawlable data (by default no need, FrontendEngine can turn it on)
+				if ($this->add_crawlable_data()) {
+
+					$crawlable_data = array_merge(
+						$crawlable_data,
+						$iohandler->get_crawlable_data($feedback, $params, $block_data_settings)
+					);
+				}
 			}
 
 			// If the pageSection was provided as an attribute, then we're fetching data for the block, we don't need to calculate the feedback for the pageSection, it's already known

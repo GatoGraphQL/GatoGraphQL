@@ -16,7 +16,7 @@ class PoP_ServerUtils {
 		// By default, it is mangled, if not mangled then param "mangled" must have value "none"
 		// Coment Leo 13/01/2017: get_vars() can't function properly since it references objects which have not been initialized yet,
 		// when called at the very beginning. So then access the request directly
-		return $_REQUEST[GD_URLPARAM_MANGLED] == GD_URLPARAM_MANGLED_NONE;
+		return isset($_REQUEST[GD_URLPARAM_MANGLED]) && $_REQUEST[GD_URLPARAM_MANGLED] == GD_URLPARAM_MANGLED_NONE;
 	}
 
 	public static function is_mangled() {

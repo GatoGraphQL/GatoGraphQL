@@ -10,6 +10,6 @@
 	); ?>
 	<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_SIDEINFO ?>" data-frametarget="<?php echo GD_URLPARAM_TARGET_MAIN ?>" data-merge-container="#<?php echo GD_TEMPLATEID_PAGESECTIONID_SIDEINFO ?>-merge" data-offcanvas="sideinfo" class="sideinfo pop-merge <?php echo implode(' ', $sideinfo_templates); ?>">
 		<div class="container-fluid perfect-scrollbar-offsetreference">
-			<div class="tab-content pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_SIDEINFO ?>-merge"></div>
+			<div class="tab-content pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_SIDEINFO ?>-merge"><?php echo PoP_ServerSideRendering_Factory::get_instance()->render_pagesection(GD_TEMPLATEID_PAGESECTIONSETTINGSID_SIDEINFO) ?></div>
 		</div>
 	</div>

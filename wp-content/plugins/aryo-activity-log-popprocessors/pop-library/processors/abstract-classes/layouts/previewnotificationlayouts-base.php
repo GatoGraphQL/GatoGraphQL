@@ -227,9 +227,7 @@ class GD_Template_Processor_PreviewNotificationLayoutsBase extends GD_Template_P
 				'data-class' => AAL_POP_STATUS_READ,
 			));
 			$this->merge_att(GD_AAL_TEMPLATE_BUTTON_NOTIFICATION_MARKASREAD, $atts, 'previoustemplates-ids', array(
-				'data-target' => array(
-					$template_id,
-				)
+				'data-target' => $template_id,
 			));
 			$this->merge_block_jsmethod_att(GD_AAL_TEMPLATE_BUTTON_NOTIFICATION_MARKASREAD, $atts, array('switchTargetClass'));
 
