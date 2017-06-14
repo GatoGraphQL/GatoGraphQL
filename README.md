@@ -63,9 +63,17 @@ Install and activate the following plugins, which are integrated with PoP (_not 
  - [WP Super Cache](https://wordpress.org/plugins/wp-super-cache/): for caching the website
  - (Commercial) [Gravity Forms](http://www.gravityforms.com/): for sending messages, newsletter, flagging, volunteering, etc
 
+### Required 3rd-party libraries
+
+[LightnCandy](https://github.com/zordius/lightncandy) is used for producing server-side HTML code. It must be installed in order to compile Handlebars javascript templates into PHP code. (There is no need to install it just to run the website as it is, since all PHP-compiled Handlebars javascript templates have been uploaded to this repository).
+
+To install it, follow the instructions [here](https://zordius.github.io/HandlebarsCookbook/9000-quickstart.html). Run composer under folder [wp-content/plugins/pop-frontendengine/php-templates/cli](https://github.com/leoloso/PoP/tree/master/wp-content/plugins/pop-frontendengine/php-templates/cli).
+
 ## Configuration
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
+
+- `POP_SERVER_USESERVERSIDERENDERING` (_true|false_): Produce HTML on the server-side for the first-loaded page.
 
 - `POP_SERVER_USECACHE` (_true|false_): Create and re-use a cache of the settings of the requested page.
 
