@@ -75,12 +75,29 @@ class GD_Template_Processor_FormComponentsBase extends GD_Template_ProcessorBase
 	// 	return '';
 	// }
 
+	function is_value_selected($template_id, $atts) {
+
+		return false;
+	}
+
 	function get_input_options($template_id, $atts) {
 	
 		$options = array('name' => $this->get_name($template_id, $atts));
 		$selected = $this->get_att($template_id, $atts, 'selected');
+		
+		// Comment Leo 13/06/2017: this function is kind of hacky, the real solution should be
+		// to pass param $runtime_atts to all functions, which is not saved in pop-cache,
+		// and there we can pass a value as a 'selected' param
+		// (Eg: $this->add_att($template_id, $atts, 'selected', $this->get_value($template_id, $atts)); in function init_atts in pop-coreprocessors/pop-library/processors/abstract-classes/formcomponents/urlparamtext-formcomponents-inputs-base.php)
+		if ($this->is_value_selected($template_id, $atts)) {
+
+			// IMPORTANT! Pay attention that we are passing array() instead of $atts
+			// This way it will obtain the value from the $_REQUEST
+			// Otherwise, it enters an infinite loop, get_input_options calling get_value calling get_input_options etc...
+			$options['selected'] = $this->get_value($template_id, array());
+		}
 		// Checking !is_null to accept a selected value of ''
-		if (!is_null($selected)) {
+		elseif (!is_null($selected)) {
 
 			$options['selected'] = $selected;
 		}
