@@ -339,8 +339,9 @@ class PoP_ServerSide_Manager {
 
 	// ------------------------------------------------------
 	// Comment Leo: Heavily commented in PHP
+	// Comment Leo: passing extra parameter $json in PHP
 	// ------------------------------------------------------
-	function init() {
+	function init($json) {
 	
 		// // Comment Leo 22/08/2016: when is_search_engine(), there is no #toplevel, so do nothing
 		// if ($('#'+popPageSectionManager.getTopLevelSettingsId()).length) {
@@ -348,7 +349,8 @@ class PoP_ServerSide_Manager {
 		// 	t.initDocument();
 
 			// Initialize Settings, Feedback and Data
-			$this->initTopLevelJson();
+			// Comment Leo: passing extra parameter $json in PHP
+			$this->initTopLevelJson($json);
 
 			// // Make sure the localStorage has no stale entries
 			// t.initLocalStorage();
@@ -3292,12 +3294,15 @@ class PoP_ServerSide_Manager {
 	// 	}
 	// }
 
-	function initTopLevelJson() {
+	// Comment Leo: passing extra parameter $json in PHP
+	function initTopLevelJson($json) {
 
 		// Initialize Settings
 		// var jsonHtml = $('#'+popPageSectionManager.getTopLevelSettingsId());
 		// var json = $.parseJSON(jsonHtml.html());
-		$json = PoP_ServerSideRendering_Factory::get_instance()->get_json();
+		// Comment Leo: $json already passed as parameter. Not accessing the function here, to not create a loop:
+		// PoP_ServerSideRendering::get_json => self::init => self::initTopLevelJson =>	PoP_ServerSideRendering::get_json
+		// $json = PoP_ServerSideRendering_Factory::get_instance()->get_json();
 
 		$this->database = $json['database'];
 		$this->userdatabase = $json['userdatabase'];

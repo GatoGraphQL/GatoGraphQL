@@ -40,7 +40,8 @@ class PoP_ServerSideRendering {
 
 			// Also initialize the popManager, so it will get all its private values from $json
 			$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
-			$popManager->init();
+			// Comment Leo: passing extra parameter $json in PHP
+			$popManager->init($this->json);
 
 			// Because $popManager modified the settings (eg: added the topLevelSettings, etc), then we gotta update the local $json object accordingly
 			$this->json['settings'] = $popManager->getMemory()['settings'];
