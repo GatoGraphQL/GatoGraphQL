@@ -69,7 +69,8 @@ add_filter( 'embed_defaults', 'gd_embed_defaults_size' );
 function gd_embed_defaults_size()
 {
     // adjust these pixel values to your needs
-    return array( 'width' => 640, 'height' => 480 );
+    // return array( 'width' => 640, 'height' => 480 );
+    return array( 'width' => 480, 'height' => 400 );
 }
 
 
