@@ -592,6 +592,8 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 }
 .pop-notificationmsg.website-level.sessiontabs .checkbox {
 	display: inline-block;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 .pop-notificationmsg.website-level.sessiontabs .checkbox input[type=checkbox] {
 	margin-left: -15px;
@@ -605,7 +607,6 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 
 	text-align: center;
 }
-.pop-notificationmsg.page-level,
 .pop-loading,
 .pop-error {
 
@@ -615,6 +616,10 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 
 	/* On top of offcanvas.hover */
 	z-index: 720;
+}
+.pop-notificationmsg.page-level {
+
+	z-index: 730;
 }
 .pop-notificationmsg.website-level.topmost {
 

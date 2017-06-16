@@ -17,7 +17,7 @@ function popcore_tabs_jquery_constants($jquery_constants) {
 	$msg_placeholder = '<div class="pop-notificationmsg %s alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" aria-hidden="true" data-dismiss="alert">×</button>%s</div>';
 	$btn_placeholder = '<button type="button" class="btn btn-default" aria-hidden="true" data-dismiss="alert" %s>%s</button>';
 	$btns = 
-		'<div class="btn-group btn-group-sm">'.
+		'<div class="btn-group btn-group-xs">'.
 			sprintf(
 				$btn_placeholder,
 				'onclick="{0}"',
