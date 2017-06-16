@@ -97,6 +97,10 @@ class PoP_Engine {
 			// "userpostactivity-count":1
 			$nocache_fields = $json['nocache-fields'];
 			$commoncode = preg_replace('/"('.implode('|', $nocache_fields).')":[0-9]+,?/', '', $commoncode);
+
+			// Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
+			$commoncode = apply_filters('PoP_Engine:etag_header:commoncode', $commoncode);
+
 			header("ETag: ".wp_hash($commoncode));
 		}
 	}
