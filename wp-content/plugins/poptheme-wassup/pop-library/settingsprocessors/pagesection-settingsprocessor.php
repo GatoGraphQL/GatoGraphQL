@@ -548,7 +548,6 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 		$fetching_json_data = $vars['fetching-json-data'];
 		$target = $vars['target'];
 		$blocks = $blockgroups = $frames = array();
-		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
 
 		$add = 
 			($template_id == GD_TEMPLATE_PAGESECTION_HOME && $target == GD_URLPARAM_TARGET_MAIN) ||
@@ -559,6 +558,9 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			
 			if ($fetching_json_data) {
 
+				// Comment Leo 20/06/2017: $page_id is POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME, however the settings-processor is set using POP_WPAPI_PAGE_ALLCONTENT,
+				// so there was an exception and a quick fix it so use this other page. Still gotta fix properly
+				$page_id = POP_WPAPI_PAGE_ALLCONTENT; //GD_TemplateManager_Utils::get_hierarchy_page_id();
 				$blocks[] = $gd_template_settingsmanager->get_page_block($page_id);
 			}
 			else {
