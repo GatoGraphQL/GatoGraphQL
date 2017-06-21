@@ -71,7 +71,7 @@ To install it, follow the instructions [here](https://zordius.github.io/Handleba
 
 ### Installing the demo
 
-Because the [scripts automating the installation process](https://github.com/leoloso/PoP/issues/49) are not done yet, we provide file [getpop-demo/install.zip](https://github.com/leoloso/PoP/tree/master/install/getpop-demo/install.zip) to quickly install a copy of [GetPoP Demo website](https://demo.getpop.org/) in your localhost. Read the installation instructions [here](https://github.com/leoloso/PoP/tree/master/install/getpop-demo/install.html).
+Because the [scripts automating the installation process](https://github.com/leoloso/PoP/issues/49) are not done yet, we provide file [getpop-demo/install.zip](https://github.com/leoloso/PoP/tree/master/install/getpop-demo/install.zip) to quickly install a copy of [GetPoP Demo website](https://demo.getpop.org/) in your localhost. Read the installation instructions [here](https://github.com/leoloso/PoP/blob/master/install/getpop-demo/install.md).
 
 ## Configuration
 
