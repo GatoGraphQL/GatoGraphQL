@@ -71,7 +71,7 @@ class GD_DataLoader {
 		return null;
 	}
 	
-	function get_dataset($formatter, $resultset, $ids_data_fields = array()) {	
+	function get_dataset($formatter, $resultset, $add_crawlable_data, $ids_data_fields = array()) {	
 		
 		global $gd_dataquery_manager;
 
@@ -81,13 +81,16 @@ class GD_DataLoader {
 			$dataquery = $gd_dataquery_manager->get($dataquery_name);
 		}
 
-		// Get the crawlabledata Printer
-		if ($crawlabledata_printer_name = $this->get_crawlabledata_printer()) {
-
-			global $gd_dataloader_crawlabledataprinter_manager;
+		if ($add_crawlable_data) {
 			
-			// From the dataloader name, obtain the FieldProcessor Name
-			$crawlabledata_printer = $gd_dataloader_crawlabledataprinter_manager->get_printer($crawlabledata_printer_name);
+			// Get the crawlabledata Printer
+			if ($crawlabledata_printer_name = $this->get_crawlabledata_printer()) {
+
+				global $gd_dataloader_crawlabledataprinter_manager;
+				
+				// From the dataloader name, obtain the FieldProcessor Name
+				$crawlabledata_printer = $gd_dataloader_crawlabledataprinter_manager->get_printer($crawlabledata_printer_name);
+			}
 		}
 
 		// Iterate data, extract into final results

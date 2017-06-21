@@ -31,27 +31,29 @@ class PoP_Engine {
 
 	function get_toplevel_template_id() {
 
-		if (is_home() || is_front_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+
+		if ($vars['global-state']['is-home']/*is_home()*/ || $vars['global-state']['is-front-page']/*is_front_page()*/) {
 
 			return GD_TEMPLATE_TOPLEVEL_HOME;
 		}
-		elseif (is_tag()) {
+		elseif ($vars['global-state']['is-tag']/*is_tag()*/) {
 
 			return GD_TEMPLATE_TOPLEVEL_TAG;
 		}
-		elseif (is_page()) {
+		elseif ($vars['global-state']['is-page']/*is_page()*/) {
 			
 			return GD_TEMPLATE_TOPLEVEL_PAGE;
 		}
-		elseif (is_single()) {
+		elseif ($vars['global-state']['is-single']/*is_single()*/) {
 			
 			return GD_TEMPLATE_TOPLEVEL_SINGLE;
 		}
-		elseif (is_author()) {
+		elseif ($vars['global-state']['is-author']/*is_author()*/) {
 			
 			return GD_TEMPLATE_TOPLEVEL_AUTHOR;
 		}
-		elseif (is_404()) {
+		elseif ($vars['global-state']['is-404']/*is_404()*/) {
 			
 			return GD_TEMPLATE_TOPLEVEL_404;
 		}
@@ -59,7 +61,7 @@ class PoP_Engine {
 		// https://www.mesym.com/en/stories/ attempts to load the "stories" category template
 		// (even though stories is located under category "posts"). When that happens, since
 		// PoP currently doesn't support categories, then simply treat it as a 404
-		elseif (is_category() || is_archive()) {
+		elseif ($vars['global-state']['is-category']/*is_category()*/ || $vars['global-state']['is-archive']/*is_archive()*/) {
 			
 			return GD_TEMPLATE_TOPLEVEL_404;
 		}
@@ -478,6 +480,7 @@ class PoP_Engine {
 
 		$blocks_template_id = array();
 		$blocks_atts = array();
+		$add_crawlable_data = $this->add_crawlable_data();
 
 
 		// TopLevel attributes
@@ -667,7 +670,7 @@ class PoP_Engine {
 				$params = $iohandler->get_params($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts);
 				$target_params[$pagesection_settings_id][$block_settings_id] = $params;
 				// Allow to turn on/off getting the crawlable data (by default no need, FrontendEngine can turn it on)
-				if ($this->add_crawlable_data()) {
+				if ($add_crawlable_data) {
 
 					$crawlable_data = array_merge(
 						$crawlable_data,
@@ -719,7 +722,7 @@ class PoP_Engine {
 
 			// Execute the dataloader for all combined ids
 			$resultset = $dataloader->get_data($dataloader_ids_data_fields);
-			$dataset = $dataloader->get_dataset($formatter, $resultset, $dataloader_ids_data_fields);
+			$dataset = $dataloader->get_dataset($formatter, $resultset, $add_crawlable_data, $dataloader_ids_data_fields);
 
 			// Add the crawlable data
 			$crawlable_data = array_merge(
