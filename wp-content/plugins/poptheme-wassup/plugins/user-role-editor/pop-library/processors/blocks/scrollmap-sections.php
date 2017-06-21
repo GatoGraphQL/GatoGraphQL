@@ -210,7 +210,8 @@ class GD_URE_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templ
 			// Members of the Community
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLLMAP:
 			
-				global $author;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				// If the profile is not a community, then return no users at all (Eg: an Organization opting out from having members)
 				if (gd_ure_is_community($author)) {
 					
@@ -333,7 +334,8 @@ class GD_URE_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templ
 			// Members of the Community
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLLMAP:
 			
-				global $author;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				// If the profile is not a community, then return no users at all (Eg: an Organization opting out from having members)
 				if (!gd_ure_is_community($author)) {
 					

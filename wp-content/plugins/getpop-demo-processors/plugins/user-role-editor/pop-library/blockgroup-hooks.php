@@ -20,7 +20,8 @@ class GetPoPDemo_URE_BlockGroupHooks {
 	function authortop_widget_blocks($blocks) {
 
 		// Add the members only for communities
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		if (gd_ure_is_community($author)) {
 		
 			$blocks[] = GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL;

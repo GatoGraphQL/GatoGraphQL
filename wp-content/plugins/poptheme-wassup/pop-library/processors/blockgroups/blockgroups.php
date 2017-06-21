@@ -211,7 +211,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 				// $blocks = array();
 
 				// // Add the members only for communities
-				// global $author;
+				// $author = $vars['global-state']['author']/*global $author*/;
 				// if (gd_ure_is_community($author)) {
 				
 				// 	$blocks[] = GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL;
@@ -577,7 +577,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			// 	if (apply_filters(POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS, false)) {
 				
 			// 		// Only if it is a community there will be 2 columns: events and members. Otherwise, only events.
-			// 		global $author;
+			// 		$author = $vars['global-state']['author']/*global $author*/;
 			// 		$classes = array(
 			// 			GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL => gd_ure_is_community($author) ? 'col-sm-8 col-sm-pull-4' : 'col-sm-12',
 			// 			GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL => 'col-sm-4 col-sm-push-8',

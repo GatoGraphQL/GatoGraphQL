@@ -107,6 +107,7 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 	}
 	function get_href($template_id, $atts) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR:
@@ -128,7 +129,7 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 		
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
 
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				// Allow URE to add the ContentSource
 				return apply_filters(
@@ -139,7 +140,7 @@ class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processo
 		
 			case GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
 
-				$url = get_tag_link(get_queried_object_id());
+				$url = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 				return GD_TemplateManager_Utils::add_tab($url, POPTHEME_WASSUP_EM_PAGE_PASTEVENTS);
 
 			case GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP:

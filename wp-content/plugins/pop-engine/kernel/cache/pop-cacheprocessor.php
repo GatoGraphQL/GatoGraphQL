@@ -116,12 +116,14 @@ class GD_Template_CacheProcessor {
 
 	function get_cache_filename($template_id) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_TOPLEVEL_PAGE:
 
 				// Each page is an independent configuration
-				global $post, $gd_dataquery_manager;
+				$post = $vars['global-state']['post']/*global $post*/;
+				global $gd_dataquery_manager;
 				// We add the page path to help understand what file it is, in addition to the ID (to make sure to make the configuration unique to that page)
 				$filename = 'page_'.str_replace(array('-', '/'), '', GD_TemplateManager_Utils::get_page_path($post->ID)).$post->ID;
 
@@ -164,7 +166,7 @@ class GD_Template_CacheProcessor {
 			case GD_TEMPLATE_TOPLEVEL_AUTHOR:
 
 				// Author: depends on its role
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$filename = 'author_'.str_replace('-', '', gd_ure_getuserrole($author));
 				return $this->add_vars($filename);
 
@@ -173,7 +175,7 @@ class GD_Template_CacheProcessor {
 				// Single depends on its post_type and category
 				// Past Event and (Upcoming) Event will be different because they have a different (main) category artificially associated to them
 				// Project/Event volunteering: 
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				$filename = 'single_'.$post->post_type;
 				$filename = $this->add_categories($filename, $post);
 				return $this->add_vars($filename);

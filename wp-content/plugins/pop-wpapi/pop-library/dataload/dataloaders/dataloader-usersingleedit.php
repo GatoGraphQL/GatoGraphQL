@@ -17,7 +17,8 @@ class GD_DataLoader_UserSingleEdit extends GD_DataLoader_User {
 	
 	function get_data_ids($vars = array(), $is_main_query = false) {
 	
-		return array(get_current_user_id());
+		$vars = GD_TemplateManager_Utils::get_vars();
+		return array($vars['global-state']['current-user-id']/*get_current_user_id()*/);
 	}
 }
 	

@@ -7,10 +7,10 @@
 
 class PoPTheme_Wassup_Engine_Utils {
 
-	function __construct() {
+	// function __construct() {
 
-		add_filter('GD_TemplateManager_Utils:get_vars', array($this, 'get_vars'));
-	}
+	// 	add_filter('GD_TemplateManager_Utils:get_vars', array($this, 'get_vars'));
+	// }
 
 	public static function get_vars($vars) {
 
@@ -36,4 +36,5 @@ class PoPTheme_Wassup_Engine_Utils {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoPTheme_Wassup_Engine_Utils();
+// new PoPTheme_Wassup_Engine_Utils();
+add_filter('GD_TemplateManager_Utils:get_vars', array('PoPTheme_Wassup_Engine_Utils', 'get_vars'));

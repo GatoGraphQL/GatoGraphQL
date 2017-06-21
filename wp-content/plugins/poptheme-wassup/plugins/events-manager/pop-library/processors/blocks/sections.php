@@ -603,7 +603,8 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL:
 
 				$ret = GD_Template_Processor_CustomSectionBlocksUtils::get_tag_dataloadsource($template_id);
-				// $ret = get_tag_link(get_queried_object_id());
+				// $vars = GD_TemplateManager_Utils::get_vars();
+				// $ret = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 				break;
 
 			default:
@@ -861,8 +862,9 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 
 		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
 		
+		$vars = GD_TemplateManager_Utils::get_vars();
 		$myevents_query_args = array(
-			'author' => get_current_user_id(),
+			'author' => $vars['global-state']['current-user-id']/*get_current_user_id()*/,
 			'status' => 'all' // Any post type
 		);
 

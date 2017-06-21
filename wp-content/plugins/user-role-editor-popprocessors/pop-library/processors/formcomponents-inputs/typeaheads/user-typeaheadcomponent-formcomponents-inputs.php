@@ -62,7 +62,8 @@ class GD_URE_Template_Processor_UserTypeaheadComponentFormComponentInputs extend
 
 			case GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_COMMUNITYUSERS:
 
-				global $author;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				return GD_TemplateManager_Utils::add_tab($url, POP_WPAPI_PAGE_ALLUSERS);
 

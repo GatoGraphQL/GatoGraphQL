@@ -31,12 +31,13 @@ class GD_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProcesso
 
 	function process($checkpoint) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($checkpoint) {
 
 			case GD_DATALOAD_CHECKPOINT_USERLOGGEDIN:
 
 				// Check if the user is logged in
-				if (!is_user_logged_in()) {
+				if (!$vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
 					return new WP_Error('usernotloggedin');
 				}
@@ -45,7 +46,7 @@ class GD_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProcesso
 			case GD_DATALOAD_CHECKPOINT_USERLOGGEDIN_SUBMIT:
 
 				// Check if the user is logged in
-				if (!doing_post() || !is_user_logged_in()) {
+				if (!doing_post() || !$vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
 					return new WP_Error('usernotloggedin');
 				}
@@ -54,7 +55,7 @@ class GD_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProcesso
 			case GD_DATALOAD_CHECKPOINT_USERNOTLOGGEDIN_SUBMIT:
 
 				// Check if the user is not logged in
-				if (!doing_post() || is_user_logged_in()) {
+				if (!doing_post() || $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
 					return new WP_Error('userloggedin');
 				}	

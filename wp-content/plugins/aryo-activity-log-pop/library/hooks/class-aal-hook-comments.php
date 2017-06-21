@@ -11,7 +11,8 @@ class AAL_PoP_Hook_Comments extends AAL_Hook_Base {
 	public function spam_comment($comment_id) {
 		
 		// Enable if the current logged in user is the System Notification's defined user
-		if (get_current_user_id() != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if ($vars['global-state']['current-user-id']/*get_current_user_id()*/ != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
 			return;
 		}
 

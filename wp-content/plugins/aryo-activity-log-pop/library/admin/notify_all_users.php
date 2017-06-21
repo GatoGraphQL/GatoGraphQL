@@ -17,7 +17,8 @@ add_action('admin_init', 'aal_pop_notifyallusers_add_meta_box');
 function aal_pop_notifyallusers_add_meta_box() {
 
 	// Enable if the current logged in user is the System Notification's defined user
-	if (get_current_user_id() != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['current-user-id']/*get_current_user_id()*/ != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
 		return;
 	}
 
@@ -39,7 +40,8 @@ function aal_pop_notifyallusers_add_meta_box() {
 function aal_pop_notifyallusers_meta_box_content() {
 
 	// Enable if the current logged in user is the System Notification's defined user
-	if (get_current_user_id() != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['current-user-id']/*get_current_user_id()*/ != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
 		return;
 	}
 	
@@ -64,7 +66,8 @@ add_action('save_post', 'aal_pop_notifyallusers_meta_box_save');
 function aal_pop_notifyallusers_meta_box_save($post_id) {
 
 	// Enable if the current logged in user is the System Notification's defined user
-	if (get_current_user_id() != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['current-user-id']/*get_current_user_id()*/ != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
 		return;
 	}
 

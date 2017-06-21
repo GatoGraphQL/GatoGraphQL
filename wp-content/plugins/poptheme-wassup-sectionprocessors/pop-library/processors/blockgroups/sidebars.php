@@ -122,7 +122,7 @@ class PoPSP_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_
 			// case GD_TEMPLATE_BLOCKGROUP_AUTHORLOCATIONPOSTS_SIDEBAR:
 			// case GD_TEMPLATE_BLOCKGROUP_AUTHORSTORIES_SIDEBAR:
 
-			// 	global $author;
+			// 	$author = $vars['global-state']['author']/*global $author*/;
 			// 	$filters = array(
 			// 		GD_TEMPLATE_BLOCKGROUP_AUTHORANNOUNCEMENTS_SIDEBAR => GD_TEMPLATE_BLOCK_AUTHORANNOUNCEMENTS_SIDEBAR,
 			// 		GD_TEMPLATE_BLOCKGROUP_AUTHORDISCUSSIONS_SIDEBAR => GD_TEMPLATE_BLOCK_AUTHORDISCUSSIONS_SIDEBAR,

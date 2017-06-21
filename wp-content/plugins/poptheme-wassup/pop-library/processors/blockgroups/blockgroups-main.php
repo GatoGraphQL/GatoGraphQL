@@ -40,7 +40,7 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 				case GD_TEMPLATE_BLOCKGROUP_SINGLEPOST:
 
-					global $post;
+					$post = $vars['global-state']['post']/*global $post*/;
 					if (get_post_status($post->ID) == 'publish')  {
 
 						// Comment Leo 09/11/2015: No need to add this information for the Upvote/Downvote, it's too much
@@ -278,6 +278,7 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 	function get_title($template_id) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCKGROUP_404:
@@ -286,14 +287,14 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 			case GD_TEMPLATE_BLOCKGROUP_SINGLEPOST:
 				
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				return get_the_title($post->ID);
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHORSUMMARY:
 
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				return get_the_author_meta('display_name', $author);
 		
 			case GD_TEMPLATE_BLOCKGROUP_TAG:

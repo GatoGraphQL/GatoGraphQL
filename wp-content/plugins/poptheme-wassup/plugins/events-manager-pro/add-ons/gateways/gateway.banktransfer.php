@@ -27,7 +27,9 @@ if (class_exists("EM_Gateway_Offline")) {
 		}
 		
 		function em_wp_localize_script($vars){
-			if( is_user_logged_in() && get_option('dbem_rsvp_enabled') ){
+			
+			$main_vars = GD_TemplateManager_Utils::get_vars();
+			if( $main_vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/ && get_option('dbem_rsvp_enabled') ){
 				$vars[$this->gateway . '_confirm'] = __('Be aware that by approving a booking awaiting payment, a full payment transaction will be registered against this booking, meaning that it will be considered as paid.','dbem');
 			}
 			return $vars;

@@ -11,13 +11,21 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 function has_role($role, $user_id = null) {
 
-	if (!$user_id && is_user_logged_in()) {
-	
-		$user_id = get_current_user_id();
-	}
+	// Comment Leo 20/06/2017: function has_role is called by gd_ure_is_organization, called by PoP_URE_Engine_Utils::get_vars
+	// So here it can produce an indefinite loop, whenever $user_is is null
+	// For that, we ask that first, and only in that case we obtain $vars
 	if (!$user_id) {
 	
-		return false;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
+	
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
+		}
+		
+		if (!$user_id) {
+
+			return false;
+		}
 	}
 	
 	$roles = get_user_roles($user_id);

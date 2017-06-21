@@ -22,8 +22,9 @@ function gd_em_cap_can_manage($event, $owner_capability = false, $admin_capabili
 	} 
 	
 	// $authors = apply_filters('gd_em_event_authors', array($event->post_author), $event);
+	$vars = GD_TemplateManager_Utils::get_vars();
 	$authors = array_map('gd_get_the_id', get_coauthors($event->post_id));
-	$is_author = ( (in_array(get_current_user_id(), $authors)) || (!empty($user) && in_array($user->ID, $authors)) );
+	$is_author = ( (in_array($vars['global-state']['current-user-id']/*get_current_user_id()*/, $authors)) || (!empty($user) && in_array($user->ID, $authors)) );
 
 	//now check capability
 	$can_manage = false;

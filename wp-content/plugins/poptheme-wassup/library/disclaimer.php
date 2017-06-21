@@ -11,7 +11,8 @@ define ('GD_DISCLAIMER_NONCE', 'gd_disclaimer');
 function gd_get_disclaimer_url($post_id = null) {
 
 	if (!$post_id) { 
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		$post_id = $post->ID;
 	}
 	return GD_MetaManager::get_post_meta( $post_id, GD_METAKEY_POST_DISCLAIMERURL, true);
@@ -20,7 +21,8 @@ function gd_get_disclaimer_url($post_id = null) {
 add_filter( 'the_content', 'gd_show_disclaimer', 10000);
 function gd_show_disclaimer($content) {
 
-	if (is_single()) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['is-single']/*is_single()*/) {
 
 		if ($disclaimer_url = gd_get_disclaimer_url()) {
 

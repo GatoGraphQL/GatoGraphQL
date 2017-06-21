@@ -15,6 +15,7 @@ class URE_AAL_PoP_DataLoad_FieldProcessor_Notifications_Hook extends GD_DataLoad
 	function get_value($resultitem, $field, $fieldprocessor) {
 
 		$notification = $resultitem;
+		$vars = GD_TemplateManager_Utils::get_vars();
 
 		switch ($field) {
 
@@ -150,7 +151,7 @@ class URE_AAL_PoP_DataLoad_FieldProcessor_Notifications_Hook extends GD_DataLoad
 							case URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP:
 
 								// Change the message depending if the logged in user is the object of this action
-								$recipient = (get_current_user_id() == $notification->object_id) ? __('your', 'ure-popprocessors') : sprintf('<strong>%s</strong>’s', get_the_author_meta('display_name', $notification->object_id));
+								$recipient = ($vars['global-state']['current-user-id']/*get_current_user_id()*/ == $notification->object_id) ? __('your', 'ure-popprocessors') : sprintf('<strong>%s</strong>’s', get_the_author_meta('display_name', $notification->object_id));
 								return sprintf(
 									__('<strong>%s</strong> has updated %s membership settings:', 'ure-popprocessors'),
 									get_the_author_meta('display_name', $notification->user_id),

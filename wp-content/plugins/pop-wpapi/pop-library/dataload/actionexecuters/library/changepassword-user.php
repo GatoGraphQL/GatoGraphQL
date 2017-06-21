@@ -43,7 +43,8 @@ class GD_ChangePassword_User {
 
 		global $gd_template_processor_manager, $allowedposttags;
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		$form_data = array(
 			'user_id' => $user_id,
 			'current_password' => $gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_CUU_CURRENTPASSWORD)->get_value(GD_TEMPLATE_FORMCOMPONENT_CUU_CURRENTPASSWORD, $atts),

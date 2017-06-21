@@ -13,13 +13,6 @@ class GD_AddComment {
 			$errors[] = __('We don\'t know what post the comment is for. Please reload the page and try again.', 'pop-wpapi');
 		}
 
-		// if (!is_user_logged_in()) {
-		// 	$errors[] = sprintf(
-		// 		__('Please %s to add a comment.', 'pop-wpapi'),
-		// 		gd_get_login_html()
-		// 	);
-		// }
-
 		if (empty($form_data['comment'])) {
 			$errors[] = __('The comment is empty.', 'pop-wpapi');
 		}
@@ -49,7 +42,8 @@ class GD_AddComment {
 
 	protected function get_comment_data($form_data) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		$author_url = gd_users_author_url($user_id);
 		$comment_data = array(
 			'user_id' => $user_id,

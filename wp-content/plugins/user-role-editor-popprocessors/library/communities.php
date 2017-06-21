@@ -110,7 +110,8 @@ function gd_ure_get_community_metavalue_contributecontent($user_id) {
 
 function gd_ure_get_community_metavalue_currentcommunity($value) {
 
-	$community = get_current_user_id();
+	$vars = GD_TemplateManager_Utils::get_vars();
+	$community = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 	return gd_ure_get_community_metavalue($community, $value);
 }
 
@@ -214,7 +215,8 @@ function gd_ure_get_communities_status_active_filter($value) {
 
 function gd_ure_community_membershipstatus_filterbycurrentcommunity($values) {
 
-	return gd_ure_community_membershipstatus_filterbycommunity($values, get_current_user_id());
+	$vars = GD_TemplateManager_Utils::get_vars();
+	return gd_ure_community_membershipstatus_filterbycommunity($values, $vars['global-state']['current-user-id']/*get_current_user_id()*/);
 }
 
 function gd_ure_community_membershipstatus_filterbycommunity($values, $community) {
@@ -246,7 +248,8 @@ function gd_ure_community_membershipstatus_filterbycommunity($values, $community
 // 	$status = $parts[1]; // Status can be the privilege or tag
 
 // 	// Filter privileges for this community: the logged in user
-// 	$community = get_current_user_id();
+	// $vars = GD_TemplateManager_Utils::get_vars();
+// 	$community = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 
 // 	if ($community == $usercommunity) {
 // 		return $status;

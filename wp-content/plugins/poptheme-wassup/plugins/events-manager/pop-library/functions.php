@@ -64,9 +64,10 @@ function gd_em_addrelatedpost_buttons($buttons) {
 add_filter('GD_TemplateManager_Utils:multiple_open', 'gd_em_multipleopenurls');
 function gd_em_multipleopenurls($multiple_open) {
 
-	if (is_page()) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['is-page']/*is_page()*/) {
 
-		global $post;
+		$post = $vars['global-state']['post']/*global $post*/;
 		$create_pages = array(
 			POPTHEME_WASSUP_EM_PAGE_ADDEVENT,
 			POPTHEME_WASSUP_EM_PAGE_ADDEVENTLINK,

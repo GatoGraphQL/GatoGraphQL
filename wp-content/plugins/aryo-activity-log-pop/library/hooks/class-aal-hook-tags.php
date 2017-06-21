@@ -26,12 +26,13 @@ class AAL_PoP_Hook_Tags extends AAL_Hook_Base {
 
 	public function subscribedtounsubscribedfrom_tag($tag_id, $action) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		$tag = get_tag($tag_id);
 		aal_insert_log( array(
 			'action'      => $action,
 			'object_type' => 'Taxonomy',
 			'object_subtype' => 'Tag',
-			'user_id'     => get_current_user_id(),
+			'user_id'     => $vars['global-state']['current-user-id']/*get_current_user_id()*/,
 			'object_id'   => $tag_id,
 			'object_name' => PoP_TagUtils::get_tag_symbol().$tag->name,
 		) );

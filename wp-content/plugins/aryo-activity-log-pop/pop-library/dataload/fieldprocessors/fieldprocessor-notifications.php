@@ -23,6 +23,7 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 		}	
 	
 		$notification = $resultitem;	
+		$vars = GD_TemplateManager_Utils::get_vars();
 					
 		switch ($field) {
 		
@@ -289,7 +290,7 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 							case AAL_POP_ACTION_USER_UNFOLLOWSUSER:
 
 								// If the user is the object of this action, then point the link to the user who is doing the action
-								if (get_current_user_id() == $notification->object_id) {
+								if ($vars['global-state']['current-user-id']/*get_current_user_id()*/ == $notification->object_id) {
 									$value = get_author_posts_url($notification->user_id);
 								}
 								else {
@@ -392,7 +393,7 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 
 									// If the user has been tagged in this post, this action has higher priority than creating a post, then show that message
 									$taggedusers_ids = GD_MetaManager::get_post_meta($notification->object_id, GD_METAKEY_POST_TAGGEDUSERS);
-									if (in_array(get_current_user_id(), $taggedusers_ids)) {
+									if (in_array($vars['global-state']['current-user-id']/*get_current_user_id()*/, $taggedusers_ids)) {
 
 										$messages = array(
 											AAL_POP_ACTION_POST_CREATEDPOST => __('<strong>%1$s</strong> mentioned you in %2$s <strong>%3$s</strong>', 'aal-pop'),
@@ -410,7 +411,7 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 
 										// If the post has #hashtags the user is subscribed to, then add it as part of the message (the notification may appear only because of the #hashtag)
 										$post_tags = wp_get_post_tags($notification->object_id, array('fields' => 'ids'));
-										$user_hashtags = GD_MetaManager::get_user_meta(get_current_user_id(), GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
+										$user_hashtags = GD_MetaManager::get_user_meta($vars['global-state']['current-user-id']/*get_current_user_id()*/, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
 										if ($intersected_tags = array_intersect($post_tags, $user_hashtags)) {
 
 											$tags = array();
@@ -510,7 +511,7 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 								);
 								
 								// Change the message depending if the logged in user is the object of this action
-								$recipient = (get_current_user_id() == $notification->object_id) ? __('you', 'aal-pop') : sprintf('<strong>%s</strong>', get_the_author_meta('display_name', $notification->object_id));
+								$recipient = ($vars['global-state']['current-user-id']/*get_current_user_id()*/ == $notification->object_id) ? __('you', 'aal-pop') : sprintf('<strong>%s</strong>', get_the_author_meta('display_name', $notification->object_id));
 								$value = sprintf(
 									$messages[$notification->action],
 									get_the_author_meta('display_name', $notification->user_id),
@@ -617,14 +618,14 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 								if ($comment->comment_parent) {
 
 									$comment_parent = get_comment($comment->comment_parent);
-									if ($comment_parent->user_id == get_current_user_id()) {
+									if ($comment_parent->user_id == $vars['global-state']['current-user-id']/*get_current_user_id()*/) {
 										$message = __('<strong>%1$s</strong> replied to your comment in %2$s <strong>%3$s</strong>', 'aal-pop');
 									}
 								}
 
 								// If the user has been tagged in this comment, this action has higher priority than commenting, then show that message
 								$taggedusers_ids = GD_MetaManager::get_comment_meta($notification->object_id, GD_METAKEY_COMMENT_TAGGEDUSERS);
-								if (in_array(get_current_user_id(), $taggedusers_ids)) {
+								if (in_array($vars['global-state']['current-user-id']/*get_current_user_id()*/, $taggedusers_ids)) {
 
 									$message = __('<strong>%1$s</strong> mentioned you in a comment in %2$s <strong>%3$s</strong>', 'aal-pop');
 								}

@@ -9,9 +9,10 @@ class GD_NotificationMarkAsReadUnread {
 
 	protected function get_form_data($atts) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		$form_data = array(
 			'histid' => $_REQUEST[$this->get_request_key()],
-			'user_id' => get_current_user_id(),
+			'user_id' => $vars['global-state']['current-user-id']/*get_current_user_id()*/,
 		);
 		
 		return $form_data;

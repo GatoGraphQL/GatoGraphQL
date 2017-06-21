@@ -11,7 +11,8 @@ define ('GD_WSL_USER_ATTRIBUTE', 'wsluser');
 function get_wsl_pop_provider($user_id = null) {
 
 	if (is_null($user_id)) {
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 	}
 
 	return get_user_meta($user_id, 'wsl_current_provider', true);

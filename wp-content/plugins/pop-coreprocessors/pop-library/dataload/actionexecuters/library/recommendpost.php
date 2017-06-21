@@ -13,7 +13,8 @@ class GD_RecommendPost extends GD_RecommendUnrecommendPost {
 
 		if (!$errors) {
 
-			$user_id = get_current_user_id();
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 			$target_id = $form_data['target_id'];
 
 			// Check that the logged in user has not already recommended this post
@@ -46,7 +47,8 @@ class GD_RecommendPost extends GD_RecommendUnrecommendPost {
 
 	protected function update($form_data) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		$target_id = $form_data['target_id'];
 
 		// Update value

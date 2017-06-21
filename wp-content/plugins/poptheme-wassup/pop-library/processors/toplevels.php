@@ -357,11 +357,12 @@ class GD_Template_Processor_CustomTopLevels extends GD_Template_Processor_TopLev
 
 	protected function get_user_info($template_id, $atts) {
 			
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 		
 			case GD_TEMPLATE_TOPLEVEL_PAGE:
 
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				switch ($post->ID) {
 
 					case POP_WPAPI_PAGE_LOGIN:
@@ -379,11 +380,12 @@ class GD_Template_Processor_CustomTopLevels extends GD_Template_Processor_TopLev
 
 	function get_redirect_url($template_id) {
 	
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 		
 			case GD_TEMPLATE_TOPLEVEL_PAGE:
 
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				switch ($post->ID) {
 
 					case POP_WPAPI_PAGE_EDITPROFILE:
@@ -397,8 +399,8 @@ class GD_Template_Processor_CustomTopLevels extends GD_Template_Processor_TopLev
 					case POP_COREPROCESSORS_PAGE_MYPROFILE:
 						
 						// If logged in, redirect to user Profile
-						if (is_user_logged_in()) {
-							return get_author_posts_url(get_current_user_id());
+						if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
+							return get_author_posts_url($vars['global-state']['current-user-id']/*get_current_user_id()*/);
 						}
 						break;
 				}	

@@ -24,12 +24,13 @@ class GD_Template_Processor_LatestCounts extends GD_Template_Processor_LatestCou
 
 	function get_classes($template_id, $atts) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 			
 			case GD_TEMPLATE_LATESTCOUNT_TAG_ALLCONTENT:
 				
 				return array(
-					'tag'.get_queried_object_id()
+					'tag'.$vars['global-state']['queried-object-id']/*get_queried_object_id()*/
 				);
 			
 			case GD_TEMPLATE_LATESTCOUNT_ALLCONTENT:
@@ -39,7 +40,7 @@ class GD_Template_Processor_LatestCounts extends GD_Template_Processor_LatestCou
 			
 			case GD_TEMPLATE_LATESTCOUNT_AUTHOR_ALLCONTENT:
 				
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$ret = array(
 					'author'.$author
 				);
@@ -54,7 +55,7 @@ class GD_Template_Processor_LatestCounts extends GD_Template_Processor_LatestCou
 			
 			case GD_TEMPLATE_LATESTCOUNT_SINGLE_ALLCONTENT:
 				
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				$ret = array(
 					'single'.$post->ID
 				);

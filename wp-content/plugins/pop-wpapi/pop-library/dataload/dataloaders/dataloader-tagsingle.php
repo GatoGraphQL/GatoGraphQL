@@ -22,7 +22,8 @@ class GD_DataLoader_TagSingle extends GD_DataLoader {
 	
 	function get_data_ids($vars = array(), $is_main_query = false) {
 	
-		return array(get_queried_object_id());
+		$vars = GD_TemplateManager_Utils::get_vars();
+		return array($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 	}
 
 	function get_crawlabledata_printer() {
@@ -35,7 +36,8 @@ class GD_DataLoader_TagSingle extends GD_DataLoader {
      */
 	function execute_get_data($ids) {
 	
-		return array(get_queried_object());
+		$vars = GD_TemplateManager_Utils::get_vars();
+		return array($vars['global-state']['queried-object']/*get_queried_object()*/);
 	}
 	
 	function get_execution_priority() {

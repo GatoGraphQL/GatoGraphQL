@@ -203,11 +203,12 @@ class GD_Template_Processor_CustomSubMenus extends GD_Template_Processor_SubMenu
 	function get_blockunititem_url($template_id, $blockunit) {
 
 		global $gd_template_settingsmanager;
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_SUBMENU_AUTHOR:
 
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				$page_id = $gd_template_settingsmanager->get_blockgroup_page($blockunit, GD_SETTINGS_HIERARCHY_AUTHOR);
 
@@ -219,7 +220,7 @@ class GD_Template_Processor_CustomSubMenus extends GD_Template_Processor_SubMenu
 
 			case GD_TEMPLATE_SUBMENU_TAG:
 
-				$url = get_tag_link(get_queried_object_id());
+				$url = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 				$page_id = $gd_template_settingsmanager->get_blockgroup_page($blockunit, GD_SETTINGS_HIERARCHY_TAG);
 
 				$url = GD_TemplateManager_Utils::add_tab($url, $page_id);
@@ -229,7 +230,7 @@ class GD_Template_Processor_CustomSubMenus extends GD_Template_Processor_SubMenu
 
 			case GD_TEMPLATE_SUBMENU_SINGLE:
 
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				$url = get_permalink($post->ID);
 				$page_id = $gd_template_settingsmanager->get_blockgroup_page($blockunit, GD_SETTINGS_HIERARCHY_SINGLE);
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);

@@ -53,8 +53,9 @@ class GD_URE_Dataload_UserCheckpointProcessor extends GD_Dataload_CheckpointProc
 			case GD_URE_DATALOAD_CHECKPOINT_EDITINGCOMMUNITYMEMBER:
 
 				// Validate the user being edited is member of the community
+				$vars = GD_TemplateManager_Utils::get_vars();
 				$user_id = $_REQUEST['uid'];
-				$community = get_current_user_id();
+				$community = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 				$status = GD_MetaManager::get_user_meta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 				$community_status = gd_ure_find_community_metavalues($community, $status);
 

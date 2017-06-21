@@ -28,7 +28,8 @@ add_filter('GD_Template_Processor_PageTabPageSections:get_extra_intercept_urls:a
 add_filter('GD_Template_Processor_TabPanePageSections:get_extra_intercept_urls:author', 'gd_ure_add_source_param_pagesections');
 function gd_ure_add_source_param_pagesections($url) {
 
-	global $author;
+	$vars = GD_TemplateManager_Utils::get_vars();
+	$author = $vars['global-state']['author']/*global $author*/;
 	return gd_ure_add_source_param($url, $author);
 }
 

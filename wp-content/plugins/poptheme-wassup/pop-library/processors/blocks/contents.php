@@ -36,7 +36,8 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 			case GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT:
 
-				global $author;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				return sprintf(
 					'<p class="text-center"><a href="%s">%s</a></p>',
@@ -50,12 +51,13 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 	
 	function get_title($template_id) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_AUTHOR_CONTENT:
 			case GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT:
 
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				return get_the_author_meta('display_name', $author);
 
 			// case GD_TEMPLATE_BLOCK_TAG_CONTENT:
@@ -65,7 +67,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
 
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				return get_the_title($post->ID);
 
 			case GD_TEMPLATE_BLOCK_POSTHEADER:
@@ -113,13 +115,14 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 		$ret = parent::get_block_inner_templates($template_id);
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT:
 			case GD_TEMPLATE_BLOCK_AUTHOR_CONTENT:
 
 				// Add the Sidebar on the top
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				if (gd_ure_is_organization($author)) {
 
 					$ret[] = GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION;
@@ -200,6 +203,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 	function init_atts($template_id, &$atts) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_TAG_CONTENT:
@@ -221,7 +225,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				$this->append_att($template_id, $atts, 'class', 'block-single-content');
 
 				// Also append the post_status, so we can hide the bottomsidebar for draft posts
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				$this->append_att($template_id, $atts, 'runtime-class', $post->post_type.'-'.$post->ID);
 				$this->append_att($template_id, $atts, 'runtime-class', get_post_status($post->ID));
 				break;
@@ -254,25 +258,26 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 		global $gd_template_settingsmanager;
 		
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_AUTHOR_CONTENT:
 			case GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT:
 
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR);
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);
 
 			case GD_TEMPLATE_BLOCK_TAG_CONTENT:
 
-				$url = get_tag_link(get_queried_object_id());
+				$url = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 				$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG);
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				$url = get_permalink($post->ID);
 				$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_SINGLE);
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);
@@ -280,7 +285,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
 
 				// Needed to be able to Share the page (eg: Share on Twitter on https://getpop.org/en/documentation/modularity/)
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				return get_permalink($post->ID);
 		}
 	

@@ -24,6 +24,7 @@ class GD_DataLoader_CommentList extends GD_DataLoader_List {
 	
 		$query = parent::get_query($vars);
 
+		$main_vars = GD_TemplateManager_Utils::get_vars();
 		$paged = $vars[GD_URLPARAM_PAGED];
 		$limit = $vars[GD_URLPARAM_LIMIT];
 
@@ -48,7 +49,7 @@ class GD_DataLoader_CommentList extends GD_DataLoader_List {
 			$query['number'] = $limit;
 		}
 
-		global $post;
+		$post = $main_vars['global-state']['post']/*global $post*/;
 		$query['status'] = 'approve';
 		$query['type'] = 'comment'; // Only comments, no trackbacks or pingbacks
 		$query['post_id'] = $vars[GD_URLPARAM_POSTID];
@@ -82,8 +83,6 @@ class GD_DataLoader_CommentList extends GD_DataLoader_List {
      */
 	function execute_get_data($ids) {
 	
-		// global $post;
-		// return get_comments(array('status' => 'approve', 'post_id' => $post->ID));
 		$ret = array();
 		foreach ($ids as $id) {
 			$ret[] = get_comment($id);

@@ -652,10 +652,10 @@ class GD_Template_Processor_CustomTabPanePageSections extends GD_Template_Proces
 				
 			case GD_TEMPLATE_PAGESECTION_NAVIGATOR:
 
-				if (is_page()) {
+				if ($vars['global-state']['is-page']/*is_page()*/) {
 					PoPTheme_Wassup_PageSectionSettingsUtils::add_page_blockunits($ret, $template_id);
 				}
-				elseif (is_tag()) {
+				elseif ($vars['global-state']['is-tag']/*is_tag()*/) {
 					PoPTheme_Wassup_PageSectionSettingsUtils::add_tag_blockunits($ret, $template_id);
 				}
 				break;

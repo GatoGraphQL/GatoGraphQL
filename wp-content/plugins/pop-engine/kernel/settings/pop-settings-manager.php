@@ -31,21 +31,22 @@ class GD_Template_SettingsManager {
 	protected function get_hierarchy($hierarchy = null) {
 
 		// Check the Wordpress hierarchy and return the corresponding hierarchy
+		$vars = GD_TemplateManager_Utils::get_vars();
 		if (!$hierarchy) {
 			
-			if (is_page()) {
+			if ($vars['global-state']['is-page']/*is_page()*/) {
 				$hierarchy = GD_SETTINGS_HIERARCHY_PAGE;
 			}
-			elseif (is_home() || is_front_page()) {
+			elseif ($vars['global-state']['is-home']/*is_home()*/ || $vars['global-state']['is-front-page']/*is_front_page()*/) {
 				$hierarchy = GD_SETTINGS_HIERARCHY_HOME;
 			}
-			elseif (is_tag()) {
+			elseif ($vars['global-state']['is-tag']/*is_tag()*/) {
 				$hierarchy = GD_SETTINGS_HIERARCHY_TAG;
 			}
-			elseif (is_author()) {
+			elseif ($vars['global-state']['is-author']/*is_author()*/) {
 				$hierarchy = GD_SETTINGS_HIERARCHY_AUTHOR;
 			}
-			elseif (is_single()) {
+			elseif ($vars['global-state']['is-single']/*is_single()*/) {
 				$hierarchy = GD_SETTINGS_HIERARCHY_SINGLE;
 			}
 		}
@@ -121,15 +122,16 @@ class GD_Template_SettingsManager {
 
 	function get_page_block($page_id = null, $hierarchy = null, $format = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
-		elseif (!$page_id && (is_home() || is_front_page())) {
+		elseif (!$page_id && ($vars['global-state']['is-home']/*is_home()*/ || $vars['global-state']['is-front-page']/*is_front_page()*/)) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
 		}
-		elseif (!$page_id && is_tag()) {
+		elseif (!$page_id && $vars['global-state']['is-tag']/*is_tag()*/) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 		}
 		$hierarchy = $this->get_hierarchy($hierarchy);
@@ -156,15 +158,16 @@ class GD_Template_SettingsManager {
 
 	function get_page_blockgroup($page_id = null, $hierarchy = null, $format = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
-		elseif (is_home() || is_front_page()) {
+		elseif ($vars['global-state']['is-home']/*is_home()*/ || $vars['global-state']['is-front-page']/*is_front_page()*/) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
 		}
-		elseif (!$page_id && is_tag()) {
+		elseif (!$page_id && $vars['global-state']['is-tag']/*is_tag()*/) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 		}
 		$hierarchy = $this->get_hierarchy($hierarchy);
@@ -190,9 +193,10 @@ class GD_Template_SettingsManager {
 
 	function get_page_action($page_id = null, $hierarchy = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 			
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
 
@@ -210,9 +214,10 @@ class GD_Template_SettingsManager {
 
 	function get_page_checkpoints($page_id = null, $hierarchy = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 			
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
 
@@ -237,9 +242,10 @@ class GD_Template_SettingsManager {
 
 	function silent_document($page_id = null, $hierarchy = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 			
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
 
@@ -264,9 +270,10 @@ class GD_Template_SettingsManager {
 
 	function is_appshell($page_id = null, $hierarchy = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 			
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
 
@@ -291,9 +298,10 @@ class GD_Template_SettingsManager {
 
 	function is_functional($page_id = null, $hierarchy = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 			
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
 
@@ -318,9 +326,10 @@ class GD_Template_SettingsManager {
 
 	function needs_target_id($page_id = null, $hierarchy = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 			
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
 
@@ -345,9 +354,10 @@ class GD_Template_SettingsManager {
 
 	function store_local($page_id = null, $hierarchy = null) {
 
-		if (!$page_id && is_page()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 			
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
 

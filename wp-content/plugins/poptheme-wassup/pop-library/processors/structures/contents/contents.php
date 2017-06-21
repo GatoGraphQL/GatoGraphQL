@@ -76,7 +76,8 @@ class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase 
 		);
 		if (in_array($template_id, $hookable)) {
 
-			global $post;
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$post = $vars['global-state']['post']/*global $post*/;
 			if ($template_id == GD_TEMPLATE_CONTENT_SINGLE && POPTHEME_WASSUP_CAT_WEBPOSTLINKS && has_category(POPTHEME_WASSUP_CAT_WEBPOSTLINKS, $post)) {
 
 				$inner = GD_TEMPLATE_CONTENTINNER_LINKSINGLE;

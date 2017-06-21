@@ -54,9 +54,10 @@ function gd_custom_addrelatedpost_buttons($buttons) {
 add_filter('GD_TemplateManager_Utils:multiple_open', 'gd_custom_multipleopenurls');
 function gd_custom_multipleopenurls($multiple_open) {
 
-	if (is_page()) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['is-page']/*is_page()*/) {
 
-		global $post;
+		$post = $vars['global-state']['post']/*global $post*/;
 		$create_pages = array(
 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOST,
 			POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ADDLOCATIONPOSTLINK,

@@ -87,12 +87,13 @@ class GD_Filter_Manager {
 		// Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
 		// including both the tag and the already existing taxonomy filtering (eg: categories)
 		// So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
-		if ((is_tag() || $query['tag']) && $query['tax_query']) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (($vars['global-state']['is-tag']/*is_tag()*/ || $query['tag']) && $query['tax_query']) {
 
 			// Create the tag item in the taxonomy
 			$tag_slug = '';
-			if (is_tag()) {
-				$tag = get_queried_object();
+			if ($vars['global-state']['is-tag']/*is_tag()*/) {
+				$tag = $vars['global-state']['queried-object']/*get_queried_object()*/;
 			    $tag_slug = $tag->slug;
 			}
 			else {

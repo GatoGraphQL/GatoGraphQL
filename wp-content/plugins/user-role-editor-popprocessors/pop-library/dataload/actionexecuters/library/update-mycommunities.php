@@ -23,7 +23,8 @@ class GD_Update_MyCommunities {
 	protected function get_form_data($atts) {
 
 		global $gd_template_processor_manager;		
-		$user_id = is_user_logged_in() ? get_current_user_id() : '';
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/ ? $vars['global-state']['current-user-id']/*get_current_user_id()*/ : '';
 		$form_data = array(
 			'user_id' => $user_id,
 			'communities' => $gd_template_processor_manager->get_processor(GD_URE_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES)->get_value(GD_URE_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES, $atts),

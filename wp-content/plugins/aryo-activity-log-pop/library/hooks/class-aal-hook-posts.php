@@ -213,7 +213,8 @@ class AAL_PoP_Hook_Posts extends AAL_Hook_Base {
 	public function admin_approval_post($new_status, $old_status, $post) {
 		
 		// Enable if the current logged in user is the System Notification's defined user
-		if (get_current_user_id() != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if ($vars['global-state']['current-user-id']/*get_current_user_id()*/ != POP_AAL_USERALIAS_SYSTEMNOTIFICATIONS) {
 			return;
 		}
 
@@ -269,7 +270,8 @@ class AAL_PoP_Hook_Posts extends AAL_Hook_Base {
 		
 		$post = get_post($post_id);	
 		if (!$user_id) {
-			$user_id = get_current_user_id();
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		}
 
 		aal_insert_log(

@@ -12,7 +12,8 @@
 function gd_get_postname($post_id = null, $format = 'title') {
 
 	if (is_null($post_id)) {
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		$post_id = $post->ID;
 	}	
 	
@@ -41,7 +42,8 @@ function gd_get_categoryname($cat_id, $format = 'title') {
 function gd_get_posticon($post_id = null) {
 
 	if (is_null($post_id)) {
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		$post_id = $post->ID;
 	}	
 	
@@ -53,7 +55,8 @@ function gd_get_posticon($post_id = null) {
 function gd_post_parentpageid($post_id = null) {
 
 	if (is_null($post_id)) {
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		$post_id = $post->post_ID;
 	}
 

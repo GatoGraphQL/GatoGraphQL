@@ -19,6 +19,7 @@ class PoP_WPAPI {
 
 	function __construct(){
 		
+// require_once 'pop-library/pop-engine-utils.php';
 		add_action('plugins_loaded', array($this, 'init'), 20);
 		add_action('PoP:version', array($this,'version'), 20);
 	}

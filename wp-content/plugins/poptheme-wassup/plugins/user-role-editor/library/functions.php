@@ -105,7 +105,8 @@ function gd_ure_authorsidebars_components($components, $section) {
 add_filter('GD_Template_Processor_CustomSubMenus:author:blockgroupitems', 'gd_ure_profile_community_add_members_tab');
 function gd_ure_profile_community_add_members_tab($blockunititems) {
 
-	global $author;
+	$vars = GD_TemplateManager_Utils::get_vars();
+	$author = $vars['global-state']['author']/*global $author*/;
 	if (gd_ure_is_community($author) && POP_URE_POPPROCESSORS_PAGE_MEMBERS) {
 		
 		// Place the Members tab before the Followers tab

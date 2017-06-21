@@ -22,7 +22,8 @@ class PoPTheme_SectionProcessors_ContentHooks {
 
 		if ($template_id == GD_TEMPLATE_CONTENT_SINGLE) {
 
-			global $post;
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$post = $vars['global-state']['post']/*global $post*/;
 			if (
 				$post->post_type == 'post' && (
 					(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_ANNOUNCEMENTLINKS && has_category(POPTHEME_WASSUP_SECTIONPROCESSORS_CAT_ANNOUNCEMENTLINKS, $post)) ||

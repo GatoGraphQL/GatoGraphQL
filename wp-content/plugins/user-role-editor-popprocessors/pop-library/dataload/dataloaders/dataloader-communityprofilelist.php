@@ -22,7 +22,8 @@ class GD_URE_DataLoader_CommunityUserList extends GD_DataLoader_UserList {
 		$ret = parent::execute_query_ids($query);
 
 		// Also include the current author
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
     	array_unshift($ret, $author);
 
     	return $ret;

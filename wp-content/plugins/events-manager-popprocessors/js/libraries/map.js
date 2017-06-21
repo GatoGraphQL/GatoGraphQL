@@ -363,7 +363,10 @@ popMap = {
 			markerPos = markersInfo.markersPos[markerIds[0]];
 			// Comment Leo 10/09/2015: related to the comment above, ask for this condition just in case, however there should be no need, this should always be true
 			if (gMap.markers[markerPos]) {
-				google.maps.event.trigger( gMap.markers[markerPos], 'click' );
+				// If there is no connection to Internet, object 'google' will not be there
+				if (typeof google != 'undefined') {
+					google.maps.event.trigger( gMap.markers[markerPos], 'click' );
+				}
 			}
 		}
 		else {
@@ -421,7 +424,7 @@ popMap = {
 
 		var t = this;
 
-		if (typeof GMaps == 'undefined') return;
+		if (typeof google == 'undefined' || typeof GMaps == 'undefined') return;
 
 		// var pssId = popManager.getSettingsId(pageSection);
 		// var bsId = popManager.getSettingsId(block);
@@ -569,9 +572,12 @@ popMap = {
 				lng : markerData.coordinates.lng,
 				title : markerData.title,
 				infoWindow: infoWindow,
-				icon: markerData.icon,
-				animation: google.maps.Animation.DROP
+				icon: markerData.icon
 			};
+			// If there is no connection to Internet, object 'google' will not be there
+			if (typeof google != 'undefined') {
+				markerOptions['animation'] = google.maps.Animation.DROP;
+			}
 			marker = gMap.addMarker(markerOptions);
 
 			// Save the position of the marker in the map
@@ -589,7 +595,10 @@ popMap = {
 			gMap.hideInfoWindows();
 			
 			// If unique, open the infoWindow for that one marker
-			google.maps.event.trigger( marker, 'click' );
+			// If there is no connection to Internet, object 'google' will not be there
+			if (typeof google != 'undefined') {
+				google.maps.event.trigger( marker, 'click' );
+			}
 		}
 
 		t.zoom(pageSection, block, map);
@@ -622,14 +631,17 @@ popMap = {
 					lngInput.val(latlng.lng());
 
 					var marker = gMap.markers[0];
-					google.maps.event.addListener(marker, 'dragend', function() {
-						
-						var latlng = marker.getPosition();
-						
-						// Set the Lat / Lng to create the Location
-						latInput.val(latlng.lat());
-						lngInput.val(latlng.lng());
-					});					
+					// If there is no connection to Internet, object 'google' will not be there
+					if (typeof google != 'undefined') {
+						google.maps.event.addListener(marker, 'dragend', function() {
+							
+							var latlng = marker.getPosition();
+							
+							// Set the Lat / Lng to create the Location
+							latInput.val(latlng.lat());
+							lngInput.val(latlng.lng());
+						});			
+					}		
 				}
 			}
 		});

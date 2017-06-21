@@ -385,7 +385,8 @@ function gd_em_single_event_is_future() {
 	// by the time we need to call this function
 	
 	// global $EM_Event;
-	global $post;
+	$vars = GD_TemplateManager_Utils::get_vars();
+	$post = $vars['global-state']['post']/*global $post*/;
 	$EM_Event = em_get_event($post);
 	return POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/ < $EM_Event->end;
 }

@@ -26,7 +26,8 @@ class GD_EditMembership {
 
 		global $gd_template_processor_manager;		
 
-		$community = is_user_logged_in() ? get_current_user_id() : '';
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$community = $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/ ? $vars['global-state']['current-user-id']/*get_current_user_id()*/ : '';
 		$form_data = array(
 			'community' => $community,
 			'user_id' => $_REQUEST['uid'],

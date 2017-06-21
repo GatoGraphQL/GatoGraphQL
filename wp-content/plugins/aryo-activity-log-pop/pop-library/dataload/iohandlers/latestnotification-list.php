@@ -16,10 +16,11 @@ class GD_DataLoad_IOHandler_LatestNotificationList extends GD_DataLoad_IOHandler
 
 	function get_hist_time($atts, $iohandler_atts) {
 
-		if (is_user_logged_in()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
 			// Since the last time the user logged in
-			$lastaccess = GD_MetaManager::get_user_meta(get_current_user_id(), POP_METAKEY_USER_LASTACCESS, true);
+			$lastaccess = GD_MetaManager::get_user_meta($vars['global-state']['current-user-id']/*get_current_user_id()*/, POP_METAKEY_USER_LASTACCESS, true);
 			
 			// Alert the user about all past notifications
 			// Newly created user accounts, there's still no lastaccess, so just give a "1" to make the comparison, it will return all results

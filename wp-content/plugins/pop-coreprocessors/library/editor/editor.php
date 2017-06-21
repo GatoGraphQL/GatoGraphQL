@@ -10,7 +10,12 @@
 // This way, function get_value('content-editor') on fieldprocessor-posts.php
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
 // Code copied from wp-includes/class-wp-editor.php => public static function editor( $content, $editor_id, $settings = array() )
-add_filter('init', 'gd_editor_init');
+// Comment Leo 20/06/2017: this cannot be executed on 'init'! If doing so, function `loading_frame` initializes
+// GD_TemplateManager_Utils::get_vars() before the WordPress query vars are set, which means that
+// function is_home, is_author, is_page, etc, they all fail, returning always false
+// For that, instead execute when we have initialized PoP
+// add_filter('init', 'gd_editor_init');
+add_filter('PoP_Engine:beginning', 'gd_editor_init');
 function gd_editor_init() {
 
   if (is_admin() || GD_TemplateManager_Utils::loading_frame()) {

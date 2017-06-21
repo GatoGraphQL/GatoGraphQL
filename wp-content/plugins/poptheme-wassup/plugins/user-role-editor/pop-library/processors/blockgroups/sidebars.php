@@ -126,7 +126,8 @@ class GD_URE_Template_Processor_SidebarBlockGroups extends GD_Template_Processor
 			case GD_TEMPLATE_BLOCKGROUP_AUTHORWEBPOSTS_SIDEBAR:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHORMEMBERS_SIDEBAR:
 
-				global $author;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				$filters = array(
 					GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR => null,
 					GD_TEMPLATE_BLOCKGROUP_AUTHORMAINALLCONTENT_SIDEBAR => GD_TEMPLATE_BLOCK_AUTHORSECTION_MAINALLCONTENT_SIDEBAR,

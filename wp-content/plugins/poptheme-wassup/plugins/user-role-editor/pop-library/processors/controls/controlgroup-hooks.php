@@ -18,7 +18,8 @@ class PoPThemeWassup_URE_ControlGroup_Hooks {
 
 	function get_layouts($layouts) {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 
 		// Add the Switch Organization/Organization+Members if the author is an organization
 		if (gd_ure_is_community($author)) {

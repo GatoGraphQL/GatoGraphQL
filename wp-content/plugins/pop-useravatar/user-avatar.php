@@ -625,7 +625,6 @@ function user_avatar_delete_files($uid)	{
  * Description: Attempts to filter get_avatar function and let Word/BuddyPress have a go at  
  * 				finding an avatar that may have been uploaded locally.
  *
- * @global array $authordata
  * @param string $avatar The result of get_avatar from before-filter
  * @param int|string|object $user A user ID, email address, or comment object
  * @param int $size Size of the avatar image (thumb/full)

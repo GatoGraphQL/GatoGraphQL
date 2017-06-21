@@ -23,7 +23,8 @@ class GD_DataLoader_Single extends GD_DataLoader {
 	function get_data_ids($vars = array(), $is_main_query = false) {
 	
 		// Simply return the global $post ID. 
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		return array($post->ID);
 	}
 
@@ -37,7 +38,8 @@ class GD_DataLoader_Single extends GD_DataLoader {
      */
 	function execute_get_data($ids) {
 	
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		return array($post);
 	}
 	

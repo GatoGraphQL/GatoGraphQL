@@ -10,7 +10,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function get_author_title() {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		$ret = get_the_author_meta('display_name', $author);
 
 		if ($page_id = GD_TemplateManager_Utils::get_hierarchy_page_id()) {
@@ -58,7 +59,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function get_single_title() {
 
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		$ret = get_the_title($post->ID);
 
 		if ($page_id = GD_TemplateManager_Utils::get_hierarchy_page_id()) {
@@ -75,7 +77,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function get_single_submenu() {
 
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 		if (get_post_status($post->ID) == 'publish')  {
 
 			// Comment Leo 09/11/2015: No need to add this information for the Upvote/Downvote, it's too much
@@ -116,8 +119,9 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 		// an attr "tab" indicating this page through its path. This way, users can go straight to their 
 		// information by typing their url: mesym.com/u/mesym?tab=events. Also good for future API
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		global $gd_template_settingsmanager;
-		$url = get_tag_link(get_queried_object_id());
+		$url = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 		$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG);
 		$ret = GD_TemplateManager_Utils::add_tab($url, $page_id);
 		$ret = apply_filters('GD_Template_Processor_CustomSectionBlocks:get_dataload_source:tag', $ret);
@@ -138,7 +142,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_authorcontent(&$ret) {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 
 		// Allow to override with User Role Editor: for organizations: Find all the members of this community, and filter all posts accordingly
 		// Only filter if the 'author' attribute has not been set yet. If it has been set, it must've been done by the filter, 
@@ -151,14 +156,15 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_tagcontent(&$ret) {
 
-		// $tag_id = get_queried_object_id();
-		$tag = get_queried_object();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$tag = $vars['global-state']['queried-object']/*get_queried_object()*/;
 		$ret['tag'] = $tag->slug;
 	}
 
 	public static function add_dataloadqueryargs_tagsubscribers(&$ret) {
 
-		$tag_id = get_queried_object_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$tag_id = $vars['global-state']['queried-object-id']/*get_queried_object_id()*/;
 		if (!isset($ret['meta-query'])) { $ret['meta-query'] = array(); }
 		
 		$ret['meta-query'][] = array(
@@ -170,7 +176,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_authorfollowers(&$ret) {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		if (!isset($ret['meta-query'])) { $ret['meta-query'] = array(); }
 		
 		// It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
@@ -184,7 +191,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_authorfollowingusers(&$ret) {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		if (!isset($ret['meta-query'])) { $ret['meta-query'] = array(); }
 		
 		// It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
@@ -198,7 +206,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_authorsubscribedtotags(&$ret) {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		if (!isset($ret['meta-query'])) { $ret['meta-query'] = array(); }
 		
 		// It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
@@ -212,7 +221,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_authorrecommendedposts(&$ret) {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		// Find all recommended posts by this author
 		$meta_query = array(
 			'key' => GD_MetaManager::get_meta_key(GD_METAKEY_POST_RECOMMENDEDBY),
@@ -226,8 +236,9 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_singlehighlights(&$ret, $post_id = null) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		if (!$post_id) {
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$post_id = $post->ID;
 		}
 
@@ -251,7 +262,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_recommendedby(&$ret) {
 
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 
 		// Find all related posts
 		$meta_query = array(
@@ -265,7 +277,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_upvotedby(&$ret) {
 
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 
 		// Find all related posts
 		$meta_query = array(
@@ -279,7 +292,8 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_downvotedby(&$ret) {
 
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 
 		// Find all related posts
 		$meta_query = array(

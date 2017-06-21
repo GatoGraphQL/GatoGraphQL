@@ -18,7 +18,8 @@ class PoPThemeWassup_URE_LatestCounts_Hooks {
 
 	function get_classes($classes) {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 
 		// Add all the members of the organization, if the author is an organization, and we're on the Organization+Members page
 		$vars = GD_TemplateManager_Utils::get_vars();

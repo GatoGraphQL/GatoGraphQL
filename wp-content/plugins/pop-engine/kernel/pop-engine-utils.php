@@ -11,6 +11,7 @@ define ('POP_HOOK_POPMANAGERUTILS_PRINTURL', 'GD_TemplateManager_Utils:get_print
 class GD_TemplateManager_Utils {
 
 	public static $errors = array()/*, $is_search_engine = null*/;
+	public static $vars = array();
 
 	public static function is_search_engine() {
 
@@ -244,26 +245,26 @@ class GD_TemplateManager_Utils {
 
 	public static function get_hierarchy_page_id($use_default = true) {
 	
-		if (is_page()) {
-			global $post;
+		$vars = self::get_vars();
+		if ($vars['global-state']['is-page']/*is_page()*/) {
+			$post = $vars['global-state']['post']/*global $post*/;
 			$page_id = $post->ID;
 		}
-		elseif (is_home() || is_front_page()) {
+		elseif ($vars['global-state']['is-home']/*is_home()*/ || $vars['global-state']['is-front-page']/*is_front_page()*/) {
 			$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME;
 		}
-		// elseif (is_tag()) {
+		// elseif ($vars['global-state']['is-tag']/*is_tag()*/) {
 		// 	$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 		// }
-		elseif (is_author() || is_single() || is_tag()) {
+		elseif ($vars['global-state']['is-author']/*is_author()*/ || $vars['global-state']['is-single']/*is_single()*/ || $vars['global-state']['is-tag']/*is_tag()*/) {
 			// Get the page from the tab attr
-			$vars = GD_TemplateManager_Utils::get_vars();
 			$tab = $vars['tab'];
 			if ($tab) {
 				$page = get_page_by_path($tab);
 				$page_id = $page->ID;
 			}
 			else {
-				if (is_tag()) {
+				if ($vars['global-state']['is-tag']/*is_tag()*/) {
 					$page_id = POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG;
 				}
 			}
@@ -290,7 +291,7 @@ class GD_TemplateManager_Utils {
 
 	public static function get_datastructure_formatter() {
 
-		$vars = GD_TemplateManager_Utils::get_vars();
+		$vars = self::get_vars();
 
 		global $gd_dataload_datastructureformat_manager;
 		return $gd_dataload_datastructureformat_manager->get_datastructure_formatter($vars['datastructure']);
@@ -315,6 +316,10 @@ class GD_TemplateManager_Utils {
 	}
 
 	public static function get_vars() {
+
+		if (self::$vars) {
+			return self::$vars;
+		}
 
 		global $gd_theme_manager;
 
@@ -362,7 +367,7 @@ class GD_TemplateManager_Utils {
 			$settingsformat = $_REQUEST[GD_URLPARAM_SETTINGSFORMAT];
 		}
 		$format = isset($_REQUEST[GD_URLPARAM_FORMAT]) ? $_REQUEST[GD_URLPARAM_FORMAT] : $settingsformat;
-		$vars = array(
+		self::$vars = array(
 			'output' => $output,
 			'target' => $target,
 			'module' => $module,
@@ -387,12 +392,33 @@ class GD_TemplateManager_Utils {
 
 		if ($fetching_json_data) {
 			
-			$vars['pagesection'] = $_REQUEST[GD_URLPARAM_PAGESECTION_SETTINGSID];
+			self::$vars['pagesection'] = $_REQUEST[GD_URLPARAM_PAGESECTION_SETTINGSID];
 		}
 
-		// Allow for plug-ins to add their own vars
-		$vars = apply_filters('GD_TemplateManager_Utils:get_vars', $vars);
+		// The global state below, will need to be hooked in by pop-wpapi
+		self::$vars['global-state'] = array(
 
-		return $vars;
+			// Template hierarchy
+			'is-home' => false,
+			'is-front-page' => false,
+			'is-tag' => false,
+			'is-page' => false,
+			'is-single' => false,
+			'is-author' => false,
+			'is-404' => false,
+			'is-search' => false,
+			'is-category' => false,
+			'is-archive' => false,
+
+			// User (non)logged-in state
+			'is-user-logged-in' => false,
+			'current-user' => null,
+			'current-user-id' => null,
+		);
+
+		// Allow for plug-ins to add their own vars
+		self::$vars = apply_filters('GD_TemplateManager_Utils:get_vars', self::$vars);
+
+		return self::$vars;
 	}
 }

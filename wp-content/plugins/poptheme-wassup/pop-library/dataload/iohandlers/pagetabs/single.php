@@ -16,7 +16,8 @@ class GD_DataLoad_TabIOHandler_Single extends GD_DataLoad_TabIOHandler {
 
 	protected function get_thumb() {
 		
-		global $post;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
 	    $post_thumb_id = gd_get_thumb_id($post->ID);
 		$thumb = wp_get_attachment_image_src( $post_thumb_id, 'favicon');
 		return array(
@@ -40,8 +41,6 @@ class GD_DataLoad_TabIOHandler_Single extends GD_DataLoad_TabIOHandler {
 	
 	function get_title() {
 
-		// global $post;
-		// return get_the_title($post->ID);
 		return get_the_title();
 	}
 }

@@ -17,8 +17,9 @@ class GD_DataLoad_ActionExecuter_FileUploadPicture extends GD_DataLoad_ActionExe
     function execute(&$block_data_settings, $block_atts, &$block_execution_bag) {
 
 		// Copy the images to the fileupload-userphoto upload folder
+		$vars = GD_TemplateManager_Utils::get_vars();
 		$gd_fileupload_userphoto = GD_FileUpload_UserPhoto_Manager_Factory::get_instance()->get_instance();
-		$user_id = get_current_user_id();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		$gd_fileupload_userphoto->set_upload_path($user_id);
 		$gd_fileupload_userphoto->copy_picture($user_id);
 

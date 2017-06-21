@@ -80,7 +80,8 @@ class AAL_PoPProcessors_Template_Processor_Blocks extends GD_Template_Processor_
 			case GD_TEMPLATE_BLOCKDATA_LATESTNOTIFICATIONS:
 
 				// If the user is logged in, the GD_TEMPLATE_ACTION_LOGIN was successful, then load the data
-				if (is_user_logged_in()) {
+				$vars = GD_TemplateManager_Utils::get_vars();
+				if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
 					$data_settings[GD_DATALOAD_LOAD] = true;
 				}

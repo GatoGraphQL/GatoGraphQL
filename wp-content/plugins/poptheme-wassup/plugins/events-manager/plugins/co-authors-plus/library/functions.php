@@ -15,7 +15,8 @@ function gd_user_event_post_ids($authors = null) {
 
 	// Allow to specify for which users (used by Events Map profile filtering)
 	if (is_null($authors)) {
-		$authors = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$authors = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 	}
 	elseif (is_array($authors)) {
 		$authors = implode(',', $authors);

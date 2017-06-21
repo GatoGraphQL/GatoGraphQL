@@ -24,13 +24,14 @@ class PoP_EM_Template_Processor_SidebarBlockGroups extends GD_Template_Processor
 
 		$ret = parent::get_inner_blocks($template_id);
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOREVENTS_SIDEBAR:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHORPASTEVENTS_SIDEBAR:
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOREVENTSCALENDAR_SIDEBAR:
 
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$filters = array(
 					GD_TEMPLATE_BLOCKGROUP_AUTHOREVENTS_SIDEBAR => GD_TEMPLATE_BLOCK_AUTHOREVENTS_SIDEBAR,
 					GD_TEMPLATE_BLOCKGROUP_AUTHORPASTEVENTS_SIDEBAR => GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SIDEBAR,

@@ -96,17 +96,17 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 		$ret[GD_URLPARAM_STORELOCAL] = $vars[GD_URLPARAM_STORELOCAL];
 		
 		// All page properties
-		global $post;
-		if (is_page()) {
+		$post = $main_vars['global-state']['post']/*global $post*/;
+		if ($main_vars['global-state']['is-page']/*is_page()*/) {
 			$parentpageid = $post->ID;
 		}
 		// retrieve the page for the category for the post
-		elseif (is_single()) {
+		elseif ($main_vars['global-state']['is-single']/*is_single()*/) {
 			$parentpageid = gd_post_parentpageid($post->ID);
 		}
 		// retrieve the page for the authors
-		elseif (is_author()) {
-			global $author;
+		elseif ($main_vars['global-state']['is-author']/*is_author()*/) {
+			$author = $main_vars['global-state']['author']/*global $author*/;
 			$parentpageid = gd_author_parentpageid($author);
 		}
 		if ($parentpageid) {

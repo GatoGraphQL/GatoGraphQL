@@ -1485,7 +1485,8 @@ class GD_Template_Processor_CustomSectionBlocks extends GD_Template_Processor_Se
 			case GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_LIST:
 
-				// $ret = get_tag_link(get_queried_object_id());
+				// $vars = GD_TemplateManager_Utils::get_vars();
+				// $ret = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 				// break;
 
 			case GD_TEMPLATE_BLOCK_TAGMAINALLCONTENT_SCROLL_DETAILS:
@@ -2359,7 +2360,8 @@ class GD_Template_Processor_CustomSectionBlocks extends GD_Template_Processor_Se
 			case GD_TEMPLATE_BLOCK_MYWEBPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
 			case GD_TEMPLATE_BLOCK_MYWEBPOSTS_SCROLL_FULLVIEWPREVIEW:
 			
-				$ret['author'] = get_current_user_id(); // Logged-in author
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$ret['author'] = $vars['global-state']['current-user-id']/*get_current_user_id()*/; // Logged-in author
 				break;
 		}
 
@@ -2521,7 +2523,8 @@ class GD_Template_Processor_CustomSectionBlocks extends GD_Template_Processor_Se
 
 			case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLL_FIXEDLIST:
 
-				global $author;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				return sprintf(
 					'<br/><p class="text-center"><a href="%s">%s</a></p>',

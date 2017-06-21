@@ -62,6 +62,8 @@ function gd_rss_author($output) {
 	// );
 	// if (is_feed() && in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
 
+	// $vars = GD_TemplateManager_Utils::get_vars();
+	// $authordata = $vars['global-state']['authordata']/*global $authordata*/;
 	global $authordata;
 	$url = get_author_posts_url($authordata->ID);
 	// $url = GD_TemplateManager_Utils::add_tab($url, POP_COREPROCESSORS_PAGE_DESCRIPTION);

@@ -25,7 +25,8 @@ class GD_DataLoad_ActionExecuter_Logout extends GD_DataLoad_ActionExecuter {
 		if ('POST' == $_SERVER['REQUEST_METHOD']) { 
 
 			// If the user is not logged in, then return the error
-			if (!is_user_logged_in()) {
+			$vars = GD_TemplateManager_Utils::get_vars();
+			if (!$vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
 				$error = __('You are not logged in.', 'pop-wpapi');
 			
@@ -35,13 +36,16 @@ class GD_DataLoad_ActionExecuter_Logout extends GD_DataLoad_ActionExecuter {
 				);
 			}
 
-			$user_id = get_current_user_id();
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 			wp_logout();
 
 			// Delete the current user, so that it already says "user not logged in" for the toplevel feedback
 			global $current_user;
 			$current_user = null;
 			wp_set_current_user(0);
+
+			// Modify the global-state with the newly logged in user info
+			PoP_WPAPI_Engine_Utils::update_global_user_state(GD_TemplateManager_Utils::$vars);;
 
 			do_action('gd:user:loggedout', $user_id);
 

@@ -42,8 +42,9 @@ class AAL_PoP_API extends AAL_API {
 		extract($args);
 
 		// $user_id: if none has been passed in the params, then check if the user is logged in, and use that
-		if (!$user_id && is_user_logged_in()) {
-			$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$user_id && $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		}
 
 		// Results output: object by default, array by param.

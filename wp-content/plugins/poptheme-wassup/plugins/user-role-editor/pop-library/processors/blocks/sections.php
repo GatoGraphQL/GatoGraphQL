@@ -528,6 +528,7 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 
 		$ret = parent::get_runtime_dataload_query_args($template_id, $atts);
 		
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			// Members of the Community
@@ -538,7 +539,7 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL:
 			
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				// If the profile is not a community, then return no users at all (Eg: an Organization opting out from having members)
 				if (gd_ure_is_community($author)) {
 					
@@ -550,7 +551,7 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_MYMEMBERS_TABLE_EDIT:
 			case GD_TEMPLATE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW:
 			
-				$current_user = get_current_user_id();
+				$current_user = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 				if (gd_ure_is_community($current_user)) {
 					
 					if (!isset($ret['meta-query'])) { $ret['meta-query'] = array(); }
@@ -1066,7 +1067,8 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_LIST:
 			
-				global $author;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				// If the profile is not a community, then return no users at all (Eg: an Organization opting out from having members)
 				if (!gd_ure_is_community($author)) {
 					

@@ -31,13 +31,15 @@ class GD_DataLoader_Author extends GD_DataLoader {
 
 	function get_data_ids($vars = array(), $is_main_query = false) {
 	
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		return array($author);
 	}
 	
 	function execute_get_data($ids) {
 	
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		return array(get_userdata($author));
 	}
 	

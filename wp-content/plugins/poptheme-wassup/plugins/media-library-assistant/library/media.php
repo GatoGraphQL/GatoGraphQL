@@ -24,9 +24,6 @@ function gd_media_attachment_fields( $fields, $post ) {
 */
 add_filter( 'attachment_fields_to_save', 'gd_media_update_attachment_meta', 10, 2); 
 function gd_media_update_attachment_meta($post, $attachment){
-//    global $post;
-
-
 
 	// Check the source of the data: includes/media.php or includes/ajax-actions.php
 	// These 2 pass the data differently

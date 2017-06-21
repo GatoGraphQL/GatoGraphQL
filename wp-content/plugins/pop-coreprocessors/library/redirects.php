@@ -11,7 +11,8 @@
 add_filter('redirect_canonical', 'no_redirect_on_404');
 function no_redirect_on_404($redirect_url)
 {
-    if (is_404()) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+    if ($vars['global-state']['is-404']/*is_404()*/) {
         return false;
     }
     return $redirect_url;

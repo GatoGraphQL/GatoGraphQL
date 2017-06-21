@@ -63,7 +63,8 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_ActionExecuter
 		// These are needed since implementing PoP where the user is always logged in, so we can't print the name/email
 		// on the front-end anymore, instead fields GD_GF_TEMPLATE_FORMCOMPONENT_NAME and GD_GF_TEMPLATE_FORMCOMPONENT_EMAIL are
 		// not visible when the user is logged in
-		if (PoP_FormUtils::use_loggedinuser_data() && is_user_logged_in()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (PoP_FormUtils::use_loggedinuser_data() && $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 			
 			$form_id = isset($_POST["gform_submit"]) ? $_POST["gform_submit"] : 0;
 	        if ($form_id){
@@ -89,7 +90,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_ActionExecuter
 				// }
 				if ($fieldnames) {
 
-					$current_user = wp_get_current_user();
+					$current_user = $vars['global-state']['current-user']/*wp_get_current_user()*/;
 					
 					if (isset($_POST[$fieldnames['name']])) {
 						$_POST[$fieldnames['name']] = $current_user->display_name;
@@ -108,7 +109,8 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_ActionExecuter
 		// This is a workaround to validate the form which takes place in advance based on if the captcha is present or not
 		// this is done now because GF sends the email at the beginning, this can't be postponed
 		// Check only if the user is not logged in. When logged in, we never use the captcha
-		if (!(PoP_FormUtils::use_loggedinuser_data() && is_user_logged_in())) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!(PoP_FormUtils::use_loggedinuser_data() && $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/)) {
 			
 			$form_id = isset($_POST["gform_submit"]) ? $_POST["gform_submit"] : 0;
 	        if($form_id){

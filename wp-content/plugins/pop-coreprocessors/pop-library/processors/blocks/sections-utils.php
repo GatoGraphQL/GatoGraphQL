@@ -34,7 +34,8 @@ class PoPCore_Template_Processor_SectionBlocksUtils {
 	public static function add_dataloadqueryargs_references(&$ret, $post_id = null) {
 
 		if (!$post_id) {
-			global $post;
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$post = $vars['global-state']['post']/*global $post*/;
 			$post_id = $post->ID;
 		}
 
@@ -71,7 +72,8 @@ class PoPCore_Template_Processor_SectionBlocksUtils {
 
 	public static function add_dataloadqueryargs_allcontent_bysingletag(&$ret) {
 
-		$tag_id = get_queried_object_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$tag_id = $vars['global-state']['queried-object-id']/*get_queried_object_id()*/;
 
 		// Must create a nested taxonomy (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters),
 		// where in each 'AND' item we query for the post category/event and the tag

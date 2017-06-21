@@ -6360,7 +6360,8 @@ class CPP_Template_Processor_SectionBlocks extends GD_Template_Processor_Section
 			case GD_TEMPLATE_BLOCK_MYCATEGORYWEBPOSTS09_SIMPLEVIEWPREVIEW:
 			case GD_TEMPLATE_BLOCK_MYCATEGORYWEBPOSTS09_FULLVIEWPREVIEW:
 			
-				$ret['author'] = get_current_user_id(); // Logged-in author
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$ret['author'] = $vars['global-state']['current-user-id']/*get_current_user_id()*/; // Logged-in author
 				break;
 
 			// Filter by the Profile/Community

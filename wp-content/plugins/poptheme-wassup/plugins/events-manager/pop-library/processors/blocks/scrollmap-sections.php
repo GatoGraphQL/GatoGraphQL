@@ -228,12 +228,13 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 
 	protected function get_title_link($template_id) {
 	
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
 			
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				$page = $this->get_block_page($template_id);
 				return GD_TemplateManager_Utils::add_tab($url, $page);
@@ -241,7 +242,7 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
 			
-				$url = get_tag_link(get_queried_object_id());
+				$url = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 				$page = $this->get_block_page($template_id);
 				return GD_TemplateManager_Utils::add_tab($url, $page);
 		}

@@ -35,7 +35,7 @@ class Wassup_URE_PageSectionSettingsProcessor extends Wassup_PageSectionSettings
 			// else {
 				
 			// 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR;
-			// 	// global $author;
+			// 	// $author = $vars['global-state']['author']/*global $author*/;
 			// 	// if (gd_ure_is_organization($author)) {
 					
 			// 	// 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR_ORGANIZATION;

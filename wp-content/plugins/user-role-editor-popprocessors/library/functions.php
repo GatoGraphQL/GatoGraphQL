@@ -10,7 +10,8 @@ add_filter('gd_author_parentpageid', 'gd_ure_author_parentpageid_impl', 10, 2);
 function gd_ure_author_parentpageid_impl($pageid, $author_id = null) {
 
 	if (is_null($author_id)) {
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		$author_id = $author;
 	}
 
@@ -83,10 +84,10 @@ function gd_ure_add_filtercomponent_communities_post($filtercomponents) {
 add_filter('gd_template:filter-authorposts:filtercomponents', 'gd_ure_add_filtercomponent_communityusers');
 function gd_ure_add_filtercomponent_communityusers($filtercomponents) {
 
-	global $author;
+	$vars = GD_TemplateManager_Utils::get_vars();
+	$author = $vars['global-state']['author']/*global $author*/;
 
 	// Check if the user is showing the community. If showing organization, then no need for this
-	$vars = GD_TemplateManager_Utils::get_vars();
 	if (gd_ure_is_community($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 
 		// Add it after the search
@@ -102,9 +103,10 @@ function gd_ure_add_filtercomponent_communityusers($filtercomponents) {
 add_filter('gd_template:dataload_query_args:authors', 'gd_ure_profile_organization_dataloadquery_addmembers');
 function gd_ure_profile_organization_dataloadquery_addmembers($authors) {
 
-	global $author;
-	// Check if the user is showing the community. If showing organization, then no need for this
 	$vars = GD_TemplateManager_Utils::get_vars();
+	$author = $vars['global-state']['author']/*global $author*/;
+
+	// Check if the user is showing the community. If showing organization, then no need for this
 	if (gd_ure_is_community($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
 		
 		$authors = array_merge(

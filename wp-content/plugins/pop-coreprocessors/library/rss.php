@@ -24,7 +24,8 @@ function gd_rss_namespace() {
 add_action( 'rss2_item', 'gd_rss_featured_image' );
 function gd_rss_featured_image() {
     
-    global $post;
+	$vars = GD_TemplateManager_Utils::get_vars();
+    $post = $vars['global-state']['post']/*global $post*/;
    	gd_rss_print_featured_image($post->ID);
 }
 function gd_rss_print_featured_image($post_id) {

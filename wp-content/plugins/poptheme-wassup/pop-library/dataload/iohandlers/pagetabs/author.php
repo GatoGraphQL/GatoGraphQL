@@ -15,7 +15,9 @@ class GD_DataLoad_TabIOHandler_Author extends GD_DataLoad_TabIOHandler {
 	}
 
 	protected function get_thumb() {
-		global $author;
+		
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		$avatar = gd_get_avatar($author, GD_AVATAR_SIZE_16);
 		return array(
 			'src' => $avatar['src'],
@@ -38,7 +40,8 @@ class GD_DataLoad_TabIOHandler_Author extends GD_DataLoad_TabIOHandler {
 	
 	function get_title() {
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		return get_the_author_meta( 'display_name', $author );
 	}
 }

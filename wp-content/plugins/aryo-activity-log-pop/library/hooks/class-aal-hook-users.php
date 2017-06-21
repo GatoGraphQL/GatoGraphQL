@@ -61,10 +61,11 @@ class AAL_PoP_Hook_Users extends AAL_Hook_Base {
 
 	public function followunfollows_user($user_id, $action) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		aal_insert_log( array(
 			'action'      => $action,
 			'object_type' => 'User',
-			'user_id'     => get_current_user_id(),
+			'user_id'     => $vars['global-state']['current-user-id']/*get_current_user_id()*/,
 			'object_id'   => $user_id,
 			'object_name' => get_the_author_meta('display_name', $user_id),
 		) );

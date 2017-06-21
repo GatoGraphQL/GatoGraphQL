@@ -31,9 +31,10 @@ class GD_DataLoad_ActionExecuter_CreateUpdate_User extends GD_DataLoad_ActionExe
 			if ($action == 'update') {
 
 				// Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
+				$vars = GD_TemplateManager_Utils::get_vars();
 				$success_string = sprintf(
 					__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-wpapi'),
-					GD_TemplateManager_Utils::add_tab(get_author_posts_url(get_current_user_id()), POP_COREPROCESSORS_PAGE_DESCRIPTION),
+					GD_TemplateManager_Utils::add_tab(get_author_posts_url($vars['global-state']['current-user-id']/*get_current_user_id()*/), POP_COREPROCESSORS_PAGE_DESCRIPTION),
 					GD_URLPARAM_TARGET_QUICKVIEW,
 					apply_filters('GD_DataLoad_ActionExecuter_CreateUpdate_User:success_msg:linkattrs', '')
 				);				

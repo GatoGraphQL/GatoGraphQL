@@ -9,11 +9,12 @@
 		<?php /* Avoid insecure HTTP requests over HTTPS. Taken from https://developers.google.com/web/fundamentals/security/prevent-mixed-content/fixing-mixed-content */ ?>
 		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<?php endif; ?>
+	<?php $vars = GD_TemplateManager_Utils::get_vars();	?>
 	<?php $title = gd_get_document_title(); ?>
 	<?php $encoded_title = esc_html($title); ?>
 	<?php $site_name = get_bloginfo('name'); ?>
 	<title><?php echo gd_get_document_title() ?></title>
-	<?php if ( is_search() || is_author() ) : ?>
+	<?php if ( $vars['global-state']['is-search']/*is_search()*/ || $vars['global-state']['is-author']/*is_author()*/ ) : ?>
 	<meta name="robots" content="noindex, nofollow" />
 	<?php endif ?>	
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'poptheme-wassup' ), esc_html( get_bloginfo('name'), 1 ) ) ?>" />
@@ -34,22 +35,22 @@
 	<meta name="twitter:site" content="<?php echo $twitter_user ?>">
 	<meta name="twitter:creator" content="<?php echo $twitter_user ?>">
 	<?php 
-	if (is_single()) {
+	if ($vars['global-state']['is-single']/*is_single()*/) {
 		$description = gd_get_post_description(); 
 	}
-	elseif (is_page()) {
+	elseif ($vars['global-state']['is-page']/*is_page()*/) {
 		$description = gd_header_page_description();
 	}
-	elseif (is_author()) {
-		global $author;
+	elseif ($vars['global-state']['is-author']/*is_author()*/) {
+		$author = $vars['global-state']['author']/*global $author*/;
 	    $curauth = get_userdata($author);
 		$description = sprintf(__('View %1$s profile and get in touch through %2$s.', 'poptheme-wassup'), $curauth->display_name, $site_name);
 	}
-	elseif (is_tag()) {
+	elseif ($vars['global-state']['is-tag']/*is_tag()*/) {
 		$description = sprintf(__('Entries tagged “%1$s” in %2$s.', 'poptheme-wassup'), single_tag_title("", false), $site_name);
 	}
 	// If none of the above, always use the Website description
-	// elseif (is_home() || is_front_page()) {
+	// elseif ($vars['global-state']['is-home']/*is_home()*/ || $vars['global-state']['is-front-page']/*is_front_page()*/) {
 	else {
 		$description = gd_header_site_description();
 	}
@@ -89,6 +90,5 @@
 		<div id="background-screen" class="background-screen"></div>
 		<?php 
 		// Include the Theme Header
-		$vars = GD_TemplateManager_Utils::get_vars();
 		include $vars['theme-path'].'/header.php';
 		?>

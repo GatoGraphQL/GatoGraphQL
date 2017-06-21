@@ -9,25 +9,26 @@ class GD_Template_Processor_SectionLatestCountsBase extends GD_Template_Processo
 
 	function get_classes($template_id, $atts) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		$ret = parent::get_classes($template_id, $atts);
 		if ($section_classes = $this->get_section_classes($template_id, $atts)) {
 
 			$pre = '';
 			if ($this->is_author($template_id, $atts)) {
 
-				global $author;
+				$author = $vars['global-state']['author']/*global $author*/;
 				$ret[] = 'author'.$author;
 				$pre = 'author-';
 			}
 			elseif ($this->is_single($template_id, $atts)) {
 
-				global $post;
+				$post = $vars['global-state']['post']/*global $post*/;
 				$ret[] = 'single'.$post->ID;
 				$pre = 'single-';
 			}
 			elseif ($this->is_tag($template_id, $atts)) {
 
-				$ret[] = 'tag'.get_queried_object_id();
+				$ret[] = 'tag'.$vars['global-state']['queried-object-id']/*get_queried_object_id()*/;
 				$pre = 'tag-';
 			}
 

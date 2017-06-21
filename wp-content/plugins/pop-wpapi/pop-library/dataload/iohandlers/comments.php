@@ -18,12 +18,13 @@ class GD_DataLoad_IOHandler_CommentList extends GD_DataLoad_IOHandler_List {
     
 		$ret = parent::get_vars($atts, $iohandler_atts);
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		if (isset($atts[GD_URLPARAM_POSTID])) {
 			$ret[GD_URLPARAM_POSTID] = $atts[GD_URLPARAM_POSTID];	
 		}
 		else {
 			// By default, select the global $post ID;
-			global $post;
+			$post = $vars['global-state']['post']/*global $post*/;
 			$ret[GD_URLPARAM_POSTID] = $post->ID;	
 		}
 

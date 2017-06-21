@@ -43,9 +43,10 @@ class GD_EmailInvite {
 			}
 		}
 
-		if (PoP_FormUtils::use_loggedinuser_data() && is_user_logged_in()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (PoP_FormUtils::use_loggedinuser_data() && $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
-			$user_id = get_current_user_id();
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 			$sender_name = get_the_author_meta('display_name', $user_id);
 			$sender_url = get_author_posts_url($user_id);
 		}
@@ -94,7 +95,8 @@ class GD_EmailInvite {
 		$form_data['emails'] = array_diff($emails, $invalid_emails);
 
 		// Validate the captcha
-		if (!PoP_FormUtils::use_loggedinuser_data() || !is_user_logged_in()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!PoP_FormUtils::use_loggedinuser_data() || !$vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 			
 			$captcha = $form_data['captcha'];
 			

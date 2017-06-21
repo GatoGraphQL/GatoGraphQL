@@ -49,7 +49,8 @@ class GD_UpdateMyPreferences {
 
 		global $gd_template_processor_manager;		
 
-		$user_id = is_user_logged_in() ? get_current_user_id() : '';
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/ ? $vars['global-state']['current-user-id']/*get_current_user_id()*/ : '';
 		$form_data = array(
 			'user_id' => $user_id,
 		);

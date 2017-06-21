@@ -13,7 +13,8 @@ class GD_FollowUser extends GD_FollowUnfollowUser {
 
 		if (!$errors) {
 
-			$user_id = get_current_user_id();
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 			$target_id = $form_data['target_id'];
 
 			if ($user_id == $target_id) {
@@ -53,7 +54,8 @@ class GD_FollowUser extends GD_FollowUnfollowUser {
 
 	protected function update($form_data) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		$target_id = $form_data['target_id'];
 
 		// Comment Leo 02/10/2015: added redundant values, so that we can query for both "Who are my followers" and "Who I am following"

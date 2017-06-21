@@ -23,9 +23,10 @@ class GD_PPP_DataLoad_FieldProcessor_Profiles_Hook extends GD_DataLoad_FieldProc
 				$authors = $fieldprocessor->get_value($resultitem, 'authors');
 
 				// This function only makes sense when the user is logged in
-				if (is_user_logged_in()) {
+				$vars = GD_TemplateManager_Utils::get_vars();
+				if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 					
-					array_splice($authors, array_search(get_current_user_id(), $authors), 1);
+					array_splice($authors, array_search($vars['global-state']['current-user-id']/*get_current_user_id()*/, $authors), 1);
 				}
 				return $authors;
 

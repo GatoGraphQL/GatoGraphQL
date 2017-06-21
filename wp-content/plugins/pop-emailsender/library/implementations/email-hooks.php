@@ -272,6 +272,7 @@ class PoP_EmailSender_Hooks {
 			$post_title = get_the_title($post_id);
 			$footer = $this->get_preferences_footer(__('You are receiving this notification for having subscribed to tags/topics added in this post.', 'pop-emailsender'));
 
+			$vars = GD_TemplateManager_Utils::get_vars();
 			foreach ($post_tags as $tag_id) {
 
 				// Get all the users who subscribed to each tag
@@ -282,7 +283,7 @@ class PoP_EmailSender_Hooks {
 
 						// Keep only the users with the corresponding preference on
 						// Do not send to the current user
-						if ($tag_subscribers = PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST, $tag_subscribers, array(get_current_user_id()))) {
+						if ($tag_subscribers = PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST, $tag_subscribers, array($vars['global-state']['current-user-id']/*get_current_user_id()*/))) {
 
 							$emails = $names = array();
 							foreach ($tag_subscribers as $subscribeduser) {
@@ -454,7 +455,8 @@ class PoP_EmailSender_Hooks {
 
 		// Keep only the users with the corresponding preference on
 		// Do not send to the current user
-		$users = PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_GENERAL_NEWPOST, array(), array(get_current_user_id()));
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$users = PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_GENERAL_NEWPOST, array(), array($vars['global-state']['current-user-id']/*get_current_user_id()*/));
 		if ($users) {
 
 			// From those, remove all users who got an email in a previous email function
@@ -585,6 +587,7 @@ class PoP_EmailSender_Hooks {
 			$post_title = get_the_title($post_id);
 			$footer = $this->get_preferences_footer(__('You are receiving this notification for having subscribed to tags/topics added in this comment/post.', 'pop-emailsender'));
 
+			$vars = GD_TemplateManager_Utils::get_vars();
 			foreach ($post_tags as $tag_id) {
 
 				// Get all the users who subscribed to each tag
@@ -595,7 +598,7 @@ class PoP_EmailSender_Hooks {
 
 						// Keep only the users with the corresponding preference on
 						// Do not send to the current user
-						if ($tag_subscribers = PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT, $tag_subscribers, array(get_current_user_id()))) {
+						if ($tag_subscribers = PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT, $tag_subscribers, array($vars['global-state']['current-user-id']/*get_current_user_id()*/))) {
 
 							$emails = $names = array();
 							foreach ($tag_subscribers as $tag_subscriber) {
@@ -642,7 +645,8 @@ class PoP_EmailSender_Hooks {
 	}
 	function emailnotifications_network_followeduser($target_id) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 
 		// Get the current user's network's users (followers + members of same communities)
 		$networkusers = $this->get_user_networkusers($user_id);
@@ -690,7 +694,8 @@ class PoP_EmailSender_Hooks {
 	}
 	function emailnotifications_network_recommendedpost($post_id) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 
 		// Get the current user's network's users (followers + members of same communities)
 		$networkusers = $this->get_user_networkusers($user_id);
@@ -738,7 +743,8 @@ class PoP_EmailSender_Hooks {
 	}
 	function emailnotifications_network_subscribedtotopic($tag_id) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 
 		// Get the current user's network's users (followers + members of same communities)
 		$networkusers = $this->get_user_networkusers($user_id);
@@ -795,7 +801,8 @@ class PoP_EmailSender_Hooks {
 	}
 	protected function emailnotifications_network_updownvotedpost($post_id, $upvote) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 
 		// Get the current user's network's users (followers + members of same communities)
 		$networkusers = $this->get_user_networkusers($user_id);
@@ -1471,7 +1478,8 @@ class PoP_EmailSender_Hooks {
 
 		if (!in_array($target_id, $this->sent_emails[POP_EMAIL_FOLLOWSUSER])) {
 
-			$user_id = get_current_user_id();
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 			$user_html = PoP_EmailTemplates_Factory::get_instance()->get_userhtml($user_id);
 			
 			$target_url = get_author_posts_url($target_id);
@@ -1503,7 +1511,8 @@ class PoP_EmailSender_Hooks {
 	 * ---------------------------------------------------------------------------------------------------------------*/
 	function recommendpost($post_id) {
 
-		$user_id = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 		$user_html = PoP_EmailTemplates_Factory::get_instance()->get_userhtml($user_id);
 
 		$post_name = gd_get_postname($post_id);

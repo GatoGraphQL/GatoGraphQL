@@ -93,7 +93,8 @@ class GD_Template_Processor_CommentScrolls extends GD_Template_Processor_Scrolls
 
 			case GD_TEMPLATE_SCROLL_COMMENTS_LIST:
 
-				global $post;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$post = $vars['global-state']['post']/*global $post*/;
 				$this->append_att($template_id, $atts, 'class', 'pop-commentpost-'.$post->ID);
 				$this->append_att($template_id, $atts, 'class', 'pop-postcomment');
 				break;

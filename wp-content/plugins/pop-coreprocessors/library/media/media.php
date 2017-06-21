@@ -29,7 +29,8 @@ function gd_resources_add_author_to_query($query) {
 	// Only allowed users (admin, editors) can edit other's files. If the user does not have this role, limit the retrieved files to his own's
 	//if (!current_user_can(GD_CAPABILITY_EDIT_OTHERS_FILES)) {
 	if (!user_has_admin_access()) {
-		$query['author'] = get_current_user_id();
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$query['author'] = $vars['global-state']['current-user-id']/*get_current_user_id()*/;
 	}
 	
 	return $query; 

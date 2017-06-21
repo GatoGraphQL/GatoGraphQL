@@ -98,7 +98,8 @@ class GD_CreateUpdate_User {
 
 		global $gd_template_processor_manager; /*, $allowedposttags;*/
 
-		$user_id = is_user_logged_in() ? get_current_user_id() : '';
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/ ? $vars['global-state']['current-user-id']/*get_current_user_id()*/ : '';
 		$username = $gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_CUU_USERNAME)->get_value(GD_TEMPLATE_FORMCOMPONENT_CUU_USERNAME, $atts);
 		$form_data = array(
 			'user_id' => $user_id,
@@ -250,7 +251,8 @@ class GD_CreateUpdate_User {
 		// If user is logged in => It's Update
 		// Otherwise => It's Create
 		
-		if (is_user_logged_in()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 
 			$this->update($errors, $atts);
 			return 'update';

@@ -43,23 +43,6 @@ class GD_UpdateUserMetaValue {
 		return $form_data;
 	}
 
-	// protected function update_value($value, $form_data) {
-	// }
-
-	// protected function update($form_data) {
-
-	// 	$user_id = get_current_user_id();
-	// 	$target_id = $form_data['target_id'];
-	// 	$usermeta_key = $this->get_usermeta_key();
-
-	// 	// Get value and update
-	// 	$value = GD_MetaManager::get_user_meta($user_id, $usermeta_key);
-	// 	$this->update_value(&$value, $form_data);
-	// 	GD_MetaManager::update_user_meta($user_id, $usermeta_key, $value);
-
-	// 	return $target_id;
-	// }
-
 	protected function update($form_data) {
 
 		$target_id = $form_data['target_id'];

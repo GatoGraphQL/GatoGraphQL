@@ -22,7 +22,8 @@ class PoPTheme_EM_Processors_ContentHooks {
 
 		if (($template_id == GD_TEMPLATE_CONTENT_SINGLE)) {
 
-			global $post;
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$post = $vars['global-state']['post']/*global $post*/;
 			if ($post->post_type == EM_POST_TYPE_EVENT) {
 				
 				$event = em_get_event($post->ID, 'post_id');

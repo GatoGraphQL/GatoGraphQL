@@ -66,7 +66,8 @@ function wassup_media_send_to_editor($html, $id, $attachment) {
 
 function gd_get_post_description() {
 
-	global $post;
+  $vars = GD_TemplateManager_Utils::get_vars();
+	$post = $vars['global-state']['post']/*global $post*/;
   $excerpt = $post->post_excerpt;
   // Comment Leo 23/05: not using get_the_excerpt because of the applied filters, eg: adding a disclaimer at the very top
   // $excerpt = get_the_excerpt();
@@ -74,7 +75,6 @@ function gd_get_post_description() {
 	// If the excerpt is empty, return the post content instead
 	if (!$excerpt) {
 
-		global $post;
 		// 300 characters long is good enough, remove all whitespaces, remove shortcodes
 		$excerpt = str_replace(array("\n\r", "\n", "\r", "\t"), array(' ', '', '', ' '), wp_trim_excerpt(limit_string(strip_tags(strip_shortcodes($post->post_content)), 300)));
 	}
@@ -87,7 +87,8 @@ function gd_excerpt_more($excerpt_more) {
   return '...';
 }
 function gd_header_page_description() {
-  global $post;
+  $vars = GD_TemplateManager_Utils::get_vars();
+  $post = $vars['global-state']['post']/*global $post*/;
   return apply_filters('gd_header_page_description', '', $post->ID);
 }
 
@@ -102,15 +103,16 @@ function gd_get_initial_document_title() {
 
 function gd_get_document_thumb($size = 'large') {
 
-  if (is_single() || is_page()) {
-    global $post;
+  $vars = GD_TemplateManager_Utils::get_vars();
+  if ($vars['global-state']['is-single']/*is_single()*/ || $vars['global-state']['is-page']/*is_page()*/) {
+    $post = $vars['global-state']['post']/*global $post*/;
     $post_thumb_id = gd_get_thumb_id($post->ID);
     $thumb = wp_get_attachment_image_src( $post_thumb_id, $size);
     $thumb_mime_type = get_post_mime_type($post_thumb_id);
   }
-  elseif (is_author()) {
+  elseif ($vars['global-state']['is-author']/*is_author()*/) {
 
-    global $author;
+    $author = $vars['global-state']['author']/*global $author*/;
     // $avatar = get_avatar($author, 150);
     // $avatar_original = gd_user_avatar_original_file($avatar, $author, 150);
     $userphoto = gd_get_useravatar_photoinfo($author);

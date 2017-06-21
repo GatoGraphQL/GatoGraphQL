@@ -66,6 +66,7 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 	}
 	protected function get_title_link($template_id) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_EVENTS:
@@ -74,7 +75,8 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS:
 
-				global $author, $gd_template_settingsmanager;
+				$author = $vars['global-state']['author']/*global $author*/;
+				global $gd_template_settingsmanager;
 				$url = get_author_posts_url($author);
 				$page_ids = array(
 					GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS => POPTHEME_WASSUP_EM_PAGE_EVENTS,
@@ -84,7 +86,7 @@ class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Proces
 			case GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS:
 
 				global $gd_template_settingsmanager;
-				$url = get_tag_link(get_queried_object_id());
+				$url = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 				$page_ids = array(
 					GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS => POPTHEME_WASSUP_EM_PAGE_EVENTS,
 				);

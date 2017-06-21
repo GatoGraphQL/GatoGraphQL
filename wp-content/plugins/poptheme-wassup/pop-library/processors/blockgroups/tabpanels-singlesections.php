@@ -256,7 +256,7 @@ class GD_Template_Processor_SingleSectionTabPanelBlockGroups extends GD_Template
 				case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDCONTENT:
 				case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:
 
-					global $post;
+					$post = $vars['global-state']['post']/*global $post*/;
 					if (get_post_status($post->ID) == 'publish')  {
 						
 						return GD_TEMPLATE_CONTROLGROUP_SUBMENUPOSTLIST;
@@ -266,7 +266,7 @@ class GD_Template_Processor_SingleSectionTabPanelBlockGroups extends GD_Template
 				// Single Authors has no filter, so show only the Share control
 				case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEAUTHORS:
 
-					global $post;
+					$post = $vars['global-state']['post']/*global $post*/;
 					if (get_post_status($post->ID) == 'publish')  {
 						
 						return GD_TEMPLATE_CONTROLGROUP_SHARE;
@@ -277,7 +277,7 @@ class GD_Template_Processor_SingleSectionTabPanelBlockGroups extends GD_Template
 				case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEUPVOTEDBY:
 				case GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEDOWNVOTEDBY:
 
-					global $post;
+					$post = $vars['global-state']['post']/*global $post*/;
 					if (get_post_status($post->ID) == 'publish')  {
 						
 						return GD_TEMPLATE_CONTROLGROUP_SUBMENUUSERLIST;

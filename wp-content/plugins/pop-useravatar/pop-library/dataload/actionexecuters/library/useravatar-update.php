@@ -11,7 +11,8 @@ class GD_UserAvatar_Update {
 
 		global $gd_template_processor_manager;
 
-		$user_id = is_user_logged_in() ? get_current_user_id() : '';
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$user_id = $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/ ? $vars['global-state']['current-user-id']/*get_current_user_id()*/ : '';
 		$form_data = array(
 			'user_id' => $user_id,
 			'picture-uploadpath' => $gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_FILEUPLOAD_PICTURE)->get_value(GD_TEMPLATE_FORMCOMPONENT_FILEUPLOAD_PICTURE, $atts),

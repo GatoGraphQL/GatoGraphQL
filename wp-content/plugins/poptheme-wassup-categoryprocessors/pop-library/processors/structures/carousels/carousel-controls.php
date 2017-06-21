@@ -349,6 +349,7 @@ class CPP_Template_Processor_CarouselControls extends GD_Template_Processor_Caro
 	}
 	protected function get_title_link($template_id) {
 
+		$vars = GD_TemplateManager_Utils::get_vars();
 		$pages = array(
 			GD_TEMPLATE_CAROUSELCONTROLS_CATEGORYPOSTS00 => POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS00,
 			GD_TEMPLATE_CAROUSELCONTROLS_CATEGORYPOSTS01 => POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS01,
@@ -420,12 +421,13 @@ class CPP_Template_Processor_CarouselControls extends GD_Template_Processor_Caro
 		}
 		elseif ($page = $authorpages[$template_id]) {
 
+			$author = $vars['global-state']['author']/*global $author*/;
 			$url = get_author_posts_url($author);
 			return GD_TemplateManager_Utils::add_tab($url, $page);
 		}
 		elseif ($page = $tagpages[$template_id]) {
 			
-			$url = get_tag_link(get_queried_object_id());
+			$url = get_tag_link($vars['global-state']['queried-object-id']/*get_queried_object_id()*/);
 			return GD_TemplateManager_Utils::add_tab($url, $page);
 		}
 

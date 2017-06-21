@@ -4,11 +4,12 @@ add_filter('GD_TemplateManager_Utils:get_hierarchy_page_id:default', 'get_custom
 function get_custom_default_hierarchy_page_id() {
 
 	// Implement the default tabs for Author/Single
-	if (is_author()) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['is-author']/*is_author()*/) {
 		
 		return POP_COREPROCESSORS_PAGE_MAIN;
 	}
-	elseif (is_single()) {
+	elseif ($vars['global-state']['is-single']/*is_single()*/) {
 
 		return POP_COREPROCESSORS_PAGE_DESCRIPTION;
 	}
@@ -118,9 +119,10 @@ function get_custom_targets($targets) {
 add_filter('GD_TemplateManager_Utils:multiple_open', 'gd_multipleopenurls');
 function gd_multipleopenurls($multiple_open) {
 
-	if (is_page()) {
+	$vars = GD_TemplateManager_Utils::get_vars();
+	if ($vars['global-state']['is-page']/*is_page()*/) {
 
-		global $post;
+		$post = $vars['global-state']['post']/*global $post*/;
 		$multiple = array(
 			POPTHEME_WASSUP_PAGE_ADDWEBPOSTLINK,
 			POPTHEME_WASSUP_PAGE_ADDWEBPOST,

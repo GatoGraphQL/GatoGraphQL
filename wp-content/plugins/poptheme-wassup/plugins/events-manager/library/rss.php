@@ -9,7 +9,10 @@ define ('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_3DAYS', 'events-3days');
 define ('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_4DAYS', 'events-4days');
 
 function gd_em_rss() {
-	global $post, $wp_query, $wpdb;
+	
+	$vars = GD_TemplateManager_Utils::get_vars();
+	$post = $vars['global-state']['post']/*global $post*/;
+	global $wp_query, $wpdb;
 
 	// Taken from plugins/events-manager/events-manager.php function em_rss()
 	// Calling https://www.mesym.com/events/feed/ does not produce the EM feed

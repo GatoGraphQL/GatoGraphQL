@@ -98,9 +98,10 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 		
 		// When submitting the form, if user is logged in, then use these values. 
 		// Otherwise, use the values sent in the form
-		if (PoP_FormUtils::use_loggedinuser_data() && doing_post() && is_user_logged_in()) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (PoP_FormUtils::use_loggedinuser_data() && doing_post() && $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
 				
-			$current_user = wp_get_current_user();
+			$current_user = $vars['global-state']['current-user']/*wp_get_current_user()*/;
 			switch ($template_id) {
 
 				case GD_GF_TEMPLATE_FORMCOMPONENT_NAME:

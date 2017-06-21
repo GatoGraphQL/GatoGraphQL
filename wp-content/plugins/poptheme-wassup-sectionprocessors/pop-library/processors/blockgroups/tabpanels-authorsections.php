@@ -26,7 +26,8 @@ class GD_Custom_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_T
 
 		$ret = parent::get_block_inner_templates($template_id);
 
-		global $author;
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$author = $vars['global-state']['author']/*global $author*/;
 		if (gd_ure_is_community($author)) {
 
 			switch ($template_id) {

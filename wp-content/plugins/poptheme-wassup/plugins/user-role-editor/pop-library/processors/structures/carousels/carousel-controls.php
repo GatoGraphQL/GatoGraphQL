@@ -56,7 +56,9 @@ class GD_URE_Template_Processor_CustomCarouselControls extends GD_Template_Proce
 
 			case GD_TEMPLATE_CAROUSELCONTROLS_AUTHORMEMBERS:
 
-				global $author, $gd_template_settingsmanager;
+				global $gd_template_settingsmanager;
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$author = $vars['global-state']['author']/*global $author*/;
 				$url = get_author_posts_url($author);
 				$page_ids = array(
 					GD_TEMPLATE_CAROUSELCONTROLS_AUTHORMEMBERS => POP_URE_POPPROCESSORS_PAGE_MEMBERS,

@@ -22,8 +22,9 @@ class GD_DataLoad_ActionExecuter_Login extends GD_DataLoad_ActionExecuter {
 			$error = '';
 
 			// If the user is already logged in, then return the error
-			if (is_user_logged_in()) {
-				$user = wp_get_current_user();
+			$vars = GD_TemplateManager_Utils::get_vars();
+			if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
+				$user = $vars['global-state']['current-user']/*wp_get_current_user()*/;
 				$error = sprintf(
 					__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'pop-wpapi'),
 					get_author_posts_url($user->ID),
@@ -111,6 +112,9 @@ class GD_DataLoad_ActionExecuter_Login extends GD_DataLoad_ActionExecuter {
 			// Set the current user, so that it already says "user logged in" for the toplevel feedback
 			$user = $loginResult;
 			wp_set_current_user($user->ID);
+
+			// Modify the global-state with the newly logged in user info
+			PoP_WPAPI_Engine_Utils::update_global_user_state(GD_TemplateManager_Utils::$vars);
 
 			do_action('gd:user:loggedin', $user->ID);
 

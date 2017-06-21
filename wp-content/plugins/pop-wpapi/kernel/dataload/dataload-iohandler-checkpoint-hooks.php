@@ -48,14 +48,15 @@ class PoP_WPAPI_DataLoad_CheckpointIOHandler_Hooks {
 		// Get the user info? (used for pages where user logged in is needed. Generally same as with checkpoints)
 		if ($iohandler_atts[GD_DATALOAD_GETUSERINFO]) {
 			
+			$vars = GD_TemplateManager_Utils::get_vars();
 			$user_name = '';
 			$avatar_user = POP_WPAPI_AVATAR_GENERICUSER;
 			$user_url = '';
 			$user_roles = $user_attributes = array();
-			$user_logged_in = is_user_logged_in();
+			$user_logged_in = $vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/;
 			if ($user_logged_in) {
 
-				$user = wp_get_current_user();
+				$user = $vars['global-state']['current-user']/*wp_get_current_user()*/;
 				$user_name = $user->display_name;
 				$avatar_user = $user->ID;
 				$user_url = get_author_posts_url($user->ID);
