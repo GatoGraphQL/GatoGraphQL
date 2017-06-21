@@ -69,6 +69,10 @@ Install and activate the following plugins, which are integrated with PoP (_not 
 
 To install it, follow the instructions [here](https://zordius.github.io/HandlebarsCookbook/9000-quickstart.html). Run composer under folder [wp-content/plugins/pop-frontendengine/php-templates/cli](https://github.com/leoloso/PoP/tree/master/wp-content/plugins/pop-frontendengine/php-templates/cli).
 
+### Installing the demo
+
+Because the [scripts automating the installation process](https://github.com/leoloso/PoP/issues/49) are not done yet, we provide file [getpop-demo-install.zip](https://github.com/leoloso/PoP/tree/master/install/getpop-demo-install.zip) to quickly install a copy of [GetPoP Demo website](https://demo.getpop.org/) in your localhost. Read the installation instructions [here](https://github.com/leoloso/PoP/tree/master/install/getpop-demo-install.html).
+
 ## Configuration
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
