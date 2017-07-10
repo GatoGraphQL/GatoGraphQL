@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_EMAILSENDER_VERSION', 0.102);
+define ('POP_EMAILSENDER_VERSION', 0.103);
 define ('POP_EMAILSENDER_DIR', dirname(__FILE__));
 
 class PoP_EmailSender {

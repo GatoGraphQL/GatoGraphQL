@@ -16,4 +16,10 @@ class GD_Template_Processor_PostAdditionalLayoutsBase extends GD_Template_Proces
 	
 		return array('post-type', 'cat');
 	}
+
+	function init_atts($template_id, &$atts) {
+
+		$this->append_att($template_id, $atts, 'class', 'pop-multilayout-label');		
+		return parent::init_atts($template_id, $atts);
+	}
 }

@@ -1,5 +1,5 @@
 {{#with itemObject}}
-	<a {{#if ../url-field}}href="{{get . ../url-field}}"{{/if}} {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../link-class}} {{../btn-class}} {{../class}} target-{{id}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} title="{{../title}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}} {{#each ../previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../../. template=this}}"{{/each}}>
+	<a {{#if ../url-field}}href="{{get . ../url-field}}"{{/if}} {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../classes.link}} {{../classes.btn}} {{../class}} target-{{id}}" style="{{../styles.link}}{{../styles.btn}}{{../style}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} title="{{../title}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}} {{#each ../previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../../. template=this}}"{{/each}}>
 		{{#withModule ../. "buttoninner"}}
 			{{enterModule ../../.}}
 		{{/withModule}}

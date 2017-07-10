@@ -115,14 +115,15 @@ class PoP_EmailSender_Hooks {
 	
 	protected function get_preferences_footer($msg) {
 
-		return sprintf(
-			'<p><small>%s</small></p>',
-			sprintf(
-				__('%s You can edit your preferences for email notifications <a href="%s">here</a>.', 'pop-emailsender'),
-				$msg,
-				get_permalink(POP_COREPROCESSORS_PAGE_MYPREFERENCES)
-			)
-		);
+		return PoP_EmailSender_CustomUtils::get_preferences_footer($msg);
+		// return sprintf(
+		// 	'<p><small>%s</small></p>',
+		// 	sprintf(
+		// 		__('%s You can edit your preferences for email notifications <a href="%s">here</a>.', 'pop-emailsender'),
+		// 		$msg,
+		// 		get_permalink(POP_COREPROCESSORS_PAGE_MYPREFERENCES)
+		// 	)
+		// );
 	}
 
 	protected function get_user_networkusers($user_id) {

@@ -86,7 +86,7 @@ class GD_Template_Processor_CollapsePanelGroupBlockGroupsBase extends GD_Templat
 
 		if ($panel_class = $this->get_outerpanel_class($template_id)) {
 			
-			$ret[GD_JS_CLASSES/*'classes'*/]['panel'] = $panel_class;
+			$ret[GD_JS_CLASSES/*'classes'*/]['collapsepanel'] = $panel_class;
 		}
 		
 		return $ret;

@@ -31,7 +31,7 @@ class GD_EM_Template_Processor_DateTimeLayoutsBase extends GD_Template_Processor
 	
 		if ($this->add_downloadlinks($template_id)) {
 
-			$ret[] = GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKS;
+			$ret[] = GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN;
 		}
 		
 		return $ret;
@@ -45,12 +45,15 @@ class GD_EM_Template_Processor_DateTimeLayoutsBase extends GD_Template_Processor
 	
 		if ($this->add_downloadlinks($template_id)) {
 
-			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['layout-downloadlinks'] = $gd_template_processor_manager->get_processor(GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKS)->get_settings_id(GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKS);
+			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['layout-downloadlinks'] = $gd_template_processor_manager->get_processor(GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN)->get_settings_id(GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN);
 
 			if ($downloadlinks_class = $this->get_downloadlinks_class($template_id)) {
 				$ret[GD_JS_CLASSES/*'classes'*/]['downloadlinks'] = $downloadlinks_class;
 			}
 		}
+		$ret[GD_JS_CLASSES/*'classes'*/]['calendar'] = 'calendar';
+		$ret[GD_JS_CLASSES/*'classes'*/]['date'] = 'date';
+		$ret[GD_JS_CLASSES/*'classes'*/]['time'] = 'time';
 		if ($separator = $this->get_separator($template_id, $atts)) {
 			$ret['separator'] = $separator;
 		}

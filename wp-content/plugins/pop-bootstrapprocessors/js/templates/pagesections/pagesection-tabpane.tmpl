@@ -1,11 +1,11 @@
 {{#each block-settings-ids.blockunits}}
 	{{#withBlock ../. this}}
-		<div {{#generateId context=../../. targetId=../../pss.pssId group='tab'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} role="tabpanel" class="tab-pane {{../../class}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
+		<div {{#generateId context=../../. targetId=../../pss.pssId group='tab'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} role="tabpanel" class="tab-pane {{../../class}}" style="{{../../style}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 			<div class="pop-header hidden">
 				{{#ifget ../../titles.headers template}}
 					{{{get ../../titles.headers template}}}
 				{{/ifget}}
-				<div class="pop-box {{../../classes.header}}"></div>
+				<div class="pop-box {{../../classes.header}}" style="{{../../styles.header}}"></div>
 			</div>
 			{{enterModule . parentContext=../../.}}
 			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='tab'}}" data-toggle="tab" role="tab" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" data-title="{{{tls.feedback.title}}}"></a>

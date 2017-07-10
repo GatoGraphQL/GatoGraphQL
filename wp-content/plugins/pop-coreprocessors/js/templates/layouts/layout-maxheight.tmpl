@@ -1,5 +1,5 @@
 {{#with itemObject}}
-	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="js-dynamic-height {{../class}}" data-maxheight="{{../maxheight}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="js-dynamic-height {{../class}}" style="{{../style}}" data-maxheight="{{../maxheight}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
 		<div class="inner dynamic-height-wrap">
 			{{#each ../template-ids.inners}}
 				{{#withModule ../../. this}}
@@ -8,7 +8,7 @@
 			{{/each}}
 		</div>
 		<div class="dynamicbtn-wrapper">
-			<button class="js-dynamic-show-hide button {{../classes.btn}}" title="{{../titles.more}}" data-replace-text="{{../titles.less}}">{{../titles.more}}</button>
+			<button class="js-dynamic-show-hide button {{../classes.btn}}" style="{{../styles.btn}}" title="{{../titles.more}}" data-replace-text="{{../titles.less}}">{{../titles.more}}</button>
 		</div>
 	</div>
 {{/with}}

@@ -61,7 +61,7 @@ class GetPoPDemo_Template_Processor_TopLevelCollapseBlockGroups extends GD_Templ
 		global $gd_template_processor_manager;
 		$placeholder = 
 			'<div class="media">'.
-				'<div class="pull-left">'.
+				'<div class="media-left">'.
 					'<h2 class="media-heading"><i class="fa fa-fw fa-2x %1$s"></i></h2>'.
 				'</div>'.
 				'<div class="media-body">'.

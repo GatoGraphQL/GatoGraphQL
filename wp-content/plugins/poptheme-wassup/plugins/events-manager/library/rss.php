@@ -113,7 +113,7 @@ function pop_em_rss_events_build_sql_conditions($conditions, $args){
 	        // $end_date: if doing 2 days, then must produce +1 day, etc
 	        $start_date = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/);
 	        $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/));
-	        $conditions['scope'] = " (event_start_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)) OR (event_end_date BETWEEN CAST('$end_date' AS DATE) AND CAST('$start_date' AS DATE))";
+	        $conditions['scope'] = " ((event_start_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)) OR (event_end_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)))";
 	    }
     }
     return $conditions;

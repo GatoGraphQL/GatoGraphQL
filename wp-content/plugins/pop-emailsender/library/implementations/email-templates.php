@@ -15,7 +15,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates {
 		// Message
 		if ($names) {
 			return sprintf(
-				__('<p>Dear %s,</p>', 'pop-emailsender'), 
+				__('<p>Hi %s,</p>', 'pop-emailsender'), 
 				implode(', ', $names)
 			);
 		}

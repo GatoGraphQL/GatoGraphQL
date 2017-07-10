@@ -1,14 +1,14 @@
 {{#with itemObject}}
-	<div class="layout user-layout preview {{../class}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+	<div class="layout user-layout preview {{../class}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
 		{{#withModule ../. "quicklinkgroup-top"}}
-			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}">
+			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}" style="{{../../styles.quicklinkgroup-top}}">
 				{{enterModule ../../.}}
 			</div>
 		{{/withModule}}		
-		<div class="wrapper {{../classes.wrapper}}">
-			<div class="{{../classes.avatar-wrapper}}">
+		<div class="wrapper {{../classes.wrapper}}" style="{{../styles.wrapper}}">
+			<div class="{{../classes.avatar-wrapper}}" style="{{../styles.avatar-wrapper}}">
 				{{#withModule ../. "useravatar"}}				
-					<div class="avatar {{../../classes.avatar}}">
+					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">
 						{{enterModule ../../.}}
 
 						{{#if ../../template-ids.avatar-extras}}
@@ -23,7 +23,7 @@
 					</div>
 				{{/withModule}}
 				{{#if ../template-ids.belowavatar}}
-					<div class="extra {{../classes.belowavatar}}">
+					<div class="extra {{../classes.belowavatar}}" style="{{../styles.belowavatar}}">
 						{{#each ../template-ids.belowavatar}}
 							{{#withModule ../../. this}}
 								<div class="extra-inner">
@@ -34,8 +34,8 @@
 					</div>
 				{{/if}}
 			</div>
-			<div class="content-body {{../classes.content-body}}">
-				<{{../title-htmlmarkup}} class="name {{../classes.name}}">
+			<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
+				<{{../title-htmlmarkup}} class="name {{../classes.name}}" style="{{../styles.name}}">
 					{{#if is-profile}}
 						<a href="{{get . ../url-field}}" title="{{{display-name}}}" target="{{../link-target}}">{{{display-name}}}</a>
 					{{else}}
@@ -45,16 +45,16 @@
 				</{{../title-htmlmarkup}}>
 				{{#if ../show-short-description}}
 					{{#if short-description-formatted}}
-						<p class="description {{../../classes.short-description}}">{{{short-description-formatted}}}</p>
+						<p class="description {{../../classes.short-description}}" style="{{../../styles.short-description}}">{{{short-description-formatted}}}</p>
 					{{/if}}
 				{{/if}}
 				{{#if ../show-excerpt}}
 					{{#if excerpt}}
-						<p class="excerpt {{../../classes.excerpt}}">{{{excerpt}}}</p>
+						<p class="excerpt {{../../classes.excerpt}}" style="{{../../styles.excerpt}}">{{{excerpt}}}</p>
 					{{/if}}
 				{{/if}}
 				{{#if ../template-ids.belowexcerpt}}
-					<div class="extra {{../classes.belowexcerpt}}">
+					<div class="extra {{../classes.belowexcerpt}}" style="{{../styles.belowexcerpt}}">
 						{{#each ../template-ids.belowexcerpt}}
 							{{#withModule ../../. this}}
 								<div class="extra-inner">
@@ -65,7 +65,7 @@
 					</div>
 				{{/if}}
 				{{#withModule ../. "quicklinkgroup-bottom"}}
-					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}">
+					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}" style="{{../../styles.quicklinkgroup-bottom}}">
 						{{enterModule ../../.}}
 					</div>
 				{{/withModule}}

@@ -421,4 +421,12 @@ class GD_TemplateManager_Utils {
 
 		return self::$vars;
 	}
+
+	// public static function modify_vars_global_state($value) {
+
+	// 	self::$vars['global-state'] = array_merge(
+	// 		self::$vars['global-state'],
+	// 		$value
+	// 	);
+	// }
 }

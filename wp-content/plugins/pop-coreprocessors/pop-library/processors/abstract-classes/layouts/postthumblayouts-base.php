@@ -11,6 +11,20 @@ class GD_Template_Processor_PostThumbLayoutsBase extends GD_Template_ProcessorBa
 
 		return GD_TEMPLATESOURCE_LAYOUT_POSTTHUMB;
 	}
+	
+	function get_modules($template_id) {
+	
+		$ret = parent::get_modules($template_id);
+
+		if ($thumb_extras = $this->get_extra_thumb_layouts($template_id)) {
+			$ret = array_merge(
+				$ret,
+				$thumb_extras
+			);
+		}
+
+		return $ret;
+	}
 
 	function get_extra_thumb_layouts($template_id) {
 
@@ -48,7 +62,8 @@ class GD_Template_Processor_PostThumbLayoutsBase extends GD_Template_ProcessorBa
 
 	function get_thumb_img_class($template_id) {
 
-		return 'img-responsive';
+		// return 'img-responsive';
+		return '';
 	}
 
 	function get_thumb_link_class($template_id) {
@@ -69,7 +84,7 @@ class GD_Template_Processor_PostThumbLayoutsBase extends GD_Template_ProcessorBa
 		if ($target = $this->get_linktarget($template_id, $atts)) {
 			$ret['link-target'] = $target;
 		}
-		$ret[GD_JS_CLASSES/*'classes'*/]['img'] = $this->get_thumb_img_class($template_id);
+		$ret[GD_JS_CLASSES/*'classes'*/]['img'] = $this->get_att($template_id, $atts, 'img-class');
 		if ($link_class = $this->get_thumb_link_class($template_id)) {
 			$ret[GD_JS_CLASSES/*'classes'*/]['link'] = $link_class;
 		}
@@ -85,18 +100,10 @@ class GD_Template_Processor_PostThumbLayoutsBase extends GD_Template_ProcessorBa
 
 		return $ret;
 	}
-	
-	function get_modules($template_id) {
-	
-		$ret = parent::get_modules($template_id);
 
-		if ($thumb_extras = $this->get_extra_thumb_layouts($template_id)) {
-			$ret = array_merge(
-				$ret,
-				$thumb_extras
-			);
-		}
+	function init_atts($template_id, &$atts) {
 
-		return $ret;
+		$this->append_att($template_id, $atts, 'img-class', $this->get_thumb_img_class($template_id));
+		return parent::init_atts($template_id, $atts);
 	}
 }

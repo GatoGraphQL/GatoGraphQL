@@ -25,6 +25,36 @@ class PoP_ServerSideRendering {
 		$this->templatesource_paths[$template_source] = $path;
 	}
 	
+	function init_json() {
+
+		if (!$this->enabled) {
+			return;
+		}
+	
+		// Obtain the JSON from the PoP_Engine
+		if (!$this->json) {
+			
+			// The JSON is already encoded, as a String, so we must decode it to transformt it into an array
+			$engine = PoP_Engine_Factory::get_instance();
+			$this->json = json_decode($engine->json['json'], true);
+		}
+	}
+	
+	function init_popmanager() {
+
+		if (!$this->enabled) {
+			return;
+		}
+	
+		// Initialize the popManager, so it will get all its private values from $json
+		$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
+		// Comment Leo: passing extra parameter $json in PHP
+		$popManager->init($this->json);
+
+		// Because $popManager modified the settings (eg: added the topLevelSettings, etc), then we gotta update the local $json object accordingly
+		$this->json['settings'] = $popManager->getMemory()['settings'];
+	}
+	
 	function get_json() {
 
 		if (!$this->enabled) {
@@ -34,20 +64,22 @@ class PoP_ServerSideRendering {
 		// Obtain the JSON from the PoP_Engine
 		if (!$this->json) {
 			
-			// The JSON is already encoded, as a String, so we must decode it to transformt it into an array
-			$engine = PoP_Engine_Factory::get_instance();
-			$this->json = json_decode($engine->json['json'], true);
+			// Initialize the JSON
+			$this->init_json();
 
 			// Also initialize the popManager, so it will get all its private values from $json
-			$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
-			// Comment Leo: passing extra parameter $json in PHP
-			$popManager->init($this->json);
-
-			// Because $popManager modified the settings (eg: added the topLevelSettings, etc), then we gotta update the local $json object accordingly
-			$this->json['settings'] = $popManager->getMemory()['settings'];
+			$this->init_popmanager();
 		}
 
 		return $this->json;
+	}
+	
+	function merge_json($context) {
+
+		$this->json = array_merge(
+			$this->json,
+			$context
+		);
 	}
 	
 	function get_json_settings() {
@@ -141,6 +173,16 @@ class PoP_ServerSideRendering {
 	
 	function render_pagesection($pagesection_settings_id, $target = null) {
 	
+		return $this->render_target($pagesection_settings_id, null, $target);
+	}
+	
+	function render_block($pagesection_settings_id, $block, $target = null) {
+	
+		return $this->render_target($pagesection_settings_id, $block, $target);
+	}
+
+	function render_target($pagesection_settings_id, $block = null, $target = null) {
+	
 		if (!$this->enabled) {
 			return '';
 		}
@@ -167,8 +209,19 @@ class PoP_ServerSideRendering {
 
 			throw new Exception(sprintf('No template defined in context (%s)', full_url()));
 		}
+
+		// We can render a block instead of the pageSection
+		// Needed for producing the html for the automated emails
+		$render_template_id = $pagesection_template_id;
+		$render_context = $pagesection_configuration;
+		if ($block) {
+
+			$render_context = $render_context[GD_JS_MODULES][$block];
+			$render_template_id = $render_context[GD_JS_TEMPLATE];
+		}
 		
-		return $this->render_template($pagesection_template_id, $pagesection_configuration)/*.'<script type="application/json" id="test">'.$this->json.'</script>'*/;
+		return $this->render_template($render_template_id, $render_context);
+		// return $this->render_template($pagesection_template_id, $pagesection_configuration)/*.'<script type="application/json" id="test">'.$this->json.'</script>'*/;
 	}
 }
 

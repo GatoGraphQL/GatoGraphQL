@@ -1,12 +1,12 @@
 {{#with itemObject}}
-	<div class="layout post-layout preview {{../class}} {{#each cat-slugs}} {{.}}{{/each}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+	<div class="layout post-layout preview {{../class}} {{#each cat-slugs}} {{.}}{{/each}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
 		{{#withModule ../. "quicklinkgroup-top"}}
-			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}">
+			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}" style="{{../../styles.quicklinkgroup-top}}">
 				{{enterModule ../../.}}
 			</div>
 		{{/withModule}}
 		{{#compare "abovethumb" ../authors-position operator="in"}}
-			<div class="authors abovethumb {{../classes.authors}} {{../classes.authors-abovethumb}}">
+			<div class="authors abovethumb {{../classes.authors}} {{../classes.authors-abovethumb}}" style="{{../styles.authors}}{{../styles.authors-abovethumb}}">
 				{{{../titles.beforeauthors.abovethumb}}}
 				{{#each authors}}
 					{{#if @index}}{{{../../authors-sep}}}{{/if}}
@@ -17,20 +17,20 @@
 				{{{../titles.afterauthors.abovethumb}}}
 			</div>
 		{{/compare}}
-		<div class="wrapper {{../classes.wrapper}}">
-			<div class="{{../classes.thumb-wrapper}}">
+		<div class="wrapper {{../classes.wrapper}}" style="{{../styles.wrapper}}">
+			<div class="{{../classes.thumb-wrapper}}" style="{{../styles.thumb-wrapper}}">
 				{{#withModule ../. "postthumb"}}				
-					<div class="post-thumb {{../../classes.thumb}}">
+					<div class="post-thumb {{../../classes.thumb}}" style="{{../../styles.thumb}}">
 						{{enterModule ../../.}}
 					</div>
 				{{/withModule}}
 				{{#withModule ../. "author-avatar"}}
-					<div class="avatar {{../../classes.avatar}}">					
+					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">					
 						{{enterModule ../../. itemDBKey=../../bs.db-keys.subcomponents.authors.db-key itemObjectId=../authors}}
 					</div>
 				{{/withModule}}
 				{{#if ../template-ids.belowthumb}}
-					<div class="extra {{../classes.belowthumb}}">
+					<div class="extra {{../classes.belowthumb}}" style="{{../styles.belowthumb}}">
 						{{#each ../template-ids.belowthumb}}
 							{{#withModule ../../. this}}
 								<div class="extra-inner">
@@ -42,9 +42,9 @@
 				{{/if}}
 			</div>
 			{{#if ../template-ids.beforecontent}}			
-				<div class="beforecontent {{../classes.beforecontent}}">
+				<div class="beforecontent {{../classes.beforecontent}}" style="{{../styles.beforecontent}}">
 					{{#each ../template-ids.beforecontent}}
-						<div class="inner {{../../classes.beforecontent-inner}}">
+						<div class="inner {{../../classes.beforecontent-inner}}" style="{{../../styles.beforecontent-inner}}">
 							{{#withModule ../../. this}}
 								{{enterModule ../../../.}}
 							{{/withModule}}
@@ -52,12 +52,12 @@
 					{{/each}}
 				</div>
 			{{/if}}
-			<div class="content-body {{../classes.content-body}}">
+			<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
 				{{#if ../show-date}}
-					<a href="{{get . ../url-field}}" title="{{../titles.date}}" class="date {{../classes.date}}">{{{ondate datetime}}}</a>
+					<a href="{{get . ../url-field}}" title="{{../titles.date}}" class="date {{../classes.date}}" style="{{../styles.date}}">{{{ondate datetime}}}</a>
 				{{/if}}
 				{{#compare "abovetitle" ../authors-position operator="in"}}
-					<div class="authors abovetitle {{../classes.authors}} {{../classes.authors-abovetitle}}">
+					<div class="authors abovetitle {{../classes.authors}} {{../classes.authors-abovetitle}}" style="{{../styles.authors}}{{../styles.authors-abovetitle}}">
 						{{{../titles.beforeauthors.abovetitle}}}
 						{{#each authors}}
 							{{#if @index}}{{{../../authors-sep}}}{{/if}}
@@ -69,7 +69,7 @@
 					</div>
 				{{/compare}}
 				{{#if ../show-posttitle}}
-					<{{../title-htmlmarkup}} class="title {{../classes.title}}">
+					<{{../title-htmlmarkup}} class="title {{../classes.title}}" style="{{../styles.title}}">
 						{{#if ../show-date}}
 							{{{title}}}
 						{{else}}
@@ -77,13 +77,8 @@
 						{{/if}}
 					</{{../title-htmlmarkup}}>
 				{{/if}}
-				{{#if ../show-excerpt}}
-					{{#if excerpt}}
-						<p class="excerpt {{../classes.excerpt}}">{{{excerpt}}}</p>
-					{{/if}}
-				{{/if}}
 				{{#if ../template-ids.abovecontent}}
-					<div class="abovecontent {{../classes.abovecontent}}">
+					<div class="abovecontent {{../classes.abovecontent}}" style="{{../styles.abovecontent}}">
 						{{#each ../template-ids.abovecontent}}
 							{{#withModule ../../. this}}
 								{{enterModule ../../../.}}
@@ -91,13 +86,18 @@
 						{{/each}}
 					</div>
 				{{/if}}
+				{{#if ../show-excerpt}}
+					{{#if excerpt}}
+						<p class="excerpt {{../classes.excerpt}}" style="{{../styles.excerpt}}">{{{excerpt}}}</p>
+					{{/if}}
+				{{/if}}
 				{{#withModule ../. "content"}}				
-					<div class="content pop-content {{../../classes.content}} clearfix" {{#generateId context=../../. group="content"}}{{../../id}}-content{{/generateId}}>
+					<div class="content pop-content {{../../classes.content}} clearfix" style="{{../../styles.content}}" {{#generateId context=../../. group="content"}}{{../../id}}-content{{/generateId}}>
 						{{enterModule ../../.}}
 					</div>
 				{{/withModule}}
 				{{#compare "belowcontent" ../authors-position operator="in"}}
-					<div class="authors belowcontent {{../classes.authors}} {{../classes.authors-belowcontent}}">
+					<div class="authors belowcontent {{../classes.authors}} {{../classes.authors-belowcontent}}" style="{{../styles.authors}}{{../styles.authors-belowcontent}}">
 						{{{../titles.beforeauthors.belowcontent}}}
 						{{#each authors}}
 							{{#if @index}}{{{../../authors-sep}}}{{/if}}
@@ -109,9 +109,9 @@
 					</div>
 				{{/compare}}
 				{{#if ../template-ids.belowcontent}}
-					<div class="extra {{../classes.belowcontent}}">
+					<div class="extra {{../classes.belowcontent}}" style="{{../styles.belowcontent}}">
 						{{#each ../template-ids.belowcontent}}
-							<div class="extra-inner {{../../classes.belowcontent-inner}}">
+							<div class="extra-inner {{../../classes.belowcontent-inner}}" style="{{../../styles.belowcontent-inner}}">
 								{{#withModule ../../. this}}
 									{{enterModule ../../../.}}
 								{{/withModule}}
@@ -120,14 +120,14 @@
 					</div>
 				{{/if}}
 				{{#withModule ../. "quicklinkgroup-bottom"}}
-					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}">
+					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}" style="{{../../styles.quicklinkgroup-bottom}}">
 						{{enterModule ../../.}}
 					</div>
 				{{/withModule}}
 				{{#if ../template-ids.bottom}}
-					<div class="extra {{../classes.bottom}}">
+					<div class="extra {{../classes.bottom}}" style="{{../styles.bottom}}">
 						{{#each ../template-ids.bottom}}
-							<div class="extra-inner {{../../classes.bottom-inner}}">
+							<div class="extra-inner {{../../classes.bottom-inner}}" style="{{../../styles.bottom-inner}}">
 								{{#withModule ../../. this}}
 									{{enterModule ../../../.}}
 								{{/withModule}}
@@ -137,9 +137,9 @@
 				{{/if}}
 			</div>
 			{{#if ../template-ids.aftercontent}}			
-				<div class="aftercontent {{../classes.aftercontent}}">
+				<div class="aftercontent {{../classes.aftercontent}}" style="{{../styles.aftercontent}}">
 					{{#each ../template-ids.aftercontent}}
-						<div class="inner {{../../classes.aftercontent-inner}}">
+						<div class="inner {{../../classes.aftercontent-inner}}" style="{{../../styles.aftercontent-inner}}">
 							{{#withModule ../../. this}}
 								{{enterModule ../../../.}}
 							{{/withModule}}

@@ -1,4 +1,4 @@
-<form {{#generateId}}{{id}}{{/generateId}} action="{{action}}" class="{{class}} {{runtime-class}} clearfix" role="form" method="{{method}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+<form {{#generateId}}{{id}}{{/generateId}} action="{{action}}" class="{{class}} {{runtime-class}} clearfix" style="{{style}}{{runtime-style}}" role="form" method="{{method}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 	{{{description}}}
 	<div class="form-inner {{class-merge}} clearfix">
 		{{#withModule . "inner"}}

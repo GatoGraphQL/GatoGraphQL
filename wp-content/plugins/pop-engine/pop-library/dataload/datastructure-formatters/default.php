@@ -33,10 +33,10 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 
 			// Settings
 			if ($settings) {
-
 				$encode['runtimesettings'] = $runtimesettings;
 				$encode['settings'] = '{SETTINGS}';
 				$json = str_replace('"{SETTINGS}"', $settings, json_encode($encode));
+
 			}
 			// Data but not settings
 			else {
@@ -50,6 +50,7 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 				'runtimesettings' => $runtimesettings,
 				'settings' => '{SETTINGS}'
 			);
+
 			$json = str_replace('"{SETTINGS}"', $settings, json_encode($encode));
 		}
 

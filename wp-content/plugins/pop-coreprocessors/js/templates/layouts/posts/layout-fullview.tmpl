@@ -1,23 +1,23 @@
 {{#with itemObject}}
-	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="pop-post-{{id}} post-layout fullview {{../class}} {{#each cat-slugs}} {{.}}{{/each}}">
-		<div class="wrapper {{../classes.wrapper}}">
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="pop-post-{{id}} post-layout fullview {{../class}} {{#each cat-slugs}} {{.}}{{/each}}" style="{{../style}}">
+		<div class="wrapper {{../classes.wrapper}}" style="{{../styles.wrapper}}">
 			{{#compare ../title-position "top"}}
 				{{#withModule ../. "title"}}
 					{{enterModule ../../.}}
 				{{/withModule}}
 			{{/compare}}
-			<div class="row">
+			<div class="{{../classes.inner-wrapper}}" style="{{../styles.inner-wrapper}}">
 				{{#withModule ../. "sidebar"}}
-					<div class="sidebar topsidebar {{../../classes.sidebar}}">
+					<div class="sidebar topsidebar {{../../classes.sidebar}}" style="{{../../styles.sidebar}}">
 						{{enterModule ../../.}}
 					</div>
 				{{/withModule}}
-				<div class="content-body {{../classes.content-body}}">
+				<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
 					{{#if ../template-ids.headers}}
-						<div class="headers {{../classes.headers}}">
+						<div class="headers {{../classes.headers}}" style="{{../styles.headers}}">
 							{{#each ../template-ids.headers}}
 								{{#withModule ../../. this}}
-									<div class="header {{../../../classes.header}}">
+									<div class="header {{../../../classes.header}}" style="{{../../../styles.header}}">
 										{{enterModule ../../../.}}
 									</div>
 								{{/withModule}}
@@ -29,9 +29,9 @@
 							{{enterModule ../../.}}
 						{{/withModule}}
 					{{/compare}}
-					<div class="content pop-content {{../classes.content}} clearfix">
+					<div class="content pop-content {{../classes.content}} clearfix" style="{{../styles.content}}">
 						{{#if ../template-ids.abovecontent}}
-							<div class="abovecontent {{../classes.abovecontent}}">
+							<div class="abovecontent {{../classes.abovecontent}}" style="{{../styles.abovecontent}}">
 								{{#each ../template-ids.abovecontent}}
 									{{#withModule ../../. this}}
 										{{enterModule ../../../.}}
@@ -39,7 +39,7 @@
 								{{/each}}
 							</div>
 						{{/if}}
-						<div class="{{../classes.content-inner}}">
+						<div class="{{../classes.content-inner}}" style="{{../styles.content-inner}}">
 							{{#each ../template-ids.content}}
 								{{#withModule ../../. this}}
 									{{enterModule ../../../.}}
@@ -48,10 +48,10 @@
 						</div>
 					</div>	
 					{{#if ../template-ids.footers}}
-						<div class="footers {{../classes.footers}}">
+						<div class="footers {{../classes.footers}}" style="{{../styles.footers}}">
 							{{#each ../template-ids.footers}}
 								{{#withModule ../../. this}}
-									<div class="footer {{../../../classes.footer}}">
+									<div class="footer {{../../../classes.footer}}" style="{{../../../styles.footer}}">
 										{{enterModule ../../../.}}
 									</div>
 								{{/withModule}}

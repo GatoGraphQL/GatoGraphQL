@@ -1,5 +1,5 @@
 <?php
- function lcr593c9d1310727raw($cx, $v, $ex = 0) {
+ function lcr595ab09ca717fraw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -23,7 +23,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9d1310727raw($cx, $vv);
+      $ret[] = lcr595ab09ca717fraw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -71,6 +71,6 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<span>',lcr593c9d1310727raw($cx, (($inary && isset($in['symbol'])) ? $in['symbol'] : null)),'',lcr593c9d1310727raw($cx, (($inary && isset($in['namedescription'])) ? $in['namedescription'] : null)),'</span>';return ob_get_clean();
+    ob_start();echo '<span>',lcr595ab09ca717fraw($cx, (($inary && isset($in['symbol'])) ? $in['symbol'] : null)),'',lcr595ab09ca717fraw($cx, (($inary && isset($in['namedescription'])) ? $in['namedescription'] : null)),'</span>';return ob_get_clean();
 };
 ?>

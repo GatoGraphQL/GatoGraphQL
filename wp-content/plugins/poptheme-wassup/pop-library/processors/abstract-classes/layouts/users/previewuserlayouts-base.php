@@ -36,7 +36,7 @@ class GD_Template_Processor_CustomPreviewUserLayoutsBase extends GD_Template_Pro
 
 			$ret[GD_JS_CLASSES/*'classes'*/]['name'] = 'media-heading';
 			$ret[GD_JS_CLASSES/*'classes'*/]['wrapper'] = 'media'; //' overflow-visible';
-			$ret[GD_JS_CLASSES/*'classes'*/]['avatar-wrapper'] = 'pull-left';
+			$ret[GD_JS_CLASSES/*'classes'*/]['avatar-wrapper'] = 'media-left';
 			$ret[GD_JS_CLASSES/*'classes'*/]['avatar'] = 'media-object';
 			$ret[GD_JS_CLASSES/*'classes'*/]['content-body'] = 'media-body';
 		}

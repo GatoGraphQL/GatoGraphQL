@@ -13,6 +13,7 @@ define ('GD_TEMPLATE_BUTTONINNER_POSTVIEW', PoP_ServerUtils::get_template_defini
 define ('GD_TEMPLATE_BUTTONINNER_POSTPREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-postpreview'));
 define ('GD_TEMPLATE_BUTTONINNER_POSTPERMALINK', PoP_ServerUtils::get_template_definition('buttoninner-postpermalink'));
 define ('GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('buttoninner-comments'));
+define ('GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL', PoP_ServerUtils::get_template_definition('buttoninner-comments-label'));
 define ('GD_TEMPLATE_BUTTONINNER_FOLLOWUSER_PREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-followuser-preview'));
 define ('GD_TEMPLATE_BUTTONINNER_FOLLOWUSER_FULL', PoP_ServerUtils::get_template_definition('viewcomponentuttoninner-sidebar-followuser-full'));
 define ('GD_TEMPLATE_BUTTONINNER_UNFOLLOWUSER_PREVIEW', PoP_ServerUtils::get_template_definition('buttoninner-unfollowuser-preview'));
@@ -47,6 +48,7 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 			GD_TEMPLATE_BUTTONINNER_POSTPREVIEW,
 			GD_TEMPLATE_BUTTONINNER_POSTPERMALINK,
 			GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS,
+			GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL,
 			GD_TEMPLATE_BUTTONINNER_FOLLOWUSER_PREVIEW,
 			GD_TEMPLATE_BUTTONINNER_FOLLOWUSER_FULL,
 			GD_TEMPLATE_BUTTONINNER_UNFOLLOWUSER_PREVIEW,
@@ -118,6 +120,7 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 				return 'fa-fw fa-link';
 
 			case GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS:
+			case GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL:
 
 				return 'fa-fw fa-comments';
 
@@ -161,6 +164,10 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 	function get_btn_title($template_id) {
 		
 		switch ($template_id) {
+
+			case GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL:
+
+				return __('Comments', 'pop-coreprocessors');
 
 			case GD_TEMPLATE_BUTTONINNER_QUICKVIEW_PREVIEWDROPDOWN:
 
@@ -234,6 +241,7 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS:
+			case GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL:
 		
 				return 'comments-count';
 					
@@ -269,6 +277,30 @@ class GD_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInn
 		}
 		
 		return parent::get_text_field($template_id, $atts);
+	}
+
+	function get_textfield_open($template_id, $atts) {
+		
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL:
+		
+				return __('(', 'pop-coreprocessors');
+		}
+		
+		return parent::get_textfield_open($template_id, $atts);
+	}
+
+	function get_textfield_close($template_id, $atts) {
+		
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL:
+		
+				return __(')', 'pop-coreprocessors');
+		}
+		
+		return parent::get_textfield_close($template_id, $atts);
 	}
 }
 

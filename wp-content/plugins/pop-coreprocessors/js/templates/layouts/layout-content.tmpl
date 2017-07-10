@@ -1,7 +1,7 @@
 {{#with itemObject}}
-	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}}" style="{{../style}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
 		{{#if ../template-ids.abovecontent}}
-			<div class="abovecontent {{../classes.abovecontent}}">
+			<div class="abovecontent {{../classes.abovecontent}}" style="{{../styles.abovecontent}}">
 				{{#each ../template-ids.abovecontent}}
 					{{#withModule ../../. this}}
 						{{enterModule ../../../.}}
@@ -9,7 +9,7 @@
 				{{/each}}
 			</div>
 		{{/if}}
-		<div {{#generateId context=../. group="inner"}}{{../id}}{{/generateId}} class="inner {{../classes.inner}}">
+		<div {{#generateId context=../. group="inner"}}{{../id}}{{/generateId}} class="inner {{../classes.inner}}" style="{{../styles.inner}}">
 			{{{showmore content len=../content-maxlength}}}
 		</div>
 	</div>

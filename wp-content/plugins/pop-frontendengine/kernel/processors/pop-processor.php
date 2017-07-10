@@ -484,6 +484,100 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		return $ret;
 	}	
 
+	function get_template_configurations($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$ret = parent::get_template_configurations($template_id, $atts);
+
+		// After saving the configuration, we can manipulate it, to convert values if needed
+		// Replace classes with styles, if set in the general atts
+		if ($this->get_general_att($atts, 'convert-classes-to-styles')) {
+
+			$settings_id = $this->get_settings_id($template_id);
+			$configuration = &$ret[$settings_id];
+
+			// Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
+			if ($allclasses = array_filter(explode(' ', $configuration[GD_JS_CLASS/*'class'*/]))) {
+
+				// Add a dot to all classes, to convert them into a CSS selector
+				// $allclasses = array_map(array('PoP_Frontend_ConversionUtils', 'get_class_selector'), $allclasses);
+			
+				// // Obtain the styles
+				// $intersected = array_intersect(PoP_Frontend_ConversionUtils::get_classes(), $allclasses);
+				// $styles = array_map(array('PoP_Frontend_ConversionUtils', 'convert'), $intersected);
+
+				$styles = PoP_Frontend_ConversionUtils::get_styles_from_classes($allclasses);
+
+				// Set the styles as a param
+				$configuration[GD_JS_STYLE/*'style'*/] = implode(' ', $styles);
+
+				// Remove the class
+				$configuration[GD_JS_CLASS/*'class'*/] = '';
+			}
+			if ($entries = $configuration[GD_JS_CLASSES/*'classes'*/]) {
+				
+				foreach ($entries as $key => $class) {
+
+					if ($allclasses = array_filter(explode(' ', $class))) {
+
+						// Add a dot to all classes, to convert them into a CSS selector
+						// $allclasses = array_map(array('PoP_Frontend_ConversionUtils', 'get_class_selector'), $allclasses);
+
+						// // Obtain the styles
+						// $intersected = array_intersect(PoP_Frontend_ConversionUtils::get_classes(), $allclasses);
+						// $styles = array_map(array('PoP_Frontend_ConversionUtils', 'convert'), $intersected);
+
+						$styles = PoP_Frontend_ConversionUtils::get_styles_from_classes($allclasses);
+
+						// Set the styles as a param
+						$configuration[GD_JS_STYLES/*'styles'*/][$key] = implode(' ', $styles);
+
+						// Remove the class
+						$configuration[GD_JS_CLASSES/*'classes'*/][$key] = '';
+					}
+				}
+			}
+		}
+		
+		return $ret;
+	}
+
+	function get_template_runtimeconfigurations($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$ret = parent::get_template_runtimeconfigurations($template_id, $atts);
+
+		// After saving the configuration, we can manipulate it, to convert values if needed
+		// Replace classes with styles, if set in the general atts
+		if ($this->get_general_att($atts, 'convert-classes-to-styles')) {
+
+			$runtimeconfiguration = &$ret[$template_id];
+
+			// Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
+			if ($allclasses = array_filter(explode(' ', $runtimeconfiguration['runtime-class']))) {
+
+				// // Add a dot to all classes, to convert them into a CSS selector
+				// $allclasses = array_map(array('PoP_Frontend_ConversionUtils', 'get_class_selector'), $allclasses);
+			
+				// // Obtain the styles
+				// $intersected = array_intersect(PoP_Frontend_ConversionUtils::get_classes(), $allclasses);
+				// $styles = array_map(array('PoP_Frontend_ConversionUtils', 'convert'), $intersected);
+
+				$styles = PoP_Frontend_ConversionUtils::get_styles_from_classes($allclasses);
+
+				// Set the styles as a param
+				$runtimeconfiguration['runtime-style'] = implode(' ', $styles);
+
+				// Remove the class
+				$runtimeconfiguration['runtime-class'] = '';
+			}
+		}
+		
+		return $ret;
+	}
+
 	function get_template_configuration($template_id, $atts) {
 	
 		global $gd_template_processor_manager, $gd_dataload_manager;
@@ -508,12 +602,17 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		if ($is_id_unique = $this->is_frontend_id_unique($template_id, $atts)) {
 			$ret[GD_JS_ISIDUNIQUE/*'is-id-unique'*/] = true;
 		}
+
+		// Output the 'class'. Check if to convert it to styles, for emails
+		$classs = '';
 		if ($class = $this->get_att($template_id, $atts, 'class')) {
-			$ret[GD_JS_CLASS/*'class'*/] = $class;
+			$classs = $class;
 		}
 		if ($classes = $this->get_att($template_id, $atts, 'classes')) {
-			$ret[GD_JS_CLASS/*'class'*/] .= ' '.implode(' ', array_unique($classes));
+			$classs .= ' '.implode(' ', array_unique($classes));
 		}
+		$ret[GD_JS_CLASS/*'class'*/] = $classs;
+
 		if ($params = $this->get_att($template_id, $atts, 'params')) {
 			$ret[GD_JS_PARAMS/*'params'*/] = $params;
 		}
@@ -578,7 +677,7 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		}
 		
 		return $ret;
-	}	
+	}
 
 	function get_intercept_settings($template_id, $atts) {
 

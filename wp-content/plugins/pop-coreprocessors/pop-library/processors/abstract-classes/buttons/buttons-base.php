@@ -100,9 +100,11 @@ class GD_Template_Processor_ButtonsBase extends GD_Template_ProcessorBase {
 		// 	$ret['condition-field'] = $condition_field;
 		// }
 		$ret['url-field'] = $this->get_url_field($template_id);
-		$ret['link-class'] = $this->get_link_class($template_id);
+		// $ret['link-class'] = $this->get_link_class($template_id);
+		$ret[GD_JS_CLASSES/*'classes'*/]['link'] = $this->get_link_class($template_id);
 		if ($btn_class = $this->get_att($template_id, $atts, 'btn-class')) {
-			$ret['btn-class'] = $btn_class;
+			// $ret['btn-class'] = $btn_class;
+			$ret[GD_JS_CLASSES/*'classes'*/]['btn'] = $btn_class;
 		}
 		
 		if ($linktarget = $this->get_linktarget($template_id, $atts)) {

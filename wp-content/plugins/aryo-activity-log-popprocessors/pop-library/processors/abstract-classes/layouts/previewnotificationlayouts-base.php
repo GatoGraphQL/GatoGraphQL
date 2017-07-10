@@ -99,6 +99,10 @@ class GD_Template_Processor_PreviewNotificationLayoutsBase extends GD_Template_P
 	// 		)
 	// 	);
 	// }
+	function add_url_link($template_id, $atts) {
+
+		return false;
+	}
 
 	function get_data_fields($template_id, $atts) {
 
@@ -111,6 +115,10 @@ class GD_Template_Processor_PreviewNotificationLayoutsBase extends GD_Template_P
 		// $ret[] = 'url';
 		$ret[] = 'status';
 		$ret[] = 'message';
+
+		if ($this->add_url_link($template_id, $atts)) {
+			$ret[] = 'url';
+		}
 		
 		return $ret;
 	}
@@ -157,13 +165,15 @@ class GD_Template_Processor_PreviewNotificationLayoutsBase extends GD_Template_P
 
 		// 	$ret['add-url'] = true;
 		// }
-
+		if ($this->add_url_link($template_id, $atts)) {
+			$ret['add-url-link'] = true;
+		}
 		// Classes
 		$ret[GD_JS_CLASSES/*'classes'*/] = array();
 		if ($this->horizontal_media_layout($template_id)) {
 
 			$ret[GD_JS_CLASSES/*'classes'*/]['wrapper'] = 'media';// ' overflow-visible';
-			$ret[GD_JS_CLASSES/*'classes'*/]['thumb-wrapper'] = 'pull-left';
+			$ret[GD_JS_CLASSES/*'classes'*/]['thumb-wrapper'] = 'media-left';
 			$ret[GD_JS_CLASSES/*'classes'*/]['content-body'] = 'media-body clearfix';
 		}
 

@@ -29,6 +29,8 @@ define ('GD_JS_REPLICATEBLOCKSETTINGSIDS', $compact ? 'rbsi' : 'replicate-blocks
 define ('GD_JS_APPENDABLE', $compact ? 'ap' : 'appendable');
 define ('GD_JS_CLASS', $compact ? 'c' : 'class');
 define ('GD_JS_CLASSES', $compact ? 'cs' : 'classes');
+define ('GD_JS_STYLE', $compact ? 'y' : 'style');
+define ('GD_JS_STYLES', $compact ? 'ys' : 'styles');
 define ('GD_JS_TITLES', $compact ? 'tt' : 'titles');
 define ('GD_JS_PARAMS', $compact ? 'p' : 'params');
 define ('GD_JS_ITEMOBJECTPARAMS', $compact ? 'iop' : 'itemobject-params');
@@ -74,6 +76,8 @@ function gd_jquery_constants_jsparams($jquery_constants) {
 	$jquery_constants['JS_APPENDABLE'] = GD_JS_APPENDABLE;
 	$jquery_constants['JS_CLASS'] = GD_JS_CLASS;
 	$jquery_constants['JS_CLASSES'] = GD_JS_CLASSES;
+	$jquery_constants['JS_STYLE'] = GD_JS_STYLE;
+	$jquery_constants['JS_STYLES'] = GD_JS_STYLES;
 	$jquery_constants['JS_TITLES'] = GD_JS_TITLES;
 	$jquery_constants['JS_PARAMS'] = GD_JS_PARAMS;
 	$jquery_constants['JS_ITEMOBJECTPARAMS'] = GD_JS_ITEMOBJECTPARAMS;

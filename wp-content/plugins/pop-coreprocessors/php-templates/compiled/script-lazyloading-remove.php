@@ -1,7 +1,7 @@
 <?php
- function lcr593c9d19da05ewi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr595ab0a4167a1wi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr593c9d19da05em($cx, $v, array($bp[0] => $v));
+   $v = lcr595ab0a4167a1m($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,15 +16,15 @@
   return $ret;
  }
 
- function lcr593c9d19da05eencq($cx, $var) {
+ function lcr595ab0a4167a1encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9d19da05eraw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0a4167a1raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9d19da05em($cx, $a, $b) {
+ function lcr595ab0a4167a1m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -39,7 +39,7 @@
   return $a;
  }
 
- function lcr593c9d19da05eraw($cx, $v, $ex = 0) {
+ function lcr595ab0a4167a1raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -63,7 +63,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9d19da05eraw($cx, $vv);
+      $ret[] = lcr595ab0a4167a1raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -175,10 +175,10 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr593c9d19da05ewi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<script type="text/javascript">
+    ob_start();echo '',lcr595ab0a4167a1wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<script type="text/javascript">
 	(function($){
 		$(document).one(\'template:merged\', function() {
-			var destination = $(\'div.pop-append-',lcr593c9d19da05eencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['itemObjectDBKey'])) ? $cx['scopes'][count($cx['scopes'])-1]['itemObjectDBKey'] : null)),'-',lcr593c9d19da05eencq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'\');
+			var destination = $(\'div.pop-append-',lcr595ab0a4167a1encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['itemObjectDBKey'])) ? $cx['scopes'][count($cx['scopes'])-1]['itemObjectDBKey'] : null)),'-',lcr595ab0a4167a1encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'\');
 			var loading = destination.closest(\'[data-lazyloadingspinner-target]\');
 			$(loading.data(\'lazyloadingspinner-target\')).addClass(\'hidden\');
 			// Remove the attr, so this element is not found again

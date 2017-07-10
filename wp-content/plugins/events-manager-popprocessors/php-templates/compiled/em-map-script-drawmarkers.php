@@ -1,5 +1,5 @@
 <?php
- function lcr593c9d326bdb1hbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr595ab0bee2f74hbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -16,18 +16,18 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr593c9d326bdb1exch($cx, $ch, $vars, $options);
+  return lcr595ab0bee2f74exch($cx, $ch, $vars, $options);
  }
 
- function lcr593c9d326bdb1encq($cx, $var) {
+ function lcr595ab0bee2f74encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9d326bdb1raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0bee2f74raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9d326bdb1exch($cx, $ch, $vars, &$options) {
+ function lcr595ab0bee2f74exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -40,13 +40,13 @@
   }
 
   if($e !== null) {
-   lcr593c9d326bdb1err($cx, $e);
+   lcr595ab0bee2f74err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr593c9d326bdb1raw($cx, $v, $ex = 0) {
+ function lcr595ab0bee2f74raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -70,7 +70,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9d326bdb1raw($cx, $vv);
+      $ret[] = lcr595ab0bee2f74raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -82,7 +82,7 @@
   return "$v";
  }
 
- function lcr593c9d326bdb1err($cx, $err) {
+ function lcr595ab0bee2f74err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -201,7 +201,7 @@ return function ($in = null, $options = null) {
 (function($){
 	$(document).one(\'template:merged\', function() {
 
-		var mapDiv = $(\'#',lcr593c9d326bdb1encq($cx, lcr593c9d326bdb1hbch($cx, 'lastGeneratedId', array(array(),array('template'=>(($inary && isset($in['mapdiv-template'])) ? $in['mapdiv-template'] : null))), 'encq', $in)),'\');
+		var mapDiv = $(\'#',lcr595ab0bee2f74encq($cx, lcr595ab0bee2f74hbch($cx, 'lastGeneratedId', array(array(),array('template'=>(($inary && isset($in['mapdiv-template'])) ? $in['mapdiv-template'] : null))), 'encq', $in)),'\');
 		var block = popManager.getBlock(mapDiv);
 		var pageSection = popManager.getPageSection(block);
 

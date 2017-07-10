@@ -1,7 +1,7 @@
 <?php
- function lcr593c9cf6581a7wi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr595ab08350980wi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr593c9cf6581a7m($cx, $v, array($bp[0] => $v));
+   $v = lcr595ab08350980m($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,15 +16,15 @@
   return $ret;
  }
 
- function lcr593c9cf6581a7encq($cx, $var) {
+ function lcr595ab08350980encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9cf6581a7raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab08350980raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9cf6581a7raw($cx, $v, $ex = 0) {
+ function lcr595ab08350980raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -48,7 +48,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9cf6581a7raw($cx, $vv);
+      $ret[] = lcr595ab08350980raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -60,7 +60,7 @@
   return "$v";
  }
 
- function lcr593c9cf6581a7m($cx, $a, $b) {
+ function lcr595ab08350980m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -175,8 +175,8 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr593c9cf6581a7wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<div class="',lcr593c9cf6581a7encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['class'])) ? $cx['scopes'][count($cx['scopes'])-1]['class'] : null)),'">
-		<a href="',lcr593c9cf6581a7encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['src'])) ? $in['userphoto']['src'] : null)),'" rel="',lcr593c9cf6581a7encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['rel'])) ? $in['userphoto']['rel'] : null)),'" title="',lcr593c9cf6581a7raw($cx, (($inary && isset($in['display-name'])) ? $in['display-name'] : null)),'"><img src="',lcr593c9cf6581a7encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['src'])) ? $in['userphoto']['src'] : null)),'" class="img-responsive thumbnail" alt="',lcr593c9cf6581a7raw($cx, (($inary && isset($in['display-name'])) ? $in['display-name'] : null)),'" width="',lcr593c9cf6581a7encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['width'])) ? $in['userphoto']['width'] : null)),'" height="',lcr593c9cf6581a7encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['height'])) ? $in['userphoto']['height'] : null)),'"></a>
+    ob_start();echo '',lcr595ab08350980wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<div class="',lcr595ab08350980encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['class'])) ? $cx['scopes'][count($cx['scopes'])-1]['class'] : null)),'" style="',lcr595ab08350980encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['style'])) ? $cx['scopes'][count($cx['scopes'])-1]['style'] : null)),'">
+		<a href="',lcr595ab08350980encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['src'])) ? $in['userphoto']['src'] : null)),'" rel="',lcr595ab08350980encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['rel'])) ? $in['userphoto']['rel'] : null)),'" title="',lcr595ab08350980raw($cx, (($inary && isset($in['display-name'])) ? $in['display-name'] : null)),'"><img src="',lcr595ab08350980encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['src'])) ? $in['userphoto']['src'] : null)),'" class="img-responsive thumbnail" alt="',lcr595ab08350980raw($cx, (($inary && isset($in['display-name'])) ? $in['display-name'] : null)),'" width="',lcr595ab08350980encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['width'])) ? $in['userphoto']['width'] : null)),'" height="',lcr595ab08350980encq($cx, ((isset($in['userphoto']) && is_array($in['userphoto']) && isset($in['userphoto']['height'])) ? $in['userphoto']['height'] : null)),'"></a>
 	</div>
 ';}),'';return ob_get_clean();
 };

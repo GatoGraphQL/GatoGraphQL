@@ -1,8 +1,8 @@
 {{! Message can be given as text, or as a code (to eval against the pre-loaded messages in the configuration) }}
 {{#with feedback-msg}}
-	<div class="media {{../class}}">
+	<div class="media {{../class}}" style="{{../style}}">
 		{{#if icon}}
-			<div class="pull-left">
+			<div class="media-left">
 				<span class="pop-messagefeedback-icon glyphicon {{icon}} media-object"></span>
 			</div>
 		{{/if}}

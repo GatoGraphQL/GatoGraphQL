@@ -1,13 +1,13 @@
 <?php
- function lcr593c9ce5e49e8encq($cx, $var) {
+ function lcr595ab0723050fencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9ce5e49e8raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0723050fraw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9ce5e49e8raw($cx, $v, $ex = 0) {
+ function lcr595ab0723050fraw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -31,7 +31,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9ce5e49e8raw($cx, $vv);
+      $ret[] = lcr595ab0723050fraw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -143,6 +143,6 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<hr class="',lcr593c9ce5e49e8encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'"/>';return ob_get_clean();
+    ob_start();echo '<hr class="',lcr595ab0723050fencq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" style="',lcr595ab0723050fencq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" />';return ob_get_clean();
 };
 ?>

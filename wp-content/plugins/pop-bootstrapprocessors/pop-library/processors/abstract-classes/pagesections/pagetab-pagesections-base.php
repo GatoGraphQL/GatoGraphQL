@@ -23,7 +23,8 @@ class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processo
 
 		$ret = parent::get_template_configuration($template_id, $atts);
 
-		$ret['btn-class'] = $this->get_btn_class($template_id, $atts);
+		// $ret['btn-class'] = $this->get_btn_class($template_id, $atts);
+		$ret[GD_JS_CLASSES/*'classes'*/]['btn'] = $this->get_btn_class($template_id, $atts);
 
 		return $ret;
 	}

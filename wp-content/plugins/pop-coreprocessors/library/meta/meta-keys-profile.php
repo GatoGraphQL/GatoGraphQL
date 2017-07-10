@@ -32,10 +32,10 @@ define ('GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT' , 'pref_ema
 define ('GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST' , 'pref_emailnotif_network_updownvotedpost');
 define ('GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST' , 'pref_emailnotif_subscribedtopic_createdpost');
 define ('GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT' , 'pref_emailnotif_subscribedtopic_addedcomment');
-define ('GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYCONTENT' , 'pref_emaildigests_dailynewcontent');
-define ('GD_METAKEY_PROFILE_EMAILDIGESTS_BIWEEKLYUPCOMINGEVENTS' , 'pref_emaildigests_biweeklyupcomingevents');
-define ('GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNETWORKACTIVITY' , 'pref_emaildigests_dailynetworkactivity');
-define ('GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY' , 'pref_emaildigests_dailysubscribedtopicsactivity');
+define ('GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYLATESTPOSTS' , 'pref_emaildigests_weeklylatestposts');
+define ('GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS' , 'pref_emaildigests_weeklyupcomingevents');
+define ('GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNOTIFICATIONS' , 'pref_emaildigests_dailynotifications');
+// define ('GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY' , 'pref_emaildigests_dailysubscribedtopicsactivity');
 
 add_filter('gd_acf_get_keys_store_as_array', 'gd_acf_get_keys_store_as_array_profiles');
 function gd_acf_get_keys_store_as_array_profiles($keys) {

@@ -17,6 +17,9 @@ class GD_Template_Processor_NotificationTimeLayoutsBase extends GD_Template_Proc
 		$ret = parent::get_data_fields($template_id, $atts);
 
 		$ret[] = 'hist-time-nogmt';
+
+		// This one is needed only for the notifications digest, using automated emails
+		$ret[] = 'hist-time-formatted-string';
 		
 		return $ret;
 	}

@@ -4,6 +4,7 @@
 // Load Plugin-specific Libraries
 //-------------------------------------------------------------------------------------
 
+require_once 'pop-frontendengine/load.php';
 require_once 'pop-bootstrapprocessors/load.php';
 require_once 'pop-coreprocessors/load.php';
 

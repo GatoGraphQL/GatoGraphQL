@@ -39,6 +39,11 @@ class GD_DataLoad_IOHandler_NotificationList extends GD_DataLoad_IOHandler_List 
 			return '>';
 		}
 
+		if (isset($atts['hist_time_compare'])) {
+
+			return $atts['hist_time_compare'];
+		}
+
 		return '<=';
 	}
 

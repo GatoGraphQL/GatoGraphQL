@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('PHOTOSWIPEPOP_VERSION', 0.102);
+define('PHOTOSWIPEPOP_VERSION', 0.103);
 define('PHOTOSWIPEPOP_PHOTOSWIPE_VERSION', '4.1.1');
 define('PHOTOSWIPEPOP_DIR', dirname(__FILE__));
 

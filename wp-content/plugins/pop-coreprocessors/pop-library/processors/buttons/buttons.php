@@ -14,6 +14,7 @@ define ('GD_TEMPLATE_BUTTON_POSTVIEW', PoP_ServerUtils::get_template_definition(
 define ('GD_TEMPLATE_BUTTON_POSTPREVIEW', PoP_ServerUtils::get_template_definition('button-postpreview'));
 define ('GD_TEMPLATE_BUTTON_POSTPERMALINK', PoP_ServerUtils::get_template_definition('button-postpermalink'));
 define ('GD_TEMPLATE_BUTTON_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('postbutton-comments'));
+define ('GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL', PoP_ServerUtils::get_template_definition('postbutton-comments-label'));
 define ('GD_TEMPLATE_BUTTON_FOLLOWUSER_PREVIEW', PoP_ServerUtils::get_template_definition('button-followuser-preview'));
 define ('GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL', PoP_ServerUtils::get_template_definition('button-sidebar-followuser-full'));
 define ('GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW', PoP_ServerUtils::get_template_definition('button-unfollowuser-preview'));
@@ -49,6 +50,7 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 			GD_TEMPLATE_BUTTON_POSTPREVIEW,
 			GD_TEMPLATE_BUTTON_POSTPERMALINK,
 			GD_TEMPLATE_BUTTON_POSTCOMMENTS,
+			GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL,
 			GD_TEMPLATE_BUTTON_FOLLOWUSER_PREVIEW,
 			GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL,
 			GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW,
@@ -109,6 +111,10 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 
 				return GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS;
 
+			case GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL:
+
+				return GD_TEMPLATE_BUTTONINNER_POSTCOMMENTS_LABEL;
+
 			default:
 
 				$buttoninners = array(
@@ -165,6 +171,7 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 				return 'preview-url';
 					
 			case GD_TEMPLATE_BUTTON_POSTCOMMENTS:
+			case GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL:
 				
 				return 'comments-url';
 					
@@ -267,6 +274,7 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 				return __('Permalink', 'pop-coreprocessors');
 			
 			case GD_TEMPLATE_BUTTON_POSTCOMMENTS:
+			case GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL:
 
 				return __('Comments', 'pop-coreprocessors');
 
@@ -385,6 +393,7 @@ class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 		
 			case GD_TEMPLATE_BUTTON_POSTPERMALINK:
 			case GD_TEMPLATE_BUTTON_POSTCOMMENTS:
+			case GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL:
 
 				$ret .= ' btn btn-link';
 				break;

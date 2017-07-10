@@ -538,6 +538,12 @@ popManager = {
 					context.classes.appendable = context[M.JS_CLASSES][M.JS_APPENDABLE];
 				}
 			}
+			if (context[M.JS_STYLE]) {
+				context.style = context[M.JS_STYLE];
+			}
+			if (context[M.JS_STYLES]) {
+				context.styles = context[M.JS_STYLES];
+			}
 			if (context[M.JS_TITLES]) {
 				context.titles = context[M.JS_TITLES];
 			}

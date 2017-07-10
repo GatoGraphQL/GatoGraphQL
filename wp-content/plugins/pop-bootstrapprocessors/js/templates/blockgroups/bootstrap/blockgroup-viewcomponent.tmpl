@@ -1,12 +1,12 @@
-<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="{{type}} {{classes.bootstrap-component}} {{classes.viewcomponent}}" tabindex="-1" role="dialog" aria-labelledby="{{lastGeneratedId group=bootstrap-type}}" aria-hidden="true" {{#each viewcomponent-params}} {{@key}}="{{this}}"{{/each}}>
-	<div class="{{type}}-dialog {{classes.dialog}}">
+<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="{{type}} {{classes.bootstrap-component}} {{classes.viewcomponent}}" style="{{styles.bootstrap-component}}{{styles.viewcomponent}}" tabindex="-1" role="dialog" aria-labelledby="{{lastGeneratedId group=bootstrap-type}}" aria-hidden="true" {{#each viewcomponent-params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="{{type}}-dialog {{classes.dialog}}" style="{{styles.dialog}}">
 		<div class="{{type}}-content">
 			<div class="{{type}}-header">
 				<button type="button" class="close close-lg" data-dismiss="{{type}}" aria-hidden="true">&times;</button>
 				{{#if fontawesome}}<i class="fa {{fontawesome}} fa-fw"></i>{{/if}}{{#if titles.header}}<i>{{{titles.header}}}</i>{{/if}}
 				<div class="pop-box"></div>
 			</div>
-			<div id="{{lastGeneratedId group=bootstrap-type}}-container" class="{{type}}-body {{classes.container}}">
+			<div id="{{lastGeneratedId group=bootstrap-type}}-container" class="{{type}}-body {{classes.container}}" style="{{styles.container}}">
 				{{#each settings-ids.blockunits}}
 					{{#withBlock ../root-context this}}
 						{{enterModule .}}

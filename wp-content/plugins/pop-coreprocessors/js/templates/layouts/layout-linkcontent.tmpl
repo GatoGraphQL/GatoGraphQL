@@ -1,5 +1,5 @@
 {{#with itemObject}}
-	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}}" style="{{../style}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
 		{{{linkcontent}}}
 	</div>
 {{/with}}

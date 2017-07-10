@@ -1,17 +1,17 @@
 <?php
- function lcr593ca4f9b2171ifvar($cx, $v, $zero) {
+ function lcr595ab05f07d62ifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr593ca4f9b2171encq($cx, $var) {
+ function lcr595ab05f07d62encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593ca4f9b2171raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab05f07d62raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593ca4f9b2171raw($cx, $v, $ex = 0) {
+ function lcr595ab05f07d62raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -35,7 +35,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593ca4f9b2171raw($cx, $vv);
+      $ret[] = lcr595ab05f07d62raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -147,6 +147,6 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '';if (lcr593ca4f9b2171ifvar($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), false)){echo '';if (lcr593ca4f9b2171ifvar($cx, (($inary && isset($in['appendable'])) ? $in['appendable'] : null), false)){echo 'pop-append-',lcr593ca4f9b2171encq($cx, (($inary && isset($in['itemObjectDBKey'])) ? $in['itemObjectDBKey'] : null)),'-',lcr593ca4f9b2171encq($cx, ((isset($in['itemObject']) && is_array($in['itemObject']) && isset($in['itemObject']['id'])) ? $in['itemObject']['id'] : null)),' ',lcr593ca4f9b2171encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['appendable'])) ? $in['classes']['appendable'] : null)),'';}else{echo '';}echo '';}else{echo '';}echo '';return ob_get_clean();
+    ob_start();echo '';if (lcr595ab05f07d62ifvar($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), false)){echo '';if (lcr595ab05f07d62ifvar($cx, (($inary && isset($in['appendable'])) ? $in['appendable'] : null), false)){echo 'pop-append-',lcr595ab05f07d62encq($cx, (($inary && isset($in['itemObjectDBKey'])) ? $in['itemObjectDBKey'] : null)),'-',lcr595ab05f07d62encq($cx, ((isset($in['itemObject']) && is_array($in['itemObject']) && isset($in['itemObject']['id'])) ? $in['itemObject']['id'] : null)),' ',lcr595ab05f07d62encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['appendable'])) ? $in['classes']['appendable'] : null)),'';}else{echo '';}echo '';}else{echo '';}echo '';return ob_get_clean();
 };
 ?>

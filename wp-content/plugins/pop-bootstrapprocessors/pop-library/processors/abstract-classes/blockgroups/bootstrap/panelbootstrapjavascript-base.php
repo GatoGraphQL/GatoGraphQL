@@ -294,7 +294,8 @@ class GD_Template_Processor_PanelBootstrapJavascriptBlockGroupsBase extends GD_T
 			
 			if ($panelheader_class = $this->get_panelheader_class($template_id)) {
 				
-				$ret['panelheader-class'] = $panelheader_class;
+				// $ret['panelheader-class'] = $panelheader_class;
+				$ret[GD_JS_CLASSES/*'classes'*/]['panelheader'] = $panelheader_class;
 			}
 			if ($panelheader_item_class = $this->get_panelheader_item_class($template_id)) {
 				
@@ -323,7 +324,8 @@ class GD_Template_Processor_PanelBootstrapJavascriptBlockGroupsBase extends GD_T
 		}
 		if ($panel_class = $this->get_panel_class($template_id)) {
 			
-			$ret['panel-class'] = $panel_class;
+			// $ret['panel-class'] = $panel_class;
+			$ret[GD_JS_CLASSES/*'classes'*/]['panel'] = $panel_class;
 		}
 		if ($custom_panel_class = $this->get_custom_panel_class($template_id, $atts)) {
 			

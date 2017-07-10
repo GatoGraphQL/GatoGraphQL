@@ -75,6 +75,7 @@ class GD_Template_Processor_FullObjectLayoutsBase extends GD_Template_ProcessorB
 
 		$ret[GD_JS_CLASSES/*'classes'*/] = array(
 			'wrapper' => '',
+			'inner-wrapper' => 'row',
 			'socialmedia' => '',
 			'content' => 'readable clearfix',
 			'sidebar' => '',

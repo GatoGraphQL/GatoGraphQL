@@ -15,7 +15,7 @@ function gd_ure_authorsidebars_configuration($configuration) {
 	// Merge in the configuration
 	$panel_conf = array(
 		'widget-class' => 'panel panel-default',
-		'title-wrapper' => 'panel-heading',
+		'title-wrapper-class' => 'panel-heading',
 		'title-class' => 'panel-title',
 		'body-class' => 'panel-body'
 	);

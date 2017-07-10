@@ -65,6 +65,13 @@ class GD_DataLoad_FieldProcessor_Notifications extends GD_DataLoad_FieldProcesso
 				// because moment.js will
 				$value = $notification->hist_time - (get_option('gmt_offset') * 3600);
 				break;
+			case 'hist-time-formatted-string':
+				// Must convert date using GMT
+				$value = sprintf(
+					__('%s ago', 'aal-pop'),
+					humanTiming($notification->hist_time - (get_option('gmt_offset') * 3600))
+				);
+				break;
 
 			// Specific fields to be used by the subcomponents, based on a combination of Object Type + Action
 			// Needed to, for instance, load the comment immediately, already from the notification

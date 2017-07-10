@@ -1,6 +1,6 @@
 {{#each block-settings-ids.blockunits}}
 	{{#withBlock ../. this}}
-		<div {{#generateId context=../../. targetId=../../pss.pssId group='modal'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} role="dialog" class="modal {{../../class}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}} aria-hidden="true" aria-labelledby="{{lastGeneratedId context=../../. targetId=../../pss.pssId group='modal'}}">	
+		<div {{#generateId context=../../. targetId=../../pss.pssId group='modal'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} role="dialog" class="modal {{../../class}}" style="{{../../style}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}} aria-hidden="true" aria-labelledby="{{lastGeneratedId context=../../. targetId=../../pss.pssId group='modal'}}">	
 			<div class="pop-modaldialog modal-dialog {{#ifget ../../classes.dialogs template}}{{{get ../../classes.dialogs template}}}{{/ifget}}">
 				<div class="pop-modalcontent modal-content">
 					<div class="modal-header">
@@ -9,7 +9,7 @@
 							{{#ifget ../../titles.headers template}}
 								{{{get ../../titles.headers template}}}
 							{{/ifget}}
-							<div class="pop-box {{../../classes.header}}"></div>
+							<div class="pop-box {{../../classes.header}}" style="{{../../styles.header}}"></div>
 						</div>
 					</div>
 					<div class="pop-modalbody {{#ifget ../../classes.bodies template}}{{{get ../../classes.bodies template}}}{{/ifget}}">

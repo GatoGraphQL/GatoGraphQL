@@ -1,5 +1,5 @@
 {{#with itemObject}}
-	<div {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} class="pop-sm clearfix {{../class}}">
+	<div {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} class="pop-sm clearfix {{../class}}" style="{{../style}}">
 		{{#each ../modules}}
 			{{enterModule ../../.}}
 		{{/each}}

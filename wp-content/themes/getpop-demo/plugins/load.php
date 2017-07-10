@@ -6,6 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+require_once 'pop-frontendengine/load.php';
 // require_once 'pop-wpapi/load.php';
 // require_once 'pop-coreprocessors/load.php';
 // require_once 'events-manager-popprocessors/load.php';

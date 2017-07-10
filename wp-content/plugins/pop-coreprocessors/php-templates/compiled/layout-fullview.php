@@ -1,7 +1,7 @@
 <?php
- function lcr593c9d0a02f88wi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr595ab0962a56cwi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr593c9d0a02f88m($cx, $v, array($bp[0] => $v));
+   $v = lcr595ab0962a56cm($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,7 +16,7 @@
   return $ret;
  }
 
- function lcr593c9d0a02f88hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr595ab0962a56chbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -56,10 +56,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr593c9d0a02f88m($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr595ab0962a56cm($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr593c9d0a02f88m($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr595ab0962a56cm($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -88,18 +88,18 @@
    };
   }
 
-  return lcr593c9d0a02f88exch($cx, $ch, $vars, $options);
+  return lcr595ab0962a56cexch($cx, $ch, $vars, $options);
  }
 
- function lcr593c9d0a02f88encq($cx, $var) {
+ function lcr595ab0962a56cencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9d0a02f88raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0962a56craw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9d0a02f88sec($cx, $v, $bp, $in, $each, $cb, $else = null) {
+ function lcr595ab0962a56csec($cx, $v, $bp, $in, $each, $cb, $else = null) {
   $push = ($in !== $v) || $each;
 
   $isAry = is_array($v) || ($v instanceof \ArrayObject);
@@ -152,10 +152,10 @@
      $i++;
     }
     if (isset($bp[0])) {
-     $raw = lcr593c9d0a02f88m($cx, $raw, array($bp[0] => $raw));
+     $raw = lcr595ab0962a56cm($cx, $raw, array($bp[0] => $raw));
     }
     if (isset($bp[1])) {
-     $raw = lcr593c9d0a02f88m($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
+     $raw = lcr595ab0962a56cm($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
     }
     $ret[] = $cb($cx, $raw);
    }
@@ -208,7 +208,7 @@
   return '';
  }
 
- function lcr593c9d0a02f88hbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr595ab0962a56chbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -225,14 +225,14 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr593c9d0a02f88exch($cx, $ch, $vars, $options);
+  return lcr595ab0962a56cexch($cx, $ch, $vars, $options);
  }
 
- function lcr593c9d0a02f88ifvar($cx, $v, $zero) {
+ function lcr595ab0962a56cifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr593c9d0a02f88m($cx, $a, $b) {
+ function lcr595ab0962a56cm($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -247,7 +247,7 @@
   return $a;
  }
 
- function lcr593c9d0a02f88exch($cx, $ch, $vars, &$options) {
+ function lcr595ab0962a56cexch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -260,13 +260,13 @@
   }
 
   if($e !== null) {
-   lcr593c9d0a02f88err($cx, $e);
+   lcr595ab0962a56cerr($cx, $e);
   }
 
   return $r;
  }
 
- function lcr593c9d0a02f88raw($cx, $v, $ex = 0) {
+ function lcr595ab0962a56craw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -290,7 +290,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9d0a02f88raw($cx, $vv);
+      $ret[] = lcr595ab0962a56craw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -302,7 +302,7 @@
   return "$v";
  }
 
- function lcr593c9d0a02f88err($cx, $err) {
+ function lcr595ab0962a56cerr($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -432,31 +432,31 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr593c9d0a02f88wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<div ',lcr593c9d0a02f88hbbch($cx, 'generateId', array(array(),array('context'=>$cx['scopes'][count($cx['scopes'])-1])), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['id'])) ? $cx['scopes'][count($cx['scopes'])-1]['id'] : null)),'';}),' class="pop-post-',lcr593c9d0a02f88encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),' post-layout fullview ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['class'])) ? $cx['scopes'][count($cx['scopes'])-1]['class'] : null)),' ',lcr593c9d0a02f88sec($cx, (($inary && isset($in['cat-slugs'])) ? $in['cat-slugs'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr593c9d0a02f88encq($cx, $in),'';}),'">
-		<div class="wrapper ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['wrapper'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['wrapper'] : null)),'">
-',lcr593c9d0a02f88hbbch($cx, 'compare', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['title-position'])) ? $cx['scopes'][count($cx['scopes'])-1]['title-position'] : null),'top'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d0a02f88hbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-1],'title'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '					',lcr593c9d0a02f88encq($cx, lcr593c9d0a02f88hbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-2]),array()), 'encq', $in)),'
-';}),'';}),'			<div class="row">
-',lcr593c9d0a02f88hbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-1],'sidebar'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '					<div class="sidebar topsidebar ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]['classes']) && isset($cx['scopes'][count($cx['scopes'])-2]['classes']['sidebar'])) ? $cx['scopes'][count($cx['scopes'])-2]['classes']['sidebar'] : null)),'">
-						',lcr593c9d0a02f88encq($cx, lcr593c9d0a02f88hbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-2]),array()), 'encq', $in)),'
+    ob_start();echo '',lcr595ab0962a56cwi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<div ',lcr595ab0962a56chbbch($cx, 'generateId', array(array(),array('context'=>$cx['scopes'][count($cx['scopes'])-1])), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['id'])) ? $cx['scopes'][count($cx['scopes'])-1]['id'] : null)),'';}),' class="pop-post-',lcr595ab0962a56cencq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),' post-layout fullview ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['class'])) ? $cx['scopes'][count($cx['scopes'])-1]['class'] : null)),' ',lcr595ab0962a56csec($cx, (($inary && isset($in['cat-slugs'])) ? $in['cat-slugs'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr595ab0962a56cencq($cx, $in),'';}),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['style'])) ? $cx['scopes'][count($cx['scopes'])-1]['style'] : null)),'">
+		<div class="wrapper ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['wrapper'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['wrapper'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['wrapper'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['wrapper'] : null)),'">
+',lcr595ab0962a56chbbch($cx, 'compare', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['title-position'])) ? $cx['scopes'][count($cx['scopes'])-1]['title-position'] : null),'top'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0962a56chbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-1],'title'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '					',lcr595ab0962a56cencq($cx, lcr595ab0962a56chbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-2]),array()), 'encq', $in)),'
+';}),'';}),'			<div class="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['inner-wrapper'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['inner-wrapper'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['inner-wrapper'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['inner-wrapper'] : null)),'">
+',lcr595ab0962a56chbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-1],'sidebar'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '					<div class="sidebar topsidebar ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]['classes']) && isset($cx['scopes'][count($cx['scopes'])-2]['classes']['sidebar'])) ? $cx['scopes'][count($cx['scopes'])-2]['classes']['sidebar'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]['styles']) && isset($cx['scopes'][count($cx['scopes'])-2]['styles']['sidebar'])) ? $cx['scopes'][count($cx['scopes'])-2]['styles']['sidebar'] : null)),'">
+						',lcr595ab0962a56cencq($cx, lcr595ab0962a56chbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-2]),array()), 'encq', $in)),'
 					</div>
-';}),'				<div class="content-body ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['content-body'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['content-body'] : null)),'">
-';if (lcr593c9d0a02f88ifvar($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'] : null), false)){echo '						<div class="headers ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['headers'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['headers'] : null)),'">
-',lcr593c9d0a02f88sec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d0a02f88hbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '									<div class="header ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-3]) && is_array($cx['scopes'][count($cx['scopes'])-3]['classes']) && isset($cx['scopes'][count($cx['scopes'])-3]['classes']['header'])) ? $cx['scopes'][count($cx['scopes'])-3]['classes']['header'] : null)),'">
-										',lcr593c9d0a02f88encq($cx, lcr593c9d0a02f88hbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
+';}),'				<div class="content-body ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['content-body'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['content-body'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['content-body'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['content-body'] : null)),'">
+';if (lcr595ab0962a56cifvar($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'] : null), false)){echo '						<div class="headers ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['headers'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['headers'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['headers'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['headers'] : null)),'">
+',lcr595ab0962a56csec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['headers'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0962a56chbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '									<div class="header ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-3]) && is_array($cx['scopes'][count($cx['scopes'])-3]['classes']) && isset($cx['scopes'][count($cx['scopes'])-3]['classes']['header'])) ? $cx['scopes'][count($cx['scopes'])-3]['classes']['header'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-3]) && is_array($cx['scopes'][count($cx['scopes'])-3]['styles']) && isset($cx['scopes'][count($cx['scopes'])-3]['styles']['header'])) ? $cx['scopes'][count($cx['scopes'])-3]['styles']['header'] : null)),'">
+										',lcr595ab0962a56cencq($cx, lcr595ab0962a56chbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
 									</div>
 ';}),'';}),'						</div>
-';}else{echo '';}echo '',lcr593c9d0a02f88hbbch($cx, 'compare', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['title-position'])) ? $cx['scopes'][count($cx['scopes'])-1]['title-position'] : null),'body'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d0a02f88hbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-1],'title'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '							',lcr593c9d0a02f88encq($cx, lcr593c9d0a02f88hbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-2]),array()), 'encq', $in)),'
-';}),'';}),'					<div class="content pop-content ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['content'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['content'] : null)),' clearfix">
-';if (lcr593c9d0a02f88ifvar($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'] : null), false)){echo '							<div class="abovecontent ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['abovecontent'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['abovecontent'] : null)),'">
-',lcr593c9d0a02f88sec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d0a02f88hbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '										',lcr593c9d0a02f88encq($cx, lcr593c9d0a02f88hbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
+';}else{echo '';}echo '',lcr595ab0962a56chbbch($cx, 'compare', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['title-position'])) ? $cx['scopes'][count($cx['scopes'])-1]['title-position'] : null),'body'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0962a56chbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-1],'title'),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '							',lcr595ab0962a56cencq($cx, lcr595ab0962a56chbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-2]),array()), 'encq', $in)),'
+';}),'';}),'					<div class="content pop-content ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['content'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['content'] : null)),' clearfix" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['content'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['content'] : null)),'">
+';if (lcr595ab0962a56cifvar($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'] : null), false)){echo '							<div class="abovecontent ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['abovecontent'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['abovecontent'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['abovecontent'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['abovecontent'] : null)),'">
+',lcr595ab0962a56csec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['abovecontent'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0962a56chbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '										',lcr595ab0962a56cencq($cx, lcr595ab0962a56chbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
 ';}),'';}),'							</div>
-';}else{echo '';}echo '						<div class="',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['content-inner'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['content-inner'] : null)),'">
-',lcr593c9d0a02f88sec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['content'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['content'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d0a02f88hbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '									',lcr593c9d0a02f88encq($cx, lcr593c9d0a02f88hbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
+';}else{echo '';}echo '						<div class="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['content-inner'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['content-inner'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['content-inner'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['content-inner'] : null)),'">
+',lcr595ab0962a56csec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['content'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['content'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0962a56chbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '									',lcr595ab0962a56cencq($cx, lcr595ab0962a56chbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
 ';}),'';}),'						</div>
 					</div>	
-';if (lcr593c9d0a02f88ifvar($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'] : null), false)){echo '						<div class="footers ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['footers'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['footers'] : null)),'">
-',lcr593c9d0a02f88sec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d0a02f88hbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '									<div class="footer ',lcr593c9d0a02f88encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-3]) && is_array($cx['scopes'][count($cx['scopes'])-3]['classes']) && isset($cx['scopes'][count($cx['scopes'])-3]['classes']['footer'])) ? $cx['scopes'][count($cx['scopes'])-3]['classes']['footer'] : null)),'">
-										',lcr593c9d0a02f88encq($cx, lcr593c9d0a02f88hbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
+';if (lcr595ab0962a56cifvar($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'] : null), false)){echo '						<div class="footers ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['footers'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['footers'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['styles']) && isset($cx['scopes'][count($cx['scopes'])-1]['styles']['footers'])) ? $cx['scopes'][count($cx['scopes'])-1]['styles']['footers'] : null)),'">
+',lcr595ab0962a56csec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['template-ids']) && isset($cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'])) ? $cx['scopes'][count($cx['scopes'])-1]['template-ids']['footers'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0962a56chbbch($cx, 'withModule', array(array($cx['scopes'][count($cx['scopes'])-2],$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '									<div class="footer ',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-3]) && is_array($cx['scopes'][count($cx['scopes'])-3]['classes']) && isset($cx['scopes'][count($cx['scopes'])-3]['classes']['footer'])) ? $cx['scopes'][count($cx['scopes'])-3]['classes']['footer'] : null)),'" style="',lcr595ab0962a56cencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-3]) && is_array($cx['scopes'][count($cx['scopes'])-3]['styles']) && isset($cx['scopes'][count($cx['scopes'])-3]['styles']['footer'])) ? $cx['scopes'][count($cx['scopes'])-3]['styles']['footer'] : null)),'">
+										',lcr595ab0962a56cencq($cx, lcr595ab0962a56chbch($cx, 'enterModule', array(array($cx['scopes'][count($cx['scopes'])-3]),array()), 'encq', $in)),'
 									</div>
 ';}),'';}),'						</div>
 ';}else{echo '';}echo '				</div>

@@ -5,7 +5,7 @@
 
 			var block = $('#{{../bs.bId}}');
 			var pageSection = $('#{{../pss.psId}}');
-			popMapRuntime.setMarkerData(pageSection, block, '{{title}}', '<div class="media">{{#withSublevel ../thumb.name}}<a class="pull-left" href="{{../url}}"><img src="{{src}}" width="{{width}}" height="{{height}}" alt="{{../title}}"></a>{{/withSublevel}}<div class="media-body"><div class="authors">{{#each authors}}{{#if @index}}{{{../../authors-sep}}}{{/if}}{{#withModule ../../. "authors"}}{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.authors.db-key itemObjectId=../.}}{{/withModule}}{{/each}}</div><a href="{{url}}"><h4 class="media-heading">{{{title}}}</h4></a>{{#withModule ../. "layout-extra"}}{{enterModule ../../.}}{{/withModule}}</div></div>');
+			popMapRuntime.setMarkerData(pageSection, block, '{{title}}', '<div class="media">{{#withSublevel ../thumb.name}}<a class="media-left" href="{{../url}}"><img src="{{src}}" width="{{width}}" height="{{height}}" alt="{{../title}}"></a>{{/withSublevel}}<div class="media-body"><div class="authors">{{#each authors}}{{#if @index}}{{{../../authors-sep}}}{{/if}}{{#withModule ../../. "authors"}}{{enterModule ../../../. itemDBKey=../../../bs.db-keys.subcomponents.authors.db-key itemObjectId=../.}}{{/withModule}}{{/each}}</div><a href="{{url}}"><h4 class="media-heading">{{{title}}}</h4></a>{{#withModule ../. "layout-extra"}}{{enterModule ../../.}}{{/withModule}}</div></div>');
 		});
 	})(jQuery);
 	</script>

@@ -1,8 +1,8 @@
-<div class="buttongroup-wrapper {{classes.wrapper}}">
+<div class="buttongroup-wrapper {{classes.wrapper}}" style="{{styles.wrapper}}">
 	{{#compare type "tab"}}
-		<ul {{#generateId}}{{id}}{{/generateId}} class="nav nav-tabs {{class}}" role="tablist" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+		<ul {{#generateId}}{{id}}{{/generateId}} class="nav nav-tabs {{class}}" style="{{style}}" role="tablist" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 			{{#each headers}}
-				<li role="presentation" class="{{../classes.item}} {{#if active}}active{{/if}} {{#if subheaders}}dropdown{{/if}}">
+				<li role="presentation" class="{{../classes.item}} {{#if active}}active{{/if}} {{#if subheaders}}dropdown{{/if}}" style="{{../styles.item}}">
 					<a href="{{url}}">
 						{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}<span class="tab-title">{{{title}}}</span>{{#if subheaders}} <span class="caret"></span>{{/if}}
 					</a>
@@ -22,14 +22,14 @@
 		</ul>
 	{{/compare}}
 	{{#compare type "btn-group"}}
-		<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" role="group" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+		<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}" role="group" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 			{{#each headers}}
-				<a class="{{#if active}}active{{/if}} {{../classes.item}}" href="{{url}}">
+				<a class="{{#if active}}active{{/if}} {{../classes.item}}" style="{{../styles.item}}" href="{{url}}">
 					{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
 				</a>
 				{{#if subheaders}}
-					<span class="{{#if active}}active{{/if}} {{../classes.item}} dropdown">
-						<a href="#" role="button" class="{{#if active}}active{{/if}} {{../classes.item-dropdown}} dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+					<span class="{{#if active}}active{{/if}} {{../classes.item}} dropdown" style="{{../styles.item}}">
+						<a href="#" role="button" class="{{#if active}}active{{/if}} {{../classes.item-dropdown}} dropdown-toggle" style="{{../styles.item-dropdown}}" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
 						<ul class="dropdown-menu pull-right" role="menu">
 							{{#each subheaders}}
 								<li role="presentation" class="{{#if active}}active{{/if}}">
@@ -45,7 +45,7 @@
 		</div>
 	{{/compare}}
 	{{#compare type "dropdown"}}
-		<div {{#generateId}}{{id}}{{/generateId}} class="clearfix {{class}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+		<div {{#generateId}}{{id}}{{/generateId}} class="clearfix {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 			<div class="dropdown pull-right">
 				<a href="#" class="dropdown-toggle close close-sm" data-toggle="dropdown" role="button">{{{titles.dropdown}}}</a>
 				<ul class="dropdown-menu" role="menu">

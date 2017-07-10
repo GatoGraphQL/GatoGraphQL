@@ -21,7 +21,8 @@ class GD_Template_Processor_DropdownButtonControlsBase extends GD_Template_Proce
 		$ret = parent::get_template_configuration($template_id, $atts);
 
 		if ($class = $this->get_btn_class($template_id)) {
-			$ret['btn-class'] = $class;
+			// $ret['btn-class'] = $class;
+			$ret[GD_JS_CLASSES/*'classes'*/]['btn'] = $class;
 		}
 		
 		return $ret;

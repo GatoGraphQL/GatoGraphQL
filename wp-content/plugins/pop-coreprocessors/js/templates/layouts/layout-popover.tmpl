@@ -1,5 +1,5 @@
 {{#with itemObject}}
-	<span class="make-popover {{../class}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} data-popover-target="#popover-{{../itemObjectDBKey}}-{{id}}">
+	<span class="make-popover {{../class}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} data-popover-target="#popover-{{../itemObjectDBKey}}-{{id}}">
 		{{#withModule ../. "layout-content"}}
 			{{enterModule ../../.}}
 		{{/withModule}}

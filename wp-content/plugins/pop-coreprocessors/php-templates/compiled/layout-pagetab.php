@@ -1,7 +1,7 @@
 <?php
- function lcr593c9cfb491fawi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr595ab0887a29dwi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr593c9cfb491fam($cx, $v, array($bp[0] => $v));
+   $v = lcr595ab0887a29dm($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,19 +16,19 @@
   return $ret;
  }
 
- function lcr593c9cfb491faencq($cx, $var) {
+ function lcr595ab0887a29dencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9cfb491faraw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0887a29draw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9cfb491faifvar($cx, $v, $zero) {
+ function lcr595ab0887a29difvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr593c9cfb491faraw($cx, $v, $ex = 0) {
+ function lcr595ab0887a29draw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -52,7 +52,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9cfb491faraw($cx, $vv);
+      $ret[] = lcr595ab0887a29draw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -64,7 +64,7 @@
   return "$v";
  }
 
- function lcr593c9cfb491fam($cx, $a, $b) {
+ function lcr595ab0887a29dm($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -179,8 +179,8 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr593c9cfb491fawi($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['thumb'])) ? $in['bs']['feedback']['thumb'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<img src="',lcr593c9cfb491faencq($cx, (($inary && isset($in['src'])) ? $in['src'] : null)),'" width="',lcr593c9cfb491faencq($cx, (($inary && isset($in['w'])) ? $in['w'] : null)),'" height="',lcr593c9cfb491faencq($cx, (($inary && isset($in['h'])) ? $in['h'] : null)),'">
-';}),'',lcr593c9cfb491fawi($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['fontawesome'])) ? $in['bs']['feedback']['fontawesome'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '<i class="fa fa-fw ',lcr593c9cfb491faencq($cx, $in),'"></i>';}),'
-';if (lcr593c9cfb491faifvar($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['title'])) ? $in['bs']['feedback']['title'] : null), false)){echo '',lcr593c9cfb491faraw($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['title'])) ? $in['bs']['feedback']['title'] : null)),'';}else{echo '';}echo '';return ob_get_clean();
+    ob_start();echo '',lcr595ab0887a29dwi($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['thumb'])) ? $in['bs']['feedback']['thumb'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<img src="',lcr595ab0887a29dencq($cx, (($inary && isset($in['src'])) ? $in['src'] : null)),'" width="',lcr595ab0887a29dencq($cx, (($inary && isset($in['w'])) ? $in['w'] : null)),'" height="',lcr595ab0887a29dencq($cx, (($inary && isset($in['h'])) ? $in['h'] : null)),'">
+';}),'',lcr595ab0887a29dwi($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['fontawesome'])) ? $in['bs']['feedback']['fontawesome'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '<i class="fa fa-fw ',lcr595ab0887a29dencq($cx, $in),'"></i>';}),'
+';if (lcr595ab0887a29difvar($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['title'])) ? $in['bs']['feedback']['title'] : null), false)){echo '',lcr595ab0887a29draw($cx, ((isset($in['bs']['feedback']) && is_array($in['bs']['feedback']) && isset($in['bs']['feedback']['title'])) ? $in['bs']['feedback']['title'] : null)),'';}else{echo '';}echo '';return ob_get_clean();
 };
 ?>

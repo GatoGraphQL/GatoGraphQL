@@ -67,8 +67,13 @@ class GD_DataLoader_NotificationList extends GD_DataLoader_List {
 		}
 
 		// left outer join for the status table?
-		if ($joinstatus = $vars['joinstatus']) {
-			$query['joinstatus'] = $joinstatus;
+		if (isset($vars['joinstatus'])) {
+			$query['joinstatus'] = $vars['joinstatus'];
+
+			// Also copy the status value, if passed, so that we can filter by either read or non-read notifications
+			if (isset($vars['status'])) {
+				$query['status'] = $vars['status'];
+			}
 		}
 
 		return $query;
@@ -89,7 +94,14 @@ class GD_DataLoader_NotificationList extends GD_DataLoader_List {
 
     	$query['array'] = true;
     	$query['fields'] = array('histid');
-    	$query['joinstatus'] = false;
+    	
+    	// By default, we use joinstatus => false to make the initial query run faster
+    	// however, this param can be provided in the dataload_query_args, 
+    	// eg: to bring in only notifications which have not been read, for the automated emails daily notification digest
+    	// then keep it as it is
+    	if (!isset($query['joinstatus'])) {
+	    	$query['joinstatus'] = false;
+	    }
 
     	$results = $this->execute_query($query);
 

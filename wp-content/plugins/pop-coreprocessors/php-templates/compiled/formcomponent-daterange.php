@@ -1,5 +1,5 @@
 <?php
- function lcr593c9ceb719ebhbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr595ab0782af78hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -39,10 +39,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr593c9ceb719ebm($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr595ab0782af78m($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr593c9ceb719ebm($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr595ab0782af78m($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -71,22 +71,22 @@
    };
   }
 
-  return lcr593c9ceb719ebexch($cx, $ch, $vars, $options);
+  return lcr595ab0782af78exch($cx, $ch, $vars, $options);
  }
 
- function lcr593c9ceb719ebencq($cx, $var) {
+ function lcr595ab0782af78encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9ceb719ebraw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0782af78raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9ceb719ebifvar($cx, $v, $zero) {
+ function lcr595ab0782af78ifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr593c9ceb719ebm($cx, $a, $b) {
+ function lcr595ab0782af78m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -101,7 +101,7 @@
   return $a;
  }
 
- function lcr593c9ceb719ebexch($cx, $ch, $vars, &$options) {
+ function lcr595ab0782af78exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -114,13 +114,13 @@
   }
 
   if($e !== null) {
-   lcr593c9ceb719eberr($cx, $e);
+   lcr595ab0782af78err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr593c9ceb719ebraw($cx, $v, $ex = 0) {
+ function lcr595ab0782af78raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -144,7 +144,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9ceb719ebraw($cx, $vv);
+      $ret[] = lcr595ab0782af78raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -156,7 +156,7 @@
   return "$v";
  }
 
- function lcr593c9ceb719eberr($cx, $err) {
+ function lcr595ab0782af78err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -271,11 +271,11 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<input ',lcr593c9ceb719ebhbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9ceb719ebencq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' type="text" value="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['range'])) ? $in['range'] : null)),'" class="form-control ',lcr593c9ceb719ebencq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),' ',lcr593c9ceb719ebencq($cx, (($inary && isset($in['timepicker'])) ? $in['timepicker'] : null)),'" placeholder="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['placeholder'])) ? $in['placeholder'] : null)),'">
-<input type="hidden" value="',lcr593c9ceb719ebencq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['from'])) ? $in['value']['from'] : null)),'" name="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-from" class="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' from">
-<input type="hidden" value="',lcr593c9ceb719ebencq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['to'])) ? $in['value']['to'] : null)),'" name="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-to" class="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' to">
-';if (lcr593c9ceb719ebifvar($cx, (($inary && isset($in['timepicker'])) ? $in['timepicker'] : null), false)){echo '	<input type="hidden" value="',lcr593c9ceb719ebencq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['fromtime'])) ? $in['value']['fromtime'] : null)),'" name="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-fromtime" class="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' fromtime">
-	<input type="hidden" value="',lcr593c9ceb719ebencq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['totime'])) ? $in['value']['totime'] : null)),'" name="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-totime" class="',lcr593c9ceb719ebencq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' totime">
+    ob_start();echo '<input ',lcr595ab0782af78hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0782af78encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' type="text" value="',lcr595ab0782af78encq($cx, (($inary && isset($in['range'])) ? $in['range'] : null)),'" class="form-control ',lcr595ab0782af78encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),' ',lcr595ab0782af78encq($cx, (($inary && isset($in['timepicker'])) ? $in['timepicker'] : null)),'" style="',lcr595ab0782af78encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" placeholder="',lcr595ab0782af78encq($cx, (($inary && isset($in['placeholder'])) ? $in['placeholder'] : null)),'">
+<input type="hidden" value="',lcr595ab0782af78encq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['from'])) ? $in['value']['from'] : null)),'" name="',lcr595ab0782af78encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-from" class="',lcr595ab0782af78encq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' from">
+<input type="hidden" value="',lcr595ab0782af78encq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['to'])) ? $in['value']['to'] : null)),'" name="',lcr595ab0782af78encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-to" class="',lcr595ab0782af78encq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' to">
+';if (lcr595ab0782af78ifvar($cx, (($inary && isset($in['timepicker'])) ? $in['timepicker'] : null), false)){echo '	<input type="hidden" value="',lcr595ab0782af78encq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['fromtime'])) ? $in['value']['fromtime'] : null)),'" name="',lcr595ab0782af78encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-fromtime" class="',lcr595ab0782af78encq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' fromtime">
+	<input type="hidden" value="',lcr595ab0782af78encq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['totime'])) ? $in['value']['totime'] : null)),'" name="',lcr595ab0782af78encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-totime" class="',lcr595ab0782af78encq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' totime">
 ';}else{echo '';}echo '';return ob_get_clean();
 };
 ?>

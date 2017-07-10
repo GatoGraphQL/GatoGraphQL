@@ -255,22 +255,6 @@ class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processo
 		return parent::show_fetchmore($template_id);
 	}
 
-	protected function filter_hidden($template_id) {
-
-		switch ($template_id) {
-
-			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR:
-			case GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR:
-
-			case GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_ADDONS:
-			case GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_ADDONS:
-			
-				return true;
-		}
-
-		return parent::filter_hidden($template_id);
-	}
-
 	function get_filter_template($template_id) {
 
 		switch ($template_id) {

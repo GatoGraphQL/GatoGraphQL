@@ -1177,31 +1177,6 @@ class GD_Template_Processor_CustomSectionBlocks extends GD_Template_Processor_Se
 		return parent::show_fetchmore($template_id);
 	}
 
-	protected function filter_hidden($template_id) {
-
-		switch ($template_id) {
-
-			case GD_TEMPLATE_BLOCK_TAGALLCONTENT_SCROLL_NAVIGATOR:
-			case GD_TEMPLATE_BLOCK_ALLCONTENT_SCROLL_NAVIGATOR:
-			case GD_TEMPLATE_BLOCK_LINKS_SCROLL_NAVIGATOR:
-			case GD_TEMPLATE_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR:
-			case GD_TEMPLATE_BLOCK_WEBPOSTS_SCROLL_NAVIGATOR:
-
-			case GD_TEMPLATE_BLOCK_ALLUSERS_SCROLL_NAVIGATOR:
-
-			case GD_TEMPLATE_BLOCK_ALLCONTENT_SCROLL_ADDONS:
-			case GD_TEMPLATE_BLOCK_LINKS_SCROLL_ADDONS:
-			case GD_TEMPLATE_BLOCK_HIGHLIGHTS_SCROLL_ADDONS:
-			case GD_TEMPLATE_BLOCK_WEBPOSTS_SCROLL_ADDONS:
-
-			case GD_TEMPLATE_BLOCK_ALLUSERS_SCROLL_ADDONS:
-			
-				return true;
-		}
-
-		return parent::filter_hidden($template_id);
-	}
-
 	function get_filter_template($template_id) {
 
 		switch ($template_id) {

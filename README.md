@@ -65,9 +65,15 @@ Install and activate the following plugins, which are integrated with PoP (_not 
 
 ### Required 3rd-party libraries
 
+#### LightnCandy
+
 [LightnCandy](https://github.com/zordius/lightncandy) is used for producing server-side HTML code. It must be installed in order to compile Handlebars javascript templates into PHP code. (There is no need to install it just to run the website as it is, since all PHP-compiled Handlebars javascript templates have been uploaded to this repository).
 
 To install it, follow the instructions [here](https://zordius.github.io/HandlebarsCookbook/9000-quickstart.html). Run composer under folder [wp-content/plugins/pop-frontendengine/php-templates/cli](https://github.com/leoloso/PoP/tree/master/wp-content/plugins/pop-frontendengine/php-templates/cli).
+
+#### PHP CSS Parser
+
+[PHP CSS Parser](https://github.com/sabberworm/PHP-CSS-Parser) is used for parsing css files to extract their styles. It must be installed in order to send the automated emails, which, instead of using classes, have inline styles printed in the HTML code.
 
 ### Installing the demo
 

@@ -518,6 +518,12 @@ class PoP_ServerSide_Manager {
 					$context['classes']['appendable'] = $context[GD_JS_CLASSES][GD_JS_APPENDABLE];
 				}
 			}
+			if ($context[GD_JS_STYLE]) {
+				$context['style'] = $context[GD_JS_STYLE];
+			}
+			if ($context[GD_JS_STYLES]) {
+				$context['styles'] = $context[GD_JS_STYLES];
+			}
 			if ($context[GD_JS_TITLES]) {
 				$context['titles'] = $context[GD_JS_TITLES];
 			}

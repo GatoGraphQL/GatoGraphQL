@@ -96,10 +96,10 @@ class GD_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcessor_H
 			// case 'pref-emailnotif-network-joinscommunity':
 			case 'pref-emailnotif-subscribedtopic-createdpost':
 			case 'pref-emailnotif-subscribedtopic-addedcomment':
-			case 'pref-emaildigests-dailynewcontent':
-			case 'pref-emaildigests-biweeklyupcomingevents':
-			case 'pref-emaildigests-dailynetworkactivity':
-			case 'pref-emaildigests-dailysubscribedtopicsactivity':
+			case 'pref-emaildigests-weeklylatestposts':
+			case 'pref-emaildigests-weeklyupcomingevents':
+			case 'pref-emaildigests-dailynotifications':
+			// case 'pref-emaildigests-dailysubscribedtopicsactivity':
 
 				$metakeys = array(
 					'pref-emailnotif-general-newpost' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_GENERAL_NEWPOST,
@@ -113,10 +113,10 @@ class GD_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcessor_H
 					// 'pref-emailnotif-network-joinscommunity' => GD_URE_METAKEY_PROFILE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
 					'pref-emailnotif-subscribedtopic-createdpost' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST,
 					'pref-emailnotif-subscribedtopic-addedcomment' => GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
-					'pref-emaildigests-dailynewcontent' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYCONTENT,
-					'pref-emaildigests-biweeklyupcomingevents' => GD_METAKEY_PROFILE_EMAILDIGESTS_BIWEEKLYUPCOMINGEVENTS,
-					'pref-emaildigests-dailynetworkactivity' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNETWORKACTIVITY,
-					'pref-emaildigests-dailysubscribedtopicsactivity' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY,
+					'pref-emaildigests-weeklylatestposts' => GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYLATESTPOSTS,
+					'pref-emaildigests-weeklyupcomingevents' => GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS,
+					'pref-emaildigests-dailynotifications' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNOTIFICATIONS,
+					// 'pref-emaildigests-dailysubscribedtopicsactivity' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY,
 				);
 				return GD_MetaManager::get_user_meta($fieldprocessor->get_id($user), $metakeys[$field], true);
 		}

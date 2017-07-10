@@ -352,7 +352,9 @@ fieldset[disabled] .btn-inverse.active {
 }
 
 .media > .pull-left .thumbnail,
-.media > .pull-right .thumbnail {
+.media > .media-left .thumbnail,
+.media > .pull-right .thumbnail,
+.media > .media-right .thumbnail {
   margin-bottom: 0;
 }
 
@@ -814,4 +816,13 @@ hr {
 .btn-linkedin.disabled:hover,.btn-linkedin[disabled]:hover,fieldset[disabled] .btn-linkedin:hover,.btn-linkedin.disabled:focus,.btn-linkedin[disabled]:focus,fieldset[disabled] .btn-linkedin:focus,.btn-linkedin.disabled.focus,.btn-linkedin[disabled].focus,fieldset[disabled] .btn-linkedin.focus{background-color:#007bb6;border-color:rgba(0,0,0,0.2)}
 .btn-linkedin .badge{color:#007bb6;background-color:#fff}
 
+/* After replacing media>pull-left with media-left, the class="thumbnail" doesn't work anymore, it doesn't show anything, because of max-width: 100%; */
+.media-left .carousel-inner>.item>a>img, 
+.media-left .carousel-inner>.item>img, 
+.media-left .img-responsive, 
+.media-left .thumbnail a>img, 
+.media-left .thumbnail>img,
+.media-left .img-thumbnail {
+  max-width: initial;
+}
 

@@ -27,7 +27,7 @@
 						<img src="{{src}}" class="img-responsive" alt="{{title}}">
 					{{/with}}<br/>
 					{{#each socialmedias}}
-						<a href="{{link}}" class="{{../classes.socialmedia}}" title="{{name}}">
+						<a href="{{link}}" class="{{../classes.socialmedia}}" style="{{../styles.socialmedia}}" title="{{name}}">
 							{{{title}}}
 						</a><br/>
 					{{/each}}
@@ -46,7 +46,7 @@
 							</div>
 							<div class="col-xs-6">								
 								{{#each socialmedias}}
-									<a href="{{link}}" class="{{../classes.socialmedia}}" title="{{name}}">
+									<a href="{{link}}" class="{{../classes.socialmedia}}" style="{{../styles.socialmedia}}" title="{{name}}">
 										{{{title}}}
 									</a><br/>
 								{{/each}}
@@ -85,7 +85,7 @@
 		</a>
 		<div class="dropdown-menu" role="menu">
 			<div class="media">
-				<div class="pull-left">
+				<div class="media-left">
 					<div class="top-iconleft-container">
 						{{{titles.addcontent-left}}}
 					</div>
@@ -136,12 +136,12 @@
 		</a>
 		<div class="dropdown-menu" role="menu">
 			<div class="media">
-				<div class="pull-left">
+				<div class="media-left">
 					<div class="top-useravatar-container">
 						<a title="{{titles.myprofile}}" href="{{tls.feedback.user.url}}" class="pop-user-url user-avatar thumbnail">
 							<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar">
 						</a>
-						<a href="{{links.useravatar}}" class="{{classes.useravatar}} useravatar-link">
+						<a href="{{links.useravatar}}" class="{{classes.useravatar}} useravatar-link" style="{{styles.useravatar}}">
 							{{{titles.useravatar}}}
 						</a>
 					</div>
@@ -164,7 +164,7 @@
 		</a>
 		<div class="dropdown-menu" role="menu" id="{{id}}-menu-usernotloggedin">
 			<div class="media">
-				<div class="pull-left">
+				<div class="media-left">
 					<div class="top-iconleft-container">
 						{{{titles.account-left}}}
 					</div>
@@ -182,11 +182,11 @@
 		<li class="dropdown nav-notifications nav-dropdown">
 			<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId template=../template group="notification-link"}}{{../id}}-notificationslink{{/generateId}} title="{{../titles.notifications}}" {{#each ../params.notifications-link}} {{@key}}="{{this}}"{{/each}}>
 				<span class="glyphicon {{../icons.notifications}}"></span>
-				<span id="{{../ids.notifications-count}}" class="hidden {{../classes.notifications-count}}"></span>
+				<span id="{{../ids.notifications-count}}" class="hidden {{../classes.notifications-count}}" style="{{../styles.notifications-count}}"></span>
 			</a>
 			<div class="dropdown-menu" role="menu">
 				<div class="col-xs-12" id="{{../id}}-notifications">
-					<div {{#generateId targetId=../pss.pssId template=../template group="notifications"}}{{../id}}{{/generateId}} class="{{../classes.notifications}}">
+					<div {{#generateId targetId=../pss.pssId template=../template group="notifications"}}{{../id}}{{/generateId}} class="{{../classes.notifications}}" style="{{../styles.notifications}}">
 						{{enterModule .}}
 					</div>
 					<hr/>

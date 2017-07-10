@@ -1,14 +1,14 @@
-<div class="{{class}} {{runtime-class}} {{#if bs.feedback.stop-fetching}}pop-stopfetching{{/if}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-settings-id="{{settings-id}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+<div class="{{class}} {{runtime-class}} {{#if bs.feedback.stop-fetching}}pop-stopfetching{{/if}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-settings-id="{{settings-id}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 
 	{{#withModule . "controlgroup-top"}}
-		<div class="blocksection-controls {{../classes.controlgroup-top}}">
+		<div class="blocksection-controls {{../classes.controlgroup-top}}" style="{{../styles.controlgroup-top}}">
 			{{enterModule ../.}}
 		</div>
 	{{/withModule}}
 			
 	{{#if bs.feedback.title}}
-		<div class="blocksection-title {{classes.blocksection-title}}">
-			<{{title-htmltag}} class="title {{classes.block-title}}">
+		<div class="blocksection-title {{classes.blocksection-title}}" style="{{styles.blocksection-title}}">
+			<{{title-htmltag}} class="title {{classes.block-title}}" style="{{styles.block-title}}">
 				{{#if bs.feedback.title-link}}
 					<a href="{{bs.feedback.title-link}}">{{{bs.feedback.title}}}</a>
 				{{else}}
@@ -23,7 +23,7 @@
 	{{{description-top}}}
 
 	{{#withModule . "controlgroup-bottom"}}
-		<div class="blocksection-controls {{../classes.controlgroup-bottom}}">
+		<div class="blocksection-controls {{../classes.controlgroup-bottom}}" style="{{../styles.controlgroup-bottom}}">
 			{{enterModule ../.}}
 		</div>
 	{{/withModule}}
@@ -78,7 +78,7 @@
 
 	{{!This will be empty for BlockGroup}}
 	{{#if settings-ids.block-inners}}
-		<div class="blocksection-inners clearfix {{classes.blocksection-inners}}">
+		<div class="blocksection-inners clearfix {{classes.blocksection-inners}}" style="{{styles.blocksection-inners}}">
 			{{#each settings-ids.block-inners}}
 				{{#withBlock ../. this}}
 					{{enterModule ../../. itemDBKey=../../bs.db-keys.db-key items=../../bs.dataset}}
@@ -105,7 +105,7 @@
 
 	{{!Needed to render the BlockGroup}}
 	{{#if template-ids.block-extensions}}
-		<div class="blocksection-extensions clearfix {{classes.blocksection-extensions}}">
+		<div class="blocksection-extensions clearfix {{classes.blocksection-extensions}}" style="{{styles.blocksection-extensions}}">
 			{{#each template-ids.block-extensions}}
 				{{applyLightTemplate this context=../.}}
 			{{/each}}

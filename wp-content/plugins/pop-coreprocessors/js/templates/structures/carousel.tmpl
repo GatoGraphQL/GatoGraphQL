@@ -1,4 +1,4 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="carousel {{mode}} {{class}}" {{#each params}} {{@key}}="{{this}}"{{/each}}> 
+<div {{#generateId}}{{id}}{{/generateId}} class="carousel {{mode}} {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}> 
 	{{#withModule . "carousel-indicators"}}
 		<div class="row {{template}} pop-merge clearfix" id="{{lastGeneratedId context=../../.}}-merge">
 			{{enterModule ../.}}

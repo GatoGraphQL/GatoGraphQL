@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 13:20+0800\n"
-"PO-Revision-Date: 2017-03-29 13:20+0800\n"
+"POT-Creation-Date: 2017-07-06 22:12+0200\n"
+"PO-Revision-Date: 2017-07-06 22:12+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -12,13 +12,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
 #: .././library/_email.php:93
-#: .././library/implementations/email-templates.php:18
 #, php-format
 msgid "<p>Dear %s,</p>"
 msgstr "<p>Estimado/a %s,</p>"
@@ -29,18 +28,18 @@ msgid "<p>Howdy!</p>"
 msgstr "<p>¡Hola!</p>"
 
 #: .././library/_email.php:181 .././library/_email.php:186
-#: .././library/implementations/email-hooks.php:930
-#: .././library/implementations/email-hooks.php:935
+#: .././library/implementations/email-hooks.php:938
+#: .././library/implementations/email-hooks.php:943
 #, php-format
 msgid "Your %s was created successfully!"
 msgstr "Tu %s se ha creado con éxito"
 
-#: .././library/_email.php:191 .././library/implementations/email-hooks.php:940
+#: .././library/_email.php:191 .././library/implementations/email-hooks.php:948
 #, php-format
 msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
 msgstr "<p>Tu %s <a href=\"%s\">%s</a> fue creado con éxito!</p>"
 
-#: .././library/_email.php:207 .././library/implementations/email-hooks.php:956
+#: .././library/_email.php:207 .././library/implementations/email-hooks.php:964
 #, php-format
 msgid ""
 "Please notice that the status of the %s is <strong>'Draft'</strong>, so it "
@@ -49,7 +48,7 @@ msgstr ""
 "Por favor, tenga en cuenta que el estado del %s es <strong>'borrador'</"
 "strong>, de modo que no será publicado."
 
-#: .././library/_email.php:214 .././library/implementations/email-hooks.php:963
+#: .././library/_email.php:214 .././library/implementations/email-hooks.php:971
 msgid ""
 "<p>Please wait for our moderators approval. You will receive an email with "
 "the confirmation.</p>"
@@ -57,109 +56,110 @@ msgstr ""
 "<p>Por favor espere a que nuestros moderadores aprueben su post. Recibirás "
 "un correo electrónico con la confirmación.</p>"
 
-#: .././library/_email.php:250 .././library/implementations/email-hooks.php:999
+#: .././library/_email.php:250
+#: .././library/implementations/email-hooks.php:1007
 #, php-format
 msgid "[%s]: New %s by %s"
 msgstr "[%s]: Nuevo %s por %s"
 
 #: .././library/_email.php:251
-#: .././library/implementations/email-hooks.php:1005
+#: .././library/implementations/email-hooks.php:1013
 #, php-format
 msgid "A new %s has been submitted on %s:"
 msgstr "Se ha creado un nuevo %s en %s:"
 
 #: .././library/_email.php:254
-#: .././library/implementations/email-hooks.php:1012
+#: .././library/implementations/email-hooks.php:1020
 #, php-format
 msgid "[%s]: %s updated by %s"
 msgstr "[%s]: %s actualizado por %s"
 
 #: .././library/_email.php:255
-#: .././library/implementations/email-hooks.php:1018
+#: .././library/implementations/email-hooks.php:1026
 #, php-format
 msgid "%s updated on %s:"
 msgstr "%s actualizado en %s:"
 
 #: .././library/_email.php:259
-#: .././library/implementations/email-hooks.php:1026
+#: .././library/implementations/email-hooks.php:1034
 #, php-format
 msgid "<b>Author:</b> %s"
 msgstr "<b>Autor:</b> %s"
 
 #: .././library/_email.php:260
-#: .././library/implementations/email-hooks.php:1030
+#: .././library/implementations/email-hooks.php:1038
 #, php-format
 msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
 msgstr "<b>Correo electrónico del autor:</b> <a href=\"mailto:%1$s\">%1$s</a>"
 
 #: .././library/_email.php:261
-#: .././library/implementations/email-hooks.php:1034
+#: .././library/implementations/email-hooks.php:1042
 #, php-format
 msgid "<b>Title:</b> %s"
 msgstr "<b>Titulo:</b> %s"
 
 #: .././library/_email.php:262
-#: .././library/implementations/email-hooks.php:1038
+#: .././library/implementations/email-hooks.php:1046
 #, php-format
 msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
 msgstr "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
 
 #: .././library/_email.php:263
-#: .././library/implementations/email-hooks.php:1042
+#: .././library/implementations/email-hooks.php:1050
 #, php-format
 msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
 msgstr "<b>Enlace de edición:</b> <a href=\"%1$s\">%1$s</a>"
 
 #: .././library/_email.php:264
-#: .././library/implementations/email-hooks.php:1046
+#: .././library/implementations/email-hooks.php:1054
 #, php-format
 msgid "<b>Status:</b> %s"
 msgstr "<b>Estado:</b> %s"
 
 #: .././library/_email.php:301
-#: .././library/implementations/email-hooks.php:1073
+#: .././library/implementations/email-hooks.php:1081
 #, php-format
 msgid "[%s]: New Profile: %s"
 msgstr "[%s]: Nuevo perfil: %s"
 
 #: .././library/_email.php:302
-#: .././library/implementations/email-hooks.php:1074
+#: .././library/implementations/email-hooks.php:1082
 #, php-format
 msgid "A Profile was created on %s."
 msgstr "Un perfil fue creado en %s."
 
 #: .././library/_email.php:305
-#: .././library/implementations/email-hooks.php:1077
+#: .././library/implementations/email-hooks.php:1085
 #, php-format
 msgid "[%s]: Profile updated: %s"
 msgstr "[%s]: Perfil actualizado: %s"
 
 #: .././library/_email.php:306
-#: .././library/implementations/email-hooks.php:1078
+#: .././library/implementations/email-hooks.php:1086
 #, php-format
 msgid "Profile updated on %s."
 msgstr "Perfil actualizado en %s."
 
 #: .././library/_email.php:310
-#: .././library/implementations/email-hooks.php:1082
+#: .././library/implementations/email-hooks.php:1090
 #, php-format
 msgid "<b>Profile:</b> %s"
 msgstr "<b>Perfil:</b> %s"
 
 #: .././library/_email.php:311
-#: .././library/implementations/email-hooks.php:1083
+#: .././library/implementations/email-hooks.php:1091
 #, php-format
 msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
 msgstr "<b>Enlace al perfil:</b> <a href=\"%1$s\">%1$s</a>"
 
 #: .././library/_email.php:319
-#: .././library/implementations/email-hooks.php:1094
+#: .././library/implementations/email-hooks.php:1102
 #, php-format
 msgid "Welcome to %s!"
 msgstr "¡Bienvenido a %s!"
 
 #: .././library/_email.php:326
-#: .././library/implementations/email-hooks.php:1101
+#: .././library/implementations/email-hooks.php:1109
 msgid ""
 "<p>Your user account was created successfully. This is your public profile "
 "page:</p>"
@@ -168,24 +168,24 @@ msgstr ""
 "perfil público</p> "
 
 #: .././library/_email.php:333
-#: .././library/implementations/email-hooks.php:1108
+#: .././library/implementations/email-hooks.php:1116
 msgid "Now you can share your content/activities with our community:"
 msgstr "Ahora puedes compartir tu contenido/actividades con nuestra comunidad:"
 
 #: .././library/_email.php:354
-#: .././library/implementations/email-hooks.php:1129
+#: .././library/implementations/email-hooks.php:1137
 #, php-format
 msgid "About %s"
 msgstr "Acerca de %s"
 
 #: .././library/_email.php:531
-#: .././library/implementations/email-hooks.php:1190
+#: .././library/implementations/email-hooks.php:1198
 #, php-format
 msgid "A new %s was posted referencing \"%s\""
 msgstr "Un nuevo %s fue publicado haciendo referencia a \"%s\""
 
 #: .././library/_email.php:536
-#: .././library/implementations/email-hooks.php:1195
+#: .././library/implementations/email-hooks.php:1203
 #, php-format
 msgid "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
 msgstr ""
@@ -193,13 +193,13 @@ msgstr ""
 "p>"
 
 #: .././library/_email.php:559
-#: .././library/implementations/email-hooks.php:1223
+#: .././library/implementations/email-hooks.php:1231
 #, php-format
 msgid "Your %s was approved!"
 msgstr "¡Tu %s fue aprobado!"
 
 #: .././library/_email.php:561
-#: .././library/implementations/email-hooks.php:1225
+#: .././library/implementations/email-hooks.php:1233
 #, php-format
 msgid "<p>Hurray! Your %s was approved!</p>"
 msgstr "<p>¡Hurra! Tu %s fue aprobado.</p>"
@@ -227,31 +227,31 @@ msgid "Click here to reply the comment"
 msgstr "Haga clic aquí para responder el comentario"
 
 #: .././library/_email.php:636
-#: .././library/implementations/email-hooks.php:1302
+#: .././library/implementations/email-hooks.php:1310
 #, php-format
 msgid "%s replied your comment in “%s”"
 msgstr " %s ha contestado tu comentario en “%s”"
 
 #: .././library/_email.php:685
-#: .././library/implementations/email-hooks.php:1349
+#: .././library/implementations/email-hooks.php:1357
 #, php-format
 msgid "New comment added in “%s”"
 msgstr "Nuevo comentario añadido en “%s”"
 
 #: .././library/_email.php:720
-#: .././library/implementations/email-hooks.php:1393
+#: .././library/implementations/email-hooks.php:1401
 #, php-format
 msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
 msgstr "<p><a href=\"%s\">%s</a> te ha mencionado en %s:</p>"
 
 #: .././library/_email.php:733
-#: .././library/implementations/email-hooks.php:1406
+#: .././library/implementations/email-hooks.php:1414
 #, php-format
 msgid "You were mentioned in %1$s “%2$s”"
 msgstr "Has sido mencionado en %1$s “%2$s”"
 
 #: .././library/_email.php:756
-#: .././library/implementations/email-hooks.php:1438
+#: .././library/implementations/email-hooks.php:1446
 msgid ""
 "<p><a href=\"%1$s\">%2$s</a> mentioned you in a comment from %3$s <a href="
 "\"%4%s\">%5$s</a>:</p>"
@@ -260,33 +260,33 @@ msgstr ""
 "href=“%4$s”>%5$s</a>:</p>"
 
 #: .././library/_email.php:793
-#: .././library/implementations/email-hooks.php:1452
+#: .././library/implementations/email-hooks.php:1460
 #, php-format
 msgid "You were mentioned in a comment from %1$s “%2$s”"
 msgstr "Has sido mencionado en un comentario en %1$s “%2$s”"
 
 #: .././library/_email.php:812
-#: .././library/implementations/email-hooks.php:1540
+#: .././library/implementations/email-hooks.php:1550
 msgid "Password reset code"
 msgstr "Código de restablecimiento de contraseña"
 
 #: .././library/_email.php:817
-#: .././library/implementations/email-hooks.php:1544
+#: .././library/implementations/email-hooks.php:1554
 msgid "Retrieve password"
 msgstr "Recuperar contraseña"
 
 #: .././library/_email.php:822
-#: .././library/implementations/email-hooks.php:1548
+#: .././library/implementations/email-hooks.php:1558
 msgid "Password reset successful"
 msgstr "Restablecimiento de contraseña exitoso"
 
 #: .././library/_email.php:825
-#: .././library/implementations/email-hooks.php:1551
+#: .././library/implementations/email-hooks.php:1561
 msgid "Your password has been changed successfully."
 msgstr "Tu contraseña ha sido cambiada con éxito."
 
 #: .././library/_email.php:827
-#: .././library/implementations/email-hooks.php:1553
+#: .././library/implementations/email-hooks.php:1563
 #, php-format
 msgid "Please <a href=\"%s\">click here to log-in</a>."
 msgstr "Por favor, <a href=\"%s\">haga click aquí para iniciar sesión</a>."
@@ -300,30 +300,30 @@ msgstr ""
 "Pronto podrás configurar tus preferencias de notificaciones en tu correo "
 "electrónico."
 
-#: .././library/_email.php:911 .././library/implementations/email-hooks.php:206
+#: .././library/_email.php:911 .././library/implementations/email-hooks.php:207
 #, php-format
 msgid "%s has created a new %s: “%s”"
 msgstr "%s creó un nuevo %s: “%s”"
 
-#: .././library/_email.php:919 .././library/implementations/email-hooks.php:214
-#: .././library/implementations/email-hooks.php:488
+#: .././library/_email.php:919 .././library/implementations/email-hooks.php:215
+#: .././library/implementations/email-hooks.php:491
 #, php-format
 msgid "<b><a href=\"%s\">%s</a></b> has created a new %s:"
 msgstr "<b><a href=\"%s\">%s</a></b> creó un nuevo %s:"
 
 #: .././library/_email.php:944
-#: .././library/implementations/email-hooks.php:1479
+#: .././library/implementations/email-hooks.php:1488
 msgid "You have a new follower!"
 msgstr "¡Tienes un nuevo seguidor!"
 
 #: .././library/_email.php:947
-#: .././library/implementations/email-hooks.php:1482
+#: .././library/implementations/email-hooks.php:1491
 #, php-format
 msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
 msgstr "<p>¡Felicitaciones! <a href=\"%s\">Tienes un nuevo seguidor</a>:</p>"
 
 #: .././library/_email.php:953
-#: .././library/implementations/email-hooks.php:1488
+#: .././library/implementations/email-hooks.php:1497
 msgid ""
 "<p>This user will receive notifications following your activity, such as "
 "recommending content, posting a new discussion or comment, and others.</p>"
@@ -333,38 +333,29 @@ msgstr ""
 "p>"
 
 #: .././library/_email.php:969
-#: .././library/implementations/email-hooks.php:1510
+#: .././library/implementations/email-hooks.php:1520
 #, php-format
 msgid "Your %s was recommended!"
 msgstr "¡Tu %s fue recomendado!"
 
 #: .././library/_email.php:971
-#: .././library/implementations/email-hooks.php:1512
+#: .././library/implementations/email-hooks.php:1522
 #, php-format
 msgid "<p>Your %1$s <a href=\"%2$s\">%3$s</a> was recommended by:</p>"
 msgstr "<p>Tu %1$s <a href=“%2$s”>%3$s</a> fue recomendado por:</p>"
 
-#: .././library/implementations/email-hooks.php:121
-#, php-format
-msgid ""
-"%s You can edit your preferences for email notifications <a href=\"%s"
-"\">here</a>."
-msgstr ""
-"%s Puedes editar tus preferencias de notificaciones por email <a "
-"href=“%s”>aquí</a>."
-
-#: .././library/implementations/email-hooks.php:170
-#: .././library/implementations/email-hooks.php:547
-#: .././library/implementations/email-hooks.php:678
-#: .././library/implementations/email-hooks.php:726
-#: .././library/implementations/email-hooks.php:775
-#: .././library/implementations/email-hooks.php:818
+#: .././library/implementations/email-hooks.php:171
+#: .././library/implementations/email-hooks.php:550
+#: .././library/implementations/email-hooks.php:683
+#: .././library/implementations/email-hooks.php:732
+#: .././library/implementations/email-hooks.php:782
+#: .././library/implementations/email-hooks.php:826
 msgid ""
 "You are receiving this notification for belonging to the user’s network."
 msgstr ""
 "Estás recibiendo esta notificación por pertenecer a la red de este usuario."
 
-#: .././library/implementations/email-hooks.php:273
+#: .././library/implementations/email-hooks.php:274
 msgid ""
 "You are receiving this notification for having subscribed to tags/topics "
 "added in this post."
@@ -372,17 +363,17 @@ msgstr ""
 "Estás recibiendo esta notificación por estar suscrito a tags/tópicos "
 "añadidos en este post."
 
-#: .././library/implementations/email-hooks.php:298
+#: .././library/implementations/email-hooks.php:300
 #, php-format
 msgid "There is a new %s tagged with “%s”: “%s”"
 msgstr "Hay un nuevo %s con tag “%s”: “%s”"
 
-#: .././library/implementations/email-hooks.php:307
+#: .././library/implementations/email-hooks.php:309
 #, php-format
 msgid "There is a new %s, tagged with <a href=\"%s\">%s</a>:"
 msgstr "Hay un nuevo %s, con tag <a href=\"%s\">%s</a>:"
 
-#: .././library/implementations/email-hooks.php:474
+#: .././library/implementations/email-hooks.php:477
 msgid ""
 "You are currently receiving notifications for all new content posted on the "
 "website."
@@ -390,12 +381,12 @@ msgstr ""
 "Estás actualmente recibiendo notificaciones del nuevo contenido agregado al "
 "sitio web."
 
-#: .././library/implementations/email-hooks.php:481
+#: .././library/implementations/email-hooks.php:484
 #, php-format
 msgid "There is a new %s: “%s”"
 msgstr "Hay un nuevo %s: “%s”"
 
-#: .././library/implementations/email-hooks.php:537
+#: .././library/implementations/email-hooks.php:540
 msgid ""
 "<p><a href=\"%1$s\">%2$s</a> added a comment in %3$s <a href=\"%4%s\">%5$s</"
 "a>:</p>"
@@ -403,12 +394,12 @@ msgstr ""
 "<p><a href=“%1$s”>%2$s</a> añadió un comentario en %3$s <a href=“%4%s”>%5$s</"
 "a>:</p>"
 
-#: .././library/implementations/email-hooks.php:554
+#: .././library/implementations/email-hooks.php:557
 #, php-format
 msgid "%1$s added a comment in %2$s “%3$s”"
 msgstr "%1$s añadió un comentario en %2$s “%3$s”"
 
-#: .././library/implementations/email-hooks.php:586
+#: .././library/implementations/email-hooks.php:589
 msgid ""
 "You are receiving this notification for having subscribed to tags/topics "
 "added in this comment/post."
@@ -416,12 +407,12 @@ msgstr ""
 "Estás recibiendo esta notificación por estar suscrito a tags/tópicos "
 "añadidos en este comentario/post."
 
-#: .././library/implementations/email-hooks.php:611
+#: .././library/implementations/email-hooks.php:615
 #, php-format
 msgid "New comment added under %s with topic “%s”"
 msgstr "Nuevo comentario añadido bajo %s con tópico “%s”"
 
-#: .././library/implementations/email-hooks.php:619
+#: .././library/implementations/email-hooks.php:623
 #, php-format
 msgid ""
 "A new comment has been added in %s <a href=\"%s\">%s</a>, which has topic <a "
@@ -430,81 +421,110 @@ msgstr ""
 "Un nuevo comentario ha sido añadido en %s <a href=“%s”>%s</a>, el cual tiene "
 "tópico <a href=“%s”>%s</a>:"
 
-#: .././library/implementations/email-hooks.php:665
+#: .././library/implementations/email-hooks.php:670
 #, php-format
 msgid "%s is now following %s"
 msgstr "%s ahora sigue a %s"
 
-#: .././library/implementations/email-hooks.php:671
+#: .././library/implementations/email-hooks.php:676
 #, php-format
 msgid "<p><a href=\"%s\">%s</a> is now following:</p>"
 msgstr "<p><a href=“%s”>%s</a> ahora sigue a:</p>"
 
-#: .././library/implementations/email-hooks.php:713
+#: .././library/implementations/email-hooks.php:719
 #, php-format
 msgid "%s has recommended “%s”"
 msgstr "%s ha recomendado “%s”"
 
-#: .././library/implementations/email-hooks.php:719
+#: .././library/implementations/email-hooks.php:725
 #, php-format
 msgid "<p><a href=\"%s\">%s</a> has recommended:</p>"
 msgstr "<p><a href=“%s”>%s</a> ha recomendado:</p>"
 
-#: .././library/implementations/email-hooks.php:762
+#: .././library/implementations/email-hooks.php:769
 #, php-format
 msgid "%s subscribed to %s"
 msgstr "%s se ha suscrito a %s"
 
-#: .././library/implementations/email-hooks.php:768
+#: .././library/implementations/email-hooks.php:775
 #, php-format
 msgid "<p><a href=\"%s\">%s</a> subscribed to:</p>"
 msgstr "<p><a href=“%s”>%s</a> se ha suscrito a:</p>"
 
-#: .././library/implementations/email-hooks.php:825
+#: .././library/implementations/email-hooks.php:833
 #, php-format
 msgid "%s upvoted “%s”"
 msgstr "%s expresó estar de acuerdo con “%s”"
 
-#: .././library/implementations/email-hooks.php:825
+#: .././library/implementations/email-hooks.php:833
 #, php-format
 msgid "%s downvoted “%s”"
 msgstr "%s expresó estar en desacuerdo con “%s”"
 
-#: .././library/implementations/email-hooks.php:832
+#: .././library/implementations/email-hooks.php:840
 #, php-format
 msgid "<a href=\"%s\">%s</a> upvoted:"
 msgstr "<a href=“%s”>%s</a> expresó estar de acuerdo con:"
 
-#: .././library/implementations/email-hooks.php:832
+#: .././library/implementations/email-hooks.php:840
 #, php-format
 msgid "<a href=\"%s\">%s</a> downvoted:"
 msgstr "<a href=“%s”>%s</a> expresó estar en desacuerdo con:"
+
+#: .././library/implementations/email-templates.php:18
+#, php-format
+msgid "<p>Hi %s,</p>"
+msgstr "<p>Hola %s,</p>"
+
+#: .././library/implementations/email-utils.php:14
+#, php-format
+msgid ""
+"You can edit your preferences for email notifications <a href=\"%s\">here</"
+"a>."
+msgstr ""
+"Puedes editar tus preferencias de notificaciones por email <a href=\"%s"
+"\">aquí</a>."
+
+#: .././library/implementations/email-utils.php:21
+#, php-format
+msgid "%s %s"
+msgstr "%s %s"
 
 #: .././validation.php:33
 msgid "Only admins see this message."
 msgstr "Only admins see this message."
 
 #: .././validation.php:38
+#| msgid ""
+#| "Error: <b>PoP—Platform of Platforms</b> is not installed/activated. "
+#| "Without it, <b>PoP Email Sender</b> will not work. Please install this "
+#| "plugin from your plugin installer or download it <a href=\"http://"
+#| "wordpress.org/extend/plugins/pop/\">from here</a>."
 msgid ""
 "Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without "
 "it, <b>PoP Email Sender</b> will not work. Please install this plugin from "
-"your plugin installer or download it <a href=\"http://wordpress.org/extend/"
-"plugins/pop/\">from here</a>."
+"your plugin installer or download it <a href=\"https://github.com/leoloso/"
+"PoP/\">from here</a>."
 msgstr ""
 "Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without "
 "it, <b>PoP Email Sender</b> will not work. Please install this plugin from "
-"your plugin installer or download it <a href=“http://wordpress.org/extend/"
-"plugins/pop/“>from here</a>."
+"your plugin installer or download it <a href=\"https://github.com/leoloso/"
+"PoP/\">from here</a>."
 
 #: .././validation.php:42
+#| msgid ""
+#| "Warning: please make sure to have the <a href=\"http://wordpress.org/"
+#| "extend/plugins/pop/\">latest version</a> of <b>PoP—Platform of Platforms</"
+#| "b> installed, or otherwise <b>PoP Email Sender</b> might not function "
+#| "properly."
 msgid ""
-"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
-"plugins/pop/\">latest version</a> of <b>PoP—Platform of Platforms</b> "
-"installed, or otherwise <b>PoP Email Sender</b> might not function properly."
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP—Platform of Platforms</b> installed, or "
+"otherwise <b>PoP Email Sender</b> might not function properly."
 msgstr ""
-"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
-"plugins/pop/“>latest version</a> of <b>PoP—Platform of Platforms</b> "
-"installed, or otherwise <b>PoP Email Sender</b> might not function properly."
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP—Platform of Platforms</b> installed, or "
+"otherwise <b>PoP Email Sender</b> might not function properly."
 
 #~ msgid ""
 #~ "<b><a href=\"%s\">%s</a></b> has created a new %s, tagged with <b><i>%s</"

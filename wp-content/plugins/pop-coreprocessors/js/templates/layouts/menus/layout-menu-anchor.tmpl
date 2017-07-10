@@ -1,9 +1,9 @@
-<div class="{{class}}" role="menu" {{#generateId}}{{id}}{{/generateId}}>
+<div class="{{class}}" style="{{style}}" role="menu" {{#generateId}}{{id}}{{/generateId}}>
 	{{#each itemObject.items}}
 		{{#compare title "divider"}}
 			<hr />
 		{{else}}
-			<a id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{../classes.item}} {{classes}}' href="{{url}}" title="{{alt}}" {{{additional-attrs}}}>{{{title}}}</a>
+			<a id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{../classes.item}} {{classes}}' style="{{../styles.item}}" href="{{url}}" title="{{alt}}" {{{additional-attrs}}}>{{{title}}}</a>
 		{{/compare}}
 	{{/each}}
 </div>

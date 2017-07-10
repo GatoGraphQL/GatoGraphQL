@@ -1,7 +1,7 @@
-<div class="{{class}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-settings-id="{{settings-id}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>			
+<div class="{{class}}" style="{{style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-settings-id="{{settings-id}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>			
 	{{#if bs.feedback.title}}
-		<div class="blocksection-title {{classes.blocksection-title}}">
-			<{{title-htmltag}} class="title {{classes.block-title}}">
+		<div class="blocksection-title {{classes.blocksection-title}}" style="{{styles.blocksection-title}}">
+			<{{title-htmltag}} class="title {{classes.block-title}}" style="{{styles.block-title}}">
 				{{#if bs.feedback.title-link}}
 					<a href="{{bs.feedback.title-link}}">{{{bs.feedback.title}}}</a>
 				{{else}}

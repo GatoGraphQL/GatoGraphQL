@@ -135,7 +135,7 @@ class Wassup_Template_Processor_Widgets extends GD_Template_Processor_WidgetsBas
 
 		return parent::get_widget_class($template_id, $atts);
 	}
-	function get_title_wrapper($template_id, $atts) {
+	function get_title_wrapper_class($template_id, $atts) {
 
 		switch ($template_id) {
 
@@ -149,7 +149,7 @@ class Wassup_Template_Processor_Widgets extends GD_Template_Processor_WidgetsBas
 				return '';
 		}
 
-		return parent::get_title_wrapper($template_id, $atts);
+		return parent::get_title_wrapper_class($template_id, $atts);
 	}
 	function get_title_class($template_id, $atts) {
 

@@ -58,7 +58,7 @@ class GD_DataLoad_FieldProcessor_Posts_Utils {
 	// 	if ($nonembeddable_message) {
 
 	// 		$content .= sprintf(
-	// 			'<div class="alert alert-warning"><div class="media"><div class="pull-left">%s</div><div class="media-body">%s</div></div></div>', 
+	// 			'<div class="alert alert-warning"><div class="media"><div class="media-left">%s</div><div class="media-body">%s</div></div></div>', 
 	// 			'<i class="fa fa-2x fa-fw fa-link"></i>',
 	// 			$nonembeddable_message
 	// 		);

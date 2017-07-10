@@ -2,7 +2,7 @@
 	{{#withModule . "input"}}
 		{{enterModule ../.}}
 	{{/withModule}}
-	<span class="input-group-btn {{classes.input-group-btn}}">
+	<span class="input-group-btn {{classes.input-group-btn}}" style="{{styles.input-group-btn}}">
 		{{#each settings-keys.controls}}
 			{{#withModule ../. this}}
 				{{enterModule ../../.}}

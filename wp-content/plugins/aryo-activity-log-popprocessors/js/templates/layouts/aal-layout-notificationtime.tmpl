@@ -1,3 +1,3 @@
 {{#with itemObject}}
-	<div class="time {{../class}}" data-time="{{hist-time-nogmt}}" data-format="{{../format}}" {{#generateId context=../.}}{{../id}}{{/generateId}}></div>
+	<div class="time {{../class}}" style="{{../style}}" data-time="{{hist-time-nogmt}}" data-format="{{../format}}" {{#generateId context=../.}}{{../id}}{{/generateId}}><span class="hidden">{{hist-time-formatted-string}}</span></div>
 {{/with}}

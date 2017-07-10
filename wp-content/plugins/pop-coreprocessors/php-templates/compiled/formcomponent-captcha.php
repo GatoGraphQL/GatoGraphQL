@@ -1,13 +1,13 @@
 <?php
- function lcr593c9cea3f3f5encq($cx, $var) {
+ function lcr595ab076e052bencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9cea3f3f5raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab076e052braw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9cea3f3f5raw($cx, $v, $ex = 0) {
+ function lcr595ab076e052braw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -31,7 +31,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9cea3f3f5raw($cx, $vv);
+      $ret[] = lcr595ab076e052braw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -144,9 +144,9 @@ return function ($in = null, $options = null) {
     
     $inary=is_array($in);
     ob_start();echo '<div class="input-group">
-	<span class="input-group-addon"><img src="',lcr593c9cea3f3f5encq($cx, (($inary && isset($in['captcha-imgsrc'])) ? $in['captcha-imgsrc'] : null)),'"></span>
-	<input type="text" name="',lcr593c9cea3f3f5encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-input" class="',lcr593c9cea3f3f5encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),' ',lcr593c9cea3f3f5encq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' form-control" placeholder="',lcr593c9cea3f3f5encq($cx, (($inary && isset($in['placeholder'])) ? $in['placeholder'] : null)),'">
+	<span class="input-group-addon"><img src="',lcr595ab076e052bencq($cx, (($inary && isset($in['captcha-imgsrc'])) ? $in['captcha-imgsrc'] : null)),'"></span>
+	<input type="text" name="',lcr595ab076e052bencq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-input" class="',lcr595ab076e052bencq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),' ',lcr595ab076e052bencq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' form-control" style="',lcr595ab076e052bencq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" placeholder="',lcr595ab076e052bencq($cx, (($inary && isset($in['placeholder'])) ? $in['placeholder'] : null)),'">
 </div>
-<input type="hidden" name="',lcr593c9cea3f3f5encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-session" value="',lcr593c9cea3f3f5encq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['session'])) ? $in['value']['session'] : null)),'">';return ob_get_clean();
+<input type="hidden" name="',lcr595ab076e052bencq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-session" value="',lcr595ab076e052bencq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['session'])) ? $in['value']['session'] : null)),'">';return ob_get_clean();
 };
 ?>

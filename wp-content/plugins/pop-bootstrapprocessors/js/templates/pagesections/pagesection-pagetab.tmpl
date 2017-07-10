@@ -1,11 +1,11 @@
 {{#each block-settings-ids.blockunits}}
 	{{#withBlock ../. this}}
-		<div class="{{../../class}}" {{#generateId context=../../. targetId=../../pss.pssId group='unit'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}}  {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
+		<div class="{{../../class}}" style="{{../../style}}" {{#generateId context=../../. targetId=../../pss.pssId group='unit'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}}  {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 			<div class="btn-group">
-				<a {{#generateId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} href="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" role="button" class="pop-pagetab-btn {{../../btn-class}}">
+				<a {{#generateId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} href="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" role="button" class="pop-pagetab-btn {{../../classes.btn}}" style="{{../../styles.btn}}">
 					{{enterModule . parentContext=../../.}}
 				</a>
-				<button type="button" class="pop-closepagetab-btn {{../../btn-class}} btn-narrow" {{#generateId context=../../. targetId=../../pss.pssId group='remove'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}">
+				<button type="button" class="pop-closepagetab-btn {{../../classes.btn}} btn-narrow" style="{{../../styles.btn}}" {{#generateId context=../../. targetId=../../pss.pssId group='remove'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}">
 					<small><span class="glyphicon glyphicon-remove"></span></small>
 				</button>
 			</div>

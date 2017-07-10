@@ -1,4 +1,4 @@
-<div class="{{class}}" {{#generateId}}{{id}}{{/generateId}}>
+<div class="{{class}}" style="{{style}}" {{#generateId}}{{id}}{{/generateId}}>
 </div>
 
 <script type="text/javascript">
@@ -18,7 +18,7 @@
 				item = '<hr />';
 			{{else}}
 				item = '<div class="{{#if ../settings-ids.dropdownsegmentedbuttons}}input-group{{else}}input-unique{{/if}} child">';
-				item += '<a id="menu-item-{{id}}" href="{{url}}" title="{{alt}}" class="form-control {{../classes.btn}} {{classes}}">';
+				item += '<a id="menu-item-{{id}}" href="{{url}}" title="{{alt}}" class="form-control {{../classes.btn}} {{classes}}" style="{{../styles.btn}}">';
 				item += unescapeHtml('{{title}}');
 				item += '</a>';
 
@@ -40,7 +40,7 @@
 				item = '<hr />';
 			{{else}}
 				item = '<div class="input-block" id="menu-item-{{id}}"><div class="input-group parent">';
-				item += 	'<a href="{{url}}" class="form-control {{../classes.btn}} {{classes}}" title="{{alt}}">';
+				item += 	'<a href="{{url}}" class="form-control {{../classes.btn}} {{classes}}" style="{{../styles.btn}}" title="{{alt}}">';
 				item += unescapeHtml('{{title}}');
 				item += '</a>';
 				item += 	'<div class="input-group-btn">';
@@ -60,9 +60,9 @@
 	{{!Iterate all submenus and add them under the corresponding parent}}
 	$.each(submenus, function(key, value) {
 		$('#'+key).children('div.input-group').children('div.input-group-btn')
-			.prepend($('<a href="#'+key+'-collapse" role="button" class="{{classes.btn}}" data-toggle="collapse"><i class="fa fa-fw fa-caret-down"></i><span class="sr-only">{{titles.toggle}}</span></a>'));
+			.prepend($('<a href="#'+key+'-collapse" role="button" class="{{classes.btn}}" style="{{styles.btn}}" data-toggle="collapse"><i class="fa fa-fw fa-caret-down"></i><span class="sr-only">{{titles.toggle}}</span></a>'));
 		$('#'+key)
-			.append($('<div id="'+key+'-collapse" class="submenu collapse {{classes.collapse}}" role="menu">'+value.join('')+'</div>'));
+			.append($('<div id="'+key+'-collapse" class="submenu collapse {{classes.collapse}}" style="{{styles.collapse}}" role="menu">'+value.join('')+'</div>'));
 	});
 
 })(jQuery);

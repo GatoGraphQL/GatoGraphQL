@@ -466,24 +466,6 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 		return parent::show_fetchmore($template_id);
 	}
 
-	protected function filter_hidden($template_id) {
-
-		switch ($template_id) {
-
-			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_NAVIGATOR:
-			case GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR:
-			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR:
-
-			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS:
-			case GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
-			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS:
-			
-				return true;
-		}
-
-		return parent::filter_hidden($template_id);
-	}
-
 	function get_filter_template($template_id) {
 
 		switch ($template_id) {

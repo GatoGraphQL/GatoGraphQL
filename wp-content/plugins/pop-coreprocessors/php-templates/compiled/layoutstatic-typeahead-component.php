@@ -1,5 +1,5 @@
 <?php
- function lcr593c9d123c4efraw($cx, $v, $ex = 0) {
+ function lcr595ab09bf3a3braw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -23,7 +23,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9d123c4efraw($cx, $vv);
+      $ret[] = lcr595ab09bf3a3braw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -71,6 +71,6 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<div class="clearfix">',lcr593c9d123c4efraw($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'</div>';return ob_get_clean();
+    ob_start();echo '<div class="clearfix">',lcr595ab09bf3a3braw($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'</div>';return ob_get_clean();
 };
 ?>

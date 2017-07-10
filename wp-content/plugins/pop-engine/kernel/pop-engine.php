@@ -254,6 +254,11 @@ class PoP_Engine {
 		return false;
 	}
 
+	function get_datastructure_formatter() {
+
+		return GD_TemplateManager_Utils::get_datastructure_formatter();
+	}
+
 	protected function get_json($template_id, $output_items) {
 
 		global $gd_template_processor_manager, $gd_template_cachemanager;
@@ -262,7 +267,7 @@ class PoP_Engine {
 			return;
 		}
 
-		$formatter = GD_TemplateManager_Utils::get_datastructure_formatter();
+		$formatter = $this->get_datastructure_formatter();
 		$request = $_REQUEST;
 
 		// // If passing no setting items, then bring everything
@@ -432,7 +437,8 @@ class PoP_Engine {
 		}
 	}
 
-	private function get_data($toplevel_template_id, $toplevel_processor, $toplevel_atts, $formatter, $request = array()) {
+	// This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
+	function get_data($toplevel_template_id, $toplevel_processor, $toplevel_atts, $formatter, $request = array()) {
 			
 		global $gd_template_processor_manager, $gd_dataload_manager, $gd_dataload_iohandle_manager, $gd_dataload_actionexecution_manager, $gd_dataquery_manager, $gd_template_cachemanager;
 

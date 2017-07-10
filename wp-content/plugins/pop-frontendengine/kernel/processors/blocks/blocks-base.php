@@ -599,10 +599,6 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 
 		return false;
 	}
-	protected function filter_hidden($template_id) {
-
-		return false;
-	}
 	protected function filter_visible($template_id) {
 
 		return false;

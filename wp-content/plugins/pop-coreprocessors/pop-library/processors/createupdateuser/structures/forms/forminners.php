@@ -72,38 +72,15 @@ class GD_Template_Processor_UserFormInners extends GD_Template_Processor_FormInn
 						// GD_URE_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
 						GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST,
 						GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
-						GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYCONTENT,
-						GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_BIWEEKLYUPCOMINGEVENTS,
-						GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNETWORKACTIVITY,
-						GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY,
+						GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS,
+						GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS,
+						GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS,
+						// GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY,
 					)
 				);
 				foreach ($inputs as $input) {
 
 					$this->add_att($input, $atts, 'load-itemobject-value', true);
-				}
-
-				// Comment Leo 22/03/2017: Disabled inputs: wait until implementation to have them enabled
-				$disabled = array(
-					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYCONTENT,
-					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_BIWEEKLYUPCOMINGEVENTS,
-					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNETWORKACTIVITY,
-					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY,
-				);
-
-				global $gd_template_processor_manager;
-				foreach ($disabled as $input) {
-					
-					// Add a 'Coming soon' before the label
-					$label = sprintf(
-						__('(Coming soon) %s', 'pop-coreprocessors'),
-						$gd_template_processor_manager->get_processor($input)->get_label($input, $atts)
-					);
-					$this->add_att($input, $atts, 'label', $label);
-
-					// Make it disabled and read only
-					$this->add_att($input, $atts, 'readonly', true);
-					$this->add_att($input, $atts, 'disabled', true);
 				}
 				break;
 		}

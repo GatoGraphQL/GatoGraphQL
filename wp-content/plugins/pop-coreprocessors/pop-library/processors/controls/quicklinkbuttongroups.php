@@ -21,6 +21,7 @@ define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM', PoP_Se
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSHARE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-usershare'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERCONTACTINFO', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-usercontactinfo'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-comments'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-comments-label'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-tagshare'));
 
 class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
@@ -44,6 +45,7 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSHARE,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERCONTACTINFO,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS,
+			GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE,
 		);
 	}
@@ -137,6 +139,11 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS:
 
 				$ret[] = GD_TEMPLATE_BUTTON_POSTCOMMENTS;
+				break;
+
+			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL:
+
+				$ret[] = GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL;
 				break;
 
 			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE:

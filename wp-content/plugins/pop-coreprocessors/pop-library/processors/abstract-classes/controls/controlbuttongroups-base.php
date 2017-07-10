@@ -30,6 +30,7 @@ class GD_Template_Processor_ControlButtonGroupsBase extends GD_Template_Processo
 			}
 		}
 
+		$this->append_att($template_id, $atts, 'class', 'btn-group pop-hide-empty');		
 		$this->append_att($template_id, $atts, 'class', 'pop-hidden-print');		
 		return parent::init_atts($template_id, $atts);
 	}

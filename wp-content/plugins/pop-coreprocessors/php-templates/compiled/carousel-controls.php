@@ -1,5 +1,5 @@
 <?php
- function lcr593c9d1c544d7hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr595ab0a6a7306hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -39,10 +39,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr593c9d1c544d7m($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr595ab0a6a7306m($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr593c9d1c544d7m($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr595ab0a6a7306m($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -71,18 +71,18 @@
    };
   }
 
-  return lcr593c9d1c544d7exch($cx, $ch, $vars, $options);
+  return lcr595ab0a6a7306exch($cx, $ch, $vars, $options);
  }
 
- function lcr593c9d1c544d7encq($cx, $var) {
+ function lcr595ab0a6a7306encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr593c9d1c544d7raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0a6a7306raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr593c9d1c544d7hbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr595ab0a6a7306hbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -99,14 +99,14 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr593c9d1c544d7exch($cx, $ch, $vars, $options);
+  return lcr595ab0a6a7306exch($cx, $ch, $vars, $options);
  }
 
- function lcr593c9d1c544d7ifvar($cx, $v, $zero) {
+ function lcr595ab0a6a7306ifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr593c9d1c544d7raw($cx, $v, $ex = 0) {
+ function lcr595ab0a6a7306raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -130,7 +130,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr593c9d1c544d7raw($cx, $vv);
+      $ret[] = lcr595ab0a6a7306raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -142,7 +142,7 @@
   return "$v";
  }
 
- function lcr593c9d1c544d7m($cx, $a, $b) {
+ function lcr595ab0a6a7306m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -157,7 +157,7 @@
   return $a;
  }
 
- function lcr593c9d1c544d7exch($cx, $ch, $vars, &$options) {
+ function lcr595ab0a6a7306exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -170,13 +170,13 @@
   }
 
   if($e !== null) {
-   lcr593c9d1c544d7err($cx, $e);
+   lcr595ab0a6a7306err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr593c9d1c544d7err($cx, $err) {
+ function lcr595ab0a6a7306err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -296,15 +296,15 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<div ',lcr593c9d1c544d7hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d1c544d7encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' class="pop-carousel-controls ',lcr593c9d1c544d7encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" data-target="#',lcr593c9d1c544d7encq($cx, lcr593c9d1c544d7hbch($cx, 'lastGeneratedId', array(array(),array('template'=>(($inary && isset($in['carousel-template'])) ? $in['carousel-template'] : null))), 'encq', $in)),'">
-	<a ',lcr593c9d1c544d7hbbch($cx, 'generateId', array(array(),array('group'=>'control-left')), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d1c544d7encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'-control-left';}),' href="#" class="pop-carousel-control left ',lcr593c9d1c544d7encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control'])) ? $in['classes']['control'] : null)),' ',lcr593c9d1c544d7encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control-prev'])) ? $in['classes']['control-prev'] : null)),'">
+    ob_start();echo '<div ',lcr595ab0a6a7306hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0a6a7306encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' class="pop-carousel-controls ',lcr595ab0a6a7306encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" style="',lcr595ab0a6a7306encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" data-target="#',lcr595ab0a6a7306encq($cx, lcr595ab0a6a7306hbch($cx, 'lastGeneratedId', array(array(),array('template'=>(($inary && isset($in['carousel-template'])) ? $in['carousel-template'] : null))), 'encq', $in)),'">
+	<a ',lcr595ab0a6a7306hbbch($cx, 'generateId', array(array(),array('group'=>'control-left')), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0a6a7306encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'-control-left';}),' href="#" class="pop-carousel-control left ',lcr595ab0a6a7306encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control'])) ? $in['classes']['control'] : null)),' ',lcr595ab0a6a7306encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control-prev'])) ? $in['classes']['control-prev'] : null)),'" style="',lcr595ab0a6a7306encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['control'])) ? $in['styles']['control'] : null)),' ',lcr595ab0a6a7306encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['control-prev'])) ? $in['styles']['control-prev'] : null)),'">
 		<span class="glyphicon glyphicon-chevron-left"></span>
 	</a>
-';if (lcr593c9d1c544d7ifvar($cx, (($inary && isset($in['title'])) ? $in['title'] : null), false)){echo '';if (lcr593c9d1c544d7ifvar($cx, (($inary && isset($in['title-link'])) ? $in['title-link'] : null), false)){echo '			<a href="',lcr593c9d1c544d7encq($cx, (($inary && isset($in['title-link'])) ? $in['title-link'] : null)),'" class="',lcr593c9d1c544d7encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['title'])) ? $in['classes']['title'] : null)),'" ';if (lcr593c9d1c544d7ifvar($cx, (($inary && isset($in['target'])) ? $in['target'] : null), false)){echo 'target="',lcr593c9d1c544d7encq($cx, (($inary && isset($in['target'])) ? $in['target'] : null)),'"';}else{echo '';}echo '>
-				<',lcr593c9d1c544d7encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),'>',lcr593c9d1c544d7raw($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'</',lcr593c9d1c544d7encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),'>
+';if (lcr595ab0a6a7306ifvar($cx, (($inary && isset($in['title'])) ? $in['title'] : null), false)){echo '';if (lcr595ab0a6a7306ifvar($cx, (($inary && isset($in['title-link'])) ? $in['title-link'] : null), false)){echo '			<a href="',lcr595ab0a6a7306encq($cx, (($inary && isset($in['title-link'])) ? $in['title-link'] : null)),'" class="',lcr595ab0a6a7306encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['title'])) ? $in['classes']['title'] : null)),'" style="',lcr595ab0a6a7306encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['title'])) ? $in['styles']['title'] : null)),'" ';if (lcr595ab0a6a7306ifvar($cx, (($inary && isset($in['target'])) ? $in['target'] : null), false)){echo 'target="',lcr595ab0a6a7306encq($cx, (($inary && isset($in['target'])) ? $in['target'] : null)),'"';}else{echo '';}echo '>
+				<',lcr595ab0a6a7306encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),'>',lcr595ab0a6a7306raw($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'</',lcr595ab0a6a7306encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),'>
 			</a>
-';}else{echo '			<',lcr593c9d1c544d7encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),' class="',lcr593c9d1c544d7encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['title'])) ? $in['classes']['title'] : null)),'">',lcr593c9d1c544d7raw($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'</',lcr593c9d1c544d7encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),'>
-';}echo '';}else{echo '';}echo '	<a ',lcr593c9d1c544d7hbbch($cx, 'generateId', array(array(),array('group'=>'control-right')), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr593c9d1c544d7encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'-control-right';}),' href="#" class="pop-carousel-control right ',lcr593c9d1c544d7encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control'])) ? $in['classes']['control'] : null)),' ',lcr593c9d1c544d7encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control-next'])) ? $in['classes']['control-next'] : null)),'">
+';}else{echo '			<',lcr595ab0a6a7306encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),' class="',lcr595ab0a6a7306encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['title'])) ? $in['classes']['title'] : null)),'" style="',lcr595ab0a6a7306encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['title'])) ? $in['styles']['title'] : null)),'">',lcr595ab0a6a7306raw($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'</',lcr595ab0a6a7306encq($cx, (($inary && isset($in['html-tag'])) ? $in['html-tag'] : null)),'>
+';}echo '';}else{echo '';}echo '	<a ',lcr595ab0a6a7306hbbch($cx, 'generateId', array(array(),array('group'=>'control-right')), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0a6a7306encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'-control-right';}),' href="#" class="pop-carousel-control right ',lcr595ab0a6a7306encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control'])) ? $in['classes']['control'] : null)),' ',lcr595ab0a6a7306encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['control-next'])) ? $in['classes']['control-next'] : null)),'" style="',lcr595ab0a6a7306encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['control'])) ? $in['styles']['control'] : null)),' ',lcr595ab0a6a7306encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['control-next'])) ? $in['styles']['control-next'] : null)),'">
 		<span class="glyphicon glyphicon-chevron-right"></span>
 	</a>
 </div>';return ob_get_clean();

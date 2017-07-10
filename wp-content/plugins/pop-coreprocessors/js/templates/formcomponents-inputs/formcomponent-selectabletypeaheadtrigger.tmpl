@@ -1,4 +1,4 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="alert in {{classes.alert}} {{class}} pop-typeahead-selected">
+<div {{#generateId}}{{id}}{{/generateId}} class="alert in {{classes.alert}} {{class}} pop-typeahead-selected" style="{{styles.alert}} {{style}}">
 	{{{description}}}
 	{{! When the the value is selected from the typeahead, it won't have "cannot-close-ids", so chech for this existence}}
 	{{#if show-close-btn}}

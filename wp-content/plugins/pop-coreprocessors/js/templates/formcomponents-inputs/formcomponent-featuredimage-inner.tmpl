@@ -1,25 +1,25 @@
 <div class="featuredimage-container pull-left" {{#generateId}}{{id}}{{/generateId}}>
 	<a {{#generateId group='set'}}{{id}}{{/generateId}} href="#" class="visible-loggedin">
 		{{#if value}}
-			<img src="{{img.src}}" width="{{img.width}}" height="{{img.height}}" class="{{classes.img}}">
+			<img src="{{img.src}}" width="{{img.width}}" height="{{img.height}}" class="{{classes.img}}" style="{{styles.img}}">
 		{{else}}
-			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}">
+			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}" style="{{styles.img}}">
 		{{/if}}
 	</a>
 	<span class="visible-notloggedin">
 		{{#if value}}
-			<img src="{{img.src}}" width="{{img.width}}" height="{{img.height}}" class="{{classes.img}}">
+			<img src="{{img.src}}" width="{{img.width}}" height="{{img.height}}" class="{{classes.img}}" style="{{styles.img}}">
 		{{else}}
-			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}">
+			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}" style="{{styles.img}}">
 		{{/if}}
 	</span>
-	<div class="{{classes.options}} visible-loggedin">
-		<a {{#generateId group='set'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn set {{classes.set-btn}}"><span class="glyphicon glyphicon-upload"></span> {{titles.btn-add}}</a>
+	<div class="{{classes.options}} visible-loggedin" style="{{styles.options}}">
+		<a {{#generateId group='set'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn set {{classes.set-btn}}" style="{{styles.set-btn}}"><span class="glyphicon glyphicon-upload"></span> {{titles.btn-add}}</a>
 		{{#if value}}		
-			<a {{#generateId group='remove'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn remove {{classes.remove-btn}}"><span class="glyphicon glyphicon-remove-sign"></span> {{titles.btn-remove}}</a>
+			<a {{#generateId group='remove'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn remove {{classes.remove-btn}}" style="{{styles.remove-btn}}"><span class="glyphicon glyphicon-remove-sign"></span> {{titles.btn-remove}}</a>
 		{{/if}}
 	</div>
-	<div class="{{classes.options}} visible-notloggedin">
+	<div class="{{classes.options}} visible-notloggedin" style="{{styles.options}}">
 		{{{titles.usernotloggedin}}}
 	</div>
 </div>

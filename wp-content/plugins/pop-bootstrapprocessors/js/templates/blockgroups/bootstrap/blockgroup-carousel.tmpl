@@ -1,6 +1,6 @@
-<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="carousel {{classes.bootstrap-component}} {{classes.carousel}}" {{#each carousel-params}} {{@key}}="{{this}}"{{/each}}> 
+<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="carousel {{classes.bootstrap-component}} {{classes.carousel}}" style="{{styles.bootstrap-component}}{{styles.carousel}}" {{#each carousel-params}} {{@key}}="{{this}}"{{/each}}> 
 	{{#compare panel-header-type "indicators"}}
-		<div class="carousel-indicators {{panelheader-class}}" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
+		<div class="carousel-indicators {{classes.panelheader}}" style="{{styles.panelheader}}" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 			{{#each panel-headers}}
 				<div class="{{#compare ../active settings-id}}active{{/compare}}" data-target="#{{lastGeneratedId context=../. group=../bootstrap-type}}" data-slide-to="{{@index}}">
 					{{{title}}}
@@ -10,10 +10,10 @@
 	{{/compare}}
 	<div class="carousel-inner" role="listbox">
 		{{#each settings-ids.blockunits}}
-			<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" class="item {{#compare ../active this}}active{{/compare}} {{../panel-class}} {{get ../custom-panel-class this}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
-				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}">
+			<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" class="item {{#compare ../active this}}active{{/compare}} {{../classes.panel}} {{get ../custom-panel-class this}}" style="{{../styles.panel}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
+				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}" style="{{../styles.container}}">
 					{{#compare ../panel-header-type "indicators-internal"}}
-						<div class="carousel-indicators {{../panelheader-class}}" {{#each ../panelheader-params}} {{@key}}="{{this}}"{{/each}}>
+						<div class="carousel-indicators {{../panelheader-class}}" style="{{../styles.panelheader}}" {{#each ../panelheader-params}} {{@key}}="{{this}}"{{/each}}>
 							{{#each ../../panel-headers}}
 								<div class="{{#compare ../../../active settings-id}}active{{/compare}}" data-target="#{{lastGeneratedId context=../../../. group=../../../bootstrap-type}}" data-slide-to="{{@index}}">
 									<h5>{{{title}}}</h5>

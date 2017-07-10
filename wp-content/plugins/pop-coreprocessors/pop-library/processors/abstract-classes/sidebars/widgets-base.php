@@ -55,7 +55,7 @@ class GD_Template_Processor_WidgetsBase extends GD_Template_ProcessorBase {
 
 		return 'panel panel-default';
 	}
-	function get_title_wrapper($template_id, $atts) {
+	function get_title_wrapper_class($template_id, $atts) {
 
 		return 'panel-heading';
 	}
@@ -139,7 +139,7 @@ class GD_Template_Processor_WidgetsBase extends GD_Template_ProcessorBase {
 		$this->add_att($template_id, $atts, 'menu-title', $this->get_menu_title($template_id, $atts));
 		$this->add_att($template_id, $atts, 'fontawesome', $this->get_fontawesome($template_id, $atts));
 		$this->add_att($template_id, $atts, 'widget-class', $this->get_widget_class($template_id, $atts));
-		$this->add_att($template_id, $atts, 'title-wrapper', $this->get_title_wrapper($template_id, $atts));
+		$this->add_att($template_id, $atts, 'title-wrapper-class', $this->get_title_wrapper_class($template_id, $atts));
 		$this->add_att($template_id, $atts, 'title-class', $this->get_title_class($template_id, $atts));
 		$this->add_att($template_id, $atts, 'body-class', $this->get_body_class($template_id, $atts));
 		// $this->add_att($template_id, $atts, 'expand', $this->expand($template_id, $atts));
@@ -173,10 +173,14 @@ class GD_Template_Processor_WidgetsBase extends GD_Template_ProcessorBase {
 		$ret['menu-title'] = $this->get_att($template_id, $atts, 'menu-title');
 		$ret[GD_JS_FONTAWESOME/*'fontawesome'*/] = $this->get_att($template_id, $atts, 'fontawesome');
 
-		$ret['widget-class'] = $this->get_att($template_id, $atts, 'widget-class');
-		$ret['title-class'] = $this->get_att($template_id, $atts, 'title-class');
-		$ret['title-wrapper'] = $this->get_att($template_id, $atts, 'title-wrapper');
-		$ret['body-class'] = $this->get_att($template_id, $atts, 'body-class');
+		// $ret['widget-class'] = $this->get_att($template_id, $atts, 'widget-class');
+		$ret[GD_JS_CLASSES/*'classes'*/]['widget'] = $this->get_att($template_id, $atts, 'widget-class');
+		// $ret['title-class'] = $this->get_att($template_id, $atts, 'title-class');
+		$ret[GD_JS_CLASSES/*'classes'*/]['title'] = $this->get_att($template_id, $atts, 'title-class');
+		// $ret['body-class'] = $this->get_att($template_id, $atts, 'body-class');
+		$ret[GD_JS_CLASSES/*'classes'*/]['body'] = $this->get_att($template_id, $atts, 'body-class');
+		// $ret['title-wrapper-class'] = $this->get_att($template_id, $atts, 'title-wrapper-class');
+		$ret[GD_JS_CLASSES/*'classes'*/]['title-wrapper'] = $this->get_att($template_id, $atts, 'title-wrapper-class');
 		// $ret['expand'] = $this->get_att($template_id, $atts, 'expand');
 		$ret['show-header'] = $this->get_att($template_id, $atts, 'show-header');
 		$ret['title-htmltag'] = $this->get_att($template_id, $atts, 'title-htmltag');

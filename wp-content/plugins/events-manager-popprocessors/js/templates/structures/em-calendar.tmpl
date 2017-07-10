@@ -1,4 +1,4 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="calendar make-fullcalendar {{class}}" {{#each params}} {{@key}}="{{this}}"{{/each}}></div>
+<div {{#generateId}}{{id}}{{/generateId}} class="calendar make-fullcalendar {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}></div>
 {{#withModule . "controlgroup"}}
 	<div class="pop-calendar-controls" data-target="#{{lastGeneratedId context=../.}}">
 		{{enterModule ../.}}
