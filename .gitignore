@@ -23,6 +23,8 @@ wp-admin/
 wp-includes/
 wp-content/languages/
 
+vendor/
+
 /index.php
 /wp-activate.php
 /wp-blog-header.php
