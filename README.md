@@ -75,6 +75,8 @@ To install it, follow the instructions [here](https://zordius.github.io/Handleba
 
 [PHP CSS Parser](https://github.com/sabberworm/PHP-CSS-Parser) is used for parsing css files to extract their styles. It must be installed in order to send the automated emails, which, instead of using classes, have inline styles printed in the HTML code.
 
+To install it, open a Terminal window, go to folder [wp-content/plugins/pop-frontendengine/library/css-to-style-conversion/](https://github.com/leoloso/PoP/tree/master/wp-content/plugins/pop-frontendengine/library/css-to-style-conversion), and run `composer install` (make sure to have [Composer](https://getcomposer.org/) installed first).
+
 ### Installing the demo
 
 Because the [scripts automating the installation process](https://github.com/leoloso/PoP/issues/49) are not done yet, we provide file [getpop-demo/install.zip](https://github.com/leoloso/PoP/tree/master/install/getpop-demo/install.zip) to quickly install a copy of [GetPoP Demo website](https://demo.getpop.org/) in your localhost. Read the installation instructions [here](https://github.com/leoloso/PoP/blob/master/install/getpop-demo/install.md).
