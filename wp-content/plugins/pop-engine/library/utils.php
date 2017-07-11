@@ -27,12 +27,19 @@ function limit_string($string, $length = null, $more = null, $bywords = false) {
 		$length = apply_filters('excerpt_length', 250);
 		
 	// Similar to wp_trim_excerpt in wp-includes/formatting.php
-	if (!$more)
+	if (!$more) {
 		$more = apply_filters( 'excerpt_more', ' ' . '[&hellip;]' );
-	if (!$bywords)
-		$string = (strlen($string) > $length) ? substr($string, 0, $length) . $more : $string;
-	else
+	}
+	if (!$bywords) {
+		// Comment Leo 11/07/2017: for some weird reason, when the $string contains character "’", it fails! So I gotta make sure it is not there...
+		// $string = (strlen($string) > $length) ? substr($string, 0, $length) . $more : $string;
+		// $string = (strlen($string) > $length) ? substr(str_replace('’',"'", $string), 0, $length) . $more : $string;
+		// Comment Leo 11/07/2017: it works fine using mb_substr instead, so use that one
+		$string = (strlen($string) > $length) ? mb_substr($string, 0, $length) . $more : $string;
+	}
+	else {
 		$string = wp_trim_words( $string, $length, $more );
+	}
 	
 	return $string;
 }
