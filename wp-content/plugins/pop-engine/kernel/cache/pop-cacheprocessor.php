@@ -62,6 +62,11 @@ class GD_Template_CacheProcessor {
 			// $filename .= '-datastructure_'.$datastructure;
 			$filename .= '-'.$datastructure;
 		}
+		if ($module = $vars['module']) {
+			
+			// Module is also needed, because the cached data-settings from module=datasettings and module=data are different
+			$filename .= '-'.$module;
+		}
 		if ($mangled = $vars['mangled']) {
 			
 			// By default it is mangled. To make it non-mangled, url must have param "mangled=none",
