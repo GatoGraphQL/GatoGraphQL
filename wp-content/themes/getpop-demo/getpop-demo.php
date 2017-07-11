@@ -3,7 +3,7 @@
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('GETPOPDEMO_VERSION', 0.252);
+define ('GETPOPDEMO_VERSION', 0.253);
 
 define ('GETPOPDEMO_DIR', STYLESHEETPATH);
 define ('GETPOPDEMO_DIR_RESOURCES', GETPOPDEMO_DIR.'/resources');

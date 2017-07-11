@@ -28,11 +28,13 @@ define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYPOSTS', PoP_ServerUtils::get_templat
 
 define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_MAINALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-mainallcontent'));
 define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-allcontent'));
+define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_POSTS', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-posts'));
 define ('GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLUSERS', PoP_ServerUtils::get_template_definition('sidebarinner-authorsection-allusers'));
 
 define ('GD_TEMPLATE_SIDEBARINNER_TAGSECTION_MAINALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-tagsection-mainallcontent'));
 define ('GD_TEMPLATE_SIDEBARINNER_TAGSECTION_ALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-tagsection-allcontent'));
 define ('GD_TEMPLATE_SIDEBARINNER_TAGSECTION_WEBPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-tagsection-webposts'));
+define ('GD_TEMPLATE_SIDEBARINNER_TAGSECTION_POSTS', PoP_ServerUtils::get_template_definition('sidebarinner-tagsection-posts'));
 
 define ('GD_TEMPLATE_SIDEBARINNER_HOMESECTION_ALLCONTENT', PoP_ServerUtils::get_template_definition('sidebarinner-homesection-allcontent'));
 
@@ -61,9 +63,11 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_MAINALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_ALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_WEBPOSTS,
+			GD_TEMPLATE_SIDEBARINNER_TAGSECTION_POSTS,
 			GD_TEMPLATE_SIDEBARINNER_HOMESECTION_ALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_MAINALLCONTENT,
 			GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLCONTENT,
+			GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_POSTS,
 			GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLUSERS,
 		);
 	}
@@ -194,6 +198,12 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGWEBPOSTS;
 				break;
 
+			case GD_TEMPLATE_SIDEBARINNER_TAGSECTION_POSTS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_TAGSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_TAGPOSTS;
+				break;
+
 			case GD_TEMPLATE_SIDEBARINNER_HOMESECTION_ALLCONTENT:
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_HOMESECTION;
@@ -210,6 +220,12 @@ class GD_Template_Processor_CustomSectionSidebarInners extends GD_Template_Proce
 
 				$ret[] = GD_TEMPLATE_BUTTONGROUP_AUTHORSECTION;
 				$ret[] = GD_TEMPLATE_DELEGATORFILTER_AUTHORWILDCARDPOSTS;
+				break;
+
+			case GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_POSTS:
+
+				$ret[] = GD_TEMPLATE_BUTTONGROUP_AUTHORSECTION;
+				$ret[] = GD_TEMPLATE_DELEGATORFILTER_AUTHORPOSTS;
 				break;
 
 			case GD_TEMPLATE_SIDEBARINNER_AUTHORSECTION_ALLUSERS:

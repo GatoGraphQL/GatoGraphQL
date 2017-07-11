@@ -17,7 +17,9 @@ define ('GD_TEMPLATE_FILTER_AUTHORHIGHLIGHTS', PoP_ServerUtils::get_template_def
 define ('GD_TEMPLATE_FILTER_WEBPOSTS', PoP_ServerUtils::get_template_definition('filter-webposts'));
 define ('GD_TEMPLATE_FILTER_POSTS', PoP_ServerUtils::get_template_definition('filter-posts'));
 define ('GD_TEMPLATE_FILTER_AUTHORWEBPOSTS', PoP_ServerUtils::get_template_definition('filter-authorwebposts'));
+define ('GD_TEMPLATE_FILTER_AUTHORPOSTS', PoP_ServerUtils::get_template_definition('filter-authorposts'));
 define ('GD_TEMPLATE_FILTER_TAGWEBPOSTS', PoP_ServerUtils::get_template_definition('filter-tagwebposts'));
+define ('GD_TEMPLATE_FILTER_TAGPOSTS', PoP_ServerUtils::get_template_definition('filter-tagposts'));
 define ('GD_TEMPLATE_FILTER_WILDCARDUSERS', PoP_ServerUtils::get_template_definition('filter-wildcardusers'));
 define ('GD_TEMPLATE_FILTER_AUTHORWILDCARDUSERS', PoP_ServerUtils::get_template_definition('filter-authorwildcardusers'));
 // define ('GD_TEMPLATE_FILTER_MYRESOURCES', PoP_ServerUtils::get_template_definition('filter-myresources'));
@@ -47,7 +49,9 @@ class GD_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersB
 			GD_TEMPLATE_FILTER_WEBPOSTS,
 			GD_TEMPLATE_FILTER_POSTS,
 			GD_TEMPLATE_FILTER_AUTHORWEBPOSTS,
+			GD_TEMPLATE_FILTER_AUTHORPOSTS,
 			GD_TEMPLATE_FILTER_TAGWEBPOSTS,
+			GD_TEMPLATE_FILTER_TAGPOSTS,
 			GD_TEMPLATE_FILTER_WILDCARDUSERS,
 			GD_TEMPLATE_FILTER_AUTHORWILDCARDUSERS,
 			// GD_TEMPLATE_FILTER_RESOURCES,
@@ -77,7 +81,9 @@ class GD_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersB
 			GD_TEMPLATE_FILTER_WEBPOSTS => GD_TEMPLATE_FILTERINNER_WEBPOSTS,
 			GD_TEMPLATE_FILTER_POSTS => GD_TEMPLATE_FILTERINNER_POSTS,
 			GD_TEMPLATE_FILTER_AUTHORWEBPOSTS => GD_TEMPLATE_FILTERINNER_AUTHORWEBPOSTS,
+			GD_TEMPLATE_FILTER_AUTHORPOSTS => GD_TEMPLATE_FILTERINNER_AUTHORPOSTS,
 			GD_TEMPLATE_FILTER_TAGWEBPOSTS => GD_TEMPLATE_FILTERINNER_TAGWEBPOSTS,
+			GD_TEMPLATE_FILTER_TAGPOSTS => GD_TEMPLATE_FILTERINNER_TAGPOSTS,
 			GD_TEMPLATE_FILTER_WILDCARDUSERS => GD_TEMPLATE_FILTERINNER_WILDCARDUSERS,
 			GD_TEMPLATE_FILTER_AUTHORWILDCARDUSERS => GD_TEMPLATE_FILTERINNER_AUTHORWILDCARDUSERS,
 			// GD_TEMPLATE_FILTER_RESOURCES => GD_TEMPLATE_FILTERINNER_RESOURCES,
