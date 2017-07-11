@@ -101,12 +101,7 @@ class PoP_EmailSender_Hooks {
 		add_action('gd_upvotepost', array($this, 'emailnotifications_network_upvotedpost'), 10, 1);
 		add_action('gd_downvotepost', array($this, 'emailnotifications_network_downvotedpost'), 10, 1);
 		// URE_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
-		// add_action('gd_update_mycommunities:update', array($this, 'emailnotifications_network_joinscommunity'), 10, 3);
-		
-		// // EMAILNOTIFICATIONS_DIGESTS_DAILY_NEWCONTENT:
-		// add_action('', array($this, 'emailnotifications_digests_daily_newcontent'), 10, 1);
-		// // EMAILNOTIFICATIONS_DIGESTS_DAILY_UPCOMINGEVENTS:
-		// add_action('', array($this, 'emailnotifications_digests_daily_upcomingevents'), 10, 1);
+		// add_action('gd_update_mycommunities:update', array($this, 'emailnotifications_network_joinscommunity'), 10, 3);		
 	}
 
 	/**---------------------------------------------------------------------------------------------------------------
@@ -913,12 +908,6 @@ class PoP_EmailSender_Hooks {
 	// 			);
 	// 		}			
 	// 	}
-	// }
-	// function emailnotifications_digests_daily_newcontent($post_id) {
-
-	// }
-	// function emailnotifications_digests_daily_upcomingevents	($post_id) {
-
 	// }
 
 	/**---------------------------------------------------------------------------------------------------------------
