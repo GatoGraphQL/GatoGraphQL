@@ -2267,11 +2267,28 @@ popManager = {
 
 		if (lastPromise) {
 			lastPromise.done(function() {
-				t.processPageSection(pageSection, response, options);
+
+				// If while processing the pageSection we get error "Mempage not available",
+				// do not let it break the execution of other JS, contain it
+				try {
+					t.processPageSection(pageSection, response, options);
+				}
+				catch(err) {
+					// Do nothing
+					console.error(err.message);
+				}
 			});
 		}
 		else {
-			t.processPageSection(pageSection, response, options);
+			// If while processing the pageSection we get error "Mempage not available",
+			// do not let it break the execution of other JS, contain it
+			try {
+				t.processPageSection(pageSection, response, options);
+			}
+			catch(err) {
+				// Do nothing
+				console.error(err.message);
+			}
 		}
 
 		// Resolve the deferred
@@ -2871,11 +2888,27 @@ popManager = {
 
 				if (lastPromise) {
 					lastPromise.done(function() {
-						t.fetchBlockComplete(pageSection, block, params, status, options);
+						// If while processing the pageSection we get error "Mempage not available",
+						// do not let it break the execution of other JS, contain it
+						try {
+							t.fetchBlockComplete(pageSection, block, params, status, options);
+								}
+						catch(err) {
+							// Do nothing
+							console.error(err.message);
+						}
 					});
 				}
 				else {
-					t.fetchBlockComplete(pageSection, block, params, status, options);
+					// If while processing the pageSection we get error "Mempage not available",
+					// do not let it break the execution of other JS, contain it
+					try {
+						t.fetchBlockComplete(pageSection, block, params, status, options);
+					}
+					catch(err) {
+						// Do nothing
+						console.error(err.message);
+					}
 				}
 
 				// Resolve the deferred
@@ -3034,7 +3067,7 @@ popManager = {
 				}
 				catch(err) {
 					// Do nothing
-					console.log(err.message);
+					console.error(err.message);
 					// console.trace();
 				}
 			});
