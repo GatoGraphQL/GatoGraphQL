@@ -11,7 +11,7 @@ class GD_Template_Processor_CreateUserFormMesageFeedbackLayoutsBase extends GD_T
 
 		$ret = parent::get_messages($template_id, $atts);
 			
-		$ret['success-header'] = __('Awesome! Your User Account was created successfully!', 'pop-coreprocessors');
+		$ret['success-header'] = __('Awesome! Your User Account was created successfully.', 'pop-coreprocessors');
 		
 		// Allow PoPTheme Wassup to add the emails to whitelist
 		$ret['success'] = apply_filters(

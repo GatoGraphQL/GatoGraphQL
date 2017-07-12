@@ -44,31 +44,32 @@ class PoP_ThemeWassup_EM_AE_Template_Processor_CustomPostLayoutSidebarInners ext
 		return $ret;
 	}
 
-	function get_wrapper_class($template_id) {
+	// Comment Leo 12/07/2017: these 2 functions are commented, since class="row" doesn't work in emails
+	// function get_wrapper_class($template_id) {
 
-		switch ($template_id) {
+	// 	switch ($template_id) {
 			
-			case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
-			// case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT:
+	// 		case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
+	// 		// case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT:
 
-				return 'row';
-		}
+	// 			return 'row';
+	// 	}
 	
-		return parent::get_wrapper_class($template_id);
-	}
+	// 	return parent::get_wrapper_class($template_id);
+	// }
 	
-	function get_widgetwrapper_class($template_id) {
+	// function get_widgetwrapper_class($template_id) {
 
-		switch ($template_id) {
+	// 	switch ($template_id) {
 			
-			case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
-			// case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT:
+	// 		case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
+	// 		// case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT:
 			
-				return 'col-xsm-6';
-		}
+	// 			return 'col-xsm-6';
+	// 	}
 	
-		return parent::get_widgetwrapper_class($template_id);
-	}
+	// 	return parent::get_widgetwrapper_class($template_id);
+	// }
 }
 
 

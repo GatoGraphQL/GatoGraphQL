@@ -35,6 +35,7 @@ define ('GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT' , '
 define ('GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYLATESTPOSTS' , 'pref_emaildigests_weeklylatestposts');
 define ('GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS' , 'pref_emaildigests_weeklyupcomingevents');
 define ('GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNOTIFICATIONS' , 'pref_emaildigests_dailynotifications');
+define ('GD_METAKEY_PROFILE_EMAILDIGESTS_SPECIALPOSTS' , 'pref_emaildigests_specialposts');
 // define ('GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY' , 'pref_emaildigests_dailysubscribedtopicsactivity');
 
 add_filter('gd_acf_get_keys_store_as_array', 'gd_acf_get_keys_store_as_array_profiles');

@@ -26,25 +26,25 @@ class PoP_ThemeWassup_EM_AE_Template_Processor_FullViewLayouts extends GD_Templa
 		);
 	}
 
-	function get_footer_templates($template_id) {
+	// function get_footer_templates($template_id) {
 
-		$ret = parent::get_footer_templates($template_id);
+	// 	$ret = parent::get_footer_templates($template_id);
 
-		switch ($template_id) {
+	// 	switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:
-			// case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT:
-			// case GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:
-			// case GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT:
-			// case GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:
-			// case GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT:
+	// 		case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:
+	// 		// case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT:
+	// 		// case GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:
+	// 		// case GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT:
+	// 		// case GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:
+	// 		// case GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT:
 
-				$ret[] = GD_TEMPLATE_QUICKLINKGROUP_EVENTBOTTOM;
-				break;
-		}
+	// 			$ret[] = GD_TEMPLATE_QUICKLINKGROUP_EVENTBOTTOM;
+	// 			break;
+	// 	}
 
-		return $ret;
-	}
+	// 	return $ret;
+	// }
 
 	function get_sidebar_template($template_id) {
 

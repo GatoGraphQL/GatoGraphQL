@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Category Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-09 16:54+0200\n"
-"PO-Revision-Date: 2017-07-09 16:56+0200\n"
+"POT-Creation-Date: 2017-07-12 19:43+0200\n"
+"PO-Revision-Date: 2017-07-12 19:44+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
@@ -29,11 +29,10 @@ msgstr "Tus notificaciones del día — %s"
 
 #: .././plugins/aryo-activity-log-popprocessors/pop-library/processors/blocks/sections.php:75
 msgid "These are your unread notifications from the last day."
-msgstr "Estas son tus notificaciones no leídas del día anterior."
+msgstr "Estas son tus notificaciones no leídas del día pasado."
 
 #: .././plugins/aryo-activity-log-popprocessors/pop-library/processors/blocks/sections.php:77
 #, php-format
-#| msgid "Upcoming events — %s <small><a href=\"%s\">View online</a></small>"
 msgid ""
 "Your daily notifications — %s <small><a href=\"%s\">View online</a></small>"
 msgstr ""
@@ -44,7 +43,7 @@ msgstr ""
 msgid "View all your notifications on %s"
 msgstr "Ver todas tus notificaciones en %s"
 
-#: .././plugins/events-manager/pop-library/automatedemails/weekly-upcomingevents.php:30
+#: .././plugins/events-manager/pop-library/automatedemails/weekly-upcomingevents.php:25
 #, php-format
 msgid "Upcoming events — %s"
 msgstr "Próximos eventos — %s"
@@ -68,7 +67,7 @@ msgstr "Eventos próximos — %s <small><a href=\"%s\">Ver online</a></small>"
 msgid "View all events on %s"
 msgstr "Ver todos los eventos en %s"
 
-#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:52
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:53
 msgid "Event"
 msgstr "Evento"
 
@@ -76,6 +75,11 @@ msgstr "Evento"
 #, php-format
 msgid "Latest content — %s"
 msgstr "Último contenido — %s"
+
+#: .././pop-library/processors/blocks/contents.php:42
+#, php-format
+msgid "Here we send you this special %s:"
+msgstr "Aquí te enviamos este especial %s:"
 
 #: .././pop-library/processors/blocks/sections.php:89
 #, php-format
@@ -98,11 +102,11 @@ msgstr "Último contenido — %s <small><a href=\"%s\">Ver online</a></small>"
 msgid "View all content on %s"
 msgstr "Ver todo el contenido en %s"
 
-#: .././pop-library/processors/sidebars/widgetries.php:50
+#: .././pop-library/processors/sidebars/widgetries.php:51
 msgid "Author(s)"
 msgstr "Autor(es)"
 
-#: .././pop-library/processors/sidebars/widgetries.php:51
+#: .././pop-library/processors/sidebars/widgetries.php:52
 msgid "Post"
 msgstr "Post"
 

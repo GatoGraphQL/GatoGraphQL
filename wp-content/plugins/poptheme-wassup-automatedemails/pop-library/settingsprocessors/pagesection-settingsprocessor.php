@@ -21,6 +21,7 @@ class PoPTheme_Wassup_AutomatedEmails_PageSectionSettingsProcessor extends Wassu
 			switch ($page_id) {
 
 				case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY:
+				case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL:
 
 					$blocks[] = GD_TEMPLATE_BLOCK_EMPTYSIDEINFO;
 					break;
@@ -44,6 +45,7 @@ class PoPTheme_Wassup_AutomatedEmails_PageSectionSettingsProcessor extends Wassu
 		switch ($page_id) {
 
 			case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY:
+			case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL:
 
 				$add = 
 					($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN) ||
@@ -66,6 +68,7 @@ class PoPTheme_Wassup_AutomatedEmails_PageSectionSettingsProcessor extends Wassu
 		switch ($page_id) {
 
 			case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY:
+			case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN) {
 
@@ -98,6 +101,7 @@ class PoPTheme_Wassup_AutomatedEmails_PageSectionSettingsProcessor extends Wassu
 		switch ($page_id) {
 
 			case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY:
+			case POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL:
 
 				$add = 
 					($template_id == GD_TEMPLATE_PAGESECTION_PAGETABS_PAGE && $target == GD_URLPARAM_TARGET_MAIN) ||

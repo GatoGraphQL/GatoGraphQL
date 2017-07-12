@@ -141,23 +141,29 @@ function extra_user_profile_fields( $user ) {
 	<h4><?php _e('Email digests', 'pop-coreprocessors') ?></h4>		
 	<table class="form-table">
 	<tr>
-	<th><label for="display_email"><?php _e('New content by the community (weekly)', 'pop-coreprocessors') ?></label></th>
+	<th><label><?php _e('New content by the community (weekly)', 'pop-coreprocessors') ?></label></th>
 	<td>
 	<?php echo GD_AdminUtils::form_dropdown('emaildigests_weeklylatestposts', gd_build_select_options(array('Yes', 'No')), isset($_POST['emaildigests_weeklylatestposts']) ? $_POST['emaildigests_weeklylatestposts'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYLATESTPOSTS, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
 	</td>
 	</tr>	
 	<tr>
-	<th><label for="display_email"><?php _e('Upcoming events (weekly)', 'pop-coreprocessors') ?></label></th>
+	<th><label><?php _e('Upcoming events (weekly)', 'pop-coreprocessors') ?></label></th>
 	<td>
 	<?php echo GD_AdminUtils::form_dropdown('emaildigests_weeklyupcomingevents', gd_build_select_options(array('Yes', 'No')), isset($_POST['emaildigests_weeklyupcomingevents']) ? $_POST['emaildigests_weeklyupcomingevents'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
 	</td>
 	</tr>		
 	<tr>
-	<th><label for="display_email"><?php _e('My notifications (daily)', 'pop-coreprocessors') ?></label></th>
+	<th><label><?php _e('My notifications (daily)', 'pop-coreprocessors') ?></label></th>
 	<td>
 	<?php echo GD_AdminUtils::form_dropdown('emaildigests_dailynotifications', gd_build_select_options(array('Yes', 'No')), isset($_POST['emaildigests_dailynotifications']) ? $_POST['emaildigests_dailynotifications'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNOTIFICATIONS, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
 	</td>
 	</tr>
+	<tr>
+	<th><label><?php _e('Special posts', 'pop-coreprocessors') ?></label></th>
+	<td>
+	<?php echo GD_AdminUtils::form_dropdown('emaildigests_specialposts', gd_build_select_options(array('Yes', 'No')), isset($_POST['emaildigests_specialposts']) ? $_POST['emaildigests_specialposts'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILDIGESTS_SPECIALPOSTS, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
+	</td>
+	</tr>	
 	<?php /*		
 	<tr>
 	<th><label for="display_email"><?php _e('(Coming soon) Activity on my subscribed topics (daily)', 'pop-coreprocessors') ?></label></th>
@@ -206,6 +212,7 @@ function save_extra_user_profile_fields( $user_id ) {
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYLATESTPOSTS, (isset($_POST['emaildigests_weeklylatestposts']) && $_POST['emaildigests_weeklylatestposts'] == "yes"), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS, (isset($_POST['emaildigests_weeklyupcomingevents']) && $_POST['emaildigests_weeklyupcomingevents'] == "yes"), true );
 	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNOTIFICATIONS, (isset($_POST['emaildigests_dailynotifications']) && $_POST['emaildigests_dailynotifications'] == "yes"), true );
+	GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILDIGESTS_SPECIALPOSTS, (isset($_POST['emaildigests_specialposts']) && $_POST['emaildigests_specialposts'] == "yes"), true );
 	// GD_MetaManager::update_user_meta($user_id, GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY, (isset($_POST['emaildigests_dailysubscribedtopicsactivity']) && $_POST['emaildigests_dailysubscribedtopicsactivity'] == "yes"), true );
 }
 

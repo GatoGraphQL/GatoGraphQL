@@ -85,6 +85,7 @@ class GD_Template_Processor_PostThumbLayoutsBase extends GD_Template_ProcessorBa
 			$ret['link-target'] = $target;
 		}
 		$ret[GD_JS_CLASSES/*'classes'*/]['img'] = $this->get_att($template_id, $atts, 'img-class');
+		$ret[GD_JS_CLASSES/*'classes'*/]['thumb-extras'] = 'thumb-extras';
 		if ($link_class = $this->get_thumb_link_class($template_id)) {
 			$ret[GD_JS_CLASSES/*'classes'*/]['link'] = $link_class;
 		}

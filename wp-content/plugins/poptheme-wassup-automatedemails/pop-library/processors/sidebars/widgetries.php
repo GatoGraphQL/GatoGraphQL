@@ -38,6 +38,7 @@ class PoPTheme_Wassup_AE_Template_Processor_Widgets extends GD_Template_Processo
 					$ret[] = GD_TEMPLATE_LAYOUTWRAPPER_APPLIESTO;
 				}
 				$ret[] = GD_TEMPLATE_LAYOUT_PUBLISHED;
+				$ret[] = GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL;
 				break;
 		}
 		

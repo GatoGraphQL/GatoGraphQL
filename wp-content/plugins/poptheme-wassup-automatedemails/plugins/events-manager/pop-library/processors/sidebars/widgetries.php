@@ -39,6 +39,7 @@ class PoP_ThemeWassup_EM_AE_Template_Processor_Widgets extends GD_Template_Proce
 				// }
 				$ret[] = GD_TEMPLATE_EM_LAYOUT_DATETIME;
 				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS;
+				$ret[] = GD_TEMPLATE_QUICKLINKGROUP_EVENTBOTTOM;
 				break;
 		}
 		

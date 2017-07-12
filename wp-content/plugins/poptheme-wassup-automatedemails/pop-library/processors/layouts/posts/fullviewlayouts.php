@@ -16,20 +16,20 @@ class PoPTheme_Wassup_AE_Template_Processor_FullViewLayouts extends GD_Template_
 		);
 	}
 
-	function get_footer_templates($template_id) {
+	// function get_footer_templates($template_id) {
 
-		$ret = parent::get_footer_templates($template_id);
+	// 	$ret = parent::get_footer_templates($template_id);
 
-		switch ($template_id) {
+	// 	switch ($template_id) {
 
-			case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
+	// 		case GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
 
-				$ret[] = GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL;
-				break;
-		}
+	// 			$ret[] = GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL;
+	// 			break;
+	// 	}
 
-		return $ret;
-	}
+	// 	return $ret;
+	// }
 
 	function get_sidebar_template($template_id) {
 

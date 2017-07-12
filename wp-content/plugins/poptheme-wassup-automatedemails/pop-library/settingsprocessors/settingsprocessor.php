@@ -15,6 +15,7 @@ class PoPTheme_Wassup_AutomatedEmails_Template_SettingsProcessor extends GD_Temp
 
 			return array(
 				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_SYSTEMACCESSVALID),
+				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_SYSTEMACCESSVALID),
 			);
 		}
 	
@@ -28,6 +29,13 @@ class PoPTheme_Wassup_AutomatedEmails_Template_SettingsProcessor extends GD_Temp
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_AUTOMATEDEMAIL_SCREEN_SECTION);
+
+			$pageblocks_single = array(
+				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL => GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST,
+			);
+			foreach ($pageblocks_single as $page => $block) {
+				$ret[$page]['blocks']['default'] = $block;
+			}
 
 			$pageblocks_details = array(
 				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY => GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_DETAILS,

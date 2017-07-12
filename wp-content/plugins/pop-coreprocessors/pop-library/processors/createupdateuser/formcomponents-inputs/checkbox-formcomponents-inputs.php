@@ -20,6 +20,7 @@ define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMME
 define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-weeklylatestposts'));
 define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-weeklyupcomingevents'));
 define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-dailynotifications'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-specialposts'));
 // define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-dailysubscribedtopicsactivity'));
 
 class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Template_Processor_CheckboxFormComponentsBase {
@@ -41,6 +42,7 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 			GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS,
 			GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS,
 			GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS,
+			GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS,
 			// GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY,
 		);
 	}
@@ -107,6 +109,10 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS:
 
 				return __('My notifications (daily)', 'pop-coreprocessors');
+
+			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS:
+
+				return __('Special posts or announcements', 'pop-coreprocessors');
 			
 			// case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY:
 
@@ -136,6 +142,7 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS:
+			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS:
 			// case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY:
 
 				$fields = array(
@@ -153,6 +160,7 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS => 'pref-emaildigests-weeklylatestposts',
 					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS => 'pref-emaildigests-weeklyupcomingevents',
 					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS => 'pref-emaildigests-dailynotifications',
+					GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS => 'pref-emaildigests-specialposts',
 					// GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY => 'pref-emaildigests-dailysubscribedtopicsactivity',
 				);
 
@@ -181,6 +189,7 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS:
+			case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS:
 			// case GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY:
 
 				return false;

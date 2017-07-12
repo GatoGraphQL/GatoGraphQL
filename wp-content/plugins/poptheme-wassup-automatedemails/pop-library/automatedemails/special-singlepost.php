@@ -6,29 +6,26 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// class PoPTheme_Wassup_EM_AE_WeeklyUpcomingEvents extends PoP_ThemeWassup_ProcessorAutomatedEmailsBase {
-class PoPTheme_Wassup_EM_AE_WeeklyUpcomingEvents extends PoP_ThemeWassup_SimpleProcessorAutomatedEmailsBase {
+class PoP_ThemeWassup_AE_SpecialSinglePost extends PoP_ThemeWassup_SimpleProcessorAutomatedEmailsBase {
 
     public function get_page() {
         
-        return POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_UPCOMINGEVENTS_WEEKLY;
+        return POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL;
     }
     
     protected function get_recipients() {
         
-        return PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS);
+        return PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILDIGESTS_SPECIALPOSTS);
     }
 
     protected function get_subject() {
         
-        return sprintf(
-            __('Upcoming events — %s', 'poptheme-wassup-automatedemails'),
-            date(get_option('date_format'))
-        );
+        // The post id is passed through param pid
+        return get_the_title($_REQUEST['pid']);
     }
 }
 
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoPTheme_Wassup_EM_AE_WeeklyUpcomingEvents();
+new PoP_ThemeWassup_AE_SpecialSinglePost();

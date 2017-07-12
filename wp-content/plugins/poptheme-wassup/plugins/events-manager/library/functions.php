@@ -379,14 +379,16 @@ if( !is_admin() ){
 /**---------------------------------------------------------------------------------------------------------------
  * Single Event functions
  * ---------------------------------------------------------------------------------------------------------------*/
-function gd_em_single_event_is_future() {
+function gd_em_single_event_is_future($post = null) {
 
 	// Comment Leo 07/07/2014: do not use variable global $EM_Event, since it has not been initialized properly
 	// by the time we need to call this function
 	
 	// global $EM_Event;
-	$vars = GD_TemplateManager_Utils::get_vars();
-	$post = $vars['global-state']['post']/*global $post*/;
+	if (!$post) {
+		$vars = GD_TemplateManager_Utils::get_vars();
+		$post = $vars['global-state']['post']/*global $post*/;
+	}
 	$EM_Event = em_get_event($post);
 	return POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/ < $EM_Event->end;
 }

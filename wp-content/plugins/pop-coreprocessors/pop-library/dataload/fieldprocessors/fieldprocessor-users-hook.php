@@ -99,6 +99,7 @@ class GD_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcessor_H
 			case 'pref-emaildigests-weeklylatestposts':
 			case 'pref-emaildigests-weeklyupcomingevents':
 			case 'pref-emaildigests-dailynotifications':
+			case 'pref-emaildigests-specialposts':
 			// case 'pref-emaildigests-dailysubscribedtopicsactivity':
 
 				$metakeys = array(
@@ -116,6 +117,7 @@ class GD_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcessor_H
 					'pref-emaildigests-weeklylatestposts' => GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYLATESTPOSTS,
 					'pref-emaildigests-weeklyupcomingevents' => GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS,
 					'pref-emaildigests-dailynotifications' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNOTIFICATIONS,
+					'pref-emaildigests-specialposts' => GD_METAKEY_PROFILE_EMAILDIGESTS_SPECIALPOSTS,
 					// 'pref-emaildigests-dailysubscribedtopicsactivity' => GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY,
 				);
 				return GD_MetaManager::get_user_meta($fieldprocessor->get_id($user), $metakeys[$field], true);

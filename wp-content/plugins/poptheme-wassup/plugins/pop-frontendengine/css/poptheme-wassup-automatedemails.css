@@ -22,3 +22,12 @@
     text-decoration: underline;
     color: #7a7a7b;
 }
+
+.layoutauthor,
+.content-single {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.thumb-extras {
+	display: none;
+}
