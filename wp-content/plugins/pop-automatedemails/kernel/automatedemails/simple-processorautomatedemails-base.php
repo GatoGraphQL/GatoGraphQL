@@ -8,17 +8,26 @@
 class PoP_SimpleProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEmailsBase {
 
     public function get_emails() {
+
+        // Check that there are results. If not, then no need to send the email
+        global $gd_template_processor_manager;
+        $pagesection_settings_id = $this->get_pagesection_settingsid();
+        $block_template = $this->get_block_template();
+        $block_settings_id = $gd_template_processor_manager->get_processor($block_template)->get_settings_id($block_template);
+        $json = PoP_ServerSideRendering_Factory::get_instance()->get_json();
+        if ($json['dataset'][$pagesection_settings_id][$block_settings_id]) {
         
-        // If there are no recipients, no need to create the content
-        if ($recipients = $this->get_recipients()) {
-            
-            // Emails is an array of arrays, each of which has the following format:
-            $item = array(
-                'recipients' => $recipients,
-                'subject' => $this->get_subject(),
-                'content' => $this->get_content(),
-            );
-            return array($item);
+            // If there are no recipients, no need to create the content
+            if ($recipients = $this->get_recipients()) {
+                
+                // Emails is an array of arrays, each of which has the following format:
+                $item = array(
+                    'recipients' => $recipients,
+                    'subject' => $this->get_subject(),
+                    'content' => $this->get_content(),
+                );
+                return array($item);
+            }
         }
         return array();
     }
