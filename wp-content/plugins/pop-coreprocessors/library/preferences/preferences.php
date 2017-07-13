@@ -32,6 +32,7 @@ class PoPCore_Preferences {
 			$query = array(
 				'fields' => 'ID',
 				'number' => 0,
+				'role' => GD_ROLE_PROFILE,
 			);
 			$user_ids = get_users($query);
 
