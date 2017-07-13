@@ -16,7 +16,7 @@ class PoP_SimpleProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEmail
         $block_settings_id = $gd_template_processor_manager->get_processor($block_template)->get_settings_id($block_template);
         $json = PoP_ServerSideRendering_Factory::get_instance()->get_json();
         if ($json['dataset'][$pagesection_settings_id][$block_settings_id]) {
-        
+
             // If there are no recipients, no need to create the content
             if ($recipients = $this->get_recipients()) {
                 

@@ -25,27 +25,34 @@ class PoP_EmailSender_Utils {
 	// 		$sender->enqueue_email($to, $subject, $msg);
 	// 	}
 	// }
-	public static function send_email($to, $subject, $msg) {
+	public static function send_email($to, $subject, $msg, $headers_name = null) {
 
-		// $sender = PoP_EmailSender_Factory::get_instance();
-		// $sender->send_email($to, $subject, $msg);
 		if (is_null(self::$headers)) {
 			self::init();
 		}
 
-		wp_mail($to, $subject, $msg, self::$headers);
+		// Header is default, or a custom one
+		$headers_name = $headers_name ?? 'default';
+		$headers = self::$headers[$headers_name] ?? self::$headers['default'];
+		
+		wp_mail($to, $subject, $msg, $headers);
 	}
 	protected static function init() {
 		
-		self::$headers = sprintf(
-			"From: %s <%s>\r\n", 
-			self::get_from_name(), 
-			self::get_from_email()
-		);
-		self::$headers .= sprintf(
-			"Content-Type: %s; charset=\"%s\"\n",
-			self::get_contenttype(),
-			self::get_charset()
+		// Allow to add extra headers. Eg: newsletters
+		self::$headers = apply_filters(
+			'PoP_EmailSender_Utils:init:headers',
+			array(
+				'default' => sprintf(
+					"From: %s <%s>\r\n", 
+					self::get_from_name(), 
+					self::get_from_email()
+				).sprintf(
+					"Content-Type: %s; charset=\"%s\"\n",
+					self::get_contenttype(),
+					self::get_charset()
+				)
+			)
 		);
 	}
 
@@ -77,7 +84,7 @@ class PoP_EmailSender_Utils {
 		return apply_filters('gd_email_charset', strtolower(get_option('blog_charset')));
 	}
 
-	public static function sendemail_to_users($emails, $names, $subject, $msg, $individual = true) {
+	public static function sendemail_to_users($emails, $names, $subject, $msg, $individual = true, $header = null) {
 
 		if (!is_array($emails)) {
 			$emails = array($emails);
@@ -96,14 +103,14 @@ class PoP_EmailSender_Utils {
 					$name = array($names[$i]);
 				}
 				$emailmsg = PoP_EmailTemplates_Factory::get_instance()->add_emailframe($subject, $msg, $name);
-				self::send_email($to, $subject, $emailmsg);
+				self::send_email($to, $subject, $emailmsg, $header);
 			}
 		}
 		else {
 
 			$to = implode(',', $emails);	
 			$emailmsg = PoP_EmailTemplates_Factory::get_instance()->add_emailframe($subject, $msg, $names);
-			self::send_email($to, $subject, $emailmsg);
+			self::send_email($to, $subject, $emailmsg, $header);
 		}
 	}
 

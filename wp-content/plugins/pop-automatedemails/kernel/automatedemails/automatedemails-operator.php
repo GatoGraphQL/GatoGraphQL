@@ -25,6 +25,11 @@ class PoP_AutomatedEmails_Operator {
 			$post = $vars['global-state']['post']/*global $post*/;
 			if ($automatedemail = $pop_automatedemails_manager->get_automatedemail($post->ID)) {
 				
+				// Allow to change the header to 'newsletter' under PoPTheme Wassup
+				$header = apply_filters(
+					'PoP_AutomatedEmails_Operator:automatedemail:header',
+					null
+				);
 				foreach ($automatedemail->get_emails() as $email) {
 					
 					$useremails = $names = array();
@@ -33,7 +38,7 @@ class PoP_AutomatedEmails_Operator {
 						$names[] = get_the_author_meta('display_name', $user_id);
 					}
 
-					PoP_EmailSender_Utils::sendemail_to_users($useremails, $names, $email['subject'], $email['content'], true);
+					PoP_EmailSender_Utils::sendemail_to_users($useremails, $names, $email['subject'], $email['content'], true, $header);
 				}
 			}
 		}

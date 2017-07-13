@@ -36,6 +36,7 @@ class PoP_EmailSender_EmailNotificationUtils {
 		if ($include && $exclude) {
 			$users = array_diff($users, $exclude);
 		}
+
 		return $users;
 	}
 }
