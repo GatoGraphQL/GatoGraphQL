@@ -92,7 +92,8 @@ class PoPTheme_Wassup_AAL_AE_Template_Processor_SectionBlocks extends PoPTheme_W
 			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
 
 				return sprintf(
-					'<p>&nbsp;</p><p>%s</p>%s',
+					// '<p>&nbsp;</p><p>%s</p>%s',
+					'<p>&nbsp;</p><p>%s</p>',
 					sprintf(
 						'<a href="%s">%s</a>',
 						get_permalink(POP_AAL_PAGE_NOTIFICATIONS),
@@ -100,8 +101,8 @@ class PoPTheme_Wassup_AAL_AE_Template_Processor_SectionBlocks extends PoPTheme_W
 							__('View all your notifications on %s', 'poptheme-wassup-automatedemails'),
 							get_bloginfo('name')
 						)
-					),
-					PoP_EmailSender_CustomUtils::get_preferences_footer()
+					)//,
+					// PoP_EmailSender_CustomUtils::get_preferences_footer()
 				);
 		}
 

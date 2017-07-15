@@ -71,6 +71,7 @@ function gd_gf_email_layout( $notification, $form, $entry ) {
 	);
 	$names = array();
 	$user_ids = array();
+	$emails = array();
 
 	// Check if the recipient of the email is known. If so, extract their names
 	global $gd_template_processor_manager;
@@ -96,10 +97,11 @@ function gd_gf_email_layout( $notification, $form, $entry ) {
 		foreach ($user_ids as $user_id) {
 		
 			$names[] = get_the_author_meta('display_name', $user_id);
+			$emails[] = get_the_author_meta('user_email', $user_id);
 		}
 	}
 
-	$notification['message'] = PoP_EmailTemplates_Factory::get_instance()->add_emailframe($title, $notification['message'], $names, GD_EMAIL_TEMPLATE_EMAILBODY);
+	$notification['message'] = PoP_EmailTemplates_Factory::get_instance()->add_emailframe($title, $notification['message'], $emails, $names, GD_EMAIL_TEMPLATE_EMAILBODY);
 
 	return $notification;
 }

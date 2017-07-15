@@ -57,12 +57,12 @@ class GD_Template_Processor_UserMessageFeedbackLayouts extends GD_Template_Proce
 
 				// User not yet logged in
 				$ret['usernotloggedin'] = sprintf(
-					__('Please <a href="%s">log in</a> to save your preferences.', 'pop-coreprocessors'),
+					__('Please <a href="%s">log in</a> to edit your preferences.', 'pop-coreprocessors'),
 					wp_login_url()
 				);
 				// User has no access to this functionality (eg: logged in with Facebook)
 				$ret['usernoprofileaccess'] = sprintf(
-					__('Only %s accounts can save preferences.', 'pop-coreprocessors'),
+					__('Only %s accounts can edit preferences.', 'pop-coreprocessors'),
 					get_bloginfo('name')
 				);
 				break;

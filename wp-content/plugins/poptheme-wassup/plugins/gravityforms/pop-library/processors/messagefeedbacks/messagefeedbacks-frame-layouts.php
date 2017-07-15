@@ -11,6 +11,7 @@ define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_SHAREBYEMAIL', PoP_ServerUtils:
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-volunteer'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FLAG', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-flag'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTER', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-newsletter'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-newsletterunsubscription'));
 
 class GD_GF_Template_Processor_MessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 
@@ -23,6 +24,7 @@ class GD_GF_Template_Processor_MessageFeedbackFrameLayouts extends GD_Template_P
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_VOLUNTEER,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FLAG,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTER,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTERUNSUBSCRIPTION,
 		);
 	}
 
@@ -35,6 +37,7 @@ class GD_GF_Template_Processor_MessageFeedbackFrameLayouts extends GD_Template_P
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_VOLUNTEER => GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_VOLUNTEER,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FLAG => GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FLAG,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTER => GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_NEWSLETTER,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTERUNSUBSCRIPTION => GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION,
 		);
 
 		if ($layout = $layouts[$template_id]) {

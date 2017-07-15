@@ -9,5 +9,3 @@ function poptheme_wassup_gf_init_constants() {
 	
 	require_once 'constants.php';
 }
-
-require_once 'navigation.php';

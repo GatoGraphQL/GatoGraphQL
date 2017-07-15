@@ -1540,7 +1540,7 @@ class PoP_EmailSender_Hooks {
 	}
 	function retrievepasswordmessage($message, $key, $user_login, $user_data) {
 
-		return PoP_EmailTemplates_Factory::get_instance()->add_emailframe(__('Retrieve password', 'pop-emailsender'), $message, array($user_data->display_name));
+		return PoP_EmailTemplates_Factory::get_instance()->add_emailframe(__('Retrieve password', 'pop-emailsender'), $message, array($user_data->user_email), array($user_data->display_name));
 	}
 	function lostpasswordreset($user_id) {
 

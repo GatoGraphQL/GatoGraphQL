@@ -12,6 +12,7 @@ define ('GD_TEMPLATE_BLOCK_VOLUNTEER', PoP_ServerUtils::get_template_definition(
 define ('GD_TEMPLATE_BLOCK_FLAG', PoP_ServerUtils::get_template_definition('block-flag'));
 define ('GD_TEMPLATE_BLOCK_NEWSLETTER', PoP_ServerUtils::get_template_definition('block-newsletter'));
 define ('GD_TEMPLATE_BLOCKCODE_NEWSLETTER', PoP_ServerUtils::get_template_definition('blockcode-newsletter'));
+define ('GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('block-newsletterunsubscription'));
 
 class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 
@@ -25,6 +26,7 @@ class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 			GD_TEMPLATE_BLOCK_FLAG,
 			GD_TEMPLATE_BLOCK_NEWSLETTER,
 			GD_TEMPLATE_BLOCKCODE_NEWSLETTER,
+			GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION,
 		);
 	}
 
@@ -71,6 +73,10 @@ class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 			case GD_TEMPLATE_BLOCKCODE_NEWSLETTER:
 		
 				return GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTER;
+
+			case GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION:
+		
+				return GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION;
 		}
 
 		return parent::get_messagefeedback($template_id);
@@ -118,6 +124,11 @@ class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 				$ret[] = GD_TEMPLATE_PAGECODE_NEWSLETTER;
 				$ret[] = GD_TEMPLATE_FORM_NEWSLETTER;
 				break;
+				
+			case GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION:
+
+				$ret[] = GD_TEMPLATE_FORM_NEWSLETTERUNSUBSCRIPTION;
+				break;
 		}
 	
 		return $ret;
@@ -134,6 +145,7 @@ class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 			case GD_TEMPLATE_BLOCK_FLAG:
 			case GD_TEMPLATE_BLOCK_NEWSLETTER:
 			case GD_TEMPLATE_BLOCKCODE_NEWSLETTER:
+			case GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION:
 			
 				// Change the 'Loading' message in the Status
 				$this->add_att(GD_TEMPLATE_STATUS, $atts, 'loading-msg', __('Sending...', 'poptheme-wassup'));	
@@ -141,14 +153,6 @@ class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 
 		}
 
-		// $newsletter_description = sprintf(
-		// 	__('%s%s:', 'poptheme-wassup'),
-		// 	gd_navigation_menu_item(POPTHEME_WASSUP_GF_PAGE_NEWSLETTER, true),
-		// 	apply_filters(
-		// 		'GD_Template_Processor_GFBlocks:newsletter:description', 
-		// 		__('Subscribe to our newsletter:', 'poptheme-wassup')
-		// 	)
-		// );
 		$newsletter_description = apply_filters(
 			'GD_Template_Processor_GFBlocks:newsletter:description', 
 			__('Subscribe to our newsletter:', 'poptheme-wassup')
@@ -220,6 +224,10 @@ class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 			case GD_TEMPLATE_BLOCKCODE_NEWSLETTER:
 			
 				return GD_DATALOAD_IOHANDLER_SHORTCODEFORM;
+		
+			case GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION:
+		
+				return GD_DATALOAD_IOHANDLER_FORM;
 		}
 
 		return parent::get_iohandler($template_id);

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-12 19:45+0200\n"
-"PO-Revision-Date: 2017-07-12 19:45+0200\n"
+"POT-Creation-Date: 2017-07-15 14:03+0200\n"
+"PO-Revision-Date: 2017-07-15 14:03+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -1210,13 +1210,13 @@ msgstr "Preferencias guardadas."
 
 #: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:60
 #, php-format
-msgid "Please <a href=\"%s\">log in</a> to save your preferences."
+msgid "Please <a href=\"%s\">log in</a> to edit your preferences."
 msgstr ""
 "Por favor <a href=\"%s\">iniciá tu sesión</a> para editar tus preferencias."
 
 #: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:65
 #, php-format
-msgid "Only %s accounts can save preferences."
+msgid "Only %s accounts can edit preferences."
 msgstr "Sólo cuentas de  %s pueden editar preferencias."
 
 #: .././pop-library/processors/formcomponents-inputs/captcha-formcomponents-inputs.php:25

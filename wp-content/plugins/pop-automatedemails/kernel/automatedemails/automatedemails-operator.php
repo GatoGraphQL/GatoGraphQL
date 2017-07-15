@@ -23,22 +23,43 @@ class PoP_AutomatedEmails_Operator {
 		if ($vars['global-state']['is-page']/*is_page()*/) {
 
 			$post = $vars['global-state']['post']/*global $post*/;
-			if ($automatedemail = $pop_automatedemails_manager->get_automatedemail($post->ID)) {
+			if ($automatedemails = $pop_automatedemails_manager->get_automatedemails($post->ID)) {
 				
-				// Allow to change the header to 'newsletter' under PoPTheme Wassup
-				$header = apply_filters(
-					'PoP_AutomatedEmails_Operator:automatedemail:header',
-					null
-				);
-				foreach ($automatedemail->get_emails() as $email) {
-					
-					$useremails = $names = array();
-					foreach ($email['recipients'] as $user_id) {
-						$useremails[] = get_the_author_meta('user_email', $user_id);
-						$names[] = get_the_author_meta('display_name', $user_id);
-					}
+				foreach ($automatedemails as $automatedemail) {
+				
+					// Allow to change the header to 'newsletter' under PoPTheme Wassup
+					$header = apply_filters(
+						'PoP_AutomatedEmails_Operator:automatedemail:header',
+						null
+					);
+					foreach ($automatedemail->get_emails() as $email) {
+						
+						$users = $email['users'] ?? array();
+						$recipients = $email['recipients'] ?? array();
+						if ($users || $recipients) {
 
-					PoP_EmailSender_Utils::sendemail_to_users($useremails, $names, $email['subject'], $email['content'], true, $header);
+							$useremails = $names = array();
+							foreach ($users as $user_id) {
+								$useremails[] = get_the_author_meta('user_email', $user_id);
+								$names[] = get_the_author_meta('display_name', $user_id);
+							}
+
+							// Allow Gravity Forms to already send a list of useremails and names
+							foreach ($recipients as $recipient) {
+								$useremails[] = $recipient['email'];
+								$names[] = $recipient['name'];
+							}
+
+							// // Comment Leo: descomentar acá
+							// echo PHP_EOL.PHP_EOL;
+							// echo 'USERS: '.implode(',', $names).PHP_EOL;
+							// echo 'EMAILS: '.implode(',', $useremails).PHP_EOL;
+							// echo 'CONTENT: '.PHP_EOL;
+							// echo $email['content'];
+							// echo PHP_EOL;
+							PoP_EmailSender_Utils::sendemail_to_users($useremails, $names, $email['subject'], $email['content'], true, $header, $email['frame']);
+						}
+					}
 				}
 			}
 		}

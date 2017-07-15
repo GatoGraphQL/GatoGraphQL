@@ -18,7 +18,7 @@ class PoP_EmailSender {
 
 	function __construct() {
 
-		// Priority: after PoP AWS loaded
+		// Priority: after PoP Core Processors loaded
 		add_action('plugins_loaded', array($this,'init'), 40);
 	}
 	function init(){

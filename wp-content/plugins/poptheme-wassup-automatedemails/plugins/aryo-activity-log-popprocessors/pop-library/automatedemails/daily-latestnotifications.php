@@ -14,7 +14,7 @@ class PoPTheme_Wassup_AAL_AE_DailyLatestNotifications extends PoP_ThemeWassup_Lo
         return POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTNOTIFICATIONS_DAILY;
     }
 
-    protected function get_recipients() {
+    protected function get_users() {
         
         return PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILDIGESTS_DAILYNOTIFICATIONS);
     }

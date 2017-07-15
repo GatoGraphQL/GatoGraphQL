@@ -14,7 +14,7 @@ class PoP_ThemeWassup_AE_WeeklyLatestPosts extends PoP_ThemeWassup_SimpleProcess
         return POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY;
     }
     
-    protected function get_recipients() {
+    protected function get_users() {
         
         return PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYLATESTPOSTS);
     }

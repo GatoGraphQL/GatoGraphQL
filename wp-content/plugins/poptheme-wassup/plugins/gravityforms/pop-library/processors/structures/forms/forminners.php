@@ -11,6 +11,7 @@ define ('GD_TEMPLATE_FORMINNER_SHAREBYEMAIL', PoP_ServerUtils::get_template_defi
 define ('GD_TEMPLATE_FORMINNER_VOLUNTEER', PoP_ServerUtils::get_template_definition('forminner-volunteer'));
 define ('GD_TEMPLATE_FORMINNER_FLAG', PoP_ServerUtils::get_template_definition('forminner-flag'));
 define ('GD_TEMPLATE_FORMINNER_NEWSLETTER', PoP_ServerUtils::get_template_definition('forminner-newsletter'));
+define ('GD_TEMPLATE_FORMINNER_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('forminner-newsletterunsubscription'));
 
 class GD_Template_Processor_GFFormInners extends GD_Template_Processor_FormInnersBase {
 
@@ -23,6 +24,7 @@ class GD_Template_Processor_GFFormInners extends GD_Template_Processor_FormInner
 			GD_TEMPLATE_FORMINNER_VOLUNTEER,
 			GD_TEMPLATE_FORMINNER_FLAG,
 			GD_TEMPLATE_FORMINNER_NEWSLETTER,
+			GD_TEMPLATE_FORMINNER_NEWSLETTERUNSUBSCRIPTION,
 		);
 	}
 
@@ -134,6 +136,18 @@ class GD_Template_Processor_GFFormInners extends GD_Template_Processor_FormInner
 					)
 				);
 				break;
+
+			case GD_TEMPLATE_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
+
+				$ret = array_merge(
+					$ret,
+					array(
+						GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTEREMAIL,
+						GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTEREMAILVERIFICATIONCODE,
+						GD_GF_TEMPLATE_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION,
+					)
+				);
+				break;
 		}
 
 		return $ret;
@@ -231,23 +245,21 @@ class GD_Template_Processor_GFFormInners extends GD_Template_Processor_FormInner
 				$this->add_att(GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAIL, $atts, 'name', $fieldnames['email']);
 				$this->add_att(GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTERNAME, $atts, 'name', $fieldnames['name']);
 				break;
+
+			case GD_TEMPLATE_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
+
+				$inputs = array(
+					GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAIL,
+					GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAILVERIFICATIONCODE,
+				);
+				foreach ($inputs as $input) {
+					$this->merge_block_jsmethod_att($input, $atts, array('fillURLParamInput'));
+					$this->merge_att($input, $atts, 'params', array(
+						'data-urlparam' => $input
+					));
+				}
+				break;
 		}
-
-		// switch ($template_id) {
-
-		// 	case GD_TEMPLATE_FORMINNER_CONTACTUS:
-		// 	case GD_TEMPLATE_FORMINNER_CONTACTUSER:
-		// 	case GD_TEMPLATE_FORMINNER_SHAREBYEMAIL:
-		// 	case GD_TEMPLATE_FORMINNER_VOLUNTEER:
-		// 	case GD_TEMPLATE_FORMINNER_FLAG:
-
-		// 		// If we can't use the user loggedin-data, then gotta show the captcha always
-		// 		if (!PoP_FormUtils::use_loggedinuser_data()) {
-		// 			$this->append_att(GD_TEMPLATE_FORMCOMPONENTGROUP_CAPTCHA, $atts, 'class', 'visible-always');
-		// 			$this->append_att(GD_TEMPLATE_FORMCOMPONENT_CAPTCHA, $atts, 'class', 'visible-always');
-		// 		}
-		// 		break;
-		// }
 		
 		return parent::init_atts($template_id, $atts);
 	}

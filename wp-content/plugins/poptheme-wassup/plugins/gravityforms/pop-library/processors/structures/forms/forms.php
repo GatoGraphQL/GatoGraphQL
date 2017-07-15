@@ -11,6 +11,7 @@ define ('GD_TEMPLATE_FORM_SHAREBYEMAIL', PoP_ServerUtils::get_template_definitio
 define ('GD_TEMPLATE_FORM_VOLUNTEER', PoP_ServerUtils::get_template_definition('form-volunteer'));
 define ('GD_TEMPLATE_FORM_FLAG', PoP_ServerUtils::get_template_definition('form-flag'));
 define ('GD_TEMPLATE_FORM_NEWSLETTER', PoP_ServerUtils::get_template_definition('form-newsletter'));
+define ('GD_TEMPLATE_FORM_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('form-newsletterunsubscription'));
 
 class GD_Template_Processor_GFForms extends GD_Template_Processor_FormsBase {
 
@@ -23,6 +24,7 @@ class GD_Template_Processor_GFForms extends GD_Template_Processor_FormsBase {
 			GD_TEMPLATE_FORM_VOLUNTEER,
 			GD_TEMPLATE_FORM_FLAG,
 			GD_TEMPLATE_FORM_NEWSLETTER,
+			GD_TEMPLATE_FORM_NEWSLETTERUNSUBSCRIPTION,
 		);
 	}
 
@@ -35,6 +37,7 @@ class GD_Template_Processor_GFForms extends GD_Template_Processor_FormsBase {
 			GD_TEMPLATE_FORM_VOLUNTEER => GD_TEMPLATE_FORMINNER_VOLUNTEER,
 			GD_TEMPLATE_FORM_FLAG => GD_TEMPLATE_FORMINNER_FLAG,
 			GD_TEMPLATE_FORM_NEWSLETTER => GD_TEMPLATE_FORMINNER_NEWSLETTER,
+			GD_TEMPLATE_FORM_NEWSLETTERUNSUBSCRIPTION => GD_TEMPLATE_FORMINNER_NEWSLETTERUNSUBSCRIPTION,
 		);
 
 		if ($inner = $inners[$template_id]) {

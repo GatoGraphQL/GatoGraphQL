@@ -112,7 +112,8 @@ class PoPTheme_Wassup_AE_Template_Processor_SectionBlocks extends PoPTheme_Wassu
 			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_LIST:
 
 				return sprintf(
-					'<p>&nbsp;</p><p>%s</p>%s',
+					// '<p>&nbsp;</p><p>%s</p>%s',
+					'<p>&nbsp;</p><p>%s</p>',
 					sprintf(
 						'<a href="%s">%s</a>',
 						get_permalink(POP_WPAPI_PAGE_ALLCONTENT),
@@ -120,8 +121,8 @@ class PoPTheme_Wassup_AE_Template_Processor_SectionBlocks extends PoPTheme_Wassu
 							__('View all content on %s', 'poptheme-wassup-automatedemails'),
 							get_bloginfo('name')
 						)
-					),
-					PoP_EmailSender_CustomUtils::get_preferences_footer()
+					)//,
+					// PoP_EmailSender_CustomUtils::get_preferences_footer()
 				);
 		}
 

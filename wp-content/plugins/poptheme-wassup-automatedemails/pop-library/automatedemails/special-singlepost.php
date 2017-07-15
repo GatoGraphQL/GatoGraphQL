@@ -13,7 +13,7 @@ class PoP_ThemeWassup_AE_SpecialSinglePost extends PoP_ThemeWassup_SimpleProcess
         return POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL;
     }
     
-    protected function get_recipients() {
+    protected function get_users() {
         
         return PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILDIGESTS_SPECIALPOSTS);
     }

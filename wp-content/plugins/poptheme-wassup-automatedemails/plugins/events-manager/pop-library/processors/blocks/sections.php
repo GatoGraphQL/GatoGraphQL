@@ -205,26 +205,9 @@ class PoPTheme_Wassup_EM_AE_Template_Processor_SectionBlocks extends PoPTheme_Wa
 			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST:
 
-				// return sprintf(
-				// 	'<hr/><p>%s</p><p class="text-center">%s</p>%s',
-				// 	sprintf(
-				// 		__('All events are uploaded in the website, for free, by <a href="%s">our community members</a>. You are not a member yet? <a href="%s">Click here</a> to register as an individual, or <a href="%s">click here</a> to register as an organization.', 'poptheme-wassup-automatedemails'),
-				// 		get_permalink(POP_WPAPI_PAGE_ALLUSERS),
-				// 		get_permalink(POP_URE_POPPROCESSORS_PAGE_ADDPROFILEINDIVIDUAL),
-				// 		get_permalink(POP_URE_POPPROCESSORS_PAGE_ADDPROFILEORGANIZATION)
-				// 	),
-				// 	sprintf(
-				// 		'<a href="%s" class="btn btn-primary btn-lg">%s</a>',
-				// 		get_permalink(POPTHEME_WASSUP_EM_PAGE_EVENTS),
-				// 		sprintf(
-				// 			__('View all events on %s', 'poptheme-wassup-automatedemails'),
-				// 			get_bloginfo('name')
-				// 		)
-				// 	),
-				// 	PoP_EmailSender_CustomUtils::get_preferences_footer()
-				// );
 				return sprintf(
-					'<p>&nbsp;</p><p>%s</p>%s',
+					// '<p>&nbsp;</p><p>%s</p>%s',
+					'<p>&nbsp;</p><p>%s</p>',
 					sprintf(
 						'<a href="%s">%s</a>',
 						get_permalink(POPTHEME_WASSUP_EM_PAGE_EVENTS),
@@ -232,8 +215,8 @@ class PoPTheme_Wassup_EM_AE_Template_Processor_SectionBlocks extends PoPTheme_Wa
 							__('View all events on %s', 'poptheme-wassup-automatedemails'),
 							get_bloginfo('name')
 						)
-					),
-					PoP_EmailSender_CustomUtils::get_preferences_footer()
+					)//,
+					// PoP_EmailSender_CustomUtils::get_preferences_footer()
 				);
 		}
 

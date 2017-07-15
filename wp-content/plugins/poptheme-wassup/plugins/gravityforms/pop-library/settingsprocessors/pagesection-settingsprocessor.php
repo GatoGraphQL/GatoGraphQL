@@ -140,6 +140,22 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 				}	
 				break;
 
+			case POPTHEME_WASSUP_GF_PAGE_NEWSLETTERUNSUBSCRIPTION:
+
+				$add = 
+					($template_id == GD_TEMPLATE_PAGESECTION_HOVER)/* ||
+					($template_id == GD_TEMPLATE_PAGESECTION_PAGE)*/;
+				if ($add) {
+
+					if ($submitted_data) {
+
+						$blocks[] = $gd_template_settingsmanager->get_page_action($page_id);
+						break;
+					}
+					$blocks[] = $gd_template_settingsmanager->get_page_block($page_id);
+				}
+				break;
+
 			/*********************************************
 			 * Initial load
 			 *********************************************/
@@ -172,6 +188,7 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 			case POPTHEME_WASSUP_GF_PAGE_SHAREBYEMAIL:
 			case POPTHEME_WASSUP_GF_PAGE_CONTACTUS:
 			case POPTHEME_WASSUP_GF_PAGE_NEWSLETTER:
+			case POPTHEME_WASSUP_GF_PAGE_NEWSLETTERUNSUBSCRIPTION:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE) {
 
@@ -224,12 +241,14 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 			// These 2 are open in the hover, so they must not add a pageTab if calling that URL straight
 			case POPTHEME_WASSUP_GF_PAGE_CONTACTUS:
 			case POPTHEME_WASSUP_GF_PAGE_NEWSLETTER:
+			case POPTHEME_WASSUP_GF_PAGE_NEWSLETTERUNSUBSCRIPTION:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_ADDONTABS_PAGE && $target == GD_URLPARAM_TARGET_ADDONS) {
 
 					$tabs = array(
 						POPTHEME_WASSUP_GF_PAGE_CONTACTUS => GD_TEMPLATE_BLOCK_ADDONTABS_CONTACTUS,
 						POPTHEME_WASSUP_GF_PAGE_NEWSLETTER => GD_TEMPLATE_BLOCK_ADDONTABS_NEWSLETTER,
+						POPTHEME_WASSUP_GF_PAGE_NEWSLETTERUNSUBSCRIPTION => GD_TEMPLATE_BLOCK_PAGETABS_PAGE,
 					);
 					$blocks[] = $tabs[$page_id];
 				}

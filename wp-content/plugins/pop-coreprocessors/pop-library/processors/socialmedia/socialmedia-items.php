@@ -18,10 +18,10 @@ define ('GD_TEMPLATE_POSTSOCIALMEDIA_LINKEDIN', PoP_ServerUtils::get_template_de
 define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN', PoP_ServerUtils::get_template_definition('tag-socialmedia-linkedin'));
 define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN', PoP_ServerUtils::get_template_definition('user-socialmedia-linkedin'));
 define ('GD_TEMPLATE_POSTSOCIALMEDIA_FB_PREVIEW', PoP_ServerUtils::get_template_definition('post-socialmedia-fb-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_FB_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-fb-preview'));
+define ('GD_TEMPLATE_TAGSOCIALMEDIA_FB_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-fb-preview'));
 define ('GD_TEMPLATE_USERSOCIALMEDIA_FB_PREVIEW', PoP_ServerUtils::get_template_definition('user-socialmedia-fb-preview'));
 define ('GD_TEMPLATE_POSTSOCIALMEDIA_TWITTER_PREVIEW', PoP_ServerUtils::get_template_definition('post-socialmedia-twitter-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-twitter-preview'));
+define ('GD_TEMPLATE_TAGSOCIALMEDIA_TWITTER_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-twitter-preview'));
 define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER_PREVIEW', PoP_ServerUtils::get_template_definition('user-socialmedia-twitter-preview'));
 define ('GD_TEMPLATE_POSTSOCIALMEDIA_GPLUS_PREVIEW', PoP_ServerUtils::get_template_definition('post-socialmedia-gplus-preview'));
 define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-gplus-preview'));

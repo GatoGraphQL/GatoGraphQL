@@ -14,21 +14,31 @@ class GD_GF_CreateUpdate_Profile_Hooks {
 		add_action('gd_createupdate_profile:additionals_create', array($this, 'additionals'), 10, 3);
 	}
 
+	function enabled() {
+
+		// By default it is not enabled
+		return apply_filters(
+			'GD_GF_CreateUpdate_Profile_Hooks:enabled',
+			false
+		);
+	}
+
 	function get_form_data($form_data, $atts) {
 
-		global $gd_template_processor_manager;
+		if (!$this->enabled()) {
+			return $form_data;
+		}
 
+		global $gd_template_processor_manager;
 		$form_data['newsletter'] = $gd_template_processor_manager->get_processor(GD_GF_TEMPLATE_FORMCOMPONENT_CUP_NEWSLETTER)->get_value(GD_GF_TEMPLATE_FORMCOMPONENT_CUP_NEWSLETTER, $atts);
-		
 		return $form_data;
 	}
 
 	function get_components($components, $template_id, $processor) {
 
-		// switch ($template_id) {
-
-		// 	case GD_TEMPLATE_FORMINNER_PROFILEORGANIZATION_CREATE:
-		// 	case GD_TEMPLATE_FORMINNER_PROFILEINDIVIDUAL_CREATE:
+		if (!$this->enabled()) {
+			return $components;
+		}
 
 		// Add before the Captcha
 		$extra_components = array(
@@ -36,13 +46,14 @@ class GD_GF_CreateUpdate_Profile_Hooks {
 		);
 		array_splice($components, array_search(GD_TEMPLATE_FORMCOMPONENTGROUP_CAPTCHA, $components), 0, $extra_components);
 		
-		// 		break;
-		// }
-		
 		return $components;
 	}
 
 	function additionals($user_id, $form_data, $extras) {
+
+		if (!$this->enabled()) {
+			return;
+		}
 
 		$subscribe = $form_data['newsletter'];
 		if ($subscribe) {

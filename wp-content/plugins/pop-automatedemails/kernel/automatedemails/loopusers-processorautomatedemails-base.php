@@ -10,7 +10,9 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
     public function get_emails() {
         
         $emails = array();
-        if ($recipients = $this->get_recipients()) {
+
+        // Only users make sense here, no recipients, since we are serving personalized content to users on the website
+        if ($users = $this->get_users()) {
 
             // All the variables needed to operate into the pop-engine.php get_data function
             global $gd_template_processor_manager;
@@ -38,7 +40,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $vars['global-state']['is-user-logged-in'] = true;
             
             $yesterday = strtotime("-1 day", POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/);
-            foreach ($recipients as $user_id) {
+            foreach ($users as $user_id) {
 
                 // Set the recipient as the "current-user-id", pretending this user is logged in
                 $vars['global-state']['current-user'] = new WP_User($user_id, '');
@@ -81,9 +83,10 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 
                 // Now we can call again function get_content(), which will have the right context for that user
                 $emails[] = array(
-                    'recipients' => array($user_id),
+                    'users' => array($user_id),
                     'subject' => $this->get_subject($user_id),
                     'content' => $this->get_content(),
+                    'frame' => $this->get_frame(),
                 );
             }
 
@@ -95,7 +98,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
         return $emails;
     }
     
-    protected function get_recipients() {
+    protected function get_users() {
         
         return array();
     }
@@ -103,6 +106,11 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
     protected function get_subject($user_id) {
         
         return '';
+    }
+
+    protected function get_frame() {
+        
+        return GD_EMAIL_FRAME_PREFERENCES;
     }
 }
 

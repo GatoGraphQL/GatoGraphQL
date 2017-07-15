@@ -6,11 +6,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('GD_EMAIL_FRAME_DEFAULT', 'default');
 define ('GD_EMAIL_TEMPLATE_BUTTON', 'button.html');
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates {
 
-	function get_emailframe_header($title, $names, $template) {
+	function get_name() {
+
+		return GD_EMAIL_FRAME_DEFAULT;
+	}
+
+	function get_emailframe_header(/*$frame, */$title, $emails, $names, $template) {
 
 		// Message
 		if ($names) {
@@ -22,7 +28,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates {
 		return __('<p>Howdy!</p>', 'pop-emailsender');
 	}
 
-	function get_emailframe_footer($title, $names, $template) {
+	function get_emailframe_footer(/*$frame, */$title, $emails, $names, $template) {
 		
 		$url = trailingslashit(home_url());
 		return sprintf(

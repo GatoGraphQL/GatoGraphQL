@@ -84,7 +84,7 @@ class PoP_EmailSender_Utils {
 		return apply_filters('gd_email_charset', strtolower(get_option('blog_charset')));
 	}
 
-	public static function sendemail_to_users($emails, $names, $subject, $msg, $individual = true, $header = null) {
+	public static function sendemail_to_users($emails, $names, $subject, $msg, $individual = true, $header = null, $frame = null) {
 
 		if (!is_array($emails)) {
 			$emails = array($emails);
@@ -102,14 +102,14 @@ class PoP_EmailSender_Utils {
 				if ($names) {
 					$name = array($names[$i]);
 				}
-				$emailmsg = PoP_EmailTemplates_Factory::get_instance()->add_emailframe($subject, $msg, $name);
+				$emailmsg = PoP_EmailTemplates_Factory::get_instance($frame)->add_emailframe($subject, $msg, array($to), $name);
 				self::send_email($to, $subject, $emailmsg, $header);
 			}
 		}
 		else {
 
 			$to = implode(',', $emails);	
-			$emailmsg = PoP_EmailTemplates_Factory::get_instance()->add_emailframe($subject, $msg, $names);
+			$emailmsg = PoP_EmailTemplates_Factory::get_instance($frame)->add_emailframe($subject, $msg, $emails, $names);
 			self::send_email($to, $subject, $emailmsg, $header);
 		}
 	}

@@ -11,6 +11,7 @@ define ('GD_GF_TEMPLATE_FORMCOMPONENT_NAME', PoP_ServerUtils::get_template_defin
 define ('GD_GF_TEMPLATE_FORMCOMPONENT_EMAIL', PoP_ServerUtils::get_template_definition('gf-field-email'));
 define ('GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTERNAME', PoP_ServerUtils::get_template_definition('gf-field-newslettername'));
 define ('GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAIL', PoP_ServerUtils::get_template_definition('gf-field-newsletteremail'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAILVERIFICATIONCODE', PoP_ServerUtils::get_template_definition('gf-field-newsletteremailverificationcode'));
 define ('GD_GF_TEMPLATE_FORMCOMPONENT_DESTINATIONEMAIL', PoP_ServerUtils::get_template_definition('gf-field-destinationemail'));
 define ('GD_GF_TEMPLATE_FORMCOMPONENT_SUBJECT', PoP_ServerUtils::get_template_definition('gf-field-subject'));
 define ('GD_GF_TEMPLATE_FORMCOMPONENT_PHONE', PoP_ServerUtils::get_template_definition('gf-field-phone'));
@@ -25,6 +26,7 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 			GD_GF_TEMPLATE_FORMCOMPONENT_EMAIL,
 			GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTERNAME,
 			GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAIL,
+			GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAILVERIFICATIONCODE,
 			GD_GF_TEMPLATE_FORMCOMPONENT_DESTINATIONEMAIL,
 			GD_GF_TEMPLATE_FORMCOMPONENT_SUBJECT,
 			GD_GF_TEMPLATE_FORMCOMPONENT_PHONE
@@ -47,6 +49,10 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAIL:
 				
 				return __('Your Email', 'poptheme-wassup');
+
+			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAILVERIFICATIONCODE:
+
+				return __('Verification code', 'poptheme-wassup');
 
 			case GD_GF_TEMPLATE_FORMCOMPONENT_DESTINATIONEMAIL:
 				
@@ -71,6 +77,7 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 			case GD_GF_TEMPLATE_FORMCOMPONENT_NAME:
 			case GD_GF_TEMPLATE_FORMCOMPONENT_EMAIL:
 			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAIL:
+			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAILVERIFICATIONCODE:
 			case GD_GF_TEMPLATE_FORMCOMPONENT_DESTINATIONEMAIL:
 				
 				return true;
@@ -84,6 +91,7 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 		switch ($template_id) {
 		
 			case GD_GF_TEMPLATE_FORMCOMPONENT_FORMID:
+			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAILVERIFICATIONCODE:
 			
 				return true;
 		}
@@ -124,6 +132,7 @@ class GD_GF_Template_Processor_TextFormComponentInputs extends GD_Template_Proce
 			case GD_GF_TEMPLATE_FORMCOMPONENT_SUBJECT:
 			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTERNAME:
 			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAIL:
+			case GD_GF_TEMPLATE_FORMCOMPONENT_NEWSLETTEREMAILVERIFICATIONCODE:
 
 				$this->add_att($template_id, $atts, 'pop-form-clear', true);
 				break;

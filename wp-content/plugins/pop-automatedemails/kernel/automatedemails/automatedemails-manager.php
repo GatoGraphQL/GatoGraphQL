@@ -16,10 +16,14 @@ class PoP_AutomatedEmails_Manager {
 	
     function add($automatedemail) {
     
-		$this->automatedemails[$automatedemail->get_page()] = $automatedemail;		
+		// Each page can have many automatedemails (eg: 1 for users, 1 for recipients from Gravity Forms)
+    	if (!$this->automatedemails[$automatedemail->get_page()]) {
+    		$this->automatedemails[$automatedemail->get_page()] = array();
+    	}
+		$this->automatedemails[$automatedemail->get_page()][] = $automatedemail;		
 	}
 	
-	function get_automatedemail($page) {
+	function get_automatedemails($page) {
 
 		return $this->automatedemails[$page];
 	}

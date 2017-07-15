@@ -22,6 +22,11 @@ class PoP_EmailSender_Templates {
 		PoP_EmailTemplates_Factory::set_instance($this);
 	}
 
+	function get_name() {
+
+		return '';
+	}
+
 	function get_template_folders() {
 
 		if (!$this->template_folders) {
@@ -30,7 +35,11 @@ class PoP_EmailSender_Templates {
 		return $this->template_folders;
 	}
 
-	function add_emailframe($title, $content, $names = array(), $template_name = GD_EMAIL_TEMPLATE_EMAIL) {
+	function add_emailframe($title, $content, $emails = array(), $names = array(), $template_name = GD_EMAIL_TEMPLATE_EMAIL/*, $frame = null*/) {
+
+		// If passing null, initialize it to the default value
+		$template_name = $template_name ?? GD_EMAIL_TEMPLATE_EMAIL;
+		// $frame = $frame ?? GD_EMAIL_FRAME_DEFAULT;
 
 		// "add_emailframe" because if the template_folder is not set (eg: explicitly set to null, such as with PoP Mailer AWS) then it won't add anything
 		$template = '';
@@ -44,25 +53,30 @@ class PoP_EmailSender_Templates {
 
 		if ($template) {
 
+			// if (!isset($this->email_frames[$template])) {
+			// 	$this->email_frames[$template] = array();
+			// }
+
 			// If the frame had been generated, then fetch it from the cache
-			if (!isset($this->email_frames[$template])) {
+			if (!isset($this->email_frames[$template]/*[$frame]*/)) {
 
 				$url = trailingslashit(home_url());
 				ob_start();
 				include ($template);
-				$this->email_frames[$template] = str_replace(
+				$this->email_frames[$template]/*[$frame]*/ = str_replace(
 					'{{URL}}', 
 					$url, 
 					ob_get_clean()
 				);
 			}
 			// Message
-			$header = $this->get_emailframe_header($title, $names, $template_name);
-			$footer = $this->get_emailframe_footer($title, $names, $template_name);
+			$header = $this->get_emailframe_header(/*$frame, */$title, $emails, $names, $template_name);
+			$beforefooter = $this->get_emailframe_beforefooter(/*$frame, */$title, $emails, $names, $template_name);
+			$footer = $this->get_emailframe_footer(/*$frame, */$title, $emails, $names, $template_name);
 			$msg = str_replace(
-				array('{{TITLE}}', '{{HEADER}}', '{{CONTENT}}', '{{FOOTER}}'), 
-				array($title, $header, $content, $footer), 
-				$this->email_frames[$template]
+				array('{{TITLE}}', '{{HEADER}}', '{{CONTENT}}', '{{BEFOREFOOTER}}', '{{FOOTER}}'), 
+				array($title, $header, $content, $beforefooter, $footer), 
+				$this->email_frames[$template]/*[$frame]*/
 			);
 		}
 		else {
@@ -72,12 +86,17 @@ class PoP_EmailSender_Templates {
 		return $msg;
 	}
 
-	function get_emailframe_header($title, $names, $template_name) {
+	function get_emailframe_header(/*$frame, */$title, $emails, $names, $template_name) {
 
 		return '';
 	}
 
-	function get_emailframe_footer($title, $names, $template_name) {
+	function get_emailframe_footer(/*$frame, */$title, $emails, $names, $template_name) {
+		
+		return '';
+	}
+
+	function get_emailframe_beforefooter(/*$frame, */$title, $emails, $names, $template_name) {
 		
 		return '';
 	}

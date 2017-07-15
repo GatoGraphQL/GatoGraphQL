@@ -11,6 +11,7 @@ define ('GD_TEMPLATE_ACTION_SHAREBYEMAIL', PoP_ServerUtils::get_template_definit
 define ('GD_TEMPLATE_ACTION_VOLUNTEER', PoP_ServerUtils::get_template_definition('action-volunteer'));
 define ('GD_TEMPLATE_ACTION_FLAG', PoP_ServerUtils::get_template_definition('action-flag'));
 define ('GD_TEMPLATE_ACTION_NEWSLETTER', PoP_ServerUtils::get_template_definition('action-newsletter'));
+define ('GD_TEMPLATE_ACTION_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('action-newsletterunsubscription'));
 
 class GD_Template_Processor_GFActions extends GD_Template_Processor_ActionsBase {
 
@@ -23,6 +24,7 @@ class GD_Template_Processor_GFActions extends GD_Template_Processor_ActionsBase 
 			GD_TEMPLATE_ACTION_VOLUNTEER,
 			GD_TEMPLATE_ACTION_FLAG,
 			GD_TEMPLATE_ACTION_NEWSLETTER,
+			GD_TEMPLATE_ACTION_NEWSLETTERUNSUBSCRIPTION,
 		);
 	}
 	
@@ -64,6 +66,10 @@ class GD_Template_Processor_GFActions extends GD_Template_Processor_ActionsBase 
 			case GD_TEMPLATE_ACTION_NEWSLETTER:
 
 				return GD_DATALOAD_ACTIONEXECUTER_GRAVITYFORMS;
+
+			case GD_TEMPLATE_ACTION_NEWSLETTERUNSUBSCRIPTION:
+
+				return GD_DATALOAD_ACTIONEXECUTER_NEWSLETTERUNSUBSCRIPTION;
 		}
 
 		return parent::get_actionexecuter($template_id);
@@ -81,6 +87,10 @@ class GD_Template_Processor_GFActions extends GD_Template_Processor_ActionsBase 
 			case GD_TEMPLATE_ACTION_NEWSLETTER:
 			
 				return GD_DATALOAD_IOHANDLER_SHORTCODEFORM;
+
+			case GD_TEMPLATE_ACTION_NEWSLETTERUNSUBSCRIPTION:
+
+				return GD_DATALOAD_IOHANDLER_FORM;
 		}
 
 		return parent::get_iohandler($template_id);
@@ -113,6 +123,10 @@ class GD_Template_Processor_GFActions extends GD_Template_Processor_ActionsBase 
 			case GD_TEMPLATE_ACTION_NEWSLETTER:
 
 				return GD_TEMPLATE_BLOCK_NEWSLETTER;
+		
+			case GD_TEMPLATE_ACTION_NEWSLETTERUNSUBSCRIPTION:
+
+				return GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION;
 		}
 
 		return parent::get_settings_id($template_id);

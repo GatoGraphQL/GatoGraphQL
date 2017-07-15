@@ -14,7 +14,7 @@ class PoPTheme_Wassup_EM_AE_WeeklyUpcomingEvents extends PoP_ThemeWassup_SimpleP
         return POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_UPCOMINGEVENTS_WEEKLY;
     }
     
-    protected function get_recipients() {
+    protected function get_users() {
         
         return PoP_EmailSender_EmailNotificationUtils::get_prereferenceon_users(GD_METAKEY_PROFILE_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS);
     }

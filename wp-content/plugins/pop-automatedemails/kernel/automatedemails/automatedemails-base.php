@@ -22,9 +22,11 @@ class PoP_AutomatedEmailsBase {
         
         // Emails is an array of arrays, each of which has the following format:
         // $item = array(
+        //     'users' => $this->get_users(),
         //     'recipients' => $this->get_recipients(),
         //     'subject' => $this->get_subject(),
         //     'content' => $this->get_content(),
+        //     'frame' => $this->get_frame(),
         // );
         return array();
     }

@@ -11,6 +11,7 @@ define ('GD_TEMPLATE_MESSAGEFEEDBACK_SHAREBYEMAIL', PoP_ServerUtils::get_templat
 define ('GD_TEMPLATE_MESSAGEFEEDBACK_VOLUNTEER', PoP_ServerUtils::get_template_definition('messagefeedback-volunteer'));
 define ('GD_TEMPLATE_MESSAGEFEEDBACK_FLAG', PoP_ServerUtils::get_template_definition('messagefeedback-flag'));
 define ('GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTER', PoP_ServerUtils::get_template_definition('messagefeedback-newsletter'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('messagefeedback-newsletterunsubscription'));
 
 class GD_GF_Template_Processor_MessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 
@@ -23,6 +24,7 @@ class GD_GF_Template_Processor_MessageFeedbacks extends GD_Template_Processor_Me
 			GD_TEMPLATE_MESSAGEFEEDBACK_VOLUNTEER,
 			GD_TEMPLATE_MESSAGEFEEDBACK_FLAG,
 			GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTER,
+			GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION,
 		);
 	}
 
@@ -35,6 +37,7 @@ class GD_GF_Template_Processor_MessageFeedbacks extends GD_Template_Processor_Me
 			GD_TEMPLATE_MESSAGEFEEDBACK_VOLUNTEER => GD_TEMPLATE_MESSAGEFEEDBACKINNER_VOLUNTEER,
 			GD_TEMPLATE_MESSAGEFEEDBACK_FLAG => GD_TEMPLATE_MESSAGEFEEDBACKINNER_FLAG,
 			GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTER => GD_TEMPLATE_MESSAGEFEEDBACKINNER_NEWSLETTER,
+			GD_TEMPLATE_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION => GD_TEMPLATE_MESSAGEFEEDBACKINNER_NEWSLETTERUNSUBSCRIPTION,
 		);
 
 		if ($inner = $inners[$template_id]) {

@@ -49,20 +49,20 @@ class PoPTheme_Wassup_AE_Template_Processor_ContentBlocks extends PoPTheme_Wassu
 		return parent::get_description($template_id, $atts);
 	}
 
-	protected function get_description_bottom($template_id, $atts) {
+	// protected function get_description_bottom($template_id, $atts) {
 	
-		switch ($template_id) {
+	// 	switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
+	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
 
-				return sprintf(
-					'<p>&nbsp;</p>%s',
-					PoP_EmailSender_CustomUtils::get_preferences_footer()
-				);
-		}
+	// 			return sprintf(
+	// 				'<p>&nbsp;</p>%s',
+	// 				PoP_EmailSender_CustomUtils::get_preferences_footer()
+	// 			);
+	// 	}
 
-		return parent::get_description_bottom($template_id, $atts);
-	}
+	// 	return parent::get_description_bottom($template_id, $atts);
+	// }
 	
 	protected function get_block_inner_templates($template_id) {
 

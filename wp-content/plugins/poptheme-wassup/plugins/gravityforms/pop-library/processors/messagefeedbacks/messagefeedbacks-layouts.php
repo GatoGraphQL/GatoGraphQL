@@ -11,6 +11,7 @@ define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_SHAREBYEMAIL', PoP_ServerUtils::get_
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-messagefeedback-volunteer'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FLAG', PoP_ServerUtils::get_template_definition('layout-messagefeedback-flag'));
 define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_NEWSLETTER', PoP_ServerUtils::get_template_definition('layout-messagefeedback-newsletter'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('layout-messagefeedback-newsletterunsubscription'));
 
 class GD_GF_Template_Processor_MessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 
@@ -23,6 +24,7 @@ class GD_GF_Template_Processor_MessageFeedbackLayouts extends GD_Template_Proces
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_VOLUNTEER,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FLAG,
 			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_NEWSLETTER,
+			GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION,
 		);
 	}
 
@@ -76,6 +78,19 @@ class GD_GF_Template_Processor_MessageFeedbackLayouts extends GD_Template_Proces
 				$ret['success'] = sprintf(
 					__("To make sure you get the newsletter, please add <strong>%s</strong> in your contact list. Thanks!", 'poptheme-wassup'),
 					PoPTheme_Wassup_EmailSender_Utils::get_newsletter_email()
+				);
+				break;
+
+			case GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_NEWSLETTERUNSUBSCRIPTION:
+
+				$ret['success-header'] = __('Unsubscription successful', 'poptheme-wassup');
+				$ret['success'] = sprintf(
+					'%s<br/>%s',
+					__('It is a pity to see you go. Hopefully you will keep visiting our website.', 'poptheme-wassup'),
+					sprintf(
+						__('And if anything, you can always <a href="%s">contact us</a>.', 'poptheme-wassup'),
+						get_permalink(POPTHEME_WASSUP_GF_PAGE_CONTACTUS)
+					)
 				);
 				break;
 		}
