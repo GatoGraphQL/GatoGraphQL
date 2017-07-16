@@ -63,3 +63,7 @@ define ('POPTHEME_WASSUP_GF_NEWSLETTER_FIELDNAME_NAME_ID', false);
 // Private Keys
 //--------------------------------------------------------
 define ('POPTHEME_WASSUP_GF_PRIVATEKEYS_NEWSLETTERUNSUBSCRIBE', false);
+
+// System install
+//--------------------------------------------------------
+define ('POPTHEME_WASSUP_GF_SYSTEMINSTALL_NEWSLETTER_ENTRIES', array());
