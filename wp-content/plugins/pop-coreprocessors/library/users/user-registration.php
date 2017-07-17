@@ -68,12 +68,6 @@ function extra_user_profile_fields( $user ) {
 	<?php echo GD_AdminUtils::form_dropdown('general_newpost', gd_build_select_options(array('Yes', 'No')), isset($_POST['general_newpost']) ? $_POST['general_newpost'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_GENERAL_NEWPOST, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
 	</td>
 	</tr>	
-	<tr>
-	<th><label for="display_email"><?php printf(__('Special announcements from %s', 'pop-coreprocessors'), get_bloginfo('name')) ?></label></th>
-	<td>
-	<?php echo GD_AdminUtils::form_dropdown('general_specialpost', gd_build_select_options(array('Yes', 'No')), isset($_POST['general_specialpost']) ? $_POST['general_specialpost'] : (GD_MetaManager::get_user_meta($user->ID, GD_METAKEY_PROFILE_EMAILNOTIFICATIONS_GENERAL_SPECIALPOST, true) ? "yes" : "no"), 'class="regular-text"' ); ?>
-	</td>
-	</tr>		
 	</table>
 	<h5><?php _e('A user on my network:', 'pop-coreprocessors') ?></h5>		
 	<table class="form-table">

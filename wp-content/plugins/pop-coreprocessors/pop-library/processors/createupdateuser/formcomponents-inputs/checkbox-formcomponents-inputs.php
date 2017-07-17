@@ -7,7 +7,6 @@
 
 // My Preferences
 define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-general-newpost'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_SPECIALPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-general-specialpost'));
 define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-createdpost'));
 define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-recommendedpost'));
 define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-followeduser'));
@@ -29,7 +28,6 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 	
 		return array(
 			GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST,
-			GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_SPECIALPOST,
 			GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST,
 			GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST,
 			GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER,
@@ -54,13 +52,6 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
 
 				return __('New content is posted on the website', 'pop-coreprocessors');
-
-			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_SPECIALPOST:
-
-				return sprintf(
-					__('Special announcements from %s', 'pop-coreprocessors'),
-					get_bloginfo('name')
-				);
 			
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST:
 
@@ -129,7 +120,6 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 		switch ($template_id) {
 			
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
-			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_SPECIALPOST:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
@@ -147,7 +137,6 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 
 				$fields = array(
 					GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST => 'pref-emailnotif-general-newpost',
-					GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_SPECIALPOST => 'pref-emailnotif-general-specialpost',
 					GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST => 'pref-emailnotif-network-createdpost',
 					GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST => 'pref-emailnotif-network-recommendedpost',
 					GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER => 'pref-emailnotif-network-followeduser',
@@ -176,7 +165,6 @@ class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Te
 		switch ($template_id) {
 
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
-			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_SPECIALPOST:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
 			case GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
