@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('WASSUP_CHECKPOINT_LOGGEDIN_SYSTEMACCESSVALID', 'checkpoint-loggedin-systemaccessvalid');
+define ('WASSUP_CHECKPOINT_SYSTEMACCESSVALID', 'checkpoint-loggedin-systemaccessvalid');
 
 class PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils {
 
@@ -16,7 +16,7 @@ class PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils {
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			// Validate by both private key and client's IP
-			$loggedin_systemaccesvalid = array(
+			$systemaccesvalid = array(
 				'checkpoints' => array(
 					POP_SYSTEM_DATALOAD_CHECKPOINT_SYSTEMACCESSKEYVALID,
 					POP_SYSTEM_DATALOAD_CHECKPOINT_SYSTEMACCESSIPVALID,
@@ -26,8 +26,8 @@ class PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils {
 
 			switch ($name) {
 
-				case WASSUP_CHECKPOINT_LOGGEDIN_SYSTEMACCESSVALID:
-					$checkpoint = $loggedin_systemaccesvalid;
+				case WASSUP_CHECKPOINT_SYSTEMACCESSVALID:
+					$checkpoint = $systemaccesvalid;
 					break;
 			}
 		}

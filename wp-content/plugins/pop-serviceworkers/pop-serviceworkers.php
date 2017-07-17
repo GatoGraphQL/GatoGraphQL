@@ -26,7 +26,6 @@ class PoP_ServiceWorkers {
 		
 		// Priority: after PoP Core Processors loaded
 		add_action('plugins_loaded', array($this,'init'), 35);
-		// add_action('PoP:install', array($this,'install'), 10, 1);
 		add_action('PoP:system-install', array($this,'system_install'));
 	}
 	function init(){
@@ -41,7 +40,6 @@ class PoP_ServiceWorkers {
 			define ('POP_SERVICEWORKERS_ASSETDESTINATION_URI', WP_CONTENT_URL.'/pop-serviceworkers');
 		}
 
-		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {
 			
 			$this->initialize();

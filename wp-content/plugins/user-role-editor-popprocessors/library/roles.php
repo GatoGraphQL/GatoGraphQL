@@ -14,7 +14,7 @@ define ('GD_URE_ROLE_COMMUNITY', 'community');
 /**---------------------------------------------------------------------------------------------------------------
  * Install
  * ---------------------------------------------------------------------------------------------------------------*/    
-add_action('PoP:install', 'gd_ure_install_roles');
+add_action('PoP:system-build', 'gd_ure_install_roles');
 function gd_ure_install_roles() {
 	
 	add_role( GD_URE_ROLE_INDIVIDUAL, 'GD Individual', array());

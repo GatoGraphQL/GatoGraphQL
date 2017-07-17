@@ -25,7 +25,7 @@ remove_action( 'edit_user_profile', array('EM_User_Fields','show_profile_fields'
 
 
 // Add Events Manager Pro Bank Transfer Gateway options
-add_action('PoP:install', 'gd_emp_add_options');
+add_action('PoP:system-build', 'gd_emp_add_options');
 function gd_emp_add_options() {
 
 	//banktransfer

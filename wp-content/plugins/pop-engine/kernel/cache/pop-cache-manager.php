@@ -16,7 +16,7 @@ class GD_Template_CacheManager {
 
 	function __construct() {
 		
-		add_action('PoP:install', array($this,'install'));
+		add_action('PoP:system-build', array($this, 'system_build'));
 		add_action('init', array($this,'init'));
 	}
 
@@ -28,7 +28,7 @@ class GD_Template_CacheManager {
 		}
 	}
 
-	function install() {
+	function system_build() {
 
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_SETTINGS));
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_DATASETTINGS));

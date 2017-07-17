@@ -14,7 +14,7 @@ define ('GD_ROLE_PROFILE', 'profile');
 /**---------------------------------------------------------------------------------------------------------------
  * Install
  * ---------------------------------------------------------------------------------------------------------------*/    
-add_action('PoP:install', 'gd_install_roles');
+add_action('PoP:system-build', 'gd_install_roles');
 function gd_install_roles() {
 	
 	$default = array(	'edit_posts' => true, 

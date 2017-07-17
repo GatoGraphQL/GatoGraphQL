@@ -41,7 +41,6 @@ class PoP_BaseProcessors {
 		define ('POP_BASEPROCESSORS_URI', plugins_url('', __FILE__));
 		define ('POP_BASEPROCESSORS_URI_LIB', POP_BASEPROCESSORS_URI.'/library' );
 
-		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {
 			
 			$this->initialize();
@@ -54,12 +53,6 @@ class PoP_BaseProcessors {
 		$validation = new PoP_BaseProcessors_Validation();
 		return $validation->validate();	
 	}
-	// function install(){
-
-	// 	require_once 'installation.php';
-	// 	$installation = new PoP_BaseProcessors_Installation();
-	// 	return $installation->install();	
-	// }	
 	function initialize(){
 
 		require_once 'initialization.php';

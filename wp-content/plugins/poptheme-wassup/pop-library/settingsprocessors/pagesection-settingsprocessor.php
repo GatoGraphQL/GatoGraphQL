@@ -831,17 +831,6 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 				}
 				break;
 
-			/*********************************************
-			 * System
-			 *********************************************/
-			// case POP_SYSTEM_PAGE_SYSTEM_POPINSTALL:
-
-			// 	if ($template_id == GD_TEMPLATE_PAGESECTION_OPERATIONAL) {
-
-			// 		$blocks[] = $gd_template_settingsmanager->get_page_action($page_id);
-			// 	}
-			// 	break;
-
 			case POP_FRONTENDENGINE_PAGE_EXTERNAL:
 			case POP_WPAPI_PAGE_LOADERS_POSTS_FIELDS:
 			case POP_WPAPI_PAGE_LOADERS_USERS_FIELDS:

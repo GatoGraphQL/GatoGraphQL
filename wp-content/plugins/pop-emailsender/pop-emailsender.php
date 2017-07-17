@@ -25,7 +25,6 @@ class PoP_EmailSender {
 
 		define ('POP_EMAILSENDER_URI', plugins_url('', __FILE__));
 
-		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {
 			
 			$this->initialize();

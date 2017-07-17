@@ -220,7 +220,7 @@ function gd_wp_cache_eof_tags_json_response() {
  * Whenever there is a new software version, delete the cache
  * ---------------------------------------------------------------------------------------------------------------*/
 // Priority 100: execute after the GD_Template_CustomSettingsProcessor gets initialized
-add_action('PoP:install', 'gd_wp_cache_deletecache');
+add_action('PoP:system-build', 'gd_wp_cache_deletecache');
 function gd_wp_cache_deletecache() {
 
 	wp_cache_clear_cache();

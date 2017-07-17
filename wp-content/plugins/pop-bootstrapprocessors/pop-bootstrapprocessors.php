@@ -41,7 +41,6 @@ class PoP_BootstrapProcessors {
 		define ('POP_BOOTSTRAPPROCESSORS_URI', plugins_url('', __FILE__));
 		define ('POP_BOOTSTRAPPROCESSORS_URI_LIB', POP_BOOTSTRAPPROCESSORS_URI.'/library' );
 
-		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {
 			
 			$this->initialize();
@@ -54,12 +53,6 @@ class PoP_BootstrapProcessors {
 		$validation = new PoP_BootstrapProcessors_Validation();
 		return $validation->validate();	
 	}
-	// function install(){
-
-	// 	require_once 'installation.php';
-	// 	$installation = new PoP_BootstrapProcessors_Installation();
-	// 	return $installation->install();	
-	// }	
 	function initialize(){
 
 		require_once 'initialization.php';

@@ -28,15 +28,18 @@ class PoPEngine {
 	}
 	function init(){
 		
-		add_action('admin_init', array($this, 'install'), 10, 0);
+		// Comment Leo 17/07/2017: instead of executing 'install' whenever in the back-end and the pop_version changes,
+		// we create a build page to be executed, statically, even in DEV
+		// add_action('admin_init', array($this, 'system_build'), 10, 0);
+		
 		$this->initialize();
 		define('POP_ENGINE_INITIALIZED', true);
 	}
-	function install(){
+	function system_build(){
 
 		require_once 'installation.php';
 		$installation = new PoPEngine_Installation();
-		return $installation->install();
+		return $installation->system_build();
 	}
 	function system_install(){
 

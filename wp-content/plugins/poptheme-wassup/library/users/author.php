@@ -14,14 +14,14 @@
 add_action('init','change_author_permalinks');
 function change_author_permalinks() {
 
-	// Comment Leo 25/04/2016: Split the logic below into 2, to be executed in "init" and "PoP:install",
+	// Comment Leo 25/04/2016: Split the logic below into 2, to be executed in "init" and "PoP:system-build",
   // because flush_rules() would execute a massive update in the DB with each single request, which takes performance waaaay down and kills the server,
   // as I found out on the AWS servers
   global $wp_rewrite;
 	$wp_rewrite->author_base = 'u';
 	// $wp_rewrite->flush_rules();
 }
-add_action('PoP:install','change_author_flushrules');
+add_action('PoP:system-build','change_author_flushrules');
 function change_author_flushrules() {
 
   // Comment Leo 05/05/2016: Executing flush_rules() is SO expensive, that we'd rather not do it unless really really have to

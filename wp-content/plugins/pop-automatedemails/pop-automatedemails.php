@@ -25,7 +25,6 @@ class PoP_AutomatedEmails {
 
 		define ('POP_AUTOMATEDEMAILS_URI', plugins_url('', __FILE__));
 
-		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {
 			
 			$this->initialize();

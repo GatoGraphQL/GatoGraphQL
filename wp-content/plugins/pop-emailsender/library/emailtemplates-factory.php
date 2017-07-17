@@ -13,7 +13,10 @@ class PoP_EmailTemplates_Factory {
 		self::$instances[$instance->get_name()] = $instance;
 	}
 
-	public static function get_instance($name = GD_EMAIL_FRAME_DEFAULT) {
+	public static function get_instance($name = null) {
+		if (!$name) {
+			$name = GD_EMAIL_FRAME_DEFAULT;
+		}
 		return self::$instances[$name];
 	}
 }

@@ -12,7 +12,8 @@ class PoPTheme_Wassup_PoPSystem_Template_SettingsProcessor extends GD_Template_S
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			return array(
-				POP_SYSTEM_PAGE_SYSTEM_POPINSTALL => true,
+				POP_SYSTEM_PAGE_SYSTEM_INSTALL => true,
+				POP_SYSTEM_PAGE_SYSTEM_BUILD => true,
 			);
 		}
 
@@ -25,7 +26,8 @@ class PoPTheme_Wassup_PoPSystem_Template_SettingsProcessor extends GD_Template_S
 
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 			return array(
-				POP_SYSTEM_PAGE_SYSTEM_POPINSTALL => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_SYSTEMACCESSVALID),
+				POP_SYSTEM_PAGE_SYSTEM_INSTALL => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
+				POP_SYSTEM_PAGE_SYSTEM_BUILD => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
 			);
 		}
 	
@@ -46,7 +48,8 @@ class PoPTheme_Wassup_PoPSystem_Template_SettingsProcessor extends GD_Template_S
 
 			// Actions 
 			$pageactions = array(
-				POP_SYSTEM_PAGE_SYSTEM_POPINSTALL => GD_TEMPLATE_ACTION_SYSTEM_POPINSTALL,
+				POP_SYSTEM_PAGE_SYSTEM_INSTALL => GD_TEMPLATE_ACTION_SYSTEM_INSTALL,
+				POP_SYSTEM_PAGE_SYSTEM_BUILD => GD_TEMPLATE_ACTION_SYSTEM_BUILD,
 			);
 			foreach ($pageactions as $page => $action) {
 				$ret[$page]['action'] = $action;

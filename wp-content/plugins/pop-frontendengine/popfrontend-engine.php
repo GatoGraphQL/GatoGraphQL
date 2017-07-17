@@ -21,7 +21,7 @@ class PoPFrontend {
 		
 		// Priority: after PoP WP Processors loaded
 		add_action('plugins_loaded', array($this,'init'), 15);
-		add_action('PoP:system-install', array($this,'system_install'));
+		add_action('PoP:system-build', array($this,'system_build'));
 		add_action('PoP:version', array($this,'version'), 15);
 	}
 	function version($version){
@@ -50,11 +50,11 @@ class PoPFrontend {
 		$validation = new PoPFrontend_Validation();
 		return $validation->validate();	
 	}
-	function system_install(){
+	function system_build(){
 
 		require_once 'installation.php';
 		$installation = new PoPFrontend_Installation();
-		return $installation->system_install();	
+		return $installation->system_build();	
 	}	
 	function initialize(){
 

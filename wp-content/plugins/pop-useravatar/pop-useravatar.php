@@ -34,7 +34,6 @@ class PoP_UserAvatar {
 		define ('POP_USERAVATAR_URI', plugins_url('', __FILE__));
 		define ('POP_USERAVATAR_URI_LIB', POP_USERAVATAR_URI.'/library' );
 
-		// add_action('admin_init', array($this, 'install'));
 		if ($this->validate()) {
 			
 			$this->initialize();
@@ -47,12 +46,6 @@ class PoP_UserAvatar {
 		$validation = new PoP_UserAvatar_Validation();
 		return $validation->validate();	
 	}
-	// function install(){
-
-	// 	require_once 'installation.php';
-	// 	$installation = new PoP_UserAvatar_Installation();
-	// 	return $installation->install();	
-	// }	
 	function initialize(){
 
 		require_once 'initialization.php';

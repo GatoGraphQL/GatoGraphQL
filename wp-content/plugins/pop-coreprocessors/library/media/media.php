@@ -55,7 +55,7 @@ function gd_upload_mimes( $mime ) {
  * Set default thumb size from 'medium' to 'large'
  * ---------------------------------------------------------------------------------------------------------------*/
 
-add_action('PoP:install', 'gd_media_update_image_default_size');
+add_action('PoP:system-build', 'gd_media_update_image_default_size');
 function gd_media_update_image_default_size() {
 
 	update_option('image_default_size', 'large');

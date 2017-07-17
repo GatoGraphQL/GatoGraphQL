@@ -14,7 +14,7 @@ class PoPTheme_Wassup_AutomatedEmails_EM_Template_SettingsProcessor extends GD_T
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			return array(
-				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_UPCOMINGEVENTS_WEEKLY => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_LOGGEDIN_SYSTEMACCESSVALID),
+				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_UPCOMINGEVENTS_WEEKLY => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
 			);
 		}
 	
