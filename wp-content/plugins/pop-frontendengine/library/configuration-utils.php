@@ -18,6 +18,17 @@ class PoP_Frontend_ConfigurationUtils {
 		)));
 	}
 
+	public static function get_allowed_domains() {
+
+		$domains = array();
+		foreach (self::get_allowed_urls() as $url) {
+
+			$parse = parse_url($url);
+			$domains[] = $parse['scheme'].'://'.$parse['host'];
+		}
+		return array_unique($domains);
+	}
+
 	public static function get_multilayout_labels() {
 
 		return apply_filters('gd_templatemanager:multilayout_labels', array());

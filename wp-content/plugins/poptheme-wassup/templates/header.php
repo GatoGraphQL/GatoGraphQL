@@ -2,6 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 <head profile="http://gmpg.org/xfn/11" prefix="og: http://ogp.me/ns#">
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+	<?php /* DNS Prefetching */ ?>
+	<?php foreach (PoP_Frontend_ConfigurationUtils::get_allowed_domains() as $domain) : ?>
+		<link rel="dns-prefetch" href="<?php echo $domain ?>">
+	<?php endforeach; ?>
 	<?php /* For Bootstrap v3.0: http://getbootstrap.com/getting-started/ */ ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
