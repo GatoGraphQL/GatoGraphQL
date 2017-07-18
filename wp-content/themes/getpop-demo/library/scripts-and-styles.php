@@ -27,6 +27,7 @@ function getpopdemo_inlinestyles($styles) {
 			body.sliding,
 			body.embed #background-screen {
 			  background: #fcec8c url('.GETPOPDEMO_ASSETS_URI.'/img/getpop-demo-bg-1440x900-2.png) no-repeat fixed center;
+			  background-size: cover;
 			}
 		}
 		@media screen and (min-width: 1440px), screen and (min-height: 900px) {

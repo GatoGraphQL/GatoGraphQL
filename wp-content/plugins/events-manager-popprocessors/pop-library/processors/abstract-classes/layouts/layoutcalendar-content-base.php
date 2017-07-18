@@ -23,12 +23,13 @@ class GD_Template_Processor_CalendarContentLayoutsBase extends GD_Template_Proce
 		return $ret;
 	}	
 
-	function get_block_jsmethod($template_id, $atts) {
+	// Comment Leo 18/07/2017: commented since removing the "hidden-md hidden-lg" view for smartphones. Now there is only one
+	// function get_block_jsmethod($template_id, $atts) {
 
-		$ret = parent::get_block_jsmethod($template_id, $atts);
-		$this->add_jsmethod($ret, 'doNothing', 'void-link');
-		return $ret;
-	}
+	// 	$ret = parent::get_block_jsmethod($template_id, $atts);
+	// 	$this->add_jsmethod($ret, 'doNothing', 'void-link');
+	// 	return $ret;
+	// }
 
 	function get_template_configuration($template_id, $atts) {
 

@@ -1685,6 +1685,7 @@ body.non-scrollable .pagesection-group+.pagesection-group-after {
 .pagesection-group.active-main.active-side-xs .offcanvas.side,
 .pagesection-group.active-main.active-navigator-xs .offcanvas.navigator {
 	left: 0;
+	right: 0;
 }
 .pagesection-group.active-top.active-side-xs .offcanvas.top,
 .pagesection-group.active-side-xs .offcanvas.top,
@@ -4568,7 +4569,8 @@ pre.prettyprint {
     border-bottom: 0;
 }
 
-.collapse-hometop .pop-block.calendar .fc-event {
+/* Comment Leo 18/07/2017: instead of making it one line just for the collapse in the home top, do it everywhere, so this solution also works for smartphones */
+/*.collapse-hometop */.pop-block.calendar .fc-event {
 	max-height: 16px;
 	overflow: hidden;
     word-break: break-all;
@@ -4579,4 +4581,14 @@ pre.prettyprint {
 	font-weight: normal;
 	/* Add some space to the left, it looks better */
 	margin-left: 20px;
+}
+
+/* Make the background-size: cover; work also in Chrome in Android phone */
+/* Taken from https://stackoverflow.com/questions/14876035/background-size-cover-not-working-in-portrait-on-android-tablet#19452558 */
+html{
+ height:100%;
+ min-height:100%;
+}
+body{
+ min-height:100%;
 }
