@@ -39,7 +39,8 @@ class PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest {
 			'48x48',
 			'96x96',
 			'192x192',
-			'256x256',
+            '256x256',
+			'512x512',
 		);
 
 		$imagename = apply_filters('PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest:imagename', 'launcher-icon-');
