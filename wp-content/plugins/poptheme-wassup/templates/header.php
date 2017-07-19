@@ -72,6 +72,8 @@
 	<meta name="twitter:image" content="<?php echo $thumb['src'] ?>">
 	<meta name="twitter:image:width" content="<?php echo $thumb['width'] ?>">
 	<meta name="twitter:image:height" content="<?php echo $thumb['height'] ?>">
+	<?php /* Needed to pass the Lighthouse report for PWAs */ ?>
+	<meta name="theme-color" content="#FFFFFF"/>
 	<?php wp_head(); ?>
 	<?php /* For Bootstrap v3.0: http://getbootstrap.com/getting-started/ */ ?>
 	<?php /* HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries */ ?>
