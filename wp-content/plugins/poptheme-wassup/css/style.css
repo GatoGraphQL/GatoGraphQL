@@ -1707,6 +1707,30 @@ body.non-scrollable .pagesection-group+.pagesection-group-after {
 .pagesection-group.active-side-xs .offcanvas.background {
 	left: 100%;
 }
+
+/* Comment Leo 19/07/2017: if using the app on iOS or Android device, and opening the Side menu, the left: 100%; property makes the whole stuff to look really bad (a bug from them!). So for this case (which we got through the media css queries below), also add property display: none; */
+@media only screen and (min-device-width : 240px) and (max-device-width : 640px) {
+	.pagesection-group.active-top.active-side-xs .offcanvas.top,
+	.pagesection-group.active-side-xs .offcanvas.top,
+	.pagesection-group.active-main.active-side-xs .offcanvas.main,
+	.pagesection-group.active-side-xs .offcanvas.main,
+	.pagesection-group.active-main.active-side-xs #ps-main .blocksection-controls.top,
+	.pagesection-group.active-pagetabs.active-side-xs .offcanvas.pagetabs,
+	.pagesection-group.active-side-xs .offcanvas.pagetabs,
+	.pagesection-group.active-pagetabs-xs.active-side-xs .offcanvas.pagetabs,
+	.pagesection-group.active-side-xs .offcanvas.pagetabs,
+	.pagesection-group.active-top.active-navigator-xs .offcanvas.top,
+	.pagesection-group.active-navigator-xs .offcanvas.top,
+	.pagesection-group.active-main.active-navigator-xs .offcanvas.main,
+	.pagesection-group.active-navigator-xs .offcanvas.main,
+	.pagesection-group.active-pagetabs.active-navigator-xs .offcanvas.pagetabs,
+	.pagesection-group.active-navigator-xs .offcanvas.pagetabs,
+	.pagesection-group.active-pagetabs-xs.active-navigator-xs .offcanvas.pagetabs,
+	.pagesection-group.active-navigator-xs .offcanvas.pagetabs,
+	.pagesection-group.active-side-xs .offcanvas.background {
+		display: none;
+	}
+}
 .pagesection-group.active-sideinfo-xs .offcanvas.sideinfo,
 .pagesection-group.active-main.active-sideinfo-xs .offcanvas.sideinfo {
 	right: 0;
