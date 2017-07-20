@@ -1488,6 +1488,9 @@ body.non-scrollable .pagesection-group .offcanvas.main {
 body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-controls.top {
 	left: 0;
 }
+body.sliding .pagesection-group.active-side-xs.active-sideinfo-xs #ps-sideinfo .blocksection-controls.top {
+	left: 100%;
+}
 /*.pagesection-group.active-top .offcanvas.addontabs,*/
 .pagesection-group.active-top .offcanvas.sideinfo,
 .pagesection-group.active-top .offcanvas.background,
