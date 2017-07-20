@@ -269,7 +269,7 @@ class GD_Template_Processor_SingleSectionTabPanelBlockGroups extends GD_Template
 					$post = $vars['global-state']['post']/*global $post*/;
 					if (get_post_status($post->ID) == 'publish')  {
 						
-						return GD_TEMPLATE_CONTROLGROUP_SHARE;
+						return GD_TEMPLATE_CONTROLGROUP_SUBMENUSHARE;
 					}
 					break;
 					

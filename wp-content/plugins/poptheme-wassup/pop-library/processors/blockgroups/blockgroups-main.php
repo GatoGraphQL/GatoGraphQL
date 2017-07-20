@@ -49,7 +49,7 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 						$skip = apply_filters('GD_Template_Processor_MainBlockGroups:get_controlgroup_bottom:skip_categories', array());
 						if (!in_array($cat, $skip)) {
 
-							return GD_TEMPLATE_CONTROLGROUP_SHARE;
+							return GD_TEMPLATE_CONTROLGROUP_SUBMENUSHARE;
 						}
 					}
 					break;
@@ -57,11 +57,11 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 				case GD_TEMPLATE_BLOCKGROUP_AUTHOR:
 				case GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION:
 
-					return GD_TEMPLATE_CONTROLGROUP_SHARE;
+					return GD_TEMPLATE_CONTROLGROUP_SUBMENUSHARE;
 
 				case GD_TEMPLATE_BLOCKGROUP_TAG:
 
-					return GD_TEMPLATE_CONTROLGROUP_SHARE;
+					return GD_TEMPLATE_CONTROLGROUP_SUBMENUSHARE;
 			}
 		}
 
