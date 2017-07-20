@@ -181,10 +181,7 @@ h3,
 
 .navbar .nav > li > a,
 .navbar .nav .sub-menu > li > a {
-  font-family: Rockwell, Rokkit, Verdana;  
-  font-size: 17px;
-  padding: 14px 14px;
-  line-height: 14px;
+  font-family: Rockwell, Rokkit, Verdana; 
 }
 
 .carousel-indicators > div:hover {

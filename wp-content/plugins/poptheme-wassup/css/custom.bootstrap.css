@@ -826,3 +826,11 @@ hr {
   max-width: initial;
 }
 
+.navbar .nav > li > a,
+.navbar .nav .sub-menu > li > a {  
+  font-size: 17px;
+  padding: 14px 14px;
+  /*line-height: 14px;*/
+  /* Comment Leo 20/07/2017: line-height 14px creates problems on mobile phones, it shows an extra 1 pixel below the icon that is very annoying. Setting 12 px somehow works fine */
+  line-height: 12px;
+}
