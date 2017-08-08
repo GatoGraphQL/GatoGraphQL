@@ -2763,7 +2763,7 @@ popManager = {
 		t.triggerEvent(pageSection, block, 'fetchDomainCompleted', [status, domain]);
 
 		// If this is the last domain fetched
-		if (!status.isLast) {
+		if (status.isLast) {
 			
 			t.triggerEvent(pageSection, block, 'fetchCompleted', [status]);
 		}
