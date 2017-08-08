@@ -33,6 +33,17 @@ class PoP_Processor_BlockGroupsBase extends PoP_Processor_BlocksBase {
 	// PUBLIC Overriding Functions
 	//-------------------------------------------------
 
+	protected function get_block_page($template_id) {
+
+		global $gd_template_settingsmanager;
+
+		if ($page = $gd_template_settingsmanager->get_blockgroup_page($template_id)) {
+
+			return $page;
+		}
+		return null;
+	}
+
 	function is_blockgroup($template_id) {
 
 		return true;

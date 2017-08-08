@@ -41,6 +41,38 @@ class GD_URE_Template_Processor_CreateProfileForms extends GD_Template_Processor
 		return parent::get_inner_template($template_id);
 	}
 
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_FORM_PROFILEORGANIZATION_CREATE:
+			case GD_TEMPLATE_FORM_PROFILEINDIVIDUAL_CREATE:
+
+				$this->add_jsmethod($ret, 'addDomainClass');
+				break;
+		}
+		
+		return $ret;
+	}
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_FORM_PROFILEORGANIZATION_CREATE:
+			case GD_TEMPLATE_FORM_PROFILEINDIVIDUAL_CREATE:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'visible-notloggedin-';
+				break;
+		}
+
+		return $ret;
+	}
+
 	function init_atts($template_id, &$atts) {
 	
 		switch ($template_id) {

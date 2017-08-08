@@ -35,6 +35,7 @@ require_once POP_COREPROCESSORS_LIB.'/captcha/load.php';
 require_once POP_COREPROCESSORS_LIB.'/classes.php';
 require_once POP_COREPROCESSORS_LIB.'/comments.php';
 require_once POP_COREPROCESSORS_LIB.'/content.php';
+require_once POP_COREPROCESSORS_LIB.'/crossdomain.php';
 require_once POP_COREPROCESSORS_LIB.'/form-utils.php';
 // require_once POP_COREPROCESSORS_LIB.'/formatting.php';
 require_once POP_COREPROCESSORS_LIB.'/dataload.php';
@@ -64,5 +65,6 @@ require_once POP_COREPROCESSORS_LIB.'/template.php';
 require_once POP_COREPROCESSORS_LIB.'/translation.php';
 require_once POP_COREPROCESSORS_LIB.'/viewers.php';
 require_once POP_COREPROCESSORS_LIB.'/scripts-and-styles.php';
+require_once POP_COREPROCESSORS_LIB.'/user-account.php';
 // require_once POP_COREPROCESSORS_LIB.'/walker/load.php';
 

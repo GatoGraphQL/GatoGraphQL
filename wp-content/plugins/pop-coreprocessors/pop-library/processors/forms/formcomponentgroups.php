@@ -168,6 +168,38 @@ class GD_Template_Processor_FormComponentGroups extends GD_Template_Processor_Fo
 		return parent::use_component_configuration($template_id);
 	}
 
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_FORMCOMPONENTGROUP_CAPTCHA:
+			case GD_TEMPLATE_FORMCOMPONENTGROUP_SENDERNAME:
+
+				$this->add_jsmethod($ret, 'addDomainClass');
+				break;
+		}
+		
+		return $ret;
+	}
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_FORMCOMPONENTGROUP_CAPTCHA:
+			case GD_TEMPLATE_FORMCOMPONENTGROUP_SENDERNAME:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'visible-notloggedin-';
+				break;
+		}
+
+		return $ret;
+	}
+
 	function init_atts($template_id, &$atts) {
 
 		switch ($template_id) {

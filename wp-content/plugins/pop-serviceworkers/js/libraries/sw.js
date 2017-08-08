@@ -127,7 +127,7 @@ popServiceWorkers = {
 			// Problem happens not just for homepage, but for whenever there's no locale, eg: https://getpop.org/implement
 			var url = window.location.href;
 			if (!url.startsWith(M.HOMELOCALE_URL+'/')) {
-				url = M.HOMELOCALE_URL+url.substr(M.HOME_URL.length);
+				url = M.HOMELOCALE_URL+url.substr(M.HOME_DOMAIN.length);
 			}
 			popManager.fetch(url, options);
 		});
@@ -145,13 +145,13 @@ popServiceWorkers = {
 			// That is because SW caches the 'html' resource, with its first timestamp, so it keeps
 			// sending the request to see how many new posts there are from that pretty old date,
 			// producing messages like "View new 17 posts"
-			var blockParams = popManager.getBlockParams(pageSection, block);
+			var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
 			// Timestamp is provided in seconds, function Date.now() returns in milliseconds, so make the translation
 			// Also, rounding the current timestamp to the second increases chances that different users might be served the same response by hitting the cache
 			// Solution taken from https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
 			// Also add the timezone difference in seconds, to synchronize the right time in both server and client
-			blockParams[M.URLPARAM_TIMESTAMP] = Math.floor(Date.now()/1000) + (M.GMT_OFFSET * 60 * 60);
+			blockQueryState[M.URLPARAM_TIMESTAMP] = Math.floor(Date.now()/1000) + (M.GMT_OFFSET * 60 * 60);
 		}
 	},
 

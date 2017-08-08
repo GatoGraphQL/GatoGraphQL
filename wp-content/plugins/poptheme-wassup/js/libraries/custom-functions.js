@@ -8,23 +8,23 @@ popCustomFunctions = {
 	addPageSectionIds : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, template = args.template;
+		var domain = args.domain, pageSection = args.pageSection, template = args.template;
 		var pssId = popManager.getSettingsId(pageSection);
 		var psId = pageSection.attr('id');
 
 		if (psId == M.PS_HOVER_ID) {
 
-			popJSRuntimeManager.addPageSectionId(pssId, template, psId, 'closehover');
+			popJSRuntimeManager.addPageSectionId(domain, pssId, template, psId, 'closehover');
 		}	
 		else if (psId == M.PS_FRAME_NAVIGATOR_ID) {
 
-			popJSRuntimeManager.addPageSectionId(pssId, template, psId, 'closenavigator');
+			popJSRuntimeManager.addPageSectionId(domain, pssId, template, psId, 'closenavigator');
 		}	
 		else if (psId == M.PS_ADDONS_ID) {
 
-			popJSRuntimeManager.addPageSectionId(pssId, template, psId, 'window-fullsize');
-			popJSRuntimeManager.addPageSectionId(pssId, template, psId, 'window-maximize');
-			popJSRuntimeManager.addPageSectionId(pssId, template, psId, 'window-minimize');
+			popJSRuntimeManager.addPageSectionId(domain, pssId, template, psId, 'window-fullsize');
+			popJSRuntimeManager.addPageSectionId(domain, pssId, template, psId, 'window-maximize');
+			popJSRuntimeManager.addPageSectionId(domain, pssId, template, psId, 'window-minimize');
 		}	
 	},
 
@@ -185,10 +185,12 @@ popCustomFunctions = {
 	isUserIdSameAsLoggedInUser : function(args) {
 	
 		var t = this;
-		if (popUserAccount.isLoggedIn()) {
+		var domain = args.domain;
+
+		if (popUserAccount.isLoggedIn(domain)) {
 
 			var user_id = args.input;
-			return (popUserAccount.id == user_id);
+			return (popUserAccount.getLoggedInUserId(domain) == user_id);
 		}
 		
 		return false;

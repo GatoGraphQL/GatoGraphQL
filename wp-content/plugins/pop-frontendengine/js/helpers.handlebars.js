@@ -193,10 +193,11 @@ Handlebars.registerHelper('ifget', function(db, index, options) {
 		return '';
 	}
 
+	var context = options.hash.context || this;
 	var condition = false;
 	// Allow to execute a method to check for the condition (eg: is user-id from the object equal to website logged in user?)
 	if (options.hash.method) {
-		var executed = popJSLibraryManager.execute(options.hash.method, {input: db[index]});
+		var executed = popJSLibraryManager.execute(options.hash.method, {domain: context.tls.domain, input: db[index]});
 		jQuery.each(executed, function(index, value) {
 			if (value) {
 				condition = true;
@@ -251,6 +252,7 @@ Handlebars.registerHelper('generateId', function(options) {
 	var group = options.hash.group;
 	var id = options.fn(this);
 	var ignorePSRuntimeId = context.ignorePSRuntimeId;
+	var domain = context.tls.domain;
 	
 	// Print also the block URL. Needed to know under what URL to save the session-ids.
 	// Set the URL before calling addTemplateId, where it will be needed
@@ -259,14 +261,15 @@ Handlebars.registerHelper('generateId', function(options) {
 		popJSRuntimeManager.setBlockURL(url);
 	}
 
-	var generatedId = popJSRuntimeManager.addTemplateId(pssId, targetId, template, id, group, fixed, isIdUnique, ignorePSRuntimeId);
+	var generatedId = popJSRuntimeManager.addTemplateId(domain, pssId, targetId, template, id, group, fixed, isIdUnique, ignorePSRuntimeId);
 	var items = [];
 	items.push('id="'+generatedId+'"'); 
 	items.push('data-templateid="'+template+'"');
 	
 	// For the block, also add the URL on which it was first generated (not initialized... it can be initialized later on)
 	if (url) {
-		items.push('data-toplevel-url="'+url+'"');
+		items.push('data-'+M.PARAMS_TOPLEVEL_URL+'="'+url+'"');
+		items.push('data-'+M.PARAMS_TOPLEVEL_DOMAIN+'="'+getDomain(url)+'"');
 	}
 	return new Handlebars.SafeString(items.join(' '));
 });
@@ -277,13 +280,16 @@ Handlebars.registerHelper('lastGeneratedId', function(options) {
 	var targetId = options.hash.targetId || context.bs.bsId;
 	var template = options.hash.template || context[M.JS_TEMPLATE];//context.template;
 
+	var domain = context.tls.domain;
 	var group = options.hash.group;
-	return popJSRuntimeManager.getLastGeneratedId(pssId, targetId, template, group);
+	return popJSRuntimeManager.getLastGeneratedId(domain, pssId, targetId, template, group);
 });
 
 Handlebars.registerHelper('applyLightTemplate', function(template, options){
 	var context = options.hash.context || this;
-	var response = popManager.getHtml(template, context);
+	// var tls = context.tls;
+	// var domain = tls.domain;
+	var response = popManager.getHtml(/*domain, */template, context);
 	return new Handlebars.SafeString(response);
 });
 
@@ -314,12 +320,14 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	// Add all these vars to the context for this template
 	var extend = {itemObject: itemObject, itemObjectDBKey: itemObjectDBKey, itemDBKey: itemDBKey, items: items, tls: tls, pss: pss, bs: bs, ignorePSRuntimeId: ignorePSRuntimeId};
 	
+	var domain = tls.domain;
 	var pssId = pss.pssId;
 	var psId = pss.psId;
 	var bsId = bs.bsId;
 	var bId = bs.bId;
+	// var isMultiDomain = bs['is-multidomain'];
 
-	jQuery.extend(context, popManager.getRuntimeConfiguration(pssId, bsId, templateName));
+	jQuery.extend(context, popManager.getRuntimeConfiguration(domain, pssId, bsId, templateName));
 
 	// Expand the JS Keys
 	// Needed in addition to withBlock/withModule because it's not always used. Eg: controlbuttongroup.tmpl it iterates directly on modules and do enterModule on each, no #with involved
@@ -345,7 +353,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	if (options.hash.itemDBKey && itemObjectId) {
 
 		itemDBKey = options.hash.itemDBKey;
-		itemObject = popManager.getItemObject(itemDBKey, itemObjectId);
+		itemObject = popManager.getItemObject(domain, itemDBKey, itemObjectId);
 		extend.itemObject = itemObject;
 		extend.itemObjectDBKey = itemDBKey;
 		extend.itemDBKey = itemDBKey;
@@ -359,7 +367,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	else if (options.hash.subcomponent && itemObjectId) {
 
 		itemDBKey = bs['db-keys'][M.JS_SUBCOMPONENTS][options.hash.subcomponent]['db-key'];//bs['db-keys'].subcomponents[options.hash.subcomponent]['db-key'];
-		itemObject = popManager.getItemObject(itemDBKey, itemObjectId);
+		itemObject = popManager.getItemObject(domain, itemDBKey, itemObjectId);
 		extend.itemObject = itemObject;
 		extend.itemObjectDBKey = itemDBKey;
 		extend.itemDBKey = itemDBKey;
@@ -414,7 +422,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var strReplace = staticStrReplace.concat(runtimeStrReplace);
 	if (strReplace.length) {
 
-		popManager.replaceFromItemObject(pssId, bsId, templateName, itemObject, extend, strReplace);
+		popManager.replaceFromItemObject(domain, pssId, bsId, templateName, itemObject, extend, strReplace);
 	}
 
 
@@ -432,7 +440,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	
 	jQuery.extend(context, extend);
 
-	var response = popManager.getHtml(templateName, context);
+	var response = popManager.getHtml(/*domain, */templateName, context);
 
 	if (options.hash.unsafe) {
 		return response;
@@ -460,8 +468,11 @@ function getMultiLayoutKey(itemDBKey, itemObject) {
 }
 Handlebars.registerHelper('withLayout', function(itemDBKey, itemObjectId, multipleLayouts, context, options) {
 
+	var tls = context.tls;
+	var domain = tls.domain;
+
 	// Obtain the key composed as: 'post_type'-'cat'
-	var itemObject = popManager.getItemObject(itemDBKey, itemObjectId);
+	var itemObject = popManager.getItemObject(domain, itemDBKey, itemObjectId);
 	
 	// keys 'post-type' and 'cat' must always be there!
 	var key = getMultiLayoutKey(itemDBKey, itemObject);
@@ -576,8 +587,12 @@ Handlebars.registerHelper('withSublevel', function(sublevel, options) {
 
 Handlebars.registerHelper('withItemObject', function(itemDBKey, itemObjectId, options) {
 
+	var context = options.hash.context || this;
+	var tls = context.tls;
+	var domain = tls.domain;
+
 	// Replace the context with only the itemObject
-	var context = popManager.getItemObject(itemDBKey, itemObjectId);
+	var context = popManager.getItemObject(domain, itemDBKey, itemObjectId);
 	
 	return options.fn(context);
 });

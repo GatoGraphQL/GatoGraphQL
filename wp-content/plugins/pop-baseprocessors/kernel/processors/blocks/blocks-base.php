@@ -101,6 +101,9 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 		if ($description_top = $this->get_att($template_id, $atts, 'description-top')) {
 			$ret['description-top'] = $description_top;
 		}
+		if ($description_abovetitle = $this->get_att($template_id, $atts, 'description-abovetitle')) {
+			$ret['description-abovetitle'] = $description_abovetitle;
+		}
 		if ($title_htmltag = $this->get_att($template_id, $atts, 'title-htmltag')) {
 			$ret['title-htmltag'] = $title_htmltag;
 		}
@@ -116,6 +119,9 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 
 		// Important: add them in this order (top, center, bottom) because we might open an html tag
 		// in top and close it in the bottom (eg: GETPOP_TEMPLATE_CODEBLOCK_OFFLINEFIRST)
+		if ($description_abovetitle = $configuration['description-abovetitle']) {
+			$ret[] = $description_abovetitle;
+		}
 		if ($description_top = $configuration['description-top']) {
 			$ret[] = $description_top;
 		}
@@ -181,6 +187,9 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 		if ($description_top = $this->get_description_top($template_id, $atts)) {
 			$this->add_att($template_id, $atts, 'description-top', $description_top);
 		}
+		if ($description_abovetitle = $this->get_description_abovetitle($template_id, $atts)) {
+			$this->add_att($template_id, $atts, 'description-abovetitle', $description_abovetitle);
+		}
 		if ($title_htmltag = $this->get_title_htmltag($template_id, $atts)) {
 			$this->add_att($template_id, $atts, 'title-htmltag', $title_htmltag);
 		}
@@ -227,6 +236,10 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 		return null;
 	}
 	protected function get_description_top($template_id, $atts) {
+	
+		return null;
+	}
+	protected function get_description_abovetitle($template_id, $atts) {
 	
 		return null;
 	}

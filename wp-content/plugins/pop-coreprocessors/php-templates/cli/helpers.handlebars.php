@@ -9,4 +9,10 @@ class PoP_Core_ServerSide_HelperCallers {
         global $pop_core_serverside_helpers;
         return $pop_core_serverside_helpers->latestCountTargets($itemObject, $options);
     }
+
+    public static function formatFeedbackMessage($message, $options) { 
+
+        global $pop_core_serverside_helpers;
+        return $pop_core_serverside_helpers->formatFeedbackMessage($message, $options);
+    }
 }

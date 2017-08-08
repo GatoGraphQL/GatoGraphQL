@@ -16,14 +16,14 @@ popSystem = {
 	activeLinks : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var pageSection = args.pageSection, targets = args.targets, domain = args.domain;
 
 		// Only if the pageSection allows activeLinks (eg: side menu does not, or otherwise that link will remain always painted)
 		var settings = popManager.getFetchPageSectionSettings(pageSection);
 		if (settings.activeLinks) {
 
 			// Source can be params or topLevelFeedback
-			var feedback = popManager.getTopLevelFeedback();
+			var feedback = popManager.getTopLevelFeedback(domain);
 
 			var parentPageId = feedback[M.URLPARAM_PARENTPAGEID];
 			if (parentPageId) {
@@ -222,11 +222,11 @@ popSystem = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.click(function(e) {
 			
 			e.preventDefault();
-			popManager.loadLatest(pageSection, block);
+			popManager.loadLatest(domain, pageSection, block);
 		});
 	},
 
@@ -234,24 +234,24 @@ popSystem = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.each(function() {
 			
 			var target = $(this);
 			// Default: 30 seconds
 			var time = target.data('clicktime') || 30000;
-			t.execTimeoutLoadLatestBlock(pageSection, block, target, time);
+			t.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
 		});
 	},
 
 	displayBlockDatasetCount : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, block = args.block;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block;
 
 		if (block.data('datasetcount-target')) {
 
-			var jsSettings = popManager.getJsSettings(pageSection, block);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block);
 
 			// By default: execute only when the block is created
 			var when = jsSettings['display-datasetcount-when'] || ['oncreated'];
@@ -263,7 +263,7 @@ popSystem = {
 			
 				$(document).ready(function($) {
 					var target = $(block.data('datasetcount-target'));
-					popManager.displayDatasetCount(pageSection, block, target, updateTitle);
+					popManager.displayDatasetCount(domain, pageSection, block, target, updateTitle);
 				});
 			}
 			
@@ -271,7 +271,7 @@ popSystem = {
 			if (when.indexOf('onrendered') > -1) {
 				block.on('rendered', function(e) {
 					var target = $(block.data('datasetcount-target'));
-					popManager.displayDatasetCount(pageSection, block, target, updateTitle);
+					popManager.displayDatasetCount(domain, pageSection, block, target, updateTitle);
 				});
 			}
 		}
@@ -385,7 +385,7 @@ popSystem = {
 	resetOnSuccess : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		var pssId = popManager.getSettingsId(pageSection);
 
 		targets.on('fetched', function(e, response) {
@@ -399,7 +399,7 @@ popSystem = {
 			if (blockFeedback.result === true) {
 
 				// skip-restore: allow the message feedback to still show
-				popManager.reset(pageSection, block, {'skip-restore': true});
+				popManager.reset(domain, pageSection, block, {'skip-restore': true});
 			}
 		});
 	},
@@ -407,9 +407,9 @@ popSystem = {
 	resetOnUserLogout : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
-		$(document).on('user:loggedout', function(e, source) {
+		$(document).on('user:loggedout:'+domain, function(e, source) {
 
 			targets.each(function() {
 		
@@ -419,7 +419,7 @@ popSystem = {
 
 					// 'delete-dataset': needed to erase the personal information of the logged in user. Eg: Add OpinionatedVoted, where it was showing the OpinionatedVoted by the user.
 					// popManager.reset(pageSection, block, {'delete-dataset': true});
-					popManager.reset(pageSection, block);
+					popManager.reset(domain, pageSection, block);
 				}
 			});
 		});
@@ -447,7 +447,7 @@ popSystem = {
 				setTimeout(function () {
 					
 					// Destroy this pageSectionPage
-					popManager.triggerDestroyTarget(block.data('paramsscope-url'), target);
+					popManager.triggerDestroyTarget(popManager.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/, target);
 				}, destroyTime);
 			}
 		});
@@ -456,7 +456,7 @@ popSystem = {
 	destroyPageOnUserLoggedOut : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		// Do it only after the pageSection has been initialized
 		// This is so that the pageSectionPage doesn't get destroyed when having loaded that one! That one will give the info the user is not logged in
@@ -464,27 +464,27 @@ popSystem = {
 		// This will execute after t.feedbackLoginOut in user-account.js->pageSectionInitialized
 		pageSection.one('completed', function() {
 
-			t.execDestroyPageOnUserLoggedOut(targets);
+			t.execDestroyPageOnUserLoggedOut(domain, targets);
 		});
 	},
 
 	destroyPageOnUserNoRole : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		pageSection.one('completed', function() {
 		
-			t.execDestroyPageOnUserNoRole(pageSection, targets);
+			t.execDestroyPageOnUserNoRole(domain, pageSection, targets);
 		});
 	},
 
 	refetchBlockOnUserLoggedIn : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
-		$(document).one('user:loggedin', function(e, source) {
+		$(document).one('user:loggedin:'+domain, function(e, source) {
 
 			if (source == 'initialfeedback') {
 				return;
@@ -497,22 +497,22 @@ popSystem = {
 	nonendingRefetchBlockOnUserLoggedIn : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
-		t.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedin');
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
+		t.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedin:'+domain);
 	},
 
 	nonendingRefetchBlockOnUserLoggedInOut : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
-		t.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedinout');
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
+		t.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedinout:'+domain);
 	},
 
 	deleteBlockFeedbackValueOnUserLoggedInOut : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, block = args.block;
-		$(document).on('user:loggedinout', function(e, source) {
+		var domain = args.domain, pageSection = args.pageSection, block = args.block;
+		$(document).on('user:loggedinout:'+domain, function(e, source) {
 
 			// Ask for 'initialuserdata' because some blocks will update themselves to load the content,
 			// and will not depend on the user loggedin data. eg: Create OpinionatedVoted Block for the TPP Website
@@ -523,11 +523,11 @@ popSystem = {
 			
 			// Deleting values is needed for the Notifications: when creating a user account, it will create notification "Welcome!",
 			// but to fetch it we gotta delete param `hist_time` with value from previous fetching of notifications
-			var jsSettings = popManager.getJsSettings(pageSection, block);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block);
 			var keys = jsSettings['user:loggedinout-deletefeedbackvalue'] || [];
 			if (keys.length) {
 				
-				var blockFeedback = popManager.getBlockFeedback(pageSection, block);
+				var blockFeedback = popManager.getBlockFeedback(domain/*popManager.getBlockTopLevelDomain(block)*/, pageSection, block);
 				$.each(keys, function(index, keyLevels) {
 
 					// each param in params is an array of levels, to go down the blockParams to delete it (eg: 1 param will be ['params', 'hist_time'] to delete blockParams['params']['hist_time'])
@@ -548,8 +548,8 @@ popSystem = {
 	scrollTopOnUserLoggedInOut : function (args) {
 
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
-		$(document).on('user:loggedinout', function(e, source) {
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
+		$(document).on('user:loggedinout:'+domain, function(e, source) {
 
 			if (source == 'initialfeedback' || source == 'initialuserdata') {
 				return;
@@ -560,7 +560,7 @@ popSystem = {
 
 				// Comment Leo 15/02/2017: Make sure the target still exists, because it may have been destroyed already but the hook still stays on
 				if ($('#'+target.attr('id')).length) {
-					var jsSettings = popManager.getJsSettings(pageSection, block, target);
+					var jsSettings = popManager.getJsSettings(domain, pageSection, block, target);
 					var animate = jsSettings['scrolltop-animate'] || false;
 					popManager.scrollToElem(target, target, animate);
 				}
@@ -571,9 +571,9 @@ popSystem = {
 	refetchBlockGroupOnUserLoggedIn : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
-		$(document).one('user:loggedin', function(e, source) {
+		$(document).one('user:loggedin:'+domain, function(e, source) {
 
 			// if (source == 'cookie' || source == 'initialfeedback') {
 			if (source == 'initialfeedback') {
@@ -670,7 +670,7 @@ popSystem = {
 	destroyPage : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		
 		targets.click(function(e) {
 			
@@ -679,7 +679,7 @@ popSystem = {
 			var pageSectionPage = $(link.data('target'));
 
 			// Call the destroy to the pageSection, it will know which page to destroy
-			popManager.destroyPageSectionPage(pageSection, pageSectionPage);
+			popManager.destroyPageSectionPage(domain, pageSection, pageSectionPage);
 		});
 	},
 
@@ -921,6 +921,22 @@ popSystem = {
 		});
 	},
 
+	addDomainClass : function(args) {
+
+		var t = this;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
+
+		targets.each(function() {
+
+			var target = $(this);
+
+			// Add a prefix to the domain, such as 'visible-loggedin-', etc
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block, target);
+			var prefix = jsSettings['prefix'] || '';
+			targets.addClass(prefix+getDomainId(domain));
+		});
+	},
+
 	//-------------------------------------------------
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
@@ -932,7 +948,7 @@ popSystem = {
 		// URL: take it from 'data-url' on the link (eg: Page Tab), or if it doesn't exist,
 		// from the corresponding paramsscope URL (eg: blockunit-frame controls to close a page)
 		return {
-			url: link.data('url') || popManager.getBlock(link).data('paramsscope-url'),
+			url: link.data('url') || popManager.getTargetParamsScopeURL(popManager.getBlock(link))/*popManager.getBlock(link).data('paramsscope-url')*/,
 			target: link.attr('target') || popManager.getFrameTarget(pageSection)
 		};
 	},
@@ -972,10 +988,10 @@ popSystem = {
 		}
 	},
 
-	execTimeoutLoadLatestBlock : function(pageSection, block, target, time) {
+	execTimeoutLoadLatestBlock : function(domain, pageSection, block, target, time) {
 
 		var t = this;
-		var jsSettings = popManager.getJsSettings(pageSection, block, target);
+		var jsSettings = popManager.getJsSettings(domain, pageSection, block, target);
 		var options = {
 			'skip-status': true,
 			
@@ -986,11 +1002,11 @@ popSystem = {
 
 		// Only if the user is logged in? Eg: Latest Notifications, it makes no sense to fetch constantly for logged out users
 		var onlyLoggedIn = jsSettings['only-loggedin'] || false;
-		if (onlyLoggedIn && !popUserAccount.isLoggedIn()) {
+		if (onlyLoggedIn && !popUserAccount.isLoggedIn(domain)) {
 
-			$(document).one('user:loggedin', function(e, source) {
+			$(document).one('user:loggedin:'+domain, function(e, source) {
 
-				t.execTimeoutLoadLatestBlock(pageSection, block, target, time);
+				t.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
 			});
 
 			// No more needed
@@ -1002,8 +1018,8 @@ popSystem = {
 			// Make sure object still exists
 			if ($('#'+target.attr('id')).length) {
 
-				popManager.loadLatest(pageSection, block, options);
-				t.execTimeoutLoadLatestBlock(pageSection, block, target, time);
+				popManager.loadLatest(domain, pageSection, block, options);
+				t.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
 			}			
 		}, time);
 	},
@@ -1051,11 +1067,11 @@ popSystem = {
 		});
 	},
 
-	execDestroyPageOnUserLoggedOut : function(targets) {
+	execDestroyPageOnUserLoggedOut : function(domain, targets) {
 
 		var t = this;
 
-		$(document).one('user:loggedout', function(e, source) {
+		$(document).one('user:loggedout:'+domain, function(e, source) {
 
 			targets.each(function() {
 		
@@ -1064,18 +1080,18 @@ popSystem = {
 				if (block.length) {
 					var pageSection = popManager.getPageSection(block);
 					var target = popManager.getFrameTarget(pageSection);
-					popManager.triggerDestroyTarget(block.data('paramsscope-url'), target);
+					popManager.triggerDestroyTarget(popManager.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/, target);
 				}
 			});
 		});
 	},
 
-	execDestroyPageOnUserNoRole : function(pageSection, block) {
+	execDestroyPageOnUserNoRole : function(domain, pageSection, block) {
 
 		var t = this;		
 		var neededRole = block.data('neededrole');
 		
-		$(document).one('user:updated', function(e, updates) {
+		$(document).one('user:updated:'+domain, function(e, updates) {
 
 			// To double-check that the object still exists in the DOM and was not removed when doing popManager.destroyPageSectionPage
 			block = $('#'+block.attr('id'));
@@ -1086,12 +1102,12 @@ popSystem = {
 				if (updates.roles && updates.roles.indexOf(neededRole) == -1) {
 					
 					var target = popManager.getFrameTarget(pageSection);
-					popManager.triggerDestroyTarget(block.data('paramsscope-url'), target);
+					popManager.triggerDestroyTarget(popManager.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/, target);
 				}
 				else {
 
 					// Re-add the event handler
-					t.execDestroyPageOnUserNoRole(pageSection, block);
+					t.execDestroyPageOnUserNoRole(domain, pageSection, block);
 				}
 			}
 		});
@@ -1144,7 +1160,12 @@ popSystem = {
 
 		var t = this;
 
-		var memory = popManager.getMemory();
+		// Comment Leo 26/10/2015: the URL is not the intercepted one but the original one. These 2 differ when intercepting without params
+		// Eg: adding a new comment, https://www.mesym.com/add-comment/?pid=19604, url to intercept is https://www.mesym.com/add-comment/
+		var url = link.data('original-url');
+		
+		var domain = getDomain(url);
+		var memory = popManager.getMemory(domain);
 		
 		// Restore initial toplevel feedback from when the page was loaded
 		var interceptUrl = link.data('intercept-url');
@@ -1155,7 +1176,7 @@ popSystem = {
 		// and that was a problem since it had all values added on loading_frame(): version, theme, thememode, etc
 		// So now iterating all the fields, and setting the value by copy
 		// memory.feedback.toplevel = $.extend({}, replicableMemory.feedback.toplevel);
-		var tlFeedback = popManager.getTopLevelFeedback();
+		var tlFeedback = popManager.getTopLevelFeedback(domain);
 		// var tlFeedback = memory.feedback.toplevel;
 		$.each(replicableMemory.feedback.toplevel, function(key, value) {
 
@@ -1181,11 +1202,6 @@ popSystem = {
 		// Generate a new uniqueId
 		// Change the tab "current-page" URL to the intercepted URL + add an ID to make this URL
 		// different for if again replicating the same element (eg: clicking twice on Add Event)
-		
-		// Comment Leo 26/10/2015: the URL is not the intercepted one but the original one. These 2 differ when intercepting without params
-		// Eg: adding a new comment, https://www.mesym.com/add-comment/?pid=19604, url to intercept is https://www.mesym.com/add-comment/
-		// var url = interceptUrl;
-		var url = link.data('original-url');
 		if (generateUniqueId) {
 
 			// function openTabs(): It might be the case that we're calling a an Add Post page with a unique-id and that page doesn't exist
@@ -1197,7 +1213,7 @@ popSystem = {
 			}
 			else {
 			
-				popManager.generateUniqueId();			
+				popManager.generateUniqueId(domain);			
 				if (addUniqueId) {
 
 					url = popManager.addUniqueId(url);
@@ -1212,7 +1228,7 @@ popSystem = {
 		tlFeedback[M.URLPARAM_URL] = url;
 
 		// Update document
-		popManager.maybeUpdateDocument(pageSection);
+		popManager.maybeUpdateDocument(domain, pageSection);
 	},
 
 	replicateMultiplePageSection : function(pageSection, targets) {
@@ -1243,9 +1259,10 @@ popSystem = {
 		var pssId = popManager.getSettingsId(pageSection);
 		var template = link.data('templateid');
 		
-		var memory = popManager.getMemory();
-
 		var interceptUrl = link.data('intercept-url');
+		var domain = getDomain(interceptUrl);
+		var memory = popManager.getMemory(domain);
+
 		var target = popManager.getFrameTarget(pageSection);
 		var replicableMemory = popManager.getReplicableMemory(interceptUrl, target);
 		
@@ -1255,13 +1272,14 @@ popSystem = {
 		$.each(replicableMemory.feedback.block, function(ipssId, ipsFeedback) {
 			$.extend(memory.feedback.block[ipssId], ipsFeedback);
 			$.extend(memory.dataset[ipssId], replicableMemory.dataset[ipssId]);
-			$.extend(memory.params[ipssId], replicableMemory.params[ipssId]);
+			$.extend(memory['query-state'].general[ipssId], replicableMemory['query-state'].general[ipssId]);
+			$.extend(memory['query-state'].domain[ipssId], replicableMemory['query-state'].domain[ipssId]);
 		});
 
 		// Intercept URL: the newly created URL, assigned already to the toplevel feedback on the fuction above
-		var tlFeedback = popManager.getTopLevelFeedback();
-		var psFeedback = popManager.getPageSectionFeedback(pageSection);
-		var psConfiguration = popManager.getPageSectionConfiguration(pageSection);
+		var tlFeedback = popManager.getTopLevelFeedback(domain);
+		var psFeedback = popManager.getPageSectionFeedback(domain, pageSection);
+		var psConfiguration = popManager.getPageSectionConfiguration(domain, pageSection);
 		if (!psFeedback['intercept-urls'][template]) {
 			psFeedback['intercept-urls'][template] = {};
 		}
@@ -1292,7 +1310,7 @@ popSystem = {
 		psConfiguration[M.JS_BLOCKSETTINGSIDS/*'block-settings-ids'*/] = blockSettingsIds;
 
 		// This will set the 'pss' in the context with the new toplevel feedback
-		popManager.initPageSectionSettings(pageSection, psConfiguration);
+		popManager.initPageSectionSettings(domain, pageSection, psConfiguration);
 
 		// Set up the clicked link as a relatedTarget. This is needed for the Addons, eg: when clicking on Volunteer, it can pickup what Project it is from the data-header in the original link
 		var options = {
@@ -1301,7 +1319,7 @@ popSystem = {
 			},
 			url: tlFeedback[M.URLPARAM_URL]
 		}
-		popManager.renderPageSection(pageSection, options);
+		popManager.renderPageSection(domain, pageSection, options);
 	},
 
 	refetchBlock : function(pageSection, block) {
@@ -1409,13 +1427,13 @@ popSystem = {
 		var otherRegex = new RegExp(/\.(pdf|css|js|zip|tar|ppt|pptx|doc|docx|xls|xlsx)$/i);
 
 		var allowedAnchors = [];
-		$.each(M.ALLOWED_URLS, function(index, domain) {
+		$.each(M.ALLOWED_DOMAINS, function(index, domain) {
 
 			allowedAnchors.push('a[href^="'+domain+'"]');
 		});
 
 		// All links pointing to the website: capture them and do the request with fetch functions
-		// $(document).on('click', 'a[href^="'+M.HOME_URL+'"]', function(e) {
+		// $(document).on('click', 'a[href^="'+M.HOME_DOMAIN+'"]', function(e) {
 		$(document).on('click', allowedAnchors.join(','), function(e) {
 
 			var anchor = $(this);
@@ -1473,8 +1491,8 @@ popSystem = {
 					e.preventDefault();
 
 					// Special case for the homepage: the link can be https://www.mesym.com or https://www.mesym.com/. However, in the popURLInterceptors it's stored as 'https://www.mesym.com/', and if the link doesn't have that final trail, then it will not be intercepted. So make sure to add it
-					if (url == M.HOME_URL) {
-						url = M.HOME_URL+'/';
+					if (url == M.HOME_DOMAIN) {
+						url = M.HOME_DOMAIN+'/';
 					}
 
 					// See if we intercept the link, or go fetch it from the server
@@ -1595,17 +1613,12 @@ popSystem = {
 
 		// External sites: open in new window
 		$(document).on('click', 'a[href^="http://"],a[href^="https://"]', function(e) {
-		// $(document).on('click', 'a[href^!="'+M.HOME_URL+'"]', function(e) {
 
 
 			var anchor = $(this);
 			var url = anchor.attr('href');
-			// if(!url.startsWith(M.HOME_URL)) {
-
-			// 	t.linkBlankTarget(anchor);
-			// }
 			var openblank = true;
-			$.each(M.ALLOWED_URLS, function(index, domain) {
+			$.each(M.ALLOWED_DOMAINS, function(index, domain) {
 
 				if(url.startsWith(domain)) {
 
@@ -1665,4 +1678,4 @@ popSystem = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popSystem, ['documentInitialized', 'activeLinks', 'newWindow', 'fullscreen', 'clickURLParam', 'initDelegatorFilter', 'initBlockGroupFilter', 'initBlockFilter', 'reloadBlockGroup', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'displayBlockDatasetCount', 'clearDatasetCount', 'clearDatasetCountOnUserLoggedOut', 'replicateTopLevel', 'replicatePageSection', 'closePageSection', 'closePageSectionOnTabShown', 'onDestroyPageSwitchTab', 'addOpenTab', 'closePageTab', 'resetOnSuccess', 'resetOnUserLogout', 'closeMessageFeedbacksOnPageSectionOpen', 'closePageSectionOnSuccess', 'destroyPageOnUserLoggedOut', 'destroyPageOnUserNoRole', 'refetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedInOut', 'deleteBlockFeedbackValueOnUserLoggedInOut', 'scrollTopOnUserLoggedInOut', 'refetchBlockGroupOnUserLoggedIn', 'destroyPageOnSuccess', 'destroyPage', 'initFilter', 'interceptForm', 'forms', /*'initBlockProxyFilter', */'clearInput', 'makeAlwaysRefetchBlock', 'scrollHandler']);
+popJSLibraryManager.register(popSystem, ['documentInitialized', 'activeLinks', 'newWindow', 'fullscreen', 'clickURLParam', 'initDelegatorFilter', 'initBlockGroupFilter', 'initBlockFilter', 'reloadBlockGroup', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'displayBlockDatasetCount', 'clearDatasetCount', 'clearDatasetCountOnUserLoggedOut', 'replicateTopLevel', 'replicatePageSection', 'closePageSection', 'closePageSectionOnTabShown', 'onDestroyPageSwitchTab', 'addOpenTab', 'closePageTab', 'resetOnSuccess', 'resetOnUserLogout', 'closeMessageFeedbacksOnPageSectionOpen', 'closePageSectionOnSuccess', 'destroyPageOnUserLoggedOut', 'destroyPageOnUserNoRole', 'refetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedInOut', 'deleteBlockFeedbackValueOnUserLoggedInOut', 'scrollTopOnUserLoggedInOut', 'refetchBlockGroupOnUserLoggedIn', 'destroyPageOnSuccess', 'destroyPage', 'initFilter', 'interceptForm', 'forms', /*'initBlockProxyFilter', */'clearInput', 'makeAlwaysRefetchBlock', 'scrollHandler', 'addDomainClass']);

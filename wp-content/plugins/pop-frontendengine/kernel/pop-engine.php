@@ -96,7 +96,7 @@ class PoPFrontend_Engine extends PoP_Engine {
 
 		// Templates: What templates must be executed after call to loadMore is back with data:
 		// CB: list of templates to merge
-		$json_settings['template-sources'] = $processor->get_templates_sources($template_id, $atts);
+		// $json_settings['template-sources'] = $processor->get_templates_sources($template_id, $atts);
 		$json_settings['templates-cbs'] = $processor->get_templates_cbs($template_id, $atts);
 		$json_settings['templates-paths'] = $processor->get_templates_paths($template_id, $atts);
 		// JS Settings: allow for Javascript to be executed (eg: Twitter typeahead initialization)

@@ -7,27 +7,31 @@
 
 class PoP_Frontend_ConfigurationUtils {
 
-	public static function get_allowed_urls() {
+	public static function get_backgroundload_urls() {
+
+		return apply_filters(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD, array());
+	}
+
+	public static function get_allowed_domains() {
 
 		$homeurl = get_site_url();
 		return array_values(array_unique(apply_filters(
-			'gd_templatemanager:allowed_urls',
+			'gd_templatemanager:allowed_domains',
 			array(
 				$homeurl,
 			)
 		)));
 	}
 
-	public static function get_allowed_domains() {
+	// public static function get_allowed_domains() {
 
-		$domains = array();
-		foreach (self::get_allowed_urls() as $url) {
+	// 	$domains = array();
+	// 	foreach (self::get_allowed_urls() as $url) {
 
-			$parse = parse_url($url);
-			$domains[] = $parse['scheme'].'://'.$parse['host'];
-		}
-		return array_unique($domains);
-	}
+	// 		$domain[] = get_domain($url);
+	// 	}
+	// 	return array_unique($domains);
+	// }
 
 	public static function get_multilayout_labels() {
 
@@ -76,5 +80,30 @@ class PoP_Frontend_ConfigurationUtils {
 			__('(None)', 'pop-frontendengine') => 'label-none',
 		);
 		return apply_filters('gd_templatemanager:labelize_classes', $labelize_classes);	
+	}
+
+	public static function get_multidomain_websites() {
+
+		$domain_properties = array(
+			get_site_url() => array(
+				'name' => get_bloginfo('name'),
+				'description' => get_bloginfo('description'),
+			)
+		);
+		$domain_properties = apply_filters('gd_templatemanager:multidomain:domain_properties', $domain_properties);	
+
+		// Add the ID to all domains
+		foreach ($domain_properties as $domain => &$properties) {
+			
+			$properties['id'] = GD_TemplateManager_Utils::get_domain_id($domain);
+
+			// Allow to add the language, and then change the default language on a domain by domain basis
+			$properties['locale'] = apply_filters(
+				'gd_templatemanager:multidomain:locale',
+				$domain,
+				$domain
+			);
+		}
+		return $domain_properties;
 	}
 }

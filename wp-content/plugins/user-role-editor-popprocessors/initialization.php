@@ -5,6 +5,9 @@ class URE_PoPProcessors_Initialization {
 
 		load_plugin_textdomain('ure-popprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('ah');
+
 		require_once 'config/load.php';
 		require_once 'pop-library/load.php';
 		require_once 'library/load.php';

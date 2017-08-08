@@ -53,7 +53,7 @@ class AAL_PoPProcessors_Template_Processor_SectionBlocks extends GD_Template_Pro
 
 				// Ask the user to log-in to see the personal notifications
 				return sprintf(
-					'<div class="visible-notloggedin alert alert-sm alert-warning">%s</div>',
+					'<div class="visible-notloggedin-anydomain alert alert-sm alert-warning">%s</div>',
 					sprintf(
 						__('These are the general notifications. Please %s to see your personal notifications.', 'aal-popprocessors'),
 						gd_get_login_html()

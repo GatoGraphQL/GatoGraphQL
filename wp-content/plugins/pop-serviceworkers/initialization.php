@@ -5,6 +5,9 @@ class PoP_ServiceWorkers_Initialization {
 
 		load_plugin_textdomain('pop-serviceworkers', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('a9');
+
 		if (!is_admin()) {
 
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));

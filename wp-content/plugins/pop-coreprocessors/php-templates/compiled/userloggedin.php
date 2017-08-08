@@ -1,13 +1,13 @@
 <?php
- function lcr595ab0adf0415encq($cx, $var) {
+ function lcr598a1bfdaf2f7encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0adf0415raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr598a1bfdaf2f7raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr595ab0adf0415hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr598a1bfdaf2f7hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -47,10 +47,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr595ab0adf0415m($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr598a1bfdaf2f7m($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr595ab0adf0415m($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr598a1bfdaf2f7m($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -79,14 +79,14 @@
    };
   }
 
-  return lcr595ab0adf0415exch($cx, $ch, $vars, $options);
+  return lcr598a1bfdaf2f7exch($cx, $ch, $vars, $options);
  }
 
- function lcr595ab0adf0415ifvar($cx, $v, $zero) {
+ function lcr598a1bfdaf2f7ifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr595ab0adf0415raw($cx, $v, $ex = 0) {
+ function lcr598a1bfdaf2f7raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -110,7 +110,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr595ab0adf0415raw($cx, $vv);
+      $ret[] = lcr598a1bfdaf2f7raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -122,7 +122,7 @@
   return "$v";
  }
 
- function lcr595ab0adf0415m($cx, $a, $b) {
+ function lcr598a1bfdaf2f7m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -137,7 +137,7 @@
   return $a;
  }
 
- function lcr595ab0adf0415exch($cx, $ch, $vars, &$options) {
+ function lcr598a1bfdaf2f7exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -150,13 +150,13 @@
   }
 
   if($e !== null) {
-   lcr595ab0adf0415err($cx, $e);
+   lcr598a1bfdaf2f7err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr595ab0adf0415err($cx, $err) {
+ function lcr598a1bfdaf2f7err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -271,25 +271,25 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<div class="',lcr595ab0adf0415encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" style="',lcr595ab0adf0415encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" ',lcr595ab0adf0415hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr595ab0adf0415encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),'>
+    ob_start();echo '<div class="',lcr598a1bfdaf2f7encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),' visible-loggedin-',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain-id'])) ? $in['tls']['domain-id'] : null)),'" style="',lcr598a1bfdaf2f7encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" ',lcr598a1bfdaf2f7hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr598a1bfdaf2f7encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),'>
 	<div class="media">
 		<div class="media-left">
 			<div class="top-useravatar-container">
-';if (lcr595ab0adf0415ifvar($cx, (($inary && isset($in['add-link'])) ? $in['add-link'] : null), false)){echo '					<a href="',lcr595ab0adf0415encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['url'])) ? $in['tls']['feedback']['user']['url'] : null)),'" class="pop-user-url user-avatar thumbnail">
-						<img src="',lcr595ab0adf0415encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['avatar'])) ? $in['tls']['feedback']['user']['avatar'] : null)),'" class="pop-user-avatar">
+';if (lcr598a1bfdaf2f7ifvar($cx, (($inary && isset($in['add-link'])) ? $in['add-link'] : null), false)){echo '					<a href="',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['url'])) ? $in['tls']['feedback']['user']['url'] : null)),'" class="pop-user-url user-avatar thumbnail ',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain-id'])) ? $in['tls']['domain-id'] : null)),'">
+						<img src="',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['avatar'])) ? $in['tls']['feedback']['user']['avatar'] : null)),'" class="pop-user-avatar ',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain-id'])) ? $in['tls']['domain-id'] : null)),'">
 					</a>
-';}else{echo '					<img src="',lcr595ab0adf0415encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['avatar'])) ? $in['tls']['feedback']['user']['avatar'] : null)),'" class="pop-user-avatar">
+';}else{echo '					<img src="',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['avatar'])) ? $in['tls']['feedback']['user']['avatar'] : null)),'" class="pop-user-avatar ',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain-id'])) ? $in['tls']['domain-id'] : null)),'">
 ';}echo '			</div>
 		</div>
 		<div class="media-body">
-			<',lcr595ab0adf0415encq($cx, (($inary && isset($in['name-htmlmarkup'])) ? $in['name-htmlmarkup'] : null)),' class="media-heading">
-				<small>',lcr595ab0adf0415raw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['top'])) ? $in['titles']['top'] : null)),'</small><br/>
-';if (lcr595ab0adf0415ifvar($cx, (($inary && isset($in['add-link'])) ? $in['add-link'] : null), false)){echo '					<a href="',lcr595ab0adf0415encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['url'])) ? $in['tls']['feedback']['user']['url'] : null)),'" class="pop-user-url">
-						<span class="pop-user-name">',lcr595ab0adf0415raw($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['name'])) ? $in['tls']['feedback']['user']['name'] : null)),'</span>
+			<',lcr598a1bfdaf2f7encq($cx, (($inary && isset($in['name-htmlmarkup'])) ? $in['name-htmlmarkup'] : null)),' class="media-heading">
+				<small>',lcr598a1bfdaf2f7raw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['top'])) ? $in['titles']['top'] : null)),'</small><br/>
+';if (lcr598a1bfdaf2f7ifvar($cx, (($inary && isset($in['add-link'])) ? $in['add-link'] : null), false)){echo '					<a href="',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['url'])) ? $in['tls']['feedback']['user']['url'] : null)),'" class="pop-user-url ',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain-id'])) ? $in['tls']['domain-id'] : null)),'">
+						<span class="pop-user-name ',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain-id'])) ? $in['tls']['domain-id'] : null)),'">',lcr598a1bfdaf2f7raw($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['name'])) ? $in['tls']['feedback']['user']['name'] : null)),'</span>
 					</a>
-';}else{echo '					<span class="pop-user-name">',lcr595ab0adf0415raw($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['name'])) ? $in['tls']['feedback']['user']['name'] : null)),'</span>
-';}echo '			</',lcr595ab0adf0415encq($cx, (($inary && isset($in['name-htmlmarkup'])) ? $in['name-htmlmarkup'] : null)),'>
-			',lcr595ab0adf0415raw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['bottom'])) ? $in['titles']['bottom'] : null)),'
+';}else{echo '					<span class="pop-user-name ',lcr598a1bfdaf2f7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain-id'])) ? $in['tls']['domain-id'] : null)),'">',lcr598a1bfdaf2f7raw($cx, ((isset($in['tls']['feedback']['user']) && is_array($in['tls']['feedback']['user']) && isset($in['tls']['feedback']['user']['name'])) ? $in['tls']['feedback']['user']['name'] : null)),'</span>
+';}echo '			</',lcr598a1bfdaf2f7encq($cx, (($inary && isset($in['name-htmlmarkup'])) ? $in['name-htmlmarkup'] : null)),'>
+			',lcr598a1bfdaf2f7raw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['bottom'])) ? $in['titles']['bottom'] : null)),'
 		</div>
 	</div>
 </div>';return ob_get_clean();

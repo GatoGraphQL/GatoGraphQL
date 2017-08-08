@@ -43,7 +43,7 @@ $template = file_get_contents($input);
 
 // set compiled PHP code into $phpStr
 $phpStr = LightnCandy::compile($template, array(
-	'flags' => LightnCandy::FLAG_PARENT | LightnCandy::FLAG_ELSE | LightnCandy::FLAG_ERROR_LOG | LightnCandy::FLAG_THIS | LightnCandy::FLAG_NAMEDARG | LightnCandy::FLAG_SPVARS | LightnCandy::FLAG_HBESCAPE | LightnCandy::FLAG_JS/* (= LightnCandy::FLAG_JSTRUE | LightnCandy::FLAG_JSOBJECT | LightnCandy::FLAG_JSLENGTH) */ | LightnCandy::FLAG_BESTPERFORMANCE /*( = LightnCandy::FLAG_ECHO | LightnCandy::FLAG_STANDALONEPHP) */,
+	'flags' => LightnCandy::FLAG_ADVARNAME | LightnCandy::FLAG_PARENT | LightnCandy::FLAG_ELSE | LightnCandy::FLAG_ERROR_LOG | LightnCandy::FLAG_THIS | LightnCandy::FLAG_NAMEDARG | LightnCandy::FLAG_SPVARS | LightnCandy::FLAG_HBESCAPE | LightnCandy::FLAG_JS/* (= LightnCandy::FLAG_JSTRUE | LightnCandy::FLAG_JSOBJECT | LightnCandy::FLAG_JSLENGTH) */ | LightnCandy::FLAG_BESTPERFORMANCE /*( = LightnCandy::FLAG_ECHO | LightnCandy::FLAG_STANDALONEPHP) */,
 	'helpers' => $helper_functions,
 ));  
 

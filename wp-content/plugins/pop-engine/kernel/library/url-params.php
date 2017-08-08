@@ -48,6 +48,8 @@ define ('GD_URLPARAM_URL', 'url');
 define ('GD_URLPARAM_ERROR', 'error');
 define ('GD_URLPARAM_SILENTDOCUMENT', 'silentdocument');
 define ('GD_URLPARAM_STORELOCAL', 'storelocal');
+define ('GD_URLPARAM_NONCES', 'nonces');
+// define ('GD_URLPARAM_NONCES_MEDIAFORM', 'media-form');
 
 define ('GD_URLPARAM_REDIRECTTO', 'redirect_to');
 

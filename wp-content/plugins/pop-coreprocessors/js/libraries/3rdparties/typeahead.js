@@ -44,8 +44,9 @@ popTypeahead = {
 	fillTypeahead : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
+		// var domain = getDomain(block.data('toplevel-url'));
 		targets.each(function() {
 
 			var typeahead = $(this);
@@ -53,17 +54,17 @@ popTypeahead = {
 			var urlparam = typeahead.data('urlparam');
 			if (urlparam) {
 
-				var url = block.data('paramsscope-url');
+				var url = popManager.getBlockTopLevelURL(block);//popManager.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/;
 				var values = getParam(urlparam, url);
 				if (values) {
 
 					var database_key = typeahead.data('database-key');
 					$.each(values, function(key, value) {
 
-						var datum = popManager.getItemObject(database_key, value);
+						var datum = popManager.getItemObject(domain, database_key, value);
 
 						// Trigger the select
-						t.selectTypeahead(pageSection, block, typeahead, datum);
+						t.selectTypeahead(domain, pageSection, block, typeahead, datum);
 					});
 
 					// If we are inside a collapsed widget (eg: in the Add Post addons pageSection), then open the collapse
@@ -76,7 +77,7 @@ popTypeahead = {
 	selectDatum : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.click(function(e) {
 
@@ -86,19 +87,20 @@ popTypeahead = {
 			var typeahead = $(link.data('target'));
 			var value = link.data('objectid');
 			var database_key = link.data('db-key');
-			var datum = popManager.getItemObject(database_key, value);
+			// var domain = getDomain(block.data('toplevel-url'));
+			var datum = popManager.getItemObject(domain, database_key, value);
 
 			// Trigger the select
-			t.selectTypeahead(pageSection, block, typeahead, datum);
+			t.selectTypeahead(domain, pageSection, block, typeahead, datum);
 		});
 	},
 
 	selectableTypeahead : function(args) {
 	
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
-		t.typeahead(pageSection, block, targets);
+		t.typeahead(domain, pageSection, block, targets);
 
 		targets.each(function() {
 
@@ -110,7 +112,7 @@ popTypeahead = {
 			typeahead.bind('typeahead:selected', function(obj, datum, name) {	  
 
 				var typeahead = $(this);
-				t.selectTypeahead(pageSection, block, typeahead, datum);
+				t.selectTypeahead(domain, pageSection, block, typeahead, datum);
 			});
 		});
 	},
@@ -118,9 +120,9 @@ popTypeahead = {
 	fetchlinkTypeahead : function(args) {
 	
 		var t = this;
-		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 		
-		t.typeahead(pageSection, /*pageSectionPage, */block, targets);
+		t.typeahead(domain, pageSection, /*pageSectionPage, */block, targets);
 		
 		targets.each(function() {
 
@@ -159,17 +161,26 @@ popTypeahead = {
 		});
 	},
 
+	removeLocalStorageItem : function(args) {
+
+		var t = this;
+		var path = args.path, key = args.key;
+
+		// Delete the localStorage entries for the typeahead
+		args.result = args.result || key.startsWith('__'+path);
+	},
+
 	//-------------------------------------------------
 	// PUBLIC but not EXPOSED functions
 	//-------------------------------------------------
 
-	selectTypeahead : function(pageSection, block, typeahead, datum) {
+	selectTypeahead : function(domain, pageSection, block, typeahead, datum) {
 	
 		var t = this;
 
 		var input = typeahead.find('input[type="text"].tt-input');
 
-		t.triggerSelect(pageSection, block, typeahead, datum);
+		t.triggerSelect(domain, pageSection, block, typeahead, datum);
 			
 		// Delete the string
 		input.typeahead('val', '');
@@ -195,7 +206,7 @@ popTypeahead = {
 		return typeahead.children('div.pop-operation').find('a, button, input');
 	},
 
-	typeahead : function(pageSection, block, targets) {
+	typeahead : function(domain, pageSection, block, targets) {
 	
 		var t = this;
 		
@@ -212,20 +223,20 @@ popTypeahead = {
 
 			var typeahead = $(this);
 			var input = typeahead.find('input[type="text"]');
-			var jsSettings = popManager.getJsSettings(pageSection, block, typeahead);		
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block, typeahead);		
 
 			// Retrieve the dataset
 			var dataset = [];
 			$.each(jsSettings['dataset-components'], function(index, component) {
 				
-				var datasetJsSettings = popManager.getJsSettings(pageSection, block, component);
+				var datasetJsSettings = popManager.getJsSettings(domain, pageSection, block, component);
 				dataset.push(datasetJsSettings['dataset']);
 			});
 
 			// Retrieve the compiled template from "template-name"
 			$.each(dataset, function(index, datasetunit) {
 				var layout = datasetunit['layout'];
-				datasetunit.template = popManager.getScriptTemplate(layout);
+				datasetunit.template = popManager.getScriptTemplate(/*domain, */layout);
 
 				// Allow plug-ins to modify the url: allow pop-cdn to hook in the CDN
 				var args = {};
@@ -345,14 +356,14 @@ popTypeahead = {
 		});
 	},
 
-	triggerSelect : function(pageSection, block, typeahead, datum) {
+	triggerSelect : function(domain, pageSection, block, typeahead, datum) {
 	
 		var t = this;
 
 		// Check this value has not been added before
 		if (typeahead.find('input[type="hidden"][value="'+datum.id+'"]').length == 0) {
 		
-			var jsSettings = popManager.getJsSettings(pageSection, block, typeahead);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block, typeahead);
 			var template = jsSettings['trigger-layout'];
 			var pssId = popManager.getSettingsId(pageSection);
 			var bsId = popManager.getSettingsId(block);
@@ -360,13 +371,14 @@ popTypeahead = {
 
 			// Generate the code and append
 			var options = {extendContext: context}
-			popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
-			var html = popManager.getTemplateHtml(pageSection, block, template, options);
+			popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+			// var domain = block.data('domain') || getDomain(block.data('toplevel-url'));
+			var html = popManager.getTemplateHtml(domain, pageSection, block, template, options);
 			popManager.mergeHtml(html, typeahead.find('.pop-box'));
-			popManager.runJSMethods(pageSection, block, template, 'last');
+			popManager.runJSMethods(domain, pageSection, block, template, 'last');
 
 			// Delete the session ids before starting a new session
-			popJSRuntimeManager.deleteBlockLastSessionIds(pageSection, block, template);
+			popJSRuntimeManager.deleteBlockLastSessionIds(domain, pageSection, block, template);
 
 			t.validateMaxSelected(pageSection, block, typeahead);
 			
@@ -412,4 +424,4 @@ popTypeahead = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popTypeahead, ['selectableTypeahead', 'fillTypeahead', 'selectDatum', 'fetchlinkTypeahead', 'selectableTypeaheadTrigger', 'typeaheadSearchBtn', 'typeaheadSearchInput']);
+popJSLibraryManager.register(popTypeahead, ['selectableTypeahead', 'fillTypeahead', 'selectDatum', 'fetchlinkTypeahead', 'selectableTypeaheadTrigger', 'typeaheadSearchBtn', 'typeaheadSearchInput', 'removeLocalStorageItem']);

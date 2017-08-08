@@ -11,6 +11,7 @@ define ('POP_CACHETYPE_SETTINGS', 'settings');
 define ('POP_CACHETYPE_DATASETTINGS', 'data-settings');
 define ('POP_CACHETYPE_ATTS', 'atts');
 define ('POP_CACHETYPE_CRAWLABLEITEMS', 'crawlable-items');
+define ('POP_CACHETYPE_SITEMAPPING', 'sitemapping');
 
 class GD_Template_CacheManager {
 
@@ -34,6 +35,7 @@ class GD_Template_CacheManager {
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_DATASETTINGS));
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_ATTS));
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_CRAWLABLEITEMS));
+		$this->restore($this->get_cache_dir(POP_CACHETYPE_SITEMAPPING));
 	}
 
 	function restore($cache_dir) {

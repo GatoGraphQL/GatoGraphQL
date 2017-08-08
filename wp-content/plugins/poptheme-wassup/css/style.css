@@ -6,17 +6,13 @@
 #ps-sideinfo {
 	padding-top: 10px;
 }
-/*body.sliding #ps-side,
-body.sliding #ps-sideinfo, */
 body.sliding,
-body.sliding/*.swift*/ #ps-side,
-body.sliding/*.swift*/ #ps-sideinfo,
+body.sliding #ps-side,
+body.sliding #ps-sideinfo,
 body.sliding #ps-main > .container-fluid,
 body.sliding #ps-hover .container-fluid {
 	background-color: #f1f1f2;
 }
-/*body.sliding.expansive #ps-side,
-body.sliding.expansive #ps-sideinfo,*/
 body.sliding #ps-navigator {
 	background-color: #4d4d4f;
 }
@@ -49,8 +45,7 @@ body.sliding #ps-navigator {
 	box-shadow: 0 0 5px rgba(77, 77, 79, .2);
 }
 @media (min-width: 768px) {
-	/*body.swift */#ps-side .nav>li>a/*,
-	body.swift #ps-sideinfo .nav>li>a*/ {
+	#ps-side .nav>li>a {
 		font-size: 12px;
 		padding-top: 5px;
 		padding-bottom: 5px;
@@ -114,9 +109,6 @@ body.expansive #ps-main .blockgroup-singlepost {
     margin-right: auto;
     margin-left: auto;
 }
-/*body.expansive #ps-main .simpleview {
-	background-color: #fff; / * Needed because the .scroll-inner below has limited width * /
-}*/
 
 .dropdown-menu > li > div.pop-block {
   padding: 3px 20px;
@@ -189,20 +181,14 @@ body.pop-loadingframe .loadinglogo {
 	right: 0;
 }
 .loading-screen {
-	/*background-color: #f1f1f2;*/
 	/* Over topnav */
 	z-index: 1110;
 	display: none;
 	overflow: hidden;
 }
-/* Below everything else, including the offcanvas background */
-/*.background-screen {
-	z-index: 50;
-}*/
 /* Do not allow the user to click yet, because JS not yet initialized, by placing the loading-screen div with a transparent background on top of everything */
 body.pop-loadingjs .loading-screen {
 	display: block;
-    /*background-color: transparent;*/
 }
 /* The top has a background color, so don't show it while showing the loading screen */
 body.pop-loadingframe.pop-loadingjs #ps-top,
@@ -259,11 +245,6 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	min-height: 0;
 }
 
-/* Since WP 3.9 Do not allow to edit Resources / Source in the Media Manager window, because it doesn't edit these values anyway, so then just hide */
-/*.compat-attachment-fields {
-	display: none;
-}*/
-
 .pop-messagefeedback-icon {
 	font-size: 40px;
 	margin-left: 5px; /* So that it doesn't get cut inside the class="media" => class="pull-left" div */
@@ -272,42 +253,22 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	margin-top: 10px;
 }
 
-/*body.swift *//*.pop-sm .socialmedia-item,*/
-/*body.swift *//*.sidebar.vertical *//*.pop-sm */.pop-functionbutton,
+.pop-functionbutton,
 .btn.pop-functionbutton,
-/*body.swift *//*.sidebar.horizontal .pop-sm .pop-functionbutton,*/
-/*.sidebar.horizontal .pop-sm*/ .socialmedia-item/*,
-.sidebar.horizontal .pop-sm .pop-functionbutton*/ {
+.socialmedia-item {
 	color: #4d4d4f;
-	/*font-size: 125%;*/
-	/*padding: 3px 2px;*/
 }
 .pop-functionbutton,
 .btn.pop-functionbutton {
 	background-color: #fff;
 }
 
-/*body.expansive *//*.socialmedia-item,*/
-/*body.expansive */.socialmedia-item:hover,
-/*body.expansive *//*.sidebar.horizontal .pop-sm .socialmedia-item:hover,*/
-/*body.swift *//*.pop-sm .socialmedia-item:hover,*/
-/*body.swift *//*.sidebar.horizontal *//*.pop-sm .socialmedia-item:hover,*/
-/*body.expansive *//*.sidebar.vertical *//*.pop-sm .pop-functionbutton,*/
-/*.sidebar.horizontal *//*.pop-sm */.pop-functionbutton.active,
+.socialmedia-item:hover,
+.pop-functionbutton.active,
 .btn.pop-functionbutton.active {
 	color: #ffffff;
 }
-/*.sidebar.horizontal .pop-sm .pop-recommendpost,
-.sidebar.horizontal .pop-sm .pop-followuser {
-	background-color: #fff;
-}*/
-/*.sidebar.horizontal .pop-sm .pop-functionbutton {
-	font-size: 150%;
-	padding: 5px;
-}*/
-/*.sidebar.horizontal .pop-sm .pop-functiongroup {
-	margin-right: 20px;
-}*/
+
 #ps-main .sidebar .pop-sm,
 #ps-quickview .sidebar .pop-sm {
 	margin-bottom: 10px;
@@ -331,13 +292,11 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	padding-left: 15px;
 	padding-right: 15px;
 }
-/*.fullview .sidebar.horizontal.conclusion,*/
 .simpleview .sidebar.horizontal.conclusion,
 .fullview .footers {
 	padding-left: 15px;
 	padding-right: 15px;
 }
-/*.fullview .sidebar.horizontal.conclusion,*/
 .fullview .footers {
 	margin-left: -57px;
 	margin-right: -57px;
@@ -358,9 +317,9 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	padding: 5px 2px;
 }
 #ps-sideinfo .pop-sm .socialmedia-item,
-#ps-main /*.sidebar */.pop-sm .socialmedia-item,
-#ps-quickview /*.sidebar */.pop-sm .socialmedia-item,
-#ps-quickviewinfo /*.sidebar */.pop-sm .socialmedia-item {
+#ps-main .pop-sm .socialmedia-item,
+#ps-quickview .pop-sm .socialmedia-item,
+#ps-quickviewinfo .pop-sm .socialmedia-item {
 	padding: 5px 2px;
 }
 @media (min-width: 768px) {
@@ -581,12 +540,6 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	position: relative;
 }
 
-/*.pop-notificationmsg.website-level .btn-group.sessiontabs {
-	margin: 0 5px;
-}
-.pop-notificationmsg.website-level .btn-group.sessiontabs+.checkbox {
-	display: inline-block;
-}*/
 .pop-notificationmsg.website-level.sessiontabs .btn-group {
 	margin: 0 5px;
 }
@@ -640,11 +593,6 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	left: 50%;
 	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
 }
-/* Do not show under the 'disabled' layer */
-/*.pop-block.pop-disabled .pop-loading,
-.pop-block.pop-disabled .pop-error {
-	display: none;
-}*/
 
 .pop-disabledlayer .pop-box {
 
@@ -703,7 +651,6 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
  	width: 100%;
  }
  .pop-typeaheadmap .pop-map {
- 	/*height: 300px;*/
  	height: 200px;
  }
 .modal .pop-map,
@@ -727,9 +674,6 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 }*/
 
 /* Typeahead */
-/*.pop-typeahead .pop-box > .pop-typeahead-selected:first-child {
-	margin-top: 5px;
-}*/
 #ps-main .pop-typeahead .pop-box > .pop-typeahead-selected:last-child {
 	margin-bottom: 0;
 }
@@ -779,14 +723,6 @@ table td {
 }
 
 
-/* JWP6 */
-/*.compat-item tr.compat-field-jwplayermodule_thumbnail,
-.compat-item tr.compat-field-jwp6_insert_with_player label,
-.compat-item tr.compat-field-jwp6_insert_with_player select,
-.compat-item tr.compat-field-jwp6_insert_with_player div,
-.compat-item tr.compat-field-jwp6_insert_with_player p { display: none; }*/
-
-
 /* Copied from http://localhost/wp-includes/css/media-views.min.css?ver=3.5.1 definition: .media-sidebar .setting span */
 .compat-attachment-fields .label > label {
 	font-size: 12px;
@@ -804,30 +740,68 @@ table td {
 	width: 100%;
 }
 
-
-.visible-loggedin,
-body.loggedin .visible-notloggedin,
-.visible-community,
+/* ------------------------------------------------ */
+/* Comment Leo 31/07/2017: */
+/* Logged in classes: they depend on the domain, so they are added through PHP */
+/* ------------------------------------------------ */
+/*.visible-loggedin,*/
+.visible-loggedin-anydomain,
+.visible-loggedin-localdomain,
+body.loggedin-anydomain .visible-notloggedin-anydomain,
+body.loggedin-localdomain .visible-notloggedin-localdomain,
+/*body.loggedin .visible-notloggedin,*/
+.visible-community, /* classes with roles are added in the Menu in the DB, so they don't have the domain */
 .visible-organization,
-.visible-individual,
-.wp-media-buttons,
-body.offline .wp-media-buttons, /* Don't show the Media buttons when the website is offline */
-body.loggedin.offline .wp-media-buttons,
-.loggedin-btn {
+.visible-individual
+/*.wp-media-buttons,*/
+/*body.offline .wp-media-buttons, *//* Don't show the Media buttons when the website is offline */
+/*body.loggedin.offline .wp-media-buttons,*/
+/*.loggedin-btn*/ {
 	display: none !important;
 }
-.visible-loggedin.visible-always,
-body.loggedin .visible-loggedin,
-.visible-notloggedin,
+/*.visible-loggedin.visible-always,*/
+body.loggedin-anydomain .visible-loggedin-anydomain,
+body.loggedin-localdomain .visible-loggedin-localdomain/*,*/
+/*body.loggedin .visible-loggedin,*/
+/*.visible-notloggedin,*/
+/*body.loggedin-anydomain .visible-notloggedin.visible-always,
+body.loggedin-localdomain .visible-notloggedin.visible-always*//*,
 body.loggedin .visible-notloggedin.visible-always,
-body.community .visible-community,
-body.organization .visible-organization,
-body.individual .visible-individual,
-body.loggedin .wp-media-buttons {
+body.loggedin.community .visible-community,
+body.loggedin.organization .visible-organization,
+body.loggedin.individual .visible-individual,
+body.loggedin .wp-media-buttons*/ {
 	display: block !important;
 }
-body.loggedin .loggedin-btn {
+/*body.loggedin .loggedin-btn {
 	display: inline-block !important;
+}*/
+
+/* WSL Users: do not show "Change Password" link */
+/*body.loggedin.wsluser .hidden-wsluser {
+	display: none;
+}*/
+
+/* Quicklinkgroup: show only if the user is logged in */
+body.loggedin-anydomain .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
+    display: block;
+}
+/* For desktop devices: hide the links, show them on hover */
+@media (min-width: 992px) {
+	body.loggedin-anydomain .scroll-notifications .blockinner-row .quicklinkgroup-top {
+	    display: none;
+	}
+	body.loggedin-anydomain .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
+	    display: block;
+	}
+}
+
+/* ------------------------------------------------ */
+/* End Logged in classes
+/* ------------------------------------------------ */
+/* Quicklinkgroup: show only if the user is logged in */
+.scroll-notifications .blockinner-row .quicklinkgroup-top {
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -907,20 +881,10 @@ body.loggedin .loggedin-btn {
 }
 
 /* By default, show the positive functionality: follow user, etc. When user logs in, their styles should override these */
-.pop-functionaction/*,
-.pop-followuser,
-.pop-recommendpost,
-.pop-subscribetotag,
-.pop-upvotepost,
-.pop-downvotepost*/ {
+.pop-functionaction {
 	display: block;
 }
-.pop-functionunaction/*,
-.pop-unfollowuser,
-.pop-unrecommendpost,
-.pop-unsubscribefromtag,
-.pop-undoupvotepost,
-.pop-undodownvotepost*/ {
+.pop-functionunaction {
 	display: none;
 }
 
@@ -963,7 +927,6 @@ h4 .pop-spinner {
 }
 
 #ps-side li.menu-item-parent > a {
-    /*padding-left: 30px;*/
     padding-left: 35px;
 }
 #ps-sideinfo li.menu-item-parent > a {
@@ -976,10 +939,6 @@ h4 .pop-spinner {
 }
 
 /* Hide the FAQ link in the control group for the addons window. eg: Add Highlight */
-/*#ps-addons .block-highlight-create .blocksection-controls,
-#ps-addons .block-highlight-update .blocksection-controls,
-#ps-addons .block-webpost-create .blocksection-controls,
-#ps-addons .block-webpost-update .blocksection-controls*/
 #ps-addons .pop-block.addons-nocontrols .blocksection-controls {
 	display: none;
 }
@@ -1045,12 +1004,6 @@ dl.aligncenter {
 	padding-top: 4px;
 	margin-bottom: 10px;
 }
-/*.wp-caption.alignleft {
-	margin-right: 10px;
-}
-.wp-caption.alignright {
-	margin-left: 10px;
-}*/
 .mceIEcenter {
 	text-align: center;
 }
@@ -1191,9 +1144,6 @@ span.twitter-typeahead {
 .offcanvas-collapse.panel-collapse .panel-heading {
 	padding-top: 0;
 }
-/*.panel-title.collapsepanelgroup-title {
-	font-size: 24px;
-}*/
 
 .post-layout .media,
 .user-layout .media {
@@ -1343,7 +1293,6 @@ body.sliding .pagesection-group.active-top.active-pagetabs.active-navigator-xs .
 
 
 /* pageSections (offcanvas) visibility */
-/*html,*/
 body.non-scrollable {
   overflow-x: hidden;  /*Prevent scroll on narrow devices  */
 }
@@ -1397,15 +1346,6 @@ body.non-scrollable .pagesection-group .offcanvas.main {
 .pagesection-group.active-addontabs .offcanvas.addontabs {
 	display: block;
 }
-
-/*.pagesection-group.active-main.active-side-xs #ps-main .blocksection-controls.top {
-	display: none;
-}
-@media (min-width: 768px) {
-	.pagesection-group.active-main.active-side-xs #ps-main .blocksection-controls.top {
-		display: block;
-	}
-}*/
 
 /* Responsive: common */
 .pagesection-group .offcanvas.hover {
@@ -1491,7 +1431,6 @@ body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-co
 body.sliding .pagesection-group.active-side-xs.active-sideinfo-xs #ps-sideinfo .blocksection-controls.top {
 	left: 100%;
 }
-/*.pagesection-group.active-top .offcanvas.addontabs,*/
 .pagesection-group.active-top .offcanvas.sideinfo,
 .pagesection-group.active-top .offcanvas.background,
 .pagesection-group.active-top .offcanvas.main,
@@ -1536,7 +1475,6 @@ body.non-scrollable .pagesection-group+.pagesection-group-after {
 .pagesection-group.active-pagetabs-xs .offcanvas.pagetabs {
 	top: 0px;
 }
-/*.pagesection-group.active-pagetabs-xs .offcanvas.addontabs,*/
 .pagesection-group.active-pagetabs-xs .offcanvas.background,
 .pagesection-group.active-pagetabs-xs .offcanvas.main,
 .pagesection-group.active-pagetabs-xs .offcanvas.sideinfo,
@@ -1556,7 +1494,6 @@ body.non-scrollable .pagesection-group+.pagesection-group-after {
 .pagesection-group.active-top.active-pagetabs-xs .offcanvas.pagetabs {
 	top: 45px;
 }
-/*.pagesection-group.active-top.active-pagetabs-xs .offcanvas.addontabs,*/
 .pagesection-group.active-top.active-pagetabs-xs .offcanvas.background,
 .pagesection-group.active-top.active-pagetabs-xs .offcanvas.main,
 .pagesection-group.active-top.active-pagetabs-xs .offcanvas.sideinfo,
@@ -1836,7 +1773,6 @@ body.non-scrollable .pagesection-group+.pagesection-group-after {
 	}
 	.pagesection-group.active-addontabs .window.minimized .offcanvas.addontabs,
 	.pagesection-group.active-addons .window.minimized .offcanvas.addons {
-		/*width: 20%;*/
 		width: 33%;
 	}
 
@@ -2066,12 +2002,6 @@ body.sliding #ps-hover .container-fluid {
 	padding-left: 30px;
 }
 
-/* When doing waypoints scrollVertical on a map (eg: Organik Fundraising Farms Map), the scroll property cuts the left part of the scroll. Add the white background here, always */
-/*.pop-block-scrollmap.vertical > .blocksection-inners {
-	margin-left: -15px;
-	padding-left: 15px;
-	background-color: #fff;
-}*/
 .pop-block-scrollmap.vertical .blocksection-inners>div.scroll,
 .pop-block-calendarmap .blocksection-inners>div.calendar {
 	float: left;
@@ -2518,9 +2448,6 @@ div.mce-tooltip {
 .sidebar .pop-map {
  	height: 300px;
 }
-/*.sidebar-widget .item {
-	margin-bottom: 20px;
-}*/
 
 
 .layout.preview .extra.belowthumb,
@@ -2836,22 +2763,7 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 	max-width: 50%;
 }
 
-/*.blockgroup-home-welcome .top-expand {*/
-	/*margin: 0;*/
-    /*margin-top: 1px; *//* Somehow if not adding this, it shows a line on the mobile phone version. So hide it by pulling the whole thing down 1 px */
-    /*margin-bottom: -15px;*/
-/*}*/
-/*.top-expand {
-    text-align: center;
-}*/
-/*@media (min-width: 768px) {
-	.blockgroup-home-welcome .top-expand {
-	    margin-top: -5px;
-	}
-}*/
-
 .blockgroup-home-welcome .top-expand {
-    /*margin-top: -10px;*/
     margin-top: 0;
     border-radius: 6px;
     padding: 5px 0;
@@ -2888,9 +2800,6 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 	    left: auto;
 	}
 }
-/*.welcome-description {
-	font-size: 18px;
-}*/
 
 .blockgroup-author .blockgroup-author-description > .top-expand {
 	margin: 0 0 10px;
@@ -2906,7 +2815,6 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 }
 .blockgroup-home-welcome .jumbotron {
 	background-color: #fff;
-	/*margin-top: -10px;*/
 }
 .blockgroup-home-welcome .top-collapse {
     position: absolute;
@@ -2920,39 +2828,6 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
     top: 0;
     left: 0;
 }
-/*.blockgroup-home-welcome .block-homewelcome {
-	position: static;
-	margin-bottom: 0;
-}*/
-/*.blockgroup-home-welcome.jumbotron {
-	margin-top: -15px;
-	margin-bottom: 20px;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-}*/
-/*body.swift *//*.blockgroup-home-welcome.jumbotron {
-	padding: 15px 30px 20px;
-}*/
-/*body.expansive .blockgroup-home-welcome.jumbotron {
-	padding-top: 15px;
-	padding-bottom: 20px;
-}
-*/
-/*.blockgroup-home-welcome.jumbotron p {
-    margin-bottom: 10px;
-    font-size: 15px;
-    font-weight: normal;
-}*/
-/*.blockgroup-home-welcome.jumbotron h1 {
-	text-align: center;
-}*/
-/*@media screen and (min-width: 768px) {
-	.blockgroup-home-welcome.jumbotron .h1, 
-	.blockgroup-home-welcome.jumbotron h1 {
-		font-size: 50px;
-	}
-}
-*/
 #ps-background .jumbotron {
   margin-bottom: 0;
 }
@@ -3115,17 +2990,11 @@ body.embed .pagesection-group .framesection-navbar-title {
 	margin-bottom: 40px;
 }
 .readable {
-/*	font-size: 18px;*/
 	overflow: hidden;
 }
 .pop-content.readable {
 	padding-bottom: 15px;
 }
-/*.readable p,
-.readable ul,
-.readable ol {	
-	margin-bottom: 20px;
-}*/
 
 .fullview.nodescription {
 	margin-bottom: -20px; /* Remove the 20px white space in the User Fullview when showing the description not in the body, but in a widget */
@@ -3140,130 +3009,31 @@ body.embed .pagesection-group .framesection-navbar-title {
 	/*background-color: #f1f1f2;*/
 	background-color: #dcddde;
 }
-/*body.expansive .fullview > .wrapper > .row > .content-body,
-body.expansive .layoutauthor,
-body.expansive .content-single {
-	padding: 30px 15px;
-}*/
-/*body.swift */.fullview > .wrapper > .row > .content-body,
-/*body.swift */.layoutauthor,
-/*body.swift */.content-single {
+
+.fullview > .wrapper > .row > .content-body,
+.layoutauthor,
+.content-single {
 	padding: 30px 10px;
 }
 @media (min-width: 700px) {
-	/*body.swift */.fullview > .wrapper > .row > .content-body {
+	.fullview > .wrapper > .row > .content-body {
 		padding: 30px 57px; /* With 57px, the width of the content inside is exactly 480px */
 	}
-	/*body.swift */.layoutauthor,
-	/*body.swift */.content-single {
+	.layoutauthor,
+	.content-single {
 		padding: 30px 41px; /* With 41px, the width of the content inside is exactly 480px */
 	}
 }
-/*#ps-quickview .layoutauthor,
-#ps-quickview .content-single {
-	padding: 30px 28px;
-}*/
-/*.userpostinteraction-single > .loadingmsg,
-.userpostinteraction-single > .referencedby,
-.userpostinteraction-single > .postcomments,
-.userpostinteraction-single > .userpostinteraction {
-	padding: 0 15px;
-}*/
+
 .block-single-content > .blocksection-inners > hr {
 	margin-right: 15px;
 	margin-left: 15px;
 }
-/*@media (min-width: 768px) {
-	body.expansive .fullview > .wrapper > .row > .content-body,
-	body.expansive .layoutauthor,
-	body.expansive .content-single {
-		padding: 50px 80px 50px;
-	}
-	/ * Make embeds and iframes slightly wider, so they look better * /
-	body.expansive .fullview > .wrapper > .row > .content-body .responsiveembed-container,
-	body.expansive .layoutauthor .responsiveembed-container,
-	body.expansive .content-single .responsiveembed-container,
-	body.expansive .fullview > .wrapper > .row > .content-body .content-iframe-wrapper,
-	body.expansive .layoutauthor .content-iframe-wrapper,
-	body.expansive .content-single .content-iframe-wrapper {
-		margin-left: -15px;
-		margin-right: -15px;
-	}
-	body.expansive .userpostinteraction-single > .loadingmsg,
-	body.expansive .userpostinteraction-single > .referencedby,
-	body.expansive .userpostinteraction-single > .postcomments,
-	body.expansive .userpostinteraction-single > .userpostinteraction {
-		padding: 0 80px;
-	}
-	body.expansive .block-single-content > .blocksection-inners > hr {
-		margin-right: 80px;
-		margin-left: 80px;
-	}
-	body.expansive #ps-main .fullview .horizontal.sidebar.conclusion > .row,
-	body.expansive #ps-quickview .fullview .horizontal.sidebar.conclusion > .row {
-		margin-left: -80px;
-		margin-right: -80px;
-	}
-}
-@media (min-width: 992px) {
-	body.expansive .fullview > .wrapper > .row > .content-body,
-	body.expansive .layoutauthor,
-	body.expansive .content-single {
-		padding: 50px 120px 50px;
-	}
-	body.expansive .userpostinteraction-single > .loadingmsg,
-	body.expansive .userpostinteraction-single > .referencedby,
-	body.expansive .userpostinteraction-single > .postcomments,
-	body.expansive .userpostinteraction-single > .userpostinteraction {
-		padding: 0 120px;
-	}
-	body.expansive .block-single-content > .blocksection-inners > hr {
-		margin-right: 120px;
-		margin-left: 120px;
-	}
-	body.expansive #ps-main .fullview .horizontal.sidebar.conclusion > .row,
-	body.expansive #ps-quickview .fullview .horizontal.sidebar.conclusion > .row {
-		margin-left: -120px;
-		margin-right: -120px;
-	}
-}
-@media (min-width: 1200px) {
-	body.expansive .fullview > .wrapper > .row > .content-body,
-	body.expansive .layoutauthor,
-	body.expansive .content-single {
-		padding: 50px 150px 50px;
-	}
-	body.expansive .userpostinteraction-single > .loadingmsg,
-	body.expansive .userpostinteraction-single > .referencedby,
-	body.expansive .userpostinteraction-single > .postcomments,
-	body.expansive .userpostinteraction-single > .userpostinteraction {
-		padding: 0 150px;
-	}
-	body.expansive .block-single-content > .blocksection-inners > hr {
-		margin-right: 150px;
-		margin-left: 150px;
-	}
-	body.expansive #ps-main .fullview .horizontal.sidebar.conclusion > .row,
-	body.expansive #ps-quickview .fullview .horizontal.sidebar.conclusion > .row {
-		margin-left: -150px;
-		margin-right: -150px;
-	}
-}*/
+
 .fullview.nodescription > .wrapper > .row > .content-body {
 	padding: 0;
 }
 
-/*.block-single-content,
-.block-singleinteraction-content,
-.fullview.scroll > .scroll-inner > .scroll-row > .pop-elem {
-
-	padding-bottom: 20px;
-}*/
-
-/*.block-single-content.publish {
-	padding-bottom: 20px;
-}
-*/
 .alert.form-horizontal .form-group:last-child {
 	margin-bottom: 0;
 }
@@ -3294,7 +3064,6 @@ body.expansive .content-single {
   display: none !important;
 }
 /* Place the Search button on the right of the Search input */
-/*#ps-top.pop-search-visible .pop-toggle-search {*/
 #ps-top.pop-search-visible .visiblesearch-visible-right {
 	position: absolute;
 	right: 0;
@@ -3386,57 +3155,36 @@ body.expansive .content-single {
 	}
 }
 
-/* Hide the "Add Content" button when side navigation is showing */
-/*.pagesection-group.active-side #ps-top .nav-addcontent {
-	display: none;
-}*/
-
 #ps-top .nav-account .dropdown-menu {
-	/*left: -155px;*/	
 	left: -192px;
-	/*left: -118px;*/
 }
 #ps-top .nav-account .dropdown-menu:before {
-	/*left: 169px;*/
 	left: 206px;
-	/*left: 132px;*/
 }
 #ps-top .nav-account .dropdown-menu:after {
-	/*left: 170px;*/
 	left: 207px;
-	/*left: 133px;*/
 }
 #ps-top .nav-notifications .dropdown-menu {
-	/*left: -192px;*/	
 	left: -229px;
-	/*left: -155px;*/
 }
 #ps-top .nav-notifications .dropdown-menu:before {
-	/*left: 206px;*/
 	left: 243px;
-	/*left: 169px;*/
 }
 #ps-top .nav-notifications .dropdown-menu:after {
-	/*left: 207px;*/
 	left: 244px;
-	/*left: 170px;*/
 }
 #ps-top .nav-addcontent .dropdown-menu {
-	/*left: -229px;*/	
 	left: -51px;	
 }
 #ps-top .nav-addcontent .dropdown-menu:before {
-	/*left: 243px;*/
 	left: 65px;
 }
 #ps-top .nav-addcontent .dropdown-menu:after {
-	/*left: 244px;*/
 	left: 66px;
 }
 #account-loading-msg {
 	position: absolute;
 	top: 7px;
-    /*left: 159px;*/
     left: 197px;
 }
 
@@ -3444,67 +3192,44 @@ body.expansive .content-single {
 /* We don't care about mobile phone version, since the side covers the main anyway */
 @media (min-width: 768px) {
 	#ps-top .nav-account .dropdown-menu {
-		/*left: -155px;*/	
 		left: -192px;
 	}
 	#ps-top .nav-account .dropdown-menu:before {
-		/*left: 169px;*/
 		left: 206px;
 	}
 	#ps-top .nav-account .dropdown-menu:after {
-		/*left: 170px;*/
 		left: 207px;
 	}
 	#ps-top .nav-notifications .dropdown-menu {
-		/*left: -192px;*/	
 		left: -229px;
 	}
 	#ps-top .nav-notifications .dropdown-menu:before {
-		/*left: 206px;*/
 		left: 243px;
 	}
 	#ps-top .nav-notifications .dropdown-menu:after {
-		/*left: 207px;*/
 		left: 244px;
 	}
 	.pagesection-group.active-side #ps-top .nav-account .dropdown-menu {
 		left: -104px;	
-		/*left: -141px;	*/
 	}
 	.pagesection-group.active-side #ps-top .nav-account .dropdown-menu:before {
 		left: 118px;
-		/*left: 155px;*/
 	}
 	.pagesection-group.active-side #ps-top .nav-account .dropdown-menu:after {
 		left: 119px;
-		/*left: 156px;*/
 	}
 	.pagesection-group.active-side #ps-top .nav-notifications .dropdown-menu {
 		left: -141px;	
-		/*left: -178px;*/
 	}
 	.pagesection-group.active-side #ps-top .nav-notifications .dropdown-menu:before {
 		left: 155px;
-		/*left: 192px;*/
 	}
 	.pagesection-group.active-side #ps-top .nav-notifications .dropdown-menu:after {
 		left: 156px;
-		/*left: 193px;*/
 	}
-
-	/*.pagesection-group.active-side #ps-top .nav-addcontent .dropdown-menu {
-		left: -178px;	
-	}
-	.pagesection-group.active-side #ps-top .nav-addcontent .dropdown-menu:before {
-		left: 192px;
-	}
-	.pagesection-group.active-side #ps-top .nav-addcontent .dropdown-menu:after {
-		left: 193px;
-	}*/
 
 	.pagesection-group.active-side #account-loading-msg {
 		left: 108px;
-		/*left: 145px;*/
 	}
 }
 
@@ -3696,13 +3421,6 @@ body.non-scrollable .pop-block.pop-functionalblock > .blocksection-messagefeedba
 	/* This space at the top is because there is a quicklinkgroup at the left of the author (eg: for Highlight), which have "btn btn-link" class, with margin top 6. So now they are at same level */
 	margin-top: 6px;
 }
-/*.preview .authors-link-bottom {
-	margin-bottom: 10px;
-}*/
-
-/*.preview .quicklinkgroup-bottom {
-	margin-bottom: 10px;
-}*/
 .preview .quicklinkgroup-bottom + .extra {
 	margin-top: 10px;
 }
@@ -3734,17 +3452,10 @@ body.non-scrollable .pop-block.pop-functionalblock > .blocksection-messagefeedba
 .sidebarwidget-quicklinkgroup {
 	margin-top: -8px;
 }
-/*.sidebarwidget-quicklinkgroup .btn.btn-link {
-	padding-top: 0;
-	padding-bottom: 0;
-}*/    
 
 .simpleview .wrapper.referencedby .pop-blockinner-row:last-child {
 	margin-bottom: 20px;
 }
-/*.simpleview .wrapper.referencedby .pop-structureinner:last-child > .well {
-	margin-bottom: 0;
-}*/
 
 
 .label-none {
@@ -3818,8 +3529,7 @@ div.inline {
 	padding: 0;
 }
 
-#ps-top-menu-addcontent li.menu-item-parent > a/*,
-#ps-side .addnew-menu li.menu-item-parent > a*/ {
+#ps-top-menu-addcontent li.menu-item-parent > a {
     position: absolute;
     top: 0;
     right: 0;
@@ -3828,10 +3538,6 @@ div.inline {
 #ps-top-menu-addcontent li > a {
     background-color: #4d4d4f;
 }
-
-/*#ps-side .addnew-menu li.menu-item-parent > a {
-    padding-left: 10px;
-}*/
 
 .visible-link,
 .layout.preview > .wrapper > .content-body > .authors.belowcontent,
@@ -3883,15 +3589,6 @@ div.inline {
 	max-height: 100px;
 }
 
-/* WSL Users: do not show "Change Password" link */
-body.loggedin.wsluser .hidden-wsluser {
-	display: none;
-}
-
-/*#ps-top .scroll-notifications .blockinner-row:hover,
-#ps-main .scroll-notifications .blockinner-row:hover {
-    background-color: #e9e9ea;
-}*/
 
 .scroll-notifications .preview.notification-layout {
     margin: -15px;
@@ -3901,9 +3598,6 @@ body.loggedin.wsluser .hidden-wsluser {
     margin: -15px 0;
     padding: 5px;
 }
-/*#ps-top .scroll-notifications .preview.notification-layout .message {
-    color: #4d4d4f;
-}*/
 .scroll-notifications .preview.notification-layout {
     background-color: #d9edf7;
 }
@@ -3916,13 +3610,12 @@ body.loggedin.wsluser .hidden-wsluser {
 .scroll-notifications .preview.notification-layout .quicklinkgroup-top {
     margin-top: 0;
     margin-right: 0;
-    background-color: #fff;/*transparent;*/
+    background-color: #fff;
 }
 #ps-top .scroll-notifications > .scroll-inner{
     background-color: #333;
 }
 #ps-top .scroll-notifications .preview.notification-layout {
-    /*background-color: #7a7a7b;*/
     background-color: #337ab7;
 }
 #ps-top .scroll-notifications .preview.notification-layout a,
@@ -3939,14 +3632,6 @@ body.loggedin.wsluser .hidden-wsluser {
     background-color: #4d4d4f;/*transparent;*/
 }
 
-/*.scroll-notifications .preview.notification-layout .visible-read,
-.scroll-notifications .preview.notification-layout.read .visible-nonread {
-    display: none;
-}
-.scroll-notifications .preview.notification-layout .visible-nonread,
-.scroll-notifications .preview.notification-layout.read .visible-read {
-    display: block;
-}*/
 .scroll-notifications .preview.notification-layout .pop-functional.mark-as-unread,
 .scroll-notifications .preview.notification-layout.read .pop-functional.mark-as-read {
     display: none;
@@ -3961,39 +3646,10 @@ body.loggedin.wsluser .hidden-wsluser {
     bottom: 0; 
     left: 0; 
     right: 0; 
-    /*margin: -15px;*/
 }
 
-/*.preview.notification-layout .message,
-.preview.notification-layout .quicklinkgroup-bottom {
-	display: inline-block;
-}*/
 
-/* Quicklinkgroup: show only if the user is logged in */
-.scroll-notifications .blockinner-row .quicklinkgroup-top/*,
-.scroll-notifications .blockinner-row .quicklinkgroup-bottom*/ {
-    display: none;
-}
-body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
-    display: block;
-}
-/*body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-bottom {
-    display: inline-block;
-}*/
-/* For desktop devices: hide the links, show them on hover */
-/*@media only screen and (min-device-width: 993px) {*/
-@media (min-width: 992px) {
-	body.loggedin .scroll-notifications .blockinner-row .quicklinkgroup-top/*,
-	body.loggedin .scroll-notifications .blockinner-row .quicklinkgroup-bottom*/ {
-	    display: none;
-	}
-	body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
-	    display: block;
-	}
-	/*body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-bottom {
-	    display: inline-block;
-	}*/
-}
+
 .preview.notification-layout .quicklinkgroup-bottom + .extra {
 	margin-top: 0;
 }
@@ -4044,7 +3700,6 @@ body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
  	max-height: 500px;
 }
 .pop-block-scrollmap.horizontal .mapdetails.scrollable {
- 	/*overflow-x: auto !important;*/
     white-space: nowrap;
     background-color: #fff;
 }
@@ -4057,12 +3712,6 @@ body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
     border-top: 0;
     width: 320px;
 }
-/*.pop-block-scrollmap.pop-block-userscrollmap.horizontal .mapdetails.scrollable > .scroll-inner > .pop-blockinner-row {
- 	width: 200px;
-}*/
-/*.pop-block-scrollmap.pop-block-postscrollmap.horizontal .mapdetails.scrollable > .scroll-inner > .pop-blockinner-row {
- 	width: 320px;
-}*/
 .pop-block-scrollmap.horizontal .pop-map {
  	height: 400px;
  }
@@ -4093,16 +3742,6 @@ body.loggedin .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
     right: 0;
     background-color: #337ab7;
 }
-
-/* Do not show the "Loading" status over the "These are general notifications" sign */
-/*#ps-top .block-notifications > .blocksection-status > .pop-loading,*/
-/*#ps-top .block-notifications > .blocksection-status > .pop-error {
-	margin-top: 60px;
-}*/
-/*body.loggedin #ps-top .block-notifications > .blocksection-status > .pop-loading,*/
-/*body.loggedin #ps-top .block-notifications > .blocksection-status > .pop-error {
-	margin-top: 0;
-}*/
 
 #ps-top .block-notifications > .blocksection-status > .pop-loading {
     top: 4px;
@@ -4252,7 +3891,7 @@ pre.breakable {
 }
 
 /* Posts only has featured image, which might not be there, so then add the border only if it is there */
-/*.layout.preview.quick-posts*/.layout.preview.posts > .wrapper > .content-body.simpleview > .abovecontent > .wrapper,
+.layout.preview.posts > .wrapper > .content-body.simpleview > .abovecontent > .wrapper,
 .layout.preview.events-all > .wrapper > .content-body.simpleview > .abovecontent {
     background-color: #d9edf7;
 	border: 1px solid #bce8f1;
@@ -4295,17 +3934,8 @@ div.wp-media-buttons .button {
 	display: inline-block;
 }
 .gallery.gallery-size-thumbnail dl.gallery-item {
-	/*margin: 0 5px 5px 0;
-	vertical-align: top;*/
 	margin-bottom: 0;
 }
-/*.gallery.gallery-size-thumbnail dl.gallery-item {
-	width: 165px;
-}*/
-/*.gallery.gallery-size-thumbnail dl.gallery-item img {
-	margin: 2px 4px 2px 0;
-	padding: 2px;
-}*/
 
 /* Gallery "thumb-gallery" */
 .content-single .gallery.gallery-size-thumbnail,
@@ -4350,20 +3980,11 @@ div.wp-media-buttons .button {
 	display: inline-block;
 }
 
-/*.btn-link:focus span,
-.btn-link:hover span {
-	text-decoration: underline;
-}*/
 
 .pop-collapse-btn.wrapper {
 	text-align: center;
 }
 
-/*.sm-group+.secinteractions-group {
-	margin-left: 10px;
-	padding-left: 10px;
-	border-left: 1px dotted #7a7a7b;
-}*/
 .sm-group+.volunteer-wrapper,
 .secinteractions-group+.volunteer-wrapper {
 	float: right;
@@ -4398,7 +4019,6 @@ div.wp-media-buttons .button {
 }
 #ps-side .addnew-menu ul.dropdown-menu > li:nth-child(even) > a,
 .pop-addrelatedpost-dropdown > ul.dropdown-menu > li:nth-child(even) > a {
-  /*padding-left: 35px;*/
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -4410,16 +4030,6 @@ div.wp-media-buttons .button {
 	/* Hide "as Link" */
 	display: none;
 }
-/*#ps-side .addnew-menu ul.dropdown-menu > li:nth-child(even):first-child > a,
-.pop-addrelatedpost-dropdown > ul.dropdown-menu > li:nth-child(even):first-child > a {
-	position: static;
-	margin-top: 0;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-.pop-addrelatedpost-dropdown > ul.dropdown-menu > li:nth-child(even):first-child .pop-btn-title {
-	display: inline-block;
-}*/
 #ps-side .addnew-menu ul.dropdown-menu {
 	background-color: #dbe0e2;	
 }
@@ -4442,9 +4052,6 @@ div.wp-media-buttons .button {
 	margin-left: 5px;
 }
 
-/*.linkcollapse-iframe .content-iframe-wrapper {
-	background-color: #dcddde;
-}*/
 .pop-functiongroup {
 	background-color: #fff;
 }
@@ -4472,10 +4079,6 @@ body.print #ps-sideinfo {
     border: 1px dotted #dcddde;
 }
 
-/* Categories DelegatorFilter: hide the submit button */
-/*form.pop-filterform-instantaneous button[type="submit"] {
-	display: none;
-}*/
 form.pop-filterform-instantaneous {
 	margin-bottom: 10px;
 }
@@ -4535,15 +4138,6 @@ form.pop-filterform-instantaneous {
 	}
 }
 
-/* Remove the transition of the progress-bar for the loadingprogress, or it doesn't work. Solution from https://stackoverflow.com/questions/30285185/why-doesnt-progress-bar-dynamically-change-unlike-text */
-/*
-.progress #loadingprogress.progress-bar {
-  -webkit-transition: none;
-       -o-transition: none;
-          transition: none;
-}
-*/
-
 iframe.embedpreview {
 	background-color: #fff;
 }
@@ -4597,7 +4191,7 @@ pre.prettyprint {
 }
 
 /* Comment Leo 18/07/2017: instead of making it one line just for the collapse in the home top, do it everywhere, so this solution also works for smartphones */
-/*.collapse-hometop */.pop-block.calendar .fc-event {
+.pop-block.calendar .fc-event {
 	max-height: 16px;
 	overflow: hidden;
     word-break: break-all;

@@ -1,7 +1,7 @@
 <div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}">
 	<div class="media">
 		<div class="media-left">
-			<img {{#generateId group="useravatar"}}{{id}}{{/generateId}} src="{{tls.feedback.user.avatar}}" class="pop-user-avatar img-thumbnail">
+			<img {{#generateId group="useravatar"}}{{id}}{{/generateId}} src="{{tls.feedback.user.avatar}}" class="pop-user-avatar {{tls.domain-id}} img-thumbnail">
 		</div>
 		<div class="media-body">
 			{{#each template-ids.layouts}}

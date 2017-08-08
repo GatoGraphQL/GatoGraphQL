@@ -42,6 +42,34 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 	/***********************************************************/
 	/** Repeated from "parent" class! */
 	/***********************************************************/
+	function get_query_multidomain_urls($template_id, $atts) {
+			
+		global $gd_template_processor_manager;
+		
+		// All code below commented because get_query_url does not need to go all the way down to template-processor.php,
+		// Only blocks will implement this function
+		
+		$ret = array();				
+
+		// In the Hierarchy Processor, all subcomponent templates are blocks
+		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+
+			$component_processor = $gd_template_processor_manager->get_processor($component);
+			$component_atts = $atts[$component];
+			$component_settings_id = $component_processor->get_settings_id($component);
+			
+			$component_ret = $component_processor->get_query_multidomain_urls($component, $component_atts);
+			
+			// Place all block configurations below $block_id
+			$ret[$component_settings_id] = $component_ret;
+		}
+
+		return $ret;
+	}
+
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
 	function get_query_domains($template_id, $atts) {
 			
 		global $gd_template_processor_manager;
@@ -58,9 +86,16 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 			$component_atts = $atts[$component];
 			
 			// At the block level, dataloadsource_domain might be null, then do not add it
-			if ($component_ret = $component_processor->get_dataloadsource_domain($component, $component_atts)) {
+			// if ($component_ret = $component_processor->get_dataloadsource_domain($component, $component_atts)) {
 			
-				$ret[] = $component_ret;
+			// 	$ret[] = $component_ret;
+			// }
+			if ($component_ret = $component_processor->get_dataload_multidomain_sources($component, $component_atts)) {
+			
+				$ret[] = array_unique(array_merge(
+					$ret,
+					$component_ret
+				));
 			}
 		}
 

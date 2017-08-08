@@ -54,9 +54,9 @@ class GD_Template_Processor_UserLoggedInsBase extends GD_Template_ProcessorBase 
 		return $ret;
 	}
 	
-	function init_atts($template_id, &$atts) {
+	// function init_atts($template_id, &$atts) {
 
-		$this->append_att($template_id, $atts, 'class', 'visible-loggedin');			
-		return parent::init_atts($template_id, $atts);
-	}
+	// 	$this->append_att($template_id, $atts, 'class', 'visible-loggedin');			
+	// 	return parent::init_atts($template_id, $atts);
+	// }
 }

@@ -9,9 +9,9 @@ popBlockFunctions = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, block = args.block;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block;
 
-		if (popManager.hideIfEmpty(pageSection, block)) {
+		if (popManager.hideIfEmpty(domain, pageSection, block)) {
 
 			block.addClass('hidden');
 		}

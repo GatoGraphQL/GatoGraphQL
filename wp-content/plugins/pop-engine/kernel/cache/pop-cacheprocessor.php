@@ -87,6 +87,10 @@ class GD_Template_CacheProcessor {
 			
 			$filename .= '-'.str_replace('-', '', $themestyle);
 		}
+		if ($domain = $vars['domain']) {
+			
+			$filename .= '-'.str_replace('-', '', GD_TemplateManager_Utils::get_domain_id($domain));
+		}
 		// Comment Leo 05/04/2017: do also add the version, because otherwise there are PHP errors
 		// happening from stale configuration that is not deleted, and still served, after a new version is deployed
 		// By adding the version, that will not happen anymore

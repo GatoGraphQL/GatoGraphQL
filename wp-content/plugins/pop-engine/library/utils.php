@@ -52,6 +52,21 @@ function maybe_add_http($url) {
     return $url;
 }
 
+function get_domain($url) {
+    
+    $parse = parse_url($url);
+	return $parse['scheme'].'://'.$parse['host'];
+}
+function remove_scheme($domain) {
+
+    $arr = explode("//", $domain);
+    return count($arr) == 1 ? $arr[0] : $arr[1];
+}
+// function get_domain($url, $add_scheme = false) {
+    
+//     $parse = parse_url($url);
+// 	return ($add_scheme ? $parse['scheme'].'://' : '').$parse['host'];
+// }
 
 function full_url() {
     $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";

@@ -23,12 +23,12 @@ cp libraries/3rdparties/waypoints.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugi
 cp libraries/addeditpost.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/block-functions.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/bootstrap-carousel.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
-# cp libraries/bootstrap.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/controls.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
-# cp libraries/custombootstrap.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/editor.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/mentions.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/featuredimage.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
+cp libraries/mediamanager.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
+cp libraries/mediamanager-cors.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/tabs.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/functions.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp libraries/modals.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
@@ -44,8 +44,7 @@ cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/bootstrap-mul
 cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/jquery.dynamicmaxheight.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
-# wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/pop-coreprocessors.bundle.orig.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries&f=helpers.handlebars.js,custombootstrap.js,system.js,addeditpost.js,editor.js,mentions.js,featuredimage.js,user-account.js,bootstrap.js,bootstrap-carousel.js,waypoints.js,window.js,multiselect.js,dynamicmaxheight.js,daterange.js,typeahead.js,modals.js,analytics.js,perfectscrollbar.js,functions.js,block-functions.js,controls.js,jquery.fullscreen-min.js,bootstrap-multiselect.0.9.13.js,jquery.dynamicmaxheight.min.js"
-wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/pop-coreprocessors.bundle.orig.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries&f=helpers.handlebars.js,system.js,addeditpost.js,editor.js,mentions.js,featuredimage.js,tabs.js,user-account.js,waypoints.js,window.js,multiselect.js,dynamicmaxheight.js,daterange.js,typeahead.js,analytics.js,perfectscrollbar.js,functions.js,block-functions.js,bootstrap-carousel.js,modals.js,controls.js,jquery.fullscreen-min.js,bootstrap-multiselect.0.9.13.js,jquery.dynamicmaxheight.min.js"
+wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/pop-coreprocessors.bundle.orig.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries&f=helpers.handlebars.js,system.js,addeditpost.js,editor.js,mentions.js,featuredimage.js,mediamanager.js,mediamanager-cors.js,tabs.js,user-account.js,waypoints.js,window.js,multiselect.js,dynamicmaxheight.js,daterange.js,typeahead.js,analytics.js,perfectscrollbar.js,functions.js,block-functions.js,bootstrap-carousel.js,modals.js,controls.js,jquery.fullscreen-min.js,bootstrap-multiselect.0.9.13.js,jquery.dynamicmaxheight.min.js"
 uglifyjs $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/pop-coreprocessors.bundle.orig.min.js -o $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/pop-coreprocessors.bundle.min.js -c warnings=false -m
 
 ###########################

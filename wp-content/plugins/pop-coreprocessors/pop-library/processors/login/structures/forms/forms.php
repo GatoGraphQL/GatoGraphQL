@@ -46,6 +46,43 @@ class GD_Template_Processor_LoginForms extends GD_Template_Processor_FormsBase {
 		return parent::get_components($template_id, $atts);
 	}
 
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_FORM_LOGIN:
+			case GD_TEMPLATE_FORM_LOGOUT:
+
+				$this->add_jsmethod($ret, 'addDomainClass');
+				break;
+		}
+		
+		return $ret;
+	}
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_FORM_LOGIN:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'visible-notloggedin-';
+				break;
+		
+			case GD_TEMPLATE_FORM_LOGOUT:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'visible-loggedin-';
+				break;
+		}
+
+		return $ret;
+	}
+
 	function init_atts($template_id, &$atts) {
 	
 		switch ($template_id) {
@@ -90,9 +127,10 @@ class GD_Template_Processor_LoginForms extends GD_Template_Processor_FormsBase {
 
 			case GD_TEMPLATE_FORM_LOGOUT:
 
-				// Do not show if user already logged out
+				// // Do not show if user already logged out
+				// // Notice that it works for the domain from wherever this block is being fetched from!
+				// $this->append_att($template_id, $atts, 'class', 'visible-loggedin-'.GD_TemplateManager_Utils::get_domain_id(get_site_url()));
 				$this->append_att($template_id, $atts, 'class', 'visible-loggedin');
-
 
 				// Add the description
 				$description = sprintf(

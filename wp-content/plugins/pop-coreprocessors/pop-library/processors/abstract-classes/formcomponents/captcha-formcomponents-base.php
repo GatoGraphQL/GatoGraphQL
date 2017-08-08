@@ -90,6 +90,11 @@ class GD_Template_Processor_CaptchaFormComponentsBase extends GD_Template_Proces
 
 			$ret['placeholder'] = $placeholder;
 		}
+
+		if ($wrapper_class = $this->get_att($template_id, $atts, 'wrapper-class')) {
+
+			$ret[GD_JS_CLASSES]['wrapper'] = $wrapper_class;
+		}
 				
 		return $ret;
 	}

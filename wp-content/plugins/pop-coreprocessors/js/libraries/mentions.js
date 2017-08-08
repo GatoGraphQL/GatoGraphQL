@@ -3,14 +3,16 @@ popMentions = {
 
 	// Backup the previous results
 	previousData: {},
+	// domain: null,
 
 	//-------------------------------------------------
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	documentInitialized : function() {
+	documentInitialized : function(args) {
 	
 		var t = this;
+		// t.domain = args.domain;
 
 		// Load the Prefetch URLs
 		t.prefetch();
@@ -117,7 +119,7 @@ popMentions = {
 
 		var t = this;
 		var delimiter = t.infereDelimiter(item);
-		var html = popManager.getHtml(M.MENTIONS.TYPES[delimiter].template, item);
+		var html = popManager.getHtml(/*t.domain, */M.MENTIONS.TYPES[delimiter].template, item);
 		return '<li><a href="javascript:;"><span>'+html+'</span></a></li>';
 	},
 

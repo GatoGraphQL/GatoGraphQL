@@ -275,11 +275,11 @@ popWaypoints = {
 			block.on('fetchCompleted', function(e) {
 				
 				var block = $(this);
-				var blockParams = popManager.getBlockParams(pageSection, block);
+				// var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
+				// if (blockQueryState[M.URLPARAM_STOPFETCHING]) {	
 				// Update waypoint
-				// if (!blockParams[M.DATALOAD_INTERNALPARAMS][M.URLPARAM_STOPFETCHING]) {	
-				if (blockParams[M.URLPARAM_STOPFETCHING]) {	
+				if (popManager.stopFetchingBlock(pageSection, block)) {
 
 					// If stop fetching no need to use the waypoint anymore. Re-enable it only when filtering,
 					// since that's the only way to re-fill the content
@@ -399,10 +399,10 @@ popWaypoints = {
 			block.one('fetchCompleted', function() {
 				
 				// After filtering, re-enable waypoints
-				var blockParams = popManager.getBlockParams(pageSection, block);
-				if (!blockParams[M.URLPARAM_STOPFETCHING]) {
+				// var blockQueryState = popManager.getBlockQueryState(pageSection, block);
+				// if (!blockQueryState[M.URLPARAM_STOPFETCHING]) {
+				if (!popManager.stopFetchingBlock(pageSection, block)) {
 					waypoint.enable();
-					// waypoint.context.refresh();
 				}
 				else {
 					t.reEnable(pageSection, block, waypoint);

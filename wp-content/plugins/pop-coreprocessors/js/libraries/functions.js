@@ -157,7 +157,7 @@ popFunctions = {
 	fillAddonURLInput : function(args) {
 
 		var t = this;
-		var targets = args.targets, link = args.relatedTarget;
+		var domain = args.domain, targets = args.targets, link = args.relatedTarget;
 
 		// Whenever replicating an Addon, we might want to pick extra information from the opening link (relatedTarget), eg: Header from att data-header for the Contact Profile Addon
 		if (link) {
@@ -165,7 +165,7 @@ popFunctions = {
 			targets.each(function() {
 
 				var input = $(this);
-				t.fillURLInput(input, link);
+				t.fillURLInput(domain, input, link);
 			});
 		}
 	},
@@ -174,7 +174,7 @@ popFunctions = {
 
 		var t = this;
 
-		var targets = args.targets;
+		var domain = args.domain, targets = args.targets;
 		targets.each(function() {
 
 			var input = $(this);
@@ -182,7 +182,7 @@ popFunctions = {
 			modal.on('show.bs.modal', function(e) {
 
 				var link = $(e.relatedTarget);
-				t.fillURLInput(input, link);
+				t.fillURLInput(domain, input, link);
 			});
 		});
 	},
@@ -248,8 +248,9 @@ popFunctions = {
 		});
 		block.on('fetchCompleted', function(e) {
 
-			var blockParams = popManager.getBlockParams(pageSection, block);
-			if (blockParams[M.URLPARAM_STOPFETCHING]) {
+			// var blockQueryState = popManager.getBlockQueryState(pageSection, block);
+			// if (blockQueryState[M.URLPARAM_STOPFETCHING]) {
+			if (popManager.stopFetchingBlock(pageSection, block)) {
 
 				targets.addClass('hidden');
 			}
@@ -360,14 +361,14 @@ popFunctions = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		targets.each(function() {
 
 			var iframe = $(this);
 			var block = popManager.getBlock(iframe);
 
 			// Embed is the default urlType, but API also enabled
-			var jsSettings = popManager.getJsSettings(pageSection, block, iframe);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block, iframe);
 			var urlType = jsSettings['url-type'] || 'embed';
 			var modal = block.closest('.modal');
 			modal.on('show.bs.modal', function(e) {
@@ -380,14 +381,14 @@ popFunctions = {
 				}
 
 				var link = $(e.relatedTarget);
-				var url = t.getUrl(link, true);
+				var url = t.getUrl(domain, link, true);
 				if (urlType == 'embed') {
 					url = popManager.getEmbedUrl(url);
 				}
 				else if (urlType == 'api') {
 					url = popManager.getAPIUrl(url);
 				}
-				t.embedPreview(pageSection, block, iframe, url);
+				t.embedPreview(domain, pageSection, block, iframe, url);
 			});
 		});
 	},
@@ -396,7 +397,7 @@ popFunctions = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.each(function() {
 
 			var connector = $(this);
@@ -404,11 +405,11 @@ popFunctions = {
 			input.change(function() {
 				
 				var input = $(this);
-				t.embedPreviewFromInput(pageSection, block, connector);
+				t.embedPreviewFromInput(domain, pageSection, block, connector);
 			});
 
 			// If the input already has a value, then already do the embed (eg: Edit Link)
-			t.embedPreviewFromInput(pageSection, block, connector);
+			t.embedPreviewFromInput(domain, pageSection, block, connector);
 		});
 	},
 
@@ -416,20 +417,20 @@ popFunctions = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		targets.each(function() {
 
 			var input = $(this);
 			var block = popManager.getBlock(input);
 			
 			// Default: Copy Search URL (ie: do nothing else to the url)
-			var jsSettings = popManager.getJsSettings(pageSection, block, input);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block, input);
 			var urlType = jsSettings['url-type'] || '';
 			var modal = input.closest('.modal');
 			modal.on('show.bs.modal', function(e) {
 
 				var link = $(e.relatedTarget);
-				var url = t.getUrl(link);
+				var url = t.getUrl(domain, link);
 
 				// Maybe the URL type is none, then leave the URL as it is (eg: Copy Search URL),
 				// or it may need to add extra params, like embed or api
@@ -500,7 +501,7 @@ popFunctions = {
 	reset : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		// When clicking on this button, reset the block (eg: for Create new Project, allows to re-draw the form)
 		targets.click(function(e) {
@@ -509,7 +510,7 @@ popFunctions = {
 			var button = $(this);
 			var block = popManager.getBlock(button);
 			
-			popManager.reset(pageSection, block);
+			popManager.reset(domain, pageSection, block);
 
 			// Also close the message feedback
 			popManager.closeMessageFeedback(block);
@@ -687,7 +688,7 @@ popFunctions = {
 		}
 	},
 
-	embedPreviewFromInput : function(pageSection, block, connector) {
+	embedPreviewFromInput : function(domain, pageSection, block, connector) {
 
 		var t = this;
 
@@ -704,7 +705,7 @@ popFunctions = {
 			// // Because the iframe will be regenerated, the id to the iframe will become obsolete,
 			// // so update it. Since doing REPLACE_INLINE, the new iframe will be the targetContainer
 			var iframe = $(connector.data('iframe-target'));
-			var merged = t.embedPreview(pageSection, block, iframe, url);
+			var merged = t.embedPreview(domain, pageSection, block, iframe, url);
 			connector.data('iframe-target', '#'+merged.targetContainer.attr('id'));
 		}
 	},
@@ -715,13 +716,13 @@ popFunctions = {
 		var val, urlparam = input.data('urlparam');
 		if (urlparam) {
 
-			var url = block.data('paramsscope-url');
+			var url = popManager.getBlockTopLevelURL(block);//popManager.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/;
 			val = getParam(urlparam, url);
 		}
 		return val || '';
 	},
 
-	embedPreview : function(pageSection, block, iframe, url) {
+	embedPreview : function(domain, pageSection, block, iframe, url) {
 
 		var t = this;
 
@@ -736,12 +737,13 @@ popFunctions = {
 
 		// Run again the Handlebars template to re-print the image with the new data
 		var template = iframe.data('templateid');
-		popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
-		var merged = popManager.mergeTargetTemplate(pageSection, block, template, options);
-		popManager.runJSMethods(pageSection, block, template, 'full');
+		popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+		// var domain = block.data('domain') || getDomain(block.data('toplevel-url'));
+		var merged = popManager.mergeTargetTemplate(domain, pageSection, block, template, options);
+		popManager.runJSMethods(domain, pageSection, block, template, 'full');
 
 		// Set the Block URL to indicate from where the session-ids must be retrieved
-		var iframeid = popJSRuntimeManager.getLastGeneratedId(popManager.getSettingsId(pageSection), popManager.getSettingsId(block), template);
+		var iframeid = popJSRuntimeManager.getLastGeneratedId(domain, popManager.getSettingsId(pageSection), popManager.getSettingsId(block), template);
 		block.data('embed-iframe', '#'+iframeid);
 
 		return merged;
@@ -765,7 +767,7 @@ popFunctions = {
 		input.val(val);
 	},
 
-	fillURLInput : function(input, link) {
+	fillURLInput : function(domain, input, link) {
 
 		var t = this;
 
@@ -773,11 +775,11 @@ popFunctions = {
 		// All properties are stored under the original link, not the interceptor
 		link = popManager.getOriginalLink(link);
 		
-		var url = t.getUrl(link);
+		var url = t.getUrl(domain, link);
 		input.val(url);
 	},
 
-	getUrl : function(link, use_pageurl) {
+	getUrl : function(domain, link, use_pageurl) {
 
 		var t = this;
 
@@ -792,7 +794,7 @@ popFunctions = {
 			// If not, take the url from the block queryUrl. Eg: Discussions share Embed code
 			var blockTarget = $(link.data('blocktarget'));
 			var pageSection = popManager.getPageSection(blockTarget);
-			url = popManager.getBlockFilteringUrl(pageSection, blockTarget, use_pageurl);
+			url = popManager.getBlockFilteringUrl(domain, pageSection, blockTarget, use_pageurl);
 		}
 
 		return url;

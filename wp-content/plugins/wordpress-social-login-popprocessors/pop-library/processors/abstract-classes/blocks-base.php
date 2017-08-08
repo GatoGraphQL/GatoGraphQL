@@ -7,6 +7,24 @@
 
 class GD_WSL_Template_Processor_NetworkLinkBlocksBase extends GD_Template_Processor_BlocksBase {
 
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+
+		$this->add_jsmethod($ret, 'addDomainClass');
+		
+		return $ret;
+	}
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		// For function addDomainClass
+		$ret['prefix'] = 'visible-notloggedin-';
+
+		return $ret;
+	}
+
 	function init_atts($template_id, &$atts) {
 
 		// Visible only if the user not logged in

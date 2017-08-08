@@ -30,6 +30,7 @@ define ('POP_COREPROCESSORS_PAGE_INVITENEWUSERS', false);
 // Profile Pages
 //--------------------------------------------------------
 define ('POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES', false);
+define ('POP_COREPROCESSORS_PAGE_LOADERS_INITIALIZEDOMAIN', false);
 define ('POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA', false);
 define ('POP_COREPROCESSORS_PAGE_MYPROFILE', false);
 define ('POP_COREPROCESSORS_PAGE_MYPREFERENCES', false);

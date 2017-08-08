@@ -68,7 +68,7 @@ popTabs = {
 		var t = this;
 
 		// Save the value of the cookie, if set
-		if ($('#'+M.IDS_TABS_REMEMBERCHECKBOX).attr('checked')) {
+		if ($('#'+M.IDS_TABS_REMEMBERCHECKBOX).prop('checked')) {
 			
 			$.cookie('opentabs', value, { expires: 365, path: "/" });
 		}

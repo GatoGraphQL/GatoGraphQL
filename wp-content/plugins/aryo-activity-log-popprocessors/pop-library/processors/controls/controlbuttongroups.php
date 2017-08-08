@@ -37,20 +37,6 @@ class AAL_PoPProcessors_Template_Processor_ControlButtonGroups extends GD_Templa
 		
 		return $ret;
 	}
-	
-	// function init_atts($template_id, &$atts) {
-	
-	// 	switch ($template_id) {
-				
-	// 		case AAL_POPPROCESSORS_TEMPLATE_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD:
-
-	// 			// Only if the user is logged in
-	// 			$this->append_att($template_id, $atts, 'class', 'visible-loggedin');	
-	// 			break;
-	// 	}
-		
-	// 	return parent::init_atts($template_id, $atts);
-	// }
 }
 
 /**---------------------------------------------------------------------------------------------------------------

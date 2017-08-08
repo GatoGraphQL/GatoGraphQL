@@ -11,7 +11,7 @@ Author URI: https://getpop.org/en/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_CDNCORE_VERSION', 0.152);
+define ('POP_CDNCORE_VERSION', 0.153);
 define ('POP_CDNCORE_DIR', dirname(__FILE__));
 define ('POP_CDNCORE_ASSETS_DIR', POP_CDNCORE_DIR.'/kernel/cdn/assets');
 

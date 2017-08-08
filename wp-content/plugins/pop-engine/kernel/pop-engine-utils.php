@@ -13,6 +13,16 @@ class GD_TemplateManager_Utils {
 	public static $errors = array()/*, $is_search_engine = null*/;
 	public static $vars = array();
 
+	public static function get_domain_id($domain) {
+
+	    // The domain ID is simply removing the scheme, and replacing all dots with '-'
+	    // It is needed to assign an extra class to the event
+	    $domain_id = str_replace('.', '-', remove_scheme($domain));
+
+	    // Allow to override the domainId, to unify DEV and PROD domains
+		return apply_filters('gd_templatemanager:domain_id', $domain_id, $domain);	
+	}
+
 	public static function is_search_engine() {
 
 		// if (is_null(self::$is_search_engine)) {
@@ -331,6 +341,7 @@ class GD_TemplateManager_Utils {
 		// $mode = $_REQUEST[GD_URLPARAM_MODE];
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
+		$domain = $_REQUEST[POP_URLPARAM_DOMAIN];
 		
 		// Target/Module default values (for either empty, or if the user is playing around with the url)
 		$modules = array(
@@ -377,6 +388,7 @@ class GD_TemplateManager_Utils {
 			'settingsformat' => $settingsformat,
 			'tab' => $tab,
 			'action' => $action,
+			'domain' => $domain,
 			'theme' => $gd_theme_manager->get_theme() ? $gd_theme_manager->get_theme()->get_name() : '',
 			'thememode' => $gd_theme_manager->get_thememode() ? $gd_theme_manager->get_thememode()->get_name() : '',
 			'themestyle' => $gd_theme_manager->get_themestyle() ? $gd_theme_manager->get_themestyle()->get_name() : '',

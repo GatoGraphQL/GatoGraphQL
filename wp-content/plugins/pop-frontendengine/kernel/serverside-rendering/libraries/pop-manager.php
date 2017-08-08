@@ -4,9 +4,15 @@ class PoP_ServerSide_Manager {
 	//-------------------------------------------------
 	// INTERNAL variables
 	//-------------------------------------------------
+	// Comment Leo 21/07/2017: since adding multicomponents for different domains, we group memory, database and userDatabase under property `state`, under which we specify the domain
+	private $state;
+	private $sitemapping;
+	// private $memory;
+	// private $database;
+	// private $userdatabase;
+
 	// Comment Leo: Not needed in PHP => Commented out
 	// private $mergingTemplatePromise;
-	private $memory;
 	// Comment Leo: Not needed in PHP => Commented out
 	// // Used to override the dataset/feedback/params when resetting the block
 	// private $initialBlockMemory;
@@ -17,8 +23,6 @@ class PoP_ServerSide_Manager {
 	// private $replicableMemory;
 	// Comment Leo: Not needed in PHP => Commented out
 	// private $runtimeMemory;
-	private $database;
-	private $userdatabase;
 	// Comment Leo: Not needed in PHP => Commented out
 	// private $firstLoad;
 	// Comment Leo: Not needed in PHP => Commented out
@@ -29,19 +33,27 @@ class PoP_ServerSide_Manager {
 		PoP_ServerSide_Libraries_Factory::set_popmanager_instance($this);
 		
 		// Initialize internal variables
+		$this->sitemapping = array();
+		$this->state = array();
+		// $this->memory = array(
+		// 	'settings' => array(),
+		// 	'runtimesettings' => array(),
+		// 	'dataset' => array(),
+		// 	'feedback' => array(
+		// 		'block' => array(),
+		// 		'pagesection' => array(),
+		// 		'toplevel' => array(),
+		// 	),
+		// 	'query-state' => array(
+		// 		'general' => array(),
+		// 		'domain' => array(),
+		// 	),
+		// );
+		// $this->database = array();
+		// $this->userdatabase = array();
+
 		// Comment Leo: Not needed in PHP => Commented out
 		// $this->mergingTemplatePromise = false;
-		$this->memory = array(
-			'settings' => array(),
-			'runtimesettings' => array(),
-			'dataset' => array(),
-			'feedback' => array(
-				'block' => array(),
-				'pagesection' => array(),
-				'toplevel' => array(),
-			),
-			'params' => array(),
-		);
 		// Comment Leo: Not needed in PHP => Commented out
 		// // Used to override the dataset/feedback/params when resetting the block
 		// $this->initialBlockMemory = array();
@@ -53,8 +65,6 @@ class PoP_ServerSide_Manager {
 		// 	'general' => array(),
 		// 	'url' => array(),
 		// );
-		$this->database = array();
-		$this->userdatabase = array();
 		// Comment Leo: Not needed in PHP => Commented out
 		// $this->firstLoad = array();
 	}
@@ -63,9 +73,22 @@ class PoP_ServerSide_Manager {
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
-	function getMemory() {
+	function getMemory($domain) {
 
-		return $this->memory;
+		// return $this->memory;
+		return $this->state[$domain]['memory'];
+	}
+
+	function getDatabase($domain) {
+
+		// return $this->memory;
+		return $this->state[$domain]['database'];
+	}
+
+	function getUserDatabase($domain) {
+
+		// return $this->memory;
+		return $this->state[$domain]['userdatabase'];
 	}
 
 	// ------------------------------------------------------
@@ -342,7 +365,48 @@ class PoP_ServerSide_Manager {
 	// Comment Leo: passing extra parameter $json in PHP
 	// ------------------------------------------------------
 	function init($json) {
-	
+
+		// Initialize the state for all allowed domains
+		foreach(array(get_site_url())/*PoP_Frontend_ConfigurationUtils::get_allowed_domains()*/ as $domain) {
+
+			$this->state[$domain] = array(
+				'memory' => array(
+					'settings' => array(
+						'js-settings' => array(),
+						'jsmethods' => array(
+							'pagesection' => array(),
+							'block' => array(),
+						),
+						'templates-cbs' => array(),
+						'templates-paths' => array(),
+						'db-keys' => array(),
+						'configuration' => array(),
+						// 'template-sources' => array(),
+					),
+					'runtimesettings' => array(
+						'query-url' => array(),
+						'query-multidomain-urls' => array(),
+						'configuration' => array(),
+						'js-settings' => array(),
+					),
+					'dataset' => array(),
+					'feedback' => array(
+						'block' => array(),
+						'pagesection' => array(),
+						'toplevel' => array(),
+					),
+					'query-state' => array(
+						'general' => array(),
+						'domain' => array(),
+					)
+				),
+				'database' => array(),
+				'userdatabase' => array(),
+			);
+		}
+
+		$domain = get_site_url();
+
 		// // Comment Leo 22/08/2016: when is_search_engine(), there is no #toplevel, so do nothing
 		// if ($('#'+popPageSectionManager.getTopLevelSettingsId()).length) {
 
@@ -350,7 +414,7 @@ class PoP_ServerSide_Manager {
 
 			// Initialize Settings, Feedback and Data
 			// Comment Leo: passing extra parameter $json in PHP
-			$this->initTopLevelJson($json);
+			$this->initTopLevelJson($domain, $json);
 
 			// // Make sure the localStorage has no stale entries
 			// t.initLocalStorage();
@@ -360,7 +424,7 @@ class PoP_ServerSide_Manager {
 			// popUserAccount.initialLogin();
 
 			// Obtain what pageSections to merge from the configuration
-			// $memory = $this->getMemory();
+			// $memory = &$this->getMemory($domain);
 
 			// // Keep the pageSection DOM elems
 			// var pageSections = [];
@@ -369,7 +433,9 @@ class PoP_ServerSide_Manager {
 			// and then execute all JS on them ($this->pageSectionInitialized(pageSection)), and in between remove the "loading" screen
 			// this way, the first paint is much faster, for a better user experience
 			// Step 0: initialize the pageSection
-			foreach($this->memory['settings']['configuration'] as $pssId => &$psConfiguration) {
+			// foreach($this->memory['settings']['configuration'] as $pssId => &$psConfiguration) {
+			// foreach($memory['settings']['configuration'] as $pssId => &$psConfiguration) {
+			foreach($this->state[$domain]['memory']['settings']['configuration'] as $pssId => &$psConfiguration) {
 
 				// $psId = $psConfiguration[GD_JS_FRONTENDID];
 				// pageSection = $('#'+psId);
@@ -378,9 +444,9 @@ class PoP_ServerSide_Manager {
 				// pageSection.attr('data-settings-id', pssId);
 				// pageSection.addClass('pop-pagesection');
 
-				$this->initPageSectionSettings($pssId/*$pageSection*/, $psConfiguration/*$this->memory['settings']['configuration'][$pssId]*/); // Changed line in PHP, different in JS
+				$this->initPageSectionSettings($domain, $pssId/*$pageSection*/, $psConfiguration/*$this->memory['settings']['configuration'][$pssId]*/); // Changed line in PHP, different in JS
 				// Insert into the Runtime to generate the ID
-				$this->addPageSectionIds($pssId/*$pageSection*/, $psConfiguration[GD_JS_TEMPLATE]); // Changed line in PHP, different in JS
+				$this->addPageSectionIds($domain, $pssId/*$pageSection*/, $psConfiguration[GD_JS_TEMPLATE]); // Changed line in PHP, different in JS
 
 				// // Allow plugins to catch events for the rendering
 				// $this->initPageSection($pageSection);
@@ -535,16 +601,17 @@ class PoP_ServerSide_Manager {
 		}
 	}
 
-	function addPageSectionIds($pageSection, $template) {
+	function addPageSectionIds($domain, $pageSection, $template) {
 
 		$pssId = $this->getSettingsId($pageSection);
 		// $psId = pageSection.attr('id');
 
 		// Insert into the Runtime to generate the ID
 		$popJSRuntimeManager = PoP_ServerSide_Libraries_Factory::get_jsruntime_instance();
-		$popJSRuntimeManager->addPageSectionId($pssId, $template, $psId);
+		$popJSRuntimeManager->addPageSectionId($domain, $domain, $pssId, $template, $psId);
 
 		$args = array(
+			'domain' => $domain,
 			'pageSection' => $pageSection,
 			'template' => $template,
 		);
@@ -1591,7 +1658,7 @@ class PoP_ServerSide_Manager {
 	// 			// Delete all stale entries: all those starting with the website URL
 	// 			// Solution taken from https://stackoverflow.com/questions/7591893/html5-localstorage-jquery-delete-localstorage-keys-starting-with-a-certain-wo
 	// 			Object.keys(localStorage).forEach(function(key) { 
-	// 				if (key.startsWith(M.HOME_URL)) {
+	// 				if (key.startsWith(M.HOME_DOMAIN)) {
 	// 					localStorage.removeItem(key); 
 	// 				} 
 	// 			}); 
@@ -1656,15 +1723,15 @@ class PoP_ServerSide_Manager {
 	// 	var currentURL = window.location.href;
 		
 	// 	// Special case for the homepage: the link must have the final '/'
-	// 	if (currentURL == M.HOME_URL) {
-	// 		currentURL = M.HOME_URL+'/';
+	// 	if (currentURL == M.HOME_DOMAIN) {
+	// 		currentURL = M.HOME_DOMAIN+'/';
 	// 	}
 
 	// 	// Special case for qTranslateX: if we are loading the homepage, without the language information
 	// 	// (eg: https://kuwang.com.ar), and a tab with the language is open (eg: https://kuwang.com.ar/es/)
 	// 	// then have it removed, or the homepage will be open twice. For that, we assume the current does have
 	// 	// the language information, so it will be removed below
-	// 	if (currentURL == M.HOME_URL+'/' && M.HOMELOCALE_URL) {
+	// 	if (currentURL == M.HOME_DOMAIN+'/' && M.HOMELOCALE_URL) {
 	// 		currentURL = M.HOMELOCALE_URL+'/';
 	// 	}
 
@@ -2074,9 +2141,9 @@ class PoP_ServerSide_Manager {
 	// 	var options = {};
 
 	// 	// If the URL is not from this same website, but from any aggregated website, then allow the cross domain
-	// 	if(!url.startsWith(M.HOME_URL)) {
+	// 	if(!url.startsWith(M.HOME_DOMAIN)) {
 
-	// 		$.each(M.ALLOWED_URLS, function(index, allowed) {
+	// 		$.each(M.ALLOWED_DOMAINS, function(index, allowed) {
 
 	// 			if(url.startsWith(allowed)) {
 
@@ -2964,9 +3031,9 @@ class PoP_ServerSide_Manager {
 	// 	return unique;
 	// }
 
-	function getUniqueId() {
+	function getUniqueId($domain) {
 
-		$tlFeedback = $this->getTopLevelFeedback();
+		$tlFeedback = $this->getTopLevelFeedback($domain);
 		return $tlFeedback[POP_UNIQUEID];
 	}
 
@@ -3159,16 +3226,16 @@ class PoP_ServerSide_Manager {
 	// 	$(document).triggerHandler('rendered', [target, newDOMs, targetContainers]);
 	// }
 
-	function getPageSectionConfiguration($pageSection) {
+	function getPageSectionConfiguration($domain, $pageSection) {
 		
 		$pssId = $this->getSettingsId($pageSection);
-		return $this->getMemory()['settings']['configuration'][$pssId];
+		return $this->getMemory($domain)['settings']['configuration'][$pssId];
 	}
 
-	function getTargetConfiguration($pageSection, $target, $template) {
+	function getTargetConfiguration($domain, $pageSection, $target, $template) {
 	
-		$templatePath = $this->getTemplatePath($pageSection, $target, $template);
-		$targetConfiguration = $this->getPageSectionConfiguration($pageSection);
+		$templatePath = $this->getTemplatePath($domain, $pageSection, $target, $template);
+		$targetConfiguration = $this->getPageSectionConfiguration($domain, $pageSection);
 		
 		// Go down all levels of the configuration, until finding the level for the template-cb
 		if ($templatePath) {
@@ -3196,10 +3263,10 @@ class PoP_ServerSide_Manager {
 		}
 	}
 
-	function replaceFromItemObject($pssId, $bsId, $template, $itemObject, &$override, $strReplace) {
+	function replaceFromItemObject($domain, $pssId, $bsId, $template, $itemObject, &$override, $strReplace) {
 	
-		$feedback = $this->getTopLevelFeedback();
-		$targetConfiguration = $this->getTargetConfiguration($pssId, $bsId, $template);
+		$feedback = $this->getTopLevelFeedback($domain);
+		$targetConfiguration = $this->getTargetConfiguration($domain, $pssId, $bsId, $template);
 		foreach($strReplace as $replace) {	
 
 			$replaceWhereField = $replace['replace-where-field'];
@@ -3301,7 +3368,7 @@ class PoP_ServerSide_Manager {
 	// }
 
 	// Comment Leo: passing extra parameter $json in PHP
-	function initTopLevelJson($json) {
+	function initTopLevelJson($domain, $json) {
 
 		// Initialize Settings
 		// var jsonHtml = $('#'+popPageSectionManager.getTopLevelSettingsId());
@@ -3310,15 +3377,17 @@ class PoP_ServerSide_Manager {
 		// PoP_ServerSideRendering::get_json => self::init => self::initTopLevelJson =>	PoP_ServerSideRendering::get_json
 		// $json = PoP_ServerSideRendering_Factory::get_instance()->get_json();
 
-		$this->database = $json['database'];
-		$this->userdatabase = $json['userdatabase'];
+		$this->sitemapping = $json['sitemapping'];
 
-		// $this->memory = $this->getMemory();
-		$this->memory['settings'] = $json['settings'];
-		$this->memory['runtimesettings'] = $json['runtimesettings'];
-		$this->memory['dataset'] = $json['dataset'];
-		$this->memory['feedback'] = $json['feedback'];
-		$this->memory['params'] = $json['params'];
+		$this->state[$domain]['database'] = $json['database'];
+		$this->state[$domain]['userdatabase'] = $json['userdatabase'];
+
+		// $memory = &$this->getMemory($domain);
+		$this->state[$domain]['memory']['settings'] = $json['settings'];
+		$this->state[$domain]['memory']['runtimesettings'] = $json['runtimesettings'];
+		$this->state[$domain]['memory']['dataset'] = $json['dataset'];
+		$this->state[$domain]['memory']['feedback'] = $json['feedback'];
+		$this->state[$domain]['memory']['query-state'] = $json['query-state'];
 
 		// Comment Leo: Not needed in PHP => Commented out
 		// // Dataset, feedback and Params: the PHP will write empty objects as [] instead of {}, so they will be treated as arrays
@@ -3517,16 +3586,16 @@ class PoP_ServerSide_Manager {
 	function getTemplateSource($template) {
 	
 		// If empty, then the template is its own source		
-		return $this->getMemory()['settings']['template-sources'][$template] ?? $template;
+		return $this->sitemapping['template-sources'][$template] ?? $template;
 	}
 
-	function initPageSectionSettings($pageSection, &$psConfiguration) {
+	function initPageSectionSettings($domain, $pageSection, &$psConfiguration) {
 	
 		// Initialize TopLevel / Blocks from the info provided in the feedback
-		$tls = $this->getTopLevelSettings();
+		$tls = $this->getTopLevelSettings($domain);
 		$psConfiguration['tls'] = $tls;
 
-		$pss = $this->getPageSectionSettings($pageSection);
+		$pss = $this->getPageSectionSettings($domain, $pageSection);
 		$pssId = $this->getSettingsId($pageSection);
 		$psId = $psConfiguration[GD_JS_FRONTENDID];
 		$pss['psId'] = $psId; // This line was added to the PHP, it's not there in the JS
@@ -3540,7 +3609,7 @@ class PoP_ServerSide_Manager {
 			foreach($psConfiguration[GD_JS_MODULES] as $bsId => &$bConfiguration) {
 				
 				$bId = $bConfiguration[GD_JS_FRONTENDID];
-				$bs = $this->getBlockSettings($pssId, $bsId, $psId, $bId);
+				$bs = $this->getBlockSettings($domain, $domain, $pssId, $bsId, $psId, $bId);
 				$bConfiguration/*$psConfiguration[GD_JS_MODULES][$bsId]*/['tls'] = $tls;
 				$bConfiguration/*$psConfiguration[GD_JS_MODULES][$bsId]*/['pss'] = $pss;
 				$bConfiguration/*$psConfiguration[GD_JS_MODULES][$bsId]*/['bs'] = $bs;
@@ -3642,20 +3711,23 @@ class PoP_ServerSide_Manager {
 	// 	});
 	// }
 
-	function getTopLevelSettings() {
+	function getTopLevelSettings($domain) {
 
+		$multidomain_websites = PoP_Frontend_ConfigurationUtils::get_multidomain_websites();
 		return array(
-			'feedback' => $this->getTopLevelFeedback()
+			'domain' => $domain,
+			'domain-id' => $multidomain_websites[$domain] ? $multidomain_websites[$domain]['id'] : GD_TemplateManager_Utils::get_domain_id($domain),
+			'feedback' => $this->getTopLevelFeedback($domain),			
 		);
 	}
 
-	function getPageSectionSettings($pageSection) {
+	function getPageSectionSettings($domain, $pageSection) {
 
 		$pssId = $this->getSettingsId($pageSection);
 		// $psId = $pageSection.attr('id');
 
 		$pageSectionSettings = array(
-			'feedback' => $this->getPageSectionFeedback($pageSection),
+			'feedback' => $this->getPageSectionFeedback($domain, $pageSection),
 			'pssId' => $pssId,
 			// 'psId' => $psId,
 		);
@@ -3663,14 +3735,23 @@ class PoP_ServerSide_Manager {
 		return $pageSectionSettings;
 	}
 
-	function getBlockSettings($pssId, $bsId, $psId, $bId) {
+	function isMultiDomain($blockTLDomain, $pssId, $bsId) {
+	
+		// Comments Leo 27/07/2017: the query-multidomain-urls are stored under the domain from which the block was initially rendered,
+		// and not that from where the data is being rendered
+		$multidomain_urls = $this->getRuntimeSettings($blockTLDomain, $pssId, $bsId, 'query-multidomain-urls');
+		return ($multidomain_urls && count($multidomain_urls) >= 2);
+	}
+
+	function getBlockSettings($domain, $blockTLDomain, $pssId, $bsId, $psId, $bId) {
 	
 		$blockSettings = array(
-			"db-keys" => $this->getDatabaseKeys($pssId, $bsId),
-			'dataset' => $this->getBlockDataset($pssId, $bsId),
-			'feedback' => $this->getBlockFeedback($pssId, $bsId),
+			"db-keys" => $this->getDatabaseKeys($domain, $pssId, $bsId),
+			'dataset' => $this->getBlockDataset($domain, $pssId, $bsId),
+			'feedback' => $this->getBlockFeedback($domain, $pssId, $bsId),
 			'bsId' => $bsId,
 			'bId' => $bId,
+			'is-multidomain' => $this->isMultiDomain($blockTLDomain, $pssId, $bsId),
 		);
 
 		$this->expandBlockSettingsJSKeys($blockSettings);
@@ -3688,47 +3769,47 @@ class PoP_ServerSide_Manager {
 		}
 	}
 
-	function getBlockDataset($pageSection, $block) {
+	function getBlockDataset($domain, $pageSection, $block) {
 	
 		$pssId = $this->getSettingsId($pageSection);
 		$bsId = $this->getSettingsId($block);
 		
-		return $this->getMemory()['dataset'][$pssId][$bsId];
+		return $this->getMemory($domain)['dataset'][$pssId][$bsId];
 	}
 
-	function getBlockFeedback($pageSection, $block) {
+	function getBlockFeedback($domain, $pageSection, $block) {
 	
 		$pssId = $this->getSettingsId($pageSection);
 		$bsId = $this->getSettingsId($block);
 		
-		return $this->getMemory()['feedback']['block'][$pssId][$bsId];
+		return $this->getMemory($domain)['feedback']['block'][$pssId][$bsId];
 	}
 
-	function getPageSectionFeedback($pageSection) {
+	function getPageSectionFeedback($domain, $pageSection) {
 	
 		$pssId = $this->getSettingsId($pageSection);
-		return $this->getMemory()['feedback']['pagesection'][$pssId];
+		return $this->getMemory($domain)['feedback']['pagesection'][$pssId];
 	}
 
-	function getTopLevelFeedback() {
+	function getTopLevelFeedback($domain) {
 		
-		return $this->getMemory()['feedback']['toplevel'];
+		return $this->getMemory($domain)['feedback']['toplevel'];
 	}
 
-	function getSettings($pageSection, $target, $item) {
+	function getSettings($domain, $pageSection, $target, $item) {
 		
 		$pssId = $this->getSettingsId($pageSection);
 		$targetId = $this->getSettingsId($target);
-		$memory = $this->getMemory();
+		$memory = $this->getMemory($domain);
 
 		return $memory['settings'][$item][$pssId][$targetId];
 	}
 
-	function getRuntimeSettings($pageSection, $target, $item) {
+	function getRuntimeSettings($domain, $pageSection, $target, $item) {
 		
 		$pssId = $this->getSettingsId($pageSection);
 		$targetId = $this->getSettingsId($target);
-		$memory = $this->getMemory();
+		$memory = $this->getMemory($domain);
 		
 		return $memory['runtimesettings'][$item][$pssId][$targetId];
 	}
@@ -3741,20 +3822,20 @@ class PoP_ServerSide_Manager {
 	// 	return $this->getRuntimeMemoryPage(pageSection, block)['query-url'];
 	// }
 
-	function getRuntimeConfiguration($pageSection, $block, $el) {
+	function getRuntimeConfiguration($domain, $pageSection, $block, $el) {
 
 		// When getting the block configuration, there's no need to pass el param
 		$el = $el ?? $block;
 		
 		$elsId = $this->getTemplateOrObjectSettingsId($el);
-		$configuration = $this->getRuntimeSettings($pageSection, $block, 'configuration');
+		$configuration = $this->getRuntimeSettings($domain, $pageSection, $block, 'configuration');
 
 		return $configuration[$elsId] ?? array();
 	}
 
-	function getDatabaseKeys($pageSection, $block) {
+	function getDatabaseKeys($domain, $pageSection, $block) {
 	
-		return $this->getSettings($pageSection, $block, 'db-keys');
+		return $this->getSettings($domain, $pageSection, $block, 'db-keys');
 	}
 
 	// ------------------------------------------------------
@@ -3875,21 +3956,26 @@ class PoP_ServerSide_Manager {
 
 	function getDestroyUrl($url) {
 
-		// Comment Leo 10/06/2016: The URL can start with other domains, for the Platform of Platforms
-		$domain = get_site_url();
-		foreach(PoP_Frontend_ConfigurationUtils::get_allowed_urls() as $allowed) {
+		// // Comment Leo 10/06/2016: The URL can start with other domains, for the Platform of Platforms
+		// $domain = get_site_url();
+		// // ------------------------------------------------------
+		// // Comment Leo: Not needed in PHP => Commented out
+		// // ------------------------------------------------------
+		// // foreach(PoP_Frontend_ConfigurationUtils::get_allowed_domains() as $allowed) {
 
-			if(startsWith($url, $allowed)) {
+		// // 	if(startsWith($url, $allowed)) {
 
-				$domain = $allowed;
-				break;
-			}
-		}
+		// // 		$domain = $allowed;
+		// // 		break;
+		// // 	}
+		// // }
 		
-		// Comment Leo 28/10/2015: Use this URL instead of !destroy because
-		// this bit gets stripped off when doing removeParams(url) to get the interceptors, however it is still needed
-		return str_replace($domain, $domain.'/destroy', $url);
-		// return url+'!destroy';
+		// // Comment Leo 28/10/2015: Use this URL instead of !destroy because
+		// // this bit gets stripped off when doing removeParams(url) to get the interceptors, however it is still needed
+		// return str_replace($domain, $domain.'/destroy', $url);
+
+		$domain = get_domain($url);
+		return $domain.'/destroy'.substr($url, strlen($domain));
 	}
 	
 	function getTemplateOrObjectSettingsId($el) {
@@ -4093,9 +4179,9 @@ class PoP_ServerSide_Manager {
 	// 	return allowed;
 	// }
 
-	function getTemplatePath($pageSection, $target, $template) {
+	function getTemplatePath($domain, $pageSection, $target, $template) {
 		
-		$templatePaths = $this->getSettings($pageSection, $target, 'templates-paths');
+		$templatePaths = $this->getSettings($domain, $pageSection, $target, 'templates-paths');
 		return $templatePaths[$template];
 	}
 	
@@ -4159,14 +4245,22 @@ class PoP_ServerSide_Manager {
 		return '';
 	}
 
-	function getItemObject($itemDBKey, $itemObjectId) {
+	function getItemObject($domain, $itemDBKey, $itemObjectId) {
 
 		$userItem = $item = array();
-		if ($this->userdatabase[$itemDBKey] && $this->userdatabase[$itemDBKey][$itemObjectId]) {
-			$userItem = $this->userdatabase[$itemDBKey][$itemObjectId];
+		// if ($this->userdatabase[$itemDBKey] && $this->userdatabase[$itemDBKey][$itemObjectId]) {
+		// 	$userItem = $this->userdatabase[$itemDBKey][$itemObjectId];
+		// }
+		// if ($this->database[$itemDBKey] && $this->database[$itemDBKey][$itemObjectId]) {
+		// 	$item = $this->database[$itemDBKey][$itemObjectId];
+		// }
+		$userdatabase = $this->getUserDatabase($domain);
+		$database = $this->getDatabase($domain);
+		if ($userdatabase[$itemDBKey] && $userdatabase[$itemDBKey][$itemObjectId]) {
+			$userItem = $userdatabase[$itemDBKey][$itemObjectId];
 		}
-		if ($this->database[$itemDBKey] && $this->database[$itemDBKey][$itemObjectId]) {
-			$item = $this->database[$itemDBKey][$itemObjectId];
+		if ($database[$itemDBKey] && $database[$itemDBKey][$itemObjectId]) {
+			$item = $database[$itemDBKey][$itemObjectId];
 		}
 		return array_merge(
 			$userItem, 

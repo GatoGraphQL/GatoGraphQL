@@ -1,3 +1,26 @@
+// Taken from https://stackoverflow.com/questions/6941533/get-protocol-domain-and-port-from-url
+function getDomain(url) {
+
+    var arr = url.split("/");
+    return arr[0] + "//" + arr[2];
+}
+// function getDomain(url, add_scheme) {
+
+//     var arr = url.split("/");
+//     return (add_scheme ? arr[0] + "//" : "") + arr[2];
+// }
+function removeScheme(domain) {
+
+    var arr = domain.split("//");
+    return arr.length == 1 ? arr[0] : arr[1];
+}
+function getDomainId(domain) {
+
+    // The domain ID is simply removing the scheme, and replacing all dots with '-'
+    // It is needed to assign an extra class to the event
+    return removeScheme(domain).replace(/\./g, '-');
+}
+
 function unescapeHtml(unsafe) {
     // Taken from http://stackoverflow.com/questions/4480757/how-do-i-unescape-html-entities-in-js-change-lt-to
     var d = document.createElement("div");

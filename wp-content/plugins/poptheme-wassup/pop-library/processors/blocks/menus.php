@@ -124,6 +124,36 @@ class GD_Template_Processor_CustomMenuBlocks extends GD_Template_Processor_MenuB
 		return $menus[$template_id];
 	}
 
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERLOGGEDIN:
+
+				$this->add_jsmethod($ret, 'addDomainClass');
+				break;
+		}
+		
+		return $ret;
+	}
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERLOGGEDIN:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'menu-';
+				break;
+		}
+
+		return $ret;
+	}
+
 	
 	function init_atts($template_id, &$atts) {
 

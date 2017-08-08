@@ -233,7 +233,7 @@ popBootstrapCarouselControls = {
 	
 		var t = this;
 
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var /*domain = args.domain, */pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		var carousel = t.getCarousel(targets);
 
@@ -244,9 +244,9 @@ popBootstrapCarouselControls = {
 		t.controlCarouselPrev(pageSection, block, carousel, targets, controlPrev);
 
 		// Initialize block
-		block.on('fetchCompleted', function(e) {
+		block.on('fetchDomainCompleted', function(e, status, domain) {
 		
-			t.handleReload(pageSection, block, targets);
+			t.handleReload(domain, pageSection, block, targets);
 		});
 
 		// Initialize variables
@@ -282,11 +282,10 @@ popBootstrapCarouselControls = {
 	
 		var t = this;
 
-		// var pageSection = args.pageSection, block = args.block, targets = args.targets;
-		var blockParams = popManager.getBlockParams(pageSection, block);
+		// var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
 		// If stopped loading and we are in the slide before the last one, disable control
-		if (popBootstrapCarousel.isNthLastSlide(carousel, 2) && blockParams[M.URLPARAM_STOPFETCHING]) {
+		if (popBootstrapCarousel.isNthLastSlide(carousel, 2) && popManager.stopFetchingBlock(pageSection, block)/*blockQueryState[M.URLPARAM_STOPFETCHING]*/) {
 
 			t.disable(controlNext);
 		}
@@ -303,7 +302,7 @@ popBootstrapCarouselControls = {
 		var t = this;
 
 		// var pageSection = args.pageSection, block = args.block, targets = args.targets;
-		var blockParams = popManager.getBlockParams(pageSection, block);
+		var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
 		control.click(function(e) {
 	
@@ -319,7 +318,7 @@ popBootstrapCarouselControls = {
 			if (popBootstrapCarousel.isLastSlide(carousel)) {
 			
 				// If we are already loading, or stopped loading altogether, then disable control and do nothing			
-				if (blockParams.loading.length || blockParams[M.URLPARAM_STOPFETCHING]) {
+				if (blockQueryState.loading.length || popManager.stopFetchingBlock(pageSection, block)/*blockQueryState[M.URLPARAM_STOPFETCHING]*/) {
 		
 					return;
 				}
@@ -369,11 +368,10 @@ popBootstrapCarouselControls = {
 		});
 	},
 
-	handleReload : function(pageSection, block, carouselControls) {
+	handleReload : function(domain, pageSection, block, carouselControls) {
 	
 		var t = this;
-		// var blockFeedback = popManager.getBlockFeedback(pageSection, block);
-		var dataset = popManager.getBlockDataset(pageSection, block);
+		var dataset = popManager.getBlockDataset(domain/*popManager.getBlockTopLevelDomain(block)*/, pageSection, block);
 
 		// Set controls enabled / disabled
 		t.setEnabledDisabled(pageSection, block, carouselControls);
@@ -452,9 +450,8 @@ popBootstrapCarouselControls = {
 			}
 
 			// Disable / Enable next button			
-			var blockParams = popManager.getBlockParams(pageSection, block);
-			// if (popBootstrapCarousel.isLastSlide(carousel) && blockParams[M.DATALOAD_INTERNALPARAMS][M.URLPARAM_STOPFETCHING]) {
-			if (popBootstrapCarousel.isLastSlide(carousel) && blockParams[M.URLPARAM_STOPFETCHING]) {
+			// var blockQueryState = popManager.getBlockQueryState(pageSection, block);
+			if (popBootstrapCarousel.isLastSlide(carousel) && popManager.stopFetchingBlock(pageSection, block)/*blockQueryState[M.URLPARAM_STOPFETCHING]*/) {
 		
 				t.disable(controlNext);
 			}

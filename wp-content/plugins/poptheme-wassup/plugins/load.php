@@ -82,6 +82,10 @@ if (defined('AAL_POPPROCESSORS_VERSION')) {
 	require_once 'aryo-activity-log-popprocessors/load.php';		
 }
 
+if (defined('WSL_POP_VERSION')) {
+	require_once 'wordpress-social-login-popprocessors/load.php';		
+}
+
 // Execute after function as3cf_init in amazon-s3-and-cloudfront/wordpress-s3.php
 add_action( 'aws_init', 'pop_as3cf_init', 100 );
 function pop_as3cf_init() {

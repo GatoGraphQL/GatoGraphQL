@@ -1,13 +1,13 @@
-<div class="{{class}}" style="{{style}}" {{#generateId}}{{id}}{{/generateId}}>
+<div class="{{class}} visible-loggedin-{{tls.domain-id}}" style="{{style}}" {{#generateId}}{{id}}{{/generateId}}>
 	<div class="media">
 		<div class="media-left">
 			<div class="top-useravatar-container">
 				{{#if add-link}}
-					<a href="{{tls.feedback.user.url}}" class="pop-user-url user-avatar thumbnail">
-						<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar">
+					<a href="{{tls.feedback.user.url}}" class="pop-user-url user-avatar thumbnail {{tls.domain-id}}">
+						<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar {{tls.domain-id}}">
 					</a>
 				{{else}}
-					<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar">
+					<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar {{tls.domain-id}}">
 				{{/if}}
 			</div>
 		</div>
@@ -15,11 +15,11 @@
 			<{{name-htmlmarkup}} class="media-heading">
 				<small>{{{titles.top}}}</small><br/>
 				{{#if add-link}}
-					<a href="{{tls.feedback.user.url}}" class="pop-user-url">
-						<span class="pop-user-name">{{{tls.feedback.user.name}}}</span>
+					<a href="{{tls.feedback.user.url}}" class="pop-user-url {{tls.domain-id}}">
+						<span class="pop-user-name {{tls.domain-id}}">{{{tls.feedback.user.name}}}</span>
 					</a>
 				{{else}}
-					<span class="pop-user-name">{{{tls.feedback.user.name}}}</span>
+					<span class="pop-user-name {{tls.domain-id}}">{{{tls.feedback.user.name}}}</span>
 				{{/if}}
 			</{{name-htmlmarkup}}>
 			{{{titles.bottom}}}

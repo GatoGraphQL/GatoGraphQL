@@ -15,8 +15,19 @@ class GD_Template_Processor_FeaturedImageInnerFormComponentsBase extends GD_Temp
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
+		$this->add_jsmethod($ret, 'addDomainClass');
 		$this->add_jsmethod($ret, 'featuredImageSet', 'set');
 		$this->add_jsmethod($ret, 'featuredImageRemove', 'remove');
+		return $ret;
+	}
+
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		// For function addDomainClass
+		$ret['prefix'] = 'featuredimage-';
+
 		return $ret;
 	}
 

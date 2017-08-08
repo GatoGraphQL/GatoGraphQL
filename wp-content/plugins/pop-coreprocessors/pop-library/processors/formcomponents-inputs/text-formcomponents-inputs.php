@@ -124,7 +124,28 @@ class GD_Template_Processor_TextFormComponentInputs extends GD_Template_Processo
 
 				$this->add_jsmethod($ret, 'browserUrl');
 				break;
+		
+			case GD_TEMPLATE_FORMCOMPONENT_SENDERNAME:
+
+				$this->add_jsmethod($ret, 'addDomainClass');
+				break;
 		}
+		return $ret;
+	}
+
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_FORMCOMPONENT_SENDERNAME:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'visible-notloggedin-';
+				break;
+		}
+
 		return $ret;
 	}
 

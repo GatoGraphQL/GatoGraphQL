@@ -9,6 +9,8 @@ define ('GD_URLPARAM_ACTION_PRINT', 'print');
 define ('GD_URLPARAM_TARGET_PRINT', 'print');
 define ('GD_URLPARAM_TARGET_SOCIALMEDIA', 'socialmedia');
 
+define ('POP_URLPARAM_DOMAIN', 'domain');
+
 add_filter('gd_jquery_constants', 'gd_jquery_constants_urlparams');
 function gd_jquery_constants_urlparams($jquery_constants) {
 
@@ -31,6 +33,8 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 	$jquery_constants['URLPARAM_ERROR'] = GD_URLPARAM_ERROR;
 	$jquery_constants['URLPARAM_SILENTDOCUMENT'] = GD_URLPARAM_SILENTDOCUMENT;
 	$jquery_constants['URLPARAM_STORELOCAL'] = GD_URLPARAM_STORELOCAL;
+	$jquery_constants['URLPARAM_NONCES'] = GD_URLPARAM_NONCES;
+	// $jquery_constants['URLPARAM_NONCES_MEDIAFORM'] = GD_URLPARAM_NONCES_MEDIAFORM;
 	
 	$jquery_constants['URLPARAM_BACKGROUNDLOADURLS'] = GD_URLPARAM_BACKGROUNDLOADURLS;
 	
@@ -56,6 +60,9 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 
 	$jquery_constants['URLPARAM_HIDEBLOCK'] = GD_URLPARAM_HIDEBLOCK;
 	$jquery_constants['URLPARAM_STOPFETCHING'] = GD_URLPARAM_STOPFETCHING;
+	
+	// Needed to initialize a domain
+	$jquery_constants['PLACEHOLDER_DOMAINURL'] = add_query_arg(POP_URLPARAM_DOMAIN, '{0}', get_permalink(POP_COREPROCESSORS_PAGE_LOADERS_INITIALIZEDOMAIN));
 
 	return $jquery_constants;
 }

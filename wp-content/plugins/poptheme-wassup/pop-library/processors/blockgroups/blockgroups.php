@@ -402,7 +402,8 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEACCOUNT:
 
 				// Do not show if the user is logged in
-				$this->append_att($template_id, $atts, 'class', 'visible-notloggedin');
+				// Notice that it works for the domain from wherever this block is being fetched from!
+				$this->append_att($template_id, $atts, 'class', 'visible-notloggedin-'.GD_TemplateManager_Utils::get_domain_id(get_site_url()));
 
 				// Give it some formatting
 				$this->append_att($template_id, $atts, 'class', 'well well-sm');

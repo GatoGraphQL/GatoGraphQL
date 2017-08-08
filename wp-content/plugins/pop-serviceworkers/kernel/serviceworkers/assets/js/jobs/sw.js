@@ -31,6 +31,7 @@ var config = {
   themes: $themes,
   outputJSON: $outputJSON,
   origins: $origins,
+  multidomains: $multidomains,
   strategies: $strategies,
   ignore: $ignore,
   params: {
@@ -162,8 +163,9 @@ self.addEventListener('fetch', event => {
     var url = new URL(request.url);
     var criteria = {
       isNotExcluded: !opts.excludedPaths.full[resourceType].some(path => request.url.startsWith(path)),
-      // The pages do not included the locale domain, so add it before doing the comparison
+      // The pages do not include the locale domain, or any of the multidomains (adding the current locale), or the multidomains for the default locale (eg: GetPoP has ES language, but MESYM does not, so it will fallback to its EN default lang) so add it before doing the comparison
       isPageNotExcluded: !opts.excludedPaths.partial[resourceType].some(path => request.url.startsWith(opts.locales.domain+path)),
+      isNotExternalDomain: opts.multidomains.indexOf(url.origin) == -1,
       isGETRequest: request.method === 'GET',
       // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com)
       isFromMyOriginsOrPrecached: (opts.origins.indexOf(url.origin) > -1 || opts.cacheItems[resourceType].indexOf(url) > -1)

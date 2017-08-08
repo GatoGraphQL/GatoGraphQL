@@ -115,6 +115,12 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 
 		$ret[GD_URLPARAM_TITLE] = gd_get_document_title();
 
+		// // Nonces for validation for the Media Manager
+		// $ret[GD_URLPARAM_NONCES] = array(
+		// 	'media-form' => wp_create_nonce('media-form'),
+		// 	'media-send-to-editor' => wp_create_nonce('media-send-to-editor'),
+		// );
+
 		// Allow plugins to keep adding stuff. Eg: language from qTranslate
 		return apply_filters('GD_DataLoad_TopLevelIOHandler:feedback', $ret);
 	}

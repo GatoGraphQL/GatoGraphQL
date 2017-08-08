@@ -7,12 +7,13 @@ popCDN = {
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
-	documentInitialized : function() {
+	documentInitialized : function(args) {
 	
 		var t = this;
 
 		// Will need the thumbprint values from the topLevelFeedback
-		var tlValues = popManager.getTopLevelFeedback()[M.CDN_THUMBPRINTVALUES];
+		var domain = args.domain;
+		var tlValues = popManager.getTopLevelFeedback(domain)[M.CDN_THUMBPRINTVALUES];
 
 		// Set initially the value from the localStorage, if it exists
 		t.thumbprintValues = popManager.getStoredData(t.localStorageKey, false);
@@ -136,7 +137,7 @@ popCDN = {
 		// - CDN URL is defined, 
 		// - the URL is pointing locally (eg: not decentralized), then can use CDN
 		// - the URL allows to use CDN (eg: page_requires_user_state) do not
-		return M.CDN_CONTENT_URI && url.startsWith(M.HOME_URL) && popCDNThumbprints.canUseCDN(url);
+		return M.CDN_CONTENT_URI && url.startsWith(M.HOME_DOMAIN) && popCDNThumbprints.canUseCDN(url);
 	},
 
 	getCDNUrl : function(url) {
@@ -144,7 +145,7 @@ popCDN = {
 		var t = this;
 
 		// Replace the website domain with the CDN domain
-		return M.CDN_CONTENT_URI+url.substr(M.HOME_URL.length);
+		return M.CDN_CONTENT_URI+url.substr(M.HOME_DOMAIN.length);
 	},
 
 	getThumbprintValue : function(url) {

@@ -39,9 +39,11 @@ class GD_DataLoad_IOHandler_List extends GD_DataLoad_IOHandler_Query {
 		return $stop_loading = count($dataset) < $limit;
 	}
 	
-	function get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	// function get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_domain_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
 	
-		$ret = parent::get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		// $ret = parent::get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_domain_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
 		$vars = $this->get_vars($vars_atts, $iohandler_atts);
 
 		// Needed to loadLatest, to know from what time to get results

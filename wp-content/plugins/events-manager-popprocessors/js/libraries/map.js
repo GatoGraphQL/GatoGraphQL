@@ -20,7 +20,7 @@ popMap = {
 	map : function(args) {
 	
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		
 		block.one('rerender', function(action) {
 			
@@ -30,14 +30,14 @@ popMap = {
 		targets.each(function() {
 			
 			var map = $(this);
-			t.triggerShowMap(pageSection, block, map);
+			t.triggerShowMap(domain, pageSection, block, map);
 		});
 	},
 
 	mapModal : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		targets.on('shown.bs.modal', function() {
 
 			var modal = $(this);
@@ -46,7 +46,7 @@ popMap = {
 				var map = $(this);
 				var block = popManager.getBlock(map);
 				if (popManager.jsInitialized(block)) {
-					t.triggerShowMap(pageSection, block, map);
+					t.triggerShowMap(domain, pageSection, block, map);
 				}
 			});
 		});
@@ -71,16 +71,15 @@ popMap = {
 		});
 
 		// Hook the standalone map to the block activity
-		block.on('fetchCompleted', function(e, status) {
+		block.on('fetchDomainCompleted', function(e, status, domain) {
 			
 			// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
-			popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
+			popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
 
 			targets.each(function() {
 
 				var map = $(this);
-				// t.addMarkers(pageSection, block, map, status.reload);
-				t.triggerAddMarkers(pageSection, block, map, status);
+				t.triggerAddMarkers(domain, pageSection, block, map, status);
 			});
 		});
 
@@ -128,51 +127,56 @@ popMap = {
 		});
 	},
 
-	triggerShowMap : function(pageSection, block, map) {
+	triggerShowMap : function(domain, pageSection, block, map) {
 
 		var t = this;
 
 		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
 		if (!popManager.isHidden(map)) {
 		
-			t.execTriggerShowMap(pageSection, block, map);
+			t.execTriggerShowMap(domain, pageSection, block, map);
 		}
 		else {
 
-			t.pendingTriggerMap('showmap', pageSection, block, map);
+			t.pendingTriggerMap('showmap', domain, pageSection, block, map);
 		}
 	},
 
-	triggerAddMarkers : function(pageSection, block, map, status) {
+	triggerAddMarkers : function(domain, pageSection, block, map, status) {
 
 		var t = this;
 
 		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
 		if (!popManager.isHidden(map)) {
 		
-			t.addMarkers(pageSection, block, map, status.reload);
+			// Comment Leo 26/07/2017: since adding domains, we can't just ask for status.reload to know if to remove the current markers,
+			// since that flag will be true for each domain that we are fetching data from, after doing a reload,
+			// so they will keep removing the previous' domains' markers.
+			// var removeCurrent = status.reload;
+			var removeCurrent = status.reload && status.isFirst;
+			t.addMarkers(domain, pageSection, block, map, removeCurrent);
 		}
 		else {
 
-			t.pendingTriggerMap('addmarkers', pageSection, block, map, status);
+			t.pendingTriggerMap('addmarkers', domain, pageSection, block, map, status);
 		}
 	},
 
-	triggerFunction : function(functionName, pageSection, block, map, status) {
+	triggerFunction : function(functionName, domain, pageSection, block, map, status) {
 
 		var t = this;
 					
 		// Call again this same function, to make sure that the map is still not hidden by 1 of the other conditions (eg: pageSectionTab not active AND map inside a collapse)
 		// t.execTriggerShowMap(pageSection, block, map);
 		if (functionName == 'showmap') {
-			t.triggerShowMap(pageSection, block, map);
+			t.triggerShowMap(domain, pageSection, block, map);
 		}
 		else if (functionName == 'addmarkers') {
-			t.triggerAddMarkers(pageSection, block, map, status);
+			t.triggerAddMarkers(domain, pageSection, block, map, status);
 		}
 	},
 
-	pendingTriggerMap : function(functionName, pageSection, block, map, status) {
+	pendingTriggerMap : function(functionName, domain, pageSection, block, map, status) {
 
 		var t = this;
 
@@ -188,7 +192,7 @@ popMap = {
 				block = $('#'+block.attr('id'));
 				if (block.length) {
 					
-					t.triggerFunction(functionName, pageSection, block, map, status);
+					t.triggerFunction(functionName, domain, pageSection, block, map, status);
 				}
 			});
 		}
@@ -200,7 +204,7 @@ popMap = {
 			var collapse = map.parents('.collapse').not('.in');
 			collapse.one('shown.bs.collapse', function() {
 
-				t.triggerFunction(functionName, pageSection, block, map, status);
+				t.triggerFunction(functionName, domain, pageSection, block, map, status);
 			});
 		}
 
@@ -211,13 +215,13 @@ popMap = {
 
 			pageSectionPage.one('shown.bs.tabpane', function() {
 				
-				t.triggerFunction(functionName, pageSection, block, map, status);
+				t.triggerFunction(functionName, domain, pageSection, block, map, status);
 			});
 			// }
 		}
 	},
 
-	execTriggerShowMap : function(pageSection, block, map) {
+	execTriggerShowMap : function(domain, pageSection, block, map) {
 
 		var t = this;
 
@@ -227,7 +231,7 @@ popMap = {
 		// 	t.addMarkers(pageSection, block, map, map.data('markers-removecurrent'));
 		// });
 
-		t.addMarkers(pageSection, block, map, map.data('markers-removecurrent'));
+		t.addMarkers(domain, pageSection, block, map, map.data('markers-removecurrent'));
 
 		// Dispatch a window resize so that the Calendar / Google map gets updated
 		windowResize();
@@ -531,7 +535,7 @@ popMap = {
 		}
 	},
 
-	addMarkers : function(pageSection, block, map, removeCurrent) {
+	addMarkers : function(domain, pageSection, block, map, removeCurrent) {
 
 		var t = this;
 		var gMap = t.getGMap(pageSection, block, map);
@@ -546,12 +550,14 @@ popMap = {
 			t.setMarkersPos(pageSection, block, map, null, true);
 		}
 
-		var markerIds = map.data('marker-ids');
+		// var markerIds = map.data('marker-ids');
+		var markerIds = map.data('marker-ids-'+removeScheme(domain));
 		if (!markerIds || !markerIds.length) return;
 
 		// Set no marker ids on the map, so that when clicking on the tab or collapse again, it doesn't add these markers again
 		// (more since it will override previously added markers using update=true not present currently in data-marker-ids)
-		map.data('marker-ids', null);
+		// map.data('marker-ids', null);
+		map.data('marker-ids-'+removeScheme(domain), null);
 		
 		// Allow to inject markers from other blocks, useful for loading just one map: LocationsMap Modal Block
 		var markersInfo = t.getMarkersInfo(pageSection, block, map);
@@ -693,27 +699,28 @@ popMapRuntime = {
 		$.extend(mempage, empty);
 	},
 
-	drawMarkers : function(pageSection, block, mapDiv) {
+	// This function is invoked from wp-content/plugins/events-manager-popprocessors/js/templates/maps/em-map-script-drawmarkers.tmpl
+	drawMarkers : function(domain, pageSection, block, mapDiv) {
 	
 		var t = this;
 
 		if (popManager.jsInitialized(block)) {
-			t.execDrawMarkers(pageSection, block, mapDiv);
+			t.execDrawMarkers(domain, pageSection, block, mapDiv);
 		}
 		else {
 			block.one('initialize', function() {
-				t.execDrawMarkers(pageSection, block, mapDiv);
+				t.execDrawMarkers(domain, pageSection, block, mapDiv);
 			});
 		}
 	},
-	execDrawMarkers : function(pageSection, block, mapDiv) {
+	execDrawMarkers : function(domain, pageSection, block, mapDiv) {
 	
 		var t = this;
 		var mempage = t.getRuntimeMemoryPage(pageSection, block);
 
 		//Add the data-marker-ids to the pop-map div
-		// mapDiv.data('marker-ids', mempage.marker_ids.join(','));
-		mapDiv.data('marker-ids', mempage.marker_ids);
+		// mapDiv.data('marker-ids', mempage.marker_ids);
+		mapDiv.data('marker-ids-'+removeScheme(domain), mempage.marker_ids);
 	},
 
 	resetMarkerIds : function(pageSection, block) {

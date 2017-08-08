@@ -37,9 +37,9 @@ class GD_DataLoad_IOHandler_AddPost extends GD_DataLoad_IOHandler_Form {
 		return $ret;
 	}
 
-	function get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
 	
-		$ret = parent::get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
 
 		// Empty params needed for initialBlockMemory:
 		// We must send these params empty at the beginning. That way, when clicking on "Reset", it will override

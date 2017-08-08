@@ -99,6 +99,36 @@ class GD_Template_Processor_SubMenus extends GD_Template_Processor_SubMenusBase 
 		return parent::get_blockunititem_url($template_id, $blockunit);
 	}
 
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_SUBMENU_ACCOUNT:
+
+				$this->add_jsmethod($ret, 'addDomainClass');
+				break;
+		}
+		
+		return $ret;
+	}
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_SUBMENU_ACCOUNT:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'visible-notloggedin-';
+				break;
+		}
+
+		return $ret;
+	}
+
 	function init_atts($template_id, &$atts) {
 
 		switch ($template_id) {

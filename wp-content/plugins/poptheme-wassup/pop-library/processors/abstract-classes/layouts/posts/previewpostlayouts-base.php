@@ -65,8 +65,8 @@ class GD_Template_Processor_CustomPreviewPostLayoutsBase extends GD_Template_Pro
 
 	function init_atts($template_id, &$atts) {
 
-		// Make the thumb image responsive
-		if ($this->horizontal_layout($template_id)) {
+		// Make the thumb image responsive if it is not the media layout
+		if (!$this->horizontal_media_layout($template_id)) {
 			if ($thumb = $this->get_post_thumb_template($template_id)) {
 				$this->append_att($thumb, $atts, 'img-class', 'img-responsive');
 			}

@@ -8,7 +8,7 @@ popUserRole = {
 	filterByCommunity : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.change(function (e) {
 
@@ -18,7 +18,7 @@ popUserRole = {
 
 			if (checkbox.is(':checked')) {
 				var user = checkbox.data('user-datum');
-				popTypeahead.triggerSelect(pageSection, block, communityTypeahead, user);
+				popTypeahead.triggerSelect(domain, pageSection, block, communityTypeahead, user);
 			}
 			else {
 				popTypeahead.removeSelected(communityTypeahead, user_id);

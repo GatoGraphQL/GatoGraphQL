@@ -11,7 +11,7 @@ popFeaturedImage = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	documentInitialized : function() {
+	documentInitialized : function(args) {
 
 		var t = this;
 
@@ -24,7 +24,7 @@ popFeaturedImage = {
 		t.frame.on('open',function() {
 
 			// We know which is the featuredImage opening the frame because it is the only one with class "open"
-			var featuredImage = $('.pop-featuredimage.open');
+			var featuredImage = t.getOpenFeaturedImage();
 
 			// If there's an ID already selected, then select it in the Media Manager
 			var selected = featuredImage.find('input[type="hidden"]');
@@ -62,7 +62,8 @@ popFeaturedImage = {
 
 				var block = popManager.getBlock(featuredImage);
 				var pageSection = popManager.getPageSection(block);
-				t.merge(pageSection, block, featuredImage, value, imgsrc);
+				var domain = popManager.getBlockTopLevelDomain(block);
+				t.merge(domain, pageSection, block, featuredImage, value, imgsrc);
 			}
 			
 			featuredImage.removeClass('open');
@@ -88,7 +89,7 @@ popFeaturedImage = {
 	featuredImageRemove : function(args) {
 	
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		
 		targets.click(function(e) {
 				
@@ -96,7 +97,7 @@ popFeaturedImage = {
 			var button = $(this);			
 			var featuredImage = button.closest('.pop-featuredimage');
 
-			t.remove(pageSection, block, featuredImage);
+			t.remove(domain, pageSection, block, featuredImage);
 		});
 	},
 
@@ -104,7 +105,7 @@ popFeaturedImage = {
 	// PUBLIC but not EXPOSED functions
 	//-------------------------------------------------
 
-	merge : function(pageSection, block, featuredImage, value, imgsrc) {
+	merge : function(domain, pageSection, block, featuredImage, value, imgsrc) {
 
 		var t = this;
 
@@ -117,16 +118,31 @@ popFeaturedImage = {
 		
 		// Run again the Handlebars template to re-print the image with the new data
 		var template = featuredImage.data('merge-template');
-		popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
-		popManager.mergeTargetTemplate(pageSection, block, template, options);
-		popManager.runJSMethods(pageSection, block, template, 'full');
+		popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+		// var domain = block.data('domain') || getDomain(block.data('toplevel-url'));
+		popManager.mergeTargetTemplate(domain, pageSection, block, template, options);
+		popManager.runJSMethods(domain, pageSection, block, template, 'full');
 	},
-	remove : function(pageSection, block, featuredImage) {
+	remove : function(domain, pageSection, block, featuredImage) {
 
 		var t = this;
 		
 		// Delete the value, set the default-img 
-		t.merge(pageSection, block, featuredImage, '', '');
+		t.merge(domain, pageSection, block, featuredImage, '', '');
+	},
+	getFrame : function() {
+
+		var t = this;
+
+		// Function needed by popMediaManagerCORS
+		return t.frame;
+	},
+	getOpenFeaturedImage : function() {
+
+		var t = this;
+
+		// We know which is the featuredImage opening the frame because it is the only one with class "open"
+		return $('.pop-featuredimage.open');
 	}	
 };
 })(jQuery);

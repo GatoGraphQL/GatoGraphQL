@@ -214,7 +214,7 @@ class PoP_Mentions {
       // Allow for the popover by adding data-popover-id
       $content = sprintf(
         '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-        '#popover-'.GD_DATABASE_KEY_USERS.'-'.$user->ID,
+        '#popover-'.GD_TemplateManager_Utils::get_domain_id(get_site_url()).'-'.GD_DATABASE_KEY_USERS.'-'.$user->ID,
         get_author_posts_url($user->ID),
         // Instead of the original match, use the user's name
         $user->display_name//$match[0]

@@ -35,4 +35,17 @@ class GD_Template_Processor_MessageFeedbackFrameLayoutsBase extends GD_Template_
 		
 		return $ret;
 	}
+
+	function init_atts($template_id, &$atts) {
+
+		// If the block is multidomain, then make the messagefeedback look smaller,
+		// since many of them may pile up on top of each other, for each domain
+		// (eg: no events for this website, no events for that website)
+		if ($this->get_general_att($atts, 'is-multidomain')) {
+			
+			$this->append_att($template_id, $atts, 'class', 'alert-xs');
+		}
+		
+		return parent::init_atts($template_id, $atts);
+	}
 }

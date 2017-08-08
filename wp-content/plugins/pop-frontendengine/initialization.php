@@ -9,6 +9,9 @@ class PoPFrontend_Initialization {
 
 		load_plugin_textdomain('pop-frontendengine', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('a1');
+
 		// If it is a search engine, there's no need to output the scripts or initialize popManager
 		if (!is_admin()/* && !GD_TemplateManager_Utils::is_search_engine()*/) {
 
@@ -115,7 +118,7 @@ class PoPFrontend_Initialization {
 		);
 
 		$homeurl = get_site_url();
-		$allowed_urls = PoP_Frontend_ConfigurationUtils::get_allowed_urls();
+		$allowed_domains = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
 
 		// Locale is needed to store the Open Tabs under the right language
 		$locale = apply_filters('gd_templatemanager:locale', get_locale());
@@ -123,7 +126,8 @@ class PoPFrontend_Initialization {
 		// Default one: do not send, so that it doesn't show up in the Embed URL
 		$vars = GD_TemplateManager_Utils::get_vars();
 		$themestyle = $vars['themestyle-isdefault'] ? '' : $vars['themestyle'];
-		$background_load = apply_filters(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD, array());
+		// $background_load = apply_filters(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD, array());
+		$background_load = PoP_Frontend_ConfigurationUtils::get_backgroundload_urls();
 		$keepopentabs = apply_filters(POP_HOOK_POPFRONTEND_KEEPOPENTABS, true);
 		$multilayout_labels = PoP_Frontend_ConfigurationUtils::get_multilayout_labels();
 		$multilayout_keyfields = PoP_Frontend_ConfigurationUtils::get_multilayout_keyfields();
@@ -134,10 +138,11 @@ class PoPFrontend_Initialization {
 			GD_URLPARAM_MODULE => GD_URLPARAM_MODULE_DATA,
 			GD_URLPARAM_MANGLED => GD_URLPARAM_MANGLED_NONE,
 		));
+
 		$jquery_constants = array(
-			'HOME_URL' => $homeurl,
 			'INITIAL_URL' => GD_TemplateManager_Utils::get_current_url(), // Needed to always identify which was the first URL loaded
-			'ALLOWED_URLS' => $allowed_urls,
+			'HOME_DOMAIN' => $homeurl,
+			'ALLOWED_DOMAINS' => $allowed_domains,
 			'VERSION' => pop_version(),
 			'LOCALE' => $locale,
 			'API_URLPARAMS' => $api_urlparams,
@@ -147,10 +152,11 @@ class PoPFrontend_Initialization {
 			// This URL is needed to retrieve the user data, if the user is logged in
 			'BACKGROUND_LOAD' => $background_load,
 			'KEEP_OPEN_TABS' => $keepopentabs ? true : '',
-			'USERLOGGEDIN_DATA_PAGEURL' => get_permalink(POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA),
 			'USERLOGGEDIN_LOADINGMSG_TARGET' => apply_filters('gd_templatemanager:userloggedin_loadingmsg_target', null),
 			// Define variable below to be overriden by WP Super Cache (if plugin disabled, it won't break anything)
-			'AJAXURL' => apply_filters('gd_ajax_url', admin_url('admin-ajax.php')),
+			// 'AJAXURL' => apply_filters('gd_ajax_url', admin_url('admin-ajax.php')),
+			'AJAXURL' => admin_url('admin-ajax.php', 'relative'),
+			'UPLOADURL' => admin_url('async-upload.php', 'relative'),
 			// 'THEME' => $vars['theme'],
 			// 'THEMEMODE' => $vars['thememode'],
 			'GMT_OFFSET' => get_option('gmt_offset'),
@@ -162,6 +168,7 @@ class PoPFrontend_Initialization {
 			),
 			'STATUS' => PoP_Frontend_ConfigurationUtils::get_status_settings(),
 			'LABELIZE_CLASSES' => PoP_Frontend_ConfigurationUtils::get_labelize_classes(),
+			'MULTIDOMAIN_WEBSITES' => PoP_Frontend_ConfigurationUtils::get_multidomain_websites(),
 			'ROLES' => gd_roles(),
 			'USERATTRIBUTES' => gd_user_attributes(),
 			'LABELS' => array(

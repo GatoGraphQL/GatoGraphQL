@@ -47,10 +47,13 @@ popJSLibraryManager.register(popWSL, ['wslNetworkLink']);
 //-------------------------------------------------
 // Standard code
 //-------------------------------------------------
+// global variable wsl_login_url
+var wsl_login_url = '';
 function wsl_wordpress_social_login_callback() {
 
 	// If there is a logged-in user, then close the pageSection
-	if (popUserAccount.isLoggedIn()) {
+	if (wsl_login_url && popUserAccount.isLoggedIn(getDomain(wsl_login_url))) {
+
 		if (popWSL.loginBlock) {
 			var pageSection = popManager.getPageSection(popWSL.loginBlock);
 			var closeTime = M.WSL_LOGINUSER_CLOSETIME || 1500;
@@ -74,5 +77,24 @@ window.wsl_wordpress_social_login = function(config) {
 		options['urlfetched-callbacks'] = [wsl_wordpress_social_login_callback];
 	}
 
-	popUserAccount.fetchLoggedInUserData(options);
+	// From the browser URL, induce what URL we are calling from all the available domains
+	wsl_login_url = '';
+	var url = popBrowserHistory.getPossibleDomainURL(window.location.href);
+	var domain = getDomain(url);
+	$.each(M.USERLOGGEDIN_DATA_PAGEURLS, function(index, url) {
+
+		// Check if this is the LoggedIn User Data URL for the browser domain
+		if (url.startsWith(domain)) {
+
+			// We found it!
+			wsl_login_url = url;
+			return -1;
+		}
+	});
+
+	if (wsl_login_url) {
+
+		// Execute the log-in to bring the data, it will also call the callback function to close the hover pageSection
+		popUserAccount.fetchLoggedInUserData(wsl_login_url, options);
+	}
 }

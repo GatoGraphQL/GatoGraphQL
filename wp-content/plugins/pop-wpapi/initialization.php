@@ -5,6 +5,9 @@ class PoP_WPAPI_Initialization {
 
 		load_plugin_textdomain('pop-wpapi', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('a2');
+
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Constants/Configuration for functionalities needed by the plug-in
 		 * ---------------------------------------------------------------------------------------------------------------*/

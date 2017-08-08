@@ -14,7 +14,7 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 		return GD_DATALOAD_DATASTRUCTURE_DEFAULT;
 	}
 
-	function get_formatted_data($settings, $runtimesettings, $data) {
+	function get_formatted_data($settings, $runtimesettings, $sitemapping, $data) {
 	
 		// Combine Settings, Data and Feedback into 1 unique Structure, so that it can be delivered under 1 single JSON for the ajax load
 		$json = array();
@@ -27,12 +27,13 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 				'dataset' => $data['dataset'],
 				'database' => $data['database'],
 				'userdatabase' => $data['userdatabase'],
-				'params' => $data['params'],
-				'feedback' => $data['feedback']
+				'query-state' => $data['query-state'],
+				'feedback' => $data['feedback'],
 			);
 
 			// Settings
 			if ($settings) {
+				$encode['sitemapping'] = $sitemapping;
 				$encode['runtimesettings'] = $runtimesettings;
 				$encode['settings'] = '{SETTINGS}';
 				$json = str_replace('"{SETTINGS}"', $settings, json_encode($encode));
@@ -47,6 +48,7 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 		elseif ($settings) {
 
 			$encode = array(
+				'sitemapping' => $sitemapping,
 				'runtimesettings' => $runtimesettings,
 				'settings' => '{SETTINGS}'
 			);

@@ -31,18 +31,21 @@ class GD_DataLoad_BlockIOHandler extends GD_DataLoad_IOHandler {
 		return $ret;
 	}
 
-	function get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_domain_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
 	
-		$ret = parent::get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_domain_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
 
-		$vars = $this->get_vars($vars_atts, $iohandler_atts);
-		
 		// Always include this param for any block (it can be overriden in implementations, like block-list)
-		// $ret[GD_DATALOAD_INTERNALPARAMS][GD_URLPARAM_STOPFETCHING] = false;
 		$ret[GD_URLPARAM_STOPFETCHING] = false;
 
+		return $ret;
+	}
+
+	function get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	
+		$ret = parent::get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+
 		// Content Loaded?
-		// $ret[GD_DATALOAD_INTERNALPARAMS][GD_DATALOAD_CONTENTLOADED] = $iohandler_atts[GD_DATALOAD_CONTENTLOADED];
 		$ret[GD_DATALOAD_CONTENTLOADED] = $iohandler_atts[GD_DATALOAD_CONTENTLOADED];
 
 		return $ret;

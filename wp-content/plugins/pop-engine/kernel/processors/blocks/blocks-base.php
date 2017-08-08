@@ -23,14 +23,21 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 
 	function get_query_url($template_id, $atts) {		
 		
-		$url = $this->get_dataload_source($template_id, $atts);
+		return $this->get_dataload_source($template_id, $atts);
 
-		if ($proxy_domain = $this->get_dataloadsource_domain($template_id, $atts)) {
+		// $url = $this->get_dataload_source($template_id, $atts);
 
-			$url = str_replace(get_site_url(), $proxy_domain, $url);
-		}
+		// if ($proxy_domain = $this->get_dataloadsource_domain($template_id, $atts)) {
 
-		return $url;
+		// 	$url = str_replace(get_site_url(), $proxy_domain, $url);
+		// }
+
+		// return $url;
+	}
+
+	function get_query_multidomain_urls($template_id, $atts) {		
+		
+		return $this->get_dataload_multidomain_sources($template_id, $atts);
 	}
 
 	function is_blockgroup($template_id) {
@@ -38,15 +45,15 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 		return false;
 	}
 
-	function get_dataloadsource_domain($template_id, $atts) {
+	// function get_dataloadsource_domain($template_id, $atts) {
 
-		if ($proxy_domain = $this->get_att($template_id, $atts, 'dataloadsource-domain')) {
+	// 	if ($proxy_domain = $this->get_att($template_id, $atts, 'dataloadsource-domain')) {
 
-			return $proxy_domain;
-		}
+	// 		return $proxy_domain;
+	// 	}
 
-		return null;
-	}
+	// 	return null;
+	// }
 
 	function get_dataload_source($template_id, $atts) {
 
@@ -56,6 +63,41 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 		}
 	
 		return null;
+	}
+
+	function get_dataload_multidomain_sources($template_id, $atts) {
+
+		if ($domains = $this->get_att($template_id, $atts, 'dataload-multidomain-sources')) {
+
+			return $domains;
+		}
+	
+		// By default, return one element, that being the dataload-source itself
+		if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
+			
+			return array(
+				$dataload_source,
+			);
+		}
+
+		return array();
+	}
+
+	function queries_external_domain($template_id, $atts) {
+
+		if ($sources = $this->get_dataload_multidomain_sources($template_id, $atts)) {
+			
+			$domain = get_site_url();
+			foreach ($sources as $source) {
+
+				if (substr($source, 0, strlen($domain)) != $domain) {
+
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 	
 	//-------------------------------------------------
@@ -169,10 +211,23 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 		 * ---------------------------------------------------------------------------------------------------------------*/
 
 		// Allow is_proxy and is_aggregator to set 'content-loaded' before setting the default value
-		if ($this->get_dataloadsource_domain($template_id, $atts)) {
+		// if ($this->get_dataloadsource_domain($template_id, $atts)) {
+
+		// 	// If proxy => Content not loaded
+		// 	$this->add_att($template_id, $atts, 'content-loaded', false);
+		// }
+		if ($this->queries_external_domain($template_id, $atts)) {
 
 			// If proxy => Content not loaded
 			$this->add_att($template_id, $atts, 'content-loaded', false);
+		}
+
+		// If it is multidomain, add a flag for inner layouts to know and react
+		$multidomain_urls = $this->get_query_multidomain_urls($template_id, $atts);
+		if (is_array($multidomain_urls) && count($multidomain_urls) >= 2) {
+		
+			$this->add_general_att($atts, 'is-multidomain', true);
+			$this->append_att($template_id, $atts, 'class', 'pop-multidomain');
 		}
 
 		// Content Loaded?

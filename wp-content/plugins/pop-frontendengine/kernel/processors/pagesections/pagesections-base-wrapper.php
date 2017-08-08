@@ -38,6 +38,14 @@ class GD_Template_Processor_PageSectionsBaseWrapper extends GD_Template_Processo
 	/***********************************************************/
 	/** Repeated from "parent" class! */
 	/***********************************************************/
+	function get_query_multidomain_urls($template_id, $atts) {
+			
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
 	function get_query_domains($template_id, $atts) {
 			
 		return $this->process($template_id, $atts, __FUNCTION__);

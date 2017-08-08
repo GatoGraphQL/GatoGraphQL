@@ -1,13 +1,13 @@
 <?php
- function lcr595ab0bfd79c3encq($cx, $var) {
+ function lcr598a1c10c2fabencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0bfd79c3raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr598a1c10c2fabraw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr595ab0bfd79c3raw($cx, $v, $ex = 0) {
+ function lcr598a1c10c2fabraw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -31,7 +31,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr595ab0bfd79c3raw($cx, $vv);
+      $ret[] = lcr598a1c10c2fabraw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -147,8 +147,8 @@ return function ($in = null, $options = null) {
 (function($){
 	$(document).one(\'template:merged\', function() {
 
-		var block = $(\'#',lcr595ab0bfd79c3encq($cx, ((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['bId'])) ? $in['bs']['bId'] : null)),'\');
-		var pageSection = $(\'#',lcr595ab0bfd79c3encq($cx, ((isset($in['pss']) && is_array($in['pss']) && isset($in['pss']['psId'])) ? $in['pss']['psId'] : null)),'\');
+		var block = $(\'#',lcr598a1c10c2fabencq($cx, ((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['bId'])) ? $in['bs']['bId'] : null)),'\');
+		var pageSection = $(\'#',lcr598a1c10c2fabencq($cx, ((isset($in['pss']) && is_array($in['pss']) && isset($in['pss']['psId'])) ? $in['pss']['psId'] : null)),'\');
 		popMapRuntime.resetMarkerIds(pageSection, block);
 	});
 })(jQuery);

@@ -13,7 +13,27 @@ class PoP_EditorUtils {
     // If no editor has been initialized, just create the main one, always, at the footer
     // This will be called for HTML output, not for JSON output
     add_action('wp_footer', array('PoP_EditorUtils', 'create_main_editor'));
+
+    // Comment Leo 06/08/2017: moved under PoP_Core_DataLoad_NoncesCheckpointIOHandler_Hooks,
+    // sending the nonces whenever the user is online
+    // // Whenever loading the editor, on any page, add the nonces to the topLevelFeedback
+    // add_action('media_buttons', array('PoP_EditorUtils', 'add_nonces'));
   }
+  // public static function add_nonces() {
+
+  //   // Whenever loading the editor, on any page, add the nonces to the topLevelFeedback
+  //   add_filter('GD_DataLoad_TopLevelIOHandler:feedback', array('PoP_EditorUtils', 'add_nonces_to_feedback'));
+  // }
+  // public static function add_nonces_to_feedback($feedback) {
+
+  //   // Nonces for validation for the Media Manager
+  //   $feedback[GD_URLPARAM_NONCES] = array(
+  //     'media-form' => wp_create_nonce('media-form'),
+  //     'media-send-to-editor' => wp_create_nonce('media-send-to-editor'),
+  //   );
+
+  //   return $feedback;
+  // }
 
   public static function create_main_editor() {
 

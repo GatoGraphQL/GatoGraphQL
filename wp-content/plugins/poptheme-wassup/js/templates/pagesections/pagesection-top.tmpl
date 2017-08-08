@@ -127,19 +127,19 @@
 </ul>
 <div id="account-loading-msg" class="hidden visiblesearch-hidden">{{{titles.account-loading-msg}}}</div>
 <ul class="nav navbar-nav navbar-nav-account visiblesearch-hidden" role="menu">
-	<li class="dropdown nav-account nav-dropdown visible-loggedin">
-		<a title="{{titles.myprofile}}" href="{{tls.feedback.user.url}}" class="pop-user-url user-avatar hidden-xs hidden-sm">
-			<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar img-thumbnail">
+	<li class="dropdown nav-account nav-dropdown visible-loggedin-localdomain">
+		<a title="{{titles.myprofile}}" href="{{tls.feedback.user.url}}" class="pop-user-url {{tls.domain-id}} user-avatar hidden-xs hidden-sm">
+			<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar {{tls.domain-id}} img-thumbnail">
 		</a>
 		<a title="{{titles.myprofile}}" href="#" class="user-avatar hidden-md hidden-lg" {{#generateId targetId=pss.pssId group="void-link"}}{{id}}-useraccount-loggedin{{/generateId}}>
-			<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar img-thumbnail">
+			<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar {{tls.domain-id}} img-thumbnail">
 		</a>
 		<div class="dropdown-menu" role="menu">
 			<div class="media">
 				<div class="media-left">
 					<div class="top-useravatar-container">
-						<a title="{{titles.myprofile}}" href="{{tls.feedback.user.url}}" class="pop-user-url user-avatar thumbnail">
-							<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar">
+						<a title="{{titles.myprofile}}" href="{{tls.feedback.user.url}}" class="pop-user-url {{tls.domain-id}} user-avatar thumbnail">
+							<img src="{{tls.feedback.user.avatar}}" class="pop-user-avatar {{tls.domain-id}}">
 						</a>
 						<a href="{{links.useravatar}}" class="{{classes.useravatar}} useravatar-link" style="{{styles.useravatar}}">
 							{{{titles.useravatar}}}
@@ -147,7 +147,7 @@
 					</div>
 				</div>
 				<div class="media-body" id="{{id}}-menu-userloggedin">
-					<h3 class="media-heading"><a title="{{titles.myprofile}}" href="{{tls.feedback.user.url}}" class="pop-user-url user-avatar"><span class="pop-user-name">{{{tls.feedback.user.name}}}</span></a></h3>
+					<h3 class="media-heading"><a title="{{titles.myprofile}}" href="{{tls.feedback.user.url}}" class="pop-user-url {{tls.domain-id}} user-avatar"><span class="pop-user-name {{tls.domain-id}}">{{{tls.feedback.user.name}}}</span></a></h3>
 					{{#withModule . "block-menu-userloggedin"}}
 						{{enterModule .}}
 					{{/withModule}}
@@ -155,7 +155,7 @@
 			</div>
 		</div>
 	</li>
-	<li class="dropdown nav-account nav-dropdown visible-notloggedin">
+	<li class="dropdown nav-account nav-dropdown visible-notloggedin-localdomain">
 		<a title="{{titles.loginaddprofile}}" href="{{links.login}}" class="hidden-xs hidden-sm">
 			<span class="glyphicon {{icons.account}}"></span>
 		</a>

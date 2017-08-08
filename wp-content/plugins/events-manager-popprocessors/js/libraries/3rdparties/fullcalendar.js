@@ -1,6 +1,9 @@
 (function($){
 popFullCalendar = {
 
+	// domain : '',
+	// promise : false,
+
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
@@ -21,7 +24,7 @@ popFullCalendar = {
 
 		var t = this;
 
-		var pageSection = args.pageSection, block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		var pageSectionPage = popManager.getPageSectionPage(block);
 		pageSectionPage.one('destroy', function() {
@@ -54,7 +57,7 @@ popFullCalendar = {
 		});
 
 		// // block.on('fetched', function(e) {
-		block.on('rendered', function(e) {
+		block.on('rendered', function(e, newDOMs, targetContainers, renderedDomain) {
 
 			var block = $(this);
 			var pageSection = popManager.getPageSection(block);
@@ -65,13 +68,13 @@ popFullCalendar = {
 			// 	block = $('#'+aggregatorData['id']);
 			// }
 			
-			t.execCalendar(pageSection, block, targets, 'update');
+			t.execCalendar(renderedDomain, pageSection, block, targets, 'update');
 
 			// Dispatch a window resize so that the Calendar / Google map gets updated
 			windowResize();
 		});
 
-		t.execCalendar(pageSection, block, targets, 'new');
+		t.execCalendar(domain, pageSection, block, targets, 'new');
 	},
 
 
@@ -145,7 +148,7 @@ popFullCalendar = {
 		$.each(events_data, function(index, event_data) {
 
 			// Check if the event has not been added yet
-			if (!t.isEventLoaded(pageSection, block, event_data.id)) {
+			if (!t.isEventLoaded(pageSection, block, event_data.domain, event_data.id)) {
 
 				// mempage.eventData[event_data.id] = {
 					// itemDBKey: itemDBKey
@@ -154,14 +157,14 @@ popFullCalendar = {
 				events_data_to_add.push(event_data);
 
 				// Mark this event as loaded
-				t.setEventLoaded(pageSection, block, event_data.id);
+				t.setEventLoaded(pageSection, block, event_data.domain, event_data.id);
 			}
 		});
 
 		$.merge(mempage.events, events_data_to_add);
 	},
 
-	execCalendar : function(pageSection, block, targets, state) {
+	execCalendar : function(domain, pageSection, block, targets, state) {
 
 		var t = this;
 
@@ -208,34 +211,64 @@ popFullCalendar = {
 
 			var calendar = $(this);
 
-			// Create fullCalendar elements
-			if (state == 'new') {
-				
-				// Integrate the custom options for the Calendar
-				var jsSettings = popManager.getJsSettings(pageSection, block, calendar);
-				var customOptions = jsSettings.options || {};
-				var calendarOptions = $.extend({}, options, customOptions);
-				var layouts = jsSettings.layouts;
+			// // Use promises, because we need to keep the domain in internal variable t.domain
+			// // So through promises, we make sure that 2 executions do not change t.domain concurrently, leading to conflict
+			// var dfd = $.Deferred();
+			// var lastPromise = t.promise;
+			// t.promise = dfd.promise();
 
-				calendarOptions.eventRender = function(event, element) {
-					
-					t.renderEvent(pageSection, block, layouts, event, element);
-				};
-				calendarOptions.eventAfterAllRender = function(view) {
+			// if (lastPromise) {
+			// 	lastPromise.done(function() {
 
-					t.renderEventAfterAll(pageSection, block, layouts);
-				};
+					// Create fullCalendar elements
+					t.execFullCalendar(domain, pageSection, block, calendar, state, options);
+			// 	});
+			// }
+			// else {
+			// 	// Create fullCalendar elements
+			// 	t.execFullCalendar(domain, pageSection, block, calendar, state, options);
+			// }
 
-				calendar.fullCalendar(calendarOptions);
-			}
-			else if (state == 'update') {
-
-				calendar.fullCalendar('refetchEvents');
-			}
+			// // Resolve the deferred
+			// dfd.resolve();
 		});
 
 		// Set this year/month as loaded
 		t.setDateLoaded(pageSection, block, date);
+	},
+
+	execFullCalendar : function(domain, pageSection, block, calendar, state, options) {
+
+		var t = this;
+
+		// We keep the domain in an internal variable. 
+		// It will be accessed in functions renderEvent and renderEventAfterAll
+		// t.domain = domain;
+
+		// Create fullCalendar elements
+		if (state == 'new') {
+			
+			// Integrate the custom options for the Calendar
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block, calendar);
+			var customOptions = jsSettings.options || {};
+			var calendarOptions = $.extend({}, options, customOptions);
+			var layouts = jsSettings.layouts;
+
+			calendarOptions.eventRender = function(event, element) {
+				
+				t.renderEvent(/*domain, */pageSection, block, layouts, event, element);
+			};
+			calendarOptions.eventAfterAllRender = function(view) {
+
+				t.renderEventAfterAll(/*domain, */pageSection, block, layouts);
+			};
+
+			calendar.fullCalendar(calendarOptions);
+		}
+		else if (state == 'update') {
+
+			calendar.fullCalendar('refetchEvents');
+		}
 	},
 
 	setDateLoaded : function(pageSection, block, date) {
@@ -254,37 +287,38 @@ popFullCalendar = {
 		return mempage.loadedDates[date.year()+'-'+(date.month()+1)] === true;
 	},
 
-	setEventLoaded : function(pageSection, block, eventId) {
+	setEventLoaded : function(pageSection, block, domain, eventId) {
 
 		var t = this;
 		var mempage = t.getRuntimeMemoryPage(pageSection, block);
 
-		mempage.loadedEventIds[eventId] = true;
+		mempage.loadedEventIds[domain] = mempage.loadedEventIds[domain] || {};
+		mempage.loadedEventIds[domain][eventId] = true;
 	},
 
-	isEventLoaded : function(pageSection, block, eventId) {
+	isEventLoaded : function(pageSection, block, domain, eventId) {
 
 		var t = this;
 		var mempage = t.getRuntimeMemoryPage(pageSection, block);
 
-		return mempage.loadedEventIds[eventId] === true;
+		return mempage.loadedEventIds[domain] && mempage.loadedEventIds[domain][eventId] === true;
 	},
 
 	getDate : function(pageSection, block) {
 
 		var t = this;
-		var blockParams = popManager.getBlockParams(pageSection, block);
+		var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
 		// Make sure to not include the leading zeros
-		var year = parseInt(blockParams[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_YEAR]);
-		var month = parseInt(blockParams[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_MONTH]);
+		var year = parseInt(blockQueryState[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_YEAR]);
+		var month = parseInt(blockQueryState[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_MONTH]);
 
 		// Migration to FullCalendar 2.0: use Moment to generate the date
 		// http://arshaw.com/fullcalendar/docs/current_date/defaultDate/
 		return moment(year + '-' + month + '-01', 'YYYY-M-DD');
 	},
 
-	renderEvent : function(pageSection, block, layouts, event, element) {
+	renderEvent : function(/*domain, */pageSection, block, layouts, event, element) {
 
 		var t = this;
 		var mempage = t.getRuntimeMemoryPage(pageSection, block);
@@ -292,8 +326,10 @@ popFullCalendar = {
 		// If the html has already been generated, then use it (eg: on popState)
 		// Otherwise it can't be reproduced, since the Database is already lost
 		// var eventData = mempage.eventData[event.id];
+		var domain = event.domain;
 		var eventId = event.id;
-		var html = mempage.eventsHtml[eventId];
+		mempage.eventsHtml[domain] = mempage.eventsHtml[domain] || {};
+		var html = mempage.eventsHtml[domain][eventId];
 		if (html) {
 
 			// Flag that we must run JS methods on the html that already exists (because it was taken out of the DOM, the methods must be run on it again)
@@ -302,30 +338,24 @@ popFullCalendar = {
 		else {
 
 			var options = {}
-			// var aggregatorData = popManager.getAggregatorBlockData(pageSection, block);
-			// if (aggregatorData) {
-				
-			// 	// First calculate the extra class with the subscribed block
-			// 	options['extend-class'] = popManager.getProxyBlockExtraClass(pageSection, block);
-			// 	block = $('#'+aggregatorData['id']);			
-			// }
 			
-			var dbKeys = popManager.getDatabaseKeys(pageSection, block);
+			var dbKeys = popManager.getDatabaseKeys(domain/*getDomain(block.data('toplevel-url'))*/, pageSection, block);
 			var itemDBKey = dbKeys['db-key'];
 			html = '';
-			popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
+			popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+			// var domain = block.data('domain') || getDomain(block.data('toplevel-url'));
 			$.each(layouts, function(index, layout) {
-				html += popManager.getTemplateHtml(pageSection, block, layout, options, itemDBKey, eventId);
+				html += popManager.getTemplateHtml(domain, pageSection, block, layout, options, itemDBKey, eventId);
 			});
 
 			// Save the html for next time
-			mempage.eventsHtml[eventId] = html;
+			mempage.eventsHtml[domain][eventId] = html;
 		}
 
 		element.html(html);
 	},
 
-	renderEventAfterAll : function(pageSection, block, layouts) {
+	renderEventAfterAll : function(/*domain, */pageSection, block, layouts) {
 
 		var t = this;
 		var mempage = t.getRuntimeMemoryPage(pageSection, block);
@@ -347,8 +377,11 @@ popFullCalendar = {
 			// By executing on 'full', we'll be executing over absolutely all generated ids, ie: both july and august. However,
 			// because august events were taken out of the DOM, then it won't execute anything on them; august events 
 			// will not exist on the calendar anymore by then
-			$.each(layouts, function(index, layout) {
-				popManager.runJSMethods(pageSection, block, layout, 'full');
+			var query_urls = popManager.getQueryMultiDomainUrls(pageSection, block);
+			$.each(query_urls, function(domain, query_url) {
+				$.each(layouts, function(index, layout) {
+					popManager.runJSMethods(domain, pageSection, block, layout, 'full');
+				});
 			});
 		}
 	},
@@ -411,11 +444,11 @@ popFullCalendarControls = {
 
 		var t = this;
 
-		var blockParams = popManager.getBlockParams(pageSection, block);
+		var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
 		// Update the Year / Month Params (this is needed, so that the params are already set if filtering)
-		blockParams[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_YEAR] = date.year();
-		blockParams[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_MONTH] = date.month() + 1; // Month is 0-based, so gotta add 1
+		blockQueryState[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_YEAR] = date.year();
+		blockQueryState[M.DATALOAD_VISIBLEPARAMS][M.URLPARAM_MONTH] = date.month() + 1; // Month is 0-based, so gotta add 1
 	},
 
 	execute : function(pageSection, block, control, operation) {

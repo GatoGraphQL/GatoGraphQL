@@ -812,6 +812,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			/**-------------------------------------------
 			 * OPERATIONAL
 			 *-------------------------------------------*/
+			case POP_COREPROCESSORS_PAGE_LOADERS_INITIALIZEDOMAIN:
 			case POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA:
 			case POP_COREPROCESSORS_PAGE_FOLLOWUSER:
 			case POP_COREPROCESSORS_PAGE_UNFOLLOWUSER:

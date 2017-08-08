@@ -8,7 +8,7 @@ popTypeaheadMap = {
 	typeaheadMap : function(args) {
 	
 		var t = this;
-		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		
 		// var typeaheadMap = elem.find('.pop-typeaheadmap');
 		targets.each(function() {
@@ -28,18 +28,18 @@ popTypeaheadMap = {
 					$.extend(targetConfiguration, {itemObject: datum});
 
 					// Add it to DOM => Execute it => the markerData will be added to popMap.markers
-					// popJSRuntimeManager.deleteBlockLastSessionIds(pageSection, block, template);
-					popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
-					var html = popManager.getTemplateHtml(pageSection, block, template);					
+					popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+					// var domain = block.data('domain') || getDomain(block.data('toplevel-url'));
+					var html = popManager.getTemplateHtml(domain, pageSection, block, template);					
 					popManager.mergeHtml(html, typeaheadMap);
-					popManager.runJSMethods(pageSection, /*pageSectionPage, */block, template, 'last');
-					popJSRuntimeManager.deleteBlockLastSessionIds(pageSection, block, template);
-					
+					popManager.runJSMethods(domain, pageSection, /*pageSectionPage, */block, template, 'last');
+					popJSRuntimeManager.deleteBlockLastSessionIds(domain, pageSection, block, template);
 				}
 
 				// Add the newly added marker to the map
-				map.data('marker-ids', [datum.id]);
-				popMap.addMarkers(pageSection, block, map);
+				// map.data('marker-ids', [datum.id]);
+				map.data('marker-ids-'+removeScheme(domain), [datum.id]);
+				popMap.addMarkers(domain, pageSection, block, map);
 			});
 
 			typeahead.on('close', function(e, alert, markerId) {

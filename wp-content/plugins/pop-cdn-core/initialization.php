@@ -5,6 +5,9 @@ class PoP_CDNCore_Initialization {
 
 		load_plugin_textdomain('pop-cdn-core', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('a7');
+
 		if (!is_admin()) {
 
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
@@ -55,8 +58,9 @@ class PoP_CDNCore_Initialization {
 		}
 
 		// This file is generated dynamically, so it can't be added to any bundle or minified
+		// That's why we use pop_version() as its version, so upgrading the website will fetch again this file
 		global $pop_cdncore_manager;
-		wp_register_script('pop-cdn-core-config', $pop_cdncore_manager->get_fileurl('cdn-config.js'), array(), POP_CDNCORE_VERSION, true);
+		wp_register_script('pop-cdn-core-config', $pop_cdncore_manager->get_fileurl('cdn-config.js'), array(), pop_version(), true);
 		wp_enqueue_script('pop-cdn-core-config');
 	}
 }

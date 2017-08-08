@@ -17,6 +17,8 @@ class PoP_CDNCore_Thumbprint_Comment extends PoP_CDNCore_ThumbprintBase {
     public function get_query() {
         
         return array(
+            'fields' => 'ids',
+            'number' => 1,
             'status' => 'approve',
             'type' => 'comment', // Only comments, no trackbacks or pingbacks
             'order' =>  'DESC',

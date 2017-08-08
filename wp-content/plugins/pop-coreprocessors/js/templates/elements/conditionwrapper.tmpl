@@ -1,5 +1,5 @@
 {{#with itemObject}}
-	{{#ifget . ../condition-field method=../condition-method}}
+	{{#ifget . ../condition-field method=../condition-method context=../.}}
 		{{#each ../template-ids.layouts}}
 			{{#withModule ../../. this}}
 				{{#if ../../../show-div}}

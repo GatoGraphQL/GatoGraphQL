@@ -118,13 +118,45 @@ class GD_Template_Processor_LoginBlocks extends GD_Template_Processor_BlocksBase
 
 			case GD_TEMPLATE_BLOCK_LOGOUT:
 
+				// Notice that it works for the domain from wherever this block is being fetched from!
 				return sprintf(
-					'<p class="visible-notloggedin"><em>%s</em></p>',
+					'<p class="visible-notloggedin-%s"><em>%s</em></p>',
+					GD_TemplateManager_Utils::get_domain_id(get_site_url()),
 					__('You are not logged in.', 'pop-coreprocessors')
 				);
 		}
 	
 		return parent::get_description($template_id, $atts);
+	}
+
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_BLOCK_USERLOGGEDINWELCOME:
+
+				$this->add_jsmethod($ret, 'addDomainClass');
+				break;
+		}
+		
+		return $ret;
+	}
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_BLOCK_USERLOGGEDINWELCOME:
+
+				// For function addDomainClass
+				$ret['prefix'] = 'visible-loggedin-';
+				break;
+		}
+
+		return $ret;
 	}
 	
 	function init_atts($template_id, &$atts) {
@@ -145,6 +177,8 @@ class GD_Template_Processor_LoginBlocks extends GD_Template_Processor_BlocksBase
 			case GD_TEMPLATE_BLOCK_USERLOGGEDINWELCOME:
 
 				// Not visible if user not logged in
+				// Notice that it works for the domain from wherever this block is being fetched from!
+				// $this->append_att($template_id, $atts, 'class', 'visible-loggedin-'.GD_TemplateManager_Utils::get_domain_id(get_site_url()));
 				$this->append_att($template_id, $atts, 'class', 'visible-loggedin');
 				break;
 		}

@@ -34,6 +34,14 @@ class PoPFrontend_Processor_BlocksBaseWrapper extends GD_Template_ProcessorBaseW
 	/***********************************************************/
 	/** Repeated from "parent" class! */
 	/***********************************************************/
+	function get_query_multidomain_urls($template_id, $atts) {		
+		
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
 	function is_blockgroup($template_id) {
 
 		return $this->processor->is_blockgroup($template_id);
@@ -42,15 +50,23 @@ class PoPFrontend_Processor_BlocksBaseWrapper extends GD_Template_ProcessorBaseW
 	/***********************************************************/
 	/** Repeated from "parent" class! */
 	/***********************************************************/
-	function get_dataloadsource_domain($template_id, $atts) {
+	// function get_dataloadsource_domain($template_id, $atts) {
 
-		return $this->process($template_id, $atts, __FUNCTION__);
-	}
+	// 	return $this->process($template_id, $atts, __FUNCTION__);
+	// }
 
 	/***********************************************************/
 	/** Repeated from "parent" class! */
 	/***********************************************************/
 	function get_dataload_source($template_id, $atts) {
+
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+	
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
+	function get_dataload_multidomain_sources($template_id, $atts) {
 
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}

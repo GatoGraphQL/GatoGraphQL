@@ -170,4 +170,9 @@ class PoPTheme_Wassup_Utils {
 		return apply_filters(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN, false);
 		// return apply_filters('PoPTheme_Wassup_Utils:add_mainpagesection_scrollbar', false);
 	}
+
+	public static function get_multidomain_bgcolors() {
+
+		return apply_filters('PoPTheme_Wassup_Utils:multidomain_bgcolors', array());
+	}
 }

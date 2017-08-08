@@ -8,7 +8,7 @@ popFileUpload = {
 	fileUpload : function(args) {
 	
 		var t = this;
-		var pageSection = args.pageSection, targets = args.targets;
+		var /*domain = args.domain, */pageSection = args.pageSection, targets = args.targets;
 
 		targets.each(function() {
 
@@ -34,8 +34,8 @@ popFileUpload = {
 					
 					var data = {o: o, locale: locale};
 					// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
-					popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
-					var html = popManager.getHtml(templateName, data);
+					popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+					var html = popManager.getHtml(/*domain, */templateName, data);
 					var row = $(html);
 
 					rows = rows.add(row);
@@ -54,8 +54,8 @@ popFileUpload = {
 					var data = $.extend({}, targetConfiguration, {o: o, locale: locale});
 
 					// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
-					popJSRuntimeManager.setBlockURL(block.data('toplevel-url'));
-					var html = popManager.getHtml(templateName, data);
+					popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+					var html = popManager.getHtml(/*domain, */templateName, data);
 					var row = $(html);
 
 					// Allow for wp-prettyPhoto to add its handlers here

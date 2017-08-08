@@ -51,7 +51,21 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['$localesByURL'] = $this->get_locales_byurl();
         $configuration['$defaultLocale'] = $this->get_default_locale();
         $configuration['$outputJSON'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
-        $configuration['$origins'] = PoP_Frontend_ConfigurationUtils::get_allowed_urls();
+        $configuration['$origins'] = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
+        // $multidomain_websites = PoP_Frontend_ConfigurationUtils::get_multidomain_websites();
+        // $multidomain_locales = array();
+        // foreach ($multidomain_websites as $domain => $website_info) {
+        //     $multidomain_locales[] = $website_info['locale'];
+        // }
+        // $configuration['$multidomain'] = array(
+        //     'domains' => array_keys($multidomain_websites),
+        //     'locales' => $multidomain_locales,
+        // );
+        // Remove the localhost from the multidomains, or the SW won't cache anything at all
+        $homeurl = get_site_url();
+        $multidomains = array_keys(PoP_Frontend_ConfigurationUtils::get_multidomain_websites());
+        array_splice($multidomains, array_search($homeurl, $multidomains), 1);
+        $configuration['$multidomains'] = $multidomains;
         $configuration['$cacheBustParam'] = GD_URLPARAM_SWCACHEBUST;
 
         // Thememodes for the appshell
@@ -71,10 +85,6 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         );
 
         $resourceTypes = array('static', 'json', 'html');
-        // $configuration['$excludedPaths'] = array(
-        //     'full' => array(),
-        //     'partial' => array(),
-        // );
         $configuration['$excludedFullPaths'] = $configuration['$excludedPartialPaths'] = $configuration['$cacheItems'] = $configuration['$strategies'] = array();
         foreach ($resourceTypes as $resourceType) {
 

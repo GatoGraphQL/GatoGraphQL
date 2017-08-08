@@ -76,6 +76,19 @@ class GD_Template_Processor_EditorFormComponentsBase extends GD_Template_Process
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
 		$this->add_jsmethod($ret, 'editor');
+
+		// To hide the .wp-media-buttons under the specific (user is not logged in) domain
+		$this->add_jsmethod($ret, 'addDomainClass');
+		return $ret;
+	}
+
+	function get_js_setting($template_id, $atts) {
+
+		$ret = parent::get_js_setting($template_id, $atts);
+
+		// For function addDomainClass
+		$ret['prefix'] = 'editor-';
+
 		return $ret;
 	}
 

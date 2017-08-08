@@ -45,6 +45,8 @@ class PoP_ServerSideRendering {
 		if (!$this->enabled) {
 			return;
 		}
+
+		$domain = get_site_url();
 	
 		// Initialize the popManager, so it will get all its private values from $json
 		$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
@@ -52,7 +54,7 @@ class PoP_ServerSideRendering {
 		$popManager->init($this->json);
 
 		// Because $popManager modified the settings (eg: added the topLevelSettings, etc), then we gotta update the local $json object accordingly
-		$this->json['settings'] = $popManager->getMemory()['settings'];
+		$this->json['settings'] = $popManager->getMemory($domain)['settings'];
 	}
 	
 	function get_json() {
@@ -82,6 +84,16 @@ class PoP_ServerSideRendering {
 		);
 	}
 	
+	function get_json_sitemapping() {
+	
+		if (!$this->enabled) {
+			return array();
+		}
+	
+		$json = $this->get_json();
+		return $json['sitemapping'];
+	}
+	
 	function get_json_settings() {
 	
 		if (!$this->enabled) {
@@ -108,8 +120,8 @@ class PoP_ServerSideRendering {
 			return array();
 		}
 	
-		$settings = $this->get_json_settings();
-		return $settings['template-sources'];
+		$sitemapping = $this->get_json_sitemapping();
+		return $sitemapping['template-sources'];
 	}
 	
 	protected function get_renderer($filename) {

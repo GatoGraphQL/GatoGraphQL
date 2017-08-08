@@ -14,9 +14,9 @@ class GD_DataLoad_IOHandler_EditMembership extends GD_DataLoad_IOHandler_Form {
 		return GD_DATALOAD_IOHANDLER_EDITMEMBERSHIP;
 	}
 
-	function get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
 	
-		$ret = parent::get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
 
 		$uid = $_REQUEST['uid'];
 		$ret[GD_DATALOAD_PARAMS]['uid'] = $uid;

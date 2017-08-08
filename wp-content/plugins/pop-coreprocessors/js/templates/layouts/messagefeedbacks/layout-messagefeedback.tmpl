@@ -15,13 +15,13 @@
 			{{#each codes}}
 				{{#if @index}}<br/>{{/if}}
 				{{#ifget ../../messages this}}
-					{{{get ../../messages .}}}
+					{{{formatFeedbackMessage (get ../../messages .) domain=../../tls.domain is-multidomain=../../bs.is-multidomain}}}
 				{{/ifget}}
 			{{/each}}
 			{{#if codes}}{{#if strings}}<br/>{{/if}}{{/if}}
 			{{#each strings}}
 				{{#if @index}}<br/>{{/if}}
-				{{{this}}}
+				{{{formatFeedbackMessage . domain=../../tls.domain is-multidomain=../../bs.is-multidomain}}}
 			{{/each}}
 			{{#if footer.code}}
 				{{#ifget ../messages footer.code}}

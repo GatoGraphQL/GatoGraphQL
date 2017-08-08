@@ -51,6 +51,26 @@ class PoPFrontend_Processor_BlockGroupsBase extends PoPFrontend_Processor_Blocks
 	/***********************************************************/
 	/** Repeated from "parent" class! */
 	/***********************************************************/
+	protected function get_block_page($template_id) {
+
+		global $gd_template_settingsmanager;
+
+		if ($page = $gd_template_settingsmanager->get_blockgroup_page($template_id)) {
+
+			return $page;
+		}
+		return null;
+	}
+
+	function get_title($template_id) {
+
+		// By default, do not make the blockgroup take the title from its blockgroup-page
+		return null;
+	}
+
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
 	function is_blockgroup($template_id) {
 
 		return true;

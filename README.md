@@ -95,6 +95,8 @@ PoP allows the configuration of the following properties, done in file wp-config
 
   0: Use the original name of each module. 1: Use both. 2: Use the base36 counter number.
 
+- `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true|false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different website can communicate with each other without conflict, mangling all templates definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
+
 - `POP_SERVER_COMPACTJSKEYS` (_true|false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
 - `POP_SERVER_USELOCALSTORAGE` (_true|false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
@@ -112,6 +114,10 @@ To have a website consume data coming from other domains, crossdomain access mus
       Header add Access-Control-Allow-Methods GET
       Header add Access-Control-Allow-Methods POST
     </IfModule>
+
+#### Important
+
+For POST operations to work, we need to make sure the user's browser isn't blocking third-party cookies, otherwise [cross-origin credentialed requests will not work](https://stackoverflow.com/questions/24687313/what-exactly-does-the-access-control-allow-credentials-header-do#24689738). In Chrome, this configuration is set under Settings > Advanced Settings > Privacy > Content Settings > Block third-party cookies and site data.
 
 ### Integration between the Content CDN and Service Workers
 

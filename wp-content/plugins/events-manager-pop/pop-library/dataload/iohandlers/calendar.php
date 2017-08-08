@@ -48,15 +48,24 @@ class GD_DataLoad_IOHandler_Calendar extends GD_DataLoad_IOHandler_List {
 	}
 	
 	
-	function get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
 	
-		$ret = parent::get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
 
 		$vars = $this->get_vars($vars_atts, $iohandler_atts);
 		
 		// Send back the year / month
 		$ret[GD_DATALOAD_VISIBLEPARAMS][GD_URLPARAM_YEAR] = $vars[GD_URLPARAM_YEAR];
 		$ret[GD_DATALOAD_VISIBLEPARAMS][GD_URLPARAM_MONTH] = $vars[GD_URLPARAM_MONTH];
+
+		// Never stop fetching! (Or otherwise it doesn't allow to go prev/next with Calendar buttons)
+		// $ret[GD_URLPARAM_STOPFETCHING] = false;
+
+		return $ret;
+	}
+	function get_domain_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	
+		$ret = parent::get_domain_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
 
 		// Never stop fetching! (Or otherwise it doesn't allow to go prev/next with Calendar buttons)
 		$ret[GD_URLPARAM_STOPFETCHING] = false;

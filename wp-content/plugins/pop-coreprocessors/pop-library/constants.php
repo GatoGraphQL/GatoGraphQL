@@ -13,6 +13,7 @@ define ('GD_CONSTANT_LOADING_SPINNER', '<i class="fa fa-fw fa-spinner fa-spin"><
 define ('GD_CONSTANT_AUTHORS_SEPARATOR', '<span class="preview-author-sep">|</span>');
 define ('GD_CONSTANT_MANDATORY', '*');
 define ('GD_SEPARATOR', ',');
+define ('GD_CONSTANT_FEEDBACKMSG_MULTIDOMAIN', __('(<em>{0}</em>) {1}', 'pop-coreprocessors'));
 // define (
 // 	'GD_CONSTANT_LAZYLOAD_LOADINGDIV', 
 // 	sprintf(
@@ -88,6 +89,7 @@ function gd_popcore_jquery_constants_templatemanager_impl($jquery_constants) {
 		GD_CONSTANT_RETRY_MSG
 	);
 	$jquery_constants['ERROR_404'] = __('Ops, this is a broken link.', 'pop-coreprocessors');
+	$jquery_constants['FEEDBACKMSG_MULTIDOMAIN'] = GD_CONSTANT_FEEDBACKMSG_MULTIDOMAIN;
 	// $jquery_constants['ERROR_404'] = sprintf(
 	// 	'%s<br/>%s',
 	// 	__('Ops, this is a broken link.', 'pop-coreprocessors'),

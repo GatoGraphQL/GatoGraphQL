@@ -34,20 +34,20 @@ popMapCollection = {
 	modalMap : function(args) {
 
 		var t = this;
-		var targets = args.targets;
+		var domain = args.domain, targets = args.targets;
 
 		targets.on('show.bs.modal', function(e) {
 
 			var modal = $(this);
 			var link = $(e.relatedTarget);
-			t.execModalMap(modal, link);
+			t.execModalMap(domain, modal, link);
 		});
 	},
 
 	modalMapBlock : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, block = args.block, targets = args.targets, link = args.relatedTarget;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets, link = args.relatedTarget;
 		var modal = targets.closest('.modal');
 
 		// Need to refresh the map when the modal shows again, otherwise when opening the 2nd modal map,
@@ -59,14 +59,14 @@ popMapCollection = {
 		// });
 
 		// Do already execute it, the first time, since this will be executed when creating the modal inside the MODALS pageSection
-		t.execModalMap(modal, link);
+		t.execModalMap(domain, modal, link);
 	},
 
 	//-------------------------------------------------
 	// PROTECTED functions
 	//-------------------------------------------------
 
-	execModalMap : function(modals, link) {
+	execModalMap : function(domain, modals, link) {
 
 		var t = this;
 
@@ -83,10 +83,9 @@ popMapCollection = {
 		mapDiv.data('markers-pagesection', pageSection);
 		mapDiv.data('markers-block', block);
 		mapDiv.data('markers-removecurrent', true);
-		// mapDiv.data('marker-ids', link.data('marker-ids'));
 		var markerIds = popMap.getMarkerIdsFromLinkURLs(link);
-		// mapDiv.data('marker-ids', markerIds.join(','));
-		mapDiv.data('marker-ids', markerIds);
+		// mapDiv.data('marker-ids', markerIds);
+		mapDiv.data('marker-ids-'+removeScheme(domain), markerIds);
 	},
 
 	

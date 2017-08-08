@@ -40,3 +40,17 @@ Handlebars.registerHelper('latestCountTargets', function(itemObject, options) {
 
     return new Handlebars.SafeString(targets.join(','));
 });
+
+Handlebars.registerHelper('formatFeedbackMessage', function(message, options) {
+
+    var isMultiDomain = options.hash['is-multidomain'];
+    var domain = options.hash.domain;
+    if (isMultiDomain && domain) {
+
+        // If specified the domain, then add its name in the message, through a customizable format
+        var name = M.MULTIDOMAIN_WEBSITES[domain] ? M.MULTIDOMAIN_WEBSITES[domain].name : domain;
+        message = M.FEEDBACKMSG_MULTIDOMAIN.format(name, message);
+    }
+
+    return new Handlebars.SafeString(message);
+});

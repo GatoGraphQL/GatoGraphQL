@@ -5,6 +5,9 @@ class PoPTheme_Wassup_Initialization {
 
 		load_plugin_textdomain('poptheme-wassup', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('ab');
+
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Global Variables and Configuration
 		 * ---------------------------------------------------------------------------------------------------------------*/

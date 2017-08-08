@@ -9,7 +9,16 @@ add_filter( 'media_view_strings', 'cor_media_view_strings' );
 function cor_media_view_strings( $strings ) {
 
 	if (!is_admin()) {
-	    unset( $strings['setFeaturedImageTitle'] );
+
+		// Comment Leo 05/08/2017:
+		// doing unset creates a bug: sometimes it adds item 'Media Library' in the Media Manager, on the left side navigation (Insert Media, Create Gallery, then Media Library)
+		// which is the 'featured-image' panel
+		// It happens when:
+		// 	First loading http://getpop.localhost/en/add-post/
+		// 	Then clicking http://getpop-demo.localhost/en/add-post/
+		// 	Opening Media Manager there
+	    // unset( $strings['setFeaturedImageTitle'] );
+	    $strings['setFeaturedImageTitle'] = '';
 
 	    // doing unset only adds the default mediaLibraryTitle instead, so setting it to an empty string works
 	    $strings['createPlaylistTitle'] = '';

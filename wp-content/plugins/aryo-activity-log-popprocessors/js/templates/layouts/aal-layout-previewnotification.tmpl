@@ -1,5 +1,5 @@
 {{#with itemObject}}
-	<div class="layout notification-layout preview {{../class}} {{status}} target-{{id}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+	<div class="layout notification-layout preview {{../class}} {{status}} target-{{id}}-{{../tls.domain-id}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
 		{{#withModule ../. "link"}}
 			{{enterModule ../../.}}
 		{{/withModule}}

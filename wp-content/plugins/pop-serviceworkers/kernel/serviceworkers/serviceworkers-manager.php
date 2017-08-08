@@ -41,8 +41,12 @@ class PoP_ServiceWorkers_Manager {
 		$json = array();
 		
 		$blogname = get_bloginfo('name');
+		$description = get_bloginfo('description');
 		if ($short_name = apply_filters('PoP_ServiceWorkers_Manager:manifest:short_name', $blogname)) {
 			$json['short_name'] = $short_name;
+		}
+		if ($description = apply_filters('PoP_ServiceWorkers_Manager:manifest:description', $description)) {
+			$json['description'] = $description;
 		}
 		if ($name = apply_filters('PoP_ServiceWorkers_Manager:manifest:name', $blogname)) {
 			$json['name'] = $name;

@@ -81,8 +81,8 @@ class AAL_PoPProcessors_Template_Processor_AnchorControls extends GD_Template_Pr
 				
 			case AAL_POPPROCESSORS_TEMPLATE_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
 
-				// Only if the user is logged in
-				$this->append_att($template_id, $atts, 'class', 'visible-loggedin');	
+				// Only if the user is logged in on any one domain
+				$this->append_att($template_id, $atts, 'class', 'visible-loggedin-anydomain');	
 				break;
 		}
 

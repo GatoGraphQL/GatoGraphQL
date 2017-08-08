@@ -53,7 +53,7 @@ class GD_DataLoad_IOHandler {
 		return $atts;
 	}
 
-	function get_params($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_general_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
 
 		$ret = array();
 
@@ -64,6 +64,10 @@ class GD_DataLoad_IOHandler {
 		}
 	
 		return $ret;
+	}
+	function get_domain_querystate($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+
+		return array();
 	}
 
 	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
@@ -84,5 +88,10 @@ class GD_DataLoad_IOHandler {
 		}
 
 		return $ret;
+	}
+
+	function get_backgroundurls($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	
+		return array();
 	}
 }

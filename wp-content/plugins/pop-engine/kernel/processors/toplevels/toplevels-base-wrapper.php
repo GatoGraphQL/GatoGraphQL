@@ -32,6 +32,11 @@ class PoP_Processor_TopLevelsBaseWrapper extends PoP_ProcessorBaseWrapper {
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}
 
+	function get_query_multidomain_urls($template_id, $atts) {
+			
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
 	function get_query_domains($template_id, $atts) {
 			
 		return $this->process($template_id, $atts, __FUNCTION__);

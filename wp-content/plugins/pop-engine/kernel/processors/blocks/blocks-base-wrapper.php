@@ -22,15 +22,20 @@ class PoP_Processor_BlocksBaseWrapper extends PoP_ProcessorBaseWrapper {
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}
 
+	function get_query_multidomain_urls($template_id, $atts) {		
+		
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
 	function is_blockgroup($template_id) {
 
 		return $this->processor->is_blockgroup($template_id);
 	}
 
-	function get_dataloadsource_domain($template_id, $atts) {
+	// function get_dataloadsource_domain($template_id, $atts) {
 
-		return $this->process($template_id, $atts, __FUNCTION__);
-	}
+	// 	return $this->process($template_id, $atts, __FUNCTION__);
+	// }
 
 	function get_dataloader($template_id) {
 
@@ -38,6 +43,10 @@ class PoP_Processor_BlocksBaseWrapper extends PoP_ProcessorBaseWrapper {
 	}
 
 	function get_dataload_source($template_id, $atts) {
+
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+	function get_dataload_multidomain_sources($template_id, $atts) {
 
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}

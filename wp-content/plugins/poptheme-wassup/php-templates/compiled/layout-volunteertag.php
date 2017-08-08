@@ -1,7 +1,7 @@
 <?php
- function lcr595ab0b2d8a65wi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr598a1c033970bwi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr595ab0b2d8a65m($cx, $v, array($bp[0] => $v));
+   $v = lcr598a1c033970bm($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,19 +16,19 @@
   return $ret;
  }
 
- function lcr595ab0b2d8a65ifvar($cx, $v, $zero) {
+ function lcr598a1c033970bifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr595ab0b2d8a65encq($cx, $var) {
+ function lcr598a1c033970bencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr595ab0b2d8a65raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr598a1c033970braw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr595ab0b2d8a65raw($cx, $v, $ex = 0) {
+ function lcr598a1c033970braw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -52,7 +52,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr595ab0b2d8a65raw($cx, $vv);
+      $ret[] = lcr598a1c033970braw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -64,7 +64,7 @@
   return "$v";
  }
 
- function lcr595ab0b2d8a65m($cx, $a, $b) {
+ function lcr598a1c033970bm($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -179,7 +179,7 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr595ab0b2d8a65wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '';if (lcr595ab0b2d8a65ifvar($cx, (($inary && isset($in['volunteers-needed'])) ? $in['volunteers-needed'] : null), false)){echo '		<span class="',lcr595ab0b2d8a65encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['class'])) ? $cx['scopes'][count($cx['scopes'])-1]['class'] : null)),'" style="',lcr595ab0b2d8a65encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['style'])) ? $cx['scopes'][count($cx['scopes'])-1]['style'] : null)),'">',lcr595ab0b2d8a65raw($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['titles']) && isset($cx['scopes'][count($cx['scopes'])-1]['titles']['volunteer'])) ? $cx['scopes'][count($cx['scopes'])-1]['titles']['volunteer'] : null)),'</span>
+    ob_start();echo '',lcr598a1c033970bwi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '';if (lcr598a1c033970bifvar($cx, (($inary && isset($in['volunteers-needed'])) ? $in['volunteers-needed'] : null), false)){echo '		<span class="',lcr598a1c033970bencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['class'])) ? $cx['scopes'][count($cx['scopes'])-1]['class'] : null)),'" style="',lcr598a1c033970bencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['style'])) ? $cx['scopes'][count($cx['scopes'])-1]['style'] : null)),'">',lcr598a1c033970braw($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['titles']) && isset($cx['scopes'][count($cx['scopes'])-1]['titles']['volunteer'])) ? $cx['scopes'][count($cx['scopes'])-1]['titles']['volunteer'] : null)),'</span>
 ';}else{echo '';}echo '';}),'
 ';return ob_get_clean();
 };

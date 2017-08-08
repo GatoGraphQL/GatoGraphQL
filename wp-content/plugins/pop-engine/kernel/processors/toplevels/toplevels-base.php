@@ -38,6 +38,21 @@ class PoP_Processor_TopLevelsBase extends PoP_ProcessorBase {
 		return $ret;
 	}	
 
+	function get_query_multidomain_urls($template_id, $atts) {
+			
+		global $gd_template_processor_manager;
+
+		$ret = array();
+		foreach ($this->get_modules($template_id) as $module) {
+			
+			$module_atts = $atts[$module];
+			$module_settings_id = $gd_template_processor_manager->get_processor($module)->get_settings_id($module);
+			$ret[$module_settings_id] = $gd_template_processor_manager->get_processor($module)->get_query_multidomain_urls($module, $module_atts);
+		}
+		
+		return $ret;
+	}	
+
 	function get_query_domains($template_id, $atts) {
 			
 		global $gd_template_processor_manager;

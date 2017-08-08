@@ -5,6 +5,9 @@ class PoP_BootstrapProcessors_Initialization {
 
 		load_plugin_textdomain('pop-bootstrapprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('a4');
+
 		if (!is_admin()) {
 
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));

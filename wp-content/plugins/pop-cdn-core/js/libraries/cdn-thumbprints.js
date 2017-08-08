@@ -37,7 +37,7 @@ popCDNThumbprints = {
   isHome : function(url) {
 
     var path = removeParams(url);
-    var possible = [M.HOME_URL, M.HOME_URL+'/', M.HOMELOCALE_URL, M.HOMELOCALE_URL+'/'];
+    var possible = [M.HOME_DOMAIN, M.HOME_DOMAIN+'/', M.HOMELOCALE_URL, M.HOMELOCALE_URL+'/'];
     return possible.indexOf(path) > -1;
   },
 

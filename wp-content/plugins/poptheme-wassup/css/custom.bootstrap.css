@@ -65,6 +65,11 @@
   margin-bottom: 10px;
 }
 
+.alert-xs { 
+  padding: 3px; 
+  margin-bottom: 5px;
+}
+
 .dropdown-menu {
   background-color: #dcddde;
   margin: 0;

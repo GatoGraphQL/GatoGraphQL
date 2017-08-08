@@ -8,14 +8,14 @@ popForms = {
 	formCreatePostBlock : function(args) {
 	
 		var t = this;
-		var pageSection = args.pageSection, block = args.block;
+		var domain = args.domain, pageSection = args.pageSection, block = args.block;
 
 		// When posting a new post, and then the user logs out, we gotta close that tab. But not until the post is actually created
 		var pssId = popManager.getSettingsId(pageSection);
 		var bsId = popManager.getSettingsId(block);		
 		block.one('fetched', function(e, response) {
 	
-			t.execFormCreatePostBlock(pageSection, block, response);
+			t.execFormCreatePostBlock(domain, pageSection, block, response);
 		});
 	},
 
@@ -46,7 +46,7 @@ popForms = {
 	// PROTECTED functions
 	//-------------------------------------------------
 
-	execFormCreatePostBlock : function(pageSection, block, response) {
+	execFormCreatePostBlock : function(domain, pageSection, block, response) {
 	
 		var t = this;
 
@@ -58,13 +58,13 @@ popForms = {
 		if (blockFeedback.result === true) {
 
 			// If it was successful, execute the destroyPageOnUserLoggedOut function on it
-			popSystem.execDestroyPageOnUserLoggedOut(block);
+			popSystem.execDestroyPageOnUserLoggedOut(domain, block);
 		}
 		else {
 
 			// If not, try again
 			block.one('fetched', function(e, response) {
-				t.execFormCreatePostBlock(pageSection, block, response);
+				t.execFormCreatePostBlock(domain, pageSection, block, response);
 			});
 		}
 	},

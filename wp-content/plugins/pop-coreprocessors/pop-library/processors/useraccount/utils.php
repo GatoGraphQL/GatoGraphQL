@@ -7,6 +7,30 @@
 
 class GD_Template_Processor_UserAccountUtils {
 
+	// public static function get_loggedinuserdata_urls() {
+
+	// 	return apply_filters(
+	// 		'gd_templatemanager:loggedinuserdata_urls',
+	// 		array(
+	// 			get_permalink(POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA),
+	// 		)
+	// 	);
+	// }
+
+	// public static function get_loggedinuserdata_domains() {
+
+	// 	$domains = array();
+	// 	if ($loggedinuserdata_urls = self::get_loggedinuserdata_urls()) {
+		
+	// 		foreach ($loggedinuserdata_urls as $url) {
+
+	// 			$domains[] = get_domain($url);
+	// 		}
+	// 	}
+
+	// 	return $domains;
+	// }
+
 	public static function get_loggedinuserdata_blocks() {
 
 		// Allow Aryo to add the "Latest Notifications" block

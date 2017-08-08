@@ -11,7 +11,7 @@ popBrowserHistory = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	documentInitialized : function(args) {
+	documentInitialized : function() {
 
 		var t = this;
 		$(window).on("popstate", function(e) {
@@ -23,6 +23,9 @@ popBrowserHistory = {
 				// Otherwise intercept cannot find the Url, and no need for the fetch, since it will add the params once again
 				// No need to push URL to the stack, since we're already moving back/forward there
 				var url = t.removePushURLAtts(window.location.href);
+				// If it is the external page, then recover the actual URL
+				url = t.getPossibleDomainURL(url);
+
 				var options = {skipPushState: true};
 				if (popURLInterceptors.getInterceptors(url).length) {
 					popURLInterceptors.intercept(url, options);
@@ -43,10 +46,22 @@ popBrowserHistory = {
 	// PRIVATE functions
 	//-------------------------------------------------
 
+	getPossibleDomainURL : function(url) {
+
+		var t = this;
+
+		// If it is the external page, then recover the actual URL
+		if (url.startsWith(M.EXTERNAL_URL)) {
+			url = decodeURIComponent(getParam(M.URLPARAM_URL, url));
+		}
+
+		return url;
+	},
+
 	addPushURLAtts : function(url) {
 	
 		var t = this;
-		var tlFeedback = popManager.getTopLevelFeedback();
+		var tlFeedback = popManager.getTopLevelFeedback(getDomain(url));
 		$.each(tlFeedback[M.DATALOAD_PUSHURLATTS], function(key, value) {
 
 			url = add_query_arg(key, value, url);
@@ -59,7 +74,7 @@ popBrowserHistory = {
 	
 		var t = this;
 
-		var tlFeedback = popManager.getTopLevelFeedback(), args = [];
+		var tlFeedback = popManager.getTopLevelFeedback(getDomain(url)), args = [];
 		$.each(tlFeedback[M.DATALOAD_PUSHURLATTS], function(key, value) {
 
 			args.push(key);
@@ -78,7 +93,7 @@ popBrowserHistory = {
 
 		// Push history in the browser
 		// Platform of Platforms: if the URL is not from this website, then add it as a param
-		if(!url.startsWith(M.HOME_URL)) {
+		if(!url.startsWith(M.HOME_DOMAIN)) {
 			url = add_query_arg(M.URLPARAM_URL, encodeURIComponent(url), M.EXTERNAL_URL);
 		}
 		history.pushState({url: url}, '', url);

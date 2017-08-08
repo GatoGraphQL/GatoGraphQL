@@ -46,7 +46,7 @@ popCustomBootstrap = {
 	pageSectionNewDOMsInitialized : function(args) {
 
 		var t = this;
-		var pageSection = args.pageSection, newDOMs = args.newDOMs;
+		var domain = args.domain, pageSection = args.pageSection, newDOMs = args.newDOMs;
 		
 		// Function 'activateNestedComponents' must be executed before anything else: show the proper bootstrap components, open one inside of each other,
 		// before executing the javascript
@@ -55,9 +55,7 @@ popCustomBootstrap = {
 		// so we gotta make My Announcements and its parent tab My Content properly active before triggering the js initialization)
 		t.activateNestedComponents(pageSection, newDOMs);
 
-		// t.handleHistoryState(pageSection, newDOMs);
-		// t.handleEvents(pageSection, newDOMs);
-		t.showComponentInitializeJS(pageSection, newDOMs);
+		t.showComponentInitializeJS(domain, pageSection, newDOMs);
 		t.triggerTabPaneEvents(newDOMs);
 	},
 
@@ -197,32 +195,32 @@ popCustomBootstrap = {
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
-	showComponentInitializeJS : function(pageSection, newDOMs) {
+	showComponentInitializeJS : function(domain, pageSection, newDOMs) {
 
 		var t = this;
 
 		var collapses = newDOMs.find('.collapse.pop-bscomponent').addBack('.collapse.pop-bscomponent');
 		if (collapses.length) {
-			t.initComponentHandlers(pageSection, /*pageSectionPage, */collapses, 'shown.bs.collapse');
+			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */collapses, 'shown.bs.collapse');
 		}
 
 		var modals = newDOMs.find('.modal.pop-bscomponent').addBack('.modal.pop-bscomponent');
 		if (modals.length) {
-			t.initComponentHandlers(pageSection, /*pageSectionPage, */modals, 'shown.bs.modal');
+			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */modals, 'shown.bs.modal');
 		}
 
 		var tabPanes = newDOMs.find('.tab-pane.pop-bscomponent').addBack('.tab-pane.pop-bscomponent');
 		if (tabPanes.length) {
-			t.initComponentHandlers(pageSection, /*pageSectionPage, */tabPanes, 'shown.bs.tabpane');
+			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */tabPanes, 'shown.bs.tabpane');
 		}
 
 		var carousels = newDOMs.find('.carousel.pop-bscomponent').addBack('.carousel.pop-bscomponent');
 		if (carousels.length) {
-			t.initComponentHandlers(pageSection, /*pageSectionPage, */carousels, 'slid.bs.carousel', true);
+			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */carousels, 'slid.bs.carousel', true);
 		}
 	},
 	
-	initComponentHandlers : function(pageSection, targets, handler, useRelatedTarget) {
+	initComponentHandlers : function(domain, pageSection, targets, handler, useRelatedTarget) {
 	
 		var t = this;
 
@@ -244,7 +242,7 @@ popCustomBootstrap = {
 				'post-data': component.data('post-data'),
 			}
 
-			t.recursiveSetBlockData(pageSection, blocks, block_data);
+			t.recursiveSetBlockData(domain, pageSection, blocks, block_data);
 		});
 
 		// Initialize JS: whenever the bootstrap javascrit component opens (tab, modal, collapse)
@@ -275,18 +273,7 @@ popCustomBootstrap = {
 				options.url = url;
 			}
 
-			popManager.initBlockBranches(pageSection, blocks, options);
-			
-			// Pass the event originating everything (e). This way, we can already execute JS code
-			// that needs to capture this same handler (eg: embedCode)
-			// var options = {};
-			// if (e && e.relatedTarget) {
-			// 	options['js-args'] = {
-			// 		relatedTarget: e.relatedTarget
-			// 	};
-			// }
-			// popManager.initBlockBranches(pageSection, blocks, options);
-			// popManager.initBlockBranches(pageSection, blocks);
+			popManager.initBlockBranches(domain, pageSection, blocks, options);
 		});
 
 		// Make the contained blocks trigger the 'visible' handler, which will be caught by other functions (eg: reload)
@@ -297,14 +284,14 @@ popCustomBootstrap = {
 
 			if (component.data('onetime-refetch')) {
 
-				t.recursiveOneTimeRefetch(pageSection, blocks);
+				t.recursiveOneTimeRefetch(domain, pageSection, blocks);
 			}
 
-			t.triggerBlocksVisible(pageSection, blocks);
+			t.triggerBlocksVisible(domain, pageSection, blocks);
 		});
 	},
 
-	recursiveSetBlockData : function(pageSection, blocks, block_data) {
+	recursiveSetBlockData : function(domain, pageSection, blocks, block_data) {
 	
 		var t = this;
 
@@ -320,16 +307,16 @@ popCustomBootstrap = {
 				block.data(key, value);
 			});
 			
-			var jsSettings = popManager.getJsSettings(pageSection, block);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block);
 			var blockBranches = jsSettings['initjs-blockbranches'];
 			if (blockBranches) {
 
-				t.recursiveSetBlockData(pageSection, $(blockBranches.join(', ')), block_data);
+				t.recursiveSetBlockData(domain, pageSection, $(blockBranches.join(', ')), block_data);
 			}
 		});
 	},
 
-	recursiveOneTimeRefetch : function(pageSection, blocks) {
+	recursiveOneTimeRefetch : function(domain, pageSection, blocks) {
 	
 		var t = this;
 
@@ -338,16 +325,16 @@ popCustomBootstrap = {
 			var block = $(this);
 			popSystem.makeOneTimeRefetch(pageSection, block);
 			
-			var jsSettings = popManager.getJsSettings(pageSection, block);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block);
 			var blockBranches = jsSettings['initjs-blockbranches'];
 			if (blockBranches) {
 
-				t.recursiveOneTimeRefetch(pageSection, $(blockBranches.join(', ')));
+				t.recursiveOneTimeRefetch(domain, pageSection, $(blockBranches.join(', ')));
 			}
 		});
 	},
 
-	triggerBlocksVisible : function(pageSection, blocks) {
+	triggerBlocksVisible : function(domain, pageSection, blocks) {
 	
 		var t = this;
 
@@ -357,11 +344,11 @@ popCustomBootstrap = {
 			block.triggerHandler('visible');
 
 			// Do the same for all contained 'visible' sub-blocks
-			var jsSettings = popManager.getJsSettings(pageSection, block);
+			var jsSettings = popManager.getJsSettings(domain, pageSection, block);
 			var blockBranches = jsSettings['initjs-blockbranches'];
 			if (blockBranches) {
 
-				t.triggerBlocksVisible(pageSection, $(blockBranches.join(', ')));
+				t.triggerBlocksVisible(domain, pageSection, $(blockBranches.join(', ')));
 			}
 		});
 	},
@@ -604,9 +591,6 @@ popCustomBootstrap = {
 					if (previousTabPane.length) {
 						t.savePosition(pageSection, previousTabPane);
 					}
-					// else {
-					// 	t.savePosition(pageSection, tabPane);
-					// }
 				})
 				.on('shown.bs.tabpane', function() {
 				

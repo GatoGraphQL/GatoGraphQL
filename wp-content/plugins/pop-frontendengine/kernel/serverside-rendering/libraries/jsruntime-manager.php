@@ -50,31 +50,34 @@ class PoP_ServerSide_JSRuntimeManager {
 	// 	}
 	// }
 
-	function initBlockVarPaths(&$vars, $url, $pssId, $targetId, $template, $group = null) {
+	function initBlockVarPaths(&$vars, $url, $domain, $pssId, $targetId, $template, $group = null) {
 	
 		$group = $group ?? GD_JSMETHOD_GROUP_MAIN;
 
 		if (!$vars[$url]) {
 			$vars[$url] = array();
 		}
-		if (!$vars[$url][$pssId]) {
-			$vars[$url][$pssId] = array();
+		if (!$vars[$url][$domain]) {
+			$vars[$url][$domain] = array();
 		}
-		if (!$vars[$url][$pssId][$targetId]) {
-			$vars[$url][$pssId][$targetId] = array();
+		if (!$vars[$url][$domain][$pssId]) {
+			$vars[$url][$domain][$pssId] = array();
 		}
-		if (!$vars[$url][$pssId][$targetId][$template]) {
-			$vars[$url][$pssId][$targetId][$template] = array();
+		if (!$vars[$url][$domain][$pssId][$targetId]) {
+			$vars[$url][$domain][$pssId][$targetId] = array();
 		}
-		if (!$vars[$url][$pssId][$targetId][$template][$group]) {
-			$vars[$url][$pssId][$targetId][$template][$group] = array();
+		if (!$vars[$url][$domain][$pssId][$targetId][$template]) {
+			$vars[$url][$domain][$pssId][$targetId][$template] = array();
+		}
+		if (!$vars[$url][$domain][$pssId][$targetId][$template][$group]) {
+			$vars[$url][$domain][$pssId][$targetId][$template][$group] = array();
 		}
 	}
 
-	function initVars($url, $pssId, $targetId, $template, $group) {
+	function initVars($url, $domain, $pssId, $targetId, $template, $group) {
 	
-		$this->initBlockVarPaths($this->full_session_ids, $url, $pssId, $targetId, $template, $group);
-		$this->initBlockVarPaths($this->last_session_ids, $url, $pssId, $targetId, $template, $group);
+		$this->initBlockVarPaths($this->full_session_ids, $url, $domain, $pssId, $targetId, $template, $group);
+		$this->initBlockVarPaths($this->last_session_ids, $url, $domain, $pssId, $targetId, $template, $group);
 	}
 
 	function addGroup($id, $group) {
@@ -86,17 +89,17 @@ class PoP_ServerSide_JSRuntimeManager {
 		return $id;
 	}
 
-	function addPageSectionId($pssId, $template, $id, $group = null) {
+	function addPageSectionId($domain, $pssId, $template, $id, $group = null) {
 
-		return $this->addTemplateId($pssId, $pssId, $template, $id, $group, $true, $true);
+		return $this->addTemplateId($domain, $pssId, $pssId, $template, $id, $group, $true, $true);
 	}
 
-	function addTemplateId($pssId, $targetId, $template, $id, $group = null, $fixed = null, $isIdUnique = null, $ignorePSRuntimeId = null) {
+	function addTemplateId($domain, $pssId, $targetId, $template, $id, $group = null, $fixed = null, $isIdUnique = null, $ignorePSRuntimeId = null) {
 	
 		// If the ID is not unique, then we gotta make it unique, getting the POP_FRONTENDENGINE_CONSTANT_UNIQUE_ID from the topLevel feedback
 		$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
 		if (!$isIdUnique) {
-			$id .= $popManager->getUniqueId();
+			$id .= $popManager->getUniqueId($domain);
 		}
 
 		// Add a counter id at the end so that no two ids will be the same (only needed for elements other than pageSection and blocks)
@@ -110,32 +113,32 @@ class PoP_ServerSide_JSRuntimeManager {
 		// Add under both pageSection and block, unless the targetId is the pssId, then no need for the block (eg: pagesection-tabpane.tmpl for the group="interceptor" link)
 		// ignorePSRuntimeId: to not add the runtime ID for the pageSection when re-drawing data inside a block (the IDs will be generated again, but no need to add them to the pageSection side, since pageSection js methods will not be executed again)
 		if (!$ignorePSRuntimeId) {
-			$this->addTargetId($this->pageSectionURL, $pssId, $pssId, $template, $group, $id);
+			$this->addTargetId($this->pageSectionURL, $domain, $pssId, $pssId, $template, $group, $id);
 		}
 		if ($pssId != $targetId) {
-			$this->addTargetId($this->blockURL, $pssId, $targetId, $template, $group, $id);
+			$this->addTargetId($this->blockURL, $domain, $pssId, $targetId, $template, $group, $id);
 		}
 		return $id;
 	}
 
-	function addTargetId($url, $pssId, $targetId, $template, $group, $id) {
+	function addTargetId($url, $domain, $pssId, $targetId, $template, $group, $id) {
 
 		$group = $group ?? GD_JSMETHOD_GROUP_MAIN;
 
-		$this->initVars($url, $pssId, $targetId, $template, $group);
-		$this->full_session_ids[$url][$pssId][$targetId][$template][$group][] = $id;
-		$this->last_session_ids[$url][$pssId][$targetId][$template][$group][] = $id;
+		$this->initVars($url, $domain, $pssId, $targetId, $template, $group);
+		$this->full_session_ids[$url][$domain][$pssId][$targetId][$template][$group][] = $id;
+		$this->last_session_ids[$url][$domain][$pssId][$targetId][$template][$group][] = $id;
 
 		return $id;
 	}
 
-	function getLastGeneratedId($pssId, $targetId, $template, $group = null) {
+	function getLastGeneratedId($domain, $pssId, $targetId, $template, $group = null) {
 	
 		$group = $group ?? GD_JSMETHOD_GROUP_MAIN;
 
 		// Is it a pageSection? or a block?
 		$url = ($pssId == $targetId) ? $this->pageSectionURL : $this->blockURL;
-		$ids = $this->full_session_ids[$url][$pssId][$targetId][$template][$group];
+		$ids = $this->full_session_ids[$url][$domain][$pssId][$targetId][$template][$group];
 		return $ids[count($ids)-1];
 	}
 

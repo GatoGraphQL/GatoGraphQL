@@ -16,13 +16,6 @@ function add_gd_admin_stylesheet() {
 	echo '<link rel="stylesheet" href="' . POPTHEME_WASSUP_URI . '/css/admin.css" type="text/css" />';
 }
 
-// Add modified variable as to force Browser to fetch new copy of the style.css file
-// add_filter("stylesheet_uri", "gd_stylesheet_uri_add_modified_var", 20);
-// function gd_stylesheet_uri_add_modified_var($stylesheet) {
-
-// 	return $stylesheet . "?version=" . pop_version();
-// }
-
 function get_compatibility_js_files() {
 
 	$files = array();
@@ -102,4 +95,118 @@ function wassup_inlinestyles($styles) {
 	}
 
 	return $styles;
+}
+
+
+/**---------------------------------------------------------------------------------------------------------------
+ * Logged in classes: they depend on the domain, so they are added through PHP, not in the .css anymore
+ * ---------------------------------------------------------------------------------------------------------------*/
+add_filter('pop_header_inlinestyles:styles', 'wassup_loggedin_styles');
+function wassup_loggedin_styles($styles) {
+
+	// if ($loggedinuserdata_domains = GD_Template_Processor_UserAccountUtils::get_loggedinuserdata_domains()) {
+		
+	// 	foreach ($loggedinuserdata_domains as $domain) {
+
+	// 		$styles .= get_wassup_loggedin_domain_styles($domain);
+	// 	}
+	// }
+	$styles .= get_wassup_loggedin_domain_styles(get_site_url());
+	return $styles;
+}
+function get_wassup_loggedin_domain_styles($domain) {
+
+	$domainId = GD_TemplateManager_Utils::get_domain_id($domain);
+	return sprintf(
+		get_wassup_loggedin_domain_styles_placeholder(),
+		$domainId
+	);
+}
+function get_wassup_loggedin_domain_styles_placeholder() {
+
+	// Allow WSL to add its own styles
+	return apply_filters(
+		'get_wassup_loggedin_domain_styles_placeholder',
+		'
+			.visible-loggedin-%1$s,
+			body.loggedin-%1$s .visible-notloggedin-%1$s,
+			.community-%1$s .visible-community-%1$s,
+			.organization-%1$s .visible-organization-%1$s,
+			.individual-%1$s .visible-individual-%1$s,
+			.editor-%1$s .wp-media-buttons,'/*.pop-block.%1$s .wp-media-buttons,*/.'
+			body.loggedin-%1$s.offline .editor-%1$s .wp-media-buttons,'/*body.loggedin-%1$s.offline .pop-block.%1$s .wp-media-buttons,*/.'
+			.featuredimage-%1$s .loggedin-btn {'/*.pop-block.%1$s .loggedin-btn*/.'
+				display: none !important;
+			}
+
+			.visible-notloggedin-%1$s,
+			body.loggedin-%1$s .visible-loggedin-%1$s,
+			body.loggedin-%1$s .visible-notloggedin-%1$s.visible-always,
+			body.loggedin-%1$s.community-%1$s .visible-community-%1$s,
+			body.loggedin-%1$s.community-%1$s .menu-%1$s .visible-community,
+			body.loggedin-%1$s.organization-%1$s .visible-organization-%1$s,
+			body.loggedin-%1$s.organization-%1$s .menu-%1$s .visible-organization,
+			body.loggedin-%1$s.individual-%1$s .visible-individual-%1$s,
+			body.loggedin-%1$s.individual-%1$s .menu-%1$s .visible-individual,
+			body.loggedin-%1$s .editor-%1$s .wp-media-buttons {'/*body.loggedin-%1$s .pop-block.%1$s .wp-media-buttons {*/.'
+				display: block !important;
+			}
+			body.loggedin-%1$s .featuredimage-%1$s .loggedin-btn {'/*body.loggedin-%1$s .pop-block.%1$s .loggedin-btn {*/.'
+				display: inline-block !important;
+			}
+
+			'/*.*//* Quicklinkgroup: show only if the user is logged in *//*'
+			body.loggedin-%1$s .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
+			    display: block;
+			}
+
+			'.*//* For desktop devices: hide the links, show them on hover *//*'
+			@media (min-width: 992px) {
+				body.loggedin-%1$s .scroll-notifications .blockinner-row .quicklinkgroup-top {
+				    display: none;
+				}
+				body.loggedin-%1$s .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
+				    display: block;
+				}
+			}
+		'*/
+	);
+}
+
+/**---------------------------------------------------------------------------------------------------------------
+ * Change styles according to the domain
+ * ---------------------------------------------------------------------------------------------------------------*/
+add_filter('pop_header_inlinestyles:styles', 'wassup_multidomain_inlinestyles');
+function wassup_multidomain_inlinestyles($styles) {
+
+	// Add the background color for the home domain only. For other domains, it will be fetched on runtime, through CODE_INITIALIZEDOMAIN
+	$styles .= get_multidomain_bgcolor_style(get_site_url());
+	return $styles;
+}
+function get_multidomain_bgcolor_style($domain) {
+
+	// Add the background color for the home domain only. For other domains, it will be fetched on runtime, through CODE_INITIALIZEDOMAIN
+	$domain_bgcolors = PoPTheme_Wassup_Utils::get_multidomain_bgcolors();
+	if ($bgcolor = $domain_bgcolors[$domain]) {
+
+		return sprintf(
+			get_multidomain_bgcolor_style_placeholder(),
+			GD_TemplateManager_Utils::get_domain_id($domain),
+			$bgcolor
+		);
+	}
+
+	return '';
+}
+function get_multidomain_bgcolor_style_placeholder() {
+
+	// Allow Events Manager to override the styles, for the Events Calendar
+	return apply_filters(
+		'multidomain_bgcolor_style:style_placeholder',
+		'
+			.pop-multidomain .blockinner-row.%1$s {
+				background-color: %2$s;
+			}
+		'
+	);
 }

@@ -5,8 +5,8 @@
 //-------------------------------------------------------------------------------------
 
 // Register the AWS S3 domain in the Allowed Domains list
-add_filter('gd_templatemanager:allowed_urls', 'pop_awss3_allowedurl');
-function pop_awss3_allowedurl($allowed_urls) {
+add_filter('gd_templatemanager:allowed_domains', 'pop_awss3_allowedurl');
+function pop_awss3_allowedurl($allowed_domains) {
 
 	global $as3cf;
 
@@ -21,7 +21,7 @@ function pop_awss3_allowedurl($allowed_urls) {
 	$domain = $as3cf->get_s3_url_domain($bucket, $region);
 	$domain = $scheme . '://' . $domain;
 
-	$allowed_urls[] = $domain;
+	$allowed_domains[] = $domain;
 
-	return $allowed_urls;
+	return $allowed_domains;
 }

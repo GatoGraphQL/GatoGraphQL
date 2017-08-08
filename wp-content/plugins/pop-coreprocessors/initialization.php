@@ -5,6 +5,9 @@ class PoP_CoreProcessors_Initialization {
 
 		load_plugin_textdomain('pop-coreprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
+		// Set the plugin namespace for the processors
+		PoP_ServerUtils::set_namespace('a5');
+
 		if (!is_admin()) {
 
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
@@ -207,6 +210,15 @@ class PoP_CoreProcessors_Initialization {
 
 			wp_register_script('pop-coreprocessors-featuredimage', $libraries_js_folder.'/featuredimage.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-featuredimage');
+
+			// Watch out: crossdomain comes after featuredimage! Because it needs to access its internal variables, after these were initialized
+			// And it depends on the user-account, to track when the user logs in/out
+			wp_register_script('pop-coreprocessors-mediamanager', $libraries_js_folder.'/mediamanager.js', array('jquery', 'pop', 'pop-coreprocessors-featuredimage'), POP_COREPROCESSORS_VERSION, true);
+			wp_enqueue_script('pop-coreprocessors-mediamanager');
+
+			// Watch out: crossdomain comes after mediamanager! Because it depends on it
+			wp_register_script('pop-coreprocessors-mediamanager-cors', $libraries_js_folder.'/mediamanager-cors.js', array('jquery', 'pop', 'pop-coreprocessors-mediamanager'), POP_COREPROCESSORS_VERSION, true);
+			wp_enqueue_script('pop-coreprocessors-mediamanager-cors');
 
 			wp_register_script('pop-coreprocessors-tabs', $libraries_js_folder.'/tabs.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 			wp_enqueue_script('pop-coreprocessors-tabs');

@@ -63,7 +63,26 @@ class PoPTheme_Wassup_AAL_AE_Template_Processor_SectionBlocks extends PoPTheme_W
 		return parent::get_messagefeedback_position($template_id);
 	}
 
-	protected function get_description($template_id, $atts) {
+	function get_title($template_id) {
+	
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
+
+				// Important: this text can only be in the title, and not in the description, because the description is saved in pop-cache/,
+				// while the title is set on runtime, so only then we can have the date on the title!
+				return sprintf(
+					__('Your daily notifications — %s <small><a href="%s">View online</a></small>', 'poptheme-wassup-automatedemails'),
+					date(get_option('date_format')),
+					get_permalink(POP_AAL_PAGE_NOTIFICATIONS)
+				);
+		}
+
+		return parent::get_title($template_id);
+	}
+
+	protected function get_description_abovetitle($template_id, $atts) {
 	
 		switch ($template_id) {
 
@@ -71,17 +90,12 @@ class PoPTheme_Wassup_AAL_AE_Template_Processor_SectionBlocks extends PoPTheme_W
 			case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
 
 				return sprintf(
-					'<p>%s</p><h1>%s</h1>',
-					__('These are your unread notifications from the last day.', 'poptheme-wassup-automatedemails'),
-					sprintf(
-						__('Your daily notifications — %s <small><a href="%s">View online</a></small>', 'poptheme-wassup-automatedemails'),
-						date(get_option('date_format')),
-						get_permalink(POP_AAL_PAGE_NOTIFICATIONS)
-					)
+					'<p>%s</p>',
+					__('These are your unread notifications from the last day.', 'poptheme-wassup-automatedemails')
 				);
 		}
 
-		return parent::get_description($template_id, $atts);
+		return parent::get_description_abovetitle($template_id, $atts);
 	}
 
 	protected function get_description_bottom($template_id, $atts) {

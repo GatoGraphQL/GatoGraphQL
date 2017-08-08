@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 14:03+0200\n"
-"PO-Revision-Date: 2017-07-15 14:03+0200\n"
+"POT-Creation-Date: 2017-08-08 10:22+0200\n"
+"PO-Revision-Date: 2017-08-08 10:23+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
@@ -191,11 +191,11 @@ msgstr "Iniciar sesión"
 msgid "log in"
 msgstr "iniciar sesión"
 
-#: .././library/media.php:43
+#: .././library/media.php:52
 msgid "Upload media files"
 msgstr "Subir archivos"
 
-#: .././library/media.php:46
+#: .././library/media.php:55
 msgid "Set"
 msgstr "Establecer"
 
@@ -256,91 +256,85 @@ msgid "General:"
 msgstr "General:"
 
 #: .././library/users/user-registration.php:66
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:56
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:54
 msgid "New content is posted on the website"
 msgstr "Nuevo contenido es agregado al sitio web"
 
 #: .././library/users/user-registration.php:72
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:61
-#, php-format
-msgid "Special announcements from %s"
-msgstr "Anuncio especial de %s"
-
-#: .././library/users/user-registration.php:78
 #: .././pop-library/processors/createupdateuser/forms/codes.php:49
 msgid "A user on my network:"
 msgstr "Un usuario en mi red:"
 
-#: .././library/users/user-registration.php:81
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:67
+#: .././library/users/user-registration.php:75
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:58
 msgid "Created content"
 msgstr "Contenido"
 
-#: .././library/users/user-registration.php:87
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:71
+#: .././library/users/user-registration.php:81
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:62
 msgid "Recommends content"
 msgstr "Recomienda contenido"
 
-#: .././library/users/user-registration.php:93
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:75
+#: .././library/users/user-registration.php:87
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:66
 msgid "Follows another user"
 msgstr "Sigue a otro usuario"
 
-#: .././library/users/user-registration.php:99
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:79
+#: .././library/users/user-registration.php:93
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:70
 msgid "Subscribed to a topic"
 msgstr "Suscrito a un tópico"
 
-#: .././library/users/user-registration.php:105
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:83
+#: .././library/users/user-registration.php:99
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:74
 msgid "Added a comment"
 msgstr "Añadió un comentario"
 
-#: .././library/users/user-registration.php:111
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:87
+#: .././library/users/user-registration.php:105
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:78
 msgid "Up/down-voted a highlight"
 msgstr "Evaluó un destacado"
 
-#: .././library/users/user-registration.php:119
+#: .././library/users/user-registration.php:113
 msgid "Joins a community"
 msgstr "Se une a una comunidad"
 
-#: .././library/users/user-registration.php:126
+#: .././library/users/user-registration.php:120
 #: .././pop-library/processors/createupdateuser/forms/codes.php:50
 msgid "A topic I am subscribed to:"
 msgstr "Un tópico al que estoy suscrito:"
 
-#: .././library/users/user-registration.php:129
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:95
+#: .././library/users/user-registration.php:123
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:86
 msgid "Has new content"
 msgstr "Tiene nuevo contenido"
 
-#: .././library/users/user-registration.php:135
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:99
+#: .././library/users/user-registration.php:129
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:90
 msgid "Has a comment added"
 msgstr "Tiene un comentario añadido"
 
-#: .././library/users/user-registration.php:141
+#: .././library/users/user-registration.php:135
 #: .././pop-library/processors/createupdateuser/forms/codes.php:36
 msgid "Email digests"
 msgstr "Resúmenes por email"
 
-#: .././library/users/user-registration.php:144
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:103
+#: .././library/users/user-registration.php:138
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:94
 msgid "New content by the community (weekly)"
 msgstr "Nuevo contenido de nuestra comunidad (semanal)"
 
-#: .././library/users/user-registration.php:150
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:107
+#: .././library/users/user-registration.php:144
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:98
 msgid "Upcoming events (weekly)"
 msgstr "Eventos próximos (semanal)"
 
-#: .././library/users/user-registration.php:156
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:111
+#: .././library/users/user-registration.php:150
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:102
 msgid "My notifications (daily)"
 msgstr "Mis notificaciones (diario)"
 
-#: .././library/users/user-registration.php:162
+#: .././library/users/user-registration.php:156
 msgid "Special posts"
 msgstr "Posts especiales"
 
@@ -360,11 +354,15 @@ msgstr "Parece que estás offline."
 msgid "Retry"
 msgstr "Reintentar"
 
-#: .././pop-library/constants.php:90
+#: .././pop-library/constants.php:16
+msgid "(<em>{0}</em>) {1}"
+msgstr "(<em>{0}</em>) {1}"
+
+#: .././pop-library/constants.php:91
 msgid "Ops, this is a broken link."
 msgstr "Ops, este es un enlace roto."
 
-#: .././pop-library/constants.php:120
+#: .././pop-library/constants.php:122
 msgid ""
 "Ops, the upload failed. Let's fix this: please save your post as 'Draft', "
 "refresh the browser window, and try again."
@@ -624,19 +622,19 @@ msgstr "Descartar"
 msgid "Load more"
 msgstr "Cargar más"
 
-#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:170
+#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:183
 msgid "Please write the content here..."
 msgstr "Por favor, escriba el contenido aquí..."
 
-#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:33
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:44
 msgid "Set Featured Image"
 msgstr "Establecer la imagen destacada"
 
-#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:34
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:45
 msgid "Remove"
 msgstr "Eliminar"
 
-#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:36
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:47
 #, php-format
 msgid "Please %s to set the featured image."
 msgstr "Por favor, %s para establecer la imagen destacada."
@@ -772,7 +770,7 @@ msgstr ""
 
 #: .././pop-library/processors/blocks/blocks.php:233
 #: .././pop-library/processors/comments/blocks.php:175
-#: .././pop-library/processors/login/blocks.php:142
+#: .././pop-library/processors/login/blocks.php:174
 msgid "Sending..."
 msgstr "Enviando..."
 
@@ -1125,7 +1123,7 @@ msgstr "Ver tu <a href=\"%s\">cuenta de usuario actualizada</a>."
 msgid "Saving..."
 msgstr "Guardando…"
 
-#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:115
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:106
 msgid "Special posts or announcements"
 msgstr "Posts o anuncios especiales"
 
@@ -1170,7 +1168,7 @@ msgstr "URL de tu sitio web"
 msgid "Description"
 msgstr "Descripción"
 
-#: .././pop-library/processors/createupdateuser/forms/formgroups.php:131
+#: .././pop-library/processors/createupdateuser/forms/formgroups.php:128
 msgid ""
 "Please be careful to fill-in the email properly! It will not only appear in "
 "the profile page, but also be used by our system to send you notifications."
@@ -1218,6 +1216,19 @@ msgstr ""
 #, php-format
 msgid "Only %s accounts can edit preferences."
 msgstr "Sólo cuentas de  %s pueden editar preferencias."
+
+#: .././pop-library/processors/domain/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Domain Initialization"
+msgstr "Inicialización del Dominio"
+
+#: .././pop-library/processors/domain/messagefeedbacks/messagefeedbacks-layouts.php:28
+msgid "The domain is empty."
+msgstr "El dominio está vacío."
+
+#: .././pop-library/processors/domain/messagefeedbacks/messagefeedbacks-layouts.php:30
+#, php-format
+msgid "Domain <strong>%s</strong> is not valid."
+msgstr "El dominio <strong>%s</strong> no es válido."
 
 #: .././pop-library/processors/formcomponents-inputs/captcha-formcomponents-inputs.php:25
 msgid "Captcha"
@@ -1287,11 +1298,11 @@ msgstr "Buscar:"
 
 #: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:44
 msgid "Content with "
-msgstr "Contenido con"
+msgstr "Contenido con "
 
 #: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:49
 msgid "Users with "
-msgstr "Usuarios con"
+msgstr "Usuarios con "
 
 #: .././pop-library/processors/formcomponents-inputs/typeaheads/tag-typeaheadcomponent-formcomponents-inputs.php:25
 msgid "Tags:"
@@ -1319,7 +1330,7 @@ msgid "Users"
 msgstr "Usuarios"
 
 #: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:64
-#: .././pop-library/processors/forms/formcomponentgroups.php:233
+#: .././pop-library/processors/forms/formcomponentgroups.php:265
 msgid "Co-authors"
 msgstr "Co-autores"
 
@@ -1327,16 +1338,16 @@ msgstr "Co-autores"
 msgid "Users:"
 msgstr "Usuarios:"
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:191
+#: .././pop-library/processors/forms/formcomponentgroups.php:223
 msgid "Type post title..."
 msgstr "Escribir título del post..."
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:192
-#: .././pop-library/processors/forms/formcomponentgroups.php:193
+#: .././pop-library/processors/forms/formcomponentgroups.php:224
+#: .././pop-library/processors/forms/formcomponentgroups.php:225
 msgid "Type name..."
 msgstr "Escribir el nombre…"
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:202
+#: .././pop-library/processors/forms/formcomponentgroups.php:234
 msgid ""
 "Type emails here, separated by space or comma (\" \" or \",\"), or 1 email "
 "per line"
@@ -1344,7 +1355,7 @@ msgstr ""
 "Escriba los emails aquí, separados por espacio o coma (\" \" or \",\"), ó 1 "
 "email por línea"
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:217
+#: .././pop-library/processors/forms/formcomponentgroups.php:249
 msgid ""
 "Co-authoring this post with other users? Select them all here, they will not "
 "only appear as co-owners in the webpage, but will also be able to edit this "
@@ -1354,7 +1365,7 @@ msgstr ""
 "aquí, los mismos no sólo aparecerán como co-autores en la página web, sino "
 "también serán capaces de editar este post."
 
-#: .././pop-library/processors/forms/formcomponentgroups.php:221
+#: .././pop-library/processors/forms/formcomponentgroups.php:253
 msgid ""
 "Please select all related content, so the reader can easily access this "
 "inter-related information."
@@ -1436,7 +1447,7 @@ msgstr "Añadir nuevo"
 msgid "Navigate"
 msgstr "Navegar"
 
-#: .././pop-library/processors/login/blocks.php:123
+#: .././pop-library/processors/login/blocks.php:125
 msgid "You are not logged in."
 msgstr "Aún no has iniciado tu sesión."
 
@@ -1546,7 +1557,7 @@ msgstr ""
 "Ya has iniciado sesión en el sitio web, por favor primero %s para "
 "restablecer tu contraseña."
 
-#: .././pop-library/processors/login/structures/forms/forms.php:70
+#: .././pop-library/processors/login/structures/forms/forms.php:107
 msgid ""
 "Please type in your account username or email, and you will receive a code "
 "in your email to reset your password."
@@ -1554,17 +1565,17 @@ msgstr ""
 "Por favor escribí tu nombre de usuario o email, y recibirás un código en tu "
 "email para restablecer tu contraseña."
 
-#: .././pop-library/processors/login/structures/forms/forms.php:85
+#: .././pop-library/processors/login/structures/forms/forms.php:122
 msgid "We sent you an email with a code."
 msgstr "Te hemos enviado un email con un código."
 
-#: .././pop-library/processors/login/structures/forms/forms.php:86
+#: .././pop-library/processors/login/structures/forms/forms.php:123
 msgid "Please copy/paste it in the input below, and choose your new password."
 msgstr ""
 "Por favor, copiálo y pegálo en la entrada acá abajo, y elegí tu nueva "
 "contraseña."
 
-#: .././pop-library/processors/login/structures/forms/forms.php:100
+#: .././pop-library/processors/login/structures/forms/forms.php:138
 msgid "Are you sure you want to log out?"
 msgstr "¿Estás seguro que querés finalizar tu sesión?"
 
@@ -1700,6 +1711,9 @@ msgstr ""
 "bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
 "your plugin installer or download it <a href=\"https://github.com/leoloso/"
 "PoP/\">from here</a>."
+
+#~ msgid "Special announcements from %s"
+#~ msgstr "Anuncio especial de %s"
 
 #~ msgid "(Coming soon) Activity from users on my network (daily)"
 #~ msgstr "(Próximamente) Actividad de los usuarios en mi red (diario)"

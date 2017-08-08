@@ -1,6 +1,6 @@
 {{#with itemObject}}
 	{{#withSublevel ../thumb.name}}
-		<div class="post-thumb {{../../class}}" style="{{../../style}}">
+		<div {{#generateId context=../../.}}{{../../id}}{{/generateId}} class="post-thumb {{../../class}}" style="{{../../style}}">
 			<a href="{{get ../. ../../url-field}}" class="{{../../classes.link}}" style="{{../../styles.link}}" target="{{../../link-target}}" {{#each ../../itemobject-params}} {{@key}}="{{get ../../. this}}"{{/each}}>
 				<img src="{{src}}" class="{{../../classes.img}}" style="{{../../styles.img}}" alt="{{{../title}}}" width="{{width}}" height="{{height}}">
 			</a>

@@ -324,10 +324,18 @@ class PoP_Engine {
 					$settings = json_encode($this->get_json_settings($template_id, $atts));
 					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings);
 				}
+
+				$sitemapping = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SITEMAPPING, true);
+				if (!$sitemapping) {
+
+					$sitemapping = $this->get_json_sitemapping($template_id, $atts);
+					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SITEMAPPING, $sitemapping, true);
+				}
 			}
 			else {
 
 				$settings = json_encode($this->get_json_settings($template_id, $atts));
+				$sitemapping = $this->get_json_sitemapping($template_id, $atts);
 			}
 
 			$runtimesettings = $this->get_json_runtimesettings($template_id, $atts);
@@ -340,7 +348,7 @@ class PoP_Engine {
 			$data = $this->get_data($template_id, $processor, $atts, $formatter, $request);
 		}
 
-		$json = $formatter->get_formatted_data($settings, $runtimesettings, $data);
+		$json = $formatter->get_formatted_data($settings, $runtimesettings, $sitemapping, $data);
 
 		// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
 		$json['cachedsettings'] = $cachedsettings;
@@ -361,6 +369,7 @@ class PoP_Engine {
 
 		// Query: Each block has a query indicating how to process loadMore ajax call
 		$json_runtimesettings['query-url'] = $processor->get_query_url($template_id, $atts);
+		$json_runtimesettings['query-multidomain-urls'] = $processor->get_query_multidomain_urls($template_id, $atts);
 		$json_runtimesettings['configuration'] = $processor->get_template_runtimeconfigurations($template_id, $atts);
 		
 		return $json_runtimesettings;
@@ -388,6 +397,21 @@ class PoP_Engine {
 		// $json_settings[POP_UNIQUEID] = POP_CONSTANT_UNIQUE_ID;
 		
 		return $json_settings;
+	}
+
+	protected function get_json_sitemapping($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$json_sitemapping = array();
+
+		// Otherwise, get the dynamic configuration
+		$processor = $gd_template_processor_manager->get_processor($template_id);
+
+		// Templates: What templates must be executed after call to loadMore is back with data:
+		$json_sitemapping['template-sources'] = $processor->get_templates_sources($template_id, $atts);
+		
+		return $json_sitemapping;
 	}
 	
 	private function combine_ids_datafields(&$ids_data_fields, $dataloader_name, $ids, $data_fields) {
@@ -448,8 +472,12 @@ class PoP_Engine {
 		$dataset_ids = array();
 		$data = array();
 		$block_feedback = array();
-		$target_params = array();
+		$target_general_querystate = array();
+		$target_domain_querystate = array();
 		$pagesection_feedback = array();
+
+		// Save all the BACKGROUND_LOAD urls to send back to the browser, to load immediately again (needed to fetch non-cacheable data-fields)
+		$backgroundload_urls = array();
 		
 		// Load under global key (shared by all pagesections / blocks)
 		$ids_data_fields = array();		
@@ -512,8 +540,8 @@ class PoP_Engine {
 			// Initialize responses for the pagesection
 			$dataset_ids[$pagesection_settings_id] = array();
 			$block_feedback[$pagesection_settings_id] = array();
-			$target_params[$pagesection_settings_id] = array();
-			
+			$target_general_querystate[$pagesection_settings_id] = array();
+			$target_domain_querystate[$pagesection_settings_id] = array();
 
 			// Obtain all block_template_id and block_atts back
 			// To get the $block_atts, we need to iterate through all keys of $atts and find the one with 'block-settings-id' with our known value
@@ -653,8 +681,21 @@ class PoP_Engine {
 
 					$feedback = $iohandler->get_feedback($checkpoint, array(), $dataload_atts, $iohandler_atts, $executed, $block_atts);
 					$block_feedback[$pagesection_settings_id][$block_settings_id] = $feedback;
-					$params = $iohandler->get_params($checkpoint, array(), $dataload_atts, $iohandler_atts, $executed, $block_atts);
-					$target_params[$pagesection_settings_id][$block_settings_id] = $params;
+					// If the block iohandler has background URLs, integrate them
+					// But only if it is that the validation has not failed
+					// Then, blocks with the STATIC dataloader ('data-load' => false), can also load background urls (eg: GD_TEMPLATE_BLOCKGROUP_INITIALIZEDOMAIN)
+					if (!$block_checkpointvalidation_failed) {
+						if ($iohandler_backgroundload_urls = $iohandler->get_backgroundurls($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts)) {
+							$backgroundload_urls = array_merge(
+								$backgroundload_urls,
+								$iohandler_backgroundload_urls
+							);
+						}
+					}
+					$general_querystate = $iohandler->get_general_querystate($checkpoint, array(), $dataload_atts, $iohandler_atts, $executed, $block_atts);
+					$target_general_querystate[$pagesection_settings_id][$block_settings_id] = $general_querystate;
+					$domain_querystate = $iohandler->get_domain_querystate($checkpoint, array(), $dataload_atts, $iohandler_atts, $executed, $block_atts);
+					$target_domain_querystate[$pagesection_settings_id][$block_settings_id] = $domain_querystate;
 					// This is needed for several reasons:
 					// 1. so that memory.dataset[pssId] is not considered an array but an object by jQuery
 					// 2. so that when replicating the initial memory dataset, it will override the value with the empty one. Otherwise it does nothing.
@@ -673,14 +714,27 @@ class PoP_Engine {
 				// Save the feedback / Add crawlable data
 				$feedback = $iohandler->get_feedback($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts);
 				$block_feedback[$pagesection_settings_id][$block_settings_id] = $feedback;
-				$params = $iohandler->get_params($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts);
-				$target_params[$pagesection_settings_id][$block_settings_id] = $params;
+				// If the block iohandler has background URLs, integrate them
+				if ($iohandler_backgroundload_urls = $iohandler->get_backgroundurls($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts)) {
+					$backgroundload_urls = array_merge(
+						$backgroundload_urls,
+						$iohandler_backgroundload_urls
+					);
+				}
+				$general_querystate = $iohandler->get_general_querystate($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts);
+				$target_general_querystate[$pagesection_settings_id][$block_settings_id] = $general_querystate;
+				$domain_querystate = $iohandler->get_domain_querystate($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts);
+				$target_domain_querystate[$pagesection_settings_id][$block_settings_id] = $domain_querystate;
 				// Allow to turn on/off getting the crawlable data (by default no need, FrontendEngine can turn it on)
 				if ($add_crawlable_data) {
 
+					$merged_querystate = array_merge_recursive(
+						$general_querystate, 
+						$domain_querystate
+					);
 					$crawlable_data = array_merge(
 						$crawlable_data,
-						$iohandler->get_crawlable_data($feedback, $params, $block_data_settings)
+						$iohandler->get_crawlable_data($feedback, $merged_querystate, $block_data_settings)
 					);
 				}
 			}
@@ -695,18 +749,30 @@ class PoP_Engine {
 
 				$feedback = $pagesection_iohandler->get_feedback($checkpoint, array(), $request, $pagesection_iohandler_atts, null, $pagesection_atts);
 				$pagesection_feedback[$pagesection_settings_id] = $feedback;
+
+				// If the pageSection iohandler has background URLs, integrate them
+				if ($iohandler_backgroundload_urls = $pagesection_iohandler->get_backgroundurls($checkpoint, array(), $request, $pagesection_iohandler_atts, null, $pagesection_atts)) {
+					$backgroundload_urls = array_merge(
+						$backgroundload_urls,
+						$iohandler_backgroundload_urls
+					);
+				}
 			}
 		}
 
 		// Finally, after executing all block feedbacks, produce the toplevel feedback (do it at the end, so it's also valid when the user logs in (actionexecuter "Log in" being a block))
 		// Also needed here for the CDN: after adding a post, bring the new value for the POST THUMBPRINT in that same response
 		$toplevel_feedback = $toplevel_iohandler->get_feedback($checkpoint, array(), $request, $toplevel_iohandler_atts, null, $toplevel_atts);
+		// If the toplevel iohandler has background URLs, integrate them
+		if ($iohandler_backgroundload_urls = $toplevel_iohandler->get_backgroundurls($checkpoint, array(), $request, $toplevel_iohandler_atts, null, $toplevel_atts)) {
+			$backgroundload_urls = array_merge(
+				$backgroundload_urls,
+				$iohandler_backgroundload_urls
+			);
+		}
 		
 		// Save all database elements here, under dataloader
 		$database = $userdatabase = $nocache_fields = array();
-
-		// Save all the BACKGROUND_LOAD urls to send back to the browser, to load immediately again (needed to fetch non-cacheable data-fields)
-		$backgroundload_urls = array();
 
 		// Iterate all dataloaders, in order given by their execution priority, 
 		// and for each get the data through all $ids from all blocks, all in 1 query
@@ -910,7 +976,10 @@ class PoP_Engine {
 			'database' => $database,
 			'userdatabase' => $userdatabase,
 			'crawlable-data' => implode("\n", $crawlable_data),
-			'params' => $target_params,
+			'query-state' => array(
+				'general' => $target_general_querystate,
+				'domain' => $target_domain_querystate,
+			),
 			'feedback' => array(
 				'block' => $block_feedback,
 				'toplevel' => $toplevel_feedback,

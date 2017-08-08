@@ -212,11 +212,15 @@ class PoP_ServerSide_Helpers {
 			return '';
 		}
 
+		$context = $options['hash']['context'] ?? $options['_this'];
 		$condition = false;
 		// Allow to execute a method to check for the condition (eg: is user-id from the object equal to website logged in user?)
 		if ($options['hash']['method']) {
 			$popJSLibraryManager = PoP_ServerSide_Libraries_Factory::get_jslibrary_instance();
-			$args = array('input' => $db[$index]);
+			$args = array(
+				'domain' => $context['tls']['domain'],
+				'input' => $db[$index],
+			);
 			$executed = $popJSLibraryManager->execute($options['hash']['method'], $args);
 			foreach($executed as $value) {
 				if ($value) {
@@ -272,6 +276,7 @@ class PoP_ServerSide_Helpers {
 		$group = $options['hash']['group'];
 		$id = $options['fn']();
 		$ignorePSRuntimeId = $context['ignorePSRuntimeId'];
+		$domain = $context['tls']['domain'];
 		
 		// Print also the block URL. Needed to know under what URL to save the session-ids.
 		// Set the URL before calling addTemplateId, where it will be needed
@@ -281,14 +286,15 @@ class PoP_ServerSide_Helpers {
 			$popJSRuntimeManager->setBlockURL($url);
 		}
 
-		$generatedId = $popJSRuntimeManager->addTemplateId($pssId, $targetId, $template, $id, $group, $fixed, $isIdUnique, $ignorePSRuntimeId);
+		$generatedId = $popJSRuntimeManager->addTemplateId($domain, $pssId, $targetId, $template, $id, $group, $fixed, $isIdUnique, $ignorePSRuntimeId);
 		$items = array();
 		$items[] = 'id="'.$generatedId.'"'; 
 		$items[] = 'data-templateid="'.$template.'"';
 		
 		// For the block, also add the URL on which it was first generated (not initialized... it can be initialized later on)
 		if ($url) {
-			$items[] = 'data-toplevel-url="'.$url.'"';
+			$items[] = 'data-'.POP_PARAMS_TOPLEVEL_URL.'="'.$url.'"';
+			$items[] = 'data-'.POP_PARAMS_TOPLEVEL_DOMAIN.'="'.get_domain($url).'"';
 		}
 		return new LS(implode(' ', $items));
 	}
@@ -299,9 +305,10 @@ class PoP_ServerSide_Helpers {
 		$targetId = $options['hash']['targetId'] ?? $context['bs']['bsId'];
 		$template = $options['hash']['template'] ?? $context[GD_JS_TEMPLATE];
 		
+		$domain = $context['tls']['domain'];
 		$group = $options['hash']['group'];
 		$popJSRuntimeManager = PoP_ServerSide_Libraries_Factory::get_jsruntime_instance();
-		return $popJSRuntimeManager->getLastGeneratedId($pssId, $targetId, $template, $group);
+		return $popJSRuntimeManager->getLastGeneratedId($domain, $pssId, $targetId, $template, $group);
 	}
 
 	function applyLightTemplate($template, $options){
@@ -348,6 +355,7 @@ class PoP_ServerSide_Helpers {
 			'ignorePSRuntimeId' => $ignorePSRuntimeId,
 		);
 		
+		$domain = $tls['domain'];
 		$pssId = $pss['pssId'];
 		$psId = $pss['psId'];
 		$bsId = $bs['bsId'];
@@ -356,7 +364,7 @@ class PoP_ServerSide_Helpers {
 		$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
 		$context = array_merge(
 			$context,
-			$popManager->getRuntimeConfiguration($pssId, $bsId, $templateName)
+			$popManager->getRuntimeConfiguration($domain, $pssId, $bsId, $templateName)
 		);
 
 		// Expand the JS Keys
@@ -383,7 +391,7 @@ class PoP_ServerSide_Helpers {
 		if ($options['hash']['itemDBKey'] && $itemObjectId) {
 
 			$itemDBKey = $options['hash']['itemDBKey'];
-			$itemObject = $popManager->getItemObject($itemDBKey, $itemObjectId);
+			$itemObject = $popManager->getItemObject($domain, $itemDBKey, $itemObjectId);
 			$extend['itemObject'] = $itemObject;
 			$extend['itemObjectDBKey'] = $itemDBKey;
 			$extend['itemDBKey'] = $itemDBKey;
@@ -397,7 +405,7 @@ class PoP_ServerSide_Helpers {
 		else if ($options['hash']['subcomponent'] && $itemObjectId) {
 
 			$itemDBKey = $bs['db-keys'][GD_JS_SUBCOMPONENTS][$options['hash']['subcomponent']]['db-key'];
-			$itemObject = $popManager->getItemObject($itemDBKey, $itemObjectId);
+			$itemObject = $popManager->getItemObject($domain, $itemDBKey, $itemObjectId);
 			$extend['itemObject'] = $itemObject;
 			$extend['itemObjectDBKey'] = $itemDBKey;
 			$extend['itemDBKey'] = $itemDBKey;
@@ -455,7 +463,7 @@ class PoP_ServerSide_Helpers {
 		);
 		if ($strReplace) {
 
-			$popManager->replaceFromItemObject($pssId, $bsId, $templateName, $itemObject, $extend, $strReplace);
+			$popManager->replaceFromItemObject($domain, $pssId, $bsId, $templateName, $itemObject, $extend, $strReplace);
 		}
 
 
@@ -506,9 +514,12 @@ class PoP_ServerSide_Helpers {
 
 	function withLayout($itemDBKey, $itemObjectId, $multipleLayouts, $context, $options) {
 
+		$tls = $context['tls'];
+		$domain = $tls['domain'];
+
 		// Obtain the key composed as: 'post_type'-'cat'
 		$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
-		$itemObject = $popManager->getItemObject($itemDBKey, $itemObjectId);
+		$itemObject = $popManager->getItemObject($domain, $itemDBKey, $itemObjectId);
 		
 		// keys 'post-type' and 'cat' must always be there!
 		$key = $this->getMultiLayoutKey($itemDBKey, $itemObject);
@@ -635,9 +646,13 @@ class PoP_ServerSide_Helpers {
 
 	function withItemObject($itemDBKey, $itemObjectId, $options) {
 
+		$context = $options['hash']['context'] ?? $options['_this'];
+		$tls = $context['tls'];
+		$domain = $tls['domain'];
+
 		// Replace the context with only the itemObject
 		$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
-		$context = $popManager->getItemObject($itemDBKey, $itemObjectId);
+		$context = $popManager->getItemObject($domain, $itemDBKey, $itemObjectId);
 		
 		return $options['fn']($context);
 	}
