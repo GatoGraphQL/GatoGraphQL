@@ -5,8 +5,11 @@ popManager = {
 	// INTERNAL variables
 	//-------------------------------------------------
 	
+	// Comment Leo 10/08/2017: actually, they can't be independent, since they will still share the same context, because the configuration is copied by reference, not by copy...
+	// So then must stack all domains under the same promise for the html rendering...
 	// Comment Leo 21/07/2017: since adding multicomponents for different domains, we use a different mergingTemplatePromise for each domain
-	mergingTemplatePromise : {},//false,
+	// mergingTemplatePromise : {},//false,
+	mergingTemplatePromise : false,
 	// Comment Leo 21/07/2017: since adding multicomponents for different domains, we group memory, database and userDatabase under property `state`, under which we specify the domain
 	state : {},
 	sitemapping : {},
@@ -2109,8 +2112,8 @@ popManager = {
 
 		// Add to the queue of promises to execute and merge the template
 		var dfd = $.Deferred();
-		var lastPromise = t.mergingTemplatePromise[domain];
-		t.mergingTemplatePromise[domain] = dfd.promise();
+		var lastPromise = t.mergingTemplatePromise;//[domain];
+		t.mergingTemplatePromise/*[domain]*/ = dfd.promise();
 
 		// If while processing the pageSection we get error "Mempage not available",
 		// do not let it break the execution of other JS, contain it
@@ -2628,10 +2631,10 @@ popManager = {
 						// So we need to make the template merging process synchronous. For that we implement a queue of deferred object,
 						// Where each one of them merges only after the previous one process has finished, + mergingTemplatePromise = false for the first case and when there are no other elements in the queue
 						// By the end of the success function all merging will be done, then we can proceed with following item in the queue
-						var lastPromise = t.mergingTemplatePromise[domain];
+						var lastPromise = t.mergingTemplatePromise;//[domain];
 						var dfd = $.Deferred();
 						var thisPromise = dfd.promise();
-						t.mergingTemplatePromise[domain] = thisPromise;
+						t.mergingTemplatePromise/*[domain]*/ = thisPromise;
 						if (lastPromise) {
 							lastPromise.done(function() {
 								t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
@@ -2690,10 +2693,10 @@ popManager = {
 						}
 
 						// Following instructions can be executed only after the merging has finished
-						var lastPromise = t.mergingTemplatePromise[domain];
+						var lastPromise = t.mergingTemplatePromise;//[domain];
 						var dfd = $.Deferred();
 						var thisPromise = dfd.promise();
-						t.mergingTemplatePromise[domain] = thisPromise;
+						t.mergingTemplatePromise/*[domain]*/ = thisPromise;
 
 						// If while processing the pageSection we get error "Mempage not available",
 						// do not let it break the execution of other JS, contain it
@@ -2947,8 +2950,10 @@ popManager = {
 							if (!rpsConfiguration[key]) {
 								rpsConfiguration[key] = {};
 							}
-							// Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration (explanation below)
-							$.extend(true, rpsConfiguration[key], value);
+							// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `t.mergingTemplatePromise` keeping a promise per domain...
+							// // Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration (explanation below)
+							// $.extend(true, rpsConfiguration[key], value);
+							$.extend(rpsConfiguration[key], value);
 						}
 						else {
 							rpsConfiguration[key] = value;
@@ -2980,13 +2985,15 @@ popManager = {
 						memory.settings['templates-paths'][rpssId][rbsId] = $.extend({}, localMemory.settings['templates-paths'][rpssId][rbsId]);
 						memory.settings['db-keys'][rpssId][rbsId] = $.extend({}, localMemory.settings['db-keys'][rpssId][rbsId]);
 						
-						// Modules under the first level configuration
-						// Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration, because
-						// it will be modified by Handlebars when printing the HTML (adding the variables to the context),
-						// so then all configurations from different domains must be copies and cannot reference to the same original configuration
-						// Otherwise, we can't print the HTML for different domains concurrently, as it is done now (check that `t.mergingTemplatePromise` keeps a promise per domain,
-						// so these can be printed concurrently)
-						memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend(true, {}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
+						// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `t.mergingTemplatePromise` keeping a promise per domain...
+						// // Modules under the first level configuration
+						// // Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration, because
+						// // it will be modified by Handlebars when printing the HTML (adding the variables to the context),
+						// // so then all configurations from different domains must be copies and cannot reference to the same original configuration
+						// // Otherwise, we can't print the HTML for different domains concurrently, as it is done now (check that `t.mergingTemplatePromise` keeps a promise per domain,
+						// // so these can be printed concurrently)
+						// memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend(true, {}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
+						memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend({}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
 					}
 				});
 			});
