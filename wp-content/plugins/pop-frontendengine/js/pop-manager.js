@@ -2839,9 +2839,10 @@ popManager = {
 
 			// Copy the properties from the local memory's domain to the operating domain?
 			// This is done the first time it is accessed, eg: if memory.feedback.toplevel is empty
+			// Copy using deep, so that the copy is not done by reference. Otherwise, all domains topLevels will be overriding each other!
 			if ($.isEmptyObject(memory.feedback.toplevel)) {
 				
-				memory.feedback.toplevel = $.extend({}, localMemory.feedback.toplevel);
+				memory.feedback.toplevel = $.extend(true, {}, localMemory.feedback.toplevel);
 
 				// Important: do NOT copy everything! In particular, do not copy the loggedin user information
 				if (typeof memory.feedback.toplevel[M.DATALOAD_USER] != 'undefined') {
@@ -2850,12 +2851,12 @@ popManager = {
 			}
 			if ($.isEmptyObject(memory.feedback.pagesection[pssId])) {
 				
-				memory.feedback.pagesection[pssId] = $.extend({}, localMemory.feedback.pagesection[pssId]);
+				memory.feedback.pagesection[pssId] = $.extend(true, {}, localMemory.feedback.pagesection[pssId]);
 				memory.feedback.block[pssId] = {};
 			}
 			if ($.isEmptyObject(memory.feedback.block[pssId][bsId])) {
 				
-				memory.feedback.block[pssId][bsId] = $.extend({}, localMemory.feedback.block[pssId][bsId]);
+				memory.feedback.block[pssId][bsId] = $.extend(true, {}, localMemory.feedback.block[pssId][bsId]);
 			}
 		}
 	},
@@ -2946,7 +2947,8 @@ popManager = {
 							if (!rpsConfiguration[key]) {
 								rpsConfiguration[key] = {};
 							}
-							$.extend(rpsConfiguration[key], value);
+							// Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration (explanation below)
+							$.extend(true, rpsConfiguration[key], value);
 						}
 						else {
 							rpsConfiguration[key] = value;
@@ -2956,6 +2958,9 @@ popManager = {
 
 				$.each(rpsParams, function(rbsId, rbParams) {
 
+					// Comment Leo 10/08/2017: IMPORTANT: No need to use `deep` copy when doing $.extend() below, except for the `configuration`!!!
+					// Because all properties will not be modified across domains, then copy by reference will work.
+					// However, for the configuration, Handlebars will modify it per domain (setting the context), so they must be copied by copy, not by reference!
 					// If the memory is empty (eg: first time that we are loading a different domain), then recreate it under the domain scope
 					if ($.isEmptyObject(memory['query-state'].general[rpssId][rbsId])) {
 
@@ -2976,7 +2981,12 @@ popManager = {
 						memory.settings['db-keys'][rpssId][rbsId] = $.extend({}, localMemory.settings['db-keys'][rpssId][rbsId]);
 						
 						// Modules under the first level configuration
-						memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend({}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
+						// Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration, because
+						// it will be modified by Handlebars when printing the HTML (adding the variables to the context),
+						// so then all configurations from different domains must be copies and cannot reference to the same original configuration
+						// Otherwise, we can't print the HTML for different domains concurrently, as it is done now (check that `t.mergingTemplatePromise` keeps a promise per domain,
+						// so these can be printed concurrently)
+						memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend(true, {}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
 					}
 				});
 			});
