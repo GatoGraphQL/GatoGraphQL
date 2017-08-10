@@ -43,6 +43,7 @@ define ('GD_TEMPLATECALLBACK_ACTION_RESET', 'reset');
 
 define ('GD_JSPLACEHOLDER_QUERY', '*QUERY*'); // Replaced from '%QUERY' because using '%' gives a JS error (Uncaught URIError: URI malformed) on function splitParams in utils.js when trying to add yet another parameter on that URL 
 
+define('POP_KEYS_THUMBPRINT', 'thumbprint');
 
 add_filter('gd_jquery_constants', 'gd_popcore_jquery_constants_templatemanager_impl');
 function gd_popcore_jquery_constants_templatemanager_impl($jquery_constants) {
@@ -90,6 +91,10 @@ function gd_popcore_jquery_constants_templatemanager_impl($jquery_constants) {
 	);
 	$jquery_constants['ERROR_404'] = __('Ops, this is a broken link.', 'pop-coreprocessors');
 	$jquery_constants['FEEDBACKMSG_MULTIDOMAIN'] = GD_CONSTANT_FEEDBACKMSG_MULTIDOMAIN;
+	
+	$jquery_constants['KEYS_THUMBPRINT'] = POP_KEYS_THUMBPRINT;
+
+	
 	// $jquery_constants['ERROR_404'] = sprintf(
 	// 	'%s<br/>%s',
 	// 	__('Ops, this is a broken link.', 'pop-coreprocessors'),

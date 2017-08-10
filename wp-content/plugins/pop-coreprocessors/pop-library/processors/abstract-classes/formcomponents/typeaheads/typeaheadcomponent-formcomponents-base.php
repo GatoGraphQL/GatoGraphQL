@@ -112,9 +112,11 @@ class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Temp
 
 		$ret = parent::get_js_runtimesetting($template_id, $atts);
 
-		// Dataset
+		// Comment Leo 10/08/2017: the thumbprint value will make the ETag for a page to change whenever there is a new post,
+		// even if this new post is show in that page
+		// Then, this 'thumbprint' key+value will need to be removed before doing wp_hash
 		$ret['dataset'] = array(
-			'thumbprint' => $this->get_thumbprint($template_id, $atts)
+			POP_KEYS_THUMBPRINT/*'thumbprint'*/ => $this->get_thumbprint($template_id, $atts)
 		);
 
 		return $ret;

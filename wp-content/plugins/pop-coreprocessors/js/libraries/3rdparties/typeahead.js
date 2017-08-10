@@ -283,7 +283,7 @@ popTypeahead = {
 				if (datasetunit.prefetch) {
 					options.prefetch = {
 						url: datasetunit.prefetch,
-						thumbprint: datasetunit.thumbprint
+						thumbprint: datasetunit[M.KEYS_THUMBPRINT]/*.thumbprint*/
 					};
 				}
 				if (datasetunit.remote) {
