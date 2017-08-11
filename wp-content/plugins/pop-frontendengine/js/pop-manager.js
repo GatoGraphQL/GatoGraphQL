@@ -317,53 +317,54 @@ popManager = {
 		return t.firstLoad[popManager.getSettingsId(pageSection)];
 	},
 
-	init : function() {
+	initDomainVars : function(domain) {
 	
 		var t = this;
 
-		// Initialize the state for all allowed domains
-		$.each(M.ALLOWED_DOMAINS, function(index, domain) {
-
-			t.state[domain] = {
-				memory : {
-					settings: {
-						'js-settings': {},
-						jsmethods: {
-							pagesection: {},
-							block: {},
-						},
-						'templates-cbs': {},
-						'templates-paths': {},
-						'db-keys': {},
-						configuration: {},
-						// 'template-sources': {},
-					},
-					runtimesettings: {
-						'query-url': {},
-						'query-multidomain-urls': {},
-						configuration: {},
-						'js-settings': {},
-					},
-					dataset: {},
-					feedback: {
-						block: {},
+		t.state[domain] = {
+			memory : {
+				settings: {
+					'js-settings': {},
+					jsmethods: {
 						pagesection: {},
-						toplevel: {}
+						block: {},
 					},
-					'query-state': {
-						general: {},
-						domain: {},
-					}
+					'templates-cbs': {},
+					'templates-paths': {},
+					'db-keys': {},
+					configuration: {},
+					// 'template-sources': {},
 				},
-				database : {},
-				userdatabase : {},
-			};
-		});
+				runtimesettings: {
+					'query-url': {},
+					'query-multidomain-urls': {},
+					configuration: {},
+					'js-settings': {},
+				},
+				dataset: {},
+				feedback: {
+					block: {},
+					pagesection: {},
+					toplevel: {}
+				},
+				'query-state': {
+					general: {},
+					domain: {},
+				}
+			},
+			database : {},
+			userdatabase : {},
+		};
+	},
 
-		var domain = M.HOME_DOMAIN;
+	init : function() {
+	
+		var t = this;
 		
 		// Comment Leo 22/08/2016: when is_search_engine(), there is no #toplevel, so do nothing
 		if ($('#'+popPageSectionManager.getTopLevelSettingsId()).length) {
+
+			var domain = M.HOME_DOMAIN;
 
 			t.initDocument(domain);
 
@@ -609,6 +610,9 @@ popManager = {
 		t.domains[domain] = {
 			initialized: true
 		};
+
+		// Initialize the variables holding the memory and databases for that domain;
+		t.initDomainVars(domain);
 
 		if (fetchData) {
 
@@ -2879,31 +2883,28 @@ popManager = {
 
 			// Copy the properties from the local memory's domain to the operating domain?
 			// This is done the first time it is accessed, eg: if memory.feedback.toplevel is empty
-			// if ($.isEmptyObject(memory.feedback.toplevel)) {
-			if ($.isEmptyObject(memory.dataset)) {
+			// if ($.isEmptyObject(memory.dataset)) {
 				
-				// memory.feedback.toplevel = $.extend({}, localMemory.feedback.toplevel);
-
-				// Replicate it from the local domain one
-				memory.runtimesettings = {
-					'query-url': {},
-					'query-multidomain-urls': {},
-					configuration: {},
-					'js-settings': {},
-				};
-				memory.settings = {
-					'js-settings': {},
-					jsmethods: {
-						pagesection: {},
-						block: {},
-					},
-					'templates-cbs': {},
-					'templates-paths': {},
-					'db-keys': {},
-					configuration: {},
-					// 'template-sources': $.extend({}, localMemory.settings['template-sources']),
-				};	
-			}
+			// 	// Replicate it from the local domain one
+			// 	memory.runtimesettings = {
+			// 		'query-url': {},
+			// 		'query-multidomain-urls': {},
+			// 		configuration: {},
+			// 		'js-settings': {},
+			// 	};
+			// 	memory.settings = {
+			// 		'js-settings': {},
+			// 		jsmethods: {
+			// 			pagesection: {},
+			// 			block: {},
+			// 		},
+			// 		'templates-cbs': {},
+			// 		'templates-paths': {},
+			// 		'db-keys': {},
+			// 		configuration: {},
+			// 		// 'template-sources': $.extend({}, localMemory.settings['template-sources']),
+			// 	};	
+			// }
 
 			$.each(response['query-state'].general, function(rpssId, rpsParams) {	
 
@@ -2913,8 +2914,6 @@ popManager = {
 					memory['query-state'].general[rpssId] = {};
 					memory['query-state'].domain[rpssId] = {};
 					memory.dataset[rpssId] = {};
-					// memory.feedback.block[rpssId] = {};
-					// memory.feedback.pagesection[rpssId] = $.extend({}, localMemory.feedback.pagesection[rpssId]);
 
 					memory.runtimesettings.configuration[rpssId] = {};
 					memory.runtimesettings['query-url'][rpssId] = {};
@@ -2942,22 +2941,23 @@ popManager = {
 
 						// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
 						// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
-						if ($.type(value) == 'array') {
-							rpsConfiguration[key] = {};
-						}
-						else if ($.type(value) == 'object') {
-							// If it is an object, extend it. If not, just assign the value
-							if (!rpsConfiguration[key]) {
-								rpsConfiguration[key] = {};
-							}
-							// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `t.mergingTemplatePromise` keeping a promise per domain...
-							// // Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration (explanation below)
-							// $.extend(true, rpsConfiguration[key], value);
-							$.extend(rpsConfiguration[key], value);
-						}
-						else {
-							rpsConfiguration[key] = value;
-						}
+						t.copyToConfiguration(key, value, rpsConfiguration);
+						// if ($.type(value) == 'array') {
+						// 	rpsConfiguration[key] = {};
+						// }
+						// else if ($.type(value) == 'object') {
+						// 	// If it is an object, extend it. If not, just assign the value
+						// 	if (!rpsConfiguration[key]) {
+						// 		rpsConfiguration[key] = {};
+						// 	}
+						// 	// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `t.mergingTemplatePromise` keeping a promise per domain...
+						// 	// // Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration (explanation below)
+						// 	// $.extend(true, rpsConfiguration[key], value);
+						// 	$.extend(rpsConfiguration[key], value);
+						// }
+						// else {
+						// 	rpsConfiguration[key] = value;
+						// }
 					});
 				}
 
@@ -2972,7 +2972,6 @@ popManager = {
 						memory['query-state'].general[rpssId][rbsId] = $.extend({}, localMemory['query-state'].general[rpssId][rbsId]);
 						memory['query-state'].domain[rpssId][rbsId] = $.extend({}, localMemory['query-state'].domain[rpssId][rbsId]);
 						memory.dataset[rpssId][rbsId] = $.extend({}, localMemory.dataset[rpssId][rbsId]);
-						// memory.feedback.block[rpssId][rbsId] = $.extend({}, localMemory.feedback.block[rpssId][rbsId]);
 
 						memory.runtimesettings.configuration[rpssId][rbsId] = {};
 						memory.runtimesettings['query-url'][rpssId][rbsId] = $.extend({}, localMemory.runtimesettings['query-url'][rpssId][rbsId]);
@@ -3859,6 +3858,27 @@ popManager = {
 		}
 	},
 
+	copyToConfiguration : function(key, value, configuration) {
+
+		var t = this;
+
+		// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
+		// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
+		if ($.type(value) == 'array') {
+			configuration[key] = {};
+		}
+		else if ($.type(value) == 'object') {
+			// If it is an object, extend it. If not, just assign the value
+			if (!configuration[key]) {
+				configuration[key] = {};
+			}
+			$.extend(configuration[key], value);
+		}
+		else {
+			configuration[key] = value;
+		}
+	},
+
 	integratePageSection : function(domain, response) {
 	
 		var t = this;
@@ -3912,19 +3932,20 @@ popManager = {
 
 				// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
 				// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
-				if ($.type(value) == 'array') {
-					psConfiguration[key] = {};
-				}
-				else if ($.type(value) == 'object') {
-					// If it is an object, extend it. If not, just assign the value
-					if (!psConfiguration[key]) {
-						psConfiguration[key] = {};
-					}
-					$.extend(psConfiguration[key], value);
-				}
-				else {
-					psConfiguration[key] = value;
-				}
+				t.copyToConfiguration(key, value, psConfiguration);
+				// if ($.type(value) == 'array') {
+				// 	psConfiguration[key] = {};
+				// }
+				// else if ($.type(value) == 'object') {
+				// 	// If it is an object, extend it. If not, just assign the value
+				// 	if (!psConfiguration[key]) {
+				// 		psConfiguration[key] = {};
+				// 	}
+				// 	$.extend(psConfiguration[key], value);
+				// }
+				// else {
+				// 	psConfiguration[key] = value;
+				// }
 			});
 
 			var psId = rpsConfiguration[M.JS_FRONTENDID];//rpsConfiguration['frontend-id'];
