@@ -15,9 +15,9 @@ if (class_exists('MLAData'))
 if (class_exists("RGForms"))	
 	require_once 'gravityforms/load.php';
 
-if (defined('POP_SERVICEWORKERS_INITIALIZED')) {
-	require_once 'pop-serviceworkers/load.php';		
-}
+// if (defined('POP_SERVICEWORKERS_INITIALIZED')) {
+// 	require_once 'pop-serviceworkers/load.php';		
+// }
 
 // if (class_exists("JWP6_Plugin"))	
 // 	require_once 'jw-player-plugin-for-wordpress/load.php';

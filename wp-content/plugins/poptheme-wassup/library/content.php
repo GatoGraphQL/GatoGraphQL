@@ -96,6 +96,10 @@ function gd_header_site_description() {
   return apply_filters('gd_header_site_description', '');
 }
 
+function gd_get_theme_color() {
+  return apply_filters('gd_get_theme_color', '#FFFFFF');
+}
+
 function gd_get_initial_document_title() {
   
   return apply_filters('gd_get_initial_document_title', get_bloginfo('name'));
