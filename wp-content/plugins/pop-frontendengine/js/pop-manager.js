@@ -2641,11 +2641,27 @@ popManager = {
 						t.mergingTemplatePromise/*[domain]*/ = thisPromise;
 						if (lastPromise) {
 							lastPromise.done(function() {
-								t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
+								// Catch the "Mempage not available" exception, or the app might crash
+								try {
+									t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
+								}
+								catch(err) {
+									// Do nothing
+									// console.error(err.message);
+									console.log(err.message);
+								}
 							});
 						}
 						else {
-							t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
+							// Catch the "Mempage not available" exception, or the app might crash
+							try {
+								t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
+							}
+							catch(err) {
+								// Do nothing
+								// console.error(err.message);
+								console.log(err.message);
+							}
 						}
 
 						// Resolve this promise
@@ -2711,7 +2727,8 @@ popManager = {
 								}
 								catch(err) {
 									// Do nothing
-									console.error(err.message);
+									// console.error(err.message);
+									console.log(err.message);
 								}
 							});
 						}
@@ -2721,7 +2738,8 @@ popManager = {
 							}
 							catch(err) {
 								// Do nothing
-								console.error(err.message);
+								// console.error(err.message);
+								console.log(err.message);
 							}
 						}
 
