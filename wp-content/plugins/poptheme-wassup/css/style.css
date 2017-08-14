@@ -590,7 +590,7 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 .pop-notificationmsg.website-level {
 	position: fixed;
 	bottom: 0;
-	left: 50%;
+	/*left: 50%;*/
 	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
 }
 
@@ -608,14 +608,19 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	width: 180px;
 	margin-left: -90px;
 }
-.pop-notificationmsg.page-level,
+/*.pop-notificationmsg.page-level,
 .pop-notificationmsg.website-level,
 .pop-error.top-level {
 
 	width: 400px;
 	margin-left: -200px;
-}
-@media (min-width: 768px) {
+}*/
+@media (min-width: 500px) {
+	.pop-notificationmsg.page-level,
+	.pop-notificationmsg.website-level {
+
+		left: 50%;
+	}
 	.pop-notificationmsg.page-level,
 	.pop-notificationmsg.website-level,
 	.pop-error.top-level {
