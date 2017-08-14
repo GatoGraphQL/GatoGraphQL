@@ -62,7 +62,7 @@ class GD_DataLoad_ActionExecuter_Login extends GD_DataLoad_ActionExecuter {
 						$credentials = array(
 							'user_login' => $username,
 							'user_password' => $pwd,
-							'rememberme' => true,
+							'remember' => true,
 						);
 						$loginResult = wp_signon($credentials);
 
