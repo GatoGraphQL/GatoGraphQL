@@ -299,7 +299,14 @@ self.addEventListener('fetch', event => {
     if (url.search) {
       url.search += '&';
     }
-    url.search += opts.params.cachebust + '=' + Date.now();
+    
+    // Comment Leo 14/08/2017: We set the cache-busting number to change every 1 second
+    // This is done because the request will go through the CDN. So if many users, at the
+    // same second, access the same page in the website, the SW refresh will get the response
+    // from the CDN, and it won't reach the server. 
+    // var fresh = Date.now(); // Every millisecond
+    var fresh = Math.floor(Date.now()/1000); // Every second
+    url.search += opts.params.cachebust + '=' + fresh;
 
     return new Request(url.toString());
   }
