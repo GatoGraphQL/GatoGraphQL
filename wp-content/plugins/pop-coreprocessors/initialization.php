@@ -70,8 +70,9 @@ class PoP_CoreProcessors_Initialization {
 			// https://github.com/noraesae/perfect-scrollbar/releases
 			wp_register_script('perfect-scrollbar', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.11/js/min/perfect-scrollbar.jquery.min.js', null, null);
 
+			// Comment Leo 15/08/2017: We don't use Modernizr anymore after commenting `Modernizr.localstorage` in function supports_html5_storage()
 			// https://github.com/Modernizr/Modernizr/releases
-			wp_register_script('modernizr', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', null, null);
+			// wp_register_script('modernizr', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', null, null);
 
 			// http://handlebarsjs.com/installation.html
 			// // Comment Leo: Version 4.0.10 has a bug (https://github.com/wycats/handlebars.js/issues/1300) that make the application not work correctly

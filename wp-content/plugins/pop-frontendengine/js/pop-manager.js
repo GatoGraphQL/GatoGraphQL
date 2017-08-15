@@ -1589,7 +1589,7 @@ popManager = {
 		var t = this;
 
 		// Delete all stale entries
-		if (M.USELOCALSTORAGE && Modernizr.localstorage) {
+		if (M.USELOCALSTORAGE && supports_html5_storage()) {
 				
 			var latest = localStorage['PoP:version'];
 			if (!latest || (latest != M.VERSION)){
@@ -1797,7 +1797,7 @@ popManager = {
 		var t = this;
 
 		// Check if a response is stored in local storage for that combination of URL and params
-		if (M.USELOCALSTORAGE && Modernizr.localstorage) {
+		if (M.USELOCALSTORAGE && supports_html5_storage()) {
 				
 			var stored = localStorage[localStorageKey];
 			if (stored) {
@@ -1831,7 +1831,7 @@ popManager = {
 	storeData : function(localStorageKey, value, expires) {
 
 		var t = this;
-		if (M.USELOCALSTORAGE && Modernizr.localstorage) {
+		if (M.USELOCALSTORAGE && supports_html5_storage()) {
 				
 			var stored = {
 				version: M.VERSION,
