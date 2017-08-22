@@ -36,6 +36,11 @@ function gd_wassup_theme_body_class($body_classes) {
 				$body_classes[] = 'non-scrollable';
 			}
 		}
+
+		// if (PoPTheme_Wassup_Utils::narrow_body()) {
+		
+		// 	$body_classes[] = 'narrow';
+		// }
 	}
 	
 	return $body_classes;

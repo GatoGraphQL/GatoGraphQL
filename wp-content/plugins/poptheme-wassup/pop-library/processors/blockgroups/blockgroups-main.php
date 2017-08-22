@@ -117,6 +117,12 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 			case GD_TEMPLATE_BLOCKGROUP_HOME:
 
 				$this->append_att($template_id, $atts, 'class', 'blockgroup-home');
+
+				if (PoPTheme_Wassup_Utils::narrow_body_home()) {
+
+					// Make it 564px max width
+					$this->append_att($template_id, $atts, 'class', 'narrow');
+				}
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR:

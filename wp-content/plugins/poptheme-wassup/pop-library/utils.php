@@ -171,6 +171,15 @@ class PoPTheme_Wassup_Utils {
 		// return apply_filters('PoPTheme_Wassup_Utils:add_mainpagesection_scrollbar', false);
 	}
 
+	// public static function narrow_body() {
+
+	// 	return apply_filters('PoPTheme_Wassup_Utils:narrow_body', true);
+	// }
+	public static function narrow_body_home() {
+
+		return apply_filters('PoPTheme_Wassup_Utils:narrow_body_home', true);
+	}
+
 	public static function get_multidomain_bgcolors() {
 
 		return apply_filters('PoPTheme_Wassup_Utils:multidomain_bgcolors', array());
