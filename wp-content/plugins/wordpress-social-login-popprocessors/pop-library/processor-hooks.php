@@ -22,6 +22,11 @@ class GD_WSL_ProcessorHooks {
 
 	function loginchannels($blocks) {
 
+		// Only if there are service providers
+		if (!gd_wsl_networklinks()) {
+			return $blocks;
+		}
+
 		// Add Facebook, Twitter, etc, after the Login Block
 		$add = array(GD_WSL_TEMPLATE_BLOCK_NETWORKLINKS);
 		array_splice($blocks, array_search(GD_TEMPLATE_BLOCK_LOGIN, $blocks)+1, 0, $add);
@@ -29,6 +34,11 @@ class GD_WSL_ProcessorHooks {
 	}
 
 	function add_hook($hooks) {
+
+		// Only if there are service providers
+		if (!gd_wsl_networklinks()) {
+			return $hooks;
+		}
 
 		$hooks[] = $this;
 		return $hooks;
