@@ -8,7 +8,7 @@ popFileUpload = {
 	fileUpload : function(args) {
 	
 		var t = this;
-		var /*domain = args.domain, */pageSection = args.pageSection, targets = args.targets;
+		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		targets.each(function() {
 
@@ -46,7 +46,7 @@ popFileUpload = {
 					var templateName = fileupload.data('template-download');
 					var rows = $();
 					
-					var targetConfiguration = popManager.getTargetConfiguration(pageSection, block, templateName);
+					var targetConfiguration = popManager.getTargetConfiguration(domain, pageSection, block, templateName);
 
 					// Expand the JS Keys for the configuration
 					popManager.expandJSKeys(targetConfiguration);

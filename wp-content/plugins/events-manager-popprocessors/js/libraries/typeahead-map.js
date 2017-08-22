@@ -24,7 +24,7 @@ popTypeaheadMap = {
 				if (!popMap.hasMarker(pageSection, block, datum.id)) {
 
 					// Extend the targetContext using datum as the itemObject
-					var targetConfiguration = popManager.getTargetConfiguration(pageSection, block, template);
+					var targetConfiguration = popManager.getTargetConfiguration(domain, pageSection, block, template);
 					$.extend(targetConfiguration, {itemObject: datum});
 
 					// Add it to DOM => Execute it => the markerData will be added to popMap.markers

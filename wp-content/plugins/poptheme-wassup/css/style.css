@@ -51,7 +51,10 @@ body.sliding #ps-navigator {
 		padding-bottom: 5px;
 	}
 }
-body.swift #ps-main .pop-outerblock.blockgroup-home:before,
+
+
+body.swift #ps-main .pop-outerblock.blockgroup-home.narrow:before,
+body.swift #ps-main .pop-outerblock.narrowblock:before,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost:before,
 body.swift #ps-main .pop-outerblock.blockgroup-author:before,
 body.swift #ps-main .pop-outerblock.blockgroup-tag:before,
@@ -59,7 +62,8 @@ body.swift #ps-main .pop-outerblock.controlblock:before,
 body.swift #ps-main .pop-outerblock.feed:before,
 body.expansive #ps-main .simpleview > .scroll-inner:before,
 body.expansive #ps-main .fullview > .scroll-inner:before,
-body.swift #ps-main .pop-outerblock.blockgroup-home:after,
+body.swift #ps-main .pop-outerblock.blockgroup-home.narrow:after,
+body.swift #ps-main .pop-outerblock.narrowblock:after,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost:after,
 body.swift #ps-main .pop-outerblock.blockgroup-author:after,
 body.swift #ps-main .pop-outerblock.blockgroup-tag:after,
@@ -70,7 +74,8 @@ body.expansive #ps-main .fullview > .scroll-inner:after {
   display: table;
   content: " ";
 }
-body.swift #ps-main .pop-outerblock.blockgroup-home:after,
+body.swift #ps-main .pop-outerblock.blockgroup-home.narrow:after,
+body.swift #ps-main .pop-outerblock.narrowblock:after,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost:after,
 body.swift #ps-main .pop-outerblock.blockgroup-author:after,
 body.swift #ps-main .pop-outerblock.blockgroup-tag:after,
@@ -80,7 +85,8 @@ body.expansive #ps-main .simpleview > .scroll-inner:after,
 body.expansive #ps-main .fullview > .scroll-inner:after {
   clear: both;
 }
-body.swift #ps-main .pop-outerblock.blockgroup-home,
+body.swift #ps-main .pop-outerblock.blockgroup-home.narrow,
+body.swift #ps-main .pop-outerblock.narrowblock,
 body.swift #ps-main .pop-outerblock.blockgroup-singlepost,
 body.swift #ps-main .pop-outerblock.blockgroup-author,
 body.swift #ps-main .pop-outerblock.blockgroup-tag,
@@ -109,6 +115,7 @@ body.expansive #ps-main .blockgroup-singlepost {
     margin-right: auto;
     margin-left: auto;
 }
+
 
 .dropdown-menu > li > div.pop-block {
   padding: 3px 20px;
