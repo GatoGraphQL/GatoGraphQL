@@ -12,6 +12,8 @@ define ('GD_TEMPLATE_CONTENT_USERPOSTINTERACTION', PoP_ServerUtils::get_template
 define ('GD_TEMPLATE_CONTENT_POSTHEADER', PoP_ServerUtils::get_template_definition('content-postheader'));
 define ('GD_TEMPLATE_CONTENT_USERHEADER', PoP_ServerUtils::get_template_definition('content-userheader'));
 // define ('GD_TEMPLATE_CONTENT_POSTCONCLUSION', PoP_ServerUtils::get_template_definition('content-postconclusion'));
+define ('GD_TEMPLATE_CONTENT_PAGECONTENT', PoP_ServerUtils::get_template_definition('content-pagecontent'));
+define ('GD_TEMPLATE_CONTENT_PAGECONTENT_PRETTYPRINT', PoP_ServerUtils::get_template_definition('content-pagecontent-prettyprint'));
 
 define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_UPDATEDATA', PoP_ServerUtils::get_template_definition('content-dataquery-allcontent-updatedata'));
 define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLUSERS_UPDATEDATA', PoP_ServerUtils::get_template_definition('content-dataquery-allusers-updatedata'));
@@ -44,6 +46,8 @@ class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase 
 			GD_TEMPLATE_CONTENT_DATAQUERY_TAGS_REQUESTLAYOUTS,
 			// GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_COMMENTS,
 			// GD_TEMPLATE_CONTENT_POSTCONCLUSION,
+			GD_TEMPLATE_CONTENT_PAGECONTENT,
+			GD_TEMPLATE_CONTENT_PAGECONTENT_PRETTYPRINT,
 		);
 	}
 	function get_inner_template($template_id) {
@@ -63,6 +67,8 @@ class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase 
 			GD_TEMPLATE_CONTENT_DATAQUERY_ALLUSERS_REQUESTLAYOUTS => GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLUSERS_REQUESTLAYOUTS,
 			GD_TEMPLATE_CONTENT_DATAQUERY_COMMENTS_REQUESTLAYOUTS => GD_TEMPLATE_CONTENTINNER_DATAQUERY_COMMENTS_REQUESTLAYOUTS,
 			GD_TEMPLATE_CONTENT_DATAQUERY_TAGS_REQUESTLAYOUTS => GD_TEMPLATE_CONTENTINNER_DATAQUERY_TAGS_REQUESTLAYOUTS,
+			GD_TEMPLATE_CONTENT_PAGECONTENT => GD_TEMPLATE_CONTENTINNER_PAGECONTENT,
+			GD_TEMPLATE_CONTENT_PAGECONTENT_PRETTYPRINT => GD_TEMPLATE_CONTENTINNER_PAGECONTENT,
 		);
 
 		if ($inner = $inners[$template_id]) {
@@ -103,6 +109,21 @@ class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase 
 		}
 
 		return parent::get_inner_template($template_id);
+	}
+
+	function get_block_jsmethod($template_id, $atts) {
+
+		$ret = parent::get_block_jsmethod($template_id, $atts);
+	
+		switch ($template_id) {
+
+			case GD_TEMPLATE_CONTENT_PAGECONTENT_PRETTYPRINT:
+
+				$this->add_jsmethod($ret, 'prettyPrint');
+				break;
+		}
+
+		return $ret;
 	}
 
 	function init_atts($template_id, &$atts) {

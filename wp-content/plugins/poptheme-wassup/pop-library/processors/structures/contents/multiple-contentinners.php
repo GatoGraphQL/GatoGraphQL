@@ -13,6 +13,7 @@ define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_REQUESTLAYOUTS', PoP_Serv
 define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLUSERS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('contentinner-dataquery-allusers-requestlayouts'));
 define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_COMMENTS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('contentinner-dataquery-comments-requestlayouts'));
 define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_TAGS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('contentinner-dataquery-tags-requestlayouts'));
+define ('GD_TEMPLATE_CONTENTINNER_PAGECONTENT', PoP_ServerUtils::get_template_definition('contentinner-getpop-pagecontent'));
 
 // define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_COMMENTS', 'contentinner-dataquery-allcontent-comments');
 
@@ -30,6 +31,7 @@ class GD_Template_Processor_MultipleContentInners extends GD_Template_Processor_
 			GD_TEMPLATE_CONTENTINNER_DATAQUERY_COMMENTS_REQUESTLAYOUTS,
 			GD_TEMPLATE_CONTENTINNER_DATAQUERY_TAGS_REQUESTLAYOUTS,
 			// GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_COMMENTS,
+			GD_TEMPLATE_CONTENTINNER_PAGECONTENT,
 		);
 	}
 
@@ -59,6 +61,16 @@ class GD_Template_Processor_MultipleContentInners extends GD_Template_Processor_
 
 			// 	$ret[] = GD_TEMPLATE_SUBCOMPONENT_POSTCOMMENTS;
 			// 	break;
+
+			default:
+
+				$layouts = array(
+					GD_TEMPLATE_CONTENTINNER_PAGECONTENT => GD_TEMPLATE_LAYOUT_CONTENT_PAGE,
+				);
+				if ($layout = $layouts[$template_id]) {
+					$ret[] = $layout;
+				}
+				break;
 		}
 
 		return $ret;
