@@ -105,7 +105,7 @@ class Wassup_GF_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 				$add = 
 					($template_id == GD_TEMPLATE_PAGESECTION_HOVER) || 
 					// Only allow to add the Contact us form in the Main when doing JSON, so that calling https://www.mesym.com/en/contact-us/ only brings it in the hover, but the form can still be placed in the Main, as with getPoP, and process the requests.
-					($fetching_json && ($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN));
+					($fetching_json_data && ($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN));
 				if ($add) {
 
 					if ($submitted_data) {
