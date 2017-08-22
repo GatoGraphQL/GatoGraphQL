@@ -101,13 +101,13 @@ class GetPoPDemo_Initialization {
 
 			/** Custom Theme Source */
 			// Custom implementation of Bootstrap
-			wp_register_style('getpop-bootstrap', $folder . '/custom.bootstrap.css', array('bootstrap'), GETPOPDEMO_VERSION, 'screen');
-			wp_enqueue_style('getpop-bootstrap');
+			wp_register_style('getpop-demo-bootstrap', $folder . '/custom.bootstrap.css', array('bootstrap'), GETPOPDEMO_VERSION, 'screen');
+			wp_enqueue_style('getpop-demo-bootstrap');
 
-			wp_register_style('getpop-typeahead-bootstrap', $folder . '/typeahead.js-bootstrap.css', array('getpop-bootstrap'), GETPOPDEMO_VERSION, 'screen');
-			wp_enqueue_style('getpop-typeahead-bootstrap');		
+			wp_register_style('getpop-demo-typeahead-bootstrap', $folder . '/typeahead.js-bootstrap.css', array('getpop-demo-bootstrap'), GETPOPDEMO_VERSION, 'screen');
+			wp_enqueue_style('getpop-demo-typeahead-bootstrap');		
 			
-			wp_register_style('getpop-demo', $folder . '/style.css', array('poptheme-wassup', 'getpop-bootstrap'), GETPOPDEMO_VERSION);
+			wp_register_style('getpop-demo', $folder . '/style.css', array('poptheme-wassup', 'getpop-demo-bootstrap'), GETPOPDEMO_VERSION);
 			wp_enqueue_style('getpop-demo');
 		}
 	}
