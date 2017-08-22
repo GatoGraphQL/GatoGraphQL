@@ -118,7 +118,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			($template_id == GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWHOME && $target == GD_URLPARAM_TARGET_QUICKVIEW);
 		if ($add) {
 
-			$blockgroups = $frames = array();
+			$blocks = $blockgroups = $frames = array();
 			
 			// Allow GetPoP website to change the sidebar, since it is changing the homepage
 			if ($blockgroup = apply_filters('PoPTheme_Wassup_PageSectionSettingsProcessor:sideinfo_home:blockgroup', GD_TEMPLATE_BLOCKGROUP_HOMESECTION_ALLCONTENT_SIDEBAR)) {
@@ -132,6 +132,12 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 				if (!$vars['fetching-json-data']) {
 					GD_TemplateManager_Utils::add_blocks($ret, $frames, GD_TEMPLATEBLOCKSETTINGS_FRAME);
 				}
+			}
+			// If no blockgroup, then "close" the sideinfo
+			else {
+				
+				$blocks[] = GD_TEMPLATE_BLOCK_EMPTYSIDEINFO;
+				GD_TemplateManager_Utils::add_blocks($ret, $blocks, GD_TEMPLATEBLOCKSETTINGS_MAIN);
 			}
 		}
 	}
@@ -571,7 +577,10 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			// Frames: PageSection ControlGroups
 			if ($template_id == GD_TEMPLATE_PAGESECTION_HOME && $target == GD_URLPARAM_TARGET_MAIN) {
 
-				$frames[] = GD_TEMPLATE_BLOCK_HOMECONTROL;
+				// Allow Verticals to not add the frame on the homepage
+				if ($frame = apply_filters('PoPTheme_Wassup_PageSectionSettingsProcessor:home:frame', GD_TEMPLATE_BLOCK_HOMECONTROL)) {
+					$frames[] = $frame;
+				}
 			}
 			elseif ($template_id == GD_TEMPLATE_PAGESECTION_QUICKVIEWHOME && $target == GD_URLPARAM_TARGET_QUICKVIEW) {
 
