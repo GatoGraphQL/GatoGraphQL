@@ -2,7 +2,8 @@
 (function($){
 	$(document).one('template:merged', function() {
 
-		var mapDiv = $('#{{lastGeneratedId template=mapdiv-template}}');
+		{{! the "mapdiv-template" gets drawn on the block-toplevel-domain, not on the data domain }}
+		var mapDiv = $('#{{lastGeneratedId template=mapdiv-template domain=bs.toplevel-domain}}');
 		var block = popManager.getBlock(mapDiv);
 		var pageSection = popManager.getPageSection(block);
 

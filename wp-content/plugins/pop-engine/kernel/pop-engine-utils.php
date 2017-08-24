@@ -341,7 +341,7 @@ class GD_TemplateManager_Utils {
 		// $mode = $_REQUEST[GD_URLPARAM_MODE];
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
-		$domain = $_REQUEST[POP_URLPARAM_DOMAIN];
+		// $domain = $_REQUEST[POP_URLPARAM_DOMAIN];
 		
 		// Target/Module default values (for either empty, or if the user is playing around with the url)
 		$modules = array(
@@ -388,7 +388,7 @@ class GD_TemplateManager_Utils {
 			'settingsformat' => $settingsformat,
 			'tab' => $tab,
 			'action' => $action,
-			'domain' => $domain,
+			// 'domain' => $domain,
 			'theme' => $gd_theme_manager->get_theme() ? $gd_theme_manager->get_theme()->get_name() : '',
 			'thememode' => $gd_theme_manager->get_thememode() ? $gd_theme_manager->get_thememode()->get_name() : '',
 			'themestyle' => $gd_theme_manager->get_themestyle() ? $gd_theme_manager->get_themestyle()->get_name() : '',

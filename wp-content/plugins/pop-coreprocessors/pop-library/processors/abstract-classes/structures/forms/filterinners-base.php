@@ -109,4 +109,13 @@ class GD_Template_Processor_FilterInnersBase extends GD_Template_Processor_FormI
 
 		return GD_TEMPLATE_SUBMITBUTTONFORMGROUP_SEARCH;
 	}	
+
+	function get_template_cb_actions($template_id, $atts) {
+	
+		// Comment Leo 23/08/2017: The filter must not be re-drawn after reloading/refreshing content,
+		// it must not be affected by the data coming back from fetching-json-data, the filter is outside this scope
+		return array(
+			GD_TEMPLATECALLBACK_ACTION_RESET,
+		);
+	}
 }

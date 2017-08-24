@@ -52,20 +52,12 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['$defaultLocale'] = $this->get_default_locale();
         $configuration['$outputJSON'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
         $configuration['$origins'] = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
-        // $multidomain_websites = PoP_Frontend_ConfigurationUtils::get_multidomain_websites();
-        // $multidomain_locales = array();
-        // foreach ($multidomain_websites as $domain => $website_info) {
-        //     $multidomain_locales[] = $website_info['locale'];
-        // }
-        // $configuration['$multidomain'] = array(
-        //     'domains' => array_keys($multidomain_websites),
-        //     'locales' => $multidomain_locales,
-        // );
         // Remove the localhost from the multidomains, or the SW won't cache anything at all
-        $homeurl = get_site_url();
-        $multidomains = array_keys(PoP_Frontend_ConfigurationUtils::get_multidomain_websites());
-        array_splice($multidomains, array_search($homeurl, $multidomains), 1);
-        $configuration['$multidomains'] = $multidomains;
+        // $homeurl = get_site_url();
+        // $multidomains = array_keys(PoP_MultiDomain_Utils::get_multidomain_websites());
+        // array_splice($multidomains, array_search($homeurl, $multidomains), 1);
+        // $configuration['$multidomains'] = $multidomains;
+        $configuration['$multidomains'] = $this->get_multidomains();
         $configuration['$cacheBustParam'] = GD_URLPARAM_SWCACHEBUST;
 
         // Thememodes for the appshell
@@ -233,6 +225,36 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
     //         $pages
     //     );
     // }
+
+    protected function get_multidomains() {
+
+        // // $multidomain_websites = PoP_MultiDomain_Utils::get_multidomain_websites();
+        // // $multidomain_locales = array();
+        // // foreach ($multidomain_websites as $domain => $website_info) {
+        // //     $multidomain_locales[] = $website_info['locale'];
+        // // }
+        // // $configuration['$multidomain'] = array(
+        // //     'domains' => array_keys($multidomain_websites),
+        // //     'locales' => $multidomain_locales,
+        // // );
+        // // Remove the localhost from the multidomains, or the SW won't cache anything at all
+        
+        // $multidomains = array_keys(PoP_MultiDomain_Utils::get_multidomain_websites());
+        // Allow popMultiDomains to modify this
+        $multidomains = array_unique(apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:multidomains',
+            array()
+        ));
+
+        // Make sure the homeurl is not there!
+        $homeurl = get_site_url();
+        $pos = array_search($homeurl, $multidomains);
+        if ($pos > -1) {
+            array_splice($multidomains, $pos, 1);
+        }
+        
+        return $multidomains;
+    }
 
     protected function get_locales() {
         

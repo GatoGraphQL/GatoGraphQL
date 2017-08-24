@@ -19,7 +19,7 @@ class GD_Template_Processor_FormInnersBase extends GD_Template_Processor_Structu
 		return array(
 			GD_TEMPLATECALLBACK_ACTION_LOADCONTENT,
 			GD_TEMPLATECALLBACK_ACTION_REFETCH,
-			GD_TEMPLATECALLBACK_ACTION_RESET
+			GD_TEMPLATECALLBACK_ACTION_RESET,
 		);
 	}
 }

@@ -43,14 +43,11 @@ Handlebars.registerHelper('latestCountTargets', function(itemObject, options) {
 
 Handlebars.registerHelper('formatFeedbackMessage', function(message, options) {
 
-    var isMultiDomain = options.hash['is-multidomain'];
-    var domain = options.hash.domain;
-    if (isMultiDomain && domain) {
+    var topLevelSettings = options.hash.tls, 
+        pageSectionSettings = options.hash.pss, 
+        blockSettings = options.hash.bs;
 
-        // If specified the domain, then add its name in the message, through a customizable format
-        var name = M.MULTIDOMAIN_WEBSITES[domain] ? M.MULTIDOMAIN_WEBSITES[domain].name : domain;
-        message = M.FEEDBACKMSG_MULTIDOMAIN.format(name, message);
-    }
-
+    // Allow popMultiDomain to modify the message, adding the domain name
+    message = popSystem.formatFeedbackMessage(message, topLevelSettings, pageSectionSettings, blockSettings);
     return new Handlebars.SafeString(message);
 });

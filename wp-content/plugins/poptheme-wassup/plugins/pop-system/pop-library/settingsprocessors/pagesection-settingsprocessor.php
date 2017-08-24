@@ -14,7 +14,7 @@ class PoPTheme_Wassup_PoPSystem_PageSectionSettingsProcessor extends Wassup_Page
 		$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();
 		
 		// Comment Leo 27/07/2016: function add_page_blockunits is invoked also for error pages, which produce no $page_id
-		// Because POP_FRONTENDENGINE_PAGE_EXTERNAL has no value, the switch actually matches the "false" value from POP_FRONTENDENGINE_PAGE_EXTERNAL with the "null" value from $page_id
+		// Because POP_MULTIDOMAIN_PAGE_EXTERNAL has no value, the switch actually matches the "false" value from POP_MULTIDOMAIN_PAGE_EXTERNAL with the "null" value from $page_id
 		// and it enters the condition. To avoid that problem, make sure there is a $page_id
 		if (!$page_id) return;
 

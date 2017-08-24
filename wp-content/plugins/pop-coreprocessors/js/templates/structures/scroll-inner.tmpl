@@ -1,6 +1,6 @@
 {{#each items}}
 	{{#if ../layout-grid.row-items}}
-		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row blockinner-row scroll-row {{../extend-class}} {{!../layout-grid.wrapper-class}} {{../classes.layoutgrid-wrapper}} pop-structureinner" style="{{../styles.layoutgrid-wrapper}}">{{/mod}}
+		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row blockinner-row scroll-row {{../extend-class}} {{../tls.domain-id}} {{!../layout-grid.wrapper-class}} {{../classes.layoutgrid-wrapper}} pop-structureinner" style="{{../styles.layoutgrid-wrapper}}">{{/mod}}
 	{{/if}}
 	<div class="pop-elem {{../class}} blockinner-elem {{!../layout-grid.class}}" style="{{../style}}">
 		{{#each ../template-ids.layouts}}

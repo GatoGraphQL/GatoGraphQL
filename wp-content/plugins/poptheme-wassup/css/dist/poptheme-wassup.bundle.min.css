@@ -449,9 +449,9 @@ body.sliding #ps-hover .container-fluid{min-height:100%}#ps-hover{background-col
 .pop-block-calendarmap .blocksection-messagefeedback,
 .pop-block-calendar.pop-block-calendarmap .pop-calendar-controls,
 .pop-block-calendarmap .blocksection-fetchmore{width:50%;padding-right:15px}.pop-block-scrollmap.vertical .blocksection-inners>div.map,
-.pop-block-calendarmap .blocksection-inners>div.map{float:right}.pop-block-scrollmap.vertical .blocksection-inners>div.map{width:75%}.pop-block-calendarmap .blocksection-inners>div.map{width:50%}.pop-block-map .blocksection-messagefeedback{position:absolute;z-index:1000}.pop-block-calendarmap .blocksection-messagefeedback,
+.pop-block-calendarmap .blocksection-inners>div.map{float:right}.pop-block-scrollmap.vertical .blocksection-inners>div.map{width:75%}.pop-block-calendarmap .blocksection-inners>div.map{width:50%}.pop-block-map .blocksection-messagefeedback{position:absolute;z-index:500}.pop-block-map.pop-multidomain .blocksection-messagefeedback{position:relative}.pop-block-calendarmap .blocksection-messagefeedback,
 .pop-block-calendarmap .blocksection-status .pop-loading,
-.pop-block-calendarmap .blocksection-status .pop-error{top:50px}.pop-block-calendarmap .pop-error{width:100%;position:absolute}.pop-block-scrollmap.vertical .blocksection-fetchmore{width:25%}.pagesection-group.theater #ps-main .container-fluid{max-width:100%;padding:0}.pagesection-group.theater #ps-main-merge{padding-left:0;padding-right:0}.pagesection-group.theater .pop-block-map
+.pop-block-calendarmap .blocksection-status .pop-error{top:50px}.pop-block-calendarmap.pop-multidomain .blocksection-messagefeedback{top:0}.pop-block-calendarmap .pop-error{width:100%;position:absolute}.pop-block-scrollmap.vertical .blocksection-fetchmore{width:25%}.pagesection-group.theater #ps-main .container-fluid{max-width:100%;padding:0}.pagesection-group.theater #ps-main-merge{padding-left:0;padding-right:0}.pagesection-group.theater .pop-block-map
 .map{position:fixed !important;top:0;bottom:0;height:100%;float:none;right:0}.pagesection-group.active-top.theater .pop-block-map
 .map{top:45px}.pagesection-group.active-top.active-pagetabs.theater .pop-block-map
 .map{top:80px}.pagesection-group.theater .pop-block-map .pop-map{height:100%}.pagesection-group.theater .pop-block-scrollmap .blocksection-inners>.scroll,

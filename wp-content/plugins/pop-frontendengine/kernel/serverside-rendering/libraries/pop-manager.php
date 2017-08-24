@@ -3713,10 +3713,11 @@ class PoP_ServerSide_Manager {
 
 	function getTopLevelSettings($domain) {
 
-		$multidomain_websites = PoP_Frontend_ConfigurationUtils::get_multidomain_websites();
+		// Comment Leo 24/08/2017: no need for the pre-defined ID
+		//$multidomain_websites = PoP_MultiDomain_Utils::get_multidomain_websites();
 		return array(
 			'domain' => $domain,
-			'domain-id' => $multidomain_websites[$domain] ? $multidomain_websites[$domain]['id'] : GD_TemplateManager_Utils::get_domain_id($domain),
+			'domain-id' => /*$multidomain_websites[$domain] ? $multidomain_websites[$domain]['id'] : */GD_TemplateManager_Utils::get_domain_id($domain),
 			'feedback' => $this->getTopLevelFeedback($domain),			
 		);
 	}
@@ -3751,6 +3752,7 @@ class PoP_ServerSide_Manager {
 			'feedback' => $this->getBlockFeedback($domain, $pssId, $bsId),
 			'bsId' => $bsId,
 			'bId' => $bId,
+			'toplevel-domain' => $blockTLDomain,
 			'is-multidomain' => $this->isMultiDomain($blockTLDomain, $pssId, $bsId),
 		);
 

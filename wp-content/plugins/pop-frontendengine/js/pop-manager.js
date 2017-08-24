@@ -369,7 +369,7 @@ popManager = {
 			t.initDocument(domain);
 
 			// Initialize the domain
-			t.initDomain(domain, false);
+			t.initDomain(domain/*, false*/);
 
 			// Initialize Settings, Feedback and Data
 			t.initTopLevelJson(domain);
@@ -602,7 +602,7 @@ popManager = {
 		$(document).triggerHandler('initialize.pop.document', [domain]);
 	},
 
-	initDomain : function(domain, fetchData) {
+	initDomain : function(domain/*, fetchData*/) {
 	
 		var t = this;
 
@@ -614,14 +614,15 @@ popManager = {
 		// Initialize the variables holding the memory and databases for that domain;
 		t.initDomainVars(domain);
 
-		if (fetchData) {
+		// Comment Leo 24/08/2017: Moved to popMultiDomain
+		// if (fetchData) {
 
-			// Fetch the corresponding data from the server to initialize the domain
-			var url = M.PLACEHOLDER_DOMAINURL.format(encodeURIComponent(domain));
-			var entries = {};
-			entries[url] = [M.URLPARAM_TARGET_MAIN];
-			t.backgroundLoad(entries);
-		}
+		// 	// Fetch the corresponding data from the server to initialize the domain
+		// 	var url = M.PLACEHOLDER_DOMAINURL.format(encodeURIComponent(domain));
+		// 	var entries = {};
+		// 	entries[url] = [M.URLPARAM_TARGET_MAIN];
+		// 	t.backgroundLoad(entries);
+		// }
 
 		var args = {
 			domain: domain,
@@ -638,7 +639,7 @@ popManager = {
 		if (!t.domains[domain] || !t.domains[domain].initialized) {
 
 			// Initialize the domain
-			t.initDomain(domain, true);
+			t.initDomain(domain/*, true*/);
 		}
 	},
 
@@ -3284,6 +3285,10 @@ popManager = {
 		// Eg: messagefeedback when there are no results from the first domain, may be overriten by a second domain
 		var fetchStatus = options['fetch-status'] || {isFirst: true, isLast: true};
 		var operation = options.operation || (fetchStatus.isFirst ? M.URLPARAM_OPERATION_REPLACE : M.URLPARAM_OPERATION_APPEND);
+		// Special case multidomain: if the operation is REPLACE, but it is not the first element, then APPEND, or else the data from the 2nd, 3rd, etc, domains will replace the preceding ones
+		if (operation == M.URLPARAM_OPERATION_REPLACE && !fetchStatus.isFirst) {
+			operation = M.URLPARAM_OPERATION_APPEND;
+		}
 
 		// Delete all children before appending?
 		if (operation == M.URLPARAM_OPERATION_REPLACE) {
@@ -3629,7 +3634,7 @@ popManager = {
 		var t = this;
 
 		return {
-			url: [],
+			url: {},
 			loading: [],
 			reload: [],
 			operation: {},
@@ -3976,9 +3981,10 @@ popManager = {
 	
 		var t = this;
 
+		// Comment Leo 24/08/2017: no need for the pre-defined ID
 		return {
 			domain: domain,
-			'domain-id': M.MULTIDOMAIN_WEBSITES[domain] ? M.MULTIDOMAIN_WEBSITES[domain].id : getDomainId(domain),
+			'domain-id': /*M.MULTIDOMAIN_WEBSITES[domain] ? M.MULTIDOMAIN_WEBSITES[domain].id : */getDomainId(domain),
 			feedback: t.getTopLevelFeedback(domain),
 		};
 	},
@@ -4017,6 +4023,7 @@ popManager = {
 			feedback: t.getBlockFeedback(domain, pssId, bsId),
 			bsId: bsId,
 			bId: bId,
+			'toplevel-domain': blockTLDomain,
 			'is-multidomain': t.isMultiDomain(blockTLDomain, pssId, bsId)
 		};
 

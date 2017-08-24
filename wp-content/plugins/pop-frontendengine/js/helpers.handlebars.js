@@ -279,8 +279,8 @@ Handlebars.registerHelper('lastGeneratedId', function(options) {
 	var pssId = options.hash.pssId || context.pss.pssId;
 	var targetId = options.hash.targetId || context.bs.bsId;
 	var template = options.hash.template || context[M.JS_TEMPLATE];//context.template;
-
-	var domain = context.tls.domain;
+	// Allow to set the domain explicitly. Eg: in the decentralized map, the "mapdiv-template" gets drawn on the block-toplevel-domain, not on the data domain
+	var domain = options.hash.domain || context.tls.domain;
 	var group = options.hash.group;
 	return popJSRuntimeManager.getLastGeneratedId(domain, pssId, targetId, template, group);
 });

@@ -14,7 +14,7 @@
 				end: "{{end-date}}",
 				allDay: {{all-day-string}},
 				domain: "{{../../tls.domain}}", {{!Domain is needed because all events are redrawn all together, so each of them needs to know from where to get its object data}}
-				className: "{{#if ../../bs.is-multidomain}}{{../../tls.domain-id}}{{/if}}",
+				className: "{{../../tls.domain-id}}",
 			});
 		{{/withItemObject}}
 	{{/each}}

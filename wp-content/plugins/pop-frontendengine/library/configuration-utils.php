@@ -82,28 +82,29 @@ class PoP_Frontend_ConfigurationUtils {
 		return apply_filters('gd_templatemanager:labelize_classes', $labelize_classes);	
 	}
 
-	public static function get_multidomain_websites() {
+	// public static function get_multidomain_websites() {
 
-		$domain_properties = array(
-			get_site_url() => array(
-				'name' => get_bloginfo('name'),
-				'description' => get_bloginfo('description'),
-			)
-		);
-		$domain_properties = apply_filters('gd_templatemanager:multidomain:domain_properties', $domain_properties);	
+	// 	$domain_properties = array(
+	// 		get_site_url() => array(
+	// 			'name' => get_bloginfo('name'),
+	// 			'description' => get_bloginfo('description'),
+	// 		)
+	// 	);
+	// 	$domain_properties = apply_filters('PoP_MultiDomain_Utils:domain_properties', $domain_properties);	
 
-		// Add the ID to all domains
-		foreach ($domain_properties as $domain => &$properties) {
+	// 	// Add the ID to all domains
+	// 	foreach ($domain_properties as $domain => &$properties) {
 			
-			$properties['id'] = GD_TemplateManager_Utils::get_domain_id($domain);
+	// 		// Comment Leo 24/08/2017: no need for the pre-defined ID
+	// 		// $properties['id'] = GD_TemplateManager_Utils::get_domain_id($domain);
 
-			// Allow to add the language, and then change the default language on a domain by domain basis
-			$properties['locale'] = apply_filters(
-				'gd_templatemanager:multidomain:locale',
-				$domain,
-				$domain
-			);
-		}
-		return $domain_properties;
-	}
+	// 		// Allow to add the language, and then change the default language on a domain by domain basis
+	// 		$properties['locale'] = apply_filters(
+	// 			'gd_templatemanager:multidomain:locale',
+	// 			$domain,
+	// 			$domain
+	// 		);
+	// 	}
+	// 	return $domain_properties;
+	// }
 }

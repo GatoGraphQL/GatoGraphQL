@@ -2044,12 +2044,18 @@ body.sliding #ps-hover .container-fluid {
 
 .pop-block-map .blocksection-messagefeedback {
 	position: absolute;
-	z-index: 1000;
+	z-index: 500;
+}
+.pop-block-map.pop-multidomain .blocksection-messagefeedback {
+	position: relative;
 }
 .pop-block-calendarmap .blocksection-messagefeedback,
 .pop-block-calendarmap .blocksection-status .pop-loading,
 .pop-block-calendarmap .blocksection-status .pop-error {
 	top: 50px;
+}
+.pop-block-calendarmap.pop-multidomain .blocksection-messagefeedback {
+	top: 0;
 }
 
 .pop-block-calendarmap .pop-error {

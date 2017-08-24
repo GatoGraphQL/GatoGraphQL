@@ -7,7 +7,7 @@
 
 define ('GD_TEMPLATE_BLOCK_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('block-inviteusers'));
 define ('GD_TEMPLATE_BLOCK_LATESTCOUNTS', PoP_ServerUtils::get_template_definition('block-latestcounts'));
-define ('GD_TEMPLATE_BLOCK_EXTERNAL', PoP_ServerUtils::get_template_definition('block-external'));
+// define ('GD_TEMPLATE_BLOCK_EXTERNAL', PoP_ServerUtils::get_template_definition('block-external'));
 
 class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase {
 
@@ -16,7 +16,7 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 		return array(			
 			GD_TEMPLATE_BLOCK_INVITENEWUSERS,
 			GD_TEMPLATE_BLOCK_LATESTCOUNTS,
-			GD_TEMPLATE_BLOCK_EXTERNAL,
+			// GD_TEMPLATE_BLOCK_EXTERNAL,
 		);
 	}
 
@@ -41,19 +41,6 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 		
 		return parent::get_description($template_id, $atts);
 	}
-
-	// function get_title($template_id) {
-
-	// 	switch ($template_id) {
-
-	// 		case GD_TEMPLATE_BLOCK_EXTERNAL:
-
-	// 			// Use the name of the website, so that when reloading this page on GetPoP.org, on the top navigation bar it show "GetPoP" instead of "External"
-	// 			return get_bloginfo('name');
-	// 	}
-		
-	// 	return parent::get_title($template_id);
-	// }
 
 	protected function get_block_inner_templates($template_id) {
 
@@ -103,11 +90,11 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 				}
 				break;
 
-			case GD_TEMPLATE_BLOCK_EXTERNAL:
+			// case GD_TEMPLATE_BLOCK_EXTERNAL:
 
-				// This is all this block does: load the external url defined in parameter "url"
-				$this->add_jsmethod($ret, 'clickURLParam');
-				break;
+			// 	// This is all this block does: load the external url defined in parameter "url"
+			// 	$this->add_jsmethod($ret, 'clickURLParam');
+			// 	break;
 		}
 		
 		return $ret;
@@ -244,11 +231,11 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 				}
 				break;
 
-			case GD_TEMPLATE_BLOCK_EXTERNAL:
+			// case GD_TEMPLATE_BLOCK_EXTERNAL:
 
-				// Make it invisible, nothing to show
-				$this->append_att($template_id, $atts, 'class', 'hidden');
-				break;
+			// 	// Make it invisible, nothing to show
+			// 	$this->append_att($template_id, $atts, 'class', 'hidden');
+			// 	break;
 		}
 		
 		return parent::init_atts($template_id, $atts);

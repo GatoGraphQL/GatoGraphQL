@@ -1,7 +1,7 @@
 {{#each items}}
 	{{#mod @index ../layout-grid.divider}}<div class="pop-structureinner item blockinner-item carousel-item">{{/mod}}
 	{{#if ../layout-grid.row-items}}
-		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row blockinner-row carousel-row {{../extend-class}} {{!../layout-grid.wrapper-class}} {{../classes.layoutgrid-wrapper}}" style="{{../styles.layoutgrid-wrapper}}">{{/mod}}
+		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row blockinner-row carousel-row {{../extend-class}} {{../tls.domain-id}} {{!../layout-grid.wrapper-class}} {{../classes.layoutgrid-wrapper}}" style="{{../styles.layoutgrid-wrapper}}">{{/mod}}
 	{{/if}}
 	<div class="pop-elem {{../class}} blockinner-elem {{!../layout-grid.class}}" style="{{../style}}">
 		{{#each ../template-ids.layouts}}

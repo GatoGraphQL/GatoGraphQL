@@ -55,6 +55,10 @@ if (defined('POP_CDNCORE_INITIALIZED')) {
 	require_once 'pop-cdn-core/load.php';		
 }
 
+if (defined('POP_MULTIDOMAIN_INITIALIZED')) {
+	require_once 'pop-multidomain/load.php';		
+}
+
 if (defined('POP_EMAILSENDER_INITIALIZED')) {
 	require_once 'pop-emailsender/load.php';		
 }

@@ -10,7 +10,7 @@
 /**---------------------------------------------------------------------------------------------------------------
  * Logged in classes: they depend on the domain, so they are added through PHP, not in the .css anymore
  * ---------------------------------------------------------------------------------------------------------------*/
-add_filter('get_wassup_loggedin_domain_styles_placeholder', 'get_wassup_wsl_loggedin_domain_styles_placeholder');
+add_filter('get_loggedin_domain_styles_placeholder', 'get_wassup_wsl_loggedin_domain_styles_placeholder');
 function get_wassup_wsl_loggedin_domain_styles_placeholder($placeholder) {
 
 	$placeholder .= 

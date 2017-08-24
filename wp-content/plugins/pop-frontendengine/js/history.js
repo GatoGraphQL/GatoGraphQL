@@ -23,8 +23,9 @@ popBrowserHistory = {
 				// Otherwise intercept cannot find the Url, and no need for the fetch, since it will add the params once again
 				// No need to push URL to the stack, since we're already moving back/forward there
 				var url = t.removePushURLAtts(window.location.href);
+				
 				// If it is the external page, then recover the actual URL
-				url = t.getPossibleDomainURL(url);
+				url = t.getApplicationURL(url);
 
 				var options = {skipPushState: true};
 				if (popURLInterceptors.getInterceptors(url).length) {
@@ -46,14 +47,22 @@ popBrowserHistory = {
 	// PRIVATE functions
 	//-------------------------------------------------
 
-	getPossibleDomainURL : function(url) {
+	getApplicationURL : function(url) {
 
 		var t = this;
 
 		// If it is the external page, then recover the actual URL
-		if (url.startsWith(M.EXTERNAL_URL)) {
-			url = decodeURIComponent(getParam(M.URLPARAM_URL, url));
-		}
+		// Allow popMultiDomain to inject the external URL
+		var args = {
+			url: url
+		};
+		popJSLibraryManager.execute('modifyApplicationURL', args);
+		url = args.url;
+
+		// // If it is the external page, then recover the actual URL
+		// if (url.startsWith(M.EXTERNAL_URL)) {
+		// 	url = decodeURIComponent(getParam(M.URLPARAM_URL, url));
+		// }
 
 		return url;
 	},
@@ -93,9 +102,16 @@ popBrowserHistory = {
 
 		// Push history in the browser
 		// Platform of Platforms: if the URL is not from this website, then add it as a param
-		if(!url.startsWith(M.HOME_DOMAIN)) {
-			url = add_query_arg(M.URLPARAM_URL, encodeURIComponent(url), M.EXTERNAL_URL);
-		}
+		// Allow popMultiDomain to inject the external URL
+		var args = {
+			url: url
+		};
+		popJSLibraryManager.execute('modifyPushStateURL', args);
+		url = args.url;
+
+		// if(!url.startsWith(M.HOME_DOMAIN)) {
+		// 	url = add_query_arg(M.URLPARAM_URL, encodeURIComponent(url), M.EXTERNAL_URL);
+		// }
 		history.pushState({url: url}, '', url);
 
 		t.loaded = true;

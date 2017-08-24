@@ -9,7 +9,7 @@ define ('GD_URLPARAM_ACTION_PRINT', 'print');
 define ('GD_URLPARAM_TARGET_PRINT', 'print');
 define ('GD_URLPARAM_TARGET_SOCIALMEDIA', 'socialmedia');
 
-define ('POP_URLPARAM_DOMAIN', 'domain');
+// define ('POP_URLPARAM_DOMAIN', 'domain');
 
 add_filter('gd_jquery_constants', 'gd_jquery_constants_urlparams');
 function gd_jquery_constants_urlparams($jquery_constants) {
@@ -62,7 +62,7 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 	$jquery_constants['URLPARAM_STOPFETCHING'] = GD_URLPARAM_STOPFETCHING;
 	
 	// Needed to initialize a domain
-	$jquery_constants['PLACEHOLDER_DOMAINURL'] = add_query_arg(POP_URLPARAM_DOMAIN, '{0}', get_permalink(POP_COREPROCESSORS_PAGE_LOADERS_INITIALIZEDOMAIN));
+	// $jquery_constants['PLACEHOLDER_DOMAINURL'] = add_query_arg(POP_URLPARAM_DOMAIN, '{0}', get_permalink(POP_MULTIDOMAIN_PAGE_LOADERS_INITIALIZEDOMAIN));
 
 	return $jquery_constants;
 }

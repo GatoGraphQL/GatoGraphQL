@@ -79,7 +79,7 @@ window.wsl_wordpress_social_login = function(config) {
 
 	// From the browser URL, induce what URL we are calling from all the available domains
 	wsl_login_url = '';
-	var url = popBrowserHistory.getPossibleDomainURL(window.location.href);
+	var url = popBrowserHistory.getApplicationURL(window.location.href);
 	var domain = getDomain(url);
 	$.each(M.USERLOGGEDIN_DATA_PAGEURLS, function(index, url) {
 

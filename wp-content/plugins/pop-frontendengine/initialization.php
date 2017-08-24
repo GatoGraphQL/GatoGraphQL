@@ -25,7 +25,7 @@ class PoPFrontend_Initialization {
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Constants/Configuration for functionalities needed by the plug-in
 		 * ---------------------------------------------------------------------------------------------------------------*/
-		require_once 'config/load.php';
+		// require_once 'config/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Load the Library first
@@ -168,7 +168,7 @@ class PoPFrontend_Initialization {
 			),
 			'STATUS' => PoP_Frontend_ConfigurationUtils::get_status_settings(),
 			'LABELIZE_CLASSES' => PoP_Frontend_ConfigurationUtils::get_labelize_classes(),
-			'MULTIDOMAIN_WEBSITES' => PoP_Frontend_ConfigurationUtils::get_multidomain_websites(),
+			// 'MULTIDOMAIN_WEBSITES' => PoP_MultiDomain_Utils::get_multidomain_websites(),
 			'ROLES' => gd_roles(),
 			'USERATTRIBUTES' => gd_user_attributes(),
 			'LABELS' => array(
@@ -196,13 +196,8 @@ class PoPFrontend_Initialization {
 		// Allow qTrans to add the language information
 		if ($homelocaleurl = apply_filters('gd_templatemanager:homelocale_url', $homeurl)) {
 			$jquery_constants['HOMELOCALE_URL'] = $homelocaleurl;
-		}		
-
-		// External page, to load aggregated PoP URLs into the browser
-		if (POP_FRONTENDENGINE_PAGE_EXTERNAL) {
-
-			$jquery_constants['EXTERNAL_URL'] = get_permalink(POP_FRONTENDENGINE_PAGE_EXTERNAL);
 		}
+		
 		if ($domcontainer_id) {
 			$jquery_constants['DOMCONTAINER_ID'] = $domcontainer_id;
 		}

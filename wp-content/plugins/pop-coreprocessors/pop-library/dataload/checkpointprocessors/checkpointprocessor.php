@@ -7,7 +7,7 @@
 
 define ('GD_DATALOAD_CHECKPOINT_PROFILEACCESS', 'checkpoint-profileaccess');
 define ('GD_DATALOAD_CHECKPOINT_PROFILEACCESS_SUBMIT', 'checkpoint-profileaccess-submit');
-define ('GD_DATALOAD_CHECKPOINT_DOMAINVALID', 'checkpoint-domainvalid');
+// define ('GD_DATALOAD_CHECKPOINT_DOMAINVALID', 'checkpoint-domainvalid');
 
 class PoPCore_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProcessor {
 
@@ -16,7 +16,7 @@ class PoPCore_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProcess
 		return array(
 			GD_DATALOAD_CHECKPOINT_PROFILEACCESS,
 			GD_DATALOAD_CHECKPOINT_PROFILEACCESS_SUBMIT,
-			GD_DATALOAD_CHECKPOINT_DOMAINVALID,
+			// GD_DATALOAD_CHECKPOINT_DOMAINVALID,
 		);
 	}
 
@@ -42,20 +42,20 @@ class PoPCore_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProcess
 				}
 				break;
 
-			case GD_DATALOAD_CHECKPOINT_DOMAINVALID:
+			// case GD_DATALOAD_CHECKPOINT_DOMAINVALID:
 
-				// Check if the domain passed in param 'domain' is allowed
-				$domain = GD_Template_Processor_DomainUtils::get_domain_from_request();
-				if (!$domain) {
+			// 	// Check if the domain passed in param 'domain' is allowed
+			// 	$domain = GD_Template_Processor_DomainUtils::get_domain_from_request();
+			// 	if (!$domain) {
 
-					return new WP_Error('domainempty');
-				}
-				$allowed_domains = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
-				if (!in_array($domain, $allowed_domains)) {
+			// 		return new WP_Error('domainempty');
+			// 	}
+			// 	$allowed_domains = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
+			// 	if (!in_array($domain, $allowed_domains)) {
 
-					return new WP_Error('domainnotvalid');
-				}
-				break;
+			// 		return new WP_Error('domainnotvalid');
+			// 	}
+			// 	break;
 		}
 	
 		return parent::process($checkpoint);
