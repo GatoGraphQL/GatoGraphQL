@@ -32,7 +32,7 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 					sprintf(
 						'<p>%s</p>',
 						sprintf(
-							__('Send an invite to your friends/colleagues/etc to join <em><strong>%s</strong></em>:', 'pop-coreprocessors'),
+							__('Send an invite to your friends to join <em><strong>%s</strong></em>:', 'pop-coreprocessors'),
 							get_bloginfo('name')
 						)
 					)

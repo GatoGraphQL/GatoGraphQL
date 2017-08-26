@@ -454,8 +454,9 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 						// 'featuredcommunities' => __('Featured Organizations', 'poptheme-wassup'),
 						// Override the footer value
 						'footer' => sprintf(
-							__('Powered by <a href="%s">the PoP framework</a>', 'poptheme-wassup'),
-							'https://getpop.org'
+							__('Powered by <a href="%s" target="_blank">the PoP framework</a> — Hosted at <a href="%s" target="_blank">Verticals</a>', 'poptheme-wassup'),
+							'https://getpop.org',
+							'https://verticals.io'
 						),
 						'about' => __('About us', 'poptheme-wassup'),
 						'myprofile' => __('My Profile', 'poptheme-wassup'),

@@ -1852,7 +1852,7 @@ popManager = {
 			}
 			catch(err) {
 				// Do nothing
-				// console.error(err.message);
+				console.log('Error: '+err.message);
 			}
 		}
 	},
@@ -2130,7 +2130,7 @@ popManager = {
 				}
 				catch(err) {
 					// Do nothing
-					console.error(err.message);
+					console.log('Error: '+err.message);
 				}
 			});
 		}
@@ -2140,7 +2140,7 @@ popManager = {
 			}
 			catch(err) {
 				// Do nothing
-				console.error(err.message);
+				console.log('Error: '+err.message);
 			}
 		}
 
@@ -2649,7 +2649,7 @@ popManager = {
 								catch(err) {
 									// Do nothing
 									// console.error(err.message);
-									console.log(err.message);
+									console.log('Error: '+err.message);
 								}
 							});
 						}
@@ -2661,7 +2661,7 @@ popManager = {
 							catch(err) {
 								// Do nothing
 								// console.error(err.message);
-								console.log(err.message);
+								console.log('Error: '+err.message);
 							}
 						}
 
@@ -2729,7 +2729,7 @@ popManager = {
 								catch(err) {
 									// Do nothing
 									// console.error(err.message);
-									console.log(err.message);
+									console.log('Error: '+err.message);
 								}
 							});
 						}
@@ -2740,7 +2740,7 @@ popManager = {
 							catch(err) {
 								// Do nothing
 								// console.error(err.message);
-								console.log(err.message);
+								console.log('Error: '+err.message);
 							}
 						}
 
@@ -3120,7 +3120,7 @@ popManager = {
 				}
 				catch(err) {
 					// Do nothing
-					console.error(err.message);
+					console.log('Error: '+err.message);
 					// console.trace();
 				}
 			});

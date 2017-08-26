@@ -28,7 +28,7 @@ class PoPTheme_Wassup_CategoryProcessors_SubmenuHooks {
 	function singleauthorsubmenu_blockunits($blockunits, $current_blockgroup) {
 
 		// Under Posts
-		if ($add = array_values(PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_authorblockgroups())) {
+		if ($add = array_values(PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_authorblockgroups(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS)))) {
 			array_splice($blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORWEBPOSTS], 0, 0, $add);
 
 			if (in_array($current_blockgroup, $add)) {
@@ -43,7 +43,7 @@ class PoPTheme_Wassup_CategoryProcessors_SubmenuHooks {
 	function tagsubmenu_blockunits($blockunits, $current_blockgroup) {
 
 		// Under Posts
-		if ($add = array_values(PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_tagblockgroups())) {
+		if ($add = array_values(PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cat_tagblockgroups(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_WEBPOSTS)))) {
 			array_splice($blockunits[GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGWEBPOSTS], 0, 0, $add);
 
 			if (in_array($current_blockgroup, $add)) {

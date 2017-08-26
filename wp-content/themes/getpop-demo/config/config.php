@@ -40,16 +40,6 @@ function getpopdemo_aal_bgcolor($color, $template_id) {
 /**---------------------------------------------------------------------------------------------------------------
  * pagesections.php
  * ---------------------------------------------------------------------------------------------------------------*/
-// add_filter('GD_Template_Processor_CustomPageSections:pagesection-top:titles', 'getpopdemo_pagesectiontop_titles');
-// function getpopdemo_pagesectiontop_titles($titles) {
-	
-// 	$titles['footer'] = sprintf(
-// 		__('Powered by <a href="%s">the PoP framework</a>', 'getpop-demo'),
-// 		'https://getpop.org'
-// 	);
-// 	return $titles;
-// }
-
 add_filter('GD_Template_Processor_CustomPageSections:pagesection-top:socialmedias', 'getpopdemo_pagesectiontop_socialmedias');
 function getpopdemo_pagesectiontop_socialmedias($socialmedias) {
 	

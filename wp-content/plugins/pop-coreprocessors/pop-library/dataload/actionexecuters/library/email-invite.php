@@ -11,6 +11,13 @@ class GD_EmailInvite {
 
 		$form_data = $this->get_form_data($atts);
 
+		// We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
+		$this->validate_captcha($errors, $form_data);
+
+		if ($errors) {
+			return;
+		}
+
 		$this->validate($errors, $form_data);
 
 		// No need to validate for errors, because the email will be sent to all valid emails anyway,
@@ -69,6 +76,21 @@ class GD_EmailInvite {
 		return $form_data;
 	}	
 
+	protected function validate_captcha(&$errors, &$form_data) {
+
+		// Validate the captcha
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!PoP_FormUtils::use_loggedinuser_data() || !$vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
+			
+			$captcha = $form_data['captcha'];
+			
+			$captcha_validation = GD_Captcha::validate($captcha['input'], $captcha['session']);
+			if (is_wp_error($captcha_validation)) {
+				$errors[] = $captcha_validation->get_error_message();
+			}
+		}
+	}
+
 	protected function validate(&$errors, &$form_data) {
 		
 		$emails = $form_data['emails'];
@@ -93,18 +115,6 @@ class GD_EmailInvite {
 
 		// Re-assign the non-invalid emails to the form_data
 		$form_data['emails'] = array_diff($emails, $invalid_emails);
-
-		// Validate the captcha
-		$vars = GD_TemplateManager_Utils::get_vars();
-		if (!PoP_FormUtils::use_loggedinuser_data() || !$vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
-			
-			$captcha = $form_data['captcha'];
-			
-			$captcha_validation = GD_Captcha::validate($captcha['input'], $captcha['session']);
-			if (is_wp_error($captcha_validation)) {
-				$errors[] = $captcha_validation->get_error_message();
-			}
-		}
 	}
 
 	/** Function to override */

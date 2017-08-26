@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Core Processors\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 10:22+0200\n"
-"PO-Revision-Date: 2017-08-08 10:23+0200\n"
+"POT-Creation-Date: 2017-08-26 13:44+0200\n"
+"PO-Revision-Date: 2017-08-26 13:45+0200\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <info@mesym.com>\n"
 "Language: es\n"
@@ -358,11 +358,11 @@ msgstr "Reintentar"
 msgid "(<em>{0}</em>) {1}"
 msgstr "(<em>{0}</em>) {1}"
 
-#: .././pop-library/constants.php:91
+#: .././pop-library/constants.php:92
 msgid "Ops, this is a broken link."
 msgstr "Ops, este es un enlace roto."
 
-#: .././pop-library/constants.php:122
+#: .././pop-library/constants.php:127
 msgid ""
 "Ops, the upload failed. Let's fix this: please save your post as 'Draft', "
 "refresh the browser window, and try again."
@@ -391,12 +391,12 @@ msgstr "Ahora estás siguiendo a <em><strong>%s</strong></em>."
 msgid "You have already down-voted <em><strong>%s</strong></em>."
 msgstr "Ya has expresado estar en desacuerdo con <em><strong>%s</strong></em>."
 
-#: .././pop-library/dataload/actionexecuters/library/email-invite.php:85
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:107
 #, php-format
 msgid "The following emails are invalid: <strong>%s</strong>"
 msgstr "Los siguientes emails son inválidos: <strong>%s</strong>"
 
-#: .././pop-library/dataload/actionexecuters/library/email-invite.php:91
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:113
 msgid "Email(s) cannot be empty."
 msgstr "Correo(s) electrónico(s) no puede estar vacío."
 
@@ -614,6 +614,19 @@ msgstr "Sí"
 msgid "No"
 msgstr "No"
 
+#: .././pop-library/processors/_domain/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Domain Initialization"
+msgstr "Inicialización del Dominio"
+
+#: .././pop-library/processors/_domain/messagefeedbacks/messagefeedbacks-layouts.php:28
+msgid "The domain is empty."
+msgstr "El dominio está vacío."
+
+#: .././pop-library/processors/_domain/messagefeedbacks/messagefeedbacks-layouts.php:30
+#, php-format
+msgid "Domain <strong>%s</strong> is not valid."
+msgstr "El dominio <strong>%s</strong> no es válido."
+
 #: .././pop-library/processors/abstract-classes/alerts-base.php:36
 msgid "Dismiss"
 msgstr "Descartar"
@@ -761,14 +774,12 @@ msgstr "En respuesta a:"
 
 #: .././pop-library/processors/blocks/blocks.php:35
 #, php-format
-msgid ""
-"Send an invite to your friends/colleagues/etc to join <em><strong>%s</"
-"strong></em>:"
+msgid "Send an invite to your friends to join <em><strong>%s</strong></em>:"
 msgstr ""
-"Enviar una invitación a tus amigos/colegas/etc para unirse a <em><strong>%s</"
-"strong></em>:"
+"Enviá una invitación a tus amigos para sumarse a <em><strong>%s</strong></"
+"em>:"
 
-#: .././pop-library/processors/blocks/blocks.php:233
+#: .././pop-library/processors/blocks/blocks.php:220
 #: .././pop-library/processors/comments/blocks.php:175
 #: .././pop-library/processors/login/blocks.php:174
 msgid "Sending..."
@@ -1216,19 +1227,6 @@ msgstr ""
 #, php-format
 msgid "Only %s accounts can edit preferences."
 msgstr "Sólo cuentas de  %s pueden editar preferencias."
-
-#: .././pop-library/processors/domain/messagefeedbacks/messagefeedbacks-layouts.php:27
-msgid "Domain Initialization"
-msgstr "Inicialización del Dominio"
-
-#: .././pop-library/processors/domain/messagefeedbacks/messagefeedbacks-layouts.php:28
-msgid "The domain is empty."
-msgstr "El dominio está vacío."
-
-#: .././pop-library/processors/domain/messagefeedbacks/messagefeedbacks-layouts.php:30
-#, php-format
-msgid "Domain <strong>%s</strong> is not valid."
-msgstr "El dominio <strong>%s</strong> no es válido."
 
 #: .././pop-library/processors/formcomponents-inputs/captcha-formcomponents-inputs.php:25
 msgid "Captcha"
