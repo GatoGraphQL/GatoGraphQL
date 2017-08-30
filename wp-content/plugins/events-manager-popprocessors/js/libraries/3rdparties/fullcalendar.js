@@ -46,7 +46,7 @@ popFullCalendar = {
 		}
 
 		// When re-rendering a block, check if the operation is REPLACE (= filtering), then delete all the current events
-		block.on('beforeMerge', function(e, options) {
+		block.on('beforeRender', function(e, options) {
 
 			var block = $(this);
 			

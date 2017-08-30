@@ -3281,21 +3281,8 @@ popManager = {
 		var html = t.getTemplateHtml(domain, pageSection, target, templateName, options);
 		var targetContainer = t.getMergeTarget(target, templateName, options);
 
-		// Default operation: REPLACE, unless it is multidomain and processing a 2nd domain in that block, in which data could be replacing the just added data from other domains
-		// Eg: messagefeedback when there are no results from the first domain, may be overriten by a second domain
-		var fetchStatus = options['fetch-status'] || {isFirst: true, isLast: true};
-		
-		// Comment Leo 30/08/2017: Because the options will be passed to other javascript functions through event 'beforeMerge',
-		// we need to keep consistency of the operation and the options operation. 
-		// Otherwise, in fullcalendar.js, it will get the REPLACE operation for multidomain instead of an APPEND, deleting all events from previous domains when doing a reset
-		options.operation = options.operation || (fetchStatus.isFirst ? M.URLPARAM_OPERATION_REPLACE : M.URLPARAM_OPERATION_APPEND);
-		// Special case multidomain: if the operation is REPLACE, but it is not the first element, then APPEND, or else the data from the 2nd, 3rd, etc, domains will replace the preceding ones
-		if (options.operation == M.URLPARAM_OPERATION_REPLACE && !fetchStatus.isFirst) {
-			options.operation = M.URLPARAM_OPERATION_APPEND;
-		}
-
-		// Comment Leo 30/08/2017: only now the options are consistent, so only now we can call 'beforeMerge'
-		target.triggerHandler('beforeMerge', [options]);
+		// Default operation: REPLACE
+		options.operation = options.operation || M.URLPARAM_OPERATION_REPLACE;
 
 		// Delete all children before appending?
 		if (options.operation == M.URLPARAM_OPERATION_REPLACE) {
@@ -3410,8 +3397,21 @@ popManager = {
 
 		options = options || {};
 
+		// Default operation: REPLACE, unless it is multidomain and processing a 2nd domain in that block, in which data could be replacing the just added data from other domains
+		// Eg: messagefeedback when there are no results from the first domain, may be overriten by a second domain
+		var fetchStatus = options['fetch-status'] || {isFirst: true, isLast: true};
+		
+		// Comment Leo 30/08/2017: Because the options will be passed to other javascript functions through event 'beforeMerge',
+		// we need to keep consistency of the operation and the options operation. 
+		// Otherwise, in fullcalendar.js, it will get the REPLACE operation for multidomain instead of an APPEND, deleting all events from previous domains when doing a reset
+		options.operation = options.operation || (fetchStatus.isFirst ? M.URLPARAM_OPERATION_REPLACE : M.URLPARAM_OPERATION_APPEND);
+		// Special case multidomain: if the operation is REPLACE, but it is not the first element, then APPEND, or else the data from the 2nd, 3rd, etc, domains will replace the preceding ones
+		if (options.operation == M.URLPARAM_OPERATION_REPLACE && !fetchStatus.isFirst) {
+			options.operation = M.URLPARAM_OPERATION_APPEND;
+		}
+
 		// And having set-up all the handlers, we can trigger the handler
-		target.triggerHandler('beforeRender');
+		target.triggerHandler('beforeRender', [options]);
 
 		var templates_cbs = t.getTemplatesCbs(domain, pageSection, target, options.action);
 		var targetContainers = $();
