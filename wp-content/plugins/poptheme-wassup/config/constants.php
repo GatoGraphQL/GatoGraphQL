@@ -52,3 +52,8 @@ define ('POPTHEME_WASSUP_PAGE_EDITHIGHLIGHT', false);
 //--------------------------------------------------------
 define ('POPTHEME_WASSUP_PAGE_ADDCONTENTFAQ', false);
 define ('POPTHEME_WASSUP_PAGE_ACCOUNTFAQ', false);
+
+// Links
+//--------------------------------------------------------
+define ('POPTHEME_WASSUP_LINK_GETPOP', 'https://getpop.org');
+define ('POPTHEME_WASSUP_LINK_VERTICALS', 'https://verticals.io');

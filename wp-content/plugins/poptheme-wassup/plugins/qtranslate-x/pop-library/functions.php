@@ -74,3 +74,20 @@ function get_qtransx_languageitems($shortnames = array()) {
 
 	return $items;
 }
+
+/**---------------------------------------------------------------------------------------------------------------
+ * Add the language to the links to PoP and Verticals
+ * ---------------------------------------------------------------------------------------------------------------*/
+add_filter('GD_Template_Processor_CustomPageSections:footer:poweredby-links', 'gd_qtransx_footerlinks');
+function gd_qtransx_footerlinks($link) {
+
+	// Because both PoP and Verticals are in EN and ES languages, add the corresponding language if the current website supports them
+	$current = qtranxf_getLanguage();
+	if (in_array($current, POPTHEME_WASSUP_QTRANS_LANG_POWEREDBYWEBSITES)) {
+
+		// $link = qtranxf_convertURL($link, $current);
+		$link = trailingslashit($link).$current.'/';
+	}
+
+	return $link;
+}
