@@ -16,7 +16,7 @@
 		{{#if ../show-each}}
 			{{#each locations}}
 				{{#if @index}}{{{../../each-separator}}}{{/if}}
-				<a {{#generateId context=../../.}}{{../../../id}}-{{../../id}}-{{this}}{{/generateId}} href="{{addParam ../../url ../../locationsfield-name this}}" data-append-intercepturl="#{{../../bs.bId}}" {{#if ../../linktarget}}target="{{../../linktarget}}"{{/if}} class="{{../../classes.link}} {{../../classes.btn}}" style="{{../../styles.link}}{{../../styles.btn}}" data-header="{{#withModule ../../. 'header'}}{{enterModule ../../../.}}{{/withModule}}" title="{{{../../title}}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
+				<a {{#generateId context=../../.}}{{../../id}}-{{../id}}-{{this}}{{/generateId}} href="{{addParam ../../url ../../locationsfield-name this}}" data-append-intercepturl="#{{../../bs.bId}}" {{#if ../../linktarget}}target="{{../../linktarget}}"{{/if}} class="{{../../classes.link}} {{../../classes.btn}}" style="{{../../styles.link}}{{../../styles.btn}}" data-header="{{#withModule ../../. 'header'}}{{enterModule ../../../.}}{{/withModule}}" title="{{{../../title}}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 					{{#if ../../fontawesome}}
 						<i class="fa {{../../fontawesome}}"></i>
 					{{/if}}

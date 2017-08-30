@@ -325,7 +325,6 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var psId = pss.psId;
 	var bsId = bs.bsId;
 	var bId = bs.bId;
-	// var isMultiDomain = bs['is-multidomain'];
 
 	jQuery.extend(context, popManager.getRuntimeConfiguration(domain, pssId, bsId, templateName));
 

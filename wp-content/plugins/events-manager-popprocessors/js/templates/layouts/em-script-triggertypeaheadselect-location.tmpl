@@ -9,8 +9,9 @@
 			var typeahead = $(createlocation.data('typeahead-target'));
 			var block = popManager.getBlock(typeahead);
 			var pageSection = popManager.getPageSection(block);
-			var location = popManager.getItemObject('{{../itemDBKey}}', '{{id}}');
-			popTypeahead.triggerSelect(pageSection, block, typeahead, location);
+			var domain = '{{../tls.domain}}';
+			var location = popManager.getItemObject(domain, '{{../itemDBKey}}', '{{id}}');
+			popTypeahead.triggerSelect(domain, pageSection, block, typeahead, location);
 		});
 	})(jQuery);
 	</script>
