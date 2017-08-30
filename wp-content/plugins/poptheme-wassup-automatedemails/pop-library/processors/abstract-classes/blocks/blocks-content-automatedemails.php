@@ -26,6 +26,7 @@ class PoPTheme_Wassup_AutomatedEmails_Template_Processor_ContentBlocksBase exten
 
 		// Convert the classes to styles
 		$this->add_general_att($atts, 'convert-classes-to-styles', true);
+
 		return parent::init_atts($template_id, $atts);
 	}
 }

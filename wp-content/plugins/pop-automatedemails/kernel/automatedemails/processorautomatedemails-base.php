@@ -21,7 +21,13 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase {
     
     protected function get_content() {
 
-        return PoP_ServerSideRendering_Factory::get_instance()->render_block($this->get_pagesection_settingsid(), $this->get_block_template());
+        $content = PoP_ServerSideRendering_Factory::get_instance()->render_block($this->get_pagesection_settingsid(), $this->get_block_template());
+
+        // Newsletter: remove all unwanted HTML output, such as Javascript code
+        // Taken from https://stackoverflow.com/questions/7130867/remove-script-tag-from-html-content#7131156
+        $content = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $content);
+
+        return $content;
     }
     
     protected function has_results() {
