@@ -3284,14 +3284,21 @@ popManager = {
 		// Default operation: REPLACE, unless it is multidomain and processing a 2nd domain in that block, in which data could be replacing the just added data from other domains
 		// Eg: messagefeedback when there are no results from the first domain, may be overriten by a second domain
 		var fetchStatus = options['fetch-status'] || {isFirst: true, isLast: true};
-		var operation = options.operation || (fetchStatus.isFirst ? M.URLPARAM_OPERATION_REPLACE : M.URLPARAM_OPERATION_APPEND);
+		
+		// Comment Leo 30/08/2017: Because the options will be passed to other javascript functions through event 'beforeMerge',
+		// we need to keep consistency of the operation and the options operation. 
+		// Otherwise, in fullcalendar.js, it will get the REPLACE operation for multidomain instead of an APPEND, deleting all events from previous domains when doing a reset
+		options.operation = options.operation || (fetchStatus.isFirst ? M.URLPARAM_OPERATION_REPLACE : M.URLPARAM_OPERATION_APPEND);
 		// Special case multidomain: if the operation is REPLACE, but it is not the first element, then APPEND, or else the data from the 2nd, 3rd, etc, domains will replace the preceding ones
-		if (operation == M.URLPARAM_OPERATION_REPLACE && !fetchStatus.isFirst) {
-			operation = M.URLPARAM_OPERATION_APPEND;
+		if (options.operation == M.URLPARAM_OPERATION_REPLACE && !fetchStatus.isFirst) {
+			options.operation = M.URLPARAM_OPERATION_APPEND;
 		}
 
+		// Comment Leo 30/08/2017: only now the options are consistent, so only now we can call 'beforeMerge'
+		target.triggerHandler('beforeMerge', [options]);
+
 		// Delete all children before appending?
-		if (operation == M.URLPARAM_OPERATION_REPLACE) {
+		if (options.operation == M.URLPARAM_OPERATION_REPLACE) {
 
 			// Allow others to do something before this is all gone (eg: destroy LocationsMap so it can be regenerated using same id)
 			target.triggerHandler('replace', [options.action]);
@@ -3306,7 +3313,7 @@ popManager = {
 
 			targetContainer.empty();
 		}
-		var merged = t.mergeHtml(html, targetContainer, operation);
+		var merged = t.mergeHtml(html, targetContainer, options.operation);
 
 		// Call the callback javascript functions under the templateBlock (only aggregator one for PoPs)
 		target.triggerHandler('merged', [merged.newDOMs]);
@@ -3404,7 +3411,7 @@ popManager = {
 		options = options || {};
 
 		// And having set-up all the handlers, we can trigger the handler
-		target.triggerHandler('beforeMerge', [options]);
+		target.triggerHandler('beforeRender');
 
 		var templates_cbs = t.getTemplatesCbs(domain, pageSection, target, options.action);
 		var targetContainers = $();
