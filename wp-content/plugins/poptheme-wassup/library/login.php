@@ -7,6 +7,16 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 /**---------------------------------------------------------------------------------------------------------------
+ * Change the expiration of the login cookie to much longer than 2 weeks
+ * ---------------------------------------------------------------------------------------------------------------*/
+add_filter('auth_cookie_expiration', 'poptheme_wassup_auth_cookie_expiration');
+function poptheme_wassup_auth_cookie_expiration($time) {
+
+    // 20 years (similar to GitHub)
+    return 20 * 365 * DAY_IN_SECONDS;
+}
+
+/**---------------------------------------------------------------------------------------------------------------
  * Change the Wordpress logo to MESYM logo in wp-login.php
  * ---------------------------------------------------------------------------------------------------------------*/
 add_action( 'login_enqueue_scripts', 'gd_login_logo' );
