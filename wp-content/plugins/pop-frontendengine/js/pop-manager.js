@@ -2902,29 +2902,6 @@ popManager = {
 
 			// Copy the properties from the local memory's domain to the operating domain?
 			// This is done the first time it is accessed, eg: if memory.feedback.toplevel is empty
-			// if ($.isEmptyObject(memory.dataset)) {
-				
-			// 	// Replicate it from the local domain one
-			// 	memory.runtimesettings = {
-			// 		'query-url': {},
-			// 		'query-multidomain-urls': {},
-			// 		configuration: {},
-			// 		'js-settings': {},
-			// 	};
-			// 	memory.settings = {
-			// 		'js-settings': {},
-			// 		jsmethods: {
-			// 			pagesection: {},
-			// 			block: {},
-			// 		},
-			// 		'templates-cbs': {},
-			// 		'templates-paths': {},
-			// 		'db-keys': {},
-			// 		configuration: {},
-			// 		// 'template-sources': $.extend({}, localMemory.settings['template-sources']),
-			// 	};	
-			// }
-
 			$.each(response['query-state'].general, function(rpssId, rpsParams) {	
 
 				// If the memory is empty (eg: first time that we are loading a different domain), then recreate it under the domain scope
@@ -2951,32 +2928,20 @@ popManager = {
 
 					// Configuration: first copy the modules, and then the 1st level configuration => pageSection configuration
 					// This is a special case because the blocks are located under 'modules', so doing $.extend will override the existing modules in 'memory', however we want to keep them
-					var rpsConfiguration = memory.settings.configuration[rpssId];
+					var psConfiguration = memory.settings.configuration[rpssId];
 					var lpsConfiguration = localMemory.settings.configuration[rpssId];
 					$.each(lpsConfiguration, function(key, value) {
 
 						// Do not process the key modules, that will be done later
 						if (key == M.JS_MODULES || key == 'modules') return;
 
+						// Do not process the root-context and parent-context keys, which contain inner references,
+						// to avoid JS error "Maximum call stack size called" when doing the deep extend below
+						if (key == 'root-context' || key == 'parent-context') return;
+
 						// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
 						// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
-						t.copyToConfiguration(key, value, rpsConfiguration);
-						// if ($.type(value) == 'array') {
-						// 	rpsConfiguration[key] = {};
-						// }
-						// else if ($.type(value) == 'object') {
-						// 	// If it is an object, extend it. If not, just assign the value
-						// 	if (!rpsConfiguration[key]) {
-						// 		rpsConfiguration[key] = {};
-						// 	}
-						// 	// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `t.mergingTemplatePromise` keeping a promise per domain...
-						// 	// // Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration (explanation below)
-						// 	// $.extend(true, rpsConfiguration[key], value);
-						// 	$.extend(rpsConfiguration[key], value);
-						// }
-						// else {
-						// 	rpsConfiguration[key] = value;
-						// }
+						t.copyToConfiguration(key, value, psConfiguration, true);
 					});
 				}
 
@@ -3010,8 +2975,14 @@ popManager = {
 						// // so then all configurations from different domains must be copies and cannot reference to the same original configuration
 						// // Otherwise, we can't print the HTML for different domains concurrently, as it is done now (check that `t.mergingTemplatePromise` keeps a promise per domain,
 						// // so these can be printed concurrently)
-						// memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend(true, {}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
-						memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend({}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
+						// Doing deep copy, so that the domain memory does not override the local domain
+						// We gotta delete keys 'root-context' and 'parent-context' first, otherwise the deep copy does not work, we will get
+						// JS error "Maximum call stack size called" when doing the deep extend below
+						var bConfiguration = localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId];
+						delete bConfiguration['root-context'];
+						delete bConfiguration['parent-context'];
+						memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend(true, {}, bConfiguration);
+						// memory.settings.configuration[rpssId][M.JS_MODULES][rbsId] = $.extend({}, localMemory.settings.configuration[rpssId][M.JS_MODULES][rbsId]);
 					}
 				});
 			});
@@ -3554,6 +3525,7 @@ popManager = {
 		if (extendContext) {
 			targetContext = $.extend({}, targetContext, extendContext);
 		}
+
 		return t.getHtml(/*domain, */templateName, targetContext);
 	},
 
@@ -3888,7 +3860,7 @@ popManager = {
 		}
 	},
 
-	copyToConfiguration : function(key, value, configuration) {
+	copyToConfiguration : function(key, value, configuration, deep) {
 
 		var t = this;
 
@@ -3902,7 +3874,15 @@ popManager = {
 			if (!configuration[key]) {
 				configuration[key] = {};
 			}
-			$.extend(configuration[key], value);
+
+			// If copying from the JSON response to the local memory, no need for deep, reference is good
+			// If copying from the local memory to a domain memory, must make it deep, so that references are not shared and the memory is not overriden by accident
+			if (deep) {
+				$.extend(true, configuration[key], value);
+			}
+			else {
+				$.extend(configuration[key], value);
+			}
 		}
 		else {
 			configuration[key] = value;
@@ -3962,20 +3942,7 @@ popManager = {
 
 				// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
 				// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
-				t.copyToConfiguration(key, value, psConfiguration);
-				// if ($.type(value) == 'array') {
-				// 	psConfiguration[key] = {};
-				// }
-				// else if ($.type(value) == 'object') {
-				// 	// If it is an object, extend it. If not, just assign the value
-				// 	if (!psConfiguration[key]) {
-				// 		psConfiguration[key] = {};
-				// 	}
-				// 	$.extend(psConfiguration[key], value);
-				// }
-				// else {
-				// 	psConfiguration[key] = value;
-				// }
+				t.copyToConfiguration(key, value, psConfiguration, false);
 			});
 
 			var psId = rpsConfiguration[M.JS_FRONTENDID];//rpsConfiguration['frontend-id'];
