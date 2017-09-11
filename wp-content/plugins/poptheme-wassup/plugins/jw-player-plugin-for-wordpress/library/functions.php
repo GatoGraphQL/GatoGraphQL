@@ -26,8 +26,8 @@ add_action('init', 'gd_media_upload_init');
 function gd_media_upload_init() {
 
 	//if (!user_has_admin_access()) {
-	remove_filter('media_upload_tabs', array('JWP6_Media', 'add_media_tabs'), 99999);
-	add_filter('media_upload_tabs', 'gd_jwp6_add_media_tabs', 99999);
+	remove_filter('media_upload_tabs', array('JWP6_Media', 'add_media_tabs'), PHP_INT_MAX);
+	add_filter('media_upload_tabs', 'gd_jwp6_add_media_tabs', PHP_INT_MAX);
 
 	add_filter('media_upload_gd_jwp6_media_external', 'gd_jwp6_render_media_external_tab');
 	add_filter('media_upload_gd_jwp6_media_external_editresources', 'gd_jwp6_render_media_external_tab_editresources');

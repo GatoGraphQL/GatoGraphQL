@@ -50,7 +50,7 @@ class PoP_EmailSender_Hooks {
 		// Password lost
 		add_action('retrieve_password_key', array($this, 'retrieve_password_key'));
 		add_filter('retrieve_password_title', array($this, 'retrieve_password_title'));
-		add_filter('retrieve_password_message', array($this, 'retrievepasswordmessage'), 999999, 4);
+		add_filter('retrieve_password_message', array($this, 'retrievepasswordmessage'), PHP_INT_MAX, 4);
 		add_action('gd_lostpasswordreset', array($this, 'lostpasswordreset'), 10, 1);
 		add_filter('send_password_change_email', array($this, 'donotsend'), 100000, 1);
 		add_filter('send_email_change_email', array($this, 'donotsend'), 100000, 1);

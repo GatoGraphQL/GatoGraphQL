@@ -17,13 +17,13 @@ class PoP_ServiceWorkers_Hooks_TinyMCE {
         add_filter( 
             'teeny_mce_before_init', 
             array($this, 'store_tinymce_resources'),
-            999999,
+            PHP_INT_MAX,
             1
         );
         add_filter( 
             'tiny_mce_before_init', 
             array($this, 'store_tinymce_resources'),
-            999999,
+            PHP_INT_MAX,
             1
         );
         

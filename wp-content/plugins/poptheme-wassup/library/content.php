@@ -14,7 +14,7 @@ function gd_posts_menuorder() {
 }
 
 // Make the tinymce always rich edit, also if user is logged out, or accessing the website using wget (so we can use wget to call /system/popinstall and save the service-workers.js file properly)
-add_filter( 'user_can_richedit', '__return_true', 999999);
+add_filter( 'user_can_richedit', '__return_true', PHP_INT_MAX);
 
 // function gd_get_plaincontent_categories() {
 
