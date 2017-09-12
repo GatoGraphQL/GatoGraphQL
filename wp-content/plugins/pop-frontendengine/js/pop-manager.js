@@ -416,6 +416,13 @@ popManager = {
 			var options = {
 				'serverside-rendering': M.USESERVERSIDERENDERING
 			}
+
+			// Comment Leo 12/09/2017: Gotta use the Deferred here already, because the rendered pageSection
+			// may trigger a backgroundLoad of a page which is already cached (localStorage/Service Workers),
+			// so the response will come back immediately and try to render itself, for which
+			// it will modify the context, making the following pageSections (pagetabs, sideinfo) to be rendered unproperly
+			var dfd = $.Deferred();
+			t.mergingTemplatePromise = dfd.promise();
 			$.each(pageSections, function(index, pageSection) {
 
 				// // Re-calculate the progress
@@ -423,6 +430,7 @@ popManager = {
 
 				t.renderPageSection(domain, pageSection, options);
 			});
+			dfd.resolve();
 
 			// Step 2: remove the "loading" screen
 			$(document.body).removeClass('pop-loadingframe');
