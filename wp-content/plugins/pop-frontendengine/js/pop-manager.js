@@ -2130,19 +2130,10 @@ popManager = {
 
 		// If while processing the pageSection we get error "Mempage not available",
 		// do not let it break the execution of other JS, contain it
-		if (lastPromise) {
-			lastPromise.done(function() {
-			
-				try {
-					t.processPageSection(domain, pageSection, response, options);
-				}
-				catch(err) {
-					// Do nothing
-					console.log('Error: '+err.message);
-				}
-			});
-		}
-		else {
+		// Comment Leo 13/09/2017: There will always be a lastPromise, since it was added on the init() function
+		// if (lastPromise) {
+		lastPromise.done(function() {
+		
 			try {
 				t.processPageSection(domain, pageSection, response, options);
 			}
@@ -2150,10 +2141,20 @@ popManager = {
 				// Do nothing
 				console.log('Error: '+err.message);
 			}
-		}
 
-		// Resolve the deferred
-		dfd.resolve();
+			// Resolve the deferred
+			dfd.resolve();
+		});
+		// }
+		// else {
+		// 	try {
+		// 		t.processPageSection(domain, pageSection, response, options);
+		// 	}
+		// 	catch(err) {
+		// 		// Do nothing
+		// 		console.log('Error: '+err.message);
+		// 	}
+		// }
 	},
 
 	maybeUpdateDocument : function(domain, pageSection, options) {
@@ -2648,20 +2649,10 @@ popManager = {
 						var dfd = $.Deferred();
 						var thisPromise = dfd.promise();
 						t.mergingTemplatePromise/*[domain]*/ = thisPromise;
-						if (lastPromise) {
-							lastPromise.done(function() {
-								// Catch the "Mempage not available" exception, or the app might crash
-								try {
-									t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
-								}
-								catch(err) {
-									// Do nothing
-									// console.error(err.message);
-									console.log('Error: '+err.message);
-								}
-							});
-						}
-						else {
+						// Comment Leo 13/09/2017: There will always be a lastPromise, since it was added on the init() function
+						// if (lastPromise) {
+						lastPromise.done(function() {
+
 							// Catch the "Mempage not available" exception, or the app might crash
 							try {
 								t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
@@ -2671,10 +2662,22 @@ popManager = {
 								// console.error(err.message);
 								console.log('Error: '+err.message);
 							}
-						}
 
-						// Resolve this promise
-						dfd.resolve();
+							// Resolve this promise
+							dfd.resolve();
+						});
+						// }
+						// else {
+						// 	// Catch the "Mempage not available" exception, or the app might crash
+						// 	try {
+						// 		t.executeFetchBlockSuccess(pageSection, block, blockQueryState, response, status, jqXHR);
+						// 	}
+						// 	catch(err) {
+						// 		// Do nothing
+						// 		// console.error(err.message);
+						// 		console.log('Error: '+err.message);
+						// 	}
+						// }
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 
@@ -2729,19 +2732,10 @@ popManager = {
 
 						// If while processing the pageSection we get error "Mempage not available",
 						// do not let it break the execution of other JS, contain it
-						if (lastPromise) {
-							lastPromise.done(function() {
-								try {
-									t.fetchBlockComplete(domain, pageSection, block, /*blockQueryState, */status, options);
-								}
-								catch(err) {
-									// Do nothing
-									// console.error(err.message);
-									console.log('Error: '+err.message);
-								}
-							});
-						}
-						else {
+						// Comment Leo 13/09/2017: There will always be a lastPromise, since it was added on the init() function
+						// if (lastPromise) {
+						lastPromise.done(function() {
+							
 							try {
 								t.fetchBlockComplete(domain, pageSection, block, /*blockQueryState, */status, options);
 							}
@@ -2750,10 +2744,21 @@ popManager = {
 								// console.error(err.message);
 								console.log('Error: '+err.message);
 							}
-						}
 
-						// Resolve the deferred
-						dfd.resolve();
+							// Resolve the deferred
+							dfd.resolve();
+						});
+						// }
+						// else {
+						// 	try {
+						// 		t.fetchBlockComplete(domain, pageSection, block, /*blockQueryState, */status, options);
+						// 	}
+						// 	catch(err) {
+						// 		// Do nothing
+						// 		// console.error(err.message);
+						// 		console.log('Error: '+err.message);
+						// 	}
+						// }
 					}
 				}));
 			});
