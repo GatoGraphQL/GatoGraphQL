@@ -125,6 +125,18 @@ class GD_Template_CacheProcessor {
 
 	function get_cache_filename($template_id) {
 
+		// Return the filename coded, otherwise it may become too long and produces errors accessing the file
+		if ($filename = $this->get_cache_filename_by_toplevel($template_id)) {
+
+			// Do not start with a number (just in case)
+			return 'c'.md5($filename);
+		}
+
+		return false;
+	}
+
+	protected function get_cache_filename_by_toplevel($template_id) {
+
 		$vars = GD_TemplateManager_Utils::get_vars();
 		switch ($template_id) {
 
