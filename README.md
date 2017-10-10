@@ -5,12 +5,12 @@ Framework for building Single-Page Application WordPress websites, decentralized
 
 **PoP website:** https://getpop.org
 
-Demos to play with PoP:
+**Demos to play with PoP:**
 
 - Social Network: https://demo.getpop.org
 - Decentralized Social Network: https://sukipop.com
 
-Production sites:
+**Production sites:**
 
 - MESYM: https://www.mesym.com
 - Agenda Urbana: https://agendaurbana.org
@@ -92,11 +92,15 @@ Because the [scripts automating the installation process](https://github.com/leo
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
+- `POP_SERVER_USECODESPLITTING` (_true|false_): If true, load only the .js and .css that is needed on each page and nothing more, if false, load a big application bundle.
+
 - `POP_SERVER_USESERVERSIDERENDERING` (_true|false_): Produce HTML on the server-side for the first-loaded page.
 
 - `POP_SERVER_USECACHE` (_true|false_): Create and re-use a cache of the settings of the requested page.
 
-- `POP_SERVER_USEMINIFIEDFILES` (_true|false_): Include the mangled, minified and bundled together version of all .js, .tmpl.js and .css files.
+- `POP_SERVER_USEMINIFIEDRESOURCES` (_true|false_): Include the mangled, minified and bundled together version of all .js, .tmpl.js and .css files.
+
+- `POP_SERVER_USECDNRESOURCES` (_true|false_): Whenever available, use resources from a public CDN.
 
 - `POP_SERVER_TEMPLATEDEFINITION_TYPE` (_0|1|2_): Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
 
