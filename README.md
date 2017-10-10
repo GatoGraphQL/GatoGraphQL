@@ -3,10 +3,17 @@
 # PoP — “Platform of Platforms”
 Framework for building Single-Page Application WordPress websites, decentralized crowd-sourced platforms, and social networks
 
-For more info, visit:
+**PoP website:** https://getpop.org
 
-- **PoP website:** https://getpop.org
-- **PoP demo:** https://demo.getpop.org
+Demos to play with PoP:
+
+- Social Network: https://demo.getpop.org
+- Decentralized Social Network: https://sukipop.com
+
+Production sites:
+
+- MESYM: https://www.mesym.com
+- Agenda Urbana: https://agendaurbana.org
 
 Below is a technical summary. For a more in-depth description, please visit [PoP's documentation page](https://getpop.org/en/documentation/overview/).
 
