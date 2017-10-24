@@ -22,7 +22,20 @@ class PoPTheme_Wassup_AutomatedEmails_Template_SettingsProcessor extends GD_Temp
 		return parent::get_checkpoints($hierarchy);
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function is_for_internal_use($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTPOSTS_WEEKLY => true,
+				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_SINGLEPOST_SPECIAL => true,
+			);
+		}
+
+		return parent::is_for_internal_use($hierarchy);
+	}
+
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 

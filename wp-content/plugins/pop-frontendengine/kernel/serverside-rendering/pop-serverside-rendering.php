@@ -36,7 +36,9 @@ class PoP_ServerSideRendering {
 			
 			// The JSON is already encoded, as a String, so we must decode it to transformt it into an array
 			$engine = PoP_Engine_Factory::get_instance();
-			$this->json = json_decode($engine->json['json'], true);
+			// $this->json = json_decode($engine->json['json'], true);
+			// $this->json = json_decode($engine->json['encoded-json'], true);
+			$this->json = $engine->resultsObject['json'];
 		}
 	}
 	

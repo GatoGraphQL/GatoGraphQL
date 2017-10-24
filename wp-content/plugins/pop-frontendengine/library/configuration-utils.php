@@ -9,6 +9,18 @@ class PoP_Frontend_ConfigurationUtils {
 
 	public static function get_backgroundload_urls() {
 
+		// return apply_filters(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD, array());
+		$url_targets = array();
+		foreach (self::get_backgroundload_pages() as $page => $targets) {
+			
+			$url_targets[get_permalink($page)] = $targets;
+		}
+
+		return apply_filters('PoP_Frontend_ConfigurationUtils:backgroundload_urls', $url_targets);
+	}
+
+	public static function get_backgroundload_pages() {
+
 		return apply_filters(POP_HOOK_POPFRONTEND_BACKGROUNDLOAD, array());
 	}
 

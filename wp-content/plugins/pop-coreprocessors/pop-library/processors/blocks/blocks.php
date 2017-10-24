@@ -138,24 +138,24 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 		return $ret;
 	}
 
-	protected function get_block_page($template_id) {
+	// protected function get_block_page($template_id) {
 
-		global $gd_template_settingsmanager;
+	// 	global $gd_template_settingsmanager;
 
-		switch ($template_id) {
+	// 	switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_LATESTCOUNTS:
+	// 		case GD_TEMPLATE_BLOCK_LATESTCOUNTS:
 
-				// Make explicit that it is "page" hierarchy, since the Notifications can be loaded initially from any hierarchy, so if not explicit it won't find the block here
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
+	// 			// Make explicit that it is "page" hierarchy, since the Notifications can be loaded initially from any hierarchy, so if not explicit it won't find the block here
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
 
-					return $page;
-				}
-				break;
-		}
+	// 				return $page;
+	// 			}
+	// 			break;
+	// 	}
 
-		return parent::get_block_page($template_id);
-	}
+	// 	return parent::get_block_page($template_id);
+	// }
 
 	protected function get_iohandler($template_id) {
 

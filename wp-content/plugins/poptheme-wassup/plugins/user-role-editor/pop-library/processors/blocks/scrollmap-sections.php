@@ -154,27 +154,39 @@ class GD_URE_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templ
 		return $ret;
 	}
 
-	protected function get_block_page($template_id) {
+	// protected function get_block_page($template_id) {
 
-		global $gd_template_settingsmanager;
+	// 	global $gd_template_settingsmanager;
+
+	// 	switch ($template_id) {
+
+	// 		// These are the Profile Blocks, they will always be used inside an is_author() page
+	// 		// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
+	// 		// an attr "tab" indicating this page through its path. This way, users can go straight to their 
+	// 		// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
+	// 		case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLLMAP:
+			
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;			
+	// 	}
+	
+	// 	return parent::get_block_page($template_id);
+	// }
+	protected function get_block_hierarchy($template_id) {
 
 		switch ($template_id) {
 
-			// These are the Profile Blocks, they will always be used inside an is_author() page
-			// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
-			// an attr "tab" indicating this page through its path. This way, users can go straight to their 
-			// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
 			case GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLLMAP:
-			
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
-
-					return $page;
-				}
-				break;			
+				
+				return GD_SETTINGS_HIERARCHY_AUTHOR;
 		}
-	
-		return parent::get_block_page($template_id);
+		
+		return parent::get_block_hierarchy($template_id);
 	}
+
 
 	protected function get_dataload_query_args($template_id, $atts) {
 

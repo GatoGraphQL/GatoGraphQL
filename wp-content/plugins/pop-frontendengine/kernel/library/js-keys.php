@@ -10,6 +10,7 @@ $compact = PoP_ServerUtils::compact_js_keys();
 define ('GD_JS_TEMPLATEIDS', $compact ? 'ti' : 'template-ids');
 define ('GD_JS_SETTINGSIDS', $compact ? 'ss' : 'settings-ids');
 define ('GD_JS_BLOCKSETTINGSIDS', $compact ? 'b' : 'block-settings-ids');
+define ('GD_JS_TEMPLATESOURCES', $compact ? 'tx' : 'template-sources');
 define ('GD_JS_METHODS', $compact ? 'mt' : 'methods');
 define ('GD_JS_NEXT', $compact ? 'n' : 'next');
 define ('GD_JS_FIXEDID', $compact ? 'fx' : 'fixed-id');
@@ -57,6 +58,7 @@ function gd_jquery_constants_jsparams($jquery_constants) {
 	$jquery_constants['JS_TEMPLATEIDS'] = GD_JS_TEMPLATEIDS;	
 	$jquery_constants['JS_SETTINGSIDS'] = GD_JS_SETTINGSIDS;	
 	$jquery_constants['JS_BLOCKSETTINGSIDS'] = GD_JS_BLOCKSETTINGSIDS;
+	$jquery_constants['JS_TEMPLATESOURCES'] = GD_JS_TEMPLATESOURCES;
 	$jquery_constants['JS_METHODS'] = GD_JS_METHODS;	
 	$jquery_constants['JS_NEXT'] = GD_JS_NEXT;	
 	$jquery_constants['JS_FIXEDID'] = GD_JS_FIXEDID;	

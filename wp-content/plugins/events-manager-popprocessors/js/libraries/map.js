@@ -104,15 +104,19 @@ popMap = {
 
 		var t = this;
 		var mempage = t.getRuntimeMemoryPage(pageSection, targetOrId);
-		var empty = {
+		var empty = t.getEmtpyBlockRuntimeMemory();
 
+		$.extend(mempage, empty);
+	},
+
+	getEmtpyBlockRuntimeMemory : function() {
+
+		return {
 			markers: {},
 			markersPos: {},
 			markersOpen: {},
 			maps: {},
 		};
-
-		$.extend(mempage, empty);
 	},
 
 	destroy : function(pageSection, block, targets) {
@@ -459,7 +463,18 @@ popMap = {
 
 		var markersPageSection = map.data('markers-pagesection') || pageSection;
 		var markersBlock = map.data('markers-block') || block;
-		var mempage = t.getRuntimeMemoryPage(markersPageSection, markersBlock);
+		
+		// Comment Leo 16/10/2017: there is a bug:
+		// clicking on location link inside the Event preview gives JS error, because the link from where we are clicking (the original link), which we need in map-collection.js, execModalMap : function(domain, modals, link), line `link = popManager.getOriginalLink(link);`, doesn't exist anymore, since it's also in a modal window which is closed when opening the new location modal window...
+		// Then getRuntimeMemoryPage will throw an Exception. If this happens, then just do nothing, but don't let it explode
+		var mempage = t.getEmtpyBlockRuntimeMemory();
+		try {
+			mempage = t.getRuntimeMemoryPage(markersPageSection, markersBlock);
+		}
+		catch(err) {
+			// Do nothing
+			console.log('Error: '+err.message);
+		}
 		var mapId = map.attr('id');
 		// Markers Info
 		return {
@@ -569,26 +584,32 @@ popMap = {
 
 			markerData = markersInfo.markers[markerId];
 
-			var infoWindow = {
-				content : markerData.infoWindow.header + '<br/>' + markerData.infoWindow.content
-			};
+			// Comment Leo 16/10/2017: there is a bug:
+			// clicking on location link inside the Event preview gives JS error, because the link from where we are clicking (the original link), which we need in map-collection.js, execModalMap : function(domain, modals, link), line `link = popManager.getOriginalLink(link);`, doesn't exist anymore, since it's also in a modal window which is closed when opening the new location modal window...
+			// Then we will not have object will markerData. In this case, do nothing (do not let the JS explode)
+			if (markerData) {
 
-			var markerOptions = {
-				lat : markerData.coordinates.lat,
-				lng : markerData.coordinates.lng,
-				title : markerData.title,
-				infoWindow: infoWindow,
-				icon: markerData.icon
-			};
-			// If there is no connection to Internet, object 'google' will not be there
-			if (typeof google != 'undefined') {
-				markerOptions['animation'] = google.maps.Animation.DROP;
+				var infoWindow = {
+					content : markerData.infoWindow.header + '<br/>' + markerData.infoWindow.content
+				};
+
+				var markerOptions = {
+					lat : markerData.coordinates.lat,
+					lng : markerData.coordinates.lng,
+					title : markerData.title,
+					infoWindow: infoWindow,
+					icon: markerData.icon
+				};
+				// If there is no connection to Internet, object 'google' will not be there
+				if (typeof google != 'undefined') {
+					markerOptions['animation'] = google.maps.Animation.DROP;
+				}
+				marker = gMap.addMarker(markerOptions);
+
+				// Save the position of the marker in the map
+				markerPos = gMap.markers.length - 1;
+				markersPos[markerId] = markerPos;
 			}
-			marker = gMap.addMarker(markerOptions);
-
-			// Save the position of the marker in the map
-			markerPos = gMap.markers.length - 1;
-			markersPos[markerId] = markerPos;
 		});
 
 		t.setMarkersPos(pageSection, block, map, markersPos);

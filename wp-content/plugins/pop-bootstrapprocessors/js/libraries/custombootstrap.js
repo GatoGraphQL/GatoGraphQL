@@ -323,7 +323,7 @@ popCustomBootstrap = {
 		blocks.each(function() {
 
 			var block = $(this);
-			popSystem.makeOneTimeRefetch(pageSection, block);
+			popBlockDataQuery.makeOneTimeRefetch(pageSection, block);
 			
 			var jsSettings = popManager.getJsSettings(domain, pageSection, block);
 			var blockBranches = jsSettings['initjs-blockbranches'];

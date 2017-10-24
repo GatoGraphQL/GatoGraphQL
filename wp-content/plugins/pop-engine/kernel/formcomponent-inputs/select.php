@@ -8,13 +8,13 @@
 
 class GD_FormInput_Select extends GD_FormInput {
 
-	function get_default_value(/*$conf*/) {
+	function get_default_value(/*$conf*/$output=false) {
 	
 		if ($this->is_multiple()) {
 			return array();	
 		}
 		
-		return parent::get_default_value(/*$conf*/);
+		return parent::get_default_value(/*$conf*/$output);
 	}
 
 	function get_value(/*$conf, */$output = false) {

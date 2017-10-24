@@ -17,8 +17,4 @@ class PoP_ServerSideRendering_Factory {
 
 		return self::$instance;
 	}
-
-	// public static function render_pagesection($template_id) {
-	// 	self::$instance->render_pagesection($template_id);
-	// }
 }

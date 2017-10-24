@@ -11,7 +11,7 @@ define ('WASSUP_CHECKPOINT_LOGGEDIN_STATIC', 'checkpoint-loggedin-static');
 define ('WASSUP_CHECKPOINT_LOGGEDIN_DATAFROMSERVER', 'checkpoint-loggedin-datafromserver');
 define ('WASSUP_CHECKPOINT_LOGGEDIN_CANEDIT', 'checkpoint-loggedin-canedit');
 define ('WASSUP_CHECKPOINT_LOGGEDIN_ISADMINISTRATOR', 'checkpoint-loggedin-isadministrator');
-define ('WASSUP_CHECKPOINT_DOMAINVALID', 'checkpoint-domainvalid');
+// define ('WASSUP_CHECKPOINT_DOMAINVALID', 'checkpoint-domainvalid');
 
 class Wassup_SettingsProcessor_CheckpointUtils {
 
@@ -72,15 +72,15 @@ class Wassup_SettingsProcessor_CheckpointUtils {
 				),
 				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER
 			);
-			$domainvalid = array(
-				'checkpoints' => array(
-					GD_DATALOAD_CHECKPOINT_DOMAINVALID,
-				),
-				// Adding type DataFromServer, so that the blockgroup (GD_TEMPLATE_BLOCKGROUP_INITIALIZEDOMAIN) 
-				// will have the right value of $block_checkpointvalidation_failed, in pop-engine.php, 
-				// if the checkpoint fails, and it doesn't execute adding backgroundload-urls
-				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER
-			);
+			// $domainvalid = array(
+			// 	'checkpoints' => array(
+			// 		GD_DATALOAD_CHECKPOINT_DOMAINVALID,
+			// 	),
+			// 	// Adding type DataFromServer, so that the blockgroup (GD_TEMPLATE_BLOCKGROUP_INITIALIZEDOMAIN) 
+			// 	// will have the right value of $block_checkpointvalidation_failed, in pop-engine.php, 
+			// 	// if the checkpoint fails, and it doesn't execute adding backgroundload-urls
+			// 	'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER
+			// );
 
 			switch ($name) {
 
@@ -108,10 +108,10 @@ class Wassup_SettingsProcessor_CheckpointUtils {
 					$checkpoint = $loggedin_isadmin;
 					break;
 
-				case WASSUP_CHECKPOINT_DOMAINVALID:
+				// case WASSUP_CHECKPOINT_DOMAINVALID:
 
-					$checkpoint = $domainvalid;
-					break;
+				// 	$checkpoint = $domainvalid;
+				// 	break;
 			}
 		}
 	

@@ -26,26 +26,31 @@ class WSL_PoPProcessors_Initialization {
 
 	function register_scripts() {
 
-		$folder = WSL_POPPROCESSORS_URI.'/js';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
-			
-			$folder .= '/dist';
-			wp_register_script('wsl-popprocessors-templates', $folder . '/wordpress-social-login-popprocessors.templates.bundle.min.js', array(), WSL_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('wsl-popprocessors-templates');
+			$js_folder = WSL_POPPROCESSORS_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
 
-			wp_register_script('wsl-popprocessors', $folder . '/wordpress-social-login-popprocessors.bundle.min.js', array('pop', 'jquery'), WSL_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('wsl-popprocessors');
-		}
-		else {
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('wsl-popprocessors-templates', $bundles_js_folder . '/wordpress-social-login-popprocessors.templates.bundle.min.js', array(), WSL_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('wsl-popprocessors-templates');
 
-			$folder .= '/libraries';
-			
-			wp_register_script('wsl-popprocessors-functions', $folder.'/wsl-functions.js', array('jquery', 'pop'), WSL_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('wsl-popprocessors-functions');
+				wp_register_script('wsl-popprocessors', $bundles_js_folder . '/wordpress-social-login-popprocessors.bundle.min.js', array('pop', 'jquery'), WSL_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('wsl-popprocessors');
+			}
+			else {
 
-			/** Templates Sources */
-			$this->enqueue_templates_scripts();
+				wp_register_script('wsl-popprocessors-functions', $libraries_js_folder.'/wsl-functions'.$suffix.'.js', array('jquery', 'pop'), WSL_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('wsl-popprocessors-functions');
+
+				/** Templates Sources */
+				$this->enqueue_templates_scripts();
+			}
 		}
 	}
 

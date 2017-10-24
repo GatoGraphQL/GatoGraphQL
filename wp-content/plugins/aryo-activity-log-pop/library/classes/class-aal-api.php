@@ -1246,7 +1246,6 @@ class AAL_PoP_API extends AAL_API {
 		// --------------------------------------------------
 		$actions = array();
 		if ($histid) {
-
 			// 2. Additional (similar) notifications ($histid not null)
 			$notification = $this->get_notification($histid);
 			$objectids_sql = '';
@@ -1352,6 +1351,35 @@ class AAL_PoP_API extends AAL_API {
 						$notification->user_id
 					);
 				}
+			}
+			elseif ($notification->object_type == "Taxonomy") {
+				
+				if ($notification->object_subtype == "Tag") {
+
+					$tag_actions = apply_filters(
+						'AAL_PoP_API:additional_notificatios:markasread:tags:actions',
+						array(
+							AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG,
+							AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG,
+						)
+					);
+					if (in_array($notification->action, $tag_actions)) {				
+
+						$actions = $tag_actions;
+						$objectids_sql = sprintf(
+							'
+								%1$s.object_id = %2$s
+							',
+							$wpdb->activity_log,
+							$notification->object_id
+						);
+					}
+				}
+			}
+			else {
+
+				// If it is none of these cases, then do nothing
+				return;
 			}
 
 			if ($objectids_sql) {

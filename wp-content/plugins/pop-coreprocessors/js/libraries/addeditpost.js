@@ -1,5 +1,5 @@
 (function($){
-popForms = {
+popAddEditPost = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -58,7 +58,7 @@ popForms = {
 		if (blockFeedback.result === true) {
 
 			// If it was successful, execute the destroyPageOnUserLoggedOut function on it
-			popSystem.execDestroyPageOnUserLoggedOut(domain, block);
+			popEventReactions.execDestroyPageOnUserLoggedOut(domain, block);
 		}
 		else {
 
@@ -97,4 +97,4 @@ popForms = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popForms, ['formCreatePostBlock', 'manageStatus']);
+popJSLibraryManager.register(popAddEditPost, ['formCreatePostBlock', 'manageStatus']);

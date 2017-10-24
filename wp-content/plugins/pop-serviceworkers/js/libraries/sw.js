@@ -114,6 +114,7 @@ popServiceWorkers = {
 		
 		// Do it on initialized.pop.document already, since there's no need to wait, this is the main content
 		$(document).on('initialized.pop.document', function() {
+			
 			var options = {
 				skipPushState: true,
 			};
@@ -129,6 +130,7 @@ popServiceWorkers = {
 			if (!url.startsWith(M.HOMELOCALE_URL+'/')) {
 				url = M.HOMELOCALE_URL+url.substr(M.HOME_DOMAIN.length);
 			}
+
 			popManager.fetch(url, options);
 		});
 	},

@@ -44,17 +44,17 @@ class PoPFrontend_Engine extends PoP_Engine {
 				$div_id,
 				$this->crawlableitems,
 				$this->runtimecrawlableitems,
-				$this->json['crawlable-data']
+				$this->resultsObject['crawlable-data']
 			);
 		}
 	}
 
-	protected function get_json($template_id, $output_items) {
+	protected function get_results_object($template_id, $output_items) {
 
 		global $gd_template_processor_manager, $gd_template_cachemanager;
 
 		// Get the JSON from the parent
-		$json = parent::get_json($template_id, $output_items);
+		$resultsObject = parent::get_results_object($template_id, $output_items);
 
 		// Add the crawlable items
 		if (in_array('crawlable', $output_items)) {
@@ -82,7 +82,7 @@ class PoPFrontend_Engine extends PoP_Engine {
 			$this->runtimecrawlableitems = implode("\n", $this->get_runtime_crawlable_items($template_id, $this->atts));
 		}
 
-		return $json;
+		return $resultsObject;
 	}
 
 	protected function get_json_settings($template_id, $atts) {
@@ -107,6 +107,23 @@ class PoPFrontend_Engine extends PoP_Engine {
 		);
 		
 		return $json_settings;
+	}
+
+	protected function get_json_sitemapping($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$json_sitemapping = parent::get_json_sitemapping($template_id, $atts);
+
+		// Otherwise, get the dynamic configuration
+		$processor = $gd_template_processor_manager->get_processor($template_id);
+
+		// Needed for the ResourceLoader, to load also all other needed sources by each template
+		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+			$json_sitemapping['template-extra-sources'] = $processor->get_templates_extra_sources($template_id, $atts);
+		}
+		
+		return $json_sitemapping;
 	}
 
 	protected function get_json_runtimesettings($template_id, $atts) {

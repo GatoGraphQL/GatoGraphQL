@@ -45,12 +45,13 @@ class PoP_ServerUtils {
 	/**
 	 * Function used to create a definition for a template. Needed for reducing the filesize of the html generated for PROD
 	 * Instead of using the name of the $template_id, we use a unique number in base 36, so the name will occupy much lower size
+	 * Comment Leo 27/09/2017: Changed from $template_id to only $id so that it can also be used with ResourceLoaders
 	 */
-	public static function get_template_definition($template_id, $mirror = false) {
+	public static function get_template_definition($id/*$template_id*/, $mirror = false) {
 
 		// If not mangled, then that's it, use the original $template_id
 		if (self::is_not_mangled()) {
-			return $template_id;
+			return $id;
 		}
 
 		// Mirror: it simply returns the $template_id again. It confirms in the code that this decision is deliberate 
@@ -58,14 +59,14 @@ class PoP_ServerUtils {
 		// It is simply used to explicitly say that we need the same name as the template_id, eg: for the filtercomponents,
 		// so that in the URL params it shows names that make sense (author=...&search=...)
 		if ($mirror) {
-			return $template_id;
+			return $id;
 		}
 
 		$templatedefinition_type = self::get_templatedefinition_type();
 
 		// Type 0: Use $template_id as the definition
 		if ($templatedefinition_type === 0) {
-			return $template_id;
+			return $id;
 		}
 
 		// Comment Leo: Fix here! The array should be injectable, each plug-in should add its reserved names
@@ -126,7 +127,7 @@ class PoP_ServerUtils {
 		// Type 1: Use both base36 counter and $template_id as the definition
 		// Do not add "-" or "_" to the definition, since some templates cannot support it.
 		// Eg: formcomponenteditor, used with wp_editor
-		return $counter.$template_id;
+		return $counter.$id;
 	}
 
 	/**

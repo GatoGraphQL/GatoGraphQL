@@ -25,6 +25,21 @@ class GD_DataLoad_FieldProcessor_Posts_Hook extends GD_DataLoad_FieldProcessor_H
 			case 'authors' :
 				return gd_get_postauthors($fieldprocessor->get_id($post));
 
+			case 'coauthors' :
+
+				$authors = $fieldprocessor->get_value($resultitem, 'authors');
+
+				// This function only makes sense when the user is logged in
+				$vars = GD_TemplateManager_Utils::get_vars();
+				if ($vars['global-state']['is-user-logged-in']/*is_user_logged_in()*/) {
+					
+					$pos = array_search($vars['global-state']['current-user-id']/*get_current_user_id()*/, $authors);
+					if ($pos >= 0) {
+						array_splice($authors, $pos, 1);
+					}
+				}
+				return $authors;
+
 			// Users mentioned in the post: @mentions
 			case 'taggedusers' :
 				return GD_MetaManager::get_post_meta($fieldprocessor->get_id($post), GD_METAKEY_POST_TAGGEDUSERS);

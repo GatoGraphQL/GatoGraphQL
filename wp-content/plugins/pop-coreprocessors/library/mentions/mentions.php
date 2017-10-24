@@ -158,9 +158,7 @@ class PoP_Mentions {
   // since v 3.0 post type depending
   function process_content( $content ) {
     
-    // if (in_array(get_post_type(), gd_dataload_posttypes())) {
-      $content = $this->work($content);
-    // }
+    $content = $this->work($content);
     return $content;
   }
 

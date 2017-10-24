@@ -210,6 +210,23 @@ class PoPFrontend_Template_Processor_TopLevelsBase extends GD_Template_Processor
 		
 		return $ret;
 	}
+	
+	function get_templates_extra_sources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		$ret = array();
+		foreach ($this->get_modules($template_id) as $module) {
+			
+			$module_atts = $atts[$module];
+			$ret = array_merge(
+				$ret,
+				$gd_template_processor_manager->get_processor($module)->get_templates_extra_sources($module, $module_atts)
+			);
+		}
+		
+		return $ret;
+	}
 
 	function get_templates_cbs($template_id, $atts) {
 	

@@ -47,6 +47,9 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 	$jquery_constants['URLPARAM_OPERATION_REPLACE'] = GD_URLPARAM_OPERATION_REPLACE;
 	$jquery_constants['URLPARAM_OPERATION_REPLACEINLINE'] = GD_URLPARAM_OPERATION_REPLACEINLINE;
 
+	$jquery_constants['URLPARAM_FORMAT'] = GD_URLPARAM_FORMAT;
+	$jquery_constants['URLPARAM_TAB'] = GD_URLPARAM_TAB;
+
 	$jquery_constants['URLPARAM_MODULE'] = GD_URLPARAM_MODULE;
 	$jquery_constants['URLPARAM_MODULE_SETTINGSDATA'] = GD_URLPARAM_MODULE_SETTINGSDATA;
 	$jquery_constants['URLPARAM_MODULE_DATA'] = GD_URLPARAM_MODULE_DATA;
@@ -58,7 +61,7 @@ function gd_jquery_constants_urlparams($jquery_constants) {
 	
 	$jquery_constants['URLPARAM_VALIDATECHECKPOINTS'] = GD_URLPARAM_VALIDATECHECKPOINTS;
 
-	$jquery_constants['URLPARAM_HIDEBLOCK'] = GD_URLPARAM_HIDEBLOCK;
+	// $jquery_constants['URLPARAM_HIDEBLOCK'] = GD_URLPARAM_HIDEBLOCK;
 	$jquery_constants['URLPARAM_STOPFETCHING'] = GD_URLPARAM_STOPFETCHING;
 	
 	// Needed to initialize a domain

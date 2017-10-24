@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('AAL_POP_VERSION', 0.103);
+define('AAL_POP_VERSION', 0.104);
 define('AAL_POP_DIR', dirname(__FILE__));
 
 define( 'AAL_POP_LOG__FILE__', __FILE__ );

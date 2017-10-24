@@ -385,64 +385,94 @@ class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Templa
 		return $ret;
 	}
 
-	protected function get_block_page($template_id) {
+	// protected function get_block_page($template_id) {
 
-		global $gd_template_settingsmanager;
+	// 	global $gd_template_settingsmanager;
+
+	// 	switch ($template_id) {
+
+	// 		case GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
+
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;
+
+	// 		// These are the Profile Blocks, they will always be used inside an is_author() page
+	// 		// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
+	// 		// an attr "tab" indicating this page through its path. This way, users can go straight to their 
+	// 		// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
+
+	// 		// case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
+
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;
+
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
+
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;
+
+	// 		case GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP:
+	// 		case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
+
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_SINGLE)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;
+	// 	}
+	
+	// 	return parent::get_block_page($template_id);
+	// }
+	protected function get_block_hierarchy($template_id) {
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP:
-			case GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
-
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
-
-					return $page;
-				}
-				break;
-
-			// These are the Profile Blocks, they will always be used inside an is_author() page
-			// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
-			// an attr "tab" indicating this page through its path. This way, users can go straight to their 
-			// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
+			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
+			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
-
-			// case GD_TEMPLATE_BLOCK_AUTHORALLCONTENT_SCROLLMAP:
-			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
-			case GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
-
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
-
-					return $page;
-				}
-				break;
+				
+				return GD_SETTINGS_HIERARCHY_AUTHOR;
 
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
 			case GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP:
-
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
-
-					return $page;
-				}
-				break;
+				
+				return GD_SETTINGS_HIERARCHY_TAG;
 
 			case GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP:
 			case GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
 
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_SINGLE)) {
-
-					return $page;
-				}
-				break;
+				return GD_SETTINGS_HIERARCHY_SINGLE;
 		}
-	
-		return parent::get_block_page($template_id);
+		
+		return parent::get_block_hierarchy($template_id);
 	}
+
 
 	protected function get_dataload_query_args($template_id, $atts) {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
  
-class PoP_CDNCore_Job_ThumbprintsConfig extends PoP_CDNCore_Job {
+class PoP_CDNCore_FileReproduction_ThumbprintsConfig extends PoP_CDNCore_FileReproduction {
 
     public function get_js_path() {
         
@@ -34,26 +34,26 @@ class PoP_CDNCore_Job_ThumbprintsConfig extends PoP_CDNCore_Job {
         return array(
             'startsWith' => array(
                 'full' => apply_filters(
-                    'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:rejected:startsWith:full',
+                    'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:startsWith:full',
                     array()
                 ),
                 'partial' => apply_filters(
-                    'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:rejected:startsWith:partial',
+                    'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:startsWith:partial',
                     array()
                 ),
             ),
             // Array of Arrays: elem[0] = URL param, elem[1] = value
             'hasParamValues' => apply_filters(
-                'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:rejected:hasParamValues',
+                'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:hasParamValues',
                 array()
             ),
             // Array of Arrays: elem[0] = URL param, elem[1] = value
             'noParamValues' => apply_filters(
-                'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:rejected:noParamValues',
+                'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:noParamValues',
                 array()
             ),
             'isHome' => apply_filters(
-                'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:rejected:isHome',
+                'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:isHome',
                 false
             )
         );
@@ -64,28 +64,28 @@ class PoP_CDNCore_Job_ThumbprintsConfig extends PoP_CDNCore_Job {
         return array(
             'startsWith' => array(
                 'full' => apply_filters(
-                    'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:full',
+                    'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:full',
                     array(),
                     $thumbprint
                 ),
                 'partial' => apply_filters(
-                    'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
+                    'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
                     array(),
                     $thumbprint
                 ),
             ),
             'hasParamValues' => apply_filters(
-                'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:hasParamValues',
+                'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:hasParamValues',
                 array(),
                 $thumbprint
             ),
             'noParamValues' => apply_filters(
-                'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
+                'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
                 array(),
                 $thumbprint
             ),
             'isHome' => apply_filters(
-                'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:isHome',
+                'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:isHome',
                 false,
                 $thumbprint
             )
@@ -96,4 +96,4 @@ class PoP_CDNCore_Job_ThumbprintsConfig extends PoP_CDNCore_Job {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_CDNCore_Job_ThumbprintsConfig();
+new PoP_CDNCore_FileReproduction_ThumbprintsConfig();

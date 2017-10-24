@@ -123,6 +123,7 @@ class GD_Template_SettingsManager {
 	function get_page_block($page_id = null, $hierarchy = null, $format = null) {
 
 		$vars = GD_TemplateManager_Utils::get_vars();
+
 		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
 
 			$post = $vars['global-state']['post']/*global $post*/;
@@ -322,6 +323,34 @@ class GD_Template_SettingsManager {
 		}
 
 		return $functional;
+	}
+
+	function is_for_internal_use($page_id = null, $hierarchy = null) {
+
+		$vars = GD_TemplateManager_Utils::get_vars();
+		if (!$page_id && $vars['global-state']['is-page']/*is_page()*/) {
+			
+			$post = $vars['global-state']['post']/*global $post*/;
+			$page_id = $post->ID;
+		}
+
+		$hierarchy = $this->get_hierarchy($hierarchy);
+		
+		global $gd_template_settingsprocessor_manager;
+		if (!($processor = $gd_template_settingsprocessor_manager->get_processor_by_page($page_id, $hierarchy))) {
+		
+			return false;
+		}
+
+		// If we get an array, then it defines the value on a page by page basis
+		// Otherwise, it's true/false, just return it
+		$internal = $processor->is_for_internal_use($hierarchy);
+		if (is_array($internal)) {
+
+			return $internal[$page_id];
+		}
+
+		return $internal;
 	}
 
 	function needs_target_id($page_id = null, $hierarchy = null) {

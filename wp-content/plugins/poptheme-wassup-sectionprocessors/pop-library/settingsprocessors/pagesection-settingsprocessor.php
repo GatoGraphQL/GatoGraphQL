@@ -93,12 +93,13 @@ class PoPTheme_Wassup_SectionProcessors_PageSectionSettingsProcessor extends Was
 		if ($add) {
 
 			$blockgroups = $frames = array();
-			$post_type = get_post_type();
+			$post = $vars['global-state']['post']/*global $post*/;
+			$post_type = get_post_type($post->ID);
 			if ($post_type == 'post') {
 
 				// For the Single Related: add the specific sidebar, which includes a delegator filter for the corresponding content
 				$sidebar = null;
-				$cat = gd_get_the_main_category();
+				$cat = gd_get_the_main_category($post->ID);
 				if ($page_id = GD_TemplateManager_Utils::get_hierarchy_page_id()) {
 					switch ($page_id) {
 

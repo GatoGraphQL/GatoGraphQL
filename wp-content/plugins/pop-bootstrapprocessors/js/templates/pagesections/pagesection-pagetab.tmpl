@@ -2,7 +2,7 @@
 	{{#withBlock ../. this}}
 		<div class="{{../../class}}" style="{{../../style}}" {{#generateId context=../../. targetId=../../pss.pssId group='unit'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}}  {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 			<div class="btn-group">
-				<a {{#generateId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} href="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" role="button" class="pop-pagetab-btn {{../../classes.btn}}" style="{{../../styles.btn}}">
+				<a {{#generateId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} href="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}" role="button" class="pop-pagetab-btn {{#iffirstload context=../../.}}active{{/iffirstload}} {{../../classes.btn}} {{../../classes.btn-tab}}" style="{{../../styles.btn}}">
 					{{enterModule . parentContext=../../.}}
 				</a>
 				<button type="button" class="pop-closepagetab-btn {{../../classes.btn}} btn-narrow" style="{{../../styles.btn}}" {{#generateId context=../../. targetId=../../pss.pssId group='remove'}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{get . ../../../template}}{{/withSublevel}}">
@@ -19,12 +19,12 @@
 			{{/withSublevel}}
 
 			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="destroy-interceptor"}}{{../../id}}{{../../tls.feedback.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='unit'}}" data-intercept-url="{{#withSublevel ../../template context=../../pss.feedback.intercept-urls}}{{#withSublevel ../../../template}}{{destroyUrl this}}{{/withSublevel}}{{/withSublevel}}" data-intercept-skipstateupdate="true"></a>
-			{{#each ../../template-ids.insideextensions}}
+			{{#each ../../template-sources.insideextensions}}
 				{{applyLightTemplate . context=../../../.}}
 			{{/each}}
 		</div>
 	{{/withBlock}}
 {{/each}}
-{{#each template-ids.extensions}}
+{{#each template-sources.extensions}}
 	{{applyLightTemplate . context=../.}}
 {{/each}}

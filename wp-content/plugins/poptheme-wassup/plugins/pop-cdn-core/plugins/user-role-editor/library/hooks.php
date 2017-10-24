@@ -10,13 +10,13 @@ class PoP_URE_CDN_Hooks {
 	function __construct() {
 
 		add_filter(
-			'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
+			'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
 			array($this, 'get_thumbprint_partialpaths'),
 			10,
 			2
 		);
 		add_filter(
-			'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
+			'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
 			array($this, 'get_thumbprint_noparamvalues'),
 			10,
 			2

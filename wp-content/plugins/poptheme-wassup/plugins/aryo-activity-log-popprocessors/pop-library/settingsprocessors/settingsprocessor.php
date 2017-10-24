@@ -22,7 +22,7 @@ class Wassup_AAL_PoPProcessors_Template_SettingsProcessor extends GD_Template_Se
 		return parent::get_checkpoints($hierarchy);
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 		$default_format_notifications = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_NOTIFICATIONS);

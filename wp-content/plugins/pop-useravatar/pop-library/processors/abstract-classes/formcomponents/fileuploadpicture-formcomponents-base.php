@@ -96,15 +96,16 @@ class GD_Template_Processor_FileUploadPictureFormComponentsBase extends GD_Templ
 
 		$ret = parent::get_template_runtimeconfiguration($template_id, $atts);
 
+		// Original values to update the 'upload-path' and 'action' on runtime
 		$gd_fileupload_userphoto = GD_FileUpload_UserPhoto_Manager_Factory::get_instance()->get_instance();
 		$upload_path = $gd_fileupload_userphoto->get_upload_path();
 		$action = $gd_fileupload_userphoto->get_action_url();
+		$ret['upload-path-original'] = $upload_path;
+		$ret['action-original'] = $action;
 
 		// These 2 properties will be updated on runtime with the user_id (not available yet on the configuration)
 		$ret['upload-path'] = $upload_path;
-		$ret['upload-path-original'] = $upload_path;
 		$ret['action'] = $action;
-		$ret['action-original'] = $action;
 		
 		return $ret;
 	}

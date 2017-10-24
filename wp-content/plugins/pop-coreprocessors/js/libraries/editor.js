@@ -10,7 +10,6 @@ popEditor = {
 	// 	var t = this;
 
 	// 	var targets = args.targets;
-	// 	// console.log('focusing on', targets.find('.pop-editor'));
 	// 	targets.each(function() {
 			
 	// 		var editor = $(this).find('.pop-editor');

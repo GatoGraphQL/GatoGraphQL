@@ -134,3 +134,26 @@ function pop_sw_reloadurl_linkattrs($params) {
 	$params .= ' data-sw-networkfirst="true"';
 	return $params;
 }
+
+
+// add_filter('gd_jquery_constants', 'pop_sw_jquery_constants');
+// function pop_sw_jquery_constants($jquery_constants) {
+
+// 	global $pop_resourceloaderprocessor_manager;
+// 	$hierarchy_resources = array(
+// 		'home' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES,
+// 		'page' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES,
+// 		'single' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES,
+// 		'author' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES,
+// 		'tag' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES,
+// 	);
+// 	$hierarchy_urls = array();
+// 	$version = pop_version();
+// 	foreach ($hierarchy_resources as $hierarchy_resources => $resource) {
+// 		$hierarchy_urls[$hierarchy] = add_query_arg('ver', $version, $pop_resourceloaderprocessor_manager->get_file_url($resource));
+// 	}
+// 	$jquery_constants['RESOURCELOADER_HIERARCHY_DEFAULT_URLS'] = $hierarchy_urls;
+	
+
+// 	return $jquery_constants;
+// }

@@ -142,8 +142,17 @@ class PoPTheme_Wassup_EM_PageSectionHooks {
 		// if ($subcomponent == GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS) {
 		if ($subcomponent == GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS) {
 			
-			// Make the block lazy load
-			$processor->add_att($subcomponent, $ret, 'content-loaded', false);
+			// Comment Leo 19/10/2017: load it straight, damn it! So no need to show the "Loading" or the Skeleton Screen,
+			// taking into account that this component in the sideinfo shows immediately (it's above the fold)
+			// // Make the block lazy load, but not when loading the frame if generating the code on the server, 
+			// // because then we need the website to look complete immediately
+			// if (!(GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering())) {
+				
+			// 	$processor->add_att($subcomponent, $ret, 'content-loaded', false);
+				
+			// 	// Use the Skeleton screen to load the lazy-load content
+			// 	$processor->add_att($subcomponent, $ret, 'use-skeletonscreen', true);
+			// }
 
 			// Add the link
 			$processor->add_att($subcomponent, $ret, 'title-htmltag', 'h4');

@@ -90,7 +90,7 @@ class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase 
 			}
 			else {
 
-				$cat = gd_get_the_main_category();
+				$cat = gd_get_the_main_category($post->ID);
 				$inners = array(
 					GD_TEMPLATE_CONTENT_SINGLE => array(
 						POPTHEME_WASSUP_CAT_HIGHLIGHTS => GD_TEMPLATE_CONTENTINNER_HIGHLIGHTSINGLE,

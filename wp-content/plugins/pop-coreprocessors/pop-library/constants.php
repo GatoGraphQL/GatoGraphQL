@@ -80,12 +80,12 @@ function gd_popcore_jquery_constants_templatemanager_impl($jquery_constants) {
 	$jquery_constants['CBACTION_RESET'] = GD_TEMPLATECALLBACK_ACTION_RESET;
 
 	$jquery_constants['ERROR_MSG'] = sprintf(
-		'%s <a href="{0}">%s</a>',
+		'%s <a href="{0}" target="{1}">%s</a>',
 		GD_CONSTANT_ERROR_MSG,
 		GD_CONSTANT_RETRY_MSG
 	);
 	$jquery_constants['ERROR_OFFLINE'] = sprintf(
-		'%s <a href="{0}">%s</a>',
+		'%s <a href="{0}" target="{1}">%s</a>',
 		GD_CONSTANT_OFFLINE_MSG,
 		GD_CONSTANT_RETRY_MSG
 	);

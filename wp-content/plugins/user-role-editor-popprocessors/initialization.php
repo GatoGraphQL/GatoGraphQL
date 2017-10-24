@@ -21,18 +21,23 @@ class URE_PoPProcessors_Initialization {
 
 	function register_scripts() {
 
-		$folder = URE_POPPROCESSORS_URI.'/js';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
-			
-			$folder .= '/dist';
-			wp_register_script('ure-popprocessors-templates', $folder . '/user-role-editor-popprocessors.templates.bundle.min.js', array(), URE_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('ure-popprocessors-templates');
-		}
-		else {
+			$js_folder = URE_POPPROCESSORS_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
 
-			/** Templates Sources */
-			$this->enqueue_templates_scripts();
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('ure-popprocessors-templates', $bundles_js_folder . '/user-role-editor-popprocessors.templates.bundle.min.js', array(), URE_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('ure-popprocessors-templates');
+			}
+			else {
+
+				/** Templates Sources */
+				$this->enqueue_templates_scripts();
+			}
 		}
 	}
 

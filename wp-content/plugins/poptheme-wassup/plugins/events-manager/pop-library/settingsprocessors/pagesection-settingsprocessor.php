@@ -89,12 +89,13 @@ class Wassup_EM_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 		if ($add) {
 
 			$blockgroups = $frames = array();
-			$post_type = get_post_type();
+			$post = $vars['global-state']['post']/*global $post*/;
+			$post_type = get_post_type($post->ID);
 			if ($post_type == EM_POST_TYPE_EVENT) {
 
 				// For the Single Related: add the specific sidebar, which includes a delegator filter for the corresponding content
 				$page_id = GD_TemplateManager_Utils::get_hierarchy_page_id();					
-				if (gd_em_single_event_is_future()) {
+				if (gd_em_single_event_is_future($post->ID)) {
 
 					$sidebars = array(
 						POPTHEME_WASSUP_PAGE_HIGHLIGHTS => GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_HIGHLIGHTSSIDEBAR,
@@ -414,11 +415,11 @@ class Wassup_EM_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 			
 				if ($template_id == GD_TEMPLATE_PAGESECTION_PAGE && $target == GD_URLPARAM_TARGET_MAIN) {
 
-					$blocks[] = GD_TEMPLATE_BLOCK_LOCATIONSMAP;
+					$blocks[] = $gd_template_settingsmanager->get_page_block($page_id);
 				}
 				elseif ($template_id == GD_TEMPLATE_PAGESECTION_MODALS_PAGE && $target == GD_URLPARAM_TARGET_MODALS) {
 
-					$blocks[] = GD_TEMPLATE_BLOCK_STATICLOCATIONSMAP;
+					$blocks[] = $gd_template_settingsmanager->get_page_block($page_id, null, GD_TEMPLATEFORMAT_MODALS);
 				}
 				break;
 				
@@ -441,7 +442,7 @@ class Wassup_EM_PageSectionSettingsProcessor extends Wassup_PageSectionSettingsP
 					}
 					elseif ($is_modal) {
 
-						$blockgroups[] = $gd_template_settingsmanager->get_page_blockgroup($page_id);
+						$blockgroups[] = $gd_template_settingsmanager->get_page_blockgroup($page_id, null, GD_TEMPLATEFORMAT_MODALS);
 					}
 				}
 				break;

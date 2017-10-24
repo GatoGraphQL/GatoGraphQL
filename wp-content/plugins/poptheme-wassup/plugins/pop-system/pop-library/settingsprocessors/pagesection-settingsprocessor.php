@@ -25,8 +25,11 @@ class PoPTheme_Wassup_PoPSystem_PageSectionSettingsProcessor extends Wassup_Page
 			/*********************************************
 			 * System
 			 *********************************************/
-			case POP_SYSTEM_PAGE_SYSTEM_INSTALL:
 			case POP_SYSTEM_PAGE_SYSTEM_BUILD:
+			case POP_SYSTEM_PAGE_SYSTEM_GENERATE:
+			case POP_SYSTEM_PAGE_SYSTEM_GENERATETHEME:
+			case POP_SYSTEM_PAGE_SYSTEM_ACTIVATEPLUGINS:
+			case POP_SYSTEM_PAGE_SYSTEM_INSTALL:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_OPERATIONAL) {
 

@@ -247,6 +247,52 @@ class GD_TemplateManager_Utils {
 		return $page_path;
 	}
 
+	public static function get_post_path($post_id, $remove_post_slug = false) {
+
+		// Generate the post path. If the post is published, just use permalink. If not, we can't, or it will get the URL to edit the post,
+		// and not the URL the post will be published to, which is what is needed by the ResourceLoader
+		if (get_post_type($post_id) == 'publish') {
+
+			$permalink = get_permalink($post_id);
+			$post_name = get_slug($post_id);
+		}
+		else {
+
+			// Function get_sample_permalink comes from the file below, so it must be included
+			// Code below copied from `function get_sample_permalink_html`
+			require_once ABSPATH.'wp-admin/includes/post.php';
+			list($permalink, $post_name) = get_sample_permalink($post_id, null, null);
+			$permalink = str_replace( array( '%pagename%', '%postname%' ), $post_name, $permalink );
+		}
+
+		$domain = trailingslashit(home_url());
+
+		// Remove the domain from the permalink => page path
+		$post_path = substr($permalink, strlen($domain));
+
+		// Remove the post slug
+		if ($remove_post_slug) {
+
+            $post_path = substr($post_path, 0, strlen($post_path) - strlen(trailingslashit($post_name)));
+        }
+
+		return $post_path;
+	}
+
+	public static function get_category_path($category_id, $taxonomy = 'category') {
+
+		// Convert it to int, otherwise it thinks it's a string and the method below fails
+		$category_path = get_term_link((int) $category_id, $taxonomy);
+
+		// Remove the initial part ("https://www.mesym.com/en/categories/")
+		global $wp_rewrite;
+		$termlink = $wp_rewrite->get_extra_permastruct($taxonomy);
+		$termlink = str_replace("%$taxonomy%", '', $termlink);
+		$termlink = home_url( user_trailingslashit($termlink, $taxonomy) );
+
+		return substr($category_path, strlen($termlink));
+	}
+
 	public static function get_tab($page_id) {
 
 		// Add url with the tab pointing to the corresponding page
@@ -284,9 +330,22 @@ class GD_TemplateManager_Utils {
 	
 			// Through the filter we can specify the default values when no 'tab' is specified
 			$page_id = apply_filters('GD_TemplateManager_Utils:get_hierarchy_page_id:default', null);
+			// $page_id = self::get_hierarchy_default_page($vars['global-state']['hierarchy']);
 		}
 
 		return $page_id;
+	}
+
+	public static function get_hierarchy_default_page($hierarchy) {
+	
+		$default_pages = array(
+			'home' => POPTHEME_WASSUP_PAGEPLACEHOLDER_HOME,
+			'tag' => POPTHEME_WASSUP_PAGEPLACEHOLDER_TAG,
+			'single' => null,
+			'author' => null,
+		);
+		$default_pages = apply_filters('GD_TemplateManager_Utils:hierarchy_default_pages', $default_pages);
+		return $default_pages[$hierarchy];
 	}
 
 	public static function get_embed_url($url) {
@@ -342,7 +401,7 @@ class GD_TemplateManager_Utils {
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
 		// $domain = $_REQUEST[POP_URLPARAM_DOMAIN];
-		
+
 		// Target/Module default values (for either empty, or if the user is playing around with the url)
 		$modules = array(
 			GD_URLPARAM_MODULE_SETTINGSDATA,
@@ -411,6 +470,7 @@ class GD_TemplateManager_Utils {
 		self::$vars['global-state'] = array(
 
 			// Template hierarchy
+			'hierarchy' => null,
 			'is-home' => false,
 			'is-front-page' => false,
 			'is-tag' => false,
@@ -432,6 +492,21 @@ class GD_TemplateManager_Utils {
 		self::$vars = apply_filters('GD_TemplateManager_Utils:get_vars', self::$vars);
 
 		return self::$vars;
+	}
+
+	public static function set_vars_hierarchy($hierarchy) {
+
+		self::$vars['global-state']['hierarchy'] = $hierarchy;
+		self::$vars['global-state']['is-home'] = $hierarchy == 'home';
+		self::$vars['global-state']['is-front-page'] = $hierarchy == 'front-page';
+		self::$vars['global-state']['is-tag'] = $hierarchy == 'tag';
+		self::$vars['global-state']['is-page'] = $hierarchy == 'page';
+		self::$vars['global-state']['is-single'] = $hierarchy == 'single';
+		self::$vars['global-state']['is-author'] = $hierarchy == 'author';
+		self::$vars['global-state']['is-404'] = $hierarchy == '404';
+		self::$vars['global-state']['is-search'] = $hierarchy == 'search';
+		self::$vars['global-state']['is-category'] = $hierarchy == 'category';
+		self::$vars['global-state']['is-archive'] = $hierarchy == 'archive';
 	}
 
 	// public static function modify_vars_global_state($value) {

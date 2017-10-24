@@ -44,9 +44,13 @@ class GD_ThemeManager {
 	// 	return $this->selected_theme;
 	// }
 
-	function get_theme() {
+	function get_theme($themename = '') {
+
+		if (!$themename) {
+			$themename = $this->selected_theme;
+		}
 	
-		return $this->themes[$this->selected_theme];
+		return $this->themes[$themename];
 	}
 
 	function get_thememode() {
@@ -70,6 +74,15 @@ class GD_ThemeManager {
 	function is_default_theme() {
 	
 		return $this->selected_theme == $this->get_default_themename();
+	}
+
+	function get_default_thememodename($themename) {
+
+		if ($theme = $this->get_theme($themename)) {
+			return $theme->get_default_thememodename();
+		}
+
+		return null;
 	}
 
 	function is_default_thememode() {

@@ -45,7 +45,7 @@ class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBl
 
 						// Comment Leo 09/11/2015: No need to add this information for the Upvote/Downvote, it's too much
 						// HIGHLIGHTS go in top since they have no submenu
-						$cat = gd_get_the_main_category();
+						$cat = gd_get_the_main_category($post->ID);
 						$skip = apply_filters('GD_Template_Processor_MainBlockGroups:get_controlgroup_bottom:skip_categories', array());
 						if (!in_array($cat, $skip)) {
 

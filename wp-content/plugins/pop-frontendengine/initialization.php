@@ -3,9 +3,18 @@
 define ('POP_HOOK_POPFRONTEND_BACKGROUNDLOAD', 'popfrontend-backgroundload');
 define ('POP_HOOK_POPFRONTEND_KEEPOPENTABS', 'popfrontend-keepopentabs');
 
+
+
 class PoPFrontend_Initialization {
 
-	function initialize(){
+	protected $scripts;
+
+	function __construct() {
+
+		$this->scripts = array();
+	}
+
+	function initialize() {
 
 		load_plugin_textdomain('pop-frontendengine', false, dirname(plugin_basename(__FILE__)).'/languages');
 
@@ -18,8 +27,16 @@ class PoPFrontend_Initialization {
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
 		
 			// Print all jQuery functions, execute after all the plugin scripts have loaded
-			// Priority 25: do it before the wpEditor scripts (priority 50) from wp-includes/class-wp-editor.php function editor_settings()
-			add_action('wp_print_footer_scripts', array($this, 'add_jquery'), 25);
+			// Load before we start printing the footer scripts, so we can add the 'after' data to the required scripts
+			add_action('wp_print_footer_scripts', array($this, 'init_scripts'), 0);
+			// if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {
+
+			// 	add_action('wp_print_footer_scripts', array($this, 'add_scripts'), 0);
+			// }
+			// else {
+
+			add_action('wp_print_footer_scripts', array($this, 'print_scripts'), PHP_INT_MAX);
+			// }
 		}
 
 		/**---------------------------------------------------------------------------------------------------------------
@@ -45,58 +62,103 @@ class PoPFrontend_Initialization {
 
 	function register_scripts() {
 
-		$js_folder = POP_FRONTENDENGINE_URI.'/js';
-		$dist_js_folder = $js_folder.'/dist';
-		
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
-			
-			wp_register_script('pop-frontendengine-templates', $dist_js_folder . '/pop-frontendengine.templates.bundle.min.js', array(), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-frontendengine-templates');
-			
-			wp_register_script('pop', $dist_js_folder . '/pop-frontendengine.bundle.min.js', array('jquery', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop');
-		}
-		else {
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			/** Enqueue Theme Plugins Sources */
-			$this->enqueue_plugins_scripts();
+			$js_folder = POP_FRONTENDENGINE_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
+			$includes_js_folder = $js_folder.'/includes';
+			$cdn_js_folder = $includes_js_folder . '/cdn';
 
-			/** Theme JS Sources */
-			wp_register_script('pop-helpers-handlebars', $js_folder.'/helpers.handlebars.js', array('handlebars'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-helpers-handlebars');		
+			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
 
-			wp_register_script('pop-utils', $js_folder.'/utils.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-utils');
+				// http://handlebarsjs.com/installation.html
+				// // Comment Leo: Version 4.0.10 has a bug (https://github.com/wycats/handlebars.js/issues/1300) that make the application not work correctly
+				wp_register_script('handlebars', 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.runtime.min.js', null, null);
+				// wp_register_script('handlebars', 'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.runtime.min.js', null, null);
+			}
+			else {
 
-			wp_register_script('pop-compatibility', $js_folder.'/compatibility.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-compatibility');
+				// // Comment Leo: Version 4.0.10 has a bug (https://github.com/wycats/handlebars.js/issues/1300) that make the application not work correctly
+				wp_register_script('handlebars', $cdn_js_folder . '/handlebars.runtime.4.0.10.min.js', null, null);
+			}
+			wp_enqueue_script('handlebars');
 
-			wp_register_script('pop-jslibrary-manager', $js_folder.'/jslibrary-manager.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-jslibrary-manager');
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('pop-frontendengine-templates', $bundles_js_folder . '/pop-frontendengine.templates.bundle.min.js', array(), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-frontendengine-templates');
+				
+				wp_register_script('pop', $bundles_js_folder . '/pop-frontendengine.bundle.min.js', array('jquery', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop');
+			}
+			else {
 
-			wp_register_script('pop-jsruntime-manager', $js_folder.'/jsruntime-manager.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-jsruntime-manager');
+				/** Enqueue Theme Plugins Sources */
+				// $this->enqueue_plugins_scripts();
 
-			wp_register_script('pop-pagesection-manager', $js_folder.'/pagesection-manager.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-pagesection-manager');
+				/** Theme JS Sources */
+				wp_register_script('pop-helpers-handlebars', $libraries_js_folder.'/helpers.handlebars'.$suffix.'.js', array('handlebars'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-helpers-handlebars');		
 
-			wp_register_script('pop-history', $js_folder.'/history.js', array('jquery', 'pop-jslibrary-manager', 'pop-jsruntime-manager'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-history');
+				wp_register_script('pop-utils-functions', $libraries_js_folder.'/utils'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-utils-functions');		
 
-			wp_register_script('pop-interceptors', $js_folder.'/interceptors.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop-interceptors');
+				wp_register_script('pop-utils', $libraries_js_folder.'/pop-utils'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-utils');
 
-			// Sortable needed for the Typeahead
-			wp_register_script('pop', $js_folder.'/pop-manager.js', array('jquery', 'pop-utils', 'pop-pagesection-manager', 'pop-history', 'pop-interceptors', 'pop-jslibrary-manager', 'pop-jsruntime-manager', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
-			wp_enqueue_script('pop');
+				wp_register_script('pop-compatibility', $libraries_js_folder.'/compatibility'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-compatibility');
 
-			/** Templates Sources */
-			$this->enqueue_templates_scripts();
-		}
+				wp_register_script('pop-jslibrary-manager', $libraries_js_folder.'/jslibrary-manager'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-jslibrary-manager');
+
+				wp_register_script('pop-jsruntime-manager', $libraries_js_folder.'/jsruntime-manager'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-jsruntime-manager');
+
+				wp_register_script('pop-pagesection-manager', $libraries_js_folder.'/pagesection-manager'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-pagesection-manager');
+
+				wp_register_script('pop-history', $libraries_js_folder.'/history'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager', 'pop-jsruntime-manager'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-history');
+
+				wp_register_script('pop-interceptors', $libraries_js_folder.'/interceptors'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop-interceptors');
+
+				// // Check if we need this library or not
+				// if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+
+				// 	wp_register_script('pop-resourceloader', $libraries_js_folder.'/resourceloader'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
+				// 	wp_enqueue_script('pop-resourceloader');
+				// }
+
+				// Sortable needed for the Typeahead
+				wp_register_script('pop', $libraries_js_folder.'/pop-manager'.$suffix.'.js', array('jquery', 'pop-utils', 'pop-pagesection-manager', 'pop-history', 'pop-interceptors', 'pop-jslibrary-manager', 'pop-jsruntime-manager', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
+				wp_enqueue_script('pop');
+
+				/** Templates Sources */
+				$this->enqueue_templates_scripts();
+			}
 	
-		// Print all jQuery functions constants
-		$jquery_constants = $this->get_jquery_constants();
-		wp_localize_script('pop', 'M', $jquery_constants);
+			// Print all jQuery functions constants
+			$jquery_constants = $this->get_jquery_constants();
+			wp_localize_script('pop', 'M', $jquery_constants);
+		}
+
+		// No need to declare this file here, since it's already defined in the resourceloader-processor
+		// Also, if not doing code splitting, then no need for the resourceLoader config file
+		// // if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+		// else {
+
+		// 	// This file is generated dynamically, so it can't be added to any bundle or minified
+		// 	// That's why we use pop_version() as its version, so upgrading the website will fetch again this file
+		// 	global $pop_resourceloader_configfile_generator;
+		// 	wp_register_script('pop-resourceloader-config', $pop_resourceloader_configfile_generator->get_fileurl(), array(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_RESOURCELOADER)), pop_version(), true);
+		// 	wp_enqueue_script('pop-resourceloader-config');
+		// }
 	}
 
 	function enqueue_templates_scripts() {
@@ -191,6 +253,7 @@ class PoPFrontend_Initialization {
 			'STRING_MORE' => GD_STRING_MORE,
 			'STRING_LESS' => GD_STRING_LESS,
 			'ONDATE' => $ondate,
+			'PATHSTARTPOS' => apply_filters('gd_templatemanager:pathstartpos', 1),
 		);
 
 		// Allow qTrans to add the language information
@@ -202,10 +265,22 @@ class PoPFrontend_Initialization {
 			$jquery_constants['DOMCONTAINER_ID'] = $domcontainer_id;
 		}
 
+		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+			$jquery_constants['USECODESPLITTING'] = true;
+			$jquery_constants['CODESPLITTING']['PREFIXES'] = array(
+				'FORMAT' => POP_RESOURCELOADERIDENTIFIER_FORMAT,
+				'TAB' => POP_RESOURCELOADERIDENTIFIER_TAB,
+				'TARGET' => POP_RESOURCELOADERIDENTIFIER_TARGET,
+			);
+		}
+		else {
+			$jquery_constants['USECODESPLITTING'] = '';
+		}
+
 		return apply_filters('gd_jquery_constants', $jquery_constants);
 	}
 
-	function add_jquery() {
+	function init_scripts() {
 
 		// When embedding a post using oEmbed, it creates the post url + /embed/ at the end, however
 		// the scripts are not loaded, so doing popManager.init(); fails and gives a JS error
@@ -213,42 +288,101 @@ class PoPFrontend_Initialization {
 		if (is_embed()) {
 			return;
 		}
+
+		// $scripts = array();
 	
 		// Comment Leo 10/06/2017: If doing the server-side rendering, then we must print all the generated IDs to run all JS methods,
 		// before calling popManager.init()
 		if (PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 
 			$popJSRuntimeManager = PoP_ServerSide_Libraries_Factory::get_jsruntime_instance();
-			printf(
-			'<script type="text/javascript">%s</script>', 
-				sprintf(
-					'popJSRuntimeManager[\'full-session-ids\'] = %s;',
-					json_encode($popJSRuntimeManager->getSessionIds('full'))
-				).
-				PHP_EOL.
-				sprintf(
-					'popJSRuntimeManager[\'last-session-ids\'] = %s;',
-					json_encode($popJSRuntimeManager->getSessionIds('last'))
-				)
+			$this->scripts[] = sprintf(
+				'popJSRuntimeManager[\'full-session-ids\'] = %s;',
+				json_encode($popJSRuntimeManager->getSessionIds('full'))
+			);
+			$this->scripts[] = sprintf(
+				'popJSRuntimeManager[\'last-session-ids\'] = %s;',
+				json_encode($popJSRuntimeManager->getSessionIds('last'))
 			);
 		}
 
-		// Comment Leo 22/08/2016: I don't know why 'add_query' is executing even if it is a search engine
-		// Because of that, I added the JS code: `if (popManager) { }`
-		printf(
-			'<script type="text/javascript">%s</script>', 
-			// 'if (popManager) { popManager.init(); }'
-			'popManager.init();'
-		);
+		// Comment Leo 27/09/2017: Send the list of resources already loaded to the front-end
+		$resources = array();
+		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+
+			global $popfrontend_resourceloader_scriptsregistration;
+			$resources = $popfrontend_resourceloader_scriptsregistration->get_resources();
+			
+			// We send the already-loaded resources. Can do it, because these are always the same
+			// That's not the case with bundle(group)s, see below
+			$this->scripts[] = sprintf(
+				'popResourceLoader.loaded.js.resources = %s;',
+				json_encode($resources)
+			);
+			
+			// Comment Leo 07/10/2017: it makes no sense to send the bundle(group) ids, because these ids
+			// are different to the ones in the generated files
+			// Unless they are taken from the pop-cache! (Which were saved when running the creation process)
+			// Only then can use
+			global $pop_resourceloader_abbreviationsstorage_manager;
+	        if ($pop_resourceloader_abbreviationsstorage_manager->has_cached_abbreviations()) {
+
+				$bundle_group_ids = $popfrontend_resourceloader_scriptsregistration->get_bundlegroup_ids();
+				$bundle_ids = $popfrontend_resourceloader_scriptsregistration->get_bundle_ids();
+				$this->scripts[] = sprintf(
+					'popResourceLoader["loaded-by-domain"]["%s"] = %s',
+					get_site_url(),
+					json_encode(array(
+						'js' => array(
+							'bundles' => $bundle_ids,
+							'bundle-groups' => $bundle_group_ids,
+						)
+					))
+				);
+			}
+		}
+
+		// At the end, execute the code initializing everything
+		// Add it inside document.ready(), so that the "loading spinner" on the browser tab has already finished,
+		// giving the impression to the user that the page has already loaded, improving the speed perception
+		$this->scripts[] = 'jQuery(document).ready( function($) { popManager.init(); });';
+		// $this->scripts[] = 'popManager.init();';
+
+		// // Print all the scripts
+		// if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {
+
+		// 	// Execute the script immediately after the last element of the ResourceLoader enqueued scripts has been printed
+		// 	global $wp_scripts;
+		// 	$last_resource = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[count($resources)-1]);
+		// 	$wp_scripts->add_data($last_resource, 'after',  $scripts);
+		// }
+		// else {
+		// 	printf(
+		// 		'<script type="text/javascript">%s</script>', 
+		// 		implode(PHP_EOL, $scripts)
+		// 	);
+		// }
 	}
 
-	function enqueue_plugins_scripts() {
-	
-		$scripts = apply_filters('gd_enqueue_plugins_scripts', array());
-		
-		// Enqueue all theme plugins .js files
-		foreach ($scripts as $script) {
-			wp_enqueue_script($script);
+	// function add_scripts() {
+
+	// 	if ($this->scripts) {
+
+	// 		// Execute the script immediately after the last element of the ResourceLoader enqueued scripts has been printed
+	// 		global $wp_scripts;
+	// 		$last_resource = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[count($resources)-1]);
+	// 		$wp_scripts->add_data($last_resource, 'after',  $scripts);
+	// 	}
+	// }
+
+	function print_scripts() {
+
+		if ($this->scripts) {
+
+			printf(
+				'<script type="text/javascript">%s</script>', 
+				implode(PHP_EOL, $this->scripts)
+			);
 		}
 	}
 }

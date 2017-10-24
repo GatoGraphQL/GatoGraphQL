@@ -1,3 +1,11 @@
+<div class="pop-notificationmsg website-level alert alert-warning" role="alert">
+	<?php 
+		echo apply_filters(
+			'gd_loading_waittoclickmsg', 
+			__('The website is loading, please wait a few moments to click on links.', 'poptheme-wassup')
+		); 
+	?>
+</div>
 <div class="loadinglogo">
 	<?php $gd_logo = gd_logo('large') ?>
 	<?php $maxwidth = $gd_logo[1] ?>

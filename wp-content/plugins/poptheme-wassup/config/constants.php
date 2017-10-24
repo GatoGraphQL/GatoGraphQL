@@ -57,3 +57,8 @@ define ('POPTHEME_WASSUP_PAGE_ACCOUNTFAQ', false);
 //--------------------------------------------------------
 define ('POPTHEME_WASSUP_LINK_GETPOP', 'https://getpop.org');
 define ('POPTHEME_WASSUP_LINK_VERTICALS', 'https://verticals.io');
+
+// Plugin activation
+//--------------------------------------------------------
+define ('POPTHEME_WASSUP_PLUGINACTIVATION_PPPPOP_VERSION', false);
+define ('POPTHEME_WASSUP_PLUGINACTIVATION_GADWPPOP_VERSION', false);

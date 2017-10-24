@@ -3,7 +3,7 @@
 		{{#each ../template-ids.layouts}}
 			{{#withModule ../../. this}}
 				{{#if ../../../show-div}}
-					<div class="wrapper {{../../../class}} {{../../../classes.succeeded}} {{#each ../../../template-ids.class-extensions}}{{applyLightTemplate . context=../../../../.}}{{/each}}" style="{{../../../style}}{{../../../styles.succeeded}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>
+					<div class="wrapper {{../../../class}} {{../../../classes.succeeded}} {{#each ../../../template-sources.class-extensions}}{{applyLightTemplate . context=../../../../.}}{{/each}}" style="{{../../../style}}{{../../../styles.succeeded}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>
 						{{enterModule ../../../.}}
 					</div>
 				{{else}}
@@ -15,7 +15,7 @@
 		{{#each ../template-ids.conditionfailed-layouts}}
 			{{#withModule ../../. this}}
 				{{#if ../../../show-div}}
-					<div class="wrapper {{../../../class}} {{../../../classes.failed}} {{#each ../../../template-ids.class-extensions}}{{applyLightTemplate . context=../../../../.}}{{/each}}" style="{{../../../style}}{{../../../styles.failed}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>
+					<div class="wrapper {{../../../class}} {{../../../classes.failed}} {{#each ../../../template-sources.class-extensions}}{{applyLightTemplate . context=../../../../.}}{{/each}}" style="{{../../../style}}{{../../../styles.failed}}" {{#generateId context=../../../.}}{{../../../id}}{{/generateId}}>
 						{{enterModule ../../../.}}
 					</div>
 				{{else}}

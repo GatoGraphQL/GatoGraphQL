@@ -21,7 +21,19 @@ class PoPTheme_Wassup_AutomatedEmails_AAL_Template_SettingsProcessor extends GD_
 		return parent::get_checkpoints($hierarchy);
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function is_for_internal_use($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POPTHEME_WASSUP_AUTOMATEDEMAILS_PAGE_LATESTNOTIFICATIONS_DAILY => true,
+			);
+		}
+
+		return parent::is_for_internal_use($hierarchy);
+	}
+
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 

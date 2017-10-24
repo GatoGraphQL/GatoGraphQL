@@ -37,8 +37,7 @@ popNotifications = {
 				t.execTimeFromNow(target);
 			}, 60000); // Once every 60 seconds
 		}
-	},
-	
+	}	
 };
 })(jQuery);
 

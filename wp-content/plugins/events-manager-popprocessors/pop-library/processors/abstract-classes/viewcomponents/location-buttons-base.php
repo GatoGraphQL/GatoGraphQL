@@ -145,15 +145,4 @@ class GD_Template_Processor_LocationViewComponentButtonsBase extends GD_Template
 
 		return $ret;
 	}
-
-	// function init_atts($template_id, &$atts) {
-
-	// 	global $gd_template_processor_manager;
-	
-	// 	$this->merge_att($template_id, $atts, 'params', array(
-	// 		'data-toggle' => 'modal'
-	// 	));
-		
-	// 	return parent::init_atts($template_id, $atts);
-	// }
 }

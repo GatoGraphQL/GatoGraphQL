@@ -118,6 +118,32 @@ class GD_EM_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor
 		return $ret;
 	}
 
+	protected function get_block_hierarchy($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_SIDEBAR:
+				
+				return GD_SETTINGS_HIERARCHY_AUTHOR;
+				
+			case GD_TEMPLATE_BLOCK_TAG_EVENTS_CALENDAR_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_TAG_EVENTS_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_TAG_PASTEVENTS_SIDEBAR:
+				
+				return GD_SETTINGS_HIERARCHY_TAG;
+
+			case GD_TEMPLATE_BLOCK_SINGLE_EVENT_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_SINGLE_PASTEVENT_SIDEBAR:
+
+				return GD_SETTINGS_HIERARCHY_SINGLE;
+		}
+		
+		return parent::get_block_hierarchy($template_id);
+	}
+
+
 	function get_dataloader($template_id) {
 
 		switch ($template_id) {

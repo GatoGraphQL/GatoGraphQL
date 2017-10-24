@@ -18,6 +18,8 @@ class GD_Template_Processor_FormsBase extends GD_Template_Processor_StructuresBa
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
 
+		$this->add_jsmethod($ret, 'formHandleDisabledLayer');
+		
 		$form_type = $this->get_form_type($template_id, $atts);
 		if ($form_type == GD_SUBMITFORMTYPE_FETCHBLOCK) {
 			$this->add_jsmethod($ret, 'forms');

@@ -53,20 +53,6 @@ class GetPoPDemo_Processors_BlockGroupHooks {
 					$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'collapsible', true);
 				}
 				break;
-			
-			// case GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA:
-
-			// 	if ($blockgroup_block == GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP) {
-
-			// 		// Make lazy-load
-			// 		$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'content-loaded', false);	
-
-			// 		// Format
-			// 		$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'title-htmltag', 'h3');
-			// 		$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'add-titlelink', true);
-			// 		$processor->add_att($blockgroup_block, $blockgroup_block_atts, 'collapsible', true);
-			// 	}
-			// 	break;
 		}
 
 		return $blockgroup_block_atts;
@@ -80,13 +66,6 @@ class GetPoPDemo_Processors_BlockGroupHooks {
 			// GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME
 		);
 	}
-
-	// function hometop_widget_blocks($blocks) {
-
-	// 	// Add the Blockgroup which has the Featured widget
-	// 	$blocks[] = GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP;
-	// 	return $blocks;
-	// }
 
 	function authortop_widget_blocks($blocks) {
 

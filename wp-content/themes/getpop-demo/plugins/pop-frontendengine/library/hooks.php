@@ -12,7 +12,7 @@ class GetPoPDemo_FE_Hooks {
 
     function add_css_files($files) {
 
-        $files[] = GETPOPDEMO_DIR.'/css/dist/getpop-demo.bundle.min.css';
+        $files[] = GETPOPDEMO_DIR.'/css/dist/bundles/getpop-demo.bundle.min.css';
     	return $files;
     }
 }

@@ -20,7 +20,7 @@ class GD_FormInput_EM_LocationCountries extends GD_FormInput_MultiSelect {
 		return $values;
 	}
 
-	function get_default_value() {
+	function get_default_value($output=false) {
 
 		return array(get_option('dbem_location_default_country'));
 	}

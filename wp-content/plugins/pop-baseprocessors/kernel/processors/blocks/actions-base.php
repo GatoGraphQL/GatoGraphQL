@@ -16,7 +16,7 @@ class GD_Template_Processor_ActionsBase extends GD_Template_Processor_BlocksBase
 		global $gd_template_settingsmanager;
 
 		// Take the configuration from under the 'actions' instead of the 'blocks'
-		if ($page = $gd_template_settingsmanager->get_action_page($template_id)) {
+		if ($page = $gd_template_settingsmanager->get_action_page($template_id, $this->get_block_hierarchy($template_id))) {
 
 			return $page;
 		}

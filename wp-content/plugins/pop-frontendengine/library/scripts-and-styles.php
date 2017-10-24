@@ -15,7 +15,15 @@
 
 
 if (!is_admin()) {
-	add_action( 'wp_head', 'gd_add_scripts_header', 0);
+
+	if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {
+		
+		add_action( 'wp_footer', 'gd_add_scripts_header', 0);
+	}
+	else {
+
+		add_action( 'wp_head', 'gd_add_scripts_header', 0);
+	}
 }
 function gd_add_scripts_header() {
 	// Code taken from /wp-admin/admin-header.php

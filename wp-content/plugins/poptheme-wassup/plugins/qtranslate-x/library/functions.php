@@ -30,6 +30,12 @@ function gd_qtransxf_use_block_altlang($output, $lang, $language_list, $alt_lang
 /**---------------------------------------------------------------------------------------------------------------
  * Litte bit of everything
  * ---------------------------------------------------------------------------------------------------------------*/
+// Change the position of where the path in a URL starts (accounting for "en/")
+add_filter('gd_templatemanager:pathstartpos', 'gd_qtrans_pathstartpos');
+function gd_qtrans_pathstartpos($pos) {
+
+	return 4;
+}
 
 /* 
  * Add extra classes to the body: Locale

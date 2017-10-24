@@ -20,7 +20,8 @@ class Wassup_EM_Template_SettingsProcessorHooks {
 	function get_page_blocks($ret, $hierarchy, $include_common) {
 
 		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblocks_map = array(
 				POP_WPAPI_PAGE_ALLUSERS => GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP,

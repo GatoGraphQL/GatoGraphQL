@@ -361,8 +361,8 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 			case GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME:
 			case GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG:
 
-				// It will add class "in" through .js if there is no cookie
-				$ret['blocksection-extensions'] = 'collapse';
+				// Make it open by default, then the .js will take it out if there's a cookie
+				$ret['blocksection-extensions'] = 'collapse in';
 				break;
 
 			case GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION:
@@ -432,6 +432,7 @@ class GD_Template_Processor_CustomBlockGroups extends GD_Template_Processor_List
 					'data-cookieclass' => 'in',
 					'data-deletecookiebtn' => $deletecookiebtn,
 					'data-setcookiebtn' => $setcookiebtn,
+					'data-initial' => 'toggle',
 				));
 				break;
 		}

@@ -10,7 +10,7 @@ class GD_Template_Processor_CustomSideInfoBlocksBase extends GD_Template_Process
 	function get_pagesection_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_pagesection_jsmethod($template_id, $atts);
-		$this->add_jsmethod($ret, 'closePageSectionOnTabShown');
+		$this->add_jsmethod($ret, 'closePageSectionOnTabpaneShown');
 		return $ret;
 	}
 }

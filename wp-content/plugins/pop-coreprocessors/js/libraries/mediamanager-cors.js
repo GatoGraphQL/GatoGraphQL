@@ -59,6 +59,9 @@ popMediaManagerCORS = {
 					t.domains['editor-'+state.id] = domain;
 				}
 			});
+		});
+
+		$(document).on('initialized.featuredImage', function(e) {
 
 			// Inside $(document).ready( because popFeaturedImage.documentInitialized will execute after, so getFrame() is not ready yet
 			// After the frame is open, check if need to refresh content

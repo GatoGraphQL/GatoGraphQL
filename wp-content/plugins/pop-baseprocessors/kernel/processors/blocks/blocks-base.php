@@ -167,7 +167,7 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 		}
 	
 		return $ret;
-	}	
+	}
 
 	function init_atts($template_id, &$atts) {
 
@@ -204,6 +204,25 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 			$this->add_att($controlgroup_bottom, $atts, 'block-target', $blocktarget);
 		}
 		
+		// Allow Skeleton Screens: if setting $att 'use-skeletonscreen' then do not validate if the content is loaded
+		// Then, the content will be loaded nevertheless, and this content will be used for the skeleton screen effect,
+		// simply adding some extra styles together with style '.pop-block.pop-loadingcontent'
+		if ($this->queries_external_domain($template_id, $atts)) {
+			
+			// If proxy => Content not loaded => Make it use the Skeleton screen
+			$this->add_att($template_id, $atts, 'use-skeletonscreen', true);
+
+			// Inform pop-engine to bring the data anyway, needed for the Skeleton Screen effect
+			$this->add_att($template_id, $atts, 'validate-content-loaded', false);
+		}
+
+		$this->add_att($template_id, $atts, 'use-skeletonscreen', false);
+		if ($this->get_att($template_id, $atts, 'use-skeletonscreen')) {
+
+			// Add extra class to the block
+			$this->append_att($template_id, $atts, 'class', 'pop-skeletonscreen');
+		}
+
 		return parent::init_atts($template_id, $atts);
 	}
 

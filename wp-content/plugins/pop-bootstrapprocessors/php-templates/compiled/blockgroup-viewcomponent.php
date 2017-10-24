@@ -1,5 +1,5 @@
 <?php
- function lcr598a1bb156b9dhbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr59cd19bf86c33hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -39,10 +39,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr598a1bb156b9dm($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr59cd19bf86c33m($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr598a1bb156b9dm($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr59cd19bf86c33m($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -71,18 +71,18 @@
    };
   }
 
-  return lcr598a1bb156b9dexch($cx, $ch, $vars, $options);
+  return lcr59cd19bf86c33exch($cx, $ch, $vars, $options);
  }
 
- function lcr598a1bb156b9dencq($cx, $var) {
+ function lcr59cd19bf86c33encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr598a1bb156b9draw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19bf86c33raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr598a1bb156b9dhbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr59cd19bf86c33hbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -99,10 +99,10 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr598a1bb156b9dexch($cx, $ch, $vars, $options);
+  return lcr59cd19bf86c33exch($cx, $ch, $vars, $options);
  }
 
- function lcr598a1bb156b9dsec($cx, $v, $bp, $in, $each, $cb, $else = null) {
+ function lcr59cd19bf86c33sec($cx, $v, $bp, $in, $each, $cb, $else = null) {
   $push = ($in !== $v) || $each;
 
   $isAry = is_array($v) || ($v instanceof \ArrayObject);
@@ -155,10 +155,10 @@
      $i++;
     }
     if (isset($bp[0])) {
-     $raw = lcr598a1bb156b9dm($cx, $raw, array($bp[0] => $raw));
+     $raw = lcr59cd19bf86c33m($cx, $raw, array($bp[0] => $raw));
     }
     if (isset($bp[1])) {
-     $raw = lcr598a1bb156b9dm($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
+     $raw = lcr59cd19bf86c33m($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
     }
     $ret[] = $cb($cx, $raw);
    }
@@ -211,11 +211,11 @@
   return '';
  }
 
- function lcr598a1bb156b9difvar($cx, $v, $zero) {
+ function lcr59cd19bf86c33ifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr598a1bb156b9draw($cx, $v, $ex = 0) {
+ function lcr59cd19bf86c33raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -239,7 +239,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr598a1bb156b9draw($cx, $vv);
+      $ret[] = lcr59cd19bf86c33raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -251,7 +251,7 @@
   return "$v";
  }
 
- function lcr598a1bb156b9dm($cx, $a, $b) {
+ function lcr59cd19bf86c33m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -266,7 +266,7 @@
   return $a;
  }
 
- function lcr598a1bb156b9dexch($cx, $ch, $vars, &$options) {
+ function lcr59cd19bf86c33exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -279,13 +279,13 @@
   }
 
   if($e !== null) {
-   lcr598a1bb156b9derr($cx, $e);
+   lcr59cd19bf86c33err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr598a1bb156b9derr($cx, $err) {
+ function lcr59cd19bf86c33err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -415,16 +415,16 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<div ',lcr598a1bb156b9dhbbch($cx, 'generateId', array(array(),array('group'=>(($inary && isset($in['bootstrap-type'])) ? $in['bootstrap-type'] : null))), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr598a1bb156b9dencq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' class="',lcr598a1bb156b9dencq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),' ',lcr598a1bb156b9dencq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['bootstrap-component'])) ? $in['classes']['bootstrap-component'] : null)),' ',lcr598a1bb156b9dencq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['viewcomponent'])) ? $in['classes']['viewcomponent'] : null)),'" style="',lcr598a1bb156b9dencq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['bootstrap-component'])) ? $in['styles']['bootstrap-component'] : null)),'',lcr598a1bb156b9dencq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['viewcomponent'])) ? $in['styles']['viewcomponent'] : null)),'" tabindex="-1" role="dialog" aria-labelledby="',lcr598a1bb156b9dencq($cx, lcr598a1bb156b9dhbch($cx, 'lastGeneratedId', array(array(),array('group'=>(($inary && isset($in['bootstrap-type'])) ? $in['bootstrap-type'] : null))), 'encq', $in)),'" aria-hidden="true" ',lcr598a1bb156b9dsec($cx, (($inary && isset($in['viewcomponent-params'])) ? $in['viewcomponent-params'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr598a1bb156b9dencq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="',lcr598a1bb156b9dencq($cx, $in),'"';}),'>
-	<div class="',lcr598a1bb156b9dencq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-dialog ',lcr598a1bb156b9dencq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['dialog'])) ? $in['classes']['dialog'] : null)),'" style="',lcr598a1bb156b9dencq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['dialog'])) ? $in['styles']['dialog'] : null)),'">
-		<div class="',lcr598a1bb156b9dencq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-content">
-			<div class="',lcr598a1bb156b9dencq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-header">
-				<button type="button" class="close close-lg" data-dismiss="',lcr598a1bb156b9dencq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'" aria-hidden="true">&times;</button>
-				';if (lcr598a1bb156b9difvar($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null), false)){echo '<i class="fa ',lcr598a1bb156b9dencq($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null)),' fa-fw"></i>';}else{echo '';}echo '';if (lcr598a1bb156b9difvar($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['header'])) ? $in['titles']['header'] : null), false)){echo '<i>',lcr598a1bb156b9draw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['header'])) ? $in['titles']['header'] : null)),'</i>';}else{echo '';}echo '
+    ob_start();echo '<div ',lcr59cd19bf86c33hbbch($cx, 'generateId', array(array(),array('group'=>(($inary && isset($in['bootstrap-type'])) ? $in['bootstrap-type'] : null))), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr59cd19bf86c33encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' class="',lcr59cd19bf86c33encq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),' ',lcr59cd19bf86c33encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['bootstrap-component'])) ? $in['classes']['bootstrap-component'] : null)),' ',lcr59cd19bf86c33encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['viewcomponent'])) ? $in['classes']['viewcomponent'] : null)),'" style="',lcr59cd19bf86c33encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['bootstrap-component'])) ? $in['styles']['bootstrap-component'] : null)),'',lcr59cd19bf86c33encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['viewcomponent'])) ? $in['styles']['viewcomponent'] : null)),'" tabindex="-1" role="dialog" aria-labelledby="',lcr59cd19bf86c33encq($cx, lcr59cd19bf86c33hbch($cx, 'lastGeneratedId', array(array(),array('group'=>(($inary && isset($in['bootstrap-type'])) ? $in['bootstrap-type'] : null))), 'encq', $in)),'" aria-hidden="true" ',lcr59cd19bf86c33sec($cx, (($inary && isset($in['viewcomponent-params'])) ? $in['viewcomponent-params'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr59cd19bf86c33encq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="',lcr59cd19bf86c33encq($cx, $in),'"';}),'>
+	<div class="',lcr59cd19bf86c33encq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-dialog ',lcr59cd19bf86c33encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['dialog'])) ? $in['classes']['dialog'] : null)),'" style="',lcr59cd19bf86c33encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['dialog'])) ? $in['styles']['dialog'] : null)),'">
+		<div class="',lcr59cd19bf86c33encq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-content">
+			<div class="',lcr59cd19bf86c33encq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-header">
+				<button type="button" class="close close-lg" data-dismiss="',lcr59cd19bf86c33encq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'" aria-hidden="true">&times;</button>
+				';if (lcr59cd19bf86c33ifvar($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null), false)){echo '<i class="fa ',lcr59cd19bf86c33encq($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null)),' fa-fw"></i>';}else{echo '';}echo '';if (lcr59cd19bf86c33ifvar($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['header'])) ? $in['titles']['header'] : null), false)){echo '<i>',lcr59cd19bf86c33raw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['header'])) ? $in['titles']['header'] : null)),'</i>';}else{echo '';}echo '
 				<div class="pop-box"></div>
 			</div>
-			<div id="',lcr598a1bb156b9dencq($cx, lcr598a1bb156b9dhbch($cx, 'lastGeneratedId', array(array(),array('group'=>(($inary && isset($in['bootstrap-type'])) ? $in['bootstrap-type'] : null))), 'encq', $in)),'-container" class="',lcr598a1bb156b9dencq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-body ',lcr598a1bb156b9dencq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['container'])) ? $in['classes']['container'] : null)),'" style="',lcr598a1bb156b9dencq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['container'])) ? $in['styles']['container'] : null)),'">
-',lcr598a1bb156b9dsec($cx, ((isset($in['settings-ids']) && is_array($in['settings-ids']) && isset($in['settings-ids']['blockunits'])) ? $in['settings-ids']['blockunits'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr598a1bb156b9dhbbch($cx, 'withBlock', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['root-context'])) ? $cx['scopes'][count($cx['scopes'])-1]['root-context'] : null),$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '						',lcr598a1bb156b9dencq($cx, lcr598a1bb156b9dhbch($cx, 'enterModule', array(array($in),array()), 'encq', $in)),'
+			<div id="',lcr59cd19bf86c33encq($cx, lcr59cd19bf86c33hbch($cx, 'lastGeneratedId', array(array(),array('group'=>(($inary && isset($in['bootstrap-type'])) ? $in['bootstrap-type'] : null))), 'encq', $in)),'-container" class="',lcr59cd19bf86c33encq($cx, (($inary && isset($in['type'])) ? $in['type'] : null)),'-body ',lcr59cd19bf86c33encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['container'])) ? $in['classes']['container'] : null)),'" style="',lcr59cd19bf86c33encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['container'])) ? $in['styles']['container'] : null)),'">
+',lcr59cd19bf86c33sec($cx, ((isset($in['settings-ids']) && is_array($in['settings-ids']) && isset($in['settings-ids']['blockunits'])) ? $in['settings-ids']['blockunits'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr59cd19bf86c33hbbch($cx, 'withBlock', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['root-context'])) ? $cx['scopes'][count($cx['scopes'])-1]['root-context'] : null),$in),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '						',lcr59cd19bf86c33encq($cx, lcr59cd19bf86c33hbch($cx, 'enterModule', array(array($in),array()), 'encq', $in)),'
 ';}),'';}),'			</div>
 		</div>
 	</div>

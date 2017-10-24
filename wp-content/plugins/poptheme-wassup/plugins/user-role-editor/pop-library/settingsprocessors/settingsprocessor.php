@@ -44,12 +44,13 @@ class Wassup_URE_Template_SettingsProcessor extends GD_Template_SettingsProcesso
 		return parent::needs_target_id($hierarchy);
 	}
 
-	function get_page_blockgroups($hierarchy, $include_common = true) {
+	function get_page_blockgroups($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
 		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblockgroups = array(
 				POP_URE_POPPROCESSORS_PAGE_COMMUNITIES => GD_TEMPLATE_BLOCKGROUP_TABPANEL_COMMUNITIES,
@@ -81,7 +82,7 @@ class Wassup_URE_Template_SettingsProcessor extends GD_Template_SettingsProcesso
 		return $ret;
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
@@ -91,7 +92,8 @@ class Wassup_URE_Template_SettingsProcessor extends GD_Template_SettingsProcesso
 		// common, then we can't get their dataload-source.
 		// However, when generating the cache (file generator.php) these are not needed, so then skip them
 		// Common blocks
-		if ($include_common) {
+		// if ($include_common) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			// Navigator
 			$pageblocks_navigator = array(						
@@ -144,10 +146,10 @@ class Wassup_URE_Template_SettingsProcessor extends GD_Template_SettingsProcesso
 			foreach ($pageactions as $page => $action) {
 				$ret[$page]['action'] = $action;
 			}
-		}
+		// }
 
-		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// // Page or Blocks inserted in Home
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
 
 			$default_format_users = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_USERS);
 			$default_format_myusers = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_URE_SCREEN_MYUSERS);

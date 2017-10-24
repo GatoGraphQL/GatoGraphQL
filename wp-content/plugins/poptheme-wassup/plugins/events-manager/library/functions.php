@@ -379,23 +379,27 @@ if( !is_admin() ){
 /**---------------------------------------------------------------------------------------------------------------
  * Single Event functions
  * ---------------------------------------------------------------------------------------------------------------*/
-function gd_em_single_event_is_future($post = null) {
+function gd_em_single_event_is_future($post_or_post_id = null) {
 
 	// Comment Leo 07/07/2014: do not use variable global $EM_Event, since it has not been initialized properly
 	// by the time we need to call this function
 	
 	// global $EM_Event;
-	if (!$post) {
+	if (!$post_or_post_id) {
 		$vars = GD_TemplateManager_Utils::get_vars();
-		$post = $vars['global-state']['post']/*global $post*/;
+		$post_or_post_id = $vars['global-state']['post']/*global $post*/;
 	}
-	$EM_Event = em_get_event($post);
+	if (!is_object($post_or_post_id)) {
+		$EM_Event = em_get_event($post_or_post_id, 'post_id');
+	}
+	
 	return POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/ < $EM_Event->end;
 }
-function gd_em_single_event_is_past() {
 
-	return !gd_em_single_event_is_future();
-}
+// function gd_em_single_event_is_past($post_or_post_id = null) {
+
+// 	return !gd_em_single_event_is_future($post_or_post_id);
+// }
 
 
 /**---------------------------------------------------------------------------------------------------------------
@@ -513,7 +517,7 @@ function gd_em_post_parentpageid_impl($pageid, $post_id) {
 
 	if (get_post_type($post_id) == EM_POST_TYPE_EVENT) {
 
-		if (gd_em_single_event_is_future()) {
+		if (gd_em_single_event_is_future($post_id)) {
 			return POPTHEME_WASSUP_EM_PAGE_EVENTS;
 		}
 		return POPTHEME_WASSUP_EM_PAGE_PASTEVENTS;

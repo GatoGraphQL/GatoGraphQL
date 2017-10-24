@@ -66,12 +66,13 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 		return parent::needs_target_id($hierarchy);
 	}
 
-	function get_page_blockgroups($hierarchy, $include_common = true) {
+	function get_page_blockgroups($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
 		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblockgroups = array(
 				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_LOCATIONPOSTS,
@@ -131,7 +132,7 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 		return $ret;
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
@@ -141,7 +142,8 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 		// common, then we can't get their dataload-source.
 		// However, when generating the cache (file generator.php) these are not needed, so then skip them
 		// Common blocks
-		if ($include_common) {
+		// if ($include_common) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			// Default
 			$pageblocks_allothers = array(
@@ -169,13 +171,13 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_EDITFEATURED => GD_TEMPLATE_BLOCK_FEATURED_UPDATE,
 
 				// About
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_HOWTOUSEWEBSITE => GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_CONTENTGUIDELINES => GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_OURMISSION => GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_OURSTORY => GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_VOLUNTEERWITHUS => GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_SPONSORUS => GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
-				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_INTHEMEDIA => GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_HOWTOUSEWEBSITE => GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_CONTENTGUIDELINES => GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_OURMISSION => GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_OURSTORY => GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_VOLUNTEERWITHUS => GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_SPONSORUS => GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT_INTHEMEDIA => GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
 				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_ABOUT => GD_TEMPLATE_BLOCK_MENU_BODY_ABOUT,
 			
 				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_THOUGHTS  => GD_TEMPLATE_BLOCK_THOUGHTS_SCROLL,
@@ -208,9 +210,9 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 			foreach ($pageactions as $page => $action) {
 				$ret[$page]['action'] = $action;
 			}
-		}
+		// }
 
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
 
 			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_SECTION);
 			$default_format_mycontent = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_MYCONTENT);

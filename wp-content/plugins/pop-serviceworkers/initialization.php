@@ -58,25 +58,31 @@ class PoP_ServiceWorkers_Initialization {
 
 	function register_scripts() {
 
-		$js_folder = POP_SERVICEWORKERS_URI.'/js';
-		$libraries_js_folder = $js_folder.'/libraries';
-		$dist_js_folder = $js_folder.'/dist';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
-			
-			wp_register_script('pop-serviceworkers', $dist_js_folder . '/pop-serviceworkers.bundle.min.js', array(), POP_SERVICEWORKERS_VERSION, true);
-			wp_enqueue_script('pop-serviceworkers');
+			$js_folder = POP_SERVICEWORKERS_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
+
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('pop-serviceworkers', $bundles_js_folder . '/pop-serviceworkers.bundle.min.js', array(), POP_SERVICEWORKERS_VERSION, true);
+				wp_enqueue_script('pop-serviceworkers');
+			}
+			else {
+
+				wp_register_script('pop-serviceworkers-functions', $libraries_js_folder.'/sw'.$suffix.'.js', array('pop'), POP_SERVICEWORKERS_VERSION, true);
+				wp_enqueue_script('pop-serviceworkers-functions');
+			}
+
+			// This file is generated dynamically, so it can't be added to any bundle or minified
+			global $pop_serviceworkers_manager;
+			wp_register_script('pop-serviceworkers-registrar', $pop_serviceworkers_manager->get_fileurl('sw-registrar.js'), array(), POP_SERVICEWORKERS_VERSION, true);
+			wp_enqueue_script('pop-serviceworkers-registrar');
 		}
-		else {
-
-			wp_register_script('pop-serviceworkers-functions', $libraries_js_folder.'/sw.js', array('pop'), POP_SERVICEWORKERS_VERSION, true);
-			wp_enqueue_script('pop-serviceworkers-functions');
-		}
-
-		// This file is generated dynamically, so it can't be added to any bundle or minified
-		global $pop_serviceworkers_manager;
-		wp_register_script('pop-serviceworkers-registrar', $pop_serviceworkers_manager->get_fileurl('sw-registrar.js'), array(), POP_SERVICEWORKERS_VERSION, true);
-		wp_enqueue_script('pop-serviceworkers-registrar');
 	}
 }
 

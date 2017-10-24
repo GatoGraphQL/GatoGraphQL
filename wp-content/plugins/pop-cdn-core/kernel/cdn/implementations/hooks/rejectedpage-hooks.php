@@ -10,7 +10,7 @@ class PoP_CDNCore_RejectedPageHooks {
     function __construct() {
 
         add_filter(
-            'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:rejected:startsWith:partial',
+            'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:startsWith:partial',
             array($this, 'get_rejected_partialpaths')
         );
     }

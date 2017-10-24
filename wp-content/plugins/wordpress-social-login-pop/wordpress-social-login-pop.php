@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('WSL_POP_VERSION', 0.103);
+define('WSL_POP_VERSION', 0.104);
 define('WSL_POP_DIR', dirname(__FILE__));
 
 /**---------------------------------------------------------------------------------------------------------------

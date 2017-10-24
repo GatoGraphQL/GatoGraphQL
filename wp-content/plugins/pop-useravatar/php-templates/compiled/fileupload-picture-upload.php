@@ -1,5 +1,5 @@
 <?php
- function lcr598a1c09cd1b4sec($cx, $v, $bp, $in, $each, $cb, $else = null) {
+ function lcr59cd1a0ab132esec($cx, $v, $bp, $in, $each, $cb, $else = null) {
   $push = ($in !== $v) || $each;
 
   $isAry = is_array($v) || ($v instanceof \ArrayObject);
@@ -52,10 +52,10 @@
      $i++;
     }
     if (isset($bp[0])) {
-     $raw = lcr598a1c09cd1b4m($cx, $raw, array($bp[0] => $raw));
+     $raw = lcr59cd1a0ab132em($cx, $raw, array($bp[0] => $raw));
     }
     if (isset($bp[1])) {
-     $raw = lcr598a1c09cd1b4m($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
+     $raw = lcr59cd1a0ab132em($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
     }
     $ret[] = $cb($cx, $raw);
    }
@@ -108,19 +108,19 @@
   return '';
  }
 
- function lcr598a1c09cd1b4ifvar($cx, $v, $zero) {
+ function lcr59cd1a0ab132eifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr598a1c09cd1b4encq($cx, $var) {
+ function lcr59cd1a0ab132eencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr598a1c09cd1b4raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd1a0ab132eraw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr598a1c09cd1b4m($cx, $a, $b) {
+ function lcr59cd1a0ab132em($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -135,7 +135,7 @@
   return $a;
  }
 
- function lcr598a1c09cd1b4raw($cx, $v, $ex = 0) {
+ function lcr59cd1a0ab132eraw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -159,7 +159,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr598a1c09cd1b4raw($cx, $vv);
+      $ret[] = lcr59cd1a0ab132eraw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -271,10 +271,10 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr598a1c09cd1b4sec($cx, ((isset($in['o']) && is_array($in['o']) && isset($in['o']['files'])) ? $in['o']['files'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '    <div class="template-upload fade">
+    ob_start();echo '',lcr59cd1a0ab132esec($cx, ((isset($in['o']) && is_array($in['o']) && isset($in['o']['files'])) ? $in['o']['files'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '    <div class="template-upload fade">
     	<div class="preview"><span class="fade"></span></div>
-';if (lcr598a1c09cd1b4ifvar($cx, (($inary && isset($in['error'])) ? $in['error'] : null), false)){echo '            <div class="error">
-            	<span class="label label-danger">',lcr598a1c09cd1b4encq($cx, (($inary && isset($in['error'])) ? $in['error'] : null)),'</span>
+';if (lcr59cd1a0ab132eifvar($cx, (($inary && isset($in['error'])) ? $in['error'] : null), false)){echo '            <div class="error">
+            	<span class="label label-danger">',lcr59cd1a0ab132eencq($cx, (($inary && isset($in['error'])) ? $in['error'] : null)),'</span>
             </div>
 ';}else{echo '        	<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
 ';}echo '    </div>

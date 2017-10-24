@@ -18,14 +18,17 @@ class PoP_WPAPI_Engine_Utils {
 		// Template hierarchy
 		if (is_home()) {
 
+			$vars['global-state']['hierarchy'] = 'home';
 			$vars['global-state']['is-home'] = true;
 		}
 		elseif (is_front_page()) {
 
+			$vars['global-state']['hierarchy'] = 'home';
 			$vars['global-state']['is-front-page'] = true;
 		}
 		elseif (is_tag()) {
 
+			$vars['global-state']['hierarchy'] = 'tag';
 			$vars['global-state']['queried-object'] = get_queried_object();
 			$vars['global-state']['queried-object-id'] = get_queried_object_id();
 			$vars['global-state']['is-tag'] = true;
@@ -33,37 +36,44 @@ class PoP_WPAPI_Engine_Utils {
 		elseif (is_page()) {
 			
 			global $post;
+			$vars['global-state']['hierarchy'] = 'page';
 			$vars['global-state']['post'] = $post;
 			$vars['global-state']['is-page'] = true;
 		}
 		elseif (is_single()) {
 			
 			global $post;
+			$vars['global-state']['hierarchy'] = 'single';
 			$vars['global-state']['post'] = $post;
 			$vars['global-state']['is-single'] = true;
 		}
 		elseif (is_author()) {
 			
 			global $author/*, $authordata*/;
+			$vars['global-state']['hierarchy'] = 'author';
 			$vars['global-state']['author'] = $author;
 			// $vars['global-state']['authordata'] = $authordata;
 			$vars['global-state']['is-author'] = true;
 		}
 		elseif (is_404()) {
 			
+			$vars['global-state']['hierarchy'] = '404';
 			$vars['global-state']['is-404'] = true;
 		}
 		elseif (is_search()) {
 
+			$vars['global-state']['hierarchy'] = 'search';
 			$vars['global-state']['is-search'] = true;
 		}
 		elseif (is_category()) {
 
+			$vars['global-state']['hierarchy'] = 'category';
 			$vars['global-state']['is-category'] = true;
 		}
 		
 		if (is_archive()) {
 
+			$vars['global-state']['hierarchy'] = 'archive';
 			$vars['global-state']['is-archive'] = true;
 		}
 		

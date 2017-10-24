@@ -19,7 +19,7 @@ function add_gd_admin_stylesheet() {
 function get_compatibility_js_files() {
 
 	$files = array();
-	if (PoP_Frontend_ServerUtils::use_minified_files()) {
+	if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
 
 		$files[] = 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js';
 		$files[] = 'https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js';

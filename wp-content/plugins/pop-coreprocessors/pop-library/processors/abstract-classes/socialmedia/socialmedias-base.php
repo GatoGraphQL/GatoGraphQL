@@ -21,7 +21,7 @@ class GD_Template_Processor_SocialMediaBase extends GD_Template_ProcessorBase {
 		$ret = parent::get_block_jsmethod($template_id, $atts);
 
 		if ($this->use_counter($template_id)) {
-			$this->add_jsmethod($ret, 'socialmedia');
+			$this->add_jsmethod($ret, 'socialmediaCounter');
 		}
 		
 		return $ret;

@@ -1,4 +1,4 @@
-<div class="{{class}} {{runtime-class}} {{#if bs.feedback.stop-fetching}}pop-stopfetching{{/if}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-settings-id="{{settings-id}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+<div class="{{class}} {{runtime-class}} {{#if bs.feedback.stop-fetching}}pop-stopfetching{{/if}} {{#if bs.feedback.hide-block}}hidden{{/if}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-settings-id="{{settings-id}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
 
 	{{#withModule . "controlgroup-top"}}
 		<div class="blocksection-controls {{../classes.controlgroup-top}}" style="{{../styles.controlgroup-top}}">
@@ -106,9 +106,9 @@
 	{{#if add-clearfixdiv}}<div class="clearfix"></div>{{/if}}
 
 	{{!Needed to render the BlockGroup}}
-	{{#if template-ids.block-extensions}}
+	{{#if template-sources.block-extensions}}
 		<div class="blocksection-extensions clearfix {{classes.blocksection-extensions}}" style="{{styles.blocksection-extensions}}">
-			{{#each template-ids.block-extensions}}
+			{{#each template-sources.block-extensions}}
 				{{applyLightTemplate this context=../.}}
 			{{/each}}
 		</div>

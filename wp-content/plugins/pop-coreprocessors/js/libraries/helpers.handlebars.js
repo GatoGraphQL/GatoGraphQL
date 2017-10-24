@@ -48,6 +48,6 @@ Handlebars.registerHelper('formatFeedbackMessage', function(message, options) {
         blockSettings = options.hash.bs;
 
     // Allow popMultiDomain to modify the message, adding the domain name
-    message = popSystem.formatFeedbackMessage(message, topLevelSettings, pageSectionSettings, blockSettings);
+    message = popFeedbackMessage.formatFeedbackMessage(message, topLevelSettings, pageSectionSettings, blockSettings);
     return new Handlebars.SafeString(message);
 });

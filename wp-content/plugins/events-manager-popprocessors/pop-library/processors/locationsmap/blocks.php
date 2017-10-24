@@ -66,6 +66,19 @@ class GD_Template_Processor_LocationsMapBlocks extends GD_Template_Processor_Blo
 		return parent::get_dataload_source($template_id, $atts);
 	}
 
+	function get_title($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_STATICLOCATIONSMAP:
+			
+				// No title
+				return '';
+		}
+
+		return parent::get_title($template_id);
+	}
+
 	function init_atts($template_id, &$atts) {
 
 		switch ($template_id) {

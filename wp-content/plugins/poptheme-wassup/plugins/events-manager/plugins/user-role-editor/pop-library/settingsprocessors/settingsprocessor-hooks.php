@@ -20,7 +20,8 @@ class Wassup_EM_URE_Template_SettingsProcessorHooks {
 	function get_page_blocks($ret, $hierarchy, $include_common) {
 
 		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblocks_map = array(
 				POP_URE_POPPROCESSORS_PAGE_COMMUNITIES  => GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLLMAP,

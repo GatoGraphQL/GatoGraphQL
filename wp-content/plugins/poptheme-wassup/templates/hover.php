@@ -5,6 +5,6 @@
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 		</div>
-		<div class="tab-content pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_HOVER ?>-merge"><?php echo PoP_ServerSideRendering_Factory::get_instance()->render_pagesection(GD_TEMPLATE_PAGESECTION_HOVER) ?></div>
+		<div class="tab-content pop-merge-target" id="<?php echo GD_TEMPLATEID_PAGESECTIONID_HOVER ?>-merge"><?php echo PoP_ServerSideRendering_Utils::render_pagesection(GD_TEMPLATE_PAGESECTION_HOVER) ?></div>
 	</div>
 </div>

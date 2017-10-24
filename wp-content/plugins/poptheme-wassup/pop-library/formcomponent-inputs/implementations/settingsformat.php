@@ -27,7 +27,7 @@ class GD_FormInput_SettingsFormat extends GD_FormInput_Select {
 		return $values;
 	}	
 	
-	function get_default_value(/*$conf*/) {
+	function get_default_value($output=false/*$conf*/) {
 
 		$vars = GD_TemplateManager_Utils::get_vars();
 		if ($selected = $vars['settingsformat']) {

@@ -54,7 +54,7 @@ class GD_Template_Processor_BlockGroupsBase extends GD_Template_Processor_Blocks
 
 		global $gd_template_settingsmanager;
 
-		if ($page = $gd_template_settingsmanager->get_blockgroup_page($template_id)) {
+		if ($page = $gd_template_settingsmanager->get_blockgroup_page($template_id, $this->get_block_hierarchy($template_id))) {
 
 			return $page;
 		}

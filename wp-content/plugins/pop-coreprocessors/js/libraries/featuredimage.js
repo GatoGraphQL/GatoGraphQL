@@ -15,58 +15,64 @@ popFeaturedImage = {
 
 		var t = this;
 
-		t.frame = wp.media({
-			title: M.LABELS.MEDIA_FEATUREDIMAGE_TITLE,
-			multiple: false,
-			library: {type: 'image'},
-			button: {text: M.LABELS.MEDIA_FEATUREDIMAGE_BTN}
-		});
-		t.frame.on('open',function() {
+		$(document).ready(function($) {
 
-			// We know which is the featuredImage opening the frame because it is the only one with class "open"
-			var featuredImage = t.getOpenFeaturedImage();
+			t.frame = wp.media({
+				title: M.LABELS.MEDIA_FEATUREDIMAGE_TITLE,
+				multiple: false,
+				library: {type: 'image'},
+				button: {text: M.LABELS.MEDIA_FEATUREDIMAGE_BTN}
+			});
+			t.frame.on('open',function() {
 
-			// If there's an ID already selected, then select it in the Media Manager
-			var selected = featuredImage.find('input[type="hidden"]');
-			if (selected.val()) {
+				// We know which is the featuredImage opening the frame because it is the only one with class "open"
+				var featuredImage = t.getOpenFeaturedImage();
+
+				// If there's an ID already selected, then select it in the Media Manager
+				var selected = featuredImage.find('input[type="hidden"]');
+				if (selected.val()) {
+					var selection = t.frame.state().get('selection');
+					attachment = wp.media.attachment(selected.val());
+					attachment.fetch();
+					selection.add( attachment ? [ attachment ] : [] );
+				}
+			});
+			t.frame.on('close',function() {
+				
+				var featuredImage = $('.pop-featuredimage.open');
+				var configuration = {};
 				var selection = t.frame.state().get('selection');
-				attachment = wp.media.attachment(selected.val());
-				attachment.fetch();
-				selection.add( attachment ? [ attachment ] : [] );
-			}
-		});
-		t.frame.on('close',function() {
-			
-			var featuredImage = $('.pop-featuredimage.open');
-			var configuration = {};
-			var selection = t.frame.state().get('selection');
-			if (selection.length) {
+				if (selection.length) {
 
-				var value, imgsrc;
-				var imgSize = featuredImage.data('img-size');
-				selection.map(function(attachment) {
+					var value, imgsrc;
+					var imgSize = featuredImage.data('img-size');
+					selection.map(function(attachment) {
 
-					attachment = attachment.toJSON();
+						attachment = attachment.toJSON();
 
-					// If the image is smaller than 360x200, them 'medium-1' is empty, if that happens use the 'medium' or if not 'thumbnail'
-					var imgData = attachment.sizes[imgSize] || attachment.sizes['medium'] || attachment.sizes['thumbnail'];
+						// If the image is smaller than 360x200, them 'medium-1' is empty, if that happens use the 'medium' or if not 'thumbnail'
+						var imgData = attachment.sizes[imgSize] || attachment.sizes['medium'] || attachment.sizes['thumbnail'];
 
-					// Set the attachment id into the selected featuredImage id
-					value = attachment.id;
-					imgsrc = {
-						src : imgData.url,
-						width : imgData.width,
-						height : imgData.height
-					};
-				});
+						// Set the attachment id into the selected featuredImage id
+						value = attachment.id;
+						imgsrc = {
+							src : imgData.url,
+							width : imgData.width,
+							height : imgData.height
+						};
+					});
 
-				var block = popManager.getBlock(featuredImage);
-				var pageSection = popManager.getPageSection(block);
-				var domain = popManager.getBlockTopLevelDomain(block);
-				t.merge(domain, pageSection, block, featuredImage, value, imgsrc);
-			}
-			
-			featuredImage.removeClass('open');
+					var block = popManager.getBlock(featuredImage);
+					var pageSection = popManager.getPageSection(block);
+					var domain = popManager.getBlockTopLevelDomain(block);
+					t.merge(domain, pageSection, block, featuredImage, value, imgsrc);
+				}
+				
+				featuredImage.removeClass('open');
+			});
+
+			// Allow MediaManagerCors to initialize itself
+			$(document).triggerHandler('initialized.featuredImage', [t.frame])
 		});
 	},
 	featuredImageSet : function(args) {

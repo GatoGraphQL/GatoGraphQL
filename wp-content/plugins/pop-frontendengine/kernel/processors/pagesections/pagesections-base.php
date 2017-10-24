@@ -209,6 +209,17 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		return $ret;
 	}
 
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
+	function get_template_extra_sources($template_id, $atts) {
+
+		// Add the extension templates
+		$ret = parent::get_template_extra_sources($template_id, $atts);
+		$ret['extensions'] = $this->get_pagesection_extensions($template_id);
+		return $ret;
+	}
+
 	function get_template_configuration($template_id, $atts) {
 	
 		global $gd_template_processor_manager;
@@ -221,8 +232,8 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		
 		$ret[GD_JS_SETTINGSID/*'settings-id'*/] = $this->get_settings_id($template_id);
 
-		// Add the extension templates
-		$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['extensions'] = $this->get_pagesection_extensions($template_id);		
+		// // Add the extension templates
+		// $ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['extensions'] = $this->get_pagesection_extensions($template_id);		
 
 		/***********************************************************/
 
@@ -376,12 +387,14 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		global $gd_template_processor_manager;
 	
 		$ret = array();
-		// Only add the ones who are different to itself, to compress output file
 		$template_source = $this->get_template_source($template_id, $atts);
-		if ($template_id != $template_source) {
-
-			$ret[$template_id] = $template_source;
-		}
+		// Only add the ones who are different to itself, to compress output file
+		// Comment Leo 28/09/2017: we must send always the template_source, even if it's similar to the template_id,
+		// so that we have the information of all required template-sources for the ResourceLoader
+		// Eg: otherwise loading template 'status' fails
+		// if ($template_id != $template_source) {
+		$ret[$template_id] = $template_source;
+		// }
 		
 		// In the Hierarchy Processor, all subcomponent templates are blocks
 		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
@@ -391,6 +404,33 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 			$component_settings_id = $component_processor->get_settings_id($component);
 					
 			$component_ret = $component_processor->get_templates_sources($component, $component_atts);
+
+			$ret = array_merge(
+				$ret,
+				$component_ret
+			);
+		}
+		
+		return $ret;
+	}
+	
+	function get_templates_extra_sources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+	
+		$ret = array();
+		if ($template_extra_sources = $this->get_template_extra_sources($template_id, $atts)) {
+			$ret[$template_id] = $template_extra_sources;
+		}
+		
+		// In the Hierarchy Processor, all subcomponent templates are blocks
+		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+		
+			$component_processor = $gd_template_processor_manager->get_processor($component);
+			$component_atts = $atts[$component];
+			$component_settings_id = $component_processor->get_settings_id($component);
+					
+			$component_ret = $component_processor->get_templates_extra_sources($component, $component_atts);
 
 			$ret = array_merge(
 				$ret,

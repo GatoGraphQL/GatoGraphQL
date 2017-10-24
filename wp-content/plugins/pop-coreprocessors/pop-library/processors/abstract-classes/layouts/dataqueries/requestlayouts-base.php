@@ -9,10 +9,9 @@ class GD_Template_Processor_RequestLayoutsBase extends GD_Template_Processor_Mul
 
 	protected function get_layouts($template_id) {
 
-		$layouts = isset($_REQUEST['layouts']) ? $_REQUEST['layouts'] : array();
-		if (!is_array($layouts)) {
-			$layouts = array($layouts);
-		}
+		$vars = GD_TemplateManager_Utils::get_vars();
+		// $layouts = isset($_REQUEST['layouts']) ? $_REQUEST['layouts'] : array();
+		$layouts = isset($vars['layouts']) ? $vars['layouts'] : array();
 
 		// Only allow from a specific list of fields. Precaution against hackers.
 		// $layouts = array_intersect($layouts, $atts['dataquery-allowedlayouts']);

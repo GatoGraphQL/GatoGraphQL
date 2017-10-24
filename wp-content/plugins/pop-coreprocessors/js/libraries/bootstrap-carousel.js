@@ -199,36 +199,6 @@ popBootstrapCarouselControls = {
 		t.resetBlockRuntimeMemory(pageSection, block);
 	},
 
-	// preserveState : function(args) {
-	
-	// 	var t = this;
-	// 	var pageSection = args.pageSection, state = args.state;
-	// 	var pssId = popManager.getSettingsId(pageSection);
-
-	// 	// console.log(state);
-	// 	state.bootstrapCarouselControls = {
-	// 		items: $.extend({}, t.items[pssId])
-	// 	};
-	// },
-
-	// retrieveState : function(args) {
-	
-	// 	var t = this;
-	// 	var pageSection = args.pageSection, state = args.state.bootstrapCarouselControls;
-	// 	var pssId = popManager.getSettingsId(pageSection);
-
-	// 	t.items[pssId] = state.items;
-	// },
-
-	// clearState : function(args) {
-	
-	// 	var t = this;
-	// 	var pageSection = args.pageSection;
-	// 	var pssId = popManager.getSettingsId(pageSection);
-
-	// 	t.items[pssId] = {};
-	// },
-
 	carouselControls : function(args) {
 	
 		var t = this;

@@ -14,8 +14,12 @@ popMentions = {
 		var t = this;
 		// t.domain = args.domain;
 
-		// Load the Prefetch URLs
-		t.prefetch();
+		// Wait until the document is ready, to make sure the ResourceLoader config is loaded, which will handle this URL
+		$(document).ready(function($) {
+			
+			// Load the Prefetch URLs
+			t.prefetch();
+		});
 	},
 
 	//-------------------------------------------------

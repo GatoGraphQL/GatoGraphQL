@@ -114,15 +114,19 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 
 	function get_template_source($template_id, $atts) {
 
-		// global $gd_template_processor_manager;
-
-		// // If decorating another component, bring this one's result
-		// if ($decorated_template = $this->get_decorated_template($template_id)) {
-			
-		// 	return $gd_template_processor_manager->get_processor($decorated_template)->get_template_source($decorated_template, $atts);
-		// }
-
 		return $template_id;
+	}
+
+	function get_template_extra_sources($template_id, $atts) {
+
+		// Load additional template sources to render the view
+		$extra_sources = array();
+
+		if ($appendable = $this->get_att($template_id, $atts, 'appendable')) {
+			$extra_sources['class-extensions'][] = GD_TEMPLATEEXTENSION_APPENDABLECLASS;
+		}
+
+		return $extra_sources;
 	}
 
 	function get_template_cb($template_id, $atts) {
@@ -148,15 +152,41 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		// Return initialized empty array at the last level		
 		$ret = array();		
 
-		// Only add the ones who are different to itself, to compress output file
 		$template_source = $this->get_template_source($template_id, $atts);
-		if ($template_id != $template_source) {
-
-			$ret[$template_id] = $template_source;
-		}
+		// Only add the ones who are different to itself, to compress output file
+		// Comment Leo 28/09/2017: we must send always the template_source, even if it's similar to the template_id,
+		// so that we have the information of all required template-sources for the ResourceLoader
+		// Eg: otherwise loading template 'status' fails
+		// if ($template_id != $template_source) {
+		$ret[$template_id] = $template_source;
+		// }
 		foreach ($this->get_modulecomponents($template_id) as $component) {
 				
 			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_templates_sources($component, $atts)) {
+			
+				$ret = array_merge(
+					$ret,
+					$component_ret
+				);
+			}
+		}
+		
+		return $ret;
+	}
+
+	function get_templates_extra_sources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		// Return initialized empty array at the last level		
+		$ret = array();		
+
+		if ($template_extra_sources = $this->get_template_extra_sources($template_id, $atts)) {
+			$ret[$template_id] = $template_extra_sources;
+		}
+		foreach ($this->get_modulecomponents($template_id) as $component) {
+				
+			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_templates_extra_sources($component, $atts)) {
 			
 				$ret = array_merge(
 					$ret,
@@ -626,6 +656,12 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 			$ret[GD_JS_BLOCKFEEDBACKPARAMS/*'blockfeedback-params'*/] = $blockfeedback_params;
 		}
 
+		// Load additional/extension template sources?
+		if ($templatesource_extras = $this->get_template_extra_sources($template_id, $atts)) {
+			
+			$ret[GD_JS_TEMPLATESOURCES/*'template-sources'*/] = $templatesource_extras;
+		}
+
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Override values (needed for Updating values in the form, fetching fields in the Social Media template, etc)
 		 * ---------------------------------------------------------------------------------------------------------------*/
@@ -673,7 +709,7 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		if ($appendable = $this->get_att($template_id, $atts, 'appendable')) {
 			$ret[GD_JS_APPENDABLE/*'appendable'*/] = true;
 			$ret[GD_JS_CLASSES/*'classes'*/][GD_JS_APPENDABLE/*'appendable'*/] = $this->get_att($template_id, $atts, 'appendable-class');
-			$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['class-extensions'][] = GD_TEMPLATEEXTENSION_APPENDABLECLASS;
+			// $ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['class-extensions'][] = GD_TEMPLATEEXTENSION_APPENDABLECLASS;
 		}
 		
 		return $ret;

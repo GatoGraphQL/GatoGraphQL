@@ -23,9 +23,9 @@ class GD_FormInput_YesNo extends GD_FormInput_Select {
 		return $values;
 	}	
 	
-	function get_default_value(/*$conf*/) {
-	
-		return false;
+	function get_default_value($output=false/*$conf*/) {
+
+		return $output ? 'false' : false;
 	}
 
 	function get_value(/*$conf, */$output=false) {

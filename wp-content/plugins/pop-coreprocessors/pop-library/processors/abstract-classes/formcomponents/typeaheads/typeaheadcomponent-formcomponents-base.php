@@ -7,6 +7,36 @@
 
 class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Template_Processor_FormComponentsBase {
 
+	private $resources;
+
+	function __construct() {
+
+		parent::__construct();
+
+		// Comment Leo 20/10/2017: Important! Because the template will be rendered on runtime in the front-end,
+		// we must make sure that this template is delivered on the ResourceLoader when doing code-splitting
+		$this->resources = array();
+		add_filter(
+			'PoP_CoreProcessors_ResourceLoaderProcessor:typeahead:templates',
+			array($this, 'get_dependencies')
+		);
+	}
+
+	function get_dependencies($resources) {
+
+		if ($this->resources) {
+
+			$resources = array_merge(
+				$resources,
+				$this->resources
+			);
+
+			// Reset state
+			$this->resources = array();
+		}
+		return $resources;
+	}
+
 	function get_template_source($template_id, $atts) {
 
 		return null;
@@ -127,10 +157,15 @@ class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Temp
 		$ret = parent::get_js_setting($template_id, $atts);
 
 		$label = $this->get_label($template_id, $atts);
+
+		// Comment Leo 20/10/2017: Important! Because the template will be rendered on runtime in the front-end,
+		// we must make sure that this template is delivered on the ResourceLoader when doing code-splitting
+		$template_source = $this->get_template_source($template_id, $atts);
+		$this->resources[] = PoP_ResourceLoaderProcessorUtils::get_template_resource_name($template_source);
 		
 		// Dataset
 		$ret['dataset'] = array(
-			'layout' => $this->get_template_source($template_id, $atts),//$this->get_layout($template_id),
+			'layout' => $template_source,
 			'name' => $template_id,
 			'header' => $label ? '<strong class="menu-text">'.$label.'</strong>' : '',
 			'pending' => '<p class="clearfix menu-text text-warning"><em>'.GD_CONSTANT_LOADING_SPINNER.' '.$this->get_pending_msg($template_id).'</em></p>',

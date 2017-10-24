@@ -23,8 +23,20 @@ class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processo
 
 		$ret = parent::get_template_configuration($template_id, $atts);
 
-		// $ret['btn-class'] = $this->get_btn_class($template_id, $atts);
 		$ret[GD_JS_CLASSES/*'classes'*/]['btn'] = $this->get_btn_class($template_id, $atts);
+
+		// Comment Leo 24/10/2017: add this class in the .tmpl directly, so we can check for is-first-load?
+		// Otherwise, it will always add class 'active', even when opening extra tabs other than the current (focused) one, 
+		// like when opening the previous session tabs
+		// // If doing Server-side rendering, then already add "active" to the tabPane, to not depend on javascript
+		// // (Otherwise, the page will look empty!)
+		// $btn_tab = '';
+		// if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+		// 	$btn_tab = ' active';
+		// }
+		// if ($btn_tab) {
+		// 	$ret[GD_JS_CLASSES/*'classes'*/]['btn-tab'] = $btn_tab;
+		// }
 
 		return $ret;
 	}
@@ -33,6 +45,7 @@ class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processo
 
 		$atts = parent::get_atts_hierarchy_initial($template_id);
 		$this->append_att($template_id, $atts, 'class', 'pop-pagesection-page pop-viewport toplevel');
+
 		return $atts;
 	}
 

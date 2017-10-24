@@ -12,10 +12,9 @@ class GD_Template_Processor_DataQueriesBase extends GD_Template_ProcessorBase {
 	function get_data_fields($template_id, $atts) {
 	// function get_runtime_datafields($template_id, $atts) {
 
-		$fields = isset($_REQUEST['fields']) ? $_REQUEST['fields'] : array();
-		if (!is_array($fields)) {
-			$fields = array($fields);
-		}
+		$vars = GD_TemplateManager_Utils::get_vars();
+		// $fields = isset($_REQUEST['fields']) ? $_REQUEST['fields'] : array();
+		$fields = isset($vars['fields']) ? $vars['fields'] : array();
 
 		// Only allow from a specific list of fields. Precaution against hackers.
 		// $fields = array_intersect($fields, $atts['dataquery-allowedfields']);

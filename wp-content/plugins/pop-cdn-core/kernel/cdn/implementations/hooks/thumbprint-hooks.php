@@ -10,13 +10,13 @@ class PoP_CDNCore_ThumbprintUserHooks {
     function __construct() {
 
         add_filter(
-            'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
+            'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
             array($this, 'get_thumbprint_partialpaths'),
             10,
             2
         );
         add_filter(
-            'PoP_CDNCore_Job_ThumbprintsConfig:criteriaitems:thumbprint:isHome',
+            'PoP_CDNCore_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:isHome',
             array($this, 'get_thumbprint_ishome'),
             10,
             2

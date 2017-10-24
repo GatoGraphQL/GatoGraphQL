@@ -26,7 +26,7 @@ class GD_FormInput_LinkAccessDescription extends GD_FormInput_Select {
 		return $values;
 	}	
 	
-	function get_default_value() {
+	function get_default_value($output=false) {
 	
 		return array('free');
 	}		

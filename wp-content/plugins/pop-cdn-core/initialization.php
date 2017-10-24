@@ -36,32 +36,38 @@ class PoP_CDNCore_Initialization {
 
 	function register_scripts() {
 
-		$js_folder = POP_CDNCORE_URI.'/js';
-		$libraries_js_folder = $js_folder.'/libraries';
-		$dist_js_folder = $js_folder.'/dist';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
-			
-			wp_register_script('pop-cdn-core', $dist_js_folder . '/pop-cdn-core.bundle.min.js', array(), POP_CDNCORE_VERSION, true);
-			wp_enqueue_script('pop-cdn-core');
+			$js_folder = POP_CDNCORE_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
+		
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('pop-cdn-core', $bundles_js_folder . '/pop-cdn-core.bundle.min.js', array(), POP_CDNCORE_VERSION, true);
+				wp_enqueue_script('pop-cdn-core');
+			}
+			else {
+
+				wp_register_script('pop-cdn-core-functions', $libraries_js_folder.'/cdn'.$suffix.'.js', array('pop'), POP_CDNCORE_VERSION, true);
+				wp_enqueue_script('pop-cdn-core-functions');
+
+				wp_register_script('pop-cdn-core-thumbprints', $libraries_js_folder.'/cdn-thumbprints'.$suffix.'.js', array('pop'), POP_CDNCORE_VERSION, true);
+				wp_enqueue_script('pop-cdn-core-thumbprints');
+
+				wp_register_script('pop-cdn-core-core-hooks', $libraries_js_folder.'/plugins/pop-coreprocessors/cdn-hooks'.$suffix.'.js', array('pop-cdn-core-functions'), POP_CDNCORE_VERSION, true);
+				wp_enqueue_script('pop-cdn-core-core-hooks');
+			}
+
+			// This file is generated dynamically, so it can't be added to any bundle or minified
+			// That's why we use pop_version() as its version, so upgrading the website will fetch again this file
+			global $pop_cdncore_configfile_generator;
+			wp_register_script('pop-cdn-core-config', $pop_cdncore_configfile_generator->get_fileurl(), array(), pop_version(), true);
+			wp_enqueue_script('pop-cdn-core-config');
 		}
-		else {
-
-			wp_register_script('pop-cdn-core-functions', $libraries_js_folder.'/cdn.js', array('pop'), POP_CDNCORE_VERSION, true);
-			wp_enqueue_script('pop-cdn-core-functions');
-
-			wp_register_script('pop-cdn-core-thumbprints', $libraries_js_folder.'/cdn-thumbprints.js', array('pop'), POP_CDNCORE_VERSION, true);
-			wp_enqueue_script('pop-cdn-core-thumbprints');
-
-			wp_register_script('pop-cdn-core-core-hooks', POP_CDNCORE_URI.'/plugins/pop-coreprocessors/js/libraries/cdn-hooks.js', array('pop-cdn-core-functions'), POP_CDNCORE_VERSION, true);
-			wp_enqueue_script('pop-cdn-core-core-hooks');
-		}
-
-		// This file is generated dynamically, so it can't be added to any bundle or minified
-		// That's why we use pop_version() as its version, so upgrading the website will fetch again this file
-		global $pop_cdncore_manager;
-		wp_register_script('pop-cdn-core-config', $pop_cdncore_manager->get_fileurl('cdn-config.js'), array(), pop_version(), true);
-		wp_enqueue_script('pop-cdn-core-config');
 	}
 }
 

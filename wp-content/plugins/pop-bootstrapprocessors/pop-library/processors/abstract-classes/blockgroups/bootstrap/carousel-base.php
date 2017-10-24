@@ -7,10 +7,16 @@
 
 class GD_Template_Processor_CarouselBlockGroupsBase extends GD_Template_Processor_DefaultActivePanelBootstrapJavascriptBlockGroupsBase {
 
-	protected function get_block_extension_templates($template_id) {
+	// protected function get_block_extension_templates($template_id) {
 
-		$ret = parent::get_block_extension_templates($template_id);
-		$ret[] = GD_TEMPLATESOURCE_BLOCKGROUP_CAROUSEL;
+	// 	$ret = parent::get_block_extension_templates($template_id);
+	// 	$ret[] = GD_TEMPLATESOURCE_BLOCKGROUP_CAROUSEL;
+	// 	return $ret;
+	// }
+	function get_template_extra_sources($template_id, $atts) {
+
+		$ret = parent::get_template_extra_sources($template_id, $atts);
+		$ret['block-extensions'][] = GD_TEMPLATESOURCE_BLOCKGROUP_CAROUSEL;
 		return $ret;
 	}
 

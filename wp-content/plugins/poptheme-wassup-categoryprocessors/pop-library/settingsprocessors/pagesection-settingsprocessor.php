@@ -17,11 +17,12 @@ class PoPTheme_Wassup_CategoryProcessors_PageSectionSettingsProcessor extends Wa
 		if ($add) {
 
 			$blockgroups = $frames = array();
-			$post_type = get_post_type();
+			$post = $vars['global-state']['post']/*global $post*/;
+			$post_type = get_post_type($post->ID);
 			if ($post_type == 'post') {
 
 				// Add the sidebars only for the independent categories; section categories already get this setting from WEBPOST BLOCK
-				if (in_array(gd_get_the_main_category(), PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_POSTS)))) {
+				if (in_array(gd_get_the_main_category($post->ID), PoPTheme_Wassup_CategoryProcessors_ConfigUtils::get_cats(array(POP_CATEGORYPROCESSORS_CONFIGUTILS_POSTS)))) {
 					
 					$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_SIDEBAR;
 

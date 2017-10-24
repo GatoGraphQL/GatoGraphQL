@@ -32,17 +32,25 @@ class GD_Template_Processor_BootstrapPageSectionsBase extends GD_Template_Proces
 
 		return $ret;
 	}
-
-	function get_template_configuration($template_id, $atts) {
 	
-		global $gd_template_processor_manager;
-
-		$ret = parent::get_template_configuration($template_id, $atts);	
+	function get_template_extra_sources($template_id, $atts) {
 
 		// Add the inside extension templates
-		$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['insideextensions'] = $this->get_pagesection_insideextensions($template_id);		
-
+		$ret = parent::get_template_extra_sources($template_id, $atts);
+		$ret['insideextensions'] = $this->get_pagesection_insideextensions($template_id);
 		return $ret;
 	}
+
+	// function get_template_configuration($template_id, $atts) {
+	
+	// 	global $gd_template_processor_manager;
+
+	// 	$ret = parent::get_template_configuration($template_id, $atts);	
+
+	// 	// Add the inside extension templates
+	// 	$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['insideextensions'] = $this->get_pagesection_insideextensions($template_id);		
+
+	// 	return $ret;
+	// }
 }
 

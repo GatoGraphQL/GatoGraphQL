@@ -20,6 +20,11 @@ class EM_PoPProcessors_Initialization {
 		require_once 'config/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
+		 * Kernel Override
+		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once 'kernel/load.php';
+
+		/**---------------------------------------------------------------------------------------------------------------
 		 * PoP Library
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		require_once 'pop-library/load.php';
@@ -37,49 +42,58 @@ class EM_PoPProcessors_Initialization {
 
 	function register_scripts() {
 
-		$folder = EM_POPPROCESSORS_URI.'/js';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
+			$js_folder = EM_POPPROCESSORS_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
 
-			wp_register_script('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js', array('jquery', 'moment'), null);
-		}
-		else {
+			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
 
-			$cdn_folder = $folder . '/includes/cdn';
-			wp_register_script('fullcalendar', $cdn_folder . '/fullcalendar.2.9.1.min.js', array('jquery', 'moment'), null);
-		}
-		wp_enqueue_script('fullcalendar');
+				wp_register_script('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js', array('jquery', 'moment'), null);
+			}
+			else {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
-			
-			$folder .= '/dist';
-			wp_register_script('em-popprocessors-templates', $folder . '/events-manager-popprocessors.templates.bundle.min.js', array(), EM_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('em-popprocessors-templates');
+				$cdn_folder = $js_folder . '/includes/cdn';
+				wp_register_script('fullcalendar', $cdn_folder . '/fullcalendar.2.9.1.min.js', array('jquery', 'moment'), null);
+			}
+			wp_enqueue_script('fullcalendar');
 
-			wp_register_script('em-popprocessors', $folder . '/events-manager-popprocessors.bundle.min.js', array('pop', 'jquery'), EM_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('em-popprocessors');
-		}
-		else {
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('em-popprocessors-templates', $bundles_js_folder . '/events-manager-popprocessors.templates.bundle.min.js', array(), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-templates');
 
-			$folder .= '/libraries';
-			
-			wp_register_script('em-popprocessors-map', $folder.'/map.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('em-popprocessors-map');
+				wp_register_script('em-popprocessors', $bundles_js_folder . '/events-manager-popprocessors.bundle.min.js', array('pop', 'jquery'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors');
+			}
+			else {
 
-			wp_register_script('em-popprocessors-typeaheadmap', $folder.'/typeahead-map.js', array('jquery', 'pop', 'em-popprocessors-map', 'pop-coreprocessors-typeahead'), EM_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('em-popprocessors-typeaheadmap');
+				/** Theme JS Sources */
+				wp_register_script('em-popprocessors-helpers-handlebars', $libraries_js_folder.'/helpers.handlebars'.$suffix.'.js', array('handlebars'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-helpers-handlebars');	
 
-			wp_register_script('em-popprocessors-createlocation', $folder.'/create-location.js', array('jquery', 'pop', 'em-popprocessors-map'), EM_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('em-popprocessors-createlocation');
+				wp_register_script('em-popprocessors-map', $libraries_js_folder.'/map'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-map');
 
-			wp_register_script('em-popprocessors-mapcollection', $folder.'/map-collection.js', array('jquery', 'pop', 'em-popprocessors-map'), EM_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('em-popprocessors-mapcollection');
+				wp_register_script('em-popprocessors-typeaheadmap', $libraries_js_folder.'/typeahead-map'.$suffix.'.js', array('jquery', 'pop', 'em-popprocessors-map', 'pop-coreprocessors-typeahead'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-typeaheadmap');
 
-			wp_register_script('em-popprocessors-fullcalendar', $folder.'/3rdparties/fullcalendar.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('em-popprocessors-fullcalendar');
+				wp_register_script('em-popprocessors-createlocation', $libraries_js_folder.'/create-location'.$suffix.'.js', array('jquery', 'pop', 'em-popprocessors-map'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-createlocation');
 
-			/** Templates Sources */
-			$this->enqueue_templates_scripts();
+				wp_register_script('em-popprocessors-mapcollection', $libraries_js_folder.'/map-collection'.$suffix.'.js', array('jquery', 'pop', 'em-popprocessors-map'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-mapcollection');
+
+				wp_register_script('em-popprocessors-fullcalendar', $libraries_js_folder.'/3rdparties/fullcalendar'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-fullcalendar');
+
+				/** Templates Sources */
+				$this->enqueue_templates_scripts();
+			}
 		}
 	}
 
@@ -131,7 +145,7 @@ class EM_PoPProcessors_Initialization {
 		 * 3rd Party Libraries (using CDN whenever possible)
 		 ----------------------------- */
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
+		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
 			
 			// CDN
 			wp_register_style('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css', null, null);

@@ -231,7 +231,7 @@ function gd_wp_cache_deletecache() {
  * Allow to override what files to ignore to cache: all the ones with checkpoint needed
  * ---------------------------------------------------------------------------------------------------------------*/
 // Priority 20: After the config file has been created
-add_action('PoP:system-install', 'gd_wp_cache_set_rejected_uri', 20);
+add_action('PoP:system-generate', 'gd_wp_cache_set_rejected_uri', 20);
 function gd_wp_cache_set_rejected_uri() {
 
 	// Check if we have rejected uris, if so replace them in wp-cache-config.php

@@ -29,8 +29,9 @@ if (class_exists("JWP6_Plugin"))
 if (class_exists('MLAData'))		
 	require_once 'media-library-assistant/load.php';
 
-if (class_exists("DS_Public_Post_Preview"))	
-	require_once 'public-post-preview/load.php';
+// if (class_exists("DS_Public_Post_Preview"))	
+if (defined('PPP_POP_VERSION'))
+	require_once 'public-post-preview-pop/load.php';
 
 if (defined('QTX_VERSION'))
 	require_once 'qtranslate-x/load.php';
@@ -40,6 +41,10 @@ if (defined('QTX_VERSION'))
 
 if (class_exists('User_Role_Editor'))
 	require_once 'user-role-editor/load.php';
+
+if (class_exists('GADWP_Manager')) {
+	require_once 'google-analytics-dashboard-for-wp/load.php';
+}
 
 // if (function_exists('wsl_activate'))
 // 	require_once 'wordpress-social-login/load.php';	

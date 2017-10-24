@@ -28,44 +28,6 @@ popCustomFunctions = {
 		}	
 	},
 
-	// ctrlTab : function() {
-
-	// 	var t = this;
-
-	// 	// Switch tabs when the user presses ctrl+tab keys
-	// 	// Code copied from https://stackoverflow.com/questions/2878983/capture-key-press-without-placing-an-input-element-on-the-page
-	// 	document.onkeydown = function(evt) {
-
-	// 		evt = evt || window.event;
-
-	// 		// Don't allow the browser to do its own browser tab switching
-	// 		evt.preventDefault();
-
-	// 		// Tab's keyCode: 9
-	// 		if (evt.ctrlKey && evt.keyCode == 9) {
-
-	// 			// Find the current tab and then switch to next/previous one. Make sure there at least 2 tabs
-	// 			var pageSection = $('#'+M.PS_PAGETABS_ID);
-	// 			var tabs = pageSection.find('a.pop-pagetab-btn');
-	// 			if (tabs.length > 1) {
-
-	// 				var current = tabs.filter('.active');
-	// 				if (current.length) {
-
-	// 					popSystem.switchTab(current);
-	// 				}
-	// 			}
-	// 		}
-	// 	};
-	// },
-
-	// documentInitialized : function() {
-	
-	// 	var t = this;
-
-	// 	t.ctrlTab();
-	// },
-
 	pageSectionInitialized : function(args) {
 	
 		var t = this;
@@ -255,6 +217,29 @@ popCustomFunctions = {
 		return 0;
 	},
 
+	closeMessageFeedback : function(args) {
+		
+		var t = this;
+		var elem = args.elem;
+
+		// Message is an alert, so close it
+		$(document).ready( function($) {
+
+			elem.find('.pop-messagefeedback').removeClass('fade').alert('close');
+		});
+	},
+
+	closeMessageFeedbacks : function(args) {
+		
+		var t = this;
+		var pageSection = args.pageSection;
+
+		// Message is an alert, so close it
+		$(document).ready( function($) {
+			pageSection.find('.pop-messagefeedback').removeClass('fade').alert('close');
+		});
+	},
+
 	//-------------------------------------------------
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
@@ -267,7 +252,8 @@ popCustomFunctions = {
 		if (elem.attr('id') == M.PS_MAIN_ID && !elem.hasClass('perfect-scrollbar')) {
 
 			if (animate) {
-				$(document.body).animate({ scrollTop: top }, 'fast');
+				// We need both 'html' and 'body' because body is used by webkit, html is used by firefox
+				$('html, body').animate({ scrollTop: top }, 'fast');
 			}
 			else {
 				window.scrollTo(0, top);
@@ -307,4 +293,4 @@ popCustomFunctions = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popCustomFunctions, ['addPageSectionIds', 'pageSectionNewDOMsBeforeInitialize'], true);
-popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser', 'getPosition', 'scrollToElem', 'scrollTop']);
+popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser', 'getPosition', 'scrollToElem', 'scrollTop', 'closeMessageFeedback', 'closeMessageFeedbacks']);

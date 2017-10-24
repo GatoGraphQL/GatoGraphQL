@@ -11,9 +11,10 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_FRONTENDENGINE_VERSION', 0.123);
+define ('POP_FRONTENDENGINE_VERSION', 0.127);
 define ('POP_FRONTENDENGINE_DIR', dirname(__FILE__));
 define ('POP_FRONTENDENGINE_PHPTEMPLATES_DIR', POP_FRONTENDENGINE_DIR.'/php-templates/compiled');
+define ('POP_RESOURCELOADER_ASSETS_DIR', POP_FRONTENDENGINE_DIR.'/kernel/resourceloader/config/assets');
 
 class PoPFrontend {
 
@@ -22,6 +23,7 @@ class PoPFrontend {
 		// Priority: after PoP WP Processors loaded
 		add_action('plugins_loaded', array($this,'init'), 15);
 		add_action('PoP:system-build', array($this,'system_build'));
+		add_action('PoP:system-generate:theme', array($this,'system_generate_theme'));
 		add_action('PoP:version', array($this,'version'), 15);
 	}
 	function version($version){
@@ -33,10 +35,26 @@ class PoPFrontend {
 		// Allow other plug-ins to modify the plugins_url path (eg: pop-aws adding the CDN)
 		define ('POP_FRONTENDENGINE_URI', plugins_url('', __FILE__));
 
+		// // Allow the Theme to override the cache folder (eg: to add a custom folder after ir, eg: pop-cache/mesym/)
+		// if (!defined ('POP_FRONTENDENGINE_CONTENT_DIR')) {
+		// 	define ('POP_FRONTENDENGINE_CONTENT_DIR', WP_CONTENT_DIR.'/pop-frontendengine');
+		// }
+		// if (!defined ('POP_FRONTENDENGINE_CONTENT_URI')) {
+		// 	define ('POP_FRONTENDENGINE_CONTENT_URI', WP_CONTENT_URL.'/pop-frontendengine');
+		// }
+		define ('POP_FRONTENDENGINE_CONTENT_DIR', POP_CONTENT_DIR.'/pop-frontendengine');
+		define ('POP_FRONTENDENGINE_CONTENT_URI', POP_CONTENT_URL.'/pop-frontendengine');
+		define ('POP_FRONTENDENGINE_BUILD_DIR', POP_BUILD_DIR.'/pop-frontendengine');
+		define ('POP_FRONTENDENGINE_GENERATECACHE_DIR', POP_GENERATECACHE_DIR.'/pop-frontendengine');
+		// define ('POP_FRONTENDENGINE_BUILD_URI', POP_BUILD_URL.'/pop-frontendengine');
+
 		// Allow the Theme to override the cache folder (eg: to add a custom folder after ir, eg: pop-cache/mesym/)
-		if (!defined ('POP_FRONTENDENGINE_CONTENT_DIR')) {
-			define ('POP_FRONTENDENGINE_CONTENT_DIR', WP_CONTENT_DIR.'/pop-frontendengine');
-		}
+		// if (!defined ('POP_RESOURCELOADER_ASSETDESTINATION_DIR')) {
+		// 	define ('POP_RESOURCELOADER_ASSETDESTINATION_DIR', WP_CONTENT_DIR.'/pop-resourceloader');
+		// }
+		// if (!defined ('POP_RESOURCELOADER_ASSETDESTINATION_URI')) {
+		// 	define ('POP_RESOURCELOADER_ASSETDESTINATION_URI', WP_CONTENT_URL.'/pop-resourceloader');
+		// }
 
 		if ($this->validate()) {
 			
@@ -55,6 +73,12 @@ class PoPFrontend {
 		require_once 'installation.php';
 		$installation = new PoPFrontend_Installation();
 		return $installation->system_build();	
+	}	
+	function system_generate_theme(){
+
+		require_once 'installation.php';
+		$installation = new PoPFrontend_Installation();
+		return $installation->system_generate_theme();	
 	}	
 	function initialize(){
 

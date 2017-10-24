@@ -17,7 +17,8 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 		if ($add) {
 
 			$blockgroups = $frames = array();
-			$post_type = get_post_type();
+			$post = $vars['global-state']['post']/*global $post*/;
+			$post_type = get_post_type($post->ID);
 			if ($post_type == 'post') {
 
 				$cats_blockgroup = array(
@@ -41,7 +42,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 				if ($webpost_sidebar = $webpost_sidebars[$page_id]) {
 					$cats_blockgroup[POPTHEME_WASSUP_CAT_WEBPOSTS] = $webpost_sidebar;
 				}
-				if ($cat_blockgroup = $cats_blockgroup[gd_get_the_main_category()]) {
+				if ($cat_blockgroup = $cats_blockgroup[gd_get_the_main_category($post->ID)]) {
 					$blockgroups[] = $cat_blockgroup;
 				}
 			}
@@ -361,10 +362,8 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			case POPTHEME_WASSUP_PAGE_HIGHLIGHTS:
 			case POP_COREPROCESSORS_PAGE_POSTAUTHORS:
 			case POP_COREPROCESSORS_PAGE_RECOMMENDEDBY:
-
-			// Comment Leo 09/11/2015: No need to add this information for the Upvote/Downvote, it's too much
-			// case POP_COREPROCESSORS_PAGE_UPVOTEDBY:
-			// case POP_COREPROCESSORS_PAGE_DOWNVOTEDBY:
+			case POP_COREPROCESSORS_PAGE_UPVOTEDBY:
+			case POP_COREPROCESSORS_PAGE_DOWNVOTEDBY:
 
 				$add = 
 					($template_id == GD_TEMPLATE_PAGESECTION_SINGLE && $target == GD_URLPARAM_TARGET_MAIN) ||
@@ -821,7 +820,7 @@ class PoPTheme_Wassup_PageSectionSettingsProcessor extends Wassup_PageSectionSet
 			/**-------------------------------------------
 			 * OPERATIONAL
 			 *-------------------------------------------*/
-			case POP_MULTIDOMAIN_PAGE_LOADERS_INITIALIZEDOMAIN:
+			// case POP_MULTIDOMAIN_PAGE_LOADERS_INITIALIZEDOMAIN:
 			case POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA:
 			case POP_COREPROCESSORS_PAGE_FOLLOWUSER:
 			case POP_COREPROCESSORS_PAGE_UNFOLLOWUSER:

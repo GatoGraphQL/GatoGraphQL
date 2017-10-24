@@ -50,12 +50,13 @@ class AAL_Template_SettingsProcessor extends GD_Template_SettingsProcessorBase {
 		return parent::get_checkpoints($hierarchy);
 	}
 
-	function get_page_blockgroups($hierarchy, $include_common = true) {
+	function get_page_blockgroups($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
 		// Common BlockGroups
-		if ($include_common) {
+		// if ($include_common) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			// Default
 			$pageblockgroups_allothers = array(
@@ -72,7 +73,7 @@ class AAL_Template_SettingsProcessor extends GD_Template_SettingsProcessorBase {
 		return $ret;
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
@@ -82,7 +83,8 @@ class AAL_Template_SettingsProcessor extends GD_Template_SettingsProcessorBase {
 		// common, then we can't get their dataload-source.
 		// However, when generating the cache (file generator.php) these are not needed, so then skip them
 		// Common blocks
-		if ($include_common) {
+		// if ($include_common) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			// Actions 
 			$pageactions = array(

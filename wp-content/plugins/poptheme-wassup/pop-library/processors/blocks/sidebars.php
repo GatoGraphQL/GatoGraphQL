@@ -230,6 +230,36 @@ class GD_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_Cu
 		return $ret;
 	}
 
+	protected function get_block_hierarchy($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_AUTHORSECTION_MAINALLCONTENT_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_AUTHORSECTION_ALLCONTENT_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_AUTHORSECTION_POSTS_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_AUTHORSECTION_ALLUSERS_SIDEBAR:
+				
+				return GD_SETTINGS_HIERARCHY_AUTHOR;
+
+			case GD_TEMPLATE_BLOCK_TAGSECTION_MAINALLCONTENT_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_TAGSECTION_ALLCONTENT_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_TAGSECTION_WEBPOSTS_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_TAGSECTION_POSTS_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_TAG_SIDEBAR:
+				
+				return GD_SETTINGS_HIERARCHY_TAG;
+
+			case GD_TEMPLATE_BLOCK_SINGLE_WEBPOSTLINK_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_SINGLE_HIGHLIGHT_SIDEBAR:
+			case GD_TEMPLATE_BLOCK_SINGLE_WEBPOST_SIDEBAR:
+
+				return GD_SETTINGS_HIERARCHY_SINGLE;
+		}
+		
+		return parent::get_block_hierarchy($template_id);
+	}
+
+
 	function get_dataloader($template_id) {
 
 		switch ($template_id) {

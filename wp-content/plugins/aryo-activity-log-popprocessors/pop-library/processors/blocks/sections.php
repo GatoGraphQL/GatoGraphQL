@@ -168,25 +168,25 @@ class AAL_PoPProcessors_Template_Processor_SectionBlocks extends GD_Template_Pro
 		return $ret;
 	}
 
-	protected function get_block_page($template_id) {
+	// protected function get_block_page($template_id) {
 
-		global $gd_template_settingsmanager;
+	// 	global $gd_template_settingsmanager;
 
-		switch ($template_id) {
+	// 	switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
-			case GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
+	// 		case GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
+	// 		case GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
 
-				// Make explicit that it is "page" hierarchy, since the Notifications in the Top pageSection can be loaded initially from any hierarchy, so if not explicit it won't find the block here
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
+	// 			// Make explicit that it is "page" hierarchy, since the Notifications in the Top pageSection can be loaded initially from any hierarchy, so if not explicit it won't find the block here
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
 
-					return $page;
-				}
-				break;
-		}
+	// 				return $page;
+	// 			}
+	// 			break;
+	// 	}
 
-		return parent::get_block_page($template_id);
-	}
+	// 	return parent::get_block_page($template_id);
+	// }
 
 	protected function get_dataload_query_args($template_id, $atts) {
 

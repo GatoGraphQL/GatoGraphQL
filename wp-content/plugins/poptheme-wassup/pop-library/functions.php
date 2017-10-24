@@ -16,6 +16,15 @@ function get_custom_default_hierarchy_page_id() {
 
 	return null;
 }
+add_filter('GD_TemplateManager_Utils:hierarchy_default_pages', 'get_custom_default_hierarchy_pages');
+function get_custom_default_hierarchy_pages($pages) {
+
+	// Implement the default tabs for Author/Single
+	$pages['author'] = POP_COREPROCESSORS_PAGE_MAIN;
+	$pages['single'] = POP_COREPROCESSORS_PAGE_DESCRIPTION;
+
+	return $pages;
+}
 
 /**---------------------------------------------------------------------------------------------------------------
  * Uniqueblocks

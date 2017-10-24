@@ -145,6 +145,7 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 
 		// Do not load Lazy or PoP Blocks or Search (initially)
 		$ret[GD_DATALOAD_CONTENTLOADED] = $this->get_att($template_id, $atts, 'content-loaded');
+		$ret[GD_DATALOAD_VALIDATECONTENTLOADED] = $this->get_att($template_id, $atts, 'validate-content-loaded');
 
 		if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
 			$ret['dataload-source'] = $dataload_source;
@@ -244,6 +245,10 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 			// Load data by default
 			$this->add_att($template_id, $atts, 'content-loaded', true);
 		}
+
+		// Always validate if content-loaded by default
+		// This can be overridden by the blocks-base in baseprocessors
+		$this->add_att($template_id, $atts, 'validate-content-loaded', true);
 				
 		return parent::init_atts($template_id, $atts);
 	}
@@ -306,10 +311,15 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 
 		global $gd_template_settingsmanager;
 
-		if ($page = $gd_template_settingsmanager->get_block_page($template_id)) {
+		if ($page = $gd_template_settingsmanager->get_block_page($template_id, $this->get_block_hierarchy($template_id))) {
 
 			return $page;
 		}
 		return null;
+	}
+	protected function get_block_hierarchy($template_id) {
+
+		// Consider a page as the default
+		return GD_SETTINGS_HIERARCHY_PAGE;
 	}
 }

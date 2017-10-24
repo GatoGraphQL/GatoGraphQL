@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POPTHEME_WASSUP_AUTOMATEDEMAILS_VERSION', 0.104);
+define ('POPTHEME_WASSUP_AUTOMATEDEMAILS_VERSION', 0.105);
 define ('POPTHEME_WASSUP_AUTOMATEDEMAILS_DIR', dirname(__FILE__));
 
 class PoPTheme_Wassup_AutomatedEmails {

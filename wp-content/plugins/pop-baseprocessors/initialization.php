@@ -26,18 +26,23 @@ class PoP_BaseProcessors_Initialization {
 
 	function register_scripts() {
 
-		$js_folder = POP_BASEPROCESSORS_URI.'/js';
-		$dist_js_folder = $js_folder.'/dist';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
+			$js_folder = POP_BASEPROCESSORS_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
 			
-			wp_register_script('pop-baseprocessors-templates', $dist_js_folder . '/pop-baseprocessors.templates.bundle.min.js', array(), POP_BASEPROCESSORS_VERSION, true);
-			wp_enqueue_script('pop-baseprocessors-templates');
-		}
-		else {
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('pop-baseprocessors-templates', $bundles_js_folder . '/pop-baseprocessors.templates.bundle.min.js', array(), POP_BASEPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-baseprocessors-templates');
+			}
+			else {
 
-			/** Templates Sources */
-			$this->enqueue_templates_scripts();
+				/** Templates Sources */
+				$this->enqueue_templates_scripts();
+			}
 		}
 	}
 

@@ -38,8 +38,8 @@ function categoryprocessors_multilayout_labels($labels) {
 /**---------------------------------------------------------------------------------------------------------------
  * core.php
  * ---------------------------------------------------------------------------------------------------------------*/
-add_filter('gd_postname', 'categoryprocessors_postname', 10, 2);
-function categoryprocessors_postname($name, $post_id) {
+add_filter('gd_postname', 'categoryprocessors_postname', 10, 3);
+function categoryprocessors_postname($name, $post_id, $format) {
 
 	if (get_post_type($post_id) == 'post') {
 
@@ -51,7 +51,7 @@ function categoryprocessors_postname($name, $post_id) {
 			for ($i=0; $i < count($post_cats); $i++) { 
 				$cat = $post_cats[$i];
 				if (in_array($cat->term_id, $cats)) {
-					return gd_get_categoryname($cat->term_id);
+					return gd_get_categoryname($cat->term_id, $format);
 				}
 			}
 		}

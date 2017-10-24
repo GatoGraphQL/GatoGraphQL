@@ -9,7 +9,11 @@ class GD_Template_SettingsProcessorBase {
 
 	function __construct() {
 
-		add_action('init', array($this, 'init'));
+		// Comment Leo 30/09/2017: Important: do it at the very end, to make sure that
+		// all constants have been set by then (otherwise, in file settingsprocessor.pht 
+		// it may add the configuration under page "POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS01", 
+		// it is not treated as false if the constant has not been defined)
+		add_action('init', array($this, 'init'), PHP_INT_MAX);
 	}
 
 	function init() {
@@ -26,7 +30,7 @@ class GD_Template_SettingsProcessorBase {
 	/**
 	 * Function to override
 	 */
-	function get_page_blockgroups($hierarchy, $include_common = true) {
+	function get_page_blockgroups($hierarchy/*, $include_common = true*/) {
 	
 		return array();
 	}
@@ -34,7 +38,7 @@ class GD_Template_SettingsProcessorBase {
 	/**
 	 * Function to override
 	 */
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 	
 		return array();
 	}
@@ -60,6 +64,11 @@ class GD_Template_SettingsProcessorBase {
 	}
 
 	function is_functional($hierarchy) {
+
+		return false;
+	}
+
+	function is_for_internal_use($hierarchy) {
 
 		return false;
 	}

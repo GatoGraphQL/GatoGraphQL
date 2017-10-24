@@ -16,6 +16,12 @@ class GD_Template_Processor_InterceptablePageSectionsBase extends GD_Template_Pr
 		$ret[] = GD_TEMPLATEEXTENSION_PAGESECTIONREPLICABLE;
 		return $ret;
 	}
+	// function get_template_extra_sources($template_id, $atts) {
+
+	// 	$ret = parent::get_template_extra_sources($template_id, $atts);
+	// 	$ret['extensions'][] = GD_TEMPLATEEXTENSION_PAGESECTIONREPLICABLE;
+	// 	return $ret;
+	// }
 
 	function get_replicate_blocksettingsids($template_id, $atts) {
 

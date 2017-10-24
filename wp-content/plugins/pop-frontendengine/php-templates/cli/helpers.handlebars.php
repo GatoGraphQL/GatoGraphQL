@@ -94,6 +94,12 @@ class PoP_ServerSide_HelperCallers {
 		return $pop_serverside_helpers->withget($db, $index, $options);
 	}
 
+	public static function iffirstload($options) { 
+
+		global $pop_serverside_helpers;
+		return $pop_serverside_helpers->iffirstload($options);
+	}
+
 	public static function interceptAttr($options) { 
 
 		global $pop_serverside_helpers;

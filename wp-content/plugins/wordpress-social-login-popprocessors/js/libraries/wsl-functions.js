@@ -57,7 +57,7 @@ function wsl_wordpress_social_login_callback() {
 		if (popWSL.loginBlock) {
 			var pageSection = popManager.getPageSection(popWSL.loginBlock);
 			var closeTime = M.WSL_LOGINUSER_CLOSETIME || 1500;
-			popSystem.timeoutClosePageSection(pageSection, closeTime);
+			popEventReactions.timeoutClosePageSection(pageSection, closeTime);
 		}
 	}
 }

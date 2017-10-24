@@ -83,7 +83,7 @@ class GD_Template_Processor_CustomSectionBlocksUtils {
 
 			// Comment Leo 09/11/2015: No need to add this information for the Upvote/Downvote, it's too much
 			// No ned for the highlights
-			$cat = gd_get_the_main_category();
+			$cat = gd_get_the_main_category($post->ID);
 			$skip = apply_filters('GD_Template_Processor_CustomSectionBlocksUtils:get_single_submenu:skip_categories', array());
 			if (!in_array($cat, $skip)) {
 

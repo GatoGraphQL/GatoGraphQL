@@ -7,11 +7,14 @@
   global.$swRegistrations = {};
 
   if ('serviceWorker' in navigator) {
-    var enabledSw = $enabledSw;
-    enabledSw.forEach(function(entry) {
-      var scope = entry.scope;
-      var swUrl = entry.url;
-      global.$swRegistrations[scope] = navigator.serviceWorker.register(swUrl, { scope: scope });
+    // Wait until the page is loaded, to register the SW, to improve user experience (source: https://developers.google.com/web/fundamentals/primers/service-workers/registration)
+    window.addEventListener('load', function() {
+      var enabledSw = $enabledSw;
+      enabledSw.forEach(function(entry) {
+        var scope = entry.scope;
+        var swUrl = entry.url;
+        global.$swRegistrations[scope] = navigator.serviceWorker.register(swUrl, { scope: scope });
+      });
     });
   }
 

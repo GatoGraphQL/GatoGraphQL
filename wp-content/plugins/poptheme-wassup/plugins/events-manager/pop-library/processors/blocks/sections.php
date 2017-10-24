@@ -724,72 +724,112 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 		return $ret;
 	}
 
-	protected function get_block_page($template_id) {
+	// protected function get_block_page($template_id) {
 
-		global $gd_template_settingsmanager;
+	// 	global $gd_template_settingsmanager;
+
+	// 	switch ($template_id) {
+
+	// 		case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS:
+	// 		case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS:
+	// 		case GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
+
+	// 			// Make explicit that it is "page" hierarchy, since the Events Calendar is embedded everywhere in the sideinfo
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;
+
+	// 		// These are the Profile Blocks, they will always be used inside an is_author() page
+	// 		// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
+	// 		// an attr "tab" indicating this page through its path. This way, users can go straight to their 
+	// 		// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS:
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW:
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL:
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_LIST:
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP:
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL:
+	// 		case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST:
+
+	// 		case GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL:
+
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;
+
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_DETAILS:
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW:
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW:
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL:
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_LIST:
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP:
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDAR:
+	// 		case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS:
+	// 		case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW:
+	// 		case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW:
+	// 		case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL:
+	// 		case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_LIST:
+
+	// 		case GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL:
+
+	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
+
+	// 				return $page;
+	// 			}
+	// 			break;
+	// 	}
+	
+	// 	return parent::get_block_page($template_id);
+	// }
+	protected function get_block_hierarchy($template_id) {
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS:
-			case GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS:
-			case GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
-
-				// Make explicit that it is "page" hierarchy, since the Events Calendar is embedded everywhere in the sideinfo
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_PAGE)) {
-
-					return $page;
-				}
-				break;
-
-			// These are the Profile Blocks, they will always be used inside an is_author() page
-			// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
-			// an attr "tab" indicating this page through its path. This way, users can go straight to their 
-			// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_LIST:
+			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP:
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR:
-			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS:
-			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW:
-			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW:
-			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL:
-			case GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST:
-
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL:
-
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
-
-					return $page;
-				}
-				break;
-
+				
+				return GD_SETTINGS_HIERARCHY_AUTHOR;
+				
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_DETAILS:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_LIST:
+			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_LIST:
 			case GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDAR:
-			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS:
-			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW:
-			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW:
-			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL:
-			case GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_LIST:
-
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL:
-
-				if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
-
-					return $page;
-				}
-				break;
+				
+				return GD_SETTINGS_HIERARCHY_TAG;
 		}
-	
-		return parent::get_block_page($template_id);
+		
+		return parent::get_block_hierarchy($template_id);
 	}
+
 
 	protected function get_dataload_query_args($template_id, $atts) {
 

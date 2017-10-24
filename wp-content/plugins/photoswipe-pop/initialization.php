@@ -31,46 +31,57 @@ class PhotoSwipe_PoP_Initialization {
 
 	function register_scripts() {
 
-		$uri = PHOTOSWIPEPOP_URI.'/js';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		// Load different files depending on the environment (PROD / DEV)
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
+			$js_folder = PHOTOSWIPEPOP_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
 
-			$dist_uri = $uri.'/dist';
+			// Load different files depending on the environment (PROD / DEV)
+			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
 
-			// https://github.com/dimsemenov/PhotoSwipe/releases
-			wp_register_script('photoswipe', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe.min.js', null, null);
-			wp_register_script('photoswipe-skin', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe-ui-default.min.js', null, null);
-			wp_register_script('photoswipe-pop', $dist_uri.'/photoswipe-pop.bundle.min.js', array('jquery', 'pop', 'photoswipe'), PHOTOSWIPEPOP_VERSION, true);
+				// https://github.com/dimsemenov/PhotoSwipe/releases
+				wp_register_script('photoswipe', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe.min.js', null, null);
+				wp_register_script('photoswipe-skin', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe-ui-default.min.js', null, null);
+			}
+			else {
+				
+				$includes_uri = $js_folder.'/includes/cdn/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION;
+				wp_register_script('photoswipe', $includes_uri.'/photoswipe.min.js', null, null);
+				wp_register_script('photoswipe-skin', $includes_uri.'/photoswipe-ui-default.min.js', null, null);
+			}
+			wp_enqueue_script('photoswipe');
+			wp_enqueue_script('photoswipe-skin');
+		
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+
+				wp_register_script('photoswipe-pop', $bundles_js_folder.'/photoswipe-pop.bundle.min.js', array('jquery', 'pop', 'photoswipe'), PHOTOSWIPEPOP_VERSION, true);
+			}
+			else {
+				
+				wp_register_script('photoswipe-pop', $libraries_js_folder.'/photoswipe-pop'.$suffix.'.js', array('jquery', 'pop', 'photoswipe'), PHOTOSWIPEPOP_VERSION, true);
+			}
+			wp_enqueue_script('photoswipe-pop');
 		}
-		else {
-			
-			$includes_uri = $uri.'/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION;
-			wp_register_script('photoswipe', $includes_uri.'/photoswipe.min.js', null, null);
-			wp_register_script('photoswipe-skin', $includes_uri.'/photoswipe-ui-default.min.js', null, null);
-			wp_register_script('photoswipe-pop', $uri.'/photoswipe-pop.js', array('jquery', 'pop', 'photoswipe'), PHOTOSWIPEPOP_VERSION, true);
-		}
-
-		wp_enqueue_script('photoswipe');
-		wp_enqueue_script('photoswipe-skin');
-		wp_enqueue_script('photoswipe-pop');
 	}
 
 	function register_styles() {
 
 		// Load different files depending on the environment (PROD / DEV)
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
+		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
 			wp_register_style('photoswipe', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe.min.css', null, null);
 			wp_register_style('photoswipe-skin', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/default-skin/default-skin.min.css', null, null);
 		}
 		else {
 
-			$dist_uri = PHOTOSWIPEPOP_URI.'/css/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION;
-			wp_register_style('photoswipe', $dist_uri.'/photoswipe.min.css', null, null);
-			wp_register_style('photoswipe-skin', $dist_uri.'/default-skin/default-skin.min.css', null, null);
+			$css_uri = PHOTOSWIPEPOP_URI.'/css/includes/cdn/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION;
+			wp_register_style('photoswipe', $css_uri.'/photoswipe.min.css', null, null);
+			wp_register_style('photoswipe-skin', $css_uri.'/default-skin/default-skin.min.css', null, null);
 		}
-
 		wp_enqueue_style('photoswipe');
 		wp_enqueue_style('photoswipe-skin');
 	}

@@ -4,9 +4,10 @@
 importScripts('./$dependenciesFolder/localforage.1.4.3.min.js');
 importScripts('./$dependenciesFolder/utils.js');
 
-const SW_STRATEGIES_CACHEFIRST = 1;
+const SW_STRATEGIES_CACHEFIRSTTHENNETWORK = 1;
 const SW_STRATEGIES_CACHEFIRSTTHENREFRESH = 2;
 const SW_STRATEGIES_NETWORKFIRST = 3;
+const SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL = 4;
 
 var config = {
   version: $version,
@@ -72,11 +73,15 @@ function getOriginalURL(url, opts) {
   return url;
 }
 
-function addToCache(cacheKey, request, response, opts) {
+function addToCache(cacheKey, request, response, use_alias, opts) {
   // If coming from function refresh, response might be null
   // Comment Leo 06/03/2017: calling addToCache before refresh now, so no need to ask if response is not null
   // if (response !== null && response.ok) {
-  if (response.ok) {
+  // Comment Leo 24/10/2017: if coming from the HTML request, and it hasn't hit the appshell, then appshellRequest will be null.
+  // Check for this case with "typeof (request) != 'undefined'". Otherwise, the content from the HTML request
+  // will also override, in the cache, the appShell
+  // if (response.ok) {
+  if (request && response && response.ok) {
 
     // Add to the cache
     var copy = response.clone();
@@ -85,22 +90,25 @@ function addToCache(cacheKey, request, response, opts) {
     });
 
     // Save an entry on IndexedDB for the alias URL to point to this request
-    var original = getOriginalURL(request.url, opts);
-    if (original != request.url) {
+    if (use_alias) {
 
-      // First save the previous alias where the info was stored, so we can also send a message later on, on function 'refresh'
-      localforage.getItem('Alias-'+original).then( previousRequestURL => {
+      var original = getOriginalURL(request.url, opts);
+      if (original != request.url) {
 
-        // Add the previous URL in the opts, for use in function `refresh`
-        if (previousRequestURL && previousRequestURL != request.url) {
-          opts.previousRequestURLs[request.url] = previousRequestURL;
-        }
+        // First save the previous alias where the info was stored, so we can also send a message later on, on function 'refresh'
+        localforage.getItem('Alias-'+original).then( previousRequestURL => {
 
-        // Set the new request on that position
-        if (previousRequestURL != request.url) {
-          localforage.setItem('Alias-'+original, request.url);
-        }
-      });          
+          // Add the previous URL in the opts, for use in function `refresh`
+          if (previousRequestURL && previousRequestURL != request.url) {
+            opts.previousRequestURLs[request.url] = previousRequestURL;
+          }
+
+          // Set the new request on that position
+          if (previousRequestURL != request.url) {
+            localforage.setItem('Alias-'+original, request.url);
+          }
+        });          
+      }
     }
   }
   return response;
@@ -252,29 +260,12 @@ self.addEventListener('fetch', event => {
     // The 'html' and 'static' behave in the same way, with the difference that 'html' must always
     // point to the appshell page. If this one is not cached (eg: the user deleted it manually using Dev Tools)
     // then can still fetch it (the appshell page, not the requested page) and cache it
-    if (resourceType === 'html') {
+    /*if (resourceType === 'html') {
+      
       // For HTML use a different URL: the appshell page
-
-      // The different appshells are a combination of locale, theme and thememode
-      var params = getParams(request.url);
-      var theme = params[opts.appshell.params.precached.theme] || opts.themes.default;
-      var thememode = params[opts.appshell.params.precached.thememode] || (opts.themes.themes[theme] ? opts.themes.themes[theme].default : '');
-
-      // The initial appshell URL has the params that we have precached
-      var url = opts.appshell.pages[opts.locales.current][theme][thememode];
-
-      // In addition, there are other params that, if provided by the user, they must be added to the URL
-      // These params are not originally precached in any appshell URL, so such page will have to be retrieved from the server
-      opts.appshell.params.fromserver.forEach(function(param) {
-
-        // If the param was passed in the URL, then add it along
-        if (params[param]) {
-          url += '&'+param+'='+params[param];
-        }
-      });
-      request = new Request(url);
+      request = getAppShellRequest(request, opts);
     }
-    else if (resourceType === 'json') {
+    else */if (resourceType === 'json') {
 
       // Remove the ignore strings, we don't want to send it to the server, it was added to the URL
       // only to bypass the Cache First strategy
@@ -289,6 +280,30 @@ self.addEventListener('fetch', event => {
     }
     
     return request;
+  }
+
+  function getAppShellRequest(request, opts) {
+
+    // For HTML use a different URL: the appshell page
+
+    // The different appshells are a combination of locale, theme and thememode
+    var params = getParams(request.url);
+    var theme = params[opts.appshell.params.precached.theme] || opts.themes.default;
+    var thememode = params[opts.appshell.params.precached.thememode] || (opts.themes.themes[theme] ? opts.themes.themes[theme].default : '');
+
+    // The initial appshell URL has the params that we have precached
+    var url = opts.appshell.pages[opts.locales.current][theme][thememode];
+
+    // In addition, there are other params that, if provided by the user, they must be added to the URL
+    // These params are not originally precached in any appshell URL, so such page will have to be retrieved from the server
+    opts.appshell.params.fromserver.forEach(function(param) {
+
+      // If the param was passed in the URL, then add it along
+      if (params[param]) {
+        url += '&'+param+'='+params[param];
+      }
+    });
+    return new Request(url);
   }
 
   function getCacheBustRequest(request, opts) {
@@ -337,15 +352,19 @@ self.addEventListener('fetch', event => {
         strategy = SW_STRATEGIES_CACHEFIRSTTHENREFRESH;    
       }
     }
-    else if (resourceType === 'html' || resourceType === 'static') {
+    else if (resourceType === 'html') {
 
-      strategy = SW_STRATEGIES_CACHEFIRST;
+      strategy = SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL;
+    }
+    else if (resourceType === 'static') {
+
+      strategy = SW_STRATEGIES_CACHEFIRSTTHENNETWORK;
     }
 
     return strategy;
   }
 
-  function refresh(request, response, opts) {
+  function refresh(request, response, use_alias, opts) {
 
     var ETag = response.headers.get('ETag');
     if (!ETag) {
@@ -355,7 +374,7 @@ self.addEventListener('fetch', event => {
     // Comment Leo 04/04/2017: use the original URL instead of the response.url, so that 2 responses with different thumbprints
     // are considered the same URL. Otherwise, it won't find the other one, and won't show the refresh message
     // var key = response.url;
-    var key = 'ETag-'+getOriginalURL(request.url, opts);
+    var key = use_alias ? 'ETag-'+getOriginalURL(request.url, opts) : request.url;
     return localforage.getItem(key).then(function(previousETag) {
 
       // Compare the ETag of the response, with the previous one, saved in the IndexedDB
@@ -390,7 +409,7 @@ self.addEventListener('fetch', event => {
             client.postMessage(JSON.stringify(message));
 
             // If there was a previousRequestURL, also send to that one
-            if (opts.previousRequestURLs[request.url]) {
+            if (use_alias && opts.previousRequestURLs[request.url]) {
               message.url = opts.previousRequestURLs[request.url];
               client.postMessage(JSON.stringify(message));
               delete opts.previousRequestURLs[request.url];
@@ -423,11 +442,40 @@ self.addEventListener('fetch', event => {
     // Add the cache buster param for JSON responses, no need for static assets or for the initial appshell load (if this one changes, then the version will change and get downloaded and cached again)
     var cacheBustRequest = getCacheBustRequest(request, opts);
 
-    if (strategy === SW_STRATEGIES_CACHEFIRST || strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
-    
-      // Bust the cache. Taken from https://developers.google.com/web/showcase/2015/service-workers-iowa
+    // Static resources
+    if (strategy === SW_STRATEGIES_CACHEFIRSTTHENNETWORK) {
 
-      /* Load immediately from the Cache */
+      /* Load immediately from the Cache. If it fails, fetch from the network */
+      event.respondWith(
+        fetchFromCache(request)
+          .catch(() => fetch(request, fetchOpts)) 
+          .then(response => addToCache(cacheKey, request, response, false, opts))
+      );
+    }
+    // HTML: First check if we have that HTML in the cache, which is fast, if not use the AppShell, which is slower since it depends on JS
+    else if (strategy === SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL) {
+
+      var appshellRequest = null;
+
+      /* Load immediately from the Cache, if not there try from the Network, if not there then try the appShell from the Cache, then it tries appShell from network (should not be needed) */
+      /* This patter is not fully offline first, because it checks the html page network before checking the appshell cache */
+      /* This is done because loading html is much faster than loading the appshell, which relies on JS to load the content */
+      event.respondWith(
+        fetchFromCache(request)
+          .catch(() => fetch(request, fetchOpts)) 
+          // The response from this fetch will be saved in the cached below, through the cacheBustRequest
+          .then(response => addToCache(cacheKey, request, response, false, opts))
+          // Initialize the appshellRequest only now, so that the .then() below only works if the content comes from the appshell
+          // Otherwise, this 2nd .then() will also be executed from the html content of the original request, overriding with its content the appshell content in the cache
+          .catch(function() { appshellRequest = getAppShellRequest(request, opts); return fetchFromCache(appshellRequest, fetchOpts); }) 
+          .catch(() => fetch(appshellRequest, fetchOpts)) 
+          .then(response => addToCache(cacheKey, appshellRequest, response, false, opts))
+      );
+    }
+    // JSON content
+    else if (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
+
+      /* Load immediately from the Cache, if it fails try from its alias URL, if it fails then fetch from the network */
       event.respondWith(
         fetchFromCache(request)
           // Check if an alternate version of the same URL has cached this result
@@ -438,31 +486,35 @@ self.addEventListener('fetch', event => {
           // We obtain the URL for this alternate request under the Alias URL in IndexedDB
           .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL)))) 
           .catch(() => fetch(request, fetchOpts)) 
-          .then(response => addToCache(cacheKey, request, response, opts))
+          .then(response => addToCache(cacheKey, request, response, true, opts))
       );
-
-      /* Bring fresh content from the server, and show a message to the user if the cached content is stale */
-      /* Only do it for the json resourceType, since html will never change (unless $version is updated), 
-      and static will also not change (.css and .js will also have their version changed, and images 
-      never get updated under the same filename, the Media Manager will upload them with a different filename the 2nd time) */
-      if (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
-        event.waitUntil(
-          fetch(cacheBustRequest, fetchOpts)
-            // Comment Leo 06/03/2017: 1st save the cache back (even without checking the ETag), and only then call refresh,
-            // because somehow sometimes the response ETag different than the stored one, it was saved, but nevertheless the 
-            // SW cache returned the previous content!
-            .then(response => addToCache(cacheKey, request, response, opts))
-            .then(response => refresh(request, response, opts))
-        );
-      }
     }
+    // JSON content that needs to come from the server first, if it fails try the cache
     else if (strategy === SW_STRATEGIES_NETWORKFIRST) {
 
       event.respondWith(
         fetch(cacheBustRequest, fetchOpts)
-          .then(response => addToCache(cacheKey, request, response, opts))
+          .then(response => addToCache(cacheKey, request, response, true, opts))
           .catch(() => fetchFromCache(request))
-          .catch(function(err) {/*console.log(err)*/})
+          //.catch(function(err) {/*console.log(err)*/})
+      );
+    }
+
+    if (strategy === SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL || strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
+    
+      // The appshell doesn't need the alias, since it's only used with the 'html' resourceType, which doesn't go through the Content CDN */
+      var use_alias = (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH);
+      /* Bring fresh content from the server, and show a message to the user if the cached content is stale */
+      /* Only do it for the html and json resourceTypes, since static will never change (.css and .js will also have their version changed, and images 
+      never get updated under the same filename, the Media Manager will upload them with a different filename the 2nd time) */
+      event.waitUntil(
+        // Bust the cache. Taken from https://developers.google.com/web/showcase/2015/service-workers-iowa
+        fetch(cacheBustRequest, fetchOpts)
+          // Comment Leo 06/03/2017: 1st save the cache back (even without checking the ETag), and only then call refresh,
+          // because somehow sometimes the response ETag different than the stored one, it was saved, but nevertheless the 
+          // SW cache returned the previous content!
+          .then(response => addToCache(cacheKey, request, response, use_alias, opts))
+          .then(response => refresh(request, response, use_alias, opts))
       );
     }
   }

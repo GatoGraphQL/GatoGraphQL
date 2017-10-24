@@ -99,7 +99,7 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 	/** Repeated from "parent" class! */
 	/***********************************************************/
 	function get_dataload_source($template_id, $atts) {
-
+			
 		if ($page = $this->get_block_page($template_id)) {
 
 			return get_permalink($page);
@@ -120,7 +120,7 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 	
 		// By default, return one element, that being the dataload-source itself
 		if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
-			
+
 			return array(
 				$dataload_source,
 			);
@@ -223,6 +223,7 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 
 		// Do not load Lazy or PoP Blocks or Search (initially)
 		$ret[GD_DATALOAD_CONTENTLOADED] = $this->get_att($template_id, $atts, 'content-loaded');
+		$ret[GD_DATALOAD_VALIDATECONTENTLOADED] = $this->get_att($template_id, $atts, 'validate-content-loaded');
 
 		if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
 			$ret['dataload-source'] = $dataload_source;
@@ -361,10 +362,10 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 			}
 			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['block-inners'] = $block_inner_settings_ids;
 		}
-		if ($block_extensions = $this->get_block_extension_templates($template_id)) {
+		// if ($block_extensions = $this->get_block_extension_templates($template_id)) {
 			
-			$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['block-extensions'] = $block_extensions;
-		}
+		// 	$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['block-extensions'] = $block_extensions;
+		// }
 		if ($show_status = $this->show_status($template_id)) {
 
 			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['status'] = $gd_template_processor_manager->get_processor(GD_TEMPLATE_STATUS)->get_settings_id(GD_TEMPLATE_STATUS);
@@ -486,7 +487,16 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 			// Load data by default
 			$this->add_att($template_id, $atts, 'content-loaded', true);
 		}
+
+		// Always validate if content-loaded by default
+		// This can be overridden by the blocks-base in baseprocessors
+		$this->add_att($template_id, $atts, 'validate-content-loaded', true);
 		/***********************************************************/
+
+		if ($this->get_att($template_id, $atts, 'content-loaded') === false) {
+
+			$this->append_att($template_id, $atts, 'class', POP_CLASS_LOADINGCONTENT);
+		}
 
 
 		// Allow is_proxy and is_aggregator to set 'content-loaded' before setting the default value
@@ -580,16 +590,16 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 		return parent::init_atts($template_id, $atts);
 	}
 
-	function get_block_jsmethod($template_id, $atts) {
+	// function get_block_jsmethod($template_id, $atts) {
 
-		$ret = parent::get_block_jsmethod($template_id, $atts);
+	// 	$ret = parent::get_block_jsmethod($template_id, $atts);
 
-		if ($this->get_att($template_id, $atts, 'hidden-if-empty')) {
-			$this->add_jsmethod($ret, 'hideIfEmptyBlock');
-		}
+	// 	if ($this->get_att($template_id, $atts, 'hidden-if-empty')) {
+	// 		$this->add_jsmethod($ret, 'hideIfEmptyBlock');
+	// 	}
 
-		return $ret;
-	}
+	// 	return $ret;
+	// }
 
 	function is_frontend_id_unique($template_id, $atts) {
 	
@@ -675,10 +685,10 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 
 		return array();
 	}
-	protected function get_block_extension_templates($template_id) {
+	// protected function get_block_extension_templates($template_id) {
 
-		return array();
-	}
+	// 	return array();
+	// }
 
 	/***********************************************************/
 	/** Repeated from "parent" class! */
@@ -740,12 +750,21 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 
 		global $gd_template_settingsmanager;
 
-		if ($page = $gd_template_settingsmanager->get_block_page($template_id)) {
+		if ($page = $gd_template_settingsmanager->get_block_page($template_id, $this->get_block_hierarchy($template_id))) {
 
 			return $page;
 		}
 		return null;
 	}
+	/***********************************************************/
+	/** Repeated from "parent" class! */
+	/***********************************************************/
+	protected function get_block_hierarchy($template_id) {
+
+		// Consider a page as the default
+		return GD_SETTINGS_HIERARCHY_PAGE;
+	}
+	
 	protected function get_title_link($template_id) {
 	
 		if ($page = $this->get_block_page($template_id)) {

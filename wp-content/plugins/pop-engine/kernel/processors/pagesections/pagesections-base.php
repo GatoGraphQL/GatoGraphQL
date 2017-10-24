@@ -181,6 +181,14 @@ class PoP_Processor_PageSectionsBase extends PoP_ProcessorBase {
 		return $ret;
 	}
 
+	function get_template_extra_sources($template_id, $atts) {
+
+		// Add the extension templates
+		$ret = parent::get_template_extra_sources($template_id, $atts);
+		$ret['extensions'] = $this->get_pagesection_extensions($template_id);
+		return $ret;
+	}
+
 	function get_template_configuration($template_id, $atts) {
 	
 		global $gd_template_processor_manager;
@@ -189,8 +197,8 @@ class PoP_Processor_PageSectionsBase extends PoP_ProcessorBase {
 		
 		$ret[GD_JS_SETTINGSID/*'settings-id'*/] = $this->get_settings_id($template_id);
 
-		// Add the extension templates
-		$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['extensions'] = $this->get_pagesection_extensions($template_id);		
+		// // Add the extension templates
+		// $ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['extensions'] = $this->get_pagesection_extensions($template_id);		
 
 		return $ret;
 	}

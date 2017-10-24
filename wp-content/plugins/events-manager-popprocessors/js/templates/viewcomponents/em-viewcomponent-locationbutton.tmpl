@@ -2,7 +2,7 @@
 	<div class="{{../class}}" style="{{../style}}">
 		{{#if ../show-join}}
 			{{#compare locations.length 1 operator=">"}}
-				<a {{#generateId context=../.}}{{../../id}}-{{../id}}{{/generateId}} href="{{#if ../url-field}}{{{get . ../url-field}}}{{else}}{{addParam ../url ../locationsfield-name locations}}{{/if}}" data-append-intercepturl="#{{../bs.bId}}" {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../classes.link}} {{../classes.btn}}" style="{{../styles.link}}{{../styles.btn}}" data-header="{{#withModule ../. 'header'}}{{enterModule ../../.}}{{/withModule}}" title="{{{../title}}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+				<a {{#generateId context=../.}}{{../../id}}-{{../id}}{{/generateId}} href="{{#if ../url-field}}{{{get . ../url-field}}}{{else}}{{addParam (locationsPageURL ../tls.domain) ../locationsfield-name locations}}{{/if}}" data-append-intercepturl="#{{../bs.bId}}" {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../classes.link}} {{../classes.btn}}" style="{{../styles.link}}{{../styles.btn}}" data-header="{{#withModule ../. 'header'}}{{enterModule ../../.}}{{/withModule}}" title="{{{../title}}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
 					{{#if ../show-each}}
 						<span class="all-locations-titlelink">{{{../titles.locations}}}</span>
 					{{else}}
@@ -16,7 +16,7 @@
 		{{#if ../show-each}}
 			{{#each locations}}
 				{{#if @index}}{{{../../each-separator}}}{{/if}}
-				<a {{#generateId context=../../.}}{{../../id}}-{{../id}}-{{this}}{{/generateId}} href="{{addParam ../../url ../../locationsfield-name this}}" data-append-intercepturl="#{{../../bs.bId}}" {{#if ../../linktarget}}target="{{../../linktarget}}"{{/if}} class="{{../../classes.link}} {{../../classes.btn}}" style="{{../../styles.link}}{{../../styles.btn}}" data-header="{{#withModule ../../. 'header'}}{{enterModule ../../../.}}{{/withModule}}" title="{{{../../title}}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
+				<a {{#generateId context=../../.}}{{../../id}}-{{../id}}-{{this}}{{/generateId}} href="{{addParam (locationsPageURL ../../tls.domain) ../../locationsfield-name this}}" data-append-intercepturl="#{{../../bs.bId}}" {{#if ../../linktarget}}target="{{../../linktarget}}"{{/if}} class="{{../../classes.link}} {{../../classes.btn}}" style="{{../../styles.link}}{{../../styles.btn}}" data-header="{{#withModule ../../. 'header'}}{{enterModule ../../../.}}{{/withModule}}" title="{{{../../title}}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 					{{#if ../../fontawesome}}
 						<i class="fa {{../../fontawesome}}"></i>
 					{{/if}}

@@ -257,6 +257,20 @@ class PoP_ServerSide_Helpers {
 		return $options['fn']($context);
 	}
 
+	function iffirstload($options) {
+
+		$context = $options['hash']['context'] ?? $options['_this'];
+		$pssId = $options['hash']['pssId'] ?? $context['pss']['pssId'];
+		$popManager = PoP_ServerSide_Libraries_Factory::get_popmanager_instance();
+		$condition = $popManager->isFirstLoad($pssId);;
+		if ($condition) {
+	        return $options['fn']();
+	    } 
+	    else {
+	        return $options['inverse']();
+	    }
+	}
+
 	function interceptAttr($options) {
 
 		$context = $options['hash']['context'] ?? $options['_this'];
@@ -465,7 +479,6 @@ class PoP_ServerSide_Helpers {
 
 			$popManager->replaceFromItemObject($domain, $pssId, $bsId, $templateName, $itemObject, $extend, $strReplace);
 		}
-
 
 		// Needed for the BlockGroups
 		$parentContext = $options['hash']['parentContext'] ?? array();

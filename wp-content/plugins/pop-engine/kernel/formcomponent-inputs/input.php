@@ -49,7 +49,7 @@ class GD_FormInput {
 			return $this->selected;
 		}
 		
-		return $this->get_default_value(/*$conf*/);
+		return $this->get_default_value(/*$conf*/$output);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class GD_FormInput {
 	/**
 	 * Function to override
 	 */
-	function get_default_value(/*$conf*/) {
+	function get_default_value(/*$conf*/$output=false) {
 	
 		return '';
 	}

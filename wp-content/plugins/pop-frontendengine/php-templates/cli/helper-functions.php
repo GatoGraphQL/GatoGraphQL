@@ -17,6 +17,7 @@ $helper_functions = array_merge(
 		'get' => 'PoP_ServerSide_HelperCallers::get',
 		'ifget' => 'PoP_ServerSide_HelperCallers::ifget',
 		'withget' => 'PoP_ServerSide_HelperCallers::withget',
+		'iffirstload' => 'PoP_ServerSide_HelperCallers::iffirstload',
 		'interceptAttr' => 'PoP_ServerSide_HelperCallers::interceptAttr',
 		'generateId' => 'PoP_ServerSide_HelperCallers::generateId',
 		'lastGeneratedId' => 'PoP_ServerSide_HelperCallers::lastGeneratedId',

@@ -19,7 +19,8 @@ class PoPTheme_Wassup_SectionProcessors_EM_Template_SettingsProcessorHooks {
 
 	function get_page_blocks($ret, $hierarchy, $include_common) {
 
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblocks_map = array(
 				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_LOCATIONPOSTS_SCROLLMAP,

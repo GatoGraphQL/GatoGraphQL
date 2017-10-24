@@ -33,12 +33,13 @@ class Wassup_GF_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 		return parent::needs_target_id($hierarchy);
 	}
 
-	function get_page_blockgroups($hierarchy, $include_common = true) {
+	function get_page_blockgroups($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
 		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblockgroups = array(
 				POPTHEME_WASSUP_GF_PAGE_CONTACTUSER => GD_TEMPLATE_BLOCKGROUP_CONTACTUSER,
@@ -55,7 +56,7 @@ class Wassup_GF_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 		return $ret;
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
@@ -65,7 +66,8 @@ class Wassup_GF_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 		// common, then we can't get their dataload-source.
 		// However, when generating the cache (file generator.php) these are not needed, so then skip them
 		// Common blocks
-		if ($include_common) {
+		// if ($include_common) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			// Default
 			$pageblocks_allothers = array(

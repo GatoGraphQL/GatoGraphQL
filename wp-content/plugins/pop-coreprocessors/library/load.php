@@ -25,6 +25,7 @@ require_once POP_COREPROCESSORS_LIB.'/admin/load.php';
 require_once POP_COREPROCESSORS_LIB.'/utils.php';
 require_once POP_COREPROCESSORS_LIB.'/users/load.php';
 
+require_once POP_COREPROCESSORS_LIB.'/script-optimization.php';
 require_once POP_COREPROCESSORS_LIB.'/screens.php';
 require_once POP_COREPROCESSORS_LIB.'/media.php';
 require_once POP_COREPROCESSORS_LIB.'/mentions/load.php';
@@ -49,7 +50,7 @@ require_once POP_COREPROCESSORS_LIB.'/embed.php';
 // require_once POP_COREPROCESSORS_LIB.'/file.php';
 // require_once POP_COREPROCESSORS_LIB.'/fileupload-userphoto/fileupload-picture.php';
 require_once POP_COREPROCESSORS_LIB.'/gallery.php';
-require_once POP_COREPROCESSORS_LIB.'/googleanalytics.php';
+// require_once POP_COREPROCESSORS_LIB.'/deprecated-googleanalytics.php';
 require_once POP_COREPROCESSORS_LIB.'/hide_admin_bar.php';
 require_once POP_COREPROCESSORS_LIB.'/login/login.php';
 require_once POP_COREPROCESSORS_LIB.'/preferences/load.php';

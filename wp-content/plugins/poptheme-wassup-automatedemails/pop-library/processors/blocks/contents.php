@@ -78,7 +78,6 @@ class PoPTheme_Wassup_AE_Template_Processor_ContentBlocks extends PoPTheme_Wassu
 				$cat = gd_get_the_main_category($pid);
 				if ($post_type == EM_POST_TYPE_EVENT) {
 
-					// $ret[] = gd_em_single_event_is_future($pid) ? GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT : GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT;
 					$ret[] = GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT;
 				}
 				elseif ($post_type == 'post') {

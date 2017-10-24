@@ -19,17 +19,22 @@ popUserAccount = {
 	// PUBLIC functions
 	//-------------------------------------------------
 	
-	// initDocument : function() {
+	initDocument : function(args) {
 	
-	// 	var t = this;
+		var t = this;
+		var domain = args.domain;
 
-	// 	// Create the vars for all the domain
-	// 	$.each(M.USERLOGGEDIN_DATA_PAGEURLS, function(index, url) {
+		// Log in the user immediately, before rendering the HTML. This way, conditional wrappers can access the state of the user
+		// being logged in, such as for "isUserIdSameAsLoggedInUser"
+		t.initialLogin(domain);
 
-	// 		var domain = getDomain(url);
-	// 		t.initDomain(domain);
-	// 	});
-	// },
+		// // Create the vars for all the domain
+		// $.each(M.USERLOGGEDIN_DATA_PAGEURLS, function(index, url) {
+
+		// 	var domain = getDomain(url);
+		// 	t.initDomain(domain);
+		// });
+	},
 
 	initDomain : function(args) {
 	
@@ -389,4 +394,4 @@ popUserAccount = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popUserAccount, [/*'initDocument', */'initDomain', 'documentInitialized', 'pageSectionInitialized', 'blockInitialized', 'loadAvatar']);
+popJSLibraryManager.register(popUserAccount, ['initDocument', 'initDomain', 'documentInitialized', 'pageSectionInitialized', 'blockInitialized', 'loadAvatar']);

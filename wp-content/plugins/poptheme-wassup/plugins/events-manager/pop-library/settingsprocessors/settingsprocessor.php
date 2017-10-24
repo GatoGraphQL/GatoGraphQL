@@ -41,12 +41,13 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 		return parent::needs_target_id($hierarchy);
 	}
 
-	function get_page_blockgroups($hierarchy, $include_common = true) {
+	function get_page_blockgroups($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
 		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblockgroups = array(
 				POPTHEME_WASSUP_EM_PAGE_EVENTS => GD_TEMPLATE_BLOCKGROUP_TABPANEL_EVENTS,
@@ -59,6 +60,18 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				
 				// Also Default
 				$ret[$page]['blockgroups']['default'] = $blockgroup;
+			}
+
+			// Modals
+			$pageblockgroups_modals = array(
+
+				// Locations
+				POP_EM_POPPROCESSORS_PAGE_ADDLOCATION => GD_TEMPLATE_BLOCKGROUP_CREATELOCATION,
+			);
+			foreach ($pageblockgroups_modals as $page => $blockgroup) {
+				
+				// Also Default
+				$ret[$page]['blockgroups'][GD_TEMPLATEFORMAT_MODALS] = $blockgroup;
 			}
 		}
 
@@ -95,7 +108,7 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 		return $ret;
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
@@ -105,12 +118,13 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 		// common, then we can't get their dataload-source.
 		// However, when generating the cache (file generator.php) these are not needed, so then skip them
 		// Common blocks
-		if ($include_common) {
+		// if ($include_common) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			// Default
 			$pageblocks_allothers = array(
 
-				// Modals
+				// Locations
 				POP_EM_POPPROCESSORS_PAGE_ADDLOCATION => GD_TEMPLATE_BLOCK_CREATELOCATION,
 				POP_EM_POPPROCESSORS_PAGE_LOCATIONSMAP => GD_TEMPLATE_BLOCK_LOCATIONSMAP,
 
@@ -129,6 +143,17 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 				$ret[$page]['blocks']['default'] = $block;
 			}
 
+			// Modals
+			$pageblocks_modals = array(
+
+				// Locations
+				POP_EM_POPPROCESSORS_PAGE_ADDLOCATION => GD_TEMPLATE_BLOCK_CREATELOCATION,
+				POP_EM_POPPROCESSORS_PAGE_LOCATIONSMAP => GD_TEMPLATE_BLOCK_STATICLOCATIONSMAP,
+			);
+			foreach ($pageblocks_modals as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_MODALS] = $block;
+			}
+
 			// Actions 
 			$pageactions = array(
 				POP_EM_POPPROCESSORS_PAGE_ADDLOCATION => GD_TEMPLATE_ACTION_CREATELOCATION,
@@ -140,10 +165,10 @@ class Wassup_EM_Template_SettingsProcessor extends GD_Template_SettingsProcessor
 			foreach ($pageactions as $page => $action) {
 				$ret[$page]['action'] = $action;
 			}
-		}
+		// }
 
-		// Blocks in the homepage that need to access a PAGE dataload_source
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_HOME || $hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+		// // Blocks in the homepage that need to access a PAGE dataload_source
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_HOME || $hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_SECTION);
 			$default_format_sectioncalendar = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_SECTIONCALENDAR);

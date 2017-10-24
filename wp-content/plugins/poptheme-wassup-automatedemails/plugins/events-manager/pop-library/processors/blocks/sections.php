@@ -471,54 +471,6 @@ class PoPTheme_Wassup_EM_AE_Template_Processor_SectionBlocks extends PoPTheme_Wa
 		return $ret;
 	}
 
-	// protected function get_block_page($template_id) {
-
-	// 	global $gd_template_settingsmanager;
-
-	// 	switch ($template_id) {
-
-	// 		// These are the Profile Blocks, they will always be used inside an is_author() page
-	// 		// Then, point them not the is_page() page, but to the author url (mesym.com/p/mesym) and
-	// 		// an attr "tab" indicating this page through its path. This way, users can go straight to their 
-	// 		// information by typing their url: mesym.com/p/mesym?tab=events. Also good for future API
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHOREVENTS_SCROLL_DETAILS:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHOREVENTS_SCROLL_FULLVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHOREVENTS_SCROLL_THUMBNAIL:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHOREVENTS_SCROLL_LIST:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHORPASTEVENTS_SCROLL_DETAILS:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHORPASTEVENTS_SCROLL_FULLVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHORPASTEVENTS_SCROLL_THUMBNAIL:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_AUTHORPASTEVENTS_SCROLL_LIST:
-
-	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_AUTHOR)) {
-
-	// 				return $page;
-	// 			}
-	// 			break;
-
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGEVENTS_SCROLL_DETAILS:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGEVENTS_SCROLL_SIMPLEVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGEVENTS_SCROLL_FULLVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGEVENTS_SCROLL_THUMBNAIL:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGEVENTS_SCROLL_LIST:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGPASTEVENTS_SCROLL_DETAILS:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGPASTEVENTS_SCROLL_SIMPLEVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGPASTEVENTS_SCROLL_FULLVIEW:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGPASTEVENTS_SCROLL_THUMBNAIL:
-	// 		case GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_TAGPASTEVENTS_SCROLL_LIST:
-
-	// 			if ($page = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_TAG)) {
-
-	// 				return $page;
-	// 			}
-	// 			break;
-	// 	}
-	
-	// 	return parent::get_block_page($template_id);
-	// }
-
 	protected function get_dataload_query_args($template_id, $atts) {
 
 		$ret = parent::get_dataload_query_args($template_id, $atts);

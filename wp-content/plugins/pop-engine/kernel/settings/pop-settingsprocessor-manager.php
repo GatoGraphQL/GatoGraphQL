@@ -36,6 +36,13 @@ class GD_Template_SettingsProcessor_Manager {
 		}
 	}
 	
+	function get_pages_added_under_hierarchy($hierarchy) {
+	
+		// Needed by the ResourceLoader to print resourceloader-config.js
+		// "false" or "0" id pages are added to the configuration when that page has not been defined. Filter these out.
+		return array_filter(array_keys($this->sortedprocessors[$hierarchy]['by-page']));
+	}
+	
 	function get_processor_by_page($page_id, $hierarchy) {
 	
 		return $this->sortedprocessors[$hierarchy]['by-page'][$page_id];

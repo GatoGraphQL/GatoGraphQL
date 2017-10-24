@@ -371,6 +371,12 @@ class GD_Template_Processor_CustomPageSections extends GD_Template_Processor_Pag
 					'data-cookietarget' => '#'.GD_TEMPLATEID_PAGESECTIONGROUP_ID,
 					'data-cookieclass' => 'active-side',
 					'data-togglecookiebtn' => 'self',
+
+					// Comment Leo 17/10/2017: Changed 'initial' from 'notset' to 'toggle', so that it removes class 'active-side'
+					// if the user had closed the side menu (hence there will be a cookie 'dismissed')
+					// Needed after introducing class 'active-side' directly in pagesection-group through serverside-rendering,
+					// so that we can still keep the state of the open/close side navigation
+					'data-initial' => 'toggle',
 				);
 				break;
 		}

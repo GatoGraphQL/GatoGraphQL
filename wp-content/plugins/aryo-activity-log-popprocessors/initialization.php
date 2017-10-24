@@ -31,38 +31,43 @@ class AAL_PoPProcessors_Initialization {
 
 	function register_scripts() {
 
-		$folder = AAL_POPPROCESSORS_URI.'/js';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		// Moment.js library already loaded by PoP Core Processors
-		// if (PoP_Frontend_ServerUtils::use_minified_files()) {
+			$js_folder = AAL_POPPROCESSORS_URI.'/js';
+			$dist_js_folder = $js_folder.'/dist';
+			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_js_folder = $dist_js_folder.'/bundles';
 
-		// 	// CDN
-		// 	wp_register_script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js', array('jquery'), null);
-		// }
-		// else {
+			// Moment.js library already loaded by PoP Core Processors
+			// if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
 
-		// 	// Local files
-		// 	wp_register_script('moment', $cdn_js_folder . '/moment.2.10.6.min.js', array('jquery'), null);
-		// }
+			// 	// CDN
+			// 	wp_register_script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js', array('jquery'), null);
+			// }
+			// else {
 
-		if (PoP_Frontend_ServerUtils::use_minified_files()) {
-			
-			$folder .= '/dist';
-			wp_register_script('aal-popprocessors-templates', $folder . '/aryo-activity-log-popprocessors.templates.bundle.min.js', array(), AAL_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('aal-popprocessors-templates');
+			// 	// Local files
+			// 	wp_register_script('moment', $cdn_js_folder . '/moment.2.10.6.min.js', array('jquery'), null);
+			// }
 
-			wp_register_script('aal-popprocessors', $folder . '/aryo-activity-log-popprocessors.bundle.min.js', array('pop', 'jquery'), AAL_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('aal-popprocessors');
-		}
-		else {
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+				
+				wp_register_script('aal-popprocessors-templates', $bundles_js_folder . '/aryo-activity-log-popprocessors.templates.bundle.min.js', array(), AAL_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('aal-popprocessors-templates');
 
-			$folder .= '/libraries';
-			
-			wp_register_script('aal-popprocessors-notifications', $folder.'/notifications.js', array('jquery', 'pop'), AAL_POPPROCESSORS_VERSION, true);
-			wp_enqueue_script('aal-popprocessors-notifications');
+				wp_register_script('aal-popprocessors', $bundles_js_folder . '/aryo-activity-log-popprocessors.bundle.min.js', array('pop', 'jquery'), AAL_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('aal-popprocessors');
+			}
+			else {
 
-			/** Templates Sources */
-			$this->enqueue_templates_scripts();
+				wp_register_script('aal-popprocessors-notifications', $libraries_js_folder.'/notifications'.$suffix.'.js', array('jquery', 'pop'), AAL_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('aal-popprocessors-notifications');
+
+				/** Templates Sources */
+				$this->enqueue_templates_scripts();
+			}
 		}
 	}
 

@@ -40,12 +40,13 @@ class PoPTheme_Wassup_CategoryProcessors_Template_SettingsProcessor extends GD_T
 		return parent::get_checkpoints($hierarchy);
 	}
 
-	function get_page_blockgroups($hierarchy, $include_common = true) {
+	function get_page_blockgroups($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
 		// Page or Blocks inserted in Home
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$pageblockgroups = array(
 				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_CATEGORYPOSTS00 => GD_TEMPLATE_BLOCKGROUP_TABPANEL_CATEGORYPOSTS00,
@@ -89,6 +90,7 @@ class PoPTheme_Wassup_CategoryProcessors_Template_SettingsProcessor extends GD_T
 				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_MYCATEGORYWEBPOSTS08 => GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYCATEGORYWEBPOSTS08,
 				POPTHEME_WASSUP_CATEGORYPROCESSORS_PAGE_MYCATEGORYWEBPOSTS09 => GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYCATEGORYWEBPOSTS09,
 			);
+
 			foreach ($pageblockgroups as $page => $blockgroup) {
 				
 				// Also Default
@@ -163,11 +165,12 @@ class PoPTheme_Wassup_CategoryProcessors_Template_SettingsProcessor extends GD_T
 		return $ret;
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 
-		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		// if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE || $hierarchy == GD_SETTINGS_HIERARCHY_HOME) {
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			$default_format_section = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_SECTION);
 			$default_format_mycontent = PoPTheme_Wassup_Utils::get_defaultformat_by_screen(POP_SCREEN_MYCONTENT);

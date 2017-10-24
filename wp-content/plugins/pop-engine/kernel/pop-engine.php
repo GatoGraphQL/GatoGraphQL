@@ -21,7 +21,7 @@ define ('GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUPREPLICABLE', 'blockgroup-replicable'
 
 class PoP_Engine {
 
-	var $json, $atts;
+	var $resultsObject, $encoded_json, $atts;
 
 	function __construct() {
 
@@ -70,7 +70,7 @@ class PoP_Engine {
 		throw new Exception(sprintf('No toplevel template_id for this request (%s)', full_url()));
 	}
 
-	function send_etag_header($json) {
+	function send_etag_header() {
 
 		// Set the ETag-header? This is needed for the Service Workers
 		// Comment Leo 01/03/2017: it had been sent only for JSON requests, but also added for the first, loading_frame() request,
@@ -87,7 +87,7 @@ class PoP_Engine {
 				POP_CONSTANT_RAND,
 				POP_CONSTANT_TIME,
 			);
-			$commoncode = str_replace($differentiators, '', $json['json']);
+			$commoncode = str_replace($differentiators, '', $this->encoded_json/*$this->json['encoded-json']*/);
 
 			// Also replace all those tags with content that, even if it's different, should not alter the output
 			// Eg: comments-count. Because adding a comment does not delete the cache, then the comments-count is allowed
@@ -97,8 +97,10 @@ class PoP_Engine {
 			// "userpostactivity-count":1, (if there are more elements after)
 			// and
 			// "userpostactivity-count":1
-			$nocache_fields = $json['nocache-fields'];
-			$commoncode = preg_replace('/"('.implode('|', $nocache_fields).')":[0-9]+,?/', '', $commoncode);
+			// Comment Leo 22/10/2017: ?module=settings doesn't have 'nocache-fields'
+			if ($nocache_fields = $this->resultsObject['nocache-fields']) {
+				$commoncode = preg_replace('/"('.implode('|', $nocache_fields).')":[0-9]+,?/', '', $commoncode);
+			}
 
 			// Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
 			$commoncode = apply_filters('PoP_Engine:etag_header:commoncode', $commoncode);
@@ -151,18 +153,35 @@ class PoP_Engine {
 
 		$template_id = $this->get_toplevel_template_id();
 		$output_items = $this->get_output_items();
-		if (!($this->json = $this->get_json($template_id, $output_items))) {
+		if (!($this->resultsObject = $this->get_results_object($template_id, $output_items))) {
 
 			return;
 		}
 
+		// Do not send template-extra-sources from the sitemapping, it is not used in the front-end, only in the server
+		$json = $this->resultsObject['json'];
+
+		// Only will be there when fetching-json, not when fetching-json-data
+		if ($json['sitemapping']) {
+			unset($json['sitemapping']['template-extra-sources']);
+		}
+
+		// Save it for later use
+		if ($json) {
+			$this->encoded_json = json_encode($json);
+		}
+		else {
+			// JSON_FORCE_OBJECT is needed when printing the typeahead data (GD_DATALOAD_DATASTRUCTURE_RESULTS)
+			$this->encoded_json = json_encode(array(), JSON_FORCE_OBJECT);
+		}
+
 		// Send the ETag-header
-		$this->send_etag_header($this->json);
+		$this->send_etag_header();
 	}
 
 	function output() {
 		
-		if (!$this->json) {
+		if (!$this->resultsObject) {
 
 			return;
 		}
@@ -181,9 +200,9 @@ class PoP_Engine {
 		;
 		printf(
 			$output,
-			$this->json['cachedsettings'] ? "true" : "false",
+			$this->resultsObject['cachedsettings'] ? "true" : "false",
 			GD_TEMPLATEID_TOPLEVEL_SETTINGSID,
-			$this->json['json']
+			$this->encoded_json//$this->json['encoded-json']
 		);
 		// }
 
@@ -202,13 +221,13 @@ class PoP_Engine {
 		// Indicate that this is a json response in the HTTP Header
 		header('Content-type: application/json');
 		
-		if (!$this->json) {
+		if (!$this->resultsObject) {
 
 			return;
 		}
 
 		// Skip returning 'crawlable-data', no need for JSON request
-		echo $this->json['json'];
+		echo $this->encoded_json;//$this->json['encoded-json'];
 
 		// Allow extra functionalities. Eg: Save the logged-in user meta information
 		do_action('PoP_Engine:output_json:end');
@@ -259,25 +278,14 @@ class PoP_Engine {
 		return GD_TemplateManager_Utils::get_datastructure_formatter();
 	}
 
-	protected function get_json($template_id, $output_items) {
+	function get_atts($template_id) {
 
 		global $gd_template_processor_manager, $gd_template_cachemanager;
+
 		if (!($processor = $gd_template_processor_manager->get_processor($template_id))) {
 		
-			return;
+			return array();
 		}
-
-		$formatter = $this->get_datastructure_formatter();
-		$request = $_REQUEST;
-
-		// // If passing no setting items, then bring everything
-		// if (empty($output_items)) {
-
-		// 	$output_items = array(
-		// 		'settings',
-		// 		'data'
-		// 	);
-		// }
 
 		$initial_atts = array();
 		
@@ -299,6 +307,50 @@ class PoP_Engine {
 			$atts = $processor->init_atts($template_id, $initial_atts);
 		}
 
+		return $atts;
+	}
+
+	protected function get_results_object($template_id, $output_items) {
+
+		global $gd_template_processor_manager, $gd_template_cachemanager;
+		if (!($processor = $gd_template_processor_manager->get_processor($template_id))) {
+		
+			return;
+		}
+
+		$formatter = $this->get_datastructure_formatter();
+		$request = $_REQUEST;
+
+		// // If passing no setting items, then bring everything
+		// if (empty($output_items)) {
+
+		// 	$output_items = array(
+		// 		'settings',
+		// 		'data'
+		// 	);
+		// }
+
+		// $initial_atts = array();
+		
+		// // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
+		// // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
+		// // First check if there's a cache stored
+		// if (!doing_post() && PoP_ServerUtils::use_cache()) {
+			
+		// 	$atts = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_ATTS, true);
+
+		// 	// If there is no cached one, generate the atts and cache it
+		// 	if (!$atts) {
+
+		// 		$atts = $processor->init_atts($template_id, $initial_atts);
+		// 		$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_ATTS, $atts, true);
+		// 	}
+		// }
+		// else {
+		// 	$atts = $processor->init_atts($template_id, $initial_atts);
+		// }
+		$atts = $this->get_atts($template_id);
+
 		// Save it to be used by the children class
 		$this->atts = $atts;
 				
@@ -312,7 +364,10 @@ class PoP_Engine {
 			// First check if there's a cache stored
 			if (!doing_post() && PoP_ServerUtils::use_cache()) {
 				
-				$settings = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SETTINGS);
+				// Comment Leo 22/10/2017: instead of saving and operating with a String, work with the JSON object,
+				// so no need to decode it for the AutomatedEmails and others
+				// $settings = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SETTINGS);
+				$settings = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SETTINGS, true);
 
 				// If there is no cached one, generate the configuration and cache it
 				if ($settings) {
@@ -321,8 +376,12 @@ class PoP_Engine {
 				}
 				else {
 
-					$settings = json_encode($this->get_json_settings($template_id, $atts));
-					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings);
+					// Comment Leo 22/10/2017: instead of saving and operating with a String, work with the JSON object,
+					// so no need to decode it for the AutomatedEmails and others
+					// $settings = json_encode($this->get_json_settings($template_id, $atts));
+					// $gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings);
+					$settings = $this->get_json_settings($template_id, $atts);
+					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings, true);
 				}
 
 				$sitemapping = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SITEMAPPING, true);
@@ -334,7 +393,10 @@ class PoP_Engine {
 			}
 			else {
 
-				$settings = json_encode($this->get_json_settings($template_id, $atts));
+				// Comment Leo 22/10/2017: instead of saving and operating with a String, work with the JSON object,
+				// so no need to decode it for the AutomatedEmails and others
+				// $settings = json_encode($this->get_json_settings($template_id, $atts));
+				$settings = $this->get_json_settings($template_id, $atts);
 				$sitemapping = $this->get_json_sitemapping($template_id, $atts);
 			}
 
@@ -348,15 +410,15 @@ class PoP_Engine {
 			$data = $this->get_data($template_id, $processor, $atts, $formatter, $request);
 		}
 
-		$json = $formatter->get_formatted_data($settings, $runtimesettings, $sitemapping, $data);
+		$resultsObject = $formatter->get_formatted_data($settings, $runtimesettings, $sitemapping, $data);
 
 		// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
-		$json['cachedsettings'] = $cachedsettings;
+		$resultsObject['cachedsettings'] = $cachedsettings;
 
 		// Give the nocache-fields back also, to properly generate the ETag
-		$json['nocache-fields'] = $data['nocache-fields'];
+		$resultsObject['nocache-fields'] = $data['nocache-fields'];
 
-		return $json;
+		return $resultsObject;
 	}
 
 	protected function get_json_runtimesettings($template_id, $atts) {
@@ -574,7 +636,9 @@ class PoP_Engine {
 				$block_settings_id = $module_settings_id;
 				$block_data_settings = $module_data_settings;
 
-				if (($checkpoint_failed && $block_data_settings[GD_DATALOAD_VALIDATECHECKPOINTS]) || $block_data_settings[GD_DATALOAD_CONTENTLOADED] === false) {
+				// GD_DATALOAD_VALIDATECONTENTLOADED: Used so we can force to load content even if setting 'content-loaded'=false in the block
+				// Needed for using the Skeleton Screen, in which the skeleton comes from real data
+				if (($checkpoint_failed && $block_data_settings[GD_DATALOAD_VALIDATECHECKPOINTS]) || ($block_data_settings[GD_DATALOAD_VALIDATECONTENTLOADED] && $block_data_settings[GD_DATALOAD_CONTENTLOADED] === false)) {
 
 					$dataset_ids[$pagesection_settings_id][$block_settings_id] = array();
 					continue;
@@ -677,7 +741,7 @@ class PoP_Engine {
 				if ($block_checkpointvalidation_failed) {
 					$iohandler_atts['checkpointvalidation-failed'] = true;
 				}
-				if ($block_checkpointvalidation_failed || $block_data_settings[GD_DATALOAD_LOAD] === false || $block_data_settings[GD_DATALOAD_CONTENTLOADED] === false) {
+				if ($block_checkpointvalidation_failed || $block_data_settings[GD_DATALOAD_LOAD] === false || ($block_data_settings[GD_DATALOAD_VALIDATECONTENTLOADED] && $block_data_settings[GD_DATALOAD_CONTENTLOADED] === false)) {
 
 					$feedback = $iohandler->get_feedback($checkpoint, array(), $dataload_atts, $iohandler_atts, $executed, $block_atts);
 					$block_feedback[$pagesection_settings_id][$block_settings_id] = $feedback;

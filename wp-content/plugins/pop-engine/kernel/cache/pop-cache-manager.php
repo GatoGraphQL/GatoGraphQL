@@ -12,6 +12,7 @@ define ('POP_CACHETYPE_DATASETTINGS', 'data-settings');
 define ('POP_CACHETYPE_ATTS', 'atts');
 define ('POP_CACHETYPE_CRAWLABLEITEMS', 'crawlable-items');
 define ('POP_CACHETYPE_SITEMAPPING', 'sitemapping');
+define ('POP_CACHETYPE_RESOURCES', 'resources');
 
 class GD_Template_CacheManager {
 

@@ -6,10 +6,10 @@
 .dynamic-height-wrap {
   overflow: hidden;
   position: relative;
-  -webkit-transition: max-height 0.25s ease-in-out;
-  -moz-transition: max-height 0.25s ease-in-out;
-  -o-transition: max-height 0.25s ease-in-out;
-  transition: max-height 0.25s ease-in-out;
+  -webkit-transition: max-height 0.5s ease-in-out;
+  -moz-transition: max-height 0.5s ease-in-out;
+  -o-transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.5s ease-in-out;
   width: 100%;
 }
 

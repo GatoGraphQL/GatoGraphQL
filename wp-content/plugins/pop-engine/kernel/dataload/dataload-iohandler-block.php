@@ -66,7 +66,6 @@ class GD_DataLoad_BlockIOHandler extends GD_DataLoad_IOHandler {
 		// }
 
 		// Hide Block?
-		// $ret[GD_URLPARAM_HIDEBLOCK] = false;
 		$ret[GD_URLPARAM_HIDEBLOCK] = empty($dataset) && $iohandler_atts[GD_URLPARAM_HIDDENIFEMPTY];
 
 		// validate-checkpoints

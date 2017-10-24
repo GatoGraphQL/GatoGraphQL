@@ -32,7 +32,7 @@ popControls = {
 			var control = $(this);
 			var url = t.getBlockFilteringUrl(domain, pageSection, control, true);
 			url = popManager.getPrintUrl(url);
-			popSystem.openPrint(url);
+			popLinks.openPrint(url);
 		});
 	},
 	controlSocialMedia : function(args) {
@@ -53,7 +53,7 @@ popControls = {
 			var settings = M.SOCIALMEDIA[provider];
 			var shareUrl = settings['share-url'].replace(new RegExp('%url%', 'g'), encodeURIComponent(url)).replace(new RegExp('%title%', 'g'), encodeURIComponent(title));
 
-			popSystem.openSocialMedia(shareUrl);
+			popLinks.openSocialMedia(shareUrl);
 		});
 	},
 	

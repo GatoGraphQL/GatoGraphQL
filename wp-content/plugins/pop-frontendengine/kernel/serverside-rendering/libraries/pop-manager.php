@@ -352,13 +352,14 @@ class PoP_ServerSide_Manager {
 	// 	return mempage[pssId][targetId];
 	// }
 
-	// ------------------------------------------------------
-	// Comment Leo: Not needed in PHP => Commented out
-	// ------------------------------------------------------
-	// function isFirstLoad($pageSection) {
+	function isFirstLoad($pageSection) {
 		
-	// 	return $this->firstLoad[popManager.getSettingsId(pageSection)];
-	// }
+		// ------------------------------------------------------
+		// Comment Leo: rendering html in server-side is always firstLoad
+		// ------------------------------------------------------
+		// return $this->$firstLoad[$popManager->getSettingsId($pageSection)];
+		return true;
+	}
 
 	// ------------------------------------------------------
 	// Comment Leo: Heavily commented in PHP
@@ -522,6 +523,9 @@ class PoP_ServerSide_Manager {
 					$context['settings-ids']['blockunits'] = $context[GD_JS_SETTINGSIDS][GD_JS_BLOCKUNITS];
 				}
 			}
+			if ($context[GD_JS_TEMPLATESOURCES]) {
+				$context['template-sources'] = $context[GD_JS_TEMPLATESOURCES];
+			}
 			if ($context[GD_JS_INTERCEPT]) {
 				$context['intercept'] = $context[GD_JS_INTERCEPT];
 			}
@@ -604,7 +608,14 @@ class PoP_ServerSide_Manager {
 	function addPageSectionIds($domain, $pageSection, $template) {
 
 		$pssId = $this->getSettingsId($pageSection);
+
+		// Comment Leo 19/10/2017: obviously we can't get the $psId from its HTML attr, so just get it from the corresponding processor
+		// We need to provide the proper $atts, however just to get the pageSection id it works without $atts too, so just pass array()
+		// (this is hacky, but well, it works)
 		// $psId = pageSection.attr('id');
+		global $gd_template_processor_manager;
+		$atts = array();
+		$psId = $gd_template_processor_manager->get_processor($template)->get_id($template, $atts);
 
 		// Insert into the Runtime to generate the ID
 		$popJSRuntimeManager = PoP_ServerSide_Libraries_Factory::get_jsruntime_instance();
@@ -3266,21 +3277,35 @@ class PoP_ServerSide_Manager {
 	function replaceFromItemObject($domain, $pssId, $bsId, $template, $itemObject, &$override, $strReplace) {
 	
 		$feedback = $this->getTopLevelFeedback($domain);
-		$targetConfiguration = $this->getTargetConfiguration($domain, $pssId, $bsId, $template);
-		foreach($strReplace as $replace) {	
+		$targetConfiguration = $this->getTargetConfiguration($domain, $pssId, $bsId, $template);			
+		// ------------------------------------------------------
+		// Comment Leo: Added in PHP => 
+		// Because in JS it works by reference, the runtimeConfiguration, was already in enterModule
+		// But because PHP passes values by copy, then we need to add the runtimeConfiguration again
+		// This is needed so that https://www.mesym.com/en/change-pic/ loads the pic of the user immediately,
+		// when doing serverside-rendering
+		// ------------------------------------------------------
+		$targetConfiguration = array_merge(
+			$targetConfiguration,
+			$this->getRuntimeConfiguration($domain, $pssId, $bsId, $template)
+		);
+		// ------------------------------------------------------
+
+		foreach ($strReplace as $replace) {	
 
 			$replaceWhereField = $replace['replace-where-field'];
 			$replaceWherePath = $replace['replace-where-path'];
 			$replaceFromField = $replace['replace-from-field'] ?? $replaceWhereField;
 			$replacements = $replace['replacements'];
 			$replaceFrom = $targetConfiguration[$replaceFromField];
-			foreach($replacements as $replacement) {
+			foreach ($replacements as $replacement) {
 
 				$replaceStr = $replacement['replace-str'];
 
 				// Item Object / Single Item Object (eg: as loaded in Edit Project page)
 				// If the block is lazy, then there won't be a singleItemObject, then do nothing
-				if ($itemObject) {				
+				if ($itemObject) {	
+
 					$replaceWithField = $replacement['replace-with-field'];
 					if ($replaceWithField && $replaceStr != $itemObject[$replaceWithField]) {
 						

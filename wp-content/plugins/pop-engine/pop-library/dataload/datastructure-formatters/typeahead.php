@@ -18,16 +18,14 @@ class GD_DataLoad_DataStructureFormatter_Results extends GD_DataLoad_DataStructu
 	function get_formatted_data($settings, $runtimesettings, $sitemapping, $data) {
 	
 		$dbcontent = array_values($data['database']);
-		// $dbcontent = array_merge(
-		// 	array_values($data['database']),
-		// 	array_values($data['userdatabase'])
-		// );
 
 		if ($dbcontent && $dbcontent[0]) {
-			$json = json_encode($dbcontent[0]);
+			// $json = json_encode($dbcontent[0]);
+			$json = $dbcontent[0];
 		}
 		else {
-			$json = json_encode(array(), JSON_FORCE_OBJECT);
+			// $json = json_encode(array(), JSON_FORCE_OBJECT);
+			$json = array();
 		}
 		return array('json' => $json);
 	}

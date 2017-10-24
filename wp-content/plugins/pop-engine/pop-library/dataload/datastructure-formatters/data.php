@@ -14,10 +14,11 @@ class GD_DataLoad_DataStructureFormatter_Data extends GD_DataLoad_DataStructureF
 		return GD_DATALOAD_DATASTRUCTURE_DATA;
 	}
 	
-	// Return only the settings
+	// Return only the data
 	function get_formatted_data($settings, $runtimesettings, $sitemapping, $data) {
 	
-		return array('json' => json_encode($data));
+		// return array('json' => json_encode($data));
+		return array('json' => $data);
 	}
 
 }

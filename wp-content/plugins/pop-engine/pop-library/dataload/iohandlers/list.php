@@ -129,9 +129,6 @@ class GD_DataLoad_IOHandler_List extends GD_DataLoad_IOHandler_Query {
 			$ret['msgs'] = $msgs;
 			$ret['show-msgs'] = $show_msgs;
 		}
-		
-		// // Hide Block?
-		// $ret[GD_URLPARAM_HIDEBLOCK] = empty($dataset) && $iohandler_atts[GD_URLPARAM_HIDDENIFEMPTY];
 
 		// stop-fetching is loaded twice: in the params and in the feedback. This is because we can't access the params from the .tmpl files
 		// (the params object is created only when initializing JS => after rendering the html with Handlebars so it's not available by then)

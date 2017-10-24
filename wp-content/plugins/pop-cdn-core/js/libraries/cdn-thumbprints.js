@@ -21,7 +21,11 @@ popCDNThumbprints = {
     var t = this;
 
     // Just making sure the .js file containing popCDNConfig was generated ok. If not, fail gracefully
-    if (!popCDNConfig) return [];
+    if (!popCDNConfig) {
+      
+      console.log('There is no popCDNConfig object, no thumbprints returned');
+      return [];
+    }
     
     var thumbprints = [];
     $.each(popCDNConfig.thumbprints, function(index, thumbprint) {

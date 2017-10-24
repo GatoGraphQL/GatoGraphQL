@@ -21,6 +21,21 @@ class PoPEngine_Installation {
 		// }
 	}
 
+	function system_generate() {
+
+		do_action('PoP:system-generate');
+	}
+
+	function system_generate_theme() {
+
+		do_action('PoP:system-generate:theme');
+	}
+
+	function system_activateplugins() {
+
+		do_action('PoP:system-activateplugins');
+	}
+
 	function system_install() {
 
 		// Save the new version on the DB

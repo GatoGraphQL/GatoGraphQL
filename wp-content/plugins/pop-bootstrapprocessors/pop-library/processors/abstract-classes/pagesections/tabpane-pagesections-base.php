@@ -20,11 +20,6 @@ class GD_Template_Processor_TabPanePageSectionsBase extends GD_Template_Processo
 
 		return array();
 	}
-	// function get_permanent_templates($template_id) {
-
-	// 	// Allow the Sideinfo to have a permanent Events Calendar
-	// 	return array();
-	// }
 
 	function get_template_configuration($template_id, $atts) {
 
@@ -36,7 +31,6 @@ class GD_Template_Processor_TabPanePageSectionsBase extends GD_Template_Processo
 		if ($header_titles = $this->get_header_titles($template_id)) {
 			$ret[GD_JS_TITLES/*'titles'*/]['headers'] = $header_titles;
 		}
-		// $ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['permanent'] = $this->get_permanent_templates($template_id);		
 
 		return $ret;
 	}
@@ -56,6 +50,13 @@ class GD_Template_Processor_TabPanePageSectionsBase extends GD_Template_Processo
 		$this->merge_att($template_id, $atts, 'params', array(
 			'data-paramsscope' => GD_SETTINGS_PARAMSSCOPE_URL
 		));
+
+		// If doing Server-side rendering, then already add "active" to the tabPane, to not depend on javascript
+		// (Otherwise, the page will look empty!)
+		if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+			$this->append_att($template_id, $atts, 'class', 'active');
+		}
+
 
 		return $atts;
 	}

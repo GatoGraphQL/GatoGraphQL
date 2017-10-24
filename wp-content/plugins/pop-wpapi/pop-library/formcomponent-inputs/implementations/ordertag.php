@@ -25,7 +25,7 @@ class GD_FormInput_OrderTag extends GD_FormInput_Order {
 		return $values;
 	}
 
-	function get_default_value(/*$conf*/) {
+	function get_default_value(/*$conf*/$output=false) {
 
 		return 'count|DESC';
 	}

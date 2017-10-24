@@ -23,7 +23,7 @@ class GD_FormInput_UnmoderatedStatusDescription extends GD_FormInput_Select {
 		return $values;
 	}	
 	
-	function get_default_value() {
+	function get_default_value($output=false) {
 	
 		return array('draft');
 	}		

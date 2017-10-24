@@ -10,7 +10,7 @@ define ('GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT', PoP_ServerUtils::get_template
 define ('GD_TEMPLATE_BLOCK_TAG_CONTENT', PoP_ServerUtils::get_template_definition('block-tag-content'));
 define ('GD_TEMPLATE_BLOCK_SINGLE_CONTENT', PoP_ServerUtils::get_template_definition('block-single-content'));
 define ('GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT', PoP_ServerUtils::get_template_definition('block-singleinteraction-content'));
-define ('GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT', PoP_ServerUtils::get_template_definition('block-singleabout-content'));
+define ('GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT', PoP_ServerUtils::get_template_definition('block-pageabout-content'));
 define ('GD_TEMPLATE_BLOCK_POSTHEADER', PoP_ServerUtils::get_template_definition('block-postheader'));
 define ('GD_TEMPLATE_BLOCK_USERHEADER', PoP_ServerUtils::get_template_definition('block-userheader'));
 
@@ -24,7 +24,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 			GD_TEMPLATE_BLOCK_TAG_CONTENT,
 			GD_TEMPLATE_BLOCK_SINGLE_CONTENT,
 			GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT,
-			GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT,
+			GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT,
 			GD_TEMPLATE_BLOCK_POSTHEADER,
 			GD_TEMPLATE_BLOCK_USERHEADER,
 		);
@@ -65,7 +65,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 			// 	return GD_Template_Processor_CustomSectionBlocksUtils::get_tag_title(true, false);
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
-			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+			case GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT:
 
 				$post = $vars['global-state']['post']/*global $post*/;
 				return get_the_title($post->ID);
@@ -87,7 +87,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 			switch ($template_id) {
 
-				case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+				case GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT:
 
 					return GD_TEMPLATE_CONTROLGROUP_SHARE;
 			}
@@ -146,11 +146,11 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 
 				// Add the Sidebar on the top
-				$post_type = get_post_type();
-				$cat = gd_get_the_main_category();
+				$post = $vars['global-state']['post'];
+				$post_type = get_post_type($post->ID);
+				$cat = gd_get_the_main_category($post->ID);
 				if ($post_type == EM_POST_TYPE_EVENT) {
-
-					$ret[] = gd_em_single_event_is_future() ? GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT : GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT;
+					$ret[] = gd_em_single_event_is_future($post->ID) ? GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT : GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT;
 				}
 				elseif ($post_type == 'post') {
 
@@ -182,7 +182,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				$ret[] = GD_TEMPLATE_CONTENT_USERPOSTINTERACTION;
 				break;
 
-			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+			case GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT:
 
 				$ret[] = GD_TEMPLATE_CONTENT_SINGLE;
 				break;
@@ -211,7 +211,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				$this->append_att($template_id, $atts, 'class', 'block-tag-content');
 				break;
 
-			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+			case GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT:
 
 				$this->append_att($template_id, $atts, 'class', 'block-singleabout-content');
 				$inners = $this->get_block_inner_templates($template_id);
@@ -245,7 +245,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 		switch ($template_id) {
 
-			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+			case GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT:
 
 				$ret['blocksection-inners'] = 'row row-item';
 				break;
@@ -282,7 +282,7 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 				$page_id = $gd_template_settingsmanager->get_block_page($template_id, GD_SETTINGS_HIERARCHY_SINGLE);
 				return GD_TemplateManager_Utils::add_tab($url, $page_id);
 
-			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+			case GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT:
 
 				// Needed to be able to Share the page (eg: Share on Twitter on https://getpop.org/en/documentation/modularity/)
 				$post = $vars['global-state']['post']/*global $post*/;
@@ -291,6 +291,29 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 	
 		return parent::get_dataload_source($template_id, $atts);
 	}
+
+	protected function get_block_hierarchy($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_AUTHOR_CONTENT:
+			case GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT:
+				
+				return GD_SETTINGS_HIERARCHY_AUTHOR;
+
+			case GD_TEMPLATE_BLOCK_TAG_CONTENT:
+				
+				return GD_SETTINGS_HIERARCHY_TAG;
+
+			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
+			case GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT:
+
+				return GD_SETTINGS_HIERARCHY_SINGLE;
+		}
+		
+		return parent::get_block_hierarchy($template_id);
+	}
+
 
 	function get_dataloader($template_id) {
 
@@ -307,10 +330,12 @@ class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_Bl
 
 			case GD_TEMPLATE_BLOCK_SINGLE_CONTENT:
 			case GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT:
-			case GD_TEMPLATE_BLOCK_SINGLEABOUT_CONTENT:
+			case GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT:
 
 				// Decide on the dataloader based on the post_type of the single element
-				$post_type = get_post_type();
+				$vars = GD_TemplateManager_Utils::get_vars();
+				$post = $vars['global-state']['post']/*global $post*/;
+				$post_type = get_post_type($post->ID);
 
 				if ($post_type == EM_POST_TYPE_EVENT) {
 					return GD_DATALOADER_EVENTSINGLE;

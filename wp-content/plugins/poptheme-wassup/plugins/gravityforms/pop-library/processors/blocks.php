@@ -248,17 +248,20 @@ class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 
 	protected function get_block_page($template_id) {
 
-		global $gd_template_settingsmanager;
+	// // 	global $gd_template_settingsmanager;
+	// 	global $gd_template_processor_manager;
 		
 		switch ($template_id) {
 
 			case GD_TEMPLATE_BLOCKCODE_NEWSLETTER:
 
-				if ($page = $gd_template_settingsmanager->get_block_page(GD_TEMPLATE_BLOCK_NEWSLETTER)) {
+				// // if ($page = $gd_template_settingsmanager->get_block_page(GD_TEMPLATE_BLOCK_NEWSLETTER)) {
 
-					return $page;
-				}
-				break;			
+				// // 	return $page;
+				// // }
+				// // break;
+				// return $gd_template_processor_manager->get_processor(GD_TEMPLATE_BLOCK_NEWSLETTER)->get_block_page(GD_TEMPLATE_BLOCK_NEWSLETTER);
+				return $this->get_block_page(GD_TEMPLATE_BLOCK_NEWSLETTER);
 		}
 	
 		return parent::get_block_page($template_id);

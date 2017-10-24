@@ -9,6 +9,52 @@ define ('POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN', 'wassuputils-scrollablemain');
 
 class PoPTheme_Wassup_Utils {
 
+	// Return all the classes to make the pageSections active inside the pageSectionGroup
+	// Needed to display the html immediately when doing serverside-rendering, so no need to wait
+	// for javascript to execute to have content visible
+	public static function get_pagesectiongroup_active_pagesection_classes($active_classes = array()) {
+
+		if (PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+			
+			$engine = PoP_Engine_Factory::get_instance();
+			// $json = json_decode($engine->json['json'], true);
+			// $json = json_decode($engine->json['encoded-json'], true);
+			$json = $engine->resultsObject['json'];
+			$configuration = $json['settings']['configuration'];
+			$possiblyOpenPageSections = array(
+				GD_TEMPLATEID_PAGESECTIONSETTINGSID_MAIN,
+				GD_TEMPLATEID_PAGESECTIONSETTINGSID_SIDEINFO,
+				GD_TEMPLATE_PAGESECTION_HOVER,
+			);
+			foreach ($possiblyOpenPageSections as $possiblyOpenPageSection) {
+
+				$pageSectionBlocks = array_flatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_BLOCKSETTINGSIDS]));
+				if ($pageSectionBlocks) {
+
+					// If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
+					if ($possiblyOpenPageSection == GD_TEMPLATEID_PAGESECTIONSETTINGSID_SIDEINFO) {
+
+						global $gd_template_processor_manager;
+						$emptyblock_settings_id = $gd_template_processor_manager->get_processor(GD_TEMPLATE_BLOCK_EMPTYSIDEINFO)->get_settings_id(GD_TEMPLATE_BLOCK_EMPTYSIDEINFO);
+						if (in_array($emptyblock_settings_id, $pageSectionBlocks)) {
+
+							continue;
+						}
+					}
+					$active_classes[] = 'active-'.$possiblyOpenPageSection;
+				}
+			}
+		}
+
+		// Hook: allow Verticals to remove 'active-side' class
+		$active_classes = apply_filters(
+			'PoPTheme_Wassup_Utils:pagesectiongroup:active_pagesection_classes',
+			$active_classes
+		);
+
+		return $active_classes;
+	}
+
 	public static function get_defaultformat_by_screen($screen) {
 
 		$format = '';

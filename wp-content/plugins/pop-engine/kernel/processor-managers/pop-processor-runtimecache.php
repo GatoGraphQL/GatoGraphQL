@@ -7,23 +7,41 @@
 
 class GD_Template_ProcessorRuntimeCache {
 
-	var $cache;
+	var $cache, $use_vars_identifier;
 	function __construct() {
 
 		$this->cache = array();
+
+		// No need by default
+		$this->use_vars_identifier = false;
 	}
 
-	// protected function get_pagesection($pagesection) {
+	function setUseVarsIdentifier($use_vars_identifier) {
 
-	// 	if (!$pagesection) {
+		$this->use_vars_identifier = $use_vars_identifier;
+	}
 
-	// 		return 'general';
-	// 	}
+	function get_requestinstance_id() {
 
-	// 	return $pagesection;
-	// }
+		// Comment Leo 18/09/2017: Since we need to pretend we are in other pages, to obtain their list of resources,
+		// we need to incorporate all the $vars values into the cache
+		if ($this->use_vars_identifier) {
+
+			return PoP_VarsUtils::get_vars_identifier();
+		}
+
+		return 'general';
+	}
+
+	function delete_cache() {
+
+		unset($this->cache[$this->get_requestinstance_id()]);
+	}
 
 	function is_cached($pagesection, $module, $template_id, $method) {
+
+		// // Check that it is enabled. If not, always return false
+		// if ($this->enabled) {
 
 		if (!$pagesection) {
 
@@ -31,25 +49,23 @@ class GD_Template_ProcessorRuntimeCache {
 			throw new Exception(sprintf('Error Processing Request: pagesection empty (%s)', full_url()));
 		}
 
-		// $pagesection = $this->get_pagesection($pagesection);
-		if (isset($this->cache[$pagesection][$module][$template_id][$method])) {
+		if (isset($this->cache[$this->get_requestinstance_id()][$pagesection][$module][$template_id][$method])) {
 
 			return true;
 		}
+		// }
 
 		return false;
 	}
 
 	function get_cache($pagesection, $module, $template_id, $method) {
 
-		// $pagesection = $this->get_pagesection($pagesection);
-		return $this->cache[$pagesection][$module][$template_id][$method];
+		return $this->cache[$this->get_requestinstance_id()][$pagesection][$module][$template_id][$method];
 	}
 
 	function add_cache($pagesection, $module, $template_id, $method, $cache) {
 
-		// $pagesection = $this->get_pagesection($pagesection);
-		$this->cache[$pagesection][$module][$template_id][$method] = $cache;
+		$this->cache[$this->get_requestinstance_id()][$pagesection][$module][$template_id][$method] = $cache;
 	}
 }
 

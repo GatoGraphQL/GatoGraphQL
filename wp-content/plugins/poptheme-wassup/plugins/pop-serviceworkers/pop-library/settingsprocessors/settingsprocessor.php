@@ -31,7 +31,19 @@ class PoPTheme_Wassup_PoPSW_Template_SettingsProcessor extends GD_Template_Setti
 		return parent::is_appshell($hierarchy);
 	}
 
-	function get_page_blocks($hierarchy, $include_common = true) {
+	function is_for_internal_use($hierarchy) {
+
+		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
+
+			return array(
+				POP_SERVICEWORKERS_PAGE_APPSHELL => true,
+			);
+		}
+
+		return parent::is_for_internal_use($hierarchy);
+	}
+
+	function get_page_blocks($hierarchy/*, $include_common = true*/) {
 
 		$ret = array();
 

@@ -12,7 +12,7 @@ class PoP_CategoryProcessors_FE_Hooks {
 
     function add_css_files($files) {
 
-        $files[] = POPTHEME_WASSUP_CATEGORYPROCESSORS_DIR.'/css/dist/poptheme-wassup-categoryprocessors.bundle.min.css';
+        $files[] = POPTHEME_WASSUP_CATEGORYPROCESSORS_DIR.'/css/dist/bundles/poptheme-wassup-categoryprocessors.bundle.min.css';
     	return $files;
     }
 }

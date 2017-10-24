@@ -375,12 +375,12 @@ popWaypoints = {
 	// 				if (direction == 'up') {
 						
 	// 					// Disable the show/hide topnav, keep it always open
-	// 					popPageSectionManager.disableShowHideTopNav();
+	// 					popCustomPageSectionManager.disableShowHideTopNav();
 	// 				}
 	// 				else if (direction == 'down') {
 
 	// 					// When entering the FullView content feed, enable the show/hide topnav
-	// 					popPageSectionManager.enableShowHideTopNav();
+	// 					popCustomPageSectionManager.enableShowHideTopNav();
 	// 				}
 	// 			}, opts);
 	// 		});
@@ -498,8 +498,6 @@ popWaypoints = {
 	// executeHistoryState : function(pageSection, waypoint, options) {
 	
 	// 	var t = this;
-		
-	// 	// console.log(pageSection, waypoint);
 		
 	// 	// popManager.historyReplaceState(pageSection, waypoint, options);
 	// 	popManager.historyReplaceState(waypoint, options);

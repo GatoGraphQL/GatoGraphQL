@@ -1,5 +1,5 @@
 <?php
- function lcr598a1bc3dff78hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr59cd19d000195hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -39,10 +39,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr598a1bc3dff78m($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr59cd19d000195m($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr598a1bc3dff78m($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr59cd19d000195m($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -71,18 +71,18 @@
    };
   }
 
-  return lcr598a1bc3dff78exch($cx, $ch, $vars, $options);
+  return lcr59cd19d000195exch($cx, $ch, $vars, $options);
  }
 
- function lcr598a1bc3dff78encq($cx, $var) {
+ function lcr59cd19d000195encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr598a1bc3dff78raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19d000195raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr598a1bc3dff78m($cx, $a, $b) {
+ function lcr59cd19d000195m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -97,7 +97,7 @@
   return $a;
  }
 
- function lcr598a1bc3dff78exch($cx, $ch, $vars, &$options) {
+ function lcr59cd19d000195exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -110,13 +110,13 @@
   }
 
   if($e !== null) {
-   lcr598a1bc3dff78err($cx, $e);
+   lcr59cd19d000195err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr598a1bc3dff78raw($cx, $v, $ex = 0) {
+ function lcr59cd19d000195raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -140,7 +140,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr598a1bc3dff78raw($cx, $vv);
+      $ret[] = lcr59cd19d000195raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -152,7 +152,7 @@
   return "$v";
  }
 
- function lcr598a1bc3dff78err($cx, $err) {
+ function lcr59cd19d000195err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -267,12 +267,12 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<div ',lcr598a1bc3dff78hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr598a1bc3dff78encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' class="',lcr598a1bc3dff78encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['wrapper'])) ? $in['classes']['wrapper'] : null)),'">
+    ob_start();echo '<div ',lcr59cd19d000195hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr59cd19d000195encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' class="',lcr59cd19d000195encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['wrapper'])) ? $in['classes']['wrapper'] : null)),'">
 	<div class="input-group">
-		<span class="input-group-addon"><img src="',lcr598a1bc3dff78encq($cx, (($inary && isset($in['captcha-imgsrc'])) ? $in['captcha-imgsrc'] : null)),'"></span>
-		<input type="text" name="',lcr598a1bc3dff78encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-input" class="',lcr598a1bc3dff78encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),' ',lcr598a1bc3dff78encq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' form-control" style="',lcr598a1bc3dff78encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" placeholder="',lcr598a1bc3dff78encq($cx, (($inary && isset($in['placeholder'])) ? $in['placeholder'] : null)),'">
+		<span class="input-group-addon"><img src="',lcr59cd19d000195encq($cx, (($inary && isset($in['captcha-imgsrc'])) ? $in['captcha-imgsrc'] : null)),'"></span>
+		<input type="text" name="',lcr59cd19d000195encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-input" class="',lcr59cd19d000195encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),' ',lcr59cd19d000195encq($cx, (($inary && isset($in['input-class'])) ? $in['input-class'] : null)),' form-control" style="',lcr59cd19d000195encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" placeholder="',lcr59cd19d000195encq($cx, (($inary && isset($in['placeholder'])) ? $in['placeholder'] : null)),'">
 	</div>
-	<input type="hidden" name="',lcr598a1bc3dff78encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-session" value="',lcr598a1bc3dff78encq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['session'])) ? $in['value']['session'] : null)),'">
+	<input type="hidden" name="',lcr59cd19d000195encq($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'-session" value="',lcr59cd19d000195encq($cx, ((isset($in['value']) && is_array($in['value']) && isset($in['value']['session'])) ? $in['value']['session'] : null)),'">
 </div>';return ob_get_clean();
 };
 ?>

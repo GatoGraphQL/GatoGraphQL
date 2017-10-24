@@ -220,8 +220,8 @@ popFullCalendar = {
 			// if (lastPromise) {
 			// 	lastPromise.done(function() {
 
-					// Create fullCalendar elements
-					t.execFullCalendar(domain, pageSection, block, calendar, state, options);
+			// Create fullCalendar elements
+			t.execFullCalendar(domain, pageSection, block, calendar, state, options);
 			// 	});
 			// }
 			// else {
@@ -470,17 +470,6 @@ popFullCalendarControls = {
 		}
 
 		t.setCalendarBlockParams(pageSection, block, date);
-
-		// Same for the subscribers
-		// var subscribedBlocksData = popManager.getAggregatorSubscribedBlocksData(pageSection, block);
-		// if (subscribedBlocksData) {
-
-		// 	$.each(subscribedBlocksData, function(index, subscribedBlockData) {
-
-		// 		var subscribedTemplateBlock = $('#'+subscribedBlockData['id']);
-		// 		t.setCalendarBlockParams(pageSection, subscribedTemplateBlock, date);
-		// 	});
-		// }
 		
 		// Delete previous "No Events found" messages
 		popManager.closeMessageFeedback(block);
