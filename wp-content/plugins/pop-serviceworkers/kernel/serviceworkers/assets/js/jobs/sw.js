@@ -257,13 +257,40 @@ self.addEventListener('fetch', event => {
 
     var resourceType = getResourceType(request);
 
-    // Special case: when accessing the root website (https://getpop.org), there is a redirection, then we get an exception in Firefox:
+    // Special case: when there is a redirection, then we get an exception in Firefox:
     // Corrupted Content Error
     // The site at https://getpop.org/ has experienced a network protocol violation that cannot be repaired.
     // The page you are trying to view cannot be shown because an error in the data transmission was detected.
     //     Please contact the website owners to inform them of this problem.
-    if (resourceType === 'html' && (request.url == opts.contentCDN.domains.original || request.url == opts.contentCDN.domains.original+'/')) {
-      request = new Request(opts.locales.domain);
+    // Doing the adviced solution (adding redirect:'follow' whenever doing a fetch) doesn't work, so we must implement this workaround
+    // Only needed for html, since for JSON there will never be a link pointing to a not-final URL
+    if (resourceType === 'html') {
+
+      // When accessing https://getpop.org or https://getpop.org/ instead of https://getpop.org/en/
+      // Or accessing https://getpop.org/en instead of https://getpop.org/en/
+      if (request.url == opts.contentCDN.domains.original || request.url == opts.contentCDN.domains.original+'/' || request.url == opts.contentCDN.domains.original+'/'+opts.locales.current) {
+        request = new Request(opts.locales.domain);
+      }
+      else {
+
+        // When accessing https://getpop.org/u/leo/ instead of https://getpop.org/en/u/leo/
+        if (request.url.substr(0, opts.locales.domain.length) != opts.locales.domain) {
+          request = new Request(opts.locales.domain+request.url.substr((opts.contentCDN.domains.original+'/').length));
+        }
+
+        // When accessing https://getpop.org/en/u/leo instead of https://getpop.org/en/u/leo/
+        // Or accessing https://getpop.org/en/u/leo?tab=main instead of https://getpop.org/en/u/leo/?tab=main
+        // Or accessing https://getpop.org/en/u/leo#wuriwurie instead of https://getpop.org/en/u/leo/#wuriwurie
+        if (request.url.indexOf('?') == -1 && request.url.indexOf('#') == -1 && request.url.substr(-1) != '/') {
+          request = new Request(request.url+'/');
+        }
+        else if (request.url.indexOf('?') != -1 && request.url.indexOf('/?') == -1) {
+          request = new Request(request.url.replace('?', '/?'));
+        }
+        else if (request.url.indexOf('?') == -1 && request.url.indexOf('#') != -1 && request.url.indexOf('/#') == -1) {
+          request = new Request(request.url.replace('#', '/#'));
+        }
+      }
     }
 
 
