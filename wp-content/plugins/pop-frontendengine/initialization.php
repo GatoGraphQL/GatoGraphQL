@@ -3,8 +3,6 @@
 define ('POP_HOOK_POPFRONTEND_BACKGROUNDLOAD', 'popfrontend-backgroundload');
 define ('POP_HOOK_POPFRONTEND_KEEPOPENTABS', 'popfrontend-keepopentabs');
 
-
-
 class PoPFrontend_Initialization {
 
 	protected $scripts;
@@ -345,8 +343,8 @@ class PoPFrontend_Initialization {
 		// At the end, execute the code initializing everything
 		// Add it inside document.ready(), so that the "loading spinner" on the browser tab has already finished,
 		// giving the impression to the user that the page has already loaded, improving the speed perception
-		$this->scripts[] = 'jQuery(document).ready( function($) { popManager.init(); });';
-		// $this->scripts[] = 'popManager.init();';
+		// $this->scripts[] = 'jQuery(document).ready( function($) { popManager.init(); });';
+		$this->scripts[] = 'popManager.init();';
 
 		// // Print all the scripts
 		// if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {

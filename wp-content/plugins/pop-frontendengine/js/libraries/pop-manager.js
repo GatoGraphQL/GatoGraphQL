@@ -2087,125 +2087,6 @@ popManager = {
 		}));
 	},
 
-	// executeFetchPageSection : function(domain, pageSection, url, params, fetchUrl, postData, target, localStorageKey, options) {
-
-	// 	var t = this;
-
-	// 	var status = popPageSectionManager.getPageSectionStatus(pageSection);
-	// 	var error = status.find('.pop-error');
-
-	// 	// Show the Disabled Layer over a block?
-	// 	if (options['disable-layer']) {
-	// 		options['disable-layer'].children('.pop-disabledlayer').removeClass('hidden');
-	// 	}
-
-	// 	var crossdomain = t.getCrossDomainOptions(fetchUrl);
-
-	// 	$.ajax($.extend(crossdomain, {
-	// 		dataType: "json",
-	// 		url: fetchUrl,
-	// 		data: postData,
-	// 		beforeSend: function(jqXHR, settings) {
-
-	// 			// Addition of the URL to retrieve local information back when it comes back
-	// 			// http://stackoverflow.com/questions/11467201/jquery-statuscode-404-how-to-get-jqxhr-url
-	// 			// Comment Leo 25/12/2016: set the original url (which might include a hashtag, as in /add-post/#1482655583982)
-	// 			// and not the settings.url, which is the actual URL we're sending to. This way, we can $.ajax concurrently to the same URL
-	// 			// twice, since they had different hashtags (as in when having 2 Add Post tabs open, and get all reopened with openTabs())
-	// 			jqXHR.url = url;//settings.url;
-
-	// 			// Save the fetchUrl to retrieve it under 'complete'
-	// 			params.url[jqXHR.url] = url;
-	// 			params.target[jqXHR.url] = target;
-
-	// 			// Keep the URL being fetched for updating stale json content using Service Workers
-	// 			params['fetch-url'][jqXHR.url] = settings.url;
-
-	// 			// Save the url being loaded
-	// 			params.loading.push(url);
-		
-	// 			t.handlePageSectionLoadingStatus(pageSection, 'add', options);
-	// 		},
-	// 		complete: function(jqXHR) {
-
-	// 			// Everything below can be executed even if the deferred object executed in .processPageSectionResponse
-	// 			// has not resolved yet. 
-	// 			var url = params.url[jqXHR.url];
-	// 			delete params.url[jqXHR.url];
-	// 			delete params.target[jqXHR.url];
-	// 			delete params['fetch-url'][jqXHR.url];
-
-	// 			params.loading.splice(params.loading.indexOf(url), 1);
-
-	// 			t.handlePageSectionLoadingStatus(pageSection, 'remove', options);
-
-	// 			// Callback when the url was fetched
-	// 			if (options['urlfetched-callbacks']) {
-
-	// 				var handler = 'urlfetched:'+escape(url);
-	// 				$.each(options['urlfetched-callbacks'], function(index, callback) {
-
-	// 					$(document).one(handler, callback);
-	// 				});
-	// 			}
-
-	// 			// t.triggerURLFetched(url);
-
-	// 			// Remove the Disabled Layer over a block
-	// 			if (options['disable-layer']) {
-	// 				options['disable-layer'].children('.pop-disabledlayer').addClass('hidden');
-	// 			}
-	// 		},			
-	// 		success: function(response, textStatus, jqXHR) {
-
-	// 			t.prePageSectionSuccess(pageSection, response, options);
-
-	// 			// Hide the error message
-	// 			error.addClass('hidden');
-
-	// 			// If the original URL had a hashtag (eg: /add-post/#1482655583982), the returning url
-	// 			// will also have one (using is_multipleopen() => add_unique_id), but not the same one, then 
-	// 			// replace the original one with the new one in PoP:openTabs, or otherwise it will keep adding new tabs to the openTabs, 
-	// 			// which are the same tab but duplicated for having different hashtags in the URL
-	// 			var url = params.url[jqXHR.url];
-	// 			var feedbackURL = response.feedback.toplevel[M.URLPARAM_URL];
-	// 			var target = params.target[jqXHR.url];
-				
-	// 			if (url != feedbackURL) {
-	// 				t.replaceOpenTab(url, feedbackURL, target);
-	// 			}
-
-	// 			// Add the fetched URL to the options, so we keep track of the URL that produced the code for the opening page, to be used 
-	// 			// when updated stale json content from the Service Workers
-	// 			options['fetch-params'] = {
-	// 				url: url,
-	// 				target: target,
-	// 				'fetch-url': params['fetch-url'][jqXHR.url]
-	// 			};
-
-	// 			// Local storage? Save the response as a string
-	// 			// Save it at the end, because sometimes the localStorage fails (lack of space?) and it stops the flow of the JS
-	// 			// Important: execute this before calling "processPageSectionResponse" below, since this function alters the response
-	// 			// by adding "parent-context" and "root-context" making the object circular, upon which JSON.stringify fails
-	// 			// ("Uncaught TypeError: Converting circular structure to JSON")
-	// 			if (response.feedback.toplevel[M.URLPARAM_STORELOCAL]) {
-						
-	// 				t.storeData(localStorageKey, response);
-	// 			}
-	// 			t.processPageSectionResponse(domain, pageSection, fetchUrl, response, options);
-	// 		},
-	// 		error: function(jqXHR, textStatus, errorThrown) {
-
-	// 			var fetchedUrl = params.url[jqXHR.url];
-	// 			// Show an error if the fetch was not silent
-	// 			if (!options.silentDocument) {
-	// 				t.showError(pageSection, t.getError(fetchedUrl, jqXHR, textStatus, errorThrown));
-	// 			}
-	// 			pageSection.triggerHandler('fetchFailed');
-	// 		}
-	// 	}));
-	// },
-
 	prePageSectionSuccess : function(pageSection, response, options) {
 
 		var t = this;
@@ -3561,6 +3442,15 @@ popManager = {
 			t.triggerHTMLMerged();
 
 			newDOMs = t.getPageSectionDOMs(domain, pageSection);
+
+			// Add the initial 'fetch-params' so we can also show the "page refreshed, please click here to refresh" when first loading the website
+			var tlFeedback = t.getTopLevelFeedback(domain);
+			var url = tlFeedback[M.URLPARAM_URL];
+			options['fetch-params'] = {
+				url: url,
+				target: M.URLPARAM_TARGET_FULL,
+				'fetch-url': url
+			};
 		}
 		else {
 			newDOMs = t.renderTarget(domain, /*domain, */pageSection, pageSection, options);

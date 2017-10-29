@@ -4,10 +4,10 @@
 importScripts('./$dependenciesFolder/localforage.1.4.3.min.js');
 importScripts('./$dependenciesFolder/utils.js');
 
-const SW_STRATEGIES_CACHEFIRSTTHENNETWORK = 1;
-const SW_STRATEGIES_CACHEFIRSTTHENREFRESH = 2;
-const SW_STRATEGIES_NETWORKFIRST = 3;
-const SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL = 4;
+const SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL = 1;
+const SW_STRATEGIES_CACHEFIRSTTHENNETWORK = 2;
+const SW_STRATEGIES_CACHEFIRSTTHENNETWORKTHENREFRESH = 3;
+const SW_STRATEGIES_NETWORKFIRSTTHENCACHE = 4;
 
 var config = {
   version: $version,
@@ -257,6 +257,16 @@ self.addEventListener('fetch', event => {
 
     var resourceType = getResourceType(request);
 
+    // Special case: when accessing the root website (https://getpop.org), there is a redirection, then we get an exception in Firefox:
+    // Corrupted Content Error
+    // The site at https://getpop.org/ has experienced a network protocol violation that cannot be repaired.
+    // The page you are trying to view cannot be shown because an error in the data transmission was detected.
+    //     Please contact the website owners to inform them of this problem.
+    if (resourceType === 'html' && (request.url == opts.contentCDN.domains.original || request.url == opts.contentCDN.domains.original+'/')) {
+      request = new Request(opts.locales.domain);
+    }
+
+
     // The 'html' and 'static' behave in the same way, with the difference that 'html' must always
     // point to the appshell page. If this one is not cached (eg: the user deleted it manually using Dev Tools)
     // then can still fetch it (the appshell page, not the requested page) and cache it
@@ -326,6 +336,19 @@ self.addEventListener('fetch', event => {
     return new Request(url.toString());
   }
 
+  function evalJSONStrategy(strategyParameters, request, opts) {
+    
+      var criteria = {
+        startsWith: strategyParameters.startsWith.full.some(path => request.url.startsWith(path)),
+        // The pages do not included the locale domain, so add it before doing the comparison
+        pageStartsWith: strategyParameters.startsWith.partial.some(path => request.url.startsWith(opts.locales.domain+path)),
+        // endsWith: networkFirst.endsWith.some(path => request.url.endsWith(path)),
+        hasParams: stripIgnoredUrlParameters(request.url, strategyParameters.hasParams) != request.url
+      }
+      var successCriteria = Object.keys(criteria).filter(criteriaKey => criteria[criteriaKey]);
+      return successCriteria.length;
+  }
+
   function getStrategy(request, opts) {
     
     var strategy = '';
@@ -335,21 +358,14 @@ self.addEventListener('fetch', event => {
     if (resourceType === 'json') {
 
       var networkFirst = opts.strategies[resourceType].networkFirst;
-      var criteria = {
-        startsWith: networkFirst.startsWith.full.some(path => request.url.startsWith(path)),
-        // The pages do not included the locale domain, so add it before doing the comparison
-        pageStartsWith: networkFirst.startsWith.partial.some(path => request.url.startsWith(opts.locales.domain+path)),
-        // endsWith: networkFirst.endsWith.some(path => request.url.endsWith(path)),
-        hasParams: stripIgnoredUrlParameters(request.url, networkFirst.hasParams) != request.url
-      }
-      var successCriteria = Object.keys(criteria).filter(criteriaKey => criteria[criteriaKey]);
-      if (successCriteria.length) {
+      if (evalJSONStrategy(networkFirst, request, opts)) {
 
-        strategy = SW_STRATEGIES_NETWORKFIRST;
+        strategy = SW_STRATEGIES_NETWORKFIRSTTHENCACHE;
       }
       else {
 
-        strategy = SW_STRATEGIES_CACHEFIRSTTHENREFRESH;    
+          // Base strategy
+          strategy = SW_STRATEGIES_CACHEFIRSTTHENNETWORKTHENREFRESH;    
       }
     }
     else if (resourceType === 'html') {
@@ -368,7 +384,7 @@ self.addEventListener('fetch', event => {
 
     var ETag = response.headers.get('ETag');
     if (!ETag) {
-      return null;
+      return response;
     }
     
     // Comment Leo 04/04/2017: use the original URL instead of the response.url, so that 2 responses with different thumbprints
@@ -379,7 +395,7 @@ self.addEventListener('fetch', event => {
 
       // Compare the ETag of the response, with the previous one, saved in the IndexedDB
       if (ETag == previousETag) {
-        return null;
+        return response;
       }
 
       // Save the new value
@@ -387,7 +403,7 @@ self.addEventListener('fetch', event => {
 
         // If there was no previous ETag, then send no notification to the user
         if (!previousETag) {
-          return null;
+          return response;
         }
 
         // Send a message to the client
@@ -439,13 +455,24 @@ self.addEventListener('fetch', event => {
     //   fetchOpts.mode = 'cors';
     // }
 
+    // We indicate if we must trigger another request to fetch up-to-date content and, if the content from the server
+    // is more up-to-date than the cached one, then show a notification to the user to refresh the page
+    var check_updated = false;
+    var use_alias = false;
+
     // Add the cache buster param for JSON responses, no need for static assets or for the initial appshell load (if this one changes, then the version will change and get downloaded and cached again)
-    var cacheBustRequest = getCacheBustRequest(request, opts);
+    var cacheBustRequest = null;
+    if (strategy !== SW_STRATEGIES_CACHEFIRSTTHENNETWORK) {
+    
+      cacheBustRequest = getCacheBustRequest(request, opts);
+    }
 
     // Static resources
     if (strategy === SW_STRATEGIES_CACHEFIRSTTHENNETWORK) {
 
       /* Load immediately from the Cache. If it fails, fetch from the network */
+      /* No need to check if there is more up-to-date asset, because these are static files, we don't expect them to change */
+      /* If they did, they will have a different URL anyway */
       event.respondWith(
         fetchFromCache(request)
           .catch(() => fetch(request, fetchOpts)) 
@@ -455,6 +482,10 @@ self.addEventListener('fetch', event => {
     // HTML: First check if we have that HTML in the cache, which is fast, if not use the AppShell, which is slower since it depends on JS
     else if (strategy === SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL) {
 
+      check_updated = true;
+      // The appshell doesn't need the alias, since it's only used with the 'html' resourceType, which doesn't go through the Content CDN */
+      // use_alias = false;
+
       var appshellRequest = null;
 
       /* Load immediately from the Cache, if not there try from the Network, if not there then try the appShell from the Cache, then it tries appShell from network (should not be needed) */
@@ -462,18 +493,24 @@ self.addEventListener('fetch', event => {
       /* This is done because loading html is much faster than loading the appshell, which relies on JS to load the content */
       event.respondWith(
         fetchFromCache(request)
-          .catch(() => fetch(request, fetchOpts)) 
+          // If nothing in the cache, the fetch initial request from the network
+          // Also, no need to check_updated content anymore, since we didn't get the page from the cache anyway
+          .catch(function() { check_updated = false; return fetch(cacheBustRequest, fetchOpts) }) 
           // The response from this fetch will be saved in the cached below, through the cacheBustRequest
           .then(response => addToCache(cacheKey, request, response, false, opts))
           // Initialize the appshellRequest only now, so that the .then() below only works if the content comes from the appshell
           // Otherwise, this 2nd .then() will also be executed from the html content of the original request, overriding with its content the appshell content in the cache
           .catch(function() { appshellRequest = getAppShellRequest(request, opts); return fetchFromCache(appshellRequest, fetchOpts); }) 
+          // If somehow can't, try to fetch the appshell from the network
           .catch(() => fetch(appshellRequest, fetchOpts)) 
           .then(response => addToCache(cacheKey, appshellRequest, response, false, opts))
       );
     }
     // JSON content
-    else if (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
+    else if (strategy === SW_STRATEGIES_CACHEFIRSTTHENNETWORKTHENREFRESH) {
+
+      check_updated = true;
+      use_alias = true;
 
       /* Load immediately from the Cache, if it fails try from its alias URL, if it fails then fetch from the network */
       event.respondWith(
@@ -485,12 +522,15 @@ self.addEventListener('fetch', event => {
           // then use that one
           // We obtain the URL for this alternate request under the Alias URL in IndexedDB
           .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL)))) 
-          .catch(() => fetch(request, fetchOpts)) 
+          .catch(function() { check_updated = false; return fetch(cacheBustRequest, fetchOpts) }) 
           .then(response => addToCache(cacheKey, request, response, true, opts))
+          .then(response => refresh(request, response, true, opts))
       );
     }
     // JSON content that needs to come from the server first, if it fails try the cache
-    else if (strategy === SW_STRATEGIES_NETWORKFIRST) {
+    // No need to refresh, since we will not show the user the message "Please click here to update the page"
+    // for this type of request (eg: lazy-loaded content)
+    else if (strategy === SW_STRATEGIES_NETWORKFIRSTTHENCACHE) {
 
       event.respondWith(
         fetch(cacheBustRequest, fetchOpts)
@@ -500,10 +540,8 @@ self.addEventListener('fetch', event => {
       );
     }
 
-    if (strategy === SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL || strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH) {
+    if (check_updated) {
     
-      // The appshell doesn't need the alias, since it's only used with the 'html' resourceType, which doesn't go through the Content CDN */
-      var use_alias = (strategy === SW_STRATEGIES_CACHEFIRSTTHENREFRESH);
       /* Bring fresh content from the server, and show a message to the user if the cached content is stale */
       /* Only do it for the html and json resourceTypes, since static will never change (.css and .js will also have their version changed, and images 
       never get updated under the same filename, the Media Manager will upload them with a different filename the 2nd time) */
