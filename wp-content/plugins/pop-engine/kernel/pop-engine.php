@@ -161,22 +161,44 @@ class PoP_Engine {
 		// Do not send template-extra-sources from the sitemapping, it is not used in the front-end, only in the server
 		$json = $this->resultsObject['json'];
 
-		// Only will be there when fetching-json, not when fetching-json-data
-		if ($json['sitemapping']) {
-			unset($json['sitemapping']['template-extra-sources']);
-		}
-
-		// Save it for later use
-		if ($json) {
-			$this->encoded_json = json_encode($json);
-		}
-		else {
-			// JSON_FORCE_OBJECT is needed when printing the typeahead data (GD_DATALOAD_DATASTRUCTURE_RESULTS)
-			$this->encoded_json = json_encode(array(), JSON_FORCE_OBJECT);
-		}
+		// Keep only the data that is needed to be sent, and encode it as JSON
+		$this->encoded_json = $this->get_encoded_json($json);
 
 		// Send the ETag-header
 		$this->send_etag_header();
+	}
+
+	function get_encoded_json($json) {
+
+		if ($json) {
+	
+			// Do not send template-extra-sources from the sitemapping, it is not used in the front-end, only in the server
+			// Only will be there when fetching-json, not when fetching-json-data
+			if ($json['sitemapping']) {
+				unset($json['sitemapping']['template-extra-sources']);
+			}
+
+			// If we are first loading the website, and using serverside-rendering, then there is no need to send the data to the front-end
+			if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+
+				// We do not need the DB, but we need the entries
+				if (isset($json['database'])) {
+
+					// $json['database'] = array();
+					unset($json['database']);
+				}
+				if (isset($json['userdatabase'])) {
+
+					// $json['userdatabase'] = array();
+					unset($json['userdatabase']);
+				}
+			}
+			
+			return json_encode($json);
+		}
+	
+		// JSON_FORCE_OBJECT is needed when printing the typeahead data (GD_DATALOAD_DATASTRUCTURE_RESULTS)
+		return json_encode(array(), JSON_FORCE_OBJECT);
 	}
 
 	function output() {

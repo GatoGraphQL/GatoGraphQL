@@ -3683,10 +3683,10 @@ popManager = {
 		// t.sitemapping['template-sources'] = json.sitemapping['template-sources'];
 		t.sitemapping = json.sitemapping;
 
-		// t.database = json.database;
-		// t.userdatabase = json.userdatabase;
-		t.state[domain].database = json.database;
-		t.state[domain].userdatabase = json.userdatabase;
+		// Comment Leo 30/10/2017: assign {} as base case, since when doing serverside-rendering,
+		// we are not sending the DB values (as to decrease output size)
+		t.state[domain].database = json.database || {};
+		t.state[domain].userdatabase = json.userdatabase || {};
 
 		var memory = t.getMemory(domain);
 		memory.settings = json.settings;

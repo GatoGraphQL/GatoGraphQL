@@ -1597,6 +1597,12 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 				
 				// Allow for the controls to be aligned to the right, using css
 				$this->append_att($template_id, $atts, 'class', 'pop-block-calendar');
+
+				// Comment Leo 30/10/2017: when doing serverside-rendering on loading the website,
+				// we are not sending the database anymore (to decrease output size). However the calendar
+				// is still rendered in the front-end using javascript, hence it won't work since the data is not sent anymore.
+				// To fix this, simply make the calendars lazy-load, until the calendar html code is rendered on the backend
+				$this->add_att($template_id, $atts, 'content-loaded', false);
 				break;
 		}
 

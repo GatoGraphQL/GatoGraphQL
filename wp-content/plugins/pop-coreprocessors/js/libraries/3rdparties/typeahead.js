@@ -360,8 +360,12 @@ popTypeahead = {
 	
 		var t = this;
 
+		// Comment Leo 30/10/2017: when doing serverside-rendering, and first loading the website (eg: https://www.mesym.com/en/add-post/?related[0]=22199),
+		// we will already have the item rendered. And since the database is not sent anymore, datum.id will be empty
+		// so we must check for this condition too.
+
 		// Check this value has not been added before
-		if (typeahead.find('input[type="hidden"][value="'+datum.id+'"]').length == 0) {
+		if (datum && datum.id && typeahead.find('input[type="hidden"][value="'+datum.id+'"]').length == 0) {
 		
 			var jsSettings = popManager.getJsSettings(domain, pageSection, block, typeahead);
 			var template = jsSettings['trigger-layout'];
