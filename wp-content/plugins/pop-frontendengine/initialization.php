@@ -298,10 +298,13 @@ class PoPFrontend_Initialization {
 				'popJSRuntimeManager[\'full-session-ids\'] = %s;',
 				json_encode($popJSRuntimeManager->getSessionIds('full'))
 			);
-			$this->scripts[] = sprintf(
-				'popJSRuntimeManager[\'last-session-ids\'] = %s;',
-				json_encode($popJSRuntimeManager->getSessionIds('last'))
-			);
+			// Comment Leo 30/10/2017: when initially loading the website, the full-session-ids and last-session-ids are the same
+			// So instead of sending the code below (which could be up to 100kb of code!) simply duplicate the entry above through JS
+			// $this->scripts[] = sprintf(
+			// 	'popJSRuntimeManager[\'last-session-ids\'] = %s;',
+			// 	json_encode($popJSRuntimeManager->getSessionIds('last'))
+			// );
+			$this->scripts[] = 'popJSRuntimeManager[\'last-session-ids\'] = jQuery.extend(true, {}, popJSRuntimeManager[\'full-session-ids\']);';
 		}
 
 		// Comment Leo 27/09/2017: Send the list of resources already loaded to the front-end

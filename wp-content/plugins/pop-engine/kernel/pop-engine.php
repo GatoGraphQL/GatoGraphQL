@@ -175,21 +175,20 @@ class PoP_Engine {
 			// Do not send template-extra-sources from the sitemapping, it is not used in the front-end, only in the server
 			// Only will be there when fetching-json, not when fetching-json-data
 			if ($json['sitemapping']) {
+				
 				unset($json['sitemapping']['template-extra-sources']);
 			}
 
 			// If we are first loading the website, and using serverside-rendering, then there is no need to send the data to the front-end
 			if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 
-				// We do not need the DB, but we need the entries
+				// We do not need the DB
 				if (isset($json['database'])) {
 
-					// $json['database'] = array();
 					unset($json['database']);
 				}
 				if (isset($json['userdatabase'])) {
 
-					// $json['userdatabase'] = array();
 					unset($json['userdatabase']);
 				}
 			}
