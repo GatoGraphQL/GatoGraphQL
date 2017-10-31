@@ -9,7 +9,7 @@
 
 class PoP_ResourceLoaderProcessor_Manager {
 
-	var $initialized, $processors, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $url_htmltag_attributes;
+	var $initialized, $processors, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $htmltag_attributes;
 	
 	function __construct() {
 	
@@ -26,6 +26,13 @@ class PoP_ResourceLoaderProcessor_Manager {
 		add_filter(
             'PoP_Frontend_ResourceLoaderMappingManager:resources',
             array($this, 'add_resources_to_map')
+        );
+
+        // Prepare the htmltag attributes before they are printed in the footer
+        add_action(
+            'wp_print_footer_scripts',
+            array($this, 'prepare_htmltag_attributes'),
+            0
         );
 
     	// Allow to add attributes 'async' or 'defer' to the script tag
@@ -86,10 +93,12 @@ class PoP_ResourceLoaderProcessor_Manager {
 				$this->resources_to_map[] = $resource;
 			}
 
-			// Add attributes to the html script/style loading this URL?
-			if ($attributes = $processor->get_htmltag_attributes($resource)) {
-				$this->htmltag_attributes[PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource)] = $attributes;
-			}
+			// Comment Leo 31/10/2017: can't do it now, because the template-resourceloader depends on the dynamic-template-sources,
+			// which are not available yet. Then moved to function `prepare_htmltag_attributes`
+			// // Add attributes to the html script/style loading this URL?
+			// if ($attributes = $processor->get_htmltag_attributes($resource)) {
+			// 	$this->htmltag_attributes[PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource)] = $attributes;
+			// }
 		}	
 	}
 
@@ -112,6 +121,17 @@ class PoP_ResourceLoaderProcessor_Manager {
 			// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 			wp_register_script(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource), $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
 			wp_enqueue_script(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource));
+		}
+	}
+
+	function prepare_htmltag_attributes() {
+
+		// Add attributes to the html script/style loading this URL?
+		foreach ($this->processors as $resource => $processor) {
+
+			if ($attributes = $processor->get_htmltag_attributes($resource)) {
+				$this->htmltag_attributes[PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource)] = $attributes;
+			}	
 		}
 	}
 

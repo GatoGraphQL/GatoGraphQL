@@ -292,6 +292,12 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 		
 		return $ret;
 	}
+	
+	// Block: it always includes its configuration path, so the dynamic templates cannot start from here
+	function is_dynamic_template_source($template_id, $atts) {
+	
+		return false;
+	}
 
 	/***********************************************************/
 	/** Repeated from "parent" class! */

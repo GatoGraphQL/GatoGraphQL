@@ -181,6 +181,7 @@ class PoP_Engine {
 			if ($json['sitemapping']) {
 
 				unset($json['sitemapping']['template-extra-sources']);
+				unset($json['sitemapping']['dynamic-template-sources']);
 			}
 
 			// If we are first loading the website, and using serverside-rendering, then there is no need to send the data to the front-end
@@ -591,6 +592,12 @@ class PoP_Engine {
 
 		// Templates: What templates must be executed after call to loadMore is back with data:
 		$json_sitemapping['template-sources'] = $processor->get_templates_sources($template_id, $atts);
+		
+		// The dynamic template sources will only be needed to optimize handlebars templates loading, when doing serverside-rendering and doing code-splitting
+		if (PoP_Frontend_ServerUtils::use_serverside_rendering() && PoP_Frontend_ServerUtils::use_code_splitting()) {
+			
+			$json_sitemapping['dynamic-template-sources'] = $processor->get_dynamic_templates_sources($template_id, $atts);
+		}
 		
 		return $json_sitemapping;
 	}

@@ -382,6 +382,38 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		return $ret;
 	}
 	
+	function is_dynamic_template_source($template_id, $atts) {
+	
+		return false;
+	}
+	
+	function get_dynamic_templates_sources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		// If the template path has been set to true, then from this template downwards all templates are dynamic
+		$ret = $this->get_currentlevel_dynamic_templates_sources($template_id, $atts);
+		
+		// If not, then keep iterating down the road
+		if (empty($ret)) {
+		
+			// In the Hierarchy Processor, all subcomponent templates are blocks
+			foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+			
+				$component_processor = $gd_template_processor_manager->get_processor($component);
+				$component_atts = $atts[$component];					
+				$component_ret = $component_processor->get_dynamic_templates_sources($component, $component_atts);
+
+				$ret = array_unique(array_merge(
+					$ret,
+					$component_ret
+				));
+			}
+		}
+		
+		return $ret;
+	}
+	
 	function get_templates_sources($template_id, $atts) {
 	
 		global $gd_template_processor_manager;
@@ -400,9 +432,7 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
 		
 			$component_processor = $gd_template_processor_manager->get_processor($component);
-			$component_atts = $atts[$component];
-			$component_settings_id = $component_processor->get_settings_id($component);
-					
+			$component_atts = $atts[$component];					
 			$component_ret = $component_processor->get_templates_sources($component, $component_atts);
 
 			$ret = array_merge(

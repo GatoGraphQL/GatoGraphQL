@@ -11,6 +11,11 @@ class GD_Template_ProcessorBaseWrapper extends PoP_ProcessorBaseWrapper {
 	// PUBLIC Functions: cache
 	//-------------------------------------------------
 
+	function get_dynamic_templates_sources($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
 	function get_templates_sources($template_id, $atts) {
 	
 		return $this->process($template_id, $atts, __FUNCTION__);
