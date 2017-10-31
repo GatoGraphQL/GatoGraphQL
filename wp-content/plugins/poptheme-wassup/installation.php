@@ -19,6 +19,9 @@ class PoPTheme_Wassup_Installation {
 		// Google Analytics Dashboard for WP PoP
 		$plugin_version['google-analytics-dashboard-for-wp-pop'] = POPTHEME_WASSUP_PLUGINACTIVATION_GADWPPOP_VERSION;
 
+		// PoP FrontendEngine AWS
+		$plugin_version['pop-frontendengine-aws'] = POPTHEME_WASSUP_PLUGINACTIVATION_FRONTENDENGINEAWS_VERSION;
+
 		// Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
 		$version = pop_version();
 		foreach ($plugin_version as $plugin => $activate_version) {

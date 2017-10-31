@@ -13,6 +13,7 @@ define ('POP_RESOURCELOADER_JSLIBRARYMANAGER', PoP_ServerUtils::get_template_def
 define ('POP_RESOURCELOADER_JSRUNTIMEMANAGER', PoP_ServerUtils::get_template_definition('jsruntime-manager'));
 define ('POP_RESOURCELOADER_PAGESECTIONMANAGER', PoP_ServerUtils::get_template_definition('pagesection-manager'));
 define ('POP_RESOURCELOADER_POPMANAGER', PoP_ServerUtils::get_template_definition('pop-manager'));
+define ('POP_RESOURCELOADER_TOPLEVELJSON', PoP_ServerUtils::get_template_definition('topleveljson'));
 define ('POP_RESOURCELOADER_RESOURCELOADER', PoP_ServerUtils::get_template_definition('resourceloader'));
 define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG', PoP_ServerUtils::get_template_definition('resourceloader-config'));
 define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-resources'));
@@ -40,6 +41,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			POP_RESOURCELOADER_JSRUNTIMEMANAGER,
 			POP_RESOURCELOADER_PAGESECTIONMANAGER,
 			POP_RESOURCELOADER_POPMANAGER,
+			POP_RESOURCELOADER_TOPLEVELJSON,
 			POP_RESOURCELOADER_RESOURCELOADER,
 			POP_RESOURCELOADER_RESOURCELOADERCONFIG,
 			POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES,
@@ -67,6 +69,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			POP_RESOURCELOADER_JSRUNTIMEMANAGER => 'jsruntime-manager',
 			POP_RESOURCELOADER_PAGESECTIONMANAGER => 'pagesection-manager',
 			POP_RESOURCELOADER_POPMANAGER => 'pop-manager',
+			POP_RESOURCELOADER_TOPLEVELJSON => 'topleveljson',
 			POP_RESOURCELOADER_RESOURCELOADER => 'resourceloader',
 			// POP_RESOURCELOADER_RESOURCELOADERCONFIG => 'resourceloader-config',
 			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES => 'resourceloader-config-resources',
@@ -280,6 +283,9 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			POP_RESOURCELOADER_POPMANAGER => array(
 				'popManager',
 			),
+			POP_RESOURCELOADER_TOPLEVELJSON => array(
+				'popTopLevelJSON',
+			),
 			POP_RESOURCELOADER_POPUTILS => array(
 				'popUtils',
 			),
@@ -323,13 +329,19 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 					POP_RESOURCELOADER_INTERCEPTORS,
 					POP_RESOURCELOADER_JSRUNTIMEMANAGER,
 					POP_RESOURCELOADER_PAGESECTIONMANAGER,
-
+					
 					// We can add the Resource Loader as a dependency here (even if not referenced in popManager),
 					// because if we are not doing code-splitting, then this whole resource loading code
 					// will never get executed
 					POP_RESOURCELOADER_RESOURCELOADER,
 					POP_RESOURCELOADER_RESOURCELOADERCONFIG,
 				);
+
+				// Hook in the sitemapping/settings values into the JSON
+				if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+
+					$manager_dependencies[] = POP_RESOURCELOADER_TOPLEVELJSON;
+				}
 
 				// Check what strategy to use to load the ResourceLoader Config files
 				// if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {
@@ -345,10 +357,10 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 				// 	$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES;
 				// }
 				// else {
-					$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES;
+				$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES;
 
-					// Add the backgroundLoad resources from the beginning, so we already have the mapping with the resources for these URL, which will be fetched immediately when loading the website
-					$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES;
+				// Add the backgroundLoad resources from the beginning, so we already have the mapping with the resources for these URL, which will be fetched immediately when loading the website
+				$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES;
 				// }
 				if ($manager_dependencies = apply_filters(
 					'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',

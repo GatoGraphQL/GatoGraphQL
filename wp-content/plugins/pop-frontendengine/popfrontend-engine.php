@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_FRONTENDENGINE_VERSION', 0.130);
+define ('POP_FRONTENDENGINE_VERSION', 0.131);
 define ('POP_FRONTENDENGINE_DIR', dirname(__FILE__));
 define ('POP_FRONTENDENGINE_PHPTEMPLATES_DIR', POP_FRONTENDENGINE_DIR.'/php-templates/compiled');
 define ('POP_RESOURCELOADER_ASSETS_DIR', POP_FRONTENDENGINE_DIR.'/kernel/resourceloader/config/assets');
@@ -44,6 +44,8 @@ class PoPFrontend {
 		// }
 		define ('POP_FRONTENDENGINE_CONTENT_DIR', POP_CONTENT_DIR.'/pop-frontendengine');
 		define ('POP_FRONTENDENGINE_CONTENT_URI', POP_CONTENT_URL.'/pop-frontendengine');
+		// define ('POP_FRONTENDENGINE_RUNTIMECONTENT_DIR', POP_RUNTIMECONTENT_DIR.'/pop-frontendengine');
+		// define ('POP_FRONTENDENGINE_RUNTIMECONTENT_URI', POP_RUNTIMECONTENT_URL.'/pop-frontendengine');
 		define ('POP_FRONTENDENGINE_BUILD_DIR', POP_BUILD_DIR.'/pop-frontendengine');
 		define ('POP_FRONTENDENGINE_GENERATECACHE_DIR', POP_GENERATECACHE_DIR.'/pop-frontendengine');
 		// define ('POP_FRONTENDENGINE_BUILD_URI', POP_BUILD_URL.'/pop-frontendengine');

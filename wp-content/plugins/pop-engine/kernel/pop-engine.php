@@ -21,12 +21,16 @@ define ('GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUPREPLICABLE', 'blockgroup-replicable'
 
 class PoP_Engine {
 
-	var $resultsObject, $encoded_json, $atts;
+	var $resultsObject, $encoded_json, $atts, $scripts;
 
 	function __construct() {
 
 		// Set myself as the PoP_Engine instance in the Factory
 		PoP_Engine_Factory::set_instance($this);
+
+		// Print needed scripts
+		$this->scripts = array();
+		add_action('wp_print_footer_scripts', array($this, 'print_scripts'));
 	}
 
 	function get_toplevel_template_id() {
@@ -175,7 +179,7 @@ class PoP_Engine {
 			// Do not send template-extra-sources from the sitemapping, it is not used in the front-end, only in the server
 			// Only will be there when fetching-json, not when fetching-json-data
 			if ($json['sitemapping']) {
-				
+
 				unset($json['sitemapping']['template-extra-sources']);
 			}
 
@@ -191,6 +195,18 @@ class PoP_Engine {
 
 					unset($json['userdatabase']);
 				}
+
+				// Do not send the sitemapping or the settings to be output as code. 
+				// Instead, save the settings contents into a javascript file, and enqueue it
+				if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+					
+					// Sitemapping
+					$this->optimize_encoded_json($json, 'sitemapping', POP_RUNTIMECONTENTTYPE_SITEMAPPING, false);
+					
+					// Settings
+					$this->optimize_encoded_json($json, 'settings', POP_RUNTIMECONTENTTYPE_SETTINGS, true);
+				}
+
 			}
 			
 			return json_encode($json);
@@ -198,6 +214,88 @@ class PoP_Engine {
 	
 		// JSON_FORCE_OBJECT is needed when printing the typeahead data (GD_DATALOAD_DATASTRUCTURE_RESULTS)
 		return json_encode(array(), JSON_FORCE_OBJECT);
+	}
+
+	function optimize_encoded_json(&$json, $property, $type, $do_replacements) {
+
+		// Sitemapping
+		if ($value = $json[$property]) {
+			
+			// Check if this file has already been generated. If not, then save it
+			global $gd_template_runtimecontentmanager;
+			$template_id = $this->get_toplevel_template_id();
+			if (!$gd_template_runtimecontentmanager->cache_exists($template_id, $type)) {
+
+				// Generate and save the JS code
+				$value_js = sprintf(
+					'popTopLevelJSON.strings[\'%1$s\'] = %2$s;',
+					$property,
+					// Encoded twice: the first one for the array, the 2nd one to convert it to string
+					json_encode(json_encode($value))
+				);
+				$gd_template_runtimecontentmanager->store_cache($template_id, $type, $value_js);
+
+				// In addition, this file must be uploaded to AWS S3 bucket, so that this scheme of generating the file on runtime
+				// can also work when hosting the website at multiple servers 
+				do_action(
+					'PoP_Engine:optimize_encoded_json:file_stored',
+					$template_id,
+					$property, 
+					$type
+					// $value_js
+				);
+			}
+
+			// Enqueue the .js file
+			if ($file_url = $gd_template_runtimecontentmanager->get_file_url($template_id, $type)) {
+
+				wp_register_script('pop-'.$property, $file_url, array(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_POPMANAGER)), pop_version(), true);
+				wp_enqueue_script('pop-'.$property);
+			}
+
+			// We must also do the replacements on the JS code (get_loadfile_cache_replacements)
+			if ($do_replacements) {
+
+				if ($replacements = $gd_template_runtimecontentmanager->get_loadfile_cache_replacements()) {
+					
+					$from = $replacements['from'];
+					$to = $replacements['to'];
+					if ($from && $to) {
+						
+						$replaces = '';
+						for ($i=0; $i<count($from); $i++) {
+							
+							$replaces .= sprintf(
+								'.replace(/%s/g, \'%s\')',
+								$from[$i],
+								$to[$i]
+							);
+						}
+						$this->scripts[] = sprintf(
+							'if (popTopLevelJSON.strings[\'%1$s\']) {'.
+								'popTopLevelJSON.strings[\'%1$s\'] = popTopLevelJSON.strings[\'%1$s\']%2$s;'.
+							'}',
+							$property,
+							$replaces
+						);
+					}
+				}
+			}
+
+			// Remove the entry from the html output
+			unset($json[$property]);
+		}
+	}
+
+	function print_scripts() {
+
+		if ($this->scripts) {
+
+			printf(
+				'<script type="text/javascript">%s</script>', 
+				implode(PHP_EOL, $this->scripts)
+			);
+		}
 	}
 
 	function output() {

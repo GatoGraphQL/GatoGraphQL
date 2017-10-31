@@ -62,3 +62,4 @@ define ('POPTHEME_WASSUP_LINK_VERTICALS', 'https://verticals.io');
 //--------------------------------------------------------
 define ('POPTHEME_WASSUP_PLUGINACTIVATION_PPPPOP_VERSION', false);
 define ('POPTHEME_WASSUP_PLUGINACTIVATION_GADWPPOP_VERSION', false);
+define ('POPTHEME_WASSUP_PLUGINACTIVATION_FRONTENDENGINEAWS_VERSION', false);

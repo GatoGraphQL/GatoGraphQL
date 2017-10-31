@@ -132,6 +132,11 @@ class PoPFrontend_Initialization {
 				// 	wp_register_script('pop-resourceloader', $libraries_js_folder.'/resourceloader'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
 				// 	wp_enqueue_script('pop-resourceloader');
 				// }
+				if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+					
+					wp_register_script('pop-topleveljson', $libraries_js_folder.'/topleveljson'.$suffix.'.js', array(), POP_FRONTENDENGINE_VERSION, true);
+					wp_enqueue_script('pop-topleveljson');
+				}
 
 				// Sortable needed for the Typeahead
 				wp_register_script('pop', $libraries_js_folder.'/pop-manager'.$suffix.'.js', array('jquery', 'pop-utils', 'pop-pagesection-manager', 'pop-history', 'pop-interceptors', 'pop-jslibrary-manager', 'pop-jsruntime-manager', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);

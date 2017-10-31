@@ -80,4 +80,13 @@ class PoP_Frontend_ServerUtils {
 
 		return false;
 	}
+
+	public static function generate_resources_on_runtime() {
+
+		if (defined('POP_SERVER_GENERATERESOURCESONRUNTIME')) {
+			return POP_SERVER_GENERATERESOURCESONRUNTIME;
+		}
+
+		return true;
+	}
 }

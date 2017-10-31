@@ -1841,7 +1841,7 @@ popManager = {
 			if (stored) {
 
 				// Transform the string back into JSON
-				stored = $.parseJSON(stored);
+				stored = JSON.parse(stored);
 
 				if (use_version) {
 
@@ -3677,7 +3677,10 @@ popManager = {
 
 		// Initialize Settings
 		var jsonHtml = $('#'+popPageSectionManager.getTopLevelSettingsId());
-		var json = $.parseJSON(jsonHtml.html());
+		var json = JSON.parse(jsonHtml.html());
+
+		// Comment Leo 30/10/2017: add a hook to fill the settings/sitemapping values from pop-runtimecontent .js files
+		$(document).triggerHandler('initTopLevelJson', [json]);
 
 		// The template sources are located under sitemapping
 		// t.sitemapping['template-sources'] = json.sitemapping['template-sources'];

@@ -35,6 +35,7 @@ uglifyjs libraries/jslibrary-manager.js -o dist/libraries/jslibrary-manager.min.
 uglifyjs libraries/jsruntime-manager.js -o dist/libraries/jsruntime-manager.min.js -c warnings=false -m
 uglifyjs libraries/pagesection-manager.js -o dist/libraries/pagesection-manager.min.js -c warnings=false -m
 uglifyjs libraries/pop-manager.js -o dist/libraries/pop-manager.min.js -c warnings=false -m
+uglifyjs libraries/topleveljson.js -o dist/libraries/topleveljson.min.js -c warnings=false -m
 uglifyjs libraries/utils.js -o dist/libraries/utils.min.js -c warnings=false -m
 uglifyjs libraries/pop-utils.js -o dist/libraries/pop-utils.min.js -c warnings=false -m
 uglifyjs libraries/compatibility.js -o dist/libraries/compatibility.min.js -c warnings=false -m
@@ -43,4 +44,4 @@ uglifyjs libraries/resourceloader.js -o dist/libraries/resourceloader.min.js -c 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
 rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/libraries/*.tmpl.js
 cp $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/libraries/*.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/libraries/
-wget -O $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/bundles/pop-frontendengine.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/libraries&f=helpers.handlebars.min.js,utils.min.js,pop-utils.min.js,compatibility.min.js,jslibrary-manager.min.js,jsruntime-manager.min.js,pagesection-manager.min.js,history.min.js,interceptors.min.js,resourceloader.min.js,pop-manager.min.js"
+wget -O $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/bundles/pop-frontendengine.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-frontendengine/js/libraries&f=helpers.handlebars.min.js,utils.min.js,pop-utils.min.js,compatibility.min.js,jslibrary-manager.min.js,jsruntime-manager.min.js,pagesection-manager.min.js,history.min.js,interceptors.min.js,resourceloader.min.js,pop-manager.min.js,topleveljson.min.js"
