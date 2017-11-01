@@ -52,15 +52,15 @@ class PoP_Frontend_ServerUtils {
 		return true;
 	}
 
-	public static function use_codesplitting_fastboot() {
+	public static function use_fastboot() {
 
-		if (!self::use_code_splitting()) {
+		// if (!self::use_code_splitting()) {
 
-			return false;
-		}
+		// 	return false;
+		// }
 
-		if (defined('POP_SERVER_USECODESPLITTINGFASTBOOT')) {
-			return POP_SERVER_USECODESPLITTINGFASTBOOT;
+		if (defined('POP_SERVER_USEFASTBOOT')) {
+			return POP_SERVER_USEFASTBOOT;
 		}
 
 		return true;
