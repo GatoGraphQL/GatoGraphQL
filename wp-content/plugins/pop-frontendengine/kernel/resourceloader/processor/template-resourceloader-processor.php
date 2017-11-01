@@ -35,7 +35,7 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 				
 				if (!in_array($this->get_filename($resource), $dynamic_template_sources)) {
 
-					return "defer='defer'";
+					return "async='async'";
 				}
 			}
 		}
