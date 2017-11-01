@@ -71,7 +71,7 @@ class PhotoSwipe_PoP_Initialization {
 	function register_styles() {
 
 		// Load different files depending on the environment (PROD / DEV)
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
 
 			wp_register_style('photoswipe', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe.min.css', null, null);
 			wp_register_style('photoswipe-skin', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/default-skin/default-skin.min.css', null, null);
