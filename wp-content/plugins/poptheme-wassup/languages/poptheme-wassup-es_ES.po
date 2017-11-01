@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Theme Wassup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-30 09:57+0200\n"
-"PO-Revision-Date: 2017-08-30 09:57+0200\n"
+"POT-Creation-Date: 2017-11-01 14:53+0800\n"
+"PO-Revision-Date: 2017-11-01 14:54+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
@@ -578,7 +578,7 @@ msgstr "Evento pasado"
 msgid "The address was not found on the map"
 msgstr "La dirección no se encontró en el mapa"
 
-#: .././plugins/events-manager/library/functions.php:495
+#: .././plugins/events-manager/library/functions.php:499
 #: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:38
 #: .././plugins/events-manager/pop-library/processors/buttons/post-buttons.php:68
 #: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:26
@@ -615,7 +615,7 @@ msgstr "Ubicación(es) para:"
 msgid "Add location"
 msgstr "Añadir ubicación"
 
-#: .././plugins/events-manager/pop-library/pagesection-hooks.php:159
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:173
 msgid "View all events"
 msgstr "Ver todos los eventos"
 
@@ -749,7 +749,7 @@ msgstr "Enviando…"
 #: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:70
 #: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:53
 #: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:149
-#: .././pop-library/processors/pagesections/pagesections.php:464
+#: .././pop-library/processors/pagesections/pagesections.php:471
 msgid "Login/Register"
 msgstr "Iniciar sesión/Registrarse"
 
@@ -925,7 +925,7 @@ msgstr "Cuándo"
 
 #: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:49
 #: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:56
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:614
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:631
 #: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:44
 #: .././pop-library/processors/structures/tables/tables.php:60
 #: .././pop-library/processors/structures/tables/tables.php:67
@@ -1265,11 +1265,6 @@ msgstr ""
 "Por favor, añada los siguientes emails a tu lista de contactos, para "
 "asegurar de que recibas nuestras notificaciones:"
 
-#: .././plugins/public-post-preview/library/functions.php:22
-#: .././pop-library/processors/createupdatepost/forms/formgroups.php:38
-msgid "Preview"
-msgstr "Vista previa"
-
 #: .././plugins/qtranslate-x/library/functions.php:22
 #, php-format
 msgid ""
@@ -1386,15 +1381,15 @@ msgstr "Tel / Fax"
 msgid "Full view"
 msgstr "Vista completa"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:577
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:594
 msgid "Show Help"
 msgstr "Mostrar ayuda"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:582
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:599
 msgid "Inviting users to become your members"
 msgstr "Invitando usuarios a convertirse en sus miembros"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:584
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:601
 #, php-format
 msgid ""
 "Please click on %s to invite your physical Organization's members to become "
@@ -1403,35 +1398,35 @@ msgstr ""
 "Por favor, haga clic en %s para invitar a los miembros de su organización "
 "física para convertirse en sus miembros en el sitio web."
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:590
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:607
 msgid "What is a member?"
 msgstr "¿Qué es un miembro?"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:591
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:608
 msgid "This depends on your Organization. Some examples:<br/>"
 msgstr "Esto depende de su Organización. Algunos ejemplos: <br/>"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:593
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:610
 msgid "University teachers/students"
 msgstr "Profesores universitarios / estudiantes"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:594
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:611
 msgid "NGO volunteers"
 msgstr "Voluntarios de ONG"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:595
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:612
 msgid "Company staff"
 msgstr "Personal de la empresa"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:596
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:613
 msgid "etc"
 msgstr "etc"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:601
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:618
 msgid "What happens when my Organization has members?"
 msgstr "¿Qué sucede cuando mi organización tiene miembros?"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:602
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:619
 msgid ""
 "If they have privilege <em>Contribute content</em> on, whenever they post "
 "any content in the website (eg: a new event, article, project, etc) will "
@@ -1443,11 +1438,11 @@ msgstr ""
 "proyecto, etc) también aparecerá bajo el perfil de su organización. Si este "
 "privilegio está desactivado, sólo aparecerá en \"Mis miembros\""
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:606
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:623
 msgid "Editing current members' status"
 msgstr "Edición de estatus de los miembros actuales"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:607
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:624
 msgid ""
 "The users listed below have declared themselves to be members of your "
 "Organization. You can click on \"Edit Membership\" to edit the settings for "
@@ -1457,7 +1452,7 @@ msgstr ""
 "miembros de su organización. Puede hacer clic en \"Editar afiliación\" para "
 "editar la configuración para cada uno de ellos:"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:615
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:632
 msgid ""
 "<em>Active</em> if the user is truly your member, or <em>Rejected</em> "
 "otherwise.<br/><em>Rejected</em> users will not appear as your "
@@ -1467,23 +1462,23 @@ msgstr ""
 "em> por caso contrario.<br/>Usuarios con estado <em>Rechazado</em> no "
 "aparecerán como miembros de su organización, y no contribuyerán contenido."
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:622
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:639
 #: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:45
 msgid "Privileges"
 msgstr "Privilegios"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:623
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:640
 msgid ""
 "<em>Contribute content</em> will add the member's content to your profile."
 msgstr ""
 "<em>Contribuir contenido</em> añadirá el contenido del miembro a su perfil."
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:630
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:647
 #: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:46
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:631
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:648
 msgid "What is the type of relationship from this member to your Organization."
 msgstr "Cuál es el tipo de relación de este miembro a su Organización."
 
@@ -1609,8 +1604,8 @@ msgid "Page not found!"
 msgstr "¡Página no encontrada!"
 
 #: .././pop-library/dataload/iohandlers/pagetabs/home.php:22
-#: .././pop-library/processors/pagesections/pagesections.php:449
-#: .././pop-library/processors/pagesections/pagesections.php:539
+#: .././pop-library/processors/pagesections/pagesections.php:455
+#: .././pop-library/processors/pagesections/pagesections.php:546
 msgid "Home"
 msgstr "Principal"
 
@@ -1626,6 +1621,16 @@ msgstr "enlace por"
 #: .././pop-library/processors/abstract-classes/layouts/volunteertag-base.php:22
 msgid "Volunteer!"
 msgstr "¡Ofrecerse como voluntario!"
+
+#: .././pop-library/processors/blockgroups/_carousels-toplevel.php:60
+#, php-format
+msgid "%sBack"
+msgstr "%sAtrás"
+
+#: .././pop-library/processors/blockgroups/_carousels-toplevel.php:67
+#, php-format
+msgid "%sNavigator"
+msgstr "%sNavegador"
 
 #: .././pop-library/processors/blockgroups/blockgroups-main.php:227
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:413
@@ -1665,24 +1670,14 @@ msgstr "Ops, esta página no existe!"
 msgid "Show description"
 msgstr "Mostrar descripción"
 
-#: .././pop-library/processors/blockgroups/blockgroups.php:464
+#: .././pop-library/processors/blockgroups/blockgroups.php:465
 #: .././templates/hover.php:4 .././templates/navigator.php:4
 msgid "Close"
 msgstr "Cerrar"
 
-#: .././pop-library/processors/blockgroups/blockgroups.php:525
+#: .././pop-library/processors/blockgroups/blockgroups.php:526
 msgid "Log in or Register"
 msgstr "Iniciar sesión o Registrarse"
-
-#: .././pop-library/processors/blockgroups/carousels-toplevel.php:60
-#, php-format
-msgid "%sBack"
-msgstr "%sAtrás"
-
-#: .././pop-library/processors/blockgroups/carousels-toplevel.php:67
-#, php-format
-msgid "%sNavigator"
-msgstr "%sNavegador"
 
 #: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:599
 #: .././pop-library/processors/blockgroups/tabpanels-sections.php:763
@@ -1699,23 +1694,23 @@ msgstr "Ir al perfil completo "
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: .././pop-library/processors/blocks/sections.php:2507
+#: .././pop-library/processors/blocks/sections.php:2621
 msgid "View all Content "
 msgstr "Ver todo el contenido "
 
-#: .././pop-library/processors/blocks/sections.php:3380
+#: .././pop-library/processors/blocks/sections.php:3494
 msgid "Latest Content"
 msgstr "Contenido más reciente"
 
-#: .././pop-library/processors/blocks/sections.php:3384
+#: .././pop-library/processors/blocks/sections.php:3498
 msgid "Our Sponsors"
 msgstr "Nuestros patrocinadores"
 
-#: .././pop-library/processors/blocks/sections.php:3388
+#: .././pop-library/processors/blocks/sections.php:3502
 msgid "Our Supporters"
 msgstr "Quiénes nos apoyan"
 
-#: .././pop-library/processors/blocks/sections.php:3395
+#: .././pop-library/processors/blocks/sections.php:3509
 msgid "Who we are"
 msgstr "Quiénes somos"
 
@@ -1844,6 +1839,10 @@ msgstr "Destacar de:"
 #: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:299
 msgid "Highlight:"
 msgstr "Destacado:"
+
+#: .././pop-library/processors/createupdatepost/forms/formgroups.php:38
+msgid "Preview"
+msgstr "Vista previa"
 
 #: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:90
 msgid "Featured Image"
@@ -2001,11 +2000,11 @@ msgstr "etiqueta"
 msgid "tags"
 msgstr "etiquetas"
 
-#: .././pop-library/processors/pagesections/pagesection-hooks.php:125
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:139
 msgid "FAQs"
 msgstr "Preguntas frecuentes"
 
-#: .././pop-library/processors/pagesections/pagesection-hooks.php:141
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:155
 msgid "Add a comment for:"
 msgstr "Añadir un comentario para:"
 
@@ -2017,11 +2016,11 @@ msgstr "Alternar menú de navegación"
 msgid "Toggle Browsing Tabs"
 msgstr "Alternar pestañas de navegación"
 
-#: .././pop-library/processors/pagesections/pagesections.php:451
+#: .././pop-library/processors/pagesections/pagesections.php:457
 msgid "Toggle Search"
 msgstr "Alternar búsqueda"
 
-#: .././pop-library/processors/pagesections/pagesections.php:457
+#: .././pop-library/processors/pagesections/pagesections.php:463
 #, php-format
 msgid ""
 "Powered by <a href=\"%s\" target=\"_blank\">the PoP framework</a> through <a "
@@ -2030,61 +2029,61 @@ msgstr ""
 "Hecho con <a href=\"%s\" target=\"_blank\">the PoP framework</a> a través de "
 "<a href=\"%s\" target=\"_blank\">Verticals</a>"
 
-#: .././pop-library/processors/pagesections/pagesections.php:461
+#: .././pop-library/processors/pagesections/pagesections.php:468
 msgid "About us"
 msgstr "Sobre nosotros"
 
-#: .././pop-library/processors/pagesections/pagesections.php:462
+#: .././pop-library/processors/pagesections/pagesections.php:469
 msgid "My Profile"
 msgstr "Mi perfil"
 
-#: .././pop-library/processors/pagesections/pagesections.php:465
+#: .././pop-library/processors/pagesections/pagesections.php:472
 msgid "Settings"
 msgstr "Ajustes"
 
-#: .././pop-library/processors/pagesections/pagesections.php:466
+#: .././pop-library/processors/pagesections/pagesections.php:473
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: .././pop-library/processors/pagesections/pagesections.php:467
+#: .././pop-library/processors/pagesections/pagesections.php:474
 msgid "<em>Many thanks to our <strong>Sponsors and Supporters</strong>:</em>"
 msgstr ""
 "<em>Muchas gracias a nuestros <strong>Patrocinadores y Colaboradores</"
 "strong>:</em>"
 
-#: .././pop-library/processors/pagesections/pagesections.php:468
+#: .././pop-library/processors/pagesections/pagesections.php:475
 msgid "Our Sponsors and Supporters"
 msgstr "Nuestros Patrocinadores y Colaboradores"
 
-#: .././pop-library/processors/pagesections/pagesections.php:470
-#: .././pop-library/processors/pagesections/pagesections.php:475
+#: .././pop-library/processors/pagesections/pagesections.php:477
+#: .././pop-library/processors/pagesections/pagesections.php:482
 #, php-format
 msgid "View all <a href=\"%s\">%s</a>"
 msgstr "Ver todas <a href=\"%s\">%s</a>"
 
-#: .././pop-library/processors/pagesections/pagesections.php:484
+#: .././pop-library/processors/pagesections/pagesections.php:491
 msgid "Add content"
 msgstr "Agregar contenido"
 
-#: .././pop-library/processors/pagesections/pagesections.php:485
+#: .././pop-library/processors/pagesections/pagesections.php:492
 msgid "Add new..."
 msgstr "Añadir un nuevo..."
 
-#: .././pop-library/processors/pagesections/pagesections.php:488
+#: .././pop-library/processors/pagesections/pagesections.php:495
 #, php-format
 msgid "Your account in %s"
 msgstr "Tu cuenta en %s"
 
-#: .././pop-library/processors/pagesections/pagesections.php:541
+#: .././pop-library/processors/pagesections/pagesections.php:548
 #, php-format
 msgid "Open %s in a new tab"
 msgstr "Abrir %s en una nueva pestaña"
 
-#: .././pop-library/processors/pagesections/pagesections.php:544
+#: .././pop-library/processors/pagesections/pagesections.php:551
 msgid "Toggle full screen"
 msgstr "Alternar pantalla completa"
 
-#: .././pop-library/processors/pagesections/pagesections.php:545
+#: .././pop-library/processors/pagesections/pagesections.php:552
 msgid "Open in new window"
 msgstr "Abrir en Nueva ventana"
 
@@ -2134,7 +2133,7 @@ msgstr "Usuarios"
 msgid "Date"
 msgstr "Fecha"
 
-#: .././pop-library/utils.php:147
+#: .././pop-library/utils.php:193
 #, php-format
 msgid "Welcome to %s!"
 msgstr "Bienvenidos a %s!"
@@ -2171,11 +2170,17 @@ msgstr "Ver el perfil de %1$s y ponerse en contacto a través de %2$s."
 msgid "Entries tagged “%1$s” in %2$s."
 msgstr "Entradas con la etiqueta \"%1$s\" en %2$s."
 
-#: .././templates/loading-screen.php:12
+#: .././templates/loading-screen.php:5
+msgid "The website is loading, please wait a few moments to click on links."
+msgstr ""
+"El sitio web está cargando, por favor espere unos momentos para hacer click "
+"en enlaces."
+
+#: .././templates/loading-screen.php:20
 msgid "Loading pure awesomeness"
 msgstr "Cargando genialidad pura"
 
-#: .././templates/loading-screen.php:13
+#: .././templates/loading-screen.php:21
 msgid "please wait..."
 msgstr "por favor espere..."
 
