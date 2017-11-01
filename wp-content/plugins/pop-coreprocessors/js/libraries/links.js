@@ -88,16 +88,14 @@ popLinks = {
 
 			if (imgRegex.test(url)) {
 
-				var method = 'linksImage';
-
 				// Allow for a 3rd party plugin to intercept it (eg: photoSwipe). If no plugin did, then open in new window
-				if (popJSLibraryManager.getLibraries(method).length) {
+				if (popJSLibraryManager.getLibraries('linksImage').length) {
 
 					e.preventDefault();
 					var args = {
 						anchor: anchor
 					}
-					popJSLibraryManager.execute(method, args);
+					popJSLibraryManager.execute('linksImage', args);
 				}
 				else {
 
