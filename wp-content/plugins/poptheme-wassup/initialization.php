@@ -44,7 +44,9 @@ class PoPTheme_Wassup_Initialization {
 
 			// After PoP
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'), 100);
-			add_action('wp_print_styles', array($this, 'register_styles'), 100);
+
+			// Priority 0: print "style.css" immediately, so it starts rendering and applying these styles before anything else
+			add_action('wp_print_styles', array($this, 'register_styles'), 0);
 		}
 	}
 
@@ -154,6 +156,40 @@ class PoPTheme_Wassup_Initialization {
 		$includes_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/includes';
 		$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
 		$bundles_css_folder = $dist_css_folder . '/bundles';
+
+		/* ------------------------------
+		 * Local Libraries (enqueue first)
+		 ----------------------------- */
+
+		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+
+			wp_register_style('poptheme-wassup', $bundles_css_folder . '/poptheme-wassup.bundle.min.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
+			wp_enqueue_style('poptheme-wassup');
+		}
+		else {
+
+			wp_register_style('poptheme-wassup-pagesectiongroup', $libraries_css_folder . '/pagesection-group'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+			wp_enqueue_style('poptheme-wassup-pagesectiongroup');
+
+			/** Theme CSS Source */
+			wp_register_style('poptheme-wassup', $libraries_css_folder.'/style'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
+			wp_enqueue_style('poptheme-wassup');
+
+			// Not in CDN
+			wp_register_style('bootstrap-multiselect', $includes_css_folder . '/bootstrap-multiselect.0.9.13'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
+			wp_enqueue_style('bootstrap-multiselect');
+
+			/** Custom Theme Source */
+			// Custom implementation of Bootstrap
+			wp_register_style('poptheme-wassup-bootstrap', $libraries_css_folder . '/custom.bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
+			wp_enqueue_style('poptheme-wassup-bootstrap');
+
+			wp_register_style('poptheme-wassup-skeletonscreen', $libraries_css_folder . '/skeleton-screen'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+			wp_enqueue_style('poptheme-wassup-skeletonscreen');
+
+			wp_register_style('poptheme-wassup-typeahead-bootstrap', $libraries_css_folder . '/typeahead.js-bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
+			wp_enqueue_style('poptheme-wassup-typeahead-bootstrap');	
+		}
 		
 		/* ------------------------------
 		 * 3rd Party Libraries (using CDN whenever possible)
@@ -179,32 +215,5 @@ class PoPTheme_Wassup_Initialization {
 		wp_enqueue_style('fileupload');
 		wp_enqueue_style('font-awesome');
 		wp_enqueue_style('daterangepicker');
-
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
-
-			wp_register_style('poptheme-wassup', $bundles_css_folder . '/poptheme-wassup.bundle.min.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
-			wp_enqueue_style('poptheme-wassup');
-		}
-		else {
-
-			// Not in CDN
-			wp_register_style('bootstrap-multiselect', $includes_css_folder . '/bootstrap-multiselect.0.9.13'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('bootstrap-multiselect');
-
-			/** Theme CSS Source */
-			wp_register_style('poptheme-wassup', $libraries_css_folder.'/style'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
-			wp_enqueue_style('poptheme-wassup');
-
-			/** Custom Theme Source */
-			// Custom implementation of Bootstrap
-			wp_register_style('poptheme-wassup-bootstrap', $libraries_css_folder . '/custom.bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-bootstrap');
-
-			wp_register_style('poptheme-wassup-skeletonscreen', $libraries_css_folder . '/skeleton-screen'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-skeletonscreen');
-
-			wp_register_style('poptheme-wassup-typeahead-bootstrap', $libraries_css_folder . '/typeahead.js-bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-typeahead-bootstrap');	
-		}
 	}
 }
