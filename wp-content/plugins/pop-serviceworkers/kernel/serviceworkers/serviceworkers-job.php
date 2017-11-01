@@ -50,7 +50,11 @@ class PoP_ServiceWorkers_Job {
         $dependencies_foldername = $pop_serviceworkers_manager->get_dependencies_foldername();
 
         // Path: allow to add the full path to the folder, so we can access them under assets.getpop.org instead of getpop.org (which happens using a relative path)
-        $dependencies_path = POP_SERVICEWORKERS_ASSETDESTINATION_URI.'/'.$dependencies_foldername;
+        // Allow the CDN to be injected by hook
+        $dependencies_path = apply_filters(
+            'PoP_ServiceWorkers_Job:dependencies_path',
+            POP_SERVICEWORKERS_ASSETDESTINATION_URI.'/'.$dependencies_foldername
+        );
         return array(
             '$dependenciesFolder' => $dependencies_foldername,
             '$dependenciesPath' => $dependencies_path,
