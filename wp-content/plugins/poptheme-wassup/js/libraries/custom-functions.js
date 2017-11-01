@@ -211,7 +211,8 @@ popCustomFunctions = {
 		if (elem.attr('id') == M.PS_MAIN_ID && !elem.hasClass('perfect-scrollbar')) {
 
 			// Return the height of the body
-			return body.scrollTop;
+			// Taken from https://stackoverflow.com/questions/19618545/body-scrolltop-vs-documentelement-scrolltop-vs-window-pagyoffset-vs-window-scrol
+			return window.pageYOffset || document.documentElement.scrollTop || body.scrollTop || 0;
 		}
 
 		return 0;
