@@ -45,8 +45,15 @@ class PoP_ServiceWorkers_Job {
     public function get_sw_codereplacements() {
         
         global $pop_serviceworkers_manager;
+        
+        // Foldername: where the dependency scripts are located
+        $dependencies_foldername = $pop_serviceworkers_manager->get_dependencies_foldername();
+
+        // Path: allow to add the full path to the folder, so we can access them under assets.getpop.org instead of getpop.org (which happens using a relative path)
+        $dependencies_path = POP_SERVICEWORKERS_ASSETDESTINATION_URI.'/'.$dependencies_foldername;
         return array(
-            '$dependenciesFolder' => $pop_serviceworkers_manager->get_dependencies_foldername(),
+            '$dependenciesFolder' => $dependencies_foldername,
+            '$dependenciesPath' => $dependencies_path,
         );
     }
 

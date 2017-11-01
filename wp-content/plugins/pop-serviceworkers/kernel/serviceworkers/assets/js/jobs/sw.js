@@ -1,8 +1,8 @@
 /* global self, caches, fetch, URL, Response */
 'use strict';
 
-importScripts('./$dependenciesFolder/localforage.1.4.3.min.js');
-importScripts('./$dependenciesFolder/utils.js');
+importScripts('$dependenciesPath/localforage.1.4.3.min.js');
+importScripts('$dependenciesPath/utils.js');
 
 const SW_STRATEGIES_CACHEFIRSTTHENAPPSHELL = 1;
 const SW_STRATEGIES_CACHEFIRSTTHENNETWORK = 2;
