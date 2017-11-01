@@ -343,25 +343,12 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 					$manager_dependencies[] = POP_RESOURCELOADER_TOPLEVELJSON;
 				}
 
-				// Check what strategy to use to load the ResourceLoader Config files
-				// if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {
-
-				// 	// Comment Leo 08/10/2017: instead of loading the full default-config.js, load the smaller homedefault-config.js, pagedefault-config.js, etc,
-				// 	// and then make them defer if they are not the ones needed for the current page
-				// 	// $manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES;
-				// 	$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES;
-				// 	$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES;
-				// 	$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES;
-				// 	$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES;
-				// 	$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES;
-				// 	$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES;
-				// }
-				// else {
+				// Load the ResourceLoader Config files
 				$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES;
 
 				// Add the backgroundLoad resources from the beginning, so we already have the mapping with the resources for these URL, which will be fetched immediately when loading the website
 				$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES;
-				// }
+
 				if ($manager_dependencies = apply_filters(
 					'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
 					$manager_dependencies

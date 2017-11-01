@@ -46,7 +46,6 @@ cp $POP_APP_PATH/wp-content/plugins/pop-frontendengine/js/dist/bundles/pop-front
 cp $POP_APP_PATH/wp-content/plugins/pop-bootstrapprocessors/js/dist/bundles/pop-bootstrapprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/bundles/pop-coreprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-cdn-core/js/dist/bundles/pop-cdn-core.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
-cp $POP_APP_PATH/wp-content/plugins/pop-resourceloader/js/dist/bundles/pop-resourceloader.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-serviceworkers/js/dist/bundles/pop-serviceworkers.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/aryo-activity-log-popprocessors/js/dist/bundles/aryo-activity-log-popprocessors.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-useravatar/js/dist/bundles/pop-useravatar.bundle.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/apps/getpop-demo/js/libraries/

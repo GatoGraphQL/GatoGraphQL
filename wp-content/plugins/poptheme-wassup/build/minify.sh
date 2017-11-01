@@ -29,6 +29,7 @@ wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/bundles/popthem
 cd $POP_APP_PATH/wp-content/plugins/poptheme-wassup/css/
 uglifycss libraries/style.css --output dist/libraries/style.min.css
 uglifycss libraries/custom.bootstrap.css --output dist/libraries/custom.bootstrap.min.css
+uglifycss libraries/pagesection-group.css --output dist/libraries/pagesection-group.min.css
 uglifycss libraries/skeleton-screen.css --output dist/libraries/skeleton-screen.min.css
 uglifycss libraries/typeahead.js-bootstrap.css --output dist/libraries/typeahead.js-bootstrap.min.css
 uglifycss includes/bootstrap-multiselect.0.9.13.css --output dist/includes/bootstrap-multiselect.0.9.13.min.css
@@ -37,4 +38,4 @@ uglifycss includes/bootstrap-multiselect.0.9.13.css --output dist/includes/boots
 rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/css/*.css
 cp dist/libraries/*.min.css $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/css/
 cp dist/includes/*.min.css $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/css/
-wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/css/dist/bundles/poptheme-wassup.bundle.min.css "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/css&f=style.min.css,custom.bootstrap.min.css,skeleton-screen.min.css,typeahead.js-bootstrap.min.css,bootstrap-multiselect.0.9.13.min.css"
+wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/css/dist/bundles/poptheme-wassup.bundle.min.css "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/css&f=style.min.css,custom.bootstrap.min.css,pagesection-group.min.css,skeleton-screen.min.css,typeahead.js-bootstrap.min.css,bootstrap-multiselect.0.9.13.min.css"

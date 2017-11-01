@@ -35,13 +35,6 @@ class PoPFrontend {
 		// Allow other plug-ins to modify the plugins_url path (eg: pop-aws adding the CDN)
 		define ('POP_FRONTENDENGINE_URI', plugins_url('', __FILE__));
 
-		// // Allow the Theme to override the cache folder (eg: to add a custom folder after ir, eg: pop-cache/mesym/)
-		// if (!defined ('POP_FRONTENDENGINE_CONTENT_DIR')) {
-		// 	define ('POP_FRONTENDENGINE_CONTENT_DIR', WP_CONTENT_DIR.'/pop-frontendengine');
-		// }
-		// if (!defined ('POP_FRONTENDENGINE_CONTENT_URI')) {
-		// 	define ('POP_FRONTENDENGINE_CONTENT_URI', WP_CONTENT_URL.'/pop-frontendengine');
-		// }
 		define ('POP_FRONTENDENGINE_CONTENT_DIR', POP_CONTENT_DIR.'/pop-frontendengine');
 		define ('POP_FRONTENDENGINE_CONTENT_URI', POP_CONTENT_URL.'/pop-frontendengine');
 		// define ('POP_FRONTENDENGINE_RUNTIMECONTENT_DIR', POP_RUNTIMECONTENT_DIR.'/pop-frontendengine');
@@ -49,14 +42,6 @@ class PoPFrontend {
 		define ('POP_FRONTENDENGINE_BUILD_DIR', POP_BUILD_DIR.'/pop-frontendengine');
 		define ('POP_FRONTENDENGINE_GENERATECACHE_DIR', POP_GENERATECACHE_DIR.'/pop-frontendengine');
 		// define ('POP_FRONTENDENGINE_BUILD_URI', POP_BUILD_URL.'/pop-frontendengine');
-
-		// Allow the Theme to override the cache folder (eg: to add a custom folder after ir, eg: pop-cache/mesym/)
-		// if (!defined ('POP_RESOURCELOADER_ASSETDESTINATION_DIR')) {
-		// 	define ('POP_RESOURCELOADER_ASSETDESTINATION_DIR', WP_CONTENT_DIR.'/pop-resourceloader');
-		// }
-		// if (!defined ('POP_RESOURCELOADER_ASSETDESTINATION_URI')) {
-		// 	define ('POP_RESOURCELOADER_ASSETDESTINATION_URI', WP_CONTENT_URL.'/pop-resourceloader');
-		// }
 
 		if ($this->validate()) {
 			

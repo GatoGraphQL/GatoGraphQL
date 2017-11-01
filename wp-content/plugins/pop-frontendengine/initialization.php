@@ -27,14 +27,7 @@ class PoPFrontend_Initialization {
 			// Print all jQuery functions, execute after all the plugin scripts have loaded
 			// Load before we start printing the footer scripts, so we can add the 'after' data to the required scripts
 			add_action('wp_print_footer_scripts', array($this, 'init_scripts'), 0);
-			// if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {
-
-			// 	add_action('wp_print_footer_scripts', array($this, 'add_scripts'), 0);
-			// }
-			// else {
-
 			add_action('wp_print_footer_scripts', array($this, 'print_scripts'), PHP_INT_MAX);
-			// }
 		}
 
 		/**---------------------------------------------------------------------------------------------------------------
@@ -126,12 +119,6 @@ class PoPFrontend_Initialization {
 				wp_register_script('pop-interceptors', $libraries_js_folder.'/interceptors'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
 				wp_enqueue_script('pop-interceptors');
 
-				// // Check if we need this library or not
-				// if (PoP_Frontend_ServerUtils::use_code_splitting()) {
-
-				// 	wp_register_script('pop-resourceloader', $libraries_js_folder.'/resourceloader'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
-				// 	wp_enqueue_script('pop-resourceloader');
-				// }
 				if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
 					
 					wp_register_script('pop-topleveljson', $libraries_js_folder.'/topleveljson'.$suffix.'.js', array(), POP_FRONTENDENGINE_VERSION, true);
@@ -353,33 +340,7 @@ class PoPFrontend_Initialization {
 		// giving the impression to the user that the page has already loaded, improving the speed perception
 		// $this->scripts[] = 'jQuery(document).ready( function($) { popManager.init(); });';
 		$this->scripts[] = 'popManager.init();';
-
-		// // Print all the scripts
-		// if (PoP_Frontend_ServerUtils::use_codesplitting_fastboot()) {
-
-		// 	// Execute the script immediately after the last element of the ResourceLoader enqueued scripts has been printed
-		// 	global $wp_scripts;
-		// 	$last_resource = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[count($resources)-1]);
-		// 	$wp_scripts->add_data($last_resource, 'after',  $scripts);
-		// }
-		// else {
-		// 	printf(
-		// 		'<script type="text/javascript">%s</script>', 
-		// 		implode(PHP_EOL, $scripts)
-		// 	);
-		// }
 	}
-
-	// function add_scripts() {
-
-	// 	if ($this->scripts) {
-
-	// 		// Execute the script immediately after the last element of the ResourceLoader enqueued scripts has been printed
-	// 		global $wp_scripts;
-	// 		$last_resource = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[count($resources)-1]);
-	// 		$wp_scripts->add_data($last_resource, 'after',  $scripts);
-	// 	}
-	// }
 
 	function print_scripts() {
 
