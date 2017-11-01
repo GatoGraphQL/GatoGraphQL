@@ -7,6 +7,7 @@
   font-family: 'Rockwell';
   src: url('../../fonts/Rockwell.eot');
   src: local('Rockwell Regular'), local('Rockwell'), url('../../fonts/Rockwell.ttf') format('truetype');
+  font-display: fallback;
 } 
 
 @media (min-width: 768px) {
@@ -262,9 +263,10 @@
 }
 
 /* Taken from https://github.com/twbs/bootstrap/issues/6053 so we can add .dropdown-menu inside .media and not get it cut */
-.media, .media-body {
+/* Comment Leo 01/10/2017: commented because it also makes the comments (which are inside a media) get away from their container and the screen becomes way wider than it should, mobile phone browsing is then ugly */
+/*.media, .media-body {
   overflow: visible;
-}
+}*/
 .media .media-body {
   display: table-cell;
   width: 10000px;
@@ -847,3 +849,5 @@ hr {
   /* Comment Leo 20/07/2017: line-height 14px creates problems on mobile phones, it shows an extra 1 pixel below the icon that is very annoying. Setting 12 px somehow works fine */
   line-height: 12px;
 }
+
+
