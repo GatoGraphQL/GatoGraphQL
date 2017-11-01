@@ -27,10 +27,13 @@ popMap = {
 			t.destroy(pageSection, block, targets);
 		});
 
-		targets.each(function() {
-			
-			var map = $(this);
-			t.triggerShowMap(domain, pageSection, block, map);
+		// Do it after the document is fully loaded, so that Google Maps doesn't make the site load more slowly
+		$(document).ready(function($) {
+			targets.each(function() {
+				
+				var map = $(this);
+				t.triggerShowMap(domain, pageSection, block, map);
+			});
 		});
 	},
 
