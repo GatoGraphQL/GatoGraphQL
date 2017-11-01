@@ -82,7 +82,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
 
             $configuration['$excludedFullPaths'][$resourceType] = array_unique($this->get_excluded_fullpaths($resourceType));
             $configuration['$excludedPartialPaths'][$resourceType] = array_unique($this->get_excluded_partialpaths($resourceType));
-            $configuration['$cacheItems'][$resourceType] = array_unique($this->get_precache_list($resourceType));
+            $configuration['$cacheItems'][$resourceType] = array_values(array_unique($this->get_precache_list($resourceType)));
             $configuration['$strategies'][$resourceType] = $this->get_strategies($resourceType);
             $configuration['$ignore'][$resourceType] = $this->get_ignored_params($resourceType);
         }
