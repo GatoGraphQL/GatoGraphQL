@@ -92,21 +92,27 @@ Because the [scripts automating the installation process](https://github.com/leo
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
-- `POP_SERVER_USECODESPLITTING` (_true|false_): If true, load only the .js and .css that is needed on each page and nothing more, if false, load a big application bundle.
-
 - `POP_SERVER_USESERVERSIDERENDERING` (_true|false_): Produce HTML on the server-side for the first-loaded page.
 
-- `POP_SERVER_USECACHE` (_true|false_): Create and re-use a cache of the settings of the requested page.
+- `POP_SERVER_USECODESPLITTING` (_true|false_): Load only the .js and .css that is needed on each page and nothing more.
 
-- `POP_SERVER_USEMINIFIEDRESOURCES` (_true|false_): Include the mangled, minified and bundled together version of all .js, .tmpl.js and .css files.
+- `POP_SERVER_GENERATERESOURCESONRUNTIME` (_true|false_): Allow to extract configuration code from the HTML output and into Javascript files on runtime.
+
+- `POP_SERVER_USEMINIFIEDRESOURCES` (_true|false_): Include the minified version of .js and .css files.
+
+- `POP_SERVER_USEBUNDLEDRESOURCES` (_true|false_): (Only if not doing code-splitting) Insert script and style assets from a single bundled file.
 
 - `POP_SERVER_USECDNRESOURCES` (_true|false_): Whenever available, use resources from a public CDN.
+
+- `POP_SERVER_USEFASTBOOT` (_true|false_): Re-order script tags so that they are included only after rendering all HTML.
 
 - `POP_SERVER_TEMPLATEDEFINITION_TYPE` (_0|1|2_): Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
 
   0: Use the original name of each module. 1: Use both. 2: Use the base36 counter number.
 
 - `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true|false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different websites can communicate with each other without conflict, mangling all template definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
+
+- `POP_SERVER_USECACHE` (_true|false_): Create and re-use a cache of the settings of the requested page.
 
 - `POP_SERVER_COMPACTJSKEYS` (_true|false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
@@ -152,9 +158,13 @@ Executing the `minify.sh` scripts requires the following software (_I'll welcome
  
 1. [UglifyJS](https://github.com/mishoo/UglifyJS2)
 
- To mangle and so further reduce the file size of the bundled JS file
+ To minify (as to reduce the file size of) JS files
 
-2. [Google's minimizer Min](https://github.com/mrclay/minify)
+2. [UglifyCSS](https://github.com/fmarcia/UglifyCSS)
+
+ To minify (as to reduce the file size of) CSS files
+
+3. [Google's minimizer Min](https://github.com/mrclay/minify)
 
  To bundle and minify files. The min webserver must be deployed under http://min.localhost/.
 
