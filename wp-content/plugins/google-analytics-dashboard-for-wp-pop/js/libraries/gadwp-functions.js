@@ -19,6 +19,9 @@ popGADWP = {
 	stateURLPushed : function(args) {
 
 		var t = this;
+		// Provide the path: remove the domain from the URL to track
+		// Documentation: https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
+		ga('set', 'page', args.url.substr(M.HOME_DOMAIN.length));
 		ga('send', 'pageview');
 	},
 };
