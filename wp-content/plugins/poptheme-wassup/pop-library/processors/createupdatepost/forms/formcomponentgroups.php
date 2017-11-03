@@ -5,29 +5,29 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_TITLE', PoP_ServerUtils::get_template_definition('formcomponentgroup-cup-title'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_STATUS', PoP_ServerUtils::get_template_definition('formcomponentgroup-cup-status'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINK', PoP_ServerUtils::get_template_definition('formcomponentgroup-link'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINKTITLE', PoP_ServerUtils::get_template_definition('formcomponentgroup-linktitle'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINKACCESS', PoP_ServerUtils::get_template_definition('formcomponentgroup-linkaccess'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINKCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponentgroup-linkcategories'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_APPLIESTO', PoP_ServerUtils::get_template_definition('formcomponentgroup-appliesto'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CATEGORIES', PoP_ServerUtils::get_template_definition('formcomponentgroup-categories'));
-// define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SECTIONS', PoP_ServerUtils::get_template_definition('formcomponentgroup-sections'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('formcomponentgroup-webpostsections'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_HIGHLIGHTEDITOR', PoP_ServerUtils::get_template_definition('formcomponent-highlighteditorgroup'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_HIGHLIGHTEDPOST', PoP_ServerUtils::get_template_definition('formcomponentgroup-selectabletypeahead-highlightedpost'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_BUTTONGROUP_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('formcomponentgroup-buttongroup-webpostsections'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_TITLE', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-cup-title'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CUP_STATUS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-cup-status'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINK', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-link'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINKTITLE', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-linktitle'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINKACCESS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-linkaccess'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LINKCATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-linkcategories'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_APPLIESTO', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-appliesto'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-categories'));
+// define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SECTIONS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-sections'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-webpostsections'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_HIGHLIGHTEDITOR', PoP_TemplateIDUtils::get_template_definition('formcomponent-highlighteditorgroup'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_HIGHLIGHTEDPOST', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-selectabletypeahead-highlightedpost'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_BUTTONGROUP_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-buttongroup-webpostsections'));
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LINKACCESS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-linkaccess'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LINKCATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-linkcategories'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_APPLIESTO', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-appliesto'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_CATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-categories'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_SECTIONS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-sections'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-webpostsections'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_BUTTONGROUP_CATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-categories-btngroup'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_BUTTONGROUP_SECTIONS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-sections-btngroup'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_BUTTONGROUP_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-webpostsections-btngroup'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LINKACCESS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-linkaccess'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LINKCATEGORIES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-linkcategories'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_APPLIESTO', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-appliesto'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-categories'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_SECTIONS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-sections'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-webpostsections'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_BUTTONGROUP_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-categories-btngroup'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_BUTTONGROUP_SECTIONS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-sections-btngroup'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_BUTTONGROUP_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-webpostsections-btngroup'));
 
 class GD_Template_Processor_CreateUpdatePostFormComponentGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

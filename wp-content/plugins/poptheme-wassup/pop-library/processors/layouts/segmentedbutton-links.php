@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-segmentedbutton-navigator'));
-define ('GD_TEMPLATE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-dropdownsegmentedbutton-navigator'));
+define ('GD_TEMPLATE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-segmentedbutton-navigator'));
+define ('GD_TEMPLATE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-dropdownsegmentedbutton-navigator'));
 
 class GD_Template_Processor_SegmentedButtonLinks extends GD_Template_Processor_SegmentedButtonLinksBase {
 

@@ -5,19 +5,19 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// define ('GD_TEMPLATE_LAYOUT_SIMPLEVIEW_EVENT', PoP_ServerUtils::get_template_definition('layout-simpleview-event'));
-// define ('GD_TEMPLATE_LAYOUT_SIMPLEVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-simpleview-pastevent'));
-// define ('GD_TEMPLATE_AUTHORLAYOUT_SIMPLEVIEW_EVENT', PoP_ServerUtils::get_template_definition('authorlayout-simpleview-event'));
-// define ('GD_TEMPLATE_AUTHORLAYOUT_SIMPLEVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('authorlayout-simpleview-pastevent'));
-// define ('GD_TEMPLATE_SINGLELAYOUT_SIMPLEVIEW_EVENT', PoP_ServerUtils::get_template_definition('singlelayout-simpleview-event'));
-// define ('GD_TEMPLATE_SINGLELAYOUT_SIMPLEVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('singlelayout-simpleview-pastevent'));
+// define ('GD_TEMPLATE_LAYOUT_SIMPLEVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-simpleview-event'));
+// define ('GD_TEMPLATE_LAYOUT_SIMPLEVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-simpleview-pastevent'));
+// define ('GD_TEMPLATE_AUTHORLAYOUT_SIMPLEVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('authorlayout-simpleview-event'));
+// define ('GD_TEMPLATE_AUTHORLAYOUT_SIMPLEVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('authorlayout-simpleview-pastevent'));
+// define ('GD_TEMPLATE_SINGLELAYOUT_SIMPLEVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('singlelayout-simpleview-event'));
+// define ('GD_TEMPLATE_SINGLELAYOUT_SIMPLEVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('singlelayout-simpleview-pastevent'));
 
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_EVENT', PoP_ServerUtils::get_template_definition('layout-fullview-event'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-fullview-pastevent'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_EVENT', PoP_ServerUtils::get_template_definition('authorlayout-fullview-event'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('authorlayout-fullview-pastevent'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_EVENT', PoP_ServerUtils::get_template_definition('singlelayout-fullview-event'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('singlelayout-fullview-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-fullview-event'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-fullview-pastevent'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-event'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-pastevent'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-event'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-pastevent'));
 
 class GD_EM_Template_Processor_CustomFullViewLayouts extends GD_Template_Processor_CustomFullViewLayoutsBase {
 

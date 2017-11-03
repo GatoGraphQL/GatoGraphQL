@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_AUTHOR_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('block-author-sidebar-organization'));
-define ('GD_TEMPLATE_BLOCK_AUTHOR_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('block-author-sidebar-individual'));
-define ('GD_TEMPLATE_BLOCK_SECTION_INDIVIDUALS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-individuals-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_ORGANIZATIONS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-organizations-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_MYMEMBERS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-mymembers-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHOR_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('block-author-sidebar-organization'));
+define ('GD_TEMPLATE_BLOCK_AUTHOR_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('block-author-sidebar-individual'));
+define ('GD_TEMPLATE_BLOCK_SECTION_INDIVIDUALS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-individuals-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_ORGANIZATIONS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-organizations-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_MYMEMBERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-mymembers-sidebar'));
 
 class GD_URE_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_CustomSidebarBlocksBase {
 

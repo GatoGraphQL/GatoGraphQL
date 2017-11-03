@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('form-user-changepwd'));
-define ('GD_TEMPLATE_FORM_MYPREFERENCES', PoP_ServerUtils::get_template_definition('form-mypreferences'));
+define ('GD_TEMPLATE_FORM_USER_CHANGEPASSWORD', PoP_TemplateIDUtils::get_template_definition('form-user-changepwd'));
+define ('GD_TEMPLATE_FORM_MYPREFERENCES', PoP_TemplateIDUtils::get_template_definition('form-mypreferences'));
 
 class GD_Template_Processor_UserForms extends GD_Template_Processor_FormsBase {
 

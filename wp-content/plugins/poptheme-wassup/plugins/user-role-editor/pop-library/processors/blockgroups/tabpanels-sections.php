@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_COMMUNITIES', PoP_ServerUtils::get_template_definition('blockgroup-communities-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('blockgroup-organizations-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_INDIVIDUALS', PoP_ServerUtils::get_template_definition('blockgroup-individuals-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYMEMBERS', PoP_ServerUtils::get_template_definition('blockgroup-mymembers-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('blockgroup-communities-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('blockgroup-organizations-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('blockgroup-individuals-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('blockgroup-mymembers-tabpanel'));
 
 class GD_URE_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Processor_SectionTabPanelBlockGroupsBase {
 

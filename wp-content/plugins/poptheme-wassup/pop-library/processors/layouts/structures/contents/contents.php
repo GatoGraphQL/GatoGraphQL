@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTLAYOUT_HIGHLIGHTREFERENCEDBY', PoP_ServerUtils::get_template_definition('contentlayout-highlightreferencedby'));
-define ('GD_TEMPLATE_CONTENTLAYOUT_HIGHLIGHTREFERENCEDBY_APPENDABLE', PoP_ServerUtils::get_template_definition('contentlayout-highlightreferencedby-appendable'));
+define ('GD_TEMPLATE_CONTENTLAYOUT_HIGHLIGHTREFERENCEDBY', PoP_TemplateIDUtils::get_template_definition('contentlayout-highlightreferencedby'));
+define ('GD_TEMPLATE_CONTENTLAYOUT_HIGHLIGHTREFERENCEDBY_APPENDABLE', PoP_TemplateIDUtils::get_template_definition('contentlayout-highlightreferencedby-appendable'));
 
 class Wassup_Template_Processor_LayoutContents extends GD_Template_Processor_ContentsBase {
 

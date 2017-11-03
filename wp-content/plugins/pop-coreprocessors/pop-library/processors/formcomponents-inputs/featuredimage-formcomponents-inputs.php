@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_FEATUREDIMAGE', PoP_ServerUtils::get_template_definition('formcomponent-featuredimage'));
+define ('GD_TEMPLATE_FORMCOMPONENT_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('formcomponent-featuredimage'));
 
 class GD_Template_Processor_FeaturedImageComponentInputs extends GD_Template_Processor_FeaturedImageFormComponentsBase {
 

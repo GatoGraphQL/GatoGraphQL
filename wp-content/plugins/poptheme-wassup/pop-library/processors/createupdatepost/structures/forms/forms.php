@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_WEBPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-webpostlink-update'));
-define ('GD_TEMPLATE_FORM_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('form-webpostlink-create'));
-define ('GD_TEMPLATE_FORM_HIGHLIGHT_UPDATE', PoP_ServerUtils::get_template_definition('form-highlight-update'));
-define ('GD_TEMPLATE_FORM_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('form-highlight-create'));
-define ('GD_TEMPLATE_FORM_WEBPOST_UPDATE', PoP_ServerUtils::get_template_definition('form-webpost-update'));
-define ('GD_TEMPLATE_FORM_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('form-webpost-create'));
+define ('GD_TEMPLATE_FORM_WEBPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-webpostlink-update'));
+define ('GD_TEMPLATE_FORM_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('form-webpostlink-create'));
+define ('GD_TEMPLATE_FORM_HIGHLIGHT_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-highlight-update'));
+define ('GD_TEMPLATE_FORM_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('form-highlight-create'));
+define ('GD_TEMPLATE_FORM_WEBPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-webpost-update'));
+define ('GD_TEMPLATE_FORM_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('form-webpost-create'));
 
 class Wassup_Template_Processor_CreateUpdatePostForms extends GD_Template_Processor_FormsBase {
 

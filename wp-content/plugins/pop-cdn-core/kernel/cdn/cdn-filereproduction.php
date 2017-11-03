@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
  
-class PoP_CDNCore_FileReproduction extends PoP_Frontend_FileReproductionBase {
+class PoP_CDNCore_FileReproduction extends PoP_Engine_FileReproductionBase {
 
     function get_renderer() {
     

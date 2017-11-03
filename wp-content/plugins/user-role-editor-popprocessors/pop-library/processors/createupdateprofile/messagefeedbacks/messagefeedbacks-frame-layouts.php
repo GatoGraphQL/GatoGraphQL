@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYCOMMUNITIES', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-mycommunities'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-invitemembers'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-editmembership'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYMEMBERS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-mymembers'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYCOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-mycommunities'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-invitemembers'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-editmembership'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-mymembers'));
 
 class GD_URE_Template_Processor_ProfileMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

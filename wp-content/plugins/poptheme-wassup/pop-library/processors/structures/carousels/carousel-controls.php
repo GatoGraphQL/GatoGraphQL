@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELCONTROLS_USERS', PoP_ServerUtils::get_template_definition('carouselcontrols-users'));
+define ('GD_TEMPLATE_CAROUSELCONTROLS_USERS', PoP_TemplateIDUtils::get_template_definition('carouselcontrols-users'));
 // define ('GD_TEMPLATE_CAROUSELCONTROLS_LATESTCOMMENTS_HOME', 'carouselcontrols-latestcomments-home');
 
 class GD_Template_Processor_CustomCarouselControls extends GD_Template_Processor_CarouselControlsBase {

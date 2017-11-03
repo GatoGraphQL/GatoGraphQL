@@ -23,8 +23,8 @@ class PoP_ResourceLoader_AbbreviationsStorageManager {
 			$this->initialized = true;
 
 			// Get the inner variable from the cache, if it exists
-			global $pop_frontend_filejsonstorage, $pop_resourceloader_abbreviationsstorage_generator;
-			$this->abbreviations = $pop_frontend_filejsonstorage->get($pop_resourceloader_abbreviationsstorage_generator->get_filepath());
+			global $pop_engine_filejsonstorage, $pop_resourceloader_abbreviationsstorage_generator;
+			$this->abbreviations = $pop_engine_filejsonstorage->get($pop_resourceloader_abbreviationsstorage_generator->get_filepath());
 		}
 	}
 

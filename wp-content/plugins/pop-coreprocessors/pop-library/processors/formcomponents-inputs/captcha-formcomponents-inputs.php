@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CAPTCHA', PoP_ServerUtils::get_template_definition('formcomponent-captcha'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CAPTCHA', PoP_TemplateIDUtils::get_template_definition('formcomponent-captcha'));
 
 class GD_Template_Processor_CaptchaFormComponentInputs extends GD_Template_Processor_CaptchaFormComponentsBase {
 

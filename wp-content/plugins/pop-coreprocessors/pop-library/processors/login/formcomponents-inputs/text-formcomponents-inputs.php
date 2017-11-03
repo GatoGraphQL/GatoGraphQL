@@ -6,12 +6,12 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // Important: do NOT change the name of these formcomponents, they are needed like this by function wp_signon()
-define ('GD_TEMPLATE_FORMCOMPONENT_LOGIN_USERNAME', PoP_ServerUtils::get_template_definition('log'));
-define ('GD_TEMPLATE_FORMCOMPONENT_LOGIN_PWD', PoP_ServerUtils::get_template_definition('pwd'));
-define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWD_USERNAME', PoP_ServerUtils::get_template_definition('user_login'));
-define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWDRESET_CODE', PoP_ServerUtils::get_template_definition('code'));
-define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWDRESET_NEWPASSWORD', PoP_ServerUtils::get_template_definition('pass1'));
-define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWDRESET_PASSWORDREPEAT', PoP_ServerUtils::get_template_definition('pass2'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOGIN_USERNAME', PoP_TemplateIDUtils::get_template_definition('log'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOGIN_PWD', PoP_TemplateIDUtils::get_template_definition('pwd'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWD_USERNAME', PoP_TemplateIDUtils::get_template_definition('user_login'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWDRESET_CODE', PoP_TemplateIDUtils::get_template_definition('code'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWDRESET_NEWPASSWORD', PoP_TemplateIDUtils::get_template_definition('pass1'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOSTPWDRESET_PASSWORDREPEAT', PoP_TemplateIDUtils::get_template_definition('pass2'));
 
 class GD_Template_Processor_LoginTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

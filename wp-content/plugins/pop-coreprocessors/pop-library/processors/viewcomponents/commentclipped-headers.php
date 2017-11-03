@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED', PoP_ServerUtils::get_template_definition('viewcomponent-header-commentclipped'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-commentclipped'));
 
 class GD_Template_Processor_CommentClippedViewComponentHeaders extends GD_Template_Processor_CommentClippedViewComponentHeadersBase {
 

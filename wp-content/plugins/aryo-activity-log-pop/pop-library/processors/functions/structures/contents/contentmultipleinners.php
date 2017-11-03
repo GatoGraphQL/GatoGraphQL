@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTINNER_MARKNOTIFICATIONASREAD', PoP_ServerUtils::get_template_definition('contentinner-marknotificationasread'));
-define ('GD_TEMPLATE_CONTENTINNER_MARKNOTIFICATIONASUNREAD', PoP_ServerUtils::get_template_definition('contentinner-marknotificationasunread'));
+define ('GD_TEMPLATE_CONTENTINNER_MARKNOTIFICATIONASREAD', PoP_TemplateIDUtils::get_template_definition('contentinner-marknotificationasread'));
+define ('GD_TEMPLATE_CONTENTINNER_MARKNOTIFICATIONASUNREAD', PoP_TemplateIDUtils::get_template_definition('contentinner-marknotificationasunread'));
 
 class GD_AAL_Template_Processor_FunctionsContentMultipleInners extends GD_Template_Processor_ContentMultipleInnersBase {
 

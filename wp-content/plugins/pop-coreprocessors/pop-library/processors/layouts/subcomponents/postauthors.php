@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTAUTHORS', PoP_ServerUtils::get_template_definition('layout-postauthors'));
-define ('GD_TEMPLATE_LAYOUT_SIMPLEPOSTAUTHORS', PoP_ServerUtils::get_template_definition('layout-simplepostauthors'));
+define ('GD_TEMPLATE_LAYOUT_POSTAUTHORS', PoP_TemplateIDUtils::get_template_definition('layout-postauthors'));
+define ('GD_TEMPLATE_LAYOUT_SIMPLEPOSTAUTHORS', PoP_TemplateIDUtils::get_template_definition('layout-simplepostauthors'));
 
 class GD_Template_Processor_PostAuthorLayouts extends GD_Template_Processor_PostAuthorLayoutsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_TITLE', PoP_ServerUtils::get_template_definition('formcomponent-cup-title'));
-define ('GD_TEMPLATE_FORMCOMPONENT_LINK', PoP_ServerUtils::get_template_definition('formcomponent-link'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_TITLE', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-title'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LINK', PoP_TemplateIDUtils::get_template_definition('formcomponent-link'));
 
 class GD_Template_Processor_CreateUpdatePostTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

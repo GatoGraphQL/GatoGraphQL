@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EVENT_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-event-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EVENT_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-event-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-event-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EVENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-event-update'));
 
 class GD_EM_Template_Processor_CreateUpdatePostFormMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

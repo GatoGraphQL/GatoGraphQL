@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_BUTTONINNER_GOOGLECALENDAR', PoP_ServerUtils::get_template_definition('em-buttoninner-googlecalendar'));
-define ('GD_EM_TEMPLATE_BUTTONINNER_ICAL', PoP_ServerUtils::get_template_definition('em-buttoninner-ical'));
+define ('GD_EM_TEMPLATE_BUTTONINNER_GOOGLECALENDAR', PoP_TemplateIDUtils::get_template_definition('em-buttoninner-googlecalendar'));
+define ('GD_EM_TEMPLATE_BUTTONINNER_ICAL', PoP_TemplateIDUtils::get_template_definition('em-buttoninner-ical'));
 
 class GD_EM_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENT_MARKNOTIFICATIONASREAD', PoP_ServerUtils::get_template_definition('content-marknotificationasread'));
-define ('GD_TEMPLATE_CONTENT_MARKNOTIFICATIONASUNREAD', PoP_ServerUtils::get_template_definition('content-marknotificationasunread'));
+define ('GD_TEMPLATE_CONTENT_MARKNOTIFICATIONASREAD', PoP_TemplateIDUtils::get_template_definition('content-marknotificationasread'));
+define ('GD_TEMPLATE_CONTENT_MARKNOTIFICATIONASUNREAD', PoP_TemplateIDUtils::get_template_definition('content-marknotificationasunread'));
 
 class GD_AAL_Template_Processor_FunctionsContents extends GD_Template_Processor_ContentsBase {
 

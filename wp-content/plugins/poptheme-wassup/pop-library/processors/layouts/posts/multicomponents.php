@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION', PoP_ServerUtils::get_template_definition('multicomponent-userhighlightpostinteraction'));
-define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTINTERACTION', PoP_ServerUtils::get_template_definition('multicomponent-userpostinteraction'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('multicomponent-userhighlightpostinteraction'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('multicomponent-userpostinteraction'));
 
 class Wassup_Template_Processor_MultipleComponentLayouts extends GD_Template_Processor_MultiplesBase {
 	

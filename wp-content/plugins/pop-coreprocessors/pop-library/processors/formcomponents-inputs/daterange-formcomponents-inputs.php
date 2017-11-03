@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_DATERANGEPICKER', PoP_ServerUtils::get_template_definition('formcomponent-daterangepicker'));
-define ('GD_TEMPLATE_FORMCOMPONENT_DATERANGETIMEPICKER', PoP_ServerUtils::get_template_definition('formcomponent-daterangetimepicker'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_DATERANGEPICKER', PoP_ServerUtils::get_template_definition('date', true)); // Keep the name, so the URL params when filtering make sense
+define ('GD_TEMPLATE_FORMCOMPONENT_DATERANGEPICKER', PoP_TemplateIDUtils::get_template_definition('formcomponent-daterangepicker'));
+define ('GD_TEMPLATE_FORMCOMPONENT_DATERANGETIMEPICKER', PoP_TemplateIDUtils::get_template_definition('formcomponent-daterangetimepicker'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_DATERANGEPICKER', PoP_TemplateIDUtils::get_template_definition('date', true)); // Keep the name, so the URL params when filtering make sense
 
 class GD_Template_Processor_DateRangeComponentInputs extends GD_Template_Processor_DateRangeFormComponentsBase {
 

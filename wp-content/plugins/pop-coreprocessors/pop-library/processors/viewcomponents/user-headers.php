@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_USER', PoP_ServerUtils::get_template_definition('viewcomponent-header-user'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_USER_URL', PoP_ServerUtils::get_template_definition('viewcomponent-header-user-url'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_USER', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-user'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_USER_URL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-user-url'));
 
 class GD_Template_Processor_UserViewComponentHeaders extends GD_Template_Processor_UserViewComponentHeadersBase {
 

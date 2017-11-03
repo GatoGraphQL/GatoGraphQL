@@ -5,18 +5,18 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-locationposts-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_STORIES', PoP_ServerUtils::get_template_definition('blockgroup-stories-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('blockgroup-announcements-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_DISCUSSIONS', PoP_ServerUtils::get_template_definition('blockgroup-discussions-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_FEATURED', PoP_ServerUtils::get_template_definition('blockgroup-featured-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_BLOG', PoP_ServerUtils::get_template_definition('blockgroup-blog-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-locationposts-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_STORIES', PoP_TemplateIDUtils::get_template_definition('blockgroup-stories-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-announcements-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('blockgroup-discussions-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_FEATURED', PoP_TemplateIDUtils::get_template_definition('blockgroup-featured-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_BLOG', PoP_TemplateIDUtils::get_template_definition('blockgroup-blog-tabpanel'));
 
 // My Content
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-mylocationposts-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYSTORIES', PoP_ServerUtils::get_template_definition('blockgroup-mystories-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('blockgroup-myannouncements-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('blockgroup-mydiscussions-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-mylocationposts-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('blockgroup-mystories-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-myannouncements-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('blockgroup-mydiscussions-tabpanel'));
 
 class GD_Custom_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Processor_SectionTabPanelBlockGroupsBase {
 

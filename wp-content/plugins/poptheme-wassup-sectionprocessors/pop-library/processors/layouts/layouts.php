@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_LOCATIONPOST_CATEGORIES', PoP_ServerUtils::get_template_definition('layout-locationpost-categories'));
-define ('GD_TEMPLATE_LAYOUT_DISCUSSION_CATEGORIES', PoP_ServerUtils::get_template_definition('layout-discussion-categories'));
+define ('GD_TEMPLATE_LAYOUT_LOCATIONPOST_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layout-locationpost-categories'));
+define ('GD_TEMPLATE_LAYOUT_DISCUSSION_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layout-discussion-categories'));
 
 class GD_Custom_Template_Processor_Layouts extends GD_Template_Processor_CategoriesLayoutsBase {
 

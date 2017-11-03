@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_EVENT', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-event'));
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_PASTEVENT', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-pastevent'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_EVENT', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-event'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-pastevent'));
 
 class GD_EM_Template_Processor_CustomVerticalSingleSidebars extends GD_Template_Processor_SidebarsBase {
 	

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_MESSAGES_HOME', PoP_ServerUtils::get_template_definition('block-messages-home'));
+define ('GD_TEMPLATE_BLOCK_MESSAGES_HOME', PoP_TemplateIDUtils::get_template_definition('block-messages-home'));
 
 class GD_Template_Processor_CustomMessageBlocks extends GD_Template_Processor_MessageBlocksBase {
 

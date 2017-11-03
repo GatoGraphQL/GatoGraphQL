@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBMENU_ACCOUNT', PoP_ServerUtils::get_template_definition('submenu-account'));
+define ('GD_TEMPLATE_SUBMENU_ACCOUNT', PoP_TemplateIDUtils::get_template_definition('submenu-account'));
 
 class GD_Template_Processor_SubMenus extends GD_Template_Processor_SubMenusBase {
 

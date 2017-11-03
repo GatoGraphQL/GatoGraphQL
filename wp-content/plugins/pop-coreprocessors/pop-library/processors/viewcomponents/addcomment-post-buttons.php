@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-addcomment'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-addcomment-big'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-addcomment'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-addcomment-big'));
 
 class GD_Template_Processor_AddCommentPostViewComponentButtons extends GD_Template_Processor_AddCommentPostViewComponentButtonsBase {
 

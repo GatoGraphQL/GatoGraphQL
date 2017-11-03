@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_TAGS', PoP_ServerUtils::get_template_definition('formcomponent-typeaheadcomponent-tags'));
+define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_TAGS', PoP_TemplateIDUtils::get_template_definition('formcomponent-typeaheadcomponent-tags'));
 
 class GD_Template_Processor_TagTypeaheadComponentFormComponentInputs extends GD_Template_Processor_TagTypeaheadComponentFormComponentsBase {
 

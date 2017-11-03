@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_ALLCONTENT', PoP_ServerUtils::get_template_definition('latestcount-tag-allcontent'));
-define ('GD_TEMPLATE_LATESTCOUNT_ALLCONTENT', PoP_ServerUtils::get_template_definition('latestcount-allcontent'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_ALLCONTENT', PoP_ServerUtils::get_template_definition('latestcount-author-allcontent'));
-define ('GD_TEMPLATE_LATESTCOUNT_SINGLE_ALLCONTENT', PoP_ServerUtils::get_template_definition('latestcount-single-allcontent'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-allcontent'));
+define ('GD_TEMPLATE_LATESTCOUNT_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('latestcount-allcontent'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('latestcount-author-allcontent'));
+define ('GD_TEMPLATE_LATESTCOUNT_SINGLE_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('latestcount-single-allcontent'));
 
 class GD_Template_Processor_LatestCounts extends GD_Template_Processor_LatestCountsBase {
 

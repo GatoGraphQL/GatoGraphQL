@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TALKINGSPEECHBUBBLE_THOUGHT', PoP_ServerUtils::get_template_definition('talkingspeechbubble-thought'));
+define ('GD_TEMPLATE_TALKINGSPEECHBUBBLE_THOUGHT', PoP_TemplateIDUtils::get_template_definition('talkingspeechbubble-thought'));
 
 class GD_Template_Processor_CustomTalkingSpeechBubbles extends GD_Template_Processor_TalkingSpeechBubblesBase {
 

@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENT_FOLLOWSUSERS', PoP_ServerUtils::get_template_definition('content-followsusers'));
-define ('GD_TEMPLATE_CONTENT_UNFOLLOWSUSERS', PoP_ServerUtils::get_template_definition('content-unfollowsusers'));
-define ('GD_TEMPLATE_CONTENT_RECOMMENDSPOSTS', PoP_ServerUtils::get_template_definition('content-recommendsposts'));
-define ('GD_TEMPLATE_CONTENT_UNRECOMMENDSPOSTS', PoP_ServerUtils::get_template_definition('content-unrecommendsposts'));
-define ('GD_TEMPLATE_CONTENT_SUBSCRIBESTOTAGS', PoP_ServerUtils::get_template_definition('content-subscribestotags'));
-define ('GD_TEMPLATE_CONTENT_UNSUBSCRIBEFROMTAGS', PoP_ServerUtils::get_template_definition('content-unsubscribesfromtags'));
-define ('GD_TEMPLATE_CONTENT_UPVOTESPOSTS', PoP_ServerUtils::get_template_definition('content-upvotesposts'));
-define ('GD_TEMPLATE_CONTENT_UNDOUPVOTESPOSTS', PoP_ServerUtils::get_template_definition('content-undoupvotesposts'));
-define ('GD_TEMPLATE_CONTENT_DOWNVOTESPOSTS', PoP_ServerUtils::get_template_definition('content-downvotesposts'));
-define ('GD_TEMPLATE_CONTENT_UNDODOWNVOTESPOSTS', PoP_ServerUtils::get_template_definition('content-undodownvotesposts'));
+define ('GD_TEMPLATE_CONTENT_FOLLOWSUSERS', PoP_TemplateIDUtils::get_template_definition('content-followsusers'));
+define ('GD_TEMPLATE_CONTENT_UNFOLLOWSUSERS', PoP_TemplateIDUtils::get_template_definition('content-unfollowsusers'));
+define ('GD_TEMPLATE_CONTENT_RECOMMENDSPOSTS', PoP_TemplateIDUtils::get_template_definition('content-recommendsposts'));
+define ('GD_TEMPLATE_CONTENT_UNRECOMMENDSPOSTS', PoP_TemplateIDUtils::get_template_definition('content-unrecommendsposts'));
+define ('GD_TEMPLATE_CONTENT_SUBSCRIBESTOTAGS', PoP_TemplateIDUtils::get_template_definition('content-subscribestotags'));
+define ('GD_TEMPLATE_CONTENT_UNSUBSCRIBEFROMTAGS', PoP_TemplateIDUtils::get_template_definition('content-unsubscribesfromtags'));
+define ('GD_TEMPLATE_CONTENT_UPVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('content-upvotesposts'));
+define ('GD_TEMPLATE_CONTENT_UNDOUPVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('content-undoupvotesposts'));
+define ('GD_TEMPLATE_CONTENT_DOWNVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('content-downvotesposts'));
+define ('GD_TEMPLATE_CONTENT_UNDODOWNVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('content-undodownvotesposts'));
 
 class GD_Template_Processor_FunctionsContents extends GD_Template_Processor_ContentsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_EM_LAYOUT_LOCATIONNAME', PoP_ServerUtils::get_template_definition('em-layout-locationname'));
+define ('GD_TEMPLATE_EM_LAYOUT_LOCATIONNAME', PoP_TemplateIDUtils::get_template_definition('em-layout-locationname'));
 
 class GD_Template_Processor_LocationNameLayouts extends GD_Template_Processor_LocationNameLayoutsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTUSERMENTIONS', PoP_ServerUtils::get_template_definition('layout-postusermentions'));
+define ('GD_TEMPLATE_LAYOUT_POSTUSERMENTIONS', PoP_TemplateIDUtils::get_template_definition('layout-postusermentions'));
 
 class GD_Template_Processor_PostUserMentionsLayouts extends GD_Template_Processor_PostUserMentionsLayoutsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_AUTHOR_GENERIC', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-author-generic'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_AUTHOR_GENERIC', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-author-generic'));
 
 class GD_Template_Processor_CustomVerticalAuthorSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 	

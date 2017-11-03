@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_PROFILEORGANIZATION_CREATE', PoP_ServerUtils::get_template_definition('forminner-profileorganization-create'));
+define ('GD_TEMPLATE_FORMINNER_PROFILEORGANIZATION_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-profileorganization-create'));
 
 class GD_URE_Template_Processor_CreateProfileOrganizationFormInners extends GD_URE_Template_Processor_CreateProfileOrganizationFormInnersBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('widget-postcomments'));
-define ('GD_TEMPLATE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('widget-postcomments-appendtoscript'));
-// define ('GD_TEMPLATE_WIDGET_MAXHEIGHTPOSTCOMMENTS', PoP_ServerUtils::get_template_definition('widget-maxheightpostcomments'));
-// define ('GD_TEMPLATE_WIDGET_MAXHEIGHTPOSTCOMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('widget-maxheightpostcomments-appendtoscript'));
+define ('GD_TEMPLATE_WIDGET_POSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('widget-postcomments'));
+define ('GD_TEMPLATE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('widget-postcomments-appendtoscript'));
+// define ('GD_TEMPLATE_WIDGET_MAXHEIGHTPOSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('widget-maxheightpostcomments'));
+// define ('GD_TEMPLATE_WIDGET_MAXHEIGHTPOSTCOMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('widget-maxheightpostcomments-appendtoscript'));
 
 class GD_Template_Processor_CommentsWidgets extends GD_Template_Processor_WidgetsBase {
 

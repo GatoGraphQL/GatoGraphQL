@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_PAGETABS_EVENT_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-event-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-eventlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-event-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-eventlink-create'));
 
 class GD_EM_Template_Processor_CustomTabBlocks extends GD_Template_Processor_TabBlocksBase {
 	

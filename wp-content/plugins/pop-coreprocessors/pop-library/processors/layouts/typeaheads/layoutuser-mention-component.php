@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTUSER_MENTION_COMPONENT', PoP_ServerUtils::get_template_definition('layoutuser-mention-component'));
+define ('GD_TEMPLATE_LAYOUTUSER_MENTION_COMPONENT', PoP_TemplateIDUtils::get_template_definition('layoutuser-mention-component'));
 
 class GD_Template_Processor_UserMentionComponentLayouts extends GD_Template_Processor_UserMentionComponentLayoutsBase {
 

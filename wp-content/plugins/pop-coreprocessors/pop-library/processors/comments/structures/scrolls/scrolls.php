@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_COMMENTS_LIST', PoP_ServerUtils::get_template_definition('scroll-comments-list'));
-define ('GD_TEMPLATE_SCROLL_COMMENTS_ADD', PoP_ServerUtils::get_template_definition('scroll-comments-add'));
-define ('GD_TEMPLATE_SCROLLLAYOUT_POSTCOMMENT', PoP_ServerUtils::get_template_definition('layout-postcomment-scroll'));
-define ('GD_TEMPLATE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE', PoP_ServerUtils::get_template_definition('layout-postcomment-scroll-appendable'));
-define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('layout-referencedby-scroll-details'));
-define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-referencedby-scroll-simpleview'));
-define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-referencedby-scroll-fullview'));
-define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE', PoP_ServerUtils::get_template_definition('layout-referencedby-scroll-appendable'));
+define ('GD_TEMPLATE_SCROLL_COMMENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-comments-list'));
+define ('GD_TEMPLATE_SCROLL_COMMENTS_ADD', PoP_TemplateIDUtils::get_template_definition('scroll-comments-add'));
+define ('GD_TEMPLATE_SCROLLLAYOUT_POSTCOMMENT', PoP_TemplateIDUtils::get_template_definition('layout-postcomment-scroll'));
+define ('GD_TEMPLATE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE', PoP_TemplateIDUtils::get_template_definition('layout-postcomment-scroll-appendable'));
+define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-referencedby-scroll-details'));
+define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedby-scroll-simpleview'));
+define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedby-scroll-fullview'));
+define ('GD_TEMPLATE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE', PoP_TemplateIDUtils::get_template_definition('layout-referencedby-scroll-appendable'));
 
 class GD_Template_Processor_CommentScrolls extends GD_Template_Processor_ScrollsBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-highlightedit'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_HIGHLIGHTVIEW', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-highlightview'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-addonspostedit'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_ADDONSORMAINPOSTEDIT', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-addonsormainpostedit'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-highlightedit'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_HIGHLIGHTVIEW', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-highlightview'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-addonspostedit'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_ADDONSORMAINPOSTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-addonsormainpostedit'));
 
 class Wassup_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

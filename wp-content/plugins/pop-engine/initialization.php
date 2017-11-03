@@ -7,11 +7,13 @@ class PoPEngine_Initialization {
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Load the Server first, so we can access class PoP_ServerUtils
+		 * And its required library first
 		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once 'server-library/load.php';
 		require_once 'server/load.php';
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('a0');
+		PoP_TemplateIDUtils::set_namespace('a0');
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Constants/Configuration for functionalities needed by the plug-in

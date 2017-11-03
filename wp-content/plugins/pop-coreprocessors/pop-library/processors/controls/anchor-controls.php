@@ -5,33 +5,33 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS', PoP_ServerUtils::get_template_definition('anchorcontrol-toggleoptionalfields'));
-define ('GD_TEMPLATE_ANCHORCONTROL_EXPANDCOLLAPSIBLE', PoP_ServerUtils::get_template_definition('anchorcontrol-expandcollapsible'));
-define ('GD_TEMPLATE_ANCHORCONTROL_FILTERTOGGLE', PoP_ServerUtils::get_template_definition('anchorcontrol-filtertoggle'));
-define ('GD_TEMPLATE_ANCHORCONTROL_CURRENTURL', PoP_ServerUtils::get_template_definition('anchorcontrol-currenturl'));
-define ('GD_TEMPLATE_ANCHORCONTROL_SUBMENUTOGGLE_XS', PoP_ServerUtils::get_template_definition('anchorcontrol-submenutoggle-xs'));
-define ('GD_TEMPLATE_ANCHORCONTROL_PRINT', PoP_ServerUtils::get_template_definition('anchorcontrol-print'));
-define ('GD_TEMPLATE_ANCHORCONTROL_EMBED', PoP_ServerUtils::get_template_definition('anchorcontrol-embed'));
-define ('GD_TEMPLATE_ANCHORCONTROL_API', PoP_ServerUtils::get_template_definition('anchorcontrol-api'));
-define ('GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('anchorcontrol-copysearchurl'));
-define ('GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL', PoP_ServerUtils::get_template_definition('anchorcontrol-sharebyemail'));
-define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('anchorcontrol-invitenewusers'));
-define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('anchorcontrol-share-invitenewusers'));
-define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGE', PoP_ServerUtils::get_template_definition('anchorcontrol-closepage'));
-define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBTN', PoP_ServerUtils::get_template_definition('anchorcontrol-closepagebtn'));
-define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBOTTOM', PoP_ServerUtils::get_template_definition('anchorcontrol-closepagebottom'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO', PoP_ServerUtils::get_template_definition('anchorcontrol-togglequickviewinfo'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFO', PoP_ServerUtils::get_template_definition('anchorcontrol-togglesideinfo'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS', PoP_ServerUtils::get_template_definition('anchorcontrol-togglesideinfoxs'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK', PoP_ServerUtils::get_template_definition('anchorcontrol-togglesideinfoxs-back'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS', PoP_ServerUtils::get_template_definition('anchorcontrol-toggletabs'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS', PoP_ServerUtils::get_template_definition('anchorcontrol-toggletabsxs'));
-define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK', PoP_ServerUtils::get_template_definition('anchorcontrol-share-facebook'));
-define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER', PoP_ServerUtils::get_template_definition('anchorcontrol-share-twitter'));
-define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN', PoP_ServerUtils::get_template_definition('anchorcontrol-share-linkedin'));
-define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK', PoP_ServerUtils::get_template_definition('anchorcontrol-fixedshare-facebook'));
-define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER', PoP_ServerUtils::get_template_definition('anchorcontrol-fixedshare-twitter'));
-define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN', PoP_ServerUtils::get_template_definition('anchorcontrol-fixedshare-linkedin'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-toggleoptionalfields'));
+define ('GD_TEMPLATE_ANCHORCONTROL_EXPANDCOLLAPSIBLE', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-expandcollapsible'));
+define ('GD_TEMPLATE_ANCHORCONTROL_FILTERTOGGLE', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-filtertoggle'));
+define ('GD_TEMPLATE_ANCHORCONTROL_CURRENTURL', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-currenturl'));
+define ('GD_TEMPLATE_ANCHORCONTROL_SUBMENUTOGGLE_XS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-submenutoggle-xs'));
+define ('GD_TEMPLATE_ANCHORCONTROL_PRINT', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-print'));
+define ('GD_TEMPLATE_ANCHORCONTROL_EMBED', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-embed'));
+define ('GD_TEMPLATE_ANCHORCONTROL_API', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-api'));
+define ('GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-copysearchurl'));
+define ('GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-sharebyemail'));
+define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-invitenewusers'));
+define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-share-invitenewusers'));
+define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGE', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-closepage'));
+define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBTN', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-closepagebtn'));
+define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGEBOTTOM', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-closepagebottom'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-togglequickviewinfo'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFO', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-togglesideinfo'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-togglesideinfoxs'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-togglesideinfoxs-back'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETABS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-toggletabs'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETABSXS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-toggletabsxs'));
+define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-share-facebook'));
+define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-share-twitter'));
+define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-share-linkedin'));
+define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-fixedshare-facebook'));
+define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_TWITTER', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-fixedshare-twitter'));
+define ('GD_TEMPLATE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-fixedshare-linkedin'));
 
 class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

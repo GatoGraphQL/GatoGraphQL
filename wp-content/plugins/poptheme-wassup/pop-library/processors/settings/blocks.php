@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_SETTINGS', PoP_ServerUtils::get_template_definition('block-settings'));
+define ('GD_TEMPLATE_BLOCK_SETTINGS', PoP_TemplateIDUtils::get_template_definition('block-settings'));
 
 class GD_Template_Processor_CustomSettingsBlocks extends GD_Template_Processor_BlocksBase {
 

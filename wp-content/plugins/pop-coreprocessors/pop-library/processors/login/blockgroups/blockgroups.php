@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_LOGIN', PoP_ServerUtils::get_template_definition('blockgroup-login'));
+define ('GD_TEMPLATE_BLOCKGROUP_LOGIN', PoP_TemplateIDUtils::get_template_definition('blockgroup-login'));
 
 class GD_Template_Processor_LoginBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

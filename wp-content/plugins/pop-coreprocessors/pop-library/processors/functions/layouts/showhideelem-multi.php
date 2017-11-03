@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_FOLLOWUSER_STYLES', PoP_ServerUtils::get_template_definition('layout-followuser-styles'));
-define ('GD_TEMPLATE_LAYOUT_UNFOLLOWUSER_STYLES', PoP_ServerUtils::get_template_definition('layout-unfollowuser-styles'));
-define ('GD_TEMPLATE_LAYOUT_RECOMMENDPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-recommendposts-styles'));
-define ('GD_TEMPLATE_LAYOUT_UNRECOMMENDPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-unrecommendposts-styles'));
-define ('GD_TEMPLATE_LAYOUT_SUBSCRIBETOTAG_STYLES', PoP_ServerUtils::get_template_definition('layout-subscribetotag-styles'));
-define ('GD_TEMPLATE_LAYOUT_UNSUBSCRIBEFROMTAG_STYLES', PoP_ServerUtils::get_template_definition('layout-unsubscribefromtag-styles'));
-define ('GD_TEMPLATE_LAYOUT_UPVOTEPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-upvoteposts-styles'));
-define ('GD_TEMPLATE_LAYOUT_UNDOUPVOTEPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-undoupvoteposts-styles'));
-define ('GD_TEMPLATE_LAYOUT_DOWNVOTEPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-downvoteposts-styles'));
-define ('GD_TEMPLATE_LAYOUT_UNDODOWNVOTEPOST_STYLES', PoP_ServerUtils::get_template_definition('layout-undodownvoteposts-styles'));
+define ('GD_TEMPLATE_LAYOUT_FOLLOWUSER_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-followuser-styles'));
+define ('GD_TEMPLATE_LAYOUT_UNFOLLOWUSER_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-unfollowuser-styles'));
+define ('GD_TEMPLATE_LAYOUT_RECOMMENDPOST_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-recommendposts-styles'));
+define ('GD_TEMPLATE_LAYOUT_UNRECOMMENDPOST_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-unrecommendposts-styles'));
+define ('GD_TEMPLATE_LAYOUT_SUBSCRIBETOTAG_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-subscribetotag-styles'));
+define ('GD_TEMPLATE_LAYOUT_UNSUBSCRIBEFROMTAG_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-unsubscribefromtag-styles'));
+define ('GD_TEMPLATE_LAYOUT_UPVOTEPOST_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-upvoteposts-styles'));
+define ('GD_TEMPLATE_LAYOUT_UNDOUPVOTEPOST_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-undoupvoteposts-styles'));
+define ('GD_TEMPLATE_LAYOUT_DOWNVOTEPOST_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-downvoteposts-styles'));
+define ('GD_TEMPLATE_LAYOUT_UNDODOWNVOTEPOST_STYLES', PoP_TemplateIDUtils::get_template_definition('layout-undodownvoteposts-styles'));
 
 class GD_Template_Processor_ShowHideElemMultiStyleLayouts extends GD_Template_Processor_MultiplesBase {
 

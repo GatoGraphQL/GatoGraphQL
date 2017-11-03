@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-featuredimage'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-featuredimagevolunteer'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-featuredimage'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-featuredimagevolunteer'));
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_GENERIC', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-generic'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_LINK', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-link'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_HIGHLIGHTLEFT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-highlightleft'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-highlightright'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_WEBPOST', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-webpost'));
-// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_WEBPOSTLEFT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-webpostleft'));
-// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_WEBPOSTRIGHT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-webpostright'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_GENERIC', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-generic'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_LINK', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-link'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_HIGHLIGHTLEFT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-highlightleft'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-highlightright'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_WEBPOST', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-webpost'));
+// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_WEBPOSTLEFT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-webpostleft'));
+// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_WEBPOSTRIGHT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-webpostright'));
 
 class GD_Template_Processor_CustomPostMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

@@ -5,21 +5,21 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_QUICKLINKGROUP_POST', PoP_ServerUtils::get_template_definition('quicklinkgroup-post'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOM', PoP_ServerUtils::get_template_definition('quicklinkgroup-postbottom'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER', PoP_ServerUtils::get_template_definition('quicklinkgroup-postbottomvolunteer'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOMEXTENDED', PoP_ServerUtils::get_template_definition('quicklinkgroup-postbottom-extended'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER', PoP_ServerUtils::get_template_definition('quicklinkgroup-postbottom-extendedvolunteer'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_POSTEDIT', PoP_ServerUtils::get_template_definition('quicklinkgroup-postedit'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_ADDONSPOSTEDIT', PoP_ServerUtils::get_template_definition('quicklinkgroup-addonspostedit'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_HIGHLIGHTEDIT', PoP_ServerUtils::get_template_definition('quicklinkgroup-highlightedit'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_HIGHLIGHTCONTENT', PoP_ServerUtils::get_template_definition('quicklinkgroup-highlightcontent'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_USERCOMPACT', PoP_ServerUtils::get_template_definition('quicklinkgroup-usercompact'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_USER', PoP_ServerUtils::get_template_definition('quicklinkgroup-user'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_USERBOTTOM', PoP_ServerUtils::get_template_definition('quicklinkgroup-userbottom'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_USER_EDITMEMBERS', PoP_ServerUtils::get_template_definition('quicklinkgroup-user-editmembers'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST', PoP_ServerUtils::get_template_definition('quicklinkgroup-updownvoteundoupdownvotepost'));
-define ('GD_TEMPLATE_QUICKLINKGROUP_TAG', PoP_ServerUtils::get_template_definition('quicklinkgroup-tag'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_POST', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-post'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOM', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-postbottom'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-postbottomvolunteer'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOMEXTENDED', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-postbottom-extended'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-postbottom-extendedvolunteer'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_POSTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-postedit'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_ADDONSPOSTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-addonspostedit'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_HIGHLIGHTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-highlightedit'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_HIGHLIGHTCONTENT', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-highlightcontent'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_USERCOMPACT', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-usercompact'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_USER', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-user'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_USERBOTTOM', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-userbottom'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_USER_EDITMEMBERS', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-user-editmembers'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-updownvoteundoupdownvotepost'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_TAG', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-tag'));
 
 class GD_Template_Processor_CustomQuicklinkGroups extends GD_Template_Processor_ControlGroupsBase {
 

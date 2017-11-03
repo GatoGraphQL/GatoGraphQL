@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasread-showhideelemstyles'));
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasunread-showhideelemstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasread-showhideelemstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasunread-showhideelemstyles'));
 
 class GD_AAL_Template_Processor_ShowHideElemMultiStyleLayouts extends GD_Template_Processor_MultiplesBase {
 

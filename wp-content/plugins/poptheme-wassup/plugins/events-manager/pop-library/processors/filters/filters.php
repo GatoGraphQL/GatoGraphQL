@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTER_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('filter-authorevents'));
-define ('GD_TEMPLATE_FILTER_TAGEVENTS', PoP_ServerUtils::get_template_definition('filter-tagevents'));
-define ('GD_TEMPLATE_FILTER_AUTHOREVENTSCALENDAR', PoP_ServerUtils::get_template_definition('filter-authoreventscalendar'));
-define ('GD_TEMPLATE_FILTER_TAGEVENTSCALENDAR', PoP_ServerUtils::get_template_definition('filter-tageventscalendar'));
-define ('GD_TEMPLATE_FILTER_EVENTS', PoP_ServerUtils::get_template_definition('filter-events'));
-define ('GD_TEMPLATE_FILTER_EVENTSCALENDAR', PoP_ServerUtils::get_template_definition('filter-eventscalendar'));
-define ('GD_TEMPLATE_FILTER_LOCATIONS', PoP_ServerUtils::get_template_definition('filter-locations'));
-define ('GD_TEMPLATE_FILTER_MYEVENTS', PoP_ServerUtils::get_template_definition('filter-myevents'));
+define ('GD_TEMPLATE_FILTER_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('filter-authorevents'));
+define ('GD_TEMPLATE_FILTER_TAGEVENTS', PoP_TemplateIDUtils::get_template_definition('filter-tagevents'));
+define ('GD_TEMPLATE_FILTER_AUTHOREVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('filter-authoreventscalendar'));
+define ('GD_TEMPLATE_FILTER_TAGEVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('filter-tageventscalendar'));
+define ('GD_TEMPLATE_FILTER_EVENTS', PoP_TemplateIDUtils::get_template_definition('filter-events'));
+define ('GD_TEMPLATE_FILTER_EVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('filter-eventscalendar'));
+define ('GD_TEMPLATE_FILTER_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('filter-locations'));
+define ('GD_TEMPLATE_FILTER_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('filter-myevents'));
 
 class GD_EM_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_WSLFUNCTIONS', PoP_ServerUtils::get_template_definition('wsl-functions'));
+define ('POP_RESOURCELOADER_WSLFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('wsl-functions'));
 
 class WSL_PoPProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

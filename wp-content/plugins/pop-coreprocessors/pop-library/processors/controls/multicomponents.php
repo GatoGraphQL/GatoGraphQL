@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS', PoP_ServerUtils::get_template_definition('multicomponent-anchorcontrol-toggletabs'));
+define ('GD_TEMPLATE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS', PoP_TemplateIDUtils::get_template_definition('multicomponent-anchorcontrol-toggletabs'));
 
 class GD_Template_Processor_ControlMulticomponents extends GD_Template_Processor_MultiplesBase {
 	

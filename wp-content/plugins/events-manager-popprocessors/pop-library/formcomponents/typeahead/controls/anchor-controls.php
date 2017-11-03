@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ANCHORCONTROL_CREATELOCATION', PoP_ServerUtils::get_template_definition('anchorcontrol-createlocation'));
+define ('GD_TEMPLATE_ANCHORCONTROL_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-createlocation'));
 
 class GD_Template_Processor_TypeaheadAnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

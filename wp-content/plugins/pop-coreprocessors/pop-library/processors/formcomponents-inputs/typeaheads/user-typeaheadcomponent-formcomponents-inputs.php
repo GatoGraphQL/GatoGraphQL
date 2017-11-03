@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_ALLUSERS', PoP_ServerUtils::get_template_definition('formcomponent-typeaheadcomponent-allusers'));
+define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_ALLUSERS', PoP_TemplateIDUtils::get_template_definition('formcomponent-typeaheadcomponent-allusers'));
 
 class GD_Template_Processor_UserTypeaheadComponentFormComponentInputs extends GD_Template_Processor_UserTypeaheadComponentFormComponentsBase {
 

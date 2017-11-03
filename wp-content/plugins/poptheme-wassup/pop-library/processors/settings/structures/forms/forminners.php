@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_SETTINGS', PoP_ServerUtils::get_template_definition('forminner-settings'));
+define ('GD_TEMPLATE_FORMINNER_SETTINGS', PoP_TemplateIDUtils::get_template_definition('forminner-settings'));
 
 class GD_Template_Processor_SettingsFormInners extends GD_Template_Processor_FormInnersBase {
 

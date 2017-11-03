@@ -5,26 +5,26 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-locationpost'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-story'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-discussion'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-blog'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-announcement'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-featured'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-locationpost'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_STORY', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-story'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-discussion'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-blog'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-announcement'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-featured'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-locationpost'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-story'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-discussion'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-blog'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-announcement'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-featured'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-locationpost'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STORY', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-story'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-discussion'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-blog'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-announcement'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-featured'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-locationpost'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-story'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-discussion'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-blog'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-announcement'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-featured'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-locationpost'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STORY', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-story'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-discussion'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-blog'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-announcement'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-featured'));
 
 class GD_Custom_Template_Processor_CustomPostLayoutSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 

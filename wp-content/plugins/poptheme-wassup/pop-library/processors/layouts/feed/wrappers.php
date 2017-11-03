@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY', PoP_ServerUtils::get_template_definition('buttonwrapper-userpostactivity'));
+define ('GD_TEMPLATE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY', PoP_TemplateIDUtils::get_template_definition('buttonwrapper-userpostactivity'));
 
 class GD_Template_Processor_FeedButtonWrappers extends GD_Template_Processor_ShowIfNotEmptyConditionWrapperBase {
 

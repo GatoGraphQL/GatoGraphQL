@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR', PoP_ServerUtils::get_template_definition('layout-reloadembedpreviewconnector'));
+define ('GD_TEMPLATE_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR', PoP_TemplateIDUtils::get_template_definition('layout-reloadembedpreviewconnector'));
 
 class GD_Template_Processor_ReloadEmbedPreviewConnectors extends GD_Template_Processor_ReloadEmbedPreviewConnectorsBase {
 

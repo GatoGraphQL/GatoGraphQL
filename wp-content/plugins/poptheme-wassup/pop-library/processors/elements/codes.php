@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CODE_OURSPONSORSINTRO', PoP_ServerUtils::get_template_definition('code-oursponsorsintro'));
-define ('GD_TEMPLATE_CODE_HOMEWELCOME', PoP_ServerUtils::get_template_definition('code-homewelcome'));
-define ('GD_TEMPLATE_CODE_LAZYLOADINGSPINNER', PoP_ServerUtils::get_template_definition('code-lazyloadingspinner'));
-define ('GD_TEMPLATE_CODE_EMPTY', PoP_ServerUtils::get_template_definition('code-empty'));
-define ('GD_TEMPLATE_CODE_VOLUNTEERWITHUSINTRO', PoP_ServerUtils::get_template_definition('code-volunteerwithusintro'));
-define ('GD_TEMPLATE_CODE_TRENDINGTAGSDESCRIPTION', PoP_ServerUtils::get_template_definition('code-trendingtagsdescription'));
+define ('GD_TEMPLATE_CODE_OURSPONSORSINTRO', PoP_TemplateIDUtils::get_template_definition('code-oursponsorsintro'));
+define ('GD_TEMPLATE_CODE_HOMEWELCOME', PoP_TemplateIDUtils::get_template_definition('code-homewelcome'));
+define ('GD_TEMPLATE_CODE_LAZYLOADINGSPINNER', PoP_TemplateIDUtils::get_template_definition('code-lazyloadingspinner'));
+define ('GD_TEMPLATE_CODE_EMPTY', PoP_TemplateIDUtils::get_template_definition('code-empty'));
+define ('GD_TEMPLATE_CODE_VOLUNTEERWITHUSINTRO', PoP_TemplateIDUtils::get_template_definition('code-volunteerwithusintro'));
+define ('GD_TEMPLATE_CODE_TRENDINGTAGSDESCRIPTION', PoP_TemplateIDUtils::get_template_definition('code-trendingtagsdescription'));
 
 class GD_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 

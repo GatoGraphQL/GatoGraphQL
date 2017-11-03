@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_CREATELOCATION', PoP_ServerUtils::get_template_definition('blockgroup-createlocation'));
+define ('GD_TEMPLATE_BLOCKGROUP_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-createlocation'));
 
 class GD_Template_Processor_CreateLocationBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

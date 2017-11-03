@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-automatedemails-latestposts-details'));
-define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-automatedemails-latestposts-simpleview'));
-define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-automatedemails-latestposts-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-automatedemails-latestposts-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_LIST', PoP_ServerUtils::get_template_definition('scroll-automatedemails-latestposts-list'));
+define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-automatedemails-latestposts-details'));
+define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-automatedemails-latestposts-simpleview'));
+define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-automatedemails-latestposts-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-automatedemails-latestposts-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_AUTOMATEDEMAILS_LATESTPOSTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-automatedemails-latestposts-list'));
 
 class PoPTheme_Wassup_AE_Template_Processor_Scrolls extends GD_Template_Processor_ScrollsBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLGROUP_MYLOCATIONPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-mylocationpostlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_MYSTORYLIST', PoP_ServerUtils::get_template_definition('controlgroup-mystorylist'));
-define ('GD_TEMPLATE_CONTROLGROUP_MYANNOUNCEMENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-myannouncementlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_MYDISCUSSIONLIST', PoP_ServerUtils::get_template_definition('controlgroup-mydiscussionlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYLOCATIONPOSTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-mylocationpostlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYSTORYLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-mystorylist'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYANNOUNCEMENTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-myannouncementlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYDISCUSSIONLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-mydiscussionlist'));
 
 class SectionProcessors_Template_Processor_ControlGroups extends GD_Template_Processor_ControlGroupsBase {
 

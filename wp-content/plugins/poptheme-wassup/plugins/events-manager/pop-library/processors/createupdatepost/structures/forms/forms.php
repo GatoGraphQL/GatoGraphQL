@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_EVENT_UPDATE', PoP_ServerUtils::get_template_definition('form-event-update'));
-define ('GD_TEMPLATE_FORM_EVENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-eventlink-update'));
-define ('GD_TEMPLATE_FORM_EVENT_CREATE', PoP_ServerUtils::get_template_definition('form-event-create'));
-define ('GD_TEMPLATE_FORM_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('form-eventlink-create'));
+define ('GD_TEMPLATE_FORM_EVENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-event-update'));
+define ('GD_TEMPLATE_FORM_EVENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-eventlink-update'));
+define ('GD_TEMPLATE_FORM_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('form-event-create'));
+define ('GD_TEMPLATE_FORM_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('form-eventlink-create'));
 
 class GD_EM_Template_Processor_CreateUpdatePostForms extends GD_Template_Processor_FormsBase {
 

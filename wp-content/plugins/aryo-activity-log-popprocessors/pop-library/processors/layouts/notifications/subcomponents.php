@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBCOMPONENT_NOTIFICATIONCOMMENT', PoP_ServerUtils::get_template_definition('subcomponent-notificationcomment'));
+define ('GD_TEMPLATE_SUBCOMPONENT_NOTIFICATIONCOMMENT', PoP_TemplateIDUtils::get_template_definition('subcomponent-notificationcomment'));
 
 class GD_Template_Processor_NotificationSubcomponentLayouts extends GD_Template_Processor_SubcomponentLayoutsBase {
 

@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_INSTANTANEOUSFILTER_CATEGORIES', PoP_ServerUtils::get_template_definition('instantaneousfilter-categories'));
-define ('GD_TEMPLATE_INSTANTANEOUSFILTER_SECTIONS', PoP_ServerUtils::get_template_definition('instantaneousfilter-sections'));
-define ('GD_TEMPLATE_INSTANTANEOUSFILTER_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('instantaneousfilter-webpostsections'));
+define ('GD_TEMPLATE_INSTANTANEOUSFILTER_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('instantaneousfilter-categories'));
+define ('GD_TEMPLATE_INSTANTANEOUSFILTER_SECTIONS', PoP_TemplateIDUtils::get_template_definition('instantaneousfilter-sections'));
+define ('GD_TEMPLATE_INSTANTANEOUSFILTER_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('instantaneousfilter-webpostsections'));
 
 class GD_Template_Processor_InstantaneousFilters extends GD_Template_Processor_InstantaneousFiltersBase {
 

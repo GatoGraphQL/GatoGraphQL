@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LINK_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-link-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LINK_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-link-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-highlight-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_HIGHLIGHT_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-highlight-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-webpost-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_WEBPOST_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-webpost-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LINK_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-link-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-link-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-highlight-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_HIGHLIGHT_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-highlight-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-webpost-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_WEBPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-webpost-update'));
 
 class Wassup_Template_Processor_CreateUpdatePostFormMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

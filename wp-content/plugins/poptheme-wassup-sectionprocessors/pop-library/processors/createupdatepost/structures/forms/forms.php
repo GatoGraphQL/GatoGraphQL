@@ -5,24 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('form-locationpost-update'));
-define ('GD_TEMPLATE_FORM_LOCATIONPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-locationpostlink-update'));
-define ('GD_TEMPLATE_FORM_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('form-locationpost-create'));
-define ('GD_TEMPLATE_FORM_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('form-locationpostlink-create'));
-define ('GD_TEMPLATE_FORM_STORY_UPDATE', PoP_ServerUtils::get_template_definition('form-story-update'));
-define ('GD_TEMPLATE_FORM_STORYLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-storylink-update'));
-define ('GD_TEMPLATE_FORM_STORY_CREATE', PoP_ServerUtils::get_template_definition('form-story-create'));
-define ('GD_TEMPLATE_FORM_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('form-storylink-create'));
-define ('GD_TEMPLATE_FORM_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('form-announcement-update'));
-define ('GD_TEMPLATE_FORM_ANNOUNCEMENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-announcementlink-update'));
-define ('GD_TEMPLATE_FORM_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('form-announcement-create'));
-define ('GD_TEMPLATE_FORM_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('form-announcementlink-create'));
-define ('GD_TEMPLATE_FORM_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('form-discussion-update'));
-define ('GD_TEMPLATE_FORM_DISCUSSIONLINK_UPDATE', PoP_ServerUtils::get_template_definition('form-discussionlink-update'));
-define ('GD_TEMPLATE_FORM_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('form-discussion-create'));
-define ('GD_TEMPLATE_FORM_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('form-discussionlink-create'));
-define ('GD_TEMPLATE_FORM_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('form-featured-update'));
-define ('GD_TEMPLATE_FORM_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('form-featured-create'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-locationpost-update'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-locationpostlink-update'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('form-locationpost-create'));
+define ('GD_TEMPLATE_FORM_LOCATIONPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('form-locationpostlink-create'));
+define ('GD_TEMPLATE_FORM_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-story-update'));
+define ('GD_TEMPLATE_FORM_STORYLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-storylink-update'));
+define ('GD_TEMPLATE_FORM_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('form-story-create'));
+define ('GD_TEMPLATE_FORM_STORYLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('form-storylink-create'));
+define ('GD_TEMPLATE_FORM_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-announcement-update'));
+define ('GD_TEMPLATE_FORM_ANNOUNCEMENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-announcementlink-update'));
+define ('GD_TEMPLATE_FORM_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('form-announcement-create'));
+define ('GD_TEMPLATE_FORM_ANNOUNCEMENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('form-announcementlink-create'));
+define ('GD_TEMPLATE_FORM_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-discussion-update'));
+define ('GD_TEMPLATE_FORM_DISCUSSIONLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-discussionlink-update'));
+define ('GD_TEMPLATE_FORM_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('form-discussion-create'));
+define ('GD_TEMPLATE_FORM_DISCUSSIONLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('form-discussionlink-create'));
+define ('GD_TEMPLATE_FORM_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-featured-update'));
+define ('GD_TEMPLATE_FORM_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('form-featured-create'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostForms extends GD_Template_Processor_FormsBase {
 

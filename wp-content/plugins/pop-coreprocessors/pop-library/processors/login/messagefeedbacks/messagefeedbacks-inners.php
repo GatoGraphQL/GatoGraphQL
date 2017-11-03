@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOGIN', PoP_ServerUtils::get_template_definition('messagefeedbackinner-login'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOSTPWD', PoP_ServerUtils::get_template_definition('messagefeedbackinner-lostpwd'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOSTPWDRESET', PoP_ServerUtils::get_template_definition('messagefeedbackinner-lostpwdreset'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOGOUT', PoP_ServerUtils::get_template_definition('messagefeedbackinner-logout'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOGIN', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-login'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOSTPWD', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-lostpwd'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOSTPWDRESET', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-lostpwdreset'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOGOUT', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-logout'));
 
 class GD_Template_Processor_LoginMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

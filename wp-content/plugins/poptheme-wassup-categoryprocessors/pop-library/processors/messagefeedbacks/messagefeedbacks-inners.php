@@ -5,47 +5,47 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS00', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts00'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS01', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts01'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS02', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts02'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS03', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts03'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS04', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts04'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS05', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts05'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS06', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts06'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS07', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts07'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS08', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts08'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS09', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categoryposts09'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS00', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts00'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS01', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts01'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS02', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts02'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS03', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts03'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS04', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts04'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS05', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts05'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS06', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts06'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS07', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts07'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS08', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts08'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS09', PoP_ServerUtils::get_template_definition('messagefeedbackinner-categorywebposts09'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS00', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts00'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS01', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts01'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS02', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts02'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS03', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts03'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS04', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts04'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS05', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts05'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS06', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts06'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS07', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts07'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS08', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts08'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYPOSTS09', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categoryposts09'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS00', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts00'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS01', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts01'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS02', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts02'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS03', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts03'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS04', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts04'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS05', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts05'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS06', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts06'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS07', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts07'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS08', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts08'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CATEGORYWEBPOSTS09', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-categorywebposts09'));
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS00', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts00'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS01', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts01'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS02', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts02'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS03', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts03'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS04', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts04'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS05', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts05'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS06', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts06'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS07', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts07'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS08', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts08'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS09', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategoryposts09'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS00', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts00'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS01', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts01'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS02', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts02'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS03', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts03'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS04', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts04'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS05', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts05'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS06', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts06'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS07', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts07'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS08', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts08'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS09', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycategorywebposts09'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS00', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts00'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS01', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts01'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS02', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts02'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS03', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts03'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS04', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts04'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS05', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts05'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS06', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts06'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS07', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts07'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS08', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts08'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYPOSTS09', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategoryposts09'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS00', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts00'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS01', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts01'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS02', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts02'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS03', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts03'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS04', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts04'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS05', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts05'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS06', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts06'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS07', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts07'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS08', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts08'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCATEGORYWEBPOSTS09', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycategorywebposts09'));
 
 class CPP_Template_Processor_CustomListMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

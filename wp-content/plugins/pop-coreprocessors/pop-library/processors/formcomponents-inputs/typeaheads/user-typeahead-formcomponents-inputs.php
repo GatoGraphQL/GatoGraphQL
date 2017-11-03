@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_PROFILES', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeahead-profiles'));
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeahead-postauthors'));
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeahead-postcoauthors'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_PROFILES', PoP_ServerUtils::get_template_definition('profiles', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_PROFILES', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeahead-profiles'));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeahead-postauthors'));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeahead-postcoauthors'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_PROFILES', PoP_TemplateIDUtils::get_template_definition('profiles', true));
 
 class GD_Template_Processor_UserSelectableTypeaheadFormComponentInputs extends GD_Template_Processor_UserSelectableTypeaheadFormComponentsBase {
 

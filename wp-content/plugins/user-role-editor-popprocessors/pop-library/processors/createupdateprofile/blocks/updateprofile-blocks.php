@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_PROFILEORGANIZATION_UPDATE', PoP_ServerUtils::get_template_definition('block-profileorganization-update'));
-define ('GD_TEMPLATE_BLOCK_PROFILEINDIVIDUAL_UPDATE', PoP_ServerUtils::get_template_definition('block-profileindividual-update'));
+define ('GD_TEMPLATE_BLOCK_PROFILEORGANIZATION_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-profileorganization-update'));
+define ('GD_TEMPLATE_BLOCK_PROFILEINDIVIDUAL_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-profileindividual-update'));
 
 class GD_URE_Template_Processor_UpdateProfileBlocks extends GD_Template_Processor_UpdateProfileBlocksBase {
 

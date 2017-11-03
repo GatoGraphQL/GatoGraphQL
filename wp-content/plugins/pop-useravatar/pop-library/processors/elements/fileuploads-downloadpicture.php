@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILEUPLOAD_PICTURE_DOWNLOAD', PoP_ServerUtils::get_template_definition('fileupload-picture-download'));
+define ('GD_TEMPLATE_FILEUPLOAD_PICTURE_DOWNLOAD', PoP_TemplateIDUtils::get_template_definition('fileupload-picture-download'));
 
 class GD_Template_Processor_DownloadPictureFileUpload extends GD_Template_Processor_DownloadPictureFileUploadBase {
 

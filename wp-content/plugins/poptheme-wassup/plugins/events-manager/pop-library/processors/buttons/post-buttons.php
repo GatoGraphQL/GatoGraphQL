@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTON_EVENT_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-event-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-eventlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-event-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-eventlink-create'));
 
 class GD_Custom_EM_Template_Processor_Buttons extends GD_Custom_Template_Processor_ButtonsBase {
 

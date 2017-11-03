@@ -5,78 +5,78 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLLINNER_THOUGHTS', PoP_ServerUtils::get_template_definition('scrollinner-thoughts'));
+define ('GD_TEMPLATE_SCROLLINNER_THOUGHTS', PoP_TemplateIDUtils::get_template_definition('scrollinner-thoughts'));
 
-define ('GD_TEMPLATE_SCROLLINNER_MYANNOUNCEMENTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-myannouncements-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYDISCUSSIONS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mydiscussions-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mylocationposts-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYSTORIES_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mystories-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYANNOUNCEMENTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-myannouncements-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYDISCUSSIONS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mydiscussions-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mylocationposts-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYSTORIES_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mystories-simpleviewpreview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_MYANNOUNCEMENTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-myannouncements-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYDISCUSSIONS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mydiscussions-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mylocationposts-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYSTORIES_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mystories-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYANNOUNCEMENTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-myannouncements-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYDISCUSSIONS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mydiscussions-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mylocationposts-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYSTORIES_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mystories-fullviewpreview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_BLOG_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-blog-navigator'));
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-announcements-navigator'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-discussions-navigator'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-featured-navigator'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-navigator'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-stories-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_BLOG_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-blog-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-announcements-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-discussions-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-featured-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-stories-navigator'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-announcements-addons'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-discussions-addons'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-featured-addons'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-addons'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-stories-addons'));
-define ('GD_TEMPLATE_SCROLLINNER_BLOG_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-blog-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-announcements-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-discussions-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-featured-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-stories-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_BLOG_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-blog-addons'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-announcements-details'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-discussions-details'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-featured-details'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-details'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-stories-details'));
-define ('GD_TEMPLATE_SCROLLINNER_BLOG_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-blog-details'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-announcements-details'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-discussions-details'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-featured-details'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-details'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-stories-details'));
+define ('GD_TEMPLATE_SCROLLINNER_BLOG_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-blog-details'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-announcements-simpleview'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-discussions-simpleview'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-simpleview'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-stories-simpleview'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-featured-simpleview'));
-define ('GD_TEMPLATE_SCROLLINNER_BLOG_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-blog-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-announcements-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-discussions-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-stories-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-featured-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_BLOG_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-blog-simpleview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-announcements-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-discussions-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-stories-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-featured-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_BLOG_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-blog-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-announcements-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-discussions-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-stories-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-featured-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_BLOG_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-blog-fullview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORANNOUNCEMENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authorannouncements-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORDISCUSSIONS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authordiscussions-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authorlocationposts-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORSTORIES_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authorstories-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORANNOUNCEMENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorannouncements-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORDISCUSSIONS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authordiscussions-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorlocationposts-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORSTORIES_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorstories-fullview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-announcements-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-discussions-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-featured-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-stories-thumbnail'));
-// define ('GD_TEMPLATE_SCROLLINNER_BLOG_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-blog-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-announcements-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-discussions-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-featured-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-stories-thumbnail'));
+// define ('GD_TEMPLATE_SCROLLINNER_BLOG_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-blog-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-announcements-list'));
-define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-discussions-list'));
-define ('GD_TEMPLATE_SCROLLINNER_FEATURED_LIST', PoP_ServerUtils::get_template_definition('scrollinner-featured-list'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-list'));
-define ('GD_TEMPLATE_SCROLLINNER_STORIES_LIST', PoP_ServerUtils::get_template_definition('scrollinner-stories-list'));
-define ('GD_TEMPLATE_SCROLLINNER_BLOG_LIST', PoP_ServerUtils::get_template_definition('scrollinner-blog-list'));
+define ('GD_TEMPLATE_SCROLLINNER_ANNOUNCEMENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-announcements-list'));
+define ('GD_TEMPLATE_SCROLLINNER_DISCUSSIONS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-discussions-list'));
+define ('GD_TEMPLATE_SCROLLINNER_FEATURED_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-featured-list'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-list'));
+define ('GD_TEMPLATE_SCROLLINNER_STORIES_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-stories-list'));
+define ('GD_TEMPLATE_SCROLLINNER_BLOG_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-blog-list'));
 
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-map'));
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_HORIZONTALMAP', PoP_ServerUtils::get_template_definition('scrollinner-locationposts-horizontalmap'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-map'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONPOSTS_HORIZONTALMAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-locationposts-horizontalmap'));
 
-define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_CORE', PoP_ServerUtils::get_template_definition('scrollinner-whoweare-core'));
-define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_VOLUNTEERS', PoP_ServerUtils::get_template_definition('scrollinner-whoweare-volunteers'));
-define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_ADVISORS', PoP_ServerUtils::get_template_definition('scrollinner-whoweare-advisors'));
+define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_CORE', PoP_TemplateIDUtils::get_template_definition('scrollinner-whoweare-core'));
+define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_VOLUNTEERS', PoP_TemplateIDUtils::get_template_definition('scrollinner-whoweare-volunteers'));
+define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_ADVISORS', PoP_TemplateIDUtils::get_template_definition('scrollinner-whoweare-advisors'));
 
 class GD_Custom_Template_Processor_CustomScrollInners extends GD_Template_Processor_ScrollInnersBase {
 

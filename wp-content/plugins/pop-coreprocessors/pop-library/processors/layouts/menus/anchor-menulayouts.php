@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MENU_BUTTON', PoP_ServerUtils::get_template_definition('layout-menu-button'));
+define ('GD_TEMPLATE_LAYOUT_MENU_BUTTON', PoP_TemplateIDUtils::get_template_definition('layout-menu-button'));
 
 class GD_Template_Processor_AnchorMenuLayouts extends GD_Template_Processor_AnchorMenuLayoutsBase {
 

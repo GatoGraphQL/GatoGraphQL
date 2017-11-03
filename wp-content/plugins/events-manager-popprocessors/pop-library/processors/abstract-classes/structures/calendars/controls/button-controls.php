@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CALENDARBUTTONCONTROL_CALENDARPREV', PoP_ServerUtils::get_template_definition('calendarbuttoncontrol-calendarprev'));
-define ('GD_TEMPLATE_CALENDARBUTTONCONTROL_CALENDARNEXT', PoP_ServerUtils::get_template_definition('calendarbuttoncontrol-calendarnext'));
+define ('GD_TEMPLATE_CALENDARBUTTONCONTROL_CALENDARPREV', PoP_TemplateIDUtils::get_template_definition('calendarbuttoncontrol-calendarprev'));
+define ('GD_TEMPLATE_CALENDARBUTTONCONTROL_CALENDARNEXT', PoP_TemplateIDUtils::get_template_definition('calendarbuttoncontrol-calendarnext'));
 
 class GD_Template_Processor_CalendarButtonControls extends GD_Template_Processor_ButtonControlsBase {
 

@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MEMBERS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-members'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-organizations'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_INDIVIDUALS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-individuals'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MEMBERS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-members'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-organizations'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-individuals'));
 
 class GD_URE_Template_Processor_CustomListMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXTAREAEDITOR', PoP_ServerUtils::get_template_definition('formcomponent-textarea-editor'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILS', PoP_ServerUtils::get_template_definition('formcomponent-emails'));
-define ('GD_TEMPLATE_FORMCOMPONENT_ADDITIONALMESSAGE', PoP_ServerUtils::get_template_definition('formcomponent-additionalmessage'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXTAREAEDITOR', PoP_TemplateIDUtils::get_template_definition('formcomponent-textarea-editor'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILS', PoP_TemplateIDUtils::get_template_definition('formcomponent-emails'));
+define ('GD_TEMPLATE_FORMCOMPONENT_ADDITIONALMESSAGE', PoP_TemplateIDUtils::get_template_definition('formcomponent-additionalmessage'));
 
 class GD_Template_Processor_TextareaFormComponentInputs extends GD_Template_Processor_TextareaFormComponentsBase {
 

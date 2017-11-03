@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_PROFILEORGANIZATION_CREATE', PoP_ServerUtils::get_template_definition('action-profileorganization-create'));
-define ('GD_TEMPLATE_ACTION_PROFILEORGANIZATION_UPDATE', PoP_ServerUtils::get_template_definition('action-profileorganization-update'));
-define ('GD_TEMPLATE_ACTION_PROFILEINDIVIDUAL_CREATE', PoP_ServerUtils::get_template_definition('action-profileindividual-create'));
-define ('GD_TEMPLATE_ACTION_PROFILEINDIVIDUAL_UPDATE', PoP_ServerUtils::get_template_definition('action-profileindividual-update'));
+define ('GD_TEMPLATE_ACTION_PROFILEORGANIZATION_CREATE', PoP_TemplateIDUtils::get_template_definition('action-profileorganization-create'));
+define ('GD_TEMPLATE_ACTION_PROFILEORGANIZATION_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-profileorganization-update'));
+define ('GD_TEMPLATE_ACTION_PROFILEINDIVIDUAL_CREATE', PoP_TemplateIDUtils::get_template_definition('action-profileindividual-create'));
+define ('GD_TEMPLATE_ACTION_PROFILEINDIVIDUAL_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-profileindividual-update'));
 
 class GD_URE_Template_Processor_CreateUpdateProfileActions extends GD_Template_Processor_CreateUpdateUserActionsBase {
 

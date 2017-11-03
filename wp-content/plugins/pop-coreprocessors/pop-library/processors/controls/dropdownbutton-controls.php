@@ -5,19 +5,19 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-share'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-fixedshare'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-resultsshare'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-addrelatedpost'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_PAGEWITHSIDEOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-pagewithsideoptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SINGLEOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-singleoptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWSINGLEOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-quickviewsingleoptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_AUTHOROPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-authoroptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWAUTHOROPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-quickviewauthoroptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_HOMEOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-homeoptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWHOMEOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-quickviewhomeoptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_TAGOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-tagoptions'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWTAGOPTIONS', PoP_ServerUtils::get_template_definition('dropdownbuttoncontrol-quickviewtagoptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-share'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_FIXEDSHARE', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-fixedshare'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-resultsshare'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-addrelatedpost'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_PAGEWITHSIDEOPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-pagewithsideoptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SINGLEOPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-singleoptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWSINGLEOPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-quickviewsingleoptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_AUTHOROPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-authoroptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWAUTHOROPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-quickviewauthoroptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_HOMEOPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-homeoptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWHOMEOPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-quickviewhomeoptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_TAGOPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-tagoptions'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONCONTROL_QUICKVIEWTAGOPTIONS', PoP_TemplateIDUtils::get_template_definition('dropdownbuttoncontrol-quickviewtagoptions'));
 
 class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor_DropdownButtonControlsBase {
 

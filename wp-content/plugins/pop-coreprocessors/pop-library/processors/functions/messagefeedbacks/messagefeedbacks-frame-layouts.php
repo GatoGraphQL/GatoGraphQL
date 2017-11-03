@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FOLLOWUSER', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-followuser'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNFOLLOWUSER', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-unfollowuser'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_RECOMMENDPOST', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-recommendpost'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNRECOMMENDPOST', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-unrecommendpost'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_SUBSCRIBETOTAG', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-subscribetotag'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNSUBSCRIBEFROMTAG', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-unsubscribefromtag'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UPVOTEPOST', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-upvotepost'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNDOUPVOTEPOST', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-undoupvotepost'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DOWNVOTEPOST', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-downvotepost'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNDODOWNVOTEPOST', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-undodownvotepost'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-followuser'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNFOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-unfollowuser'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_RECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-recommendpost'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNRECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-unrecommendpost'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_SUBSCRIBETOTAG', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-subscribetotag'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNSUBSCRIBEFROMTAG', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-unsubscribefromtag'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-upvotepost'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNDOUPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-undoupvotepost'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-downvotepost'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UNDODOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-undodownvotepost'));
 
 class GD_Template_Processor_FunctionMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

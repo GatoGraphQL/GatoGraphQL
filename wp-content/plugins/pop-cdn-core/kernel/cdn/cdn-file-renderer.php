@@ -4,4 +4,4 @@
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $pop_cdncore_filerenderer;
-$pop_cdncore_filerenderer = new PoP_Frontend_FileRenderer();
+$pop_cdncore_filerenderer = new PoP_Engine_FileRenderer();

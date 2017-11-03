@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUTWRAPPER_ORGANIZATIONMEMBERS', PoP_ServerUtils::get_template_definition('ure-layoutwrapper-organizationmembers'));
+define ('GD_URE_TEMPLATE_LAYOUTWRAPPER_ORGANIZATIONMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-layoutwrapper-organizationmembers'));
 
 class GD_URE_Template_Processor_MembersLayoutWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

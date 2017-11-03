@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_EMHANDLEBARSHELPERS', PoP_ServerUtils::get_template_definition('em-helpers-handlebars'));
-define ('POP_RESOURCELOADER_FULLCALENDAR', PoP_ServerUtils::get_template_definition('em-fullcalendar'));
-define ('POP_RESOURCELOADER_CREATELOCATION', PoP_ServerUtils::get_template_definition('em-create-location'));
-define ('POP_RESOURCELOADER_MAPCOLLECTION', PoP_ServerUtils::get_template_definition('em-map-collection'));
-define ('POP_RESOURCELOADER_MAP', PoP_ServerUtils::get_template_definition('em-mapa')); // Changing the name, since 'em-map' is used by the template
-define ('POP_RESOURCELOADER_TYPEAHEADMAP', PoP_ServerUtils::get_template_definition('em-typeahead-map'));
+define ('POP_RESOURCELOADER_EMHANDLEBARSHELPERS', PoP_TemplateIDUtils::get_template_definition('em-helpers-handlebars'));
+define ('POP_RESOURCELOADER_FULLCALENDAR', PoP_TemplateIDUtils::get_template_definition('em-fullcalendar'));
+define ('POP_RESOURCELOADER_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('em-create-location'));
+define ('POP_RESOURCELOADER_MAPCOLLECTION', PoP_TemplateIDUtils::get_template_definition('em-map-collection'));
+define ('POP_RESOURCELOADER_MAP', PoP_TemplateIDUtils::get_template_definition('em-mapa')); // Changing the name, since 'em-map' is used by the template
+define ('POP_RESOURCELOADER_TYPEAHEADMAP', PoP_TemplateIDUtils::get_template_definition('em-typeahead-map'));
 
 class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

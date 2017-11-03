@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_WEBPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('block-webpostlink-update'));
-define ('GD_TEMPLATE_BLOCK_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-webpostlink-create'));
-define ('GD_TEMPLATE_BLOCK_HIGHLIGHT_UPDATE', PoP_ServerUtils::get_template_definition('block-highlight-update'));
-define ('GD_TEMPLATE_BLOCK_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('block-highlight-create'));
-define ('GD_TEMPLATE_BLOCK_WEBPOST_UPDATE', PoP_ServerUtils::get_template_definition('block-webpost-update'));
-define ('GD_TEMPLATE_BLOCK_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('block-webpost-create'));
+define ('GD_TEMPLATE_BLOCK_WEBPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-webpostlink-update'));
+define ('GD_TEMPLATE_BLOCK_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-webpostlink-create'));
+define ('GD_TEMPLATE_BLOCK_HIGHLIGHT_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-highlight-update'));
+define ('GD_TEMPLATE_BLOCK_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-highlight-create'));
+define ('GD_TEMPLATE_BLOCK_WEBPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-webpost-update'));
+define ('GD_TEMPLATE_BLOCK_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('block-webpost-create'));
 
 class Wassup_Template_Processor_CreateUpdatePostBlocks extends GD_Template_Processor_BlocksBase {
 

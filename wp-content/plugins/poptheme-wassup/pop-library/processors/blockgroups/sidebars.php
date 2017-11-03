@@ -5,44 +5,44 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_SEARCHPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-searchposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_ALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-allcontent-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_WEBPOSTLINKS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-webpostlinks-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_HIGHLIGHTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-highlights-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_WEBPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-webposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_POSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-posts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_SEARCHPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-searchposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_ALLCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-allcontent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_WEBPOSTLINKS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-webpostlinks-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_HIGHLIGHTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-highlights-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_WEBPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-webposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_POSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-posts-sidebar'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_SEARCHUSERS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-searchusers-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_ALLUSERS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-allusers-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_SEARCHUSERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-searchusers-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_ALLUSERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-allusers-sidebar'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_TRENDINGTAGS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-trendingtags-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_TAGS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-tags-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_TRENDINGTAGS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-trendingtags-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_TAGS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-tags-sidebar'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLEPAGE_ABOUT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-singlepage-about-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLEPAGE_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-singlepage-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLEPAGE_ABOUT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-singlepage-about-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLEPAGE_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-singlepage-sidebar'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-mycontent-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYWEBPOSTLINKS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-mywebpostlinks-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYHIGHLIGHTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-myhighlights-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYWEBPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-mywebposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-myposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-mycontent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYWEBPOSTLINKS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-mywebpostlinks-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYHIGHLIGHTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-myhighlights-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYWEBPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-mywebposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-myposts-sidebar'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_MAINALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-mainallcontent-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_ALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-allcontent-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-webposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_POSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-posts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_SUBSCRIBERS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-subscribers-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_MAINALLCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-mainallcontent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_ALLCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-allcontent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_WEBPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-webposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_POSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-posts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_SUBSCRIBERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-subscribers-sidebar'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOSTLINK_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-webpostlink-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_HIGHLIGHT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-highlight-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-webpost-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_RELATEDCONTENTSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-webpost-relatedcontentsidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_HIGHLIGHTSSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-webpost-highlightssidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_POSTAUTHORSSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-webpost-postauthorssidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_RECOMMENDEDBYSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-webpost-recommendedbysidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOSTLINK_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-webpostlink-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_HIGHLIGHT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-highlight-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-webpost-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_RELATEDCONTENTSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-webpost-relatedcontentsidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_HIGHLIGHTSSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-webpost-highlightssidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_POSTAUTHORSSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-webpost-postauthorssidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_WEBPOST_RECOMMENDEDBYSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-webpost-recommendedbysidebar'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_HOMESECTION_ALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-homesection-allcontent-sidebar'));
-// define ('GD_TEMPLATE_BLOCKGROUP_TAGSECTION_ALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tagsection-allcontent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOMESECTION_ALLCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-homesection-allcontent-sidebar'));
+// define ('GD_TEMPLATE_BLOCKGROUP_TAGSECTION_ALLCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tagsection-allcontent-sidebar'));
 
 class GD_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_SidebarBlockGroupsBase {
 

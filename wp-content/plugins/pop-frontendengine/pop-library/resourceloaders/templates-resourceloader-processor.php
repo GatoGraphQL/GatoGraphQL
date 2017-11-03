@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_TEMPLATEEXTENSION_PAGESECTIONREPLICABLE', PoP_ServerUtils::get_template_definition(GD_TEMPLATEEXTENSION_PAGESECTIONREPLICABLE));
-define ('POP_RESOURCELOADER_TEMPLATEEXTENSION_PAGESECTIONFRAME', PoP_ServerUtils::get_template_definition(GD_TEMPLATEEXTENSION_PAGESECTIONFRAME));
-define ('POP_RESOURCELOADER_TEMPLATEEXTENSION_APPENDABLECLASS', PoP_ServerUtils::get_template_definition(GD_TEMPLATEEXTENSION_APPENDABLECLASS));
+define ('POP_RESOURCELOADER_TEMPLATEEXTENSION_PAGESECTIONREPLICABLE', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATEEXTENSION_PAGESECTIONREPLICABLE));
+define ('POP_RESOURCELOADER_TEMPLATEEXTENSION_PAGESECTIONFRAME', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATEEXTENSION_PAGESECTIONFRAME));
+define ('POP_RESOURCELOADER_TEMPLATEEXTENSION_APPENDABLECLASS', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATEEXTENSION_APPENDABLECLASS));
 
 class PoP_FrontEnd_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor {
 

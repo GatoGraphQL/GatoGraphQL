@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_WSL_TEMPLATE_BLOCK_NETWORKLINKS', PoP_ServerUtils::get_template_definition('wsl-block-networklinks'));
+define ('GD_WSL_TEMPLATE_BLOCK_NETWORKLINKS', PoP_TemplateIDUtils::get_template_definition('wsl-block-networklinks'));
 
 class GD_WSL_Template_Processor_NetworkLinkBlocks extends GD_WSL_Template_Processor_NetworkLinkBlocksBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('AAL_POPPROCESSORS_TEMPLATE_CONTROLBUTTONGROUP_NOTIFICATIONLIST', PoP_ServerUtils::get_template_definition('aal-popprocessors-controlbuttongroup-notificationlist'));
-define ('AAL_POPPROCESSORS_TEMPLATE_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD', PoP_ServerUtils::get_template_definition('aal-popprocessors-controlbuttongroup-notifications-markallasread'));
+define ('AAL_POPPROCESSORS_TEMPLATE_CONTROLBUTTONGROUP_NOTIFICATIONLIST', PoP_TemplateIDUtils::get_template_definition('aal-popprocessors-controlbuttongroup-notificationlist'));
+define ('AAL_POPPROCESSORS_TEMPLATE_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD', PoP_TemplateIDUtils::get_template_definition('aal-popprocessors-controlbuttongroup-notifications-markallasread'));
 
 class AAL_PoPProcessors_Template_Processor_ControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

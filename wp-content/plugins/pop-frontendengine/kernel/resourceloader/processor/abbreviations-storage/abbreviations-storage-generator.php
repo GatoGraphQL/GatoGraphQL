@@ -1,5 +1,5 @@
 <?php
-class PoP_ResourceLoader_AbbreviationsStorageFileGenerator extends PoP_Frontend_FileGeneratorBase {
+class PoP_ResourceLoader_AbbreviationsStorageFileGenerator extends PoP_Engine_FileGeneratorBase {
 
 	function get_dir() {
 
@@ -23,14 +23,14 @@ class PoP_ResourceLoader_AbbreviationsStorageFileGenerator extends PoP_Frontend_
 			'key-ids' => $key_ids,
 		);
 
-		global $pop_frontend_filejsonstorage;
-		$pop_frontend_filejsonstorage->save($this->get_filepath(), $abbreviations);
+		global $pop_engine_filejsonstorage;
+		$pop_engine_filejsonstorage->save($this->get_filepath(), $abbreviations);
 	}
 
 	public function delete() {
 
-		global $pop_frontend_filejsonstorage;
-		$pop_frontend_filejsonstorage->delete($this->get_filepath());
+		global $pop_engine_filejsonstorage;
+		$pop_engine_filejsonstorage->delete($this->get_filepath());
 	}
 }
 	

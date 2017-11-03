@@ -5,18 +5,18 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTWRAPPER_LINK_CATEGORIES', PoP_ServerUtils::get_template_definition('layoutwrapper-link-categories'));
-define ('GD_TEMPLATE_LAYOUTWRAPPER_CATEGORIES', PoP_ServerUtils::get_template_definition('layoutwrapper-categories'));
-define ('GD_TEMPLATE_LAYOUTWRAPPER_APPLIESTO', PoP_ServerUtils::get_template_definition('layoutwrapper-appliesto'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCES', PoP_ServerUtils::get_template_definition('widgetwrapper-highlightreferences'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('widgetwrapper-highlightreferencedby-simpleview'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('widgetwrapper-highlightreferencedby-fullview'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('widgetwrapper-highlightreferencedby-details'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_LINK_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-link-categories'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-categories'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_APPLIESTO', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-appliesto'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCES', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-highlightreferences'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-highlightreferencedby-simpleview'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-highlightreferencedby-fullview'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-highlightreferencedby-details'));
 
 // Comment Leo 07/12/2015: Use a short name, since it will be added as param "layout" in the url
-define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('highrefby-simpleview', true));
-define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_ServerUtils::get_template_definition('highrefby-fullview', true));
-define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_ServerUtils::get_template_definition('highrefby-details', true));
+define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('highrefby-simpleview', true));
+define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('highrefby-fullview', true));
+define ('GD_TEMPLATE_WIDGETWRAPPER_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_TemplateIDUtils::get_template_definition('highrefby-details', true));
 
 class Wassup_Template_Processor_WidgetWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

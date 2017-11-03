@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL', PoP_ServerUtils::get_template_definition('layout-postconclusionsidebarinner-horizontal'));
-define ('GD_TEMPLATE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL', PoP_ServerUtils::get_template_definition('layout-subjugatedpostconclusionsidebarinner-horizontal'));
+define ('GD_TEMPLATE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('layout-postconclusionsidebarinner-horizontal'));
+define ('GD_TEMPLATE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('layout-subjugatedpostconclusionsidebarinner-horizontal'));
 
 class GD_Template_Processor_PostLayoutSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 

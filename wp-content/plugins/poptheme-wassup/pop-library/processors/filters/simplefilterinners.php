@@ -5,30 +5,30 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDTAGS', PoP_ServerUtils::get_template_definition('simplefilterinner-wildcardtags'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-wildcardposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWILDCARDPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorwildcardposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('simplefilterinner-webpostlinks'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWEBPOSTLINKS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorwebpostlinks'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_HIGHLIGHTS', PoP_ServerUtils::get_template_definition('simplefilterinner-highlights'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORHIGHLIGHTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorhighlights'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_WEBPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-webposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_POSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-posts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWEBPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorwebposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGWEBPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-tagwebposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-tagposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDUSERS', PoP_ServerUtils::get_template_definition('simplefilterinner-wildcardusers'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWILDCARDUSERS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorwildcardusers'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDMYPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-wildcardmyposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYWEBPOSTLINKS', PoP_ServerUtils::get_template_definition('simplefilterinner-mywebpostlinks'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('simplefilterinner-myhighlights'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-mywebposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-myposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGALLCONTENT', PoP_ServerUtils::get_template_definition('simplefilterinner-tagallcontent'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_HOMEALLCONTENT', PoP_ServerUtils::get_template_definition('simplefilterinner-homeallcontent'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORMAINALLCONTENT', PoP_ServerUtils::get_template_definition('simplefilterinner-authormainallcontent'));
-// define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORALLCONTENT', PoP_ServerUtils::get_template_definition('simplefilterinner-authorallcontent'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDTAGS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-wildcardtags'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-wildcardposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWILDCARDPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorwildcardposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_WEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-webpostlinks'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorwebpostlinks'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_HIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-highlights'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorhighlights'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-webposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_POSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-posts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorwebposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagwebposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDUSERS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-wildcardusers'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORWILDCARDUSERS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorwildcardusers'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_WILDCARDMYPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-wildcardmyposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYWEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-mywebpostlinks'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-myhighlights'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-mywebposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-myposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGALLCONTENT', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagallcontent'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_HOMEALLCONTENT', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-homeallcontent'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORMAINALLCONTENT', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authormainallcontent'));
+// define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORALLCONTENT', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorallcontent'));
 
 class GD_Template_Processor_CustomSimpleFilterInners extends GD_Template_Processor_SimpleFilterInnersBase {
 

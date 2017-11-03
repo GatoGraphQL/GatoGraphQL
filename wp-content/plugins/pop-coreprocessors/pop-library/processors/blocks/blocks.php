@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('block-inviteusers'));
-define ('GD_TEMPLATE_BLOCK_LATESTCOUNTS', PoP_ServerUtils::get_template_definition('block-latestcounts'));
-// define ('GD_TEMPLATE_BLOCK_EXTERNAL', PoP_ServerUtils::get_template_definition('block-external'));
+define ('GD_TEMPLATE_BLOCK_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('block-inviteusers'));
+define ('GD_TEMPLATE_BLOCK_LATESTCOUNTS', PoP_TemplateIDUtils::get_template_definition('block-latestcounts'));
+// define ('GD_TEMPLATE_BLOCK_EXTERNAL', PoP_TemplateIDUtils::get_template_definition('block-external'));
 
 class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase {
 

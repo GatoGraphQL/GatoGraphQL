@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FETCHMORE', PoP_ServerUtils::get_template_definition('fetchmore'));
+define ('GD_TEMPLATE_FETCHMORE', PoP_TemplateIDUtils::get_template_definition('fetchmore'));
 
 class GD_Template_Processor_FetchMore extends GD_Template_Processor_FetchMoreBase {
 

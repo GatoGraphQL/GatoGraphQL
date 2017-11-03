@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTINNER_FOLLOWSUSERS', PoP_ServerUtils::get_template_definition('contentinner-followsusers'));
-define ('GD_TEMPLATE_CONTENTINNER_UNFOLLOWSUSERS', PoP_ServerUtils::get_template_definition('contentinner-unfollowsusers'));
-define ('GD_TEMPLATE_CONTENTINNER_RECOMMENDSPOSTS', PoP_ServerUtils::get_template_definition('contentinner-recommendsposts'));
-define ('GD_TEMPLATE_CONTENTINNER_UNRECOMMENDSPOSTS', PoP_ServerUtils::get_template_definition('contentinner-unrecommendsposts'));
-define ('GD_TEMPLATE_CONTENTINNER_SUBSCRIBESTOTAGS', PoP_ServerUtils::get_template_definition('contentinner-subscribestotags'));
-define ('GD_TEMPLATE_CONTENTINNER_UNSUBSCRIBESFROMTAGS', PoP_ServerUtils::get_template_definition('contentinner-unsubscribesfromtags'));
-define ('GD_TEMPLATE_CONTENTINNER_UPVOTESPOSTS', PoP_ServerUtils::get_template_definition('contentinner-upvotesposts'));
-define ('GD_TEMPLATE_CONTENTINNER_UNDOUPVOTESPOSTS', PoP_ServerUtils::get_template_definition('contentinner-undoupvotesposts'));
-define ('GD_TEMPLATE_CONTENTINNER_DOWNVOTESPOSTS', PoP_ServerUtils::get_template_definition('contentinner-downvotesposts'));
-define ('GD_TEMPLATE_CONTENTINNER_UNDODOWNVOTESPOSTS', PoP_ServerUtils::get_template_definition('contentinner-undodownvotesposts'));
+define ('GD_TEMPLATE_CONTENTINNER_FOLLOWSUSERS', PoP_TemplateIDUtils::get_template_definition('contentinner-followsusers'));
+define ('GD_TEMPLATE_CONTENTINNER_UNFOLLOWSUSERS', PoP_TemplateIDUtils::get_template_definition('contentinner-unfollowsusers'));
+define ('GD_TEMPLATE_CONTENTINNER_RECOMMENDSPOSTS', PoP_TemplateIDUtils::get_template_definition('contentinner-recommendsposts'));
+define ('GD_TEMPLATE_CONTENTINNER_UNRECOMMENDSPOSTS', PoP_TemplateIDUtils::get_template_definition('contentinner-unrecommendsposts'));
+define ('GD_TEMPLATE_CONTENTINNER_SUBSCRIBESTOTAGS', PoP_TemplateIDUtils::get_template_definition('contentinner-subscribestotags'));
+define ('GD_TEMPLATE_CONTENTINNER_UNSUBSCRIBESFROMTAGS', PoP_TemplateIDUtils::get_template_definition('contentinner-unsubscribesfromtags'));
+define ('GD_TEMPLATE_CONTENTINNER_UPVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('contentinner-upvotesposts'));
+define ('GD_TEMPLATE_CONTENTINNER_UNDOUPVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('contentinner-undoupvotesposts'));
+define ('GD_TEMPLATE_CONTENTINNER_DOWNVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('contentinner-downvotesposts'));
+define ('GD_TEMPLATE_CONTENTINNER_UNDODOWNVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('contentinner-undodownvotesposts'));
 
 class GD_Template_Processor_FunctionsContentMultipleInners extends GD_Template_Processor_ContentMultipleInnersBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_BOOTSTRAP', PoP_ServerUtils::get_template_definition('bootstrap'));
-define ('POP_RESOURCELOADER_CUSTOMBOOTSTRAP', PoP_ServerUtils::get_template_definition('custombootstrap'));
+define ('POP_RESOURCELOADER_BOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('bootstrap'));
+define ('POP_RESOURCELOADER_CUSTOMBOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('custombootstrap'));
 
 class PoP_BootstrapProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

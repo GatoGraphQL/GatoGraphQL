@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CREATELOCATION', PoP_ServerUtils::get_template_definition('messagefeedbackinner-createlocation'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-createlocation'));
 
 class GD_Template_Processor_CreateLocationMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

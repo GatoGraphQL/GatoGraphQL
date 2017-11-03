@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('messagefeedbackinner-user-changepassword'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYPREFERENCES', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mypreferences'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_USER_CHANGEPASSWORD', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-user-changepassword'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYPREFERENCES', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mypreferences'));
 
 class GD_Template_Processor_UserMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

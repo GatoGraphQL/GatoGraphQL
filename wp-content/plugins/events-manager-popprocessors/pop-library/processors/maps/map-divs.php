@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MAP_DIV', PoP_ServerUtils::get_template_definition('em-map-div'));
+define ('GD_TEMPLATE_MAP_DIV', PoP_TemplateIDUtils::get_template_definition('em-map-div'));
 
 class GD_Template_Processor_MapDivs extends GD_Template_Processor_MapDivsBase {
 

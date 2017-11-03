@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTAUTHOR_CONTENT', PoP_ServerUtils::get_template_definition('layoutauthor-content'));
-define ('GD_TEMPLATE_LAYOUTAUTHOR_LIMITEDCONTENT', PoP_ServerUtils::get_template_definition('layoutauthor-limitedcontent'));
+define ('GD_TEMPLATE_LAYOUTAUTHOR_CONTENT', PoP_TemplateIDUtils::get_template_definition('layoutauthor-content'));
+define ('GD_TEMPLATE_LAYOUTAUTHOR_LIMITEDCONTENT', PoP_TemplateIDUtils::get_template_definition('layoutauthor-limitedcontent'));
 
 class GD_Template_Processor_AuthorContentLayouts extends GD_Template_Processor_AuthorContentLayoutsBase {
 

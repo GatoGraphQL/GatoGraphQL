@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_ADDCOMMENT', PoP_ServerUtils::get_template_definition('action-addcomment'));
+define ('GD_TEMPLATE_ACTION_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('action-addcomment'));
 
 class GD_Template_Processor_CommentsActions extends GD_Template_Processor_ActionsBase {
 

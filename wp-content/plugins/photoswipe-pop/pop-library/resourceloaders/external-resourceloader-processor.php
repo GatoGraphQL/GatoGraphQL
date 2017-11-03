@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPE', PoP_ServerUtils::get_template_definition('external-photoswipe'));
-define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPESKIN', PoP_ServerUtils::get_template_definition('external-photoswipe-skin'));
+define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPE', PoP_TemplateIDUtils::get_template_definition('external-photoswipe'));
+define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPESKIN', PoP_TemplateIDUtils::get_template_definition('external-photoswipe-skin'));
 
 class PhotoSwipe_PoP_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

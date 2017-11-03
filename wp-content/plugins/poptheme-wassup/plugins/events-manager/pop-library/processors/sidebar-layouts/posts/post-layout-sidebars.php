@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-event'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-pastevent'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-event'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-pastevent'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-event'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-event'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-event'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-event'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-pastevent'));
 
 class GD_EM_Template_Processor_CustomPostLayoutSidebars extends GD_Template_Processor_SidebarsBase {
 

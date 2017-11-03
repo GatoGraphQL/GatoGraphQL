@@ -5,23 +5,23 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_TOP', PoP_ServerUtils::get_template_definition('blockgroup-home-top'));
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME', PoP_ServerUtils::get_template_definition('blockgroup-home-welcome'));
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME', PoP_ServerUtils::get_template_definition('blockgroup-home-compactwelcome'));
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME', PoP_ServerUtils::get_template_definition('blockgroup-home-institutionalwelcome'));
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG', PoP_ServerUtils::get_template_definition('blockgroup-home-welcomeblog'));
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA', PoP_ServerUtils::get_template_definition('blockgroup-home-widgetarea'));
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEACCOUNT', PoP_ServerUtils::get_template_definition('blockgroup-home-welcomeaccount'));
-define ('GD_TEMPLATE_BLOCKGROUP_HOME_BLOGNEWSLETTER', PoP_ServerUtils::get_template_definition('blockgroup-home-blognewsletter'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_TOP', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-top'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_WELCOME', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-welcome'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_COMPACTWELCOME', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-compactwelcome'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_INSTITUTIONALWELCOME', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-institutionalwelcome'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEBLOG', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-welcomeblog'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_WIDGETAREA', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-widgetarea'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_WELCOMEACCOUNT', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-welcomeaccount'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME_BLOGNEWSLETTER', PoP_TemplateIDUtils::get_template_definition('blockgroup-home-blognewsletter'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_TOP', PoP_ServerUtils::get_template_definition('blockgroup-author-top'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION', PoP_ServerUtils::get_template_definition('blockgroup-author-description'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA', PoP_ServerUtils::get_template_definition('blockgroup-author-widgetarea'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_TOP', PoP_TemplateIDUtils::get_template_definition('blockgroup-author-top'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_DESCRIPTION', PoP_TemplateIDUtils::get_template_definition('blockgroup-author-description'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_WIDGETAREA', PoP_TemplateIDUtils::get_template_definition('blockgroup-author-widgetarea'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA', PoP_ServerUtils::get_template_definition('blockgroup-tag-widgetarea'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_WIDGETAREA', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-widgetarea'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_WHOWEARE', PoP_ServerUtils::get_template_definition('blockgroup-whoweare'));
-define ('GD_TEMPLATE_BLOCKGROUP_OURSPONSORS', PoP_ServerUtils::get_template_definition('blockgroup-oursponsors'));
+define ('GD_TEMPLATE_BLOCKGROUP_WHOWEARE', PoP_TemplateIDUtils::get_template_definition('blockgroup-whoweare'));
+define ('GD_TEMPLATE_BLOCKGROUP_OURSPONSORS', PoP_TemplateIDUtils::get_template_definition('blockgroup-oursponsors'));
 
 define ('POP_HOOK_BLOCKGROUP_TOPWIDGETS_INCOLUMNS', 'blockgroup-topwidgets-incolumns');
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_TEMPLATE_BLOCK', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_BLOCK));
+define ('POP_RESOURCELOADER_TEMPLATE_BLOCK', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_BLOCK));
 
 class PoP_BaseProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor {
 

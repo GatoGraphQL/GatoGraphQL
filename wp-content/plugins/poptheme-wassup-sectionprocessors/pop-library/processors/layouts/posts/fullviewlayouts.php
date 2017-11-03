@@ -5,26 +5,26 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-fullview-announcement'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-fullview-locationpost'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_FEATURED', PoP_ServerUtils::get_template_definition('layout-fullview-featured'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-fullview-discussion'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_STORY', PoP_ServerUtils::get_template_definition('layout-fullview-story'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_BLOG', PoP_ServerUtils::get_template_definition('layout-fullview-blog'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_THOUGHT', PoP_ServerUtils::get_template_definition('layout-fullview-thought'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_HOMEMESSAGE', PoP_ServerUtils::get_template_definition('layout-fullview-homemessage'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('layout-fullview-announcement'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('layout-fullview-locationpost'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-fullview-featured'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('layout-fullview-discussion'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_STORY', PoP_TemplateIDUtils::get_template_definition('layout-fullview-story'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-fullview-blog'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_THOUGHT', PoP_TemplateIDUtils::get_template_definition('layout-fullview-thought'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_HOMEMESSAGE', PoP_TemplateIDUtils::get_template_definition('layout-fullview-homemessage'));
 
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('authorlayout-fullview-announcement'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_LOCATIONPOST', PoP_ServerUtils::get_template_definition('authorlayout-fullview-locationpost'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_DISCUSSION', PoP_ServerUtils::get_template_definition('authorlayout-fullview-discussion'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_STORY', PoP_ServerUtils::get_template_definition('authorlayout-fullview-story'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_FEATURED', PoP_ServerUtils::get_template_definition('authorlayout-fullview-featured'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-announcement'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-locationpost'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-discussion'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_STORY', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-story'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_FEATURED', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-featured'));
 
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('singlelayout-fullview-announcement'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_LOCATIONPOST', PoP_ServerUtils::get_template_definition('singlelayout-fullview-locationpost'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_DISCUSSION', PoP_ServerUtils::get_template_definition('singlelayout-fullview-discussion'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_STORY', PoP_ServerUtils::get_template_definition('singlelayout-fullview-story'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_FEATURED', PoP_ServerUtils::get_template_definition('singlelayout-fullview-featured'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-announcement'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-locationpost'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-discussion'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_STORY', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-story'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_FEATURED', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-featured'));
 
 class GD_Custom_Template_Processor_CustomFullViewLayouts extends GD_Template_Processor_CustomFullViewLayoutsBase {
 

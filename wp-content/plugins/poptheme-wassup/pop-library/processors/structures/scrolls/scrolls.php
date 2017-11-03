@@ -5,111 +5,111 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_HOMEMESSAGES', PoP_ServerUtils::get_template_definition('scroll-homemessages'));
+define ('GD_TEMPLATE_SCROLL_HOMEMESSAGES', PoP_TemplateIDUtils::get_template_definition('scroll-homemessages'));
 
-define ('GD_TEMPLATE_SCROLL_MYCONTENT_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mycontent-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mylinks-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYWEBPOSTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mywebposts-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYCONTENT_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mycontent-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mylinks-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYWEBPOSTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mywebposts-simpleviewpreview'));
 
-define ('GD_TEMPLATE_SCROLL_MYCONTENT_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mycontent-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYLINKS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mylinks-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYHIGHLIGHTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-myhighlights-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYWEBPOSTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mywebposts-fullviewpreview'));
-// define ('GD_TEMPLATE_SCROLL_MYRESOURCES_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-myresources-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYCONTENT_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mycontent-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYLINKS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mylinks-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYHIGHLIGHTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-myhighlights-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYWEBPOSTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mywebposts-fullviewpreview'));
+// define ('GD_TEMPLATE_SCROLL_MYRESOURCES_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-myresources-fullviewpreview'));
 
-define ('GD_TEMPLATE_SCROLL_ALLCONTENT_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-allcontent-navigator'));
-define ('GD_TEMPLATE_SCROLL_LINKS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-links-navigator'));
-define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-highlights-navigator'));
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-webposts-navigator'));
+define ('GD_TEMPLATE_SCROLL_ALLCONTENT_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-allcontent-navigator'));
+define ('GD_TEMPLATE_SCROLL_LINKS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-links-navigator'));
+define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-highlights-navigator'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-navigator'));
 
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-allusers-navigator'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-navigator'));
 
-define ('GD_TEMPLATE_SCROLL_ALLCONTENT_ADDONS', PoP_ServerUtils::get_template_definition('scroll-allcontent-addons'));
-define ('GD_TEMPLATE_SCROLL_LINKS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-links-addons'));
-define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-highlights-addons'));
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-webposts-addons'));
+define ('GD_TEMPLATE_SCROLL_ALLCONTENT_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-allcontent-addons'));
+define ('GD_TEMPLATE_SCROLL_LINKS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-links-addons'));
+define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-highlights-addons'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-addons'));
 
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-allusers-addons'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-addons'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-searchposts-details'));
-define ('GD_TEMPLATE_SCROLL_ALLCONTENT_DETAILS', PoP_ServerUtils::get_template_definition('scroll-allcontent-details'));
-define ('GD_TEMPLATE_SCROLL_LINKS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-links-details'));
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-webposts-details'));
-// define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-highlights-details'));
-define ('GD_TEMPLATE_SCROLL_TAGS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-tags-details'));
+define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-searchposts-details'));
+define ('GD_TEMPLATE_SCROLL_ALLCONTENT_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-allcontent-details'));
+define ('GD_TEMPLATE_SCROLL_LINKS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-links-details'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-details'));
+// define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-highlights-details'));
+define ('GD_TEMPLATE_SCROLL_TAGS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-tags-details'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-searchusers-details'));
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-allusers-details'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-authorfollowers-details'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-authorfollowingusers-details'));
-define ('GD_TEMPLATE_SCROLL_AUTHORSUBSCRIBEDTOTAGS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-authorsubscribedtotags-details'));
+define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-searchusers-details'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-details'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowers-details'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowingusers-details'));
+define ('GD_TEMPLATE_SCROLL_AUTHORSUBSCRIBEDTOTAGS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-authorsubscribedtotags-details'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-searchposts-simpleview'));
-define ('GD_TEMPLATE_SCROLL_ALLCONTENT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-allcontent-simpleview'));
-define ('GD_TEMPLATE_SCROLL_LINKS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-links-simpleview'));
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-webposts-simpleview'));
+define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-searchposts-simpleview'));
+define ('GD_TEMPLATE_SCROLL_ALLCONTENT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-allcontent-simpleview'));
+define ('GD_TEMPLATE_SCROLL_LINKS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-links-simpleview'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-simpleview'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-searchposts-fullview'));
-define ('GD_TEMPLATE_SCROLL_ALLCONTENT_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-allcontent-fullview'));
-define ('GD_TEMPLATE_SCROLL_LINKS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-links-fullview'));
-define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-highlights-fullview'));
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-webposts-fullview'));
+define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-searchposts-fullview'));
+define ('GD_TEMPLATE_SCROLL_ALLCONTENT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-allcontent-fullview'));
+define ('GD_TEMPLATE_SCROLL_LINKS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-links-fullview'));
+define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-highlights-fullview'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-fullview'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-searchusers-fullview'));
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-allusers-fullview'));
+define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-searchusers-fullview'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-fullview'));
 
-// define ('GD_TEMPLATE_SCROLL_AUTHORALLCONTENT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-authorallcontent-simpleview'));
-// define ('GD_TEMPLATE_SCROLL_AUTHORLINKS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-authorlinks-simpleview'));
-// define ('GD_TEMPLATE_SCROLL_AUTHORWEBPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-authorwebposts-simpleview'));
-// define ('GD_TEMPLATE_SCROLL_AUTHORRECOMMENDEDPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-authorrecommendedposts-simpleview'));
+// define ('GD_TEMPLATE_SCROLL_AUTHORALLCONTENT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorallcontent-simpleview'));
+// define ('GD_TEMPLATE_SCROLL_AUTHORLINKS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorlinks-simpleview'));
+// define ('GD_TEMPLATE_SCROLL_AUTHORWEBPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorwebposts-simpleview'));
+// define ('GD_TEMPLATE_SCROLL_AUTHORRECOMMENDEDPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorrecommendedposts-simpleview'));
 
-define ('GD_TEMPLATE_SCROLL_AUTHORALLCONTENT_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorallcontent-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORLINKS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorlinks-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORHIGHLIGHTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorhighlights-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORWEBPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorwebposts-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorfollowers-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorfollowingusers-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORRECOMMENDEDPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorrecommendedposts-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORALLCONTENT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorallcontent-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORLINKS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorlinks-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORHIGHLIGHTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorhighlights-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORWEBPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorwebposts-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowers-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowingusers-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORRECOMMENDEDPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorrecommendedposts-fullview'));
 
-// define ('GD_TEMPLATE_SCROLL_SINGLERELATEDCONTENT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-singlerelatedcontent-simpleview'));
+// define ('GD_TEMPLATE_SCROLL_SINGLERELATEDCONTENT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-singlerelatedcontent-simpleview'));
 
-define ('GD_TEMPLATE_SCROLL_SINGLERELATEDCONTENT_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-singlerelatedcontent-fullview'));
-define ('GD_TEMPLATE_SCROLL_SINGLERELATEDHIGHLIGHTCONTENT_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-singlerelatedhighlightcontent-fullview'));
-define ('GD_TEMPLATE_SCROLL_SINGLEAUTHORS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-singleauthors-fullview'));
+define ('GD_TEMPLATE_SCROLL_SINGLERELATEDCONTENT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-singlerelatedcontent-fullview'));
+define ('GD_TEMPLATE_SCROLL_SINGLERELATEDHIGHLIGHTCONTENT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-singlerelatedhighlightcontent-fullview'));
+define ('GD_TEMPLATE_SCROLL_SINGLEAUTHORS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-singleauthors-fullview'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-searchposts-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_ALLCONTENT_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-allcontent-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_LINKS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-links-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-highlights-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-webposts-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-searchposts-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_ALLCONTENT_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-allcontent-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_LINKS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-links-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-highlights-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-searchusers-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-allusers-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-authorfollowers-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-authorfollowingusers-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-searchusers-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowers-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowingusers-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_LIST', PoP_ServerUtils::get_template_definition('scroll-searchposts-list'));
-define ('GD_TEMPLATE_SCROLL_ALLCONTENT_LIST', PoP_ServerUtils::get_template_definition('scroll-allcontent-list'));
-define ('GD_TEMPLATE_SCROLL_LINKS_LIST', PoP_ServerUtils::get_template_definition('scroll-links-list'));
-define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_LIST', PoP_ServerUtils::get_template_definition('scroll-highlights-list'));
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_LIST', PoP_ServerUtils::get_template_definition('scroll-webposts-list'));
-define ('GD_TEMPLATE_SCROLL_TAGS_LIST', PoP_ServerUtils::get_template_definition('scroll-tags-list'));
+define ('GD_TEMPLATE_SCROLL_SEARCHPOSTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-searchposts-list'));
+define ('GD_TEMPLATE_SCROLL_ALLCONTENT_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-allcontent-list'));
+define ('GD_TEMPLATE_SCROLL_LINKS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-links-list'));
+define ('GD_TEMPLATE_SCROLL_HIGHLIGHTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-highlights-list'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-list'));
+define ('GD_TEMPLATE_SCROLL_TAGS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-tags-list'));
 
-define ('GD_TEMPLATE_SCROLL_WEBPOSTS_LINE', PoP_ServerUtils::get_template_definition('scroll-webposts-line'));
+define ('GD_TEMPLATE_SCROLL_WEBPOSTS_LINE', PoP_TemplateIDUtils::get_template_definition('scroll-webposts-line'));
 
-define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_LIST', PoP_ServerUtils::get_template_definition('scroll-searchusers-list'));
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_LIST', PoP_ServerUtils::get_template_definition('scroll-allusers-list'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_LIST', PoP_ServerUtils::get_template_definition('scroll-authorfollowers-list'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_LIST', PoP_ServerUtils::get_template_definition('scroll-authorfollowingusers-list'));
-define ('GD_TEMPLATE_SCROLL_AUTHORSUBSCRIBEDTOTAGS_LIST', PoP_ServerUtils::get_template_definition('scroll-authorsubscribedtotags-list'));
+define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-searchusers-list'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-list'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowers-list'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowingusers-list'));
+define ('GD_TEMPLATE_SCROLL_AUTHORSUBSCRIBEDTOTAGS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-authorsubscribedtotags-list'));
 
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_DETAILS', PoP_ServerUtils::get_template_definition('scroll-whoweare-details'));
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-whoweare-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_LIST', PoP_ServerUtils::get_template_definition('scroll-whoweare-list'));
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-whoweare-fullview'));
-define ('GD_TEMPLATE_SCROLL_OURSPONSORS', PoP_ServerUtils::get_template_definition('scroll-oursponsors'));
-define ('GD_TEMPLATE_SCROLL_OURSUPPORTERS', PoP_ServerUtils::get_template_definition('scroll-oursupporters'));
-define ('GD_TEMPLATE_SCROLL_OURSPONSORS_SMALLDETAILS', PoP_ServerUtils::get_template_definition('scroll-oursponsors-smalldetails'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-details'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-list'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-fullview'));
+define ('GD_TEMPLATE_SCROLL_OURSPONSORS', PoP_TemplateIDUtils::get_template_definition('scroll-oursponsors'));
+define ('GD_TEMPLATE_SCROLL_OURSUPPORTERS', PoP_TemplateIDUtils::get_template_definition('scroll-oursupporters'));
+define ('GD_TEMPLATE_SCROLL_OURSPONSORS_SMALLDETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-oursponsors-smalldetails'));
 
 class GD_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsBase {
 

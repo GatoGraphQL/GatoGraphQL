@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST', PoP_ServerUtils::get_template_definition('layout-automatedemails-postsidebarcompact-horizontal-post'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-postsidebarcompact-horizontal-post'));
 
 class PoPTheme_Wassup_AE_Template_Processor_CustomPostLayoutSidebars extends GD_Template_Processor_SidebarsBase {
 

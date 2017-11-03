@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_CREATEPROFILE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-createprofile'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_CREATEPROFILE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-createprofile'));
 
 class GD_Template_Processor_CreateProfileMessageFeedbackLayouts extends GD_Template_Processor_CreateUserFormMesageFeedbackLayoutsBase {
 

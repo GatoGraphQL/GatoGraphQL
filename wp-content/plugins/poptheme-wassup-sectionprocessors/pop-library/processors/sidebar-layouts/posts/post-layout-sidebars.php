@@ -5,26 +5,26 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-locationpost'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-story'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-discussion'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-blog'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-announcement'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebar-vertical-featured'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-locationpost'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_STORY', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-story'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-discussion'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-blog'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-announcement'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_VERTICAL_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-vertical-featured'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-locationpost'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-story'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-discussion'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-blog'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-announcement'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebar-horizontal-featured'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-locationpost'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STORY', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-story'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-discussion'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-blog'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-announcement'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBAR_HORIZONTAL_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-postsidebar-horizontal-featured'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-locationpost'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STORY', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-story'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_DISCUSSION', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-discussion'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_BLOG', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-blog'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-announcement'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_FEATURED', PoP_ServerUtils::get_template_definition('layout-postsidebarcompact-horizontal-featured'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-locationpost'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STORY', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-story'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-discussion'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-blog'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-announcement'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarcompact-horizontal-featured'));
 
 class GD_Custom_Template_Processor_CustomPostLayoutSidebars extends GD_Template_Processor_SidebarsBase {
 

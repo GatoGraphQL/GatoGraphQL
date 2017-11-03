@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_CONTROLGROUP_CONTENTSOURCE', PoP_ServerUtils::get_template_definition('ure-controlgroup-contentsource'));
+define ('GD_URE_TEMPLATE_CONTROLGROUP_CONTENTSOURCE', PoP_TemplateIDUtils::get_template_definition('ure-controlgroup-contentsource'));
 
 class GD_URE_Template_Processor_ControlGroups extends GD_Template_Processor_ControlGroupsBase {
 

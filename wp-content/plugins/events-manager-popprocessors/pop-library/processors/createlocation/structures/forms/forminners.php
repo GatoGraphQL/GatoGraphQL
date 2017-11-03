@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_CREATELOCATION', PoP_ServerUtils::get_template_definition('em-forminner-createlocation'));
+define ('GD_TEMPLATE_FORMINNER_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('em-forminner-createlocation'));
 
 class GD_EM_Template_Processor_CreateLocationFormInners extends GD_Template_Processor_FormInnersBase {
 

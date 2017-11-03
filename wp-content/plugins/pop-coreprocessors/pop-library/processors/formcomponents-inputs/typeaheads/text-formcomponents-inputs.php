@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEAD', PoP_ServerUtils::get_template_definition('formcomponent-text-typeahead'));
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADSEARCH', PoP_ServerUtils::get_template_definition('formcomponent-text-typeaheadsearch'));
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADPROFILES', PoP_ServerUtils::get_template_definition('formcomponent-text-typeaheadprofiles'));
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADPOSTAUTHORS', PoP_ServerUtils::get_template_definition('formcomponent-text-typeaheadpostauthors'));
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADRELATEDCONTENT', PoP_ServerUtils::get_template_definition('formcomponent-text-typeaheadrelatedcontent'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('formcomponent-text-typeahead'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADSEARCH', PoP_TemplateIDUtils::get_template_definition('formcomponent-text-typeaheadsearch'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADPROFILES', PoP_TemplateIDUtils::get_template_definition('formcomponent-text-typeaheadprofiles'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADPOSTAUTHORS', PoP_TemplateIDUtils::get_template_definition('formcomponent-text-typeaheadpostauthors'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADRELATEDCONTENT', PoP_TemplateIDUtils::get_template_definition('formcomponent-text-typeaheadrelatedcontent'));
 
 class GD_Template_Processor_TypeaheadTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

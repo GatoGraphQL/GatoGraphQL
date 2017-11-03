@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING', PoP_ServerUtils::get_template_definition('formcomponent-quicklinktypeahead-everything'));
+define ('GD_TEMPLATE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING', PoP_TemplateIDUtils::get_template_definition('formcomponent-quicklinktypeahead-everything'));
 
 class GD_Template_Processor_FetchlinkTypeaheadFormComponentInputs extends GD_Template_Processor_FetchlinkTypeaheadFormComponentsBase {
 

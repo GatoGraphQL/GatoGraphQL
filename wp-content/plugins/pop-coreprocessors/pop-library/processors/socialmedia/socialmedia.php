@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER', PoP_ServerUtils::get_template_definition('post-socialmedia-simpleview-volunteer'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_VOLUNTEER', PoP_ServerUtils::get_template_definition('post-socialmedia-volunteer'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA', PoP_ServerUtils::get_template_definition('post-socialmedia'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_COUNTER', PoP_ServerUtils::get_template_definition('post-socialmedia-counter'));
-define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA', PoP_ServerUtils::get_template_definition('subjugatedpost-socialmedia'));
-define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER', PoP_ServerUtils::get_template_definition('subjugatedpost-socialmedia-counter'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA', PoP_ServerUtils::get_template_definition('user-socialmedia'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_COUNTER', PoP_ServerUtils::get_template_definition('user-socialmedia-counter'));
-define ('GD_TEMPLATE_TAGSOCIALMEDIA', PoP_ServerUtils::get_template_definition('tag-socialmedia'));
-define ('GD_TEMPLATE_TAGSOCIALMEDIA_COUNTER', PoP_ServerUtils::get_template_definition('tag-socialmedia-counter'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-simpleview-volunteer'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-volunteer'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('post-socialmedia'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_COUNTER', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-counter'));
+define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('subjugatedpost-socialmedia'));
+define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER', PoP_TemplateIDUtils::get_template_definition('subjugatedpost-socialmedia-counter'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('user-socialmedia'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_COUNTER', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-counter'));
+define ('GD_TEMPLATE_TAGSOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia'));
+define ('GD_TEMPLATE_TAGSOCIALMEDIA_COUNTER', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-counter'));
 
 class GD_Template_Processor_SocialMedia extends GD_Template_Processor_SocialMediaBase {
 

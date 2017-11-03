@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_LINK_ACCESS', PoP_ServerUtils::get_template_definition('widget-link-access'));
-define ('GD_TEMPLATE_WIDGET_LINK_CATEGORIES', PoP_ServerUtils::get_template_definition('widget-link-categories'));
-define ('GD_TEMPLATE_WIDGET_CATEGORIES', PoP_ServerUtils::get_template_definition('widget-categories'));
-define ('GD_TEMPLATE_WIDGET_APPLIESTO', PoP_ServerUtils::get_template_definition('widget-appliesto'));
+define ('GD_TEMPLATE_WIDGET_LINK_ACCESS', PoP_TemplateIDUtils::get_template_definition('widget-link-access'));
+define ('GD_TEMPLATE_WIDGET_LINK_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('widget-link-categories'));
+define ('GD_TEMPLATE_WIDGET_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('widget-categories'));
+define ('GD_TEMPLATE_WIDGET_APPLIESTO', PoP_TemplateIDUtils::get_template_definition('widget-appliesto'));
 
-define ('GD_TEMPLATE_WIDGETCOMPACT_GENERICINFO', PoP_ServerUtils::get_template_definition('widgetcompact-generic-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_LINKINFO', PoP_ServerUtils::get_template_definition('widgetcompact-link-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_HIGHLIGHTINFO', PoP_ServerUtils::get_template_definition('widgetcompact-highlight-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_WEBPOSTINFO', PoP_ServerUtils::get_template_definition('widgetcompact-webpost-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_GENERICINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-generic-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_LINKINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-link-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_HIGHLIGHTINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-highlight-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_WEBPOSTINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-webpost-info'));
 
 class GD_Template_Processor_CustomPostWidgets extends GD_Template_Processor_WidgetsBase {
 

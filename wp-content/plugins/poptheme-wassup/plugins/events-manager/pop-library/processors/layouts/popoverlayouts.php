@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POPOVER_EVENT', PoP_ServerUtils::get_template_definition('layout-popover-event'));
+define ('GD_TEMPLATE_LAYOUT_POPOVER_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-popover-event'));
 
 class GD_EM_Template_Processor_CustomPopoverLayouts extends GD_Template_Processor_PopoverLayoutsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MAP_SCRIPTCUSTOMIZATION_POST', PoP_ServerUtils::get_template_definition('em-map-scriptcustomization-post'));
+define ('GD_TEMPLATE_MAP_SCRIPTCUSTOMIZATION_POST', PoP_TemplateIDUtils::get_template_definition('em-map-scriptcustomization-post'));
 
 class GD_Template_Processor_PostMapScriptCustomizations extends GD_Template_Processor_PostMapScriptCustomizationsBase {
 

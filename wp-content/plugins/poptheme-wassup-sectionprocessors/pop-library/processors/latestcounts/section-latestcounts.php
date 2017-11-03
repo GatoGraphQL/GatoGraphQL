@@ -5,20 +5,20 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LATESTCOUNT_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('latestcount-locationposts'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('latestcount-author-locationposts'));
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('latestcount-tag-locationposts'));
-define ('GD_TEMPLATE_LATESTCOUNT_STORIES', PoP_ServerUtils::get_template_definition('latestcount-stories'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_STORIES', PoP_ServerUtils::get_template_definition('latestcount-author-stories'));
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_STORIES', PoP_ServerUtils::get_template_definition('latestcount-tag-stories'));
-define ('GD_TEMPLATE_LATESTCOUNT_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('latestcount-announcements'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('latestcount-author-announcements'));
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('latestcount-tag-announcements'));
-define ('GD_TEMPLATE_LATESTCOUNT_DISCUSSIONS', PoP_ServerUtils::get_template_definition('latestcount-discussions'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_DISCUSSIONS', PoP_ServerUtils::get_template_definition('latestcount-author-discussions'));
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_DISCUSSIONS', PoP_ServerUtils::get_template_definition('latestcount-tag-discussions'));
-define ('GD_TEMPLATE_LATESTCOUNT_FEATURED', PoP_ServerUtils::get_template_definition('latestcount-featured'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_FEATURED', PoP_ServerUtils::get_template_definition('latestcount-author-featured'));
+define ('GD_TEMPLATE_LATESTCOUNT_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('latestcount-locationposts'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('latestcount-author-locationposts'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-locationposts'));
+define ('GD_TEMPLATE_LATESTCOUNT_STORIES', PoP_TemplateIDUtils::get_template_definition('latestcount-stories'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_STORIES', PoP_TemplateIDUtils::get_template_definition('latestcount-author-stories'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_STORIES', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-stories'));
+define ('GD_TEMPLATE_LATESTCOUNT_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('latestcount-announcements'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('latestcount-author-announcements'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-announcements'));
+define ('GD_TEMPLATE_LATESTCOUNT_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('latestcount-discussions'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('latestcount-author-discussions'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-discussions'));
+define ('GD_TEMPLATE_LATESTCOUNT_FEATURED', PoP_TemplateIDUtils::get_template_definition('latestcount-featured'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_FEATURED', PoP_TemplateIDUtils::get_template_definition('latestcount-author-featured'));
 
 class PoPThemeWassup_SectionProcessors_Template_Processor_SectionLatestCounts extends GD_Template_Processor_SectionLatestCountsBase {
 

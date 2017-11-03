@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELCONTROLGROUP_CAROUSEL', PoP_ServerUtils::get_template_definition('carouselcontrolgroup-carousel'));
+define ('GD_TEMPLATE_CAROUSELCONTROLGROUP_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('carouselcontrolgroup-carousel'));
 
 class GD_Template_Processor_CarouselControlGroups extends GD_Template_Processor_ControlGroupsBase {
 

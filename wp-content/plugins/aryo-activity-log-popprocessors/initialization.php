@@ -6,7 +6,7 @@ class AAL_PoPProcessors_Initialization {
 		load_plugin_textdomain('aal-popprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('a8');
+		PoP_TemplateIDUtils::set_namespace('a8');
 
 		if (!is_admin()) {
 

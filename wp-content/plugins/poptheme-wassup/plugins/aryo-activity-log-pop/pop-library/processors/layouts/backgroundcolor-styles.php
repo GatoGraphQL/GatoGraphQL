@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasread-bgcolorstyles'));
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasunread-bgcolorstyles'));
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasread-topbgcolorstyles'));
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasunread-topbgcolorstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasread-bgcolorstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasunread-bgcolorstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasread-topbgcolorstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_TOPBGCOLORSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasunread-topbgcolorstyles'));
 
 class PopThemeWassup_AAL_Template_Processor_BackgroundColorStyleLayouts extends GD_Template_Processor_StylesLayoutsBase {
 

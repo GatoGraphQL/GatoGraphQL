@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION', PoP_ServerUtils::get_template_definition('layout-usersidebarinner-vertical-organization'));
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_VERTICAL_INDIVIDUAL', PoP_ServerUtils::get_template_definition('layout-usersidebarinner-vertical-individual'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('layout-usersidebarinner-vertical-organization'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_VERTICAL_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('layout-usersidebarinner-vertical-individual'));
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION', PoP_ServerUtils::get_template_definition('layout-usersidebarinner-horizontal-organization'));
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL', PoP_ServerUtils::get_template_definition('layout-usersidebarinner-horizontal-individual'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('layout-usersidebarinner-horizontal-organization'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('layout-usersidebarinner-horizontal-individual'));
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION', PoP_ServerUtils::get_template_definition('layout-usersidebarinner-compacthorizontal-organization'));
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL', PoP_ServerUtils::get_template_definition('layout-usersidebarinner-compacthorizontal-individual'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('layout-usersidebarinner-compacthorizontal-organization'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('layout-usersidebarinner-compacthorizontal-individual'));
 
 // class GD_Template_Processor_CustomUserLayoutSidebarInners extends GD_Template_Processor_LayoutSidebarInnersBase {
 class GD_URE_Template_Processor_CustomUserLayoutSidebarInners extends GD_Template_Processor_SidebarInnersBase {

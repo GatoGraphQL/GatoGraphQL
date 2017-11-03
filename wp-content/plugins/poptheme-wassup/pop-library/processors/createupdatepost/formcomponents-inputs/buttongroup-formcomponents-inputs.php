@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_BUTTONGROUP_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('formcomponent-buttongroup-webpostsections'));
+define ('GD_TEMPLATE_FORMCOMPONENT_BUTTONGROUP_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('formcomponent-buttongroup-webpostsections'));
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_BUTTONGROUP_CATEGORIES', PoP_ServerUtils::get_template_definition('categories-bg', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_BUTTONGROUP_SECTIONS', PoP_ServerUtils::get_template_definition('sections-bg', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_BUTTONGROUP_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('webpostsections-bg', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_BUTTONGROUP_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('categories-bg', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_BUTTONGROUP_SECTIONS', PoP_TemplateIDUtils::get_template_definition('sections-bg', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_BUTTONGROUP_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('webpostsections-bg', true));
 
 class GD_Template_Processor_CreateUpdatePostButtonGroupFormComponentInputs extends GD_Template_Processor_ButtonGroupFormComponentsBase {
 

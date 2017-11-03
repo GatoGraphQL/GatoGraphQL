@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_INDIVIDUALS', PoP_ServerUtils::get_template_definition('simplefilterinner-individuals'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('simplefilterinner-organizations'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYMEMBERS', PoP_ServerUtils::get_template_definition('simplefilterinner-mymembers'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-individuals'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-organizations'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-mymembers'));
 
 class GD_URE_Template_Processor_CustomSimpleFilterInners extends GD_Template_Processor_SimpleFilterInnersBase {
 

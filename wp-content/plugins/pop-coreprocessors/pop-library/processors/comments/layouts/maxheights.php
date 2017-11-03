@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('maxheight-subcomponent-postcomments'));
-// define ('GD_TEMPLATE_MAXHEIGHT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('maxheight-widgetwrapper-postcomments-appendtoscript'));
-// define ('GD_TEMPLATE_MAXHEIGHT_LAYOUT_COMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('maxheight-layout-comments-appendtoscript'));
+define ('GD_TEMPLATE_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('maxheight-subcomponent-postcomments'));
+// define ('GD_TEMPLATE_MAXHEIGHT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('maxheight-widgetwrapper-postcomments-appendtoscript'));
+// define ('GD_TEMPLATE_MAXHEIGHT_LAYOUT_COMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('maxheight-layout-comments-appendtoscript'));
 
 class GD_Template_Processor_PostCommentMaxHeightLayouts extends GD_Template_Processor_MaxHeightLayoutsBase {
 

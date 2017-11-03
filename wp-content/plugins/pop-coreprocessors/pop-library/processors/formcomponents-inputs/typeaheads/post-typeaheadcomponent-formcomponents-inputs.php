@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_ALLCONTENT', PoP_ServerUtils::get_template_definition('formcomponent-typeaheadcomponent-allcontent'));
+define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('formcomponent-typeaheadcomponent-allcontent'));
 
 class GD_Template_Processor_PostTypeaheadComponentFormComponentInputs extends GD_Template_Processor_PostTypeaheadComponentFormComponentsBase {
 

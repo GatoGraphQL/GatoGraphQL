@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_POST', PoP_ServerUtils::get_template_definition('viewcomponent-header-post-'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_POST_URL', PoP_ServerUtils::get_template_definition('viewcomponent-header-post-url'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_POST', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-post-'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_POST_URL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-post-url'));
 
 class GD_Template_Processor_PostViewComponentHeaders extends GD_Template_Processor_PostViewComponentHeadersBase {
 

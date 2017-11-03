@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONWRAPPER_POSTVIEW', PoP_ServerUtils::get_template_definition('buttonwrapper-postview'));
-define ('GD_TEMPLATE_BUTTONWRAPPER_POSTPREVIEW', PoP_ServerUtils::get_template_definition('buttonwrapper-postpreview'));
-define ('GD_TEMPLATE_BUTTONWRAPPER_POSTPERMALINK', PoP_ServerUtils::get_template_definition('buttonwrapper-postpermalink'));
+define ('GD_TEMPLATE_BUTTONWRAPPER_POSTVIEW', PoP_TemplateIDUtils::get_template_definition('buttonwrapper-postview'));
+define ('GD_TEMPLATE_BUTTONWRAPPER_POSTPREVIEW', PoP_TemplateIDUtils::get_template_definition('buttonwrapper-postpreview'));
+define ('GD_TEMPLATE_BUTTONWRAPPER_POSTPERMALINK', PoP_TemplateIDUtils::get_template_definition('buttonwrapper-postpermalink'));
 
 class GD_Template_Processor_ButtonWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

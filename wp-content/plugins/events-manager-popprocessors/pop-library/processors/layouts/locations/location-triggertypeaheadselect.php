@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_EM_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION', PoP_ServerUtils::get_template_definition('em-script-triggertypeaheadselect-location'));
+define ('GD_TEMPLATE_EM_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION', PoP_TemplateIDUtils::get_template_definition('em-script-triggertypeaheadselect-location'));
 
 class GD_Template_Processor_TriggerLocationTypeaheadScriptLayouts extends GD_Template_Processor_TriggerLocationTypeaheadScriptLayoutsBase {
 

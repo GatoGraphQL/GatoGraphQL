@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_ServerUtils::get_template_definition('layout-referencedby-appendtoscript-details'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS', PoP_ServerUtils::get_template_definition('layout-referencedbyempty-appendtoscript-details'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-referencedby-appendtoscript-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-referencedbyempty-appendtoscript-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-referencedby-appendtoscript-fullview'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-referencedbyempty-appendtoscript-fullview'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-referencedby-appendtoscript-details'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-referencedbyempty-appendtoscript-details'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedby-appendtoscript-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedbyempty-appendtoscript-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedby-appendtoscript-fullview'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedbyempty-appendtoscript-fullview'));
 
 class GD_Template_Processor_ReferencesFramesLayouts extends GD_Template_Processor_ReferencesScriptFrameLayoutsBase {
 

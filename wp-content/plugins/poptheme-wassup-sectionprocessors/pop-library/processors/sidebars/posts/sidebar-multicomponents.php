@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_LOCATIONPOST', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-locationpost'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_STORY', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-story'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_DISCUSSION', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-discussion'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_BLOG', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-blog'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-announcement'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATURED', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-featured'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-locationpost'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_STORY', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-story'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-discussion'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_BLOG', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-blog'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-announcement'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATURED', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-featured'));
 
 class GD_Custom_Template_Processor_PostMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_LINK_ACCESS', PoP_ServerUtils::get_template_definition('layout-link-access'));
+define ('GD_TEMPLATE_LAYOUT_LINK_ACCESS', PoP_TemplateIDUtils::get_template_definition('layout-link-access'));
 
 class Wassup_Template_Processor_Layouts extends Wassup_Template_Processor_LinkAccessLayoutsBase {
 

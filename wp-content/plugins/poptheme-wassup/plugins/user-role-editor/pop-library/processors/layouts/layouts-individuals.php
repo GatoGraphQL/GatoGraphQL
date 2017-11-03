@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUT_PROFILEINDIVIDUAL_DETAILS', PoP_ServerUtils::get_template_definition('ure-layoutuser-profileindividual-details'));
+define ('GD_URE_TEMPLATE_LAYOUT_PROFILEINDIVIDUAL_DETAILS', PoP_TemplateIDUtils::get_template_definition('ure-layoutuser-profileindividual-details'));
 
 class GD_URE_Custom_Template_Processor_ProfileIndividualLayouts extends GD_URE_Custom_Template_Processor_ProfileIndividualLayoutsBase {
 

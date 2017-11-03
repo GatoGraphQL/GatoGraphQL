@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_EMBEDCODE', PoP_ServerUtils::get_template_definition('embedcode'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMBEDCODE', PoP_TemplateIDUtils::get_template_definition('embedcode'));
 
 class GD_Template_Processor_ShareTextareaFormComponentInputs extends GD_Template_Processor_TextareaFormComponentsBase {
 

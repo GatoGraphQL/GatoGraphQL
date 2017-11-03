@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_EVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-eventlinks'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-authoreventlinks'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TAGEVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-tageventlinks'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_MYEVENTLINKS', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-myeventlinks'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDEVENT', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addevent'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_EVENTLINKS', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-eventlinks'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-authoreventlinks'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TAGEVENTLINKS', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-tageventlinks'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_MYEVENTLINKS', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-myeventlinks'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDEVENT', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-addevent'));
 
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLEMAP', PoP_ServerUtils::get_template_definition('controlbuttongroup-togglemap'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP', PoP_ServerUtils::get_template_definition('controlbuttongroup-toggleauthormap'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLETAGMAP', PoP_ServerUtils::get_template_definition('controlbuttongroup-toggletagmap'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLEMAP', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-togglemap'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-toggleauthormap'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLETAGMAP', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-toggletagmap'));
 
 class GD_EM_Template_Processor_CustomControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

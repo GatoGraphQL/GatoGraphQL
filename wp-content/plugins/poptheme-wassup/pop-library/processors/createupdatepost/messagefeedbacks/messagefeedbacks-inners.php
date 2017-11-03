@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LINK_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-link-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LINK_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-link-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-highlight-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_HIGHLIGHT_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-highlight-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-webpost-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_WEBPOST_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-webpost-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LINK_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-link-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-link-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-highlight-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_HIGHLIGHT_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-highlight-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-webpost-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_WEBPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-webpost-update'));
 
 class Wassup_Template_Processor_CreateUpdatePostFormMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

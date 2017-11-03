@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_DATAQUERY_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('layout-dataquery-requestlayouts'));
+define ('GD_TEMPLATE_LAYOUT_DATAQUERY_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('layout-dataquery-requestlayouts'));
 
 class GD_Template_Processor_RequestLayouts extends GD_Template_Processor_RequestLayoutsBase {
 

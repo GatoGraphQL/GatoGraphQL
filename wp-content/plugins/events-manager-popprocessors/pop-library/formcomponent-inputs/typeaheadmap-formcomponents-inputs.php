@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_FORMCOMPONENT_TYPEAHEADMAP', PoP_ServerUtils::get_template_definition('formcomponent-locationsmap'));
+define ('GD_EM_TEMPLATE_FORMCOMPONENT_TYPEAHEADMAP', PoP_TemplateIDUtils::get_template_definition('formcomponent-locationsmap'));
 
 class GD_Template_Processor_TypeaheadMapFormComponentInputs extends GD_Template_Processor_TypeaheadMapFormComponentsBase {
 

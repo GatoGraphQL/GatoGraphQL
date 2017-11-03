@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_PROFILEINDIVIDUAL_CREATE', PoP_ServerUtils::get_template_definition('forminner-profileindividual-create'));
+define ('GD_TEMPLATE_FORMINNER_PROFILEINDIVIDUAL_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-profileindividual-create'));
 
 class GD_URE_Template_Processor_CreateProfileIndividualFormInners extends GD_URE_Template_Processor_CreateProfileIndividualFormInnersBase {
 

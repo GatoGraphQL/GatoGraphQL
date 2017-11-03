@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_MESSAGE_NOLOCATION', PoP_ServerUtils::get_template_definition('em-message-nolocation'));
+define ('GD_EM_TEMPLATE_MESSAGE_NOLOCATION', PoP_TemplateIDUtils::get_template_definition('em-message-nolocation'));
 
 class GD_EM_Template_Processor_WidgetMessages extends GD_Template_Processor_WidgetMessagesBase {
 

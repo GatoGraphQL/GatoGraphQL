@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_DESCRIPTION', PoP_ServerUtils::get_template_definition('formcomponent-cuu-description'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_DESCRIPTION', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-description'));
 
 class GD_Template_Processor_CreateUpdateUserTextareaFormComponentInputs extends GD_Template_Processor_TextareaFormComponentsBase {
 

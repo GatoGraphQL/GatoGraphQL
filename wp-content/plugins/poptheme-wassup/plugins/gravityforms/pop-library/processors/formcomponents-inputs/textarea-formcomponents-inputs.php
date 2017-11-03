@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_GF_TEMPLATE_FORMCOMPONENT_MESSAGE', PoP_ServerUtils::get_template_definition('gf-field-message'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENT_ADDITIONALMESSAGE', PoP_ServerUtils::get_template_definition('gf-field-additionalmessage'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENT_WHYVOLUNTEER', PoP_ServerUtils::get_template_definition('gf-field-whyvolunteer'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENT_WHYFLAG', PoP_ServerUtils::get_template_definition('gf-field-whyflag'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENT_MESSAGE', PoP_TemplateIDUtils::get_template_definition('gf-field-message'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENT_ADDITIONALMESSAGE', PoP_TemplateIDUtils::get_template_definition('gf-field-additionalmessage'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENT_WHYVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('gf-field-whyvolunteer'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENT_WHYFLAG', PoP_TemplateIDUtils::get_template_definition('gf-field-whyflag'));
 
 class GD_GF_Template_Processor_TextareaFormComponentInputs extends GD_Template_Processor_TextareaFormComponentsBase {
 

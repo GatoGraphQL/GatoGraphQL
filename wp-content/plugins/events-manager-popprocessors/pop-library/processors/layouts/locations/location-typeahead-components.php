@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT', PoP_ServerUtils::get_template_definition('em-layoutlocation-typeahead-component'));
+define ('GD_TEMPLATE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT', PoP_TemplateIDUtils::get_template_definition('em-layoutlocation-typeahead-component'));
 
 class GD_EM_Template_Processor_LocationTypeaheadsComponentLayouts extends GD_EM_Template_Processor_LocationTypeaheadsComponentLayoutsBase {
 

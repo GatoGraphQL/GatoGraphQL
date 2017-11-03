@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-locationpostcategories'));
-define ('GD_TEMPLATE_FORMCOMPONENT_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-discussioncategories'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('locationpostcategories', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('discussioncategories', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_LOCATIONPOSTCATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponent-locationpostcategories'));
+define ('GD_TEMPLATE_FORMCOMPONENT_DISCUSSIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponent-discussioncategories'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_LOCATIONPOSTCATEGORIES', PoP_TemplateIDUtils::get_template_definition('locationpostcategories', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_DISCUSSIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('discussioncategories', true));
 
 class GD_Custom_Template_Processor_MultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
 

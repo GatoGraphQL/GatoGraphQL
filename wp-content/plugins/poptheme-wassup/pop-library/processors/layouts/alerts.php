@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ALERT_STICKY', PoP_ServerUtils::get_template_definition('alert-sticky'));
+define ('GD_TEMPLATE_ALERT_STICKY', PoP_TemplateIDUtils::get_template_definition('alert-sticky'));
 
 class GD_Template_Processor_Alerts extends GD_Template_Processor_AlertsBase {
 

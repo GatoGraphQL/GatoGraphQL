@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLEINNER_MYEVENTS', PoP_ServerUtils::get_template_definition('tableinner-myevents'));
-define ('GD_TEMPLATE_TABLEINNER_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('tableinner-mypastevents'));
+define ('GD_TEMPLATE_TABLEINNER_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('tableinner-myevents'));
+define ('GD_TEMPLATE_TABLEINNER_MYPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('tableinner-mypastevents'));
 
 class GD_EM_Template_Processor_TableInners extends GD_Template_Processor_TableInnersBase {
 

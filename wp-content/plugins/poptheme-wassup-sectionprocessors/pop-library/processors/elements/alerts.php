@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ALERT_HOMEMESSAGE', PoP_ServerUtils::get_template_definition('alert-homemessage'));
+define ('GD_TEMPLATE_ALERT_HOMEMESSAGE', PoP_TemplateIDUtils::get_template_definition('alert-homemessage'));
 
 class GD_Template_Processor_CustomAlerts extends GD_Template_Processor_AlertsBase {
 

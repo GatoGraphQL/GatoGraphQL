@@ -8,20 +8,20 @@
 /*********************************************
  * My Content Tables
  *********************************************/
-define ('GD_TEMPLATE_BLOCK_MYMEMBERS_TABLE_EDIT', PoP_ServerUtils::get_template_definition('block-mymembers-table-edit'));
+define ('GD_TEMPLATE_BLOCK_MYMEMBERS_TABLE_EDIT', PoP_TemplateIDUtils::get_template_definition('block-mymembers-table-edit'));
 
 /*--------------------------------------------
  * My Content Full Post Preview
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-mymembers-scroll-fullviewpreview'));
+define ('GD_TEMPLATE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-mymembers-scroll-fullviewpreview'));
 
 /*********************************************
  * Typeaheads
  *********************************************/
-define ('GD_TEMPLATE_BLOCK_COMMUNITIES_TYPEAHEAD', PoP_ServerUtils::get_template_definition('block-communities-typeahead'));
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_TYPEAHEAD', PoP_ServerUtils::get_template_definition('block-organizations-typeahead'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_TYPEAHEAD', PoP_ServerUtils::get_template_definition('block-individuals-typeahead'));
-define ('GD_TEMPLATE_BLOCK_AUTHORUSERS_TYPEAHEAD', PoP_ServerUtils::get_template_definition('block-authorusers-typeahead'));
+define ('GD_TEMPLATE_BLOCK_COMMUNITIES_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('block-communities-typeahead'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('block-organizations-typeahead'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('block-individuals-typeahead'));
+define ('GD_TEMPLATE_BLOCK_AUTHORUSERS_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('block-authorusers-typeahead'));
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
  * Common blocks (Home/Page/Author/Single)
@@ -29,57 +29,57 @@ define ('GD_TEMPLATE_BLOCK_AUTHORUSERS_TYPEAHEAD', PoP_ServerUtils::get_template
 /*--------------------------------------------
  * Navigator
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR', PoP_ServerUtils::get_template_definition('block-organizations-scroll-navigator'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR', PoP_ServerUtils::get_template_definition('block-individuals-scroll-navigator'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('block-organizations-scroll-navigator'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('block-individuals-scroll-navigator'));
 
 /*--------------------------------------------
  * Addons
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_ADDONS', PoP_ServerUtils::get_template_definition('block-organizations-scroll-addons'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_ADDONS', PoP_ServerUtils::get_template_definition('block-individuals-scroll-addons'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_ADDONS', PoP_TemplateIDUtils::get_template_definition('block-organizations-scroll-addons'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_ADDONS', PoP_TemplateIDUtils::get_template_definition('block-individuals-scroll-addons'));
 
 /*--------------------------------------------
  * Details: Thumb, title and excerpt
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-communities-scroll-details'));
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-organizations-scroll-details'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-individuals-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-communities-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-organizations-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-individuals-scroll-details'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-authormembers-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-authormembers-scroll-details'));
 
 /*--------------------------------------------
  * Full Post
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-communities-scroll-fullview'));
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-organizations-scroll-fullview'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-individuals-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-communities-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-organizations-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-individuals-scroll-fullview'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-authormembers-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-authormembers-scroll-fullview'));
 
 /*--------------------------------------------
  * Thumbnail
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-communities-scroll-thumbnail'));
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-organizations-scroll-thumbnail'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-individuals-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-communities-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-organizations-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-individuals-scroll-thumbnail'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-authormembers-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-authormembers-scroll-thumbnail'));
 
 /*--------------------------------------------
  * List
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-communities-scroll-list'));
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-organizations-scroll-list'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-individuals-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-communities-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-organizations-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-individuals-scroll-list'));
 
-// define ('GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-organizationmembers-scroll-list'));
+// define ('GD_TEMPLATE_BLOCK_ORGANIZATIONMEMBERS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-organizationmembers-scroll-list'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-authormembers-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-authormembers-scroll-list'));
 
 /*********************************************
  * Post Carousels
  *********************************************/
-define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL', PoP_ServerUtils::get_template_definition('block-authormembers-carousel'));
+define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('block-authormembers-carousel'));
 
 class GD_URE_Template_Processor_CustomSectionBlocks extends GD_Template_Processor_SectionBlocksBase {
 	

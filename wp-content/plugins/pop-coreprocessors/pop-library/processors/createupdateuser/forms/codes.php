@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_LABEL', PoP_ServerUtils::get_template_definition('code-emailnotifications-label'));
-define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_GENERALLABEL', PoP_ServerUtils::get_template_definition('code-emailnotifications-generallabel'));
-define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL', PoP_ServerUtils::get_template_definition('code-emailnotifications-networklabel'));
-define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL', PoP_ServerUtils::get_template_definition('code-emailnotifications-subscribedtopicslabel'));
-define ('GD_TEMPLATE_CODE_DAILYEMAILDIGESTS_LABEL', PoP_ServerUtils::get_template_definition('code-dailyemaildigestslabel'));
+define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_LABEL', PoP_TemplateIDUtils::get_template_definition('code-emailnotifications-label'));
+define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_GENERALLABEL', PoP_TemplateIDUtils::get_template_definition('code-emailnotifications-generallabel'));
+define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL', PoP_TemplateIDUtils::get_template_definition('code-emailnotifications-networklabel'));
+define ('GD_TEMPLATE_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL', PoP_TemplateIDUtils::get_template_definition('code-emailnotifications-subscribedtopicslabel'));
+define ('GD_TEMPLATE_CODE_DAILYEMAILDIGESTS_LABEL', PoP_TemplateIDUtils::get_template_definition('code-dailyemaildigestslabel'));
 
 class GD_Template_Processor_UserCodes extends GD_Template_Processor_CodesBase {
 

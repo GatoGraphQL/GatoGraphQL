@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_FORM_EVENTDETAILS', PoP_ServerUtils::get_template_definition('widget-form-event-details'));
-define ('GD_TEMPLATE_WIDGET_FORM_EVENTLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-eventlink-details'));
+define ('GD_TEMPLATE_WIDGET_FORM_EVENTDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-event-details'));
+define ('GD_TEMPLATE_WIDGET_FORM_EVENTLINKDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-eventlink-details'));
 
 class GD_EM_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_WidgetsBase {
 

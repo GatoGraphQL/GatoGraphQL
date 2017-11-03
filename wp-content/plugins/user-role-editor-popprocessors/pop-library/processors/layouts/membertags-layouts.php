@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUTUSER_MEMBERTAGS', PoP_ServerUtils::get_template_definition('ure-layoutuser-membertags-nodesc'));
+define ('GD_URE_TEMPLATE_LAYOUTUSER_MEMBERTAGS', PoP_TemplateIDUtils::get_template_definition('ure-layoutuser-membertags-nodesc'));
 
 class GD_URE_Template_Processor_MemberTagsLayouts extends GD_URE_Template_Processor_MemberTagsLayoutsBase {
 

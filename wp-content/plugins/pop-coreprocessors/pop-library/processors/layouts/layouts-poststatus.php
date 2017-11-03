@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTPOST_STATUS', PoP_ServerUtils::get_template_definition('layoutpost-status'));
+define ('GD_TEMPLATE_LAYOUTPOST_STATUS', PoP_TemplateIDUtils::get_template_definition('layoutpost-status'));
 
 class GD_Template_Processor_PostStatusLayouts extends GD_Template_Processor_PostStatusLayoutsBase {
 

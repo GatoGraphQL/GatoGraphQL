@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARINNER_CONTENT_HORIZONTAL', PoP_ServerUtils::get_template_definition('contentsidebarinner-horizontal'));
-define ('GD_TEMPLATE_SIDEBARINNER_CONTENT_VERTICAL', PoP_ServerUtils::get_template_definition('contentsidebarinner-vertical'));
+define ('GD_TEMPLATE_SIDEBARINNER_CONTENT_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('contentsidebarinner-horizontal'));
+define ('GD_TEMPLATE_SIDEBARINNER_CONTENT_VERTICAL', PoP_TemplateIDUtils::get_template_definition('contentsidebarinner-vertical'));
 
 class GD_Template_Processor_ContentSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 

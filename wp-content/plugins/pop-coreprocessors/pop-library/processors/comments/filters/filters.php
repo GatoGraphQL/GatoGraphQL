@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTER_COMMENTS', PoP_ServerUtils::get_template_definition('filter-comments'));
+define ('GD_TEMPLATE_FILTER_COMMENTS', PoP_TemplateIDUtils::get_template_definition('filter-comments'));
 
 class GD_Template_Processor_CommentFilters extends GD_Template_Processor_FiltersBase {
 

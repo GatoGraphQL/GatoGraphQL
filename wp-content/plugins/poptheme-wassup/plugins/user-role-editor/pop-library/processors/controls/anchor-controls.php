@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('anchorcontrol-invitenewmembers'));
-define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWMEMBERS_BIG', PoP_ServerUtils::get_template_definition('anchorcontrol-invitenewmembers-big'));
+define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-invitenewmembers'));
+define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWMEMBERS_BIG', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-invitenewmembers-big'));
 
 class GD_URE_Template_Processor_CustomAnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

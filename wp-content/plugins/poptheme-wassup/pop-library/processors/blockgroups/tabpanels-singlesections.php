@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-singlerelatedcontent'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-singlerelatedhighlightcontent'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEAUTHORS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-singleauthors'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERECOMMENDEDBY', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-singlerecommendedby'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEUPVOTEDBY', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-singleupvotedby'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEDOWNVOTEDBY', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-singledownvotedby'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-singlerelatedcontent'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-singlerelatedhighlightcontent'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEAUTHORS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-singleauthors'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLERECOMMENDEDBY', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-singlerecommendedby'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEUPVOTEDBY', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-singleupvotedby'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SINGLEDOWNVOTEDBY', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-singledownvotedby'));
 
 class GD_Template_Processor_SingleSectionTabPanelBlockGroups extends GD_Template_Processor_DefaultActiveTabPanelBlockGroupsBase {
 

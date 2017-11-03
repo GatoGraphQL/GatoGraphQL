@@ -5,20 +5,20 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_TOPIC', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-topic'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_CUP_NEWSLETTER', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-cup-newsletter'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NAME', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-name'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_EMAIL', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-email'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTERNAME', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-newslettername'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTEREMAIL', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-newsletteremail'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTEREMAILVERIFICATIONCODE', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-newsletteremailverificationcode'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_DESTINATIONEMAIL', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-destinationemail'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_SUBJECT', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-subject'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_PHONE', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-phone'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_MESSAGE', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-message'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_ADDITIONALMESSAGE', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-additionalmessage'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_WHYVOLUNTEER', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-whyvolunteer'));
-define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_WHYFLAG', PoP_ServerUtils::get_template_definition('gf-formcomponentgroup-field-whyflag'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_TOPIC', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-topic'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_CUP_NEWSLETTER', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-cup-newsletter'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NAME', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-name'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_EMAIL', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-email'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTERNAME', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-newslettername'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTEREMAIL', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-newsletteremail'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_NEWSLETTEREMAILVERIFICATIONCODE', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-newsletteremailverificationcode'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_DESTINATIONEMAIL', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-destinationemail'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_SUBJECT', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-subject'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_PHONE', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-phone'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_MESSAGE', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-message'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_ADDITIONALMESSAGE', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-additionalmessage'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_WHYVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-whyvolunteer'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENTGROUP_WHYFLAG', PoP_TemplateIDUtils::get_template_definition('gf-formcomponentgroup-field-whyflag'));
 
 
 class GD_GF_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {

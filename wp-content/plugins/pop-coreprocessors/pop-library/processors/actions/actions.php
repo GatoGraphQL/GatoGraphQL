@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('action-inviteusers'));
+define ('GD_TEMPLATE_ACTION_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('action-inviteusers'));
 
 class PoP_Core_Template_Processor_Actions extends GD_Template_Processor_ActionsBase {
 

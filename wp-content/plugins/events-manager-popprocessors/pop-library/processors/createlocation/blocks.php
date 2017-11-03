@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_CREATELOCATION', PoP_ServerUtils::get_template_definition('block-em-createlocation'));
-define ('GD_TEMPLATE_BLOCKDATA_CREATELOCATION', PoP_ServerUtils::get_template_definition('blockdata-em-createlocation'));
+define ('GD_TEMPLATE_BLOCK_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('block-em-createlocation'));
+define ('GD_TEMPLATE_BLOCKDATA_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('blockdata-em-createlocation'));
 
 class GD_EM_Template_Processor_CreateLocationBlocks extends GD_Template_Processor_BlocksBase {
 

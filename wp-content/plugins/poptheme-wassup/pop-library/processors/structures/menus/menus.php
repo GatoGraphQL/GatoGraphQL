@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DROPDOWNBUTTONMENU_TOP', PoP_ServerUtils::get_template_definition('dropdownbuttonmenu-top'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONMENU_SIDE', PoP_ServerUtils::get_template_definition('dropdownbuttonmenu-side'));
-define ('GD_TEMPLATE_MULTITARGETINDENTMENU', PoP_ServerUtils::get_template_definition('multitargetindentmenu'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONMENU_TOP', PoP_TemplateIDUtils::get_template_definition('dropdownbuttonmenu-top'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONMENU_SIDE', PoP_TemplateIDUtils::get_template_definition('dropdownbuttonmenu-side'));
+define ('GD_TEMPLATE_MULTITARGETINDENTMENU', PoP_TemplateIDUtils::get_template_definition('multitargetindentmenu'));
 
 class GD_Template_Processor_Menus extends GD_Template_Processor_ContentsBase {
 

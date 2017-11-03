@@ -8,23 +8,23 @@
 /*--------------------------------------------
  * Details: Thumb, title and excerpt
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-automatedemails-latestposts-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-automatedemails-latestposts-scroll-details'));
 
 /*--------------------------------------------
  * Full Post
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-automatedemails-latestposts-scroll-simpleview'));
-define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-automatedemails-latestposts-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('block-automatedemails-latestposts-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-automatedemails-latestposts-scroll-fullview'));
 
 /*--------------------------------------------
  * Thumbnail
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-automatedemails-latestposts-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-automatedemails-latestposts-scroll-thumbnail'));
 
 /*--------------------------------------------
  * List
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-automatedemails-latestposts-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_LATESTPOSTS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-automatedemails-latestposts-scroll-list'));
 
 class PoPTheme_Wassup_AE_Template_Processor_SectionBlocks extends PoPTheme_Wassup_AutomatedEmails_Template_Processor_SectionBlocksBase {
 

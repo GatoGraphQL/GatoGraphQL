@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-organizations'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_INDIVIDUALS', PoP_ServerUtils::get_template_definition('sidebarinner-section-individuals'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYMEMBERS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mymembers'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-organizations'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-individuals'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-mymembers'));
 
 // class GD_URE_Template_Processor_CustomSectionSidebars extends GD_Template_Processor_SectionSidebarsBase {
 class GD_URE_Template_Processor_CustomSectionSidebarInners extends GD_Template_Processor_SidebarInnersBase {

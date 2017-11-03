@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLE_MYMEMBERS', PoP_ServerUtils::get_template_definition('table-mymembers'));
+define ('GD_TEMPLATE_TABLE_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('table-mymembers'));
 
 class GD_URE_Template_Processor_Tables extends GD_Template_Processor_TablesBase {
 

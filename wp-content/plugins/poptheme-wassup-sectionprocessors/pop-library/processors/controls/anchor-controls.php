@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addlocationpost'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addlocationpostlink'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addstory'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addstorylink'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addannouncement'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENTLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addannouncementlink'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSION', PoP_ServerUtils::get_template_definition('custombuttoncontrol-adddiscussion'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSIONLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-adddiscussionlink'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addlocationpost'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addlocationpostlink'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORY', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addstory'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDSTORYLINK', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addstorylink'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addannouncement'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDANNOUNCEMENTLINK', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addannouncementlink'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSION', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-adddiscussion'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDDISCUSSIONLINK', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-adddiscussionlink'));
 
 class SectionProcessors_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

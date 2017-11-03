@@ -6,7 +6,7 @@ class WSL_PoPProcessors_Initialization {
 		load_plugin_textdomain('wsl-popprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('ai');
+		PoP_TemplateIDUtils::set_namespace('ai');
 
 		if (!is_admin()) {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_MIMETYPE', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-mimetype'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_TAXONOMY', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-taxonomy'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_MIMETYPE', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-mimetype'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_TAXONOMY', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-taxonomy'));
 
 class GD_Template_Processor_MediaFormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

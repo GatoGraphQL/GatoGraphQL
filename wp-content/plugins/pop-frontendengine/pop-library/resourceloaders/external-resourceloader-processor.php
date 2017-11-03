@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_EXTERNAL_HANDLEBARS', PoP_ServerUtils::get_template_definition('external-handlebars'));
+define ('POP_RESOURCELOADER_EXTERNAL_HANDLEBARS', PoP_TemplateIDUtils::get_template_definition('external-handlebars'));
 
 class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

@@ -5,75 +5,75 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_THOUGHTS', PoP_ServerUtils::get_template_definition('scroll-thoughts'));
+define ('GD_TEMPLATE_SCROLL_THOUGHTS', PoP_TemplateIDUtils::get_template_definition('scroll-thoughts'));
 
-define ('GD_TEMPLATE_SCROLL_MYANNOUNCEMENTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-myannouncements-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYDISCUSSIONS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mydiscussions-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mylocationposts-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYSTORIES_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mystories-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYANNOUNCEMENTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-myannouncements-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYDISCUSSIONS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mydiscussions-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mylocationposts-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYSTORIES_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mystories-fullviewpreview'));
 
-define ('GD_TEMPLATE_SCROLL_MYANNOUNCEMENTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-myannouncements-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYDISCUSSIONS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mydiscussions-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mylocationposts-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYSTORIES_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mystories-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYANNOUNCEMENTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-myannouncements-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYDISCUSSIONS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mydiscussions-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mylocationposts-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYSTORIES_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mystories-simpleviewpreview'));
 
-define ('GD_TEMPLATE_SCROLL_BLOG_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-blog-navigator'));
-define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-announcements-navigator'));
-define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-discussions-navigator'));
-define ('GD_TEMPLATE_SCROLL_FEATURED_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-featured-navigator'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-locationposts-navigator'));
-define ('GD_TEMPLATE_SCROLL_STORIES_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-stories-navigator'));
+define ('GD_TEMPLATE_SCROLL_BLOG_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-blog-navigator'));
+define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-announcements-navigator'));
+define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-discussions-navigator'));
+define ('GD_TEMPLATE_SCROLL_FEATURED_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-featured-navigator'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-navigator'));
+define ('GD_TEMPLATE_SCROLL_STORIES_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-stories-navigator'));
 
-define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-announcements-addons'));
-define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-discussions-addons'));
-define ('GD_TEMPLATE_SCROLL_FEATURED_ADDONS', PoP_ServerUtils::get_template_definition('scroll-featured-addons'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-locationposts-addons'));
-define ('GD_TEMPLATE_SCROLL_STORIES_ADDONS', PoP_ServerUtils::get_template_definition('scroll-stories-addons'));
-define ('GD_TEMPLATE_SCROLL_BLOG_ADDONS', PoP_ServerUtils::get_template_definition('scroll-blog-addons'));
+define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-announcements-addons'));
+define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-discussions-addons'));
+define ('GD_TEMPLATE_SCROLL_FEATURED_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-featured-addons'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-addons'));
+define ('GD_TEMPLATE_SCROLL_STORIES_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-stories-addons'));
+define ('GD_TEMPLATE_SCROLL_BLOG_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-blog-addons'));
 
-define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-announcements-details'));
-define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-discussions-details'));
-define ('GD_TEMPLATE_SCROLL_FEATURED_DETAILS', PoP_ServerUtils::get_template_definition('scroll-featured-details'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-locationposts-details'));
-define ('GD_TEMPLATE_SCROLL_STORIES_DETAILS', PoP_ServerUtils::get_template_definition('scroll-stories-details'));
-define ('GD_TEMPLATE_SCROLL_BLOG_DETAILS', PoP_ServerUtils::get_template_definition('scroll-blog-details'));
+define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-announcements-details'));
+define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-discussions-details'));
+define ('GD_TEMPLATE_SCROLL_FEATURED_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-featured-details'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-details'));
+define ('GD_TEMPLATE_SCROLL_STORIES_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-stories-details'));
+define ('GD_TEMPLATE_SCROLL_BLOG_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-blog-details'));
 
-define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-announcements-simpleview'));
-define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-discussions-simpleview'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-locationposts-simpleview'));
-define ('GD_TEMPLATE_SCROLL_STORIES_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-stories-simpleview'));
-define ('GD_TEMPLATE_SCROLL_FEATURED_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-featured-simpleview'));
-define ('GD_TEMPLATE_SCROLL_BLOG_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-blog-simpleview'));
+define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-announcements-simpleview'));
+define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-discussions-simpleview'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-simpleview'));
+define ('GD_TEMPLATE_SCROLL_STORIES_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-stories-simpleview'));
+define ('GD_TEMPLATE_SCROLL_FEATURED_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-featured-simpleview'));
+define ('GD_TEMPLATE_SCROLL_BLOG_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-blog-simpleview'));
 
-define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-announcements-fullview'));
-define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-discussions-fullview'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-locationposts-fullview'));
-define ('GD_TEMPLATE_SCROLL_STORIES_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-stories-fullview'));
-define ('GD_TEMPLATE_SCROLL_FEATURED_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-featured-fullview'));
-define ('GD_TEMPLATE_SCROLL_BLOG_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-blog-fullview'));
+define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-announcements-fullview'));
+define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-discussions-fullview'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-fullview'));
+define ('GD_TEMPLATE_SCROLL_STORIES_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-stories-fullview'));
+define ('GD_TEMPLATE_SCROLL_FEATURED_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-featured-fullview'));
+define ('GD_TEMPLATE_SCROLL_BLOG_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-blog-fullview'));
 
-define ('GD_TEMPLATE_SCROLL_AUTHORANNOUNCEMENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorannouncements-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORDISCUSSIONS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authordiscussions-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorlocationposts-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORSTORIES_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorstories-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORANNOUNCEMENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorannouncements-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORDISCUSSIONS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authordiscussions-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorlocationposts-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORSTORIES_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorstories-fullview'));
 
-define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-announcements-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-discussions-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_FEATURED_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-featured-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-locationposts-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_STORIES_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-stories-thumbnail'));
-// define ('GD_TEMPLATE_SCROLL_BLOG_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-blog-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-announcements-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-discussions-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_FEATURED_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-featured-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_STORIES_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-stories-thumbnail'));
+// define ('GD_TEMPLATE_SCROLL_BLOG_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-blog-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_LIST', PoP_ServerUtils::get_template_definition('scroll-announcements-list'));
-define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_LIST', PoP_ServerUtils::get_template_definition('scroll-discussions-list'));
-define ('GD_TEMPLATE_SCROLL_FEATURED_LIST', PoP_ServerUtils::get_template_definition('scroll-featured-list'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_LIST', PoP_ServerUtils::get_template_definition('scroll-locationposts-list'));
-define ('GD_TEMPLATE_SCROLL_STORIES_LIST', PoP_ServerUtils::get_template_definition('scroll-stories-list'));
-define ('GD_TEMPLATE_SCROLL_BLOG_LIST', PoP_ServerUtils::get_template_definition('scroll-blog-list'));
+define ('GD_TEMPLATE_SCROLL_ANNOUNCEMENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-announcements-list'));
+define ('GD_TEMPLATE_SCROLL_DISCUSSIONS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-discussions-list'));
+define ('GD_TEMPLATE_SCROLL_FEATURED_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-featured-list'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-list'));
+define ('GD_TEMPLATE_SCROLL_STORIES_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-stories-list'));
+define ('GD_TEMPLATE_SCROLL_BLOG_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-blog-list'));
 
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_CORE', PoP_ServerUtils::get_template_definition('scroll-whoweare-core'));
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_VOLUNTEERS', PoP_ServerUtils::get_template_definition('scroll-whoweare-volunteers'));
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_ADVISORS', PoP_ServerUtils::get_template_definition('scroll-whoweare-advisors'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_CORE', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-core'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_VOLUNTEERS', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-volunteers'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_ADVISORS', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-advisors'));
 
 class GD_Custom_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsBase {
 

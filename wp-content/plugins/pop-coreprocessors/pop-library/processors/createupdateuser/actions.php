@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_MYPREFERENCES', PoP_ServerUtils::get_template_definition('action-mypreferences'));
-define ('GD_TEMPLATE_ACTION_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('action-user-changepwd'));
+define ('GD_TEMPLATE_ACTION_MYPREFERENCES', PoP_TemplateIDUtils::get_template_definition('action-mypreferences'));
+define ('GD_TEMPLATE_ACTION_USER_CHANGEPASSWORD', PoP_TemplateIDUtils::get_template_definition('action-user-changepwd'));
 
 class GD_Template_Processor_UserActions extends GD_Template_Processor_ActionsBase {
 

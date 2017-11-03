@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_EM_LAYOUTEVENT_TABLECOL', PoP_ServerUtils::get_template_definition('em-layoutevent-tablecol'));
+define ('GD_TEMPLATE_EM_LAYOUTEVENT_TABLECOL', PoP_TemplateIDUtils::get_template_definition('em-layoutevent-tablecol'));
 
 class GD_Template_Processor_EventDateAndTimeLayouts extends GD_Template_Processor_EventDateAndTimeLayoutsBase {
 

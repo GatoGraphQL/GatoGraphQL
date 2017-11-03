@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_LATESTNOTIFICATIONS', PoP_ServerUtils::get_template_definition('aal-block-latestnotifications'));
-define ('GD_TEMPLATE_BLOCKDATA_LATESTNOTIFICATIONS', PoP_ServerUtils::get_template_definition('aal-blockdata-latestnotifications'));
+define ('GD_TEMPLATE_BLOCK_LATESTNOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('aal-block-latestnotifications'));
+define ('GD_TEMPLATE_BLOCKDATA_LATESTNOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('aal-blockdata-latestnotifications'));
 
 class AAL_PoPProcessors_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase {
 

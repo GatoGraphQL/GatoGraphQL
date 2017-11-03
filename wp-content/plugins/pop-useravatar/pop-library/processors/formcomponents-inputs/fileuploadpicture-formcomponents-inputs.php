@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_FILEUPLOAD_PICTURE', PoP_ServerUtils::get_template_definition('formcomponent-fileupload-picture'));
+define ('GD_TEMPLATE_FORMCOMPONENT_FILEUPLOAD_PICTURE', PoP_TemplateIDUtils::get_template_definition('formcomponent-fileupload-picture'));
 
 class GD_Template_Processor_FileUploadPictureFormComponentInputs extends GD_Template_Processor_FileUploadPictureFormComponentsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBAR_MENU_ABOUT', PoP_ServerUtils::get_template_definition('sidebar-menu-about'));
+define ('GD_TEMPLATE_SIDEBAR_MENU_ABOUT', PoP_TemplateIDUtils::get_template_definition('sidebar-menu-about'));
 
 class GD_Template_Processor_CustomMenuSidebars extends GD_Template_Processor_SidebarsBase {
 	

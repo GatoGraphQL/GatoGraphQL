@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTPOST_TYPEAHEAD_COMPONENT', PoP_ServerUtils::get_template_definition('layoutpost-typeahead-component'));
+define ('GD_TEMPLATE_LAYOUTPOST_TYPEAHEAD_COMPONENT', PoP_TemplateIDUtils::get_template_definition('layoutpost-typeahead-component'));
 
 class GD_Template_Processor_PostTypeaheadComponentLayouts extends GD_Template_Processor_PostTypeaheadComponentLayoutsBase {
 

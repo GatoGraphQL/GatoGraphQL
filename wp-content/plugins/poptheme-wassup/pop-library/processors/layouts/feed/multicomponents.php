@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('multicomponent-userpostactivity-simpleview'));
-define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW', PoP_ServerUtils::get_template_definition('multicomponent-userpostactivity-lazysimpleview'));
-define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTACTIVITY', PoP_ServerUtils::get_template_definition('multicomponent-userpostactivity'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('multicomponent-userpostactivity-simpleview'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('multicomponent-userpostactivity-lazysimpleview'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USERPOSTACTIVITY', PoP_TemplateIDUtils::get_template_definition('multicomponent-userpostactivity'));
 
 class GD_Template_Processor_MultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

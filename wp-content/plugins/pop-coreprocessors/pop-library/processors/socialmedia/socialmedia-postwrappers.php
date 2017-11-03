@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEERPOSTWRAPPER', PoP_ServerUtils::get_template_definition('volunteerpost-socialmedia-simpleview-wrapper'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_VOLUNTEERPOSTWRAPPER', PoP_ServerUtils::get_template_definition('volunteerpost-socialmedia-wrapper'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_POSTWRAPPER', PoP_ServerUtils::get_template_definition('post-socialmedia-wrapper'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER', PoP_ServerUtils::get_template_definition('post-socialmedia-counter-wrapper'));
-define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER', PoP_ServerUtils::get_template_definition('subjugatedpost-socialmedia-wrapper'));
-define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER', PoP_ServerUtils::get_template_definition('subjugatedpost-socialmedia-counter-wrapper'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEERPOSTWRAPPER', PoP_TemplateIDUtils::get_template_definition('volunteerpost-socialmedia-simpleview-wrapper'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_VOLUNTEERPOSTWRAPPER', PoP_TemplateIDUtils::get_template_definition('volunteerpost-socialmedia-wrapper'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_POSTWRAPPER', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-wrapper'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-counter-wrapper'));
+define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER', PoP_TemplateIDUtils::get_template_definition('subjugatedpost-socialmedia-wrapper'));
+define ('GD_TEMPLATE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER', PoP_TemplateIDUtils::get_template_definition('subjugatedpost-socialmedia-counter-wrapper'));
 
 class GD_Template_Processor_SocialMediaPostWrappers extends GD_Template_Processor_SocialMediaPostWrapperBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLGROUP_MYMEMBERS', PoP_ServerUtils::get_template_definition('controlgroup-mymembers'));
-define ('GD_TEMPLATE_CONTROLGROUP_MYBLOCKMEMBERS', PoP_ServerUtils::get_template_definition('controlgroup-myblockmembers'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('controlgroup-mymembers'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYBLOCKMEMBERS', PoP_TemplateIDUtils::get_template_definition('controlgroup-myblockmembers'));
 
 class GD_URE_Template_Processor_CustomControlGroups extends GD_Template_Processor_ControlGroupsBase {
 

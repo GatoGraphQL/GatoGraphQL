@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-locationpost-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-locationpost-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORY_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-story-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORY_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-story-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-announcement-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-announcement-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-discussion-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-discussion-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('messagefeedback-featured-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedback-featured-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-locationpost-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-locationpost-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-story-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-story-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-announcement-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-announcement-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-discussion-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-discussion-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-featured-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-featured-update'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

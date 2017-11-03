@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_LOCATIONPOST', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-locationpost'));
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_STORY', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-story'));
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_DISCUSSION', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-discussion'));
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_BLOG', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-blog'));
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-announcement'));
-define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_FEATURED', PoP_ServerUtils::get_template_definition('vertical-sidebar-single-featured'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-locationpost'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_STORY', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-story'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-discussion'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_BLOG', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-blog'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-announcement'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_SINGLE_FEATURED', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-single-featured'));
 
 class GD_Template_Processor_CustomVerticalSingleSidebars extends GD_Template_Processor_SidebarsBase {
 	

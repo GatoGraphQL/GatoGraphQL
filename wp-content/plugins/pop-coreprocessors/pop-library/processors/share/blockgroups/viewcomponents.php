@@ -4,9 +4,9 @@
  * Template Manager (Handlebars)
  *
  * ---------------------------------------------------------------------------------------------------------------*/
-define ('GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL', PoP_ServerUtils::get_template_definition('blockgroup-embed-modal'));
-define ('GD_TEMPLATE_BLOCKGROUP_API_MODAL', PoP_ServerUtils::get_template_definition('blockgroup-api-modal'));
-define ('GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL', PoP_ServerUtils::get_template_definition('blockgroup-copysearchurl-modal'));
+define ('GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-embed-modal'));
+define ('GD_TEMPLATE_BLOCKGROUP_API_MODAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-api-modal'));
+define ('GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-copysearchurl-modal'));
 
 class GD_Template_Processor_ShareModalBlockGroups extends GD_Template_Processor_FormModalViewComponentBlockGroupsBase {
 

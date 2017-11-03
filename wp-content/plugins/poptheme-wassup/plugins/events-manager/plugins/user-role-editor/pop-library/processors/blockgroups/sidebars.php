@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHOREVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorevents-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORPASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorpastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHOREVENTSCALENDAR_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authoreventscalendar-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHOREVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorevents-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORPASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorpastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHOREVENTSCALENDAR_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authoreventscalendar-sidebar'));
 
 class PoP_EM_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_SidebarBlockGroupsBase {
 

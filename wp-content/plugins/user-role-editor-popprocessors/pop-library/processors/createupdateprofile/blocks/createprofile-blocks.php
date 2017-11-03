@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_PROFILEORGANIZATION_CREATE', PoP_ServerUtils::get_template_definition('block-profileorganization-create'));
-define ('GD_TEMPLATE_BLOCK_PROFILEINDIVIDUAL_CREATE', PoP_ServerUtils::get_template_definition('block-profileindividual-create'));
+define ('GD_TEMPLATE_BLOCK_PROFILEORGANIZATION_CREATE', PoP_TemplateIDUtils::get_template_definition('block-profileorganization-create'));
+define ('GD_TEMPLATE_BLOCK_PROFILEINDIVIDUAL_CREATE', PoP_TemplateIDUtils::get_template_definition('block-profileindividual-create'));
 
 class GD_URE_Template_Processor_CreateProfileBlocks extends GD_Template_Processor_CreateProfileBlocksBase {
 

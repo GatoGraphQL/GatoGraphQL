@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_REFERENCES_LINE', PoP_ServerUtils::get_template_definition('layout-references-line'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCES_RELATED', PoP_ServerUtils::get_template_definition('layout-references-related'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCES_ADDONS', PoP_ServerUtils::get_template_definition('layout-references-addons'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCES_REFERENCEDPOSTTITLE', PoP_ServerUtils::get_template_definition('layout-references-referencedposttitle'));
-define ('GD_TEMPLATE_LAYOUT_REFERENCES_AUTHORREFERENCEDPOSTTITLE', PoP_ServerUtils::get_template_definition('layout-references-authorreferencedposttitle'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCES_LINE', PoP_TemplateIDUtils::get_template_definition('layout-references-line'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCES_RELATED', PoP_TemplateIDUtils::get_template_definition('layout-references-related'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCES_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-references-addons'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCES_REFERENCEDPOSTTITLE', PoP_TemplateIDUtils::get_template_definition('layout-references-referencedposttitle'));
+define ('GD_TEMPLATE_LAYOUT_REFERENCES_AUTHORREFERENCEDPOSTTITLE', PoP_TemplateIDUtils::get_template_definition('layout-references-authorreferencedposttitle'));
 
 class GD_Template_Processor_ReferencesLayouts extends GD_Template_Processor_ReferencesLayoutsBase {
 

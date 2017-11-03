@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_POSTSOCIALMEDIA', PoP_ServerUtils::get_template_definition('multicomponent-post-sm'));
-define ('GD_TEMPLATE_MULTICOMPONENT_USERSOCIALMEDIA', PoP_ServerUtils::get_template_definition('multicomponent-user-sm'));
-define ('GD_TEMPLATE_MULTICOMPONENT_TAGSOCIALMEDIA', PoP_ServerUtils::get_template_definition('multicomponent-tag-sm'));
-define ('GD_TEMPLATE_MULTICOMPONENT_POSTSECINTERACTIONS', PoP_ServerUtils::get_template_definition('multicomponent-postsecinteractions'));
-define ('GD_TEMPLATE_MULTICOMPONENT_USERSECINTERACTIONS', PoP_ServerUtils::get_template_definition('multicomponent-usersecinteractions'));
-define ('GD_TEMPLATE_MULTICOMPONENT_TAGSECINTERACTIONS', PoP_ServerUtils::get_template_definition('multicomponent-tagsecinteractions'));
-define ('GD_TEMPLATE_MULTICOMPONENT_POSTOPTIONS', PoP_ServerUtils::get_template_definition('multicomponent-postoptions'));
-define ('GD_TEMPLATE_MULTICOMPONENT_USEROPTIONS', PoP_ServerUtils::get_template_definition('multicomponent-useroptions'));
-define ('GD_TEMPLATE_MULTICOMPONENT_TAGOPTIONS', PoP_ServerUtils::get_template_definition('multicomponent-tagoptions'));
+define ('GD_TEMPLATE_MULTICOMPONENT_POSTSOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('multicomponent-post-sm'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USERSOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('multicomponent-user-sm'));
+define ('GD_TEMPLATE_MULTICOMPONENT_TAGSOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('multicomponent-tag-sm'));
+define ('GD_TEMPLATE_MULTICOMPONENT_POSTSECINTERACTIONS', PoP_TemplateIDUtils::get_template_definition('multicomponent-postsecinteractions'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USERSECINTERACTIONS', PoP_TemplateIDUtils::get_template_definition('multicomponent-usersecinteractions'));
+define ('GD_TEMPLATE_MULTICOMPONENT_TAGSECINTERACTIONS', PoP_TemplateIDUtils::get_template_definition('multicomponent-tagsecinteractions'));
+define ('GD_TEMPLATE_MULTICOMPONENT_POSTOPTIONS', PoP_TemplateIDUtils::get_template_definition('multicomponent-postoptions'));
+define ('GD_TEMPLATE_MULTICOMPONENT_USEROPTIONS', PoP_TemplateIDUtils::get_template_definition('multicomponent-useroptions'));
+define ('GD_TEMPLATE_MULTICOMPONENT_TAGOPTIONS', PoP_TemplateIDUtils::get_template_definition('multicomponent-tagoptions'));
 
 class GD_Template_Processor_SocialMediaMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

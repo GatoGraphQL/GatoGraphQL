@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_ORDERUSER', PoP_ServerUtils::get_template_definition('order-user', true)); // Keep the name, so the URL params when filtering make sense
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_ORDERPOST', PoP_ServerUtils::get_template_definition('order-post', true)); // Keep the name, so the URL params when filtering make sense
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_ORDERTAG', PoP_ServerUtils::get_template_definition('order-tag', true)); // Keep the name, so the URL params when filtering make sense
-define ('GD_TEMPLATE_FORMCOMPONENT_SETTINGSFORMAT', PoP_ServerUtils::get_template_definition('formcomponent-settingsformat'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_ORDERUSER', PoP_TemplateIDUtils::get_template_definition('order-user', true)); // Keep the name, so the URL params when filtering make sense
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_ORDERPOST', PoP_TemplateIDUtils::get_template_definition('order-post', true)); // Keep the name, so the URL params when filtering make sense
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_ORDERTAG', PoP_TemplateIDUtils::get_template_definition('order-tag', true)); // Keep the name, so the URL params when filtering make sense
+define ('GD_TEMPLATE_FORMCOMPONENT_SETTINGSFORMAT', PoP_TemplateIDUtils::get_template_definition('formcomponent-settingsformat'));
 
 class GD_Template_Processor_SelectFormComponentInputs extends GD_Template_Processor_SelectFormComponentsBase {
 

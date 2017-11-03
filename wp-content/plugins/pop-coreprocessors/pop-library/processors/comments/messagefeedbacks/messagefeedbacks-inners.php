@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_COMMENTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-comments'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ADDCOMMENT', PoP_ServerUtils::get_template_definition('messagefeedbackinner-addcomment'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_COMMENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-comments'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-addcomment'));
 
 class GD_Template_Processor_CommentsMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

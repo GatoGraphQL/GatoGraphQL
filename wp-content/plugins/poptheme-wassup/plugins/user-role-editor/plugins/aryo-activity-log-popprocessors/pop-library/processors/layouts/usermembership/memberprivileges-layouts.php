@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_LAYOUTUSER_MEMBERPRIVILEGES', PoP_ServerUtils::get_template_definition('ure-aal-layoutuser-memberprivileges-desc'));
+define ('GD_URE_AAL_TEMPLATE_LAYOUTUSER_MEMBERPRIVILEGES', PoP_TemplateIDUtils::get_template_definition('ure-aal-layoutuser-memberprivileges-desc'));
 
 class Wassup_URE_AAL_Template_Processor_MemberPrivilegesLayouts extends GD_URE_Template_Processor_MemberPrivilegesLayoutsBase {
 

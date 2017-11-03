@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_AAL_TEMPLATE_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM', PoP_ServerUtils::get_template_definition('aal-multicomponent-quicklinkgroup-bottom'));
+define ('GD_AAL_TEMPLATE_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM', PoP_TemplateIDUtils::get_template_definition('aal-multicomponent-quicklinkgroup-bottom'));
 
 class GD_Template_Processor_MultipleComponentLayouts extends GD_Template_Processor_MultiplesBase {
 	

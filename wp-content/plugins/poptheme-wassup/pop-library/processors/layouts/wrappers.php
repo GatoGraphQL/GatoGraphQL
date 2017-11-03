@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTWRAPPER_USERPOSTINTERACTION', PoP_ServerUtils::get_template_definition('layoutwrapper-userpostinteraction'));
-define ('GD_TEMPLATE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION', PoP_ServerUtils::get_template_definition('layoutwrapper-userhighlightpostinteraction'));
-define ('GD_TEMPLATE_CODEWRAPPER_LAZYLOADINGSPINNER', PoP_ServerUtils::get_template_definition('codewrapper-lazyloadingspinner'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_USERPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-userpostinteraction'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-userhighlightpostinteraction'));
+define ('GD_TEMPLATE_CODEWRAPPER_LAZYLOADINGSPINNER', PoP_TemplateIDUtils::get_template_definition('codewrapper-lazyloadingspinner'));
 
 class GD_Template_Processor_CustomWrapperLayouts extends GD_Template_Processor_ConditionWrapperBase {
 

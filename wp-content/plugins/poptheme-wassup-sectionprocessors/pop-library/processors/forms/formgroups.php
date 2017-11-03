@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponentgroup-locationpostcategories'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponentgroup-discussioncategories'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-locationpostcategories'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_DISCUSSIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-discussioncategories'));
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-locationpostcategories'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DISCUSSIONCATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-discussioncategories'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_LOCATIONPOSTCATEGORIES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-locationpostcategories'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DISCUSSIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-discussioncategories'));
 
 class GD_Custom_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

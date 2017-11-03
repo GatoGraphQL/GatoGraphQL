@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_LOGIN', PoP_ServerUtils::get_template_definition('action-login'));
-define ('GD_TEMPLATE_ACTION_LOSTPWD', PoP_ServerUtils::get_template_definition('action-lostpwd'));
-define ('GD_TEMPLATE_ACTION_LOSTPWDRESET', PoP_ServerUtils::get_template_definition('action-lostpwdreset'));
-define ('GD_TEMPLATE_ACTION_LOGOUT', PoP_ServerUtils::get_template_definition('action-logout'));
+define ('GD_TEMPLATE_ACTION_LOGIN', PoP_TemplateIDUtils::get_template_definition('action-login'));
+define ('GD_TEMPLATE_ACTION_LOSTPWD', PoP_TemplateIDUtils::get_template_definition('action-lostpwd'));
+define ('GD_TEMPLATE_ACTION_LOSTPWDRESET', PoP_TemplateIDUtils::get_template_definition('action-lostpwdreset'));
+define ('GD_TEMPLATE_ACTION_LOGOUT', PoP_TemplateIDUtils::get_template_definition('action-logout'));
 
 class GD_Template_Processor_LoginActions extends GD_Template_Processor_ActionsBase {
 

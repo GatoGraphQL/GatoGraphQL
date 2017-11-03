@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_BUTTON_GOOGLECALENDAR', PoP_ServerUtils::get_template_definition('em-button-googlecalendar'));
-define ('GD_EM_TEMPLATE_BUTTON_ICAL', PoP_ServerUtils::get_template_definition('em-button-ical'));
+define ('GD_EM_TEMPLATE_BUTTON_GOOGLECALENDAR', PoP_TemplateIDUtils::get_template_definition('em-button-googlecalendar'));
+define ('GD_EM_TEMPLATE_BUTTON_ICAL', PoP_TemplateIDUtils::get_template_definition('em-button-ical'));
 
 class GD_EM_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_NOTIFICATIONS', PoP_ServerUtils::get_template_definition('notifications'));
+define ('POP_RESOURCELOADER_NOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('notifications'));
 
 class PoP_AAL_Processors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

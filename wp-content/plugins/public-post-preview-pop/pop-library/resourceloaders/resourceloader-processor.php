@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_PPPFUNCTIONS', PoP_ServerUtils::get_template_definition('ppp-functions'));
+define ('POP_RESOURCELOADER_PPPFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('ppp-functions'));
 
 class PPP_PoP_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

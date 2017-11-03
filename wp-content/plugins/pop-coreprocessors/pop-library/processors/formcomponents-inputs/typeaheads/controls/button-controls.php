@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONCONTROL_TYPEAHEADSEARCH', PoP_ServerUtils::get_template_definition('buttoncontrol-typeaheadsearch'));
+define ('GD_TEMPLATE_BUTTONCONTROL_TYPEAHEADSEARCH', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-typeaheadsearch'));
 
 class GD_Template_Processor_TypeaheadButtonControls extends GD_Template_Processor_ButtonControlsBase {
 

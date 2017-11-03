@@ -1,5 +1,5 @@
 <?php
-class PoP_ResourceLoader_ConfigFileGeneratorBase extends PoP_Frontend_RendererFileGeneratorBase {
+class PoP_ResourceLoader_ConfigFileGeneratorBase extends PoP_Engine_RendererFileGeneratorBase {
 
 	function get_dir() {
 

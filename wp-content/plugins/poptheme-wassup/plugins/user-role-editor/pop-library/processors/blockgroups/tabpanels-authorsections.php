@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORMEMBERS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authormembers'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORMEMBERS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authormembers'));
 
 class GD_URE_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Template_Processor_AuthorSectionTabPanelBlockGroupsBase {
 

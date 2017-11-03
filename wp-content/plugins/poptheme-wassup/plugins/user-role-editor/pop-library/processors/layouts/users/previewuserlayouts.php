@@ -5,37 +5,37 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-navigator'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_ADDONS', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-addons'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_LIST', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-mapdetails'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_POPOVER', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-popover'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_COMMUNITIES', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-communities'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_POSTAUTHOR', PoP_ServerUtils::get_template_definition('layout-previewuser-organization-postauthor'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-navigator'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-addons'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_POPOVER', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-popover'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-communities'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATION_POSTAUTHOR', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organization-postauthor'));
 
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATIONMEMBERS_LIST', PoP_ServerUtils::get_template_definition('layout-previewuser-organizationmembers-list'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_ORGANIZATIONMEMBERS_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-organizationmembers-list'));
 
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_DETAILS', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-organization-details'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-organization-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_LIST', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-organization-list'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-organization-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-organization-details'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-organization-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_LIST', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-organization-list'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_ORGANIZATION_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-organization-mapdetails'));
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-navigator'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_ADDONS', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-addons'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_LIST', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-mapdetails'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_POPOVER', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-popover'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_COMMUNITIES', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-communities'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_POSTAUTHOR', PoP_ServerUtils::get_template_definition('layout-previewuser-individual-postauthor'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-navigator'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-addons'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_POPOVER', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-popover'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-communities'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_INDIVIDUAL_POSTAUTHOR', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-individual-postauthor'));
 
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_DETAILS', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-individual-details'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-individual-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_LIST', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-individual-list'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-individual-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-individual-details'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-individual-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_LIST', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-individual-list'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_INDIVIDUAL_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-individual-mapdetails'));
 
 class GD_URE_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Processor_CustomPreviewUserLayoutsBase {
 

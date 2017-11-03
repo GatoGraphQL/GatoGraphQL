@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDLOCATIONPOST', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addlocationpost'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDSTORY', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addstory'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDANNOUNCEMENT', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addannouncement'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDDISCUSSION', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-adddiscussion'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDLOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-addlocationpost'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDSTORY', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-addstory'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-addannouncement'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDDISCUSSION', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-adddiscussion'));
 
 class SectionProcessors_Template_Processor_ControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

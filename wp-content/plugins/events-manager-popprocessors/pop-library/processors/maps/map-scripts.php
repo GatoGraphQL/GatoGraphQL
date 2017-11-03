@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MAP_SCRIPT', PoP_ServerUtils::get_template_definition('em-map-script'));
-define ('GD_TEMPLATE_MAP_SCRIPT_POST', PoP_ServerUtils::get_template_definition('em-map-script-post'));
-define ('GD_TEMPLATE_MAP_SCRIPT_USER', PoP_ServerUtils::get_template_definition('em-map-script-user'));
+define ('GD_TEMPLATE_MAP_SCRIPT', PoP_TemplateIDUtils::get_template_definition('em-map-script'));
+define ('GD_TEMPLATE_MAP_SCRIPT_POST', PoP_TemplateIDUtils::get_template_definition('em-map-script-post'));
+define ('GD_TEMPLATE_MAP_SCRIPT_USER', PoP_TemplateIDUtils::get_template_definition('em-map-script-user'));
 
 class GD_Template_Processor_MapScripts extends GD_Template_Processor_MapScriptsBase {
 

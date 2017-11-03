@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_CONTROLBUTTONGROUP_CONTENTSOURCE', PoP_ServerUtils::get_template_definition('ure-controlbuttongroup-contentsource'));
+define ('GD_URE_TEMPLATE_CONTROLBUTTONGROUP_CONTENTSOURCE', PoP_TemplateIDUtils::get_template_definition('ure-controlbuttongroup-contentsource'));
 
 class GD_URE_Template_Processor_ControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

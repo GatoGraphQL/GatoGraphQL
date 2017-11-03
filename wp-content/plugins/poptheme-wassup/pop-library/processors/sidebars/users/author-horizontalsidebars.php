@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_HORIZONTALSIDEBAR_AUTHOR_GENERIC', PoP_ServerUtils::get_template_definition('horizontal-sidebar-author-generic'));
+define ('GD_TEMPLATE_HORIZONTALSIDEBAR_AUTHOR_GENERIC', PoP_TemplateIDUtils::get_template_definition('horizontal-sidebar-author-generic'));
 
 // class GD_Template_Processor_CustomHorizontalAuthorSidebars extends GD_Template_Processor_HorizontalContentSidebarsBase {
 class GD_Template_Processor_CustomHorizontalAuthorSidebars extends GD_Template_Processor_SidebarsBase {

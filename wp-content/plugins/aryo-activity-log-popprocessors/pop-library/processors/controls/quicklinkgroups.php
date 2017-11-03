@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_AAL_TEMPLATE_QUICKLINKGROUP_NOTIFICATION', PoP_ServerUtils::get_template_definition('aal-quicklinkgroup-notification'));
+define ('GD_AAL_TEMPLATE_QUICKLINKGROUP_NOTIFICATION', PoP_TemplateIDUtils::get_template_definition('aal-quicklinkgroup-notification'));
 
 class GD_AAL_Template_Processor_QuicklinkGroups extends GD_Template_Processor_ControlGroupsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_60', PoP_ServerUtils::get_template_definition('layout-useravatar-60'));
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_60_RESPONSIVE', PoP_ServerUtils::get_template_definition('layout-useravatar-60-responsive'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_60', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-60'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_60_RESPONSIVE', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-60-responsive'));
 
 class GD_Template_Processor_UserAvatarLayouts extends GD_Template_Processor_UserAvatarLayoutsBase {
 

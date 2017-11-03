@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_ORGANIZATION', PoP_ServerUtils::get_template_definition('ure-typeahead-component-organization'));
-define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_INDIVIDUAL', PoP_ServerUtils::get_template_definition('ure-typeahead-component-individual'));
-define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_COMMUNITY', PoP_ServerUtils::get_template_definition('ure-typeahead-component-community'));
-define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_COMMUNITYUSERS', PoP_ServerUtils::get_template_definition('ure-typeahead-component-communityusers'));
+define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('ure-typeahead-component-organization'));
+define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('ure-typeahead-component-individual'));
+define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_COMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-typeahead-component-community'));
+define ('GD_URE_TEMPLATE_TYPEAHEAD_COMPONENT_COMMUNITYUSERS', PoP_TemplateIDUtils::get_template_definition('ure-typeahead-component-communityusers'));
 
 class GD_URE_Template_Processor_UserTypeaheadComponentFormComponentInputs extends GD_Template_Processor_UserTypeaheadComponentFormComponentInputs {
 

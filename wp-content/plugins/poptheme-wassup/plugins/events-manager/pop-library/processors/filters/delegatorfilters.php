@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorevents'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGEVENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-tagevents'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHOREVENTSCALENDAR', PoP_ServerUtils::get_template_definition('delegatorfilter-authoreventscalendar'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGEVENTSCALENDAR', PoP_ServerUtils::get_template_definition('delegatorfilter-tageventscalendar'));
-define ('GD_TEMPLATE_DELEGATORFILTER_EVENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-events'));
-define ('GD_TEMPLATE_DELEGATORFILTER_EVENTSCALENDAR', PoP_ServerUtils::get_template_definition('delegatorfilter-eventscalendar'));
-define ('GD_TEMPLATE_DELEGATORFILTER_LOCATIONS', PoP_ServerUtils::get_template_definition('delegatorfilter-locations'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYEVENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-myevents'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorevents'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGEVENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagevents'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHOREVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authoreventscalendar'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGEVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tageventscalendar'));
+define ('GD_TEMPLATE_DELEGATORFILTER_EVENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-events'));
+define ('GD_TEMPLATE_DELEGATORFILTER_EVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-eventscalendar'));
+define ('GD_TEMPLATE_DELEGATORFILTER_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-locations'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-myevents'));
 
 class GD_EM_Template_Processor_CustomDelegatorFilters extends GD_Template_Processor_CustomDelegatorFiltersBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMGROUP_EMBEDPREVIEW', PoP_ServerUtils::get_template_definition('formgroup-embedpreview'));
+define ('GD_TEMPLATE_FORMGROUP_EMBEDPREVIEW', PoP_TemplateIDUtils::get_template_definition('formgroup-embedpreview'));
 
 class GD_Template_Processor_CreateUpdatePostFormGroups extends GD_Template_Processor_FormGroupsBase {
 

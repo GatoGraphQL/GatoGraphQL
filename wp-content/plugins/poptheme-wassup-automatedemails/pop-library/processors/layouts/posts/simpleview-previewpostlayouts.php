@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewpost-post-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewpost-post-simpleview'));
 
 class PoPTheme_Wassup_AE_Template_Processor_SimpleViewPreviewPostLayouts extends GD_Template_Processor_BareSimpleViewPreviewPostLayoutsBase {
 

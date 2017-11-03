@@ -6,7 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // My Preferences
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-formcomponent-emailnotifications-network-joinscommunity'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-formcomponent-emailnotifications-network-joinscommunity'));
 
 class GD_URE_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Template_Processor_CheckboxFormComponentsBase {
 

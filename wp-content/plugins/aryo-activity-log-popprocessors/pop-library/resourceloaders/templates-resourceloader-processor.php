@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_PREVIEWNOTIFICATION));
-define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_NOTIFICATIONTIME', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_NOTIFICATIONTIME));
-define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_NOTIFICATIONICON', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_NOTIFICATIONICON));
+define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_PREVIEWNOTIFICATION));
+define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_NOTIFICATIONTIME', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_NOTIFICATIONTIME));
+define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_NOTIFICATIONICON', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_NOTIFICATIONICON));
 
 class PoP_AAL_Processors_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor {
 

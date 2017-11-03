@@ -6,7 +6,7 @@ class PoP_CDNCore_Initialization {
 		load_plugin_textdomain('pop-cdn-core', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('a7');
+		PoP_TemplateIDUtils::set_namespace('a7');
 
 		if (!is_admin()) {
 

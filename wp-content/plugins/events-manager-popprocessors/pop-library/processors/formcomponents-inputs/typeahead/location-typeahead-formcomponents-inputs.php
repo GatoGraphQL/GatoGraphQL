@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeahead-locations'));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeahead-locations'));
 
 class GD_Template_Processor_LocationSelectableTypeaheadFormComponentInputs extends GD_Template_Processor_LocationSelectableTypeaheadFormComponentsBase {
 

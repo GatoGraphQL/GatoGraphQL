@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-tagbutton-sharebyemail-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-tagbutton-sharebyemail-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-tagbutton-embed-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-tagbutton-embed-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-tagbutton-api-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-tagbutton-api-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-tagbutton-sharebyemail-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-tagbutton-sharebyemail-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-tagbutton-embed-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-tagbutton-embed-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-tagbutton-api-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-tagbutton-api-previewdropdown'));
 
 class GD_Template_Processor_TagViewComponentButtons extends GD_Template_Processor_TagViewComponentButtonsBase {
 

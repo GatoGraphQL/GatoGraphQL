@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBCOMPONENT_REFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('subcomponent-referencedby-details'));
-define ('GD_TEMPLATE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('subcomponent-referencedby-simpleview'));
-define ('GD_TEMPLATE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('subcomponent-referencedby-fullview'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_REFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('lazysubcomponent-referencedby-details'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('lazysubcomponent-referencedby-simpleview'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_REFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('lazysubcomponent-referencedby-fullview'));
+define ('GD_TEMPLATE_SUBCOMPONENT_REFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('subcomponent-referencedby-details'));
+define ('GD_TEMPLATE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('subcomponent-referencedby-simpleview'));
+define ('GD_TEMPLATE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('subcomponent-referencedby-fullview'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_REFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-referencedby-details'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-referencedby-simpleview'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_REFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-referencedby-fullview'));
 
 class GD_Template_Processor_ReferencedbyLayouts extends GD_Template_Processor_SubcomponentLayoutsBase {
 

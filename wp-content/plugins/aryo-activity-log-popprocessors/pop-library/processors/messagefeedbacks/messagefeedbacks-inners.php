@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_NOTIFICATIONS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-notifications'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_NOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-notifications'));
 
 class GD_AAL_Template_Processor_CustomListMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

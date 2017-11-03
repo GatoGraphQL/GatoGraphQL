@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_INSTANTANEOUSFILTERINNER_CATEGORIES', PoP_ServerUtils::get_template_definition('instantaneousfilterinner-categories'));
-define ('GD_TEMPLATE_INSTANTANEOUSFILTERINNER_SECTIONS', PoP_ServerUtils::get_template_definition('instantaneousfilterinner-sections'));
-define ('GD_TEMPLATE_INSTANTANEOUSFILTERINNER_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('instantaneousfilterinner-webpostsections'));
+define ('GD_TEMPLATE_INSTANTANEOUSFILTERINNER_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('instantaneousfilterinner-categories'));
+define ('GD_TEMPLATE_INSTANTANEOUSFILTERINNER_SECTIONS', PoP_TemplateIDUtils::get_template_definition('instantaneousfilterinner-sections'));
+define ('GD_TEMPLATE_INSTANTANEOUSFILTERINNER_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('instantaneousfilterinner-webpostsections'));
 
 class GD_Template_Processor_InstantaneousSimpleFilterInners extends GD_Template_Processor_InstantaneousSimpleFilterInnersBase {
 

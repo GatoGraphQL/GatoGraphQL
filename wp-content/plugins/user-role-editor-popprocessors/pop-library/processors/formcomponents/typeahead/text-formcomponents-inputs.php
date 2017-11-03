@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADORGANIZATIONS', PoP_ServerUtils::get_template_definition('formcomponent-text-typeaheadorganizations'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('formcomponent-text-typeaheadorganizations'));
 
 class GD_URE_Template_Processor_TypeaheadTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

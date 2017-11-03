@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_FOLLOWUSER', PoP_ServerUtils::get_template_definition('blockgroup-followuser'));
-define ('GD_TEMPLATE_BLOCKGROUP_UNFOLLOWUSER', PoP_ServerUtils::get_template_definition('blockgroup-unfollowuser'));
-define ('GD_TEMPLATE_BLOCKGROUP_RECOMMENDPOST', PoP_ServerUtils::get_template_definition('blockgroup-recommendpost'));
-define ('GD_TEMPLATE_BLOCKGROUP_UNRECOMMENDPOST', PoP_ServerUtils::get_template_definition('blockgroup-unrecommendpost'));
-define ('GD_TEMPLATE_BLOCKGROUP_SUBSCRIBETOTAG', PoP_ServerUtils::get_template_definition('blockgroup-subscribetotag'));
-define ('GD_TEMPLATE_BLOCKGROUP_UNSUBSCRIBEFROMTAG', PoP_ServerUtils::get_template_definition('blockgroup-unsubscribefromtag'));
-define ('GD_TEMPLATE_BLOCKGROUP_UPVOTEPOST', PoP_ServerUtils::get_template_definition('blockgroup-upvotepost'));
-define ('GD_TEMPLATE_BLOCKGROUP_UNDOUPVOTEPOST', PoP_ServerUtils::get_template_definition('blockgroup-undoupvotepost'));
-define ('GD_TEMPLATE_BLOCKGROUP_DOWNVOTEPOST', PoP_ServerUtils::get_template_definition('blockgroup-downvotepost'));
-define ('GD_TEMPLATE_BLOCKGROUP_UNDODOWNVOTEPOST', PoP_ServerUtils::get_template_definition('blockgroup-undodownvotepost'));
+define ('GD_TEMPLATE_BLOCKGROUP_FOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('blockgroup-followuser'));
+define ('GD_TEMPLATE_BLOCKGROUP_UNFOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('blockgroup-unfollowuser'));
+define ('GD_TEMPLATE_BLOCKGROUP_RECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('blockgroup-recommendpost'));
+define ('GD_TEMPLATE_BLOCKGROUP_UNRECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('blockgroup-unrecommendpost'));
+define ('GD_TEMPLATE_BLOCKGROUP_SUBSCRIBETOTAG', PoP_TemplateIDUtils::get_template_definition('blockgroup-subscribetotag'));
+define ('GD_TEMPLATE_BLOCKGROUP_UNSUBSCRIBEFROMTAG', PoP_TemplateIDUtils::get_template_definition('blockgroup-unsubscribefromtag'));
+define ('GD_TEMPLATE_BLOCKGROUP_UPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockgroup-upvotepost'));
+define ('GD_TEMPLATE_BLOCKGROUP_UNDOUPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockgroup-undoupvotepost'));
+define ('GD_TEMPLATE_BLOCKGROUP_DOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockgroup-downvotepost'));
+define ('GD_TEMPLATE_BLOCKGROUP_UNDODOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockgroup-undodownvotepost'));
 
 class GD_Template_Processor_FunctionsBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

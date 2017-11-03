@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_SETTINGS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-settings'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_SETTINGS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-settings'));
 
 class GD_Template_Processor_SettingsMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MENU_MULTITARGETINDENT', PoP_ServerUtils::get_template_definition('layout-menu-multitargetindent'));
+define ('GD_TEMPLATE_LAYOUT_MENU_MULTITARGETINDENT', PoP_TemplateIDUtils::get_template_definition('layout-menu-multitargetindent'));
 
 class GD_Template_Processor_MultiTargetIndentMenuLayouts extends GD_Template_Processor_MultiTargetIndentMenuLayoutsBase {
 

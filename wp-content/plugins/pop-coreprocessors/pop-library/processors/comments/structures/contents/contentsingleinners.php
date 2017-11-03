@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTINNER_COMMENTSINGLE', PoP_ServerUtils::get_template_definition('contentinner-commentsingle'));
+define ('GD_TEMPLATE_CONTENTINNER_COMMENTSINGLE', PoP_TemplateIDUtils::get_template_definition('contentinner-commentsingle'));
 
 class GD_Template_Processor_CommentContentInners extends GD_Template_Processor_ContentSingleInnersBase {
 

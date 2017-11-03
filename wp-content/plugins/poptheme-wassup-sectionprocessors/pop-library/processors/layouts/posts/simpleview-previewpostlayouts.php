@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_ANNOUNCEMENT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-announcement-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-locationpost-simpleview'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_FEATURED_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-featured-simpleview'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_DISCUSSION_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-discussion-simpleview'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_STORY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-story-simpleview'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_BLOG_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-blog-simpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_ANNOUNCEMENT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-announcement-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-locationpost-simpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_FEATURED_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewost-featured-simpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_DISCUSSION_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewost-discussion-simpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_STORY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewost-story-simpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_BLOG_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewost-blog-simpleview'));
 
 class PoPSF_Template_Processor_SimpleViewPreviewPostLayouts extends GD_Template_Processor_CustomSimpleViewPreviewPostLayoutsBase {
 

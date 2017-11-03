@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_AAL_TEMPLATE_BUTTONINNER_NOTIFICATIONPREVIEWLINK', PoP_ServerUtils::get_template_definition('aal-buttoninner-notificationpreviewlink'));
-define ('GD_AAL_TEMPLATE_BUTTONINNER_USERVIEW', PoP_ServerUtils::get_template_definition('aal-buttoninner-userview'));
-define ('GD_AAL_TEMPLATE_BUTTONINNER_NOTIFICATION_MARKASREAD', PoP_ServerUtils::get_template_definition('aal-buttoninner-notification-markasread'));
-define ('GD_AAL_TEMPLATE_BUTTONINNER_NOTIFICATION_MARKASUNREAD', PoP_ServerUtils::get_template_definition('aal-buttoninner-notification-markasunread'));
+define ('GD_AAL_TEMPLATE_BUTTONINNER_NOTIFICATIONPREVIEWLINK', PoP_TemplateIDUtils::get_template_definition('aal-buttoninner-notificationpreviewlink'));
+define ('GD_AAL_TEMPLATE_BUTTONINNER_USERVIEW', PoP_TemplateIDUtils::get_template_definition('aal-buttoninner-userview'));
+define ('GD_AAL_TEMPLATE_BUTTONINNER_NOTIFICATION_MARKASREAD', PoP_TemplateIDUtils::get_template_definition('aal-buttoninner-notification-markasread'));
+define ('GD_AAL_TEMPLATE_BUTTONINNER_NOTIFICATION_MARKASUNREAD', PoP_TemplateIDUtils::get_template_definition('aal-buttoninner-notification-markasunread'));
 
 class AAL_PoPProcessors_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

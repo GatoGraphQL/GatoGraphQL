@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-event-simpleview'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-simpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-simpleview'));
 
 class GD_EM_Template_Processor_CustomSimpleViewPreviewPostLayouts extends GD_Template_Processor_CustomSimpleViewPreviewPostLayoutsBase {
 

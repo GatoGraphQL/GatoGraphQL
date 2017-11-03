@@ -5,31 +5,31 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDTAGS', PoP_ServerUtils::get_template_definition('delegatorfilter-wildcardtags'));
-define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-wildcardposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWILDCARDPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorwildcardposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('delegatorfilter-webpostlinks'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWEBPOSTLINKS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorwebpostlinks'));
-define ('GD_TEMPLATE_DELEGATORFILTER_HIGHLIGHTS', PoP_ServerUtils::get_template_definition('delegatorfilter-highlights'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORHIGHLIGHTS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorhighlights'));
-define ('GD_TEMPLATE_DELEGATORFILTER_WEBPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-webposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_POSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-posts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWEBPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorwebposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGWEBPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-tagwebposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-tagposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDUSERS', PoP_ServerUtils::get_template_definition('delegatorfilter-wildcardusers'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWILDCARDUSERS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorwildcardusers'));
-define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDMYPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-wildcardmyposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYWEBPOSTLINKS', PoP_ServerUtils::get_template_definition('delegatorfilter-mywebpostlinks'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('delegatorfilter-myhighlights'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-mywebposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-myposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGMAINALLCONTENT', PoP_ServerUtils::get_template_definition('delegatorfilter-tagmainallcontent'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGALLCONTENT', PoP_ServerUtils::get_template_definition('delegatorfilter-tagallcontent'));
-define ('GD_TEMPLATE_DELEGATORFILTER_HOMEALLCONTENT', PoP_ServerUtils::get_template_definition('delegatorfilter-homeallcontent'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORMAINALLCONTENT', PoP_ServerUtils::get_template_definition('delegatorfilter-authormainallcontent'));
-// define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORALLCONTENT', PoP_ServerUtils::get_template_definition('delegatorfilter-authorallcontent'));
+define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDTAGS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-wildcardtags'));
+define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-wildcardposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWILDCARDPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorwildcardposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_WEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-webpostlinks'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorwebpostlinks'));
+define ('GD_TEMPLATE_DELEGATORFILTER_HIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-highlights'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorhighlights'));
+define ('GD_TEMPLATE_DELEGATORFILTER_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-webposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_POSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-posts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorwebposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagwebposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDUSERS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-wildcardusers'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORWILDCARDUSERS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorwildcardusers'));
+define ('GD_TEMPLATE_DELEGATORFILTER_WILDCARDMYPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-wildcardmyposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYWEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-mywebpostlinks'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-myhighlights'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-mywebposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-myposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGMAINALLCONTENT', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagmainallcontent'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGALLCONTENT', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagallcontent'));
+define ('GD_TEMPLATE_DELEGATORFILTER_HOMEALLCONTENT', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-homeallcontent'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORMAINALLCONTENT', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authormainallcontent'));
+// define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORALLCONTENT', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorallcontent'));
 
 class GD_Template_Processor_CustomDelegatorFilters extends GD_Template_Processor_CustomDelegatorFiltersBase {
 

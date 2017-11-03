@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_BUTTONWRAPPER_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-aal-buttonwrapper-editmembership'));
-define ('GD_URE_AAL_TEMPLATE_BUTTONWRAPPER_VIEWALLMEMBERS', PoP_ServerUtils::get_template_definition('ure-aal-buttonwrapper-viewallmembers'));
+define ('GD_URE_AAL_TEMPLATE_BUTTONWRAPPER_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-aal-buttonwrapper-editmembership'));
+define ('GD_URE_AAL_TEMPLATE_BUTTONWRAPPER_VIEWALLMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-aal-buttonwrapper-viewallmembers'));
 
 class Custom_URE_AAL_PoPProcessors_Template_Processor_ButtonWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

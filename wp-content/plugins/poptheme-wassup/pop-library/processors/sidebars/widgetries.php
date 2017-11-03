@@ -5,13 +5,13 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCES', PoP_ServerUtils::get_template_definition('widget-highlightreferences'));
-define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('widget-highlightreferencedby-simpleview'));
-define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('widget-highlightreferencedby-fullview'));
-define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('widget-highlightreferencedby-details'));
-define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('widget-highlightreferencedby-appendtoscript-simpleview'));
-define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_ServerUtils::get_template_definition('widget-highlightreferencedby-appendtoscript-fullview'));
-define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_ServerUtils::get_template_definition('widget-highlightreferencedby-appendtoscript-details'));
+define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCES', PoP_TemplateIDUtils::get_template_definition('widget-highlightreferences'));
+define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('widget-highlightreferencedby-simpleview'));
+define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('widget-highlightreferencedby-fullview'));
+define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('widget-highlightreferencedby-details'));
+define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('widget-highlightreferencedby-appendtoscript-simpleview'));
+define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('widget-highlightreferencedby-appendtoscript-fullview'));
+define ('GD_TEMPLATE_WIDGET_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_TemplateIDUtils::get_template_definition('widget-highlightreferencedby-appendtoscript-details'));
 
 class Wassup_Template_Processor_Widgets extends GD_Template_Processor_WidgetsBase {
 

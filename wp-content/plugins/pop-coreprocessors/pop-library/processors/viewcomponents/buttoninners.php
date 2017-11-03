@@ -5,22 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-sharebyemail-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-sharebyemail-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-embed-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-embed-socialmedia-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-api-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-api-socialmedia-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-volunteer-full'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-volunteer-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-flag-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-flag-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-sendmessage-preview'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-sidebar-sendmessage-full'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-replycomment'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-addcomment'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-addcomment-full'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG', PoP_ServerUtils::get_template_definition('viewcomponent-compactbuttoninner-volunteer-big'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-sharebyemail-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-sharebyemail-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-embed-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-embed-socialmedia-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-api-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-api-socialmedia-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-volunteer-full'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-volunteer-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-flag-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-flag-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-sendmessage-preview'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-sidebar-sendmessage-full'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-replycomment'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-addcomment'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-addcomment-full'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-compactbuttoninner-volunteer-big'));
 
 class GD_Template_Processor_ViewComponentButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

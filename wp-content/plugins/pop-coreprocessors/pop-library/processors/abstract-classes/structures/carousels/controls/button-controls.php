@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELBUTTONCONTROL_CAROUSELPREV', PoP_ServerUtils::get_template_definition('carouselbuttoncontrol-carouselprev'));
-define ('GD_TEMPLATE_CAROUSELBUTTONCONTROL_CAROUSELNEXT', PoP_ServerUtils::get_template_definition('carouselbuttoncontrol-carouselnext'));
+define ('GD_TEMPLATE_CAROUSELBUTTONCONTROL_CAROUSELPREV', PoP_TemplateIDUtils::get_template_definition('carouselbuttoncontrol-carouselprev'));
+define ('GD_TEMPLATE_CAROUSELBUTTONCONTROL_CAROUSELNEXT', PoP_TemplateIDUtils::get_template_definition('carouselbuttoncontrol-carouselnext'));
 
 class GD_Template_Processor_CarouselButtonControls extends GD_Template_Processor_ButtonControlsBase {
 

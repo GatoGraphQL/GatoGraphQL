@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_HOME', PoP_ServerUtils::get_template_definition('blockgroup-home'));
-define ('GD_TEMPLATE_BLOCKGROUP_404', PoP_ServerUtils::get_template_definition('blockgroup-404'));
-define ('GD_TEMPLATE_BLOCKGROUP_BACKGROUNDMENU', PoP_ServerUtils::get_template_definition('blockgroup-backgroundmenu'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLEPOST', PoP_ServerUtils::get_template_definition('blockgroup-singlepost'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR', PoP_ServerUtils::get_template_definition('blockgroup-author'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION', PoP_ServerUtils::get_template_definition('blockgroup-authordescription'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORSUMMARY', PoP_ServerUtils::get_template_definition('blockgroup-authorsummary'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG', PoP_ServerUtils::get_template_definition('blockgroup-tag'));
+define ('GD_TEMPLATE_BLOCKGROUP_HOME', PoP_TemplateIDUtils::get_template_definition('blockgroup-home'));
+define ('GD_TEMPLATE_BLOCKGROUP_404', PoP_TemplateIDUtils::get_template_definition('blockgroup-404'));
+define ('GD_TEMPLATE_BLOCKGROUP_BACKGROUNDMENU', PoP_TemplateIDUtils::get_template_definition('blockgroup-backgroundmenu'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLEPOST', PoP_TemplateIDUtils::get_template_definition('blockgroup-singlepost'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR', PoP_TemplateIDUtils::get_template_definition('blockgroup-author'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORDESCRIPTION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authordescription'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORSUMMARY', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorsummary'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag'));
 
 class GD_Template_Processor_MainBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

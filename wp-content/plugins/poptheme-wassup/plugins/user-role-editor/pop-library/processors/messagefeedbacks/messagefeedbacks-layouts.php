@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MEMBERS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-members'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-organizations'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_INDIVIDUALS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-individuals'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MEMBERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-members'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-organizations'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-individuals'));
 
 class GD_URE_Template_Processor_CustomListMessageFeedbackLayouts extends GD_Template_Processor_ListMessageFeedbackLayoutsBase {
 

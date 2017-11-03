@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_COMMUNITIES', PoP_ServerUtils::get_template_definition('layout-multipleuser-communities'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-communities'));
 
 class GD_URE_Template_Processor_MultipleUserLayouts extends GD_Template_Processor_MultipleUserLayoutsBase {
 

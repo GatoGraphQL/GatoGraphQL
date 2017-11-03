@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTSTATIC_TYPEAHEAD_COMPONENT', PoP_ServerUtils::get_template_definition('layoutstatic-typeahead-component'));
+define ('GD_TEMPLATE_LAYOUTSTATIC_TYPEAHEAD_COMPONENT', PoP_TemplateIDUtils::get_template_definition('layoutstatic-typeahead-component'));
 
 class GD_Template_Processor_StaticTypeaheadComponentLayouts extends GD_Template_Processor_StaticTypeaheadComponentLayoutsBase {
 

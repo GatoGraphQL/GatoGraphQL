@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCRIPT_APPENDCOMMENT', PoP_ServerUtils::get_template_definition('script-append-comment'));
+define ('GD_TEMPLATE_SCRIPT_APPENDCOMMENT', PoP_TemplateIDUtils::get_template_definition('script-append-comment'));
 
 class GD_Template_Processor_AppendCommentLayouts extends GD_Template_Processor_AppendCommentLayoutsBase {
 

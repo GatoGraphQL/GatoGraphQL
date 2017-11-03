@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS', PoP_ServerUtils::get_template_definition('viewcomponent-buttonwrapper-postlocations'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS', PoP_ServerUtils::get_template_definition('viewcomponent-buttonwrapper-userlocations'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS', PoP_ServerUtils::get_template_definition('viewcomponent-buttonwrapper-postsidebarlocations'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS', PoP_ServerUtils::get_template_definition('viewcomponent-buttonwrapper-usersidebarlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttonwrapper-postlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttonwrapper-userlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttonwrapper-postsidebarlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttonwrapper-usersidebarlocations'));
 
 class GD_Template_Processor_LocationViewComponentButtonWrapperss extends GD_Template_Processor_ConditionWrapperBase {
 

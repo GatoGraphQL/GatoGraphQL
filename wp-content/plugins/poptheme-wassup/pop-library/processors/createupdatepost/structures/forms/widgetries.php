@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_FORM_FEATUREDIMAGE', PoP_ServerUtils::get_template_definition('widget-form-featuredimage'));
-define ('GD_TEMPLATE_WIDGET_FORM_METAINFORMATION', PoP_ServerUtils::get_template_definition('widget-form-metainformation'));
-define ('GD_TEMPLATE_WIDGET_FORM_WEBPOSTLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-linkdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_WEBPOSTDETAILS', PoP_ServerUtils::get_template_definition('widget-form-webpostdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('widget-form-featuredimage'));
+define ('GD_TEMPLATE_WIDGET_FORM_METAINFORMATION', PoP_TemplateIDUtils::get_template_definition('widget-form-metainformation'));
+define ('GD_TEMPLATE_WIDGET_FORM_WEBPOSTLINKDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-linkdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_WEBPOSTDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-webpostdetails'));
 
 class Wassup_Template_Processor_FormWidgets extends GD_Template_Processor_WidgetsBase {
 

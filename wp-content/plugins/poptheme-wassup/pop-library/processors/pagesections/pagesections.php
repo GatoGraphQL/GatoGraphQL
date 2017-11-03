@@ -23,15 +23,15 @@ define ('GD_TEMPLATEID_PAGESECTIONID_CONTAINER', 'ps-container');
 /**---------------------------------------------------------------------------------------------------------------
  * All PageSections
  * ---------------------------------------------------------------------------------------------------------------*/
-define ('GD_TEMPLATE_PAGESECTION_TOP', PoP_ServerUtils::get_template_definition('pagesection-top', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDE', PoP_ServerUtils::get_template_definition('pagesection-side', true));
-define ('GD_TEMPLATE_PAGESECTION_BACKGROUND', PoP_ServerUtils::get_template_definition('pagesection-background', true));
+define ('GD_TEMPLATE_PAGESECTION_TOP', PoP_TemplateIDUtils::get_template_definition('pagesection-top', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDE', PoP_TemplateIDUtils::get_template_definition('pagesection-side', true));
+define ('GD_TEMPLATE_PAGESECTION_BACKGROUND', PoP_TemplateIDUtils::get_template_definition('pagesection-background', true));
 
 /**---------------------------------------------------------------------------------------------------------------
  * THEMES: Print
  * ---------------------------------------------------------------------------------------------------------------*/
-define ('GD_TEMPLATE_PAGESECTION_TOPSIMPLE', PoP_ServerUtils::get_template_definition('pagesection-topsimple', true));
-define ('GD_TEMPLATE_PAGESECTION_TOPEMBED', PoP_ServerUtils::get_template_definition('pagesection-topembed', true));
+define ('GD_TEMPLATE_PAGESECTION_TOPSIMPLE', PoP_TemplateIDUtils::get_template_definition('pagesection-topsimple', true));
+define ('GD_TEMPLATE_PAGESECTION_TOPEMBED', PoP_TemplateIDUtils::get_template_definition('pagesection-topembed', true));
 
 /**---------------------------------------------------------------------------------------------------------------
  * ThemeMode/Style Hooks

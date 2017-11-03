@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBCOMPONENT_HIGHLIGHTREFERENCEDBY', PoP_ServerUtils::get_template_definition('subcomponent-highlightreferencedby'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_HIGHLIGHTREFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('lazysubcomponent-highlightreferencedby-details'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_HIGHLIGHTREFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('lazysubcomponent-highlightreferencedby-simpleview'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_HIGHLIGHTREFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('lazysubcomponent-highlightreferencedby-fullview'));
+define ('GD_TEMPLATE_SUBCOMPONENT_HIGHLIGHTREFERENCEDBY', PoP_TemplateIDUtils::get_template_definition('subcomponent-highlightreferencedby'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_HIGHLIGHTREFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-highlightreferencedby-details'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_HIGHLIGHTREFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-highlightreferencedby-simpleview'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_HIGHLIGHTREFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-highlightreferencedby-fullview'));
 
 class GD_Template_Processor_HighlightReferencedbyLayouts extends GD_Template_Processor_SubcomponentLayoutsBase {
 

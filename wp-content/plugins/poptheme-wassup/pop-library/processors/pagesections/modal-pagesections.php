@@ -14,12 +14,12 @@ define ('GD_TEMPLATEID_PAGESECTIONSETTINGSID_MODALS', 'modals');
 /**---------------------------------------------------------------------------------------------------------------
  * All PageSections
  * ---------------------------------------------------------------------------------------------------------------*/
-define ('GD_TEMPLATE_PAGESECTION_MODALS_HOME', PoP_ServerUtils::get_template_definition('modals-home', true));
-define ('GD_TEMPLATE_PAGESECTION_MODALS_TAG', PoP_ServerUtils::get_template_definition('modals-tag', true));
-define ('GD_TEMPLATE_PAGESECTION_MODALS_PAGE', PoP_ServerUtils::get_template_definition('modals-page', true));
-define ('GD_TEMPLATE_PAGESECTION_MODALS_SINGLE', PoP_ServerUtils::get_template_definition('modals-single', true));
-define ('GD_TEMPLATE_PAGESECTION_MODALS_AUTHOR', PoP_ServerUtils::get_template_definition('modals-author', true));
-define ('GD_TEMPLATE_PAGESECTION_MODALS_404', PoP_ServerUtils::get_template_definition('modals-404', true));
+define ('GD_TEMPLATE_PAGESECTION_MODALS_HOME', PoP_TemplateIDUtils::get_template_definition('modals-home', true));
+define ('GD_TEMPLATE_PAGESECTION_MODALS_TAG', PoP_TemplateIDUtils::get_template_definition('modals-tag', true));
+define ('GD_TEMPLATE_PAGESECTION_MODALS_PAGE', PoP_TemplateIDUtils::get_template_definition('modals-page', true));
+define ('GD_TEMPLATE_PAGESECTION_MODALS_SINGLE', PoP_TemplateIDUtils::get_template_definition('modals-single', true));
+define ('GD_TEMPLATE_PAGESECTION_MODALS_AUTHOR', PoP_TemplateIDUtils::get_template_definition('modals-author', true));
+define ('GD_TEMPLATE_PAGESECTION_MODALS_404', PoP_TemplateIDUtils::get_template_definition('modals-404', true));
 
 class GD_Template_Processor_CustomModalPageSections extends GD_Template_Processor_ModalPageSectionsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_QT_TEMPLATE_FORMCOMPONENT_LANGUAGE', PoP_ServerUtils::get_template_definition('qt-formcomponent-language'));
+define ('GD_QT_TEMPLATE_FORMCOMPONENT_LANGUAGE', PoP_TemplateIDUtils::get_template_definition('qt-formcomponent-language'));
 
 class GD_QT_Template_Processor_SelectFormComponentInputs extends GD_Template_Processor_SelectFormComponentsBase {
 

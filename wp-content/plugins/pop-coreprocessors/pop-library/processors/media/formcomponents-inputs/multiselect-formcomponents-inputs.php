@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_MIMETYPE', PoP_ServerUtils::get_template_definition('mimetype', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_TAXONOMY', PoP_ServerUtils::get_template_definition('taxonomy', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_MIMETYPE', PoP_TemplateIDUtils::get_template_definition('mimetype', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_TAXONOMY', PoP_TemplateIDUtils::get_template_definition('taxonomy', true));
 
 class GD_Template_Processor_MediaMultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
 

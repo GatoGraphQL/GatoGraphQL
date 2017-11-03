@@ -5,25 +5,25 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-previewpost-event-navigator'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_ADDONS', PoP_ServerUtils::get_template_definition('layout-previewpost-event-addons'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewpost-event-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-previewpost-event-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_LIST', PoP_ServerUtils::get_template_definition('layout-previewpost-event-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewpost-event-mapdetails'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewpost-event-horizontalmapdetails'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_RELATED', PoP_ServerUtils::get_template_definition('layout-previewpost-event-related'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_EDIT', PoP_ServerUtils::get_template_definition('layout-previewpost-event-edit'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_POPOVER', PoP_ServerUtils::get_template_definition('layout-previewpost-event-popover'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL', PoP_ServerUtils::get_template_definition('layout-previewpost-event-carousel'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-navigator'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-addons'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-mapdetails'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-related'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT', PoP_ServerUtils::get_template_definition('layout-previewost-pastevent-edit'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-navigator'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-addons'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-horizontalmapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_RELATED', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-related'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-edit'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_POPOVER', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-popover'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-event-carousel'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-navigator'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-addons'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-related'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-previewost-pastevent-edit'));
 
 class GD_EM_Template_Processor_CustomPreviewPostLayouts extends GD_Template_Processor_CustomPreviewPostLayoutsBase {
 

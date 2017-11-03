@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTUSER_QUICKLINKS', PoP_ServerUtils::get_template_definition('layoutuser-quicklinks'));
+define ('GD_TEMPLATE_LAYOUTUSER_QUICKLINKS', PoP_TemplateIDUtils::get_template_definition('layoutuser-quicklinks'));
 
 class GD_Template_Processor_UserQuickLinkLayouts extends GD_Template_Processor_UserQuickLinkLayoutsBase {
 

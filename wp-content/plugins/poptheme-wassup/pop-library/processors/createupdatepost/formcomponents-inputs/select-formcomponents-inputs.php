@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_STATUS', PoP_ServerUtils::get_template_definition('formcomponent-cup-status'));
-define ('GD_TEMPLATE_FORMCOMPONENT_LINKACCESS', PoP_ServerUtils::get_template_definition('formcomponent-linkaccess'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_STATUS', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-status'));
+define ('GD_TEMPLATE_FORMCOMPONENT_LINKACCESS', PoP_TemplateIDUtils::get_template_definition('formcomponent-linkaccess'));
 
 class GD_Template_Processor_CreateUpdatePostSelectFormComponentInputs extends GD_Template_Processor_SelectFormComponentsBase {
 

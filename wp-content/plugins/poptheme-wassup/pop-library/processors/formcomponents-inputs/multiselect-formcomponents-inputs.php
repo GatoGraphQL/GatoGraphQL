@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_VOLUNTEERSNEEDED_MULTISELECT', PoP_ServerUtils::get_template_definition('formcomponent-volunteersneededmulti'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_VOLUNTEERSNEEDED_MULTISELECT', PoP_ServerUtils::get_template_definition('volunteersneededmulti', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_VOLUNTEERSNEEDED_MULTISELECT', PoP_TemplateIDUtils::get_template_definition('formcomponent-volunteersneededmulti'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_VOLUNTEERSNEEDED_MULTISELECT', PoP_TemplateIDUtils::get_template_definition('volunteersneededmulti', true));
 
 class PoPTheme_Wassup_Template_Processor_MultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
 

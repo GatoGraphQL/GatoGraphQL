@@ -5,35 +5,35 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS', PoP_ServerUtils::get_template_definition('controlbuttongroup-toggleoptionalfields'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER', PoP_ServerUtils::get_template_definition('controlbuttongroup-filter'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_CURRENTURL', PoP_ServerUtils::get_template_definition('controlbuttongroup-currenturl'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP', PoP_ServerUtils::get_template_definition('controlbuttongroup-reloadblockgroup'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCK', PoP_ServerUtils::get_template_definition('controlbuttongroup-reloadblock'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_LOADLATESTBLOCK', PoP_ServerUtils::get_template_definition('controlbuttongroup-loadlatestblock'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SUBMENU_XS', PoP_ServerUtils::get_template_definition('controlbuttongroup-submenu-xs'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RESETEDITOR', PoP_ServerUtils::get_template_definition('controlbuttongroup-reseteditor'));
-// define ('GD_TEMPLATE_CONTROLBUTTONGROUP_OPENALL', PoP_ServerUtils::get_template_definition('controlbuttongroup-openall'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SHARE', PoP_ServerUtils::get_template_definition('controlbuttongroup-share'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_FIXEDSHARE', PoP_ServerUtils::get_template_definition('controlbuttongroup-fixedshare'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE', PoP_ServerUtils::get_template_definition('controlbuttongroup-resultsshare'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLESIDEINFO_BACK', PoP_ServerUtils::get_template_definition('controlbuttongroup-togglesideinfo-back'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDCOMMENT', PoP_ServerUtils::get_template_definition('controlbuttongroup-addcomment'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDRELATEDPOST', PoP_ServerUtils::get_template_definition('controlbuttongroup-addrelatedpost'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_PAGEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-pageoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_PAGEWITHSIDEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-pagewithsideoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWPAGEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-quickviewpageoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWPAGEWITHSIDEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-quickviewpagewithsideoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SINGLEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-singleoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SINGLEOPTIONSBOTTOM', PoP_ServerUtils::get_template_definition('controlbuttongroup-singleoptionsbottom'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWSINGLEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-singlepageoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOROPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-authoroptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWAUTHOROPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-quickviewauthoroptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_HOMEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-homeoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWHOMEOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-quickviewhomeoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TAGOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-tagoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWTAGOPTIONS', PoP_ServerUtils::get_template_definition('controlbuttongroup-quickviewtagoptions'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ALLTAGSLINK', PoP_ServerUtils::get_template_definition('controlbuttongroup-alltagslink'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-toggleoptionalfields'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_FILTER', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-filter'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_CURRENTURL', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-currenturl'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-reloadblockgroup'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RELOADBLOCK', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-reloadblock'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_LOADLATESTBLOCK', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-loadlatestblock'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SUBMENU_XS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-submenu-xs'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RESETEDITOR', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-reseteditor'));
+// define ('GD_TEMPLATE_CONTROLBUTTONGROUP_OPENALL', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-openall'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SHARE', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-share'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_FIXEDSHARE', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-fixedshare'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_RESULTSSHARE', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-resultsshare'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TOGGLESIDEINFO_BACK', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-togglesideinfo-back'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-addcomment'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDRELATEDPOST', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-addrelatedpost'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_PAGEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-pageoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_PAGEWITHSIDEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-pagewithsideoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWPAGEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-quickviewpageoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWPAGEWITHSIDEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-quickviewpagewithsideoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SINGLEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-singleoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_SINGLEOPTIONSBOTTOM', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-singleoptionsbottom'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWSINGLEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-singlepageoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_AUTHOROPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-authoroptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWAUTHOROPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-quickviewauthoroptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_HOMEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-homeoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWHOMEOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-quickviewhomeoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_TAGOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-tagoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_QUICKVIEWTAGOPTIONS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-quickviewtagoptions'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ALLTAGSLINK', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-alltagslink'));
 
 class GD_Template_Processor_ControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

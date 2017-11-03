@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGETCOMPACT_GENERICINFO', PoP_ServerUtils::get_template_definition('widgetcompact-genericinfo'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_GENERICINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-genericinfo'));
 
 class GD_Custom_Template_Processor_UserWidgets extends GD_Template_Processor_WidgetsBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGETWRAPPER_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('widgetwrapper-postcomments'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('postcomments', true)); // Comment Leo 07/12/2015: Use a short name, since it will be added as param "layout" in the url
-// define ('GD_TEMPLATE_WIDGETWRAPPER_MAXHEIGHTPOSTCOMMENTS', PoP_ServerUtils::get_template_definition('widgetwrapper-maxheightpostcomments'));
-// define ('GD_TEMPLATE_WIDGETWRAPPER_MAXHEIGHTPOSTCOMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('mh-postcomments', true)); // Comment Leo 07/12/2015: Use a short name, since it will be added as param "layout" in the url
+define ('GD_TEMPLATE_WIDGETWRAPPER_POSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-postcomments'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('postcomments', true)); // Comment Leo 07/12/2015: Use a short name, since it will be added as param "layout" in the url
+// define ('GD_TEMPLATE_WIDGETWRAPPER_MAXHEIGHTPOSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-maxheightpostcomments'));
+// define ('GD_TEMPLATE_WIDGETWRAPPER_MAXHEIGHTPOSTCOMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('mh-postcomments', true)); // Comment Leo 07/12/2015: Use a short name, since it will be added as param "layout" in the url
 
 class GD_Template_Processor_CommentsWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

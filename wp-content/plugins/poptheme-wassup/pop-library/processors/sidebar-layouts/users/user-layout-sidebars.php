@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_VERTICAL_GENERIC', PoP_ServerUtils::get_template_definition('layout-usersidebar-vertical-generic'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_VERTICAL_GENERIC', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-vertical-generic'));
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_HORIZONTAL_GENERIC', PoP_ServerUtils::get_template_definition('layout-usersidebar-horizontal-generic'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_HORIZONTAL_GENERIC', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-horizontal-generic'));
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_GENERIC', PoP_ServerUtils::get_template_definition('layout-usersidebar-compacthorizontal-generic'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_GENERIC', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-compacthorizontal-generic'));
 
 // class GD_Template_Processor_CustomUserLayoutSidebars extends GD_Template_Processor_LayoutSidebarsBase {
 class GD_Template_Processor_CustomUserLayoutSidebars extends GD_Template_Processor_SidebarsBase {

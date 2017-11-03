@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MAP_SCRIPT_MARKERS', PoP_ServerUtils::get_template_definition('em-map-script-markers'));
+define ('GD_TEMPLATE_MAP_SCRIPT_MARKERS', PoP_TemplateIDUtils::get_template_definition('em-map-script-markers'));
 
 class GD_Template_Processor_MapMarkerScripts extends GD_Template_Processor_MapMarkerScriptsBase {
 

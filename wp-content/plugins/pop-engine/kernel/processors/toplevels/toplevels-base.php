@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TOPLEVEL_HOME', PoP_ServerUtils::get_template_definition('toplevel-home'));
-define ('GD_TEMPLATE_TOPLEVEL_TAG', PoP_ServerUtils::get_template_definition('toplevel-tag'));
-define ('GD_TEMPLATE_TOPLEVEL_PAGE', PoP_ServerUtils::get_template_definition('toplevel-page'));
-define ('GD_TEMPLATE_TOPLEVEL_SINGLE', PoP_ServerUtils::get_template_definition('toplevel-single'));
-define ('GD_TEMPLATE_TOPLEVEL_AUTHOR', PoP_ServerUtils::get_template_definition('toplevel-author'));
-define ('GD_TEMPLATE_TOPLEVEL_404', PoP_ServerUtils::get_template_definition('toplevel-404'));
+define ('GD_TEMPLATE_TOPLEVEL_HOME', PoP_TemplateIDUtils::get_template_definition('toplevel-home'));
+define ('GD_TEMPLATE_TOPLEVEL_TAG', PoP_TemplateIDUtils::get_template_definition('toplevel-tag'));
+define ('GD_TEMPLATE_TOPLEVEL_PAGE', PoP_TemplateIDUtils::get_template_definition('toplevel-page'));
+define ('GD_TEMPLATE_TOPLEVEL_SINGLE', PoP_TemplateIDUtils::get_template_definition('toplevel-single'));
+define ('GD_TEMPLATE_TOPLEVEL_AUTHOR', PoP_TemplateIDUtils::get_template_definition('toplevel-author'));
+define ('GD_TEMPLATE_TOPLEVEL_404', PoP_TemplateIDUtils::get_template_definition('toplevel-404'));
 
 class PoP_Processor_TopLevelsBase extends PoP_ProcessorBase {
 

@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBMITBUTTON_SUBMIT', PoP_ServerUtils::get_template_definition('submitbutton-submit'));
-define ('GD_TEMPLATE_SUBMITBUTTON_OK', PoP_ServerUtils::get_template_definition('submitbutton-ok'));
-define ('GD_TEMPLATE_SUBMITBUTTON_SEND', PoP_ServerUtils::get_template_definition('submitbutton-send'));
-define ('GD_TEMPLATE_SUBMITBUTTON_SAVE', PoP_ServerUtils::get_template_definition('submitbutton-save'));
-define ('GD_TEMPLATE_SUBMITBUTTON_UPDATE', PoP_ServerUtils::get_template_definition('submitbutton-update'));
-define ('GD_TEMPLATE_SUBMITBUTTON_SEARCH', PoP_ServerUtils::get_template_definition('submitbutton-search'));
+define ('GD_TEMPLATE_SUBMITBUTTON_SUBMIT', PoP_TemplateIDUtils::get_template_definition('submitbutton-submit'));
+define ('GD_TEMPLATE_SUBMITBUTTON_OK', PoP_TemplateIDUtils::get_template_definition('submitbutton-ok'));
+define ('GD_TEMPLATE_SUBMITBUTTON_SEND', PoP_TemplateIDUtils::get_template_definition('submitbutton-send'));
+define ('GD_TEMPLATE_SUBMITBUTTON_SAVE', PoP_TemplateIDUtils::get_template_definition('submitbutton-save'));
+define ('GD_TEMPLATE_SUBMITBUTTON_UPDATE', PoP_TemplateIDUtils::get_template_definition('submitbutton-update'));
+define ('GD_TEMPLATE_SUBMITBUTTON_SEARCH', PoP_TemplateIDUtils::get_template_definition('submitbutton-search'));
 
 class GD_Template_Processor_SubmitButtons extends GD_Template_Processor_SubmitButtonsBase {
 

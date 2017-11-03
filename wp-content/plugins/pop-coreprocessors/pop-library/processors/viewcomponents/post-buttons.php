@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-sharebyemail-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-sharebyemail-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-embed-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-embed-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-api-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-api-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG', PoP_ServerUtils::get_template_definition('viewcomponent-compactpostbutton-volunteer-big'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-volunteer-big'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-volunteer-tiny'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-flag-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-postbutton-flag-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-sharebyemail-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-sharebyemail-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-embed-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-embed-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-api-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-api-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-compactpostbutton-volunteer-big'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-volunteer-big'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-volunteer-tiny'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-flag-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbutton-flag-previewdropdown'));
 
 class GD_Template_Processor_PostViewComponentButtons extends GD_Template_Processor_PostViewComponentButtonsBase {
 

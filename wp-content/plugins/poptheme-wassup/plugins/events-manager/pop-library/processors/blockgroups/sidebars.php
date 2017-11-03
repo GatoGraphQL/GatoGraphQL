@@ -5,24 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_CALENDAR_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-events-calendar-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-events-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_PASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-pastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-myevents-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYPASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-mypastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_EVENTS_CALENDAR_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-events-calendar-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_EVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-events-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_TAG_PASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-tag-pastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-event-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_RELATEDCONTENTSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-event-relatedcontentsidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_HIGHLIGHTSSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-event-highlightssidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_POSTAUTHORSSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-event-postauthorssidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_RECOMMENDEDBYSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-event-recommendedbysidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-pastevent-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-pastevent-relatedcontentsidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-pastevent-highlightssidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-pastevent-postauthorssidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_RECOMMENDEDBYSIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-single-pastevent-recommendedbysidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_CALENDAR_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-events-calendar-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_EVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-events-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_PASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-pastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-myevents-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYPASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-mypastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_EVENTS_CALENDAR_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-events-calendar-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_EVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-events-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TAG_PASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tag-pastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-event-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_RELATEDCONTENTSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-event-relatedcontentsidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_HIGHLIGHTSSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-event-highlightssidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_POSTAUTHORSSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-event-postauthorssidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_EVENT_RECOMMENDEDBYSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-event-recommendedbysidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-pastevent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-pastevent-relatedcontentsidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-pastevent-highlightssidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-pastevent-postauthorssidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SINGLE_PASTEVENT_RECOMMENDEDBYSIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-single-pastevent-recommendedbysidebar'));
 
 class GD_EM_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_SidebarBlockGroupsBase {
 

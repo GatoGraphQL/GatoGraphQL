@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_LOGGEDINUSERDATA', PoP_ServerUtils::get_template_definition('blockgroup-loggedinuserdata'));
+define ('GD_TEMPLATE_BLOCKGROUP_LOGGEDINUSERDATA', PoP_TemplateIDUtils::get_template_definition('blockgroup-loggedinuserdata'));
 
 class GD_Template_Processor_UserAccountBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

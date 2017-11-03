@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_WIDGET_COMMUNITIES', PoP_ServerUtils::get_template_definition('ure-widget-communities'));
-define ('GD_URE_TEMPLATE_WIDGETCOMPACT_COMMUNITIES', PoP_ServerUtils::get_template_definition('ure-widgetcompact-communities'));
+define ('GD_URE_TEMPLATE_WIDGET_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-widget-communities'));
+define ('GD_URE_TEMPLATE_WIDGETCOMPACT_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-widgetcompact-communities'));
 
 class GD_URE_Template_Processor_Widgets extends GD_Template_Processor_WidgetsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('AAL_POPPROCESSORS_TEMPLATE_CONTROLGROUP_NOTIFICATIONLIST', PoP_ServerUtils::get_template_definition('aal-popprocessors-controlgroup-notificationlist'));
+define ('AAL_POPPROCESSORS_TEMPLATE_CONTROLGROUP_NOTIFICATIONLIST', PoP_TemplateIDUtils::get_template_definition('aal-popprocessors-controlgroup-notificationlist'));
 
 class AAL_PoPProcessors_Template_Processor_ControlGroups extends GD_Template_Processor_ControlGroupsBase {
 

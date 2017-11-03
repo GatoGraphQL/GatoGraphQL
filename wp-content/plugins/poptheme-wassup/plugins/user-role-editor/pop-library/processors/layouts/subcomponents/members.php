@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUT_ORGANIZATIONMEMBERS', PoP_ServerUtils::get_template_definition('ure-layout-organizationmembers'));
+define ('GD_URE_TEMPLATE_LAYOUT_ORGANIZATIONMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-layout-organizationmembers'));
 
 class GD_URE_Template_Processor_MembersLayouts extends GD_URE_Template_Processor_MembersLayoutsBase {
 

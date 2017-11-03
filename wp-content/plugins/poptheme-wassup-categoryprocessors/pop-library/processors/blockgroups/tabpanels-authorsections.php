@@ -5,27 +5,27 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS00', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts00'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS01', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts01'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS02', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts02'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS03', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts03'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS04', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts04'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS05', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts05'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS06', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts06'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS07', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts07'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS08', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts08'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS09', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts09'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS00', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts00'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS01', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts01'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS02', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts02'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS03', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts03'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS04', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts04'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS05', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts05'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS06', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts06'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS07', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts07'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS08', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts08'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYPOSTS09', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategoryposts09'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS00', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts00'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS01', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts01'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS02', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts02'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS03', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts03'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS04', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts04'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS05', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts05'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS06', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts06'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS07', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts07'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS08', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts08'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS09', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts09'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS00', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts00'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS01', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts01'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS02', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts02'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS03', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts03'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS04', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts04'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS05', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts05'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS06', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts06'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS07', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts07'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS08', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts08'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORCATEGORYWEBPOSTS09', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorcategorywebposts09'));
 
 class CPP_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Template_Processor_AuthorSectionTabPanelBlockGroupsBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_EVENT_UPDATE', PoP_ServerUtils::get_template_definition('forminner-event-update'));
-define ('GD_TEMPLATE_FORMINNER_EVENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('forminner-eventlink-update'));
-define ('GD_TEMPLATE_FORMINNER_EVENT_CREATE', PoP_ServerUtils::get_template_definition('forminner-event-create'));
-define ('GD_TEMPLATE_FORMINNER_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('forminner-eventlink-create'));
+define ('GD_TEMPLATE_FORMINNER_EVENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-event-update'));
+define ('GD_TEMPLATE_FORMINNER_EVENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-eventlink-update'));
+define ('GD_TEMPLATE_FORMINNER_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-event-create'));
+define ('GD_TEMPLATE_FORMINNER_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-eventlink-create'));
 
 class GD_EM_Template_Processor_CreateUpdatePostFormInners extends Wassup_Template_Processor_CreateUpdatePostFormInnersBase {
 

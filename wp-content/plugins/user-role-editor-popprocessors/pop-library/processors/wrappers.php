@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_WIDGETWRAPPER_COMMUNITIES', PoP_ServerUtils::get_template_definition('ure-widgetwrapper-communities'));
-define ('GD_URE_TEMPLATE_WIDGETCOMPACTWRAPPER_COMMUNITIES', PoP_ServerUtils::get_template_definition('ure-widgetcompactwrapper-communities'));
+define ('GD_URE_TEMPLATE_WIDGETWRAPPER_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-widgetwrapper-communities'));
+define ('GD_URE_TEMPLATE_WIDGETCOMPACTWRAPPER_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-widgetcompactwrapper-communities'));
 
 class GD_URE_Template_Processor_SidebarComponentsWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_TAG', PoP_ServerUtils::get_template_definition('layout-tag'));
-define ('GD_TEMPLATE_LAYOUT_TAGH4', PoP_ServerUtils::get_template_definition('layout-tagh4'));
+define ('GD_TEMPLATE_LAYOUT_TAG', PoP_TemplateIDUtils::get_template_definition('layout-tag'));
+define ('GD_TEMPLATE_LAYOUT_TAGH4', PoP_TemplateIDUtils::get_template_definition('layout-tagh4'));
 
 class GD_Template_Processor_TagLayouts extends GD_Template_Processor_TagLayoutsBase {
 

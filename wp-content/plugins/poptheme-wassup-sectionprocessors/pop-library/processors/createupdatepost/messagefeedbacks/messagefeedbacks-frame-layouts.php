@@ -6,16 +6,16 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-locationpost-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-locationpost-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_STORY_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-story-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_STORY_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-story-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-announcement-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-announcement-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-discussion-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-discussion-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-featured-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-featured-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-locationpost-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-locationpost-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-story-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-story-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-announcement-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-announcement-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-discussion-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-discussion-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-featured-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-featured-update'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

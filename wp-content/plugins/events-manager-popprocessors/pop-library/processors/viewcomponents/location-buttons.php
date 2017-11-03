@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS', PoP_ServerUtils::get_template_definition('em-viewcomponent-button-postlocations'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS', PoP_ServerUtils::get_template_definition('em-viewcomponent-button-userlocations'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS', PoP_ServerUtils::get_template_definition('em-viewcomponent-button-postsidebarlocations'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS', PoP_ServerUtils::get_template_definition('em-viewcomponent-button-usersidebarlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-postlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-userlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-postsidebarlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-usersidebarlocations'));
 
 class GD_Template_Processor_LocationViewComponentButtons extends GD_Template_Processor_LocationViewComponentButtonsBase {
 

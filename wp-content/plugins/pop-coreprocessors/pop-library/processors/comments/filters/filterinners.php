@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERINNER_COMMENTS', PoP_ServerUtils::get_template_definition('filterinner-comments'));
+define ('GD_TEMPLATE_FILTERINNER_COMMENTS', PoP_TemplateIDUtils::get_template_definition('filterinner-comments'));
 
 class GD_Template_Processor_CommentFilterInners extends GD_Template_Processor_FilterInnersBase {
 

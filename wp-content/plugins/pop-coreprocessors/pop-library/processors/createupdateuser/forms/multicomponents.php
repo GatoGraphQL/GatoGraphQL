@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS', PoP_ServerUtils::get_template_definition('multicomponent-emailnotifications'));
-define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL', PoP_ServerUtils::get_template_definition('multicomponent-emailnotifications-general'));
-define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK', PoP_ServerUtils::get_template_definition('multicomponent-emailnotifications-network'));
-define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC', PoP_ServerUtils::get_template_definition('multicomponent-emailnotifications-subscribedtopic'));
-define ('GD_TEMPLATE_MULTICOMPONENT_EMAILDIGESTS', PoP_ServerUtils::get_template_definition('multicomponent-emaildigests'));
+define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('multicomponent-emailnotifications'));
+define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL', PoP_TemplateIDUtils::get_template_definition('multicomponent-emailnotifications-general'));
+define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK', PoP_TemplateIDUtils::get_template_definition('multicomponent-emailnotifications-network'));
+define ('GD_TEMPLATE_MULTICOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC', PoP_TemplateIDUtils::get_template_definition('multicomponent-emailnotifications-subscribedtopic'));
+define ('GD_TEMPLATE_MULTICOMPONENT_EMAILDIGESTS', PoP_TemplateIDUtils::get_template_definition('multicomponent-emaildigests'));
 
 class GD_Template_Processor_UserMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

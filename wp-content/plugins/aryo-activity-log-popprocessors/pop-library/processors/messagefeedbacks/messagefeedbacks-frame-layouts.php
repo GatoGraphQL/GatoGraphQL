@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NOTIFICATIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-notifications'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-notifications'));
 
 class GD_AAL_Template_Processor_CustomListMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

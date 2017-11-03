@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_SETTINGS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-settings'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_SETTINGS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-settings'));
 
 class GD_Template_Processor_SettingsMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

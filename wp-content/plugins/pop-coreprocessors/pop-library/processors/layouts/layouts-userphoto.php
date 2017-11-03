@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTHOR_USERPHOTO', PoP_ServerUtils::get_template_definition('layout-author-userphoto'));
+define ('GD_TEMPLATE_LAYOUT_AUTHOR_USERPHOTO', PoP_TemplateIDUtils::get_template_definition('layout-author-userphoto'));
 
 class GD_Template_Processor_UserPhotoLayouts extends GD_Template_Processor_UserPhotoLayoutsBase {
 

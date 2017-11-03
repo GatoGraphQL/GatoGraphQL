@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_QT_TEMPLATE_FORMCOMPONENTGROUP_LANGUAGE', PoP_ServerUtils::get_template_definition('qt-formcomponentgroup-language'));
+define ('GD_QT_TEMPLATE_FORMCOMPONENTGROUP_LANGUAGE', PoP_TemplateIDUtils::get_template_definition('qt-formcomponentgroup-language'));
 
 class GD_QT_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

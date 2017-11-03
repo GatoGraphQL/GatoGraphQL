@@ -6,7 +6,7 @@ class PoPTheme_Wassup_CategoryProcessors_Initialization {
 		load_plugin_textdomain('poptheme-wassup-categoryprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('ad');
+		PoP_TemplateIDUtils::set_namespace('ad');
 		
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Global Variables and Configuration

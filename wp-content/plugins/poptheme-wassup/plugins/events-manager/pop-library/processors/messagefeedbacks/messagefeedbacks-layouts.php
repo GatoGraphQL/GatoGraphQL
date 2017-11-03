@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EVENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-events'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PASTEVENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-pastevents'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYEVENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-myevents'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mypastevents'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EVENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-events'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_PASTEVENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-pastevents'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-myevents'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mypastevents'));
 
 class GD_EM_Template_Processor_CustomListMessageFeedbackLayouts extends GD_Template_Processor_ListMessageFeedbackLayoutsBase {
 

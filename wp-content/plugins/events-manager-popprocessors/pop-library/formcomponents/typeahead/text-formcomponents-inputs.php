@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADADDLOCATION', PoP_ServerUtils::get_template_definition('formcomponent-text-typeaheadaddlocation'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADADDLOCATION', PoP_TemplateIDUtils::get_template_definition('formcomponent-text-typeaheadaddlocation'));
 
 class GD_EM_Template_Processor_TextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUTUSER_MEMBERPRIVILEGES', PoP_ServerUtils::get_template_definition('ure-layoutuser-memberprivileges-nodesc'));
+define ('GD_URE_TEMPLATE_LAYOUTUSER_MEMBERPRIVILEGES', PoP_TemplateIDUtils::get_template_definition('ure-layoutuser-memberprivileges-nodesc'));
 
 class GD_URE_Template_Processor_MemberPrivilegesLayouts extends GD_URE_Template_Processor_MemberPrivilegesLayoutsBase {
 

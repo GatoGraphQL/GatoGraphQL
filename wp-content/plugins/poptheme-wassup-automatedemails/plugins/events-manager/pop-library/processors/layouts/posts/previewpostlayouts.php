@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_DETAILS', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewpost-event-details'));
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewpost-event-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_LIST', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewpost-event-list'));
-// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_PASTEVENT_DETAILS', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewost-pastevent-details'));
-// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_PASTEVENT_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewost-pastevent-thumbnail'));
-// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_PASTEVENT_LIST', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewost-pastevent-list'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewpost-event-details'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewpost-event-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_LIST', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewpost-event-list'));
+// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_PASTEVENT_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewost-pastevent-details'));
+// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_PASTEVENT_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewost-pastevent-thumbnail'));
+// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_PASTEVENT_LIST', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewost-pastevent-list'));
 
 class PoP_ThemeWassup_EM_AE_Template_Processor_PreviewPostLayouts extends GD_Template_Processor_CustomPreviewPostLayoutsBase {
 

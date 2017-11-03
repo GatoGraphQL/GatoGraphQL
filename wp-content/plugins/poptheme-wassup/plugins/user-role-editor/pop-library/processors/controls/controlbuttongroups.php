@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('controlbuttongroup-invitenewmembers'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-invitenewmembers'));
 
 class GD_URE_Template_Processor_CustomControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

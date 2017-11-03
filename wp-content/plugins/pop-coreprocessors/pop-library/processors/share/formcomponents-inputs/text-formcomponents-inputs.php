@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('copysearchurl'));
-define ('GD_TEMPLATE_FORMCOMPONENT_API', PoP_ServerUtils::get_template_definition('api'));
+define ('GD_TEMPLATE_FORMCOMPONENT_COPYSEARCHURL', PoP_TemplateIDUtils::get_template_definition('copysearchurl'));
+define ('GD_TEMPLATE_FORMCOMPONENT_API', PoP_TemplateIDUtils::get_template_definition('api'));
 
 class GD_Template_Processor_ShareTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR', PoP_ServerUtils::get_template_definition('custombuttoncontrol-calendar'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-pastevents'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-authorpastevents'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-tagpastevents'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('custombuttoncontrol-mypastevents'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENT', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addevent'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENTLINK', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addeventlink'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_CALENDAR', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-calendar'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_PASTEVENTS', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-pastevents'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-authorpastevents'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_TAGPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-tagpastevents'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_MYPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-mypastevents'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENT', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addevent'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDEVENTLINK', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addeventlink'));
 
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP', PoP_ServerUtils::get_template_definition('anchorcontrol-togglemap'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP', PoP_ServerUtils::get_template_definition('anchorcontrol-toggleauthormap'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP', PoP_ServerUtils::get_template_definition('anchorcontrol-toggletagmap'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEMAP', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-togglemap'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLEAUTHORMAP', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-toggleauthormap'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TOGGLETAGMAP', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-toggletagmap'));
 
 class GD_EM_Template_Processor_CustomAnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

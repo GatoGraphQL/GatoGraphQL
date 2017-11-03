@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION', PoP_ServerUtils::get_template_definition('multicomponentwrapper-userhighlightpostinteraction'));
-define ('GD_TEMPLATE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION', PoP_ServerUtils::get_template_definition('multicomponentwrapper-userpostinteraction'));
+define ('GD_TEMPLATE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('multicomponentwrapper-userhighlightpostinteraction'));
+define ('GD_TEMPLATE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('multicomponentwrapper-userpostinteraction'));
 
 class Wassup_Template_Processor_MultipleComponentLayoutWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

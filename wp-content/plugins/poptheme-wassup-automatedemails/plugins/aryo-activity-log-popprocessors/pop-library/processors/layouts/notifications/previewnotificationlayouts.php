@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_DETAILS', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewnotification-details'));
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_LIST', PoP_ServerUtils::get_template_definition('layout-automatedemails-previewnotification-list'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewnotification-details'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_LIST', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-previewnotification-list'));
 
 class GD_Template_Processor_AutomatedEmailsPreviewNotificationLayouts extends GD_Template_Processor_AutomatedEmailsPreviewNotificationLayoutsBase {
 

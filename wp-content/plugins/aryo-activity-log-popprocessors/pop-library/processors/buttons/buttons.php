@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_AAL_TEMPLATE_BUTTON_NOTIFICATIONPREVIEWLINK', PoP_ServerUtils::get_template_definition('aal-button-notificationpreviewlink'));
-define ('GD_AAL_TEMPLATE_BUTTON_USERVIEW', PoP_ServerUtils::get_template_definition('aal-button-userview'));
-define ('GD_AAL_TEMPLATE_BUTTON_NOTIFICATION_MARKASREAD', PoP_ServerUtils::get_template_definition('aal-button-notification-markasread'));
-define ('GD_AAL_TEMPLATE_BUTTON_NOTIFICATION_MARKASUNREAD', PoP_ServerUtils::get_template_definition('aal-button-notification-markasunread'));
+define ('GD_AAL_TEMPLATE_BUTTON_NOTIFICATIONPREVIEWLINK', PoP_TemplateIDUtils::get_template_definition('aal-button-notificationpreviewlink'));
+define ('GD_AAL_TEMPLATE_BUTTON_USERVIEW', PoP_TemplateIDUtils::get_template_definition('aal-button-userview'));
+define ('GD_AAL_TEMPLATE_BUTTON_NOTIFICATION_MARKASREAD', PoP_TemplateIDUtils::get_template_definition('aal-button-notification-markasread'));
+define ('GD_AAL_TEMPLATE_BUTTON_NOTIFICATION_MARKASUNREAD', PoP_TemplateIDUtils::get_template_definition('aal-button-notification-markasunread'));
 
 class AAL_PoPProcessors_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 

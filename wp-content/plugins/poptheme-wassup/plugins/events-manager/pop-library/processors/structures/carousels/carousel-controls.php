@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELCONTROLS_EVENTS', PoP_ServerUtils::get_template_definition('carouselcontrols-events'));
-define ('GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('carouselcontrols-authorevents'));
-define ('GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS', PoP_ServerUtils::get_template_definition('carouselcontrols-tagevents'));
+define ('GD_TEMPLATE_CAROUSELCONTROLS_EVENTS', PoP_TemplateIDUtils::get_template_definition('carouselcontrols-events'));
+define ('GD_TEMPLATE_CAROUSELCONTROLS_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('carouselcontrols-authorevents'));
+define ('GD_TEMPLATE_CAROUSELCONTROLS_TAGEVENTS', PoP_TemplateIDUtils::get_template_definition('carouselcontrols-tagevents'));
 
 class GD_EM_Template_Processor_CustomCarouselControls extends GD_Template_Processor_CarouselControlsBase {
 

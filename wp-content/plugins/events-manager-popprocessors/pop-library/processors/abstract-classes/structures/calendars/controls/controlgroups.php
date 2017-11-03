@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CALENDARCONTROLGROUP_CALENDAR', PoP_ServerUtils::get_template_definition('calendarcontrolgroup-calendar'));
+define ('GD_TEMPLATE_CALENDARCONTROLGROUP_CALENDAR', PoP_TemplateIDUtils::get_template_definition('calendarcontrolgroup-calendar'));
 
 class GD_Template_Processor_CalendarControlGroups extends GD_Template_Processor_ControlGroupsBase {
 

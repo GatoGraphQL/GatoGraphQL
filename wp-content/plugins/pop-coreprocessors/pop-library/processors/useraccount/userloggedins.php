@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_USERACCOUNT_USERLOGGEDINWELCOME', PoP_ServerUtils::get_template_definition('useraccount-userloggedinwelcome'));
-define ('GD_TEMPLATE_USERACCOUNT_USERLOGGEDINPROMPT', PoP_ServerUtils::get_template_definition('useraccount-userloggedinprompt'));
+define ('GD_TEMPLATE_USERACCOUNT_USERLOGGEDINWELCOME', PoP_TemplateIDUtils::get_template_definition('useraccount-userloggedinwelcome'));
+define ('GD_TEMPLATE_USERACCOUNT_USERLOGGEDINPROMPT', PoP_TemplateIDUtils::get_template_definition('useraccount-userloggedinprompt'));
 
 class GD_Template_Processor_UserLoggedIns extends GD_Template_Processor_UserLoggedInsBase {
 

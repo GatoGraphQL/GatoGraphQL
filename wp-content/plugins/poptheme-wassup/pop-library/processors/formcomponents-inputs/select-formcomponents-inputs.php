@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_VOLUNTEERSNEEDED_SELECT', PoP_ServerUtils::get_template_definition('formcomponent-custom-volunteersneeded'));
+define ('GD_TEMPLATE_FORMCOMPONENT_VOLUNTEERSNEEDED_SELECT', PoP_TemplateIDUtils::get_template_definition('formcomponent-custom-volunteersneeded'));
 
 class GD_Custom_Template_Processor_SelectFormComponentInputs extends GD_Template_Processor_SelectFormComponentsBase {
 

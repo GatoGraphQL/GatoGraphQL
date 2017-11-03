@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_EM_WIDGET_POSTLOCATIONSMAP', PoP_ServerUtils::get_template_definition('em-widget-postlocationsmap'));
-define ('GD_TEMPLATE_EM_WIDGET_USERLOCATIONSMAP', PoP_ServerUtils::get_template_definition('em-widget-userlocationsmap'));
-define ('GD_TEMPLATE_EM_WIDGET_DATETIMEDOWNLOADLINKS', PoP_ServerUtils::get_template_definition('em-widget-datetimedownloadlinks'));
-define ('GD_TEMPLATE_EM_WIDGET_DATETIME', PoP_ServerUtils::get_template_definition('em-widget-datetime'));
-define ('GD_TEMPLATE_EM_WIDGETCOMPACT_EVENTINFO', PoP_ServerUtils::get_template_definition('em-widgetcompact-eventinfo'));
-define ('GD_TEMPLATE_EM_WIDGETCOMPACT_PASTEVENTINFO', PoP_ServerUtils::get_template_definition('em-widgetcompact-pasteventinfo'));
+define ('GD_TEMPLATE_EM_WIDGET_POSTLOCATIONSMAP', PoP_TemplateIDUtils::get_template_definition('em-widget-postlocationsmap'));
+define ('GD_TEMPLATE_EM_WIDGET_USERLOCATIONSMAP', PoP_TemplateIDUtils::get_template_definition('em-widget-userlocationsmap'));
+define ('GD_TEMPLATE_EM_WIDGET_DATETIMEDOWNLOADLINKS', PoP_TemplateIDUtils::get_template_definition('em-widget-datetimedownloadlinks'));
+define ('GD_TEMPLATE_EM_WIDGET_DATETIME', PoP_TemplateIDUtils::get_template_definition('em-widget-datetime'));
+define ('GD_TEMPLATE_EM_WIDGETCOMPACT_EVENTINFO', PoP_TemplateIDUtils::get_template_definition('em-widgetcompact-eventinfo'));
+define ('GD_TEMPLATE_EM_WIDGETCOMPACT_PASTEVENTINFO', PoP_TemplateIDUtils::get_template_definition('em-widgetcompact-pasteventinfo'));
 
 class GD_EM_Template_Processor_SidebarComponents extends GD_Template_Processor_WidgetsBase {
 

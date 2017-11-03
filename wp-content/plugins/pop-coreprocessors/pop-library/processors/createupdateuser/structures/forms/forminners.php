@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('forminner-user-changepwd'));
-define ('GD_TEMPLATE_FORMINNER_MYPREFERENCES', PoP_ServerUtils::get_template_definition('forminner-mypreferences'));
+define ('GD_TEMPLATE_FORMINNER_USER_CHANGEPASSWORD', PoP_TemplateIDUtils::get_template_definition('forminner-user-changepwd'));
+define ('GD_TEMPLATE_FORMINNER_MYPREFERENCES', PoP_TemplateIDUtils::get_template_definition('forminner-mypreferences'));
 
 class GD_Template_Processor_UserFormInners extends GD_Template_Processor_FormInnersBase {
 

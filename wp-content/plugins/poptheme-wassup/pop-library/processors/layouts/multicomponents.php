@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT', PoP_ServerUtils::get_template_definition('multicomponent-simpleview-postcontent'));
+define ('GD_TEMPLATE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT', PoP_TemplateIDUtils::get_template_definition('multicomponent-simpleview-postcontent'));
 
 class GD_Template_Processor_MaxHeightLayoutMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

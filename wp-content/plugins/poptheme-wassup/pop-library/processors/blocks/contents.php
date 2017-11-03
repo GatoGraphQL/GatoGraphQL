@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_AUTHOR_CONTENT', PoP_ServerUtils::get_template_definition('block-author-content'));
-define ('GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT', PoP_ServerUtils::get_template_definition('block-author-summarycontent'));
-define ('GD_TEMPLATE_BLOCK_TAG_CONTENT', PoP_ServerUtils::get_template_definition('block-tag-content'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_CONTENT', PoP_ServerUtils::get_template_definition('block-single-content'));
-define ('GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT', PoP_ServerUtils::get_template_definition('block-singleinteraction-content'));
-define ('GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT', PoP_ServerUtils::get_template_definition('block-pageabout-content'));
-define ('GD_TEMPLATE_BLOCK_POSTHEADER', PoP_ServerUtils::get_template_definition('block-postheader'));
-define ('GD_TEMPLATE_BLOCK_USERHEADER', PoP_ServerUtils::get_template_definition('block-userheader'));
+define ('GD_TEMPLATE_BLOCK_AUTHOR_CONTENT', PoP_TemplateIDUtils::get_template_definition('block-author-content'));
+define ('GD_TEMPLATE_BLOCK_AUTHOR_SUMMARYCONTENT', PoP_TemplateIDUtils::get_template_definition('block-author-summarycontent'));
+define ('GD_TEMPLATE_BLOCK_TAG_CONTENT', PoP_TemplateIDUtils::get_template_definition('block-tag-content'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_CONTENT', PoP_TemplateIDUtils::get_template_definition('block-single-content'));
+define ('GD_TEMPLATE_BLOCK_SINGLEINTERACTION_CONTENT', PoP_TemplateIDUtils::get_template_definition('block-singleinteraction-content'));
+define ('GD_TEMPLATE_BLOCK_PAGEABOUT_CONTENT', PoP_TemplateIDUtils::get_template_definition('block-pageabout-content'));
+define ('GD_TEMPLATE_BLOCK_POSTHEADER', PoP_TemplateIDUtils::get_template_definition('block-postheader'));
+define ('GD_TEMPLATE_BLOCK_USERHEADER', PoP_TemplateIDUtils::get_template_definition('block-userheader'));
 
 class GD_Template_Processor_CustomContentBlocks extends GD_Template_Processor_BlocksBase {
 

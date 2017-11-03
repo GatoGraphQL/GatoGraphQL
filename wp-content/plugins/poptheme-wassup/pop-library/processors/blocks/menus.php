@@ -5,24 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_MENU_SIDEBAR_ABOUT', PoP_ServerUtils::get_template_definition('block-menu-sidebar-about'));
+define ('GD_TEMPLATE_BLOCK_MENU_SIDEBAR_ABOUT', PoP_TemplateIDUtils::get_template_definition('block-menu-sidebar-about'));
 
-define ('GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERLOGGEDIN', PoP_ServerUtils::get_template_definition('block-menu-top-userloggedin'));
-define ('GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERNOTLOGGEDIN', PoP_ServerUtils::get_template_definition('block-menu-top-usernotloggedin'));
-define ('GD_TEMPLATE_BLOCK_MENU_TOPNAV_ABOUT', PoP_ServerUtils::get_template_definition('block-menu-top-about'));
-define ('GD_TEMPLATE_BLOCK_MENU_TOP_ADDNEW', PoP_ServerUtils::get_template_definition('block-menu-top-addnew'));
+define ('GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERLOGGEDIN', PoP_TemplateIDUtils::get_template_definition('block-menu-top-userloggedin'));
+define ('GD_TEMPLATE_BLOCK_MENU_TOPNAV_USERNOTLOGGEDIN', PoP_TemplateIDUtils::get_template_definition('block-menu-top-usernotloggedin'));
+define ('GD_TEMPLATE_BLOCK_MENU_TOPNAV_ABOUT', PoP_TemplateIDUtils::get_template_definition('block-menu-top-about'));
+define ('GD_TEMPLATE_BLOCK_MENU_TOP_ADDNEW', PoP_TemplateIDUtils::get_template_definition('block-menu-top-addnew'));
 
-define ('GD_TEMPLATE_BLOCK_MENU_HOME_USERNOTLOGGEDIN', PoP_ServerUtils::get_template_definition('block-menu-home-usernotloggedin'));
+define ('GD_TEMPLATE_BLOCK_MENU_HOME_USERNOTLOGGEDIN', PoP_TemplateIDUtils::get_template_definition('block-menu-home-usernotloggedin'));
 
-define ('GD_TEMPLATE_BLOCK_MENU_SIDE_ADDNEW', PoP_ServerUtils::get_template_definition('block-menu-side-addnew'));
-define ('GD_TEMPLATE_BLOCK_MENU_SIDE_SECTIONS', PoP_ServerUtils::get_template_definition('block-menu-side-sections'));
-define ('GD_TEMPLATE_BLOCK_MENU_SIDE_SECTIONS_MULTITARGET', PoP_ServerUtils::get_template_definition('block-menu-side-sections-multitarget'));
-define ('GD_TEMPLATE_BLOCK_MENU_SIDE_MYSECTIONS', PoP_ServerUtils::get_template_definition('block-menu-side-mysections'));
+define ('GD_TEMPLATE_BLOCK_MENU_SIDE_ADDNEW', PoP_TemplateIDUtils::get_template_definition('block-menu-side-addnew'));
+define ('GD_TEMPLATE_BLOCK_MENU_SIDE_SECTIONS', PoP_TemplateIDUtils::get_template_definition('block-menu-side-sections'));
+define ('GD_TEMPLATE_BLOCK_MENU_SIDE_SECTIONS_MULTITARGET', PoP_TemplateIDUtils::get_template_definition('block-menu-side-sections-multitarget'));
+define ('GD_TEMPLATE_BLOCK_MENU_SIDE_MYSECTIONS', PoP_TemplateIDUtils::get_template_definition('block-menu-side-mysections'));
 
-define ('GD_TEMPLATE_BLOCK_MENU_BODY_ADDCONTENT', PoP_ServerUtils::get_template_definition('block-menu-body-addcontent'));
-define ('GD_TEMPLATE_BLOCK_MENU_BODY_SECTIONS', PoP_ServerUtils::get_template_definition('block-menu-body-sections'));
-define ('GD_TEMPLATE_BLOCK_MENU_BODY_MYSECTIONS', PoP_ServerUtils::get_template_definition('block-menu-body-mysections'));
-define ('GD_TEMPLATE_BLOCK_MENU_BODY_ABOUT', PoP_ServerUtils::get_template_definition('block-menu-body-about'));
+define ('GD_TEMPLATE_BLOCK_MENU_BODY_ADDCONTENT', PoP_TemplateIDUtils::get_template_definition('block-menu-body-addcontent'));
+define ('GD_TEMPLATE_BLOCK_MENU_BODY_SECTIONS', PoP_TemplateIDUtils::get_template_definition('block-menu-body-sections'));
+define ('GD_TEMPLATE_BLOCK_MENU_BODY_MYSECTIONS', PoP_TemplateIDUtils::get_template_definition('block-menu-body-mysections'));
+define ('GD_TEMPLATE_BLOCK_MENU_BODY_ABOUT', PoP_TemplateIDUtils::get_template_definition('block-menu-body-about'));
 
 class GD_Template_Processor_CustomMenuBlocks extends GD_Template_Processor_MenuBlocksBase {
 

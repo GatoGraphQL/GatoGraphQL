@@ -6,7 +6,7 @@ class GADWP_PoP_Initialization {
 		load_plugin_textdomain('gadwp-pop', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('ax');
+		PoP_TemplateIDUtils::set_namespace('ax');
 
 		if (!is_admin()) {
 

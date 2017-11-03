@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-event-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-eventlink-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-event-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-eventlink-rightside'));
 
 class GD_EM_Custom_Template_Processor_FormMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

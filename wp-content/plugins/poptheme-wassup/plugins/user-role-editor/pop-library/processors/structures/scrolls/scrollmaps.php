@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_COMMUNITIES_MAP', PoP_ServerUtils::get_template_definition('scroll-communities-map'));
-define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_MAP', PoP_ServerUtils::get_template_definition('scroll-organizations-map'));
-define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_MAP', PoP_ServerUtils::get_template_definition('scroll-individuals-map'));
-define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_MAP', PoP_ServerUtils::get_template_definition('scroll-authormembers-map'));
+define ('GD_TEMPLATE_SCROLL_COMMUNITIES_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-communities-map'));
+define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-organizations-map'));
+define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-individuals-map'));
+define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-authormembers-map'));
 
 class GD_URE_Template_Processor_CustomScrollMaps extends GD_Template_Processor_ScrollMapsBase {
 

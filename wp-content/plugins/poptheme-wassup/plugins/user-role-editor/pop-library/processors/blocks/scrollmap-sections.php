@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-communities-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-organizations-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-individuals-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_COMMUNITIES_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-communities-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_ORGANIZATIONS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-organizations-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_INDIVIDUALS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-individuals-scrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authormembers-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHORMEMBERS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authormembers-scrollmap'));
 
 class GD_URE_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Template_Processor_ScrollMapBlocksBase {
 	

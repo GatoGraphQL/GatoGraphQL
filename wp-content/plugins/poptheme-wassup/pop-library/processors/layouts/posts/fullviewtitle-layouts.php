@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_FULLVIEWTITLE', PoP_ServerUtils::get_template_definition('layout-fullviewtitle'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOSTTITLE', PoP_ServerUtils::get_template_definition('layout-previewposttitle'));
-define ('GD_TEMPLATE_LAYOUT_POSTTITLE', PoP_ServerUtils::get_template_definition('layout-posttitle'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEWTITLE', PoP_TemplateIDUtils::get_template_definition('layout-fullviewtitle'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOSTTITLE', PoP_TemplateIDUtils::get_template_definition('layout-previewposttitle'));
+define ('GD_TEMPLATE_LAYOUT_POSTTITLE', PoP_TemplateIDUtils::get_template_definition('layout-posttitle'));
 
 class GD_Template_Processor_CustomFullViewTitleLayouts extends GD_Template_Processor_FullViewTitleLayoutsBase {
 

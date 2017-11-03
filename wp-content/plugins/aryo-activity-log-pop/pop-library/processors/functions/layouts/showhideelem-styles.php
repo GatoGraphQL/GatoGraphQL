@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasread-showelemstyles'));
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasread-hideelemstyles'));
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasunread-showelemstyles'));
-define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES', PoP_ServerUtils::get_template_definition('layout-marknotificationasunread-hideelemstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasread-showelemstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasread-hideelemstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasunread-showelemstyles'));
+define ('GD_TEMPLATE_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES', PoP_TemplateIDUtils::get_template_definition('layout-marknotificationasunread-hideelemstyles'));
 
 class GD_AAL_Template_Processor_ShowHideElemStyleLayouts extends GD_Template_Processor_StylesLayoutsBase {
 

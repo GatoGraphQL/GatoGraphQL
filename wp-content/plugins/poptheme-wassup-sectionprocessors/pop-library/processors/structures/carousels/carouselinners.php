@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELINNER_BLOG', PoP_ServerUtils::get_template_definition('carouselinner-blog'));
-define ('GD_TEMPLATE_CAROUSELINNER_FEATURED', PoP_ServerUtils::get_template_definition('carouselinner-featured'));
+define ('GD_TEMPLATE_CAROUSELINNER_BLOG', PoP_TemplateIDUtils::get_template_definition('carouselinner-blog'));
+define ('GD_TEMPLATE_CAROUSELINNER_FEATURED', PoP_TemplateIDUtils::get_template_definition('carouselinner-featured'));
 
 class GD_Custom_Template_Processor_CarouselInners extends GD_Template_Processor_CarouselInnersBase {
 

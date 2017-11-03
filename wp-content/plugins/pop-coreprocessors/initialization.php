@@ -6,7 +6,7 @@ class PoP_CoreProcessors_Initialization {
 		load_plugin_textdomain('pop-coreprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('a5');
+		PoP_TemplateIDUtils::set_namespace('a5');
 
 		if (!is_admin()) {
 

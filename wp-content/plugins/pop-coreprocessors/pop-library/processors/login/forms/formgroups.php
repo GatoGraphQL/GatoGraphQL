@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOGIN_USERNAME', PoP_ServerUtils::get_template_definition('formcomponentgroup-log'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOGIN_PWD', PoP_ServerUtils::get_template_definition('formcomponentgroup-pwd'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWD_USERNAME', PoP_ServerUtils::get_template_definition('formcomponentgroup-lostpwd-username'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWDRESET_CODE', PoP_ServerUtils::get_template_definition('formcomponentgroup-lostpwdreset-code'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWDRESET_NEWPASSWORD', PoP_ServerUtils::get_template_definition('formcomponentgroup-lostpwdreset-newpassword'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWDRESET_PASSWORDREPEAT', PoP_ServerUtils::get_template_definition('formcomponentgroup-lostpwdreset-passwordrepeat'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOGIN_USERNAME', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-log'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOGIN_PWD', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-pwd'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWD_USERNAME', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-lostpwd-username'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWDRESET_CODE', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-lostpwdreset-code'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWDRESET_NEWPASSWORD', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-lostpwdreset-newpassword'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_LOSTPWDRESET_PASSWORDREPEAT', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-lostpwdreset-passwordrepeat'));
 
 class GD_Template_Processor_LoginFormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYCOMMUNITIES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mycommunities'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-invitemembers'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('layout-messagefeedback-editmembership'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYMEMBERS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mymembers'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYCOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mycommunities'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-invitemembers'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-editmembership'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mymembers'));
 
 class GD_URE_Template_Processor_ProfileMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

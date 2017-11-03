@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_MARKALLNOTIFICATIONSASREAD', PoP_ServerUtils::get_template_definition('action-markallnotificationsasread'));
-define ('GD_TEMPLATE_ACTION_MARKNOTIFICATIONASREAD', PoP_ServerUtils::get_template_definition('action-marknotificationasread'));
-define ('GD_TEMPLATE_ACTION_MARKNOTIFICATIONASUNREAD', PoP_ServerUtils::get_template_definition('action-marknotificationasunread'));
+define ('GD_TEMPLATE_ACTION_MARKALLNOTIFICATIONSASREAD', PoP_TemplateIDUtils::get_template_definition('action-markallnotificationsasread'));
+define ('GD_TEMPLATE_ACTION_MARKNOTIFICATIONASREAD', PoP_TemplateIDUtils::get_template_definition('action-marknotificationasread'));
+define ('GD_TEMPLATE_ACTION_MARKNOTIFICATIONASUNREAD', PoP_TemplateIDUtils::get_template_definition('action-marknotificationasunread'));
 
 class GD_AAL_Template_Processor_FunctionsActions extends GD_Template_Processor_ActionsBase {
 

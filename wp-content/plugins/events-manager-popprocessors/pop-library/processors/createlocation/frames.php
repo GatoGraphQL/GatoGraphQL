@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FRAME_CREATELOCATIONMAP', PoP_ServerUtils::get_template_definition('em-frame-createlocationmap'));
+define ('GD_TEMPLATE_FRAME_CREATELOCATIONMAP', PoP_TemplateIDUtils::get_template_definition('em-frame-createlocationmap'));
 
 class GD_EM_Template_Processor_CreateLocationFrames extends GD_EM_Template_Processor_CreateLocationFramesBase {
 

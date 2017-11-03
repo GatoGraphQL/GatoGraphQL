@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_USERAVATAR_UPDATE', PoP_ServerUtils::get_template_definition('forminner-useravatar-update'));
+define ('GD_TEMPLATE_FORMINNER_USERAVATAR_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-useravatar-update'));
 
 class PoP_UserAvatar_Template_Processor_UserFormInners extends GD_Template_Processor_FormInnersBase {
 

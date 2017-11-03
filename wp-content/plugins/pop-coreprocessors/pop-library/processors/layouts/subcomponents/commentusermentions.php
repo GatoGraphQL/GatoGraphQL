@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_COMMENTUSERMENTIONS', PoP_ServerUtils::get_template_definition('layout-commentusermentions'));
+define ('GD_TEMPLATE_LAYOUT_COMMENTUSERMENTIONS', PoP_TemplateIDUtils::get_template_definition('layout-commentusermentions'));
 
 class GD_Template_Processor_CommentUserMentionsLayouts extends GD_Template_Processor_CommentUserMentionsLayoutsBase {
 

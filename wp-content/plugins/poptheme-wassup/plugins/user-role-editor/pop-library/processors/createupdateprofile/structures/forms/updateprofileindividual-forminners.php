@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_FORMINNER_PROFILEINDIVIDUAL_UPDATE', PoP_ServerUtils::get_template_definition('custom-forminner-profileindividual-update'));
+define ('GD_CUSTOM_TEMPLATE_FORMINNER_PROFILEINDIVIDUAL_UPDATE', PoP_TemplateIDUtils::get_template_definition('custom-forminner-profileindividual-update'));
 
 class GD_URE_Custom_Template_Processor_UpdateProfileIndividualFormInners extends GD_URE_Template_Processor_UpdateProfileIndividualFormInnersBase {
 

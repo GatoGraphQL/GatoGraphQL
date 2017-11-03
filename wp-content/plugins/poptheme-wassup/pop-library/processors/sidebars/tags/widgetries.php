@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGETCOMPACT_TAGINFO', PoP_ServerUtils::get_template_definition('widgetcompact-taginfo'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_TAGINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-taginfo'));
 
 class GD_Custom_Template_Processor_TagWidgets extends GD_Template_Processor_WidgetsBase {
 

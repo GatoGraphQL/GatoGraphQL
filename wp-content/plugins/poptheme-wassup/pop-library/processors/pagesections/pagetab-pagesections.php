@@ -17,19 +17,19 @@ define ('GD_TEMPLATEID_PAGESECTIONSETTINGSID_PAGETABS', 'pagetabs');
 /**---------------------------------------------------------------------------------------------------------------
  * All PageSections
  * ---------------------------------------------------------------------------------------------------------------*/
-define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_HOME', PoP_ServerUtils::get_template_definition('addontabs-home', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_TAG', PoP_ServerUtils::get_template_definition('addontabs-tag', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_PAGE', PoP_ServerUtils::get_template_definition('addontabs-page', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_SINGLE', PoP_ServerUtils::get_template_definition('addontabs-single', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_AUTHOR', PoP_ServerUtils::get_template_definition('addontabs-author', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_404', PoP_ServerUtils::get_template_definition('addontabs-404', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_HOME', PoP_TemplateIDUtils::get_template_definition('addontabs-home', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_TAG', PoP_TemplateIDUtils::get_template_definition('addontabs-tag', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_PAGE', PoP_TemplateIDUtils::get_template_definition('addontabs-page', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_SINGLE', PoP_TemplateIDUtils::get_template_definition('addontabs-single', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_AUTHOR', PoP_TemplateIDUtils::get_template_definition('addontabs-author', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONTABS_404', PoP_TemplateIDUtils::get_template_definition('addontabs-404', true));
 
-define ('GD_TEMPLATE_PAGESECTION_PAGETABS_HOME', PoP_ServerUtils::get_template_definition('pagetabs-home', true));
-define ('GD_TEMPLATE_PAGESECTION_PAGETABS_TAG', PoP_ServerUtils::get_template_definition('pagetabs-tag', true));
-define ('GD_TEMPLATE_PAGESECTION_PAGETABS_PAGE', PoP_ServerUtils::get_template_definition('pagetabs-page', true));
-define ('GD_TEMPLATE_PAGESECTION_PAGETABS_SINGLE', PoP_ServerUtils::get_template_definition('pagetabs-single', true));
-define ('GD_TEMPLATE_PAGESECTION_PAGETABS_AUTHOR', PoP_ServerUtils::get_template_definition('pagetabs-author', true));
-define ('GD_TEMPLATE_PAGESECTION_PAGETABS_404', PoP_ServerUtils::get_template_definition('pagetabs-404', true));
+define ('GD_TEMPLATE_PAGESECTION_PAGETABS_HOME', PoP_TemplateIDUtils::get_template_definition('pagetabs-home', true));
+define ('GD_TEMPLATE_PAGESECTION_PAGETABS_TAG', PoP_TemplateIDUtils::get_template_definition('pagetabs-tag', true));
+define ('GD_TEMPLATE_PAGESECTION_PAGETABS_PAGE', PoP_TemplateIDUtils::get_template_definition('pagetabs-page', true));
+define ('GD_TEMPLATE_PAGESECTION_PAGETABS_SINGLE', PoP_TemplateIDUtils::get_template_definition('pagetabs-single', true));
+define ('GD_TEMPLATE_PAGESECTION_PAGETABS_AUTHOR', PoP_TemplateIDUtils::get_template_definition('pagetabs-author', true));
+define ('GD_TEMPLATE_PAGESECTION_PAGETABS_404', PoP_TemplateIDUtils::get_template_definition('pagetabs-404', true));
 
 class GD_Template_Processor_CustomPageTabPageSections extends GD_Template_Processor_PageTabPageSectionsBase {
 

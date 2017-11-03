@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION', PoP_ServerUtils::get_template_definition('formcomponent-inputgroup-typeaheadaddlocation'));
+define ('GD_TEMPLATE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION', PoP_TemplateIDUtils::get_template_definition('formcomponent-inputgroup-typeaheadaddlocation'));
 
 class GD_EM_Template_Processor_InputGroupFormComponentInputs extends GD_Template_Processor_InputGroupFormComponentsBase {
 

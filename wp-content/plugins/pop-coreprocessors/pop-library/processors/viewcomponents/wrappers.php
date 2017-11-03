@@ -5,13 +5,13 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG', PoP_ServerUtils::get_template_definition('viewcomponent-postcompactbuttonwrapper-volunteer-big'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG', PoP_ServerUtils::get_template_definition('viewcomponent-postbuttonwrapper-volunteer-big'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY', PoP_ServerUtils::get_template_definition('viewcomponent-postbuttonwrapper-volunteer-tiny'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT', PoP_ServerUtils::get_template_definition('viewcomponent-postbuttonwrapper-addcomment'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG', PoP_ServerUtils::get_template_definition('viewcomponent-postbuttonwrapper-addcomment-big'));
-define ('GD_TEMPLATE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_ServerUtils::get_template_definition('layoutwrapper-postconclusionsidebar-horizontal'));
-define ('GD_TEMPLATE_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_ServerUtils::get_template_definition('layoutwrapper-subjugatedpostconclusionsidebar-horizontal'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postcompactbuttonwrapper-volunteer-big'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbuttonwrapper-volunteer-big'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbuttonwrapper-volunteer-tiny'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbuttonwrapper-addcomment'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-postbuttonwrapper-addcomment-big'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-postconclusionsidebar-horizontal'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-subjugatedpostconclusionsidebar-horizontal'));
 
 // define ('GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_USER_SENDMESSAGE_BIG', 'viewcomponent-usercompactbuttonwrapper-sendmessage-big');
 

@@ -5,21 +5,21 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_POPOVER', PoP_ServerUtils::get_template_definition('layout-multipleuser-popover'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_POSTAUTHOR', PoP_ServerUtils::get_template_definition('layout-multipleuser-postauthor'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR', PoP_ServerUtils::get_template_definition('layout-multipleuser-contextualpostauthor'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_POPOVER', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-popover'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_POSTAUTHOR', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-postauthor'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-contextualpostauthor'));
 
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-multipleuser-navigator'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_ADDONS', PoP_ServerUtils::get_template_definition('layout-multipleuser-addons'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_DETAILS', PoP_ServerUtils::get_template_definition('layout-multipleuser-details'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-multipleuser-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_LIST', PoP_ServerUtils::get_template_definition('layout-multipleuser-list'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_FULLUSER', PoP_ServerUtils::get_template_definition('layout-multipleuser-fulluser'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_DETAILS', PoP_ServerUtils::get_template_definition('layout-authormultipleuser-details'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-authormultipleuser-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_LIST', PoP_ServerUtils::get_template_definition('layout-authormultipleuser-list'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_FULLUSER', PoP_ServerUtils::get_template_definition('layout-authormultipleuser-fulluser'));
-define ('GD_TEMPLATE_LAYOUT_SINGLEMULTIPLEUSER_FULLUSER', PoP_ServerUtils::get_template_definition('layout-singlemultipleuser-fulluser'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-navigator'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-addons'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-details'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_LIST', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-list'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_FULLUSER', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-fulluser'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-authormultipleuser-details'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-authormultipleuser-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_LIST', PoP_TemplateIDUtils::get_template_definition('layout-authormultipleuser-list'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_FULLUSER', PoP_TemplateIDUtils::get_template_definition('layout-authormultipleuser-fulluser'));
+define ('GD_TEMPLATE_LAYOUT_SINGLEMULTIPLEUSER_FULLUSER', PoP_TemplateIDUtils::get_template_definition('layout-singlemultipleuser-fulluser'));
 
 class GD_Template_Processor_MultipleUserLayouts extends GD_Template_Processor_MultipleUserLayoutsBase {
 

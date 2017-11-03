@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN', PoP_ServerUtils::get_template_definition('em-quicklinkbuttongroup-downloadlinksdropdown'));
-define ('GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKS', PoP_ServerUtils::get_template_definition('em-quicklinkbuttongroup-downloadlinks'));
+define ('GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN', PoP_TemplateIDUtils::get_template_definition('em-quicklinkbuttongroup-downloadlinksdropdown'));
+define ('GD_EM_TEMPLATE_QUICKLINKBUTTONGROUP_DOWNLOADLINKS', PoP_TemplateIDUtils::get_template_definition('em-quicklinkbuttongroup-downloadlinks'));
 
 class GD_EM_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

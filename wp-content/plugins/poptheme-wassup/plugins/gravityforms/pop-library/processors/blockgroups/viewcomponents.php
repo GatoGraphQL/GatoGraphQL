@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL', PoP_ServerUtils::get_template_definition('blockgroup-sharebyemail-modal'));
+define ('GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-sharebyemail-modal'));
 
 class GD_Template_Processor_GFModalBlockGroups extends GD_Template_Processor_FormModalViewComponentBlockGroupsBase {
 

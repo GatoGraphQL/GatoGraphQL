@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYCOMMUNITIES', PoP_ServerUtils::get_template_definition('messagefeedback-mycommunities'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('messagefeedback-invitemembers'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('messagefeedback-editmembership'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYMEMBERS', PoP_ServerUtils::get_template_definition('messagefeedback-mymembers'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYCOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('messagefeedback-mycommunities'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-invitemembers'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('messagefeedback-editmembership'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-mymembers'));
 
 class GD_URE_Template_Processor_ProfileMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_LOGIN', PoP_ServerUtils::get_template_definition('forminner-login'));
-define ('GD_TEMPLATE_FORMINNER_LOSTPWD', PoP_ServerUtils::get_template_definition('forminner-lostpwd'));
-define ('GD_TEMPLATE_FORMINNER_LOSTPWDRESET', PoP_ServerUtils::get_template_definition('forminner-lostpwdreset'));
-define ('GD_TEMPLATE_FORMINNER_LOGOUT', PoP_ServerUtils::get_template_definition('forminner-logout'));
+define ('GD_TEMPLATE_FORMINNER_LOGIN', PoP_TemplateIDUtils::get_template_definition('forminner-login'));
+define ('GD_TEMPLATE_FORMINNER_LOSTPWD', PoP_TemplateIDUtils::get_template_definition('forminner-lostpwd'));
+define ('GD_TEMPLATE_FORMINNER_LOSTPWDRESET', PoP_TemplateIDUtils::get_template_definition('forminner-lostpwdreset'));
+define ('GD_TEMPLATE_FORMINNER_LOGOUT', PoP_TemplateIDUtils::get_template_definition('forminner-logout'));
 
 class GD_Template_Processor_LoginFormInners extends GD_Template_Processor_FormInnersBase {
 

@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCRIPT_SINGLECOMMENT', PoP_ServerUtils::get_template_definition('script-singlecomment'));
-define ('GD_TEMPLATE_SCRIPT_COMMENTS', PoP_ServerUtils::get_template_definition('script-comments'));
-define ('GD_TEMPLATE_SCRIPT_COMMENTSEMPTY', PoP_ServerUtils::get_template_definition('script-commentsempty'));
-define ('GD_TEMPLATE_SCRIPT_REFERENCES', PoP_ServerUtils::get_template_definition('script-references'));
-define ('GD_TEMPLATE_SCRIPT_REFERENCESEMPTY', PoP_ServerUtils::get_template_definition('script-referencesempty'));
+define ('GD_TEMPLATE_SCRIPT_SINGLECOMMENT', PoP_TemplateIDUtils::get_template_definition('script-singlecomment'));
+define ('GD_TEMPLATE_SCRIPT_COMMENTS', PoP_TemplateIDUtils::get_template_definition('script-comments'));
+define ('GD_TEMPLATE_SCRIPT_COMMENTSEMPTY', PoP_TemplateIDUtils::get_template_definition('script-commentsempty'));
+define ('GD_TEMPLATE_SCRIPT_REFERENCES', PoP_TemplateIDUtils::get_template_definition('script-references'));
+define ('GD_TEMPLATE_SCRIPT_REFERENCESEMPTY', PoP_TemplateIDUtils::get_template_definition('script-referencesempty'));
 
 class GD_Template_Processor_ScriptsLayouts extends GD_Template_Processor_AppendScriptsLayoutsBase {
 

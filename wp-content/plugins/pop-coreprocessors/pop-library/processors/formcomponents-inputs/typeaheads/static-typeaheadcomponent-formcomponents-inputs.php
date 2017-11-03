@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_STATICSEARCH', PoP_ServerUtils::get_template_definition('formcomponent-typeaheadcomponent-staticsearch'));
+define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_STATICSEARCH', PoP_TemplateIDUtils::get_template_definition('formcomponent-typeaheadcomponent-staticsearch'));
 
 class GD_Template_Processor_StaticTypeaheadComponentFormComponentInputs extends GD_Template_Processor_StaticTypeaheadComponentFormComponentsBase {
 

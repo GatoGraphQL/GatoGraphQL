@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_UPDATEDATA', PoP_ServerUtils::get_template_definition('contentinner-dataquery-allcontent-updatedata'));
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLUSERS_UPDATEDATA', PoP_ServerUtils::get_template_definition('contentinner-dataquery-allusers-updatedata'));
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_COMMENTS_UPDATEDATA', PoP_ServerUtils::get_template_definition('contentinner-dataquery-comments-updatedata'));
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_TAGS_UPDATEDATA', PoP_ServerUtils::get_template_definition('contentinner-dataquery-tags-updatedata'));
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('contentinner-dataquery-allcontent-requestlayouts'));
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLUSERS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('contentinner-dataquery-allusers-requestlayouts'));
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_COMMENTS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('contentinner-dataquery-comments-requestlayouts'));
-define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_TAGS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('contentinner-dataquery-tags-requestlayouts'));
-define ('GD_TEMPLATE_CONTENTINNER_PAGECONTENT', PoP_ServerUtils::get_template_definition('contentinner-getpop-pagecontent'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-allcontent-updatedata'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLUSERS_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-allusers-updatedata'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_COMMENTS_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-comments-updatedata'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_TAGS_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-tags-updatedata'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-allcontent-requestlayouts'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLUSERS_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-allusers-requestlayouts'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_COMMENTS_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-comments-requestlayouts'));
+define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_TAGS_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('contentinner-dataquery-tags-requestlayouts'));
+define ('GD_TEMPLATE_CONTENTINNER_PAGECONTENT', PoP_TemplateIDUtils::get_template_definition('contentinner-getpop-pagecontent'));
 
 // define ('GD_TEMPLATE_CONTENTINNER_DATAQUERY_ALLCONTENT_COMMENTS', 'contentinner-dataquery-allcontent-comments');
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_USERPOSTINTERACTION', PoP_ServerUtils::get_template_definition('layout-userpostinteraction'));
-define ('GD_TEMPLATE_LAYOUT_USERHIGHLIGHTPOSTINTERACTION', PoP_ServerUtils::get_template_definition('layout-userhighlightpostinteraction'));
+define ('GD_TEMPLATE_LAYOUT_USERPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('layout-userpostinteraction'));
+define ('GD_TEMPLATE_LAYOUT_USERHIGHLIGHTPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('layout-userhighlightpostinteraction'));
 
 class Wassup_Template_Processor_UserPostInteractionLayouts extends GD_Template_Processor_UserPostInteractionLayoutsBase {
 

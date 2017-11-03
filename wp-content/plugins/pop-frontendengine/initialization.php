@@ -17,7 +17,7 @@ class PoPFrontend_Initialization {
 		load_plugin_textdomain('pop-frontendengine', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('a1');
+		PoP_TemplateIDUtils::set_namespace('a1');
 
 		// If it is a search engine, there's no need to output the scripts or initialize popManager
 		if (!is_admin()/* && !GD_TemplateManager_Utils::is_search_engine()*/) {

@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLE_MYCONTENT', PoP_ServerUtils::get_template_definition('table-mycontent'));
-define ('GD_TEMPLATE_TABLE_MYLINKS', PoP_ServerUtils::get_template_definition('table-mylinks'));
-define ('GD_TEMPLATE_TABLE_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('table-myhighlights'));
-define ('GD_TEMPLATE_TABLE_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('table-mywebposts'));
-// define ('GD_TEMPLATE_TABLE_MYRESOURCES', PoP_ServerUtils::get_template_definition('table-myresources'));
+define ('GD_TEMPLATE_TABLE_MYCONTENT', PoP_TemplateIDUtils::get_template_definition('table-mycontent'));
+define ('GD_TEMPLATE_TABLE_MYLINKS', PoP_TemplateIDUtils::get_template_definition('table-mylinks'));
+define ('GD_TEMPLATE_TABLE_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('table-myhighlights'));
+define ('GD_TEMPLATE_TABLE_MYWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('table-mywebposts'));
+// define ('GD_TEMPLATE_TABLE_MYRESOURCES', PoP_TemplateIDUtils::get_template_definition('table-myresources'));
 
 class GD_Template_Processor_Tables extends GD_Template_Processor_TablesBase {
 

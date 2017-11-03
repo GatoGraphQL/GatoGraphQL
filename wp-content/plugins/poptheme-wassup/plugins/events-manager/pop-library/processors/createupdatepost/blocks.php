@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_EVENT_UPDATE', PoP_ServerUtils::get_template_definition('block-event-update'));
-define ('GD_TEMPLATE_BLOCK_EVENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('block-eventlink-update'));
-define ('GD_TEMPLATE_BLOCK_EVENT_CREATE', PoP_ServerUtils::get_template_definition('block-event-create'));
-define ('GD_TEMPLATE_BLOCK_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-eventlink-create'));
+define ('GD_TEMPLATE_BLOCK_EVENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-event-update'));
+define ('GD_TEMPLATE_BLOCK_EVENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-eventlink-update'));
+define ('GD_TEMPLATE_BLOCK_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-event-create'));
+define ('GD_TEMPLATE_BLOCK_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-eventlink-create'));
 
 class GD_EM_Template_Processor_CreateUpdatePostBlocks extends GD_Template_Processor_BlocksBase {
 

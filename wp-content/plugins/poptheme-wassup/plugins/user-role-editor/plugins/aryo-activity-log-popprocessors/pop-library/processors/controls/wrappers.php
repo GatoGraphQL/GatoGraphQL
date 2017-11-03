@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUPWRAPPER_EDITUSERMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-aal-quicklinkbuttongroupwrapper-editusermembership'));
-define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUPWRAPPER_VIEWALLMEMBERS', PoP_ServerUtils::get_template_definition('ure-aal-quicklinkbuttongroupwrapper-viewallmembers'));
+define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUPWRAPPER_EDITUSERMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-aal-quicklinkbuttongroupwrapper-editusermembership'));
+define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUPWRAPPER_VIEWALLMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-aal-quicklinkbuttongroupwrapper-viewallmembers'));
 
 class GD_URE_AAL_Template_Processor_QuicklinkButtonGroupWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

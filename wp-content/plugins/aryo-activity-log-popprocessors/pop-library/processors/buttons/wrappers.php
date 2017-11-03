@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_AAL_TEMPLATE_BUTTONWRAPPER_NOTIFICATION_MARKASREAD', PoP_ServerUtils::get_template_definition('aal-buttonwrapper-notification-markasread'));
+define ('GD_AAL_TEMPLATE_BUTTONWRAPPER_NOTIFICATION_MARKASREAD', PoP_TemplateIDUtils::get_template_definition('aal-buttonwrapper-notification-markasread'));
 
 class GD_AAL_Template_Processor_ButtonWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

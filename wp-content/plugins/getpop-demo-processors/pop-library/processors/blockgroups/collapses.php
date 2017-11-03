@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GETPOPDEMO_TEMPLATE_BLOCKGROUP_COLLAPSE_HOMETOP', PoP_ServerUtils::get_template_definition('blockgroup-getpopdemo-collapse-hometop'));
+define ('GETPOPDEMO_TEMPLATE_BLOCKGROUP_COLLAPSE_HOMETOP', PoP_TemplateIDUtils::get_template_definition('blockgroup-getpopdemo-collapse-hometop'));
 
 class GetPoPDemo_Template_Processor_TopLevelCollapseBlockGroups extends GD_Template_Processor_CollapsePanelGroupBlockGroupsBase {
 

@@ -5,22 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ALLCONTENT', PoP_ServerUtils::get_template_definition('layout-messagefeedback-allcontent'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LINKS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-links'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_HIGHLIGHTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-highlights'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_WEBPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-webposts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ALLPROFILES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-allprofiles'));
-// define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_RESOURCES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-resources'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USERS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-users'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FOLLOWERS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-followers'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_SPONSORS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-sponsors'));
-// define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATUREDCOMMUNITIES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-featuredcommunities'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYCONTENT', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mycontent'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLINKS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mylinks'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-myhighlights'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mywebposts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_TAGS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-tags'));
-// define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYRESOURCES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-myresources'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-allcontent'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LINKS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-links'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_HIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-highlights'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-webposts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ALLPROFILES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-allprofiles'));
+// define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_RESOURCES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-resources'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-users'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FOLLOWERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-followers'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_SPONSORS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-sponsors'));
+// define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATUREDCOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-featuredcommunities'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYCONTENT', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mycontent'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLINKS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mylinks'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-myhighlights'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mywebposts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_TAGS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-tags'));
+// define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYRESOURCES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-myresources'));
 
 class GD_Template_Processor_CustomListMessageFeedbackLayouts extends GD_Template_Processor_ListMessageFeedbackLayoutsBase {
 

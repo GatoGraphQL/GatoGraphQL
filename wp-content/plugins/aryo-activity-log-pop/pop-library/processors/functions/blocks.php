@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKDATA_MARKALLNOTIFICATIONSASREAD', PoP_ServerUtils::get_template_definition('blockdata-markallnotificationsasread'));
-define ('GD_TEMPLATE_BLOCKDATA_MARKNOTIFICATIONASREAD', PoP_ServerUtils::get_template_definition('blockdata-marknotificationasread'));
-define ('GD_TEMPLATE_BLOCKDATA_MARKNOTIFICATIONASUNREAD', PoP_ServerUtils::get_template_definition('blockdata-marknotificationasunread'));
+define ('GD_TEMPLATE_BLOCKDATA_MARKALLNOTIFICATIONSASREAD', PoP_TemplateIDUtils::get_template_definition('blockdata-markallnotificationsasread'));
+define ('GD_TEMPLATE_BLOCKDATA_MARKNOTIFICATIONASREAD', PoP_TemplateIDUtils::get_template_definition('blockdata-marknotificationasread'));
+define ('GD_TEMPLATE_BLOCKDATA_MARKNOTIFICATIONASUNREAD', PoP_TemplateIDUtils::get_template_definition('blockdata-marknotificationasunread'));
 
 class GD_AAL_Template_Processor_FunctionsBlocks extends GD_Template_Processor_BlocksBase {
 

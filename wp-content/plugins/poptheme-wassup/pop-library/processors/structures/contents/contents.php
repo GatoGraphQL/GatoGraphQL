@@ -5,25 +5,25 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENT_AUTHOR', PoP_ServerUtils::get_template_definition('content-author'));
-// define ('GD_TEMPLATE_CONTENT_TAG', PoP_ServerUtils::get_template_definition('content-tag'));
-define ('GD_TEMPLATE_CONTENT_SINGLE', PoP_ServerUtils::get_template_definition('content-single'));
-define ('GD_TEMPLATE_CONTENT_USERPOSTINTERACTION', PoP_ServerUtils::get_template_definition('content-userpostinteraction'));
-define ('GD_TEMPLATE_CONTENT_POSTHEADER', PoP_ServerUtils::get_template_definition('content-postheader'));
-define ('GD_TEMPLATE_CONTENT_USERHEADER', PoP_ServerUtils::get_template_definition('content-userheader'));
-// define ('GD_TEMPLATE_CONTENT_POSTCONCLUSION', PoP_ServerUtils::get_template_definition('content-postconclusion'));
-define ('GD_TEMPLATE_CONTENT_PAGECONTENT', PoP_ServerUtils::get_template_definition('content-pagecontent'));
-define ('GD_TEMPLATE_CONTENT_PAGECONTENT_PRETTYPRINT', PoP_ServerUtils::get_template_definition('content-pagecontent-prettyprint'));
+define ('GD_TEMPLATE_CONTENT_AUTHOR', PoP_TemplateIDUtils::get_template_definition('content-author'));
+// define ('GD_TEMPLATE_CONTENT_TAG', PoP_TemplateIDUtils::get_template_definition('content-tag'));
+define ('GD_TEMPLATE_CONTENT_SINGLE', PoP_TemplateIDUtils::get_template_definition('content-single'));
+define ('GD_TEMPLATE_CONTENT_USERPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('content-userpostinteraction'));
+define ('GD_TEMPLATE_CONTENT_POSTHEADER', PoP_TemplateIDUtils::get_template_definition('content-postheader'));
+define ('GD_TEMPLATE_CONTENT_USERHEADER', PoP_TemplateIDUtils::get_template_definition('content-userheader'));
+// define ('GD_TEMPLATE_CONTENT_POSTCONCLUSION', PoP_TemplateIDUtils::get_template_definition('content-postconclusion'));
+define ('GD_TEMPLATE_CONTENT_PAGECONTENT', PoP_TemplateIDUtils::get_template_definition('content-pagecontent'));
+define ('GD_TEMPLATE_CONTENT_PAGECONTENT_PRETTYPRINT', PoP_TemplateIDUtils::get_template_definition('content-pagecontent-prettyprint'));
 
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_UPDATEDATA', PoP_ServerUtils::get_template_definition('content-dataquery-allcontent-updatedata'));
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLUSERS_UPDATEDATA', PoP_ServerUtils::get_template_definition('content-dataquery-allusers-updatedata'));
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_COMMENTS_UPDATEDATA', PoP_ServerUtils::get_template_definition('content-dataquery-comments-updatedata'));
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_TAGS_UPDATEDATA', PoP_ServerUtils::get_template_definition('content-dataquery-tags-updatedata'));
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('content-dataquery-allcontent-requestlayouts'));
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLUSERS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('content-dataquery-allusers-requestlayouts'));
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_COMMENTS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('content-dataquery-comments-requestlayouts'));
-define ('GD_TEMPLATE_CONTENT_DATAQUERY_TAGS_REQUESTLAYOUTS', PoP_ServerUtils::get_template_definition('content-dataquery-tags-requestlayouts'));
-// define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_COMMENTS', PoP_ServerUtils::get_template_definition('content-dataquery-allcontent-comments'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('content-dataquery-allcontent-updatedata'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLUSERS_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('content-dataquery-allusers-updatedata'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_COMMENTS_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('content-dataquery-comments-updatedata'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_TAGS_UPDATEDATA', PoP_TemplateIDUtils::get_template_definition('content-dataquery-tags-updatedata'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('content-dataquery-allcontent-requestlayouts'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLUSERS_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('content-dataquery-allusers-requestlayouts'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_COMMENTS_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('content-dataquery-comments-requestlayouts'));
+define ('GD_TEMPLATE_CONTENT_DATAQUERY_TAGS_REQUESTLAYOUTS', PoP_TemplateIDUtils::get_template_definition('content-dataquery-tags-requestlayouts'));
+// define ('GD_TEMPLATE_CONTENT_DATAQUERY_ALLCONTENT_COMMENTS', PoP_TemplateIDUtils::get_template_definition('content-dataquery-allcontent-comments'));
 
 class GD_Template_Processor_Contents extends GD_Template_Processor_ContentsBase {
 

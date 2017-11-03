@@ -5,36 +5,36 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_SECTION_ANNOUNCEMENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-announcements-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_BLOG_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-blog-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_DISCUSSIONS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-discussions-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_FEATURED_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-featured-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_LOCATIONPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-locationposts-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_STORIES_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-stories-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_ANNOUNCEMENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-announcements-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_BLOG_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-blog-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_DISCUSSIONS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-discussions-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_FEATURED_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-featured-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_LOCATIONPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-locationposts-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_STORIES_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-stories-sidebar'));
 
-define ('GD_TEMPLATE_BLOCK_SECTION_MYANNOUNCEMENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-myannouncements-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_MYDISCUSSIONS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-mydiscussions-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_MYLOCATIONPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-mylocationposts-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_MYSTORIES_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-mystories-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_MYANNOUNCEMENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-myannouncements-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_MYDISCUSSIONS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-mydiscussions-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_MYLOCATIONPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-mylocationposts-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_MYSTORIES_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-mystories-sidebar'));
 
-define ('GD_TEMPLATE_BLOCK_TAGSECTION_ANNOUNCEMENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tagsection-announcements-sidebar'));
-define ('GD_TEMPLATE_BLOCK_TAGSECTION_DISCUSSIONS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tagsection-discussions-sidebar'));
-define ('GD_TEMPLATE_BLOCK_TAGSECTION_FEATURED_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tagsection-featured-sidebar'));
-define ('GD_TEMPLATE_BLOCK_TAGSECTION_LOCATIONPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tagsection-locationposts-sidebar'));
-define ('GD_TEMPLATE_BLOCK_TAGSECTION_STORIES_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tagsection-stories-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAGSECTION_ANNOUNCEMENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tagsection-announcements-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAGSECTION_DISCUSSIONS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tagsection-discussions-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAGSECTION_FEATURED_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tagsection-featured-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAGSECTION_LOCATIONPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tagsection-locationposts-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAGSECTION_STORIES_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tagsection-stories-sidebar'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHORANNOUNCEMENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authorannouncements-sidebar'));
-define ('GD_TEMPLATE_BLOCK_AUTHORDISCUSSIONS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authordiscussions-sidebar'));
-define ('GD_TEMPLATE_BLOCK_AUTHORFEATURED_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authorfeatured-sidebar'));
-define ('GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authorlocationposts-sidebar'));
-define ('GD_TEMPLATE_BLOCK_AUTHORSTORIES_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authorstories-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHORANNOUNCEMENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authorannouncements-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHORDISCUSSIONS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authordiscussions-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHORFEATURED_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authorfeatured-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authorlocationposts-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHORSTORIES_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authorstories-sidebar'));
 
-define ('GD_TEMPLATE_BLOCK_SINGLE_ANNOUNCEMENT_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-announcement-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_BLOG_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-blog-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_DISCUSSION_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-discussion-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_FEATURED_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-featured-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_LOCATIONPOST_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-locationpost-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_STORY_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-story-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_ANNOUNCEMENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-announcement-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_BLOG_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-blog-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_DISCUSSION_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-discussion-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_FEATURED_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-featured-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_LOCATIONPOST_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-locationpost-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_STORY_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-story-sidebar'));
 
 class GD_Custom_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_CustomSidebarBlocksBase {
 

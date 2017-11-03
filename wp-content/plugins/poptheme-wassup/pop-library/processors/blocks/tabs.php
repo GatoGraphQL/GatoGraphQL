@@ -5,21 +5,21 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_PAGETABS_HOME', PoP_ServerUtils::get_template_definition('block-tabs-home'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_TAG', PoP_ServerUtils::get_template_definition('block-tabs-tag'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_PAGE', PoP_ServerUtils::get_template_definition('block-tabs-page'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_SINGLE', PoP_ServerUtils::get_template_definition('block-tabs-single'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_AUTHOR', PoP_ServerUtils::get_template_definition('block-tabs-author'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_404', PoP_ServerUtils::get_template_definition('block-tabs-404'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_HOME', PoP_TemplateIDUtils::get_template_definition('block-tabs-home'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_TAG', PoP_TemplateIDUtils::get_template_definition('block-tabs-tag'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_PAGE', PoP_TemplateIDUtils::get_template_definition('block-tabs-page'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_SINGLE', PoP_TemplateIDUtils::get_template_definition('block-tabs-single'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_AUTHOR', PoP_TemplateIDUtils::get_template_definition('block-tabs-author'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_404', PoP_TemplateIDUtils::get_template_definition('block-tabs-404'));
 
-define ('GD_TEMPLATE_BLOCK_PAGETABS_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-webpostlink-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-highlight-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-webpost-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-webpostlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-highlight-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-webpost-create'));
 
-define ('GD_TEMPLATE_BLOCK_ADDONTABS_ADDCOMMENT', PoP_ServerUtils::get_template_definition('block-addontabs-addcomment'));
-define ('GD_TEMPLATE_BLOCK_ADDONTABS_CONTACTUSER', PoP_ServerUtils::get_template_definition('block-addontabs-contactuser'));
-define ('GD_TEMPLATE_BLOCK_ADDONTABS_VOLUNTEER', PoP_ServerUtils::get_template_definition('block-addontabs-volunteer'));
-define ('GD_TEMPLATE_BLOCK_ADDONTABS_FLAG', PoP_ServerUtils::get_template_definition('block-addontabs-flag'));
+define ('GD_TEMPLATE_BLOCK_ADDONTABS_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('block-addontabs-addcomment'));
+define ('GD_TEMPLATE_BLOCK_ADDONTABS_CONTACTUSER', PoP_TemplateIDUtils::get_template_definition('block-addontabs-contactuser'));
+define ('GD_TEMPLATE_BLOCK_ADDONTABS_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('block-addontabs-volunteer'));
+define ('GD_TEMPLATE_BLOCK_ADDONTABS_FLAG', PoP_TemplateIDUtils::get_template_definition('block-addontabs-flag'));
 
 class GD_Template_Processor_CustomTabBlocks extends GD_Template_Processor_TabBlocksBase {
 	

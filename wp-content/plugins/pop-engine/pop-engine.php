@@ -30,7 +30,12 @@ class PoPEngine {
 		add_action('plugins_loaded', array($this, 'define_constants'), 10);
 	}
 	function init() {
-		
+
+		// Comment Leo 03/11/2017: Important: 
+		// 1. We set this definition on init() and not on define_constants(), because it needs to be used immediately
+		// 2. PoP Cluster should not override this value, since all templateids are shared among all websites
+		define('POP_TEMPLATEIDS_DIR', WP_CONTENT_DIR.'/pop-templateids');
+
 		// Comment Leo 17/07/2017: instead of executing 'install' whenever in the back-end and the pop_version changes,
 		// we create a build page to be executed, statically, even in DEV
 		// add_action('admin_init', array($this, 'system_build'), 10, 0);
@@ -46,6 +51,7 @@ class PoPEngine {
 		// define('POP_RUNTIMECONTENT_URL', WP_CONTENT_URL.'/pop-runtimecontent');
 		
 		define('POP_BUILD_DIR', WP_CONTENT_DIR.'/pop-build');
+		define('POP_BUILDSERVER_DIR', WP_CONTENT_DIR.'/pop-buildserver');
 		define('POP_GENERATECACHE_DIR', WP_CONTENT_DIR.'/pop-generatecache');
 		// define('POP_BUILD_URL', WP_CONTENT_URL.'/pop-build');
 	}
@@ -54,6 +60,12 @@ class PoPEngine {
 		require_once 'installation.php';
 		$installation = new PoPEngine_Installation();
 		return $installation->system_build();
+	}
+	function system_build_server() {
+
+		require_once 'installation.php';
+		$installation = new PoPEngine_Installation();
+		return $installation->system_build_server();
 	}
 	function system_generate() {
 

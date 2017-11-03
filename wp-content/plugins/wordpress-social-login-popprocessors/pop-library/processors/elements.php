@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WSL_NETWORKLINKS', PoP_ServerUtils::get_template_definition('wsl-networklinks'));
+define ('GD_TEMPLATE_WSL_NETWORKLINKS', PoP_TemplateIDUtils::get_template_definition('wsl-networklinks'));
 
 class GD_Template_Processor_WSLElements extends GD_Template_Processor_WSLElementsBase {
 

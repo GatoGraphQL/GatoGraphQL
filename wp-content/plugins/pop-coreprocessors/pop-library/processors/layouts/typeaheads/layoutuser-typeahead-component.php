@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTUSER_TYPEAHEAD_COMPONENT', PoP_ServerUtils::get_template_definition('layoutuser-typeahead-component'));
+define ('GD_TEMPLATE_LAYOUTUSER_TYPEAHEAD_COMPONENT', PoP_TemplateIDUtils::get_template_definition('layoutuser-typeahead-component'));
 
 class GD_Template_Processor_UserTypeaheadComponentLayouts extends GD_Template_Processor_UserTypeaheadComponentLayoutsBase {
 

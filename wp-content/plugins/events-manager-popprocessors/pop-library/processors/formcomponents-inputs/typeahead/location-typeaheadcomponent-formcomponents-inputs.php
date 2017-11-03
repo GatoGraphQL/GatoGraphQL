@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_LOCATIONS', PoP_ServerUtils::get_template_definition('formcomponent-typeaheadcomponent-locations'));
+define ('GD_TEMPLATE_TYPEAHEAD_COMPONENT_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('formcomponent-typeaheadcomponent-locations'));
 
 class GD_Template_Processor_LocationTypeaheadComponentFormComponentInputs extends GD_Template_Processor_LocationTypeaheadComponentFormComponentsBase {
 

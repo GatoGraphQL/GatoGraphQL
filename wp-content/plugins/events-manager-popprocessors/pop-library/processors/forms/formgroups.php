@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_FORMCOMPONENTGROUP_TYPEAHEADMAP', PoP_ServerUtils::get_template_definition('formcomponentgroup-locationsmap'));
+define ('GD_EM_TEMPLATE_FORMCOMPONENTGROUP_TYPEAHEADMAP', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-locationsmap'));
 
 class GD_EM_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

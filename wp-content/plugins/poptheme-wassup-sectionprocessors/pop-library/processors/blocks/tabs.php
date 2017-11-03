@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_PAGETABS_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-locationpost-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-locationpostlink-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-story-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-storylink-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-announcement-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-announcementlink-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-discussion-create'));
-define ('GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagetabs-discussionlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-locationpost-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_LOCATIONPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-locationpostlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-story-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_STORYLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-storylink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-announcement-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_ANNOUNCEMENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-announcementlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-discussion-create'));
+define ('GD_TEMPLATE_BLOCK_PAGETABS_DISCUSSIONLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagetabs-discussionlink-create'));
 
 class GD_Custom_Template_Processor_CustomTabBlocks extends GD_Template_Processor_TabBlocksBase {
 	

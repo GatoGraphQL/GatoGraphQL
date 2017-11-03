@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL', PoP_ServerUtils::get_template_definition('code-updownvoteundoupdownvotepost-label'));
+define ('GD_TEMPLATE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL', PoP_TemplateIDUtils::get_template_definition('code-updownvoteundoupdownvotepost-label'));
 
 class GD_Template_Processor_CustomCodes extends GD_Template_Processor_CodesBase {
 

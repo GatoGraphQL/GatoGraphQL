@@ -7,7 +7,7 @@
 
 // define ('POP_HOOK_SW_APPSHELL_REOPENTABS', 'PoPSW_Template_Processor_Blocks:appshell:reopenTabs');
 
-define ('GD_TEMPLATE_BLOCK_APPSHELL', PoP_ServerUtils::get_template_definition('block-appshell'));
+define ('GD_TEMPLATE_BLOCK_APPSHELL', PoP_TemplateIDUtils::get_template_definition('block-appshell'));
 
 class PoPSW_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase {
 

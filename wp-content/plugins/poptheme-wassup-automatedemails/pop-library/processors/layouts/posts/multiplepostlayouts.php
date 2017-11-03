@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_DETAILS', PoP_ServerUtils::get_template_definition('layout-automatedemails-multiplepost-details'));
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-automatedemails-multiplepost-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_LIST', PoP_ServerUtils::get_template_definition('layout-automatedemails-multiplepost-list'));
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-automatedemails-multiplepost-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-automatedemails-multiplepost-fullview'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-multiplepost-details'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-multiplepost-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_LIST', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-multiplepost-list'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-multiplepost-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_MULTIPLEPOST_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-multiplepost-fullview'));
 
 class PoPTheme_Wassup_AE_Template_Processor_MultiplePostLayouts extends GD_Template_Processor_MultiplePostLayoutsBase {
 

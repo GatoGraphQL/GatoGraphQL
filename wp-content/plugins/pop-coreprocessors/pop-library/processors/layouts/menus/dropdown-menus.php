@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MENU_DROPDOWN', PoP_ServerUtils::get_template_definition('layout-menu-dropdown'));
+define ('GD_TEMPLATE_LAYOUT_MENU_DROPDOWN', PoP_TemplateIDUtils::get_template_definition('layout-menu-dropdown'));
 
 class GD_Template_Processor_DropdownMenuLayouts extends GD_Template_Processor_DropdownMenuLayoutsBase {
 

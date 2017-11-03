@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-locationposts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_STORIES', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-stories'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-announcements'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DISCUSSIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-discussions'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FEATURED', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-featured'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_BLOG', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-blog'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_THOUGHTS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-thoughts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-mylocationposts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYSTORIES', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-mystories'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-myannouncements'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-mydiscussions'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-locationposts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_STORIES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-stories'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-announcements'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-discussions'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-featured'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-blog'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_THOUGHTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-thoughts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-mylocationposts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-mystories'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-myannouncements'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-mydiscussions'));
 
 class GD_Custom_Template_Processor_CustomListMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

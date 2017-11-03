@@ -5,33 +5,33 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-searchusers-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-allusers-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-allusers-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_SEARCHUSERS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-searchusers-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_ALLUSERS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-allusers-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_ALLUSERS_HORIZONTALSCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-allusers-horizontalscrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorfollowers-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorfollowingusers-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authorfollowers-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authorfollowingusers-scrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-singleauthors-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-singlerecommendedby-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-singleupvotedby-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-singledownvotedby-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_SINGLEAUTHORS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-singleauthors-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-singlerecommendedby-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-singleupvotedby-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-singledownvotedby-scrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-events-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-pastevents-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-events-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-events-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_HORIZONTALSCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-events-horizontalscrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorevents-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorpastevents-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorevents-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authorevents-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authorpastevents-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authorevents-horizontalscrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagevents-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagpastevents-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagevents-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-tagevents-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-tagpastevents-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-tagevents-horizontalscrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-tagsubscribers-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-tagsubscribers-scrollmap'));
 
-define ('GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-whoweare-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_WHOWEARE_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-whoweare-scrollmap'));
 
 class GD_EM_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Template_Processor_ScrollMapBlocksBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_TAG', PoP_ServerUtils::get_template_definition('viewcomponent-header-tag'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_TAG_URL', PoP_ServerUtils::get_template_definition('viewcomponent-header-tag-url'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_TAG', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-tag'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_TAG_URL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-tag-url'));
 
 class GD_Template_Processor_TagViewComponentHeaders extends GD_Template_Processor_TagViewComponentHeadersBase {
 

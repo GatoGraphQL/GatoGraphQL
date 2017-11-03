@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO', PoP_ServerUtils::get_template_definition('block-emptysideinfo'));
-define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('block-emptysideinfo-webpost-create'));
-define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-emptysideinfo-webpostlink-create'));
+define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO', PoP_TemplateIDUtils::get_template_definition('block-emptysideinfo'));
+define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('block-emptysideinfo-webpost-create'));
+define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-emptysideinfo-webpostlink-create'));
 
 class GD_Template_Processor_CustomSideInfoBlocks extends GD_Template_Processor_CustomSideInfoBlocksBase {
 

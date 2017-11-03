@@ -6,7 +6,7 @@ class PoP_UserAvatar_Initialization {
 		load_plugin_textdomain('pop-useravatar', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('aa');
+		PoP_TemplateIDUtils::set_namespace('aa');
 
 		if (!is_admin()) {
 

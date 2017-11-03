@@ -21,6 +21,11 @@ class PoPEngine_Installation {
 		// }
 	}
 
+	function system_build_server() {
+
+		do_action('PoP:system-build:server');
+	}
+
 	function system_generate() {
 
 		do_action('PoP:system-generate');

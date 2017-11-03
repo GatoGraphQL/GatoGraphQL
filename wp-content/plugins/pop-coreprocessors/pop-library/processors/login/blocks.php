@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_LOGIN', PoP_ServerUtils::get_template_definition('block-login'));
-define ('GD_TEMPLATE_BLOCK_LOSTPWD', PoP_ServerUtils::get_template_definition('block-lostpwd'));
-define ('GD_TEMPLATE_BLOCK_LOSTPWDRESET', PoP_ServerUtils::get_template_definition('block-lostpwdreset'));
-define ('GD_TEMPLATE_BLOCK_LOGOUT', PoP_ServerUtils::get_template_definition('block-logout'));
-define ('GD_TEMPLATE_BLOCK_USERLOGGEDINWELCOME', PoP_ServerUtils::get_template_definition('block-userloggedinwelcome'));
+define ('GD_TEMPLATE_BLOCK_LOGIN', PoP_TemplateIDUtils::get_template_definition('block-login'));
+define ('GD_TEMPLATE_BLOCK_LOSTPWD', PoP_TemplateIDUtils::get_template_definition('block-lostpwd'));
+define ('GD_TEMPLATE_BLOCK_LOSTPWDRESET', PoP_TemplateIDUtils::get_template_definition('block-lostpwdreset'));
+define ('GD_TEMPLATE_BLOCK_LOGOUT', PoP_TemplateIDUtils::get_template_definition('block-logout'));
+define ('GD_TEMPLATE_BLOCK_USERLOGGEDINWELCOME', PoP_TemplateIDUtils::get_template_definition('block-userloggedinwelcome'));
 
 class GD_Template_Processor_LoginBlocks extends GD_Template_Processor_BlocksBase {
 

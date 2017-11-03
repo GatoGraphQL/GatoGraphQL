@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_MODERATEDPOSTSTATUS', PoP_ServerUtils::get_template_definition('moderatedpoststatus', true)); // Keep the name, so the URL params when filtering make sense
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_UNMODERATEDPOSTSTATUS', PoP_ServerUtils::get_template_definition('unmoderatedpoststatus', true)); // Keep the name, so the URL params when filtering make sense
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_MODERATEDPOSTSTATUS', PoP_TemplateIDUtils::get_template_definition('moderatedpoststatus', true)); // Keep the name, so the URL params when filtering make sense
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_UNMODERATEDPOSTSTATUS', PoP_TemplateIDUtils::get_template_definition('unmoderatedpoststatus', true)); // Keep the name, so the URL params when filtering make sense
 
 class GD_Template_Processor_MultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
 

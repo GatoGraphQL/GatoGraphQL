@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTINNER_EMBEDPREVIEW', PoP_ServerUtils::get_template_definition('contentinner-embedpreview'));
-define ('GD_TEMPLATE_CONTENTINNER_EMBED', PoP_ServerUtils::get_template_definition('contentinner-embed'));
-define ('GD_TEMPLATE_CONTENTINNER_API', PoP_ServerUtils::get_template_definition('contentinner-api'));
-define ('GD_TEMPLATE_CONTENTINNER_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('contentinner-copysearchurl'));
+define ('GD_TEMPLATE_CONTENTINNER_EMBEDPREVIEW', PoP_TemplateIDUtils::get_template_definition('contentinner-embedpreview'));
+define ('GD_TEMPLATE_CONTENTINNER_EMBED', PoP_TemplateIDUtils::get_template_definition('contentinner-embed'));
+define ('GD_TEMPLATE_CONTENTINNER_API', PoP_TemplateIDUtils::get_template_definition('contentinner-api'));
+define ('GD_TEMPLATE_CONTENTINNER_COPYSEARCHURL', PoP_TemplateIDUtils::get_template_definition('contentinner-copysearchurl'));
 
 class GD_Template_Processor_ShareContentInners extends GD_Template_Processor_ContentSingleInnersBase {
 

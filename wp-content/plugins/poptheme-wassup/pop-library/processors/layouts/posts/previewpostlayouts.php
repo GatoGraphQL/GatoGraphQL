@@ -5,40 +5,40 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_HEADER', PoP_ServerUtils::get_template_definition('layout-previewpost-header'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_HEADER', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-header'));
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-previewpost-navigator'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_ADDONS', PoP_ServerUtils::get_template_definition('layout-previewpost-addons'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewpost-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-previewpost-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_LIST', PoP_ServerUtils::get_template_definition('layout-previewpost-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_LINE', PoP_ServerUtils::get_template_definition('layout-previewpost-line'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_RELATED', PoP_ServerUtils::get_template_definition('layout-previewpost-related'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EDIT', PoP_ServerUtils::get_template_definition('layout-previewpost-edit'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-navigator'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-addons'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_LINE', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-line'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_RELATED', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-related'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-edit'));
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-previewpost-webpostlink-navigator'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_ADDONS', PoP_ServerUtils::get_template_definition('layout-previewpost-webpostlink-addons'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewpost-webpostlink-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-previewpost-webpostlink-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_LIST', PoP_ServerUtils::get_template_definition('layout-previewpost-webpostlink-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_RELATED', PoP_ServerUtils::get_template_definition('layout-previewpost-webpostlink-related'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_EDIT', PoP_ServerUtils::get_template_definition('layout-previewpost-webpostlink-edit'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpostlink-navigator'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpostlink-addons'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpostlink-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpostlink-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpostlink-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_RELATED', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpostlink-related'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpostlink-edit'));
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT', PoP_ServerUtils::get_template_definition('layout-previewpost-highlight-content'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT', PoP_ServerUtils::get_template_definition('layout-previewpost-highlight-edit'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-highlight-content'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-highlight-edit'));
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-navigator'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_ADDONS', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-addons'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-details'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_CONTENT', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-content'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_LIST', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_RELATED', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-related'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_EDIT', PoP_ServerUtils::get_template_definition('layout-previewpost-webpost-edit'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-navigator'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-addons'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-details'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_CONTENT', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-content'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_RELATED', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-related'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-webpost-edit'));
 
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewpost-mapdetails'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_POPOVER', PoP_ServerUtils::get_template_definition('layout-previewpost-popover'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_CAROUSEL', PoP_ServerUtils::get_template_definition('layout-previewpost-carousel'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-mapdetails'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_POPOVER', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-popover'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-carousel'));
 
 class GD_Template_Processor_CustomPreviewPostLayouts extends GD_Template_Processor_CustomPreviewPostLayoutsBase {
 

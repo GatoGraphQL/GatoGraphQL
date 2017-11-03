@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS', PoP_ServerUtils::get_template_definition('viewcomponent-buttoninner-locations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('viewcomponent-buttoninner-locations'));
 
 class GD_Template_Processor_LocationViewComponentButtonInners extends GD_Template_Processor_LocationViewComponentButtonInnersBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES_TRIGGER', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeaheadtrigger-references'));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES_TRIGGER', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeaheadtrigger-references'));
 
 class GD_Template_Processor_PostSelectableTypeaheadTriggerFormComponentInputs extends GD_Template_Processor_PostSelectableTypeaheadTriggerFormComponentsBase {
 

@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DELEGATORFILTER_INDIVIDUALS', PoP_ServerUtils::get_template_definition('delegatorfilter-individuals'));
-define ('GD_TEMPLATE_DELEGATORFILTER_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('delegatorfilter-organizations'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYMEMBERS', PoP_ServerUtils::get_template_definition('delegatorfilter-mymembers'));
+define ('GD_TEMPLATE_DELEGATORFILTER_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-individuals'));
+define ('GD_TEMPLATE_DELEGATORFILTER_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-organizations'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-mymembers'));
 
 class GD_URE_Template_Processor_CustomDelegatorFilters extends GD_Template_Processor_CustomDelegatorFiltersBase {
 

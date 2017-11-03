@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_CONTENTINNER_MEMBER', PoP_ServerUtils::get_template_definition('ure-contentinner-member'));
+define ('GD_URE_TEMPLATE_CONTENTINNER_MEMBER', PoP_TemplateIDUtils::get_template_definition('ure-contentinner-member'));
 
 class GD_URE_Template_Processor_CustomContentInners extends GD_Template_Processor_ContentSingleInnersBase {
 

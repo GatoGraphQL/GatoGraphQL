@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_CDN', PoP_ServerUtils::get_template_definition('cdn'));
-define ('POP_RESOURCELOADER_CDNTHUMBPRINTS', PoP_ServerUtils::get_template_definition('cdn-thumbprints'));
-define ('POP_RESOURCELOADER_CDNCONFIG', PoP_ServerUtils::get_template_definition('cdn-config'));
+define ('POP_RESOURCELOADER_CDN', PoP_TemplateIDUtils::get_template_definition('cdn'));
+define ('POP_RESOURCELOADER_CDNTHUMBPRINTS', PoP_TemplateIDUtils::get_template_definition('cdn-thumbprints'));
+define ('POP_RESOURCELOADER_CDNCONFIG', PoP_TemplateIDUtils::get_template_definition('cdn-config'));
 
 class PoP_CDNCore_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

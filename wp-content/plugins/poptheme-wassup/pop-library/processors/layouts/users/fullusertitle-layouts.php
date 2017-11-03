@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_FULLUSERTITLE', PoP_ServerUtils::get_template_definition('singlelayout-fullusertitle'));
+define ('GD_TEMPLATE_LAYOUT_FULLUSERTITLE', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullusertitle'));
 
 class GD_Template_Processor_CustomFullUserTitleLayouts extends GD_Template_Processor_FullUserTitleLayoutsBase {
 

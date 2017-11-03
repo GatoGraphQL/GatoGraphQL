@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTCONTENTINNER_HIGHLIGHTREFERENCEDBY', PoP_ServerUtils::get_template_definition('contentinnerlayout-highlightreferencedby'));
-define ('GD_TEMPLATE_LAYOUTCONTENTINNER_HIGHLIGHTREFERENCEDBY_APPENDABLE', PoP_ServerUtils::get_template_definition('contentinnerlayout-highlightreferencedby-appendable'));
+define ('GD_TEMPLATE_LAYOUTCONTENTINNER_HIGHLIGHTREFERENCEDBY', PoP_TemplateIDUtils::get_template_definition('contentinnerlayout-highlightreferencedby'));
+define ('GD_TEMPLATE_LAYOUTCONTENTINNER_HIGHLIGHTREFERENCEDBY_APPENDABLE', PoP_TemplateIDUtils::get_template_definition('contentinnerlayout-highlightreferencedby-appendable'));
 
 class Wassup_Template_Processor_ContentMultipleInners extends GD_Template_Processor_ContentMultipleInnersBase {
 

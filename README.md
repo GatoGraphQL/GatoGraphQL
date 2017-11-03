@@ -110,6 +110,8 @@ PoP allows the configuration of the following properties, done in file wp-config
 
   0: Use the original name of each module. 1: Use both. 2: Use the base36 counter number.
 
+- `POP_SERVER_TEMPLATEDEFINITION_CONSTANTOVERTIME` (_true|false_): When mangling the template names (template definition type is set to 2), use a database of all template definitions, which will be constant over time and shared among different plugins, to avoid errors in the website from accessed pages (localStorage, Service Workers) with an out-of-date configuration.
+
 - `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true|false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different websites can communicate with each other without conflict, mangling all template definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
 
 - `POP_SERVER_USECACHE` (_true|false_): Create and re-use a cache of the settings of the requested page.

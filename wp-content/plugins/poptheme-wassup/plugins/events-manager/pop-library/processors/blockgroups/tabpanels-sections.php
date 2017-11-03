@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_EVENTS', PoP_ServerUtils::get_template_definition('blockgroup-events-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_PASTEVENTS', PoP_ServerUtils::get_template_definition('blockgroup-pastevents-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_EVENTSCALENDAR', PoP_ServerUtils::get_template_definition('blockgroup-eventscalendar-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYEVENTS', PoP_ServerUtils::get_template_definition('blockgroup-myevents-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('blockgroup-mypastevents-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_EVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-events-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_PASTEVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-pastevents-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_EVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-eventscalendar-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-myevents-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-mypastevents-tabpanel'));
 
 class GD_EM_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Processor_SectionTabPanelBlockGroupsBase {
 

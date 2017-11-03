@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCRIPT_HIGHLIGHTREFERENCES', PoP_ServerUtils::get_template_definition('script-highlightreferences'));
-define ('GD_TEMPLATE_SCRIPT_HIGHLIGHTREFERENCESEMPTY', PoP_ServerUtils::get_template_definition('script-highlightreferencesempty'));
+define ('GD_TEMPLATE_SCRIPT_HIGHLIGHTREFERENCES', PoP_TemplateIDUtils::get_template_definition('script-highlightreferences'));
+define ('GD_TEMPLATE_SCRIPT_HIGHLIGHTREFERENCESEMPTY', PoP_TemplateIDUtils::get_template_definition('script-highlightreferencesempty'));
 
 class Wassup_Template_Processor_ScriptsLayouts extends GD_Template_Processor_AppendScriptsLayoutsBase {
 

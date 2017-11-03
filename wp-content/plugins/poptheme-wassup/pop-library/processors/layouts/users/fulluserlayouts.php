@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_FULLUSER_PROFILE', PoP_ServerUtils::get_template_definition('layout-fulluser-profile'));
+define ('GD_TEMPLATE_LAYOUT_FULLUSER_PROFILE', PoP_TemplateIDUtils::get_template_definition('layout-fulluser-profile'));
 
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLUSER_PROFILE', PoP_ServerUtils::get_template_definition('authorlayout-fulluser-profile'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLUSER_PROFILE', PoP_TemplateIDUtils::get_template_definition('authorlayout-fulluser-profile'));
 
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLUSER_PROFILE', PoP_ServerUtils::get_template_definition('singlelayout-fulluser-profile'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLUSER_PROFILE', PoP_TemplateIDUtils::get_template_definition('singlelayout-fulluser-profile'));
 
 class GD_Template_Processor_CustomFullUserLayouts extends GD_Template_Processor_CustomFullUserLayoutsBase {
 

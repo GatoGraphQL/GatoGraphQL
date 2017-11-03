@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_PROFILES_TRIGGER', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeaheadtrigger-profiles'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_SELECTABLETYPEAHEAD_PROFILES_TRIGGER', PoP_ServerUtils::get_template_definition('selectableprofiles', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_PROFILES_TRIGGER', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeaheadtrigger-profiles'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_SELECTABLETYPEAHEAD_PROFILES_TRIGGER', PoP_TemplateIDUtils::get_template_definition('selectableprofiles', true));
 
 class GD_Template_Processor_UserSelectableTypeaheadTriggerFormComponentInputs extends GD_Template_Processor_UserSelectableTypeaheadTriggerFormComponentsBase {
 

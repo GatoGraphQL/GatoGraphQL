@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_EVERYTHING_QUICKLINKS', PoP_ServerUtils::get_template_definition('block-everything-quicklinks'));
+define ('GD_TEMPLATE_BLOCK_EVERYTHING_QUICKLINKS', PoP_TemplateIDUtils::get_template_definition('block-everything-quicklinks'));
 
 class GD_Template_Processor_QuicklinksBlocks extends GD_Template_Processor_BlocksBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONGROUP_MYUSERS', PoP_ServerUtils::get_template_definition('ure-buttongroup-myusers'));
+define ('GD_TEMPLATE_BUTTONGROUP_MYUSERS', PoP_TemplateIDUtils::get_template_definition('ure-buttongroup-myusers'));
 
 class GD_Custom_URE_Template_Processor_ButtonGroups extends GD_Template_Processor_CustomButtonGroupsBase {
 

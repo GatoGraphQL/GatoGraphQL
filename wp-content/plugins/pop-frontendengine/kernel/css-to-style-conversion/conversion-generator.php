@@ -1,5 +1,5 @@
 <?php
-class PoP_Frontend_ConversionFileGenerator extends PoP_Frontend_FileGeneratorBase {
+class PoP_Frontend_ConversionFileGenerator extends PoP_Engine_FileGeneratorBase {
 
 	function get_dir() {
 
@@ -23,8 +23,8 @@ class PoP_Frontend_ConversionFileGenerator extends PoP_Frontend_FileGeneratorBas
 
 		$class_to_styles = $this->extract($fileContents);
 
-		global $pop_frontend_filejsonstorage;
-		$pop_frontend_filejsonstorage->save($this->get_filepath(), $class_to_styles);
+		global $pop_engine_filejsonstorage;
+		$pop_engine_filejsonstorage->save($this->get_filepath(), $class_to_styles);
 	}
 
 	protected function extract($fileContents) {

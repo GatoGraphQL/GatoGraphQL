@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_CORECDNHOOKS', PoP_ServerUtils::get_template_definition('core-cdn-hooks'));
+define ('POP_RESOURCELOADER_CORECDNHOOKS', PoP_TemplateIDUtils::get_template_definition('core-cdn-hooks'));
 
 class PoP_CDNCore_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

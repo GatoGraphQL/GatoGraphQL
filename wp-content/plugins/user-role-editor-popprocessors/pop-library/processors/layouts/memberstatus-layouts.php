@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUTUSER_MEMBERSTATUS', PoP_ServerUtils::get_template_definition('ure-layoutuser-memberstatus-nodesc'));
+define ('GD_URE_TEMPLATE_LAYOUTUSER_MEMBERSTATUS', PoP_TemplateIDUtils::get_template_definition('ure-layoutuser-memberstatus-nodesc'));
 
 class GD_URE_Template_Processor_MemberStatusLayouts extends GD_URE_Template_Processor_MemberStatusLayoutsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_EVENT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-event'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_PASTEVENT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-pastevent'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_EVENT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-event'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-pastevent'));
 
 class GD_EM_Template_Processor_PostMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

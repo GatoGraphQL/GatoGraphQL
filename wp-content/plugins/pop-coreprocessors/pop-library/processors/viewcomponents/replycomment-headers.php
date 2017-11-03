@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_REPLYCOMMENT', PoP_ServerUtils::get_template_definition('viewcomponent-header-replycomment'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL', PoP_ServerUtils::get_template_definition('viewcomponent-header-replycomment-url'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_REPLYCOMMENT', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-replycomment'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-replycomment-url'));
 
 class GD_Template_Processor_ReplyCommentViewComponentHeaders extends GD_Template_Processor_ReplyCommentViewComponentHeadersBase {
 

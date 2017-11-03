@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTAUTHORS', PoP_ServerUtils::get_template_definition('layout-automatedemails-postauthors'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTAUTHORS', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-postauthors'));
 
 class PoPTheme_Wassup_AE_Template_Processor_PostAuthorLayouts extends GD_Template_Processor_PostAuthorLayoutsBase {
 

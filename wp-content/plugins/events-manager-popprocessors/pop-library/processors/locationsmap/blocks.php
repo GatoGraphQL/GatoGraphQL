@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_LOCATIONSMAP', PoP_ServerUtils::get_template_definition('block-locationsmap'));
-define ('GD_TEMPLATE_BLOCK_STATICLOCATIONSMAP', PoP_ServerUtils::get_template_definition('block-staticlocationsmap'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONSMAP', PoP_TemplateIDUtils::get_template_definition('block-locationsmap'));
+define ('GD_TEMPLATE_BLOCK_STATICLOCATIONSMAP', PoP_TemplateIDUtils::get_template_definition('block-staticlocationsmap'));
 
 class GD_Template_Processor_LocationsMapBlocks extends GD_Template_Processor_BlocksBase {
 

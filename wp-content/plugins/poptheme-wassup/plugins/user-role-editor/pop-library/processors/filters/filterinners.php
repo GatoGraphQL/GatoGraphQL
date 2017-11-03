@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERINNER_INDIVIDUALS', PoP_ServerUtils::get_template_definition('filterinner-individuals'));
-define ('GD_TEMPLATE_FILTERINNER_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('filterinner-organizations'));
-define ('GD_TEMPLATE_FILTERINNER_MYMEMBERS', PoP_ServerUtils::get_template_definition('filterinner-mymembers'));
+define ('GD_TEMPLATE_FILTERINNER_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('filterinner-individuals'));
+define ('GD_TEMPLATE_FILTERINNER_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('filterinner-organizations'));
+define ('GD_TEMPLATE_FILTERINNER_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('filterinner-mymembers'));
 
 class GD_URE_Template_Processor_CustomFilterInners extends GD_Template_Processor_FilterInnersBase {
 

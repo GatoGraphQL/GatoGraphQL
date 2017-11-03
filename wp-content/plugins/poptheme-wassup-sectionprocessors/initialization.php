@@ -6,7 +6,7 @@ class PoPTheme_Wassup_SectionProcessors_Initialization {
 		load_plugin_textdomain('poptheme-wassup-sectionprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('af');
+		PoP_TemplateIDUtils::set_namespace('af');
 		
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Global Variables and Configuration

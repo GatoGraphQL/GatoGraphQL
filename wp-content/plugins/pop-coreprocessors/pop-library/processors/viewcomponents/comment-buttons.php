@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY', PoP_ServerUtils::get_template_definition('viewcomponent-commentbutton-reply'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY', PoP_TemplateIDUtils::get_template_definition('viewcomponent-commentbutton-reply'));
 
 class GD_Template_Processor_CommentViewComponentButtons extends GD_Template_Processor_CommentViewComponentButtonsBase {
 

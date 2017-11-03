@@ -5,13 +5,13 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_CONTACTUS', PoP_ServerUtils::get_template_definition('forminner-contactus'));
-define ('GD_TEMPLATE_FORMINNER_CONTACTUSER', PoP_ServerUtils::get_template_definition('forminner-contactuser'));
-define ('GD_TEMPLATE_FORMINNER_SHAREBYEMAIL', PoP_ServerUtils::get_template_definition('forminner-sharebyemail'));
-define ('GD_TEMPLATE_FORMINNER_VOLUNTEER', PoP_ServerUtils::get_template_definition('forminner-volunteer'));
-define ('GD_TEMPLATE_FORMINNER_FLAG', PoP_ServerUtils::get_template_definition('forminner-flag'));
-define ('GD_TEMPLATE_FORMINNER_NEWSLETTER', PoP_ServerUtils::get_template_definition('forminner-newsletter'));
-define ('GD_TEMPLATE_FORMINNER_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('forminner-newsletterunsubscription'));
+define ('GD_TEMPLATE_FORMINNER_CONTACTUS', PoP_TemplateIDUtils::get_template_definition('forminner-contactus'));
+define ('GD_TEMPLATE_FORMINNER_CONTACTUSER', PoP_TemplateIDUtils::get_template_definition('forminner-contactuser'));
+define ('GD_TEMPLATE_FORMINNER_SHAREBYEMAIL', PoP_TemplateIDUtils::get_template_definition('forminner-sharebyemail'));
+define ('GD_TEMPLATE_FORMINNER_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('forminner-volunteer'));
+define ('GD_TEMPLATE_FORMINNER_FLAG', PoP_TemplateIDUtils::get_template_definition('forminner-flag'));
+define ('GD_TEMPLATE_FORMINNER_NEWSLETTER', PoP_TemplateIDUtils::get_template_definition('forminner-newsletter'));
+define ('GD_TEMPLATE_FORMINNER_NEWSLETTERUNSUBSCRIPTION', PoP_TemplateIDUtils::get_template_definition('forminner-newsletterunsubscription'));
 
 class GD_Template_Processor_GFFormInners extends GD_Template_Processor_FormInnersBase {
 

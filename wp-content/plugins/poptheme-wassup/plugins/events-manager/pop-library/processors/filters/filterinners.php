@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTERINNER_LOCATIONS', PoP_ServerUtils::get_template_definition('filterinner-locations'));
-define ('GD_TEMPLATE_FILTERINNER_EVENTS', PoP_ServerUtils::get_template_definition('filterinner-events'));
-define ('GD_TEMPLATE_FILTERINNER_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('filterinner-authorevents'));
-define ('GD_TEMPLATE_FILTERINNER_TAGEVENTS', PoP_ServerUtils::get_template_definition('filterinner-tagevents'));
-define ('GD_TEMPLATE_FILTERINNER_EVENTSCALENDAR', PoP_ServerUtils::get_template_definition('filterinner-eventscalendar'));
-define ('GD_TEMPLATE_FILTERINNER_AUTHOREVENTSCALENDAR', PoP_ServerUtils::get_template_definition('filterinner-authoreventscalendar'));
-define ('GD_TEMPLATE_FILTERINNER_TAGEVENTSCALENDAR', PoP_ServerUtils::get_template_definition('filterinner-tageventscalendar'));
-define ('GD_TEMPLATE_FILTERINNER_MYEVENTS', PoP_ServerUtils::get_template_definition('filterinner-myevents'));
+define ('GD_TEMPLATE_FILTERINNER_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('filterinner-locations'));
+define ('GD_TEMPLATE_FILTERINNER_EVENTS', PoP_TemplateIDUtils::get_template_definition('filterinner-events'));
+define ('GD_TEMPLATE_FILTERINNER_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('filterinner-authorevents'));
+define ('GD_TEMPLATE_FILTERINNER_TAGEVENTS', PoP_TemplateIDUtils::get_template_definition('filterinner-tagevents'));
+define ('GD_TEMPLATE_FILTERINNER_EVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('filterinner-eventscalendar'));
+define ('GD_TEMPLATE_FILTERINNER_AUTHOREVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('filterinner-authoreventscalendar'));
+define ('GD_TEMPLATE_FILTERINNER_TAGEVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('filterinner-tageventscalendar'));
+define ('GD_TEMPLATE_FILTERINNER_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('filterinner-myevents'));
 
 class GD_EM_Template_Processor_CustomFilterInners extends GD_Template_Processor_FilterInnersBase {
 

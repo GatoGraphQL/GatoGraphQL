@@ -5,19 +5,19 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_SECTION_EVENTS_CALENDAR_SIDEBAR', PoP_ServerUtils::get_template_definition('block-events-calendar-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_EVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-events-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_PASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-pastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_MYEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-myevents-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SECTION_MYPASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-section-mypastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCK_TAG_EVENTS_CALENDAR_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tag-events-calendar-sidebar'));
-define ('GD_TEMPLATE_BLOCK_TAG_EVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tag-events-sidebar'));
-define ('GD_TEMPLATE_BLOCK_TAG_PASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-tag-pastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_EVENT_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-event-sidebar'));
-define ('GD_TEMPLATE_BLOCK_SINGLE_PASTEVENT_SIDEBAR', PoP_ServerUtils::get_template_definition('block-single-pastevent-sidebar'));
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authorevents-sidebar'));
-define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authorpastevents-sidebar'));
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_SIDEBAR', PoP_ServerUtils::get_template_definition('block-authoreventscalendar-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_EVENTS_CALENDAR_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-events-calendar-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_EVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-events-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_PASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-pastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_MYEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-myevents-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SECTION_MYPASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-section-mypastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAG_EVENTS_CALENDAR_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tag-events-calendar-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAG_EVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tag-events-sidebar'));
+define ('GD_TEMPLATE_BLOCK_TAG_PASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-tag-pastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_EVENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-event-sidebar'));
+define ('GD_TEMPLATE_BLOCK_SINGLE_PASTEVENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-single-pastevent-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authorevents-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authorpastevents-sidebar'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-authoreventscalendar-sidebar'));
 
 class GD_EM_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_CustomSidebarBlocksBase {
 

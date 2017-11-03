@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONCOUNTRY', PoP_ServerUtils::get_template_definition('location_country', true)); // Name needed by EM to create the Location
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONCOUNTRY', PoP_TemplateIDUtils::get_template_definition('location_country', true)); // Name needed by EM to create the Location
 
 class GD_EM_Template_Processor_CreateLocationSelectFormComponentInputs extends GD_Template_Processor_SelectFormComponentsBase {
 

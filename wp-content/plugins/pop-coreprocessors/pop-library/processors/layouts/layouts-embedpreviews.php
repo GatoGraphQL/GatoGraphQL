@@ -6,8 +6,8 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // Embed
-define ('GD_TEMPLATE_LAYOUT_EMBEDPREVIEW', PoP_ServerUtils::get_template_definition('layout-urlembedpreview'));
-define ('GD_TEMPLATE_LAYOUT_USERINPUTEMBEDPREVIEW', PoP_ServerUtils::get_template_definition('layout-userinputembedpreview'));
+define ('GD_TEMPLATE_LAYOUT_EMBEDPREVIEW', PoP_TemplateIDUtils::get_template_definition('layout-urlembedpreview'));
+define ('GD_TEMPLATE_LAYOUT_USERINPUTEMBEDPREVIEW', PoP_TemplateIDUtils::get_template_definition('layout-userinputembedpreview'));
 
 class GD_Template_Processor_EmbedPreviewLayouts extends GD_Template_Processor_EmbedPreviewLayoutsBase {
 

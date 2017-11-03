@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_INDIVIDUALINTERESTS', PoP_ServerUtils::get_template_definition('formcomponent-individualinterests'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_ORGANIZATIONCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-organizationcategories'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_ORGANIZATIONTYPES', PoP_ServerUtils::get_template_definition('formcomponent-organizationtypes'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_INDIVIDUALINTERESTS', PoP_ServerUtils::get_template_definition('individualinterests', true));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_ORGANIZATIONCATEGORIES', PoP_ServerUtils::get_template_definition('organizationcategories', true));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_ORGANIZATIONTYPES', PoP_ServerUtils::get_template_definition('organizationtypes', true));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_INDIVIDUALINTERESTS', PoP_TemplateIDUtils::get_template_definition('formcomponent-individualinterests'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_ORGANIZATIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponent-organizationcategories'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_ORGANIZATIONTYPES', PoP_TemplateIDUtils::get_template_definition('formcomponent-organizationtypes'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_INDIVIDUALINTERESTS', PoP_TemplateIDUtils::get_template_definition('individualinterests', true));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_ORGANIZATIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('organizationcategories', true));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_ORGANIZATIONTYPES', PoP_TemplateIDUtils::get_template_definition('organizationtypes', true));
 
 class GD_URE_Template_Processor_MultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
 

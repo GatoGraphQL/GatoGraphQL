@@ -5,26 +5,26 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-locationposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorlocationposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_STORIES', PoP_ServerUtils::get_template_definition('simplefilterinner-stories'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('simplefilterinner-authorstories'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-announcements'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorannouncements'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_DISCUSSIONS', PoP_ServerUtils::get_template_definition('simplefilterinner-discussions'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORDISCUSSIONS', PoP_ServerUtils::get_template_definition('simplefilterinner-authordiscussions'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_FEATURED', PoP_ServerUtils::get_template_definition('simplefilterinner-featured'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_BLOG', PoP_ServerUtils::get_template_definition('simplefilterinner-blog'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-mylocationposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYSTORIES', PoP_ServerUtils::get_template_definition('simplefilterinner-mystories'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-myannouncements'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('simplefilterinner-mydiscussions'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-locationposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorlocationposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_STORIES', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-stories'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORSTORIES', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorstories'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-announcements'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorannouncements'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-discussions'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHORDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authordiscussions'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_FEATURED', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-featured'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_BLOG', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-blog'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-mylocationposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-mystories'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-myannouncements'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-mydiscussions'));
 
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('simplefilterinner-taglocationposts'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGSTORIES', PoP_ServerUtils::get_template_definition('simplefilterinner-tagstories'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-tagannouncements'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGDISCUSSIONS', PoP_ServerUtils::get_template_definition('simplefilterinner-tagdiscussions'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGFEATURED', PoP_ServerUtils::get_template_definition('simplefilterinner-tagfeatured'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-taglocationposts'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGSTORIES', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagstories'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagannouncements'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagdiscussions'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGFEATURED', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagfeatured'));
 
 class PoPSP_Template_Processor_CustomSimpleFilterInners extends GD_Template_Processor_SimpleFilterInnersBase {
 

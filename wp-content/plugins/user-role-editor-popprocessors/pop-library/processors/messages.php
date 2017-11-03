@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_MESSAGE_NOCOMMUNITIES', PoP_ServerUtils::get_template_definition('ure-message-nocommunities'));
+define ('GD_URE_TEMPLATE_MESSAGE_NOCOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-message-nocommunities'));
 
 class GD_URE_Template_Processor_WidgetMessages extends GD_Template_Processor_WidgetMessagesBase {
 

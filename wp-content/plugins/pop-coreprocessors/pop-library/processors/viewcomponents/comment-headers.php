@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_COMMENTPOST', PoP_ServerUtils::get_template_definition('viewcomponent-header-commentpost'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_COMMENTPOST_URL', PoP_ServerUtils::get_template_definition('viewcomponent-header-commentpost-url'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_COMMENTPOST', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-commentpost'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_HEADER_COMMENTPOST_URL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-header-commentpost-url'));
 
 class GD_Template_Processor_CommentViewComponentHeaders extends GD_Template_Processor_CommentViewComponentHeadersBase {
 

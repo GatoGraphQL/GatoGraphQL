@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PUBLISHED', PoP_ServerUtils::get_template_definition('layout-published'));
-define ('GD_TEMPLATE_LAYOUT_WIDGETPUBLISHED', PoP_ServerUtils::get_template_definition('layout-widgetpublished'));
+define ('GD_TEMPLATE_LAYOUT_PUBLISHED', PoP_TemplateIDUtils::get_template_definition('layout-published'));
+define ('GD_TEMPLATE_LAYOUT_WIDGETPUBLISHED', PoP_TemplateIDUtils::get_template_definition('layout-widgetpublished'));
 
 class GD_Template_Processor_PublishedLayouts extends GD_Template_Processor_PostStatusDateLayoutsBase {
 

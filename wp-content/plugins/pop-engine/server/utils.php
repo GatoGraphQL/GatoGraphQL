@@ -7,28 +7,6 @@
 
 class PoP_ServerUtils {
 
-	// Comment Leo 27/07/2017: Since adding the namespace/prefix, no need to start with a letter
-	// we just gotta make sure that the prefix starts with a letter
-	// However we initially still set it to 10, since it will be reset to 0 when calling set_namespace()
-	// Counter: cannot start with a number, or the id will get confused
-	// First number is 10, that is "a" in base 36
-	protected static $templatedefinition_counter = 10;
-	// $namespace is a 2-character string, cannot start with a number, to uniquely identify a plugin
-	// So we have (36x36)-360=936 possible namespaces/plugins that can be part of the PoP ecosystem
-	protected static $current_namespace = '';
-
-	public static function set_namespace($namespace) {
-
-		if (!self::use_templatedefinition_namespaces()) {
-			return;
-		}
-
-		self::$current_namespace = $namespace;
-
-		// Restart the counter
-		self::$templatedefinition_counter = 0;
-	}
-
 	public static function is_not_mangled() {
 
 		// By default, it is mangled, if not mangled then param "mangled" must have value "none"
@@ -41,100 +19,21 @@ class PoP_ServerUtils {
 
 		return !self::is_not_mangled();
 	}
-	
+
 	/**
-	 * Function used to create a definition for a template. Needed for reducing the filesize of the html generated for PROD
-	 * Instead of using the name of the $template_id, we use a unique number in base 36, so the name will occupy much lower size
-	 * Comment Leo 27/09/2017: Changed from $template_id to only $id so that it can also be used with ResourceLoaders
+	 * Use namespaces for the plugins, to avoid conflicts with the decentralized approach when 2 websites have different plugins installed
 	 */
-	public static function get_template_definition($id/*$template_id*/, $mirror = false) {
+	public static function use_templatedefinition_constantovertime() {
 
-		// If not mangled, then that's it, use the original $template_id
-		if (self::is_not_mangled()) {
-			return $id;
+		if (defined('POP_SERVER_TEMPLATEDEFINITION_CONSTANTOVERTIME')) {
+			return POP_SERVER_TEMPLATEDEFINITION_CONSTANTOVERTIME;
 		}
 
-		// Mirror: it simply returns the $template_id again. It confirms in the code that this decision is deliberate 
-		// (not calling function get_template_definition could also be that the developer forgot about it)
-		// It is simply used to explicitly say that we need the same name as the template_id, eg: for the filtercomponents,
-		// so that in the URL params it shows names that make sense (author=...&search=...)
-		if ($mirror) {
-			return $id;
-		}
-
-		$templatedefinition_type = self::get_templatedefinition_type();
-
-		// Type 0: Use $template_id as the definition
-		if ($templatedefinition_type === 0) {
-			return $id;
-		}
-
-		// Comment Leo: Fix here! The array should be injectable, each plug-in should add its reserved names
-		// Reserved definitions: those which are used with the mirroring, and which can conflict with a generated definition
-		// Eg: define ('GD_TEMPLATE_FORMCOMPONENT_COMMENTID', PoP_ServerUtils::get_template_definition('cid', true));
-		$reserved = array();
-		if (!self::use_templatedefinition_namespaces()) {
-			
-			$reserved = array(
-				'pid', // post id
-				'uid', // user id
-				'lid', // location id
-				'cid', // comment id
-				'fa', // to avoid template with class "fa"
-				'btn', // to avoid template with class "btn"
-				// 'tag', // for the pageSection; commented since renaming it to tagpage because of problems with prettify
-			);
-		}
-		do {
-
-			// Convert the number to base 36 to save chars
-			$counter = base_convert(self::$templatedefinition_counter, 10, 36);
-
-			// Increase the counter by 1.
-			self::$templatedefinition_counter++;
-
-			// If we are not using namespacing, then make sure that the definition does not start with a number
-			if (!self::use_templatedefinition_namespaces()) {
-
-				// If we reach a number whose base 36 conversion starts with a number, and not a letter, then skip
-				if (self::$templatedefinition_counter == 36) {
-
-					// 36 in base 10 = 10 in base 36
-					// 360 in base 10 = a0 in base 36
-					self::$templatedefinition_counter = 360;
-				}
-				elseif (self::$templatedefinition_counter == 1296) {
-
-					// 1296 in base 10 = 100 in base 36
-					// 12960 in base 10 = a00 in base 36
-					self::$templatedefinition_counter = 12960;
-				}
-				elseif (self::$templatedefinition_counter == 46656) {
-
-					// 46656 in base 10 = 1000 in base 36
-					// 466560 in base 10 = a000 in base 36
-					self::$templatedefinition_counter = 466560;
-				}
-			}
-		} 
-		while (in_array($counter, $reserved));
-
-		// Type 2: Use base36 $counter as the definition
-		if ($templatedefinition_type === 2) {
-			return (self::use_templatedefinition_namespaces() ? self::$current_namespace : '').$counter;
-		}
-
-		// Type 1: Use both base36 counter and $template_id as the definition
-		// Do not add "-" or "_" to the definition, since some templates cannot support it.
-		// Eg: formcomponenteditor, used with wp_editor
-		return $counter.$id;
+		return true;
 	}
 
 	/**
-	 * Types:
-	 * 0: Use $template_id as the definition
-	 * 1: Use both base36 counter and $template_id as the definition
-	 * 2: Use base36 counter as the definition
+	 * Use namespaces for the plugins, to avoid conflicts with the decentralized approach when 2 websites have different plugins installed
 	 */
 	public static function use_templatedefinition_namespaces() {
 
@@ -142,7 +41,9 @@ class PoP_ServerUtils {
 			return POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES;
 		}
 
-		return true;
+		// If we are using the "Constant over time" option, then the potential conflict from 2 websites not having the same name for the same templates
+		// can be handled properly by sharing the same database of names across all websites. Then, there is no need for the namespace
+		return !self::use_templatedefinition_constantovertime();
 	}
 
 	/**

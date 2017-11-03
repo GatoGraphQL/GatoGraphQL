@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-locationpost-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-locationpost-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_STORY_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-story-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_STORY_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-story-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-announcement-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-announcement-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-discussion-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-discussion-update'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-featured-create'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('messagefeedbackinner-featured-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-locationpost-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-locationpost-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-story-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-story-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-announcement-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-announcement-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-discussion-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-discussion-update'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-featured-create'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-featured-update'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

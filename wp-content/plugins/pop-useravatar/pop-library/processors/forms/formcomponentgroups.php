@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_FILEUPLOAD_PICTURE', PoP_ServerUtils::get_template_definition('formcomponentgroup-fileupload-picture'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_FILEUPLOAD_PICTURE', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-fileupload-picture'));
 
 class PoP_UserAvatar_Template_Processor_FormComponentGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

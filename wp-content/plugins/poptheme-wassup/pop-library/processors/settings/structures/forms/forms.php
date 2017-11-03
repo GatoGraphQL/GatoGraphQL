@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_SETTINGS', PoP_ServerUtils::get_template_definition('form-settings'));
+define ('GD_TEMPLATE_FORM_SETTINGS', PoP_TemplateIDUtils::get_template_definition('form-settings'));
 
 class GD_Template_Processor_SettingsForms extends GD_Template_Processor_FormsBase {
 

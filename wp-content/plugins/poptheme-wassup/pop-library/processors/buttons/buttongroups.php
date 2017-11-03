@@ -5,21 +5,21 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONGROUP_SECTION', PoP_ServerUtils::get_template_definition('buttongroup-section'));
-define ('GD_TEMPLATE_BUTTONGROUP_SECTIONWITHMAP', PoP_ServerUtils::get_template_definition('buttongroup-sectionwithmap'));
-define ('GD_TEMPLATE_BUTTONGROUP_TAGSECTION', PoP_ServerUtils::get_template_definition('buttongroup-section'));
-define ('GD_TEMPLATE_BUTTONGROUP_TAGSECTIONWITHMAP', PoP_ServerUtils::get_template_definition('buttongroup-sectionwithmap'));
-define ('GD_TEMPLATE_BUTTONGROUP_USERS', PoP_ServerUtils::get_template_definition('buttongroup-users'));
-define ('GD_TEMPLATE_BUTTONGROUP_HIGHLIGHTS', PoP_ServerUtils::get_template_definition('buttongroup-highlights'));
-define ('GD_TEMPLATE_BUTTONGROUP_MYCONTENT', PoP_ServerUtils::get_template_definition('buttongroup-mycontent'));
-define ('GD_TEMPLATE_BUTTONGROUP_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('buttongroup-myhighlights'));
-define ('GD_TEMPLATE_BUTTONGROUP_TAGSECTION', PoP_ServerUtils::get_template_definition('buttongroup-tagsection'));
-define ('GD_TEMPLATE_BUTTONGROUP_HOMESECTION', PoP_ServerUtils::get_template_definition('buttongroup-homesection'));
-define ('GD_TEMPLATE_BUTTONGROUP_AUTHORSECTION', PoP_ServerUtils::get_template_definition('buttongroup-authorsection'));
-define ('GD_TEMPLATE_BUTTONGROUP_AUTHORSECTIONWITHMAP', PoP_ServerUtils::get_template_definition('buttongroup-authorsectionwithmap'));
-define ('GD_TEMPLATE_BUTTONGROUP_AUTHORUSERS', PoP_ServerUtils::get_template_definition('buttongroup-authorusers'));
-define ('GD_TEMPLATE_BUTTONGROUP_TAGS', PoP_ServerUtils::get_template_definition('buttongroup-tags'));
-define ('GD_TEMPLATE_BUTTONGROUP_AUTHORTAGS', PoP_ServerUtils::get_template_definition('buttongroup-authortags'));
+define ('GD_TEMPLATE_BUTTONGROUP_SECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-section'));
+define ('GD_TEMPLATE_BUTTONGROUP_SECTIONWITHMAP', PoP_TemplateIDUtils::get_template_definition('buttongroup-sectionwithmap'));
+define ('GD_TEMPLATE_BUTTONGROUP_TAGSECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-section'));
+define ('GD_TEMPLATE_BUTTONGROUP_TAGSECTIONWITHMAP', PoP_TemplateIDUtils::get_template_definition('buttongroup-sectionwithmap'));
+define ('GD_TEMPLATE_BUTTONGROUP_USERS', PoP_TemplateIDUtils::get_template_definition('buttongroup-users'));
+define ('GD_TEMPLATE_BUTTONGROUP_HIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('buttongroup-highlights'));
+define ('GD_TEMPLATE_BUTTONGROUP_MYCONTENT', PoP_TemplateIDUtils::get_template_definition('buttongroup-mycontent'));
+define ('GD_TEMPLATE_BUTTONGROUP_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('buttongroup-myhighlights'));
+define ('GD_TEMPLATE_BUTTONGROUP_TAGSECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-tagsection'));
+define ('GD_TEMPLATE_BUTTONGROUP_HOMESECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-homesection'));
+define ('GD_TEMPLATE_BUTTONGROUP_AUTHORSECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-authorsection'));
+define ('GD_TEMPLATE_BUTTONGROUP_AUTHORSECTIONWITHMAP', PoP_TemplateIDUtils::get_template_definition('buttongroup-authorsectionwithmap'));
+define ('GD_TEMPLATE_BUTTONGROUP_AUTHORUSERS', PoP_TemplateIDUtils::get_template_definition('buttongroup-authorusers'));
+define ('GD_TEMPLATE_BUTTONGROUP_TAGS', PoP_TemplateIDUtils::get_template_definition('buttongroup-tags'));
+define ('GD_TEMPLATE_BUTTONGROUP_AUTHORTAGS', PoP_TemplateIDUtils::get_template_definition('buttongroup-authortags'));
 
 class GD_Custom_Template_Processor_ButtonGroups extends GD_Template_Processor_CustomButtonGroupsBase {
 

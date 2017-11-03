@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_CODE_MEMBERSLABEL', PoP_ServerUtils::get_template_definition('ure-code-memberslabel'));
+define ('GD_URE_TEMPLATE_CODE_MEMBERSLABEL', PoP_TemplateIDUtils::get_template_definition('ure-code-memberslabel'));
 
 class GD_URE_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 

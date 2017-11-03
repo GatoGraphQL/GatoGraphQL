@@ -5,24 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('forminner-locationpost-update'));
-define ('GD_TEMPLATE_FORMINNER_LOCATIONPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('forminner-locationpostlink-update'));
-define ('GD_TEMPLATE_FORMINNER_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('forminner-locationpost-create'));
-define ('GD_TEMPLATE_FORMINNER_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('forminner-locationpostlink-create'));
-define ('GD_TEMPLATE_FORMINNER_STORY_UPDATE', PoP_ServerUtils::get_template_definition('forminner-story-update'));
-define ('GD_TEMPLATE_FORMINNER_STORYLINK_UPDATE', PoP_ServerUtils::get_template_definition('forminner-storylink-update'));
-define ('GD_TEMPLATE_FORMINNER_STORY_CREATE', PoP_ServerUtils::get_template_definition('forminner-story-create'));
-define ('GD_TEMPLATE_FORMINNER_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('forminner-storylink-create'));
-define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('forminner-announcement-update'));
-define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('forminner-announcementlink-update'));
-define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('forminner-announcement-create'));
-define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('forminner-announcementlink-create'));
-define ('GD_TEMPLATE_FORMINNER_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('forminner-discussion-update'));
-define ('GD_TEMPLATE_FORMINNER_DISCUSSIONLINK_UPDATE', PoP_ServerUtils::get_template_definition('forminner-discussionlink-update'));
-define ('GD_TEMPLATE_FORMINNER_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('forminner-discussion-create'));
-define ('GD_TEMPLATE_FORMINNER_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('forminner-discussionlink-create'));
-define ('GD_TEMPLATE_FORMINNER_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('forminner-featured-update'));
-define ('GD_TEMPLATE_FORMINNER_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('forminner-featured-create'));
+define ('GD_TEMPLATE_FORMINNER_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-locationpost-update'));
+define ('GD_TEMPLATE_FORMINNER_LOCATIONPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-locationpostlink-update'));
+define ('GD_TEMPLATE_FORMINNER_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-locationpost-create'));
+define ('GD_TEMPLATE_FORMINNER_LOCATIONPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-locationpostlink-create'));
+define ('GD_TEMPLATE_FORMINNER_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-story-update'));
+define ('GD_TEMPLATE_FORMINNER_STORYLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-storylink-update'));
+define ('GD_TEMPLATE_FORMINNER_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-story-create'));
+define ('GD_TEMPLATE_FORMINNER_STORYLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-storylink-create'));
+define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-announcement-update'));
+define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-announcementlink-update'));
+define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-announcement-create'));
+define ('GD_TEMPLATE_FORMINNER_ANNOUNCEMENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-announcementlink-create'));
+define ('GD_TEMPLATE_FORMINNER_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-discussion-update'));
+define ('GD_TEMPLATE_FORMINNER_DISCUSSIONLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-discussionlink-update'));
+define ('GD_TEMPLATE_FORMINNER_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-discussion-create'));
+define ('GD_TEMPLATE_FORMINNER_DISCUSSIONLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-discussionlink-create'));
+define ('GD_TEMPLATE_FORMINNER_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-featured-update'));
+define ('GD_TEMPLATE_FORMINNER_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-featured-create'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostFormInners extends Wassup_Template_Processor_CreateUpdatePostFormInnersBase {
 

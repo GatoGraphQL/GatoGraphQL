@@ -5,18 +5,18 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCES', PoP_ServerUtils::get_template_definition('widgetwrapper-references'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCES_LINE', PoP_ServerUtils::get_template_definition('widgetwrapper-references-line'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_AUTHOR_CONTACT', PoP_ServerUtils::get_template_definition('widgetwrapper-author-contact'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('widgetwrapper-referencedby-simpleview'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('widgetwrapper-referencedby-fullview'));
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('widgetwrapper-referencedby-details'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCES', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-references'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCES_LINE', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-references-line'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_AUTHOR_CONTACT', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-author-contact'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-referencedby-simpleview'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-referencedby-fullview'));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('widgetwrapper-referencedby-details'));
 
 // Comment Leo 07/12/2015: Use a short name, since it will be added as param "layout" in the url
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_ServerUtils::get_template_definition('refby-details', true));
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('refby-simpleview', true));
-define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_ServerUtils::get_template_definition('refby-fullview', true));
-define ('GD_TEMPLATE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('comments', true));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_TemplateIDUtils::get_template_definition('refby-details', true));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('refby-simpleview', true));
+define ('GD_TEMPLATE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('refby-fullview', true));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('comments', true));
 
 class GD_Template_Processor_SidebarComponentWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

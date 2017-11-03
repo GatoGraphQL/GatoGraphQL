@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-multiplesimpleview'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewpost-link-simpleview'));
-// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-previewost-webpost-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-multiplesimpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOSTLINK_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewpost-link-simpleview'));
+// define ('GD_TEMPLATE_LAYOUT_PREVIEWPOST_WEBPOST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-previewost-webpost-simpleview'));
 
 class GD_Template_Processor_CustomSimpleViewPreviewPostLayouts extends GD_Template_Processor_CustomSimpleViewPreviewPostLayoutsBase {
 

@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_EVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-events'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_PASTEVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-pastevents'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_EVENTS_CALENDAR', PoP_ServerUtils::get_template_definition('sidebarinner-section-events-calendar'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYEVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-myevents'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mypastevents'));
-define ('GD_TEMPLATE_SIDEBARINNER_TAG_EVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-tag-events'));
-define ('GD_TEMPLATE_SIDEBARINNER_TAG_PASTEVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-tag-pastevents'));
-define ('GD_TEMPLATE_SIDEBARINNER_TAG_EVENTS_CALENDAR', PoP_ServerUtils::get_template_definition('sidebarinner-tag-events-calendar'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorevents'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorpastevents'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR', PoP_ServerUtils::get_template_definition('sidebarinner-section-authoreventscalendar'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_EVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-events'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_PASTEVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-pastevents'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_EVENTS_CALENDAR', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-events-calendar'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-myevents'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-mypastevents'));
+define ('GD_TEMPLATE_SIDEBARINNER_TAG_EVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-tag-events'));
+define ('GD_TEMPLATE_SIDEBARINNER_TAG_PASTEVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-tag-pastevents'));
+define ('GD_TEMPLATE_SIDEBARINNER_TAG_EVENTS_CALENDAR', PoP_TemplateIDUtils::get_template_definition('sidebarinner-tag-events-calendar'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authorevents'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authorpastevents'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authoreventscalendar'));
 
 class GD_EM_Template_Processor_CustomSectionSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 	

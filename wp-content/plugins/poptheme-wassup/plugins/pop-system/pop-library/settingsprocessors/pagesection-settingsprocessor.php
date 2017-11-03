@@ -26,6 +26,7 @@ class PoPTheme_Wassup_PoPSystem_PageSectionSettingsProcessor extends Wassup_Page
 			 * System
 			 *********************************************/
 			case POP_SYSTEM_PAGE_SYSTEM_BUILD:
+			case POP_SYSTEM_PAGE_SYSTEM_BUILDSERVER:
 			case POP_SYSTEM_PAGE_SYSTEM_GENERATE:
 			case POP_SYSTEM_PAGE_SYSTEM_GENERATETHEME:
 			case POP_SYSTEM_PAGE_SYSTEM_ACTIVATEPLUGINS:

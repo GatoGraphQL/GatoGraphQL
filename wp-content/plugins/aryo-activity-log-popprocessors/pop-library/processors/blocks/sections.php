@@ -8,12 +8,12 @@
 /*--------------------------------------------
  * Details: Thumb, title and excerpt
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-notifications-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-notifications-scroll-details'));
 
 /*--------------------------------------------
  * List
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-notifications-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-notifications-scroll-list'));
 
 class AAL_PoPProcessors_Template_Processor_SectionBlocks extends GD_Template_Processor_BlocksBase {
 

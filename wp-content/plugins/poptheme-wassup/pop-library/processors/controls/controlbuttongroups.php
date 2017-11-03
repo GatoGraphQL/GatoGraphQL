@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-addcontentfaq'));
-define ('GD_TEMPLATE_CUSTOMCONTROLBUTTONGROUP_ACCOUNTFAQ', PoP_ServerUtils::get_template_definition('customcontrolbuttongroup-accountfaq'));
-define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDWEBPOST', PoP_ServerUtils::get_template_definition('controlbuttongroup-addwebpost'));
+define ('GD_TEMPLATE_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-addcontentfaq'));
+define ('GD_TEMPLATE_CUSTOMCONTROLBUTTONGROUP_ACCOUNTFAQ', PoP_TemplateIDUtils::get_template_definition('customcontrolbuttongroup-accountfaq'));
+define ('GD_TEMPLATE_CONTROLBUTTONGROUP_ADDWEBPOST', PoP_TemplateIDUtils::get_template_definition('controlbuttongroup-addwebpost'));
 
 class GD_Template_Processor_CustomControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

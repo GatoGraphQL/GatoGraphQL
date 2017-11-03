@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_EVENT_CREATE', PoP_ServerUtils::get_template_definition('block-emptysideinfo-event-create'));
-define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-emptysideinfo-eventlink-create'));
+define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-emptysideinfo-event-create'));
+define ('GD_TEMPLATE_BLOCK_EMPTYSIDEINFO_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-emptysideinfo-eventlink-create'));
 
 class GD_EM_Template_Processor_CustomSideInfoBlocks extends GD_Template_Processor_CustomSideInfoBlocksBase {
 

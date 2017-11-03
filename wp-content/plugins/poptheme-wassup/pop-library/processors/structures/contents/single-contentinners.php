@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTINNER_AUTHOR', PoP_ServerUtils::get_template_definition('contentinner-author'));
-// define ('GD_TEMPLATE_CONTENTINNER_TAG', PoP_ServerUtils::get_template_definition('contentinner-tag'));
-define ('GD_TEMPLATE_CONTENTINNER_SINGLE', PoP_ServerUtils::get_template_definition('contentinner-single'));
-define ('GD_TEMPLATE_CONTENTINNER_LINKSINGLE', PoP_ServerUtils::get_template_definition('contentinner-linksingle'));
-define ('GD_TEMPLATE_CONTENTINNER_HIGHLIGHTSINGLE', PoP_ServerUtils::get_template_definition('contentinner-highlightsingle'));
-define ('GD_TEMPLATE_CONTENTINNER_POSTHEADER', PoP_ServerUtils::get_template_definition('contentinner-postheader'));
-define ('GD_TEMPLATE_CONTENTINNER_USERHEADER', PoP_ServerUtils::get_template_definition('contentinner-userheader'));
-define ('GD_TEMPLATE_CONTENTINNER_USERPOSTINTERACTION', PoP_ServerUtils::get_template_definition('contentinner-userpostinteraction'));
-define ('GD_TEMPLATE_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION', PoP_ServerUtils::get_template_definition('contentinner-userhighlightpostinteraction'));
+define ('GD_TEMPLATE_CONTENTINNER_AUTHOR', PoP_TemplateIDUtils::get_template_definition('contentinner-author'));
+// define ('GD_TEMPLATE_CONTENTINNER_TAG', PoP_TemplateIDUtils::get_template_definition('contentinner-tag'));
+define ('GD_TEMPLATE_CONTENTINNER_SINGLE', PoP_TemplateIDUtils::get_template_definition('contentinner-single'));
+define ('GD_TEMPLATE_CONTENTINNER_LINKSINGLE', PoP_TemplateIDUtils::get_template_definition('contentinner-linksingle'));
+define ('GD_TEMPLATE_CONTENTINNER_HIGHLIGHTSINGLE', PoP_TemplateIDUtils::get_template_definition('contentinner-highlightsingle'));
+define ('GD_TEMPLATE_CONTENTINNER_POSTHEADER', PoP_TemplateIDUtils::get_template_definition('contentinner-postheader'));
+define ('GD_TEMPLATE_CONTENTINNER_USERHEADER', PoP_TemplateIDUtils::get_template_definition('contentinner-userheader'));
+define ('GD_TEMPLATE_CONTENTINNER_USERPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('contentinner-userpostinteraction'));
+define ('GD_TEMPLATE_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION', PoP_TemplateIDUtils::get_template_definition('contentinner-userhighlightpostinteraction'));
 
 class GD_Template_Processor_SingleContentInners extends GD_Template_Processor_ContentSingleInnersBase {
 

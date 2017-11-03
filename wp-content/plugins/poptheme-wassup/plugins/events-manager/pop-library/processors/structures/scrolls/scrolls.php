@@ -5,40 +5,40 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_LOCATIONS', PoP_ServerUtils::get_template_definition('scroll-locations'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('scroll-locations'));
 
-define ('GD_TEMPLATE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-myevents-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mypastevents-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-myevents-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mypastevents-simpleviewpreview'));
 
-define ('GD_TEMPLATE_SCROLL_MYEVENTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-myevents-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mypastevents-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYEVENTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-myevents-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mypastevents-fullviewpreview'));
 
-define ('GD_TEMPLATE_SCROLL_EVENTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-events-navigator'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-pastevents-navigator'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-events-navigator'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-navigator'));
 
-define ('GD_TEMPLATE_SCROLL_EVENTS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-events-addons'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-pastevents-addons'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-events-addons'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-addons'));
 
-define ('GD_TEMPLATE_SCROLL_EVENTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-events-details'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-pastevents-details'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-events-details'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-details'));
 
-define ('GD_TEMPLATE_SCROLL_EVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-events-simpleview'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-pastevents-simpleview'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-events-simpleview'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-simpleview'));
 
-define ('GD_TEMPLATE_SCROLL_EVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-events-fullview'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-pastevents-fullview'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-events-fullview'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-fullview'));
 
-// define ('GD_TEMPLATE_SCROLL_AUTHOREVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-authorevents-simpleview'));
-// define ('GD_TEMPLATE_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scroll-authorpastevents-simpleview'));
+// define ('GD_TEMPLATE_SCROLL_AUTHOREVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorevents-simpleview'));
+// define ('GD_TEMPLATE_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorpastevents-simpleview'));
 
-define ('GD_TEMPLATE_SCROLL_AUTHOREVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorevents-fullview'));
-define ('GD_TEMPLATE_SCROLL_AUTHORPASTEVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authorpastevents-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHOREVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorevents-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORPASTEVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authorpastevents-fullview'));
 
-define ('GD_TEMPLATE_SCROLL_EVENTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-events-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-pastevents-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-events-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLL_EVENTS_LIST', PoP_ServerUtils::get_template_definition('scroll-events-list'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_LIST', PoP_ServerUtils::get_template_definition('scroll-pastevents-list'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-events-list'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-list'));
 
 class GD_EM_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsBase {
 

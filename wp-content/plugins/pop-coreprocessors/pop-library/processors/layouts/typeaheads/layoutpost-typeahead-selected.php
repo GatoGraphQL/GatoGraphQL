@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTPOST_TYPEAHEAD_SELECTED', PoP_ServerUtils::get_template_definition('layoutpost-typeahead-selected'));
+define ('GD_TEMPLATE_LAYOUTPOST_TYPEAHEAD_SELECTED', PoP_TemplateIDUtils::get_template_definition('layoutpost-typeahead-selected'));
 
 class GD_Template_Processor_PostTypeaheadSelectedLayouts extends GD_Template_Processor_PostTypeaheadSelectedLayoutsBase {
 

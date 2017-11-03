@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSEL_BLOG', PoP_ServerUtils::get_template_definition('carousel-blog'));
-define ('GD_TEMPLATE_CAROUSEL_FEATURED', PoP_ServerUtils::get_template_definition('carousel-featured'));
+define ('GD_TEMPLATE_CAROUSEL_BLOG', PoP_TemplateIDUtils::get_template_definition('carousel-blog'));
+define ('GD_TEMPLATE_CAROUSEL_FEATURED', PoP_TemplateIDUtils::get_template_definition('carousel-featured'));
 
 class GD_Custom_Template_Processor_Carousels extends GD_Template_Processor_CarouselsBase {
 

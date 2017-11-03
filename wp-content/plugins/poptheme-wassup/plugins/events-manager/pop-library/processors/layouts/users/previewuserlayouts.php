@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-profile-mapdetails'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS', PoP_ServerUtils::get_template_definition('layout-previewuser-profile-horizontalmapdetails'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-authorpreviewuser-profile-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-profile-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWUSER_PROFILE_HORIZONTALMAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewuser-profile-horizontalmapdetails'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORPREVIEWUSER_PROFILE_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-authorpreviewuser-profile-mapdetails'));
 
 class GD_EM_Template_Processor_CustomPreviewUserLayouts extends GD_Template_Processor_CustomPreviewUserLayoutsBase {
 

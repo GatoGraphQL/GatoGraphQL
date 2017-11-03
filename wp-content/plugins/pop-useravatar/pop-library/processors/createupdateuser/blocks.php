@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_USERAVATAR_UPDATE', PoP_ServerUtils::get_template_definition('block-useravatar-update'));
+define ('GD_TEMPLATE_BLOCK_USERAVATAR_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-useravatar-update'));
 
 class PoP_UserAvatar_Template_Processor_UserBlocks extends GD_Template_Processor_BlocksBase {
 

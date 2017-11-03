@@ -7,8 +7,8 @@
 
 // define ('GD_CUSTOM_TEMPLATE_CODE_OURSPONSORSINTRO', 'custom-code-oursponsorsintro');
 // define ('GD_CUSTOM_TEMPLATE_CODE_VOLUNTEERWITHUSINTRO', 'custom-code-volunteerwithusintro');
-define ('GD_TEMPLATE_CODE_ADVISEUSINTRO', PoP_ServerUtils::get_template_definition('code-adviseusintro'));
-define ('GD_TEMPLATE_CODE_DISCUSSIONDISCLAIMER', PoP_ServerUtils::get_template_definition('code-discussiondisclaimer'));
+define ('GD_TEMPLATE_CODE_ADVISEUSINTRO', PoP_TemplateIDUtils::get_template_definition('code-adviseusintro'));
+define ('GD_TEMPLATE_CODE_DISCUSSIONDISCLAIMER', PoP_TemplateIDUtils::get_template_definition('code-discussiondisclaimer'));
 
 class GD_Custom_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 

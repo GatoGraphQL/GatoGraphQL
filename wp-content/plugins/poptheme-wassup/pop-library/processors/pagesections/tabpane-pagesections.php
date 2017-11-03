@@ -25,40 +25,40 @@ define ('GD_TEMPLATEID_PAGESECTIONSETTINGSID_QUICKVIEWSIDEINFO', 'quickview-side
 /**---------------------------------------------------------------------------------------------------------------
  * All PageSections
  * ---------------------------------------------------------------------------------------------------------------*/
-define ('GD_TEMPLATE_PAGESECTION_HOVER', PoP_ServerUtils::get_template_definition('hover', true));
-define ('GD_TEMPLATE_PAGESECTION_NAVIGATOR', PoP_ServerUtils::get_template_definition('navigator', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONS_HOME', PoP_ServerUtils::get_template_definition('addons-home', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONS_TAG', PoP_ServerUtils::get_template_definition('addons-tag', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONS_PAGE', PoP_ServerUtils::get_template_definition('addons-page', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONS_SINGLE', PoP_ServerUtils::get_template_definition('addons-single', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONS_AUTHOR', PoP_ServerUtils::get_template_definition('addons-author', true));
-define ('GD_TEMPLATE_PAGESECTION_ADDONS_404', PoP_ServerUtils::get_template_definition('addons-404', true));
+define ('GD_TEMPLATE_PAGESECTION_HOVER', PoP_TemplateIDUtils::get_template_definition('hover', true));
+define ('GD_TEMPLATE_PAGESECTION_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('navigator', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONS_HOME', PoP_TemplateIDUtils::get_template_definition('addons-home', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONS_TAG', PoP_TemplateIDUtils::get_template_definition('addons-tag', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONS_PAGE', PoP_TemplateIDUtils::get_template_definition('addons-page', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONS_SINGLE', PoP_TemplateIDUtils::get_template_definition('addons-single', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONS_AUTHOR', PoP_TemplateIDUtils::get_template_definition('addons-author', true));
+define ('GD_TEMPLATE_PAGESECTION_ADDONS_404', PoP_TemplateIDUtils::get_template_definition('addons-404', true));
 
-define ('GD_TEMPLATE_PAGESECTION_HOME', PoP_ServerUtils::get_template_definition('home', true));
-define ('GD_TEMPLATE_PAGESECTION_TAG', PoP_ServerUtils::get_template_definition('tagpage', true));
-define ('GD_TEMPLATE_PAGESECTION_PAGE', PoP_ServerUtils::get_template_definition('page', true));
-define ('GD_TEMPLATE_PAGESECTION_SINGLE', PoP_ServerUtils::get_template_definition('single', true));
-define ('GD_TEMPLATE_PAGESECTION_AUTHOR', PoP_ServerUtils::get_template_definition('author', true));
-define ('GD_TEMPLATE_PAGESECTION_404', PoP_ServerUtils::get_template_definition('error404', true));
-define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWHOME', PoP_ServerUtils::get_template_definition('quickview-home', true));
-define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG', PoP_ServerUtils::get_template_definition('quickview-tag', true));
-define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWPAGE', PoP_ServerUtils::get_template_definition('quickview-page', true));
-define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWSINGLE', PoP_ServerUtils::get_template_definition('quickview-single', true));
-define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWAUTHOR', PoP_ServerUtils::get_template_definition('quickview-author', true));
-define ('GD_TEMPLATE_PAGESECTION_QUICKVIEW404', PoP_ServerUtils::get_template_definition('quickview-error404', true));
+define ('GD_TEMPLATE_PAGESECTION_HOME', PoP_TemplateIDUtils::get_template_definition('home', true));
+define ('GD_TEMPLATE_PAGESECTION_TAG', PoP_TemplateIDUtils::get_template_definition('tagpage', true));
+define ('GD_TEMPLATE_PAGESECTION_PAGE', PoP_TemplateIDUtils::get_template_definition('page', true));
+define ('GD_TEMPLATE_PAGESECTION_SINGLE', PoP_TemplateIDUtils::get_template_definition('single', true));
+define ('GD_TEMPLATE_PAGESECTION_AUTHOR', PoP_TemplateIDUtils::get_template_definition('author', true));
+define ('GD_TEMPLATE_PAGESECTION_404', PoP_TemplateIDUtils::get_template_definition('error404', true));
+define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWHOME', PoP_TemplateIDUtils::get_template_definition('quickview-home', true));
+define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWTAG', PoP_TemplateIDUtils::get_template_definition('quickview-tag', true));
+define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWPAGE', PoP_TemplateIDUtils::get_template_definition('quickview-page', true));
+define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWSINGLE', PoP_TemplateIDUtils::get_template_definition('quickview-single', true));
+define ('GD_TEMPLATE_PAGESECTION_QUICKVIEWAUTHOR', PoP_TemplateIDUtils::get_template_definition('quickview-author', true));
+define ('GD_TEMPLATE_PAGESECTION_QUICKVIEW404', PoP_TemplateIDUtils::get_template_definition('quickview-error404', true));
 
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG', PoP_ServerUtils::get_template_definition('sideinfo-tag', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_PAGE', PoP_ServerUtils::get_template_definition('sideinfo-page', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_HOME', PoP_ServerUtils::get_template_definition('sideinfo-home', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_SINGLE', PoP_ServerUtils::get_template_definition('sideinfo-single', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_AUTHOR', PoP_ServerUtils::get_template_definition('sideinfo-author', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_EMPTY', PoP_ServerUtils::get_template_definition('sideinfo-empty', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG', PoP_ServerUtils::get_template_definition('quickview-sideinfo-tag', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWPAGE', PoP_ServerUtils::get_template_definition('quickview-sideinfo-page', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWHOME', PoP_ServerUtils::get_template_definition('quickview-sideinfo-home', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWSINGLE', PoP_ServerUtils::get_template_definition('quickview-sideinfo-single', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWAUTHOR', PoP_ServerUtils::get_template_definition('quickview-sideinfo-author', true));
-define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWEMPTY', PoP_ServerUtils::get_template_definition('quickview-sideinfo-empty', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_TAG', PoP_TemplateIDUtils::get_template_definition('sideinfo-tag', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_PAGE', PoP_TemplateIDUtils::get_template_definition('sideinfo-page', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_HOME', PoP_TemplateIDUtils::get_template_definition('sideinfo-home', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_SINGLE', PoP_TemplateIDUtils::get_template_definition('sideinfo-single', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_AUTHOR', PoP_TemplateIDUtils::get_template_definition('sideinfo-author', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_EMPTY', PoP_TemplateIDUtils::get_template_definition('sideinfo-empty', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWTAG', PoP_TemplateIDUtils::get_template_definition('quickview-sideinfo-tag', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWPAGE', PoP_TemplateIDUtils::get_template_definition('quickview-sideinfo-page', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWHOME', PoP_TemplateIDUtils::get_template_definition('quickview-sideinfo-home', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWSINGLE', PoP_TemplateIDUtils::get_template_definition('quickview-sideinfo-single', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWAUTHOR', PoP_TemplateIDUtils::get_template_definition('quickview-sideinfo-author', true));
+define ('GD_TEMPLATE_PAGESECTION_SIDEINFO_QUICKVIEWEMPTY', PoP_TemplateIDUtils::get_template_definition('quickview-sideinfo-empty', true));
 
 class GD_Template_Processor_CustomTabPanePageSections extends GD_Template_Processor_TabPanePageSectionsBase {
 

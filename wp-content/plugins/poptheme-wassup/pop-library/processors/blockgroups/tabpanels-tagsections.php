@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGMAINALLCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagmainallcontent'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagallcontent'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGLINKS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-taglinks'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGWEBPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagwebposts'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSUBSCRIBERS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagsubscribers'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGMAINALLCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagmainallcontent'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagallcontent'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGLINKS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-taglinks'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagwebposts'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSUBSCRIBERS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagsubscribers'));
 
 class GD_Template_Processor_TagSectionTabPanelBlockGroups extends GD_Template_Processor_TagSectionTabPanelBlockGroupsBase {
 

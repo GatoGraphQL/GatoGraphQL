@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-event'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-vertical-pastevent'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-event'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-horizontal-pastevent'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-event'));
-define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-event'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-vertical-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-event'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-horizontal-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-event'));
+define ('GD_TEMPLATE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-postsidebarinner-compacthorizontal-pastevent'));
 
 class GD_EM_Template_Processor_CustomPostLayoutSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 

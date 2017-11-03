@@ -1,5 +1,5 @@
 <?php
-class PoP_CDNCore_ConfigFileGenerator extends PoP_Frontend_RendererFileGeneratorBase {
+class PoP_CDNCore_ConfigFileGenerator extends PoP_Engine_RendererFileGeneratorBase {
 
 	function get_dir() {
 

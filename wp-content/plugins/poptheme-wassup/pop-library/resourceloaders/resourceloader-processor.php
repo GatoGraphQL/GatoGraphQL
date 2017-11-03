@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_CUSTOMFUNCTIONS', PoP_ServerUtils::get_template_definition('custom-functions'));
-define ('POP_RESOURCELOADER_CUSTOMPAGESECTIONMANAGER', PoP_ServerUtils::get_template_definition('custom-pagesection-manager'));
-define ('POP_RESOURCELOADER_UREAALFUNCTIONS', PoP_ServerUtils::get_template_definition('ure-aal-functions'));
-define ('POP_RESOURCELOADER_URECOMMUNITIES', PoP_ServerUtils::get_template_definition('ure-communities'));
+define ('POP_RESOURCELOADER_CUSTOMFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('custom-functions'));
+define ('POP_RESOURCELOADER_CUSTOMPAGESECTIONMANAGER', PoP_TemplateIDUtils::get_template_definition('custom-pagesection-manager'));
+define ('POP_RESOURCELOADER_UREAALFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('ure-aal-functions'));
+define ('POP_RESOURCELOADER_URECOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-communities'));
 
 class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

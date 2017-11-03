@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_FORMCOMPONENTS_MODERATEDPUBLISH', PoP_ServerUtils::get_template_definition('multicomponent-formcomponents-moderatedpublish'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORMCOMPONENTS_UNMODERATEDPUBLISH', PoP_ServerUtils::get_template_definition('multicomponent-formcomponents-unmoderatedpublish'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LEFTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-leftside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LINK_LEFTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-link-left'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOSTLINK_LEFTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-webpostlink-left'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOSTLINK_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-webpostlink-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOST_LEFTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-webpost-leftside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOST_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-webpost-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORMCOMPONENTS_MODERATEDPUBLISH', PoP_TemplateIDUtils::get_template_definition('multicomponent-formcomponents-moderatedpublish'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORMCOMPONENTS_UNMODERATEDPUBLISH', PoP_TemplateIDUtils::get_template_definition('multicomponent-formcomponents-unmoderatedpublish'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LEFTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-leftside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LINK_LEFTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-link-left'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOSTLINK_LEFTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-webpostlink-left'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOSTLINK_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-webpostlink-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOST_LEFTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-webpost-leftside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_WEBPOST_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-webpost-rightside'));
 
 class Wassup_Template_Processor_FormMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

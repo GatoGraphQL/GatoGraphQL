@@ -6,11 +6,11 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // define ('GD_URE_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_PROFILES', 'formcomponent-selectabletypeahead-ure-profiles');
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeahead-ure-communities'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_PROFILES', PoP_ServerUtils::get_template_definition('users', true));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_COMMUNITYUSERS', PoP_ServerUtils::get_template_definition('community-users', true));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_COMMUNITIES_POST', PoP_ServerUtils::get_template_definition('communities-post', true));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_COMMUNITIES_USER', PoP_ServerUtils::get_template_definition('communities-user', true));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeahead-ure-communities'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_PROFILES', PoP_TemplateIDUtils::get_template_definition('users', true));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_COMMUNITYUSERS', PoP_TemplateIDUtils::get_template_definition('community-users', true));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_COMMUNITIES_POST', PoP_TemplateIDUtils::get_template_definition('communities-post', true));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_COMMUNITIES_USER', PoP_TemplateIDUtils::get_template_definition('communities-user', true));
 
 class GD_URE_Template_Processor_UserSelectableTypeaheadFormComponentInputs extends GD_Template_Processor_UserSelectableTypeaheadFormComponentInputs {
 

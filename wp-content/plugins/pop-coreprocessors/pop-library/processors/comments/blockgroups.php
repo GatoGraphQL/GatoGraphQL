@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_ADDCOMMENT', PoP_ServerUtils::get_template_definition('blockgroup-addcomment'));
-define ('GD_TEMPLATE_BLOCKGROUP_REPLICATEADDCOMMENT', PoP_ServerUtils::get_template_definition('blockgroup-replicateaddcomment'));
+define ('GD_TEMPLATE_BLOCKGROUP_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-addcomment'));
+define ('GD_TEMPLATE_BLOCKGROUP_REPLICATEADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-replicateaddcomment'));
 
 class GD_Template_Processor_CommentsBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

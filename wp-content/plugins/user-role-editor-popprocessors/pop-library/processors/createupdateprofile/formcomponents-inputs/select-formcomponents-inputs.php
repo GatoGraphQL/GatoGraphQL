@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_ISCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-cup-iscommunity'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_MEMBERSTATUS', PoP_ServerUtils::get_template_definition('ure-formcomponent-memberstatus'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_ISCOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-cup-iscommunity'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_MEMBERSTATUS', PoP_TemplateIDUtils::get_template_definition('ure-formcomponent-memberstatus'));
 
 class GD_URE_Template_Processor_SelectFormComponentInputs extends GD_Template_Processor_SelectFormComponentsBase {
 

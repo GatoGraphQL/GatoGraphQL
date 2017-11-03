@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorlocationposts'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorstories'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorannouncements'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORDISCUSSIONS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authordiscussions'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorlocationposts'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORSTORIES', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorstories'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorannouncements'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authordiscussions'));
 
 class GD_Custom_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Template_Processor_AuthorSectionTabPanelBlockGroupsBase {
 

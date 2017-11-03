@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-sharebyemail-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-sharebyemail-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-embed-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-embed-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-api-socialmedia'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-api-previewdropdown'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-sendmessage-preview'));
-define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL', PoP_ServerUtils::get_template_definition('viewcomponent-userbutton-sidebar-sendmessage-full'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-sharebyemail-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-sharebyemail-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-embed-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-embed-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-api-socialmedia'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-api-previewdropdown'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-sendmessage-preview'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL', PoP_TemplateIDUtils::get_template_definition('viewcomponent-userbutton-sidebar-sendmessage-full'));
 
 class GD_Template_Processor_UserViewComponentButtons extends GD_Template_Processor_UserViewComponentButtonsBase {
 

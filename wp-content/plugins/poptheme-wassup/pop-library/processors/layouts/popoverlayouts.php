@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POPOVER_USER', PoP_ServerUtils::get_template_definition('layout-popover-user'));
-define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR', PoP_ServerUtils::get_template_definition('layout-popover-user-avatar'));
-define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR60', PoP_ServerUtils::get_template_definition('layout-popover-user-avatar60'));
-define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR40', PoP_ServerUtils::get_template_definition('layout-popover-user-avatar40'));
-define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR26', PoP_ServerUtils::get_template_definition('layout-popover-user-avatar26'));
+define ('GD_TEMPLATE_LAYOUT_POPOVER_USER', PoP_TemplateIDUtils::get_template_definition('layout-popover-user'));
+define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR', PoP_TemplateIDUtils::get_template_definition('layout-popover-user-avatar'));
+define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR60', PoP_TemplateIDUtils::get_template_definition('layout-popover-user-avatar60'));
+define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR40', PoP_TemplateIDUtils::get_template_definition('layout-popover-user-avatar40'));
+define ('GD_TEMPLATE_LAYOUT_POPOVER_USER_AVATAR26', PoP_TemplateIDUtils::get_template_definition('layout-popover-user-avatar26'));
 
 class GD_Template_Processor_CustomPopoverLayouts extends GD_Template_Processor_PopoverLayoutsBase {
 

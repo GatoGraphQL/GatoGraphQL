@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CALENDARCONTROLBUTTONGROUP_CALENDAR', PoP_ServerUtils::get_template_definition('calendarcontrolbuttongroup-calendar'));
+define ('GD_TEMPLATE_CALENDARCONTROLBUTTONGROUP_CALENDAR', PoP_TemplateIDUtils::get_template_definition('calendarcontrolbuttongroup-calendar'));
 
 class GD_Template_Processor_CalendarControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

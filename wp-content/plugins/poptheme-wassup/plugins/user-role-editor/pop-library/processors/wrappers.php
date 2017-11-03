@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS', PoP_ServerUtils::get_template_definition('ure-layoutwrapper-profileindividual-details'));
-define ('GD_URE_TEMPLATE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS', PoP_ServerUtils::get_template_definition('ure-layoutwrapper-profileorganization-details'));
+define ('GD_URE_TEMPLATE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS', PoP_TemplateIDUtils::get_template_definition('ure-layoutwrapper-profileindividual-details'));
+define ('GD_URE_TEMPLATE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS', PoP_TemplateIDUtils::get_template_definition('ure-layoutwrapper-profileorganization-details'));
 
 class GD_URE_Custom_Template_Processor_SidebarComponentsWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

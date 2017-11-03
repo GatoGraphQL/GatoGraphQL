@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_BUTTON_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-button-editmembership'));
+define ('GD_URE_TEMPLATE_BUTTON_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-button-editmembership'));
 // define ('GD_URE_TEMPLATE_BUTTON_USERLINK_MEMBERS', 'ure-button-userlink-members');
 
 class GD_URE_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {

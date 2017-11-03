@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBCOMPONENT_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('subcomponent-postcomments'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('lazysubcomponent-postcomments'));
-// define ('GD_TEMPLATE_LAZYSUBCOMPONENT_MAXHEIGHTPOSTCOMMENTS', PoP_ServerUtils::get_template_definition('lazysubcomponent-maxheightpostcomments'));
-define ('GD_TEMPLATE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS', PoP_ServerUtils::get_template_definition('lazysubcomponent-noheaderpostcomments'));
+define ('GD_TEMPLATE_SUBCOMPONENT_POSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('subcomponent-postcomments'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_POSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-postcomments'));
+// define ('GD_TEMPLATE_LAZYSUBCOMPONENT_MAXHEIGHTPOSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-maxheightpostcomments'));
+define ('GD_TEMPLATE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('lazysubcomponent-noheaderpostcomments'));
 
 class GD_Template_Processor_PostCommentSubcomponentLayouts extends GD_Template_Processor_SubcomponentLayoutsBase {
 

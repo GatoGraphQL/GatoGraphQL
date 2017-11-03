@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MENU_INDENT', PoP_ServerUtils::get_template_definition('layout-menu-indent'));
+define ('GD_TEMPLATE_LAYOUT_MENU_INDENT', PoP_TemplateIDUtils::get_template_definition('layout-menu-indent'));
 
 class GD_Template_Processor_IndentMenuLayouts extends GD_Template_Processor_IndentMenuLayoutsBase {
 

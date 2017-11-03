@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_MEMBERPRIVILEGES', PoP_ServerUtils::get_template_definition('ure-formcomponent-memberprivileges'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_MEMBERTAGS', PoP_ServerUtils::get_template_definition('ure-formcomponent-membertags'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERPRIVILEGES', PoP_ServerUtils::get_template_definition('memberprivileges', true));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERTAGS', PoP_ServerUtils::get_template_definition('membertags', true));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERSTATUS', PoP_ServerUtils::get_template_definition('memberstatus', true));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_MEMBERPRIVILEGES', PoP_TemplateIDUtils::get_template_definition('ure-formcomponent-memberprivileges'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_MEMBERTAGS', PoP_TemplateIDUtils::get_template_definition('ure-formcomponent-membertags'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERPRIVILEGES', PoP_TemplateIDUtils::get_template_definition('memberprivileges', true));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERTAGS', PoP_TemplateIDUtils::get_template_definition('membertags', true));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENT_MEMBERSTATUS', PoP_TemplateIDUtils::get_template_definition('memberstatus', true));
 
 class GD_URE_Template_Processor_ProfileMultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
 

@@ -13,6 +13,7 @@ class PoPTheme_Wassup_PoPSystem_Template_SettingsProcessor extends GD_Template_S
 
 			return array(
 				POP_SYSTEM_PAGE_SYSTEM_BUILD => true,
+				POP_SYSTEM_PAGE_SYSTEM_BUILDSERVER => true,
 				POP_SYSTEM_PAGE_SYSTEM_GENERATE => true,
 				POP_SYSTEM_PAGE_SYSTEM_GENERATETHEME => true,
 				POP_SYSTEM_PAGE_SYSTEM_ACTIVATEPLUGINS => true,
@@ -29,6 +30,7 @@ class PoPTheme_Wassup_PoPSystem_Template_SettingsProcessor extends GD_Template_S
 
 			return array(
 				POP_SYSTEM_PAGE_SYSTEM_BUILD => true,
+				POP_SYSTEM_PAGE_SYSTEM_BUILDSERVER => true,
 				POP_SYSTEM_PAGE_SYSTEM_GENERATE => true,
 				POP_SYSTEM_PAGE_SYSTEM_GENERATETHEME => true,
 				POP_SYSTEM_PAGE_SYSTEM_ACTIVATEPLUGINS => true,
@@ -46,6 +48,7 @@ class PoPTheme_Wassup_PoPSystem_Template_SettingsProcessor extends GD_Template_S
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 			return array(
 				POP_SYSTEM_PAGE_SYSTEM_BUILD => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
+				POP_SYSTEM_PAGE_SYSTEM_BUILDSERVER => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
 				POP_SYSTEM_PAGE_SYSTEM_GENERATE => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
 				POP_SYSTEM_PAGE_SYSTEM_GENERATETHEME => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
 				POP_SYSTEM_PAGE_SYSTEM_ACTIVATEPLUGINS => PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils::get_checkpoint($hierarchy, WASSUP_CHECKPOINT_SYSTEMACCESSVALID),
@@ -72,6 +75,7 @@ class PoPTheme_Wassup_PoPSystem_Template_SettingsProcessor extends GD_Template_S
 			// Actions 
 			$pageactions = array(
 				POP_SYSTEM_PAGE_SYSTEM_BUILD => GD_TEMPLATE_ACTION_SYSTEM_BUILD,
+				POP_SYSTEM_PAGE_SYSTEM_BUILDSERVER => GD_TEMPLATE_ACTION_SYSTEM_BUILDSERVER,
 				POP_SYSTEM_PAGE_SYSTEM_GENERATE => GD_TEMPLATE_ACTION_SYSTEM_GENERATE,
 				POP_SYSTEM_PAGE_SYSTEM_GENERATETHEME => GD_TEMPLATE_ACTION_SYSTEM_GENERATETHEME,
 				POP_SYSTEM_PAGE_SYSTEM_ACTIVATEPLUGINS => GD_TEMPLATE_ACTION_SYSTEM_ACTIVATEPLUGINS,

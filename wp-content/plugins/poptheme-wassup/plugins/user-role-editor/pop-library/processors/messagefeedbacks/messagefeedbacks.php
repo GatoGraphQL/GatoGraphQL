@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_MEMBERS', PoP_ServerUtils::get_template_definition('messagefeedback-members'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_ORGANIZATIONS', PoP_ServerUtils::get_template_definition('messagefeedback-organizations'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_INDIVIDUALS', PoP_ServerUtils::get_template_definition('messagefeedback-individuals'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MEMBERS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-members'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_ORGANIZATIONS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-organizations'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_INDIVIDUALS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-individuals'));
 
 class GD_URE_Template_Processor_CustomListMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_GF_TEMPLATE_FORMCOMPONENT_CUP_NEWSLETTER', PoP_ServerUtils::get_template_definition('gf-cup-newsletter'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENT_CUP_NEWSLETTER', PoP_TemplateIDUtils::get_template_definition('gf-cup-newsletter'));
 
 class GD_GF_Template_Processor_CheckboxFormComponentInputs extends GD_Template_Processor_CheckboxFormComponentsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_GADWPFUNCTIONS', PoP_ServerUtils::get_template_definition('gadwp-functions'));
+define ('POP_RESOURCELOADER_GADWPFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('gadwp-functions'));
 
 class GADWP_PoP_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

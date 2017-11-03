@@ -6,22 +6,22 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // Sections
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SEARCHPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-searchposts-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_HOMEALLCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-homeallcontent-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-tagallcontent-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ALLCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-allcontent-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_LINKS', PoP_ServerUtils::get_template_definition('blockgroup-links-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_HIGHLIGHTS', PoP_ServerUtils::get_template_definition('blockgroup-highlights-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_WEBPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-webposts-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SEARCHPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-searchposts-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_HOMEALLCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-homeallcontent-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGALLCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-tagallcontent-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-allcontent-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_LINKS', PoP_TemplateIDUtils::get_template_definition('blockgroup-links-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_HIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-highlights-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-webposts-tabpanel'));
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SEARCHUSERS', PoP_ServerUtils::get_template_definition('blockgroup-searchusers-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ALLUSERS', PoP_ServerUtils::get_template_definition('blockgroup-allusers-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_SEARCHUSERS', PoP_TemplateIDUtils::get_template_definition('blockgroup-searchusers-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_ALLUSERS', PoP_TemplateIDUtils::get_template_definition('blockgroup-allusers-tabpanel'));
 
 // My Content
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-mycontent-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYLINKS', PoP_ServerUtils::get_template_definition('blockgroup-mylinks-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('blockgroup-myhighlights-tabpanel'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-mywebposts-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-mycontent-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYLINKS', PoP_TemplateIDUtils::get_template_definition('blockgroup-mylinks-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-myhighlights-tabpanel'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_MYWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-mywebposts-tabpanel'));
 
 class GD_Template_Processor_SectionTabPanelBlockGroups extends GD_Template_Processor_SectionTabPanelBlockGroupsBase {
 

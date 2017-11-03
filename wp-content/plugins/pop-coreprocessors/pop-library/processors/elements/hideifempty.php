@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_HIDEIFEMPTY', PoP_ServerUtils::get_template_definition('hideifempty'));
+define ('GD_TEMPLATE_HIDEIFEMPTY', PoP_TemplateIDUtils::get_template_definition('hideifempty'));
 
 class GD_Template_Processor_HideIfEmpties extends GD_Template_Processor_HideIfEmptyBase {
 

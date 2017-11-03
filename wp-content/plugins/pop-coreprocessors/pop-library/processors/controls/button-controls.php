@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONCONTROL_RELOADBLOCKGROUP', PoP_ServerUtils::get_template_definition('buttoncontrol-reloadblockgroup'));
-define ('GD_TEMPLATE_BUTTONCONTROL_RELOADBLOCK', PoP_ServerUtils::get_template_definition('buttoncontrol-reloadblock'));
-define ('GD_TEMPLATE_BUTTONCONTROL_LOADLATESTBLOCK', PoP_ServerUtils::get_template_definition('buttoncontrol-loadlatestblock'));
-define ('GD_TEMPLATE_BUTTONCONTROL_RESETEDITOR', PoP_ServerUtils::get_template_definition('buttoncontrol-reseteditor'));
-// define ('GD_TEMPLATE_BUTTONCONTROL_OPENALL', PoP_ServerUtils::get_template_definition('buttoncontrol-openall'));
+define ('GD_TEMPLATE_BUTTONCONTROL_RELOADBLOCKGROUP', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-reloadblockgroup'));
+define ('GD_TEMPLATE_BUTTONCONTROL_RELOADBLOCK', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-reloadblock'));
+define ('GD_TEMPLATE_BUTTONCONTROL_LOADLATESTBLOCK', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-loadlatestblock'));
+define ('GD_TEMPLATE_BUTTONCONTROL_RESETEDITOR', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-reseteditor'));
+// define ('GD_TEMPLATE_BUTTONCONTROL_OPENALL', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-openall'));
 
 class GD_Template_Processor_ButtonControls extends GD_Template_Processor_ButtonControlsBase {
 

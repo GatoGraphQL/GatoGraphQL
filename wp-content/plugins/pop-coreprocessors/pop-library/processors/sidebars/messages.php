@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGE_NOREFERENCES', PoP_ServerUtils::get_template_definition('message-noreferences'));
-define ('GD_TEMPLATE_MESSAGE_NOCONTACT', PoP_ServerUtils::get_template_definition('message-nocontact'));
+define ('GD_TEMPLATE_MESSAGE_NOREFERENCES', PoP_TemplateIDUtils::get_template_definition('message-noreferences'));
+define ('GD_TEMPLATE_MESSAGE_NOCONTACT', PoP_TemplateIDUtils::get_template_definition('message-nocontact'));
 
 class GD_Template_Processor_WidgetMessages extends GD_Template_Processor_WidgetMessagesBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-inviteusers'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-inviteusers'));
 
 class PoP_Core_Template_Processor_MessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_INDIVIDUALINTERESTS', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-individualinterests'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_ORGANIZATIONCATEGORIES', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-organizationcategories'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_ORGANIZATIONTYPES', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-organizationtypes'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_INDIVIDUALINTERESTS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-individualinterests'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORGANIZATIONCATEGORIES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-organizationcategories'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORGANIZATIONTYPES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-organizationtypes'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_INDIVIDUALINTERESTS', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-individualinterests'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_ORGANIZATIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-organizationcategories'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_ORGANIZATIONTYPES', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-organizationtypes'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_INDIVIDUALINTERESTS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-individualinterests'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORGANIZATIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-organizationcategories'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORGANIZATIONTYPES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-organizationtypes'));
 
 class GD_URE_Custom_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

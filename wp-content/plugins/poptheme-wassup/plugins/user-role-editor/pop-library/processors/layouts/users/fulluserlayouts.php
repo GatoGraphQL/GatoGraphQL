@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_FULLUSER_ORGANIZATION', PoP_ServerUtils::get_template_definition('layout-fulluser-organization'));
-define ('GD_TEMPLATE_LAYOUT_FULLUSER_INDIVIDUAL', PoP_ServerUtils::get_template_definition('layout-fulluser-individual'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLUSER_ORGANIZATION', PoP_ServerUtils::get_template_definition('authorlayout-fulluser-organization'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLUSER_INDIVIDUAL', PoP_ServerUtils::get_template_definition('authorlayout-fulluser-individual'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLUSER_ORGANIZATION', PoP_ServerUtils::get_template_definition('singlelayout-fulluser-organization'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLUSER_INDIVIDUAL', PoP_ServerUtils::get_template_definition('singlelayout-fulluser-individual'));
+define ('GD_TEMPLATE_LAYOUT_FULLUSER_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('layout-fulluser-organization'));
+define ('GD_TEMPLATE_LAYOUT_FULLUSER_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('layout-fulluser-individual'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLUSER_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('authorlayout-fulluser-organization'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLUSER_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('authorlayout-fulluser-individual'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLUSER_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('singlelayout-fulluser-organization'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLUSER_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('singlelayout-fulluser-individual'));
 
 class GD_URE_Template_Processor_CustomFullUserLayouts extends GD_Template_Processor_CustomFullUserLayoutsBase {
 

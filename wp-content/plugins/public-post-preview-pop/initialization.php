@@ -6,7 +6,7 @@ class PPP_PoP_Initialization {
 		load_plugin_textdomain('ppp-pop', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('aw');
+		PoP_TemplateIDUtils::set_namespace('aw');
 
 		if (!is_admin()) {
 

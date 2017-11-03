@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLEINNER_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('tableinner-myannouncements'));
-define ('GD_TEMPLATE_TABLEINNER_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('tableinner-mydiscussions'));
-define ('GD_TEMPLATE_TABLEINNER_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('tableinner-mylocationposts'));
-define ('GD_TEMPLATE_TABLEINNER_MYSTORIES', PoP_ServerUtils::get_template_definition('tableinner-mystories'));
+define ('GD_TEMPLATE_TABLEINNER_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('tableinner-myannouncements'));
+define ('GD_TEMPLATE_TABLEINNER_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('tableinner-mydiscussions'));
+define ('GD_TEMPLATE_TABLEINNER_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('tableinner-mylocationposts'));
+define ('GD_TEMPLATE_TABLEINNER_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('tableinner-mystories'));
 
 class GD_Custom_Template_Processor_TableInners extends GD_Template_Processor_TableInnersBase {
 

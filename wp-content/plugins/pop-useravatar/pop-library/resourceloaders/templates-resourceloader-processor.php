@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_TEMPLATE_FORMCOMPONENT_FILEUPLOAD_PICTURE', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_FORMCOMPONENT_FILEUPLOAD_PICTURE));
-define ('POP_RESOURCELOADER_TEMPLATE_FILEUPLOAD_PICTURE_UPLOAD', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_FILEUPLOAD_PICTURE_UPLOAD));
-define ('POP_RESOURCELOADER_TEMPLATE_FILEUPLOAD_PICTURE_DOWNLOAD', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_FILEUPLOAD_PICTURE_DOWNLOAD));
+define ('POP_RESOURCELOADER_TEMPLATE_FORMCOMPONENT_FILEUPLOAD_PICTURE', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_FORMCOMPONENT_FILEUPLOAD_PICTURE));
+define ('POP_RESOURCELOADER_TEMPLATE_FILEUPLOAD_PICTURE_UPLOAD', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_FILEUPLOAD_PICTURE_UPLOAD));
+define ('POP_RESOURCELOADER_TEMPLATE_FILEUPLOAD_PICTURE_DOWNLOAD', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_FILEUPLOAD_PICTURE_DOWNLOAD));
 
 class PoP_UserAvatar_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor {
 

@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_ServerUtils::get_template_definition('content-postconclusionsidebar-horizontal'));
-define ('GD_TEMPLATE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_ServerUtils::get_template_definition('content-subjugatedpostconclusionsidebar-horizontal'));
-define ('GD_TEMPLATE_CONTENT_LATESTCOUNTS', PoP_ServerUtils::get_template_definition('content-latestcounts'));
+define ('GD_TEMPLATE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('content-postconclusionsidebar-horizontal'));
+define ('GD_TEMPLATE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('content-subjugatedpostconclusionsidebar-horizontal'));
+define ('GD_TEMPLATE_CONTENT_LATESTCOUNTS', PoP_TemplateIDUtils::get_template_definition('content-latestcounts'));
 
 class PoPCore_Template_Processor_Contents extends GD_Template_Processor_ContentsBase {
 

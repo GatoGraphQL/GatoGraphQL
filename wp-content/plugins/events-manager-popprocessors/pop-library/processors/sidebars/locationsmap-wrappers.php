@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP', PoP_ServerUtils::get_template_definition('em-layoutwrapper-postlocationsmap'));
-define ('GD_TEMPLATE_EM_LAYOUTWRAPPER_USERLOCATIONSMAP', PoP_ServerUtils::get_template_definition('em-layoutwrapper-userlocationsmap'));
+define ('GD_TEMPLATE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP', PoP_TemplateIDUtils::get_template_definition('em-layoutwrapper-postlocationsmap'));
+define ('GD_TEMPLATE_EM_LAYOUTWRAPPER_USERLOCATIONSMAP', PoP_TemplateIDUtils::get_template_definition('em-layoutwrapper-userlocationsmap'));
 
 class GD_EM_Template_Processor_LocationMapConditionWrappers extends GD_EM_Template_Processor_LocationMapConditionWrappersBase {
 

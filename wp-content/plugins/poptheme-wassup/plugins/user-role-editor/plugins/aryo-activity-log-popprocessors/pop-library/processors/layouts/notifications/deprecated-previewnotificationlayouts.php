@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_JOINEDCOMMUNITY_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewnotification-joinedcommunity-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_JOINEDCOMMUNITY_LIST', PoP_ServerUtils::get_template_definition('layout-previewnotification-joinedcommunity-list'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_UPDATEDUSERMEMBERSHIP_DETAILS', PoP_ServerUtils::get_template_definition('layout-previewnotification-updatedusermembership-details'));
-define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_UPDATEDUSERMEMBERSHIP_LIST', PoP_ServerUtils::get_template_definition('layout-previewnotification-updatedusermembership-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_JOINEDCOMMUNITY_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewnotification-joinedcommunity-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_JOINEDCOMMUNITY_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewnotification-joinedcommunity-list'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_UPDATEDUSERMEMBERSHIP_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-previewnotification-updatedusermembership-details'));
+define ('GD_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION_UPDATEDUSERMEMBERSHIP_LIST', PoP_TemplateIDUtils::get_template_definition('layout-previewnotification-updatedusermembership-list'));
 
 class GD_Template_Processor_CustomPreviewNotificationLayouts extends GD_Template_Processor_PreviewNotificationLayoutsBase {
 

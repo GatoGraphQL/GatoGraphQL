@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MENU_DROPDOWNBUTTON_TOP', PoP_ServerUtils::get_template_definition('layout-menu-dropdownbutton-top'));
-define ('GD_TEMPLATE_LAYOUT_MENU_DROPDOWNBUTTON_SIDE', PoP_ServerUtils::get_template_definition('layout-menu-dropdownbutton-side'));
+define ('GD_TEMPLATE_LAYOUT_MENU_DROPDOWNBUTTON_TOP', PoP_TemplateIDUtils::get_template_definition('layout-menu-dropdownbutton-top'));
+define ('GD_TEMPLATE_LAYOUT_MENU_DROPDOWNBUTTON_SIDE', PoP_TemplateIDUtils::get_template_definition('layout-menu-dropdownbutton-side'));
 
 class GD_Template_Processor_DropdownButtonMenuLayouts extends GD_Template_Processor_DropdownButtonMenuLayoutsBase {
 

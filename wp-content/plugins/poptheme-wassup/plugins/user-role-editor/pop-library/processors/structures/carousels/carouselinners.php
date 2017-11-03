@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELINNER_AUTHORMEMBERS', PoP_ServerUtils::get_template_definition('carouselinner-authormembers'));
+define ('GD_TEMPLATE_CAROUSELINNER_AUTHORMEMBERS', PoP_TemplateIDUtils::get_template_definition('carouselinner-authormembers'));
 
 class GD_URE_Template_Processor_CustomCarouselInners extends GD_Template_Processor_CarouselInnersBase {
 

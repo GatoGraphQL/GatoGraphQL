@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGETCOMPACT_ORGANIZATIONINFO', PoP_ServerUtils::get_template_definition('widgetcompact-organization-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_INDIVIDUALINFO', PoP_ServerUtils::get_template_definition('widgetcompact-individual-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_ORGANIZATIONINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-organization-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_INDIVIDUALINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-individual-info'));
 
 class GD_URE_Custom_Template_Processor_UserWidgets extends GD_Template_Processor_WidgetsBase {
 

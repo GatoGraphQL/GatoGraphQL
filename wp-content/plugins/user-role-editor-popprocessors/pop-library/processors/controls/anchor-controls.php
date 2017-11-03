@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY', PoP_ServerUtils::get_template_definition('ure-anchorcontrol-contentsourcecommunity'));
-define ('GD_URE_TEMPLATE_ANCHORCONTROL_CONTENTSOURCEORGANIZATION', PoP_ServerUtils::get_template_definition('ure-anchorcontrol-contentsourceorganization'));
+define ('GD_URE_TEMPLATE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-anchorcontrol-contentsourcecommunity'));
+define ('GD_URE_TEMPLATE_ANCHORCONTROL_CONTENTSOURCEORGANIZATION', PoP_TemplateIDUtils::get_template_definition('ure-anchorcontrol-contentsourceorganization'));
 
 class GD_URE_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

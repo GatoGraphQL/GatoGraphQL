@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUTUSER_TYPEAHEAD_SELECTED_FILTERBYCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-layoutuser-typeahead-selected-filterbycommunity'));
+define ('GD_URE_TEMPLATE_LAYOUTUSER_TYPEAHEAD_SELECTED_FILTERBYCOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-layoutuser-typeahead-selected-filterbycommunity'));
 
 class GD_URE_Template_Processor_TypeaheadLayouts extends GD_URE_Template_Processor_TypeaheadLayoutsBase {
 

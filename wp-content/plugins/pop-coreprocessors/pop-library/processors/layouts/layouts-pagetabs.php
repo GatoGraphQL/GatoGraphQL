@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_PAGETAB', PoP_ServerUtils::get_template_definition('layout-pagetab'));
+define ('GD_TEMPLATE_LAYOUT_PAGETAB', PoP_TemplateIDUtils::get_template_definition('layout-pagetab'));
 
 class GD_Template_Processor_PageTabsLayouts extends GD_Template_Processor_PageTabsLayoutsBase {
 

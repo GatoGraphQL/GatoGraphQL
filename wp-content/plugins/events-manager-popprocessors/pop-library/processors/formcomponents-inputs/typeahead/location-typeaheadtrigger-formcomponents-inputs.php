@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS_TRIGGER', PoP_ServerUtils::get_template_definition('formcomponent-selectabletypeaheadtrigger-locations'));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS_TRIGGER', PoP_TemplateIDUtils::get_template_definition('formcomponent-selectabletypeaheadtrigger-locations'));
 
 class GD_Template_Processor_LocationSelectableTypeaheadTriggerFormComponentInputs extends GD_Template_Processor_LocationSelectableTypeaheadTriggerFormComponentsBase {
 

@@ -6,7 +6,7 @@ class PoPTheme_Wassup_AutomatedEmails_Initialization {
 		load_plugin_textdomain('poptheme-wassup-automatedemails', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('ac');
+		PoP_TemplateIDUtils::set_namespace('ac');
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Global Variables and Configuration

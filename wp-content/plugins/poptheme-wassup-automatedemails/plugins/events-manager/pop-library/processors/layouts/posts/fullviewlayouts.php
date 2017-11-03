@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT', PoP_ServerUtils::get_template_definition('layout-automatedemails-fullview-event'));
-// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-automatedemails-fullview-pastevent'));
-// define ('GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT', PoP_ServerUtils::get_template_definition('authorlayout-automatedemails-fullview-event'));
-// define ('GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('authorlayout-automatedemails-fullview-pastevent'));
-// define ('GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT', PoP_ServerUtils::get_template_definition('singlelayout-automatedemails-fullview-event'));
-// define ('GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT', PoP_ServerUtils::get_template_definition('singlelayout-automatedemails-fullview-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-fullview-event'));
+// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-fullview-pastevent'));
+// define ('GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('authorlayout-automatedemails-fullview-event'));
+// define ('GD_TEMPLATE_AUTHORLAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('authorlayout-automatedemails-fullview-pastevent'));
+// define ('GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT', PoP_TemplateIDUtils::get_template_definition('singlelayout-automatedemails-fullview-event'));
+// define ('GD_TEMPLATE_SINGLELAYOUT_AUTOMATEDEMAILS_FULLVIEW_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('singlelayout-automatedemails-fullview-pastevent'));
 
 class PoP_ThemeWassup_EM_AE_Template_Processor_FullViewLayouts extends GD_Template_Processor_CustomFullViewLayoutsBase {
 

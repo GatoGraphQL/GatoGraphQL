@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_QUICKLINKGROUP_EVENTBOTTOM', PoP_ServerUtils::get_template_definition('quicklinkgroup-automatedemails-eventbottom'));
+define ('GD_TEMPLATE_QUICKLINKGROUP_EVENTBOTTOM', PoP_TemplateIDUtils::get_template_definition('quicklinkgroup-automatedemails-eventbottom'));
 
 class PoP_ThemeWassup_EM_AE_Template_Processor_QuicklinkGroups extends GD_Template_Processor_ControlGroupsBase {
 

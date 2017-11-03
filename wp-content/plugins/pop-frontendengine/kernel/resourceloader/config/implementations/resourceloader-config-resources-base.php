@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-class PoP_ResourceLoader_FileReproduction_ResourcesConfigBase extends PoP_Frontend_FileReproductionBase {
+class PoP_ResourceLoader_FileReproduction_ResourcesConfigBase extends PoP_Engine_FileReproductionBase {
 
     public function get_configuration() {
         

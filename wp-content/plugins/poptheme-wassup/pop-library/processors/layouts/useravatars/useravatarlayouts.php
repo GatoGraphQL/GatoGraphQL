@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_40', PoP_ServerUtils::get_template_definition('layout-useravatar-40'));
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_40_RESPONSIVE', PoP_ServerUtils::get_template_definition('layout-useravatar-40-responsive'));
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_120', PoP_ServerUtils::get_template_definition('layout-useravatar-120'));
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_120_RESPONSIVE', PoP_ServerUtils::get_template_definition('layout-useravatar-120-responsive'));
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_150', PoP_ServerUtils::get_template_definition('layout-useravatar-150'));
-define ('GD_TEMPLATE_LAYOUT_USERAVATAR_150_RESPONSIVE', PoP_ServerUtils::get_template_definition('layout-useravatar-150-responsive'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_40', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-40'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_40_RESPONSIVE', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-40-responsive'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_120', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-120'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_120_RESPONSIVE', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-120-responsive'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_150', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-150'));
+define ('GD_TEMPLATE_LAYOUT_USERAVATAR_150_RESPONSIVE', PoP_TemplateIDUtils::get_template_definition('layout-useravatar-150-responsive'));
 
 class GD_Template_Processor_CustomUserAvatarLayouts extends GD_Template_Processor_UserAvatarLayoutsBase {
 

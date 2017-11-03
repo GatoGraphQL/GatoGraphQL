@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONWRAPPER_HIGHLIGHTVIEW', PoP_ServerUtils::get_template_definition('buttonwrapper-highlightview'));
+define ('GD_TEMPLATE_BUTTONWRAPPER_HIGHLIGHTVIEW', PoP_TemplateIDUtils::get_template_definition('buttonwrapper-highlightview'));
 
 class Wassup_Template_Processor_ButtonWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

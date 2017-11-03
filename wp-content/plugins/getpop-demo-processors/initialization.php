@@ -6,7 +6,7 @@ class GetPoPDemo_Processors_Initialization {
 		load_plugin_textdomain('getpop-demo-processors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('am');
+		PoP_TemplateIDUtils::set_namespace('am');
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Global Variables and Configuration from CUSTOM folder

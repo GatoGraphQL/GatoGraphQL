@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES', PoP_ServerUtils::get_template_definition('layoutwrapper-locationpost-categories'));
-define ('GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES', PoP_ServerUtils::get_template_definition('layoutwrapper-discussion-categories'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-locationpost-categories'));
+define ('GD_TEMPLATE_LAYOUTWRAPPER_DISCUSSION_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layoutwrapper-discussion-categories'));
 
 class GD_Custom_Template_Processor_WidgetWrappers extends GD_Template_Processor_ConditionWrapperBase {
 

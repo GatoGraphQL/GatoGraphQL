@@ -8,28 +8,28 @@
 /*********************************************
  * My Content Tables
  *********************************************/
-define ('GD_TEMPLATE_BLOCK_MYEVENTS_TABLE_EDIT', PoP_ServerUtils::get_template_definition('block-myevents-table-edit'));
-define ('GD_TEMPLATE_BLOCK_MYPASTEVENTS_TABLE_EDIT', PoP_ServerUtils::get_template_definition('block-mypastevents-table-edit'));
+define ('GD_TEMPLATE_BLOCK_MYEVENTS_TABLE_EDIT', PoP_TemplateIDUtils::get_template_definition('block-myevents-table-edit'));
+define ('GD_TEMPLATE_BLOCK_MYPASTEVENTS_TABLE_EDIT', PoP_TemplateIDUtils::get_template_definition('block-mypastevents-table-edit'));
 
 /*--------------------------------------------
  * My Content Full Post Preview
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('block-myevents-scroll-simpleviewpreview'));
-define ('GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('block-mypastevents-scroll-simpleviewpreview'));
-define ('GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('block-myevents-scroll-fullviewpreview'));
-define ('GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('block-mypastevents-scroll-fullviewpreview'));
+define ('GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('block-myevents-scroll-simpleviewpreview'));
+define ('GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('block-mypastevents-scroll-simpleviewpreview'));
+define ('GD_TEMPLATE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('block-myevents-scroll-fullviewpreview'));
+define ('GD_TEMPLATE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('block-mypastevents-scroll-fullviewpreview'));
 
 /*********************************************
  * Typeaheads
  *********************************************/
-define ('GD_TEMPLATE_BLOCK_EVENTS_TYPEAHEAD', PoP_ServerUtils::get_template_definition('block-events-typeahead'));
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_TYPEAHEAD', PoP_ServerUtils::get_template_definition('block-pastevents-typeahead'));
-define ('GD_TEMPLATE_BLOCK_LOCATIONS_TYPEAHEAD', PoP_ServerUtils::get_template_definition('block-locations-typeahead'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('block-events-typeahead'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('block-pastevents-typeahead'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONS_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('block-locations-typeahead'));
 
 /*********************************************
  * Scrolls
  *********************************************/
-define ('GD_TEMPLATE_BLOCK_LOCATIONS_SCROLL', PoP_ServerUtils::get_template_definition('block-locations-scroll'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONS_SCROLL', PoP_TemplateIDUtils::get_template_definition('block-locations-scroll'));
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
  * Common blocks (Home/Page/Author/Single)
@@ -37,96 +37,96 @@ define ('GD_TEMPLATE_BLOCK_LOCATIONS_SCROLL', PoP_ServerUtils::get_template_defi
 /*--------------------------------------------
  * Navigator
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR', PoP_ServerUtils::get_template_definition('block-pastevents-scroll-navigator'));
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_NAVIGATOR', PoP_ServerUtils::get_template_definition('block-events-scroll-navigator'));
-define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR', PoP_ServerUtils::get_template_definition('block-eventscalendar-calendar-navigator'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scroll-navigator'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('block-events-scroll-navigator'));
+define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('block-eventscalendar-calendar-navigator'));
 
 /*--------------------------------------------
  * Addons
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS', PoP_ServerUtils::get_template_definition('block-pastevents-scroll-addons'));
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS', PoP_ServerUtils::get_template_definition('block-events-scroll-addons'));
-define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS', PoP_ServerUtils::get_template_definition('block-eventscalendar-calendar-addons'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_ADDONS', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scroll-addons'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_ADDONS', PoP_TemplateIDUtils::get_template_definition('block-events-scroll-addons'));
+define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS', PoP_TemplateIDUtils::get_template_definition('block-eventscalendar-calendar-addons'));
 
 /*--------------------------------------------
  * Details: Thumb, title and excerpt
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-events-scroll-details'));
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-pastevents-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-events-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scroll-details'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-authorevents-scroll-details'));
-define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-authorpastevents-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-authorevents-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-authorpastevents-scroll-details'));
 
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-tagevents-scroll-details'));
-define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS', PoP_ServerUtils::get_template_definition('block-tagpastevents-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-tagevents-scroll-details'));
+define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS', PoP_TemplateIDUtils::get_template_definition('block-tagpastevents-scroll-details'));
 
 /*--------------------------------------------
  * Full Post
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-events-scroll-simpleview'));
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-pastevents-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('block-events-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scroll-simpleview'));
 
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-events-scroll-fullview'));
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-pastevents-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-events-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scroll-fullview'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-authorevents-scroll-simpleview'));
-define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-authorpastevents-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('block-authorevents-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('block-authorpastevents-scroll-simpleview'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-authorevents-scroll-fullview'));
-define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-authorpastevents-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-authorevents-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-authorpastevents-scroll-fullview'));
 
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-tagevents-scroll-simpleview'));
-define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('block-tagpastevents-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('block-tagevents-scroll-simpleview'));
+define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('block-tagpastevents-scroll-simpleview'));
 
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-tagevents-scroll-fullview'));
-define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW', PoP_ServerUtils::get_template_definition('block-tagpastevents-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-tagevents-scroll-fullview'));
+define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('block-tagpastevents-scroll-fullview'));
 
 /*--------------------------------------------
  * Thumbnail
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-events-scroll-thumbnail'));
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-pastevents-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-events-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scroll-thumbnail'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-authorevents-scroll-thumbnail'));
-define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-authorpastevents-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-authorevents-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-authorpastevents-scroll-thumbnail'));
 
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-tagevents-scroll-thumbnail'));
-define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL', PoP_ServerUtils::get_template_definition('block-tagpastevents-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-tagevents-scroll-thumbnail'));
+define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('block-tagpastevents-scroll-thumbnail'));
 
 /*--------------------------------------------
  * List
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-events-scroll-list'));
-define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-pastevents-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-events-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_PASTEVENTS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-pastevents-scroll-list'));
 
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-authorevents-scroll-list'));
-define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-authorpastevents-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-authorevents-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-authorpastevents-scroll-list'));
 
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-tagevents-scroll-list'));
-define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_LIST', PoP_ServerUtils::get_template_definition('block-tagpastevents-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-tagevents-scroll-list'));
+define ('GD_TEMPLATE_BLOCK_TAGPASTEVENTS_SCROLL_LIST', PoP_TemplateIDUtils::get_template_definition('block-tagpastevents-scroll-list'));
 
 /*--------------------------------------------
  * Map
  --------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDARMAP', PoP_ServerUtils::get_template_definition('block-eventscalendar-calendarmap'));
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP', PoP_ServerUtils::get_template_definition('block-authoreventscalendar-calendarmap'));
-define ('GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP', PoP_ServerUtils::get_template_definition('block-tageventscalendar-calendarmap'));
+define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDARMAP', PoP_TemplateIDUtils::get_template_definition('block-eventscalendar-calendarmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP', PoP_TemplateIDUtils::get_template_definition('block-authoreventscalendar-calendarmap'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP', PoP_TemplateIDUtils::get_template_definition('block-tageventscalendar-calendarmap'));
 
 /*--------------------------------------------
  * Calendar
  --------------------------------------------*/
-define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR', PoP_ServerUtils::get_template_definition('block-eventscalendar-calendar'));
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR', PoP_ServerUtils::get_template_definition('block-authoreventscalendar-calendar'));
-define ('GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDAR', PoP_ServerUtils::get_template_definition('block-tageventscalendar-calendar'));
+define ('GD_TEMPLATE_BLOCK_EVENTSCALENDAR_CALENDAR', PoP_TemplateIDUtils::get_template_definition('block-eventscalendar-calendar'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR', PoP_TemplateIDUtils::get_template_definition('block-authoreventscalendar-calendar'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDAR', PoP_TemplateIDUtils::get_template_definition('block-tageventscalendar-calendar'));
 
 /*********************************************
  * Post Carousels
  *********************************************/
 
-define ('GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL', PoP_ServerUtils::get_template_definition('block-events-carousel'));
-define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL', PoP_ServerUtils::get_template_definition('block-authorevents-carousel'));
-define ('GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL', PoP_ServerUtils::get_template_definition('block-tagevents-carousel'));
+define ('GD_TEMPLATE_BLOCK_EVENTS_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('block-events-carousel'));
+define ('GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('block-authorevents-carousel'));
+define ('GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('block-tagevents-carousel'));
 
 class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor_SectionBlocksBase {
 

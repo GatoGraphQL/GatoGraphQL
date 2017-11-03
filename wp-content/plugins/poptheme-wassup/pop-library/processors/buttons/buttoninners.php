@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-webpostlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-webpost-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-highlight-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_HIGHLIGHT_CREATEBTN', PoP_ServerUtils::get_template_definition('custom-buttoninner-highlight-createbtn'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-webpostlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-webpost-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-highlight-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_HIGHLIGHT_CREATEBTN', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-highlight-createbtn'));
 
 class Wassup_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

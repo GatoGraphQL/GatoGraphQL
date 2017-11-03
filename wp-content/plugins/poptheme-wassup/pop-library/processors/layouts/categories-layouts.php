@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_LINK_CATEGORIES', PoP_ServerUtils::get_template_definition('layout-link-categories'));
-define ('GD_TEMPLATE_LAYOUT_CATEGORIES', PoP_ServerUtils::get_template_definition('layout-categories'));
-define ('GD_TEMPLATE_LAYOUT_APPLIESTO', PoP_ServerUtils::get_template_definition('layout-appliesto'));
+define ('GD_TEMPLATE_LAYOUT_LINK_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layout-link-categories'));
+define ('GD_TEMPLATE_LAYOUT_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('layout-categories'));
+define ('GD_TEMPLATE_LAYOUT_APPLIESTO', PoP_TemplateIDUtils::get_template_definition('layout-appliesto'));
 
 class Wassup_Template_Processor_CategoriesLayouts extends GD_Template_Processor_CategoriesLayoutsBase {
 

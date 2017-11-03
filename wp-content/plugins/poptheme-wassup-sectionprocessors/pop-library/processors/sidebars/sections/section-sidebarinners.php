@@ -5,29 +5,29 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-locationposts'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_STORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-stories'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-announcements'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_DISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-discussions'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_FEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-featured'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_BLOG', PoP_ServerUtils::get_template_definition('sidebarinner-section-blog'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-locationposts'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_STORIES', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-stories'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-announcements'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-discussions'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_FEATURED', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-featured'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_BLOG', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-blog'));
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-taglocationposts'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagstories'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagannouncements'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGDISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagdiscussions'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-tagfeatured'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-taglocationposts'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGSTORIES', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-tagstories'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-tagannouncements'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-tagdiscussions'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_TAGFEATURED', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-tagfeatured'));
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorlocationposts'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorstories'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorannouncements'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORDISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-authordiscussions'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORFEATURED', PoP_ServerUtils::get_template_definition('sidebarinner-section-authorfeatured'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authorlocationposts'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORSTORIES', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authorstories'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authorannouncements'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authordiscussions'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_AUTHORFEATURED', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-authorfeatured'));
 
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mylocationposts'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYSTORIES', PoP_ServerUtils::get_template_definition('sidebarinner-section-mystories'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('sidebarinner-section-myannouncements'));
-define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('sidebarinner-section-mydiscussions'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-mylocationposts'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-mystories'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-myannouncements'));
+define ('GD_TEMPLATE_SIDEBARINNER_SECTION_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('sidebarinner-section-mydiscussions'));
 
 class GD_Custom_Template_Processor_CustomSectionSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 	

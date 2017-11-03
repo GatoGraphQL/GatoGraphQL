@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONGROUP_CALENDARSECTION', PoP_ServerUtils::get_template_definition('buttongroup-calendarsection'));
-define ('GD_TEMPLATE_BUTTONGROUP_TAGCALENDARSECTION', PoP_ServerUtils::get_template_definition('buttongroup-tagcalendarsection'));
-define ('GD_TEMPLATE_BUTTONGROUP_AUTHORCALENDARSECTION', PoP_ServerUtils::get_template_definition('buttongroup-authorcalendarsection'));
+define ('GD_TEMPLATE_BUTTONGROUP_CALENDARSECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-calendarsection'));
+define ('GD_TEMPLATE_BUTTONGROUP_TAGCALENDARSECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-tagcalendarsection'));
+define ('GD_TEMPLATE_BUTTONGROUP_AUTHORCALENDARSECTION', PoP_TemplateIDUtils::get_template_definition('buttongroup-authorcalendarsection'));
 
 class GD_Custom_EM_Template_Processor_ButtonGroups extends GD_Template_Processor_CustomButtonGroupsBase {
 

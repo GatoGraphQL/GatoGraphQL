@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELCONTROLS_AUTHORMEMBERS', PoP_ServerUtils::get_template_definition('carouselcontrols-members'));
+define ('GD_TEMPLATE_CAROUSELCONTROLS_AUTHORMEMBERS', PoP_TemplateIDUtils::get_template_definition('carouselcontrols-members'));
 
 class GD_URE_Template_Processor_CustomCarouselControls extends GD_Template_Processor_CarouselControlsBase {
 

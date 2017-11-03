@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_VOLUNTEERSNEEDED_MULTISELECT', PoP_ServerUtils::get_template_definition('formcomponentgroup-volunteersneededmulti'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_VOLUNTEERSNEEDED_SELECT', PoP_ServerUtils::get_template_definition('formcomponentgroup-volunteersneeded'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_VOLUNTEERSNEEDED_MULTISELECT', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-volunteersneededmulti'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_VOLUNTEERSNEEDED_SELECT', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-volunteersneeded'));
 
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_VOLUNTEERSNEEDED_MULTISELECT', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-volunteersneededmulti'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_VOLUNTEERSNEEDED_MULTISELECT', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-volunteersneededmulti'));
 
 class PoPTheme_Wassup_Template_Processor_FormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

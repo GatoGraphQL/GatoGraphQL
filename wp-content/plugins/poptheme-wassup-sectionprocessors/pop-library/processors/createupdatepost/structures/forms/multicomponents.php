@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-locationpost-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-locationpostlink-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_STORY_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-story-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_STORYLINK_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-storylink-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_DISCUSSION_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-discussion-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_DISCUSSIONLINK_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-discussionlink-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_ANNOUNCEMENT_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-announcement-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_ANNOUNCEMENTLINK_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-announcementlink-rightside'));
-define ('GD_TEMPLATE_MULTICOMPONENT_FORM_FEATURED_RIGHTSIDE', PoP_ServerUtils::get_template_definition('multicomponent-form-featured-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-locationpost-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-locationpostlink-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_STORY_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-story-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_STORYLINK_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-storylink-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_DISCUSSION_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-discussion-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_DISCUSSIONLINK_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-discussionlink-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_ANNOUNCEMENT_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-announcement-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_ANNOUNCEMENTLINK_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-announcementlink-rightside'));
+define ('GD_TEMPLATE_MULTICOMPONENT_FORM_FEATURED_RIGHTSIDE', PoP_TemplateIDUtils::get_template_definition('multicomponent-form-featured-rightside'));
 
 class GD_Custom_Template_Processor_FormMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

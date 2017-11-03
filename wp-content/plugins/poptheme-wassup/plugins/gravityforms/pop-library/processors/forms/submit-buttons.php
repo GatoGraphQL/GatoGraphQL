@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_GF_TEMPLATE_SUBMITBUTTON_SENDMESSAGE', PoP_ServerUtils::get_template_definition('gf-submitbutton-sendmessage'));
-define ('GD_GF_TEMPLATE_SUBMITBUTTON_SENDEMAIL', PoP_ServerUtils::get_template_definition('gf-submitbutton-sendemail'));
-define ('GD_GF_TEMPLATE_SUBMITBUTTON_SUBSCRIBE', PoP_ServerUtils::get_template_definition('gf-submitbutton-subscribe'));
-define ('GD_GF_TEMPLATE_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('gf-submitbutton-confirmunsubscription'));
+define ('GD_GF_TEMPLATE_SUBMITBUTTON_SENDMESSAGE', PoP_TemplateIDUtils::get_template_definition('gf-submitbutton-sendmessage'));
+define ('GD_GF_TEMPLATE_SUBMITBUTTON_SENDEMAIL', PoP_TemplateIDUtils::get_template_definition('gf-submitbutton-sendemail'));
+define ('GD_GF_TEMPLATE_SUBMITBUTTON_SUBSCRIBE', PoP_TemplateIDUtils::get_template_definition('gf-submitbutton-subscribe'));
+define ('GD_GF_TEMPLATE_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION', PoP_TemplateIDUtils::get_template_definition('gf-submitbutton-confirmunsubscription'));
 
 class GD_GF_Template_Processor_SubmitButtons extends GD_Template_Processor_SubmitButtonsBase {
 

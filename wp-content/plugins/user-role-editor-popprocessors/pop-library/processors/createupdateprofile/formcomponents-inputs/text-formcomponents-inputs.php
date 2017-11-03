@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_CONTACTPERSON', PoP_ServerUtils::get_template_definition('formcomponent-ure-cup-contactperson'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_CONTACTNUMBER', PoP_ServerUtils::get_template_definition('formcomponent-ure-cup-contactnumber'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_LASTNAME', PoP_ServerUtils::get_template_definition('formcomponent-ure-cup-lastname'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_CONTACTPERSON', PoP_TemplateIDUtils::get_template_definition('formcomponent-ure-cup-contactperson'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_CONTACTNUMBER', PoP_TemplateIDUtils::get_template_definition('formcomponent-ure-cup-contactnumber'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENT_CUP_LASTNAME', PoP_TemplateIDUtils::get_template_definition('formcomponent-ure-cup-lastname'));
 
 class GD_URE_Template_Processor_TextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

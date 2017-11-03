@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_KEEPASDRAFT', PoP_ServerUtils::get_template_definition('formcomponent-keepasdraft'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_KEEPASDRAFT', PoP_TemplateIDUtils::get_template_definition('formcomponent-keepasdraft'));
 
 class GD_Template_Processor_CreateUpdatePostCheckboxFormComponentInputs extends GD_Template_Processor_CheckboxFormComponentsBase {
 

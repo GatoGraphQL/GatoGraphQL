@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_MENU_ABOUT', PoP_ServerUtils::get_template_definition('widget-menu-about'));
+define ('GD_TEMPLATE_WIDGET_MENU_ABOUT', PoP_TemplateIDUtils::get_template_definition('widget-menu-about'));
 
 class GD_Custom_Template_Processor_MenuWidgets extends GD_Template_Processor_WidgetsBase {
 

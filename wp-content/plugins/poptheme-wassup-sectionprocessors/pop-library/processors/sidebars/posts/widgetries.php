@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_LOCATIONPOST_CATEGORIES', PoP_ServerUtils::get_template_definition('widget-locationpost-categories'));
-define ('GD_TEMPLATE_WIDGET_DISCUSSION_CATEGORIES', PoP_ServerUtils::get_template_definition('widget-discussion-categories'));
+define ('GD_TEMPLATE_WIDGET_LOCATIONPOST_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('widget-locationpost-categories'));
+define ('GD_TEMPLATE_WIDGET_DISCUSSION_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('widget-discussion-categories'));
 
-define ('GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO', PoP_ServerUtils::get_template_definition('widgetcompact-locationpost-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO', PoP_ServerUtils::get_template_definition('widgetcompact-discussion-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_STORYINFO', PoP_ServerUtils::get_template_definition('widgetcompact-story-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO', PoP_ServerUtils::get_template_definition('widgetcompact-announcement-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_FEATUREDINFO', PoP_ServerUtils::get_template_definition('widgetcompact-featured-info'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_BLOGINFO', PoP_ServerUtils::get_template_definition('widgetcompact-blog-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_LOCATIONPOSTINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-locationpost-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_DISCUSSIONINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-discussion-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_STORYINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-story-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_ANNOUNCEMENTINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-announcement-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_FEATUREDINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-featured-info'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_BLOGINFO', PoP_TemplateIDUtils::get_template_definition('widgetcompact-blog-info'));
 
 class GD_Custom_Template_Processor_PostWidgets extends GD_Template_Processor_WidgetsBase {
 

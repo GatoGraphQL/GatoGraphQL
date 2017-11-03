@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-automatedemails-event'));
-// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGE', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-automatedemails-featuredimage'));
-// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGEVOLUNTEER', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-automatedemails-featuredimagevolunteer'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-automatedemails-event'));
+// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-automatedemails-featuredimage'));
+// define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGEVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-automatedemails-featuredimagevolunteer'));
 
 class PoP_ThemeWassup_EM_AE_Template_Processor_PostMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ', PoP_ServerUtils::get_template_definition('custombuttoncontrol-addcontentfaq'));
-define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ACCOUNTFAQ', PoP_ServerUtils::get_template_definition('custombuttoncontrol-accountfaq'));
-define ('GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOST', PoP_ServerUtils::get_template_definition('buttoncontrol-addwebpost'));
-define ('GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK', PoP_ServerUtils::get_template_definition('buttoncontrol-addwebpostlink'));
-define ('GD_TEMPLATE_ANCHORCONTROL_TAGSLINK', PoP_ServerUtils::get_template_definition('buttoncontrol-tagslink'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-addcontentfaq'));
+define ('GD_TEMPLATE_CUSTOMANCHORCONTROL_ACCOUNTFAQ', PoP_TemplateIDUtils::get_template_definition('custombuttoncontrol-accountfaq'));
+define ('GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOST', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-addwebpost'));
+define ('GD_TEMPLATE_ANCHORCONTROL_ADDWEBPOSTLINK', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-addwebpostlink'));
+define ('GD_TEMPLATE_ANCHORCONTROL_TAGSLINK', PoP_TemplateIDUtils::get_template_definition('buttoncontrol-tagslink'));
 
 class GD_Template_Processor_CustomAnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

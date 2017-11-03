@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('layout-messagefeedback-user-changepassword'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPREFERENCES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mypreferences'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USER_CHANGEPASSWORD', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-user-changepassword'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYPREFERENCES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mypreferences'));
 
 class GD_Template_Processor_UserMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-locationpost-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-locationpostlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-discussion-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-discussionlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-story-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-storylink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-announcement-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-announcementlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-featured-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-locationpost-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_LOCATIONPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-locationpostlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-discussion-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_DISCUSSIONLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-discussionlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-story-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_STORYLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-storylink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-announcement-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_ANNOUNCEMENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-announcementlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-featured-create'));
 
 class GD_Custom_Template_Processor_Buttons extends GD_Custom_Template_Processor_ButtonsBase {
 

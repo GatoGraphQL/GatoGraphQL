@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CREATEPROFILE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-createprofile'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UPDATEPROFILE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-updateprofile'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CREATEPROFILE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-createprofile'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_UPDATEPROFILE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-updateprofile'));
 
 class GD_Template_Processor_ProfileMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

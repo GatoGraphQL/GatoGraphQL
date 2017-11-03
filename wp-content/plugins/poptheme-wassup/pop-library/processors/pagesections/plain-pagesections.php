@@ -14,8 +14,8 @@ define ('GD_TEMPLATEID_PAGESECTIONID_COMPONENTS', 'ps-components');
 /**---------------------------------------------------------------------------------------------------------------
  * All PageSections
  * ---------------------------------------------------------------------------------------------------------------*/
-define ('GD_TEMPLATE_PAGESECTION_OPERATIONAL', PoP_ServerUtils::get_template_definition('operational', true));
-define ('GD_TEMPLATE_PAGESECTION_COMPONENTS', PoP_ServerUtils::get_template_definition('components', true));
+define ('GD_TEMPLATE_PAGESECTION_OPERATIONAL', PoP_TemplateIDUtils::get_template_definition('operational', true));
+define ('GD_TEMPLATE_PAGESECTION_COMPONENTS', PoP_TemplateIDUtils::get_template_definition('components', true));
 
 class GD_Template_Processor_CustomPlainPageSections extends GD_Template_Processor_PlainPageSectionsBase {
 

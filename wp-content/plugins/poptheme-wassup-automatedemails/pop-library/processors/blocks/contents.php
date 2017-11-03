@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST', PoP_ServerUtils::get_template_definition('block-automatedemails-singlepost'));
+define ('GD_TEMPLATE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST', PoP_TemplateIDUtils::get_template_definition('block-automatedemails-singlepost'));
 
 class PoPTheme_Wassup_AE_Template_Processor_ContentBlocks extends PoPTheme_Wassup_AutomatedEmails_Template_Processor_ContentBlocksBase {
 

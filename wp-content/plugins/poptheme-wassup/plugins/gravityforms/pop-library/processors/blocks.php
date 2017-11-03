@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_CONTACTUS', PoP_ServerUtils::get_template_definition('block-contactus'));
-define ('GD_TEMPLATE_BLOCK_CONTACTUSER', PoP_ServerUtils::get_template_definition('block-contactuser'));
-define ('GD_TEMPLATE_BLOCK_SHAREBYEMAIL', PoP_ServerUtils::get_template_definition('block-sharebyemail'));
-define ('GD_TEMPLATE_BLOCK_VOLUNTEER', PoP_ServerUtils::get_template_definition('block-volunteer'));
-define ('GD_TEMPLATE_BLOCK_FLAG', PoP_ServerUtils::get_template_definition('block-flag'));
-define ('GD_TEMPLATE_BLOCK_NEWSLETTER', PoP_ServerUtils::get_template_definition('block-newsletter'));
-define ('GD_TEMPLATE_BLOCKCODE_NEWSLETTER', PoP_ServerUtils::get_template_definition('blockcode-newsletter'));
-define ('GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('block-newsletterunsubscription'));
+define ('GD_TEMPLATE_BLOCK_CONTACTUS', PoP_TemplateIDUtils::get_template_definition('block-contactus'));
+define ('GD_TEMPLATE_BLOCK_CONTACTUSER', PoP_TemplateIDUtils::get_template_definition('block-contactuser'));
+define ('GD_TEMPLATE_BLOCK_SHAREBYEMAIL', PoP_TemplateIDUtils::get_template_definition('block-sharebyemail'));
+define ('GD_TEMPLATE_BLOCK_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('block-volunteer'));
+define ('GD_TEMPLATE_BLOCK_FLAG', PoP_TemplateIDUtils::get_template_definition('block-flag'));
+define ('GD_TEMPLATE_BLOCK_NEWSLETTER', PoP_TemplateIDUtils::get_template_definition('block-newsletter'));
+define ('GD_TEMPLATE_BLOCKCODE_NEWSLETTER', PoP_TemplateIDUtils::get_template_definition('blockcode-newsletter'));
+define ('GD_TEMPLATE_BLOCK_NEWSLETTERUNSUBSCRIPTION', PoP_TemplateIDUtils::get_template_definition('block-newsletterunsubscription'));
 
 class GD_Template_Processor_GFBlocks extends GD_Template_Processor_BlocksBase {
 

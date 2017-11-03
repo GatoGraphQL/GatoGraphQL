@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MAXHEIGHT_POSTCONTENT', PoP_ServerUtils::get_template_definition('layout-maxheight-postcontent'));
-// define ('GD_TEMPLATE_LAYOUT_MAXHEIGHT_COMMENTCONTENT', PoP_ServerUtils::get_template_definition('layout-maxheight-commentcontent'));
+define ('GD_TEMPLATE_LAYOUT_MAXHEIGHT_POSTCONTENT', PoP_TemplateIDUtils::get_template_definition('layout-maxheight-postcontent'));
+// define ('GD_TEMPLATE_LAYOUT_MAXHEIGHT_COMMENTCONTENT', PoP_TemplateIDUtils::get_template_definition('layout-maxheight-commentcontent'));
 
 class GD_Template_Processor_MaxHeightLayouts extends GD_Template_Processor_MaxHeightLayoutsBase {
 

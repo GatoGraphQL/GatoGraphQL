@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTROLGROUP_EVENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-eventlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_BLOCKEVENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockeventlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHOREVENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockauthoreventlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_BLOCKTAGEVENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blocktageventlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_MYEVENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-myeventlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_MYBLOCKEVENTLIST', PoP_ServerUtils::get_template_definition('controlgroup-myblockeventlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_EVENTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-eventlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKEVENTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-blockeventlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHOREVENTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-blockauthoreventlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKTAGEVENTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-blocktageventlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYEVENTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-myeventlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_MYBLOCKEVENTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-myblockeventlist'));
 
-define ('GD_TEMPLATE_CONTROLGROUP_BLOCKMAPPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockmappostlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockauthormappostlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST', PoP_ServerUtils::get_template_definition('controlgroup-blocktagmappostlist'));
-define ('GD_TEMPLATE_CONTROLGROUP_BLOCKMAPUSERLIST', PoP_ServerUtils::get_template_definition('controlgroup-blockmapuserlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKMAPPOSTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-blockmappostlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-blockauthormappostlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-blocktagmappostlist'));
+define ('GD_TEMPLATE_CONTROLGROUP_BLOCKMAPUSERLIST', PoP_TemplateIDUtils::get_template_definition('controlgroup-blockmapuserlist'));
 
 class GD_EM_Template_Processor_CustomControlGroups extends GD_Template_Processor_ControlGroupsBase {
 

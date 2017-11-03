@@ -6,21 +6,21 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // My Preferences
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-general-newpost'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-createdpost'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-recommendedpost'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-followeduser'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-subscribedtotopic'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-addedcomment'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-network-updownvotedpost'));
-// define ('GD_URE_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-formcomponent-emailnotifications-network-joinscommunity'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-subscribedtopic-createdpost'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT', PoP_ServerUtils::get_template_definition('formcomponent-emailnotifications-subscribedtopic-addedcomment'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-weeklylatestposts'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-weeklyupcomingevents'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-dailynotifications'));
-define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-specialposts'));
-// define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY', PoP_ServerUtils::get_template_definition('formcomponent-emaildigests-dailysubscribedtopicsactivity'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_GENERAL_NEWPOST', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-general-newpost'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_CREATEDPOST', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-network-createdpost'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-network-recommendedpost'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-network-followeduser'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-network-subscribedtotopic'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-network-addedcomment'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-network-updownvotedpost'));
+// define ('GD_URE_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-formcomponent-emailnotifications-network-joinscommunity'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDPOST', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-subscribedtopic-createdpost'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT', PoP_TemplateIDUtils::get_template_definition('formcomponent-emailnotifications-subscribedtopic-addedcomment'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYLATESTPOSTS', PoP_TemplateIDUtils::get_template_definition('formcomponent-emaildigests-weeklylatestposts'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS', PoP_TemplateIDUtils::get_template_definition('formcomponent-emaildigests-weeklyupcomingevents'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYNOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('formcomponent-emaildigests-dailynotifications'));
+define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_SPECIALPOSTS', PoP_TemplateIDUtils::get_template_definition('formcomponent-emaildigests-specialposts'));
+// define ('GD_TEMPLATE_FORMCOMPONENT_EMAILDIGESTS_DAILYSUBSCRIBEDTOPICSACTIVITY', PoP_TemplateIDUtils::get_template_definition('formcomponent-emaildigests-dailysubscribedtopicsactivity'));
 
 class GD_Template_Processor_UserProfileCheckboxFormComponentInputs extends GD_Template_Processor_CheckboxFormComponentsBase {
 

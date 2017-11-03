@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_NOTIFICATIONTIME', PoP_ServerUtils::get_template_definition('layout-notificationtime'));
+define ('GD_TEMPLATE_LAYOUT_NOTIFICATIONTIME', PoP_TemplateIDUtils::get_template_definition('layout-notificationtime'));
 
 class GD_Template_Processor_NotificationTimeLayouts extends GD_Template_Processor_NotificationTimeLayoutsBase {
 

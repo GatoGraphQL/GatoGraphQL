@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_MAP_POST', PoP_ServerUtils::get_template_definition('em-map-post'));
-define ('GD_EM_TEMPLATE_MAP_USER', PoP_ServerUtils::get_template_definition('em-map-user'));
+define ('GD_EM_TEMPLATE_MAP_POST', PoP_TemplateIDUtils::get_template_definition('em-map-post'));
+define ('GD_EM_TEMPLATE_MAP_USER', PoP_TemplateIDUtils::get_template_definition('em-map-user'));
 
 class GD_EM_Template_Processor_Maps extends GD_EM_Template_Processor_MapsBase {
 

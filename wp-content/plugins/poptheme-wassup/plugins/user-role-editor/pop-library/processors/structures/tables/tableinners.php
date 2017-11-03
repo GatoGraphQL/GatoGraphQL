@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLEINNER_MYMEMBERS', PoP_ServerUtils::get_template_definition('tableinner-mymembers'));
+define ('GD_TEMPLATE_TABLEINNER_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('tableinner-mymembers'));
 
 class GD_URE_Template_Processor_TableInners extends GD_Template_Processor_TableInnersBase {
 

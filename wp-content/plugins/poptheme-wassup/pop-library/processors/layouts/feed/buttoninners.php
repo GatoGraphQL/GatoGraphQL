@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY', PoP_ServerUtils::get_template_definition('buttoninner-toggleuserpostactivity'));
+define ('GD_TEMPLATE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY', PoP_TemplateIDUtils::get_template_definition('buttoninner-toggleuserpostactivity'));
 
 class GD_Template_Processor_FeedButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

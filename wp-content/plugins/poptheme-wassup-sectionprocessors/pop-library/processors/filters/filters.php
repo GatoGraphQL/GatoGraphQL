@@ -5,25 +5,25 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FILTER_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('filter-announcements'));
-define ('GD_TEMPLATE_FILTER_AUTHORANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('filter-authorannouncements'));
-define ('GD_TEMPLATE_FILTER_TAGANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('filter-tagannouncements'));
-define ('GD_TEMPLATE_FILTER_AUTHORDISCUSSIONS', PoP_ServerUtils::get_template_definition('filter-authordiscussions'));
-define ('GD_TEMPLATE_FILTER_TAGDISCUSSIONS', PoP_ServerUtils::get_template_definition('filter-tagdiscussions'));
-define ('GD_TEMPLATE_FILTER_AUTHORLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filter-authorlocationposts'));
-define ('GD_TEMPLATE_FILTER_TAGLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filter-taglocationposts'));
-define ('GD_TEMPLATE_FILTER_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('filter-authorstories'));
-define ('GD_TEMPLATE_FILTER_TAGSTORIES', PoP_ServerUtils::get_template_definition('filter-tagstories'));
-define ('GD_TEMPLATE_FILTER_BLOG', PoP_ServerUtils::get_template_definition('filter-blog'));
-define ('GD_TEMPLATE_FILTER_DISCUSSIONS', PoP_ServerUtils::get_template_definition('filter-discussions'));
-define ('GD_TEMPLATE_FILTER_FEATURED', PoP_ServerUtils::get_template_definition('filter-featured'));
-define ('GD_TEMPLATE_FILTER_TAGFEATURED', PoP_ServerUtils::get_template_definition('filter-tagfeatured'));
-define ('GD_TEMPLATE_FILTER_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filter-locationposts'));
-define ('GD_TEMPLATE_FILTER_STORIES', PoP_ServerUtils::get_template_definition('filter-stories'));
-define ('GD_TEMPLATE_FILTER_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('filter-myannouncements'));
-define ('GD_TEMPLATE_FILTER_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('filter-mydiscussions'));
-define ('GD_TEMPLATE_FILTER_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('filter-mylocationposts'));
-define ('GD_TEMPLATE_FILTER_MYSTORIES', PoP_ServerUtils::get_template_definition('filter-mystories'));
+define ('GD_TEMPLATE_FILTER_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('filter-announcements'));
+define ('GD_TEMPLATE_FILTER_AUTHORANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('filter-authorannouncements'));
+define ('GD_TEMPLATE_FILTER_TAGANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('filter-tagannouncements'));
+define ('GD_TEMPLATE_FILTER_AUTHORDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('filter-authordiscussions'));
+define ('GD_TEMPLATE_FILTER_TAGDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('filter-tagdiscussions'));
+define ('GD_TEMPLATE_FILTER_AUTHORLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('filter-authorlocationposts'));
+define ('GD_TEMPLATE_FILTER_TAGLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('filter-taglocationposts'));
+define ('GD_TEMPLATE_FILTER_AUTHORSTORIES', PoP_TemplateIDUtils::get_template_definition('filter-authorstories'));
+define ('GD_TEMPLATE_FILTER_TAGSTORIES', PoP_TemplateIDUtils::get_template_definition('filter-tagstories'));
+define ('GD_TEMPLATE_FILTER_BLOG', PoP_TemplateIDUtils::get_template_definition('filter-blog'));
+define ('GD_TEMPLATE_FILTER_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('filter-discussions'));
+define ('GD_TEMPLATE_FILTER_FEATURED', PoP_TemplateIDUtils::get_template_definition('filter-featured'));
+define ('GD_TEMPLATE_FILTER_TAGFEATURED', PoP_TemplateIDUtils::get_template_definition('filter-tagfeatured'));
+define ('GD_TEMPLATE_FILTER_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('filter-locationposts'));
+define ('GD_TEMPLATE_FILTER_STORIES', PoP_TemplateIDUtils::get_template_definition('filter-stories'));
+define ('GD_TEMPLATE_FILTER_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('filter-myannouncements'));
+define ('GD_TEMPLATE_FILTER_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('filter-mydiscussions'));
+define ('GD_TEMPLATE_FILTER_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('filter-mylocationposts'));
+define ('GD_TEMPLATE_FILTER_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('filter-mystories'));
 
 class GD_Custom_Template_Processor_CustomFilters extends GD_Template_Processor_FiltersBase {
 

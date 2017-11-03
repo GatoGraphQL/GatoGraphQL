@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_FEATUREDIMAGEINNER', PoP_ServerUtils::get_template_definition('formcomponent-featuredimage-inner'));
+define ('GD_TEMPLATE_FORMCOMPONENT_FEATUREDIMAGEINNER', PoP_TemplateIDUtils::get_template_definition('formcomponent-featuredimage-inner'));
 
 class GD_Template_Processor_FeaturedImageInnerComponentInputs extends GD_Template_Processor_FeaturedImageInnerFormComponentsBase {
 

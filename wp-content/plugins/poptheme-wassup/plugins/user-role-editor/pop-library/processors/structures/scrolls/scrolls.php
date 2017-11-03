@@ -5,35 +5,35 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scroll-mymembers-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-mymembers-fullviewpreview'));
 
-define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-organizations-navigator'));
-define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scroll-individuals-navigator'));
+define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-organizations-navigator'));
+define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scroll-individuals-navigator'));
 
-define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-organizations-addons'));
-define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_ADDONS', PoP_ServerUtils::get_template_definition('scroll-individuals-addons'));
+define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-organizations-addons'));
+define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scroll-individuals-addons'));
 
-define ('GD_TEMPLATE_SCROLL_COMMUNITIES_DETAILS', PoP_ServerUtils::get_template_definition('scroll-communities-details'));
-define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-organizations-details'));
-define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-individuals-details'));
-define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_DETAILS', PoP_ServerUtils::get_template_definition('scroll-authormembers-details'));
+define ('GD_TEMPLATE_SCROLL_COMMUNITIES_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-communities-details'));
+define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-organizations-details'));
+define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-individuals-details'));
+define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scroll-authormembers-details'));
 
-define ('GD_TEMPLATE_SCROLL_COMMUNITIES_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-communities-fullview'));
-define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-organizations-fullview'));
-define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-individuals-fullview'));
+define ('GD_TEMPLATE_SCROLL_COMMUNITIES_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-communities-fullview'));
+define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-organizations-fullview'));
+define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-individuals-fullview'));
 
-define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_FULLVIEW', PoP_ServerUtils::get_template_definition('scroll-authormembers-fullview'));
+define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scroll-authormembers-fullview'));
 
-define ('GD_TEMPLATE_SCROLL_COMMUNITIES_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-communities-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-organizations-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-individuals-thumbnail'));
-define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scroll-authormembers-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_COMMUNITIES_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-communities-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-organizations-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-individuals-thumbnail'));
+define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scroll-authormembers-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLL_COMMUNITIES_LIST', PoP_ServerUtils::get_template_definition('scroll-communities-list'));
-define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_LIST', PoP_ServerUtils::get_template_definition('scroll-organizations-list'));
-define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_LIST', PoP_ServerUtils::get_template_definition('scroll-individuals-list'));
-// define ('GD_TEMPLATE_SCROLL_ORGANIZATIONMEMBERS_LIST', PoP_ServerUtils::get_template_definition('scroll-organizationmembers-list'));
-define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_LIST', PoP_ServerUtils::get_template_definition('scroll-authormembers-list'));
+define ('GD_TEMPLATE_SCROLL_COMMUNITIES_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-communities-list'));
+define ('GD_TEMPLATE_SCROLL_ORGANIZATIONS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-organizations-list'));
+define ('GD_TEMPLATE_SCROLL_INDIVIDUALS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-individuals-list'));
+// define ('GD_TEMPLATE_SCROLL_ORGANIZATIONMEMBERS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-organizationmembers-list'));
+define ('GD_TEMPLATE_SCROLL_AUTHORMEMBERS_LIST', PoP_TemplateIDUtils::get_template_definition('scroll-authormembers-list'));
 
 class GD_URE_Template_Processor_CustomScrolls extends GD_Template_Processor_ScrollsBase {
 

@@ -5,53 +5,53 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLLINNER_SEARCHUSERS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-searchusers-map'));
-define ('GD_TEMPLATE_SCROLLINNER_ALLUSERS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-allusers-map'));
-define ('GD_TEMPLATE_SCROLLINNER_ALLUSERS_HORIZONTALMAP', PoP_ServerUtils::get_template_definition('scrollinner-allusers-horizontalmap'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWERS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-authorfollowers-map'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWINGUSERS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-authorfollowingusers-map'));
+define ('GD_TEMPLATE_SCROLLINNER_SEARCHUSERS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-searchusers-map'));
+define ('GD_TEMPLATE_SCROLLINNER_ALLUSERS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-allusers-map'));
+define ('GD_TEMPLATE_SCROLLINNER_ALLUSERS_HORIZONTALMAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-allusers-horizontalmap'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWERS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorfollowers-map'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORFOLLOWINGUSERS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorfollowingusers-map'));
 
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONS', PoP_ServerUtils::get_template_definition('scrollinner-locations'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-locations'));
 
-define ('GD_TEMPLATE_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-myevents-simpleviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYPASTEVENTS_SIMPLEVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mypastevents-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-myevents-simpleviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYPASTEVENTS_SIMPLEVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mypastevents-simpleviewpreview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-myevents-fullviewpreview'));
-define ('GD_TEMPLATE_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mypastevents-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-myevents-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mypastevents-fullviewpreview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-events-navigator'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-navigator'));
 
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-events-addons'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-addons'));
 
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-events-details'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-details'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-details'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-details'));
 
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-events-simpleview'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-simpleview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-events-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-fullview'));
 
-// define ('GD_TEMPLATE_SCROLLINNER_AUTHOREVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authorevents-simpleview'));
-// define ('GD_TEMPLATE_SCROLLINNER_AUTHORPASTEVENTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authorpastevents-simpleview'));
+// define ('GD_TEMPLATE_SCROLLINNER_AUTHOREVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorevents-simpleview'));
+// define ('GD_TEMPLATE_SCROLLINNER_AUTHORPASTEVENTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorpastevents-simpleview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_AUTHOREVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authorevents-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authorpastevents-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHOREVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorevents-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authorpastevents-fullview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-events-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-events-list'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-list'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-list'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-list'));
 
-define ('GD_TEMPLATE_SCROLLINNER_LOCATIONS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-locations-map'));
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-events-map'));
-define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-pastevents-map'));
-define ('GD_TEMPLATE_SCROLLINNER_EVENTS_HORIZONTALMAP', PoP_ServerUtils::get_template_definition('scrollinner-events-horizontalmap'));
+define ('GD_TEMPLATE_SCROLLINNER_LOCATIONS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-locations-map'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-map'));
+define ('GD_TEMPLATE_SCROLLINNER_PASTEVENTS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-pastevents-map'));
+define ('GD_TEMPLATE_SCROLLINNER_EVENTS_HORIZONTALMAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-events-horizontalmap'));
 
-define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_MAP', PoP_ServerUtils::get_template_definition('scrollinner-whoweare-map'));
+define ('GD_TEMPLATE_SCROLLINNER_WHOWEARE_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-whoweare-map'));
 
 class GD_EM_Template_Processor_CustomScrollInners extends GD_Template_Processor_ScrollInnersBase {
 

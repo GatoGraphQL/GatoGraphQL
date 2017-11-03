@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLEINNER_MYCONTENT', PoP_ServerUtils::get_template_definition('tableinner-mycontent'));
-define ('GD_TEMPLATE_TABLEINNER_MYLINKS', PoP_ServerUtils::get_template_definition('tableinner-mylinks'));
-define ('GD_TEMPLATE_TABLEINNER_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('tableinner-myhighlights'));
-define ('GD_TEMPLATE_TABLEINNER_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('tableinner-mywebposts'));
-// define ('GD_TEMPLATE_TABLEINNER_MYRESOURCES', PoP_ServerUtils::get_template_definition('tableinner-myresources'));
+define ('GD_TEMPLATE_TABLEINNER_MYCONTENT', PoP_TemplateIDUtils::get_template_definition('tableinner-mycontent'));
+define ('GD_TEMPLATE_TABLEINNER_MYLINKS', PoP_TemplateIDUtils::get_template_definition('tableinner-mylinks'));
+define ('GD_TEMPLATE_TABLEINNER_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('tableinner-myhighlights'));
+define ('GD_TEMPLATE_TABLEINNER_MYWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('tableinner-mywebposts'));
+// define ('GD_TEMPLATE_TABLEINNER_MYRESOURCES', PoP_TemplateIDUtils::get_template_definition('tableinner-myresources'));
 
 class GD_Template_Processor_TableInners extends GD_Template_Processor_TableInnersBase {
 

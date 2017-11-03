@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-automatedemails-latestposts-details'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('scrollinner-automatedemails-latestposts-simpleview'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-automatedemails-latestposts-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-automatedemails-latestposts-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-automatedemails-latestposts-list'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-automatedemails-latestposts-details'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-automatedemails-latestposts-simpleview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-automatedemails-latestposts-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-automatedemails-latestposts-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTOMATEDEMAILS_LATESTPOSTS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-automatedemails-latestposts-list'));
 
 class PoPTheme_Wassup_AE_Template_Processor_ScrollInners extends GD_Template_Processor_ScrollInnersBase {
 

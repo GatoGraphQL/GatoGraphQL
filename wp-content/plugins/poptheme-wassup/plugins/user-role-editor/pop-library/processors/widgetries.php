@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_WIDGET_PROFILEORGANIZATION_DETAILS', PoP_ServerUtils::get_template_definition('ure-widget-profileorganization-details'));
-define ('GD_URE_TEMPLATE_WIDGET_PROFILEINDIVIDUAL_DETAILS', PoP_ServerUtils::get_template_definition('ure-widget-profileindividual-details'));
+define ('GD_URE_TEMPLATE_WIDGET_PROFILEORGANIZATION_DETAILS', PoP_TemplateIDUtils::get_template_definition('ure-widget-profileorganization-details'));
+define ('GD_URE_TEMPLATE_WIDGET_PROFILEINDIVIDUAL_DETAILS', PoP_TemplateIDUtils::get_template_definition('ure-widget-profileindividual-details'));
 
 class GD_URE_Custom_Template_Processor_Widgets extends GD_Template_Processor_WidgetsBase {
 

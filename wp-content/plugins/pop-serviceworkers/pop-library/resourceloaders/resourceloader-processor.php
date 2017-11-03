@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_SW', PoP_ServerUtils::get_template_definition('sw'));
-define ('POP_RESOURCELOADER_SWREGISTRAR', PoP_ServerUtils::get_template_definition('sw-registrar'));
+define ('POP_RESOURCELOADER_SW', PoP_TemplateIDUtils::get_template_definition('sw'));
+define ('POP_RESOURCELOADER_SWREGISTRAR', PoP_TemplateIDUtils::get_template_definition('sw-registrar'));
 
 class PoP_ServiceWorkers_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

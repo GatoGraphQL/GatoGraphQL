@@ -5,24 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('block-locationpost-update'));
-define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('block-locationpostlink-update'));
-define ('GD_TEMPLATE_BLOCK_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('block-locationpost-create'));
-define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-locationpostlink-create'));
-define ('GD_TEMPLATE_BLOCK_STORY_UPDATE', PoP_ServerUtils::get_template_definition('block-story-update'));
-define ('GD_TEMPLATE_BLOCK_STORYLINK_UPDATE', PoP_ServerUtils::get_template_definition('block-storylink-update'));
-define ('GD_TEMPLATE_BLOCK_STORY_CREATE', PoP_ServerUtils::get_template_definition('block-story-create'));
-define ('GD_TEMPLATE_BLOCK_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('block-storylink-create'));
-define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('block-announcement-update'));
-define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('block-announcementlink-update'));
-define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('block-announcement-create'));
-define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-announcementlink-create'));
-define ('GD_TEMPLATE_BLOCK_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('block-discussion-update'));
-define ('GD_TEMPLATE_BLOCK_DISCUSSIONLINK_UPDATE', PoP_ServerUtils::get_template_definition('block-discussionlink-update'));
-define ('GD_TEMPLATE_BLOCK_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('block-discussion-create'));
-define ('GD_TEMPLATE_BLOCK_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('block-discussionlink-create'));
-define ('GD_TEMPLATE_BLOCK_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('block-featured-update'));
-define ('GD_TEMPLATE_BLOCK_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('block-featured-create'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-locationpost-update'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-locationpostlink-update'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('block-locationpost-create'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-locationpostlink-create'));
+define ('GD_TEMPLATE_BLOCK_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-story-update'));
+define ('GD_TEMPLATE_BLOCK_STORYLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-storylink-update'));
+define ('GD_TEMPLATE_BLOCK_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('block-story-create'));
+define ('GD_TEMPLATE_BLOCK_STORYLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-storylink-create'));
+define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-announcement-update'));
+define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-announcementlink-update'));
+define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-announcement-create'));
+define ('GD_TEMPLATE_BLOCK_ANNOUNCEMENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-announcementlink-create'));
+define ('GD_TEMPLATE_BLOCK_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-discussion-update'));
+define ('GD_TEMPLATE_BLOCK_DISCUSSIONLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-discussionlink-update'));
+define ('GD_TEMPLATE_BLOCK_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('block-discussion-create'));
+define ('GD_TEMPLATE_BLOCK_DISCUSSIONLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-discussionlink-create'));
+define ('GD_TEMPLATE_BLOCK_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-featured-update'));
+define ('GD_TEMPLATE_BLOCK_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('block-featured-create'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostBlocks extends GD_Template_Processor_BlocksBase {
 

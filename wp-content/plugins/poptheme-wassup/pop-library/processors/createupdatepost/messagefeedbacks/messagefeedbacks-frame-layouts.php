@@ -6,12 +6,12 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LINK_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-link-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LINK_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-link-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-highlight-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_HIGHLIGHT_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-highlight-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-webpost-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_WEBPOST_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-webpost-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LINK_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-link-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_LINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-link-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-highlight-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_HIGHLIGHT_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-highlight-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-webpost-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_WEBPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-webpost-update'));
 
 class Wassup_Template_Processor_CreateUpdatePostFormMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

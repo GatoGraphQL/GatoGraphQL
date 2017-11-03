@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ANCHORMENU', PoP_ServerUtils::get_template_definition('anchormenu'));
+define ('GD_TEMPLATE_ANCHORMENU', PoP_TemplateIDUtils::get_template_definition('anchormenu'));
 
 class GD_Template_Processor_AnchorMenus extends GD_Template_Processor_AnchorMenusBase {
 

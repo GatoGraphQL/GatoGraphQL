@@ -5,13 +5,13 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_SHORTDESCRIPTION', PoP_ServerUtils::get_template_definition('formcomponent-cup-shortdescription'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_FACEBOOK', PoP_ServerUtils::get_template_definition('formcomponent-cup-facebook'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_TWITTER', PoP_ServerUtils::get_template_definition('formcomponent-cup-twitter'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_LINKEDIN', PoP_ServerUtils::get_template_definition('formcomponent-cup-linkedin'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_YOUTUBE', PoP_ServerUtils::get_template_definition('formcomponent-cup-youtube'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM', PoP_ServerUtils::get_template_definition('formcomponent-cup-instagram'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG', PoP_ServerUtils::get_template_definition('formcomponent-cup-blog'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_SHORTDESCRIPTION', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-shortdescription'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_FACEBOOK', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-facebook'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_TWITTER', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-twitter'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_LINKEDIN', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-linkedin'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_YOUTUBE', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-youtube'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_INSTAGRAM', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-instagram'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_BLOG', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-blog'));
 
 class GD_Template_Processor_CreateUpdateProfileTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

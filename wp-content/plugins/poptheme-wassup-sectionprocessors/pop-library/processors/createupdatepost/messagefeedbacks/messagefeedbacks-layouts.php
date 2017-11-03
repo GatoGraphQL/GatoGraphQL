@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-locationpost-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-locationpost-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-story-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-story-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-announcement-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-announcement-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-discussion-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-discussion-update'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-featured-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-featured-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-locationpost-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-locationpost-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-story-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-story-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-announcement-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-announcement-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-discussion-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-discussion-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-featured-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-featured-update'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostFormMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

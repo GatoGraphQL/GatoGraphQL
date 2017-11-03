@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORANNOUNCEMENTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorannouncements-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORDISCUSSIONS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authordiscussions-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFEATURED_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorfeatured-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORLOCATIONPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorlocationposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORSTORIES_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorstories-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORANNOUNCEMENTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorannouncements-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORDISCUSSIONS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authordiscussions-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFEATURED_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorfeatured-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORLOCATIONPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorlocationposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORSTORIES_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorstories-sidebar'));
 
 class PoPSP_URE_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_SidebarBlockGroupsBase {
 

@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_EXTERNAL_GOOGLEMAPS', PoP_ServerUtils::get_template_definition('external-googlemaps'));
-define ('POP_RESOURCELOADER_EXTERNAL_GMAPS', PoP_ServerUtils::get_template_definition('external-gmaps'));
-define ('POP_RESOURCELOADER_EXTERNAL_PERFECTSCROLLBAR', PoP_ServerUtils::get_template_definition('external-perfectscrollbar'));
-define ('POP_RESOURCELOADER_EXTERNAL_JQUERYCOOKIE', PoP_ServerUtils::get_template_definition('external-jquerycookie'));
-define ('POP_RESOURCELOADER_EXTERNAL_MOMENT', PoP_ServerUtils::get_template_definition('external-moment'));
-define ('POP_RESOURCELOADER_EXTERNAL_WAYPOINTS', PoP_ServerUtils::get_template_definition('external-waypoints'));
-define ('POP_RESOURCELOADER_EXTERNAL_TYPEAHEAD', PoP_ServerUtils::get_template_definition('external-typeahead'));
-define ('POP_RESOURCELOADER_EXTERNAL_DATERANGEPICKER', PoP_ServerUtils::get_template_definition('external-daterangepicker'));
-define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAPMULTISELECT', PoP_ServerUtils::get_template_definition('external-bootstrapmultiselect'));
-define ('POP_RESOURCELOADER_EXTERNAL_FULLSCREEN', PoP_ServerUtils::get_template_definition('external-fullscreen'));
-define ('POP_RESOURCELOADER_EXTERNAL_DYNAMICMAXHEIGHT', PoP_ServerUtils::get_template_definition('external-dynamicmaxheight'));
+define ('POP_RESOURCELOADER_EXTERNAL_GOOGLEMAPS', PoP_TemplateIDUtils::get_template_definition('external-googlemaps'));
+define ('POP_RESOURCELOADER_EXTERNAL_GMAPS', PoP_TemplateIDUtils::get_template_definition('external-gmaps'));
+define ('POP_RESOURCELOADER_EXTERNAL_PERFECTSCROLLBAR', PoP_TemplateIDUtils::get_template_definition('external-perfectscrollbar'));
+define ('POP_RESOURCELOADER_EXTERNAL_JQUERYCOOKIE', PoP_TemplateIDUtils::get_template_definition('external-jquerycookie'));
+define ('POP_RESOURCELOADER_EXTERNAL_MOMENT', PoP_TemplateIDUtils::get_template_definition('external-moment'));
+define ('POP_RESOURCELOADER_EXTERNAL_WAYPOINTS', PoP_TemplateIDUtils::get_template_definition('external-waypoints'));
+define ('POP_RESOURCELOADER_EXTERNAL_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('external-typeahead'));
+define ('POP_RESOURCELOADER_EXTERNAL_DATERANGEPICKER', PoP_TemplateIDUtils::get_template_definition('external-daterangepicker'));
+define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAPMULTISELECT', PoP_TemplateIDUtils::get_template_definition('external-bootstrapmultiselect'));
+define ('POP_RESOURCELOADER_EXTERNAL_FULLSCREEN', PoP_TemplateIDUtils::get_template_definition('external-fullscreen'));
+define ('POP_RESOURCELOADER_EXTERNAL_DYNAMICMAXHEIGHT', PoP_TemplateIDUtils::get_template_definition('external-dynamicmaxheight'));
 
 class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

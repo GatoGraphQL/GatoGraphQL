@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_UPDATEPROFILE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-updateprofile'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_UPDATEPROFILE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-updateprofile'));
 
 class GD_Template_Processor_UpdateProfileMessageFeedbackLayouts extends GD_Template_Processor_UpdateUserFormMesageFeedbackLayoutsBase {
 

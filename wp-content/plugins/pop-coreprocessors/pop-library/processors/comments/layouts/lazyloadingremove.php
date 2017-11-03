@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCRIPT_LAZYLOADINGREMOVE', PoP_ServerUtils::get_template_definition('script-lazyloading-remove'));
+define ('GD_TEMPLATE_SCRIPT_LAZYLOADINGREMOVE', PoP_TemplateIDUtils::get_template_definition('script-lazyloading-remove'));
 
 class GD_Template_Processor_LazyLoadingRemoveLayouts extends GD_Template_Processor_LazyLoadingRemoveLayoutsBase {
 

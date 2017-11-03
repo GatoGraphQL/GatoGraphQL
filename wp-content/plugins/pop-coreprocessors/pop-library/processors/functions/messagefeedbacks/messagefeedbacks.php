@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_FOLLOWUSER', PoP_ServerUtils::get_template_definition('messagefeedback-followuser'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNFOLLOWUSER', PoP_ServerUtils::get_template_definition('messagefeedback-unfollowuser'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_RECOMMENDPOST', PoP_ServerUtils::get_template_definition('messagefeedback-recommendpost'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNRECOMMENDPOST', PoP_ServerUtils::get_template_definition('messagefeedback-unrecommendpost'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_SUBSCRIBETOTAG', PoP_ServerUtils::get_template_definition('messagefeedback-subscribetotag'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNSUBSCRIBEFROMTAG', PoP_ServerUtils::get_template_definition('messagefeedback-unsubscribefromtag'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_UPVOTEPOST', PoP_ServerUtils::get_template_definition('messagefeedback-upvotepost'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNDOUPVOTEPOST', PoP_ServerUtils::get_template_definition('messagefeedback-undoupvotepost'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_DOWNVOTEPOST', PoP_ServerUtils::get_template_definition('messagefeedback-downvotepost'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNDODOWNVOTEPOST', PoP_ServerUtils::get_template_definition('messagefeedback-undodownvotepost'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_FOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('messagefeedback-followuser'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNFOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('messagefeedback-unfollowuser'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_RECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('messagefeedback-recommendpost'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNRECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('messagefeedback-unrecommendpost'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_SUBSCRIBETOTAG', PoP_TemplateIDUtils::get_template_definition('messagefeedback-subscribetotag'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNSUBSCRIBEFROMTAG', PoP_TemplateIDUtils::get_template_definition('messagefeedback-unsubscribefromtag'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_UPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('messagefeedback-upvotepost'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNDOUPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('messagefeedback-undoupvotepost'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_DOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('messagefeedback-downvotepost'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_UNDODOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('messagefeedback-undodownvotepost'));
 
 class GD_Template_Processor_FunctionMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUT_PROFILEORGANIZATION_DETAILS', PoP_ServerUtils::get_template_definition('ure-layoutuser-profileorganization-details'));
+define ('GD_URE_TEMPLATE_LAYOUT_PROFILEORGANIZATION_DETAILS', PoP_TemplateIDUtils::get_template_definition('ure-layoutuser-profileorganization-details'));
 
 class GD_URE_Custom_Template_Processor_ProfileOrganizationLayouts extends GD_URE_Custom_Template_Processor_ProfileOrganizationLayoutsBase {
 

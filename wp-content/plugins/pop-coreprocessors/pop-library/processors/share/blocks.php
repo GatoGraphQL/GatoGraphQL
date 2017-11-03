@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_EMBED', PoP_ServerUtils::get_template_definition('block-embed'));
-define ('GD_TEMPLATE_BLOCK_API', PoP_ServerUtils::get_template_definition('block-api'));
-define ('GD_TEMPLATE_BLOCK_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('block-copysearchurl'));
+define ('GD_TEMPLATE_BLOCK_EMBED', PoP_TemplateIDUtils::get_template_definition('block-embed'));
+define ('GD_TEMPLATE_BLOCK_API', PoP_TemplateIDUtils::get_template_definition('block-api'));
+define ('GD_TEMPLATE_BLOCK_COPYSEARCHURL', PoP_TemplateIDUtils::get_template_definition('block-copysearchurl'));
 
 class GD_Template_Processor_ShareBlocks extends GD_Template_Processor_BlocksBase {
 

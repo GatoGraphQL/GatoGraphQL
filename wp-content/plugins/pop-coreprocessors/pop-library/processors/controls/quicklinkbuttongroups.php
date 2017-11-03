@@ -5,24 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTQUICKVIEW', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postquickview'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postvolunteer'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTSHARE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postshare'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTEDIT', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postedit'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVIEW', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postview'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPREVIEW', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postpreview'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPERMALINK', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postpermalink'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-usersendmessage'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-userfollowunfollowuser'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postrecommendunrecommend'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postupvoteundoupvote'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-postdownvoteundodownvote'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-tagsubscribetounsubscribefrom'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSHARE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-usershare'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERCONTACTINFO', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-usercontactinfo'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-comments'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-comments-label'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE', PoP_ServerUtils::get_template_definition('quicklinkbuttongroup-tagshare'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTQUICKVIEW', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postquickview'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postvolunteer'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTSHARE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postshare'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postedit'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVIEW', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postview'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPREVIEW', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postpreview'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPERMALINK', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postpermalink'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-usersendmessage'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-userfollowunfollowuser'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postrecommendunrecommend'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postupvoteundoupvote'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postdownvoteundodownvote'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-tagsubscribetounsubscribefrom'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSHARE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-usershare'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERCONTACTINFO', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-usercontactinfo'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-comments'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-comments-label'));
+define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_TAGSHARE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-tagshare'));
 
 class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

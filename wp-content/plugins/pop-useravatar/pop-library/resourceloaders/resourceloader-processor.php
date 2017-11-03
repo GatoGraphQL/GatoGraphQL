@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_FILEUPLOAD', PoP_ServerUtils::get_template_definition('fileupload'));
+define ('POP_RESOURCELOADER_FILEUPLOAD', PoP_TemplateIDUtils::get_template_definition('fileupload'));
 
 class PoP_UserAvatar_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

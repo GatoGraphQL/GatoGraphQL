@@ -5,24 +5,24 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('action-locationpost-create'));
-define ('GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('action-locationpostlink-create'));
-define ('GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE', PoP_ServerUtils::get_template_definition('action-locationpost-update'));
-define ('GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-locationpostlink-update'));
-define ('GD_TEMPLATE_ACTION_STORY_CREATE', PoP_ServerUtils::get_template_definition('action-story-create'));
-define ('GD_TEMPLATE_ACTION_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('action-storylink-create'));
-define ('GD_TEMPLATE_ACTION_STORY_UPDATE', PoP_ServerUtils::get_template_definition('action-story-update'));
-define ('GD_TEMPLATE_ACTION_STORYLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-storylink-update'));
-define ('GD_TEMPLATE_ACTION_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('action-announcement-create'));
-define ('GD_TEMPLATE_ACTION_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('action-announcementlink-create'));
-define ('GD_TEMPLATE_ACTION_ANNOUNCEMENT_UPDATE', PoP_ServerUtils::get_template_definition('action-announcement-update'));
-define ('GD_TEMPLATE_ACTION_ANNOUNCEMENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-announcementlink-update'));
-define ('GD_TEMPLATE_ACTION_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('action-discussion-create'));
-define ('GD_TEMPLATE_ACTION_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('action-discussionlink-create'));
-define ('GD_TEMPLATE_ACTION_DISCUSSION_UPDATE', PoP_ServerUtils::get_template_definition('action-discussion-update'));
-define ('GD_TEMPLATE_ACTION_DISCUSSIONLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-discussionlink-update'));
-define ('GD_TEMPLATE_ACTION_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('action-featured-create'));
-define ('GD_TEMPLATE_ACTION_FEATURED_UPDATE', PoP_ServerUtils::get_template_definition('action-featured-update'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('action-locationpost-create'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('action-locationpostlink-create'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-locationpost-update'));
+define ('GD_TEMPLATE_ACTION_LOCATIONPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-locationpostlink-update'));
+define ('GD_TEMPLATE_ACTION_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('action-story-create'));
+define ('GD_TEMPLATE_ACTION_STORYLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('action-storylink-create'));
+define ('GD_TEMPLATE_ACTION_STORY_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-story-update'));
+define ('GD_TEMPLATE_ACTION_STORYLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-storylink-update'));
+define ('GD_TEMPLATE_ACTION_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('action-announcement-create'));
+define ('GD_TEMPLATE_ACTION_ANNOUNCEMENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('action-announcementlink-create'));
+define ('GD_TEMPLATE_ACTION_ANNOUNCEMENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-announcement-update'));
+define ('GD_TEMPLATE_ACTION_ANNOUNCEMENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-announcementlink-update'));
+define ('GD_TEMPLATE_ACTION_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('action-discussion-create'));
+define ('GD_TEMPLATE_ACTION_DISCUSSIONLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('action-discussionlink-create'));
+define ('GD_TEMPLATE_ACTION_DISCUSSION_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-discussion-update'));
+define ('GD_TEMPLATE_ACTION_DISCUSSIONLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-discussionlink-update'));
+define ('GD_TEMPLATE_ACTION_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('action-featured-create'));
+define ('GD_TEMPLATE_ACTION_FEATURED_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-featured-update'));
 
 class GD_Custom_Template_Processor_CreateUpdatePostActions extends GD_Template_Processor_ActionsBase {
 

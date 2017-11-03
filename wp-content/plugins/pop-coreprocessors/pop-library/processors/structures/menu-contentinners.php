@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENTINNER_MENU_BUTTON', PoP_ServerUtils::get_template_definition('contentinner-menu-button'));
-define ('GD_TEMPLATE_CONTENTINNER_MENU_DROPDOWN', PoP_ServerUtils::get_template_definition('contentinner-menu-dropdown'));
-define ('GD_TEMPLATE_CONTENTINNER_MENU_INDENT', PoP_ServerUtils::get_template_definition('contentinner-menu-indent'));
-define ('GD_TEMPLATE_CONTENTINNER_MENU_SEGMENTEDBUTTON', PoP_ServerUtils::get_template_definition('contentinner-menu-segmentedbutton'));
-define ('GD_TEMPLATE_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON', PoP_ServerUtils::get_template_definition('contentinner-menu-navigatorsegmentedbutton'));
-define ('GD_TEMPLATE_CONTENTINNER_MENU_DROPDOWNBUTTON_TOP', PoP_ServerUtils::get_template_definition('contentinner-menu-dropdownbutton-top'));
-define ('GD_TEMPLATE_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE', PoP_ServerUtils::get_template_definition('contentinner-menu-dropdownbutton-side'));
-define ('GD_TEMPLATE_CONTENTINNER_MENU_MULTITARGETINDENT', PoP_ServerUtils::get_template_definition('contentinner-menu-multitargetindent'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_BUTTON', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-button'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_DROPDOWN', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-dropdown'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_INDENT', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-indent'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_SEGMENTEDBUTTON', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-segmentedbutton'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-navigatorsegmentedbutton'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_DROPDOWNBUTTON_TOP', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-dropdownbutton-top'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-dropdownbutton-side'));
+define ('GD_TEMPLATE_CONTENTINNER_MENU_MULTITARGETINDENT', PoP_TemplateIDUtils::get_template_definition('contentinner-menu-multitargetindent'));
 
 class GD_Template_Processor_MenuContentInners extends GD_Template_Processor_ContentSingleInnersBase {
 

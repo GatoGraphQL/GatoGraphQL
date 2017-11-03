@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CALENDAR_EVENTS_NAVIGATOR', PoP_ServerUtils::get_template_definition('calendar-events-navigator'));
-define ('GD_TEMPLATE_CALENDAR_EVENTS_ADDONS', PoP_ServerUtils::get_template_definition('calendar-events-addons'));
-define ('GD_TEMPLATE_CALENDAR_EVENTS_MAIN', PoP_ServerUtils::get_template_definition('calendar-events-main'));
-define ('GD_TEMPLATE_CALENDAR_EVENTSMAP', PoP_ServerUtils::get_template_definition('calendar-eventsmap'));
+define ('GD_TEMPLATE_CALENDAR_EVENTS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('calendar-events-navigator'));
+define ('GD_TEMPLATE_CALENDAR_EVENTS_ADDONS', PoP_TemplateIDUtils::get_template_definition('calendar-events-addons'));
+define ('GD_TEMPLATE_CALENDAR_EVENTS_MAIN', PoP_TemplateIDUtils::get_template_definition('calendar-events-main'));
+define ('GD_TEMPLATE_CALENDAR_EVENTSMAP', PoP_TemplateIDUtils::get_template_definition('calendar-eventsmap'));
 
 class GD_EM_Template_Processor_Calendars extends GD_Template_Processor_CalendarsBase {
 

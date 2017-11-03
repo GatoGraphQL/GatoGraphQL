@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_MAP', PoP_ServerUtils::get_template_definition('scroll-locationposts-map'));
-define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_HORIZONTALMAP', PoP_ServerUtils::get_template_definition('scroll-locationposts-horizontalmap'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-map'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONPOSTS_HORIZONTALMAP', PoP_TemplateIDUtils::get_template_definition('scroll-locationposts-horizontalmap'));
 
 class GD_Custom_Template_Processor_CustomScrollMaps extends GD_Template_Processor_ScrollMapsBase {
 

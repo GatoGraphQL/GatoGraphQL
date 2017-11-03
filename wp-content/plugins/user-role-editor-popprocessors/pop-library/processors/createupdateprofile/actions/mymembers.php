@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('action-invitemembers'));
-define ('GD_TEMPLATE_ACTION_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('action-editmembership'));
+define ('GD_TEMPLATE_ACTION_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('action-invitemembers'));
+define ('GD_TEMPLATE_ACTION_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('action-editmembership'));
 
 class GD_URE_Template_Processor_ProfileActions extends GD_Template_Processor_ActionsBase {
 

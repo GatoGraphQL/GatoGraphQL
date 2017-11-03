@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_EXTERNAL_IFRAMETRANSPORT', PoP_ServerUtils::get_template_definition('external-iframe-transport'));
-define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOAD', PoP_ServerUtils::get_template_definition('external-fileupload'));
-define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADUI', PoP_ServerUtils::get_template_definition('external-fileupload-ui'));
-define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADPROCESS', PoP_ServerUtils::get_template_definition('external-fileupload-process'));
-define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADVALIDATE', PoP_ServerUtils::get_template_definition('external-fileupload-validate'));
-define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADLOCALE', PoP_ServerUtils::get_template_definition('external-fileupload-locale'));
+define ('POP_RESOURCELOADER_EXTERNAL_IFRAMETRANSPORT', PoP_TemplateIDUtils::get_template_definition('external-iframe-transport'));
+define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOAD', PoP_TemplateIDUtils::get_template_definition('external-fileupload'));
+define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADUI', PoP_TemplateIDUtils::get_template_definition('external-fileupload-ui'));
+define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADPROCESS', PoP_TemplateIDUtils::get_template_definition('external-fileupload-process'));
+define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADVALIDATE', PoP_TemplateIDUtils::get_template_definition('external-fileupload-validate'));
+define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADLOCALE', PoP_TemplateIDUtils::get_template_definition('external-fileupload-locale'));
 
 class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

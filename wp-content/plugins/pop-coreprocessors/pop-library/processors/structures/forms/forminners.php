@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('forminner-inviteusers'));
+define ('GD_TEMPLATE_FORMINNER_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('forminner-inviteusers'));
 
 class PoP_Core_Template_Processor_FormInners extends GD_Template_Processor_FormInnersBase {
 

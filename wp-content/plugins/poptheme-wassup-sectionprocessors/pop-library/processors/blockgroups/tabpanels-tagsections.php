@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-taglocationposts'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSTORIES', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagstories'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagannouncements'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGDISCUSSIONS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagdiscussions'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-taglocationposts'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGSTORIES', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagstories'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagannouncements'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagdiscussions'));
 
 class GD_Custom_Template_Processor_TagSectionTabPanelBlockGroups extends GD_Template_Processor_TagSectionTabPanelBlockGroupsBase {
 

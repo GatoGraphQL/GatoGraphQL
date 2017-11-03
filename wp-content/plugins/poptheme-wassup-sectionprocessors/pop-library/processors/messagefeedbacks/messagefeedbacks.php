@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('messagefeedback-locationposts'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORIES', PoP_ServerUtils::get_template_definition('messagefeedback-stories'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('messagefeedback-announcements'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_DISCUSSIONS', PoP_ServerUtils::get_template_definition('messagefeedback-discussions'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_FEATURED', PoP_ServerUtils::get_template_definition('messagefeedback-featured'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_BLOG', PoP_ServerUtils::get_template_definition('messagefeedback-blog'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_THOUGHTS', PoP_ServerUtils::get_template_definition('messagefeedback-thoughts'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('messagefeedback-mylocationposts'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYSTORIES', PoP_ServerUtils::get_template_definition('messagefeedback-mystories'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('messagefeedback-myannouncements'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('messagefeedback-mydiscussions'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-locationposts'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_STORIES', PoP_TemplateIDUtils::get_template_definition('messagefeedback-stories'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-announcements'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-discussions'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_FEATURED', PoP_TemplateIDUtils::get_template_definition('messagefeedback-featured'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_BLOG', PoP_TemplateIDUtils::get_template_definition('messagefeedback-blog'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_THOUGHTS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-thoughts'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-mylocationposts'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('messagefeedback-mystories'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-myannouncements'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-mydiscussions'));
 
 class GD_Custom_Template_Processor_CustomListMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBMENU_AUTHOR', PoP_ServerUtils::get_template_definition('submenu-author'));
-define ('GD_TEMPLATE_SUBMENU_TAG', PoP_ServerUtils::get_template_definition('submenu-tag'));
-define ('GD_TEMPLATE_SUBMENU_SINGLE', PoP_ServerUtils::get_template_definition('submenu-single'));
+define ('GD_TEMPLATE_SUBMENU_AUTHOR', PoP_TemplateIDUtils::get_template_definition('submenu-author'));
+define ('GD_TEMPLATE_SUBMENU_TAG', PoP_TemplateIDUtils::get_template_definition('submenu-tag'));
+define ('GD_TEMPLATE_SUBMENU_SINGLE', PoP_TemplateIDUtils::get_template_definition('submenu-single'));
 
 class GD_Template_Processor_CustomSubMenus extends GD_Template_Processor_SubMenusBase {
 

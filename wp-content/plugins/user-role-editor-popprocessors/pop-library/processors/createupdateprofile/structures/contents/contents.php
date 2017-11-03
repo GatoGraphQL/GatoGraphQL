@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_CONTENT_MEMBER', PoP_ServerUtils::get_template_definition('ure-content-member'));
+define ('GD_URE_TEMPLATE_CONTENT_MEMBER', PoP_TemplateIDUtils::get_template_definition('ure-content-member'));
 
 class GD_URE_Template_Processor_CustomContents extends GD_Template_Processor_ContentsBase {
 

@@ -5,22 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ALLCONTENT', PoP_ServerUtils::get_template_definition('messagefeedbackinner-allcontent'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LINKS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-links'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_HIGHLIGHTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-highlights'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_WEBPOSTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-webposts'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ALLPROFILES', PoP_ServerUtils::get_template_definition('messagefeedbackinner-allprofiles'));
-// define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_RESOURCES', PoP_ServerUtils::get_template_definition('messagefeedbackinner-resources'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_USERS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-users'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FOLLOWERS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-followers'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_SPONSORS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-sponsors'));
-// define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FEATUREDCOMMUNITIES', PoP_ServerUtils::get_template_definition('messagefeedbackinner-featuredcommunities'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCONTENT', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycontent'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYLINKS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mylinks'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYHIGHLIGHTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-myhighlights'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYWEBPOSTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mywebposts'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_TAGS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-tags'));
-// define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYRESOURCES', PoP_ServerUtils::get_template_definition('messagefeedbackinner-myresources'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ALLCONTENT', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-allcontent'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_LINKS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-links'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_HIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-highlights'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-webposts'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_ALLPROFILES', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-allprofiles'));
+// define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_RESOURCES', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-resources'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_USERS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-users'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FOLLOWERS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-followers'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_SPONSORS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-sponsors'));
+// define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_FEATUREDCOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-featuredcommunities'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCONTENT', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycontent'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYLINKS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mylinks'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-myhighlights'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mywebposts'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_TAGS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-tags'));
+// define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYRESOURCES', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-myresources'));
 
 class GD_Template_Processor_CustomListMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

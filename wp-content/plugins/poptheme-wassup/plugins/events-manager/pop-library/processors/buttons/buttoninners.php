@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_EVENT_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-event-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-eventlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-event-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-eventlink-create'));
 
 class GD_Custom_EM_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

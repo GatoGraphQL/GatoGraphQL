@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_SETTINGS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-settings'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_SETTINGS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-settings'));
 
 class GD_Template_Processor_SettingsMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

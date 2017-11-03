@@ -5,20 +5,20 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-fullview'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_LINK', PoP_ServerUtils::get_template_definition('layout-fullview-link'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_HIGHLIGHT', PoP_ServerUtils::get_template_definition('layout-fullview-highlight'));
-define ('GD_TEMPLATE_LAYOUT_FULLVIEW_WEBPOST', PoP_ServerUtils::get_template_definition('layout-fullview-webpost'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-fullview'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_LINK', PoP_TemplateIDUtils::get_template_definition('layout-fullview-link'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_HIGHLIGHT', PoP_TemplateIDUtils::get_template_definition('layout-fullview-highlight'));
+define ('GD_TEMPLATE_LAYOUT_FULLVIEW_WEBPOST', PoP_TemplateIDUtils::get_template_definition('layout-fullview-webpost'));
 
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW', PoP_ServerUtils::get_template_definition('authorlayout-fullview'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_LINK', PoP_ServerUtils::get_template_definition('authorlayout-fullview-link'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT', PoP_ServerUtils::get_template_definition('authorlayout-fullview-highlight'));
-define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_WEBPOST', PoP_ServerUtils::get_template_definition('authorlayout-fullview-webpost'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_LINK', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-link'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-highlight'));
+define ('GD_TEMPLATE_AUTHORLAYOUT_FULLVIEW_WEBPOST', PoP_TemplateIDUtils::get_template_definition('authorlayout-fullview-webpost'));
 
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW', PoP_ServerUtils::get_template_definition('singlelayout-fullview'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_LINK', PoP_ServerUtils::get_template_definition('singlelayout-fullview-link'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_HIGHLIGHT', PoP_ServerUtils::get_template_definition('singlelayout-fullview-highlight'));
-define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_WEBPOST', PoP_ServerUtils::get_template_definition('singlelayout-fullview-webpost'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_LINK', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-link'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_HIGHLIGHT', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-highlight'));
+define ('GD_TEMPLATE_SINGLELAYOUT_FULLVIEW_WEBPOST', PoP_TemplateIDUtils::get_template_definition('singlelayout-fullview-webpost'));
 
 class GD_Template_Processor_CustomFullViewLayouts extends GD_Template_Processor_CustomFullViewLayoutsBase {
 

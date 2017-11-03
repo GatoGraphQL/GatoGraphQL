@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('AAL_POPPROCESSORS_TEMPLATE_ANCHORCONTROL_NOTIFICATIONS', PoP_ServerUtils::get_template_definition('aal-popprocessors-buttoncontrol-notifications'));
-define ('AAL_POPPROCESSORS_TEMPLATE_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD', PoP_ServerUtils::get_template_definition('aal-popprocessors-buttoncontrol-notifications-markallasread'));
+define ('AAL_POPPROCESSORS_TEMPLATE_ANCHORCONTROL_NOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('aal-popprocessors-buttoncontrol-notifications'));
+define ('AAL_POPPROCESSORS_TEMPLATE_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD', PoP_TemplateIDUtils::get_template_definition('aal-popprocessors-buttoncontrol-notifications-markallasread'));
 
 class AAL_PoPProcessors_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorControlsBase {
 

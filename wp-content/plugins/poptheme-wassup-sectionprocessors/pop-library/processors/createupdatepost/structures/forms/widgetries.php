@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS', PoP_ServerUtils::get_template_definition('widget-form-locationpostdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-locationpostlinkdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS', PoP_ServerUtils::get_template_definition('widget-form-discussiondetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-discussionlinkdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS', PoP_ServerUtils::get_template_definition('widget-form-announcementdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-announcementlinkdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_STORYDETAILS', PoP_ServerUtils::get_template_definition('widget-form-storydetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_STORYLINKDETAILS', PoP_ServerUtils::get_template_definition('widget-form-storylinkdetails'));
-define ('GD_TEMPLATE_WIDGET_FORM_FEATUREDDETAILS', PoP_ServerUtils::get_template_definition('widget-form-featureddetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-locationpostdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-locationpostlinkdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_DISCUSSIONDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-discussiondetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_DISCUSSIONLINKDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-discussionlinkdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-announcementdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTLINKDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-announcementlinkdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_STORYDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-storydetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_STORYLINKDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-storylinkdetails'));
+define ('GD_TEMPLATE_WIDGET_FORM_FEATUREDDETAILS', PoP_TemplateIDUtils::get_template_definition('widget-form-featureddetails'));
 
 class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_WidgetsBase {
 

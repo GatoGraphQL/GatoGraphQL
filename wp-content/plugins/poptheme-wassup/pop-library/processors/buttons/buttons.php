@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTON_HIGHLIGHTEDIT', PoP_ServerUtils::get_template_definition('button-highlightedit'));
-define ('GD_TEMPLATE_BUTTON_HIGHLIGHTVIEW', PoP_ServerUtils::get_template_definition('button-highlightview'));
-define ('GD_TEMPLATE_BUTTON_ADDONSPOSTEDIT', PoP_ServerUtils::get_template_definition('button-addonspostedit'));
-define ('GD_TEMPLATE_BUTTON_ADDONSORMAINPOSTEDIT', PoP_ServerUtils::get_template_definition('button-addonsormainpostedit'));
+define ('GD_TEMPLATE_BUTTON_HIGHLIGHTEDIT', PoP_TemplateIDUtils::get_template_definition('button-highlightedit'));
+define ('GD_TEMPLATE_BUTTON_HIGHLIGHTVIEW', PoP_TemplateIDUtils::get_template_definition('button-highlightview'));
+define ('GD_TEMPLATE_BUTTON_ADDONSPOSTEDIT', PoP_TemplateIDUtils::get_template_definition('button-addonspostedit'));
+define ('GD_TEMPLATE_BUTTON_ADDONSORMAINPOSTEDIT', PoP_TemplateIDUtils::get_template_definition('button-addonsormainpostedit'));
 
 class Wassup_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 

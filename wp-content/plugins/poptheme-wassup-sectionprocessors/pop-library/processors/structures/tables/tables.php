@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLE_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('table-myannouncements'));
-define ('GD_TEMPLATE_TABLE_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('table-mydiscussions'));
-define ('GD_TEMPLATE_TABLE_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('table-mylocationposts'));
-define ('GD_TEMPLATE_TABLE_MYSTORIES', PoP_ServerUtils::get_template_definition('table-mystories'));
+define ('GD_TEMPLATE_TABLE_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('table-myannouncements'));
+define ('GD_TEMPLATE_TABLE_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('table-mydiscussions'));
+define ('GD_TEMPLATE_TABLE_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('table-mylocationposts'));
+define ('GD_TEMPLATE_TABLE_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('table-mystories'));
 
 class GD_Custom_Template_Processor_Tables extends GD_Template_Processor_TablesBase {
 

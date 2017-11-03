@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP', PoP_ServerUtils::get_template_definition('external-bootstrap'));
+define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('external-bootstrap'));
 
 class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

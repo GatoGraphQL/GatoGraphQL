@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT', PoP_ServerUtils::get_template_definition('postconclusion-sidebarmulticomponent-left'));
-define ('GD_TEMPLATE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT', PoP_ServerUtils::get_template_definition('subjugatedpostconclusion-sidebarmulticomponent-left'));
-define ('GD_TEMPLATE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT', PoP_ServerUtils::get_template_definition('postconclusion-sidebarmulticomponent-right'));
+define ('GD_TEMPLATE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT', PoP_TemplateIDUtils::get_template_definition('postconclusion-sidebarmulticomponent-left'));
+define ('GD_TEMPLATE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT', PoP_TemplateIDUtils::get_template_definition('subjugatedpostconclusion-sidebarmulticomponent-left'));
+define ('GD_TEMPLATE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT', PoP_TemplateIDUtils::get_template_definition('postconclusion-sidebarmulticomponent-right'));
 
 class GD_Template_Processor_PostMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

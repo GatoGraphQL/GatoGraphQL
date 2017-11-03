@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_WEBPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('forminner-webpostlink-update'));
-define ('GD_TEMPLATE_FORMINNER_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('forminner-webpostlink-create'));
-define ('GD_TEMPLATE_FORMINNER_HIGHLIGHT_UPDATE', PoP_ServerUtils::get_template_definition('forminner-highlight-update'));
-define ('GD_TEMPLATE_FORMINNER_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('forminner-highlight-create'));
-define ('GD_TEMPLATE_FORMINNER_WEBPOST_UPDATE', PoP_ServerUtils::get_template_definition('forminner-webpost-update'));
-define ('GD_TEMPLATE_FORMINNER_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('forminner-webpost-create'));
+define ('GD_TEMPLATE_FORMINNER_WEBPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-webpostlink-update'));
+define ('GD_TEMPLATE_FORMINNER_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-webpostlink-create'));
+define ('GD_TEMPLATE_FORMINNER_HIGHLIGHT_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-highlight-update'));
+define ('GD_TEMPLATE_FORMINNER_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-highlight-create'));
+define ('GD_TEMPLATE_FORMINNER_WEBPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-webpost-update'));
+define ('GD_TEMPLATE_FORMINNER_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('forminner-webpost-create'));
 
 class Wassup_Template_Processor_CreateUpdatePostFormInners extends Wassup_Template_Processor_CreateUpdatePostFormInnersBase {
 

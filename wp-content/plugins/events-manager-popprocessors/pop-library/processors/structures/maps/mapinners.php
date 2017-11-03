@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_MAPINNER_POST', PoP_ServerUtils::get_template_definition('em-mapinner-post'));
-define ('GD_EM_TEMPLATE_MAPINNER_USER', PoP_ServerUtils::get_template_definition('em-mapinner-user'));
+define ('GD_EM_TEMPLATE_MAPINNER_POST', PoP_TemplateIDUtils::get_template_definition('em-mapinner-post'));
+define ('GD_EM_TEMPLATE_MAPINNER_USER', PoP_TemplateIDUtils::get_template_definition('em-mapinner-user'));
 
 class GD_EM_Template_Processor_MapInners extends GD_EM_Template_Processor_MapInnersBase {
 

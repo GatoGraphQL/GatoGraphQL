@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_TARGETURL', PoP_ServerUtils::get_template_definition('formcomponent-targeturl'));
-define ('GD_TEMPLATE_FORMCOMPONENT_TARGETTITLE', PoP_ServerUtils::get_template_definition('formcomponent-targettitle'));
-define ('GD_TEMPLATE_FORMCOMPONENT_SENDERNAME', PoP_ServerUtils::get_template_definition('sendername'));
-define ('GD_TEMPLATE_FORMCOMPONENT_BROWSERURL', PoP_ServerUtils::get_template_definition('redirect_to', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_FILTERNAME', PoP_ServerUtils::get_template_definition('filtername', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_SEARCH', PoP_ServerUtils::get_template_definition('searchfor', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_HASHTAGS', PoP_ServerUtils::get_template_definition('hashtags', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_NAME', PoP_ServerUtils::get_template_definition('nombre', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_TARGETURL', PoP_TemplateIDUtils::get_template_definition('formcomponent-targeturl'));
+define ('GD_TEMPLATE_FORMCOMPONENT_TARGETTITLE', PoP_TemplateIDUtils::get_template_definition('formcomponent-targettitle'));
+define ('GD_TEMPLATE_FORMCOMPONENT_SENDERNAME', PoP_TemplateIDUtils::get_template_definition('sendername'));
+define ('GD_TEMPLATE_FORMCOMPONENT_BROWSERURL', PoP_TemplateIDUtils::get_template_definition('redirect_to', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_FILTERNAME', PoP_TemplateIDUtils::get_template_definition('filtername', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_SEARCH', PoP_TemplateIDUtils::get_template_definition('searchfor', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_HASHTAGS', PoP_TemplateIDUtils::get_template_definition('hashtags', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_NAME', PoP_TemplateIDUtils::get_template_definition('nombre', true));
 
 class GD_Template_Processor_TextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

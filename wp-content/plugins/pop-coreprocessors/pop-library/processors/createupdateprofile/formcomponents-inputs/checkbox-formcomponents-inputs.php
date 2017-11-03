@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CUP_DISPLAYEMAIL', PoP_ServerUtils::get_template_definition('formcomponent-cup-displayemail'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUP_DISPLAYEMAIL', PoP_TemplateIDUtils::get_template_definition('formcomponent-cup-displayemail'));
 
 class GD_Template_Processor_CreateUpdateProfileCheckboxFormComponentInputs extends GD_Template_Processor_CheckboxFormComponentsBase {
 

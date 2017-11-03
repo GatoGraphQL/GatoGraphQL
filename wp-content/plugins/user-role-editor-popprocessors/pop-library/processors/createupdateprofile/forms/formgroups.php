@@ -5,22 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_CONTACTPERSON', PoP_ServerUtils::get_template_definition('formcomponentgroup-ure-cup-contactperson'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_CONTACTNUMBER', PoP_ServerUtils::get_template_definition('formcomponentgroup-ure-cup-contactnumber'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_LASTNAME', PoP_ServerUtils::get_template_definition('formcomponentgroup-ure-cup-lastname'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_MEMBERPRIVILEGES', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-memberprivileges'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_MEMBERTAGS', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-membertags'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_MEMBERSTATUS', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-memberstatus'));
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_ISCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-cup-iscommunity'));
-// define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILS', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-emails'));
-// define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_ADDITIONALMESSAGE', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-additionalmessage'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_CONTACTPERSON', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-ure-cup-contactperson'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_CONTACTNUMBER', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-ure-cup-contactnumber'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_LASTNAME', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-ure-cup-lastname'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_MEMBERPRIVILEGES', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-memberprivileges'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_MEMBERTAGS', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-membertags'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_MEMBERSTATUS', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-memberstatus'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_CUP_ISCOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-cup-iscommunity'));
+// define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILS', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-emails'));
+// define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_ADDITIONALMESSAGE', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-additionalmessage'));
 
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERPRIVILEGES', PoP_ServerUtils::get_template_definition('ure-filterformcomponentgroup-memberprivileges'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERTAGS', PoP_ServerUtils::get_template_definition('ure-filterformcomponentgroup-membertags'));
-define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERSTATUS', PoP_ServerUtils::get_template_definition('ure-filterformcomponentgroup-memberstatus'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERPRIVILEGES', PoP_TemplateIDUtils::get_template_definition('ure-filterformcomponentgroup-memberprivileges'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERTAGS', PoP_TemplateIDUtils::get_template_definition('ure-filterformcomponentgroup-membertags'));
+define ('GD_URE_TEMPLATE_FILTERFORMCOMPONENTGROUP_MEMBERSTATUS', PoP_TemplateIDUtils::get_template_definition('ure-filterformcomponentgroup-memberstatus'));
 
 // My Preferences
-define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-emailnotifications-network-joinscommunity'));
+define ('GD_URE_TEMPLATE_FORMCOMPONENTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-emailnotifications-network-joinscommunity'));
 
 class GD_URE_Template_Processor_ProfileFormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TABLE_MYEVENTS', PoP_ServerUtils::get_template_definition('table-myevents'));
-define ('GD_TEMPLATE_TABLE_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('table-mypastevents'));
+define ('GD_TEMPLATE_TABLE_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('table-myevents'));
+define ('GD_TEMPLATE_TABLE_MYPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('table-mypastevents'));
 
 class GD_EM_Template_Processor_Tables extends GD_Template_Processor_TablesBase {
 

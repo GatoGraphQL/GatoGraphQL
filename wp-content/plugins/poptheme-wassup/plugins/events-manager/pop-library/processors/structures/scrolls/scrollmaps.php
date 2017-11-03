@@ -5,18 +5,18 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_MAP', PoP_ServerUtils::get_template_definition('scroll-allusers-map'));
-define ('GD_TEMPLATE_SCROLL_ALLUSERS_HORIZONTALMAP', PoP_ServerUtils::get_template_definition('scroll-allusers-horizontalmap'));
-define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_MAP', PoP_ServerUtils::get_template_definition('scroll-searchusers-map'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_MAP', PoP_ServerUtils::get_template_definition('scroll-authorfollowers-map'));
-define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_MAP', PoP_ServerUtils::get_template_definition('scroll-authorfollowingusers-map'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-map'));
+define ('GD_TEMPLATE_SCROLL_ALLUSERS_HORIZONTALMAP', PoP_TemplateIDUtils::get_template_definition('scroll-allusers-horizontalmap'));
+define ('GD_TEMPLATE_SCROLL_SEARCHUSERS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-searchusers-map'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWERS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowers-map'));
+define ('GD_TEMPLATE_SCROLL_AUTHORFOLLOWINGUSERS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-authorfollowingusers-map'));
 
-define ('GD_TEMPLATE_SCROLL_LOCATIONS_MAP', PoP_ServerUtils::get_template_definition('scroll-locations-map'));
-define ('GD_TEMPLATE_SCROLL_EVENTS_MAP', PoP_ServerUtils::get_template_definition('scroll-events-map'));
-define ('GD_TEMPLATE_SCROLL_PASTEVENTS_MAP', PoP_ServerUtils::get_template_definition('scroll-pastevents-map'));
-define ('GD_TEMPLATE_SCROLL_EVENTS_HORIZONTALMAP', PoP_ServerUtils::get_template_definition('scroll-events-horizontalmap'));
+define ('GD_TEMPLATE_SCROLL_LOCATIONS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-locations-map'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-events-map'));
+define ('GD_TEMPLATE_SCROLL_PASTEVENTS_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-pastevents-map'));
+define ('GD_TEMPLATE_SCROLL_EVENTS_HORIZONTALMAP', PoP_TemplateIDUtils::get_template_definition('scroll-events-horizontalmap'));
 
-define ('GD_TEMPLATE_SCROLL_WHOWEARE_MAP', PoP_ServerUtils::get_template_definition('scroll-whoweare-map'));
+define ('GD_TEMPLATE_SCROLL_WHOWEARE_MAP', PoP_TemplateIDUtils::get_template_definition('scroll-whoweare-map'));
 
 class GD_EM_Template_Processor_CustomScrollMaps extends GD_Template_Processor_ScrollMapsBase {
 

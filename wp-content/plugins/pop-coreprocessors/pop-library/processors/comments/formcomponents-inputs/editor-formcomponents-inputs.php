@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_COMMENTEDITOR', PoP_ServerUtils::get_template_definition('formcomponentcommenteditor')); // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
+define ('GD_TEMPLATE_FORMCOMPONENT_COMMENTEDITOR', PoP_TemplateIDUtils::get_template_definition('formcomponentcommenteditor')); // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
 
 class GD_Template_Processor_CommentEditorFormComponentInputs extends GD_Template_Processor_EditorFormComponentsBase {
 

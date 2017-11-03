@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_GF_TEMPLATE_FORMCOMPONENT_TOPIC', PoP_ServerUtils::get_template_definition('gf-field-topic'));
+define ('GD_GF_TEMPLATE_FORMCOMPONENT_TOPIC', PoP_TemplateIDUtils::get_template_definition('gf-field-topic'));
 
 class GD_GF_Template_Processor_SelectFormComponentInputs extends GD_Template_Processor_SelectFormComponentsBase {
 

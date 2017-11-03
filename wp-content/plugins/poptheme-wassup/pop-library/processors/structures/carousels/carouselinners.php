@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELINNER_USERS', PoP_ServerUtils::get_template_definition('carouselinner-users'));
+define ('GD_TEMPLATE_CAROUSELINNER_USERS', PoP_TemplateIDUtils::get_template_definition('carouselinner-users'));
 
 define ('POP_HOOK_CAROUSEL_USERS_GRIDCLASS', 'carousel-users-gridclass');
 

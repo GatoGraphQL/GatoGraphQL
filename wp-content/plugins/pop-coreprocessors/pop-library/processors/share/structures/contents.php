@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENT_EMBEDPREVIEW', PoP_ServerUtils::get_template_definition('content-embedpreview'));
-define ('GD_TEMPLATE_CONTENT_EMBED', PoP_ServerUtils::get_template_definition('content-embed'));
-define ('GD_TEMPLATE_CONTENT_API', PoP_ServerUtils::get_template_definition('content-api'));
-define ('GD_TEMPLATE_CONTENT_COPYSEARCHURL', PoP_ServerUtils::get_template_definition('content-copysearchurl'));
+define ('GD_TEMPLATE_CONTENT_EMBEDPREVIEW', PoP_TemplateIDUtils::get_template_definition('content-embedpreview'));
+define ('GD_TEMPLATE_CONTENT_EMBED', PoP_TemplateIDUtils::get_template_definition('content-embed'));
+define ('GD_TEMPLATE_CONTENT_API', PoP_TemplateIDUtils::get_template_definition('content-api'));
+define ('GD_TEMPLATE_CONTENT_COPYSEARCHURL', PoP_TemplateIDUtils::get_template_definition('content-copysearchurl'));
 
 class GD_Template_Processor_ShareContents extends GD_Template_Processor_ContentsBase {
 

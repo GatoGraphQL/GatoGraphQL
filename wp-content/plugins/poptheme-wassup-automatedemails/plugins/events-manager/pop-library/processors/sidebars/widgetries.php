@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// define ('GD_TEMPLATE_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS', PoP_ServerUtils::get_template_definition('widgetcompact-automatedemails-post-authors'));
-define ('GD_TEMPLATE_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO', PoP_ServerUtils::get_template_definition('em-widgetcompact-automatedemails-eventinfo'));
+// define ('GD_TEMPLATE_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS', PoP_TemplateIDUtils::get_template_definition('widgetcompact-automatedemails-post-authors'));
+define ('GD_TEMPLATE_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO', PoP_TemplateIDUtils::get_template_definition('em-widgetcompact-automatedemails-eventinfo'));
 
 class PoP_ThemeWassup_EM_AE_Template_Processor_Widgets extends GD_Template_Processor_WidgetsBase {
 

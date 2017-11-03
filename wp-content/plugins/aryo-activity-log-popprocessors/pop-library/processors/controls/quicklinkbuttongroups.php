@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_VIEWUSER', PoP_ServerUtils::get_template_definition('aal-quicklinkbuttongroup-viewuser'));
-define ('GD_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_NOTIFICATION_MARKASREADUNREAD', PoP_ServerUtils::get_template_definition('aal-quicklinkbuttongroup-notification-markasreadunread'));
+define ('GD_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_VIEWUSER', PoP_TemplateIDUtils::get_template_definition('aal-quicklinkbuttongroup-viewuser'));
+define ('GD_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_NOTIFICATION_MARKASREADUNREAD', PoP_TemplateIDUtils::get_template_definition('aal-quicklinkbuttongroup-notification-markasreadunread'));
 
 class GD_AAL_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

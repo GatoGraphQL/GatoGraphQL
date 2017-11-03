@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USERAVATAR_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-useravatar-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_USERAVATAR_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-useravatar-update'));
 
 class PoP_UserAvatar_Template_Processor_UserMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

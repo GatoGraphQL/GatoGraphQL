@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-locationpost'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_STORY', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-story'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_DISCUSSION', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-discussion'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_BLOG', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-blog'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_ANNOUNCEMENT', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-announcement'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_FEATURED', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-featured'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-locationpost'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_STORY', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-story'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_DISCUSSION', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-discussion'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_BLOG', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-blog'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_ANNOUNCEMENT', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-announcement'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_FEATURED', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-featured'));
 
 class GD_Template_Processor_CustomVerticalSingleSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 	

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_ADDCOMMENT', PoP_ServerUtils::get_template_definition('forminner-addcomment'));
+define ('GD_TEMPLATE_FORMINNER_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('forminner-addcomment'));
 
 class GD_Template_Processor_CommentsFormInners extends GD_Template_Processor_FormInnersBase {
 

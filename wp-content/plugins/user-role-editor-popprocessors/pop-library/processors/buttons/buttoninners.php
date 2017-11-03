@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_BUTTONINNER_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-buttoninner-editmembership'));
+define ('GD_URE_TEMPLATE_BUTTONINNER_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-buttoninner-editmembership'));
 // define ('GD_URE_TEMPLATE_BUTTONINNER_USERLINK_MEMBERS', 'ure-buttoninner-userlink-members');
 
 class GD_URE_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInnersBase {

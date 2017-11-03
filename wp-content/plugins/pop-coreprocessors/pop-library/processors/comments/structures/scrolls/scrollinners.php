@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLLINNER_COMMENTS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-comments-list'));
-define ('GD_TEMPLATE_SCROLLINNER_COMMENTS_ADD', PoP_ServerUtils::get_template_definition('scrollinner-comments-add'));
-define ('GD_TEMPLATE_LAYOUTSCROLLINNER_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('layout-postcommentscroll-inner'));
-define ('GD_TEMPLATE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE', PoP_ServerUtils::get_template_definition('layout-postcommentscroll-inner-appendable'));
-define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('layout-referencedbyscroll-inner-details'));
-define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-referencedbyscroll-inner-simpleview'));
-define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-referencedbyscroll-inner-fullview'));
-define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE', PoP_ServerUtils::get_template_definition('layout-referencedbyscroll-inner-appendable'));
+define ('GD_TEMPLATE_SCROLLINNER_COMMENTS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-comments-list'));
+define ('GD_TEMPLATE_SCROLLINNER_COMMENTS_ADD', PoP_TemplateIDUtils::get_template_definition('scrollinner-comments-add'));
+define ('GD_TEMPLATE_LAYOUTSCROLLINNER_POSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('layout-postcommentscroll-inner'));
+define ('GD_TEMPLATE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE', PoP_TemplateIDUtils::get_template_definition('layout-postcommentscroll-inner-appendable'));
+define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-referencedbyscroll-inner-details'));
+define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedbyscroll-inner-simpleview'));
+define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-referencedbyscroll-inner-fullview'));
+define ('GD_TEMPLATE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE', PoP_TemplateIDUtils::get_template_definition('layout-referencedbyscroll-inner-appendable'));
 
 class GD_Template_Processor_CommentScrollInners extends GD_Template_Processor_ScrollInnersBase {
 

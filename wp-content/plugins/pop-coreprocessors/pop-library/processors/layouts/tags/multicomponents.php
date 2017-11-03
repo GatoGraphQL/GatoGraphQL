@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_TAG_DETAILS', PoP_ServerUtils::get_template_definition('multicomponent-tag'));
+define ('GD_TEMPLATE_LAYOUT_TAG_DETAILS', PoP_TemplateIDUtils::get_template_definition('multicomponent-tag'));
 
 class GD_Template_ProcessorTagMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

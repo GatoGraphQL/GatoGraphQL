@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-locationposts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORIES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-stories'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-announcements'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-discussions'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED', PoP_ServerUtils::get_template_definition('layout-messagefeedback-featured'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_BLOG', PoP_ServerUtils::get_template_definition('layout-messagefeedback-blog'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_THOUGHTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-thoughts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mylocationposts'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYSTORIES', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mystories'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-myannouncements'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-mydiscussions'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-locationposts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_STORIES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-stories'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-announcements'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-discussions'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_FEATURED', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-featured'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_BLOG', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-blog'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_THOUGHTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-thoughts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mylocationposts'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mystories'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-myannouncements'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-mydiscussions'));
 
 class GD_Custom_Template_Processor_CustomListMessageFeedbackLayouts extends GD_Template_Processor_ListMessageFeedbackLayoutsBase {
 

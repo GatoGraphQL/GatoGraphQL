@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORMAINALLCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authormainallcontent'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORALLCONTENT', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorallcontent'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORLINKS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorlinks'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORHIGHLIGHTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorhighlights'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORWEBPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorwebposts'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWERS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorfollowers'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWINGUSERS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorfollowingusers'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORSUBSCRIBEDTOTAGS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorsubscribedtotags'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORRECOMMENDEDPOSTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorrecommendedposts'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORMAINALLCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authormainallcontent'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORALLCONTENT', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorallcontent'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORLINKS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorlinks'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORHIGHLIGHTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorhighlights'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORWEBPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorwebposts'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWERS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorfollowers'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORFOLLOWINGUSERS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorfollowingusers'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORSUBSCRIBEDTOTAGS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorsubscribedtotags'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORRECOMMENDEDPOSTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorrecommendedposts'));
 
 class GD_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Template_Processor_AuthorSectionTabPanelBlockGroupsBase {
 

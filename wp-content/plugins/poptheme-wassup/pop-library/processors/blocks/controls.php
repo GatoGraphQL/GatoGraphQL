@@ -5,29 +5,29 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL', PoP_ServerUtils::get_template_definition('block-pagecontrol'));
-define ('GD_TEMPLATE_BLOCK_PAGEWITHSIDECONTROL', PoP_ServerUtils::get_template_definition('block-pagewithsidecontrol'));
-define ('GD_TEMPLATE_BLOCK_SINGLECONTROL', PoP_ServerUtils::get_template_definition('block-singlecontrol'));
-define ('GD_TEMPLATE_BLOCK_HOMECONTROL', PoP_ServerUtils::get_template_definition('block-homecontrol'));
-define ('GD_TEMPLATE_BLOCK_AUTHORCONTROL', PoP_ServerUtils::get_template_definition('block-authorcontrol'));
-define ('GD_TEMPLATE_BLOCK_TAGCONTROL', PoP_ServerUtils::get_template_definition('block-tagcontrol'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol'));
+define ('GD_TEMPLATE_BLOCK_PAGEWITHSIDECONTROL', PoP_TemplateIDUtils::get_template_definition('block-pagewithsidecontrol'));
+define ('GD_TEMPLATE_BLOCK_SINGLECONTROL', PoP_TemplateIDUtils::get_template_definition('block-singlecontrol'));
+define ('GD_TEMPLATE_BLOCK_HOMECONTROL', PoP_TemplateIDUtils::get_template_definition('block-homecontrol'));
+define ('GD_TEMPLATE_BLOCK_AUTHORCONTROL', PoP_TemplateIDUtils::get_template_definition('block-authorcontrol'));
+define ('GD_TEMPLATE_BLOCK_TAGCONTROL', PoP_TemplateIDUtils::get_template_definition('block-tagcontrol'));
 
-define ('GD_TEMPLATE_BLOCK_QUICKVIEWPAGECONTROL', PoP_ServerUtils::get_template_definition('block-quickviewpagecontrol'));
-define ('GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL', PoP_ServerUtils::get_template_definition('block-quickviewpagewithsidecontrol'));
-define ('GD_TEMPLATE_BLOCK_QUICKVIEWSINGLECONTROL', PoP_ServerUtils::get_template_definition('block-quickviewsinglecontrol'));
-define ('GD_TEMPLATE_BLOCK_QUICKVIEWHOMECONTROL', PoP_ServerUtils::get_template_definition('block-quickviewhomecontrol'));
-define ('GD_TEMPLATE_BLOCK_QUICKVIEWAUTHORCONTROL', PoP_ServerUtils::get_template_definition('block-quickviewauthorcontrol'));
-define ('GD_TEMPLATE_BLOCK_QUICKVIEWTAGCONTROL', PoP_ServerUtils::get_template_definition('block-quickviewtagcontrol'));
+define ('GD_TEMPLATE_BLOCK_QUICKVIEWPAGECONTROL', PoP_TemplateIDUtils::get_template_definition('block-quickviewpagecontrol'));
+define ('GD_TEMPLATE_BLOCK_QUICKVIEWPAGEWITHSIDECONTROL', PoP_TemplateIDUtils::get_template_definition('block-quickviewpagewithsidecontrol'));
+define ('GD_TEMPLATE_BLOCK_QUICKVIEWSINGLECONTROL', PoP_TemplateIDUtils::get_template_definition('block-quickviewsinglecontrol'));
+define ('GD_TEMPLATE_BLOCK_QUICKVIEWHOMECONTROL', PoP_TemplateIDUtils::get_template_definition('block-quickviewhomecontrol'));
+define ('GD_TEMPLATE_BLOCK_QUICKVIEWAUTHORCONTROL', PoP_TemplateIDUtils::get_template_definition('block-quickviewauthorcontrol'));
+define ('GD_TEMPLATE_BLOCK_QUICKVIEWTAGCONTROL', PoP_TemplateIDUtils::get_template_definition('block-quickviewtagcontrol'));
 
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_SINGLESIDEBAR', PoP_ServerUtils::get_template_definition('block-pagecontrol-singlesidebar'));
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_AUTHORSIDEBAR', PoP_ServerUtils::get_template_definition('block-pagecontrol-authorsidebar'));
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_TAGSIDEBAR', PoP_ServerUtils::get_template_definition('block-pagecontrol-tagsidebar'));
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_PAGESIDEBAR', PoP_ServerUtils::get_template_definition('block-pagecontrol-pagesidebar'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_SINGLESIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-singlesidebar'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_AUTHORSIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-authorsidebar'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_TAGSIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-tagsidebar'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_PAGESIDEBAR', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-pagesidebar'));
 
-// define ('GD_TEMPLATE_BLOCK_PAGECONTROL_ABOUT', PoP_ServerUtils::get_template_definition('block-pagecontrol-about'));
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagecontrol-webpostlink-create'));
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('block-pagecontrol-highlight-create'));
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('block-pagecontrol-webpost-create'));
+// define ('GD_TEMPLATE_BLOCK_PAGECONTROL_ABOUT', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-about'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-webpostlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-highlight-create'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-webpost-create'));
 
 class GD_Template_Processor_ControlBlocks extends GD_Template_Processor_ControlBlocksBase {
 

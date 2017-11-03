@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS', PoP_ServerUtils::get_template_definition('em-dropdownbuttonquicklink-downloadlinks'));
+define ('GD_EM_TEMPLATE_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS', PoP_TemplateIDUtils::get_template_definition('em-dropdownbuttonquicklink-downloadlinks'));
 
 class GD_EM_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Processor_DropdownButtonControlsBase {
 

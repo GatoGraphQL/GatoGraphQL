@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorevents'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORPASTEVENTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authorpastevents'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTSCALENDAR', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-authoreventscalendar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorevents'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHORPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authorpastevents'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_AUTHOREVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-authoreventscalendar'));
 
 class GD_EM_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Template_Processor_AuthorSectionTabPanelBlockGroupsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR', PoP_ServerUtils::get_template_definition('external-fullcalendar'));
+define ('POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR', PoP_TemplateIDUtils::get_template_definition('external-fullcalendar'));
 
 class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

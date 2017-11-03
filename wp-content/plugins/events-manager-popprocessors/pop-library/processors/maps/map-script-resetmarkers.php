@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS', PoP_ServerUtils::get_template_definition('em-map-script-resetmarkers'));
+define ('GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS', PoP_TemplateIDUtils::get_template_definition('em-map-script-resetmarkers'));
 
 class GD_Template_Processor_MapResetMarkerScripts extends GD_Template_Processor_MapResetMarkerScriptsBase {
 

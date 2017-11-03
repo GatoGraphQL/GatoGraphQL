@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELINNER_EVENTS', PoP_ServerUtils::get_template_definition('carouselinner-events'));
-define ('GD_TEMPLATE_CAROUSELINNER_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('carouselinner-authorevents'));
-define ('GD_TEMPLATE_CAROUSELINNER_TAGEVENTS', PoP_ServerUtils::get_template_definition('carouselinner-tagevents'));
+define ('GD_TEMPLATE_CAROUSELINNER_EVENTS', PoP_TemplateIDUtils::get_template_definition('carouselinner-events'));
+define ('GD_TEMPLATE_CAROUSELINNER_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('carouselinner-authorevents'));
+define ('GD_TEMPLATE_CAROUSELINNER_TAGEVENTS', PoP_TemplateIDUtils::get_template_definition('carouselinner-tagevents'));
 
 class GD_EM_Template_Processor_CustomCarouselInners extends GD_Template_Processor_CarouselInnersBase {
 

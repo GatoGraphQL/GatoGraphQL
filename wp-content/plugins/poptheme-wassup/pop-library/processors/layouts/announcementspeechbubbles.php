@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ANNOUNCEMENTSPEECHBUBBLE_STICKY', PoP_ServerUtils::get_template_definition('announcementspeechbubble-sticky'));
+define ('GD_TEMPLATE_ANNOUNCEMENTSPEECHBUBBLE_STICKY', PoP_TemplateIDUtils::get_template_definition('announcementspeechbubble-sticky'));
 
 class GD_Template_Processor_AnnouncementSpeechBubbles extends GD_Template_Processor_AnnouncementSpeechBubblesBase {
 

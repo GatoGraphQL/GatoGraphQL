@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTPOST_AUTHORNAME', PoP_ServerUtils::get_template_definition('layoutpost-authorname'));
+define ('GD_TEMPLATE_LAYOUTPOST_AUTHORNAME', PoP_TemplateIDUtils::get_template_definition('layoutpost-authorname'));
 
 class GD_Template_Processor_PostAuthorNameLayouts extends GD_Template_Processor_PostAuthorNameLayoutsBase {
 

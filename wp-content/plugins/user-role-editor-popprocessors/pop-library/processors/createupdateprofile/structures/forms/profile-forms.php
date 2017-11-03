@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('form-editmembership'));
-define ('GD_TEMPLATE_FORM_MYCOMMUNITIES_UPDATE', PoP_ServerUtils::get_template_definition('form-mycommunities-update'));
+define ('GD_TEMPLATE_FORM_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('form-editmembership'));
+define ('GD_TEMPLATE_FORM_MYCOMMUNITIES_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-mycommunities-update'));
 
 class GD_URE_Template_Processor_ProfileForms extends GD_Template_Processor_FormsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_SIDE', PoP_ServerUtils::get_template_definition('blockgroup-side'));
+define ('GD_TEMPLATE_BLOCKGROUP_SIDE', PoP_TemplateIDUtils::get_template_definition('blockgroup-side'));
 
 class GD_Template_Processor_SideBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

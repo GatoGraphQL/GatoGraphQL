@@ -5,18 +5,18 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_WIDGET_POST_AUTHORS', PoP_ServerUtils::get_template_definition('widget-post-authors'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_POST_AUTHORS', PoP_ServerUtils::get_template_definition('widgetcompact-post-authors'));
-define ('GD_TEMPLATE_WIDGETCOMPACT_AUTHORDESCRIPTION', PoP_ServerUtils::get_template_definition('widgetcompact-authordescription'));
-define ('GD_TEMPLATE_WIDGET_AUTHOR_CONTACT', PoP_ServerUtils::get_template_definition('widget-author-contact'));
-define ('GD_TEMPLATE_WIDGET_REFERENCES', PoP_ServerUtils::get_template_definition('widget-references'));
-define ('GD_TEMPLATE_WIDGET_REFERENCES_LINE', PoP_ServerUtils::get_template_definition('widget-references-list'));
-define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('widget-referencedby-simpleview'));
-define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_FULLVIEW', PoP_ServerUtils::get_template_definition('widget-referencedby-fullview'));
-define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_DETAILS', PoP_ServerUtils::get_template_definition('widget-referencedby-details'));
-define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_ServerUtils::get_template_definition('widget-referencedby-appendtoscript-details'));
-define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('widget-referencedby-appendtoscript-simpleview'));
-define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_ServerUtils::get_template_definition('widget-referencedby-appendtoscript-fullview'));
+define ('GD_TEMPLATE_WIDGET_POST_AUTHORS', PoP_TemplateIDUtils::get_template_definition('widget-post-authors'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_POST_AUTHORS', PoP_TemplateIDUtils::get_template_definition('widgetcompact-post-authors'));
+define ('GD_TEMPLATE_WIDGETCOMPACT_AUTHORDESCRIPTION', PoP_TemplateIDUtils::get_template_definition('widgetcompact-authordescription'));
+define ('GD_TEMPLATE_WIDGET_AUTHOR_CONTACT', PoP_TemplateIDUtils::get_template_definition('widget-author-contact'));
+define ('GD_TEMPLATE_WIDGET_REFERENCES', PoP_TemplateIDUtils::get_template_definition('widget-references'));
+define ('GD_TEMPLATE_WIDGET_REFERENCES_LINE', PoP_TemplateIDUtils::get_template_definition('widget-references-list'));
+define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('widget-referencedby-simpleview'));
+define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('widget-referencedby-fullview'));
+define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_DETAILS', PoP_TemplateIDUtils::get_template_definition('widget-referencedby-details'));
+define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS', PoP_TemplateIDUtils::get_template_definition('widget-referencedby-appendtoscript-details'));
+define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('widget-referencedby-appendtoscript-simpleview'));
+define ('GD_TEMPLATE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('widget-referencedby-appendtoscript-fullview'));
 
 class GD_Template_Processor_Widgets extends GD_Template_Processor_WidgetsBase {
 

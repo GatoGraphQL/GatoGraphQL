@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_ORGANIZATIONCATEGORIES', PoP_ServerUtils::get_template_definition('layout-organizationcategories'));
-define ('GD_TEMPLATE_LAYOUT_ORGANIZATIONTYPES', PoP_ServerUtils::get_template_definition('layout-organizationtypes'));
+define ('GD_TEMPLATE_LAYOUT_ORGANIZATIONCATEGORIES', PoP_TemplateIDUtils::get_template_definition('layout-organizationcategories'));
+define ('GD_TEMPLATE_LAYOUT_ORGANIZATIONTYPES', PoP_TemplateIDUtils::get_template_definition('layout-organizationtypes'));
 
 class GD_URE_Template_Processor_CategoriesLayouts extends GD_Template_Processor_CategoriesLayoutsBase {
 

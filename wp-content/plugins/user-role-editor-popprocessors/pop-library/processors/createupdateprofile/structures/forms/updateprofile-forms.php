@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_PROFILEORGANIZATION_UPDATE', PoP_ServerUtils::get_template_definition('form-profileorganization-update'));
-define ('GD_TEMPLATE_FORM_PROFILEINDIVIDUAL_UPDATE', PoP_ServerUtils::get_template_definition('form-profileindividual-update'));
+define ('GD_TEMPLATE_FORM_PROFILEORGANIZATION_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-profileorganization-update'));
+define ('GD_TEMPLATE_FORM_PROFILEINDIVIDUAL_UPDATE', PoP_TemplateIDUtils::get_template_definition('form-profileindividual-update'));
 
 class GD_URE_Template_Processor_UpdateProfileForms extends GD_Template_Processor_FormsBase {
 

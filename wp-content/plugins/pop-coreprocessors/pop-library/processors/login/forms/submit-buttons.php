@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBMITBUTTON_LOGIN', PoP_ServerUtils::get_template_definition('submitbutton-login'));
-define ('GD_TEMPLATE_SUBMITBUTTON_LOSTPWD', PoP_ServerUtils::get_template_definition('submitbutton-lostpwd'));
-define ('GD_TEMPLATE_SUBMITBUTTON_LOSTPWDRESET', PoP_ServerUtils::get_template_definition('submitbutton-lostpwdreset'));
-define ('GD_TEMPLATE_SUBMITBUTTON_LOGOUT', PoP_ServerUtils::get_template_definition('submitbutton-logout'));
+define ('GD_TEMPLATE_SUBMITBUTTON_LOGIN', PoP_TemplateIDUtils::get_template_definition('submitbutton-login'));
+define ('GD_TEMPLATE_SUBMITBUTTON_LOSTPWD', PoP_TemplateIDUtils::get_template_definition('submitbutton-lostpwd'));
+define ('GD_TEMPLATE_SUBMITBUTTON_LOSTPWDRESET', PoP_TemplateIDUtils::get_template_definition('submitbutton-lostpwdreset'));
+define ('GD_TEMPLATE_SUBMITBUTTON_LOGOUT', PoP_TemplateIDUtils::get_template_definition('submitbutton-logout'));
 
 class GD_Template_Processor_LoginSubmitButtons extends GD_Template_Processor_SubmitButtonsBase {
 

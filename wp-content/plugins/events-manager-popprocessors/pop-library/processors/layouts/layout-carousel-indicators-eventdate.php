@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_EM_LAYOUT_CAROUSEL_INDICATORS_EVENTDATE', PoP_ServerUtils::get_template_definition('em-layout-carousel-indicators-eventdate'));
+define ('GD_TEMPLATE_EM_LAYOUT_CAROUSEL_INDICATORS_EVENTDATE', PoP_TemplateIDUtils::get_template_definition('em-layout-carousel-indicators-eventdate'));
 
 class GD_Template_Processor_EventDateCarouselIndicatorLayouts extends GD_Template_Processor_EventDateCarouselIndicatorLayoutsBase {
 

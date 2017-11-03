@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_COMMENTFRAME_LIST', PoP_ServerUtils::get_template_definition('layout-commentframe-list'));
-define ('GD_TEMPLATE_LAYOUT_COMMENTFRAME_ADD', PoP_ServerUtils::get_template_definition('layout-commentframe-add'));
+define ('GD_TEMPLATE_LAYOUT_COMMENTFRAME_LIST', PoP_TemplateIDUtils::get_template_definition('layout-commentframe-list'));
+define ('GD_TEMPLATE_LAYOUT_COMMENTFRAME_ADD', PoP_TemplateIDUtils::get_template_definition('layout-commentframe-add'));
 
 class GD_Template_Processor_SingleCommentFramesLayouts extends GD_Template_Processor_SingleCommentScriptFrameLayoutsBase {
 

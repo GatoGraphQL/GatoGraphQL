@@ -6,14 +6,14 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
  // Names needed by EM to create the Location
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONLAT', PoP_ServerUtils::get_template_definition('location_latitude', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONLNG', PoP_ServerUtils::get_template_definition('location_longitude', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONNAME', PoP_ServerUtils::get_template_definition('location_name', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONADDRESS', PoP_ServerUtils::get_template_definition('location_address', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONTOWN', PoP_ServerUtils::get_template_definition('location_town', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONSTATE', PoP_ServerUtils::get_template_definition('location_state', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONPOSTCODE', PoP_ServerUtils::get_template_definition('location_postcode', true));
-define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONREGION', PoP_ServerUtils::get_template_definition('location_region', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONLAT', PoP_TemplateIDUtils::get_template_definition('location_latitude', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONLNG', PoP_TemplateIDUtils::get_template_definition('location_longitude', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONNAME', PoP_TemplateIDUtils::get_template_definition('location_name', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONADDRESS', PoP_TemplateIDUtils::get_template_definition('location_address', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONTOWN', PoP_TemplateIDUtils::get_template_definition('location_town', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONSTATE', PoP_TemplateIDUtils::get_template_definition('location_state', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONPOSTCODE', PoP_TemplateIDUtils::get_template_definition('location_postcode', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_EM_LOCATIONREGION', PoP_TemplateIDUtils::get_template_definition('location_region', true));
 
 class GD_EM_Template_Processor_CreateLocationTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

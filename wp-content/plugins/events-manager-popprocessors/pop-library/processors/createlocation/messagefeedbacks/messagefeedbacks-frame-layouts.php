@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CREATELOCATION', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-createlocation'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-createlocation'));
 
 class GD_Template_Processor_CreateLocationMessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

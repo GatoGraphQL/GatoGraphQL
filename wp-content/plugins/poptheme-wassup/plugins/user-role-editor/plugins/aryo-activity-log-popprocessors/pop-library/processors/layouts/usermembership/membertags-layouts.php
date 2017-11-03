@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_LAYOUTUSER_MEMBERTAGS', PoP_ServerUtils::get_template_definition('ure-aal-layoutuser-membertags-desc'));
+define ('GD_URE_AAL_TEMPLATE_LAYOUTUSER_MEMBERTAGS', PoP_TemplateIDUtils::get_template_definition('ure-aal-layoutuser-membertags-desc'));
 
 class Wassup_URE_AAL_Template_Processor_MemberTagsLayouts extends GD_URE_Template_Processor_MemberTagsLayoutsBase {
 

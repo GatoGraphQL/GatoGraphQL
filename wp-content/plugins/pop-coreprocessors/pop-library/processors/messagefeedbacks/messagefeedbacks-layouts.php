@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_INVITENEWUSERS', PoP_ServerUtils::get_template_definition('layout-messagefeedback-inviteusers'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-inviteusers'));
 
 class PoP_Core_Template_Processor_MessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

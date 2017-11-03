@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL', PoP_ServerUtils::get_template_definition('carouselcontrolbuttongroup-carousel'));
+define ('GD_TEMPLATE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL', PoP_TemplateIDUtils::get_template_definition('carouselcontrolbuttongroup-carousel'));
 
 class GD_Template_Processor_CarouselControlButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_LAYOUT_COMMUNITIES', PoP_ServerUtils::get_template_definition('ure-layoutuser-communities'));
+define ('GD_URE_TEMPLATE_LAYOUT_COMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-layoutuser-communities'));
 
 class GD_URE_Template_Processor_UserCommunityLayouts extends GD_URE_Template_Processor_UserCommunityLayoutsBase {
 

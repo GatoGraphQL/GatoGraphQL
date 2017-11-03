@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_USER_CHANGEPASSWORD', PoP_ServerUtils::get_template_definition('block-user-changepwd'));
-define ('GD_TEMPLATE_BLOCK_MYPREFERENCES', PoP_ServerUtils::get_template_definition('block-mypreferences'));
+define ('GD_TEMPLATE_BLOCK_USER_CHANGEPASSWORD', PoP_TemplateIDUtils::get_template_definition('block-user-changepwd'));
+define ('GD_TEMPLATE_BLOCK_MYPREFERENCES', PoP_TemplateIDUtils::get_template_definition('block-mypreferences'));
 
 class GD_Template_Processor_UserBlocks extends GD_Template_Processor_BlocksBase {
 

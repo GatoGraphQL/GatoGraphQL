@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-locationposts-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-locationposts-horizontalscrollmap'));
-define ('GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorlocationposts-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-authorlocationposts-horizontalscrollmap'));
-define ('GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP', PoP_ServerUtils::get_template_definition('block-taglocationposts-scrollmap'));
-define ('GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP', PoP_ServerUtils::get_template_definition('block-taglocationposts-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-locationposts-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-locationposts-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authorlocationposts-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-authorlocationposts-horizontalscrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-taglocationposts-scrollmap'));
+define ('GD_TEMPLATE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP', PoP_TemplateIDUtils::get_template_definition('block-taglocationposts-horizontalscrollmap'));
 
 
 class GD_Custom_Template_Processor_CustomScrollMapSectionBlocks extends GD_EM_Template_Processor_ScrollMapBlocksBase {

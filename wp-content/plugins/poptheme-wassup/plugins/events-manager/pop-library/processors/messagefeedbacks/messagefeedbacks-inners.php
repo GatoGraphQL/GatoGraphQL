@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EVENTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-events'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_PASTEVENTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-pastevents'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYEVENTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-myevents'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYPASTEVENTS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mypastevents'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EVENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-events'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_PASTEVENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-pastevents'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-myevents'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mypastevents'));
 
 class GD_EM_Template_Processor_CustomListMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

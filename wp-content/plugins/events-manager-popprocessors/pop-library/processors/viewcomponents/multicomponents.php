@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS', PoP_ServerUtils::get_template_definition('multicomponent-event-datelocationdownloadlinks'));
-define ('GD_TEMPLATE_MULTICOMPONENT_EVENT_DATELOCATION', PoP_ServerUtils::get_template_definition('multicomponent-event-datelocation'));
-define ('GD_TEMPLATE_MULTICOMPONENT_LOCATIONVOLUNTEER', PoP_ServerUtils::get_template_definition('multicomponent-locationvolunteer'));
+define ('GD_TEMPLATE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS', PoP_TemplateIDUtils::get_template_definition('multicomponent-event-datelocationdownloadlinks'));
+define ('GD_TEMPLATE_MULTICOMPONENT_EVENT_DATELOCATION', PoP_TemplateIDUtils::get_template_definition('multicomponent-event-datelocation'));
+define ('GD_TEMPLATE_MULTICOMPONENT_LOCATIONVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('multicomponent-locationvolunteer'));
 
 class GD_EM_Template_Processor_EventMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

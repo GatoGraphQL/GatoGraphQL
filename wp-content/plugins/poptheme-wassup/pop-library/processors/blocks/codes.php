@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_ADDCONTENTFAQ', PoP_ServerUtils::get_template_definition('block-addcontentfaq'));
-define ('GD_TEMPLATE_BLOCK_ACCOUNTFAQ', PoP_ServerUtils::get_template_definition('block-accountfaq'));
-define ('GD_TEMPLATE_BLOCK_OURSPONSORSINTRO', PoP_ServerUtils::get_template_definition('block-oursponsorsintro'));
-define ('GD_TEMPLATE_BLOCK_HOMEWELCOME', PoP_ServerUtils::get_template_definition('block-homewelcome'));
+define ('GD_TEMPLATE_BLOCK_ADDCONTENTFAQ', PoP_TemplateIDUtils::get_template_definition('block-addcontentfaq'));
+define ('GD_TEMPLATE_BLOCK_ACCOUNTFAQ', PoP_TemplateIDUtils::get_template_definition('block-accountfaq'));
+define ('GD_TEMPLATE_BLOCK_OURSPONSORSINTRO', PoP_TemplateIDUtils::get_template_definition('block-oursponsorsintro'));
+define ('GD_TEMPLATE_BLOCK_HOMEWELCOME', PoP_TemplateIDUtils::get_template_definition('block-homewelcome'));
 
 class GD_Template_Processor_CustomBlocks extends GD_Template_Processor_BlocksBase {
 

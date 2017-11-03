@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('layout-highlightreferencedby-appendtoscript'));
-define ('GD_TEMPLATE_LAYOUT_HIGHLIGHTREFERENCEDBYEMPTY_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('layout-highlightreferencedbyempty-appendtoscript'));
+define ('GD_TEMPLATE_LAYOUT_HIGHLIGHTREFERENCEDBY_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('layout-highlightreferencedby-appendtoscript'));
+define ('GD_TEMPLATE_LAYOUT_HIGHLIGHTREFERENCEDBYEMPTY_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('layout-highlightreferencedbyempty-appendtoscript'));
 
 class GD_Template_Processor_HighlightReferencesFramesLayouts extends GD_Template_Processor_HighlightReferencesScriptFrameLayoutsBase {
 

@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('action-webpostlink-create'));
-define ('GD_TEMPLATE_ACTION_WEBPOSTLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-webpostlink-update'));
-define ('GD_TEMPLATE_ACTION_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('action-highlight-create'));
-define ('GD_TEMPLATE_ACTION_HIGHLIGHT_UPDATE', PoP_ServerUtils::get_template_definition('action-highlight-update'));
-define ('GD_TEMPLATE_ACTION_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('action-webpost-create'));
-define ('GD_TEMPLATE_ACTION_WEBPOST_UPDATE', PoP_ServerUtils::get_template_definition('action-webpost-update'));
+define ('GD_TEMPLATE_ACTION_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('action-webpostlink-create'));
+define ('GD_TEMPLATE_ACTION_WEBPOSTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-webpostlink-update'));
+define ('GD_TEMPLATE_ACTION_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('action-highlight-create'));
+define ('GD_TEMPLATE_ACTION_HIGHLIGHT_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-highlight-update'));
+define ('GD_TEMPLATE_ACTION_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('action-webpost-create'));
+define ('GD_TEMPLATE_ACTION_WEBPOST_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-webpost-update'));
 
 class Wassup_Template_Processor_CreateUpdatePostActions extends GD_Template_Processor_ActionsBase {
 

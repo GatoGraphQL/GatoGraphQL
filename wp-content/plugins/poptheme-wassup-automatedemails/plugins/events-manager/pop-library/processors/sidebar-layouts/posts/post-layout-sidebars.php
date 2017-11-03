@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT', PoP_ServerUtils::get_template_definition('layout-automatedemails-postsidebarcompact-horizontal-event'));
-// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT', PoP_ServerUtils::get_template_definition('layout-automatedemails-postsidebarcompact-horizontal-pastevent'));
+define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-postsidebarcompact-horizontal-event'));
+// define ('GD_TEMPLATE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT', PoP_TemplateIDUtils::get_template_definition('layout-automatedemails-postsidebarcompact-horizontal-pastevent'));
 
 class PoP_ThemeWassup_EM_AE_Template_Processor_CustomPostLayoutSidebars extends GD_Template_Processor_SidebarsBase {
 

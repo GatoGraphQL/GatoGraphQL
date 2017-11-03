@@ -5,30 +5,30 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EDITOR', PoP_ServerUtils::get_template_definition('formcomponenteditorgroup'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_TEXTAREAEDITOR', PoP_ServerUtils::get_template_definition('formcomponent-textarea-editorgroup'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_FEATUREDIMAGE', PoP_ServerUtils::get_template_definition('formcomponentgroup-featuredimage'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES', PoP_ServerUtils::get_template_definition('formcomponentgroup-selectabletypeahead-references'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS', PoP_ServerUtils::get_template_definition('formcomponentgroup-selectabletypeahead-postauthors'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS', PoP_ServerUtils::get_template_definition('formcomponentgroup-selectabletypeahead-postcoauthors'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_DATERANGETIMEPICKER', PoP_ServerUtils::get_template_definition('formcomponentgroup-daterangetimepicker'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CAPTCHA', PoP_ServerUtils::get_template_definition('formcomponentgroup-captcha'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SETTINGSFORMAT', PoP_ServerUtils::get_template_definition('formcomponentgroup-settingsformat'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DATERANGEPICKER', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-date'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_MODERATEDPOSTSTATUS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-moderatedpoststatus'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_UNMODERATEDPOSTSTATUS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-unmoderatedpoststatus'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORDERUSER', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-order-user'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORDERPOST', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-order-post'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORDERTAG', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-order-tag'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_SEARCH', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-searchfor'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_HASHTAGS', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-hashtags'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_NAME', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-nombre'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_TYPEAHEAD_PROFILES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-profiles'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_TYPEAHEAD_REFERENCES', PoP_ServerUtils::get_template_definition('filterformcomponentgroup-references'));
-define ('GD_TEMPLATE_SUBMITBUTTONFORMGROUP_SEARCH', PoP_ServerUtils::get_template_definition('submitbuttonformgroup-search'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EMAILS', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-emails'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SENDERNAME', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-sendername'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_ADDITIONALMESSAGE', PoP_ServerUtils::get_template_definition('ure-formcomponentgroup-additionalmessage'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EDITOR', PoP_TemplateIDUtils::get_template_definition('formcomponenteditorgroup'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_TEXTAREAEDITOR', PoP_TemplateIDUtils::get_template_definition('formcomponent-textarea-editorgroup'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-featuredimage'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-selectabletypeahead-references'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-selectabletypeahead-postauthors'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-selectabletypeahead-postcoauthors'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_DATERANGETIMEPICKER', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-daterangetimepicker'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_CAPTCHA', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-captcha'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SETTINGSFORMAT', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-settingsformat'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_DATERANGEPICKER', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-date'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_MODERATEDPOSTSTATUS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-moderatedpoststatus'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_UNMODERATEDPOSTSTATUS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-unmoderatedpoststatus'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORDERUSER', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-order-user'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORDERPOST', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-order-post'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_ORDERTAG', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-order-tag'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_SEARCH', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-searchfor'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_HASHTAGS', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-hashtags'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_NAME', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-nombre'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_TYPEAHEAD_PROFILES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-profiles'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENTGROUP_TYPEAHEAD_REFERENCES', PoP_TemplateIDUtils::get_template_definition('filterformcomponentgroup-references'));
+define ('GD_TEMPLATE_SUBMITBUTTONFORMGROUP_SEARCH', PoP_TemplateIDUtils::get_template_definition('submitbuttonformgroup-search'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EMAILS', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-emails'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_SENDERNAME', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-sendername'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_ADDITIONALMESSAGE', PoP_TemplateIDUtils::get_template_definition('ure-formcomponentgroup-additionalmessage'));
 
 class GD_Template_Processor_FormComponentGroups extends GD_Template_Processor_FormComponentGroupsBase {
 

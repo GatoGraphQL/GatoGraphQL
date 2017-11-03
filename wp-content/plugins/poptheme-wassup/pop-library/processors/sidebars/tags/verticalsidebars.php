@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBAR_TAG', PoP_ServerUtils::get_template_definition('vertical-sidebar-tag'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_TAG', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-tag'));
 
 class Wassup_Template_Processor_CustomVerticalTagSidebars extends GD_Template_Processor_SidebarsBase {
 	

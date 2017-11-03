@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_EVENT_CREATE', PoP_ServerUtils::get_template_definition('block-pagecontrol-event-create'));
-define ('GD_TEMPLATE_BLOCK_PAGECONTROL_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('block-pagecontrol-eventlink-create'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-event-create'));
+define ('GD_TEMPLATE_BLOCK_PAGECONTROL_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('block-pagecontrol-eventlink-create'));
 
 class GD_EM_Template_Processor_CustomControlBlocks extends GD_Template_Processor_ControlBlocksBase {
 

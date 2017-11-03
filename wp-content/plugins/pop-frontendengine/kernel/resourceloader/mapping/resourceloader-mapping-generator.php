@@ -1,5 +1,5 @@
 <?php
-class PoP_Frontend_ResourceLoaderMappingGenerator extends PoP_Frontend_FileGeneratorBase {
+class PoP_Frontend_ResourceLoaderMappingGenerator extends PoP_Engine_FileGeneratorBase {
 
 	function get_dir() {
 
@@ -35,8 +35,8 @@ class PoP_Frontend_ResourceLoaderMappingGenerator extends PoP_Frontend_FileGener
 
 		$mapping = $pop_frontend_resourceloader_mappingparser->extract($fileContents, $jsObjects);
 
-		global $pop_frontend_filejsonstorage;
-		$pop_frontend_filejsonstorage->save($this->get_filepath(), $mapping);
+		global $pop_engine_filejsonstorage;
+		$pop_engine_filejsonstorage->save($this->get_filepath(), $mapping);
 	}
 }
 	

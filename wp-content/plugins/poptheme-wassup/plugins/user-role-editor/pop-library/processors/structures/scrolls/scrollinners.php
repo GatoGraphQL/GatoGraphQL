@@ -5,40 +5,40 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW', PoP_ServerUtils::get_template_definition('scrollinner-mymembers-fullviewpreview'));
+define ('GD_TEMPLATE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-mymembers-fullviewpreview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-organizations-navigator'));
-define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_NAVIGATOR', PoP_ServerUtils::get_template_definition('scrollinner-individuals-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizations-navigator'));
+define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('scrollinner-individuals-navigator'));
 
-define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-organizations-addons'));
-define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_ADDONS', PoP_ServerUtils::get_template_definition('scrollinner-individuals-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizations-addons'));
+define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_ADDONS', PoP_TemplateIDUtils::get_template_definition('scrollinner-individuals-addons'));
 
-define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-communities-details'));
-define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-organizations-details'));
-define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-individuals-details'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_DETAILS', PoP_ServerUtils::get_template_definition('scrollinner-authormembers-details'));
+define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-communities-details'));
+define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizations-details'));
+define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-individuals-details'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_DETAILS', PoP_TemplateIDUtils::get_template_definition('scrollinner-authormembers-details'));
 
-define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-communities-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-organizations-fullview'));
-define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-individuals-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-communities-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizations-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-individuals-fullview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_FULLVIEW', PoP_ServerUtils::get_template_definition('scrollinner-authormembers-fullview'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('scrollinner-authormembers-fullview'));
 
-define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-communities-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-organizations-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-individuals-thumbnail'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_THUMBNAIL', PoP_ServerUtils::get_template_definition('scrollinner-authormembers-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-communities-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizations-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-individuals-thumbnail'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('scrollinner-authormembers-thumbnail'));
 
-define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_LIST', PoP_ServerUtils::get_template_definition('scrollinner-communities-list'));
-define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-organizations-list'));
-define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-individuals-list'));
-// define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONMEMBERS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-organizationmembers-list'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_LIST', PoP_ServerUtils::get_template_definition('scrollinner-authormembers-list'));
+define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-communities-list'));
+define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizations-list'));
+define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-individuals-list'));
+// define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONMEMBERS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizationmembers-list'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_LIST', PoP_TemplateIDUtils::get_template_definition('scrollinner-authormembers-list'));
 
-define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_MAP', PoP_ServerUtils::get_template_definition('scrollinner-communities-map'));
-define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-organizations-map'));
-define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-individuals-map'));
-define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_MAP', PoP_ServerUtils::get_template_definition('scrollinner-authormembers-map'));
+define ('GD_TEMPLATE_SCROLLINNER_COMMUNITIES_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-communities-map'));
+define ('GD_TEMPLATE_SCROLLINNER_ORGANIZATIONS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-organizations-map'));
+define ('GD_TEMPLATE_SCROLLINNER_INDIVIDUALS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-individuals-map'));
+define ('GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_MAP', PoP_TemplateIDUtils::get_template_definition('scrollinner-authormembers-map'));
 
 class GD_URE_Template_Processor_CustomScrollInners extends GD_Template_Processor_ScrollInnersBase {
 

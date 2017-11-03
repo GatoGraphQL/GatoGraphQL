@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DIVIDER', PoP_ServerUtils::get_template_definition('divider'));
-define ('GD_TEMPLATE_COLLAPSIBLEDIVIDER', PoP_ServerUtils::get_template_definition('collapsible-divider'));
+define ('GD_TEMPLATE_DIVIDER', PoP_TemplateIDUtils::get_template_definition('divider'));
+define ('GD_TEMPLATE_COLLAPSIBLEDIVIDER', PoP_TemplateIDUtils::get_template_definition('collapsible-divider'));
 
 class GD_Template_Processor_Dividers extends GD_Template_Processor_DividersBase {
 

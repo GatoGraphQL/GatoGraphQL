@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_LATESTCOUNTSCRIPT', PoP_ServerUtils::get_template_definition('layout-latestcount-script'));
+define ('GD_TEMPLATE_LAYOUT_LATESTCOUNTSCRIPT', PoP_TemplateIDUtils::get_template_definition('layout-latestcount-script'));
 
 class GD_Template_Processor_LatestCountScriptsLayouts extends GD_Template_Processor_LatestCountScriptsLayoutsBase {
 

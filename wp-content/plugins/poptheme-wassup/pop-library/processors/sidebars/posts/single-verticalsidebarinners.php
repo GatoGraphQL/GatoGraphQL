@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_LINK', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-link'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-highlight'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_WEBPOST', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-single-webpost'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_LINK', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-link'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-highlight'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_SINGLE_WEBPOST', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-single-webpost'));
 
 class Wassup_Template_Processor_CustomVerticalSingleSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 	

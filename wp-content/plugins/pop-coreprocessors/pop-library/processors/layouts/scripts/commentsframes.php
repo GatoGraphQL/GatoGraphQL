@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_COMMENTS_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('layout-comments-appendtoscript'));
-define ('GD_TEMPLATE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT', PoP_ServerUtils::get_template_definition('layout-commentsempty-appendtoscript'));
+define ('GD_TEMPLATE_LAYOUT_COMMENTS_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('layout-comments-appendtoscript'));
+define ('GD_TEMPLATE_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT', PoP_TemplateIDUtils::get_template_definition('layout-commentsempty-appendtoscript'));
 
 class GD_Template_Processor_CommentsFramesLayouts extends GD_Template_Processor_CommentsScriptFrameLayoutsBase {
 

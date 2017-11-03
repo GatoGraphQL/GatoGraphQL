@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTTAG_MENTION_COMPONENT', PoP_ServerUtils::get_template_definition('layouttag-mention-component'));
+define ('GD_TEMPLATE_LAYOUTTAG_MENTION_COMPONENT', PoP_TemplateIDUtils::get_template_definition('layouttag-mention-component'));
 
 class GD_Template_Processor_TagMentionComponentLayouts extends GD_Template_Processor_TagMentionComponentLayoutsBase {
 

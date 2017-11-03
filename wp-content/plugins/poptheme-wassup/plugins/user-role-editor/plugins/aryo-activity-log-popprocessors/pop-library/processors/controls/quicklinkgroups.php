@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_QUICKLINKGROUP_USER_JOINEDCOMMUNITY', PoP_ServerUtils::get_template_definition('ure-aal-quicklinkgroup-user-joinedcommunity'));
+define ('GD_URE_AAL_TEMPLATE_QUICKLINKGROUP_USER_JOINEDCOMMUNITY', PoP_TemplateIDUtils::get_template_definition('ure-aal-quicklinkgroup-user-joinedcommunity'));
 
 class GD_URE_AAL_Template_Processor_QuicklinkGroups extends GD_Template_Processor_ControlGroupsBase {
 

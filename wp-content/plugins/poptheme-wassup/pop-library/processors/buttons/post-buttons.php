@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTON_WEBPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-webpostlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_WEBPOST_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-webpost-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_HIGHLIGHT_CREATE', PoP_ServerUtils::get_template_definition('custom-postbutton-highlight-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTON_HIGHLIGHT_CREATEBTN', PoP_ServerUtils::get_template_definition('custom-postbutton-highlight-createbtn'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_WEBPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-webpostlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_WEBPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-webpost-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_HIGHLIGHT_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-highlight-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTON_HIGHLIGHT_CREATEBTN', PoP_TemplateIDUtils::get_template_definition('custom-postbutton-highlight-createbtn'));
 
 class Wassup_Template_Processor_PostButtons extends GD_Custom_Template_Processor_ButtonsBase {
 

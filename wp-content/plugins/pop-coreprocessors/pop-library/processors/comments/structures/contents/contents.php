@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CONTENT_COMMENTSINGLE', PoP_ServerUtils::get_template_definition('content-commentsingle'));
+define ('GD_TEMPLATE_CONTENT_COMMENTSINGLE', PoP_TemplateIDUtils::get_template_definition('content-commentsingle'));
 
 class GD_Template_Processor_CommentsContents extends GD_Template_Processor_ContentsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_COMMENT_LIST', PoP_ServerUtils::get_template_definition('layout-comment-list'));
-define ('GD_TEMPLATE_LAYOUT_COMMENT_ADD', PoP_ServerUtils::get_template_definition('layout-comment-add'));
+define ('GD_TEMPLATE_LAYOUT_COMMENT_LIST', PoP_TemplateIDUtils::get_template_definition('layout-comment-list'));
+define ('GD_TEMPLATE_LAYOUT_COMMENT_ADD', PoP_TemplateIDUtils::get_template_definition('layout-comment-add'));
 
 class GD_Template_Processor_CommentsLayouts extends GD_Template_Processor_CommentLayoutsBase {
 

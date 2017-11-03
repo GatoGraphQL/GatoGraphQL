@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_COMMENTS', PoP_ServerUtils::get_template_definition('messagefeedback-comments'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_ADDCOMMENT', PoP_ServerUtils::get_template_definition('messagefeedback-addcomment'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_COMMENTS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-comments'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('messagefeedback-addcomment'));
 
 class GD_Template_Processor_CommentsMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

@@ -5,25 +5,25 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorannouncements'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORDISCUSSIONS', PoP_ServerUtils::get_template_definition('delegatorfilter-authordiscussions'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-authorlocationposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORSTORIES', PoP_ServerUtils::get_template_definition('delegatorfilter-authorstories'));
-define ('GD_TEMPLATE_DELEGATORFILTER_ANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-announcements'));
-define ('GD_TEMPLATE_DELEGATORFILTER_BLOG', PoP_ServerUtils::get_template_definition('delegatorfilter-blog'));
-define ('GD_TEMPLATE_DELEGATORFILTER_DISCUSSIONS', PoP_ServerUtils::get_template_definition('delegatorfilter-discussions'));
-define ('GD_TEMPLATE_DELEGATORFILTER_FEATURED', PoP_ServerUtils::get_template_definition('delegatorfilter-featured'));
-define ('GD_TEMPLATE_DELEGATORFILTER_LOCATIONPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-locationposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_STORIES', PoP_ServerUtils::get_template_definition('delegatorfilter-stories'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-tagannouncements'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGDISCUSSIONS', PoP_ServerUtils::get_template_definition('delegatorfilter-tagdiscussions'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGFEATURED', PoP_ServerUtils::get_template_definition('delegatorfilter-tagfeatured'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-taglocationposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_TAGSTORIES', PoP_ServerUtils::get_template_definition('delegatorfilter-tagstories'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYANNOUNCEMENTS', PoP_ServerUtils::get_template_definition('delegatorfilter-myannouncements'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYDISCUSSIONS', PoP_ServerUtils::get_template_definition('delegatorfilter-mydiscussions'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYLOCATIONPOSTS', PoP_ServerUtils::get_template_definition('delegatorfilter-mylocationposts'));
-define ('GD_TEMPLATE_DELEGATORFILTER_MYSTORIES', PoP_ServerUtils::get_template_definition('delegatorfilter-mystories'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorannouncements'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authordiscussions'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorlocationposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_AUTHORSTORIES', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-authorstories'));
+define ('GD_TEMPLATE_DELEGATORFILTER_ANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-announcements'));
+define ('GD_TEMPLATE_DELEGATORFILTER_BLOG', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-blog'));
+define ('GD_TEMPLATE_DELEGATORFILTER_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-discussions'));
+define ('GD_TEMPLATE_DELEGATORFILTER_FEATURED', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-featured'));
+define ('GD_TEMPLATE_DELEGATORFILTER_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-locationposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_STORIES', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-stories'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagannouncements'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagdiscussions'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGFEATURED', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagfeatured'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-taglocationposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_TAGSTORIES', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-tagstories'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYANNOUNCEMENTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-myannouncements'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYDISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-mydiscussions'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYLOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-mylocationposts'));
+define ('GD_TEMPLATE_DELEGATORFILTER_MYSTORIES', PoP_TemplateIDUtils::get_template_definition('delegatorfilter-mystories'));
 
 class PoPSP_Template_Processor_CustomDelegatorFilters extends GD_Template_Processor_CustomDelegatorFiltersBase {
 

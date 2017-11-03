@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-postshare'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-usershare'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-usercontactinfo'));
-define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE', PoP_ServerUtils::get_template_definition('dropdownbuttonquicklink-tagshare'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_POSTSHARE', PoP_TemplateIDUtils::get_template_definition('dropdownbuttonquicklink-postshare'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERSHARE', PoP_TemplateIDUtils::get_template_definition('dropdownbuttonquicklink-usershare'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO', PoP_TemplateIDUtils::get_template_definition('dropdownbuttonquicklink-usercontactinfo'));
+define ('GD_TEMPLATE_DROPDOWNBUTTONQUICKLINK_TAGSHARE', PoP_TemplateIDUtils::get_template_definition('dropdownbuttonquicklink-tagshare'));
 
 class GD_Template_Processor_DropdownButtonQuicklinks extends GD_Template_Processor_DropdownButtonControlsBase {
 

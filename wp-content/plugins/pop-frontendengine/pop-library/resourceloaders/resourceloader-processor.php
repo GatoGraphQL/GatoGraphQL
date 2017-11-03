@@ -5,28 +5,28 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_COMPATIBILITY', PoP_ServerUtils::get_template_definition('compatibility'));
-define ('POP_RESOURCELOADER_HELPERSHANDLEBARS', PoP_ServerUtils::get_template_definition('helpers.handlebars'));
-define ('POP_RESOURCELOADER_HISTORY', PoP_ServerUtils::get_template_definition('history'));
-define ('POP_RESOURCELOADER_INTERCEPTORS', PoP_ServerUtils::get_template_definition('interceptors'));
-define ('POP_RESOURCELOADER_JSLIBRARYMANAGER', PoP_ServerUtils::get_template_definition('jslibrary-manager'));
-define ('POP_RESOURCELOADER_JSRUNTIMEMANAGER', PoP_ServerUtils::get_template_definition('jsruntime-manager'));
-define ('POP_RESOURCELOADER_PAGESECTIONMANAGER', PoP_ServerUtils::get_template_definition('pagesection-manager'));
-define ('POP_RESOURCELOADER_POPMANAGER', PoP_ServerUtils::get_template_definition('pop-manager'));
-define ('POP_RESOURCELOADER_TOPLEVELJSON', PoP_ServerUtils::get_template_definition('topleveljson'));
-define ('POP_RESOURCELOADER_RESOURCELOADER', PoP_ServerUtils::get_template_definition('resourceloader'));
-define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG', PoP_ServerUtils::get_template_definition('resourceloader-config'));
-define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-resources'));
-define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-initialresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-defaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-homedefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-pagedefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-singledefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-authordefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-tagdefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES', PoP_ServerUtils::get_template_definition('resourceloader-config-defaultdeltaresources'));
-define ('POP_RESOURCELOADER_POPUTILS', PoP_ServerUtils::get_template_definition('pop-utils'));
-define ('POP_RESOURCELOADER_UTILS', PoP_ServerUtils::get_template_definition('utils'));
+define ('POP_RESOURCELOADER_COMPATIBILITY', PoP_TemplateIDUtils::get_template_definition('compatibility'));
+define ('POP_RESOURCELOADER_HELPERSHANDLEBARS', PoP_TemplateIDUtils::get_template_definition('helpers.handlebars'));
+define ('POP_RESOURCELOADER_HISTORY', PoP_TemplateIDUtils::get_template_definition('history'));
+define ('POP_RESOURCELOADER_INTERCEPTORS', PoP_TemplateIDUtils::get_template_definition('interceptors'));
+define ('POP_RESOURCELOADER_JSLIBRARYMANAGER', PoP_TemplateIDUtils::get_template_definition('jslibrary-manager'));
+define ('POP_RESOURCELOADER_JSRUNTIMEMANAGER', PoP_TemplateIDUtils::get_template_definition('jsruntime-manager'));
+define ('POP_RESOURCELOADER_PAGESECTIONMANAGER', PoP_TemplateIDUtils::get_template_definition('pagesection-manager'));
+define ('POP_RESOURCELOADER_POPMANAGER', PoP_TemplateIDUtils::get_template_definition('pop-manager'));
+define ('POP_RESOURCELOADER_TOPLEVELJSON', PoP_TemplateIDUtils::get_template_definition('topleveljson'));
+define ('POP_RESOURCELOADER_RESOURCELOADER', PoP_TemplateIDUtils::get_template_definition('resourceloader'));
+define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG', PoP_TemplateIDUtils::get_template_definition('resourceloader-config'));
+define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-resources'));
+define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-initialresources'));
+// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-defaultresources'));
+// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-homedefaultresources'));
+// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-pagedefaultresources'));
+// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-singledefaultresources'));
+// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-authordefaultresources'));
+// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-tagdefaultresources'));
+// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-defaultdeltaresources'));
+define ('POP_RESOURCELOADER_POPUTILS', PoP_TemplateIDUtils::get_template_definition('pop-utils'));
+define ('POP_RESOURCELOADER_UTILS', PoP_TemplateIDUtils::get_template_definition('utils'));
 
 class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 

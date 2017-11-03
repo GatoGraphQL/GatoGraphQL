@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_MESSAGE_NOCATEGORIES', PoP_ServerUtils::get_template_definition('message-nocategories'));
+define ('GD_CUSTOM_TEMPLATE_MESSAGE_NOCATEGORIES', PoP_TemplateIDUtils::get_template_definition('message-nocategories'));
 
 class GD_Custom_Template_Processor_WidgetMessages extends GD_Template_Processor_WidgetMessagesBase {
 

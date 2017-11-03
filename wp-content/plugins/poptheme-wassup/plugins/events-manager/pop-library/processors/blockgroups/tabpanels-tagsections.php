@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGEVENTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagevents'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGPASTEVENTS', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tagpastevents'));
-define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGEVENTSCALENDAR', PoP_ServerUtils::get_template_definition('blockgroup-tabpanel-tageventscalendar'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGEVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagevents'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGPASTEVENTS', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tagpastevents'));
+define ('GD_TEMPLATE_BLOCKGROUP_TABPANEL_TAGEVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-tabpanel-tageventscalendar'));
 
 class GD_EM_Template_Processor_TagSectionTabPanelBlockGroups extends GD_Template_Processor_TagSectionTabPanelBlockGroupsBase {
 

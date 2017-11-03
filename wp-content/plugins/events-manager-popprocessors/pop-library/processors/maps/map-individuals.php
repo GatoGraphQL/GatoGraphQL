@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MAP_INDIVIDUAL', PoP_ServerUtils::get_template_definition('em-map-individual'));
-define ('GD_TEMPLATE_MAP_SIDEBARINDIVIDUAL', PoP_ServerUtils::get_template_definition('em-map-sidebarindividual'));
-define ('GD_TEMPLATE_MAP_INDIVIDUAL_POST', PoP_ServerUtils::get_template_definition('em-map-individual-post'));
-define ('GD_TEMPLATE_MAP_INDIVIDUAL_USER', PoP_ServerUtils::get_template_definition('em-map-individual-user'));
+define ('GD_TEMPLATE_MAP_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('em-map-individual'));
+define ('GD_TEMPLATE_MAP_SIDEBARINDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('em-map-sidebarindividual'));
+define ('GD_TEMPLATE_MAP_INDIVIDUAL_POST', PoP_TemplateIDUtils::get_template_definition('em-map-individual-post'));
+define ('GD_TEMPLATE_MAP_INDIVIDUAL_USER', PoP_TemplateIDUtils::get_template_definition('em-map-individual-user'));
 
 class GD_Template_Processor_MapIndividuals extends GD_Template_Processor_MapIndividualsBase {
 

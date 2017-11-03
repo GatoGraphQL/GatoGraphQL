@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_PROFILEINDIVIDUAL_DETAILS', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_PROFILEINDIVIDUAL_DETAILS));
-define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_PROFILEORGANIZATION_DETAILS', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_PROFILEORGANIZATION_DETAILS));
+define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_PROFILEINDIVIDUAL_DETAILS', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_PROFILEINDIVIDUAL_DETAILS));
+define ('POP_RESOURCELOADER_TEMPLATE_LAYOUT_PROFILEORGANIZATION_DETAILS', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_LAYOUT_PROFILEORGANIZATION_DETAILS));
 
 class PoPTheme_Wassup_URE_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor {
 

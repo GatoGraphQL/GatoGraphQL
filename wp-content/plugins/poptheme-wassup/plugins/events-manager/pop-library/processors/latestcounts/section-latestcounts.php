@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LATESTCOUNT_EVENTS', PoP_ServerUtils::get_template_definition('latestcount-events'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS', PoP_ServerUtils::get_template_definition('latestcount-author-events'));
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS', PoP_ServerUtils::get_template_definition('latestcount-tag-events'));
+define ('GD_TEMPLATE_LATESTCOUNT_EVENTS', PoP_TemplateIDUtils::get_template_definition('latestcount-events'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_EVENTS', PoP_TemplateIDUtils::get_template_definition('latestcount-author-events'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_EVENTS', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-events'));
 
 class GD_EM_Template_Processor_SectionLatestCounts extends GD_Template_Processor_SectionLatestCountsBase {
 

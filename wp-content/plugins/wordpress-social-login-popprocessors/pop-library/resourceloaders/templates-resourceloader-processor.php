@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('POP_RESOURCELOADER_TEMPLATE_WSL_NETWORKLINKS', PoP_ServerUtils::get_template_definition(GD_TEMPLATESOURCE_WSL_NETWORKLINKS));
+define ('POP_RESOURCELOADER_TEMPLATE_WSL_NETWORKLINKS', PoP_TemplateIDUtils::get_template_definition(GD_TEMPLATESOURCE_WSL_NETWORKLINKS));
 
 class WSL_PoPProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor {
 

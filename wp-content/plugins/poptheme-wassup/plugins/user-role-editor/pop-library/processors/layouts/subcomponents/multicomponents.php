@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_MULTICOMPONENT_ORGANIZATIONMEMBERS', PoP_ServerUtils::get_template_definition('ure-multicomponent-organizationmembers'));
+define ('GD_URE_TEMPLATE_MULTICOMPONENT_ORGANIZATIONMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-multicomponent-organizationmembers'));
 
 class GD_URE_Template_Processor_MembersLayoutMultipleComponents extends GD_Template_Processor_MultiplesBase {
 	

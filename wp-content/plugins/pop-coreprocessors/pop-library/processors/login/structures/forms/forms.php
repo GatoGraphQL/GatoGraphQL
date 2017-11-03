@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_LOGIN', PoP_ServerUtils::get_template_definition('form-login'));
-define ('GD_TEMPLATE_FORM_LOSTPWD', PoP_ServerUtils::get_template_definition('form-lostpwd'));
-define ('GD_TEMPLATE_FORM_LOSTPWDRESET', PoP_ServerUtils::get_template_definition('form-lostpwdreset'));
-define ('GD_TEMPLATE_FORM_LOGOUT', PoP_ServerUtils::get_template_definition('form-logout'));
+define ('GD_TEMPLATE_FORM_LOGIN', PoP_TemplateIDUtils::get_template_definition('form-login'));
+define ('GD_TEMPLATE_FORM_LOSTPWD', PoP_TemplateIDUtils::get_template_definition('form-lostpwd'));
+define ('GD_TEMPLATE_FORM_LOSTPWDRESET', PoP_TemplateIDUtils::get_template_definition('form-lostpwdreset'));
+define ('GD_TEMPLATE_FORM_LOGOUT', PoP_TemplateIDUtils::get_template_definition('form-logout'));
 
 class GD_Template_Processor_LoginForms extends GD_Template_Processor_FormsBase {
 

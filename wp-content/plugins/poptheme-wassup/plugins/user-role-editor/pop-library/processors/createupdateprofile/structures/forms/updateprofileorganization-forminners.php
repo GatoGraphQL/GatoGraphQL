@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_FORMINNER_PROFILEORGANIZATION_UPDATE', PoP_ServerUtils::get_template_definition('custom-forminner-profileorganization-update'));
+define ('GD_CUSTOM_TEMPLATE_FORMINNER_PROFILEORGANIZATION_UPDATE', PoP_TemplateIDUtils::get_template_definition('custom-forminner-profileorganization-update'));
 
 class GD_URE_Custom_Template_Processor_UpdateProfileOrganizationFormInners extends GD_URE_Template_Processor_UpdateProfileOrganizationFormInnersBase {
 

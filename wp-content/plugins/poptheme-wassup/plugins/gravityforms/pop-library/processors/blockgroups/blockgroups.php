@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_VOLUNTEER', PoP_ServerUtils::get_template_definition('blockgroup-volunteer'));
-define ('GD_TEMPLATE_BLOCKGROUP_FLAG', PoP_ServerUtils::get_template_definition('blockgroup-flag'));
-define ('GD_TEMPLATE_BLOCKGROUP_CONTACTUSER', PoP_ServerUtils::get_template_definition('blockgroup-contactuser'));
+define ('GD_TEMPLATE_BLOCKGROUP_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('blockgroup-volunteer'));
+define ('GD_TEMPLATE_BLOCKGROUP_FLAG', PoP_TemplateIDUtils::get_template_definition('blockgroup-flag'));
+define ('GD_TEMPLATE_BLOCKGROUP_CONTACTUSER', PoP_TemplateIDUtils::get_template_definition('blockgroup-contactuser'));
 
 class GD_Template_Processor_GFBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_TAGSIDEBARINNER_VERTICAL', PoP_ServerUtils::get_template_definition('layout-tagsidebarinner-vertical'));
+define ('GD_TEMPLATE_LAYOUT_TAGSIDEBARINNER_VERTICAL', PoP_TemplateIDUtils::get_template_definition('layout-tagsidebarinner-vertical'));
 
-define ('GD_TEMPLATE_LAYOUT_TAGSIDEBARINNER_HORIZONTAL', PoP_ServerUtils::get_template_definition('layout-tagsidebarinner-horizontal'));
+define ('GD_TEMPLATE_LAYOUT_TAGSIDEBARINNER_HORIZONTAL', PoP_TemplateIDUtils::get_template_definition('layout-tagsidebarinner-horizontal'));
 
-define ('GD_TEMPLATE_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL', PoP_ServerUtils::get_template_definition('layout-tagsidebarinner-compacthorizontal'));
+define ('GD_TEMPLATE_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL', PoP_TemplateIDUtils::get_template_definition('layout-tagsidebarinner-compacthorizontal'));
 
 class GD_Template_Processor_CustomTagLayoutSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 

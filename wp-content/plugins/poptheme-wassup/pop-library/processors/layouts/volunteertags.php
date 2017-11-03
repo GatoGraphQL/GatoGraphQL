@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTADDITIONAL_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-postadditional-volunteer'));
+define ('GD_TEMPLATE_LAYOUT_POSTADDITIONAL_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('layout-postadditional-volunteer'));
 
 class GD_Template_Processor_VolunteerTagLayouts extends GD_Template_Processor_VolunteerTagLayoutsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EVENT_CREATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-event-create'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EVENT_UPDATE', PoP_ServerUtils::get_template_definition('layout-messagefeedback-event-update'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-event-create'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_EVENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-event-update'));
 
 class GD_EM_Template_Processor_CreateUpdatePostFormMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_COMMENTS_SCROLL', PoP_ServerUtils::get_template_definition('block-comments-scroll'));
-define ('GD_TEMPLATE_BLOCK_ADDCOMMENT', PoP_ServerUtils::get_template_definition('block-addcomment'));
-define ('GD_TEMPLATE_BLOCKDATA_ADDCOMMENT', PoP_ServerUtils::get_template_definition('blockdata-addcomment'));
-define ('GD_TEMPLATE_BLOCK_COMMENTSINGLE', PoP_ServerUtils::get_template_definition('block-commentsingle'));
+define ('GD_TEMPLATE_BLOCK_COMMENTS_SCROLL', PoP_TemplateIDUtils::get_template_definition('block-comments-scroll'));
+define ('GD_TEMPLATE_BLOCK_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('block-addcomment'));
+define ('GD_TEMPLATE_BLOCKDATA_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('blockdata-addcomment'));
+define ('GD_TEMPLATE_BLOCK_COMMENTSINGLE', PoP_TemplateIDUtils::get_template_definition('block-commentsingle'));
 
 class GD_Template_Processor_CommentsBlocks extends GD_Template_Processor_BlocksBase {
 

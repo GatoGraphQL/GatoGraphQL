@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_ADDCOMMENT', PoP_ServerUtils::get_template_definition('form-addcomment'));
+define ('GD_TEMPLATE_FORM_ADDCOMMENT', PoP_TemplateIDUtils::get_template_definition('form-addcomment'));
 
 class GD_Template_Processor_CommentsForms extends GD_Template_Processor_FormsBase {
 

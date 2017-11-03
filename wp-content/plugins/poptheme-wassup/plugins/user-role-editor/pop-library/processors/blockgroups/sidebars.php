@@ -5,34 +5,34 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_INDIVIDUALS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-individuals-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_ORGANIZATIONS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-organizations-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYMEMBERS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-section-mymembers-sidebar'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-author-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMAINALLCONTENT_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-authormainallcontent-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORALLCONTENT_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-authorallcontent-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWERS_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-authorfollowers-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWINGUSERS_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-authorfollowingusers-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORRECOMMENDEDPOSTS_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-authorrecommendedposts-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORWEBPOSTS_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-authorwebposts-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMEMBERS_SIDEBAR_ORGANIZATION', PoP_ServerUtils::get_template_definition('blockgroup-authormembers-sidebar-organization'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('blockgroup-author-sidebar-individual'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMAINALLCONTENT_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('blockgroup-authormainallcontent-sidebar-individual'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORALLCONTENT_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('blockgroup-authorallcontent-sidebar-individual'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWERS_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('blockgroup-authorfollowers-sidebar-individual'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWINGUSERS_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('blockgroup-authorfollowingusers-sidebar-individual'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORRECOMMENDEDPOSTS_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('blockgroup-authorrecommendedposts-sidebar-individual'));
-// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORWEBPOSTS_SIDEBAR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('blockgroup-authorwebposts-sidebar-individual'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-author-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMAINALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authormainallcontent-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORALLCONTENT_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorallcontent-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWERS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorfollowers-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWINGUSERS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorfollowingusers-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorsubscribedtotags-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORRECOMMENDEDPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorrecommendedposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORWEBPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorwebposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORPOSTS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authorposts-sidebar'));
-define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMEMBERS_SIDEBAR', PoP_ServerUtils::get_template_definition('blockgroup-authormembers-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_INDIVIDUALS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-individuals-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_ORGANIZATIONS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-organizations-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_SECTION_MYMEMBERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-section-mymembers-sidebar'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-author-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMAINALLCONTENT_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authormainallcontent-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORALLCONTENT_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorallcontent-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWERS_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorfollowers-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWINGUSERS_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorfollowingusers-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORRECOMMENDEDPOSTS_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorrecommendedposts-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORWEBPOSTS_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorwebposts-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMEMBERS_SIDEBAR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('blockgroup-authormembers-sidebar-organization'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-author-sidebar-individual'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMAINALLCONTENT_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-authormainallcontent-sidebar-individual'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORALLCONTENT_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorallcontent-sidebar-individual'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWERS_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorfollowers-sidebar-individual'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWINGUSERS_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorfollowingusers-sidebar-individual'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORRECOMMENDEDPOSTS_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorrecommendedposts-sidebar-individual'));
+// define ('GD_TEMPLATE_BLOCKGROUP_AUTHORWEBPOSTS_SIDEBAR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorwebposts-sidebar-individual'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHOR_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-author-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMAINALLCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authormainallcontent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORALLCONTENT_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorallcontent-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorfollowers-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORFOLLOWINGUSERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorfollowingusers-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorsubscribedtotags-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORRECOMMENDEDPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorrecommendedposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORWEBPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorwebposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORPOSTS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authorposts-sidebar'));
+define ('GD_TEMPLATE_BLOCKGROUP_AUTHORMEMBERS_SIDEBAR', PoP_TemplateIDUtils::get_template_definition('blockgroup-authormembers-sidebar'));
 
 class GD_URE_Template_Processor_SidebarBlockGroups extends GD_Template_Processor_SidebarBlockGroupsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-aal-multicomponent-layoutuser-membership'));
+define ('GD_URE_AAL_TEMPLATE_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-aal-multicomponent-layoutuser-membership'));
 
 class Wassup_URE_AAL_Template_Processor_MultiMembership extends GD_Template_Processor_MultiplesBase {
 	

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_ORGANIZATION', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-organization'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_INDIVIDUAL', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-individual'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-organization'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-individual'));
 
 class GD_URE_Custom_Template_Processor_UserMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

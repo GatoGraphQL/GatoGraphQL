@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_TAGLEFT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-tagleft'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_TAGRIGHT', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-tagright'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_TAGLEFT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-tagleft'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_TAGRIGHT', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-tagright'));
 
 class GD_Custom_Template_Processor_TagMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

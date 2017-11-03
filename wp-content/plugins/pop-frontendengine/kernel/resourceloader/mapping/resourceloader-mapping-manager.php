@@ -23,8 +23,8 @@ class PoP_Frontend_ResourceLoaderMappingManager {
 			$this->initialized = true;
 
 			// Get the inner variable from the cache, if it exists
-			global $pop_frontend_filejsonstorage, $pop_frontend_resourceloader_mappinggenerator;
-			$this->mapping = $pop_frontend_filejsonstorage->get($pop_frontend_resourceloader_mappinggenerator->get_filepath());
+			global $pop_engine_filejsonstorage, $pop_frontend_resourceloader_mappinggenerator;
+			$this->mapping = $pop_engine_filejsonstorage->get($pop_frontend_resourceloader_mappinggenerator->get_filepath());
 		}
 	}
 

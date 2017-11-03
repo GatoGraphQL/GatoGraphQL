@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_CREATELOCATION', PoP_ServerUtils::get_template_definition('action-em-createlocation'));
+define ('GD_TEMPLATE_ACTION_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('action-em-createlocation'));
 
 class GD_EM_Template_Processor_CreateLocationActions extends GD_Template_Processor_ActionsBase {
 

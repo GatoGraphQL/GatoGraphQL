@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_TEMPLATE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-quicklinkbuttongroup-user-editmembership'));
+define ('GD_URE_TEMPLATE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-quicklinkbuttongroup-user-editmembership'));
 
 class GD_URE_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

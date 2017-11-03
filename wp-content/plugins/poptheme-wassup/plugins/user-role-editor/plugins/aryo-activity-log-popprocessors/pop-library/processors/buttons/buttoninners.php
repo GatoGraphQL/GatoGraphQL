@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_BUTTONINNER_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-aal-buttoninner-editmembership'));
-define ('GD_URE_AAL_TEMPLATE_BUTTONINNER_VIEWALLMEMBERS', PoP_ServerUtils::get_template_definition('ure-aal-buttoninner-viewallmembers'));
+define ('GD_URE_AAL_TEMPLATE_BUTTONINNER_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-aal-buttoninner-editmembership'));
+define ('GD_URE_AAL_TEMPLATE_BUTTONINNER_VIEWALLMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-aal-buttoninner-viewallmembers'));
 
 class Custom_URE_AAL_PoPProcessors_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

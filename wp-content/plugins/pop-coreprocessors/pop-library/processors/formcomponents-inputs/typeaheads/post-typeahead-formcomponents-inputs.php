@@ -6,8 +6,8 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // Do not change the name of these templates! They are used in the front-end (pre-select related posts/filter), so make them look nice
-define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES', PoP_ServerUtils::get_template_definition('related', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_REFERENCES', PoP_ServerUtils::get_template_definition('references', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES', PoP_TemplateIDUtils::get_template_definition('related', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_TYPEAHEAD_REFERENCES', PoP_TemplateIDUtils::get_template_definition('references', true));
 
 class GD_Template_Processor_PostSelectableTypeaheadFormComponentInputs extends GD_Template_Processor_PostSelectableTypeaheadFormComponentsBase {
 

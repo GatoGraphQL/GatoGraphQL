@@ -5,36 +5,36 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BUTTON_QUICKVIEW_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('button-quickview-previewdropdown'));
-define ('GD_TEMPLATE_BUTTON_QUICKVIEW_USER_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('button-quickview-user-previewdropdown'));
-define ('GD_TEMPLATE_BUTTON_PRINT_PREVIEWDROPDOWN', PoP_ServerUtils::get_template_definition('button-print-previewdropdown'));
-define ('GD_TEMPLATE_BUTTON_PRINT_SOCIALMEDIA', PoP_ServerUtils::get_template_definition('button-print-socialmedia'));
-define ('GD_TEMPLATE_BUTTON_POSTEDIT', PoP_ServerUtils::get_template_definition('button-postedit'));
-define ('GD_TEMPLATE_BUTTON_POSTVIEW', PoP_ServerUtils::get_template_definition('button-postview'));
-define ('GD_TEMPLATE_BUTTON_POSTPREVIEW', PoP_ServerUtils::get_template_definition('button-postpreview'));
-define ('GD_TEMPLATE_BUTTON_POSTPERMALINK', PoP_ServerUtils::get_template_definition('button-postpermalink'));
-define ('GD_TEMPLATE_BUTTON_POSTCOMMENTS', PoP_ServerUtils::get_template_definition('postbutton-comments'));
-define ('GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL', PoP_ServerUtils::get_template_definition('postbutton-comments-label'));
-define ('GD_TEMPLATE_BUTTON_FOLLOWUSER_PREVIEW', PoP_ServerUtils::get_template_definition('button-followuser-preview'));
-define ('GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL', PoP_ServerUtils::get_template_definition('button-sidebar-followuser-full'));
-define ('GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW', PoP_ServerUtils::get_template_definition('button-unfollowuser-preview'));
-define ('GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL', PoP_ServerUtils::get_template_definition('button-sidebar-unfollowuser-full'));
-define ('GD_TEMPLATE_BUTTON_RECOMMENDPOST_FULL', PoP_ServerUtils::get_template_definition('button-recommendpost-full'));
-define ('GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-recommendpost-preview'));
-define ('GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL', PoP_ServerUtils::get_template_definition('button-unrecommendpost-full'));
-define ('GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-unrecommendpost-preview'));
-define ('GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL', PoP_ServerUtils::get_template_definition('button-subscribetotag-full'));
-define ('GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW', PoP_ServerUtils::get_template_definition('button-subscribetotag-preview'));
-define ('GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL', PoP_ServerUtils::get_template_definition('button-unsubscribefromtag-full'));
-define ('GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW', PoP_ServerUtils::get_template_definition('button-unsubscribefromtag-preview'));
-define ('GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-upvotepost-preview'));
-define ('GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL', PoP_ServerUtils::get_template_definition('button-sidebar-upvotepost-full'));
-define ('GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-undoupvotepost-preview'));
-define ('GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL', PoP_ServerUtils::get_template_definition('button-sidebar-undoupvotepost-full'));
-define ('GD_TEMPLATE_BUTTON_DOWNVOTEPOST_FULL', PoP_ServerUtils::get_template_definition('button-downvotepost-full'));
-define ('GD_TEMPLATE_BUTTON_DOWNVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-downvotepost-preview'));
-define ('GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_FULL', PoP_ServerUtils::get_template_definition('button-undodownvotepost-full'));
-define ('GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW', PoP_ServerUtils::get_template_definition('button-undodownvotepost-preview'));
+define ('GD_TEMPLATE_BUTTON_QUICKVIEW_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('button-quickview-previewdropdown'));
+define ('GD_TEMPLATE_BUTTON_QUICKVIEW_USER_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('button-quickview-user-previewdropdown'));
+define ('GD_TEMPLATE_BUTTON_PRINT_PREVIEWDROPDOWN', PoP_TemplateIDUtils::get_template_definition('button-print-previewdropdown'));
+define ('GD_TEMPLATE_BUTTON_PRINT_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('button-print-socialmedia'));
+define ('GD_TEMPLATE_BUTTON_POSTEDIT', PoP_TemplateIDUtils::get_template_definition('button-postedit'));
+define ('GD_TEMPLATE_BUTTON_POSTVIEW', PoP_TemplateIDUtils::get_template_definition('button-postview'));
+define ('GD_TEMPLATE_BUTTON_POSTPREVIEW', PoP_TemplateIDUtils::get_template_definition('button-postpreview'));
+define ('GD_TEMPLATE_BUTTON_POSTPERMALINK', PoP_TemplateIDUtils::get_template_definition('button-postpermalink'));
+define ('GD_TEMPLATE_BUTTON_POSTCOMMENTS', PoP_TemplateIDUtils::get_template_definition('postbutton-comments'));
+define ('GD_TEMPLATE_BUTTON_POSTCOMMENTS_LABEL', PoP_TemplateIDUtils::get_template_definition('postbutton-comments-label'));
+define ('GD_TEMPLATE_BUTTON_FOLLOWUSER_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-followuser-preview'));
+define ('GD_TEMPLATE_BUTTON_FOLLOWUSER_FULL', PoP_TemplateIDUtils::get_template_definition('button-sidebar-followuser-full'));
+define ('GD_TEMPLATE_BUTTON_UNFOLLOWUSER_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-unfollowuser-preview'));
+define ('GD_TEMPLATE_BUTTON_UNFOLLOWUSER_FULL', PoP_TemplateIDUtils::get_template_definition('button-sidebar-unfollowuser-full'));
+define ('GD_TEMPLATE_BUTTON_RECOMMENDPOST_FULL', PoP_TemplateIDUtils::get_template_definition('button-recommendpost-full'));
+define ('GD_TEMPLATE_BUTTON_RECOMMENDPOST_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-recommendpost-preview'));
+define ('GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_FULL', PoP_TemplateIDUtils::get_template_definition('button-unrecommendpost-full'));
+define ('GD_TEMPLATE_BUTTON_UNRECOMMENDPOST_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-unrecommendpost-preview'));
+define ('GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_FULL', PoP_TemplateIDUtils::get_template_definition('button-subscribetotag-full'));
+define ('GD_TEMPLATE_BUTTON_SUBSCRIBETOTAG_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-subscribetotag-preview'));
+define ('GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_FULL', PoP_TemplateIDUtils::get_template_definition('button-unsubscribefromtag-full'));
+define ('GD_TEMPLATE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-unsubscribefromtag-preview'));
+define ('GD_TEMPLATE_BUTTON_UPVOTEPOST_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-upvotepost-preview'));
+define ('GD_TEMPLATE_BUTTON_UPVOTEPOST_FULL', PoP_TemplateIDUtils::get_template_definition('button-sidebar-upvotepost-full'));
+define ('GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-undoupvotepost-preview'));
+define ('GD_TEMPLATE_BUTTON_UNDOUPVOTEPOST_FULL', PoP_TemplateIDUtils::get_template_definition('button-sidebar-undoupvotepost-full'));
+define ('GD_TEMPLATE_BUTTON_DOWNVOTEPOST_FULL', PoP_TemplateIDUtils::get_template_definition('button-downvotepost-full'));
+define ('GD_TEMPLATE_BUTTON_DOWNVOTEPOST_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-downvotepost-preview'));
+define ('GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_FULL', PoP_TemplateIDUtils::get_template_definition('button-undodownvotepost-full'));
+define ('GD_TEMPLATE_BUTTON_UNDODOWNVOTEPOST_PREVIEW', PoP_TemplateIDUtils::get_template_definition('button-undodownvotepost-preview'));
 
 class GD_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 

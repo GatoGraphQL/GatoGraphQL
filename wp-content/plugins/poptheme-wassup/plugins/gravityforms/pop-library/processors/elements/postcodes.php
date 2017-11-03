@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_PAGECODE_NEWSLETTER', PoP_ServerUtils::get_template_definition('pagecode-newsletter'));
+define ('GD_TEMPLATE_PAGECODE_NEWSLETTER', PoP_TemplateIDUtils::get_template_definition('pagecode-newsletter'));
 
 class GD_GF_Template_Processor_PostCodes extends GD_Template_Processor_PostCodesBase {
 

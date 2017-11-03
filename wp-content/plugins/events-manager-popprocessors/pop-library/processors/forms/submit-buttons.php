@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_EM_TEMPLATE_SUBMITBUTTON_ADDLOCATION', PoP_ServerUtils::get_template_definition('em-submitbutton-addlocation'));
+define ('GD_EM_TEMPLATE_SUBMITBUTTON_ADDLOCATION', PoP_TemplateIDUtils::get_template_definition('em-submitbutton-addlocation'));
 
 class GD_EM_Template_Processor_SubmitButtons extends GD_Template_Processor_SubmitButtonsBase {
 

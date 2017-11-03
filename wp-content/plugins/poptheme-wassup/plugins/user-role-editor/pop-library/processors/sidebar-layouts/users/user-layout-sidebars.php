@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION', PoP_ServerUtils::get_template_definition('layout-usersidebar-vertical-organization'));
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL', PoP_ServerUtils::get_template_definition('layout-usersidebar-vertical-individual'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-vertical-organization'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-vertical-individual'));
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION', PoP_ServerUtils::get_template_definition('layout-usersidebar-horizontal-organization'));
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL', PoP_ServerUtils::get_template_definition('layout-usersidebar-horizontal-individual'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-horizontal-organization'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-horizontal-individual'));
 
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION', PoP_ServerUtils::get_template_definition('layout-usersidebar-compacthorizontal-organization'));
-define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL', PoP_ServerUtils::get_template_definition('layout-usersidebar-compacthorizontal-individual'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-compacthorizontal-organization'));
+define ('GD_TEMPLATE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('layout-usersidebar-compacthorizontal-individual'));
 
 // class GD_Template_Processor_CustomUserLayoutSidebars extends GD_Template_Processor_LayoutSidebarsBase {
 class GD_URE_Template_Processor_CustomUserLayoutSidebars extends GD_Template_Processor_SidebarsBase {

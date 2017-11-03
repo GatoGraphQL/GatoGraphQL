@@ -5,9 +5,9 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_MYCOMMUNITIES_UPDATE', PoP_ServerUtils::get_template_definition('block-mycommunities-update'));
-define ('GD_TEMPLATE_BLOCK_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('block-invitemembers'));
-define ('GD_TEMPLATE_BLOCK_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('block-editmembership'));
+define ('GD_TEMPLATE_BLOCK_MYCOMMUNITIES_UPDATE', PoP_TemplateIDUtils::get_template_definition('block-mycommunities-update'));
+define ('GD_TEMPLATE_BLOCK_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('block-invitemembers'));
+define ('GD_TEMPLATE_BLOCK_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('block-editmembership'));
 
 class GD_URE_Template_Processor_ProfileBlocks extends GD_Template_Processor_BlocksBase {
 

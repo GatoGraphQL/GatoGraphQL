@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_USERNAME', PoP_ServerUtils::get_template_definition('formcomponent-cuu-username'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_EMAIL', PoP_ServerUtils::get_template_definition('formcomponent-cuu-email'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_CURRENTPASSWORD', PoP_ServerUtils::get_template_definition('formcomponent-cuu-currentpassword'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_PASSWORD', PoP_ServerUtils::get_template_definition('formcomponent-cuu-password'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_NEWPASSWORD', PoP_ServerUtils::get_template_definition('formcomponent-cuu-newpassword'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_PASSWORDREPEAT', PoP_ServerUtils::get_template_definition('formcomponent-cuu-passwordrepeat'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_NEWPASSWORDREPEAT', PoP_ServerUtils::get_template_definition('formcomponent-cuu-newpasswordrepeat'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_FIRSTNAME', PoP_ServerUtils::get_template_definition('formcomponent-cuu-firstname'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CUU_USERURL', PoP_ServerUtils::get_template_definition('formcomponent-cuu-userurl'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_USERNAME', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-username'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_EMAIL', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-email'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_CURRENTPASSWORD', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-currentpassword'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_PASSWORD', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-password'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_NEWPASSWORD', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-newpassword'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_PASSWORDREPEAT', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-passwordrepeat'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_NEWPASSWORDREPEAT', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-newpasswordrepeat'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_FIRSTNAME', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-firstname'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CUU_USERURL', PoP_TemplateIDUtils::get_template_definition('formcomponent-cuu-userurl'));
 
 class GD_Template_Processor_CreateUpdateUserTextFormComponentInputs extends GD_Template_Processor_TextFormComponentsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-author-organization'));
-define ('GD_TEMPLATE_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL', PoP_ServerUtils::get_template_definition('vertical-sidebarinner-author-individual'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-author-organization'));
+define ('GD_TEMPLATE_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL', PoP_TemplateIDUtils::get_template_definition('vertical-sidebarinner-author-individual'));
 
 class GD_URE_Template_Processor_CustomVerticalAuthorSidebarInners extends GD_Template_Processor_SidebarInnersBase {
 	

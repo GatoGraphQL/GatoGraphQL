@@ -5,30 +5,30 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_FB', PoP_ServerUtils::get_template_definition('post-socialmedia-fb'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_FB', PoP_ServerUtils::get_template_definition('tag-socialmedia-fb'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_FB', PoP_ServerUtils::get_template_definition('user-socialmedia-fb'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_TWITTER', PoP_ServerUtils::get_template_definition('post-socialmedia-twitter'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER', PoP_ServerUtils::get_template_definition('tag-socialmedia-twitter'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER', PoP_ServerUtils::get_template_definition('user-socialmedia-twitter'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_GPLUS', PoP_ServerUtils::get_template_definition('post-socialmedia-gplus'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS', PoP_ServerUtils::get_template_definition('tag-socialmedia-gplus'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS', PoP_ServerUtils::get_template_definition('user-socialmedia-gplus'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_LINKEDIN', PoP_ServerUtils::get_template_definition('post-socialmedia-linkedin'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN', PoP_ServerUtils::get_template_definition('tag-socialmedia-linkedin'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN', PoP_ServerUtils::get_template_definition('user-socialmedia-linkedin'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_FB_PREVIEW', PoP_ServerUtils::get_template_definition('post-socialmedia-fb-preview'));
-define ('GD_TEMPLATE_TAGSOCIALMEDIA_FB_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-fb-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_FB_PREVIEW', PoP_ServerUtils::get_template_definition('user-socialmedia-fb-preview'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_TWITTER_PREVIEW', PoP_ServerUtils::get_template_definition('post-socialmedia-twitter-preview'));
-define ('GD_TEMPLATE_TAGSOCIALMEDIA_TWITTER_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-twitter-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER_PREVIEW', PoP_ServerUtils::get_template_definition('user-socialmedia-twitter-preview'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_GPLUS_PREVIEW', PoP_ServerUtils::get_template_definition('post-socialmedia-gplus-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-gplus-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS_PREVIEW', PoP_ServerUtils::get_template_definition('user-socialmedia-gplus-preview'));
-define ('GD_TEMPLATE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW', PoP_ServerUtils::get_template_definition('post-socialmedia-linkedin-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN_PREVIEW', PoP_ServerUtils::get_template_definition('tag-socialmedia-linkedin-preview'));
-define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN_PREVIEW', PoP_ServerUtils::get_template_definition('user-socialmedia-linkedin-preview'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_FB', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-fb'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_FB', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-fb'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_FB', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-fb'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_TWITTER', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-twitter'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-twitter'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-twitter'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_GPLUS', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-gplus'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-gplus'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-gplus'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_LINKEDIN', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-linkedin'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-linkedin'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-linkedin'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_FB_PREVIEW', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-fb-preview'));
+define ('GD_TEMPLATE_TAGSOCIALMEDIA_FB_PREVIEW', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-fb-preview'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_FB_PREVIEW', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-fb-preview'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_TWITTER_PREVIEW', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-twitter-preview'));
+define ('GD_TEMPLATE_TAGSOCIALMEDIA_TWITTER_PREVIEW', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-twitter-preview'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_TWITTER_PREVIEW', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-twitter-preview'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_GPLUS_PREVIEW', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-gplus-preview'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS_PREVIEW', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-gplus-preview'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_GPLUS_PREVIEW', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-gplus-preview'));
+define ('GD_TEMPLATE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW', PoP_TemplateIDUtils::get_template_definition('post-socialmedia-linkedin-preview'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN_PREVIEW', PoP_TemplateIDUtils::get_template_definition('tag-socialmedia-linkedin-preview'));
+define ('GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN_PREVIEW', PoP_TemplateIDUtils::get_template_definition('user-socialmedia-linkedin-preview'));
 
 class GD_Template_Processor_SocialMediaItems extends GD_Template_Processor_SocialMediaItemsBase {
 

@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_GENERIC', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-generic'));
-define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AVATAR', PoP_ServerUtils::get_template_definition('sidebarmulticomponent-avatar'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_GENERIC', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-generic'));
+define ('GD_TEMPLATE_SIDEBARMULTICOMPONENT_AVATAR', PoP_TemplateIDUtils::get_template_definition('sidebarmulticomponent-avatar'));
 
 class GD_Custom_Template_Processor_UserMultipleSidebarComponents extends GD_Template_Processor_MultiplesBase {
 	

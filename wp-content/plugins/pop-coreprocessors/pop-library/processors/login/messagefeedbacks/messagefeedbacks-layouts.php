@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOGIN', PoP_ServerUtils::get_template_definition('layout-messagefeedback-login'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOSTPWD', PoP_ServerUtils::get_template_definition('layout-messagefeedback-lostpwd'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOSTPWDRESET', PoP_ServerUtils::get_template_definition('layout-messagefeedback-lostpwdreset'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOGOUT', PoP_ServerUtils::get_template_definition('layout-messagefeedback-logout'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOGIN', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-login'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOSTPWD', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-lostpwd'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOSTPWDRESET', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-lostpwdreset'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACK_LOGOUT', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedback-logout'));
 
 class GD_Template_Processor_LoginMessageFeedbackLayouts extends GD_Template_Processor_FormMessageFeedbackLayoutsBase {
 

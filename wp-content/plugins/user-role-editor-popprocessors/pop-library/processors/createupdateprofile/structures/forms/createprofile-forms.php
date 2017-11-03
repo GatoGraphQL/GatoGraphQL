@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORM_PROFILEORGANIZATION_CREATE', PoP_ServerUtils::get_template_definition('form-profileorganization-create'));
-define ('GD_TEMPLATE_FORM_PROFILEINDIVIDUAL_CREATE', PoP_ServerUtils::get_template_definition('form-profileindividual-create'));
+define ('GD_TEMPLATE_FORM_PROFILEORGANIZATION_CREATE', PoP_TemplateIDUtils::get_template_definition('form-profileorganization-create'));
+define ('GD_TEMPLATE_FORM_PROFILEINDIVIDUAL_CREATE', PoP_TemplateIDUtils::get_template_definition('form-profileindividual-create'));
 
 class GD_URE_Template_Processor_CreateProfileForms extends GD_Template_Processor_FormsBase {
 

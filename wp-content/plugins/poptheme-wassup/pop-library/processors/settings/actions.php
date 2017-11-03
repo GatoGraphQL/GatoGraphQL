@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_SETTINGS', PoP_ServerUtils::get_template_definition('action-settings'));
+define ('GD_TEMPLATE_ACTION_SETTINGS', PoP_TemplateIDUtils::get_template_definition('action-settings'));
 
 class GD_Template_Processor_CustomSettingsActions extends GD_Template_Processor_ActionsBase {
 

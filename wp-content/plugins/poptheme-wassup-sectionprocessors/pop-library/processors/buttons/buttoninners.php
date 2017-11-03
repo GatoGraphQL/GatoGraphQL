@@ -5,15 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOST_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-locationpost-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOSTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-locationpostlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSION_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-discussion-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSIONLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-discussionlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_STORY_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-story-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_STORYLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-storylink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_ANNOUNCEMENT_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-announcement-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_ANNOUNCEMENTLINK_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-announcementlink-create'));
-define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_FEATURED_CREATE', PoP_ServerUtils::get_template_definition('custom-buttoninner-featured-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOST_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-locationpost-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_LOCATIONPOSTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-locationpostlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSION_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-discussion-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_DISCUSSIONLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-discussionlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_STORY_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-story-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_STORYLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-storylink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_ANNOUNCEMENT_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-announcement-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_ANNOUNCEMENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-announcementlink-create'));
+define ('GD_CUSTOM_TEMPLATE_BUTTONINNER_FEATURED_CREATE', PoP_TemplateIDUtils::get_template_definition('custom-buttoninner-featured-create'));
 
 class GD_Custom_Template_Processor_ButtonInners extends GD_Template_Processor_ButtonInnersBase {
 

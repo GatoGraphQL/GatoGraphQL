@@ -5,12 +5,12 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LATESTCOUNT_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('latestcount-webpostlinks'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('latestcount-author-webpostlinks'));
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS', PoP_ServerUtils::get_template_definition('latestcount-tag-webpostlinks'));
-define ('GD_TEMPLATE_LATESTCOUNT_WEBPOSTS', PoP_ServerUtils::get_template_definition('latestcount-webposts'));
-define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTS', PoP_ServerUtils::get_template_definition('latestcount-author-webposts'));
-define ('GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS', PoP_ServerUtils::get_template_definition('latestcount-tag-webposts'));
+define ('GD_TEMPLATE_LATESTCOUNT_WEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('latestcount-webpostlinks'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('latestcount-author-webpostlinks'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTLINKS', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-webpostlinks'));
+define ('GD_TEMPLATE_LATESTCOUNT_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('latestcount-webposts'));
+define ('GD_TEMPLATE_LATESTCOUNT_AUTHOR_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('latestcount-author-webposts'));
+define ('GD_TEMPLATE_LATESTCOUNT_TAG_WEBPOSTS', PoP_TemplateIDUtils::get_template_definition('latestcount-tag-webposts'));
 
 class PoPThemeWassup_Template_Processor_SectionLatestCounts extends GD_Template_Processor_SectionLatestCountsBase {
 

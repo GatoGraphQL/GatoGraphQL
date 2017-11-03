@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_MYCOMMUNITIES_UPDATE', PoP_ServerUtils::get_template_definition('action-mycommunities-update'));
+define ('GD_TEMPLATE_ACTION_MYCOMMUNITIES_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-mycommunities-update'));
 
 // class GD_URE_Template_Processor_MyCommunitiesActions extends GD_Template_Processor_BlocksBase {
 class GD_URE_Template_Processor_MyCommunitiesActions extends GD_Template_Processor_ActionsBase {

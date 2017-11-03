@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-aal-quicklinkbuttongroup-editusermembership'));
-define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_VIEWALLMEMBERS', PoP_ServerUtils::get_template_definition('ure-aal-quicklinkbuttongroup-viewallmembers'));
+define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-aal-quicklinkbuttongroup-editusermembership'));
+define ('GD_URE_AAL_TEMPLATE_QUICKLINKBUTTONGROUP_VIEWALLMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-aal-quicklinkbuttongroup-viewallmembers'));
 
 class GD_URE_AAL_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_ControlButtonGroupsBase {
 

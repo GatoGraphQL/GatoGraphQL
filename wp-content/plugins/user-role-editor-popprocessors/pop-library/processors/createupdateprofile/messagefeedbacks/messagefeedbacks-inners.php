@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCOMMUNITIES', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mycommunities'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_INVITENEWMEMBERS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-invitemembers'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('messagefeedbackinner-editmembership'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYMEMBERS', PoP_ServerUtils::get_template_definition('messagefeedbackinner-mymembers'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYCOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mycommunities'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_INVITENEWMEMBERS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-invitemembers'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-editmembership'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACKINNER_MYMEMBERS', PoP_TemplateIDUtils::get_template_definition('messagefeedbackinner-mymembers'));
 
 class GD_URE_Template_Processor_ProfileMessageFeedbackInners extends GD_Template_Processor_MessageFeedbackInnersBase {
 

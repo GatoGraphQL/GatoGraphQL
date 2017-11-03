@@ -5,13 +5,13 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CONTACTUS', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-contactus'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CONTACTUSER', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-contactuser'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_SHAREBYEMAIL', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-sharebyemail'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-volunteer'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FLAG', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-flag'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTER', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-newsletter'));
-define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTERUNSUBSCRIPTION', PoP_ServerUtils::get_template_definition('layout-messagefeedbackframe-newsletterunsubscription'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CONTACTUS', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-contactus'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_CONTACTUSER', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-contactuser'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_SHAREBYEMAIL', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-sharebyemail'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-volunteer'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_FLAG', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-flag'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTER', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-newsletter'));
+define ('GD_TEMPLATE_LAYOUT_MESSAGEFEEDBACKFRAME_NEWSLETTERUNSUBSCRIPTION', PoP_TemplateIDUtils::get_template_definition('layout-messagefeedbackframe-newsletterunsubscription'));
 
 class GD_GF_Template_Processor_MessageFeedbackFrameLayouts extends GD_Template_Processor_MessageFeedbackFrameLayoutsBase {
 

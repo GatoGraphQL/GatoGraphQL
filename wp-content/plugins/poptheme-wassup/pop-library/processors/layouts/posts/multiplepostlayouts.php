@@ -5,22 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_NAVIGATOR', PoP_ServerUtils::get_template_definition('layout-multiplepost-navigator'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_ADDONS', PoP_ServerUtils::get_template_definition('layout-multiplepost-addons'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_DETAILS', PoP_ServerUtils::get_template_definition('layout-multiplepost-details'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_THUMBNAIL', PoP_ServerUtils::get_template_definition('layout-multiplepost-thumbnail'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_LIST', PoP_ServerUtils::get_template_definition('layout-multiplepost-list'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_LINE', PoP_ServerUtils::get_template_definition('layout-multiplepost-line'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_RELATED', PoP_ServerUtils::get_template_definition('layout-multiplepost-related'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_EDIT', PoP_ServerUtils::get_template_definition('layout-multiplepost-edit'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-multiplepost-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-multiplepost-fullview'));
-// define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-authormultiplepost-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEPOST_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-authormultiplepost-fullview'));
-// define ('GD_TEMPLATE_LAYOUT_SINGLEMULTIPLEPOST_SIMPLEVIEW', PoP_ServerUtils::get_template_definition('layout-singlemultiplepost-simpleview'));
-define ('GD_TEMPLATE_LAYOUT_SINGLEMULTIPLEPOST_FULLVIEW', PoP_ServerUtils::get_template_definition('layout-singlemultiplepost-fullview'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_NAVIGATOR', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-navigator'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_ADDONS', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-addons'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_DETAILS', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-details'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_THUMBNAIL', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-thumbnail'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_LIST', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-list'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_LINE', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-line'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_RELATED', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-related'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-edit'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-fullview'));
+// define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEPOST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-authormultiplepost-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEPOST_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-authormultiplepost-fullview'));
+// define ('GD_TEMPLATE_LAYOUT_SINGLEMULTIPLEPOST_SIMPLEVIEW', PoP_TemplateIDUtils::get_template_definition('layout-singlemultiplepost-simpleview'));
+define ('GD_TEMPLATE_LAYOUT_SINGLEMULTIPLEPOST_FULLVIEW', PoP_TemplateIDUtils::get_template_definition('layout-singlemultiplepost-fullview'));
 
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_SIMPLEVIEW_CUSTOMLAYOUTS', PoP_ServerUtils::get_template_definition('layout-multiplepost-simpleview-customlayouts'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEPOST_SIMPLEVIEW_CUSTOMLAYOUTS', PoP_TemplateIDUtils::get_template_definition('layout-multiplepost-simpleview-customlayouts'));
 
 class GD_Template_Processor_MultiplePostLayouts extends GD_Template_Processor_MultiplePostLayoutsBase {
 

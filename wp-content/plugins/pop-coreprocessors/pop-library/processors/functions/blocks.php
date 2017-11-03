@@ -5,26 +5,26 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_BLOCK_FOLLOWSUSERS', PoP_ServerUtils::get_template_definition('block-followsusers'));
-define ('GD_TEMPLATE_BLOCK_RECOMMENDSPOSTS', PoP_ServerUtils::get_template_definition('block-recommendsposts'));
-define ('GD_TEMPLATE_BLOCK_SUBSCRIBESTOTAGS', PoP_ServerUtils::get_template_definition('block-subscribestotags'));
-define ('GD_TEMPLATE_BLOCK_UPVOTESPOSTS', PoP_ServerUtils::get_template_definition('block-upvotesposts'));
-define ('GD_TEMPLATE_BLOCK_DOWNVOTESPOSTS', PoP_ServerUtils::get_template_definition('block-downvotesposts'));
-define ('GD_TEMPLATE_BLOCKDATA_FOLLOWSUSERS', PoP_ServerUtils::get_template_definition('blockdata-followsusers'));
-define ('GD_TEMPLATE_BLOCKDATA_RECOMMENDSPOSTS', PoP_ServerUtils::get_template_definition('blockdata-recommendsposts'));
-define ('GD_TEMPLATE_BLOCKDATA_SUBSCRIBESTOTAGS', PoP_ServerUtils::get_template_definition('blockdata-subscribestotags'));
-define ('GD_TEMPLATE_BLOCKDATA_UPVOTESPOSTS', PoP_ServerUtils::get_template_definition('blockdata-upvotessposts'));
-define ('GD_TEMPLATE_BLOCKDATA_DOWNVOTESPOSTS', PoP_ServerUtils::get_template_definition('blockdata-downvotesposts'));
-define ('GD_TEMPLATE_BLOCKDATA_FOLLOWUSER', PoP_ServerUtils::get_template_definition('blockdata-followuser'));
-define ('GD_TEMPLATE_BLOCKDATA_UNFOLLOWUSER', PoP_ServerUtils::get_template_definition('blockdata-unfollowuser'));
-define ('GD_TEMPLATE_BLOCKDATA_RECOMMENDPOST', PoP_ServerUtils::get_template_definition('blockdata-recommendpost'));
-define ('GD_TEMPLATE_BLOCKDATA_UNRECOMMENDPOST', PoP_ServerUtils::get_template_definition('blockdata-unrecommendpost'));
-define ('GD_TEMPLATE_BLOCKDATA_SUBSCRIBETOTAG', PoP_ServerUtils::get_template_definition('blockdata-subscribetotag'));
-define ('GD_TEMPLATE_BLOCKDATA_UNSUBSCRIBEFROMTAG', PoP_ServerUtils::get_template_definition('blockdata-unsubscribefromtag'));
-define ('GD_TEMPLATE_BLOCKDATA_UPVOTEPOST', PoP_ServerUtils::get_template_definition('blockdata-upvotepost'));
-define ('GD_TEMPLATE_BLOCKDATA_UNDOUPVOTEPOST', PoP_ServerUtils::get_template_definition('blockdata-undoupvotepost'));
-define ('GD_TEMPLATE_BLOCKDATA_DOWNVOTEPOST', PoP_ServerUtils::get_template_definition('blockdata-downvotepost'));
-define ('GD_TEMPLATE_BLOCKDATA_UNDODOWNVOTEPOST', PoP_ServerUtils::get_template_definition('blockdata-undodownvotepost'));
+define ('GD_TEMPLATE_BLOCK_FOLLOWSUSERS', PoP_TemplateIDUtils::get_template_definition('block-followsusers'));
+define ('GD_TEMPLATE_BLOCK_RECOMMENDSPOSTS', PoP_TemplateIDUtils::get_template_definition('block-recommendsposts'));
+define ('GD_TEMPLATE_BLOCK_SUBSCRIBESTOTAGS', PoP_TemplateIDUtils::get_template_definition('block-subscribestotags'));
+define ('GD_TEMPLATE_BLOCK_UPVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('block-upvotesposts'));
+define ('GD_TEMPLATE_BLOCK_DOWNVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('block-downvotesposts'));
+define ('GD_TEMPLATE_BLOCKDATA_FOLLOWSUSERS', PoP_TemplateIDUtils::get_template_definition('blockdata-followsusers'));
+define ('GD_TEMPLATE_BLOCKDATA_RECOMMENDSPOSTS', PoP_TemplateIDUtils::get_template_definition('blockdata-recommendsposts'));
+define ('GD_TEMPLATE_BLOCKDATA_SUBSCRIBESTOTAGS', PoP_TemplateIDUtils::get_template_definition('blockdata-subscribestotags'));
+define ('GD_TEMPLATE_BLOCKDATA_UPVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('blockdata-upvotessposts'));
+define ('GD_TEMPLATE_BLOCKDATA_DOWNVOTESPOSTS', PoP_TemplateIDUtils::get_template_definition('blockdata-downvotesposts'));
+define ('GD_TEMPLATE_BLOCKDATA_FOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('blockdata-followuser'));
+define ('GD_TEMPLATE_BLOCKDATA_UNFOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('blockdata-unfollowuser'));
+define ('GD_TEMPLATE_BLOCKDATA_RECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('blockdata-recommendpost'));
+define ('GD_TEMPLATE_BLOCKDATA_UNRECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('blockdata-unrecommendpost'));
+define ('GD_TEMPLATE_BLOCKDATA_SUBSCRIBETOTAG', PoP_TemplateIDUtils::get_template_definition('blockdata-subscribetotag'));
+define ('GD_TEMPLATE_BLOCKDATA_UNSUBSCRIBEFROMTAG', PoP_TemplateIDUtils::get_template_definition('blockdata-unsubscribefromtag'));
+define ('GD_TEMPLATE_BLOCKDATA_UPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockdata-upvotepost'));
+define ('GD_TEMPLATE_BLOCKDATA_UNDOUPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockdata-undoupvotepost'));
+define ('GD_TEMPLATE_BLOCKDATA_DOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockdata-downvotepost'));
+define ('GD_TEMPLATE_BLOCKDATA_UNDODOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('blockdata-undodownvotepost'));
 
 class GD_Template_Processor_FunctionsBlocks extends GD_Template_Processor_BlocksBase {
 

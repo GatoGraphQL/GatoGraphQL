@@ -5,17 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENT_LINKCATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-linkcategories'));
-define ('GD_TEMPLATE_FORMCOMPONENT_APPLIESTO', PoP_ServerUtils::get_template_definition('formcomponent-appliesto'));
-define ('GD_TEMPLATE_FORMCOMPONENT_CATEGORIES', PoP_ServerUtils::get_template_definition('formcomponent-categories'));
-// define ('GD_TEMPLATE_FORMCOMPONENT_SECTIONS', PoP_ServerUtils::get_template_definition('formcomponent-sections'));
-define ('GD_TEMPLATE_FORMCOMPONENT_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('formcomponent-webpostsections'));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_LINKCATEGORIES', PoP_ServerUtils::get_template_definition('linkcategories', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_APPLIESTO', PoP_ServerUtils::get_template_definition('appliesto', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_CATEGORIES', PoP_ServerUtils::get_template_definition('categories', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_SECTIONS', PoP_ServerUtils::get_template_definition('sections', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_WEBPOSTSECTIONS', PoP_ServerUtils::get_template_definition('postsections', true));
-define ('GD_TEMPLATE_FILTERFORMCOMPONENT_LINKACCESS', PoP_ServerUtils::get_template_definition('linkaccess', true));
+define ('GD_TEMPLATE_FORMCOMPONENT_LINKCATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponent-linkcategories'));
+define ('GD_TEMPLATE_FORMCOMPONENT_APPLIESTO', PoP_TemplateIDUtils::get_template_definition('formcomponent-appliesto'));
+define ('GD_TEMPLATE_FORMCOMPONENT_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('formcomponent-categories'));
+// define ('GD_TEMPLATE_FORMCOMPONENT_SECTIONS', PoP_TemplateIDUtils::get_template_definition('formcomponent-sections'));
+define ('GD_TEMPLATE_FORMCOMPONENT_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('formcomponent-webpostsections'));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_LINKCATEGORIES', PoP_TemplateIDUtils::get_template_definition('linkcategories', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_APPLIESTO', PoP_TemplateIDUtils::get_template_definition('appliesto', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_CATEGORIES', PoP_TemplateIDUtils::get_template_definition('categories', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_SECTIONS', PoP_TemplateIDUtils::get_template_definition('sections', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_WEBPOSTSECTIONS', PoP_TemplateIDUtils::get_template_definition('postsections', true));
+define ('GD_TEMPLATE_FILTERFORMCOMPONENT_LINKACCESS', PoP_TemplateIDUtils::get_template_definition('linkaccess', true));
 
 class GD_Template_Processor_CreateUpdatePostMultiSelectFormComponentInputs extends GD_Template_Processor_MultiSelectFormComponentsBase {
 

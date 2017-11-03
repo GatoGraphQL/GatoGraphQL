@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL', PoP_ServerUtils::get_template_definition('layout-postadditional-multilayout-label'));
+define ('GD_TEMPLATE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL', PoP_TemplateIDUtils::get_template_definition('layout-postadditional-multilayout-label'));
 
 class GD_Template_Processor_PostAdditionalLayouts extends GD_Template_Processor_PostAdditionalLayoutsBase {
 

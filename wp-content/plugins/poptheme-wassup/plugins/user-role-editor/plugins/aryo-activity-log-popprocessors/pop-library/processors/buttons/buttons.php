@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_URE_AAL_TEMPLATE_BUTTON_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('ure-aal-button-editmembership'));
-define ('GD_URE_AAL_TEMPLATE_BUTTON_VIEWALLMEMBERS', PoP_ServerUtils::get_template_definition('ure-aal-button-viewallmembers'));
+define ('GD_URE_AAL_TEMPLATE_BUTTON_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('ure-aal-button-editmembership'));
+define ('GD_URE_AAL_TEMPLATE_BUTTON_VIEWALLMEMBERS', PoP_TemplateIDUtils::get_template_definition('ure-aal-button-viewallmembers'));
 
 class Custom_URE_AAL_PoPProcessors_Template_Processor_Buttons extends GD_Template_Processor_ButtonsBase {
 

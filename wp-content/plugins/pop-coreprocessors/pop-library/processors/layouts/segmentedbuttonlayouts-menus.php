@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MENU_SEGMENTEDBUTTON', PoP_ServerUtils::get_template_definition('layout-menu-segmentedbutton'));
-define ('GD_TEMPLATE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON', PoP_ServerUtils::get_template_definition('layout-menu-navigatorsegmentedbutton'));
+define ('GD_TEMPLATE_LAYOUT_MENU_SEGMENTEDBUTTON', PoP_TemplateIDUtils::get_template_definition('layout-menu-segmentedbutton'));
+define ('GD_TEMPLATE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON', PoP_TemplateIDUtils::get_template_definition('layout-menu-navigatorsegmentedbutton'));
 
 class GD_Template_Processor_SegmentedButtonMenuLayouts extends GD_Template_Processor_SegmentedButtonLayoutsBase {
 

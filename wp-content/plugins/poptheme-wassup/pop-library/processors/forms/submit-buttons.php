@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SUBMITBUTTON_INSTANTANEOUSSEARCH', PoP_ServerUtils::get_template_definition('submitbutton-instantaneoussearch'));
+define ('GD_TEMPLATE_SUBMITBUTTON_INSTANTANEOUSSEARCH', PoP_TemplateIDUtils::get_template_definition('submitbutton-instantaneoussearch'));
 
 class PoPTheme_Wassup_Template_Processor_SubmitButtons extends GD_Template_Processor_SubmitButtonsBase {
 

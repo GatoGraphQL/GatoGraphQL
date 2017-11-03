@@ -5,14 +5,14 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_LOCATIONS', PoP_ServerUtils::get_template_definition('simplefilterinner-locations'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_EVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-events'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-authorevents'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-tagevents'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_EVENTSCALENDAR', PoP_ServerUtils::get_template_definition('simplefilterinner-eventscalendar'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTSCALENDAR', PoP_ServerUtils::get_template_definition('simplefilterinner-authoreventscalendar'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTSCALENDAR', PoP_ServerUtils::get_template_definition('simplefilterinner-tageventscalendar'));
-define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYEVENTS', PoP_ServerUtils::get_template_definition('simplefilterinner-myevents'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_LOCATIONS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-locations'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_EVENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-events'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authorevents'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tagevents'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_EVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-eventscalendar'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_AUTHOREVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-authoreventscalendar'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_TAGEVENTSCALENDAR', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-tageventscalendar'));
+define ('GD_TEMPLATE_SIMPLEFILTERINNER_MYEVENTS', PoP_TemplateIDUtils::get_template_definition('simplefilterinner-myevents'));
 
 class GD_EM_Template_Processor_CustomSimpleFilterInners extends GD_Template_Processor_SimpleFilterInnersBase {
 

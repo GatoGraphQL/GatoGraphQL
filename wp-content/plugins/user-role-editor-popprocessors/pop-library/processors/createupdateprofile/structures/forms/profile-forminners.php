@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMINNER_EDITMEMBERSHIP', PoP_ServerUtils::get_template_definition('forminner-editmembership'));
-define ('GD_TEMPLATE_FORMINNER_MYCOMMUNITIES_UPDATE', PoP_ServerUtils::get_template_definition('forminner-mycommunities-update'));
+define ('GD_TEMPLATE_FORMINNER_EDITMEMBERSHIP', PoP_TemplateIDUtils::get_template_definition('forminner-editmembership'));
+define ('GD_TEMPLATE_FORMINNER_MYCOMMUNITIES_UPDATE', PoP_TemplateIDUtils::get_template_definition('forminner-mycommunities-update'));
 
 class GD_URE_Template_Processor_ProfileFormInners extends GD_Template_Processor_FormInnersBase {
 

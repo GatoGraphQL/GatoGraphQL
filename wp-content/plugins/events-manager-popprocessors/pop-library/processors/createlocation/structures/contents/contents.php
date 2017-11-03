@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_TRIGGERTYPEAHEADSELECT_LOCATION', PoP_ServerUtils::get_template_definition('triggertypeaheadselect-location'));
+define ('GD_TEMPLATE_TRIGGERTYPEAHEADSELECT_LOCATION', PoP_TemplateIDUtils::get_template_definition('triggertypeaheadselect-location'));
 
 class GD_Template_Processor_LocationContents extends GD_Template_Processor_ContentsBase {
 

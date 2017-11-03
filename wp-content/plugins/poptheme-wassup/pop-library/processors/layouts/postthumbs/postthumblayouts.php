@@ -5,22 +5,22 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_FAVICON', PoP_ServerUtils::get_template_definition('layout-postthumb-favicon'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE', PoP_ServerUtils::get_template_definition('layout-postthumb-originalfeaturedimage'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE', PoP_ServerUtils::get_template_definition('layout-postthumb-featuredimage'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-postthumb-featuredimage-volunteer'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_FAVICON', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-favicon'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-originalfeaturedimage'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-featuredimage'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-featuredimage-volunteer'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_XSMALL', PoP_ServerUtils::get_template_definition('layout-postthumb-xsmall'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDSMALL', PoP_ServerUtils::get_template_definition('layout-postthumb-croppedsmall'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM', PoP_ServerUtils::get_template_definition('layout-postthumb-croppedmedium'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDFEED', PoP_ServerUtils::get_template_definition('layout-postthumb-croppedfeed'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT', PoP_ServerUtils::get_template_definition('layout-postthumb-croppedsmall-edit'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-postthumb-croppedsmall-volunteer'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-postthumb-croppedmedium-volunteer'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-postthumb-croppedfeed-volunteer'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_XSMALL', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-xsmall'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDSMALL', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-croppedsmall'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-croppedmedium'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDFEED', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-croppedfeed'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-croppedsmall-edit'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-croppedsmall-volunteer'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-croppedmedium-volunteer'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-croppedfeed-volunteer'));
 
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED', PoP_ServerUtils::get_template_definition('layout-postthumb-linkselfcroppedfeed'));
-define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER', PoP_ServerUtils::get_template_definition('layout-postthumb-linkselfcroppedfeed-volunteer'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-linkselfcroppedfeed'));
+define ('GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER', PoP_TemplateIDUtils::get_template_definition('layout-postthumb-linkselfcroppedfeed-volunteer'));
 
 class GD_Custom_Template_Processor_PostThumbLayouts extends GD_Template_Processor_PostThumbLayoutsBase {
 

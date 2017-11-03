@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GETPOPDEMO_TEMPLATE_BLOCKGROUP_HOME', PoP_ServerUtils::get_template_definition('blockgroup-getpopdemo-home'));
+define ('GETPOPDEMO_TEMPLATE_BLOCKGROUP_HOME', PoP_TemplateIDUtils::get_template_definition('blockgroup-getpopdemo-home'));
 
 class GetPoPDemo_Template_Processor_CustomBlockGroups extends GD_Template_Processor_ListBlockGroupsBase {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_NOTIFICATIONS', PoP_ServerUtils::get_template_definition('messagefeedback-notifications'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_NOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('messagefeedback-notifications'));
 
 class GD_AAL_Template_Processor_CustomListMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

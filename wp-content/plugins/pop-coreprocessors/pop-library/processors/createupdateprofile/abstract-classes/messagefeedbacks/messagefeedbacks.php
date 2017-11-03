@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_CREATEPROFILE', PoP_ServerUtils::get_template_definition('messagefeedback-createprofile'));
-define ('GD_TEMPLATE_MESSAGEFEEDBACK_UPDATEPROFILE', PoP_ServerUtils::get_template_definition('messagefeedback-updateprofile'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_CREATEPROFILE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-createprofile'));
+define ('GD_TEMPLATE_MESSAGEFEEDBACK_UPDATEPROFILE', PoP_TemplateIDUtils::get_template_definition('messagefeedback-updateprofile'));
 
 class GD_Template_Processor_ProfileMessageFeedbacks extends GD_Template_Processor_MessageFeedbacksBase {
 

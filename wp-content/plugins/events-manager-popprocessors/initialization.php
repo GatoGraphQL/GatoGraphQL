@@ -6,7 +6,7 @@ class EM_PoPProcessors_Initialization {
 		load_plugin_textdomain('em-popprocessors', false, dirname(plugin_basename(__FILE__)).'/languages');
 
 		// Set the plugin namespace for the processors
-		PoP_ServerUtils::set_namespace('ar');
+		PoP_TemplateIDUtils::set_namespace('ar');
 
 		if (!is_admin()) {
 

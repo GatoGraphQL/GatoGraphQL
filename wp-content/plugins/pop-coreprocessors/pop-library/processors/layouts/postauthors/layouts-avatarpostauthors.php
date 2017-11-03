@@ -5,11 +5,11 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR', PoP_ServerUtils::get_template_definition('layoutpost-authoravatar'));
-define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR26', PoP_ServerUtils::get_template_definition('layoutpost-authoravatar26'));
-define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR60', PoP_ServerUtils::get_template_definition('layoutpost-authoravatar60'));
-define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR82', PoP_ServerUtils::get_template_definition('layoutpost-authoravatar82'));
-define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR120', PoP_ServerUtils::get_template_definition('layoutpost-authoravatar120'));
+define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR', PoP_TemplateIDUtils::get_template_definition('layoutpost-authoravatar'));
+define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR26', PoP_TemplateIDUtils::get_template_definition('layoutpost-authoravatar26'));
+define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR60', PoP_TemplateIDUtils::get_template_definition('layoutpost-authoravatar60'));
+define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR82', PoP_TemplateIDUtils::get_template_definition('layoutpost-authoravatar82'));
+define ('GD_TEMPLATE_LAYOUTPOST_AUTHORAVATAR120', PoP_TemplateIDUtils::get_template_definition('layoutpost-authoravatar120'));
 
 class GD_Template_Processor_PostAuthorAvatarLayouts extends GD_Template_Processor_PostAuthorAvatarLayoutsBase {
 

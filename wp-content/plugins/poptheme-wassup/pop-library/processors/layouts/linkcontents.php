@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_CONTENT_LINK', PoP_ServerUtils::get_template_definition('layout-content-link'));
+define ('GD_TEMPLATE_LAYOUT_CONTENT_LINK', PoP_TemplateIDUtils::get_template_definition('layout-content-link'));
 
 class GD_Template_Processor_LinkContentLayouts extends GD_Template_Processor_LinkContentLayoutsBase {
 

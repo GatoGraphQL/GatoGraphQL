@@ -5,10 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_EVENT_CREATE', PoP_ServerUtils::get_template_definition('action-event-create'));
-define ('GD_TEMPLATE_ACTION_EVENTLINK_CREATE', PoP_ServerUtils::get_template_definition('action-eventlink-create'));
-define ('GD_TEMPLATE_ACTION_EVENT_UPDATE', PoP_ServerUtils::get_template_definition('action-event-update'));
-define ('GD_TEMPLATE_ACTION_EVENTLINK_UPDATE', PoP_ServerUtils::get_template_definition('action-eventlink-update'));
+define ('GD_TEMPLATE_ACTION_EVENT_CREATE', PoP_TemplateIDUtils::get_template_definition('action-event-create'));
+define ('GD_TEMPLATE_ACTION_EVENTLINK_CREATE', PoP_TemplateIDUtils::get_template_definition('action-eventlink-create'));
+define ('GD_TEMPLATE_ACTION_EVENT_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-event-update'));
+define ('GD_TEMPLATE_ACTION_EVENTLINK_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-eventlink-update'));
 
 class GD_EM_Template_Processor_CreateUpdatePostActions extends GD_Template_Processor_ActionsBase {
 

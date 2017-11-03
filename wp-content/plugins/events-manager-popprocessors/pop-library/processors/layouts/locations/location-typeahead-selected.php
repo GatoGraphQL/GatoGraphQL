@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTLOCATION_TYPEAHEAD_SELECTED', PoP_ServerUtils::get_template_definition('em-layoutlocation-typeahead-selected'));
+define ('GD_TEMPLATE_LAYOUTLOCATION_TYPEAHEAD_SELECTED', PoP_TemplateIDUtils::get_template_definition('em-layoutlocation-typeahead-selected'));
 
 class GD_EM_Template_Processor_LocationTypeaheadsSelectedLayouts extends GD_EM_Template_Processor_LocationTypeaheadsSelectedLayoutsBase {
 

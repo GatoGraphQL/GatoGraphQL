@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-multipleuser-mapdetails'));
-define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_MAPDETAILS', PoP_ServerUtils::get_template_definition('layout-authormultipleuser-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_MULTIPLEUSER_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-multipleuser-mapdetails'));
+define ('GD_TEMPLATE_LAYOUT_AUTHORMULTIPLEUSER_MAPDETAILS', PoP_TemplateIDUtils::get_template_definition('layout-authormultipleuser-mapdetails'));
 
 class GD_EM_Template_Processor_MultipleUserLayouts extends GD_Template_Processor_MultipleUserLayoutsBase {
 

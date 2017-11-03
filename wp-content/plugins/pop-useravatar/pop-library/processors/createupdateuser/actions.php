@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_USERAVATAR_UPDATE', PoP_ServerUtils::get_template_definition('action-useravatar-update'));
+define ('GD_TEMPLATE_ACTION_USERAVATAR_UPDATE', PoP_TemplateIDUtils::get_template_definition('action-useravatar-update'));
 
 class PoP_UserAvatar_Template_Processor_UserActions extends GD_Template_Processor_ActionsBase {
 

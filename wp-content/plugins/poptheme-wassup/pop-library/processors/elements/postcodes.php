@@ -5,8 +5,8 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_POSTCODE_ADDCONTENTFAQ', PoP_ServerUtils::get_template_definition('postcode-addcontentfaq'));
-define ('GD_TEMPLATE_POSTCODE_ACCOUNTFAQ', PoP_ServerUtils::get_template_definition('postcode-accountfaq'));
+define ('GD_TEMPLATE_POSTCODE_ADDCONTENTFAQ', PoP_TemplateIDUtils::get_template_definition('postcode-addcontentfaq'));
+define ('GD_TEMPLATE_POSTCODE_ACCOUNTFAQ', PoP_TemplateIDUtils::get_template_definition('postcode-accountfaq'));
 
 class GD_Template_Processor_PostCodes extends GD_Template_Processor_PostCodesBase {
 

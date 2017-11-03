@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_VERTICALSIDEBAR_AUTHOR_GENERIC', PoP_ServerUtils::get_template_definition('vertical-sidebar-author-generic'));
+define ('GD_TEMPLATE_VERTICALSIDEBAR_AUTHOR_GENERIC', PoP_TemplateIDUtils::get_template_definition('vertical-sidebar-author-generic'));
 
 class GD_Template_Processor_CustomVerticalAuthorSidebars extends GD_Template_Processor_SidebarsBase {
 	

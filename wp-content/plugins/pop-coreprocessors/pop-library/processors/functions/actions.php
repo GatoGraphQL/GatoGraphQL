@@ -5,16 +5,16 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_ACTION_FOLLOWUSER', PoP_ServerUtils::get_template_definition('action-followuser'));
-define ('GD_TEMPLATE_ACTION_UNFOLLOWUSER', PoP_ServerUtils::get_template_definition('action-unfollowuser'));
-define ('GD_TEMPLATE_ACTION_RECOMMENDPOST', PoP_ServerUtils::get_template_definition('action-recommendpost'));
-define ('GD_TEMPLATE_ACTION_UNRECOMMENDPOST', PoP_ServerUtils::get_template_definition('action-unrecommendpost'));
-define ('GD_TEMPLATE_ACTION_SUBSCRIBETOTAG', PoP_ServerUtils::get_template_definition('action-subscribetotag'));
-define ('GD_TEMPLATE_ACTION_UNSUBSCRIBEFROMTAG', PoP_ServerUtils::get_template_definition('action-unsubscribefromtag'));
-define ('GD_TEMPLATE_ACTION_UPVOTEPOST', PoP_ServerUtils::get_template_definition('action-upvotepost'));
-define ('GD_TEMPLATE_ACTION_UNDOUPVOTEPOST', PoP_ServerUtils::get_template_definition('action-undoupvotepost'));
-define ('GD_TEMPLATE_ACTION_DOWNVOTEPOST', PoP_ServerUtils::get_template_definition('action-downvotepost'));
-define ('GD_TEMPLATE_ACTION_UNDODOWNVOTEPOST', PoP_ServerUtils::get_template_definition('action-undodownvotepost'));
+define ('GD_TEMPLATE_ACTION_FOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('action-followuser'));
+define ('GD_TEMPLATE_ACTION_UNFOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('action-unfollowuser'));
+define ('GD_TEMPLATE_ACTION_RECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('action-recommendpost'));
+define ('GD_TEMPLATE_ACTION_UNRECOMMENDPOST', PoP_TemplateIDUtils::get_template_definition('action-unrecommendpost'));
+define ('GD_TEMPLATE_ACTION_SUBSCRIBETOTAG', PoP_TemplateIDUtils::get_template_definition('action-subscribetotag'));
+define ('GD_TEMPLATE_ACTION_UNSUBSCRIBEFROMTAG', PoP_TemplateIDUtils::get_template_definition('action-unsubscribefromtag'));
+define ('GD_TEMPLATE_ACTION_UPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('action-upvotepost'));
+define ('GD_TEMPLATE_ACTION_UNDOUPVOTEPOST', PoP_TemplateIDUtils::get_template_definition('action-undoupvotepost'));
+define ('GD_TEMPLATE_ACTION_DOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('action-downvotepost'));
+define ('GD_TEMPLATE_ACTION_UNDODOWNVOTEPOST', PoP_TemplateIDUtils::get_template_definition('action-undodownvotepost'));
 
 class GD_Template_Processor_FunctionsActions extends GD_Template_Processor_ActionsBase {
 

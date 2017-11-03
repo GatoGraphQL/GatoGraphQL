@@ -5,49 +5,49 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS00', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts00'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS01', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts01'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS02', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts02'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS03', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts03'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS04', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts04'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS05', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts05'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS06', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts06'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS07', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts07'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS08', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts08'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS09', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts09'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS00', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts00'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS01', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts01'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS02', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts02'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS03', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts03'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS04', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts04'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS05', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts05'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS06', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts06'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS07', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts07'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS08', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts08'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS09', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts09'));
 
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS00', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts00'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS01', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts01'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS02', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts02'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS03', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts03'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS04', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts04'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS05', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts05'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS06', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts06'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS07', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts07'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS08', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts08'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS09', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts09'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS00', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts00'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS01', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts01'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS02', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts02'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS03', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts03'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS04', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts04'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS05', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts05'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS06', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts06'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS07', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts07'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS08', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts08'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS09', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts09'));
 
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS00_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts00-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS01_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts01-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS02_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts02-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS03_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts03-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS04_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts04-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS05_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts05-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS06_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts06-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS07_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts07-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS08_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts08-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS09_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categoryposts09-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS00_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts00-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS01_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts01-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS02_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts02-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS03_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts03-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS04_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts04-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS05_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts05-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS06_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts06-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS07_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts07-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS08_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts08-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYPOSTS09_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categoryposts09-content'));
 
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS00_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts00-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS01_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts01-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS02_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts02-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS03_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts03-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS04_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts04-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS05_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts05-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS06_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts06-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS07_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts07-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS08_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts08-content'));
-define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS09_CONTENT', PoP_ServerUtils::get_template_definition('carouselinner-categorywebposts09-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS00_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts00-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS01_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts01-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS02_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts02-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS03_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts03-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS04_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts04-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS05_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts05-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS06_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts06-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS07_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts07-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS08_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts08-content'));
+define ('GD_TEMPLATE_CAROUSELINNER_CATEGORYWEBPOSTS09_CONTENT', PoP_TemplateIDUtils::get_template_definition('carouselinner-categorywebposts09-content'));
 
 class CPP_Template_Processor_CarouselInners extends GD_Template_Processor_CarouselInnersBase {
 

@@ -5,13 +5,13 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONNAME', PoP_ServerUtils::get_template_definition('formcomponentgroup-location_name'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONADDRESS', PoP_ServerUtils::get_template_definition('formcomponentgroup-location_address'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONTOWN', PoP_ServerUtils::get_template_definition('formcomponentgroup-location_town'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONSTATE', PoP_ServerUtils::get_template_definition('formcomponentgroup-location_state'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONPOSTCODE', PoP_ServerUtils::get_template_definition('formcomponentgroup-location_postcode'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONREGION', PoP_ServerUtils::get_template_definition('formcomponentgroup-location_region'));
-define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONCOUNTRY', PoP_ServerUtils::get_template_definition('formcomponentgroup-location_country'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONNAME', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-location_name'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONADDRESS', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-location_address'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONTOWN', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-location_town'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONSTATE', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-location_state'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONPOSTCODE', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-location_postcode'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONREGION', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-location_region'));
+define ('GD_TEMPLATE_FORMCOMPONENTGROUP_EM_LOCATIONCOUNTRY', PoP_TemplateIDUtils::get_template_definition('formcomponentgroup-location_country'));
 
 class GD_EM_Template_Processor_CreateLocationFormGroups extends GD_Template_Processor_FormComponentGroupsBase {
 
