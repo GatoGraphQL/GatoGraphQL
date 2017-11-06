@@ -5,8 +5,6 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// define ('POP_HTMLATTRIBUTES_DEFER', "defer='defer'");
-
 class PoP_ResourceLoaderProcessor_Manager {
 
 	var $initialized, $processors, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $htmltag_attributes;

@@ -18,13 +18,6 @@ define ('POP_RESOURCELOADER_RESOURCELOADER', PoP_TemplateIDUtils::get_template_d
 define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG', PoP_TemplateIDUtils::get_template_definition('resourceloader-config'));
 define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-resources'));
 define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-initialresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-defaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-homedefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-pagedefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-singledefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-authordefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-tagdefaultresources'));
-// define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-defaultdeltaresources'));
 define ('POP_RESOURCELOADER_POPUTILS', PoP_TemplateIDUtils::get_template_definition('pop-utils'));
 define ('POP_RESOURCELOADER_UTILS', PoP_TemplateIDUtils::get_template_definition('utils'));
 
@@ -46,13 +39,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			POP_RESOURCELOADER_RESOURCELOADERCONFIG,
 			POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES,
 			POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES,
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES,
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES,
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES,
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES,
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES,
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES,
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES,
 			POP_RESOURCELOADER_POPUTILS,
 			POP_RESOURCELOADER_UTILS,
 		);
@@ -71,16 +57,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			POP_RESOURCELOADER_POPMANAGER => 'pop-manager',
 			POP_RESOURCELOADER_TOPLEVELJSON => 'topleveljson',
 			POP_RESOURCELOADER_RESOURCELOADER => 'resourceloader',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG => 'resourceloader-config',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES => 'resourceloader-config-resources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES => 'resourceloader-config-initialresources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES => 'resourceloader-config-defaultresources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES => 'resourceloader-config-homedefaultresources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES => 'resourceloader-config-pagedefaultresources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES => 'resourceloader-config-singledefaultresources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES => 'resourceloader-config-authordefaultresources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES => 'resourceloader-config-tagdefaultresources',
-			// POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES => 'resourceloader-config-defaultdeltaresources',
 			POP_RESOURCELOADER_POPUTILS => 'pop-utils',
 			POP_RESOURCELOADER_UTILS => 'utils',
 		);
@@ -98,13 +74,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES:
 				
 				// This script file is dynamically generated getting data from all over the website, so its version depend on the website version
 				return pop_version();
@@ -129,13 +98,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES:
 				
 				return false;
 		}
@@ -161,43 +123,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
 				global $pop_resourceloader_initialresources_configfile_generator;
 				return $pop_resourceloader_initialresources_configfile_generator->get_fileurl();
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES:
-
-			// 	global $pop_resourceloader_defaultresources_configfile_generator;
-			// 	return $pop_resourceloader_defaultresources_configfile_generator->get_fileurl();
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES:
-
-			// 	global $pop_resourceloader_homedefaultresources_configfile_generator;
-			// 	return $pop_resourceloader_homedefaultresources_configfile_generator->get_fileurl();
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES:
-
-			// 	global $pop_resourceloader_pagedefaultresources_configfile_generator;
-			// 	return $pop_resourceloader_pagedefaultresources_configfile_generator->get_fileurl();
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES:
-
-			// 	global $pop_resourceloader_singledefaultresources_configfile_generator;
-			// 	return $pop_resourceloader_singledefaultresources_configfile_generator->get_fileurl();
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES:
-
-			// 	global $pop_resourceloader_authordefaultresources_configfile_generator;
-			// 	return $pop_resourceloader_authordefaultresources_configfile_generator->get_fileurl();
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES:
-
-			// 	global $pop_resourceloader_tagdefaultresources_configfile_generator;
-			// 	return $pop_resourceloader_tagdefaultresources_configfile_generator->get_fileurl();
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES:
-
-			// 	// Watch out! We are adding #defer to add the 'defer' attribute to the script tag
-			// 	// Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
-			// 	global $pop_resourceloader_defaultdeltaresources_configfile_generator;
-			// 	return $pop_resourceloader_defaultdeltaresources_configfile_generator->get_fileurl();
 		}
 
 		return parent::get_file_url($resource);
@@ -209,44 +134,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
 
-				// return POP_HTMLATTRIBUTES_DEFER;
 				return "defer='defer'";
-			
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES:
-
-			// 	return "defer='defer'";
-
-			// // Page default is needed for the backgroundLoad loaded pages (eg: initial-frames/),
-			// // so then do not defer
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES:
-			// // case POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES:
-
-			// 	return "defer='defer'";
-
-			// // case POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES:
-			// // case POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES:
-			// // case POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES:
-			// // case POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES:
-			// // case POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES:
-
-			// // 	// Make them deferred if they are not the script needed for the current page
-			// // 	$vars = GD_TemplateManager_Utils::get_vars();
-			// // 	$hierarchy_resources = array(
-			// // 		'home' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES,
-			// // 		'page' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES,
-			// // 		'single' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES,
-			// // 		'author' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES,
-			// // 		'tag' => POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES,
-			// // 	);
-			// // 	$hierarchy = $vars['global-state']['hierarchy'];
-			// // 	if ($hierarchy_resources[$hierarchy] != $resource) {
-
-			// // 		return "defer='defer'";
-			// // 	}
-			// // 	break;
 
 		}
 
@@ -372,13 +260,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_HOMEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_PAGEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_SINGLEDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_AUTHORDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_TAGDEFAULTRESOURCES:
-			// case POP_RESOURCELOADER_RESOURCELOADERCONFIG_DEFAULTDELTARESOURCES:
 
 				$dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG;
 				break;
@@ -386,312 +267,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
 		return $dependencies;
 	}
-	
-	// function get_external_method_calls($resource) {
-	
-	// 	switch ($resource) {
-
-	// 		case POP_RESOURCELOADER_HELPERSHANDLEBARS:
-
-	// 			return array(
-	// 				'destroyUrl' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getDestroyUrl',
-	// 					),
-	// 				),
-	// 				'ifget' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'withget' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'expandJSKeys',
-	// 					),
-	// 				),
-	// 				'generateId' => array(
-	// 					POP_RESOURCELOADER_JSRUNTIMEMANAGER => array(
-	// 						'setBlockURL',
-	// 						'addTemplateId',
-	// 					),
-	// 				),
-	// 				'lastGeneratedId' => array(
-	// 					POP_RESOURCELOADER_JSRUNTIMEMANAGER => array(
-	// 						'getLastGeneratedId',
-	// 					),
-	// 				),
-	// 				'applyLightTemplate' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getHtml',
-	// 					),
-	// 				),
-	// 				'enterModule' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getRuntimeConfiguration',
-	// 						'expandJSKeys',
-	// 						'getItemObject',
-	// 						'overrideFromItemObject',
-	// 						'replaceFromItemObject',
-	// 						'getHtml',
-	// 					),
-	// 				),
-	// 				'withLayout' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getItemObject',
-	// 						'expandJSKeys',
-	// 					),
-	// 				),
-	// 				'withBlock' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'expandJSKeys',
-	// 					),
-	// 				),
-	// 				'withModule' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'expandJSKeys',
-	// 					),
-	// 				),
-	// 				'withSublevel' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'expandJSKeys',
-	// 					),
-	// 				),
-	// 				'withItemObject' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getItemObject',
-	// 					),
-	// 				),
-	// 			);
-
-	// 		case POP_RESOURCELOADER_HISTORY:
-
-	// 			return array(
-	// 				'documentInitialized' => array(
-	// 					POP_RESOURCELOADER_INTERCEPTORS => array(
-	// 						'getInterceptors',
-	// 						'intercept',
-	// 					),
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'fetch',
-	// 					),
-	// 				),
-	// 				'getApplicationURL' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'addPushURLAtts' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getTopLevelFeedback',
-	// 					),
-	// 				),
-	// 				'removePushURLAtts' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getTopLevelFeedback',
-	// 					),
-	// 				),
-	// 				'pushState' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 			);
-
-	// 		case POP_RESOURCELOADER_INTERCEPTORS:
-
-	// 			return array(
-	// 				'getTarget' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getFrameTarget',
-	// 					),
-	// 				),
-	// 				'intercept' => array(
-	// 					POP_RESOURCELOADER_HISTORY => array(
-	// 						'pushState',
-	// 					),
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'updateTitle',
-	// 					),
-	// 				),
-	// 			);
-
-	// 		case POP_RESOURCELOADER_JSRUNTIMEMANAGER:
-
-	// 			return array(
-	// 				'setBlockURL' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getBlockTopLevelURL',
-	// 					),
-	// 				),
-	// 				'addTemplateId' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getUniqueId',
-	// 					),
-	// 				),
-	// 				'getBlockSessionIds' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getBlockTopLevelURL',
-	// 					),
-	// 				),
-	// 				'getTargetSessionIds' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getSettingsId',
-	// 					),
-	// 				),
-	// 				'deletePageSectionLastSessionIds' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getSettingsId',
-	// 					),
-	// 				),
-	// 				'deleteBlockLastSessionIds' => array(
-	// 					POP_RESOURCELOADER_POPMANAGER => array(
-	// 						'getSettingsId',
-	// 						'getBlockTopLevelURL',
-	// 					),
-	// 				),
-	// 			);
-				
-	// 		case POP_RESOURCELOADER_POPMANAGER:
-
-	// 			return array(
-	// 				'init' => array(
-	// 					POP_RESOURCELOADER_PAGESECTIONMANAGER => array(
-	// 						'getTopLevelSettingsId',
-	// 					),
-	// 					POP_RESOURCELOADER_HISTORY => array(
-	// 						'replaceState',
-	// 					),
-	// 				),
-	// 				'expandJSKeys' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'addPageSectionIds' => array(
-	// 					POP_RESOURCELOADER_JSRUNTIMEMANAGER => array(
-	// 						'addPageSectionId',
-	// 					),
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'initDocument' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'initDomain' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'documentInitialized' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'pageSectionFetchSuccess' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'blockFetchSuccess' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'initPageSection' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'pageSectionInitialized' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'pageSectionNewDOMsInitialized' => array(
-	// 					POP_RESOURCELOADER_PAGESECTIONMANAGER => array(
-	// 						'getOpenMode',
-	// 						'open',
-	// 					),
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'initPageSectionBranches' => array(
-	// 					POP_RESOURCELOADER_JSRUNTIMEMANAGER => array(
-	// 						'deletePageSectionLastSessionIds',
-	// 					),
-	// 				),
-	// 				'triggerDestroyTarget' => array(
-	// 					POP_RESOURCELOADER_INTERCEPTORS => array(
-	// 						'intercept',
-	// 					),
-	// 				),
-	// 				'destroyTarget' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'destroyPageSectionPage' => array(
-	// 					POP_RESOURCELOADER_PAGESECTIONMANAGER => array(
-	// 						'close',
-	// 					),
-	// 				),
-	// 				'pageSectionRendered' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'runScriptsBefore' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 				'initBlock' => array(
-	// 					POP_RESOURCELOADER_JSRUNTIMEMANAGER => array(
-	// 						'setBlockURL',
-	// 					),
-	// 				),
-	// 				'initializeBlock' => array(
-	// 					POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
-	// 						'execute',
-	// 					),
-	// 				),
-	// 			);
-	// 	}
-
-	// 	return parent::get_external_method_calls($resource);
-	// }
-	
-	// function get_public_methods($resource) {
-
-	// 	switch ($resource) {
-
-	// 		case POP_RESOURCELOADER_HISTORY:
-
-	// 			return array(
-	// 				'documentInitialized',
-	// 			);
-				
-	// 		case POP_RESOURCELOADER_INTERCEPTORS:
-
-	// 			return array(
-	// 				'destroyTarget', 
-	// 				'pageSectionNewDOMsInitialized',
-	// 			);
-				
-	// 		case POP_RESOURCELOADER_PAGESECTIONMANAGER:
-
-	// 			return array(
-	// 				'isHidden', 
-	// 				'offcanvasToggle',
-	// 			);
-	// 	}
-	
-	// 	return parent::get_public_methods($resource);
-	// }
 }
 
 /**---------------------------------------------------------------------------------------------------------------

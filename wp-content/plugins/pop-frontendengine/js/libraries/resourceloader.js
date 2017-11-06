@@ -274,6 +274,10 @@ popResourceLoader = {
 		// The resources are placed under the hierarchy key in object config.resources.js
 		var jsResourcesDB = config.resources.js[hierarchy];
 
+		// // If we are requesting an external URL, and the config for that external domain is still not loaded, then jsResourcedDB will be null
+		// // Eg: when loading: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F
+		// if (jsResourcesDB) {
+
 		// single and page are not flat, but their resources configuration comes under the path
 		if (hierarchy == 'single') {
 
@@ -287,6 +291,7 @@ popResourceLoader = {
 
 			jsResourcesDB = jsResourcesDB[path];
 		}
+		// }
 
 		// Allow Public Post Preview to hook in when previewing a post, to change the DB from home to the single post
 		var args = {
