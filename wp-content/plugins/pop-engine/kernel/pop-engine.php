@@ -91,7 +91,7 @@ class PoP_Engine {
 				POP_CONSTANT_RAND,
 				POP_CONSTANT_TIME,
 			);
-			$commoncode = str_replace($differentiators, '', $this->encoded_json/*$this->json['encoded-json']*/);
+			$commoncode = str_replace($differentiators, '', json_encode($this->resultsObject['json'])/*$this->json['encoded-json']*/);
 
 			// Also replace all those tags with content that, even if it's different, should not alter the output
 			// Eg: comments-count. Because adding a comment does not delete the cache, then the comments-count is allowed
