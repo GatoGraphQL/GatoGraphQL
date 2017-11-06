@@ -16,13 +16,20 @@ popGADWP = {
 	// 		ga('send', 'pageview');
 	// 	}
 	// },
-	stateURLPushed : function(args) {
+	documentInitialized : function(args) {
 
 		var t = this;
-		// Provide the path: remove the domain from the URL to track
-		// Documentation: https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
-		ga('set', 'page', args.url.substr(M.HOME_DOMAIN.length));
-		ga('send', 'pageview');
+
+		// Allow Google Analytics to register the click
+		$(document).on('urlfetched', function(e, url, options) {
+
+			// Provide the path: remove the domain from the URL to track
+			// Documentation: https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
+			if (!options.silentDocument) {
+				ga('set', 'page', url.substr(M.HOME_DOMAIN.length));
+				ga('send', 'pageview');
+			}
+		});
 	},
 };
 })(jQuery);
@@ -31,4 +38,4 @@ popGADWP = {
 // Initialize
 //-------------------------------------------------
 // popJSLibraryManager.register(popGADWP, ['pageSectionFetchSuccess']);
-popJSLibraryManager.register(popGADWP, ['stateURLPushed']);
+popJSLibraryManager.register(popGADWP, ['documentInitialized']);

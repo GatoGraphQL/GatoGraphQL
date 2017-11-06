@@ -114,8 +114,8 @@ popBrowserHistory = {
 		// }
 		history.pushState({url: url}, '', url);
 
-		// Allow Google Analytics to register the click
-		popJSLibraryManager.execute('stateURLPushed', args);
+		// // Allow Google Analytics to register the click
+		// popJSLibraryManager.execute('stateURLPushed', args);
 
 		t.loaded = true;
 	},	

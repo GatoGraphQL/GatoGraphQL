@@ -2135,14 +2135,14 @@ popManager = {
 		t.scrollTop(error);
 	},
 
-	triggerURLFetched : function(url) {
+	triggerURLFetched : function(url, options) {
 
 		var t = this;
 
 		// Signal that this URL was fetched. Eg: btnSetLoading
 		// If not escaped, the catch doesn't work
 		$(document).triggerHandler('urlfetched:'+escape(url));
-		$(document).triggerHandler('urlfetched', [url]);
+		$(document).triggerHandler('urlfetched', [url, options]);
 		$(document).triggerHandler('urlfetchcompleted:'+escape(url));
 	},
 	triggerURLFetchFailed : function(url) {
@@ -2222,7 +2222,7 @@ popManager = {
 			try {
 
 				t.processPageSection(domain, pageSection, response, options);
-				t.triggerURLFetched(url);
+				t.triggerURLFetched(url, options);
 			}
 			catch(err) {
 				
