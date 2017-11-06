@@ -3489,6 +3489,14 @@ form.pop-filterform-instantaneous {
 	text-align: left;
 }
 
+.daterangepicker.dropdown-menu {
+    background-color: #dcddde;
+}
+.daterangepicker.dropdown-menu.opensleft:after,
+.daterangepicker.dropdown-menu.opensleft:before {
+	left: auto;
+}
+
 /* Hide the conclusion sidebar for draft posts */
 .block-single-content.draft .conclusion.horizontal.sidebar {
   display: none;
