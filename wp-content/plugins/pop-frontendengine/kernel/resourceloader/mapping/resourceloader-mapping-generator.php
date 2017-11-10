@@ -25,7 +25,7 @@ class PoP_Frontend_ResourceLoaderMappingGenerator extends PoP_Engine_FileGenerat
 		$fileContents = '';
 		foreach ($resources as $resource) {
 
-			$file = $pop_resourceloaderprocessor_manager->get_file_path($resource);
+			$file = $pop_resourceloaderprocessor_manager->get_asset_path($resource);
 			$jsObjects = array_merge(
 				$jsObjects,
 				$pop_resourceloaderprocessor_manager->get_jsobjects($resource)

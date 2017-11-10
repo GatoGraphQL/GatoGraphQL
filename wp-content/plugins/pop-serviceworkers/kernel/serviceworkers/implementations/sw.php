@@ -36,6 +36,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
 
         // Add a string before the version, since starting with a number makes trouble
         $configuration['$version'] = 'PoP-'.pop_version();
+        $configuration['$homeDomain'] = get_site_url();
         // $configuration['$offlineImage'] = $this->get_offline_image();
         // $configuration['$offlinePages'] = $this->get_offline_pages();
         $configuration['$appshellPages'] = $this->get_appshell_pages();
@@ -46,7 +47,8 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['$appshellFromServerParams'] = array(
             GD_URLPARAM_THEMESTYLE,
             GD_URLPARAM_FORMAT, // Initially, this is a proxy for GD_URLPARAM_SETTINGSFORMAT
-            GD_URLPARAM_MANGLED,
+            // Comment Leo 09/11/2017: removed param "mangled" because it can't be used anymore on "loading-frame", since the website depends on configuration generated through /generate-theme/, which depends on the value of the template-definition
+            // GD_URLPARAM_MANGLED,
         );
         $configuration['$localesByURL'] = $this->get_locales_byurl();
         $configuration['$defaultLocale'] = $this->get_default_locale();

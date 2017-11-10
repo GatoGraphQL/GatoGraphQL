@@ -21,17 +21,36 @@ class PoP_CDNCore_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 	}
 	
 	function get_filename($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CDNCONFIG:
+
+				global $pop_cdncore_configfile_generator;
+				return $pop_cdncore_configfile_generator->get_filename();
+		}
 	
 		$filenames = array(
 			POP_RESOURCELOADER_CDN => 'cdn',
 			POP_RESOURCELOADER_CDNTHUMBPRINTS => 'cdn-thumbprints',
-			POP_RESOURCELOADER_CDNCONFIG => 'cdn-config'
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
 		}
 
 		return parent::get_filename($resource);
+	}
+	
+	function get_suffix($resource) {
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CDNCONFIG:
+				
+				// This script file is dynamically generated getting data from all over the website, so its version depend on the website version
+				return '';
+		}
+		return parent::get_suffix($resource);
 	}
 	
 	function get_version($resource) {
@@ -48,8 +67,29 @@ class PoP_CDNCore_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 	}
 	
 	function get_dir($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CDNCONFIG:
+
+				global $pop_cdncore_configfile_generator;
+				return $pop_cdncore_configfile_generator->get_dir();
+		}
 	
-		return POP_CDNCORE_DIR.'/js/libraries';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return POP_CDNCORE_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CDNCONFIG:
+
+				return parent::get_asset_path($resource);
+		}
+	
+		return POP_CDNCORE_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 		
 	function extract_mapping($resource) {
@@ -113,10 +153,18 @@ class PoP_CDNCore_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
 			case POP_RESOURCELOADER_CDN:
 
-				// Comment Leo: Fix this!!!
-				$dependencies[] = POP_RESOURCELOADER_CDNTHUMBPRINTS;
-				// $dependencies[] = POP_RESOURCELOADER_POPUTILS;
-				$dependencies[] = POP_RESOURCELOADER_CORECDNHOOKS;
+				// All templates depend on the handlebars runtime. Allow plugins to add their own dependencies
+				if ($cdn_dependencies = apply_filters(
+					'PoP_CDNCore_ResourceLoaderProcessor:dependencies',
+					array(
+						POP_RESOURCELOADER_CDNTHUMBPRINTS,
+					)
+				)) {
+					$dependencies = array_merge(
+						$dependencies,
+						$cdn_dependencies
+					);
+				}
 				break;
 		}
 

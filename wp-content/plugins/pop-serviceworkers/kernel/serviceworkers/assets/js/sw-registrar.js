@@ -9,6 +9,10 @@
   if ('serviceWorker' in navigator) {
     // Wait until the page is loaded, to register the SW, to improve user experience (source: https://developers.google.com/web/fundamentals/primers/service-workers/registration)
     window.addEventListener('load', function() {
+
+      if (!M.USE_SW) {
+        return;
+      }
       var enabledSw = $enabledSw;
       enabledSw.forEach(function(entry) {
         var scope = entry.scope;

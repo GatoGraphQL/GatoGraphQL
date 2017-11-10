@@ -35,7 +35,13 @@ class PPP_PoP_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 	
 	function get_dir($resource) {
 
-		return PPP_POP_DIR.'/js/libraries';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return PPP_POP_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+
+		return PPP_POP_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {

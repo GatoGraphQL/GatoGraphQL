@@ -51,12 +51,10 @@ function gd_body_class_locale($body_classes) {
 
 
 // Add locale to fileupload-userphoto
-add_filter('gd_fileupload-userphoto_locale', 'gd_fileupload_userphoto_locale_impl');
-function gd_fileupload_userphoto_locale_impl($locale_path) {
+add_filter('gd_fileupload-userphoto_locale:filename', 'gd_fileupload_userphoto_locale_filename');
+function gd_fileupload_userphoto_locale_filename($filename) {
 
-	$locale = '-' . qtranxf_getLanguage();
-	$locale_path = str_replace('/locale.js', '/locale'.$locale.'.js', $locale_path);
-	return $locale_path;
+	return 'locale-'.qtranxf_getLanguage().'.js';
 }
 
 /**---------------------------------------------------------------------------------------------------------------

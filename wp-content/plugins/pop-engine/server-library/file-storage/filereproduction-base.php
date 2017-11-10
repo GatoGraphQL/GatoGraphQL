@@ -23,6 +23,11 @@ class PoP_Engine_FileReproductionBase {
         return array();
     }
 
+    public function is_json_replacement() {
+
+        return true;
+    }
+
     public function get_jsonencode_options() {
         
         // Documentation: https://secure.php.net/manual/en/function.json-encode.php

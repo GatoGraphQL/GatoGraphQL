@@ -94,10 +94,11 @@ class GD_TemplateManager_Utils {
 
 	public static function get_current_url() {
 
+		// Comment Leo 09/11/2017: removed param "mangled" because it can't be used anymore on "loading-frame", since the website depends on configuration generated through /generate-theme/, which depends on the value of the template-definition
 		// Strip the Target and Output off it, users don't need to see those
 		$remove_params = apply_filters(
 			'GD_TemplateManager_Utils:current_url:remove_params',
-			array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_VERSION, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE, GD_URLPARAM_MANGLED)
+			array(GD_URLPARAM_SETTINGSFORMAT, GD_URLPARAM_VERSION, GD_URLPARAM_THEME, GD_URLPARAM_THEMEMODE, GD_URLPARAM_THEMESTYLE, GD_URLPARAM_TARGET, GD_URLPARAM_MODULE, GD_URLPARAM_OUTPUT, GD_URLPARAM_DATASTRUCTURE/*, GD_URLPARAM_MANGLED*/)
 		);
 		$url = remove_query_arg($remove_params, full_url());
 
@@ -372,16 +373,16 @@ class GD_TemplateManager_Utils {
 		return $gd_theme_manager->get_theme();
 	}
 
-	private static function is_loading_frame($fetching_json, $target) {
+	// private static function is_loading_frame($fetching_json, $target) {
 
-		// Load the frame when not doing JSON (first time loading website) or when loading the settings and there's no specific target defined
-		return !$fetching_json || !$target;
-	}
+	// 	// Load the frame when not doing JSON (first time loading website) or when loading the settings and there's no specific target defined
+	// 	return !$fetching_json || !$target;
+	// }
 
 	public static function loading_frame() {
 
 		$vars = self::get_vars();
-		return self::is_loading_frame($vars['fetching-json'], $vars['target']);
+		return PoP_ServerUtils::is_loading_frame($vars['fetching-json'], $vars['target']);
 	}
 
 	public static function get_vars() {
@@ -393,13 +394,16 @@ class GD_TemplateManager_Utils {
 		global $gd_theme_manager;
 
 		$output = $_REQUEST[GD_URLPARAM_OUTPUT];
-		$target = $_REQUEST[GD_URLPARAM_TARGET];
 		$module = $_REQUEST[GD_URLPARAM_MODULE];
 		$datastructure = $_REQUEST[GD_URLPARAM_DATASTRUCTURE];
-		$mangled = $_REQUEST[GD_URLPARAM_MANGLED];
+		// Comment Leo 09/11/2017: the "not-mangled" attribute can only be used when doing "fetching-json"
+		// When doing "loading-frame" it doesn't work, since the application already uses the configuration save in /generate-theme/ stage
+		// $mangled = $_REQUEST[GD_URLPARAM_MANGLED];
+		$mangled = PoP_ServerUtils::is_mangled() ? '' : GD_URLPARAM_MANGLED_NONE;
 		// $mode = $_REQUEST[GD_URLPARAM_MODE];
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
+		$config = $_REQUEST[POP_URLPARAM_CONFIG];
 		// $domain = $_REQUEST[POP_URLPARAM_DOMAIN];
 
 		// Target/Module default values (for either empty, or if the user is playing around with the url)
@@ -411,17 +415,7 @@ class GD_TemplateManager_Utils {
 		if (!in_array($module, $modules)) {
 			$module = GD_URLPARAM_MODULE_SETTINGSDATA;
 		}
-		$targets = apply_filters(
-			'GD_TemplateManager_Utils:targets',
-			array(
-				GD_URLPARAM_TARGET_MAIN,
-			)
-		);
-		// We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
-		// (ie initial load) and when target is provided (ie loading pageSection)
-		if (!$target || ($target && !in_array($target, $targets))) {
-			$target = apply_filters('GD_TemplateManager_Utils:default_target', GD_URLPARAM_TARGET_MAIN);
-		}
+		$target = PoP_ServerUtils::get_request_target();
 		
 		$fetching_json = ($output == GD_URLPARAM_OUTPUT_JSON);
 		$fetching_json_settingsdata = ($fetching_json && $module == GD_URLPARAM_MODULE_SETTINGSDATA);
@@ -430,7 +424,7 @@ class GD_TemplateManager_Utils {
 
 		// Format: if not set, then use the default one: "settings-format" can be defined at the settings, and persists as the default option
 		// Use 'format' the first time to set the 'settingsformat' value. So if "loading_frame()" is true, take the value from 'format'
-		if (self::is_loading_frame($fetching_json, $target)) {
+		if (PoP_ServerUtils::is_loading_frame($fetching_json, $target)) {
 			$settingsformat = $_REQUEST[GD_URLPARAM_FORMAT];
 		}
 		else {
@@ -447,6 +441,7 @@ class GD_TemplateManager_Utils {
 			'settingsformat' => $settingsformat,
 			'tab' => $tab,
 			'action' => $action,
+			'config' => $config,
 			// 'domain' => $domain,
 			'theme' => $gd_theme_manager->get_theme() ? $gd_theme_manager->get_theme()->get_name() : '',
 			'thememode' => $gd_theme_manager->get_thememode() ? $gd_theme_manager->get_thememode()->get_name() : '',

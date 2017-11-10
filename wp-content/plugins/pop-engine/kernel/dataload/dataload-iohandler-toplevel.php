@@ -56,11 +56,12 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 			if ($format = $vars[GD_URLPARAM_FORMAT]) {
 				$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_SETTINGSFORMAT] = $format;
 			}
-			// if ($datastructure = $vars[GD_URLPARAM_DATASTRUCTURE]) {
-			// 	$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_DATASTRUCTURE] = $datastructure;
+			// Comment Leo 09/11/2017: removed param "mangled" because it can't be used anymore on "loading-frame", since the website depends on configuration generated through /generate-theme/, which depends on the value of the template-definition
+			// if ($mangled = $vars[GD_URLPARAM_MANGLED]) {
+			// 	$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_MANGLED] = $mangled;
 			// }
-			if ($mangled = $vars[GD_URLPARAM_MANGLED]) {
-				$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_MANGLED] = $mangled;
+			if ($config = $vars[POP_URLPARAM_CONFIG]) {
+				$ret[GD_DATALOAD_PARAMS][POP_URLPARAM_CONFIG] = $config;
 			}
 
 			// Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)

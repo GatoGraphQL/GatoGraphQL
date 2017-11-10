@@ -116,6 +116,11 @@ class EM_PoPProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateResou
 		return EM_POPPROCESSORS_URI.'/js/dist/templates';
 	}
 	
+	function get_dir($resource) {
+	
+		return EM_POPPROCESSORS_DIR.'/js/dist/templates';
+	}
+	
 	function get_globalscope_method_calls($resource) {
 
 		switch ($resource) {

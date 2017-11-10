@@ -198,7 +198,8 @@ class PoPFrontend_Initialization {
 			'VERSION' => pop_version(),
 			'LOCALE' => $locale,
 			'API_URLPARAMS' => $api_urlparams,
-			'COMPACT_JS_KEYS' => PoP_ServerUtils::compact_js_keys(),
+			'USE_SW' => (PoP_Frontend_ServerUtils::use_serviceworkers() ? true : ''),
+			'COMPACT_JS_KEYS' => (PoP_ServerUtils::compact_js_keys() ? true : ''),
 			'USELOCALSTORAGE' => (PoP_Frontend_ServerUtils::use_local_storage() ? true : ''),
 			'USESERVERSIDERENDERING' => (PoP_Frontend_ServerUtils::use_serverside_rendering() ? true : ''),
 			// This URL is needed to retrieve the user data, if the user is logged in
@@ -315,7 +316,7 @@ class PoPFrontend_Initialization {
 			
 			// Comment Leo 07/10/2017: it makes no sense to send the bundle(group) ids, because these ids
 			// are different to the ones in the generated files
-			// Unless they are taken from the pop-cache! (Which were saved when running the creation process)
+			// Unless they are taken from the pop-generatecache! (Which were saved when running the generate process)
 			// Only then can use
 			global $pop_resourceloader_abbreviationsstorage_manager;
 	        if ($pop_resourceloader_abbreviationsstorage_manager->has_cached_abbreviations()) {

@@ -35,7 +35,13 @@ class WSL_PoPProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProces
 	
 	function get_dir($resource) {
 
-		return WSL_POPPROCESSORS_DIR.'/js/libraries';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return WSL_POPPROCESSORS_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+
+		return WSL_POPPROCESSORS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {

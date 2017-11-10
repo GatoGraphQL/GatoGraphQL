@@ -40,6 +40,11 @@ class PoPTheme_Wassup_URE_TemplateResourceLoaderProcessor extends PoP_TemplateRe
 	
 		return POPTHEME_WASSUP_URI.'/js/dist/templates';
 	}
+	
+	function get_dir($resource) {
+	
+		return POPTHEME_WASSUP_DIR.'/js/dist/templates';
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

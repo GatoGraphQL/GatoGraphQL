@@ -63,14 +63,27 @@ class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcess
 	
 	function get_dir($resource) {
 
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
 		switch ($resource) {
 
 			case POP_RESOURCELOADER_FULLCALENDAR:
 				
-				return EM_POPPROCESSORS_DIR.'/js/libraries/3rdparties';
+				return EM_POPPROCESSORS_DIR.'/js/'.$subpath.'libraries/3rdparties';
 		}
 	
-		return EM_POPPROCESSORS_DIR.'/js/libraries';
+		return EM_POPPROCESSORS_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_FULLCALENDAR:
+				
+				return EM_POPPROCESSORS_DIR.'/js/libraries/3rdparties/'.$this->get_filename($resource).'.js';
+		}
+
+		return EM_POPPROCESSORS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {

@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('external-bootstrap'));
 
-class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -26,6 +26,23 @@ class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_Resour
 		}
 
 		return parent::get_filename($resource);
+	}
+	
+	function get_dir($resource) {
+	
+		return POP_BOOTSTRAPPROCESSORS_DIR.'/js/includes/cdn';
+	}
+	
+	function get_asset_path($resource) {
+	
+		$filenames = array(
+			POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP => 'bootstrap.3.3.7',
+		);
+		if ($filename = $filenames[$resource]) {
+			return $this->get_dir($resource).'/'.$filename.$this->get_suffix($resource);
+		}
+
+		return parent::get_asset_path($resource);
 	}
 	
 	function get_suffix($resource) {

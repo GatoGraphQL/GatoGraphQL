@@ -35,7 +35,13 @@ class PoP_CDNCore_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoa
 	
 	function get_dir($resource) {
 	
-		return POP_CDNCORE_DIR.'/js/libraries/plugins/pop-coreprocessors';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return POP_CDNCORE_DIR.'/js/'.$subpath.'libraries/plugins/pop-coreprocessors';
+	}
+	
+	function get_asset_path($resource) {
+	
+		return POP_CDNCORE_DIR.'/js/libraries/plugins/pop-coreprocessors/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {

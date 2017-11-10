@@ -37,8 +37,41 @@ class PoP_ServiceWorkers_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 	}
 	
 	function get_dir($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_SWREGISTRAR:
+
+				global $pop_serviceworkers_manager;
+				return $pop_serviceworkers_manager->get_dir();
+		}
 	
-		return POP_SERVICEWORKERS_DIR.'/js/libraries';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return POP_SERVICEWORKERS_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_SWREGISTRAR:
+
+				return parent::get_asset_path($resource);
+		}
+
+		return POP_SERVICEWORKERS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
+	}
+	
+	function get_suffix($resource) {
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_SWREGISTRAR:
+				
+				// This script file is dynamically generated getting data from all over the website, so its version depend on the website version
+				return '.js';
+		}
+		return parent::get_suffix($resource);
 	}
 		
 	function extract_mapping($resource) {

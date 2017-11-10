@@ -43,6 +43,11 @@ class PoP_AAL_Processors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
 	
 		return AAL_POPPROCESSORS_URI.'/js/dist/templates';
 	}
+	
+	function get_dir($resource) {
+	
+		return AAL_POPPROCESSORS_DIR.'/js/dist/templates';
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

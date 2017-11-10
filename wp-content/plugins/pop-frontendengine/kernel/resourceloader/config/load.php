@@ -10,11 +10,9 @@ require_once 'filegenerator-config-resources.php';
 require_once 'filegenerator-config-addresources-base.php';
 require_once 'filegenerator-config-resources-initial.php';
 require_once 'filegenerator-config-resources-hierarchyformat-combinations.php';
-// require_once 'filegenerator-config-resources-default.php';
-// require_once 'filegenerator-config-resources-homedefault.php';
-// require_once 'filegenerator-config-resources-pagedefault.php';
-// require_once 'filegenerator-config-resources-singledefault.php';
-// require_once 'filegenerator-config-resources-authordefault.php';
-// require_once 'filegenerator-config-resources-tagdefault.php';
-// require_once 'filegenerator-config-resources-defaultdelta.php';
+
+require_once 'bundlefile-filegenerator-base.php';
+require_once 'bundlegroup-filegenerator.php';
+require_once 'bundle-filegenerator.php';
+
 require_once 'implementations/load.php';

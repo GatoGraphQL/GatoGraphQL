@@ -8,7 +8,7 @@
 define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPE', PoP_TemplateIDUtils::get_template_definition('external-photoswipe'));
 define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPESKIN', PoP_TemplateIDUtils::get_template_definition('external-photoswipe-skin'));
 
-class PhotoSwipe_PoP_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PhotoSwipe_PoP_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -29,6 +29,11 @@ class PhotoSwipe_PoP_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderP
 		}
 
 		return parent::get_filename($resource);
+	}
+	
+	function get_dir($resource) {
+	
+		return PHOTOSWIPEPOP_DIR.'/js/includes/cdn/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION;
 	}
 	
 	function get_suffix($resource) {

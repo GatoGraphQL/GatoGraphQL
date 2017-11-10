@@ -11,7 +11,9 @@ class PoP_ResourceLoader_AbbreviationsStorageFileGenerator extends PoP_Engine_Fi
 
 	function get_filename() {
 
-		return 'resourceloader-bundle-mapping.json';
+		// We must create different mapping files depending on if we're adding the CDN resources inside the bundles or not
+		$type = PoP_Frontend_ServerUtils::bundle_external_files() ? 'global' : 'local';
+		return 'resourceloader-bundle-mapping-'.$type.'.json';
 	}
 
 	public function save($bundle_ids, $bundlegroup_ids, $key_ids) {

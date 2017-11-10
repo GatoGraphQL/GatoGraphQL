@@ -38,7 +38,13 @@ class PoP_BootstrapProcessors_ResourceLoaderProcessor extends PoP_ResourceLoader
 	
 	function get_dir($resource) {
 	
-		return POP_BOOTSTRAPPROCESSORS_DIR.'/js/libraries';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return POP_BOOTSTRAPPROCESSORS_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+	
+		return POP_BOOTSTRAPPROCESSORS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {

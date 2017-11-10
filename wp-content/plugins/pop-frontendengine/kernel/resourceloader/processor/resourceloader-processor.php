@@ -25,8 +25,13 @@ class PoP_ResourceLoaderProcessor {
 		
 	function extract_mapping($resource) {
 	
-		// By default, extract the mapping if its directory has been defined
-		return ($this->get_dir($resource) != '');
+		return true;
+	}
+
+	function can_bundle($resource) {
+	
+		// Can add the contents of the resource on the bundle/bundlegroup generated files?
+		return true;
 	}
 	
 	function get_version($resource) {
@@ -68,6 +73,15 @@ class PoP_ResourceLoaderProcessor {
 	
 		return $this->get_dir($resource).'/'.$this->get_filename_ext($resource);
 	}
+	
+	function get_asset_path($resource) {
+	
+		// This function is needed to obtain the contents of the file from the local disk, to produce the bundle/bundlegroup files
+		// By default, it's just the file path. But for external resources (eg: from CDNs) they may need to override the default value
+		// Also, it allows to create 'resourceloader-mapping.json' always from the original file, and not from its minified version
+		// (if constant POP_SERVER_USEMINIFIEDRESOURCES is true), over which the process fails
+		return $this->get_file_path($resource);
+	}
 
 	function get_jsobjects($resource) {
 
@@ -76,15 +90,7 @@ class PoP_ResourceLoaderProcessor {
 	
 	function get_dependencies($resource) {
 
-		$dependencies = array();
-
-		// Pretty much everything depends on the JS Library Manager (to register their public methods), so add it already here
-		if ($resource != POP_RESOURCELOADER_JSLIBRARYMANAGER) {
-	
-			$dependencies[] = POP_RESOURCELOADER_JSLIBRARYMANAGER;
-		}
-
-		return $dependencies;
+		return array();
 	}
 	
 	function get_globalscope_method_calls($resource) {
@@ -109,7 +115,26 @@ class PoP_ResourceLoaderProcessor {
 	
 	function get_htmltag_attributes($resource) {
 
+		if ($this->is_async($resource)) {
+
+			return "async='async'";
+		}
+		elseif ($this->is_defer($resource)) {
+
+			return "defer='defer'";
+		}
+
 		return '';
+	}
+	
+	function is_async($resource) {
+
+		return false;
+	}
+	
+	function is_defer($resource) {
+
+		return false;
 	}
 	
 	function async_load_in_order($resource) {

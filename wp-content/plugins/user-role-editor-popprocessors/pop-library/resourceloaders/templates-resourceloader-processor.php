@@ -46,6 +46,11 @@ class URE_PoPProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateReso
 	
 		return URE_POPPROCESSORS_URI.'/js/dist/templates';
 	}
+	
+	function get_dir($resource) {
+	
+		return URE_POPPROCESSORS_DIR.'/js/dist/templates';
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

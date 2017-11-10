@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR', PoP_TemplateIDUtils::get_template_definition('external-fullcalendar'));
 
-class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -26,6 +26,23 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoade
 		}
 
 		return parent::get_filename($resource);
+	}
+	
+	function get_dir($resource) {
+	
+		return EM_POPPROCESSORS_DIR.'/js/includes/cdn';
+	}
+	
+	function get_asset_path($resource) {
+	
+		$filenames = array(
+			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar.2.9.1',
+		);
+		if ($filename = $filenames[$resource]) {
+			return $this->get_dir($resource).'/'.$filename.$this->get_suffix($resource);
+		}
+
+		return parent::get_asset_path($resource);
 	}
 	
 	function get_suffix($resource) {

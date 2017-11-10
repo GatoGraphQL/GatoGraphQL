@@ -44,10 +44,6 @@ class PoP_ResourceLoader_ConfigHierarchyFormatCombinationResourcesFileGenerator 
 					foreach ($renderer_filereproductions as $filereproduction) {
 
 						$filereproduction->setFormat($format);
-
-						// // Add the version param to the URL
-						// $fileurl = add_query_arg('ver', pop_version(), $this->get_fileurl());
-						// $filereproduction->setFileURL($fileurl);
 					}
 
 					// Finally, given this combination of hierarchy and format, call the parent generate function

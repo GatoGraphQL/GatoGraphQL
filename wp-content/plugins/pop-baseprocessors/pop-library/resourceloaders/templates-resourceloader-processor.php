@@ -37,6 +37,11 @@ class PoP_BaseProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
 	
 		return POP_BASEPROCESSORS_URI.'/js/dist/templates';
 	}
+	
+	function get_dir($resource) {
+	
+		return POP_BASEPROCESSORS_DIR.'/js/dist/templates';
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

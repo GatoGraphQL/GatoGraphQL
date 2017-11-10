@@ -40,6 +40,10 @@ class PoP_VarsUtils {
 			
 			$identifier .= '-'.str_replace('-', '', $action);
 		}
+		if ($config = $vars['config']) {
+			
+			$identifier .= '-'.str_replace(',', '', $config);
+		}
 		if ($datastructure = $vars['datastructure']) {
 			
 			$identifier .= '-'.$datastructure;

@@ -59,9 +59,10 @@ class PoP_ResourceLoaderProcessorUtils {
         $pop_resourceloader_abbreviationsstorage_manager->save(self::$bundle_ids, self::$bundlegroup_ids, self::$key_ids);
     }
 
-    public static function chunk_resources($resources_set, $chunk_size = 4) {
+    public static function chunk_resources($resources_set) {
 
         // Further divide each array into chunks, to maximize the possibilities of different pages sharing the same bundles
+        $chunk_size = PoP_Frontend_ServerUtils::get_bundles_chunk_size();
         $chunked_resources = array();
         foreach ($resources_set as $resources_item) {
 
@@ -113,7 +114,7 @@ class PoP_ResourceLoaderProcessorUtils {
         return $page_formats;
     }
 
-    public static function add_resources_from_settingsprocessors(&$resources, $template_id, $hierarchy, $ids = array(), $merge = false) {
+    public static function add_resources_from_settingsprocessors($fetching_json, &$resources, $template_id, $hierarchy, $ids = array(), $merge = false) {
 
         // Get all the formats that have been set for page POP_WPAPI_PAGE_ALLCONTENT
         global $gd_template_processor_manager;
@@ -163,7 +164,7 @@ class PoP_ResourceLoaderProcessorUtils {
                             $options['is-default-tab'] = true;
                         }
                     }
-                    self::add_resources_from_current_vars($resources, $template_id, $ids, $merge, $components, $options);
+                    self::add_resources_from_current_vars($fetching_json, $resources, $template_id, $ids, $merge, $components, $options);
 
                     // Restore the original $vars['layouts']
                     if ($original_layouts) {
@@ -216,9 +217,6 @@ class PoP_ResourceLoaderProcessorUtils {
         // Transform into a string
         $encoded = json_encode($set);
 
-        // // Calculate the hash from that bundle of resources
-        // return md5($encoded);
-
         // Instead of calculating a hash, simply keep a counter, in order to further reduce the size of the generated file
         $set_id = $set_ids[$encoded];
         if (!is_null($set_id)) { // It could be 0
@@ -240,7 +238,6 @@ class PoP_ResourceLoaderProcessorUtils {
 
 	public static function get_template_resource_name($template_source) {
         
-        // return POP_RESOURCELOADER_UTILS_TEMPLATE_PREFIX.$template_source;
         global $pop_templateresourceloaderprocessor_manager;
         return $pop_templateresourceloaderprocessor_manager->get_resource($template_source);
     }
@@ -259,13 +256,6 @@ class PoP_ResourceLoaderProcessorUtils {
 
         global $pop_resourceloaderprocessor_manager, $pop_templateresourceloaderprocessor_manager;
 
-        // Important: do not change the order of these keys. In the Javascript it will fetch the elements in this order:
-        // first external scripts, then JS (because templates may depend on them, such as em-calendar-inner.tmpl) and finally the templates
-        // $resources = array(
-        //     'external' => array(),
-        //     'js' => array(),
-        //     'templates' => array(),
-        // );
         $resources = array();
         
         // Make sure there are no duplicates
@@ -274,44 +264,18 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Convert the template-sources to the corresponding resources
         $template_resources = self::get_template_resources($template_sources);
-        // if ($template_resources) {
-        //     $resources['templates'] = $template_resources;
-        // }
 
         // Add all the JS dependencies from the templates, and the templates themselves
-        // $dependency_resources = array();
         foreach ($template_resources as $template_resource) {
 
             $pop_resourceloaderprocessor_manager->add_resource_dependencies($resources/*$dependency_resources*/, $template_resource, true/*, 'templates'*/);
         }
-        // if ($dependency_resources) {
-        //     $resources[] = $dependency_resources;
-        // }
-
-        // $method_resources = $pop_resourceloaderprocessor_manager->get_resources_from_jsmethods($methods, $template_resources);
-        // if ($method_resources) {
-        //     foreach ($method_resources as $group => $group_resources) {
-        //         $resources[$group] = array_unique(array_merge(
-        //             $resources[$group],
-        //             $group_resources
-        //         ));
-        //     }
-        // }
         $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($resources, $methods, $template_resources);
 
-        // From all the collected methods, calculate the JS resources needed
-        // Also add the template extensions, since they won't be referenced directly inside template-sources
-        // return array_values(array_unique(array_merge(
-        //     $js_resources,
-        //     $pop_resourceloaderprocessor_manager->get_resources_from_jsmethods($methods, $template_resources)
-        // )));
-
-        // Drop the groups, $resources will be an array of 3 arrays
-        // return array_values($resources);
         return $resources;
     }
 
-	public static function add_resources_from_current_vars(&$resources, $toplevel_template_id, $ids = array(), $merge = false, $components = array(), $options = array()) {
+	public static function add_resources_from_current_vars($fetching_json, &$resources, $toplevel_template_id, $ids = array(), $merge = false, $components = array(), $options = array()) {
         
         // Use the $vars identifier to store the wrapper cache, so there is no collision with the values saved for the current request
         global $gd_template_processor_runtimecache, $gd_template_processor_manager, $pop_resourceloaderprocessor_manager;
@@ -338,19 +302,6 @@ class PoP_ResourceLoaderProcessorUtils {
         foreach ($vars_keys as $vars_key) {
             $original_vars[$vars_key] = $vars[$vars_key];
         }
-        // $original_output = $vars['output'];
-        // $original_fetchingjson = $vars['fetching-json'];
-        // $original_fetchingjsonsettingsdata = $vars['fetching-json-settingsdata'];
-        // $original_fetchingjsonsettings = $vars['fetching-json-settings'];
-        // $original_fetchingjsondata = $vars['fetching-json-data'];
-        
-        // // Variables over which the composition of different blocks depends
-        // $original_format = $vars['format'];
-        // $original_tab = $vars['tab'];
-        // $original_target = $vars['target'];
-
-        // // Hierarchy
-        // $original_hierarchy = $vars['global-state']['hierarchy'];
 
         // Obtain the key under which to add the resources, which is a combination of components 'format', 'tab' and 'target'
         // This code is replicated in function `loadResources` in resourceloader.js
@@ -399,9 +350,18 @@ class PoP_ResourceLoaderProcessorUtils {
 		$key = implode(GD_SEPARATOR_RESOURCELOADER, $params);
         
         // Pretend we are in that intended page, by setting the $vars in accordance
-        $vars['output'] = GD_URLPARAM_OUTPUT_JSON;
-        $vars['fetching-json'] = true;
-        $vars['fetching-json-settingsdata'] = true;
+        // Comment Leo 07/11/2017: allow to have both $fetching_json and $loading_frame,
+        // the latter one is needed for enqueuing bundles/bundlegroups instead of resources when first loading the website
+        if ($fetching_json) {
+            $vars['output'] = GD_URLPARAM_OUTPUT_JSON;
+            $vars['fetching-json'] = true;
+            $vars['fetching-json-settingsdata'] = true;
+        }
+        else {
+            $vars['output'] = null;
+            $vars['fetching-json'] = false;
+            $vars['fetching-json-settingsdata'] = false;
+        }
         $vars['fetching-json-settings'] = false;
         $vars['fetching-json-data'] = false;
         $vars['format'] = $format;
@@ -433,9 +393,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // without including the post's slug itself (eg: mesym.com/en/posts/this-is-a-post/ will save
             // resources under key mesym.com/en/posts/)
             $home_url = trailingslashit(home_url());
-            // if ($posts = $variables['posts']) {
 
-            // foreach ($posts as $post_id) {
             foreach ($ids as $post_id) {
 
                 $vars['global-state']['post'] = get_post($post_id);
@@ -452,7 +410,6 @@ class PoP_ResourceLoaderProcessorUtils {
                 // or from 2 posts with different category
                 $gd_template_processor_runtimecache->delete_cache();
             }
-            // }
         }
         elseif ($hierarchy == 'page') {
 
@@ -460,7 +417,6 @@ class PoP_ResourceLoaderProcessorUtils {
 
             // For the page hierarchy, we must save the resources under the page path,
             // for all pages in the website
-            // $post = $variables['page'];
             foreach ($ids as $page_id) {
 
                 $vars['global-state']['post'] = get_post($page_id);
@@ -477,8 +433,6 @@ class PoP_ResourceLoaderProcessorUtils {
         }
         elseif ($hierarchy == 'author') {
 
-            // $authors = $variables['authors'];
-            // foreach ($authors as $author) {
             foreach ($ids as $author) {
                 
                 $vars['global-state']['author'] = $author;
@@ -597,15 +551,6 @@ class PoP_ResourceLoaderProcessorUtils {
             $vars[$vars_key] = $original_vars[$vars_key];
         }
         GD_TemplateManager_Utils::set_vars_hierarchy($vars['global-state']['hierarchy']);
-        // $vars['output'] = $original_output;
-        // $vars['fetching-json'] = $original_fetchingjson;
-        // $vars['fetching-json-settingsdata'] = $original_fetchingjsonsettingsdata;
-        // $vars['fetching-json-settings'] = $original_fetchingjsonsettings;
-        // $vars['fetching-json-data'] = $original_fetchingjsondata;
-        // $vars['format'] = $original_format;
-        // $vars['tab'] = $original_tab;
-        // $vars['target'] = $original_target;
-        // GD_TemplateManager_Utils::set_vars_hierarchy($original_hierarchy);
 
         // Set the runtimecache once again to operate with $request
         $gd_template_processor_runtimecache->setUseVarsIdentifier(false);
@@ -617,20 +562,11 @@ class PoP_ResourceLoaderProcessorUtils {
         $item_resources = self::get_resources_from_current_vars($toplevel_template_id);
         if ($merge) {  
 
-            // // The group is 'js', 'external', 'templates'
-            // foreach ($item_resources as $group => $group_resources) {
-
-            //     $resources[$key][$group] = $resources[$key][$group] ?? array();
-            //     $resources[$key][$group] = /*array_values(*/array_unique(array_merge(
-            //         $resources[$key][$group],
-            //         $group_resources
-            //     ))/*)*/;
-            // }
             $resources[$key] = $resources[$key] ?? array();
             $resources[$key] = /*array_values(*/array_unique(array_merge(
                 $resources[$key],
                 $item_resources
-            ))/*)*/;
+            ));
         }
         else {
 
@@ -726,8 +662,3 @@ class PoP_ResourceLoaderProcessorUtils {
         }
     }
 }
-
-/**---------------------------------------------------------------------------------------------------------------
- * Initialize
- * ---------------------------------------------------------------------------------------------------------------*/
-// PoP_ResourceLoaderProcessorUtils::init();

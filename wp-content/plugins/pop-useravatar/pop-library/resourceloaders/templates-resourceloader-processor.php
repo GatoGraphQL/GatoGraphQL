@@ -43,6 +43,11 @@ class PoP_UserAvatar_TemplateResourceLoaderProcessor extends PoP_TemplateResourc
 	
 		return POP_USERAVATAR_URI.'/js/dist/templates';
 	}
+	
+	function get_dir($resource) {
+	
+		return POP_USERAVATAR_DIR.'/js/dist/templates';
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

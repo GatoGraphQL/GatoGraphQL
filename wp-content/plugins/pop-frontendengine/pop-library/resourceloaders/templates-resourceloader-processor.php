@@ -44,6 +44,11 @@ class PoP_FrontEnd_TemplateResourceLoaderProcessor extends PoP_TemplateResourceL
 		return POP_FRONTENDENGINE_URI.'/js/dist/templates';
 	}
 	
+	function get_dir($resource) {
+	
+		return POP_FRONTENDENGINE_DIR.'/js/dist/templates';
+	}
+	
 	// function is_extension($resource) {
 
 	// 	switch ($resource) {

@@ -80,13 +80,13 @@ class GetPoPDemo_Initialization {
 			wp_enqueue_script('getpop-demo-templates-app');
 			
 			// Register mega-bundle for the libraries
-			wp_register_script('getpop-demo-app', $folder.'/getpop-demo-app.bundle.min.js', array('jquery'), GETPOPDEMO_VERSION, true);
-			wp_enqueue_script('getpop-demo-app');
+			wp_register_script('pop-app', $folder.'/getpop-demo-app.bundle.min.js', array('jquery'), GETPOPDEMO_VERSION, true);
+			wp_enqueue_script('pop-app');
 
 			// When deregistering 'pop', the associated jquery_plugins will also be deregistered, so register them again
 			global $PoPFrontend_Initialization;
 			$jquery_constants = $PoPFrontend_Initialization->get_jquery_constants();
-			wp_localize_script('getpop-demo-app', 'M', $jquery_constants);
+			wp_localize_script('pop-app', 'M', $jquery_constants);
 		}
 	}
 
@@ -131,8 +131,8 @@ class GetPoPDemo_Initialization {
 			wp_dequeue_style('getpop-demo');
 
 			$folder = GETPOPDEMO_ASSETS_URI.'/css/dist/bundles';
-			wp_register_style('getpop-demo-app', $folder.'/getpop-demo-app.bundle.min.css', array('bootstrap'), GETPOPDEMO_VERSION);
-			wp_enqueue_style('getpop-demo-app');
+			wp_register_style('pop-app', $folder.'/getpop-demo-app.bundle.min.css', array('bootstrap'), GETPOPDEMO_VERSION);
+			wp_enqueue_style('pop-app');
 		}
 	}
 }

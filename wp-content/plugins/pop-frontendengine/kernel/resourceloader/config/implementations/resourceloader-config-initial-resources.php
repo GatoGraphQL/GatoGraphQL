@@ -44,10 +44,10 @@ class PoP_ResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_Res
         // Added through hooks:
         // 4. Logged-in User data page
         // Allow to hook in page POP_COREPROCESSORS_PAGE_LOGGEDINUSERDATA
-        $pages = apply_filters(
+        $pages = array_filter(array_values(apply_filters(
             'PoP_ResourceLoader_FileReproduction_InitialResourcesConfig:pages',
             $pages
-        );
+        )));
         
         // Get the paths for all those pages
         $paths = array();

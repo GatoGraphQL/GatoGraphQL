@@ -21,7 +21,7 @@ class PoP_ResourceLoader_FileReproduction_ResourcesConfigBase extends PoP_Engine
             'match-hierarchy' => $this->match_hierarchy(),
             'match-format' => $this->match_format(),
         );
-        $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::get_resource_mapping($options);
+        $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::get_resource_mapping(true, $options);
 
         // Print the resource mapping information into the config file's configuration
         $configuration['$bundles'] = $resource_mapping['bundles'];

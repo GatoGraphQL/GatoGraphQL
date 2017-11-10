@@ -7,7 +7,7 @@
 
 class PoP_ResourceLoaderProcessor_Manager {
 
-	var $initialized, $processors, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $htmltag_attributes;
+	var $initialized, $processors, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $htmltag_attributes, $first_script;
 	
 	function __construct() {
 	
@@ -36,10 +36,8 @@ class PoP_ResourceLoaderProcessor_Manager {
     	// Allow to add attributes 'async' or 'defer' to the script tag
 		// Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
 		add_filter(
-			'script_loader_tag', 
-			array($this, 'maybe_add_scripttag_attributes'), 
-			PHP_INT_MAX, 
-			3
+			'PoP_HTMLTags_Utils:htmltag_attributes', 
+			array($this, 'get_scripttag_attributes')
 		);
 	}
 	
@@ -108,8 +106,26 @@ class PoP_ResourceLoaderProcessor_Manager {
 		);
 	}
 
-	function enqueue_resources($resources) {
+	function enqueue_resources($bundlegroup_ids, $bundle_ids, $resources) {
 
+		$added_scripts = array();
+
+		// Enqueue the resources/bundles/bundlegroups
+		// In order to calculate the bundle(group) ids, we need to substract first those resources which do not can_bundle, since they will not be inside the bundle files
+		$enqueuefile_type = PoP_Frontend_ServerUtils::get_enqueuefile_type();
+		$loading_bundle = $enqueuefile_type == 'bundlegroup' || $enqueuefile_type == 'bundle';
+		if ($loading_bundle) {
+
+			// For bundles and bundlegroups, those requests that can be bundled will be inside the bundle, so remove from the resources
+			global $pop_resourceloaderprocessor_manager;
+			$canbundle_resources = $pop_resourceloaderprocessor_manager->filter_can_bundle($resources);
+			$resources = array_values(array_diff(
+				$resources,
+				$canbundle_resources
+			));
+		}
+
+		// Enqueue either all the resources, or those who can not be bundled
 		foreach ($resources as $resource) {
 
 			// Enqueue the resource
@@ -117,9 +133,88 @@ class PoP_ResourceLoaderProcessor_Manager {
 			$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $processor->get_dependencies($resource));
 
 			// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
-			wp_register_script(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource), $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
-			wp_enqueue_script(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource));
+			$script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+			wp_register_script($script, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
+			wp_enqueue_script($script);
+
+			$added_scripts[] = $script;
 		}
+
+		if ($loading_bundle) {
+
+			$version = pop_version();
+
+			// We must enqueue up to 3 files for each bundle(group:
+			// Normal, Async and Defer
+			// These files may or may not exist, so check
+			$attributes = array(
+				'' => '', 
+				'async' => "async='async'", 
+				'defer' => "defer='defer'",
+			);
+			
+			// Enqueue the bundleGroups
+			if ($enqueuefile_type == 'bundlegroup') {
+
+				// Enqueue either all the resources, or those who can not be bundled
+				global $pop_resourceloader_bundlegroupfilegenerator;
+				foreach ($bundlegroup_ids as $bundleGroupId) {
+
+					$pop_resourceloader_bundlegroupfilegenerator->set_filename($bundleGroupId);
+					$pop_resourceloader_bundlegroupfilegenerator->set_extension('.js');
+
+					foreach ($attributes as $attribute => $htmltag_attributes) {
+
+						$pop_resourceloader_bundlegroupfilegenerator->set_attribute($attribute);
+						if ($pop_resourceloader_bundlegroupfilegenerator->file_exists()) {
+
+							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
+							$script = 'pop-bundlegroup-'.$bundleGroupId.($attribute ? '-'.$attribute : '');
+							wp_register_script($script, $pop_resourceloader_bundlegroupfilegenerator->get_fileurl(), array(), $version, true);
+							wp_enqueue_script($script);
+
+							if ($htmltag_attributes) {
+								$this->htmltag_attributes[$script] = $htmltag_attributes;
+							}
+
+							$added_scripts[] = $script;
+						}
+					}
+				}
+			}	
+			// Enqueue the bundles
+			elseif ($enqueuefile_type == 'bundle') {
+
+				// Enqueue either all the resources, or those who can not be bundled
+				global $pop_resourceloader_bundlefilegenerator;
+				foreach ($bundle_ids as $bundleId) {
+
+					$pop_resourceloader_bundlefilegenerator->set_filename($bundleId);
+					$pop_resourceloader_bundlefilegenerator->set_extension('.js');
+
+					foreach ($attributes as $attribute => $htmltag_attributes) {
+
+						$pop_resourceloader_bundlefilegenerator->set_attribute($attribute);
+						if ($pop_resourceloader_bundlefilegenerator->file_exists()) {
+
+							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
+							$script = 'pop-bundle-'.$bundleId.($attribute ? '-'.$attribute : '');
+							wp_register_script($script, $pop_resourceloader_bundlefilegenerator->get_fileurl(), array(), $version, true);
+							wp_enqueue_script($script);
+
+							if ($htmltag_attributes) {
+								$this->htmltag_attributes[$script] = $htmltag_attributes;
+							}
+
+							$added_scripts[] = $script;
+						}
+					}
+				}
+			}
+		}
+
+		// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+		$this->first_script = $added_scripts[0];
 	}
 
 	function prepare_htmltag_attributes() {
@@ -135,10 +230,16 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 	function localize_scripts() {
 
-		// Also localize the scripts. It can be done for pop-manager.js, which is added always
+		// Also localize the scripts. 
 		global $PoPFrontend_Initialization;
 		$jquery_constants = $PoPFrontend_Initialization->get_jquery_constants();
-		wp_localize_script(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_POPMANAGER), 'M', $jquery_constants);
+
+		// Comment Leo 07/11/2017: since allowing to enqueue bundles/bundgleGroups, it's not true that pop-manager as a resource is always enqueued
+		// Then, simply enqueue the $first_script
+		// // It can be done for pop-manager.js, which is added always
+		// $script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_POPMANAGER);
+		$script = $this->first_script;
+		wp_localize_script($script, 'M', $jquery_constants);
 	}
 
 	function async_load_in_order($resource) {
@@ -168,6 +269,41 @@ class PoP_ResourceLoaderProcessor_Manager {
 	function get_file_path($resource) {
 
 		return $this->get_processor($resource)->get_file_path($resource);
+	}
+
+	function get_asset_path($resource) {
+
+		return $this->get_processor($resource)->get_asset_path($resource);
+	}
+
+	function filter_can_bundle($resources) {
+
+		return array_filter($resources, array($this, 'can_bundle'));
+	}
+
+	function can_bundle($resource) {
+
+		return $this->get_processor($resource)->can_bundle($resource);
+	}
+
+	function filter_async($resources) {
+
+		return array_filter($resources, array($this, 'is_async'));
+	}
+
+	function is_async($resource) {
+
+		return $this->get_processor($resource)->is_async($resource);
+	}
+
+	function filter_defer($resources) {
+
+		return array_filter($resources, array($this, 'is_defer'));
+	}
+
+	function is_defer($resource) {
+
+		return $this->get_processor($resource)->is_defer($resource);
 	}
 
 	function get_jsobjects($resource) {
@@ -435,18 +571,12 @@ class PoP_ResourceLoaderProcessor_Manager {
 	}
 
 	// Allow to add attributes 'async' or 'defer' to the script tag
-	function maybe_add_scripttag_attributes($tag, $handle, $src) {
+	function get_scripttag_attributes($htmltag_attributes) {
 		
-		if ($attributes = $this->htmltag_attributes[$handle]) {
-
-			return str_replace(
-				" src='${src}'>",
-				" src='${src}' ".$attributes.">",
-				$tag
-			);
-		}
-
-		return $tag;
+		return array_merge(
+			$htmltag_attributes,
+			$this->htmltag_attributes
+		);
 	}
 }
 

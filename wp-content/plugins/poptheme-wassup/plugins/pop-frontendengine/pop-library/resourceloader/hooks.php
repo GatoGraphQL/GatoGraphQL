@@ -14,31 +14,43 @@ class PoPThemeWassup_ResourceLoader_Hooks {
 
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:home',
-            array($this, 'get_home_resources')
+            array($this, 'get_home_resources'),
+            10,
+            2
         );
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:tag',
-            array($this, 'get_tag_resources')
+            array($this, 'get_tag_resources'),
+            10,
+            2
         );
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:author',
-            array($this, 'get_author_resources')
+            array($this, 'get_author_resources'),
+            10,
+            2
         );
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:single',
-            array($this, 'get_single_resources')
+            array($this, 'get_single_resources'),
+            10,
+            2
         );
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:page',
-            array($this, 'get_page_resources')
+            array($this, 'get_page_resources'),
+            10,
+            2
         );
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:page',
-            array($this, 'get_backgroundurls_page_resources')
+            array($this, 'get_backgroundurls_page_resources'),
+            10,
+            2
         );
     }
 
-    function get_home_resources($resources) {
+    function get_home_resources($resources, $fetching_json) {
 
         $template_id = GD_TEMPLATE_TOPLEVEL_HOME;
 
@@ -53,18 +65,18 @@ class PoPThemeWassup_ResourceLoader_Hooks {
         if ($scheme == POP_RESOURCELOADERCONFIGURATION_HOME_FEED) {
 
             $hierarchy = GD_SETTINGS_HIERARCHY_HOME;
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($resources, $template_id, $hierarchy);
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy);
         }
         elseif ($scheme == POP_RESOURCELOADERCONFIGURATION_HOME_STATIC) {
 
             // Add a single item
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($resources, $template_id);
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($fetching_json, $resources, $template_id);
         }
 
         return $resources;
     }
 
-    function get_tag_resources($resources) {
+    function get_tag_resources($resources, $fetching_json) {
 
         // Get any one tag from the DB
         $query = array(
@@ -75,13 +87,13 @@ class PoPThemeWassup_ResourceLoader_Hooks {
         
             $template_id = GD_TEMPLATE_TOPLEVEL_TAG;
             $hierarchy = GD_SETTINGS_HIERARCHY_TAG;
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($resources, $template_id, $hierarchy, $ids);
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy, $ids);
         }
 
         return $resources;
     }
 
-    function get_author_resources($resources) {
+    function get_author_resources($resources, $fetching_json) {
 
         // The author is a special case: different roles will have different configurations
         // However, we can't tell from the URL the role of that author (mesym.com/u/leo/ and mesym.com/u/mesym/)
@@ -112,13 +124,13 @@ class PoPThemeWassup_ResourceLoader_Hooks {
             $template_id = GD_TEMPLATE_TOPLEVEL_AUTHOR;
             $hierarchy = GD_SETTINGS_HIERARCHY_AUTHOR;
             $merge = true;
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($resources, $template_id, $hierarchy, $ids, $merge);
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy, $ids, $merge);
         }
 
         return $resources;
     }
 
-    function get_single_resources($resources) {
+    function get_single_resources($resources, $fetching_json) {
 
         $template_id = GD_TEMPLATE_TOPLEVEL_SINGLE;
         $hierarchy = GD_SETTINGS_HIERARCHY_SINGLE;
@@ -160,7 +172,7 @@ class PoPThemeWassup_ResourceLoader_Hooks {
         if ($ids) {
 
             $merge = false;
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($resources, $template_id, $hierarchy, $ids, $merge);
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy, $ids, $merge);
         }
 
         
@@ -194,22 +206,22 @@ class PoPThemeWassup_ResourceLoader_Hooks {
         if ($ids) {
 
             $merge = true;
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($resources, $template_id, $hierarchy, $ids, $merge);
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy, $ids, $merge);
         }
 
         return $resources;
     }
 
-    function get_page_resources($resources) {
+    function get_page_resources($resources, $fetching_json) {
         
         $template_id = GD_TEMPLATE_TOPLEVEL_PAGE;
         $hierarchy = GD_SETTINGS_HIERARCHY_PAGE;
-        PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($resources, $template_id, $hierarchy);
+        PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy);
 
         return $resources;
     }
 
-    function get_backgroundurls_page_resources($resources) {
+    function get_backgroundurls_page_resources($resources, $fetching_json) {
                 
         // The Initial Loaders page is a particular case: 
         // 1. blocks/formats for page POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES are not defined in file settingsprocessor.php, so method get_page_resources above will not work
@@ -227,7 +239,7 @@ class PoPThemeWassup_ResourceLoader_Hooks {
                 $components = array(
                     'target' => $target,
                 );
-                PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($resources, $template_id, $ids, $merge, $components);
+                PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($fetching_json, $resources, $template_id, $ids, $merge, $components);
             }
         }
 

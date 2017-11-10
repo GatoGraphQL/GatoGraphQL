@@ -22,7 +22,28 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return '.tmpl.js';
 	}
 	
-	function get_htmltag_attributes($resource) {
+	// function get_htmltag_attributes($resource) {
+
+	// 	// When first loading the website, if doing serverside-rendering, then most of the javascript template files
+	// 	// are actually not needed. They are needed only when the block is lazy-loaded, or when performing a dynamic action,
+	// 	// such as showing the events calendar (rendered through JS) or appending more posts to the feed
+	// 	if (PoP_Frontend_ServerUtils::use_serverside_rendering() && PoP_Frontend_ServerUtils::use_code_splitting()) {
+
+	// 		$engine = PoP_Engine_Factory::get_instance();
+	// 		$json = $engine->resultsObject['json'];
+	// 		if ($dynamic_template_sources = $json['sitemapping']['dynamic-template-sources']) {
+				
+	// 			if (!in_array($this->get_filename($resource), $dynamic_template_sources)) {
+
+	// 				return "async='async'";
+	// 			}
+	// 		}
+	// 	}
+
+	// 	return parent::get_htmltag_attributes($resource);
+	// }
+	
+	function is_async($resource) {
 
 		// When first loading the website, if doing serverside-rendering, then most of the javascript template files
 		// are actually not needed. They are needed only when the block is lazy-loaded, or when performing a dynamic action,
@@ -35,12 +56,12 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 				
 				if (!in_array($this->get_filename($resource), $dynamic_template_sources)) {
 
-					return "async='async'";
+					return true;
 				}
 			}
 		}
 
-		return parent::get_htmltag_attributes($resource);
+		return parent::is_async($resource);
 	}
 	
 	function get_dependencies($resource) {
@@ -62,6 +83,11 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		}
 	
 		return $dependencies;
+	}
+		
+	function extract_mapping($resource) {
+	
+		return false;
 	}
 	
 	// function is_extension($resource) {

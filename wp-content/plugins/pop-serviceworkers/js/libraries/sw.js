@@ -173,6 +173,8 @@ popServiceWorkers = {
 })(jQuery);
 
 //-------------------------------------------------
-// Initialize
+// Initialize (but only if Service Workers enabled!)
 //-------------------------------------------------
-popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyFetchArgs', 'modifyFetchBlockArgs', 'fetchBrowserURL', 'resetTimestamp']);
+if (M.USE_SW) {
+	popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyFetchArgs', 'modifyFetchBlockArgs', 'fetchBrowserURL', 'resetTimestamp']);
+}

@@ -11,6 +11,9 @@ const SW_STRATEGIES_NETWORKFIRSTTHENCACHE = 4;
 
 var config = {
   version: $version,
+  domains: {
+    home: $homeDomain,
+  },
   cacheItems: $cacheItems,
   excludedPaths: {
     full: $excludedFullPaths,
@@ -268,14 +271,14 @@ self.addEventListener('fetch', event => {
 
       // When accessing https://getpop.org or https://getpop.org/ instead of https://getpop.org/en/
       // Or accessing https://getpop.org/en instead of https://getpop.org/en/
-      if (request.url == opts.contentCDN.domains.original || request.url == opts.contentCDN.domains.original+'/' || request.url == opts.contentCDN.domains.original+'/'+opts.locales.current) {
+      if (request.url == opts.domains.home || request.url == opts.domains.home+'/' || request.url == opts.domains.home+'/'+opts.locales.current) {
         request = new Request(opts.locales.domain);
       }
       else {
 
         // When accessing https://getpop.org/u/leo/ instead of https://getpop.org/en/u/leo/
         if (request.url.substr(0, opts.locales.domain.length) != opts.locales.domain) {
-          request = new Request(opts.locales.domain+request.url.substr((opts.contentCDN.domains.original+'/').length));
+          request = new Request(opts.locales.domain+request.url.substr((opts.domains.home+'/').length));
         }
 
         // When accessing https://getpop.org/en/u/leo instead of https://getpop.org/en/u/leo/

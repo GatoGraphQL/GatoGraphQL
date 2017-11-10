@@ -10,9 +10,8 @@ define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOAD', PoP_TemplateIDUtils::get_templ
 define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADUI', PoP_TemplateIDUtils::get_template_definition('external-fileupload-ui'));
 define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADPROCESS', PoP_TemplateIDUtils::get_template_definition('external-fileupload-process'));
 define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADVALIDATE', PoP_TemplateIDUtils::get_template_definition('external-fileupload-validate'));
-define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADLOCALE', PoP_TemplateIDUtils::get_template_definition('external-fileupload-locale'));
 
-class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -22,7 +21,6 @@ class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderP
 			POP_RESOURCELOADER_EXTERNAL_FILEUPLOADUI,
 			POP_RESOURCELOADER_EXTERNAL_FILEUPLOADPROCESS,
 			POP_RESOURCELOADER_EXTERNAL_FILEUPLOADVALIDATE,
-			POP_RESOURCELOADER_EXTERNAL_FILEUPLOADLOCALE,
 		);
 	}
 	
@@ -43,22 +41,32 @@ class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderP
 		return parent::get_filename($resource);
 	}
 	
-	function get_file_url($resource) {
+	function get_dir($resource) {
 	
-		switch ($resource) {
-
-			case POP_RESOURCELOADER_EXTERNAL_FILEUPLOADLOCALE:
-				
-				return pop_useravatar_get_locale_jsfile();
+		return POP_USERAVATAR_DIR.'/js/includes/cdn';
+	}
+	
+	function get_asset_path($resource) {
+	
+		$version = '.9.5.7';
+		$filenames = array(
+			POP_RESOURCELOADER_EXTERNAL_IFRAMETRANSPORT => 'jquery.iframe-transport'.$version,
+			POP_RESOURCELOADER_EXTERNAL_FILEUPLOAD => 'jquery.fileupload'.$version,
+			POP_RESOURCELOADER_EXTERNAL_FILEUPLOADUI => 'jquery.fileupload-ui'.$version,
+			POP_RESOURCELOADER_EXTERNAL_FILEUPLOADPROCESS => 'jquery.fileupload-process'.$version,
+			POP_RESOURCELOADER_EXTERNAL_FILEUPLOADVALIDATE => 'jquery.fileupload-validate'.$version,
+		);
+		if ($filename = $filenames[$resource]) {
+			return $this->get_dir($resource).'/'.$filename.'.min.js';
 		}
 
-		return parent::get_file_url($resource);
+		return parent::get_asset_path($resource);
 	}
 	
 	function get_suffix($resource) {
-	
-		switch ($resource) {
 
+		switch ($resource) {
+			
 			case POP_RESOURCELOADER_EXTERNAL_IFRAMETRANSPORT:
 			case POP_RESOURCELOADER_EXTERNAL_FILEUPLOAD:
 			case POP_RESOURCELOADER_EXTERNAL_FILEUPLOADUI:
@@ -99,7 +107,6 @@ class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderP
 			case POP_RESOURCELOADER_EXTERNAL_FILEUPLOAD:
 
 				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_IFRAMETRANSPORT;
-				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_FILEUPLOADLOCALE;
 				break;
 
 			// Make sure the UI is loaded first, or otherwise we get a JS error

@@ -17,7 +17,7 @@ define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAPMULTISELECT', PoP_TemplateIDUtils:
 define ('POP_RESOURCELOADER_EXTERNAL_FULLSCREEN', PoP_TemplateIDUtils::get_template_definition('external-fullscreen'));
 define ('POP_RESOURCELOADER_EXTERNAL_DYNAMICMAXHEIGHT', PoP_TemplateIDUtils::get_template_definition('external-dynamicmaxheight'));
 
-class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -48,6 +48,18 @@ class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoa
 		return parent::get_file_url($resource);
 	}
 	
+	function can_bundle($resource) {
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_EXTERNAL_GOOGLEMAPS:
+
+				return false;
+		}
+
+		return parent::can_bundle($resource);
+	}
+	
 	function get_filename($resource) {
 	
 		$use_cdn = PoP_Frontend_ServerUtils::use_cdn_resources();
@@ -68,6 +80,40 @@ class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ResourceLoa
 		}
 
 		return parent::get_filename($resource);
+	}
+	
+	function get_dir($resource) {
+
+		// Scripts not under a CDN
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_EXTERNAL_DYNAMICMAXHEIGHT:
+				
+				return POP_COREPROCESSORS_DIR.'/js/includes';
+		}
+	
+		return POP_COREPROCESSORS_DIR.'/js/includes/cdn';
+	}
+	
+	function get_asset_path($resource) {
+	
+		$filenames = array(
+			POP_RESOURCELOADER_EXTERNAL_GMAPS => 'gmaps.0.4.24',
+			POP_RESOURCELOADER_EXTERNAL_PERFECTSCROLLBAR => 'perfect-scrollbar.jquery.0.6.11',
+			POP_RESOURCELOADER_EXTERNAL_JQUERYCOOKIE => 'jquery.cookie.1.4.1',
+			POP_RESOURCELOADER_EXTERNAL_MOMENT => 'moment.2.15.1',
+			POP_RESOURCELOADER_EXTERNAL_WAYPOINTS => 'jquery.waypoints.4.0.1',
+			POP_RESOURCELOADER_EXTERNAL_TYPEAHEAD => 'typeahead.bundle.0.11.1',
+			POP_RESOURCELOADER_EXTERNAL_DATERANGEPICKER => 'daterangepicker.2.1.24',
+			POP_RESOURCELOADER_EXTERNAL_BOOTSTRAPMULTISELECT => 'bootstrap-multiselect.0.9.13',
+			POP_RESOURCELOADER_EXTERNAL_FULLSCREEN => 'jquery.fullscreen',
+			POP_RESOURCELOADER_EXTERNAL_DYNAMICMAXHEIGHT => 'jquery.dynamicmaxheight',
+		);
+		if ($filename = $filenames[$resource]) {
+			return $this->get_dir($resource).'/'.$filename.$this->get_suffix($resource);
+		}
+
+		return parent::get_asset_path($resource);
 	}
 	
 	function get_suffix($resource) {

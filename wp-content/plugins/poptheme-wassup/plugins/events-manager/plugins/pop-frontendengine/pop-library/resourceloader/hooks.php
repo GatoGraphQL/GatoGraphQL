@@ -15,15 +15,19 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks {
 
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:single',
-            array($this, 'get_single_resources')
+            array($this, 'get_single_resources'),
+            10,
+            2
         );
         add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:page',
-            array($this, 'get_page_resources')
+            array($this, 'get_page_resources'),
+            10,
+            2
         );
     }
 
-    function get_page_resources($resources) {
+    function get_page_resources($resources, $fetching_json) {
                 
         // When processing POP_EM_POPPROCESSORS_PAGE_ADDLOCATION, we need a configuration for both target=main and target=modals
         // Because giving no target (the default behaviour) will then choose target=modals, below explicitly create the configuration for target=main
@@ -37,12 +41,12 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks {
             'format' => GD_TEMPLATEFORMAT_MODALS,
             'target' => GD_URLPARAM_TARGET_MAIN,
         );
-        PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($resources, $template_id, $ids, $merge, $components);
+        PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($fetching_json, $resources, $template_id, $ids, $merge, $components);
 
         return $resources;
     }
 
-    function get_single_resources($resources) {
+    function get_single_resources($resources, $fetching_json) {
         
         // The event is a special case: both future and past events have different configurations
         // However, we can't tell from the URL which one it is (mesym.com/events/...)
@@ -106,7 +110,7 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks {
 
             // Add the hook before the execution of the method, and remove it immediately afterwards
             add_filter('em_get_event', array($this, 'force_event_scope'), PHP_INT_MAX, 2);
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($resources, $template_id, $hierarchy/*, $blockunit_type*/, $ids, $merge);
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy/*, $blockunit_type*/, $ids, $merge);
             remove_filter('em_get_event', array($this, 'force_event_scope'), PHP_INT_MAX, 2);
         }
 

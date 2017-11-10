@@ -21,7 +21,7 @@ define ('GD_TEMPLATEBLOCKSETTINGS_BLOCKGROUPREPLICABLE', 'blockgroup-replicable'
 
 class PoP_Engine {
 
-	var $resultsObject, $encoded_json, $atts, $scripts;
+	var $resultsObject, $encoded_json, $atts, $scripts, $enqueue;
 
 	function __construct() {
 
@@ -29,8 +29,11 @@ class PoP_Engine {
 		PoP_Engine_Factory::set_instance($this);
 
 		// Print needed scripts
-		$this->scripts = array();
+		$this->scripts = $this->enqueue = array();
 		add_action('wp_print_footer_scripts', array($this, 'print_scripts'));
+
+		// Priority 60: after priority 50 in wp-content/plugins/pop-frontendengine/kernel/resourceloader/initialization.php
+		add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 60);
 	}
 
 	function get_toplevel_template_id() {
@@ -184,30 +187,33 @@ class PoP_Engine {
 				unset($json['sitemapping']['dynamic-template-sources']);
 			}
 
-			// If we are first loading the website, and using serverside-rendering, then there is no need to send the data to the front-end
-			if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+			// Optimizations to be made when first loading the website
+			if (GD_TemplateManager_Utils::loading_frame()) {
 
-				// We do not need the DB
-				if (isset($json['database'])) {
+				// If we are using serverside-rendering, then there is no need to send the data to the front-end
+				if (PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 
-					unset($json['database']);
-				}
-				if (isset($json['userdatabase'])) {
+					// We do not need the DB
+					if (isset($json['database'])) {
 
-					unset($json['userdatabase']);
+						unset($json['database']);
+					}
+					if (isset($json['userdatabase'])) {
+
+						unset($json['userdatabase']);
+					}
 				}
 
 				// Do not send the sitemapping or the settings to be output as code. 
 				// Instead, save the settings contents into a javascript file, and enqueue it
 				if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
-					
+
 					// Sitemapping
 					$this->optimize_encoded_json($json, 'sitemapping', POP_RUNTIMECONTENTTYPE_SITEMAPPING, false);
 					
 					// Settings
 					$this->optimize_encoded_json($json, 'settings', POP_RUNTIMECONTENTTYPE_SETTINGS, true);
 				}
-
 			}
 			
 			return json_encode($json);
@@ -250,8 +256,15 @@ class PoP_Engine {
 			// Enqueue the .js file
 			if ($file_url = $gd_template_runtimecontentmanager->get_file_url($template_id, $type)) {
 
-				wp_register_script('pop-'.$property, $file_url, array(PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_POPMANAGER)), pop_version(), true);
-				wp_enqueue_script('pop-'.$property);
+				// Comment Leo 07/11/2017: if enqueuing bundle/bundlegroup scripts, then we don't have the pop-manager.js file enqueued, 
+				// Then, move the functionality below to `enqueue_scripts`, as to wait until the corresponding scripts have been enqueued
+				$this->enqueue[] = array(
+					'property' => $property,
+					'file-url' => $file_url,
+				);
+				// $script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_POPMANAGER);
+				// wp_register_script('pop-'.$property, $file_url, array($script), pop_version(), true);
+				// wp_enqueue_script('pop-'.$property);
 			}
 
 			// We must also do the replacements on the JS code (get_loadfile_cache_replacements)
@@ -285,6 +298,30 @@ class PoP_Engine {
 
 			// Remove the entry from the html output
 			unset($json[$property]);
+		}
+	}
+
+	function enqueue_scripts() {
+
+		$version = pop_version();
+
+		$script = 'pop';
+		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+
+			global $pop_resourceloaderprocessor_manager;
+			$script = $pop_resourceloaderprocessor_manager->first_script;
+		}
+		elseif (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+
+			// The bundle application file must be registered under "pop-app"
+			$script = 'pop-app';
+		}
+		foreach ($this->enqueue as $item) {
+
+			// When using the 'app-bundle' then there is no $first_script, just use 'pop'
+			$dependencies = array($script);
+			wp_register_script('pop-'.$item['property'], $item['file-url'], $dependencies, $version, true);
+			wp_enqueue_script('pop-'.$item['property']);
 		}
 	}
 
@@ -378,9 +415,14 @@ class PoP_Engine {
 
 					$redirect = add_query_arg(GD_URLPARAM_DATASTRUCTURE, $datastructure, $redirect);
 				}
-				if ($mangled = $_REQUEST[GD_URLPARAM_MANGLED]) {
+				// Comment Leo 09/11/2017: removed param "mangled" because it can't be used anymore on "loading-frame", since the website depends on configuration generated through /generate-theme/, which depends on the value of the template-definition
+				// if ($mangled = $_REQUEST[GD_URLPARAM_MANGLED]) {
 
-					$redirect = add_query_arg(GD_URLPARAM_MANGLED, $mangled, $redirect);
+				// 	$redirect = add_query_arg(GD_URLPARAM_MANGLED, $mangled, $redirect);
+				// }
+				if ($config = $_REQUEST[POP_URLPARAM_CONFIG]) {
+
+					$redirect = add_query_arg(POP_URLPARAM_CONFIG, $config, $redirect);
 				}
 			}
 

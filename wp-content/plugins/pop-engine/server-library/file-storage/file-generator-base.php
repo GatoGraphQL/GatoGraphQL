@@ -26,6 +26,11 @@ class PoP_Engine_FileGeneratorBase {
 		return $this->get_url().'/'.$this->get_filename();
 	}
 
+	function file_exists() {
+
+		return file_exists($this->get_filepath());
+	}
+
 	// function get_file() {
 
 	// 	return $this->get_filepath($this->get_filename());

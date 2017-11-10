@@ -12,6 +12,7 @@ wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/bundles/popthem
 ###########################
 
 cd $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/
+uglifyjs libraries/condition-functions.js -o dist/libraries/condition-functions.min.js -c warnings=false -m
 uglifyjs libraries/custom-functions.js -o dist/libraries/custom-functions.min.js -c warnings=false -m
 uglifyjs libraries/custom-pagesection-manager.js -o dist/libraries/custom-pagesection-manager.min.js -c warnings=false -m
 uglifyjs libraries/ure-communities.js -o dist/libraries/ure-communities.min.js -c warnings=false -m
@@ -20,7 +21,7 @@ uglifyjs libraries/ure-aal-functions.js -o dist/libraries/ure-aal-functions.min.
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
 rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/js/libraries/*.js
 cp dist/libraries/*.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/js/libraries/
-wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/bundles/poptheme-wassup.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/js/libraries&f=custom-functions.min.js,custom-pagesection-manager.min.js,ure-communities.min.js,ure-aal-functions.min.js"
+wget -O $POP_APP_PATH/wp-content/plugins/poptheme-wassup/js/dist/bundles/poptheme-wassup.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/poptheme-wassup/js/libraries&f=condition-functions.min.js,custom-functions.min.js,custom-pagesection-manager.min.js,ure-communities.min.js,ure-aal-functions.min.js"
 
 ###########################
 # CSS

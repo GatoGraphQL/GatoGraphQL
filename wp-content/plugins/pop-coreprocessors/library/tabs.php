@@ -11,6 +11,15 @@ define ('POP_IDS_TABS_REMEMBERCHECKBOX', 'tabs-remember');
 add_filter('gd_jquery_constants', 'popcore_tabs_jquery_constants');
 function popcore_tabs_jquery_constants($jquery_constants) {
 
+	// Do not open the tabs if setting the config by the querystring on the URL
+	$vars = GD_TemplateManager_Utils::get_vars();
+	$opentabs = !$vars['config'];
+	$opentabs = apply_filters(
+		'popcore_tabs_jquery_constants:opentabs',
+		$opentabs
+	);
+	$jquery_constants['OPENTABS'] = $opentabs ? true : "";
+
 	$jquery_constants['IDS_TABS_REMEMBERCHECKBOX'] = POP_IDS_TABS_REMEMBERCHECKBOX;
 
 	// Re-open tabs? Add 'data-dismiss="alert"' so that it always closes the alert, either pressing accept or cancel

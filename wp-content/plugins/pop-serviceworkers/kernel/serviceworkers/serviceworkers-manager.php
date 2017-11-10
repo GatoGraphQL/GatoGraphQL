@@ -7,11 +7,11 @@ class PoP_ServiceWorkers_Manager {
 		$this->scope = site_url('/', 'relative');
 	}
 
-	private function get_dir(){
+	function get_dir(){
 
 		return POP_SERVICEWORKERS_ASSETDESTINATION_DIR;
 	}
-	private function get_url(){
+	function get_url(){
 
 		return POP_SERVICEWORKERS_ASSETDESTINATION_URI;
 	}

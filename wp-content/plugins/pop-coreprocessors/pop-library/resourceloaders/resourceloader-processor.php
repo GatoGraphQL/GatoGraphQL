@@ -174,6 +174,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 	
 	function get_dir($resource) {
 
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
 		switch($resource) {
 
 			// case POP_RESOURCELOADER_ANALYTICS:
@@ -184,10 +185,28 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 			case POP_RESOURCELOADER_TYPEAHEAD:
 			case POP_RESOURCELOADER_WAYPOINTS:
 			
-				return POP_COREPROCESSORS_DIR.'/js/libraries/3rdparties';
+				return POP_COREPROCESSORS_DIR.'/js/'.$subpath.'libraries/3rdparties';
 		}
 	
-		return POP_COREPROCESSORS_DIR.'/js/libraries';
+		return POP_COREPROCESSORS_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+	
+		switch ($resource) {
+
+			// case POP_RESOURCELOADER_ANALYTICS:
+			case POP_RESOURCELOADER_DATERANGE:
+			case POP_RESOURCELOADER_DYNAMICMAXHEIGHT:
+			case POP_RESOURCELOADER_MULTISELECT:
+			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
+			case POP_RESOURCELOADER_TYPEAHEAD:
+			case POP_RESOURCELOADER_WAYPOINTS:
+
+				return POP_COREPROCESSORS_DIR.'/js/libraries/3rdparties/'.$this->get_filename($resource).'.js';
+		}
+
+		return POP_COREPROCESSORS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {

@@ -92,33 +92,43 @@ Because the [scripts automating the installation process](https://github.com/leo
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
-- `POP_SERVER_USESERVERSIDERENDERING` (_true|false_): Produce HTML on the server-side for the first-loaded page.
+- `POP_SERVER_USESERVERSIDERENDERING` (_true_|_false_): Produce HTML on the server-side for the first-loaded page.
 
-- `POP_SERVER_USECODESPLITTING` (_true|false_): Load only the .js and .css that is needed on each page and nothing more.
+- `POP_SERVER_USECODESPLITTING` (_true_|_false_): Load only the .js and .css that is needed on each page and nothing more.
 
-- `POP_SERVER_GENERATERESOURCESONRUNTIME` (_true|false_): Allow to extract configuration code from the HTML output and into Javascript files on runtime.
+- `POP_SERVER_GENERATEBUNDLEGROUPFILES` and `POP_SERVER_GENERATEBUNDLEFILES` (_true_|_false_): (Only if doing code-splitting) When executing the /generate-theme/ build script, generate a single bundlegroup and/or a series of bundle files (of up-to-4 resources each) for each page on the website containing all resources it needs.
 
-- `POP_SERVER_USEMINIFIEDRESOURCES` (_true|false_): Include the minified version of .js and .css files.
+- `POP_SERVER_ENQUEUEFILESTYPE` (_resource_|_bundle_|_bundlegroup_): (Only if doing code-splitting) Choose how the initial-page resources are loaded:
 
-- `POP_SERVER_USEBUNDLEDRESOURCES` (_true|false_): (Only if not doing code-splitting) Insert script and style assets from a single bundled file.
+    - "resource": Load the required resources straight; 
+    - "bundle": through a series of bundle files, each of them comprising up to 4 resources; 
+    - "bundlegroup": through a unique bundlegroup file.
 
-- `POP_SERVER_USECDNRESOURCES` (_true|false_): Whenever available, use resources from a public CDN.
+- `POP_SERVER_GENERATERESOURCESONRUNTIME` (_true_|_false_): Allow to extract configuration code from the HTML output and into Javascript files on runtime.
 
-- `POP_SERVER_USEFASTBOOT` (_true|false_): Re-order script tags so that they are included only after rendering all HTML.
+- `POP_SERVER_USEMINIFIEDRESOURCES` (_true_|_false_): Include the minified version of .js and .css files.
 
-- `POP_SERVER_TEMPLATEDEFINITION_TYPE` (_0|1|2_): Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
+- `POP_SERVER_USEBUNDLEDRESOURCES` (_true_|_false_): (Only if not doing code-splitting) Insert script and style assets from a single bundled file.
 
-  0: Use the original name of each module. 1: Use both. 2: Use the base36 counter number.
+- `POP_SERVER_USECDNRESOURCES` (_true_|_false_): Whenever available, use resources from a public CDN.
 
-- `POP_SERVER_TEMPLATEDEFINITION_CONSTANTOVERTIME` (_true|false_): When mangling the template names (template definition type is set to 2), use a database of all template definitions, which will be constant over time and shared among different plugins, to avoid errors in the website from accessed pages (localStorage, Service Workers) with an out-of-date configuration.
+- `POP_SERVER_USEFASTBOOT` (_true_|_false_): If doing server-side rendering, re-order script tags so that they are included only after rendering all HTML.
 
-- `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true|false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different websites can communicate with each other without conflict, mangling all template definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
+- `POP_SERVER_TEMPLATEDEFINITION_TYPE` (_0_|_1_|_2_): Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
 
-- `POP_SERVER_USECACHE` (_true|false_): Create and re-use a cache of the settings of the requested page.
+    - 0: Use the original name of each module. 
+    - 1: Use both. 
+    - 2: Use the base36 counter number.
 
-- `POP_SERVER_COMPACTJSKEYS` (_true|false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
+- `POP_SERVER_TEMPLATEDEFINITION_CONSTANTOVERTIME` (_true_|_false_): When mangling the template names (template definition type is set to 2), use a database of all template definitions, which will be constant over time and shared among different plugins, to avoid errors in the website from accessed pages (localStorage, Service Workers) with an out-of-date configuration.
 
-- `POP_SERVER_USELOCALSTORAGE` (_true|false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
+- `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true_|_false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different websites can communicate with each other without conflict, mangling all template definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
+
+- `POP_SERVER_USECACHE` (_true_|_false_): Create and re-use a cache of the settings of the requested page.
+
+- `POP_SERVER_COMPACTJSKEYS` (_true_|_false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
+
+- `POP_SERVER_USELOCALSTORAGE` (_true_|_false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
 ### Decentralization: enabling crossdomain
 

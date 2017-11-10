@@ -20,9 +20,6 @@ class PoP_CDNCore_ResourceLoaderProcessor_Hooks {
 
 		// Add cdn-config.js, which is not referenced in the internal/external method calls by any other .js object
 		$dependencies[] = POP_RESOURCELOADER_CDNCONFIG;
-
-		// Comment Leo: Fix this!!!
-		$dependencies[] = POP_RESOURCELOADER_POPUTILS;
 		
 		return $dependencies;
 	}

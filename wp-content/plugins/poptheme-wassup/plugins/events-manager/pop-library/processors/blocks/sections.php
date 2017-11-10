@@ -1602,7 +1602,10 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 				// we are not sending the database anymore (to decrease output size). However the calendar
 				// is still rendered in the front-end using javascript, hence it won't work since the data is not sent anymore.
 				// To fix this, simply make the calendars lazy-load, until the calendar html code is rendered on the backend
-				$this->add_att($template_id, $atts, 'content-loaded', false);
+				if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+					
+					$this->add_att($template_id, $atts, 'content-loaded', false);
+				}
 				break;
 		}
 

@@ -45,6 +45,24 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 	}
 	
 	function get_filename($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
+				
+				global $pop_resourceloader_configfile_generator;
+				return $pop_resourceloader_configfile_generator->get_filename();
+			
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
+
+				global $pop_resourceloader_resources_configfile_generator;
+				return $pop_resourceloader_resources_configfile_generator->get_filename();
+			
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
+
+				global $pop_resourceloader_initialresources_configfile_generator;
+				return $pop_resourceloader_initialresources_configfile_generator->get_filename();
+		}
 	
 		$filenames = array(
 			POP_RESOURCELOADER_COMPATIBILITY => 'compatibility',
@@ -82,9 +100,56 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return POP_FRONTENDENGINE_VERSION;
 	}
 	
-	function get_dir($resource) {
+	function get_suffix($resource) {
 	
-		return POP_FRONTENDENGINE_DIR.'/js/libraries';
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
+				
+				// This script file is dynamically generated getting data from all over the website, so its version depend on the website version
+				return '';
+		}
+		return parent::get_suffix($resource);
+	}
+	
+	function get_dir($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
+				
+				global $pop_resourceloader_configfile_generator;
+				return $pop_resourceloader_configfile_generator->get_dir();
+			
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
+
+				global $pop_resourceloader_resources_configfile_generator;
+				return $pop_resourceloader_resources_configfile_generator->get_dir();
+			
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
+
+				global $pop_resourceloader_initialresources_configfile_generator;
+				return $pop_resourceloader_initialresources_configfile_generator->get_dir();
+		}
+	
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return POP_FRONTENDENGINE_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
+
+				return parent::get_asset_path($resource);
+		}
+
+		return POP_FRONTENDENGINE_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 		
 	function extract_mapping($resource) {
@@ -128,17 +193,30 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return parent::get_file_url($resource);
 	}
 	
-	function get_htmltag_attributes($resource) {
+	// function get_htmltag_attributes($resource) {
+
+	// 	switch ($resource) {
+			
+	// 		case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
+
+	// 			return "defer='defer'";
+
+	// 	}
+
+	// 	return parent::get_htmltag_attributes($resource);
+	// }
+	
+	function is_defer($resource) {
 
 		switch ($resource) {
 			
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
 
-				return "defer='defer'";
+				return true;
 
 		}
 
-		return parent::get_htmltag_attributes($resource);
+		return parent::is_defer($resource);
 	}
 	
 	function get_path($resource) {
@@ -206,9 +284,8 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 				$manager_dependencies = array(
 					POP_RESOURCELOADER_COMPATIBILITY,
 					POP_RESOURCELOADER_UTILS,
-					// POP_RESOURCELOADER_POPUTILS,
-					// The JS Library Manager is already included in the parent object
-					// POP_RESOURCELOADER_JSLIBRARYMANAGER,
+					POP_RESOURCELOADER_POPUTILS,
+					POP_RESOURCELOADER_JSLIBRARYMANAGER,
 
 					// The resources below are not strictly needed to be added as dependencies, since they are mapped inside popManager.init internal/external method calls
 					// However, if the mapping has not been generated, then that dependency will fail.
@@ -248,10 +325,10 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 				}
 				break;
 
-			case POP_RESOURCELOADER_RESOURCELOADER:
+			// case POP_RESOURCELOADER_RESOURCELOADER:
 
-				$dependencies[] = POP_RESOURCELOADER_JSLIBRARYMANAGER;
-				break;
+			// 	$dependencies[] = POP_RESOURCELOADER_JSLIBRARYMANAGER;
+			// 	break;
 		
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
 

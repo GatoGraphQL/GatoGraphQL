@@ -144,20 +144,6 @@ popCustomFunctions = {
 		}
 	},
 
-	isUserIdSameAsLoggedInUser : function(args) {
-	
-		var t = this;
-		var domain = args.domain;
-
-		if (popUserAccount.isLoggedIn(domain)) {
-
-			var user_id = args.input;
-			return (popUserAccount.getLoggedInUserId(domain) == user_id);
-		}
-		
-		return false;
-	},
-
 	getEmbedUrl : function(args) {
 	
 		var t = this;
@@ -294,4 +280,4 @@ popCustomFunctions = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popCustomFunctions, ['addPageSectionIds', 'pageSectionNewDOMsBeforeInitialize'], true);
-popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'isUserIdSameAsLoggedInUser', 'getPosition', 'scrollToElem', 'scrollTop', 'closeMessageFeedback', 'closeMessageFeedbacks']);
+popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'getPosition', 'scrollToElem', 'scrollTop', 'closeMessageFeedback', 'closeMessageFeedbacks']);

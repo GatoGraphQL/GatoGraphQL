@@ -202,4 +202,7 @@ popTabs = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popTabs, ['documentInitialized', 'onDestroyPageSwitchTab', 'addOpenTab', 'closePageTab']);
+// Only if enabled
+if (M.OPENTABS) {
+	popJSLibraryManager.register(popTabs, ['documentInitialized', 'onDestroyPageSwitchTab', 'addOpenTab', 'closePageTab']);
+}

@@ -16,27 +16,12 @@ class PoPFrontend_ResourceLoader_ScriptsRegistration {
 		return $this->resources;
 	}
 
-	// function get_bundle_id() {
-	
-	// 	return $this->bundle_id;
-	// }
 	function get_bundle_ids() {
 
-		// if (!$this->bundle_ids && $this->resources) {
-
-		// 	$resources_set = PoP_ResourceLoaderProcessorUtils::chunk_resources(array($this->resources));
-		// 	$this->bundle_ids = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_bundle_id'), $resources_set);
-		// }
-	
 		return $this->bundle_ids;
 	}
 	function get_bundlegroup_ids() {
 
-		// if (!$this->bundlegroup_ids && $this->bundle_ids) {
-
-		// 	$this->bundlegroup_ids = array(PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($this->bundle_ids));
-		// }
-	
 		return $this->bundlegroup_ids;
 	}
 
@@ -100,18 +85,15 @@ class PoPFrontend_ResourceLoader_ScriptsRegistration {
 	function register_resources($resources) {
 
 		// Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
-		// $this->resources = array_unique(array_merge(
-		// 	$this->resources,
-		// 	$resources
-		// ));
 		$this->resources = $resources;
+
 		$resources_set = PoP_ResourceLoaderProcessorUtils::chunk_resources(array($this->resources));
 		$this->bundle_ids = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_bundle_id'), $resources_set);
 		$this->bundlegroup_ids = array(PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($this->bundle_ids));
 
 		// Enqueue the resources
 		global $pop_resourceloaderprocessor_manager;
-		$pop_resourceloaderprocessor_manager->enqueue_resources($this->resources);
+		$pop_resourceloaderprocessor_manager->enqueue_resources($this->bundlegroup_ids, $this->bundle_ids, $this->resources);
 	}
 }
 

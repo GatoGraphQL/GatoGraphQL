@@ -57,7 +57,6 @@ class GD_Template_Processor_TabPanePageSectionsBase extends GD_Template_Processo
 			$this->append_att($template_id, $atts, 'class', 'active');
 		}
 
-
 		return $atts;
 	}
 

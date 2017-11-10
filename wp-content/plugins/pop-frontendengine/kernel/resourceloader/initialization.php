@@ -8,7 +8,7 @@ class PoPFrontend_ResourceLoader_Initialization {
 		// These 2 functions (register and localize) are separated into 2 calls, so that they can independently 
 		// be unhooked (eg: by Service Workers)
 		add_action('wp_enqueue_scripts', array($this, 'register_scripts'), 50);
-		add_action('wp_enqueue_scripts', array($this, 'localize_scripts'), 51);
+		add_action('wp_enqueue_scripts', array($this, 'localize_scripts'), 70);
 	}
 
 	function register_scripts() {

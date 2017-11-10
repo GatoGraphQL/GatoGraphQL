@@ -454,7 +454,6 @@ class PoP_ServerSide_Manager {
 
 				// pageSections.push(pageSection);
 			}
-			// echo json_encode($this->memory['settings']['configuration']); die;
 
 			// // Step 1: render the pageSection
 			// var options = {

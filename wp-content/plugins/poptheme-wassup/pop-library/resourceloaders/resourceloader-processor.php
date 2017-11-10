@@ -5,6 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('POP_RESOURCELOADER_CONDITIONFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('condition-functions'));
 define ('POP_RESOURCELOADER_CUSTOMFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('custom-functions'));
 define ('POP_RESOURCELOADER_CUSTOMPAGESECTIONMANAGER', PoP_TemplateIDUtils::get_template_definition('custom-pagesection-manager'));
 define ('POP_RESOURCELOADER_UREAALFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('ure-aal-functions'));
@@ -15,6 +16,7 @@ class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_ResourceLoaderProcesso
 	function get_resources_to_process() {
 
 		return array(
+			POP_RESOURCELOADER_CONDITIONFUNCTIONS,
 			POP_RESOURCELOADER_CUSTOMFUNCTIONS,
 			POP_RESOURCELOADER_CUSTOMPAGESECTIONMANAGER,
 			POP_RESOURCELOADER_UREAALFUNCTIONS,
@@ -25,6 +27,7 @@ class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_ResourceLoaderProcesso
 	function get_filename($resource) {
 	
 		$filenames = array(
+			POP_RESOURCELOADER_CONDITIONFUNCTIONS => 'condition-functions',
 			POP_RESOURCELOADER_CUSTOMFUNCTIONS => 'custom-functions',
 			POP_RESOURCELOADER_CUSTOMPAGESECTIONMANAGER => 'custom-pagesection-manager',
 			POP_RESOURCELOADER_UREAALFUNCTIONS => 'ure-aal-functions',
@@ -44,7 +47,13 @@ class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_ResourceLoaderProcesso
 	
 	function get_dir($resource) {
 
-		return POPTHEME_WASSUP_DIR.'/js/libraries';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return POPTHEME_WASSUP_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+
+		return POPTHEME_WASSUP_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {
@@ -56,6 +65,9 @@ class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_ResourceLoaderProcesso
 	function get_jsobjects($resource) {
 
 		$objects = array(
+			POP_RESOURCELOADER_CONDITIONFUNCTIONS => array(
+				'popConditionFunctions',
+			),
 			POP_RESOURCELOADER_CUSTOMFUNCTIONS => array(
 				'popCustomFunctions',
 			),

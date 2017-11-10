@@ -109,6 +109,9 @@ class PoPTheme_Wassup_Initialization {
 				wp_register_script('poptheme-wassup-pagesection-manager', $libraries_js_folder . '/custom-pagesection-manager'.$suffix.'.js', array('jquery', 'pop'), POPTHEME_WASSUP_VERSION, true);
 				wp_enqueue_script('poptheme-wassup-pagesection-manager');
 
+				wp_register_script('poptheme-wassup-conditions', $libraries_js_folder . '/condition-functions'.$suffix.'.js', array('jquery', 'pop'), POPTHEME_WASSUP_VERSION, true);
+				wp_enqueue_script('poptheme-wassup-conditions');
+
 				wp_register_script('poptheme-wassup', $libraries_js_folder . '/custom-functions'.$suffix.'.js', array('jquery', 'pop'), POPTHEME_WASSUP_VERSION, true);
 				wp_enqueue_script('poptheme-wassup');
 

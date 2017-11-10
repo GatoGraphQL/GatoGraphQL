@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_EXTERNAL_HANDLEBARS', PoP_TemplateIDUtils::get_template_definition('external-handlebars'));
 
-class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -26,6 +26,23 @@ class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderPro
 		}
 
 		return parent::get_filename($resource);
+	}
+	
+	function get_dir($resource) {
+	
+		return POP_FRONTENDENGINE_DIR.'/js/includes/cdn';
+	}
+	
+	function get_asset_path($resource) {
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_EXTERNAL_HANDLEBARS:
+
+				return $this->get_dir($resource).'/handlebars.runtime.4.0.10'.$this->get_suffix($resource);
+		}
+
+		return parent::get_asset_path($resource);
 	}
 	
 	function get_suffix($resource) {

@@ -35,7 +35,13 @@ class PoP_AAL_Processors_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 	
 	function get_dir($resource) {
 	
-		return AAL_POPPROCESSORS_DIR.'/js/libraries';
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		return AAL_POPPROCESSORS_DIR.'/js/'.$subpath.'libraries';
+	}
+	
+	function get_asset_path($resource) {
+
+		return AAL_POPPROCESSORS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {

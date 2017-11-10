@@ -401,6 +401,11 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
 		return POP_COREPROCESSORS_URI.'/js/dist/templates';
 	}
 	
+	function get_dir($resource) {
+	
+		return POP_COREPROCESSORS_DIR.'/js/dist/templates';
+	}
+	
 	function get_globalscope_method_calls($resource) {
 
 		switch ($resource) {
