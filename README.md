@@ -96,13 +96,15 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_USECODESPLITTING` (_true_|_false_): Load only the .js and .css that is needed on each page and nothing more.
 
-- `POP_SERVER_GENERATEBUNDLEGROUPFILES` and `POP_SERVER_GENERATEBUNDLEFILES` (_true_|_false_): (Only if doing code-splitting) When executing the /generate-theme/ build script, generate a single bundlegroup and/or a series of bundle files (of up-to-4 resources each) for each page on the website containing all resources it needs.
+- `POP_SERVER_GENERATEBUNDLEGROUPFILES` and `POP_SERVER_GENERATEBUNDLEFILES` (_true_|_false_): (Only if doing code-splitting) When executing the /generate-theme/ build script, generate a single bundlegroup and/or a series of bundle files for each page on the website containing all resources it needs.
 
 - `POP_SERVER_ENQUEUEFILESTYPE` (_resource_|_bundle_|_bundlegroup_): (Only if doing code-splitting) Choose how the initial-page resources are loaded:
 
-    - "resource": Load the required resources straight; 
-    - "bundle": through a series of bundle files, each of them comprising up to 4 resources; 
-    - "bundlegroup": through a unique bundlegroup file.
+    - "resource": Load the required resources straight
+    - "bundle": through a series of bundle files, each of them comprising up to x resources (defined through constant `POP_SERVER_BUNDLECHUNKSIZE`)
+    - "bundlegroup": through a unique bundlegroup file
+
+- `POP_SERVER_BUNDLECHUNKSIZE` (_int_): (Only if doing code-splitting) How many resources to pack inside a bundle file. Default: 4.
 
 - `POP_SERVER_GENERATERESOURCESONRUNTIME` (_true_|_false_): Allow to extract configuration code from the HTML output and into Javascript files on runtime.
 
@@ -116,9 +118,9 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_TEMPLATEDEFINITION_TYPE` (_0_|_1_|_2_): Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
 
-    - 0: Use the original name of each module. 
-    - 1: Use both. 
-    - 2: Use the base36 counter number.
+    - 0: Use the original name of each module
+    - 1: Use both
+    - 2: Use the base36 counter number
 
 - `POP_SERVER_TEMPLATEDEFINITION_CONSTANTOVERTIME` (_true_|_false_): When mangling the template names (template definition type is set to 2), use a database of all template definitions, which will be constant over time and shared among different plugins, to avoid errors in the website from accessed pages (localStorage, Service Workers) with an out-of-date configuration.
 
