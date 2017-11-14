@@ -1,5 +1,5 @@
 (function($){
-popFunctions = {
+window.popFunctions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popFunctions = {
 
 	expandJSKeys : function(args) {
 	
-		var t = this;
+		var that = this;
 		var context = args.context;
 		
 		if (context[M.JS_FONTAWESOME]) {
@@ -27,7 +27,7 @@ popFunctions = {
 
 	showmore : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		// span with class "pop-showmore-more-full" can also be inside the <p></p>
@@ -56,7 +56,7 @@ popFunctions = {
 
 	hideEmpty : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var targets = args.targets;
 		targets.closest('.pop-hide-empty').addClass('hidden');
@@ -64,7 +64,7 @@ popFunctions = {
 
 	switchTargetClass : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 		targets.click(function(e) {
 	
@@ -97,7 +97,7 @@ popFunctions = {
 
 	doNothing : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		targets.click(function(e) {
@@ -110,7 +110,7 @@ popFunctions = {
 	// Fetch more button
 	fetchMore : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		block.on('beforeFetch', function(e, options) {
@@ -145,7 +145,7 @@ popFunctions = {
 
 	fetchMoreDisable : function(args) {
 
-		var t = this;
+		var that = this;
 		var block = args.block, targets = args.targets;
 
 		block.on('beforeFetch', function(e, options) {
@@ -167,7 +167,7 @@ popFunctions = {
 
 	saveLastClicked : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.click(function(e) {
@@ -184,7 +184,7 @@ popFunctions = {
 
 	retrySendRequest : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.click(function(e) {
@@ -200,7 +200,7 @@ popFunctions = {
 
 	// mediaplayer : function(args) {
 
-	// 	var t = this;
+	// 	var that = this;
 
 	// 	var targets = args.targets;
 	// 	targets.mediaelementplayer();
@@ -208,7 +208,7 @@ popFunctions = {
 
 	reset : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		// When clicking on this button, reset the block (eg: for Create new Project, allows to re-draw the form)
@@ -227,7 +227,7 @@ popFunctions = {
 
 	// smallScreenHideCollapse : function(args) {
 
-	// 	var t = this;
+	// 	var that = this;
 	// 	var targets = args.targets;
 
 	// 	// Collapse for small screen (768px)
@@ -239,7 +239,7 @@ popFunctions = {
 
 	sortable : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 
 		$(document).ready(function($) {
@@ -249,7 +249,7 @@ popFunctions = {
 
 	onActionThenClick : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 		targets.each(function() {
 
@@ -275,7 +275,7 @@ popFunctions = {
 
 	getUrl : function(domain, link, use_pageurl) {
 
-		var t = this;
+		var that = this;
 
 		// Make sure the link we got is the original one, and not the intercepted one
 		// target-url is stored under the original link, not the interceptor

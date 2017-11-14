@@ -199,7 +199,7 @@ class PoPTheme_Wassup_Initialization {
 		 * 3rd Party Libraries (using CDN whenever possible)
 		 ----------------------------- */
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 			
 			// CDN
 			wp_register_style('perfect-scrollbar', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.5/css/perfect-scrollbar.min.css', null, null);

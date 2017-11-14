@@ -1,5 +1,5 @@
 (function($){
-popOnlineOffline = {
+window.popOnlineOffline = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,9 +7,9 @@ popOnlineOffline = {
 
 	documentInitialized : function() {
 	
-		var t = this;
+		var that = this;
 
-		t.onlineOffline();
+		that.onlineOffline();
 	},
 
 	//-------------------------------------------------
@@ -18,17 +18,17 @@ popOnlineOffline = {
 
 	onlineOffline : function() {
 		
-		var t = this;
-		window.addEventListener('online', t.checkOnlineOffline);
-		window.addEventListener('offline', t.checkOnlineOffline);
+		var that = this;
+		window.addEventListener('online', that.checkOnlineOffline);
+		window.addEventListener('offline', that.checkOnlineOffline);
 
 		// Already execute it
-		t.checkOnlineOffline();
+		that.checkOnlineOffline();
 	},
 
 	checkOnlineOffline : function() {
 		
-		var t = this;
+		var that = this;
 
 		// Add a class to the body with the status online/offline
 		if (navigator.onLine){

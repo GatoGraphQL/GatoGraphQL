@@ -1,5 +1,5 @@
 (function($){
-popMap = {
+window.popMap = {
 	
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,24 +7,24 @@ popMap = {
 
 	initBlockRuntimeMemory : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
 
 		// Initialize with this library key
 		mempage.map = {};
 
 		// Reset values
-		t.resetBlockRuntimeMemory(pageSection, block);
+		that.resetBlockRuntimeMemory(pageSection, block);
 	},
 
 	map : function(args) {
 	
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		
 		block.one('rerender', function(action) {
 			
-			t.destroy(pageSection, block, targets);
+			that.destroy(pageSection, block, targets);
 		});
 
 		// Do it after the document is fully loaded, so that Google Maps doesn't make the site load more slowly
@@ -32,14 +32,14 @@ popMap = {
 			targets.each(function() {
 				
 				var map = $(this);
-				t.triggerShowMap(domain, pageSection, block, map);
+				that.triggerShowMap(domain, pageSection, block, map);
 			});
 		});
 	},
 
 	mapModal : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		targets.on('shown.bs.modal', function() {
 
@@ -49,7 +49,7 @@ popMap = {
 				var map = $(this);
 				var block = popManager.getBlock(map);
 				if (popManager.jsInitialized(block)) {
-					t.triggerShowMap(domain, pageSection, block, map);
+					that.triggerShowMap(domain, pageSection, block, map);
 				}
 			});
 		});
@@ -57,7 +57,7 @@ popMap = {
 
 	mapStandalone : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		// Refresh when website goes into theater mode (needed at least for the standaloneMap)
@@ -68,7 +68,7 @@ popMap = {
 				var map = $(this);
 				if (!popManager.isHidden(map)) {
 
-					t.refresh(pageSection, block, map);
+					that.refresh(pageSection, block, map);
 				}
 			});
 		});
@@ -82,14 +82,14 @@ popMap = {
 			targets.each(function() {
 
 				var map = $(this);
-				t.triggerAddMarkers(domain, pageSection, block, map, status);
+				that.triggerAddMarkers(domain, pageSection, block, map, status);
 			});
 		});
 
 		targets.each(function() {
 
 			var map = $(this);
-			t.hoverBlockElems(pageSection, block, map);
+			that.hoverBlockElems(pageSection, block, map);
 		});
 	},
 
@@ -99,15 +99,15 @@ popMap = {
 
 	getRuntimeMemoryPage : function(pageSection, targetOrId) {
 
-		var t = this;
+		var that = this;
 		return popManager.getRuntimeMemoryPage(pageSection, targetOrId).map;
 	},
 
 	resetBlockRuntimeMemory : function(pageSection, targetOrId) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, targetOrId);
-		var empty = t.getEmtpyBlockRuntimeMemory();
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, targetOrId);
+		var empty = that.getEmtpyBlockRuntimeMemory();
 
 		$.extend(mempage, empty);
 	},
@@ -124,8 +124,8 @@ popMap = {
 
 	destroy : function(pageSection, block, targets) {
 	
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		targets.each(function() {
 			var map = $(this);
@@ -136,22 +136,22 @@ popMap = {
 
 	triggerShowMap : function(domain, pageSection, block, map) {
 
-		var t = this;
+		var that = this;
 
 		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
 		if (!popManager.isHidden(map)) {
 		
-			t.execTriggerShowMap(domain, pageSection, block, map);
+			that.execTriggerShowMap(domain, pageSection, block, map);
 		}
 		else {
 
-			t.pendingTriggerMap('showmap', domain, pageSection, block, map);
+			that.pendingTriggerMap('showmap', domain, pageSection, block, map);
 		}
 	},
 
 	triggerAddMarkers : function(domain, pageSection, block, map, status) {
 
-		var t = this;
+		var that = this;
 
 		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
 		if (!popManager.isHidden(map)) {
@@ -161,31 +161,31 @@ popMap = {
 			// so they will keep removing the previous' domains' markers.
 			// var removeCurrent = status.reload;
 			var removeCurrent = status.reload && status.isFirst;
-			t.addMarkers(domain, pageSection, block, map, removeCurrent);
+			that.addMarkers(domain, pageSection, block, map, removeCurrent);
 		}
 		else {
 
-			t.pendingTriggerMap('addmarkers', domain, pageSection, block, map, status);
+			that.pendingTriggerMap('addmarkers', domain, pageSection, block, map, status);
 		}
 	},
 
 	triggerFunction : function(functionName, domain, pageSection, block, map, status) {
 
-		var t = this;
+		var that = this;
 					
 		// Call again this same function, to make sure that the map is still not hidden by 1 of the other conditions (eg: pageSectionTab not active AND map inside a collapse)
-		// t.execTriggerShowMap(pageSection, block, map);
+		// that.execTriggerShowMap(pageSection, block, map);
 		if (functionName == 'showmap') {
-			t.triggerShowMap(domain, pageSection, block, map);
+			that.triggerShowMap(domain, pageSection, block, map);
 		}
 		else if (functionName == 'addmarkers') {
-			t.triggerAddMarkers(domain, pageSection, block, map, status);
+			that.triggerAddMarkers(domain, pageSection, block, map, status);
 		}
 	},
 
 	pendingTriggerMap : function(functionName, domain, pageSection, block, map, status) {
 
-		var t = this;
+		var that = this;
 
 		var pageSectionPage = popManager.getPageSectionPage(block);
 
@@ -199,7 +199,7 @@ popMap = {
 				block = $('#'+block.attr('id'));
 				if (block.length) {
 					
-					t.triggerFunction(functionName, domain, pageSection, block, map, status);
+					that.triggerFunction(functionName, domain, pageSection, block, map, status);
 				}
 			});
 		}
@@ -211,7 +211,7 @@ popMap = {
 			var collapse = map.parents('.collapse').not('.in');
 			collapse.one('shown.bs.collapse', function() {
 
-				t.triggerFunction(functionName, domain, pageSection, block, map, status);
+				that.triggerFunction(functionName, domain, pageSection, block, map, status);
 			});
 		}
 
@@ -222,7 +222,7 @@ popMap = {
 
 			pageSectionPage.one('shown.bs.tabpane', function() {
 				
-				t.triggerFunction(functionName, domain, pageSection, block, map, status);
+				that.triggerFunction(functionName, domain, pageSection, block, map, status);
 			});
 			// }
 		}
@@ -230,15 +230,15 @@ popMap = {
 
 	execTriggerShowMap : function(domain, pageSection, block, map) {
 
-		var t = this;
+		var that = this;
 
 		// targets.each(function() {
 			
 		// 	var map = $(this);
-		// 	t.addMarkers(pageSection, block, map, map.data('markers-removecurrent'));
+		// 	that.addMarkers(pageSection, block, map, map.data('markers-removecurrent'));
 		// });
 
-		t.addMarkers(domain, pageSection, block, map, map.data('markers-removecurrent'));
+		that.addMarkers(domain, pageSection, block, map, map.data('markers-removecurrent'));
 
 		// Dispatch a window resize so that the Calendar / Google map gets updated
 		windowResize();
@@ -246,15 +246,15 @@ popMap = {
 
 	refresh : function(pageSection, block, map) {
 
-		var t = this;
-		var gMap = t.getGMap(pageSection, block, map);
+		var that = this;
+		var gMap = that.getGMap(pageSection, block, map);
 		if (!gMap) return;
 		gMap.refresh();
 	},
 
 	hoverBlockElems : function(pageSection, block, map) {
 
-		var t = this;
+		var that = this;
 		
 		// Close all (other open) infowindows
 		block.on('mouseenter', '.pop-openmapmarkers', function() {
@@ -276,33 +276,33 @@ popMap = {
 				links = elem.find('a.pop-modalmap-link');
 			}
 
-			t.openMapMarkers(pageSection, block, map, links);
+			that.openMapMarkers(pageSection, block, map, links);
 		});
 	},
 	
 	openMapMarkers : function(pageSection, block, map, links) {
 
-		var t = this;
+		var that = this;
 
 		// Make sure the map is visible. If it is not, do nothing or it will screw it
 		if (popManager.isHidden(map)) return;
 		
-		t.closeMarkers(pageSection, block, map);
+		that.closeMarkers(pageSection, block, map);
 
 		// Open all the markers for the link, if any
 		if (links.length) {
 
-			t.openMarkers(pageSection, block, map, links);
+			that.openMarkers(pageSection, block, map, links);
 		}
 	},
 
 	closeMarkers : function(pageSection, block, map) {
 
-		var t = this;
+		var that = this;
 
-		var gMap = t.getGMap(pageSection, block, map);
+		var gMap = that.getGMap(pageSection, block, map);
 		if (!gMap) return;
-		var markersInfo = t.getMarkersInfo(pageSection, block, map);
+		var markersInfo = that.getMarkersInfo(pageSection, block, map);
 		
 		// Close all other open infoWindows
 		gMap.hideInfoWindows();
@@ -319,7 +319,7 @@ popMap = {
 
 	getMarkerIdsFromLinkURLs : function(links) {
 
-		var t = this;
+		var that = this;
 
 		var markerIds = [];
 		links.each(function() {
@@ -342,19 +342,19 @@ popMap = {
 
 	openMarkers : function(pageSection, block, map, links) {
 
-		var t = this;
+		var that = this;
 
-		var markerIds = t.getMarkerIdsFromLinkURLs(links);
+		var markerIds = that.getMarkerIdsFromLinkURLs(links);
 		if (!markerIds.length) return;
 		
 		// Remove potential duplicates
 		markerIds = markerIds.filter(function (item, pos) {return markerIds.indexOf(item) == pos});
 
-		var gMap = t.getGMap(pageSection, block, map);
+		var gMap = that.getGMap(pageSection, block, map);
 		if (!gMap) return;
 
 		// Allow to inject markers from other blocks, useful for loading just one map: LocationsMap Modal Block
-		var markersInfo = t.getMarkersInfo(pageSection, block, map);
+		var markersInfo = that.getMarkersInfo(pageSection, block, map);
 
 		// Change the icon to a different one
 		$.each(markerIds, function(index, markerId) {
@@ -387,24 +387,24 @@ popMap = {
 
 		// Assign the new openMarkers
 		// var markersOpen = $.extend({}, markerIds);
-		t.setMarkersOpen(pageSection, block, map, markerIds, true);
+		that.setMarkersOpen(pageSection, block, map, markerIds, true);
 	},
 
 	// Function used within map-script-markers.tmpl, that's why it uses pssId/bsId as arguments, instead of the objects
 	// (objects not created/inserted into the DOM yet)
 	initMarker : function(pageSection, block, markerId, markerData) {
 	
-		var t = this;
+		var that = this;
 
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		// Initialize internal vars
-		// t.initMarkersVars(pssId, bsId);
+		// that.initMarkersVars(pssId, bsId);
 
 		// Check if this marker already exists, if so add new information to this one (pile up all in one marker instead of having many sitting on top of each other so that we can't access the below ones):
 		// 1. Same title: we already have it, don't add it
 		// 2. Different title: it's a different post/user referencing the same Location => append content
-		// var loadedMarkerData = t.markers[pssId][bsId][markerId];
+		// var loadedMarkerData = that.markers[pssId][bsId][markerId];
 		var loadedMarkerData = mempage.markers[markerId];
 		if (loadedMarkerData) {
 
@@ -419,32 +419,32 @@ popMap = {
 			// Reset the marker to the default one
 			markerData.icon = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
 		}
-		// t.markers[pssId][bsId][markerId] = markerData;
+		// that.markers[pssId][bsId][markerId] = markerData;
 		mempage.markers[markerId] = markerData;
 	},
 
 	hasMarker : function(pageSection, block, markerId) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		return mempage.markers[markerId];
 	},
 
 	getGMap : function(pageSection, block, map) {
 
-		var t = this;
+		var that = this;
 
 		if (typeof google == 'undefined' || typeof GMaps == 'undefined') return;
 
 		// var pssId = popManager.getSettingsId(pageSection);
 		// var bsId = popManager.getSettingsId(block);
 
-		// t.initMapsVars(pssId, bsId);
+		// that.initMapsVars(pssId, bsId);
 
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 		var mapId = map.attr('id');
-		// var gMap = t.maps[pssId][bsId][mapId];
+		// var gMap = that.maps[pssId][bsId][mapId];
 		var gMap = mempage.maps[mapId];
 
 		// If it doesn't exist, create it
@@ -462,7 +462,7 @@ popMap = {
 
 	getMarkersInfo : function(pageSection, block, map) {
 
-		var t = this;
+		var that = this;
 
 		var markersPageSection = map.data('markers-pagesection') || pageSection;
 		var markersBlock = map.data('markers-block') || block;
@@ -470,9 +470,9 @@ popMap = {
 		// Comment Leo 16/10/2017: there is a bug:
 		// clicking on location link inside the Event preview gives JS error, because the link from where we are clicking (the original link), which we need in map-collection.js, execModalMap : function(domain, modals, link), line `link = popManager.getOriginalLink(link);`, doesn't exist anymore, since it's also in a modal window which is closed when opening the new location modal window...
 		// Then getRuntimeMemoryPage will throw an Exception. If this happens, then just do nothing, but don't let it explode
-		var mempage = t.getEmtpyBlockRuntimeMemory();
+		var mempage = that.getEmtpyBlockRuntimeMemory();
 		try {
-			mempage = t.getRuntimeMemoryPage(markersPageSection, markersBlock);
+			mempage = that.getRuntimeMemoryPage(markersPageSection, markersBlock);
 		}
 		catch(err) {
 			// Do nothing
@@ -488,8 +488,8 @@ popMap = {
 	},
 	setMarkersOpen : function(pageSection, block, map, markersOpen, removeCurrent) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 		var mapId = map.attr('id');
 
 		if (removeCurrent || !mempage.markersOpen[mapId]) {
@@ -501,8 +501,8 @@ popMap = {
 	},
 	setMarkersPos : function(pageSection, block, map, markersPos, removeCurrent) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 		var mapId = map.attr('id');
 
 		if (removeCurrent || !mempage.markersPos[mapId]) {
@@ -515,11 +515,11 @@ popMap = {
 
 	removeMarker : function(pageSection, block, map, markerId) {
 
-		var t = this;
+		var that = this;
 
-		var gMap = t.getGMap(pageSection, block, map);
+		var gMap = that.getGMap(pageSection, block, map);
 		if (!gMap) return;
-		var markersInfo = t.getMarkersInfo(pageSection, block, map);
+		var markersInfo = that.getMarkersInfo(pageSection, block, map);
 
 		// No need to remove the marker from the map, or update markersPos, because .setMap(null) simply hides the marker, not delete it
 		markerPos = markersInfo.markersPos[markerId];
@@ -529,13 +529,13 @@ popMap = {
 		}
 
 		// Zoom
-		t.zoom(pageSection, block, map);
+		that.zoom(pageSection, block, map);
 	},
 
 	zoom : function(pageSection, block, map) {
 
-		var t = this;
-		var gMap = t.getGMap(pageSection, block, map);
+		var that = this;
+		var gMap = that.getGMap(pageSection, block, map);
 		if (!gMap) return;
 
 		// Zoom
@@ -555,8 +555,8 @@ popMap = {
 
 	addMarkers : function(domain, pageSection, block, map, removeCurrent) {
 
-		var t = this;
-		var gMap = t.getGMap(pageSection, block, map);
+		var that = this;
+		var gMap = that.getGMap(pageSection, block, map);
 		if (!gMap) return;
 
 		// Remove already existing markers?
@@ -564,8 +564,8 @@ popMap = {
 
 			// Remove any open marker and their position
 			gMap.removeMarkers();
-			t.setMarkersOpen(pageSection, block, map, null, true);
-			t.setMarkersPos(pageSection, block, map, null, true);
+			that.setMarkersOpen(pageSection, block, map, null, true);
+			that.setMarkersPos(pageSection, block, map, null, true);
 		}
 
 		// var markerIds = map.data('marker-ids');
@@ -578,7 +578,7 @@ popMap = {
 		map.data('marker-ids-'+removeScheme(domain), null);
 		
 		// Allow to inject markers from other blocks, useful for loading just one map: LocationsMap Modal Block
-		var markersInfo = t.getMarkersInfo(pageSection, block, map);
+		var markersInfo = that.getMarkersInfo(pageSection, block, map);
 		
 		var markerData, marker, markerPos;
 		var markersPos = {};
@@ -615,7 +615,7 @@ popMap = {
 			}
 		});
 
-		t.setMarkersPos(pageSection, block, map, markersPos);
+		that.setMarkersPos(pageSection, block, map, markersPos);
 
 		// Open the infoWindow of the added marker (if only 1)
 		var onemarkerClick = map.data('open-onemarker-infowindow');
@@ -631,14 +631,14 @@ popMap = {
 			}
 		}
 
-		t.zoom(pageSection, block, map);
+		that.zoom(pageSection, block, map);
 	},
 
 	// geocode : function(pageSection, block, createLocationMap, address) {
 	geocode : function(pageSection, block, map, address, latInput, lngInput) {
 
-		var t = this;
-		var gMap = t.getGMap(pageSection, block, map);
+		var that = this;
+		var gMap = that.getGMap(pageSection, block, map);
 		if (!gMap) return;
 
 		GMaps.geocode({
@@ -681,7 +681,7 @@ popMap = {
 
 
 (function($){
-popMapRuntime = {
+window.popMapRuntime = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -689,14 +689,14 @@ popMapRuntime = {
 
 	initBlockRuntimeMemory : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
 
 		// Initialize with this library key
 		mempage.mapRuntime = {};
 
 		// Reset values
-		t.resetBlockRuntimeMemory(pageSection, block);
+		that.resetBlockRuntimeMemory(pageSection, block);
 	},
 		
 	//-------------------------------------------------
@@ -705,14 +705,14 @@ popMapRuntime = {
 
 	getRuntimeMemoryPage : function(pageSection, targetOrId) {
 
-		var t = this;
+		var that = this;
 		return popManager.getRuntimeMemoryPage(pageSection, targetOrId).mapRuntime;
 	},
 
 	resetBlockRuntimeMemory : function(pageSection, targetOrId) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, targetOrId);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, targetOrId);
 		var empty = {
 
 			content: '', 
@@ -726,21 +726,21 @@ popMapRuntime = {
 	// This function is invoked from wp-content/plugins/events-manager-popprocessors/js/templates/maps/em-map-script-drawmarkers.tmpl
 	drawMarkers : function(domain, pageSection, block, mapDiv) {
 	
-		var t = this;
+		var that = this;
 
 		if (popManager.jsInitialized(block)) {
-			t.execDrawMarkers(domain, pageSection, block, mapDiv);
+			that.execDrawMarkers(domain, pageSection, block, mapDiv);
 		}
 		else {
 			block.one('initialize', function() {
-				t.execDrawMarkers(domain, pageSection, block, mapDiv);
+				that.execDrawMarkers(domain, pageSection, block, mapDiv);
 			});
 		}
 	},
 	execDrawMarkers : function(domain, pageSection, block, mapDiv) {
 	
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		//Add the data-marker-ids to the pop-map div
 		// mapDiv.data('marker-ids', mempage.marker_ids);
@@ -749,41 +749,41 @@ popMapRuntime = {
 
 	resetMarkerIds : function(pageSection, block) {
 	
-		var t = this;		
+		var that = this;		
 		if (popManager.jsInitialized(block)) {
-			t.execResetMarkerIds(pageSection, block);
+			that.execResetMarkerIds(pageSection, block);
 		}
 		else {
 			block.one('initialize', function() {
-				t.execResetMarkerIds(pageSection, block);
+				that.execResetMarkerIds(pageSection, block);
 			});
 		}
 	},
 	execResetMarkerIds : function(pageSection, block) {
 	
-		var t = this;		
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;		
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 		mempage.marker_ids = [];
 	},
 
 	setMarkerData : function(pageSection, block, title, content) {
 	
-		var t = this;
+		var that = this;
 
 		if (popManager.jsInitialized(block)) {
-			t.execSetMarkerData(pageSection, block, title, content);
+			that.execSetMarkerData(pageSection, block, title, content);
 		}
 		else {
 			block.one('initialize', function() {
-				t.execSetMarkerData(pageSection, block, title, content);
+				that.execSetMarkerData(pageSection, block, title, content);
 			});
 		}
 	},
 	execSetMarkerData : function(pageSection, block, title, content) {
 	
-		var t = this;
-		// t.initMarkerDataVars(pssId, bsId);
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		// that.initMarkerDataVars(pssId, bsId);
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		// If already set, then do nothing. This is so that we can customize the infoWindow content:
 		// If possible we set customized content, eg: a Project or Event name/pic. If no customization
@@ -798,25 +798,25 @@ popMapRuntime = {
 
 	initMarker : function(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent) {
 	
-		var t = this;
+		var that = this;
 		
 		if (popManager.jsInitialized(block)) {
-			t.execInitMarker(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
+			that.execInitMarker(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
 		}
 		else {
 			block.one('initialize', function() {
-				t.execInitMarker(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
+				that.execInitMarker(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
 			});
 		}
 	},
 	execInitMarker : function(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent) {
 	
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		// defaultTitle/Content: because these are the location attributes, but before setting them
 		// we had the change to set customized attributes, eg: Project or Event or User
-		t.setMarkerData(pageSection, block, defaultTitle, defaultContent);
+		that.setMarkerData(pageSection, block, defaultTitle, defaultContent);
 
 		var title = mempage.title;
 		var content = mempage.content;
@@ -830,7 +830,7 @@ popMapRuntime = {
 				header: '<strong>'+title+'</strong>',
 				content: content
 			},
-			// icon : t.icon
+			// icon : that.icon
 			icon : 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
 		};
 

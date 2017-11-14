@@ -23,7 +23,7 @@ function em_popprocessors_qtransx_register_scripts() {
 	// If the current lang is supported, then use fullcalendar's localization file
 	if ($lang = $languages[qtranxf_getLanguage()]) {
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			$placeholder = 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang/%s.js';
 		}

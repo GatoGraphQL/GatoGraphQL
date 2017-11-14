@@ -1,5 +1,5 @@
 (function($){
-popBrowserHistory = {
+window.popBrowserHistory = {
 
 	//-------------------------------------------------
 	// INTERNAL variables
@@ -13,19 +13,19 @@ popBrowserHistory = {
 
 	documentInitialized : function() {
 
-		var t = this;
+		var that = this;
 		$(window).on("popstate", function(e) {
 
 			// if (e && e.originalEvent && e.originalEvent.state) {
-			if (t.loaded) {
+			if (that.loaded) {
 				
 				// Remove the previously added PushURLAtts
 				// Otherwise intercept cannot find the Url, and no need for the fetch, since it will add the params once again
 				// No need to push URL to the stack, since we're already moving back/forward there
-				var url = t.removePushURLAtts(window.location.href);
+				var url = that.removePushURLAtts(window.location.href);
 				
 				// If it is the external page, then recover the actual URL
-				url = t.getApplicationURL(url);
+				url = that.getApplicationURL(url);
 
 				var options = {skipPushState: true};
 				if (popURLInterceptors.getInterceptors(url).length) {
@@ -38,7 +38,7 @@ popBrowserHistory = {
 			else {
 				// popState also gets called when first loading a website, so we also need to save the state, but not continue
 				// to keep loading another page
-				t.loaded = true;
+				that.loaded = true;
 			}
 		});
 	},
@@ -49,7 +49,7 @@ popBrowserHistory = {
 
 	getApplicationURL : function(url) {
 
-		var t = this;
+		var that = this;
 
 		// If it is the external page, then recover the actual URL
 		// Allow popMultiDomain to inject the external URL
@@ -69,7 +69,7 @@ popBrowserHistory = {
 
 	addPushURLAtts : function(url) {
 	
-		var t = this;
+		var that = this;
 		var tlFeedback = popManager.getTopLevelFeedback(getDomain(url));
 		$.each(tlFeedback[M.DATALOAD_PUSHURLATTS], function(key, value) {
 
@@ -81,7 +81,7 @@ popBrowserHistory = {
 
 	removePushURLAtts : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		var tlFeedback = popManager.getTopLevelFeedback(getDomain(url)), args = [];
 		$.each(tlFeedback[M.DATALOAD_PUSHURLATTS], function(key, value) {
@@ -93,12 +93,12 @@ popBrowserHistory = {
 
 	pushState : function(url) {
 		
-		var t = this;
+		var that = this;
 
 		// After intercepting the URL, add the PUSHURLATTS, so they will also appear in the browser url
 		// This is because of a problem with Chrome: when it gets restarted, it calls again the last URL it had, even within an iframe
 		// So this created an issue with the embed: cannot strip param "mode=embed" in the browser URL, gotta add it again even if artificially
-		url = t.addPushURLAtts(url);
+		url = that.addPushURLAtts(url);
 
 		// Push history in the browser
 		// Platform of Platforms: if the URL is not from this website, then add it as a param
@@ -117,25 +117,25 @@ popBrowserHistory = {
 		// // Allow Google Analytics to register the click
 		// popJSLibraryManager.execute('stateURLPushed', args);
 
-		t.loaded = true;
+		that.loaded = true;
 	},	
 
 	replaceState : function(url) {
 		
-		var t = this;
+		var that = this;
 
 		// Only if the new url is different than the current one
 		if (window.location.url == url) {
 			return;
 		}
 
-		url = t.addPushURLAtts(url);
+		url = that.addPushURLAtts(url);
 
 		// Push history in the browser
 		history.replaceState({url: url}, '', url);
 
-		// t.currentUrl = url;
-		t.loaded = true;
+		// that.currentUrl = url;
+		that.loaded = true;
 	}
 };
 })(jQuery);

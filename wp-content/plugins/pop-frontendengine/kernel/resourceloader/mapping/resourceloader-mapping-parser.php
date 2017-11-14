@@ -31,8 +31,8 @@ class PoP_Frontend_ResourceLoaderMappingParser {
 		$publicFunctionObject = null;
 		$recordPublicFunctionObject = $recordPublicFunctions = $recordMethodExecution = false;
 
-		// Must always add jsObject 't', which stands for `this`
-		$jsObjects[] = 't';
+		// Must always add jsObject 'that', which stands for `this`
+		$jsObjects[] = 'that';
 
 		$inFunction = false;
 		$objectsOpenInFunction = 1;
@@ -140,8 +140,8 @@ class PoP_Frontend_ResourceLoaderMappingParser {
 						}
 						else {
 						
-							// Special case: if the last object is 't', then it's an internal method call. Or if the object being invoked is the same as the current. Otherwise it's an external one
-							if ($lastSymbol == 't' || $lastSymbol == $currentObject) {
+							// Special case: if the last object is 'this' or 'that', then it's an internal method call. Or if the object being invoked is the same as the current. Otherwise it's an external one
+							if ($lastSymbol == 'this' || $lastSymbol == 'that' || $lastSymbol == $currentObject) {
 
 								$internalMethodCalls[$currentObject][$lastFunction] = $internalMethodCalls[$currentObject][$lastFunction] ?? array();
 								if (!in_array($maybeFunctionCall, $internalMethodCalls[$currentObject][$lastFunction])) {

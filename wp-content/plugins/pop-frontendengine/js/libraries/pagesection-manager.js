@@ -1,5 +1,5 @@
 (function($){
-popPageSectionManager = {
+window.popPageSectionManager = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popPageSectionManager = {
 
 	offcanvasToggle : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.click(function(e) {
@@ -18,19 +18,19 @@ popPageSectionManager = {
 			var target = $(control.data('target'));
 			var action = control.data('toggle');
 			if (action == 'offcanvas-open') {
-				t.open(target, mode);
+				that.open(target, mode);
 			}
 			else if (action == 'offcanvas-close') {
-				t.close(target, mode);
+				that.close(target, mode);
 			}
 			else if (action == 'offcanvas-toggle') {
-				t.toggle(target, mode);
+				that.toggle(target, mode);
 			}
 		});
 	},
 	isHidden : function(args) {
 	
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		// Comment Leo: this makes the waypoint on the frame-side fail, because the class needed is active-side
@@ -46,11 +46,11 @@ popPageSectionManager = {
 		// Check that the pageSection is not hidden
 
 		var offcanvas = targets.closest('.offcanvas');
-		return t.execIsHidden(offcanvas);
+		return that.execIsHidden(offcanvas);
 		// if (offcanvas.length) {
 
-		// 	var classs = t.getOffcanvasActiveClass(offcanvas);
-		// 	return !t.getGroup(offcanvas).hasClass(classs);
+		// 	var classs = that.getOffcanvasActiveClass(offcanvas);
+		// 	return !that.getGroup(offcanvas).hasClass(classs);
 		// }
 
 		// return false;		
@@ -62,11 +62,11 @@ popPageSectionManager = {
 
 	execIsHidden : function(offcanvas) {
 	
-		var t = this;
+		var that = this;
 		if (offcanvas.length) {
 
-			var classs = t.getOffcanvasActiveClass(offcanvas);
-			return !t.getGroup(offcanvas).hasClass(classs);
+			var classs = that.getOffcanvasActiveClass(offcanvas);
+			return !that.getGroup(offcanvas).hasClass(classs);
 		}
 
 		return false;		
@@ -74,7 +74,7 @@ popPageSectionManager = {
 	
 	getOffcanvasActiveClass : function(offcanvas, mode) {
 	
-		var t = this;
+		var that = this;
 		var section = offcanvas.data('offcanvas');
 		var ret = 'active-'+section;
 
@@ -87,55 +87,55 @@ popPageSectionManager = {
 
 	open : function(offcanvas, mode) {
 	
-		var t = this;
-		var group = t.getGroup(offcanvas);
-		var classs = t.getOffcanvasActiveClass(offcanvas, mode);
+		var that = this;
+		var group = that.getGroup(offcanvas);
+		var classs = that.getOffcanvasActiveClass(offcanvas, mode);
 		group.addClass(classs);
-		t.triggerStatus(offcanvas, mode, 'opened');
+		that.triggerStatus(offcanvas, mode, 'opened');
 	},
 	close : function(offcanvas, mode) {
 	
-		var t = this;
-		var group = t.getGroup(offcanvas);
-		var classs = t.getOffcanvasActiveClass(offcanvas, mode);
+		var that = this;
+		var group = that.getGroup(offcanvas);
+		var classs = that.getOffcanvasActiveClass(offcanvas, mode);
 		group.removeClass(classs);
-		t.triggerStatus(offcanvas, mode, 'closed');
+		that.triggerStatus(offcanvas, mode, 'closed');
 	},
 	toggle : function(offcanvas, mode) {
 	
-		var t = this;
-		var group = t.getGroup(offcanvas);
-		var classs = t.getOffcanvasActiveClass(offcanvas, mode);
+		var that = this;
+		var group = that.getGroup(offcanvas);
+		var classs = that.getOffcanvasActiveClass(offcanvas, mode);
 		// group.toggleClass(classs);
 		if (group.hasClass(classs)) {
-			t.close(offcanvas, mode);
+			that.close(offcanvas, mode);
 		}
 		else {
-			t.open(offcanvas, mode);
+			that.open(offcanvas, mode);
 		}
 	},
 	triggerStatus : function(offcanvas, mode, status) {
 	
-		var t = this;
-		var group = t.getGroup(offcanvas);
+		var that = this;
+		var group = that.getGroup(offcanvas);
 		group.triggerHandler('on.bs.pagesection-group:pagesection-'+offcanvas.attr('id')+':'+status, [offcanvas, mode]);
 	},
 	
 
 	getTopLevelSettingsId : function() {
 		
-		var t = this;
+		var that = this;
 		return M.TEMPLATE_TOPLEVEL_SETTINGS_ID;
 	},
 	getPageSectionStatus : function(pageSection) {
 	
-		var t = this;
+		var that = this;
 
 		return $('#'+pageSection.attr('id')+'-status');
 	},
 	getGroup : function(offcanvas) {
 
-		var t = this;
+		var that = this;
 
 		// The offcanvas can be empty. If so, then return the main pageSectionGroup
 		// Otherwise, it could also be the quickView
@@ -146,9 +146,9 @@ popPageSectionManager = {
 	},
 	theater : function(theater) {
 
-		var t = this;
-		var group = t.getGroup();
-		t.transitionEndResize();
+		var that = this;
+		var group = that.getGroup();
+		that.transitionEndResize();
 		if (theater) {
 			group.addClass('theater');
 			group.triggerHandler('on.bs.pagesection:theater');
@@ -160,16 +160,16 @@ popPageSectionManager = {
 	},
 	isTheater : function() {
 
-		var t = this;
-		var group = t.getGroup();
+		var that = this;
+		var group = that.getGroup();
 		return group.hasClass('theater');
 	},
 	transitionEndResize : function() {
 
-		var t = this;
+		var that = this;
 
 		// Dispatch a window resize so that the Calendar / Google map gets updated
-		var offCanvasGroup = t.getGroup();
+		var offCanvasGroup = that.getGroup();
 		offCanvasGroup.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
 			windowResize();
 		});

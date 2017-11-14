@@ -1,5 +1,5 @@
 (function($){
-popPerfectScrollbar = {
+window.popPerfectScrollbar = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,14 +7,14 @@ popPerfectScrollbar = {
 
 	// documentInitialized : function() {
 	
-	// 	var t = this;
+	// 	var that = this;
 
-	// 	t.scrollbars();
+	// 	that.scrollbars();
 	// },
 
 	scrollbarHorizontal : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		jQuery(document).ready( function($) {	
@@ -27,7 +27,7 @@ popPerfectScrollbar = {
 	},
 	scrollbarVertical : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 		jQuery(document).ready( function($) {	
 
@@ -40,7 +40,7 @@ popPerfectScrollbar = {
 
 	getPosition : function(args) {
 
-		var t = this;
+		var that = this;
 		var elem = args.elem;
 		var scrollbar = elem.closest('.perfect-scrollbar').addBack('.perfect-scrollbar');
 		if (scrollbar.length) {
@@ -62,7 +62,7 @@ popPerfectScrollbar = {
 
 	// scrollbars : function() {
 
-	// 	var t = this;
+	// 	var that = this;
 			
 	// 	$('.perfect-scrollbar.vertical').perfectScrollbar({suppressScrollX: true});
 	// 	$('.perfect-scrollbar.horizontal').perfectScrollbar({suppressScrollY: true});
@@ -79,13 +79,13 @@ popPerfectScrollbar = {
 	// 	// 		return;
 	// 	// 	}
 
-	// 	// 	t.scrollTop(collapse);
+	// 	// 	that.scrollTop(collapse);
 	// 	// });
 	// },
 
 	doScroll : function(scrollbar, x, animate) {
 
-		var t = this;
+		var that = this;
 		
 		if (animate) {
 			scrollbar.animate({scrollTop: x});
@@ -98,7 +98,7 @@ popPerfectScrollbar = {
 
 	scrollToElem : function(args) {
 
-		var t = this;
+		var that = this;
 		var elem = args.elem, position = args.position, animate = args.animate;
 		var scrollbar = elem.closest('.perfect-scrollbar').addBack('.perfect-scrollbar');
 		if (scrollbar.length) {
@@ -114,7 +114,7 @@ popPerfectScrollbar = {
 			}
 
 			// Scroll up
-			t.doScroll(scrollbar, x, animate);
+			that.doScroll(scrollbar, x, animate);
 			return true;
 		}
 
@@ -123,14 +123,14 @@ popPerfectScrollbar = {
 
 	scrollTop : function(args) {
 
-		var t = this;
+		var that = this;
 		var elem = args.elem, top = args.top, animate = args.animate;
 		top = top || 0;
 
 		var scrollbar = elem.closest('.perfect-scrollbar').addBack('.perfect-scrollbar');
 		if (scrollbar.length) {
 			
-			t.doScroll(scrollbar, top, animate);
+			that.doScroll(scrollbar, top, animate);
 			return true;
 		}
 

@@ -1,5 +1,5 @@
 (function($){
-popReplicate = {
+window.popReplicate = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popReplicate = {
 
 	replicateTopLevel : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.each(function() {
@@ -16,18 +16,18 @@ popReplicate = {
 			var type = link.data('replicate-type');
 			if (type == M.REPLICATETYPES.MULTIPLE) {
 				
-				t.replicateMultipleTopLevel(pageSection, link);
+				that.replicateMultipleTopLevel(pageSection, link);
 			}
 			else if (type == M.REPLICATETYPES.SINGLE) {
 
-				t.replicateSingleTopLevel(pageSection, link);
+				that.replicateSingleTopLevel(pageSection, link);
 			}
 		});
 	},
 
 	replicatePageSection : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.each(function() {
@@ -36,11 +36,11 @@ popReplicate = {
 			var type = link.data('replicate-type');
 			if (type == M.REPLICATETYPES.MULTIPLE) {
 				
-				t.replicateMultiplePageSection(pageSection, link);
+				that.replicateMultiplePageSection(pageSection, link);
 			}
 			else if (type == M.REPLICATETYPES.SINGLE) {
 
-				t.replicateSinglePageSection(pageSection, link);
+				that.replicateSinglePageSection(pageSection, link);
 			}
 		});
 	},
@@ -51,28 +51,28 @@ popReplicate = {
 
 	replicateMultipleTopLevel : function(pageSection, targets) {
 
-		var t = this;
+		var that = this;
 		targets.click(function(e) {
 			
 			e.preventDefault();
 			var link = $(this);		
 			var addUniqueId = link.data('unique-url') || false;
-			t.execReplicateTopLevel(pageSection, link, true, addUniqueId);
+			that.execReplicateTopLevel(pageSection, link, true, addUniqueId);
 		});
 	},
 	replicateSingleTopLevel : function(pageSection, targets) {
 
-		var t = this;
+		var that = this;
 		targets.one('click', function(e) {
 			
 			e.preventDefault();
 			var link = $(this);	
-			t.execReplicateTopLevel(pageSection, link, false, false);
+			that.execReplicateTopLevel(pageSection, link, false, false);
 		});
 	},
 	execReplicateTopLevel : function(pageSection, link, generateUniqueId, addUniqueId) {
 
-		var t = this;
+		var that = this;
 
 		// Comment Leo 26/10/2015: the URL is not the intercepted one but the original one. These 2 differ when intercepting without params
 		// Eg: adding a new comment, https://www.mesym.com/add-comment/?pid=19604, url to intercept is https://www.mesym.com/add-comment/
@@ -147,27 +147,27 @@ popReplicate = {
 
 	replicateMultiplePageSection : function(pageSection, targets) {
 
-		var t = this;
+		var that = this;
 		targets.click(function(e) {
 
 			e.preventDefault();
 			var link = $(this);
-			t.execReplicatePageSection(pageSection, link);
+			that.execReplicatePageSection(pageSection, link);
 		});
 	},
 	replicateSinglePageSection : function(pageSection, targets) {
 
-		var t = this;
+		var that = this;
 		targets.one('click', function(e) {
 
 			e.preventDefault();
 			var link = $(this);
-			t.execReplicatePageSection(pageSection, link);
+			that.execReplicatePageSection(pageSection, link);
 		});
 	},
 	execReplicatePageSection : function(pageSection, link) {
 
-		var t = this;
+		var that = this;
 
 		var bsId = link.data('block-settingsid');
 		var pssId = popManager.getSettingsId(pageSection);

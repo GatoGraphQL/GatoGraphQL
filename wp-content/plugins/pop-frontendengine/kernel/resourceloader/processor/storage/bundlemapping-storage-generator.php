@@ -4,7 +4,8 @@ class PoP_ResourceLoader_BundleMappingStorageFileGenerator extends PoP_Engine_Re
 	function get_filename() {
 
 		// We must create different mapping files depending on if we're adding the CDN resources inside the bundles or not
-		return 'resourceloader-bundle-mapping-'.$this->get_scope().'.json';
+		// return 'resourceloader-bundle-mapping-'.$this->get_scope().'.json';
+		return 'resourceloader-bundle-mapping.json';
 	}
 
 	public function save($bundle_ids, $bundlegroup_ids, $key_ids) {

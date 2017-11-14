@@ -1,5 +1,5 @@
 (function($){
-popWindow = {
+window.popWindow = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popWindow = {
 
 	windowSize : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.click(function(e) {
@@ -20,13 +20,13 @@ popWindow = {
 
 				var action = control.data('toggle');
 				if (action == 'window-fullsize') {
-					t.fullsize(target);
+					that.fullsize(target);
 				}
 				else if (action == 'window-maximize') {
-					t.maximize(target);
+					that.maximize(target);
 				}
 				else if (action == 'window-minimize') {
-					t.minimize(target);
+					that.minimize(target);
 				}
 			}
 		});
@@ -38,7 +38,7 @@ popWindow = {
 
 	getSize : function(target) {
 	
-		var t = this;
+		var that = this;
 		if (target.hasClass('fullsize')) {
 			return 'fullsize';
 		}
@@ -53,7 +53,7 @@ popWindow = {
 	},
 	fullsize : function(target) {
 	
-		var t = this;
+		var that = this;
 		target
 			.removeClass('maximized minimized')
 			.addClass('fullsize');
@@ -61,7 +61,7 @@ popWindow = {
 	},
 	maximize : function(target) {
 	
-		var t = this;
+		var that = this;
 		target
 			.removeClass('fullsize minimized')
 			.addClass('maximized');
@@ -69,7 +69,7 @@ popWindow = {
 	},
 	minimize : function(target) {
 	
-		var t = this;
+		var that = this;
 		target
 			.removeClass('fullsize maximized')
 			.addClass('minimized');

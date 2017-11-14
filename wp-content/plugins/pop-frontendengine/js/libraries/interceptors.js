@@ -1,5 +1,5 @@
 (function($){
-popURLInterceptors = {
+window.popURLInterceptors = {
 
 	//-------------------------------------------------
 	// INTERNAL variables
@@ -14,44 +14,44 @@ popURLInterceptors = {
 
 	pageSectionNewDOMsInitialized : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, newDOMs = args.newDOMs;
 
 		newDOMs.find('[data-intercept="fullurl"]').addBack('[data-intercept="fullurl"]').each(function () {
 
 			var interceptor = $(this);
 			var id = interceptor.attr('id');
-			var url = t.getUrl(interceptor);
-			var settings = t.getSettings(interceptor);
-			var target = t.getTarget(pageSection, interceptor);
+			var url = that.getUrl(interceptor);
+			var settings = that.getSettings(interceptor);
+			var target = that.getTarget(pageSection, interceptor);
 
-			if (!t.fullurl[target]) {
-				t.fullurl[target] = {};				
+			if (!that.fullurl[target]) {
+				that.fullurl[target] = {};				
 			}
-			if (!t.fullurl[target][url]) {
-				t.fullurl[target][url] = [];
+			if (!that.fullurl[target][url]) {
+				that.fullurl[target][url] = [];
 			}
-			t.fullurl[target][url].push(id);
+			that.fullurl[target][url].push(id);
 		});
 
 		newDOMs.find('[data-intercept="partialurl"]').addBack('[data-intercept="partialurl"]').each(function () {
 
 			var interceptor = $(this);
 			var id = interceptor.attr('id');
-			var url = t.getUrl(interceptor);
-			var settings = t.getSettings(interceptor);
-			var target = t.getTarget(pageSection, interceptor);
+			var url = that.getUrl(interceptor);
+			var settings = that.getSettings(interceptor);
+			var target = that.getTarget(pageSection, interceptor);
 			
-			if (!t.partialurl[target]) {
-				t.partialurl[target] = {};				
+			if (!that.partialurl[target]) {
+				that.partialurl[target] = {};				
 			}
-			t.partialurl[target][id] = url;
+			that.partialurl[target][id] = url;
 		});
 	},
 
 	destroyTarget : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, destroyTarget = args.destroyTarget;
 
 		// Destroy all Full-URL interceptors
@@ -60,22 +60,22 @@ popURLInterceptors = {
 			// Delete all 'document' interceptors
 			var interceptor = $(this);
 			var id = interceptor.attr('id');
-			var url = t.getUrl(interceptor);
-			var settings = t.getSettings(interceptor);
-			var target = t.getTarget(pageSection, interceptor);
+			var url = that.getUrl(interceptor);
+			var settings = that.getSettings(interceptor);
+			var target = that.getTarget(pageSection, interceptor);
 
 			// Remove all the interceptors with this id
-			var interceptors = t.fullurl[target][url];
+			var interceptors = that.fullurl[target][url];
 			if (interceptors) {
 
 				interceptors = interceptors.filter(function (interceptorId, pos) {return id != interceptorId});
 				if (interceptors.length) {
 
-					t.fullurl[target][url] = interceptors;
+					that.fullurl[target][url] = interceptors;
 				}
 				else {
 
-					delete t.fullurl[target][url];
+					delete that.fullurl[target][url];
 				}
 			}
 		});
@@ -86,8 +86,8 @@ popURLInterceptors = {
 			// Delete all 'document' interceptors
 			var interceptor = $(this);
 			var id = interceptor.attr('id');
-			var target = t.getTarget(pageSection, interceptor);
-			delete t.partialurl[target][id];
+			var target = that.getTarget(pageSection, interceptor);
+			delete that.partialurl[target][id];
 		});
 	},
 
@@ -97,7 +97,7 @@ popURLInterceptors = {
 
 	getSettings : function(interceptor) {
 
-		var t = this;
+		var that = this;
 
 		var settings = interceptor.data('intercept-settings') || '';
 		settings = settings.split(M.SEPARATOR);
@@ -107,7 +107,7 @@ popURLInterceptors = {
 
 	getTarget : function(pageSection, interceptor) {
 
-		var t = this;
+		var that = this;
 		
 		// Targets: a particular one (eg: navigator) or the document for everything
 		return interceptor.attr('target') || popManager.getFrameTarget(pageSection);
@@ -115,18 +115,18 @@ popURLInterceptors = {
 
 	getUrl : function(interceptor) {
 
-		var t = this;
+		var that = this;
 		return interceptor.data('intercept-url');
 	},
 
 	getFullUrlInterceptors : function(url, options) {
 
-		var t = this;
+		var that = this;
 		var ret = [];
 		options = options || {};
 
 		var target = options.target || M.URLPARAM_TARGET_MAIN;
-		var interceptors = t.fullurl;
+		var interceptors = that.fullurl;
 
 		if (interceptors[target]) {
 
@@ -159,12 +159,12 @@ popURLInterceptors = {
 
 	getPartialUrlInterceptor : function(interceptUrl, options) {
 
-		var t = this;
+		var that = this;
 		var interceptor = null;
 		options = options || {};
 
 		var target = options.target || M.URLPARAM_TARGET_MAIN;
-		var interceptors = t.partialurl;
+		var interceptors = that.partialurl;
 
 		// First check if there's an interceptor for that template
 		if (target) {
@@ -187,11 +187,11 @@ popURLInterceptors = {
 
 	getURLInterceptors : function(interceptUrl, options) {
 
-		var t = this;
+		var that = this;
 		
 		// First try to intercept the full url, then the partial url
-		var ret = t.getFullUrlInterceptors(interceptUrl, options);
-		var partialurl = t.getPartialUrlInterceptor(interceptUrl, options);
+		var ret = that.getFullUrlInterceptors(interceptUrl, options);
+		var partialurl = that.getPartialUrlInterceptor(interceptUrl, options);
 		if (partialurl) {
 			ret.push(partialurl);
 		}
@@ -200,14 +200,14 @@ popURLInterceptors = {
 
 	getInterceptors : function(interceptUrl, options) {
 
-		var t = this;
+		var that = this;
 		
 		// First try to intercept the full url, then different alternatives, eg: url without '#'
 		// This is needed for the replicate: eg: sequence:
 		// click Add project -> go somewhere else -> destroy Add project -> press back btn in browser
 		// then, the 1st intercept will fail (to url https://www.mesym.com/add-project/#1425467928853)
 		// but the 2nd one will catch it and create a new Add Project page
-		var ret = t.getURLInterceptors(interceptUrl, options);
+		var ret = that.getURLInterceptors(interceptUrl, options);
 		if (ret.length) {
 			return ret;
 		}
@@ -215,7 +215,7 @@ popURLInterceptors = {
 		var noMarkerUrl = removeMarker(interceptUrl);
 		if (noMarkerUrl != interceptUrl) {
 
-			ret = t.getURLInterceptors(noMarkerUrl, options);
+			ret = that.getURLInterceptors(noMarkerUrl, options);
 		}
 
 		return ret;
@@ -223,11 +223,11 @@ popURLInterceptors = {
 
 	intercept : function(interceptUrl, options) {
 
-		var t = this;
+		var that = this;
 		var interceptor;
 		options = options || {};
 		
-		var interceptors = t.getInterceptors(interceptUrl, options);
+		var interceptors = that.getInterceptors(interceptUrl, options);
 
 		// If interceptor found, use it
 		if (interceptors.length) {
@@ -278,7 +278,7 @@ popURLInterceptors = {
 				// properties from the original link
 				interceptor.data('interceptedTarget', relatedTarget);
 
-				var settings = t.getSettings(interceptor.parent());
+				var settings = that.getSettings(interceptor.parent());
 				interceptor.data('original-url', interceptUrl);
 				interceptor.data('post-data', getParams(interceptUrl));
 				interceptor.trigger('click');

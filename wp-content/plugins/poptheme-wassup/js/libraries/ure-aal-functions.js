@@ -1,5 +1,5 @@
 (function($){
-popUREAAL = {
+window.popUREAAL = {
 	
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popUREAAL = {
 
 	isActionUpdatedUserMembership : function(args) {
 	
-		var t = this;
+		var that = this;
 
 		var action = args.input;
 		return (action == M.ACTION_USER_UPDATEDUSERMEMBERSHIP);
@@ -15,7 +15,7 @@ popUREAAL = {
 
 	isActionJoinedCommunity : function(args) {
 	
-		var t = this;
+		var that = this;
 
 		var action = args.input;
 		return (action == M.ACTION_USER_JOINEDCOMMUNITY);
@@ -23,7 +23,7 @@ popUREAAL = {
 
 	isObjectTypeUser : function(args) {
 	
-		var t = this;
+		var that = this;
 
 		var object_type = args.input;
 		return (object_type == M.OBJECTTYPE_USER);

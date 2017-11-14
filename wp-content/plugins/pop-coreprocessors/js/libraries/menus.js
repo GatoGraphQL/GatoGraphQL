@@ -1,5 +1,5 @@
 (function($){
-popMenus = {
+window.popMenus = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popMenus = {
 
 	activeLinks : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets, domain = args.domain;
 
 		// Only if the pageSection allows activeLinks (eg: side menu does not, or otherwise that link will remain always painted)

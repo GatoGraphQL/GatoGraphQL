@@ -1,5 +1,5 @@
 (function($){
-popUserRole = {
+window.popUserRole = {
 	
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popUserRole = {
 
 	filterByCommunity : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.change(function (e) {

@@ -1,5 +1,5 @@
 (function($){
-popFileUpload = {
+window.popFileUpload = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popFileUpload = {
 
 	fileUpload : function(args) {
 	
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		targets.each(function() {

@@ -26,7 +26,7 @@ class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ExternalResourc
 	
 	function get_filename($resource) {
 	
-		$version = (!PoP_Frontend_ServerUtils::use_cdn_resources() ? '.9.5.7' : '');
+		$version = (!PoP_Frontend_ServerUtils::access_externalcdn_resources() ? '.9.5.7' : '');
 		$filenames = array(
 			POP_RESOURCELOADER_EXTERNAL_IFRAMETRANSPORT => 'jquery.iframe-transport'.$version,
 			POP_RESOURCELOADER_EXTERNAL_FILEUPLOAD => 'jquery.fileupload'.$version,
@@ -81,7 +81,7 @@ class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ExternalResourc
 	
 	function get_path($resource) {
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			switch ($resource) {
 

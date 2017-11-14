@@ -1,5 +1,5 @@
 (function($){
-popBootstrapCarousel = {
+window.popBootstrapCarousel = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,10 +7,10 @@ popBootstrapCarousel = {
 
 	carouselStatic : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
-		t.prepareCarousel(pageSection, block, targets);
+		that.prepareCarousel(pageSection, block, targets);
 
 		targets.carousel({ 
 			interval: false,
@@ -20,7 +20,7 @@ popBootstrapCarousel = {
 
 	carouselAutomatic : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		
 		// Stop the Carousel when filtering, if not Javascript error
@@ -30,7 +30,7 @@ popBootstrapCarousel = {
 			targets.carousel('pause');
 		});
 
-		t.prepareCarousel(pageSection, block, targets);
+		that.prepareCarousel(pageSection, block, targets);
 			
 		// Initialize if there's one active item. If none, the carousel has no elements at all
 		if (carousel.find('.item.active').length) {
@@ -64,30 +64,30 @@ popBootstrapCarousel = {
 
 	prepareCarousel : function(pageSection, block, targets) {
 
-		var t = this;
+		var that = this;
 		
 		// When filtering, gotta re-add 'active' to the first slide
 		block.on('rendered', function() {
 
-			t.targetsAddActive(targets);
+			that.targetsAddActive(targets);
 		});
 
-		t.targetsAddActive(targets);
+		that.targetsAddActive(targets);
 	},
 	targetsAddActive : function(targets) {
 
-		var t = this;
+		var that = this;
 		targets.each(function() {
 	
 			// Add the 'active' class
 			var carousel = $(this);			
-			t.addActive(carousel);
+			that.addActive(carousel);
 		});
 	},
 
 	// carouselOverflowVisible : function(carousel) {
 
-	// 	var t = this;
+	// 	var that = this;
 
 	// 	// Comment Leo 04/05/2014: With carousel in the Homepage we couldn't have a post background color extend until the border of the page,
 	// 	// because of the property 'overflow': 'hidden', which hid the +-15px from class row inside the carousel
@@ -104,7 +104,7 @@ popBootstrapCarousel = {
 
 	addActive : function(carousel) {
 	
-		var t = this;
+		var that = this;
 		
 		// Add 'active' to the first item of carousel, and then initialize ('active' is not added in the .tmpl to be merged)
 		if (carousel.find('.item.active').length == 0) {
@@ -116,57 +116,57 @@ popBootstrapCarousel = {
 
 	showElement : function(carousel, elem) {
 
-		var t = this;
+		var that = this;
 		var slide = elem.closest('.item');
 		var slideNumber = slide.parent().children().index(slide);
-		t.slideTo(carousel, slideNumber);
+		that.slideTo(carousel, slideNumber);
 	},
 	
 	slideTo : function(carousel, number) {
 
-		var t = this;
+		var that = this;
 		carousel.carousel(number);
 	},
 
 	next : function(carousel) {
 
-		var t = this;
+		var that = this;
 		carousel.carousel('next');
 	},
 	
 	prev : function(carousel) {
 
-		var t = this;
+		var that = this;
 		carousel.carousel('prev');
 	},
 	
 	isFirstSlide : function(carousel) {
 	
-		var t = this;		
+		var that = this;		
 		return carousel.find('.item:first-child').hasClass('active');
 	},
 	
 	isLastSlide : function(carousel) {
 	
-		var t = this;		
+		var that = this;		
 		return carousel.find('.item:last-child').hasClass('active');
 	},
 	
 	isNthSlide : function(carousel, position) {
 	
-		var t = this;		
+		var that = this;		
 		return carousel.find('.item:nth-child('+position+')').hasClass('active');
 	},
 	
 	isNthLastSlide : function(carousel, position) {
 	
-		var t = this;		
+		var that = this;		
 		return carousel.find('.item:nth-last-child('+position+')').hasClass('active');
 	},
 	
 	numberSlides : function(carousel) {
 	
-		var t = this;		
+		var that = this;		
 		return carousel.find('.item').length;
 	},
 
@@ -175,7 +175,7 @@ popBootstrapCarousel = {
 
 
 (function($){
-popBootstrapCarouselControls = {
+window.popBootstrapCarouselControls = {
 		
 	//-------------------------------------------------
 	// PRIVATE
@@ -189,41 +189,41 @@ popBootstrapCarouselControls = {
 
 	initBlockRuntimeMemory : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
 
 		// Initialize with this library key
 		mempage.carouselControls = {};
 
 		// Reset values
-		t.resetBlockRuntimeMemory(pageSection, block);
+		that.resetBlockRuntimeMemory(pageSection, block);
 	},
 
 	carouselControls : function(args) {
 	
-		var t = this;
+		var that = this;
 
 		var /*domain = args.domain, */pageSection = args.pageSection, block = args.block, targets = args.targets;
 
-		var carousel = t.getCarousel(targets);
+		var carousel = that.getCarousel(targets);
 
 		var controlNext = targets.children('.pop-carousel-control.right');
-		t.controlCarouselNext(pageSection, block, carousel, targets, controlNext);
+		that.controlCarouselNext(pageSection, block, carousel, targets, controlNext);
 
 		var controlPrev = targets.children('.pop-carousel-control.left');
-		t.controlCarouselPrev(pageSection, block, carousel, targets, controlPrev);
+		that.controlCarouselPrev(pageSection, block, carousel, targets, controlPrev);
 
 		// Initialize block
 		block.on('fetchDomainCompleted', function(e, status, domain) {
 		
-			t.handleReload(domain, pageSection, block, targets);
+			that.handleReload(domain, pageSection, block, targets);
 		});
 
 		// Initialize variables
-		// t.initVars(pageSection, block);
+		// that.initVars(pageSection, block);
 		
 		// Initialize: set state of buttons (enabled / disabled)
-		t.setEnabledDisabled(pageSection, block, targets);
+		that.setEnabledDisabled(pageSection, block, targets);
 	},
 
 	//-------------------------------------------------
@@ -232,14 +232,14 @@ popBootstrapCarouselControls = {
 
 	getRuntimeMemoryPage : function(pageSection, targetOrId) {
 
-		var t = this;
+		var that = this;
 		return popManager.getRuntimeMemoryPage(pageSection, targetOrId).carouselControls;
 	},
 
 	resetBlockRuntimeMemory : function(pageSection, targetOrId) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, targetOrId);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, targetOrId);
 		var empty = {
 
 			state: '',
@@ -250,18 +250,18 @@ popBootstrapCarouselControls = {
 
 	slideNext : function(pageSection, block, carousel, controlNext) {
 	
-		var t = this;
+		var that = this;
 
 		// var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
 		// If stopped loading and we are in the slide before the last one, disable control
 		if (popBootstrapCarousel.isNthLastSlide(carousel, 2) && popManager.stopFetchingBlock(pageSection, block)/*blockQueryState[M.URLPARAM_STOPFETCHING]*/) {
 
-			t.disable(controlNext);
+			that.disable(controlNext);
 		}
 		
 		// Remove 'disabled' from Prev control
-		t.enable(controlNext.siblings('.pop-carousel-control.left'));
+		that.enable(controlNext.siblings('.pop-carousel-control.left'));
 
 		// Slide
 		popBootstrapCarousel.next(carousel);
@@ -269,7 +269,7 @@ popBootstrapCarouselControls = {
 	
 	controlCarouselNext : function(pageSection, block, carousel, carouselControls, control) {
 	
-		var t = this;
+		var that = this;
 
 		// var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		var blockQueryState = popManager.getBlockQueryState(pageSection, block);
@@ -280,7 +280,7 @@ popBootstrapCarouselControls = {
 			var control = $(this);
 		
 			// If control is disabled, do nothing
-			if (t.disabled(control)) return;
+			if (that.disabled(control)) return;
 				
 			// var carousel = $(control.data('target'));
 
@@ -296,20 +296,20 @@ popBootstrapCarouselControls = {
 				// Load more
 				popManager.fetchBlock(pageSection, block, {operation: M.URLPARAM_OPERATION_APPEND});
 				
-				t.setControlState(pageSection, block, 'loading');
+				that.setControlState(pageSection, block, 'loading');
 			}
 			
 			// Otherwise, just slide
 			else {
 
-				t.slideNext(pageSection, block, carousel, control);
+				that.slideNext(pageSection, block, carousel, control);
 			}
 		});
 	},
 
 	controlCarouselPrev : function(pageSection, block, carousel, carouselControls, control) {
 	
-		var t = this;
+		var that = this;
 
 		control.click(function(e) {
 	
@@ -317,20 +317,20 @@ popBootstrapCarouselControls = {
 			var control = $(this);
 		
 			// If control is disabled, do nothing
-			if (t.disabled(control)) return;
+			if (that.disabled(control)) return;
 					
 			// var carousel = $(control.data('target'));
 			
 			// If we are in the first slide, disable Prev control
 			if (popBootstrapCarousel.isNthSlide(carousel, 2)) {
 
-				t.disable(control);
+				that.disable(control);
 			}
 
 			// If there are more slides later, re-enable Next Control
 			if (popBootstrapCarousel.numberSlides(carousel) > 1) {
 			
-				t.enable(control.siblings('.pop-carousel-control.right'));
+				that.enable(control.siblings('.pop-carousel-control.right'));
 			}
 
 			// Slide
@@ -340,115 +340,115 @@ popBootstrapCarouselControls = {
 
 	handleReload : function(domain, pageSection, block, carouselControls) {
 	
-		var t = this;
+		var that = this;
 		var dataset = popManager.getBlockDataset(domain/*popManager.getBlockTopLevelDomain(block)*/, pageSection, block);
 
 		// Set controls enabled / disabled
-		t.setEnabledDisabled(pageSection, block, carouselControls);
+		that.setEnabledDisabled(pageSection, block, carouselControls);
 		
 		// Only if no message is being shown, and if the last state from the control was 'next'
-		// if (!blockFeedback.msg && t.getControlState(pageSection, block) == 'loading') {
+		// if (!blockFeedback.msg && that.getControlState(pageSection, block) == 'loading') {
 
 		// Only if there are results, and if the last state from the control was 'next'
-		if (dataset && dataset.length && t.getControlState(pageSection, block) == 'loading') {
+		if (dataset && dataset.length && that.getControlState(pageSection, block) == 'loading') {
 		
-			var carousel = t.getCarousel(carouselControls);
+			var carousel = that.getCarousel(carouselControls);
 			var controlNext = carouselControls.children('.pop-carousel-control.right');
-			t.slideNext(pageSection, block, carousel, controlNext);
+			that.slideNext(pageSection, block, carousel, controlNext);
 		}
 		
 		// Reset state
-		t.setControlState(pageSection, block, '');
+		that.setControlState(pageSection, block, '');
 	},
 
 	// initVars : function(pageSection, block) {
 
-	// 	var t = this;
+	// 	var that = this;
 	// 	var pssId = popManager.getSettingsId(pageSection);
 	// 	var bsId = popManager.getSettingsId(block);
 
-	// 	if (!t.items[pssId]) {
-	// 		t.items[pssId] = {};
+	// 	if (!that.items[pssId]) {
+	// 		that.items[pssId] = {};
 	// 	}
 
-	// 	t.items[pssId][bsId] = { state : '' };
+	// 	that.items[pssId][bsId] = { state : '' };
 	// },
 	
 	getControlState : function(pageSection, block) {
 	
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 		
 		return mempage.state;
 	},
 	
 	setControlState : function(pageSection, block, state) {
 	
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 		
 		mempage.state = state;
 	},
 
 	getCarousel : function(carouselControls) {
 	
-		var t = this;
+		var that = this;
 		return $(carouselControls.data('target'));
 	},
 	
 	setEnabledDisabled : function(pageSection, block, carouselControls) {
 		
-		var t = this;
+		var that = this;
 
-		var carousel = t.getCarousel(carouselControls);
+		var carousel = that.getCarousel(carouselControls);
 		var controlPrev = carouselControls.children('.pop-carousel-control.left');
 		var controlNext = carouselControls.children('.pop-carousel-control.right');
 
 		if (popBootstrapCarousel.numberSlides(carousel) == 0) {
 			// No results, disable both
-			t.disable(controlPrev);
-			t.disable(controlNext);
+			that.disable(controlPrev);
+			that.disable(controlNext);
 		}
 		else {
 
 			// Disable the prev button
 			if (popBootstrapCarousel.isFirstSlide(carousel)) {
-				t.disable(controlPrev);
+				that.disable(controlPrev);
 			}
 			else {
-				t.enable(controlPrev);
+				that.enable(controlPrev);
 			}
 
 			// Disable / Enable next button			
 			// var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 			if (popBootstrapCarousel.isLastSlide(carousel) && popManager.stopFetchingBlock(pageSection, block)/*blockQueryState[M.URLPARAM_STOPFETCHING]*/) {
 		
-				t.disable(controlNext);
+				that.disable(controlNext);
 			}
 			else {
 		
-				t.enable(controlNext);
+				that.enable(controlNext);
 			}
 		}
 	},
 	
 	disable : function(control) {
 	
-		var t = this;
+		var that = this;
 		control.addClass('disabled');
 		control.attr('disabled', true);
 	},
 	
 	enable : function(control) {
 	
-		var t = this;
+		var that = this;
 		control.removeClass('disabled');
 		control.attr('disabled', false);
 	},
 	
 	disabled : function(control) {
 	
-		var t = this;
+		var that = this;
 		return control.hasClass('disabled');
 	}
 };

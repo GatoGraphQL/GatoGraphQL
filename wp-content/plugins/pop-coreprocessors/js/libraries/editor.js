@@ -1,5 +1,5 @@
 (function($){
-popEditor = {
+window.popEditor = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popEditor = {
 
 	// editorFocus : function(args) {
 
-	// 	var t = this;
+	// 	var that = this;
 
 	// 	var targets = args.targets;
 	// 	targets.each(function() {
@@ -20,17 +20,17 @@ popEditor = {
 
 	editor : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 
 		// When the block gets its content replaced (for the editor, it happens in Edit Profile), also destroy the editor
 		block.one('rerender', function(action) {
 
-			t.destroy(targets);
+			that.destroy(targets);
 		});
 		var pageSectionPage = popManager.getPageSectionPage(block);
 		pageSectionPage.one('destroy', function() {
-			t.destroy(targets);
+			that.destroy(targets);
 		});
 
 		// All the targets are inputs inside a form. Before the form submits, it will save the wpEditor value
@@ -119,7 +119,7 @@ popEditor = {
 
 	destroy : function(targets) {
 	
-		var t = this;
+		var that = this;
 		targets.each(function() {
 
 			var editor = $(this).find('.pop-editor');

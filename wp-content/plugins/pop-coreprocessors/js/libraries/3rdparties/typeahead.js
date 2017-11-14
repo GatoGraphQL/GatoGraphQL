@@ -1,5 +1,5 @@
 (function($){
-popTypeahead = {
+window.popTypeahead = {
 	
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,19 +7,19 @@ popTypeahead = {
 
 	typeaheadSearchBtn : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.click(function() {
 
 			var control = $(this);
 			var typeahead = control.closest('.pop-typeahead');
-			t.executeTypeaheadSearch(pageSection, block, typeahead);
+			that.executeTypeaheadSearch(pageSection, block, typeahead);
 		});
 	},
 	typeaheadSearchInput : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.keypress(function(e) {
@@ -36,14 +36,14 @@ popTypeahead = {
 				var input = typeahead.find('input[type="text"].tt-input');
 				input.typeahead('close');
 
-				t.executeTypeaheadSearch(pageSection, block, typeahead);
+				that.executeTypeaheadSearch(pageSection, block, typeahead);
 			}
 		});
 	},
 
 	fillTypeahead : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		// var domain = getDomain(block.data('toplevel-url'));
@@ -64,7 +64,7 @@ popTypeahead = {
 						var datum = popManager.getItemObject(domain, database_key, value);
 
 						// Trigger the select
-						t.selectTypeahead(domain, pageSection, block, typeahead, datum);
+						that.selectTypeahead(domain, pageSection, block, typeahead, datum);
 					});
 
 					// If we are inside a collapsed widget (eg: in the Add Post addons pageSection), then open the collapse
@@ -76,7 +76,7 @@ popTypeahead = {
 
 	selectDatum : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.click(function(e) {
@@ -91,38 +91,38 @@ popTypeahead = {
 			var datum = popManager.getItemObject(domain, database_key, value);
 
 			// Trigger the select
-			t.selectTypeahead(domain, pageSection, block, typeahead, datum);
+			that.selectTypeahead(domain, pageSection, block, typeahead, datum);
 		});
 	},
 
 	selectableTypeahead : function(args) {
 	
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
-		t.typeahead(domain, pageSection, block, targets);
+		that.typeahead(domain, pageSection, block, targets);
 
 		targets.each(function() {
 
 			var typeahead = $(this);
 
-			t.validateMaxSelected(pageSection, block, typeahead);
+			that.validateMaxSelected(pageSection, block, typeahead);
 			
 			// Process the "selected" trigger
 			typeahead.bind('typeahead:selected', function(obj, datum, name) {	  
 
 				var typeahead = $(this);
-				t.selectTypeahead(domain, pageSection, block, typeahead, datum);
+				that.selectTypeahead(domain, pageSection, block, typeahead, datum);
 			});
 		});
 	},
 
 	fetchlinkTypeahead : function(args) {
 	
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 		
-		t.typeahead(domain, pageSection, /*pageSectionPage, */block, targets);
+		that.typeahead(domain, pageSection, /*pageSectionPage, */block, targets);
 		
 		targets.each(function() {
 
@@ -140,7 +140,7 @@ popTypeahead = {
 
 	selectableTypeaheadTrigger : function(args) {
 
-		var t = this;
+		var that = this;
 			
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
@@ -151,7 +151,7 @@ popTypeahead = {
 			var typeahead = alert.closest('.pop-typeahead');
 
 			// Re-enable the Typeahead (if disabled because of max-selected limit reached)
-			var disable = t.getElementsToDisable(typeahead);
+			var disable = that.getElementsToDisable(typeahead);
 			disable.attr('disabled', false);
 			disable.removeClass('disabled');
 
@@ -163,7 +163,7 @@ popTypeahead = {
 
 	removeLocalStorageItem : function(args) {
 
-		var t = this;
+		var that = this;
 		var path = args.path, key = args.key;
 
 		// Delete the localStorage entries for the typeahead
@@ -176,11 +176,11 @@ popTypeahead = {
 
 	selectTypeahead : function(domain, pageSection, block, typeahead, datum) {
 	
-		var t = this;
+		var that = this;
 
 		var input = typeahead.find('input[type="text"].tt-input');
 
-		t.triggerSelect(domain, pageSection, block, typeahead, datum);
+		that.triggerSelect(domain, pageSection, block, typeahead, datum);
 			
 		// Delete the string
 		input.typeahead('val', '');
@@ -188,7 +188,7 @@ popTypeahead = {
 
 	executeTypeaheadSearch : function(pageSection, block, typeahead) {
 	
-		var t = this;
+		var that = this;
 		var input = typeahead.find('input[type="text"].tt-input');
 
 		// Trigger the search: get the url from the block dataload-source, and replace %QUERY with the value of the typeahead
@@ -202,21 +202,21 @@ popTypeahead = {
 
 	getElementsToDisable : function(typeahead) {
 
-		var t = this;
+		var that = this;
 		return typeahead.children('div.pop-operation').find('a, button, input');
 	},
 
 	typeahead : function(domain, pageSection, block, targets) {
 	
-		var t = this;
+		var that = this;
 		
 		var pageSectionPage = popManager.getPageSectionPage(block);
 		pageSectionPage.one('destroy', function() {
-			t.destroy(targets);
+			that.destroy(targets);
 		});
 		block.one('rerender', function(action) {
 			
-			t.destroy(targets);
+			that.destroy(targets);
 		});
 
 		targets.each(function() {
@@ -358,7 +358,7 @@ popTypeahead = {
 
 	triggerSelect : function(domain, pageSection, block, typeahead, datum) {
 	
-		var t = this;
+		var that = this;
 
 		// Comment Leo 30/10/2017: when doing serverside-rendering, and first loading the website (eg: https://www.mesym.com/en/add-post/?related[0]=22199),
 		// we will already have the item rendered. And since the database is not sent anymore, datum.id will be empty
@@ -384,7 +384,7 @@ popTypeahead = {
 			// Delete the session ids before starting a new session
 			popJSRuntimeManager.deleteBlockLastSessionIds(domain, pageSection, block, template);
 
-			t.validateMaxSelected(pageSection, block, typeahead);
+			that.validateMaxSelected(pageSection, block, typeahead);
 			
 			typeahead.triggerHandler('selected', [datum]);
 		}
@@ -392,7 +392,7 @@ popTypeahead = {
 
 	validateMaxSelected : function(pageSection, block, typeahead) {
 	
-		var t = this;
+		var that = this;
 
 		// Count how many items, and if we reach the max, disable the typeahead
 		if (typeahead.data('max-selected')) {
@@ -401,7 +401,7 @@ popTypeahead = {
 			if (numSelected == typeahead.data('max-selected')) {
 
 				// Disable the typeahead
-				var disable = t.getElementsToDisable(typeahead);
+				var disable = that.getElementsToDisable(typeahead);
 				disable.attr('disabled', 'disabled');
 				disable.addClass('disabled');
 			}	
@@ -410,7 +410,7 @@ popTypeahead = {
 
 	removeSelected : function(typeahead, id) {
 	
-		var t = this;
+		var that = this;
 
 		var selected = typeahead.find('input[type="hidden"][value="'+id+'"]');
 		var alert = selected.closest('.alert');
@@ -419,7 +419,7 @@ popTypeahead = {
 
 	destroy : function(targets) {
 	
-		var t = this;
+		var that = this;
 		targets.find('input[type="text"].tt-input').typeahead('destroy');
 	}
 };

@@ -1,5 +1,5 @@
 (function($){
-popCDN = {
+window.popCDN = {
 
 	localStorageKey : 'PoP:cdn-thumbprints',
 	thumbprintValues : {},
@@ -9,54 +9,54 @@ popCDN = {
 	//-------------------------------------------------
 	documentInitialized : function(args) {
 	
-		var t = this;
+		var that = this;
 
 		// Will need the thumbprint values from the topLevelFeedback
 		var domain = args.domain;
 		var tlValues = popManager.getTopLevelFeedback(domain)[M.CDN_THUMBPRINTVALUES];
 
 		// Set initially the value from the localStorage, if it exists
-		t.thumbprintValues = popManager.getStoredData(t.localStorageKey, false);
+		that.thumbprintValues = popManager.getStoredData(that.localStorageKey, false);
 
-		if (t.thumbprintValues) {
+		if (that.thumbprintValues) {
 
 			// Update with values from the topLevelFeedback
-			t.updateThumbprintValues(tlValues);
+			that.updateThumbprintValues(tlValues);
 		}
 		else {
 
 			// Initialize as the topLevelFeedback directly
-			t.thumbprintValues = $.extend({}, tlValues);
-			t.storeData();
+			that.thumbprintValues = $.extend({}, tlValues);
+			that.storeData();
 		}
 	},
 
 	pageSectionFetchSuccess : function(args) {
 	
-		var t = this;
+		var that = this;
 		var response = args.response;
-		t.fetchSuccess(response);
+		that.fetchSuccess(response);
 	},
 
 	blockFetchSuccess : function(args) {
 	
-		var t = this;
+		var that = this;
 		var response = args.response;
-		t.fetchSuccess(response);
+		that.fetchSuccess(response);
 	},
 
 	modifyFetchArgs : function(args) {
 	
-		var t = this;
+		var that = this;
 		var options = args.options, url = args.url;
 
-		if (t.useCDN(url)) {
+		if (that.useCDN(url)) {
 			
 			// Modify the URL, replacing the website domain with the CDN
-			args.url = t.getCDNUrl(url);
+			args.url = that.getCDNUrl(url);
 		
 			// Add the thumbprints as params
-			var thumbprint = t.getThumbprintValue(url);
+			var thumbprint = that.getThumbprintValue(url);
 			if (thumbprint) {
 				options.params = options.params || {};
 				options.params[M.CDN_URLPARAM_THUMBPRINT] = thumbprint;
@@ -66,17 +66,17 @@ popCDN = {
 
 	modifyFetchBlockArgs : function(args) {
 	
-		var t = this;
+		var that = this;
 		var options = args.options, url = args.url, type = args.type;
 
 		// Only for GET requests
-		if (type == 'GET' && t.useCDN(url)) {
+		if (type == 'GET' && that.useCDN(url)) {
 			
 			// Modify the URL, replacing the website domain with the CDN
-			args.url = t.getCDNUrl(url);
+			args.url = that.getCDNUrl(url);
 		
 			// Add the thumbprints as params
-			var thumbprint = t.getThumbprintValue(url);
+			var thumbprint = that.getThumbprintValue(url);
 			if (thumbprint) {
 				options['onetime-post-data'] = options['onetime-post-data'] ? options['onetime-post-data']+'&' : '';
 				options['onetime-post-data'] += M.CDN_URLPARAM_THUMBPRINT+'='+thumbprint;
@@ -90,10 +90,10 @@ popCDN = {
 
 	fetchSuccess : function(response) {
 	
-		var t = this;
+		var that = this;
 
 		// Update the thumbprint values from the response's topLevelFeedback
-		t.updateThumbprintValues(response.feedback.toplevel[M.CDN_THUMBPRINTVALUES]);
+		that.updateThumbprintValues(response.feedback.toplevel[M.CDN_THUMBPRINTVALUES]);
 	},
 
 	updateThumbprintValues : function(newValues) {
@@ -101,7 +101,7 @@ popCDN = {
 		// Get the new values from newValues (which is the topLevelFeedback), and set them as the thumbprint value if they are bigger than the current value
 		// This is done like this, because the topLevelFeedback may come from a page cached in Service Workers, so that that value
 		// is already stale, and otherwise it would override more up-to-date values
-		var t = this;
+		var that = this;
 
 		// Flag to indicate if to save a new more up-to-date value in localStorage
 		var save = false;
@@ -109,29 +109,29 @@ popCDN = {
 		// Get the max value, for each thumbprint item, from both the topLevelFeedback and the current value
 		for (var key in newValues) {
 
-			if (newValues[key] > t.thumbprintValues[key]) {
+			if (newValues[key] > that.thumbprintValues[key]) {
 
-				t.thumbprintValues[key] = newValues[key];
+				that.thumbprintValues[key] = newValues[key];
 				save = true;
 			}
 		}
 
 		// Save latest thumbprint values in localStorage
 		if (save) {
-			t.storeData();
+			that.storeData();
 		}
 	},
 
 	storeData : function() {
 	
-		var t = this;
+		var that = this;
 
-		popManager.storeData(t.localStorageKey, t.thumbprintValues);
+		popManager.storeData(that.localStorageKey, that.thumbprintValues);
 	},
 
 	useCDN : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		// Use CDN if:
 		// - CDN URL is defined, 
@@ -142,7 +142,7 @@ popCDN = {
 
 	getCDNUrl : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		// Replace the website domain with the CDN domain
 		return M.CDN_CONTENT_URI+url.substr(M.HOME_DOMAIN.length);
@@ -150,7 +150,7 @@ popCDN = {
 
 	getThumbprintValue : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		var thumbprints = popCDNThumbprints.getThumbprints(url);
 		var value = [];
@@ -158,24 +158,24 @@ popCDN = {
 		$.each(thumbprints, function(index, thumbprint) {
 
 			// Add the value of that thumbprint
-			value.push(t.thumbprintValues[thumbprint]);
+			value.push(that.thumbprintValues[thumbprint]);
 		});
 
-		// Split them with a separator to make it easier to see the different thumbprint values
+		// Join them (using a dot) to make it easier to see the different thumbprint values
 		return value.join(M.CDN_SEPARATOR_THUMBPRINT);
 	},
 
 	convertURL : function(url) {
 	
-		var t = this;
+		var that = this;
 
-		if (t.useCDN(url)) {
+		if (that.useCDN(url)) {
 			
-			// Important: get the thumbprint now. After doing t.getCDNUrl(url);, the domain changes, so the thumbprint values won't be found anymore
-			var thumbprint = t.getThumbprintValue(url);
+			// Important: get the thumbprint now. After doing that.getCDNUrl(url);, the domain changes, so the thumbprint values won't be found anymore
+			var thumbprint = that.getThumbprintValue(url);
 
 			// Modify the URL, replacing the website domain with the CDN
-			url = t.getCDNUrl(url);
+			url = that.getCDNUrl(url);
 
 			// Add the version
 			// url = add_query_arg(M.CDN_URLPARAM_VERSION, M.VERSION, url);

@@ -1,5 +1,5 @@
 (function($){
-popBootstrap = {
+window.popBootstrap = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popBootstrap = {
 
 	modal : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		// Hooks
@@ -28,35 +28,35 @@ popBootstrap = {
 
 	closeModals : function() {
 
-		var t = this;
+		var that = this;
 		$('.modal.in').modal('hide');
 	},
 
 	showingModal : function(modal) {
 
-		var t = this;
+		var that = this;
 		return modal.hasClass('in');
 	},
 
 	popover : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
-		t.execPopover(pageSection, block, targets);
+		that.execPopover(pageSection, block, targets);
 	},
 
 	contentPopover : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		// Execute the popover on any link with attr data-popover-target defined
-		t.execPopover(pageSection, block, targets.find('a[data-popover-target]'));
+		that.execPopover(pageSection, block, targets.find('a[data-popover-target]'));
 	},
 
 	tooltip : function(args) {
 		
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*block = args.block,*/ targets = args.targets;
 
 		jQuery(document).ready( function($) {
@@ -91,15 +91,15 @@ popBootstrap = {
 
 	openParentCollapse : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
-		t.execOpenParentCollapse(targets);
+		that.execOpenParentCollapse(targets);
 	},
 
 	alertCloseOnTimeout : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		// get the time from the block
@@ -115,14 +115,14 @@ popBootstrap = {
 		targets.mouseleave(function() {
 			
 			targets.data('close', true);
-			t.execAlertCloseOnTimeout(targets, closeTime);
+			that.execAlertCloseOnTimeout(targets, closeTime);
 
 			// Also allow to change the style
 			targets.removeClass('hover');
 		})
 
 		// set the timeout
-		t.execAlertCloseOnTimeout(targets, closeTime);
+		that.execAlertCloseOnTimeout(targets, closeTime);
 	},
 
 	//-------------------------------------------------
@@ -131,7 +131,7 @@ popBootstrap = {
 
 	execOpenParentCollapse : function(targets) {
 
-		var t = this;
+		var that = this;
 
 		// Open the Parent Collapse, needed for the Simple View Feed when adding a comment and the comments is not showing
 		targets.closest('.collapse').not('.in').collapse('show');
@@ -139,7 +139,7 @@ popBootstrap = {
 
 	execPopover : function(pageSection, block, targets) {
 
-		var t = this;
+		var that = this;
 
 		jQuery(document).ready( function($) {
 			var pageSectionPage = popManager.getPageSectionPage(block);
@@ -204,7 +204,7 @@ popBootstrap = {
 
 	execAlertCloseOnTimeout : function(targets, closeTime) {
 
-		var t = this;
+		var that = this;
 		setTimeout(function () {
 			
 			if (targets.data('close')) {
@@ -216,7 +216,7 @@ popBootstrap = {
 
 	scrollTop : function(args) {
 
-		var t = this;
+		var that = this;
 		var elem = args.elem, top = args.top, animate = args.animate;
 
 		// Try modal if available

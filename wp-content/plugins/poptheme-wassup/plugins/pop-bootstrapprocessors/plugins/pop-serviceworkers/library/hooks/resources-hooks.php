@@ -24,7 +24,7 @@ class PoPTheme_Wassup_Core_ServiceWorkers_Hooks_Resources {
             // Add all the fonts needed by Bootstrap inside the bootstrap.min.css file
             // Note: this file is in plug-in pop-coreprocessors, not in poptheme-wassup, however we
             // add it here to not add a dependency from pop-coreprocessors to pop-serviceworkers
-            if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+            if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
                 $precache[] = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/fonts/glyphicons-halflings-regular.eot';
                 $precache[] = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/fonts/glyphicons-halflings-regular.svg';

@@ -1,18 +1,18 @@
 (function($){
-popNotifications = {
+window.popNotifications = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
 	//-------------------------------------------------
 	timeFromNow : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		targets.each(function() {
 
 			var target = $(this);
-			t.execTimeFromNow(target);
+			that.execTimeFromNow(target);
 		});
 	},
 
@@ -21,7 +21,7 @@ popNotifications = {
 	//-------------------------------------------------
 	execTimeFromNow : function(target) {
 
-		var t = this;
+		var that = this;
 
 		// Check if the target still exists
 		if (($('#'+target.attr('id'))).length) {
@@ -34,7 +34,7 @@ popNotifications = {
 			// Keep the time updated
 			setTimeout(function () {
 				
-				t.execTimeFromNow(target);
+				that.execTimeFromNow(target);
 			}, 60000); // Once every 60 seconds
 		}
 	}	

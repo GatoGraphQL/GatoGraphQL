@@ -1,5 +1,5 @@
 (function($){
-popCustomBootstrap = {
+window.popCustomBootstrap = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popCustomBootstrap = {
 
 	initDocument : function() {
 	
-		var t = this;
+		var that = this;
 		
 		// Solution to problem: links can't be edited inside wpEditor inside Bootstrap modal
 		// Solution taken from: 
@@ -21,31 +21,31 @@ popCustomBootstrap = {
 	},
 	runScriptsBefore : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, newDOMs = args.newDOMs;
 
 		/** Collapse */
 		newDOMs.find('.collapse').addBack('.collapse')
 			.on('show.bs.collapse', function() {
 
-				t.addBubblingFlag($(this), '.collapse', 'show');
+				that.addBubblingFlag($(this), '.collapse', 'show');
 			})
 			.on('shown.bs.collapse', function() {
 
-				t.addBubblingFlag($(this), '.collapse', 'shown');
+				that.addBubblingFlag($(this), '.collapse', 'shown');
 			})
 			.on('hide.bs.collapse', function() {
 
-				t.addBubblingFlag($(this), '.collapse', 'hide');
+				that.addBubblingFlag($(this), '.collapse', 'hide');
 			})
 			.on('hidden.bs.collapse', function() {
 
-				t.addBubblingFlag($(this), '.collapse', 'hidden');
+				that.addBubblingFlag($(this), '.collapse', 'hidden');
 			});
 	},
 	pageSectionNewDOMsInitialized : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, newDOMs = args.newDOMs;
 		
 		// Function 'activateNestedComponents' must be executed before anything else: show the proper bootstrap components, open one inside of each other,
@@ -53,15 +53,15 @@ popCustomBootstrap = {
 		// This is done so that we can capture the event as 'shown' (instead of 'show') and make sure that the js executes alright
 		// (eg of problem with 'show': Clicking on My Announcements will first load My Content since that tabPanel is active at the beginning,
 		// so we gotta make My Announcements and its parent tab My Content properly active before triggering the js initialization)
-		t.activateNestedComponents(pageSection, newDOMs);
+		that.activateNestedComponents(pageSection, newDOMs);
 
-		t.showComponentInitializeJS(domain, pageSection, newDOMs);
-		t.triggerTabPaneEvents(newDOMs);
+		that.showComponentInitializeJS(domain, pageSection, newDOMs);
+		that.triggerTabPaneEvents(newDOMs);
 	},
 
 	onBootstrapEventWindowResize : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		// Whenever any of this events are trigger, resize the window to refresh Waypoints
@@ -74,7 +74,7 @@ popCustomBootstrap = {
 		
 	isHidden : function(args) {
 	
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		// Collapse, Modal, Tab Pane
@@ -92,7 +92,7 @@ popCustomBootstrap = {
 
 	isActive : function(args) {
 	
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		if (targets.hasClass('tab-pane') && !targets.hasClass('active')) {
@@ -105,7 +105,7 @@ popCustomBootstrap = {
 
 	activeTabLink : function(args) {
 	
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		targets.click(function(e) {
@@ -117,7 +117,7 @@ popCustomBootstrap = {
 
 	activatePageTab : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.click(function() {
@@ -125,7 +125,7 @@ popCustomBootstrap = {
 			var interceptor = $(this);
 			var pageTabBtn = $(interceptor.data('target'));
 
-			t.clickPageTab(pageSection, pageTabBtn);
+			that.clickPageTab(pageSection, pageTabBtn);
 		});	
 
 		targets.each(function() {
@@ -143,7 +143,7 @@ popCustomBootstrap = {
 
 	customQuickView : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection;
 		var modal = pageSection.closest('.modal');
 
@@ -165,7 +165,7 @@ popCustomBootstrap = {
 
 	destroyPageOnModalClose : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		// When closing the modal, trigger a destroy of the interceptor. This is needed for the quickView => preview,
@@ -182,7 +182,7 @@ popCustomBootstrap = {
 
 	customCloseModals : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection;
 
 		pageSection.on('destroy', function() {
@@ -197,32 +197,32 @@ popCustomBootstrap = {
 
 	showComponentInitializeJS : function(domain, pageSection, newDOMs) {
 
-		var t = this;
+		var that = this;
 
 		var collapses = newDOMs.find('.collapse.pop-bscomponent').addBack('.collapse.pop-bscomponent');
 		if (collapses.length) {
-			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */collapses, 'shown.bs.collapse');
+			that.initComponentHandlers(domain, pageSection, /*pageSectionPage, */collapses, 'shown.bs.collapse');
 		}
 
 		var modals = newDOMs.find('.modal.pop-bscomponent').addBack('.modal.pop-bscomponent');
 		if (modals.length) {
-			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */modals, 'shown.bs.modal');
+			that.initComponentHandlers(domain, pageSection, /*pageSectionPage, */modals, 'shown.bs.modal');
 		}
 
 		var tabPanes = newDOMs.find('.tab-pane.pop-bscomponent').addBack('.tab-pane.pop-bscomponent');
 		if (tabPanes.length) {
-			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */tabPanes, 'shown.bs.tabpane');
+			that.initComponentHandlers(domain, pageSection, /*pageSectionPage, */tabPanes, 'shown.bs.tabpane');
 		}
 
 		var carousels = newDOMs.find('.carousel.pop-bscomponent').addBack('.carousel.pop-bscomponent');
 		if (carousels.length) {
-			t.initComponentHandlers(domain, pageSection, /*pageSectionPage, */carousels, 'slid.bs.carousel', true);
+			that.initComponentHandlers(domain, pageSection, /*pageSectionPage, */carousels, 'slid.bs.carousel', true);
 		}
 	},
 	
 	initComponentHandlers : function(domain, pageSection, targets, handler, useRelatedTarget) {
 	
-		var t = this;
+		var that = this;
 
 		// Comment Leo: IMPORTANT: do NOT alter the order of these pieces of code below:
 		// 1. When opening a component, set the data (eg: post-data) in all the contained blocks
@@ -242,7 +242,7 @@ popCustomBootstrap = {
 				'post-data': component.data('post-data'),
 			}
 
-			t.recursiveSetBlockData(domain, pageSection, blocks, block_data);
+			that.recursiveSetBlockData(domain, pageSection, blocks, block_data);
 		});
 
 		// Initialize JS: whenever the bootstrap javascrit component opens (tab, modal, collapse)
@@ -284,16 +284,16 @@ popCustomBootstrap = {
 
 			if (component.data('onetime-refetch')) {
 
-				t.recursiveOneTimeRefetch(domain, pageSection, blocks);
+				that.recursiveOneTimeRefetch(domain, pageSection, blocks);
 			}
 
-			t.triggerBlocksVisible(domain, pageSection, blocks);
+			that.triggerBlocksVisible(domain, pageSection, blocks);
 		});
 	},
 
 	recursiveSetBlockData : function(domain, pageSection, blocks, block_data) {
 	
-		var t = this;
+		var that = this;
 
 		blocks.each(function() {
 
@@ -311,14 +311,14 @@ popCustomBootstrap = {
 			var blockBranches = jsSettings['initjs-blockbranches'];
 			if (blockBranches) {
 
-				t.recursiveSetBlockData(domain, pageSection, $(blockBranches.join(', ')), block_data);
+				that.recursiveSetBlockData(domain, pageSection, $(blockBranches.join(', ')), block_data);
 			}
 		});
 	},
 
 	recursiveOneTimeRefetch : function(domain, pageSection, blocks) {
 	
-		var t = this;
+		var that = this;
 
 		blocks.each(function() {
 
@@ -329,14 +329,14 @@ popCustomBootstrap = {
 			var blockBranches = jsSettings['initjs-blockbranches'];
 			if (blockBranches) {
 
-				t.recursiveOneTimeRefetch(domain, pageSection, $(blockBranches.join(', ')));
+				that.recursiveOneTimeRefetch(domain, pageSection, $(blockBranches.join(', ')));
 			}
 		});
 	},
 
 	triggerBlocksVisible : function(domain, pageSection, blocks) {
 	
-		var t = this;
+		var that = this;
 
 		blocks.each(function() {
 
@@ -348,36 +348,36 @@ popCustomBootstrap = {
 			var blockBranches = jsSettings['initjs-blockbranches'];
 			if (blockBranches) {
 
-				t.triggerBlocksVisible(domain, pageSection, $(blockBranches.join(', ')));
+				that.triggerBlocksVisible(domain, pageSection, $(blockBranches.join(', ')));
 			}
 		});
 	},
 
 	activateNestedComponents : function(pageSection, newDOMs) {
 	
-		var t = this;
+		var that = this;
 
 		// When opening a tabPane, if it is inside another tab pane, open it
 		// This way, when clicking on Load in Navigator, it will show (initially Navigator tab is hidden)
 		newDOMs.find('div.tab-pane div.tab-pane').addBack('div.tab-pane div.tab-pane').on('shown.bs.tabpane', function () {
-			t.activateOuterTabPanes($(this));
+			that.activateOuterTabPanes($(this));
 		});
 		// collapse inside tabPane
 		newDOMs.find('div.tab-pane div.collapse').addBack('div.tab-pane div.collapse').on('shown.bs.collapse', function () {
-			t.activateOuterTabPanes($(this));
+			that.activateOuterTabPanes($(this));
 		});
 		// collapse inside carousel
 		newDOMs.find('div.carousel div.collapse').addBack('div.carousel div.collapse').on('shown.bs.collapse', function () {
-			t.activateOuterCarousel($(this));
+			that.activateOuterCarousel($(this));
 		});
 		// tabPane inside of Carousel
 		newDOMs.find('div.carousel div.tab-pane').addBack('div.carousel div.tab-pane').on('shown.bs.tabpane', function () {
-			t.activateOuterCarousel($(this));
+			that.activateOuterCarousel($(this));
 		});
 	},
 	activateOuterTabPanes : function(component) {
 
-		var t = this;
+		var that = this;
 
 		var outerTabPanes = component.parents('.tab-pane').not('.active');
 		if (outerTabPanes.length) {
@@ -388,7 +388,7 @@ popCustomBootstrap = {
 	},
 	activateOuterCarousel : function(component) {
 
-		var t = this;
+		var that = this;
 
 		var outerCarousel = component.closest('.carousel');
 		popBootstrapCarousel.showElement(outerCarousel, component);
@@ -399,22 +399,22 @@ popCustomBootstrap = {
 	
 		// This function is fired in initPageSection and not in initElem because if the component in the pageSection is lazy, then this is never executed
 		// and so the event in the tab-pane will never be triggered for which the component will never be initialized
-		var t = this;
+		var that = this;
 
 		// Whenever firing 'shown.bs.tab' on the tab, also fire 'shown.bs.tabpane' on the tabpane
 		// e.currentTarget: newly activated tabpane
 		elem.find('a[data-toggle="tab"]').addBack('a[data-toggle="tab"]')
 			.on('show.bs.tab', function (e) {				
-				t.triggerTabPaneEvent($(this), e, 'show.bs.tabpane');
+				that.triggerTabPaneEvent($(this), e, 'show.bs.tabpane');
 			})
 			.on('shown.bs.tab', function (e) {		
-				t.triggerTabPaneEvent($(this), e, 'shown.bs.tabpane');
+				that.triggerTabPaneEvent($(this), e, 'shown.bs.tabpane');
 			})
 			.on('hide.bs.tab', function (e) {		
-				t.triggerTabPaneEvent($(this), e, 'hide.bs.tabpane');
+				that.triggerTabPaneEvent($(this), e, 'hide.bs.tabpane');
 			})
 			.on('hidden.bs.tab', function (e) {		
-				t.triggerTabPaneEvent($(this), e, 'hidden.bs.tabpane');
+				that.triggerTabPaneEvent($(this), e, 'hidden.bs.tabpane');
 			});
 	},
 
@@ -422,7 +422,7 @@ popCustomBootstrap = {
 	
 		// This function is fired in initPageSection and not in initElem because if the component in the pageSection is lazy, then this is never executed
 		// and so the event in the tab-pane will never be triggered for which the component will never be initialized
-		var t = this;
+		var that = this;
 		var tabPane = $($(e.target).attr('href'));
 
 		// Passed from the interceptor, needed to know if to refetch or skip it
@@ -443,7 +443,7 @@ popCustomBootstrap = {
 
 	bubbling : function(elem, selector) {
 
-		var t = this;
+		var that = this;
 
 		if (elem.is(selector)) {
 
@@ -459,7 +459,7 @@ popCustomBootstrap = {
 
 	addBubblingFlag : function(elem, parentSelector, type) {
 
-		var t = this;
+		var that = this;
 		
 		if (elem.parents(parentSelector).length) {
 			
@@ -474,7 +474,7 @@ popCustomBootstrap = {
 
 	activatePageTabs : function(pageSection, newDOMs, inactivePane) {
 
-		var t = this;
+		var that = this;
 
 		// Mark tabs as inactive
 		if (inactivePane) {
@@ -486,7 +486,7 @@ popCustomBootstrap = {
 	// The functions below are invoked in popCustomFunctions
 	activateSideTabpanes : function(pageSection, newDOMs, inactivePane) {
 
-		var t = this;
+		var that = this;
 
 		var tabPane = newDOMs.filter('.tab-pane');
 		if (tabPane.length) {
@@ -521,7 +521,7 @@ popCustomBootstrap = {
 	},
 	activateQuickviewTabpanes : function(pageSection, newDOMs, inactivePane) {
 
-		var t = this;
+		var that = this;
 
 		var tabPane = newDOMs.filter('.tab-pane');
 		if (tabPane.length) {
@@ -532,7 +532,7 @@ popCustomBootstrap = {
 	},
 	activateModals : function(pageSection, newDOMs) {
 
-		var t = this;
+		var that = this;
 
 		var modal = newDOMs.filter('.modal');
 		if (modal.length) {
@@ -555,7 +555,7 @@ popCustomBootstrap = {
 	},
 	activateTabPanes : function(pageSection, newDOMs, inactivePane, removeTheather, sides) {
 
-		var t = this;
+		var that = this;
 
 		// Only if tabPanes were actually drawn (eg: calling Background Load pages will bring only replicable tabPanes, no actual tabPane yet)
 		var tabPane = newDOMs.filter('.tab-pane');
@@ -568,7 +568,7 @@ popCustomBootstrap = {
 
 				if (!firstLoad) {
 					var previousTabPane = newDOMs.siblings('.tab-pane.active');
-					t.savePosition(pageSection, previousTabPane);
+					that.savePosition(pageSection, previousTabPane);
 					previousTabPane.removeClass('active');
 				}
 
@@ -589,26 +589,26 @@ popCustomBootstrap = {
 					// Comment Leo 15/02/2017: if it has no active tabPanes, then the clicked on tabPane is the one currently active
 					// So then save its current position, so that below, when doing newPageSectionJS, it scrolls to where it already is (otherwise, it may go to the top)
 					if (previousTabPane.length) {
-						t.savePosition(pageSection, previousTabPane);
+						that.savePosition(pageSection, previousTabPane);
 					}
 				})
 				.on('shown.bs.tabpane', function() {
 				
 					var tabPane = $(this);
 					popPageSectionManager.open(pageSection);					
-					t.newPageSectionJS(pageSection, removeTheather, sides, tabPane);
+					that.newPageSectionJS(pageSection, removeTheather, sides, tabPane);
 				});
 
 			if (!inactivePane && !firstLoad) {
 
-				t.newPageSectionJS(pageSection, removeTheather, sides);
+				that.newPageSectionJS(pageSection, removeTheather, sides);
 			}
 		}
 	},
 
 	clickPageTab : function(pageSection, pageTabBtn) {
 
-		var t = this;
+		var that = this;
 		
 		// activate (ie add class 'active') to the new pageTab, remove to all others
 		pageSection.find('.pop-pagetab-btn').removeClass('active');
@@ -617,14 +617,14 @@ popCustomBootstrap = {
 
 	savePosition : function(pageSection, tabPane) {
 
-		var t = this;
+		var that = this;
 		tabPane.data('lastposition', popManager.getPosition(pageSection));
 		tabPane.data('theater', popPageSectionManager.isTheater());
 	},
 
 	newPageSectionJS : function(pageSection, removeTheather, sides, tabPane) {
 
-		var t = this;
+		var that = this;
 
 		// Close the the side pageSections for mobile phone
 		sides.each(function() {

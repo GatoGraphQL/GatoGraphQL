@@ -1,5 +1,5 @@
 (function($){
-popDatasetCount = {
+window.popDatasetCount = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popDatasetCount = {
 
 	displayBlockDatasetCount : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block;
 
 		if (block.data('datasetcount-target')) {
@@ -40,7 +40,7 @@ popDatasetCount = {
 
 	clearDatasetCount : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.each(function() {
@@ -53,17 +53,17 @@ popDatasetCount = {
 			var updateTitle = link.data('datasetcount-updatetitle') ? true : false;
 			link.click(function(e) {
 				e.preventDefault();
-				t.execClearDatasetCount(target, updateTitle);
+				that.execClearDatasetCount(target, updateTitle);
 			});
 			link.hover(function() {
-				t.execClearDatasetCount(target, updateTitle);
+				that.execClearDatasetCount(target, updateTitle);
 			});
 		});
 	},
 
 	clearDatasetCountOnUserLoggedOut : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.each(function() {
 			
@@ -74,7 +74,7 @@ popDatasetCount = {
 			// var updateTitle = jsSettings['update-title'];
 			var updateTitle = link.data('datasetcount-updatetitle') ? true : false;
 			$(document).on('user:loggedout', function(e) {
-				t.execClearDatasetCount(target, updateTitle);
+				that.execClearDatasetCount(target, updateTitle);
 			});
 		});
 	},
@@ -85,7 +85,7 @@ popDatasetCount = {
 
 	execClearDatasetCount : function(target, updateTitle) {
 
-		var t = this;
+		var that = this;
 		target.html('').addClass('hidden');
 
 		// Delete the datasetCount from the document title

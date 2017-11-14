@@ -1,5 +1,5 @@
 (function($){
-popEventReactions = {
+window.popEventReactions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popEventReactions = {
 
 	resetOnSuccess : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		var pssId = popManager.getSettingsId(pageSection);
 
@@ -29,7 +29,7 @@ popEventReactions = {
 
 	resetOnUserLogout : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		$(document).on('user:loggedout:'+domain, function(e, source) {
@@ -50,7 +50,7 @@ popEventReactions = {
 
 	destroyPageOnSuccess : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 		var pssId = popManager.getSettingsId(pageSection);
 
@@ -78,33 +78,33 @@ popEventReactions = {
 
 	destroyPageOnUserLoggedOut : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		// Do it only after the pageSection has been initialized
 		// This is so that the pageSectionPage doesn't get destroyed when having loaded that one! That one will give the info the user is not logged in
 		// So now, it first destroys all pageSectionPages, and then sets the handler for this one
-		// This will execute after t.feedbackLoginOut in user-account.js->pageSectionInitialized
+		// This will execute after that.feedbackLoginOut in user-account.js->pageSectionInitialized
 		pageSection.one('completed', function() {
 
-			t.execDestroyPageOnUserLoggedOut(domain, targets);
+			that.execDestroyPageOnUserLoggedOut(domain, targets);
 		});
 	},
 
 	destroyPageOnUserNoRole : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		pageSection.one('completed', function() {
 		
-			t.execDestroyPageOnUserNoRole(domain, pageSection, targets);
+			that.execDestroyPageOnUserNoRole(domain, pageSection, targets);
 		});
 	},
 
 	deleteBlockFeedbackValueOnUserLoggedInOut : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block;
 		$(document).on('user:loggedinout:'+domain, function(e, source) {
 
@@ -141,7 +141,7 @@ popEventReactions = {
 
 	scrollTopOnUserLoggedInOut : function (args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		$(document).on('user:loggedinout:'+domain, function(e, source) {
 
@@ -164,7 +164,7 @@ popEventReactions = {
 
 	closeMessageFeedbacksOnPageSectionOpen : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		popPageSectionManager.getGroup(pageSection).on('on.bs.pagesection-group:pagesection-'+pageSection.attr('id')+':opened', function() {
@@ -176,7 +176,7 @@ popEventReactions = {
 
 	closePageSectionOnSuccess : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 		var pssId = popManager.getSettingsId(pageSection);
 
@@ -192,7 +192,7 @@ popEventReactions = {
 
 				// get the time from the block
 				var closeTime = block.data('closetime') || 0;
-				t.timeoutClosePageSection(pageSection, closeTime);
+				that.timeoutClosePageSection(pageSection, closeTime);
 				// setTimeout(function () {
 					
 				// 	popPageSectionManager.close(pageSection);
@@ -207,7 +207,7 @@ popEventReactions = {
 
 	closePageSectionOnTabpaneShown : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.each(function() {
@@ -231,7 +231,7 @@ popEventReactions = {
 
 	timeoutClosePageSection : function(pageSection, closeTime) {
 
-		var t = this;
+		var that = this;
 		setTimeout(function () {
 			
 			popPageSectionManager.close(pageSection);
@@ -244,7 +244,7 @@ popEventReactions = {
 
 	execDestroyPageOnUserLoggedOut : function(domain, targets) {
 
-		var t = this;
+		var that = this;
 
 		$(document).one('user:loggedout:'+domain, function(e, source) {
 
@@ -263,7 +263,7 @@ popEventReactions = {
 
 	execDestroyPageOnUserNoRole : function(domain, pageSection, block) {
 
-		var t = this;		
+		var that = this;		
 		var neededRole = block.data('neededrole');
 		
 		$(document).one('user:updated:'+domain, function(e, updates) {
@@ -282,7 +282,7 @@ popEventReactions = {
 				else {
 
 					// Re-add the event handler
-					t.execDestroyPageOnUserNoRole(domain, pageSection, block);
+					that.execDestroyPageOnUserNoRole(domain, pageSection, block);
 				}
 			}
 		});

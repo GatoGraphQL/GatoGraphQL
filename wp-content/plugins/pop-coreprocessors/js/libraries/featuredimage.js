@@ -1,5 +1,5 @@
 (function($){
-popFeaturedImage = {
+window.popFeaturedImage = {
 
 	//-------------------------------------------------
 	// INTERNAL VARIABLES
@@ -13,35 +13,35 @@ popFeaturedImage = {
 
 	documentInitialized : function(args) {
 
-		var t = this;
+		var that = this;
 
 		$(document).ready(function($) {
 
-			t.frame = wp.media({
+			that.frame = wp.media({
 				title: M.LABELS.MEDIA_FEATUREDIMAGE_TITLE,
 				multiple: false,
 				library: {type: 'image'},
 				button: {text: M.LABELS.MEDIA_FEATUREDIMAGE_BTN}
 			});
-			t.frame.on('open',function() {
+			that.frame.on('open',function() {
 
 				// We know which is the featuredImage opening the frame because it is the only one with class "open"
-				var featuredImage = t.getOpenFeaturedImage();
+				var featuredImage = that.getOpenFeaturedImage();
 
 				// If there's an ID already selected, then select it in the Media Manager
 				var selected = featuredImage.find('input[type="hidden"]');
 				if (selected.val()) {
-					var selection = t.frame.state().get('selection');
+					var selection = that.frame.state().get('selection');
 					attachment = wp.media.attachment(selected.val());
 					attachment.fetch();
 					selection.add( attachment ? [ attachment ] : [] );
 				}
 			});
-			t.frame.on('close',function() {
+			that.frame.on('close',function() {
 				
 				var featuredImage = $('.pop-featuredimage.open');
 				var configuration = {};
-				var selection = t.frame.state().get('selection');
+				var selection = that.frame.state().get('selection');
 				if (selection.length) {
 
 					var value, imgsrc;
@@ -65,19 +65,19 @@ popFeaturedImage = {
 					var block = popManager.getBlock(featuredImage);
 					var pageSection = popManager.getPageSection(block);
 					var domain = popManager.getBlockTopLevelDomain(block);
-					t.merge(domain, pageSection, block, featuredImage, value, imgsrc);
+					that.merge(domain, pageSection, block, featuredImage, value, imgsrc);
 				}
 				
 				featuredImage.removeClass('open');
 			});
 
 			// Allow MediaManagerCors to initialize itself
-			$(document).triggerHandler('initialized.featuredImage', [t.frame])
+			$(document).triggerHandler('initialized.featuredImage', [that.frame])
 		});
 	},
 	featuredImageSet : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		
 		targets.click(function(e) {
@@ -89,12 +89,12 @@ popFeaturedImage = {
 			// We know which is the featuredImage opening the frame because it is the only one with class "open"
 			featuredImage.addClass('open');
 
-			t.frame.open();
+			that.frame.open();
 		});
 	},
 	featuredImageRemove : function(args) {
 	
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		
 		targets.click(function(e) {
@@ -103,7 +103,7 @@ popFeaturedImage = {
 			var button = $(this);			
 			var featuredImage = button.closest('.pop-featuredimage');
 
-			t.remove(domain, pageSection, block, featuredImage);
+			that.remove(domain, pageSection, block, featuredImage);
 		});
 	},
 
@@ -113,7 +113,7 @@ popFeaturedImage = {
 
 	merge : function(domain, pageSection, block, featuredImage, value, imgsrc) {
 
-		var t = this;
+		var that = this;
 
 		var options = {
 			extendContext: {
@@ -131,21 +131,21 @@ popFeaturedImage = {
 	},
 	remove : function(domain, pageSection, block, featuredImage) {
 
-		var t = this;
+		var that = this;
 		
 		// Delete the value, set the default-img 
-		t.merge(domain, pageSection, block, featuredImage, '', '');
+		that.merge(domain, pageSection, block, featuredImage, '', '');
 	},
 	getFrame : function() {
 
-		var t = this;
+		var that = this;
 
 		// Function needed by popMediaManagerCORS
-		return t.frame;
+		return that.frame;
 	},
 	getOpenFeaturedImage : function() {
 
-		var t = this;
+		var that = this;
 
 		// We know which is the featuredImage opening the frame because it is the only one with class "open"
 		return $('.pop-featuredimage.open');

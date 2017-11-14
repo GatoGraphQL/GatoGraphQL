@@ -1,24 +1,24 @@
 (function($){
-popCDNCoreHooks = {
+window.popCDNCoreHooks = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
 	mentionsSource : function(args) {
 	
-		var t = this;
+		var that = this;
 		args.url = popCDN.convertURL(args.url);
 	},
 
 	typeaheadPrefetchURL : function(args) {
 	
-		var t = this;
+		var that = this;
 		args.url = popCDN.convertURL(args.url);
 	},
 
 	typeaheadRemoteURL : function(args) {
 	
-		var t = this;
+		var that = this;
 		args.url = popCDN.convertURL(args.url);
 	},
 

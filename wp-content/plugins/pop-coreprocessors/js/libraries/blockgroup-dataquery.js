@@ -1,5 +1,5 @@
 (function($){
-popBlockGroupDataQuery = {
+window.popBlockGroupDataQuery = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popBlockGroupDataQuery = {
 
 	initBlockGroupFilter : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var pageSection = args.pageSection, blockGroup = args.block, targets = args.targets;
 		// var blocks = popManager.getBlockGroupBlocks(blockGroup);
@@ -32,13 +32,13 @@ popBlockGroupDataQuery = {
 
 			// Copy the filter params to all contained blocks
 			var filter = $(this);
-			t.filterBlockGroup(pageSection, blockGroup, filter) ;
+			that.filterBlockGroup(pageSection, blockGroup, filter) ;
 		});
 	},
 
 	reloadBlockGroup : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var pageSection = args.pageSection, blockGroup = args.block, targets = args.targets;
 		targets.click(function(e) {
@@ -53,7 +53,7 @@ popBlockGroupDataQuery = {
 
 	refetchBlockGroupOnUserLoggedIn : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		$(document).one('user:loggedin:'+domain, function(e, source) {
@@ -101,7 +101,7 @@ popBlockGroupDataQuery = {
 
 	filterBlockGroup : function(pageSection, blockGroup, filter) {
 
-		var t = this;
+		var that = this;
 
 		var activeBlock = popManager.getBlockGroupActiveBlock(blockGroup);
 		var blocks = popManager.getBlockGroupBlocks(blockGroup);

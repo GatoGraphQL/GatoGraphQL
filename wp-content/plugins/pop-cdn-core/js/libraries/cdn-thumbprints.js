@@ -1,5 +1,5 @@
 (function($){
-popCDNThumbprints = {
+window.popCDNThumbprints = {
 
   //-------------------------------------------------
   // PRIVATE functions
@@ -7,18 +7,18 @@ popCDNThumbprints = {
 
   canUseCDN : function(url) {
   
-    var t = this;
+    var that = this;
 
     // Just making sure the .js file containing popCDNConfig was generated ok. If not, fail gracefully
     if (!popCDNConfig) return false;
 
     // Can use, if that URL is not rejected
-    return !t.evalCriteria(url, popCDNConfig.criteria.rejected);
+    return !that.evalCriteria(url, popCDNConfig.criteria.rejected);
   },
 
   getThumbprints : function(url) {
   
-    var t = this;
+    var that = this;
 
     // Just making sure the .js file containing popCDNConfig was generated ok. If not, fail gracefully
     if (!popCDNConfig) {
@@ -30,7 +30,7 @@ popCDNThumbprints = {
     var thumbprints = [];
     $.each(popCDNConfig.thumbprints, function(index, thumbprint) {
 
-      if (t.evalCriteria(url, popCDNConfig.criteria.thumbprints[thumbprint])) {
+      if (that.evalCriteria(url, popCDNConfig.criteria.thumbprints[thumbprint])) {
         thumbprints.push(thumbprint);
       }
     });
@@ -47,7 +47,7 @@ popCDNThumbprints = {
 
   evalCriteria : function(url, entries) {
   
-    var t = this;
+    var that = this;
 
     var evalParam = function(elem) {
 
@@ -85,7 +85,7 @@ popCDNThumbprints = {
     var criterias = [
       {
         // isHome: special case, we can't ask for path pattern, or otherwise its thumbprints will always be true for everything else (since everything has the path of the home)
-        isHome: entries.isHome && t.isHome(url),
+        isHome: entries.isHome && that.isHome(url),
 
         startsWith: entries.startsWith.full.some(function(path) {
           

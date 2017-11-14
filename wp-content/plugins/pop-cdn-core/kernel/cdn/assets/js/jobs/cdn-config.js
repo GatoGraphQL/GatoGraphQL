@@ -1,5 +1,5 @@
 (function($){
-popCDNConfig = {
+window.popCDNConfig = {
 
   thumbprints: $thumbprints,
   criteria: {

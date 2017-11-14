@@ -6,10 +6,10 @@ class PoP_Engine_ResourceLoaderFileGeneratorBase extends PoP_Engine_FileGenerato
 		// We have different bundle mappings for different combinations of theme and thememode,
 		// so then store these files accordingly
 		$vars = GD_TemplateManager_Utils::get_vars();
-		return POP_FRONTENDENGINE_GENERATECACHE_DIR.'/resourceloader/'.$vars['theme'].'/'.$vars['thememode'];
+		return POP_FRONTENDENGINE_GENERATECACHE_DIR.'/resourceloader/'.$vars['theme'].'/'.$vars['thememode'].'/'.$this->get_subfolder();
 	}
 
-	protected function get_scope() {
+	protected function get_subfolder() {
 
 		// We must create different mapping files depending on if we're adding the CDN resources inside the bundles or not
 		return PoP_Frontend_ServerUtils::bundle_external_files() ? 'global' : 'local';

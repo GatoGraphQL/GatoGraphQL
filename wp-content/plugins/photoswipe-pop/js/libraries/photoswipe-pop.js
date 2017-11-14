@@ -1,5 +1,5 @@
 (function($){
-popPhotoSwipe = {
+window.popPhotoSwipe = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,11 +7,11 @@ popPhotoSwipe = {
 
 	linksImage : function(args) {
 
-		var t = this;
+		var that = this;
 		var anchor = args.anchor;
 
 		// Adapted from http://webdesign.tutsplus.com/tutorials/the-perfect-lightbox-using-photoswipe-with-jquery--cms-23587
-		var lightBox = new PhotoSwipe($('#pswp')[0], PhotoSwipeUI_Default, t.getItems(anchor), t.getOptions(anchor));
+		var lightBox = new PhotoSwipe($('#pswp')[0], PhotoSwipeUI_Default, that.getItems(anchor), that.getOptions(anchor));
 
 		// Initialize PhotoSwipe
 		lightBox.init();
@@ -23,11 +23,11 @@ popPhotoSwipe = {
 
 	getOptions : function(anchor) {
 
-		var t = this;
+		var that = this;
 		
 		// Documentation: http://photoswipe.com/documentation/options.html
 		return {
-			index: t.getIndex(anchor),
+			index: that.getIndex(anchor),
 			bgOpacity: 0.8,
 			showHideOpacity: true,
 			history: false,
@@ -40,7 +40,7 @@ popPhotoSwipe = {
 
 	getItem : function(anchor) {
 
-		var t = this;
+		var that = this;
 		var image = anchor.children('img');
 		var item = {
 			src: anchor.attr('href'),
@@ -76,7 +76,7 @@ popPhotoSwipe = {
 
 	getItems : function(anchor) {
 
-		var t = this;
+		var that = this;
 		
 		var items = [];
 
@@ -86,12 +86,12 @@ popPhotoSwipe = {
 
 			gallery.find('.gallery-item a').each( function() {
 
-				items.push(t.getItem($(this)));
+				items.push(that.getItem($(this)));
 			});
 		}
 		else {
 
-			items.push(t.getItem(anchor));
+			items.push(that.getItem(anchor));
 		}
 
 		return items;
@@ -99,7 +99,7 @@ popPhotoSwipe = {
 
 	getIndex : function(anchor) {
 
-		var t = this;
+		var that = this;
 		
 		// Check if the link is inside a gallery
 		var galleryItem = anchor.closest('.gallery-item');

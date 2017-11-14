@@ -1,5 +1,5 @@
 (function($){
-popJSLibraryManager = {
+window.popJSLibraryManager = {
 
 	// All the registered JS libraries
 	libraries: [],
@@ -10,38 +10,38 @@ popJSLibraryManager = {
 
 	register : function(library, methods, highPriority, override) {
 
-		var t = this;
+		var that = this;
 
-		t.libraries.push(library);
+		that.libraries.push(library);
 		$.each(methods, function(index, method) {
 
 			// override: allows for any library to override others
-			if (!t.methods[method] || override) {
-				t.methods[method] = [];
+			if (!that.methods[method] || override) {
+				that.methods[method] = [];
 			}
 
 			if (highPriority) {
-				t.methods[method].unshift(library);
+				that.methods[method].unshift(library);
 			}
 			else {
-				t.methods[method].push(library);
+				that.methods[method].push(library);
 			}
 		})
 	},
 
 	getLibraries : function(method) {
 
-		var t = this;
-		return t.methods[method] || [];
+		var that = this;
+		return that.methods[method] || [];
 	},
 
 	execute : function(method, args) {
 
-		var t = this;
+		var that = this;
 
 		// Call 'destroy' from all libraries in popJSLibraryManager
 		var ret = {};
-		var libraries = t.methods[method];
+		var libraries = that.methods[method];
 		if (libraries) {
 			$.each(libraries, function(index, library) {
 

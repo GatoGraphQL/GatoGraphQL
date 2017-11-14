@@ -1,5 +1,5 @@
 (function($){
-popLinks = {
+window.popLinks = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,9 +7,9 @@ popLinks = {
 
 	documentInitialized : function() {
 	
-		var t = this;
+		var that = this;
 
-		t.links();
+		that.links();
 	},
 
 	//-------------------------------------------------
@@ -18,7 +18,7 @@ popLinks = {
 
 	linkBlankTarget : function(anchor) {
 
-		var t = this;
+		var that = this;
 
 		// Open in new window
 		if (!anchor.attr('target')) {
@@ -28,7 +28,7 @@ popLinks = {
 
 	maybeaddspinner : function(anchor, url) {
 
-		var t = this;
+		var that = this;
 
 		// Add a spinner next to the clicked link? Allow to override on an anchor by anchor basis
 		var addspinner = !anchor.hasClass('hidden') && ((M.ADDANCHORSPINNER && (typeof anchor.data('addspinner') == 'undefined') || anchor.data('addspinner')));
@@ -67,7 +67,7 @@ popLinks = {
 
 	links : function() {
 
-		var t = this;
+		var that = this;
 
 		// Capture all internal/external links
 		var imgRegex = new RegExp(/\.(gif|jpg|jpeg|tiff|png)$/i);
@@ -99,12 +99,12 @@ popLinks = {
 				}
 				else {
 
-					t.linkBlankTarget(anchor);
+					that.linkBlankTarget(anchor);
 				}
 			}
 			else if (otherRegex.test(url)) {
 				
-				t.linkBlankTarget(anchor);
+				that.linkBlankTarget(anchor);
 			}
 			else {
 
@@ -120,14 +120,14 @@ popLinks = {
 				// Open the whole page? Then do not catch. Needed to switch language
 				if (target == M.URLPARAM_TARGET_FULL) {
 					e.preventDefault();
-					t.maybeaddspinner(anchor, url);
+					that.maybeaddspinner(anchor, url);
 					window.location = url;
 					return;
 				}
 				// Print: special case, handle differently
 				if (target == M.URLPARAM_TARGET_PRINT) {
 					e.preventDefault();
-					t.openPrint(url);
+					that.openPrint(url);
 					return;
 				}
 				if (popManager.targetExists(target)) {
@@ -197,7 +197,7 @@ popLinks = {
 						// In these cases, use the normal 'Loading'
 						
 						// Add a spinner next to the clicked link? Allow to override on an anchor by anchor basis
-						var addspinner = t.maybeaddspinner(anchor, url);
+						var addspinner = that.maybeaddspinner(anchor, url);
 
 						// Set the 'loading msg' target if it was defined. If empty, it will show no message, that's why here asking for != 'undefined'
 						// Initially, set the value to the opposite of "addspinner": when adding a spinner next to the link, no need for the loading mesage
@@ -229,7 +229,7 @@ popLinks = {
 			e.preventDefault();
 			var anchor = $(this);
 			var url = anchor.attr('href');
-			t.openSocialMedia(url);
+			that.openSocialMedia(url);
 		});
 
 		// Scroll to an anchor?
@@ -273,7 +273,7 @@ popLinks = {
 			});
 			if (openblank) {
 
-				t.linkBlankTarget(anchor);
+				that.linkBlankTarget(anchor);
 			}
 		});		
 	},

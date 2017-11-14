@@ -54,7 +54,7 @@ class PoP_UserAvatar_Initialization {
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
 			$bundles_js_folder = $dist_js_folder.'/bundles';
 
-			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 				// File Upload
 				wp_register_script('fileupload-iframe-transport', 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.iframe-transport.min.js', null, null);

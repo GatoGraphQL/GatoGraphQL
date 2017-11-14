@@ -1,5 +1,5 @@
 (function($){
-popTopLevelJSON = {
+window.popTopLevelJSON = {
 
 	//-------------------------------------------------
 	// INTERNAL variables
@@ -13,17 +13,17 @@ popTopLevelJSON = {
 
 	getProperties : function() {
 
-		var t = this;
+		var that = this;
 
 		// Merge the json with the properties from object popTopLevelJSON
 		var properties = {};
-		if (!$.isEmptyObject(t.strings)) {
+		if (!$.isEmptyObject(that.strings)) {
 			
-			for (var property in t.strings) {
-				if (t.strings.hasOwnProperty(property)) {
+			for (var property in that.strings) {
+				if (that.strings.hasOwnProperty(property)) {
 			
 					// We have a string, convert it to JSON
-					properties[property] = JSON.parse(t.strings[property]);
+					properties[property] = JSON.parse(that.strings[property]);
 				}
 			}
 		}
@@ -33,10 +33,10 @@ popTopLevelJSON = {
 
 	init : function() {
 
-		var t = this;
+		var that = this;
 		$(document).on('initTopLevelJson', function(e, json) {
 
-			$.extend(json, t.getProperties());	
+			$.extend(json, that.getProperties());	
 		});
 	}
 };

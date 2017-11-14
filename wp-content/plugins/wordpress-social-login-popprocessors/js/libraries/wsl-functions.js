@@ -1,5 +1,5 @@
 (function($){
-popWSL = {
+window.popWSL = {
 
 	// What is the log in block, to enable the Disabled Layer on top of it
 	loginBlock: null,
@@ -10,7 +10,7 @@ popWSL = {
 
 	wslNetworkLink : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		targets.click(function(e) {
@@ -24,7 +24,7 @@ popWSL = {
 
 			// Save the loginBlock
 			var block = popManager.getBlock(link);
-			t.loginBlock = $(block.data('loginblock'));
+			that.loginBlock = $(block.data('loginblock'));
 
 			window.open(
 				// popupurl+"provider="+provider,

@@ -51,7 +51,7 @@ class EM_PoPProcessors_Initialization {
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
 			$bundles_js_folder = $dist_js_folder.'/bundles';
 
-			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 				wp_register_script('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js', array('jquery', 'moment'), null);
 			}
@@ -145,7 +145,7 @@ class EM_PoPProcessors_Initialization {
 		 * 3rd Party Libraries (using CDN whenever possible)
 		 ----------------------------- */
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 			
 			// CDN
 			wp_register_style('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css', null, null);

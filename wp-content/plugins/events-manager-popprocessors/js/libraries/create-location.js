@@ -1,5 +1,5 @@
 (function($){
-popCreateLocation = {
+window.popCreateLocation = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,27 +7,27 @@ popCreateLocation = {
 
 	createLocationModal : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
-		t.execCreateLocationModal(pageSection, targets);
+		that.execCreateLocationModal(pageSection, targets);
 	},
 
 	createLocationModalBlock : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets, link = args.relatedTarget;
 
 		// Transfer the attributes to the modals. Execute it now, because 'show.bs.modal' cannot be intercepted
 		// when the modal is first created from the MODALS pageSection
-		t.transferAttributes(targets.closest('.modal'), link);
+		that.transferAttributes(targets.closest('.modal'), link);
 
-		t.execCreateLocationModal(pageSection, targets.closest('.modal'));
+		that.execCreateLocationModal(pageSection, targets.closest('.modal'));
 	},
 
 	maybeCloseLocationModal : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 		var pssId = popManager.getSettingsId(pageSection);
 
@@ -52,7 +52,7 @@ popCreateLocation = {
 
 	transferAttributes : function(modals, link) {
 
-		var t = this;
+		var that = this;
 
 		// Make sure the link we got is the original one, and not the intercepted one
 		// All properties are stored under the original link, not the interceptor
@@ -67,7 +67,7 @@ popCreateLocation = {
 
 	execCreateLocationModal : function(pageSection, modals) {
 
-		var t = this;
+		var that = this;
 
 		// This class is needed for the layoutscript to find out where to find the original typeahead
 		// (So we don't tie it directly to the modal, it can also be another component)
@@ -76,7 +76,7 @@ popCreateLocation = {
 
 			var modal = $(this);
 			var link = $(e.relatedTarget);
-			t.transferAttributes(modal, link);
+			that.transferAttributes(modal, link);
 		});
 	}
 };

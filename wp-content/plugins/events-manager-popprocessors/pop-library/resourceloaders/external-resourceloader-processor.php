@@ -19,7 +19,7 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 	function get_filename($resource) {
 	
 		$filenames = array(
-			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar'.(!PoP_Frontend_ServerUtils::use_cdn_resources() ? '.2.9.1' : ''),
+			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar'.(!PoP_Frontend_ServerUtils::access_externalcdn_resources() ? '.2.9.1' : ''),
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
@@ -59,7 +59,7 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 	
 	function get_path($resource) {
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			switch ($resource) {
 

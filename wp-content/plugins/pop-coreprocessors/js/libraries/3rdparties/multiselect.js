@@ -1,5 +1,5 @@
 (function($){
-popMultiselect = {
+window.popMultiselect = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popMultiselect = {
 
 	// destroyPageSection : function(args) {
 
-	// 	var t = this;
+	// 	var that = this;
 	// 	var pageSection = args.pageSection;
 
 	// 	pageSection.find('.multiselect').remove();
@@ -15,7 +15,7 @@ popMultiselect = {
 
 	multiselect : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 
 		var pageSectionPage = popManager.getPageSectionPage(block);

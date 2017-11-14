@@ -1,5 +1,5 @@
 (function($){
-popBlockDataQuery = {
+window.popBlockDataQuery = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popBlockDataQuery = {
 
 	initDelegatorFilter : function(args) {
 
-		var t = this;
+		var that = this;
 		var delegatorPageSection = args.pageSection, targets = args.targets;
 
 		// Initialize Filters
@@ -42,7 +42,7 @@ popBlockDataQuery = {
 
 	initBlockFilter : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		// Initialize Filters
@@ -64,7 +64,7 @@ popBlockDataQuery = {
 
 	reloadBlock : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.click(function(e) {
@@ -76,7 +76,7 @@ popBlockDataQuery = {
 
 	loadLatestBlock : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.click(function(e) {
@@ -88,7 +88,7 @@ popBlockDataQuery = {
 
 	timeoutLoadLatestBlock : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.each(function() {
@@ -96,13 +96,13 @@ popBlockDataQuery = {
 			var target = $(this);
 			// Default: 30 seconds
 			var time = target.data('clicktime') || 30000;
-			t.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
+			that.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
 		});
 	},
 
 	refetchBlockOnUserLoggedIn : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 
 		$(document).one('user:loggedin:'+domain, function(e, source) {
@@ -111,27 +111,27 @@ popBlockDataQuery = {
 				return;
 			}
 
-			t.execRefetchBlock(pageSection, targets);
+			that.execRefetchBlock(pageSection, targets);
 		});
 	},
 
 	nonendingRefetchBlockOnUserLoggedIn : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
-		t.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedin:'+domain);
+		that.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedin:'+domain);
 	},
 
 	nonendingRefetchBlockOnUserLoggedInOut : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
-		t.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedinout:'+domain);
+		that.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedinout:'+domain);
 	},
 
 	deleteBlockFeedbackValueOnUserLoggedInOut : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block;
 		$(document).on('user:loggedinout:'+domain, function(e, source) {
 
@@ -168,7 +168,7 @@ popBlockDataQuery = {
 
 	initFilter : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		// Initialize Filters
@@ -184,12 +184,12 @@ popBlockDataQuery = {
 
 	makeAlwaysRefetchBlock : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block;
 
 		block.on('visible', function () {
 			var block = $(this);
-			t.refetchBlock(pageSection, block);
+			that.refetchBlock(pageSection, block);
 		});
 	},
 
@@ -199,7 +199,7 @@ popBlockDataQuery = {
 
 	execTimeoutLoadLatestBlock : function(domain, pageSection, block, target, time) {
 
-		var t = this;
+		var that = this;
 		var jsSettings = popManager.getJsSettings(domain, pageSection, block, target);
 		var options = {
 			'skip-status': true,
@@ -215,7 +215,7 @@ popBlockDataQuery = {
 
 			$(document).one('user:loggedin:'+domain, function(e, source) {
 
-				t.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
+				that.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
 			});
 
 			// No more needed
@@ -228,14 +228,14 @@ popBlockDataQuery = {
 			if ($('#'+target.attr('id')).length) {
 
 				popManager.loadLatest(domain, pageSection, block, options);
-				t.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
+				that.execTimeoutLoadLatestBlock(domain, pageSection, block, target, time);
 			}			
 		}, time);
 	},
 
 	execNonendingRefetchBlockOnUserEvent : function(pageSection, targets, handler) {
 
-		var t = this;
+		var that = this;
 		$(document).on(handler, function(e, source) {
 
 			// Ask for 'initialuserdata' because some blocks will update themselves to load the content,
@@ -245,37 +245,37 @@ popBlockDataQuery = {
 				return;
 			}
 			
-			t.execRefetchBlock(pageSection, targets);
+			that.execRefetchBlock(pageSection, targets);
 		});
 	},
 
 	execRefetchBlock : function(pageSection, blocks) {
 
-		var t = this;
+		var that = this;
 		blocks.each(function() {
 	
 			// To double-check that the object still exists in the DOM and was not removed when doing popManager.destroyPageSectionPage
 			var block = $('#'+$(this).attr('id'));
 			if (block.length) {
 				
-				t.refetchBlock(pageSection, block);
+				that.refetchBlock(pageSection, block);
 			}
 		});
 	},
 
 	refetchBlock : function(pageSection, block) {
 	
-		var t = this;
+		var that = this;
 		var options = {'post-data': block.data('post-data'), 'show-disabled-layer': true};
 		popManager.refetch(pageSection, block, options);
 	},
 
 	makeOneTimeRefetch : function(pageSection, block) {
 
-		var t = this;
+		var that = this;
 
 		// If the block has not loaded its content, then do nothing, whenever it gets initialized it will send the request all by itself
-		// This also handles when data-load=false (eg: Search). Doing instead if (!t.jsInitialized(block)) { fails with Search, since it is not initialized but the 
+		// This also handles when data-load=false (eg: Search). Doing instead if (!that.jsInitialized(block)) { fails with Search, since it is not initialized but the 
 		// initialization does not fetch the content either
 		if (!popManager.jsInitialized(block) || !popManager.isContentLoaded(pageSection, block)) {
 

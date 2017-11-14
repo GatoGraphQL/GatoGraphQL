@@ -1,5 +1,5 @@
 (function($){
-popGADWP = {
+window.popGADWP = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popGADWP = {
 
 	// pageSectionFetchSuccess : function(args) {
 
-	// 	var t = this;
+	// 	var that = this;
 
 	// 	// Only register the Google Analytics call if it is not a silent page
 	// 	var options = args.options;
@@ -18,7 +18,7 @@ popGADWP = {
 	// },
 	documentInitialized : function(args) {
 
-		var t = this;
+		var that = this;
 
 		// Allow Google Analytics to register the click
 		$(document).on('urlfetched', function(e, url, options) {

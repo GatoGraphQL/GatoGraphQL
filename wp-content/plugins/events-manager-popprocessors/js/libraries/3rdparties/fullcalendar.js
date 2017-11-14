@@ -1,5 +1,5 @@
 (function($){
-popFullCalendar = {
+window.popFullCalendar = {
 
 	// domain : '',
 	// promise : false,
@@ -10,19 +10,19 @@ popFullCalendar = {
 
 	initBlockRuntimeMemory : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
 
 		// Initialize with this library key
 		mempage.fullCalendar = {};
 
 		// Reset values
-		t.resetBlockRuntimeMemory(pageSection, block);
+		that.resetBlockRuntimeMemory(pageSection, block);
 	},
 		
 	calendar : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
@@ -52,7 +52,7 @@ popFullCalendar = {
 			
 			if (options.operation == M.URLPARAM_OPERATION_REPLACE) {
 	
-				t.resetBlockRuntimeMemory(pageSection, block);
+				that.resetBlockRuntimeMemory(pageSection, block);
 			}
 		});
 
@@ -68,13 +68,13 @@ popFullCalendar = {
 			// 	block = $('#'+aggregatorData['id']);
 			// }
 			
-			t.execCalendar(renderedDomain, pageSection, block, targets, 'update');
+			that.execCalendar(renderedDomain, pageSection, block, targets, 'update');
 
 			// Dispatch a window resize so that the Calendar / Google map gets updated
 			windowResize();
 		});
 
-		t.execCalendar(domain, pageSection, block, targets, 'new');
+		that.execCalendar(domain, pageSection, block, targets, 'new');
 	},
 
 
@@ -84,14 +84,14 @@ popFullCalendar = {
 
 	getRuntimeMemoryPage : function(pageSection, targetOrId) {
 
-		var t = this;
+		var that = this;
 		return popManager.getRuntimeMemoryPage(pageSection, targetOrId).fullCalendar;
 	},
 
 	resetBlockRuntimeMemory : function(pageSection, targetOrId) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, targetOrId);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, targetOrId);
 		var empty = {
 
 			// Save the settings for each event
@@ -118,7 +118,7 @@ popFullCalendar = {
 
 	addEvents : function(pageSection, block, /*calendar, */events_data) {
 	
-		var t = this;
+		var that = this;
 
 		// Needed to not initialize the Navigator Calendar initially. Otherwise it produces a JS error since the mempage was never initialized
 		if (!events_data.length) return;
@@ -126,20 +126,20 @@ popFullCalendar = {
 		// When the block is not initialized, we can't add the events since the runtimeMemory is not ready yet
 		// So then wait until the calendar is initialized, and only then add the events
 		if (popManager.jsInitialized(block)) {
-			t.execAddEvents(pageSection, block, /*calendar, */events_data);
+			that.execAddEvents(pageSection, block, /*calendar, */events_data);
 		}
 		else {
 			block.one('initialize', function() {
-				t.execAddEvents(pageSection, block, /*calendar, */events_data);
+				that.execAddEvents(pageSection, block, /*calendar, */events_data);
 			});
 		}
 	},
 
 	execAddEvents : function(pageSection, block, /*calendar, */events_data) {
 	
-		var t = this;
+		var that = this;
 
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 		
 		// Filter events to be added: check they have not been added already (eg: events spanning Jan/Feb)
 		var events_data_to_add = [];
@@ -148,7 +148,7 @@ popFullCalendar = {
 		$.each(events_data, function(index, event_data) {
 
 			// Check if the event has not been added yet
-			if (!t.isEventLoaded(pageSection, block, event_data.domain, event_data.id)) {
+			if (!that.isEventLoaded(pageSection, block, event_data.domain, event_data.id)) {
 
 				// mempage.eventData[event_data.id] = {
 					// itemDBKey: itemDBKey
@@ -157,7 +157,7 @@ popFullCalendar = {
 				events_data_to_add.push(event_data);
 
 				// Mark this event as loaded
-				t.setEventLoaded(pageSection, block, event_data.domain, event_data.id);
+				that.setEventLoaded(pageSection, block, event_data.domain, event_data.id);
 			}
 		});
 
@@ -166,10 +166,10 @@ popFullCalendar = {
 
 	execCalendar : function(domain, pageSection, block, targets, state) {
 
-		var t = this;
+		var that = this;
 
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
-		var date = t.getDate(pageSection, block);
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
+		var date = that.getDate(pageSection, block);
 
 		var options;
 		if (state == 'new') {
@@ -190,7 +190,7 @@ popFullCalendar = {
 					// 	events = [];
 					// 	$.each(subscribedBlocksData, function(index, subscribedBlockData) {
 
-					// 		$.merge(events, t.getRuntimeMemoryPage(pageSection, subscribedBlockData['settings-id']).events);
+					// 		$.merge(events, that.getRuntimeMemoryPage(pageSection, subscribedBlockData['settings-id']).events);
 					// 	});
 					// }
 					// else {
@@ -211,22 +211,22 @@ popFullCalendar = {
 
 			var calendar = $(this);
 
-			// // Use promises, because we need to keep the domain in internal variable t.domain
-			// // So through promises, we make sure that 2 executions do not change t.domain concurrently, leading to conflict
+			// // Use promises, because we need to keep the domain in internal variable that.domain
+			// // So through promises, we make sure that 2 executions do not change that.domain concurrently, leading to conflict
 			// var dfd = $.Deferred();
-			// var lastPromise = t.promise;
-			// t.promise = dfd.promise();
+			// var lastPromise = that.promise;
+			// that.promise = dfd.promise();
 
 			// if (lastPromise) {
 			// 	lastPromise.done(function() {
 
 			// Create fullCalendar elements
-			t.execFullCalendar(domain, pageSection, block, calendar, state, options);
+			that.execFullCalendar(domain, pageSection, block, calendar, state, options);
 			// 	});
 			// }
 			// else {
 			// 	// Create fullCalendar elements
-			// 	t.execFullCalendar(domain, pageSection, block, calendar, state, options);
+			// 	that.execFullCalendar(domain, pageSection, block, calendar, state, options);
 			// }
 
 			// // Resolve the deferred
@@ -234,16 +234,16 @@ popFullCalendar = {
 		});
 
 		// Set this year/month as loaded
-		t.setDateLoaded(pageSection, block, date);
+		that.setDateLoaded(pageSection, block, date);
 	},
 
 	execFullCalendar : function(domain, pageSection, block, calendar, state, options) {
 
-		var t = this;
+		var that = this;
 
 		// We keep the domain in an internal variable. 
 		// It will be accessed in functions renderEvent and renderEventAfterAll
-		// t.domain = domain;
+		// that.domain = domain;
 
 		// Create fullCalendar elements
 		if (state == 'new') {
@@ -256,11 +256,11 @@ popFullCalendar = {
 
 			calendarOptions.eventRender = function(event, element) {
 				
-				t.renderEvent(/*domain, */pageSection, block, layouts, event, element);
+				that.renderEvent(/*domain, */pageSection, block, layouts, event, element);
 			};
 			calendarOptions.eventAfterAllRender = function(view) {
 
-				t.renderEventAfterAll(/*domain, */pageSection, block, layouts);
+				that.renderEventAfterAll(/*domain, */pageSection, block, layouts);
 			};
 
 			calendar.fullCalendar(calendarOptions);
@@ -273,24 +273,24 @@ popFullCalendar = {
 
 	setDateLoaded : function(pageSection, block, date) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		mempage.loadedDates[date.year()+'-'+(date.month()+1)] = true;
 	},
 
 	isDateLoaded : function(pageSection, block, date) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		return mempage.loadedDates[date.year()+'-'+(date.month()+1)] === true;
 	},
 
 	setEventLoaded : function(pageSection, block, domain, eventId) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		mempage.loadedEventIds[domain] = mempage.loadedEventIds[domain] || {};
 		mempage.loadedEventIds[domain][eventId] = true;
@@ -298,15 +298,15 @@ popFullCalendar = {
 
 	isEventLoaded : function(pageSection, block, domain, eventId) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		return mempage.loadedEventIds[domain] && mempage.loadedEventIds[domain][eventId] === true;
 	},
 
 	getDate : function(pageSection, block) {
 
-		var t = this;
+		var that = this;
 		var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
 		// Make sure to not include the leading zeros
@@ -320,8 +320,8 @@ popFullCalendar = {
 
 	renderEvent : function(/*domain, */pageSection, block, layouts, event, element) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		// If the html has already been generated, then use it (eg: on popState)
 		// Otherwise it can't be reproduced, since the Database is already lost
@@ -357,8 +357,8 @@ popFullCalendar = {
 
 	renderEventAfterAll : function(/*domain, */pageSection, block, layouts) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemoryPage(pageSection, block);
+		var that = this;
+		var mempage = that.getRuntimeMemoryPage(pageSection, block);
 
 		// Upon triggering merged, the popover scripts with code $(document).one('template:merged', ... will get executed
 		// run this before executing the JS
@@ -388,14 +388,14 @@ popFullCalendar = {
 
 	fetch : function(pageSection, block, calendar) {
 
-		var t = this;
+		var that = this;
 
-		var date = t.getDate(pageSection, block);
+		var date = that.getDate(pageSection, block);
 		// var calendar = block.find('.make-fullcalendar');			
 		// Month is 0-based (http://arshaw.com/fullcalendar/docs/current_date/gotoDate/) so substract 1		
 		calendar.fullCalendar( 'gotoDate', date);
 
-		if (t.isDateLoaded(pageSection, block, date)) {
+		if (that.isDateLoaded(pageSection, block, date)) {
 
 			return;
 		}
@@ -407,7 +407,7 @@ popFullCalendar = {
 })(jQuery);
 
 (function($){
-popFullCalendarControls = {
+window.popFullCalendarControls = {
 	
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -415,24 +415,24 @@ popFullCalendarControls = {
 
 	controlCalendarPrev : function(args) {
 	
-		var t = this;
+		var that = this;
 
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.click(function(e) {
 
 			var control = $(this);
-			t.execute(pageSection, block, control, 'prev');			
+			that.execute(pageSection, block, control, 'prev');			
 		});
 	},
 	controlCalendarNext : function(args) {
 	
-		var t = this;
+		var that = this;
 
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.click(function(e) {
 
 			var control = $(this);
-			t.execute(pageSection, block, control, 'next');			
+			that.execute(pageSection, block, control, 'next');			
 		});
 	},
 
@@ -442,7 +442,7 @@ popFullCalendarControls = {
 
 	setCalendarBlockParams : function(pageSection, block, date) {
 
-		var t = this;
+		var that = this;
 
 		var blockQueryState = popManager.getBlockQueryState(pageSection, block);
 
@@ -453,7 +453,7 @@ popFullCalendarControls = {
 
 	execute : function(pageSection, block, control, operation) {
 
-		var t = this;
+		var that = this;
 
 		// var calendar = block.find('.make-fullcalendar');
 		var calendar = $(control.closest('.pop-calendar-controls').data('target'));
@@ -469,7 +469,7 @@ popFullCalendarControls = {
 			date = date.subtract(1, 'months');
 		}
 
-		t.setCalendarBlockParams(pageSection, block, date);
+		that.setCalendarBlockParams(pageSection, block, date);
 		
 		// Delete previous "No Events found" messages
 		popManager.closeMessageFeedback(block);

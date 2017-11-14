@@ -1,5 +1,5 @@
 (function($){
-popModals = {
+window.popModals = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popModals = {
 
 	modalForm : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.on('show.bs.modal', function(e) {

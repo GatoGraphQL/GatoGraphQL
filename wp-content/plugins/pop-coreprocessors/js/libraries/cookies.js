@@ -1,5 +1,5 @@
 (function($){
-popCookies = {
+window.popCookies = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popCookies = {
 
 	cookies : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 		targets.each(function() {
 
@@ -30,7 +30,7 @@ popCookies = {
 
 	cookieToggleClass : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;		
 		targets.each(function() {
 
@@ -41,17 +41,17 @@ popCookies = {
 			// Eg: toggle sideinfo will execute "cookieToggleClass" many times, but only at the beginning we must open/keep closed the sideinfo
 			// if (popManager.isFirstLoad(pageSection)) {
 			
-			t.cookieToggleClassInitial(pageSection, container);
+			that.cookieToggleClassInitial(pageSection, container);
 			// if (container.data('cookieonready')) {
 				
 			// 	// Do document ready so that the collapse works for Google Maps (eg: Homepage's Project widget)
 			// 	jQuery(document).ready(function($) {
 
-			// 		t.cookieToggleClassInitial(pageSection, container);
+			// 		that.cookieToggleClassInitial(pageSection, container);
 			// 	});
 			// }
 			// else {
-			// 	t.cookieToggleClassInitial(pageSection, container);
+			// 	that.cookieToggleClassInitial(pageSection, container);
 			// }
 
 			// }
@@ -94,7 +94,7 @@ popCookies = {
 
 	cookieToggleClassInitial : function(pageSection, container) {
 	
-		var t = this;
+		var that = this;
 
 		var cookieid = container.data('cookieid');
 

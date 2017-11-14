@@ -1,5 +1,5 @@
 (function($){
-popServiceWorkers = {
+window.popServiceWorkers = {
 
 	// Keep a list of all open pages, as a pair key=url value=pageSectionPage
 	pages: {},
@@ -13,7 +13,7 @@ popServiceWorkers = {
 	// documentInitialized : function(args) {
 	init : function() {
 
-		var t = this;
+		var that = this;
 		if ('serviceWorker' in navigator) {
 			
 			// Catch the messages delivered by the Service Worker, and act upon them
@@ -23,18 +23,18 @@ popServiceWorkers = {
 				if (message.type === 'refresh') {
 
 					// If there is a pageSectionPage for that URL
-					if (t.pages[message.url]) {
+					if (that.pages[message.url]) {
 
 						// Retrieve it
-						var pageSectionPage = $('#'+t.pages[message.url]);
+						var pageSectionPage = $('#'+that.pages[message.url]);
 
 						// Make sure the pageSectionPage is still in the DOM: if it still has its data attributes then it's there
 						// If it's removed, that becomes undefined
 						if (pageSectionPage && pageSectionPage.data('fetch-url')) {
 						
 							// Show the message, then delete the entry from the pages, it's not needed anymore
-							t.showRefreshMessage(pageSectionPage);
-							delete t.pages[message.url];
+							that.showRefreshMessage(pageSectionPage);
+							delete that.pages[message.url];
 						}
 					}
 				}
@@ -55,7 +55,7 @@ popServiceWorkers = {
 
 	pageSectionNewDOMsBeforeInitialize : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, newDOMs = args.newDOMs;
 		var psId = pageSection.attr('id');
 
@@ -72,12 +72,12 @@ popServiceWorkers = {
 				if (url) {
 					
 					// Make the pageSectionPage refresh if the URL has a message
-					t.pages[url] = pageSectionPage.attr('id');
+					that.pages[url] = pageSectionPage.attr('id');
 
 					// If closing the tab, delete the entry
 					pageSectionPage.one('destroy', function() {
 				
-						delete t.pages[url];
+						delete that.pages[url];
 					});
 				}
 			}
@@ -86,7 +86,7 @@ popServiceWorkers = {
 
 	modifyFetchArgs : function(args) {
 	
-		var t = this;
+		var that = this;
 		var options = args.options;//, anchor = args.anchor;
 
 		if (options['js-args']) {
@@ -102,7 +102,7 @@ popServiceWorkers = {
 
 	modifyFetchBlockArgs : function(args) {
 	
-		var t = this;
+		var that = this;
 		var options = args.options, url = args.url;
 
 		// if doing reload, load straight from the server if the user has connection (Network First strategy)
@@ -114,7 +114,7 @@ popServiceWorkers = {
 
 	fetchBrowserURL : function(args) {
 
-		var t = this;
+		var that = this;
 		
 		// Do it on initialized.pop.document already, since there's no need to wait, this is the main content
 		$(document).on('initialized.pop.document', function() {
@@ -141,7 +141,7 @@ popServiceWorkers = {
 
 	resetTimestamp : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block;
 
 		// Only if SW supported
@@ -167,7 +167,7 @@ popServiceWorkers = {
 
 	showRefreshMessage : function(pageSectionPage) {
 
-		var t = this;
+		var that = this;
 		
 		var url = pageSectionPage.data('url');
 		var target = pageSectionPage.data('target');

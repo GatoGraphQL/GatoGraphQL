@@ -1,5 +1,5 @@
 (function($){
-popSocialMedia = {
+window.popSocialMedia = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popSocialMedia = {
 
 	socialmediaCounter : function(args) {
 
-		var t = this;
+		var that = this;
 
 		// Execute it only on hover, not directly because it takes so much time to load!
 		var targets = args.targets;

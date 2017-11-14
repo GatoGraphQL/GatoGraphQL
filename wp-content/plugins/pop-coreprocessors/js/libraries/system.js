@@ -1,5 +1,5 @@
 (function($){
-popSystem = {
+window.popSystem = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popSystem = {
 
 	destroyPage : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		
 		targets.click(function(e) {
@@ -23,7 +23,7 @@ popSystem = {
 
 	closePageSection : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.click(function(e) {

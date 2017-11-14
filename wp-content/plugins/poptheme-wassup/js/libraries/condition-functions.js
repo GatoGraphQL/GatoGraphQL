@@ -1,5 +1,5 @@
 (function($){
-popConditionFunctions = {
+window.popConditionFunctions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popConditionFunctions = {
 
 	isUserIdSameAsLoggedInUser : function(args) {
 	
-		var t = this;
+		var that = this;
 		var domain = args.domain;
 
 		if (popUserAccount.isLoggedIn(domain)) {

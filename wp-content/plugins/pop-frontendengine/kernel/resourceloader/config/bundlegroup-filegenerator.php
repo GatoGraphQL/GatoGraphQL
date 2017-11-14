@@ -3,11 +3,11 @@ class PoP_ResourceLoader_BundleGroupFileGenerator extends PoP_ResourceLoader_Bun
 
 	function get_dir() {
 
-		return parent::get_dir().'/bundlegroups/'.$this->get_subfolder();
+		return parent::get_dir().'/bundlegroups';//.'/'.$this->get_subfolder();
 	}
 	function get_url() {
 
-		return parent::get_url().'/bundlegroups/'.$this->get_subfolder();
+		return parent::get_url().'/bundlegroups';//.'/'.$this->get_subfolder();
 	}
 }
     

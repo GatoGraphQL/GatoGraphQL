@@ -1,5 +1,5 @@
 (function($){
-popMediaManagerCORS = {
+window.popMediaManagerCORS = {
 
 	//-------------------------------------------------
 	// INTERNAL VARIABLES
@@ -16,20 +16,20 @@ popMediaManagerCORS = {
 
 	documentInitialized : function() {
 
-		var t = this;
+		var that = this;
 
 		// Whenever executing wp.ajax.send, in file wp-includes/js/wp-util.js, we may change the url
 		// depending on the domain corresponding to the open media manager
 		$(document).on('wp.ajax:send:options', function(e, options) {
 
-			t.setEditorOptions(options);
+			that.setEditorOptions(options);
 		});
 
 		// Similarly, whenever executing uploader:start:settings, in file wp-includes/js/plupload/wp-plupload.js, we may change the url
 		// depending on the domain corresponding to the open media manager
 		$(document).on('uploader:start:settings', function(e, settings) {
 
-			t.setUploadSettings(settings);
+			that.setUploadSettings(settings);
 		});
 
 		$(document).ready( function($) {
@@ -47,7 +47,7 @@ popMediaManagerCORS = {
 				var states = ['gallery', 'insert'];
 				if (states.indexOf(state.id) > -1) {
 					
-					if (domain && t.domains['editor-'+state.id] && domain != t.domains['editor-'+state.id]) {
+					if (domain && that.domains['editor-'+state.id] && domain != that.domains['editor-'+state.id]) {
 
 						// Instruct the Media Manager that it needs to refresh
 						// state.get('library')._requery(true);// Initialize vars
@@ -56,7 +56,7 @@ popMediaManagerCORS = {
 					}
 
 					// Set the editor's domain to be the current domain
-					t.domains['editor-'+state.id] = domain;
+					that.domains['editor-'+state.id] = domain;
 				}
 			});
 		});
@@ -71,7 +71,7 @@ popMediaManagerCORS = {
 				var domain = popMediaManager.getDomain();
 				
 				// If the current and previous domains are different, then trigger a refresh of the data
-				if (domain && t.domains.featuredImage && domain != t.domains.featuredImage) {
+				if (domain && that.domains.featuredImage && domain != that.domains.featuredImage) {
 
 					// Instruct the Media Manager that it needs to refresh
 					// wp.media.frame.state().get('library')._requery(true);
@@ -80,7 +80,7 @@ popMediaManagerCORS = {
 				}
 
 				// Set the featuredImage's domain to be the current domain
-				t.domains.featuredImage = domain;
+				that.domains.featuredImage = domain;
 			});
 		});
 	},
@@ -91,7 +91,7 @@ popMediaManagerCORS = {
 
 	setEditorOptions : function(options) {
 
-		var t = this;
+		var that = this;
 
 		var domain = popMediaManager.getDomain();
 		if (domain) {
@@ -155,7 +155,7 @@ popMediaManagerCORS = {
 
 	setUploadSettings : function(settings) {
 
-		var t = this;
+		var that = this;
 
 		// Set it always, because the settings are kept in the state of the Uploader,
 		// so we make sure it will always have the right domain, and not the previous one
@@ -183,4 +183,4 @@ popMediaManagerCORS = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popMediaManagerCORS, ['documentInitialized'], true); // High priority: execute before function 'documentInitialized' from popMediaManager, so we set t.needsRefresh before the media manager checks for this value and performs the refresh
+popJSLibraryManager.register(popMediaManagerCORS, ['documentInitialized'], true); // High priority: execute before function 'documentInitialized' from popMediaManager, so we set that.needsRefresh before the media manager checks for this value and performs the refresh

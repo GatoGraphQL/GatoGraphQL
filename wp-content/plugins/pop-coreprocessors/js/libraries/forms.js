@@ -1,5 +1,5 @@
 (function($){
-popForms = {
+window.popForms = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popForms = {
 
 	interceptForm : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var pageSection = args.pageSection, targets = args.targets;
 		targets.click(function(e) {
@@ -28,7 +28,7 @@ popForms = {
 
 	forms : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		var pssId = popManager.getSettingsId(pageSection);
 		var bsId = popManager.getSettingsId(block);
@@ -82,7 +82,7 @@ popForms = {
 
 	formHandleDisabledLayer : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 		var pssId = popManager.getSettingsId(pageSection);
 		var bsId = popManager.getSettingsId(block);
@@ -101,7 +101,7 @@ popForms = {
 
 	clearInput : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.each(function () {

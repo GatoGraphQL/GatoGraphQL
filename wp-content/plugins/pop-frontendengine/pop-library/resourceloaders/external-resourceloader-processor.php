@@ -19,7 +19,7 @@ class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ExternalResourceL
 	function get_filename($resource) {
 	
 		$filenames = array(
-			POP_RESOURCELOADER_EXTERNAL_HANDLEBARS => 'handlebars.runtime'.(!PoP_Frontend_ServerUtils::use_cdn_resources() ? '.4.0.10' : ''),
+			POP_RESOURCELOADER_EXTERNAL_HANDLEBARS => 'handlebars.runtime'.(!PoP_Frontend_ServerUtils::access_externalcdn_resources() ? '.4.0.10' : ''),
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
@@ -59,7 +59,7 @@ class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ExternalResourceL
 	
 	function get_path($resource) {
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			switch ($resource) {
 

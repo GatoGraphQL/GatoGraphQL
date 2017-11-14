@@ -1,5 +1,5 @@
 (function($){
-popPrintFunctions = {
+window.popPrintFunctions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popPrintFunctions = {
 
 	printWindow : function(args) {
 
-		var t = this;
+		var that = this;
 
 		// Print only if parameter "action=print" is in the URL
 		// This way, we can control when to print automatically and when not (eg: just to show the Print themeMode in GetPoP website)

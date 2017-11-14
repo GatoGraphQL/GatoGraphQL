@@ -1,5 +1,5 @@
 (function($){
-popMapCollection = {
+window.popMapCollection = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popMapCollection = {
 
 	formMapLocationGeocode : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.find('input.address-input').change(function() {
@@ -33,20 +33,20 @@ popMapCollection = {
 
 	modalMap : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, targets = args.targets;
 
 		targets.on('show.bs.modal', function(e) {
 
 			var modal = $(this);
 			var link = $(e.relatedTarget);
-			t.execModalMap(domain, modal, link);
+			that.execModalMap(domain, modal, link);
 		});
 	},
 
 	modalMapBlock : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets, link = args.relatedTarget;
 		var modal = targets.closest('.modal');
 
@@ -59,7 +59,7 @@ popMapCollection = {
 		// });
 
 		// Do already execute it, the first time, since this will be executed when creating the modal inside the MODALS pageSection
-		t.execModalMap(domain, modal, link);
+		that.execModalMap(domain, modal, link);
 	},
 
 	//-------------------------------------------------
@@ -68,7 +68,7 @@ popMapCollection = {
 
 	execModalMap : function(domain, modals, link) {
 
-		var t = this;
+		var that = this;
 
 		// Make sure the link we got is the original one, and not the intercepted one
 		// This is important to later on retrieve the corresponding block and pageSection,

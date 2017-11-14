@@ -64,7 +64,7 @@ class PoP_CoreProcessors_Initialization {
 			// If before, it produces an error with $('btn').button('loading')
 			// http://stackoverflow.com/questions/13235578/bootstrap-radio-buttons-toggle-issue
 			
-			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 				// CDN
 				// https://github.com/noraesae/perfect-scrollbar/releases
@@ -453,7 +453,7 @@ class PoP_CoreProcessors_Initialization {
 		// Taken from public static function editor( $content, $editor_id, $settings = array() ) {
 		wp_print_styles('editor-buttons');
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 			
 			// CDN
 			// wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);

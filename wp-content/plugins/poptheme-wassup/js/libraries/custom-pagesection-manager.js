@@ -8,7 +8,7 @@ function hideTopNav() {
 	popPageSectionManager.close(popCustomPageSectionManager.getTopNav());
 }
 (function($){
-popCustomPageSectionManager = {
+window.popCustomPageSectionManager = {
 
 	//-------------------------------------------------
 	// PUBLIC but NOT EXPOSED functions
@@ -16,20 +16,20 @@ popCustomPageSectionManager = {
 
 	enableShowHideTopNav : function() {
 
-		var t = this;
+		var that = this;
 		$(window).on('scroll:down', hideTopNav);
 		$(window).on('scroll:up', showTopNav);
 	},
 	disableShowHideTopNav : function() {
 
-		var t = this;
+		var that = this;
 		// The context for t is lost, so gotta call the function using the full structure
 		$(window).off('scroll:down', hideTopNav);
 		$(window).off('scroll:up', showTopNav);
 	},
 	getTopNav : function() {
 
-		var t = this;
+		var that = this;
 
 		var offCanvasGroup = popPageSectionManager.getGroup();
 		return offCanvasGroup.find('.offcanvas-topnav');

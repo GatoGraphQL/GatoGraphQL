@@ -43,7 +43,7 @@ class PoP_BootstrapProcessors_Initialization {
 			// If before, it produces an error with $('btn').button('loading')
 			// http://stackoverflow.com/questions/13235578/bootstrap-radio-buttons-toggle-issue
 			
-			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 				// Important: add dependency 'jquery-ui-dialog' to bootstrap. If not, when loading library 'fileupload' in pop-useravatar plug-in, it produces a JS error
 				// Uncaught Error: cannot call methods on button prior to initialization; attempted to call method 'loading'
@@ -102,7 +102,7 @@ class PoP_BootstrapProcessors_Initialization {
 		 * Wordpress Styles
 		 ----------------------------- */
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 			
 			// CDN
 			wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);

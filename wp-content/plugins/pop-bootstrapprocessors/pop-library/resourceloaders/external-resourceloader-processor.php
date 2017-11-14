@@ -19,7 +19,7 @@ class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_Extern
 	function get_filename($resource) {
 	
 		$filenames = array(
-			POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP => 'bootstrap'.(!PoP_Frontend_ServerUtils::use_cdn_resources() ? '.3.3.7' : ''),
+			POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP => 'bootstrap'.(!PoP_Frontend_ServerUtils::access_externalcdn_resources() ? '.3.3.7' : ''),
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
@@ -59,7 +59,7 @@ class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_Extern
 	
 	function get_path($resource) {
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			switch ($resource) {
 

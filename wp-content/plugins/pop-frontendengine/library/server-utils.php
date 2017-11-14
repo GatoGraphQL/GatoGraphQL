@@ -22,16 +22,16 @@ class PoP_Frontend_ServerUtils {
 		return false;
 	}
 
-	public static function use_cdn_resources() {
+	public static function access_externalcdn_resources() {
 
 		// Allow to override the configuration
-		$override = PoP_ServerUtils::get_override_configuration('cdn');
+		$override = PoP_ServerUtils::get_override_configuration('externalcdn');
 		if (!is_null($override)) {
 			return $override;
 		}
 
-		if (defined('POP_SERVER_USECDNRESOURCES')) {
-			return POP_SERVER_USECDNRESOURCES;
+		if (defined('POP_SERVER_ACCESSEXTERNALCDNRESOURCES')) {
+			return POP_SERVER_ACCESSEXTERNALCDNRESOURCES;
 		}
 
 		return false;
@@ -139,7 +139,7 @@ class PoP_Frontend_ServerUtils {
 		}
 
 		// If using CDN resources, then do not pack them inside
-		return !self::use_cdn_resources();
+		return !self::access_externalcdn_resources();
 	}
 
 	public static function get_enqueuefile_type() {

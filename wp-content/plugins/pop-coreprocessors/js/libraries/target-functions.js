@@ -1,5 +1,5 @@
 (function($){
-popTargetFunctions = {
+window.popTargetFunctions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popTargetFunctions = {
 
 	copyHeader : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets, link = args.relatedTarget;
 
 		// Whenever replicating an Addon, we might want to pick extra information from the opening link (relatedTarget), eg: Header from att data-header for the Contact Profile Addon
@@ -27,7 +27,7 @@ popTargetFunctions = {
 
 	highlight : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 		
 		targets.each(function() {

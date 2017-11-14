@@ -1,5 +1,5 @@
 (function($){
-popWaypoints = {
+window.popWaypoints = {
 
 	//-------------------------------------------------
 	// INTERNAL VARIABLES
@@ -12,7 +12,7 @@ popWaypoints = {
 	// Comment Leo 22/02/2017: Waypoints seems to already process the windowResize already, so no need to add this
 	// documentInitialized : function() {
 	
-	// 	var t = this;
+	// 	var that = this;
 
 	// 	$(window).on('resized', function() {
 
@@ -22,7 +22,7 @@ popWaypoints = {
 
 	waypointsHistoryStateNew : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 		
 		jQuery(document).ready( function($) {
@@ -31,7 +31,7 @@ popWaypoints = {
 			targets.each(function() {
 
 				var target = $(this);
-				var opts = t.getOptions(pageSection, target);
+				var opts = that.getOptions(pageSection, target);
 
 				var waypointUp = new Waypoint({
 					element: target,
@@ -44,7 +44,7 @@ popWaypoints = {
 							return;
 						}
 						if (direction == 'up') {
-							// t.executeHistoryState(pageSection, $(this));
+							// that.executeHistoryState(pageSection, $(this));
 							popManager.historyReplaceState($(this));
 						}
 					}, 
@@ -63,23 +63,23 @@ popWaypoints = {
 						}
 						if (direction == 'down') {
 							// Also track with Google Analytics
-							// t.executeHistoryState(pageSection, $(this), {analytics: true});
-							// t.executeHistoryState(pageSection, $(this));
+							// that.executeHistoryState(pageSection, $(this), {analytics: true});
+							// that.executeHistoryState(pageSection, $(this));
 							popManager.historyReplaceState($(this));
 						}
 					}, 
 					context: opts.context
 				});
 
-				t.destroy(pageSection, block, waypointUp);
-				t.destroy(pageSection, block, waypointDown);
+				that.destroy(pageSection, block, waypointUp);
+				that.destroy(pageSection, block, waypointDown);
 			});
 		});
 	},
 
 	waypointsHistoryStateOriginal : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 		
 		jQuery(document).ready( function($) {
@@ -88,7 +88,7 @@ popWaypoints = {
 			targets.each(function() {
 
 				var target = $(this);
-				var opts = t.getOptions(pageSection, target);
+				var opts = that.getOptions(pageSection, target);
 
 				var waypoint = new Waypoint({
 					element: target,
@@ -101,20 +101,20 @@ popWaypoints = {
 							return;
 						}
 						if (direction == 'up') {
-							// t.executeHistoryState(pageSection, $(this));
+							// that.executeHistoryState(pageSection, $(this));
 							popManager.historyReplaceState(target);
 						}
 					}, 
 					context: opts.context
 				});				
-				t.destroy(pageSection, block, waypoint);
+				that.destroy(pageSection, block, waypoint);
 			});
 		});
 	},
 
 	waypointsToggleClass : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		jQuery(document).ready( function($) {	
@@ -126,7 +126,7 @@ popWaypoints = {
 				var classs = target.data('class');
 				if (recipient.length && classs) {
 
-					var opts = t.getOptions(pageSection, target);
+					var opts = that.getOptions(pageSection, target);
 					var waypoint = new Waypoint({
 						element: target,
 						handler: function(direction) {
@@ -149,10 +149,10 @@ popWaypoints = {
 							// Comment 30/01/2017: since removing perfectScrollbar from the mainPageSection, and switching to body, we can't use the context 'pop-waypoints-context' anymore
 							// Then, we gotta add an offset for the main pageSection: it has an offset with regards to the body (eg: top => 45px, top+pagetabs => 80px),
 							// Needed for the Projects Map waypointsTeater
-							return t.getOffset(this.element);
+							return that.getOffset(this.element);
 						}
 					});		
-					t.destroy(pageSection, block, waypoint);
+					that.destroy(pageSection, block, waypoint);
 				}
 			});			
 		});
@@ -160,7 +160,7 @@ popWaypoints = {
 
 	waypointsToggleCollapse : function(args) {
 	
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		jQuery(document).ready( function($) {	
@@ -173,7 +173,7 @@ popWaypoints = {
 				if (target.length) {
 					var block = popManager.getBlock(target);
 					var pageSection = popManager.getBlock(block);
-					t.execWaypointsToggleCollapse(pageSection, block, target, collapse);
+					that.execWaypointsToggleCollapse(pageSection, block, target, collapse);
 				}
 			});			
 		});
@@ -181,7 +181,7 @@ popWaypoints = {
 
 	waypointsTheater : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 
 		// var waypoint = block.find('.waypoint[data-toggle="theater"]').addBack('.waypoint[data-toggle="theater"]');
@@ -190,7 +190,7 @@ popWaypoints = {
 			targets.each(function() {
 
 				var target = $(this);
-				var opts = t.getOptions(pageSection, target);
+				var opts = that.getOptions(pageSection, target);
 
 				var waypoint = new Waypoint({
 					element: target,
@@ -214,17 +214,17 @@ popWaypoints = {
 						// Comment 30/01/2017: since removing perfectScrollbar from the mainPageSection, and switching to body, we can't use the context 'pop-waypoints-context' anymore
 						// Then, we gotta add an offset for the main pageSection: it has an offset with regards to the body (eg: top => 45px, top+pagetabs => 80px),
 						// Needed for the Projects Map waypointsTeater
-						return t.getOffset(this.element);
+						return that.getOffset(this.element);
 					}
 				});		
-				t.destroy(pageSection, block, waypoint);
+				that.destroy(pageSection, block, waypoint);
 			});			
 		});
 	},
 
 	waypointsFetchMore : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, /*pageSectionPage = args.pageSectionPage, */block = args.block, targets = args.targets;
 
 		// Fetch more
@@ -238,7 +238,7 @@ popWaypoints = {
 			targets.each(function() {
 
 				var target = $(this);
-				var opts = t.getOptions(pageSection, target);
+				var opts = that.getOptions(pageSection, target);
 
 				// enabled attr: fetch data only if the Content has been initialized
 				// Eg when not: Lazy Blocks / Aggregators (for these, only trigger waypoint after data is first initialized)
@@ -264,7 +264,7 @@ popWaypoints = {
 					enabled: contentLoaded,
 					offset: 'bottom-in-view'
 				});				
-				t.destroy(pageSection, block, waypoint);
+				that.destroy(pageSection, block, waypoint);
 
 				waypoints.push(waypoint);
 			});
@@ -287,7 +287,7 @@ popWaypoints = {
 
 						if (waypoint.enabled) {
 							waypoint.disable();
-							t.reEnable(pageSection, block, waypoint);
+							that.reEnable(pageSection, block, waypoint);
 						}
 					});
 				}
@@ -311,7 +311,7 @@ popWaypoints = {
 	// Comment Leo: Uncomment here: Needed for MainRelated Info
 	// waypointsCollapse : function(args) {
 	
-	// 	var t = this;
+	// 	var that = this;
 	// 	var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 	// 	// var waypoint = block.find('.waypoint[data-toggle="offcanvas-collapse"]').addBack('.waypoint[data-toggle="offcanvas-collapse"]');
@@ -322,7 +322,7 @@ popWaypoints = {
 	// 			var waypoint = $(this);
 	// 			var target = waypoint.data('target');
 	// 			var parent = waypoint.data('parent');
-	// 			var opts = t.getOptions(waypoint);
+	// 			var opts = that.getOptions(waypoint);
 
 	// 			// Data toggle: offcanvas collapse
 	// 			waypoint.waypoint(function(direction) {
@@ -353,7 +353,7 @@ popWaypoints = {
 
 	// waypointsShowHideTopNav : function(args) {
 	
-	// 	var t = this;
+	// 	var that = this;
 	// 	var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 	// 	// Show/hide topnav
@@ -363,7 +363,7 @@ popWaypoints = {
 	// 		targets.each(function() {
 
 	// 			var waypoint = $(this);
-	// 			var opts = t.getOptions(waypoint);
+	// 			var opts = that.getOptions(waypoint);
 
 	// 			waypoint.waypoint(function(direction) {
 			
@@ -393,7 +393,7 @@ popWaypoints = {
 
 	reEnable : function(pageSection, block, waypoint) {
 	
-		var t = this;
+		var that = this;
 		
 		block.one('beforeReload', function() {
 			block.one('fetchCompleted', function() {
@@ -405,7 +405,7 @@ popWaypoints = {
 					waypoint.enable();
 				}
 				else {
-					t.reEnable(pageSection, block, waypoint);
+					that.reEnable(pageSection, block, waypoint);
 				}
 			});
 		});
@@ -413,8 +413,8 @@ popWaypoints = {
 
 	execWaypointsToggleCollapse : function(pageSection, block, target, collapse) {
 	
-		var t = this;
-		var opts = t.getOptions(pageSection, target);
+		var that = this;
+		var opts = that.getOptions(pageSection, target);
 
 		var waypoint = new Waypoint({
 			element: target,
@@ -434,12 +434,12 @@ popWaypoints = {
 			}, 
 			context: opts.context
 		});		
-		t.destroy(pageSection, block, waypoint);
+		that.destroy(pageSection, block, waypoint);
 	},
 
 	getOptions : function(pageSection, waypoint) {
 	
-		var t = this;
+		var that = this;
 		var options = {};
 		
 		// Comment Leo 10/04/2014: pop-viewport for perfect-scrollbar and for waypoints are not the same!
@@ -470,7 +470,7 @@ popWaypoints = {
 	},
 	// getOptions : function(pageSection, waypoint) {
 	
-	// 	var t = this;
+	// 	var that = this;
 
 	// 	var opts = {};
 
@@ -486,7 +486,7 @@ popWaypoints = {
 
 	destroy : function(pageSection, block, waypoint) {
 
-		var t = this;
+		var that = this;
 		
 		var pageSectionPage = popManager.getPageSectionPage(block);
 		pageSectionPage.one('destroy', function() {
@@ -497,7 +497,7 @@ popWaypoints = {
 
 	// executeHistoryState : function(pageSection, waypoint, options) {
 	
-	// 	var t = this;
+	// 	var that = this;
 		
 	// 	// popManager.historyReplaceState(pageSection, waypoint, options);
 	// 	popManager.historyReplaceState(waypoint, options);

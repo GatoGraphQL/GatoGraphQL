@@ -1,12 +1,12 @@
 (function($){
-popTabs = {
+window.popTabs = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
 	documentInitialized : function(args) {
 
-		var t = this;
+		var that = this;
 
 		// Wait until all JS config files from the ResourceLoader have been loaded
 		$(document).ready(function($){
@@ -64,7 +64,7 @@ popTabs = {
 
 	onDestroyPageSwitchTab : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		// Catch the event 'destroy' and switch the tab then. This way, it will also work when destroying the pageSectionPage
@@ -75,14 +75,14 @@ popTabs = {
 			var pageSectionPage = popManager.getPageSectionPage(link);
 			pageSectionPage.on('destroy', function() {
 
-				t.switchTab(link);
+				that.switchTab(link);
 			})
 		})
 	},
 
 	addOpenTab : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets, addOpenTab = args.addOpenTab;
 
 		// Allow function openTabs to set this attr in false, so this value is not added yet once again since it's already open
@@ -96,7 +96,7 @@ popTabs = {
 			
 			var link = $(this);
 			
-			var params = t.getDestroyPageTabParams(pageSection, link);
+			var params = that.getDestroyPageTabParams(pageSection, link);
 
 			// Add the url to the session tabs, so next session they can be re-opened
 			popManager.addOpenTab(params.url, params.target);
@@ -105,7 +105,7 @@ popTabs = {
 
 	closePageTab : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, targets = args.targets;
 
 		targets.click(function(e) {
@@ -113,7 +113,7 @@ popTabs = {
 			e.preventDefault();
 			var link = $(this);
 			
-			var params = t.getDestroyPageTabParams(pageSection, link);
+			var params = that.getDestroyPageTabParams(pageSection, link);
 
 			// Comment Leo 10/01/2017: this line has been moved to triggerDestroyTarget so it's executed even
 			// if the user did not click on the close button, eg: after adding a comment, the window self destroys,
@@ -132,7 +132,7 @@ popTabs = {
 
 	getDestroyPageTabParams : function(pageSection, link) {
 
-		var t = this;
+		var that = this;
 			
 		// URL: take it from 'data-url' on the link (eg: Page Tab), or if it doesn't exist,
 		// from the corresponding paramsscope URL (eg: blockunit-frame controls to close a page)
@@ -144,7 +144,7 @@ popTabs = {
 
 	switchTab : function(link) {
 
-		var t = this;
+		var that = this;
 
 		// If the link is active, then switch to previous or next tab
 		if (link.prev('a.pop-pagetab-btn').hasClass('active')) {
@@ -166,7 +166,7 @@ popTabs = {
 
 	saveCookie : function(value) {
 
-		var t = this;
+		var that = this;
 
 		// Save the value of the cookie, if set
 		if ($('#'+M.IDS_TABS_REMEMBERCHECKBOX).prop('checked')) {
@@ -177,10 +177,10 @@ popTabs = {
 
 	openTabs : function() {
 
-		var t = this;
+		var that = this;
 
 		// Save the value of the cookie, if set
-		t.saveCookie("true");
+		that.saveCookie("true");
 
 		// Open the tabs
 		popManager.openTabs();
@@ -188,10 +188,10 @@ popTabs = {
 
 	keepScreenOpenTab : function(url, target) {
 
-		var t = this;
+		var that = this;
 
 		// Save the value of the cookie, if set
-		t.saveCookie("false");
+		that.saveCookie("false");
 
 		// Remove the previous session tabs from openTabs
 		popManager.keepScreenOpenTab(url, target);

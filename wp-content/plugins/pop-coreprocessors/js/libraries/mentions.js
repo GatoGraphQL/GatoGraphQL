@@ -1,5 +1,5 @@
 (function($){
-popMentions = {
+window.popMentions = {
 
 	// Backup the previous results
 	previousData: {},
@@ -11,14 +11,14 @@ popMentions = {
 
 	documentInitialized : function(args) {
 	
-		var t = this;
-		// t.domain = args.domain;
+		var that = this;
+		// that.domain = args.domain;
 
 		// Wait until the document is ready, to make sure the ResourceLoader config is loaded, which will handle this URL
 		$(document).ready(function($) {
 			
 			// Load the Prefetch URLs
-			t.prefetch();
+			that.prefetch();
 		});
 	},
 
@@ -28,25 +28,25 @@ popMentions = {
 
 	prefetch : function() {
 	
-		var t = this;
+		var that = this;
 
 		// Whenever starting the lookup (after typing @), the user can already see the list of all items from the prefetch,
 		// and also it will set the prefetch results for the "previous" step
 		$.each(M.MENTIONS.TYPES, function(delimiter, settings) {
 
-			t.fetchData(delimiter, settings.baseline);
+			that.fetchData(delimiter, settings.baseline);
 		});
 	},
 
 	fetchData : function(delimiter, url, process) {
 	
-		var t = this;
+		var that = this;
 
 		// Have the results been stored? If so, use them
 		var stored = popManager.getStoredData(url);
 		if (stored) {
 
-			t.processData(delimiter, stored, process);
+			that.processData(delimiter, stored, process);
 		}
 		else {
 
@@ -57,17 +57,17 @@ popMentions = {
 				var ttl = 86400000;
 				popManager.storeData(url, data, ttl);
 
-				t.processData(delimiter, data, process);
+				that.processData(delimiter, data, process);
 			});
 		}
 	},
 
 	processData : function(delimiter, data, process) {
 	
-		var t = this;
+		var that = this;
 
 		// Backup the results as the "previous" results
-		t.previousData[delimiter] = data;
+		that.previousData[delimiter] = data;
 
 		if (process) {
 
@@ -78,7 +78,7 @@ popMentions = {
 
 	source : function(query, process, delimiter) {
 	
-		var t = this;
+		var that = this;
 
 		// If we have set-up a confiration for this delimiter
 		if (M.MENTIONS.TYPES[delimiter]) {
@@ -110,34 +110,34 @@ popMentions = {
 
 				// Start processing with the results from the previous lookup, as to not keep the user waiting for the response to come back
 				// Base case: [], for if the first load has not finished yet
-				var previousData = t.previousData[delimiter] || [];
+				var previousData = that.previousData[delimiter] || [];
 				process(previousData);
 
 				// Fetch the data, and process it when it comes back
-				t.fetchData(delimiter, url, process);
+				that.fetchData(delimiter, url, process);
 			}
 		}
 	},
 
 	render: function(item) {
 
-		var t = this;
-		var delimiter = t.infereDelimiter(item);
-		var html = popManager.getHtml(/*t.domain, */M.MENTIONS.TYPES[delimiter].template, item);
+		var that = this;
+		var delimiter = that.infereDelimiter(item);
+		var html = popManager.getHtml(/*that.domain, */M.MENTIONS.TYPES[delimiter].template, item);
 		return '<li><a href="javascript:;"><span>'+html+'</span></a></li>';
 	},
 
 	insert : function(item) {
 	
-		var t = this;
+		var that = this;
 
-		var delimiter = t.infereDelimiter(item);
+		var delimiter = that.infereDelimiter(item);
 		return '<span>' + delimiter + item[M.MENTIONS.TYPES[delimiter].key] + '</span>&nbsp;';
 	},
 
 	infereDelimiter : function(item) {
 	
-		var t = this;
+		var that = this;
 
 		// We do not have the delimiter, however we can guess it back from the key from all delimiter settings.
 		var ret = '';

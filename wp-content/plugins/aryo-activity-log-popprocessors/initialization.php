@@ -41,7 +41,7 @@ class AAL_PoPProcessors_Initialization {
 			$bundles_js_folder = $dist_js_folder.'/bundles';
 
 			// Moment.js library already loaded by PoP Core Processors
-			// if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+			// if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			// 	// CDN
 			// 	wp_register_script('moment', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js', array('jquery'), null);

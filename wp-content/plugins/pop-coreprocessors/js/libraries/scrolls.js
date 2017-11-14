@@ -1,5 +1,5 @@
 (function($){
-popScrolls = {
+window.popScrolls = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popScrolls = {
 
 	scrollHandler : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection;
 
 		var lastScrollTop = 0, delta = 200;

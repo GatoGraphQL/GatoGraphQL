@@ -41,7 +41,7 @@ class PhotoSwipe_PoP_Initialization {
 			$bundles_js_folder = $dist_js_folder.'/bundles';
 
 			// Load different files depending on the environment (PROD / DEV)
-			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 				// https://github.com/dimsemenov/PhotoSwipe/releases
 				wp_register_script('photoswipe', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe.min.js', null, null);
@@ -71,7 +71,7 @@ class PhotoSwipe_PoP_Initialization {
 	function register_styles() {
 
 		// Load different files depending on the environment (PROD / DEV)
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			wp_register_style('photoswipe', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/photoswipe.min.css', null, null);
 			wp_register_style('photoswipe-skin', 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/'.PHOTOSWIPEPOP_PHOTOSWIPE_VERSION.'/default-skin/default-skin.min.css', null, null);

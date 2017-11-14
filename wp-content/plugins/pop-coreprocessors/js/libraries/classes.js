@@ -1,5 +1,5 @@
 (function($){
-popClasses = {
+window.popClasses = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popClasses = {
 
 	addDomainClass : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		targets.each(function() {

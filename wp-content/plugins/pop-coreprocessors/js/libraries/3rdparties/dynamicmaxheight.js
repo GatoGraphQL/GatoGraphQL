@@ -1,5 +1,5 @@
 (function($){
-popDynamicMaxHeight = {
+window.popDynamicMaxHeight = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popDynamicMaxHeight = {
 
 	dynamicMaxHeight : function(args) {
 	
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		targets.dynamicMaxHeight();

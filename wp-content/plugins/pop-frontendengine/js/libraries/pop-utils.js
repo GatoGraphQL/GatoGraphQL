@@ -1,5 +1,5 @@
 (function($){
-popUtils = {
+window.popUtils = {
 	
 	getPath : function(url) {
 		

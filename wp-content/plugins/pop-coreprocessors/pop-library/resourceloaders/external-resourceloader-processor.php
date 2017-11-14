@@ -62,7 +62,7 @@ class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalRes
 	
 	function get_filename($resource) {
 	
-		$use_cdn = PoP_Frontend_ServerUtils::use_cdn_resources();
+		$use_cdn = PoP_Frontend_ServerUtils::access_externalcdn_resources();
 		$filenames = array(
 			POP_RESOURCELOADER_EXTERNAL_GMAPS => 'gmaps'.(!$use_cdn ? '.0.4.24' : ''),
 			POP_RESOURCELOADER_EXTERNAL_PERFECTSCROLLBAR => 'perfect-scrollbar.jquery'.(!$use_cdn ? '.0.6.11' : ''),
@@ -142,7 +142,7 @@ class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalRes
 	
 	function get_path($resource) {
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			$paths = array(
 				POP_RESOURCELOADER_EXTERNAL_GMAPS => 'https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24',

@@ -64,7 +64,7 @@ class PoPFrontend_Initialization {
 			$includes_js_folder = $js_folder.'/includes';
 			$cdn_js_folder = $includes_js_folder . '/cdn';
 
-			if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 				// http://handlebarsjs.com/installation.html
 				// // Comment Leo: Version 4.0.10 has a bug (https://github.com/wycats/handlebars.js/issues/1300) that make the application not work correctly

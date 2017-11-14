@@ -1,5 +1,5 @@
 (function($){
-popManager = {
+window.popManager = {
 
 	//-------------------------------------------------
 	// INTERNAL variables
@@ -48,25 +48,25 @@ popManager = {
 
 	getMemory : function(domain) {
 
-		var t = this;
+		var that = this;
 		// domain = domain || M.HOME_DOMAIN;
-		return t.state[domain].memory;
+		return that.state[domain].memory;
 	},
 	getDatabase : function(domain) {
 
-		var t = this;
+		var that = this;
 		// domain = domain || M.HOME_DOMAIN;
-		return t.state[domain].database;
+		return that.state[domain].database;
 	},
 	getUserDatabase : function(domain) {
 
-		var t = this;
+		var that = this;
 		// domain = domain || M.HOME_DOMAIN;
-		return t.state[domain].userdatabase;
+		return that.state[domain].userdatabase;
 	},
 	getInitialBlockMemory : function(url) {
 
-		var t = this;
+		var that = this;
 
 		// If the url is the first one loaded, then the initial memory is stored there.
 		// Otherwise, there is a bug when loading https://www.mesym.com/en/log-in/:
@@ -74,23 +74,23 @@ popManager = {
 		// and it will fetch /log-in again. However, the Notifications will not be there, since it's loaded only on loadingframe(),
 		// and it will produce a JS error when integrating the initialMemory into the memory (restoreinitial)
 		if (url == M.INITIAL_URL) {
-			return t.initialBlockMemory[url];
+			return that.initialBlockMemory[url];
 		}
 
 		// The url is either stored as the initial block memory, or it is an intercepted url, so the configuration
 		// is stored under another url
-		var storedUnder = t.urlPointers[url];
+		var storedUnder = that.urlPointers[url];
 		if (storedUnder) {
-			return t.initialBlockMemory[storedUnder.url];	
+			return that.initialBlockMemory[storedUnder.url];	
 		}
-		return t.initialBlockMemory[url] || {};
+		return that.initialBlockMemory[url] || {};
 	},
 	addInitialBlockMemory : function(response) {
 
-		var t = this;
+		var that = this;
 		var url = response.feedback.toplevel[M.URLPARAM_URL];
-		if (!t.initialBlockMemory[url]) {
-			t.initialBlockMemory[url] = {
+		if (!that.initialBlockMemory[url]) {
+			that.initialBlockMemory[url] = {
 				dataset: {},
 				feedback: {
 					block: {},
@@ -104,7 +104,7 @@ popManager = {
 				}
 			};
 		}
-		var initialMemory = t.initialBlockMemory[url];
+		var initialMemory = that.initialBlockMemory[url];
 		$.each(response.settings.configuration, function(pssId, rpsConfiguration) {
 
 			if (!initialMemory['query-state'].general[pssId]) {
@@ -123,15 +123,15 @@ popManager = {
 	},
 	getReplicableMemory : function(url, target) {
 
-		var t = this;
+		var that = this;
 		target = target || M.URLPARAM_TARGET_MAIN;
 
-		var storedUnder = t.urlPointers[url];
-		return t.replicableMemory[storedUnder.url][storedUnder.target];
+		var storedUnder = that.urlPointers[url];
+		return that.replicableMemory[storedUnder.url][storedUnder.target];
 	},
 	saveUrlPointers : function(response, target) {
 
-		var t = this;
+		var that = this;
 		target = target || M.URLPARAM_TARGET_MAIN;
 		var url = response.feedback.toplevel[M.URLPARAM_URL];
 
@@ -140,7 +140,7 @@ popManager = {
 			if (psFeedback['intercept-urls']) {
 				$.each(psFeedback['intercept-urls'], function(ipssId, iObject) {
 					$.each(iObject, function(ielemsId, iUrl) {
-						t.urlPointers[iUrl] = {
+						that.urlPointers[iUrl] = {
 							url: url,
 							target: target
 						};
@@ -154,7 +154,7 @@ popManager = {
 				if (bFeedback['intercept-urls']) {
 					$.each(bFeedback['intercept-urls'], function(ibsId, iObject) {
 						$.each(iObject, function(ielemsId, iUrl) {
-							t.urlPointers[iUrl] = {
+							that.urlPointers[iUrl] = {
 								url: url,
 								target: target
 							};
@@ -166,7 +166,7 @@ popManager = {
 	},
 	addReplicableMemory : function(response, target) {
 
-		var t = this;
+		var that = this;
 		target = target || M.URLPARAM_TARGET_MAIN;
 
 		// Store the memory only if the response involves pageSections with replicable elements
@@ -183,10 +183,10 @@ popManager = {
 
 			// Keep a copy of the memory, to be restored when a replicable elements is intercepted
 			var url = response.feedback.toplevel[M.URLPARAM_URL];
-			if (!t.replicableMemory[url]) {
-				t.replicableMemory[url] = {};
+			if (!that.replicableMemory[url]) {
+				that.replicableMemory[url] = {};
 			}
-			t.replicableMemory[url][target] = {
+			that.replicableMemory[url][target] = {
 				dataset: $.extend(true, {}, response.dataset),
 				feedback: $.extend(true, {}, response.feedback),
 				'query-state': $.extend(true, {}, response['query-state'])
@@ -195,47 +195,47 @@ popManager = {
 	},
 	getRuntimeMemory : function(domain, pageSection, target, options) {
 
-		var t = this;
+		var that = this;
 
 		options = options || {};
 
 		// To tell if it's general or url, check for data-paramscope in the pageSection
-		var pageSectionPage = t.getPageSectionPage(target);
+		var pageSectionPage = that.getPageSectionPage(target);
 		var scope = pageSectionPage.data('paramsscope');
 		if (scope == M.SETTINGS_PARAMSSCOPE_URL) {
 			
-			var url = options.url || t.getTopLevelFeedback(domain)[M.URLPARAM_URL];//''+window.location.href;
-			if (!t.runtimeMemory.url[url]) {
+			var url = options.url || that.getTopLevelFeedback(domain)[M.URLPARAM_URL];//''+window.location.href;
+			if (!that.runtimeMemory.url[url]) {
 			
 				// Create a new instance for this URL
-				t.runtimeMemory.url[url] = {};
+				that.runtimeMemory.url[url] = {};
 			}
 
 			// Save which url the params for this target is under
 			target.data(M.PARAMS_PARAMSSCOPE_URL, url);
 
-			return t.runtimeMemory.url[url];
+			return that.runtimeMemory.url[url];
 		}
 
 		// The entry can be created either under 'general' for all pageSections who are static, ie: they don't bring any new content with the url (eg: top-frame)
 		// or under 'url' for the ones who depend on a given url, eg: main
-		return t.runtimeMemory.general;
+		return that.runtimeMemory.general;
 	},
 	newRuntimeMemoryPage : function(domain, pageSection, target, options) {
 
-		var t = this;
+		var that = this;
 		
 		// Take the URL from the topLevelFeedback and not from window.location.href when creating a new one.
 		// this is so that we don't need to update the browser url, which sometimes we don't want, eg: when replicating Add Comment in the addon pageSection
 		options = options || {};
 		if (!options.url) {
-			var tlFeedback = t.getTopLevelFeedback(domain);
+			var tlFeedback = that.getTopLevelFeedback(domain);
 			options.url = tlFeedback[M.URLPARAM_URL];
 		}
-		var mempage = t.getRuntimeMemory(domain, pageSection, target, options);
+		var mempage = that.getRuntimeMemory(domain, pageSection, target, options);
 
-		var pssId = t.getSettingsId(pageSection);
-		var targetId = t.getSettingsId(target);
+		var pssId = that.getSettingsId(pageSection);
+		var targetId = that.getSettingsId(target);
 
 		if (!mempage[pssId]) {
 			mempage[pssId] = {};
@@ -252,11 +252,11 @@ popManager = {
 	},
 	deleteRuntimeMemoryPage : function(domain, pageSection, target, options) {
 
-		var t = this;
-		var mempage = t.getRuntimeMemory(domain, pageSection, target, options);
+		var that = this;
+		var mempage = that.getRuntimeMemory(domain, pageSection, target, options);
 
-		var pssId = t.getSettingsId(pageSection);
-		var targetId = t.getSettingsId(target);
+		var pssId = that.getSettingsId(pageSection);
+		var targetId = that.getSettingsId(target);
 
 		if (mempage[pssId]) {
 			delete mempage[pssId][targetId];
@@ -268,7 +268,7 @@ popManager = {
 	},
 	getRuntimeMemoryPage : function(pageSection, targetOrId, options) {
 
-		var t = this;
+		var that = this;
 
 		// In function executeFetchBlock will get a response with the settingsId of the block, not the block. 
 		// In that case, we can't do block.data('paramsscope-url'), so instead we pass the url in the options
@@ -281,20 +281,20 @@ popManager = {
 		}
 		else if ($.type(targetOrId) == 'object') {
 			var target = targetOrId;
-			url = t.getTargetParamsScopeURL(target);//target.data(M.PARAMS_PARAMSSCOPE_URL);
+			url = that.getTargetParamsScopeURL(target);//target.data(M.PARAMS_PARAMSSCOPE_URL);
 		}
 		if (url) {
 			
-			mempage = t.runtimeMemory.url[url];
+			mempage = that.runtimeMemory.url[url];
 		}
 		else {
 
 			// Otherwise, it's general
-			mempage = t.runtimeMemory.general;
+			mempage = that.runtimeMemory.general;
 		}
 
-		var pssId = t.getSettingsId(pageSection);
-		var targetId = t.getSettingsId(targetOrId);
+		var pssId = that.getSettingsId(pageSection);
+		var targetId = that.getSettingsId(targetOrId);
 
 		// If this doesn't exist, it's because the tab was closed and we are still retrieving the mempage later on (eg: a fetch-more had been invoked and the response came after tab was closed)
 		// Since this behavior is not right, then just thrown an exception
@@ -312,16 +312,16 @@ popManager = {
 
 	isFirstLoad : function(pageSection) {
 		
-		var t = this;
+		var that = this;
 		
-		return t.firstLoad[t.getSettingsId(pageSection)];
+		return that.firstLoad[that.getSettingsId(pageSection)];
 	},
 
 	initDomainVars : function(domain) {
 	
-		var t = this;
+		var that = this;
 
-		t.state[domain] = {
+		that.state[domain] = {
 			memory : {
 				settings: {
 					'js-settings': {},
@@ -359,7 +359,7 @@ popManager = {
 
 	init : function() {
 	
-		var t = this;
+		var that = this;
 
 		// Step 0: The HTML has been loaded, now execute JS
 		$(document.body).removeClass('pop-loadinghtml');
@@ -370,32 +370,32 @@ popManager = {
 			var domain = M.HOME_DOMAIN;
 
 			// Make sure the localStorage has no stale entries
-			t.initLocalStorage();
+			that.initLocalStorage();
 
 			// Initialize the domain: it must be done before initializing the topLevelJSON, since this latter one must save info under the domain
-			t.initDomain(domain/*, false*/);
+			that.initDomain(domain/*, false*/);
 
 			// Initialize the variables holding the memory and databases for that domain;
-			// t.initDomainVars(domain);
+			// that.initDomainVars(domain);
 
 			// Initialize Settings, Feedback and Data
-			t.initTopLevelJson(domain);
+			that.initTopLevelJson(domain);
 
 			// Initialize the document
-			t.initDocument(domain);
+			that.initDocument(domain);
 
 			// Log in the user immediately, before rendering the HTML. This way, conditional wrappers can access the state of the user
 			// being logged in, such as for "isUserIdSameAsLoggedInUser"
 			// popUserAccount.initialLogin(domain);
 
 			// Obtain what pageSections to merge from the configuration
-			var memory = t.getMemory(domain);
+			var memory = that.getMemory(domain);
 
 			// Keep the pageSection DOM elems
 			var pageSections = [];
 
-			// Comment Leo 01/12/2016: Split the logic below into 2: first render all the pageSections (t.renderPageSection(pageSection)),
-			// and then execute all JS on them (t.pageSectionInitialized(pageSection)), and in between remove the "loading" screen
+			// Comment Leo 01/12/2016: Split the logic below into 2: first render all the pageSections (that.renderPageSection(pageSection)),
+			// and then execute all JS on them (that.pageSectionInitialized(pageSection)), and in between remove the "loading" screen
 			// this way, the first paint is much faster, for a better user experience
 			// Step 0: initialize the pageSection
 			$.each(memory.settings.configuration, function(pssId, psConfiguration) {
@@ -407,13 +407,13 @@ popManager = {
 				pageSection.attr('data-settings-id', pssId);
 				pageSection.addClass('pop-pagesection');
 
-				t.initPageSectionSettings(domain, pageSection, psConfiguration);
+				that.initPageSectionSettings(domain, pageSection, psConfiguration);
 
 				// Insert into the Runtime to generate the ID
-				t.addPageSectionIds(domain, pageSection, psConfiguration[M.JS_TEMPLATE]);
+				that.addPageSectionIds(domain, pageSection, psConfiguration[M.JS_TEMPLATE]);
 
 				// Allow plugins to catch events for the rendering
-				t.initPageSection(pageSection);
+				that.initPageSection(pageSection);
 
 				pageSections.push(pageSection);
 			});
@@ -429,13 +429,13 @@ popManager = {
 			// so the response will come back immediately and try to render itself, for which
 			// it will modify the context, making the following pageSections (pagetabs, sideinfo) to be rendered unproperly
 			var dfd = $.Deferred();
-			t.mergingTemplatePromise = dfd.promise();
+			that.mergingTemplatePromise = dfd.promise();
 			$.each(pageSections, function(index, pageSection) {
 
 				// // Re-calculate the progress
-				// t.progress = parseInt(delta*(index+1));
+				// that.progress = parseInt(delta*(index+1));
 
-				t.renderPageSection(domain, pageSection, options);
+				that.renderPageSection(domain, pageSection, options);
 			});
 			dfd.resolve();
 
@@ -445,32 +445,32 @@ popManager = {
 			// Step 3: execute JS
 			$.each(pageSections, function(index, pageSection) {
 
-				t.pageSectionInitialized(domain, pageSection);
+				that.pageSectionInitialized(domain, pageSection);
 			});
 
 			// Step 4: remove the "loading" screen
 			$(document.body).removeClass('pop-loadingjs');
 
-			var topLevelFeedback = t.getTopLevelFeedback(domain);
+			var topLevelFeedback = that.getTopLevelFeedback(domain);
 			var url = topLevelFeedback[M.URLPARAM_URL];
 			if (!topLevelFeedback[M.URLPARAM_SILENTDOCUMENT]) {
 				
 				// Update URL: it will remove the unwanted items, eg: mode=embed (so that if the user clicks on the newWindow btn, it opens properly)
 				popBrowserHistory.replaceState(url);
-				t.updateDocument(domain);
+				that.updateDocument(domain);
 			}
 
-			t.documentInitialized(domain);
+			that.documentInitialized(domain);
 
 			// If the server requested to extra load more URLs
-			t.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
-			t.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
+			that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
+			that.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
 		}
 	},
 
 	expandJSKeys : function(context) {
 	
-		var t = this;
+		var that = this;
 
 		// In order to save file size, context keys can be compressed, eg: 'modules' => 'm', 'template' => 't'. However they might be referenced with their full name
 		// in .tmpl files, so reconstruct the full name in the context duplicating these entries
@@ -581,9 +581,9 @@ popManager = {
 
 	addPageSectionIds : function(domain, pageSection, template) {
 	
-		var t = this;
+		var that = this;
 
-		var pssId = t.getSettingsId(pageSection);
+		var pssId = that.getSettingsId(pageSection);
 		var psId = pageSection.attr('id');
 
 		// Insert into the Runtime to generate the ID
@@ -600,7 +600,7 @@ popManager = {
 
 	initDocument : function(domain) {
 	
-		var t = this;
+		var that = this;
 
 		// $(document).on('user:loggedinout', function(e, source) {
 		$(document).on('user:loggedout', function(e, source, domain) {
@@ -609,7 +609,7 @@ popManager = {
 			// Comment Leo 07/03/2016: this was initially loggedinout, however it deletes the userdatabase immediately, when the user is logged in and accessing a stateful page
 			// var domain = M.HOME_DOMAIN;
 			// Use the domain from the event
-			t.clearUserDatabase(domain);
+			that.clearUserDatabase(domain);
 		});
 
 		var args = {
@@ -622,15 +622,15 @@ popManager = {
 
 	initDomain : function(domain/*, fetchData*/) {
 	
-		var t = this;
+		var that = this;
 
 		// Mark the domain as initialized
-		t.domains[domain] = {
+		that.domains[domain] = {
 			initialized: true
 		};
 
 		// Initialize the variables holding the memory and databases for that domain;
-		t.initDomainVars(domain);
+		that.initDomainVars(domain);
 
 		// Comment Leo 24/08/2017: Moved to popMultiDomain
 		// if (fetchData) {
@@ -639,7 +639,7 @@ popManager = {
 		// 	var url = M.PLACEHOLDER_DOMAINURL.format(encodeURIComponent(domain));
 		// 	var entries = {};
 		// 	entries[url] = [M.URLPARAM_TARGET_MAIN];
-		// 	t.backgroundLoad(entries);
+		// 	that.backgroundLoad(entries);
 		// }
 
 		var args = {
@@ -652,24 +652,24 @@ popManager = {
 
 	maybeInitializeDomain : function(domain) {
 	
-		var t = this;
+		var that = this;
 
-		if (!t.domains[domain] || !t.domains[domain].initialized) {
+		if (!that.domains[domain] || !that.domains[domain].initialized) {
 
 			// Initialize the variables holding the memory and databases for that domain;
-			// t.initDomainVars(domain);
+			// that.initDomainVars(domain);
 
 			// Initialize the domain
-			t.initDomain(domain/*, true*/);
+			that.initDomain(domain/*, true*/);
 		}
 	},
 
 	documentInitialized : function(domain) {
 	
-		var t = this;
+		var that = this;
 
 		// // Prepare the handling of link-clicking
-		// t.links();
+		// that.links();
 
 		var args = {
 			domain: domain,
@@ -681,7 +681,7 @@ popManager = {
 
 	pageSectionFetchSuccess : function(pageSection, response, options) {
 	
-		var t = this;
+		var that = this;
 
 		var args = {
 			pageSection: pageSection, 
@@ -694,7 +694,7 @@ popManager = {
 
 	blockFetchSuccess : function(pageSection, block, response) {
 	
-		var t = this;
+		var that = this;
 
 		popJSLibraryManager.execute('blockFetchSuccess', {pageSection: pageSection, block: block, response: response});
 		block.triggerHandler('fetched.pop.block');
@@ -702,7 +702,7 @@ popManager = {
 
 	backgroundLoad : function(urls) {
 	
-		var t = this;
+		var that = this;
 
 		// Trigger loading the frames and other background actions
 		var options = {
@@ -713,16 +713,16 @@ popManager = {
 
 			$.each(targets, function(index, target) {
 
-				t.fetch(url, $.extend({target: target}, options));
+				that.fetch(url, $.extend({target: target}, options));
 			});
 		});
 	},
 
 	initPageSection : function(pageSection) {
 	
-		var t = this;
+		var that = this;
 
-		t.firstLoad[t.getSettingsId(pageSection)] = true;
+		that.firstLoad[that.getSettingsId(pageSection)] = true;
 
 		popJSLibraryManager.execute('initPageSection', {pageSection: pageSection});
 		pageSection.triggerHandler('initialize');
@@ -731,10 +731,10 @@ popManager = {
 
 	pageSectionInitialized : function(domain, pageSection) {
 	
-		var t = this;
+		var that = this;
 
 		// Initialize the params for this branch
-		t.initPageSectionRuntimeMemory(domain, pageSection);
+		that.initPageSectionRuntimeMemory(domain, pageSection);
 
 		popJSLibraryManager.execute('pageSectionInitialized', {domain: domain, pageSection: pageSection});
 		pageSection.triggerHandler('initialized');
@@ -742,12 +742,12 @@ popManager = {
 
 
 		// Once the template has been initialized, then that's it, no more JS running, set firstLoad in false
-		t.firstLoad[t.getSettingsId(pageSection)] = false;
+		that.firstLoad[that.getSettingsId(pageSection)] = false;
 	},
 
 	pageSectionNewDOMsInitialized : function(domain, pageSection, newDOMs, options) {
 	
-		var t = this;
+		var that = this;
 
 		// Open the corresponding offcanvas section
 		// We use .pop-item to differentiate from 'full' and 'empty' pageSectionPages (eg: in pagesection-tabpane-source we need the empty one to close the sideInfo and then be deleted when the tab is closed)
@@ -764,7 +764,7 @@ popManager = {
 
 			// Allow the pageSection to remain closed. eg: for the pageTabs in embed 
 			var openmode = popPageSectionManager.getOpenMode(pageSection);
-			var firstLoad = t.isFirstLoad(pageSection);
+			var firstLoad = that.isFirstLoad(pageSection);
 			if (openmode == 'automatic' || (firstLoad && openmode == 'initial')) {
 				popPageSectionManager.open(pageSection);
 			}
@@ -775,31 +775,31 @@ popManager = {
 			pageSection: pageSection,
 			newDOMs: newDOMs
 		};
-		t.extendArgs(args, options);
+		that.extendArgs(args, options);
 		
 		// Execute this first, so we can switch the tabPane to the newly added one before executing the JS
 		popJSLibraryManager.execute('pageSectionNewDOMsBeforeInitialize', args);
 
-		t.initPageSectionBranches(domain, pageSection, newDOMs, options);
+		that.initPageSectionBranches(domain, pageSection, newDOMs, options);
 
 		popJSLibraryManager.execute('pageSectionNewDOMsInitialized', args);
 	},
 
 	initPageSectionBranches : function(domain, pageSection, newDOMs, options) {
 	
-		var t = this;
+		var that = this;
 
 		// First initialize the JS for the pageSection
-		t.runPageSectionJSMethods(domain, pageSection, options);
+		that.runPageSectionJSMethods(domain, pageSection, options);
 
 		// Then, Initialize all inner scripts for the blocks
 		// It is fine that it uses pageSection in the 2nd params, since it's there that it stores the branches information, already selecting the proper element nodes
-		var jsSettings = t.getPageSectionJsSettings(domain, pageSection);
+		var jsSettings = that.getPageSectionJsSettings(domain, pageSection);
 		var blockBranches = jsSettings['initjs-blockbranches'];
 		if (blockBranches) {
 
 			var branches = $(blockBranches.join(',')).not('.'+M.JS_INITIALIZED);
-			t.initBlockBranches(domain, pageSection, branches, options);
+			that.initBlockBranches(domain, pageSection, branches, options);
 		}
 
 		// Delete the session ids at the end of the rendering
@@ -808,20 +808,20 @@ popManager = {
 
 	triggerDestroyTarget : function(url, target) {
 
-		var t = this;
+		var that = this;
 		target = target || M.URLPARAM_TARGET_MAIN;
 
 		// Remove the tab from the open sessions
-		t.removeOpenTab(url, target);
+		that.removeOpenTab(url, target);
 
 		// Intercept url+'!destroy' and this should call the corresponding destroy for the page
 		// Call the interceptor to 
-		popURLInterceptors.intercept(t.getDestroyUrl(url), {target: target});
+		popURLInterceptors.intercept(that.getDestroyUrl(url), {target: target});
 	},
 
 	destroyTarget : function(domain, pageSection, target) {
 
-		var t = this;
+		var that = this;
 
 		// Call 'destroy' from all libraries in popJSLibraryManager
 		var args = {
@@ -837,7 +837,7 @@ popManager = {
 		blocks.each(function() {
 			
 			var block = $(this);
-			t.deleteRuntimeMemoryPage(domain/*t.getBlockTopLevelDomain(block)*/, pageSection, block, {url: t.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/});
+			that.deleteRuntimeMemoryPage(domain/*that.getBlockTopLevelDomain(block)*/, pageSection, block, {url: that.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/});
 		})
 
 		// Remove from the DOM
@@ -846,7 +846,7 @@ popManager = {
 
 	destroyPageSectionPage : function(domain, pageSection, pageSectionPage) {
 
-		var t = this;
+		var that = this;
 
 		var target = pageSectionPage || pageSection;
 
@@ -856,21 +856,21 @@ popManager = {
 			popPageSectionManager.close(pageSection, 'xs');
 		}
 
-		t.destroyTarget(domain, pageSection, target);
+		that.destroyTarget(domain, pageSection, target);
 	},
 
 	pageSectionRendered : function(domain, pageSection, newDOMs, options) {
 
-		var t = this;		
+		var that = this;		
 
-		t.pageSectionNewDOMsInitialized(domain, pageSection, newDOMs, options);
+		that.pageSectionNewDOMsInitialized(domain, pageSection, newDOMs, options);
 
 		var args = {
 			domain: domain,
 			pageSection: pageSection,
 			newDOMs: newDOMs
 		}
-		t.extendArgs(args, options);
+		that.extendArgs(args, options);
 
 		popJSLibraryManager.execute('pageSectionRendered', args);
 		pageSection.triggerHandler('pageSectionRendered');
@@ -878,7 +878,7 @@ popManager = {
 
 	runScriptsBefore : function(pageSection, newDOMs) {
 	
-		var t = this;
+		var that = this;
 
 		var args = {
 			pageSection: pageSection,
@@ -889,23 +889,23 @@ popManager = {
 
 	jsInitialized : function(block) {
 
-		var t = this;
+		var that = this;
 		return block.hasClass(M.JS_INITIALIZED);
 	},
 	jsLazy : function(block) {
 
-		var t = this;
+		var that = this;
 		return block.hasClass(M.CLASS_LAZYJS);
 	},
 	setJsInitialized : function(block) {
 
-		var t = this;
+		var that = this;
 		block.addClass(M.JS_INITIALIZED).removeClass(M.CLASS_LAZYJS);
 	},
 
 	initBlockBranches : function(domain, pageSection, blocks, options) {
 
-		var t = this;
+		var that = this;
 
 		// When being called from the parent node, the branch might still not exist
 		// (eg: before it gets activated: #frame-main_blockgroup-tabpanel-main-blockgroup-tabpanel-sections.tab-pane.active > #frame-main_blockgroup-tabpanel-main-blockgroup-tabpanel-sections-body")
@@ -919,26 +919,26 @@ popManager = {
 			// Ask if it is already initialized or not. This is needed because, otherwise, when opening a tabpane inside of a tabpane,
 			// the initialization of leaves in the last level will happen more than once
 
-			var proceed = !t.jsInitialized(block);
+			var proceed = !that.jsInitialized(block);
 
 			// If the block is lazy initialize, do not initialize first (eg: modals, they are initialized when first shown)
 			// force-init: disregard if it's lazy or not: explicitly initialize it
 			if (!options['force-init']) {
 				
-				proceed = proceed && !t.jsLazy(block);
+				proceed = proceed && !that.jsLazy(block);
 			}
 
 			// Commented so that we can do initBlockBranch(pageSection, pageSection) time and again
 			// after it gets rendered appending new DOMs
 			if (proceed) {
 
-				t.setJsInitialized(block);
-				t.initBlock(domain, pageSection, block, options);
+				that.setJsInitialized(block);
+				that.initBlock(domain, pageSection, block, options);
 
-				var jsSettings = t.getJsSettings(domain, pageSection, block);
+				var jsSettings = that.getJsSettings(domain, pageSection, block);
 				var blockBranches = jsSettings['initjs-blockbranches'];
 				if (blockBranches) {
-					t.initBlockBranches(domain, pageSection, $(blockBranches.join(', ')).not('.'+M.JS_INITIALIZED), options);
+					that.initBlockBranches(domain, pageSection, $(blockBranches.join(', ')).not('.'+M.JS_INITIALIZED), options);
 				}
 				var blockChildren = jsSettings['initjs-blockchildren'];
 				if (blockChildren) {
@@ -950,7 +950,7 @@ popManager = {
 							target = target.children(selector).not('.'+M.JS_INITIALIZED);
 						});
 					});
-					t.initBlockBranches(domain, pageSection, target, options);
+					that.initBlockBranches(domain, pageSection, target, options);
 				}
 			}
 		});
@@ -958,19 +958,19 @@ popManager = {
 
 	initBlock : function(domain, pageSection, block, options) {
 
-		var t = this;
+		var that = this;
 		options = options || {};
 		
 		// Do an extend of $options, so that the same object is not used for initializing 2 different blocks.
 		// Eg: we don't to change the options.url on the same object for newRuntimePage. That could lead to 2 different blocks using the same URL,
 		// it happens when doing openTabs with more than 2 tabs, it does it so quick that the calendar on the right all point to the same URL
-		t.initBlockRuntimeMemory(domain, pageSection, block, $.extend({}, options));
+		that.initBlockRuntimeMemory(domain, pageSection, block, $.extend({}, options));
 
 		// Allow scripts and others to perform certain action after the runtimeMemory was generated
-		t.initializeBlock(pageSection, block, options);
+		that.initializeBlock(pageSection, block, options);
 
-		t.runScriptsBefore(pageSection, block);
-		t.runBlockJSMethods(domain, pageSection, block, options);
+		that.runScriptsBefore(pageSection, block);
+		that.runBlockJSMethods(domain, pageSection, block, options);
 		
 		// Important: place these handlers only at the end, so that handlers specified in popManagerMethods are executed first
 		// and follow the same order as above
@@ -982,30 +982,30 @@ popManager = {
 			// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
 			popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
 			
-			t.runScriptsBefore(pageSection, newDOMs);
+			that.runScriptsBefore(pageSection, newDOMs);
 			
 			// This won't execute again the JS on the block when adding newDOMs, because by then
 			// the block ID will have disappeared from the lastSessionIds. The only ids will be the new ones,
 			// contained in newDOMs
-			t.runBlockJSMethods(renderedDomain, pageSection, block, null, options);
+			that.runBlockJSMethods(renderedDomain, pageSection, block, null, options);
 		});
 
-		t.blockInitialized(domain, pageSection, /*pageSectionPage, */block, options);
+		that.blockInitialized(domain, pageSection, /*pageSectionPage, */block, options);
 
 		// And only now, finally, load the block Content (all JS has already been initialized)
 		// (eg: function setFilterBlockParams needs to set the filtering params, but does it on js:initialized event. Only after this, load content)
-		t.loadBlockContent(domain, pageSection, block);
+		that.loadBlockContent(domain, pageSection, block);
 	},
 
 	initializeBlock : function(pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 
 		var args = {
 			pageSection: pageSection,
 			block: block
 		};
-		t.extendArgs(args, options);
+		that.extendArgs(args, options);
 
 		popJSLibraryManager.execute('initBlock', args);
 
@@ -1015,7 +1015,7 @@ popManager = {
 
 	extendArgs : function(args, options) {
 	
-		var t = this;
+		var that = this;
 
 		// Allow to extend the args with whatever is provided under 'js-args'
 		options = options || {};
@@ -1026,14 +1026,14 @@ popManager = {
 
 	blockInitialized : function(domain, pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 
 		var args = {
 			domain: domain,
 			pageSection: pageSection,
 			block: block
 		};
-		t.extendArgs(args, options);
+		that.extendArgs(args, options);
 
 		popJSLibraryManager.execute('blockInitialized', args);
 
@@ -1043,9 +1043,9 @@ popManager = {
 
 	loadBlockContent : function(domain, pageSection, block) {
 
-		var t = this;
+		var that = this;
 
-		if (!t.isContentLoaded(pageSection, block)) {
+		if (!that.isContentLoaded(pageSection, block)) {
 
 			// Add a class, so we can give an extra style to the block while loading the content
 			// This class has already been added in blocks-base.php
@@ -1056,7 +1056,7 @@ popManager = {
 			});
 
 			// Set the content as loaded
-			t.setContentLoaded(pageSection, block);
+			that.setContentLoaded(pageSection, block);
 
 			var options = {
 				action: M.CBACTION_LOADCONTENT,
@@ -1064,7 +1064,7 @@ popManager = {
 			};
 
 			// Show disabled layer?
-			var jsSettings = t.getJsSettings(domain, pageSection, block);
+			var jsSettings = that.getJsSettings(domain, pageSection, block);
 			if (jsSettings['loadcontent-showdisabledlayer']) {
 				options['show-disabled-layer'] = true;
 			}
@@ -1075,14 +1075,14 @@ popManager = {
 			// which will bring all the latest notifications. However, because /notifications is stateless, it will save the user "lastaccess" timestamp,
 			// so overriding the previous timestamp needed by /loggedinuser-data for the latest notifications
 			$(document).ready(function($) {
-				t.fetchBlock(pageSection, block, options);
+				that.fetchBlock(pageSection, block, options);
 			});
 		}
 	},
 
 	runPageSectionJSMethods : function(domain, pageSection, options) {
 	
-		var t = this;
+		var that = this;
 
 		var sessionIds = popJSRuntimeManager.getPageSectionSessionIds(domain, pageSection);
 		if (!sessionIds) return;
@@ -1090,7 +1090,7 @@ popManager = {
 		// Make sure it executes the JS in each template only once.
 		// Eg: Otherwise, since having MultiLayouts, it will execute 'popover' for each single 'layout-popover-user' template found, and it repeats itself inside a block many times
 		var executedTemplates = [];
-		var templateMethods = t.getPageSectionJsMethods(domain, pageSection);
+		var templateMethods = that.getPageSectionJsMethods(domain, pageSection);
 		$.each(templateMethods, function(template, groupMethods) {
 			if (executedTemplates.indexOf(template) == -1) {
 				executedTemplates.push(template);
@@ -1107,7 +1107,7 @@ popManager = {
 										pageSection: pageSection,
 										targets: targets,
 									};
-									t.extendArgs(args, options);
+									that.extendArgs(args, options);
 									popJSLibraryManager.execute(method, args);
 								});
 							}
@@ -1120,15 +1120,15 @@ popManager = {
 
 	runBlockJSMethods : function(domain, pageSection, block, options) {
 	
-		var t = this;
-		t.runJSMethods(domain, pageSection, block, null, null, options);
+		var that = this;
+		that.runJSMethods(domain, pageSection, block, null, null, options);
 		
 		// Delete the session ids after running the js methods
 		popJSRuntimeManager.deleteBlockLastSessionIds(domain, pageSection, block);
 	},
 	runJSMethods : function(domain, pageSection, block, templateFrom, session, options) {
 	
-		var t = this;
+		var that = this;
 
 		// Get the blockSessionIds: these contain the ids added to the block only during the last
 		// 'rendered' session. This way, when appending newDOMs (eg: with waypoint on scrolling down),
@@ -1136,12 +1136,12 @@ popManager = {
 		var sessionIds = popJSRuntimeManager.getBlockSessionIds(domain, pageSection, block, session);
 		if (!sessionIds) return;
 		
-		var templateMethods = t.getTemplateJSMethods(domain, pageSection, block, templateFrom);
-		t.runJSMethodsInner(domain, pageSection, block, templateMethods, sessionIds, [], options);
+		var templateMethods = that.getTemplateJSMethods(domain, pageSection, block, templateFrom);
+		that.runJSMethodsInner(domain, pageSection, block, templateMethods, sessionIds, [], options);
 	},	
 	runJSMethodsInner : function(domain, pageSection, block, templateMethods, sessionIds, executedTemplates, options) {
 	
-		var t = this;
+		var that = this;
 		options = options || {};
 
 		// For each template, analyze what methods must be executed, and then continue down the line
@@ -1167,7 +1167,7 @@ popManager = {
 									block: block,
 									targets: targets,
 								};
-								t.extendArgs(args, options);
+								that.extendArgs(args, options);
 								popJSLibraryManager.execute(method, args);
 							});
 						}
@@ -1182,15 +1182,15 @@ popManager = {
 			// Next is an array, since each template can contain many others.
 			$.each(templateMethods[M.JS_NEXT]/*templateMethods.next*/, function(index, next) {
 				
-				t.runJSMethodsInner(domain, pageSection, /*pageSectionPage, */block, next, sessionIds, executedTemplates, options);
+				that.runJSMethodsInner(domain, pageSection, /*pageSectionPage, */block, next, sessionIds, executedTemplates, options);
 			})
 		}
 	},
 	getTemplateJSMethods : function(domain, pageSection, block, templateFrom) {
 	
-		var t = this;
+		var that = this;
 
-		var templateMethods = t.getBlockJsMethods(domain, pageSection, block);
+		var templateMethods = that.getBlockJsMethods(domain, pageSection, block);
 		
 		// If not templateFrom provided, then we're using the block as 'from' so we can already
 		// return the templateMethods, which always start from the block
@@ -1201,11 +1201,11 @@ popManager = {
 		
 		// Start searching for the templateFrom down the line templateMethods. 
 		// Once found, that's the templateMethods needed => map of templateFrom => methods to execute
-		return t.getTemplateJSMethodsInner(pageSection, block, templateFrom, templateMethods);
+		return that.getTemplateJSMethodsInner(pageSection, block, templateFrom, templateMethods);
 	},	
 	getTemplateJSMethodsInner : function(pageSection, block, templateFrom, templateMethods) {
 	
-		var t = this;
+		var that = this;
 
 		// Check if the current level is the template we're looking for. If so, we found it, return it
 		// and it will crawl all the way back up
@@ -1220,7 +1220,7 @@ popManager = {
 		if (templateMethods[M.JS_NEXT]/*templateMethods.next*/) {
 			$.each(templateMethods[M.JS_NEXT]/*templateMethods.next*/, function(index, next) {
 				
-				found = t.getTemplateJSMethodsInner(pageSection, block, templateFrom, next);
+				found = that.getTemplateJSMethodsInner(pageSection, block, templateFrom, next);
 				if (found) {
 					// found the result => exit the loop and immediately return this result
 					return false;
@@ -1232,7 +1232,7 @@ popManager = {
 
 	maybeRedirect : function(feedback) {
 
-		var t = this;
+		var that = this;
 
 		// Redirect / Fetch Template?
 		if (feedback.redirect && feedback.redirect.url) {
@@ -1241,7 +1241,7 @@ popManager = {
 			if (feedback.redirect.fetch) {
 
 				// Comment Leo 22/09/2015: create and anchor and "click" it, so it can be intercepted (eg: Reset password)
-				t.click(feedback.redirect.url)
+				that.click(feedback.redirect.url)
 			}
 
 			// Hard redirect => Used after logging in
@@ -1258,7 +1258,7 @@ popManager = {
 
 	historyReplaceState : function(elem, options) {
 
-		var t = this;
+		var that = this;
 
 		var url = elem.data('historystate-url');
 		var title = elem.data('historystate-title');
@@ -1268,22 +1268,22 @@ popManager = {
 
 		// Also update the title in the browser tab
 		if (title) {
-			t.documentTitle = unescapeHtml(title);
-			document.title = t.documentTitle;
+			that.documentTitle = unescapeHtml(title);
+			document.title = that.documentTitle;
 		}
 	},
 
 	// hideIfEmpty : function(domain, pageSection, block) {
 
-	// 	var t = this;
+	// 	var that = this;
 
-	// 	var feedback = t.getBlockFeedback(domain/*t.getBlockTopLevelDomain(block)*/, pageSection, block);
+	// 	var feedback = that.getBlockFeedback(domain/*that.getBlockTopLevelDomain(block)*/, pageSection, block);
 	// 	return feedback[M.URLPARAM_HIDEBLOCK];
 	// },
 
 	isHidden : function(elem) {
 
-		var t = this;
+		var that = this;
 		if (elem.hasClass('hidden')) return true;
 
 		// Check if the element is still in the DOM
@@ -1315,7 +1315,7 @@ popManager = {
 
 	isActive : function(elem) {
 
-		var t = this;
+		var that = this;
 
 		var executed = popJSLibraryManager.execute('isActive', {targets: elem});
 		var ret = true;
@@ -1331,43 +1331,43 @@ popManager = {
 
 	isContentLoaded : function(pageSection, block) {
 
-		var t = this;
+		var that = this;
 
-		var blockQueryState = t.getBlockQueryState(pageSection, block);
+		var blockQueryState = that.getBlockQueryState(pageSection, block);
 
 		// The "|| false" is needed because waypoints doesn't work passing 'undefined' to its enabled, either true or false
 		return blockQueryState[M.DATALOAD_CONTENTLOADED] || false;
 	},
 	setContentLoaded : function(pageSection, block) {
 
-		var t = this;
+		var that = this;
 
-		var blockQueryState = t.getBlockQueryState(pageSection, block);
+		var blockQueryState = that.getBlockQueryState(pageSection, block);
 		blockQueryState[M.DATALOAD_CONTENTLOADED] = true;
 	},
 
 	updateDocument : function(domain) {
 
-		var t = this;
+		var that = this;
 
 		// Update the title in the page
-		t.updateTitle(t.getTopLevelFeedback(domain)[M.URLPARAM_TITLE]);
+		that.updateTitle(that.getTopLevelFeedback(domain)[M.URLPARAM_TITLE]);
 	},
 
 	updateTitle : function(title) {
 
-		var t = this;
+		var that = this;
 
 		if (title) {
-			t.documentTitle = unescapeHtml(title);
-			document.title = t.documentTitle;
+			that.documentTitle = unescapeHtml(title);
+			document.title = that.documentTitle;
 		}
 	},
 
 	executeSetFilterBlockParams : function(pageSection, block, filter) {
 	
-		var t = this;
-		var blockQueryState = t.getBlockQueryState(pageSection, block);
+		var that = this;
+		var blockQueryState = that.getBlockQueryState(pageSection, block);
 
 		// Filter out inputs (input, select, textarea, etc) without value (solution found in http://stackoverflow.com/questions/16526815/jquery-remove-empty-or-white-space-values-from-url-parameters)
 		blockQueryState.filter = filter.find('.' + M.FILTER_INPUT).filter(function () {return $.trim(this.value);}).serialize();
@@ -1380,13 +1380,13 @@ popManager = {
 
 	setFilterBlockParams : function(pageSection, block, filter) {
 	
-		var t = this;
-		if (t.jsInitialized(block)) {
-			t.executeSetFilterBlockParams(pageSection, block, filter);
+		var that = this;
+		if (that.jsInitialized(block)) {
+			that.executeSetFilterBlockParams(pageSection, block, filter);
 		}
 		else {
 			block.one('js:initialized', function() {
-				t.executeSetFilterBlockParams(pageSection, block, filter);
+				that.executeSetFilterBlockParams(pageSection, block, filter);
 			});
 		}
 	},
@@ -1394,26 +1394,26 @@ popManager = {
 	// Comment Leo 08/07/2016: filter might or might not be under that block. Eg: called by initBlockProxyFilter it is not
 	filter : function(pageSection, block, filter) {
 	
-		var t = this;
+		var that = this;
 		
-		// t.setFilterParams(pageSection, filter);
-		t.setFilterBlockParams(pageSection, block, filter);
+		// that.setFilterParams(pageSection, filter);
+		that.setFilterBlockParams(pageSection, block, filter);
 
 		// Reload
-		t.reload(pageSection, block);
+		that.reload(pageSection, block);
 
 		// Scroll Top to show the "Submitting" message
-		t.blockScrollTop(pageSection, block);
+		that.blockScrollTop(pageSection, block);
 	},
 
 	blockScrollTop : function(pageSection, block) {
 	
-		var t = this;
+		var that = this;
 		
 		// Scroll Top to show the "Submitting" message
 		var modal = block.closest('.modal');
 		if (modal.length == 0) {
-			t.scrollToElem(pageSection, block.children('.blocksection-status').first(), true);
+			that.scrollToElem(pageSection, block.children('.blocksection-status').first(), true);
 		}
 		else {
 			modal.animate({ scrollTop: 0 }, 'fast');
@@ -1422,9 +1422,9 @@ popManager = {
 
 	setReloadBlockParams : function(pageSection, block) {
 	
-		var t = this;
+		var that = this;
 
-		// var blockQueryState = t.getBlockQueryState(pageSection, block);
+		// var blockQueryState = that.getBlockQueryState(pageSection, block);
 		// // Delete the data saved
 		// // Comment Leo 03/04/2015: this is ugly and should be fixed: not all blocks have these elements (paged, stop-fetching)
 		// // The lists have it (eg: My Events) but an Edit Event page does not. However this one can also be reloaded (eg: first loading an edit page when user
@@ -1437,7 +1437,7 @@ popManager = {
 		// }
 		
 		// Comment Leo 25/07/2017: do the reset for all domains
-		var queryState = t.getBlockMultiDomainQueryState(pageSection, block);
+		var queryState = that.getBlockMultiDomainQueryState(pageSection, block);
 		$.each(queryState, function(domain, blockDomainQueryState) {
 			
 			// Delete the data saved
@@ -1455,7 +1455,7 @@ popManager = {
 
 	refetch : function(pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 		
 		options = options || {};
 		options.action = M.CBACTION_REFETCH;
@@ -1463,12 +1463,12 @@ popManager = {
 		block.triggerHandler('beforeRefetch');
 
 		// Refetch
-		t.reload(pageSection, block, options);
+		that.reload(pageSection, block, options);
 	},	
 
 	reset : function(domain, pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 		options = options || {};
 
 		// Sometimes there is no need to restore the initial memory, and even more, it can't be done since it has
@@ -1477,16 +1477,16 @@ popManager = {
 		if (!options['skip-restore']) {
 
 			// Reset the params. Eg: "pid", "_wpnonce"
-			t.restoreInitialBlockMemory(pageSection, block);
+			that.restoreInitialBlockMemory(pageSection, block);
 		}
 
-		// var domain = t.getBlockTopLevelDomain(block);
-		t.processBlock(domain, pageSection, block, {operation: M.URLPARAM_OPERATION_REPLACE, action: M.CBACTION_RESET, reset: true});
+		// var domain = that.getBlockTopLevelDomain(block);
+		that.processBlock(domain, pageSection, block, {operation: M.URLPARAM_OPERATION_REPLACE, action: M.CBACTION_RESET, reset: true});
 	},	
 
 	reload : function(pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 		// Options: it will potentially already have attr 'action'
 		options = options || {};
 		options.operation = M.URLPARAM_OPERATION_REPLACE;
@@ -1496,19 +1496,19 @@ popManager = {
 		options['hide-latestcount'] = true;
 
 		// Delete the data saved
-		t.setReloadBlockParams(pageSection, block);
+		that.setReloadBlockParams(pageSection, block);
 
 		block.triggerHandler('beforeReload');
 
 		// Load everything again
-		t.fetchBlock(pageSection, block, options);
+		that.fetchBlock(pageSection, block, options);
 	},	
 
 	loadLatest : function(domain, pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 		options = options || {};
-		var blockDomainQueryState = t.getBlockDomainQueryState(domain, pageSection, block);
+		var blockDomainQueryState = that.getBlockDomainQueryState(domain, pageSection, block);
 
 		// Add the latest content on top of everything else
 		options.operation = M.URLPARAM_OPERATION_PREPEND;
@@ -1528,12 +1528,12 @@ popManager = {
 		block.triggerHandler('beforeLoadLatest');
 
 		// Load latest content. 
-		t.fetchBlock(pageSection, block, options);
+		that.fetchBlock(pageSection, block, options);
 	},	
 
 	handlePageSectionLoadingStatus : function(pageSection, operation, options) {
 		
-		var t = this;
+		var that = this;
 		var loading;
 
 		// If the target is given in the options, use it (eg: userloggedin-data loading message). If not, find it under the status
@@ -1557,12 +1557,12 @@ popManager = {
 			// error.addClass('hidden');
 		}
 
-		t.handleLoadingStatus(loading, operation, options)
+		that.handleLoadingStatus(loading, operation, options)
 	},
 
 	handleLoadingStatus : function(loading, operation) {
 		
-		var t = this;
+		var that = this;
 
 		// Comment Leo 09/09/2015: in the past, we passed num as an argument to the function, with value params.loading.length
 		// But this doesn't work anymore since adding 'loadingmsg-target', since this one and the general loading share the params.loading
@@ -1594,13 +1594,13 @@ popManager = {
 
 	fetch : function(url, options) {
 
-		var t = this;
+		var that = this;
 		options = options || {};
 
-		var pageSection = t.getFetchTargetPageSection(options.target);
+		var pageSection = that.getFetchTargetPageSection(options.target);
 
 		// When there's a javascript error, hierarchyParams is null. So check for this and then do normal window redirection
-		var params = t.getPageSectionParams(pageSection);
+		var params = that.getPageSectionParams(pageSection);
 		if (!params) {
 			if (options['noparams-reload-url']) {
 				
@@ -1609,12 +1609,12 @@ popManager = {
 			return;
 		}
 		
-		t.fetchPageSection(pageSection, url, options);
+		that.fetchPageSection(pageSection, url, options);
 	},
 
 	removeLocalStorageItem : function(path, key) {
 
-		var t = this;
+		var that = this;
 
 		// Allow typeahead to also delete its entries
 		var args = {result: key.startsWith(path), key: key, path: path};
@@ -1624,7 +1624,7 @@ popManager = {
 
 	initLocalStorage : function() {
 
-		var t = this;
+		var that = this;
 
 		// Delete all stale entries
 		if (M.USELOCALSTORAGE && supports_html5_storage()) {
@@ -1639,7 +1639,7 @@ popManager = {
 					// Allow typeahead to also delete its entries
 					M.ALLOWED_DOMAINS.forEach(function(path) { 
 
-						if (t.removeLocalStorageItem(path, key)) {
+						if (that.removeLocalStorageItem(path, key)) {
 							localStorage.removeItem(key); 
 							return -1;
 						}
@@ -1654,7 +1654,7 @@ popManager = {
 
 	openTabs : function() {
 
-		var t = this;
+		var that = this;
 		if (!M.KEEP_OPEN_TABS) return;
 
 		// Get all the tabs open from the previous session, and open them already		
@@ -1668,9 +1668,9 @@ popManager = {
 			}
 		};
 
-		var currentURL = t.getTabsCurrentURL();
+		var currentURL = that.getTabsCurrentURL();
 
-		var tabs = t.getScreenOpenTabs();
+		var tabs = that.getScreenOpenTabs();
 		$.each(tabs, function(target, urls) {
 
 			// Open the tab on the corresponding target
@@ -1691,14 +1691,14 @@ popManager = {
 			// Open all tabs
 			$.each(urls, function(index, url) {
 
-				t.fetch(url, options);
+				that.fetch(url, options);
 			});
 		});
 	},
 
 	getTabsCurrentURL : function() {
 
-		var t = this;
+		var that = this;
 		
 		var currentURL = window.location.href;
 		
@@ -1720,7 +1720,7 @@ popManager = {
 
 	getOpenTabsKey : function() {
 
-		var t = this;
+		var that = this;
 		
 		// Comment Leo 16/01/2017: we can all params set in the topLevel feedback directly
 		var key = M.LOCALE;
@@ -1729,7 +1729,7 @@ popManager = {
 		var domain = M.HOME_DOMAIN;
 
 		// Also add all the other "From Server" params if initially set (eg: themestyle, settingsformat, mangled)
-		var params = t.getTopLevelFeedback(domain)[M.DATALOAD_PARAMS];
+		var params = that.getTopLevelFeedback(domain)[M.DATALOAD_PARAMS];
 		$.each(params, function(param, value) {
 			key += '|'+param+'='+value;
 		});
@@ -1739,9 +1739,9 @@ popManager = {
 
 	getScreenOpenTabs : function() {
 
-		var t = this;
-		var tabs = t.getOpenTabs();
-		var key = t.getOpenTabsKey();
+		var that = this;
+		var tabs = that.getOpenTabs();
+		var key = that.getOpenTabsKey();
 
 		return tabs[key] || {};
 	},
@@ -1751,31 +1751,31 @@ popManager = {
 		// Function executed to only keep a given tab open and close all the others.
 		// Used for the alert "Do you want to open the previous session tabs?" 
 		// If clicking cancel, then remove all other tabs, for next time that the user opens the browser
-		var t = this;
-		var tabs = t.getOpenTabs();
-		var key = t.getOpenTabsKey();
+		var that = this;
+		var tabs = that.getOpenTabs();
+		var key = that.getOpenTabsKey();
 
 		// Remove all other targets also, so that it delets open pages in addons pageSection
 		tabs[key] = {};
 		tabs[key][target] = [url];
-		t.storeData('PoP:openTabs', tabs);
+		that.storeData('PoP:openTabs', tabs);
 	},
 
 	getOpenTabs : function() {
 
-		var t = this;
+		var that = this;
 		if (!M.KEEP_OPEN_TABS) return {};
 
-		return t.getStoredData('PoP:openTabs') || {};
+		return that.getStoredData('PoP:openTabs') || {};
 	},
 
 	addOpenTab : function(url, target) {
 
-		var t = this;
+		var that = this;
 		if (!M.KEEP_OPEN_TABS) return false;
 
-		var tabs = t.getOpenTabs();
-		var key = t.getOpenTabsKey();
+		var tabs = that.getOpenTabs();
+		var key = that.getOpenTabsKey();
 		tabs[key] = tabs[key] || {};
 		tabs[key][target] = tabs[key][target] || [];
 		if (tabs[key][target].indexOf(url) > -1) {
@@ -1785,18 +1785,18 @@ popManager = {
 		}
 
 		tabs[key][target].push(url);
-		t.storeData('PoP:openTabs', tabs);
+		that.storeData('PoP:openTabs', tabs);
 
 		return true;
 	},
 
 	removeOpenTab : function(url, target) {
 
-		var t = this;
+		var that = this;
 		if (!M.KEEP_OPEN_TABS) return false;
 
-		var tabs = t.getOpenTabs();
-		var key = t.getOpenTabsKey();
+		var tabs = that.getOpenTabs();
+		var key = that.getOpenTabsKey();
 		tabs[key] = tabs[key] || {};
 		tabs[key][target] = tabs[key][target] || [];
 		var pos = tabs[key][target].indexOf(url);
@@ -1815,24 +1815,24 @@ popManager = {
 				delete tabs[key];
 			}
 		}
-		t.storeData('PoP:openTabs', tabs);
+		that.storeData('PoP:openTabs', tabs);
 
 		return true;
 	},
 
 	replaceOpenTab : function(fromURL, toURL, target) {
 
-		var t = this;
+		var that = this;
 		if (!M.KEEP_OPEN_TABS) return;
 
-		if (t.removeOpenTab(fromURL, target)) {
-			t.addOpenTab(toURL, target);
+		if (that.removeOpenTab(fromURL, target)) {
+			that.addOpenTab(toURL, target);
 		}
 	},
 
 	getStoredData : function(localStorageKey, use_version) {
 
-		var t = this;
+		var that = this;
 
 		// Check if a response is stored in local storage for that combination of URL and params
 		if (M.USELOCALSTORAGE && supports_html5_storage()) {
@@ -1868,7 +1868,7 @@ popManager = {
 
 	storeData : function(localStorageKey, value, expires) {
 
-		var t = this;
+		var that = this;
 		if (M.USELOCALSTORAGE && supports_html5_storage()) {
 				
 			var stored = {
@@ -1896,8 +1896,8 @@ popManager = {
 
 	fetchPageSection : function(pageSection, url, options) {
 
-		var t = this;
-		var params = t.getPageSectionParams(pageSection);
+		var that = this;
+		var params = that.getPageSectionParams(pageSection);
 
 		// When there's a javascript error, hierarchyParams is null. So check for this and then do normal window redirection
 		if (!params) {
@@ -1912,11 +1912,11 @@ popManager = {
 
 		options = options || {};
 
-		var target = t.getTarget(pageSection);
+		var target = that.getTarget(pageSection);
 		var domain = getDomain(url);
 
 		// Initialize the domain, if needed
-		t.maybeInitializeDomain(domain);
+		that.maybeInitializeDomain(domain);
 
 		// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
 		// Also, re-take the URL from the args, so plugins can also modify it. Eg: routing through a CDN with pop-cdn
@@ -1945,7 +1945,7 @@ popManager = {
 		popJSLibraryManager.execute('preFetchPageSection', {url: fetchUrl, options: options});
 
 		// Contains the attr for the Theme
-		var topLevelFeedback = t.getTopLevelFeedback(domain);
+		var topLevelFeedback = that.getTopLevelFeedback(domain);
 		var paramsData = $.extend({}, topLevelFeedback[M.DATALOAD_PARAMS], params[M.DATALOAD_PARAMS]);
 		// Extend with params given through the options. Eg: WSL "action=authenticated, provider=facebook" params to log-in the user
 		if (options.params) {
@@ -1956,18 +1956,18 @@ popManager = {
 
 		// Check if a response is stored in local storage for that combination of URL and params
 		localStorageKey = fetchUrl+'|'+postData;
-		var stored = t.getStoredData(localStorageKey);
+		var stored = that.getStoredData(localStorageKey);
 		if (stored) {
 
-			t.prePageSectionSuccess(pageSection, stored, options);
-			t.processPageSectionResponse(domain, pageSection, url, fetchUrl, stored, options);
-			// t.triggerURLFetched(url);
+			that.prePageSectionSuccess(pageSection, stored, options);
+			that.processPageSectionResponse(domain, pageSection, url, fetchUrl, stored, options);
+			// that.triggerURLFetched(url);
 
 			// That's it!
 			return;
 		}
 
-		// t.executeFetchPageSection(domain, pageSection, url, params, fetchUrl, postData, target, localStorageKey, options);
+		// that.executeFetchPageSection(domain, pageSection, url, params, fetchUrl, postData, target, localStorageKey, options);
 		var status = popPageSectionManager.getPageSectionStatus(pageSection);
 		var error = status.find('.pop-error');
 
@@ -1976,7 +1976,7 @@ popManager = {
 			options['disable-layer'].children('.pop-disabledlayer').removeClass('hidden');
 		}
 
-		var crossdomain = t.getCrossDomainOptions(fetchUrl);
+		var crossdomain = that.getCrossDomainOptions(fetchUrl);
 
 		$.ajax($.extend(crossdomain, {
 			dataType: "json",
@@ -2001,7 +2001,7 @@ popManager = {
 				// Save the url being loaded
 				params.loading.push(url);
 		
-				t.handlePageSectionLoadingStatus(pageSection, 'add', options);
+				that.handlePageSectionLoadingStatus(pageSection, 'add', options);
 			},
 			complete: function(jqXHR) {
 
@@ -2014,7 +2014,7 @@ popManager = {
 
 				params.loading.splice(params.loading.indexOf(url), 1);
 
-				t.handlePageSectionLoadingStatus(pageSection, 'remove', options);
+				that.handlePageSectionLoadingStatus(pageSection, 'remove', options);
 
 				// Callback when the url was fetched
 				if (options['urlfetched-callbacks']) {
@@ -2026,7 +2026,7 @@ popManager = {
 					});
 				}
 
-				// t.triggerURLFetched(url);
+				// that.triggerURLFetched(url);
 
 				// Remove the Disabled Layer over a block
 				if (options['disable-layer']) {
@@ -2035,7 +2035,7 @@ popManager = {
 			},			
 			success: function(response, textStatus, jqXHR) {
 
-				t.prePageSectionSuccess(pageSection, response, options);
+				that.prePageSectionSuccess(pageSection, response, options);
 
 				// Hide the error message
 				error.addClass('hidden');
@@ -2049,7 +2049,7 @@ popManager = {
 				var target = params.target[jqXHR.url];
 				
 				if (url != feedbackURL) {
-					t.replaceOpenTab(url, feedbackURL, target);
+					that.replaceOpenTab(url, feedbackURL, target);
 				}
 
 				// Add the fetched URL to the options, so we keep track of the URL that produced the code for the opening page, to be used 
@@ -2067,9 +2067,9 @@ popManager = {
 				// ("Uncaught TypeError: Converting circular structure to JSON")
 				if (response.feedback.toplevel[M.URLPARAM_STORELOCAL]) {
 						
-					t.storeData(localStorageKey, response);
+					that.storeData(localStorageKey, response);
 				}
-				t.processPageSectionResponse(domain, pageSection, url, fetchUrl, response, options);
+				that.processPageSectionResponse(domain, pageSection, url, fetchUrl, response, options);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 
@@ -2078,10 +2078,10 @@ popManager = {
 
 				// Show an error if the fetch was not silent
 				if (!options.silentDocument) {
-					t.showError(pageSection, t.getError(pageSection, url, jqXHR, textStatus, errorThrown));
+					that.showError(pageSection, that.getError(pageSection, url, jqXHR, textStatus, errorThrown));
 				}
 
-				t.triggerURLFetchFailed(url);
+				that.triggerURLFetchFailed(url);
 				pageSection.triggerHandler('fetchFailed');
 			}
 		}));
@@ -2089,18 +2089,18 @@ popManager = {
 
 	prePageSectionSuccess : function(pageSection, response, options) {
 
-		var t = this;
+		var that = this;
 		
 		// Allow pop-cdn to incorporate the thumbprint values in the topLevelFeedback before backgroundLoad
-		t.pageSectionFetchSuccess(pageSection, response, options);
+		that.pageSectionFetchSuccess(pageSection, response, options);
 
 		// The server might have requested to load extra URLs (eg: forcedserverload_fields)
-		t.backgroundLoad(response.feedback.toplevel[M.URLPARAM_BACKGROUNDLOADURLS]);
+		that.backgroundLoad(response.feedback.toplevel[M.URLPARAM_BACKGROUNDLOADURLS]);
 	},
 
 	getCrossDomainOptions : function(url) {
 
-		var t = this;
+		var that = this;
 		var options = {};
 
 		// If the URL is not from this same website, but from any aggregated website, then allow the cross domain
@@ -2125,19 +2125,19 @@ popManager = {
 
 	showError : function(pageSection, message) {
 
-		var t = this;
+		var that = this;
 
 		var status = popPageSectionManager.getPageSectionStatus(pageSection);
 		var error = status.find('.pop-error');
 		
 		error.children('div.pop-box').html(message);
 		error.removeClass('hidden');
-		t.scrollTop(error);
+		that.scrollTop(error);
 	},
 
 	triggerURLFetched : function(url, options) {
 
-		var t = this;
+		var that = this;
 
 		// Signal that this URL was fetched. Eg: btnSetLoading
 		// If not escaped, the catch doesn't work
@@ -2147,7 +2147,7 @@ popManager = {
 	},
 	triggerURLFetchFailed : function(url) {
 
-		var t = this;
+		var that = this;
 
 		// Signal that this URL was fetched. Eg: btnSetLoading
 		// If not escaped, the catch doesn't work
@@ -2158,27 +2158,27 @@ popManager = {
 
 	processPageSectionResponse : function(domain, pageSection, url, fetchUrl, response, options) {
 
-		var t = this;
+		var that = this;
 
 		// Save all entries in the replicable, both for a new fetch, or also if retrieved from localStorage
-		var target = t.getTarget(pageSection);
+		var target = that.getTarget(pageSection);
 
 		// For each URL to be intercepted, save under which page URL and target its memory has been stored
-		t.saveUrlPointers(response, target);
-		t.addReplicableMemory(response, target);
-		t.addInitialBlockMemory(response);
+		that.saveUrlPointers(response, target);
+		that.addReplicableMemory(response, target);
+		that.addInitialBlockMemory(response);
 		
 		// Integrate the DB
-		t.integrateDatabases(domain, response);
+		that.integrateDatabases(domain, response);
 
 		// Check if the resources for the URL have already been loaded. 
 		// If not, then wait 100ms and check again, until they are loaded. Only then proceed to process the response
-		t.checkExecuteProcessPageSectionResponse(domain, pageSection, url, fetchUrl, response, options);
+		that.checkExecuteProcessPageSectionResponse(domain, pageSection, url, fetchUrl, response, options);
 	},
 
 	checkExecuteProcessPageSectionResponse : function(domain, pageSection, url, fetchUrl, response, options) {
 
-		var t = this;
+		var that = this;
 
 		// Check if the resources are loaded
 		// Allow popResourceLoader to hook in
@@ -2192,26 +2192,26 @@ popManager = {
 		if (args.loaded) {
 			
 			// Resources loaded => Process
-			t.executeProcessPageSectionResponse(domain, pageSection, url, response, options);
+			that.executeProcessPageSectionResponse(domain, pageSection, url, response, options);
 		}
 		else {
 		
 			// Not loaded => check again in 100ms
 			setTimeout(function () {
 				
-				t.checkExecuteProcessPageSectionResponse(domain, pageSection, url, fetchUrl, response, options)
+				that.checkExecuteProcessPageSectionResponse(domain, pageSection, url, fetchUrl, response, options)
 			}, 100);
 		}
 	},
 
 	executeProcessPageSectionResponse : function(domain, pageSection, url, response, options) {
 
-		var t = this;
+		var that = this;
 
 		// Add to the queue of promises to execute and merge the template
 		var dfd = $.Deferred();
-		var lastPromise = t.mergingTemplatePromise;//[domain];
-		t.mergingTemplatePromise/*[domain]*/ = dfd.promise();
+		var lastPromise = that.mergingTemplatePromise;//[domain];
+		that.mergingTemplatePromise/*[domain]*/ = dfd.promise();
 
 		// If while processing the pageSection we get error "Mempage not available",
 		// do not let it break the execution of other JS, contain it
@@ -2221,12 +2221,12 @@ popManager = {
 		
 			try {
 
-				t.processPageSection(domain, pageSection, response, options);
-				t.triggerURLFetched(url, options);
+				that.processPageSection(domain, pageSection, response, options);
+				that.triggerURLFetched(url, options);
 			}
 			catch(err) {
 				
-				t.triggerURLFetchFailed(url);
+				that.triggerURLFetchFailed(url);
 				console.log('Error: '+err.message);
 			}
 
@@ -2236,7 +2236,7 @@ popManager = {
 		// }
 		// else {
 		// 	try {
-		// 		t.processPageSection(domain, pageSection, response, options);
+		// 		that.processPageSection(domain, pageSection, response, options);
 		// 	}
 		// 	catch(err) {
 		// 		// Do nothing
@@ -2247,7 +2247,7 @@ popManager = {
 
 	maybeUpdateDocument : function(domain, pageSection, options) {
 		
-		var t = this;
+		var that = this;
 		options = options || {};
 
 		// Check if explicitly said to not update the document
@@ -2256,32 +2256,32 @@ popManager = {
 		}
 
 		// Sometimes update (eg: main), sometimes not (eg: modal)
-		var settings = t.getFetchPageSectionSettings(pageSection);
+		var settings = that.getFetchPageSectionSettings(pageSection);
 		if (settings.updateDocument) {
 
 			if (!options.skipPushState) {
 				
-				var topLevelFeedback = t.getTopLevelFeedback(domain);
+				var topLevelFeedback = that.getTopLevelFeedback(domain);
 				popBrowserHistory.pushState(topLevelFeedback[M.URLPARAM_URL]);
 			}
-			t.updateDocument(domain);
+			that.updateDocument(domain);
 		}
 	},
 
 	processPageSection : function(domain, pageSection, response, options) {
 		
-		var t = this;
+		var that = this;
 
-		var target = t.getTarget(pageSection);
+		var target = that.getTarget(pageSection);
 
 		// Integrate the response feedback
-		t.integrateTopLevelFeedback(domain, response);
-		var topLevelFeedback = t.getTopLevelFeedback(domain);
+		that.integrateTopLevelFeedback(domain, response);
+		var topLevelFeedback = that.getTopLevelFeedback(domain);
 
 		// Show any error message from the toplevel feedback
 		var errorMessage = topLevelFeedback[M.URLPARAM_ERROR];
 		if (errorMessage) {
-			t.showError(pageSection, errorMessage);
+			that.showError(pageSection, errorMessage);
 		}
 
 		// If reloading the URL, then we fetched that URL from the server independently of that page already loaded in the client (ie: it will not be intercepted)
@@ -2290,7 +2290,7 @@ popManager = {
 		if (options.reloadurl) {
 
 			// Get the url, and destroy those pages
-			t.triggerDestroyTarget(url, target);
+			that.triggerDestroyTarget(url, target);
 		}
 
 		// Set the "silent document" value return in the topLevelFeedback
@@ -2298,15 +2298,15 @@ popManager = {
 		if (topLevelFeedback[M.URLPARAM_SILENTDOCUMENT]) {
 			options.silentDocument = true;
 		}
-		t.maybeUpdateDocument(domain, pageSection, options);
+		that.maybeUpdateDocument(domain, pageSection, options);
 
 		// Do a Redirect?
 		if (options.maybeRedirect) {
-			if (t.maybeRedirect(topLevelFeedback)) return;
+			if (that.maybeRedirect(topLevelFeedback)) return;
 		}
 
 		// Integrate the response		
-		t.integratePageSection(domain, response);
+		that.integratePageSection(domain, response);
 
 		// First Check if the response also includes other pageSections. Eg: when fetching Projects, it will also bring its MainRelated
 		// Check first so that later on it can refer javascript on these already created objects
@@ -2314,7 +2314,7 @@ popManager = {
 
 			var psId = rpsConfiguration[M.JS_FRONTENDID];//rpsConfiguration['frontend-id'];
 			var pageSection = $('#'+psId);
-			t.renderPageSection(domain, pageSection, options);
+			that.renderPageSection(domain, pageSection, options);
 		
 			// Trigger
 			pageSection.triggerHandler('fetched', [options, url, domain]);
@@ -2324,19 +2324,19 @@ popManager = {
 
 	scrollToElem : function(elem, position, animate) {
 
-		var t = this;
+		var that = this;
 		popJSLibraryManager.execute('scrollToElem', {elem: elem, position: position, animate: animate});
 	},
 	scrollTop : function(elem, top, animate) {
 
-		var t = this;
+		var that = this;
 
 		// This will call functions from perfectScrollbar, bootstrap modal, and custom functions
 		popJSLibraryManager.execute('scrollTop', {elem: elem, top: top, animate: animate});
 	},
 	getPosition : function(elem) {
 
-		var t = this;
+		var that = this;
 
 		// Allow to have custom-functions.js provide the implementation of this function for the main pageSection, and perfectScrollbar also
 		var executed = popJSLibraryManager.execute('getPosition', {elem: elem});
@@ -2354,7 +2354,7 @@ popManager = {
 	getSettingsId : function(objectOrId) {
 		
 		// target: pageSection or Block, or already pssId or bsId (when called from a .tmpl.js file)
-		var t = this;
+		var that = this;
 
 		if ($.type(objectOrId) == 'object') {
 			
@@ -2367,8 +2367,8 @@ popManager = {
 
 	getError : function(pageSection, url, jqXHR, textStatus, errorThrown) {
 
-		var t = this;
-		var target = t.getTarget(pageSection);
+		var that = this;
+		var target = that.getTarget(pageSection);
 		if (jqXHR.status === 0) { // status = 0 => user is offline
 			
 			return M.ERROR_OFFLINE.format(url, target);
@@ -2382,7 +2382,7 @@ popManager = {
 
 	closeMessageFeedback : function(elem) {
 		
-		var t = this;
+		var that = this;
 
 		// Add a hook for Bootstrap to perform the action
 		var args = {
@@ -2397,7 +2397,7 @@ popManager = {
 	},
 	closeMessageFeedbacks : function(pageSection) {
 		
-		var t = this;
+		var that = this;
 
 		// Add a hook for Bootstrap to perform the action
 		var args = {
@@ -2412,11 +2412,11 @@ popManager = {
 
 	processBlock : function(domain, pageSection, block, options) {
 		
-		var t = this;
+		var that = this;
 
-		var pssId = t.getSettingsId(pageSection);
-		var bsId = t.getSettingsId(block);
-		var memory = t.getMemory(domain);
+		var pssId = that.getSettingsId(pageSection);
+		var bsId = that.getSettingsId(block);
+		var memory = that.getMemory(domain);
 
 		// Add 'items' from the dataset, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
 		options.extendContext = {
@@ -2427,38 +2427,38 @@ popManager = {
 		// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
 		popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
 
-		t.renderTarget(domain, pageSection, block, options);
+		that.renderTarget(domain, pageSection, block, options);
 	},
 
 	fetchBlock : function(pageSection, block, options) {
 		
-		var t = this;
+		var that = this;
 		options = options || {};
 
 		if (!options['skip-stopfetching-check']) {
 
 			// // If 'stop-fetching' is true then don't bring anymore
-			// var blockQueryState = t.getBlockQueryState(pageSection, block);
+			// var blockQueryState = that.getBlockQueryState(pageSection, block);
 			// if (blockQueryState[M.URLPARAM_STOPFETCHING]) {
 
 			// 	return;
 			// }
-			if (t.stopFetchingBlock(pageSection, block)) {
+			if (that.stopFetchingBlock(pageSection, block)) {
 				return;
 			}
 		}
 
-		t.executeFetchBlock(pageSection, block, options);
+		that.executeFetchBlock(pageSection, block, options);
 	},
 
 	getBlockPostData : function(domain, pageSection, block, options) {
 		
-		var t = this;
+		var that = this;
 		options = options || {};
 		var paramsGroup = options.paramsGroup || 'all';
 
-		var blockQueryState = t.getBlockQueryState(pageSection, block);
-		var blockDomainQueryState = t.getBlockDomainQueryState(domain, pageSection, block);
+		var blockQueryState = that.getBlockQueryState(pageSection, block);
+		var blockDomainQueryState = that.getBlockDomainQueryState(domain, pageSection, block);
 		
 		// Filter all params which are empty
 		var params = {};
@@ -2497,7 +2497,7 @@ popManager = {
 
 	handleBlockError : function(error, jqXHR, options) {
 
-		var t = this;
+		var that = this;
 
 		// First show status-specific error messages, then the general one
 		// Is the user offline? (status = 0 => user is offline) Show the right message
@@ -2518,7 +2518,7 @@ popManager = {
 		// Allow the "loading" and "error" message to not show up. Eg: for loadLatest, which is executed automatically
 		if (!options['skip-status']) {
 			error.removeClass('hidden');
-			t.scrollTop(error);
+			that.scrollTop(error);
 		}
 	},
 
@@ -2536,13 +2536,13 @@ popManager = {
 
 	executeFetchBlock : function(pageSection, block, options) {
 		
-		var t = this;
+		var that = this;
 		options = options || {};		
 
 		// Comment Leo 25/07/2017: transition from single domain (queryUrl) to multidomain
 		// // If the block has no query url, then nothing to do
 		// // (eg: when 'lazy-initializing' the offcanvas locations map, it has no content to fetch)
-		// var fetchUrl = t.getQueryUrl(pageSection, block);
+		// var fetchUrl = that.getQueryUrl(pageSection, block);
 		// if (!fetchUrl) {
 		// 	return;
 		// }
@@ -2553,15 +2553,15 @@ popManager = {
 		// If the params are already sent in the options, then use it
 		// It's needed for loading the 'Edit Event' page, where the params are provided by the collapse in attr data-params
 		// Override the post-data in the params, and then use it time and again (needed for the Navigator, it will set the filtering fields of the intercepted url into its post-data and send these again and again on waypoint scroll down - its own filter fields are empty!)
-		var blockQueryState = t.getBlockQueryState(pageSection, block);
+		var blockQueryState = that.getBlockQueryState(pageSection, block);
 		if (options['post-data']) {
 			blockQueryState['post-data'] = options['post-data'];
 		}
 
-		// var domain = t.getBlockTopLevelDomain(block);
+		// var domain = that.getBlockTopLevelDomain(block);
 
 		var fetch_urls = {};
-		var query_urls = t.getQueryMultiDomainUrls(pageSection, block);
+		var query_urls = that.getQueryMultiDomainUrls(pageSection, block);
 		$.each(query_urls, function(domain, fetchUrl) {
 
 			// If the block has no query url, then continue to next one
@@ -2571,16 +2571,16 @@ popManager = {
 
 			// If it must stop fetching for this one domain, then continue
 			if (!options['skip-stopfetching-check']) {
-				if (t.stopFetchingDomainBlock(domain, pageSection, block)) {
+				if (that.stopFetchingDomainBlock(domain, pageSection, block)) {
 					return;
 				}	
 			}
 
 			// Initialize the domain, if needed
-			t.maybeInitializeDomain(domain);
+			that.maybeInitializeDomain(domain);
 
 			// Initialize the multidomain feedback, so that when requesting for the feedback from a domain different than the local one, below, it doesn't explode
-			t.initMultiDomainFeedback(domain, pageSection, block);
+			that.initMultiDomainFeedback(domain, pageSection, block);
 
 			// Allow PoP Service Workers to modify the options, adding the Network First parameter to allow to fetch the preview straight from the server
 			var args = {
@@ -2592,9 +2592,9 @@ popManager = {
 			popJSLibraryManager.execute('modifyFetchBlockArgs', args);
 			fetchUrl = args.url;
 
-			var topLevelFeedback = t.getTopLevelFeedback(domain);
-			var pageSectionFeedback = t.getPageSectionFeedback(domain, pageSection);
-			var blockFeedback = t.getBlockFeedback(domain, pageSection, block);
+			var topLevelFeedback = that.getTopLevelFeedback(domain);
+			var pageSectionFeedback = that.getPageSectionFeedback(domain, pageSection);
+			var blockFeedback = that.getBlockFeedback(domain, pageSection, block);
 			
 			var blockQueryStateData = $.extend({}, topLevelFeedback[M.DATALOAD_PARAMS], pageSectionFeedback[M.DATALOAD_PARAMS], blockFeedback[M.DATALOAD_PARAMS]);
 			
@@ -2617,14 +2617,14 @@ popManager = {
 				post_data += options['onetime-post-data'];
 			}
 			// Allow the blockQueryStateData to add the blockQueryState or not. Needed for the loadLatest content, where we want to get rid of pagination and other params
-			var block_post_data = t.getBlockPostData(domain, pageSection, block);
+			var block_post_data = that.getBlockPostData(domain, pageSection, block);
 			if (post_data && block_post_data) {
 				post_data += '&';
 			}
 			post_data += block_post_data;
 
 			// Add a param to tell the back-end we are doing ajax
-			var target = t.getTarget(pageSection);
+			var target = that.getTarget(pageSection);
 			fetchUrl = add_query_arg(M.URLPARAM_TARGET, target, fetchUrl);
 			fetchUrl = add_query_arg(M.URLPARAM_MODULE, M.URLPARAM_MODULE_DATA, fetchUrl);
 			fetchUrl = add_query_arg(M.URLPARAM_OUTPUT, M.URLPARAM_OUTPUT_JSON, fetchUrl);
@@ -2656,11 +2656,11 @@ popManager = {
 				error.addClass('hidden');	
 
 				// Close Message
-				t.closeMessageFeedback(block);
+				that.closeMessageFeedback(block);
 			}
 
 			// Hide buttons / set loading msg
-			t.triggerEvent(pageSection, block, 'beforeFetch', [options]);
+			that.triggerEvent(pageSection, block, 'beforeFetch', [options]);
 
 			// When doing refetch, and initializing the data (aka doing GET, not POST), then show the 'disabled' layer
 			if (options['show-disabled-layer']) {
@@ -2675,7 +2675,7 @@ popManager = {
 				var fetchUrl = fetchInfo.url;
 				var loadingUrl = fetchInfo.loading;
 				var post_data = fetchInfo.data;
-				var crossdomain = t.getCrossDomainOptions(fetchUrl);
+				var crossdomain = that.getCrossDomainOptions(fetchUrl);
 
 				$.ajax($.extend(crossdomain, {
 					dataType: "json",
@@ -2709,7 +2709,7 @@ popManager = {
 						
 						// the url is needed to re-identify the block, since all it's given to us on the response is the settings-id
 						// which is not enough anymore since we can have different blocks with the same settings-id, so we need to find once again the id
-						blockQueryState['paramsscope-url'][loadingUrl] = t.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/;
+						blockQueryState['paramsscope-url'][loadingUrl] = that.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/;
 						
 						// Is it a realod?
 						if (options.reload) {
@@ -2718,16 +2718,16 @@ popManager = {
 						}
 		
 						if (!options['skip-status']) {
-							t.handleLoadingStatus(loading, 'add');
+							that.handleLoadingStatus(loading, 'add');
 						}
 					},	
 					success: function(response, textStatus, jqXHR) {
 
 						// Allow pop-cdn to incorporate the thumbprint values in the topLevelFeedback before backgroundLoad
-						t.blockFetchSuccess(pageSection, block, response);
+						that.blockFetchSuccess(pageSection, block, response);
 
 						// Start loading extra urls
-						t.backgroundLoad(response.feedback.toplevel[M.URLPARAM_BACKGROUNDLOADURLS]);
+						that.backgroundLoad(response.feedback.toplevel[M.URLPARAM_BACKGROUNDLOADURLS]);
 
 						// loadLatest: when it comes back, hide the latestcount div
 						if (options['hide-latestcount']) {
@@ -2738,24 +2738,24 @@ popManager = {
 
 						// We need to pass the status down the road, so methods can know if this is the first domain processed from a list of domains or not
 						// It is needed for when doing operation REPLACE, do it only the first time, but not later, or it will replace data from previous domains
-						var status = t.getMultiDomainBlockStatus(blockQueryState, fetch_urls, timestamp);
+						var status = that.getMultiDomainBlockStatus(blockQueryState, fetch_urls, timestamp);
 
 						// Comment Leo 03/12/2015: Using Deferred Object for the following reason:
 						// Templates for 2 URLs cannot be merged at the same time, since they both access the same settings (unique thread)
 						// So we need to make the template merging process synchronous. For that we implement a queue of deferred object,
 						// Where each one of them merges only after the previous one process has finished, + mergingTemplatePromise = false for the first case and when there are no other elements in the queue
 						// By the end of the success function all merging will be done, then we can proceed with following item in the queue
-						var lastPromise = t.mergingTemplatePromise;//[domain];
+						var lastPromise = that.mergingTemplatePromise;//[domain];
 						var dfd = $.Deferred();
 						var thisPromise = dfd.promise();
-						t.mergingTemplatePromise/*[domain]*/ = thisPromise;
+						that.mergingTemplatePromise/*[domain]*/ = thisPromise;
 						// Comment Leo 13/09/2017: There will always be a lastPromise, since it was added on the init() function
 						// if (lastPromise) {
 						lastPromise.done(function() {
 
 							// Catch the "Mempage not available" exception, or the app might crash
 							try {
-								t.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
+								that.executeFetchBlockSuccess(pageSection, block, /*blockQueryState, */response, status, jqXHR);
 							}
 							catch(err) {
 								// Do nothing
@@ -2770,7 +2770,7 @@ popManager = {
 						// else {
 						// 	// Catch the "Mempage not available" exception, or the app might crash
 						// 	try {
-						// 		t.executeFetchBlockSuccess(pageSection, block, blockQueryState, response, status, jqXHR);
+						// 		that.executeFetchBlockSuccess(pageSection, block, blockQueryState, response, status, jqXHR);
 						// 	}
 						// 	catch(err) {
 						// 		// Do nothing
@@ -2781,14 +2781,14 @@ popManager = {
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 
-						t.handleBlockError(error, jqXHR, options);
-						t.triggerEvent(pageSection, block, 'fetchFailed');
+						that.handleBlockError(error, jqXHR, options);
+						that.triggerEvent(pageSection, block, 'fetchFailed');
 					},
 					complete: function(jqXHR) {
 
 						// Following instructions can be executed immediately when calling `complete`,
 						// even if the merging has yet not taken place
-						var status = t.getMultiDomainBlockStatus(blockQueryState, fetch_urls, timestamp);
+						var status = that.getMultiDomainBlockStatus(blockQueryState, fetch_urls, timestamp);
 						// var status = {
 						// 	timestamp: timestamp,
 						// };
@@ -2821,14 +2821,14 @@ popManager = {
 						}
 		
 						if (!options['skip-status']) {
-							t.handleLoadingStatus(loading, 'remove');
+							that.handleLoadingStatus(loading, 'remove');
 						}
 
 						// Following instructions can be executed only after the merging has finished
-						var lastPromise = t.mergingTemplatePromise;//[domain];
+						var lastPromise = that.mergingTemplatePromise;//[domain];
 						var dfd = $.Deferred();
 						var thisPromise = dfd.promise();
-						t.mergingTemplatePromise/*[domain]*/ = thisPromise;
+						that.mergingTemplatePromise/*[domain]*/ = thisPromise;
 
 						// If while processing the pageSection we get error "Mempage not available",
 						// do not let it break the execution of other JS, contain it
@@ -2837,7 +2837,7 @@ popManager = {
 						lastPromise.done(function() {
 							
 							try {
-								t.fetchBlockComplete(domain, pageSection, block, /*blockQueryState, */status, options);
+								that.fetchBlockComplete(domain, pageSection, block, /*blockQueryState, */status, options);
 							}
 							catch(err) {
 								// Do nothing
@@ -2851,7 +2851,7 @@ popManager = {
 						// }
 						// else {
 						// 	try {
-						// 		t.fetchBlockComplete(domain, pageSection, block, /*blockQueryState, */status, options);
+						// 		that.fetchBlockComplete(domain, pageSection, block, /*blockQueryState, */status, options);
 						// 	}
 						// 	catch(err) {
 						// 		// Do nothing
@@ -2867,9 +2867,9 @@ popManager = {
 
 	fetchBlockComplete: function(domain, pageSection, block, /*params, */status, options) {
 
-		var t = this;
+		var that = this;
 
-		var blockQueryState = t.getBlockQueryState(pageSection, block);
+		var blockQueryState = that.getBlockQueryState(pageSection, block);
 
 		// Remove the 'disabled' layer
 		block.children('.pop-disabledlayer').addClass('hidden');
@@ -2877,7 +2877,7 @@ popManager = {
 		// Display the dataset count?
 		if (options['datasetcount-target']) {
 			
-			t.displayDatasetCount(domain, pageSection, block, $(options['datasetcount-target']), options['datasetcount-updatetitle']);
+			that.displayDatasetCount(domain, pageSection, block, $(options['datasetcount-target']), options['datasetcount-updatetitle']);
 		}
 
 		// Only if not loading other URLs still
@@ -2888,9 +2888,9 @@ popManager = {
 		}
 
 		// Add/Remove class "pop-stopfetching"
-		// var blockQueryState = t.getBlockQueryState(pageSection, block);
+		// var blockQueryState = that.getBlockQueryState(pageSection, block);
 		// if (blockQueryState[M.URLPARAM_STOPFETCHING]) {
-		if (t.stopFetchingBlock(pageSection, block)) {
+		if (that.stopFetchingBlock(pageSection, block)) {
 
 			block.addClass('pop-stopfetching');
 		}
@@ -2899,12 +2899,12 @@ popManager = {
 			block.removeClass('pop-stopfetching');
 		}
 
-		t.triggerEvent(pageSection, block, 'fetchDomainCompleted', [status, domain]);
+		that.triggerEvent(pageSection, block, 'fetchDomainCompleted', [status, domain]);
 
 		// If this is the last domain fetched
 		if (status.isLast) {
 			
-			t.triggerEvent(pageSection, block, 'fetchCompleted', [status]);
+			that.triggerEvent(pageSection, block, 'fetchCompleted', [status]);
 		}
 	},
 
@@ -2913,12 +2913,12 @@ popManager = {
 		// There are 2 interpretations to stop fetching data for the block: with domain and without domain
 		// #1 - with domain: check if that specific domain can still fetch data
 		// #2 - without domain: check the whole block, i.e. all domains must have the stop-fetching flag in true
-		var t = this;
+		var that = this;
 		var ret = true;
-		var query_urls = t.getQueryMultiDomainUrls(pageSection, block);
+		var query_urls = that.getQueryMultiDomainUrls(pageSection, block);
 		$.each(query_urls, function(domain, query_url) {
 
-			var blockQueryDomainState = t.getBlockDomainQueryState(domain, pageSection, block);
+			var blockQueryDomainState = that.getBlockDomainQueryState(domain, pageSection, block);
 			if (!blockQueryDomainState[M.URLPARAM_STOPFETCHING]) {
 				ret = false;
 				return -1;
@@ -2930,16 +2930,16 @@ popManager = {
 
 	stopFetchingDomainBlock : function(domain, pageSection, block) {
 
-		var t = this;
-		var blockQueryDomainState = t.getBlockDomainQueryState(domain, pageSection, block);
+		var that = this;
+		var blockQueryDomainState = that.getBlockDomainQueryState(domain, pageSection, block);
 		return blockQueryDomainState[M.URLPARAM_STOPFETCHING];
 	},
 
 	displayDatasetCount : function(domain, pageSection, block, target, updateTitle) {
 		
-		var t = this;
+		var that = this;
 
-		var dataset = t.getBlockDataset(domain/*t.getBlockTopLevelDomain(block)*/, pageSection, block);
+		var dataset = that.getBlockDataset(domain/*that.getBlockTopLevelDomain(block)*/, pageSection, block);
 		if (dataset.length) {
 
 			// Mode: 'add' or 'replace'
@@ -2955,7 +2955,7 @@ popManager = {
 
 				// update the title
 				if (updateTitle) {
-					document.title = '('+count+') '+t.documentTitle;
+					document.title = '('+count+') '+that.documentTitle;
 				}
 			}
 		}
@@ -2963,18 +2963,18 @@ popManager = {
 
 	initMultiDomainFeedback : function(domain, pageSection, block) {
 
-		var t = this;
+		var that = this;
 
 		// Check if the domain from which we fetched the info is different than the loaded URL
 		// If that's the case, then it's data aggregation from a different website, we initialize
 		// all the properties from that domain
-		var memory = t.getMemory(domain);
-		var localDomain = t.getBlockTopLevelDomain(block);
+		var memory = that.getMemory(domain);
+		var localDomain = that.getBlockTopLevelDomain(block);
 		if (domain != localDomain) {
 
-			var pssId = t.getSettingsId(pageSection);
-			var bsId = t.getSettingsId(block);
-			var localMemory = t.getMemory(localDomain);
+			var pssId = that.getSettingsId(pageSection);
+			var bsId = that.getSettingsId(block);
+			var localMemory = that.getMemory(localDomain);
 
 			// Copy the properties from the local memory's domain to the operating domain?
 			// This is done the first time it is accessed, eg: if memory.feedback.toplevel is empty
@@ -3002,16 +3002,16 @@ popManager = {
 
 	initMultiDomainMemory : function(domain, pageSection, block, response) {
 
-		var t = this;
+		var that = this;
 
 		// Check if the domain from which we fetched the info is different than the loaded URL
 		// If that's the case, then it's data aggregation from a different website, we initialize
 		// all the properties from that domain
-		var memory = t.getMemory(domain);
-		var localDomain = t.getBlockTopLevelDomain(block);
+		var memory = that.getMemory(domain);
+		var localDomain = that.getBlockTopLevelDomain(block);
 		if (domain != localDomain) {
 
-			var localMemory = t.getMemory(localDomain);
+			var localMemory = that.getMemory(localDomain);
 
 			// Copy the properties from the local memory's domain to the operating domain?
 			// This is done the first time it is accessed, eg: if memory.feedback.toplevel is empty
@@ -3054,7 +3054,7 @@ popManager = {
 
 						// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
 						// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
-						t.copyToConfiguration(key, value, psConfiguration, true);
+						that.copyToConfiguration(key, value, psConfiguration, true);
 					});
 				}
 
@@ -3081,12 +3081,12 @@ popManager = {
 						memory.settings['templates-paths'][rpssId][rbsId] = $.extend({}, localMemory.settings['templates-paths'][rpssId][rbsId]);
 						memory.settings['db-keys'][rpssId][rbsId] = $.extend({}, localMemory.settings['db-keys'][rpssId][rbsId]);
 						
-						// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `t.mergingTemplatePromise` keeping a promise per domain...
+						// Comment Leo 10/08/2017: this comment below actually doesn't work, so I had to remove the `that.mergingTemplatePromise` keeping a promise per domain...
 						// // Modules under the first level configuration
 						// // Comment Leo 10/08/2017: IMPORTANT: Using deep copy just for the configuration, because
 						// // it will be modified by Handlebars when printing the HTML (adding the variables to the context),
 						// // so then all configurations from different domains must be copies and cannot reference to the same original configuration
-						// // Otherwise, we can't print the HTML for different domains concurrently, as it is done now (check that `t.mergingTemplatePromise` keeps a promise per domain,
+						// // Otherwise, we can't print the HTML for different domains concurrently, as it is done now (check that `that.mergingTemplatePromise` keeps a promise per domain,
 						// // so these can be printed concurrently)
 						// Doing deep copy, so that the domain memory does not override the local domain
 						// We gotta delete keys 'root-context' and 'parent-context' first, otherwise the deep copy does not work, we will get
@@ -3104,9 +3104,9 @@ popManager = {
 
 	executeFetchBlockSuccess : function(pageSection, block, /*params, */response, status, jqXHR) {
 
-		var t = this;
+		var that = this;
 
-		var blockQueryState = t.getBlockQueryState(pageSection, block);
+		var blockQueryState = that.getBlockQueryState(pageSection, block);
 
 		// And finally process the block
 		var loadingUrl = blockQueryState.url[jqXHR.url];
@@ -3122,9 +3122,9 @@ popManager = {
 		// // all the properties from that domain
 		var domain = blockQueryState.domain[loadingUrl];
 		// var domain = getDomain(loadingUrl);
-		t.initMultiDomainMemory(domain, pageSection, block, response);
+		that.initMultiDomainMemory(domain, pageSection, block, response);
 
-		var memory = t.getMemory(domain);
+		var memory = that.getMemory(domain);
 		
 		// Restore initial runtimeConfiguration: eg, for TPP Debate website, upon loading a single post, 
 		// it will trigger to load the "After reading this" Add OpinionatedVoted with the already-submitted opinionatedvote, when it comes back
@@ -3134,7 +3134,7 @@ popManager = {
 		var restoreinitial_actions = [M.CBACTION_LOADCONTENT, M.CBACTION_REFETCH, M.CBACTION_RESET];
 		var restoreinitial = restoreinitial_actions.indexOf(action) > -1;
 		if (restoreinitial) {
-			var initialMemory = t.getInitialBlockMemory(runtimeOptions.url);
+			var initialMemory = that.getInitialBlockMemory(runtimeOptions.url);
 			$.each(response['query-state'].general, function(rpssId, rpsParams) {	
 				$.each(rpsParams, function(rbsId, rbParams) {
 					// Use a direct reference instead of $.extend() because this one creates mess by messing up references when loading other
@@ -3145,10 +3145,10 @@ popManager = {
 		}
 
 		// Integrate topLevel
-		t.integrateTopLevelFeedback(domain, response);
+		that.integrateTopLevelFeedback(domain, response);
 
 		// Integrate the response data into the templateSettings
-		t.integrateDatabases(domain, response);
+		that.integrateDatabases(domain, response);
 
 		// Integrate the block
 		$.each(response['query-state'].general, function(rpssId, rpsParams) {
@@ -3175,7 +3175,7 @@ popManager = {
 					// Integrate the params
 					// If the user closed the tab that originated the ajax call before the response, then the params do not exist anymore
 					// and getBlockParams will throw an exception. Then catch it, and do nothing else (no need anyway!)
-					var rBlock = $('#'+t.getBlockId(rpssId, rbsId, runtimeOptions));
+					var rBlock = $('#'+that.getBlockId(rpssId, rbsId, runtimeOptions));
 
 					// Set the domain from the loadingURL
 					// rBlock.data('domain', domain);
@@ -3183,9 +3183,9 @@ popManager = {
 					// Comment Leo 04/12/2015: IMPORTANT: This extend below must be done always, even if `processblock-ifhasdata` condition below applies
 					// and so we skip the merging, however the params must be set for later use. Eg: TPP Debate Create OpinionatedVoted block
 					// skip-params: used for the loadLatest, so that the response of the params is not integrated back, messing up the paged, limit, etc
-					$.extend(t.getBlockQueryState(rPageSection, rBlock, runtimeOptions), rbParams);
+					$.extend(that.getBlockQueryState(rPageSection, rBlock, runtimeOptions), rbParams);
 					// Also extend the domain query-state
-					$.extend(t.getBlockDomainQueryState(domain, rPageSection, rBlock, runtimeOptions), response['query-state'].domain[rpssId][rbsId]);
+					$.extend(that.getBlockDomainQueryState(domain, rPageSection, rBlock, runtimeOptions), response['query-state'].domain[rpssId][rbsId]);
 
 					// When loading content, we can say to re-draw the block if there is data to be drawn, and do nothing instead
 					// This is needed for the "Add your Thought on TPP": if the user is not logged in, and writes a Thought, and then logs in,
@@ -3193,14 +3193,14 @@ popManager = {
 					var process_actions = [M.CBACTION_LOADCONTENT, M.CBACTION_REFETCH];
 					if (process_actions.indexOf(action) > -1) {
 
-						var jsSettings = t.getJsSettings(domain, rPageSection, rBlock);
+						var jsSettings = that.getJsSettings(domain, rPageSection, rBlock);
 						if (jsSettings['processblock-ifhasdata'] && !response.dataset[rpssId][rbsId].length) {
 							return;	
 						}
 					}
 
 					// And finally process the block
-					t.processBlock(domain, rPageSection, rBlock, processOptions);
+					that.processBlock(domain, rPageSection, rBlock, processOptions);
 				}
 				catch(err) {
 					// Do nothing
@@ -3215,7 +3215,7 @@ popManager = {
 
 	triggerEvent : function(pageSection, block, event, args) {
 
-		var t = this;
+		var that = this;
 
 		// Trigger on this block
 		block.triggerHandler(event, args);
@@ -3223,8 +3223,8 @@ popManager = {
 
 	integrateTopLevelFeedback : function(domain, response) {
 	
-		var t = this;
-		var tlFeedback = t.getMemory(domain).feedback.toplevel;
+		var that = this;
+		var tlFeedback = that.getMemory(domain).feedback.toplevel;
 
 		// Integrate the response into the topLevelFeedback
 		// Iterate all fields from the response topLevel. If it's an object, extend it. if not, just copy the value
@@ -3252,17 +3252,17 @@ popManager = {
 
 	clearUserDatabase : function(domain) {
 	
-		var t = this;
+		var that = this;
 		// domain = domain || M.HOME_DOMAIN;
 
 		// Executed when the logged-in user logs out
-		t.state[domain].userdatabase = {};
-		// t.userdatabase = {};
+		that.state[domain].userdatabase = {};
+		// that.userdatabase = {};
 	},
 
 	integrateDatabase : function(database, responsedb) {
 	
-		var t = this;
+		var that = this;
 
 		// Integrate the response Database into the database
 		$.each(responsedb, function(dbKey, dbItems) {
@@ -3289,15 +3289,15 @@ popManager = {
 
 	integrateDatabases : function(domain, response) {
 	
-		var t = this;
+		var that = this;
 
-		t.integrateDatabase(t.getDatabase(domain)/*t.database*/, response.database);
-		t.integrateDatabase(t.getUserDatabase(domain)/*t.userdatabase*/, response.userdatabase);
+		that.integrateDatabase(that.getDatabase(domain)/*that.database*/, response.database);
+		that.integrateDatabase(that.getUserDatabase(domain)/*that.userdatabase*/, response.userdatabase);
 	},
 
 	getMergeTargetContainer : function(target) {
 	
-		var t = this;
+		var that = this;
 
 		if (target.data('merge-container')) {
 			return $(target.data('merge-container'));
@@ -3308,7 +3308,7 @@ popManager = {
 
 	getMergeTarget : function(target, templateName, options) {
 	
-		var t = this;
+		var that = this;
 		options = options || {};
 
 		var selector = '.pop-merge.' + templateName;
@@ -3316,18 +3316,18 @@ popManager = {
 		// Allow to set the target in the options. Eg: used in the Link Fullview feed to change the src of each iframe when Google translating
 		var mergeTarget = options['merge-target'] ? $(options['merge-target']) : target.find(selector).addBack(selector);
 
-		return t.getMergeTargetContainer(mergeTarget);
+		return that.getMergeTargetContainer(mergeTarget);
 	},
 
 	generateUniqueId : function(domain) {
 
-		var t = this;
+		var that = this;
 
 		// Create a new uniqueId
 		var unique = Date.now();
 
 		// assign it to the toplevel feedback
-		var tlFeedback = t.getTopLevelFeedback(domain);
+		var tlFeedback = that.getTopLevelFeedback(domain);
 		tlFeedback[M.UNIQUEID] = unique;
 
 		return unique;
@@ -3335,35 +3335,35 @@ popManager = {
 
 	getUniqueId : function(domain) {
 
-		var t = this;
+		var that = this;
 
-		var tlFeedback = t.getTopLevelFeedback(domain);
+		var tlFeedback = that.getTopLevelFeedback(domain);
 		return tlFeedback[M.UNIQUEID];
 	},
 
 	addUniqueId : function(url) {
 
-		var t = this;
+		var that = this;
 
 		var domain = getDomain(url);
-		var unique = t.getUniqueId(domain);
+		var unique = that.getUniqueId(domain);
 		return url+'#'+unique;
 	},
 
 	mergeTargetTemplate : function(domain, pageSection, target, templateName, options) {
 	
-		var t = this;
+		var that = this;
 		options = options || {};
 
 		var rerender_actions = [M.CBACTION_LOADCONTENT, M.CBACTION_REFETCH, M.CBACTION_RESET];
 		var rerender = rerender_actions.indexOf(options.action) > -1;
 		if (rerender) {
 			// When rerendering, create the unique-id again, since not all the components allow to re-create a new component with an already-utilized id (eg: editor.js)
-			t.generateUniqueId(domain);
+			that.generateUniqueId(domain);
 		}
 		
-		var html = t.getTemplateHtml(domain, pageSection, target, templateName, options);
-		var targetContainer = t.getMergeTarget(target, templateName, options);
+		var html = that.getTemplateHtml(domain, pageSection, target, templateName, options);
+		var targetContainer = that.getMergeTarget(target, templateName, options);
 
 		// Default operation: REPLACE
 		options.operation = options.operation || M.URLPARAM_OPERATION_REPLACE;
@@ -3384,7 +3384,7 @@ popManager = {
 
 			targetContainer.empty();
 		}
-		var merged = t.mergeHtml(html, targetContainer, options.operation);
+		var merged = that.mergeHtml(html, targetContainer, options.operation);
 
 		// Call the callback javascript functions under the templateBlock (only aggregator one for PoPs)
 		target.triggerHandler('merged', [merged.newDOMs]);
@@ -3394,7 +3394,7 @@ popManager = {
 
 	mergeHtml : function(html, container, operation) {
 
-		var t = this;
+		var that = this;
 
 		// We can create the element first and then move it to the final destination, and it will be the same:
 		// From https://api.jquery.com/append/:
@@ -3411,14 +3411,14 @@ popManager = {
 			container.append(newDOMs);
 		}
 
-		t.triggerHTMLMerged();
+		that.triggerHTMLMerged();
 
 		return {targetContainer: container, newDOMs: newDOMs};
 	},
 
 	triggerHTMLMerged : function() {
 
-		var t = this;
+		var that = this;
 
 		// Needed for the calendar to know when the element is finally inserted into the DOM, to be able to operate with it
 		$(document).triggerHandler('template:merged');
@@ -3426,10 +3426,10 @@ popManager = {
 
 	renderPageSection : function(domain, pageSection, options) {
 	
-		var t = this;
+		var that = this;
 		options = options || {};
 
-		$.extend(options, t.getFetchPageSectionSettings(pageSection));
+		$.extend(options, that.getFetchPageSectionSettings(pageSection));
 
 		// If doing server-side rendering, then no need to render the view using javascript templates,
 		// however we must still identify the newDOMs as to execute the JS on the elements
@@ -3439,12 +3439,12 @@ popManager = {
 			// Trigger 'template:merged' for the Events Map to add the markers
 			// It must come before the next line, which will execute the JS on all elements
 			// (Eg: then layout-initjs-delay.tmpl works fine)
-			t.triggerHTMLMerged();
+			that.triggerHTMLMerged();
 
-			newDOMs = t.getPageSectionDOMs(domain, pageSection);
+			newDOMs = that.getPageSectionDOMs(domain, pageSection);
 
 			// Add the initial 'fetch-params' so we can also show the "page refreshed, please click here to refresh" when first loading the website
-			var tlFeedback = t.getTopLevelFeedback(domain);
+			var tlFeedback = that.getTopLevelFeedback(domain);
 			var url = tlFeedback[M.URLPARAM_URL];
 			options['fetch-params'] = {
 				url: url,
@@ -3453,40 +3453,40 @@ popManager = {
 			};
 		}
 		else {
-			newDOMs = t.renderTarget(domain, /*domain, */pageSection, pageSection, options);
+			newDOMs = that.renderTarget(domain, /*domain, */pageSection, pageSection, options);
 		}
 
 		// Sometimes no newDOMs are actually produced. Eg: when calling /userloggedin-data
 		// So then do not call pageSectionRendered, or it can make mess (eg: it scrolls up when /userloggedin-data comes back)
 		if (newDOMs.length) {
 
-			t.pageSectionRendered(domain, pageSection, newDOMs, options);
+			that.pageSectionRendered(domain, pageSection, newDOMs, options);
 		}
 	},
 
 	getPageSectionDOMs : function(domain, pageSection) {
 	
-		var t = this;
+		var that = this;
 
-		var templates_cbs = t.getTemplatesCbs(domain, pageSection, pageSection);
+		var templates_cbs = that.getTemplatesCbs(domain, pageSection, pageSection);
 		var targetContainers = $();
 		var newDOMs = $();
 		$.each(templates_cbs, function(index, templateName) {
 
 			// The DOMs are the existing elements on the pageSection merge target container
-			var targetContainer = t.getMergeTarget(pageSection, templateName);
+			var targetContainer = that.getMergeTarget(pageSection, templateName);
 			targetContainers.add(targetContainer);
 			newDOMs = newDOMs.add(targetContainer.children());
 		});
 
-		t.triggerRendered(domain, pageSection, newDOMs, targetContainers);
+		that.triggerRendered(domain, pageSection, newDOMs, targetContainers);
 
 		return newDOMs;
 	},
 
 	renderTarget : function(domain, pageSection, target, options) {
 	
-		var t = this;
+		var that = this;
 
 		options = options || {};
 
@@ -3506,24 +3506,24 @@ popManager = {
 		// And having set-up all the handlers, we can trigger the handler
 		target.triggerHandler('beforeRender', [options]);
 
-		var templates_cbs = t.getTemplatesCbs(domain, pageSection, target, options.action);
+		var templates_cbs = that.getTemplatesCbs(domain, pageSection, target, options.action);
 		var targetContainers = $();
 		var newDOMs = $();
 		$.each(templates_cbs, function(index, templateName) {
 
-			var merged = t.mergeTargetTemplate(domain, pageSection, target, templateName, options);
+			var merged = that.mergeTargetTemplate(domain, pageSection, target, templateName, options);
 			targetContainers = targetContainers.add(merged.targetContainer);
 			newDOMs = newDOMs.add(merged.newDOMs);
 		});
 
-		t.triggerRendered(domain, target, newDOMs, targetContainers);
+		that.triggerRendered(domain, target, newDOMs, targetContainers);
 
 		return newDOMs;
 	},
 
 	triggerRendered : function(domain, target, newDOMs, targetContainers) {
 	
-		var t = this;
+		var that = this;
 
 		target.triggerHandler('rendered', [newDOMs, targetContainers, domain]);
 		$(document).triggerHandler('rendered', [target, newDOMs, targetContainers, domain]);
@@ -3531,17 +3531,17 @@ popManager = {
 
 	getPageSectionConfiguration : function(domain, pageSection) {
 	
-		var t = this;
+		var that = this;
 		
-		var pssId = t.getSettingsId(pageSection);
-		return t.getMemory(domain).settings.configuration[pssId];
+		var pssId = that.getSettingsId(pageSection);
+		return that.getMemory(domain).settings.configuration[pssId];
 	},
 
 	getTargetConfiguration : function(domain, pageSection, target, template) {
 	
-		var t = this;
-		var templatePath = t.getTemplatePath(domain, pageSection, target, template);
-		var targetConfiguration = t.getPageSectionConfiguration(domain, pageSection);
+		var that = this;
+		var templatePath = that.getTemplatePath(domain, pageSection, target, template);
+		var targetConfiguration = that.getPageSectionConfiguration(domain, pageSection);
 		
 		// Go down all levels of the configuration, until finding the level for the template-cb
 		if (templatePath) {
@@ -3557,7 +3557,7 @@ popManager = {
 
 	overrideFromItemObject : function(itemObject, override, overrideFields) {
 	
-		var t = this;
+		var that = this;
 
 		// Item Object / Single Item Object (eg: as loaded in Edit Project page)
 		// If the block is lazy, then there won't be a singleItemObject, then do nothing
@@ -3573,9 +3573,9 @@ popManager = {
 
 	replaceFromItemObject : function(domain, pssId, bsId, template, itemObject, override, strReplace) {
 	
-		var t = this;
-		var feedback = t.getTopLevelFeedback(domain);
-		var targetConfiguration = t.getTargetConfiguration(domain, pssId, bsId, template);
+		var that = this;
+		var feedback = that.getTopLevelFeedback(domain);
+		var targetConfiguration = that.getTargetConfiguration(domain, pssId, bsId, template);
 		$.each(strReplace, function(index, replace) {	
 
 			var replaceWhereField = replace['replace-where-field'];
@@ -3627,18 +3627,18 @@ popManager = {
 
 	getTemplateHtml : function(domain, pageSection, target, templateName, options, itemDBKey, itemObjectId) {
 
-		var t = this;
-		var targetConfiguration = t.getTargetConfiguration(domain, pageSection, target, templateName);
+		var that = this;
+		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, templateName);
 		options = options || {};
 
 		targetContext = targetConfiguration;
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
-		var templatePath = t.getTemplatePath(domain, pageSection, target, templateName);
+		var templatePath = that.getTemplatePath(domain, pageSection, target, templateName);
 		if (templatePath.length) {
-			var block = t.getBlock(target);
-			t.initContextSettings(domain, pageSection, block, targetContext);
-			t.extendContext(targetContext, domain, itemDBKey, itemObjectId);
+			var block = that.getBlock(target);
+			that.initContextSettings(domain, pageSection, block, targetContext);
+			that.extendContext(targetContext, domain, itemDBKey, itemObjectId);
 		}
 
 		// extendContext: don't keep the overriding in the configuration. This way, we can use the replicate without having to reset
@@ -3648,14 +3648,14 @@ popManager = {
 			targetContext = $.extend({}, targetContext, extendContext);
 		}
 
-		return t.getHtml(/*domain, */templateName, targetContext);
+		return that.getHtml(/*domain, */templateName, targetContext);
 	},
 
 	extendContext : function(context, domain, itemDBKey, itemObjectId, override) {
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
 		// Also used from within function enterModules to create the context to pass to each module
-		var t = this;
+		var that = this;
 		override = override || {};
 		$.extend(context, override);
 
@@ -3665,7 +3665,7 @@ popManager = {
 			$.extend(context, {itemDBKey: itemDBKey});
 			if (itemObjectId) {
 
-				var itemObject = t.getItemObject(domain, itemDBKey, itemObjectId);
+				var itemObject = that.getItemObject(domain, itemDBKey, itemObjectId);
 				$.extend(context, {itemObject: itemObject, itemObjectDBKey: itemDBKey});
 			}
 		}
@@ -3673,7 +3673,7 @@ popManager = {
 
 	initTopLevelJson : function(domain) {
 	
-		var t = this;
+		var that = this;
 
 		// Initialize Settings
 		var jsonHtml = $('#'+popPageSectionManager.getTopLevelSettingsId());
@@ -3683,15 +3683,15 @@ popManager = {
 		$(document).triggerHandler('initTopLevelJson', [json]);
 
 		// The template sources are located under sitemapping
-		// t.sitemapping['template-sources'] = json.sitemapping['template-sources'];
-		t.sitemapping = json.sitemapping;
+		// that.sitemapping['template-sources'] = json.sitemapping['template-sources'];
+		that.sitemapping = json.sitemapping;
 
 		// Comment Leo 30/10/2017: assign {} as base case, since when doing serverside-rendering,
 		// we are not sending the DB values (as to decrease output size)
-		t.state[domain].database = json.database || {};
-		t.state[domain].userdatabase = json.userdatabase || {};
+		that.state[domain].database = json.database || {};
+		that.state[domain].userdatabase = json.userdatabase || {};
 
-		var memory = t.getMemory(domain);
+		var memory = that.getMemory(domain);
 		memory.settings = json.settings;
 		memory.runtimesettings = json.runtimesettings;
 		memory.dataset = json.dataset;
@@ -3728,14 +3728,14 @@ popManager = {
 		});
 		// ---------------------------------------
 
-		t.saveUrlPointers(json);
-		t.addReplicableMemory(json);
-		t.addInitialBlockMemory(json);
+		that.saveUrlPointers(json);
+		that.addReplicableMemory(json);
+		that.addInitialBlockMemory(json);
 	},
 
 	getBlockDefaultParams : function() {
 	
-		var t = this;
+		var that = this;
 
 		return {
 			url: {},
@@ -3755,12 +3755,12 @@ popManager = {
 	},
 	getBlockDefaultMultiDomainParams : function() {
 	
-		var t = this;
+		var that = this;
 		return {};
 	},
 	getPageSectionDefaultParams : function() {
 	
-		var t = this;
+		var that = this;
 
 		return {
 			url: {},
@@ -3773,12 +3773,12 @@ popManager = {
 	initPageSectionRuntimeMemory : function(domain, pageSection, options) {
 	
 		// Initialize TopLevel / Blocks from the info provided in the feedback
-		var t = this;
+		var that = this;
 
-		var runtimeMempage = t.newRuntimeMemoryPage(domain, pageSection, pageSection, options);
+		var runtimeMempage = that.newRuntimeMemoryPage(domain, pageSection, pageSection, options);
 
-		var pssId = t.getSettingsId(pageSection);
-		runtimeMempage['query-state'] = t.getPageSectionDefaultParams();
+		var pssId = that.getSettingsId(pageSection);
+		runtimeMempage['query-state'] = that.getPageSectionDefaultParams();
 
 		// Allow JS libraries to hook up and initialize their own params
 		var args = {
@@ -3791,31 +3791,31 @@ popManager = {
 	initBlockRuntimeMemory : function(domain, pageSection, block, options) {
 	
 		// Initialize TopLevel / Blocks from the info provided in the feedback
-		var t = this;
+		var that = this;
 
-		var runtimeMempage = t.newRuntimeMemoryPage(domain, pageSection, block, options);
+		var runtimeMempage = that.newRuntimeMemoryPage(domain, pageSection, block, options);
 
-		var memory = t.getMemory(domain);
-		var pssId = t.getSettingsId(pageSection);
-		var bsId = t.getSettingsId(block);
+		var memory = that.getMemory(domain);
+		var pssId = that.getSettingsId(pageSection);
+		var bsId = that.getSettingsId(block);
 		
 		runtimeMempage.id = block.attr('id');
-		runtimeMempage['query-url'] = t.getRuntimeSettings(domain, pageSection, block, 'query-url');
+		runtimeMempage['query-url'] = that.getRuntimeSettings(domain, pageSection, block, 'query-url');
 		runtimeMempage['query-multidomain-urls'] = {};
 
 		// Params: it is slit into 2: #1. block params, and #2. dataloader-source-params (multidomain-params)
 		// #1 contains params that are unique to the block, which are equally posted to all sources, eg: filter
 		// #2 contains params whose value can change from source to source, eg: stop-loading
 		runtimeMempage['query-state'] = {
-			general: $.extend(t.getBlockDefaultParams(), memory['query-state'].general[pssId][bsId]),
+			general: $.extend(that.getBlockDefaultParams(), memory['query-state'].general[pssId][bsId]),
 			domain: {},
 		};
-		var multidomain_urls = t.getRuntimeSettings(domain, pageSection, block, 'query-multidomain-urls');
+		var multidomain_urls = that.getRuntimeSettings(domain, pageSection, block, 'query-multidomain-urls');
 		$.each(multidomain_urls, function(index, query_url) {
 
 			query_url_domain = getDomain(query_url);
 			runtimeMempage['query-multidomain-urls'][query_url_domain] = query_url;
-			runtimeMempage['query-state'].domain[query_url_domain] = $.extend(t.getBlockDefaultMultiDomainParams(), memory['query-state'].domain[pssId][bsId]);
+			runtimeMempage['query-state'].domain[query_url_domain] = $.extend(that.getBlockDefaultMultiDomainParams(), memory['query-state'].domain[pssId][bsId]);
 		})
 
 		// Allow JS libraries to hook up and initialize their own params
@@ -3830,7 +3830,7 @@ popManager = {
 
 	getViewport : function(pageSection, el) {
 	
-		var t = this;
+		var that = this;
 		var viewport = el.closest('.pop-viewport');
 		if (viewport.length) {
 			return viewport;
@@ -3842,18 +3842,18 @@ popManager = {
 
 	getDOMContainer : function(pageSection, el) {
 	
-		var t = this;
+		var that = this;
 		if (M.DOMCONTAINER_ID) {
 			return $('#'+M.DOMCONTAINER_ID);
 		}
 
 		// Default: the viewport
-		return t.getViewport(pageSection, el);
+		return that.getViewport(pageSection, el);
 	},
 
 	getBlock : function(el) {
 	
-		var t = this;
+		var that = this;
 		if (el.hasClass('pop-block')) {
 
 			return el;
@@ -3875,29 +3875,29 @@ popManager = {
 
 	getTargetParamsScopeURL : function(/*pageSection, */target) {
 
-		var t = this;
+		var that = this;
 		return target.data(M.PARAMS_PARAMSSCOPE_URL);
 	},
 	getBlockTopLevelURL : function(/*pageSection, */block) {
 
-		var t = this;
+		var that = this;
 		return block.data(M.PARAMS_TOPLEVEL_URL);
 	},
 	getBlockTopLevelDomain : function(/*pageSection, */block) {
 
-		var t = this;
+		var that = this;
 		return block.data(M.PARAMS_TOPLEVEL_DOMAIN);
 	},
 
 	isBlockGroup : function(block) {
 	
-		var t = this;		
+		var that = this;		
 		return block.hasClass('pop-blockgroup');
 	},
 
 	getBlockGroupActiveBlock : function(blockGroup) {
 	
-		var t = this;
+		var that = this;
 		
 		// Supposedly only 1 active pop-block can be inside a group of BlockGroups, so this should either
 		// return 1 result or none
@@ -3906,38 +3906,38 @@ popManager = {
 
 	getBlockGroupBlocks : function(blockGroup) {
 	
-		var t = this;
+		var that = this;
 		return blockGroup.find('.pop-block');
 	},
 
 	// getTemplateSource : function(domain, template) {
 	
 	// 	// If empty, then the template is its own source
-	// 	var t = this;		
-	// 	return t.getMemory(domain).settings['template-sources'][template] || template;
+	// 	var that = this;		
+	// 	return that.getMemory(domain).settings['template-sources'][template] || template;
 	// },
 	getTemplateSource : function(template) {
 	
 		// If empty, then the template is its own source
-		var t = this;		
-		return t.sitemapping['template-sources'][template] || template;
+		var that = this;		
+		return that.sitemapping['template-sources'][template] || template;
 	},
 
 	initPageSectionSettings : function(domain, pageSection, psConfiguration) {
 	
 		// Initialize TopLevel / Blocks from the info provided in the feedback
-		var t = this;
+		var that = this;
 
-		var tls = t.getTopLevelSettings(domain);
+		var tls = that.getTopLevelSettings(domain);
 		$.extend(psConfiguration, {tls: tls});
 
-		var pss = t.getPageSectionSettings(domain, pageSection);
-		var pssId = t.getSettingsId(pageSection);
+		var pss = that.getPageSectionSettings(domain, pageSection);
+		var pssId = that.getSettingsId(pageSection);
 		var psId = psConfiguration[M.JS_FRONTENDID];//psConfiguration['frontend-id'];
 		$.extend(psConfiguration, {pss: pss});	
 
 		// Expand the JS Keys for the configuration
-		t.expandJSKeys(psConfiguration);
+		that.expandJSKeys(psConfiguration);
 
 		// Fill each block configuration with its pssId/bsId/settings
 		if (psConfiguration[M.JS_MODULES]/*psConfiguration.modules*/) {
@@ -3945,11 +3945,11 @@ popManager = {
 				
 				var bId = bConfiguration[M.JS_FRONTENDID];//bConfiguration['frontend-id'];
 				// The blockTopLevelDomain is the same as teh domain when initializing the pageSection
-				var bs = t.getBlockSettings(domain, domain, pssId, bsId, psId, bId);
+				var bs = that.getBlockSettings(domain, domain, pssId, bsId, psId, bId);
 				$.extend(bConfiguration, {tls: tls, pss: pss, bs: bs});	
 
 				// Expand the JS Keys for the configuration
-				t.expandJSKeys(bConfiguration);
+				that.expandJSKeys(bConfiguration);
 			});	
 		}
 	},
@@ -3957,23 +3957,23 @@ popManager = {
 	initContextSettings : function(domain, pageSection, block, context) {
 	
 		// Initialize TopLevel / Blocks from the info provided in the feedback
-		var t = this;
+		var that = this;
 
-		var tls = t.getTopLevelSettings(domain);
+		var tls = that.getTopLevelSettings(domain);
 		$.extend(context, {tls: tls});
 
-		var pss = t.getPageSectionSettings(domain, pageSection);
+		var pss = that.getPageSectionSettings(domain, pageSection);
 		$.extend(context, {pss: pss});	
 
-		var pssId = t.getSettingsId(pageSection);
+		var pssId = that.getSettingsId(pageSection);
 		var psId = pageSection.attr('id');
-		var bsId = t.getSettingsId(block);
+		var bsId = that.getSettingsId(block);
 		var bId = block.attr('id');
-		var bs = t.getBlockSettings(domain, t.getBlockTopLevelDomain(block), pssId, bsId, psId, bId);
+		var bs = that.getBlockSettings(domain, that.getBlockTopLevelDomain(block), pssId, bsId, psId, bId);
 		$.extend(context, {pss: pss, bs: bs});	
 
 		// Expand the JS Keys for the configuration
-		t.expandJSKeys(context);
+		that.expandJSKeys(context);
 
 		// If there's no itemDBKey, also add it
 		// This is because there is a bug: first loading /log-in/, it will generate the settings adding itemDBKey when rendering
@@ -3987,7 +3987,7 @@ popManager = {
 
 	copyToConfiguration : function(key, value, configuration, deep) {
 
-		var t = this;
+		var that = this;
 
 		// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
 		// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
@@ -4016,11 +4016,11 @@ popManager = {
 
 	integratePageSection : function(domain, response) {
 	
-		var t = this;
+		var that = this;
 
-		$.extend(t.sitemapping['template-sources'], response.sitemapping['template-sources']);
+		$.extend(that.sitemapping['template-sources'], response.sitemapping['template-sources']);
 		
-		var memory = t.getMemory(domain);
+		var memory = that.getMemory(domain);
 		// $.extend(memory.settings['template-sources'], response.settings['template-sources']);
 		$.each(response.settings.configuration, function(pssId, rpsConfiguration) {
 
@@ -4067,36 +4067,36 @@ popManager = {
 
 				// If it is an array then do nothing but set the object: this happens when the pageSection has no modules (eg: sideInfo for Discussions page)
 				// and because we can't specify FORCE_OBJECT for encoding the json, then it assumes it's an array instead of an object, and it makes mess
-				t.copyToConfiguration(key, value, psConfiguration, false);
+				that.copyToConfiguration(key, value, psConfiguration, false);
 			});
 
 			var psId = rpsConfiguration[M.JS_FRONTENDID];//rpsConfiguration['frontend-id'];
 			var pageSection = $('#'+psId);
-			t.initPageSectionSettings(domain, pageSection, psConfiguration);
+			that.initPageSectionSettings(domain, pageSection, psConfiguration);
 		});
 	},
 
 	getTopLevelSettings : function(domain) {
 	
-		var t = this;
+		var that = this;
 
 		// Comment Leo 24/08/2017: no need for the pre-defined ID
 		return {
 			domain: domain,
 			'domain-id': /*M.MULTIDOMAIN_WEBSITES[domain] ? M.MULTIDOMAIN_WEBSITES[domain].id : */getDomainId(domain),
-			feedback: t.getTopLevelFeedback(domain),
+			feedback: that.getTopLevelFeedback(domain),
 		};
 	},
 
 	getPageSectionSettings : function(domain, pageSection) {
 	
-		var t = this;
+		var that = this;
 
-		var pssId = t.getSettingsId(pageSection);
+		var pssId = that.getSettingsId(pageSection);
 		var psId = pageSection.attr('id');
 
 		var pageSectionSettings = {
-			feedback: t.getPageSectionFeedback(domain, pageSection),
+			feedback: that.getPageSectionFeedback(domain, pageSection),
 			pssId: pssId,
 			psId: psId
 		};
@@ -4106,34 +4106,34 @@ popManager = {
 
 	isMultiDomain : function(blockTLDomain, pssId, bsId) {
 	
-		var t = this;
+		var that = this;
 		// Comments Leo 27/07/2017: the query-multidomain-urls are stored under the domain from which the block was initially rendered,
 		// and not that from where the data is being rendered
-		var multidomain_urls = t.getRuntimeSettings(blockTLDomain, pssId, bsId, 'query-multidomain-urls');
+		var multidomain_urls = that.getRuntimeSettings(blockTLDomain, pssId, bsId, 'query-multidomain-urls');
 		return (multidomain_urls && multidomain_urls.length >= 2);
 	},
 
 	getBlockSettings : function(domain, blockTLDomain, pssId, bsId, psId, bId) {
 	
-		var t = this;
+		var that = this;
 		var blockSettings = {
-			"db-keys": t.getDatabaseKeys(domain, pssId, bsId),
-			dataset: t.getBlockDataset(domain, pssId, bsId),
-			feedback: t.getBlockFeedback(domain, pssId, bsId),
+			"db-keys": that.getDatabaseKeys(domain, pssId, bsId),
+			dataset: that.getBlockDataset(domain, pssId, bsId),
+			feedback: that.getBlockFeedback(domain, pssId, bsId),
 			bsId: bsId,
 			bId: bId,
 			'toplevel-domain': blockTLDomain,
-			'is-multidomain': t.isMultiDomain(blockTLDomain, pssId, bsId)
+			'is-multidomain': that.isMultiDomain(blockTLDomain, pssId, bsId)
 		};
 
-		t.expandBlockSettingsJSKeys(blockSettings);
+		that.expandBlockSettingsJSKeys(blockSettings);
 
 		return blockSettings;
 	},
 
 	expandBlockSettingsJSKeys : function(blockSettings) {
 	
-		var t = this;
+		var that = this;
 
 		if (blockSettings && M.COMPACT_JS_KEYS) {
 			
@@ -4145,101 +4145,101 @@ popManager = {
 
 	getBlockDataset : function(domain, pageSection, block) {
 	
-		var t = this;
-		var pssId = t.getSettingsId(pageSection);
-		var bsId = t.getSettingsId(block);
+		var that = this;
+		var pssId = that.getSettingsId(pageSection);
+		var bsId = that.getSettingsId(block);
 		
-		return t.getMemory(domain).dataset[pssId][bsId];
+		return that.getMemory(domain).dataset[pssId][bsId];
 	},
 
 	getBlockFeedback : function(domain, pageSection, block) {
 	
-		var t = this;
-		var pssId = t.getSettingsId(pageSection);
-		var bsId = t.getSettingsId(block);
+		var that = this;
+		var pssId = that.getSettingsId(pageSection);
+		var bsId = that.getSettingsId(block);
 		
-		return t.getMemory(domain).feedback.block[pssId][bsId];
+		return that.getMemory(domain).feedback.block[pssId][bsId];
 	},
 
 	getPageSectionFeedback : function(domain, pageSection) {
 	
-		var t = this;
-		var pssId = t.getSettingsId(pageSection);
-		return t.getMemory(domain).feedback.pagesection[pssId];
+		var that = this;
+		var pssId = that.getSettingsId(pageSection);
+		return that.getMemory(domain).feedback.pagesection[pssId];
 	},
 
 	getTopLevelFeedback : function(domain) {
 	
-		var t = this;
+		var that = this;
 		
-		return t.getMemory(domain).feedback.toplevel;
+		return that.getMemory(domain).feedback.toplevel;
 	},
 
 	getSettings : function(domain, pageSection, target, item) {
 	
-		var t = this;
+		var that = this;
 		
-		var pssId = t.getSettingsId(pageSection);
-		var targetId = t.getSettingsId(target);
-		var memory = t.getMemory(domain);
+		var pssId = that.getSettingsId(pageSection);
+		var targetId = that.getSettingsId(target);
+		var memory = that.getMemory(domain);
 
 		return memory.settings[item][pssId][targetId];
 	},
 	getRuntimeSettings : function(domain, pageSection, target, item) {
 	
-		var t = this;
+		var that = this;
 		
-		var pssId = t.getSettingsId(pageSection);
-		var targetId = t.getSettingsId(target);
-		var memory = t.getMemory(domain);
+		var pssId = that.getSettingsId(pageSection);
+		var targetId = that.getSettingsId(target);
+		var memory = that.getMemory(domain);
 		
 		return memory.runtimesettings[item][pssId][targetId];
 	},
 
 	getQueryUrl : function(pageSection, block) {
 	
-		var t = this;
-		return t.getRuntimeMemoryPage(pageSection, block)['query-url'];
+		var that = this;
+		return that.getRuntimeMemoryPage(pageSection, block)['query-url'];
 	},
 
 	getQueryMultiDomainUrls : function(pageSection, block) {
 	
-		var t = this;
-		return t.getRuntimeMemoryPage(pageSection, block)['query-multidomain-urls'];
+		var that = this;
+		return that.getRuntimeMemoryPage(pageSection, block)['query-multidomain-urls'];
 	},
 
 	getRuntimeConfiguration : function(domain, pageSection, block, el) {
 
-		var t = this;
+		var that = this;
 
 		// When getting the block configuration, there's no need to pass el param
 		el = el || block;
 		
-		var elsId = t.getTemplateOrObjectSettingsId(el);
-		var configuration = t.getRuntimeSettings(domain, pageSection, block, 'configuration');
+		var elsId = that.getTemplateOrObjectSettingsId(el);
+		var configuration = that.getRuntimeSettings(domain, pageSection, block, 'configuration');
 
 		return configuration[elsId] || {};
 	},
 
 	getDatabaseKeys : function(domain, pageSection, block) {
 	
-		var t = this;
-		return t.getSettings(domain, pageSection, block, 'db-keys');
+		var that = this;
+		return that.getSettings(domain, pageSection, block, 'db-keys');
 	},
 
 	getBlockFilteringUrl : function(domain, pageSection, block, use_pageurl) {
 	
-		var t = this;
-		var url = t.getQueryUrl(pageSection, block);
+		var that = this;
+		var url = that.getQueryUrl(pageSection, block);
 
 		// If the block doesn't have a filtering url (eg: the Author Description, https://www.mesym.com/p/leo/?tab=description) then use the current browser url
 		if (!url && use_pageurl) {
 			// url = window.location.href;
-			url = t.getTopLevelFeedback(domain/*t.getBlockTopLevelDomain(block)*/)[M.URLPARAM_URL];
+			url = that.getTopLevelFeedback(domain/*that.getBlockTopLevelDomain(block)*/)[M.URLPARAM_URL];
 		}
 
 		// Add only the 'visible' params to the URL
-		var post_data = t.getBlockPostData(domain, pageSection, block, {paramsGroup: 'visible'});
+		var post_data = that.getBlockPostData(domain, pageSection, block, {paramsGroup: 'visible'});
 		if (post_data) {
 			if (url.indexOf('?') > -1) {
 				url += '&';
@@ -4254,7 +4254,7 @@ popManager = {
 
 	click : function(url, target, container) {
 	
-		var t = this;
+		var that = this;
 		target = target || '';
 		container = container || $(document.body);
 		
@@ -4268,7 +4268,7 @@ popManager = {
 
 	getUnembedUrl : function(url) {
 
-		var t = this;
+		var that = this;
 
 		// Allow to have custom-functions.js provide the implementation of this function
 		var executed = popJSLibraryManager.execute('getUnembedUrl', {url: url});
@@ -4285,7 +4285,7 @@ popManager = {
 
 	getEmbedUrl : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		// Allow to have custom-functions.js provide the implementation of this function
 		var executed = popJSLibraryManager.execute('getEmbedUrl', {url: url});
@@ -4302,7 +4302,7 @@ popManager = {
 
 	getAPIUrl : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		// Add the corresponding parameters, like this:
 		// $url?output=json&module=data&mangled=false
@@ -4317,7 +4317,7 @@ popManager = {
 
 	getPrintUrl : function(url) {
 	
-		var t = this;
+		var that = this;
 		
 		// Allow to have custom-functions.js provide the implementation of this function
 		var executed = popJSLibraryManager.execute('getPrintUrl', {url: url});
@@ -4334,7 +4334,7 @@ popManager = {
 
 	getDestroyUrl : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		// // Comment Leo 10/06/2016: The URL can start with other domains, for the Platform of Platforms
 		// var domain = M.HOME_DOMAIN;
@@ -4359,7 +4359,7 @@ popManager = {
 	
 	getTemplateOrObjectSettingsId : function(el) {
 
-		var t = this;
+		var that = this;
 		
 		// If it's an object, return an attribute	
 		if ($.type(el) == 'object') {
@@ -4374,26 +4374,26 @@ popManager = {
 	getPageSectionJsSettings : function(domain, pageSection) {
 	
 		// This is a special case
-		var t = this;
-		var pssId = t.getSettingsId(pageSection);
+		var that = this;
+		var pssId = that.getSettingsId(pageSection);
 		
-		return t.getSettings(domain, pageSection, pageSection, 'js-settings') || {};
+		return that.getSettings(domain, pageSection, pageSection, 'js-settings') || {};
 	},
 	getJsSettings : function(domain, pageSection, block, el) {
 
-		var t = this;
+		var that = this;
 
 		// When getting the block settings, there's no need to pass el param
 		el = el || block;
 		
-		var pssId = t.getSettingsId(pageSection);
-		var bsId = t.getSettingsId(block);
-		var jsSettingsId = t.getTemplateOrObjectSettingsId(el);
+		var pssId = that.getSettingsId(pageSection);
+		var bsId = that.getSettingsId(block);
+		var jsSettingsId = that.getTemplateOrObjectSettingsId(el);
 
 		// Combine the JS settings and the runtime JS settings together
-		// var domain = t.getBlockTopLevelDomain(block);
-		var settings = t.getSettings(domain, pageSection, block, 'js-settings');
-		var runtimeSettings = t.getRuntimeSettings(domain, pageSection, block, 'js-settings');
+		// var domain = that.getBlockTopLevelDomain(block);
+		var settings = that.getSettings(domain, pageSection, block, 'js-settings');
+		var runtimeSettings = that.getRuntimeSettings(domain, pageSection, block, 'js-settings');
 
 		var jsSettings = {};
 		if (settings[jsSettingsId]) {
@@ -4407,41 +4407,41 @@ popManager = {
 	},
 	getPageSectionJsMethods : function(domain, pageSection) {
 	
-		var t = this;
+		var that = this;
 
-		var pssId = t.getSettingsId(pageSection);
-		var memory = t.getMemory(domain);
+		var pssId = that.getSettingsId(pageSection);
+		var memory = that.getMemory(domain);
 		return memory.settings['jsmethods']['pagesection'][pssId] || {};
 	},
 	getBlockJsMethods : function(domain, pageSection, block) {
 	
-		var t = this;
+		var that = this;
 
-		var pssId = t.getSettingsId(pageSection);
-		var bsId = t.getSettingsId(block);
-		var memory = t.getMemory(domain);
+		var pssId = that.getSettingsId(pageSection);
+		var bsId = that.getSettingsId(block);
+		var memory = that.getMemory(domain);
 
 		return memory.settings['jsmethods']['block'][pssId][bsId] || {};
 	},
 	restoreInitialBlockMemory : function(pageSection, block, options) {
 
-		var t = this;
-		var pssId = t.getSettingsId(pageSection);
-		var bsId = t.getSettingsId(block);
-		var url = t.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/;
-		var initialMemory = t.getInitialBlockMemory(url);
+		var that = this;
+		var pssId = that.getSettingsId(pageSection);
+		var bsId = that.getSettingsId(block);
+		var url = that.getTargetParamsScopeURL(block)/*block.data('paramsscope-url')*/;
+		var initialMemory = that.getInitialBlockMemory(url);
 		// var domain = getDomain(url);
 
-		var queryState = t.getRuntimeMemoryPage(pageSection, block, options)['query-state'];
-		queryState.general = $.extend(t.getBlockDefaultParams(), initialMemory['query-state'].general[pssId][bsId]);
+		var queryState = that.getRuntimeMemoryPage(pageSection, block, options)['query-state'];
+		queryState.general = $.extend(that.getBlockDefaultParams(), initialMemory['query-state'].general[pssId][bsId]);
 
 		var dataset = initialMemory.dataset[pssId][bsId];
-		var query_urls = t.getQueryMultiDomainUrls(pageSection, block);
+		var query_urls = that.getQueryMultiDomainUrls(pageSection, block);
 		$.each(query_urls, function(domain, query_url) {
 			
-			queryState.domain[domain] = $.extend(t.getBlockDefaultMultiDomainParams(), initialMemory['query-state'].domain[pssId][bsId]);
+			queryState.domain[domain] = $.extend(that.getBlockDefaultMultiDomainParams(), initialMemory['query-state'].domain[pssId][bsId]);
 			
-			var memory = t.getMemory(domain);
+			var memory = that.getMemory(domain);
 			memory.runtimesettings.configuration[pssId][bsId] = $.extend({}, initialMemory.runtimesettings.configuration[pssId][bsId]);
 			memory.feedback.block[pssId][bsId] = $.extend({}, initialMemory.feedback.block[pssId][bsId]);
 
@@ -4458,32 +4458,32 @@ popManager = {
 	
 	getBlockQueryState : function(pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 
-		return t.getRuntimeMemoryPage(pageSection, block, options)['query-state'].general;
+		return that.getRuntimeMemoryPage(pageSection, block, options)['query-state'].general;
 	},
 	getBlockMultiDomainQueryState : function(pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 
-		return t.getRuntimeMemoryPage(pageSection, block, options)['query-state'].domain;
+		return that.getRuntimeMemoryPage(pageSection, block, options)['query-state'].domain;
 	},
 	getBlockDomainQueryState : function(domain, pageSection, block, options) {
 	
-		var t = this;
+		var that = this;
 
-		return t.getBlockMultiDomainQueryState(pageSection, block, options)[domain] || {};
+		return that.getBlockMultiDomainQueryState(pageSection, block, options)[domain] || {};
 	},
 	getPageSectionParams : function(pageSection, options) {
 	
-		var t = this;
+		var that = this;
 
-		return t.getRuntimeMemoryPage(pageSection, pageSection, options)['query-state'];
+		return that.getRuntimeMemoryPage(pageSection, pageSection, options)['query-state'];
 	},
 	
 	getTarget : function(pageSection) {
 	
-		var t = this;
+		var that = this;
 		var id = pageSection.attr('id');
 
 		// Default case: if the target doesn't exist, use the main target
@@ -4500,12 +4500,12 @@ popManager = {
 	},
 	targetExists : function(target) {
 
-		var t = this;
+		var that = this;
 		return M.FETCHTARGET_SETTINGS[target];
 	},
 	getFetchTargetPageSection : function(target) {
 	
-		var t = this;
+		var that = this;
 
 		if (!target || target == '_self' || !M.FETCHTARGET_SETTINGS[target]) {
 			target = M.URLPARAM_TARGET_MAIN;
@@ -4515,18 +4515,18 @@ popManager = {
 	},
 	getFetchPageSectionSettings : function(pageSection) {
 	
-		var t = this;
+		var that = this;
 		var psId = pageSection.attr('id');
 		return M.FETCHPAGESECTION_SETTINGS[psId] || {};
 	},
 	
 	getTemplatesCbs : function(domain, pageSection, target, action) {
 	
-		var t = this;
+		var that = this;
 
 		action = action || 'main';
 
-		var templatesCbs = t.getSettings(domain, pageSection, target, 'templates-cbs');
+		var templatesCbs = that.getSettings(domain, pageSection, target, 'templates-cbs');
 		var cbs = templatesCbs.cbs;
 		var actions = templatesCbs.actions;
 
@@ -4553,50 +4553,50 @@ popManager = {
 
 	getTemplatePath : function(domain, pageSection, target, template) {
 	
-		var t = this;
+		var that = this;
 		
-		var templatePaths = t.getSettings(domain, pageSection, target, 'templates-paths');
+		var templatePaths = that.getSettings(domain, pageSection, target, 'templates-paths');
 		return templatePaths[template];
 	},
 	
 	getScriptTemplate : function(/*domain, */templateName) {
 
-		var t = this;
-		var templateSource = t.getTemplateSource(/*domain, */templateName);
+		var that = this;
+		var templateSource = that.getTemplateSource(/*domain, */templateName);
 		return Handlebars.templates[templateSource];
 	},
 
 	getPageSectionGroup : function(elem) {
 	
-		var t = this;
+		var that = this;
 		return elem.closest('.pop-pagesection-group').addBack('.pop-pagesection-group');
 	},
 	getPageSection : function(elem) {
 	
-		var t = this;
+		var that = this;
 		return elem.closest('.pop-pagesection').addBack('.pop-pagesection');
 	},
 	getPageSectionPage : function(elem) {
 	
-		var t = this;		
+		var that = this;		
 		var page = elem.closest('.pop-pagesection-page').addBack('.pop-pagesection-page');
 		if (page.length) {
 			return page;
 		}
-		return t.getPageSection(elem);
+		return that.getPageSection(elem);
 	},
 	
 	getBlockId : function(pageSection, block, options) {
 	
-		var t = this;		
+		var that = this;		
 
-		return t.getRuntimeMemoryPage(pageSection, block, options).id;
+		return that.getRuntimeMemoryPage(pageSection, block, options).id;
 	},
 	
 	getHtml : function(/*domain, */templateName, context) {
 
-		var t = this;	
-		var template = t.getScriptTemplate(/*domain, */templateName);
+		var that = this;	
+		var template = that.getScriptTemplate(/*domain, */templateName);
 
 		// Comment Leo 29/11/2014: some browser plug-ins will not allow the template to be created
 		// Eg: AdBlock Plus. So when that happens (eg: when requesting template "socialmedia-source") template is undefined
@@ -4619,10 +4619,10 @@ popManager = {
 
 	getItemObject : function(domain, itemDBKey, itemObjectId) {
 
-		var t = this;
+		var that = this;
 		var userItem = {}, item = {};
-		var userdatabase = t.getUserDatabase(domain);
-		var database = t.getDatabase(domain);
+		var userdatabase = that.getUserDatabase(domain);
+		var database = that.getDatabase(domain);
 		if (userdatabase[itemDBKey] && userdatabase[itemDBKey][itemObjectId]) {
 			userItem = userdatabase[itemDBKey][itemObjectId];
 		}
@@ -4634,25 +4634,25 @@ popManager = {
 
 	getFrameTarget : function(pageSection) {
 
-		var t = this;
+		var that = this;
 		return pageSection.data('frametarget') || M.URLPARAM_TARGET_MAIN;
 	},
 
 	getClickFrameTarget : function(pageSection) {
 
-		var t = this;
-		return pageSection.data('clickframetarget') || t.getFrameTarget(pageSection);
+		var that = this;
+		return pageSection.data('clickframetarget') || that.getFrameTarget(pageSection);
 	},
 
 	getOriginalLink : function(link) {
 
-		var t = this;
+		var that = this;
 
 		// If the link is an interceptor, then return the data from the original intercepted element
 		// Otherwise, it is the link itself, retrieve from there
 		var intercepted = link.data('interceptedTarget');
 		if (intercepted) {
-			return t.getOriginalLink(intercepted);
+			return that.getOriginalLink(intercepted);
 		}
 
 		return link;

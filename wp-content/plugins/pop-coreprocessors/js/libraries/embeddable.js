@@ -1,5 +1,5 @@
 (function($){
-popEmbeddable = {
+window.popEmbeddable = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popEmbeddable = {
 
 	fullscreen : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		$(document).bind("fullscreenchange", function() {
@@ -40,7 +40,7 @@ popEmbeddable = {
 
 	newWindow : function(args) {
 
-		var t = this;
+		var that = this;
 		var targets = args.targets;
 
 		targets.click(function(e) {

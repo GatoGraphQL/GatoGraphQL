@@ -1,5 +1,5 @@
 (function($){
-popCustomFunctions = {
+window.popCustomFunctions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popCustomFunctions = {
 
 	addPageSectionIds : function(args) {
 
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, template = args.template;
 		var pssId = popManager.getSettingsId(pageSection);
 		var psId = pageSection.attr('id');
@@ -30,7 +30,7 @@ popCustomFunctions = {
 
 	pageSectionInitialized : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection;
 		var psId = pageSection.attr('id');
 
@@ -47,7 +47,7 @@ popCustomFunctions = {
 	
 	pageSectionNewDOMsBeforeInitialize : function(args) {
 
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, newDOMs = args.newDOMs, inactivePane = args.inactivePane;
 		var psId = pageSection.attr('id');
 
@@ -82,10 +82,10 @@ popCustomFunctions = {
 				// Functions to trigger when the top level of the tabPanes is open (not for, say, the Content/Members in a Profile page)
 				tabPane.on('shown.bs.tabpane', function() {
 					
-					t.handleWindow(pageSection, 'minimized');
+					that.handleWindow(pageSection, 'minimized');
 				});
 				if (!inactivePane && !firstLoad) {
-					t.handleWindow(pageSection, 'minimized');
+					that.handleWindow(pageSection, 'minimized');
 				}
 			}
 			// If not, check if the addon window is fullsize, if so maximize it
@@ -94,10 +94,10 @@ popCustomFunctions = {
 				var addonsPageSection = $('#'+M.PS_ADDONS_ID);
 				tabPane.on('shown.bs.tabpane', function() {
 					
-					t.handleWindow(addonsPageSection, 'fullsize');
+					that.handleWindow(addonsPageSection, 'fullsize');
 				});
 				if (!inactivePane && !firstLoad) {
-					t.handleWindow(addonsPageSection, 'fullsize');
+					that.handleWindow(addonsPageSection, 'fullsize');
 				}
 			}
 		}
@@ -146,15 +146,15 @@ popCustomFunctions = {
 
 	getEmbedUrl : function(args) {
 	
-		var t = this;
+		var that = this;
 		var url = args.url;
 		
-		return t.addURLParams(add_query_arg(M.URLPARAM_THEMEMODE, M.THEMEMODE_WASSUP_EMBED, url));
+		return that.addURLParams(add_query_arg(M.URLPARAM_THEMEMODE, M.THEMEMODE_WASSUP_EMBED, url));
 	},
 
 	getUnembedUrl : function(args) {
 
-		var t = this;
+		var that = this;
 		var url = args.url;
 		
 		return removeQueryFields(url, [M.URLPARAM_THEMEMODE]);
@@ -162,35 +162,35 @@ popCustomFunctions = {
 
 	getPrintUrl : function(args) {
 	
-		var t = this;
+		var that = this;
 		var url = args.url;
 		
 		// Also add param print automatically when opening the page
-		return t.addURLParams(add_query_arg(M.URLPARAM_ACTION, M.URLPARAM_ACTION_PRINT, add_query_arg(M.URLPARAM_THEMEMODE, M.THEMEMODE_WASSUP_PRINT, url)));
+		return that.addURLParams(add_query_arg(M.URLPARAM_ACTION, M.URLPARAM_ACTION_PRINT, add_query_arg(M.URLPARAM_THEMEMODE, M.THEMEMODE_WASSUP_PRINT, url)));
 	},
 
 	scrollToElem : function(args) {
 
-		var t = this;
+		var that = this;
 		var elem = args.elem, position = args.position, animate = args.animate;
 
 		var pageSection = popManager.getPageSection(position);
 		var top = position.offset().top - pageSection.offset().top;
 		
-		return t.execScrollTop(elem, top, animate);
+		return that.execScrollTop(elem, top, animate);
 	},
 
 	scrollTop : function(args) {
 
-		var t = this;
+		var that = this;
 		var elem = args.elem, top = args.top, animate = args.animate;
 
-		return t.execScrollTop(elem, top, animate);
+		return that.execScrollTop(elem, top, animate);
 	},
 
 	getPosition : function(args) {
 
-		var t = this;
+		var that = this;
 		var elem = args.elem;
 
 		// If the element is the mainPageSection, and not of the perfectScrollbar type (defined in function PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar())...
@@ -206,7 +206,7 @@ popCustomFunctions = {
 
 	closeMessageFeedback : function(args) {
 		
-		var t = this;
+		var that = this;
 		var elem = args.elem;
 
 		// Message is an alert, so close it
@@ -218,7 +218,7 @@ popCustomFunctions = {
 
 	closeMessageFeedbacks : function(args) {
 		
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection;
 
 		// Message is an alert, so close it
@@ -233,7 +233,7 @@ popCustomFunctions = {
 
 	execScrollTop : function(elem, top, animate) {
 
-		var t = this;
+		var that = this;
 
 		// If the element is the mainPageSection, and not of the perfectScrollbar type (defined in function PoPTheme_Wassup_Utils::add_mainpagesection_scrollbar())...
 		if (elem.attr('id') == M.PS_MAIN_ID && !elem.hasClass('perfect-scrollbar')) {
@@ -253,7 +253,7 @@ popCustomFunctions = {
 
 	addURLParams : function(url) {
 	
-		var t = this;
+		var that = this;
 
 		if (M.THEMESTYLE) {
 
@@ -265,7 +265,7 @@ popCustomFunctions = {
 	
 	handleWindow : function(pageSection, exitSize) {
 
-		var t = this;
+		var that = this;
 
 		var windoww = pageSection.closest('.window');
 		if (popWindow.getSize(windoww) == exitSize) {

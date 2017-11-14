@@ -1,5 +1,5 @@
 (function($){
-popContentFunctions = {
+window.popContentFunctions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popContentFunctions = {
 
 	imageResponsive : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var targets = args.targets;
 		

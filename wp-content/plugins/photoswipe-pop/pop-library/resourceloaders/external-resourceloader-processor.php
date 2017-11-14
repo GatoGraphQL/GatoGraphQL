@@ -51,7 +51,7 @@ class PhotoSwipe_PoP_ExternalResourceLoaderProcessor extends PoP_ExternalResourc
 	
 	function get_path($resource) {
 
-		if (PoP_Frontend_ServerUtils::use_cdn_resources()) {
+		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			switch ($resource) {
 

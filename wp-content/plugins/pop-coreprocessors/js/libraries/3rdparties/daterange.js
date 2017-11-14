@@ -1,5 +1,5 @@
 (function($){
-popDateRange = {
+window.popDateRange = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popDateRange = {
 
 	dateRange : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		var format = M.DATERANGE_FORMAT || 'DD/MM/YYYY';
@@ -98,7 +98,7 @@ popDateRange = {
 			});
 			daterange.daterangepicker(
 				daterange_settings,
-				t.callback
+				that.callback
 			);
 
 			// Comment Leo 05/12/2016: commented since adding autoUpdateInput=false
@@ -116,8 +116,8 @@ popDateRange = {
 
 	callback : function(start, end) {
 
-		var t = this;
-		var dateinput = t.element;
+		var that = this;
+		var dateinput = that.element;
 
 		dateinput.siblings('.from').val(start.format('YYYY-MM-DD'));
 		dateinput.siblings('.to').val(end.format('YYYY-MM-DD'));

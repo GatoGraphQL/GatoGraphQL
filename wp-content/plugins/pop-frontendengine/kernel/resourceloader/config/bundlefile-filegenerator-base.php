@@ -3,11 +3,6 @@ class PoP_ResourceLoader_BundleFileFileGeneratorBase extends PoP_ResourceLoader_
 
 	private $filename, $attibute, $extension, $resources;
 
-	protected function get_subfolder() {
-
-		return PoP_Frontend_ServerUtils::bundle_external_files() ? 'global' : 'local';
-	}
-
 	function set_filename($filename) {
 
 		$this->filename = $filename;

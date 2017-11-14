@@ -1,5 +1,5 @@
 (function($){
-popFeedbackMessage = {
+window.popFeedbackMessage = {
 
 	//-------------------------------------------------
 	// 'PRIVATE' FUNCTIONS
@@ -7,7 +7,7 @@ popFeedbackMessage = {
 
 	formatFeedbackMessage : function(message, topLevelSettings, pageSectionSettings, blockSettings) {
 
-		var t = this;
+		var that = this;
 			
 		// Allow popMultiDomain to modify the message, adding the domain name
 	    var args = {

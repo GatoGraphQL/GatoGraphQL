@@ -238,12 +238,13 @@ class GD_TemplateManager_Utils {
 		$page_path = substr($permalink, strlen($domain));
 
 		// Remove the first and last '/'
-		if ($page_path[strlen($page_path)-1] == '/') {
-			$page_path = substr($page_path, 0, strlen($page_path)-1);
-		}
-		if ($page_path[0] == '/') {
-			$page_path = substr($page_path, 1);
-		}
+		// if ($page_path[strlen($page_path)-1] == '/') {
+		// 	$page_path = substr($page_path, 0, strlen($page_path)-1);
+		// }
+		// if ($page_path[0] == '/') {
+		// 	$page_path = substr($page_path, 1);
+		// }
+		$page_path = trim($page_path, '/');
 
 		return $page_path;
 	}

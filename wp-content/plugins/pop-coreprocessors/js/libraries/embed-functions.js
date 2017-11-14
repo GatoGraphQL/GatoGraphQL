@@ -1,5 +1,5 @@
 (function($){
-popEmbedFunctions = {
+window.popEmbedFunctions = {
 
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
@@ -7,7 +7,7 @@ popEmbedFunctions = {
 
 	modalReloadEmbedPreview : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		targets.each(function() {
@@ -36,14 +36,14 @@ popEmbedFunctions = {
 				else if (urlType == 'api') {
 					url = popManager.getAPIUrl(url);
 				}
-				t.embedPreview(domain, pageSection, block, iframe, url);
+				that.embedPreview(domain, pageSection, block, iframe, url);
 			});
 		});
 	},
 
 	reloadEmbedPreview : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var domain = args.domain, pageSection = args.pageSection, block = args.block, targets = args.targets;
 		targets.each(function() {
@@ -53,17 +53,17 @@ popEmbedFunctions = {
 			input.change(function() {
 				
 				var input = $(this);
-				t.embedPreviewFromInput(domain, pageSection, block, connector);
+				that.embedPreviewFromInput(domain, pageSection, block, connector);
 			});
 
 			// If the input already has a value, then already do the embed (eg: Edit Link)
-			t.embedPreviewFromInput(domain, pageSection, block, connector);
+			that.embedPreviewFromInput(domain, pageSection, block, connector);
 		});
 	},
 
 	replaceCode : function(args) {
 
-		var t = this;
+		var that = this;
 
 		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
 		targets.each(function() {
@@ -88,7 +88,7 @@ popEmbedFunctions = {
 				else if (urlType == 'api') {
 					url = popManager.getAPIUrl(url);
 				}
-				t.execReplaceCode(input, url);
+				that.execReplaceCode(input, url);
 			});
 		});
 	},
@@ -99,7 +99,7 @@ popEmbedFunctions = {
 
 	embedPreviewFromInput : function(domain, pageSection, block, connector) {
 
-		var t = this;
+		var that = this;
 
 		var input = $(connector.data('input-target'));
 		var url = input.val();
@@ -114,14 +114,14 @@ popEmbedFunctions = {
 			// // Because the iframe will be regenerated, the id to the iframe will become obsolete,
 			// // so update it. Since doing REPLACE_INLINE, the new iframe will be the targetContainer
 			var iframe = $(connector.data('iframe-target'));
-			var merged = t.embedPreview(domain, pageSection, block, iframe, url);
+			var merged = that.embedPreview(domain, pageSection, block, iframe, url);
 			connector.data('iframe-target', '#'+merged.targetContainer.attr('id'));
 		}
 	},
 
 	embedPreview : function(domain, pageSection, block, iframe, url) {
 
-		var t = this;
+		var that = this;
 
 		// Set the URL into the preview settings configuration, and re-draw the structure-inner
 		var options = {
@@ -148,7 +148,7 @@ popEmbedFunctions = {
 
 	execReplaceCode : function(input, url) {
 
-		var t = this;
+		var that = this;
 
 		var placeholder = input.data('code-placeholder');
 		var code = placeholder.format(url);

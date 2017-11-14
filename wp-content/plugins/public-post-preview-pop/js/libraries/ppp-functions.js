@@ -1,5 +1,5 @@
 (function($){
-popPPP = {
+window.popPPP = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popPPP = {
 
 	loadResourcesDB : function(args) {
 
-		var t = this;
+		var that = this;
 		var url = args.url, path = args.path, config = args.config;
 
 		// If originally it is the home URL

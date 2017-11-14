@@ -1,5 +1,5 @@
 (function($){
-popAddEditPost = {
+window.popAddEditPost = {
 
 	//-------------------------------------------------
 	// PUBLIC functions
@@ -7,7 +7,7 @@ popAddEditPost = {
 
 	formCreatePostBlock : function(args) {
 	
-		var t = this;
+		var that = this;
 		var domain = args.domain, pageSection = args.pageSection, block = args.block;
 
 		// When posting a new post, and then the user logs out, we gotta close that tab. But not until the post is actually created
@@ -15,17 +15,17 @@ popAddEditPost = {
 		var bsId = popManager.getSettingsId(block);		
 		block.one('fetched', function(e, response) {
 	
-			t.execFormCreatePostBlock(domain, pageSection, block, response);
+			that.execFormCreatePostBlock(domain, pageSection, block, response);
 		});
 	},
 
 	manageStatus : function(args) {
 	
-		var t = this;
+		var that = this;
 		var pageSection = args.pageSection, block = args.block, targets = args.targets;
 
 		// Set "disabled" to Published state
-		t.execManageStatus(targets);
+		that.execManageStatus(targets);
 
 		// Check if the user changed the Status from Published and Submitted, then "Published" it must be disabled
 		var pssId = popManager.getSettingsId(pageSection);
@@ -37,7 +37,7 @@ popAddEditPost = {
 			// result = true means it was successful
 			if (blockFeedback.result === true) {
 
-				t.execManageStatus(targets);
+				that.execManageStatus(targets);
 			}
 		});
 	},
@@ -48,7 +48,7 @@ popAddEditPost = {
 
 	execFormCreatePostBlock : function(domain, pageSection, block, response) {
 	
-		var t = this;
+		var that = this;
 
 		var pssId = popManager.getSettingsId(pageSection);
 		var bsId = popManager.getSettingsId(block);		
@@ -64,14 +64,14 @@ popAddEditPost = {
 
 			// If not, try again
 			block.one('fetched', function(e, response) {
-				t.execFormCreatePostBlock(domain, pageSection, block, response);
+				that.execFormCreatePostBlock(domain, pageSection, block, response);
 			});
 		}
 	},
 
 	execManageStatus : function(targets) {
 
-		var t = this;
+		var that = this;
 
 		// Set "disabled" to 'publish' state
 		targets.each(function() {
