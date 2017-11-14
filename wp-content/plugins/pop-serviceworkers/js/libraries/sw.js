@@ -7,7 +7,11 @@ popServiceWorkers = {
 	//-------------------------------------------------
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
-	documentInitialized : function(args) {
+	// Comment Leo 14/11/2017: execute function immediately
+	// Otherwise, when first loading the page, if it has changed, it will not show the message "Please click here to reload the page",
+	// since the code to execute that is executed after the SW 'refresh' function...
+	// documentInitialized : function(args) {
+	init : function() {
 
 		var t = this;
 		if ('serviceWorker' in navigator) {
@@ -176,5 +180,6 @@ popServiceWorkers = {
 // Initialize (but only if Service Workers enabled!)
 //-------------------------------------------------
 if (M.USE_SW) {
-	popJSLibraryManager.register(popServiceWorkers, ['documentInitialized', 'pageSectionNewDOMsBeforeInitialize', 'modifyFetchArgs', 'modifyFetchBlockArgs', 'fetchBrowserURL', 'resetTimestamp']);
+	popJSLibraryManager.register(popServiceWorkers, [/*'documentInitialized', */'pageSectionNewDOMsBeforeInitialize', 'modifyFetchArgs', 'modifyFetchBlockArgs', 'fetchBrowserURL', 'resetTimestamp']);
+	popServiceWorkers.init();
 }

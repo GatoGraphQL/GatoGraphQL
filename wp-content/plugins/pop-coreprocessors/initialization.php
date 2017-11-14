@@ -468,7 +468,8 @@ class PoP_CoreProcessors_Initialization {
 		// wp_enqueue_style('bootstrap');
 		wp_enqueue_style('daterangepicker');
 
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		// Comment Leo 12/11/2017: always add the bundle instead, until introducing CSS through the resourceLoader
+		if (true || PoP_Frontend_ServerUtils::use_bundled_resources()) {
 			
 			// Plug-in bundle
 			wp_register_style('pop-coreprocessors', $bundles_css_folder . '/pop-coreprocessors.bundle.min.css', array('bootstrap'), POP_COREPROCESSORS_VERSION);

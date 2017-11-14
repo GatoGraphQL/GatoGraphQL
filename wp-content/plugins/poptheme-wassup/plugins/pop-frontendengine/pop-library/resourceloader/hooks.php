@@ -19,6 +19,12 @@ class PoPThemeWassup_ResourceLoader_Hooks {
             2
         );
         add_filter(
+            'PoP_ResourceLoader_FileReproduction_Config:js-resources:404',
+            array($this, 'get_404_resources'),
+            10,
+            2
+        );
+        add_filter(
             'PoP_ResourceLoader_FileReproduction_Config:js-resources:tag',
             array($this, 'get_tag_resources'),
             10,
@@ -76,6 +82,15 @@ class PoPThemeWassup_ResourceLoader_Hooks {
         return $resources;
     }
 
+    function get_404_resources($resources, $fetching_json) {
+
+        $template_id = GD_TEMPLATE_TOPLEVEL_404;
+
+        PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($fetching_json, $resources, $template_id);
+
+        return $resources;
+    }
+
     function get_tag_resources($resources, $fetching_json) {
 
         // Get any one tag from the DB
@@ -103,11 +118,26 @@ class PoPThemeWassup_ResourceLoader_Hooks {
             'number' => 1,
             'fields' => 'ID',
         );
+
+        // We must merge together also the resources needed for the community!
+        $community_ids = get_users(array_merge(
+            $query,
+            array(
+                'role' => GD_URE_ROLE_COMMUNITY,
+            )
+        ));
+        // The organization must be different than the community, so that they don't override each other in the $ids array
+        // (otherwise, only the last one will prevail, and will not generate configuration for both source=community/organization)
         $organization_ids = get_users(array_merge(
             $query,
             array(
                 'role' => GD_URE_ROLE_ORGANIZATION,
-            )
+            ),
+            $community_ids ?
+                array(
+                    'exclude' => $community_ids
+                ) :
+                array()
         ));
         $individual_ids = get_users(array_merge(
             $query,
@@ -116,6 +146,7 @@ class PoPThemeWassup_ResourceLoader_Hooks {
             )
         ));
         $ids = array_merge(
+            $community_ids,
             $organization_ids,
             $individual_ids
         );
@@ -124,7 +155,28 @@ class PoPThemeWassup_ResourceLoader_Hooks {
             $template_id = GD_TEMPLATE_TOPLEVEL_AUTHOR;
             $hierarchy = GD_SETTINGS_HIERARCHY_AUTHOR;
             $merge = true;
-            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy, $ids, $merge);
+            $options = array(
+                'extra-vars' => array(
+                    'source' => array(),
+                ),
+            );
+
+            // For the organization and community, we must set the extra $vars['source'] value
+            if ($organization_id = $organization_ids[0]) {
+
+                $options['extra-vars']['source'][$organization_id] = GD_URLPARAM_URECONTENTSOURCE_ORGANIZATION;
+            }
+            if ($community_id = $community_ids[0]) {
+
+                $options['extra-vars']['source'][$community_id] = GD_URLPARAM_URECONTENTSOURCE_COMMUNITY;
+            }
+            if ($individual_id = $individual_ids[0]) {
+
+                $options['extra-vars']['source'][$individual_id] = '';
+            }
+
+            // Organization: it must add together the resources for both "source=community" and "source=organization"
+            PoP_ResourceLoaderProcessorUtils::add_resources_from_settingsprocessors($fetching_json, $resources, $template_id, $hierarchy, $ids, $merge, $options);
         }
 
         return $resources;

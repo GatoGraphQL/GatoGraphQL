@@ -10,6 +10,7 @@ define ('GD_SETTINGS_HIERARCHY_AUTHOR', 'author');
 define ('GD_SETTINGS_HIERARCHY_HOME', 'home');
 define ('GD_SETTINGS_HIERARCHY_TAG', 'tag');
 define ('GD_SETTINGS_HIERARCHY_SINGLE', 'single');
+// define ('GD_SETTINGS_HIERARCHY_404', '404');
 
 class GD_Template_SettingsManager {
 
@@ -24,7 +25,8 @@ class GD_Template_SettingsManager {
 			GD_SETTINGS_HIERARCHY_AUTHOR,
 			GD_SETTINGS_HIERARCHY_HOME,
 			GD_SETTINGS_HIERARCHY_TAG,
-			GD_SETTINGS_HIERARCHY_SINGLE
+			GD_SETTINGS_HIERARCHY_SINGLE,
+			// GD_SETTINGS_HIERARCHY_404,
 		);
 	}
 
@@ -49,6 +51,9 @@ class GD_Template_SettingsManager {
 			elseif ($vars['global-state']['is-single']/*is_single()*/) {
 				$hierarchy = GD_SETTINGS_HIERARCHY_SINGLE;
 			}
+			// elseif ($vars['global-state']['is-404']) {
+			// 	$hierarchy = GD_SETTINGS_HIERARCHY_404;
+			// }
 		}
 
 		return $hierarchy;

@@ -318,8 +318,8 @@ class PoPFrontend_Initialization {
 			// are different to the ones in the generated files
 			// Unless they are taken from the pop-generatecache! (Which were saved when running the generate process)
 			// Only then can use
-			global $pop_resourceloader_abbreviationsstorage_manager;
-	        if ($pop_resourceloader_abbreviationsstorage_manager->has_cached_abbreviations()) {
+			global $pop_resourceloader_bundlemappingstoragemanager;
+	        if ($pop_resourceloader_bundlemappingstoragemanager->has_cached_entries()) {
 
 				$bundle_group_ids = $popfrontend_resourceloader_scriptsregistration->get_bundlegroup_ids();
 				$bundle_ids = $popfrontend_resourceloader_scriptsregistration->get_bundle_ids();

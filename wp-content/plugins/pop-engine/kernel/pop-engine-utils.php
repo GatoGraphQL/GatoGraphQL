@@ -403,7 +403,10 @@ class GD_TemplateManager_Utils {
 		// $mode = $_REQUEST[GD_URLPARAM_MODE];
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
-		$config = $_REQUEST[POP_URLPARAM_CONFIG];
+
+		// Comment Leo 13/11/2017: do not add the config to the $vars, so that we can re-use the saved cachename 
+		// with a URL with param config also (param config is not used when generating the cached configurations)
+		// $config = $_REQUEST[POP_URLPARAM_CONFIG];
 		// $domain = $_REQUEST[POP_URLPARAM_DOMAIN];
 
 		// Target/Module default values (for either empty, or if the user is playing around with the url)
@@ -431,6 +434,12 @@ class GD_TemplateManager_Utils {
 			$settingsformat = $_REQUEST[GD_URLPARAM_SETTINGSFORMAT];
 		}
 		$format = isset($_REQUEST[GD_URLPARAM_FORMAT]) ? $_REQUEST[GD_URLPARAM_FORMAT] : $settingsformat;
+		// Comment Leo 13/11/2017: If there is not format, then set it to 'default'
+		// This is needed so that the /generate/ generated configurations under a $cachename (based on the value of $vars)
+		// can match the same $cachename when visiting that page
+		if (!$format) {
+			$format = POP_VALUES_DEFAULT;
+		}
 		self::$vars = array(
 			'output' => $output,
 			'target' => $target,
@@ -441,7 +450,7 @@ class GD_TemplateManager_Utils {
 			'settingsformat' => $settingsformat,
 			'tab' => $tab,
 			'action' => $action,
-			'config' => $config,
+			// 'config' => $config,
 			// 'domain' => $domain,
 			'theme' => $gd_theme_manager->get_theme() ? $gd_theme_manager->get_theme()->get_name() : '',
 			'thememode' => $gd_theme_manager->get_thememode() ? $gd_theme_manager->get_thememode()->get_name() : '',

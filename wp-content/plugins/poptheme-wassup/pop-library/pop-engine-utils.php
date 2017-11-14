@@ -7,11 +7,6 @@
 
 class PoPTheme_Wassup_Engine_Utils {
 
-	// function __construct() {
-
-	// 	add_filter('GD_TemplateManager_Utils:get_vars', array($this, 'get_vars'));
-	// }
-
 	public static function get_vars($vars) {
 
 		$target = $vars['target'];
@@ -36,5 +31,4 @@ class PoPTheme_Wassup_Engine_Utils {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-// new PoPTheme_Wassup_Engine_Utils();
 add_filter('GD_TemplateManager_Utils:get_vars', array('PoPTheme_Wassup_Engine_Utils', 'get_vars'));

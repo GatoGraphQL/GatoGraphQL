@@ -28,7 +28,8 @@ class PoP_ResourceLoaderProcessor_Manager {
 
         // Prepare the htmltag attributes before they are printed in the footer
         add_action(
-            'wp_print_footer_scripts',
+            // 'wp_print_footer_scripts',
+            'wp_enqueue_scripts',
             array($this, 'prepare_htmltag_attributes'),
             0
         );
@@ -106,7 +107,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 		);
 	}
 
-	function enqueue_resources($bundlegroup_ids, $bundle_ids, $resources) {
+	function enqueue_resources($bundlegroup_ids, $bundle_ids, $resources/*, $remove_bundled_resources = true*/) {
 
 		$added_scripts = array();
 
@@ -114,32 +115,6 @@ class PoP_ResourceLoaderProcessor_Manager {
 		// In order to calculate the bundle(group) ids, we need to substract first those resources which do not can_bundle, since they will not be inside the bundle files
 		$enqueuefile_type = PoP_Frontend_ServerUtils::get_enqueuefile_type();
 		$loading_bundle = $enqueuefile_type == 'bundlegroup' || $enqueuefile_type == 'bundle';
-		if ($loading_bundle) {
-
-			// For bundles and bundlegroups, those requests that can be bundled will be inside the bundle, so remove from the resources
-			global $pop_resourceloaderprocessor_manager;
-			$canbundle_resources = $pop_resourceloaderprocessor_manager->filter_can_bundle($resources);
-			$resources = array_values(array_diff(
-				$resources,
-				$canbundle_resources
-			));
-		}
-
-		// Enqueue either all the resources, or those who can not be bundled
-		foreach ($resources as $resource) {
-
-			// Enqueue the resource
-			$processor = $this->get_processor($resource);
-			$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $processor->get_dependencies($resource));
-
-			// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
-			$script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
-			wp_register_script($script, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
-			wp_enqueue_script($script);
-
-			$added_scripts[] = $script;
-		}
-
 		if ($loading_bundle) {
 
 			$version = pop_version();
@@ -165,6 +140,14 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 					foreach ($attributes as $attribute => $htmltag_attributes) {
 
+						// Check if the file exists
+						// We employ function `file_exists()` to validate if the normal/async/defer files exist.
+						// 1. Normal: we could expect the bundlegroup to exist, and directly print its path without checking. However, if constant `POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS` is true, then not all URLs will have a bundle(group) file, so in those cases it will fail
+						// 2. Defer and Async: we are not storing anywhere if those files were created or not, so gotta check for the physical files. 
+						// Using function `file_exists` is not ideal for 2 reasons:
+						// 1. It creates a dependency to have the files pre-generated. Then, when creating file service-worker.js in /generate/, we must've run /generate-theme/ before then. This is not right
+						// (The bundle(group) files are generated under /generate-theme/)
+						// 2. Accessing the disk for each file is not performant (no big issue with bundlegroups, but big with bundles, which could be many)
 						$pop_resourceloader_bundlegroupfilegenerator->set_attribute($attribute);
 						if ($pop_resourceloader_bundlegroupfilegenerator->file_exists()) {
 
@@ -194,6 +177,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 					foreach ($attributes as $attribute => $htmltag_attributes) {
 
+						// Check if the file exists
 						$pop_resourceloader_bundlefilegenerator->set_attribute($attribute);
 						if ($pop_resourceloader_bundlefilegenerator->file_exists()) {
 
@@ -211,6 +195,42 @@ class PoP_ResourceLoaderProcessor_Manager {
 					}
 				}
 			}
+
+			// The bundlegroup file may not exist (eg: when using flag POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS and loading a page with parameters)
+			// In that case, $added_scripts will be empty. Then fallback on loading resources, not bundle(group)s
+			// $remove_bundled_resources allows the service-worker.js file to also register all individual files, so they are pre-cached
+			if (!empty($added_scripts)/* && $remove_bundled_resources*/) {
+
+				// For bundles and bundlegroups, those requests that can be bundled will be inside the bundle, so remove from the resources
+				global $pop_resourceloaderprocessor_manager;
+				$canbundle_resources = $pop_resourceloaderprocessor_manager->filter_can_bundle($resources);
+				$resources = array_values(array_diff(
+					$resources,
+					$canbundle_resources
+				));
+			}
+		}
+
+		// Enqueue either all the resources, or those who can not be bundled
+		foreach ($resources as $resource) {
+
+			// Enqueue the resource
+			$processor = $this->get_processor($resource);
+			
+			// Comment Leo 13/11/2017: if a dependency in inside the bundle, then the corresponding handle will never be registered and this resource will not be added to the page
+			// Then, check for the dependencies only when loading resources, not bundle(group)s
+			$dependencies = array();
+			if (!$loading_bundle) {
+
+				$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $processor->get_dependencies($resource));
+			}
+
+			// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
+			$script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+			wp_register_script($script, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
+			wp_enqueue_script($script);
+
+			$added_scripts[] = $script;
 		}
 
 		// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it

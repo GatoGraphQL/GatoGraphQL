@@ -8,4 +8,4 @@ require_once 'template-resourceloader-processor.php';
 require_once 'external-resourceloader-processor.php';
 require_once 'resourceloader-scripts-registration.php';
 require_once 'htmltag-utils.php';
-require_once 'abbreviations-storage/load.php';
+require_once 'storage/load.php';

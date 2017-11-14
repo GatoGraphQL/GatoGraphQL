@@ -17,8 +17,12 @@ class PoPFrontend_Installation {
 		// ResourceLoader Config files
 		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			// Delete the file containing the cached "abbreviations" from the ResourceLoader
-			PoP_ResourceLoaderProcessorUtils::delete_abbreviations();
+			// Delete the file containing the cached entries (or "abbreviations") from the ResourceLoader
+			PoP_ResourceLoaderProcessorUtils::delete_entries();
+
+			// Delete the file containing what resources/bundle/bundlegroups were generated for each cachename
+			global $pop_resourceloader_generatedfilesstoragemanager;
+			$pop_resourceloader_generatedfilesstoragemanager->delete();
 			
 			global $pop_resourceloader_configfile_generator, $pop_resourceloader_resources_configfile_generator, $pop_resourceloader_initialresources_configfile_generator, $pop_resourceloader_hierarchyformatcombinationresources_configfile_generator;
 			$pop_resourceloader_configfile_generator->generate();
@@ -39,9 +43,13 @@ class PoPFrontend_Installation {
 				$pop_resourceloader_multiplefilegenerator_bundlegroups->generate();
 			}
 
-			// Save a new file containing the cached "abbreviations" from the ResourceLoader
-			global $pop_resourceloader_abbreviationsstorage_manager;
-			PoP_ResourceLoaderProcessorUtils::save_abbreviations();
+			// Generate and Save the file containing what resources/bundle/bundlegroups were generated for each cachename
+			global $pop_resourceloader_storagegenerator;
+			$pop_resourceloader_storagegenerator->generate();
+			$pop_resourceloader_generatedfilesstoragemanager->save();
+
+			// Save a new file containing the cached entries (or "abbreviations") from the ResourceLoader
+			PoP_ResourceLoaderProcessorUtils::save_entries();
 		}
 		
 	}

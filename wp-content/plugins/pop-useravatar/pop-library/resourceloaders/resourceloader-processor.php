@@ -85,7 +85,7 @@ class PoP_UserAvatar_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor
 
 			case POP_RESOURCELOADER_FILEUPLOADLOCALE:
 
-				return POP_USERAVATAR_DIR.'/js/locales/fileupload/'.$this->get_filename($resource).'.js';
+				return POP_USERAVATAR_DIR.'/js/locales/fileupload/'.$this->get_filename($resource);
 		}
 
 		return POP_USERAVATAR_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';

@@ -112,6 +112,15 @@ class PoP_Frontend_ServerUtils {
 		return false;
 	}
 
+	public static function skip_bundle_pageswithparams() {
+
+		if (defined('POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS')) {
+			return POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS;
+		}
+
+		return false;
+	}
+
 	public static function get_bundles_chunk_size() {
 
 		if (defined('POP_SERVER_BUNDLECHUNKSIZE')) {
@@ -144,6 +153,14 @@ class PoP_Frontend_ServerUtils {
 		}
 		elseif (PoP_ServerUtils::get_override_configuration('load-resources') === true) {
 			return 'resource';
+		}
+
+		// There are requests that can only work with a specific type
+		// Eg: the AppShell, it must always use 'resource', or otherwise it will need to load extra bundle(group) files, 
+		// making the initial SW pre-fetch heavy, and not allowing to easily create the AppShell for the different thememodes (embed, print)
+		if ($enqueuefile_type = apply_filters('get_enqueuefile_type', '')) {
+
+			return $enqueuefile_type;
 		}
 
 		if (defined('POP_SERVER_ENQUEUEFILESTYPE')) {
@@ -209,9 +226,16 @@ class PoP_Frontend_ServerUtils {
 
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('runtime-js');
-
 		if (!is_null($override)) {
 			return $override;
+		}
+
+		// Even if set as true, there are requests that cannot generate resources on runtime
+		// Eg: the AppShell, or otherwise we must also cache the corresponding /sitemapping/ and /settings/ .js files,
+		// which we can't obtain when generating the service-worker.js file
+		if (apply_filters('generate_resources_on_runtime', false)) {
+
+			return false;
 		}
 
 		if (defined('POP_SERVER_GENERATERESOURCESONRUNTIME')) {

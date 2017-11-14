@@ -98,7 +98,8 @@ class GetPoPDemo_Initialization {
 		$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
 		$bundles_css_folder = $dist_css_folder . '/bundles';
 		
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		// Comment Leo 12/11/2017: always add the bundle instead, until introducing CSS through the resourceLoader
+		if (true || PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
 			wp_register_style('getpop-demo', $bundles_css_folder.'/getpop-demo.bundle.min.css', array('bootstrap'), GETPOPDEMO_VERSION);
 			wp_enqueue_style('getpop-demo');
@@ -121,7 +122,8 @@ class GetPoPDemo_Initialization {
 	function register_combined_app_styles() {
 		
 		// Re-register Styles: decrease amount of requests by combining all .css dependencies into 1 mega file
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		// Comment Leo 12/11/2017: always add the bundle instead, until introducing CSS through the resourceLoader
+		if (true || PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
 			// De-register all dependencies, and add instead a bundle of all of them
 			// wp_dequeue_style('pop-bootstrapprocessors');

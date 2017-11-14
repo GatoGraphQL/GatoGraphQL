@@ -64,7 +64,7 @@ class GD_Template_Processor_ButtonGroupsBase extends GD_Template_ProcessorBase {
 						'title' => $headers_data['titles'][$format],
 						'fontawesome' => $headers_data['icons'][$format],
 					);
-					if (($vars['format'] == $format) || (!$vars['format'] && ($format == $default_active_format))) {
+					if (($vars['format'] == $format) || ((!$vars['format'] || $vars['format'] == POP_VALUES_DEFAULT) && ($format == $default_active_format))) {
 						
 						$header['active'] = true;
 					}
@@ -78,7 +78,7 @@ class GD_Template_Processor_ButtonGroupsBase extends GD_Template_ProcessorBase {
 								'title' => $headers_data['titles'][$subformat],
 								'fontawesome' => $headers_data['icons'][$subformat],
 							);
-							if (($vars['format'] == $subformat) || (!$vars['format'] && ($subformat == $default_active_format))) {
+							if (($vars['format'] == $subformat) || ((!$vars['format'] || $vars['format'] == POP_VALUES_DEFAULT) && ($subformat == $default_active_format))) {
 								
 								$subheader['active'] = true;
 								$header['active'] = true;

@@ -11,8 +11,7 @@ function gd_ure_author_parentpageid_impl($pageid, $author_id = null) {
 
 	if (is_null($author_id)) {
 		$vars = GD_TemplateManager_Utils::get_vars();
-		$author = $vars['global-state']['author']/*global $author*/;
-		$author_id = $author;
+		$author_id = $vars['global-state']['author']/*global $author*/;
 	}
 
 	if (gd_ure_is_organization($author_id)) {

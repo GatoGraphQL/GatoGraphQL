@@ -89,6 +89,13 @@ function gd_ure_getuserrole_hook($role, $user_id) {
 	return gd_ure_getuserrole($user_id);
 }
 
+// Override the generic function with this one
+add_filter('get_the_user_role', 'gd_ure_get_the_user_role', 10, 2);
+function gd_ure_get_the_user_role($role, $user_id) {
+
+	return gd_ure_getuserrole($user_id);
+}
+
 function gd_ure_getuserrole($user_id) {
 
 	if (gd_ure_is_organization($user_id)) {

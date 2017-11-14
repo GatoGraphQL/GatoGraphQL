@@ -40,7 +40,9 @@ class PoP_ResourceLoader_FileReproduction_ResourcesMirrorCode extends PoP_Engine
         foreach ($this->resources as $resource) {
 
             // Get the content for that resource
-            $file = $pop_resourceloaderprocessor_manager->get_asset_path($resource);
+            // Comment Leo 13/11/2017: use get_file_path instead of get_asset_path so that it includes the minified resources
+            // $file = $pop_resourceloaderprocessor_manager->get_asset_path($resource);
+            $file = $pop_resourceloaderprocessor_manager->get_file_path($resource);
             $file_contents = file_get_contents($file);
             if ($file_contents !== false) {
                 $contents[] = $file_contents;

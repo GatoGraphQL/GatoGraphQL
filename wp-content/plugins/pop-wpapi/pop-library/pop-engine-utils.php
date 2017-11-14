@@ -7,11 +7,6 @@
 
 class PoP_WPAPI_Engine_Utils {
 
-	// function __construct() {
-
-	// 	add_filter('GD_TemplateManager_Utils:get_vars', array($this, 'get_vars'));
-	// }
-
 	public static function get_vars($vars) {
 
 		// $global_state = &$vars['global-state'];
@@ -104,5 +99,4 @@ class PoP_WPAPI_Engine_Utils {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-// new PoP_WPAPI_Engine_Utils();
 add_filter('GD_TemplateManager_Utils:get_vars', array('PoP_WPAPI_Engine_Utils', 'get_vars'), 0); // Priority 0: execute immediately, to set the global state for others (eg: PoP_URE_Engine_Utils) to query immediately 

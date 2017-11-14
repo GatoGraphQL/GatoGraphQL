@@ -389,10 +389,10 @@ class GD_Template_Processor_CustomTopLevels extends GD_Template_Processor_TopLev
 				switch ($post->ID) {
 
 					case POP_WPAPI_PAGE_EDITPROFILE:
-						if (gd_ure_is_organization($user_id)) {
+						if (gd_ure_is_organization()) {
 							return get_permalink(POP_URE_POPPROCESSORS_PAGE_EDITPROFILEORGANIZATION);
 						}
-						elseif (gd_ure_is_individual($user_id)) {
+						elseif (gd_ure_is_individual()) {
 							return get_permalink(POP_URE_POPPROCESSORS_PAGE_EDITPROFILEINDIVIDUAL);
 						}
 						break;

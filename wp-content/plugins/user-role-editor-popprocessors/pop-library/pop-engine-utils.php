@@ -7,11 +7,6 @@
 
 class PoP_URE_Engine_Utils {
 
-	// function __construct() {
-
-	// 	add_filter('GD_TemplateManager_Utils:get_vars', array($this, 'get_vars'));
-	// }
-
 	public static function get_vars($vars) {
 
 		// global-state variables already set by PoP_WPAPI
@@ -40,5 +35,4 @@ class PoP_URE_Engine_Utils {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-// new PoP_URE_Engine_Utils();
 add_filter('GD_TemplateManager_Utils:get_vars', array('PoP_URE_Engine_Utils', 'get_vars'));

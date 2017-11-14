@@ -213,10 +213,21 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
 
 				return true;
-
 		}
 
 		return parent::is_defer($resource);
+	}
+	
+	function can_bundle($resource) {
+
+		switch ($resource) {
+			
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
+
+				return false;
+		}
+
+		return parent::can_bundle($resource);
 	}
 	
 	function get_path($resource) {

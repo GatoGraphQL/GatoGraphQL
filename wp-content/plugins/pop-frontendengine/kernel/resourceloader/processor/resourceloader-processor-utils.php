@@ -18,13 +18,13 @@ class PoP_ResourceLoaderProcessorUtils {
 
             self::$initialized = true;
 
-            // Get the already generated abbreviations from the cache
-            global $pop_resourceloader_abbreviationsstorage_manager;
-            if ($pop_resourceloader_abbreviationsstorage_manager->has_cached_abbreviations()) {
+            // Get the already generated entries from the cache
+            global $pop_resourceloader_bundlemappingstoragemanager;
+            if ($pop_resourceloader_bundlemappingstoragemanager->has_cached_entries()) {
 
-                self::$bundle_ids = $pop_resourceloader_abbreviationsstorage_manager->get_bundle_ids();
-                self::$bundlegroup_ids = $pop_resourceloader_abbreviationsstorage_manager->get_bundlegroup_ids();
-                self::$key_ids = $pop_resourceloader_abbreviationsstorage_manager->get_key_ids();
+                self::$bundle_ids = $pop_resourceloader_bundlemappingstoragemanager->get_bundle_ids();
+                self::$bundlegroup_ids = $pop_resourceloader_bundlemappingstoragemanager->get_bundlegroup_ids();
+                self::$key_ids = $pop_resourceloader_bundlemappingstoragemanager->get_key_ids();
 
                 // Start the counter in 1 plus than the elements we already have (actually, the counter should not be needed!)
                 self::$bundle_counter = count(self::$bundle_ids) + 1;
@@ -41,38 +41,44 @@ class PoP_ResourceLoaderProcessorUtils {
         }
     }
 
-    public static function delete_abbreviations() {
+    public static function delete_entries() {
 
-        // Get the already generated abbreviations from the cache
-        global $pop_resourceloader_abbreviationsstorage_manager;
-        $pop_resourceloader_abbreviationsstorage_manager->delete();
+        // Get the already generated entries from the cache
+        global $pop_resourceloader_bundlemappingstoragemanager;
+        $pop_resourceloader_bundlemappingstoragemanager->delete();
 
         // Re-initialize the inner variables
         self::$initialized = false;
         self::init();
     }
 
-    public static function save_abbreviations() {
+    public static function save_entries() {
 
-        // Get the already generated abbreviations from the cache
-        global $pop_resourceloader_abbreviationsstorage_manager;
-        $pop_resourceloader_abbreviationsstorage_manager->save(self::$bundle_ids, self::$bundlegroup_ids, self::$key_ids);
+        // Get the already generated entries from the cache
+        global $pop_resourceloader_bundlemappingstoragemanager;
+        $pop_resourceloader_bundlemappingstoragemanager->save(self::$bundle_ids, self::$bundlegroup_ids, self::$key_ids);
     }
 
-    public static function chunk_resources($resources_set) {
+    // public static function chunk_resources($resources_set) {
+
+    //     // Further divide each array into chunks, to maximize the possibilities of different pages sharing the same bundles
+    //     $chunk_size = PoP_Frontend_ServerUtils::get_bundles_chunk_size();
+    //     $chunked_resources = array();
+    //     foreach ($resources_set as $resources_item) {
+
+    //         $chunked_resources = array_merge(
+    //             $chunked_resources,
+    //             array_chunk($resources_item, $chunk_size)
+    //         );
+    //     }
+
+    //     return $chunked_resources;
+    // }
+    public static function chunk_resources($resources) {
 
         // Further divide each array into chunks, to maximize the possibilities of different pages sharing the same bundles
         $chunk_size = PoP_Frontend_ServerUtils::get_bundles_chunk_size();
-        $chunked_resources = array();
-        foreach ($resources_set as $resources_item) {
-
-            $chunked_resources = array_merge(
-                $chunked_resources,
-                array_chunk($resources_item, $chunk_size)
-            );
-        }
-
-        return $chunked_resources;
+        return array_chunk($resources, $chunk_size);
     }
 
     public static function get_pages_and_formats_added_under_hierarchy($hierarchy) {
@@ -114,10 +120,23 @@ class PoP_ResourceLoaderProcessorUtils {
         return $page_formats;
     }
 
-    public static function add_resources_from_settingsprocessors($fetching_json, &$resources, $template_id, $hierarchy, $ids = array(), $merge = false) {
+    public static function add_resources_from_settingsprocessors($fetching_json, &$resources, $template_id, $hierarchy, $ids = array(), $merge = false, $options = array()) {
 
         // Get all the formats that have been set for page POP_WPAPI_PAGE_ALLCONTENT
         global $gd_template_processor_manager;
+
+        // If we are loading-frame and configured to skip generating the pages with params, then go straight to current vars and nothing else
+        // Pretty much all of them except the page
+        $tab_and_format_hierarchies = array(
+            'home',
+            'tag',
+            'author',
+            'single',
+        );
+        if (in_array($hierarchy, $tab_and_format_hierarchies) && !$fetching_json && PoP_Frontend_ServerUtils::skip_bundle_pageswithparams()) {
+
+            return PoP_ResourceLoaderProcessorUtils::add_resources_from_current_vars($fetching_json, $resources, $template_id, $ids, $merge, array(), $options);
+        }
 
         // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
         $vars = &GD_TemplateManager_Utils::$vars;
@@ -133,7 +152,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 foreach ($formats as $format) {
                     
-                    $options = array();
+                    $item_options = $options;
                     $components = array(
                         'format' => $format,
                     );
@@ -161,10 +180,10 @@ class PoP_ResourceLoaderProcessorUtils {
 
                         // If this tab is the default one, an entry with no tab must also be created
                         if ($page_id == GD_TemplateManager_Utils::get_hierarchy_default_page($hierarchy)) {
-                            $options['is-default-tab'] = true;
+                            $item_options['is-default-tab'] = true;
                         }
                     }
-                    self::add_resources_from_current_vars($fetching_json, $resources, $template_id, $ids, $merge, $components, $options);
+                    self::add_resources_from_current_vars($fetching_json, $resources, $template_id, $ids, $merge, $components, $item_options);
 
                     // Restore the original $vars['layouts']
                     if ($original_layouts) {
@@ -284,20 +303,33 @@ class PoP_ResourceLoaderProcessorUtils {
         // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
         $vars = &GD_TemplateManager_Utils::$vars;
 
+        // Comment Leo 11/11/2017: we can only do $merge = true when doing "fetching-json", because we need to bundle all resources for all different cases for the same URL
+        // However, if doing "loading-frame", then we can't bundle all the cases together, or we will not be able to get back the specific bundle(group)s for the currently visited request
+        // (this is the case when doing PoP_Frontend_ServerUtils::get_enqueuefile_type() == 'bundle' or 'bundlegroup')
+        if (!$fetching_json) {
+
+            $merge = false;
+        }
+
         // IMPORTANT: we must pretend it's 'fetching-json' request, so that it doesn't load the frame files once again, which will be already loaded (PRPL is triggered when clicking on any link => will always be doing ?output=json)
         $original_vars = array();
-        $vars_keys = array(
-            'output',
-            'fetching-json',
-            'fetching-json-settingsdata',
-            'fetching-json-settings',
-            'fetching-json-data',
-            // Variables over which the composition of different blocks depends
-            'format',
-            'tab',
-            'target',
-            // Hierarchy
-            'global-state',
+        $extra_vars = $options['extra-vars'] ?? array();
+        $vars_keys = array_merge(
+            array(
+                'output',
+                'fetching-json',
+                'fetching-json-settingsdata',
+                'fetching-json-settings',
+                'fetching-json-data',
+                // Variables over which the composition of different blocks depends
+                'format',
+                'tab',
+                'target',
+                'module',
+                // Hierarchy
+                'global-state',
+            ),
+            array_unique(array_keys($extra_vars))
         );
         foreach ($vars_keys as $vars_key) {
             $original_vars[$vars_key] = $vars[$vars_key];
@@ -306,7 +338,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Obtain the key under which to add the resources, which is a combination of components 'format', 'tab' and 'target'
         // This code is replicated in function `loadResources` in resourceloader.js
         $params = array();
-        $format = $components['format'] ?? POP_VALUES_DEFAULT;
+        $format = $components['format'] ?? ($fetching_json ? POP_VALUES_DEFAULT : '');
 		$tab = $components['tab'];
         
         // Targets special cases: certain formats (eg: Navigator) are used only from a corresponding target
@@ -341,13 +373,25 @@ class PoP_ResourceLoaderProcessorUtils {
             }
         }
         
-		$params[] = POP_RESOURCELOADERIDENTIFIER_FORMAT.$format;
-		if ($tab) {
-			$params[] = POP_RESOURCELOADERIDENTIFIER_TAB.$tab;
-		}
-		$params[] = POP_RESOURCELOADERIDENTIFIER_TARGET.$target;
+        // If doing JSON, then the key is the combination of the format/tab/target
+        // Then, resources for author => Individual/Organization must be bundled together
+        if ($fetching_json) {
+    		
+            $params[] = POP_RESOURCELOADERIDENTIFIER_FORMAT.$format;
+    		if ($tab) {
+    			$params[] = POP_RESOURCELOADERIDENTIFIER_TAB.$tab;
+    		}
+    		$params[] = POP_RESOURCELOADERIDENTIFIER_TARGET.$target;
 
-		$key = implode(GD_SEPARATOR_RESOURCELOADER, $params);
+    		$key = implode(GD_SEPARATOR_RESOURCELOADER, $params);
+        }
+        // If doing loading_frame, then the page must only hold its own resources, and be stored under its own, unique key
+        // Then, resources for author => Individual/Organization must NOT be bundled together
+        else {
+
+            global $gd_template_cacheprocessor_manager;
+            $cacheprocessor = $gd_template_cacheprocessor_manager->get_processor($toplevel_template_id);
+        }
         
         // Pretend we are in that intended page, by setting the $vars in accordance
         // Comment Leo 07/11/2017: allow to have both $fetching_json and $loading_frame,
@@ -362,6 +406,7 @@ class PoP_ResourceLoaderProcessorUtils {
             $vars['fetching-json'] = false;
             $vars['fetching-json-settingsdata'] = false;
         }
+        $vars['module'] = GD_URLPARAM_MODULE_SETTINGSDATA;
         $vars['fetching-json-settings'] = false;
         $vars['fetching-json-data'] = false;
         $vars['format'] = $format;
@@ -374,7 +419,7 @@ class PoP_ResourceLoaderProcessorUtils {
             GD_TEMPLATE_TOPLEVEL_PAGE => 'page',
             GD_TEMPLATE_TOPLEVEL_SINGLE => 'single',
             GD_TEMPLATE_TOPLEVEL_AUTHOR => 'author',
-            // GD_TEMPLATE_TOPLEVEL_404 => '404',
+            GD_TEMPLATE_TOPLEVEL_404 => '404',
         );
         $hierarchy = $hierarchies[$toplevel_template_id];
         if (!$hierarchy) {
@@ -397,6 +442,13 @@ class PoP_ResourceLoaderProcessorUtils {
             foreach ($ids as $post_id) {
 
                 $vars['global-state']['post'] = get_post($post_id);
+
+                // If doing loading_frame, then the page must only hold its own resources, and be stored under its own, unique key
+                // Then, resources for author => Individual/Organization must NOT be bundled together
+                if (!$fetching_json) {
+
+                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                }
 
                 // For the single hierarchy, we must save the resources under the category path,
                 // for all the categories in the website
@@ -421,6 +473,13 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 $vars['global-state']['post'] = get_post($page_id);
 
+                // If doing loading_frame, then the page must only hold its own resources, and be stored under its own, unique key
+                // Then, resources for author => Individual/Organization must NOT be bundled together
+                if (!$fetching_json) {
+
+                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                }
+
                 $path = trailingslashit(GD_TemplateManager_Utils::get_page_path($page_id));
                 $paths[] = $path;
                 
@@ -436,6 +495,23 @@ class PoP_ResourceLoaderProcessorUtils {
             foreach ($ids as $author) {
                 
                 $vars['global-state']['author'] = $author;
+
+                // Allow to set the extra vars: "source" => "community"/"organization", with the value set under the author id
+                foreach ($extra_vars as $extra_var => $extra_var_id_value) {
+
+                    if (!is_null($extra_var_id_value[$author])) {
+
+                        $vars[$extra_var] = $extra_var_id_value[$author];
+                    }
+                }
+
+                // If doing loading_frame, then the page must only hold its own resources, and be stored under its own, unique key
+                // Then, resources for author => Individual/Organization must NOT be bundled together
+                if (!$fetching_json) {
+
+                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                }
+
                 self::add_resources_from_current_loop($resources, $key, $toplevel_template_id, $merge);
 
                 // Reset the cache
@@ -450,6 +526,14 @@ class PoP_ResourceLoaderProcessorUtils {
                 
                 $vars['global-state']['queried-object'] = get_tag($tag_id);
                 $vars['global-state']['queried-object-id'] = $tag_id;
+
+                // If doing loading_frame, then the page must only hold its own resources, and be stored under its own, unique key
+                // Then, resources for author => Individual/Organization must NOT be bundled together
+                if (!$fetching_json) {
+
+                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                }
+
                 self::add_resources_from_current_loop($resources, $key, $toplevel_template_id, $merge);
 
                 // Reset the cache
@@ -457,6 +541,28 @@ class PoP_ResourceLoaderProcessorUtils {
             }
         }
         elseif ($hierarchy == 'home') {
+
+            // If doing loading_frame, then the page must only hold its own resources, and be stored under its own, unique key
+            // Then, resources for author => Individual/Organization must NOT be bundled together
+            if (!$fetching_json) {
+
+                $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+            }
+        
+            // Calculate and save the resources
+            $resources[$key] = self::get_resources_from_current_vars($toplevel_template_id);
+
+            // Reset the cache
+            $gd_template_processor_runtimecache->delete_cache();
+        }
+        elseif ($hierarchy == '404') {
+
+            // If doing loading_frame, then the page must only hold its own resources, and be stored under its own, unique key
+            // Then, resources for author => Individual/Organization must NOT be bundled together
+            if (!$fetching_json) {
+
+                $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+            }
         
             // Calculate and save the resources
             $resources[$key] = self::get_resources_from_current_vars($toplevel_template_id);
@@ -465,82 +571,87 @@ class PoP_ResourceLoaderProcessorUtils {
             $gd_template_processor_runtimecache->delete_cache();
         }
 
-        $flat_hierarchies = array(
-            'home', 
-            'tag', 
-            'author',
-        );
-        $path_hierarchies = array(
-            'single', 
-            'page',
-        );
+        // If doing JSON, then we may need to duplicate entries. 
+        // For loading_frame, no need
+        if ($fetching_json) {
 
-        // For hierarchies where can have a tab, if the tab is the default one, then also
-        // add an entry without the tab (we can't add t:default in JS since we don't know which is the default tab for each hierarchy, just from the URL pattern)
-        $notab_hierarchies = array(
-            'author', 
-            'single', 
-            'tag',
-        );
+            $flat_hierarchies = array(
+                'home', 
+                'tag', 
+                'author',
+            );
+            $path_hierarchies = array(
+                'single', 
+                'page',
+            );
 
-        $duplicate_notab = in_array($hierarchy, $notab_hierarchies) && $options['is-default-tab'];
-        if ($duplicate_notab) {
+            // For hierarchies where can have a tab, if the tab is the default one, then also
+            // add an entry without the tab (we can't add t:default in JS since we don't know which is the default tab for each hierarchy, just from the URL pattern)
+            $notab_hierarchies = array(
+                'author', 
+                'single', 
+                'tag',
+            );
 
-            // Flat hierarchies: saved under $resources
-            // Non-flat (eg: single): saved under $resources[$path] for each $path
-            $notab_params = $params;
-            array_splice($notab_params, array_search(POP_RESOURCELOADERIDENTIFIER_TAB.$tab, $notab_params), 1);
-            $notab_key = implode(GD_SEPARATOR_RESOURCELOADER, $notab_params);
-
-            if (in_array($hierarchy, $flat_hierarchies)) {
-
-                $resources[$notab_key] = $resources[$key];
-            }
-            else {
-
-                foreach ($paths as $path) {
-
-                    $resources[$path][$notab_key] = $resources[$path][$key];
-                }
-            }
-        }
-
-        // If the format was among navigator, addons, etc, the link will actually not have the format parameter,
-        // it will be default. So duplicate the entry, making it for the default also
-        if ($duplicate_as_default_format) {
-
-            $defaultformat_params = $params;
-            $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.POP_VALUES_DEFAULT;
-            $defaultformat_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_params);
-
-            if (in_array($hierarchy, $flat_hierarchies)) {
-
-                $resources[$defaultformat_key] = $resources[$key];
-            }
-            elseif (in_array($hierarchy, $path_hierarchies)) {
-
-                foreach ($paths as $path) {
-
-                    $resources[$path][$defaultformat_key] = $resources[$path][$key];
-                }
-            }
-
+            $duplicate_notab = in_array($hierarchy, $notab_hierarchies) && $options['is-default-tab'];
             if ($duplicate_notab) {
 
-                // If also duplicate, add the same entry without the tab
-                $defaultformat_notab_params = $notab_params;
-                $defaultformat_notab_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.POP_VALUES_DEFAULT;
-                $defaultformat_notab_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_notab_params);
+                // Flat hierarchies: saved under $resources
+                // Non-flat (eg: single): saved under $resources[$path] for each $path
+                $notab_params = $params;
+                array_splice($notab_params, array_search(POP_RESOURCELOADERIDENTIFIER_TAB.$tab, $notab_params), 1);
+                $notab_key = implode(GD_SEPARATOR_RESOURCELOADER, $notab_params);
 
                 if (in_array($hierarchy, $flat_hierarchies)) {
 
-                    $resources[$defaultformat_notab_key] = $resources[$key];
+                    $resources[$notab_key] = $resources[$key];
                 }
                 else {
 
                     foreach ($paths as $path) {
 
-                        $resources[$path][$defaultformat_notab_key] = $resources[$path][$key];
+                        $resources[$path][$notab_key] = $resources[$path][$key];
+                    }
+                }
+            }
+
+            // If the format was among navigator, addons, etc, the link will actually not have the format parameter,
+            // it will be default. So duplicate the entry, making it for the default also
+            if ($duplicate_as_default_format) {
+
+                $defaultformat_params = $params;
+                $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.POP_VALUES_DEFAULT;
+                $defaultformat_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_params);
+
+                if (in_array($hierarchy, $flat_hierarchies)) {
+
+                    $resources[$defaultformat_key] = $resources[$key];
+                }
+                elseif (in_array($hierarchy, $path_hierarchies)) {
+
+                    foreach ($paths as $path) {
+
+                        $resources[$path][$defaultformat_key] = $resources[$path][$key];
+                    }
+                }
+
+                if ($duplicate_notab) {
+
+                    // If also duplicate, add the same entry without the tab
+                    $defaultformat_notab_params = $notab_params;
+                    $defaultformat_notab_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.POP_VALUES_DEFAULT;
+                    $defaultformat_notab_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_notab_params);
+
+                    if (in_array($hierarchy, $flat_hierarchies)) {
+
+                        $resources[$defaultformat_notab_key] = $resources[$key];
+                    }
+                    else {
+
+                        foreach ($paths as $path) {
+
+                            $resources[$path][$defaultformat_notab_key] = $resources[$path][$key];
+                        }
                     }
                 }
             }

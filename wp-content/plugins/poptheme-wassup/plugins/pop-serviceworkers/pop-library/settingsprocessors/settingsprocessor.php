@@ -31,6 +31,10 @@ class PoPTheme_Wassup_PoPSW_Template_SettingsProcessor extends GD_Template_Setti
 		return parent::is_appshell($hierarchy);
 	}
 
+	// Comment Leo 14/11/2017: no need to comment it anymore, since making the AppShell always be loading using 'resource',
+	// Then we don't need to obtain its bundle(group) files, we just load all individual resources directly
+	// // Comment Leo 13/11/2017: The AppShell page cannot be marked as for internal use, or
+	// // we won't be able to generate the bundle(group)s to load it
 	function is_for_internal_use($hierarchy) {
 
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {

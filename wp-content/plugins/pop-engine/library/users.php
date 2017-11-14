@@ -44,3 +44,11 @@ function get_user_roles($user_id) {
     
     return $user_roles;
 };
+
+function get_the_user_role($user_id) {
+
+	$roles = get_user_roles($user_id);
+
+	// Allow URE to override this function
+	return apply_filters('get_the_user_role', $roles[0], $user_id);
+}

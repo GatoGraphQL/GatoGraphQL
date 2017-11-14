@@ -7,7 +7,7 @@
   font-family: 'Rockwell';
   src: url('../../fonts/Rockwell.eot');
   src: local('Rockwell Regular'), local('Rockwell'), url('../../fonts/Rockwell.ttf') format('truetype');
-  font-display: fallback;
+  font-display: optional;
 } 
 
 @media (min-width: 768px) {

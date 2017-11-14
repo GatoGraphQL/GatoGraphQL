@@ -112,7 +112,7 @@ class GD_Template_CacheProcessor {
 
 				// Author: depends on its role
 				$author = $vars['global-state']['author']/*global $author*/;
-				$filename = 'author_'.str_replace('-', '', gd_ure_getuserrole($author));
+				$filename = 'author_'.str_replace('-', '', get_the_user_role($author));
 				// return $this->add_vars($filename);
 				break;
 

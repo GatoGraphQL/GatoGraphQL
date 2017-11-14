@@ -164,7 +164,8 @@ class PoPTheme_Wassup_Initialization {
 		 * Local Libraries (enqueue first)
 		 ----------------------------- */
 
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		// Comment Leo 12/11/2017: always add the bundle instead, until introducing CSS through the resourceLoader
+		if (true || PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
 			wp_register_style('poptheme-wassup', $bundles_css_folder . '/poptheme-wassup.bundle.min.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
 			wp_enqueue_style('poptheme-wassup');

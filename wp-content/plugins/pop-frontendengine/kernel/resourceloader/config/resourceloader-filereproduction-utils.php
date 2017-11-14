@@ -42,8 +42,18 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 'PoP_ResourceLoader_FileReproduction_Config:js-resources:tag',
                 array(),
                 $fetching_json
-            )
+            ),
         );
+        // 404: it only makes sense to compute it for "loading-frame". 
+        // For "fetching-json", it will never be linked to
+        if (!$fetching_json) {
+            
+            $flat_js_resources['404'] = apply_filters(
+                'PoP_ResourceLoader_FileReproduction_Config:js-resources:404',
+                array(),
+                $fetching_json
+            );
+        }
         $path_js_resources = array(
             'single' => apply_filters(
                 'PoP_ResourceLoader_FileReproduction_Config:js-resources:single',
@@ -115,7 +125,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                     }
                 }
 
-                $resources_set = PoP_ResourceLoaderProcessorUtils::chunk_resources(array($resources));
+                $resources_set = PoP_ResourceLoaderProcessorUtils::chunk_resources($resources);
 
                 $flat_js_resourcebundles[$hierarchy][$key] = array();
                 foreach ($resources_set as $resources_item) {
@@ -158,7 +168,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                             continue;
                         }
                     }
-                    $resources_set = PoP_ResourceLoaderProcessorUtils::chunk_resources(array($resources));
+                    $resources_set = PoP_ResourceLoaderProcessorUtils::chunk_resources($resources);
                     $path_js_resourcebundles[$hierarchy][$path][$key] = array();
                     foreach ($resources_set as $resources_item) {
                         $resources_item = array_unique(array_values($resources_item));

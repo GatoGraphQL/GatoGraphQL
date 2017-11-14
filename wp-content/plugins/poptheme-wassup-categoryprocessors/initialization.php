@@ -38,7 +38,8 @@ class PoPTheme_Wassup_CategoryProcessors_Initialization {
 		$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
 		$bundles_css_folder = $dist_css_folder . '/bundles';
 
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		// Comment Leo 12/11/2017: always add the bundle instead, until introducing CSS through the resourceLoader
+		if (true || PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
 			wp_register_style('poptheme-wassup-categoryprocessors', $bundles_css_folder . '/poptheme-wassup-categoryprocessors.bundle.min.css', array('bootstrap'), POPTHEME_WASSUP_CATEGORYPROCESSORS_VERSION);
 			wp_enqueue_style('poptheme-wassup-categoryprocessors');
