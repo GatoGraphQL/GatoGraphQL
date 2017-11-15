@@ -246,12 +246,14 @@ class PoP_ResourceLoaderProcessor_Manager {
 					$canbundle_resources
 				));
 				// }
-			}	
-			else {
-				
-				// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
-				$this->first_script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[0]);
 			}
+		}	
+
+		// The first script will be a resource, if either we are loading resources, or a bundle(group) file does not exist then use the fallback mechanism
+		if (!$loading_bundle || $fallback) {
+			
+			// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+			$this->first_script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[0]);
 		}
 
 		// Enqueue either all the resources, or those who can not be bundled
