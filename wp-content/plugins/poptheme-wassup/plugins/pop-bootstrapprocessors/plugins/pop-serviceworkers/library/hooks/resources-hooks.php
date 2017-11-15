@@ -36,9 +36,13 @@ class PoPTheme_Wassup_Core_ServiceWorkers_Hooks_Resources {
 
                 $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.eot';
                 $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.svg';
-                $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.ttf';
-                $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.woff';
-                $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.woff2';
+
+                // Comment Leo 16/11/2017: These files should be added to the Service Workers precache list, however if so we get JS error:
+                // The FetchEvent for "https://assets.sdg-sse.org/wp-content/plugins/pop-bootstrapprocessors/css/includes/fonts/glyphicons-halflings-regular.woff" resulted in a network error response: an "opaque" response was used for a request whose type is not no-cors
+                // And it just doesn't work! Even if adding mode: "no-cors" as recommended...
+                // $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.ttf';
+                // $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.woff';
+                // $precache[] = POP_BOOTSTRAPPROCESSORS_URI.'/css/includes/fonts/glyphicons-halflings-regular.woff2';
             }
         }
 

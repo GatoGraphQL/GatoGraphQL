@@ -121,11 +121,13 @@ self.addEventListener('install', event => {
   function onInstall(event, opts) {
     
     var resourceTypes = ['static', 'json', 'html'];
+    var fontExtensions = ['woff', 'woff2', 'ttf'];
     // Taken from https://brandonrozek.com/2015/11/service-workers/
     return Promise.all(resourceTypes.map(function(resourceType) {
       return caches.open(cacheName(resourceType, opts)).then(function(cache) {
         return Promise.all(opts.cacheItems[resourceType].map(function(url) {
-          return fetch(url, (new URL(url)).origin === self.location.origin ? {} : {mode: 'no-cors'}).then(function(response) {
+          // Use No Cors fetch mode if either: it comes from another domain, or it's a font file
+          return fetch(url, ((new URL(url)).origin !== self.location.origin || (resourceType == 'static' && fontExtensions.some(ext => (new URL(url)).pathname.endsWith('.'+ext)))) ? {mode: 'no-cors'} : {}).then(function(response) {
             return cache.put(url, response.clone());
           });
         }))
@@ -479,6 +481,12 @@ self.addEventListener('fetch', event => {
 
     // Allow to modify the request, fetching content from a different URL
     request = getRequest(request, opts);
+    // // Use No Cors to fetch font files
+    // var fontExtensions = ['woff', 'woff2', 'ttf'];
+    // if (resourceType == 'static' && fontExtensions.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext))) {
+    //   request = new Request(request.url, {mode: 'no-cors'});
+    // }
+
     var fetchOpts = {};
     // var origin = (new URL(request.url)).origin;
     // if (opts.origins.indexOf(origin) > -1) {
