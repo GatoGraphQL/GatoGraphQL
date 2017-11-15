@@ -1,3 +1,4 @@
+"use strict";
 // Taken from https://stackoverflow.com/questions/6941533/get-protocol-domain-and-port-from-url
 function getDomain(url) {
 

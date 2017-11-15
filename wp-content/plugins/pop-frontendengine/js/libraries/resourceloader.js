@@ -1,3 +1,4 @@
+"use strict";
 // This function are called as a callback to load_scripts, so they lose the context of who 't' is
 // So then place them outside the popResourceLoader structure
 function markResourceAsLoaded(url, state) {

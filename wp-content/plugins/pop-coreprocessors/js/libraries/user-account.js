@@ -1,3 +1,4 @@
+"use strict";
 (function($){
 window.popUserAccount = {
 
@@ -317,7 +318,7 @@ window.popUserAccount = {
 		var userInfo = topLevelFeedback[M.DATALOAD_USER];
 		if (typeof userInfo != 'undefined') {
 
-			var loggedin, id, name, avatar, url;
+			var loggedin, id, name, avatar, url, roles, userattributes;
 			loggedin = userInfo[M.DATALOAD_USER_LOGGEDIN];
 			id = userInfo[M.DATALOAD_USER_ID];
 			name = userInfo[M.DATALOAD_USER_NAME];

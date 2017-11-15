@@ -1,3 +1,4 @@
+"use strict";
 // Handlebars.registerHelper('breaklines', function(text) {
 //     text = Handlebars.Utils.escapeExpression(text);
 //     text = text.toString();
@@ -134,7 +135,7 @@ Handlebars.registerHelper('mod', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
         throw new Error("Handlebars Helper equal needs 2 parameters");
         
-    offset = options.hash.offset || 0;
+    var offset = options.hash.offset || 0;
             
     if( (lvalue + offset) % rvalue === 0 ) {
         return options.fn(this);

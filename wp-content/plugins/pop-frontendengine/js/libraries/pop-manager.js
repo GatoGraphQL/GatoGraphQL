@@ -1,3 +1,4 @@
+"use strict";
 (function($){
 window.popManager = {
 
@@ -3631,7 +3632,7 @@ window.popManager = {
 		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, templateName);
 		options = options || {};
 
-		targetContext = targetConfiguration;
+		var targetContext = targetConfiguration;
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
 		var templatePath = that.getTemplatePath(domain, pageSection, target, templateName);
@@ -3813,7 +3814,7 @@ window.popManager = {
 		var multidomain_urls = that.getRuntimeSettings(domain, pageSection, block, 'query-multidomain-urls');
 		$.each(multidomain_urls, function(index, query_url) {
 
-			query_url_domain = getDomain(query_url);
+			var query_url_domain = getDomain(query_url);
 			runtimeMempage['query-multidomain-urls'][query_url_domain] = query_url;
 			runtimeMempage['query-state'].domain[query_url_domain] = $.extend(that.getBlockDefaultMultiDomainParams(), memory['query-state'].domain[pssId][bsId]);
 		})

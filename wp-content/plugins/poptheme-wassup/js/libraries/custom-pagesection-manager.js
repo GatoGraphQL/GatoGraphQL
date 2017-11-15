@@ -1,3 +1,4 @@
+"use strict";
 // These functions are called from the event handler, so they lose the context of who 't' is
 // This is needed so that we can call jQuery.off on them
 // So then place them outside the popPageSectionManager structure

@@ -1,3 +1,4 @@
+"use strict";
 (function($){
 window.popMap = {
 	
@@ -310,7 +311,7 @@ window.popMap = {
 		// Restore the icon for all open markers
 		$.each(markersInfo.markersOpen, function(index, markerId) {
 
-			markerPos = markersInfo.markersPos[markerId];
+			var markerPos = markersInfo.markersPos[markerId];
 			if (gMap.markers[markerPos]) {
 				gMap.markers[markerPos].setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
 			}
@@ -359,7 +360,7 @@ window.popMap = {
 		// Change the icon to a different one
 		$.each(markerIds, function(index, markerId) {
 
-			markerPos = markersInfo.markersPos[markerId];
+			var markerPos = markersInfo.markersPos[markerId];
 
 			// Comment Leo 10/09/2015: sometimes this produces null on gMap.markers[markerPos] (I don't know why it happens), so just in case check for this condition
 			// so it doesn't produce a js error (eg where it has happened: https://www.mesym.com/u/mesym/?tab=members&format=map)
@@ -371,7 +372,7 @@ window.popMap = {
 		// If only 1 location, then "click" on it
 		if (markerIds.length == 1) {
 
-			markerPos = markersInfo.markersPos[markerIds[0]];
+			var markerPos = markersInfo.markersPos[markerIds[0]];
 			// Comment Leo 10/09/2015: related to the comment above, ask for this condition just in case, however there should be no need, this should always be true
 			if (gMap.markers[markerPos]) {
 				// If there is no connection to Internet, object 'google' will not be there
@@ -522,7 +523,7 @@ window.popMap = {
 		var markersInfo = that.getMarkersInfo(pageSection, block, map);
 
 		// No need to remove the marker from the map, or update markersPos, because .setMap(null) simply hides the marker, not delete it
-		markerPos = markersInfo.markersPos[markerId];
+		var markerPos = markersInfo.markersPos[markerId];
 
 		if (gMap.markers[markerPos]) {
 			gMap.markers[markerPos].setMap(null);

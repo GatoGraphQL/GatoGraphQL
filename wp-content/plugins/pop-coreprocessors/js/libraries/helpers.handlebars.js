@@ -1,3 +1,4 @@
+"use strict";
 Handlebars.registerHelper('latestCountTargets', function(itemObject, options) {
 
     // Build the notification prompt targets, based on the data on the itemObject
