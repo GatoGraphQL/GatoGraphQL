@@ -109,7 +109,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 	function enqueue_resources($bundlegroup_ids, $bundle_ids, $resources/*, $remove_bundled_resources = true*/) {
 
-		$added_scripts = array();
+		// $added_scripts = array();
 
 		// Enqueue the resources/bundles/bundlegroups
 		// In order to calculate the bundle(group) ids, we need to substract first those resources which do not can_bundle, since they will not be inside the bundle files
@@ -127,6 +127,9 @@ class PoP_ResourceLoaderProcessor_Manager {
 				'async' => "async='async'", 
 				'defer' => "defer='defer'",
 			);
+
+			$fallback = false;
+			$scripts_properties = array();
 			
 			// Enqueue the bundleGroups
 			if ($enqueuefile_type == 'bundlegroup') {
@@ -153,14 +156,21 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 							$script = 'pop-bundlegroup-'.$bundleGroupId.($attribute ? '-'.$attribute : '');
-							wp_register_script($script, $pop_resourceloader_bundlegroupfilegenerator->get_fileurl(), array(), $version, true);
-							wp_enqueue_script($script);
+							$scripts_properties[] = array(
+								'script' => $script,
+								'file-url' => $pop_resourceloader_bundlegroupfilegenerator->get_fileurl(),
+								'html-attributes' => $htmltag_attributes,
+							);
 
-							if ($htmltag_attributes) {
-								$this->htmltag_attributes[$script] = $htmltag_attributes;
-							}
+							// $added_scripts[] = $script;
+						}
+						elseif (!$attribute) {
 
-							$added_scripts[] = $script;
+							// If any normal bundle(group) does not exist, fallback on loading resources
+							$fallback = true;
+
+							// We can skip iterating
+							break;
 						}
 					}
 				}
@@ -183,23 +193,50 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 							$script = 'pop-bundle-'.$bundleId.($attribute ? '-'.$attribute : '');
-							wp_register_script($script, $pop_resourceloader_bundlefilegenerator->get_fileurl(), array(), $version, true);
-							wp_enqueue_script($script);
+							$scripts_properties[] = array(
+								'script' => $script,
+								'file-url' => $pop_resourceloader_bundlefilegenerator->get_fileurl(),
+								'html-attributes' => $htmltag_attributes,
+							);
 
-							if ($htmltag_attributes) {
-								$this->htmltag_attributes[$script] = $htmltag_attributes;
-							}
+							// $added_scripts[] = $script;
+						}
+						elseif (!$attribute) {
 
-							$added_scripts[] = $script;
+							// If any normal bundle(group) does not exist, fallback on loading resources
+							$fallback = true;
+
+							// We can skip iterating
+							break;
 						}
 					}
 				}
 			}
 
-			// The bundlegroup file may not exist (eg: when using flag POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS and loading a page with parameters)
-			// In that case, $added_scripts will be empty. Then fallback on loading resources, not bundle(group)s
-			// $remove_bundled_resources allows the service-worker.js file to also register all individual files, so they are pre-cached
-			if (!empty($added_scripts)/* && $remove_bundled_resources*/) {
+			// Enqueue all the added scripts, if all of the needed bundle(group)s exist
+			if (!$fallback) {
+
+				// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+				$this->first_script = $scripts_properties[0]['script'];
+			
+				foreach ($scripts_properties as $script_properties) {
+
+					$script = $script_properties['script'];
+					$file_url = $script_properties['file-url'];
+					$htmltag_attributes = $script_properties['html-attributes'];
+
+					wp_register_script($script, $file_url, array(), $version, true);
+					wp_enqueue_script($script);
+
+					if ($htmltag_attributes) {
+						$this->htmltag_attributes[$script] = $htmltag_attributes;
+					}
+				}
+
+				// The bundlegroup file may not exist (eg: when using flag POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS and loading a page with parameters)
+				// In that case, $added_scripts will be empty. Then fallback on loading resources, not bundle(group)s
+				// $remove_bundled_resources allows the service-worker.js file to also register all individual files, so they are pre-cached
+				// if (!empty($added_scripts)/* && $remove_bundled_resources*/) {
 
 				// For bundles and bundlegroups, those requests that can be bundled will be inside the bundle, so remove from the resources
 				global $pop_resourceloaderprocessor_manager;
@@ -208,6 +245,12 @@ class PoP_ResourceLoaderProcessor_Manager {
 					$resources,
 					$canbundle_resources
 				));
+				// }
+			}	
+			else {
+				
+				// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+				$this->first_script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[0]);
 			}
 		}
 
@@ -230,11 +273,11 @@ class PoP_ResourceLoaderProcessor_Manager {
 			wp_register_script($script, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
 			wp_enqueue_script($script);
 
-			$added_scripts[] = $script;
+			// $added_scripts[] = $script;
 		}
 
 		// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
-		$this->first_script = $added_scripts[0];
+		// $this->first_script = $added_scripts[0];
 	}
 
 	function prepare_htmltag_attributes() {
