@@ -115,6 +115,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 		// In order to calculate the bundle(group) ids, we need to substract first those resources which do not can_bundle, since they will not be inside the bundle files
 		$enqueuefile_type = PoP_Frontend_ServerUtils::get_enqueuefile_type();
 		$loading_bundle = $enqueuefile_type == 'bundlegroup' || $enqueuefile_type == 'bundle';
+		$bundlescripts_properties = array();
 		if ($loading_bundle) {
 
 			$version = pop_version();
@@ -129,7 +130,6 @@ class PoP_ResourceLoaderProcessor_Manager {
 			);
 
 			$fallback = false;
-			$scripts_properties = array();
 			
 			// Enqueue the bundleGroups
 			if ($enqueuefile_type == 'bundlegroup') {
@@ -156,7 +156,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 							$script = 'pop-bundlegroup-'.$bundleGroupId.($attribute ? '-'.$attribute : '');
-							$scripts_properties[] = array(
+							$bundlescripts_properties[] = array(
 								'script' => $script,
 								'file-url' => $pop_resourceloader_bundlegroupfilegenerator->get_fileurl(),
 								'html-attributes' => $htmltag_attributes,
@@ -193,7 +193,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 							$script = 'pop-bundle-'.$bundleId.($attribute ? '-'.$attribute : '');
-							$scripts_properties[] = array(
+							$bundlescripts_properties[] = array(
 								'script' => $script,
 								'file-url' => $pop_resourceloader_bundlefilegenerator->get_fileurl(),
 								'html-attributes' => $htmltag_attributes,
@@ -216,22 +216,8 @@ class PoP_ResourceLoaderProcessor_Manager {
 			// Enqueue all the added scripts, if all of the needed bundle(group)s exist
 			if (!$fallback) {
 
-				// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
-				$this->first_script = $scripts_properties[0]['script'];
-			
-				foreach ($scripts_properties as $script_properties) {
-
-					$script = $script_properties['script'];
-					$file_url = $script_properties['file-url'];
-					$htmltag_attributes = $script_properties['html-attributes'];
-
-					wp_register_script($script, $file_url, array(), $version, true);
-					wp_enqueue_script($script);
-
-					if ($htmltag_attributes) {
-						$this->htmltag_attributes[$script] = $htmltag_attributes;
-					}
-				}
+				// // Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+				// $this->first_script = $bundlescripts_properties[0]['script'];
 
 				// The bundlegroup file may not exist (eg: when using flag POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS and loading a page with parameters)
 				// In that case, $added_scripts will be empty. Then fallback on loading resources, not bundle(group)s
@@ -249,14 +235,26 @@ class PoP_ResourceLoaderProcessor_Manager {
 			}
 		}	
 
-		// The first script will be a resource, if either we are loading resources, or a bundle(group) file does not exist then use the fallback mechanism
-		if (!$loading_bundle || $fallback) {
+		// // The first script will be a resource, if either we are loading resources, or a bundle(group) file does not exist then use the fallback mechanism
+		// if (!$loading_bundle || $fallback) {
 			
-			// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+		// 	// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+		// 	$this->first_script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[0]);
+		// }
+
+		// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
+		if ($resources) {
+
 			$this->first_script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resources[0]);
 		}
+		elseif ($bundlescripts_properties) {
 
+			$this->first_script = $bundlescripts_properties[0]['script'];
+		}
+		
 		// Enqueue either all the resources, or those who can not be bundled
+		// Do it first, because these resources are most likely to be depended-by the scripts in the bundle
+		// (including all external resources, when doing POP_SERVER_ACCESSEXTERNALCDNRESOURCES = true)
 		foreach ($resources as $resource) {
 
 			// Enqueue the resource
@@ -276,6 +274,21 @@ class PoP_ResourceLoaderProcessor_Manager {
 			wp_enqueue_script($script);
 
 			// $added_scripts[] = $script;
+		}
+
+		// Enqueue all the added scripts, if all of the needed bundle(group)s exist
+		foreach ($bundlescripts_properties as $script_properties) {
+
+			$script = $script_properties['script'];
+			$file_url = $script_properties['file-url'];
+			$htmltag_attributes = $script_properties['html-attributes'];
+
+			wp_register_script($script, $file_url, array(), $version, true);
+			wp_enqueue_script($script);
+
+			if ($htmltag_attributes) {
+				$this->htmltag_attributes[$script] = $htmltag_attributes;
+			}
 		}
 
 		// Save the name for the first enqueued resource/bundle/bundleGroup, to localize it
