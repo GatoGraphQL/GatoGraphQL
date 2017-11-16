@@ -35,10 +35,13 @@ window.popTopLevelJSON = {
 	init : function() {
 
 		var that = this;
-		$(document).on('initTopLevelJson', function(e, json) {
+		if (M.RUNTIMEJS) {
+			
+			$(document).on('initTopLevelJson', function(e, json) {
 
-			$.extend(json, that.getProperties());	
-		});
+				$.extend(json, that.getProperties());	
+			});
+		}
 	}
 };
 })(jQuery);

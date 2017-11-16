@@ -119,11 +119,13 @@ class PoPFrontend_Initialization {
 				wp_register_script('pop-interceptors', $libraries_js_folder.'/interceptors'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
 				wp_enqueue_script('pop-interceptors');
 
-				if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+				// Comment Leo 17.11.2017: we load the script always, so we can make the test with/out ?config=runtime-js and it will not fail
+				// (Otherwise it fails because the configuration is cached but the list of modules to load is different)
+				// if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
 					
 					wp_register_script('pop-topleveljson', $libraries_js_folder.'/topleveljson'.$suffix.'.js', array(), POP_FRONTENDENGINE_VERSION, true);
 					wp_enqueue_script('pop-topleveljson');
-				}
+				// }
 
 				// Sortable needed for the Typeahead
 				wp_register_script('pop', $libraries_js_folder.'/pop-manager'.$suffix.'.js', array('jquery', 'pop-utils', 'pop-pagesection-manager', 'pop-history', 'pop-interceptors', 'pop-jslibrary-manager', 'pop-jsruntime-manager', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);
@@ -199,6 +201,7 @@ class PoPFrontend_Initialization {
 			'LOCALE' => $locale,
 			'API_URLPARAMS' => $api_urlparams,
 			'USE_SW' => (PoP_Frontend_ServerUtils::use_serviceworkers() ? true : ''),
+			'RUNTIMEJS' => (PoP_Frontend_ServerUtils::generate_resources_on_runtime() ? true : ''),
 			'COMPACT_JS_KEYS' => (PoP_ServerUtils::compact_js_keys() ? true : ''),
 			'USELOCALSTORAGE' => (PoP_Frontend_ServerUtils::use_local_storage() ? true : ''),
 			'USESERVERSIDERENDERING' => (PoP_Frontend_ServerUtils::use_serverside_rendering() ? true : ''),
