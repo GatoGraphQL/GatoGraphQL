@@ -92,7 +92,7 @@ window.popServiceWorkers = {
 
 		if (options['js-args']) {
 			
-			anchor = options['js-args'].relatedTarget;
+			var anchor = options['js-args'].relatedTarget;
 
 			if (anchor && anchor.data('sw-networkfirst')) {
 				options.params = options.params || {};
