@@ -67,6 +67,36 @@ class PoP_Frontend_ServerUtils {
 		return true;
 	}
 
+	public static function remove_database_from_output() {
+
+		// We only remove the code in the server-side rendering, when first loading the website. If this is not the case,
+		// then there is no need for this functionality
+		if (!GD_TemplateManager_Utils::loading_frame() || !PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+
+			return false;
+		}
+
+		// Allow to override the configuration
+		$override = PoP_ServerUtils::get_override_configuration('remove-db');
+		if (!is_null($override)) {
+			return $override;
+		}
+
+		// Allow specific pages to set this value to false
+		// Eg: the Events Calendar, which requires the DB data to add events to the calendar all on runtime
+		// (until we can produce the HTML for the calendar also on the server-side. Check: https://github.com/leoloso/PoP/issues/59)
+		if (apply_filters('keep_database_in_output', false)) {
+
+			return false;
+		}
+
+		if (defined('POP_SERVER_REMOVEDATABASEFROMOUTPUT')) {
+			return POP_SERVER_REMOVEDATABASEFROMOUTPUT;
+		}
+
+		return true;
+	}
+
 	public static function use_code_splitting() {
 
 		// Allow to override the configuration
@@ -181,7 +211,7 @@ class PoP_Frontend_ServerUtils {
 		return 'resource';
 	}
 
-	public static function use_fastboot() {
+	public static function scripts_after_html() {
 
 		if (!self::use_serverside_rendering()) {
 
@@ -189,16 +219,31 @@ class PoP_Frontend_ServerUtils {
 		}
 
 		// Allow to override the configuration
-		$override = PoP_ServerUtils::get_override_configuration('fastboot');
+		$override = PoP_ServerUtils::get_override_configuration('scripts-end');
 		if (!is_null($override)) {
 			return $override;
 		}
 
-		if (defined('POP_SERVER_USEFASTBOOT')) {
-			return POP_SERVER_USEFASTBOOT;
+		if (defined('POP_SERVER_SCRIPTSAFTERHTML')) {
+			return POP_SERVER_SCRIPTSAFTERHTML;
 		}
 
 		return true;
+	}
+
+	public static function use_appshell() {
+
+		// Allow to override the configuration
+		$override = PoP_ServerUtils::get_override_configuration('appshell');
+		if (!is_null($override)) {
+			return $override;
+		}
+
+		if (defined('POP_SERVER_USEAPPSHELL')) {
+			return POP_SERVER_USEAPPSHELL;
+		}
+
+		return false;
 	}
 
 	public static function use_bundled_resources() {

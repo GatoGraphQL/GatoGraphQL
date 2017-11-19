@@ -1602,7 +1602,9 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 				// we are not sending the database anymore (to decrease output size). However the calendar
 				// is still rendered in the front-end using javascript, hence it won't work since the data is not sent anymore.
 				// To fix this, simply make the calendars lazy-load, until the calendar html code is rendered on the backend
-				if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+				// Comment Leo 19/11/2017: this can only take place when playing with config "param", 
+				// since adding a hook to make the Calendar page/tag/author not remove the HTML code (hook "keep_database_in_output")
+				if (PoP_Frontend_ServerUtils::remove_database_from_output()) {
 					
 					$this->add_att($template_id, $atts, 'content-loaded', false);
 				}
