@@ -9,9 +9,18 @@ class PoP_WPAPI_Engine_Utils {
 
 	public static function get_vars($vars) {
 
-		// $global_state = &$vars['global-state'];
 		// Template hierarchy
-		if (is_home()) {
+		// Comment Leo 19/11/2017: when first loading the website, ask if we are using the AppShell before anything else,
+		// in which case it will always be 'page' and the $post->ID set to the corresponding AppShell page ID
+		if (GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_appshell()) {
+			
+			// Comment Leo 19/11/2017: page ID POP_FRONTENDENGINE_PAGE_APPSHELL must be set at this plugin level, not on pop-serviceworkers
+			global $post;
+			$vars['global-state']['hierarchy'] = 'page';
+			$vars['global-state']['post'] = get_post(POP_FRONTENDENGINE_PAGE_APPSHELL);
+			$vars['global-state']['is-page'] = true;
+		}
+		elseif (is_home()) {
 
 			$vars['global-state']['hierarchy'] = 'home';
 			$vars['global-state']['is-home'] = true;
