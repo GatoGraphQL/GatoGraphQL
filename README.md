@@ -92,6 +92,8 @@ Because the [scripts automating the installation process](https://github.com/leo
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
+- `POP_SERVER_USEAPPSHELL` (_true_|_false_): Load an empty Application Shell (or appshell), which loads the page content after loading.
+
 - `POP_SERVER_USESERVERSIDERENDERING` (_true_|_false_): Produce HTML on the server-side for the first-loaded page.
 
 - `POP_SERVER_USECODESPLITTING` (_true_|_false_): Load only the .js and .css that is needed on each page and nothing more.
@@ -116,7 +118,9 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_USECDNRESOURCES` (_true_|_false_): Whenever available, use resources from a public CDN.
 
-- `POP_SERVER_USEFASTBOOT` (_true_|_false_): If doing server-side rendering, re-order script tags so that they are included only after rendering all HTML.
+- `POP_SERVER_SCRIPTSAFTERHTML` (_true_|_false_): If doing server-side rendering, re-order script tags so that they are included only after rendering all HTML.
+
+- `POP_SERVER_REMOVEDATABASEFROMOUTPUT` (_true_|_false_): If doing server-side rendering, remove all database data from the HTML output.
 
 - `POP_SERVER_TEMPLATEDEFINITION_TYPE` (_0_|_1_|_2_): Allows to replace the name of each module with a base36 number instead, to generate a smaller response (around 40%).
 
@@ -133,6 +137,8 @@ PoP allows the configuration of the following properties, done in file wp-config
 - `POP_SERVER_COMPACTJSKEYS` (_true_|_false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
 - `POP_SERVER_USELOCALSTORAGE` (_true_|_false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
+
+- `POP_SERVER_ENABLECONFIGBYPARAMS` (_true_|_false_): Enable to set the application configuration through URL param "config"
 
 ### Decentralization: enabling crossdomain
 
