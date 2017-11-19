@@ -16,7 +16,7 @@
 
 if (!is_admin()) {
 
-	if (PoP_Frontend_ServerUtils::use_fastboot()) {
+	if (PoP_Frontend_ServerUtils::scripts_after_html()) {
 		
 		add_action( 'wp_footer', 'gd_add_scripts_header', 0);
 	}

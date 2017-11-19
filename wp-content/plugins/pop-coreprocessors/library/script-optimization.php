@@ -4,7 +4,7 @@
 add_action('init', 'pop_reorder_head_scripts', 10000);
 function pop_reorder_head_scripts() {
 	
-	if (PoP_Frontend_ServerUtils::use_fastboot()) {
+	if (PoP_Frontend_ServerUtils::scripts_after_html()) {
 		
 		// Move the head scripts to the footer
 		// Set in file wp-includes/default-filters.php

@@ -19,7 +19,7 @@ class PoP_ServerSideRendering_Utils {
 	
 	public static function print_scripts() {
 	
-		if (PoP_Frontend_ServerUtils::use_fastboot()) {
+		if (PoP_Frontend_ServerUtils::scripts_after_html()) {
 			
 			if (self::$scripts) {
 
@@ -36,7 +36,7 @@ class PoP_ServerSideRendering_Utils {
 
 		$html = PoP_ServerSideRendering_Factory::get_instance()->render_target($pagesection_settings_id, null, $target);
 
-		if (PoP_Frontend_ServerUtils::use_fastboot()) {
+		if (PoP_Frontend_ServerUtils::scripts_after_html()) {
 			
 			// Extract all <script> tags out, to be added once again after including jquery.js in the footer
 			// $match[2] has the javascript code, without the <script tag
