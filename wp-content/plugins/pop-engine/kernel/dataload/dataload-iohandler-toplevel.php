@@ -60,8 +60,11 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 			// if ($mangled = $vars[GD_URLPARAM_MANGLED]) {
 			// 	$ret[GD_DATALOAD_PARAMS][GD_URLPARAM_MANGLED] = $mangled;
 			// }
-			if ($config = $vars[POP_URLPARAM_CONFIG]) {
-				$ret[GD_DATALOAD_PARAMS][POP_URLPARAM_CONFIG] = $config;
+			if (PoP_ServerUtils::enable_config_by_params()) {
+
+				if ($config = $vars[POP_URLPARAM_CONFIG]) {
+					$ret[GD_DATALOAD_PARAMS][POP_URLPARAM_CONFIG] = $config;
+				}
 			}
 
 			// Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)

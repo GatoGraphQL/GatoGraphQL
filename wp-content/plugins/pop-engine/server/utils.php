@@ -29,7 +29,16 @@ class PoP_ServerUtils {
 		// Allow to override the configuration with values passed in the query string:
 		// "config": comma-separated string with all fields with value "true"
 		// Whatever fields are not there, will be considered "false"
-		self::$override_configuration = $_REQUEST[POP_URLPARAM_CONFIG] ? explode(',', $_REQUEST[POP_URLPARAM_CONFIG]) : array();
+		self::$override_configuration = array();
+		if (PoP_ServerUtils::enable_config_by_params()) {
+			
+			self::$override_configuration = $_REQUEST[POP_URLPARAM_CONFIG] ? explode(',', $_REQUEST[POP_URLPARAM_CONFIG]) : array();
+		}
+	}
+
+	public static function doing_override_configuration() {
+
+		return !empty(self::$override_configuration);
 	}
 
 	public static function get_override_configuration($key) {
@@ -159,6 +168,15 @@ class PoP_ServerUtils {
 		return 0;
 	}
 
+	public static function enable_config_by_params() {
+
+		if (defined('POP_SERVER_ENABLECONFIGBYPARAMS')) {
+			return POP_SERVER_ENABLECONFIGBYPARAMS;
+		}
+
+		return false;
+	}
+
 	/**
 	 * Use 'modules' or 'm' in the JS context. Used to compress the file size in PROD
 	 */
@@ -179,11 +197,18 @@ class PoP_ServerUtils {
 
 	public static function use_cache() {
 
-		// // Allow to override the configuration
-		// $override = PoP_ServerUtils::get_override_configuration('config-cache');
-		// if (!is_null($override)) {
-		// 	return $override;
+		// If we are overriding the configuration, then do NOT use the cache
+		// Otherwise, parameters from the config have need to be added to $vars, however they can't,
+		// since we want the $vars cachename to not change when testing with the "config" param
+		// Eg of configuration that should change and so will produce problems:
+		// File wp-content/plugins/poptheme-wassup/plugins/events-manager/pop-library/processors/blocks/sections.php:
+		// if (PoP_Frontend_ServerUtils::remove_database_from_output()) {
+		// 	$this->add_att($template_id, $atts, 'content-loaded', false);
 		// }
+		if (self::doing_override_configuration()) {
+			
+			return false;
+		}
 
 		if (defined('POP_SERVER_USECACHE')) {
 			return POP_SERVER_USECACHE;

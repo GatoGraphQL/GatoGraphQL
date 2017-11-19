@@ -314,12 +314,13 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 				);
 
 				// Hook in the sitemapping/settings values into the JSON
-				// Comment Leo 17.11.2017: we load the script always, so we can make the test with/out ?config=runtime-js and it will not fail
+				// Comment Leo 19/11/2017: if we enable the "config" param, then add this resource always
 				// (Otherwise it fails because the configuration is cached but the list of modules to load is different)
-				// if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+				// If not, then add it if we are generating the resources on runtime
+				if (PoP_ServerUtils::enable_config_by_params() || PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
 
 					$manager_dependencies[] = POP_RESOURCELOADER_TOPLEVELJSON;
-				// }
+				}
 
 				// Load the ResourceLoader Config files
 				$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES;
