@@ -150,8 +150,10 @@ class PoPTheme_Wassup_EM_PageSectionHooks {
 			// Make the block lazy load, but not when loading the frame if generating the code on the server, 
 			// because then we need the website to look complete immediately
 			// if (!(GD_TemplateManager_Utils::loading_frame() && PoP_Frontend_ServerUtils::use_serverside_rendering())) {
+			if (PoP_Frontend_ServerUtils::use_serviceworkers()) {
 				
-			$processor->add_att($subcomponent, $ret, 'content-loaded', false);
+				$processor->add_att($subcomponent, $ret, 'content-loaded', false);
+			}
 			
 			// Comment Leo 29/10/2017: we can't use skeleton screen, since it will then load posts
 			// which may change the ETag value for the page... not worth it
