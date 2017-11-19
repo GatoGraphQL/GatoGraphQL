@@ -7,13 +7,176 @@
 
 class PoPFrontend_Engine extends PoP_Engine {
 
-	var $crawlableitems, $runtimecrawlableitems;
+	var $crawlableitems, $runtimecrawlableitems, $scripts, $enqueue;
+
+	function __construct() {
+
+		parent::__construct();
+
+		// Print needed scripts
+		$this->scripts = $this->enqueue = array();
+		add_action('wp_print_footer_scripts', array($this, 'print_scripts'));
+
+		// Priority 60: after priority 50 in wp-content/plugins/pop-frontendengine/kernel/resourceloader/initialization.php
+		add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 60);
+	}
 
 	protected function add_crawlable_data() {
 
 		// Get the crawlable data only if not doing the server-side rendering
 		// Otherwise, we already have the final HTML, so the crawlable data serves no purpose
 		return !PoP_Frontend_ServerUtils::use_serverside_rendering();
+	}
+
+	// Allow PoPFrontend_Engine to override this function
+	protected function get_encoded_json_object($json) {
+
+		$json = parent::get_encoded_json_object($json);
+
+		// Optimizations to be made when first loading the website
+		if (GD_TemplateManager_Utils::loading_frame()) {
+
+			// If we are using serverside-rendering, and set the config to remove the database code,
+			// then do not send the data to the front-end (most likely there is no need, since the HTML has already been produced)
+			if (PoP_Frontend_ServerUtils::use_serverside_rendering() && PoP_Frontend_ServerUtils::remove_database_from_output()) {
+
+				// We do not need the DB
+				if (isset($json['database'])) {
+
+					unset($json['database']);
+				}
+				if (isset($json['userdatabase'])) {
+
+					unset($json['userdatabase']);
+				}
+			}
+
+			// Do not send the sitemapping or the settings to be output as code. 
+			// Instead, save the settings contents into a javascript file, and enqueue it
+			if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+
+				// Sitemapping
+				$this->optimize_encoded_json($json, 'sitemapping', POP_RUNTIMECONTENTTYPE_SITEMAPPING, false);
+				
+				// Settings
+				$this->optimize_encoded_json($json, 'settings', POP_RUNTIMECONTENTTYPE_SETTINGS, true);
+			}
+		}
+			
+		return $json;
+	}
+
+	function optimize_encoded_json(&$json, $property, $type, $do_replacements) {
+
+		// Sitemapping
+		if ($value = $json[$property]) {
+			
+			// Check if this file has already been generated. If not, then save it
+			global $gd_template_runtimecontentmanager;
+			$template_id = $this->get_toplevel_template_id();
+			if (!$gd_template_runtimecontentmanager->cache_exists($template_id, $type)) {
+
+				// Generate and save the JS code
+				$value_js = sprintf(
+					'popTopLevelJSON.strings[\'%1$s\'] = %2$s;',
+					$property,
+					// Encoded twice: the first one for the array, the 2nd one to convert it to string
+					json_encode(json_encode($value))
+				);
+				$gd_template_runtimecontentmanager->store_cache($template_id, $type, $value_js);
+
+				// In addition, this file must be uploaded to AWS S3 bucket, so that this scheme of generating the file on runtime
+				// can also work when hosting the website at multiple servers 
+				do_action(
+					'PoP_Engine:optimize_encoded_json:file_stored',
+					$template_id,
+					$property, 
+					$type
+					// $value_js
+				);
+			}
+
+			// Enqueue the .js file
+			if ($file_url = $gd_template_runtimecontentmanager->get_file_url($template_id, $type)) {
+
+				// Comment Leo 07/11/2017: if enqueuing bundle/bundlegroup scripts, then we don't have the pop-manager.js file enqueued, 
+				// Then, move the functionality below to `enqueue_scripts`, as to wait until the corresponding scripts have been enqueued
+				$this->enqueue[] = array(
+					'property' => $property,
+					'file-url' => $file_url,
+				);
+				// $script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_POPMANAGER);
+				// wp_register_script('pop-'.$property, $file_url, array($script), pop_version(), true);
+				// wp_enqueue_script('pop-'.$property);
+			}
+
+			// We must also do the replacements on the JS code (get_loadfile_cache_replacements)
+			if ($do_replacements) {
+
+				if ($replacements = $gd_template_runtimecontentmanager->get_loadfile_cache_replacements()) {
+					
+					$from = $replacements['from'];
+					$to = $replacements['to'];
+					if ($from && $to) {
+						
+						$replaces = '';
+						for ($i=0; $i<count($from); $i++) {
+							
+							$replaces .= sprintf(
+								'.replace(/%s/g, \'%s\')',
+								$from[$i],
+								$to[$i]
+							);
+						}
+						$this->scripts[] = sprintf(
+							'if (popTopLevelJSON.strings[\'%1$s\']) {'.
+								'popTopLevelJSON.strings[\'%1$s\'] = popTopLevelJSON.strings[\'%1$s\']%2$s;'.
+							'}',
+							$property,
+							$replaces
+						);
+					}
+				}
+			}
+
+			// Remove the entry from the html output
+			unset($json[$property]);
+		}
+	}
+
+	function print_scripts() {
+
+		if ($this->scripts) {
+
+			printf(
+				'<script type="text/javascript">%s</script>', 
+				implode(PHP_EOL, $this->scripts)
+			);
+		}
+	}
+
+	function enqueue_scripts() {
+
+		$version = pop_version();
+
+		$script = 'pop';
+		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+
+			global $pop_resourceloaderprocessor_manager;
+			$script = $pop_resourceloaderprocessor_manager->first_script;
+		}
+		elseif (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+
+			// The bundle application file must be registered under "pop-app"
+			$script = 'pop-app';
+		}
+		foreach ($this->enqueue as $item) {
+
+			// When using the 'app-bundle' then there is no $first_script, just use 'pop'
+			$dependencies = array($script);
+			wp_register_script('pop-'.$item['property'], $item['file-url'], $dependencies, $version, true);
+			wp_enqueue_script('pop-'.$item['property']);
+		}
 	}
 
 	function get_output_items() {
