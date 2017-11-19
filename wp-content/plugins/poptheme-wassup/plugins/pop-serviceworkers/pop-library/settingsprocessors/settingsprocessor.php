@@ -12,7 +12,7 @@ class PoPTheme_Wassup_PoPSW_Template_SettingsProcessor extends GD_Template_Setti
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			return array(
-				POP_SERVICEWORKERS_PAGE_APPSHELL => true,
+				POP_FRONTENDENGINE_PAGE_APPSHELL => true,
 			);
 		}
 
@@ -24,7 +24,7 @@ class PoPTheme_Wassup_PoPSW_Template_SettingsProcessor extends GD_Template_Setti
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			return array(
-				POP_SERVICEWORKERS_PAGE_APPSHELL => true,
+				POP_FRONTENDENGINE_PAGE_APPSHELL => true,
 			);
 		}
 
@@ -40,7 +40,7 @@ class PoPTheme_Wassup_PoPSW_Template_SettingsProcessor extends GD_Template_Setti
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 
 			return array(
-				POP_SERVICEWORKERS_PAGE_APPSHELL => true,
+				POP_FRONTENDENGINE_PAGE_APPSHELL => true,
 			);
 		}
 
@@ -54,7 +54,7 @@ class PoPTheme_Wassup_PoPSW_Template_SettingsProcessor extends GD_Template_Setti
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_PAGE) {
 	
 			$pageblocks = array(
-				POP_SERVICEWORKERS_PAGE_APPSHELL  => GD_TEMPLATE_BLOCK_APPSHELL,
+				POP_FRONTENDENGINE_PAGE_APPSHELL  => GD_TEMPLATE_BLOCK_APPSHELL,
 			);
 			foreach ($pageblocks as $page => $block) {
 				$ret[$page]['blocks']['default'] = $block;

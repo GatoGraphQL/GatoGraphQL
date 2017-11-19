@@ -34,7 +34,7 @@ class PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsRegistration {
 		// 	$template_id = GD_TEMPLATE_TOPLEVEL_PAGE;
 	 //        $hierarchy = GD_SETTINGS_HIERARCHY_PAGE;
 	 //        $ids = array(
-	 //            POP_SERVICEWORKERS_PAGE_APPSHELL,
+	 //            POP_FRONTENDENGINE_PAGE_APPSHELL,
 	 //        ); 
 	 //        $merge = false;
 	 //        $fetching_json = false;

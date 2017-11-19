@@ -25,7 +25,7 @@ class PoPTheme_Wassup_PoPSW_PageSectionSettingsProcessor extends Wassup_PageSect
 			/*********************************************
 			 * System
 			 *********************************************/
-			case POP_SERVICEWORKERS_PAGE_APPSHELL:
+			case POP_FRONTENDENGINE_PAGE_APPSHELL:
 
 				if ($template_id == GD_TEMPLATE_PAGESECTION_OPERATIONAL) {
 

@@ -49,7 +49,7 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks {
 
 	// function get_appshell_pages($pages) {
 
-	// 	if ($localepages = $this->get_localepages_from_page(POP_SERVICEWORKERS_PAGE_APPSHELL)) {
+	// 	if ($localepages = $this->get_localepages_from_page(POP_FRONTENDENGINE_PAGE_APPSHELL)) {
 	// 		return $localepages;
 	// 	}
 

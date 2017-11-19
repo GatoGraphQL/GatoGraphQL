@@ -48,6 +48,7 @@ define ('POP_RESOURCELOADER_SYSTEM', PoP_TemplateIDUtils::get_template_definitio
 define ('POP_RESOURCELOADER_TABS', PoP_TemplateIDUtils::get_template_definition('tabs'));
 define ('POP_RESOURCELOADER_USERACCOUNT', PoP_TemplateIDUtils::get_template_definition('user-account'));
 define ('POP_RESOURCELOADER_WINDOW', PoP_TemplateIDUtils::get_template_definition('window'));
+define ('POP_RESOURCELOADER_APPSHELL', PoP_TemplateIDUtils::get_template_definition('appshell'));
 
 class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
@@ -97,6 +98,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 			POP_RESOURCELOADER_TABS,
 			POP_RESOURCELOADER_USERACCOUNT,
 			POP_RESOURCELOADER_WINDOW,
+			POP_RESOURCELOADER_APPSHELL,
 		);
 	}
 	
@@ -146,6 +148,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 			POP_RESOURCELOADER_TABS => 'tabs',
 			POP_RESOURCELOADER_USERACCOUNT => 'user-account',
 			POP_RESOURCELOADER_WINDOW => 'window',
+			POP_RESOURCELOADER_APPSHELL => 'appshell',
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
@@ -359,6 +362,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 			),
 			POP_RESOURCELOADER_WINDOW => array(
 				'popWindow',
+			),
+			POP_RESOURCELOADER_APPSHELL => array(
+				'popAppShell',
 			),
 		);
 		if ($object = $objects[$resource]) {

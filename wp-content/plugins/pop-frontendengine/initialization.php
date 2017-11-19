@@ -33,7 +33,7 @@ class PoPFrontend_Initialization {
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Constants/Configuration for functionalities needed by the plug-in
 		 * ---------------------------------------------------------------------------------------------------------------*/
-		// require_once 'config/load.php';
+		require_once 'config/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Load the Library first
@@ -119,13 +119,14 @@ class PoPFrontend_Initialization {
 				wp_register_script('pop-interceptors', $libraries_js_folder.'/interceptors'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
 				wp_enqueue_script('pop-interceptors');
 
-				// Comment Leo 17.11.2017: we load the script always, so we can make the test with/out ?config=runtime-js and it will not fail
+				// Comment Leo 19/11/2017: if we enable the "config" param, then add this resource always
 				// (Otherwise it fails because the configuration is cached but the list of modules to load is different)
-				// if (PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
+				// If not, then add it if we are generating the resources on runtime
+				if (PoP_ServerUtils::enable_config_by_params() || PoP_Frontend_ServerUtils::generate_resources_on_runtime()) {
 					
 					wp_register_script('pop-topleveljson', $libraries_js_folder.'/topleveljson'.$suffix.'.js', array(), POP_FRONTENDENGINE_VERSION, true);
 					wp_enqueue_script('pop-topleveljson');
-				// }
+				}
 
 				// Sortable needed for the Typeahead
 				wp_register_script('pop', $libraries_js_folder.'/pop-manager'.$suffix.'.js', array('jquery', 'pop-utils', 'pop-pagesection-manager', 'pop-history', 'pop-interceptors', 'pop-jslibrary-manager', 'pop-jsruntime-manager', 'jquery-ui-sortable'), POP_FRONTENDENGINE_VERSION, true);

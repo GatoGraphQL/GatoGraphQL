@@ -37,6 +37,13 @@ class PoP_CoreProcessors_ResourceLoaderProcessor_Hooks {
 		// Even though popMentions will be loaded from the internal/external method calls, if the mapping has not
 		// been generated, then it will fail and give a JS error. By expliciting the dependency here, it will work always fine
 		$dependencies[] = POP_RESOURCELOADER_MENTIONS;
+
+		// Comment Leo 19/11/2017: load the appshell file if either: enabling the config, using the appshell, or allowing for Service Workers, which use the appshell to load content when offline
+		if (PoP_ServerUtils::enable_config_by_params() || PoP_Frontend_ServerUtils::use_appshell() || PoP_Frontend_ServerUtils::use_serviceworkers()) {
+
+			$dependencies[] = POP_RESOURCELOADER_APPSHELL;
+		}
+		
 		return $dependencies;
 	}
 

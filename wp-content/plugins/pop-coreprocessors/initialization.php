@@ -299,6 +299,13 @@ class PoP_CoreProcessors_Initialization {
 				wp_register_script('pop-coreprocessors-user-account', $libraries_js_folder.'/user-account'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-user-account');
 
+				// Comment Leo 19/11/2017: load the appshell file if either: enabling the config, using the appshell, or allowing for Service Workers, which use the appshell to load content when offline
+				if (PoP_ServerUtils::enable_config_by_params() || PoP_Frontend_ServerUtils::use_appshell() || PoP_Frontend_ServerUtils::use_serviceworkers()) {
+					
+					wp_register_script('pop-appshell', $libraries_js_folder.'/appshell'.$suffix.'.js', array(), POP_COREPROCESSORS_VERSION, true);
+					wp_enqueue_script('pop-appshell');
+				}
+
 				/** Templates Sources */
 				$this->enqueue_templates_scripts();
 			}

@@ -3,10 +3,10 @@
 /**---------------------------------------------------------------------------------------------------------------
  *
  * IDs Configuration
- * Override these definitions to implement the corresponding features
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
 // Pages
 //--------------------------------------------------------
-define ('POP_FRONTENDENGINE_PAGE_EXTERNAL', false);
+define ('POP_FRONTENDENGINE_PAGE_APPSHELL', false);
+

@@ -288,7 +288,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
     protected function get_appshell_pages() {
         
         $pages = array();
-        if (POP_SERVICEWORKERS_PAGE_APPSHELL) {
+        if (POP_FRONTENDENGINE_PAGE_APPSHELL) {
             
             global $gd_theme_manager;
 
@@ -300,7 +300,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
                     
                     foreach ($theme->get_thememodes() as $thememode) {
                         
-                        $pages[$locale][$theme->get_name()][$thememode->get_name()] = $this->get_appshell_url(POP_SERVICEWORKERS_PAGE_APPSHELL, $locale, $theme->get_name(), $thememode->get_name());
+                        $pages[$locale][$theme->get_name()][$thememode->get_name()] = $this->get_appshell_url(POP_FRONTENDENGINE_PAGE_APPSHELL, $locale, $theme->get_name(), $thememode->get_name());
                     }
                 }
             }

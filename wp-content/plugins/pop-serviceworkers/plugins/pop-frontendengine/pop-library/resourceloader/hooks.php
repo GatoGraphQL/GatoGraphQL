@@ -43,7 +43,7 @@ class PoP_ServiceWorkers_Frontend_ResourceLoader_Hooks {
 
 			$page_id = $vars['global-state']['post']->ID;
 			$skip_pages = array(
-				POP_SERVICEWORKERS_PAGE_APPSHELL,
+				POP_FRONTENDENGINE_PAGE_APPSHELL,
 			);
 			if (in_array($page_id, $skip_pages)) {
 
