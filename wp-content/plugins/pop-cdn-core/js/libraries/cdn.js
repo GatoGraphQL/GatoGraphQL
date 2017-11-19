@@ -154,15 +154,17 @@ window.popCDN = {
 		var that = this;
 
 		var thumbprints = popCDNThumbprints.getThumbprints(url);
-		var value = [];
-		
-		$.each(thumbprints, function(index, thumbprint) {
+		// var value = [];
+		// $.each(thumbprints, function(index, thumbprint) {
 
-			// Add the value of that thumbprint
-			value.push(that.thumbprintValues[thumbprint]);
+		// 	// Add the value of that thumbprint
+		// 	value.push(that.thumbprintValues[thumbprint]);
+		// });
+		var value = thumbprints.map(function(thumbprint) {
+			return that.thumbprintValues[thumbprint];
 		});
 
-		// Join them (using a dot) to make it easier to see the different thumbprint values
+		// Join all the thumbprints together using a dot, to make it easier to identify the different thumbprint values
 		return value.join(M.CDN_SEPARATOR_THUMBPRINT);
 	},
 
