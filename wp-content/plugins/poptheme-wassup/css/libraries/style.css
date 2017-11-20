@@ -1604,6 +1604,13 @@ body.sliding #ps-hover .container-fluid {
 	/* Hide the overflow, so that in mobile phone it doesn't make the screen bigger than the actual device width */
 	overflow: hidden;
 }
+@media (min-width: 768px) {
+	#ps-main .blockinner-row,
+	#ps-quickview .blockinner-row {
+		/* Hide the overflow, so that in mobile phone it doesn't make the screen bigger than the actual device width */
+		overflow: initial;
+	}
+}
 #ps-main .layout.preview .blockinner-row,
 #ps-quickview .layout.preview .blockinner-row {
 	background-color: transparent;
