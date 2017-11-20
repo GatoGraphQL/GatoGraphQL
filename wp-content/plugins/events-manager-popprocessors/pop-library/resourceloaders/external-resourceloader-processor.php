@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR', PoP_TemplateIDUtils::get_template_definition('external-fullcalendar'));
+define ('POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE', PoP_TemplateIDUtils::get_template_definition('external-fullcalendar-locale'));
 
 class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
 
@@ -13,6 +14,7 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 
 		return array(
 			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR,
+			POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE,
 		);
 	}
 	
@@ -20,6 +22,7 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 	
 		$filenames = array(
 			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar'.(!PoP_Frontend_ServerUtils::access_externalcdn_resources() ? '.2.9.1' : ''),
+			POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE => get_em_qtransx_fullcalendar_locale_filename(),
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
@@ -29,6 +32,13 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 	}
 	
 	function get_dir($resource) {
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
+				
+				return EM_POPPROCESSORS_DIR.'/js/includes/cdn/fullcalendar.2.9.1-lang';
+		}
 	
 		return EM_POPPROCESSORS_DIR.'/js/includes/cdn';
 	}
@@ -37,6 +47,7 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 	
 		$filenames = array(
 			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar.2.9.1',
+			POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE => get_em_qtransx_fullcalendar_locale_filename(),
 		);
 		if ($filename = $filenames[$resource]) {
 			return $this->get_dir($resource).'/'.$filename.$this->get_suffix($resource);
@@ -52,6 +63,10 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR:
 
 				return '.min.js';
+		
+			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
+		
+				return '.js';
 		}
 
 		return parent::get_suffix($resource);
@@ -66,10 +81,33 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 				case POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR:
 
 					return 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1';
+			
+				case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
+
+					return 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang';;
 			}
 		}
 
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
+				
+				return EM_POPPROCESSORS_URI.'/js/includes/cdn/fullcalendar.2.9.1-lang';
+		}
+
 		return EM_POPPROCESSORS_URI.'/js/includes/cdn';
+	}
+	
+	function can_bundle($resource) {
+
+		switch ($resource) {
+			
+			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
+
+				return false;
+		}
+
+		return parent::can_bundle($resource);
 	}
 	
 	function get_dependencies($resource) {

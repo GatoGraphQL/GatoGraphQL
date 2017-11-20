@@ -139,6 +139,11 @@ class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcess
 			case POP_RESOURCELOADER_FULLCALENDAR:
 
 				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR;
+				
+				// Add Locale file, if applicable
+				if (get_em_qtransx_fullcalendar_locale_filename()) {
+					$dependencies[] = POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE;
+				}
 				break;
 
 			case POP_RESOURCELOADER_MAP:
