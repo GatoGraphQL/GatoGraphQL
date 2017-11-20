@@ -117,9 +117,12 @@ class PoPFrontend_ResourceLoader_ScriptsRegistration {
 	    $blockJSMethods = $json['settings']['jsmethods']['block'];
 
 	    $methods = PoP_ResourceLoaderProcessorUtils::get_jsmethods($pageSectionJSMethods, $blockJSMethods);
+	    $critical_methods = $methods[POP_PROGRESSIVEBOOTING_CRITICAL];
+	    $noncritical_methods = $methods[POP_PROGRESSIVEBOOTING_NONCRITICAL];
 
 		// Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
-		return PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $methods);
+		// return PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $methods);
+		return PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $critical_methods, $noncritical_methods);
 	}
 
 	function calculate_bundles($resources) {

@@ -38,7 +38,7 @@ class PoPFrontend_Engine extends PoP_Engine {
 
 			// If we are using serverside-rendering, and set the config to remove the database code,
 			// then do not send the data to the front-end (most likely there is no need, since the HTML has already been produced)
-			if (PoP_Frontend_ServerUtils::use_serverside_rendering() && PoP_Frontend_ServerUtils::remove_database_from_output()) {
+			if (PoP_Frontend_ServerUtils::remove_database_from_output()) {
 
 				// We do not need the DB
 				if (isset($json['database'])) {

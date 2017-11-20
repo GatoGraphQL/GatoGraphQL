@@ -304,4 +304,25 @@ class PoP_Frontend_ServerUtils {
 
 		return true;
 	}
+
+	public static function use_progressive_booting() {
+
+		// Only valid when doing code-splitting
+		if (!self::use_code_splitting()) {
+
+			return false;
+		}
+
+		// Allow to override the configuration
+		$override = PoP_ServerUtils::get_override_configuration('progressive-booting');
+		if (!is_null($override)) {
+			return $override;
+		}
+
+		if (defined('POP_SERVER_USEPROGRESSIVEBOOTING')) {
+			return POP_SERVER_USEPROGRESSIVEBOOTING;
+		}
+
+		return true;
+	}
 }

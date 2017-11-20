@@ -74,7 +74,8 @@ class GD_Template_Processor_MaxHeightLayoutsBase extends GD_Template_ProcessorBa
 		// Integrate with plug-in "Dynamic max height plugin for jQuery"
 		if (!is_null($this->get_att($template_id, $atts, 'maxheight'))) {
 			
-			$this->add_jsmethod($ret, 'dynamicMaxHeight');
+			// This function is critical! Execute immediately, so users can already press on "See more" when scrolling down
+			$this->add_jsmethod($ret, 'dynamicMaxHeight', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
 		}
 
 		return $ret;

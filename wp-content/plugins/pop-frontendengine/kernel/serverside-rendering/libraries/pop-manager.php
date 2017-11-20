@@ -430,6 +430,11 @@ class PoP_ServerSide_Manager {
 			// // Keep the pageSection DOM elems
 			// var pageSections = [];
 
+			// Set the URL for the 'session-ids'
+			$popJSRuntimeManager = PoP_ServerSide_Libraries_Factory::get_jsruntime_instance();
+			$url = GD_TemplateManager_Utils::get_current_url();
+			$popJSRuntimeManager->setPageSectionURL($url);
+
 			// Comment Leo 01/12/2016: Split the logic below into 2: first render all the pageSections ($this->renderPageSection(pageSection)),
 			// and then execute all JS on them ($this->pageSectionInitialized(pageSection)), and in between remove the "loading" screen
 			// this way, the first paint is much faster, for a better user experience

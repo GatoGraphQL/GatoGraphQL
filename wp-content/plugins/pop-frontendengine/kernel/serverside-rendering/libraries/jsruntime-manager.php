@@ -16,7 +16,7 @@ class PoP_ServerSide_JSRuntimeManager {
 		// Initialize internal variables
 		$this->full_session_ids = array();
 		$this->last_session_ids = array();
-		$this->pageSectionURL = 'general';
+		// $this->pageSectionURL = 'general';
 	}
 
 	//-------------------------------------------------
@@ -32,9 +32,15 @@ class PoP_ServerSide_JSRuntimeManager {
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
+	function setPageSectionURL($url) {
+
+		$this->pageSectionURL = $url;
+	}
+
 	function setBlockURL($url) {
 
 		$this->blockURL = $url;
+		$this->setPageSectionURL($url);
 	}
 
 	// function initPageSectionVarPaths(&$vars, $pssId, $template, $group = null) {

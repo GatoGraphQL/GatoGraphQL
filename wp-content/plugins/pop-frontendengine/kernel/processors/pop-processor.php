@@ -522,12 +522,21 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		// template
 		// methods: map of group => methods
 		// next: repeats this sequence down the line for all the template's modules
-		if ($jsmethod = $this->get_filtered_block_jsmethod($template_id, $atts)) {
-			$methods = array_merge(
-				$methods, 
-				$jsmethod
-			);
+		if ($priority_jsmethod = $this->get_filtered_block_jsmethod($template_id, $atts)) {
+
+			foreach ($priority_jsmethod as $priority => $jsmethod) {
+
+				if (!$jsmethod) {
+					continue;
+				}
+				$methods[$priority] = $methods[$priority] ?? array();
+				$methods[$priority] = array_merge(
+					$methods[$priority], 
+					$jsmethod
+				);
+			}
 		}
+
 		if ($methods) {
 			$ret[GD_JS_METHODS/*'methods'*/] = $methods;
 		}
@@ -809,11 +818,31 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 
 	protected function get_pagesection_jsmethod($template_id, $atts) {
 
-		return $this->get_target_jsmethod($template_id, $atts, 'pagesection-jsmethod');
+		$ret = array();
+		$priorities = array(
+			POP_PROGRESSIVEBOOTING_CRITICAL,
+			POP_PROGRESSIVEBOOTING_NONCRITICAL,
+		);
+		foreach ($priorities as $priority) {
+
+			$ret[$priority] = $this->get_target_jsmethod($template_id, $atts, 'pagesection-jsmethod-'.$priority);
+		}
+
+		return $ret;
 	}
 	protected function get_block_jsmethod($template_id, $atts) {
 
-		return $this->get_target_jsmethod($template_id, $atts, 'block-jsmethod');
+		$ret = array();
+		$priorities = array(
+			POP_PROGRESSIVEBOOTING_CRITICAL,
+			POP_PROGRESSIVEBOOTING_NONCRITICAL,
+		);
+		foreach ($priorities as $priority) {
+
+			$ret[$priority] = $this->get_target_jsmethod($template_id, $atts, 'block-jsmethod-'.$priority);
+		}
+
+		return $ret;
 	}
 	protected function get_filtered_pagesection_jsmethod($template_id, $atts) {
 
@@ -838,17 +867,19 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		return $jsmethod;
 	}
 
-	function add_jsmethod(&$ret, $method, $group = GD_JSMETHOD_GROUP_MAIN, $unshift = false) {
+	function add_jsmethod(&$ret, $method, $group = GD_JSMETHOD_GROUP_MAIN, $unshift = false, $priority = null) {
 		
-		GD_TemplateManager_Utils::add_jsmethod($ret, $method, $group, $unshift);
+		GD_TemplateManager_Utils::add_jsmethod($ret, $method, $group, $unshift, $priority);
 	}
-	function merge_pagesection_jsmethod_att($template_id, &$atts, $methods, $group = GD_JSMETHOD_GROUP_MAIN) {
+	function merge_pagesection_jsmethod_att($template_id, &$atts, $methods, $group = GD_JSMETHOD_GROUP_MAIN, $priority = null) {
 		
-		$this->merge_target_jsmethod_att($template_id, $atts, 'pagesection-jsmethod', $methods, $group);
+		$priority = $priority ?? POP_PROGRESSIVEBOOTING_NONCRITICAL;
+		$this->merge_target_jsmethod_att($template_id, $atts, 'pagesection-jsmethod-'.$priority, $methods, $group);
 	}
-	function merge_block_jsmethod_att($template_id, &$atts, $methods, $group = GD_JSMETHOD_GROUP_MAIN) {
+	function merge_block_jsmethod_att($template_id, &$atts, $methods, $group = GD_JSMETHOD_GROUP_MAIN, $priority = null) {
 		
-		$this->merge_target_jsmethod_att($template_id, $atts, 'block-jsmethod', $methods, $group);
+		$priority = $priority ?? POP_PROGRESSIVEBOOTING_NONCRITICAL;
+		$this->merge_target_jsmethod_att($template_id, $atts, 'block-jsmethod-'.$priority, $methods, $group);
 	}
 	
 	//-------------------------------------------------
@@ -873,8 +904,13 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 	private function merge_target_jsmethod_att($template_id, &$atts, $target_key, $methods, $group) {
 		
 		// Merge iterating by key because the key is the group, so the value would be overwritten with the same group as key
+		// $this->merge_iterate_key_recursive_att($template_id, $atts, $target_key, array(
+		// 	$group => array(
+		// 		$priority => $methods,
+		// 	)
+		// ));
 		$this->merge_iterate_key_att($template_id, $atts, $target_key, array(
-			$group => $methods
+			$group => $methods,
 		));
 	}
 }

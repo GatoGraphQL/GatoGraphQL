@@ -273,6 +273,7 @@ Handlebars.registerHelper('generateId', function(options) {
 	var url = options.hash.addURL ? context.tls.feedback[M.URLPARAM_URL] : '';
 	if (url) {
 		popJSRuntimeManager.setBlockURL(url);
+		// popJSRuntimeManager.setPageSectionURL(url);
 	}
 
 	var generatedId = popJSRuntimeManager.addTemplateId(domain, pssId, targetId, template, id, group, fixed, isIdUnique, ignorePSRuntimeId);

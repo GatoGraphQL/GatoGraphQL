@@ -82,7 +82,7 @@ class GD_Core_Template_Processor_Blocks extends GD_Template_Processor_BlocksBase
 			case GD_TEMPLATE_BLOCK_APPSHELL:
 
 				// This is all this block does: load the external url defined in parameter "url"
-				$this->add_jsmethod($ret, 'fetchBrowserURL');
+				$this->add_jsmethod($ret, 'fetchBrowserURL', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
 
 				// Comment Leo 07/03/2017: commented because it was taken out of SW, so that this JS function is executed always, SW or not, in pop-coreprocessors/js/libraries/tabs.js
 				// // reopen previous session tabs only if enabled. Eg: GetPoP will be disabled, because with the iframe on it,

@@ -119,7 +119,8 @@ class PoP_ResourceLoaderProcessor {
 
 			return "async='async'";
 		}
-		elseif ($this->is_defer($resource)) {
+		// can_defer: allows the templates to check if we are doing serverside-rendering, because .tmpl files cannot be made "defer" when doing client-side rendering
+		elseif ($this->can_defer($resource) && $this->is_defer($resource)) {
 
 			return "defer='defer'";
 		}
@@ -132,7 +133,19 @@ class PoP_ResourceLoaderProcessor {
 		return false;
 	}
 	
+	protected function can_defer($resource) {
+
+		// can_defer: allows the templates to check if we are doing serverside-rendering, because .tmpl files cannot be made "defer" when doing client-side rendering
+		return true;
+	}
+	
 	function is_defer($resource) {
+
+		// If these resources have been marked as 'noncritical', then defer loading them
+		if (PoP_Frontend_ServerUtils::use_progressive_booting() && in_array($resource, PoP_ResourceLoaderProcessorUtils::$noncritical_resources)) {
+
+			return true;
+		}
 
 		return false;
 	}

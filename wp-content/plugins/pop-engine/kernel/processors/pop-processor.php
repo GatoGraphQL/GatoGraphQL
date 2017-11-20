@@ -702,17 +702,22 @@ class PoP_ProcessorBase {
 					$value
 				);
 			}
-			elseif ($options['merge-iterate-key']) {
+			elseif ($options['merge-iterate-key']/* || $options['merge-iterate-key-recursive']*/) {
 				foreach ($value as $value_key => $value_value) {
 					if (!$atts[$group][$template_id][$field][$value_key]) {
 						$atts[$group][$template_id][$field][$value_key] = array();
 					}
 					// Doing array_unique, because in the NotificationPreviewLayout, different layouts might impose a JS down the road, many times, and these get duplicated
 					$atts[$group][$template_id][$field][$value_key] = array_unique(
-						array_merge(
-							$atts[$group][$template_id][$field][$value_key],
-							$value_value
-						)
+						/*$options['merge-iterate-key'] ?
+							*/array_merge(
+								$atts[$group][$template_id][$field][$value_key],
+								$value_value
+							)/* :
+							array_merge_recursive(
+								$atts[$group][$template_id][$field][$value_key],
+								$value_value
+							)*/
 					);
 				}
 			}
@@ -760,6 +765,10 @@ class PoP_ProcessorBase {
 
 		$this->add_att_group_field($template_id, $atts, 'template-conf', $field, $value, array('array' => true, 'merge-iterate-key' => true));
 	}
+	// function merge_iterate_key_recursive_att($template_id, &$atts, $field, $value) {
+
+	// 	$this->add_att_group_field($template_id, $atts, 'template-conf', $field, $value, array('array' => true, 'merge-iterate-key-recursive' => true));
+	// }
 	function push_att($template_id, &$atts, $field, $value) {
 
 		$this->add_att_group_field($template_id, $atts, 'template-conf', $field, $value, array('array' => true, 'push' => true));

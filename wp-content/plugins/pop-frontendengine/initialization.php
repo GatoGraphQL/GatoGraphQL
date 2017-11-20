@@ -202,6 +202,7 @@ class PoPFrontend_Initialization {
 			'LOCALE' => $locale,
 			'API_URLPARAMS' => $api_urlparams,
 			'USE_SW' => (PoP_Frontend_ServerUtils::use_serviceworkers() ? true : ''),
+			'USE_PROGRESSIVEBOOTING' => (PoP_Frontend_ServerUtils::use_progressive_booting() ? true : ''),
 			'RUNTIMEJS' => (PoP_Frontend_ServerUtils::generate_resources_on_runtime() ? true : ''),
 			'COMPACT_JS_KEYS' => (PoP_ServerUtils::compact_js_keys() ? true : ''),
 			'USELOCALSTORAGE' => (PoP_Frontend_ServerUtils::use_local_storage() ? true : ''),

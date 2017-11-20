@@ -22,6 +22,12 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return '.tmpl.js';
 	}
 	
+	protected function can_defer($resource) {
+
+		// Javascript Template files can only be deferred when doing server-side rendering
+		return PoP_Frontend_ServerUtils::use_serverside_rendering();
+	}
+	
 	// function get_htmltag_attributes($resource) {
 
 	// 	// When first loading the website, if doing serverside-rendering, then most of the javascript template files
@@ -43,25 +49,31 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 	// 	return parent::get_htmltag_attributes($resource);
 	// }
 	
-	function is_async($resource) {
+	// function is_async($resource) {
+	function is_defer($resource) {
 
 		// When first loading the website, if doing serverside-rendering, then most of the javascript template files
 		// are actually not needed. They are needed only when the block is lazy-loaded, or when performing a dynamic action,
 		// such as showing the events calendar (rendered through JS) or appending more posts to the feed
-		if (PoP_Frontend_ServerUtils::use_serverside_rendering() && PoP_Frontend_ServerUtils::use_code_splitting()) {
+		if (/*PoP_Frontend_ServerUtils::use_serverside_rendering() && */PoP_Frontend_ServerUtils::use_code_splitting()) {
 
 			$engine = PoP_Engine_Factory::get_instance();
 			$json = $engine->resultsObject['json'];
 			if ($dynamic_template_sources = $json['sitemapping']['dynamic-template-sources']) {
 				
-				if (!in_array($this->get_filename($resource), $dynamic_template_sources)) {
+				// Comment Leo 20/11/2017: taking a very aggressive approach: make all templates be deferred,
+				// unless they are inside a dynamic component (this could also be made deferred, but to be on the safe side,
+				// as in any JS method needing a .tmpl template being set as 'critical', then keep it like this)
+				if (in_array($this->get_filename($resource), $dynamic_template_sources)) {
 
-					return true;
+					return false;
 				}
+				return true;
 			}
 		}
 
-		return parent::is_async($resource);
+		// return parent::is_async($resource);
+		return parent::is_defer($resource);
 	}
 	
 	function get_dependencies($resource) {

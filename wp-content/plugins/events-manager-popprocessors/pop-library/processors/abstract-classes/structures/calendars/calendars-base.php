@@ -15,7 +15,8 @@ class GD_Template_Processor_CalendarsBase extends GD_Template_Processor_Structur
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
-		$this->add_jsmethod($ret, 'calendar');
+		// The calendar is set to critical, because it is not rendered on the server-side yet
+		$this->add_jsmethod($ret, 'calendar', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
 		return $ret;
 	}
 

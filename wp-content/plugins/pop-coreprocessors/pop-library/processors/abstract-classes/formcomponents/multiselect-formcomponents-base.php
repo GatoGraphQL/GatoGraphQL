@@ -15,7 +15,8 @@ class GD_Template_Processor_MultiSelectFormComponentsBase extends GD_Template_Pr
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
-		$this->add_jsmethod($ret, 'multiselect');
+		// Make it critical because the multiselect looks very ugly without initializing
+		$this->add_jsmethod($ret, 'multiselect', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
 		return $ret;
 	}
 

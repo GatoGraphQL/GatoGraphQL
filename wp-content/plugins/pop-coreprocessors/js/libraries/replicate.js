@@ -234,7 +234,8 @@ window.popReplicate = {
 			},
 			url: tlFeedback[M.URLPARAM_URL]
 		}
-		popManager.renderPageSection(domain, pageSection, options);
+		popJSRuntimeManager.setPageSectionURL(tlFeedback[M.URLPARAM_URL]);
+		popManager.renderPageSection(domain, pageSection, null, options);
 	},
 };
 })(jQuery);

@@ -13,7 +13,8 @@ window.popAppShell = {
 		var that = this;
 		
 		// Do it on initialized.pop.document already, since there's no need to wait, this is the main content
-		$(document).on('initialized.pop.document', function() {
+		// $(document).on('initialized.pop.document', function() {
+		$(document).ready(function($) {
 			
 			var options = {
 				skipPushState: true,

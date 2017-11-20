@@ -26,12 +26,13 @@ class PoP_ResourceLoaderProcessor_Manager {
             array($this, 'add_resources_to_map')
         );
 
-        // Prepare the htmltag attributes before they are printed in the footer
+        // Prepare the htmltag attributes before they are printed in the footer, but after all resources have been enqueued
+        // That is needed to calculate PoP_ResourceLoaderProcessorUtils::$noncritical_resources, which happens triggered by `$popfrontend_resourceloader_scriptsregistration->register_scripts();`
         add_action(
             // 'wp_print_footer_scripts',
             'wp_enqueue_scripts',
             array($this, 'prepare_htmltag_attributes'),
-            0
+            PHP_INT_MAX
         );
 
     	// Allow to add attributes 'async' or 'defer' to the script tag

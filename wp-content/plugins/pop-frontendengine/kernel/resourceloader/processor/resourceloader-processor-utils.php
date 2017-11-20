@@ -11,6 +11,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
     protected static $initialized = false;
     protected static $bundle_ids, $bundle_counter, $bundlegroup_ids, $bundlegroup_counter, $key_ids, $key_counter;
+    public static $noncritical_resources = array();
 
     public static function init() {
 
@@ -271,7 +272,8 @@ class PoP_ResourceLoaderProcessorUtils {
         return array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_template_resource_name'), $template_sources);
     }
 
-    public static function calculate_resources($template_sources, $methods) {
+    // public static function calculate_resources($template_sources, $methods) {
+    public static function calculate_resources($template_sources, $critical_methods, $noncritical_methods) {
 
         global $pop_resourceloaderprocessor_manager, $pop_templateresourceloaderprocessor_manager;
 
@@ -279,7 +281,9 @@ class PoP_ResourceLoaderProcessorUtils {
         
         // Make sure there are no duplicates
         $template_sources = array_unique($template_sources);
-        $methods = array_unique($methods);
+        // $methods = array_unique($methods);
+        $critical_methods = array_unique($critical_methods);
+        $noncritical_methods = array_unique($noncritical_methods);
 
         // Convert the template-sources to the corresponding resources
         $template_resources = self::get_template_resources($template_sources);
@@ -289,7 +293,24 @@ class PoP_ResourceLoaderProcessorUtils {
 
             $pop_resourceloaderprocessor_manager->add_resource_dependencies($resources/*$dependency_resources*/, $template_resource, true/*, 'templates'*/);
         }
-        $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($resources, $methods, $template_resources);
+        // $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($resources, $methods, $template_resources);
+        $critical_resources = $noncritical_resources = array();
+        $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($critical_resources, $critical_methods, $template_resources);
+        $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($noncritical_resources, $noncritical_methods, array(), false);
+
+        // If a resource is both critical and non-critical, then remove it from non-critical
+        $noncritical_resources = array_diff(
+            $noncritical_resources, 
+            $critical_resources
+        );
+
+        self::$noncritical_resources = $noncritical_resources;
+
+        $resources = array_values(array_unique(array_merge(
+            $resources,
+            $critical_resources,
+            $noncritical_resources
+        )));
 
         return $resources;
     }
@@ -708,9 +729,12 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Get the list of methods that will be called in that pageSection, to obtain, later on, what JS resources are needed 
         $methods = array_values(self::get_jsmethods_from_template($toplevel_template_id, $toplevel_atts));
+        $critical_methods = $methods[POP_PROGRESSIVEBOOTING_CRITICAL];
+        $noncritical_methods = $methods[POP_PROGRESSIVEBOOTING_NONCRITICAL];
 
         // Finally, merge all the template and JS resources together
-        return self::calculate_resources($sources, $methods);
+        // return self::calculate_resources($sources, $methods);
+        return self::calculate_resources($sources, $critical_methods, $noncritical_methods);
     }
 
     public static function get_jsmethods_from_template($toplevel_template_id, $toplevel_atts) {
@@ -728,47 +752,84 @@ class PoP_ResourceLoaderProcessorUtils {
         global $pop_resourceloaderprocessor_manager;
 
         // Start with those methods that are always executed, already by the framework, not from configuration
-        $js_methods = $pop_resourceloaderprocessor_manager->get_initial_jsmethods();
+        $critical_js_methods = $pop_resourceloaderprocessor_manager->get_initial_jsmethods();
+        $noncritical_js_methods = array();
 
         // Add all the pageSection methods
         foreach ($pageSectionJSMethods as $pageSection => $methods) {
-            self::add_pagesection_jsmethods($js_methods, $methods);
+            self::add_pagesection_jsmethods($critical_js_methods, $methods, POP_PROGRESSIVEBOOTING_CRITICAL);
+            self::add_pagesection_jsmethods($noncritical_js_methods, $methods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
         }
 
         // Add all the block methods
         foreach ($blockJSMethods as $pageSection => $blockTemplateMethods) {
             foreach ($blockTemplateMethods as $template => $templateMethods) {
-                self::add_block_jsmethods($js_methods, $templateMethods);
+                self::add_block_jsmethods($critical_js_methods, $templateMethods, POP_PROGRESSIVEBOOTING_CRITICAL);
+                self::add_block_jsmethods($noncritical_js_methods, $templateMethods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
             }
         }
 
-        return array_values(array_unique($js_methods));
+        $critical_js_methods = array_values(array_unique($critical_js_methods));
+        $noncritical_js_methods = array_values(array_unique($noncritical_js_methods));
+
+        // If a method was marked both critical and non-critical, then mark it as critical only
+        $noncritical_js_methods = array_diff(
+            $noncritical_js_methods,
+            $critical_js_methods
+        );
+
+        return array(
+            POP_PROGRESSIVEBOOTING_CRITICAL => $critical_js_methods,
+            POP_PROGRESSIVEBOOTING_NONCRITICAL => $noncritical_js_methods,
+        );
     }
 
-    public static function add_pagesection_jsmethods(&$js_methods, $templateMethods) {
+    public static function add_pagesection_jsmethods(&$js_methods, $templateMethods, $priority) {
         
-        foreach ($templateMethods as $template => $groupMethods) {
-            foreach ($groupMethods as $group => $methods) {
-                foreach ($methods as $method) {
-                    $js_methods[] = $method;
+        foreach ($templateMethods as $template => $priorityGroupMethods) {
+            // foreach ($priorityGroupMethods as $priority => $groupMethods) {
+            if ($groupMethods = $priorityGroupMethods[$priority]) {
+                foreach ($groupMethods as $group => $methods) {
+                    foreach ($methods as $method) {
+                        $js_methods[] = $method;
+                    }
                 }
             }
+            // }
         }
+        // foreach ($templateMethods as $template => $groupMethods) {
+        //     foreach ($groupMethods as $group => $methods) {
+        //         foreach ($methods as $method) {
+        //             $js_methods[] = $method;
+        //         }
+        //     }
+        // }
     }
 
-    public static function add_block_jsmethods(&$js_methods, $templateMethods) {
+    public static function add_block_jsmethods(&$js_methods, $templateMethods, $priority) {
         
-        if ($groupMethods = $templateMethods[GD_JS_METHODS]) {
-            foreach ($groupMethods as $group => $methods) {
-                foreach ($methods as $method) {
-                    $js_methods[] = $method;
+        if ($priorityGroupMethods = $templateMethods[GD_JS_METHODS]) {
+            // foreach ($priorityGroupMethods as $priority => $groupMethods) {
+            if ($groupMethods = $priorityGroupMethods[$priority]) {
+                foreach ($groupMethods as $group => $methods) {
+                    foreach ($methods as $method) {
+                        $js_methods[] = $method;
+                    }
                 }
             }
+            // }
         }
+        // if ($groupMethods = $templateMethods[GD_JS_METHODS]) {
+        //     foreach ($groupMethods as $group => $methods) {
+        //         foreach ($methods as $method) {
+        //             $js_methods[] = $method;
+        //         }
+        //     }
+        // }
 
         if ($templateMethods[GD_JS_NEXT]) {
             foreach ($templateMethods[GD_JS_NEXT] as $next) {
-                self::add_block_jsmethods($js_methods, $next);
+                self::add_block_jsmethods($js_methods, $next, $priority);
             }
         }
     }

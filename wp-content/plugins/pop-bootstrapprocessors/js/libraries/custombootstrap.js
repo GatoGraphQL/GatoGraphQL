@@ -274,7 +274,7 @@ window.popCustomBootstrap = {
 				options.url = url;
 			}
 
-			popManager.initBlockBranches(domain, pageSection, blocks, options);
+			popManager.initBlockBranches(domain, pageSection, blocks, null, options);
 		});
 
 		// Make the contained blocks trigger the 'visible' handler, which will be caught by other functions (eg: reload)

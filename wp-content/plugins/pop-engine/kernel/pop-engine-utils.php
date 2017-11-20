@@ -132,21 +132,38 @@ class GD_TemplateManager_Utils {
 		return urldecode($url);
 	}
 
-	public static function add_jsmethod(&$ret, $method, $group = GD_JSMETHOD_GROUP_MAIN, $unshift = false) {
+	public static function add_jsmethod(&$ret, $method, $group = '', $unshift = false, $priority = null) {
+
+		$priority = $priority ?? POP_PROGRESSIVEBOOTING_NONCRITICAL;
+		$group = $group ? $group : GD_JSMETHOD_GROUP_MAIN;
 
 		if ($unshift) {
-			if (!$ret[$group]) {
-				$ret[$group] = array();
+			if (!$ret[$priority]) {
+				$ret[$priority] = array();
 			}
-			array_unshift($ret[$group], $method);
+			if (!$ret[$priority][$group]) {
+				$ret[$priority][$group] = array();
+			}
+			array_unshift($ret[$priority][$group], $method);
 		}
 		else {
-			$ret[$group][] = $method;
+			$ret[$priority][$group][] = $method;
 		}
 	}
 	public static function remove_jsmethod(&$ret, $method, $group = GD_JSMETHOD_GROUP_MAIN) {
 		
-		array_splice($ret[$group], array_search($method, $ret[$group]), 1);
+		// Remove from both 'critical' and 'noncritical' priorities
+		$priorities = array(
+			POP_PROGRESSIVEBOOTING_CRITICAL,
+			POP_PROGRESSIVEBOOTING_NONCRITICAL,
+		);
+		foreach ($priorities as $priority) {
+
+			$pos = array_search($method, $ret[$group][$priority]);
+			if ($pos >= 0) {
+				array_splice($ret[$group][$priority], $pos, 1);
+			}
+		}
 	}
 
 	public static function add_unique_id($url) {

@@ -325,8 +325,10 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 				// Load the ResourceLoader Config files
 				$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES;
 
+				// Comment Leo 20/11/2017: since making the backgroundLoad execute in window.addEventListener('load', function() {,
+				// we can just wait to load resource.js, so no need for initialresources.js anymore
 				// Add the backgroundLoad resources from the beginning, so we already have the mapping with the resources for these URL, which will be fetched immediately when loading the website
-				$manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES;
+				// $manager_dependencies[] = POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES;
 
 				if ($manager_dependencies = apply_filters(
 					'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',

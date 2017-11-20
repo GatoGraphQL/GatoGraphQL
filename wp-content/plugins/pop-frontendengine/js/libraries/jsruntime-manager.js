@@ -9,12 +9,17 @@ window.popJSRuntimeManager = {
 	'full-session-ids': {},
 	'last-session-ids': {},
 	blockURL: null,
-	pageSectionURL: 'general',
+	pageSectionURL: null,
 
 	//-------------------------------------------------
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
+	setPageSectionURL : function(url) {
+		
+		var that = this;
+		that.pageSectionURL = url;
+	},
 	setBlockURL : function(blockOrURL) {
 		
 		var that = this;
@@ -29,6 +34,9 @@ window.popJSRuntimeManager = {
 			url = blockOrURL;
 		}
 		that.blockURL = url;
+
+		// Also set the pageSection's URL
+		that.setPageSectionURL(url);
 	},
 
 	initBlockVarPaths : function(vars, url, domain, pssId, targetId, template, group) {
@@ -129,8 +137,6 @@ window.popJSRuntimeManager = {
 	getPageSectionSessionIds : function(domain, pageSection, session) {
 	
 		var that = this;
-
-		// The URL is a static placeholder, since the pageSection is always initialized immediately
 		var url = that.pageSectionURL;
 
 		return that.getTargetSessionIds(url, domain, pageSection, pageSection, session);

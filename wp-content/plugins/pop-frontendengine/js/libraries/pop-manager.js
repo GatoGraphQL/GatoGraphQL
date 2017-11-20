@@ -395,6 +395,12 @@ window.popManager = {
 			// Keep the pageSection DOM elems
 			var pageSections = [];
 
+			var topLevelFeedback = that.getTopLevelFeedback(domain);
+			var url = topLevelFeedback[M.URLPARAM_URL];
+
+			// Set the URL for the 'session-ids'
+			popJSRuntimeManager.setPageSectionURL(url);
+
 			// Comment Leo 01/12/2016: Split the logic below into 2: first render all the pageSections (that.renderPageSection(pageSection)),
 			// and then execute all JS on them (that.pageSectionInitialized(pageSection)), and in between remove the "loading" screen
 			// this way, the first paint is much faster, for a better user experience
@@ -414,17 +420,23 @@ window.popManager = {
 				that.addPageSectionIds(domain, pageSection, psConfiguration[M.JS_TEMPLATE]);
 
 				// Allow plugins to catch events for the rendering
-				that.initPageSection(pageSection);
+				that.initPageSection(domain, pageSection);
 
 				pageSections.push(pageSection);
 			});
 
-
 			// Step 1: render the pageSection
 			var options = {
-				'serverside-rendering': M.USESERVERSIDERENDERING
+				'serverside-rendering': M.USESERVERSIDERENDERING,
+				'session-ids-url': url
 			}
 
+			// Progressive Booting: if enabled, split the process of initializing JS into 2: 'critical' immediately, and 'noncritical' after the page loads
+			var priority = null;
+			if (M.USE_PROGRESSIVEBOOTING) {
+				priority = M.PROGRESSIVEBOOTING.CRITICAL;
+			}
+			
 			// Comment Leo 12/09/2017: Gotta use the Deferred here already, because the rendered pageSection
 			// may trigger a backgroundLoad of a page which is already cached (localStorage/Service Workers),
 			// so the response will come back immediately and try to render itself, for which
@@ -436,7 +448,9 @@ window.popManager = {
 				// // Re-calculate the progress
 				// that.progress = parseInt(delta*(index+1));
 
-				that.renderPageSection(domain, pageSection, options);
+				// This will also initialize the 'critical' JS
+				// Here it will not delete the session-ids yet, so they can be accessed by 'noncritical'
+				that.renderPageSection(domain, pageSection, priority, options);
 			});
 			dfd.resolve();
 
@@ -452,8 +466,6 @@ window.popManager = {
 			// Step 4: remove the "loading" screen
 			$(document.body).removeClass('pop-loadingjs');
 
-			var topLevelFeedback = that.getTopLevelFeedback(domain);
-			var url = topLevelFeedback[M.URLPARAM_URL];
 			if (!topLevelFeedback[M.URLPARAM_SILENTDOCUMENT]) {
 				
 				// Update URL: it will remove the unwanted items, eg: mode=embed (so that if the user clicks on the newWindow btn, it opens properly)
@@ -463,9 +475,31 @@ window.popManager = {
 
 			that.documentInitialized(domain);
 
-			// If the server requested to extra load more URLs
-			that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
-			that.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
+			// // If the server requested to extra load more URLs
+			// that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
+			// that.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
+
+			// Progressive booting: Execute the non-critical JS functions
+			window.addEventListener('load', function() {
+
+				// If Progressive Booting is enabled...
+				if (M.USE_PROGRESSIVEBOOTING) {
+
+					// Initialize the 'noncritical' JS
+					$.each(pageSections, function(index, pageSection) {
+
+						// that.nonCriticalInitPageSectionBranches(domain, pageSection, options);
+						// Here it will delete the session-ids
+						that.initPageSectionBranches(domain, pageSection, M.PROGRESSIVEBOOTING.NONCRITICAL, options);
+					});
+				}
+
+				// Comment Leo 20/11/2017: execute backgroundLoad only now, after the page has loaded
+				// This way, we bring forward the "Time to interactive", for all those functionalities that the user can see/is waiting for
+				// The backgroundLoad can be prioritized lower (the /loggedinuser-data/ page, brought thru backgroundLoad, would be nice to bring immediately, but is a tradeoff; application views can certainly wait)
+				that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
+				that.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
+			});
 		}
 	},
 
@@ -719,11 +753,14 @@ window.popManager = {
 		});
 	},
 
-	initPageSection : function(pageSection) {
+	initPageSection : function(domain, pageSection) {
 	
 		var that = this;
 
 		that.firstLoad[that.getSettingsId(pageSection)] = true;
+
+		// Initialize the params for this branch
+		that.initPageSectionRuntimeMemory(domain, pageSection);
 
 		popJSLibraryManager.execute('initPageSection', {pageSection: pageSection});
 		pageSection.triggerHandler('initialize');
@@ -734,8 +771,8 @@ window.popManager = {
 	
 		var that = this;
 
-		// Initialize the params for this branch
-		that.initPageSectionRuntimeMemory(domain, pageSection);
+		// // Initialize the params for this branch
+		// that.initPageSectionRuntimeMemory(domain, pageSection);
 
 		popJSLibraryManager.execute('pageSectionInitialized', {domain: domain, pageSection: pageSection});
 		pageSection.triggerHandler('initialized');
@@ -746,7 +783,7 @@ window.popManager = {
 		that.firstLoad[that.getSettingsId(pageSection)] = false;
 	},
 
-	pageSectionNewDOMsInitialized : function(domain, pageSection, newDOMs, options) {
+	pageSectionNewDOMsInitialized : function(domain, pageSection, newDOMs, priority, options) {
 	
 		var that = this;
 
@@ -781,17 +818,34 @@ window.popManager = {
 		// Execute this first, so we can switch the tabPane to the newly added one before executing the JS
 		popJSLibraryManager.execute('pageSectionNewDOMsBeforeInitialize', args);
 
-		that.initPageSectionBranches(domain, pageSection, newDOMs, options);
+		that.initPageSectionBranches(domain, pageSection, priority, options);
 
 		popJSLibraryManager.execute('pageSectionNewDOMsInitialized', args);
 	},
 
-	initPageSectionBranches : function(domain, pageSection, newDOMs, options) {
+	initPageSectionBranches : function(domain, pageSection, priority, options) {
 	
 		var that = this;
+		options = options || {};
+
+		// Comment Leo 20/11/2017: we must set for what URL we are getting the session-ids and then deleting them
+		// Otherwise, there may be a problem after the introduction of Progressive Booting:
+		// 1. We execute 'critical' JS, which doesn't yet delete the pageSection session-ids
+		// 2. This execution triggers calling https://getpop.org/en/loaders/loggedinuser-data/
+		// 3. This one executes its own JS, and deletes all the pageSection session ids (formerly always under key 'general')
+		// 4. When executing the 'noncritical' JS, the session-ids do not exist anymore!
+		// Set the value of the URL in the options to make it explicit. Otherwise, take it from the topLevelFeedback
+		var url = options['session-ids-url'];
+		if (!url) {
+			var tlFeedback = popManager.getTopLevelFeedback(domain);
+			url = tlFeedback[M.URLPARAM_URL];
+		}
+
+		// Set it immediately before running the JS methods
+		popJSRuntimeManager.setPageSectionURL(url);
 
 		// First initialize the JS for the pageSection
-		that.runPageSectionJSMethods(domain, pageSection, options);
+		that.runPageSectionJSMethods(domain, pageSection, priority, options);
 
 		// Then, Initialize all inner scripts for the blocks
 		// It is fine that it uses pageSection in the 2nd params, since it's there that it stores the branches information, already selecting the proper element nodes
@@ -800,11 +854,17 @@ window.popManager = {
 		if (blockBranches) {
 
 			var branches = $(blockBranches.join(',')).not('.'+M.JS_INITIALIZED);
-			that.initBlockBranches(domain, pageSection, branches, options);
+			that.initBlockBranches(domain, pageSection, branches, priority, options);
 		}
 
-		// Delete the session ids at the end of the rendering
-		popJSRuntimeManager.deletePageSectionLastSessionIds(domain, pageSection);
+		// Delete the session ids at the end of the rendering, but not for 'critical', since we will be executing 'noncritical' immediately after
+		// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+		if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
+
+			// To be on the safe side that the URL might've been changed by some process in between, set it once again now
+			popJSRuntimeManager.setPageSectionURL(url);
+			popJSRuntimeManager.deletePageSectionLastSessionIds(domain, pageSection);
+		}
 	},
 
 	triggerDestroyTarget : function(url, target) {
@@ -860,11 +920,11 @@ window.popManager = {
 		that.destroyTarget(domain, pageSection, target);
 	},
 
-	pageSectionRendered : function(domain, pageSection, newDOMs, options) {
+	pageSectionRendered : function(domain, pageSection, newDOMs, priority, options) {
 
 		var that = this;		
 
-		that.pageSectionNewDOMsInitialized(domain, pageSection, newDOMs, options);
+		that.pageSectionNewDOMsInitialized(domain, pageSection, newDOMs, priority, options);
 
 		var args = {
 			domain: domain,
@@ -904,7 +964,7 @@ window.popManager = {
 		block.addClass(M.JS_INITIALIZED).removeClass(M.CLASS_LAZYJS);
 	},
 
-	initBlockBranches : function(domain, pageSection, blocks, options) {
+	initBlockBranches : function(domain, pageSection, blocks, priority, options) {
 
 		var that = this;
 
@@ -933,13 +993,30 @@ window.popManager = {
 			// after it gets rendered appending new DOMs
 			if (proceed) {
 
-				that.setJsInitialized(block);
-				that.initBlock(domain, pageSection, block, options);
+				// For priority = 'critical' do not set as initialized, since we will execute immediately after the 'noncritical' batch
+				// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+				if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
+					
+					that.setJsInitialized(block);
+				}
+
+				// For priority = 'noncritical', no need to initialize, since the block has already been initialized during 'critical'
+				// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+				if (priority != M.PROGRESSIVEBOOTING.NONCRITICAL) {
+
+					that.initBlock(domain, pageSection, block, priority, options);
+				}
+				else {
+
+					// Directly run the 'noncritical' JS methods, which otherwise is done in initBlock
+					popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
+					that.runBlockJSMethods(domain, pageSection, block, priority, options);
+				}
 
 				var jsSettings = that.getJsSettings(domain, pageSection, block);
 				var blockBranches = jsSettings['initjs-blockbranches'];
 				if (blockBranches) {
-					that.initBlockBranches(domain, pageSection, $(blockBranches.join(', ')).not('.'+M.JS_INITIALIZED), options);
+					that.initBlockBranches(domain, pageSection, $(blockBranches.join(', ')).not('.'+M.JS_INITIALIZED), priority, options);
 				}
 				var blockChildren = jsSettings['initjs-blockchildren'];
 				if (blockChildren) {
@@ -951,13 +1028,13 @@ window.popManager = {
 							target = target.children(selector).not('.'+M.JS_INITIALIZED);
 						});
 					});
-					that.initBlockBranches(domain, pageSection, target, options);
+					that.initBlockBranches(domain, pageSection, target, priority, options);
 				}
 			}
 		});
 	},
 
-	initBlock : function(domain, pageSection, block, options) {
+	initBlock : function(domain, pageSection, block, priority, options) {
 
 		var that = this;
 		options = options || {};
@@ -971,7 +1048,7 @@ window.popManager = {
 		that.initializeBlock(pageSection, block, options);
 
 		that.runScriptsBefore(pageSection, block);
-		that.runBlockJSMethods(domain, pageSection, block, options);
+		that.runBlockJSMethods(domain, pageSection, block, priority, options);
 		
 		// Important: place these handlers only at the end, so that handlers specified in popManagerMethods are executed first
 		// and follow the same order as above
@@ -988,7 +1065,7 @@ window.popManager = {
 			// This won't execute again the JS on the block when adding newDOMs, because by then
 			// the block ID will have disappeared from the lastSessionIds. The only ids will be the new ones,
 			// contained in newDOMs
-			that.runBlockJSMethods(renderedDomain, pageSection, block, null, options);
+			that.runBlockJSMethods(renderedDomain, pageSection, block, null, null, options);
 		});
 
 		that.blockInitialized(domain, pageSection, /*pageSectionPage, */block, options);
@@ -1080,21 +1157,45 @@ window.popManager = {
 			});
 		}
 	},
+	getGroupMethodsByPriority : function(priorityGroupMethods, priority) {
+	
+		var that = this;
+		
+		// Execute methods: "critical" or "noncritical" if specified, or all of them if "null"
+		var priorities = [M.PROGRESSIVEBOOTING.CRITICAL, M.PROGRESSIVEBOOTING.NONCRITICAL];
+		if (priorities.indexOf(priority) >= 0) {
 
-	runPageSectionJSMethods : function(domain, pageSection, options) {
+			return priorityGroupMethods[priority];
+		}
+
+		// or execute both when the priority is null (=> Progressive Booting is disabled, or calling this function not from popManager.init())
+		// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+		var groupMethods = {};
+		$.each(priorities, function(index, priority) {
+
+			if (priorityGroupMethods[priority]) {
+				$.extend(groupMethods, priorityGroupMethods[priority]);
+			}
+		});
+
+		return groupMethods;
+	},
+
+	runPageSectionJSMethods : function(domain, pageSection, priority, options) {
 	
 		var that = this;
 
-		var sessionIds = popJSRuntimeManager.getPageSectionSessionIds(domain, pageSection);
+		var sessionIds = popJSRuntimeManager.getPageSectionSessionIds(domain, pageSection, 'last');
 		if (!sessionIds) return;
 
 		// Make sure it executes the JS in each template only once.
 		// Eg: Otherwise, since having MultiLayouts, it will execute 'popover' for each single 'layout-popover-user' template found, and it repeats itself inside a block many times
 		var executedTemplates = [];
 		var templateMethods = that.getPageSectionJsMethods(domain, pageSection);
-		$.each(templateMethods, function(template, groupMethods) {
+		$.each(templateMethods, function(template, priorityGroupMethods) {
 			if (executedTemplates.indexOf(template) == -1) {
 				executedTemplates.push(template);
+				var groupMethods = that.getGroupMethodsByPriority(priorityGroupMethods, priority);
 				if (sessionIds[template] && groupMethods) {
 					$.each(groupMethods, function(group, methods) {
 						var ids = sessionIds[template][group];
@@ -1119,15 +1220,18 @@ window.popManager = {
 		});
 	},
 
-	runBlockJSMethods : function(domain, pageSection, block, options) {
+	runBlockJSMethods : function(domain, pageSection, block, priority, options) {
 	
 		var that = this;
-		that.runJSMethods(domain, pageSection, block, null, null, options);
+		that.runJSMethods(domain, pageSection, block, null, null, priority, options);
 		
 		// Delete the session ids after running the js methods
-		popJSRuntimeManager.deleteBlockLastSessionIds(domain, pageSection, block);
+		// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+		if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
+			popJSRuntimeManager.deleteBlockLastSessionIds(domain, pageSection, block);
+		}
 	},
-	runJSMethods : function(domain, pageSection, block, templateFrom, session, options) {
+	runJSMethods : function(domain, pageSection, block, templateFrom, session, priority, options) {
 	
 		var that = this;
 
@@ -1138,9 +1242,9 @@ window.popManager = {
 		if (!sessionIds) return;
 		
 		var templateMethods = that.getTemplateJSMethods(domain, pageSection, block, templateFrom);
-		that.runJSMethodsInner(domain, pageSection, block, templateMethods, sessionIds, [], options);
+		that.runJSMethodsInner(domain, pageSection, block, templateMethods, sessionIds, [], priority, options);
 	},	
-	runJSMethodsInner : function(domain, pageSection, block, templateMethods, sessionIds, executedTemplates, options) {
+	runJSMethodsInner : function(domain, pageSection, block, templateMethods, sessionIds, executedTemplates, priority, options) {
 	
 		var that = this;
 		options = options || {};
@@ -1148,32 +1252,37 @@ window.popManager = {
 		// For each template, analyze what methods must be executed, and then continue down the line
 		// doing the same for contained templates
 		var template = templateMethods[M.JS_TEMPLATE];//templateMethods.template;
-		var groupMethods = templateMethods[M.JS_METHODS];//templateMethods.methods;
-
 		if (executedTemplates.indexOf(template) == -1) {
 			
 			executedTemplates.push(template);
-			
-			if (sessionIds[template] && groupMethods) {
-				$.each(groupMethods, function(group, methods) {
-					var ids = sessionIds[template][group];
-					if (ids) {
-						var selector = '#'+ids.join(', #');
-						var targets = $(selector);
-						if (targets.length) {
-							$.each(methods, function(index, method) {
-								var args = {
-									domain: domain,
-									pageSection: pageSection,
-									block: block,
-									targets: targets,
-								};
-								that.extendArgs(args, options);
-								popJSLibraryManager.execute(method, args);
-							});
+
+			if (templateMethods[M.JS_METHODS]) {
+		
+				// Execute methods: "critical" or "noncritical" if specified,
+				// or execute both when the priority is null (=> Progressive Booting is disabled, or calling this function not from popManager.init())
+				// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+				var groupMethods = that.getGroupMethodsByPriority(templateMethods[M.JS_METHODS], priority);
+				if (sessionIds[template] && groupMethods) {
+					$.each(groupMethods, function(group, methods) {
+						var ids = sessionIds[template][group];
+						if (ids) {
+							var selector = '#'+ids.join(', #');
+							var targets = $(selector);
+							if (targets.length) {
+								$.each(methods, function(index, method) {
+									var args = {
+										domain: domain,
+										pageSection: pageSection,
+										block: block,
+										targets: targets,
+									};
+									that.extendArgs(args, options);
+									popJSLibraryManager.execute(method, args);
+								});
+							}
 						}
-					}
-				});
+					});
+				}
 			}
 		}
 
@@ -1183,7 +1292,7 @@ window.popManager = {
 			// Next is an array, since each template can contain many others.
 			$.each(templateMethods[M.JS_NEXT]/*templateMethods.next*/, function(index, next) {
 				
-				that.runJSMethodsInner(domain, pageSection, /*pageSectionPage, */block, next, sessionIds, executedTemplates, options);
+				that.runJSMethodsInner(domain, pageSection, /*pageSectionPage, */block, next, sessionIds, executedTemplates, priority, options);
 			})
 		}
 	},
@@ -2311,11 +2420,12 @@ window.popManager = {
 
 		// First Check if the response also includes other pageSections. Eg: when fetching Projects, it will also bring its MainRelated
 		// Check first so that later on it can refer javascript on these already created objects
+		popJSRuntimeManager.setPageSectionURL(url);
 		$.each(response.settings.configuration, function(rpssId, rpsConfiguration) {
 
 			var psId = rpsConfiguration[M.JS_FRONTENDID];//rpsConfiguration['frontend-id'];
 			var pageSection = $('#'+psId);
-			that.renderPageSection(domain, pageSection, options);
+			that.renderPageSection(domain, pageSection, null, options);
 		
 			// Trigger
 			pageSection.triggerHandler('fetched', [options, url, domain]);
@@ -3425,7 +3535,7 @@ window.popManager = {
 		$(document).triggerHandler('template:merged');
 	},
 
-	renderPageSection : function(domain, pageSection, options) {
+	renderPageSection : function(domain, pageSection, priority, options) {
 	
 		var that = this;
 		options = options || {};
@@ -3461,7 +3571,7 @@ window.popManager = {
 		// So then do not call pageSectionRendered, or it can make mess (eg: it scrolls up when /userloggedin-data comes back)
 		if (newDOMs.length) {
 
-			that.pageSectionRendered(domain, pageSection, newDOMs, options);
+			that.pageSectionRendered(domain, pageSection, newDOMs, priority, options);
 		}
 	},
 

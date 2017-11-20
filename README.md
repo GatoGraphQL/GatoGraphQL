@@ -98,6 +98,8 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_USECODESPLITTING` (_true_|_false_): Load only the .js and .css that is needed on each page and nothing more.
 
+- `POP_SERVER_USEPROGRESSIVEBOOTING` (_true_|_false_): If doing code splitting, load JS resources on 2 stages: critical ones immediately, and non-critical ones deferred, to lower down the Time to Interactive of the application.
+
 - `POP_SERVER_GENERATEBUNDLEGROUPFILES` and `POP_SERVER_GENERATEBUNDLEFILES` (_true_|_false_): (Only if doing code-splitting) When executing the /generate-theme/ build script, generate a single bundlegroup and/or a series of bundle files for each page on the website containing all resources it needs.
 
 - `POP_SERVER_ENQUEUEFILESTYPE` (_resource_|_bundle_|_bundlegroup_): (Only if doing code-splitting) Choose how the initial-page resources are loaded:
