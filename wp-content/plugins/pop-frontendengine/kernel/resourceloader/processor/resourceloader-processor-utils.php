@@ -728,9 +728,12 @@ class PoP_ResourceLoaderProcessorUtils {
         ));
 
         // Get the list of methods that will be called in that pageSection, to obtain, later on, what JS resources are needed 
-        $methods = array_values(self::get_jsmethods_from_template($toplevel_template_id, $toplevel_atts));
-        $critical_methods = $methods[POP_PROGRESSIVEBOOTING_CRITICAL];
-        $noncritical_methods = $methods[POP_PROGRESSIVEBOOTING_NONCRITICAL];
+        // Comment Leo 21/11/2017: when switching from all methods to critical/noncritical ones, I dropped the array_values() out from $methods,
+        // and added it when calculating $(non)critical_methods
+        // $methods = array_values(self::get_jsmethods_from_template($toplevel_template_id, $toplevel_atts));
+        $methods = self::get_jsmethods_from_template($toplevel_template_id, $toplevel_atts);
+        $critical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_CRITICAL]);
+        $noncritical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_NONCRITICAL]);
 
         // Finally, merge all the template and JS resources together
         // return self::calculate_resources($sources, $methods);
