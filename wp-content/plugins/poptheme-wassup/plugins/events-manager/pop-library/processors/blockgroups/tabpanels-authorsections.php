@@ -352,6 +352,9 @@ class GD_EM_Template_Processor_AuthorSectionTabPanelBlockGroups extends GD_Templ
 			$class = 'calendar';
 		}
 		if ($class) {
+			
+			// Artificial property added to identify the template when adding template-resources
+			$this->add_att($template_id, $atts, 'resourceloader', $class);
 			$this->append_att($template_id, $atts, 'class', $class);
 		}
 

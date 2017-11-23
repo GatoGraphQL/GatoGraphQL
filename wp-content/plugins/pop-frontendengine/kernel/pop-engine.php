@@ -162,8 +162,8 @@ class PoPFrontend_Engine extends PoP_Engine {
 		$script = 'pop';
 		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			global $pop_resourceloaderprocessor_manager;
-			$script = $pop_resourceloaderprocessor_manager->first_script;
+			global $pop_jsresourceloaderprocessor_manager;
+			$script = $pop_jsresourceloaderprocessor_manager->first_script;
 		}
 		elseif (PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
@@ -283,7 +283,9 @@ class PoPFrontend_Engine extends PoP_Engine {
 
 		// Needed for the ResourceLoader, to load also all other needed sources by each template
 		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
+
 			$json_sitemapping['template-extra-sources'] = $processor->get_templates_extra_sources($template_id, $atts);
+			$json_sitemapping['template-resources'] = $processor->get_templates_resources($template_id, $atts);
 		}
 		
 		return $json_sitemapping;

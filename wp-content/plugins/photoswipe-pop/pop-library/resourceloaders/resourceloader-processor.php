@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_PHOTOSWIPE', PoP_TemplateIDUtils::get_template_definition('photoswipe'));
 
-class PhotoSwipe_PoP_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PhotoSwipe_PoP_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

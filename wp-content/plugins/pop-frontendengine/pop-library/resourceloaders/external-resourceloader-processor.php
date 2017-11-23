@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_EXTERNAL_HANDLEBARS', PoP_TemplateIDUtils::get_template_definition('external-handlebars'));
 
-class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
+class PoP_FrontEnd_JSExternalResourceLoaderProcessor extends PoP_ExternalJSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -76,4 +76,4 @@ class PoP_FrontEnd_ExternalResourceLoaderProcessor extends PoP_ExternalResourceL
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_FrontEnd_ExternalResourceLoaderProcessor();
+new PoP_FrontEnd_JSExternalResourceLoaderProcessor();

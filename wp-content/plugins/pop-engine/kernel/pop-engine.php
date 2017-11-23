@@ -189,6 +189,7 @@ class PoP_Engine {
 		if ($json['sitemapping']) {
 
 			unset($json['sitemapping']['template-extra-sources']);
+			unset($json['sitemapping']['template-resources']);
 			unset($json['sitemapping']['dynamic-template-sources']);
 		}
 			

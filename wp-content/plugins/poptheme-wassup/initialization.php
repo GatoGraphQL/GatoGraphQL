@@ -157,6 +157,7 @@ class PoPTheme_Wassup_Initialization {
 		$cdn_css_folder = $css_folder . '/cdn';
 		$libraries_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/libraries';
 		$includes_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/includes';
+		$templates_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/templates';
 		$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
 		$bundles_css_folder = $dist_css_folder . '/bundles';
 
@@ -165,7 +166,7 @@ class PoPTheme_Wassup_Initialization {
 		 ----------------------------- */
 
 		// Comment Leo 12/11/2017: always add the bundle instead, until introducing CSS through the resourceLoader
-		if (true || PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		if (/*true || */PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
 			wp_register_style('poptheme-wassup', $bundles_css_folder . '/poptheme-wassup.bundle.min.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
 			wp_enqueue_style('poptheme-wassup');
@@ -188,11 +189,93 @@ class PoPTheme_Wassup_Initialization {
 			wp_register_style('poptheme-wassup-bootstrap', $libraries_css_folder . '/custom.bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
 			wp_enqueue_style('poptheme-wassup-bootstrap');
 
-			wp_register_style('poptheme-wassup-skeletonscreen', $libraries_css_folder . '/skeleton-screen'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-skeletonscreen');
-
 			wp_register_style('poptheme-wassup-typeahead-bootstrap', $libraries_css_folder . '/typeahead.js-bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-typeahead-bootstrap');	
+			wp_enqueue_style('poptheme-wassup-typeahead-bootstrap');
+
+			// If doing code-splitting, the resources below are already added by the ResourceLoader, so no need for them here
+			if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
+
+				wp_register_style('poptheme-wassup-blockgroup-home-welcome', $templates_css_folder . '/blockgroup-home-welcome'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-blockgroup-home-welcome');
+
+				wp_register_style('poptheme-wassup-collapse-hometop', $templates_css_folder . '/collapse-hometop'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-collapse-hometop');
+
+				wp_register_style('poptheme-wassup-quicklinkgroups', $templates_css_folder . '/quicklinkgroups'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-quicklinkgroups');
+
+				wp_register_style('poptheme-wassup-daterangepicker', $templates_css_folder . '/daterangepicker'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-daterangepicker');	
+
+				wp_register_style('poptheme-wassup-skeletonscreen', $templates_css_folder . '/skeleton-screen'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-skeletonscreen');	
+
+				wp_register_style('poptheme-wassup-blockcarousel', $templates_css_folder . '/block-carousel'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-blockcarousel');
+
+				wp_register_style('poptheme-wassup-fetchmore', $templates_css_folder . '/fetchmore'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-fetchmore');
+
+				wp_register_style('poptheme-wassup-blockgroup-author', $templates_css_folder . '/blockgroup-author'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-blockgroup-author');
+
+				wp_register_style('poptheme-wassup-blockgroup-authorsections', $templates_css_folder . '/blockgroup-authorsections'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-blockgroup-authorsections');
+
+				wp_register_style('poptheme-wassup-block', $templates_css_folder . '/block'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-block');
+
+				wp_register_style('poptheme-wassup-functionalblock', $templates_css_folder . '/functionalblock'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-functionalblock');
+
+				wp_register_style('poptheme-wassup-functionbutton', $templates_css_folder . '/functionbutton'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-functionbutton');
+
+				wp_register_style('poptheme-wassup-socialmedia', $templates_css_folder . '/socialmedia'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-socialmedia');
+
+				wp_register_style('poptheme-wassup-form-mypreferences', $templates_css_folder . '/form-mypreferences'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-form-mypreferences');
+
+				wp_register_style('poptheme-wassup-block-comments', $templates_css_folder . '/block-comments'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-block-comments');
+
+				wp_register_style('poptheme-wassup-frame-addcomments', $templates_css_folder . '/frame-addcomments'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-frame-addcomments');
+
+				wp_register_style('poptheme-wassup-side-sections-menu', $templates_css_folder . '/side-sections-menu'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-side-sections-menu');
+
+				wp_register_style('poptheme-wassup-littleguy', $templates_css_folder . '/littleguy'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-littleguy');
+
+				wp_register_style('poptheme-wassup-speechbubble', $templates_css_folder . '/speechbubble'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-speechbubble');
+
+				wp_register_style('poptheme-wassup-featuredimage', $templates_css_folder . '/featuredimage'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-featuredimage');
+
+				wp_register_style('poptheme-wassup-multiselect', $templates_css_folder . '/multiselect'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-multiselect');
+
+				wp_register_style('poptheme-wassup-homemessage', $templates_css_folder . '/homemessage'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-homemessage');
+
+				wp_register_style('poptheme-wassup-smalldetails', $templates_css_folder . '/smalldetails'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-smalldetails');
+
+				wp_register_style('poptheme-wassup-block-notifications', $templates_css_folder . '/block-notifications'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-block-notifications');
+
+				wp_register_style('poptheme-wassup-scroll-notifications', $templates_css_folder . '/scroll-notifications'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-scroll-notifications');
+
+				wp_register_style('poptheme-wassup-widget', $templates_css_folder . '/widget'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-widget');
+
+				wp_register_style('poptheme-wassup-dynamicmaxheight', $templates_css_folder . '/dynamicmaxheight'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-dynamicmaxheight');
+			}
 		}
 		
 		/* ------------------------------

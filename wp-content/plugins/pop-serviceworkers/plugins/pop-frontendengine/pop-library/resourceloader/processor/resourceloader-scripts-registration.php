@@ -1,25 +1,28 @@
 <?php
 
-class PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsRegistration {
+class PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsAndStylesRegistration {
 
 	function register_scripts() {
 
-		global $pop_resourceloaderprocessor_manager, $popfrontend_resourceloader_scriptsregistration;
+		global $pop_resourceloaderprocessor_manager, $popfrontend_resourceloader_scriptsandstyles_registration;
 
 		// Get all the resources
 		$resources = $pop_resourceloaderprocessor_manager->get_resources();
+
+		// Filter them
+		$resources = $pop_resourceloaderprocessor_manager->filter_js($resources);
 
 		// Add a hook to remove unwanted resources. Eg:
 		// POP_RESOURCELOADER_RESOURCELOADERCONFIG_EXTERNAL and POP_RESOURCELOADER_RESOURCELOADERCONFIG_EXTERNALRESOURCES
 		// (These only make sense to be added on the External page)
 		$resources = apply_filters(
-			'PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsRegistration:register_scripts',
+			'PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsAndStylesRegistration:register_scripts',
 			$resources
 		);
 
 		// Comment Leo 13/11/2017: no need for bundle/bundlegroups to be registered here, since we're just enqueuing resources for the AppShell
 		// // Calculate the bundles and bundlegroups
-		// $generatedfiles = $popfrontend_resourceloader_scriptsregistration->calculate_bundles($resources);
+		// $generatedfiles = $popfrontend_resourceloader_scriptsandstyles_registration->calculate_bundles($resources);
 		// $bundles = $generatedfiles['bundles'];
 		// $bundlegroups = $generatedfiles['bundle-groups'];
 		$bundles = array();
@@ -53,7 +56,7 @@ class PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsRegistration {
 		// 		}
 	 //        }
 
-	 //        $generatedfiles = $popfrontend_resourceloader_scriptsregistration->calculate_bundles($enqueue_appshell_resources);
+	 //        $generatedfiles = $popfrontend_resourceloader_scriptsandstyles_registration->calculate_bundles($enqueue_appshell_resources);
 		// 	$bundles = $generatedfiles['bundles'];
 		// 	$bundlegroups = $generatedfiles['bundle-groups'];
 		// }
@@ -61,12 +64,34 @@ class PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsRegistration {
 		// Comment Leo 14/11/2017: no need for $remove_bundled_resources, since the AppShell only deals with 'resource', so $bundle and $bundlegroups will be empty
 		// // Register them, but do not remove the individual resources, so they are added to the SW precache list
 		// $remove_bundled_resources = false;
-		$popfrontend_resourceloader_scriptsregistration->register_resources($resources, $bundles, $bundlegroups/*, $remove_bundled_resources*/);
+		$popfrontend_resourceloader_scriptsandstyles_registration->register_resources(POP_RESOURCELOADER_RESOURCETYPE_JS, $resources, $bundles, $bundlegroups/*, $remove_bundled_resources*/);
+	}
+
+	function register_styles() {
+
+		global $pop_resourceloaderprocessor_manager, $popfrontend_resourceloader_scriptsandstyles_registration;
+
+		// Get all the resources
+		$resources = $pop_resourceloaderprocessor_manager->get_resources();
+
+		// Filter them
+		$resources = $pop_resourceloaderprocessor_manager->filter_css($resources);
+
+		// Add a hook to remove unwanted resources.
+		$resources = apply_filters(
+			'PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsAndStylesRegistration:register_styles',
+			$resources
+		);
+
+		$bundles = array();
+		$bundlegroups = array();
+
+		$popfrontend_resourceloader_scriptsandstyles_registration->register_resources(POP_RESOURCELOADER_RESOURCETYPE_CSS, $resources, $bundles, $bundlegroups/*, $remove_bundled_resources*/);
 	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-global $pop_serviceworkers_frontend_resourceloader_scriptsregistration;
-$pop_serviceworkers_frontend_resourceloader_scriptsregistration = new PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsRegistration();
+global $pop_serviceworkers_frontend_resourceloader_scriptsandstyles_registration;
+$pop_serviceworkers_frontend_resourceloader_scriptsandstyles_registration = new PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsAndStylesRegistration();

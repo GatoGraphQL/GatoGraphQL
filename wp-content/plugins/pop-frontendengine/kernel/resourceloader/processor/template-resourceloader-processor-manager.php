@@ -5,14 +5,15 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-class PoP_TemplateResourceLoaderProcessor_Manager {
+class PoP_TemplateResourceLoaderProcessor_Manager/* extends PoP_JSResourceLoaderProcessor_Manager*/ {
 
-	var $templatesource_resources, $extensions;
+	var $templatesource_resources;
 	
 	function __construct() {
+
+		// parent::__construct();
 	
 		$this->templatesource_resources = array();
-		// $this->extensions = array();
 	}
 	
 	function get_resource($template_source) {
@@ -25,21 +26,13 @@ class PoP_TemplateResourceLoaderProcessor_Manager {
 		return $resource;
 	}
 	
-	// function get_extensions() {
-
-	// 	return $this->extensions;
-	// }
-	
 	function add($processor, $resources_to_process) {
+
+		// parent::add($processor, $resources_to_process);
 	
 		foreach ($resources_to_process as $resource) {
 		
 			$this->templatesource_resources[$processor->get_filename($resource)] = $resource;
-
-			// // If it is an extension, add it to the array
-			// if ($processor->is_extension($resource)) {
-			// 	$this->extensions[] = $resource;
-			// }
 		}	
 	}
 }

@@ -4190,6 +4190,8 @@ class GD_Template_Processor_CustomSectionBlocks extends GD_Template_Processor_Se
 
 			case GD_TEMPLATE_BLOCK_USERS_CAROUSEL:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'block-carousel');
 				$this->append_att($template_id, $atts, 'class', 'pop-block-carousel block-users-carousel');
 				break;
 

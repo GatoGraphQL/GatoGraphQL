@@ -26,6 +26,11 @@ class GD_Template_ProcessorBaseWrapper extends PoP_ProcessorBaseWrapper {
 		return $this->process($template_id, $atts, __FUNCTION__);
 	}
 
+	function get_templates_resources($template_id, $atts) {
+	
+		return $this->process($template_id, $atts, __FUNCTION__);
+	}
+
 	function fixed_id($template_id, $atts) {
 
 		return $this->process($template_id, $atts, __FUNCTION__);

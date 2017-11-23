@@ -456,6 +456,18 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 
 	var response = popManager.getHtml(/*domain, */templateName, context);
 
+	// Comment Leo 23/11/2017: actually we do need it! For lazy-loading content
+	// Eg: notification-layout, inside the pagesection-top notifications, when initializing the lazy-load must print the link
+	// // Comment Leo 22/11/2017: it makes no sense to print the styles in the body in the client, since loading
+	// // the css files through the resourceLoader: it starts fetch after the user clicks on the link, 
+	// // which is far more efficient than waiting until adding the HTML code to the DOM
+	// Add the CSS style links in the body?
+	if (M.PRINTTAGSINBODY) {
+
+		var resourceTags = popResourceLoader.includeResources(domain, context[M.JS_RESOURCES], true);
+		response = resourceTags + response;
+	}
+
 	if (options.hash.unsafe) {
 		return response;
 	}

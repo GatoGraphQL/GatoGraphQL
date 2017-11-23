@@ -12,7 +12,7 @@ define ('POP_RESOURCELOADER_MAPCOLLECTION', PoP_TemplateIDUtils::get_template_de
 define ('POP_RESOURCELOADER_MAP', PoP_TemplateIDUtils::get_template_definition('em-mapa')); // Changing the name, since 'em-map' is used by the template
 define ('POP_RESOURCELOADER_TYPEAHEADMAP', PoP_TemplateIDUtils::get_template_definition('em-typeahead-map'));
 
-class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

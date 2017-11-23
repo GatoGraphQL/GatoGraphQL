@@ -7,7 +7,7 @@
 
 class PoP_HTMLTags_Utils {
 
-	protected static $htmltag_attributes;
+	protected static $scripttag_attributes;
 	
 	function init() {
 	
@@ -25,15 +25,15 @@ class PoP_HTMLTags_Utils {
 	function maybe_add_scripttag_attributes($tag, $handle, $src) {
 
 		// Initialize
-		if (is_null(self::$htmltag_attributes)) {
+		if (is_null(self::$scripttag_attributes)) {
 
-			self::$htmltag_attributes = apply_filters(
-				'PoP_HTMLTags_Utils:htmltag_attributes',
+			self::$scripttag_attributes = apply_filters(
+				'PoP_HTMLTags_Utils:scripttag_attributes',
 				array()
 			);
 		}
 		
-		if ($attributes = self::$htmltag_attributes[$handle]) {
+		if ($attributes = self::$scripttag_attributes[$handle]) {
 
 			return str_replace(
 				" src='${src}'>",

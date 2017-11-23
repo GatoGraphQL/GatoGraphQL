@@ -499,6 +499,14 @@ class PoP_ServerSide_Helpers {
 
 		$response = $popManager->getHtml($templateName, $context);
 
+		// Add the CSS style links in the body?
+		if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+
+			$popResourceLoader = PoP_ServerSide_Libraries_Factory::get_resourceloader_instance();
+			$resourceTags = $popResourceLoader->includeResources($domain, $context[GD_JS_RESOURCES], true);
+			$response = $resourceTags.$response;
+		}
+
 		if ($options['hash']['unsafe']) {
 			return $response;
 		}

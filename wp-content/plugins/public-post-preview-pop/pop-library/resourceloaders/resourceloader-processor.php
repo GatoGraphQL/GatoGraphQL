@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_PPPFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('ppp-functions'));
 
-class PPP_PoP_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PPP_PoP_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

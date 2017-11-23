@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_CORECDNHOOKS', PoP_TemplateIDUtils::get_template_definition('core-cdn-hooks'));
 
-class PoP_CDNCore_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_CDNCore_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

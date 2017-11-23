@@ -14,30 +14,14 @@ window.popResourceLoader = {
 	config : {},
 
 	// Keep a list of all loading resources
-	loading : {
-		js : {
-			resources: [],
-		},
-		// css : {
-		// 	resources: [],
-		// 	bundles: [],
-		// 	"bundle-groups": [],
-		// }
-	},
-	'error-loading' : {
-		js : {
-			resources: [],
-		},
-	},
+	loading : [],
+	'error-loading' : [],
 	'loading-urls' : {},
 
 	// Keep a list of all loaded resources. All resources are called always the same among different domains,
 	// so one list here listing all of them works
-	loaded : {
-		js : {
-			resources: [],
-		},
-	},
+	loaded : [],
+	'loaded-in-body' : [],
 	// Loaded bundles and bundleGroups depend on their domains, since their names change among domains
 	'loaded-by-domain' : {},
 
@@ -83,6 +67,63 @@ window.popResourceLoader = {
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
+	includeResources : function(domain, resources, ignoreAlreadyIncluded) {
+
+		var that = this;
+		if (!resources) {
+
+			return '';
+		}
+
+		var config = that.getConfigByDomain(domain);
+		var body_resources = [];
+
+		// Remove the resources that have been included already
+		if (ignoreAlreadyIncluded) {
+			
+			// Comment Leo 23/11/2017: if a component is lazy-loaded, and inside has a CSS file that is printed in the body,
+			// then we must check if that resource has been added to the body. (It will be already marked as "loaded" by the website,
+			// but it never was actually because of the lazy-loading)
+			if (M.PRINTTAGSINBODY) {
+				
+				body_resources = $(resources).not(that['loaded-in-body']).get();
+			}
+			
+			resources = $(resources).not(that.loaded).get();
+		}
+
+		// Mark the resources as already included
+		that.loaded = that.loaded.concat(resources);
+		if (M.PRINTTAGSINBODY) {
+
+			that['loaded-in-body'] = that['loaded-in-body'].concat(body_resources);
+			resources = body_resources;
+		}
+
+		// Map the resources to their tags
+		var tags = resources.map(function(resource) {
+
+			var source = config.sources[resource];
+			var type = config.types[resource];
+			if (config.types[M.RESOURCELOADER.TYPES.CSS].indexOf(resource) >= 0) {
+				return '<link rel="stylesheet" href="{0}">'.format(source);
+			}
+			else if (config.types[M.RESOURCELOADER.TYPES.JS].indexOf(resource) >= 0) {
+				return '<script type="text/javascript" src="{0}"></script>'.format(source);
+			}
+			// var type = config.types[resource];
+			// if (type == M.RESOURCELOADER.TYPES.CSS) {
+			// 	return '<link rel="stylesheet" href="{0}">'.format(source);
+			// }
+			// else if (type == M.RESOURCELOADER.TYPES.JS) {
+			// 	return '<script type="text/javascript" src="{0}"></script>'.format(source);
+			// }
+			return '';
+		});
+
+		return tags.join('');
+	},
+
 	markResourceAsLoaded : function(url, state) {
 
 		var that = this;
@@ -93,14 +134,15 @@ window.popResourceLoader = {
 		// Only mark it as loaded if the state is "ok" and not "error"
 		if (state == 'ok') {
 
-			that.loaded.js.resources.push(resource);
+			that.loaded.push(resource);
+			that['loaded-in-body'].push(resource);
 		}
 		else if (state == 'error') {
-			that['error-loading'].js.resources.push(resource);
+			that['error-loading'].push(resource);
 		}
 
 		// Remove from the loading list, no need anymore
-		that.loading.js.resources.splice(that.loading.js.resources.indexOf(resource), 1);
+		that.loading.splice(that.loading.indexOf(resource), 1);
 		delete that['loading-urls'][url];
 	},
 
@@ -183,11 +225,9 @@ window.popResourceLoader = {
 	// 	return path.startsWith(single_path) && path != single_path;
 	// },
 
-	getConfig : function(url) {
+	getConfigByDomain : function(domain) {
 
 		var that = this;
-
-		var domain = getDomain(url);
 
 		// Check we have a config for this domain
 		var config = that.config[domain];
@@ -201,6 +241,14 @@ window.popResourceLoader = {
 		}
 		
 		return config || {};
+	},
+
+	getConfig : function(url) {
+
+		var that = this;
+
+		var domain = getDomain(url);
+		return that.getConfigByDomain(domain);
 	},
 
 	getHierarchy : function(url) {
@@ -264,7 +312,7 @@ window.popResourceLoader = {
 		var config = that.getConfig(url);
 
 		// Check that if the config has not been initialized, then nothing to do
-		if (!config || !config.resources || !config.resources.js) {
+		if (!config || !config.resources) {
 
 			return {};
 		}
@@ -273,11 +321,11 @@ window.popResourceLoader = {
 		var path = popUtils.getPath(url);
 
 		// The resources are placed under the hierarchy key in object config.resources.js
-		var jsResourcesDB = config.resources.js[hierarchy];
+		var resourcesDB = config.resources[hierarchy];
 
-		// // If we are requesting an external URL, and the config for that external domain is still not loaded, then jsResourcedDB will be null
+		// // If we are requesting an external URL, and the config for that external domain is still not loaded, then resourcesDB will be null
 		// // Eg: when loading: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F
-		// if (jsResourcesDB) {
+		// if (resourcesDB) {
 
 		// single and page are not flat, but their resources configuration comes under the path
 		if (hierarchy == 'single') {
@@ -286,11 +334,11 @@ window.popResourceLoader = {
 			// The code below doesn't work in UglifyJS!
 			// var paths = single_paths.filter(single_path => path.startsWith(single_path) && path != single_path/*that.isSinglePath(path, single_path)*/);
 			var paths = config.paths.single.filter(function(single_path) { return path.startsWith(single_path) && path != single_path /*that.isSinglePath(path, single_path)*/;});
-			jsResourcesDB = jsResourcesDB[paths[0]];
+			resourcesDB = resourcesDB[paths[0]];
 		}
 		else if (hierarchy == 'page') {
 
-			jsResourcesDB = jsResourcesDB[path];
+			resourcesDB = resourcesDB[path];
 		}
 		// }
 
@@ -299,12 +347,12 @@ window.popResourceLoader = {
 			url: url,
 			path: path,
 			config: config,
-			jsResourcesDB: jsResourcesDB,
+			resourcesDB: resourcesDB,
 		};
 		popJSLibraryManager.execute('loadResourcesDB', args);
-		jsResourcesDB = args.jsResourcesDB;
+		resourcesDB = args.resourcesDB;
 
-		return jsResourcesDB || {};
+		return resourcesDB || {};
 	},
 
 	getURLComponents : function(url) {
@@ -342,10 +390,8 @@ window.popResourceLoader = {
 		if (!that['loaded-by-domain'][domain]) {
 			
 			that['loaded-by-domain'][domain] = {
-				js: {
-					bundles: [], 
-					'bundle-groups': [],
-				}
+				bundles: [], 
+				'bundle-groups': [],
 			};
 		}
 	},
@@ -360,52 +406,55 @@ window.popResourceLoader = {
 		// 	return;
 		// }
 		
-		var jsResourcesDB = that.getResourcesDB(url);
+		var resourcesDB = that.getResourcesDB(url);
 		var urlComponents = that.getURLComponents(url);
 
 		var keyId = config.keys[urlComponents.key];
 
-		if (keyId && jsResourcesDB[keyId]) {
+		if (keyId && resourcesDB[keyId]) {
 
 			var domain = getDomain(url);
 			that.initLoadedByDomain(domain);
 			
 			// Load all the resources using JS		
-			var bundleGroupId = jsResourcesDB[keyId];
+			var bundleGroupIds = resourcesDB[keyId];
 
-			// Check if that bundleGroup has been loaded or loading. If so, do nothing
-			if (that['loaded-by-domain'][domain].js['bundle-groups'].indexOf(bundleGroupId) == -1/* || that.loading.js['bundle-groups'].indexOf(bundleGroupId) == -1*/) {
+			$.each(bundleGroupIds, function(index, bundleGroupId) {
 
-				// // Mark the bundleGroup as loading from now on
-				// that.loading.js['bundle-groups'].push(bundleGroupId);
+				// Check if that bundleGroup has been loaded or loading. If so, do nothing
+				if (that['loaded-by-domain'][domain]['bundle-groups'].indexOf(bundleGroupId) == -1/* || that.loading['bundle-groups'].indexOf(bundleGroupId) == -1*/) {
 
-				var bundleIds = config['bundle-groups'][bundleGroupId] || [];
+					// // Mark the bundleGroup as loading from now on
+					// that.loading['bundle-groups'].push(bundleGroupId);
 
-				// Filter out the bundleIds that have already been loaded or loading
-				bundleIds = $(bundleIds).not(that['loaded-by-domain'][domain].js.bundles).get();
-				// bundleIds = $(bundleIds).not(that.loading.js.bundles).get();
+					var bundleIds = config['bundle-groups'][bundleGroupId] || [];
 
-				$.each(bundleIds, function(index, bundleId) {
+					// Filter out the bundleIds that have already been loaded or loading
+					bundleIds = $(bundleIds).not(that['loaded-by-domain'][domain].bundles).get();
+					// bundleIds = $(bundleIds).not(that.loading.bundles).get();
 
-					// Check if that bundle has been loaded or loading. If so, do nothing
-					if (that['loaded-by-domain'][domain].js.bundles.indexOf(bundleId) == -1/* || that.loading.js.bundles.indexOf(bundleId) == -1*/) {
+					$.each(bundleIds, function(index, bundleId) {
 
-						// // Mark the bundle as loaded from now on
-						// that.loading.js.bundles.push(bundleId);
+						// Check if that bundle has been loaded or loading. If so, do nothing
+						if (that['loaded-by-domain'][domain].bundles.indexOf(bundleId) == -1/* || that.loading.bundles.indexOf(bundleId) == -1*/) {
 
-						var resources = config.bundles[bundleId];
+							// // Mark the bundle as loaded from now on
+							// that.loading.bundles.push(bundleId);
 
-						// Filter out the resources that have already been loaded or loading
-						resources = $(resources).not(that.loaded.js.resources).get();
-						resources = $(resources).not(that.loading.js.resources).get();
+							var resources = config.bundles[bundleId];
 
-						$.each(resources, function(index, resource) {
+							// Filter out the resources that have already been loaded or loading
+							resources = $(resources).not(that.loaded).get();
+							resources = $(resources).not(that.loading).get();
 
-							that.loadResource(config, resource);
-						});
-					}
-				});
-			}
+							$.each(resources, function(index, resource) {
+
+								that.loadResource(config, resource);
+							});
+						}
+					});
+				}
+			});
 		}
 		// If it couldnt' find a DB for the current URL, and the target is not main,
 		// then check for a configuration using the main target
@@ -422,20 +471,30 @@ window.popResourceLoader = {
 		var that = this;		
 
 		// Mark it as loading
-		that.loading.js.resources.push(resource);
+		that.loading.push(resource);
 
 		// Remove it from the error list, if it's there
-		var pos = that['error-loading'].js.resources.indexOf(resource);
+		var pos = that['error-loading'].indexOf(resource);
 		if (pos >= 0) {
-			that['error-loading'].js.resources.splice(pos, 1);
+			that['error-loading'].splice(pos, 1);
 		}
 		
 		var source = config.sources[resource];
-		var ordered = config['ordered-load-resources'].indexOf(resource) >= 0;
-		load_script(source, markResourceAsLoaded, ordered);
-
-		// Add the resource/url to the waiting list
 		that['loading-urls'][source] = resource;
+		
+		// Add the resource/url to the waiting list. Do it now because `load_style` will call the callback function immediately
+		// var type = config.types[resource];		
+		// if (type == M.RESOURCELOADER.TYPES.JS) {
+		if (config.types[M.RESOURCELOADER.TYPES.JS].indexOf(resource) >= 0) {
+	
+			var ordered = config['ordered-load-resources'].indexOf(resource) >= 0;
+			load_script(source, markResourceAsLoaded, ordered);
+		}
+		// else if (type == M.RESOURCELOADER.TYPES.CSS) {
+		else if (config.types[M.RESOURCELOADER.TYPES.CSS].indexOf(resource) >= 0) {
+
+			load_style(source, markResourceAsLoaded);
+		}
 	},
 
 	areResourcesLoadedForURL : function(url) {
@@ -448,98 +507,85 @@ window.popResourceLoader = {
 		// 	return;
 		// }
 		
-		var jsResourcesDB = that.getResourcesDB(url);
+		var resourcesDB = that.getResourcesDB(url);
 		var urlComponents = that.getURLComponents(url);
 
 		var keyId = config.keys[urlComponents.key];
 
-		if (keyId && jsResourcesDB[keyId]) {
+		if (keyId && resourcesDB[keyId]) {
 
 			var domain = getDomain(url);
 			that.initLoadedByDomain(domain);
 			
-			// First check if the bundleGroup is loaded
-			var bundleGroupId = jsResourcesDB[keyId];
+			var bundleGroupIds = resourcesDB[keyId];
 
-			// Check if that bundleGroup has been loaded. If so, do nothing
-			if (that['loaded-by-domain'][domain].js['bundle-groups'].indexOf(bundleGroupId) >= 0) {
+			// Filter out the bundleGroupIds that have already been loaded
+			bundleGroupIds = $(bundleGroupIds).not(that['loaded-by-domain'][domain]['bundle-groups']).get();
 
-				return true;
-			}
+			var loadedBundleGroups = true;
+			$.each(bundleGroupIds, function(index, bundleGroupId) {
 
-			// Then check if the bundles have been loaded
-			var bundleIds = config['bundle-groups'][bundleGroupId] || [];
+				// Then check if the bundles have been loaded
+				var bundleIds = config['bundle-groups'][bundleGroupId] || [];
 
-			// Filter out the bundleIds that have already been loaded
-			bundleIds = $(bundleIds).not(that['loaded-by-domain'][domain].js.bundles).get();
-			
-			if (!bundleIds.length) {
+				// Filter out the bundleIds that have already been loaded
+				bundleIds = $(bundleIds).not(that['loaded-by-domain'][domain].bundles).get();
 
-				// Mark also the bundleGroup as loaded
-				that['loaded-by-domain'][domain].js['bundle-groups'].push(bundleGroupId);
+				var loadedBundles = true;
+				$.each(bundleIds, function(index, bundleId) {
 
-				return true;
-			}
+					// Finally check if the resources have been loaded
+					var resources = config.bundles[bundleId];
 
-			var loadedResources = true;
-			$.each(bundleIds, function(index, bundleId) {
+					// Filter out the resources that have already been loaded
+					resources = $(resources).not(that.loaded).get();
+					var loadedResources = true;
+					$.each(resources, function(index, resource) {
 
-				// Finally check if the resources have been loaded
-				var resources = config.bundles[bundleId];
-
-				// Filter out the resources that have already been loaded
-				resources = $(resources).not(that.loaded.js.resources).get();
-				var loadedBundleResources = true;
-				$.each(resources, function(index, resource) {
-
-					// If the resource is in the error list, it failed loading, 
-					// try to load it again
-					if (that['error-loading'].js.resources.indexOf(resource) >= 0) {
-
-						that.loadResource(config, resource);
-					}
-
-					// Check if the resource has been loaded
-					if (that.loaded.js.resources.indexOf(resource) == -1) {
-
-						loadedBundleResources = false;
-
-						// It should be loading! If for some reason it is not, there was some error, then load it again
-						var source = config.sources[resource];
-						if (!that['loading-urls'][source]) {
+						// If the resource is in the error list, it failed loading, 
+						// try to load it again
+						if (that['error-loading'].indexOf(resource) >= 0) {
 
 							that.loadResource(config, resource);
 						}
 
-						// Exit the loop
-						return -1;
+						// Check if the resource has been loaded
+						if (that.loaded.indexOf(resource) == -1) {
+
+							loadedResources = false;
+
+							// It should be loading! If for some reason it is not, there was some error, then load it again
+							var source = config.sources[resource];
+							if (!that['loading-urls'][source]) {
+
+								that.loadResource(config, resource);
+							}
+						}
+					});
+					if (loadedResources) {
+
+						// Mark the bundle as loaded too
+						that['loaded-by-domain'][domain]['bundles'].push(bundleId);
+					}
+					else {
+
+						// Not all resources have been loaded, exit
+						loadedBundles = false;
 					}
 				});
-				if (loadedBundleResources) {
 
-					// Mark the bundles as loaded
-					that['loaded-by-domain'][domain].js['bundles'].push(bundleId);
+				if (loadedBundles) {
+
+					// Mark also the bundleGroup and the bundles as loaded
+					that['loaded-by-domain'][domain]['bundle-groups'].push(bundleGroupId);
 				}
 				else {
 
-					// Not all resources have been loaded, exit
-					loadedResources = false;
-
-					// Exit the loop
-					return -1;
+					loadedBundleGroups = false;
 				}
 			});
-
-			if (loadedResources) {
-
-				// Mark also the bundleGroup and the bundles as loaded
-				that['loaded-by-domain'][domain].js['bundle-groups'].push(bundleGroupId);
-
-				return true;
-			}
-
-			// Not everything has been loaded yet
-			return false;
+				
+			return loadedBundleGroups;
 		}
 		// If it couldnt' find a DB for the current URL, and the target is not main,
 		// then check for a configuration using the main target

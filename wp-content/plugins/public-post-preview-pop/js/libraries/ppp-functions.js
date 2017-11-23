@@ -23,7 +23,7 @@ window.popPPP = {
 				if (postPath) {
 
 					// Change the config from home to single, under the corresponding path
-					args.jsResourcesDB = config.resources.js.single[postPath];
+					args.resourcesDB = config.resources.single[postPath];
 				}
 			}
 		}

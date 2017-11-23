@@ -50,7 +50,7 @@ define ('POP_RESOURCELOADER_USERACCOUNT', PoP_TemplateIDUtils::get_template_defi
 define ('POP_RESOURCELOADER_WINDOW', PoP_TemplateIDUtils::get_template_definition('window'));
 define ('POP_RESOURCELOADER_APPSHELL', PoP_TemplateIDUtils::get_template_definition('appshell'));
 
-class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -394,6 +394,15 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProce
 			case POP_RESOURCELOADER_MULTISELECT:
 
 				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_BOOTSTRAPMULTISELECT;
+				
+				// Allow to hook extra CSS styles
+				if ($extra_dependencies = apply_filters('PoP_CoreProcessors_ResourceLoaderProcessor:dependencies:multiselect', array())) {
+					
+					$dependencies = array_merge(
+						$dependencies,
+						$extra_dependencies
+					);
+				}
 				break;
 				
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:

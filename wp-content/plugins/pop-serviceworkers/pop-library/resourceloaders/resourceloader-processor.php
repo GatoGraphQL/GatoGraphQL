@@ -8,7 +8,7 @@
 define ('POP_RESOURCELOADER_SW', PoP_TemplateIDUtils::get_template_definition('sw'));
 define ('POP_RESOURCELOADER_SWREGISTRAR', PoP_TemplateIDUtils::get_template_definition('sw-registrar'));
 
-class PoP_ServiceWorkers_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_ServiceWorkers_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('external-bootstrap'));
 
-class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
+class PoP_BootstrapProcessors_JSExternalResourceLoaderProcessor extends PoP_ExternalJSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -76,4 +76,4 @@ class PoP_BootstrapProcessors_ExternalResourceLoaderProcessor extends PoP_Extern
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_BootstrapProcessors_ExternalResourceLoaderProcessor();
+new PoP_BootstrapProcessors_JSExternalResourceLoaderProcessor();

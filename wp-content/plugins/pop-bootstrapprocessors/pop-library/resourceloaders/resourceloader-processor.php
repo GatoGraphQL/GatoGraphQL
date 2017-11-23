@@ -8,7 +8,7 @@
 define ('POP_RESOURCELOADER_BOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('bootstrap'));
 define ('POP_RESOURCELOADER_CUSTOMBOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('custombootstrap'));
 
-class PoP_BootstrapProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_BootstrapProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

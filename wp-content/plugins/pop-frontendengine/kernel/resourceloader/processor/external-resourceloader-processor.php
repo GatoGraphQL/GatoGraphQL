@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-class PoP_ExternalResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_ExternalJSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function can_bundle($resource) {
 	

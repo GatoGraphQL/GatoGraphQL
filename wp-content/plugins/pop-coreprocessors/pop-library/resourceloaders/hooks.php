@@ -22,6 +22,26 @@ class PoP_CoreProcessors_ResourceLoaderProcessor_Hooks {
 			'PoP_ResourceLoader_FileReproduction_InitialResourcesConfig:pages',
 			array($this, 'get_initial_pages')
 		);
+
+		add_filter(
+			'GD_Template_ProcessorBase:template-resources',
+			array($this, 'get_template_css_resources'),
+			10,
+			4
+		);
+	}
+
+	function get_template_css_resources($resources, $template_id, $template_source, $atts) {
+
+		switch ($template_source) {
+
+			case GD_TEMPLATESOURCE_FORMCOMPONENT_DATERANGE:
+
+				$resources[] = POP_RESOURCELOADER_EXTERNAL_CSS_DATERANGEPICKER;
+				break;
+		}
+
+		return $resources;
 	}
 
 	function get_template_dependencies($dependencies) {

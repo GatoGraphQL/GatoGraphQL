@@ -10,7 +10,7 @@ class PoP_ServiceWorkers_ResourceLoader_MultiDomain_RemoveResources {
 	function __construct() {
 
 		add_filter(
-			'PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsRegistration:register_scripts',
+			'PoP_ServiceWorkers_Frontend_ResourceLoader_ScriptsAndStylesRegistration:register_scripts',
 			array($this, 'modify_resources')
 		);
 	}

@@ -8,7 +8,7 @@
 define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPE', PoP_TemplateIDUtils::get_template_definition('external-photoswipe'));
 define ('POP_RESOURCELOADER_EXTERNAL_PHOTOSWIPESKIN', PoP_TemplateIDUtils::get_template_definition('external-photoswipe-skin'));
 
-class PhotoSwipe_PoP_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
+class PhotoSwipe_PoP_ExternalJSResourceLoaderProcessor extends PoP_ExternalJSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -69,4 +69,4 @@ class PhotoSwipe_PoP_ExternalResourceLoaderProcessor extends PoP_ExternalResourc
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PhotoSwipe_PoP_ExternalResourceLoaderProcessor();
+new PhotoSwipe_PoP_ExternalJSResourceLoaderProcessor();

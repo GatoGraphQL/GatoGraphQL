@@ -11,7 +11,7 @@ define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADUI', PoP_TemplateIDUtils::get_tem
 define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADPROCESS', PoP_TemplateIDUtils::get_template_definition('external-fileupload-process'));
 define ('POP_RESOURCELOADER_EXTERNAL_FILEUPLOADVALIDATE', PoP_TemplateIDUtils::get_template_definition('external-fileupload-validate'));
 
-class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
+class PoP_UserAvatar_JSExternalResourceLoaderProcessor extends PoP_ExternalJSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -140,4 +140,4 @@ class PoP_UserAvatar_ExternalResourceLoaderProcessor extends PoP_ExternalResourc
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_UserAvatar_ExternalResourceLoaderProcessor();
+new PoP_UserAvatar_JSExternalResourceLoaderProcessor();

@@ -345,6 +345,8 @@ class GD_Template_Processor_SocialMediaItems extends GD_Template_Processor_Socia
 			case GD_TEMPLATE_USERSOCIALMEDIA_LINKEDIN:
 			case GD_TEMPLATE_TAGSOCIALMEDIA_LINKEDIN:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'socialmedia');	
 				$this->append_att($template_id, $atts, 'class', 'socialmedia-changebg icon-only');
 				break;
 		}

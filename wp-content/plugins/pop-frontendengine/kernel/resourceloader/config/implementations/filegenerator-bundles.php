@@ -9,18 +9,25 @@ class PoP_ResourceLoader_MultipleFileGenerator_Bundles {
 
     public function generate() {
         
+        global $pop_resourceloader_jsbundlefilegenerator, $pop_resourceloader_cssbundlefilegenerator;
         $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::get_resource_mapping(false);
 
         // Generate the bundle file with all the resources inside?
-        if ($bundles = $resource_mapping['bundles']) {
+        // $type = 'js' or 'css'
+        foreach ($resource_mapping['bundles'] as $type => $bundles) {
 
-            global $pop_resourceloader_bundlefilegenerator;
+            if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+                $filegenerator = $pop_resourceloader_jsbundlefilegenerator;
+            }
+            elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+                $filegenerator = $pop_resourceloader_cssbundlefilegenerator;
+            }
             foreach ($bundles as $bundleId => $resources_item) {
 
-                $pop_resourceloader_bundlefilegenerator->set_filename($bundleId);
-                $pop_resourceloader_bundlefilegenerator->set_extension('.js');
-                $pop_resourceloader_bundlefilegenerator->set_resources($resources_item);
-                $pop_resourceloader_bundlefilegenerator->generate();
+                $filegenerator->set_filename($bundleId);
+                $filegenerator->set_extension('.'.$type);
+                $filegenerator->set_resources($resources_item);
+                $filegenerator->generate();
             }
         }
     }

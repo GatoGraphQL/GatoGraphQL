@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_NOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('notifications'));
 
-class PoP_AAL_Processors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_AAL_Processors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

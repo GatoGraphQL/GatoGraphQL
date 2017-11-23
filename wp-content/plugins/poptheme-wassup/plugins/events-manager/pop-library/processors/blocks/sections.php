@@ -1573,6 +1573,9 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 		);
 		if (in_array($template_id, $calendarmaps)) {
 
+			// Artificial property added to identify the template when adding template-resources
+			$this->add_att($template_id, $atts, 'resourceloader', 'map');
+
 			$this->append_att($template_id, $atts, 'class', 'pop-block-map');
 			$this->append_att($template_id, $atts, 'class', 'pop-block-calendarmap');
 		}
@@ -1583,6 +1586,8 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTS_CAROUSEL:
 			case GD_TEMPLATE_BLOCK_TAGEVENTS_CAROUSEL:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'block-carousel');
 				$this->append_att($template_id, $atts, 'class', 'pop-block-carousel block-posts-carousel block-events-carousel');
 				break;
 
@@ -1594,6 +1599,9 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 			case GD_TEMPLATE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR:
 			case GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP:
 			case GD_TEMPLATE_BLOCK_TAGEVENTSCALENDAR_CALENDAR:
+
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'calendar');
 				
 				// Allow for the controls to be aligned to the right, using css
 				$this->append_att($template_id, $atts, 'class', 'pop-block-calendar');
@@ -1741,6 +1749,9 @@ class GD_EM_Template_Processor_CustomSectionBlocks extends GD_Template_Processor
 			$class = 'calendarmap';
 		}
 		if ($class) {
+			
+			// Artificial property added to identify the template when adding template-resources
+			$this->add_att($template_id, $atts, 'resourceloader', $class);
 			$this->append_att($template_id, $atts, 'class', $class);
 		}
 		

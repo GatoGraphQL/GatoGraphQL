@@ -37,6 +37,7 @@ define ('GD_JS_PARAMS', $compact ? 'p' : 'params');
 define ('GD_JS_ITEMOBJECTPARAMS', $compact ? 'iop' : 'itemobject-params');
 define ('GD_JS_PREVIOUSTEMPLATESIDS', $compact ? 'pt' : 'previoustemplates-ids');
 define ('GD_JS_BLOCKFEEDBACKPARAMS', $compact ? 'bfp' : 'blockfeedback-params');
+define ('GD_JS_RESOURCES', $compact ? 'r' : 'resources');
 
 // Intercept
 define ('GD_JS_INTERCEPT', $compact ? 'i' : 'intercept');
@@ -90,6 +91,7 @@ function gd_jquery_constants_jsparams($jquery_constants) {
 	$jquery_constants['JS_SETTINGS'] = GD_JS_SETTINGS;
 	$jquery_constants['JS_TARGET'] = GD_JS_TARGET;
 	$jquery_constants['JS_SKIPSTATEUPDATE'] = GD_JS_SKIPSTATEUPDATE;
+	$jquery_constants['JS_RESOURCES'] = GD_JS_RESOURCES;
 
 	return $jquery_constants;
 }

@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_GADWPFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('gadwp-functions'));
 
-class GADWP_PoP_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class GADWP_PoP_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

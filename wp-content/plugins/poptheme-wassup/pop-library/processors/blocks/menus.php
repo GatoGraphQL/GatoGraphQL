@@ -187,6 +187,8 @@ class GD_Template_Processor_CustomMenuBlocks extends GD_Template_Processor_MenuB
 			case GD_TEMPLATE_BLOCK_MENU_SIDE_SECTIONS_MULTITARGET:
 			case GD_TEMPLATE_BLOCK_MENU_SIDE_MYSECTIONS:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'side-sections-menu');
 				$this->append_att($template_id, $atts, 'class', 'side-sections-menu');
 				break;
 
@@ -195,6 +197,8 @@ class GD_Template_Processor_CustomMenuBlocks extends GD_Template_Processor_MenuB
 			case GD_TEMPLATE_BLOCK_MENU_BODY_MYSECTIONS:
 			case GD_TEMPLATE_BLOCK_MENU_BODY_ABOUT:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'side-sections-menu');
 				$this->append_att($template_id, $atts, 'class', 'side-sections-menu');
 				break;
 		}

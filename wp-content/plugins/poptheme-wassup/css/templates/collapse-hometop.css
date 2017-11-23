@@ -1,0 +1,12 @@
+.pop-blockgroup.collapse-hometop > .blocksection-extensions > .panel-group > .panel {
+    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+}
+
+.pop-blockgroup.collapse-hometop > .blocksection-extensions > .panel-group > .panel.panel-default>.panel-heading {
+    background-color: rgba(255, 255, 255, 0.75);
+}

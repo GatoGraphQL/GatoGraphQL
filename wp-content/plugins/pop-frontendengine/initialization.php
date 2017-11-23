@@ -203,6 +203,7 @@ class PoPFrontend_Initialization {
 			'API_URLPARAMS' => $api_urlparams,
 			'USE_SW' => (PoP_Frontend_ServerUtils::use_serviceworkers() ? true : ''),
 			'USE_PROGRESSIVEBOOTING' => (PoP_Frontend_ServerUtils::use_progressive_booting() ? true : ''),
+			'PRINTTAGSINBODY' => (PoP_Frontend_ServerUtils::include_resources_in_body() ? true : ''),
 			'RUNTIMEJS' => (PoP_Frontend_ServerUtils::generate_resources_on_runtime() ? true : ''),
 			'COMPACT_JS_KEYS' => (PoP_ServerUtils::compact_js_keys() ? true : ''),
 			'USELOCALSTORAGE' => (PoP_Frontend_ServerUtils::use_local_storage() ? true : ''),
@@ -309,13 +310,13 @@ class PoPFrontend_Initialization {
 		$resources = array();
 		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			global $popfrontend_resourceloader_scriptsregistration;
-			$resources = $popfrontend_resourceloader_scriptsregistration->get_resources();
-			
+			global $popfrontend_resourceloader_scriptsandstyles_registration;
+			$resources = $popfrontend_resourceloader_scriptsandstyles_registration->get_resources();
+
 			// We send the already-loaded resources. Can do it, because these are always the same
 			// That's not the case with bundle(group)s, see below
 			$this->scripts[] = sprintf(
-				'popResourceLoader.loaded.js.resources = %s;',
+				'popResourceLoader.loaded = %s;',
 				json_encode($resources)
 			);
 			
@@ -326,25 +327,20 @@ class PoPFrontend_Initialization {
 			global $pop_resourceloader_bundlemappingstoragemanager;
 	        if ($pop_resourceloader_bundlemappingstoragemanager->has_cached_entries()) {
 
-				$bundle_group_ids = $popfrontend_resourceloader_scriptsregistration->get_bundlegroup_ids();
-				$bundle_ids = $popfrontend_resourceloader_scriptsregistration->get_bundle_ids();
+				$bundle_group_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundlegroup_ids();
+				$bundle_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundle_ids();
 				$this->scripts[] = sprintf(
 					'popResourceLoader["loaded-by-domain"]["%s"] = %s',
 					get_site_url(),
 					json_encode(array(
-						'js' => array(
-							'bundles' => $bundle_ids,
-							'bundle-groups' => $bundle_group_ids,
-						)
+						'bundles' => $bundle_ids,
+						'bundle-groups' => $bundle_group_ids,
 					))
 				);
 			}
 		}
 
 		// At the end, execute the code initializing everything
-		// Add it inside document.ready(), so that the "loading spinner" on the browser tab has already finished,
-		// giving the impression to the user that the page has already loaded, improving the speed perception
-		// $this->scripts[] = 'jQuery(document).ready( function($) { popManager.init(); });';
 		$this->scripts[] = 'popManager.init();';
 	}
 

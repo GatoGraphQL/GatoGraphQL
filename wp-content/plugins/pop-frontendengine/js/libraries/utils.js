@@ -348,3 +348,18 @@ function load_script(path, callback, ordered) {
         }
     }
 }
+
+// Taken from https://stackoverflow.com/questions/574944/how-to-load-up-css-files-using-javascript#577002
+function load_style(path, callback) {
+
+    var head  = document.getElementsByTagName('head')[0];
+    var link  = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = path;
+    link.media = 'all';
+    head.appendChild(link);
+
+    // There is no bullet proof way to check if the style sheet is loaded, so then just call the callback immediately
+    callback(path, "ok");
+}

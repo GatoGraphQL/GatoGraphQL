@@ -112,6 +112,64 @@ class PoP_Frontend_ServerUtils {
 		return true;
 	}
 
+	public static function include_resources_in_header() {
+
+		return self::get_templateresources_include_type() == 'header';
+	}
+
+	public static function include_resources_in_body() {
+
+		$bodies = array(
+			'body',
+			'body-inline',
+		);
+		return in_array(self::get_templateresources_include_type(), $bodies);
+	}
+
+	public static function get_templateresources_include_type() {
+
+		// Include in the body is only valid when doing server-side rendering, code-splitting, and the enqueue type is 'resource'
+		if (!self::use_serverside_rendering() || !self::use_code_splitting() || self::get_enqueuefile_type() != 'resource') {
+
+			return 'header';
+		}
+
+		// Allow to override the configuration
+		if (PoP_ServerUtils::get_override_configuration('resources-header') === true) {
+			return 'header';
+		}
+		elseif (PoP_ServerUtils::get_override_configuration('resources-body') === true) {
+			return 'body';
+		}
+		elseif (PoP_ServerUtils::get_override_configuration('resources-body-inline') === true) {
+			return 'body-inline';
+		}
+
+		// Allow specific pages to set this value to false
+		// Eg: when generating the Service Workers, we need to register all of the CSS files to output them in the precache list
+		if ($include_type = apply_filters('get_templateresources_include_type', '')) {
+
+			return $include_type;
+		}
+
+		if (defined('POP_SERVER_TEMPLATERESOURCESINCLUDETYPE')) {
+
+			// Make sure the defined value is valid
+			$values = array(
+				'header',
+				'body',
+				'body-inline',
+			);
+			if (in_array(POP_SERVER_TEMPLATERESOURCESINCLUDETYPE, $values)) {
+
+				return POP_SERVER_TEMPLATERESOURCESINCLUDETYPE;
+			}
+		}
+
+		// Default value
+		return 'header';
+	}
+
 	public static function generate_bundle_files() {
 
 		// Only valid when doing code-splitting

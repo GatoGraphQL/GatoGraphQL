@@ -148,6 +148,17 @@ class GD_Template_Processor_UserViewComponentButtons extends GD_Template_Process
 				$this->append_att($template_id, $atts, 'class', 'pop-hidden-print');
 				break;
 		}
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
+
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'socialmedia');	
+				break;
+		}
 		
 		return parent::init_atts($template_id, $atts);
 	}

@@ -11,12 +11,20 @@ class PoP_ResourceLoader_GeneratedFilesStorageManager {
 
 	function __construct() {
 
-		$this->generatedfiles = array(
-			'bundlegroup-ids' => array(),
-			'bundle-ids' => array(),
-			'resources' => array(),
-		);
+		$this->reset();
 		$this->initialized = false;
+	}
+
+	protected function reset() {
+
+		$this->generatedfiles = array(
+			'js-bundlegroup-ids' => array(),
+			'js-bundle-ids' => array(),
+			'js-resources' => array(),
+			'css-bundlegroup-ids' => array(),
+			'css-bundle-ids' => array(),
+			'css-resources' => array(),
+		);
 	}
 
 	function init() {
@@ -40,56 +48,84 @@ class PoP_ResourceLoader_GeneratedFilesStorageManager {
 
 	public function delete() {
 
-		$this->generatedfiles = array(
-			'bundlegroup-ids' => array(),
-			'bundle-ids' => array(),
-			'resources' => array(),
-		);
-
+		$this->reset();
+		
 		global $pop_resourceloader_generatedfilesstoragefilegenerator;
 		$pop_resourceloader_generatedfilesstoragefilegenerator->delete();
 	}
 
-	public function get_bundlegroup_ids($cachename) {
+	public function get_js_bundlegroup_ids($cachename) {
 
 		// Lazy init
 		$this->init();
-		return $this->generatedfiles['bundlegroup-ids'][$cachename];
+		return $this->generatedfiles['js-bundlegroup-ids'][$cachename];
+	}
+	public function add_js_bundlegroup_ids($cachename, $bundlegroup_ids) {
+
+		// Lazy init
+		$this->init();
+		$this->generatedfiles['js-bundlegroup-ids'][$cachename] = $bundlegroup_ids;
+	}
+	public function get_js_bundle_ids($cachename) {
+
+		// Lazy init
+		$this->init();
+		return $this->generatedfiles['js-bundle-ids'][$cachename];
+	}
+	public function add_js_bundle_ids($cachename, $bundle_ids) {
+
+		// Lazy init
+		$this->init();
+		$this->generatedfiles['js-bundle-ids'][$cachename] = $bundle_ids;
+	}
+	public function get_js_resources($cachename) {
+
+		// Lazy init
+		$this->init();
+		return $this->generatedfiles['js-resources'][$cachename];
+	}
+	public function add_js_resources($cachename, $resources) {
+
+		// Lazy init
+		$this->init();
+		$this->generatedfiles['js-resources'][$cachename] = $resources;
 	}
 
-	public function add_bundlegroup_ids($cachename, $bundlegroup_ids) {
+	public function get_css_bundlegroup_ids($cachename) {
 
 		// Lazy init
 		$this->init();
-		$this->generatedfiles['bundlegroup-ids'][$cachename] = $bundlegroup_ids;
+		return $this->generatedfiles['css-bundlegroup-ids'][$cachename];
 	}
-
-	public function get_bundle_ids($cachename) {
+	public function add_css_bundlegroup_ids($cachename, $bundlegroup_ids) {
 
 		// Lazy init
 		$this->init();
-		return $this->generatedfiles['bundle-ids'][$cachename];
+		$this->generatedfiles['css-bundlegroup-ids'][$cachename] = $bundlegroup_ids;
 	}
-
-	public function add_bundle_ids($cachename, $bundle_ids) {
+	public function get_css_bundle_ids($cachename) {
 
 		// Lazy init
 		$this->init();
-		$this->generatedfiles['bundle-ids'][$cachename] = $bundle_ids;
+		return $this->generatedfiles['css-bundle-ids'][$cachename];
 	}
-
-	public function get_resources($cachename) {
+	public function add_css_bundle_ids($cachename, $bundle_ids) {
 
 		// Lazy init
 		$this->init();
-		return $this->generatedfiles['resources'][$cachename];
+		$this->generatedfiles['css-bundle-ids'][$cachename] = $bundle_ids;
 	}
-
-	public function add_resources($cachename, $resources) {
+	public function get_css_resources($cachename) {
 
 		// Lazy init
 		$this->init();
-		$this->generatedfiles['resources'][$cachename] = $resources;
+		return $this->generatedfiles['css-resources'][$cachename];
+	}
+	public function add_css_resources($cachename, $resources) {
+
+		// Lazy init
+		$this->init();
+		$this->generatedfiles['css-resources'][$cachename] = $resources;
 	}
 }
 

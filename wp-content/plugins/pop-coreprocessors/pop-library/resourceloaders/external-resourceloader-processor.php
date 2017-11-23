@@ -17,7 +17,7 @@ define ('POP_RESOURCELOADER_EXTERNAL_BOOTSTRAPMULTISELECT', PoP_TemplateIDUtils:
 define ('POP_RESOURCELOADER_EXTERNAL_FULLSCREEN', PoP_TemplateIDUtils::get_template_definition('external-fullscreen'));
 define ('POP_RESOURCELOADER_EXTERNAL_DYNAMICMAXHEIGHT', PoP_TemplateIDUtils::get_template_definition('external-dynamicmaxheight'));
 
-class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
+class PoP_CoreProcessors_JSExternalResourceLoaderProcessor extends PoP_ExternalJSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -196,4 +196,4 @@ class PoP_CoreProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalRes
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_CoreProcessors_ExternalResourceLoaderProcessor();
+new PoP_CoreProcessors_JSExternalResourceLoaderProcessor();

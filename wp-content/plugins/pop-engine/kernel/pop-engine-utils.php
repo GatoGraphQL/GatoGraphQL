@@ -152,16 +152,23 @@ class GD_TemplateManager_Utils {
 	}
 	public static function remove_jsmethod(&$ret, $method, $group = GD_JSMETHOD_GROUP_MAIN) {
 		
-		// Remove from both 'critical' and 'noncritical' priorities
-		$priorities = array(
-			POP_PROGRESSIVEBOOTING_CRITICAL,
-			POP_PROGRESSIVEBOOTING_NONCRITICAL,
-		);
-		foreach ($priorities as $priority) {
+		if ($ret[$group]) {
 
-			$pos = array_search($method, $ret[$group][$priority]);
-			if ($pos >= 0) {
-				array_splice($ret[$group][$priority], $pos, 1);
+			// Remove from both 'critical' and 'noncritical' priorities
+			$priorities = array(
+				POP_PROGRESSIVEBOOTING_CRITICAL,
+				POP_PROGRESSIVEBOOTING_NONCRITICAL,
+			);
+			foreach ($priorities as $priority) {
+
+				if ($ret[$group][$priority]) {
+				
+					$pos = array_search($method, $ret[$group][$priority]);
+					if ($pos >= 0) {
+						
+						array_splice($ret[$group][$priority], $pos, 1);
+					}
+				}
 			}
 		}
 	}

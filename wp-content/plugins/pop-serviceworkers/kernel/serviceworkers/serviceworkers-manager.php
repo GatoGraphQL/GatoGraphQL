@@ -93,7 +93,7 @@ class PoP_ServiceWorkers_Manager {
         );
     }
 
-	function generate_files(){
+	function generate_files() {
 
 		global $pop_serviceworkers_job_manager;
 

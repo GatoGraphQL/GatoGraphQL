@@ -457,10 +457,33 @@ class GD_Template_Processor_PageSectionsBase extends GD_Template_ProcessorBase {
 		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
 		
 			$component_processor = $gd_template_processor_manager->get_processor($component);
-			$component_atts = $atts[$component];
-			$component_settings_id = $component_processor->get_settings_id($component);
-					
+			$component_atts = $atts[$component];					
 			$component_ret = $component_processor->get_templates_extra_sources($component, $component_atts);
+
+			$ret = array_merge(
+				$ret,
+				$component_ret
+			);
+		}
+		
+		return $ret;
+	}
+	
+	function get_templates_resources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+	
+		$ret = array();
+		if ($template_resources = $this->get_template_resources($template_id, $atts)) {
+			$ret[$template_id] = $template_resources;
+		}
+		
+		// In the Hierarchy Processor, all subcomponent templates are blocks
+		foreach ($this->get_modulecomponents($template_id, array('modules', 'extra-blocks')) as $component) {
+		
+			$component_processor = $gd_template_processor_manager->get_processor($component);
+			$component_atts = $atts[$component];					
+			$component_ret = $component_processor->get_templates_resources($component, $component_atts);
 
 			$ret = array_merge(
 				$ret,

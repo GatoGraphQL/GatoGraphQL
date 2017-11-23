@@ -1,0 +1,8 @@
+
+.form-mypreferences label {
+	/* My preferences: make all labels non-bold, it looks bad otherwise */
+	font-weight: normal;
+	/* Add some space to the left, it looks better */
+	margin-left: 20px;
+}
+

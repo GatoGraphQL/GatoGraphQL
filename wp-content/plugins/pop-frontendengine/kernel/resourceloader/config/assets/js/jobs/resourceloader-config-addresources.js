@@ -11,6 +11,10 @@ if (!config.loaded) {
 	
 	$.extend(config.keys, $keys);
 	$.extend(config.sources, $sources);
+	var types = $types;
+	$.each(Object.keys(types), function(index, type) {
+		config.types[type] = config.types[type].concat(types[type]);
+	})
 	config['ordered-load-resources'] = config['ordered-load-resources'].concat($orderedLoadResources);
 	$.extend(config.bundles, $bundles);
 	$.extend(config['bundle-groups'], $bundleGroups);

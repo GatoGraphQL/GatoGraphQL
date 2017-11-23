@@ -35,6 +35,20 @@ class GD_Template_Processor_CustomCodes extends GD_Template_Processor_CodesBase 
 	
 		return parent::get_code($template_id, $atts);
 	}
+
+	function init_atts($template_id, &$atts) {
+		
+		switch ($template_id) {
+					
+			case GD_TEMPLATE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
+
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'functionbutton');
+				break;
+		}
+			
+		return parent::init_atts($template_id, $atts);
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

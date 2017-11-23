@@ -137,6 +137,8 @@ class GD_Template_Processor_FunctionsActions extends GD_Template_Processor_Actio
 			case GD_TEMPLATE_ACTION_DOWNVOTEPOST:
 			case GD_TEMPLATE_ACTION_UNDODOWNVOTEPOST:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'functionalblock');	
 				$this->append_att($template_id, $atts, 'class', 'pop-functionalblock');	
 				break;
 		}

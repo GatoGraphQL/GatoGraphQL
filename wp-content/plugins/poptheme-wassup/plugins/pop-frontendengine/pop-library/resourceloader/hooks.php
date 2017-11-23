@@ -13,43 +13,43 @@ class PoPThemeWassup_ResourceLoader_Hooks {
     function __construct() {
 
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:home',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:home',
             array($this, 'get_home_resources'),
             10,
             2
         );
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:404',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:404',
             array($this, 'get_404_resources'),
             10,
             2
         );
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:tag',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:tag',
             array($this, 'get_tag_resources'),
             10,
             2
         );
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:author',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:author',
             array($this, 'get_author_resources'),
             10,
             2
         );
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:single',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:single',
             array($this, 'get_single_resources'),
             10,
             2
         );
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:page',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:page',
             array($this, 'get_page_resources'),
             10,
             2
         );
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:page',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:page',
             array($this, 'get_backgroundurls_page_resources'),
             10,
             2

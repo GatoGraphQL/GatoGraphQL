@@ -129,6 +129,19 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		return $extra_sources;
 	}
 
+	function get_template_resources($template_id, $atts) {
+
+		// Allow the theme to hook in the needed CSS resources. It could be based on the $template_id, or its template source, then pass both these values
+		return array_values(array_unique(apply_filters(
+			'GD_Template_ProcessorBase:template-resources',
+			array(),
+			$template_id,
+			$this->get_template_source($template_id, $atts),
+			$atts,
+			$this
+		)));
+	}
+
 	function get_template_cb($template_id, $atts) {
 
 		// Allow to be set from upper templates. Eg: from the embed Modal to the embedPreview layout,
@@ -228,6 +241,30 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		foreach ($this->get_modulecomponents($template_id) as $component) {
 				
 			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_templates_extra_sources($component, $atts)) {
+			
+				$ret = array_merge(
+					$ret,
+					$component_ret
+				);
+			}
+		}
+		
+		return $ret;
+	}
+
+	function get_templates_resources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		// Return initialized empty array at the last level		
+		$ret = array();		
+
+		if ($template_resources = $this->get_template_resources($template_id, $atts)) {
+			$ret[$template_id] = $template_resources;
+		}
+		foreach ($this->get_modulecomponents($template_id) as $component) {
+				
+			if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_templates_resources($component, $atts)) {
 			
 				$ret = array_merge(
 					$ret,
@@ -710,6 +747,15 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		if ($templatesource_extras = $this->get_template_extra_sources($template_id, $atts)) {
 			
 			$ret[GD_JS_TEMPLATESOURCES/*'template-sources'*/] = $templatesource_extras;
+		}
+
+		// Load the resources. Enable only if enabled by config
+		if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+
+			if ($template_resources = $this->get_template_resources($template_id, $atts)) {
+				
+				$ret[GD_JS_RESOURCES] = $template_resources;
+			}
 		}
 
 		/**---------------------------------------------------------------------------------------------------------------

@@ -14,13 +14,13 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks {
         $this->future_events = array();
 
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:single',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:single',
             array($this, 'get_single_resources'),
             10,
             2
         );
         add_filter(
-            'PoP_ResourceLoader_FileReproduction_Config:js-resources:page',
+            'PoP_ResourceLoader_FileReproduction_Config:resources:page',
             array($this, 'get_page_resources'),
             10,
             2

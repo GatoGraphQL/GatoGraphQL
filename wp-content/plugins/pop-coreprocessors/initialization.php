@@ -460,23 +460,27 @@ class PoP_CoreProcessors_Initialization {
 		// Taken from public static function editor( $content, $editor_id, $settings = array() ) {
 		wp_print_styles('editor-buttons');
 
-		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
-			
-			// CDN
-			// wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);
-			wp_register_style('daterangepicker', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.css', null, null);
-		}
-		else {
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			// Locally stored files
-			// wp_register_style('bootstrap', $cdn_css_folder . '/bootstrap.3.3.7.min.css', null, null);
-			wp_register_style('daterangepicker', $cdn_css_folder . '/daterangepicker.2.1.24.min.css', null, null);
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
+				
+				// CDN
+				// wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);
+				wp_register_style('daterangepicker', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.css', null, null);
+			}
+			else {
+
+				// Locally stored files
+				// wp_register_style('bootstrap', $cdn_css_folder . '/bootstrap.3.3.7.min.css', null, null);
+				wp_register_style('daterangepicker', $cdn_css_folder . '/daterangepicker.2.1.24.min.css', null, null);
+			}
+			// wp_enqueue_style('bootstrap');
+			wp_enqueue_style('daterangepicker');
 		}
-		// wp_enqueue_style('bootstrap');
-		wp_enqueue_style('daterangepicker');
 
 		// Comment Leo 12/11/2017: always add the bundle instead, until introducing CSS through the resourceLoader
-		if (true || PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		if (/*true || */PoP_Frontend_ServerUtils::use_bundled_resources()) {
 			
 			// Plug-in bundle
 			wp_register_style('pop-coreprocessors', $bundles_css_folder . '/pop-coreprocessors.bundle.min.css', array('bootstrap'), POP_COREPROCESSORS_VERSION);

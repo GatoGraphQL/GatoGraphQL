@@ -272,10 +272,9 @@ class PoP_ResourceLoaderProcessorUtils {
         return array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_template_resource_name'), $template_sources);
     }
 
-    // public static function calculate_resources($template_sources, $methods) {
-    public static function calculate_resources($template_sources, $critical_methods, $noncritical_methods) {
+    public static function calculate_resources($template_sources, $critical_methods, $noncritical_methods, $templates_resources) {
 
-        global $pop_resourceloaderprocessor_manager, $pop_templateresourceloaderprocessor_manager;
+        global $pop_jsresourceloaderprocessor_manager, $pop_templateresourceloaderprocessor_manager;
 
         $resources = array();
         
@@ -291,12 +290,12 @@ class PoP_ResourceLoaderProcessorUtils {
         // Add all the JS dependencies from the templates, and the templates themselves
         foreach ($template_resources as $template_resource) {
 
-            $pop_resourceloaderprocessor_manager->add_resource_dependencies($resources/*$dependency_resources*/, $template_resource, true/*, 'templates'*/);
+            $pop_jsresourceloaderprocessor_manager->add_resource_dependencies($resources/*$dependency_resources*/, $template_resource, true/*, 'templates'*/);
         }
-        // $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($resources, $methods, $template_resources);
+        // $pop_jsresourceloaderprocessor_manager->add_resources_from_jsmethods($resources, $methods, $template_resources);
         $critical_resources = $noncritical_resources = array();
-        $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($critical_resources, $critical_methods, $template_resources);
-        $pop_resourceloaderprocessor_manager->add_resources_from_jsmethods($noncritical_resources, $noncritical_methods, array(), false);
+        $pop_jsresourceloaderprocessor_manager->add_resources_from_jsmethods($critical_resources, $critical_methods, $template_resources);
+        $pop_jsresourceloaderprocessor_manager->add_resources_from_jsmethods($noncritical_resources, $noncritical_methods, array(), false);
 
         // If a resource is both critical and non-critical, then remove it from non-critical
         $noncritical_resources = array_diff(
@@ -309,7 +308,8 @@ class PoP_ResourceLoaderProcessorUtils {
         $resources = array_values(array_unique(array_merge(
             $resources,
             $critical_resources,
-            $noncritical_resources
+            $noncritical_resources,
+            $templates_resources
         )));
 
         return $resources;
@@ -318,7 +318,7 @@ class PoP_ResourceLoaderProcessorUtils {
 	public static function add_resources_from_current_vars($fetching_json, &$resources, $toplevel_template_id, $ids = array(), $merge = false, $components = array(), $options = array()) {
         
         // Use the $vars identifier to store the wrapper cache, so there is no collision with the values saved for the current request
-        global $gd_template_processor_runtimecache, $gd_template_processor_manager, $pop_resourceloaderprocessor_manager;
+        global $gd_template_processor_runtimecache, $gd_template_processor_manager, $pop_jsresourceloaderprocessor_manager;
         $gd_template_processor_runtimecache->setUseVarsIdentifier(true);
 
         // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
@@ -735,9 +735,12 @@ class PoP_ResourceLoaderProcessorUtils {
         $critical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_CRITICAL]);
         $noncritical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_NONCRITICAL]);
 
+        // Get all the resources the template is dependent on. Eg: inline CSS styles
+        $templates_resources = array_values(array_unique(array_flatten(array_values($toplevel_processor->get_templates_resources($toplevel_template_id, $toplevel_atts)))));
+
         // Finally, merge all the template and JS resources together
         // return self::calculate_resources($sources, $methods);
-        return self::calculate_resources($sources, $critical_methods, $noncritical_methods);
+        return self::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources);
     }
 
     public static function get_jsmethods_from_template($toplevel_template_id, $toplevel_atts) {
@@ -752,10 +755,10 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function get_jsmethods($pageSectionJSMethods, $blockJSMethods) {
         
-        global $pop_resourceloaderprocessor_manager;
+        global $pop_jsresourceloaderprocessor_manager;
 
         // Start with those methods that are always executed, already by the framework, not from configuration
-        $critical_js_methods = $pop_resourceloaderprocessor_manager->get_initial_jsmethods();
+        $critical_js_methods = $pop_jsresourceloaderprocessor_manager->get_initial_jsmethods();
         $noncritical_js_methods = array();
 
         // Add all the pageSection methods

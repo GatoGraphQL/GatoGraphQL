@@ -10276,6 +10276,8 @@ class CPP_Template_Processor_SectionBlocks extends GD_Template_Processor_Section
 			case GD_TEMPLATE_BLOCK_TAGCATEGORYWEBPOSTS08_CAROUSEL_CONTENT:
 			case GD_TEMPLATE_BLOCK_TAGCATEGORYWEBPOSTS09_CAROUSEL_CONTENT:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'block-carousel');
 				$this->append_att($template_id, $atts, 'class', 'pop-block-carousel block-posts-carousel');
 				break;
 		}

@@ -15,4 +15,11 @@ class GD_Template_Processor_AnnouncementSpeechBubblesBase extends GD_Template_Pr
 		
 		return $ret;
 	}
+	
+	function init_atts($template_id, &$atts) {
+
+		// Artificial property added to identify the template when adding template-resources
+		$this->add_att($template_id, $atts, 'resourceloader', 'littleguy');
+		return parent::init_atts($template_id, $atts);
+	}
 }

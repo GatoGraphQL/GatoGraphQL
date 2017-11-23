@@ -318,6 +318,8 @@ class AAL_PoPProcessors_Template_Processor_SectionBlocks extends GD_Template_Pro
 			case GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
 			case GD_TEMPLATE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'block-notifications');
 				$this->append_att($template_id, $atts, 'class', 'block-notifications');	
 				break;
 		}

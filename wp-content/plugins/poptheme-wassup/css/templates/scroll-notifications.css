@@ -1,0 +1,80 @@
+
+/* Quicklinkgroup: show only if the user is logged in */
+body.loggedin-anydomain .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
+    display: block;
+}
+/* For desktop devices: hide the links, show them on hover */
+@media (min-width: 992px) {
+	body.loggedin-anydomain .scroll-notifications .blockinner-row .quicklinkgroup-top {
+	    display: none;
+	}
+	body.loggedin-anydomain .scroll-notifications .blockinner-row:hover .quicklinkgroup-top {
+	    display: block;
+	}
+}
+
+/* ------------------------------------------------ */
+/* End Logged in classes
+/* ------------------------------------------------ */
+/* Quicklinkgroup: show only if the user is logged in */
+.scroll-notifications .blockinner-row .quicklinkgroup-top {
+    display: none;
+}
+
+.scroll-notifications .preview.notification-layout {
+    margin: -15px;
+    padding: 10px;
+}
+#ps-top .scroll-notifications .preview.notification-layout {
+    margin: -15px 0;
+    padding: 5px;
+}
+.scroll-notifications .preview.notification-layout {
+    background-color: #d9edf7;
+}
+.scroll-notifications .preview.notification-layout.read {
+    background-color: #fff;
+}
+.scroll-notifications .preview.notification-layout:hover {
+    background-color: #eff4f6 !important;
+}
+.scroll-notifications .preview.notification-layout .quicklinkgroup-top {
+    margin-top: 0;
+    margin-right: 0;
+    background-color: #fff;
+}
+#ps-top .scroll-notifications > .scroll-inner {
+    background-color: #333;
+}
+#ps-top .scroll-notifications .preview.notification-layout {
+    background-color: #337ab7;
+}
+#ps-top .scroll-notifications .preview.notification-layout a {
+    color: #fff;
+}
+#ps-top .scroll-notifications .preview.notification-layout.read {
+    background-color: #4d4d4f;
+}
+#ps-top .scroll-notifications .preview.notification-layout:hover {
+    background-color: #606061 !important;
+}
+#ps-top .scroll-notifications .preview.notification-layout .quicklinkgroup-top {
+    background-color: #4d4d4f;/*transparent;*/
+}
+
+.scroll-notifications .preview.notification-layout .pop-functional.mark-as-unread,
+.scroll-notifications .preview.notification-layout.read .pop-functional.mark-as-read {
+    display: none;
+}
+.scroll-notifications .preview.notification-layout .pop-functional.mark-as-read,
+.scroll-notifications .preview.notification-layout.read .pop-functional.mark-as-unread {
+    display: block;
+}
+.scroll-notifications .preview.notification-layout .url {
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+}
+

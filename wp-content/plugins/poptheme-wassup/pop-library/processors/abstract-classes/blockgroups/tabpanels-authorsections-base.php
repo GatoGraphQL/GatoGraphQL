@@ -48,6 +48,9 @@ class GD_Template_Processor_AuthorSectionTabPanelBlockGroupsBase extends GD_Temp
 
 	function init_atts($template_id, &$atts) {
 
+		// Artificial property added to identify the template when adding template-resources
+		$this->add_att($template_id, $atts, 'resourceloader', 'blockgroup-authorsections');
+
 		// Needed for the URE ControlSource to show stacked on the right
 		$this->append_att($template_id, $atts, 'class', 'blockgroup-authorsections');
 		

@@ -13,7 +13,7 @@ class PoP_Frontend_ResourceLoaderMappingGenerator extends PoP_Engine_FileGenerat
 
 	public function generate() {
 
-		global $pop_resourceloaderprocessor_manager, $pop_frontend_resourceloader_mappingparser;
+		global $pop_jsresourceloaderprocessor_manager, $pop_frontend_resourceloader_mappingparser;
 
 		// Reset the inner variable to empty, to generate it once again
 		$mapping = array();
@@ -25,10 +25,10 @@ class PoP_Frontend_ResourceLoaderMappingGenerator extends PoP_Engine_FileGenerat
 		$fileContents = '';
 		foreach ($resources as $resource) {
 
-			$file = $pop_resourceloaderprocessor_manager->get_asset_path($resource);
+			$file = $pop_jsresourceloaderprocessor_manager->get_asset_path($resource);
 			$jsObjects = array_merge(
 				$jsObjects,
-				$pop_resourceloaderprocessor_manager->get_jsobjects($resource)
+				$pop_jsresourceloaderprocessor_manager->get_jsobjects($resource)
 			);
 			$fileContents .= file_get_contents($file).PHP_EOL;
 		}

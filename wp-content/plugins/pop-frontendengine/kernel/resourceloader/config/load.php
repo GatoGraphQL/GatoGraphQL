@@ -12,7 +12,11 @@ require_once 'filegenerator-config-resources-initial.php';
 require_once 'filegenerator-config-resources-hierarchyformat-combinations.php';
 
 require_once 'bundlefile-filegenerator-base.php';
-require_once 'bundlegroup-filegenerator.php';
-require_once 'bundle-filegenerator.php';
+require_once 'js-bundlefile-filegenerator-base.php';
+require_once 'js-bundlegroup-filegenerator.php';
+require_once 'js-bundle-filegenerator.php';
+require_once 'css-bundlefile-filegenerator-base.php';
+require_once 'css-bundlegroup-filegenerator.php';
+require_once 'css-bundle-filegenerator.php';
 
 require_once 'implementations/load.php';

@@ -112,6 +112,12 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS` (_true_|_false_): When generating bundle or bundlegroup files, allow to only pre-generate the bundle(group)s for URLs without parameters, falling back on the "resource" enqueue file type for these cases. (Eg: loading "https://getpop.org/en/u/leo/" will load "bundlegroup", but loading "https://getpop.org/en/u/leo/?tab=followers" may load "resource" instead, if the corresponding bundlegroup file had not been pre-generated).
 
+- `POP_SERVER_TEMPLATERESOURCESINCLUDETYPE` (_header_|_body_|_body-inline_): (Only if doing server-side rendering, code-splitting and enqueue type = "resource") Choose how to include those resources depended by a module (mainly CSS styles):
+
+    - "header": Link in the header
+    - "body": Link in the body, right before the module HTML
+    - "body-inline": Inline in the body, right before the module HTML
+
 - `POP_SERVER_GENERATERESOURCESONRUNTIME` (_true_|_false_): Allow to extract configuration code from the HTML output and into Javascript files on runtime.
 
 - `POP_SERVER_USEMINIFIEDRESOURCES` (_true_|_false_): Include the minified version of .js and .css files.

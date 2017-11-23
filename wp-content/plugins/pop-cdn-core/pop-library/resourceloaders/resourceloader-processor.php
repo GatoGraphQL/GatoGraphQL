@@ -9,7 +9,7 @@ define ('POP_RESOURCELOADER_CDN', PoP_TemplateIDUtils::get_template_definition('
 define ('POP_RESOURCELOADER_CDNTHUMBPRINTS', PoP_TemplateIDUtils::get_template_definition('cdn-thumbprints'));
 define ('POP_RESOURCELOADER_CDNCONFIG', PoP_TemplateIDUtils::get_template_definition('cdn-config'));
 
-class PoP_CDNCore_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_CDNCore_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

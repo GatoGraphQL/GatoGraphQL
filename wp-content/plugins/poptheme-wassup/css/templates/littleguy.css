@@ -1,0 +1,47 @@
+
+/* Little Guys for Speech */
+.littleguy-announcement {
+	/* Image size: 60x62px; */
+	background: url( img/little-guys/announcement-small.png ) no-repeat right 20px;
+	padding-right: 65px;
+	min-height: 82px; /* 62px + 20px */
+}
+.littleguy-announcement .speechbubble:after, 
+.littleguy-announcement .speechbubble:before {
+	right: auto;
+	left: 100%;
+}
+.littleguy-announcement .speechbubble:after {
+	border-right: 0;
+	border-left-color: #ffffff;
+}
+.littleguy-announcement .speechbubble:before {
+	border-right: 0;
+	border-left-color: #7d7d7f;
+}
+
+.littleguy-talking {
+	/* Image size: 60x73px; */
+	background: url( img/little-guys/talking-small.png ) no-repeat 0 15px;
+	padding-left: 70px;
+	min-height: 88px; /* 73px + 15px */
+}
+.littleguy-talking .speechbubble:after, 
+.littleguy-talking .speechbubble:before {
+	top: 65px;
+}
+
+@media (min-width: 768px) {
+	.littleguy-announcement {
+		/* Image size: 176x180px; */
+		background: url( img/little-guys/announcement.png ) no-repeat right 0;
+		padding-right: 190px;
+		min-height: 180px;
+	}
+	.littleguy-talking {
+		/* Image size: 120x147px; */
+		background: url( img/little-guys/talking.png ) no-repeat 0 0;
+		padding-left: 130px;
+		min-height: 147px;
+	}
+}

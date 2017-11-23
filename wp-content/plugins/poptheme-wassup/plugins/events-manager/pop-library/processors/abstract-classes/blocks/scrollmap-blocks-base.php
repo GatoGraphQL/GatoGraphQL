@@ -75,6 +75,9 @@ class GD_EM_Template_Processor_ScrollMapBlocksBase extends GD_Template_Processor
 
 		global $gd_template_processor_manager;
 
+		// Artificial property added to identify the template when adding template-resources
+		$this->add_att($template_id, $atts, 'resourceloader', 'map');
+
 		$this->append_att($template_id, $atts, 'class', 'map');
 		$this->append_att($template_id, $atts, 'class', 'pop-block-map');
 		$this->append_att($template_id, $atts, 'class', 'pop-block-scrollmap');

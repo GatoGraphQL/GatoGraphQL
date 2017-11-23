@@ -11,7 +11,7 @@ define ('POP_RESOURCELOADER_CUSTOMPAGESECTIONMANAGER', PoP_TemplateIDUtils::get_
 define ('POP_RESOURCELOADER_UREAALFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('ure-aal-functions'));
 define ('POP_RESOURCELOADER_URECOMMUNITIES', PoP_TemplateIDUtils::get_template_definition('ure-communities'));
 
-class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

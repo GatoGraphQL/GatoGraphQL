@@ -178,6 +178,18 @@ class GD_Template_Processor_PostViewComponentButtons extends GD_Template_Process
 				));
 				break;
 		}
+
+		switch ($template_id) {
+		
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
+
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'socialmedia');	
+				break;
+		}
 		
 		return parent::init_atts($template_id, $atts);
 	}

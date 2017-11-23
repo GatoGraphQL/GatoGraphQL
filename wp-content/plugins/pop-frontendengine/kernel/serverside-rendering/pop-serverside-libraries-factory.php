@@ -7,7 +7,7 @@
 
 class PoP_ServerSide_Libraries_Factory {
 
-	protected static $jslibrary, $jsruntime, $popmanager;
+	protected static $jslibrary, $jsruntime, $popmanager, $resourceloader;
 
 	public static function set_jslibrary_instance($jslibrary) {
 		self::$jslibrary = $jslibrary;
@@ -34,5 +34,14 @@ class PoP_ServerSide_Libraries_Factory {
 	public static function get_popmanager_instance() {
 
 		return self::$popmanager;
+	}
+
+	public static function set_resourceloader_instance($resourceloader) {
+		self::$resourceloader = $resourceloader;
+	}
+
+	public static function get_resourceloader_instance() {
+
+		return self::$resourceloader;
 	}
 }

@@ -7,6 +7,7 @@
 
 class PoP_ResourceLoader_StorageGenerator {
 
+    // Generate and Save the file containing what resources/bundle/bundlegroups were generated for each cachename
     public function generate() {
         
         $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::get_resource_mapping(false);
@@ -16,67 +17,110 @@ class PoP_ResourceLoader_StorageGenerator {
 
         // Save the bundle-ids under their cachename, so no need to calculate it again when accessing a page
         global $pop_resourceloader_generatedfilesstoragemanager;
-        foreach ($resource_mapping['resources']['js']['flat'] as $hierarchy => $key_bundlegroup) {
+        $types = array(
+            POP_RESOURCELOADER_RESOURCETYPE_JS,
+            POP_RESOURCELOADER_RESOURCETYPE_CSS,
+        );
+        foreach ($types as $type) {
 
-            foreach ($key_bundlegroup as $keyId => $bundleGroupId) {
+            foreach ($resource_mapping['resources'][$type]['flat'] as $hierarchy => $key_bundlegroups) {
 
-                // When generating the bundle(group)s, the key is the cache name
-                $cachename = array_search($keyId, $resource_mapping['keys']);
+                foreach ($key_bundlegroups as $keyId => $bundleGroupIds) {
 
-                // // Save the bundlegroups?
-                // if ($generate_bundlegroups) {
-                $pop_resourceloader_generatedfilesstoragemanager->add_bundlegroup_ids($cachename, array($bundleGroupId));
-                // }
+                    foreach ($bundleGroupIds as $bundleGroupId) {
 
-                $bundle_ids = $resource_mapping['bundle-groups'][$bundleGroupId];
-                // // Save the bundles?
-                // if ($generate_bundles) {
-                $pop_resourceloader_generatedfilesstoragemanager->add_bundle_ids($cachename, $bundle_ids);
-                // }
+                        // When generating the bundle(group)s, the key is the cache name
+                        $cachename = array_search($keyId, $resource_mapping['keys']);
 
-                // Save the resources
-                $resources = array();
-                foreach ($bundle_ids as $bundleId) {
+                        // // Save the bundlegroups?
+                        // if ($generate_bundlegroups) {
+                        if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+                            $pop_resourceloader_generatedfilesstoragemanager->add_js_bundlegroup_ids($cachename, array($bundleGroupId));
+                        }
+                        elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+                            $pop_resourceloader_generatedfilesstoragemanager->add_css_bundlegroup_ids($cachename, array($bundleGroupId));
+                        }
+                        // }
 
-                    $resources = array_merge(
-                        $resources,
-                        $resource_mapping['bundles'][$bundleId]
-                    );
-                }
-                $pop_resourceloader_generatedfilesstoragemanager->add_resources($cachename, $resources);
+                        $bundle_ids = $resource_mapping['bundle-groups'][$type][$bundleGroupId];
+                        // // Save the bundles?
+                        // if ($generate_bundles) {
+                        if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+                            $pop_resourceloader_generatedfilesstoragemanager->add_js_bundle_ids($cachename, $bundle_ids);
+                        }
+                        elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+                            $pop_resourceloader_generatedfilesstoragemanager->add_css_bundle_ids($cachename, $bundle_ids);
+                        }
+                        // }
 
-            }
-        }
-        foreach ($resource_mapping['resources']['js']['path'] as $hierarchy => $path_key_bundlegroup) {
+                        // Save the resources
+                        $resources = array();
+                        foreach ($bundle_ids as $bundleId) {
 
-            foreach ($path_key_bundlegroup as $path => $key_bundlegroup) {
-
-                foreach ($key_bundlegroup as $keyId => $bundleGroupId) {
-
-                    // When generating the bundle(group)s, the key is the cache name
-                    $cachename = array_search($keyId, $resource_mapping['keys']);
-
-                    // // Save the bundlegroups?
-                    // if ($generate_bundlegroups) {
-                    $pop_resourceloader_generatedfilesstoragemanager->add_bundlegroup_ids($cachename, array($bundleGroupId));
-                    // }
-
-                    $bundle_ids = $resource_mapping['bundle-groups'][$bundleGroupId];
-                    // // Save the bundles?
-                    // if ($generate_bundles) {
-                    $pop_resourceloader_generatedfilesstoragemanager->add_bundle_ids($cachename, $bundle_ids);
-                    // }
-
-                    // Save the resources
-                    $resources = array();
-                    foreach ($bundle_ids as $bundleId) {
-
-                        $resources = array_merge(
-                            $resources,
-                            $resource_mapping['bundles'][$bundleId]
-                        );
+                            $resources = array_merge(
+                                $resources,
+                                $resource_mapping['bundles'][$type][$bundleId]
+                            );
+                        }
+                        if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+                            $pop_resourceloader_generatedfilesstoragemanager->add_js_resources($cachename, $resources);
+                        }
+                        elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+                            $pop_resourceloader_generatedfilesstoragemanager->add_css_resources($cachename, $resources);
+                        }
                     }
-                    $pop_resourceloader_generatedfilesstoragemanager->add_resources($cachename, $resources);
+
+                }
+            }
+            foreach ($resource_mapping['resources'][$type]['path'] as $hierarchy => $path_key_bundlegroup) {
+
+                foreach ($path_key_bundlegroup as $path => $key_bundlegroups) {
+
+                    foreach ($key_bundlegroups as $keyId => $bundleGroupIds) {
+
+                        foreach ($bundleGroupIds as $bundleGroupId) {
+
+                            // When generating the bundle(group)s, the key is the cache name
+                            $cachename = array_search($keyId, $resource_mapping['keys']);
+
+                            // // Save the bundlegroups?
+                            // if ($generate_bundlegroups) {
+                            if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+                                $pop_resourceloader_generatedfilesstoragemanager->add_js_bundlegroup_ids($cachename, array($bundleGroupId));
+                            }
+                            elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+                                $pop_resourceloader_generatedfilesstoragemanager->add_css_bundlegroup_ids($cachename, array($bundleGroupId));
+                            }
+                            // }
+
+                            $bundle_ids = $resource_mapping['bundle-groups'][$type][$bundleGroupId];
+                            // // Save the bundles?
+                            // if ($generate_bundles) {
+                            if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+                                $pop_resourceloader_generatedfilesstoragemanager->add_js_bundle_ids($cachename, $bundle_ids);
+                            }
+                            elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+                                $pop_resourceloader_generatedfilesstoragemanager->add_css_bundle_ids($cachename, $bundle_ids);
+                            }
+                            // }
+
+                            // Save the resources
+                            $resources = array();
+                            foreach ($bundle_ids as $bundleId) {
+
+                                $resources = array_merge(
+                                    $resources,
+                                    $resource_mapping['bundles'][$type][$bundleId]
+                                );
+                            }
+                            if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+                                $pop_resourceloader_generatedfilesstoragemanager->add_js_resources($cachename, $resources);
+                            }
+                            if ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+                                $pop_resourceloader_generatedfilesstoragemanager->add_css_resources($cachename, $resources);
+                            }
+                        }
+                    }
                 }
             }
         }

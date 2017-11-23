@@ -8,7 +8,7 @@
 define ('POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR', PoP_TemplateIDUtils::get_template_definition('external-fullcalendar'));
 define ('POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE', PoP_TemplateIDUtils::get_template_definition('external-fullcalendar-locale'));
 
-class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResourceLoaderProcessor {
+class EM_PoPProcessors_JSExternalResourceLoaderProcessor extends PoP_ExternalJSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
@@ -129,4 +129,4 @@ class EM_PoPProcessors_ExternalResourceLoaderProcessor extends PoP_ExternalResou
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new EM_PoPProcessors_ExternalResourceLoaderProcessor();
+new EM_PoPProcessors_JSExternalResourceLoaderProcessor();

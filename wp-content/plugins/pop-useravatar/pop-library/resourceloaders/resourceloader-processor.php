@@ -8,7 +8,7 @@
 define ('POP_RESOURCELOADER_FILEUPLOAD', PoP_TemplateIDUtils::get_template_definition('fileupload'));
 define ('POP_RESOURCELOADER_FILEUPLOADLOCALE', PoP_TemplateIDUtils::get_template_definition('fileupload-locale'));
 
-class PoP_UserAvatar_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_UserAvatar_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 

@@ -5,7 +5,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class PoP_TemplateResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function init() {
 
@@ -16,6 +16,12 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		global $pop_templateresourceloaderprocessor_manager;
 		$pop_templateresourceloaderprocessor_manager->add($this, $this->get_resources_to_process());
 	}
+
+	// protected function get_manager() {
+
+	// 	global $pop_templateresourceloaderprocessor_manager;
+	// 	return $pop_templateresourceloaderprocessor_manager;
+	// }
 	
 	function get_suffix($resource) {
 	

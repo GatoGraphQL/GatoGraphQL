@@ -12,8 +12,15 @@ class PoP_ResourceLoaderProcessor {
 		add_action('init', array($this, 'init'));
 	}
 
+	// protected function get_manager() {
+
+	// 	global $pop_resourceloaderprocessor_manager;
+	// 	return $pop_resourceloaderprocessor_manager;
+	// }
+
 	function init() {
 
+		// $this->get_manager()->add($this, $this->get_resources_to_process());
 		global $pop_resourceloaderprocessor_manager;
 		$pop_resourceloaderprocessor_manager->add($this, $this->get_resources_to_process());
 	}
@@ -51,7 +58,23 @@ class PoP_ResourceLoaderProcessor {
 	
 	function get_suffix($resource) {
 	
-		return (PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '').'.js';
+		return '';
+	}
+	
+	function get_type($resource) {
+	
+		// $suffix = $this->get_suffix($resource);
+
+		// if (in_array($suffix, array('.js', '.min.js')) {
+
+		// 	return POP_RESOURCELOADER_RESOURCETYPE_JS;
+		// }
+		// elseif (in_array($suffix, array('.css', '.min.css')) {
+
+		// 	return POP_RESOURCELOADER_RESOURCETYPE_CSS;
+		// }
+
+		return '';
 	}
 	
 	function get_filename($resource) {
@@ -82,76 +105,14 @@ class PoP_ResourceLoaderProcessor {
 		// (if constant POP_SERVER_USEMINIFIEDRESOURCES is true), over which the process fails
 		return $this->get_file_path($resource);
 	}
+	
+	// function get_htmltag_attributes($resource) {
 
-	function get_jsobjects($resource) {
-
-		return array();
-	}
+	// 	return '';
+	// }
 	
 	function get_dependencies($resource) {
 
 		return array();
-	}
-	
-	function get_globalscope_method_calls($resource) {
-	
-		return array();
-	}
-	
-	// function get_external_method_calls($resource) {
-	
-	// 	return array();
-	// }
-	
-	// function get_internal_method_calls($resource) {
-	
-	// 	return array();
-	// }
-	
-	function get_public_methods($resource) {
-	
-		return array();
-	}
-	
-	function get_htmltag_attributes($resource) {
-
-		if ($this->is_async($resource)) {
-
-			return "async='async'";
-		}
-		// can_defer: allows the templates to check if we are doing serverside-rendering, because .tmpl files cannot be made "defer" when doing client-side rendering
-		elseif ($this->can_defer($resource) && $this->is_defer($resource)) {
-
-			return "defer='defer'";
-		}
-
-		return '';
-	}
-	
-	function is_async($resource) {
-
-		return false;
-	}
-	
-	protected function can_defer($resource) {
-
-		// can_defer: allows the templates to check if we are doing serverside-rendering, because .tmpl files cannot be made "defer" when doing client-side rendering
-		return true;
-	}
-	
-	function is_defer($resource) {
-
-		// If these resources have been marked as 'noncritical', then defer loading them
-		if (PoP_Frontend_ServerUtils::use_progressive_booting() && in_array($resource, PoP_ResourceLoaderProcessorUtils::$noncritical_resources)) {
-
-			return true;
-		}
-
-		return false;
-	}
-	
-	function async_load_in_order($resource) {
-
-		return false;
 	}
 }

@@ -7,7 +7,7 @@
 
 define ('POP_RESOURCELOADER_WSLFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('wsl-functions'));
 
-class WSL_PoPProcessors_ResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
+class WSL_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
 	function get_resources_to_process() {
 
