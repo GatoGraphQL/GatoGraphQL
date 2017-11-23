@@ -55,6 +55,11 @@ class PoP_ResourceLoader_FileReproduction_Config extends PoP_Engine_FileReproduc
             .$pop_resourceloader_hierarchyformatcombinationresources_configfile_generator->get_variable_filename('{0}', '{1}');
         $configFileURLPlaceholder = add_query_arg('ver', pop_version(), $configFileURLPlaceholder);
         $configuration['$configFileURLPlaceholder'] = $configFileURLPlaceholder;
+        
+        $configuration['$configTypes'] = array(
+            POP_RESOURCELOADER_RESOURCETYPE_JS => array(),
+            POP_RESOURCELOADER_RESOURCETYPE_CSS => array(),
+        );
 
         return $configuration;
     }

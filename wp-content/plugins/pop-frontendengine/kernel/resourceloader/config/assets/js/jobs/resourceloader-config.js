@@ -3,7 +3,7 @@ popResourceLoader.config[$domain] = {
 	"configfile-urlplaceholder": $configFileURLPlaceholder,
 	"keys": {},
 	"sources": {},
-	"types": {},
+	"types": $configTypes,
 	"ordered-load-resources": [],
 	"bundles": {},
 	"bundle-groups": {},
