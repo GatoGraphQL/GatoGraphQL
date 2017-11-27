@@ -96,7 +96,10 @@ class PoPFrontend_Initialization {
 				wp_enqueue_script('pop-helpers-handlebars');		
 
 				wp_register_script('pop-utils-functions', $libraries_js_folder.'/utils'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
-				wp_enqueue_script('pop-utils-functions');		
+				wp_enqueue_script('pop-utils-functions');			
+
+				// wp_register_script('pop-utilsinline-functions', $libraries_js_folder.'/utils-inline'.$suffix.'.js', array(), POP_FRONTENDENGINE_VERSION, true);
+				// wp_enqueue_script('pop-utilsinline-functions');		
 
 				wp_register_script('pop-utils', $libraries_js_folder.'/pop-utils'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
 				wp_enqueue_script('pop-utils');
@@ -319,6 +322,17 @@ class PoPFrontend_Initialization {
 				'popResourceLoader.loaded = %s;',
 				json_encode($resources)
 			);
+
+			// Send the list of scripts that have already been included in the body as links/inline
+			if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+				
+				$popResourceLoader = PoP_ServerSide_Libraries_Factory::get_resourceloader_instance();
+				$this->scripts[] = sprintf(
+					'popResourceLoader["loaded-in-body"] = %s;',
+					json_encode($popResourceLoader->loadedInBody)
+				);
+			}
+
 			
 			// Comment Leo 07/10/2017: it makes no sense to send the bundle(group) ids, because these ids
 			// are different to the ones in the generated files

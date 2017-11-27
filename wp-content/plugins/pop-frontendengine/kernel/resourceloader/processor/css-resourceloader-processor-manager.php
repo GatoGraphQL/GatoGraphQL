@@ -7,11 +7,49 @@
 
 class PoP_CSSResourceLoaderProcessor_Manager {
 
-	protected $first_style;
+	protected $first_style, $inline_resources;
+
+	function __construct() {
+
+		$this->inline_resources = array();
+
+		add_action('wp_head', array($this, 'print_styles'));
+	}
+
+	function print_style($resource) {
+
+		global $pop_resourceloaderprocessor_manager;
+		$file = $pop_resourceloaderprocessor_manager->get_file_path($resource);
+        $file_contents = file_get_contents($file);
+		$resource_id = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+
+		return sprintf(
+			'<style id="%s" type="text/css">%s</style>',
+			$resource_id,
+			$file_contents
+		);
+	}
+
+	function print_styles() {
+
+		if ($this->inline_resources) {
+
+			echo implode(PHP_EOL, array_map(array($this, 'print_style'), $this->inline_resources));
+		}
+	}
+
+	function print_inline_resources($resources) {
+
+		$this->inline_resources = $resources;
+	}
 
 	function enqueue_resources($resources, $bundle_ids, $bundlegroup_ids/*, $remove_bundled_resources = true*/) {
 
 		global $pop_resourceloaderprocessor_manager;
+
+		// We can only enqueue the resources that do NOT go in the body or are inlined. 
+		// Those ones will be added when doing $popResourceLoader->includeResources (in the body), or hardcoded (inline, such as utils-inline.js)
+		$resources = $pop_resourceloaderprocessor_manager->get_enqueuable_resources($resources);
 
 		// Enqueue the resources/bundles/bundlegroups
 		// In order to calculate the bundle(group) ids, we need to substract first those resources which do not can_bundle, since they will not be inside the bundle files
@@ -122,11 +160,14 @@ class PoP_CSSResourceLoaderProcessor_Manager {
 				// We must filter the dependencies to only CSS files, for if a script has a dependency to a style or viceversa (WP won't load the resource then)
 				$dependencies = $processor->get_dependencies($resource);
 				$dependencies = $pop_resourceloaderprocessor_manager->filter_css($dependencies);
-				$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $dependencies);
 			}
+
+			// Filter out the dependencies which are inline or in-body
+			$dependencies = $pop_resourceloaderprocessor_manager->get_enqueuable_resources($dependencies);
 
 			// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers style "utils")
 			$style = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+			$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $dependencies);
 			wp_register_style($style, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource));
 			wp_enqueue_style($style);
 		}

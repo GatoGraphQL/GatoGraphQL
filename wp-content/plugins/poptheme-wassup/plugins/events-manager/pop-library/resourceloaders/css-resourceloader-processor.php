@@ -8,6 +8,7 @@
 define ('POP_RESOURCELOADER_CSS_CALENDAR', PoP_TemplateIDUtils::get_template_definition('css-em-calendar'));
 define ('POP_RESOURCELOADER_CSS_MAP', PoP_TemplateIDUtils::get_template_definition('css-em-map'));
 
+// class PoPTheme_Wassup_EM_CSSResourceLoaderProcessor extends PoP_CSSComponentResourceLoaderProcessor {
 class PoPTheme_Wassup_EM_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor {
 
 	function get_resources_to_process() {

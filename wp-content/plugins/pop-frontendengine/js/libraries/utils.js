@@ -295,19 +295,28 @@ function supports_html5_storage() {
     }
 }
 
-// function load_script(source) {
-    
-//     var s = document.createElement('script');
-//     s.type = "text/javascript";
-//     s.src = source;
+// Taken from https://stackoverflow.com/questions/574944/how-to-load-up-css-files-using-javascript#577002
+function load_style(path, callback) {
 
-//     // Add it to the DOM, which will load the required script
-//     document.body.appendChild(s);
-// }
+    var head  = document.getElementsByTagName('head')[0];
+    var link  = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = path;
+    link.media = 'all';
+    head.appendChild(link);
+
+    // There is no bullet proof way to check if the style sheet is loaded, so then just call the callback immediately
+    if (callback) {
+        callback(path, "ok");
+    }
+}
+
 // Taken from https://stackoverflow.com/questions/1293367/how-to-detect-if-javascript-files-are-loaded#1293389
 function load_script(path, callback, ordered) {
 
     var done = false;
+    var head  = document.getElementsByTagName('head')[0];
     var scr = document.createElement('script');
 
     // ordered => execute the scripts in order. Needed to load jquery.fileupload-ui before jquery.fileupload-process, or it produces a JS error
@@ -318,7 +327,8 @@ function load_script(path, callback, ordered) {
     scr.onreadystatechange = handleReadyStateChange;
     scr.onerror = handleError;
     scr.src = path;
-    document.body.appendChild(scr);
+    // document.body.appendChild(scr);
+    head.appendChild(scr);
 
     function handleLoad() {
         if (!done) {
@@ -347,19 +357,4 @@ function load_script(path, callback, ordered) {
             }
         }
     }
-}
-
-// Taken from https://stackoverflow.com/questions/574944/how-to-load-up-css-files-using-javascript#577002
-function load_style(path, callback) {
-
-    var head  = document.getElementsByTagName('head')[0];
-    var link  = document.createElement('link');
-    link.rel  = 'stylesheet';
-    link.type = 'text/css';
-    link.href = path;
-    link.media = 'all';
-    head.appendChild(link);
-
-    // There is no bullet proof way to check if the style sheet is loaded, so then just call the callback immediately
-    callback(path, "ok");
 }

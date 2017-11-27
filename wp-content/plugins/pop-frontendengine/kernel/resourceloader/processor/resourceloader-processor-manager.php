@@ -77,6 +77,28 @@ class PoP_ResourceLoaderProcessor_Manager {
 		return $this->get_processor($resource)->get_asset_path($resource);
 	}
 
+	function get_enqueuable_resources($resources) {
+
+		// We can only enqueue the resources that do NOT go in the body or are inlined. 
+		// Those ones will be added when doing $popResourceLoader->includeResources (in the body), or hardcoded (inline, such as utils-inline.js)
+		if ($in_body_resources = $this->filter_in_body($resources)) {
+
+			$resources = array_diff(
+				$resources,
+				$in_body_resources
+			);
+		}
+		if ($inline_resources = $this->filter_inline($resources)) {
+
+			$resources = array_diff(
+				$resources,
+				$inline_resources
+			);
+		}
+
+		return $resources;
+	}
+
 	function filter_js($resources) {
 
 		return array_filter($resources, array($this, 'is_js'));
@@ -97,7 +119,57 @@ class PoP_ResourceLoaderProcessor_Manager {
 		return $this->get_processor($resource)->get_type($resource) == POP_RESOURCELOADER_RESOURCETYPE_CSS;
 	}
 
+	function filter_in_body($resources) {
+
+		if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+
+			// Extract all the resources added through PoP_Processor->get_template_resources($template_id, $atts)
+			$engine = PoP_Engine_Factory::get_instance();
+			$json = $engine->resultsObject['json'];
+			if ($templates_resources = $json['sitemapping']['template-resources']) {
+				
+				$templates_resources = array_values(array_unique(array_flatten(array_values($templates_resources))));
+				return array_intersect($resources, $templates_resources);
+			}
+		}
+
+		return array();
+
+		// return array_filter($resources, array($this, 'in_body'));
+	}
+
+	// function in_body($resource) {
+
+	// 	return $this->get_processor($resource)->in_body($resource);
+	// }
+
+	function filter_inline($resources) {
+
+		return array_filter($resources, array($this, 'inline'));
+	}
+
+	function inline($resource) {
+
+		return $this->get_processor($resource)->inline($resource);
+	}
+
 	function filter_can_bundle($resources) {
+
+		// Remove all resources which go in the body, those cannot be bundled
+		if ($in_body_resources = $this->filter_in_body($resources)) {
+			
+			$resources = array_diff(
+				$resources,
+				$in_body_resources
+			);
+		}
+		if ($inline_resources = $this->filter_inline($resources)) {
+			
+			$resources = array_diff(
+				$resources,
+				$inline_resources
+			);
+		}
 		
 		return array_filter($resources, array($this, 'can_bundle'));
 	}

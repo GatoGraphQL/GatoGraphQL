@@ -993,12 +993,12 @@ window.popManager = {
 			// after it gets rendered appending new DOMs
 			if (proceed) {
 
-				// For priority = 'critical' do not set as initialized, since we will execute immediately after the 'noncritical' batch
-				// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
-				if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
+				// // For priority = 'critical' do not set as initialized, since we will execute immediately after the 'noncritical' batch
+				// // If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+				// if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
 					
-					that.setJsInitialized(block);
-				}
+				// 	that.setJsInitialized(block);
+				// }
 
 				// For priority = 'noncritical', no need to initialize, since the block has already been initialized during 'critical'
 				// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
@@ -1007,6 +1007,9 @@ window.popManager = {
 					that.initBlock(domain, pageSection, block, priority, options);
 				}
 				else {
+
+					// Set the block as initialized
+					that.initializeBlock(pageSection, block, priority, options);
 
 					// Directly run the 'noncritical' JS methods, which otherwise is done in initBlock
 					popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
@@ -1045,7 +1048,10 @@ window.popManager = {
 		that.initBlockRuntimeMemory(domain, pageSection, block, $.extend({}, options));
 
 		// Allow scripts and others to perform certain action after the runtimeMemory was generated
-		that.initializeBlock(pageSection, block, options);
+		// If it is critical don't do it yet, since the noncritical will trigger this instead
+		if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
+			that.initializeBlock(pageSection, block, priority, options);
+		}
 
 		that.runScriptsBefore(pageSection, block);
 		that.runBlockJSMethods(domain, pageSection, block, priority, options);
@@ -1079,13 +1085,15 @@ window.popManager = {
 	
 		var that = this;
 
-		var args = {
-			pageSection: pageSection,
-			block: block
-		};
-		that.extendArgs(args, options);
+		that.setJsInitialized(block);
 
-		popJSLibraryManager.execute('initBlock', args);
+		// var args = {
+		// 	pageSection: pageSection,
+		// 	block: block
+		// };
+		// that.extendArgs(args, options);
+
+		// popJSLibraryManager.execute('initBlock', args);
 
 		// Trigger event
 		block.triggerHandler('initialize');

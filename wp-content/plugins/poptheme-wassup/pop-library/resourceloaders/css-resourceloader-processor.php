@@ -33,6 +33,7 @@ define ('POP_RESOURCELOADER_CSS_SCROLLNOTIFICATIONS', PoP_TemplateIDUtils::get_t
 define ('POP_RESOURCELOADER_CSS_WIDGET', PoP_TemplateIDUtils::get_template_definition('css-widget'));
 define ('POP_RESOURCELOADER_CSS_DYNAMICMAXHEIGHT', PoP_TemplateIDUtils::get_template_definition('css-dynamicmaxheight'));
 
+// class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSComponentResourceLoaderProcessor {
 class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor {
 
 	function get_resources_to_process() {

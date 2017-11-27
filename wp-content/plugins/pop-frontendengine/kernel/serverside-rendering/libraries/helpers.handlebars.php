@@ -501,10 +501,17 @@ class PoP_ServerSide_Helpers {
 
 		// Add the CSS style links in the body?
 		if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+			
+			// // Include only those resources that go in the body
+			// global $pop_resourceloaderprocessor_manager;
+			// if ($resources = $pop_resourceloaderprocessor_manager->filter_in_body($resources)) {
+			if ($resources = $context[GD_JS_RESOURCES]) {
 
-			$popResourceLoader = PoP_ServerSide_Libraries_Factory::get_resourceloader_instance();
-			$resourceTags = $popResourceLoader->includeResources($domain, $context[GD_JS_RESOURCES], true);
-			$response = $resourceTags.$response;
+				$popResourceLoader = PoP_ServerSide_Libraries_Factory::get_resourceloader_instance();
+				$resourceTags = $popResourceLoader->includeResources($domain, $bId, $resources, true);
+				$response = $resourceTags.$response;
+			}
+			// }
 		}
 
 		if ($options['hash']['unsafe']) {

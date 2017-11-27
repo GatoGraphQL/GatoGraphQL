@@ -160,21 +160,22 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 		// Comment Leo 21/11/2017: Set the resources on $popResourceLoader, so that CSS resources have their URL to print it in the body
 		$this->init_resourceloader($type, $resources);
 
+		global $pop_resourceloaderprocessor_manager;
+		$inline_resources = $pop_resourceloaderprocessor_manager->filter_inline($resources);
+
 		// Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
 		if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 					
 			// Enqueue the resources
 			global $pop_jsresourceloaderprocessor_manager;
 			$pop_jsresourceloaderprocessor_manager->enqueue_resources($resources, $bundles, $bundlegroups/*, $remove_bundled_resources*/);
+			$pop_jsresourceloaderprocessor_manager->print_inline_resources($inline_resources);
 		}
 		elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
 
-			// Enqueue the resources. But only if we are not printing the CSS links in the body
-			if (PoP_Frontend_ServerUtils::include_resources_in_header()) {
-
-				global $pop_cssresourceloaderprocessor_manager;
-				$pop_cssresourceloaderprocessor_manager->enqueue_resources($resources, $bundles, $bundlegroups/*, $remove_bundled_resources*/);
-			}
+			global $pop_cssresourceloaderprocessor_manager;
+			$pop_cssresourceloaderprocessor_manager->enqueue_resources($resources, $bundles, $bundlegroups/*, $remove_bundled_resources*/);
+			$pop_cssresourceloaderprocessor_manager->print_inline_resources($inline_resources);
 		}
 	}
 
@@ -243,20 +244,15 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 		// Comment Leo 21/11/2017: set the resources into the $popResourceLoader instance
 		global $pop_resourceloaderprocessor_manager;
 		$sources = array();
-		// $types = array(
-  //           POP_RESOURCELOADER_RESOURCETYPE_JS => array(),
-  //           POP_RESOURCELOADER_RESOURCETYPE_CSS => array(),
-		// );
 		$types = array(
             $type => array(),
 		);
 		foreach ($resources as $resource) {
 
-			$sources[$resource] = $pop_resourceloaderprocessor_manager->get_processor($resource)->get_file_url($resource);
-			// $resource_type = $pop_resourceloaderprocessor_manager->get_processor($resource)->get_type($resource);
-			// $types[$resource_type][] = $resource;
+			$sources[$resource] = $pop_resourceloaderprocessor_manager->get_file_url($resource, true);
 			$types[$type][] = $resource;
 		}
+		// $in_body = $pop_resourceloaderprocessor_manager->filter_in_body($resources);
 
 		// Do a merge below, because this function will be invoked twice: once for the JS and once for the CSS, so don't let them override each other
 		$domain = get_site_url();
@@ -270,6 +266,7 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 		            POP_RESOURCELOADER_RESOURCETYPE_JS => array(),
 		            POP_RESOURCELOADER_RESOURCETYPE_CSS => array(),
 		        ),
+		        // 'in-body' => array(),
 			);
 		}
 		$popResourceLoader->config[$domain]['resources'] = array_merge(
@@ -284,6 +281,10 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 			$popResourceLoader->config[$domain]['types'][$type],
 			$types[$type]
 		);
+		// $popResourceLoader->config[$domain]['in-body'] = array_merge(
+		// 	$popResourceLoader->config[$domain]['in-body'],
+		// 	$in_body
+		// );
 	}
 }
 

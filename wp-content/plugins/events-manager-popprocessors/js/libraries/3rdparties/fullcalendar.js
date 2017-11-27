@@ -57,19 +57,24 @@ window.popFullCalendar = {
 			}
 		});
 
-		// // block.on('fetched', function(e) {
-		block.on('rendered', function(e, newDOMs, targetContainers, renderedDomain) {
+		// Comment Leo 24/11/2017: re-draw the calendar when new events are added, instead of when the block is rendered
+		// That is because after adding critical/noncritical JS execution, sometimes in GetPoP decentralized calendar in the homepage,
+		// events are added after the calendar has executed, and they would not be shown
+		// // When new events are added, re-draw the calendar
+		// block.on('rendered', function(e, newDOMs, targetContainers, renderedDomain) {
 
-			var block = $(this);
-			var pageSection = popManager.getPageSection(block);
+		// 	var block = $(this);
+		// 	var pageSection = popManager.getPageSection(block);
 			
-			// If it has an aggregator, then the event was added to that one
-			// var aggregatorData = popManager.getAggregatorBlockData(pageSection, block);
-			// if (aggregatorData) {
-			// 	block = $('#'+aggregatorData['id']);
-			// }
+		// 	that.execCalendar(renderedDomain, pageSection, block, targets, 'update');
+
+		// 	// Dispatch a window resize so that the Calendar / Google map gets updated
+		// 	windowResize();
+		// });
+		// When new events are added, re-draw the calendar
+		block.on('addedEvents', function() {
 			
-			that.execCalendar(renderedDomain, pageSection, block, targets, 'update');
+			that.execCalendar(domain, pageSection, block, targets, 'update');
 
 			// Dispatch a window resize so that the Calendar / Google map gets updated
 			windowResize();
@@ -163,6 +168,9 @@ window.popFullCalendar = {
 		});
 
 		$.merge(mempage.events, events_data_to_add);
+
+		// Trigger a handler to re-draw the calendar
+		block.triggerHandler('addedEvents');
 	},
 
 	execCalendar : function(domain, pageSection, block, targets, state) {

@@ -35,7 +35,25 @@ class PoP_ResourceLoaderProcessor {
 		return true;
 	}
 
+	// function in_body($resource) {
+	
+	// 	// Is it added in the body instead of through wp_enqueue_script/style?
+	// 	return false;
+	// }
+
+	function inline($resource) {
+	
+		// Directly add the contents of the file to the HTML output, instead of including it from a style/script tag
+		return false;
+	}
+
 	function can_bundle($resource) {
+
+		// // If the resource must be inlined or it goes in the body, then it cannot be bundled
+		// if ($this->inline($resource)/* || $this->in_body($resource)*/) {
+
+		// 	return false;
+		// }
 	
 		// Can add the contents of the resource on the bundle/bundlegroup generated files?
 		return true;

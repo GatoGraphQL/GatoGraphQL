@@ -20,6 +20,7 @@ define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES', PoP_TemplateIDUtils
 define ('POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES', PoP_TemplateIDUtils::get_template_definition('resourceloader-config-initialresources'));
 define ('POP_RESOURCELOADER_POPUTILS', PoP_TemplateIDUtils::get_template_definition('pop-utils'));
 define ('POP_RESOURCELOADER_UTILS', PoP_TemplateIDUtils::get_template_definition('utils'));
+// define ('POP_RESOURCELOADER_INLINEUTILS', PoP_TemplateIDUtils::get_template_definition('utils-inline'));
 
 class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
 
@@ -41,6 +42,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 			POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES,
 			POP_RESOURCELOADER_POPUTILS,
 			POP_RESOURCELOADER_UTILS,
+			// POP_RESOURCELOADER_INLINEUTILS,
 		);
 	}
 	
@@ -77,6 +79,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 			POP_RESOURCELOADER_RESOURCELOADER => 'resourceloader',
 			POP_RESOURCELOADER_POPUTILS => 'pop-utils',
 			POP_RESOURCELOADER_UTILS => 'utils',
+			// POP_RESOURCELOADER_INLINEUTILS => 'utils-inline',
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
@@ -84,6 +87,18 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 
 		return parent::get_filename($resource);
 	}
+	
+	// function inline($resource) {
+
+	// 	switch ($resource) {
+
+	// 		case POP_RESOURCELOADER_INLINEUTILS:
+				
+	// 			return true;
+	// 	}
+	
+	// 	return parent::inline($resource);
+	// }
 	
 	function get_version($resource) {
 
@@ -160,6 +175,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 			case POP_RESOURCELOADER_COMPATIBILITY:
 			case POP_RESOURCELOADER_HELPERSHANDLEBARS:
 			case POP_RESOURCELOADER_UTILS:
+			// case POP_RESOURCELOADER_INLINEUTILS:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
@@ -295,6 +311,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 				$manager_dependencies = array(
 					POP_RESOURCELOADER_COMPATIBILITY,
 					POP_RESOURCELOADER_UTILS,
+					// POP_RESOURCELOADER_INLINEUTILS,
 					POP_RESOURCELOADER_POPUTILS,
 					POP_RESOURCELOADER_JSLIBRARYMANAGER,
 

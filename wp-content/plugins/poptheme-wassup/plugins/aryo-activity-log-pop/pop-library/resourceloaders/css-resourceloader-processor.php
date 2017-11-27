@@ -7,6 +7,7 @@
 
 define ('POP_RESOURCELOADER_CSS_NOTIFICATIONLAYOUT', PoP_TemplateIDUtils::get_template_definition('css-notification-layout'));
 
+// class PopThemeWassup_AAL_CSSResourceLoaderProcessor extends PoP_CSSComponentResourceLoaderProcessor {
 class PopThemeWassup_AAL_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor {
 
 	function get_resources_to_process() {

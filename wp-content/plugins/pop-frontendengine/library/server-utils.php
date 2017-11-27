@@ -76,11 +76,11 @@ class PoP_Frontend_ServerUtils {
 			return false;
 		}
 
-		// Allow to override the configuration
-		$override = PoP_ServerUtils::get_override_configuration('remove-db');
-		if (!is_null($override)) {
-			return $override;
-		}
+		// // Allow to override the configuration
+		// $override = PoP_ServerUtils::get_override_configuration('remove-db');
+		// if (!is_null($override)) {
+		// 	return $override;
+		// }
 
 		// Allow specific pages to set this value to false
 		// Eg: the Events Calendar, which requires the DB data to add events to the calendar all on runtime

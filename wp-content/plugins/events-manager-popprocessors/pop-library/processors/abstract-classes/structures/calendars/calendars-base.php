@@ -15,8 +15,16 @@ class GD_Template_Processor_CalendarsBase extends GD_Template_Processor_Structur
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
-		// The calendar is set to critical, because it is not rendered on the server-side yet
-		$this->add_jsmethod($ret, 'calendar', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
+
+		// Comment Leo: right now, the calendar CANNOT be made critical, because its events are added on 'initialize', which will take place on non-critical
+		// Then, the events will be added, but there is no trigger to refresh the Calendar, then the events will not show up
+		// // Comment Leo 24/11/2017: if it is made critical, somehow it doesn't render well on Firefox when first accessing the website
+		// // https://getpop.org/en/
+		// // The calendar must be set to critical, or it doens't work: the calendar must be rendered
+		// // before the individual events are added to it, which happens on 'initialize'
+		// // Also, critical because it is not rendered on the server-side yet
+		// $this->add_jsmethod($ret, 'calendar', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
+		$this->add_jsmethod($ret, 'calendar');
 		return $ret;
 	}
 

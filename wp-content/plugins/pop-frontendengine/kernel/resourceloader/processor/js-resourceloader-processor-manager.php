@@ -7,7 +7,7 @@
 
 class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcessor_Manager*/ {
 
-	var $initialized, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $first_script, $scripttag_attributes;
+	var $initialized, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $first_script, $scripttag_attributes, $inline_resources;
 	
 	function __construct() {
 
@@ -21,6 +21,9 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 		// $this->enqueued_resources = array();
 		$this->resources_to_map = array();
 		$this->scripttag_attributes = array();
+
+		$this->inline_resources = array();
+		add_action('wp_head', array($this, 'print_scripts'));
 		
 		add_filter(
             'PoP_Frontend_ResourceLoaderMappingManager:resources',
@@ -93,10 +96,41 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 		);
 	}
 
+	function print_script($resource) {
+
+		global $pop_resourceloaderprocessor_manager;
+		$file = $pop_resourceloaderprocessor_manager->get_file_path($resource);
+        $file_contents = file_get_contents($file);
+		$resource_id = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+
+		return sprintf(
+			'<script id="%s" type="text/javascript">%s</script>',
+			$resource_id,
+			$file_contents
+		);
+	}
+
+	function print_scripts() {
+
+		if ($this->inline_resources) {
+
+			echo implode(PHP_EOL, array_map(array($this, 'print_script'), $this->inline_resources));
+		}
+	}
+
+	function print_inline_resources($resources) {
+
+		$this->inline_resources = $resources;
+	}
+
 	function enqueue_resources($resources, $bundle_ids, $bundlegroup_ids/*, $remove_bundled_resources = true*/) {
 
 		global $pop_resourceloaderprocessor_manager;
 		// $added_scripts = array();
+
+		// We can only enqueue the resources that do NOT go in the body or are inlined. 
+		// Those ones will be added when doing $popResourceLoader->includeResources (in the body), or hardcoded (inline, such as utils-inline.js)
+		$resources = $pop_resourceloaderprocessor_manager->get_enqueuable_resources($resources);
 
 		// Enqueue the resources/bundles/bundlegroups
 		// In order to calculate the bundle(group) ids, we need to substract first those resources which do not can_bundle, since they will not be inside the bundle files
@@ -254,11 +288,14 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 				// We must filter the dependencies to only CSS files, for if a script has a dependency to a style or viceversa (WP won't load the resource then)
 				$dependencies = $processor->get_dependencies($resource);
 				$dependencies = $pop_resourceloaderprocessor_manager->filter_js($dependencies);
-				$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $dependencies);
 			}
+
+			// Filter out the dependencies which are inline or in-body
+			$dependencies = $pop_resourceloaderprocessor_manager->get_enqueuable_resources($dependencies);
 
 			// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 			$script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+			$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $dependencies);
 			wp_register_script($script, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
 			wp_enqueue_script($script);
 
@@ -318,6 +355,11 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 
 		return $this->get_processor($resource)->async_load_in_order($resource);
 	}
+
+	// function get_enqueuable_resources($resources) {
+
+	// 	return $this->get_processor($resource)->get_enqueuable_resources($resource);
+	// }
 
 	function filter_async($resources) {
 

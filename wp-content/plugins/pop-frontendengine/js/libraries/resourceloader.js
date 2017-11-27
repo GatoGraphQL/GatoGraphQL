@@ -67,7 +67,25 @@ window.popResourceLoader = {
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
-	includeResources : function(domain, resources, ignoreAlreadyIncluded) {
+	onDeletePageSectionPageLoadResource : function(blockId, type, source) {
+
+		// If destroying the pageSectionPage, the corresponding 'in-body' styles will also be deleted, and other pages using those styles will be affected.
+		// Then, simply load again those removed resources (scripts and styles)
+		var pageSectionPage = popManager.getPageSectionPage($("#"+blockId));
+		pageSectionPage.one('destroy', function() {
+
+			if (type == M.RESOURCELOADER.TYPES.CSS) {
+				
+				load_style(source);
+			}
+			else if (type == M.RESOURCELOADER.TYPES.JS) {
+
+				load_script(source);
+			}
+		});
+	},
+
+	includeResources : function(domain, blockId, resources, ignoreAlreadyIncluded) {
 
 		var that = this;
 		if (!resources) {
@@ -84,32 +102,39 @@ window.popResourceLoader = {
 			// Comment Leo 23/11/2017: if a component is lazy-loaded, and inside has a CSS file that is printed in the body,
 			// then we must check if that resource has been added to the body. (It will be already marked as "loaded" by the website,
 			// but it never was actually because of the lazy-loading)
-			if (M.PRINTTAGSINBODY) {
+			// if (M.PRINTTAGSINBODY) {
 				
-				body_resources = $(resources).not(that['loaded-in-body']).get();
-			}
-			
+			body_resources = $(resources).not(that['loaded-in-body']).get();
+			// }			
 			resources = $(resources).not(that.loaded).get();
 		}
 
 		// Mark the resources as already included
 		that.loaded = that.loaded.concat(resources);
-		if (M.PRINTTAGSINBODY) {
+		// if (M.PRINTTAGSINBODY) {
 
-			that['loaded-in-body'] = that['loaded-in-body'].concat(body_resources);
-			resources = body_resources;
-		}
+		that['loaded-in-body'] = that['loaded-in-body'].concat(body_resources);
+		resources = body_resources;
+		// }
 
 		// Map the resources to their tags
 		var tags = resources.map(function(resource) {
 
+			// If destroying the pageSectionPage, the corresponding 'in-body' styles will also be deleted, and other pages using those styles will be affected.
+			// Then, simply load again those removed resources (scripts and styles)
 			var source = config.sources[resource];
-			var type = config.types[resource];
+			var fn = '<script type="text/javascript">jQuery(document).ready( function($) { popResourceLoader.onDeletePageSectionPageLoadResource("{0}", "{1}", "{2}"); });</script>';
 			if (config.types[M.RESOURCELOADER.TYPES.CSS].indexOf(resource) >= 0) {
-				return '<link rel="stylesheet" href="{0}">'.format(source);
+
+				var script = fn.format(blockId, M.RESOURCELOADER.TYPES.CSS, source);
+				var tag = '<link rel="stylesheet" href="{0}">'.format(source);
+				return script+tag;
 			}
 			else if (config.types[M.RESOURCELOADER.TYPES.JS].indexOf(resource) >= 0) {
-				return '<script type="text/javascript" src="{0}"></script>'.format(source);
+				
+				var script = fn.format(blockId, M.RESOURCELOADER.TYPES.JS, source);
+				var tag = '<script type="text/javascript" src="{0}"></script>'.format(source);
+				return script+tag;
 			}
 			// var type = config.types[resource];
 			// if (type == M.RESOURCELOADER.TYPES.CSS) {
@@ -322,6 +347,12 @@ window.popResourceLoader = {
 
 		// The resources are placed under the hierarchy key in object config.resources.js
 		var resourcesDB = config.resources[hierarchy];
+
+		// When initializing multidomain components, the config may not be loaded yet, so there will be no DB yet
+		if (!resourcesDB) {
+
+			return {};
+		}
 
 		// // If we are requesting an external URL, and the config for that external domain is still not loaded, then resourcesDB will be null
 		// // Eg: when loading: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F

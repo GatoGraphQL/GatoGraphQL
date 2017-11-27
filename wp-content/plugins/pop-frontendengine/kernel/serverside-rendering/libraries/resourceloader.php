@@ -3,7 +3,7 @@ class PoP_ServerSide_ResourceLoader {
 
 	// The values here will be populated from resourceloader-config.js,
 	// on a domain by domain basis
-	public $config;
+	public $config, $blockId;
 
 	// Keep a list of all loading resources
 	// private $loading;
@@ -13,6 +13,7 @@ class PoP_ServerSide_ResourceLoader {
 	// Keep a list of all loaded resources. All resources are called always the same among different domains,
 	// so one list here listing all of them works
 	public $loaded;
+	public $loadedInBody;
 	// Loaded bundles and bundleGroups depend on their domains, since their names change among domains
 	// private $loadedByDomain;
 
@@ -30,6 +31,7 @@ class PoP_ServerSide_ResourceLoader {
 		// );
 		// $this->loadingURLs = array();
 		$this->loaded = array();
+		$this->loadedInBody = array();
 		// $this->loadedByDomain = array();
 	}
 
@@ -40,32 +42,47 @@ class PoP_ServerSide_ResourceLoader {
 	protected function includeResource($resource) {
 
 		$config = $this->getConfigByDomain($this->domain);
+		$blockId = $this->blockId;
 		$resource_id = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
 		$include_type = PoP_Frontend_ServerUtils::get_templateresources_include_type();
 
 		// Include the script/style link
 		if ($include_type == 'body') {
 
+			// If destroying the pageSectionPage, the corresponding 'in-body' styles will also be deleted, and other pages using those styles will be affected.
+			// Then, simply load again those removed resources (scripts and styles)
 			$source = $config['sources'][$resource];
-			// $type = $config['types'][$resource];
-			
-			// if ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+			$fn = '<script type="text/javascript">jQuery(document).ready( function($) { popResourceLoader.onDeletePageSectionPageLoadResource("%s", "%s", "%s"); });</script>';
 			if (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_CSS])) {
 
-				return sprintf(
+				$script = sprintf(
+					$fn,
+					$blockId,
+					POP_RESOURCELOADER_RESOURCETYPE_CSS,
+					$source
+				);
+				$tag = sprintf(
 					'<link id="%s" rel="stylesheet" href="%s">',
 					$resource_id,
 					$source
 				);
+				return $script.$tag;
 			}
 			// else if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 			elseif (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_JS])) {
 
-				return sprintf(
+				$script = sprintf(
+					$fn,
+					$blockId,
+					POP_RESOURCELOADER_RESOURCETYPE_JS,
+					$source
+				);
+				$tag = sprintf(
 					'<script id="%s" type="text/javascript" src="%s"></script>',
 					$resource_id,
 					$source
 				);
+				return $script.$tag;
 			}
 		}
 		// Include the content of the file
@@ -97,16 +114,30 @@ class PoP_ServerSide_ResourceLoader {
 		return '';
 	}
 
-	function includeResources($domain, $resources, $ignoreAlreadyIncluded) {
+	function includeResources($domain, $blockId, $resources, $ignoreAlreadyIncluded) {
 
 		if (!$resources) {
 
 			return '';
 		}
 
+		// Only
+
+		$body_resources = array();
+
 		// Remove the resources that have been included already
 		if ($ignoreAlreadyIncluded) {
-			
+
+			// Comment Leo 23/11/2017: if a component is lazy-loaded, and inside has a CSS file that is printed in the body,
+			// then we must check if that resource has been added to the body. (It will be already marked as "loaded" by the website,
+			// but it never was actually because of the lazy-loading)
+			// if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+				
+			$body_resources = array_diff(
+				$resources,
+				$this->loadedInBody
+			);
+			// }
 			$resources = array_diff(
 				$resources,
 				$this->loaded
@@ -118,9 +149,18 @@ class PoP_ServerSide_ResourceLoader {
 			$this->loaded,
 			$resources
 		);
+		// if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+
+		$this->loadedInBody = array_merge(
+			$this->loadedInBody,
+			$body_resources
+		);
+		$resources = $body_resources;
+		// }
 
 		// Map the resources to their tags. First set the domain so it can be accessed in that function
 		$this->domain = $domain;
+		$this->blockId = $blockId;
 		$tags = array_map(array($this, 'includeResource'), $resources);
 
 		return implode('', $tags);

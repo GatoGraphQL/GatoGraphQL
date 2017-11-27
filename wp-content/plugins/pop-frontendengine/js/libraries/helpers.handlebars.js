@@ -464,8 +464,12 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	// Add the CSS style links in the body?
 	if (M.PRINTTAGSINBODY) {
 
-		var resourceTags = popResourceLoader.includeResources(domain, context[M.JS_RESOURCES], true);
-		response = resourceTags + response;
+		var resources = context[M.JS_RESOURCES];
+		if (resources) {
+
+			var resourceTags = popResourceLoader.includeResources(domain, bId, resources, true);
+			response = resourceTags + response;
+		}
 	}
 
 	if (options.hash.unsafe) {
