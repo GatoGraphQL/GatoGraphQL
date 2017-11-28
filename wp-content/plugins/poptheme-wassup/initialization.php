@@ -193,8 +193,8 @@ class PoPTheme_Wassup_Initialization {
 			wp_enqueue_style('poptheme-wassup-typeahead-bootstrap');
 
 			// If doing code-splitting, the resources below are already added by the ResourceLoader, so no need for them here
-			// if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
-			if (!PoP_Frontend_ServerUtils::include_resources_in_body()) {
+			if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
+			// if (!PoP_Frontend_ServerUtils::include_resources_in_body()) {
 
 				wp_register_style('poptheme-wassup-blockgroup-home-welcome', $templates_css_folder . '/blockgroup-home-welcome'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
 				wp_enqueue_style('poptheme-wassup-blockgroup-home-welcome');
