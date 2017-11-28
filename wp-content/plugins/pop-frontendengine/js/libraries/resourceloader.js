@@ -67,21 +67,37 @@ window.popResourceLoader = {
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
-	onDeletePageSectionPageLoadResource : function(blockId, type, source) {
+	loadScriptOrStyle : function(type, source) {
+
+		var that = this;
+		if (type == M.RESOURCELOADER.TYPES.CSS) {
+			
+			load_style(source);
+		}
+		else if (type == M.RESOURCELOADER.TYPES.JS) {
+
+			load_script(source);
+		}
+	},
+
+	onRemoveLoadResource : function(blockId, type, source) {
+
+		var that = this;
+		var block = $("#"+blockId);
 
 		// If destroying the pageSectionPage, the corresponding 'in-body' styles will also be deleted, and other pages using those styles will be affected.
 		// Then, simply load again those removed resources (scripts and styles)
-		var pageSectionPage = popManager.getPageSectionPage($("#"+blockId));
+		var pageSectionPage = popManager.getPageSectionPage(block);
 		pageSectionPage.one('destroy', function() {
 
-			if (type == M.RESOURCELOADER.TYPES.CSS) {
-				
-				load_style(source);
-			}
-			else if (type == M.RESOURCELOADER.TYPES.JS) {
+			that.loadScriptOrStyle(type, source);
+		});
 
-				load_script(source);
-			}
+		// Similar, if the style/script was added in an element inside a list (eg: a layout inside a post list),
+		// and the block content gets replaced (eg: when filtering inside the block), then the style/script must be linked to
+		block.one('replace', function() {
+
+			that.loadScriptOrStyle(type, source);
 		});
 	},
 
@@ -123,7 +139,7 @@ window.popResourceLoader = {
 			// If destroying the pageSectionPage, the corresponding 'in-body' styles will also be deleted, and other pages using those styles will be affected.
 			// Then, simply load again those removed resources (scripts and styles)
 			var source = config.sources[resource];
-			var fn = '<script type="text/javascript">jQuery(document).ready( function($) { popResourceLoader.onDeletePageSectionPageLoadResource("{0}", "{1}", "{2}"); });</script>';
+			var fn = '<script type="text/javascript">jQuery(document).ready( function($) { popResourceLoader.onRemoveLoadResource("{0}", "{1}", "{2}"); });</script>';
 			if (config.types[M.RESOURCELOADER.TYPES.CSS].indexOf(resource) >= 0) {
 
 				var script = fn.format(blockId, M.RESOURCELOADER.TYPES.CSS, source);
