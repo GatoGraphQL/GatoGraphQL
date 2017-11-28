@@ -41,18 +41,18 @@ class PoP_ServerSide_ResourceLoader {
 
 	protected function includeResource($resource) {
 
-		$config = $this->getConfigByDomain($this->domain);
-		$blockId = $this->blockId;
-		$resource_id = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
-		$include_type = PoP_Frontend_ServerUtils::get_templateresources_include_type();
-
 		// Include the script/style link
-		if ($include_type == 'body') {
+		if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
 
-			// If destroying the pageSectionPage, the corresponding 'in-body' styles will also be deleted, and other pages using those styles will be affected.
-			// Then, simply load again those removed resources (scripts and styles)
+			$config = $this->getConfigByDomain($this->domain);
+			$blockId = $this->blockId;
+			$resource_id = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+			$include_type = PoP_Frontend_ServerUtils::get_templateresources_include_type();
+
+			// For both 'body' and 'body-inline', include the style/script file when the pageSectionPage is destroyed
+			$script = '';
 			$source = $config['sources'][$resource];
-			$fn = '<script type="text/javascript">jQuery(document).ready( function($) { popResourceLoader.onDeletePageSectionPageLoadResource("%s", "%s", "%s"); });</script>';
+			$fn = '<script type="text/javascript">jQuery(document).ready( function($) { popResourceLoader.onRemoveLoadResource("%s", "%s", "%s"); });</script>';
 			if (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_CSS])) {
 
 				$script = sprintf(
@@ -61,14 +61,7 @@ class PoP_ServerSide_ResourceLoader {
 					POP_RESOURCELOADER_RESOURCETYPE_CSS,
 					$source
 				);
-				$tag = sprintf(
-					'<link id="%s" rel="stylesheet" href="%s">',
-					$resource_id,
-					$source
-				);
-				return $script.$tag;
 			}
-			// else if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 			elseif (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_JS])) {
 
 				$script = sprintf(
@@ -77,39 +70,60 @@ class PoP_ServerSide_ResourceLoader {
 					POP_RESOURCELOADER_RESOURCETYPE_JS,
 					$source
 				);
-				$tag = sprintf(
-					'<script id="%s" type="text/javascript" src="%s"></script>',
-					$resource_id,
-					$source
-				);
-				return $script.$tag;
 			}
+
+			if ($include_type == 'body') {
+
+				// If destroying the pageSectionPage, the corresponding 'in-body' styles will also be deleted, and other pages using those styles will be affected.
+				// Then, simply load again those removed resources (scripts and styles)
+				if (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_CSS])) {
+
+					$tag = sprintf(
+						'<link id="%s" rel="stylesheet" href="%s">',
+						$resource_id,
+						$source
+					);
+					return $script.$tag;
+				}
+				// else if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+				elseif (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_JS])) {
+
+					$tag = sprintf(
+						'<script id="%s" type="text/javascript" src="%s"></script>',
+						$resource_id,
+						$source
+					);
+					return $script.$tag;
+				}
+			}
+			// Include the content of the file
+			elseif ($include_type == 'body-inline') {
+
+				global $pop_resourceloaderprocessor_manager;
+				$file = $pop_resourceloaderprocessor_manager->get_file_path($resource);
+	            $file_contents = file_get_contents($file);
+
+				if (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_CSS])) {
+
+					$inline = sprintf(
+						'<style id="%s" type="text/css">%s</style>',
+						$resource_id,
+						$file_contents
+					);
+					return $script.$inline;
+				}
+				// else if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+				elseif (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_JS])) {
+
+					$inline = sprintf(
+						'<script id="%s" type="text/javascript">%s</script>',
+						$resource_id,
+						$file_contents
+					);
+					return $script.$inline;
+				}
+			}		
 		}
-		// Include the content of the file
-		elseif ($include_type == 'body-inline') {
-
-			global $pop_resourceloaderprocessor_manager;
-			$file = $pop_resourceloaderprocessor_manager->get_file_path($resource);
-            $file_contents = file_get_contents($file);
-
-			if (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_CSS])) {
-
-				return sprintf(
-					'<style id="%s" type="text/css">%s</style>',
-					$resource_id,
-					$file_contents
-				);
-			}
-			// else if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-			elseif (in_array($resource, $config['types'][POP_RESOURCELOADER_RESOURCETYPE_JS])) {
-
-				return sprintf(
-					'<script id="%s" type="text/javascript">%s</script>',
-					$resource_id,
-					$file_contents
-				);
-			}
-		}		
 
 		return '';
 	}
