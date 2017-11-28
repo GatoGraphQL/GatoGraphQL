@@ -35,6 +35,21 @@ window.popMap = {
 				var map = $(this);
 				that.triggerShowMap(domain, pageSection, block, map);
 			});
+
+			// If executing the map on 'critical' JS mode, then the markers need to be drawn to the map after the block becomes initialized
+			// Otherwise, markers will not appear on the map, because function initMarker adds them by doing `block.one('initialize', ...)`,
+			// which will happen after we execute `triggerShowMap` above
+			if (M.USE_PROGRESSIVEBOOTING && !popManager.jsInitialized(block)) {
+
+				block.one('initialize', function() {
+
+					targets.each(function() {
+				
+						var map = $(this);
+						that.triggerAddMarkers(domain, pageSection, block, map);
+					});
+				});
+			}
 		});
 	},
 
@@ -153,6 +168,7 @@ window.popMap = {
 	triggerAddMarkers : function(domain, pageSection, block, map, status) {
 
 		var that = this;
+		status = status || {};
 
 		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
 		if (!popManager.isHidden(map)) {
@@ -450,12 +466,13 @@ window.popMap = {
 
 		// If it doesn't exist, create it
 		if (!gMap) {
-			gMap = mempage.maps[mapId] = new GMaps({
+			gMap = new GMaps({
 				div: '#'+mapId,
 				lat: M.LOCATIONSMAP_LAT,
 				lng: M.LOCATIONSMAP_LNG,
 				zoom: parseInt(M.LOCATIONSMAP_ZOOM),
 			});
+			mempage.maps[mapId] = gMap;
 		}
 
 		return gMap;
