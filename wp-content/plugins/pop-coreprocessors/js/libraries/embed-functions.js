@@ -32,7 +32,7 @@ window.popEmbedFunctions = {
 				var link = $(e.relatedTarget);
 				var url = popFunctions.getUrl(domain, link, true);
 				if (urlType == 'embed') {
-					url = popManager.getEmbedUrl(url);
+					url = that.getEmbedUrl(url);
 				}
 				else if (urlType == 'api') {
 					url = popManager.getAPIUrl(url);
@@ -84,7 +84,7 @@ window.popEmbedFunctions = {
 				// Maybe the URL type is none, then leave the URL as it is (eg: Copy Search URL),
 				// or it may need to add extra params, like embed or api
 				if (urlType == 'embed') {
-					url = popManager.getEmbedUrl(url);
+					url = that.getEmbedUrl(url);
 				}
 				else if (urlType == 'api') {
 					url = popManager.getAPIUrl(url);
@@ -97,6 +97,57 @@ window.popEmbedFunctions = {
 	//-------------------------------------------------
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
+
+	getUnembedUrl : function(url) {
+
+		var that = this;
+
+		// Allow to have custom-functions.js provide the implementation of this function
+		var executed = popJSLibraryManager.execute('getUnembedUrl', {url: url});
+		var ret = false;
+		$.each(executed, function(index, value) {
+			if (value) {
+				url = value;
+				return -1;
+			}
+		});
+		
+		return url;
+	},
+
+	getEmbedUrl : function(url) {
+	
+		var that = this;
+
+		// Allow to have custom-functions.js provide the implementation of this function
+		var executed = popJSLibraryManager.execute('getEmbedUrl', {url: url});
+		var ret = false;
+		$.each(executed, function(index, value) {
+			if (value) {
+				url = value;
+				return -1;
+			}
+		});
+		
+		return url;
+	},
+
+	getPrintUrl : function(url) {
+	
+		var that = this;
+		
+		// Allow to have custom-functions.js provide the implementation of this function
+		var executed = popJSLibraryManager.execute('getPrintUrl', {url: url});
+		var ret = false;
+		$.each(executed, function(index, value) {
+			if (value) {
+				url = value;
+				return -1;
+			}
+		});
+		
+		return url;
+	},
 
 	embedPreviewFromInput : function(domain, pageSection, block, connector) {
 

@@ -281,4 +281,4 @@ window.popCustomFunctions = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popCustomFunctions, ['addPageSectionIds', 'pageSectionNewDOMsBeforeInitialize'], true);
-popJSLibraryManager.register(popCustomFunctions, [/*'documentInitialized', */'pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'getPosition', 'scrollToElem', 'scrollTop', 'closeMessageFeedback', 'closeMessageFeedbacks']);
+popJSLibraryManager.register(popCustomFunctions, ['pageSectionInitialized', 'getEmbedUrl', 'getUnembedUrl', 'getPrintUrl', 'getPosition', 'scrollToElem', 'scrollTop', 'closeMessageFeedback', 'closeMessageFeedbacks']);

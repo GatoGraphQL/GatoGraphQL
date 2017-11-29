@@ -616,10 +616,27 @@ window.popCustomBootstrap = {
 		pageTabBtn.addClass('active');
 	},
 
+	getPosition : function(elem) {
+
+		var that = this;
+
+		// Allow to have custom-functions.js provide the implementation of this function for the main pageSection, and perfectScrollbar also
+		var executed = popJSLibraryManager.execute('getPosition', {elem: elem});
+		var ret = 0;
+		$.each(executed, function(index, value) {
+			if (value) {
+				ret = value;
+				return -1;
+			}
+		});
+		
+		return ret;
+	},
+
 	savePosition : function(pageSection, tabPane) {
 
 		var that = this;
-		tabPane.data('lastposition', popManager.getPosition(pageSection));
+		tabPane.data('lastposition', that.getPosition(pageSection));
 		tabPane.data('theater', popPageSectionManager.isTheater());
 	},
 

@@ -28,13 +28,6 @@ window.popUserAccount = {
 		// Log in the user immediately, before rendering the HTML. This way, conditional wrappers can access the state of the user
 		// being logged in, such as for "isUserIdSameAsLoggedInUser"
 		that.initialLogin(domain);
-
-		// // Create the vars for all the domain
-		// $.each(M.USERLOGGEDIN_DATA_PAGEURLS, function(index, url) {
-
-		// 	var domain = getDomain(url);
-		// 	that.initDomain(domain);
-		// });
 	},
 
 	initDomain : function(args) {
@@ -63,6 +56,12 @@ window.popUserAccount = {
 		// Important: this function below must be executed before gdUserLoginout.initDocument(elem); so it can catch the login/logout events
 		that.checkpointInvalidateBlocks();
 
+		// // Fetch the user logged in data, for each non-initialized domain
+		// that.fetchAllDomainsLoggedInUserData();
+	},
+	documentLoaded : function() {
+	
+		var that = this;
 		// Fetch the user logged in data, for each non-initialized domain
 		that.fetchAllDomainsLoggedInUserData();
 	},
@@ -395,4 +394,4 @@ window.popUserAccount = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popUserAccount, ['initDocument', 'initDomain', 'documentInitialized', 'pageSectionInitialized', 'blockInitialized', 'loadAvatar']);
+popJSLibraryManager.register(popUserAccount, ['initDocument', 'initDomain', 'documentInitialized', 'documentLoaded', 'pageSectionInitialized', 'blockInitialized', 'loadAvatar']);

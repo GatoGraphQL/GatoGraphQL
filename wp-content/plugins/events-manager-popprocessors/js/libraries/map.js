@@ -6,7 +6,7 @@ window.popMap = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	initBlockRuntimeMemory : function(args) {
+	initBlockRuntimeMemoryIndependent : function(args) {
 	
 		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
@@ -705,7 +705,7 @@ window.popMapRuntime = {
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
 
-	initBlockRuntimeMemory : function(args) {
+	initBlockRuntimeMemoryIndependent : function(args) {
 	
 		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
@@ -865,5 +865,5 @@ window.popMapRuntime = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popMap, ['initBlockRuntimeMemory', 'map', 'mapModal', 'mapStandalone']);
-popJSLibraryManager.register(popMapRuntime, ['initBlockRuntimeMemory']);
+popJSLibraryManager.register(popMap, ['initBlockRuntimeMemoryIndependent', 'map', 'mapModal', 'mapStandalone']);
+popJSLibraryManager.register(popMapRuntime, ['initBlockRuntimeMemoryIndependent']);

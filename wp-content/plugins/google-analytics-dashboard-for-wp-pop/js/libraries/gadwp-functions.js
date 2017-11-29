@@ -6,17 +6,6 @@ window.popGADWP = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	// pageSectionFetchSuccess : function(args) {
-
-	// 	var that = this;
-
-	// 	// Only register the Google Analytics call if it is not a silent page
-	// 	var options = args.options;
-	// 	if (!options.silentDocument) {
-
-	// 		ga('send', 'pageview');
-	// 	}
-	// },
 	documentInitialized : function(args) {
 
 		var that = this;
@@ -38,5 +27,4 @@ window.popGADWP = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-// popJSLibraryManager.register(popGADWP, ['pageSectionFetchSuccess']);
 popJSLibraryManager.register(popGADWP, ['documentInitialized']);

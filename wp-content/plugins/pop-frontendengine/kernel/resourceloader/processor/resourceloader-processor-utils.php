@@ -295,6 +295,10 @@ class PoP_ResourceLoaderProcessorUtils {
         // $pop_jsresourceloaderprocessor_manager->add_resources_from_jsmethods($resources, $methods, $template_resources);
         $critical_resources = $noncritical_resources = array();
         $pop_jsresourceloaderprocessor_manager->add_resources_from_jsmethods($critical_resources, $critical_methods, $template_resources);
+        // Add the dependencies for the template resources also
+        foreach ($template_resources as $template_resource) {
+            $pop_jsresourceloaderprocessor_manager->add_resource_dependencies($critical_resources, $template_resource, false);
+        }
         $pop_jsresourceloaderprocessor_manager->add_resources_from_jsmethods($noncritical_resources, $noncritical_methods, array(), false);
 
         // If a resource is both critical and non-critical, then remove it from non-critical

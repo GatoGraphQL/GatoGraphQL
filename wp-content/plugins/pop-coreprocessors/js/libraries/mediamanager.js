@@ -19,7 +19,7 @@ window.popMediaManager = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	documentInitialized : function() {
+	documentInitializedIndependent : function() {
 
 		var that = this;
 
@@ -164,5 +164,5 @@ window.popMediaManager = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popMediaManager, ['documentInitialized']);
+popJSLibraryManager.register(popMediaManager, ['documentInitializedIndependent']);
 popJSLibraryManager.register(popMediaManager, ['featuredImageSet'], true); // High priority: execute before function 'featuredImageSet' from popFeaturedImage, so we set that.domain BEFORE the frame opens

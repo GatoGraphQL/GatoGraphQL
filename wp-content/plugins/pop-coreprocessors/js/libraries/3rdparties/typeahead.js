@@ -162,15 +162,6 @@ window.popTypeahead = {
 		});
 	},
 
-	removeLocalStorageItem : function(args) {
-
-		var that = this;
-		var path = args.path, key = args.key;
-
-		// Delete the localStorage entries for the typeahead
-		args.result = args.result || key.startsWith('__'+path);
-	},
-
 	//-------------------------------------------------
 	// PUBLIC but not EXPOSED functions
 	//-------------------------------------------------
@@ -429,4 +420,4 @@ window.popTypeahead = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popTypeahead, ['selectableTypeahead', 'fillTypeahead', 'selectDatum', 'fetchlinkTypeahead', 'selectableTypeaheadTrigger', 'typeaheadSearchBtn', 'typeaheadSearchInput', 'removeLocalStorageItem']);
+popJSLibraryManager.register(popTypeahead, ['selectableTypeahead', 'fillTypeahead', 'selectDatum', 'fetchlinkTypeahead', 'selectableTypeaheadTrigger', 'typeaheadSearchBtn', 'typeaheadSearchInput']);

@@ -1,6 +1,10 @@
 "use strict";
 // This function are called as a callback to load_scripts, so they lose the context of who 't' is
 // So then place them outside the popResourceLoader structure
+function markJSResourceAsLoaded(url, state) {
+
+	popResourceLoader.markJSResourceAsLoaded(url, state);
+}
 function markResourceAsLoaded(url, state) {
 
 	popResourceLoader.markResourceAsLoaded(url, state);
@@ -17,6 +21,7 @@ window.popResourceLoader = {
 	loading : [],
 	'error-loading' : [],
 	'loading-urls' : {},
+	'loading-resources' : {},
 
 	// Keep a list of all loaded resources. All resources are called always the same among different domains,
 	// so one list here listing all of them works
@@ -163,6 +168,22 @@ window.popResourceLoader = {
 		});
 
 		return tags.join('');
+	},
+
+	markJSResourceAsLoaded : function(url, state) {
+
+		var that = this;
+
+		if (state == 'ok') {
+
+			// From the URL, get the corresponding resource
+			var resource = that['loading-urls'][url];
+
+			// Assign the loaded libraries (when calling "register") to this resource
+			popCodeSplitJSLibraryManager.assignLibrariesToResource(resource);
+		}
+		
+		that.markResourceAsLoaded(url, state);
 	},
 
 	markResourceAsLoaded : function(url, state) {
@@ -496,7 +517,7 @@ window.popResourceLoader = {
 
 							$.each(resources, function(index, resource) {
 
-								that.loadResource(config, resource);
+								that.loadResource(url, config, resource);
 							});
 						}
 					});
@@ -513,9 +534,14 @@ window.popResourceLoader = {
 		}
 	},
 
-	loadResource : function(config, resource) {
+	loadResource : function(url, config, resource) {
 
 		var that = this;		
+
+		that['loading-resources'][url] = that['loading-resources'][url] || [];
+		if (that['loading-resources'][url].indexOf(resource) == -1) {
+			that['loading-resources'][url].push(resource);
+		}
 
 		// Mark it as loading
 		that.loading.push(resource);
@@ -535,7 +561,7 @@ window.popResourceLoader = {
 		if (config.types[M.RESOURCELOADER.TYPES.JS].indexOf(resource) >= 0) {
 	
 			var ordered = config['ordered-load-resources'].indexOf(resource) >= 0;
-			load_script(source, markResourceAsLoaded, ordered);
+			load_script(source, markJSResourceAsLoaded, ordered);
 		}
 		// else if (type == M.RESOURCELOADER.TYPES.CSS) {
 		else if (config.types[M.RESOURCELOADER.TYPES.CSS].indexOf(resource) >= 0) {
@@ -593,7 +619,7 @@ window.popResourceLoader = {
 						// try to load it again
 						if (that['error-loading'].indexOf(resource) >= 0) {
 
-							that.loadResource(config, resource);
+							that.loadResource(url, config, resource);
 						}
 
 						// Check if the resource has been loaded
@@ -605,7 +631,7 @@ window.popResourceLoader = {
 							var source = config.sources[resource];
 							if (!that['loading-urls'][source]) {
 
-								that.loadResource(config, resource);
+								that.loadResource(url, config, resource);
 							}
 						}
 					});
@@ -631,6 +657,46 @@ window.popResourceLoader = {
 					loadedBundleGroups = false;
 				}
 			});
+
+			// If all the resources have been loaded, then call documentInitializedIndependent on all of them at the same time
+			// This is needed so that JS objects can register themselves in the proper execution order (eg: popMediaManagerCORS must execute before popMediaManager)
+			if (loadedBundleGroups) {
+
+				// Check it that URL needed to load resources
+				var loadedURLResources = that['loading-resources'][url];
+				if (loadedURLResources && loadedURLResources.length) {
+
+					// Remove the entry
+					delete that['loading-resources'][url];
+
+					// Execute 'documentInitializedIndependent' only on those resources which have been loaded by this current load
+					var codeSplitLibraries = [];
+					$.each(loadedURLResources, function(index, loadedURLResource) {
+
+						// getLibraries returns the list of JS objects which were registered by this current load
+						codeSplitLibraries = codeSplitLibraries.concat(popCodeSplitJSLibraryManager.getLibraries(loadedURLResource));
+					});
+
+					// Only execute if there are new libraries to be initialized
+					if (codeSplitLibraries.length) {
+
+						// Initialize the resources
+						var args = {
+							domain: M.HOME_DOMAIN,
+							codeSplitLibraries: codeSplitLibraries,
+						};
+						popJSLibraryManager.execute('documentInitializedIndependent', args/*, true*/);
+					}
+				}
+			}
+			// else {
+
+			// 	// Mark the URL as currently loading resources
+			// 	if (that['loading-resources'].indexOf(url) == -1) {
+
+			// 		that['loading-resources'].push(url);
+			// 	}
+			// }
 				
 			return loadedBundleGroups;
 		}

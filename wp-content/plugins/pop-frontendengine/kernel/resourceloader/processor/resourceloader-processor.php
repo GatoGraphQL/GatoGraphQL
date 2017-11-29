@@ -133,4 +133,28 @@ class PoP_ResourceLoaderProcessor {
 
 		return array();
 	}
+	
+	function get_decorated_resources($resource) {
+
+		// This function allows to load files 'mediamanager.js' and 'mediamanager-cors.js' without adding them as dependencies from the featuredimage.js and editor.js files
+		// Indeed they are not dependencies, however any of the latter 2 is loaded, the former 2 must also be loaded since they decorate (i.e. add functionality to) them
+		// They also allow having logic in function `documentInitializedIndependent`, since otherwise these 2 files have no other JS methods to be mapped to, so they would not be loaded in first place 
+		return array();
+	}
+	
+	function get_decorators($resource) {
+
+		global $pop_resourceloaderprocessor_manager;
+
+		// Return all resources which are decorating the given resource
+		return $pop_resourceloaderprocessor_manager->get_decorators($resource);
+	}
+	
+	// function get_dependencies_and_decorators($resource) {
+
+	// 	return array_merge(
+	// 		$this->get_dependencies($resource),
+	// 		$this->get_decorators($resource)
+	// 	);
+	// }
 }

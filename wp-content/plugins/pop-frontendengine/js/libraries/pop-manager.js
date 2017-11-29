@@ -473,6 +473,8 @@ window.popManager = {
 				that.updateDocument(domain);
 			}
 
+			// Only critical assets will be executed here, because 'documentInitialized' is part of the resourceloader-mapping starting from popManager.init(),
+			// so it is not possible to have "defer" scripts with function documentInitialized
 			that.documentInitialized(domain);
 
 			// // If the server requested to extra load more URLs
@@ -481,6 +483,8 @@ window.popManager = {
 
 			// Progressive booting: Execute the non-critical JS functions
 			window.addEventListener('load', function() {
+
+				that.documentLoaded(domain);
 
 				// If Progressive Booting is enabled...
 				if (M.USE_PROGRESSIVEBOOTING) {
@@ -710,8 +714,24 @@ window.popManager = {
 			domain: domain,
 		};
 
+		// The difference between documentInitialized and documentInitializedIndependent,
+		// is that documentInitializedIndependent does not create a dependency between JS files.
+		// Then, when creating the resourceloader-mapping, those files will not be retrieved
+		// Instead, their function documentInitializedIndependent will be called if they have been loaded anyway
 		popJSLibraryManager.execute('documentInitialized', args);
+		popJSLibraryManager.execute('documentInitializedIndependent', args/*, true*/);
 		$(document).triggerHandler('initialized.pop.document');
+	},
+
+	documentLoaded : function(domain) {
+	
+		var that = this;
+
+		var args = {
+			domain: domain,
+		};
+
+		popJSLibraryManager.execute('documentLoaded', args);
 	},
 
 	pageSectionFetchSuccess : function(pageSection, response, options) {
@@ -762,7 +782,7 @@ window.popManager = {
 		// Initialize the params for this branch
 		that.initPageSectionRuntimeMemory(domain, pageSection);
 
-		popJSLibraryManager.execute('initPageSection', {pageSection: pageSection});
+		// popJSLibraryManager.execute('initPageSection', {pageSection: pageSection});
 		pageSection.triggerHandler('initialize');
 		$(document).triggerHandler('initialize.pop.pagesection', [pageSection]);
 	},
@@ -770,9 +790,6 @@ window.popManager = {
 	pageSectionInitialized : function(domain, pageSection) {
 	
 		var that = this;
-
-		// // Initialize the params for this branch
-		// that.initPageSectionRuntimeMemory(domain, pageSection);
 
 		popJSLibraryManager.execute('pageSectionInitialized', {domain: domain, pageSection: pageSection});
 		pageSection.triggerHandler('initialized');
@@ -926,15 +943,15 @@ window.popManager = {
 
 		that.pageSectionNewDOMsInitialized(domain, pageSection, newDOMs, priority, options);
 
-		var args = {
-			domain: domain,
-			pageSection: pageSection,
-			newDOMs: newDOMs
-		}
-		that.extendArgs(args, options);
+		// var args = {
+		// 	domain: domain,
+		// 	pageSection: pageSection,
+		// 	newDOMs: newDOMs
+		// }
+		// that.extendArgs(args, options);
 
-		popJSLibraryManager.execute('pageSectionRendered', args);
-		pageSection.triggerHandler('pageSectionRendered');
+		// popJSLibraryManager.execute('pageSectionRendered', args);
+		// pageSection.triggerHandler('pageSectionRendered');
 	},
 
 	runScriptsBefore : function(pageSection, newDOMs) {
@@ -2453,22 +2470,6 @@ window.popManager = {
 		// This will call functions from perfectScrollbar, bootstrap modal, and custom functions
 		popJSLibraryManager.execute('scrollTop', {elem: elem, top: top, animate: animate});
 	},
-	getPosition : function(elem) {
-
-		var that = this;
-
-		// Allow to have custom-functions.js provide the implementation of this function for the main pageSection, and perfectScrollbar also
-		var executed = popJSLibraryManager.execute('getPosition', {elem: elem});
-		var ret = 0;
-		$.each(executed, function(index, value) {
-			if (value) {
-				ret = value;
-				return -1;
-			}
-		});
-		
-		return ret;
-	},
 
 	getSettingsId : function(objectOrId) {
 		
@@ -3906,6 +3907,7 @@ window.popManager = {
 			runtimeMempage: runtimeMempage
 		};
 		popJSLibraryManager.execute('initPageSectionRuntimeMemory', args);
+		popJSLibraryManager.execute('initPageSectionRuntimeMemoryIndependent', args);
 	},
 	initBlockRuntimeMemory : function(domain, pageSection, block, options) {
 	
@@ -3945,6 +3947,7 @@ window.popManager = {
 			runtimeMempage: runtimeMempage
 		};
 		popJSLibraryManager.execute('initBlockRuntimeMemory', args);
+		popJSLibraryManager.execute('initBlockRuntimeMemoryIndependent', args);
 	},
 
 	getViewport : function(pageSection, el) {
@@ -4385,40 +4388,6 @@ window.popManager = {
 		link.trigger('click');
 	},
 
-	getUnembedUrl : function(url) {
-
-		var that = this;
-
-		// Allow to have custom-functions.js provide the implementation of this function
-		var executed = popJSLibraryManager.execute('getUnembedUrl', {url: url});
-		var ret = false;
-		$.each(executed, function(index, value) {
-			if (value) {
-				url = value;
-				return -1;
-			}
-		});
-		
-		return url;
-	},
-
-	getEmbedUrl : function(url) {
-	
-		var that = this;
-
-		// Allow to have custom-functions.js provide the implementation of this function
-		var executed = popJSLibraryManager.execute('getEmbedUrl', {url: url});
-		var ret = false;
-		$.each(executed, function(index, value) {
-			if (value) {
-				url = value;
-				return -1;
-			}
-		});
-		
-		return url;
-	},
-
 	getAPIUrl : function(url) {
 	
 		var that = this;
@@ -4431,23 +4400,6 @@ window.popManager = {
 			url = add_query_arg(param, value, url);
 		});
 
-		return url;
-	},
-
-	getPrintUrl : function(url) {
-	
-		var that = this;
-		
-		// Allow to have custom-functions.js provide the implementation of this function
-		var executed = popJSLibraryManager.execute('getPrintUrl', {url: url});
-		var ret = false;
-		$.each(executed, function(index, value) {
-			if (value) {
-				url = value;
-				return -1;
-			}
-		});
-		
 		return url;
 	},
 

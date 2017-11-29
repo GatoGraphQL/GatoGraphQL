@@ -11,6 +11,7 @@ define ('POP_RESOURCELOADER_DYNAMICMAXHEIGHT', PoP_TemplateIDUtils::get_template
 define ('POP_RESOURCELOADER_MULTISELECT', PoP_TemplateIDUtils::get_template_definition('multiselect'));
 define ('POP_RESOURCELOADER_PERFECTSCROLLBAR', PoP_TemplateIDUtils::get_template_definition('perfectscrollbar'));
 define ('POP_RESOURCELOADER_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('typeahead'));
+define ('POP_RESOURCELOADER_TYPEAHEADSTORAGE', PoP_TemplateIDUtils::get_template_definition('typeahead-storage'));
 define ('POP_RESOURCELOADER_WAYPOINTS', PoP_TemplateIDUtils::get_template_definition('waypoints'));
 define ('POP_RESOURCELOADER_ADDEDITPOST', PoP_TemplateIDUtils::get_template_definition('addeditpost'));
 // define ('POP_RESOURCELOADER_BLOCKFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('block-functions'));
@@ -20,6 +21,7 @@ define ('POP_RESOURCELOADER_EDITOR', PoP_TemplateIDUtils::get_template_definitio
 define ('POP_RESOURCELOADER_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('featuredimage'));
 define ('POP_RESOURCELOADER_COOKIES', PoP_TemplateIDUtils::get_template_definition('cookies'));
 define ('POP_RESOURCELOADER_FUNCTIONS', PoP_TemplateIDUtils::get_template_definition('functions'));
+define ('POP_RESOURCELOADER_EXPAND', PoP_TemplateIDUtils::get_template_definition('expand'));
 define ('POP_RESOURCELOADER_INPUTFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('input-functions'));
 define ('POP_RESOURCELOADER_EMBEDFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('embed-functions'));
 define ('POP_RESOURCELOADER_PRINTFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('print-functions'));
@@ -61,6 +63,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_MULTISELECT,
 			POP_RESOURCELOADER_PERFECTSCROLLBAR,
 			POP_RESOURCELOADER_TYPEAHEAD,
+			POP_RESOURCELOADER_TYPEAHEADSTORAGE,
 			POP_RESOURCELOADER_WAYPOINTS,
 			POP_RESOURCELOADER_ADDEDITPOST,
 			// POP_RESOURCELOADER_BLOCKFUNCTIONS,
@@ -70,6 +73,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_FEATUREDIMAGE,
 			POP_RESOURCELOADER_COOKIES,
 			POP_RESOURCELOADER_FUNCTIONS,
+			POP_RESOURCELOADER_EXPAND,
 			POP_RESOURCELOADER_INPUTFUNCTIONS,
 			POP_RESOURCELOADER_EMBEDFUNCTIONS,
 			POP_RESOURCELOADER_PRINTFUNCTIONS,
@@ -111,6 +115,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_MULTISELECT => 'multiselect',
 			POP_RESOURCELOADER_PERFECTSCROLLBAR => 'perfectscrollbar',
 			POP_RESOURCELOADER_TYPEAHEAD => 'typeahead',
+			POP_RESOURCELOADER_TYPEAHEADSTORAGE => 'typeahead-storage',
 			POP_RESOURCELOADER_WAYPOINTS => 'waypoints',
 			POP_RESOURCELOADER_ADDEDITPOST => 'addeditpost',
 			// POP_RESOURCELOADER_BLOCKFUNCTIONS => 'block-functions',
@@ -120,6 +125,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_FEATUREDIMAGE => 'featuredimage',
 			POP_RESOURCELOADER_COOKIES => 'cookies',
 			POP_RESOURCELOADER_FUNCTIONS => 'functions',
+			POP_RESOURCELOADER_EXPAND => 'expand',
 			POP_RESOURCELOADER_INPUTFUNCTIONS => 'input-functions',
 			POP_RESOURCELOADER_EMBEDFUNCTIONS => 'embed-functions',
 			POP_RESOURCELOADER_PRINTFUNCTIONS => 'print-functions',
@@ -186,6 +192,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_MULTISELECT:
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
 			case POP_RESOURCELOADER_TYPEAHEAD:
+			case POP_RESOURCELOADER_TYPEAHEADSTORAGE:
 			case POP_RESOURCELOADER_WAYPOINTS:
 			
 				return POP_COREPROCESSORS_DIR.'/js/'.$subpath.'libraries/3rdparties';
@@ -204,6 +211,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_MULTISELECT:
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
 			case POP_RESOURCELOADER_TYPEAHEAD:
+			case POP_RESOURCELOADER_TYPEAHEADSTORAGE:
 			case POP_RESOURCELOADER_WAYPOINTS:
 
 				return POP_COREPROCESSORS_DIR.'/js/libraries/3rdparties/'.$this->get_filename($resource).'.js';
@@ -223,6 +231,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_MULTISELECT:
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
 			case POP_RESOURCELOADER_TYPEAHEAD:
+			case POP_RESOURCELOADER_TYPEAHEADSTORAGE:
 			case POP_RESOURCELOADER_WAYPOINTS:
 			
 				$afterpath = '/3rdparties';
@@ -254,6 +263,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_TYPEAHEAD => array(
 				'popTypeahead',
 			),
+			POP_RESOURCELOADER_TYPEAHEADSTORAGE => array(
+				'popTypeaheadStorage',
+			),
 			POP_RESOURCELOADER_WAYPOINTS => array(
 				'popWaypoints',
 			),
@@ -281,6 +293,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			),
 			POP_RESOURCELOADER_FUNCTIONS => array(
 				'popFunctions',
+			),
+			POP_RESOURCELOADER_EXPAND => array(
+				'popExpand',
 			),
 			POP_RESOURCELOADER_INPUTFUNCTIONS => array(
 				'popInputFunctions',
@@ -384,6 +399,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_DATERANGE:
 
 				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_DATERANGEPICKER;
+				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_MOMENT;
 				break;
 				
 			case POP_RESOURCELOADER_DYNAMICMAXHEIGHT:
@@ -449,6 +465,31 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 		}
 
 		return $dependencies;
+	}
+	
+	function get_decorated_resources($resource) {
+
+		$decorated = parent::get_decorated_resources($resource);
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_MEDIAMANAGER:
+			case POP_RESOURCELOADER_MEDIAMANAGERCORS:
+
+				$decorated[] = POP_RESOURCELOADER_FEATUREDIMAGE;
+				$decorated[] = POP_RESOURCELOADER_EDITOR;
+				break;
+		}
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_MEDIAMANAGERCORS:
+
+				$decorated[] = POP_RESOURCELOADER_MEDIAMANAGER;
+				break;
+		}
+
+		return $decorated;
 	}
 }
 

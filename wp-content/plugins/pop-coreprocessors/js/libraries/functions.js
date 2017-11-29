@@ -6,19 +6,6 @@ window.popFunctions = {
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
 
-	expandJSKeys : function(args) {
-	
-		var that = this;
-		var context = args.context;
-		
-		if (context[M.JS_FONTAWESOME]) {
-			context.fontawesome = context[M.JS_FONTAWESOME];
-		}
-		if (context[M.JS_DESCRIPTION]) {
-			context.description = context[M.JS_DESCRIPTION];
-		}
-	},
-
 	beep : function(args) {
 
 		// It beeps only once in total, and not once per target
@@ -300,4 +287,4 @@ window.popFunctions = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popFunctions, ['expandJSKeys', 'showmore', 'hideEmpty', 'switchTargetClass', 'doNothing', 'fetchMore', 'fetchMoreDisable', 'saveLastClicked', 'retrySendRequest', /*'mediaplayer', */'reset', /*'smallScreenHideCollapse', */'sortable', 'onActionThenClick', 'beep']);
+popJSLibraryManager.register(popFunctions, ['showmore', 'hideEmpty', 'switchTargetClass', 'doNothing', 'fetchMore', 'fetchMoreDisable', 'saveLastClicked', 'retrySendRequest', /*'mediaplayer', */'reset', /*'smallScreenHideCollapse', */'sortable', 'onActionThenClick', 'beep']);

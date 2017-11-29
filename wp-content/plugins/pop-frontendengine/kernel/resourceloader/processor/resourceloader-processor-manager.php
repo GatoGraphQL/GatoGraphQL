@@ -35,6 +35,26 @@ class PoP_ResourceLoaderProcessor_Manager {
 		return array_keys($this->processors);
 	}
 	
+	function decorates_resource($resource) {
+
+		$decorated_resources = $this->get_processor($resource)->get_decorated_resources($resource);
+		if (in_array($this->maybe_decorated_resource, $decorated_resources)) {
+
+			return $resource;
+		}
+
+		return null;
+	}
+	
+	function get_decorators($resource) {
+
+		// Return the list of all resources which are decorating the given $resource
+		$resources = $this->get_resources();
+		$this->maybe_decorated_resource = $resource;
+		$decorators = array_filter(array_map(array($this, 'decorates_resource'), $resources));
+		return $decorators;
+	}
+	
 	function add($processor, $resources_to_process) {
 	
 		foreach ($resources_to_process as $resource) {
@@ -218,6 +238,20 @@ class PoP_ResourceLoaderProcessor_Manager {
 		// Enqueue the resource, at the end, after its dependencies have been added
 		if ($add_resource) {
 			$this->add_resource($resources, $resource/*, $resource_key*/);
+		}
+
+		// Add the decorators after the resource
+		$decorators = $processor->get_decorators($resource);
+		// foreach ($dependencies as $dependency_resource/* => $dependency_resource_methods*/) {
+		// 	$this->add_resources_from_jsobjects($resources, $dependency_resource/*, $dependency_resource_methods*/);
+		// }
+		foreach ($decorators as $decorator_resource) {
+			
+			// if (!in_array($dependency_resource, $this->enqueued_resources)) {
+			if (!in_array($decorator_resource, $resources)) {
+
+				$this->add_resource_dependencies($resources, $decorator_resource, true/*, 'external'*/);
+			}
 		}
 	}
 }

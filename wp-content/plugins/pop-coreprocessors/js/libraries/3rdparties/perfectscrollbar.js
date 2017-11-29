@@ -6,13 +6,6 @@ window.popPerfectScrollbar = {
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
 
-	// documentInitialized : function() {
-	
-	// 	var that = this;
-
-	// 	that.scrollbars();
-	// },
-
 	scrollbarHorizontal : function(args) {
 	
 		var that = this;
@@ -145,4 +138,4 @@ window.popPerfectScrollbar = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popPerfectScrollbar, [/*'documentInitialized'*/ 'scrollbarHorizontal', 'scrollbarVertical', 'getPosition', 'scrollToElem', 'scrollTop']);
+popJSLibraryManager.register(popPerfectScrollbar, ['scrollbarHorizontal', 'scrollbarVertical', 'getPosition', 'scrollToElem', 'scrollTop']);

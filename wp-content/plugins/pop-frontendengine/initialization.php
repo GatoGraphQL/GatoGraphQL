@@ -110,6 +110,12 @@ class PoPFrontend_Initialization {
 				wp_register_script('pop-jslibrary-manager', $libraries_js_folder.'/jslibrary-manager'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
 				wp_enqueue_script('pop-jslibrary-manager');
 
+				if (PoP_ServerUtils::enable_config_by_params() || PoP_Frontend_ServerUtils::use_code_splitting()) {
+					
+					wp_register_script('pop-codesplit-jslibrary-manager', $libraries_js_folder.'/codesplit-jslibrary-manager'.$suffix.'.js', array('jquery'), POP_FRONTENDENGINE_VERSION, true);
+					wp_enqueue_script('pop-codesplit-jslibrary-manager');
+				}
+
 				wp_register_script('pop-jsruntime-manager', $libraries_js_folder.'/jsruntime-manager'.$suffix.'.js', array('jquery', 'pop-jslibrary-manager'), POP_FRONTENDENGINE_VERSION, true);
 				wp_enqueue_script('pop-jsruntime-manager');
 

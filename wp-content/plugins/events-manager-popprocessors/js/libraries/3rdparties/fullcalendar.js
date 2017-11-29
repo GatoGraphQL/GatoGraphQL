@@ -9,7 +9,7 @@ window.popFullCalendar = {
 	// PUBLIC FUNCTIONS
 	//-------------------------------------------------
 
-	initBlockRuntimeMemory : function(args) {
+	initBlockRuntimeMemoryIndependent : function(args) {
 	
 		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
@@ -492,5 +492,5 @@ window.popFullCalendarControls = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popFullCalendar, ['initBlockRuntimeMemory', 'calendar']);
+popJSLibraryManager.register(popFullCalendar, ['initBlockRuntimeMemoryIndependent', 'calendar']);
 popJSLibraryManager.register(popFullCalendarControls, ['controlCalendarPrev', 'controlCalendarNext']);

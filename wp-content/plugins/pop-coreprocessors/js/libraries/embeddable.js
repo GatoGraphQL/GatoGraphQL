@@ -47,7 +47,7 @@ window.popEmbeddable = {
 		targets.click(function(e) {
 
 			e.preventDefault();
-			window.open(popManager.getUnembedUrl(window.location.href), '_blank');
+			window.open(that.getUnembedUrl(window.location.href), '_blank');
 		});
 	},
 };

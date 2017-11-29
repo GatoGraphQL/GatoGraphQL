@@ -10,6 +10,7 @@ define ('POP_RESOURCELOADER_HELPERSHANDLEBARS', PoP_TemplateIDUtils::get_templat
 define ('POP_RESOURCELOADER_HISTORY', PoP_TemplateIDUtils::get_template_definition('history'));
 define ('POP_RESOURCELOADER_INTERCEPTORS', PoP_TemplateIDUtils::get_template_definition('interceptors'));
 define ('POP_RESOURCELOADER_JSLIBRARYMANAGER', PoP_TemplateIDUtils::get_template_definition('jslibrary-manager'));
+define ('POP_RESOURCELOADER_CODESPLITJSLIBRARYMANAGER', PoP_TemplateIDUtils::get_template_definition('codesplit-jslibrary-manager'));
 define ('POP_RESOURCELOADER_JSRUNTIMEMANAGER', PoP_TemplateIDUtils::get_template_definition('jsruntime-manager'));
 define ('POP_RESOURCELOADER_PAGESECTIONMANAGER', PoP_TemplateIDUtils::get_template_definition('pagesection-manager'));
 define ('POP_RESOURCELOADER_POPMANAGER', PoP_TemplateIDUtils::get_template_definition('pop-manager'));
@@ -32,6 +33,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 			POP_RESOURCELOADER_HISTORY,
 			POP_RESOURCELOADER_INTERCEPTORS,
 			POP_RESOURCELOADER_JSLIBRARYMANAGER,
+			POP_RESOURCELOADER_CODESPLITJSLIBRARYMANAGER,
 			POP_RESOURCELOADER_JSRUNTIMEMANAGER,
 			POP_RESOURCELOADER_PAGESECTIONMANAGER,
 			POP_RESOURCELOADER_POPMANAGER,
@@ -72,6 +74,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 			POP_RESOURCELOADER_HISTORY => 'history',
 			POP_RESOURCELOADER_INTERCEPTORS => 'interceptors',
 			POP_RESOURCELOADER_JSLIBRARYMANAGER => 'jslibrary-manager',
+			POP_RESOURCELOADER_CODESPLITJSLIBRARYMANAGER => 'codesplit-jslibrary-manager',
 			POP_RESOURCELOADER_JSRUNTIMEMANAGER => 'jsruntime-manager',
 			POP_RESOURCELOADER_PAGESECTIONMANAGER => 'pagesection-manager',
 			POP_RESOURCELOADER_POPMANAGER => 'pop-manager',
@@ -264,6 +267,9 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 			POP_RESOURCELOADER_JSLIBRARYMANAGER => array(
 				'popJSLibraryManager',
 			),
+			POP_RESOURCELOADER_CODESPLITJSLIBRARYMANAGER => array(
+				'popCodeSplitJSLibraryManager',
+			),
 			POP_RESOURCELOADER_JSRUNTIMEMANAGER => array(
 				'popJSRuntimeManager',
 			),
@@ -314,6 +320,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 					// POP_RESOURCELOADER_INLINEUTILS,
 					POP_RESOURCELOADER_POPUTILS,
 					POP_RESOURCELOADER_JSLIBRARYMANAGER,
+					POP_RESOURCELOADER_CODESPLITJSLIBRARYMANAGER,
 
 					// The resources below are not strictly needed to be added as dependencies, since they are mapped inside popManager.init internal/external method calls
 					// However, if the mapping has not been generated, then that dependency will fail.
@@ -357,11 +364,6 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 					);
 				}
 				break;
-
-			// case POP_RESOURCELOADER_RESOURCELOADER:
-
-			// 	$dependencies[] = POP_RESOURCELOADER_JSLIBRARYMANAGER;
-			// 	break;
 		
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
 

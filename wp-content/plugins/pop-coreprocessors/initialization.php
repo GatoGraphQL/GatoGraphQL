@@ -185,6 +185,9 @@ class PoP_CoreProcessors_Initialization {
 				wp_register_script('pop-coreprocessors-cookies', $libraries_js_folder.'/cookies'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-cookies');
 
+				wp_register_script('pop-coreprocessors-expand', $libraries_js_folder.'/expand'.$suffix.'.js', array('pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-expand');
+
 				wp_register_script('pop-coreprocessors-functions', $libraries_js_folder.'/functions'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-functions');
 
@@ -265,6 +268,9 @@ class PoP_CoreProcessors_Initialization {
 
 				wp_register_script('pop-coreprocessors-typeahead', $libraries_js_folder.'/3rdparties/typeahead'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-typeahead');
+
+				wp_register_script('pop-coreprocessors-typeaheadstorage', $libraries_js_folder.'/3rdparties/typeahead-storage'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-typeaheadstorage');
 
 				// wp_register_script('pop-coreprocessors-googleanalytics', $libraries_js_folder.'/3rdparties/analytics'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				// wp_enqueue_script('pop-coreprocessors-googleanalytics');

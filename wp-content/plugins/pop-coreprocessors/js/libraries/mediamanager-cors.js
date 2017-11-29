@@ -15,7 +15,7 @@ window.popMediaManagerCORS = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	documentInitialized : function() {
+	documentInitializedIndependent : function() {
 
 		var that = this;
 
@@ -60,9 +60,10 @@ window.popMediaManagerCORS = {
 					that.domains['editor-'+state.id] = domain;
 				}
 			});
-		});
+			
+		// });
 
-		$(document).on('initialized.featuredImage', function(e) {
+		// $(document).on('initialized.featuredImage', function(e) {
 
 			// Inside $(document).ready( because popFeaturedImage.documentInitialized will execute after, so getFrame() is not ready yet
 			// After the frame is open, check if need to refresh content
@@ -184,4 +185,4 @@ window.popMediaManagerCORS = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popMediaManagerCORS, ['documentInitialized'], true); // High priority: execute before function 'documentInitialized' from popMediaManager, so we set that.needsRefresh before the media manager checks for this value and performs the refresh
+popJSLibraryManager.register(popMediaManagerCORS, ['documentInitializedIndependent'], true); // High priority: execute before function 'documentInitialized' from popMediaManager, so we set that.needsRefresh before the media manager checks for this value and performs the refresh

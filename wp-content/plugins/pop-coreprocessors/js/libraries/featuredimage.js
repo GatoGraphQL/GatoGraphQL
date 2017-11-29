@@ -12,18 +12,27 @@ window.popFeaturedImage = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	documentInitialized : function(args) {
+	init : function() {
 
 		var that = this;
-
+		
 		$(document).ready(function($) {
 
+			// Initialize the frame immediately, so that it can also be accessed by popMediaManagerCORS
 			that.frame = wp.media({
 				title: M.LABELS.MEDIA_FEATUREDIMAGE_TITLE,
 				multiple: false,
 				library: {type: 'image'},
 				button: {text: M.LABELS.MEDIA_FEATUREDIMAGE_BTN}
 			});
+		});
+	},
+	documentInitializedIndependent : function(args) {
+
+		var that = this;
+
+		$(document).ready(function($) {
+
 			that.frame.on('open',function() {
 
 				// We know which is the featuredImage opening the frame because it is the only one with class "open"
@@ -72,8 +81,8 @@ window.popFeaturedImage = {
 				featuredImage.removeClass('open');
 			});
 
-			// Allow MediaManagerCors to initialize itself
-			$(document).triggerHandler('initialized.featuredImage', [that.frame])
+			// // Allow MediaManagerCors to initialize itself
+			// $(document).triggerHandler('initialized.featuredImage', [that.frame])
 		});
 	},
 	featuredImageSet : function(args) {
@@ -157,4 +166,5 @@ window.popFeaturedImage = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popFeaturedImage, ['documentInitialized', 'featuredImageSet', 'featuredImageRemove']);
+popJSLibraryManager.register(popFeaturedImage, ['documentInitializedIndependent', 'featuredImageSet', 'featuredImageRemove']);
+popFeaturedImage.init();

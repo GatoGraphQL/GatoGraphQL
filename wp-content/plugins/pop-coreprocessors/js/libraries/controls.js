@@ -32,7 +32,7 @@ window.popControls = {
 			e.preventDefault();
 			var control = $(this);
 			var url = that.getBlockFilteringUrl(domain, pageSection, control, true);
-			url = popManager.getPrintUrl(url);
+			url = popEmbedFunctions.getPrintUrl(url);
 			popLinks.openPrint(url);
 		});
 	},

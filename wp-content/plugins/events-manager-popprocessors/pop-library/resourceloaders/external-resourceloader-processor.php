@@ -112,7 +112,7 @@ class EM_PoPProcessors_JSExternalResourceLoaderProcessor extends PoP_ExternalJSR
 	
 	function get_dependencies($resource) {
 
-		$dependencies = array();
+		$dependencies = parent::get_dependencies($resource);
 
 		switch ($resource) {
 

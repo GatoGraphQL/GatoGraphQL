@@ -188,7 +188,7 @@ window.popBootstrapCarouselControls = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	initBlockRuntimeMemory : function(args) {
+	initBlockRuntimeMemoryIndependent : function(args) {
 	
 		var that = this;
 		var pageSection = args.pageSection, block = args.block, mempage = args.runtimeMempage;
@@ -459,4 +459,4 @@ window.popBootstrapCarouselControls = {
 // Initialize
 //-------------------------------------------------
 popJSLibraryManager.register(popBootstrapCarousel, ['carouselStatic', 'carouselAutomatic']);
-popJSLibraryManager.register(popBootstrapCarouselControls, ['initBlockRuntimeMemory', 'controlCarouselPrev', 'controlCarouselNext', 'carouselControls']);
+popJSLibraryManager.register(popBootstrapCarouselControls, ['initBlockRuntimeMemoryIndependent', 'controlCarouselPrev', 'controlCarouselNext', 'carouselControls']);

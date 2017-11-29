@@ -56,6 +56,7 @@ uglifyjs libraries/3rdparties/dynamicmaxheight.js -o dist/libraries/3rdparties/d
 uglifyjs libraries/3rdparties/multiselect.js -o dist/libraries/3rdparties/multiselect.min.js -c warnings=false -m
 uglifyjs libraries/3rdparties/perfectscrollbar.js -o dist/libraries/3rdparties/perfectscrollbar.min.js -c warnings=false -m
 uglifyjs libraries/3rdparties/typeahead.js -o dist/libraries/3rdparties/typeahead.min.js -c warnings=false -m
+uglifyjs libraries/3rdparties/typeahead-storage.js -o dist/libraries/3rdparties/typeahead-storage.min.js -c warnings=false -m
 uglifyjs libraries/3rdparties/waypoints.js -o dist/libraries/3rdparties/waypoints.min.js -c warnings=false -m
 uglifyjs libraries/appshell.js -o dist/libraries/appshell.min.js -c warnings=false -m
 uglifyjs libraries/addeditpost.js -o dist/libraries/addeditpost.min.js -c warnings=false -m
@@ -69,6 +70,7 @@ uglifyjs libraries/mediamanager.js -o dist/libraries/mediamanager.min.js -c warn
 uglifyjs libraries/mediamanager-cors.js -o dist/libraries/mediamanager-cors.min.js -c warnings=false -m
 uglifyjs libraries/tabs.js -o dist/libraries/tabs.min.js -c warnings=false -m
 uglifyjs libraries/cookies.js -o dist/libraries/cookies.min.js -c warnings=false -m
+uglifyjs libraries/expand.js -o dist/libraries/expand.min.js -c warnings=false -m
 uglifyjs libraries/functions.js -o dist/libraries/functions.min.js -c warnings=false -m
 uglifyjs libraries/input-functions.js -o dist/libraries/input-functions.min.js -c warnings=false -m
 uglifyjs libraries/embed-functions.js -o dist/libraries/embed-functions.min.js -c warnings=false -m
@@ -104,7 +106,7 @@ echo ##########################
 # cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/jquery.fullscreen-min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 # cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/bootstrap-multiselect.0.9.13.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/jquery.dynamicmaxheight.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
-wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/bundles/pop-coreprocessors.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries&f=helpers.handlebars.min.js,system.min.js,appshell.min.js,addeditpost.min.js,editor.min.js,mentions.min.js,featuredimage.min.js,mediamanager.min.js,mediamanager-cors.min.js,tabs.min.js,user-account.min.js,waypoints.min.js,window.min.js,multiselect.min.js,dynamicmaxheight.min.js,daterange.min.js,typeahead.min.js,analytics.min.js,perfectscrollbar.min.js,functions.min.js,input-functions.min.js,embed-functions.min.js,print-functions.min.js,content-functions.min.js,target-functions.min.js,socialmedia.min.js,embeddable.min.js,block-dataquery.min.js,blockgroup-dataquery.min.js,menus.min.js,dataset-count.min.js,replicate.min.js,forms.min.js,links.min.js,classes.min.js,scrolls.min.js,onlineoffline.min.js,event-reactions.min.js,feedback-message.min.js,bootstrap-carousel.min.js,modals.min.js,controls.min.js,jquery.dynamicmaxheight.min.js"
+wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/bundles/pop-coreprocessors.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries&f=helpers.handlebars.min.js,system.min.js,appshell.min.js,addeditpost.min.js,editor.min.js,mentions.min.js,featuredimage.min.js,mediamanager.min.js,mediamanager-cors.min.js,tabs.min.js,user-account.min.js,waypoints.min.js,window.min.js,multiselect.min.js,dynamicmaxheight.min.js,daterange.min.js,typeahead.min.js,typeahead-storage.min.js,analytics.min.js,perfectscrollbar.min.js,expand.min.js,functions.min.js,input-functions.min.js,embed-functions.min.js,print-functions.min.js,content-functions.min.js,target-functions.min.js,socialmedia.min.js,embeddable.min.js,block-dataquery.min.js,blockgroup-dataquery.min.js,menus.min.js,dataset-count.min.js,replicate.min.js,forms.min.js,links.min.js,classes.min.js,scrolls.min.js,onlineoffline.min.js,event-reactions.min.js,feedback-message.min.js,bootstrap-carousel.min.js,modals.min.js,controls.min.js,jquery.dynamicmaxheight.min.js"
 
 ###########################
 # CSS

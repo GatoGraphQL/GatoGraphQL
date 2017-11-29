@@ -10,17 +10,6 @@ window.popWaypoints = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	// Comment Leo 22/02/2017: Waypoints seems to already process the windowResize already, so no need to add this
-	// documentInitialized : function() {
-	
-	// 	var that = this;
-
-	// 	$(window).on('resized', function() {
-
-	// 		Waypoint.refreshAll();
-	// 	});
-	// },
-
 	waypointsHistoryStateNew : function(args) {
 	
 		var that = this;
@@ -509,4 +498,4 @@ window.popWaypoints = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popWaypoints, [/*'documentInitialized', */'waypointsFetchMore', 'waypointsToggleClass', 'waypointsToggleCollapse', 'waypointsTheater', 'waypointsHistoryStateOriginal', 'waypointsHistoryStateNew']);
+popJSLibraryManager.register(popWaypoints, ['waypointsFetchMore', 'waypointsToggleClass', 'waypointsToggleCollapse', 'waypointsTheater', 'waypointsHistoryStateOriginal', 'waypointsHistoryStateNew']);

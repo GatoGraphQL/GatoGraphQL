@@ -173,7 +173,7 @@ class PoP_CoreProcessors_JSExternalResourceLoaderProcessor extends PoP_ExternalJ
 	
 	function get_dependencies($resource) {
 
-		$dependencies = array();
+		$dependencies = parent::get_dependencies($resource);
 
 		switch ($resource) {
 
@@ -186,6 +186,14 @@ class PoP_CoreProcessors_JSExternalResourceLoaderProcessor extends PoP_ExternalJ
 			case POP_RESOURCELOADER_EXTERNAL_DATERANGEPICKER:
 
 				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP;
+				break;
+		}
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_EXTERNAL_DATERANGEPICKER:
+
+				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_MOMENT;
 				break;
 		}
 

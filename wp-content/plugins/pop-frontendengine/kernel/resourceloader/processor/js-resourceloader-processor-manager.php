@@ -55,6 +55,43 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 
 			global $pop_frontend_resourceloader_mappingmanager;
 			$this->mapping = $pop_frontend_resourceloader_mappingmanager->get_mapping();
+
+			// Comment Leo 28/11/2017: for popManager, when it does popJSLibraryManager.execute(..., ...),
+			// do not follow the mapping for a few function calls. That is because there are generic functions, 
+			// such as `initBlockRuntimeMemory`, that must be called over the added element on the DOM, but that 
+			// they do not imply dependency, or otherwise it loads these files ALWAYS, independently if they
+			// are actually needed or not on that page (eg: map.js is loaded always, since it has function `initBlockRuntimeMemory`)
+			// For these cases, we added a 2nd function, called ...Independent, which does not require the dependency in the mapping
+			if ($this->mapping['publicMethods']) {
+
+				$noDependencyMethods = array(
+					'initBlockRuntimeMemoryIndependent',
+					'initPageSectionRuntimeMemoryIndependent',
+					'documentInitializedIndependent',
+				);
+				foreach ($noDependencyMethods as $method) {
+					
+					if (isset($this->mapping['publicMethods'][$method])) {
+
+						unset($this->mapping['publicMethods'][$method]);
+					}
+				}
+			}
+			// if ($this->mapping['methodExecutions']['popManager']) {
+
+			// 	/*"methodName": list of execute calls within*/
+			// 	$removeExecuteMethods = array(
+			// 		/*"initBlockRuntimeMemory": */"initBlockRuntimeMemory",
+			// 		/*"initPageSectionRuntimeMemory": */"initPageSectionRuntimeMemory",
+			// 	);
+			// 	foreach ($this->mapping['methodExecutions']['popManager'] as $method => $calledMethods) {
+					
+			// 		$this->mapping['methodExecutions']['popManager'][$method] = array_diff(
+			// 			$calledMethods,
+			// 			$removeExecuteMethods
+			// 		);
+			// 	}
+			// }
 		}
 	
 		return $processor;
