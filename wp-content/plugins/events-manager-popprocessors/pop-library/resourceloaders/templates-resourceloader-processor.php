@@ -128,7 +128,7 @@ class EM_PoPProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateResou
 			case POP_RESOURCELOADER_TEMPLATE_CALENDAR_INNER:
 
 				return array(
-					'popFullCalendar' => array(
+					'popFullCalendarAddEvents' => array(
 						'addEvents',
 					),
 					'popManager' => array(
@@ -176,7 +176,7 @@ class EM_PoPProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateResou
 			case POP_RESOURCELOADER_TEMPLATE_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION:
 
 				return array(
-					'popTypeahead' => array(
+					'popTypeaheadTriggerSelect' => array(
 						'triggerSelect',
 					),
 					'popManager' => array(

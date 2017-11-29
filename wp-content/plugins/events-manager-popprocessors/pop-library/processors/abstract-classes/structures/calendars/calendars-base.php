@@ -12,20 +12,25 @@ class GD_Template_Processor_CalendarsBase extends GD_Template_Processor_Structur
 		return GD_TEMPLATESOURCE_CALENDAR;
 	}
 
+	function is_critical($template_id, $atts) {
+
+		// Allow to set the value from above
+		return $this->get_att($template_id, $atts, 'critical');
+	}
+
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
 
-		// Comment Leo 28/11/2017: make the calendar critical, because (in GetPoP) otherwise the events may be loading before there is a calendar where to show it, and then it appears all at once, and it looks ugly
-		// // Comment Leo: right now, the calendar CANNOT be made critical, because its events are added on 'initialize', which will take place on non-critical
-		// // Then, the events will be added, but there is no trigger to refresh the Calendar, then the events will not show up
-		// // // Comment Leo 24/11/2017: if it is made critical, somehow it doesn't render well on Firefox when first accessing the website
-		// // // https://getpop.org/en/
-		// // // The calendar must be set to critical, or it doens't work: the calendar must be rendered
-		// // // before the individual events are added to it, which happens on 'initialize'
-		// // // Also, critical because it is not rendered on the server-side yet
-		// $this->add_jsmethod($ret, 'calendar');
-		$this->add_jsmethod($ret, 'calendar', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
+		// Allow to set the calendar to critical: in the homepage in GetPoP, the events may be loading before there is a calendar where to show it, and then it appears all at once, and it looks ugly
+		if ($this->is_critical($template_id, $atts)) {
+
+			$this->add_jsmethod($ret, 'calendar', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
+		}
+		else {
+
+			$this->add_jsmethod($ret, 'calendar');
+		}
 		return $ret;
 	}
 
@@ -79,5 +84,11 @@ class GD_Template_Processor_CalendarsBase extends GD_Template_Processor_Structur
 		}
 
 		return $ret;
+	}
+
+	function init_atts($template_id, &$atts) {
+
+		$this->add_att($template_id, $atts, 'critical', false);
+		return parent::init_atts($template_id, $atts);
 	}
 }

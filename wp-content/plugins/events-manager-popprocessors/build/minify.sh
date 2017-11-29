@@ -13,13 +13,20 @@ wget -O $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/bu
 cd $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/
 uglifyjs libraries/helpers.handlebars.js -o dist/libraries/helpers.handlebars.min.js -c warnings=false -m
 uglifyjs libraries/create-location.js -o dist/libraries/create-location.min.js -c warnings=false -m
-uglifyjs libraries/map.js -o dist/libraries/map.min.js -c warnings=false -m
 uglifyjs libraries/typeahead-map.js -o dist/libraries/typeahead-map.min.js -c warnings=false -m
 uglifyjs libraries/map-collection.js -o dist/libraries/map-collection.min.js -c warnings=false -m
-uglifyjs libraries/3rdparties/fullcalendar.js -o dist/libraries/3rdparties/fullcalendar.min.js -c warnings=false -m
+uglifyjs libraries/map/map.js -o dist/libraries/map/map.min.js -c warnings=false -m
+uglifyjs libraries/map/map-memory.js -o dist/libraries/map/map-memory.min.js -c warnings=false -m
+uglifyjs libraries/map/map-initmarker.js -o dist/libraries/map/map-initmarker.min.js -c warnings=false -m
+uglifyjs libraries/map/map-runtime.js -o dist/libraries/map/map-runtime.min.js -c warnings=false -m
+uglifyjs libraries/map/map-runtime-memory.js -o dist/libraries/map/map-runtime-memory.min.js -c warnings=false -m
+uglifyjs libraries/3rdparties/calendar/fullcalendar.js -o dist/libraries/3rdparties/calendar/fullcalendar.min.js -c warnings=false -m
+uglifyjs libraries/3rdparties/calendar/fullcalendar-memory.js -o dist/libraries/3rdparties/calendar/fullcalendar-memory.min.js -c warnings=false -m
+uglifyjs libraries/3rdparties/calendar/fullcalendar-addevents.js -o dist/libraries/3rdparties/calendar/fullcalendar-addevents.min.js -c warnings=false -m
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
 rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries/*.js
 cp $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/libraries/*.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries/
-cp $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/libraries/3rdparties/*.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries/
-wget -O $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/bundles/events-manager-popprocessors.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries&f=helpers.handlebars.min.js,create-location.min.js,map.min.js,typeahead-map.min.js,map-collection.min.js,fullcalendar.min.js"
+cp $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/libraries/map/*.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries/
+cp $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/libraries/3rdparties/calendar/*.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries/
+wget -O $POP_APP_PATH/wp-content/plugins/events-manager-popprocessors/js/dist/bundles/events-manager-popprocessors.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/events-manager-popprocessors/js/libraries&f=helpers.handlebars.min.js,create-location.min.js,map.min.js,map-memory.min.js,map-initmarker.min.js,map-runtime.min.js,map-runtime-memory.min.js,typeahead-map.min.js,map-collection.min.js,fullcalendar.min.js,fullcalendar-memory.min.js,fullcalendar-addevents.min.js"

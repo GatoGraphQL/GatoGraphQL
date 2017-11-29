@@ -10,12 +10,8 @@ define ('POP_RESOURCELOADER_DATERANGE', PoP_TemplateIDUtils::get_template_defini
 define ('POP_RESOURCELOADER_DYNAMICMAXHEIGHT', PoP_TemplateIDUtils::get_template_definition('dynamicmaxheight'));
 define ('POP_RESOURCELOADER_MULTISELECT', PoP_TemplateIDUtils::get_template_definition('multiselect'));
 define ('POP_RESOURCELOADER_PERFECTSCROLLBAR', PoP_TemplateIDUtils::get_template_definition('perfectscrollbar'));
-define ('POP_RESOURCELOADER_TYPEAHEAD', PoP_TemplateIDUtils::get_template_definition('typeahead'));
-define ('POP_RESOURCELOADER_TYPEAHEADSTORAGE', PoP_TemplateIDUtils::get_template_definition('typeahead-storage'));
-define ('POP_RESOURCELOADER_WAYPOINTS', PoP_TemplateIDUtils::get_template_definition('waypoints'));
 define ('POP_RESOURCELOADER_ADDEDITPOST', PoP_TemplateIDUtils::get_template_definition('addeditpost'));
 // define ('POP_RESOURCELOADER_BLOCKFUNCTIONS', PoP_TemplateIDUtils::get_template_definition('block-functions'));
-define ('POP_RESOURCELOADER_BOOTSTRAPCAROUSEL', PoP_TemplateIDUtils::get_template_definition('bootstrap-carousel'));
 define ('POP_RESOURCELOADER_CONTROLS', PoP_TemplateIDUtils::get_template_definition('controls'));
 define ('POP_RESOURCELOADER_EDITOR', PoP_TemplateIDUtils::get_template_definition('editor'));
 define ('POP_RESOURCELOADER_FEATUREDIMAGE', PoP_TemplateIDUtils::get_template_definition('featuredimage'));
@@ -30,7 +26,9 @@ define ('POP_RESOURCELOADER_TARGETFUNCTIONS', PoP_TemplateIDUtils::get_template_
 define ('POP_RESOURCELOADER_SOCIALMEDIA', PoP_TemplateIDUtils::get_template_definition('socialmedia'));
 define ('POP_RESOURCELOADER_EMBEDDABLE', PoP_TemplateIDUtils::get_template_definition('embeddable'));
 define ('POP_RESOURCELOADER_BLOCKDATAQUERY', PoP_TemplateIDUtils::get_template_definition('block-dataquery'));
+define ('POP_RESOURCELOADER_BLOCKDATAQUERYUSERSTATE', PoP_TemplateIDUtils::get_template_definition('block-dataquery-userstate'));
 define ('POP_RESOURCELOADER_BLOCKGROUPDATAQUERY', PoP_TemplateIDUtils::get_template_definition('blockgroup-dataquery'));
+define ('POP_RESOURCELOADER_BLOCKGROUPDATAQUERYUSERSTATE', PoP_TemplateIDUtils::get_template_definition('blockgroup-dataquery-userstate'));
 define ('POP_RESOURCELOADER_MENUS', PoP_TemplateIDUtils::get_template_definition('menus'));
 define ('POP_RESOURCELOADER_DATASETCOUNT', PoP_TemplateIDUtils::get_template_definition('dataset-count'));
 define ('POP_RESOURCELOADER_REPLICATE', PoP_TemplateIDUtils::get_template_definition('replicate'));
@@ -40,6 +38,7 @@ define ('POP_RESOURCELOADER_CLASSES', PoP_TemplateIDUtils::get_template_definiti
 define ('POP_RESOURCELOADER_SCROLLS', PoP_TemplateIDUtils::get_template_definition('scrolls'));
 define ('POP_RESOURCELOADER_ONLINEOFFLINE', PoP_TemplateIDUtils::get_template_definition('onlineoffline'));
 define ('POP_RESOURCELOADER_EVENTREACTIONS', PoP_TemplateIDUtils::get_template_definition('event-reactions'));
+define ('POP_RESOURCELOADER_EVENTREACTIONSUSERSTATE', PoP_TemplateIDUtils::get_template_definition('event-reactions-userstate'));
 define ('POP_RESOURCELOADER_FEEDBACKMESSAGE', PoP_TemplateIDUtils::get_template_definition('feedback-message'));
 define ('POP_RESOURCELOADER_COREHANDLEBARSHELPERS', PoP_TemplateIDUtils::get_template_definition('core-helpers-handlebars'));
 define ('POP_RESOURCELOADER_MEDIAMANAGERCORS', PoP_TemplateIDUtils::get_template_definition('mediamanager-cors'));
@@ -62,12 +61,8 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_DYNAMICMAXHEIGHT,
 			POP_RESOURCELOADER_MULTISELECT,
 			POP_RESOURCELOADER_PERFECTSCROLLBAR,
-			POP_RESOURCELOADER_TYPEAHEAD,
-			POP_RESOURCELOADER_TYPEAHEADSTORAGE,
-			POP_RESOURCELOADER_WAYPOINTS,
 			POP_RESOURCELOADER_ADDEDITPOST,
 			// POP_RESOURCELOADER_BLOCKFUNCTIONS,
-			POP_RESOURCELOADER_BOOTSTRAPCAROUSEL,
 			POP_RESOURCELOADER_CONTROLS,
 			POP_RESOURCELOADER_EDITOR,
 			POP_RESOURCELOADER_FEATUREDIMAGE,
@@ -82,7 +77,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_SOCIALMEDIA,
 			POP_RESOURCELOADER_EMBEDDABLE,
 			POP_RESOURCELOADER_BLOCKDATAQUERY,
+			POP_RESOURCELOADER_BLOCKDATAQUERYUSERSTATE,
 			POP_RESOURCELOADER_BLOCKGROUPDATAQUERY,
+			POP_RESOURCELOADER_BLOCKGROUPDATAQUERYUSERSTATE,
 			POP_RESOURCELOADER_MENUS,
 			POP_RESOURCELOADER_DATASETCOUNT,
 			POP_RESOURCELOADER_REPLICATE,
@@ -92,6 +89,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_SCROLLS,
 			POP_RESOURCELOADER_ONLINEOFFLINE,
 			POP_RESOURCELOADER_EVENTREACTIONS,
+			POP_RESOURCELOADER_EVENTREACTIONSUSERSTATE,
 			POP_RESOURCELOADER_FEEDBACKMESSAGE,
 			POP_RESOURCELOADER_COREHANDLEBARSHELPERS,
 			POP_RESOURCELOADER_MEDIAMANAGERCORS,
@@ -114,12 +112,8 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_DYNAMICMAXHEIGHT => 'dynamicmaxheight',
 			POP_RESOURCELOADER_MULTISELECT => 'multiselect',
 			POP_RESOURCELOADER_PERFECTSCROLLBAR => 'perfectscrollbar',
-			POP_RESOURCELOADER_TYPEAHEAD => 'typeahead',
-			POP_RESOURCELOADER_TYPEAHEADSTORAGE => 'typeahead-storage',
-			POP_RESOURCELOADER_WAYPOINTS => 'waypoints',
 			POP_RESOURCELOADER_ADDEDITPOST => 'addeditpost',
 			// POP_RESOURCELOADER_BLOCKFUNCTIONS => 'block-functions',
-			POP_RESOURCELOADER_BOOTSTRAPCAROUSEL => 'bootstrap-carousel',
 			POP_RESOURCELOADER_CONTROLS => 'controls',
 			POP_RESOURCELOADER_EDITOR => 'editor',
 			POP_RESOURCELOADER_FEATUREDIMAGE => 'featuredimage',
@@ -134,7 +128,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_SOCIALMEDIA => 'socialmedia',
 			POP_RESOURCELOADER_EMBEDDABLE => 'embeddable',
 			POP_RESOURCELOADER_BLOCKDATAQUERY => 'block-dataquery',
+			POP_RESOURCELOADER_BLOCKDATAQUERYUSERSTATE => 'block-dataquery-userstate',
 			POP_RESOURCELOADER_BLOCKGROUPDATAQUERY => 'blockgroup-dataquery',
+			POP_RESOURCELOADER_BLOCKGROUPDATAQUERYUSERSTATE => 'blockgroup-dataquery-userstate',
 			POP_RESOURCELOADER_MENUS => 'menus',
 			POP_RESOURCELOADER_DATASETCOUNT => 'dataset-count',
 			POP_RESOURCELOADER_REPLICATE => 'replicate',
@@ -144,6 +140,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_SCROLLS => 'scrolls',
 			POP_RESOURCELOADER_ONLINEOFFLINE => 'onlineoffline',
 			POP_RESOURCELOADER_EVENTREACTIONS => 'event-reactions',
+			POP_RESOURCELOADER_EVENTREACTIONSUSERSTATE => 'event-reactions-userstate',
 			POP_RESOURCELOADER_FEEDBACKMESSAGE => 'feedback-message',
 			POP_RESOURCELOADER_COREHANDLEBARSHELPERS => 'helpers.handlebars',
 			POP_RESOURCELOADER_MEDIAMANAGERCORS => 'mediamanager-cors',
@@ -191,9 +188,6 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_DYNAMICMAXHEIGHT:
 			case POP_RESOURCELOADER_MULTISELECT:
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
-			case POP_RESOURCELOADER_TYPEAHEAD:
-			case POP_RESOURCELOADER_TYPEAHEADSTORAGE:
-			case POP_RESOURCELOADER_WAYPOINTS:
 			
 				return POP_COREPROCESSORS_DIR.'/js/'.$subpath.'libraries/3rdparties';
 		}
@@ -210,9 +204,6 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_DYNAMICMAXHEIGHT:
 			case POP_RESOURCELOADER_MULTISELECT:
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
-			case POP_RESOURCELOADER_TYPEAHEAD:
-			case POP_RESOURCELOADER_TYPEAHEADSTORAGE:
-			case POP_RESOURCELOADER_WAYPOINTS:
 
 				return POP_COREPROCESSORS_DIR.'/js/libraries/3rdparties/'.$this->get_filename($resource).'.js';
 		}
@@ -230,9 +221,6 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_DYNAMICMAXHEIGHT:
 			case POP_RESOURCELOADER_MULTISELECT:
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
-			case POP_RESOURCELOADER_TYPEAHEAD:
-			case POP_RESOURCELOADER_TYPEAHEADSTORAGE:
-			case POP_RESOURCELOADER_WAYPOINTS:
 			
 				$afterpath = '/3rdparties';
 				break;
@@ -260,25 +248,12 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_PERFECTSCROLLBAR => array(
 				'popPerfectScrollbar',
 			),
-			POP_RESOURCELOADER_TYPEAHEAD => array(
-				'popTypeahead',
-			),
-			POP_RESOURCELOADER_TYPEAHEADSTORAGE => array(
-				'popTypeaheadStorage',
-			),
-			POP_RESOURCELOADER_WAYPOINTS => array(
-				'popWaypoints',
-			),
 			POP_RESOURCELOADER_ADDEDITPOST => array(
 				'popAddEditPost',
 			),
 			// POP_RESOURCELOADER_BLOCKFUNCTIONS => array(
 			// 	'popBlockFunctions',
 			// ),
-			POP_RESOURCELOADER_BOOTSTRAPCAROUSEL => array(
-				'popBootstrapCarousel',
-				'popBootstrapCarouselControls',
-			),
 			POP_RESOURCELOADER_CONTROLS => array(
 				'popControls',
 			),
@@ -321,8 +296,14 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_BLOCKDATAQUERY => array(
 				'popBlockDataQuery',
 			),
+			POP_RESOURCELOADER_BLOCKDATAQUERYUSERSTATE => array(
+				'popBlockDataQueryUserState',
+			),
 			POP_RESOURCELOADER_BLOCKGROUPDATAQUERY => array(
 				'popBlockGroupDataQuery',
+			),
+			POP_RESOURCELOADER_BLOCKGROUPDATAQUERYUSERSTATE => array(
+				'popBlockGroupDataQueryUserState',
 			),
 			POP_RESOURCELOADER_MENUS => array(
 				'popMenus',
@@ -350,6 +331,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			),
 			POP_RESOURCELOADER_EVENTREACTIONS => array(
 				'popEventReactions',
+			),
+			POP_RESOURCELOADER_EVENTREACTIONSUSERSTATE => array(
+				'popEventReactionsUserState',
 			),
 			POP_RESOURCELOADER_FEEDBACKMESSAGE => array(
 				'popFeedbackMessage',
@@ -424,27 +408,6 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
 
 				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_PERFECTSCROLLBAR;
-				break;
-				
-			case POP_RESOURCELOADER_TYPEAHEAD:
-
-				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_TYPEAHEAD;
-
-				// Also add the Handlebar templates needed to render the typeahead views on runtime
-				if ($typeahead_layouts = array_unique(apply_filters(
-					'PoP_CoreProcessors_ResourceLoaderProcessor:typeahead:templates',
-					array()
-				))) {
-					$dependencies = array_merge(
-						$dependencies,
-						$typeahead_layouts
-					);
-				}
-				break;
-				
-			case POP_RESOURCELOADER_WAYPOINTS:
-
-				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_WAYPOINTS;
 				break;
 				
 			case POP_RESOURCELOADER_COOKIES:

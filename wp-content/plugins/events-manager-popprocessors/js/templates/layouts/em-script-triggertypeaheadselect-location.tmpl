@@ -11,7 +11,7 @@
 			var pageSection = popManager.getPageSection(block);
 			var domain = '{{../tls.domain}}';
 			var location = popManager.getItemObject(domain, '{{../itemDBKey}}', '{{id}}');
-			popTypeahead.triggerSelect(domain, pageSection, block, typeahead, location);
+			popTypeaheadTriggerSelect.triggerSelect(domain, pageSection, block, typeahead, location);
 		});
 	})(jQuery);
 	</script>

@@ -6,10 +6,8 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('POP_RESOURCELOADER_EMHANDLEBARSHELPERS', PoP_TemplateIDUtils::get_template_definition('em-helpers-handlebars'));
-define ('POP_RESOURCELOADER_FULLCALENDAR', PoP_TemplateIDUtils::get_template_definition('em-fullcalendar'));
 define ('POP_RESOURCELOADER_CREATELOCATION', PoP_TemplateIDUtils::get_template_definition('em-create-location'));
 define ('POP_RESOURCELOADER_MAPCOLLECTION', PoP_TemplateIDUtils::get_template_definition('em-map-collection'));
-define ('POP_RESOURCELOADER_MAP', PoP_TemplateIDUtils::get_template_definition('em-mapa')); // Changing the name, since 'em-map' is used by the template
 define ('POP_RESOURCELOADER_TYPEAHEADMAP', PoP_TemplateIDUtils::get_template_definition('em-typeahead-map'));
 
 class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor {
@@ -18,10 +16,8 @@ class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProce
 
 		return array(
 			POP_RESOURCELOADER_EMHANDLEBARSHELPERS,
-			POP_RESOURCELOADER_FULLCALENDAR,
 			POP_RESOURCELOADER_CREATELOCATION,
 			POP_RESOURCELOADER_MAPCOLLECTION,
-			POP_RESOURCELOADER_MAP,
 			POP_RESOURCELOADER_TYPEAHEADMAP,
 		);
 	}
@@ -30,10 +26,8 @@ class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProce
 	
 		$filenames = array(
 			POP_RESOURCELOADER_EMHANDLEBARSHELPERS => 'helpers.handlebars',
-			POP_RESOURCELOADER_FULLCALENDAR => 'fullcalendar',
 			POP_RESOURCELOADER_CREATELOCATION => 'create-location',
 			POP_RESOURCELOADER_MAPCOLLECTION => 'map-collection',
-			POP_RESOURCELOADER_MAP => 'map',
 			POP_RESOURCELOADER_TYPEAHEADMAP => 'typeahead-map',
 		);
 		if ($filename = $filenames[$resource]) {
@@ -64,59 +58,28 @@ class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProce
 	function get_dir($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		switch ($resource) {
-
-			case POP_RESOURCELOADER_FULLCALENDAR:
-				
-				return EM_POPPROCESSORS_DIR.'/js/'.$subpath.'libraries/3rdparties';
-		}
-	
 		return EM_POPPROCESSORS_DIR.'/js/'.$subpath.'libraries';
 	}
 	
 	function get_asset_path($resource) {
-
-		switch ($resource) {
-
-			case POP_RESOURCELOADER_FULLCALENDAR:
-				
-				return EM_POPPROCESSORS_DIR.'/js/libraries/3rdparties/'.$this->get_filename($resource).'.js';
-		}
 
 		return EM_POPPROCESSORS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
 	}
 	
 	function get_path($resource) {
 
-		$afterpath = '';
-		switch ($resource) {
-
-			case POP_RESOURCELOADER_FULLCALENDAR:
-				
-				$afterpath = '/3rdparties';
-				break;
-		}
-
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return EM_POPPROCESSORS_URI.'/js/'.$subpath.'libraries'.$afterpath;
+		return EM_POPPROCESSORS_URI.'/js/'.$subpath.'libraries';
 	}
 
 	function get_jsobjects($resource) {
 
 		$objects = array(
-			POP_RESOURCELOADER_FULLCALENDAR => array(
-				'popFullCalendar',
-				'popFullCalendarControls',
-			),
 			POP_RESOURCELOADER_CREATELOCATION => array(
 				'popCreateLocation',
 			),
 			POP_RESOURCELOADER_MAPCOLLECTION => array(
 				'popMapCollection',
-			),
-			POP_RESOURCELOADER_MAP => array(
-				'popMap',
-				'popMapRuntime',
 			),
 			POP_RESOURCELOADER_TYPEAHEADMAP => array(
 				'popTypeaheadMap',
@@ -128,31 +91,6 @@ class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProce
 		}
 
 		return parent::get_jsobjects($resource);
-	}
-	
-	function get_dependencies($resource) {
-
-		$dependencies = parent::get_dependencies($resource);
-	
-		switch ($resource) {
-
-			case POP_RESOURCELOADER_FULLCALENDAR:
-
-				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR;
-				
-				// Add Locale file, if applicable
-				if (get_em_qtransx_fullcalendar_locale_filename()) {
-					$dependencies[] = POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE;
-				}
-				break;
-
-			case POP_RESOURCELOADER_MAP:
-
-				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_GMAPS;
-				break;
-		}
-
-		return $dependencies;
 	}
 }
 

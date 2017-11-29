@@ -19,10 +19,10 @@ window.popUserRole = {
 
 			if (checkbox.is(':checked')) {
 				var user = checkbox.data('user-datum');
-				popTypeahead.triggerSelect(domain, pageSection, block, communityTypeahead, user);
+				popTypeaheadTriggerSelect.triggerSelect(domain, pageSection, block, communityTypeahead, user);
 			}
 			else {
-				popTypeahead.removeSelected(communityTypeahead, user_id);
+				popTypeaheadTriggerSelect.removeSelected(communityTypeahead, user_id);
 			}
 		});
 	},

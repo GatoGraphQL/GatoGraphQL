@@ -173,9 +173,6 @@ class PoP_CoreProcessors_Initialization {
 				// wp_register_script('pop-bootstrapprocessors-bootstrap', $libraries_js_folder.'/bootstrap.js', array('jquery', 'pop', 'bootstrap'), POP_COREPROCESSORS_VERSION, true);
 				// wp_enqueue_script('pop-bootstrapprocessors-bootstrap');
 
-				wp_register_script('pop-coreprocessors-bootstrap-carousel', $libraries_js_folder.'/bootstrap-carousel'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
-				wp_enqueue_script('pop-coreprocessors-bootstrap-carousel');
-
 				wp_register_script('pop-coreprocessors-window', $libraries_js_folder.'/window'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-window');
 
@@ -215,8 +212,14 @@ class PoP_CoreProcessors_Initialization {
 				wp_register_script('pop-coreprocessors-blockdataquery', $libraries_js_folder.'/block-dataquery'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-blockdataquery');
 
+				wp_register_script('pop-coreprocessors-blockdataquery-userstate', $libraries_js_folder.'/block-dataquery-userstate'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-blockdataquery-userstate');
+
 				wp_register_script('pop-coreprocessors-blockgroupdataquery', $libraries_js_folder.'/blockgroup-dataquery'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-blockgroupdataquery');
+
+				wp_register_script('pop-coreprocessors-blockgroupdataquery-userstate', $libraries_js_folder.'/blockgroup-dataquery-userstate'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-blockgroupdataquery-userstate');
 
 				wp_register_script('pop-coreprocessors-menus', $libraries_js_folder.'/menus'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-menus');
@@ -245,6 +248,9 @@ class PoP_CoreProcessors_Initialization {
 				wp_register_script('pop-coreprocessors-eventreactions', $libraries_js_folder.'/event-reactions'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-eventreactions');
 
+				wp_register_script('pop-coreprocessors-eventreactions-userstate', $libraries_js_folder.'/event-reactions-userstate'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-eventreactions-userstate');
+
 				wp_register_script('pop-coreprocessors-feedback-message', $libraries_js_folder.'/feedback-message'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-feedback-message');
 
@@ -254,8 +260,14 @@ class PoP_CoreProcessors_Initialization {
 				wp_register_script('pop-coreprocessors-controls', $libraries_js_folder.'/controls'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-controls');
 
-				wp_register_script('pop-coreprocessors-waypoints', $libraries_js_folder.'/3rdparties/waypoints'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
-				wp_enqueue_script('pop-coreprocessors-waypoints');
+				wp_register_script('pop-coreprocessors-bootstrap-carousel', $libraries_js_folder.'/carousel/bootstrap-carousel'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-bootstrap-carousel');
+
+				wp_register_script('pop-coreprocessors-bootstrap-carousel-static', $libraries_js_folder.'/carousel/bootstrap-carousel-static'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-bootstrap-carousel-static');
+
+				wp_register_script('pop-coreprocessors-bootstrap-carousel-automatic', $libraries_js_folder.'/carousel/bootstrap-carousel-automatic'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-bootstrap-carousel-automatic');
 
 				wp_register_script('pop-coreprocessors-multiselect', $libraries_js_folder.'/3rdparties/multiselect'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-multiselect');
@@ -266,10 +278,43 @@ class PoP_CoreProcessors_Initialization {
 				wp_register_script('pop-coreprocessors-daterange', $libraries_js_folder.'/3rdparties/daterange'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-daterange');
 
-				wp_register_script('pop-coreprocessors-typeahead', $libraries_js_folder.'/3rdparties/typeahead'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_register_script('pop-coreprocessors-waypoints', $libraries_js_folder.'/3rdparties/waypoints/waypoints'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-waypoints');
+
+				wp_register_script('pop-coreprocessors-waypoints-fetchmore', $libraries_js_folder.'/3rdparties/waypoints/waypoints-fetchmore'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-waypoints-fetchmore');
+
+				wp_register_script('pop-coreprocessors-waypoints-historystate', $libraries_js_folder.'/3rdparties/waypoints/waypoints-historystate'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-waypoints-historystate');
+
+				wp_register_script('pop-coreprocessors-waypoints-theater', $libraries_js_folder.'/3rdparties/waypoints/waypoints-theater'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-waypoints-theater');
+
+				wp_register_script('pop-coreprocessors-waypoints-toggleclass', $libraries_js_folder.'/3rdparties/waypoints/waypoints-toggleclass'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-waypoints-toggleclass');
+
+				wp_register_script('pop-coreprocessors-waypoints-togglecollapse', $libraries_js_folder.'/3rdparties/waypoints/waypoints-togglecollapse'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-waypoints-togglecollapse');
+
+				wp_register_script('pop-coreprocessors-typeahead', $libraries_js_folder.'/3rdparties/typeahead/typeahead'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-typeahead');
 
-				wp_register_script('pop-coreprocessors-typeaheadstorage', $libraries_js_folder.'/3rdparties/typeahead-storage'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
+				wp_register_script('pop-coreprocessors-typeahead-search', $libraries_js_folder.'/3rdparties/typeahead/typeahead-search'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-typeahead-search');
+
+				wp_register_script('pop-coreprocessors-typeahead-fetchlink', $libraries_js_folder.'/3rdparties/typeahead/typeahead-fetchlink'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-typeahead-fetchlink');
+
+				wp_register_script('pop-coreprocessors-typeahead-selectable', $libraries_js_folder.'/3rdparties/typeahead/typeahead-selectable'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-typeahead-selectable');
+
+				wp_register_script('pop-coreprocessors-typeahead-triggerselect', $libraries_js_folder.'/3rdparties/typeahead/typeahead-triggerselect'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-typeahead-triggerselect');
+
+				wp_register_script('pop-coreprocessors-typeahead-validate', $libraries_js_folder.'/3rdparties/typeahead/typeahead-validate'.$suffix.'.js', array('jquery', 'pop', 'pop-bootstrapprocessors-bootstrap'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-typeahead-validate');
+
+				wp_register_script('pop-coreprocessors-typeaheadstorage', $libraries_js_folder.'/3rdparties/typeahead/typeahead-storage'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-typeaheadstorage');
 
 				// wp_register_script('pop-coreprocessors-googleanalytics', $libraries_js_folder.'/3rdparties/analytics'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);

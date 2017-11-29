@@ -76,8 +76,20 @@ class EM_PoPProcessors_Initialization {
 				wp_register_script('em-popprocessors-helpers-handlebars', $libraries_js_folder.'/helpers.handlebars'.$suffix.'.js', array('handlebars'), EM_POPPROCESSORS_VERSION, true);
 				wp_enqueue_script('em-popprocessors-helpers-handlebars');	
 
-				wp_register_script('em-popprocessors-map', $libraries_js_folder.'/map'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
-				wp_enqueue_script('em-popprocessors-map');
+				wp_register_script('em-popprocessors-map', $libraries_js_folder.'/map/map'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-map');	
+
+				wp_register_script('em-popprocessors-map-memory', $libraries_js_folder.'/map/map-memory'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-map-memory');
+
+				wp_register_script('em-popprocessors-map-initmarker', $libraries_js_folder.'/map/map-initmarker'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-map-initmarker');	
+
+				wp_register_script('em-popprocessors-map-runtime', $libraries_js_folder.'/map/map-runtime'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-map-runtime');	
+
+				wp_register_script('em-popprocessors-map-runtime-memory', $libraries_js_folder.'/map/map-runtime-memory'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-map-runtime-memory');
 
 				wp_register_script('em-popprocessors-typeaheadmap', $libraries_js_folder.'/typeahead-map'.$suffix.'.js', array('jquery', 'pop', 'em-popprocessors-map', 'pop-coreprocessors-typeahead'), EM_POPPROCESSORS_VERSION, true);
 				wp_enqueue_script('em-popprocessors-typeaheadmap');
@@ -88,8 +100,14 @@ class EM_PoPProcessors_Initialization {
 				wp_register_script('em-popprocessors-mapcollection', $libraries_js_folder.'/map-collection'.$suffix.'.js', array('jquery', 'pop', 'em-popprocessors-map'), EM_POPPROCESSORS_VERSION, true);
 				wp_enqueue_script('em-popprocessors-mapcollection');
 
-				wp_register_script('em-popprocessors-fullcalendar', $libraries_js_folder.'/3rdparties/fullcalendar'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_register_script('em-popprocessors-fullcalendar', $libraries_js_folder.'/3rdparties/calendar/fullcalendar'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
 				wp_enqueue_script('em-popprocessors-fullcalendar');
+
+				wp_register_script('em-popprocessors-fullcalendar-memory', $libraries_js_folder.'/3rdparties/calendar/fullcalendar-memory'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-fullcalendar-memory');
+
+				wp_register_script('em-popprocessors-fullcalendar-addevents', $libraries_js_folder.'/3rdparties/calendar/fullcalendar-addevents'.$suffix.'.js', array('jquery', 'pop'), EM_POPPROCESSORS_VERSION, true);
+				wp_enqueue_script('em-popprocessors-fullcalendar-addevents');
 
 				/** Templates Sources */
 				$this->enqueue_templates_scripts();

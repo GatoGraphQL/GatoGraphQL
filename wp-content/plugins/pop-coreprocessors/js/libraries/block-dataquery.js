@@ -101,72 +101,6 @@ window.popBlockDataQuery = {
 		});
 	},
 
-	refetchBlockOnUserLoggedIn : function(args) {
-
-		var that = this;
-		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
-
-		$(document).one('user:loggedin:'+domain, function(e, source) {
-
-			if (source == 'initialfeedback') {
-				return;
-			}
-
-			that.execRefetchBlock(pageSection, targets);
-		});
-	},
-
-	nonendingRefetchBlockOnUserLoggedIn : function(args) {
-
-		var that = this;
-		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
-		that.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedin:'+domain);
-	},
-
-	nonendingRefetchBlockOnUserLoggedInOut : function(args) {
-
-		var that = this;
-		var domain = args.domain, pageSection = args.pageSection, targets = args.targets;
-		that.execNonendingRefetchBlockOnUserEvent(pageSection, targets, 'user:loggedinout:'+domain);
-	},
-
-	deleteBlockFeedbackValueOnUserLoggedInOut : function(args) {
-
-		var that = this;
-		var domain = args.domain, pageSection = args.pageSection, block = args.block;
-		$(document).on('user:loggedinout:'+domain, function(e, source) {
-
-			// Ask for 'initialuserdata' because some blocks will update themselves to load the content,
-			// and will not depend on the user loggedin data. eg: Create OpinionatedVoted Block for the TPP Website
-			// So if the source was that initial data, dismiss, otherwise it will trigger the URL load once again
-			if (source == 'initialfeedback' || source == 'initialuserdata') {
-				return;
-			}
-			
-			// Deleting values is needed for the Notifications: when creating a user account, it will create notification "Welcome!",
-			// but to fetch it we gotta delete param `hist_time` with value from previous fetching of notifications
-			var jsSettings = popManager.getJsSettings(domain, pageSection, block);
-			var keys = jsSettings['user:loggedinout-deletefeedbackvalue'] || [];
-			if (keys.length) {
-				
-				var blockFeedback = popManager.getBlockFeedback(domain/*popManager.getBlockTopLevelDomain(block)*/, pageSection, block);
-				$.each(keys, function(index, keyLevels) {
-
-					// each param in params is an array of levels, to go down the blockParams to delete it (eg: 1 param will be ['params', 'hist_time'] to delete blockParams['params']['hist_time'])
-					// Go down to the last level
-					var feedbackLevel = blockFeedback;
-					for (i = 0; i < (keyLevels.length)-1; i++) { 
-						feedbackLevel = feedbackLevel[keyLevels[i]];
-					}
-
-					// Delete that last level
-					delete feedbackLevel[keyLevels[(keyLevels.length)-1]];
-				});
-			}
-
-		});
-	},
-
 	initFilter : function(args) {
 
 		var that = this;
@@ -234,22 +168,6 @@ window.popBlockDataQuery = {
 		}, time);
 	},
 
-	execNonendingRefetchBlockOnUserEvent : function(pageSection, targets, handler) {
-
-		var that = this;
-		$(document).on(handler, function(e, source) {
-
-			// Ask for 'initialuserdata' because some blocks will update themselves to load the content,
-			// and will not depend on the user loggedin data. eg: Create OpinionatedVoted Block for the TPP Website
-			// So if the source was that initial data, dismiss, otherwise it will trigger the URL load once again
-			if (source == 'initialfeedback' || source == 'initialuserdata') {
-				return;
-			}
-			
-			that.execRefetchBlock(pageSection, targets);
-		});
-	},
-
 	execRefetchBlock : function(pageSection, blocks) {
 
 		var that = this;
@@ -294,4 +212,4 @@ window.popBlockDataQuery = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popBlockDataQuery, ['initDelegatorFilter', 'initBlockFilter', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'refetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedIn', 'nonendingRefetchBlockOnUserLoggedInOut', 'initFilter', 'makeAlwaysRefetchBlock']);
+popJSLibraryManager.register(popBlockDataQuery, ['initDelegatorFilter', 'initBlockFilter', 'reloadBlock', 'loadLatestBlock', 'timeoutLoadLatestBlock', 'initFilter', 'makeAlwaysRefetchBlock']);
