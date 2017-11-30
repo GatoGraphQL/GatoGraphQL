@@ -333,7 +333,7 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 			// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 			$script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
 			$dependencies = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_noconflict_resource_name'), $dependencies);
-			wp_register_script($script, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), true);
+			wp_register_script($script, $processor->get_file_url($resource), $dependencies, $processor->get_version($resource), $processor->in_footer($resource));
 			wp_enqueue_script($script);
 
 			// $added_scripts[] = $script;

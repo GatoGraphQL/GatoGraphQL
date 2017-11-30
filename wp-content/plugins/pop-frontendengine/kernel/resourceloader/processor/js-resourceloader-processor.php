@@ -30,6 +30,11 @@ class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return (PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '').'.js';
 	}
 
+	function in_footer($resource) {
+	
+		return true;
+	}
+
 	function get_jsobjects($resource) {
 
 		return array();
