@@ -535,7 +535,9 @@ self.addEventListener('fetch', event => {
           // Also, no need to check_updated content anymore, since we didn't get the page from the cache anyway
           .catch(function() { check_updated = false; return fetch(cacheBustRequest, fetchOpts) }) 
           // The response from this fetch will be saved in the cached below, through the cacheBustRequest
-          .then(response => addToCache(cacheKey, request, response, false, opts))
+          // Comment Leo 01/12/2017: this weird way of asking for !check_updated below, is to avoid the cache from fetchFromCache(request) to be saved again in the cache,
+          // in such a way that may possibly override the cache written by the cacheBustRequest executed below!
+          .then(function(response) { if (!check_updated) { return addToCache(cacheKey, request, response, false, opts); } return response; })
           // Initialize the appshellRequest only now, so that the .then() below only works if the content comes from the appshell
           // Otherwise, this 2nd .then() will also be executed from the html content of the original request, overriding with its content the appshell content in the cache
           .catch(function() { appshellRequest = getAppShellRequest(request, opts); return fetchFromCache(appshellRequest, fetchOpts); }) 
