@@ -20,25 +20,7 @@ window.popServiceWorkers = {
 			// Catch the messages delivered by the Service Worker, and act upon them
 			navigator.serviceWorker.onmessage = function (event) {
 
-				var message = JSON.parse(event.data);
-				if (message.type === 'refresh') {
-
-					// If there is a pageSectionPage for that URL
-					if (that.pages[message.url]) {
-
-						// Retrieve it
-						var pageSectionPage = $('#'+that.pages[message.url]);
-
-						// Make sure the pageSectionPage is still in the DOM: if it still has its data attributes then it's there
-						// If it's removed, that becomes undefined
-						if (pageSectionPage && pageSectionPage.data('fetch-url')) {
-						
-							// Show the message, then delete the entry from the pages, it's not needed anymore
-							that.showRefreshMessage(pageSectionPage);
-							delete that.pages[message.url];
-						}
-					}
-				}
+				that.processEvent(event);
 			};
 
 			// Show a message to the user when there is a new SW installed
@@ -138,6 +120,30 @@ window.popServiceWorkers = {
 	//-------------------------------------------------
 	// PRIVATE functions
 	//-------------------------------------------------
+
+	processEvent : function(event) {
+
+		var that = this;
+		var message = JSON.parse(event.data);
+		if (message.type === 'refresh') {
+
+			// If there is a pageSectionPage for that URL
+			if (that.pages[message.url]) {
+
+				// Retrieve it
+				var pageSectionPage = $('#'+that.pages[message.url]);
+
+				// Make sure the pageSectionPage is still in the DOM: if it still has its data attributes then it's there
+				// If it's removed, that becomes undefined
+				if (pageSectionPage && pageSectionPage.data('fetch-url')) {
+				
+					// Show the message, then delete the entry from the pages, it's not needed anymore
+					that.showRefreshMessage(pageSectionPage);
+					delete that.pages[message.url];
+				}
+			}
+		}
+	},
 
 	showRefreshMessage : function(pageSectionPage) {
 

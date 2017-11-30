@@ -11,7 +11,7 @@ Author URI: https://getpop.org/en/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_SERVICEWORKERS_VERSION', 0.126);
+define ('POP_SERVICEWORKERS_VERSION', 0.127);
 define ('POP_SERVICEWORKERS_DIR', dirname(__FILE__));
 define ('POP_SERVICEWORKERS_ASSETS_DIR', POP_SERVICEWORKERS_DIR.'/kernel/serviceworkers/assets');
 

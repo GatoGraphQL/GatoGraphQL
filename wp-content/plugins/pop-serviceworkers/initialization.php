@@ -76,6 +76,9 @@ class PoP_ServiceWorkers_Initialization {
 
 				wp_register_script('pop-serviceworkers-functions', $libraries_js_folder.'/sw'.$suffix.'.js', array('pop'), POP_SERVICEWORKERS_VERSION, true);
 				wp_enqueue_script('pop-serviceworkers-functions');
+
+				wp_register_script('pop-serviceworkers-functions-initial', $libraries_js_folder.'/sw-initial'.$suffix.'.js', array('pop'), POP_SERVICEWORKERS_VERSION, true);
+				wp_enqueue_script('pop-serviceworkers-functions-initial');
 			}
 
 			// This file is generated dynamically, so it can't be added to any bundle or minified
