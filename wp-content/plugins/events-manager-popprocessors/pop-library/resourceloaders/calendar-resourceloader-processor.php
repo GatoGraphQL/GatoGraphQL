@@ -41,6 +41,7 @@ class EM_PoPProcessors_CalendarResourceLoaderProcessor extends PoP_JSResourceLoa
 	
 	function get_dir($resource) {
 
+		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
 		return EM_POPPROCESSORS_DIR.'/js/'.$subpath.'libraries/3rdparties/calendar';
 	}
 	
