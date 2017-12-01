@@ -199,6 +199,7 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 					$pop_resourceloader_jsbundlegroupfilegenerator->set_filename($bundleGroupId);
 					$pop_resourceloader_jsbundlegroupfilegenerator->set_extension('.js');
 
+					$anyfile_exists = false;
 					foreach ($attributes as $attribute => $scripttag_attributes) {
 
 						// Check if the file exists
@@ -212,6 +213,8 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 						$pop_resourceloader_jsbundlegroupfilegenerator->set_attribute($attribute);
 						if ($pop_resourceloader_jsbundlegroupfilegenerator->file_exists()) {
 
+							$anyfile_exists = true;
+
 							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 							$script = 'pop-bundlegroup-'.$bundleGroupId.($attribute ? '-'.$attribute : '');
 							$bundlescripts_properties[] = array(
@@ -222,14 +225,14 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 
 							// $added_scripts[] = $script;
 						}
-						elseif (!$attribute) {
+					}
+					if (!$anyfile_exists) {
 
-							// If any normal bundle(group) does not exist, fallback on loading resources
-							$fallback = true;
+						// If any normal bundle(group) does not exist, fallback on loading resources
+						$fallback = true;
 
-							// We can skip iterating
-							break;
-						}
+						// We can skip iterating
+						break;
 					}
 				}
 			}	
@@ -243,11 +246,14 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 					$pop_resourceloader_jsbundlefilegenerator->set_filename($bundleId);
 					$pop_resourceloader_jsbundlefilegenerator->set_extension('.js');
 
+					$anyfile_exists = false;
 					foreach ($attributes as $attribute => $scripttag_attributes) {
 
 						// Check if the file exists
 						$pop_resourceloader_jsbundlefilegenerator->set_attribute($attribute);
 						if ($pop_resourceloader_jsbundlefilegenerator->file_exists()) {
+
+							$anyfile_exists = true;
 
 							// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 							$script = 'pop-bundle-'.$bundleId.($attribute ? '-'.$attribute : '');
@@ -259,14 +265,14 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 
 							// $added_scripts[] = $script;
 						}
-						elseif (!$attribute) {
+					}
+					if (!$anyfile_exists) {
 
-							// If any normal bundle(group) does not exist, fallback on loading resources
-							$fallback = true;
+						// If any normal bundle(group) does not exist, fallback on loading resources
+						$fallback = true;
 
-							// We can skip iterating
-							break;
-						}
+						// We can skip iterating
+						break;
 					}
 				}
 			}
@@ -609,11 +615,6 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 				}
 			}
 
-			// $this->processed[$jsobject] = $this->processed[$jsobject] ?? array();
-			// $this->processed[$jsobject] = array_unique(array_merge(
-			// 	$this->processed[$jsobject],
-			// 	$jsobject_methods
-			// ));
 			$this->processed[$jsobject] = $processed_methods;
 
 			// First enqueue the dependencies, then continue to enqueue the needed resources
