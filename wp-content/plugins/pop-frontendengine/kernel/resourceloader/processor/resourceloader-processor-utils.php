@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('POP_RESOURCELOADER_UTILS_TEMPLATE_PREFIX', 'tmpl-');
+define ('POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME', 'current_template_id');
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -85,7 +86,6 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function get_pages_and_formats_added_under_hierarchy($hierarchy) {
 
         global $gd_template_settingsprocessor_manager;
-
         $page_formats = array();
         if ($pages = $gd_template_settingsprocessor_manager->get_pages_added_under_hierarchy($hierarchy)) {
                 
@@ -95,7 +95,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 if (!$page_id) {
                     continue;
                 }
-                
+    
                 $settingsprocessor = $gd_template_settingsprocessor_manager->get_processor_by_page($page_id, $hierarchy);
 
                 // If this page is for internal use (eg: System Build/Generate/Install), then do not print out in the configuration
@@ -272,7 +272,7 @@ class PoP_ResourceLoaderProcessorUtils {
         return array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_template_resource_name'), $template_sources);
     }
 
-    public static function calculate_resources($template_sources, $critical_methods, $noncritical_methods, $templates_resources) {
+    public static function calculate_resources($template_sources, $critical_methods, $noncritical_methods, $templates_resources, $cachename = null) {
 
         global $pop_jsresourceloaderprocessor_manager, $pop_templateresourceloaderprocessor_manager;
 
@@ -307,7 +307,12 @@ class PoP_ResourceLoaderProcessorUtils {
             $critical_resources
         );
 
-        self::$noncritical_resources = $noncritical_resources;
+        // Save the $noncritical_resources internally, so it can be used to set resources as "defer"
+        // To store them, the $cachename must be passed as a parameter, because then it can be uses when generating
+        // bundle(group)s, which are calculated all at the beginning, and created all later together; if we don't
+        // keep the $cachename, we don't know what non-critical resources belong to which generation process
+        $cachename = $cachename ?? POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME;
+        self::$noncritical_resources[$cachename] = $noncritical_resources;
 
         $resources = array_values(array_unique(array_merge(
             $resources,
@@ -317,6 +322,15 @@ class PoP_ResourceLoaderProcessorUtils {
         )));
 
         return $resources;
+    }
+
+    public static function get_noncritical_resources($cachename = null) {
+
+        // If no $cachename was provided, then use the one for to access the non-critical resources for the current request
+        $cachename = $cachename ?? POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME;
+
+        // The non-critical resources are stored on a $vars combination basis, so it can be uses when generating the bundle(group)s, which are calculated at the beginning, and then generated all of them together at the end
+        return self::$noncritical_resources[$cachename] ?? array();
     }
 
 	public static function add_resources_from_current_vars($fetching_json, &$resources, $toplevel_template_id, $ids = array(), $merge = false, $components = array(), $options = array()) {
@@ -742,9 +756,16 @@ class PoP_ResourceLoaderProcessorUtils {
         // Get all the resources the template is dependent on. Eg: inline CSS styles
         $templates_resources = array_values(array_unique(array_flatten(array_values($toplevel_processor->get_templates_resources($toplevel_template_id, $toplevel_atts)))));
 
+        // Get the current cachename where to store $noncritical_resources
+        global $gd_template_cacheprocessor_manager;
+        $cachename = $gd_template_cacheprocessor_manager->get_processor($toplevel_template_id)->get_cache_filename($toplevel_template_id);
+        // $options = array(
+        //     'cachename' => $cachename,
+        // );
+
         // Finally, merge all the template and JS resources together
         // return self::calculate_resources($sources, $methods);
-        return self::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources);
+        return self::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources, $cachename/*$options*/);
     }
 
     public static function get_jsmethods_from_template($toplevel_template_id, $toplevel_atts) {

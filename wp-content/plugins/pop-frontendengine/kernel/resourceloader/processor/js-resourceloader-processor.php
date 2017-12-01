@@ -75,7 +75,7 @@ class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 	function is_defer($resource) {
 
 		// If these resources have been marked as 'noncritical', then defer loading them
-		if (PoP_Frontend_ServerUtils::use_progressive_booting() && in_array($resource, PoP_ResourceLoaderProcessorUtils::$noncritical_resources)) {
+		if (PoP_Frontend_ServerUtils::use_progressive_booting() && in_array($resource, PoP_ResourceLoaderProcessorUtils::get_noncritical_resources())) {
 
 			return true;
 		}

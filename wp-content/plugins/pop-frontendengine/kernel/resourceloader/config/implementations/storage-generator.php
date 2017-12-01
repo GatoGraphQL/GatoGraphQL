@@ -27,10 +27,10 @@ class PoP_ResourceLoader_StorageGenerator {
 
                 foreach ($key_bundlegroups as $keyId => $bundleGroupIds) {
 
-                    foreach ($bundleGroupIds as $bundleGroupId) {
+                    // When generating the bundle(group)s, the key is the cache name
+                    $cachename = array_search($keyId, $resource_mapping['keys']);
 
-                        // When generating the bundle(group)s, the key is the cache name
-                        $cachename = array_search($keyId, $resource_mapping['keys']);
+                    foreach ($bundleGroupIds as $bundleGroupId) {
 
                         // // Save the bundlegroups?
                         // if ($generate_bundlegroups) {
@@ -78,10 +78,10 @@ class PoP_ResourceLoader_StorageGenerator {
 
                     foreach ($key_bundlegroups as $keyId => $bundleGroupIds) {
 
-                        foreach ($bundleGroupIds as $bundleGroupId) {
+                        // When generating the bundle(group)s, the key is the cache name
+                        $cachename = array_search($keyId, $resource_mapping['keys']);
 
-                            // When generating the bundle(group)s, the key is the cache name
-                            $cachename = array_search($keyId, $resource_mapping['keys']);
+                        foreach ($bundleGroupIds as $bundleGroupId) {
 
                             // // Save the bundlegroups?
                             // if ($generate_bundlegroups) {

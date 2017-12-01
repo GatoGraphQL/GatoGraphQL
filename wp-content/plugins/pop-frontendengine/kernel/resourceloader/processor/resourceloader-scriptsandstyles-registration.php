@@ -220,9 +220,17 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 	    // Get all the resources the template is dependent on. Eg: inline CSS styles
         $templates_resources = array_values(array_unique(array_flatten(array_values($json['sitemapping']['template-resources']))));
 
+        // // Get the current cachename where to store $noncritical_resources
+        // global $gd_template_cacheprocessor_manager;
+        // $template_id = $engine->get_toplevel_template_id();
+        // $cachename = $gd_template_cacheprocessor_manager->get_processor($template_id)->get_cache_filename($template_id);
+        // $options = array(
+        //     'cachename' => $cachename,
+        // );
+
 		// Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
 		// return PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $methods);
-		$this->calculated_resources = PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources);
+		$this->calculated_resources = PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources/*, $options*/);
 
 		return $this->calculated_resources;
 	}
