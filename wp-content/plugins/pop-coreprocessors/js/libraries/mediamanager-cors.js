@@ -51,9 +51,7 @@ window.popMediaManagerCORS = {
 					if (domain && that.domains['editor-'+state.id] && domain != that.domains['editor-'+state.id]) {
 
 						// Instruct the Media Manager that it needs to refresh
-						// state.get('library')._requery(true);// Initialize vars
-						// popMediaManager.initDomain(domain);
-						popMediaManager.needsRefresh/*[domain]*/['editor-'+state.id] = true;
+						popMediaManager.needsRefresh['editor-'+state.id] = true;
 					}
 
 					// Set the editor's domain to be the current domain
@@ -61,10 +59,6 @@ window.popMediaManagerCORS = {
 				}
 			});
 			
-		// });
-
-		// $(document).on('initialized.featuredImage', function(e) {
-
 			// Inside $(document).ready( because popFeaturedImage.documentInitialized will execute after, so getFrame() is not ready yet
 			// After the frame is open, check if need to refresh content
 			popFeaturedImage.getFrame().on('open', function() {
@@ -76,9 +70,7 @@ window.popMediaManagerCORS = {
 				if (domain && that.domains.featuredImage && domain != that.domains.featuredImage) {
 
 					// Instruct the Media Manager that it needs to refresh
-					// wp.media.frame.state().get('library')._requery(true);
-					// popMediaManager.initDomain(domain);
-					popMediaManager.needsRefresh/*[domain]*/.featuredImage = true;
+					popMediaManager.needsRefresh.featuredImage = true;
 				}
 
 				// Set the featuredImage's domain to be the current domain

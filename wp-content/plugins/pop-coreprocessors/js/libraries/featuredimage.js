@@ -42,7 +42,7 @@ window.popFeaturedImage = {
 				var selected = featuredImage.find('input[type="hidden"]');
 				if (selected.val()) {
 					var selection = that.frame.state().get('selection');
-					attachment = wp.media.attachment(selected.val());
+					var attachment = wp.media.attachment(selected.val());
 					attachment.fetch();
 					selection.add( attachment ? [ attachment ] : [] );
 				}

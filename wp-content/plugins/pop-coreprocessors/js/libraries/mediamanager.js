@@ -19,19 +19,13 @@ window.popMediaManager = {
 	// PUBLIC functions
 	//-------------------------------------------------
 
-	documentInitializedIndependent : function() {
+	init : function() {
 
 		var that = this;
 
-		// Remove the 'post_id', we don't need it ever
-		$(document).on('uploader:start:settings', function(e, settings) {
-
-			that.setUploadSettings(settings);
-		});
-
 		// Whenever opening the Media Manager, save under what domain it belongs
 		// Code copied from wp-includes/js/media-editor.js
-		// The code below is split into 2: 1st part is executed immediately, 2nd part inside $(document).ready()
+		// The code below is split into 2: 1st part is executed immediately, 2nd part inside `documentInitializedIndependent`
 		// Do NOT change this, otherwise it will not work! First part executes before executing
 		// $(document.body).on('click.add-media-button', '.insert-media'... on function wp-includes/js/media-editor.js,
 		// And 2nd part will execute after this logic. Then, we first set that.domain with the corresponding domain,
@@ -44,6 +38,17 @@ window.popMediaManager = {
 			// Obtain the domain from the editor's block
 			var block = popManager.getBlock(editor);
 			that.domain = popManager.getBlockTopLevelDomain(block);
+		});
+	},
+
+	documentInitializedIndependent : function() {
+
+		var that = this;
+
+		// Remove the 'post_id', we don't need it ever
+		$(document).on('uploader:start:settings', function(e, settings) {
+
+			that.setUploadSettings(settings);
 		});
 
 		// Whenever the user logs out, set the needsRefresh as true, so that next user logging in will have the media manager refreshed
@@ -70,43 +75,31 @@ window.popMediaManager = {
 				var states = ['gallery', 'insert'];
 				if (states.indexOf(state.id) > -1) {
 
-					// By this time, we should get the current domain set
-					// var domain = that.getDomain();
-					
-					// Initialize vars
-					// that.initDomain(domain);
-
 					// Only if it had been previously initialized, so that the refresh is not executed the first time it opens
-					if (that.initialized/*[domain]*/['editor-'+state.id] && that.needsRefresh/*[domain]*/['editor-'+state.id]) {
+					if (that.initialized['editor-'+state.id] && that.needsRefresh['editor-'+state.id]) {
 
 						that.refresh(state);
 					}
 
 					// Set as initialized, no need to refresh anymore
-					that.initialized/*[domain]*/['editor-'+state.id] = true;
-					that.needsRefresh/*[domain]*/['editor-'+state.id] = false;
+					that.initialized['editor-'+state.id] = true;
+					that.needsRefresh['editor-'+state.id] = false;
 				}
 			});
 
 			// Inside $(document).ready( because popFeaturedImage.documentInitialized will execute after, so getFrame() is not ready yet
 			// After the frame is open, check if need to refresh content
 			popFeaturedImage.getFrame().on('open', function() {
-
-				// // By this time, we should get the current domain set
-				// var domain = that.getDomain();
-
-				// // Initialize vars
-				// that.initDomain(domain);
 				
 				// Only if it had been previously initialized, so that the refresh is not executed the first time it opens
-				if (that.initialized/*[domain]*/.featuredImage && that.needsRefresh/*[domain]*/.featuredImage) {
+				if (that.initialized.featuredImage && that.needsRefresh.featuredImage) {
 
 					that.refresh(wp.media.frame.state());
 				}
 
 				// Set as initialized, no need to refresh anymore
-				that.initialized/*[domain]*/.featuredImage = true;
-				that.needsRefresh/*[domain]*/.featuredImage = false;
+				that.initialized.featuredImage = true;
+				that.needsRefresh.featuredImage = false;
 			});
 		});
 	},
@@ -166,3 +159,4 @@ window.popMediaManager = {
 //-------------------------------------------------
 popJSLibraryManager.register(popMediaManager, ['documentInitializedIndependent']);
 popJSLibraryManager.register(popMediaManager, ['featuredImageSet'], true); // High priority: execute before function 'featuredImageSet' from popFeaturedImage, so we set that.domain BEFORE the frame opens
+popMediaManager.init();
