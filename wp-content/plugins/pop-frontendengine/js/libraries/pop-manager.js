@@ -719,7 +719,6 @@ window.popManager = {
 		// Then, when creating the resourceloader-mapping, those files will not be retrieved
 		// Instead, their function documentInitializedIndependent will be called if they have been loaded anyway
 		popJSLibraryManager.execute('documentInitialized', args);
-		popJSLibraryManager.execute('documentInitializedIndependent', args/*, true*/);
 		$(document).triggerHandler('initialized.pop.document');
 	},
 
@@ -731,6 +730,9 @@ window.popManager = {
 			domain: domain,
 		};
 
+		// Comment Leo 03/12/2017: execute `documentInitializedIndependent` here, so that it also executes on scripts with "defer"
+		// For `documentInitialized` it can execute above, since scripts containing that function will not be loaded as non-critical
+		popJSLibraryManager.execute('documentInitializedIndependent', args/*, true*/);
 		popJSLibraryManager.execute('documentLoaded', args);
 	},
 
