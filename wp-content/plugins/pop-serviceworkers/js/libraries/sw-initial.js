@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.onmessage = function (event) {
 
 		// Otherwise, re-dispatch the event after the document is loaded
-		if (popServiceWorkers) {
+		if (typeof popServiceWorkers != 'undefined') {
 			
 			popServiceWorkers.processEvent(event);
 		}
