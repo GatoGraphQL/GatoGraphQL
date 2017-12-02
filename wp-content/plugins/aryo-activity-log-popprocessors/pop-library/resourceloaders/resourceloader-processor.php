@@ -64,6 +64,21 @@ class PoP_AAL_Processors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 
 		return parent::get_jsobjects($resource);
 	}
+	
+	function get_dependencies($resource) {
+
+		$dependencies = parent::get_dependencies($resource);
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_NOTIFICATIONS:
+
+				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_MOMENT;
+				break;
+		}
+
+		return $dependencies;
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------
