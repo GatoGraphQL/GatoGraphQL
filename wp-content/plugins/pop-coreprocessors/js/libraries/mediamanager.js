@@ -87,20 +87,19 @@ window.popMediaManager = {
 				}
 			});
 
-			// Inside $(document).ready( because popFeaturedImage.documentInitialized will execute after, so getFrame() is not ready yet
-			// After the frame is open, check if need to refresh content
-			popFeaturedImage.getFrame().on('open', function() {
+			// Initialize only if/when the popFeaturedImage has been loaded
+			if (typeof popFeaturedImage != 'undefined') {
 				
-				// Only if it had been previously initialized, so that the refresh is not executed the first time it opens
-				if (that.initialized.featuredImage && that.needsRefresh.featuredImage) {
+				that.initFeaturedImage();
+			}
+			else {
 
-					that.refresh(wp.media.frame.state());
-				}
+				$(document).on('initialized.featuredImage', function() {
 
-				// Set as initialized, no need to refresh anymore
-				that.initialized.featuredImage = true;
-				that.needsRefresh.featuredImage = false;
-			});
+					that.initFeaturedImage();
+				});
+			}
+			
 		});
 	},
 	featuredImageSet : function(args) {
@@ -118,6 +117,25 @@ window.popMediaManager = {
 	//-------------------------------------------------
 	// PUBLIC but not EXPOSED functions
 	//-------------------------------------------------
+
+	initFeaturedImage : function() {
+
+		var that = this;
+
+		// After the frame is open, check if need to refresh content
+		popFeaturedImage.getFrame().on('open', function() {
+				
+			// Only if it had been previously initialized, so that the refresh is not executed the first time it opens
+			if (that.initialized.featuredImage && that.needsRefresh.featuredImage) {
+
+				that.refresh(wp.media.frame.state());
+			}
+
+			// Set as initialized, no need to refresh anymore
+			that.initialized.featuredImage = true;
+			that.needsRefresh.featuredImage = false;
+		});
+	},
 
 	// initDomain : function(domain) {
 

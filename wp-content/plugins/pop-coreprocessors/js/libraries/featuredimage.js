@@ -81,8 +81,8 @@ window.popFeaturedImage = {
 				featuredImage.removeClass('open');
 			});
 
-			// // Allow MediaManagerCors to initialize itself
-			// $(document).triggerHandler('initialized.featuredImage', [that.frame])
+			// Allow MediaManagerCors to initialize itself
+			$(document).triggerHandler('initialized.featuredImage', [that.frame])
 		});
 	},
 	featuredImageSet : function(args) {

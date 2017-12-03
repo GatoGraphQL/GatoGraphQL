@@ -59,29 +59,47 @@ window.popMediaManagerCORS = {
 				}
 			});
 			
-			// Inside $(document).ready( because popFeaturedImage.documentInitialized will execute after, so getFrame() is not ready yet
-			// After the frame is open, check if need to refresh content
-			popFeaturedImage.getFrame().on('open', function() {
-
-				// By this time, we should get the current domain set
-				var domain = popMediaManager.getDomain();
+			// Initialize only if/when the popFeaturedImage has been loaded
+			if (typeof popFeaturedImage != 'undefined') {
 				
-				// If the current and previous domains are different, then trigger a refresh of the data
-				if (domain && that.domains.featuredImage && domain != that.domains.featuredImage) {
+				that.initFeaturedImage();
+			}
+			else {
 
-					// Instruct the Media Manager that it needs to refresh
-					popMediaManager.needsRefresh.featuredImage = true;
-				}
+				$(document).on('initialized.featuredImage', function() {
 
-				// Set the featuredImage's domain to be the current domain
-				that.domains.featuredImage = domain;
-			});
+					that.initFeaturedImage();
+				});
+			}
 		});
 	},
 
 	//-------------------------------------------------
 	// PUBLIC but not EXPOSED functions
 	//-------------------------------------------------
+
+	initFeaturedImage : function() {
+
+		var that = this;
+
+		// Inside $(document).ready( because popFeaturedImage.documentInitialized will execute after, so getFrame() is not ready yet
+		// After the frame is open, check if need to refresh content
+		popFeaturedImage.getFrame().on('open', function() {
+
+			// By this time, we should get the current domain set
+			var domain = popMediaManager.getDomain();
+			
+			// If the current and previous domains are different, then trigger a refresh of the data
+			if (domain && that.domains.featuredImage && domain != that.domains.featuredImage) {
+
+				// Instruct the Media Manager that it needs to refresh
+				popMediaManager.needsRefresh.featuredImage = true;
+			}
+
+			// Set the featuredImage's domain to be the current domain
+			that.domains.featuredImage = domain;
+		});
+	},
 
 	setEditorOptions : function(options) {
 
