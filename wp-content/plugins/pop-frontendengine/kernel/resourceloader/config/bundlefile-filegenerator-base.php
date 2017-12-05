@@ -1,7 +1,7 @@
 <?php
 class PoP_ResourceLoader_BundleFileFileGeneratorBase extends PoP_ResourceLoader_ConfigFileGeneratorBase {
 
-	protected $filename, $extension, $resources, $cachename;
+	protected $filename, $extension, $resources, $vars_hash_id;
 
 	function set_filename($filename) {
 
@@ -18,9 +18,9 @@ class PoP_ResourceLoader_BundleFileFileGeneratorBase extends PoP_ResourceLoader_
 		$this->resources = $resources;
 	}
 
-	function set_cachename($cachename) {
+	function set_vars_hash_id($vars_hash_id) {
 
-		$this->cachename = $cachename;
+		$this->vars_hash_id = $vars_hash_id;
 	}
 
 	function get_renderer() {

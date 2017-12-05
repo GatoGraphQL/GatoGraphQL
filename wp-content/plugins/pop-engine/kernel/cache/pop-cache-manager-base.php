@@ -72,12 +72,12 @@ class GD_Template_CacheManagerBase {
 
 	function cache_exists($template_id, $type, $ext = '') {
 
-		global $gd_template_cacheprocessor_manager;
-		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
+		global $gd_template_varshashprocessor_manager;
+		if (!($processor = $gd_template_varshashprocessor_manager->get_processor($template_id))) {
 		
 			return false;
 		}			
-		if ($filename = $processor->get_cache_filename($template_id)) {
+		if ($filename = $processor->get_vars_hash_id($template_id)) {
 
 			if (!$ext) {
 				$ext = $this->get_default_extension();
@@ -90,78 +90,91 @@ class GD_Template_CacheManagerBase {
 		return false;
 	}
 
-	function get_cache($template_id, $type, $decode = false, $ext = '') {
+	function get_cache_by_template_id($template_id, $type, $decode = false, $ext = '') {
 
-		global $gd_template_cacheprocessor_manager;
-		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
+		global $gd_template_varshashprocessor_manager;
+		if (!($processor = $gd_template_varshashprocessor_manager->get_processor($template_id))) {
 		
 			return false;
 		}			
-		if ($filename = $processor->get_cache_filename($template_id)) {
+		if ($vars_hash_id = $processor->get_vars_hash_id($template_id)) {
 
-			if (!$ext) {
-				$ext = $this->get_default_extension();
-			}
-
-			$file = $this->get_file($filename, $type, $ext);
-			if (file_exists($file)) {
-
-				// Return the file contents
-				$contents = file_get_contents($file);
-
-				// Replace the placeholder for the uniqueId with the current uniqueId
-				// Comment Leo 06/03/2017: do the same with all dynamic constants, so that we can generate a proper ETag also when retrieving the cached value
-				if ($replacements = $this->get_loadfile_cache_replacements()) {
-
-					$from = $replacements['from'];
-					$to = $replacements['to'];
-					if ($from && $to) {
-
-						$contents = str_replace($from, $to, $contents);
-					}
-				}
-
-				if ($decode) {
-					// Treat it as an array, not an object
-					$contents_or_object = json_decode($contents, true);
-				}
-				else {
-					$contents_or_object = $contents;
-				}
-
-				return $contents_or_object;
-			}
+			return $this->get_cache($vars_hash_id, $type, $decode, $ext);
 		}
 
 		return false;
 	}
 
-	function store_cache($template_id, $type, $contents_or_object, $encode = false, $ext = '') {
+	function get_cache($vars_hash_id, $type, $decode = false, $ext = '') {
 
-		global $gd_template_cacheprocessor_manager;
-		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
+		if (!$ext) {
+			$ext = $this->get_default_extension();
+		}
+
+		$file = $this->get_file($vars_hash_id, $type, $ext);
+		if (file_exists($file)) {
+
+			// Return the file contents
+			$contents = file_get_contents($file);
+
+			// Replace the placeholder for the uniqueId with the current uniqueId
+			// Comment Leo 06/03/2017: do the same with all dynamic constants, so that we can generate a proper ETag also when retrieving the cached value
+			if ($replacements = $this->get_loadfile_cache_replacements()) {
+
+				$from = $replacements['from'];
+				$to = $replacements['to'];
+				if ($from && $to) {
+
+					$contents = str_replace($from, $to, $contents);
+				}
+			}
+
+			if ($decode) {
+				// Treat it as an array, not an object
+				$contents_or_object = json_decode($contents, true);
+			}
+			else {
+				$contents_or_object = $contents;
+			}
+
+			return $contents_or_object;
+		}
+
+		return false;
+	}
+
+	function store_cache_by_template_id($template_id, $type, $contents_or_object, $encode = false, $ext = '') {
+
+		global $gd_template_varshashprocessor_manager;
+		if (!($processor = $gd_template_varshashprocessor_manager->get_processor($template_id))) {
 		
 			return false;
 		}
 
-		if ($filename = $processor->get_cache_filename($template_id)) {
+		if ($vars_hash_id = $processor->get_vars_hash_id($template_id)) {
 
-			if (!$ext) {
-				$ext = $this->get_default_extension();
-			}
-
-			$file = $this->get_file($filename, $type, $ext);
-
-			if ($encode) {
-				$contents = json_encode($contents_or_object);
-			}
-			else {
-				$contents = $contents_or_object;
-			}
-			$this->save_file($type, $file, $contents);
+			return $this->store_cache($vars_hash_id, $type, $contents_or_object, $encode, $ext);
 		}
 
 		return false;
+	}
+
+	function store_cache($vars_hash_id, $type, $contents_or_object, $encode = false, $ext = '') {
+
+		if (!$ext) {
+			$ext = $this->get_default_extension();
+		}
+
+		$file = $this->get_file($vars_hash_id, $type, $ext);
+
+		if ($encode) {
+			$contents = json_encode($contents_or_object);
+		}
+		else {
+			$contents = $contents_or_object;
+		}
+		
+		return $this->save_file($type, $file, $contents);
 	}
 
 	private function save_file($type, $file, $contents) {

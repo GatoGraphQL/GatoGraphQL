@@ -20,9 +20,9 @@ class PoPFrontend_Installation {
 			// Delete the file containing the cached entries (or "abbreviations") from the ResourceLoader
 			PoP_ResourceLoaderProcessorUtils::delete_entries();
 
-			// Delete the file containing what resources/bundle/bundlegroups were generated for each cachename
-			global $pop_resourceloader_generatedfilesstoragemanager;
-			$pop_resourceloader_generatedfilesstoragemanager->delete();
+			// Delete the file containing what resources/bundle/bundlegroups were generated for each vars_hash_id
+			global $pop_resourceloader_generatedfilesmanager;
+			$pop_resourceloader_generatedfilesmanager->delete();
 			
 			global $pop_resourceloader_configfile_generator, $pop_resourceloader_resources_configfile_generator, $pop_resourceloader_initialresources_configfile_generator, $pop_resourceloader_hierarchyformatcombinationresources_configfile_generator;
 			$pop_resourceloader_configfile_generator->generate();
@@ -43,10 +43,10 @@ class PoPFrontend_Installation {
 				$pop_resourceloader_multiplefilegenerator_bundlegroups->generate();
 			}
 
-			// Generate and Save the file containing what resources/bundle/bundlegroups were generated for each cachename
+			// Generate and Save the file containing what resources/bundle/bundlegroups were generated for each vars_hash_id
 			global $pop_resourceloader_storagegenerator;
 			$pop_resourceloader_storagegenerator->generate();
-			$pop_resourceloader_generatedfilesstoragemanager->save();
+			$pop_resourceloader_generatedfilesmanager->save();
 
 			// Save a new file containing the cached entries (or "abbreviations") from the ResourceLoader
 			PoP_ResourceLoaderProcessorUtils::save_entries();

@@ -47,6 +47,8 @@ class GD_Template_CacheManager extends GD_Template_CacheManagerBase {
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_CSSRESOURCES));
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_CSSBUNDLES));
 		$this->restore($this->get_cache_dir(POP_CACHETYPE_CSSBUNDLEGROUPS));
+		$this->restore($this->get_cache_dir(POP_CACHETYPE_NONCRITICALRESOURCES));
+		$this->restore($this->get_cache_dir(POP_CACHETYPE_DYNAMICTEMPLATERESOURCES));
 	}
 
 	function restore($cache_dir) {

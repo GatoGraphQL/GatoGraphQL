@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-add_filter('GD_Template_CacheProcessor:add_categories', 'gd_em_cacheprocessor_addcategories', 10, 2);
+add_filter('GD_Template_VarsHashProcessor:add_categories', 'gd_em_cacheprocessor_addcategories', 10, 2);
 function gd_em_cacheprocessor_addcategories($filename, $post) {
 
 	if ($post->post_type == EM_POST_TYPE_EVENT) {

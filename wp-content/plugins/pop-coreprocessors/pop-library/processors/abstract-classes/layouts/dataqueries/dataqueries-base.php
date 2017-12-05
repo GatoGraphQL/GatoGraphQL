@@ -8,7 +8,7 @@
 class GD_Template_Processor_DataQueriesBase extends GD_Template_ProcessorBase {
 
 	// Comment Leo 12/01/2017: make it runtime instead of static, since it exactly is getting its data from the URL
-	// Comment Leo 12/01/2017: actually, it can be static, because the 'fields' are saved in the cache filename (file wp-content/plugins/pop-engine/kernel/cache/pop-cacheprocessor.php function get_cache_filename($template_id))
+	// Comment Leo 12/01/2017: actually, it can be static, because the 'fields' are saved in the cache filename (file wp-content/plugins/pop-engine/kernel/cache/pop-cacheprocessor.php function get_vars_hash_id($template_id))
 	function get_data_fields($template_id, $atts) {
 	// function get_runtime_datafields($template_id, $atts) {
 
@@ -28,7 +28,7 @@ class GD_Template_Processor_DataQueriesBase extends GD_Template_ProcessorBase {
 	
 		$ret = parent::get_template_configuration($template_id, $atts);	
 		// Comment Leo 12/01/2017: make it runtime instead of static, since it exactly is getting its data from the URL
-		// Comment Leo 12/01/2017: actually, it can be static, because the 'fields' are saved in the cache filename (file wp-content/plugins/pop-engine/kernel/cache/pop-cacheprocessor.php function get_cache_filename($template_id))
+		// Comment Leo 12/01/2017: actually, it can be static, because the 'fields' are saved in the cache filename (file wp-content/plugins/pop-engine/kernel/cache/pop-cacheprocessor.php function get_vars_hash_id($template_id))
 		$ret['fields'] = $this->get_data_fields($template_id, $atts);
 		// $ret['fields'] = $this->get_runtime_datafields($template_id, $atts);
 		return $ret;

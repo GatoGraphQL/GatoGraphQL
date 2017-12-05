@@ -35,24 +35,33 @@ class PoP_ResourceLoader_JSBundleFileFileGeneratorBase extends PoP_ResourceLoade
 		// 3. Async
 
 		$async_resources = $pop_jsresourceloaderprocessor_manager->filter_async($resources);
-		$defer_resources = $pop_jsresourceloaderprocessor_manager->filter_defer($resources);
+		$defer_resources = $pop_jsresourceloaderprocessor_manager->filter_defer($resources, $this->vars_hash_id);
 		
 		// Only valid for Progressive Booting...
 		if (PoP_Frontend_ServerUtils::use_progressive_booting()) {
 
 			// If these resources have been marked as 'noncritical', then defer loading them
-			$noncritical_resources = PoP_ResourceLoaderProcessorUtils::get_noncritical_resources($this->cachename);
-			$defer_resources = array_unique(array_merge(
-				$defer_resources,
-				array_intersect($resources, $noncritical_resources)
-			));
+			// $noncritical_resources = PoP_ResourceLoaderProcessorUtils::get_noncritical_resources($this->vars_hash_id);
+			// global $pop_resourceloader_resourcecachemanager;
+			// $noncritical_resources = $pop_resourceloader_resourcecachemanager->get_noncritical_resources($this->vars_hash_id);
+			// $noncritical_resources = array();
+			// if (/*!doing_post() && */PoP_ServerUtils::use_cache()) {
+			global $gd_template_memorymanager;
+			if ($noncritical_resources = $gd_template_memorymanager->get_cache($this->vars_hash_id, POP_MEMORYTYPE_NONCRITICALRESOURCES, true)) {
+			// }
+			// if ($noncritical_resources) {
+				$defer_resources = array_values(array_unique(array_merge(
+					$defer_resources,
+					array_intersect($resources, $noncritical_resources)
+				)));
+			}
 		}
 
-		$normal_resources = array_diff(
+		$normal_resources = array_values(array_diff(
 			$resources,
 			$async_resources,
 			$defer_resources
-		);
+		));
 		if ($normal_resources) {
 			$this->generate_item('', $normal_resources);
 		}

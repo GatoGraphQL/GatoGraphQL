@@ -8,6 +8,7 @@ require_once 'pop-engine.php';
 
 require_once 'library/load.php';
 require_once 'avatars/load.php';
+require_once 'vars/load.php';
 require_once 'cache/load.php';
 require_once 'dataload/load.php';
 require_once 'filter/load.php';

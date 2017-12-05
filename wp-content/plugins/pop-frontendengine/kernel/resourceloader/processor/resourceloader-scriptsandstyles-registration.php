@@ -48,21 +48,21 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 
 		// Check if the list of scripts has been cached in pop-cache/ first
 		// If so, just return it from there directly
-		global $gd_template_cachemanager, $gd_template_cacheprocessor_manager, $pop_resourceloader_generatedfilesstoragemanager, $pop_resourceloaderprocessor_manager;
+		global $gd_template_cachemanager, $gd_template_varshashprocessor_manager, $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;
         $engine = PoP_Engine_Factory::get_instance();
 		$template_id = $engine->get_toplevel_template_id();
 
 		// First check if the resources have been cached from when executing /generate-theme/
-		$processor = $gd_template_cacheprocessor_manager->get_processor($template_id);
-		$cachename = $processor->get_cache_filename($template_id);
+		$processor = $gd_template_varshashprocessor_manager->get_processor($template_id);
+		$vars_hash_id = $processor->get_vars_hash_id($template_id);
 
 		if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 
-			$resources = $pop_resourceloader_generatedfilesstoragemanager->get_js_resources($cachename);
+			$resources = $pop_resourceloader_generatedfilesmanager->get_js_resources($vars_hash_id);
 		}
 		elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
 
-			$resources = $pop_resourceloader_generatedfilesstoragemanager->get_css_resources($cachename);	
+			$resources = $pop_resourceloader_generatedfilesmanager->get_css_resources($vars_hash_id);	
 		}
 
 		// If there were resources in the cached file, then there will also be the corresponding bundles and bundlegroups
@@ -70,13 +70,13 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 
 			if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 
-				$bundles = $pop_resourceloader_generatedfilesstoragemanager->get_js_bundle_ids($cachename);
-				$bundlegroups = $pop_resourceloader_generatedfilesstoragemanager->get_js_bundlegroup_ids($cachename);
+				$bundles = $pop_resourceloader_generatedfilesmanager->get_js_bundle_ids($vars_hash_id);
+				$bundlegroups = $pop_resourceloader_generatedfilesmanager->get_js_bundlegroup_ids($vars_hash_id);
 			}
 			elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
 				
-				$bundles = $pop_resourceloader_generatedfilesstoragemanager->get_css_bundle_ids($cachename);
-				$bundlegroups = $pop_resourceloader_generatedfilesstoragemanager->get_css_bundlegroup_ids($cachename);
+				$bundles = $pop_resourceloader_generatedfilesmanager->get_css_bundle_ids($vars_hash_id);
+				$bundlegroups = $pop_resourceloader_generatedfilesmanager->get_css_bundlegroup_ids($vars_hash_id);
 			}
 		}
 		else {
@@ -86,11 +86,11 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 
-					$resources = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_JSRESOURCES, true);
+					$resources = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_JSRESOURCES, true);
 				}
 				elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
 
-					$resources = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_CSSRESOURCES, true);
+					$resources = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_CSSRESOURCES, true);
 				}
 			}
 
@@ -99,20 +99,20 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 					
-					$bundles = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_JSBUNDLES, true);
-					$bundlegroups = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_JSBUNDLEGROUPS, true);
+					$bundles = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_JSBUNDLES, true);
+					$bundlegroups = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_JSBUNDLEGROUPS, true);
 				}
 				elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
 					
-					$bundles = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_CSSBUNDLES, true);
-					$bundlegroups = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_CSSBUNDLEGROUPS, true);
+					$bundles = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_CSSBUNDLES, true);
+					$bundlegroups = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_CSSBUNDLEGROUPS, true);
 				}
 			}
 			// If there is no cached one, generate the resources and cache it
 			else {
 
 				// Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
-				$resources = $this->calculate_resources();
+				$resources = $this->calculate_resources($vars_hash_id);
 
 				// We have here both .cs and .jss resources. Split them into these, and calculate the bundle(group)s for each
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
@@ -134,15 +134,15 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 
 					if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 					
-						$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_JSRESOURCES, $resources, true);
-						$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_JSBUNDLES, $bundles, true);
-						$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_JSBUNDLEGROUPS, $bundlegroups, true);
+						$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_JSRESOURCES, $resources, true);
+						$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_JSBUNDLES, $bundles, true);
+						$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_JSBUNDLEGROUPS, $bundlegroups, true);
 					}
 					elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
 						
-						$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_CSSRESOURCES, $resources, true);
-						$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_CSSBUNDLES, $bundles, true);
-						$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_CSSBUNDLEGROUPS, $bundlegroups, true);
+						$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_CSSRESOURCES, $resources, true);
+						$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_CSSBUNDLES, $bundles, true);
+						$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_CSSBUNDLEGROUPS, $bundlegroups, true);
 					}
 				}
 			}
@@ -179,7 +179,7 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 		}
 	}
 
-	protected function calculate_resources() {
+	protected function calculate_resources($vars_hash_id) {
 
 		// If first time accessing the function, calculate and then cache the resources, including both JS and CSS
 		if ($this->calculated_resources) {
@@ -201,13 +201,19 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
         // if (!PoP_Frontend_ServerUtils::use_serverside_rendering()) {
 	        
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
-        $template_sources = array_values(array_unique(array_values($json['sitemapping']['template-sources'])));
-        $template_extra_sources = array_values(array_unique(array_flatten(array_values($json['sitemapping']['template-extra-sources']))));
-        $sources = array_unique(array_merge(
+        $template_sources = $template_extra_sources = array();
+        if ($json['sitemapping']['template-sources']) {
+	        
+	        $template_sources = array_values(array_unique(array_values($json['sitemapping']['template-sources'])));
+		}
+		if ($json['sitemapping']['template-extra-sources']) {
+
+	        $template_extra_sources = array_values(array_unique(array_flatten(array_values($json['sitemapping']['template-extra-sources']))));
+	    }
+	    $sources = array_unique(array_merge(
             $template_sources,
             $template_extra_sources
         ));
-	    // }
 
         // Add all the pageSection methods
         $pageSectionJSMethods = $json['settings']['jsmethods']['pagesection'];
@@ -220,17 +226,17 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 	    // Get all the resources the template is dependent on. Eg: inline CSS styles
         $templates_resources = array_values(array_unique(array_flatten(array_values($json['sitemapping']['template-resources']))));
 
-        // // Get the current cachename where to store $noncritical_resources
-        // global $gd_template_cacheprocessor_manager;
+        // // Get the current vars_hash_id where to store $noncritical_resources
+        // global $gd_template_varshashprocessor_manager;
         // $template_id = $engine->get_toplevel_template_id();
-        // $cachename = $gd_template_cacheprocessor_manager->get_processor($template_id)->get_cache_filename($template_id);
+        // $vars_hash_id = $gd_template_varshashprocessor_manager->get_processor($template_id)->get_vars_hash_id($template_id);
         // $options = array(
-        //     'cachename' => $cachename,
+        //     'vars_hash_id' => $vars_hash_id,
         // );
 
 		// Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
 		// return PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $methods);
-		$this->calculated_resources = PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources/*, $options*/);
+		$this->calculated_resources = PoP_ResourceLoaderProcessorUtils::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources, $vars_hash_id/*, $options*/);
 
 		return $this->calculated_resources;
 	}

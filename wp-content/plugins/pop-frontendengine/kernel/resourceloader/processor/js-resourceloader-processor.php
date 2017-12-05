@@ -45,14 +45,14 @@ class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return array();
 	}
 	
-	function get_scripttag_attributes($resource) {
+	function get_scripttag_attributes($resource, $vars_hash_id) {
 
 		if ($this->is_async($resource)) {
 
 			return "async='async'";
 		}
 		// can_defer: allows the templates to check if we are doing serverside-rendering, because .tmpl files cannot be made "defer" when doing client-side rendering
-		elseif ($this->can_defer($resource) && $this->is_defer($resource)) {
+		elseif ($this->can_defer($resource) && $this->is_defer($resource, $vars_hash_id)) {
 
 			return "defer='defer'";
 		}
@@ -72,12 +72,21 @@ class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 		return true;
 	}
 	
-	function is_defer($resource) {
+	// is_defer function is relative to the specific $vars, since a resource may be defer for a page, but not for another
+	// This is evident when generating all the bundle(group) files, in which is_defer is accessed to calculate the deferred bundle(group)s
+	function is_defer($resource, $vars_hash_id) {
 
 		// If these resources have been marked as 'noncritical', then defer loading them
-		if (PoP_Frontend_ServerUtils::use_progressive_booting() && in_array($resource, PoP_ResourceLoaderProcessorUtils::get_noncritical_resources())) {
+		if (PoP_Frontend_ServerUtils::use_progressive_booting()) {
 
-			return true;
+			// global $pop_resourceloader_resourcecachemanager;
+			// $noncritical_resources = $pop_resourceloader_resourcecachemanager->get_noncritical_resources($vars_hash_id);
+			// $noncritical_resources = PoP_ResourceLoaderProcessorUtils::get_noncritical_resources();
+			global $gd_template_memorymanager;
+			if ($noncritical_resources = $gd_template_memorymanager->get_cache($vars_hash_id, POP_MEMORYTYPE_NONCRITICALRESOURCES, true)) {
+				
+				return in_array($resource, $noncritical_resources);
+			}
 		}
 
 		return false;

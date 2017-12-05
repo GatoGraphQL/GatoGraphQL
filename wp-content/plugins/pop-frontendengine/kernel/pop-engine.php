@@ -83,7 +83,7 @@ class PoPFrontend_Engine extends PoP_Engine {
 					// Encoded twice: the first one for the array, the 2nd one to convert it to string
 					json_encode(json_encode($value))
 				);
-				$gd_template_runtimecontentmanager->store_cache($template_id, $type, $value_js);
+				$gd_template_runtimecontentmanager->store_cache_by_template_id($template_id, $type, $value_js);
 
 				// In addition, this file must be uploaded to AWS S3 bucket, so that this scheme of generating the file on runtime
 				// can also work when hosting the website at multiple servers 
@@ -228,13 +228,13 @@ class PoPFrontend_Engine extends PoP_Engine {
 			if (!doing_post() && PoP_ServerUtils::use_cache()) {
 				
 				// Crawlable items
-				$this->crawlableitems = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_CRAWLABLEITEMS, false, POP_CACHE_EXT_HTML);
+				$this->crawlableitems = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_CRAWLABLEITEMS, false, POP_CACHE_EXT_HTML);
 
 				// If there is no cached one, generate it and cache it
 				if (!$this->crawlableitems) {
 
 					$this->crawlableitems = implode("\n", $this->get_crawlable_items($template_id, $this->atts));
-					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_CRAWLABLEITEMS, $this->crawlableitems, false, POP_CACHE_EXT_HTML);
+					$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_CRAWLABLEITEMS, $this->crawlableitems, false, POP_CACHE_EXT_HTML);
 				}
 			}
 			else {
@@ -286,6 +286,30 @@ class PoPFrontend_Engine extends PoP_Engine {
 
 			$json_sitemapping['template-extra-sources'] = $processor->get_templates_extra_sources($template_id, $atts);
 			$json_sitemapping['template-resources'] = $processor->get_templates_resources($template_id, $atts);
+
+			// The dynamic template sources will only be needed to optimize handlebars templates loading, when doing serverside-rendering and doing code-splitting
+			if (PoP_Frontend_ServerUtils::use_serverside_rendering()) {
+				
+				global $gd_template_memorymanager;
+
+				// Check if results are already on the cache
+				$dynamic_template_sources = $gd_template_memorymanager->get_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, true);
+				if (!$dynamic_template_sources) {
+
+					// If not, calculate the values now...
+					$dynamic_template_sources = $processor->get_dynamic_templates_sources($template_id, $atts);
+					
+					// And store them on the cache
+					$gd_template_memorymanager->store_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_sources, true);
+				}
+				$json_sitemapping['dynamic-template-sources'] = $dynamic_template_sources;
+
+				// Also save the value to be used by `is_defer`
+				// if (/*!doing_post() && */PoP_ServerUtils::use_cache()) {
+				// global $pop_resourceloader_resourcecachemanager;
+				// $pop_resourceloader_resourcecachemanager->set_dynamic_template_sources($vars_hash_id, $dynamic_template_sources);
+				// }
+			}
 		}
 		
 		return $json_sitemapping;

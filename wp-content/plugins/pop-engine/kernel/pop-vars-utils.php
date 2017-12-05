@@ -86,7 +86,7 @@ class PoP_VarsUtils {
 		$identifier .= '-'.POP_SERVER_TEMPLATEDEFINITION_TYPE;
 
 		// Allow for plug-ins to add their own vars. Eg: URE source parameter
-		$identifier = apply_filters('GD_Template_CacheProcessor:add_vars', $identifier);
+		$identifier = apply_filters('GD_Template_VarsUtils:add_vars', $identifier);
 
 		return $identifier;
 	}

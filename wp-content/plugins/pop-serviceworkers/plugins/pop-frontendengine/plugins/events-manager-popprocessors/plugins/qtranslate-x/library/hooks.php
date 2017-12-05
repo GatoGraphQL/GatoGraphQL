@@ -22,12 +22,12 @@ class PoP_ServiceWorkers_ResourceLoader_EM_QTransX_Resources {
 		// if ($q_config['default_language'] == 'en') {
 		if (!get_em_qtransx_fullcalendar_locale_filename()) {
 			
-			$resources = array_diff(
+			$resources = array_values(array_diff(
 				$resources, 
 				array(
 					POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE,
 				)
-			);
+			));
 		}
 
 		return $resources;

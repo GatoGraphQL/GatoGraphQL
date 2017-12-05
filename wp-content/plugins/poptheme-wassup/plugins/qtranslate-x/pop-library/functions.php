@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-add_filter('GD_Template_CacheProcessor:add_vars', 'gd_qtransx_cacheprocessor_addvars');
+add_filter('GD_Template_VarsUtils:add_vars', 'gd_qtransx_cacheprocessor_addvars');
 function gd_qtransx_cacheprocessor_addvars($filename) {
 
 	// Add the language

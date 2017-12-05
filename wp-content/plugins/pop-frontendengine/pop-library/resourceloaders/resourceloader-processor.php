@@ -225,7 +225,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 	// 	return parent::get_htmltag_attributes($resource);
 	// }
 	
-	function is_defer($resource) {
+	function is_defer($resource, $vars_hash_id) {
 
 		switch ($resource) {
 			
@@ -234,7 +234,7 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 				return true;
 		}
 
-		return parent::is_defer($resource);
+		return parent::is_defer($resource, $vars_hash_id);
 	}
 	
 	function can_bundle($resource) {

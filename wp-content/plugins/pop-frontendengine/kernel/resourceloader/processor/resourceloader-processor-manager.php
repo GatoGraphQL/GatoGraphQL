@@ -51,7 +51,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 		// Return the list of all resources which are decorating the given $resource
 		$resources = $this->get_resources();
 		$this->maybe_decorated_resource = $resource;
-		$decorators = array_filter(array_map(array($this, 'decorates_resource'), $resources));
+		$decorators = array_values(array_filter(array_map(array($this, 'decorates_resource'), $resources)));
 		return $decorators;
 	}
 	
@@ -103,17 +103,17 @@ class PoP_ResourceLoaderProcessor_Manager {
 		// Those ones will be added when doing $popResourceLoader->includeResources (in the body), or hardcoded (inline, such as utils-inline.js)
 		if ($in_body_resources = $this->filter_in_body($resources)) {
 
-			$resources = array_diff(
+			$resources = array_values(array_diff(
 				$resources,
 				$in_body_resources
-			);
+			));
 		}
 		if ($inline_resources = $this->filter_inline($resources)) {
 
-			$resources = array_diff(
+			$resources = array_values(array_diff(
 				$resources,
 				$inline_resources
-			);
+			));
 		}
 
 		return $resources;
@@ -121,7 +121,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 	function filter_js($resources) {
 
-		return array_filter($resources, array($this, 'is_js'));
+		return array_values(array_filter($resources, array($this, 'is_js')));
 	}
 
 	function is_js($resource) {
@@ -131,7 +131,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 	function filter_css($resources) {
 
-		return array_filter($resources, array($this, 'is_css'));
+		return array_values(array_filter($resources, array($this, 'is_css')));
 	}
 
 	function is_css($resource) {
@@ -149,7 +149,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 			if ($templates_resources = $json['sitemapping']['template-resources']) {
 				
 				$templates_resources = array_values(array_unique(array_flatten(array_values($templates_resources))));
-				return array_intersect($resources, $templates_resources);
+				return array_values(array_intersect($resources, $templates_resources));
 			}
 		}
 
@@ -165,7 +165,7 @@ class PoP_ResourceLoaderProcessor_Manager {
 
 	function filter_inline($resources) {
 
-		return array_filter($resources, array($this, 'inline'));
+		return array_values(array_filter($resources, array($this, 'inline')));
 	}
 
 	function inline($resource) {
@@ -178,20 +178,20 @@ class PoP_ResourceLoaderProcessor_Manager {
 		// Remove all resources which go in the body, those cannot be bundled
 		if ($in_body_resources = $this->filter_in_body($resources)) {
 			
-			$resources = array_diff(
+			$resources = array_values(array_diff(
 				$resources,
 				$in_body_resources
-			);
+			));
 		}
 		if ($inline_resources = $this->filter_inline($resources)) {
 			
-			$resources = array_diff(
+			$resources = array_values(array_diff(
 				$resources,
 				$inline_resources
-			);
+			));
 		}
 		
-		return array_filter($resources, array($this, 'can_bundle'));
+		return array_values(array_filter($resources, array($this, 'can_bundle')));
 	}
 
 	function can_bundle($resource) {

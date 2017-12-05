@@ -429,7 +429,7 @@ class GD_TemplateManager_Utils {
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
 
-		// Comment Leo 13/11/2017: do not add the config to the $vars, so that we can re-use the saved cachename 
+		// Comment Leo 13/11/2017: do not add the config to the $vars, so that we can re-use the saved vars_hash_id 
 		// with a URL with param config also (param config is not used when generating the cached configurations)
 		// $config = $_REQUEST[POP_URLPARAM_CONFIG];
 		// $domain = $_REQUEST[POP_URLPARAM_DOMAIN];
@@ -460,8 +460,8 @@ class GD_TemplateManager_Utils {
 		}
 		$format = isset($_REQUEST[GD_URLPARAM_FORMAT]) ? $_REQUEST[GD_URLPARAM_FORMAT] : $settingsformat;
 		// Comment Leo 13/11/2017: If there is not format, then set it to 'default'
-		// This is needed so that the /generate/ generated configurations under a $cachename (based on the value of $vars)
-		// can match the same $cachename when visiting that page
+		// This is needed so that the /generate/ generated configurations under a $vars_hash_id (based on the value of $vars)
+		// can match the same $vars_hash_id when visiting that page
 		if (!$format) {
 			$format = POP_VALUES_DEFAULT;
 		}

@@ -15,7 +15,7 @@ class PoP_Engine_Hooks {
 			array($this, 'add_vars')
 		);
 		add_filter(
-			'GD_Template_CacheProcessor:add_vars',
+			'GD_Template_VarsUtils:add_vars',
 			array($this, 'add_vars_identifier')
 		);
 	}

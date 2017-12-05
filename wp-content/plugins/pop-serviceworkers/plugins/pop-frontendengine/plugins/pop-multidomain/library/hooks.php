@@ -20,13 +20,13 @@ class PoP_ServiceWorkers_ResourceLoader_MultiDomain_RemoveResources {
 		// Do not add these resources to the Service Workers file:
 		// POP_RESOURCELOADER_RESOURCELOADERCONFIG_EXTERNAL and POP_RESOURCELOADER_RESOURCELOADERCONFIG_EXTERNALRESOURCES
 		// (These only make sense to be added on the External page)
-		$resources = array_diff(
+		$resources = array_values(array_diff(
 			$resources, 
 			array(
 				POP_RESOURCELOADER_RESOURCELOADERCONFIG_EXTERNAL,
 				POP_RESOURCELOADER_RESOURCELOADERCONFIG_EXTERNALRESOURCES,
 			)
-		);
+		));
 
 		return $resources;
 	}

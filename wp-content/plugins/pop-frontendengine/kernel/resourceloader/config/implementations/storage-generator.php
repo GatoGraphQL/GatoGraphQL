@@ -7,7 +7,7 @@
 
 class PoP_ResourceLoader_StorageGenerator {
 
-    // Generate and Save the file containing what resources/bundle/bundlegroups were generated for each cachename
+    // Generate and Save the file containing what resources/bundle/bundlegroups were generated for each vars_hash_id
     public function generate() {
         
         $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::get_resource_mapping(false);
@@ -15,8 +15,8 @@ class PoP_ResourceLoader_StorageGenerator {
         // $generate_bundles = PoP_Frontend_ServerUtils::generate_bundle_files();
         // $generate_bundlegroups = PoP_Frontend_ServerUtils::generate_bundlegroup_files();
 
-        // Save the bundle-ids under their cachename, so no need to calculate it again when accessing a page
-        global $pop_resourceloader_generatedfilesstoragemanager;
+        // Save the bundle-ids under their vars_hash_id, so no need to calculate it again when accessing a page
+        global $pop_resourceloader_generatedfilesmanager;
         $types = array(
             POP_RESOURCELOADER_RESOURCETYPE_JS,
             POP_RESOURCELOADER_RESOURCETYPE_CSS,
@@ -28,17 +28,17 @@ class PoP_ResourceLoader_StorageGenerator {
                 foreach ($key_bundlegroups as $keyId => $bundleGroupIds) {
 
                     // When generating the bundle(group)s, the key is the cache name
-                    $cachename = array_search($keyId, $resource_mapping['keys']);
+                    $vars_hash_id = array_search($keyId, $resource_mapping['keys']);
 
                     foreach ($bundleGroupIds as $bundleGroupId) {
 
                         // // Save the bundlegroups?
                         // if ($generate_bundlegroups) {
                         if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-                            $pop_resourceloader_generatedfilesstoragemanager->add_js_bundlegroup_ids($cachename, array($bundleGroupId));
+                            $pop_resourceloader_generatedfilesmanager->set_js_bundlegroup_ids($vars_hash_id, array($bundleGroupId));
                         }
                         elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-                            $pop_resourceloader_generatedfilesstoragemanager->add_css_bundlegroup_ids($cachename, array($bundleGroupId));
+                            $pop_resourceloader_generatedfilesmanager->set_css_bundlegroup_ids($vars_hash_id, array($bundleGroupId));
                         }
                         // }
 
@@ -46,10 +46,10 @@ class PoP_ResourceLoader_StorageGenerator {
                         // // Save the bundles?
                         // if ($generate_bundles) {
                         if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-                            $pop_resourceloader_generatedfilesstoragemanager->add_js_bundle_ids($cachename, $bundle_ids);
+                            $pop_resourceloader_generatedfilesmanager->set_js_bundle_ids($vars_hash_id, $bundle_ids);
                         }
                         elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-                            $pop_resourceloader_generatedfilesstoragemanager->add_css_bundle_ids($cachename, $bundle_ids);
+                            $pop_resourceloader_generatedfilesmanager->set_css_bundle_ids($vars_hash_id, $bundle_ids);
                         }
                         // }
 
@@ -57,16 +57,16 @@ class PoP_ResourceLoader_StorageGenerator {
                         $resources = array();
                         foreach ($bundle_ids as $bundleId) {
 
-                            $resources = array_merge(
+                            $resources = array_unique(array_merge(
                                 $resources,
                                 $resource_mapping['bundles'][$type][$bundleId]
-                            );
+                            ));
                         }
                         if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-                            $pop_resourceloader_generatedfilesstoragemanager->add_js_resources($cachename, $resources);
+                            $pop_resourceloader_generatedfilesmanager->set_js_resources($vars_hash_id, $resources);
                         }
                         elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-                            $pop_resourceloader_generatedfilesstoragemanager->add_css_resources($cachename, $resources);
+                            $pop_resourceloader_generatedfilesmanager->set_css_resources($vars_hash_id, $resources);
                         }
                     }
 
@@ -79,17 +79,17 @@ class PoP_ResourceLoader_StorageGenerator {
                     foreach ($key_bundlegroups as $keyId => $bundleGroupIds) {
 
                         // When generating the bundle(group)s, the key is the cache name
-                        $cachename = array_search($keyId, $resource_mapping['keys']);
+                        $vars_hash_id = array_search($keyId, $resource_mapping['keys']);
 
                         foreach ($bundleGroupIds as $bundleGroupId) {
 
                             // // Save the bundlegroups?
                             // if ($generate_bundlegroups) {
                             if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-                                $pop_resourceloader_generatedfilesstoragemanager->add_js_bundlegroup_ids($cachename, array($bundleGroupId));
+                                $pop_resourceloader_generatedfilesmanager->set_js_bundlegroup_ids($vars_hash_id, array($bundleGroupId));
                             }
                             elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-                                $pop_resourceloader_generatedfilesstoragemanager->add_css_bundlegroup_ids($cachename, array($bundleGroupId));
+                                $pop_resourceloader_generatedfilesmanager->set_css_bundlegroup_ids($vars_hash_id, array($bundleGroupId));
                             }
                             // }
 
@@ -97,10 +97,10 @@ class PoP_ResourceLoader_StorageGenerator {
                             // // Save the bundles?
                             // if ($generate_bundles) {
                             if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-                                $pop_resourceloader_generatedfilesstoragemanager->add_js_bundle_ids($cachename, $bundle_ids);
+                                $pop_resourceloader_generatedfilesmanager->set_js_bundle_ids($vars_hash_id, $bundle_ids);
                             }
                             elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-                                $pop_resourceloader_generatedfilesstoragemanager->add_css_bundle_ids($cachename, $bundle_ids);
+                                $pop_resourceloader_generatedfilesmanager->set_css_bundle_ids($vars_hash_id, $bundle_ids);
                             }
                             // }
 
@@ -108,16 +108,16 @@ class PoP_ResourceLoader_StorageGenerator {
                             $resources = array();
                             foreach ($bundle_ids as $bundleId) {
 
-                                $resources = array_merge(
+                                $resources = array_unique(array_merge(
                                     $resources,
                                     $resource_mapping['bundles'][$type][$bundleId]
-                                );
+                                ));
                             }
                             if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-                                $pop_resourceloader_generatedfilesstoragemanager->add_js_resources($cachename, $resources);
+                                $pop_resourceloader_generatedfilesmanager->set_js_resources($vars_hash_id, $resources);
                             }
                             if ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-                                $pop_resourceloader_generatedfilesstoragemanager->add_css_resources($cachename, $resources);
+                                $pop_resourceloader_generatedfilesmanager->set_css_resources($vars_hash_id, $resources);
                             }
                         }
                     }

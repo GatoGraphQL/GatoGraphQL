@@ -16,5 +16,5 @@ require_once 'templates/load.php';
 require_once 'resourceloaders/load.php';
 
 require_once 'processors/load.php';
-require_once 'cacheprocessors/load.php';
+// require_once 'cacheprocessors/load.php';
 require_once 'settingsprocessors/load.php';

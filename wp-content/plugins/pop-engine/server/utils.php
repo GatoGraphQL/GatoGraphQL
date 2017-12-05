@@ -199,7 +199,7 @@ class PoP_ServerUtils {
 
 		// If we are overriding the configuration, then do NOT use the cache
 		// Otherwise, parameters from the config have need to be added to $vars, however they can't,
-		// since we want the $vars cachename to not change when testing with the "config" param
+		// since we want the $vars vars_hash_id to not change when testing with the "config" param
 		// Eg of configuration that should change and so will produce problems:
 		// File wp-content/plugins/poptheme-wassup/plugins/events-manager/pop-library/processors/blocks/sections.php:
 		// if (PoP_Frontend_ServerUtils::remove_database_from_output()) {

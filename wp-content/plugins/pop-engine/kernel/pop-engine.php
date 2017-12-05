@@ -319,13 +319,13 @@ class PoP_Engine {
 		// First check if there's a cache stored
 		if (!doing_post() && PoP_ServerUtils::use_cache()) {
 			
-			$atts = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_ATTS, true);
+			$atts = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_ATTS, true);
 
 			// If there is no cached one, generate the atts and cache it
 			if (!$atts) {
 
 				$atts = $processor->init_atts($template_id, $initial_atts);
-				$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_ATTS, $atts, true);
+				$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_ATTS, $atts, true);
 			}
 		}
 		else {
@@ -362,13 +362,13 @@ class PoP_Engine {
 		// // First check if there's a cache stored
 		// if (!doing_post() && PoP_ServerUtils::use_cache()) {
 			
-		// 	$atts = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_ATTS, true);
+		// 	$atts = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_ATTS, true);
 
 		// 	// If there is no cached one, generate the atts and cache it
 		// 	if (!$atts) {
 
 		// 		$atts = $processor->init_atts($template_id, $initial_atts);
-		// 		$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_ATTS, $atts, true);
+		// 		$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_ATTS, $atts, true);
 		// 	}
 		// }
 		// else {
@@ -391,8 +391,8 @@ class PoP_Engine {
 				
 				// Comment Leo 22/10/2017: instead of saving and operating with a String, work with the JSON object,
 				// so no need to decode it for the AutomatedEmails and others
-				// $settings = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SETTINGS);
-				$settings = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SETTINGS, true);
+				// $settings = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_SETTINGS);
+				$settings = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_SETTINGS, true);
 
 				// If there is no cached one, generate the configuration and cache it
 				if ($settings) {
@@ -404,16 +404,16 @@ class PoP_Engine {
 					// Comment Leo 22/10/2017: instead of saving and operating with a String, work with the JSON object,
 					// so no need to decode it for the AutomatedEmails and others
 					// $settings = json_encode($this->get_json_settings($template_id, $atts));
-					// $gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings);
+					// $gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_SETTINGS, $settings);
 					$settings = $this->get_json_settings($template_id, $atts);
-					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SETTINGS, $settings, true);
+					$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_SETTINGS, $settings, true);
 				}
 
-				$sitemapping = $gd_template_cachemanager->get_cache($template_id, POP_CACHETYPE_SITEMAPPING, true);
+				$sitemapping = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_SITEMAPPING, true);
 				if (!$sitemapping) {
 
 					$sitemapping = $this->get_json_sitemapping($template_id, $atts);
-					$gd_template_cachemanager->store_cache($template_id, POP_CACHETYPE_SITEMAPPING, $sitemapping, true);
+					$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_SITEMAPPING, $sitemapping, true);
 				}
 			}
 			else {
@@ -498,12 +498,6 @@ class PoP_Engine {
 		// Templates: What templates must be executed after call to loadMore is back with data:
 		$json_sitemapping['template-sources'] = $processor->get_templates_sources($template_id, $atts);
 		
-		// The dynamic template sources will only be needed to optimize handlebars templates loading, when doing serverside-rendering and doing code-splitting
-		if (PoP_Frontend_ServerUtils::use_serverside_rendering() && PoP_Frontend_ServerUtils::use_code_splitting()) {
-			
-			$json_sitemapping['dynamic-template-sources'] = $processor->get_dynamic_templates_sources($template_id, $atts);
-		}
-		
 		return $json_sitemapping;
 	}
 	
@@ -582,12 +576,12 @@ class PoP_Engine {
 		// First check if there's a cache stored
 		if (!doing_post() && PoP_ServerUtils::use_cache()) {
 			
-			$static_datasettings = $gd_template_cachemanager->get_cache($toplevel_template_id, POP_CACHETYPE_DATASETTINGS, true);
+			$static_datasettings = $gd_template_cachemanager->get_cache_by_template_id($toplevel_template_id, POP_CACHETYPE_DATASETTINGS, true);
 
 			// If there is no cached one, generate the atts and cache it
 			if (!$static_datasettings) {
 				$static_datasettings = $toplevel_processor->get_data_settings($toplevel_template_id, $toplevel_atts);
-				$gd_template_cachemanager->store_cache($toplevel_template_id, POP_CACHETYPE_DATASETTINGS, $static_datasettings, true);
+				$gd_template_cachemanager->store_cache_by_template_id($toplevel_template_id, POP_CACHETYPE_DATASETTINGS, $static_datasettings, true);
 			}
 		}
 		else {

@@ -373,7 +373,13 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 			// Only if it is a JS file
 			if ($pop_resourceloaderprocessor_manager->is_js($resource)) {
 
-				if ($attributes = $processor->get_scripttag_attributes($resource)) {
+				// Get the current vars_hash_id
+				global $gd_template_varshashprocessor_manager;
+		        $engine = PoP_Engine_Factory::get_instance();
+				$template_id = $engine->get_toplevel_template_id();
+				$vars_hash_id = $gd_template_varshashprocessor_manager->get_processor($template_id)->get_vars_hash_id($template_id);
+				
+				if ($attributes = $processor->get_scripttag_attributes($resource, $vars_hash_id)) {
 					$this->scripttag_attributes[PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource)] = $attributes;
 				}	
 			}
@@ -414,15 +420,24 @@ class PoP_JSResourceLoaderProcessor_Manager /*extends PoP_ResourceLoaderProcesso
 		return $this->get_processor($resource)->is_async($resource);
 	}
 
-	function filter_defer($resources) {
+	function filter_defer($resources, $vars_hash_id) {
 
-		return array_filter($resources, array($this, 'is_defer'));
+		$defer = array();
+		foreach ($resources as $resource) {
+
+			if ($this->get_processor($resource)->is_defer($resource, $vars_hash_id)) {
+				$defer[] = $resource;
+			}
+		}
+
+		return $defer;
+		// return array_filter($resources, array($this, 'is_defer'));
 	}
 
-	function is_defer($resource) {
+	// function is_defer($resource) {
 
-		return $this->get_processor($resource)->is_defer($resource);
-	}
+	// 	return $this->get_processor($resource)->is_defer($resource);
+	// }
 
 	function get_jsobjects($resource) {
 

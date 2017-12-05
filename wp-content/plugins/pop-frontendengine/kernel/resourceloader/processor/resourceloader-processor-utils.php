@@ -6,13 +6,13 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('POP_RESOURCELOADER_UTILS_TEMPLATE_PREFIX', 'tmpl-');
-define ('POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME', 'current_template_id');
+// define ('POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME', 'current_template_id');
 
 class PoP_ResourceLoaderProcessorUtils {
 
     protected static $initialized = false;
     protected static $bundle_ids, $bundle_counter, $bundlegroup_ids, $bundlegroup_counter, $key_ids, $key_counter;
-    public static $noncritical_resources = array();
+    // public static $noncritical_resources = array();
 
     public static function init() {
 
@@ -272,7 +272,7 @@ class PoP_ResourceLoaderProcessorUtils {
         return array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_template_resource_name'), $template_sources);
     }
 
-    public static function calculate_resources($template_sources, $critical_methods, $noncritical_methods, $templates_resources, $cachename = null) {
+    public static function calculate_resources($template_sources, $critical_methods, $noncritical_methods, $templates_resources, $vars_hash_id/* = null*/) {
 
         global $pop_jsresourceloaderprocessor_manager, $pop_templateresourceloaderprocessor_manager;
 
@@ -302,17 +302,23 @@ class PoP_ResourceLoaderProcessorUtils {
         $pop_jsresourceloaderprocessor_manager->add_resources_from_jsmethods($noncritical_resources, $noncritical_methods, array(), false);
 
         // If a resource is both critical and non-critical, then remove it from non-critical
-        $noncritical_resources = array_diff(
+        $noncritical_resources = array_values(array_diff(
             $noncritical_resources, 
             $critical_resources
-        );
+        ));
 
         // Save the $noncritical_resources internally, so it can be used to set resources as "defer"
-        // To store them, the $cachename must be passed as a parameter, because then it can be uses when generating
+        // To store them, the $vars_hash_id must be passed as a parameter, because then it can be uses when generating
         // bundle(group)s, which are calculated all at the beginning, and created all later together; if we don't
-        // keep the $cachename, we don't know what non-critical resources belong to which generation process
-        $cachename = $cachename ?? POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME;
-        self::$noncritical_resources[$cachename] = $noncritical_resources;
+        // keep the $vars_hash_id, we don't know what non-critical resources belong to which generation process
+        // $vars_hash_id = $vars_hash_id ?? POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME;
+        // global $pop_resourceloader_resourcecachemanager;
+        // $pop_resourceloader_resourcecachemanager->set_noncritical_resources($vars_hash_id, $noncritical_resources);
+        if ($noncritical_resources) {
+            global $gd_template_memorymanager;
+            $gd_template_memorymanager->store_cache($vars_hash_id, POP_MEMORYTYPE_NONCRITICALRESOURCES, $noncritical_resources, true);
+        }
+        // self::$noncritical_resources[$vars_hash_id] = $noncritical_resources;
 
         $resources = array_values(array_unique(array_merge(
             $resources,
@@ -324,14 +330,14 @@ class PoP_ResourceLoaderProcessorUtils {
         return $resources;
     }
 
-    public static function get_noncritical_resources($cachename = null) {
+    // public static function get_noncritical_resources($vars_hash_id/* = null*/) {
 
-        // If no $cachename was provided, then use the one for to access the non-critical resources for the current request
-        $cachename = $cachename ?? POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME;
+    //     // If no $vars_hash_id was provided, then use the one for to access the non-critical resources for the current request
+    //     // $vars_hash_id = $vars_hash_id ?? POP_RESOURCELOADER_UTILS_CURRENTTEMPLATEID_CACHENAME;
 
-        // The non-critical resources are stored on a $vars combination basis, so it can be uses when generating the bundle(group)s, which are calculated at the beginning, and then generated all of them together at the end
-        return self::$noncritical_resources[$cachename] ?? array();
-    }
+    //     // The non-critical resources are stored on a $vars combination basis, so it can be uses when generating the bundle(group)s, which are calculated at the beginning, and then generated all of them together at the end
+    //     return self::$noncritical_resources[$vars_hash_id] ?? array();
+    // }
 
 	public static function add_resources_from_current_vars($fetching_json, &$resources, $toplevel_template_id, $ids = array(), $merge = false, $components = array(), $options = array()) {
         
@@ -428,8 +434,8 @@ class PoP_ResourceLoaderProcessorUtils {
         // Then, resources for author => Individual/Organization must NOT be bundled together
         else {
 
-            global $gd_template_cacheprocessor_manager;
-            $cacheprocessor = $gd_template_cacheprocessor_manager->get_processor($toplevel_template_id);
+            global $gd_template_varshashprocessor_manager;
+            $cacheprocessor = $gd_template_varshashprocessor_manager->get_processor($toplevel_template_id);
         }
         
         // Pretend we are in that intended page, by setting the $vars in accordance
@@ -486,7 +492,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if (!$fetching_json) {
 
-                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                    $key = $cacheprocessor->get_vars_hash_id($toplevel_template_id);
                 }
 
                 // For the single hierarchy, we must save the resources under the category path,
@@ -516,7 +522,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if (!$fetching_json) {
 
-                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                    $key = $cacheprocessor->get_vars_hash_id($toplevel_template_id);
                 }
 
                 $path = trailingslashit(GD_TemplateManager_Utils::get_page_path($page_id));
@@ -548,7 +554,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if (!$fetching_json) {
 
-                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                    $key = $cacheprocessor->get_vars_hash_id($toplevel_template_id);
                 }
 
                 self::add_resources_from_current_loop($resources, $key, $toplevel_template_id, $merge);
@@ -570,7 +576,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if (!$fetching_json) {
 
-                    $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                    $key = $cacheprocessor->get_vars_hash_id($toplevel_template_id);
                 }
 
                 self::add_resources_from_current_loop($resources, $key, $toplevel_template_id, $merge);
@@ -585,7 +591,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // Then, resources for author => Individual/Organization must NOT be bundled together
             if (!$fetching_json) {
 
-                $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                $key = $cacheprocessor->get_vars_hash_id($toplevel_template_id);
             }
         
             // Calculate and save the resources
@@ -600,7 +606,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // Then, resources for author => Individual/Organization must NOT be bundled together
             if (!$fetching_json) {
 
-                $key = $cacheprocessor->get_cache_filename($toplevel_template_id);
+                $key = $cacheprocessor->get_vars_hash_id($toplevel_template_id);
             }
         
             // Calculate and save the resources
@@ -726,7 +732,10 @@ class PoP_ResourceLoaderProcessorUtils {
 
     protected static function get_resources_from_current_vars($toplevel_template_id) {
         
-        global $gd_template_processor_manager;
+        global $gd_template_processor_manager, $gd_template_varshashprocessor_manager;
+
+        // Get the current vars_hash_id where to store $noncritical_resources
+        $vars_hash_id = $gd_template_varshashprocessor_manager->get_processor($toplevel_template_id)->get_vars_hash_id($toplevel_template_id);
 
         // Generate the $atts for this $vars
         $engine = PoP_Engine_Factory::get_instance();
@@ -745,6 +754,13 @@ class PoP_ResourceLoaderProcessorUtils {
             $template_extra_sources
         ));
 
+        // We also need to get the dynamic-template-sources and save it on the vars cache.
+        // It will be needed from there when doing `function is_defer($resource, $vars_hash_id)`
+        if ($dynamic_template_sources = array_values(array_unique(array_flatten(array_values($toplevel_processor->get_dynamic_templates_sources($toplevel_template_id, $toplevel_atts)))))) {
+            global $gd_template_memorymanager;
+            $gd_template_memorymanager->store_cache($vars_hash_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_sources, true);
+        }
+
         // Get the list of methods that will be called in that pageSection, to obtain, later on, what JS resources are needed 
         // Comment Leo 21/11/2017: when switching from all methods to critical/noncritical ones, I dropped the array_values() out from $methods,
         // and added it when calculating $(non)critical_methods
@@ -756,16 +772,13 @@ class PoP_ResourceLoaderProcessorUtils {
         // Get all the resources the template is dependent on. Eg: inline CSS styles
         $templates_resources = array_values(array_unique(array_flatten(array_values($toplevel_processor->get_templates_resources($toplevel_template_id, $toplevel_atts)))));
 
-        // Get the current cachename where to store $noncritical_resources
-        global $gd_template_cacheprocessor_manager;
-        $cachename = $gd_template_cacheprocessor_manager->get_processor($toplevel_template_id)->get_cache_filename($toplevel_template_id);
         // $options = array(
-        //     'cachename' => $cachename,
+        //     'vars_hash_id' => $vars_hash_id,
         // );
 
         // Finally, merge all the template and JS resources together
         // return self::calculate_resources($sources, $methods);
-        return self::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources, $cachename/*$options*/);
+        return self::calculate_resources($sources, $critical_methods, $noncritical_methods, $templates_resources, $vars_hash_id/*$options*/);
     }
 
     public static function get_jsmethods_from_template($toplevel_template_id, $toplevel_atts) {
@@ -804,10 +817,10 @@ class PoP_ResourceLoaderProcessorUtils {
         $noncritical_js_methods = array_values(array_unique($noncritical_js_methods));
 
         // If a method was marked both critical and non-critical, then mark it as critical only
-        $noncritical_js_methods = array_diff(
+        $noncritical_js_methods = array_values(array_diff(
             $noncritical_js_methods,
             $critical_js_methods
-        );
+        ));
 
         return array(
             POP_PROGRESSIVEBOOTING_CRITICAL => $critical_js_methods,

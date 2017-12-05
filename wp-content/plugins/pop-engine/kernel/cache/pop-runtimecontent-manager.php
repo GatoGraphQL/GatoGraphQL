@@ -50,12 +50,12 @@ class GD_Template_RuntimeContentManager extends GD_Template_CacheManagerBase {
 
 	function get_file_url($template_id, $type, $ext = '') {			
 
-		global $gd_template_cacheprocessor_manager;
-		if (!($processor = $gd_template_cacheprocessor_manager->get_processor($template_id))) {
+		global $gd_template_varshashprocessor_manager;
+		if (!($processor = $gd_template_varshashprocessor_manager->get_processor($template_id))) {
 		
 			return false;
 		}			
-		if ($filename = $processor->get_cache_filename($template_id)) {
+		if ($filename = $processor->get_vars_hash_id($template_id)) {
 
 			if (!$ext) {
 				$ext = $this->get_default_extension();
