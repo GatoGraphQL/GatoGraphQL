@@ -10,4 +10,4 @@ The website is configured to run under **http://getpop-demo.localhost**, and the
 - Username: admin
 - Password: 11111111
 
-Any problem with the installation, please write to [info@getpop.org](mailto:info@getpop.org).
+Any problem with the installation, please [contact Leo](mailto:leo@getpop.org) and he will help set it up.
