@@ -247,7 +247,7 @@ body.embed .pop-blockgroup > .blocksection-controls.right {
 }*/
 
 #notifications-count,
-#ps-top .scroll-notifications .preview.notification-layout {
+body #ps-top .scroll-notifications .preview.notification-layout {
   background-color: #db902e;
 }
 
