@@ -104,6 +104,19 @@ class PoP_CDNCore_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor 
 	
 		return parent::extract_mapping($resource);
 	}
+		
+	function can_bundle($resource) {
+
+		// No need to extract the mapping from this file (also, it doesn't exist under that get_dir() folder)
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CDNCONFIG:
+				
+				return false;
+		}
+	
+		return parent::can_bundle($resource);
+	}
 	
 	function get_file_url($resource) {
 
