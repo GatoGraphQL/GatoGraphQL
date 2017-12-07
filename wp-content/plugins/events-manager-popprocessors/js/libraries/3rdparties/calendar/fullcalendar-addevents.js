@@ -6,12 +6,43 @@ window.popFullCalendarAddEvents = {
 	// PUBLIC but NOT EXPOSED functions
 	//-------------------------------------------------
 
-	addEvents : function(pageSection, block, /*calendar, */events_data) {
+	// addEvents : function(pageSection, block, /*calendar, */events_data) {
+	
+	// 	var that = this;
+
+	// 	// Needed to not initialize the Navigator Calendar initially. Otherwise it produces a JS error since the mempage was never initialized
+	// 	if (!events_data.length) return;
+
+	// 	// When the block is not initialized, we can't add the events since the runtimeMemory is not ready yet
+	// 	// So then wait until the calendar is initialized, and only then add the events
+	// 	if (popManager.jsInitialized(block)) {
+	// 		that.execAddEvents(pageSection, block, /*calendar, */events_data);
+	// 	}
+	// 	else {
+	// 		block.one('initialize', function() {
+	// 			that.execAddEvents(pageSection, block, /*calendar, */events_data);
+	// 		});
+	// 	}
+	// },
+	addEvents : function(blockId, events_data) {
 	
 		var that = this;
 
 		// Needed to not initialize the Navigator Calendar initially. Otherwise it produces a JS error since the mempage was never initialized
 		if (!events_data.length) return;
+
+		var block = popManager.getBlock($('#'+blockId));
+		// If the block doesn't exist yet, then execute the function again once it does exist
+		if (typeof block == 'undefined') {
+
+			$(document).one('template:merged', function() {
+
+				that.addEvents(blockId, events_data);
+			});
+			return;		
+		}
+		
+		var pageSection = popManager.getPageSection(block);
 
 		// When the block is not initialized, we can't add the events since the runtimeMemory is not ready yet
 		// So then wait until the calendar is initialized, and only then add the events
