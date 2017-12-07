@@ -32,7 +32,9 @@
 	<meta property="og:title" content="<?php echo $encoded_title ?>">
 	<meta name="twitter:title" content="<?php echo $encoded_title ?>">
 	<?php $url = GD_TemplateManager_Utils::get_current_url(); ?>
-	<link rel="canonical" href="<?php echo $url ?>">
+	<?php if ($url != urldecode(full_url())) : ?>
+		<link rel="canonical" href="<?php echo $url ?>">
+	<?php endif; ?>
 	<meta property="og:url" content="<?php echo $url ?>">
 	<meta name="twitter:url" content="<?php echo $url ?>">
 	<?php $twitter_user = gd_twitter_user() ?>
@@ -83,7 +85,8 @@
 		<?php endforeach; ?>
 	<![endif]-->	
 </head>
-<body id="body" class="<?php if (!PoP_Frontend_ServerUtils::use_serverside_rendering()): ?>pop-loadingframe<?php endif; ?> pop-loadinghtml pop-loadingjs <?php echo gd_classes_body() ?>">
+<body id="body" class="no-js <?php if (!PoP_Frontend_ServerUtils::use_serverside_rendering()): ?>pop-loadingframe<?php endif; ?> pop-loadinghtml pop-loadingjs <?php echo gd_classes_body() ?>">
+	<script type="text/javascript">document.body.classList.remove("no-js");</script>
 	<?php // Comment Leo 10/08/2016: commented changing the title to "Loading", because Google shows this temporary title in its search results ?>
 	<?php /* ?><script type="text/javascript">document.title="<?php echo gd_get_initial_document_title() ?>";</script> <?php */ ?>
 	<?php // Comment Leo 08/06/2017: if loading the website using JS, instead of server-side, then make the wrapper initially hidden and show it through javascript; if js is disabled, it will show the crawlable-data ?>
