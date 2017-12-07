@@ -139,6 +139,10 @@ class GD_Template_Processor_CommentsBlocks extends GD_Template_Processor_BlocksB
 	protected function get_iohandler($template_id) {
 
 		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_ADDCOMMENT:
+
+				return GD_DATALOAD_IOHANDLER_FORM;
 					
 			case GD_TEMPLATE_BLOCK_COMMENTS_SCROLL:
 
