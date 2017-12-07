@@ -117,12 +117,32 @@ class EM_PoPProcessors_JSExternalResourceLoaderProcessor extends PoP_ExternalJSR
 		switch ($resource) {
 
 			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR:
+			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
 
 				$dependencies[] = POP_RESOURCELOADER_EXTERNAL_MOMENT;
 				break;
 		}
 
 		return $dependencies;
+	}
+	
+	function get_decorated_resources($resource) {
+
+		$decorated = parent::get_decorated_resources($resource);
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
+
+				// Add Locale file, if applicable
+				if (get_em_qtransx_fullcalendar_locale_filename()) {
+
+					$decorated[] = POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR;
+				}
+				break;
+		}
+
+		return $decorated;
 	}
 }
 
