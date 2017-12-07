@@ -398,6 +398,15 @@ window.popManager = {
 			var topLevelFeedback = that.getTopLevelFeedback(domain);
 			var url = topLevelFeedback[M.URLPARAM_URL];
 
+			// Comment Leo 08/11/2017: these variables will be used later on, inside `window.addEventListener('load', function() ...)`
+			// however they must be assigned right now! Because before we reach there, we will initialize blocks, and these may bring their own
+			// backgroundLoad, and modifying the topLevelFeedback, so by the time it reaches down, it will execute once again all these extra backgroundLoads
+			// These happens in sukipop.com when initializing the main feed, that block calls initDomain which calls /initialize-domain/ for all the external domains,
+			// and these bring their own /initial-frames/ URL to load. And it happens before reaching down because it's all cached in the localStorage
+			// As a consequence, clicking on Add Comment will open 2 or 3 tabs
+			var silent_document = topLevelFeedback[M.URLPARAM_SILENTDOCUMENT];
+			var background_load_urls = topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS];
+
 			// Set the URL for the 'session-ids'
 			popJSRuntimeManager.setPageSectionURL(url);
 
@@ -466,7 +475,7 @@ window.popManager = {
 			// Step 4: remove the "loading" screen
 			$(document.body).removeClass('pop-loadingjs');
 
-			if (!topLevelFeedback[M.URLPARAM_SILENTDOCUMENT]) {
+			if (!silent_document) {
 				
 				// Update URL: it will remove the unwanted items, eg: mode=embed (so that if the user clicks on the newWindow btn, it opens properly)
 				popBrowserHistory.replaceState(url);
@@ -502,7 +511,7 @@ window.popManager = {
 				// This way, we bring forward the "Time to interactive", for all those functionalities that the user can see/is waiting for
 				// The backgroundLoad can be prioritized lower (the /loggedinuser-data/ page, brought thru backgroundLoad, would be nice to bring immediately, but is a tradeoff; application views can certainly wait)
 				that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
-				that.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
+				that.backgroundLoad(background_load_urls); // Data to be loaded from server (eg: forceserverload_fields)
 			});
 		}
 	},
