@@ -14,9 +14,9 @@ class GD_DataLoad_IOHandler_FrameTopSimplePageSection extends GD_DataLoad_IOHand
 		return GD_DATALOAD_IOHANDLER_PAGESECTION_FRAMETOPSIMPLE;
 	}
 
-	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed = null, $atts) {
 	
-		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed, $atts);
 
 		// Allow Organik Fundraising to override it
 		$ret[GD_URLPARAM_TITLE] = apply_filters(

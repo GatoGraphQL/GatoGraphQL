@@ -70,7 +70,7 @@ class GD_DataLoad_IOHandler {
 		return array();
 	}
 
-	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed = null, $atts) {
 	
 		$ret = array();
 

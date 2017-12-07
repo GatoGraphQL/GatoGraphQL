@@ -82,9 +82,9 @@ class GD_DataLoad_IOHandler_List extends GD_DataLoad_IOHandler_Query {
 		return $ret;
 	}
 
-	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed = null, $atts) {
 	
-		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed, $atts);
 
 		$vars = $this->get_vars($vars_atts, $iohandler_atts);
 
@@ -136,6 +136,12 @@ class GD_DataLoad_IOHandler_List extends GD_DataLoad_IOHandler_Query {
 		$stop_loading = $this->stop_loading($dataset, $vars_atts, $iohandler_atts);
 		
 		$ret[GD_URLPARAM_STOPFETCHING] = $stop_loading;
+
+		// Add the Fetch more link to the crawlable data, for the Search Engine
+		if (!$stop_loading && $data_settings['dataload-source']) {
+
+			$ret[GD_URLPARAM_QUERYNEXTURL] = add_query_arg(GD_URLPARAM_PAGED, $paged+1, $data_settings['dataload-source']);
+		}
 
 		// Do not send this value back when doing loadLatest, or it will mess up the original structure loading
 		// Doing 'unset' as to also take it out if an ancestor class (eg: GD_DataLoad_BlockIOHandler) has set it

@@ -163,21 +163,21 @@ body.pop-loadingframe .loadinglogo {
 .loadinglogo .img-responsive {
 	display: initial;
 }
-.loading-screen/*,
-.background-screen*/ {
+.loading-screen {
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-}
-.loading-screen {
 	/* Over topnav */
 	z-index: 1110;
 	display: none;
 	overflow: hidden;
 }
 /* Do not allow the user to click yet, because JS not yet initialized, by placing the loading-screen div with a transparent background on top of everything */
+body.pop-loadingjs.no-js .loading-screen {
+	display: none;
+}
 body.pop-loadingjs .loading-screen {
 	display: block;
 }
@@ -2449,3 +2449,11 @@ body{
  min-height:100%;
 }
 
+.visible-loadinghtml,
+.pop-loadinghtml .hidden-loadinghtml {
+	display: none;
+}
+.hidden-loadinghtml,
+.pop-loadinghtml .visible-loadinghtml {
+	display: block;
+}

@@ -768,7 +768,7 @@ class PoP_Engine {
 				}
 				if ($block_checkpointvalidation_failed || $block_data_settings[GD_DATALOAD_LOAD] === false || ($block_data_settings[GD_DATALOAD_VALIDATECONTENTLOADED] && $block_data_settings[GD_DATALOAD_CONTENTLOADED] === false)) {
 
-					$feedback = $iohandler->get_feedback($checkpoint, array(), $dataload_atts, $iohandler_atts, $executed, $block_atts);
+					$feedback = $iohandler->get_feedback($checkpoint, array(), $dataload_atts, $iohandler_atts, $block_data_settings, $executed, $block_atts);
 					$block_feedback[$pagesection_settings_id][$block_settings_id] = $feedback;
 					// If the block iohandler has background URLs, integrate them
 					// But only if it is that the validation has not failed
@@ -801,7 +801,7 @@ class PoP_Engine {
 				$dataset_ids[$pagesection_settings_id][$block_settings_id] = $dataloader->get_data_response($ids, $dataload_atts);
 
 				// Save the feedback / Add crawlable data
-				$feedback = $iohandler->get_feedback($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts);
+				$feedback = $iohandler->get_feedback($checkpoint, $ids, $dataload_atts, $iohandler_atts, $block_data_settings, $executed, $block_atts);
 				$block_feedback[$pagesection_settings_id][$block_settings_id] = $feedback;
 				// If the block iohandler has background URLs, integrate them
 				if ($iohandler_backgroundload_urls = $iohandler->get_backgroundurls($checkpoint, $ids, $dataload_atts, $iohandler_atts, $executed, $block_atts)) {
@@ -836,7 +836,7 @@ class PoP_Engine {
 				$pagesection_iohandler_atts = $pagesection_data_settings[$pagesection_settings_id]['iohandler-atts'] ? $pagesection_data_settings[$pagesection_settings_id]['iohandler-atts'] : array();
 				$pagesection_iohandler = $gd_dataload_iohandle_manager->get($pagesection_iohandler_name);
 
-				$feedback = $pagesection_iohandler->get_feedback($checkpoint, array(), $request, $pagesection_iohandler_atts, null, $pagesection_atts);
+				$feedback = $pagesection_iohandler->get_feedback($checkpoint, array(), $request, $pagesection_iohandler_atts, $pagesection_data_settings, null, $pagesection_atts);
 				$pagesection_feedback[$pagesection_settings_id] = $feedback;
 
 				// If the pageSection iohandler has background URLs, integrate them
@@ -851,7 +851,7 @@ class PoP_Engine {
 
 		// Finally, after executing all block feedbacks, produce the toplevel feedback (do it at the end, so it's also valid when the user logs in (actionexecuter "Log in" being a block))
 		// Also needed here for the CDN: after adding a post, bring the new value for the POST THUMBPRINT in that same response
-		$toplevel_feedback = $toplevel_iohandler->get_feedback($checkpoint, array(), $request, $toplevel_iohandler_atts, null, $toplevel_atts);
+		$toplevel_feedback = $toplevel_iohandler->get_feedback($checkpoint, array(), $request, $toplevel_iohandler_atts, null, null, $toplevel_atts);
 		// If the toplevel iohandler has background URLs, integrate them
 		if ($iohandler_backgroundload_urls = $toplevel_iohandler->get_backgroundurls($checkpoint, array(), $request, $toplevel_iohandler_atts, null, $toplevel_atts)) {
 			$backgroundload_urls = array_merge(

@@ -38,9 +38,9 @@ class GD_DataLoad_IOHandler_CommentList extends GD_DataLoad_IOHandler_List {
 		return $ret;
 	}
 
-	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed = null, $atts) {
 	
-		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed, $atts);
 
 		$vars = $this->get_vars($vars_atts, $iohandler_atts);
 

@@ -26,9 +26,9 @@ define ('GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER', 'datafromserve
 
 class GD_DataLoad_CheckpointIOHandler extends GD_DataLoad_IOHandler {
 
-	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed = null, $atts) {
 	
-		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed, $atts);
 
 		// This is needed also when bringing block data, that's why it's placed under CheckpointIOHandler instead of TopLevelIOHandler
 		$ret[POP_UNIQUEID] = POP_CONSTANT_UNIQUE_ID;

@@ -25,9 +25,9 @@ class GD_DataLoad_TopLevelIOHandler extends GD_DataLoad_CheckpointIOHandler {
 		return $ret;
 	}
 
-	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed = null, $atts) {
 	
-		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed, $atts);
 
 		$vars = $this->get_vars($vars_atts, $iohandler_atts);
 		$main_vars = GD_TemplateManager_Utils::get_vars();

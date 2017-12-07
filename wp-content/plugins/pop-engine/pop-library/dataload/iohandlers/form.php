@@ -28,9 +28,12 @@ class GD_DataLoad_IOHandler_Form extends GD_DataLoad_IOHandler_Query {
 	// 	return true;
 	// }
 
-	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed = null, $atts) {
+	function get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed = null, $atts) {
 	
-		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $executed, $atts);
+		$ret = parent::get_feedback($checkpoint, $dataset, $vars_atts, $iohandler_atts, $data_settings, $executed, $atts);
+
+		// Add the block dataload-source so the form can point there on its action
+		$ret[GD_URLPARAM_QUERYURL] = $data_settings['dataload-source'];
 
 		// Feedback comes from the Action Execution response
 		if ($executed) {
