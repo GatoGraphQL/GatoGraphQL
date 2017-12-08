@@ -366,12 +366,15 @@ class PoPFrontend_Initialization {
 
 	function print_scripts() {
 
-		if ($this->scripts) {
+		if (!PoP_Frontend_ServerUtils::disable_js()) {
 
-			printf(
-				'<script type="text/javascript">%s</script>', 
-				implode(PHP_EOL, $this->scripts)
-			);
+			if ($this->scripts) {
+
+				printf(
+					'<script type="text/javascript">%s</script>', 
+					implode(PHP_EOL, $this->scripts)
+				);
+			}
 		}
 	}
 }

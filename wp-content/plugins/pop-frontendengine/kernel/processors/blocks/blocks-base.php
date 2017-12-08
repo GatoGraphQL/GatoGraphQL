@@ -29,21 +29,22 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 		// Do nothing by default (function to overrided)
 	}
 
-	/***********************************************************/
-	/** Repeated from "parent" class! */
-	/***********************************************************/
 	function get_query_url($template_id, $atts) {		
 		
-		return $this->get_dataload_source($template_id, $atts);;
+		// If we have disabled the JS, then pass along the "config" param, so that we can click on the "Load more" button,
+		// and do search or POST forms, and it still works without JS
+		$query_url = $this->get_dataload_source($template_id, $atts);
 
-		// $url = $this->get_dataload_source($template_id, $atts);
+		// No need to add "config" if JS enabled, since it will already be added in popManager when fetching content
+		if (PoP_Frontend_ServerUtils::disable_js()) {
 
-		// if ($proxy_domain = $this->get_dataloadsource_domain($template_id, $atts)) {
+			if ($config = $_REQUEST[POP_URLPARAM_CONFIG]) {
+				
+				$query_url = add_query_arg(POP_URLPARAM_CONFIG, $config, $query_url);
+			}
+		}
 
-		// 	$url = str_replace(get_site_url(), $proxy_domain, $url);
-		// }
-
-		// return $url;
+		return $query_url;
 	}
 
 	/***********************************************************/
@@ -225,7 +226,8 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 		$ret[GD_DATALOAD_CONTENTLOADED] = $this->get_att($template_id, $atts, 'content-loaded');
 		$ret[GD_DATALOAD_VALIDATECONTENTLOADED] = $this->get_att($template_id, $atts, 'validate-content-loaded');
 
-		if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
+		// if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
+		if ($dataload_source = $this->get_query_url($template_id, $atts)) {
 			$ret['dataload-source'] = $dataload_source;
 		}
 

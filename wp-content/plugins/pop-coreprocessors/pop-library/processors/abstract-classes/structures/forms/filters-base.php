@@ -42,6 +42,14 @@ class GD_Template_Processor_FiltersBase extends GD_Template_Processor_FormsBase 
 
 	function get_method($template_id) {
 
+		// Comment Leo 08/12/2017: if we have no JS, then use 'POST', because otherwise the ?config=disable-js parameter
+		// gets dropped away and the search response is, once again, JS-enabled
+		// Source: https://stackoverflow.com/questions/732371/what-happens-if-the-action-field-in-a-form-has-parameters
+		if (PoP_Frontend_ServerUtils::disable_js()) {
+
+			return 'POST';
+		}
+
 		return 'GET';
 	}
 	

@@ -21,6 +21,11 @@ class PoPFrontend_Engine extends PoP_Engine {
 		add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 60);
 	}
 
+	function print_json() {
+		
+		return !PoP_Frontend_ServerUtils::disable_js();
+	}
+
 	protected function add_crawlable_data() {
 
 		// Get the crawlable data only if not doing the server-side rendering

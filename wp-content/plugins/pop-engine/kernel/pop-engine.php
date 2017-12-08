@@ -196,6 +196,11 @@ class PoP_Engine {
 		return $json;
 	}
 
+	function print_json() {
+		
+		return true;
+	}
+
 	function output() {
 		
 		if (!$this->resultsObject) {
@@ -209,19 +214,22 @@ class PoP_Engine {
 		// // the cached version of the page if it exists
 		// if (!GD_TemplateManager_Utils::is_search_engine()) {
 
-		$output = 
-			// Tell the front-end if the settings are from the cache
-			'<script type="text/javascript">var POP_CACHED_SETTINGS = %s;</script>'.
-			// Template Hierarchy JSON Settings and Data
-			'<script type="application/json" id="%s">%s</script>'
-		;
-		printf(
-			$output,
-			$this->resultsObject['cachedsettings'] ? "true" : "false",
-			GD_TEMPLATEID_TOPLEVEL_SETTINGSID,
-			$this->encoded_json//$this->json['encoded-json']
-		);
-		// }
+		// Allow PoPFrontendEngine to not print the configuration when doing JS disabled
+		if ($this->print_json()) {
+
+			$output = 
+				// Tell the front-end if the settings are from the cache
+				'<script type="text/javascript">var POP_CACHED_SETTINGS = %s;</script>'.
+				// Template Hierarchy JSON Settings and Data
+				'<script type="application/json" id="%s">%s</script>'
+			;
+			printf(
+				$output,
+				$this->resultsObject['cachedsettings'] ? "true" : "false",
+				GD_TEMPLATEID_TOPLEVEL_SETTINGSID,
+				$this->encoded_json//$this->json['encoded-json']
+			);
+		}
 
 		// Allow extra functionalities. Eg: Save the logged-in user meta information
 		do_action('PoP_Engine:output:end');
@@ -851,7 +859,7 @@ class PoP_Engine {
 
 		// Finally, after executing all block feedbacks, produce the toplevel feedback (do it at the end, so it's also valid when the user logs in (actionexecuter "Log in" being a block))
 		// Also needed here for the CDN: after adding a post, bring the new value for the POST THUMBPRINT in that same response
-		$toplevel_feedback = $toplevel_iohandler->get_feedback($checkpoint, array(), $request, $toplevel_iohandler_atts, null, null, $toplevel_atts);
+		$toplevel_feedback = $toplevel_iohandler->get_feedback($checkpoint, array(), $request, $toplevel_iohandler_atts, array(), null, $toplevel_atts);
 		// If the toplevel iohandler has background URLs, integrate them
 		if ($iohandler_backgroundload_urls = $toplevel_iohandler->get_backgroundurls($checkpoint, array(), $request, $toplevel_iohandler_atts, null, $toplevel_atts)) {
 			$backgroundload_urls = array_merge(

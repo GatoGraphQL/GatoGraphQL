@@ -54,6 +54,12 @@ class PoP_Frontend_ServerUtils {
 
 	public static function use_serverside_rendering() {
 
+		// If disabling the JS, then we can only do server-side rendering
+		if (self::disable_js()) {
+
+			return true;
+		}
+
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('serverside-rendering');
 		if (!is_null($override)) {
@@ -291,6 +297,11 @@ class PoP_Frontend_ServerUtils {
 
 	public static function use_appshell() {
 
+		if (self::disable_js()) {
+
+			return false;
+		}
+
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('appshell');
 		if (!is_null($override)) {
@@ -327,6 +338,11 @@ class PoP_Frontend_ServerUtils {
 
 	public static function generate_resources_on_runtime() {
 
+		if (self::disable_js()) {
+
+			return false;
+		}
+
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('runtime-js');
 		if (!is_null($override)) {
@@ -349,6 +365,11 @@ class PoP_Frontend_ServerUtils {
 	}
 
 	public static function use_serviceworkers() {
+
+		if (self::disable_js()) {
+
+			return false;
+		}
 
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('sw');
@@ -382,5 +403,20 @@ class PoP_Frontend_ServerUtils {
 		}
 
 		return true;
+	}
+
+	public static function disable_js() {
+
+		// Allow to override the configuration
+		$override = PoP_ServerUtils::get_override_configuration('disable-js');
+		if (!is_null($override)) {
+			return $override;
+		}
+
+		if (defined('POP_SERVER_DISABLEJS')) {
+			return POP_SERVER_DISABLEJS;
+		}
+
+		return false;
 	}
 }

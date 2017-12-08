@@ -30,7 +30,7 @@ add_filter('teeny_mce_before_init', 'gd_mentions_before_init' );
 add_filter('tiny_mce_before_init', 'gd_mentions_before_init' );
 function gd_mentions_before_init($mceInit) {
 
-  if (is_admin()) {
+  if (is_admin() || PoP_Frontend_ServerUtils::disable_js()) {
     return $mceInit;
   }
 

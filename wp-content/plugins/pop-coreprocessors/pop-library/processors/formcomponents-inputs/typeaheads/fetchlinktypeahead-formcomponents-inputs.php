@@ -45,6 +45,23 @@ class GD_Template_Processor_FetchlinkTypeaheadFormComponentInputs extends GD_Tem
 
 		return parent::get_input_template($template_id);
 	}
+
+	function init_atts($template_id, &$atts) {
+
+		switch ($template_id) {
+				
+			case GD_TEMPLATE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING:
+
+				// Comment Leo 08/12/2017: Assign the input the "searchfor" name, so that it works to perform search 
+				// even when JS is disabled
+				if (PoP_Frontend_ServerUtils::disable_js()) {
+					$this->add_att(GD_TEMPLATE_FORMCOMPONENT_TEXT_TYPEAHEADSEARCH, $atts, 'name', GD_TEMPLATE_FILTERFORMCOMPONENT_SEARCH);
+				}
+				break;
+		}
+
+		return parent::init_atts($template_id, $atts);
+	}
 }
 
 

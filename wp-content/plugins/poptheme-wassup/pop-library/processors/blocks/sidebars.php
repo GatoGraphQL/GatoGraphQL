@@ -259,7 +259,6 @@ class GD_Template_Processor_CustomSidebarBlocks extends GD_Template_Processor_Cu
 		return parent::get_block_hierarchy($template_id);
 	}
 
-
 	function get_dataloader($template_id) {
 
 		switch ($template_id) {

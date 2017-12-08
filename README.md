@@ -146,7 +146,9 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_USELOCALSTORAGE` (_true_|_false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
-- `POP_SERVER_ENABLECONFIGBYPARAMS` (_true_|_false_): Enable to set the application configuration through URL param "config"
+- `POP_SERVER_ENABLECONFIGBYPARAMS` (_true_|_false_): Enable to set the application configuration through URL param "config".
+
+- `POP_SERVER_DISABLEJS` (_true_|_false_): Strip the output of all Javascript code.
 
 ### Decentralization: enabling crossdomain
 

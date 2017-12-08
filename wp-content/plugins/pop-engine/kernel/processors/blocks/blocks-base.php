@@ -147,7 +147,8 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 		$ret[GD_DATALOAD_CONTENTLOADED] = $this->get_att($template_id, $atts, 'content-loaded');
 		$ret[GD_DATALOAD_VALIDATECONTENTLOADED] = $this->get_att($template_id, $atts, 'validate-content-loaded');
 
-		if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
+		// if ($dataload_source = $this->get_dataload_source($template_id, $atts)) {
+		if ($dataload_source = $this->get_query_url($template_id, $atts)) {
 			$ret['dataload-source'] = $dataload_source;
 		}
 

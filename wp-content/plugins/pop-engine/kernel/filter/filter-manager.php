@@ -6,7 +6,6 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_FILTER_SEARCH_FIELD', 'searchfor');
 define ('GD_FILTER_FILTERING_FIELD', 'filter');
 define ('GD_FILTER_INPUT', 'filter-input');
 define ('GD_FILTER_NAME_INPUT', 'filter-name-input');

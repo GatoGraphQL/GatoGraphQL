@@ -6,6 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+require_once 'scripts.php';
 require_once 'utils.php';
 require_once 'navigation.php';
 require_once 'cron.php';

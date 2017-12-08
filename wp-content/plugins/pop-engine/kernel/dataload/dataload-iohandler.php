@@ -13,6 +13,7 @@ define ('GD_DATALOAD_PUSHURLATTS', 'pushurlatts');
 define ('GD_DATALOAD_LAZY', 'lazy');
 // define ('GD_DATALOAD_NOCONTENTLOADED', 'no-content-loaded');
 define ('GD_DATALOAD_CONTENTLOADED', 'content-loaded');
+define ('GD_DATALOAD_VALIDATECONTENTLOADED', 'validate-content-loaded');
 define ('GD_DATALOAD_LOAD', 'load');
 define ('GD_DATALOAD_INTERCEPTURLS', 'intercept-urls');
 define ('GD_DATALOAD_EXTRAINTERCEPTURLS', 'extra-intercept-urls');

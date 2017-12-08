@@ -19,6 +19,8 @@ class PoP_ServerSideRendering_Utils {
 	
 	public static function print_scripts() {
 	
+		// Add the script tags once again if we defined to have them after the html
+		// If doing disable_js, then do nothing
 		if (PoP_Frontend_ServerUtils::scripts_after_html()) {
 			
 			if (self::$scripts) {
@@ -36,7 +38,8 @@ class PoP_ServerSideRendering_Utils {
 
 		$html = PoP_ServerSideRendering_Factory::get_instance()->render_target($pagesection_settings_id, null, $target);
 
-		if (PoP_Frontend_ServerUtils::scripts_after_html()) {
+		// Extract the script tags if either we need to add them after the html, or remove all JS
+		if (PoP_Frontend_ServerUtils::scripts_after_html() || PoP_Frontend_ServerUtils::disable_js()) {
 			
 			// Extract all <script> tags out, to be added once again after including jquery.js in the footer
 			// $match[2] has the javascript code, without the <script tag
