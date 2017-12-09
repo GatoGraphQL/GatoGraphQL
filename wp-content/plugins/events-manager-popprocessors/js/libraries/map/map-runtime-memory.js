@@ -36,7 +36,7 @@ window.popMapRuntimeMemory = {
 
 			content: '', 
 			title: '', 
-			marker_ids: [],
+			marker_ids: {},
 		};
 
 		$.extend(mempage, empty);

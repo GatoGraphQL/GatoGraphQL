@@ -1,17 +1,17 @@
 <?php
- function lcr59cd19c61832bencq($cx, $var) {
+ function lcr5a2ad10410c73encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19c61832braw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2ad10410c73raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd19c61832bifvar($cx, $v, $zero) {
+ function lcr5a2ad10410c73ifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr59cd19c61832braw($cx, $v, $ex = 0) {
+ function lcr5a2ad10410c73raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -35,7 +35,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd19c61832braw($cx, $vv);
+      $ret[] = lcr5a2ad10410c73raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -47,7 +47,7 @@
   return "$v";
  }
 
- function lcr59cd19c61832bhbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr5a2ad10410c73hbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -64,10 +64,10 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr59cd19c61832bexch($cx, $ch, $vars, $options);
+  return lcr5a2ad10410c73exch($cx, $ch, $vars, $options);
  }
 
- function lcr59cd19c61832bexch($cx, $ch, $vars, &$options) {
+ function lcr5a2ad10410c73exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -80,13 +80,13 @@
   }
 
   if($e !== null) {
-   lcr59cd19c61832berr($cx, $e);
+   lcr5a2ad10410c73err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr59cd19c61832berr($cx, $err) {
+ function lcr5a2ad10410c73err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -201,8 +201,8 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<',lcr59cd19c61832bencq($cx, (($inary && isset($in['tag'])) ? $in['tag'] : null)),' class="btn-inner ',lcr59cd19c61832bencq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" style="',lcr59cd19c61832bencq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'">
-	';if (lcr59cd19c61832bifvar($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null), false)){echo '<i class="fa ',lcr59cd19c61832bencq($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null)),'"></i>';}else{echo '';}echo '<span class="pop-btn-title ',lcr59cd19c61832bencq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['btn-title'])) ? $in['classes']['btn-title'] : null)),'" style="',lcr59cd19c61832bencq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['btn-title'])) ? $in['styles']['btn-title'] : null)),'">',lcr59cd19c61832braw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['btn'])) ? $in['titles']['btn'] : null)),'';if (lcr59cd19c61832bifvar($cx, (($inary && isset($in['text-field'])) ? $in['text-field'] : null), false)){echo ' ',lcr59cd19c61832braw($cx, (($inary && isset($in['textfield-open'])) ? $in['textfield-open'] : null)),'<span class="',lcr59cd19c61832bencq($cx, (($inary && isset($in['itemDBKey'])) ? $in['itemDBKey'] : null)),'-',lcr59cd19c61832bencq($cx, (($inary && isset($in['text-field'])) ? $in['text-field'] : null)),'-',lcr59cd19c61832bencq($cx, ((isset($in['itemObject']) && is_array($in['itemObject']) && isset($in['itemObject']['id'])) ? $in['itemObject']['id'] : null)),' ',lcr59cd19c61832bencq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['text-field'])) ? $in['classes']['text-field'] : null)),'" style="',lcr59cd19c61832bencq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['text-field'])) ? $in['styles']['text-field'] : null)),'">',lcr59cd19c61832braw($cx, lcr59cd19c61832bhbch($cx, 'get', array(array((($inary && isset($in['itemObject'])) ? $in['itemObject'] : null),(($inary && isset($in['text-field'])) ? $in['text-field'] : null)),array()), 'raw', $in)),'</span>',lcr59cd19c61832braw($cx, (($inary && isset($in['textfield-close'])) ? $in['textfield-close'] : null)),'';}else{echo '';}echo '</span>
-</',lcr59cd19c61832bencq($cx, (($inary && isset($in['tag'])) ? $in['tag'] : null)),'>';return ob_get_clean();
+    ob_start();echo '<',lcr5a2ad10410c73encq($cx, (($inary && isset($in['tag'])) ? $in['tag'] : null)),' class="btn-inner ',lcr5a2ad10410c73encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" style="',lcr5a2ad10410c73encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'">
+	';if (lcr5a2ad10410c73ifvar($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null), false)){echo '<i class="fa ',lcr5a2ad10410c73encq($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null)),'"></i>';}else{echo '';}echo '<span class="pop-btn-title ',lcr5a2ad10410c73encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['btn-title'])) ? $in['classes']['btn-title'] : null)),'" style="',lcr5a2ad10410c73encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['btn-title'])) ? $in['styles']['btn-title'] : null)),'">',lcr5a2ad10410c73raw($cx, ((isset($in['titles']) && is_array($in['titles']) && isset($in['titles']['btn'])) ? $in['titles']['btn'] : null)),'';if (lcr5a2ad10410c73ifvar($cx, (($inary && isset($in['text-field'])) ? $in['text-field'] : null), false)){echo ' ',lcr5a2ad10410c73raw($cx, (($inary && isset($in['textfield-open'])) ? $in['textfield-open'] : null)),'<span class="',lcr5a2ad10410c73encq($cx, (($inary && isset($in['itemDBKey'])) ? $in['itemDBKey'] : null)),'-',lcr5a2ad10410c73encq($cx, (($inary && isset($in['text-field'])) ? $in['text-field'] : null)),'-',lcr5a2ad10410c73encq($cx, ((isset($in['itemObject']) && is_array($in['itemObject']) && isset($in['itemObject']['id'])) ? $in['itemObject']['id'] : null)),' ',lcr5a2ad10410c73encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['text-field'])) ? $in['classes']['text-field'] : null)),'" style="',lcr5a2ad10410c73encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['text-field'])) ? $in['styles']['text-field'] : null)),'">',lcr5a2ad10410c73raw($cx, lcr5a2ad10410c73hbch($cx, 'get', array(array((($inary && isset($in['itemObject'])) ? $in['itemObject'] : null),(($inary && isset($in['text-field'])) ? $in['text-field'] : null)),array()), 'raw', $in)),'</span>',lcr5a2ad10410c73raw($cx, (($inary && isset($in['textfield-close'])) ? $in['textfield-close'] : null)),'';}else{echo '';}echo '</span>
+</',lcr5a2ad10410c73encq($cx, (($inary && isset($in['tag'])) ? $in['tag'] : null)),'>';return ob_get_clean();
 };
 ?>

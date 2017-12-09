@@ -5,7 +5,7 @@
 
 			var block = $('#{{../bs.bId}}');
 			var pageSection = $('#{{../pss.psId}}');
-			popMapRuntime.initMarker(pageSection, block, '{{id}}', '{{coordinates.lat}}', '{{coordinates.lng}}', '{{{name}}}', '{{address}}');
+			popMapRuntime.initMarker('{{../tls.domain}}', pageSection, block, '{{id}}', '{{coordinates.lat}}', '{{coordinates.lng}}', '{{{name}}}', '{{address}}');
 		});
 	})(jQuery);
 	</script>

@@ -22,7 +22,8 @@ window.popTypeaheadMap = {
 
 			typeahead.on('selected', function(e, datum) {
 
-				if (!popMap.hasMarker(pageSection, block, datum.id)) {
+				var markerId = popMapRuntime.getMarkerId(domain, datum.id);
+				if (!popMap.hasMarker(pageSection, block, markerId)) {
 
 					// Extend the targetContext using datum as the itemObject
 					var targetConfiguration = popManager.getTargetConfiguration(domain, pageSection, block, template);
@@ -39,13 +40,15 @@ window.popTypeaheadMap = {
 
 				// Add the newly added marker to the map
 				// map.data('marker-ids', [datum.id]);
-				map.data('marker-ids-'+removeScheme(domain), [datum.id]);
+				map.data('marker-ids-'+removeScheme(domain), [markerId]);
+				map.data('domains', [domain]);
 				popMap.addMarkers(domain, pageSection, block, map);
 			});
 
-			typeahead.on('close', function(e, alert, markerId) {
+			typeahead.on('close', function(e, alert, locationId) {
 
 				// Remove the marker from the map
+				var markerId = popMapRuntime.getMarkerId(domain, locationId);
 				popMap.removeMarker(pageSection, block, map, markerId);
 			});
 		});

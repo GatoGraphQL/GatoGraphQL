@@ -36,6 +36,7 @@ define ('GD_TEMPLATESETTINGS_EDITOR_NAME', 'wpeditorcomponent');
 
 // define ('GD_INTERCEPTOR_WITHPARAMS', 'with-params');
 define ('GD_JS_INITIALIZED', 'js-initialized');
+define ('GD_CRITICALJS_INITIALIZED', 'criticaljs-initialized');
 
 define ('GD_TEMPLATECALLBACK_ACTION_LOADCONTENT', 'loadcontent');
 define ('GD_TEMPLATECALLBACK_ACTION_REFETCH', 'refetch');
@@ -74,6 +75,7 @@ function gd_popcore_jquery_constants_templatemanager_impl($jquery_constants) {
 
 	// $jquery_constants['INTERCEPTOR_WITHPARAMS'] = GD_INTERCEPTOR_WITHPARAMS;
 	$jquery_constants['JS_INITIALIZED'] = GD_JS_INITIALIZED;
+	$jquery_constants['CRITICALJS_INITIALIZED'] = GD_CRITICALJS_INITIALIZED;
 
 	$jquery_constants['CBACTION_LOADCONTENT'] = GD_TEMPLATECALLBACK_ACTION_LOADCONTENT;
 	$jquery_constants['CBACTION_REFETCH'] = GD_TEMPLATECALLBACK_ACTION_REFETCH;

@@ -26,27 +26,38 @@ window.popMapRuntime = {
 		var mempage = popMapRuntimeMemory.getRuntimeMemoryPage(pageSection, block);
 
 		//Add the data-marker-ids to the pop-map div
-		// mapDiv.data('marker-ids', mempage.marker_ids);
-		mapDiv.data('marker-ids-'+removeScheme(domain), mempage.marker_ids);
+		// If there were already other marker ids, then add them
+		var key = 'marker-ids-'+removeScheme(domain);
+		// var existing = mapDiv.data(key) || [];
+		// var markerIds = existing.concat(mempage.marker_ids[domain]);
+		// mapDiv.data(key, markerIds);
+		mapDiv.data(key, mempage.marker_ids[domain]);
+
+		var domains = mapDiv.data('domains') || [];
+		domains.push(domain);
+		mapDiv.data('domains', domains);
+
+		// // No need for the marker_ids in the mempage anymore
+		// mempage.marker_ids[domain] = [];
 	},
 
-	resetMarkerIds : function(pageSection, block) {
+	resetMarkerIds : function(domain, pageSection, block) {
 	
 		var that = this;		
 		if (popManager.jsInitialized(block)) {
-			that.execResetMarkerIds(pageSection, block);
+			that.execResetMarkerIds(domain, pageSection, block);
 		}
 		else {
 			block.one('initialize', function() {
-				that.execResetMarkerIds(pageSection, block);
+				that.execResetMarkerIds(domain, pageSection, block);
 			});
 		}
 	},
-	execResetMarkerIds : function(pageSection, block) {
+	execResetMarkerIds : function(domain, pageSection, block) {
 	
 		var that = this;		
 		var mempage = popMapRuntimeMemory.getRuntimeMemoryPage(pageSection, block);
-		mempage.marker_ids = [];
+		mempage.marker_ids[domain] = [];
 	},
 
 	setMarkerData : function(pageSection, block, title, content) {
@@ -79,20 +90,20 @@ window.popMapRuntime = {
 		}
 	},
 
-	initMarker : function(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent) {
+	initMarker : function(domain, pageSection, block, locationId, lat, lng, defaultTitle, defaultContent) {
 	
 		var that = this;
 		
 		if (popManager.jsInitialized(block)) {
-			that.execInitMarker(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
+			that.execInitMarker(domain, pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
 		}
 		else {
 			block.one('initialize', function() {
-				that.execInitMarker(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
+				that.execInitMarker(domain, pageSection, block, locationId, lat, lng, defaultTitle, defaultContent);
 			});
 		}
 	},
-	execInitMarker : function(pageSection, block, locationId, lat, lng, defaultTitle, defaultContent) {
+	execInitMarker : function(domain, pageSection, block, locationId, lat, lng, defaultTitle, defaultContent) {
 	
 		var that = this;
 		var mempage = popMapRuntimeMemory.getRuntimeMemoryPage(pageSection, block);
@@ -117,12 +128,22 @@ window.popMapRuntime = {
 			icon : 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
 		};
 
-		mempage.marker_ids.push(locationId);
-		popMapInitMarker.initMarker(pageSection, block, locationId, marker_data);
+		// Comment Leo 09/12/2017: place the marker Id under the domain (mempage.marker_ids[domain]) to avoid 2 requests from 2 different domains to arrive simultaneously,
+		// and the 2nd one modifiying the marker_ids for the 1st one. Placing under the domain, that won't happen
+		var markerId = that.getMarkerId(domain, locationId);
+		mempage.marker_ids[domain] = mempage.marker_ids[domain] || [];
+		mempage.marker_ids[domain].push(markerId);
+		popMapInitMarker.initMarker(pageSection, block, markerId, marker_data);
 		
 		// Once initialized, clear the marker atts
 		mempage.content = '';
 		mempage.title = '';
+	},
+
+	getMarkerId : function(domain, locationId) {
+	
+		var that = this;
+		return domain+'-'+locationId;
 	},
 };
 })(jQuery);

@@ -1,7 +1,7 @@
 <?php
- function lcr59cd19ef7280cwi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr5a2ad134d97f4wi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr59cd19ef7280cm($cx, $v, array($bp[0] => $v));
+   $v = lcr5a2ad134d97f4m($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,7 +16,7 @@
   return $ret;
  }
 
- function lcr59cd19ef7280chbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr5a2ad134d97f4hbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -33,18 +33,18 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr59cd19ef7280cexch($cx, $ch, $vars, $options);
+  return lcr5a2ad134d97f4exch($cx, $ch, $vars, $options);
  }
 
- function lcr59cd19ef7280cencq($cx, $var) {
+ function lcr5a2ad134d97f4encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19ef7280craw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2ad134d97f4raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd19ef7280cm($cx, $a, $b) {
+ function lcr5a2ad134d97f4m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -59,7 +59,7 @@
   return $a;
  }
 
- function lcr59cd19ef7280cexch($cx, $ch, $vars, &$options) {
+ function lcr5a2ad134d97f4exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -72,13 +72,13 @@
   }
 
   if($e !== null) {
-   lcr59cd19ef7280cerr($cx, $e);
+   lcr5a2ad134d97f4err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr59cd19ef7280craw($cx, $v, $ex = 0) {
+ function lcr5a2ad134d97f4raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -102,7 +102,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd19ef7280craw($cx, $vv);
+      $ret[] = lcr5a2ad134d97f4raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -114,7 +114,7 @@
   return "$v";
  }
 
- function lcr59cd19ef7280cerr($cx, $err) {
+ function lcr5a2ad134d97f4err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -229,9 +229,9 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr59cd19ef7280cwi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<script type="text/javascript">
+    ob_start();echo '',lcr5a2ad134d97f4wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<script type="text/javascript">
 	(function($){
-		var targets = $(\'',lcr59cd19ef7280cencq($cx, lcr59cd19ef7280chbch($cx, 'latestCountTargets', array(array($in),array()), 'encq', $in)),'\');
+		var targets = $(\'',lcr5a2ad134d97f4encq($cx, lcr5a2ad134d97f4hbch($cx, 'latestCountTargets', array(array($in),array()), 'encq', $in)),'\');
 		targets.find(\'.pop-count\').each(function() {
 
 			var count = $(this);

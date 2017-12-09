@@ -6,7 +6,9 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-postlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-postlocations-noinitmarkers'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-userlocations'));
+define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-userlocations-noinitmarkers'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-postsidebarlocations'));
 define ('GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS', PoP_TemplateIDUtils::get_template_definition('em-viewcomponent-button-usersidebarlocations'));
 
@@ -16,10 +18,28 @@ class GD_Template_Processor_LocationViewComponentButtons extends GD_Template_Pro
 	
 		return array(
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS,
+			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS,
+			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS,
 		);
+	}
+	
+	function init_markers($template_id) {
+
+		// When in the Map window, the location link must not initialize the markers, since they are already initialized by the map itself.
+		// Do it so, initializes them twice, which leads to problems, like when searching it displays markers from the previous state 
+		// (which were initialized then drawn then initialized again and remained there in the memory)
+		switch ($template_id) {
+
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
+			
+				return false;
+		}
+
+		return parent::init_markers($template_id);
 	}
 
 	function get_location_complement_template($template_id) {
@@ -75,7 +95,9 @@ class GD_Template_Processor_LocationViewComponentButtons extends GD_Template_Pro
 
 		$buttoninners = array(
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS => GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS,
+			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS => GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS => GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS,
+			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS => GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS => GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS,
 			GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS => GD_TEMPLATE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS,
 		);
@@ -83,7 +105,9 @@ class GD_Template_Processor_LocationViewComponentButtons extends GD_Template_Pro
 		switch ($template_id) {
 
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
 
@@ -98,11 +122,13 @@ class GD_Template_Processor_LocationViewComponentButtons extends GD_Template_Pro
 		switch ($template_id) {
 
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
 
 				return GD_TEMPLATE_VIEWCOMPONENT_HEADER_POST;
 
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
 
 				return GD_TEMPLATE_VIEWCOMPONENT_HEADER_USER;
@@ -116,8 +142,10 @@ class GD_Template_Processor_LocationViewComponentButtons extends GD_Template_Pro
 		switch ($template_id) {
 
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
 
 				return GD_URLPARAM_TARGET_MODALS;
@@ -131,7 +159,9 @@ class GD_Template_Processor_LocationViewComponentButtons extends GD_Template_Pro
 		switch ($template_id) {
 					
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
 			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
+			case GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
 
 				// return __('Locations', 'em-popprocessors');
 

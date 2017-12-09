@@ -26,12 +26,23 @@ class GD_Template_Processor_LocationViewComponentButtonsBase extends GD_Template
 		return null;
 	}
 	
+	function init_markers($template_id) {
+
+		// When in the Map window, the location link must not initialize the markers, since they are already initialized by the map itself.
+		// Do it so, initializes them twice, which leads to problems, like when searching it displays markers from the previous state 
+		// (which were initialized then drawn then initialized again and remained there in the memory)
+		return true;
+	}
+	
 	function get_modules($template_id) {
 
 		$ret = parent::get_modules($template_id);
+
+		if ($this->init_markers($template_id)) {
 	
-		$ret[] = GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS;
-		$ret[] = $this->get_mapscript_template($template_id);
+			$ret[] = GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS;
+			$ret[] = $this->get_mapscript_template($template_id);
+		}
 		
 		return $ret;
 	}
@@ -114,9 +125,12 @@ class GD_Template_Processor_LocationViewComponentButtonsBase extends GD_Template
 
 		global $gd_template_processor_manager;
 
-		$map_script = $this->get_mapscript_template($template_id);
-		$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['map-script'] = $gd_template_processor_manager->get_processor($map_script)->get_settings_id($map_script);
-		$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['map-script-resetmarkers'] = $gd_template_processor_manager->get_processor(GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS)->get_settings_id(GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS);
+		// If we don't initialize the markers, simply do not send the settings-id for those modules, and they will not be drawn
+		if ($this->init_markers($template_id)) {
+			$map_script = $this->get_mapscript_template($template_id);
+			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['map-script'] = $gd_template_processor_manager->get_processor($map_script)->get_settings_id($map_script);
+			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['map-script-resetmarkers'] = $gd_template_processor_manager->get_processor(GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS)->get_settings_id(GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS);
+		}
 
 		$ret[GD_JS_TITLES/*'titles'*/]['nolocation'] = __('No location', 'em-popprocessors');
 		$ret[GD_JS_TITLES/*'titles'*/]['locations'] = $this->get_title($template_id);

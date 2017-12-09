@@ -1,7 +1,7 @@
 <?php
- function lcr59cd1a1301854wi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr5a2c000fb0ce2wi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr59cd1a1301854m($cx, $v, array($bp[0] => $v));
+   $v = lcr5a2c000fb0ce2m($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,7 +16,7 @@
   return $ret;
  }
 
- function lcr59cd1a1301854raw($cx, $v, $ex = 0) {
+ function lcr5a2c000fb0ce2raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -40,7 +40,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd1a1301854raw($cx, $vv);
+      $ret[] = lcr5a2c000fb0ce2raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -52,7 +52,7 @@
   return "$v";
  }
 
- function lcr59cd1a1301854m($cx, $a, $b) {
+ function lcr5a2c000fb0ce2m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -103,8 +103,8 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr59cd1a1301854wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<strong>',lcr59cd1a1301854raw($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'</strong><br/>
-	',lcr59cd1a1301854raw($cx, (($inary && isset($in['address'])) ? $in['address'] : null)),'
+    ob_start();echo '',lcr5a2c000fb0ce2wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<strong>',lcr5a2c000fb0ce2raw($cx, (($inary && isset($in['name'])) ? $in['name'] : null)),'</strong><br/>
+	',lcr5a2c000fb0ce2raw($cx, (($inary && isset($in['address'])) ? $in['address'] : null)),'
 ';}),'';return ob_get_clean();
 };
 ?>

@@ -1,13 +1,13 @@
 <?php
- function lcr59cd1a10c8d96encq($cx, $var) {
+ function lcr5a2c07c0d3fd7encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd1a10c8d96raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2c07c0d3fd7raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd1a10c8d96raw($cx, $v, $ex = 0) {
+ function lcr5a2c07c0d3fd7raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -31,7 +31,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd1a10c8d96raw($cx, $vv);
+      $ret[] = lcr5a2c07c0d3fd7raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -147,9 +147,9 @@ return function ($in = null, $options = null) {
 (function($){
 	$(document).one(\'template:merged\', function() {
 
-		var block = $(\'#',lcr59cd1a10c8d96encq($cx, ((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['bId'])) ? $in['bs']['bId'] : null)),'\');
-		var pageSection = $(\'#',lcr59cd1a10c8d96encq($cx, ((isset($in['pss']) && is_array($in['pss']) && isset($in['pss']['psId'])) ? $in['pss']['psId'] : null)),'\');
-		popMapRuntime.resetMarkerIds(pageSection, block);
+		var block = $(\'#',lcr5a2c07c0d3fd7encq($cx, ((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['bId'])) ? $in['bs']['bId'] : null)),'\');
+		var pageSection = $(\'#',lcr5a2c07c0d3fd7encq($cx, ((isset($in['pss']) && is_array($in['pss']) && isset($in['pss']['psId'])) ? $in['pss']['psId'] : null)),'\');
+		popMapRuntime.resetMarkerIds(\'',lcr5a2c07c0d3fd7encq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain'])) ? $in['tls']['domain'] : null)),'\', pageSection, block);
 	});
 })(jQuery);
 </script>';return ob_get_clean();

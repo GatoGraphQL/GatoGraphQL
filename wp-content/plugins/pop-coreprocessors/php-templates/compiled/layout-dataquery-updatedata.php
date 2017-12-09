@@ -1,7 +1,7 @@
 <?php
- function lcr59cd19d8906f3wi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr5a2ad11a027fewi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr59cd19d8906f3m($cx, $v, array($bp[0] => $v));
+   $v = lcr5a2ad11a027fem($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,7 +16,7 @@
   return $ret;
  }
 
- function lcr59cd19d8906f3sec($cx, $v, $bp, $in, $each, $cb, $else = null) {
+ function lcr5a2ad11a027fesec($cx, $v, $bp, $in, $each, $cb, $else = null) {
   $push = ($in !== $v) || $each;
 
   $isAry = is_array($v) || ($v instanceof \ArrayObject);
@@ -69,10 +69,10 @@
      $i++;
     }
     if (isset($bp[0])) {
-     $raw = lcr59cd19d8906f3m($cx, $raw, array($bp[0] => $raw));
+     $raw = lcr5a2ad11a027fem($cx, $raw, array($bp[0] => $raw));
     }
     if (isset($bp[1])) {
-     $raw = lcr59cd19d8906f3m($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
+     $raw = lcr5a2ad11a027fem($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
     }
     $ret[] = $cb($cx, $raw);
    }
@@ -125,15 +125,15 @@
   return '';
  }
 
- function lcr59cd19d8906f3encq($cx, $var) {
+ function lcr5a2ad11a027feencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19d8906f3raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2ad11a027feraw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd19d8906f3hbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr5a2ad11a027fehbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -150,10 +150,10 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr59cd19d8906f3exch($cx, $ch, $vars, $options);
+  return lcr5a2ad11a027feexch($cx, $ch, $vars, $options);
  }
 
- function lcr59cd19d8906f3m($cx, $a, $b) {
+ function lcr5a2ad11a027fem($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -168,7 +168,7 @@
   return $a;
  }
 
- function lcr59cd19d8906f3raw($cx, $v, $ex = 0) {
+ function lcr5a2ad11a027feraw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -192,7 +192,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd19d8906f3raw($cx, $vv);
+      $ret[] = lcr5a2ad11a027feraw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -204,7 +204,7 @@
   return "$v";
  }
 
- function lcr59cd19d8906f3exch($cx, $ch, $vars, &$options) {
+ function lcr5a2ad11a027feexch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -217,13 +217,13 @@
   }
 
   if($e !== null) {
-   lcr59cd19d8906f3err($cx, $e);
+   lcr5a2ad11a027feerr($cx, $e);
   }
 
   return $r;
  }
 
- function lcr59cd19d8906f3err($cx, $err) {
+ function lcr5a2ad11a027feerr($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -338,11 +338,11 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr59cd19d8906f3wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<script type="text/javascript">
+    ob_start();echo '',lcr5a2ad11a027fewi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	<script type="text/javascript">
 	var targets, value, removeHidden;
 	(function($){
-',lcr59cd19d8906f3sec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['fields'])) ? $cx['scopes'][count($cx['scopes'])-1]['fields'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '			targets = $(\'.',lcr59cd19d8906f3encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]) && isset($cx['scopes'][count($cx['scopes'])-2]['itemDBKey'])) ? $cx['scopes'][count($cx['scopes'])-2]['itemDBKey'] : null)),'-',lcr59cd19d8906f3encq($cx, $in),'-',lcr59cd19d8906f3encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['id'])) ? $cx['scopes'][count($cx['scopes'])-1]['id'] : null)),'\');
-			value = \'',lcr59cd19d8906f3encq($cx, lcr59cd19d8906f3hbch($cx, 'get', array(array($cx['scopes'][count($cx['scopes'])-1],$in),array()), 'encq', $in)),'\';
+',lcr5a2ad11a027fesec($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['fields'])) ? $cx['scopes'][count($cx['scopes'])-1]['fields'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '			targets = $(\'.',lcr5a2ad11a027feencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]) && isset($cx['scopes'][count($cx['scopes'])-2]['itemDBKey'])) ? $cx['scopes'][count($cx['scopes'])-2]['itemDBKey'] : null)),'-',lcr5a2ad11a027feencq($cx, $in),'-',lcr5a2ad11a027feencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['id'])) ? $cx['scopes'][count($cx['scopes'])-1]['id'] : null)),'\');
+			value = \'',lcr5a2ad11a027feencq($cx, lcr5a2ad11a027fehbch($cx, 'get', array(array($cx['scopes'][count($cx['scopes'])-1],$in),array()), 'encq', $in)),'\';
 			targets.html(value);
 
 			removeHidden = targets.filter(\'.pop-show-notempty\');

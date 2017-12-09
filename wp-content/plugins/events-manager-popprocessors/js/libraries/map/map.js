@@ -18,26 +18,40 @@ window.popMap = {
 
 		// Do it after the document is fully loaded, so that Google Maps doesn't make the site load more slowly
 		$(document).ready(function($) {
+
 			targets.each(function() {
 				
 				var map = $(this);
 				that.triggerShowMap(domain, pageSection, block, map);
+				
+				// If we have also other domains that have been set, also trigger Show Map to add those markers
+				var domains = map.data('domains') || [];
+				if (domains.indexOf(domain) >= 0) {
+					domains.splice(domains.indexOf(domain), 1);
+				}
+				$.each(domains, function(index, externalDomain) {
+
+					that.triggerShowMap(externalDomain, pageSection, block, map);
+				});
+
+				// Remove the domains, indicating we don't need to process it anymore
+				map.data('domains', null);
 			});
 
-			// If executing the map on 'critical' JS mode, then the markers need to be drawn to the map after the block becomes initialized
-			// Otherwise, markers will not appear on the map, because function initMarker adds them by doing `block.one('initialize', ...)`,
-			// which will happen after we execute `triggerShowMap` above
-			if (M.USE_PROGRESSIVEBOOTING && !popManager.jsInitialized(block)) {
+			// // If executing the map on 'critical' JS mode, then the markers need to be drawn to the map after the block becomes initialized
+			// // Otherwise, markers will not appear on the map, because function initMarker adds them by doing `block.one('initialize', ...)`,
+			// // which will happen after we execute `triggerShowMap` above
+			// if (M.USE_PROGRESSIVEBOOTING && !popManager.jsInitialized(block)) {
 
-				block.one('initialize', function() {
+			// 	block.one('initialize', function() {
 
-					targets.each(function() {
+			// 		targets.each(function() {
 				
-						var map = $(this);
-						that.triggerAddMarkers(domain, pageSection, block, map);
-					});
-				});
-			}
+			// 			var map = $(this);
+			// 			that.triggerAddMarkers(domain, pageSection, block, map);
+			// 		});
+			// 	});
+			// }
 		});
 	},
 
@@ -82,7 +96,6 @@ window.popMap = {
 			
 			// Set the Block URL for popJSRuntimeManager.addTemplateId to know under what URL to place the session-ids
 			popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
-
 			targets.each(function() {
 
 				var map = $(this);
@@ -136,11 +149,13 @@ window.popMap = {
 		// Make sure the block is not hidden, otherwise GoogleMaps fails loading
 		if (!popManager.isHidden(map)) {
 		
+			// Comment Leo 10/12/2017: if adding the skeleton screen, it will show some Lorem Ipsum marker initially.
+			// Then, it must also be removed when first loading the content (eg: https://sukipop.com/en/past-events/?format=map)
 			// Comment Leo 26/07/2017: since adding domains, we can't just ask for status.reload to know if to remove the current markers,
 			// since that flag will be true for each domain that we are fetching data from, after doing a reload,
 			// so they will keep removing the previous' domains' markers.
 			// var removeCurrent = status.reload;
-			var removeCurrent = status.reload && status.isFirst;
+			var removeCurrent = (status.reload || status.action == M.CBACTION_LOADCONTENT) && status.isFirst;
 			that.addMarkers(domain, pageSection, block, map, removeCurrent);
 		}
 		else {
@@ -308,11 +323,14 @@ window.popMap = {
 			link = popManager.getOriginalLink(link);
 
 			var url = link.attr('href');
+			var domain = getDomain(url);
 			var paramIds = getParam(M.LOCATIONSID_FIELDNAME, url);
 			if (paramIds) {
 
-				$.each(paramIds, function(index, value) {
-					markerIds.push(value);
+				$.each(paramIds, function(index, locationId) {
+					
+					var markerId = popMapRuntime.getMarkerId(domain, locationId);
+					markerIds.push(markerId);
 				})
 			}
 		});
@@ -369,39 +387,6 @@ window.popMap = {
 		// var markersOpen = $.extend({}, markerIds);
 		that.setMarkersOpen(pageSection, block, map, markerIds, true);
 	},
-
-	// // Function used within map-script-markers.tmpl, that's why it uses pssId/bsId as arguments, instead of the objects
-	// // (objects not created/inserted into the DOM yet)
-	// initMarker : function(pageSection, block, markerId, markerData) {
-	
-	// 	var that = this;
-
-	// 	var mempage = popMapMemory.getRuntimeMemoryPage(pageSection, block);
-
-	// 	// Initialize internal vars
-	// 	// that.initMarkersVars(pssId, bsId);
-
-	// 	// Check if this marker already exists, if so add new information to this one (pile up all in one marker instead of having many sitting on top of each other so that we can't access the below ones):
-	// 	// 1. Same title: we already have it, don't add it
-	// 	// 2. Different title: it's a different post/user referencing the same Location => append content
-	// 	// var loadedMarkerData = that.markers[pssId][bsId][markerId];
-	// 	var loadedMarkerData = mempage.markers[markerId];
-	// 	if (loadedMarkerData) {
-
-	// 		// Title already added => marker already added
-	// 		if (loadedMarkerData.title.split(' | ').indexOf(markerData.title) > -1) return;
-
-	// 		// Different title => append content to the marker
-	// 		markerData.title = loadedMarkerData.title + ' | ' + markerData.title;
-	// 		// markerData.infoWindow.content = loadedMarkerData.infoWindow.content + '<hr/>' + markerData.infoWindow.content;
-	// 		markerData.infoWindow.content = markerData.infoWindow.content + '<hr/>' + loadedMarkerData.infoWindow.content;
-
-	// 		// Reset the marker to the default one
-	// 		markerData.icon = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
-	// 	}
-	// 	// that.markers[pssId][bsId][markerId] = markerData;
-	// 	mempage.markers[markerId] = markerData;
-	// },
 
 	hasMarker : function(pageSection, block, markerId) {
 
@@ -550,13 +535,14 @@ window.popMap = {
 		}
 
 		// var markerIds = map.data('marker-ids');
-		var markerIds = map.data('marker-ids-'+removeScheme(domain));
+		var key = 'marker-ids-'+removeScheme(domain);
+		var markerIds = map.data(key);
 		if (!markerIds || !markerIds.length) return;
 
 		// Set no marker ids on the map, so that when clicking on the tab or collapse again, it doesn't add these markers again
 		// (more since it will override previously added markers using update=true not present currently in data-marker-ids)
 		// map.data('marker-ids', null);
-		map.data('marker-ids-'+removeScheme(domain), null);
+		map.data(key, null);
 		
 		// Allow to inject markers from other blocks, useful for loading just one map: LocationsMap Modal Block
 		var markersInfo = that.getMarkersInfo(pageSection, block, map);

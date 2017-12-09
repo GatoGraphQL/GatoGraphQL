@@ -1,5 +1,5 @@
 <?php
- function lcr59cd1a0fe940bhbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr5a2c000c29cbahbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -16,18 +16,18 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr59cd1a0fe940bexch($cx, $ch, $vars, $options);
+  return lcr5a2c000c29cbaexch($cx, $ch, $vars, $options);
  }
 
- function lcr59cd1a0fe940bencq($cx, $var) {
+ function lcr5a2c000c29cbaencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd1a0fe940braw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2c000c29cbaraw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd1a0fe940bexch($cx, $ch, $vars, &$options) {
+ function lcr5a2c000c29cbaexch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -40,13 +40,13 @@
   }
 
   if($e !== null) {
-   lcr59cd1a0fe940berr($cx, $e);
+   lcr5a2c000c29cbaerr($cx, $e);
   }
 
   return $r;
  }
 
- function lcr59cd1a0fe940braw($cx, $v, $ex = 0) {
+ function lcr5a2c000c29cbaraw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -70,7 +70,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd1a0fe940braw($cx, $vv);
+      $ret[] = lcr5a2c000c29cbaraw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -82,7 +82,7 @@
   return "$v";
  }
 
- function lcr59cd1a0fe940berr($cx, $err) {
+ function lcr5a2c000c29cbaerr($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -201,11 +201,11 @@ return function ($in = null, $options = null) {
 (function($){
 	$(document).one(\'template:merged\', function() {
 
-		var mapDiv = $(\'#',lcr59cd1a0fe940bencq($cx, lcr59cd1a0fe940bhbch($cx, 'lastGeneratedId', array(array(),array('template'=>(($inary && isset($in['mapdiv-template'])) ? $in['mapdiv-template'] : null),'domain'=>((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['toplevel-domain'])) ? $in['bs']['toplevel-domain'] : null))), 'encq', $in)),'\');
+		var mapDiv = $(\'#',lcr5a2c000c29cbaencq($cx, lcr5a2c000c29cbahbch($cx, 'lastGeneratedId', array(array(),array('template'=>(($inary && isset($in['mapdiv-template'])) ? $in['mapdiv-template'] : null),'domain'=>((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['toplevel-domain'])) ? $in['bs']['toplevel-domain'] : null))), 'encq', $in)),'\');
 		var block = popManager.getBlock(mapDiv);
 		var pageSection = popManager.getPageSection(block);
 
-		popMapRuntime.drawMarkers("',lcr59cd1a0fe940bencq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain'])) ? $in['tls']['domain'] : null)),'", pageSection, block, mapDiv);
+		popMapRuntime.drawMarkers("',lcr5a2c000c29cbaencq($cx, ((isset($in['tls']) && is_array($in['tls']) && isset($in['tls']['domain'])) ? $in['tls']['domain'] : null)),'", pageSection, block, mapDiv);
 	});
 })(jQuery);
 </script>';return ob_get_clean();

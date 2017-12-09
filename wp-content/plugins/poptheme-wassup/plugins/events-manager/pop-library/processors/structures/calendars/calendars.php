@@ -109,6 +109,9 @@ class GD_EM_Template_Processor_Calendars extends GD_Template_Processor_Calendars
 
 			case GD_TEMPLATE_CALENDAR_EVENTS_MAIN:
 			case GD_TEMPLATE_CALENDAR_EVENTSMAP:
+
+				// Initialize the calendar immediately
+				$this->add_att($template_id, $atts, 'critical', true);
 			
 				// Make it activeItem: highlight on viewing the corresponding fullview
 				// $this->append_att(GD_TEMPLATE_LAYOUTCALENDAR, $atts, 'class', 'pop-openmapmarkers');

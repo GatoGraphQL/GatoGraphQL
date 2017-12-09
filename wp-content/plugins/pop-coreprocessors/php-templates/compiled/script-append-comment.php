@@ -1,7 +1,7 @@
 <?php
- function lcr59cd19f6d590ewi($cx, $v, $bp, $in, $cb, $else = null) {
+ function lcr5a2ad13d90077wi($cx, $v, $bp, $in, $cb, $else = null) {
   if (isset($bp[0])) {
-   $v = lcr59cd19f6d590em($cx, $v, array($bp[0] => $v));
+   $v = lcr5a2ad13d90077m($cx, $v, array($bp[0] => $v));
   }
   if (($v === false) || ($v === null) || (is_array($v) && (count($v) === 0))) {
    return $else ? $else($cx, $in) : '';
@@ -16,7 +16,7 @@
   return $ret;
  }
 
- function lcr59cd19f6d590ehbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr5a2ad13d90077hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -56,10 +56,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr59cd19f6d590em($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr5a2ad13d90077m($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr59cd19f6d590em($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr5a2ad13d90077m($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -88,18 +88,18 @@
    };
   }
 
-  return lcr59cd19f6d590eexch($cx, $ch, $vars, $options);
+  return lcr5a2ad13d90077exch($cx, $ch, $vars, $options);
  }
 
- function lcr59cd19f6d590eencq($cx, $var) {
+ function lcr5a2ad13d90077encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19f6d590eraw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2ad13d90077raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd19f6d590em($cx, $a, $b) {
+ function lcr5a2ad13d90077m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -114,7 +114,7 @@
   return $a;
  }
 
- function lcr59cd19f6d590eexch($cx, $ch, $vars, &$options) {
+ function lcr5a2ad13d90077exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -127,13 +127,13 @@
   }
 
   if($e !== null) {
-   lcr59cd19f6d590eerr($cx, $e);
+   lcr5a2ad13d90077err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr59cd19f6d590eraw($cx, $v, $ex = 0) {
+ function lcr5a2ad13d90077raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -157,7 +157,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd19f6d590eraw($cx, $vv);
+      $ret[] = lcr5a2ad13d90077raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -169,7 +169,7 @@
   return "$v";
  }
 
- function lcr59cd19f6d590eerr($cx, $err) {
+ function lcr5a2ad13d90077err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -284,9 +284,9 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '',lcr59cd19f6d590ewi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	target = current.closest(\'.pop-structureinner\');
-',lcr59cd19f6d590ehbbch($cx, 'compare', array(array((($inary && isset($in['parent'])) ? $in['parent'] : null),0),array('operator'=>'>')), $in, false, function($cx, $in) {$inary=is_array($in);echo '		destination = $(\'div.pop-commentreplies-',lcr59cd19f6d590eencq($cx, (($inary && isset($in['parent'])) ? $in['parent'] : null)),'\');
-';}, function($cx, $in) {$inary=is_array($in);echo '		destination = $(\'div.pop-append-',lcr59cd19f6d590eencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['post-db-key'])) ? $cx['scopes'][count($cx['scopes'])-1]['post-db-key'] : null)),'-',lcr59cd19f6d590eencq($cx, (($inary && isset($in['post-id'])) ? $in['post-id'] : null)),'.',lcr59cd19f6d590eencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['appendable'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['appendable'] : null)),'\');
+    ob_start();echo '',lcr5a2ad13d90077wi($cx, (($inary && isset($in['itemObject'])) ? $in['itemObject'] : null), null, $in, function($cx, $in) {$inary=is_array($in);echo '	target = current.closest(\'.pop-structureinner\');
+',lcr5a2ad13d90077hbbch($cx, 'compare', array(array((($inary && isset($in['parent'])) ? $in['parent'] : null),0),array('operator'=>'>')), $in, false, function($cx, $in) {$inary=is_array($in);echo '		destination = $(\'div.pop-commentreplies-',lcr5a2ad13d90077encq($cx, (($inary && isset($in['parent'])) ? $in['parent'] : null)),'\');
+';}, function($cx, $in) {$inary=is_array($in);echo '		destination = $(\'div.pop-append-',lcr5a2ad13d90077encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['post-db-key'])) ? $cx['scopes'][count($cx['scopes'])-1]['post-db-key'] : null)),'-',lcr5a2ad13d90077encq($cx, (($inary && isset($in['post-id'])) ? $in['post-id'] : null)),'.',lcr5a2ad13d90077encq($cx, ((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['classes']) && isset($cx['scopes'][count($cx['scopes'])-1]['classes']['appendable'])) ? $cx['scopes'][count($cx['scopes'])-1]['classes']['appendable'] : null)),'\');
 ';}),'	destination = destination.not(\'.\'+controlClass);
 ';}),'';return ob_get_clean();
 };

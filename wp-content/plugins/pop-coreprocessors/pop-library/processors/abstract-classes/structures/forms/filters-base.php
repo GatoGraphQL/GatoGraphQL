@@ -13,7 +13,10 @@ class GD_Template_Processor_FiltersBase extends GD_Template_Processor_FormsBase 
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
-		$this->add_jsmethod($ret, 'initFilter');
+
+		// Comment Leo 10/12/2017: this function MUST be critical, because it needs to set the filter query args on the block
+		// before initializing a lazy block, eg: http://sukipop.localhost/en/search-content/?filter=content&searchfor=change
+		$this->add_jsmethod($ret, 'initFilter', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
 
 		// Depending on the form type, execute a js method or another
 		$form_type = $this->get_form_type($template_id, $atts);

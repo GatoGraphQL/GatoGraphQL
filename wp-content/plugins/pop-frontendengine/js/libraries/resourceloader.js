@@ -20,6 +20,7 @@ window.popResourceLoader = {
 	// Keep a list of all loading resources
 	loading : [],
 	'error-loading' : [],
+	'error-loading-times' : {},
 	'loading-urls' : {},
 	'loading-resources' : {},
 
@@ -201,6 +202,10 @@ window.popResourceLoader = {
 		}
 		else if (state == 'error') {
 			that['error-loading'].push(resource);
+
+			// Keep how many times it failed. When it reaches 3, quit trying
+			var times = that['error-loading-times'][resource] || 0;
+			that['error-loading-times'][resource] = times+1;
 		}
 
 		// Remove from the loading list, no need anymore
@@ -616,10 +621,18 @@ window.popResourceLoader = {
 					$.each(resources, function(index, resource) {
 
 						// If the resource is in the error list, it failed loading, 
-						// try to load it again
+						// try to load it again. But only up to 3 times, then quit
 						if (that['error-loading'].indexOf(resource) >= 0) {
 
-							that.loadResource(url, config, resource);
+							// 3 times => quit trying
+							if (that['error-loading-times'][resource] >= 3) {
+								
+								that.loaded.push(resource);
+							}
+							else {
+
+								that.loadResource(url, config, resource);
+							}
 						}
 
 						// Check if the resource has been loaded

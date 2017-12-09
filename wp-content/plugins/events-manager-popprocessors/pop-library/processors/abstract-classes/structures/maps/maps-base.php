@@ -22,6 +22,7 @@ class GD_EM_Template_Processor_MapsBase extends GD_Template_Processor_Structures
 	function init_atts($template_id, &$atts) {
 
 		$this->merge_block_jsmethod_att(GD_TEMPLATE_MAP_DIV, $atts, array('mapStandalone'));
+		// $this->merge_block_jsmethod_att(GD_TEMPLATE_MAP_DIV, $atts, array('mapStandaloneCritical'), '', POP_PROGRESSIVEBOOTING_CRITICAL);
 		return parent::init_atts($template_id, $atts);
 	}
 	

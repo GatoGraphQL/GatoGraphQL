@@ -881,8 +881,14 @@ window.popManager = {
 		var blockBranches = jsSettings['initjs-blockbranches'];
 		if (blockBranches) {
 
-			var branches = $(blockBranches.join(',')).not('.'+M.JS_INITIALIZED);
-			that.initBlockBranches(domain, pageSection, branches, priority, options);
+			blockBranches = $(blockBranches.join(','));
+			if (priority != M.PROGRESSIVEBOOTING.NONCRITICAL) {
+				blockBranches = blockBranches.not('.'+M.JS_INITIALIZED);
+			}
+			else {
+				blockBranches = blockBranches.filter('.'+M.CRITICALJS_INITIALIZED);
+			}
+			that.initBlockBranches(domain, pageSection, blockBranches, priority, options);
 		}
 
 		// Delete the session ids at the end of the rendering, but not for 'critical', since we will be executing 'noncritical' immediately after
@@ -986,10 +992,14 @@ window.popManager = {
 		var that = this;
 		return block.hasClass(M.CLASS_LAZYJS);
 	},
-	setJsInitialized : function(block) {
+	setJsInitialized : function(block, priority) {
 
 		var that = this;
 		block.addClass(M.JS_INITIALIZED).removeClass(M.CLASS_LAZYJS);
+		if (priority == M.PROGRESSIVEBOOTING.CRITICAL) {
+
+			block.addClass(M.CRITICALJS_INITIALIZED);
+		}
 	},
 
 	initBlockBranches : function(domain, pageSection, blocks, priority, options) {
@@ -1008,7 +1018,10 @@ window.popManager = {
 			// Ask if it is already initialized or not. This is needed because, otherwise, when opening a tabpane inside of a tabpane,
 			// the initialization of leaves in the last level will happen more than once
 
-			var proceed = !that.jsInitialized(block);
+			var proceed = true;
+			if (priority != M.PROGRESSIVEBOOTING.NONCRITICAL) {
+				proceed = !that.jsInitialized(block);
+			}
 
 			// If the block is lazy initialize, do not initialize first (eg: modals, they are initialized when first shown)
 			// force-init: disregard if it's lazy or not: explicitly initialize it
@@ -1021,23 +1034,24 @@ window.popManager = {
 			// after it gets rendered appending new DOMs
 			if (proceed) {
 
-				// // For priority = 'critical' do not set as initialized, since we will execute immediately after the 'noncritical' batch
-				// // If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
-				// if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
+				// // // For priority = 'critical' do not set as initialized, since we will execute immediately after the 'noncritical' batch
+				// // // If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
+				// if (priority != M.PROGRESSIVEBOOTING.NONCRITICAL) {
 					
-				// 	that.setJsInitialized(block);
+				// 	that.initializeBlock(block);
 				// }
 
 				// For priority = 'noncritical', no need to initialize, since the block has already been initialized during 'critical'
 				// If Progressive Booting is not enabled, then priority will be null, so no need to worry about this
 				if (priority != M.PROGRESSIVEBOOTING.NONCRITICAL) {
 
+					// that.initializeBlock(block);
 					that.initBlock(domain, pageSection, block, priority, options);
 				}
 				else {
 
-					// Set the block as initialized
-					that.initializeBlock(pageSection, block, priority, options);
+					// // Set the block as initialized
+					// that.initializeBlock(block);
 
 					// Directly run the 'noncritical' JS methods, which otherwise is done in initBlock
 					popJSRuntimeManager.setBlockURL(block/*block.data('toplevel-url')*/);
@@ -1047,7 +1061,15 @@ window.popManager = {
 				var jsSettings = that.getJsSettings(domain, pageSection, block);
 				var blockBranches = jsSettings['initjs-blockbranches'];
 				if (blockBranches) {
-					that.initBlockBranches(domain, pageSection, $(blockBranches.join(', ')).not('.'+M.JS_INITIALIZED), priority, options);
+
+					blockBranches = $(blockBranches.join(', '));
+					if (priority != M.PROGRESSIVEBOOTING.NONCRITICAL) {
+						blockBranches = blockBranches.not('.'+M.JS_INITIALIZED);
+					}
+					else {
+						blockBranches = blockBranches.filter('.'+M.CRITICALJS_INITIALIZED);
+					}
+					that.initBlockBranches(domain, pageSection, blockBranches, priority, options);
 				}
 				var blockChildren = jsSettings['initjs-blockchildren'];
 				if (blockChildren) {
@@ -1056,7 +1078,13 @@ window.popManager = {
 					$.each(blockChildren, function(index, selectors) {
 						$.each(selectors, function(index, selector) {
 
-							target = target.children(selector).not('.'+M.JS_INITIALIZED);
+							target = target.children(selector);
+							if (priority != M.PROGRESSIVEBOOTING.NONCRITICAL) {
+								target = target.not('.'+M.JS_INITIALIZED);
+							}
+							else {
+								target = target.filter('.'+M.CRITICALJS_INITIALIZED);
+							}
 						});
 					});
 					that.initBlockBranches(domain, pageSection, target, priority, options);
@@ -1069,17 +1097,21 @@ window.popManager = {
 
 		var that = this;
 		options = options || {};
+
+		// // Allow scripts and others to perform certain action after the runtimeMemory was generated
+		// // If it is critical don't do it yet, since the noncritical will trigger this instead
+		// // if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
+		// that.initializeBlock(block);
+		// // }
 		
 		// Do an extend of $options, so that the same object is not used for initializing 2 different blocks.
 		// Eg: we don't to change the options.url on the same object for newRuntimePage. That could lead to 2 different blocks using the same URL,
 		// it happens when doing openTabs with more than 2 tabs, it does it so quick that the calendar on the right all point to the same URL
 		that.initBlockRuntimeMemory(domain, pageSection, block, $.extend({}, options));
 
-		// Allow scripts and others to perform certain action after the runtimeMemory was generated
-		// If it is critical don't do it yet, since the noncritical will trigger this instead
-		if (priority != M.PROGRESSIVEBOOTING.CRITICAL) {
-			that.initializeBlock(pageSection, block, priority, options);
-		}
+		// Comment Leo 09/12/2017: IMPORTANT: Place this function after initializing the block runtime memory above,
+		// so that doing block.one('initialize') in .tmpl files (such as em-calendar-inner.tmpl) to access the internal memory works
+		that.initializeBlock(block, priority);
 
 		that.runScriptsBefore(pageSection, block);
 		that.runBlockJSMethods(domain, pageSection, block, priority, options);
@@ -1109,11 +1141,11 @@ window.popManager = {
 		that.loadBlockContent(domain, pageSection, block);
 	},
 
-	initializeBlock : function(pageSection, block, options) {
+	initializeBlock : function(block, priority) {
 	
 		var that = this;
 
-		that.setJsInitialized(block);
+		that.setJsInitialized(block, priority);
 
 		// var args = {
 		// 	pageSection: pageSection,
@@ -1174,7 +1206,7 @@ window.popManager = {
 
 			var options = {
 				action: M.CBACTION_LOADCONTENT,
-				'post-data': block.data('post-data')
+				'post-data': block.data('post-data'),
 			};
 
 			// Show disabled layer?
@@ -2923,6 +2955,8 @@ window.popManager = {
 						// var status = {
 						// 	timestamp: timestamp,
 						// };
+						var action = blockQueryState.action[loadingUrl];
+						status.action = action;
 
 						var loadingUrl = blockQueryState.url[jqXHR.url];
 						delete blockQueryState.url[jqXHR.url];

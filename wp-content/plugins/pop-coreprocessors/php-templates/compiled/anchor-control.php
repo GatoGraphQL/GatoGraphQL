@@ -1,5 +1,5 @@
 <?php
- function lcr59cd19c6bff0ehbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr5a2ad104dacd5hbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -39,10 +39,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr59cd19c6bff0em($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr5a2ad104dacd5m($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr59cd19c6bff0em($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr5a2ad104dacd5m($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -71,22 +71,22 @@
    };
   }
 
-  return lcr59cd19c6bff0eexch($cx, $ch, $vars, $options);
+  return lcr5a2ad104dacd5exch($cx, $ch, $vars, $options);
  }
 
- function lcr59cd19c6bff0eencq($cx, $var) {
+ function lcr5a2ad104dacd5encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19c6bff0eraw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2ad104dacd5raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd19c6bff0eifvar($cx, $v, $zero) {
+ function lcr5a2ad104dacd5ifvar($cx, $v, $zero) {
   return ($v !== null) && ($v !== false) && ($zero || ($v !== 0) && ($v !== 0.0)) && ($v !== '') && (is_array($v) ? (count($v) > 0) : true);
  }
 
- function lcr59cd19c6bff0esec($cx, $v, $bp, $in, $each, $cb, $else = null) {
+ function lcr5a2ad104dacd5sec($cx, $v, $bp, $in, $each, $cb, $else = null) {
   $push = ($in !== $v) || $each;
 
   $isAry = is_array($v) || ($v instanceof \ArrayObject);
@@ -139,10 +139,10 @@
      $i++;
     }
     if (isset($bp[0])) {
-     $raw = lcr59cd19c6bff0em($cx, $raw, array($bp[0] => $raw));
+     $raw = lcr5a2ad104dacd5m($cx, $raw, array($bp[0] => $raw));
     }
     if (isset($bp[1])) {
-     $raw = lcr59cd19c6bff0em($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
+     $raw = lcr5a2ad104dacd5m($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
     }
     $ret[] = $cb($cx, $raw);
    }
@@ -195,7 +195,7 @@
   return '';
  }
 
- function lcr59cd19c6bff0ehbch($cx, $ch, $vars, $op, &$_this) {
+ function lcr5a2ad104dacd5hbch($cx, $ch, $vars, $op, &$_this) {
   if (isset($cx['blparam'][0][$ch])) {
    return $cx['blparam'][0][$ch];
   }
@@ -212,10 +212,10 @@
    $options['data'] = $cx['sp_vars'];
   }
 
-  return lcr59cd19c6bff0eexch($cx, $ch, $vars, $options);
+  return lcr5a2ad104dacd5exch($cx, $ch, $vars, $options);
  }
 
- function lcr59cd19c6bff0eraw($cx, $v, $ex = 0) {
+ function lcr5a2ad104dacd5raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -239,7 +239,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd19c6bff0eraw($cx, $vv);
+      $ret[] = lcr5a2ad104dacd5raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -251,7 +251,7 @@
   return "$v";
  }
 
- function lcr59cd19c6bff0em($cx, $a, $b) {
+ function lcr5a2ad104dacd5m($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -266,7 +266,7 @@
   return $a;
  }
 
- function lcr59cd19c6bff0eexch($cx, $ch, $vars, &$options) {
+ function lcr5a2ad104dacd5exch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -279,13 +279,13 @@
   }
 
   if($e !== null) {
-   lcr59cd19c6bff0eerr($cx, $e);
+   lcr5a2ad104dacd5err($cx, $e);
   }
 
   return $r;
  }
 
- function lcr59cd19c6bff0eerr($cx, $err) {
+ function lcr5a2ad104dacd5err($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -410,8 +410,8 @@ return function ($in = null, $options = null) {
     );
     
     $inary=is_array($in);
-    ob_start();echo '<a ',lcr59cd19c6bff0ehbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' href="',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['href'])) ? $in['href'] : null)),'" role="button" class="',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" style="',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" title="',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['label'])) ? $in['label'] : null)),'" ';if (lcr59cd19c6bff0eifvar($cx, (($inary && isset($in['target'])) ? $in['target'] : null), false)){echo 'target="',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['target'])) ? $in['target'] : null)),'"';}else{echo '';}echo ' ',lcr59cd19c6bff0esec($cx, (($inary && isset($in['params'])) ? $in['params'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr59cd19c6bff0eencq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="',lcr59cd19c6bff0eencq($cx, $in),'"';}),' ',lcr59cd19c6bff0esec($cx, (($inary && isset($in['blockfeedback-params'])) ? $in['blockfeedback-params'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr59cd19c6bff0eencq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="',lcr59cd19c6bff0eencq($cx, lcr59cd19c6bff0ehbch($cx, 'get', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['bs']) && isset($cx['scopes'][count($cx['scopes'])-1]['bs']['feedback'])) ? $cx['scopes'][count($cx['scopes'])-1]['bs']['feedback'] : null),$in),array()), 'encq', $in)),'"';}),' ',lcr59cd19c6bff0esec($cx, (($inary && isset($in['previoustemplates-ids'])) ? $in['previoustemplates-ids'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr59cd19c6bff0eencq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="#',lcr59cd19c6bff0eencq($cx, lcr59cd19c6bff0ehbch($cx, 'lastGeneratedId', array(array(),array('context'=>$cx['scopes'][count($cx['scopes'])-1],'template'=>$in)), 'encq', $in)),'"';}),'>
-	';if (lcr59cd19c6bff0eifvar($cx, (($inary && isset($in['make-title'])) ? $in['make-title'] : null), false)){echo '<h4>';}else{echo '';}echo '';if (lcr59cd19c6bff0eifvar($cx, (($inary && isset($in['icon'])) ? $in['icon'] : null), false)){echo '<span class="glyphicon ',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['icon'])) ? $in['icon'] : null)),'"></span> ';}else{echo '';}echo '';if (lcr59cd19c6bff0eifvar($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null), false)){echo '<i class="fa fa-fw ',lcr59cd19c6bff0eencq($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null)),'"></i>';}else{echo '';}echo '';if (lcr59cd19c6bff0eifvar($cx, (($inary && isset($in['text'])) ? $in['text'] : null), false)){echo '<span class="',lcr59cd19c6bff0eencq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['text'])) ? $in['classes']['text'] : null)),'" style="',lcr59cd19c6bff0eencq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['text'])) ? $in['styles']['text'] : null)),'">',lcr59cd19c6bff0eraw($cx, (($inary && isset($in['text'])) ? $in['text'] : null)),'</span>';}else{echo '';}echo '';if (lcr59cd19c6bff0eifvar($cx, (($inary && isset($in['make-title'])) ? $in['make-title'] : null), false)){echo '</h4>';}else{echo '';}echo '
+    ob_start();echo '<a ',lcr5a2ad104dacd5hbbch($cx, 'generateId', array(array(),array()), $in, false, function($cx, $in) {$inary=is_array($in);echo '',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'';}),' href="',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['href'])) ? $in['href'] : null)),'" role="button" class="',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['class'])) ? $in['class'] : null)),'" style="',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['style'])) ? $in['style'] : null)),'" title="',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['label'])) ? $in['label'] : null)),'" ';if (lcr5a2ad104dacd5ifvar($cx, (($inary && isset($in['target'])) ? $in['target'] : null), false)){echo 'target="',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['target'])) ? $in['target'] : null)),'"';}else{echo '';}echo ' ',lcr5a2ad104dacd5sec($cx, (($inary && isset($in['params'])) ? $in['params'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr5a2ad104dacd5encq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="',lcr5a2ad104dacd5encq($cx, $in),'"';}),' ',lcr5a2ad104dacd5sec($cx, (($inary && isset($in['blockfeedback-params'])) ? $in['blockfeedback-params'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr5a2ad104dacd5encq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="',lcr5a2ad104dacd5encq($cx, lcr5a2ad104dacd5hbch($cx, 'get', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]['bs']) && isset($cx['scopes'][count($cx['scopes'])-1]['bs']['feedback'])) ? $cx['scopes'][count($cx['scopes'])-1]['bs']['feedback'] : null),$in),array()), 'encq', $in)),'"';}),' ',lcr5a2ad104dacd5sec($cx, (($inary && isset($in['previoustemplates-ids'])) ? $in['previoustemplates-ids'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo ' ',lcr5a2ad104dacd5encq($cx, (isset($cx['sp_vars']['key']) ? $cx['sp_vars']['key'] : null)),'="#',lcr5a2ad104dacd5encq($cx, lcr5a2ad104dacd5hbch($cx, 'lastGeneratedId', array(array(),array('context'=>$cx['scopes'][count($cx['scopes'])-1],'template'=>$in)), 'encq', $in)),'"';}),'>
+	';if (lcr5a2ad104dacd5ifvar($cx, (($inary && isset($in['make-title'])) ? $in['make-title'] : null), false)){echo '<h4>';}else{echo '';}echo '';if (lcr5a2ad104dacd5ifvar($cx, (($inary && isset($in['icon'])) ? $in['icon'] : null), false)){echo '<span class="glyphicon ',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['icon'])) ? $in['icon'] : null)),'"></span> ';}else{echo '';}echo '';if (lcr5a2ad104dacd5ifvar($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null), false)){echo '<i class="fa fa-fw ',lcr5a2ad104dacd5encq($cx, (($inary && isset($in['fontawesome'])) ? $in['fontawesome'] : null)),'"></i>';}else{echo '';}echo '';if (lcr5a2ad104dacd5ifvar($cx, (($inary && isset($in['text'])) ? $in['text'] : null), false)){echo '<span class="',lcr5a2ad104dacd5encq($cx, ((isset($in['classes']) && is_array($in['classes']) && isset($in['classes']['text'])) ? $in['classes']['text'] : null)),'" style="',lcr5a2ad104dacd5encq($cx, ((isset($in['styles']) && is_array($in['styles']) && isset($in['styles']['text'])) ? $in['styles']['text'] : null)),'">',lcr5a2ad104dacd5raw($cx, (($inary && isset($in['text'])) ? $in['text'] : null)),'</span>';}else{echo '';}echo '';if (lcr5a2ad104dacd5ifvar($cx, (($inary && isset($in['make-title'])) ? $in['make-title'] : null), false)){echo '</h4>';}else{echo '';}echo '
 </a>';return ob_get_clean();
 };
 ?>

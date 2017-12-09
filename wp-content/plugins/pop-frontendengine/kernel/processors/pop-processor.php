@@ -955,6 +955,7 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		// 		$priority => $methods,
 		// 	)
 		// ));
+		$group = $group ? $group : GD_JSMETHOD_GROUP_MAIN;
 		$this->merge_iterate_key_att($template_id, $atts, $target_key, array(
 			$group => $methods,
 		));

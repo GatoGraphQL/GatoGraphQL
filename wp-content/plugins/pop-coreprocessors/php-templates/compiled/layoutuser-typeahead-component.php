@@ -1,13 +1,13 @@
 <?php
- function lcr59cd19f218d54encq($cx, $var) {
+ function lcr5a2ad13803551encq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr59cd19f218d54raw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2ad13803551raw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr59cd19f218d54raw($cx, $v, $ex = 0) {
+ function lcr5a2ad13803551raw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -31,7 +31,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr59cd19f218d54raw($cx, $vv);
+      $ret[] = lcr5a2ad13803551raw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -145,10 +145,10 @@ return function ($in = null, $options = null) {
     $inary=is_array($in);
     ob_start();echo '<div class="media clearfix">
 	<div class="media-left">
-		<img width="',lcr59cd19f218d54encq($cx, ((isset($in['avatar-40']) && is_array($in['avatar-40']) && isset($in['avatar-40']['size'])) ? $in['avatar-40']['size'] : null)),'" height="',lcr59cd19f218d54encq($cx, ((isset($in['avatar-40']) && is_array($in['avatar-40']) && isset($in['avatar-40']['size'])) ? $in['avatar-40']['size'] : null)),'" src="',lcr59cd19f218d54encq($cx, ((isset($in['avatar-40']) && is_array($in['avatar-40']) && isset($in['avatar-40']['src'])) ? $in['avatar-40']['src'] : null)),'">
+		<img width="',lcr5a2ad13803551encq($cx, ((isset($in['avatar-40']) && is_array($in['avatar-40']) && isset($in['avatar-40']['size'])) ? $in['avatar-40']['size'] : null)),'" height="',lcr5a2ad13803551encq($cx, ((isset($in['avatar-40']) && is_array($in['avatar-40']) && isset($in['avatar-40']['size'])) ? $in['avatar-40']['size'] : null)),'" src="',lcr5a2ad13803551encq($cx, ((isset($in['avatar-40']) && is_array($in['avatar-40']) && isset($in['avatar-40']['src'])) ? $in['avatar-40']['src'] : null)),'">
 	</div>
 	<div class="media-body">
-		<h4 class="media-heading">',lcr59cd19f218d54raw($cx, (($inary && isset($in['display-name'])) ? $in['display-name'] : null)),'</h4>
+		<h4 class="media-heading">',lcr5a2ad13803551raw($cx, (($inary && isset($in['display-name'])) ? $in['display-name'] : null)),'</h4>
 	</div>
 </div>';return ob_get_clean();
 };

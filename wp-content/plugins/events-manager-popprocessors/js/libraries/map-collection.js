@@ -87,6 +87,7 @@ window.popMapCollection = {
 		var markerIds = popMap.getMarkerIdsFromLinkURLs(link);
 		// mapDiv.data('marker-ids', markerIds);
 		mapDiv.data('marker-ids-'+removeScheme(domain), markerIds);
+		mapDiv.data('domains', [domain]);
 	},
 
 	

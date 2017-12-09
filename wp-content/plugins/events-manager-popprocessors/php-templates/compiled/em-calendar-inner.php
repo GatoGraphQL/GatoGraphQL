@@ -1,5 +1,5 @@
 <?php
- function lcr5a29073c024dbsec($cx, $v, $bp, $in, $each, $cb, $else = null) {
+ function lcr5a2c0012a8dbbsec($cx, $v, $bp, $in, $each, $cb, $else = null) {
   $push = ($in !== $v) || $each;
 
   $isAry = is_array($v) || ($v instanceof \ArrayObject);
@@ -52,10 +52,10 @@
      $i++;
     }
     if (isset($bp[0])) {
-     $raw = lcr5a29073c024dbm($cx, $raw, array($bp[0] => $raw));
+     $raw = lcr5a2c0012a8dbbm($cx, $raw, array($bp[0] => $raw));
     }
     if (isset($bp[1])) {
-     $raw = lcr5a29073c024dbm($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
+     $raw = lcr5a2c0012a8dbbm($cx, $raw, array($bp[1] => $cx['sp_vars']['index']));
     }
     $ret[] = $cb($cx, $raw);
    }
@@ -108,7 +108,7 @@
   return '';
  }
 
- function lcr5a29073c024dbhbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
+ function lcr5a2c0012a8dbbhbbch($cx, $ch, $vars, &$_this, $inverted, $cb, $else = null) {
   $options = array(
    'name' => $ch,
    'hash' => $vars[1],
@@ -148,10 +148,10 @@
     $ex = $cx['blparam'][0];
    }
    if (($context === '_NO_INPUT_HERE_') || ($context === $_this)) {
-    $ret = $cb($cx, is_array($ex) ? lcr5a29073c024dbm($cx, $_this, $ex) : $_this);
+    $ret = $cb($cx, is_array($ex) ? lcr5a2c0012a8dbbm($cx, $_this, $ex) : $_this);
    } else {
     $cx['scopes'][] = $_this;
-    $ret = $cb($cx, is_array($ex) ? lcr5a29073c024dbm($cx, $context, $ex) : $context);
+    $ret = $cb($cx, is_array($ex) ? lcr5a2c0012a8dbbm($cx, $context, $ex) : $context);
     array_pop($cx['scopes']);
    }
    if (isset($data['data'])) {
@@ -180,18 +180,18 @@
    };
   }
 
-  return lcr5a29073c024dbexch($cx, $ch, $vars, $options);
+  return lcr5a2c0012a8dbbexch($cx, $ch, $vars, $options);
  }
 
- function lcr5a29073c024dbencq($cx, $var) {
+ function lcr5a2c0012a8dbbencq($cx, $var) {
   if ($var instanceof LS) {
    return (string)$var;
   }
 
-  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a29073c024dbraw($cx, $var), ENT_QUOTES, 'UTF-8'));
+  return str_replace(array('=', '`', '&#039;'), array('&#x3D;', '&#x60;', '&#x27;'), htmlspecialchars(lcr5a2c0012a8dbbraw($cx, $var), ENT_QUOTES, 'UTF-8'));
  }
 
- function lcr5a29073c024dbm($cx, $a, $b) {
+ function lcr5a2c0012a8dbbm($cx, $a, $b) {
   if (is_array($b)) {
    if ($a === null) {
     return $b;
@@ -206,7 +206,7 @@
   return $a;
  }
 
- function lcr5a29073c024dbexch($cx, $ch, $vars, &$options) {
+ function lcr5a2c0012a8dbbexch($cx, $ch, $vars, &$options) {
   $args = $vars[0];
   $args[] = $options;
   $e = null;
@@ -219,13 +219,13 @@
   }
 
   if($e !== null) {
-   lcr5a29073c024dberr($cx, $e);
+   lcr5a2c0012a8dbberr($cx, $e);
   }
 
   return $r;
  }
 
- function lcr5a29073c024dbraw($cx, $v, $ex = 0) {
+ function lcr5a2c0012a8dbbraw($cx, $v, $ex = 0) {
   if ($ex) {
    return $v;
   }
@@ -249,7 +249,7 @@
     } else {
      $ret = array();
      foreach ($v as $k => $vv) {
-      $ret[] = lcr5a29073c024dbraw($cx, $vv);
+      $ret[] = lcr5a2c0012a8dbbraw($cx, $vv);
      }
      return join(',', $ret);
     }
@@ -261,7 +261,7 @@
   return "$v";
  }
 
- function lcr5a29073c024dberr($cx, $err) {
+ function lcr5a2c0012a8dbberr($cx, $err) {
   if ($cx['flags']['debug'] & $cx['constants']['DEBUG_ERROR_LOG']) {
    error_log($err);
    return;
@@ -380,18 +380,21 @@ return function ($in = null, $options = null) {
 (function($){
 	var events_data = [];
 	
-',lcr5a29073c024dbsec($cx, (($inary && isset($in['items'])) ? $in['items'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr5a29073c024dbhbbch($cx, 'withItemObject', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['itemDBKey'])) ? $cx['scopes'][count($cx['scopes'])-1]['itemDBKey'] : null),$in),array('context'=>$cx['scopes'][count($cx['scopes'])-1])), $in, false, function($cx, $in) {$inary=is_array($in);echo '			events_data.push({
-				id: "',lcr5a29073c024dbencq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'",
-				title: "',lcr5a29073c024dbencq($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'",
-				start: "',lcr5a29073c024dbencq($cx, (($inary && isset($in['start-date'])) ? $in['start-date'] : null)),'",
-				end: "',lcr5a29073c024dbencq($cx, (($inary && isset($in['end-date'])) ? $in['end-date'] : null)),'",
-				allDay: ',lcr5a29073c024dbencq($cx, (($inary && isset($in['all-day-string'])) ? $in['all-day-string'] : null)),',
-				domain: "',lcr5a29073c024dbencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]['tls']) && isset($cx['scopes'][count($cx['scopes'])-2]['tls']['domain'])) ? $cx['scopes'][count($cx['scopes'])-2]['tls']['domain'] : null)),'", 
-				className: "',lcr5a29073c024dbencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]['tls']) && isset($cx['scopes'][count($cx['scopes'])-2]['tls']['domain-id'])) ? $cx['scopes'][count($cx['scopes'])-2]['tls']['domain-id'] : null)),'",
+',lcr5a2c0012a8dbbsec($cx, (($inary && isset($in['items'])) ? $in['items'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);echo '',lcr5a2c0012a8dbbhbbch($cx, 'withItemObject', array(array(((isset($cx['scopes'][count($cx['scopes'])-1]) && is_array($cx['scopes'][count($cx['scopes'])-1]) && isset($cx['scopes'][count($cx['scopes'])-1]['itemDBKey'])) ? $cx['scopes'][count($cx['scopes'])-1]['itemDBKey'] : null),$in),array('context'=>$cx['scopes'][count($cx['scopes'])-1])), $in, false, function($cx, $in) {$inary=is_array($in);echo '			events_data.push({
+				id: "',lcr5a2c0012a8dbbencq($cx, (($inary && isset($in['id'])) ? $in['id'] : null)),'",
+				title: "',lcr5a2c0012a8dbbencq($cx, (($inary && isset($in['title'])) ? $in['title'] : null)),'",
+				start: "',lcr5a2c0012a8dbbencq($cx, (($inary && isset($in['start-date'])) ? $in['start-date'] : null)),'",
+				end: "',lcr5a2c0012a8dbbencq($cx, (($inary && isset($in['end-date'])) ? $in['end-date'] : null)),'",
+				allDay: ',lcr5a2c0012a8dbbencq($cx, (($inary && isset($in['all-day-string'])) ? $in['all-day-string'] : null)),',
+				domain: "',lcr5a2c0012a8dbbencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]['tls']) && isset($cx['scopes'][count($cx['scopes'])-2]['tls']['domain'])) ? $cx['scopes'][count($cx['scopes'])-2]['tls']['domain'] : null)),'", 
+				className: "',lcr5a2c0012a8dbbencq($cx, ((isset($cx['scopes'][count($cx['scopes'])-2]) && is_array($cx['scopes'][count($cx['scopes'])-2]['tls']) && isset($cx['scopes'][count($cx['scopes'])-2]['tls']['domain-id'])) ? $cx['scopes'][count($cx['scopes'])-2]['tls']['domain-id'] : null)),'",
 			});
 ';}),'';}),'
-	$(document).ready(function($) {
-		popFullCalendarAddEvents.addEvents(\'',lcr5a29073c024dbencq($cx, ((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['bId'])) ? $in['bs']['bId'] : null)),'\', events_data);
+	$(document).one(\'template:merged\', function() {
+
+		var block = popManager.getBlock($(\'#',lcr5a2c0012a8dbbencq($cx, ((isset($in['bs']) && is_array($in['bs']) && isset($in['bs']['bId'])) ? $in['bs']['bId'] : null)),'\'));
+		var pageSection = popManager.getPageSection(block);
+		popFullCalendarAddEvents.addEvents(pageSection, block, events_data);
 	});
 	
 })(jQuery);
