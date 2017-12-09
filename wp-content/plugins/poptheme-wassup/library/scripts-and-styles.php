@@ -136,3 +136,30 @@ function get_wassup_loggedin_domain_styles_placeholder($placeholder) {
 			';
 	return $placeholder;
 }
+
+/**---------------------------------------------------------------------------------------------------------------
+ * preloading fonts
+ * ---------------------------------------------------------------------------------------------------------------*/
+if (!is_admin()) {
+	add_action( 'wp_head', 'pop_header_preloadfonts');
+}
+function pop_header_preloadfonts() {
+
+	// It is 2 levels down from file "wp-content/plugins/poptheme-wassup/css/libraries/custom.bootstrap.css",
+	// or its PROD version "wp-content/plugins/poptheme-wassup/css/dist/libraries/custom.bootstrap.min.css"
+	$font_url = PoP_Frontend_ServerUtils::use_minified_resources() ?
+		POPTHEME_WASSUP_URI.'/css/fonts/Rockwell.ttf' :
+		POPTHEME_WASSUP_URI.'/fonts/Rockwell.ttf';
+	printf(
+		'<link rel="preload" href="%s" as "font" crossorigin>', 
+		$font_url
+	);
+
+	$fontawesome_url = PoP_Frontend_ServerUtils::access_externalcdn_resources() ?
+		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0' :
+		POPTHEME_WASSUP_URI.'/css/fonts/fontawesome-webfont.woff2?v=4.7.0';
+	printf(
+		'<link rel="preload" href="%s" as "font" crossorigin type="font/woff2">', 
+		$fontawesome_url
+	);
+}
