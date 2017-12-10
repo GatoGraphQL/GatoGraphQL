@@ -461,6 +461,16 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
+			$pageblocks_carousels = array(
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_FEATURED  => GD_TEMPLATE_BLOCK_AUTHORFEATURED_CAROUSEL,
+			);
+			foreach ($pageblocks_carousels as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_CAROUSEL] = $block;
+
+				if ($default_format_authorsection == GD_TEMPLATEFORMAT_CAROUSEL) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
 			// $pageblocks_map = array(
 			// 	POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_LOCATIONPOSTS  => GD_TEMPLATE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP,
 			// );
@@ -536,6 +546,16 @@ class PoPTheme_Wassup_SectionProcessors_Template_SettingsProcessor extends GD_Te
 				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_LIST] = $block;
 
 				if ($default_format_section == GD_TEMPLATEFORMAT_LIST) {
+					$ret[$page]['blocks']['default'] = $block;
+				}
+			}
+			$pageblocks_carousels = array(
+				POPTHEME_WASSUP_SECTIONPROCESSORS_PAGE_FEATURED  => GD_TEMPLATE_BLOCK_TAGFEATURED_CAROUSEL,
+			);
+			foreach ($pageblocks_carousels as $page => $block) {
+				$ret[$page]['blocks'][GD_TEMPLATEFORMAT_CAROUSEL] = $block;
+
+				if ($default_format_section == GD_TEMPLATEFORMAT_CAROUSEL) {
 					$ret[$page]['blocks']['default'] = $block;
 				}
 			}
