@@ -84,8 +84,8 @@ class GD_URE_Template_Processor_CustomScrollInners extends GD_Template_Processor
 			case GD_TEMPLATE_SCROLLINNER_AUTHORMEMBERS_THUMBNAIL:
 
 				return array(
-					'row-items' => 4, 
-					'class' => 'col-xsm-3'
+					'row-items' => 3, 
+					'class' => 'col-xsm-4'
 				);
 
 			case GD_TEMPLATE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW:

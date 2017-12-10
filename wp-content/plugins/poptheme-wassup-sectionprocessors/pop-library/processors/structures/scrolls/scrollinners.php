@@ -158,7 +158,6 @@ class GD_Custom_Template_Processor_CustomScrollInners extends GD_Template_Proces
 			// case GD_TEMPLATE_SCROLLINNER_BLOG_THUMBNAIL:
 
 			case GD_TEMPLATE_SCROLLINNER_WHOWEARE_ADVISORS:
-			case GD_TEMPLATE_SCROLLINNER_WHOWEARE_VOLUNTEERS:
 
 				// Allow ThemeStyle Expansive to override the grid
 				return apply_filters(
@@ -166,6 +165,17 @@ class GD_Custom_Template_Processor_CustomScrollInners extends GD_Template_Proces
 					array(
 						'row-items' => 2, 
 						'class' => 'col-xsm-6'
+					)
+				);
+
+			case GD_TEMPLATE_SCROLLINNER_WHOWEARE_VOLUNTEERS:
+
+				// Allow ThemeStyle Expansive to override the grid
+				return apply_filters(
+					POP_HOOK_SCROLLINNER_THUMBNAIL_GRID, 
+					array(
+						'row-items' => 3, 
+						'class' => 'col-xsm-4'
 					)
 				);
 
