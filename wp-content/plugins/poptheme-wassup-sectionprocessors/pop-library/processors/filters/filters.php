@@ -17,6 +17,7 @@ define ('GD_TEMPLATE_FILTER_TAGSTORIES', PoP_TemplateIDUtils::get_template_defin
 define ('GD_TEMPLATE_FILTER_BLOG', PoP_TemplateIDUtils::get_template_definition('filter-blog'));
 define ('GD_TEMPLATE_FILTER_DISCUSSIONS', PoP_TemplateIDUtils::get_template_definition('filter-discussions'));
 define ('GD_TEMPLATE_FILTER_FEATURED', PoP_TemplateIDUtils::get_template_definition('filter-featured'));
+define ('GD_TEMPLATE_FILTER_AUTHORFEATURED', PoP_TemplateIDUtils::get_template_definition('filter-authorfeatured'));
 define ('GD_TEMPLATE_FILTER_TAGFEATURED', PoP_TemplateIDUtils::get_template_definition('filter-tagfeatured'));
 define ('GD_TEMPLATE_FILTER_LOCATIONPOSTS', PoP_TemplateIDUtils::get_template_definition('filter-locationposts'));
 define ('GD_TEMPLATE_FILTER_STORIES', PoP_TemplateIDUtils::get_template_definition('filter-stories'));
@@ -43,6 +44,7 @@ class GD_Custom_Template_Processor_CustomFilters extends GD_Template_Processor_F
 			GD_TEMPLATE_FILTER_AUTHORDISCUSSIONS,
 			GD_TEMPLATE_FILTER_TAGDISCUSSIONS,
 			GD_TEMPLATE_FILTER_FEATURED,
+			GD_TEMPLATE_FILTER_AUTHORFEATURED,
 			GD_TEMPLATE_FILTER_TAGFEATURED,
 			GD_TEMPLATE_FILTER_BLOG,
 			GD_TEMPLATE_FILTER_MYLOCATIONPOSTS,
@@ -68,6 +70,7 @@ class GD_Custom_Template_Processor_CustomFilters extends GD_Template_Processor_F
 			GD_TEMPLATE_FILTER_AUTHORDISCUSSIONS => GD_TEMPLATE_FILTERINNER_AUTHORDISCUSSIONS,
 			GD_TEMPLATE_FILTER_TAGDISCUSSIONS => GD_TEMPLATE_FILTERINNER_TAGDISCUSSIONS,
 			GD_TEMPLATE_FILTER_FEATURED => GD_TEMPLATE_FILTERINNER_FEATURED,
+			GD_TEMPLATE_FILTER_AUTHORFEATURED => GD_TEMPLATE_FILTERINNER_AUTHORFEATURED,
 			GD_TEMPLATE_FILTER_TAGFEATURED => GD_TEMPLATE_FILTERINNER_TAGFEATURED,
 			GD_TEMPLATE_FILTER_BLOG => GD_TEMPLATE_FILTERINNER_BLOG,
 			GD_TEMPLATE_FILTER_MYLOCATIONPOSTS => GD_TEMPLATE_FILTERINNER_MYLOCATIONPOSTS,
