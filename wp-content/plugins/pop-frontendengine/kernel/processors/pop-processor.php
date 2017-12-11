@@ -158,7 +158,7 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		return $this->get_template_cb($template_id, $atts);
 	}
 	
-	function is_dynamic_template_source($template_id, $atts) {
+	function is_dynamic_template($template_id, $atts) {
 	
 		// By default: does it have a path?
 		return $this->get_template_path($template_id, $atts);
@@ -166,7 +166,7 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 	
 	function get_currentlevel_dynamic_templates_sources($template_id, $atts) {
 	
-		if ($this->is_dynamic_template_source($template_id, $atts)) {
+		if ($this->is_dynamic_template($template_id, $atts)) {
 
 			return array_unique(array_values($this->get_templates_sources($template_id, $atts)));
 		}
@@ -274,6 +274,41 @@ class GD_Template_ProcessorBase extends PoP_ProcessorBase {
 		}
 		
 		return $ret;
+	}
+
+	function get_dynamic_templates_resources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		// If the template path has been set to true, then from this template downwards all templates are dynamic
+		$ret = $this->get_currentlevel_dynamic_templates_resources($template_id, $atts);
+		
+		// If not, then keep iterating down the road
+		if (empty($ret)) {
+
+			foreach ($this->get_modulecomponents($template_id) as $component) {
+					
+				if ($component_ret = $gd_template_processor_manager->get_processor($component)->get_dynamic_templates_resources($component, $atts)) {
+				
+					$ret = array_unique(array_merge(
+						$ret,
+						$component_ret
+					));
+				}
+			}
+		}
+		
+		return $ret;
+	}
+	
+	function get_currentlevel_dynamic_templates_resources($template_id, $atts) {
+	
+		if ($this->is_dynamic_template($template_id, $atts)) {
+
+			return array_values(array_unique(array_flatten(array_values($this->get_templates_resources($template_id, $atts)))));
+		}
+
+		return array();
 	}
 
 	function get_templates_cbs($template_id, $atts) {

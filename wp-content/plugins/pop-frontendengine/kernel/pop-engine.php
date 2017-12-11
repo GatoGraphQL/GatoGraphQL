@@ -298,16 +298,31 @@ class PoPFrontend_Engine extends PoP_Engine {
 				global $gd_template_memorymanager;
 
 				// Check if results are already on the cache
-				$dynamic_template_sources = $gd_template_memorymanager->get_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, true);
+				$dynamic_template_sources = $gd_template_memorymanager->get_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATESOURCES, true);
 				if (!$dynamic_template_sources) {
 
 					// If not, calculate the values now...
 					$dynamic_template_sources = $processor->get_dynamic_templates_sources($template_id, $atts);
 					
 					// And store them on the cache
-					$gd_template_memorymanager->store_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_sources, true);
+					$gd_template_memorymanager->store_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATESOURCES, $dynamic_template_sources, true);
 				}
 				$json_sitemapping['dynamic-template-sources'] = $dynamic_template_sources;
+
+				if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
+					
+					// Check if results are already on the cache
+					$dynamic_template_resources = $gd_template_memorymanager->get_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, true);
+					if (!$dynamic_template_resources) {
+
+						// If not, calculate the values now...
+						$dynamic_template_resources = $processor->get_dynamic_templates_resources($template_id, $atts);
+						
+						// And store them on the cache
+						$gd_template_memorymanager->store_cache_by_template_id($template_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_resources, true);
+					}
+					$json_sitemapping['dynamic-template-resources'] = $dynamic_template_resources;
+				}
 
 				// Also save the value to be used by `is_defer`
 				// if (/*!doing_post() && */PoP_ServerUtils::use_cache()) {

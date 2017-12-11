@@ -194,7 +194,7 @@ class PoPFrontend_Template_Processor_TopLevelsBase extends GD_Template_Processor
 		return $ret;
 	}
 	
-	function is_dynamic_template_source($template_id, $atts) {
+	function is_dynamic_template($template_id, $atts) {
 	
 		return false;
 	}
@@ -271,6 +271,29 @@ class PoPFrontend_Template_Processor_TopLevelsBase extends GD_Template_Processor
 				$ret,
 				$gd_template_processor_manager->get_processor($module)->get_templates_resources($module, $module_atts)
 			);
+		}
+		
+		return $ret;
+	}
+
+	function get_dynamic_templates_resources($template_id, $atts) {
+	
+		global $gd_template_processor_manager;
+
+		// If the template path has been set to true, then from this template downwards all templates are dynamic
+		$ret = $this->get_currentlevel_dynamic_templates_resources($template_id, $atts);
+		
+		// If not, then keep iterating down the road
+		if (empty($ret)) {
+		
+			foreach ($this->get_modules($template_id) as $module) {
+			
+				$module_atts = $atts[$module];
+				$ret = array_unique(array_merge(
+					$ret,
+					$gd_template_processor_manager->get_processor($module)->get_dynamic_templates_resources($module, $module_atts)
+				));
+			}
 		}
 		
 		return $ret;

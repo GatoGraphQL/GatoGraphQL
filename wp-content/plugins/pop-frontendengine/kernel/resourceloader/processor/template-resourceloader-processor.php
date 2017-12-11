@@ -71,7 +71,7 @@ class PoP_TemplateResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor 
 			// global $pop_resourceloader_resourcecachemanager;
 			// $dynamic_template_sources = $pop_resourceloader_resourcecachemanager->get_dynamic_template_sources($vars_hash_id);
 			global $gd_template_memorymanager;
-			if ($dynamic_template_sources = $gd_template_memorymanager->get_cache($vars_hash_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, true)) {
+			if ($dynamic_template_sources = $gd_template_memorymanager->get_cache($vars_hash_id, POP_MEMORYTYPE_DYNAMICTEMPLATESOURCES, true)) {
 				
 				// Comment Leo 20/11/2017: taking a very aggressive approach: make all templates be deferred,
 				// unless they are inside a dynamic component (this could also be made deferred, but to be on the safe side,

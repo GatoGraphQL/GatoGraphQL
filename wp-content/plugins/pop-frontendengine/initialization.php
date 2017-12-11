@@ -337,8 +337,41 @@ class PoPFrontend_Initialization {
 					'popResourceLoader["loaded-in-body"] = %s;',
 					json_encode($popResourceLoader->loadedInBody)
 				);
-			}
 
+				// Comment Leo 11/12/2017: get the dynamic templates resources, and print already their source and type, since
+				// this information will be needed if including those resources in the body when initializing a lazy-load block
+				$engine = PoP_Engine_Factory::get_instance();
+				$json = $engine->resultsObject['json'];
+				if ($dynamic_template_resources = $json['sitemapping']['dynamic-template-resources']) {
+
+					global $pop_resourceloaderprocessor_manager;
+					$dynamic_template_resourcesources = $dynamic_template_resourcetypes = array();
+					foreach ($dynamic_template_resources as $resource) {
+
+						// Source
+						$dynamic_template_resourcesources[$resource] = $pop_resourceloaderprocessor_manager->get_file_url($resource, true);
+
+						// Type
+						$resourcetype = $pop_resourceloaderprocessor_manager->get_processor($resource)->get_type($resource);
+						$dynamic_template_resourcetypes[$resourcetype][] = $resource;
+					}
+					
+					$this->scripts[] = sprintf(
+						'popResourceLoader.config["%s"].sources = %s',
+						get_site_url(),
+						json_encode($dynamic_template_resourcesources)
+					);
+					foreach ($dynamic_template_resourcetypes as $resourcetype => $resourcetype_resources) {
+						
+						$this->scripts[] = sprintf(
+							'popResourceLoader.config["%s"].types["%s"] = %s',
+							get_site_url(),
+							$resourcetype,
+							json_encode($resourcetype_resources)
+						);
+					}
+				}
+			}
 			
 			// Comment Leo 07/10/2017: it makes no sense to send the bundle(group) ids, because these ids
 			// are different to the ones in the generated files
@@ -350,7 +383,7 @@ class PoPFrontend_Initialization {
 				$bundle_group_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundlegroup_ids();
 				$bundle_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundle_ids();
 				$this->scripts[] = sprintf(
-					'popResourceLoader["loaded-by-domain"]["%s"] = %s',
+					'popResourceLoader["loaded-by-domain"]["%s"] = %s;',
 					get_site_url(),
 					json_encode(array(
 						'bundles' => $bundle_ids,

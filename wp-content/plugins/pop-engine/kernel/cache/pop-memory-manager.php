@@ -6,6 +6,7 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('POP_MEMORYTYPE_NONCRITICALRESOURCES', 'noncritical-resources');
+define ('POP_MEMORYTYPE_DYNAMICTEMPLATESOURCES', 'dynamic-template-sources');
 define ('POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES', 'dynamic-template-resources');
 
 class GD_Template_MemoryManager extends GD_Template_CacheManagerBase {

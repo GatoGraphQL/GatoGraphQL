@@ -23,7 +23,7 @@ class GD_Template_Processor_TypeaheadComponentFormComponentsBase extends GD_Temp
 	}
 
 	// Comment Leo 31/10/2017: the components will be rendered dynamically, yet they don't have a path, so in this case simply return true always for them
-	function is_dynamic_template_source($template_id, $atts) {
+	function is_dynamic_template($template_id, $atts) {
 	
 		return true;
 	}

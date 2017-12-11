@@ -758,7 +758,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // It will be needed from there when doing `function is_defer($resource, $vars_hash_id)`
         if ($dynamic_template_sources = array_values(array_unique(array_flatten(array_values($toplevel_processor->get_dynamic_templates_sources($toplevel_template_id, $toplevel_atts)))))) {
             global $gd_template_memorymanager;
-            $gd_template_memorymanager->store_cache($vars_hash_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_sources, true);
+            $gd_template_memorymanager->store_cache($vars_hash_id, POP_MEMORYTYPE_DYNAMICTEMPLATESOURCES, $dynamic_template_sources, true);
         }
 
         // Get the list of methods that will be called in that pageSection, to obtain, later on, what JS resources are needed 
