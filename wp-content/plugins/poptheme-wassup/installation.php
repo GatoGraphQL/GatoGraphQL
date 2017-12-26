@@ -22,6 +22,9 @@ class PoPTheme_Wassup_Installation {
 		// PoP FrontendEngine AWS
 		$plugin_version['pop-frontendengine-aws'] = POPTHEME_WASSUP_PLUGINACTIVATION_FRONTENDENGINEAWS_VERSION;
 
+		// Disable REST API
+		$plugin_version['disable-json-api'] = POPTHEME_WASSUP_PLUGINACTIVATION_DISABLERESTAPI_VERSION;
+
 		// Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
 		$version = pop_version();
 		foreach ($plugin_version as $plugin => $activate_version) {
