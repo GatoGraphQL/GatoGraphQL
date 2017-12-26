@@ -129,6 +129,21 @@ class GD_Template_Processor_LoginBlocks extends GD_Template_Processor_BlocksBase
 		return parent::get_description($template_id, $atts);
 	}
 
+	protected function get_iohandler($template_id) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_BLOCK_LOGIN:
+			case GD_TEMPLATE_BLOCK_LOSTPWD:
+			case GD_TEMPLATE_BLOCK_LOSTPWDRESET:
+			case GD_TEMPLATE_BLOCK_LOGOUT:
+
+				return GD_DATALOAD_IOHANDLER_FORM;
+		}
+	
+		return parent::get_iohandler($template_id);
+	}
+
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
