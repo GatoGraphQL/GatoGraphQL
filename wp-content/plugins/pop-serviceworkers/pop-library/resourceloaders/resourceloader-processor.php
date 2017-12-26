@@ -155,6 +155,7 @@ class PoP_ServiceWorkers_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 
 		switch ($resource) {
 
+			case POP_RESOURCELOADER_SWREGISTRAR:
 			case POP_RESOURCELOADER_SWINITIAL:
 				
 				return false;

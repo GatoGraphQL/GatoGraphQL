@@ -7,9 +7,10 @@ class PoPFrontend_Installation {
 
 		// CSS to Styles: generate the database
 		$pop_frontend_conversiongenerator->generate();
-		
+
 		// Code splitting: extract all the mappings of functions calling other functions from all the .js files
 		$pop_frontend_resourceloader_mappinggenerator->generate();
+
 	}
 
 	function system_generate_theme() {

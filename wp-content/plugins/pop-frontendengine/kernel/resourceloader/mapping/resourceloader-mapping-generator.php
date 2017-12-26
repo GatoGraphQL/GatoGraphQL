@@ -19,7 +19,7 @@ class PoP_Frontend_ResourceLoaderMappingGenerator extends PoP_Engine_FileGenerat
 		$mapping = array();
 
 		// Get all the .js files from all the plugins
-		$resources = apply_filters('PoP_Frontend_ResourceLoaderMappingManager:resources', array());
+		$resources = array_filter(apply_filters('PoP_Frontend_ResourceLoaderMappingManager:resources', array()));
 		$jsObjects = array();
 
 		$fileContents = '';

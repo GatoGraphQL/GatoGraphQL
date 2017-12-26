@@ -49,6 +49,19 @@ class PoP_UserAvatar_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcess
 		return parent::get_file_url($resource);
 	}
 	
+	function can_bundle($resource) {
+
+		switch ($resource) {
+
+			// Can't bundle this file, since bundles are common to all locales
+			case POP_RESOURCELOADER_FILEUPLOADLOCALE:
+				
+				return false;
+		}
+	
+		return parent::can_bundle($resource);
+	}
+	
 	function get_suffix($resource) {
 
 		switch ($resource) {

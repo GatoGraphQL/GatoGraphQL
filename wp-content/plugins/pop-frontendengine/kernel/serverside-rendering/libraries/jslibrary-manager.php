@@ -50,7 +50,7 @@ class PoP_ServerSide_JSLibraryManager {
 			for ($index = 0; $index<count($libraries); $index++) {
 
 				$library = $libraries[$index];
-				$ret['l'+$index] = $library->$method($args);
+				$ret['l'.$index] = $library->$method($args);
 			}
 		}
 

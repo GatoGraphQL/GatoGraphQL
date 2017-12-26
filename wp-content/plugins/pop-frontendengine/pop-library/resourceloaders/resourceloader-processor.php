@@ -241,7 +241,9 @@ class PoP_FrontEnd_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 
 		switch ($resource) {
 			
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG:
 			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_RESOURCES:
+			case POP_RESOURCELOADER_RESOURCELOADERCONFIG_INITIALRESOURCES:
 
 				return false;
 		}
