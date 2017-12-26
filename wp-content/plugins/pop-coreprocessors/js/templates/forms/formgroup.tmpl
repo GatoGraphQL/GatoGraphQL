@@ -1,4 +1,4 @@
-<div class="template-form-group {{class}}" style="{{style}}">
+<div {{#generateId}}{{id}}{{/generateId}} class="template-form-group {{class}}" style="{{style}}">
 	{{#withModule . "component"}}
 		{{#if ../label}}
 			<label class="{{../classes.label}}" style="{{../styles.label}}" for="{{name}}">{{{../label}}}</label>
