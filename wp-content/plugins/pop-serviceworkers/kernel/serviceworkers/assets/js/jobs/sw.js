@@ -19,6 +19,7 @@ var config = {
     full: $excludedFullPaths,
     partial: $excludedPartialPaths
   },
+  excludedParams: $excludedParams,
   appshell: {
     pages: $appshellPages,
     params: {
@@ -181,7 +182,8 @@ self.addEventListener('fetch', event => {
       isNotExternalDomain: opts.multidomains.indexOf(url.origin) == -1,
       isGETRequest: request.method === 'GET',
       // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com)
-      isFromMyOriginsOrPrecached: (opts.origins.indexOf(url.origin) > -1 || opts.cacheItems[resourceType].indexOf(url) > -1)
+      isFromMyOriginsOrPrecached: (opts.origins.indexOf(url.origin) > -1 || opts.cacheItems[resourceType].indexOf(url) > -1),
+      doesNotHaveParams: stripIgnoredUrlParameters(request.url, opts.excludedParams[resourceType]) == request.url
     };
 
     var failingCriteria = Object.keys(criteria).filter(criteriaKey => !criteria[criteriaKey]);

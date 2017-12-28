@@ -79,11 +79,12 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         );
 
         $resourceTypes = array('static', 'json', 'html');
-        $configuration['$excludedFullPaths'] = $configuration['$excludedPartialPaths'] = $configuration['$cacheItems'] = $configuration['$strategies'] = array();
+        $configuration['$excludedFullPaths'] = $configuration['$excludedPartialPaths'] = $configuration['$excludedParams'] = $configuration['$cacheItems'] = $configuration['$strategies'] = array();
         foreach ($resourceTypes as $resourceType) {
 
-            $configuration['$excludedFullPaths'][$resourceType] = array_unique($this->get_excluded_fullpaths($resourceType));
-            $configuration['$excludedPartialPaths'][$resourceType] = array_unique($this->get_excluded_partialpaths($resourceType));
+            $configuration['$excludedFullPaths'][$resourceType] = array_unique(array_filter($this->get_excluded_fullpaths($resourceType)));
+            $configuration['$excludedPartialPaths'][$resourceType] = array_unique(array_filter($this->get_excluded_partialpaths($resourceType)));
+            $configuration['$excludedParams'][$resourceType] = array_unique(array_filter($this->get_excluded_params($resourceType)));
             $configuration['$cacheItems'][$resourceType] = array_values(array_unique($this->get_precache_list($resourceType)));
             $configuration['$strategies'][$resourceType] = $this->get_strategies($resourceType);
             $configuration['$ignore'][$resourceType] = $this->get_ignored_params($resourceType);
@@ -153,18 +154,18 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $ignore = array();
         if ($resourceType == 'json') {
 
-            // Hook in the paths to include
-            // All the layout loaders (eg: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) belong here
-            // It can be resolved to all silent_document pages without a checkpoint
-            return apply_filters(
-                'PoP_ServiceWorkers_Job_Fetch:ignoredparams:'.$resourceType,
-                array(
-                    GD_URLPARAM_SWNETWORKFIRST,
-                )
+            $ignore = array(
+                GD_URLPARAM_SWNETWORKFIRST,
             );
         }
 
-        return $ignore;
+        // Hook in the paths to include
+        // All the layout loaders (eg: POP_WPAPI_PAGE_LOADERS_POSTS_LAYOUTS) belong here
+        // It can be resolved to all silent_document pages without a checkpoint
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:ignoredparams:'.$resourceType,
+            $ignore
+        );
     }
 
     protected function get_strategies($resourceType) {
@@ -199,6 +200,24 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         }
 
         return $strategies;
+    }
+
+    protected function get_excluded_params($resourceType) {
+
+        $excluded = array();
+        if ($resourceType == 'json') {
+
+            $excluded = array(
+                // Do not cache when the URL has the timestamp, or otherwise the cache grows incredibly big with the loadLatest
+                GD_URLPARAM_TIMESTAMP,
+            );
+        }
+
+        // Hook in the params to exclude
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:exclude-params:'.$resourceType,
+            $excluded
+        );
     }
 
     // protected function get_offline_image() {
