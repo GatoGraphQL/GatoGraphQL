@@ -35,37 +35,38 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration = parent::get_sw_configuration();
 
         // Add a string before the version, since starting with a number makes trouble
-        $configuration['$version'] = 'PoP-'.pop_version();
-        $configuration['$homeDomain'] = get_site_url();
-        // $configuration['$offlineImage'] = $this->get_offline_image();
-        // $configuration['$offlinePages'] = $this->get_offline_pages();
-        $configuration['$appshellPages'] = $this->get_appshell_pages();
-        $configuration['$appshellPrecachedParams'] = array(
+        $configuration['${cacheNamePrefix}'] = 'PoP';
+        $configuration['${version}'] = (string)pop_version();
+        $configuration['${homeDomain}'] = get_site_url();
+        // $configuration['${contentDomain}'] = $this->get_content_domains();
+        $configuration['${appshellPages}'] = $this->get_appshell_pages();
+        $configuration['${appshellPrecachedParams}'] = array(
             'theme' => GD_URLPARAM_THEME,
             'thememode' => GD_URLPARAM_THEMEMODE,
         );
-        $configuration['$appshellFromServerParams'] = array(
+        $configuration['${appshellFromServerParams}'] = array(
             GD_URLPARAM_THEMESTYLE,
             GD_URLPARAM_FORMAT, // Initially, this is a proxy for GD_URLPARAM_SETTINGSFORMAT
             // Comment Leo 09/11/2017: removed param "mangled" because it can't be used anymore on "loading-frame", since the website depends on configuration generated through /generate-theme/, which depends on the value of the template-definition
             // GD_URLPARAM_MANGLED,
         );
-        $configuration['$localesByURL'] = $this->get_locales_byurl();
-        $configuration['$defaultLocale'] = $this->get_default_locale();
-        $configuration['$outputJSON'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
-        $configuration['$origins'] = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
+        $configuration['${localesByURL}'] = $this->get_locales_byurl();
+        $configuration['${defaultLocale}'] = $this->get_default_locale();
+        $configuration['${versionParam}'] = GD_URLPARAM_VERSION;
+        $configuration['${outputJSON}'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
+        $configuration['${origins}'] = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
         // Remove the localhost from the multidomains, or the SW won't cache anything at all
         // $homeurl = get_site_url();
         // $multidomains = array_keys(PoP_MultiDomain_Utils::get_multidomain_websites());
         // array_splice($multidomains, array_search($homeurl, $multidomains), 1);
         // $configuration['$multidomains'] = $multidomains;
-        $configuration['$multidomains'] = $this->get_multidomains();
-        $configuration['$cacheBustParam'] = GD_URLPARAM_SWCACHEBUST;
+        $configuration['${multidomains}'] = $this->get_multidomains();
+        $configuration['${cacheBustParam}'] = GD_URLPARAM_SWCACHEBUST;
 
         // Thememodes for the appshell
         global $gd_theme_manager;
         $theme = $gd_theme_manager->get_theme();
-        $configuration['$themes'] = array(
+        $configuration['${themes}'] = array(
             // 'params' => array(
             //     'theme' => GD_URLPARAM_THEME,
             //     'thememode' => GD_URLPARAM_THEMEMODE,
@@ -79,22 +80,22 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         );
 
         $resourceTypes = array('static', 'json', 'html');
-        $configuration['$excludedFullPaths'] = $configuration['$excludedPartialPaths'] = $configuration['$excludedParams'] = $configuration['$cacheItems'] = $configuration['$strategies'] = array();
+        $configuration['${excludedFullPaths}'] = $configuration['${excludedPartialPaths}'] = $configuration['${excludedParams}'] = $configuration['${cacheItems}'] = $configuration['${strategies}'] = $configuration['${ignore}'] = array();
         foreach ($resourceTypes as $resourceType) {
 
-            $configuration['$excludedFullPaths'][$resourceType] = array_unique(array_filter($this->get_excluded_fullpaths($resourceType)));
-            $configuration['$excludedPartialPaths'][$resourceType] = array_unique(array_filter($this->get_excluded_partialpaths($resourceType)));
-            $configuration['$excludedParams'][$resourceType] = array_unique(array_filter($this->get_excluded_params($resourceType)));
-            $configuration['$cacheItems'][$resourceType] = array_values(array_unique($this->get_precache_list($resourceType)));
-            $configuration['$strategies'][$resourceType] = $this->get_strategies($resourceType);
-            $configuration['$ignore'][$resourceType] = $this->get_ignored_params($resourceType);
+            $configuration['${excludedFullPaths}'][$resourceType] = array_unique(array_filter($this->get_excluded_fullpaths($resourceType)));
+            $configuration['${excludedPartialPaths}'][$resourceType] = array_unique(array_filter($this->get_excluded_partialpaths($resourceType)));
+            $configuration['${excludedParams}'][$resourceType] = array_unique(array_filter($this->get_excluded_params($resourceType)));
+            $configuration['${cacheItems}'][$resourceType] = array_values(array_unique($this->get_precache_list($resourceType)));
+            $configuration['${strategies}'][$resourceType] = $this->get_strategies($resourceType);
+            $configuration['${ignore}'][$resourceType] = $this->get_ignored_params($resourceType);
         }
 
         // These values will be overriden in wp-content/plugins/pop-serviceworkers/plugins/pop-cdn-core/library/serviceworkers/sw-hooks.php,
         // but must declare here the empty values so that, if the plug-in is not activated, it still replaces those values in service-worker.js
-        $configuration['$contentCDNOriginalDomain'] = get_site_url();
-        $configuration['$contentCDNDomain'] = '';
-        $configuration['$contentCDNParams'] = array();
+        $configuration['${contentCDNOriginalDomain}'] = get_site_url();
+        $configuration['${contentCDNDomain}'] = '';
+        $configuration['${contentCDNParams}'] = array();
         
         // Allow to hook the CDN configuration
         $configuration = apply_filters('PoP_ServiceWorkers_Job_SW:configuration', $configuration);
@@ -303,6 +304,17 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             $locale
         );
     }
+
+    // protected function get_content_domains() {
+        
+    //     // Allow to hook in https://content.getpop.org
+    //     return apply_filters(
+    //         'PoP_ServiceWorkers_Job_Fetch:content_domains',
+    //         array(
+    //             get_site_url(),
+    //         )
+    //     );
+    // }
 
     protected function get_appshell_pages() {
         

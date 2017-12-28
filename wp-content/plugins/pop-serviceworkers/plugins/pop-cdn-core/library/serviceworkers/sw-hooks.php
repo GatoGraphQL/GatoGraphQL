@@ -21,8 +21,8 @@ class PoP_ServiceWorkers_CDN_Hooks {
         // Fill default empty values, so that the corresponding $variables in sw.js get replaced
         if (POP_CDN_CONTENT_URI) {
             
-            $configuration['$contentCDNDomain'] = POP_CDN_CONTENT_URI;
-            $configuration['$contentCDNParams'] = array(
+            $configuration['${contentCDNDomain}'] = POP_CDN_CONTENT_URI;
+            $configuration['${contentCDNParams}'] = array(
                 GD_URLPARAM_CDNTHUMBPRINT,
                 // POP_CDNCORE_URLPARAM_VERSION,
             );

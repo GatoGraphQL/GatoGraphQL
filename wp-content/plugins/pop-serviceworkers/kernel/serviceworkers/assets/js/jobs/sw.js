@@ -10,50 +10,52 @@ const SW_STRATEGIES_CACHEFIRSTTHENNETWORKTHENREFRESH = 3;
 const SW_STRATEGIES_NETWORKFIRSTTHENCACHE = 4;
 
 var config = {
-  version: $version,
+  cacheNamePrefix: ${cacheNamePrefix},
+  version: ${version},
   domains: {
-    home: $homeDomain,
+    home: ${homeDomain},
   },
-  cacheItems: $cacheItems,
+  cacheItems: ${cacheItems},
   excludedPaths: {
-    full: $excludedFullPaths,
-    partial: $excludedPartialPaths
+    full: ${excludedFullPaths},
+    partial: ${excludedPartialPaths}
   },
-  excludedParams: $excludedParams,
+  excludedParams: ${excludedParams},
   appshell: {
-    pages: $appshellPages,
+    pages: ${appshellPages},
     params: {
-      precached: $appshellPrecachedParams,
-      fromserver: $appshellFromServerParams
+      precached: ${appshellPrecachedParams},
+      fromserver: ${appshellFromServerParams}
     }
   },
   locales: {
-    all: $localesByURL,
-    default: $defaultLocale,
+    all: ${localesByURL},
+    default: ${defaultLocale},
     current: null,
     domain: null
   },
-  themes: $themes,
-  outputJSON: $outputJSON,
-  origins: $origins,
-  multidomains: $multidomains,
-  strategies: $strategies,
-  ignore: $ignore,
+  themes: ${themes},
+  outputJSON: ${outputJSON},
+  versionParam: ${versionParam},
+  origins: ${origins},
+  multidomains: ${multidomains},
+  strategies: ${strategies},
+  ignore: ${ignore},
   params: {
-    cachebust: $cacheBustParam
+    cachebust: ${cacheBustParam}
   },
   contentCDN: {
-    params: $contentCDNParams,
+    params: ${contentCDNParams},
     domains: {
-      cdn: $contentCDNDomain,
-      original: $contentCDNOriginalDomain
+      cdn: ${contentCDNDomain},
+      original: ${contentCDNOriginalDomain}
     }
   },
   previousRequestURLs: {}
 };
 
 function cacheName(key, opts) {
-  return `${opts.version}-${key}`;
+  return `${opts.cacheNamePrefix}-${opts.version}-${key}`;
 }
 
 /**
@@ -146,7 +148,7 @@ self.addEventListener('activate', event => {
     var p1 = localforage.clear(); // Delete all ETag entries in the DB
     var p2 = caches.keys()
       .then(cacheKeys => {
-        var oldCacheKeys = cacheKeys.filter(key => !key.startsWith(opts.version));
+        var oldCacheKeys = cacheKeys.filter(key => !key.startsWith(opts.cacheNamePrefix+'-'+opts.version));
         var deletePromises = oldCacheKeys.map(oldKey => caches.delete(oldKey));
         return Promise.all(deletePromises);
       });
@@ -193,12 +195,19 @@ self.addEventListener('fetch', event => {
     }
 
     // resourceType-specific criteria
+    var params = {};
+    if (resourceType == 'json') {
+      params = getParams(request.url);
+    }
     var resourceTypeCriteria = {
       'html': {
         // For 'html' case: make sure it doesn't have output=JSON, because in that case, we're trying to see the JSON on the browser, then no need to use the appshell
         isNotInitialJSON: request.url.indexOf(opts.outputJSON) === -1
       },
-      'json': {},
+      'json': {
+        // For 'json' case: if requesting a JSON URL with a different version than the current app version, then do not cache it. This may happen when transitioning between versions, so that cached views in localStorage will request files from the previous version, before these are re-fetched for the new version
+        isNotFromDifferentAppVersion: !params[opts.versionParam] || params[opts.versionParam] == opts.version 
+      },
       'static': {
         // Do not handla dynamic images, eg: the Captcha: wp-content/plugins/pop-coreprocessors/library/captcha/captcha.png.php
         isNotDynamic: !request.url.endsWith('.php') && request.url.indexOf('.php?') === -1
