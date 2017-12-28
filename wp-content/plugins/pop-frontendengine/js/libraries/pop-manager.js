@@ -42,6 +42,7 @@ window.popManager = {
 	firstLoad : {},
 	documentTitle : null, // We keep a copy of the document title, so we can add the notification number in it
 	domains : {}, // Keep a list of all domains, so we know when to initialize them
+	loaded : false, // Flag indicating if the document has loaded, needed for operations that need to wait until then to execute
 
 	//-------------------------------------------------
 	// PUBLIC but NOT EXPOSED functions
@@ -486,9 +487,12 @@ window.popManager = {
 			// so it is not possible to have "defer" scripts with function documentInitialized
 			that.documentInitialized(domain);
 
-			// // If the server requested to extra load more URLs
-			// that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
-			// that.backgroundLoad(topLevelFeedback[M.URLPARAM_BACKGROUNDLOADURLS]); // Data to be loaded from server (eg: forceserverload_fields)
+			// If the server requested to extra load more URLs
+			// Comment Leo 28/12/2017: backgroundLoad will execute later, after the page has loaded
+			// This way, we bring forward the "Time to interactive", for all those functionalities that the user can see/is waiting for
+			// The backgroundLoad can be prioritized lower (the /loggedinuser-data/ page, brought thru backgroundLoad, would be nice to bring immediately, but is a tradeoff; application views can certainly wait)
+			that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
+			that.backgroundLoad(background_load_urls); // Data to be loaded from server (eg: forceserverload_fields)
 
 			// Progressive booting: Execute the non-critical JS functions
 			window.addEventListener('load', function() {
@@ -506,12 +510,6 @@ window.popManager = {
 						that.initPageSectionBranches(domain, pageSection, M.PROGRESSIVEBOOTING.NONCRITICAL, options);
 					});
 				}
-
-				// Comment Leo 20/11/2017: execute backgroundLoad only now, after the page has loaded
-				// This way, we bring forward the "Time to interactive", for all those functionalities that the user can see/is waiting for
-				// The backgroundLoad can be prioritized lower (the /loggedinuser-data/ page, brought thru backgroundLoad, would be nice to bring immediately, but is a tradeoff; application views can certainly wait)
-				that.backgroundLoad(M.BACKGROUND_LOAD); // Initialization of modules (eg: Modals, Addons)
-				that.backgroundLoad(background_load_urls); // Data to be loaded from server (eg: forceserverload_fields)
 			});
 		}
 	},
@@ -735,6 +733,9 @@ window.popManager = {
 	
 		var that = this;
 
+		// Change flag to say that the document is loaded
+		that.loaded = true;
+
 		var args = {
 			domain: domain,
 		};
@@ -743,6 +744,7 @@ window.popManager = {
 		// For `documentInitialized` it can execute above, since scripts containing that function will not be loaded as non-critical
 		popJSLibraryManager.execute('documentInitializedIndependent', args/*, true*/);
 		popJSLibraryManager.execute('documentLoaded', args);
+		$(document).triggerHandler('loaded.pop.document');
 	},
 
 	pageSectionFetchSuccess : function(pageSection, response, options) {
@@ -767,6 +769,23 @@ window.popManager = {
 	},
 
 	backgroundLoad : function(urls) {
+	
+		var that = this;
+
+		// BackgroundLoad: execute only after the document is loaded. Then, resources.js will be loaded by then,
+		// and we need not fear that the URLs fetched will not know what resources they must fetch.
+		// Also, it bring Time-to-interactive forward, since the URLs fetched through backgroundLoad are secondary to the experience
+		if (that.loaded) {
+			that.execBackgroundLoad(urls);
+		}
+		else {
+			$(document).on('loaded.pop.document', function() {
+				that.execBackgroundLoad(urls);
+			});
+		}
+	},
+
+	execBackgroundLoad : function(urls) {
 	
 		var that = this;
 
