@@ -59,7 +59,7 @@ window.popAddEditPost = {
 		if (blockFeedback.result === true) {
 
 			// If it was successful, execute the destroyPageOnUserLoggedOut function on it
-			popEventReactions.execDestroyPageOnUserLoggedOut(domain, block);
+			popEventReactionsUserState.execDestroyPageOnUserLoggedOut(domain, block);
 		}
 		else {
 
