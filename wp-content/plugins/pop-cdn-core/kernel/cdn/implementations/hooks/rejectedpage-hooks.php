@@ -29,10 +29,13 @@ class PoP_CDNCore_RejectedPageHooks {
         // All the files with a checkpoint must not be cached
         global $gd_template_settingsprocessor_manager;
         foreach ($gd_template_settingsprocessor_manager->get_processors() as $settingsprocessor) {
+            
+            $internals = $settingsprocessor->is_for_internal_use(GD_SETTINGS_HIERARCHY_PAGE);
             foreach ($settingsprocessor->get_checkpoints(GD_SETTINGS_HIERARCHY_PAGE) as $page => $settings) {
 
                 // The ID might've not been defined for that page (eg: Projects in TPP Debate), so skip it
-                if (!$page) continue;
+                // Skip also if it is an internal page, we don't want to expose it
+                if (!$page || $internals[$page]) continue;
                 if (in_array($settings['type'], $dynamic_types)) {
                 
                     $rejected[] = trailingslashit(GD_TemplateManager_Utils::get_page_path($page));
