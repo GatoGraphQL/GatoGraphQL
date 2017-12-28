@@ -661,7 +661,7 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 			if ($type == GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER) {
 				return null;
 			}
-			if ((doing_post() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER) {
+			if ((doing_post() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATELESS) {
 
 				return $type;
 			}

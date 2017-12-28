@@ -13,6 +13,7 @@ define ('GD_DATALOAD_VALIDATECHECKPOINTS', 'validate-checkpoints');
 // But this doesn't happen with "Create new Event", there's nothing to refetch in this case
 define ('GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC', 'static');
 define ('GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER', 'datafromserver');
+define ('GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATELESS', 'stateless');
 define ('GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER', 'datafromserver-novalidation');
 
 // add_filter('gd_jquery_constants', 'gd_jquery_constants_checkpointiohandler');

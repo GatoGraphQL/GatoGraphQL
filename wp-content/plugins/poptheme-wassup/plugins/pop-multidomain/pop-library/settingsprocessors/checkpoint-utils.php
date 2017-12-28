@@ -19,10 +19,13 @@ class Wassup_MultiDomain_SettingsProcessor_CheckpointUtils {
 				'checkpoints' => array(
 					GD_DATALOAD_CHECKPOINT_DOMAINVALID,
 				),
-				// Adding type DataFromServer, so that the blockgroup (GD_TEMPLATE_BLOCKGROUP_INITIALIZEDOMAIN) 
+				// Adding type StateLess, so that the blockgroup (GD_TEMPLATE_BLOCKGROUP_INITIALIZEDOMAIN) 
 				// will have the right value of $block_checkpointvalidation_failed, in pop-engine.php, 
 				// if the checkpoint fails, and it doesn't execute adding backgroundload-urls
-				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER
+				// Can't add type GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER because then it will also bring the user state,
+				// which we don't want for page /initialize-domain/ since it produces bugs (eg: in GetPoP, the user can't be automatically logged-in
+				// by calling /loggedinuser-data/ since that page may never be called) and it makes the page non-cacheable
+				'type' => GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATELESS
 			);
 
 			switch ($name) {

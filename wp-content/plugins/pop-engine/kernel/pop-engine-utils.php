@@ -73,6 +73,8 @@ class GD_TemplateManager_Utils {
 		$checkpoint_settings = $gd_template_settingsmanager->get_page_checkpoints();
 		$type = $checkpoint_settings['type'];
 		$checkpoints = $checkpoint_settings['checkpoints'];
+
+		// Please notice: we do NOT add GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATELESS. For these cases, there is no need to bring the "user" info in the topLevelFeedback
 		return (doing_post() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER || $type == GD_DATALOAD_NOCHECKPOINTVALIDATION_TYPE_DATAFROMSERVER;
 	}
 
