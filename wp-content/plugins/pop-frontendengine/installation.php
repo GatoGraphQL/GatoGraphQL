@@ -25,10 +25,14 @@ class PoPFrontend_Installation {
 			global $pop_resourceloader_generatedfilesmanager;
 			$pop_resourceloader_generatedfilesmanager->delete();
 			
-			global $pop_resourceloader_configfile_generator, $pop_resourceloader_resources_configfile_generator, $pop_resourceloader_initialresources_configfile_generator, $pop_resourceloader_hierarchyformatcombinationresources_configfile_generator;
+			global $pop_resourceloader_configfile_generator, $pop_resourceloader_resources_configfile_generator/*, $pop_resourceloader_initialresources_configfile_generator*/, $pop_resourceloader_hierarchyformatcombinationresources_configfile_generator;
 			$pop_resourceloader_configfile_generator->generate();
 			$pop_resourceloader_resources_configfile_generator->generate();
-			$pop_resourceloader_initialresources_configfile_generator->generate();
+			
+			// Comment Leo 20/11/2017: since making the backgroundLoad execute in window.addEventListener('load', function() {,
+			// we can just wait to load resources.js, so no need for initialresources.js anymore
+			// $pop_resourceloader_initialresources_configfile_generator->generate();
+
 			$pop_resourceloader_hierarchyformatcombinationresources_configfile_generator->generate();
 
 	        // Important: run these 2 functions below at the end, so by then we will have created all dynamic resources (eg: initialresources.js)
