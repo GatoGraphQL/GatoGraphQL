@@ -2153,7 +2153,11 @@ window.popManager = {
 
 		// Check if a response is stored in local storage for that combination of URL and params
 		localStorageKey = fetchUrl+'|'+postData;
-		var stored = that.getStoredData(localStorageKey);
+		// Only use localStorage for the local domain (getpop.org/content.getpop.org), not for external ones (agendaurbana.org, etc)
+		// This is needed to:
+		// 1. Save space in localStorage
+		// 2. Avoid saving a page (eg: add comment) which has the external domain version parameter, which we can't control in the local app, so we can't ignore those JSON URLs in SW
+		var stored = (domain == M.HOME_DOMAIN) ? that.getStoredData(localStorageKey) : false;
 		if (stored) {
 
 			that.prePageSectionSuccess(pageSection, stored, options);
@@ -2262,7 +2266,8 @@ window.popManager = {
 				// Important: execute this before calling "processPageSectionResponse" below, since this function alters the response
 				// by adding "parent-context" and "root-context" making the object circular, upon which JSON.stringify fails
 				// ("Uncaught TypeError: Converting circular structure to JSON")
-				if (response.feedback.toplevel[M.URLPARAM_STORELOCAL]) {
+				// Store only for local domain
+				if (response.feedback.toplevel[M.URLPARAM_STORELOCAL] && domain == M.HOME_DOMAIN) {
 						
 					that.storeData(localStorageKey, response);
 				}
