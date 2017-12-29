@@ -4,5 +4,6 @@
 // Load Plugin-specific Libraries
 //-------------------------------------------------------------------------------------
 
-require_once 'library/load.php';
-require_once 'plugins/load.php';
+if (defined('POP_AWS_VERSION')) {
+	require_once 'pop-aws/load.php';
+}

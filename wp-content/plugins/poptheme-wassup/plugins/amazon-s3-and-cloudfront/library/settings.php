@@ -3,8 +3,8 @@
 //-------------------------------------------------------------------------------------
 // Allow to hardcode the settings, so no need to input them as options in the DB
 //-------------------------------------------------------------------------------------
-add_filter('aws_get_setting', 'ripess_aws_get_setting', 10, 2);
-function ripess_aws_get_setting($setting, $key) {
+add_filter('aws_get_setting', 'wassup_aws_get_setting', 10, 2);
+function wassup_aws_get_setting($setting, $key) {
 
 	// What bucket (ripess, ripess-dev)
 	if ($key == 'bucket' && defined('POPTHEME_WASSUP_AWS_OFFLOADS3_BUCKET')) {
