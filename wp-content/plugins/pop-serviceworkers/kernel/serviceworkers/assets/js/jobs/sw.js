@@ -32,7 +32,8 @@ var config = {
     all: ${localesByURL},
     default: ${defaultLocale},
     current: null,
-    domain: null
+    domain: null,
+    multidomains: ${multidomainLocales},
   },
   themes: ${themes},
   outputJSON: ${outputJSON},
@@ -180,7 +181,8 @@ self.addEventListener('fetch', event => {
     var criteria = {
       isNotExcluded: !opts.excludedPaths.full[resourceType].some(path => request.url.startsWith(path)),
       // The pages do not include the locale domain, or any of the multidomains (adding the current locale), or the multidomains for the default locale (eg: GetPoP has ES language, but MESYM does not, so it will fallback to its EN default lang) so add it before doing the comparison
-      isPageNotExcluded: !opts.excludedPaths.partial[resourceType].some(path => request.url.startsWith(opts.locales.domain+path)),
+      // Check either the local domain or also the multidomain
+      isPageNotExcluded: !opts.excludedPaths.partial[resourceType].some(path => (url.origin == opts.domains.home && request.url.startsWith(opts.locales.domain+path)) || (url.origin != opts.domains.home && opts.locales.multidomains.some(multidomainLocale => request.url.startsWith(multidomainLocale+path)))),
       // Comment Leo 28/12/2017: allow to cache external domains also
       // isNotExternalDomain: opts.multidomains.indexOf(url.origin) == -1,
       isGETRequest: request.method === 'GET',
@@ -382,10 +384,12 @@ self.addEventListener('fetch', event => {
 
   function evalJSONStrategy(strategyParameters, request, opts) {
     
+      var url = new URL(request.url);
       var criteria = {
         startsWith: strategyParameters.startsWith.full.some(path => request.url.startsWith(path)),
         // The pages do not included the locale domain, so add it before doing the comparison
-        pageStartsWith: strategyParameters.startsWith.partial.some(path => request.url.startsWith(opts.locales.domain+path)),
+        // Check either the local domain or also the multidomain
+        pageStartsWith: strategyParameters.startsWith.partial.some(path => (url.origin == opts.domains.home && request.url.startsWith(opts.locales.domain+path)) || (url.origin != opts.domains.home && opts.locales.multidomains.some(multidomainLocale => request.url.startsWith(multidomainLocale+path)))),
         // endsWith: networkFirst.endsWith.some(path => request.url.endsWith(path)),
         hasParams: stripIgnoredUrlParameters(request.url, strategyParameters.hasParams) != request.url
       }

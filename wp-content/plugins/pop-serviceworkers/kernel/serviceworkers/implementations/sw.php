@@ -61,6 +61,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         // array_splice($multidomains, array_search($homeurl, $multidomains), 1);
         // $configuration['$multidomains'] = $multidomains;
         $configuration['${multidomains}'] = $this->get_multidomains();
+        $configuration['${multidomainLocales}'] = $this->get_multidomain_locales();
         $configuration['${cacheBustParam}'] = GD_URLPARAM_SWCACHEBUST;
 
         // Thememodes for the appshell
@@ -276,6 +277,23 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         }
         
         return $multidomains;
+    }
+
+     protected function get_multidomain_locales() {
+
+        $multidomain_locales = array_unique(apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:multidomain-locales',
+            array()
+        ));
+
+        // Make sure the homeurl is not there!
+        $homelocale = trailingslashit(get_bloginfo('url'));
+        $pos = array_search($homelocale, $multidomain_locales);
+        if ($pos > -1) {
+            array_splice($multidomain_locales, $pos, 1);
+        }
+        
+        return $multidomain_locales;
     }
 
     protected function get_locales() {
