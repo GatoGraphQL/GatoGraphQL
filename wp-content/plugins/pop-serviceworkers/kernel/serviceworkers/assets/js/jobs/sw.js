@@ -39,7 +39,7 @@ var config = {
   outputJSON: ${outputJSON},
   versionParam: ${versionParam},
   origins: ${origins},
-  multidomains: ${multidomains},
+  /*multidomains: ${multidomains},*/
   strategies: ${strategies},
   ignore: ${ignore},
   params: {
@@ -88,7 +88,8 @@ function addToCache(cacheKey, request, response, use_alias, opts) {
   // Check for this case with "typeof (request) != 'undefined'". Otherwise, the content from the HTML request
   // will also override, in the cache, the appShell
   // if (response.ok) {
-  if (request && response && response.ok) {
+  // Comment Leo 29/12/2017: for cross-domain requests we don't know if the response is ok, since it is opaque, then don't check for that
+  if (request && response && ((new URL(request.url)).origin !== self.location.origin || response.ok)) {
 
     // Add to the cache
     var copy = response.clone();
@@ -183,11 +184,7 @@ self.addEventListener('fetch', event => {
       // The pages do not include the locale domain, or any of the multidomains (adding the current locale), or the multidomains for the default locale (eg: GetPoP has ES language, but MESYM does not, so it will fallback to its EN default lang) so add it before doing the comparison
       // Check either the local domain or also the multidomain
       isPageNotExcluded: !opts.excludedPaths.partial[resourceType].some(path => (url.origin == opts.domains.home && request.url.startsWith(opts.locales.domain+path)) || (url.origin != opts.domains.home && opts.locales.multidomains.some(multidomainLocale => request.url.startsWith(multidomainLocale+path)))),
-      // Comment Leo 28/12/2017: allow to cache external domains also
-      // isNotExternalDomain: opts.multidomains.indexOf(url.origin) == -1,
       isGETRequest: request.method === 'GET',
-      // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com)
-      isFromMyOriginsOrPrecached: (opts.origins.indexOf(url.origin) > -1 || opts.cacheItems[resourceType].indexOf(url) > -1),
       doesNotHaveParams: stripIgnoredUrlParameters(request.url, opts.excludedParams[resourceType]) == request.url
     };
 
@@ -207,10 +204,18 @@ self.addEventListener('fetch', event => {
         isNotInitialJSON: request.url.indexOf(opts.outputJSON) === -1
       },
       'json': {
+        // Comment Leo 30/12/2017: for JSON type, we can't allow to cache from external domains, or we get this error:
+        // The FetchEvent for "http://getpop-demo.localhost/en/calendar/?origin=localhost&target=main&module=data&output=json&v=0.382&theme=wassup&thememode=simple&themestyle=swift&settingsformat=default&pagesection=main&format=calendar&limit=0&calendaryear=2017&calendarmonth=12" resulted in a network error response: an "opaque" response was used for a request whose type is not no-cors
+        // isNotExternalDomain: opts.multidomains.indexOf(url.origin) == -1,
+        isOriginOrCDN: url.origin == opts.contentCDN.domains.original || url.origin == opts.contentCDN.domains.cdn,
+        
         // For 'json' case: if requesting a JSON URL with a different version than the current app version, then do not cache it. This may happen when transitioning between versions, so that cached views in localStorage will request files from the previous version, before these are re-fetched for the new version
         isNotFromDifferentAppVersion: !params[opts.versionParam] || params[opts.versionParam] == opts.version 
       },
       'static': {
+        // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com)
+        isFromMyOriginsOrPrecached: (opts.origins.indexOf(url.origin) > -1 || opts.cacheItems[resourceType].indexOf(url) > -1),
+        
         // Do not handla dynamic images, eg: the Captcha: wp-content/plugins/pop-coreprocessors/library/captcha/captcha.png.php
         isNotDynamic: !request.url.endsWith('.php') && request.url.indexOf('.php?') === -1
       }
@@ -497,17 +502,18 @@ self.addEventListener('fetch', event => {
 
     // Allow to modify the request, fetching content from a different URL
     request = getRequest(request, opts);
-    // // Use No Cors to fetch font files
-    // var fontExtensions = ['woff', 'woff2', 'ttf'];
-    // if (resourceType == 'static' && fontExtensions.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext))) {
-    //   request = new Request(request.url, {mode: 'no-cors'});
-    // }
-
+    
     var fetchOpts = {};
-    // var origin = (new URL(request.url)).origin;
-    // if (opts.origins.indexOf(origin) > -1) {
-    //   fetchOpts.mode = 'cors';
-    // }
+
+    // Use No Cors to fetch cross-domain assets and font files
+    var origin = (new URL(request.url)).origin;
+    var fontExtensions = ['woff', 'woff2', 'ttf'];
+    var no_cors = origin !== self.location.origin || (resourceType == 'static' && fontExtensions.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext)));
+    if (no_cors) {
+
+      fetchOpts.mode = 'no-cors';
+      // request = new Request(request.url, {mode: 'no-cors'});
+    }
 
     // We indicate if we must trigger another request to fetch up-to-date content and, if the content from the server
     // is more up-to-date than the cached one, then show a notification to the user to refresh the page
@@ -519,6 +525,10 @@ self.addEventListener('fetch', event => {
     if (strategy !== SW_STRATEGIES_CACHEFIRSTTHENNETWORK) {
     
       cacheBustRequest = getCacheBustRequest(request, opts);
+      // if (no_cors) {
+
+      //   cacheBustRequest = new Request(cacheBustRequest.url, {mode: 'no-cors'});
+      // }
     }
 
     // Static resources
@@ -577,7 +587,7 @@ self.addEventListener('fetch', event => {
           // maybe there is under a previous version, like https://content.getpop.org/en/loaders/posts/layouts/?...&v=0.358&tp=1487683333
           // then use that one
           // We obtain the URL for this alternate request under the Alias URL in IndexedDB
-          .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL)))) 
+          .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL/*, no_cors ? {mode: 'no-cors'} : {}*/)))) 
           .catch(function() { check_updated = false; return fetch(cacheBustRequest, fetchOpts) }) 
           .then(response => addToCache(cacheKey, request, response, true, opts))
           .then(response => refresh(request, response, true, opts))

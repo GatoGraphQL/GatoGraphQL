@@ -55,12 +55,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['${versionParam}'] = GD_URLPARAM_VERSION;
         $configuration['${outputJSON}'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
         $configuration['${origins}'] = PoP_Frontend_ConfigurationUtils::get_allowed_domains();
-        // Remove the localhost from the multidomains, or the SW won't cache anything at all
-        // $homeurl = get_site_url();
-        // $multidomains = array_keys(PoP_MultiDomain_Utils::get_multidomain_websites());
-        // array_splice($multidomains, array_search($homeurl, $multidomains), 1);
-        // $configuration['$multidomains'] = $multidomains;
-        $configuration['${multidomains}'] = $this->get_multidomains();
+        $configuration['${multidomains}'] = array(); // $this->get_multidomains();
         $configuration['${multidomainLocales}'] = $this->get_multidomain_locales();
         $configuration['${cacheBustParam}'] = GD_URLPARAM_SWCACHEBUST;
 
@@ -251,19 +246,6 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
 
     protected function get_multidomains() {
 
-        // // $multidomain_websites = PoP_MultiDomain_Utils::get_multidomain_websites();
-        // // $multidomain_locales = array();
-        // // foreach ($multidomain_websites as $domain => $website_info) {
-        // //     $multidomain_locales[] = $website_info['locale'];
-        // // }
-        // // $configuration['$multidomain'] = array(
-        // //     'domains' => array_keys($multidomain_websites),
-        // //     'locales' => $multidomain_locales,
-        // // );
-        // // Remove the localhost from the multidomains, or the SW won't cache anything at all
-        
-        // $multidomains = array_keys(PoP_MultiDomain_Utils::get_multidomain_websites());
-        // Allow popMultiDomains to modify this
         $multidomains = array_unique(apply_filters(
             'PoP_ServiceWorkers_Job_Fetch:multidomains',
             array()
