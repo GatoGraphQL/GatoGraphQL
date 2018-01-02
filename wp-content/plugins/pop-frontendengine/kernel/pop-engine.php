@@ -82,12 +82,23 @@ class PoPFrontend_Engine extends PoP_Engine {
 			if (!$gd_template_runtimecontentmanager->cache_exists($template_id, $type)) {
 
 				// Generate and save the JS code
-				$value_js = sprintf(
-					'popTopLevelJSON.strings[\'%1$s\'] = %2$s;',
-					$property,
-					// Encoded twice: the first one for the array, the 2nd one to convert it to string
-					json_encode(json_encode($value))
-				);
+				if ($do_replacements) {
+
+					$value_js = sprintf(
+						'popTopLevelJSON.strings[\'%1$s\'] = %2$s;',
+						$property,
+						// Encoded twice: the first one for the array, the 2nd one to convert it to string
+						json_encode(json_encode($value))
+					);
+				}
+				else {
+
+					$value_js = sprintf(
+						'popTopLevelJSON.objects[\'%1$s\'] = %2$s;',
+						$property,
+						json_encode($value)
+					);	
+				}
 				$gd_template_runtimecontentmanager->store_cache_by_template_id($template_id, $type, $value_js);
 
 				// In addition, this file must be uploaded to AWS S3 bucket, so that this scheme of generating the file on runtime

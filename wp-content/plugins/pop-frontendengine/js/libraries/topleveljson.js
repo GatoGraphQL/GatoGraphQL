@@ -6,6 +6,10 @@ window.popTopLevelJSON = {
 	// INTERNAL variables
 	//-------------------------------------------------
 	
+	// Objects can be assigned directly
+	objects: {},
+
+	// Strings will perform a replacement before being converted to objects
 	strings: {},
 
 	//-------------------------------------------------
@@ -18,18 +22,27 @@ window.popTopLevelJSON = {
 
 		// Merge the json with the properties from object popTopLevelJSON
 		var properties = {};
-		if (!$.isEmptyObject(that.strings)) {
+		that.addProperties(properties, that.strings, true);
+		that.addProperties(properties, that.objects, false);
+
+		return properties;
+	},
+
+	addProperties : function(properties, from, parse) {
+
+		var that = this;
+
+		// Merge the json with the properties from object popTopLevelJSON
+		if (!$.isEmptyObject(from)) {
 			
-			for (var property in that.strings) {
-				if (that.strings.hasOwnProperty(property)) {
+			for (var property in from) {
+				if (from.hasOwnProperty(property)) {
 			
 					// We have a string, convert it to JSON
-					properties[property] = JSON.parse(that.strings[property]);
+					properties[property] = parse ? JSON.parse(from[property]) : from[property];
 				}
 			}
 		}
-
-		return properties;
 	},
 
 	init : function() {
