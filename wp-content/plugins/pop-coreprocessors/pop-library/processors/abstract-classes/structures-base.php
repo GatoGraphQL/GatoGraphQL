@@ -59,6 +59,9 @@ class GD_Template_Processor_StructuresBase extends GD_Template_ProcessorBase {
 			}
 		}
 
+		// Artificial property added to identify the template when adding template-resources
+		$this->add_att($template_id, $atts, 'resourceloader', 'structure');
+
 		return parent::init_atts($template_id, $atts);
 	}
 }

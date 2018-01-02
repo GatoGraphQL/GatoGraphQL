@@ -275,6 +275,12 @@ class PoPTheme_Wassup_Initialization {
 
 				wp_register_style('poptheme-wassup-dynamicmaxheight', $templates_css_folder . '/dynamicmaxheight'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
 				wp_enqueue_style('poptheme-wassup-dynamicmaxheight');
+
+				wp_register_style('poptheme-wassup-structure', $templates_css_folder . '/structure'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-structure');
+
+				wp_register_style('poptheme-wassup-layout', $templates_css_folder . '/layout'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-layout');
 			}
 		}
 		

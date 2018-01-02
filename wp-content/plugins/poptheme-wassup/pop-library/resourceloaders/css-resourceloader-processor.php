@@ -32,6 +32,8 @@ define ('POP_RESOURCELOADER_CSS_BLOCKNOTIFICATIONS', PoP_TemplateIDUtils::get_te
 define ('POP_RESOURCELOADER_CSS_SCROLLNOTIFICATIONS', PoP_TemplateIDUtils::get_template_definition('css-scroll-notifications'));
 define ('POP_RESOURCELOADER_CSS_WIDGET', PoP_TemplateIDUtils::get_template_definition('css-widget'));
 define ('POP_RESOURCELOADER_CSS_DYNAMICMAXHEIGHT', PoP_TemplateIDUtils::get_template_definition('css-dynamicmaxheight'));
+define ('POP_RESOURCELOADER_CSS_STRUCTURE', PoP_TemplateIDUtils::get_template_definition('css-structure'));
+define ('POP_RESOURCELOADER_CSS_LAYOUT', PoP_TemplateIDUtils::get_template_definition('css-layout'));
 
 // class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSComponentResourceLoaderProcessor {
 class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor {
@@ -66,6 +68,8 @@ class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderPr
 			POP_RESOURCELOADER_CSS_SCROLLNOTIFICATIONS,
 			POP_RESOURCELOADER_CSS_WIDGET,
 			POP_RESOURCELOADER_CSS_DYNAMICMAXHEIGHT,
+			POP_RESOURCELOADER_CSS_STRUCTURE,
+			POP_RESOURCELOADER_CSS_LAYOUT,
 		);
 	}
 	
@@ -99,6 +103,8 @@ class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderPr
 			POP_RESOURCELOADER_CSS_SCROLLNOTIFICATIONS => 'scroll-notifications',
 			POP_RESOURCELOADER_CSS_WIDGET => 'widget',
 			POP_RESOURCELOADER_CSS_DYNAMICMAXHEIGHT => 'dynamicmaxheight',
+			POP_RESOURCELOADER_CSS_STRUCTURE => 'structure',
+			POP_RESOURCELOADER_CSS_LAYOUT => 'layout',
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;

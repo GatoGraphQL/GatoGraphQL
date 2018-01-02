@@ -173,6 +173,14 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks {
 
 				$resources[] = POP_RESOURCELOADER_CSS_SCROLLNOTIFICATIONS;
 			}
+			elseif ($resourceloader_att == 'structure') {
+
+				$resources[] = POP_RESOURCELOADER_CSS_STRUCTURE;
+			}
+			elseif ($resourceloader_att == 'layout') {
+
+				$resources[] = POP_RESOURCELOADER_CSS_LAYOUT;
+			}
 		}
 
 		// Allow to inject the $template_id here for several cases

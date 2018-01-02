@@ -232,19 +232,6 @@ body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
 	padding-left: 15px;
 	padding-right: 15px;
 }
-.simpleview .sidebar.horizontal.conclusion,
-.fullview .footers {
-	padding-left: 15px;
-	padding-right: 15px;
-}
-.fullview .footers {
-	margin-left: -57px;
-	margin-right: -57px;
-}
-.simpleview .sidebar.horizontal.conclusion {
-	margin-left: -41px;
-	margin-right: -41px;
-}
 
 
 .post-thumb {
@@ -1096,30 +1083,6 @@ body.sliding #ps-hover .container-fluid {
 		overflow: initial;
 	}
 }
-#ps-main .layout.preview .blockinner-row,
-#ps-quickview .layout.preview .blockinner-row {
-	background-color: transparent;
-}
-#ps-main .simpleview > .scroll-inner > .blockinner-row,
-#ps-main .fullview > .scroll-inner > .blockinner-row,
-#ps-main .details > .scroll-inner > .blockinner-row {
-	-webkit-box-shadow: 0 2px 4px 2px #ccc;
-	-moz-box-shadow: 0 2px 4px 2px #ccc;
-	box-shadow: 0 2px 4px 2px #ccc;
-}
-#ps-main .fullview > .scroll-inner > .blockinner-row {
-	margin-top: 30px;
-}
-#ps-main .simpleview > .scroll-inner > .blockinner-row,
-#ps-main .details > .scroll-inner > .blockinner-row {
-	margin-top: 15px;
-}
-#ps-main .simpleview > .scroll-inner > .blockinner-row:first-child,
-#ps-main .fullview > .scroll-inner > .blockinner-row:first-child,
-#ps-main .details > .scroll-inner > .blockinner-row:first-child {
-  border-top: 0;
-  margin-top: 0;
-}
 
 .submenu .submenu-xs .btn {
 	border: 0;
@@ -1228,87 +1191,7 @@ div.mce-tooltip {
 	position: fixed;
 }*/
 
-.layout.preview .extra.belowthumb,
-.layout.preview .extra.belowavatar {
-	padding: 5px 10px;
-	margin-bottom: 10px;
-}
-.layout.preview .extra-inner {
-	margin-bottom: 5px;
-}
-.layout.preview .extra-inner:last-child {
-	margin-bottom: 0;
-}
 
-.simpleview > .scroll-inner .pop-blockinner-row,
-.details > .scroll-inner .pop-blockinner-row,
-.list > .scroll-inner .pop-blockinner-row,
-.addons > .scroll-inner .pop-blockinner-row {
-	margin-top: 2px;
-	padding-bottom: 15px;
-	padding-top: 15px;
-}
-.simpleview > .scroll-inner .pop-blockinner-row:first-child,
-.details > .scroll-inner .pop-blockinner-row:first-child,
-.list > .scroll-inner .pop-blockinner-row:first-child,
-.addons > .scroll-inner .pop-blockinner-row:first-child {
-	margin-top: 0;
-}
-
-.simpleview > .scroll-inner .postcomments .pop-blockinner-row,
-#ps-sideinfo .list > .scroll-inner .pop-blockinner-row,
-#ps-sideinfo .addons > .scroll-inner .pop-blockinner-row {
-	margin-top: 0px;
-	padding-bottom: 0;
-	padding-top: 0;
-}
-
-.line > .scroll-inner .pop-blockinner-row {
-    padding-bottom: 10px;
-    padding-top: 10px;
-    border-bottom: 1px solid #f1f1f2;
-}
-.line > .scroll-inner .pop-blockinner-row:last-child {
-    border-bottom: 0;
-}
-
-
-.list.independent > .scroll-inner .pop-blockinner-row {
-     margin-top: 0; 
-     padding-top: 5px;
-}
-.list.independent > .scroll-inner .pop-blockinner-row:first-child {
-     padding-top: 15px;
-}
-.list.independent > .scroll-inner .pop-blockinner-row .alert,
-.list.independent > .scroll-inner .pop-blockinner-row .well,
-.thumb.independent > .scroll-inner .pop-blockinner-row .alert,
-.thumb.independent > .scroll-inner .pop-blockinner-row .well {
-     margin-bottom: 0;
-}
-.mapdetails > .scroll-inner .pop-blockinner-row,
-.navigator > .scroll-inner .pop-blockinner-row {
-	border-top: 2px solid #f1f1f2;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-.navigator > .scroll-inner .pop-blockinner-row,
-.addons > .scroll-inner .pop-blockinner-row {
-	border-top: 1px solid #f1f1f2;
-}
-.mapdetails > .scroll-inner .pop-blockinner-row:first-child,
-.navigator > .scroll-inner .pop-blockinner-row:first-child,
-.addons > .scroll-inner .pop-blockinner-row:first-child {
-	border-top: 0;
-}
-
-.thumb > .scroll-inner .blockinner-elem {
-	padding-bottom: 15px;
-	padding-top: 15px;
-}
-.navigator > .scroll-inner .content-body {
-	margin-top: 5px;
-}
 
 a.author {
 	text-decoration: underline;
@@ -1319,9 +1202,6 @@ a.author {
 	padding: 0 2px 5px 2px;
 }
 
-.user-layout .avatar > .thumbnail {
-	margin-bottom: 0;
-}
 
 .pop-typeahead-selected label {
 	font-weight: normal;
@@ -1544,11 +1424,6 @@ body.embed .pagesection-group .framesection-navbar-title {
   margin-top: -7px;
   margin-right: -10px;
 }
-/* No margin inside Navigator because since it's inside Carousel it has overflow hidden so it gets cut */
-.navigator > .scroll-inner .pop-blockinner-row .quicklinkgroup-top {
-  margin-top: 0;
-  margin-right: 0;
-}
 
 .alert.readable,
 .well.readable {
@@ -1561,9 +1436,6 @@ body.embed .pagesection-group .framesection-navbar-title {
 	padding-bottom: 15px;
 }
 
-.fullview.nodescription {
-	margin-bottom: -20px; /* Remove the 20px white space in the User Fullview when showing the description not in the body, but in a widget */
-}
 /* Iframe size does not appear right in iOS safar, so this class fixes the problem. Taken from https://stackoverflow.com/questions/16937070/iframe-size-with-css-on-ios */
 .iframe-wrapper {
 	overflow: auto;
@@ -1595,9 +1467,6 @@ body.embed .pagesection-group .framesection-navbar-title {
 	margin-left: 15px;
 }
 
-.fullview.nodescription > .wrapper > .row > .content-body {
-	padding: 0;
-}
 
 .alert.form-horizontal .form-group:last-child {
 	margin-bottom: 0;
@@ -1873,137 +1742,8 @@ body.embed .pagesection-group .framesection-navbar-title {
 	}
 }
 
-/* Place the Event date/time on top of the featured image, only if the post has one (obviously) */
-.simpleview .abovecontent>.wrapper-featuredimage+.event-datelocation .datetime,
-.simpleview .abovecontent>.wrapper-featuredimage+.pop-multilayout .event-datelocation .datetime {
-    position: absolute;
-    top: -56px;
-    left: 5px;
-    right: 5px;
-    background-color: #fff;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px dotted #4d4d4f;
-    padding: 2px 10px;
-    margin-bottom: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-}
-.simpleview .datetime {
-    position: relative;
-}
-
-.datetime > .calendar > .date {
-    font-size: 115%;
-}
-.details .datetime > .calendar > .date {
-    font-size: 125%;
-}
-@media (min-width: 768px) {
-	.simpleview .datetime > .calendar > .date {
-	    font-size: 170%;
-	    font-weight: 700;
-	}
-	.simpleview .abovecontent>.wrapper-featuredimage+.event-datelocation .datetime,
-	.simpleview .abovecontent>.wrapper-featuredimage+.pop-multilayout .event-datelocation .datetime {
-	    top: -66px;
-	}
-}
 
 
-.preview-author,
-.preview-author-sep {
-	display: inline-block;
-}
-
-.preview-author-sep {
-    color: #337ab7;
-    margin: 0 5px;
-}
-
-.table-myhighlights .preview .quicklinkgroup-bottom,
-.table-myopinionatedvotes .preview .quicklinkgroup-bottom  {
-	margin-bottom: 10px;
-}
-.table-myhighlights .preview .preview,
-.table-myopinionatedvotes .preview .preview  {
-	padding-left: 25px;
-}
-
-.preview .authors-bottom {
-	/* This space at the top is because there is a quicklinkgroup at the left of the author (eg: for Highlight), which have "btn btn-link" class, with margin top 6. So now they are at same level */
-	margin-top: 6px;
-}
-.preview .quicklinkgroup-bottom + .extra {
-	margin-top: 10px;
-}
-.preview.blog .quicklinkgroup-bottom + .extra {
-	margin-top: 5px;
-}
-
-
-.wrapper.referencedby .pop-blockinner-row {
-	padding: 10px 0;
-	border-bottom: 1px solid #f1f1f2;
-}
-#ps-main .wrapper.referencedby .blockinner-row {
-	background-color: transparent;
-}
-#ps-main .wrapper.referencedby .panel-sm .panel-heading {
-  padding: 7px 10px 0;
-}
-.wrapper.referencedby .pop-blockinner-row:first-child {
-	padding-top: 0
-}
-.wrapper.referencedby .pop-blockinner-row:last-child {
-	padding-bottom: 0;
-	border-bottom: 0;
-}
-.simpleview .wrapper.referencedby .pop-blockinner-row {
-	padding: 5px 0;
-}
-.sidebarwidget-quicklinkgroup {
-	margin-top: -8px;
-}
-
-.simpleview .wrapper.referencedby .pop-blockinner-row:last-child {
-	margin-bottom: 20px;
-}
-
-
-.label-none {
-	color: #4d4d4f;
-}
-.label-posts,
-.label-webposts {
-  background-color: #36b4a7;
-}
-.label-posts[href]:hover,
-.label-posts[href]:focus,
-.label-webposts[href]:hover,
-.label-webposts[href]:focus {
-  background-color: #37444e;
-}
-.label-future-events {
-  background-color: #5cb85c;
-}
-.label-future-events[href]:hover,
-.label-future-events[href]:focus {
-  background-color: #449d44;
-}
-.label-current-events {
-  background-color: #ca953a;
-}
-.label-current-events[href]:hover,
-.label-current-events[href]:focus {
-  background-color: #ad953a;
-}
-.label-past-events {
-  background-color: #1ab394;
-}
-.label-past-events[href]:hover,
-.label-past-events[href]:focus {
-  background-color: #199394;
-}
 
 div.inline {
 	display: inline;
@@ -2024,10 +1764,6 @@ div.inline {
 	border: 2px solid #d9edf7;
 }
 
-.user-layout.preview .description {
-    /* font-weight: bold; */
-    font-style: italic;
-}
 
 .panel > .panel-heading > .btn.btn-link {
 	/* When inside the panel heading, the links should have no padding, or it makes the heading too big */
@@ -2044,20 +1780,11 @@ div.inline {
     background-color: #4d4d4f;
 }
 
-.visible-link,
-.layout.preview > .wrapper > .content-body > .authors.belowcontent,
-.layout.preview.postlinks > .wrapper > .content-body > .authors.abovetitle,
-.layout.preview.events-all > .wrapper > .content-body > .authors.belowcontent,
-.layout.preview.events-all.eventlinks > .wrapper > .content-body > .authors.abovetitle {
+.visible-link {
 	display: none;
 }
 .postlinks .visible-link,
-.eventlinks .visible-link,
-.layout.preview.postlinks > .wrapper > .content-body > .authors.belowcontent,
-.layout.preview.postlinks > .wrapper > .content-body.simpleview > .authors.abovetitle,
-.layout.preview.events-all.eventlinks > .wrapper > .content-body > .authors.belowcontent,
-.layout.preview.events-all.eventlinks > .wrapper > .content-body.simpleview > .authors.abovetitle,
-.layout.preview.events-all.eventlinks.events-carousel .authors.abovetitle {
+.eventlinks .visible-link {
 	display: block;
 }
 .postlinks .visible-link.inline,
@@ -2182,37 +1909,7 @@ pre.breakable {
 	margin-bottom: 10px;
 }
 
-@media (min-width: 768px) {
-	.preview .content-body.simpleview {
-		padding-left: 0;
-	}
-}
 
-.simpleview .aftercontent > .inner:first-child {
-    background-color: #d9edf7;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-/* Only add margin-top for the first 2 rows: the "Share" and the "User post interaction" ones */
-.simpleview .aftercontent > .inner:first-child,
-.simpleview .aftercontent > .inner:nth-child(2) {
-    margin-top: 15px;
-}
-
-/* Posts only has featured image, which might not be there, so then add the border only if it is there */
-.layout.preview.posts > .wrapper > .content-body.simpleview > .abovecontent > .wrapper,
-.layout.preview.events-all > .wrapper > .content-body.simpleview > .abovecontent {
-    background-color: #d9edf7;
-	border: 1px solid #bce8f1;
-	/* Using -1px for left/right margin, so the featured image has exactly 500px (col-sm-10 in container 588px wide and no padding-left) */
-    margin: 0 -1px 10px;
-}
-.content-body.simpleview > .abovecontent .event-datelocation,
-.content-body.simpleview > .abovecontent .locationvolunteer {
-    padding: 5px;
-    position: relative;
-}
 
 /* Make the Add Media button in the addons pageSection more prominent */
 div.wp-media-buttons {
@@ -2352,15 +2049,6 @@ div.wp-media-buttons .button {
 	padding: 3px 10px;
 }
 
-.simpleview.content-body > .authors.abovetitle {
-	/* Make the authors only appear on 1 line, otherwise long names (like CETDEM's) look in a 2nd line, because of the date on the right side, and ugly */
-    overflow: hidden;
-    white-space: nowrap;
-}
-.layout.preview > .wrapper > .content-body > .date {
-	margin-right: 20px;
-	margin-left: 5px;
-}
 
 .pop-functiongroup {
 	background-color: #fff;
@@ -2381,13 +2069,6 @@ body.print #ps-sideinfo {
 	display: none;
 }
 
-/* "In response to" widget above the content in the simpleview */
-.simpleview .content-body .content .sidebar-widget {
-	margin-bottom: 15px;
-    background-color: #f1f1f2;
-    padding: 5px;
-    border: 1px dotted #dcddde;
-}
 
 form.pop-filterform-instantaneous {
 	margin-bottom: 10px;
@@ -2430,14 +2111,6 @@ pre.prettyprint {
 }
 
 
-#ps-sideinfo .addons > .scroll-inner .pop-blockinner-row {
-    padding-bottom: 10px;
-    padding-top: 10px;
-    border-bottom: 1px solid #f1f1f2;
-}
-#ps-sideinfo .addons > .scroll-inner .pop-blockinner-row:last-child {
-    border-bottom: 0;
-}
 
 /* Make the background-size: cover; work also in Chrome in Android phone */
 /* Taken from https://stackoverflow.com/questions/14876035/background-size-cover-not-working-in-portrait-on-android-tablet#19452558 */

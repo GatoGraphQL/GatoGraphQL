@@ -90,4 +90,12 @@ class GD_Template_Processor_PreviewObjectLayoutsBase extends GD_Template_Process
 		
 		return $ret;
 	}
+
+	function init_atts($template_id, &$atts) {
+
+		// Artificial property added to identify the template when adding template-resources
+		$this->add_att($template_id, $atts, 'resourceloader', 'layout');
+
+		return parent::init_atts($template_id, $atts);
+	}
 }
