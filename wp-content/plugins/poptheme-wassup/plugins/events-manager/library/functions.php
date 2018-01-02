@@ -392,6 +392,9 @@ function gd_em_single_event_is_future($post_or_post_id = null) {
 	if (!is_object($post_or_post_id)) {
 		$EM_Event = em_get_event($post_or_post_id, 'post_id');
 	}
+	else {
+		$EM_Event = $post_or_post_id;
+	}
 	
 	return POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/ < $EM_Event->end;
 }
