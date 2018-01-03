@@ -13,7 +13,7 @@ class PoP_URE_Engine_Utils {
 		if ($vars['global-state']['is-author']/*is_author()*/) {
 
 			$author = $vars['global-state']['author']/*global $author*/;
-			if (gd_ure_is_organization($author)) {
+			if (gd_ure_is_community($author)) {
 
 				$source = $_REQUEST[GD_URLPARAM_URECONTENTSOURCE];
 				$sources = array(

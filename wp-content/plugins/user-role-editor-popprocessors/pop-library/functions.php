@@ -14,12 +14,11 @@ function gd_ure_cacheprocessor_addvars($filename) {
 	if ($vars['global-state']['is-author']/*is_author()*/) {
 
 		$author = $vars['global-state']['author']/*global $author*/;
-		if (gd_ure_is_organization($author)) {
+		if (gd_ure_is_community($author)) {
 
 			$vars = GD_TemplateManager_Utils::get_vars();		
 			if ($source = $vars['source']) {
 				
-				// $filename .= '-source_'.$source;
 				$filename .= '-'.$source;
 			}
 		}
