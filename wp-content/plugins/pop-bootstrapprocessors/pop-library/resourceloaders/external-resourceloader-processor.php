@@ -65,7 +65,7 @@ class PoP_BootstrapProcessors_JSExternalResourceLoaderProcessor extends PoP_Exte
 
 				case POP_RESOURCELOADER_EXTERNAL_BOOTSTRAP:
 
-					return 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/';
+					return 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js';
 			}
 		}
 
