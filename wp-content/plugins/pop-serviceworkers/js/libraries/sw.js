@@ -124,25 +124,30 @@ window.popServiceWorkers = {
 	processEvent : function(event) {
 
 		var that = this;
-		var message = JSON.parse(event.data);
-		if (message.type === 'refresh') {
+		
+		// Only after the document is ready, to make sure that that.pages is loaded
+		$(document).ready(function($){
+			
+			var message = JSON.parse(event.data);
+			if (message.type === 'refresh') {
 
-			// If there is a pageSectionPage for that URL
-			if (that.pages[message.url]) {
+				// If there is a pageSectionPage for that URL
+				if (that.pages[message.url]) {
 
-				// Retrieve it
-				var pageSectionPage = $('#'+that.pages[message.url]);
+					// Retrieve it
+					var pageSectionPage = $('#'+that.pages[message.url]);
 
-				// Make sure the pageSectionPage is still in the DOM: if it still has its data attributes then it's there
-				// If it's removed, that becomes undefined
-				if (pageSectionPage && pageSectionPage.data('fetch-url')) {
-				
-					// Show the message, then delete the entry from the pages, it's not needed anymore
-					that.showRefreshMessage(pageSectionPage);
-					delete that.pages[message.url];
+					// Make sure the pageSectionPage is still in the DOM: if it still has its data attributes then it's there
+					// If it's removed, that becomes undefined
+					if (pageSectionPage && pageSectionPage.data('fetch-url')) {
+					
+						// Show the message, then delete the entry from the pages, it's not needed anymore
+						that.showRefreshMessage(pageSectionPage);
+						delete that.pages[message.url];
+					}
 				}
 			}
-		}
+		});
 	},
 
 	showRefreshMessage : function(pageSectionPage) {
