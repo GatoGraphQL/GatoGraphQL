@@ -45,6 +45,10 @@ var config = {
   params: {
     cachebust: ${cacheBustParam}
   },
+  extensions: {
+    fonts: ${fontExtensions},
+    staticCache: ${staticCacheExtensions},
+  },
   contentCDN: {
     params: ${contentCDNParams},
     domains: {
@@ -126,13 +130,12 @@ self.addEventListener('install', event => {
   function onInstall(event, opts) {
     
     var resourceTypes = ['static', 'json', 'html'];
-    var fontExtensions = ['woff', 'woff2', 'ttf'];
     // Taken from https://brandonrozek.com/2015/11/service-workers/
     return Promise.all(resourceTypes.map(function(resourceType) {
       return caches.open(cacheName(resourceType, opts)).then(function(cache) {
         return Promise.all(opts.cacheItems[resourceType].map(function(url) {
           // Use No Cors fetch mode if either: it comes from another domain, or it's a font file
-          return fetch(url, ((new URL(url)).origin !== self.location.origin || (resourceType == 'static' && fontExtensions.some(ext => (new URL(url)).pathname.endsWith('.'+ext)))) ? {mode: 'no-cors'} : {}).then(function(response) {
+          return fetch(url, ((new URL(url)).origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(url)).pathname.endsWith('.'+ext)))) ? {mode: 'no-cors'} : {}).then(function(response) {
             return cache.put(url, response.clone());
           });
         }))
@@ -213,8 +216,10 @@ self.addEventListener('fetch', event => {
         isNotFromDifferentAppVersion: !params[opts.versionParam] || params[opts.versionParam] == opts.version 
       },
       'static': {
+
+        // opts.extensions.staticCache: Do not cache all file types (eg: exclude images)
         // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com)
-        isFromMyOriginsOrPrecached: (opts.origins.indexOf(url.origin) > -1 || opts.cacheItems[resourceType].indexOf(url) > -1),
+        isFromMyOriginsOrPrecached: ((opts.origins.indexOf(url.origin) > -1 && opts.extensions.staticCache.some(ext => url.pathname.endsWith('.'+ext))) || opts.cacheItems[resourceType].indexOf(request.url) > -1),
         
         // Do not handla dynamic images, eg: the Captcha: wp-content/plugins/pop-coreprocessors/library/captcha/captcha.png.php
         isNotDynamic: !request.url.endsWith('.php') && request.url.indexOf('.php?') === -1
@@ -507,8 +512,7 @@ self.addEventListener('fetch', event => {
 
     // Use No Cors to fetch cross-domain assets and font files
     var origin = (new URL(request.url)).origin;
-    var fontExtensions = ['woff', 'woff2', 'ttf'];
-    var no_cors = origin !== self.location.origin || (resourceType == 'static' && fontExtensions.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext)));
+    var no_cors = origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext)));
     if (no_cors) {
 
       fetchOpts.mode = 'no-cors';

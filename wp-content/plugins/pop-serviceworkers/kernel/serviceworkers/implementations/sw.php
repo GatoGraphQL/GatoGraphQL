@@ -58,6 +58,8 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['${multidomains}'] = array(); // $this->get_multidomains();
         $configuration['${multidomainLocales}'] = $this->get_multidomain_locales();
         $configuration['${cacheBustParam}'] = GD_URLPARAM_SWCACHEBUST;
+        $configuration['${fontExtensions}'] = $this->get_font_extensions();
+        $configuration['${staticCacheExtensions}'] = $this->get_staticcache_extensions();
 
         // Thememodes for the appshell
         global $gd_theme_manager;
@@ -143,6 +145,25 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             'PoP_ServiceWorkers_Job_Fetch:exclude:partial',
             array(),
             $resourceType
+        );
+    }
+
+    protected function get_font_extensions() {
+
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:font-extensions',
+            array('woff', 'woff2', 'ttf', 'eof')
+        );
+    }
+
+    protected function get_staticcache_extensions() {
+
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:staticcache-extensions',
+            array_merge(
+                array('js', 'css'),
+                $this->get_font_extensions()
+            )
         );
     }
 
