@@ -25,10 +25,6 @@ class GD_ThemeMode_Wassup_Sliding extends GD_WassupThemeMode_Base {
 
 	function background_load($pages) {
 
-		// return array_merge(
-		// 	$pages,
-		// 	$this->get_loaders_initialframes()
-		// );
 		$pages[POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES] = array(
 			GD_URLPARAM_TARGET_MAIN,
 			GD_URLPARAM_TARGET_ADDONS,
@@ -36,18 +32,6 @@ class GD_ThemeMode_Wassup_Sliding extends GD_WassupThemeMode_Base {
 		);
 		return $pages;
 	}
-
-	// protected function get_loaders_initialframes() {
-
-	// 	return array(
-	// 		// get_permalink(POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES) => array(
-	// 		POP_COREPROCESSORS_PAGE_LOADERS_INITIALFRAMES => array(
-	// 			GD_URLPARAM_TARGET_MAIN,
-	// 			GD_URLPARAM_TARGET_ADDONS,
-	// 			GD_URLPARAM_TARGET_MODALS,
-	// 		)
-	// 	);
-	// }
 
 	function get_framepagesections($pagesections, $template_id) {
 

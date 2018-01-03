@@ -9,14 +9,6 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks {
 
 	function __construct() {
 
-		// add_filter(
-		// 	'PoP_ServiceWorkers_Job_Fetch:offline_pages',
-		// 	array($this, 'get_offline_pages')
-		// );
-		// add_filter(
-		// 	'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
-		// 	array($this, 'get_appshell_pages')
-		// );
 		add_filter(
 			'PoP_ServiceWorkers_Job_Fetch:locales',
 			array($this, 'get_locales')
@@ -37,25 +29,6 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks {
 		);
 	}
 
-	// function get_offline_pages($pages) {
-
-	// 	// Add the output=json because the offline will always be called from inside the website, so by then it must all be json
- //        if ($localepages = $this->get_localepages_from_page(POP_SERVICEWORKERS_PAGE_OFFLINE, true)) {
-	// 		return $localepages;
-	// 	}
-
-	// 	return $pages;
-	// }
-
-	// function get_appshell_pages($pages) {
-
-	// 	if ($localepages = $this->get_localepages_from_page(POP_FRONTENDENGINE_PAGE_APPSHELL)) {
-	// 		return $localepages;
-	// 	}
-
-	// 	return $pages;
-	// }
-
 	function get_locales($locales) {
 
 		global $q_config;
@@ -71,31 +44,6 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks {
 
 		return qtranxf_convertURL($url, $lang);
 	}
-
-	// protected function get_localepages_from_page($page, $addjson = false) {
-
-	// 	$pages = array();
-	// 	if ($page) {
-
-	// 		global $q_config;
-	// 		if ($languages = $q_config['enabled_languages']) {
-			
-	// 			// Ignore what has been given here, add the qTrans languages instead
-	// 			$url = get_permalink($page);
-	// 			if ($addjson) {
-					
-	// 				// Add the output=json because the offline will always be called from inside the website, so by then it must all be json
-	// 	            $url = add_query_arg(GD_URLPARAM_OUTPUT, GD_URLPARAM_OUTPUT_JSON, $url);
-	// 			}
-	// 			foreach ($languages as $lang) {
-					
-	// 				$pages[$lang] = qtranxf_convertURL($url, $lang);
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return $pages;
-	// }
 
 	function get_locales_byurl($locales) {
 
