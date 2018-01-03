@@ -345,8 +345,9 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             global $gd_theme_manager;
 
             // Just pre-cache the appshell for the default theme, and all of its thememodes
+            $locales = $this->get_locales();
             $themes = array($gd_theme_manager->get_theme());
-            foreach ($this->get_locales() as $locale) {
+            foreach ($locales as $locale) {
 
                 foreach ($themes as $theme) {
                     
@@ -360,7 +361,9 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
 
         return apply_filters(
             'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
-            $pages
+            $pages,
+            $locales,
+            $themes
         );
     }
 
