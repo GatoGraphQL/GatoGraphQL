@@ -224,7 +224,7 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesRegistration {
 	    $noncritical_methods = $methods[POP_PROGRESSIVEBOOTING_NONCRITICAL];
 
 	    // Get all the resources the template is dependent on. Eg: inline CSS styles
-        $templates_resources = array_values(array_unique(array_flatten(array_values($json['sitemapping']['template-resources']))));
+	    $templates_resources = array_values(array_unique(array_flatten(array_values($json['sitemapping']['template-resources'] ?? array()))));
 
         // // Get the current vars_hash_id where to store $noncritical_resources
         // global $gd_template_varshashprocessor_manager;

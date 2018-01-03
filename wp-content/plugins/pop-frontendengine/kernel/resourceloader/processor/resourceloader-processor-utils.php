@@ -800,16 +800,20 @@ class PoP_ResourceLoaderProcessorUtils {
         $noncritical_js_methods = array();
 
         // Add all the pageSection methods
-        foreach ($pageSectionJSMethods as $pageSection => $methods) {
-            self::add_pagesection_jsmethods($critical_js_methods, $methods, POP_PROGRESSIVEBOOTING_CRITICAL);
-            self::add_pagesection_jsmethods($noncritical_js_methods, $methods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
+        if ($pageSectionJSMethods) {
+            foreach ($pageSectionJSMethods as $pageSection => $methods) {
+                self::add_pagesection_jsmethods($critical_js_methods, $methods, POP_PROGRESSIVEBOOTING_CRITICAL);
+                self::add_pagesection_jsmethods($noncritical_js_methods, $methods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
+            }
         }
 
         // Add all the block methods
-        foreach ($blockJSMethods as $pageSection => $blockTemplateMethods) {
-            foreach ($blockTemplateMethods as $template => $templateMethods) {
-                self::add_block_jsmethods($critical_js_methods, $templateMethods, POP_PROGRESSIVEBOOTING_CRITICAL);
-                self::add_block_jsmethods($noncritical_js_methods, $templateMethods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
+        if ($blockJSMethods) {
+            foreach ($blockJSMethods as $pageSection => $blockTemplateMethods) {
+                foreach ($blockTemplateMethods as $template => $templateMethods) {
+                    self::add_block_jsmethods($critical_js_methods, $templateMethods, POP_PROGRESSIVEBOOTING_CRITICAL);
+                    self::add_block_jsmethods($noncritical_js_methods, $templateMethods, POP_PROGRESSIVEBOOTING_NONCRITICAL);
+                }
             }
         }
 
