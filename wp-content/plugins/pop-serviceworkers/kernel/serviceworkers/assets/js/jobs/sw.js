@@ -84,7 +84,7 @@ function getOriginalURL(url, opts) {
   return url;
 }
 
-function addToCache(cacheKey, request, response, use_alias, opts) {
+function addToCache(/*resourceType, */cacheKey, request, response, use_alias, opts) {
   // If coming from function refresh, response might be null
   // Comment Leo 06/03/2017: calling addToCache before refresh now, so no need to ask if response is not null
   // if (response !== null && response.ok) {
@@ -92,8 +92,10 @@ function addToCache(cacheKey, request, response, use_alias, opts) {
   // Check for this case with "typeof (request) != 'undefined'". Otherwise, the content from the HTML request
   // will also override, in the cache, the appShell
   // if (response.ok) {
-  // Comment Leo 29/12/2017: for cross-domain requests we don't know if the response is ok, since it is opaque, then don't check for that
-  if (request && response && ((new URL(request.url)).origin !== self.location.origin || response.ok)) {
+  // Comment Leo 29/12/2017: for cross-domain static requests we don't know if the response is ok, since it is opaque, then don't check for that
+  // var url = new URL(request.url);
+  // if (request && response && ((url.origin !== self.location.origin && resourceType == 'static') || (url.origin === self.location.origin && response.ok))) {
+  if (request && response && response.ok) {
 
     // Add to the cache
     var copy = response.clone();
@@ -512,12 +514,12 @@ self.addEventListener('fetch', event => {
 
     // Use No Cors to fetch cross-domain assets and font files
     var origin = (new URL(request.url)).origin;
-    var no_cors = origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext)));
-    if (no_cors) {
+    // var no_cors = origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext)));
+    // if (no_cors) {
 
-      fetchOpts.mode = 'no-cors';
-      // request = new Request(request.url, {mode: 'no-cors'});
-    }
+    //   fetchOpts.mode = 'no-cors';
+    //   // request = new Request(request.url, {mode: 'no-cors'});
+    // }
 
     // We indicate if we must trigger another request to fetch up-to-date content and, if the content from the server
     // is more up-to-date than the cached one, then show a notification to the user to refresh the page
@@ -544,7 +546,7 @@ self.addEventListener('fetch', event => {
       event.respondWith(
         fetchFromCache(request)
           .catch(() => fetch(request, fetchOpts)) 
-          .then(response => addToCache(cacheKey, request, response, false, opts))
+          .then(response => addToCache(/*resourceType, */cacheKey, request, response, false, opts))
       );
     }
     // HTML: First check if we have that HTML in the cache, which is fast, if not use the AppShell, which is slower since it depends on JS
@@ -567,13 +569,13 @@ self.addEventListener('fetch', event => {
           // The response from this fetch will be saved in the cached below, through the cacheBustRequest
           // Comment Leo 01/12/2017: this weird way of asking for !check_updated below, is to avoid the cache from fetchFromCache(request) to be saved again in the cache,
           // in such a way that may possibly override the cache written by the cacheBustRequest executed below!
-          .then(function(response) { if (!check_updated) { return addToCache(cacheKey, request, response, false, opts); } return response; })
+          .then(function(response) { if (!check_updated) { return addToCache(/*resourceType, */cacheKey, request, response, false, opts); } return response; })
           // Initialize the appshellRequest only now, so that the .then() below only works if the content comes from the appshell
           // Otherwise, this 2nd .then() will also be executed from the html content of the original request, overriding with its content the appshell content in the cache
           .catch(function() { appshellRequest = getAppShellRequest(request, opts); return fetchFromCache(appshellRequest, fetchOpts); }) 
           // If somehow can't, try to fetch the appshell from the network
           .catch(() => fetch(appshellRequest, fetchOpts)) 
-          .then(response => addToCache(cacheKey, appshellRequest, response, false, opts))
+          .then(response => addToCache(/*resourceType, */cacheKey, appshellRequest, response, false, opts))
       );
     }
     // JSON content
@@ -593,7 +595,7 @@ self.addEventListener('fetch', event => {
           // We obtain the URL for this alternate request under the Alias URL in IndexedDB
           .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL/*, no_cors ? {mode: 'no-cors'} : {}*/)))) 
           .catch(function() { check_updated = false; return fetch(cacheBustRequest, fetchOpts) }) 
-          .then(response => addToCache(cacheKey, request, response, true, opts))
+          .then(response => addToCache(/*resourceType, */cacheKey, request, response, true, opts))
           .then(response => refresh(request, response, true, opts))
       );
     }
@@ -604,7 +606,7 @@ self.addEventListener('fetch', event => {
 
       event.respondWith(
         fetch(cacheBustRequest, fetchOpts)
-          .then(response => addToCache(cacheKey, request, response, true, opts))
+          .then(response => addToCache(/*resourceType, */cacheKey, request, response, true, opts))
           .catch(() => fetchFromCache(request))
           //.catch(function(err) {/*console.log(err)*/})
       );
@@ -621,7 +623,7 @@ self.addEventListener('fetch', event => {
           // Comment Leo 06/03/2017: 1st save the cache back (even without checking the ETag), and only then call refresh,
           // because somehow sometimes the response ETag different than the stored one, it was saved, but nevertheless the 
           // SW cache returned the previous content!
-          .then(response => addToCache(cacheKey, request, response, use_alias, opts))
+          .then(response => addToCache(/*resourceType, */cacheKey, request, response, use_alias, opts))
           .then(response => refresh(request, response, use_alias, opts))
       );
     }
