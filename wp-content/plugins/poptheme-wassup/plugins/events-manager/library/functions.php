@@ -17,7 +17,7 @@ function gd_em_return_event_posttype($items) {
 function gd_em_has_category($event, $cat) {
 
 	$categories = $event->get_categories();
-	return isset($categories->categories[$cat]);
+	return isset($categories->terms[$cat]);
 }
 
 add_filter('gd_get_categories', 'gd_em_get_categories', 10, 2);
@@ -26,7 +26,7 @@ function gd_em_get_categories($categories, $post_id = null) {
 	if (get_post_type($post_id) == EM_POST_TYPE_EVENT) {
 		
 		$event = em_get_event($post_id, 'post_id');
-		return array_keys($event->get_categories()->categories);
+		return array_keys($event->get_categories()->terms);
 	}
 
 	return $categories;
@@ -414,8 +414,8 @@ add_action('em_event_save_pre', 'gd_em_event_save_pre_add_all_category', 10, 1);
 function gd_em_event_save_pre_add_all_category($EM_Event){
 	
 	$category_all = POPTHEME_WASSUP_EM_CAT_ALL;
-	if (!$EM_Event->get_categories()->categories[$category_all]) {
-		$EM_Event->get_categories()->categories[$category_all] = new EM_Category($category_all);
+	if (!$EM_Event->get_categories()->terms[$category_all]) {
+		$EM_Event->get_categories()->terms[$category_all] = new EM_Category($category_all);
 	}
 }
 
@@ -437,8 +437,8 @@ function gd_em_event_get_categories_addtimeframecategory($EM_Categories, $EM_Eve
 	$timeframe_cat = $is_current ? $current_cat : ($is_future ? $future_cat : $past_cat);
 	
 	// Add the 'fictitious' category
-	if (!$EM_Categories->categories[$timeframe_cat]) {
-		$EM_Categories->categories[$timeframe_cat] = new EM_Category($timeframe_cat);
+	if (!$EM_Categories->terms[$timeframe_cat]) {
+		$EM_Categories->terms[$timeframe_cat] = new EM_Category($timeframe_cat);
 	}
 
 	// Make sure it doesn't have the other category (just in case, for if the category was saved and then retrieved back)
@@ -447,7 +447,7 @@ function gd_em_event_get_categories_addtimeframecategory($EM_Categories, $EM_Eve
 		array($timeframe_cat)
 	);
 	foreach ($remove_cats as $remove_timeframe_cat) {
-		unset($EM_Categories->categories[$remove_timeframe_cat]);
+		unset($EM_Categories->terms[$remove_timeframe_cat]);
 	}
 		
 	return $EM_Categories;
@@ -462,32 +462,32 @@ function gd_em_get_category($cat, $post_id, $return_id) {
 
 		// Check for priority: Future/Past categories have priority over All
 		$categories = $event->get_categories();
-		if ($categories->categories[POPTHEME_WASSUP_EM_CAT_CURRENT]) {
+		if ($categories->terms[POPTHEME_WASSUP_EM_CAT_CURRENT]) {
 			
 			if ($return_id) {
 				return POPTHEME_WASSUP_EM_CAT_CURRENT;
 			}
-			return $categories->categories[POPTHEME_WASSUP_EM_CAT_CURRENT];
+			return $categories->terms[POPTHEME_WASSUP_EM_CAT_CURRENT];
 		}
-		elseif ($categories->categories[POPTHEME_WASSUP_EM_CAT_FUTURE]) {
+		elseif ($categories->terms[POPTHEME_WASSUP_EM_CAT_FUTURE]) {
 			
 			if ($return_id) {
 				return POPTHEME_WASSUP_EM_CAT_FUTURE;
 			}
-			return $categories->categories[POPTHEME_WASSUP_EM_CAT_FUTURE];
+			return $categories->terms[POPTHEME_WASSUP_EM_CAT_FUTURE];
 		}
-		elseif ($categories->categories[POPTHEME_WASSUP_EM_CAT_PAST]) {
+		elseif ($categories->terms[POPTHEME_WASSUP_EM_CAT_PAST]) {
 			
 			if ($return_id) {
 				return POPTHEME_WASSUP_EM_CAT_PAST;
 			}
-			return $categories->categories[POPTHEME_WASSUP_EM_CAT_PAST];
+			return $categories->terms[POPTHEME_WASSUP_EM_CAT_PAST];
 		}
 		
 		if ($return_id) {
 			return $event->output('#_CATEGORYID');
 		}
-		return $categories[0];
+		return $categories->get_first();
 	}
 
 	return $cat;

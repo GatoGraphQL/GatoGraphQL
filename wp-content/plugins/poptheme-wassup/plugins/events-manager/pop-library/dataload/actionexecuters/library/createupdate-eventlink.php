@@ -10,8 +10,8 @@ class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event {
 	protected function populate(&$EM_Event, $post_data) {
 
 		// Add class "Link" on the event object
-		if (!$EM_Event->get_categories()->categories[POPTHEME_WASSUP_EM_CAT_EVENTLINKS]) {
-			$EM_Event->get_categories()->categories[POPTHEME_WASSUP_EM_CAT_EVENTLINKS] = new EM_Category(POPTHEME_WASSUP_EM_CAT_EVENTLINKS);
+		if (!$EM_Event->get_categories()->terms[POPTHEME_WASSUP_EM_CAT_EVENTLINKS]) {
+			$EM_Event->get_categories()->terms[POPTHEME_WASSUP_EM_CAT_EVENTLINKS] = new EM_Category(POPTHEME_WASSUP_EM_CAT_EVENTLINKS);
 		}
 		return parent::populate($EM_Event, $post_data);
 	}

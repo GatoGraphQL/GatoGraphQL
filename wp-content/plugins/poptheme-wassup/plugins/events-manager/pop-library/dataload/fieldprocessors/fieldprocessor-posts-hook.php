@@ -28,8 +28,6 @@ class GD_EM_DataLoad_FieldProcessor_Posts_Hook extends GD_DataLoad_FieldProcesso
 				case 'excerpt' :
 				case 'content' :
 
-					// $categories = $event->get_categories();
-					// if ($categories->categories[POPTHEME_WASSUP_EM_CAT_EVENTLINKS]) {
 					if (POPTHEME_WASSUP_EM_CAT_EVENTLINKS && gd_em_has_category($event, POPTHEME_WASSUP_EM_CAT_EVENTLINKS)) {
 
 						if ($field == 'excerpt') {

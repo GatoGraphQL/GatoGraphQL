@@ -79,6 +79,18 @@ class GD_CreateUpdate_Event extends GD_CustomCreateUpdate_Post {
 		// and it fails to create the event, giving error "Column 'post_excerpt' cannot be null" on wp_insert_post()
 		$EM_Event->post_excerpt = '';
 
+		// Comment Leo 04/01/2018: Since EM 5.8.1.1, we must explicity set these values as below, or else saving the event fails
+		$EM_Event->event_rsvp = 0;
+		$EM_Event->recurrence = null;
+		// $EM_Event->event_rsvp_date = null;
+		$EM_Event->event_rsvp_time = null;
+		$EM_Event->recurrence_days = null;
+		
+		// Comment Leo 04/01/2018: this line is MANDATORY! Since EM 5.8.1.1, if we don't add this line, we get the following PHP error when 
+		// executing get_post_type($EM_Event) (in file `wp-content/plugins/poptheme-wassup/plugins/events-manager/pop-library/dataload/fieldprocessors/fieldprocessor-posts-hook.php`) after creating an event:
+		// <b>Warning</b>:  array_map(): Argument #2 should be an array in <b>/Users/leo/Sites/PoP/wp-includes/post.php</b> on line <b>1980</b><br />
+		$EM_Event->ancestors = array();
+
 		// post_status might be empty (for publish)
 		if ($status = $post_data['post_status']) {
 			$EM_Event->force_status = $status;
