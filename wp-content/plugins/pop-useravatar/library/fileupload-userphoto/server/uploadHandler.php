@@ -366,6 +366,9 @@ class UploadHandler {
     function get_config_bytes($val) {
         $val = trim($val);
         $last = strtolower($val[strlen($val)-1]);
+        // Change PoP: remove the last character from $val: $val is '8M' and not '8', so doing $val *= 1024; below throws a PHP Notice starting with PHP 7.1:
+        // A non well formed numeric value encountered in /var/app/current/wp-content/plugins/pop-useravatar-aws/library/fileupload-userphoto/server/uploadHandlerS3.php on line 452, referer: https://my.tppdebate.org/en/change-pic/
+        $val = substr($val, 0, strlen($val)-1);
         switch($last) {
             case 'g':
                 $val *= 1024;
