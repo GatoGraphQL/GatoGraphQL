@@ -145,21 +145,29 @@ if (!is_admin()) {
 }
 function pop_header_preloadfonts() {
 
-	// It is 2 levels down from file "wp-content/plugins/poptheme-wassup/css/libraries/custom.bootstrap.css",
-	// or its PROD version "wp-content/plugins/poptheme-wassup/css/dist/libraries/custom.bootstrap.min.css"
-	$font_url = PoP_Frontend_ServerUtils::use_minified_resources() ?
-		POPTHEME_WASSUP_URI.'/css/fonts/Rockwell.ttf' :
-		POPTHEME_WASSUP_URI.'/fonts/Rockwell.ttf';
 	printf(
 		'<link rel="preload" href="%s" as "font" crossorigin>', 
-		$font_url
+		popthemewassup_getfont_url()
 	);
 
-	$fontawesome_url = PoP_Frontend_ServerUtils::access_externalcdn_resources() ?
-		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0' :
-		POPTHEME_WASSUP_URI.'/css/fonts/fontawesome-webfont.woff2?v=4.7.0';
 	printf(
 		'<link rel="preload" href="%s" as "font" crossorigin type="font/woff2">', 
-		$fontawesome_url
+		popthemewassup_getfontawesome_url()
 	);
+}
+function popthemewassup_getfont_url() {
+
+	// It is 2 levels down from file "wp-content/plugins/poptheme-wassup/css/libraries/custom.bootstrap.css",
+	// or its PROD version "wp-content/plugins/poptheme-wassup/css/dist/libraries/custom.bootstrap.min.css"
+	return PoP_Frontend_ServerUtils::use_minified_resources() ?
+		POPTHEME_WASSUP_URI.'/css/fonts/Rockwell.ttf' :
+		POPTHEME_WASSUP_URI.'/fonts/Rockwell.ttf';
+}
+function popthemewassup_getfontawesome_url() {
+
+	// It is 2 levels down from file "wp-content/plugins/poptheme-wassup/css/libraries/custom.bootstrap.css",
+	// or its PROD version "wp-content/plugins/poptheme-wassup/css/dist/libraries/custom.bootstrap.min.css"
+	return PoP_Frontend_ServerUtils::access_externalcdn_resources() ?
+		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0' :
+		POPTHEME_WASSUP_URI.'/css/fonts/fontawesome-webfont.woff2?v=4.7.0';
 }
