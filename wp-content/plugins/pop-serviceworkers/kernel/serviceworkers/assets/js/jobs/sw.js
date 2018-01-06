@@ -46,6 +46,7 @@ var config = {
     cachebust: ${cacheBustParam}
   },
   extensions: {
+    staticResources: ${staticResourceExtensions},
     staticCache: ${staticCacheExtensions},
   },
   contentCDN: {
@@ -172,7 +173,7 @@ self.addEventListener('fetch', event => {
   function shouldHandleFetch(event, opts) {
     
     var request = event.request;
-    var resourceType = getResourceType(request);
+    var resourceType = getResourceType(request, opts);
     var url = new URL(request.url);
     var criteria = {
       isNotExcluded: !opts.excludedPaths.full[resourceType].some(path => request.url.startsWith(path)),
@@ -255,15 +256,14 @@ self.addEventListener('fetch', event => {
     return opts;
   }
 
-  function getResourceType(request) {
+  function getResourceType(request, opts) {
     
     var acceptHeader = request.headers.get('Accept');
 
     var resourceType = 'static';
 
     // Make sure that it is not a static resource that is being requested
-    var resourceExtensions = ['txt', 'ico', 'xml', 'xsl', 'css', 'js', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'otf', 'jpg', 'jpeg', 'png', 'gif', 'pdf'];
-    if (acceptHeader.indexOf('text/html') !== -1 && !resourceExtensions.some(extension => request.url.endsWith('.'+extension) || request.url.indexOf('.'+extension+'?') > -1)) {
+    if (acceptHeader.indexOf('text/html') !== -1 && !opts.extensions.staticResources.some(extension => request.url.endsWith('.'+extension) || request.url.indexOf('.'+extension+'?') > -1)) {
       resourceType = 'html';
     } 
     else if (acceptHeader.indexOf('application/json') !== -1) {
@@ -275,7 +275,7 @@ self.addEventListener('fetch', event => {
 
   function getRequest(request, opts) {
 
-    var resourceType = getResourceType(request);
+    var resourceType = getResourceType(request, opts);
 
     // Special case: when there is a redirection, then we get an exception in Firefox:
     // Corrupted Content Error
@@ -394,7 +394,7 @@ self.addEventListener('fetch', event => {
   function getStrategy(request, opts) {
     
     var strategy = '';
-    var resourceType = getResourceType(request);
+    var resourceType = getResourceType(request, opts);
 
     // JSON requests have 2 strategies: cache first + update (the default) or network first
     if (resourceType === 'json') {
@@ -475,7 +475,7 @@ self.addEventListener('fetch', event => {
   function onFetch(event, opts) {
 
     var request = event.request;
-    var resourceType = getResourceType(request);
+    var resourceType = getResourceType(request, opts);
     var cacheKey = cacheName(resourceType, opts);
 
     // Important: obtain the strategy first, and only then modify the request. That way we can force a given

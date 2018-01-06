@@ -60,6 +60,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         $configuration['${cacheBustParam}'] = GD_URLPARAM_SWCACHEBUST;
         // $configuration['${fontExtensions}'] = $this->get_font_extensions();
         $configuration['${staticCacheExtensions}'] = $this->get_staticcache_extensions();
+        $configuration['${staticResourceExtensions}'] = $this->get_staticresource_extensions();
 
         // Thememodes for the appshell
         global $gd_theme_manager;
@@ -152,7 +153,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
 
         return apply_filters(
             'PoP_ServiceWorkers_Job_Fetch:font-extensions',
-            array('woff', 'woff2', 'ttf', 'eof')
+            array('woff', 'woff2', 'ttf', 'eof', 'eot')
         );
     }
 
@@ -162,6 +163,17 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
             'PoP_ServiceWorkers_Job_Fetch:staticcache-extensions',
             array_merge(
                 array('js', 'css', 'jpg', 'jpeg', 'png', 'gif', 'svg'),
+                $this->get_font_extensions()
+            )
+        );
+    }
+
+    protected function get_staticresource_extensions() {
+
+        return apply_filters(
+            'PoP_ServiceWorkers_Job_Fetch:staticresource-extensions',
+            array_merge(
+                array('txt', 'ico', 'xml', 'xsl', 'css', 'js', 'svg', 'jpg', 'jpeg', 'png', 'gif', 'pdf'),
                 $this->get_font_extensions()
             )
         );
