@@ -555,7 +555,7 @@ self.addEventListener('fetch', event => {
           // maybe there is under a previous version, like https://content.getpop.org/en/loaders/posts/layouts/?...&v=0.358&tp=1487683333
           // then use that one
           // We obtain the URL for this alternate request under the Alias URL in IndexedDB
-          .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL/*, no_cors ? {mode: 'no-cors'} : {}*/)))) 
+          .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL)))) 
           .catch(function() { check_updated = false; return fetch(cacheBustRequest, fetchOpts) }) 
           .then(response => addToCache(cacheKey, request, response, true, opts))
           .then(response => refresh(request, response, true, opts))
