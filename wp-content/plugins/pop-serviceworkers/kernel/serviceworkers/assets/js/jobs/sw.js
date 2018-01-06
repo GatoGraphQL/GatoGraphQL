@@ -137,7 +137,7 @@ self.addEventListener('install', event => {
       return caches.open(cacheName(resourceType, opts)).then(function(cache) {
         return Promise.all(opts.cacheItems[resourceType].map(function(url) {
           // Use No Cors fetch mode if either: it comes from another domain, or it's a font file
-          return fetch(url, ((new URL(url)).origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(url)).pathname.endsWith('.'+ext)))) ? {mode: 'no-cors'} : {}).then(function(response) {
+          return fetch(url/*, ((new URL(url)).origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(url)).pathname.endsWith('.'+ext)))) ? {mode: 'no-cors'} : {}*/).then(function(response) {
             return cache.put(url, response.clone());
           });
         }))
