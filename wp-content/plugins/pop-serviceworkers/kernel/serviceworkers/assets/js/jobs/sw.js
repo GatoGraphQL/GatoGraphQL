@@ -211,7 +211,8 @@ self.addEventListener('fetch', event => {
       'static': {
 
         // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com), and for static, do not cache all file types
-        isFromMyOriginsOrPrecached: ((opts.origins.indexOf(url.origin) > -1 && opts.extensions.staticCache.some(ext => url.pathname.endsWith('.'+ext))) || opts.cacheItems[resourceType].indexOf(request.url) > -1),
+        // If it is from my origins: do not handle since "no-cors" since these assets can't be cached anyway since the response type will be "opaque" and response.ok = false
+        isNotNoCORSAndFromMyOriginsOrPrecached: ((request.mode !== 'no-cors' && opts.origins.indexOf(url.origin) > -1 && opts.extensions.staticCache.some(ext => url.pathname.endsWith('.'+ext))) || opts.cacheItems[resourceType].indexOf(request.url) > -1),
         
         // Do not handla dynamic images, eg: the Captcha: wp-content/plugins/pop-coreprocessors/library/captcha/captcha.png.php
         isNotDynamic: !request.url.endsWith('.php') && request.url.indexOf('.php?') === -1
