@@ -56,6 +56,10 @@ if (defined('POP_SYSTEM_VERSION')) {
 	require_once 'pop-system/load.php';		
 }
 
+if (defined('POP_CDN_INITIALIZED')) {
+	require_once 'pop-cdn/load.php';		
+}
+
 if (defined('POP_CDNCORE_INITIALIZED')) {
 	require_once 'pop-cdn-core/load.php';		
 }

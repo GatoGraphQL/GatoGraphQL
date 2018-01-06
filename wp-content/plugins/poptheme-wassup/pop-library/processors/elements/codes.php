@@ -57,8 +57,9 @@ class GD_Template_Processor_Codes extends GD_Template_Processor_CodesBase {
 				$imgcode = '';
 				if ($img = gd_images_welcome()) {
 
+					$imgattr = gd_images_attributes();
 					$imgcode = sprintf(
-						'<img src="%s" class="img-responsive">',
+						'<img src="%s" class="img-responsive" '.$imgattr.'>',
 						$img
 					);
 				}
