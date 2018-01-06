@@ -5,11 +5,17 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-function get_googlemaps_url() {
+function get_googlemaps_url($add_version = false) {
 
 	$googlemaps_url = 'https://maps.google.com/maps/api/js';
 	if (POP_COREPROCESSORS_APIKEY_GOOGLEMAPS) {
 		$googlemaps_url .= '?key='.POP_COREPROCESSORS_APIKEY_GOOGLEMAPS;
+	}
+
+	if ($add_version) {
+			
+		$version = get_bloginfo( 'version' );
+		$googlemaps_url = add_query_arg('ver', $version, $googlemaps_url);
 	}
 
 	return $googlemaps_url;
