@@ -7,18 +7,34 @@
 
 class PoPFrontend_Engine extends PoP_Engine {
 
-	var $crawlableitems, $runtimecrawlableitems, $scripts, $enqueue;
+	var $crawlableitems, $runtimecrawlableitems, $scripts, $enqueue, $scripttag_attributes;
 
 	function __construct() {
 
 		parent::__construct();
 
 		// Print needed scripts
-		$this->scripts = $this->enqueue = array();
+		$this->scripts = $this->enqueue = $this->scripttag_attributes = array();
 		add_action('wp_print_footer_scripts', array($this, 'print_scripts'));
 
 		// Priority 60: after priority 50 in wp-content/plugins/pop-frontendengine/kernel/resourceloader/initialization.php
 		add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 60);
+
+    	// Allow to add attributes crossorigin="anonymous"
+		// Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
+		add_filter(
+			'PoP_HTMLTags_Utils:scripttag_attributes', 
+			array($this, 'get_scripttag_attributes')
+		);
+	}
+
+	// Allow to add attributes 'async' or 'defer' to the script tag
+	function get_scripttag_attributes($scripttag_attributes) {
+		
+		return array_merge(
+			$scripttag_attributes,
+			$this->scripttag_attributes
+		);
 	}
 
 	function print_json() {
@@ -117,9 +133,14 @@ class PoPFrontend_Engine extends PoP_Engine {
 
 				// Comment Leo 07/11/2017: if enqueuing bundle/bundlegroup scripts, then we don't have the pop-manager.js file enqueued, 
 				// Then, move the functionality below to `enqueue_scripts`, as to wait until the corresponding scripts have been enqueued
+				// Comment Leo 06/01/2018: We need to add 'crossorigin="anonymous"' because the file will be uploaded to S3, and when accessing this file
+				// we will need header Access-Control-Allow-Origin "*", and through the S3 bucket's CORS configuration, we will get that header
+				// only if there is a request header "Origin". Adding the crossorigin will add header "Origin: null" which does the job
+				// Taken from https://stackoverflow.com/questions/17533888/s3-access-control-allow-origin-header#answer-35278803
 				$this->enqueue[] = array(
 					'property' => $property,
 					'file-url' => $file_url,
+					'scripttag-attributes' => 'crossorigin="anonymous"',
 				);
 				// $script = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name(POP_RESOURCELOADER_POPMANAGER);
 				// wp_register_script('pop-'.$property, $file_url, array($script), pop_version(), true);
@@ -192,6 +213,9 @@ class PoPFrontend_Engine extends PoP_Engine {
 			$dependencies = array($script);
 			wp_register_script('pop-'.$item['property'], $item['file-url'], $dependencies, $version, true);
 			wp_enqueue_script('pop-'.$item['property']);
+			if ($scripttag_attributes = $item['scripttag-attributes']) {
+				$this->scripttag_attributes['pop-'.$item['property']] = $scripttag_attributes;
+			}
 		}
 	}
 
