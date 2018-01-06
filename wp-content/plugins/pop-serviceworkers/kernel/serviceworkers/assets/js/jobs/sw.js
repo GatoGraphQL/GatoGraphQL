@@ -46,7 +46,7 @@ var config = {
     cachebust: ${cacheBustParam}
   },
   extensions: {
-    fonts: ${fontExtensions},
+    /*fonts: ${fontExtensions},*/
     staticCache: ${staticCacheExtensions},
   },
   contentCDN: {
