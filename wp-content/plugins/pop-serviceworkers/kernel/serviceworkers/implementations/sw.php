@@ -161,7 +161,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job {
         return apply_filters(
             'PoP_ServiceWorkers_Job_Fetch:staticcache-extensions',
             array_merge(
-                array('js', 'css'),
+                array('js', 'css', 'jpg', 'jpeg', 'png', 'gif', 'svg'),
                 $this->get_font_extensions()
             )
         );
