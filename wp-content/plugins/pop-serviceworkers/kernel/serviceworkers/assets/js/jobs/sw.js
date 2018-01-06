@@ -46,7 +46,6 @@ var config = {
     cachebust: ${cacheBustParam}
   },
   extensions: {
-    /*fonts: ${fontExtensions},*/
     staticCache: ${staticCacheExtensions},
   },
   contentCDN: {
@@ -84,17 +83,9 @@ function getOriginalURL(url, opts) {
   return url;
 }
 
-function addToCache(/*resourceType, */cacheKey, request, response, use_alias, opts) {
+function addToCache(cacheKey, request, response, use_alias, opts) {
+  
   // If coming from function refresh, response might be null
-  // Comment Leo 06/03/2017: calling addToCache before refresh now, so no need to ask if response is not null
-  // if (response !== null && response.ok) {
-  // Comment Leo 24/10/2017: if coming from the HTML request, and it hasn't hit the appshell, then appshellRequest will be null.
-  // Check for this case with "typeof (request) != 'undefined'". Otherwise, the content from the HTML request
-  // will also override, in the cache, the appShell
-  // if (response.ok) {
-  // Comment Leo 29/12/2017: for cross-domain static requests we don't know if the response is ok, since it is opaque, then don't check for that
-  // var url = new URL(request.url);
-  // if (request && response && ((url.origin !== self.location.origin && resourceType == 'static') || (url.origin === self.location.origin && response.ok))) {
   if (request && response && response.ok) {
 
     // Add to the cache
@@ -136,8 +127,7 @@ self.addEventListener('install', event => {
     return Promise.all(resourceTypes.map(function(resourceType) {
       return caches.open(cacheName(resourceType, opts)).then(function(cache) {
         return Promise.all(opts.cacheItems[resourceType].map(function(url) {
-          // Use No Cors fetch mode if either: it comes from another domain, or it's a font file
-          return fetch(url/*, ((new URL(url)).origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(url)).pathname.endsWith('.'+ext)))) ? {mode: 'no-cors'} : {}*/).then(function(response) {
+          return fetch(url).then(function(response) {
             return cache.put(url, response.clone());
           });
         }))
@@ -219,8 +209,7 @@ self.addEventListener('fetch', event => {
       },
       'static': {
 
-        // opts.extensions.staticCache: Do not cache all file types (eg: exclude images)
-        // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com)
+        // Either the resource comes from my origin(s) (eg: including my personal CDN), or it has been precached (eg: from an external cdn, such as cdnjs.cloudflare.com), and for static, do not cache all file types
         isFromMyOriginsOrPrecached: ((opts.origins.indexOf(url.origin) > -1 && opts.extensions.staticCache.some(ext => url.pathname.endsWith('.'+ext))) || opts.cacheItems[resourceType].indexOf(request.url) > -1),
         
         // Do not handla dynamic images, eg: the Captcha: wp-content/plugins/pop-coreprocessors/library/captcha/captcha.png.php
@@ -335,15 +324,7 @@ self.addEventListener('fetch', event => {
     }
     else */if (resourceType === 'json') {
 
-      // Remove the ignore strings, we don't want to send it to the server, it was added to the URL
-      // only to bypass the Cache First strategy
-      // // For convenience, the URL must finish with this string
-      // var ignore = opts.ignore[resourceType];
-      // ignore.forEach(function(str) {
-      //   if (request.url.endsWith(str)) {
-      //     request = new Request(request.url.substr(0, request.url.indexOf(str)));
-      //   }
-      // });
+      // Remove the ignore strings, we don't want to send it to the server, it was added to the URL only to bypass the Cache First strategy
       request = new Request(stripIgnoredUrlParameters(request.url, opts.ignore[resourceType]));
     }
     
@@ -383,12 +364,13 @@ self.addEventListener('fetch', event => {
       url.search += '&';
     }
     
-    // Comment Leo 14/08/2017: We set the cache-busting number to change every 1 second
-    // This is done because the request will go through the CDN. So if many users, at the
-    // same second, access the same page in the website, the SW refresh will get the response
-    // from the CDN, and it won't reach the server. 
-    // var fresh = Date.now(); // Every millisecond
-    var fresh = Math.floor(Date.now()/1000); // Every second
+    // Comment Leo 06/01/2018: this is not needed anymore, since adding Lambda@Edge to remove the sw-cachebust parameter
+    // // Comment Leo 14/08/2017: We set the cache-busting number to change every 1 second
+    // // This is done because the request will go through the CDN. So if many users, at the
+    // // same second, access the same page in the website, the SW refresh will get the response
+    // // from the CDN, and it won't reach the server. 
+    // var fresh = Math.floor(Date.now()/1000); // Every second
+    var fresh = Date.now(); // Every millisecond
     url.search += opts.params.cachebust + '=' + fresh;
 
     return new Request(url.toString());
@@ -424,8 +406,8 @@ self.addEventListener('fetch', event => {
       }
       else {
 
-          // Base strategy
-          strategy = SW_STRATEGIES_CACHEFIRSTTHENNETWORKTHENREFRESH;    
+        // Base strategy
+        strategy = SW_STRATEGIES_CACHEFIRSTTHENNETWORKTHENREFRESH;    
       }
     }
     else if (resourceType === 'html') {
@@ -449,7 +431,6 @@ self.addEventListener('fetch', event => {
     
     // Comment Leo 04/04/2017: use the original URL instead of the response.url, so that 2 responses with different thumbprints
     // are considered the same URL. Otherwise, it won't find the other one, and won't show the refresh message
-    // var key = response.url;
     var key = use_alias ? 'ETag-'+getOriginalURL(request.url, opts) : request.url;
     return localforage.getItem(key).then(function(previousETag) {
 
@@ -473,13 +454,7 @@ self.addEventListener('fetch', event => {
               type: 'refresh',
               // Comment Leo 16/03/2017: Use the request.url for the key, instead of the response.url, because sometimes these 2 are different.
               // Eg: https://getpop.org for request, https://getpop.org/en/ for response
-              // When this happens, the notification to the user to refresh the page doesn't appear because it was generated using the request url
-              // url: response.url
-              // // Comment Leo 04/04/2017: after adding the PoP CDN, the request URL will have the thumbprint param
-              // // However, if the page was open immediately using the cached version, and then there is a newer version
-              // // after being fetched with a different thumbprint, then it wouldn't find that tab
-              // // So then use original URL so it can always be found
-              // url: getOriginalURL(request.url, opts)
+              // When this happens, the notification to the user to refresh the page wouldn't appear because it was generated using the request url
               url: request.url
             };
             client.postMessage(JSON.stringify(message));
@@ -512,15 +487,6 @@ self.addEventListener('fetch', event => {
     
     var fetchOpts = {};
 
-    // Use No Cors to fetch cross-domain assets and font files
-    var origin = (new URL(request.url)).origin;
-    // var no_cors = origin !== self.location.origin || (resourceType == 'static' && opts.extensions.fonts.some(ext => (new URL(request.url)).pathname.endsWith('.'+ext)));
-    // if (no_cors) {
-
-    //   fetchOpts.mode = 'no-cors';
-    //   // request = new Request(request.url, {mode: 'no-cors'});
-    // }
-
     // We indicate if we must trigger another request to fetch up-to-date content and, if the content from the server
     // is more up-to-date than the cached one, then show a notification to the user to refresh the page
     var check_updated = false;
@@ -531,10 +497,6 @@ self.addEventListener('fetch', event => {
     if (strategy !== SW_STRATEGIES_CACHEFIRSTTHENNETWORK) {
     
       cacheBustRequest = getCacheBustRequest(request, opts);
-      // if (no_cors) {
-
-      //   cacheBustRequest = new Request(cacheBustRequest.url, {mode: 'no-cors'});
-      // }
     }
 
     // Static resources
@@ -546,7 +508,7 @@ self.addEventListener('fetch', event => {
       event.respondWith(
         fetchFromCache(request)
           .catch(() => fetch(request, fetchOpts)) 
-          .then(response => addToCache(/*resourceType, */cacheKey, request, response, false, opts))
+          .then(response => addToCache(cacheKey, request, response, false, opts))
       );
     }
     // HTML: First check if we have that HTML in the cache, which is fast, if not use the AppShell, which is slower since it depends on JS
@@ -569,13 +531,13 @@ self.addEventListener('fetch', event => {
           // The response from this fetch will be saved in the cached below, through the cacheBustRequest
           // Comment Leo 01/12/2017: this weird way of asking for !check_updated below, is to avoid the cache from fetchFromCache(request) to be saved again in the cache,
           // in such a way that may possibly override the cache written by the cacheBustRequest executed below!
-          .then(function(response) { if (!check_updated) { return addToCache(/*resourceType, */cacheKey, request, response, false, opts); } return response; })
+          .then(function(response) { if (!check_updated) { return addToCache(cacheKey, request, response, false, opts); } return response; })
           // Initialize the appshellRequest only now, so that the .then() below only works if the content comes from the appshell
           // Otherwise, this 2nd .then() will also be executed from the html content of the original request, overriding with its content the appshell content in the cache
           .catch(function() { appshellRequest = getAppShellRequest(request, opts); return fetchFromCache(appshellRequest, fetchOpts); }) 
           // If somehow can't, try to fetch the appshell from the network
           .catch(() => fetch(appshellRequest, fetchOpts)) 
-          .then(response => addToCache(/*resourceType, */cacheKey, appshellRequest, response, false, opts))
+          .then(response => addToCache(cacheKey, appshellRequest, response, false, opts))
       );
     }
     // JSON content
@@ -595,7 +557,7 @@ self.addEventListener('fetch', event => {
           // We obtain the URL for this alternate request under the Alias URL in IndexedDB
           .catch(() => localforage.getItem('Alias-'+getOriginalURL(request.url, opts)).then(alternateRequestURL => fetchFromCache(new Request(alternateRequestURL/*, no_cors ? {mode: 'no-cors'} : {}*/)))) 
           .catch(function() { check_updated = false; return fetch(cacheBustRequest, fetchOpts) }) 
-          .then(response => addToCache(/*resourceType, */cacheKey, request, response, true, opts))
+          .then(response => addToCache(cacheKey, request, response, true, opts))
           .then(response => refresh(request, response, true, opts))
       );
     }
@@ -606,7 +568,7 @@ self.addEventListener('fetch', event => {
 
       event.respondWith(
         fetch(cacheBustRequest, fetchOpts)
-          .then(response => addToCache(/*resourceType, */cacheKey, request, response, true, opts))
+          .then(response => addToCache(cacheKey, request, response, true, opts))
           .catch(() => fetchFromCache(request))
           //.catch(function(err) {/*console.log(err)*/})
       );
@@ -623,7 +585,7 @@ self.addEventListener('fetch', event => {
           // Comment Leo 06/03/2017: 1st save the cache back (even without checking the ETag), and only then call refresh,
           // because somehow sometimes the response ETag different than the stored one, it was saved, but nevertheless the 
           // SW cache returned the previous content!
-          .then(response => addToCache(/*resourceType, */cacheKey, request, response, use_alias, opts))
+          .then(response => addToCache(cacheKey, request, response, use_alias, opts))
           .then(response => refresh(request, response, use_alias, opts))
       );
     }
