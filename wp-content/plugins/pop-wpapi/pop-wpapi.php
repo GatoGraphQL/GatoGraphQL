@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_WPAPI_VERSION', 0.104);
+define ('POP_WPAPI_VERSION', 0.105);
 define ('POP_WPAPI_DIR', dirname(__FILE__));
 define ('POP_WPAPI_LIB', POP_WPAPI_DIR.'/library');
 
