@@ -328,11 +328,14 @@ class PoP_CoreProcessors_Initialization {
 
 				// Watch out: crossdomain comes after featuredimage! Because it needs to access its internal variables, after these were initialized
 				// And it depends on the user-account, to track when the user logs in/out
-				wp_register_script('pop-coreprocessors-mediamanager', $libraries_js_folder.'/mediamanager'.$suffix.'.js', array('jquery', 'pop', 'pop-coreprocessors-featuredimage'), POP_COREPROCESSORS_VERSION, true);
+				wp_register_script('pop-coreprocessors-mediamanager-state', $libraries_js_folder.'/mediamanager/mediamanager-state'.$suffix.'.js', array('jquery', 'pop', 'pop-coreprocessors-featuredimage'), POP_COREPROCESSORS_VERSION, true);
+				wp_enqueue_script('pop-coreprocessors-mediamanager-state');
+
+				wp_register_script('pop-coreprocessors-mediamanager', $libraries_js_folder.'/mediamanager/mediamanager'.$suffix.'.js', array('jquery', 'pop', 'pop-coreprocessors-featuredimage'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-mediamanager');
 
 				// Watch out: crossdomain comes after mediamanager! Because it depends on it
-				wp_register_script('pop-coreprocessors-mediamanager-cors', $libraries_js_folder.'/mediamanager-cors'.$suffix.'.js', array('jquery', 'pop', 'pop-coreprocessors-mediamanager'), POP_COREPROCESSORS_VERSION, true);
+				wp_register_script('pop-coreprocessors-mediamanager-cors', $libraries_js_folder.'/mediamanager/mediamanager-cors'.$suffix.'.js', array('jquery', 'pop', 'pop-coreprocessors-mediamanager'), POP_COREPROCESSORS_VERSION, true);
 				wp_enqueue_script('pop-coreprocessors-mediamanager-cors');
 
 				wp_register_script('pop-coreprocessors-tabs', $libraries_js_folder.'/tabs'.$suffix.'.js', array('jquery', 'pop'), POP_COREPROCESSORS_VERSION, true);

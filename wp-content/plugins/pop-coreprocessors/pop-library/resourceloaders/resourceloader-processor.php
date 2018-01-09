@@ -43,6 +43,7 @@ define ('POP_RESOURCELOADER_FEEDBACKMESSAGE', PoP_TemplateIDUtils::get_template_
 define ('POP_RESOURCELOADER_COREHANDLEBARSHELPERS', PoP_TemplateIDUtils::get_template_definition('core-helpers-handlebars'));
 define ('POP_RESOURCELOADER_MEDIAMANAGERCORS', PoP_TemplateIDUtils::get_template_definition('mediamanager-cors'));
 define ('POP_RESOURCELOADER_MEDIAMANAGER', PoP_TemplateIDUtils::get_template_definition('mediamanager'));
+define ('POP_RESOURCELOADER_MEDIAMANAGERSTATE', PoP_TemplateIDUtils::get_template_definition('mediamanager-state'));
 define ('POP_RESOURCELOADER_MENTIONS', PoP_TemplateIDUtils::get_template_definition('mentions'));
 define ('POP_RESOURCELOADER_MODALS', PoP_TemplateIDUtils::get_template_definition('modals'));
 define ('POP_RESOURCELOADER_SYSTEM', PoP_TemplateIDUtils::get_template_definition('system'));
@@ -94,6 +95,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_COREHANDLEBARSHELPERS,
 			POP_RESOURCELOADER_MEDIAMANAGERCORS,
 			POP_RESOURCELOADER_MEDIAMANAGER,
+			POP_RESOURCELOADER_MEDIAMANAGERSTATE,
 			POP_RESOURCELOADER_MENTIONS,
 			POP_RESOURCELOADER_MODALS,
 			POP_RESOURCELOADER_SYSTEM,
@@ -145,6 +147,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			POP_RESOURCELOADER_COREHANDLEBARSHELPERS => 'helpers.handlebars',
 			POP_RESOURCELOADER_MEDIAMANAGERCORS => 'mediamanager-cors',
 			POP_RESOURCELOADER_MEDIAMANAGER => 'mediamanager',
+			POP_RESOURCELOADER_MEDIAMANAGERSTATE => 'mediamanager-state',
 			POP_RESOURCELOADER_MENTIONS => 'mentions',
 			POP_RESOURCELOADER_MODALS => 'modals',
 			POP_RESOURCELOADER_SYSTEM => 'system',
@@ -190,6 +193,12 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
 			
 				return POP_COREPROCESSORS_DIR.'/js/'.$subpath.'libraries/3rdparties';
+
+			case POP_RESOURCELOADER_MEDIAMANAGERCORS:
+			case POP_RESOURCELOADER_MEDIAMANAGER:
+			case POP_RESOURCELOADER_MEDIAMANAGERSTATE:
+
+				return POP_COREPROCESSORS_DIR.'/js/'.$subpath.'libraries/mediamanager';
 		}
 	
 		return POP_COREPROCESSORS_DIR.'/js/'.$subpath.'libraries';
@@ -206,6 +215,12 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
 
 				return POP_COREPROCESSORS_DIR.'/js/libraries/3rdparties/'.$this->get_filename($resource).'.js';
+
+			case POP_RESOURCELOADER_MEDIAMANAGERCORS:
+			case POP_RESOURCELOADER_MEDIAMANAGER:
+			case POP_RESOURCELOADER_MEDIAMANAGERSTATE:
+
+				return POP_COREPROCESSORS_DIR.'/js/libraries/mediamanager/'.$this->get_filename($resource).'.js';
 		}
 
 		return POP_COREPROCESSORS_DIR.'/js/libraries/'.$this->get_filename($resource).'.js';
@@ -223,6 +238,13 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			case POP_RESOURCELOADER_PERFECTSCROLLBAR:
 			
 				$afterpath = '/3rdparties';
+				break;
+
+			case POP_RESOURCELOADER_MEDIAMANAGERCORS:
+			case POP_RESOURCELOADER_MEDIAMANAGER:
+			case POP_RESOURCELOADER_MEDIAMANAGERSTATE:
+
+				$afterpath = '/mediamanager';
 				break;
 		}
 
@@ -343,6 +365,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderPro
 			),
 			POP_RESOURCELOADER_MEDIAMANAGER => array(
 				'popMediaManager',
+			),
+			POP_RESOURCELOADER_MEDIAMANAGERSTATE => array(
+				'popMediaManagerState',
 			),
 			POP_RESOURCELOADER_MENTIONS => array(
 				'popMentions',
