@@ -22,9 +22,13 @@ class PoP_ResourceLoader_BundleMappingStorageManager {
 
 			$this->initialized = true;
 
-			// Get the inner variable from the cache, if it exists
-			global $pop_engine_filejsonstorage, $pop_resourceloader_bundlemappingstoragefilegenerator;
-			$this->entries = $pop_engine_filejsonstorage->get($pop_resourceloader_bundlemappingstoragefilegenerator->get_filepath());
+			// The DB was created in STAGING when running /generate-theme/, so make sure it is copied to PROD during deployment
+			if (PoP_Frontend_ServerUtils::use_generatetheme_output_files()) {
+
+				// Get the inner variable from the cache, if it exists
+				global $pop_engine_filejsonstorage, $pop_resourceloader_bundlemappingstoragefilegenerator;
+				$this->entries = $pop_engine_filejsonstorage->get($pop_resourceloader_bundlemappingstoragefilegenerator->get_filepath());
+			}
 		}
 	}
 

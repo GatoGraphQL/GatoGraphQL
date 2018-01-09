@@ -150,6 +150,12 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_DISABLEJS` (_true_|_false_): Strip the output of all Javascript code.
 
+- `POP_SERVER_USEGENERATETHEMEOUTPUTFILES` (_true_|_false_): Indicates that we are using all the output files produced from running `/generate-theme/` in this environment, namely:
+
+    - resourceloader-bundle-mapping.json
+    - resourceloader-generatedfiles.json
+    - All `pop-memory/` files
+
 ### Decentralization: enabling crossdomain
 
 To have a website consume data coming from other domains, crossdomain access must be allowed. For this, edit your .htaccess file like this:

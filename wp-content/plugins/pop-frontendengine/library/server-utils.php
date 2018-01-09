@@ -419,4 +419,37 @@ class PoP_Frontend_ServerUtils {
 
 		return false;
 	}
+
+	public static function use_generatetheme_output_files() {
+
+		// This constant indicates that we have run /generate-theme/ in this environment, and have created the output files
+		// (or, for PROD, we have copied the files from STAGING)
+		// These files are:
+		// 1- resourceloader-bundle-mapping.json
+		// 2- resourceloader-generatedfiles.json
+		// 3- All pop-memory/ files
+		// All files under pop-memory/ are way many, and it is tempting to not include them in the release, but still include resourceloader-generatedfiles.json
+		// These files must ALL be copied! We can't copy just `resourceloader-generatedfiles.json` but not the pop-memory/ files, 
+		// or the application will not work in function `is_defer()` for the resourceLoaders, which depend on pop-memory/ to find out if the resource must be set as "defer" or not
+		// The problem is here: if accessing the cached content from file resourceloader-generatedfiles.json, then pop-memory/ files 
+		// will not get regenerated on runtime, when doing:
+		// protected function register_scripts_or_styles($type) {
+		// 	...
+		// 	if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
+		// 		$resources = $pop_resourceloader_generatedfilesmanager->get_js_resources($vars_hash_id);
+		// 	}
+		// 	elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
+		// 		$resources = $pop_resourceloader_generatedfilesmanager->get_css_resources($vars_hash_id);	
+		// 	}
+		// 	...
+		// Then, we need consistency: we either use resourceloader-generatedfiles.json and copy the pop-memory/ files from STAGING to PROD, 
+		// or none and we generate these on runtime
+		if (defined('POP_SERVER_USEGENERATETHEMEOUTPUTFILES')) {
+			return POP_SERVER_USEGENERATETHEMEOUTPUTFILES;
+		}
+
+		return false;
+	}
+
+
 }
