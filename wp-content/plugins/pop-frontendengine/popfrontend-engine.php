@@ -11,10 +11,11 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_FRONTENDENGINE_VERSION', 0.155);
+define ('POP_FRONTENDENGINE_VERSION', 0.156);
+define ('POP_FRONTENDENGINE_VENDORRESOURCESVERSION', 0.100);
 define ('POP_FRONTENDENGINE_DIR', dirname(__FILE__));
 define ('POP_FRONTENDENGINE_PHPTEMPLATES_DIR', POP_FRONTENDENGINE_DIR.'/php-templates/compiled');
-define ('POP_RESOURCELOADER_ASSETS_DIR', POP_FRONTENDENGINE_DIR.'/kernel/resourceloader/config/assets');
+define ('POP_RESOURCELOADER_ASSETS_DIR', POP_FRONTENDENGINE_DIR.'/kernel/resourceloaders/config/assets');
 
 class PoPFrontend {
 
@@ -33,15 +34,14 @@ class PoPFrontend {
 	function init(){
 
 		// Allow other plug-ins to modify the plugins_url path (eg: pop-aws adding the CDN)
-		define ('POP_FRONTENDENGINE_URI', plugins_url('', __FILE__));
+		define ('POP_FRONTENDENGINE_URL', plugins_url('', __FILE__));
+		define ('POP_RESOURCES_DIR', WP_CONTENT_DIR.'/pop-resources');
+		define ('POP_RESOURCES_URL', WP_CONTENT_URL.'/pop-resources');
 
-		define ('POP_FRONTENDENGINE_CONTENT_DIR', POP_CONTENT_DIR.'/pop-frontendengine');
-		define ('POP_FRONTENDENGINE_CONTENT_URI', POP_CONTENT_URL.'/pop-frontendengine');
-		// define ('POP_FRONTENDENGINE_RUNTIMECONTENT_DIR', POP_RUNTIMECONTENT_DIR.'/pop-frontendengine');
-		// define ('POP_FRONTENDENGINE_RUNTIMECONTENT_URI', POP_RUNTIMECONTENT_URL.'/pop-frontendengine');
+		define ('POP_RESOURCELOADER_CONTENT_DIR', POP_CONTENT_DIR.'/resourceloader');
+		define ('POP_RESOURCELOADER_CONTENT_URL', POP_CONTENT_URL.'/resourceloader');
 		define ('POP_FRONTENDENGINE_BUILD_DIR', POP_BUILD_DIR.'/pop-frontendengine');
 		define ('POP_FRONTENDENGINE_GENERATECACHE_DIR', POP_GENERATECACHE_DIR.'/pop-frontendengine');
-		// define ('POP_FRONTENDENGINE_BUILD_URI', POP_BUILD_URL.'/pop-frontendengine');
 
 		if ($this->validate()) {
 			

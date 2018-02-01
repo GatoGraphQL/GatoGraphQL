@@ -1,5 +1,5 @@
 <?php
-class PoP_Engine_TemplateIDConstantDBFileGenerator extends PoP_Engine_FileGeneratorBase {
+class PoP_Engine_TemplateIDConstantDBFileGenerator extends PoP_Engine_FileLocationBase {
 
 	function get_dir() {
 
@@ -10,13 +10,6 @@ class PoP_Engine_TemplateIDConstantDBFileGenerator extends PoP_Engine_FileGenera
 
 		return 'template-ids.json';
 	}
-
-	// public function generate() {
-
-	// 	// Save the DB in the hard disk
-	// 	global $pop_templateidmanager, $pop_engine_filejsonstorage;
-	// 	$pop_engine_filejsonstorage->save($this->get_filepath(), $pop_templateidmanager->get_database());
-	// }
 }
 	
 /**---------------------------------------------------------------------------------------------------------------

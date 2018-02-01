@@ -5,8 +5,8 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 @font-face {
   font-family: 'Rockwell';
-  src: url('../../fonts/Rockwell.eot');
-  src: local('Rockwell Regular'), local('Rockwell'), url('../../fonts/Rockwell.ttf') format('truetype');
+  src: url('../fonts/Rockwell.eot');
+  src: local('Rockwell Regular'), local('Rockwell'), url('../fonts/Rockwell.woff2') format('woff2'), url('../fonts/Rockwell.woff') format('woff'), url('../fonts/Rockwell.ttf') format('truetype'), url('../fonts/Rockwell.svg') format('svg');
   font-display: optional;
 } 
 

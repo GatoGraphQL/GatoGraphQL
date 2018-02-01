@@ -23,7 +23,7 @@ class PoPFrontend_Initialization {
 		if (!is_admin()/* && !GD_TemplateManager_Utils::is_search_engine()*/) {
 
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
-		
+
 			// Print all jQuery functions, execute after all the plugin scripts have loaded
 			// Load before we start printing the footer scripts, so we can add the 'after' data to the required scripts
 			add_action('wp_print_footer_scripts', array($this, 'init_scripts'), 0);
@@ -56,7 +56,7 @@ class PoPFrontend_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = POP_FRONTENDENGINE_URI.'/js';
+			$js_folder = POP_FRONTENDENGINE_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
@@ -165,7 +165,7 @@ class PoPFrontend_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = POP_FRONTENDENGINE_URI.'/js/dist/templates/';
+		$folder = POP_FRONTENDENGINE_URL.'/js/dist/templates/';
 
 		wp_enqueue_script('pagesectionextension-replicable-tmpl', $folder.'pagesectionextension-replicable.tmpl.js', array('handlebars'), POP_FRONTENDENGINE_VERSION, true);
 		wp_enqueue_script('pagesectionextension-frame-tmpl', $folder.'pagesectionextension-frame.tmpl.js', array('handlebars'), POP_FRONTENDENGINE_VERSION, true);
@@ -373,23 +373,27 @@ class PoPFrontend_Initialization {
 				}
 			}
 			
-			// Comment Leo 07/10/2017: it makes no sense to send the bundle(group) ids, because these ids
-			// are different to the ones in the generated files
-			// Unless they are taken from the pop-generatecache! (Which were saved when running the generate process)
-			// Only then can use
-			global $pop_resourceloader_bundlemappingstoragemanager;
-	        if ($pop_resourceloader_bundlemappingstoragemanager->has_cached_entries()) {
+			// Printing loaded assets is needed only if repeating the resources from "loading-frame" in resources.js (for "fetching-json")
+			if (!PoP_Frontend_ServerUtils::skip_loadingframe_resources()) {
 
-				$bundle_group_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundlegroup_ids();
-				$bundle_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundle_ids();
-				$this->scripts[] = sprintf(
-					'popResourceLoader["loaded-by-domain"]["%s"] = %s;',
-					get_site_url(),
-					json_encode(array(
-						'bundles' => $bundle_ids,
-						'bundle-groups' => $bundle_group_ids,
-					))
-				);
+				// Comment Leo 07/10/2017: it makes no sense to send the bundle(group) ids, because these ids
+				// are different to the ones in the generated files
+				// Unless they are taken from the pop-generatecache! (Which were saved when running the generate process)
+				// Only then can use
+				global $pop_resourceloader_mappingstoragemanager;
+		        if (!$pop_resourceloader_mappingstoragemanager->has_cached_entries()) {
+
+					$bundle_group_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundlegroup_ids();
+					$bundle_ids = $popfrontend_resourceloader_scriptsandstyles_registration->get_bundle_ids();
+					$this->scripts[] = sprintf(
+						'popResourceLoader["loaded-by-domain"]["%s"] = %s;',
+						get_site_url(),
+						json_encode(array(
+							'bundles' => $bundle_ids,
+							'bundle-groups' => $bundle_group_ids,
+						))
+					);
+				}
 			}
 		}
 

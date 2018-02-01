@@ -28,26 +28,11 @@ function unescapeHtml(unsafe) {
     d.innerHTML = unsafe;
     return d.innerText || d.text || d.textContent;
 }
-
 function add_query_arg(key, value, url){
 
     url += (url.split('?')[1] ? '&':'?') + key + '=' + value;
     return url;
 }
-
-// // Taken from https://stackoverflow.com/questions/8692348/remove-a-query-argument-from-a-url-in-javascript
-// var removeQueryFields = function (url, args) {
-
-//     if (!args.length) {
-//         return url;
-//     }
-//     // var fields = [].slice.call(arguments, 1).join('|'),
-//     var fields = args.join('|'),
-//         parts = url.split( new RegExp('[&?](' + fields + ')=[^&]*') ),
-//         length = parts.length - 1;
-//     // return parts[0] + '?' + (length ? parts[length].slice(1) : '');
-//     return parts[0] + (length ? parts[length].slice(1) : '');
-// }
 // Copied from https://developers.google.com/web/showcase/2015/service-workers-iowa
 function removeQueryFields(url, params) {
 
@@ -75,21 +60,8 @@ function removeQueryFields(url, params) {
     })
     .join('&');
 
-  // return url.replace(parser.search, search);
   return parser.protocol+'//'+parser.host+parser.pathname+(search?'?'+search:'')+parser.hash;
 }
-
-// function hashCode(str){
-//     var hash = 0;
-//     if (str.length == 0) return hash;
-//     for (i = 0; i < str.length; i++) {
-//         char = str.charCodeAt(i);
-//         hash = ((hash<<5)-hash)+char;
-//         hash = hash & hash; // Convert to 32bit integer
-//     }
-//     return hash;
-// }
-
 function removeParams(url) {
     
     if (url.indexOf('?') > -1) {
@@ -114,10 +86,7 @@ function getParams(url) {
     return '';
 }
 
-
-// Code taken from here:
-//http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
-//http://jsbin.com/adali3/2?test=Hello&person[]=jeff&person[]=jim&person[extra]=john&test3&nocache=1383479814141
+// Code taken from here: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values
 var urlParams = {};
 function getParam(key, url) {
 

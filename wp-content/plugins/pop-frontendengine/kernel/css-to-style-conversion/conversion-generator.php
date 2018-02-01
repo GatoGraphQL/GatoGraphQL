@@ -1,5 +1,5 @@
 <?php
-class PoP_Frontend_ConversionFileGenerator extends PoP_Engine_FileGeneratorBase {
+class PoP_Frontend_ConversionFileGenerator extends PoP_Engine_FileLocationBase {
 
 	function get_dir() {
 

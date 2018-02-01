@@ -5,8 +5,6 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_TEMPLATE_LAYOUTTAG_TYPEAHEAD_COMPONENT', PoP_TemplateIDUtils::get_template_definition('layouttag-typeahead-component'));
-
 class GD_Template_Processor_TagTypeaheadComponentLayoutsBase extends GD_Template_ProcessorBase {
 
 	function get_template_source($template_id, $atts) {

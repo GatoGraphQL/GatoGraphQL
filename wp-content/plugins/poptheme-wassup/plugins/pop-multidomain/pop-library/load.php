@@ -7,3 +7,4 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 require_once 'settingsprocessors/load.php';
+require_once 'resourceloaders/load.php';

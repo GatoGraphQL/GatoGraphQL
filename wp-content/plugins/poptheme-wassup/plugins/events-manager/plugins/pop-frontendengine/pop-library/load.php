@@ -1,3 +1,3 @@
 <?php
 
-require_once 'resourceloader/load.php';
+require_once 'resourceloaders/load.php';

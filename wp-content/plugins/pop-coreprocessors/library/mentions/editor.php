@@ -13,7 +13,7 @@ function gd_mentions_external_plugins($plugins) {
     return $plugins;
   }
 
-  $js_folder = POP_COREPROCESSORS_URI.'/js';
+  $js_folder = POP_COREPROCESSORS_URL.'/js';
   $includes_js_folder = $js_folder.'/includes';
 
   // tinyMCE-mention plug-in: https://github.com/CogniStreamer/tinyMCE-mention

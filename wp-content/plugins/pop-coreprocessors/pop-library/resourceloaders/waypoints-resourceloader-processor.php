@@ -62,7 +62,7 @@ class PoP_CoreProcessors_WaypointsResourceLoaderProcessor extends PoP_JSResource
 	function get_path($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return POP_COREPROCESSORS_URI.'/js/'.$subpath.'libraries/3rdparties/waypoints';
+		return POP_COREPROCESSORS_URL.'/js/'.$subpath.'libraries/3rdparties/waypoints';
 	}
 
 	function get_jsobjects($resource) {

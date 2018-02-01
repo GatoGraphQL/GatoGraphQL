@@ -1,6 +1,13 @@
 <?php
 class PoPTheme_Wassup_Installation {
 
+	function system_generate() {
+
+		global $popthemewassup_backgroundimage_filegenerator, $popthemewassup_feedthumb_filegenerator;
+		$popthemewassup_backgroundimage_filegenerator->generate();
+		$popthemewassup_feedthumb_filegenerator->generate();
+	}
+
 	function system_activateplugins() {
 
 		// Activate plugins: do it immediately
@@ -24,6 +31,9 @@ class PoPTheme_Wassup_Installation {
 
 		// Disable REST API
 		$plugin_version['disable-json-api'] = POPTHEME_WASSUP_PLUGINACTIVATION_DISABLERESTAPI_VERSION;
+
+		// PoP Cluster ResourceLoader
+		$plugin_version['pop-cluster-resourceloader'] = POPTHEME_WASSUP_PLUGINACTIVATION_CLUSTERRESOURCELOADER_VERSION;
 
 		// Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
 		$version = pop_version();

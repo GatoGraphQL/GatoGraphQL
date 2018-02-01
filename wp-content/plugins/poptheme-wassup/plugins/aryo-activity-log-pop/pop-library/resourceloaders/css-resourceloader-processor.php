@@ -40,15 +40,15 @@ class PopThemeWassup_AAL_CSSResourceLoaderProcessor extends PoP_CSSResourceLoade
 		return POPTHEME_WASSUP_DIR.'/css/'.$subpath.'templates/plugins/aryo-activity-log-pop';
 	}
 	
-	function get_asset_path($resource) {
+	// function get_asset_path($resource) {
 
-		return POPTHEME_WASSUP_DIR.'/css/templates/plugins/aryo-activity-log-pop/'.$this->get_filename($resource).'.css';
-	}
+	// 	return POPTHEME_WASSUP_DIR.'/css/templates/plugins/aryo-activity-log-pop/'.$this->get_filename($resource).'.css';
+	// }
 	
 	function get_path($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return POPTHEME_WASSUP_URI.'/css/'.$subpath.'templates/plugins/aryo-activity-log-pop';
+		return POPTHEME_WASSUP_URL.'/css/'.$subpath.'templates/plugins/aryo-activity-log-pop';
 	}
 }
 

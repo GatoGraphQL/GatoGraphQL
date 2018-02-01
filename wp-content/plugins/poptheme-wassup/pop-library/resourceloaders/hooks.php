@@ -181,6 +181,10 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks {
 
 				$resources[] = POP_RESOURCELOADER_CSS_LAYOUT;
 			}
+			elseif ($resourceloader_att == 'thumb-feed') {
+
+				$resources[] = POP_RESOURCELOADER_CSS_FEEDTHUMB;
+			}
 		}
 
 		// Allow to inject the $template_id here for several cases
@@ -202,6 +206,12 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks {
 	}
 
 	function get_manager_dependencies($dependencies) {
+
+		// Generic css
+		$dependencies[] = POP_RESOURCELOADER_CSS_BACKGROUNDIMAGE;
+		$dependencies[] = POP_RESOURCELOADER_CSS_PAGESECTIONGROUP;
+		$dependencies[] = POP_RESOURCELOADER_CSS_THEMEWASSUP;
+		$dependencies[] = POP_RESOURCELOADER_EXTERNAL_CSS_FONTAWESOME;
 
 		// All functions in files condition-functions.js and ure-aal-functions.js 
 		// are invoked through `popJSLibraryManager.execute(options.hash.method, ...`

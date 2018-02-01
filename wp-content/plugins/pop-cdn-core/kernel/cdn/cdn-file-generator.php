@@ -7,7 +7,7 @@ class PoP_CDNCore_ConfigFileGenerator extends PoP_Engine_RendererFileGeneratorBa
 	}
 	function get_url() {
 
-		return POP_CDNCORE_ASSETDESTINATION_URI;
+		return POP_CDNCORE_ASSETDESTINATION_URL;
 	}
 
 	function get_filename() {

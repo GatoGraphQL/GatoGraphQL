@@ -11,7 +11,7 @@ Author URI: https://getpop.org/en/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_CDNCORE_VERSION', 0.155);
+define ('POP_CDNCORE_VERSION', 0.156);
 define ('POP_CDNCORE_DIR', dirname(__FILE__));
 define ('POP_CDNCORE_ASSETS_DIR', POP_CDNCORE_DIR.'/kernel/cdn/assets');
 
@@ -25,17 +25,10 @@ class PoP_CDNCore {
 	}
 	function init(){
 
-		define ('POP_CDNCORE_URI', plugins_url('', __FILE__));
+		define ('POP_CDNCORE_URL', plugins_url('', __FILE__));
 
-		// // Allow the Theme to override the cache folder (eg: to add a custom folder after ir, eg: pop-cache/mesym/)
-		// if (!defined ('POP_CDNCORE_ASSETDESTINATION_DIR')) {
-		// 	define ('POP_CDNCORE_ASSETDESTINATION_DIR', WP_CONTENT_DIR.'/pop-cdn');
-		// }
-		// if (!defined ('POP_CDNCORE_ASSETDESTINATION_URI')) {
-		// 	define ('POP_CDNCORE_ASSETDESTINATION_URI', WP_CONTENT_URL.'/pop-cdn');
-		// }
-		define ('POP_CDNCORE_ASSETDESTINATION_DIR', POP_CONTENT_DIR.'/pop-cdn');
-		define ('POP_CDNCORE_ASSETDESTINATION_URI', POP_CONTENT_URL.'/pop-cdn');
+		define ('POP_CDNCORE_ASSETDESTINATION_DIR', POP_CONTENT_DIR.'/cdn');
+		define ('POP_CDNCORE_ASSETDESTINATION_URL', POP_CONTENT_URL.'/cdn');
 
 		if ($this->validate()) {
 			

@@ -220,16 +220,16 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function get_bundle_id($resources) {
 
         self::init();
-        return self::get_set_id($resources, self::$bundle_ids, self::$bundle_counter);
+        return self::get_set_id('bundle', $resources, self::$bundle_ids, self::$bundle_counter);
     }
 
     public static function get_bundlegroup_id($bundles) {
 
         self::init();
-        return self::get_set_id($bundles, self::$bundlegroup_ids, self::$bundlegroup_counter);
+        return self::get_set_id('bundlegroup', $bundles, self::$bundlegroup_ids, self::$bundlegroup_counter);
     }
 
-    protected static function get_set_id($set, &$set_ids, &$set_counter) {
+    protected static function get_set_id($handle, $set, &$set_ids, &$set_counter) {
 
         // Order them, so that 2 sets with the same resources, but on different order, are still considered the same
         array_multisort($set);
@@ -239,6 +239,17 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Instead of calculating a hash, simply keep a counter, in order to further reduce the size of the generated file
         $set_id = $set_ids[$encoded];
+        if (!is_null($set_id)) { // It could be 0
+
+            return $set_id;
+        }
+
+        // Allow 3rd parties to hook in the ID. Eg: pop-cluster can keep all bundles/bundlegroups for all websites in a common repository
+        $set_id = apply_filters(
+            'PoP_ResourceLoaderProcessorUtils:set-id:'.$handle,
+            null,
+            $encoded
+        );
         if (!is_null($set_id)) { // It could be 0
 
             return $set_id;

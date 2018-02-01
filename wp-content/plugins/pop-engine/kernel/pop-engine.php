@@ -153,7 +153,8 @@ class PoP_Engine {
 
 		$template_id = $this->get_toplevel_template_id();
 		$output_items = $this->get_output_items();
-		if (!($this->resultsObject = $this->get_results_object($template_id, $output_items))) {
+		$this->init_results_object($template_id, $output_items);
+		if (!$this->resultsObject) {
 
 			return;
 		}
@@ -343,7 +344,7 @@ class PoP_Engine {
 		return $atts;
 	}
 
-	protected function get_results_object($template_id, $output_items) {
+	protected function init_results_object($template_id, $output_items) {
 
 		global $gd_template_processor_manager, $gd_template_cachemanager;
 		if (!($processor = $gd_template_processor_manager->get_processor($template_id))) {
@@ -354,34 +355,7 @@ class PoP_Engine {
 		$formatter = $this->get_datastructure_formatter();
 		$request = $_REQUEST;
 
-		// // If passing no setting items, then bring everything
-		// if (empty($output_items)) {
 
-		// 	$output_items = array(
-		// 		'settings',
-		// 		'data'
-		// 	);
-		// }
-
-		// $initial_atts = array();
-		
-		// // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
-		// // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
-		// // First check if there's a cache stored
-		// if (!doing_post() && PoP_ServerUtils::use_cache()) {
-			
-		// 	$atts = $gd_template_cachemanager->get_cache_by_template_id($template_id, POP_CACHETYPE_ATTS, true);
-
-		// 	// If there is no cached one, generate the atts and cache it
-		// 	if (!$atts) {
-
-		// 		$atts = $processor->init_atts($template_id, $initial_atts);
-		// 		$gd_template_cachemanager->store_cache_by_template_id($template_id, POP_CACHETYPE_ATTS, $atts, true);
-		// 	}
-		// }
-		// else {
-		// 	$atts = $processor->init_atts($template_id, $initial_atts);
-		// }
 		$atts = $this->get_atts($template_id);
 
 		// Save it to be used by the children class
@@ -436,22 +410,33 @@ class PoP_Engine {
 			$runtimesettings = $this->get_json_runtimesettings($template_id, $atts);
 		}
 
+		$this->resultsObject = array(
+			'json' => $formatter->get_formatted_settings($settings, $runtimesettings, $sitemapping),
+		);
+
+		// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
+		$this->resultsObject['cachedsettings'] = $cachedsettings;
+
+		// Give the nocache-fields back also, to properly generate the ETag
+		$this->resultsObject['nocache-fields'] = $data['nocache-fields'];
+
+		// Comment Leo 20/01/2018: we must first initialize all the settings, and only later add the data.
+		// That is because calculating the data may need the values from the settings. Eg: for the resourceLoader, 
+		// calculating $loadingframe_resources needs to know all the Handlebars templates from the "sitemapping" as to generate file "resources.js",
+		// which is done through an action, called through get_data()
 		// Data = dataset (data-ids) + feedback + database
 		// + Search Engine Crawlable data
 		if (in_array('data', $output_items)) {
 
 			$data = $this->get_data($template_id, $processor, $atts, $formatter, $request);
+			$this->resultsObject['json'] = array_merge(
+				$this->resultsObject['json'],
+				$formatter->get_formatted_data($data)
+			);
+
+			// Add the crawlable data
+			$this->resultsObject['crawlable-data'] = $data['crawlable-data'] ?? array();
 		}
-
-		$resultsObject = $formatter->get_formatted_data($settings, $runtimesettings, $sitemapping, $data);
-
-		// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
-		$resultsObject['cachedsettings'] = $cachedsettings;
-
-		// Give the nocache-fields back also, to properly generate the ETag
-		$resultsObject['nocache-fields'] = $data['nocache-fields'];
-
-		return $resultsObject;
 	}
 
 	protected function get_json_runtimesettings($template_id, $atts) {

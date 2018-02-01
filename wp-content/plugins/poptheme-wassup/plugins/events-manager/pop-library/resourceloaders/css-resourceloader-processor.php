@@ -43,15 +43,15 @@ class PoPTheme_Wassup_EM_CSSResourceLoaderProcessor extends PoP_CSSResourceLoade
 		return POPTHEME_WASSUP_DIR.'/css/'.$subpath.'templates/plugins/events-manager';
 	}
 	
-	function get_asset_path($resource) {
+	// function get_asset_path($resource) {
 
-		return POPTHEME_WASSUP_DIR.'/css/templates/plugins/events-manager/'.$this->get_filename($resource).'.css';
-	}
+	// 	return POPTHEME_WASSUP_DIR.'/css/templates/plugins/events-manager/'.$this->get_filename($resource).'.css';
+	// }
 	
 	function get_path($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return POPTHEME_WASSUP_URI.'/css/'.$subpath.'templates/plugins/events-manager';
+		return POPTHEME_WASSUP_URL.'/css/'.$subpath.'templates/plugins/events-manager';
 	}
 }
 

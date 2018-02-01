@@ -15,19 +15,19 @@ class GD_DataLoad_DataStructureFormatter_Results extends GD_DataLoad_DataStructu
 	}
 	
 	// Just return the first content of the DB (disregard dbKey)
-	function get_formatted_data($settings, $runtimesettings, $sitemapping, $data) {
+	function get_formatted_settings($settings, $runtimesettings, $sitemapping) {
+	
+		return array();
+	}
+	function get_formatted_data($data) {
 	
 		$dbcontent = array_values($data['database']);
-
 		if ($dbcontent && $dbcontent[0]) {
-			// $json = json_encode($dbcontent[0]);
+
 			$json = $dbcontent[0];
 		}
-		else {
-			// $json = json_encode(array(), JSON_FORCE_OBJECT);
-			$json = array();
-		}
-		return array('json' => $json);
+
+		return $json ?? array();
 	}
 
 	// Add dataitem to dataset
@@ -39,7 +39,6 @@ class GD_DataLoad_DataStructureFormatter_Results extends GD_DataLoad_DataStructu
 
 		return $dataitem;
 	}
-
 }
 	
 /**---------------------------------------------------------------------------------------------------------------

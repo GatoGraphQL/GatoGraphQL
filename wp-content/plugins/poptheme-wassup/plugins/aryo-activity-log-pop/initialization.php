@@ -16,13 +16,12 @@ class PopThemeWassup_AAL_Initialization {
 
 	function register_styles() {
 
-		$css_folder = POPTHEME_WASSUP_URI.'/css';
-		$dist_css_folder = $css_folder . '/dist';
-		$templates_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/templates';
-		$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
-
 		if (!PoP_Frontend_ServerUtils::use_bundled_resources() && !PoP_Frontend_ServerUtils::use_code_splitting()) {
-		// if (!PoP_Frontend_ServerUtils::use_bundled_resources() && !PoP_Frontend_ServerUtils::include_resources_in_body()) {
+
+			$css_folder = POPTHEME_WASSUP_URL.'/css';
+			$dist_css_folder = $css_folder . '/dist';
+			$templates_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/templates';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
 
 			wp_register_style('poptheme-wassup-aal-notification-layout', $templates_css_folder . '/plugins/aryo-activity-log-pop/notification-layout'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
 			wp_enqueue_style('poptheme-wassup-aal-notification-layout');

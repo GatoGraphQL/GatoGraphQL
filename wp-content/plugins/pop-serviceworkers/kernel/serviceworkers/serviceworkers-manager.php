@@ -13,7 +13,7 @@ class PoP_ServiceWorkers_Manager {
 	}
 	function get_url(){
 
-		return POP_SERVICEWORKERS_ASSETDESTINATION_URI;
+		return POP_SERVICEWORKERS_ASSETDESTINATION_URL;
 	}
 	function get_dependencies_foldername(){
 

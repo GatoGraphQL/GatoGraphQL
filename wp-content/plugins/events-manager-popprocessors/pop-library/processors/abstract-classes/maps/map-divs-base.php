@@ -11,31 +11,52 @@ class GD_Template_Processor_MapDivsBase extends GD_Template_ProcessorBase {
 	
 		return GD_TEMPLATESOURCE_MAP_DIV;
 	}
+	
+	function get_modules($template_id) {
+	
+		$ret = parent::get_modules($template_id);
+
+		if ($inners = $this->get_inner_templates($template_id)) {
+			$ret = array_merge(
+				$ret,
+				$inners
+			);
+		}
+
+		return $ret;
+	}
+
+	function get_inner_templates($template_id) {
+
+		return array();
+	}
+
+	function get_template_configuration($template_id, $atts) {
+
+		global $gd_template_processor_manager;
+
+		$ret = parent::get_template_configuration($template_id, $atts);
+
+		if ($inners = $this->get_inner_templates($template_id)) {
+			
+			$ret[GD_JS_TEMPLATEIDS/*'template-ids'*/]['inners'] = $inners;
+			foreach ($inners as $inner) {
+
+				$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/][$inner] = $gd_template_processor_manager->get_processor($inner)->get_settings_id($inner);
+			}
+		}
+
+		return $ret;
+	}
 
 	function get_block_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_block_jsmethod($template_id, $atts);
 
 		$this->add_jsmethod($ret, 'map');
-		
-		// // Allow to set the map to critical
-		// if ($this->is_critical($template_id, $atts)) {
-
-		// 	$this->add_jsmethod($ret, 'map', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
-		// }
-		// else {
-
-		// 	$this->add_jsmethod($ret, 'map');
-		// }
 
 		return $ret;
 	}
-
-	// function is_critical($template_id, $atts) {
-
-	// 	// Allow to set the value from above
-	// 	return $this->get_att($template_id, $atts, 'critical');
-	// }
 
 	function open_onemarker_infowindow($template_id, $atts) {
 
@@ -43,8 +64,6 @@ class GD_Template_Processor_MapDivsBase extends GD_Template_ProcessorBase {
 	}
 
 	function init_atts($template_id, &$atts) {
-
-		// $this->add_att($template_id, $atts, 'critical', false);
 
 		// Open the infoWindow automatically when the map has only 1 marker?
 		$this->add_att($template_id, $atts, 'open-onemarker-infowindow', $this->open_onemarker_infowindow($template_id, $atts));

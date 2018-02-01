@@ -15,7 +15,7 @@ class GD_Template_Processor_StaticTypeaheadComponentFormComponentsBase extends G
 
 		return 'value';
 	}
-	function get_template_source($template_id, $atts) {
+	protected function get_component_template_source($template_id) {
 
 		return GD_TEMPLATESOURCE_LAYOUTSTATIC_TYPEAHEAD_COMPONENT;
 	}

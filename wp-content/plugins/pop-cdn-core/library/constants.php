@@ -16,8 +16,7 @@ function pop_cdncore_jquery_constants($jquery_constants) {
 
 	if (POP_CDN_CONTENT_URI) {
 
-		$jquery_constants['CDN_CONTENT_URI'] = POP_CDN_CONTENT_URI;
-		// $jquery_constants['CDN_URLPARAM_VERSION'] = POP_CDNCORE_URLPARAM_VERSION;
+		// $jquery_constants['CDN_CONTENT_URI'] = POP_CDN_CONTENT_URI;
 		$jquery_constants['CDN_URLPARAM_THUMBPRINT'] = GD_URLPARAM_CDNTHUMBPRINT;
 		$jquery_constants['CDN_THUMBPRINTVALUES'] = POP_CDNCORE_THUMBPRINTVALUES;
 		$jquery_constants['CDN_SEPARATOR_THUMBPRINT'] = POP_CDNCORE_SEPARATOR_THUMBPRINT;

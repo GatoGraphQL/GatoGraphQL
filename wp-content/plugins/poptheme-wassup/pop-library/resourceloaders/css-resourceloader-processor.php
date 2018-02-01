@@ -5,6 +5,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
+define ('POP_RESOURCELOADER_CSS_PAGESECTIONGROUP', PoP_TemplateIDUtils::get_template_definition('css-pagesectiongroup'));
+define ('POP_RESOURCELOADER_CSS_THEMEWASSUP', PoP_TemplateIDUtils::get_template_definition('css-theme-wassup'));
+define ('POP_RESOURCELOADER_CSS_THEMEWASSUPBOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('css-themebootstrap'));
+define ('POP_RESOURCELOADER_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP', PoP_TemplateIDUtils::get_template_definition('css-themetypeaheadbootstrap'));
 define ('POP_RESOURCELOADER_CSS_BLOCKGROUPHOMEWELCOME', PoP_TemplateIDUtils::get_template_definition('css-blockgroup-home-welcome'));
 define ('POP_RESOURCELOADER_CSS_COLLAPSEHOMETOP', PoP_TemplateIDUtils::get_template_definition('css-collapse-hometop'));
 define ('POP_RESOURCELOADER_CSS_QUICKLINKGROUPS', PoP_TemplateIDUtils::get_template_definition('css-quicklinkgroups'));
@@ -41,6 +45,10 @@ class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderPr
 	function get_resources_to_process() {
 
 		return array(
+			POP_RESOURCELOADER_CSS_PAGESECTIONGROUP,
+			POP_RESOURCELOADER_CSS_THEMEWASSUP,
+			POP_RESOURCELOADER_CSS_THEMEWASSUPBOOTSTRAP,
+			POP_RESOURCELOADER_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP,
 			POP_RESOURCELOADER_CSS_BLOCKGROUPHOMEWELCOME,
 			POP_RESOURCELOADER_CSS_COLLAPSEHOMETOP,
 			POP_RESOURCELOADER_CSS_QUICKLINKGROUPS,
@@ -76,6 +84,10 @@ class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderPr
 	function get_filename($resource) {
 	
 		$filenames = array(
+			POP_RESOURCELOADER_CSS_PAGESECTIONGROUP => 'pagesection-group',
+			POP_RESOURCELOADER_CSS_THEMEWASSUP => 'style',
+			POP_RESOURCELOADER_CSS_THEMEWASSUPBOOTSTRAP => 'custom.bootstrap',
+			POP_RESOURCELOADER_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP => 'typeahead.js-bootstrap',
 			POP_RESOURCELOADER_CSS_BLOCKGROUPHOMEWELCOME => 'blockgroup-home-welcome',
 			POP_RESOURCELOADER_CSS_COLLAPSEHOMETOP => 'collapse-hometop',
 			POP_RESOURCELOADER_CSS_QUICKLINKGROUPS => 'quicklinkgroups',
@@ -113,6 +125,38 @@ class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderPr
 		return parent::get_filename($resource);
 	}
 	
+	function get_referenced_files($resource) {
+
+		$referenced_files = parent::get_referenced_files($resource);
+
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CSS_THEMEWASSUP:
+
+				$referenced_files[] = '../fonts/Rockwell.eot';
+				$referenced_files[] = '../fonts/Rockwell.svg';
+				$referenced_files[] = '../fonts/Rockwell.ttf';
+				$referenced_files[] = '../fonts/Rockwell.woff';
+				$referenced_files[] = '../fonts/Rockwell.woff2';
+				break;
+		}
+
+		return $referenced_files;
+	}
+	
+	function get_handle($resource) {
+	
+		// Other resources depend on the theme being called "poptheme-wassup"
+		$handles = array(
+			POP_RESOURCELOADER_CSS_THEMEWASSUP => 'poptheme-wassup',
+		);
+		if ($handle = $handles[$resource]) {
+			return $handle;
+		}
+
+		return parent::get_handle($resource);
+	}
+	
 	function get_version($resource) {
 	
 		return POPTHEME_WASSUP_VERSION;
@@ -121,18 +165,68 @@ class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderPr
 	function get_dir($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CSS_PAGESECTIONGROUP:
+			case POP_RESOURCELOADER_CSS_THEMEWASSUP:
+			case POP_RESOURCELOADER_CSS_THEMEWASSUPBOOTSTRAP:
+			case POP_RESOURCELOADER_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP:
+
+				return POPTHEME_WASSUP_DIR.'/css/'.$subpath.'libraries';
+		}
+
 		return POPTHEME_WASSUP_DIR.'/css/'.$subpath.'templates';
 	}
 	
-	function get_asset_path($resource) {
+	// function get_asset_path($resource) {
 
-		return POPTHEME_WASSUP_DIR.'/css/templates/'.$this->get_filename($resource).'.css';
-	}
+	// 	switch ($resource) {
+
+	// 		case POP_RESOURCELOADER_CSS_PAGESECTIONGROUP:
+	// 		case POP_RESOURCELOADER_CSS_THEMEWASSUP:
+	// 		case POP_RESOURCELOADER_CSS_THEMEWASSUPBOOTSTRAP:
+	// 		case POP_RESOURCELOADER_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP:
+
+	// 			return POPTHEME_WASSUP_DIR.'/css/libraries/'.$this->get_filename($resource).'.css';
+	// 	}
+
+	// 	return POPTHEME_WASSUP_DIR.'/css/templates/'.$this->get_filename($resource).'.css';
+	// }
 	
 	function get_path($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return POPTHEME_WASSUP_URI.'/css/'.$subpath.'templates';
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CSS_PAGESECTIONGROUP:
+			case POP_RESOURCELOADER_CSS_THEMEWASSUP:
+			case POP_RESOURCELOADER_CSS_THEMEWASSUPBOOTSTRAP:
+			case POP_RESOURCELOADER_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP:
+
+				return POPTHEME_WASSUP_URL.'/css/'.$subpath.'libraries';
+		}
+
+		return POPTHEME_WASSUP_URL.'/css/'.$subpath.'templates';
+	}
+	
+	function get_decorated_resources($resource) {
+
+		$decorated = parent::get_decorated_resources($resource);
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_CSS_THEMEWASSUPBOOTSTRAP:
+
+				$decorated[] = POP_RESOURCELOADER_EXTERNAL_CSS_BOOTSTRAP;
+				break;
+
+			case POP_RESOURCELOADER_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP:
+
+				$decorated[] = POP_RESOURCELOADER_EXTERNAL_TYPEAHEAD;
+				break;
+		}
+
+		return $decorated;
 	}
 }
 

@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_EMAILSENDER_VERSION', 0.105);
+define ('POP_EMAILSENDER_VERSION', 0.106);
 define ('POP_EMAILSENDER_DIR', dirname(__FILE__));
 
 class PoP_EmailSender {
@@ -22,8 +22,6 @@ class PoP_EmailSender {
 		add_action('plugins_loaded', array($this,'init'), 40);
 	}
 	function init(){
-
-		define ('POP_EMAILSENDER_URI', plugins_url('', __FILE__));
 
 		if ($this->validate()) {
 			

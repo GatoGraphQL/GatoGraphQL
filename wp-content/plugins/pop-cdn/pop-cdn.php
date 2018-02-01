@@ -11,7 +11,7 @@ Author URI: https://getpop.org/en/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_CDN_VERSION', 0.124);
+define ('POP_CDN_VERSION', 0.125);
 define ('POP_CDN_DIR', dirname(__FILE__));
 
 class PoP_CDN {
@@ -23,8 +23,6 @@ class PoP_CDN {
 		add_action('plugins_loaded', array($this,'init'), 6);
 	}
 	function init(){
-
-		// define ('POP_CDN_URI', plugins_url('', __FILE__));
 
 		if ($this->validate()) {
 			

@@ -35,7 +35,7 @@ class WSL_PoPProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateReso
 	
 	function get_path($resource) {
 	
-		return WSL_POPPROCESSORS_URI.'/js/dist/templates';
+		return WSL_POPPROCESSORS_URL.'/js/dist/templates';
 	}
 	
 	function get_dir($resource) {

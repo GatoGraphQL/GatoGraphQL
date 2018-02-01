@@ -13,9 +13,9 @@ function doing_json() {
 
 
 // Priority: execute last
-add_filter( 'template_include', 'gd_template_include_json_impl', PHP_INT_MAX);
-add_filter( 'comments_template', 'gd_template_include_json_impl', PHP_INT_MAX);
-function gd_template_include_json_impl( $template ){
+add_filter( 'template_include', 'pop_template_include_json', PHP_INT_MAX);
+add_filter( 'comments_template', 'pop_template_include_json', PHP_INT_MAX);
+function pop_template_include_json( $template ){
 
 	if (!doing_json()) {
 	

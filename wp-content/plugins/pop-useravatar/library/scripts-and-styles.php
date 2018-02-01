@@ -7,7 +7,7 @@
 
 function pop_useravatar_get_locale_jsfile() {
 
-	return POP_USERAVATAR_URI.'/js/locales/fileupload/'.pop_useravatar_get_locale_jsfilename();
+	return POP_USERAVATAR_URL.'/js/locales/fileupload/'.pop_useravatar_get_locale_jsfilename();
 }
 
 function pop_useravatar_get_locale_jsfilename() {

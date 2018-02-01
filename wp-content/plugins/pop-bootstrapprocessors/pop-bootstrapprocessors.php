@@ -11,7 +11,8 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_BOOTSTRAPPROCESSORS_VERSION', 0.213);
+define ('POP_BOOTSTRAPPROCESSORS_VERSION', 0.214);
+define ('POP_BOOTSTRAPPROCESSORS_VENDORRESOURCESVERSION', 0.200);
 define ('POP_BOOTSTRAPPROCESSORS_DIR', dirname(__FILE__));
 define ('POP_BOOTSTRAPPROCESSORS_PHPTEMPLATES_DIR', POP_BOOTSTRAPPROCESSORS_DIR.'/php-templates/compiled');
 // define ('POP_BOOTSTRAPPROCESSORS_CACHE_DIR', WP_CONTENT_DIR.'/cache');
@@ -38,8 +39,8 @@ class PoP_BootstrapProcessors {
 	}
 	function init(){
 
-		define ('POP_BOOTSTRAPPROCESSORS_URI', plugins_url('', __FILE__));
-		define ('POP_BOOTSTRAPPROCESSORS_URI_LIB', POP_BOOTSTRAPPROCESSORS_URI.'/library' );
+		define ('POP_BOOTSTRAPPROCESSORS_URL', plugins_url('', __FILE__));
+		define ('POP_BOOTSTRAPPROCESSORS_URL_LIB', POP_BOOTSTRAPPROCESSORS_URL.'/library' );
 
 		if ($this->validate()) {
 			

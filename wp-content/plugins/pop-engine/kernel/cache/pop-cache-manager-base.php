@@ -105,13 +105,13 @@ class GD_Template_CacheManagerBase {
 		return false;
 	}
 
-	function get_cache($vars_hash_id, $type, $decode = false, $ext = '') {
+	function get_cache($filename, $type, $decode = false, $ext = '') {
 
 		if (!$ext) {
 			$ext = $this->get_default_extension();
 		}
 
-		$file = $this->get_file($vars_hash_id, $type, $ext);
+		$file = $this->get_file($filename, $type, $ext);
 		if (file_exists($file)) {
 
 			// Return the file contents
@@ -159,13 +159,13 @@ class GD_Template_CacheManagerBase {
 		return false;
 	}
 
-	function store_cache($vars_hash_id, $type, $contents_or_object, $encode = false, $ext = '') {
+	function store_cache($filename, $type, $contents_or_object, $encode = false, $ext = '') {
 
 		if (!$ext) {
 			$ext = $this->get_default_extension();
 		}
 
-		$file = $this->get_file($vars_hash_id, $type, $ext);
+		$file = $this->get_file($filename, $type, $ext);
 
 		if ($encode) {
 			$contents = json_encode($contents_or_object);

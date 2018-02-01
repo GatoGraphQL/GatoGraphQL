@@ -7,7 +7,7 @@
  
 class PoP_CDNCore_FileReproduction_ThumbprintsConfig extends PoP_CDNCore_FileReproduction {
 
-    public function get_js_path() {
+    public function get_assets_path() {
         
         return POP_CDNCORE_ASSETS_DIR.'/js/jobs/cdn-config.js';
     }
@@ -16,14 +16,22 @@ class PoP_CDNCore_FileReproduction_ThumbprintsConfig extends PoP_CDNCore_FileRep
         
         $configuration = parent::get_configuration();
 
-        global $pop_cdncore_thumbprint_manager;
-        $thumbprints = $pop_cdncore_thumbprint_manager->get_thumbprints();
-        $configuration['$thumbprints'] = $thumbprints;
-        $configuration['$criteria_rejected'] = $this->get_rejected_criteriaitems();
-        $configuration['$criteria_thumbprints'] = array();
-        foreach ($thumbprints as $thumbprint) {
+        $configuration['{{$domain}}'] = get_site_url();
 
-            $configuration['$criteria_thumbprints'][$thumbprint] = $this->get_thumbprints_criteriaitems($thumbprint);
+        $configuration['{{$cdnDomain}}'] = '';
+        $configuration['{{$thumbprints}}'] = $configuration['{{$criteria_rejected}}'] = $configuration['{{$criteria_thumbprints}}'] = array();
+        if (POP_CDN_CONTENT_URI) {
+            
+            global $pop_cdncore_thumbprint_manager;
+            $thumbprints = $pop_cdncore_thumbprint_manager->get_thumbprints();
+            $configuration['{{$cdnDomain}}'] = POP_CDN_CONTENT_URI;
+            $configuration['{{$thumbprints}}'] = $thumbprints;
+            $configuration['{{$criteria_rejected}}'] = $this->get_rejected_criteriaitems();
+            $configuration['{{$criteria_thumbprints}}'] = array();
+            foreach ($thumbprints as $thumbprint) {
+
+                $configuration['{{$criteria_thumbprints}}'][$thumbprint] = $this->get_thumbprints_criteriaitems($thumbprint);
+            }
         }
 
         return $configuration;

@@ -44,9 +44,11 @@ class PoP_ServerSide_ResourceLoader {
 		// Include the script/style link
 		if (PoP_Frontend_ServerUtils::include_resources_in_body()) {
 
+			global $pop_resourceloaderprocessor_manager;
 			$config = $this->getConfigByDomain($this->domain);
 			$blockId = $this->blockId;
-			$resource_id = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+			// $resource_id = PoP_ResourceLoaderProcessorUtils::get_noconflict_resource_name($resource);
+			$resource_id = $pop_resourceloaderprocessor_manager->get_handle($resource);
 			$include_type = PoP_Frontend_ServerUtils::get_templateresources_include_type();
 
 			// For both 'body' and 'body-inline', include the style/script file when the pageSectionPage is destroyed

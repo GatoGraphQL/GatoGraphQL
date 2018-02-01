@@ -215,7 +215,7 @@ function gd_header_page_description_impl($description, $page_id) {
 add_filter('gd_get_favicon', 'getpopdemo_get_favicon');
 function getpopdemo_get_favicon($favicon) {
 
-	return GETPOPDEMO_ASSETS_URI.'/img/favicon.ico';
+	return GETPOPDEMO_ASSETS_URL.'/img/favicon.ico';
 }
 
 
@@ -251,10 +251,10 @@ function gd_fixedscroll_user_ids_impl($ids, $template_id) {
 add_filter('gd_get_logo', 'gd_get_logo_impl');
 function gd_get_logo_impl($gd_logo) {
 
-	$large = array(GETPOPDEMO_ASSETS_URI.'/img/popdemo-logo.png', 640, 250, 'image/png');
-	$large_inverse = array(GETPOPDEMO_ASSETS_URI.'/img/popdemo-logo.png', 640, 250, 'image/png');
-	$large_white = array(GETPOPDEMO_ASSETS_URI.'/img/popdemo-logo-whitebg.png', 640, 250, 'image/png');
-	$small = array(GETPOPDEMO_ASSETS_URI.'/img/pop-logo-favicon.png', 150, 150, 'image/png');
+	$large = array(GETPOPDEMO_ASSETS_URL.'/img/popdemo-logo.png', 640, 250, 'image/png');
+	$large_inverse = array(GETPOPDEMO_ASSETS_URL.'/img/popdemo-logo.png', 640, 250, 'image/png');
+	$large_white = array(GETPOPDEMO_ASSETS_URL.'/img/popdemo-logo-whitebg.png', 640, 250, 'image/png');
+	$small = array(GETPOPDEMO_ASSETS_URL.'/img/pop-logo-favicon.png', 150, 150, 'image/png');
 
 	return array(
 		'small' => $small,
@@ -276,12 +276,12 @@ add_filter('gd_images_background', 'gd_images_background_impl');
 add_filter('gd_images_loading', 'gd_images_background_impl');
 function gd_images_background_impl($img) {
 
-	return GETPOPDEMO_ASSETS_URI.'/img/popdemo-logo-horizontal.png';
+	return GETPOPDEMO_ASSETS_URL.'/img/popdemo-logo-horizontal.png';
 }
 add_filter('gd_images_welcome', 'gd_images_welcome_impl');
 function gd_images_welcome_impl($img) {
 
-	return GETPOPDEMO_ASSETS_URI.'/img/guy.png';
+	return GETPOPDEMO_ASSETS_URL.'/img/guy.png';
 }
 
 /**---------------------------------------------------------------------------------------------------------------
@@ -383,5 +383,5 @@ function getpoptheme_organizationtypes($types) {
 add_filter('GD_Template_Processor_EmbedPreviewLayouts:get_frame_src', 'getpoptheme_embedemptysource');
 function getpoptheme_embedemptysource($src) {
 
-	return GETPOPDEMO_ASSETS_URI.'/img/iframebg.jpg';
+	return GETPOPDEMO_ASSETS_URL.'/img/iframebg.jpg';
 }

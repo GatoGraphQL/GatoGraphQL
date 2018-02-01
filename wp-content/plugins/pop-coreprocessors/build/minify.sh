@@ -85,16 +85,17 @@ cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/libraries/3rdpart
 echo ##########################
 echo INCLUDED 3rd PARTY LIBRARY JS FILES
 echo ##########################
-# cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/jquery.fullscreen-min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
-# cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/bootstrap-multiselect.0.9.13.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/includes/jquery.dynamicmaxheight.min.js $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries/
 wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/js/dist/bundles/pop-coreprocessors.bundle.min.js "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/js/libraries&f=helpers.handlebars.min.js,system.min.js,appshell.min.js,addeditpost.min.js,editor.min.js,mentions.min.js,featuredimage.min.js,mediamanager-state.min.js,mediamanager.min.js,mediamanager-cors.min.js,tabs.min.js,user-account.min.js,waypoints.min.js,waypoints-fetchmore.min.js,waypoints-historystate.min.js,waypoints-theater.min.js,waypoints-toggleclass.min.js,waypoints-togglecollapse.min.js,window.min.js,multiselect.min.js,dynamicmaxheight.min.js,daterange.min.js,typeahead.min.js,typeahead-search.min.js,typeahead-fetchlink.min.js,typeahead-selectable.min.js,typeahead-triggerselect.min.js,typeahead-validate.min.js,typeahead-storage.min.js,analytics.min.js,perfectscrollbar.min.js,expand.min.js,functions.min.js,input-functions.min.js,embed-functions.min.js,print-functions.min.js,content-functions.min.js,target-functions.min.js,socialmedia.min.js,embeddable.min.js,block-dataquery.min.js,block-dataquery-userstate.min.js,blockgroup-dataquery.min.js,blockgroup-dataquery-userstate.min.js,menus.min.js,dataset-count.min.js,replicate.min.js,forms.min.js,links.min.js,classes.min.js,scrolls.min.js,onlineoffline.min.js,event-reactions.min.js,event-reactions-userstate.min.js,feedback-message.min.js,bootstrap-carousel.min.js,bootstrap-carousel-static.min.js,bootstrap-carousel-automatic.min.js,modals.min.js,controls.min.js,jquery.dynamicmaxheight.min.js"
 
 ###########################
 # CSS
 ###########################
-rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/css/*.css
-cp $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/css/includes/jquery.dynamicmaxheight.css $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/css/
+cd $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/css/
+uglifycss includes/jquery.dynamicmaxheight.css --output dist/includes/jquery.dynamicmaxheight.min.css
+uglifycss includes/bootstrap-multiselect.0.9.13.css --output dist/includes/bootstrap-multiselect.0.9.13.min.css
 
 # All files together: generate it EXACTLY in this order, as it was taken from scripts_and_styles.php
-wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/css/dist/bundles/pop-coreprocessors.bundle.min.css "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/css&f=jquery.dynamicmaxheight.css"
+rm $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/css/*.css
+cp dist/includes/*.min.css $POP_APP_MIN_PATH/$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/css/
+wget -O $POP_APP_PATH/wp-content/plugins/pop-coreprocessors/css/dist/bundles/pop-coreprocessors.bundle.min.css "http://min.localhost/?b=$POP_APP_MIN_FOLDER/plugins/pop-coreprocessors/css&f=jquery.dynamicmaxheight.min.css,bootstrap-multiselect.0.9.13.min.css"

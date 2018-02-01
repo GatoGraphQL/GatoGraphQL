@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('PPP_POP_VERSION', 0.108);
+define('PPP_POP_VERSION', 0.109);
 define('PPP_POP_DIR', dirname(__FILE__));
 
 class PPP_PoP {
@@ -21,7 +21,7 @@ class PPP_PoP {
 
 	function init(){
 
-		define('PPP_POP_URI', plugins_url('', __FILE__));
+		define('PPP_POP_URL', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

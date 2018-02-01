@@ -53,7 +53,7 @@ class PoP_CoreProcessors_CarouselResourceLoaderProcessor extends PoP_JSResourceL
 	function get_path($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return POP_COREPROCESSORS_URI.'/js/'.$subpath.'libraries/carousel';
+		return POP_COREPROCESSORS_URL.'/js/'.$subpath.'libraries/carousel';
 	}
 
 	function get_jsobjects($resource) {

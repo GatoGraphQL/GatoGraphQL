@@ -34,7 +34,7 @@ class PPP_PoP_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = PPP_POP_URI.'/js';
+			$js_folder = PPP_POP_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';

@@ -11,6 +11,7 @@ class PoP_UserAvatar_Initialization {
 		if (!is_admin()) {
 
 			add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
+			add_action('wp_print_styles', array($this, 'register_styles'));
 		}
 
 		/**---------------------------------------------------------------------------------------------------------------
@@ -46,7 +47,7 @@ class PoP_UserAvatar_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = POP_USERAVATAR_URI.'/js';
+			$js_folder = POP_USERAVATAR_URL.'/js';
 			$includes_js_folder = $js_folder.'/includes';
 			$cdn_js_folder = $includes_js_folder . '/cdn';
 			$dist_js_folder = $js_folder.'/dist';
@@ -79,6 +80,7 @@ class PoP_UserAvatar_Initialization {
 			wp_enqueue_script('fileupload-ui');			
 			wp_enqueue_script('fileupload-process');				
 			wp_enqueue_script('fileupload-validate');	
+			
 			wp_register_script('fileupload-locale', pop_useravatar_get_locale_jsfile(), array('fileupload'), null);
 			wp_enqueue_script('fileupload-locale');	
 
@@ -103,11 +105,38 @@ class PoP_UserAvatar_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = POP_USERAVATAR_URI.'/js/dist/templates/';
+		$folder = POP_USERAVATAR_URL.'/js/dist/templates/';
 
 		wp_enqueue_script('fileupload-picture-download-tmpl', $folder.'fileupload-picture-download.tmpl.js', array('handlebars'), POP_USERAVATAR_VERSION, true);
 		wp_enqueue_script('fileupload-picture-upload-tmpl', $folder.'fileupload-picture-upload.tmpl.js', array('handlebars'), POP_USERAVATAR_VERSION, true);
 		wp_enqueue_script('formcomponent-fileupload-picture-tmpl', $folder.'formcomponent-fileupload-picture.tmpl.js', array('handlebars'), POP_USERAVATAR_VERSION, true);
+	}
+
+	function register_styles() {
+
+		// If doing code-splitting, the resources below are already added by the ResourceLoader, so no need for them here
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
+		
+			$css_folder = POP_USERAVATAR_URL.'/css';
+			$cdn_css_folder = $css_folder . '/cdn';
+			$includes_css_folder = $cdn_css_folder . '/cdn';
+
+			/* ------------------------------
+			 * 3rd Party Libraries (using CDN whenever possible)
+			 ----------------------------- */
+
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
+				
+				// CDN
+				wp_register_style('fileupload', 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/css/jquery.fileupload.min.css', null, null);
+			}
+			else {
+
+				// Locally stored files
+				wp_register_style('fileupload', $includes_css_folder . '/jquery.fileupload.9.5.7.min.css', null, null);
+			}
+			wp_enqueue_style('fileupload');
+		}
 	}
 }
 

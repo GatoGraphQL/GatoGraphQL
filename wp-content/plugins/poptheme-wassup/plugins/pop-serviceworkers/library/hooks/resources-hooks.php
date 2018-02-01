@@ -23,7 +23,7 @@ class PoPTheme_Wassup_ServiceWorkers_Hooks_Resources {
 
             // Add all the images from this plug-in
             foreach (glob(POPTHEME_WASSUP_DIR."/img/*") as $file) {
-                $precache[] = str_replace(POPTHEME_WASSUP_DIR, POPTHEME_WASSUP_URI, $file);
+                $precache[] = str_replace(POPTHEME_WASSUP_DIR, POPTHEME_WASSUP_URL, $file);
             }
 
             // Add all the images from the active theme

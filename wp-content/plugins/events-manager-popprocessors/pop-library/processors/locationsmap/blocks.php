@@ -26,9 +26,12 @@ class GD_Template_Processor_LocationsMapBlocks extends GD_Template_Processor_Blo
 
 			case GD_TEMPLATE_BLOCK_LOCATIONSMAP:
 
-				$ret[] = GD_TEMPLATE_MAP_DIV;
+				// $ret[] = GD_TEMPLATE_SCROLL_STATICIMAGE;
+				// $ret[] = GD_TEMPLATE_MAP_DIV;
+				$ret[] = GD_TEMPLATE_MAPSTATICIMAGE_DIV;
 				$ret[] = GD_TEMPLATE_SCROLL_LOCATIONS_MAP;
-				$ret[] = GD_TEMPLATE_MAP_SCRIPT_DRAWMARKERS;
+				// $ret[] = GD_TEMPLATE_MAP_SCRIPT_DRAWMARKERS;
+				$ret[] = GD_TEMPLATE_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS;
 				$ret[] = GD_TEMPLATE_MAP_SCRIPT_RESETMARKERS;
 				break;
 

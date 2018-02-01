@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('EMPOP_VERSION', 0.105);
+define('EMPOP_VERSION', 0.106);
 define('EMPOP_DIR', dirname(__FILE__));
 
 class EM_PoP {
@@ -21,8 +21,6 @@ class EM_PoP {
 
 	function init(){
 
-		define('EMPOP_URI', plugins_url('', __FILE__));
-		
 		if ($this->validate()) {
 			
 			$this->initialize();

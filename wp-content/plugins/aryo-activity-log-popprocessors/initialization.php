@@ -34,7 +34,7 @@ class AAL_PoPProcessors_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = AAL_POPPROCESSORS_URI.'/js';
+			$js_folder = AAL_POPPROCESSORS_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
@@ -73,7 +73,7 @@ class AAL_PoPProcessors_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = AAL_POPPROCESSORS_URI.'/js/dist/templates/';
+		$folder = AAL_POPPROCESSORS_URL.'/js/dist/templates/';
 
 		wp_enqueue_script('aal-layout-previewnotification-tmpl', $folder.'aal-layout-previewnotification.tmpl.js', array('handlebars'), AAL_POPPROCESSORS_VERSION, true);
 		wp_enqueue_script('aal-layout-notificationtime-tmpl', $folder.'aal-layout-notificationtime.tmpl.js', array('handlebars'), AAL_POPPROCESSORS_VERSION, true);

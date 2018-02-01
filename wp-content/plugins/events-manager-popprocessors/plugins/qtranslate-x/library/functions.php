@@ -10,24 +10,27 @@
 add_action("wp_enqueue_scripts", 'em_popprocessors_qtransx_register_scripts');
 function em_popprocessors_qtransx_register_scripts() {
 
-	// If the current lang is supported, then use fullcalendar's localization file
-	if ($filename = get_em_qtransx_fullcalendar_locale_filename()) {
+	if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
+		// If the current lang is supported, then use fullcalendar's localization file
+		if ($filename = get_em_qtransx_fullcalendar_locale_filename()) {
 
-			$placeholder = 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang/%s.js';
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
+
+				$placeholder = 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang/%s.js';
+			}
+			else {
+
+				$placeholder = EM_POPPROCESSORS_URL.'/js/includes/cdn/fullcalendar.2.9.1-lang/%s.js';
+			}
+			
+			$js_file = sprintf(
+				$placeholder,
+				$filename
+			);
+			wp_register_script('fullcalendar-lang', $js_file, array('fullcalendar'), null);
+			wp_enqueue_script('fullcalendar-lang');
 		}
-		else {
-
-			$placeholder = EM_POPPROCESSORS_URI.'/js/includes/cdn/fullcalendar.2.9.1-lang/%s.js';
-		}
-		
-		$js_file = sprintf(
-			$placeholder,
-			$filename
-		);
-		wp_register_script('fullcalendar-lang', $js_file, array('fullcalendar'), null);
-		wp_enqueue_script('fullcalendar-lang');
 	}
 }
 
@@ -49,5 +52,6 @@ function get_em_qtransx_fullcalendar_locale_filename() {
 		return $lang;
 	}
 
-	return '';
+	// Default language
+	return 'en-gb';
 }

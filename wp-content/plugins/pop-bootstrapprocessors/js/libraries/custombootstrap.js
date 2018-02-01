@@ -20,30 +20,30 @@ window.popCustomBootstrap = {
 			}
 		});
 	},
-	runScriptsBefore : function(args) {
+	// runScriptsBefore : function(args) {
 	
-		var that = this;
-		var pageSection = args.pageSection, newDOMs = args.newDOMs;
+	// 	var that = this;
+	// 	var pageSection = args.pageSection, newDOMs = args.newDOMs;
 
-		/** Collapse */
-		newDOMs.find('.collapse').addBack('.collapse')
-			.on('show.bs.collapse', function() {
+	// 	/** Collapse */
+	// 	newDOMs.find('.collapse').addBack('.collapse')
+	// 		.on('show.bs.collapse', function() {
 
-				that.addBubblingFlag($(this), '.collapse', 'show');
-			})
-			.on('shown.bs.collapse', function() {
+	// 			that.addBubblingFlag($(this), '.collapse', 'show');
+	// 		})
+	// 		.on('shown.bs.collapse', function() {
 
-				that.addBubblingFlag($(this), '.collapse', 'shown');
-			})
-			.on('hide.bs.collapse', function() {
+	// 			that.addBubblingFlag($(this), '.collapse', 'shown');
+	// 		})
+	// 		.on('hide.bs.collapse', function() {
 
-				that.addBubblingFlag($(this), '.collapse', 'hide');
-			})
-			.on('hidden.bs.collapse', function() {
+	// 			that.addBubblingFlag($(this), '.collapse', 'hide');
+	// 		})
+	// 		.on('hidden.bs.collapse', function() {
 
-				that.addBubblingFlag($(this), '.collapse', 'hidden');
-			});
-	},
+	// 			that.addBubblingFlag($(this), '.collapse', 'hidden');
+	// 		});
+	// },
 	pageSectionNewDOMsInitialized : function(args) {
 
 		var that = this;
@@ -435,43 +435,43 @@ window.popCustomBootstrap = {
 		tabPane.triggerHandler(event, [e]);
 	},
 
-	resetBubbling : function() {
+	// resetBubbling : function() {
 
-		// Delete all previous bubbling records (otherwise, once found a bubbling, it will always be considered one, and clicking on a link once again is the best way to reset everything)
-		$('[data-bubbling]').attr('data-bubbling', null);
-		$('[data-bubbling-origin]').attr('data-bubbling-origin', null);
-	},
+	// 	// Delete all previous bubbling records (otherwise, once found a bubbling, it will always be considered one, and clicking on a link once again is the best way to reset everything)
+	// 	$('[data-bubbling]').attr('data-bubbling', null);
+	// 	$('[data-bubbling-origin]').attr('data-bubbling-origin', null);
+	// },
 
-	bubbling : function(elem, selector) {
+	// // bubbling : function(elem, selector) {
 
-		var that = this;
+	// // 	var that = this;
 
-		if (elem.is(selector)) {
+	// // 	if (elem.is(selector)) {
 
-			var bubblingId = elem.attr('data-bubbling');
-			if (bubblingId && elem.find('[data-bubbling-origin="'+bubblingId+'"]').length) {
+	// // 		var bubblingId = elem.attr('data-bubbling');
+	// // 		if (bubblingId && elem.find('[data-bubbling-origin="'+bubblingId+'"]').length) {
 
-				return true;
-			}
-		}
+	// // 			return true;
+	// // 		}
+	// // 	}
 
-		return false;
-	},
+	// // 	return false;
+	// // },
 
-	addBubblingFlag : function(elem, parentSelector, type) {
+	// addBubblingFlag : function(elem, parentSelector, type) {
 
-		var that = this;
+	// 	var that = this;
 		
-		if (elem.parents(parentSelector).length) {
+	// 	if (elem.parents(parentSelector).length) {
 			
-			// Generate a randomId and assign it to all its parents under attr 'data-bubbling'
-			// Then the parents can then know that the events trigger on them are bubbles
-			var ran = getRandomInt(1, 10000000000);
-			var bubblingId = elem.attr('id')+'-'+type+'-'+ran;
-			elem.attr('data-bubbling-origin', bubblingId);
-			elem.parents(parentSelector).attr('data-bubbling', bubblingId);			
-		}
-	},
+	// 		// Generate a randomId and assign it to all its parents under attr 'data-bubbling'
+	// 		// Then the parents can then know that the events trigger on them are bubbles
+	// 		var ran = getRandomInt(1, 10000000000);
+	// 		var bubblingId = elem.attr('id')+'-'+type+'-'+ran;
+	// 		elem.attr('data-bubbling-origin', bubblingId);
+	// 		elem.parents(parentSelector).attr('data-bubbling', bubblingId);			
+	// 	}
+	// },
 
 	activatePageTabs : function(pageSection, newDOMs, inactivePane) {
 
@@ -696,5 +696,5 @@ window.popCustomBootstrap = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popCustomBootstrap, ['initDocument', 'runScriptsBefore', 'pageSectionNewDOMsInitialized', 'activeTabLink', 'isHidden', 'isActive'], true);
+popJSLibraryManager.register(popCustomBootstrap, ['initDocument', /*'runScriptsBefore', */'pageSectionNewDOMsInitialized', 'activeTabLink', 'isHidden', 'isActive'], true);
 popJSLibraryManager.register(popCustomBootstrap, ['customQuickView', 'destroyPageOnModalClose', 'customCloseModals', 'activatePageTab', 'onBootstrapEventWindowResize']);

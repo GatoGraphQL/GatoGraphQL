@@ -29,8 +29,6 @@ class GetPoPDemo_Processors {
 
 	function init(){
 
-		define ('GETPOPDEMO_PROCESSORS_URI', plugins_url('', __FILE__));
-		
 		if ($this->validate()) {
 			
 			$this->initialize();

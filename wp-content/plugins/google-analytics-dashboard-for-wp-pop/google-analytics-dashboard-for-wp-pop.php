@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('GADWP_POP_VERSION', 0.108);
+define('GADWP_POP_VERSION', 0.109);
 define('GADWP_POP_DIR', dirname(__FILE__));
 
 class GADWP_PoP {
@@ -21,7 +21,7 @@ class GADWP_PoP {
 
 	function init(){
 
-		define('GADWP_POP_URI', plugins_url('', __FILE__));
+		define('GADWP_POP_URL', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

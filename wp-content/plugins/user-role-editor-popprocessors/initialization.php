@@ -24,7 +24,7 @@ class URE_PoPProcessors_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = URE_POPPROCESSORS_URI.'/js';
+			$js_folder = URE_POPPROCESSORS_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$bundles_js_folder = $dist_js_folder.'/bundles';
 
@@ -43,7 +43,7 @@ class URE_PoPProcessors_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = URE_POPPROCESSORS_URI.'/js/dist/templates/';
+		$folder = URE_POPPROCESSORS_URL.'/js/dist/templates/';
 
 		wp_enqueue_script('ure-layoutuser-memberstatus-tmpl', $folder.'ure-layoutuser-memberstatus.tmpl.js', array('handlebars'), URE_POPPROCESSORS_VERSION, true);
 		wp_enqueue_script('ure-layoutuser-memberprivileges-tmpl', $folder.'ure-layoutuser-memberprivileges.tmpl.js', array('handlebars'), URE_POPPROCESSORS_VERSION, true);

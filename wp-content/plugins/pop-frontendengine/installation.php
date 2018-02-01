@@ -10,7 +10,6 @@ class PoPFrontend_Installation {
 
 		// Code splitting: extract all the mappings of functions calling other functions from all the .js files
 		$pop_frontend_resourceloader_mappinggenerator->generate();
-
 	}
 
 	function system_generate_theme() {
@@ -19,7 +18,14 @@ class PoPFrontend_Installation {
 		if (PoP_Frontend_ServerUtils::use_code_splitting()) {
 
 			// Delete the file containing the cached entries (or "abbreviations") from the ResourceLoader
-			PoP_ResourceLoaderProcessorUtils::delete_entries();
+			// Delete the "shared across thememodes" mapping (i.e. bundle and bundlegroup mapping) the first time we execute the process
+			// We define that we always execute first the "default" thememode. So if this is the case, then delete the mapping
+			// Set hooks so this value can be overriden by pop-cluster-resourceloader, in which the mapping can not be deleted since it will also
+			// be shared across websites, and deleted manually in the deployment process
+			$vars = GD_TemplateManager_Utils::get_vars();
+			$across_thememodes = $vars['thememode-isdefault'];
+			$across_thememodes = apply_filters('PoPFrontend_Installation:system_generate_theme:delete-across-thememodes', $across_thememodes);
+			PoP_ResourceLoaderProcessorUtils::delete_entries($across_thememodes);
 
 			// Delete the file containing what resources/bundle/bundlegroups were generated for each vars_hash_id
 			global $pop_resourceloader_generatedfilesmanager;
@@ -35,26 +41,24 @@ class PoPFrontend_Installation {
 
 			$pop_resourceloader_hierarchyformatcombinationresources_configfile_generator->generate();
 
-	        // Important: run these 2 functions below at the end, so by then we will have created all dynamic resources (eg: initialresources.js)
-	        // Generate the bundle(group) file with all the resources inside?
-	        if (PoP_Frontend_ServerUtils::generate_bundle_files()) {
+	        // Important: run this function below at the end, so by then we will have created all dynamic resources (eg: initialresources.js)
+	        // Generate the bundle(group) file with all the resources inside
+	        if (PoP_Frontend_ServerUtils::generate_loadingframe_resource_mapping()) {
+	        	
+	        	if (PoP_Frontend_ServerUtils::generate_bundle_files() || PoP_Frontend_ServerUtils::generate_bundlegroup_files()) {
 
-				global $pop_resourceloader_multiplefilegenerator_bundles;
-				$pop_resourceloader_multiplefilegenerator_bundles->generate();
+			        global $pop_resourceloader_allroutes_filegenerator_bundlefiles;
+					$pop_resourceloader_allroutes_filegenerator_bundlefiles->generate();
+				}
+
+				// Generate and Save the file containing what resources/bundle/bundlegroups were generated for each vars_hash_id
+				global $pop_resourceloader_storagegenerator;
+				$pop_resourceloader_storagegenerator->generate();
+				$pop_resourceloader_generatedfilesmanager->save();
 			}
-			if (PoP_Frontend_ServerUtils::generate_bundlegroup_files()) {
 
-				global $pop_resourceloader_multiplefilegenerator_bundlegroups;
-				$pop_resourceloader_multiplefilegenerator_bundlegroups->generate();
-			}
-
-			// Generate and Save the file containing what resources/bundle/bundlegroups were generated for each vars_hash_id
-			global $pop_resourceloader_storagegenerator;
-			$pop_resourceloader_storagegenerator->generate();
-			$pop_resourceloader_generatedfilesmanager->save();
-
-			// Save a new file containing the cached entries (or "abbreviations") from the ResourceLoader
-			PoP_ResourceLoaderProcessorUtils::save_entries();
+			// // Save a new file containing the cached entries (or "abbreviations") from the ResourceLoader
+			// PoP_ResourceLoaderProcessorUtils::save_entries();
 		}
 		
 	}

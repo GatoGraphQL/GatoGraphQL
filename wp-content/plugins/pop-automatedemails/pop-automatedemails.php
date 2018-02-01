@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_AUTOMATEDEMAILS_VERSION', 0.105);
+define ('POP_AUTOMATEDEMAILS_VERSION', 0.106);
 define ('POP_AUTOMATEDEMAILS_DIR', dirname(__FILE__));
 
 class PoP_AutomatedEmails {
@@ -22,8 +22,6 @@ class PoP_AutomatedEmails {
 		add_action('plugins_loaded', array($this,'init'), 50);
 	}
 	function init(){
-
-		define ('POP_AUTOMATEDEMAILS_URI', plugins_url('', __FILE__));
 
 		if ($this->validate()) {
 			

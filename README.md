@@ -100,7 +100,11 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_USEPROGRESSIVEBOOTING` (_true_|_false_): If doing code splitting, load JS resources on 2 stages: critical ones immediately, and non-critical ones deferred, to lower down the Time to Interactive of the application.
 
-- `POP_SERVER_GENERATEBUNDLEGROUPFILES` and `POP_SERVER_GENERATEBUNDLEFILES` (_true_|_false_): (Only if doing code-splitting) When executing the /generate-theme/ build script, generate a single bundlegroup and/or a series of bundle files for each page on the website containing all resources it needs.
+- `POP_SERVER_GENERATEBUNDLEGROUPFILES` and `POP_SERVER_GENERATEBUNDLEFILES` (_true_|_false_): (Only if doing code-splitting) When executing the `/generate-theme/` build script, generate a single bundlegroup and/or a series of bundle files for each page on the website containing all resources it needs.
+
+- `POP_SERVER_GENERATEBUNDLEFILESONRUNTIME` (_true_|_false_): (Only if doing code-splitting) Generate the bundlegroup or bundle files on runtime, so no need to pre-generate these.
+
+- `POP_SERVER_GENERATELOADINGFRAMERESOURCEMAPPING` (_true_|_false_): (Only if doing code-splitting) Pre-generate the mapping listing what resources are needed for each route in the application, created when executing the `/generate-theme/` build script.
 
 - `POP_SERVER_ENQUEUEFILESTYPE` (_resource_|_bundle_|_bundlegroup_): (Only if doing code-splitting) Choose how the initial-page resources are loaded:
 
@@ -109,8 +113,6 @@ PoP allows the configuration of the following properties, done in file wp-config
     - "bundlegroup": through a unique bundlegroup file
 
 - `POP_SERVER_BUNDLECHUNKSIZE` (_int_): (Only if doing code-splitting) How many resources to pack inside a bundle file. Default: 4.
-
-- `POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS` (_true_|_false_): When generating bundle or bundlegroup files, allow to only pre-generate the bundle(group)s for URLs without parameters, falling back on the "resource" enqueue file type for these cases. (Eg: loading "https://getpop.org/en/u/leo/" will load "bundlegroup", but loading "https://getpop.org/en/u/leo/?tab=followers" may load "resource" instead, if the corresponding bundlegroup file had not been pre-generated).
 
 - `POP_SERVER_TEMPLATERESOURCESINCLUDETYPE` (_header_|_body_|_body-inline_): (Only if doing server-side rendering, code-splitting and enqueue type = "resource") Choose how to include those resources depended by a module (mainly CSS styles):
 
@@ -155,6 +157,8 @@ PoP allows the configuration of the following properties, done in file wp-config
     - resourceloader-bundle-mapping.json
     - resourceloader-generatedfiles.json
     - All `pop-memory/` files
+
+- `POP_SERVER_SKIPLOADINGFRAMERESOURCES` (_true_|_false_): When generating file `resources.js`, with the list of resources to dynamically load on the client, do not include those resources initially loaded in the website (through "loading-frame").
 
 ### Decentralization: enabling crossdomain
 

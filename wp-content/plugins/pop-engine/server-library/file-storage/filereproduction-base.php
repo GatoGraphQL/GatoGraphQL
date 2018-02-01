@@ -8,27 +8,27 @@ class PoP_Engine_FileReproductionBase {
         }
 	}
     
-    public function get_renderer() {
+    function get_renderer() {
         
         return null;
     }
     
-    public function get_js_path() {
+    function get_assets_path() {
         
         return '';
     }
 
-    public function get_configuration() {
+    function get_configuration() {
         
         return array();
     }
 
-    public function is_json_replacement() {
+    function is_json_replacement() {
 
         return true;
     }
 
-    public function get_jsonencode_options() {
+    function get_jsonencode_options() {
         
         // Documentation: https://secure.php.net/manual/en/function.json-encode.php
         return 0;

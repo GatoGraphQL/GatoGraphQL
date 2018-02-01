@@ -39,7 +39,7 @@ class PoP_CDNCore_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = POP_CDNCORE_URI.'/js';
+			$js_folder = POP_CDNCORE_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
@@ -55,8 +55,8 @@ class PoP_CDNCore_Initialization {
 				wp_register_script('pop-cdn-core-functions', $libraries_js_folder.'/cdn'.$suffix.'.js', array('pop'), POP_CDNCORE_VERSION, true);
 				wp_enqueue_script('pop-cdn-core-functions');
 
-				wp_register_script('pop-cdn-core-thumbprints', $libraries_js_folder.'/cdn-thumbprints'.$suffix.'.js', array('pop'), POP_CDNCORE_VERSION, true);
-				wp_enqueue_script('pop-cdn-core-thumbprints');
+				// wp_register_script('pop-cdn-core-thumbprints', $libraries_js_folder.'/cdn-thumbprints'.$suffix.'.js', array('pop'), POP_CDNCORE_VERSION, true);
+				// wp_enqueue_script('pop-cdn-core-thumbprints');
 
 				wp_register_script('pop-cdn-core-core-hooks', $libraries_js_folder.'/plugins/pop-coreprocessors/cdn-hooks'.$suffix.'.js', array('pop-cdn-core-functions'), POP_CDNCORE_VERSION, true);
 				wp_enqueue_script('pop-cdn-core-core-hooks');

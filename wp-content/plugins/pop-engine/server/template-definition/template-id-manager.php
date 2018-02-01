@@ -48,8 +48,6 @@ class PoP_TemplateIDManager {
 
 	function system_build_server() {
 
-		// global $pop_engine_templateidconstantdbfilegenerator;
-		// $pop_engine_templateidconstantdbfilegenerator->generate();
 		$internals = array(
 			'database' => $this->database,
 			'templatedefinition-counter' => $this->templatedefinition_counter,
@@ -59,11 +57,6 @@ class PoP_TemplateIDManager {
 		global $pop_engine_templateidconstantdbfilegenerator, $pop_engine_filejsonstorage;
 		$pop_engine_filejsonstorage->save($pop_engine_templateidconstantdbfilegenerator->get_filepath(), $internals);
 	}
-
-	// function get_database() {
-
-	// 	return $this->database;
-	// }
 
 	function set_namespace($namespace) {
 

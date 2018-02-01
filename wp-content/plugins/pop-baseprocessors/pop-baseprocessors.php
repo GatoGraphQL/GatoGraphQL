@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_BASEPROCESSORS_VERSION', 0.209);
+define ('POP_BASEPROCESSORS_VERSION', 0.210);
 define ('POP_BASEPROCESSORS_DIR', dirname(__FILE__));
 define ('POP_BASEPROCESSORS_PHPTEMPLATES_DIR', POP_BASEPROCESSORS_DIR.'/php-templates/compiled');
 // define ('POP_BASEPROCESSORS_CACHE_DIR', WP_CONTENT_DIR.'/cache');
@@ -38,8 +38,8 @@ class PoP_BaseProcessors {
 	}
 	function init(){
 
-		define ('POP_BASEPROCESSORS_URI', plugins_url('', __FILE__));
-		define ('POP_BASEPROCESSORS_URI_LIB', POP_BASEPROCESSORS_URI.'/library' );
+		define ('POP_BASEPROCESSORS_URL', plugins_url('', __FILE__));
+		define ('POP_BASEPROCESSORS_URL_LIB', POP_BASEPROCESSORS_URL.'/library' );
 
 		if ($this->validate()) {
 			

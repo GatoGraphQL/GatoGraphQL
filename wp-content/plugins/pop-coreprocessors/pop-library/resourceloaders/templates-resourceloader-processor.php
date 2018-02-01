@@ -398,7 +398,7 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
 	
 	function get_path($resource) {
 	
-		return POP_COREPROCESSORS_URI.'/js/dist/templates';
+		return POP_COREPROCESSORS_URL.'/js/dist/templates';
 	}
 	
 	function get_dir($resource) {

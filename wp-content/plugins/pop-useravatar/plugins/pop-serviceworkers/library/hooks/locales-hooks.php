@@ -24,7 +24,7 @@ class PoP_UserAvatar_ServiceWorkers_Hooks_Locales {
             // Add all the locales other than the one already added through wp_enqueue_script
             $current = pop_useravatar_get_locale_jsfile();
             foreach (glob(POP_USERAVATAR_DIR."/js/locales/fileupload/*") as $file) {
-                $fileurl = str_replace(POP_USERAVATAR_DIR, POP_USERAVATAR_URI, $file);
+                $fileurl = str_replace(POP_USERAVATAR_DIR, POP_USERAVATAR_URL, $file);
                 if ($fileurl != $current) {
                     $precache[] = $fileurl;
                 }

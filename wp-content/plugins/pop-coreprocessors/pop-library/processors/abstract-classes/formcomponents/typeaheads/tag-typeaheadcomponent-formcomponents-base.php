@@ -11,7 +11,7 @@ class GD_Template_Processor_TagTypeaheadComponentFormComponentsBase extends GD_T
 
 		return 'namedescription';//'name';
 	}
-	function get_template_source($template_id, $atts) {
+	protected function get_component_template_source($template_id) {
 
 		return GD_TEMPLATESOURCE_LAYOUTTAG_TYPEAHEAD_COMPONENT;
 	}

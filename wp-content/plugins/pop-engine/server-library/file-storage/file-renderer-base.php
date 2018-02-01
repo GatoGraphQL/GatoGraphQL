@@ -24,7 +24,7 @@ class PoP_Engine_FileRenderer {
         
 		foreach ($this->files as $file) {
 
-			$parts[] = $this->render_file($file->get_js_path(), $file->get_configuration(), $file->is_json_replacement(), $file->get_jsonencode_options());
+			$parts[] = $this->render_file($file->get_assets_path(), $file->get_configuration(), $file->is_json_replacement(), $file->get_jsonencode_options());
 		}
 		return implode(/*';'*/PHP_EOL, $parts);
     }

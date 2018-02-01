@@ -35,7 +35,7 @@ class PoP_BootstrapProcessors_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = POP_BOOTSTRAPPROCESSORS_URI.'/js';
+			$js_folder = POP_BOOTSTRAPPROCESSORS_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
@@ -86,7 +86,7 @@ class PoP_BootstrapProcessors_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = POP_BOOTSTRAPPROCESSORS_URI.'/js/dist/templates/';
+		$folder = POP_BOOTSTRAPPROCESSORS_URL.'/js/dist/templates/';
 
 		wp_enqueue_script('blockgroup-carousel-tmpl', $folder.'blockgroup-carousel.tmpl.js', array('handlebars'), POP_BOOTSTRAPPROCESSORS_VERSION, true);
 		wp_enqueue_script('blockgroup-collapsepanelgroup-tmpl', $folder.'blockgroup-collapsepanelgroup.tmpl.js', array('handlebars'), POP_BOOTSTRAPPROCESSORS_VERSION, true);
@@ -99,25 +99,29 @@ class PoP_BootstrapProcessors_Initialization {
 
 	function register_styles() {
 
-		$css_folder = POP_BOOTSTRAPPROCESSORS_URI.'/css';
-		$includes_css_folder = $css_folder . '/includes';
-		$cdn_css_folder = $includes_css_folder . '/cdn';
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-		/* ------------------------------
-		 * Wordpress Styles
-		 ----------------------------- */
+			$css_folder = POP_BOOTSTRAPPROCESSORS_URL.'/css';
+			$includes_css_folder = $css_folder . '/includes';
+			$cdn_css_folder = $includes_css_folder . '/cdn';
 
-		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
-			
-			// CDN
-			wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);
+			/* ------------------------------
+			 * Wordpress Styles
+			 ----------------------------- */
+
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
+				
+				// CDN
+				wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);
+			}
+			else {
+
+				// Locally stored files
+				wp_register_style('bootstrap', $cdn_css_folder . '/bootstrap.3.3.7.min.css', null, null);
+			}
+			wp_enqueue_style('bootstrap');
 		}
-		else {
-
-			// Locally stored files
-			wp_register_style('bootstrap', $cdn_css_folder . '/bootstrap.3.3.7.min.css', null, null);
-		}
-		wp_enqueue_style('bootstrap');
 	}
 }
 

@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('URE_POPPROCESSORS_VERSION', 0.107);
+define('URE_POPPROCESSORS_VERSION', 0.108);
 define('URE_POPPROCESSORS_URE_VERSION', '4.19.1');
 define('URE_POPPROCESSORS_DIR', dirname(__FILE__));
 define('URE_POPPROCESSORS_PHPTEMPLATES_DIR', URE_POPPROCESSORS_DIR.'/php-templates/compiled');
@@ -23,7 +23,7 @@ class URE_PoPProcessors {
 
 	function init(){
 
-		define('URE_POPPROCESSORS_URI', plugins_url('', __FILE__));
+		define('URE_POPPROCESSORS_URL', plugins_url('', __FILE__));
 		
 		if ($this->validate()) {
 			

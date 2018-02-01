@@ -11,7 +11,8 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_COREPROCESSORS_VERSION', 0.227);
+define ('POP_COREPROCESSORS_VERSION', 0.228);
+define ('POP_COREPROCESSORS_VENDORRESOURCESVERSION', 0.200);
 define ('POP_COREPROCESSORS_DIR', dirname(__FILE__));
 define ('POP_COREPROCESSORS_PHPTEMPLATES_DIR', POP_COREPROCESSORS_DIR.'/php-templates/compiled');
 // define ('POP_COREPROCESSORS_CACHE_DIR', WP_CONTENT_DIR.'/cache');
@@ -30,16 +31,15 @@ class PoP_CoreProcessors {
 		
 		// Priority: after PoP WP Processors and PoP Bootstrap Processors loaded
 		add_action('plugins_loaded', array($this,'init'), 32);
-		add_action('PoP:version', array($this,'version'), 32);
+		add_action('PoP:system-generate', array($this,'system_generate'));
 	}
-	function version($version){
+	function init() {
 
-		return POP_COREPROCESSORS_VERSION;
-	}
-	function init(){
+		define ('POP_COREPROCESSORS_URL', plugins_url('', __FILE__));
+		define ('POP_COREPROCESSORS_URL_LIB', POP_COREPROCESSORS_URL.'/library' );
 
-		define ('POP_COREPROCESSORS_URI', plugins_url('', __FILE__));
-		define ('POP_COREPROCESSORS_URI_LIB', POP_COREPROCESSORS_URI.'/library' );
+		define ('POP_USERSTATE_ASSETDESTINATION_DIR', POP_CONTENT_DIR.'/user-state');
+		define ('POP_USERSTATE_ASSETDESTINATION_URL', POP_CONTENT_URL.'/user-state');
 
 		if ($this->validate()) {
 			
@@ -47,6 +47,12 @@ class PoP_CoreProcessors {
 			define('POP_COREPROCESSORS_INITIALIZED', true);
 		}
 	}
+	function system_generate(){
+
+		require_once 'installation.php';
+		$installation = new PoP_CoreProcessors_Installation();
+		return $installation->system_generate();	
+	}	
 	function validate(){
 		
 		require_once 'validation.php';

@@ -17,6 +17,8 @@ class PoPTheme_Wassup_PoPSystem_SettingsProcessor_CheckpointUtils {
 
 			// Validate by both private key and client's IP
 			$systemaccesvalid = array(
+				// Explicitly make it not need user state, so we can use page /generate-theme/ to calculate the minimum set of resources loaded during "loading-frame" (being logged in takes this away)
+				'requires-user-state' => false,
 				'checkpoints' => array(
 					POP_SYSTEM_DATALOAD_CHECKPOINT_SYSTEMACCESSKEYVALID,
 					POP_SYSTEM_DATALOAD_CHECKPOINT_SYSTEMACCESSIPVALID,

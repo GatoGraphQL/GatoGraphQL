@@ -473,9 +473,6 @@ window.popManager = {
 				that.pageSectionInitialized(domain, pageSection);
 			});
 
-			// Step 4: remove the "loading" screen
-			$(document.body).removeClass('pop-loadingjs');
-
 			if (!silent_document) {
 				
 				// Update URL: it will remove the unwanted items, eg: mode=embed (so that if the user clicks on the newWindow btn, it opens properly)
@@ -486,6 +483,9 @@ window.popManager = {
 			// Only critical assets will be executed here, because 'documentInitialized' is part of the resourceloader-mapping starting from popManager.init(),
 			// so it is not possible to have "defer" scripts with function documentInitialized
 			that.documentInitialized(domain);
+
+			// Step 4: remove the "loading" screen
+			$(document.body).removeClass('pop-loadingjs');
 
 			// If the server requested to extra load more URLs
 			// Comment Leo 28/12/2017: backgroundLoad will execute later, after the page has loaded

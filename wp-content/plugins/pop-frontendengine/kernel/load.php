@@ -6,4 +6,4 @@ require_once 'library/load.php';
 require_once 'css-to-style-conversion/load.php';
 require_once 'processors/load.php';
 require_once 'serverside-rendering/load.php';
-require_once 'resourceloader/load.php';
+require_once 'resourceloaders/load.php';

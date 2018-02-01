@@ -187,6 +187,9 @@ class GD_Custom_Template_Processor_PostThumbLayouts extends GD_Template_Processo
 			case GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
 			case GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
 
+				// Artificial property added to identify the template when adding template-resources
+				$this->add_att($template_id, $atts, 'resourceloader', 'thumb-feed');
+
 				// Style to add a background-image while loading the feed image
 				$this->append_att($template_id, $atts, 'class', 'thumb-feed');
 				break;

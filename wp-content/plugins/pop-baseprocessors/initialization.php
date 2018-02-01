@@ -29,7 +29,7 @@ class PoP_BaseProcessors_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = POP_BASEPROCESSORS_URI.'/js';
+			$js_folder = POP_BASEPROCESSORS_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$bundles_js_folder = $dist_js_folder.'/bundles';
 			
@@ -48,7 +48,7 @@ class PoP_BaseProcessors_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = POP_BASEPROCESSORS_URI.'/js/dist/templates/';
+		$folder = POP_BASEPROCESSORS_URL.'/js/dist/templates/';
 
 		wp_enqueue_script('block-tmpl', $folder.'block.tmpl.js', array('handlebars'), POP_BASEPROCESSORS_VERSION, true);
 	}

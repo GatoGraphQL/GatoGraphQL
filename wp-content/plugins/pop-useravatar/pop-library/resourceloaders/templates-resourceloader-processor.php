@@ -41,7 +41,7 @@ class PoP_UserAvatar_TemplateResourceLoaderProcessor extends PoP_TemplateResourc
 	
 	function get_path($resource) {
 	
-		return POP_USERAVATAR_URI.'/js/dist/templates';
+		return POP_USERAVATAR_URL.'/js/dist/templates';
 	}
 	
 	function get_dir($resource) {

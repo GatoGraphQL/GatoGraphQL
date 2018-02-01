@@ -42,7 +42,7 @@ class PoP_TinyMCEHashtags {
       return $plugins;
     }
 
-    $js_folder = POP_COREPROCESSORS_URI.'/js';
+    $js_folder = POP_COREPROCESSORS_URL.'/js';
 
     $plugins['hashtags'] = $js_folder . '/tinymce/plugins/hashtags/plugin.js';
 

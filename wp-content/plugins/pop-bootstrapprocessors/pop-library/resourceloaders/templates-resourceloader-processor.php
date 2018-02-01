@@ -68,7 +68,7 @@ class PoP_BootstrapProcessors_TemplateResourceLoaderProcessor extends PoP_Templa
 	
 	function get_path($resource) {
 	
-		return POP_BOOTSTRAPPROCESSORS_URI.'/js/dist/templates';
+		return POP_BOOTSTRAPPROCESSORS_URL.'/js/dist/templates';
 	}
 	
 	function get_dir($resource) {

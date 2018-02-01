@@ -62,7 +62,7 @@ class EM_PoPProcessors_MapResourceLoaderProcessor extends PoP_JSResourceLoaderPr
 	function get_path($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return EM_POPPROCESSORS_URI.'/js/'.$subpath.'libraries/map';
+		return EM_POPPROCESSORS_URL.'/js/'.$subpath.'libraries/map';
 	}
 
 	function get_jsobjects($resource) {

@@ -1,10 +1,11 @@
+"use strict";
 (function($){
-window.popCDNConfig = {
-
-  thumbprints: $thumbprints,
+popCDN.config[{{$domain}}] = {
+  thumbprints: {{$thumbprints}},
   criteria: {
-	  thumbprints: $criteria_thumbprints,
-	  rejected: $criteria_rejected
-  }
+	  thumbprints: {{$criteria_thumbprints}},
+	  rejected: {{$criteria_rejected}}
+  },
+  cdnDomain: {{$cdnDomain}}
 };
 })(jQuery);

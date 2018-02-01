@@ -16,6 +16,7 @@ class PoP_Frontend_ServerUtils {
 		// }
 
 		if (defined('POP_SERVER_USEMINIFIEDRESOURCES')) {
+			
 			return POP_SERVER_USEMINIFIEDRESOURCES;
 		}
 
@@ -27,10 +28,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('externalcdn');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_ACCESSEXTERNALCDNRESOURCES')) {
+			
 			return POP_SERVER_ACCESSEXTERNALCDNRESOURCES;
 		}
 
@@ -42,10 +45,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('localstorage');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_USELOCALSTORAGE')) {
+			
 			return POP_SERVER_USELOCALSTORAGE;
 		}
 
@@ -63,10 +68,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('serverside-rendering');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_USESERVERSIDERENDERING')) {
+			
 			return POP_SERVER_USESERVERSIDERENDERING;
 		}
 
@@ -97,6 +104,7 @@ class PoP_Frontend_ServerUtils {
 		}
 
 		if (defined('POP_SERVER_REMOVEDATABASEFROMOUTPUT')) {
+			
 			return POP_SERVER_REMOVEDATABASEFROMOUTPUT;
 		}
 
@@ -108,10 +116,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('code-splitting');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_USECODESPLITTING')) {
+			
 			return POP_SERVER_USECODESPLITTING;
 		}
 
@@ -142,12 +152,15 @@ class PoP_Frontend_ServerUtils {
 
 		// Allow to override the configuration
 		if (PoP_ServerUtils::get_override_configuration('resources-header') === true) {
+			
 			return 'header';
 		}
 		elseif (PoP_ServerUtils::get_override_configuration('resources-body') === true) {
+			
 			return 'body';
 		}
 		elseif (PoP_ServerUtils::get_override_configuration('resources-body-inline') === true) {
+			
 			return 'body-inline';
 		}
 
@@ -176,6 +189,54 @@ class PoP_Frontend_ServerUtils {
 		return 'header';
 	}
 
+	public static function generate_loadingframe_resource_mapping() {
+
+		// Only valid when doing code-splitting
+		if (!self::use_code_splitting()) {
+
+			return false;
+		}
+
+		// If generating either bundles or bundlegroups, then it can be done with no much processing needed, so just do it
+		if (self::generate_bundle_files() || self::generate_bundlegroup_files()) {
+
+			return true;
+		}
+
+		if (defined('POP_SERVER_GENERATELOADINGFRAMERESOURCEMAPPING')) {
+
+			return POP_SERVER_GENERATELOADINGFRAMERESOURCEMAPPING;
+		}
+
+		return false;
+	}
+
+	public static function generate_bundlefiles_on_runtime() {
+
+		// Only valid when doing code-splitting
+		if (!self::use_code_splitting()) {
+
+			return false;
+		}
+
+		// If generating either bundles or bundlegroups, and the enqueue type is the corresponding one, then the bundle(group) files will be generated statically, so no need
+		$enqueuefile_type = self::get_enqueuefile_type();
+		if (
+			$enqueuefile_type == 'resource' || 
+			($enqueuefile_type == 'bundle' && self::generate_bundle_files()) || 
+			($enqueuefile_type == 'bundlegroup' && self::generate_bundlegroup_files())) {
+
+			return false;
+		}
+
+		if (defined('POP_SERVER_GENERATEBUNDLEFILESONRUNTIME')) {
+			
+			return POP_SERVER_GENERATEBUNDLEFILESONRUNTIME;
+		}
+
+		return true;
+	}
+
 	public static function generate_bundle_files() {
 
 		// Only valid when doing code-splitting
@@ -185,6 +246,7 @@ class PoP_Frontend_ServerUtils {
 		}
 
 		if (defined('POP_SERVER_GENERATEBUNDLEFILES')) {
+			
 			return POP_SERVER_GENERATEBUNDLEFILES;
 		}
 
@@ -200,24 +262,27 @@ class PoP_Frontend_ServerUtils {
 		}
 
 		if (defined('POP_SERVER_GENERATEBUNDLEGROUPFILES')) {
+			
 			return POP_SERVER_GENERATEBUNDLEGROUPFILES;
 		}
 
 		return false;
 	}
 
-	public static function skip_bundle_pageswithparams() {
+	// public static function skip_bundle_pageswithparams() {
 
-		if (defined('POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS')) {
-			return POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS;
-		}
+	// 	if (defined('POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS')) {
+			
+	// 		return POP_SERVER_SKIPBUNDLEPAGESWITHPARAMS;
+	// 	}
 
-		return false;
-	}
+	// 	return false;
+	// }
 
 	public static function get_bundles_chunk_size() {
 
 		if (defined('POP_SERVER_BUNDLECHUNKSIZE')) {
+			
 			return POP_SERVER_BUNDLECHUNKSIZE;
 		}
 
@@ -236,25 +301,31 @@ class PoP_Frontend_ServerUtils {
 		return !self::access_externalcdn_resources();
 	}
 
-	public static function get_enqueuefile_type() {
+	public static function get_enqueuefile_type($disable_hooks = false) {
 
 		// Allow to override the configuration
 		if (PoP_ServerUtils::get_override_configuration('load-bundlegroups') === true) {
+			
 			return 'bundlegroup';
 		}
 		elseif (PoP_ServerUtils::get_override_configuration('load-bundles') === true) {
+			
 			return 'bundle';
 		}
 		elseif (PoP_ServerUtils::get_override_configuration('load-resources') === true) {
+			
 			return 'resource';
 		}
 
-		// There are requests that can only work with a specific type
-		// Eg: the AppShell, it must always use 'resource', or otherwise it will need to load extra bundle(group) files, 
-		// making the initial SW pre-fetch heavy, and not allowing to easily create the AppShell for the different thememodes (embed, print)
-		if ($enqueuefile_type = apply_filters('get_enqueuefile_type', '')) {
+		if (!$disable_hooks) {
+			
+			// There are requests that can only work with a specific type
+			// Eg: the AppShell, it must always use 'resource', or otherwise it will need to load extra bundle(group) files, 
+			// making the initial SW pre-fetch heavy, and not allowing to easily create the AppShell for the different thememodes (embed, print)
+			if ($enqueuefile_type = apply_filters('get_enqueuefile_type', '')) {
 
-			return $enqueuefile_type;
+				return $enqueuefile_type;
+			}
 		}
 
 		if (defined('POP_SERVER_ENQUEUEFILESTYPE')) {
@@ -275,6 +346,12 @@ class PoP_Frontend_ServerUtils {
 		return 'resource';
 	}
 
+	public static function loading_bundlefile($disable_hooks = false) {
+
+		$enqueuefile_type = self::get_enqueuefile_type($disable_hooks);
+		return $enqueuefile_type == 'bundlegroup' || $enqueuefile_type == 'bundle';
+	}
+
 	public static function scripts_after_html() {
 
 		if (!self::use_serverside_rendering()) {
@@ -285,10 +362,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('scripts-end');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_SCRIPTSAFTERHTML')) {
+			
 			return POP_SERVER_SCRIPTSAFTERHTML;
 		}
 
@@ -305,10 +384,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('appshell');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_USEAPPSHELL')) {
+			
 			return POP_SERVER_USEAPPSHELL;
 		}
 
@@ -326,10 +407,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('app-bundle');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_USEBUNDLEDRESOURCES')) {
+			
 			return POP_SERVER_USEBUNDLEDRESOURCES;
 		}
 
@@ -346,6 +429,7 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('runtime-js');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
@@ -358,6 +442,7 @@ class PoP_Frontend_ServerUtils {
 		}
 
 		if (defined('POP_SERVER_GENERATERESOURCESONRUNTIME')) {
+			
 			return POP_SERVER_GENERATERESOURCESONRUNTIME;
 		}
 
@@ -374,10 +459,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('sw');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_USESERVICEWORKERS')) {
+			
 			return POP_SERVER_USESERVICEWORKERS;
 		}
 
@@ -395,10 +482,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('progressive-booting');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_USEPROGRESSIVEBOOTING')) {
+			
 			return POP_SERVER_USEPROGRESSIVEBOOTING;
 		}
 
@@ -410,10 +499,12 @@ class PoP_Frontend_ServerUtils {
 		// Allow to override the configuration
 		$override = PoP_ServerUtils::get_override_configuration('disable-js');
 		if (!is_null($override)) {
+			
 			return $override;
 		}
 
 		if (defined('POP_SERVER_DISABLEJS')) {
+			
 			return POP_SERVER_DISABLEJS;
 		}
 
@@ -445,11 +536,27 @@ class PoP_Frontend_ServerUtils {
 		// Then, we need consistency: we either use resourceloader-generatedfiles.json and copy the pop-memory/ files from STAGING to PROD, 
 		// or none and we generate these on runtime
 		if (defined('POP_SERVER_USEGENERATETHEMEOUTPUTFILES')) {
+			
 			return POP_SERVER_USEGENERATETHEMEOUTPUTFILES;
 		}
 
 		return false;
 	}
 
+	public static function skip_loadingframe_resources() {
 
+		// Allow to override the configuration
+		$override = PoP_ServerUtils::get_override_configuration('skip-loadingframe-resources');
+		if (!is_null($override)) {
+			
+			return $override;
+		}
+
+		if (defined('POP_SERVER_SKIPLOADINGFRAMERESOURCES')) {
+			
+			return POP_SERVER_SKIPLOADINGFRAMERESOURCES;
+		}
+
+		return true;
+	}
 }

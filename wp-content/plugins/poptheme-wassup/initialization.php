@@ -67,7 +67,7 @@ class PoPTheme_Wassup_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = POPTHEME_WASSUP_URI.'/js';
+			$js_folder = POPTHEME_WASSUP_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
@@ -123,7 +123,7 @@ class PoPTheme_Wassup_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = POPTHEME_WASSUP_URI.'/js/dist/templates/';
+		$folder = POPTHEME_WASSUP_URL.'/js/dist/templates/';
 
 		// All Custom Templates
 		wp_enqueue_script('frame-top-tmpl', $folder.'pagesection-top.tmpl.js', array('handlebars'), POPTHEME_WASSUP_VERSION, true);
@@ -152,48 +152,43 @@ class PoPTheme_Wassup_Initialization {
 
 	function register_styles() {
 
-		$css_folder = POPTHEME_WASSUP_URI.'/css';
-		$dist_css_folder = $css_folder . '/dist';
-		$cdn_css_folder = $css_folder . '/cdn';
-		$libraries_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/libraries';
-		$includes_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/includes';
-		$templates_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/templates';
-		$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
-		$bundles_css_folder = $dist_css_folder . '/bundles';
+		// If doing code-splitting, the resources below are already added by the ResourceLoader, so no need for them here
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
+		
+			$css_folder = POPTHEME_WASSUP_URL.'/css';
+			$dist_css_folder = $css_folder . '/dist';
+			$includes_css_folder = $css_folder . '/includes';
+			$cdn_css_folder = $includes_css_folder . '/cdn';
+			$libraries_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/libraries';
+			$templates_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/templates';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+			$bundles_css_folder = $dist_css_folder . '/bundles';
 
-		/* ------------------------------
-		 * Local Libraries (enqueue first)
-		 ----------------------------- */
+			/* ------------------------------
+			 * Local Libraries (enqueue first)
+			 ----------------------------- */
 
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
 
-			wp_register_style('poptheme-wassup', $bundles_css_folder . '/poptheme-wassup.bundle.min.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
-			wp_enqueue_style('poptheme-wassup');
-		}
-		else {
+				wp_register_style('poptheme-wassup', $bundles_css_folder . '/poptheme-wassup.bundle.min.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
+				wp_enqueue_style('poptheme-wassup');
+			}
+			else {
 
-			wp_register_style('poptheme-wassup-pagesectiongroup', $libraries_css_folder . '/pagesection-group'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-pagesectiongroup');
+				wp_register_style('poptheme-wassup-pagesectiongroup', $libraries_css_folder . '/pagesection-group'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-pagesectiongroup');
 
-			/** Theme CSS Source */
-			wp_register_style('poptheme-wassup', $libraries_css_folder.'/style'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
-			wp_enqueue_style('poptheme-wassup');
+				/** Theme CSS Source */
+				wp_register_style('poptheme-wassup', $libraries_css_folder.'/style'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION);
+				wp_enqueue_style('poptheme-wassup');
 
-			// Not in CDN
-			wp_register_style('bootstrap-multiselect', $includes_css_folder . '/bootstrap-multiselect.0.9.13'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('bootstrap-multiselect');
+				/** Custom Theme Source */
+				// Custom implementation of Bootstrap
+				wp_register_style('poptheme-wassup-bootstrap', $libraries_css_folder . '/custom.bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-bootstrap');
 
-			/** Custom Theme Source */
-			// Custom implementation of Bootstrap
-			wp_register_style('poptheme-wassup-bootstrap', $libraries_css_folder . '/custom.bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-bootstrap');
-
-			wp_register_style('poptheme-wassup-typeahead-bootstrap', $libraries_css_folder . '/typeahead.js-bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
-			wp_enqueue_style('poptheme-wassup-typeahead-bootstrap');
-
-			// If doing code-splitting, the resources below are already added by the ResourceLoader, so no need for them here
-			if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
-			// if (!PoP_Frontend_ServerUtils::include_resources_in_body()) {
+				wp_register_style('poptheme-wassup-typeahead-bootstrap', $libraries_css_folder . '/typeahead.js-bootstrap'.$suffix.'.css', array('bootstrap'), POPTHEME_WASSUP_VERSION, 'screen');
+				wp_enqueue_style('poptheme-wassup-typeahead-bootstrap');
 
 				wp_register_style('poptheme-wassup-blockgroup-home-welcome', $templates_css_folder . '/blockgroup-home-welcome'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
 				wp_enqueue_style('poptheme-wassup-blockgroup-home-welcome');
@@ -281,32 +276,32 @@ class PoPTheme_Wassup_Initialization {
 
 				wp_register_style('poptheme-wassup-layout', $templates_css_folder . '/layout'.$suffix.'.css', array(), POPTHEME_WASSUP_VERSION, 'screen');
 				wp_enqueue_style('poptheme-wassup-layout');
+
+				// This file is generated dynamically, so it can't be added to any bundle or minified
+				// That's why we use pop_version() as its version, so upgrading the website will fetch again this file
+				global $popthemewassup_backgroundimage_filegenerator, $popthemewassup_feedthumb_filegenerator;
+				wp_register_style('poptheme-wassup-backgroundimage', $popthemewassup_backgroundimage_filegenerator->get_fileurl(), array(), pop_version());
+				wp_enqueue_style('poptheme-wassup-backgroundimage');
+
+				wp_register_style('poptheme-wassup-feedthumb', $popthemewassup_feedthumb_filegenerator->get_fileurl(), array(), pop_version());
+				wp_enqueue_style('poptheme-wassup-feedthumb');
 			}
-		}
-		
-		/* ------------------------------
-		 * 3rd Party Libraries (using CDN whenever possible)
-		 ----------------------------- */
-
-		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 			
-			// CDN
-			wp_register_style('perfect-scrollbar', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.5/css/perfect-scrollbar.min.css', null, null);
-			wp_register_style('fileupload', 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/css/jquery.fileupload.min.css', null, null);
-			wp_register_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', null, null);
-			wp_register_style('daterangepicker', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.11/daterangepicker.min.css', null, null);
-		}
-		else {
+			/* ------------------------------
+			 * 3rd Party Libraries (using CDN whenever possible)
+			 ----------------------------- */
 
-			// Locally stored files
-			wp_register_style('perfect-scrollbar', $cdn_css_folder . '/perfect-scrollbar.0.6.5.css', null, null);
-			wp_register_style('fileupload', $cdn_css_folder . '/jquery.fileupload.9.5.7.min.css', null, null);
-			wp_register_style('font-awesome', $cdn_css_folder . '/font-awesome.4.7.0.min.css', null, null);
-			wp_register_style('daterangepicker', $cdn_css_folder . '/daterangepicker.2.1.11.min.css', null, null);
+			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
+				
+				// CDN
+				wp_register_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', null, null);
+			}
+			else {
+
+				// Locally stored files
+				wp_register_style('font-awesome', $includes_css_folder . '/font-awesome.4.7.0.min.css', null, null);
+			}
+			wp_enqueue_style('font-awesome');
 		}
-		wp_enqueue_style('perfect-scrollbar');
-		wp_enqueue_style('fileupload');
-		wp_enqueue_style('font-awesome');
-		wp_enqueue_style('daterangepicker');
 	}
 }

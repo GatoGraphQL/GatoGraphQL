@@ -17,9 +17,7 @@ class PoP_ServiceWorkers_ResourceLoader_EM_QTransX_Resources {
 
 	function modify_resources($resources) {
 
-		// Whenever English is the default language, do not add the locale file, because in en/ version there is no en.js file, so the filename becomes drp.js, which does not exist, returning a 404
-		// global $q_config;
-		// if ($q_config['default_language'] == 'en') {
+		// If not using a default language and the selected one doesn't exist, do not add the locale file, because in en/ version there is no en.js file, so the filename becomes drp.js, which does not exist, returning a 404
 		if (!get_em_qtransx_fullcalendar_locale_filename()) {
 			
 			$resources = array_values(array_diff(

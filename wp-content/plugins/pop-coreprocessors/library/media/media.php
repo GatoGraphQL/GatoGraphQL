@@ -10,7 +10,7 @@ function gd_media_icon_dirs($args) {
 	if (!is_array($args)) return $args ;
 
 	// Add the icons path of the Resources
-	$media_icons = array(POP_COREPROCESSORS_LIB.'/media/img/flags' => POP_COREPROCESSORS_URI_LIB.'/media/img/flags');
+	$media_icons = array(POP_COREPROCESSORS_LIB.'/media/img/flags' => POP_COREPROCESSORS_URL_LIB.'/media/img/flags');
 
 	return array_merge($media_icons, $args);
 }

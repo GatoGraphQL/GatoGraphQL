@@ -60,6 +60,11 @@ class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processo
 		return $ret;
 	}
 
+	protected function open_tab($template_id, $atts) {
+
+		return true;
+	}
+
 	function get_pagesection_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_pagesection_jsmethod($template_id, $atts);
@@ -73,8 +78,9 @@ class GD_Template_Processor_PageTabPageSectionsBase extends GD_Template_Processo
 		$this->add_jsmethod($ret, 'onDestroyPageSwitchTab', 'remove');
 
 		// addOpenTab only if needed. Eg: do not do it in the Embed/Print
-		// if (apply_filters(POP_HOOK_PAGETABS_ADDOPENTAB, true)) {
-		$this->add_jsmethod($ret, 'addOpenTab', 'remove');
+		if ($this->open_tab($template_id, $atts)) {
+			$this->add_jsmethod($ret, 'addOpenTab', 'remove');
+		}
 		// }
 		$this->add_jsmethod($ret, 'closePageTab', 'remove');
 

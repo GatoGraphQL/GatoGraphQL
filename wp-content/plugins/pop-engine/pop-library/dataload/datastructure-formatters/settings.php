@@ -15,11 +15,14 @@ class GD_DataLoad_DataStructureFormatter_Settings extends GD_DataLoad_DataStruct
 	}
 	
 	// Return only the settings
-	function get_formatted_data($settings, $runtimesettings, $sitemapping, $data) {
+	function get_formatted_settings($settings, $runtimesettings, $sitemapping) {
 	
-		return array('json' => $settings);
+		return $settings;
 	}
-
+	function get_formatted_data($data) {
+	
+		return array();
+	}
 }
 	
 /**---------------------------------------------------------------------------------------------------------------

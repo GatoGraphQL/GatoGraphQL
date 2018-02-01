@@ -43,7 +43,7 @@ class PoP_CoreProcessors_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = POP_COREPROCESSORS_URI.'/js';
+			$js_folder = POP_COREPROCESSORS_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
@@ -368,7 +368,7 @@ class PoP_CoreProcessors_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = POP_COREPROCESSORS_URI.'/js/dist/templates/';
+		$folder = POP_COREPROCESSORS_URL.'/js/dist/templates/';
 
 		// All MESYM Theme Templates
 		wp_enqueue_script('alert-tmpl', $folder.'alert.tmpl.js', array('handlebars'), POP_COREPROCESSORS_VERSION, true);
@@ -496,11 +496,8 @@ class PoP_CoreProcessors_Initialization {
 
 	function register_styles() {
 
-		$css_folder = POP_COREPROCESSORS_URI.'/css';
+		$css_folder = POP_COREPROCESSORS_URL.'/css';
 		$dist_css_folder = $css_folder . '/dist';
-		$bundles_css_folder = $dist_css_folder . '/bundles';
-		$includes_css_folder = $css_folder . '/includes';
-		$cdn_css_folder = $includes_css_folder . '/cdn';
 
 		/* ------------------------------
 		 * Wordpress Styles
@@ -512,38 +509,54 @@ class PoP_CoreProcessors_Initialization {
 		// Do ALWAYS print the wp_editor editor.min.css file. This is because in the logic in function wp_editor, it will print it only for
 		// the first editor (which happend to be the one for Add Project), so first initializing any other editor than this first one it would not show properly
 		// Taken from public static function editor( $content, $editor_id, $settings = array() ) {
-		wp_print_styles('editor-buttons');
+		wp_print_styles('editor-buttons');		
 
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
+			$includes_css_folder = $css_folder . '/includes';
+			$cdn_css_folder = $includes_css_folder . '/cdn';
+			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+
 			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 				
 				// CDN
-				// wp_register_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css', null, null);
 				wp_register_style('daterangepicker', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.css', null, null);
+				wp_register_style('perfect-scrollbar', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.5/css/perfect-scrollbar.min.css', null, null);
 			}
 			else {
 
 				// Locally stored files
-				// wp_register_style('bootstrap', $cdn_css_folder . '/bootstrap.3.3.7.min.css', null, null);
 				wp_register_style('daterangepicker', $cdn_css_folder . '/daterangepicker.2.1.24.min.css', null, null);
+				wp_register_style('perfect-scrollbar', $cdn_css_folder . '/perfect-scrollbar.0.6.5.min.css', null, null);
 			}
-			// wp_enqueue_style('bootstrap');
 			wp_enqueue_style('daterangepicker');
-		}
+			wp_enqueue_style('perfect-scrollbar');
 
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
 			
-			// Plug-in bundle
-			wp_register_style('pop-coreprocessors', $bundles_css_folder . '/pop-coreprocessors.bundle.min.css', array('bootstrap'), POP_COREPROCESSORS_VERSION);
-			wp_enqueue_style('pop-coreprocessors');
-		}
-		else {
+				$bundles_css_folder = $dist_css_folder . '/bundles';
 
-			// Not in CDN
-			wp_register_style('jquery-dynamic-max-height', $includes_css_folder . '/jquery.dynamicmaxheight.css', null, POP_COREPROCESSORS_VERSION, 'screen');
-			wp_enqueue_style('jquery-dynamic-max-height');
+				// Plug-in bundle
+				wp_register_style('pop-coreprocessors', $bundles_css_folder . '/pop-coreprocessors.bundle.min.css', array('bootstrap'), POP_COREPROCESSORS_VERSION);
+				wp_enqueue_style('pop-coreprocessors');
+			}
+			else {
+
+				// Not in CDN
+				wp_register_style('jquery-dynamic-max-height', $includes_css_folder . '/jquery.dynamicmaxheight.css', null, POP_COREPROCESSORS_VERSION, 'screen');
+				wp_enqueue_style('jquery-dynamic-max-height');
+
+				// Not in CDN
+				wp_register_style('bootstrap-multiselect', $includes_css_folder . '/bootstrap-multiselect.0.9.13'.$suffix.'.css', array('bootstrap'), POP_COREPROCESSORS_VERSION, 'screen');
+				wp_enqueue_style('bootstrap-multiselect');
+			}
+
+			// This file is generated dynamically, so it can't be added to any bundle or minified
+			// That's why we use pop_version() as its version, so upgrading the website will fetch again this file
+			global $popcore_userloggedinstyles_filegenerator;
+			wp_register_style('pop-coreprocessors-userloggedin', $popcore_userloggedinstyles_filegenerator->get_fileurl(), array(), pop_version());
+			wp_enqueue_style('pop-coreprocessors-userloggedin');
 		}
 	}
 }

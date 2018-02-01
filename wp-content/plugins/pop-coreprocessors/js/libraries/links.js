@@ -17,55 +17,6 @@ window.popLinks = {
 	// 'PRIVATE' FUNCTIONS
 	//-------------------------------------------------
 
-	linkBlankTarget : function(anchor) {
-
-		var that = this;
-
-		// Open in new window
-		if (!anchor.attr('target')) {
-			anchor.attr('target', '_blank');
-		}
-	},
-
-	maybeaddspinner : function(anchor, url) {
-
-		var that = this;
-
-		// Add a spinner next to the clicked link? Allow to override on an anchor by anchor basis
-		var addspinner = !anchor.hasClass('hidden') && ((M.ADDANCHORSPINNER && (typeof anchor.data('addspinner') == 'undefined') || anchor.data('addspinner')));
-		if (addspinner) {
-
-			// Create the spinner object and add an extra class so we can remove it later on
-			var spinner = $('<span class="pop-spinner">'+M.SPINNER+'</span>');
-
-			// If the anchor contains an image, assign a class to the spinner so it can be placed on top of the image
-			if (anchor.find('img').length) {
-				spinner.addClass('spinner-img');
-			}
-
-			// Whenever the URL was fetched (or failed fetching), undo the changes. The URL must be escaped, or otherwise the string triggered cannot be handled correctly
-			$(document).one('urlfetchcompleted:'+escape(url), function() {
-				anchor
-					.removeClass('loading')
-					// .removeClass('disabled')
-					.children('.pop-spinner')
-						.remove();
-			});
-
-			// Add class 'disabled' to the button, and remove class 'disabled' to the button siblings, since once the request
-			// comes back, they'll be visible on their normal state (eg: Follow/Unfollow user)
-			// And add the spinner
-			// Also blur from the button, so that it doesn't have an annoying "_" underscore like produced between the spinner and the text
-			anchor
-				.trigger('blur')
-				// .addClass('loading disabled')
-				.addClass('loading')
-				.prepend(spinner);
-		}
-
-		return addspinner;
-	},
-
 	links : function() {
 
 		var that = this;
@@ -109,8 +60,8 @@ window.popLinks = {
 			}
 			else {
 
-				// Execute functions to reset state of DOM (eg: for bubbling prevention), etc
-				popCustomBootstrap.resetBubbling();
+				// // Execute functions to reset state of DOM (eg: for bubbling prevention), etc
+				// popCustomBootstrap.resetBubbling();
 
 				// Caged Target: allow to pageSections to open all links within inside of itself.
 				// Eg: Quickview (any link clicked in the Quickview will also open in the Quickview)
@@ -279,6 +230,55 @@ window.popLinks = {
 		});		
 	},
 
+	linkBlankTarget : function(anchor) {
+
+		var that = this;
+
+		// Open in new window
+		if (!anchor.attr('target')) {
+			anchor.attr('target', '_blank');
+		}
+	},
+
+	maybeaddspinner : function(anchor, url) {
+
+		var that = this;
+
+		// Add a spinner next to the clicked link? Allow to override on an anchor by anchor basis
+		var addspinner = !anchor.hasClass('hidden') && ((M.ADDANCHORSPINNER && (typeof anchor.data('addspinner') == 'undefined') || anchor.data('addspinner')));
+		if (addspinner) {
+
+			// Create the spinner object and add an extra class so we can remove it later on
+			var spinner = $('<span class="pop-spinner">'+M.SPINNER+'</span>');
+
+			// If the anchor contains an image, assign a class to the spinner so it can be placed on top of the image
+			if (anchor.find('img').length) {
+				spinner.addClass('spinner-img');
+			}
+
+			// Whenever the URL was fetched (or failed fetching), undo the changes. The URL must be escaped, or otherwise the string triggered cannot be handled correctly
+			$(document).one('urlfetchcompleted:'+escape(url), function() {
+				anchor
+					.removeClass('loading')
+					// .removeClass('disabled')
+					.children('.pop-spinner')
+						.remove();
+			});
+
+			// Add class 'disabled' to the button, and remove class 'disabled' to the button siblings, since once the request
+			// comes back, they'll be visible on their normal state (eg: Follow/Unfollow user)
+			// And add the spinner
+			// Also blur from the button, so that it doesn't have an annoying "_" underscore like produced between the spinner and the text
+			anchor
+				.trigger('blur')
+				// .addClass('loading disabled')
+				.addClass('loading')
+				.prepend(spinner);
+		}
+
+		return addspinner;
+	},
+
 	openPrint : function(url) {
 
 		// Comment Leo 11/04/2015: Using "_blank" instead of "print" because, since we don't add mode=print to the browser url,
@@ -298,4 +298,4 @@ window.popLinks = {
 //-------------------------------------------------
 // Initialize
 //-------------------------------------------------
-popJSLibraryManager.register(popLinks, ['documentInitialized']);
+popJSLibraryManager.register(popLinks, ['documentInitialized'], true); // execute function links() immediately

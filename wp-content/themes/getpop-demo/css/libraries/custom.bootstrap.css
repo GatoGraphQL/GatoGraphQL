@@ -3,11 +3,6 @@
  *
  * Overriding styles for GetPoP
  * ---------------------------------------------------------------------------------------------------------------*/
-/*@font-face {
-  font-family: 'Rockwell';
-  src: url('../../fonts/Rockwell.eot');
-  src: local('Rockwell Regular'), local('Rockwell'), url('../../fonts/Rockwell.ttf') format('truetype');
-}*/
 body {
   color: #4d4d4f;
   font-size: 15px;

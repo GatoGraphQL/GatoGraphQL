@@ -261,6 +261,19 @@ class GD_Template_Processor_CustomPageTabPageSections extends GD_Template_Proces
 		return $ret;
 	}
 
+	protected function open_tab($template_id, $atts) {
+
+		switch ($template_id) {
+
+			case GD_TEMPLATE_PAGESECTION_ADDONTABS_404:
+			case GD_TEMPLATE_PAGESECTION_PAGETABS_404:
+
+				return false;
+		}
+
+		return parent::open_tab($template_id, $atts);
+	}
+
 	function get_pagesection_jsmethod($template_id, $atts) {
 
 		$ret = parent::get_pagesection_jsmethod($template_id, $atts);

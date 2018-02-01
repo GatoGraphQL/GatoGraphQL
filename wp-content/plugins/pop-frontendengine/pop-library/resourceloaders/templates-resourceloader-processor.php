@@ -41,7 +41,7 @@ class PoP_FrontEnd_TemplateResourceLoaderProcessor extends PoP_TemplateResourceL
 	
 	function get_path($resource) {
 	
-		return POP_FRONTENDENGINE_URI.'/js/dist/templates';
+		return POP_FRONTENDENGINE_URL.'/js/dist/templates';
 	}
 	
 	function get_dir($resource) {

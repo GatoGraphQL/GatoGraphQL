@@ -9,3 +9,4 @@ require_once 'formcomponent-inputs/load.php';
 require_once 'filter/load.php';
 require_once 'processors/load.php';
 require_once 'settingsprocessors/load.php';
+require_once 'resourceloaders/load.php';

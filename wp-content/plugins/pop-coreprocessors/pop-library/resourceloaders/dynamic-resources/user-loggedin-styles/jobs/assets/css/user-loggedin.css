@@ -1,0 +1,26 @@
+.visible-loggedin-{{$domainId}},
+body.loggedin-{{$domainId}} .visible-notloggedin-{{$domainId}},
+.community-{{$domainId}} .visible-community-{{$domainId}},
+.organization-{{$domainId}} .visible-organization-{{$domainId}},
+.individual-{{$domainId}} .visible-individual-{{$domainId}},
+.editor-{{$domainId}} .wp-media-buttons,
+body.loggedin-{{$domainId}}.offline .editor-{{$domainId}} .wp-media-buttons,
+.featuredimage-{{$domainId}} .loggedin-btn {
+	display: none !important;
+}
+
+.visible-notloggedin-{{$domainId}},
+body.loggedin-{{$domainId}} .visible-loggedin-{{$domainId}},
+body.loggedin-{{$domainId}} .visible-notloggedin-{{$domainId}}.visible-always,
+body.loggedin-{{$domainId}}.community-{{$domainId}} .visible-community-{{$domainId}},
+body.loggedin-{{$domainId}}.community-{{$domainId}} .menu-{{$domainId}} .visible-community,
+body.loggedin-{{$domainId}}.organization-{{$domainId}} .visible-organization-{{$domainId}},
+body.loggedin-{{$domainId}}.organization-{{$domainId}} .menu-{{$domainId}} .visible-organization,
+body.loggedin-{{$domainId}}.individual-{{$domainId}} .visible-individual-{{$domainId}},
+body.loggedin-{{$domainId}}.individual-{{$domainId}} .menu-{{$domainId}} .visible-individual,
+body.loggedin-{{$domainId}} .editor-{{$domainId}} .wp-media-buttons {
+	display: block !important;
+}
+body.loggedin-{{$domainId}} .featuredimage-{{$domainId}} .loggedin-btn {
+	display: inline-block !important;
+}

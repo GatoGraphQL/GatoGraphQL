@@ -53,6 +53,9 @@ class PoP_CoreProcessors_ResourceLoaderProcessor_Hooks {
 
 	function get_manager_dependencies($dependencies) {
 
+		// User logged-in styles
+		$dependencies[] = POP_RESOURCELOADER_CSS_USERLOGGEDIN;
+
 		// This dependency has been added, because we are referencing function 'mentions_source' in editor.php
 		// Even though popMentions will be loaded from the internal/external method calls, if the mapping has not
 		// been generated, then it will fail and give a JS error. By expliciting the dependency here, it will work always fine

@@ -71,6 +71,16 @@ class GD_TemplateManager_Utils {
 		// return !empty($checkpoints);
 		global $gd_template_settingsmanager;
 		$checkpoint_settings = $gd_template_settingsmanager->get_page_checkpoints();
+
+		// Allow WASSUP_CHECKPOINT_SYSTEMACCESSVALID to not be static => it can't be cached, but to not retrieve the logged-in user data, which:
+		// 1. It doesn't need
+		// 2. It creates trouble: it adds GD_TEMPLATE_BLOCKGROUP_LOGGEDINUSERDATA to the output, bringing extra stuff that we don't want, making these pages (eg: /generate-theme/) not have
+		// the minimum set of templates anymore (eg: it adds "layout-followuser-hide-styles":"layout-styles", so we couldn't use this page to calculate $js/css_loadingframe_resources_pack anymore)
+		if (isset($checkpoint_settings['requires-user-state'])) {
+
+			return $checkpoint_settings['requires-user-state'];
+		}
+		
 		$type = $checkpoint_settings['type'];
 		$checkpoints = $checkpoint_settings['checkpoints'];
 

@@ -10,3 +10,6 @@ require_once 'map-divs-base.php';
 require_once 'map-script-drawmarkers-base.php';
 require_once 'map-script-markers-base.php';
 require_once 'map-script-resetmarkers-base.php';
+require_once 'map-staticimages-base.php';
+require_once 'map-staticimage-urlparams-base.php';
+require_once 'map-staticimage-locations-base.php';

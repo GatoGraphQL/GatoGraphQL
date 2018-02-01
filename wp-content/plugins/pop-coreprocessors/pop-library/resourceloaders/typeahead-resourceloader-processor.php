@@ -65,7 +65,7 @@ class PoP_CoreProcessors_TypeaheadResourceLoaderProcessor extends PoP_JSResource
 	function get_path($resource) {
 
 		$subpath = PoP_Frontend_ServerUtils::use_minified_resources() ? 'dist/' : '';
-		return POP_COREPROCESSORS_URI.'/js/'.$subpath.'libraries/3rdparties/typeahead';
+		return POP_COREPROCESSORS_URL.'/js/'.$subpath.'libraries/3rdparties/typeahead';
 	}
 
 	function get_jsobjects($resource) {

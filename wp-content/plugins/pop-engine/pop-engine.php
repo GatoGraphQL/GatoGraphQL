@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_ENGINE_VERSION', 0.106);
+define ('POP_ENGINE_VERSION', 0.107);
 define ('POP_ENGINE_DIR', dirname(__FILE__));
 
 define ('POP_ENGINE_LIB', POP_ENGINE_DIR.'/library' );
@@ -47,13 +47,10 @@ class PoPEngine {
 		
 		define('POP_CONTENT_DIR', WP_CONTENT_DIR.'/pop-content');
 		define('POP_CONTENT_URL', WP_CONTENT_URL.'/pop-content');
-		// define('POP_RUNTIMECONTENT_DIR', WP_CONTENT_DIR.'/pop-runtimecontent');
-		// define('POP_RUNTIMECONTENT_URL', WP_CONTENT_URL.'/pop-runtimecontent');
 		
 		define('POP_BUILD_DIR', WP_CONTENT_DIR.'/pop-build');
 		define('POP_BUILDSERVER_DIR', WP_CONTENT_DIR.'/pop-buildserver');
 		define('POP_GENERATECACHE_DIR', WP_CONTENT_DIR.'/pop-generatecache');
-		// define('POP_BUILD_URL', WP_CONTENT_URL.'/pop-build');
 	}
 	function system_build() {
 

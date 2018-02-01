@@ -18,7 +18,7 @@ class GetPoPDemo_Initialization {
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Load the PoP Library
 		 * ---------------------------------------------------------------------------------------------------------------*/
-		// require_once 'pop-library/load.php';
+		require_once 'pop-library/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Related plug-ins
@@ -73,7 +73,7 @@ class GetPoPDemo_Initialization {
 			wp_dequeue_script('poptheme-wassup-templates');
 			// wp_dequeue_script('poptheme-wassup-votingprocessors-templates');
 
-			$folder = GETPOPDEMO_ASSETS_URI.'/js/dist/bundles';
+			$folder = GETPOPDEMO_ASSETS_URL.'/js/dist/bundles';
 			
 			// Register mega-bundle for the templates
 			wp_register_script('getpop-demo-templates-app', $folder.'/getpop-demo-app.templates.bundle.min.js', array(), GETPOPDEMO_VERSION, true);
@@ -92,29 +92,35 @@ class GetPoPDemo_Initialization {
 
 	function register_styles() {
 
-		$css_folder = GETPOPDEMO_ASSETS_URI.'/css';
-		$dist_css_folder = $css_folder . '/dist';
-		$libraries_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/libraries';
-		$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
-		$bundles_css_folder = $dist_css_folder . '/bundles';
-		
-		if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
+		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			wp_register_style('getpop-demo', $bundles_css_folder.'/getpop-demo.bundle.min.css', array('bootstrap'), GETPOPDEMO_VERSION);
-			wp_enqueue_style('getpop-demo');
-		}
-		else {
-
-			/** Custom Theme Source */
-			// Custom implementation of Bootstrap
-			wp_register_style('getpop-demo-bootstrap', $libraries_css_folder . '/custom.bootstrap'.$suffix.'.css', array('bootstrap'), GETPOPDEMO_VERSION, 'screen');
-			wp_enqueue_style('getpop-demo-bootstrap');
-
-			wp_register_style('getpop-demo-typeahead-bootstrap', $libraries_css_folder . '/typeahead.js-bootstrap'.$suffix.'.css', array('getpop-demo-bootstrap'), GETPOPDEMO_VERSION, 'screen');
-			wp_enqueue_style('getpop-demo-typeahead-bootstrap');		
+			$css_folder = GETPOPDEMO_ASSETS_URL.'/css';
+			$dist_css_folder = $css_folder . '/dist';			
 			
-			wp_register_style('getpop-demo', $libraries_css_folder . '/style'.$suffix.'.css', array('poptheme-wassup', 'getpop-demo-bootstrap'), GETPOPDEMO_VERSION);
-			wp_enqueue_style('getpop-demo');
+			if (PoP_Frontend_ServerUtils::use_bundled_resources()) {
+
+				$bundles_css_folder = $dist_css_folder . '/bundles';
+
+				wp_register_style('getpop-demo', $bundles_css_folder.'/getpop-demo.bundle.min.css', array('bootstrap'), GETPOPDEMO_VERSION);
+				wp_enqueue_style('getpop-demo');
+			}
+			else {
+				
+				$libraries_css_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_css_folder : $css_folder).'/libraries';
+				$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
+
+				/** Custom Theme Source */
+				// Custom implementation of Bootstrap
+				wp_register_style('getpop-demo-bootstrap', $libraries_css_folder . '/custom.bootstrap'.$suffix.'.css', array('bootstrap'), GETPOPDEMO_VERSION, 'screen');
+				wp_enqueue_style('getpop-demo-bootstrap');
+
+				wp_register_style('getpop-demo-typeahead-bootstrap', $libraries_css_folder . '/typeahead.js-bootstrap'.$suffix.'.css', array('getpop-demo-bootstrap'), GETPOPDEMO_VERSION, 'screen');
+				wp_enqueue_style('getpop-demo-typeahead-bootstrap');		
+				
+				wp_register_style('getpop-demo', $libraries_css_folder . '/style'.$suffix.'.css', array('poptheme-wassup', 'getpop-demo-bootstrap'), GETPOPDEMO_VERSION);
+				wp_enqueue_style('getpop-demo');
+			}
 		}
 	}
 
@@ -130,7 +136,7 @@ class GetPoPDemo_Initialization {
 			wp_dequeue_style('poptheme-wassup-sectionprocessors');
 			wp_dequeue_style('getpop-demo');
 
-			$folder = GETPOPDEMO_ASSETS_URI.'/css/dist/bundles';
+			$folder = GETPOPDEMO_ASSETS_URL.'/css/dist/bundles';
 			wp_register_style('pop-app', $folder.'/getpop-demo-app.bundle.min.css', array('bootstrap'), GETPOPDEMO_VERSION);
 			wp_enqueue_style('pop-app');
 		}

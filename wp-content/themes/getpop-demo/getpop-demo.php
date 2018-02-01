@@ -3,15 +3,15 @@
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('GETPOPDEMO_VERSION', 0.314);
+define ('GETPOPDEMO_VERSION', 0.315);
 
 define ('GETPOPDEMO_DIR', STYLESHEETPATH);
 define ('GETPOPDEMO_DIR_RESOURCES', GETPOPDEMO_DIR.'/resources');
 define ('GETPOPDEMO_LIB', GETPOPDEMO_DIR.'/library' );
 define ('GETPOPDEMO_PLUGINS_DIR', GETPOPDEMO_LIB.'/plugins');
 
-define ('GETPOPDEMO_URI', get_stylesheet_directory_uri());
-define ('GETPOPDEMO_URI_PLUGINS', GETPOPDEMO_URI.'/plugins');
+define ('GETPOPDEMO_URL', get_stylesheet_directory_uri());
+define ('GETPOPDEMO_URL_PLUGINS', GETPOPDEMO_URL.'/plugins');
 
 define ('GETPOPDEMO_ORIGINURI', get_origin_stylesheet_directory_uri());
 define ('GETPOPDEMO_ORIGINURI_PLUGINS', GETPOPDEMO_ORIGINURI.'/plugins');
@@ -35,10 +35,10 @@ class GetPoPDemo {
 
 		// If we have a CDN URI, then use it for the assets
 		if (defined('POP_CDN_ASSETS_URI') && POP_CDN_ASSETS_URI) {
-			define ('GETPOPDEMO_ASSETS_URI', str_replace(get_site_url(), POP_CDN_ASSETS_URI, GETPOPDEMO_URI));
+			define ('GETPOPDEMO_ASSETS_URL', str_replace(get_site_url(), POP_CDN_ASSETS_URI, GETPOPDEMO_URL));
 		}
 		else {
-			define ('GETPOPDEMO_ASSETS_URI', GETPOPDEMO_URI);
+			define ('GETPOPDEMO_ASSETS_URL', GETPOPDEMO_URL);
 		}
 	}
 	function version($version){

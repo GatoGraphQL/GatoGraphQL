@@ -18,7 +18,11 @@ class GD_DataLoad_DataStructureFormatter {
 		return '';
 	}
 	
-	function get_formatted_data($settings, $runtimesettings, $sitemapping, $data) {
+	function get_formatted_settings($settings, $runtimesettings, $sitemapping) {
+	
+		return array();
+	}
+	function get_formatted_data($data) {
 	
 		return array();
 	}

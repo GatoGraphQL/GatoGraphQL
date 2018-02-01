@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('WSL_POP_VERSION', 0.105);
+define('WSL_POP_VERSION', 0.106);
 define('WSL_POP_DIR', dirname(__FILE__));
 
 /**---------------------------------------------------------------------------------------------------------------
@@ -26,8 +26,6 @@ class WSL_PoP {
 
 	function init(){
 
-		define('WSL_POP_URI', plugins_url('', __FILE__));
-		
 		if ($this->validate()) {
 			
 			$this->initialize();

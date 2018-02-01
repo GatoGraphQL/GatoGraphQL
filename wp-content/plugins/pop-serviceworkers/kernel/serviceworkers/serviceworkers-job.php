@@ -53,7 +53,7 @@ class PoP_ServiceWorkers_Job {
         // Allow the CDN to be injected by hook
         $dependencies_path = apply_filters(
             'PoP_ServiceWorkers_Job:dependencies_path',
-            POP_SERVICEWORKERS_ASSETDESTINATION_URI.'/'.$dependencies_foldername
+            POP_SERVICEWORKERS_ASSETDESTINATION_URL.'/'.$dependencies_foldername
         );
         return array(
             '$dependenciesFolder' => $dependencies_foldername,

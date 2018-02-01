@@ -157,7 +157,7 @@ function gd_mce_external_plugins($plugins) {
   }
 
   // $js_folder = get_stylesheet_directory_uri() . '/js';
-  $js_folder = POP_COREPROCESSORS_URI.'/js';
+  $js_folder = POP_COREPROCESSORS_URL.'/js';
   $includes_js_folder = $js_folder.'/includes';
 
   $plugins['link'] = $includes_js_folder . '/tinymce/plugins/link/plugin.min.js';

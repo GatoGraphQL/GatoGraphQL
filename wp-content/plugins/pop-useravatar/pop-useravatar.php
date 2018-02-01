@@ -11,7 +11,8 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_USERAVATAR_VERSION', 0.108);
+define ('POP_USERAVATAR_VERSION', 0.109);
+define ('POP_USERAVATAR_VENDORRESOURCESVERSION', 0.100);
 define ('POP_USERAVATAR_DIR', dirname(__FILE__));
 define ('POP_USERAVATAR_PHPTEMPLATES_DIR', POP_USERAVATAR_DIR.'/php-templates/compiled');
 define ('POP_USERAVATAR_ORIGINURI', plugins_url('', __FILE__));
@@ -31,8 +32,8 @@ class PoP_UserAvatar {
 	}
 	function init(){
 
-		define ('POP_USERAVATAR_URI', plugins_url('', __FILE__));
-		define ('POP_USERAVATAR_URI_LIB', POP_USERAVATAR_URI.'/library' );
+		define ('POP_USERAVATAR_URL', plugins_url('', __FILE__));
+		define ('POP_USERAVATAR_URL_LIB', POP_USERAVATAR_URL.'/library' );
 
 		if ($this->validate()) {
 			

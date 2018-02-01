@@ -29,7 +29,7 @@ class WSL_PoPProcessors_Initialization {
 		// Only if not doing code splitting then load the resources. Otherwise, the resources will be loaded by the ResourceLoader
 		if (!PoP_Frontend_ServerUtils::use_code_splitting()) {
 
-			$js_folder = WSL_POPPROCESSORS_URI.'/js';
+			$js_folder = WSL_POPPROCESSORS_URL.'/js';
 			$dist_js_folder = $js_folder.'/dist';
 			$libraries_js_folder = (PoP_Frontend_ServerUtils::use_minified_resources() ? $dist_js_folder : $js_folder).'/libraries';
 			$suffix = PoP_Frontend_ServerUtils::use_minified_resources() ? '.min' : '';
@@ -56,7 +56,7 @@ class WSL_PoPProcessors_Initialization {
 
 	function enqueue_templates_scripts() {
 
-		$folder = WSL_POPPROCESSORS_URI.'/js/dist/templates/';
+		$folder = WSL_POPPROCESSORS_URL.'/js/dist/templates/';
 
 		wp_enqueue_script('wsl-networklinks-tmpl', $folder.'wsl-networklinks.tmpl.js', array('handlebars'), WSL_POPPROCESSORS_VERSION, true);
 	}
