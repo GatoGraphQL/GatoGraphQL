@@ -171,9 +171,9 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesUtils {
 				);
 
 				// Calculate the bundles and bundlegroups
-				$normal_generatedfiles = self::calculate_bundles($normal_resources);
-				$vendor_generatedfiles = self::calculate_bundles($vendor_resources);
-				$dynamic_generatedfiles = self::calculate_bundles($dynamic_resources);
+				$normal_generatedfiles = self::calculate_bundles($normal_resources, true);
+				$vendor_generatedfiles = self::calculate_bundles($vendor_resources, true);
+				$dynamic_generatedfiles = self::calculate_bundles($dynamic_resources, true);
 
 				$vendor_bundles = $vendor_generatedfiles['bundles'];
 				$normal_bundles = $normal_generatedfiles['bundles'];
@@ -185,7 +185,7 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesUtils {
 				
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 
-					$template_generatedfiles = self::calculate_bundles($template_resources);
+					$template_generatedfiles = self::calculate_bundles($template_resources, true);
 					$template_bundles = $template_generatedfiles['bundles'];
 					$template_bundlegroups = $template_generatedfiles['bundle-groups'];
 
@@ -446,20 +446,20 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesUtils {
         if ($immediate_resources) {
 
             $immediate_resourcebundles = PoP_ResourceLoaderProcessorUtils::chunk_resources($immediate_resources);
-            $immediate_bundleids = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_bundle_id'), $immediate_resourcebundles);
-            $immediate_bundlegroup = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($immediate_resourcebundles);
+            $immediate_bundleids = array_map(array(self, 'get_bundle_id'), $immediate_resourcebundles);
+            $immediate_bundlegroup = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($immediate_resourcebundles, true);
         }
         if ($async_resources) {
 
             $async_resourcebundles = PoP_ResourceLoaderProcessorUtils::chunk_resources($async_resources);
-            $async_bundleids = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_bundle_id'), $async_resourcebundles);
-            $async_bundlegroup = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($async_resourcebundles);
+            $async_bundleids = array_map(array(self, 'get_bundle_id'), $async_resourcebundles);
+            $async_bundlegroup = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($async_resourcebundles, true);
         }
         if ($defer_resources) {
 
             $defer_resourcebundles = PoP_ResourceLoaderProcessorUtils::chunk_resources($defer_resources);
-            $defer_bundleids = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_bundle_id'), $defer_resourcebundles);
-            $defer_bundlegroup = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($defer_resourcebundles);
+            $defer_bundleids = array_map(array(self, 'get_bundle_id'), $defer_resourcebundles);
+            $defer_bundlegroup = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($defer_resourcebundles, true);
         }
 
         return array(
@@ -482,6 +482,11 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesUtils {
         		'bundlegroup' => $defer_bundlegroup,
         	),
         );
+    }
+
+    function get_bundle_id($resources) {
+
+    	return PoP_ResourceLoaderProcessorUtils::get_bundle_id($resources, true);
     }
 
 	protected static function calculate_resources($vars_hash_id, $options = array()) {
@@ -535,11 +540,11 @@ class PoPFrontend_ResourceLoader_ScriptsAndStylesUtils {
 		return self::$calculated_resources[$key];
 	}
 
-	protected static function calculate_bundles($resources) {
+	protected static function calculate_bundles($resources, $addRandom) {
 
 		$resources_set = PoP_ResourceLoaderProcessorUtils::chunk_resources($resources);
-		$bundle_ids = array_map(array('PoP_ResourceLoaderProcessorUtils', 'get_bundle_id'), $resources_set);
-		$bundlegroup_ids = array(PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($bundle_ids));
+		$bundle_ids = array_map(array(self, 'get_bundle_id'), $resources_set);
+		$bundlegroup_ids = array(PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($bundle_ids, $addRandom));
 
 		return array(
 			'bundles' => $bundle_ids,

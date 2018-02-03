@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_FRONTENDENGINE_VERSION', 0.156);
+define ('POP_FRONTENDENGINE_VERSION', 0.157);
 define ('POP_FRONTENDENGINE_VENDORRESOURCESVERSION', 0.100);
 define ('POP_FRONTENDENGINE_DIR', dirname(__FILE__));
 define ('POP_FRONTENDENGINE_PHPTEMPLATES_DIR', POP_FRONTENDENGINE_DIR.'/php-templates/compiled');

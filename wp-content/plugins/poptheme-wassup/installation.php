@@ -35,6 +35,9 @@ class PoPTheme_Wassup_Installation {
 		// PoP Cluster ResourceLoader
 		$plugin_version['pop-cluster-resourceloader'] = POPTHEME_WASSUP_PLUGINACTIVATION_CLUSTERRESOURCELOADER_VERSION;
 
+		// PoP Cluster ResourceLoader for AWS
+		$plugin_version['pop-cluster-resourceloader-aws'] = POPTHEME_WASSUP_PLUGINACTIVATION_CLUSTERRESOURCELOADERAWS_VERSION;
+
 		// Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
 		$version = pop_version();
 		foreach ($plugin_version as $plugin => $activate_version) {

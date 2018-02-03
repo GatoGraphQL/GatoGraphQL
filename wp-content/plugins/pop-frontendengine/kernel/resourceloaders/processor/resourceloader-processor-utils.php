@@ -23,16 +23,16 @@ class PoP_ResourceLoaderProcessorUtils {
         $pop_resourceloaderprocessor_state->save_entries();
     }
 
-    function get_bundle_id($resources) {
+    function get_bundle_id($resources, $addRandom) {
 
         global $pop_resourceloaderprocessor_state;
-        return $pop_resourceloaderprocessor_state->get_bundle_id($resources);
+        return $pop_resourceloaderprocessor_state->get_bundle_id($resources, $addRandom);
     }
 
-    function get_bundlegroup_id($resourcebundles) {
+    function get_bundlegroup_id($resourcebundles, $addRandom) {
 
         global $pop_resourceloaderprocessor_state;
-        return $pop_resourceloaderprocessor_state->get_bundlegroup_id($resourcebundles);
+        return $pop_resourceloaderprocessor_state->get_bundlegroup_id($resourcebundles, $addRandom);
     }
 
     function get_key_id($key) {

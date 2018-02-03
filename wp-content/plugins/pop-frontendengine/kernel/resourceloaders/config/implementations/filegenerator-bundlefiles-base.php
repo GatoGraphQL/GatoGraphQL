@@ -237,7 +237,9 @@ class PoP_ResourceLoader_FileGenerator_BundleFilesBase {
             do_action(
                 'PoP_ResourceLoader_FileGenerator_BundleFilesBase:generate-item',
                 $filegenerator->get_filepath(),
-                $filegenerator->get_generated_referenced_files()
+                $filegenerator->get_generated_referenced_files(),
+                $type,
+                $subtype
             );
         }
 

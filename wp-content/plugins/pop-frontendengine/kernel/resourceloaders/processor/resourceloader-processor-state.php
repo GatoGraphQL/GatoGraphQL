@@ -140,23 +140,23 @@ class PoP_ResourceLoaderProcessorState {
         $this->bundlegroup_versions[$bundleGroupId] = $version;
     }
 
-    function get_bundle_id($resources) {
+    function get_bundle_id($resources, $addRandom) {
 
         $this->init();
-        return $this->get_set_id('bundle', $resources, $this->bundle_ids, $this->bundle_counter);
+        return $this->get_set_id('bundle', $resources, $this->bundle_ids, $this->bundle_counter, $addRandom);
     }
 
-    function get_bundlegroup_id($resourcebundles) {
+    function get_bundlegroup_id($resourcebundles, $addRandom) {
 
         $this->init();
 
         // Flatten the bundles, which is currently an array of arrays, so that array_multisort works fine
         // (otherwise it sorts the outer array, but differently sorted inner elements are not sorted 
         // and so 2 sets with same elements may still be different)
-        return $this->get_set_id('bundlegroup', array_flatten($resourcebundles), $this->bundlegroup_ids, $this->bundlegroup_counter);
+        return $this->get_set_id('bundlegroup', array_flatten($resourcebundles), $this->bundlegroup_ids, $this->bundlegroup_counter, $addRandom);
     }
 
-    protected function get_set_id($handle, $set, &$set_ids, &$set_counter) {
+    protected function get_set_id($handle, $set, &$set_ids, &$set_counter, $addRandom) {
 
         // Order them, so that 2 sets with the same resources, but on different order, are still considered the same
         array_multisort($set);
@@ -176,6 +176,15 @@ class PoP_ResourceLoaderProcessorState {
 
         // It is not there yet, create a new entry and return it
         $set_id = $set_counter++;
+        
+        // Attach a random string, to avoid to concurrent threads from creating the same ID for 2 different objects
+        // With the random string, the file may be duplicated and one of them will never be used, but at least no file will override a different one
+        // Needed only for when generating the bundlefiles on runtime, not needed for when generating resources.js with the list of resources to fetch for each route
+        if ($addRandom) {
+            
+            $set_id .= '-'.generateRandomString(8, false);
+        }
+
         $set_ids[$encoded] = $set_id;
         return $set_id;
     }

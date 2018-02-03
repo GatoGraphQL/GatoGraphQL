@@ -19,13 +19,22 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         self::$resources = array();
     }
 
+    protected static function get_resourcemapping_options($options) {
+
+        // Extract the options which can make the resource-mapping return a different result, to use it for caching.
+        // Eg: option 'match-paths', 'match-hierarchy' and 'match-format' do not alter it, so they are not needed to cache the results
+        return array_intersect_key(
+            $options,
+            array(
+                'ignore-resources' => '',
+                'from-current-vars' => '',
+            )
+        );
+    }
+
     public static function get_resources($fetching_json, $options = array()) {
 
-        $options_to_encode = array(
-            'ignore-resources' => $options['ignore-resources'],
-            'from-current-vars' => $options['from-current-vars'],
-        );
-        $key = json_encode($options_to_encode).($fetching_json ? 'fetching-json' : 'loading-frame');
+        $key = json_encode(self::get_resourcemapping_options($options)).($fetching_json ? 'fetching-json' : 'loading-frame');
         if (!is_null(self::$resources[$key])) {
             return self::$resources[$key];
         }
@@ -197,7 +206,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
 
         global $pop_resourceloaderprocessor_manager;
 
-        $encoded = json_encode($options).($fetching_json ? 'fetching-json' : 'loading-frame');
+        $encoded = json_encode(self::get_resourcemapping_options($options)).($fetching_json ? 'fetching-json' : 'loading-frame');
         if (!is_null(self::$resource_mapping[$encoded])) {
             return self::$resource_mapping[$encoded];
         }
@@ -210,6 +219,10 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         $app_resources = self::get_resources($fetching_json, $options);
         $flat_resources = $app_resources['flat'];
         $path_resources = $app_resources['path'];
+
+        // If fetching-json, then no need to add the random bit to the bundle(group) ID
+        // This works fine as long as we don't copy bundle-resourceloader-mapping.json, etc files from STAGING to PROD,
+        $addRandom = !$fetching_json;
 
         // Because the items in the hierarchies will be duplicated, we create a normalized DB from all the values,
         // and assign an identifier to the bundle of resources, so the size of the generated file will be smaller
@@ -325,7 +338,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                             // }
                             
                             // Calculate the hash from that bundle of resources
-                            $bundleId = PoP_ResourceLoaderProcessorUtils::get_bundle_id($resources_item);
+                            $bundleId = PoP_ResourceLoaderProcessorUtils::get_bundle_id($resources_item, $addRandom);
 
                             // Add it to the bundles DB
                             $iterate_item['bundles'][$bundleId] = $resources_item;
@@ -401,7 +414,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                                 // if (!$resources_item) {
                                 //     continue;
                                 // }
-                                $bundleId = PoP_ResourceLoaderProcessorUtils::get_bundle_id($resources_item);
+                                $bundleId = PoP_ResourceLoaderProcessorUtils::get_bundle_id($resources_item, $addRandom);
                                 $iterate_item['bundles'][$bundleId] = $resources_item;
                                 $iterate_item['resourcebundles'][$hierarchy][$path][$key][] = $bundleId;
                             }
@@ -453,7 +466,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                         //     continue;
                         // }
                         
-                        $bundleGroupId = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($resourcebundles);
+                        $bundleGroupId = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($resourcebundles, $addRandom);
                         $iterate_item['bundlegroups'][$bundleGroupId] = $resourcebundles;
                         $keyId = PoP_ResourceLoaderProcessorUtils::get_key_id($key);
                         $keys[$key] = $keyId;
@@ -489,7 +502,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                             // if (!$resourcebundles) {
                             //     continue;
                             // }
-                            $bundleGroupId = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($resourcebundles);
+                            $bundleGroupId = PoP_ResourceLoaderProcessorUtils::get_bundlegroup_id($resourcebundles, $addRandom);
                             $iterate_item['bundlegroups'][$bundleGroupId] = $resourcebundles;
                             $keyId = PoP_ResourceLoaderProcessorUtils::get_key_id($key);
                             $keys[$key] = $keyId;
