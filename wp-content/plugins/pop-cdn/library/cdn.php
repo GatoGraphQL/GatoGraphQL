@@ -28,10 +28,3 @@ function pop_cdn_assetsrc($src) {
 	}
 	return $src;
 }
-// if (POP_CDN_UPLOADS_URI && (POP_CDN_UPLOADS_URI != get_site_url())) {
-// 	add_filter('content_url', 'pop_cdn_uploadssrc');
-// }
-// function pop_cdn_uploadssrc($src) {
-	
-// 	return str_replace(get_site_url(), POP_CDN_UPLOADS_URI, $src);
-// }
