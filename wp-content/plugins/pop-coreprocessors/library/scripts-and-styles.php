@@ -14,7 +14,7 @@ function get_googlemaps_url($add_version = false) {
 
 	if ($add_version) {
 			
-		$version = get_bloginfo( 'version' );
+		$version = POP_COREPROCESSORS_VENDORRESOURCESVERSION;//get_bloginfo( 'version' );
 		$googlemaps_url = add_query_arg('ver', $version, $googlemaps_url);
 	}
 
