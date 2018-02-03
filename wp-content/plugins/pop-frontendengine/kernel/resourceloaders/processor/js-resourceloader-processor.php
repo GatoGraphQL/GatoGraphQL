@@ -96,6 +96,8 @@ class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 	
 	function async_load_in_order($resource) {
 
-		return false;
+		// If the resource is either a decorator, or being decorated, then load them in order
+		// Otherwise, by default, no need to load it in order
+		return !empty($this->get_decorated_resources($resource)) || !empty($this->get_decorators($resource));
 	}
 }
