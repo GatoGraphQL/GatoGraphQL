@@ -77,7 +77,7 @@ body .simpleview .content-body .content .sidebar-widget {
   background-color: #f1f1f2;
   color: #4d4d4f;
 }
-.fc-event {
+.fc-event-container .fc-event {
   border: 1px solid #db902e;
   background-color: #d9edf7;
   text-align: center;
