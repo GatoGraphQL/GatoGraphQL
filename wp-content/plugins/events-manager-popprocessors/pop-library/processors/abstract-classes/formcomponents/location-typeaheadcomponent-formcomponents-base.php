@@ -15,12 +15,8 @@ class GD_Template_Processor_LocationTypeaheadComponentFormComponentsBase extends
 		
 		return $ret;
 	}
-
-	// protected function get_component_template($template_id) {
-
-	// 	return GD_TEMPLATE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT;
-	// }
-	function get_template_source($template_id, $atts) {
+	
+	function get_component_template_source($template_id) {
 
 		return GD_TEMPLATESOURCE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT;
 	}
@@ -28,10 +24,6 @@ class GD_Template_Processor_LocationTypeaheadComponentFormComponentsBase extends
 
 		return 'name';
 	}
-	// protected function get_layout($template_id) {
-
-	// 	return GD_TEMPLATE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT;
-	// }
 	protected function get_tokenizer_keys($template_id, $atts) {
 
 		return array('name', 'address');
