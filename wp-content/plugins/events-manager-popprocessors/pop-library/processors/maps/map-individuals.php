@@ -22,6 +22,20 @@ class GD_Template_Processor_MapIndividuals extends GD_Template_Processor_MapIndi
 		);
 	}
 
+	function get_mapdiv_template($template_id) {
+
+		switch ($template_id) {
+			
+			case GD_TEMPLATE_MAP_INDIVIDUAL_POST:
+			case GD_TEMPLATE_MAP_INDIVIDUAL_USER:
+			case GD_TEMPLATE_MAP_SIDEBARINDIVIDUAL:
+				
+				return GD_TEMPLATE_MAPSTATICIMAGE_USERORPOST_DIV;
+		}
+
+		return parent::get_mapdiv_template($template_id);
+	}
+
 	function open_onemarker_infowindow($template_id) {
 
 		switch ($template_id) {

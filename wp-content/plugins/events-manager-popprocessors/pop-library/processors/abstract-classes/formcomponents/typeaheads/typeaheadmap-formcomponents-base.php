@@ -12,7 +12,7 @@ class GD_Template_Processor_TypeaheadMapFormComponentsBase extends GD_Template_P
 		$ret = parent::get_modules($template_id);
 
 		$ret[] = $this->get_locations_typeahead($template_id);
-		$ret[] = GD_TEMPLATE_MAP_INDIVIDUAL;
+		$ret[] = $this->get_map_template($template_id);
 		$ret[] = GD_TEMPLATE_MAP_ADDMARKER;
 
 		return $ret;
@@ -29,6 +29,11 @@ class GD_Template_Processor_TypeaheadMapFormComponentsBase extends GD_Template_P
 		$ret = parent::get_block_jsmethod($template_id, $atts);
 		$this->add_jsmethod($ret, 'typeaheadMap');
 		return $ret;
+	}
+
+	function get_map_template($template_id) {
+	
+		return GD_TEMPLATE_MAP_INDIVIDUAL;
 	}
 
 	function get_locations_typeahead($template_id) {
@@ -82,7 +87,8 @@ class GD_Template_Processor_TypeaheadMapFormComponentsBase extends GD_Template_P
 		$ret['addmarker-template'] = GD_TEMPLATE_MAP_ADDMARKER;
 
 		$locations_typeahead = $this->get_locations_typeahead($template_id);
-		$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['map-individual'] = $gd_template_processor_manager->get_processor(GD_TEMPLATE_MAP_INDIVIDUAL)->get_settings_id(GD_TEMPLATE_MAP_INDIVIDUAL);
+		$map_template = $this->get_map_template($template_id);
+		$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['map-individual'] = $gd_template_processor_manager->get_processor($map_template)->get_settings_id($map_template);
 		$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['locations'] = $gd_template_processor_manager->get_processor($locations_typeahead)->get_settings_id($locations_typeahead);
 
 		$ret[GD_JS_CLASSES/*'classes'*/]['wrapper'] = $this->get_att($template_id, $atts, 'wrapper-class');

@@ -12,7 +12,7 @@ class GD_Template_Processor_MapDrawMarkerScriptsBase extends GD_Template_Process
 		return GD_TEMPLATESOURCE_MAP_SCRIPT_DRAWMARKERS;
 	}
 
-	function get_mapdiv_template($template_id, $atts) {
+	function get_mapdiv_template($template_id) {
 	
 		return GD_TEMPLATE_MAP_DIV;
 	}
@@ -20,7 +20,7 @@ class GD_Template_Processor_MapDrawMarkerScriptsBase extends GD_Template_Process
 	function get_template_configuration($template_id, $atts) {
 	
 		$ret = parent::get_template_configuration($template_id, $atts);
-		$ret['mapdiv-template'] = $this->get_mapdiv_template($template_id, $atts);
+		$ret['mapdiv-template'] = $this->get_mapdiv_template($template_id);
 		return $ret;
 	}
 }

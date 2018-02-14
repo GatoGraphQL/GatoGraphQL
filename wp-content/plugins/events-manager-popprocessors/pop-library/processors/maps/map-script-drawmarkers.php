@@ -20,7 +20,7 @@ class GD_Template_Processor_MapDrawMarkerScripts extends GD_Template_Processor_M
 		);
 	}
 
-	function get_mapdiv_template($template_id, $atts) {
+	function get_mapdiv_template($template_id) {
 
 		switch ($template_id) {
 
@@ -33,7 +33,7 @@ class GD_Template_Processor_MapDrawMarkerScripts extends GD_Template_Processor_M
 				return GD_TEMPLATE_MAPSTATICIMAGE_USERORPOST_DIV;
 		}
 	
-		return parent::get_mapdiv_template($template_id, $atts);
+		return parent::get_mapdiv_template($template_id);
 	}
 }
 
