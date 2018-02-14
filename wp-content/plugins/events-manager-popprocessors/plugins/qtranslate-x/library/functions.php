@@ -17,11 +17,11 @@ function em_popprocessors_qtransx_register_scripts() {
 
 			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
-				$placeholder = 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang/%s.js';
+				$placeholder = 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/lang/%s.js';
 			}
 			else {
 
-				$placeholder = EM_POPPROCESSORS_URL.'/js/includes/cdn/fullcalendar.2.9.1-lang/%s.js';
+				$placeholder = EM_POPPROCESSORS_URL.'/js/includes/cdn/fullcalendar.3.8.2-lang/%s.js';
 			}
 			
 			$js_file = sprintf(

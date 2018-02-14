@@ -20,7 +20,7 @@ class EM_PoPProcessors_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSRes
 	
 		$use_cdn = PoP_Frontend_ServerUtils::access_externalcdn_resources();
 		$filenames = array(
-			POP_RESOURCELOADER_EXTERNAL_CSS_FULLCALENDAR => 'fullcalendar'.(!$use_cdn ? '.2.9.1' : ''),
+			POP_RESOURCELOADER_EXTERNAL_CSS_FULLCALENDAR => 'fullcalendar'.(!$use_cdn ? '.3.8.2' : ''),
 		);
 		if ($filename = $filenames[$resource]) {
 			return $filename;
@@ -44,7 +44,7 @@ class EM_PoPProcessors_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSRes
 		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 			
 			$filenames = array(
-				POP_RESOURCELOADER_EXTERNAL_CSS_FULLCALENDAR => 'fullcalendar.2.9.1',
+				POP_RESOURCELOADER_EXTERNAL_CSS_FULLCALENDAR => 'fullcalendar.3.8.2',
 			);
 			if ($filename = $filenames[$resource]) {
 				return $this->get_dir($resource).'/'.$filename.$this->get_suffix($resource);
@@ -59,7 +59,7 @@ class EM_PoPProcessors_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSRes
 		if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
 			$paths = array(
-				POP_RESOURCELOADER_EXTERNAL_CSS_FULLCALENDAR => 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1',
+				POP_RESOURCELOADER_EXTERNAL_CSS_FULLCALENDAR => 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2',
 			);
 			if ($path = $paths[$resource]) {
 				return $path;

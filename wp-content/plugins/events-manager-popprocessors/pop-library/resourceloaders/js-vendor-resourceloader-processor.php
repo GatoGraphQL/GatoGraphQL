@@ -21,7 +21,7 @@ class EM_PoPProcessors_VendorJSResourceLoaderProcessor extends PoP_VendorJSResou
 	function get_filename($resource) {
 	
 		$filenames = array(
-			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar'.(!PoP_Frontend_ServerUtils::access_externalcdn_resources() ? '.2.9.1' : ''),
+			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar'.(!PoP_Frontend_ServerUtils::access_externalcdn_resources() ? '.3.8.2' : ''),
 			POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE => get_em_qtransx_fullcalendar_locale_filename(),
 		);
 		if ($filename = $filenames[$resource]) {
@@ -42,7 +42,7 @@ class EM_PoPProcessors_VendorJSResourceLoaderProcessor extends PoP_VendorJSResou
 
 			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
 				
-				return EM_POPPROCESSORS_DIR.'/js/includes/cdn/fullcalendar.2.9.1-lang';
+				return EM_POPPROCESSORS_DIR.'/js/includes/cdn/fullcalendar.3.8.2-lang';
 		}
 	
 		return EM_POPPROCESSORS_DIR.'/js/includes/cdn';
@@ -51,7 +51,7 @@ class EM_PoPProcessors_VendorJSResourceLoaderProcessor extends PoP_VendorJSResou
 	function get_asset_path($resource) {
 	
 		$filenames = array(
-			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar.2.9.1',
+			POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR => 'fullcalendar.3.8.2',
 			POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE => get_em_qtransx_fullcalendar_locale_filename(),
 		);
 		if ($filename = $filenames[$resource]) {
@@ -85,11 +85,11 @@ class EM_PoPProcessors_VendorJSResourceLoaderProcessor extends PoP_VendorJSResou
 
 				case POP_RESOURCELOADER_EXTERNAL_FULLCALENDAR:
 
-					return 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1';
+					return 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2';
 			
 				case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
 
-					return 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang';;
+					return 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/lang';;
 			}
 		}
 
@@ -97,7 +97,7 @@ class EM_PoPProcessors_VendorJSResourceLoaderProcessor extends PoP_VendorJSResou
 
 			case POP_RESOURCELOADER_EXTERNAL_FULLCALENDARLOCALE:
 				
-				return EM_POPPROCESSORS_URL.'/js/includes/cdn/fullcalendar.2.9.1-lang';
+				return EM_POPPROCESSORS_URL.'/js/includes/cdn/fullcalendar.3.8.2-lang';
 		}
 
 		return EM_POPPROCESSORS_URL.'/js/includes/cdn';

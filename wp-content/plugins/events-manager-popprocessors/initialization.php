@@ -53,12 +53,12 @@ class EM_PoPProcessors_Initialization {
 
 			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 
-				wp_register_script('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js', array('jquery', 'moment'), null);
+				wp_register_script('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.js', array('jquery', 'moment'), null);
 			}
 			else {
 
 				$cdn_folder = $js_folder . '/includes/cdn';
-				wp_register_script('fullcalendar', $cdn_folder . '/fullcalendar.2.9.1.min.js', array('jquery', 'moment'), null);
+				wp_register_script('fullcalendar', $cdn_folder . '/fullcalendar.3.8.2.min.js', array('jquery', 'moment'), null);
 			}
 			wp_enqueue_script('fullcalendar');
 
@@ -172,12 +172,12 @@ class EM_PoPProcessors_Initialization {
 			if (PoP_Frontend_ServerUtils::access_externalcdn_resources()) {
 				
 				// CDN
-				wp_register_style('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css', null, null);
+				wp_register_style('fullcalendar', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.css', null, null);
 			}
 			else {
 
 				// Locally stored files
-				wp_register_style('fullcalendar', $cdn_css_folder . '/fullcalendar.2.9.1.min.css', null, null);
+				wp_register_style('fullcalendar', $cdn_css_folder . '/fullcalendar.3.8.2.min.css', null, null);
 			}
 			wp_enqueue_style('fullcalendar');
 		}

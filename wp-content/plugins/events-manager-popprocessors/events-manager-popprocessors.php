@@ -8,7 +8,7 @@ Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
 
-define('EM_POPPROCESSORS_VERSION', 0.121);
+define('EM_POPPROCESSORS_VERSION', 0.122);
 define('EM_POPPROCESSORS_VENDORRESOURCESVERSION', 0.100);
 define('EM_POPPROCESSORS_EM_VERSION', 5.61);
 define('EM_POPPROCESSORS_DIR', dirname(__FILE__));
