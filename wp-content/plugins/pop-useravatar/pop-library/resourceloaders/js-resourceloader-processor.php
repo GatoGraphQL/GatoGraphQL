@@ -37,6 +37,18 @@ class PoP_UserAvatar_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProce
 		return parent::get_filename($resource);
 	}
 	
+	function get_suffix($resource) {
+	
+		switch ($resource) {
+
+			case POP_RESOURCELOADER_FILEUPLOADLOCALE:
+				
+				return '';
+		}
+
+		return parent::get_suffix($resource);
+	}
+	
 	function get_file_url($resource) {
 	
 		switch ($resource) {
@@ -48,19 +60,6 @@ class PoP_UserAvatar_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProce
 
 		return parent::get_file_url($resource);
 	}
-	
-	// function can_bundle($resource) {
-
-	// 	switch ($resource) {
-
-	// 		// Can't bundle this file, since bundles are common to all locales
-	// 		case POP_RESOURCELOADER_FILEUPLOADLOCALE:
-				
-	// 			return false;
-	// 	}
-	
-	// 	return parent::can_bundle($resource);
-	// }
 	
 	function get_version($resource) {
 	

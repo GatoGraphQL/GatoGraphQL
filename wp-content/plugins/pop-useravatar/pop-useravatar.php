@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_USERAVATAR_VERSION', 0.109);
+define ('POP_USERAVATAR_VERSION', 0.110);
 define ('POP_USERAVATAR_VENDORRESOURCESVERSION', 0.100);
 define ('POP_USERAVATAR_DIR', dirname(__FILE__));
 define ('POP_USERAVATAR_PHPTEMPLATES_DIR', POP_USERAVATAR_DIR.'/php-templates/compiled');

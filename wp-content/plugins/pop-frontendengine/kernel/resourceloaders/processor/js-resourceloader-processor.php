@@ -7,11 +7,6 @@
 
 class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
-	// protected function get_manager() {
-
-	// 	global $pop_jsresourceloaderprocessor_manager;
-	// 	return $pop_jsresourceloaderprocessor_manager;
-	// }
 	function init() {
 
 		parent::init();
