@@ -160,6 +160,16 @@ class PoP_ServerSide_Helpers {
 	    }
 	}
 
+	function eq($lvalue, $rvalue) {
+
+	    return $lvalue === $rvalue;
+	}
+
+	function or($lvalue, $rvalue) {
+
+	    return $lvalue || $rvalue;
+	}
+
 	function compare($lvalue, $rvalue, $options) {
 
 	    // Comment Leo: Not needed in PHP => Commented out

@@ -66,6 +66,20 @@ class GD_Template_Processor_CarouselBlockGroupsBase extends GD_Template_Processo
 		
 			$ret['carousel-params'] = $carousel_params;
 		}
+		$header_type = $this->get_panel_header_type($template_id);
+		if ($header_type == 'prevnext') {
+
+			$ret[GD_JS_TITLES]['prev'] = sprintf(
+				__('%sPrev', 'poptheme-wassup'),
+				'<i class="fa fa-fw fa-chevron-left"></i>'
+			);
+			$ret[GD_JS_TITLES]['next'] = sprintf(
+				__('Next%s', 'poptheme-wassup'),
+				'<i class="fa fa-fw fa-chevron-right"></i>'
+			);
+			// $ret[GD_JS_TITLES]['prev'] = '<i class="fa fa-fw fa-chevron-left"></i>';
+			// $ret[GD_JS_TITLES]['next'] = '<i class="fa fa-fw fa-chevron-right"></i>';
+		}
 				
 		return $ret;
 	}

@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_BOOTSTRAPPROCESSORS_VERSION', 0.214);
+define ('POP_BOOTSTRAPPROCESSORS_VERSION', 0.215);
 define ('POP_BOOTSTRAPPROCESSORS_VENDORRESOURCESVERSION', 0.200);
 define ('POP_BOOTSTRAPPROCESSORS_DIR', dirname(__FILE__));
 define ('POP_BOOTSTRAPPROCESSORS_PHPTEMPLATES_DIR', POP_BOOTSTRAPPROCESSORS_DIR.'/php-templates/compiled');

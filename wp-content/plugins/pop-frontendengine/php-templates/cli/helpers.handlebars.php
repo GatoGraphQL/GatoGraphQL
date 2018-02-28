@@ -70,6 +70,18 @@ class PoP_ServerSide_HelperCallers {
 		return $pop_serverside_helpers->mod($lvalue, $rvalue, $options);
 	}
 
+	public static function eq($lvalue, $rvalue) { 
+
+		global $pop_serverside_helpers;
+		return $pop_serverside_helpers->eq($lvalue, $rvalue);
+	}
+
+	public static function or($lvalue, $rvalue) { 
+
+		global $pop_serverside_helpers;
+		return $pop_serverside_helpers->or($lvalue, $rvalue);
+	}
+
 	public static function compare($lvalue, $rvalue, $options) { 
 
 		global $pop_serverside_helpers;
