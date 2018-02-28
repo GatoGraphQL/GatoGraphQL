@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POPTHEME_WASSUP_VERSION', 0.175);
+define ('POPTHEME_WASSUP_VERSION', 0.176);
 define ('POPTHEME_WASSUP_VENDORRESOURCESVERSION', 0.100);
 
 define ('POPTHEME_WASSUP_DIR', dirname(__FILE__));
