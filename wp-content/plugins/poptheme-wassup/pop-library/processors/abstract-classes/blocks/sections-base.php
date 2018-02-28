@@ -61,10 +61,16 @@ class GD_Template_Processor_SectionBlocksBase extends GD_Template_Processor_Bloc
 
 	function init_atts($template_id, &$atts) {		
 
-		if ($this->get_sectionfilter_template($template_id)) {
+		if ($sectionfilter = $this->get_sectionfilter_template($template_id)) {
 
 			// Class needed to push the "Loading" status a tiny bit down, so it doesn't show on top of the sectionfilter
 			$this->append_att($template_id, $atts, 'class', 'withsectionfilter');
+
+			// Check if the filter needs to be hidden (eg: GetPoP homepage)
+			if ($this->get_att($template_id, $atts, 'hide-sectionfilter')) {
+
+				$this->append_att($sectionfilter, $atts, 'class', 'hidden');
+			}
 		}
 
 		return parent::init_atts($template_id, $atts);
