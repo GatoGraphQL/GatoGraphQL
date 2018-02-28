@@ -11,7 +11,6 @@ function doing_json() {
 	return isset($_REQUEST[GD_URLPARAM_OUTPUT]) && $_REQUEST[GD_URLPARAM_OUTPUT] == GD_URLPARAM_OUTPUT_JSON;
 }
 
-
 // Priority: execute last
 add_filter( 'template_include', 'pop_template_include_json', PHP_INT_MAX);
 add_filter( 'comments_template', 'pop_template_include_json', PHP_INT_MAX);
