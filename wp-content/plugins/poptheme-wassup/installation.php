@@ -38,6 +38,18 @@ class PoPTheme_Wassup_Installation {
 		// PoP Cluster ResourceLoader for AWS
 		$plugin_version['pop-cluster-resourceloader-aws'] = POPTHEME_WASSUP_PLUGINACTIVATION_CLUSTERRESOURCELOADERAWS_VERSION;
 
+		// PoP Generic Forms
+		$plugin_version['pop-genericforms'] = POPTHEME_WASSUP_PLUGINACTIVATION_POPGENERICFORMS_VERSION;
+
+		// PoP Generic Forms Processors
+		$plugin_version['pop-genericforms-processors'] = POPTHEME_WASSUP_PLUGINACTIVATION_POPGENERICFORMSPROCESSORS_VERSION;
+
+		// Gravity Forms for PoP
+		$plugin_version['gravityforms-pop'] = POPTHEME_WASSUP_PLUGINACTIVATION_GFPOP_VERSION;
+		
+		// Gravity Forms for PoP Generic Forms
+		$plugin_version['gravityforms-pop-genericforms'] = POPTHEME_WASSUP_PLUGINACTIVATION_GFPOPGENERICFORMS_VERSION;
+
 		// Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
 		$version = pop_version();
 		foreach ($plugin_version as $plugin => $activate_version) {

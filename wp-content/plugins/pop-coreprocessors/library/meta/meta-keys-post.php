@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-define ('GD_METAKEY_POST_VOLUNTEERSNEEDED', 'volunteersneeded');
+// define ('GD_METAKEY_POST_VOLUNTEERSNEEDED', 'volunteersneeded');
 define ('GD_METAKEY_POST_REFERENCES', 'references');
 define ('GD_METAKEY_POST_RECOMMENDEDBY', 'recommendedby');
 define ('GD_METAKEY_POST_RECOMMENDCOUNT', 'recommend_count');
@@ -31,9 +31,9 @@ function gd_acf_get_keys_store_as_array_posts($keys) {
 	return $keys;
 }
 
-add_filter('gd_acf_get_keys_store_as_single', 'gd_acf_get_keys_store_as_single_custom_impl');
-function gd_acf_get_keys_store_as_single_custom_impl($keys) {
+// add_filter('gd_acf_get_keys_store_as_single', 'gd_acf_get_keys_store_as_single_custom_impl');
+// function gd_acf_get_keys_store_as_single_custom_impl($keys) {
 
-	$keys[] = GD_METAKEY_POST_VOLUNTEERSNEEDED;
-	return $keys;
-}
+// 	$keys[] = GD_METAKEY_POST_VOLUNTEERSNEEDED;
+// 	return $keys;
+// }

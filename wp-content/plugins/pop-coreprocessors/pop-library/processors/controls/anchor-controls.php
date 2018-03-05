@@ -14,7 +14,7 @@ define ('GD_TEMPLATE_ANCHORCONTROL_PRINT', PoP_TemplateIDUtils::get_template_def
 define ('GD_TEMPLATE_ANCHORCONTROL_EMBED', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-embed'));
 define ('GD_TEMPLATE_ANCHORCONTROL_API', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-api'));
 define ('GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-copysearchurl'));
-define ('GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-sharebyemail'));
+// define ('GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-sharebyemail'));
 define ('GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-invitenewusers'));
 define ('GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-share-invitenewusers'));
 define ('GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGE', PoP_TemplateIDUtils::get_template_definition('anchorcontrol-closepage'));
@@ -47,7 +47,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			GD_TEMPLATE_ANCHORCONTROL_EMBED,
 			GD_TEMPLATE_ANCHORCONTROL_API,
 			GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL,
-			GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL,
+			// GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL,
 			GD_TEMPLATE_ANCHORCONTROL_INVITENEWUSERS,
 			GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS,
 			GD_TEMPLATE_ANCHORCONTROL_CLOSEPAGE,
@@ -104,9 +104,9 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 
 				return __('Copy Search URL', 'pop-coreprocessors');
 
-			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
+			// case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
 			
-				return __('Share by email', 'pop-coreprocessors');
+			// 	return __('Share by email', 'pop-coreprocessors');
 			
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
 
@@ -234,7 +234,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 
 				return 'fa-link';
 
-			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
+			// case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
 			case GD_TEMPLATE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
 
 				return 'fa-envelope';
@@ -309,13 +309,13 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			case GD_TEMPLATE_ANCHORCONTROL_EMBED:
 			case GD_TEMPLATE_ANCHORCONTROL_API:
 			case GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL:
-			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
+			// case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
 
 				$modals = array(
 					GD_TEMPLATE_ANCHORCONTROL_EMBED => GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL,
 					GD_TEMPLATE_ANCHORCONTROL_API => GD_TEMPLATE_BLOCKGROUP_API_MODAL,
 					GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL => GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL,
-					GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL => GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL,
+					// GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL => GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL,
 				);
 				$modal = $modals[$template_id];
 				return '#'.$gd_template_processor_manager->get_processor($modal)->get_frontend_id($modal, $atts).'_modal';
@@ -485,7 +485,7 @@ class GD_Template_Processor_AnchorControls extends GD_Template_Processor_AnchorC
 			case GD_TEMPLATE_ANCHORCONTROL_EMBED:
 			case GD_TEMPLATE_ANCHORCONTROL_API:
 			case GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL:
-			case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
+			// case GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL:
 
 				$this->merge_att($template_id, $atts, 'params', array(
 					'data-toggle' => 'modal',

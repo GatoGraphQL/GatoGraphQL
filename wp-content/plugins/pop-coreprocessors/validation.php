@@ -1,6 +1,7 @@
 <?php
 
 define('POP_BOOTSTRAPPROCESSORS_MIN_VERSION', 0.1);
+// define('POP_GENERICFORMS_MIN_VERSION', 0.1);
 
 class PoP_CoreProcessors_Validation {
 
@@ -25,6 +26,24 @@ class PoP_CoreProcessors_Validation {
 			$success = false;
 		}
 
+		// if (!defined('POP_GENERICFORMS_VERSION')) {
+
+		// 	add_action('admin_notices',array($this,'forms_install_warning'));
+		// 	add_action('network_admin_notices',array($this,'forms_install_warning'));
+		// 	$success = false;
+		// }
+		// elseif(!defined('POP_GENERICFORMS_INITIALIZED')){
+
+		// 	// The admin notice will come from another failing plug-in, no need to repeat it here
+		// 	$success = false;
+		// }
+		// elseif (POP_GENERICFORMS_MIN_VERSION > POP_GENERICFORMS_VERSION) {
+			
+		// 	add_action('admin_notices',array($this,'forms_version_warning'));
+		// 	add_action('network_admin_notices',array($this,'forms_version_warning'));
+		// 	$success = false;
+		// }
+
 		return $success;	
 	}
 	function admin_notice($message){
@@ -45,4 +64,17 @@ class PoP_CoreProcessors_Validation {
 			)
 		);
 	}
+	// function forms_install_warning(){
+		
+	// 	$this->admin_notice(__('Error: <b>PoP Generic Forms</b> is not installed/activated. Without it, <b>PoP Core Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'));
+	// }
+	// function forms_version_warning(){
+		
+	// 	$this->admin_notice(
+	// 		sprintf(
+	// 			__('Error: this version of <b>PoP Core Processors</b> requires version %s or bigger of <b>PoP Generic Forms</b>. Please update this plugin from your plugin installer or download it <a href="https://github.com/leoloso/PoP/">from here</a>.','ps-pop'),
+	// 			POP_GENERICFORMS_MIN_VERSION
+	// 		)
+	// 	);
+	// }
 }

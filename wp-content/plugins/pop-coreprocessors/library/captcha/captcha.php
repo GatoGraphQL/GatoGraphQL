@@ -33,8 +33,6 @@ class GD_Captcha {
 			return $errors;
 		}
 
-		// $captcha = $_REQUEST['captcha_code'];
-
 		// Captcha matches?
 		if ($session_code !== $captcha) {
 

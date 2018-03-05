@@ -43,34 +43,13 @@ class GD_DataLoad_FieldProcessor_Posts_Hook extends GD_DataLoad_FieldProcessor_H
 			// Users mentioned in the post: @mentions
 			case 'taggedusers' :
 				return GD_MetaManager::get_post_meta($fieldprocessor->get_id($post), GD_METAKEY_POST_TAGGEDUSERS);
-			
-			// case 'thumb-favicon' :			
-			// 	$size = 'thumb-favicon';			
-			// 	return $fieldprocessor->get_thumb($post, $size);
-
-			// case 'thumb-xs' :			
-			// 	$size = 'thumb-xsmall';			
-			// 	return $fieldprocessor->get_thumb($post, $size);
-
-			// case 'thumb-sm' :			
-			// 	$size = 'thumb-small';			
-			// 	return $fieldprocessor->get_thumb($post, $size);
-
-			// case 'thumb-md' :			
-			// 	$size = 'thumb-medium';			
-			// 	return $fieldprocessor->get_thumb($post, $size);
-
-			// case 'thumb-lg' :			
-			// 	$size = 'thumb-large';			
-			// 	return $fieldprocessor->get_thumb($post, $size);
 
 			case 'favicon' :			
 			case 'thumb-xs' :			
 			case 'thumb-sm' :			
 			case 'thumb-md' :			
 			case 'thumb-feed' :			
-			case 'thumb-pagewide' :			
-			// case 'thumb-lg' :			
+			case 'thumb-pagewide' :					
 				return $fieldprocessor->get_thumb($post, $field);
 
 			// Override
@@ -125,17 +104,17 @@ class GD_DataLoad_FieldProcessor_Posts_Hook extends GD_DataLoad_FieldProcessor_H
 				}
 				return 1;
 
-			case 'flag-url' :
-				return add_query_arg('pid', $fieldprocessor->get_id($post), get_permalink(POPTHEME_WASSUP_GF_PAGE_FLAG));
+			// case 'flag-url' :
+			// 	return add_query_arg('pid', $fieldprocessor->get_id($post), get_permalink(POP_GENERICFORMS_PAGE_FLAG));
 
-			case 'volunteer-url' :
-				return add_query_arg('pid', $fieldprocessor->get_id($post), get_permalink(POPTHEME_WASSUP_GF_PAGE_VOLUNTEER));
+			// case 'volunteer-url' :
+			// 	return add_query_arg('pid', $fieldprocessor->get_id($post), get_permalink(POP_GENERICFORMS_PAGE_VOLUNTEER));
 
-			case 'volunteers-needed':
-				return GD_MetaManager::get_post_meta($fieldprocessor->get_id($post), GD_METAKEY_POST_VOLUNTEERSNEEDED, true);
+			// case 'volunteers-needed':
+			// 	return GD_MetaManager::get_post_meta($fieldprocessor->get_id($post), GD_METAKEY_POST_VOLUNTEERSNEEDED, true);
 
-			case 'volunteers-needed-string':
-				return GD_DataLoad_FieldProcessor_Utils::get_boolvalue_string($fieldprocessor->get_value($resultitem, 'volunteers-needed'));
+			// case 'volunteers-needed-string':
+			// 	return GD_DataLoad_FieldProcessor_Utils::get_boolvalue_string($fieldprocessor->get_value($resultitem, 'volunteers-needed'));
 
 			case 'references':
 				return GD_MetaManager::get_post_meta($fieldprocessor->get_id($post), GD_METAKEY_POST_REFERENCES);

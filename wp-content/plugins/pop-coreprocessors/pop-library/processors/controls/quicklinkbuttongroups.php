@@ -6,13 +6,13 @@
  * ---------------------------------------------------------------------------------------------------------------*/
 
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTQUICKVIEW', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postquickview'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postvolunteer'));
+// define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postvolunteer'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTSHARE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postshare'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTEDIT', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postedit'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVIEW', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postview'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPREVIEW', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postpreview'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPERMALINK', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postpermalink'));
-define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-usersendmessage'));
+// define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-usersendmessage'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-userfollowunfollowuser'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postrecommendunrecommend'));
 define ('GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE', PoP_TemplateIDUtils::get_template_definition('quicklinkbuttongroup-postupvoteundoupvote'));
@@ -30,13 +30,13 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 	
 		return array(
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTQUICKVIEW,
-			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER,
+			// GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTSHARE,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTEDIT,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVIEW,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPREVIEW,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTPERMALINK,
-			GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE,
+			// GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND,
 			GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE,
@@ -61,10 +61,10 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 				$ret[] = GD_TEMPLATE_BUTTON_QUICKVIEW_PREVIEWDROPDOWN;
 				break;
 
-			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER:
+			// case GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER:
 
-				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY;
-				break;
+			// 	$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY;
+			// 	break;
 
 			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_POSTSHARE:
 
@@ -91,10 +91,10 @@ class GD_Template_Processor_QuicklinkButtonGroups extends GD_Template_Processor_
 				$ret[] = GD_TEMPLATE_BUTTONWRAPPER_POSTPERMALINK;
 				break;
 
-			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE:
+			// case GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERSENDMESSAGE:
 
-				$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW;
-				break;
+			// 	$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW;
+			// 	break;
 
 			case GD_TEMPLATE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER:
 

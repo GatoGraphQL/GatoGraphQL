@@ -32,7 +32,9 @@ function get_custom_default_hierarchy_pages($pages) {
 add_filter('GD_TemplateManager_Utils:get_unique_blockgroups', 'get_custom_unique_blockgroups');
 function get_custom_unique_blockgroups($blockgroups) {
 
-	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL;
+	// if (defined('GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL')) {
+	// 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_SHAREBYEMAIL_MODAL;
+	// }
 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_EMBED_MODAL;
 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_API_MODAL;
 	$blockgroups[] = GD_TEMPLATE_BLOCKGROUP_COPYSEARCHURL_MODAL;
@@ -137,9 +139,9 @@ function gd_multipleopenurls($multiple_open) {
 			POPTHEME_WASSUP_PAGE_ADDWEBPOST,
 			POPTHEME_WASSUP_PAGE_ADDHIGHLIGHT,
 			POP_WPAPI_PAGE_ADDCOMMENT,
-			POPTHEME_WASSUP_GF_PAGE_CONTACTUSER,
-			POPTHEME_WASSUP_GF_PAGE_VOLUNTEER,
-			POPTHEME_WASSUP_GF_PAGE_FLAG,
+			POP_GENERICFORMS_PAGE_CONTACTUSER,
+			POP_GENERICFORMS_PAGE_VOLUNTEER,
+			POP_GENERICFORMS_PAGE_FLAG,
 		);
 		if (in_array($post->ID, $multiple)) {
 

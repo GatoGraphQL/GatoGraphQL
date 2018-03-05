@@ -11,7 +11,7 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_COREPROCESSORS_VERSION', 0.228);
+define ('POP_COREPROCESSORS_VERSION', 0.229);
 define ('POP_COREPROCESSORS_VENDORRESOURCESVERSION', 0.200);
 define ('POP_COREPROCESSORS_DIR', dirname(__FILE__));
 define ('POP_COREPROCESSORS_PHPTEMPLATES_DIR', POP_COREPROCESSORS_DIR.'/php-templates/compiled');

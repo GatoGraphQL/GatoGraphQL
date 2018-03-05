@@ -17,6 +17,9 @@ class GD_DataLoad_FieldProcessor_Users_Hook extends GD_DataLoad_FieldProcessor_H
 		$user = $resultitem;
 
 		switch ($field) {
+
+			// case 'contact-url' :
+			// 	return add_query_arg('uid', $fieldprocessor->get_id($user), get_permalink(POP_GENERICFORMS_PAGE_CONTACTUSER));
 			
 			case 'followuser-url':
 				return add_query_arg('uid', $fieldprocessor->get_id($user), get_permalink(POP_COREPROCESSORS_PAGE_FOLLOWUSER));

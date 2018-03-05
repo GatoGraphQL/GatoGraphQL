@@ -21,7 +21,7 @@ class GD_CustomCreateUpdate_Post extends GD_CreateUpdate_Post {
 		$form_data['categories'] = $gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_CATEGORIES)->get_value(GD_TEMPLATE_FORMCOMPONENT_CATEGORIES, $atts);
 
 		// Only if the Volunteering is enabled
-		if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+		if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 		
 			if ($this->volunteer()) {
 				$form_data['volunteersneeded'] = $gd_template_processor_manager->get_processor(GD_TEMPLATE_FORMCOMPONENT_VOLUNTEERSNEEDED_SELECT)->get_value(GD_TEMPLATE_FORMCOMPONENT_VOLUNTEERSNEEDED_SELECT, $atts);
@@ -43,7 +43,7 @@ class GD_CustomCreateUpdate_Post extends GD_CreateUpdate_Post {
 		GD_MetaManager::update_post_meta($post_id, GD_METAKEY_POST_CATEGORIES, $form_data['categories']);
 
 		// Only if the Volunteering is enabled
-		if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+		if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 		
 			// Volunteers Needed?
 			if ($this->volunteer()) {

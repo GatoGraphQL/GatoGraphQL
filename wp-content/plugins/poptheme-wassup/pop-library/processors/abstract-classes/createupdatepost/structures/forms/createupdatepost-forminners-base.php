@@ -49,7 +49,7 @@ class Wassup_Template_Processor_CreateUpdatePostFormInnersBase extends GD_Templa
 				$this->add_att(GD_EM_TEMPLATE_FORMCOMPONENT_TYPEAHEADMAP, $atts, 'load-itemobject-value', true);						
 			}
 
-			if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER && $this->volunteering($template_id)) {
+			if (POP_GENERICFORMS_PAGE_VOLUNTEER && $this->volunteering($template_id)) {
 				$this->add_att(GD_TEMPLATE_FORMCOMPONENT_VOLUNTEERSNEEDED_SELECT, $atts, 'load-itemobject-value', true);
 			}
 

@@ -18,7 +18,7 @@ class EM_AE_FullViewSidebarSettings {
 			case GD_COMPACTSIDEBARSECTION_AUTOMATEDEMAILS_EVENT:
 
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGEVOLUNTEER;
 				}
 				else {

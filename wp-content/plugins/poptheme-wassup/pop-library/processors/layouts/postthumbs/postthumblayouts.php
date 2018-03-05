@@ -135,7 +135,7 @@ class GD_Custom_Template_Processor_PostThumbLayouts extends GD_Template_Processo
 			case GD_TEMPLATE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
 				
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 			
 					$ret[] = GD_TEMPLATE_LAYOUT_POSTADDITIONAL_VOLUNTEER;
 				}

@@ -57,7 +57,8 @@ class GD_Template_Processor_CustomPostMultipleSidebarComponents extends GD_Templ
 				// Allow TPP Debate to override, adding GD_TEMPLATE_BUTTONGROUPWRAPPER_OPINIONATEDVOTECOUNT
 				$layouts = array();
 				$layouts[] = GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER;
-				$layouts[] = GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG;
+				// Added through a hook
+				// $layouts[] = GD_TEMPLATE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG;
 				$layouts[] = GD_TEMPLATE_POSTSOCIALMEDIA_POSTWRAPPER;
 				$layouts = apply_filters('GD_Template_Processor_CustomPostMultipleSidebarComponents:featuredimagevolunteer:modules', $layouts, $template_id);
 				$ret = array_merge(
@@ -89,7 +90,7 @@ class GD_Template_Processor_CustomPostMultipleSidebarComponents extends GD_Templ
 			// case GD_TEMPLATE_SIDEBARMULTICOMPONENT_WEBPOSTLEFT:
 
 			// 	// Only if the Volunteering is enabled
-			// 	if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+			// 	if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 			// 		$ret[] = GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER;
 			// 	}
 			// 	else {

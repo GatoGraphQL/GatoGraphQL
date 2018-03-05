@@ -11,15 +11,15 @@ Author URI: https://getpop.org/u/leo/
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('POP_EMAILSENDER_VERSION', 0.106);
+define ('POP_EMAILSENDER_VERSION', 0.107);
 define ('POP_EMAILSENDER_DIR', dirname(__FILE__));
 
 class PoP_EmailSender {
 
 	function __construct() {
 
-		// Priority: after PoP Core Processors loaded
-		add_action('plugins_loaded', array($this,'init'), 40);
+		// Priority: after PoP WP API loaded
+		add_action('plugins_loaded', array($this,'init'), 30);
 	}
 	function init(){
 

@@ -3,7 +3,7 @@
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define ('GETPOPDEMO_VERSION', 0.316);
+define ('GETPOPDEMO_VERSION', 0.317);
 
 define ('GETPOPDEMO_DIR', STYLESHEETPATH);
 define ('GETPOPDEMO_DIR_RESOURCES', GETPOPDEMO_DIR.'/resources');
@@ -12,9 +12,6 @@ define ('GETPOPDEMO_PLUGINS_DIR', GETPOPDEMO_LIB.'/plugins');
 
 define ('GETPOPDEMO_URL', get_stylesheet_directory_uri());
 define ('GETPOPDEMO_URL_PLUGINS', GETPOPDEMO_URL.'/plugins');
-
-define ('GETPOPDEMO_ORIGINURI', get_origin_stylesheet_directory_uri());
-define ('GETPOPDEMO_ORIGINURI_PLUGINS', GETPOPDEMO_ORIGINURI.'/plugins');
 
 // Change the Uploads folder so many websites can use the same code but different uploads in DEV
 // define ('UPLOADS', 'wp-content/uploads/getpop');
@@ -29,6 +26,9 @@ class GetPoPDemo {
 			
 			$this->initialize();
 			define('GETPOPDEMO_INITIALIZED', true);
+
+			define('GETPOPDEMO_ORIGINURI', get_origin_stylesheet_directory_uri());
+			define('GETPOPDEMO_ORIGINURI_PLUGINS', GETPOPDEMO_ORIGINURI.'/plugins');
 		}
 	}
 	function init_constants() {

@@ -105,7 +105,7 @@ function gd_get_website_description_impl($description, $addhomelink) {
 add_filter('gd_email_notifications_email', 'gd_email_notifications_email_impl');
 function gd_email_notifications_email_impl($email) {
 	
-	return 'losoviz@gmail.com';//'notifications@getpop.org';
+	return 'losoviz@gmail.com';
 }
 add_filter('gd_email_newsletter_email', 'gd_email_newsletter_email_impl');
 function gd_email_newsletter_email_impl($email) {

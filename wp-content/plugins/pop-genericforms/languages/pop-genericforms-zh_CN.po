@@ -1,0 +1,2527 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-16 15:49+0800\n"
+"PO-Revision-Date: 2016-12-16 15:49+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././config/config.php:44 .././config/config.php:70
+#: .././pop-library/dataload/actionexecuters/library/createupdate-highlight.php:36
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:36
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:37
+#: .././pop-library/processors/sidebars/posts/widgetries.php:100
+#: .././pop-library/processors/structures/tables/tables.php:72
+msgid "Highlight"
+msgstr "摘要"
+
+#: .././config/config.php:49 .././config/config.php:73
+#: .././pop-library/processors/buttons/buttoninners.php:47
+#: .././pop-library/processors/buttons/post-buttons.php:99
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:38
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:39
+#: .././pop-library/processors/sidebars/posts/widgetries.php:98
+#: .././pop-library/processors/sidebars/posts/widgetries.php:101
+#: .././pop-library/processors/structures/tables/tables.php:79
+msgid "Post"
+msgstr "帖子"
+
+#: .././config/config.php:67
+#: .././pop-library/processors/buttons/buttoninners.php:46
+#: .././pop-library/processors/buttons/post-buttons.php:98
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/text-formcomponents-inputs.php:31
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:34
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:35
+#: .././pop-library/processors/sidebars/posts/widgetries.php:99
+#: .././pop-library/processors/structures/tables/tables.php:65
+msgid "Link"
+msgstr "链接"
+
+#: .././library/disclaimer.php:28
+#, php-format
+msgid ""
+"%sThis information was gathered and published by %s from <a href=\"%s\">this "
+"source</a>."
+msgstr "%s此资讯是由%s发布，源自<a href=\"%s\">这个出处</a>。"
+
+#: .././library/disclaimer.php:67
+msgid "Disclaimer"
+msgstr "免责声明"
+
+#: .././library/disclaimer.php:86
+#, php-format
+msgid "Original URL (for Disclaimer):<br/>%s"
+msgstr "原来的URL（免责声明）：<br/>%s"
+
+#: .././library/disclaimer.php:123
+#, php-format
+msgid ""
+"This Profile was created by %s with information available on the "
+"Organization's website."
+msgstr "这个档案页被%s创建，内容来自该组织网站上的资料。"
+
+#: .././library/gallery.php:39 .././library/gallery.php:46
+msgid "Wide"
+msgstr "宽"
+
+#: .././library/gallery.php:45
+msgid "Full Size"
+msgstr "全尺寸"
+
+#: .././library/gallery.php:47
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:263
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:372
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:242
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:149
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:289
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:22
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:38
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:565
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:759
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:535
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:358
+msgid "Thumbnail"
+msgstr "縮略圖"
+
+#: .././library/user-registration.php:15
+msgid "Linkedin"
+msgstr "LinkedIn"
+
+#: .././library/user-registration.php:16
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:46
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .././library/user-registration.php:17
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:56
+msgid "Twitter"
+msgstr "Twitter"
+
+#: .././library/user-registration.php:18
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:76
+msgid "Youtube"
+msgstr "YouTube"
+
+#: .././library/user-registration.php:19
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:86
+msgid "Instagram"
+msgstr ""
+
+#: .././library/user-registration.php:20
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:36
+msgid "Blog"
+msgstr "部落格"
+
+#: .././library/user-registration.php:37 .././library/user-registration.php:40
+#, php-format
+msgid "Profile owned by %s?"
+msgstr "档案页被%s所拥有？"
+
+#: .././library/user-registration.php:47
+msgid "Organization info"
+msgstr "组织资料"
+
+#: .././library/user-registration.php:51
+msgid "Contact person"
+msgstr "联系人"
+
+#: .././library/user-registration.php:55
+msgid "Contact number"
+msgstr "联系电话"
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:66
+#, php-format
+msgid "<strong>%s</strong> has made a highlight from <strong>%s</strong>"
+msgstr "<strong>%s</strong>从<strong>%s</strong>去了摘要"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:186
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:252
+msgid "Unknown"
+msgstr "未知"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:188
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:254
+msgid "Unprocessed payment needs refund"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:224
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:295
+#, php-format
+msgid "%s Options"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:225
+msgid ""
+"<strong>Important:</strong>In order to connect Alipay with your site, you "
+"need to configure the return URL."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:225
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:296
+#, php-format
+msgid "Your return url is %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:226
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:297
+#, php-format
+msgid ""
+"Please visit the <a href=\"%s\">documentation</a> for further instructions."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:230
+msgid "Alipay account"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:233
+msgid ""
+"Please enter your Alipay Email; this is needed in order to take payment."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:237
+msgid "Alipay partner ID"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:240
+msgid ""
+"Please enter the partner ID. If you don't have one, <a href=\"https://b."
+"alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:244
+msgid "Alipay security key"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:247
+msgid ""
+"Please enter the security key. If you don't have one, <a href=\"https://b."
+"alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:251
+msgid "Payment method"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:31
+msgid ""
+"Be aware that by approving a booking awaiting payment, a full payment "
+"transaction will be registered against this booking, meaning that it will be "
+"considered as paid."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:78
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:222
+msgid "Success Message"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:81
+msgid ""
+"The message that is shown to a user when a booking with bank transfer "
+"payments is successful."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:85
+msgid "Customer Message"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:88
+msgid ""
+"Give the customer instructions for paying via Bank Transfer, and let them "
+"know that the Event Booking will be confirmed once the money is received"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:92
+#: .././plugins/events-manager-pro/library/functions.php:36
+msgid "Account details"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:95
+msgid "Account details title"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:106
+msgid "Account Name"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:112
+msgid "Account Number"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:118
+msgid "Sort Code"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:124
+msgid "Bank Name"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:130
+msgid "IBAN"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:136
+msgid "BIC (formerly Swift)"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:161
+#, php-format
+msgid "Account name: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:162
+#, php-format
+msgid "Account number: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:163
+#, php-format
+msgid "Sort code: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:164
+#, php-format
+msgid "Bank name: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:165
+#, php-format
+msgid "IBAN: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:166
+#, php-format
+msgid "BIC (formerly Swift): %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:30
+#, php-format
+msgid "Awaiting %s Payment"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:95
+#, php-format
+msgid ""
+"To finalize your booking, please click the following button to proceed to %s."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:137
+msgid "Resume Payment"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:169
+msgid "Approve"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:170
+msgid "Delete"
+msgstr "删除"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:171
+msgid "Edit/View"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:225
+msgid ""
+"The message that is shown to a user when a booking is successful whilst "
+"being redirected to PayPal for payment."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:229
+msgid "Success Free Message"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:232
+msgid ""
+"If some cases if you allow a free ticket (e.g. pay at gate) as well as paid "
+"tickets, this message will be shown and the user will not be redirected to "
+"PayPal."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:236
+msgid "Thank You Message"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:239
+msgid ""
+"If you choose to return users to the default Events Manager thank you page "
+"after a user has paid on PayPal, you can customize the thank you message "
+"here."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:243
+msgid "Return URL"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:246
+msgid ""
+"Once a payment is completed, users will be offered a link to this URL which "
+"confirms to the user that a payment is made. If you would to customize the "
+"thank you page, create a new page and add the link here. For automatic "
+"redirect, you need to turn auto-return on in your PayPal settings."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:250
+msgid "Cancel URL"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:253
+msgid ""
+"Whilst paying on PayPal, if a user cancels, they will be redirected to this "
+"page."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:257
+msgid "Delete Bookings Pending Payment"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:259
+msgid "minutes"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:260
+msgid ""
+"Once a booking is started and the user is taken to PayPal, Events Manager "
+"stores a booking record in the database to identify the incoming payment. "
+"These spaces may be considered reserved if you enable <em>Reserved "
+"unconfirmed spaces?</em> in your Events &gt; Settings page. If you would "
+"like these bookings to expire after x minutes, please enter a value above "
+"(note that bookings will be deleted, and any late payments will need to be "
+"refunded manually via PayPal)."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:264
+msgid "Manually approve completed transactions?"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:267
+msgid ""
+"By default, when someone pays for a booking, it gets automatically approved "
+"once the payment is confirmed. If you would like to manually verify and "
+"approve bookings, tick this box."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:268
+#, php-format
+msgid ""
+"Approvals must also be required for all bookings in your <a href=\"%s"
+"\">settings</a> for this to work properly."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:296
+msgid ""
+"<strong>Important:</strong>In order to connect PayPal with your site, you "
+"need to enable IPN on your account."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:301
+msgid "PayPal Email"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:307
+msgid "Paypal Currency"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:308
+#, php-format
+msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:312
+msgid "PayPal Language"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:315
+msgid "Default"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:332
+msgid ""
+"PayPal allows you to select a default language users will see. This is also "
+"determined by PayPal which detects the locale of the users browser. The "
+"default would be US."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:336
+msgid "PayPal Mode"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:339
+msgid "Live Site"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:340
+msgid "Test Mode (Sandbox)"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:346
+msgid "PayPal Page Logo"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:349
+msgid ""
+"Add your logo to the PayPal payment page. It's highly recommended you link "
+"to a https:// address."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:353
+msgid "Border Color"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:356
+msgid ""
+"Provide a hex value color to change the color from the default blue to "
+"another color (e.g. #CCAAAA)."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:32
+#: .././plugins/events-manager-pro/library/functions.php:34
+msgid "Bank Transfer"
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:33
+#: .././plugins/events-manager-pro/library/functions.php:42
+msgid "Booking successful."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:35
+msgid ""
+"Make your payment directly into our bank account. Please use your Order ID "
+"as the payment reference. Once the payment has been done, please send an "
+"email to <a href=\"mailto:info@greendrinks.cn?subject=Bank Transfer"
+"\">info@greendrinks.cn</a> with the Order ID and the Event Booking will be "
+"confirmed."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:39
+msgid "Alipay"
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:40
+msgid ""
+"Pay via Alipay, if you don't have an Alipay account, you can also pay with "
+"your debit card or credit card"
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:41
+msgid ""
+"Please wait whilst you are redirected to Alipay to proceed with payment."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:44
+msgid ""
+"Thank you for your payment. Your transaction has been completed, and a "
+"receipt for your purchase has been emailed to you along with a seperate "
+"email containing account details to access your booking information on this "
+"site. You may log into your account at www.paypal.com to view details of "
+"this transaction."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:47
+msgid "Simply come and pay at the Event ;)"
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:51
+msgid "Please select"
+msgstr "请选择"
+
+#: .././plugins/events-manager/library/functions.php:45
+msgid "Upcoming Event"
+msgstr "最新活动"
+
+#: .././plugins/events-manager/library/functions.php:50
+msgid "Current Event"
+msgstr "现有活动"
+
+#: .././plugins/events-manager/library/functions.php:55
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:111
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:54
+msgid "Past Event"
+msgstr "过往活动"
+
+#: .././plugins/events-manager/library/functions.php:298
+msgid "The address was not found on the map"
+msgstr "此地址不在地图上"
+
+#: .././plugins/events-manager/library/functions.php:494
+#: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:38
+#: .././plugins/events-manager/pop-library/processors/buttons/post-buttons.php:68
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:26
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:27
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:110
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:47
+msgid "Event"
+msgstr "活动"
+
+#: .././plugins/events-manager/pop-library/dataload/actionexecuters/library/createupdate-event.php:22
+msgid "The dates/time cannot be empty"
+msgstr "日期与时间不能为空"
+
+#: .././plugins/events-manager/pop-library/functions.php:348
+#, php-format
+msgid "%sMap"
+msgstr "%s地图"
+
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:120
+msgid "Location(s) for:"
+msgstr "地点为："
+
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:123
+msgid "Add location"
+msgstr "添加位置"
+
+#: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:14
+#: .././plugins/events-manager/pop-library/processors/structures/scrolls/scrollmaps.php:74
+msgid "Scroll down to load more results"
+msgstr "加载更多"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:251
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:360
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:230
+#: .././plugins/user-role-editor/library/functions.php:32
+#: .././plugins/user-role-editor/library/functions.php:47
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:141
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:281
+#: .././plugins/user-role-editor/pop-library/processors/widgetries.php:44
+#: .././plugins/user-role-editor/pop-library/processors/widgetries.php:45
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:21
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:39
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:549
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:743
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:519
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:346
+msgid "Details"
+msgstr "详细信息"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:255
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:364
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:234
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:18
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:35
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:553
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:747
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:523
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:350
+msgid "Feed"
+msgstr "提要式"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:259
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:368
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:238
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:36
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:557
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:751
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:527
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:354
+msgid "Extended"
+msgstr "扩展式"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:267
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:376
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:246
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:153
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:293
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:23
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:37
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:573
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:767
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:543
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:362
+msgid "List"
+msgstr "陈列式"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:271
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:380
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:250
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:157
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:297
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:20
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:41
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:577
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:771
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:547
+msgid "Map"
+msgstr "地图"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:275
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:384
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:254
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:40
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:40
+msgid "Calendar"
+msgstr "日历"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:388
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:301
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:42
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:775
+#: .././pop-library/processors/buttons/buttons.php:60
+#: .././pop-library/processors/buttons/buttons.php:62
+#: .././pop-library/processors/buttons/buttons.php:63
+msgid "Edit"
+msgstr "编辑"
+
+#: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:39
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:58
+#: .././pop-library/processors/controls/anchor-controls.php:43
+msgid "as Link"
+msgstr "为链接"
+
+#: .././plugins/events-manager/pop-library/processors/buttons/post-buttons.php:69
+msgid "Event link"
+msgstr "活动链接"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:46
+msgid "Past Events"
+msgstr "过往活动"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:50
+msgid "My Past Events"
+msgstr "我的过往活动"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:54
+msgid "Add Event"
+msgstr "添加活动"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:62
+msgid "Toggle Map"
+msgstr "切换地图"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/blocks.php:131
+#: .././pop-library/processors/createupdatepost/blocks.php:139
+msgid "Submitting..."
+msgstr "呈交中。。。"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:37
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:70
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:53
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:149
+#: .././pop-library/processors/pagesections/pagesections.php:463
+msgid "Login/Register"
+msgstr "登入／注册"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:42
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:57
+#, php-format
+msgid "Yay! Your %s was created successfully!"
+msgstr "恭喜！您的%s已成功创建"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:46
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:61
+#, php-format
+msgid "Yay! Your %s was updated successfully!"
+msgstr "恭喜！您的%s 已更新"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:56
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:67
+#, php-format
+msgid "Please %s to create your %s."
+msgstr "请%s为了创建您的%s"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:62
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:73
+#, php-format
+msgid "You need a %s account to create your %s."
+msgstr "您需要 %s 用户来创建您的 %s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:70
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:81
+#, php-format
+msgid "%s updated successfully."
+msgstr "%s已更新"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:76
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:87
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+msgstr "请<a href=\"%s\">登入</a>编辑您的%s"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:82
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:93
+#, php-format
+msgid "You need a %s account to edit your %s."
+msgstr "您需要 %s 用户来编辑您的 %s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:89
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:100
+#, php-format
+msgid "Ops, it seems you have no rights to edit this %s."
+msgstr "不好意思, 您无权编辑这%s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/structures/forms/widgetries.php:57
+msgid "Event details"
+msgstr "活动详情"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/structures/forms/widgetries.php:58
+msgid "Event link details"
+msgstr "活动链接详情"
+
+#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:31
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:47
+msgid "event"
+msgstr "活动"
+
+#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:45
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:48
+msgid "events"
+msgstr "活动"
+
+#: .././plugins/events-manager/pop-library/processors/layouts/posts/previewpostlayouts.php:378
+#: .././pop-library/processors/layouts/posts/previewpostlayouts.php:679
+msgid "posted by"
+msgstr "发表人："
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:54
+msgid "past event"
+msgstr "过往活动"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:55
+msgid "past events"
+msgstr "过往活动"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:60
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:49
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:139
+#, php-format
+msgid "No %s found."
+msgstr "无法找到 %s"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:64
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:53
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:143
+#, php-format
+msgid "No more %s found."
+msgstr "无法找到 %s"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:74
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:153
+#, php-format
+msgid "Please %s to access your %s."
+msgstr "请%s以登入您的%s."
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:81
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:160
+#, php-format
+msgid "You need a %s account to access this functionality."
+msgstr "您需要 %s 帐户以使用这个功能"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:87
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:166
+#, php-format
+msgid "Your account has no permission to edit this %s."
+msgstr "不好意思, 您无权编辑这%s."
+
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:106
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:107
+msgid "Location(s)"
+msgstr "地点"
+
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:108
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:109
+msgid "Date/Time"
+msgstr "日期／时间"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:57
+msgid "Sunday"
+msgstr "日"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:58
+msgid "Monday"
+msgstr "一"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:59
+msgid "Tuesday"
+msgstr "二"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:60
+msgid "Wednesday"
+msgstr "三"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:61
+msgid "Thursday"
+msgstr "四"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:62
+msgid "Friday"
+msgstr "无"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:63
+msgid "Saturday"
+msgstr "六"
+
+#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:60
+msgid "Events"
+msgstr "活动"
+
+#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:61
+msgid "Upcoming Events"
+msgstr "最新活动"
+
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:48
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:55
+msgid "When"
+msgstr "时间"
+
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:49
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:56
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:606
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:44
+#: .././pop-library/processors/structures/tables/tables.php:60
+#: .././pop-library/processors/structures/tables/tables.php:67
+#: .././pop-library/processors/structures/tables/tables.php:74
+#: .././pop-library/processors/structures/tables/tables.php:81
+msgid "Status"
+msgstr "状态"
+
+#: .././plugins/gravityforms/library/notifications.php:69
+#, php-format
+msgid "Notification from %s"
+msgstr "来自%s的通知"
+
+#: .././plugins/gravityforms/pop-library/formcomponent-inputs/implementations/contactus-topics.php:19
+msgid "General"
+msgstr "一般"
+
+#: .././plugins/gravityforms/pop-library/formcomponent-inputs/implementations/contactus-topics.php:20
+msgid "Website"
+msgstr "网站"
+
+#: .././plugins/gravityforms/pop-library/formcomponent-inputs/implementations/contactus-topics.php:21
+msgid "Others"
+msgstr "其他"
+
+#: .././plugins/gravityforms/pop-library/pagesection-hooks.php:40
+msgid "Send message to:"
+msgstr "发送讯息给："
+
+#: .././plugins/gravityforms/pop-library/pagesection-hooks.php:41
+#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:55
+msgid "Volunteer for:"
+msgstr "志愿者为："
+
+#: .././plugins/gravityforms/pop-library/pagesection-hooks.php:42
+#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:68
+msgid "Flag as inappropriate:"
+msgstr "举报不当内容："
+
+#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:29
+msgid "Volunteer"
+msgstr "当志愿者"
+
+#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:33
+msgid "Flag as inappropriate"
+msgstr "举报不当内容"
+
+#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:37
+msgid "Send message"
+msgstr "发送讯息给："
+
+#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:81
+msgid "Send a message to:"
+msgstr "发送讯息给："
+
+#: .././plugins/gravityforms/pop-library/processors/blockgroups/viewcomponents.php:68
+msgid "Share by email:"
+msgstr "通过电子邮件分享"
+
+#: .././plugins/gravityforms/pop-library/processors/blocks.php:139
+msgid "Sending..."
+msgstr "发送中…"
+
+#: .././plugins/gravityforms/pop-library/processors/blocks.php:154
+msgid "Subscribe to our newsletter:"
+msgstr "加入我们的通讯列表："
+
+#: .././plugins/gravityforms/pop-library/processors/blocks.php:174
+msgid "Take a peek at our regular newsletter campaigns"
+msgstr "预览我们的定期通讯"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
+msgid "Subscribe to our Newsletter?"
+msgstr "订阅我们的定期资讯？"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:31
+msgid "Topic"
+msgstr "话题"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:40
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:44
+msgid "Your Name"
+msgstr "您的名字"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:49
+msgid "Your Email"
+msgstr "您的邮件"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:53
+msgid "To Email(s)"
+msgstr "到这些电子邮件"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:57
+msgid "Subject"
+msgstr "主题"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:61
+msgid "Your Phone number"
+msgstr "您的电话号码"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:31
+msgid "Message"
+msgstr "信息"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:35
+msgid "Additional message"
+msgstr "其他信息"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:39
+msgid "Why do you want to volunteer?"
+msgstr "您为什么要当志愿者？"
+
+#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:43
+msgid "Please explain why this post is inappropriate"
+msgstr "请解释为什么您觉得这个帖子是不恰当的"
+
+#: .././plugins/gravityforms/pop-library/processors/forms/formgroups.php:50
+msgid ""
+"Keep up to date with our community activity through our weekly newsletter."
+msgstr "收到最新的资讯，加入我们的定期通讯列表"
+
+#: .././plugins/gravityforms/pop-library/processors/forms/submit-buttons.php:29
+msgid "Send Message"
+msgstr "发送讯息给："
+
+#: .././plugins/gravityforms/pop-library/processors/forms/submit-buttons.php:33
+msgid "Send Email"
+msgstr "发电子邮件"
+
+#: .././plugins/gravityforms/pop-library/processors/forms/submit-buttons.php:37
+msgid "Subscribe"
+msgstr "订阅"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:33
+msgid "Name is missing."
+msgstr "请填入姓名。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:34
+msgid "Email is missing or format is incorrect."
+msgstr "电子邮件没被填入，或格式不正确。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:35
+msgid "Message is missing."
+msgstr "信息没被填入。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:41
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:47
+msgid "Message sent successfully!"
+msgstr "邮件发送成功！"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:42
+msgid "Thanks for contacting us, we will get in touch with you shortly."
+msgstr "感谢您与我们联系，我们会尽快回答您的疑问。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:49
+msgid "Your message has been sent to the user by email."
+msgstr "您的信息已通过电子邮件发送给该用户。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:54
+msgid "Email sent successfully."
+msgstr "电子邮件已成功被发送。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:55
+msgid "Any more friends who might be interested? Keep sending!"
+msgstr "还有其他朋友会感兴趣吗？请继续发送。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:56
+msgid "To Email(s) missing."
+msgstr "电子邮件没被填入。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:61
+msgid "Awesome! Thanks for taking part!"
+msgstr "谢谢您的参与！"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:62
+msgid ""
+"We have sent a message with your information to the organizers. They should "
+"contact you soon."
+msgstr "我们已经给该组织发送了信息。他们会尽快与您联系。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:63
+msgid "\"Why do you want to volunteer?\" is missing."
+msgstr "“你为什么要当志愿者？”这栏空着。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:68
+msgid "Flag received successfully."
+msgstr "举报已被接收。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:69
+msgid "Noted, we will evaluate your feedback and take appropriate action."
+msgstr "我们已接受你的反映，并会采取适当的行动。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:70
+msgid "\"Description on why this post is inappropriate\" is missing."
+msgstr "“为什么这个帖子是不恰当的”并未填入。"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:75
+msgid "Subscription Successful!"
+msgstr "订阅成功！"
+
+#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:77
+#, php-format
+msgid ""
+"To make sure you get the newsletter, please add <strong>%s</strong> in your "
+"contact list. Thanks!"
+msgstr ""
+"为了确保你得到我们的讯息，请把<strong>%s</strong>加入您的联系人列表中。谢谢！"
+
+#: .././plugins/gravityforms/pop-library/processors/structures/forms/forms.php:65
+#, php-format
+msgid ""
+"Please write an email to <a href=\"mailto:%1$s\">%1$s</a>, or fill in the "
+"form below:"
+msgstr "请写封电子邮件至<a href=\"mailto:%1$s\">%1$s</a>，或填写以下表格："
+
+#: .././plugins/gravityforms/pop-library/processors/structures/forms/forms.php:79
+msgid ""
+"We will send the info below to the organizers, who should then get in touch "
+"with you."
+msgstr "我们将信息发送致以下的组织，他们会和您直接联系。"
+
+#: .././plugins/gravityforms/pop-library/processors/structures/forms/forms.php:89
+msgid ""
+"Based on our users' feedback, we will consider removing this post. You will "
+"receive a confirmation by email."
+msgstr "根据我们用户的反映，我们会考虑删除这个帖子。您将会收到确认的电子邮件。"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:47
+msgid "Insert with Media Player"
+msgstr "用媒体播放器加入"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:65
+msgid "External media files"
+msgstr "外部媒体文件"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:87
+msgid "Save all changes"
+msgstr "保存所有更改"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:88
+msgid "Save, Close and Refresh"
+msgstr "保存，关闭并刷新"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:263
+msgid "Click here to watch the video"
+msgstr "点击观看视频"
+
+#: .././plugins/media-library-assistant/library/functions.php:30
+msgid "Do not add"
+msgstr "不添加"
+
+#: .././plugins/media-library-assistant/library/functions.php:31
+msgid "Add to Resources"
+msgstr "添加到资源"
+
+#: .././plugins/media-library-assistant/library/functions.php:43
+msgid "Resources"
+msgstr "资源"
+
+#: .././plugins/media-library-assistant/library/media.php:14
+msgid "Source"
+msgstr "资源"
+
+#: .././plugins/pop-coreprocessors/pop-library/functions.php:14
+msgid ""
+"Please add the following emails to your contact list, to make sure you "
+"receive our notifications:"
+msgstr "请添加以下电子邮件到您的联系人列表，以确保您会收到我们的通知："
+
+#: .././plugins/public-post-preview/library/functions.php:19
+#: .././pop-library/processors/createupdatepost/forms/formgroups.php:38
+msgid "Preview"
+msgstr "预览"
+
+#: .././plugins/qtranslate-x/library/functions.php:22
+#, php-format
+msgid ""
+"Ops, it seems this content is not available in <strong>%s</strong>. <a href="
+"\"%s\">Would you like to help us translate it?</a>"
+msgstr ""
+"抱歉，看来这内容还未被翻译成<strong>%s</strong>。<a href=\"%s\">想帮我们翻"
+"译？</a>"
+
+#: .././plugins/qtranslate-x/pop-library/processors/formcomponent-inputs/select-formcomponents-inputs.php:25
+msgid "Language"
+msgstr "语言"
+
+#: .././plugins/user-role-editor/library/functions.php:40
+msgid "Member of"
+msgstr "机构"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttoninners.php:43
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttons.php:59
+msgid "Edit membership"
+msgstr "编辑成员类型"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttoninners.php:47
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttons.php:63
+msgid "View all members"
+msgstr "查看所有成员"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/layouts/usermembership/memberprivileges-layouts.php:27
+msgid "Privileges:"
+msgstr "特权："
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/layouts/usermembership/memberstatus-layouts.php:27
+msgid "Status:"
+msgstr "状态："
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/layouts/usermembership/membertags-layouts.php:27
+msgid "Tags:"
+msgstr "标签："
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:16
+msgid "Charity"
+msgstr "慈善机构"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:17
+msgid "Communities"
+msgstr "社群"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:18
+msgid "Company or Corporate"
+msgstr "生意或公司"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:19
+msgid "Government"
+msgstr "政府"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:20
+msgid "Education"
+msgstr "教育"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:21
+msgid "NGO/NPO"
+msgstr "非政府非盈利机构"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:22
+msgid "Social Enterprise"
+msgstr "社会企业"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:23
+msgid "Youth"
+msgstr "青年"
+
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-individuals-base.php:27
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:50
+msgid "Interests"
+msgstr "兴趣"
+
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:31
+msgid "Type"
+msgstr "类型"
+
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:32
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:65
+#: .././pop-library/processors/sidebars/posts/widgetries.php:95
+#: .././pop-library/processors/sidebars/posts/widgetries.php:96
+msgid "Categories"
+msgstr "组别"
+
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:33
+msgid "Contact Person"
+msgstr "联系人"
+
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:34
+msgid "Tel / Fax"
+msgstr "电话／传真"
+
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:145
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:285
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:561
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:755
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:531
+msgid "Full view"
+msgstr "全面"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:569
+msgid "Show Help"
+msgstr "协助"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:574
+msgid "Inviting users to become your members"
+msgstr "邀请成为会员"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:576
+#, php-format
+msgid ""
+"Please click on %s to invite your physical Organization's members to become "
+"your members in the website."
+msgstr "请按 %s来邀请您的组织会员成为网页里您的会员"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:582
+msgid "What is a member?"
+msgstr "什么是成员？"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:583
+msgid "This depends on your Organization. Some examples:<br/>"
+msgstr "这取决于您的组织。一些例子：<br/>"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:585
+msgid "University teachers/students"
+msgstr "大学教授与学生"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:586
+msgid "NGO volunteers"
+msgstr "自愿者"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:587
+msgid "Company staff"
+msgstr "公司职员"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:588
+msgid "etc"
+msgstr "等等"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:593
+msgid "What happens when my Organization has members?"
+msgstr "当我的组织有成员，会发生什么？"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:594
+msgid ""
+"If they have privilege <em>Contribute content</em> on, whenever they post "
+"any content in the website (eg: a new event, article, project, etc) will "
+"also show up under your Organization's profile. If this privilege is off, "
+"they will just appear under \"My members\""
+msgstr ""
+"如果他们有权利<em>贡献内容</em>，每当他们在网站上发布任何内容（如：一个新的活"
+"动、文章、项目等），这些内容也将出现在您组织的档案页。如果您不给予这个权利，"
+"他们只会出现于“我的成员”"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:598
+msgid "Editing current members' status"
+msgstr "编辑目前成员的状态"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:599
+msgid ""
+"The users listed below have declared themselves to be members of your "
+"Organization. You can click on \"Edit Membership\" to edit the settings for "
+"each one of them:"
+msgstr ""
+"下面列出的用户都已声明是您的组织的成員。您可以点击“编辑成員”来设置他们："
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:607
+msgid ""
+"<em>Active</em> if the user is truly your member, or <em>Rejected</em> "
+"otherwise.<br/><em>Rejected</em> users will not appear as your "
+"Organization's members, or contribute content."
+msgstr ""
+"如果此用户是您的成员， 状态为<em>活跃</em>，如果不是，请<em>拒绝</em>他。<br/"
+">被<em>拒绝</em>的用户不会被显示为您的组织成员，发布的内容也不会显示在您的档"
+"案页。"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:614
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:45
+msgid "Privileges"
+msgstr "特权"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:615
+msgid ""
+"<em>Contribute content</em> will add the member's content to your profile."
+msgstr "<em>贡献内容</em>会把此成员添加的内容也发布在您的档案页。"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:622
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:46
+msgid "Tags"
+msgstr "标签"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:623
+msgid "What is the type of relationship from this member to your Organization."
+msgstr "这成员和您的组织是什么类型的关系？"
+
+#: .././plugins/user-role-editor/pop-library/processors/controls/anchor-controls.php:28
+msgid "Invite new members"
+msgstr "邀请新成员"
+
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:58
+msgid "Organization Categories"
+msgstr "组织分类"
+
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:67
+msgid "Organization Types"
+msgstr "组织类型"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:31
+msgid "member"
+msgstr "成员"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:32
+msgid "members"
+msgstr "成员"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:37
+msgid "organization"
+msgstr "组织"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:38
+msgid "organizations"
+msgstr "组织"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:43
+msgid "individual"
+msgstr "个人"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:44
+msgid "individuals"
+msgstr "个人"
+
+#: .././plugins/user-role-editor/pop-library/processors/messages.php:25
+msgid "No details"
+msgstr "没有细节"
+
+#: .././plugins/user-role-editor/pop-library/processors/sidebars/users/widgetries.php:48
+msgid "Organization"
+msgstr "组织团体"
+
+#: .././plugins/user-role-editor/pop-library/processors/sidebars/users/widgetries.php:49
+msgid "Individual"
+msgstr "个人"
+
+#: .././plugins/user-role-editor/pop-library/processors/structures/carousels/carousel-controls.php:48
+msgid "Members"
+msgstr "成员"
+
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:43
+#: .././pop-library/processors/sidebars/users/widgetries.php:38
+msgid "User"
+msgstr "用户"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-highlight.php:31
+#, php-format
+msgid "Highlight from “%s”"
+msgstr "“%s”的摘要"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-link-utils.php:16
+msgid "The content cannot be empty"
+msgstr "内容未被填入"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-link-utils.php:17
+msgid "The link cannot be empty"
+msgstr "链接未被填入"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-link-utils.php:25
+msgid "Invalid Link URL"
+msgstr "无效的链接网址"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:42
+msgid "No post has been referenced"
+msgstr "没有帖子被引用"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:47
+msgid "Only one post can be referenced"
+msgstr "只有一个帖子可以被引用"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:57
+msgid "The referenced post does not exist"
+msgstr "引用的帖子并不存在"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:64
+msgid "The referenced post is not published yet"
+msgstr "引用的帖子尚未发布"
+
+#: .././pop-library/dataload/actionexecuters/referencepermalink-createupdate-base.php:17
+#, php-format
+msgid "<a href=\"%s\" %s>Click here to view it</a>."
+msgstr "<a href=\"%s\" %s>点击这里查看</a>。"
+
+#: .././pop-library/dataload/actionexecuters/referencepermalink-createupdate-base.php:24
+msgid ""
+"Please note that the status is still \"Draft\", so the post is not online "
+"yet."
+msgstr "请注意，状态仍然是“草案”，帖子尚未被发布。"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:66
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .././pop-library/dataload/iohandlers/pagetabs/404.php:22
+msgid "Page not found!"
+msgstr "找不到网页！"
+
+#: .././pop-library/dataload/iohandlers/pagetabs/home.php:22
+#: .././pop-library/processors/pagesections/pagesections.php:449
+#: .././pop-library/processors/pagesections/pagesections.php:538
+msgid "Home"
+msgstr "主页"
+
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:19
+msgid "Extended feed"
+msgstr "扩展式提要"
+
+#: .././pop-library/processors/abstract-classes/layouts/posts/simpleview-previewpostlayouts-base.php:95
+msgid "link by"
+msgstr "链接"
+
+#: .././pop-library/processors/abstract-classes/layouts/volunteertag-base.php:22
+msgid "Volunteer!"
+msgstr "志愿者！"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:221
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:387
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:78
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:236
+msgid "Latest content"
+msgstr "最新内容"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:235
+#: .././pop-library/processors/structures/tables/tables.php:59
+msgid "Content"
+msgstr "内容"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:236
+msgid "My Content"
+msgstr "我的内容"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:237
+msgid "Add Content"
+msgstr "添加内容"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:244
+#, php-format
+msgid "%s:"
+msgstr "%s："
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:265
+msgid ""
+"Aiyoooo, it seems there is nothing here. Where else would you like to go?"
+msgstr "糟糕，无法搜索任何资讯。请到另一个主题"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:285
+msgid "Ops, this page doesn't exist!"
+msgstr "不好意思，该网页不存在"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:66
+msgid "Show description"
+msgstr "显示描述"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:121
+#: .././pop-library/processors/blockgroups/blockgroups.php:122
+#: .././pop-library/processors/blockgroups/blockgroups.php:461
+#: .././templates/hover.php:4 .././templates/navigator.php:4
+msgid "Close"
+msgstr "关闭"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:512
+msgid "Log in or Register"
+msgstr "登录或注册"
+
+#: .././pop-library/processors/blockgroups/carousels-toplevel.php:60
+#, php-format
+msgid "%sBack"
+msgstr "%s回去"
+
+#: .././pop-library/processors/blockgroups/carousels-toplevel.php:67
+#, php-format
+msgid "%sNavigator"
+msgstr "%s导航"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:569
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:763
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:539
+msgid "Grid"
+msgstr "格"
+
+#: .././pop-library/processors/blocks/contents.php:42
+msgid "Go to Full Profile "
+msgstr "读取完整档案"
+
+#: .././pop-library/processors/blocks/sections-utils.php:38
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s（%2$s）"
+
+#: .././pop-library/processors/blocks/sections.php:2409
+msgid "View all Content "
+msgstr "读取完整档案"
+
+#: .././pop-library/processors/blocks/sections.php:3248
+msgid "Latest Content"
+msgstr "内容"
+
+#: .././pop-library/processors/blocks/sections.php:3252
+msgid "Our Sponsors"
+msgstr "我们的赞助商"
+
+#: .././pop-library/processors/blocks/sections.php:3256
+msgid "Our Supporters"
+msgstr "我们的支持者"
+
+#: .././pop-library/processors/blocks/sections.php:3263
+msgid "Who we are"
+msgstr "我们的支持者"
+
+#: .././pop-library/processors/buttons/buttoninners.php:44
+#: .././pop-library/processors/buttons/post-buttons.php:96
+msgid "Add Highlight"
+msgstr "提取摘要"
+
+#: .././pop-library/processors/buttons/buttons.php:61
+msgid "View"
+msgstr "游览"
+
+#: .././pop-library/processors/controls/anchor-controls.php:31
+msgid "FAQ: Adding Content"
+msgstr "常见问题：添加内容"
+
+#: .././pop-library/processors/controls/anchor-controls.php:35
+msgid "FAQ: Registration"
+msgstr "常见问题：注册"
+
+#: .././pop-library/processors/controls/anchor-controls.php:39
+msgid "Add Post"
+msgstr "添加新贴"
+
+#: .././pop-library/processors/controls/codes.php:29
+msgid "Important?"
+msgstr "重不重要？"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/buttongroup-formcomponents-inputs.php:46
+msgid "Section"
+msgstr "截面"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
+msgid "Keep as draft?"
+msgstr "保持草稿状态？"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess-description.php:18
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess.php:18
+msgid "Free access"
+msgstr "免费使用"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess-description.php:20
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess.php:20
+msgid "Behind a paywall"
+msgstr "付费墙"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess-description.php:22
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess.php:22
+msgid "User account needed"
+msgstr "需要帐户"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:72
+msgid "Sections"
+msgstr "截面"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:77
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:276
+#: .././pop-library/processors/sidebars/posts/widgetries.php:97
+msgid "Applies to"
+msgstr "适用于"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:81
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/select-formcomponents-inputs.php:31
+#: .././pop-library/processors/sidebars/posts/widgetries.php:94
+msgid "Access type"
+msgstr "使用类型"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/select-formcomponents-inputs.php:27
+msgid "Publishing status"
+msgstr "发布状态"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/text-formcomponents-inputs.php:27
+msgid "Title"
+msgstr "标题"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:208
+msgid ""
+"'Draft': still editing, our website admin will not publish it yet. 'Finished "
+"editing': our website admin will publish it (almost) immediately. 'Already "
+"published': our website admin has published it, post is already online."
+msgstr ""
+"“草稿”：编辑当中，我们的网站管理员不会把它放在网上。 “完成编辑”：我们的网站管"
+"理员会把它发布在网站上。 “已公布”：此帖已经发布在网站上。"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:212
+msgid ""
+"The URL from any webpage. (Not all websites can be embedded: Facebook, "
+"Dropbox and others do not permit it, and browsers do not embed websites on "
+"HTTP for security reasons.)"
+msgstr ""
+"填入任何HTTPS网页的URL。 （并不是所有的网站可以嵌入：Facebook、Dropbox并不允"
+"许，浏览器也因为安全问题不嵌入HTTP的网站。）"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:216
+msgid "Please copy/paste here the title from the original article."
+msgstr "请复制/粘贴原帖的主题。"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:220
+msgid "Please copy/paste any important content from the original post."
+msgstr "请复制/粘贴原帖的重要内容。"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:239
+msgid "Copy/paste here..."
+msgstr "复制/粘贴在这里..."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:261
+msgid "Select categories"
+msgstr "选择类别"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:268
+msgid "Select sections"
+msgstr "选择截面"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:294
+msgid "Highlight from:"
+msgstr "提取摘要："
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:299
+msgid "Highlight:"
+msgstr "提取摘要："
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:74
+msgid "Featured Image"
+msgstr "主要图片"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:75
+msgid "Meta information"
+msgstr "Meta信息"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:76
+msgid "Link details"
+msgstr "链接详细信息"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:77
+msgid "Post details"
+msgstr "帖子详细信息"
+
+#: .././pop-library/processors/elements/codes.php:68
+msgid "Here you will find:"
+msgstr "在这里，你会发现："
+
+#: .././pop-library/processors/elements/codes.php:105
+msgid "Many thanks to our sponsors and supporters."
+msgstr "非常感谢我们的赞助商和支持者。"
+
+#: .././pop-library/processors/elements/codes.php:109
+#, php-format
+msgid ""
+"If you or your organization wishes to participate, please visit <a href=\"%s"
+"\">%s</a>."
+msgstr "如果您或您的组织希望参与，请前往<a href=\"%s\">%s</a>。"
+
+#: .././pop-library/processors/elements/codes.php:129
+msgid "Loading data"
+msgstr "加载数据"
+
+#: .././pop-library/processors/elements/codes.php:138
+msgid "Many thanks to our volunteers."
+msgstr "非常感谢我们的志愿者。"
+
+#: .././pop-library/processors/elements/codes.php:142
+#, php-format
+msgid "If you'd like to join us, please visit <a href=\"%s\">%s</a>."
+msgstr "如果您想加入我们，请前往<a href=\"%s\">%s</a>。"
+
+#: .././pop-library/processors/elements/codes.php:155
+#, php-format
+msgid ""
+"<strong>#Trending tags are:</strong><br/>Those tags which appear in the "
+"highest number of posts, during the last %s days."
+msgstr ""
+"<strong>流行标签是：</strong><br/>在过去%s天，出现在数量最多的的帖子的标签。"
+
+#: .././pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:40
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:25
+msgid "Volunteers Needed?"
+msgstr "需要志愿者？"
+
+#: .././pop-library/processors/forms/formgroups.php:60
+msgid ""
+"Do you need volunteers? Each time a user applies to volunteer, you will get "
+"a notification email with the volunteer's contact information."
+msgstr ""
+"您需要志愿者吗？每当用户注册为志愿者，您将收到电邮通知以得到该志愿者的联络资"
+"料。"
+
+#: .././pop-library/processors/forms/submit-buttons.php:25
+msgid "Search"
+msgstr "搜索"
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:27
+msgid "Show comments, responses and highlights"
+msgstr "查看评论、回复和摘要"
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:28
+msgid "Hide comments, responses and highlights"
+msgstr "隐藏评论、回复和摘要"
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:54
+msgid "("
+msgstr "（"
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:65
+msgid ")"
+msgstr "）"
+
+#: .././pop-library/processors/layouts/feed/buttons.php:38
+msgid "Comments, responses and highlights"
+msgstr "评论、回复和摘要"
+
+#: .././pop-library/processors/layouts/posts/previewpostlayouts.php:685
+msgid "added by"
+msgstr " "
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:74
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:75
+msgid "content"
+msgstr "内容"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:81
+msgid "link"
+msgstr "链接"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:82
+msgid "links"
+msgstr "链接"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:88
+msgid "extract"
+msgstr "摘要"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:89
+msgid "extracts"
+msgstr "摘要"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:95
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:96
+msgid "posts"
+msgstr "帖子"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:102
+msgid "user"
+msgstr "用户"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:103
+msgid "users"
+msgstr "用户"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:115
+msgid "follower"
+msgstr "跟随者"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:116
+msgid "followers"
+msgstr "跟随者"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:121
+msgid "sponsor"
+msgstr "赞助商"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:122
+msgid "sponsors"
+msgstr "赞助商"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:127
+msgid "tag"
+msgstr "标签"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:128
+msgid "tags"
+msgstr "标签"
+
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:125
+msgid "FAQs"
+msgstr "常见问题解答"
+
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:141
+msgid "Add a comment for:"
+msgstr "添加评论:"
+
+#: .././pop-library/processors/pagesections/pagesections.php:355
+msgid "Toggle Navigation"
+msgstr "切换导航"
+
+#: .././pop-library/processors/pagesections/pagesections.php:356
+msgid "Toggle Browsing Tabs"
+msgstr "切换浏览标签"
+
+#: .././pop-library/processors/pagesections/pagesections.php:451
+msgid "Toggle Search"
+msgstr "切换搜索"
+
+#: .././pop-library/processors/pagesections/pagesections.php:457
+#, php-format
+msgid "Powered by <a href=\"%s\">the PoP framework</a>"
+msgstr "<a href=\"%s\">PoP Framework</a>驱动"
+
+#: .././pop-library/processors/pagesections/pagesections.php:460
+msgid "About us"
+msgstr "关于我们"
+
+#: .././pop-library/processors/pagesections/pagesections.php:461
+msgid "My Profile"
+msgstr "我的档案"
+
+#: .././pop-library/processors/pagesections/pagesections.php:464
+msgid "Settings"
+msgstr "设置"
+
+#: .././pop-library/processors/pagesections/pagesections.php:465
+msgid "Notifications"
+msgstr "通知"
+
+#: .././pop-library/processors/pagesections/pagesections.php:466
+msgid "<em>Many thanks to our <strong>Sponsors and Supporters</strong>:</em>"
+msgstr "<em>非常感谢我们的<strong>赞助商和支持者</strong>：</em>"
+
+#: .././pop-library/processors/pagesections/pagesections.php:467
+msgid "Our Sponsors and Supporters"
+msgstr "我们的赞助商和支持者"
+
+#: .././pop-library/processors/pagesections/pagesections.php:469
+#: .././pop-library/processors/pagesections/pagesections.php:474
+#, php-format
+msgid "View all <a href=\"%s\">%s</a>"
+msgstr "查看所有<a href=\"%s\">%s</a>"
+
+#: .././pop-library/processors/pagesections/pagesections.php:483
+msgid "Add content"
+msgstr "添加内容"
+
+#: .././pop-library/processors/pagesections/pagesections.php:484
+msgid "Add new..."
+msgstr "添加新的。。。"
+
+#: .././pop-library/processors/pagesections/pagesections.php:487
+#, php-format
+msgid "Your account in %s"
+msgstr "您在%s的帐户"
+
+#: .././pop-library/processors/pagesections/pagesections.php:540
+#, php-format
+msgid "Open %s in a new tab"
+msgstr "在新标签页中打开%s"
+
+#: .././pop-library/processors/pagesections/pagesections.php:543
+msgid "Toggle full screen"
+msgstr "切换全屏"
+
+#: .././pop-library/processors/pagesections/pagesections.php:544
+msgid "Open in new window"
+msgstr "在新窗口打开"
+
+#: .././pop-library/processors/pagesections/tabpane-pagesections.php:871
+msgid "Ops, there's nothing here!"
+msgstr "不好意思，这里没东西"
+
+#: .././pop-library/processors/pagesections/tabpane-pagesections.php:873
+msgid "<p>We couldn't find anything under this URL...</p>"
+msgstr "<p>在此网址下，我们无法找到任何东西...</p>"
+
+#: .././pop-library/processors/settings/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Alright, everything set up"
+msgstr "好吧，一切都已设定好了"
+
+#: .././pop-library/processors/settings/messagefeedbacks/messagefeedbacks-layouts.php:31
+msgid "Redirecting, please wait..."
+msgstr "重定向，请稍候..."
+
+#: .././pop-library/processors/sidebars/menus/widgetries.php:36
+msgid "Section links"
+msgstr "截面链接"
+
+#: .././pop-library/processors/sidebars/messages.php:25
+msgid "No Categories"
+msgstr "无组别"
+
+#: .././pop-library/processors/sidebars/widgetries.php:63
+msgid "Highlights"
+msgstr "摘要"
+
+#: .././pop-library/processors/sidebars/widgetries.php:65
+msgid "Highlighted from"
+msgstr "取摘要"
+
+#: .././pop-library/processors/structures/carousels/carousel-controls.php:54
+msgid "Users"
+msgstr "用户"
+
+#: .././pop-library/processors/structures/tables/tables.php:66
+#: .././pop-library/processors/structures/tables/tables.php:73
+#: .././pop-library/processors/structures/tables/tables.php:80
+msgid "Date"
+msgstr "日期"
+
+#: .././pop-library/utils.php:143
+#, php-format
+msgid "Welcome to %s!"
+msgstr "欢迎来到%s！"
+
+#: .././templates/addons.php:23
+msgid "Full size"
+msgstr "全尺寸"
+
+#: .././templates/addons.php:24
+msgid "Maximize"
+msgstr "最大化"
+
+#: .././templates/addons.php:25
+msgid "Minimize"
+msgstr "最小化"
+
+#: .././templates/header.php:15
+#, php-format
+msgid "%s latest posts"
+msgstr "%s 最新帖子"
+
+#: .././templates/header.php:16
+#, php-format
+msgid "%s latest comments"
+msgstr "%s 最新评论"
+
+#: .././templates/header.php:41
+#, php-format
+msgid "View %1$s profile and get in touch through %2$s."
+msgstr "见%1$s 及联络 %2$s."
+
+#: .././templates/header.php:44
+#, php-format
+msgid "Entries tagged “%1$s” in %2$s."
+msgstr "在%2$s被标记“%1$s”的帖子。"
+
+#: .././templates/loading-screen.php:12
+msgid "Loading pure awesomeness"
+msgstr "正在加载"
+
+#: .././templates/loading-screen.php:13
+msgid "please wait..."
+msgstr "请稍候。。。"
+
+#: .././validation.php:89
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:94
+msgid ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+
+#: .././validation.php:98
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Core Processors</b> installed, "
+"or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Core Processors</b> installed, "
+"or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#: .././validation.php:102
+msgid ""
+"Error: <b>Events Manager PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>Events Manager PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:106
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>Events Manager PoP Processors</b> "
+"installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>Events Manager PoP Processors</b> "
+"installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#: .././validation.php:110
+msgid ""
+"Error: <b>User Role Editor PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>User Role Editor PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"http://wordpress."
+"org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:114
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>User Role Editor PoP Processors</b> "
+"installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>User Role Editor PoP Processors</b> "
+"installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#: .././validation.php:118
+msgid ""
+"Error: <b>PhotoSwipe for PoP</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PhotoSwipe for PoP</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+
+#: .././validation.php:122
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PhotoSwipe for PoP</b> installed, or "
+"otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PhotoSwipe for PoP</b> installed, or "
+"otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#~ msgid "Content tagged with “#%s”"
+#~ msgstr "被标签为“#%s”"
+
+#~ msgid "Section(s)"
+#~ msgstr "截面"
+
+#~ msgid "View/Preview"
+#~ msgstr "查看/預覽"
+
+#~ msgid "Project"
+#~ msgstr "項目"
+
+#~ msgid "Projects"
+#~ msgstr "工程项目"
+
+#~ msgid "Story"
+#~ msgstr "故事"
+
+#~ msgid "Stories"
+#~ msgstr "故事"
+
+#~ msgid "Announcement"
+#~ msgstr "公告"
+
+#~ msgid "Announcements"
+#~ msgstr "公告"
+
+#~ msgid "Discussion"
+#~ msgstr "讨论"
+
+#~ msgid "Discussions"
+#~ msgstr "讨论"
+
+#~ msgid "Featured article"
+#~ msgstr "推荐文章"
+
+#~ msgid "Featured articles"
+#~ msgstr "推荐文章"
+
+#~ msgid "Blog entry"
+#~ msgstr "部落客输入"
+
+#~ msgid "Blog entries"
+#~ msgstr "部落客输入"
+
+#~ msgid "Resource"
+#~ msgstr "资源"
+
+#~ msgid "Organizations"
+#~ msgstr "组织"
+
+#~ msgid "Individuals"
+#~ msgstr "个人"
+
+#~ msgid "Sponsor"
+#~ msgstr "赞助商"
+
+#~ msgid "Sponsors"
+#~ msgstr "赞助商"
+
+#~ msgid "Featured Community"
+#~ msgstr "特色社区"
+
+#~ msgid "Please %s or register %s / %s to access your %s."
+#~ msgstr "请 %s或注册%s / %s 以登入您的%s."
+
+#~ msgid ""
+#~ "Your account has no access to this functionality. Please <a href=\"%s"
+#~ "\">log in</a> with a different user account."
+#~ msgstr "您的户口无法登入。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid ""
+#~ "Your account has no permission to edit this %s. Please <a href=\"%s\">log "
+#~ "in</a> with a different user account."
+#~ msgstr "您的户口无权编辑这%s。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid "No categories"
+#~ msgstr "无组别"
+
+#, fuzzy
+#~ msgid "past Events"
+#~ msgstr "过往活动"
+
+#, fuzzy
+#~ msgid "project"
+#~ msgstr "項目"
+
+#, fuzzy
+#~ msgid "projects"
+#~ msgstr "工程项目"
+
+#, fuzzy
+#~ msgid "story"
+#~ msgstr "故事"
+
+#, fuzzy
+#~ msgid "stories"
+#~ msgstr "故事"
+
+#, fuzzy
+#~ msgid "announcement"
+#~ msgstr "公告"
+
+#, fuzzy
+#~ msgid "announcements"
+#~ msgstr "公告"
+
+#, fuzzy
+#~ msgid "discussion"
+#~ msgstr "讨论"
+
+#, fuzzy
+#~ msgid "discussions"
+#~ msgstr "讨论"
+
+#, fuzzy
+#~ msgid "featured article"
+#~ msgstr "推荐文章"
+
+#, fuzzy
+#~ msgid "featured articles"
+#~ msgstr "推荐文章"
+
+#, fuzzy
+#~ msgid "blog entry"
+#~ msgstr "部落客输入"
+
+#, fuzzy
+#~ msgid "blog entries"
+#~ msgstr "部落客输入"
+
+#, fuzzy
+#~ msgid "resource"
+#~ msgstr "资源"
+
+#, fuzzy
+#~ msgid "resources"
+#~ msgstr "资源"
+
+#~ msgid "Latest"
+#~ msgstr "最近"
+
+#~ msgid "The Drivers"
+#~ msgstr "驾驶人士"
+
+#~ msgid "The Advisors"
+#~ msgstr "顾问"
+
+#~ msgid "The Volunteers"
+#~ msgstr "自愿者"
+
+#~ msgid "Links"
+#~ msgstr "链接"
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "谁能编辑内容在%s?"
+
+#~ msgid "Anyone."
+#~ msgstr "任何人"
+
+#~ msgid "Is it free?"
+#~ msgstr "请问是免费的吗？"
+
+#~ msgid "Yes."
+#~ msgstr "是的"
+
+#~ msgid "Do I need to log in to add content?"
+#~ msgstr "我需要登入以添加您的内容吗？"
+
+#~ msgid "Yes, only registered users can add content."
+#~ msgstr "是的，只有注册用户可添加内容"
+
+#~ msgid "Do the users of the website also need to log in to read my content?"
+#~ msgstr "请问本网站读者也需要登入才能阅读我的内容吗？"
+
+#~ msgid "No, anyone can access the website and read all the content."
+#~ msgstr "不需要。任何人都可游览本网页以及阅读内容。"
+
+#~ msgid "Will my content be published immediately?"
+#~ msgstr "请问我的内容会立即发布吗？"
+
+#~ msgid ""
+#~ "No. Before that, our moderators must approve the content, in order to "
+#~ "avoid spam and inappropriate content."
+#~ msgstr ""
+#~ "不会。内容发布之前，我们的版主将会审查内容以防止发布不道德与不符合的内容。"
+
+#~ msgid "Can I share my post with more authors?"
+#~ msgstr "请问我可以跟更多的作者分享我的帖子吗？"
+
+#, fuzzy
+#~ msgid ""
+#~ "Yes. In field 'Authors' you can add more users to own the post. They will "
+#~ "both appear as authors and have full editing access."
+#~ msgstr ""
+#~ "当然可以。请在“作者“里添加更多的用户（如组织或个人）来拥有您的帖子。一旦添"
+#~ "加他们为”作者“，他们也能拥有编辑的权限。"
+
+#~ msgid "Can I request volunteers?"
+#~ msgstr "请问我能要求志愿者吗？"
+
+#, fuzzy
+#~ msgid ""
+#~ "Yes. Choose 'Yes' in field 'Volunteers needed?', each time someone "
+#~ "applies to volunteer you will receive an email immediately with the "
+#~ "person's information.<br/><br/>We do not engage the volunteer in any way."
+#~ msgstr ""
+#~ "是的。请点击“要求志愿者”，任何的志愿者加入您的项目，您会立即收到一封电邮，"
+#~ "电邮里将出现志愿者的基本个人资料。<br/><br/>我们不需要任何的志愿者。"
+
+#~ msgid "Is it free to register in the website?"
+#~ msgstr "请问会员注册是免费的吗？"
+
+#~ msgid "What are the benefits of registering?"
+#~ msgstr "注册为会员会得到什么好处？"
+
+#, fuzzy
+#~ msgid ""
+#~ "You will be able to post all your content, look for volunteers, and "
+#~ "appear in the User Directory."
+#~ msgstr ""
+#~ "您将可发表或发布您的内容（如活动，项目，讨论等），要求志愿者，以及内容出现"
+#~ "在用户的目录里。"
+
+#, fuzzy
+#~ msgid "Important information"
+#~ msgstr "组织团体"
+
+#~ msgid "The website is currently in beta, please forgive all the bugs."
+#~ msgstr "该网站属于测试阶段，如有系统错误，请原谅。"
+
+#~ msgid "In response to:"
+#~ msgstr "回复给："
+
+#~ msgid ""
+#~ "MESYM.com is a platform for environmental movements in Malaysia. There "
+#~ "are many good actions being done out there. Our goal is to bring them "
+#~ "together. We connect the green dots."
+#~ msgstr ""
+#~ "MESYM.com 是一个推动马来西亚环境保护的平台。这里拥有许多您可以参与的环境保"
+#~ "护活动与项目。我们最主要的目的为聚集这些热爱环境人士在这个平台上。我们把马"
+#~ "来西亚绿色勇士们联系起来。"
+
+#~ msgid ""
+#~ " Join our environmental community and find out who is doing what, where "
+#~ "and when."
+#~ msgstr "现在就参与我们的团队，开始寻找绿色活动，预知更多的详情与时间。"
+
+#~ msgid " on %s."
+#~ msgstr "关于%s."
+
+#~ msgid "Add your %s"
+#~ msgstr "输入%s "
+
+#~ msgid "Upcoming and Past Events"
+#~ msgstr "最新与过去的活动"
+
+#~ msgid "Environmental Projects"
+#~ msgstr "环境保护活动项目"
+
+#~ msgid "Environmental Stories"
+#~ msgstr "关于环境保护的故事"
+
+#~ msgid "Environmental Discussions"
+#~ msgstr "环境保护讨论事项"
+
+#~ msgid "Environmental Announcements"
+#~ msgstr "环境保护公告"
+
+#~ msgid "Featured Articles"
+#~ msgstr "专栏"
+
+#~ msgid "MESYM Blogs"
+#~ msgstr "MESYM部落格"
+
+#~ msgid "Environmental Resources"
+#~ msgstr "环境资源"
+
+#~ msgid "People"
+#~ msgstr "人"
+
+#~ msgid "Organization Profile"
+#~ msgstr "组织结构"
+
+#~ msgid "Individual Profile"
+#~ msgstr "个人结构"
+
+#~ msgid "Title*"
+#~ msgstr "题目＊"
+
+#~ msgid "Where will my content appear?"
+#~ msgstr "请问我的内容会出现在哪里？"
+
+#~ msgid ""
+#~ "As soon as it gets published, it will appear in our homepage, in the "
+#~ "corresponding section (Events, Projects, etc), and in your profile.<br/"
+#~ "><br/>In addition, if you are member of any Community, it will also "
+#~ "appear under their profile."
+#~ msgstr ""
+#~ "如内容以发布，它将会出现在您的主页里的相关截面（如活动，项目等），以及您的"
+#~ "简介里。<br/><br/>此外，如果您也是社区里的会员，内容也会出现在他们的简介"
+#~ "里。"
+
+#~ msgid "What is the User Directory?"
+#~ msgstr "什么是会员目录？"
+
+#~ msgid "What is the difference between Organization/Individual accounts?"
+#~ msgstr "请问组织账号与个人账号有什么分别？"
+
+#~ msgid ""
+#~ "Organizations can have 'members' in the website, and each piece of "
+#~ "content posted by any member will also appear under the Organization "
+#~ "profile page."
+#~ msgstr ""
+#~ "组织账号能够拥有自己的会员，以及任何的会员发表将出现在组织的简介里。"
+
+#~ msgid "What's going on all over Malaysia."
+#~ msgstr "马来西亚怎么回事了？"
+
+#~ msgid "Volunteer for projects from many NGOs, or even start your own!"
+#~ msgstr "有来自非政府组织项目的志愿者，或着自己组织项目。"
+
+#~ msgid ""
+#~ "After volunteering, post your photo blog, share your experience with the "
+#~ "world."
+#~ msgstr ""
+#~ "当您参与了志愿者，您可以上传你的照片日记，分享您的感想与经历给全世界"
+
+#~ msgid "Have vacancies? Need green-minded people? Post it here."
+#~ msgstr "有空缺吗？想要认识更多的绿色爱好者？请在这里发帖"
+
+#~ msgid ""
+#~ "Anything and everything: what do you want to express concerning the "
+#~ "environment situation in Malaysia?"
+#~ msgstr "任何事物： 您有什么想表达关于马来西亚的环境保护的形势？"
+
+#~ msgid ""
+#~ "Browse the living database of Organizations and find out who is doing "
+#~ "what, when and where."
+#~ msgstr "游览我们的组织资料库，知道更多活动，时间与地点。"
+
+#~ msgid "Featured Organizations"
+#~ msgstr "精选组织团体"
+
+#~ msgid "More %s"
+#~ msgstr "%s 更多"
+
+#~ msgid "Related %s"
+#~ msgstr "%s相关"
+
+#~ msgid "Search Results for:"
+#~ msgstr "搜索结果："
+
+#~ msgid "Ops, nothing found here!"
+#~ msgstr "不好意思，没搜索到任何东西"
+
+#~ msgid "Apply"
+#~ msgstr "申请"
+
+#~ msgid "From"
+#~ msgstr "从"
+
+#~ msgid "To"
+#~ msgstr "给"
+
+#~ msgid "Su"
+#~ msgstr "周日"
+
+#~ msgid "Mo"
+#~ msgstr "周一"
+
+#~ msgid "Tu"
+#~ msgstr "周二"
+
+#~ msgid "We"
+#~ msgstr "周三"
+
+#~ msgid "Th"
+#~ msgstr "周四"
+
+#~ msgid "Fr"
+#~ msgstr "周五"
+
+#~ msgid "Sa"
+#~ msgstr "周六"
+
+#~ msgid "January"
+#~ msgstr "一月"
+
+#~ msgid "February"
+#~ msgstr "二月"
+
+#~ msgid "April"
+#~ msgstr "四月"
+
+#~ msgid "May"
+#~ msgstr "五月"
+
+#~ msgid "June"
+#~ msgstr "六月"
+
+#~ msgid "July"
+#~ msgstr "七月"
+
+#~ msgid "August"
+#~ msgstr "八月"
+
+#~ msgid "September"
+#~ msgstr "九月"
+
+#~ msgid "December"
+#~ msgstr "十二月"
+
+#, fuzzy
+#~ msgid "My Organizations"
+#~ msgstr "Organisasi-organisasi"
+
+#~ msgid "F jS, Y"
+#~ msgstr "F jS, Y"
+
+#~ msgid "F, Y"
+#~ msgstr "F, Y"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "j M Y"
+#~ msgstr "j M Y"

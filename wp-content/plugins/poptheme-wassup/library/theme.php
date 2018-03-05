@@ -1,6 +1,6 @@
 <?php
 
-// Function needed to obtain the stylesheet URI as pointint to the origin (the website) before the URI gets replaced with the CDN in wp-content/plugins/pop-aws/library/cdn.php function pop_aws_cdn_assetsrc_init()
+// Function needed to obtain the stylesheet URI as pointing to the origin (the website) before the URI gets replaced with the CDN in wp-content/plugins/pop-aws/library/cdn.php function pop_aws_cdn_assetsrc_init()
 // Copied from wp-includes/theme.php
 function get_origin_stylesheet_directory_uri() {
 // function get_stylesheet_directory_uri() {

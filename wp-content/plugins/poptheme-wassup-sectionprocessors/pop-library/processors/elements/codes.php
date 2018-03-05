@@ -64,8 +64,8 @@ class GD_Custom_Template_Processor_Codes extends GD_Template_Processor_CodesBase
 					'<div class="bg-info text-info">%s</div>', 
 					sprintf(
 						__('We are constantly on the lookout for worthy, knowledgeable and experienced people who sympathize with our cause and want to empower us. If you are such a person, please <a href="%s">%s</a>.', 'poptheme-wassup-sectionprocessors'),
-						get_permalink(POPTHEME_WASSUP_GF_PAGE_CONTACTUS),
-						get_the_title(POPTHEME_WASSUP_GF_PAGE_CONTACTUS)
+						get_permalink(POP_GENERICFORMS_PAGE_CONTACTUS),
+						get_the_title(POP_GENERICFORMS_PAGE_CONTACTUS)
 					)
 				);
 

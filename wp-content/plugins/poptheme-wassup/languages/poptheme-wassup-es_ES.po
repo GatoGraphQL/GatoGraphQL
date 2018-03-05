@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PoP Theme Wassup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-01 14:53+0800\n"
-"PO-Revision-Date: 2018-02-28 13:34+0800\n"
+"POT-Creation-Date: 2018-03-05 12:34+0800\n"
+"PO-Revision-Date: 2018-03-05 12:34+0800\n"
 "Last-Translator: Leo\n"
 "Language-Team: Leo Jun-E <leo@getpop.org>\n"
 "Language: es\n"
@@ -578,7 +578,7 @@ msgstr "Evento pasado"
 msgid "The address was not found on the map"
 msgstr "La dirección no se encontró en el mapa"
 
-#: .././plugins/events-manager/library/functions.php:499
+#: .././plugins/events-manager/library/functions.php:502
 #: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:38
 #: .././plugins/events-manager/pop-library/processors/buttons/post-buttons.php:68
 #: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:26
@@ -589,7 +589,6 @@ msgid "Event"
 msgstr "Evento"
 
 #: .././plugins/events-manager/library/rss.php:127
-#: .././plugins/gravityforms/pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:16
 #, php-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -615,7 +614,7 @@ msgstr "Ubicación(es) para:"
 msgid "Add location"
 msgstr "Añadir ubicación"
 
-#: .././plugins/events-manager/pop-library/pagesection-hooks.php:173
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:175
 msgid "View all events"
 msgstr "Ver todos los eventos"
 
@@ -827,7 +826,7 @@ msgstr "evento"
 msgid "events"
 msgstr "eventos"
 
-#: .././plugins/events-manager/pop-library/processors/layouts/posts/previewpostlayouts.php:394
+#: .././plugins/events-manager/pop-library/processors/layouts/posts/previewpostlayouts.php:404
 #: .././pop-library/processors/layouts/posts/previewpostlayouts.php:697
 msgid "posted by"
 msgstr "publicado por"
@@ -934,293 +933,6 @@ msgstr "Cuándo"
 msgid "Status"
 msgstr "Estado"
 
-#: .././plugins/gravityforms/library/notifications.php:69
-#, php-format
-msgid "Notification from %s"
-msgstr "Notificación de %s"
-
-#: .././plugins/gravityforms/plugins/pop-emailsender/library/implementations/email-newslettertemplates.php:33
-#, php-format
-msgid "<a href=\"%s\">Unsubscribe</a> from this newsletter."
-msgstr "<a href=\"%s\">Desuscribirse</a> de esta newsletter."
-
-#: .././plugins/gravityforms/pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:13
-msgid "Email cannot be empty."
-msgstr "El email no puede ser vacío."
-
-#: .././plugins/gravityforms/pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:17
-msgid ""
-"Please make sure you have clicked on the unsubscription link in the "
-"newsletter."
-msgstr ""
-"Asegurate de haber hecho clic en el enlace de desuscripción en la newsletter."
-
-#: .././plugins/gravityforms/pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:21
-msgid "The verification code is missing."
-msgstr "El código de verificación no puede ser vacío."
-
-#: .././plugins/gravityforms/pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:35
-msgid "The verification code does not match the email."
-msgstr "El código de verificación no coincide con el correo electrónico."
-
-#: .././plugins/gravityforms/pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:44
-msgid "Your email is not subscribed to our newsletter."
-msgstr "Tu email no está suscrito a nuestro newsletter."
-
-#: .././plugins/gravityforms/pop-library/formcomponent-inputs/implementations/contactus-topics.php:19
-msgid "General"
-msgstr "General"
-
-#: .././plugins/gravityforms/pop-library/formcomponent-inputs/implementations/contactus-topics.php:20
-msgid "Website"
-msgstr "Sitio web"
-
-#: .././plugins/gravityforms/pop-library/formcomponent-inputs/implementations/contactus-topics.php:21
-msgid "Others"
-msgstr "Otros"
-
-#: .././plugins/gravityforms/pop-library/pagesection-hooks.php:40
-msgid "Send message to:"
-msgstr "Enviar un mensaje a:"
-
-#: .././plugins/gravityforms/pop-library/pagesection-hooks.php:41
-#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:55
-msgid "Volunteer for:"
-msgstr "Ofrecerse como voluntario para:"
-
-#: .././plugins/gravityforms/pop-library/pagesection-hooks.php:42
-#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:68
-msgid "Flag as inappropriate:"
-msgstr "Marcar como inapropiado:"
-
-#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:29
-msgid "Volunteer"
-msgstr "Ofrecerse como voluntario"
-
-#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:33
-msgid "Flag as inappropriate"
-msgstr "Marcar como inapropiado"
-
-#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:37
-msgid "Send message"
-msgstr "Enviar mensaje"
-
-#: .././plugins/gravityforms/pop-library/processors/blockgroups/blockgroups.php:81
-msgid "Send a message to:"
-msgstr "Enviar un mensaje a:"
-
-#: .././plugins/gravityforms/pop-library/processors/blockgroups/viewcomponents.php:68
-msgid "Share by email:"
-msgstr "Compartir por correo electrónico:"
-
-#: .././plugins/gravityforms/pop-library/processors/blocks.php:151
-msgid "Sending..."
-msgstr "Enviando..."
-
-#: .././plugins/gravityforms/pop-library/processors/blocks.php:158
-msgid "Subscribe to our newsletter:"
-msgstr "Suscríbete a nuestro newsletter:"
-
-#: .././plugins/gravityforms/pop-library/processors/blocks.php:178
-msgid "Take a peek at our regular newsletter campaigns"
-msgstr "Echar un vistazo a nuestras campañas de newsletters regulares"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
-msgid "Subscribe to our Newsletter?"
-msgstr "¿Suscríbirse a nuestro newsletter?"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:25
-msgid "Topic"
-msgstr "Tema"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:42
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:46
-msgid "Your Name"
-msgstr "Tu nombre"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:51
-msgid "Your Email"
-msgstr "Tu correo electrónico"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:55
-msgid "Verification code"
-msgstr "Código de verificación"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:59
-msgid "To Email(s)"
-msgstr "A correo electrónico(s)"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:63
-msgid "Subject"
-msgstr "Asunto"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:67
-msgid "Your Phone number"
-msgstr "Tu número de teléfono"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:31
-msgid "Message"
-msgstr "Mensaje"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:35
-msgid "Additional message"
-msgstr "Mensaje adicional"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:39
-msgid "Why do you want to volunteer?"
-msgstr "¿Por qué quieres ser voluntario?"
-
-#: .././plugins/gravityforms/pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:43
-msgid "Please explain why this post is inappropriate"
-msgstr "Por favor, explique por qué este post es inapropiado"
-
-#: .././plugins/gravityforms/pop-library/processors/forms/formgroups.php:52
-msgid ""
-"Keep up to date with our community activity through our weekly newsletter."
-msgstr ""
-"Mantener al día con nuestra actividad de la comunidad a través de nuestro "
-"newsletter semanal."
-
-#: .././plugins/gravityforms/pop-library/processors/forms/submit-buttons.php:31
-msgid "Send Message"
-msgstr "Enviar mensaje"
-
-#: .././plugins/gravityforms/pop-library/processors/forms/submit-buttons.php:35
-msgid "Send Email"
-msgstr "Enviar correo electrónico"
-
-#: .././plugins/gravityforms/pop-library/processors/forms/submit-buttons.php:39
-msgid "Subscribe"
-msgstr "Suscribirse"
-
-#: .././plugins/gravityforms/pop-library/processors/forms/submit-buttons.php:43
-msgid "Confirm unsubscription"
-msgstr "Confirmar descripción"
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:35
-msgid "Name is missing."
-msgstr "Falta el nombre."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:36
-msgid "Email is missing or format is incorrect."
-msgstr "El correo electrónico no se encuentra o el formato es incorrecto."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:37
-msgid "Message is missing."
-msgstr "El mensaje no puede ser vacío."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:43
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:49
-msgid "Message sent successfully!"
-msgstr "¡Mensaje enviado con éxito!"
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:44
-msgid "Thanks for contacting us, we will get in touch with you shortly."
-msgstr ""
-"Gracias por contactarse con nosotros, nos pondremos en contacto a la "
-"brevedad."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:51
-msgid "Your message has been sent to the user by email."
-msgstr "Su mensaje ha sido enviado al usuario por correo electrónico."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:56
-msgid "Email sent successfully."
-msgstr "Email enviado con éxito."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:57
-msgid "Any more friends who might be interested? Keep sending!"
-msgstr "Más amigos que puedan estar interesados? ¡Siga enviando!"
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:58
-msgid "To Email(s) missing."
-msgstr "A correo electrónico(s) no puede ser vacío."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:63
-msgid "Awesome! Thanks for taking part!"
-msgstr "¡Increíble! Gracias por participar!"
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:64
-msgid ""
-"We have sent a message with your information to the organizers. They should "
-"contact you soon."
-msgstr ""
-"Hemos enviado un mensaje con sus datos a los organizadores. Ellos debieran "
-"ponerse en contacto con usted a la brevedad."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:65
-msgid "\"Why do you want to volunteer?\" is missing."
-msgstr "\"¿Por qué quieres ser voluntario?\" no puede ser vacío."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:70
-msgid "Flag received successfully."
-msgstr "Información recibida correctamente."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:71
-msgid "Noted, we will evaluate your feedback and take appropriate action."
-msgstr "Ok, vamos a evaluar su información y tomar medidas apropiadas."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:72
-msgid "\"Description on why this post is inappropriate\" is missing."
-msgstr ""
-"\"Descripción de por qué este post es inapropiado\" no puede ser vacío."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:77
-msgid "Subscription Successful!"
-msgstr "Suscripción exitosa!"
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:79
-#, php-format
-msgid ""
-"To make sure you get the newsletter, please add <strong>%s</strong> in your "
-"contact list. Thanks!"
-msgstr ""
-"Para asegurarse de obtener el newsletter, por favor, añada <strong>%s</"
-"strong> en su lista de contactos. ¡Gracias!"
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:86
-msgid "Unsubscription successful"
-msgstr "Cancelación de la suscripción exitosa"
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:89
-msgid ""
-"It is a pity to see you go. Hopefully you will keep visiting our website."
-msgstr ""
-"Es una lástima verte partir. Esperamos que sigas visitando nuestro sitio web."
-
-#: .././plugins/gravityforms/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:91
-#, php-format
-msgid "And if anything, you can always <a href=\"%s\">contact us</a>."
-msgstr ""
-"Y en todo caso, siempre puede <a href=“%s”>ponerse en contacto con nosotros</"
-"a>."
-
-#: .././plugins/gravityforms/pop-library/processors/structures/forms/forms.php:68
-#, php-format
-msgid ""
-"Please write an email to <a href=\"mailto:%1$s\">%1$s</a>, or fill in the "
-"form below:"
-msgstr ""
-"Por favor, escribí un correo electrónico a <a href=\"mailto:%1$s\">%1$s</a>, "
-"o completá el siguiente formulario:"
-
-#: .././plugins/gravityforms/pop-library/processors/structures/forms/forms.php:82
-msgid ""
-"We will send the info below to the organizers, who should then get in touch "
-"with you."
-msgstr ""
-"Vamos a enviar la información siguiente a los organizadores, quienes "
-"debieran ponerse en contacto contigo."
-
-#: .././plugins/gravityforms/pop-library/processors/structures/forms/forms.php:92
-msgid ""
-"Based on our users' feedback, we will consider removing this post. You will "
-"receive a confirmation by email."
-msgstr ""
-"Basados en la información provista por nuestros usuarios, vamos a considerar "
-"la eliminación de este post. Usted recibirá una confirmación por correo "
-"electrónico."
-
 #: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:47
 msgid "Insert with Media Player"
 msgstr "Insertar con Media Player"
@@ -1264,6 +976,23 @@ msgid ""
 msgstr ""
 "Por favor, añada los siguientes emails a tu lista de contactos, para "
 "asegurar de que recibas nuestras notificaciones:"
+
+#: .././plugins/pop-genericforms/plugins/pop-emailsender/library/implementations/email-newslettertemplates.php:33
+#, php-format
+msgid "<a href=\"%s\">Unsubscribe</a> from this newsletter."
+msgstr "<a href=\"%s\">Desuscribirse</a> de esta newsletter."
+
+#: .././plugins/pop-genericforms/pop-library/pagesection-hooks.php:40
+msgid "Send message to:"
+msgstr "Enviar un mensaje a:"
+
+#: .././plugins/pop-genericforms/pop-library/pagesection-hooks.php:41
+msgid "Volunteer for:"
+msgstr "Ofrecerse como voluntario para:"
+
+#: .././plugins/pop-genericforms/pop-library/pagesection-hooks.php:42
+msgid "Flag as inappropriate:"
+msgstr "Marcar como inapropiado:"
 
 #: .././plugins/qtranslate-x/library/functions.php:22
 #, php-format
@@ -1860,16 +1589,16 @@ msgstr "Detalles del Enlace"
 msgid "Post details"
 msgstr "Detalles del Post"
 
-#: .././pop-library/processors/elements/codes.php:75
+#: .././pop-library/processors/elements/codes.php:76
 msgid "Here you will find:"
 msgstr "Aquí encontrarás:"
 
-#: .././pop-library/processors/elements/codes.php:112
+#: .././pop-library/processors/elements/codes.php:113
 msgid "Many thanks to our sponsors and supporters."
 msgstr ""
 "Muchas gracias a nuestros patrocinadores y todos aquéllos que nos apoyan."
 
-#: .././pop-library/processors/elements/codes.php:116
+#: .././pop-library/processors/elements/codes.php:117
 #, php-format
 msgid ""
 "If you or your organization wishes to participate, please visit <a href=\"%s"
@@ -1878,20 +1607,20 @@ msgstr ""
 "Si usted o su organización desean participar, por favor visite <a href=\"%s"
 "\">%s</a>."
 
-#: .././pop-library/processors/elements/codes.php:136
+#: .././pop-library/processors/elements/codes.php:137
 msgid "Loading data"
 msgstr "Cargando datos"
 
-#: .././pop-library/processors/elements/codes.php:145
+#: .././pop-library/processors/elements/codes.php:146
 msgid "Many thanks to our volunteers."
 msgstr "Muchas gracias a nuestros voluntarios."
 
-#: .././pop-library/processors/elements/codes.php:149
+#: .././pop-library/processors/elements/codes.php:150
 #, php-format
 msgid "If you'd like to join us, please visit <a href=\"%s\">%s</a>."
 msgstr "Si desea unirse a nosotros, por favor visite <a href=\"%s\">%s</a>."
 
-#: .././pop-library/processors/elements/codes.php:162
+#: .././pop-library/processors/elements/codes.php:163
 #, php-format
 msgid ""
 "<strong>#Trending tags are:</strong><br/>Those tags which appear in the "
@@ -2000,11 +1729,11 @@ msgstr "etiqueta"
 msgid "tags"
 msgstr "etiquetas"
 
-#: .././pop-library/processors/pagesections/pagesection-hooks.php:139
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:141
 msgid "FAQs"
 msgstr "Preguntas frecuentes"
 
-#: .././pop-library/processors/pagesections/pagesection-hooks.php:155
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:157
 msgid "Add a comment for:"
 msgstr "Añadir un comentario para:"
 
@@ -2160,12 +1889,12 @@ msgstr "%s últimos posts"
 msgid "%s latest comments"
 msgstr "%s últimos comentarios"
 
-#: .././templates/header.php:51
+#: .././templates/header.php:53
 #, php-format
 msgid "View %1$s profile and get in touch through %2$s."
 msgstr "Ver el perfil de %1$s y ponerse en contacto a través de %2$s."
 
-#: .././templates/header.php:54
+#: .././templates/header.php:56
 #, php-format
 msgid "Entries tagged “%1$s” in %2$s."
 msgstr "Entradas con la etiqueta \"%1$s\" en %2$s."
@@ -2297,6 +2026,213 @@ msgstr ""
 "Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
 "PoP/\">latest version</a> of <b>PhotoSwipe for PoP</b> installed, or "
 "otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#~ msgid "Notification from %s"
+#~ msgstr "Notificación de %s"
+
+#~ msgid "Email cannot be empty."
+#~ msgstr "El email no puede ser vacío."
+
+#~ msgid ""
+#~ "Please make sure you have clicked on the unsubscription link in the "
+#~ "newsletter."
+#~ msgstr ""
+#~ "Asegurate de haber hecho clic en el enlace de desuscripción en la "
+#~ "newsletter."
+
+#~ msgid "The verification code is missing."
+#~ msgstr "El código de verificación no puede ser vacío."
+
+#~ msgid "The verification code does not match the email."
+#~ msgstr "El código de verificación no coincide con el correo electrónico."
+
+#~ msgid "Your email is not subscribed to our newsletter."
+#~ msgstr "Tu email no está suscrito a nuestro newsletter."
+
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Website"
+#~ msgstr "Sitio web"
+
+#~ msgid "Others"
+#~ msgstr "Otros"
+
+#~ msgid "Volunteer"
+#~ msgstr "Ofrecerse como voluntario"
+
+#~ msgid "Flag as inappropriate"
+#~ msgstr "Marcar como inapropiado"
+
+#~ msgid "Send message"
+#~ msgstr "Enviar mensaje"
+
+#~ msgid "Send a message to:"
+#~ msgstr "Enviar un mensaje a:"
+
+#~ msgid "Share by email:"
+#~ msgstr "Compartir por correo electrónico:"
+
+#~ msgid "Sending..."
+#~ msgstr "Enviando..."
+
+#~ msgid "Subscribe to our newsletter:"
+#~ msgstr "Suscríbete a nuestro newsletter:"
+
+#~ msgid "Take a peek at our regular newsletter campaigns"
+#~ msgstr "Echar un vistazo a nuestras campañas de newsletters regulares"
+
+#~ msgid "Subscribe to our Newsletter?"
+#~ msgstr "¿Suscríbirse a nuestro newsletter?"
+
+#~ msgid "Topic"
+#~ msgstr "Tema"
+
+#~ msgid "Your Name"
+#~ msgstr "Tu nombre"
+
+#~ msgid "Your Email"
+#~ msgstr "Tu correo electrónico"
+
+#~ msgid "Verification code"
+#~ msgstr "Código de verificación"
+
+#~ msgid "To Email(s)"
+#~ msgstr "A correo electrónico(s)"
+
+#~ msgid "Subject"
+#~ msgstr "Asunto"
+
+#~ msgid "Your Phone number"
+#~ msgstr "Tu número de teléfono"
+
+#~ msgid "Message"
+#~ msgstr "Mensaje"
+
+#~ msgid "Additional message"
+#~ msgstr "Mensaje adicional"
+
+#~ msgid "Why do you want to volunteer?"
+#~ msgstr "¿Por qué quieres ser voluntario?"
+
+#~ msgid "Please explain why this post is inappropriate"
+#~ msgstr "Por favor, explique por qué este post es inapropiado"
+
+#~ msgid ""
+#~ "Keep up to date with our community activity through our weekly newsletter."
+#~ msgstr ""
+#~ "Mantener al día con nuestra actividad de la comunidad a través de nuestro "
+#~ "newsletter semanal."
+
+#~ msgid "Send Message"
+#~ msgstr "Enviar mensaje"
+
+#~ msgid "Send Email"
+#~ msgstr "Enviar correo electrónico"
+
+#~ msgid "Subscribe"
+#~ msgstr "Suscribirse"
+
+#~ msgid "Confirm unsubscription"
+#~ msgstr "Confirmar descripción"
+
+#~ msgid "Name is missing."
+#~ msgstr "Falta el nombre."
+
+#~ msgid "Email is missing or format is incorrect."
+#~ msgstr "El correo electrónico no se encuentra o el formato es incorrecto."
+
+#~ msgid "Message is missing."
+#~ msgstr "El mensaje no puede ser vacío."
+
+#~ msgid "Message sent successfully!"
+#~ msgstr "¡Mensaje enviado con éxito!"
+
+#~ msgid "Thanks for contacting us, we will get in touch with you shortly."
+#~ msgstr ""
+#~ "Gracias por contactarse con nosotros, nos pondremos en contacto a la "
+#~ "brevedad."
+
+#~ msgid "Your message has been sent to the user by email."
+#~ msgstr "Su mensaje ha sido enviado al usuario por correo electrónico."
+
+#~ msgid "Email sent successfully."
+#~ msgstr "Email enviado con éxito."
+
+#~ msgid "Any more friends who might be interested? Keep sending!"
+#~ msgstr "Más amigos que puedan estar interesados? ¡Siga enviando!"
+
+#~ msgid "To Email(s) missing."
+#~ msgstr "A correo electrónico(s) no puede ser vacío."
+
+#~ msgid "Awesome! Thanks for taking part!"
+#~ msgstr "¡Increíble! Gracias por participar!"
+
+#~ msgid ""
+#~ "We have sent a message with your information to the organizers. They "
+#~ "should contact you soon."
+#~ msgstr ""
+#~ "Hemos enviado un mensaje con sus datos a los organizadores. Ellos "
+#~ "debieran ponerse en contacto con usted a la brevedad."
+
+#~ msgid "\"Why do you want to volunteer?\" is missing."
+#~ msgstr "\"¿Por qué quieres ser voluntario?\" no puede ser vacío."
+
+#~ msgid "Flag received successfully."
+#~ msgstr "Información recibida correctamente."
+
+#~ msgid "Noted, we will evaluate your feedback and take appropriate action."
+#~ msgstr "Ok, vamos a evaluar su información y tomar medidas apropiadas."
+
+#~ msgid "\"Description on why this post is inappropriate\" is missing."
+#~ msgstr ""
+#~ "\"Descripción de por qué este post es inapropiado\" no puede ser vacío."
+
+#~ msgid "Subscription Successful!"
+#~ msgstr "Suscripción exitosa!"
+
+#~ msgid ""
+#~ "To make sure you get the newsletter, please add <strong>%s</strong> in "
+#~ "your contact list. Thanks!"
+#~ msgstr ""
+#~ "Para asegurarse de obtener el newsletter, por favor, añada <strong>%s</"
+#~ "strong> en su lista de contactos. ¡Gracias!"
+
+#~ msgid "Unsubscription successful"
+#~ msgstr "Cancelación de la suscripción exitosa"
+
+#~ msgid ""
+#~ "It is a pity to see you go. Hopefully you will keep visiting our website."
+#~ msgstr ""
+#~ "Es una lástima verte partir. Esperamos que sigas visitando nuestro sitio "
+#~ "web."
+
+#~ msgid "And if anything, you can always <a href=\"%s\">contact us</a>."
+#~ msgstr ""
+#~ "Y en todo caso, siempre puede <a href=“%s”>ponerse en contacto con "
+#~ "nosotros</a>."
+
+#~ msgid ""
+#~ "Please write an email to <a href=\"mailto:%1$s\">%1$s</a>, or fill in the "
+#~ "form below:"
+#~ msgstr ""
+#~ "Por favor, escribí un correo electrónico a <a href=\"mailto:%1$s\">%1$s</"
+#~ "a>, o completá el siguiente formulario:"
+
+#~ msgid ""
+#~ "We will send the info below to the organizers, who should then get in "
+#~ "touch with you."
+#~ msgstr ""
+#~ "Vamos a enviar la información siguiente a los organizadores, quienes "
+#~ "debieran ponerse en contacto contigo."
+
+#~ msgid ""
+#~ "Based on our users' feedback, we will consider removing this post. You "
+#~ "will receive a confirmation by email."
+#~ msgstr ""
+#~ "Basados en la información provista por nuestros usuarios, vamos a "
+#~ "considerar la eliminación de este post. Usted recibirá una confirmación "
+#~ "por correo electrónico."
 
 #~ msgid "Powered by <a href=\"%s\">the PoP framework</a>"
 #~ msgstr "Implementado con <a href=\"%s\">the PoP framework</a>"

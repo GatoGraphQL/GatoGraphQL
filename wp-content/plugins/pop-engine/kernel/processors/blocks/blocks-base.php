@@ -116,9 +116,9 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 			);
 		}
 
-		if ($messagefeedback = $this->get_messagefeedback($template_id)) {				
-			$ret[] = $messagefeedback;
-		}
+		// if ($messagefeedback = $this->get_messagefeedback($template_id)) {				
+		// 	$ret[] = $messagefeedback;
+		// }
 				
 		return $ret;
 	}
@@ -304,10 +304,10 @@ class PoP_Processor_BlocksBase extends PoP_ProcessorBase {
 		// By default, use the bare Block IOHandler
 		return GD_DATALOAD_IOHANDLER_BLOCK;
 	}
-	protected function get_messagefeedback($template_id) {
+	// protected function get_messagefeedback($template_id) {
 
-		return null;
-	}
+	// 	return null;
+	// }
 	protected function get_block_page($template_id) {
 
 		global $gd_template_settingsmanager;

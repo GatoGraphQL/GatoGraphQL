@@ -69,7 +69,7 @@ class GD_Custom_Template_Processor_FormMultipleComponents extends GD_Template_Pr
 
 				// // For the Announcement Only
 				// // Only if the Volunteering is enabled, since it's the only component of Announcement Details
-				// // if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				// // if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 				// $ret[] = GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS;
 				// // }
 				// $ret[] = $status;

@@ -37,7 +37,7 @@ class GD_EM_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_
 				$ret[] = GD_EM_TEMPLATE_FORMCOMPONENTGROUP_TYPEAHEADMAP;
 
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_FORMCOMPONENTGROUP_VOLUNTEERSNEEDED_SELECT;
 				}
 

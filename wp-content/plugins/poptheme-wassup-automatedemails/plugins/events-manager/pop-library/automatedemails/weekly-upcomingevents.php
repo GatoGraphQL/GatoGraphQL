@@ -6,7 +6,6 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// class PoPTheme_Wassup_EM_AE_WeeklyUpcomingEvents extends PoP_ThemeWassup_ProcessorAutomatedEmailsBase {
 class PoPTheme_Wassup_EM_AE_WeeklyUpcomingEvents extends PoP_ThemeWassup_SimpleProcessorAutomatedEmailsBase {
 
     public function get_page() {

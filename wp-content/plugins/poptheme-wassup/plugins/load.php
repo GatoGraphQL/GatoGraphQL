@@ -20,8 +20,9 @@ if (class_exists('EM_Event'))
 if (class_exists('EM_Pro'))		
 	require_once 'events-manager-pro/load.php';
 
-if (class_exists("RGForms"))	
-	require_once 'gravityforms/load.php';
+if (defined('POP_GENERICFORMS_VERSION')) {
+	require_once 'pop-genericforms/load.php';
+}
 
 if (class_exists("JWP6_Plugin"))	
 	require_once 'jw-player-plugin-for-wordpress/load.php';
@@ -66,10 +67,6 @@ if (defined('POP_CDNCORE_INITIALIZED')) {
 
 if (defined('POP_MULTIDOMAIN_INITIALIZED')) {
 	require_once 'pop-multidomain/load.php';		
-}
-
-if (defined('POP_EMAILSENDER_INITIALIZED')) {
-	require_once 'pop-emailsender/load.php';		
 }
 
 if (defined('POP_MAILER_AWS_VERSION')) {

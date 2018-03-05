@@ -18,3 +18,8 @@ function get_absolute_path($path) {
     return (substr($path, 0, 1) == DIRECTORY_SEPARATOR ? DIRECTORY_SEPARATOR : '').implode(DIRECTORY_SEPARATOR, $absolutes);
     // return implode(DIRECTORY_SEPARATOR, $absolutes);
 }
+
+function trim_value(&$value) { 
+    
+    $value = trim($value); 
+}

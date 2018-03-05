@@ -13,13 +13,17 @@ class GetPoPDemo_Validation {
 			add_action('admin_notices',array($this,'install_warning'));
 			add_action('network_admin_notices',array($this,'install_warning'));
 			// Comment Leo: allow the theme to initialize, so that we can access the back-end in case of error, eg: to enable the needed plug-ins
-			// $success = false;
+			if (!is_admin()) {
+				$success = false;
+			}
 		}
 		elseif(!defined('POPTHEME_WASSUP_SECTIONPROCESSORS_INITIALIZED')){
 
 			// The admin notice will come from another failing plug-in, no need to repeat it here
 			// Comment Leo: allow the theme to initialize, so that we can access the back-end in case of error, eg: to enable the needed plug-ins
-			// $success = false;
+			if (!is_admin()) {
+				$success = false;
+			}
 		}
 		elseif(POPTHEME_WASSUP_SECTIONPROCESSORS_VERSION < POPTHEME_WASSUP_SECTIONPROCESSORS_MIN_VERSION){
 			
@@ -32,7 +36,9 @@ class GetPoPDemo_Validation {
 			add_action('admin_notices',array($this,'plugins_env_warning'));
 			add_action('network_admin_notices',array($this,'plugins_env_warning'));
 			// Comment Leo: allow the theme to initialize, so that we can access the back-end in case of error, eg: to enable the needed plug-ins
-			// $success = false;
+			if (!is_admin()) {
+				$success = false;
+			}
 		}
 		else {
 
@@ -41,13 +47,17 @@ class GetPoPDemo_Validation {
 				add_action('admin_notices',array($this,'processorsdemo_install_warning'));
 				add_action('network_admin_notices',array($this,'processorsdemo_install_warning'));
 				// Comment Leo: allow the theme to initialize, so that we can access the back-end in case of error, eg: to enable the needed plug-ins
-				// $success = false;
+				if (!is_admin()) {
+					$success = false;
+				}
 			}
 			elseif(!defined('GETPOPDEMO_PROCESSORS_INITIALIZED')){
 
 				// The admin notice will come from another failing plug-in, no need to repeat it here
 				// Comment Leo: allow the theme to initialize, so that we can access the back-end in case of error, eg: to enable the needed plug-ins
-				// $success = false;
+				if (!is_admin()) {
+					$success = false;
+				}
 			}
 			elseif(GETPOPDEMO_PROCESSORS_VERSION < GETPOPDEMO_PROCESSORS_MIN_VERSION){
 				

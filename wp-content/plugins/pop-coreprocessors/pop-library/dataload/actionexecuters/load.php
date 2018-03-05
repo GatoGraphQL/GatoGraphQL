@@ -16,5 +16,6 @@ require_once 'email-invite.php';
 require_once 'inviteusers.php';
 require_once 'update-mypreferences.php';
 
+require_once 'abstract-classes/load.php';
 require_once 'library/load.php';
 require_once 'settings/load.php';

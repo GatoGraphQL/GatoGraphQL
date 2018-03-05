@@ -1,0 +1,2133 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-08 11:38+0800\n"
+"PO-Revision-Date: 2017-02-08 11:38+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././library/captcha/captcha.php:25
+msgid "Captcha was not generated properly, please refresh page."
+msgstr "验证码并未准确下载，请刷新此页。"
+
+#: .././library/captcha/captcha.php:32
+msgid "Captcha is empty."
+msgstr "验证码是空的。"
+
+#: .././library/captcha/captcha.php:41
+msgid "Captcha doesn't match."
+msgstr "验证码不准确。"
+
+#: .././library/core.php:19
+msgid "Post"
+msgstr "帖子"
+
+#: .././library/date.php:30
+msgid "Apply"
+msgstr "申请"
+
+#: .././library/date.php:31
+msgid "Cancel"
+msgstr "取消"
+
+#: .././library/date.php:32
+msgid "From"
+msgstr "从"
+
+#: .././library/date.php:33
+msgid "To"
+msgstr "给"
+
+#: .././library/date.php:34
+msgid "Custom Range"
+msgstr "自定义范围"
+
+#: .././library/date.php:35
+msgid "DD/MM/YYYY"
+msgstr "YYYY－MM－DD"
+
+#: .././library/date.php:36
+msgid "h:mm A"
+msgstr "h:mm A"
+
+#: .././library/date.php:38
+msgid "Su"
+msgstr "周日"
+
+#: .././library/date.php:39
+msgid "Mo"
+msgstr "周一"
+
+#: .././library/date.php:40
+msgid "Tu"
+msgstr "周二"
+
+#: .././library/date.php:41
+msgid "We"
+msgstr "周三"
+
+#: .././library/date.php:42
+msgid "Th"
+msgstr "周四"
+
+#: .././library/date.php:43
+msgid "Fr"
+msgstr "周五"
+
+#: .././library/date.php:44
+msgid "Sa"
+msgstr "周六"
+
+#: .././library/date.php:47
+msgid "January"
+msgstr "一月"
+
+#: .././library/date.php:48
+msgid "February"
+msgstr "二月"
+
+#: .././library/date.php:49
+msgid "March"
+msgstr "三月"
+
+#: .././library/date.php:50
+msgid "April"
+msgstr "四月"
+
+#: .././library/date.php:51
+msgid "May"
+msgstr "五月"
+
+#: .././library/date.php:52
+msgid "June"
+msgstr "六月"
+
+#: .././library/date.php:53
+msgid "July"
+msgstr "七月"
+
+#: .././library/date.php:54
+msgid "August"
+msgstr "八月"
+
+#: .././library/date.php:55
+msgid "September"
+msgstr "九月"
+
+#: .././library/date.php:56
+msgid "October"
+msgstr "十月"
+
+#: .././library/date.php:57
+msgid "November"
+msgstr "十一月"
+
+#: .././library/date.php:58
+msgid "December"
+msgstr "十二月"
+
+#: .././library/editor.php:187
+msgid "Add Photo/File"
+msgstr "添加照片/文件"
+
+#: .././library/editor.php:193
+msgid "Add Image Gallery"
+msgstr "添加图片廊"
+
+#: .././library/editor.php:201
+msgid "Embed Youtube videos, Tweets or others"
+msgstr "嵌入YouTube视频，Twitter或其他"
+
+#: .././library/editor.php:207
+msgid ""
+"<p>To embed a video or another object, simply place its URL into the content "
+"area. Make sure the URL is on its own line and not hyperlinked. For example:"
+"</p><pre>Check out this cool video:\n"
+"\n"
+"https://www.youtube.com/watch?v=sxm3Xyutc1s\n"
+"\n"
+"That is a lovely tango!</pre><p>You can embed URLs from all these services:</"
+"p><p><i class=\"fa fa-fw fa-flickr\"></i>Flickr, <i class=\"fa fa-fw fa-"
+"instagram\"></i>Instagram, <i class=\"fa fa-fw fa-reddit\"></i>Reddit, <i "
+"class=\"fa fa-fw fa-slideshare\"></i>SlideShare, <i class=\"fa fa-fw fa-"
+"soundcloud\"></i>SoundCloud, <i class=\"fa fa-fw fa-spotify\"></i>Spotify, "
+"<i class=\"fa fa-fw fa-twitter\"></i>Twitter, <i class=\"fa fa-fw fa-vimeo"
+"\"></i>Vimeo, <i class=\"fa fa-fw fa-vine\"></i>Vine, <i class=\"fa fa-fw fa-"
+"youtube\"></i>YouTube, and others.</p>"
+msgstr ""
+"<p>要嵌入视频或其他物体，只需将它的网址填入内容区域。确保URL在属于自己的一"
+"行，也确保它不是超链接。例子：</p><pre>看看这个酷视频：\n"
+"\n"
+"https://www.youtube.com/watch?v=sxm3Xyutc1s\n"
+"\n"
+"这是探戈舞蹈</pre><p>您可以从这些服务嵌入网址：</p><p><i class=“fa fa-fw fa-"
+"flickr”></i>Flickr，<i class=“fa fa-fw fa-Instagram”></i>Instagram，<i "
+"class=“fa fa-fw fa-reddit”></i>Reddit，<i class=“fa fa-fw fa-slideshare“></"
+"i> SlideShare上，<i class=”fa fa-fw fa-soundcloud“></i>SoundCloud，<i "
+"class=”fa fa-fw fa-spotify></i>Spotify，<i class=“fa fa-fw fa-twitter”></"
+"i>Twitter，<i class=“fa fa-fw fa-vimeo”></i> Vimeo，<i class=“fa fa-fw fa-"
+"vine“></i>Vine，<i class=”fa fa-fw fa-youtube“></i>YouTube，和其他。</p>"
+
+#: .././library/login/login.php:22
+#: .././pop-library/processors/login/forms/submit-buttons.php:31
+msgid "Log in"
+msgstr "登录"
+
+#: .././library/login/login.php:22
+msgid "log in"
+msgstr "登录"
+
+#: .././library/media.php:43
+msgid "Upload media files"
+msgstr "上传媒体文件"
+
+#: .././library/media.php:46
+msgid "Set"
+msgstr "设定"
+
+#: .././library/mentions/tinymce.php:64
+#, fuzzy
+msgid "#Hashtags"
+msgstr "井号标签"
+
+#: .././library/multiselect.php:12
+msgid "None selected"
+msgstr "未选择"
+
+#: .././library/multiselect.php:13
+msgid "selected"
+msgstr "选"
+
+#: .././library/multiselect.php:14
+msgid "All selected"
+msgstr "都选择"
+
+#: .././library/users/user-registration.php:43
+msgid "Title"
+msgstr "标题"
+
+#: .././library/users/user-registration.php:47
+msgid "Short Description"
+msgstr "简介"
+
+#: .././library/users/user-registration.php:51
+#: .././library/users/user-registration.php:54
+msgid "Display email in the Profile page?"
+msgstr "在个人档案页面显示电子邮件吗？"
+
+#: .././pop-library/constants.php:8
+msgid "Loading"
+msgstr "加载中"
+
+#: .././pop-library/constants.php:9
+msgid "Ops, there was a connection problem."
+msgstr "对不起，连接出现了问题。"
+
+#: .././pop-library/constants.php:10
+msgid "It seems you are offline."
+msgstr ""
+
+#: .././pop-library/constants.php:11
+msgid "Retry"
+msgstr "对不起，连接出现了问题。"
+
+#: .././pop-library/constants.php:86
+msgid "Ops, this is a broken link."
+msgstr "对不起，这是一个错误的链接。"
+
+#: .././pop-library/constants.php:116
+msgid ""
+"Ops, the upload failed. Let's fix this: please save your post as 'Draft', "
+"refresh the browser window, and try again."
+msgstr ""
+"对不起，上传失败。请将您的帖子存为“草稿”，刷新浏览器窗口，然后再试一次。"
+
+#: .././pop-library/dataload/actionexecuters/downvotepost.php:32
+#, php-format
+msgid "You have down-voted <em><strong>%s</strong></em>."
+msgstr "你已经给予<em><strong>%s</strong></em>劣评。"
+
+#: .././pop-library/dataload/actionexecuters/email-invite.php:34
+#, php-format
+msgid "Invitation sent to the following emails: <strong>%s</strong>"
+msgstr "邀请已被发送到以下电邮：<strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/followuser.php:32
+#, php-format
+msgid "You are now following <em><strong>%s</strong></em>."
+msgstr "您正在追随<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/library/downvotepost.php:24
+#, php-format
+msgid "You have already down-voted <em><strong>%s</strong></em>."
+msgstr "您已经给予<em><strong>%s</strong></em>劣评。"
+
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:83
+#, php-format
+msgid "The following emails are invalid: <strong>%s</strong>"
+msgstr "以下电子邮件地址无效：<strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:89
+msgid "Email(s) cannot be empty."
+msgstr "以下电子邮件地址无效：<strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/library/followuser.php:21
+msgid "You can't follow yourself!"
+msgstr "您不能追随自己！"
+
+#: .././pop-library/dataload/actionexecuters/library/followuser.php:30
+#, php-format
+msgid "You are already following <em><strong>%s</strong></em>."
+msgstr "您已在追随<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:25
+#, php-format
+msgid "<p>%s is inviting you to join %s!</p>"
+msgstr "<p>%s邀请您加入%s！</p>"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:33
+#, php-format
+msgid "<p>You have been invited to join %s!</p>"
+msgstr "您已经给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:58
+#, php-format
+msgid "What is %s?"
+msgstr "什么是%s？"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:65
+msgid "Check it out here"
+msgstr "这里查看"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:79
+#, php-format
+msgid "%s is inviting you to join %s!"
+msgstr "%s邀请你加入%s！"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:87
+#, php-format
+msgid "You have been invited to join %s!"
+msgstr "您已被邀请加入%s！"
+
+#: .././pop-library/dataload/actionexecuters/library/post-update-user-metavalue.php:27
+msgid "The requested post does not exist."
+msgstr "所寻找的帖子不存在。"
+
+#: .././pop-library/dataload/actionexecuters/library/post-update-user-metavalue.php:34
+msgid "The requested functionality does not apply on this post."
+msgstr "所申请的功能不能被使用在这个帖子上。"
+
+#: .././pop-library/dataload/actionexecuters/library/recommendpost.php:24
+#, php-format
+msgid "You have already recommended <em><strong>%s</strong></em>."
+msgstr "你已经推荐了<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/library/subscribetotag.php:25
+#, fuzzy, php-format
+msgid "You have already subscribed to <em><strong>%s</strong></em>."
+msgstr "您已经给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/library/subscribetounsubscribefromtag.php:22
+#, fuzzy
+msgid "The requested topic/tag does not exist."
+msgstr "所寻找的帖子不存在。"
+
+#: .././pop-library/dataload/actionexecuters/library/undo-downvotepost.php:24
+#, php-format
+msgid "You had not down-voted <em><strong>%s</strong></em>."
+msgstr "你并未给予<em><strong>%s</strong></em>劣评。"
+
+#: .././pop-library/dataload/actionexecuters/library/undo-upvotepost.php:24
+#, php-format
+msgid "You had not up-voted <em><strong>%s</strong></em>."
+msgstr "你并未给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/library/unfollowuser.php:24
+#, php-format
+msgid "You were not following <em><strong>%s</strong></em>."
+msgstr "你并未追随<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/library/unrecommendpost.php:24
+#, php-format
+msgid "You had not recommended <em><strong>%s</strong></em>."
+msgstr "你并未推荐<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribefromtag.php:25
+#, fuzzy, php-format
+msgid "You had not subscribed to <em><strong>%s</strong></em>."
+msgstr "你并未给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/library/update-user-metavalue.php:15
+msgid "This URL is incorrect."
+msgstr "此网址不正确。"
+
+#: .././pop-library/dataload/actionexecuters/library/upvotepost.php:24
+#, php-format
+msgid "You have already up-voted <em><strong>%s</strong></em>."
+msgstr "您已经给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/library/user-update-user-metavalue.php:22
+msgid "The requested user does not exist."
+msgstr "您所寻找的用户已不存在。"
+
+#: .././pop-library/dataload/actionexecuters/recommendpost.php:32
+#, php-format
+msgid "You have recommended <em><strong>%s</strong></em>."
+msgstr "你已经推荐的<em><strong>%s</strong></em>的。"
+
+#: .././pop-library/dataload/actionexecuters/subscribetotag.php:33
+#, fuzzy, php-format
+msgid "You have subscribed to <em><strong>%s</strong></em>."
+msgstr "你已经给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/undo-downvotepost.php:32
+#, php-format
+msgid "You have stopped down-voting <em><strong>%s</strong></em>."
+msgstr "你已取消了<em><strong>%s</strong></em>的劣评。"
+
+#: .././pop-library/dataload/actionexecuters/undo-upvotepost.php:32
+#, php-format
+msgid "You have stopped up-voting <em><strong>%s</strong></em>."
+msgstr "您已取消了<em><strong>%s</strong></em>的好评。"
+
+#: .././pop-library/dataload/actionexecuters/unfollowuser.php:32
+#, php-format
+msgid "You have stopped following <em><strong>%s</strong></em>."
+msgstr "您已经停止追随<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/unrecommendpost.php:32
+#, php-format
+msgid "You have stopped recommending <em><strong>%s</strong></em>."
+msgstr "您已停止推荐<em><strong>%s</strong></em>。"
+
+#: .././pop-library/dataload/actionexecuters/unsubscribefromtag.php:33
+#, fuzzy, php-format
+msgid "You have unsubscribed from <em><strong>%s</strong></em>."
+msgstr "你已经给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/actionexecuters/upvotepost.php:32
+#, php-format
+msgid "You have up-voted <em><strong>%s</strong></em>."
+msgstr "你已经给予<em><strong>%s</strong></em>好评。"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-posts-utils.php:16
+msgid "Source: "
+msgstr "出处："
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-posts-utils.php:117
+msgid "Load link"
+msgstr "加载链接"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-posts-utils.php:136
+msgid "Open link in new tab"
+msgstr "在新标签页中打开链接"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users-hook.php:57
+msgid "Website"
+msgstr "网站"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users-hook.php:69
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:45
+msgid "Email"
+msgstr "电邮"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:21
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus-description.php:18
+msgid "Draft (still editing)"
+msgstr "草案（仍在编辑）"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:22
+msgid "Finished editing"
+msgstr "完成编辑"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:23
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus-description.php:19
+msgid "Already published"
+msgstr "已发布"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:18
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus.php:18
+#: .././pop-library/processors/abstract-classes/layouts/published-base.php:27
+msgid "Draft"
+msgstr "草案"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:19
+msgid "Pending to be published"
+msgstr "待发布"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:20
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus.php:19
+#: .././pop-library/processors/abstract-classes/layouts/published-base.php:25
+msgid "Published"
+msgstr "已被发布"
+
+#: .././pop-library/formcomponent-inputs/implementations/yesno-multi.php:18
+#: .././pop-library/formcomponent-inputs/implementations/yesno.php:18
+msgid "Yes"
+msgstr "是的"
+
+#: .././pop-library/formcomponent-inputs/implementations/yesno-multi.php:19
+#: .././pop-library/formcomponent-inputs/implementations/yesno.php:19
+msgid "No"
+msgstr "无"
+
+#: .././pop-library/processors/abstract-classes/alerts-base.php:36
+msgid "Dismiss"
+msgstr "取消"
+
+#: .././pop-library/processors/abstract-classes/elements/fetchmore-base.php:47
+msgid "Load more"
+msgstr "装载更多"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:165
+msgid "Please write the content here..."
+msgstr "请在此输入内容....."
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:33
+msgid "Set Featured Image"
+msgstr "设置主要图片"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:34
+msgid "Remove"
+msgstr "去掉"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:36
+#, php-format
+msgid "Please %s to set the featured image."
+msgstr "请%s以设置主要图片。"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/post-typeaheadcomponent-formcomponents-base.php:39
+msgid "Loading Content"
+msgstr "加载内容"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/post-typeaheadcomponent-formcomponents-base.php:43
+msgid "No Content found"
+msgstr "未找到任何内容"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/selectabletypeahead-formcomponents-base.php:88
+msgid "Suggestions"
+msgstr "建议"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/tag-typeaheadcomponent-formcomponents-base.php:66
+msgid "Loading Tags"
+msgstr "加载标签"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/tag-typeaheadcomponent-formcomponents-base.php:70
+msgid "No Tags found"
+msgstr "没有找到标签"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/typeaheadcomponent-formcomponents-base.php:97
+msgid "Loading Suggestions"
+msgstr "正在载入建议"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/typeaheadcomponent-formcomponents-base.php:101
+msgid "No Results"
+msgstr "没有结果"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/user-typeaheadcomponent-formcomponents-base.php:49
+msgid "Loading Users"
+msgstr "正在加载用户"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/user-typeaheadcomponent-formcomponents-base.php:53
+msgid "No Users found"
+msgstr "没有找到用户"
+
+#: .././pop-library/processors/abstract-classes/forms/submit-buttons-base.php:16
+msgid "Submit"
+msgstr "提交"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:32
+msgid "post"
+msgstr "帖子"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:37
+msgid "posts"
+msgstr "帖子"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:45
+#, php-format
+msgid "View %s new %s"
+msgstr "查看%s新%s"
+
+#: .././pop-library/processors/abstract-classes/layouts/maxheight-layouts-base.php:55
+msgid "Show more"
+msgstr "显示更多"
+
+#: .././pop-library/processors/abstract-classes/layouts/maxheight-layouts-base.php:56
+msgid "Show less"
+msgstr "显示较少"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/form-messagefeedbacklayouts-base.php:13
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:42
+msgid "Ops, there were some problems:"
+msgstr "抱歉，存在一些问题："
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/form-messagefeedbacklayouts-base.php:14
+msgid "Success!"
+msgstr "成功！"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/list-messagefeedbacklayouts-base.php:13
+msgid "No results"
+msgstr "没有结果"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/list-messagefeedbacklayouts-base.php:14
+msgid "No more results found"
+msgstr "没有更多的搜索结果"
+
+#: .././pop-library/processors/abstract-classes/layouts/posts/previewpostlayouts-base.php:325
+msgid "Go to permalink"
+msgstr "转到永久链接"
+
+#: .././pop-library/processors/abstract-classes/layouts/published-base.php:26
+msgid "Pending"
+msgstr "待发布"
+
+#: .././pop-library/processors/abstract-classes/layouts/taginfo-base.php:25
+msgid "Count"
+msgstr ""
+
+#: .././pop-library/processors/abstract-classes/layouts/userquicklinks-base.php:22
+msgid "No contact channels"
+msgstr "没有联络渠道"
+
+#: .././pop-library/processors/abstract-classes/socialmedia/socialmedia-items-base.php:96
+#, php-format
+msgid "Share on %s"
+msgstr "分享到%s"
+
+#: .././pop-library/processors/abstract-classes/structures/carousels/controls/button-controls.php:27
+msgid "Previous"
+msgstr "前一个"
+
+#: .././pop-library/processors/abstract-classes/structures/carousels/controls/button-controls.php:31
+msgid "Next"
+msgstr "下一个"
+
+#: .././pop-library/processors/abstract-classes/structures/menus/segmentedbuttonlayouts-base.php:58
+msgid "Toggle menu"
+msgstr "切换菜单"
+
+#: .././pop-library/processors/abstract-classes/viewcomponents/replycomment-headers-base.php:43
+#: .././pop-library/processors/comments/blockgroups.php:131
+msgid "In response to:"
+msgstr "回复给："
+
+#: .././pop-library/processors/blocks/blocks.php:35
+#, php-format
+msgid ""
+"Send an invite to your friends/colleagues/etc to join <em><strong>%s</"
+"strong></em>:"
+msgstr "邀请您的朋友/同事/等加盟<em><strong>%s</strong></em>："
+
+#: .././pop-library/processors/blocks/blocks.php:226
+#: .././pop-library/processors/comments/blocks.php:175
+#: .././pop-library/processors/login/blocks.php:142
+msgid "Sending..."
+msgstr "发送中..."
+
+#: .././pop-library/processors/buttons/buttoninners.php:167
+#: .././pop-library/processors/buttons/buttons.php:246
+msgid "Quickview"
+msgstr "快速浏览"
+
+#: .././pop-library/processors/buttons/buttoninners.php:171
+#: .././pop-library/processors/buttons/buttons.php:251
+#: .././pop-library/processors/controls/anchor-controls.php:81
+msgid "Print"
+msgstr "打印"
+
+#: .././pop-library/processors/buttons/buttoninners.php:175
+#: .././pop-library/processors/buttons/buttons.php:255
+msgid "Edit"
+msgstr "编辑"
+
+#: .././pop-library/processors/buttons/buttoninners.php:179
+#: .././pop-library/processors/buttons/buttons.php:259
+msgid "View"
+msgstr "浏览"
+
+#: .././pop-library/processors/buttons/buttoninners.php:183
+#: .././pop-library/processors/buttons/buttons.php:263
+msgid "Preview"
+msgstr "预览"
+
+#: .././pop-library/processors/buttons/buttoninners.php:187
+#: .././pop-library/processors/buttons/buttons.php:267
+#: .././pop-library/processors/controls/anchor-controls.php:77
+msgid "Permalink"
+msgstr "永久链接"
+
+#: .././pop-library/processors/buttons/buttoninners.php:192
+#: .././pop-library/processors/buttons/buttons.php:276
+msgid "Follow"
+msgstr "跟随"
+
+#: .././pop-library/processors/buttons/buttoninners.php:197
+#: .././pop-library/processors/buttons/buttons.php:281
+msgid "Following"
+msgstr "在跟随"
+
+#: .././pop-library/processors/buttons/buttoninners.php:204
+#: .././pop-library/processors/buttons/buttons.php:286
+msgid "Recommend"
+msgstr "推荐"
+
+#: .././pop-library/processors/buttons/buttoninners.php:211
+#: .././pop-library/processors/buttons/buttons.php:296
+#, fuzzy
+msgid "Subscribe"
+msgstr "订阅"
+
+#: .././pop-library/processors/buttons/buttons.php:271
+#: .././pop-library/processors/comments/structures/scrolls/widgetries.php:58
+#: .././pop-library/processors/comments/structures/scrolls/widgetries.php:59
+msgid "Comments"
+msgstr "评论"
+
+#: .././pop-library/processors/buttons/buttons.php:291
+msgid "Recommended"
+msgstr "被推荐"
+
+#: .././pop-library/processors/buttons/buttons.php:301
+msgid "Subscribed"
+msgstr ""
+
+#: .././pop-library/processors/buttons/buttons.php:306
+msgid "Up-vote"
+msgstr "给予好评"
+
+#: .././pop-library/processors/buttons/buttons.php:311
+msgid "Up-voted"
+msgstr "好评"
+
+#: .././pop-library/processors/buttons/buttons.php:316
+msgid "Down-vote"
+msgstr "给予劣评"
+
+#: .././pop-library/processors/buttons/buttons.php:321
+msgid "Down-voted"
+msgstr "劣评"
+
+#: .././pop-library/processors/comments/blockgroups.php:98
+msgid "Add Comment"
+msgstr "添加评论"
+
+#: .././pop-library/processors/comments/blockgroups.php:124
+msgid "Add a comment for:"
+msgstr "添加评论:"
+
+#: .././pop-library/processors/comments/formcomponents-inputs/editor-formcomponents-inputs.php:50
+msgid "Comment*"
+msgstr "评论*"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "comments"
+msgstr "评论"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:31
+#, php-format
+msgid "No %s yet."
+msgstr "暂时没有%s。"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:35
+#, php-format
+msgid "That's it, no more %s found."
+msgstr "无法找到 %s了"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:43
+msgid "Comment added successfully!"
+msgstr "评论添加成功！"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:44
+msgid "Comment is missing."
+msgstr "评论不存在"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:45
+msgid "Your comment was added."
+msgstr "加入您的评论。"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:46
+msgid "Login/Register"
+msgstr "登入／注册"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:48
+#, php-format
+msgid "Please %s to add a comment."
+msgstr "请%s以添加评论。"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:53
+#, php-format
+msgid "You need a %s account to add a comment."
+msgstr "你需要一个%s的帐户以添加评论。"
+
+#: .././pop-library/processors/controls/anchor-controls.php:65
+msgid "Toggle compact/full form"
+msgstr "切换成简洁型/全格式"
+
+#: .././pop-library/processors/controls/anchor-controls.php:69
+msgid "Expand"
+msgstr "扩大"
+
+#: .././pop-library/processors/controls/anchor-controls.php:73
+msgid "Filter"
+msgstr "筛选"
+
+#: .././pop-library/processors/controls/anchor-controls.php:85
+#: .././pop-library/processors/viewcomponents/buttoninners.php:148
+#: .././pop-library/processors/viewcomponents/post-buttons.php:137
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:59
+#: .././pop-library/processors/viewcomponents/user-buttons.php:78
+msgid "Embed"
+msgstr "嵌入"
+
+#: .././pop-library/processors/controls/anchor-controls.php:89
+#: .././pop-library/processors/viewcomponents/buttoninners.php:152
+#: .././pop-library/processors/viewcomponents/post-buttons.php:142
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:64
+#: .././pop-library/processors/viewcomponents/user-buttons.php:83
+msgid "API Data"
+msgstr ""
+
+#: .././pop-library/processors/controls/anchor-controls.php:93
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:27
+msgid "Copy Search URL"
+msgstr "复制搜索网址"
+
+#: .././pop-library/processors/controls/anchor-controls.php:97
+#: .././pop-library/processors/viewcomponents/buttoninners.php:144
+#: .././pop-library/processors/viewcomponents/post-buttons.php:132
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:54
+#: .././pop-library/processors/viewcomponents/user-buttons.php:73
+msgid "Share by email"
+msgstr "通过电子邮件分享"
+
+#: .././pop-library/processors/controls/anchor-controls.php:101
+msgid "Invite your friends to join!"
+msgstr "邀请你的朋友加入"
+
+#: .././pop-library/processors/controls/anchor-controls.php:107
+msgid "Close"
+msgstr "关闭"
+
+#: .././pop-library/processors/controls/anchor-controls.php:113
+msgid "Toggle sidebar"
+msgstr "切换侧边栏"
+
+#: .././pop-library/processors/controls/anchor-controls.php:117
+msgid "Go back"
+msgstr "回去"
+
+#: .././pop-library/processors/controls/anchor-controls.php:121
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:161
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .././pop-library/processors/controls/anchor-controls.php:125
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:170
+msgid "Twitter"
+msgstr "Twitter"
+
+#: .././pop-library/processors/controls/anchor-controls.php:129
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:188
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .././pop-library/processors/controls/button-controls.php:57
+msgid "Refresh"
+msgstr "刷新"
+
+#: .././pop-library/processors/controls/button-controls.php:61
+msgid "Reset"
+msgstr "重启"
+
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:163
+msgid "Reply with..."
+msgstr "回复用…"
+
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:100
+msgid "Options"
+msgstr "选项"
+
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:104
+msgid "Contact/Links"
+msgstr "联系/链接"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:27
+msgid "Awesome! Your user account was created successfully!"
+msgstr "用户帐户已成功创建！"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:28
+msgid "Already logged in!"
+msgstr "已经登录！"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:32
+#, php-format
+msgid "Please %s first to create a new user account."
+msgstr "请%s以创建新的用户帐户。"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:27
+msgid "Profile updated successfully."
+msgstr "资料更新成功。"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:28
+msgid "Login"
+msgstr "登录"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:32
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your Profile."
+msgstr "请<a href=\"%s\">登录</a>以编辑您的个人资料。"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:37
+#, php-format
+msgid "Only %s accounts can be edited."
+msgstr "只有%s的用户可以被编辑。"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:43
+msgid "Your profile is not of 'Organization' type, so you cannot edit it here."
+msgstr "您的用户档案不是“组织”的类型，所以你不能在这里编辑。"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:44
+msgid "Your profile is not of 'Individual' type, so you cannot edit it here."
+msgstr "您的用户档案不是“个人”的类型，所以您不能在这里编辑。"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
+msgid "Show email in your user profile?"
+msgstr "把电子邮件显示在用户档案？"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:37
+msgid "Short description"
+msgstr "简介"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:42
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:146
+msgid "Facebook URL"
+msgstr "Facebook网址"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:47
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:147
+msgid "Twitter URL"
+msgstr "Twitter的网址"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:52
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:148
+msgid "LinkedIn URL"
+msgstr "LinkedIn网址"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:57
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:149
+msgid "Youtube URL"
+msgstr "YouTube网址"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:62
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:150
+msgid "Instagram URL"
+msgstr ""
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:67
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:151
+msgid "Blog URL"
+msgstr ""
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createupdateuser-blocks-base.php:12
+#: .././pop-library/processors/createupdateuser/blocks.php:100
+msgid "Submitting..."
+msgstr "呈交中。。。"
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:14
+msgid "Awesome! Your User Account was created successfully!"
+msgstr "用户帐户已成功创建！"
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:22
+#, php-format
+msgid "Please <a href=\"%s\">click here to log-in</a>."
+msgstr "请<a href=\"%s\">点击这里登录</a>。"
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:14
+msgid "User Account updated successfully."
+msgstr "用户资料已成功更新。"
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:16
+#, php-format
+msgid "View your <a href=\"%s\">updated user account</a>."
+msgstr "查看您的<a href=\"%s\">已更新用户资料</a>。"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:41
+msgid "Username"
+msgstr "用户名"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:49
+msgid "Current Password"
+msgstr "目前使用的密码"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:53
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:40
+msgid "Password"
+msgstr "密码"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:57
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:52
+msgid "New password"
+msgstr "新密码"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:61
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:56
+msgid "Repeat password"
+msgstr "重复密码"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:65
+msgid "Repeat new password"
+msgstr "重复新密码"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:69
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:63
+msgid "Name"
+msgstr "名称"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:74
+msgid "Website URL"
+msgstr "网址"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/textarea-formcomponents-inputs.php:37
+#: .././pop-library/processors/sidebars/widgetries.php:117
+msgid "Description"
+msgstr "简述"
+
+#: .././pop-library/processors/createupdateuser/forms/formgroups.php:81
+msgid ""
+"Please be careful to fill-in the email properly! It will not only appear in "
+"the profile page, but also be used by our system to send you notifications."
+msgstr ""
+"请谨慎填写电子邮件！它不仅会出现在个人资料页，也会被我们的系统用来向您发送通"
+"知。"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:28
+msgid "Password updated successfully."
+msgstr "密码已成功更新。"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid ""
+"Yep, it's good to change it every now and then, with so many crooks around!"
+msgstr "安全第一！"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:31
+msgid "Ops, there is a problem:"
+msgstr "抱歉，有一个问题："
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:35
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to change your password."
+msgstr "请<a href=\"%s\">登录</a>以更改您的密码。"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:40
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:45
+#, php-format
+msgid "Only %s accounts can change their password."
+msgstr "只有%s的帐户可以更改其密码。"
+
+#: .././pop-library/processors/formcomponents-inputs/captcha-formcomponents-inputs.php:25
+msgid "Captcha"
+msgstr "验证码"
+
+#: .././pop-library/processors/formcomponents-inputs/daterange-formcomponents-inputs.php:54
+msgid "Dates"
+msgstr "日期"
+
+#: .././pop-library/processors/formcomponents-inputs/daterange-formcomponents-inputs.php:58
+msgid "Date/Time"
+msgstr "日期／时间"
+
+#: .././pop-library/processors/formcomponents-inputs/editor-formcomponents-inputs.php:25
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:41
+msgid "Content"
+msgstr "内容"
+
+#: .././pop-library/processors/formcomponents-inputs/featuredimage-formcomponents-inputs.php:37
+msgid "Featured Image"
+msgstr "主要图片"
+
+#: .././pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:41
+msgid "Status"
+msgstr "状态"
+
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:48
+msgid "Order by"
+msgstr "按订单"
+
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:52
+msgid "Default view"
+msgstr "原本视图"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:55
+#: .././pop-library/processors/forms/submit-buttons.php:51
+msgid "Search"
+msgstr "搜索"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:59
+msgid "Hashtags"
+msgstr "井号标签"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:67
+msgid "Your name"
+msgstr "您的名字"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:45
+msgid "Email(s)"
+msgstr "电子邮件"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:49
+msgid "Additional message"
+msgstr "其他信息"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/post-typeahead-formcomponents-inputs.php:40
+msgid "Posted in response / as an addition to"
+msgstr "帖子为响应/附加内容"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/post-typeaheadcomponent-formcomponents-inputs.php:25
+msgid "Content:"
+msgstr "内容："
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:26
+msgid "Search:"
+msgstr "搜索："
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:44
+msgid "Content with "
+msgstr "内容："
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:49
+msgid "Users with "
+msgstr "用户:"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/tag-typeaheadcomponent-formcomponents-inputs.php:25
+msgid "Tags:"
+msgstr "标签："
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:33
+#, php-format
+msgid "Search %s"
+msgstr "搜索%s"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:38
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:60
+#: .././pop-library/processors/sidebars/widgetries.php:116
+#: .././pop-library/processors/sidebars/widgetries.php:118
+msgid "Author(s)"
+msgstr "作者"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:44
+#: .././pop-library/processors/sidebars/widgetries.php:111
+msgid "In response to"
+msgstr "回复给："
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:56
+msgid "Users"
+msgstr "用户"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:64
+#: .././pop-library/processors/forms/formcomponentgroups.php:228
+msgid "Co-authors"
+msgstr "共创者"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:28
+msgid "Users:"
+msgstr "用户："
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:186
+msgid "Type post title..."
+msgstr "输入文章标题..."
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:187
+#: .././pop-library/processors/forms/formcomponentgroups.php:188
+msgid "Type name..."
+msgstr "键入名称..."
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:197
+msgid ""
+"Type emails here, separated by space or comma (\" \" or \",\"), or 1 email "
+"per line"
+msgstr "在此输入电子邮件，用空格或逗号分隔（“ ”或“，”），或每行1个电子邮件"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:212
+msgid ""
+"Co-authoring this post with other users? Select them all here, they will not "
+"only appear as co-owners in the webpage, but will also be able to edit this "
+"post."
+msgstr ""
+"和其他的用户共创这个帖子？把他们列在这里，让他们显示为共创者和拥有编辑这帖子"
+"的权利。"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:216
+msgid ""
+"Please select all related content, so the reader can easily access this "
+"inter-related information."
+msgstr "请选择所有相关的内容，让读者获得相互关联的信息。"
+
+#: .././pop-library/processors/forms/submit-buttons.php:35
+msgid "OK"
+msgstr "好"
+
+#: .././pop-library/processors/forms/submit-buttons.php:39
+msgid "Send"
+msgstr "发送"
+
+#: .././pop-library/processors/forms/submit-buttons.php:43
+msgid "Save"
+msgstr "保存"
+
+#: .././pop-library/processors/forms/submit-buttons.php:47
+msgid "Update"
+msgstr "更新"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:47
+msgid "follow users"
+msgstr "跟随用户"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:48
+msgid "stop following users"
+msgstr "取消跟随用户"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:49
+msgid "recommend posts"
+msgstr "推荐帖子"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:50
+msgid "stop recommending posts"
+msgstr "取消推荐"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:51
+msgid "subscribe to tags/topics"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:52
+msgid "unsubscribe from tags/topics"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:53
+msgid "up-vote posts"
+msgstr "给予好评"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:54
+msgid "stop up-voting posts"
+msgstr "取消好评"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:55
+msgid "down-vote posts"
+msgstr "给予劣评"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:56
+msgid "stop down-voting posts"
+msgstr "取消劣评"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:62
+#, php-format
+msgid "Please %s to %s."
+msgstr "请%s来%s。"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:70
+#, php-format
+msgid "You need a %s account to access this functionality."
+msgstr "您需要 %s 帐户以使用这个功能"
+
+#: .././pop-library/processors/layouts/menus/dropdownbutton-menulayouts.php:47
+msgid "Add new"
+msgstr "输入新项目"
+
+#: .././pop-library/processors/layouts/menus/multitargetindent-menulayouts.php:58
+msgid "Navigate"
+msgstr "导航"
+
+#: .././pop-library/processors/login/blocks.php:123
+msgid "You are not logged in."
+msgstr "你没有登录。"
+
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:36
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:44
+msgid "Username or email"
+msgstr "用户名或电子邮件"
+
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:48
+msgid "Code"
+msgstr "代码"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:35
+msgid "Get password reset code"
+msgstr "获取密码重设代码"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:39
+msgid "Reset password"
+msgstr "重设密码"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:43
+msgid "Yes, please log me out"
+msgstr "是的，请把我登出"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "Still not there..."
+msgstr "还没到达…"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:34
+msgid "Hurray, login successful!"
+msgstr "耶，登录成功了！"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:35
+msgid "Add"
+msgstr "添加"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:36
+msgid "You can now add posts and comments, follow users, etc"
+msgstr "添加"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:41
+msgid "Almost there..."
+msgstr "差不多了..."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:43
+#, php-format
+msgid ""
+"We sent you an email with a code. Please copy it and <a href=\"%s\">paste it "
+"here</a>."
+msgstr ""
+"我们给您送了一封电子邮件，里面有个代码。请复制并<a href=\"%s\">粘贴在这里</"
+"a>。"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:50
+msgid "Password reset successful"
+msgstr "密码重置成功"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:52
+#, php-format
+msgid "Please <a href=\"%s\">click here to log in</a>."
+msgstr "请<a href=\"%s\">点击此处登录</a>。"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:55
+msgid "The code is missing"
+msgstr "代码没被填入"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:56
+msgid "The code is not correct"
+msgstr "此代码是不正确的"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:57
+msgid "Password is missing"
+msgstr "密码没被填入"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:58
+msgid "The password must be at least 8 characters long."
+msgstr "密码必须至少8个字符。"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:59
+msgid "Repeat password is missing"
+msgstr "重复密码没被填入"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:60
+msgid "The passwords do not match"
+msgstr "密码不对"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:62
+#, php-format
+msgid ""
+"The code is invalid or expired. Please <a href=\"%s\">generate it again</a>."
+msgstr "此代码已无效或过期。请<a href=\"%s\">制造一个新的</a>。"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:69
+msgid "Logged out now"
+msgstr "现在已经登出"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:70
+msgid "But please make sure to come back!"
+msgstr "请务必回来！"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:81
+#, php-format
+msgid "You are already logged in, please %s first to re-set your password."
+msgstr "您已经登录，请%s以重新设置密码。"
+
+#: .././pop-library/processors/login/structures/forms/forms.php:70
+msgid ""
+"Please type in your account username or email, and you will receive a code "
+"in your email to reset your password."
+msgstr "请输入您的用户名或电子邮件地址，您会在你的电邮里收到重置密码的代码。"
+
+#: .././pop-library/processors/login/structures/forms/forms.php:85
+msgid "We sent you an email with a code."
+msgstr "我们已把代码发送到您的电子邮件。"
+
+#: .././pop-library/processors/login/structures/forms/forms.php:86
+msgid "Please copy/paste it in the input below, and choose your new password."
+msgstr "请把它填入下面的空格，并选择您的新密码。"
+
+#: .././pop-library/processors/login/structures/forms/forms.php:100
+msgid "Are you sure you want to log out?"
+msgstr "您确定要登出？"
+
+#: .././pop-library/processors/media/formcomponents-inputs/multiselect-formcomponents-inputs.php:40
+msgid "Resource type"
+msgstr "资源类型"
+
+#: .././pop-library/processors/media/formcomponents-inputs/multiselect-formcomponents-inputs.php:44
+msgid "Is Resource"
+msgstr "是资源"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Invite successful!"
+msgstr "邀请成功！"
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:54
+msgid "Embed:"
+msgstr "嵌入："
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:58
+msgid "API Data:"
+msgstr ""
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:62
+msgid "Copy Search URL:"
+msgstr "复制搜索网址："
+
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:31
+#, fuzzy
+msgid "Copy URL"
+msgstr "复制搜索网址"
+
+#: .././pop-library/processors/share/formcomponents-inputs/textarea-formcomponents-inputs.php:26
+msgid "Embed code"
+msgstr "嵌入代码"
+
+#: .././pop-library/processors/share/structures/contents.php:33
+msgid "Preview:"
+msgstr "预览："
+
+#: .././pop-library/processors/share/structures/contents.php:40
+msgid "Please copy/paste the html code below into your website."
+msgstr "请复制/粘贴下面的HTML代码到您的网站。"
+
+#: .././pop-library/processors/share/structures/contents.php:48
+msgid "Please select and copy (Ctrl + C) the URL below."
+msgstr "请选择并复制（Ctrl + C）下面的网址。"
+
+#: .././pop-library/processors/sidebars/messages.php:27
+msgid "Nothing here"
+msgstr "这里没有什么"
+
+#: .././pop-library/processors/sidebars/messages.php:31
+msgid "No contact details"
+msgstr "无联系方式"
+
+#: .././pop-library/processors/sidebars/widgetries.php:113
+msgid "Responses"
+msgstr "回复"
+
+#: .././pop-library/processors/sidebars/widgetries.php:115
+msgid "Contact info"
+msgstr "联系方式"
+
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:179
+msgid "Google+"
+msgstr "Google+"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:27
+msgid "Welcome"
+msgstr "欢迎"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:31
+msgid "You are already logged in as"
+msgstr "您已经登录为"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:46
+msgid "Logout?"
+msgstr "登出？"
+
+#: .././pop-library/processors/viewcomponents/addcomment-post-buttons.php:76
+#: .././pop-library/processors/viewcomponents/buttoninners.php:167
+msgid "Write a comment"
+msgstr "写个评论"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:132
+#: .././pop-library/processors/viewcomponents/post-buttons.php:148
+msgid "Volunteer!"
+msgstr "志愿者！"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:136
+#: .././pop-library/processors/viewcomponents/post-buttons.php:153
+msgid "Flag"
+msgstr "提出警告"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:140
+msgid "Click to Volunteer"
+msgstr "点击此处当志愿者"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:158
+#: .././pop-library/processors/viewcomponents/user-buttons.php:88
+msgid "Send message"
+msgstr "发信息"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:162
+msgid "Reply"
+msgstr "回复"
+
+#: .././validation.php:32
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:37
+msgid ""
+"Error: <b>PoP Bootstrap Processors</b> is not installed/activated. Without "
+"it, <b>PoP Core Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=\"http://wordpress.org/"
+"extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Bootstrap Processors</b> is not installed/activated. Without "
+"it, <b>PoP Core Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=“http://wordpress.org/"
+"extend/plugins/pop/“>from here</a>."
+
+#: .././validation.php:43
+#, php-format
+msgid ""
+"Error: this version of <b>PoP Core Processors</b> requires version %s or "
+"bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
+"your plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: this version of <b>PoP Core Processors</b> requires version %s or "
+"bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
+"your plugin installer or download it <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>from here</a>."
+
+#~ msgid ""
+#~ "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+#~ "<b>PoP Core Processors</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"http://wordpress.org/"
+#~ "extend/plugins/pop/\">from here</a>."
+#~ msgstr ""
+#~ "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+#~ "<b>PoP Core Processors</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"http://wordpress.org/"
+#~ "extend/plugins/pop/\">from here</a>."
+
+#~ msgid ""
+#~ "Error: this version of <b>PoP Core Processors</b> requires version %s or "
+#~ "bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+#~ "plugin installer or download it <a href=\"http://wordpress.org/extend/"
+#~ "plugins/pop/\">from here</a>."
+#~ msgstr ""
+#~ "Error: this version of <b>PoP Core Processors</b> requires version %s or "
+#~ "bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+#~ "plugin installer or download it <a href=\"http://wordpress.org/extend/"
+#~ "plugins/pop/\">from here</a>."
+
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#~ msgid "<p>Dear %s,</p>"
+#~ msgstr "<p>亲爱的%s，</p>"
+
+#~ msgid "<p>Howdy!</p>"
+#~ msgstr "<p>您好！</p>"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "您的%s成功被创造"
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
+#~ msgstr "<p>您%s的<a href=\"%s\">%s</a>创建成功！</p>"
+
+#~ msgid ""
+#~ "Please notice that the status of the %s is <strong>'Draft'</strong>, so "
+#~ "it won't be published online."
+#~ msgstr "请注意，%s的状态还是<strong>“草稿”</strong>，所以还未在网上发布。"
+
+#~ msgid ""
+#~ "<p>Please wait for our moderators approval. You will receive an email "
+#~ "with the confirmation.</p>"
+#~ msgstr "<p>请等待我们的版主批准。您将收到一封电子邮件确认。</p>"
+
+#~ msgid "[%s]: New %s by %s"
+#~ msgstr "[%s]：新%s,作者为%s"
+
+#~ msgid "A new %s has been submitted on %s:"
+#~ msgstr "新的%s在%s被提交："
+
+#~ msgid "[%s]: %s updated by %s"
+#~ msgstr "[%s]：%s被%s更新"
+
+#~ msgid "%s updated on %s:"
+#~ msgstr "%s在%s被更新："
+
+#~ msgid "<b>Author:</b> %s"
+#~ msgstr "<b>作者：</b>%s"
+
+#~ msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+#~ msgstr "<b>作者电子邮件：</b><a href=\"mailto:%1$s\">％1$s</a>"
+
+#~ msgid "<b>Title:</b> %s"
+#~ msgstr "<b>标题：</b>%s"
+
+#~ msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>永久链接：</b><a href=\"%1$s\">％1$s</a>"
+
+#~ msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>修改链接：</b><a href=\"%1$s\">％1$s</a>"
+
+#~ msgid "<b>Status:</b> %s"
+#~ msgstr "<b>状态：</b>%s"
+
+#~ msgid "[%s]: New Profile: %s"
+#~ msgstr "[%s]：新的档案：%s"
+
+#~ msgid "A Profile was created on %s."
+#~ msgstr "个人档案在%s被创建。"
+
+#~ msgid "[%s]: Profile updated: %s"
+#~ msgstr "[%s]：个人档案已被更新：%s"
+
+#~ msgid "Profile updated on %s."
+#~ msgstr "个人档案更新%s。"
+
+#~ msgid "<b>Profile:</b> %s"
+#~ msgstr "<b>档案：</b>%s"
+
+#~ msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>个人档案链接：</b><a href=\"%1$s\">％1$s</a>"
+
+#~ msgid "Welcome to %s!"
+#~ msgstr "欢迎来到%s！"
+
+#~ msgid ""
+#~ "<p>Your user account was created successfully. This is your public "
+#~ "profile page:</p>"
+#~ msgstr "<p>您的用户帐户已成功创建。这是您的档案页：</p>"
+
+#~ msgid "Now you can share your content/activities with our community:"
+#~ msgstr "您可以与我们的社群分享您的内容/活动："
+
+#~ msgid "About %s"
+#~ msgstr "关于%s"
+
+#~ msgid "A new %s was posted referencing \"%s\""
+#~ msgstr "一个新的%s被张贴引用“%s”"
+
+#~ msgid ""
+#~ "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
+#~ msgstr "<p>您的%s<a href=\"%s\">%s</a>已经被新的%s引用：</p>"
+
+#~ msgid "Your %s was approved!"
+#~ msgstr "您的%s已被批准！"
+
+#~ msgid "<p>Hurray! Your %s was approved!</p>"
+#~ msgstr "<p>耶！您的%s已被批准！</p>"
+
+#~ msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p><a href=\"%s\">%s</a>的评论有个回应：</p>"
+
+#~ msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>一个新的评论已被添加到<a href=\"%s\">%s</a>：</p>"
+
+#~ msgid "Click here to reply the comment"
+#~ msgstr "点击此处回复评论"
+
+#~ msgid "%s replied your comment in “%s”"
+#~ msgstr "%s在“%s”回答您的评论"
+
+#~ msgid "New comment added in “%s”"
+#~ msgstr "新评论被添加于“%s”"
+
+#~ msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
+#~ msgstr "<p><a href=\"%s\">%s</a>在%s提到您：</p>"
+
+#~ msgid "You were mentioned in %s “%s”"
+#~ msgstr "您在题目为“%2$s”的%1$s被提到"
+
+#~ msgid ""
+#~ "<p><a href=\"%s\">%s</a> mentioned you in a comment from %s <a href=\"%s"
+#~ "\">%s</a>:</p>"
+#~ msgstr ""
+#~ "<p><a href=\"%1$s\">%2$s</a>在题目为<a href=\"%4$s\">%5$s</a>的%3$s的评论"
+#~ "中提到您：</p>"
+
+#~ msgid "You were mentioned in a comment from %s “%s”"
+#~ msgstr "您在题目为“%2$s”的%1$s的评论中被提到"
+
+#~ msgid "Password reset code"
+#~ msgstr "密码重置码"
+
+#~ msgid "Retrieve password"
+#~ msgstr "找回密码"
+
+#~ msgid "Your password has been changed successfully."
+#~ msgstr "您的密码已被更改成功。"
+
+#~ msgid "You have a new follower!"
+#~ msgstr "您有一个新的追随者！"
+
+#~ msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
+#~ msgstr "<p>恭喜！ <a href=\"%s\">您有一个新的追随者</a>：</p>"
+
+#~ msgid ""
+#~ "<p>This user will receive notifications following your activity, such as "
+#~ "recommending content, posting a new discussion or comment, and others.</p>"
+#~ msgstr ""
+#~ "<p>此用户将会收到您的活动通知，如推荐内容，新讨论或评论发布，等等。</p>"
+
+#~ msgid "Your %s was recommended!"
+#~ msgstr "您的%s被推荐了！"
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was recommended by:</p>"
+#~ msgstr "<p>您题目为<a href=\"%2$s\">%3$s</a>的%1$s已被推荐：</p>"
+
+#~ msgid ""
+#~ "Please add the following emails to your contact list, to make sure you "
+#~ "receive our notifications:"
+#~ msgstr "请添加以下电子邮件到您的联系人列表，以确保您会收到我们的通知："
+
+#~ msgid "More %s"
+#~ msgstr "%s 更多"
+
+#~ msgid "Member %s"
+#~ msgstr "队员%s"
+
+#~ msgid "Related %s"
+#~ msgstr "%s相关"
+
+#, fuzzy
+#~ msgid "<p>Your %s was created successfully!</p>"
+#~ msgstr "您的%s成功被创造"
+
+#, fuzzy
+#~ msgid "In response/addition to"
+#~ msgstr "回复给："
+
+#~ msgid "%s latest posts"
+#~ msgstr "%s 最新帖子"
+
+#~ msgid "View %1$s profile and get in touch through %2$s."
+#~ msgstr "见%1$s 及联络 %2$s."
+
+#~ msgid "Project"
+#~ msgstr "項目"
+
+#~ msgid "Announcement"
+#~ msgstr "公告"
+
+#~ msgid "Discussion"
+#~ msgstr "讨论"
+
+#~ msgid "Featured"
+#~ msgstr "特点"
+
+#~ msgid "Event"
+#~ msgstr "活动"
+
+#~ msgid ""
+#~ "MESYM.com is a platform for environmental movements in Malaysia. There "
+#~ "are many good actions being done out there. Our goal is to bring them "
+#~ "together. We connect the green dots."
+#~ msgstr ""
+#~ "MESYM.com 是一个推动马来西亚环境保护的平台。这里拥有许多您可以参与的环境保"
+#~ "护活动与项目。我们最主要的目的为聚集这些热爱环境人士在这个平台上。我们把马"
+#~ "来西亚绿色勇士们联系起来。"
+
+#~ msgid ""
+#~ " Join our environmental community and find out who is doing what, where "
+#~ "and when."
+#~ msgstr "现在就参与我们的团队，开始寻找绿色活动，预知更多的详情与时间。"
+
+#~ msgid " on %s."
+#~ msgstr "关于%s."
+
+#~ msgid "Add your %s"
+#~ msgstr "输入%s "
+
+#~ msgid "Upcoming Events"
+#~ msgstr "最新活动"
+
+#~ msgid "Upcoming and Past Events"
+#~ msgstr "最新与过去的活动"
+
+#~ msgid "Environmental Projects"
+#~ msgstr "环境保护活动项目"
+
+#~ msgid "Environmental Stories"
+#~ msgstr "关于环境保护的故事"
+
+#~ msgid "Environmental Discussions"
+#~ msgstr "环境保护讨论事项"
+
+#~ msgid "Environmental Announcements"
+#~ msgstr "环境保护公告"
+
+#~ msgid "Featured Articles"
+#~ msgstr "专栏"
+
+#~ msgid "MESYM Blogs"
+#~ msgstr "MESYM部落格"
+
+#~ msgid "Environmental Resources"
+#~ msgstr "环境资源"
+
+#~ msgid "People"
+#~ msgstr "人"
+
+#~ msgid "Organization Profile"
+#~ msgstr "组织结构"
+
+#~ msgid "Individual Profile"
+#~ msgstr "个人结构"
+
+#~ msgid "Upcoming Event"
+#~ msgstr "最新活动"
+
+#~ msgid "Current Event"
+#~ msgstr "现有活动"
+
+#~ msgid "Past Event"
+#~ msgstr "过往活动"
+
+#~ msgid ""
+#~ "Aiyoooo, it seems there is nothing here. Where else would you like to go?"
+#~ msgstr "糟糕，无法搜索任何资讯。请到另一个主题"
+
+#~ msgid "Latest"
+#~ msgstr "最近"
+
+#~ msgid "%sBack"
+#~ msgstr "%s回去"
+
+#~ msgid "Details"
+#~ msgstr "详细信息"
+
+#~ msgid "Thumbnail"
+#~ msgstr "縮略圖"
+
+#~ msgid "Map"
+#~ msgstr "地图"
+
+#~ msgid "Calendar"
+#~ msgstr "日历"
+
+#~ msgid "View/Preview"
+#~ msgstr "查看/預覽"
+
+#~ msgid "FAQ: Registration"
+#~ msgstr "常见问题：注册"
+
+#~ msgid "The Drivers"
+#~ msgstr "驾驶人士"
+
+#~ msgid "The Advisors"
+#~ msgstr "顾问"
+
+#~ msgid "The Volunteers"
+#~ msgstr "自愿者"
+
+#~ msgid "Inviting users to become your members"
+#~ msgstr "邀请成为会员"
+
+#~ msgid ""
+#~ "Please click on %s to invite your physical Organization's members to "
+#~ "become your members in the website."
+#~ msgstr "请按 %s来邀请您的组织会员成为网页里您的会员"
+
+#~ msgid "Current members"
+#~ msgstr "目前成员"
+
+#~ msgid ""
+#~ "The users listed below have declared themselves to be members of your "
+#~ "Organization. You can click on \"Edit Membership\" to edit the settings "
+#~ "for each one of them:"
+#~ msgstr ""
+#~ "下面列出的用户都已声明是您的组织的成員。您可以点击“编辑成員”来设置他们："
+
+#~ msgid "Privileges"
+#~ msgstr "特权"
+
+#~ msgid "University teachers/students"
+#~ msgstr "大学教授与学生"
+
+#~ msgid "NGO volunteers"
+#~ msgstr "自愿者"
+
+#~ msgid "Company staff"
+#~ msgstr "公司职员"
+
+#~ msgid "Latest Content"
+#~ msgstr "内容"
+
+#~ msgid "Projects"
+#~ msgstr "工程项目"
+
+#~ msgid "Stories"
+#~ msgstr "故事"
+
+#~ msgid "Announcements"
+#~ msgstr "公告"
+
+#~ msgid "Discussions"
+#~ msgstr "讨论"
+
+#~ msgid "Links"
+#~ msgstr "链接"
+
+#~ msgid "Publishing Status"
+#~ msgstr "发布状态"
+
+#~ msgid "Title*"
+#~ msgstr "题目＊"
+
+#~ msgid "Yay! Your %s was updated successfully!"
+#~ msgstr "恭喜！您的%s 已更新"
+
+#~ msgid ""
+#~ "Please <a href=\"%s\">log in</a> with a %s account to create your %s."
+#~ msgstr "请<a href=\"%s\">log in</a> 同时%s户口来创建您的%s"
+
+#~ msgid "Please <a href=\"%s\">log in</a> with a %s account to edit your %s."
+#~ msgstr "请<a href=\"%s\">登入</a> 以及%s 户口以编辑您的 %s."
+
+#~ msgid "Ops, it seems you have no rights to edit this %s."
+#~ msgstr "不好意思, 您无权编辑这%s."
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "谁能编辑内容在%s?"
+
+#~ msgid "Anyone."
+#~ msgstr "任何人"
+
+#~ msgid "Is it free?"
+#~ msgstr "请问是免费的吗？"
+
+#~ msgid "Yes."
+#~ msgstr "是的"
+
+#~ msgid "Yes, only registered users can add content."
+#~ msgstr "是的，只有注册用户可添加内容"
+
+#~ msgid "Do the users of the website also need to log in to read my content?"
+#~ msgstr "请问本网站读者也需要登入才能阅读我的内容吗？"
+
+#~ msgid "No, anyone can access the website and read all the content."
+#~ msgstr "不需要。任何人都可游览本网页以及阅读内容。"
+
+#~ msgid "Will my content be published immediately?"
+#~ msgstr "请问我的内容会立即发布吗？"
+
+#~ msgid ""
+#~ "No. Before that, our moderators must approve the content, in order to "
+#~ "avoid spam and inappropriate content."
+#~ msgstr ""
+#~ "不会。内容发布之前，我们的版主将会审查内容以防止发布不道德与不符合的内容。"
+
+#~ msgid "Where will my content appear?"
+#~ msgstr "请问我的内容会出现在哪里？"
+
+#~ msgid ""
+#~ "As soon as it gets published, it will appear in our homepage, in the "
+#~ "corresponding section (Events, Projects, etc), and in your profile.<br/"
+#~ "><br/>In addition, if you are member of any Community, it will also "
+#~ "appear under their profile."
+#~ msgstr ""
+#~ "如内容以发布，它将会出现在您的主页里的相关截面（如活动，项目等），以及您的"
+#~ "简介里。<br/><br/>此外，如果您也是社区里的会员，内容也会出现在他们的简介"
+#~ "里。"
+
+#~ msgid "Can I share my post with more authors?"
+#~ msgstr "请问我可以跟更多的作者分享我的帖子吗？"
+
+#~ msgid ""
+#~ "Yes. In field 'Authors' you can add more users (either Organizations or "
+#~ "Individuals) to own the post. They will both appear as authors and have "
+#~ "full editing access."
+#~ msgstr ""
+#~ "当然可以。请在“作者“里添加更多的用户（如组织或个人）来拥有您的帖子。一旦添"
+#~ "加他们为”作者“，他们也能拥有编辑的权限。"
+
+#~ msgid "Can I request volunteers?"
+#~ msgstr "请问我能要求志愿者吗？"
+
+#~ msgid ""
+#~ "Yes. Choose 'Yes' in field 'Volunteers needed?', each time someone "
+#~ "applies to volunteer for your Project/Event/Announcement you will receive "
+#~ "an email immediately with the person's information.<br/><br/>We do not "
+#~ "engage the volunteer in any way."
+#~ msgstr ""
+#~ "是的。请点击“要求志愿者”，任何的志愿者加入您的项目，您会立即收到一封电邮，"
+#~ "电邮里将出现志愿者的基本个人资料。<br/><br/>我们不需要任何的志愿者。"
+
+#~ msgid "Is it free to register in the website?"
+#~ msgstr "请问会员注册是免费的吗？"
+
+#~ msgid "What are the benefits of registering?"
+#~ msgstr "注册为会员会得到什么好处？"
+
+#~ msgid ""
+#~ "You will be able to post all your content (events, projects, discussions, "
+#~ "etc), look for volunteers, and appear in the User Directory."
+#~ msgstr ""
+#~ "您将可发表或发布您的内容（如活动，项目，讨论等），要求志愿者，以及内容出现"
+#~ "在用户的目录里。"
+
+#~ msgid "What is the User Directory?"
+#~ msgstr "什么是会员目录？"
+
+#~ msgid "What is the difference between Organization/Individual accounts?"
+#~ msgstr "请问组织账号与个人账号有什么分别？"
+
+#~ msgid ""
+#~ "Organizations can have 'members' in the website, and each piece of "
+#~ "content posted by any member will also appear under the Organization "
+#~ "profile page."
+#~ msgstr ""
+#~ "组织账号能够拥有自己的会员，以及任何的会员发表将出现在组织的简介里。"
+
+#~ msgid "What's going on all over Malaysia."
+#~ msgstr "马来西亚怎么回事了？"
+
+#~ msgid "Volunteer for projects from many NGOs, or even start your own!"
+#~ msgstr "有来自非政府组织项目的志愿者，或着自己组织项目。"
+
+#~ msgid ""
+#~ "After volunteering, post your photo blog, share your experience with the "
+#~ "world."
+#~ msgstr ""
+#~ "当您参与了志愿者，您可以上传你的照片日记，分享您的感想与经历给全世界"
+
+#~ msgid "Have vacancies? Need green-minded people? Post it here."
+#~ msgstr "有空缺吗？想要认识更多的绿色爱好者？请在这里发帖"
+
+#~ msgid ""
+#~ "Anything and everything: what do you want to express concerning the "
+#~ "environment situation in Malaysia?"
+#~ msgstr "任何事物： 您有什么想表达关于马来西亚的环境保护的形势？"
+
+#~ msgid ""
+#~ "Browse the living database of Organizations and find out who is doing "
+#~ "what, when and where."
+#~ msgstr "游览我们的组织资料库，知道更多活动，时间与地点。"
+
+#~ msgid "Volunteers Needed?"
+#~ msgstr "需要志愿者？"
+
+#~ msgid ""
+#~ "Do you need volunteers? Each time a user applies to volunteer, you will "
+#~ "get a notification email with the volunteer's contact information."
+#~ msgstr ""
+#~ "您需要志愿者吗？每当用户注册为志愿者，您将收到电邮通知以得到该志愿者的联络"
+#~ "资料。"
+
+#~ msgid "Events"
+#~ msgstr "活动"
+
+#~ msgid "Past Events"
+#~ msgstr "过往活动"
+
+#~ msgid "User"
+#~ msgstr "用户"
+
+#~ msgid "Featured articles"
+#~ msgstr "推荐文章"
+
+#~ msgid "Blog entries"
+#~ msgstr "部落客输入"
+
+#~ msgid "Resources"
+#~ msgstr "资源"
+
+#~ msgid "Organization"
+#~ msgstr "组织团体"
+
+#~ msgid "Individual"
+#~ msgstr "个人"
+
+#~ msgid "Individuals"
+#~ msgstr "个人"
+
+#~ msgid "Sponsor"
+#~ msgstr "赞助商"
+
+#~ msgid "Sponsors"
+#~ msgstr "赞助商"
+
+#~ msgid "Featured Community"
+#~ msgstr "特色社区"
+
+#~ msgid "Featured Communities"
+#~ msgstr "特色社区"
+
+#~ msgid "No more %s found."
+#~ msgstr "无法找到 %s"
+
+#~ msgid "Please %s or register %s / %s to access your %s."
+#~ msgstr "请 %s或注册%s / %s 以登入您的%s."
+
+#~ msgid ""
+#~ "Your account has no access to this functionality. Please <a href=\"%s"
+#~ "\">log in</a> with a different user account."
+#~ msgstr "您的户口无法登入。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid ""
+#~ "Your account has no permission to edit this %s. Please <a href=\"%s\">log "
+#~ "in</a> with a different user account."
+#~ msgstr "您的户口无权编辑这%s。请<a href=\"%s\">登入</a>另一个用户户口。"
+
+#~ msgid "Featured Organizations"
+#~ msgstr "精选组织团体"
+
+#~ msgid "<em>Many thanks to <strong>our Sponsors</strong>:</em>"
+#~ msgstr "<em>非常感谢<strong>我们的赞助商</strong>:</em>"
+
+#~ msgid "The website is currently in beta, please forgive all the bugs."
+#~ msgstr "该网站属于测试阶段，如有系统错误，请原谅。"
+
+#~ msgid "Send message to:"
+#~ msgstr "发送讯息给："
+
+#~ msgid "Volunteer for:"
+#~ msgstr "志愿者为："
+
+#~ msgid "No categories"
+#~ msgstr "无组别"
+
+#~ msgid "No Categories"
+#~ msgstr "无组别"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "加载更多"
+
+#~ msgid "When"
+#~ msgstr "时间"
+
+#~ msgid "Search Results for:"
+#~ msgstr "搜索结果："
+
+#~ msgid "Ops, nothing found here!"
+#~ msgstr "不好意思，没搜索到任何东西"
+
+#, fuzzy
+#~ msgid "My Organizations"
+#~ msgstr "Organisasi-organisasi"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "F jS, Y"
+#~ msgstr "F jS, Y"
+
+#~ msgid "F, Y"
+#~ msgstr "F, Y"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "j M Y"
+#~ msgstr "j M Y"

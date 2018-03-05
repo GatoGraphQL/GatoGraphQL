@@ -1,0 +1,1815 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PoP Theme Wassup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-05 13:23+0800\n"
+"PO-Revision-Date: 2018-03-05 13:23+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <leo@getpop.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././_plugins/gravityforms-pop/library/notifications.php:69
+#, php-format
+msgid "Notification from %s"
+msgstr "Notificación de %s"
+
+#: .././_plugins/gravityforms-pop/pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:15
+msgid "Your email is not subscribed to our newsletter."
+msgstr "Tu email no está suscrito a nuestro newsletter."
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:13
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:13
+#: .././pop-library/dataload/actionexecuters/library/flag.php:13
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:13
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:13
+msgid "Your name cannot be empty."
+msgstr "Tu nombre no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:17
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:17
+#: .././pop-library/dataload/actionexecuters/library/flag.php:17
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:17
+#: .././pop-library/dataload/actionexecuters/library/subscribe-to-newsletter.php:13
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:13
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:17
+msgid "Email cannot be empty."
+msgstr "El email no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:20
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:20
+#: .././pop-library/dataload/actionexecuters/library/flag.php:20
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:20
+#: .././pop-library/dataload/actionexecuters/library/subscribe-to-newsletter.php:16
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:16
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:20
+msgid "Email format is incorrect."
+msgstr "El formato del email es incorrecto."
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:24
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:24
+msgid "Message cannot be empty."
+msgstr "Mensaje no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:54
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:68
+#: .././pop-library/dataload/actionexecuters/library/flag.php:68
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:58
+#: .././pop-library/dataload/actionexecuters/library/subscribe-to-newsletter.php:44
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:69
+#, php-format
+msgid "[%s]: %s"
+msgstr "[%s]: %s"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:56
+msgid "Contact us"
+msgstr "Contáctenos"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:61
+msgid "New contact us submission"
+msgstr "Nueva sumisión de Contacto"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:64
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:84
+#: .././pop-library/dataload/actionexecuters/library/flag.php:79
+#: .././pop-library/dataload/actionexecuters/library/subscribe-to-newsletter.php:61
+msgid "Name"
+msgstr "Nombre"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:68
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:88
+#: .././pop-library/dataload/actionexecuters/library/flag.php:83
+#: .././pop-library/dataload/actionexecuters/library/subscribe-to-newsletter.php:54
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:91
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:91
+msgid "Email"
+msgstr "Email"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:75
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:95
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:63
+msgid "Subject"
+msgstr "Asunto"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-us.php:79
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:99
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:31
+msgid "Message"
+msgstr "Mensaje"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:29
+msgid "The requested user cannot be empty."
+msgstr "El usuario requerido no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:36
+msgid "The requested user does not exist."
+msgstr "El usuario al que se hace referencia no existe."
+
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:71
+#, php-format
+msgid "%s sends you a message"
+msgstr "%s te envía un mensaje"
+
+#: .././pop-library/dataload/actionexecuters/library/contact-user.php:79
+#, php-format
+msgid "You have been sent a message from a user in %s"
+msgstr "Un usuario de %s te mandó un mensaje"
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:24
+msgid "Why flag cannot be empty."
+msgstr "El campo Porqué es inapropiado no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:29
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:25
+msgid "The requested post cannot be empty."
+msgstr "El post al que se hace referencia no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:37
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:33
+msgid "The requested post does not exist."
+msgstr "El post al que se hace referencia no existe."
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:70
+msgid "Flag post"
+msgstr "Marcar como inapropriado"
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:76
+msgid "New post flagged by user"
+msgstr "Post marcado como inapropiado por usuario"
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:90
+msgid "Post ID"
+msgstr "Post ID"
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:94
+msgid "Post title"
+msgstr "Título del Post"
+
+#: .././pop-library/dataload/actionexecuters/library/flag.php:98
+msgid "Why flag"
+msgstr "Porqué es inapropriado"
+
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:24
+msgid "The shared-page URL cannot be empty."
+msgstr "La URL de la página compartida no puede ser vacía."
+
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:28
+msgid "The shared-page title cannot be empty."
+msgstr "El título de la página compartida no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:61
+#, php-format
+msgid "%s is sharing with you: %s"
+msgstr "%s está compartiendo contigo: %s"
+
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:70
+#, php-format
+msgid "%s is sharing with you: <a href=\"%s\">%s</a>"
+msgstr "%s está compartiendo contigo: <a href=\"%s\">%s</a>"
+
+#: .././pop-library/dataload/actionexecuters/library/share-by-email.php:77
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:35
+msgid "Additional message"
+msgstr "Mensaje adicional"
+
+#: .././pop-library/dataload/actionexecuters/library/subscribe-to-newsletter.php:46
+msgid "Newsletter Subscription"
+msgstr "Subscripción a la Newsletter"
+
+#: .././pop-library/dataload/actionexecuters/library/subscribe-to-newsletter.php:51
+msgid "User subscribed to newsletter"
+msgstr "Usuario se suscribió al newsletter"
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:19
+#, php-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:20
+msgid ""
+"Please make sure you have clicked on the unsubscription link in the "
+"newsletter."
+msgstr ""
+"Asegurate de haber hecho clic en el enlace de desuscripción en la newsletter."
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:24
+msgid "The verification code is missing."
+msgstr "El código de verificación no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:38
+msgid "The verification code does not match the email."
+msgstr "El código de verificación no coincide con el correo electrónico."
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:82
+#, php-format
+msgid "[%s]: Newsletter unsubscription"
+msgstr "[%s]: Desuscripción de la Newsletter"
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribe-from-newsletter.php:88
+msgid "User unsubscribed from newsletter"
+msgstr "Usuario se desuscribió de la newsletter"
+
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:38
+msgid "Why volunteer cannot be empty."
+msgstr "El campo Porqué querés ser voluntario no puede ser vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:72
+#, php-format
+msgid "%s applied to volunteer for %s"
+msgstr "%s solicitó ser voluntario de %s"
+
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:80
+msgid ""
+"You have a new volunteer! Please contact the volunteer directly through the "
+"contact details below."
+msgstr ""
+"¡Tienes un nuevo voluntario! Por favor, póngase en contacto con el "
+"voluntario directamente a través de los datos de contacto a continuación."
+
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:84
+#, php-format
+msgid "%s applied to volunteer for: <a href=\"%s\">%s</a>"
+msgstr "%s solicitó de ser voluntario para: <a href=\"%s\">%s</a>"
+
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:98
+msgid "Phone"
+msgstr "Teléfono"
+
+#: .././pop-library/dataload/actionexecuters/library/volunteer.php:102
+msgid "Why volunteer"
+msgstr "Porqué querés ser voluntario"
+
+#: .././pop-library/formcomponent-inputs/implementations/contactus-topics.php:19
+msgid "General"
+msgstr "General"
+
+#: .././pop-library/formcomponent-inputs/implementations/contactus-topics.php:20
+msgid "Website"
+msgstr "Sitio web"
+
+#: .././pop-library/formcomponent-inputs/implementations/contactus-topics.php:21
+msgid "Others"
+msgstr "Otros"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:29
+msgid "Volunteer"
+msgstr "Ofrecerse como voluntario"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:33
+msgid "Flag as inappropriate"
+msgstr "Marcar como inapropiado"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:37
+msgid "Send message"
+msgstr "Enviar mensaje"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:55
+msgid "Volunteer for:"
+msgstr "Ofrecerse como voluntario para:"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:68
+msgid "Flag as inappropriate:"
+msgstr "Marcar como inapropiado:"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:81
+msgid "Send a message to:"
+msgstr "Enviar un mensaje a:"
+
+#: .././pop-library/processors/blockgroups/viewcomponents.php:39
+msgid "Share by email:"
+msgstr "Compartir por correo electrónico:"
+
+#: .././pop-library/processors/blocks.php:151
+msgid "Sending..."
+msgstr "Enviando..."
+
+#: .././pop-library/processors/blocks.php:158
+msgid "Subscribe to our newsletter:"
+msgstr "Suscríbete a nuestro newsletter:"
+
+#: .././pop-library/processors/blocks.php:178
+msgid "Take a peek at our regular newsletter campaigns"
+msgstr "Echar un vistazo a nuestras campañas de newsletters regulares"
+
+#: .././pop-library/processors/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
+msgid "Subscribe to our Newsletter?"
+msgstr "¿Suscríbirse a nuestro newsletter?"
+
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:25
+msgid "Topic"
+msgstr "Tema"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:42
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:46
+msgid "Your Name"
+msgstr "Tu nombre"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:51
+msgid "Your Email"
+msgstr "Tu correo electrónico"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:55
+msgid "Verification code"
+msgstr "Código de verificación"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:59
+msgid "To Email(s)"
+msgstr "A correo electrónico(s)"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:67
+msgid "Your Phone number"
+msgstr "Tu número de teléfono"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:39
+msgid "Why do you want to volunteer?"
+msgstr "¿Por qué quieres ser voluntario?"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:43
+msgid "Please explain why this post is inappropriate"
+msgstr "Por favor, explique por qué este post es inapropiado"
+
+#: .././pop-library/processors/forms/formgroups.php:52
+msgid ""
+"Keep up to date with our community activity through our weekly newsletter."
+msgstr ""
+"Mantener al día con nuestra actividad de la comunidad a través de nuestro "
+"newsletter semanal."
+
+#: .././pop-library/processors/forms/submit-buttons.php:31
+msgid "Send Message"
+msgstr "Enviar mensaje"
+
+#: .././pop-library/processors/forms/submit-buttons.php:35
+msgid "Send Email"
+msgstr "Enviar correo electrónico"
+
+#: .././pop-library/processors/forms/submit-buttons.php:39
+msgid "Subscribe"
+msgstr "Suscribirse"
+
+#: .././pop-library/processors/forms/submit-buttons.php:43
+msgid "Confirm unsubscription"
+msgstr "Confirmar descripción"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:35
+msgid "Name is missing."
+msgstr "Falta el nombre."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:36
+msgid "Email is missing or format is incorrect."
+msgstr "El correo electrónico no se encuentra o el formato es incorrecto."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:37
+msgid "Message is missing."
+msgstr "El mensaje no puede ser vacío."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:43
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:49
+msgid "Message sent successfully!"
+msgstr "¡Mensaje enviado con éxito!"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:44
+msgid "Thanks for contacting us, we will get in touch with you shortly."
+msgstr ""
+"Gracias por contactarse con nosotros, nos pondremos en contacto a la "
+"brevedad."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:51
+msgid "Your message has been sent to the user by email."
+msgstr "Su mensaje ha sido enviado al usuario por correo electrónico."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:56
+msgid "Email sent successfully."
+msgstr "Email enviado con éxito."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:57
+msgid "Any more friends who might be interested? Keep sending!"
+msgstr "Más amigos que puedan estar interesados? ¡Siga enviando!"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:58
+msgid "To Email(s) missing."
+msgstr "A correo electrónico(s) no puede ser vacío."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:63
+msgid "Awesome! Thanks for taking part!"
+msgstr "¡Increíble! Gracias por participar!"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:64
+msgid ""
+"We have sent a message with your information to the organizers. They should "
+"contact you soon."
+msgstr ""
+"Hemos enviado un mensaje con sus datos a los organizadores. Ellos debieran "
+"ponerse en contacto con usted a la brevedad."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:65
+msgid "\"Why do you want to volunteer?\" is missing."
+msgstr "\"¿Por qué quieres ser voluntario?\" no puede ser vacío."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:70
+msgid "Flag received successfully."
+msgstr "Información recibida correctamente."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:71
+msgid "Noted, we will evaluate your feedback and take appropriate action."
+msgstr "Ok, vamos a evaluar su información y tomar medidas apropiadas."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:72
+msgid "\"Description on why this post is inappropriate\" is missing."
+msgstr ""
+"\"Descripción de por qué este post es inapropiado\" no puede ser vacío."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:77
+msgid "Subscription Successful!"
+msgstr "Suscripción exitosa!"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:79
+#, php-format
+msgid ""
+"To make sure you get the newsletter, please add <strong>%s</strong> in your "
+"contact list. Thanks!"
+msgstr ""
+"Para asegurarse de obtener el newsletter, por favor, añada <strong>%s</"
+"strong> en su lista de contactos. ¡Gracias!"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:86
+msgid "Unsubscription successful"
+msgstr "Cancelación de la suscripción exitosa"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:89
+msgid ""
+"It is a pity to see you go. Hopefully you will keep visiting our website."
+msgstr ""
+"Es una lástima verte partir. Esperamos que sigas visitando nuestro sitio web."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:91
+#, php-format
+msgid "And if anything, you can always <a href=\"%s\">contact us</a>."
+msgstr ""
+"Y en todo caso, siempre puede <a href=“%s”>ponerse en contacto con nosotros</"
+"a>."
+
+#: .././pop-library/processors/structures/forms/forms.php:68
+#, php-format
+msgid ""
+"Please write an email to <a href=\"mailto:%1$s\">%1$s</a>, or fill in the "
+"form below:"
+msgstr ""
+"Por favor, escribí un correo electrónico a <a href=\"mailto:%1$s\">%1$s</a>, "
+"o completá el siguiente formulario:"
+
+#: .././pop-library/processors/structures/forms/forms.php:82
+msgid ""
+"We will send the info below to the organizers, who should then get in touch "
+"with you."
+msgstr ""
+"Vamos a enviar la información siguiente a los organizadores, quienes "
+"debieran ponerse en contacto contigo."
+
+#: .././pop-library/processors/structures/forms/forms.php:92
+msgid ""
+"Based on our users' feedback, we will consider removing this post. You will "
+"receive a confirmation by email."
+msgstr ""
+"Basados en la información provista por nuestros usuarios, vamos a considerar "
+"la eliminación de este post. Usted recibirá una confirmación por correo "
+"electrónico."
+
+#: .././validation.php:51
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:69
+msgid ""
+"Error: <b>PoP Email Sender</b> is not installed/activated. Without it, "
+"<b>PoP Generic Forms</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+msgstr ""
+"Error: <b>PoP Email Sender</b> is not installed/activated. Without it, "
+"<b>PoP Generic Forms</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+
+#: .././validation.php:73
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Email Sender</b> installed, or otherwise "
+"<b>PoP Generic Forms</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Email Sender</b> installed, or otherwise "
+"<b>PoP Generic Forms</b> might not function properly."
+
+#~ msgid "Highlight"
+#~ msgstr "Destacar"
+
+#~ msgid "Link"
+#~ msgstr "Enlace"
+
+#~ msgid ""
+#~ "%sThis information was gathered and published by %s from <a href=\"%s"
+#~ "\">this source</a>."
+#~ msgstr ""
+#~ "%sEsta información fue recogida y publicada por %s a partir de <a href="
+#~ "\"%s\">esta fuente</a>."
+
+#~ msgid "Disclaimer"
+#~ msgstr "Descargo de responsabilidad"
+
+#~ msgid "Original URL (for Disclaimer):<br/>%s"
+#~ msgstr "URL original (para el descargo de responsabilidad):<br/>%s"
+
+#~ msgid ""
+#~ "This Profile was created by %s with information available on the "
+#~ "Organization's website."
+#~ msgstr ""
+#~ "Este perfil fue creado por %s con información disponible en el sitio web "
+#~ "de la Organización."
+
+#~ msgid "Wide"
+#~ msgstr "Ancho"
+
+#~ msgid "Full Size"
+#~ msgstr "Tamaño completo"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Miniatura"
+
+#~ msgid "Linkedin"
+#~ msgstr "Linkedin"
+
+#~ msgid "Facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "Twitter"
+#~ msgstr "Twitter"
+
+#~ msgid "Youtube"
+#~ msgstr "Youtube"
+
+#~ msgid "Instagram"
+#~ msgstr "Instagram"
+
+#~ msgid "Blog"
+#~ msgstr "Blog"
+
+#~ msgid "Profile owned by %s?"
+#~ msgstr "Perfil propiedad de %s?"
+
+#~ msgid "Organization info"
+#~ msgstr "Datos de la organización"
+
+#~ msgid "Contact number"
+#~ msgstr "Número de contacto"
+
+#~ msgid "<strong>%s</strong> has made a highlight from <strong>%s</strong>"
+#~ msgstr "<strong>%s</strong> ha extraído información de <strong>%s</strong>"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconocido"
+
+#~ msgid "Unprocessed payment needs refund"
+#~ msgstr "El pago no procesado necesita reembolso"
+
+#~ msgid "%s Options"
+#~ msgstr "%s Opciones"
+
+#~ msgid ""
+#~ "<strong>Important:</strong>In order to connect Alipay with your site, you "
+#~ "need to configure the return URL."
+#~ msgstr ""
+#~ "<strong>Importante:</strong> Con el fin de conectar Alipay con su sitio, "
+#~ "es necesario configurar la dirección URL de retorno."
+
+#~ msgid "Your return url is %s"
+#~ msgstr "Su URL de retorno es %s"
+
+#~ msgid ""
+#~ "Please visit the <a href=\"%s\">documentation</a> for further "
+#~ "instructions."
+#~ msgstr ""
+#~ "Por favor, <a href=\"%s\">visite la documentación</a> para obtener más "
+#~ "instrucciones."
+
+#~ msgid "Alipay account"
+#~ msgstr "Cuenta Alipay"
+
+#~ msgid ""
+#~ "Please enter your Alipay Email; this is needed in order to take payment."
+#~ msgstr ""
+#~ "Por favor, introduzca su correo electrónico Alipay; esto es necesario con "
+#~ "el fin de recibir el pago."
+
+#~ msgid "Alipay partner ID"
+#~ msgstr "Alipay partner ID"
+
+#~ msgid ""
+#~ "Please enter the partner ID. If you don't have one, <a href=\"https://b."
+#~ "alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+#~ msgstr ""
+#~ "Por favor, introduzca el partner id. Si no tiene uno, <a target=\"_blank"
+#~ "\" href=\"https://b.alipay.com/newIndex.htm\">clic aquí para obtenerlo</"
+#~ "a>."
+
+#~ msgid "Alipay security key"
+#~ msgstr "Alipay security key"
+
+#~ msgid ""
+#~ "Please enter the security key. If you don't have one, <a href=\"https://b."
+#~ "alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+#~ msgstr ""
+#~ "Por favor, introduzca la clave de seguridad (security key). Si no tiene "
+#~ "una, <a target=\"_blank\" href=\"https://b.alipay.com/newIndex.htm\">clic "
+#~ "aquí para obtenerla</a>."
+
+#~ msgid "Payment method"
+#~ msgstr "Método de pago"
+
+#~ msgid ""
+#~ "Be aware that by approving a booking awaiting payment, a full payment "
+#~ "transaction will be registered against this booking, meaning that it will "
+#~ "be considered as paid."
+#~ msgstr ""
+#~ "Tenga en cuenta que, al aprobar un pago de la reserva a la espera, una "
+#~ "operación de pago completo será registrado contra de esta reserva, lo que "
+#~ "significa que será considerado como pagado."
+
+#~ msgid "Success Message"
+#~ msgstr "Mensaje existoso"
+
+#~ msgid ""
+#~ "The message that is shown to a user when a booking with bank transfer "
+#~ "payments is successful."
+#~ msgstr ""
+#~ "El mensaje que se muestra a un usuario cuando una reserva con pagos "
+#~ "mediante transferencia bancaria es exitoso."
+
+#~ msgid "Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "Alipay"
+#~ msgstr "Alipay"
+
+#~ msgid "Please select"
+#~ msgstr "Por favor seleccione"
+
+#~ msgid "Upcoming Event"
+#~ msgstr "Evento próximo"
+
+#~ msgid "Current Event"
+#~ msgstr "Evento actual"
+
+#~ msgid "Past Event"
+#~ msgstr "Evento pasado"
+
+#~ msgid "The address was not found on the map"
+#~ msgstr "La dirección no se encontró en el mapa"
+
+#~ msgid "Event"
+#~ msgstr "Evento"
+
+#~ msgid "days"
+#~ msgstr "días"
+
+#~ msgid "%sMap"
+#~ msgstr "%sMapa"
+
+#~ msgid "Location(s) for:"
+#~ msgstr "Ubicación(es) para:"
+
+#~ msgid "Add location"
+#~ msgstr "Añadir ubicación"
+
+#~ msgid "View all events"
+#~ msgstr "Ver todos los eventos"
+
+#~ msgid "Scroll right to load more results"
+#~ msgstr "Desplazarse hacia la derecha para cargar más resultados"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "Desplazarse hacia abajo para cargar más resultados"
+
+#~ msgid "Details"
+#~ msgstr "Detalles"
+
+#~ msgid "Feed"
+#~ msgstr "Feed"
+
+#~ msgid "Extended"
+#~ msgstr "Extendido"
+
+#~ msgid "List"
+#~ msgstr "Lista"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendario"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "as Link"
+#~ msgstr "como Enlace"
+
+#~ msgid "Event link"
+#~ msgstr "Enlace a Evento"
+
+#~ msgid "Past Events"
+#~ msgstr "Eventos Pasados"
+
+#~ msgid "My Past Events"
+#~ msgstr "Mis Eventos Pasados"
+
+#~ msgid "Add Event"
+#~ msgstr "Añadir Evento"
+
+#~ msgid "Toggle Map"
+#~ msgstr "Alternar Mapa"
+
+#~ msgid "Submitting..."
+#~ msgstr "Enviando…"
+
+#~ msgid "Login/Register"
+#~ msgstr "Iniciar sesión/Registrarse"
+
+#~ msgid "Yay! Your %s was created successfully!"
+#~ msgstr "¡Hurra! Su %s se ha creado correctamente!"
+
+#~ msgid "Yay! Your %s was updated successfully!"
+#~ msgstr "¡Hurra! Su %s se ha actualizado correctamente!"
+
+#~ msgid "Please %s to create your %s."
+#~ msgstr "Por favor, %s para crear su %s."
+
+#~ msgid "You need a %s account to create your %s."
+#~ msgstr "Es necesario una cuenta de %s para crear su %s."
+
+#~ msgid "%s updated successfully."
+#~ msgstr "%s ha actualizado correctamente."
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+#~ msgstr ""
+#~ "Por favor <a href=\"%s\">inicie su sesión de usuario</a> para editar su "
+#~ "%s."
+
+#~ msgid "You need a %s account to edit your %s."
+#~ msgstr "Es necesario una cuenta de %s para editar su %s."
+
+#~ msgid "Ops, it seems you have no rights to edit this %s."
+#~ msgstr "Ops, parece que no tiene derechos para editar este %s."
+
+#~ msgid "Incorrect URL"
+#~ msgstr "URL incorrecta"
+
+#~ msgid "Event details"
+#~ msgstr "Detalles del evento"
+
+#~ msgid "Event link details"
+#~ msgstr "Detalles del enlace al evento"
+
+#~ msgid "event"
+#~ msgstr "evento"
+
+#~ msgid "events"
+#~ msgstr "eventos"
+
+#~ msgid "posted by"
+#~ msgstr "publicado por"
+
+#~ msgid "past event"
+#~ msgstr "evento pasado"
+
+#~ msgid "past events"
+#~ msgstr "eventos pasados"
+
+#~ msgid "No %s found."
+#~ msgstr "No se han encontrado %s."
+
+#~ msgid "No more %s found."
+#~ msgstr "No se han encontrado más %s."
+
+#~ msgid "Please %s to access your %s."
+#~ msgstr "Por favor, %s para acceder a su %s."
+
+#~ msgid "You need a %s account to access this functionality."
+#~ msgstr "Es necesario una cuenta de %s para acceder a esta funcionalidad."
+
+#~ msgid "Your account has no permission to edit this %s."
+#~ msgstr "Su cuenta no tiene permiso para modificar esta %s."
+
+#~ msgid "Location(s)"
+#~ msgstr "Ubicación(es)"
+
+#~ msgid "Date/Time"
+#~ msgstr "Fecha y hora"
+
+#~ msgid "Sunday"
+#~ msgstr "Domingo"
+
+#~ msgid "Monday"
+#~ msgstr "Lunes"
+
+#~ msgid "Tuesday"
+#~ msgstr "Martes"
+
+#~ msgid "Wednesday"
+#~ msgstr "Miércoles"
+
+#~ msgid "Thursday"
+#~ msgstr "Jueves"
+
+#~ msgid "Friday"
+#~ msgstr "Viernes"
+
+#~ msgid "Saturday"
+#~ msgstr "Sábado"
+
+#~ msgid "Events"
+#~ msgstr "Eventos"
+
+#~ msgid "Upcoming Events"
+#~ msgstr "Eventos próximos"
+
+#~ msgid "When"
+#~ msgstr "Cuándo"
+
+#~ msgid "Status"
+#~ msgstr "Estado"
+
+#~ msgid "<a href=\"%s\">Unsubscribe</a> from this newsletter."
+#~ msgstr "<a href=\"%s\">Desuscribirse</a> de esta newsletter."
+
+#~ msgid "Send message to:"
+#~ msgstr "Enviar un mensaje a:"
+
+#~ msgid "Insert with Media Player"
+#~ msgstr "Insertar con Media Player"
+
+#~ msgid "External media files"
+#~ msgstr "Archivos multimedia externos"
+
+#~ msgid "Save all changes"
+#~ msgstr "Guardar todos los cambios"
+
+#~ msgid "Save, Close and Refresh"
+#~ msgstr "Guardar, cerrar y refrescar"
+
+#~ msgid "Click here to watch the video"
+#~ msgstr "Haz click aquí para ver el vídeo"
+
+#~ msgid "Do not add"
+#~ msgstr "No añada"
+
+#~ msgid "Add to Resources"
+#~ msgstr "Añadir a los recursos"
+
+#~ msgid "Resources"
+#~ msgstr "Recursos"
+
+#~ msgid "Source"
+#~ msgstr "Fuente"
+
+#~ msgid ""
+#~ "Please add the following emails to your contact list, to make sure you "
+#~ "receive our notifications:"
+#~ msgstr ""
+#~ "Por favor, añada los siguientes emails a tu lista de contactos, para "
+#~ "asegurar de que recibas nuestras notificaciones:"
+
+#~ msgid ""
+#~ "Ops, it seems this content is not available in <strong>%s</strong>. <a "
+#~ "href=\"%s\">Would you like to help us translate it?</a>"
+#~ msgstr ""
+#~ "Ops, parece que este contenido no está disponible en <strong>%s</strong>. "
+#~ "<a href=\"%s\">¿Le gustaría ayudar a traducirlo?</a>"
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#~ msgid "Member of"
+#~ msgstr "Miembro de"
+
+#~ msgid "Edit membership"
+#~ msgstr "Editar afiliación"
+
+#~ msgid "View all members"
+#~ msgstr "Ver todos los miembros"
+
+#~ msgid "Privileges:"
+#~ msgstr "Privilegios:"
+
+#~ msgid "Status:"
+#~ msgstr "Estatus:"
+
+#~ msgid "Tags:"
+#~ msgstr "Etiquetas:"
+
+#~ msgid "<p>%s: %s</p>"
+#~ msgstr "<p>%s: %s</p>"
+
+#~ msgid ", "
+#~ msgstr ", "
+
+#~ msgid "Contact Person"
+#~ msgstr "Persona de contacto"
+
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
+#~ msgid "Categories"
+#~ msgstr "Categorías"
+
+#~ msgid "Interests"
+#~ msgstr "Intereses"
+
+#~ msgid "Charity"
+#~ msgstr "Caridad"
+
+#~ msgid "Communities"
+#~ msgstr "Comunidades"
+
+#~ msgid "Company or Corporate"
+#~ msgstr "Compañía o Empresarial"
+
+#~ msgid "Government"
+#~ msgstr "Gobierno"
+
+#~ msgid "Education"
+#~ msgstr "Educación"
+
+#~ msgid "NGO/NPO"
+#~ msgstr "ONG/Organización sin fines de lucro"
+
+#~ msgid "Social Enterprise"
+#~ msgstr "Empresa social"
+
+#~ msgid "Youth"
+#~ msgstr "Jóvenes"
+
+#~ msgid "Tel / Fax"
+#~ msgstr "Tel / Fax"
+
+#~ msgid "Full view"
+#~ msgstr "Vista completa"
+
+#~ msgid "Show Help"
+#~ msgstr "Mostrar ayuda"
+
+#~ msgid "Inviting users to become your members"
+#~ msgstr "Invitando usuarios a convertirse en sus miembros"
+
+#~ msgid ""
+#~ "Please click on %s to invite your physical Organization's members to "
+#~ "become your members in the website."
+#~ msgstr ""
+#~ "Por favor, haga clic en %s para invitar a los miembros de su organización "
+#~ "física para convertirse en sus miembros en el sitio web."
+
+#~ msgid "What is a member?"
+#~ msgstr "¿Qué es un miembro?"
+
+#~ msgid "This depends on your Organization. Some examples:<br/>"
+#~ msgstr "Esto depende de su Organización. Algunos ejemplos: <br/>"
+
+#~ msgid "University teachers/students"
+#~ msgstr "Profesores universitarios / estudiantes"
+
+#~ msgid "Company staff"
+#~ msgstr "Personal de la empresa"
+
+#~ msgid "etc"
+#~ msgstr "etc"
+
+#~ msgid "What happens when my Organization has members?"
+#~ msgstr "¿Qué sucede cuando mi organización tiene miembros?"
+
+#~ msgid ""
+#~ "If they have privilege <em>Contribute content</em> on, whenever they post "
+#~ "any content in the website (eg: a new event, article, project, etc) will "
+#~ "also show up under your Organization's profile. If this privilege is off, "
+#~ "they will just appear under \"My members\""
+#~ msgstr ""
+#~ "Si tienen el privilegio <em>Contribuir contenido</em>, cada vez que "
+#~ "publican cualquier contenido en el sitio web (por ejemplo: un nuevo "
+#~ "evento, artículo, proyecto, etc) también aparecerá bajo el perfil de su "
+#~ "organización. Si este privilegio está desactivado, sólo aparecerá en "
+#~ "\"Mis miembros\""
+
+#~ msgid "Editing current members' status"
+#~ msgstr "Edición de estatus de los miembros actuales"
+
+#~ msgid ""
+#~ "The users listed below have declared themselves to be members of your "
+#~ "Organization. You can click on \"Edit Membership\" to edit the settings "
+#~ "for each one of them:"
+#~ msgstr ""
+#~ "Los usuarios que figuran a continuación se han declarado a sí mismos como "
+#~ "miembros de su organización. Puede hacer clic en \"Editar afiliación\" "
+#~ "para editar la configuración para cada uno de ellos:"
+
+#~ msgid ""
+#~ "<em>Active</em> if the user is truly your member, or <em>Rejected</em> "
+#~ "otherwise.<br/><em>Rejected</em> users will not appear as your "
+#~ "Organization's members, or contribute content."
+#~ msgstr ""
+#~ "<em>Activo</em> si el usuario es verdaderamente su miembro, o "
+#~ "<em>Rechazado</em> por caso contrario.<br/>Usuarios con estado "
+#~ "<em>Rechazado</em> no aparecerán como miembros de su organización, y no "
+#~ "contribuyerán contenido."
+
+#~ msgid "Privileges"
+#~ msgstr "Privilegios"
+
+#~ msgid ""
+#~ "<em>Contribute content</em> will add the member's content to your profile."
+#~ msgstr ""
+#~ "<em>Contribuir contenido</em> añadirá el contenido del miembro a su "
+#~ "perfil."
+
+#~ msgid "Tags"
+#~ msgstr "Etiquetas"
+
+#~ msgid ""
+#~ "What is the type of relationship from this member to your Organization."
+#~ msgstr "Cuál es el tipo de relación de este miembro a su Organización."
+
+#~ msgid "Invite new members"
+#~ msgstr "Invitar a nuevos miembros"
+
+#~ msgid "Members:"
+#~ msgstr "Miembros:"
+
+#~ msgid "Organization Categories"
+#~ msgstr "Categorías de organización"
+
+#~ msgid "Organization Types"
+#~ msgstr "Tipos de organización"
+
+#~ msgid "member"
+#~ msgstr "miembro"
+
+#~ msgid "members"
+#~ msgstr "miembros"
+
+#~ msgid "organization"
+#~ msgstr "organización"
+
+#~ msgid "organizations"
+#~ msgstr "organizaciones"
+
+#~ msgid "individual"
+#~ msgstr "individuo"
+
+#~ msgid "individuals"
+#~ msgstr "individuos"
+
+#~ msgid "No details"
+#~ msgstr "Sin detalles"
+
+#~ msgid "Organization"
+#~ msgstr "Organización"
+
+#~ msgid "Individual"
+#~ msgstr "Individuo"
+
+#~ msgid "Members"
+#~ msgstr "Miembros"
+
+#~ msgid "User"
+#~ msgstr "Usuario"
+
+#~ msgid "Highlight from “%s”"
+#~ msgstr "Destacado de “%s”"
+
+#~ msgid "Invalid Link URL"
+#~ msgstr "URL no válida"
+
+#~ msgid "No post has been referenced"
+#~ msgstr "Ningún post ha sido referenciado"
+
+#~ msgid "Only one post can be referenced"
+#~ msgstr "Sólo un post puede ser referenciado"
+
+#~ msgid "The referenced post is not published yet"
+#~ msgstr "El post al que se hace referencia no está publicado aún"
+
+#~ msgid "<a href=\"%s\" %s>Click here to view it</a>."
+#~ msgstr "<a href=\"%s\" %s>Haga clic aquí para visualizarlo</a>."
+
+#~ msgid ""
+#~ "Please note that the status is still \"Draft\", so the post is not online "
+#~ "yet."
+#~ msgstr ""
+#~ "Tenga en cuenta que el estado sigue siendo \"Borrador\", por lo que el "
+#~ "artículo no se verá publicado."
+
+#~ msgid "<a href=\"%1$s\">%2$s: %1$s</a>"
+#~ msgstr "<a href=“%1$s”>%2$s: %1$s</a>"
+
+#~ msgid "LinkedIn"
+#~ msgstr "LinkedIn"
+
+#~ msgid "Page not found!"
+#~ msgstr "¡Página no encontrada!"
+
+#~ msgid "Home"
+#~ msgstr "Principal"
+
+#~ msgid "Extended feed"
+#~ msgstr "Feed extendido"
+
+#~ msgid "link by"
+#~ msgstr "enlace por"
+
+#~ msgid "Volunteer!"
+#~ msgstr "¡Ofrecerse como voluntario!"
+
+#~ msgid "%sBack"
+#~ msgstr "%sAtrás"
+
+#~ msgid "%sNavigator"
+#~ msgstr "%sNavegador"
+
+#~ msgid "Latest content"
+#~ msgstr "Contenido más reciente"
+
+#~ msgid "Content"
+#~ msgstr "Contenido"
+
+#~ msgid "My Content"
+#~ msgstr "Mi Contenido"
+
+#~ msgid "Add Content"
+#~ msgstr "Agregar Contenido"
+
+#~ msgid "%s:"
+#~ msgstr "%s:"
+
+#~ msgid ""
+#~ "Aiyoooo, it seems there is nothing here. Where else would you like to go?"
+#~ msgstr "Aiyoooo, parece que no hay nada aquí. ¿Dónde más le gustaría ir?"
+
+#~ msgid "Ops, this page doesn't exist!"
+#~ msgstr "Ops, esta página no existe!"
+
+#~ msgid "Show description"
+#~ msgstr "Mostrar descripción"
+
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#~ msgid "Log in or Register"
+#~ msgstr "Iniciar sesión o Registrarse"
+
+#~ msgid "Grid"
+#~ msgstr "Cuadrícula"
+
+#~ msgid "Go to Full Profile "
+#~ msgstr "Ir al perfil completo "
+
+#~ msgid "%1$s (%2$s)"
+#~ msgstr "%1$s (%2$s)"
+
+#~ msgid "View all Content "
+#~ msgstr "Ver todo el contenido "
+
+#~ msgid "Latest Content"
+#~ msgstr "Contenido más reciente"
+
+#~ msgid "Our Sponsors"
+#~ msgstr "Nuestros patrocinadores"
+
+#~ msgid "Our Supporters"
+#~ msgstr "Quiénes nos apoyan"
+
+#~ msgid "Who we are"
+#~ msgstr "Quiénes somos"
+
+#~ msgid "Add Highlight"
+#~ msgstr "Destacar"
+
+#~ msgid "View"
+#~ msgstr "Ver"
+
+#~ msgid "FAQ: Adding Content"
+#~ msgstr "Preguntas frecuentes: Adición de contenido"
+
+#~ msgid "FAQ: Registration"
+#~ msgstr "Preguntas frecuentes: Registro"
+
+#~ msgid "Add Post"
+#~ msgstr "Añadir Post"
+
+#~ msgid "View all tags"
+#~ msgstr "Ver todos los tags"
+
+#~ msgid "Important?"
+#~ msgstr "¿Importante?"
+
+#~ msgid "Section"
+#~ msgstr "Sección"
+
+#~ msgid "Keep as draft?"
+#~ msgstr "¿Guardar como borrador?"
+
+#~ msgid "Free access"
+#~ msgstr "Acceso libre"
+
+#~ msgid "Behind a paywall"
+#~ msgstr "Detrás de un muro de pago"
+
+#~ msgid "User account needed"
+#~ msgstr "Cuenta de usuario necesaria"
+
+#~ msgid "Sections"
+#~ msgstr "Secciones"
+
+#~ msgid "Applies to"
+#~ msgstr "Se aplica a"
+
+#~ msgid "Access type"
+#~ msgstr "Tipo de acceso"
+
+#~ msgid "Publishing status"
+#~ msgstr "Estado de publicación"
+
+#~ msgid "Title"
+#~ msgstr "Título"
+
+#~ msgid ""
+#~ "'Draft': still editing, our website admin will not publish it yet. "
+#~ "'Finished editing': our website admin will publish it (almost) "
+#~ "immediately. 'Already published': our website admin has published it, "
+#~ "post is already online."
+#~ msgstr ""
+#~ "'Borrador': Todavía editando, nuestro admin no publicará todavía. "
+#~ "'Terminado de editar': nuestro admin lo publicará (casi) inmediatamente. "
+#~ "'Publicado': la página ya ha sido publicada."
+
+#~ msgid ""
+#~ "The URL from any webpage. (Not all websites can be embedded: Facebook, "
+#~ "Dropbox and others do not permit it, and browsers do not embed websites "
+#~ "on HTTP for security reasons.)"
+#~ msgstr ""
+#~ "La URL de cualquier página web. (No todos los sitios web pueden ser "
+#~ "incrustados: Facebook, Dropbox y otros no lo permiten, y los navegadores "
+#~ "web no incrustan sitios web bajo HTTP por razones de seguridad.)"
+
+#~ msgid "Please copy/paste here the title from the original article."
+#~ msgstr "Por favor, copie y pegue aquí el título del artículo original."
+
+#~ msgid "Please copy/paste any important content from the original post."
+#~ msgstr ""
+#~ "Por favor, copie y pegue cualquier contenido importante de la publicación "
+#~ "original."
+
+#~ msgid "Copy/paste here..."
+#~ msgstr "Copie y pegue aquí..."
+
+#~ msgid "Select categories"
+#~ msgstr "Seleccionar categorías"
+
+#~ msgid "Select sections"
+#~ msgstr "Seleccionar secciones"
+
+#~ msgid "Highlight from:"
+#~ msgstr "Destacar de:"
+
+#~ msgid "Highlight:"
+#~ msgstr "Destacado:"
+
+#~ msgid "Preview"
+#~ msgstr "Vista previa"
+
+#~ msgid "Featured Image"
+#~ msgstr "Imagen destacada"
+
+#~ msgid "Meta information"
+#~ msgstr "Meta informacion"
+
+#~ msgid "Link details"
+#~ msgstr "Detalles del Enlace"
+
+#~ msgid "Here you will find:"
+#~ msgstr "Aquí encontrarás:"
+
+#~ msgid "Many thanks to our sponsors and supporters."
+#~ msgstr ""
+#~ "Muchas gracias a nuestros patrocinadores y todos aquéllos que nos apoyan."
+
+#~ msgid ""
+#~ "If you or your organization wishes to participate, please visit <a href="
+#~ "\"%s\">%s</a>."
+#~ msgstr ""
+#~ "Si usted o su organización desean participar, por favor visite <a href="
+#~ "\"%s\">%s</a>."
+
+#~ msgid "Loading data"
+#~ msgstr "Cargando datos"
+
+#~ msgid "Many thanks to our volunteers."
+#~ msgstr "Muchas gracias a nuestros voluntarios."
+
+#~ msgid "If you'd like to join us, please visit <a href=\"%s\">%s</a>."
+#~ msgstr "Si desea unirse a nosotros, por favor visite <a href=\"%s\">%s</a>."
+
+#~ msgid ""
+#~ "<strong>#Trending tags are:</strong><br/>Those tags which appear in the "
+#~ "highest number of posts, during the last %s days."
+#~ msgstr ""
+#~ "<strong>#Trending tags son:</strong><br/>Aquéllos tags que aparecen la "
+#~ "mayor cantidad de veces, durante los últimos %s días."
+
+#~ msgid "Volunteers Needed?"
+#~ msgstr "¿Se requieren voluntarios?"
+
+#~ msgid ""
+#~ "Do you need volunteers? Each time a user applies to volunteer, you will "
+#~ "get a notification email with the volunteer's contact information."
+#~ msgstr ""
+#~ "¿Necesita voluntarios? Cada vez que un usuario se ofrezca como "
+#~ "voluntario, obtendrás una notificación por correo electrónico con la "
+#~ "información de contacto del mismo."
+
+#~ msgid "Search"
+#~ msgstr "Buscar"
+
+#~ msgid "Show comments, responses and highlights"
+#~ msgstr "Mostrar comentarios, respuestas y destacados"
+
+#~ msgid "Hide comments, responses and highlights"
+#~ msgstr "Ocultar comentarios, respuestas y destacados"
+
+#~ msgid "("
+#~ msgstr "("
+
+#~ msgid ")"
+#~ msgstr ")"
+
+#~ msgid "Comments, responses and highlights"
+#~ msgstr "Comentarios, respuestas y destacados"
+
+#~ msgid "added by"
+#~ msgstr "añadido por"
+
+#~ msgid "content"
+#~ msgstr "contenido"
+
+#~ msgid "link"
+#~ msgstr "enlace"
+
+#~ msgid "links"
+#~ msgstr "enlaces"
+
+#~ msgid "extract"
+#~ msgstr "extracto"
+
+#~ msgid "extracts"
+#~ msgstr "extractos"
+
+#~ msgid "posts"
+#~ msgstr "posts"
+
+#~ msgid "user"
+#~ msgstr "usuario"
+
+#~ msgid "users"
+#~ msgstr "usuarios"
+
+#~ msgid "follower"
+#~ msgstr "seguidor"
+
+#~ msgid "followers"
+#~ msgstr "seguidores"
+
+#~ msgid "sponsor"
+#~ msgstr "patrocinador"
+
+#~ msgid "sponsors"
+#~ msgstr "patrocinadores"
+
+#~ msgid "tag"
+#~ msgstr "etiqueta"
+
+#~ msgid "tags"
+#~ msgstr "etiquetas"
+
+#~ msgid "FAQs"
+#~ msgstr "Preguntas frecuentes"
+
+#~ msgid "Add a comment for:"
+#~ msgstr "Añadir un comentario para:"
+
+#~ msgid "Toggle Navigation"
+#~ msgstr "Alternar menú de navegación"
+
+#~ msgid "Toggle Browsing Tabs"
+#~ msgstr "Alternar pestañas de navegación"
+
+#~ msgid "Toggle Search"
+#~ msgstr "Alternar búsqueda"
+
+#~ msgid ""
+#~ "Powered by <a href=\"%s\" target=\"_blank\">the PoP framework</a> through "
+#~ "<a href=\"%s\" target=\"_blank\">Verticals</a>"
+#~ msgstr ""
+#~ "Hecho con <a href=\"%s\" target=\"_blank\">the PoP framework</a> a través "
+#~ "de <a href=\"%s\" target=\"_blank\">Verticals</a>"
+
+#~ msgid "About us"
+#~ msgstr "Sobre nosotros"
+
+#~ msgid "My Profile"
+#~ msgstr "Mi perfil"
+
+#~ msgid "Settings"
+#~ msgstr "Ajustes"
+
+#~ msgid "Notifications"
+#~ msgstr "Notificaciones"
+
+#~ msgid ""
+#~ "<em>Many thanks to our <strong>Sponsors and Supporters</strong>:</em>"
+#~ msgstr ""
+#~ "<em>Muchas gracias a nuestros <strong>Patrocinadores y Colaboradores</"
+#~ "strong>:</em>"
+
+#~ msgid "Our Sponsors and Supporters"
+#~ msgstr "Nuestros Patrocinadores y Colaboradores"
+
+#~ msgid "Add content"
+#~ msgstr "Agregar contenido"
+
+#~ msgid "Add new..."
+#~ msgstr "Añadir un nuevo..."
+
+#~ msgid "Your account in %s"
+#~ msgstr "Tu cuenta en %s"
+
+#~ msgid "Open %s in a new tab"
+#~ msgstr "Abrir %s en una nueva pestaña"
+
+#~ msgid "Toggle full screen"
+#~ msgstr "Alternar pantalla completa"
+
+#~ msgid "Open in new window"
+#~ msgstr "Abrir en Nueva ventana"
+
+#~ msgid "Ops, there's nothing here!"
+#~ msgstr "Ops, no se encontró nada aquí!"
+
+#~ msgid "<p>We couldn't find anything under this URL...</p>"
+#~ msgstr "<p>No hemos encontrado nada bajo este URL...</p>"
+
+#~ msgid "Alright, everything set up"
+#~ msgstr "Muy bien, todo está listo"
+
+#~ msgid "Redirecting, please wait..."
+#~ msgstr "Redireccionando, por favor espere..."
+
+#~ msgid "Section links"
+#~ msgstr "Enlaces de Sección"
+
+#~ msgid "No Categories"
+#~ msgstr "Sin categorías"
+
+#~ msgid "Tag/topic"
+#~ msgstr "Tag/tópico"
+
+#~ msgid "Highlights"
+#~ msgstr "Destacados"
+
+#~ msgid "Highlighted from"
+#~ msgstr "Destacado de"
+
+#~ msgid "Users"
+#~ msgstr "Usuarios"
+
+#~ msgid "Date"
+#~ msgstr "Fecha"
+
+#~ msgid "Welcome to %s!"
+#~ msgstr "Bienvenidos a %s!"
+
+#~ msgid "Full size"
+#~ msgstr "Tamaño completo"
+
+#~ msgid "Maximize"
+#~ msgstr "Maximizar"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimizar"
+
+#~ msgid "%s latest posts"
+#~ msgstr "%s últimos posts"
+
+#~ msgid "%s latest comments"
+#~ msgstr "%s últimos comentarios"
+
+#~ msgid "View %1$s profile and get in touch through %2$s."
+#~ msgstr "Ver el perfil de %1$s y ponerse en contacto a través de %2$s."
+
+#~ msgid "Entries tagged “%1$s” in %2$s."
+#~ msgstr "Entradas con la etiqueta \"%1$s\" en %2$s."
+
+#~ msgid "The website is loading, please wait a few moments to click on links."
+#~ msgstr ""
+#~ "El sitio web está cargando, por favor espere unos momentos para hacer "
+#~ "click en enlaces."
+
+#~ msgid "Loading pure awesomeness"
+#~ msgstr "Cargando genialidad pura"
+
+#~ msgid "please wait..."
+#~ msgstr "por favor espere..."
+
+#~ msgid ""
+#~ "Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+#~ "<b>PoP Theme: Wassup</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"https://github.com/leoloso/"
+#~ "PoP/\">from here</a>."
+#~ msgstr ""
+#~ "Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+#~ "<b>PoP Theme: Wassup</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"https://github.com/leoloso/"
+#~ "PoP/\">from here</a>."
+
+#~ msgid ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>PoP Core Processors</b> "
+#~ "installed, or otherwise <b>PoP Theme: Wassup</b> might not function "
+#~ "properly."
+#~ msgstr ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>PoP Core Processors</b> "
+#~ "installed, or otherwise <b>PoP Theme: Wassup</b> might not function "
+#~ "properly."
+
+#~ msgid ""
+#~ "Error: <b>Events Manager PoP Processors</b> is not installed/activated. "
+#~ "Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+#~ "plugin from your plugin installer or download it <a href=\"https://github."
+#~ "com/leoloso/PoP/\">from here</a>."
+#~ msgstr ""
+#~ "Error: <b>Events Manager PoP Processors</b> is not installed/activated. "
+#~ "Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+#~ "plugin from your plugin installer or download it <a href=\"https://github."
+#~ "com/leoloso/PoP/\">from here</a>."
+
+#~ msgid ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>Events Manager PoP Processors</b> "
+#~ "installed, or otherwise <b>PoP Theme: Wassup</b> might not function "
+#~ "properly."
+#~ msgstr ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>Events Manager PoP Processors</b> "
+#~ "installed, or otherwise <b>PoP Theme: Wassup</b> might not function "
+#~ "properly."
+
+#~ msgid ""
+#~ "Error: <b>User Role Editor PoP Processors</b> is not installed/activated. "
+#~ "Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+#~ "plugin from your plugin installer or download it <a href=\"https://github."
+#~ "com/leoloso/PoP/\">from here</a>."
+#~ msgstr ""
+#~ "Error: <b>User Role Editor PoP Processors</b> is not installed/activated. "
+#~ "Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+#~ "plugin from your plugin installer or download it <a href=\"https://github."
+#~ "com/leoloso/PoP/\">from here</a>."
+
+#~ msgid ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>User Role Editor PoP Processors</"
+#~ "b> installed, or otherwise <b>PoP Theme: Wassup</b> might not function "
+#~ "properly."
+#~ msgstr ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>User Role Editor PoP Processors</"
+#~ "b> installed, or otherwise <b>PoP Theme: Wassup</b> might not function "
+#~ "properly."
+
+#~ msgid ""
+#~ "Error: <b>PhotoSwipe for PoP</b> is not installed/activated. Without it, "
+#~ "<b>PoP Theme: Wassup</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"https://github.com/leoloso/"
+#~ "PoP/\">from here</a>."
+#~ msgstr ""
+#~ "Error: <b>PhotoSwipe for PoP</b> is not installed/activated. Without it, "
+#~ "<b>PoP Theme: Wassup</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"https://github.com/leoloso/"
+#~ "PoP/\">from here</a>."
+
+#~ msgid ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>PhotoSwipe for PoP</b> installed, "
+#~ "or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+#~ msgstr ""
+#~ "Warning: please make sure to have the <a href=\"https://github.com/"
+#~ "leoloso/PoP/\">latest version</a> of <b>PhotoSwipe for PoP</b> installed, "
+#~ "or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#~ msgid "Powered by <a href=\"%s\">the PoP framework</a>"
+#~ msgstr "Implementado con <a href=\"%s\">the PoP framework</a>"
+
+#~ msgid "View all"
+#~ msgstr "Ver todos"
+
+#~ msgid "Content tagged with “#%s”"
+#~ msgstr "Contenido etiquetado con \"#%s\""
+
+#~ msgid "Section(s)"
+#~ msgstr "Sección(es)"
+
+#~ msgid "Calendar Map"
+#~ msgstr "Mapa Calendario"
+
+#~ msgid "Show FAQs"
+#~ msgstr "Mostrar preguntas frecuentes"
+
+#~ msgid "What is the benefit of having members for my Organization?"
+#~ msgstr "¿Cuál es el beneficio de tener miembros de mi organización?"
+
+#~ msgid ""
+#~ "Your Organization will get the credit for the content posted by your "
+#~ "members without having to do much: they are the ones creating and posting "
+#~ "their own content."
+#~ msgstr ""
+#~ "Su organización recibirá el crédito por el contenido publicado por sus "
+#~ "miembros y sin tener que hacer mucho: son ellos los que están creando y "
+#~ "publicando sus propios contenidos."
+
+#~ msgid "Can you give me an example of this?"
+#~ msgstr "¿Me puede dar un ejemplo de esto?"
+
+#~ msgid ""
+#~ "Sure! Imagine your Organization is a University and has many students "
+#~ "registered as members, and each one of them posts Discussions explaining "
+#~ "their knowledge on some environmental topic they learn in class, and "
+#~ "Projects initiated in their campuses.<br/><br/>"
+#~ msgstr ""
+#~ "¡Por supuesto! Imagine que su organización es una Universidad y tiene "
+#~ "muchos estudiantes registrados como miembros, y cada uno de ellos publica "
+#~ "artículos que explican su conocimiento sobre algún tema medioambiental "
+#~ "que aprenden en clase, y proyectos iniciados en sus campus.<br/><br/>"
+
+#~ msgid ""
+#~ "All this environmental content will also show up in the University's "
+#~ "profile, with the following positive consequences:<br/>"
+#~ msgstr ""
+#~ "Todo este contenido ambiental también se mostrará en el perfil de la "
+#~ "Universidad, con las siguientes consecuencias positivas:<br/>"
+
+#~ msgid ""
+#~ "The University can show off its environmental record, and gain more "
+#~ "environmentally-aware new students."
+#~ msgstr ""
+#~ "La Universidad puede mostrar su historial medioambiental, y ganar nuevos "
+#~ "estudiantes que tengan conciencia ambiental."
+
+#~ msgid ""
+#~ "The students can share their knowledge with their classmates, year-on-"
+#~ "year fellow students, and even other University students."
+#~ msgstr ""
+#~ "Los estudiantes pueden compartir sus conocimientos con sus compañeros de "
+#~ "clase, compañeros de estudios inter-anuales, e incluso con estudiantes de "
+#~ "otras universidades."
+
+#~ msgid ""
+#~ "Other Universities will follow, eventually creating a network of "
+#~ "environmental knowledge and action."
+#~ msgstr ""
+#~ "Otras Universidades eventualmente seguirán el ejemplo, con el tiempo "
+#~ "creando una red de conocimiento y acción sobre el medio ambiente."
+
+#~ msgid "What is the benefit for my members?"
+#~ msgstr "¿Cuál es el beneficio para mis miembros?"
+
+#~ msgid ""
+#~ "In addition to being part of the network mentioned above, they will "
+#~ "benefit by showing off themselves: their profile effectively constitutes "
+#~ "an \"Environmental CV\"."
+#~ msgstr ""
+#~ "Además de ser parte de la red que se ha mencionado anteriormente, se "
+#~ "beneficiarán mostrando lo que han hecho: su perfil constituye "
+#~ "efectivamente un \"CV del Medio Ambiente\"."
+
+#~ msgid "quick post"
+#~ msgstr "post rápido"
+
+#~ msgid "Extract"
+#~ msgstr "Extracción"
+
+#~ msgid "Quick Post"
+#~ msgstr "Post rápido"
+
+#~ msgid "Source: "
+#~ msgstr "Fuente: "
+
+#~ msgid ""
+#~ "This webpage cannot be embedded, please <a href=\"%s\" target=\"_blank"
+#~ "\">click here</a> to open it in a new tab."
+#~ msgstr ""
+#~ "Este página web no puede ser incluída aquí, por favor <a href=“%s” "
+#~ "target=“_blank”>haga clic aquí fuente</a> para abrirla en una nueva "
+#~ "pestaña."
+
+#~ msgid "View/Preview"
+#~ msgstr "Ver/Vista previa"
+
+#~ msgid "Extract important information"
+#~ msgstr "Extraer información importante"
+
+#~ msgid "Extract from:"
+#~ msgstr "Extracto de:"
+
+#~ msgid "Important information:"
+#~ msgstr "Información importante:"
+
+#~ msgid "Quick Post details"
+#~ msgstr "Detalles del Post rápido"
+
+#~ msgid "Important information"
+#~ msgstr "Información importante"
+
+#~ msgid "Extracts from our users"
+#~ msgstr "Extractos de los usuarios"
+
+#~ msgid "Extracted from"
+#~ msgstr "Extraído de"
+
+#~ msgid ""
+#~ "For security reasons, the browser can only embed pages using HTTPS, so "
+#~ "please click on the <a href=\"%s\" target=\"_blank\">source</a> to open "
+#~ "the page in a new tab."
+#~ msgstr ""
+#~ "Por razones de seguridad, el navegador sólo puede incrustar páginas "
+#~ "utilizando HTTPS, así que por favor haga clic en la <a href=“%s” "
+#~ "target=“blank”>fuente</a> para abrir la página en una nueva pestaña."
+
+#~ msgid ""
+#~ "Any URL from any website. (Most websites can be embedded. However, there "
+#~ "are websites, such as Facebook, Dropbox or Google Translate, which do not "
+#~ "permit being embedded. For these, you can still add the URL, but no "
+#~ "webpage will be shown.)"
+#~ msgstr ""
+#~ "La URL de cualquier página web. (La mayoría de los sitios web puede ser "
+#~ "embebido. Sin embargo, hay sitios web, como Facebook, Dropbox o Google "
+#~ "Translate, que no lo permiten. Para estos, todavía se puede añadir la "
+#~ "URL, pero no se verá el contenido.)"
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "¿Quién puede agregar contenido en %s?"
+
+#~ msgid "Anyone."
+#~ msgstr "Todo el mundo."
+
+#~ msgid "Is it free?"
+#~ msgstr "¿Es gratis?"
+
+#~ msgid "Yes."
+#~ msgstr "Sí."
+
+#~ msgid "Project"
+#~ msgstr "Proyecto"
+
+#~ msgid "Story"
+#~ msgstr "Historia"
+
+#~ msgid "Announcement"
+#~ msgstr "Anuncio"
+
+#~ msgid "Projects"
+#~ msgstr "Proyectos"
+
+#~ msgid "Stories"
+#~ msgstr "Historias"
+
+#~ msgid "Announcements"
+#~ msgstr "Anuncio"
+
+#, fuzzy
+#~ msgid "past Events"
+#~ msgstr "Eventos pasados"
+
+#, fuzzy
+#~ msgid "announcements"
+#~ msgstr ""
+#~ "El software ha incorporado soporte para los siguientes tipos de post: "
+#~ "posts rápidos, artículos, anuncios, proyectos, historias y eventos, cada "
+#~ "una de ellos con sus propias características. Además, todos los tipos de "
+#~ "contenido también se pueden añadir como \"enlaces\", es decir, en lugar "
+#~ "de tener que copiar y pegar el contenido desde otros sitios web, uno "
+#~ "puede simplemente insertar su enlace directamente de su sitio web "
+#~ "original."

@@ -34,6 +34,10 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 	
 		$ret = parent::get_modules($template_id);
 
+		if ($messagefeedback = $this->get_messagefeedback($template_id)) {				
+			$ret[] = $messagefeedback;
+		}
+
 		if ($controlgroup_top = $this->get_controlgroup_top($template_id)) {				
 			$ret[] = $controlgroup_top;
 		}
@@ -57,6 +61,21 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 		$ret = parent::get_template_configuration($template_id, $atts);
 
 		global $gd_template_processor_manager;
+		
+		if ($messagefeedback = $this->get_messagefeedback($template_id)) {
+
+			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['messagefeedback'] = $gd_template_processor_manager->get_processor($messagefeedback)->get_settings_id($messagefeedback);
+
+			$messagefeedback_pos = $this->get_messagefeedback_position($template_id);
+			if ($messagefeedback_pos == 'top') {
+
+				$ret['messagefeedback-top'] = true;
+			}
+			elseif ($messagefeedback_pos == 'bottom') {
+
+				$ret['messagefeedback-bottom'] = true;
+			}					
+		}
 		
 		if ($show_controls = $this->get_att($template_id, $atts, 'show-controls')) {
 			
@@ -229,6 +248,11 @@ class GD_Template_Processor_BlocksBase extends PoPFrontend_Processor_BlocksBase 
 	//-------------------------------------------------
 	// PROTECTED Functions
 	//-------------------------------------------------
+
+	protected function get_messagefeedback($template_id) {
+
+		return null;
+	}
 
 	protected function get_controlgroup_top($template_id) {
 

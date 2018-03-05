@@ -51,7 +51,7 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 				$ret[] = GD_EM_TEMPLATE_FORMCOMPONENTGROUP_TYPEAHEADMAP;
 				
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_FORMCOMPONENTGROUP_VOLUNTEERSNEEDED_SELECT;
 				}
 
@@ -89,7 +89,7 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 				}
 
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_FORMCOMPONENTGROUP_VOLUNTEERSNEEDED_SELECT;
 				}
 
@@ -257,7 +257,7 @@ class GD_Custom_Template_Processor_FormWidgets extends GD_Template_Processor_Wid
 			case GD_TEMPLATE_WIDGET_FORM_ANNOUNCEMENTDETAILS:
 
 				// If the widget has nothing inside, then hide it
-				if (!PoPTheme_Wassup_Utils::add_categories() && !PoPTheme_Wassup_Utils::add_appliesto() && !POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (!PoPTheme_Wassup_Utils::add_categories() && !PoPTheme_Wassup_Utils::add_appliesto() && !POP_GENERICFORMS_PAGE_VOLUNTEER) {
 					$this->append_att($template_id, $atts, 'class', 'hidden');
 				}
 				break;

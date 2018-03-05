@@ -6,25 +6,10 @@
  *
  * ---------------------------------------------------------------------------------------------------------------*/
 
-// define ('POP_EMAILSENDER_SYNC', 'synchronous');
-// define ('POP_EMAILSENDER_ASYNC', 'asynchronous');
-
 class PoP_EmailSender_Utils {
 
 	protected static $headers;
 
-	// public static function sendemail($to, $subject, $msg, $type = POP_EMAILSENDER_ASYNC) {
-
-	// 	$sender = PoP_EmailSender_Factory::get_instance();
-	// 	if ($type == POP_EMAILSENDER_SYNC) {
-
-	// 		$sender->send_email($to, $subject, $msg);
-	// 	}
-	// 	elseif ($type == POP_EMAILSENDER_ASYNC) {
-
-	// 		$sender->enqueue_email($to, $subject, $msg);
-	// 	}
-	// }
 	public static function send_email($to, $subject, $msg, $headers_name = null) {
 
 		if (is_null(self::$headers)) {

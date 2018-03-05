@@ -10,6 +10,6 @@ if (class_exists('EM_Event'))
 if (defined('AAL_POPPROCESSORS_VERSION')) {
 	require_once 'aryo-activity-log-popprocessors/load.php';
 }
-if (class_exists("RGForms")) {
-	require_once 'gravityforms/load.php';
+if (defined('GFPOP_VERSION')) {
+	require_once 'gravityforms-pop/load.php';
 }

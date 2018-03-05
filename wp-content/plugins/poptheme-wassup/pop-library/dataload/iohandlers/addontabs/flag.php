@@ -16,7 +16,7 @@ class GD_DataLoad_TabIOHandler_FlagAddon extends GD_DataLoad_TabIOHandler_Page {
 
 	function get_title() {
 
-		return get_the_title(POPTHEME_WASSUP_GF_PAGE_FLAG);
+		return get_the_title(POP_GENERICFORMS_PAGE_FLAG);
 	}
 }
 	

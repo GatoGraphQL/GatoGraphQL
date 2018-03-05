@@ -15,7 +15,7 @@ function poptheme_wassup_createuser_successmsg($msg) {
 		sprintf(
 			'<ul><li>%s</li><li>%s</li></ul>',
 			PoP_EmailSender_Utils::get_from_email(),
-			PoPTheme_Wassup_EmailSender_Utils::get_newsletter_email()
+			PoP_GenericForms_EmailSender_Utils::get_newsletter_email()
 		),
 		$msg
 	);

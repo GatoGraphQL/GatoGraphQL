@@ -174,9 +174,9 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 			);
 		}
 
-		if ($messagefeedback = $this->get_messagefeedback($template_id)) {				
-			$ret[] = $messagefeedback;
-		}
+		// if ($messagefeedback = $this->get_messagefeedback($template_id)) {				
+		// 	$ret[] = $messagefeedback;
+		// }
 		/***********************************************************/
 
 		
@@ -387,20 +387,20 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['fetchmore'] = $gd_template_processor_manager->get_processor(GD_TEMPLATE_FETCHMORE)->get_settings_id(GD_TEMPLATE_FETCHMORE);
 		}
 		
-		if ($messagefeedback = $this->get_messagefeedback($template_id)) {
+		// if ($messagefeedback = $this->get_messagefeedback($template_id)) {
 
-			$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['messagefeedback'] = $gd_template_processor_manager->get_processor($messagefeedback)->get_settings_id($messagefeedback);
+		// 	$ret[GD_JS_SETTINGSIDS/*'settings-ids'*/]['messagefeedback'] = $gd_template_processor_manager->get_processor($messagefeedback)->get_settings_id($messagefeedback);
 
-			$messagefeedback_pos = $this->get_messagefeedback_position($template_id);
-			if ($messagefeedback_pos == 'top') {
+		// 	$messagefeedback_pos = $this->get_messagefeedback_position($template_id);
+		// 	if ($messagefeedback_pos == 'top') {
 
-				$ret['messagefeedback-top'] = true;
-			}
-			elseif ($messagefeedback_pos == 'bottom') {
+		// 		$ret['messagefeedback-top'] = true;
+		// 	}
+		// 	elseif ($messagefeedback_pos == 'bottom') {
 
-				$ret['messagefeedback-bottom'] = true;
-			}					
-		}
+		// 		$ret['messagefeedback-bottom'] = true;
+		// 	}					
+		// }
 
 		if ($classes = $this->get_blocksections_classes($template_id)) {
 
@@ -742,10 +742,10 @@ class PoPFrontend_Processor_BlocksBase extends GD_Template_ProcessorBase {
 	/***********************************************************/
 	/** Repeated from "parent" class! */
 	/***********************************************************/
-	protected function get_messagefeedback($template_id) {
+	// protected function get_messagefeedback($template_id) {
 
-		return null;
-	}
+	// 	return null;
+	// }
 	// protected function add_title_link($template_id) {
 
 	// 	return false;

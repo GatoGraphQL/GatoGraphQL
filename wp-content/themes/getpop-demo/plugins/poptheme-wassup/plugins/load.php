@@ -12,8 +12,12 @@ if (class_exists('EM_Event'))
 if (class_exists('MLAData'))		
 	require_once 'media-library-assistant/load.php';
 
-if (class_exists("RGForms"))	
-	require_once 'gravityforms/load.php';
+// if (class_exists("RGForms")) {
+// 	require_once 'gravityforms/load.php';
+// }
+if (defined('POP_GENERICFORMS_VERSION')) {
+	require_once 'pop-genericforms/load.php';		
+}
 
 // if (defined('POP_SERVICEWORKERS_INITIALIZED')) {
 // 	require_once 'pop-serviceworkers/load.php';		

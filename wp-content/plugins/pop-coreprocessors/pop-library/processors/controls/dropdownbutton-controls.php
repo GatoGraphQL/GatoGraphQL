@@ -56,20 +56,33 @@ class GD_Template_Processor_DropdownButtonControls extends GD_Template_Processor
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_SHARE:
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
 
-				$ret[] = GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK;
-				$ret[] = GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER;
-				// $ret[] = GD_TEMPLATE_ANCHORCONTROL_SHARE_LINKEDIN;
-				// $ret[] = GD_TEMPLATE_DIVIDER;
+				$modules = array();
+				$modules[] = GD_TEMPLATE_ANCHORCONTROL_SHARE_FACEBOOK;
+				$modules[] = GD_TEMPLATE_ANCHORCONTROL_SHARE_TWITTER;
 
 				if ($template_id == GD_TEMPLATE_DROPDOWNBUTTONCONTROL_RESULTSSHARE) {
 
-					$ret[] = GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL;
+					$modules[] = GD_TEMPLATE_ANCHORCONTROL_COPYSEARCHURL;
 				}
 
-				$ret[] = GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL;
-				$ret[] = GD_TEMPLATE_ANCHORCONTROL_EMBED;
-				$ret[] = GD_TEMPLATE_ANCHORCONTROL_PRINT;
-				$ret[] = GD_TEMPLATE_ANCHORCONTROL_API;
+				// Add through hook in PoP Generic Forms Processors
+				// if (defined('GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL')) {
+				// 	$ret[] = GD_TEMPLATE_ANCHORCONTROL_SHAREBYEMAIL;
+				// }
+				$modules[] = GD_TEMPLATE_ANCHORCONTROL_EMBED;
+				$modules[] = GD_TEMPLATE_ANCHORCONTROL_PRINT;
+				$modules[] = GD_TEMPLATE_ANCHORCONTROL_API;
+
+				// Allow PoP Generic Forms Processors to add modules
+				$modules = apply_filters(
+					'GD_Template_Processor_DropdownButtonControls:modules:share',
+					$modules,
+					$template_id
+				);
+				$ret = array_merge(
+					$ret,
+					$modules
+				);
 				break;
 
 			case GD_TEMPLATE_DROPDOWNBUTTONCONTROL_PAGEWITHSIDEOPTIONS:

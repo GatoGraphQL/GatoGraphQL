@@ -21,7 +21,7 @@ function gd_qtransxf_use_block_altlang($output, $lang, $language_list, $alt_lang
 		sprintf(
 			__('Ops, it seems this content is not available in <strong>%s</strong>. <a href="%s">Would you like to help us translate it?</a>', 'poptheme-wassup'),
 			$q_config['language_name'][$lang],
-			get_permalink(POPTHEME_WASSUP_GF_PAGE_CONTACTUS)
+			get_permalink(POP_GENERICFORMS_PAGE_CONTACTUS)
 		),
 		$alt_content
 	);

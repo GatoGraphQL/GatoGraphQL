@@ -32,7 +32,7 @@ class Custom_FullViewSidebarSettings {
 				$ret[] = GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE;//GD_TEMPLATE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE;//GD_TEMPLATE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE;				
 				$ret[] = GD_TEMPLATE_POSTSOCIALMEDIA_POSTWRAPPER;
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG;
 				}
 				if (PoPTheme_Wassup_Utils::add_categories_to_widget()) {
@@ -84,7 +84,7 @@ class Custom_FullViewSidebarSettings {
 				$ret[] = GD_TEMPLATE_LAYOUT_POSTTHUMB_FEATUREDIMAGE;//GD_TEMPLATE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE;//GD_TEMPLATE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE;
 				$ret[] = GD_TEMPLATE_POSTSOCIALMEDIA_POSTWRAPPER;
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG;
 				}
 				if (PoPTheme_Wassup_Utils::add_categories_to_widget()) {
@@ -100,7 +100,7 @@ class Custom_FullViewSidebarSettings {
 			case GD_COMPACTSIDEBARSECTION_LOCATIONPOST:
 
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER;
 				}
 				else {
@@ -112,7 +112,7 @@ class Custom_FullViewSidebarSettings {
 			case GD_COMPACTSIDEBARSECTION_ANNOUNCEMENT:
 
 				// Only if the Volunteering is enabled
-				if (POPTHEME_WASSUP_GF_PAGE_VOLUNTEER) {
+				if (defined('POP_GENERICFORMS_PAGE_VOLUNTEER')) {
 					$ret[] = GD_TEMPLATE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER;
 				}
 				else {

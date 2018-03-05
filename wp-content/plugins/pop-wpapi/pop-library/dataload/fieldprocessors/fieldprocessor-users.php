@@ -159,9 +159,9 @@ class GD_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor {
 				$value = gd_get_avatar($user->ID, 150);
 				break;
 
-			case 'contact-url' :
-				$value = add_query_arg('uid', $this->get_id($user), get_permalink(POPTHEME_WASSUP_GF_PAGE_CONTACTUSER));
-				break;
+			// case 'contact-url' :
+			// 	$value = add_query_arg('uid', $this->get_id($user), get_permalink(POP_GENERICFORMS_PAGE_CONTACTUSER));
+			// 	break;
 			
 			default:
 
