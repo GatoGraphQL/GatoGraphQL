@@ -1,17 +1,17 @@
 *.log
-wp-config.php
-wp-content/advanced-cache.php
-wp-content/backup-db/
-wp-content/backups/
-wp-content/blogs.dir/
-wp-content/cache/
-wp-content/upgrade/
-wp-content/uploads/
-wp-content/wp-cache-config.php
-wp-content/index.php
-wp-content/plugins/hello.php
-wp-content/plugins/index.php
-wp-content/themes/index.php
+/wp-config.php
+/wp-content/advanced-cache.php
+/wp-content/backup-db/
+/wp-content/backups/
+/wp-content/blogs.dir/
+/wp-content/cache/
+/wp-content/upgrade/
+/wp-content/uploads/
+/wp-content/wp-cache-config.php
+/wp-content/index.php
+/wp-content/plugins/hello.php
+/wp-content/plugins/index.php
+/wp-content/themes/index.php
 
 /.htaccess
 /license.txt
@@ -19,9 +19,9 @@ wp-content/themes/index.php
 /sitemap.xml
 /sitemap.xml.gz
 
-wp-admin/
-wp-includes/
-wp-content/languages/
+/wp-admin/
+/wp-includes/
+/wp-content/languages/
 
 vendor/
 
@@ -40,5 +40,5 @@ vendor/
 /wp-trackback.php
 /xmlrpc.php
 
-wp-content/themes/twentyfifteen/
+/wp-content/themes/twentyfifteen/
 
