@@ -50,43 +50,9 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 ## Installation
 
-_**Important:** PoP is currently not very smooth to install, it's a slightly lengthy manual process. We hope soon we will have scripts automating the process. If you would like to help us, that would be very welcome! [More info here](https://github.com/leoloso/PoP/issues/49)._
+We are currently creating scripts to automate the installation process, we expect them to be ready around mid-July 2018.
 
-1. Install the [latest version](https://wordpress.org/latest.zip) of WordPress
-2. Download/clone this repository on the same folder
-3. Create all required pages/categories/etc, to be found in each plugin's `config/constants.php` file (eg: [this file](https://github.com/leoloso/PoP/blob/master/wp-content/plugins/pop-coreprocessors/config/constants.php)), and set those constants with their corresponding ID
-4. Activate all plug-ins and the theme
-
-### Required 3rd-party plugins
-
-Install and activate the following plugins, which are integrated with PoP (_not all of them are mandatory, however **PoP has yet not been tested without them**_):
- - [Events Manager](https://wordpress.org/plugins/events-manager/): for the events and locations
- - [User Role Editor](https://wordpress.org/plugins/user-role-editor/): for the organization/individual account types
- - [Co-Authors Plus](https://wordpress.org/plugins/co-authors-plus/): for adding co-authors to the posts
- - [Public Post Preview](https://wordpress.org/plugins/public-post-preview/): for previewing draft posts
- - [Aryo Activity Log (Forked for PoP)](https://github.com/leoloso/aryo-activity-log): for the notifications (_please notice: this is a forked version of the plugin [Aryo Activity Log](https://wordpress.org/plugins/aryo-activity-log/), which doesn't work with PoP._)
- - [WordPress Social Login](https://wordpress.org/plugins/wordpress-social-login/): for allowing users to log-in with Facebook, Twitter, etc accounts
- - [qTranslate X](https://wordpress.org/plugins/qtranslate-x/): multi-language
- - [WP Super Cache](https://wordpress.org/plugins/wp-super-cache/): for caching the website
- - (Commercial) [Gravity Forms](http://www.gravityforms.com/): for sending messages, newsletter, flagging, volunteering, etc
-
-### Required 3rd-party libraries
-
-#### LightnCandy
-
-[LightnCandy](https://github.com/zordius/lightncandy) is used for producing server-side HTML code. It must be installed in order to compile Handlebars javascript templates into PHP code. (There is no need to install it just to run the website as it is, since all PHP-compiled Handlebars javascript templates have been uploaded to this repository).
-
-To install it, follow the instructions [here](https://zordius.github.io/HandlebarsCookbook/9000-quickstart.html). Run composer under folder [wp-content/plugins/pop-frontendengine/php-templates/cli](https://github.com/leoloso/PoP/tree/master/wp-content/plugins/pop-frontendengine/php-templates/cli).
-
-#### PHP CSS Parser
-
-[PHP CSS Parser](https://github.com/sabberworm/PHP-CSS-Parser) is used for parsing css files to extract their styles. It must be installed in order to send the automated emails, which, instead of using classes, have inline styles printed in the HTML code.
-
-To install it, open a Terminal window, go to folder [wp-content/plugins/pop-frontendengine/library/css-to-style-conversion/](https://github.com/leoloso/PoP/tree/master/wp-content/plugins/pop-frontendengine/library/css-to-style-conversion), and run `composer install` (make sure to have [Composer](https://getcomposer.org/) installed first).
-
-### Installing the demo
-
-Because the [scripts automating the installation process](https://github.com/leoloso/PoP/issues/49) are not done yet, we provide file [getpop-demo/install.zip](https://github.com/leoloso/PoP/tree/master/install/getpop-demo/install.zip) to quickly install a copy of [GetPoP Demo website](https://demo.getpop.org/) in your localhost. Read the installation instructions [here](https://github.com/leoloso/PoP/blob/master/install/getpop-demo/install.md). This is not ideal, but bear with us until we can work on the scripts. If the installation fails, please [contact Leo](mailto:leo@getpop.org) and he will help set it up.
+Until then, we provide a zip file including all code (PoP, WordPress and plugins), and a database dump from the [GetPoP Demo website](https://demo.getpop.org/), to set-up this same site in a quick-and-dirty manner in your localhost. Download the files and read the installation instructions [here](https://github.com/leoloso/PoP/blob/master/install/getpop-demo/install.md).
 
 ## Configuration
 
