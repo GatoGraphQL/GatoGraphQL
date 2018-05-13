@@ -50,11 +50,7 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 ## Installation
 
-<<<<<<< HEAD
 We are currently creating scripts to automate the installation process, we expect them to be ready around mid-July 2018.
-=======
-We are currently creating scripts to automate the installation process, we expect them to be ready around mid-April 2018.
->>>>>>> origin/master
 
 Until then, we provide a zip file including all code (PoP, WordPress and plugins), and a database dump from the [GetPoP Demo website](https://demo.getpop.org/), to set-up this same site in a quick-and-dirty manner in your localhost. Download the files and read the installation instructions [here](https://github.com/leoloso/PoP/blob/master/install/getpop-demo/install.md).
 
