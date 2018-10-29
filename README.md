@@ -1,7 +1,7 @@
 ![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
 
 # PoP — “Platform of Platforms”
-Framework for building Single-Page Application WordPress websites, decentralized crowd-sourced platforms, and social networks
+Framework for building component-based websites
 
 **PoP website:** https://getpop.org
 
@@ -15,6 +15,30 @@ Framework for building Single-Page Application WordPress websites, decentralized
 - MESYM: https://www.mesym.com
 - Agenda Urbana: https://agendaurbana.org
 
+## Attention: PoP is not ready yet!
+
+We are re-architecting PoP to make it much simpler to code with it, faster, and more versatile. The new PoP will feature an architecture based on the following foundations:
+
+- Everything is a module
+- The module is its own API
+- Reactivity
+
+At the core of these changes is an upgraded API model, which will feature server-based components. Following the example set by GraphQL, which owes its success in part to being a specification instead of an implementation, PoP will be composed of the following layers:
+
+1. The API (JSON response) specification
+2. PoP Server, to serve content based on the API specification
+3. PoP.js, to consume the content in the client
+
+Being built around an open specification, we can expect different implementations to emerge, for different technologies. The current PoP site will immediately provide the first implementation of PoP Server and PoP.js:
+
+- PoP Server for WordPress, based on PoP Server for PHP
+- PoP.js through vanilla JS and Handlebars templates
+
+We plan to start releasing the new PoP, in stages, around end of 2018 or beginning of 2019.
+
+More information here: https://getpop.org/en/blog/describing-the-foundations-of-the-new-pop/
+
+<!-- 
 Below is a technical summary. For a more in-depth description, please visit [PoP's documentation page](https://getpop.org/en/documentation/overview/).
 
 ## What is PoP?
@@ -195,6 +219,8 @@ The `minify.sh` script copies all files to minimize under folder `POP_APP_MIN_FO
   
       plugins/PLUGIN-NAME/css/
       plugins/PLUGIN-NAME/js/
+
+-->
 
 ## Want to help?
 
