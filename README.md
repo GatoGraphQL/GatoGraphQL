@@ -219,8 +219,6 @@ The `minify.sh` script copies all files to minimize under folder `POP_APP_MIN_FO
       plugins/PLUGIN-NAME/css/
       plugins/PLUGIN-NAME/js/
 
--->
-
 ## Want to help?
 
 We are looking for developers who want to become involved. Check here the issues we need your help with:
@@ -232,3 +230,5 @@ https://github.com/leoloso/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wan
 Open to Open Source projects for free, PoP uses the Live, Web-Based Browser Testing provided by [BrowserStack](https://www.browserstack.com/).
 
 ![BrowserStack](http://www.softcrylic.com/wp-content/uploads/2017/03/browser-stack.png)
+
+-->
