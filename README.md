@@ -1,9 +1,10 @@
 ![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
 
 # PoP — “Platform of Platforms”
+
 Framework for building component-based websites
 
-**PoP website:** https://getpop.org
+## Examples
 
 **Demos to play with PoP:**
 
@@ -15,9 +16,9 @@ Framework for building component-based websites
 - MESYM: https://www.mesym.com
 - Agenda Urbana: https://agendaurbana.org
 
-## Attention: PoP is not ready yet!
+## Current focus: Release the new PoP API
 
-We are re-architecting PoP to make it much simpler to code with it, faster, and more versatile. The new PoP will feature an architecture based on the following foundations:
+[We are re-architecting PoP](https://getpop.org/en/blog/describing-the-foundations-of-the-new-pop/) to make it much simpler to code with it, faster, and more versatile. The new PoP will feature an architecture based on the following foundations:
 
 - Everything is a module
 - The module is its own API
@@ -29,14 +30,12 @@ At the core of these changes is an upgraded API model, which will feature server
 2. PoP Server, to serve content based on the API specification
 3. PoP.js, to consume the content in the client
 
-Being built around an open specification, we can expect different implementations to emerge, for different technologies. The current PoP site will immediately provide the first implementation of PoP Server and PoP.js:
+Being built around an open specification, we hope that different implementations for different technologies will emerge, so that any PoP website can communicate with any other PoP website no matter its underlying technology. The current PoP site will immediately provide the first implementation of PoP Server and PoP.js:
 
 - PoP Server for WordPress, based on PoP Server for PHP
 - PoP.js through vanilla JS and Handlebars templates
 
-We plan to start releasing the new PoP, in stages, around end of 2018 or beginning of 2019.
-
-More information here: https://getpop.org/en/blog/describing-the-foundations-of-the-new-pop/
+We started releasing the new PoP on early December 2018, and the process should take several months until complete. We expect all code to be released by 2nd quarter of 2019.
 
 <!-- 
 Below is a technical summary. For a more in-depth description, please visit [PoP's documentation page](https://getpop.org/en/documentation/overview/).
