@@ -16,7 +16,7 @@ Framework for building component-based websites
 - MESYM: https://www.mesym.com
 - Agenda Urbana: https://agendaurbana.org
 
-## Current focus: Release the new PoP API
+## Current focus: Release in stages of the new PoP API
 
 [We are re-architecting PoP](https://getpop.org/en/blog/describing-the-foundations-of-the-new-pop/) to make it much simpler to code with it, faster, and more versatile. The new PoP will feature an architecture based on the following foundations:
 
