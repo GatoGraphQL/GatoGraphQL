@@ -1,7 +1,0 @@
-<FilesMatch "service-worker\.js$">
-  Header set Service-Worker-Allowed: $scope
-  Header set Cache-Control 'no-cache, must-revalidate'
-</FilesMatch>
-<FilesMatch "manifest\.json$">
-  Allow from all
-</FilesMatch>

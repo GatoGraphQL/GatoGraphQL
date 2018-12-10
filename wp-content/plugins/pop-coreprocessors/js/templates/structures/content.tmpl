@@ -1,6 +1,0 @@
-{{{description}}}
-<div class="content {{#each template-sources.class-extensions}}{{applyLightTemplate . context=../.}}{{/each}} {{class}} {{class-merge}}" style="{{style}}" {{#generateId}}{{id}}{{/generateId}} {{#each previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../. template=this}}"{{/each}}>
-	{{#withModule . "inner"}}
-		{{enterModule ../. itemDBKey=../itemDBKey items=../items}}
-	{{/withModule}}	
-</div>

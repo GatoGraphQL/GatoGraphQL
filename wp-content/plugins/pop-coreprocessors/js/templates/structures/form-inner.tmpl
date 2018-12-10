@@ -1,6 +1,0 @@
-{{#if bs.feedback.validate-checkpoints}}{{#if bs.feedback.checkpointvalidation-failed}}<div class="pop-disabledlayer pop-structureinner"><div class="layer"></div></div>{{/if}}{{/if}}
-{{#each template-ids.layouts}}
-	{{#withModule ../. this}}
-		{{enterModule ../../. itemDBKey=../../itemDBKey itemObjectId=../../items}}
-	{{/withModule}}
-{{/each}}

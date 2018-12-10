@@ -1,8 +1,0 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="{{class}} scroll" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../. template=this}}"{{/each}}>
-	{{{description}}}
-	<div class="{{#each template-sources.class-extensions}}{{applyLightTemplate . context=../.}}{{/each}} {{class-merge}} {{classes.inner}} scroll-inner clearfix" style="{{styles.inner}}">
-		{{#withModule . "inner"}}
-			{{enterModule ../. itemDBKey=../itemDBKey items=../items}}
-		{{/withModule}}	
-	</div>
-</div>

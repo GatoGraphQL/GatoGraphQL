@@ -1,1 +1,0 @@
-<div id="<?php echo GD_TEMPLATEID_PAGESECTIONID_OPERATIONAL ?>" class="operational pop-merge <?php echo GD_TEMPLATE_PAGESECTION_OPERATIONAL ?>"><?php echo PoP_ServerSideRendering_Utils::render_pagesection(GD_TEMPLATE_PAGESECTION_OPERATIONAL) ?></div>

@@ -1,4 +1,0 @@
-/* WSL Users: do not show "Change Password" link */
-body.loggedin-{{$domainId}}.wsluser-{{$domainId}} .hidden-wsluser-{{$domainId}} {
-	display: none;
-}

@@ -1,3 +1,0 @@
-#ps-main .pop-multidomain .blockinner-row.{{$domainId}} {
-	background-color: {{$backgroundColor}};
-}

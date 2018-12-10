@@ -1,3 +1,0 @@
-<a {{#generateId}}{{id}}{{/generateId}} href="{{href}}" role="button" class="{{class}}" style="{{style}}" title="{{label}}" {{#if target}}target="{{target}}"{{/if}} {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each blockfeedback-params}} {{@key}}="{{get ../bs.feedback this}}"{{/each}} {{#each previoustemplates-ids}} {{@key}}="#{{lastGeneratedId context=../. template=this}}"{{/each}}>
-	{{#if make-title}}<h4>{{/if}}{{#if icon}}<span class="glyphicon {{icon}}"></span> {{/if}}{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{#if text}}<span class="{{classes.text}}" style="{{styles.text}}">{{{text}}}</span>{{/if}}{{#if make-title}}</h4>{{/if}}
-</a>

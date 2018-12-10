@@ -1,8 +1,0 @@
-{{#each block-settings-ids.blockunits}}
-	{{#withBlock ../. this}}
-		{{enterModule . parentContext=../../.}}
-	{{/withBlock}}
-{{/each}}
-{{#each template-sources.extensions}}
-	{{applyLightTemplate . context=../.}}
-{{/each}}
