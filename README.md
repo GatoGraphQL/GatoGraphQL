@@ -46,18 +46,15 @@ The current design and implementation of the framework was done to achieve the f
     - One-way setting of props across modules, from ancestors to descendants
     - Configuration values through API, allowing to decouple modules from each other
 - Minimal effort to produced a maximum output:
-    - Isomorphism to produce HTML code client and server-side
-    - Support to send any content on the website as transactional emails
-    - Native code splitting
-    - Native A/B testing
-    - Native client-side state management
-    - Native client-side layout cache
+    - Isomorphism to produce HTML code client and server-side and to be sent as transactional email
+    - API output easily customized for different applications (website, mobile app, integration with 3rd party apps, etc)
+    - Native code splitting, A/B testing, client-side state management and layout cache
 - Clearly decoupled responsibilities among PHP, JavaScript, JavaScript templates and CSS:
     - JavaScript templates for markup
     - JavaScript for user interactivity/dynamic functionality
     - CSS for styles
     - PHP for creating the modules
-- Easy to divide responsibilities across team members
+    - => Easy to divide responsibilities across team members
 - JavaScript as progressive enhancement
 - Aggressive caching, implemented across several layers: 
     - Pages and configuration in server
