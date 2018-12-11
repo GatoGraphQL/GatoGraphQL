@@ -306,7 +306,7 @@ The first 6 plugins are needed to produce the PoP API, and the 7th plugin (pop-e
 
 That's it. You can then access PoP's API by adding parameter `output=json` to any URL on the site: https://yoursite.com/?output=json.
 
-![If adding parameter output=json to your site produces a JSON response, then you got it!](https://uploads.getpop.org/wp-content/uploads/2018/12/api-json-response.png)
+![If adding parameter output=json to your site produces a JSON response, then you got it!](https://uploads.getpop.org/wp-content/uploads/2018/12/api-json-response.png?)
 
 _Note 1: Currently PoP runs in WordPress only. Hopefully, in the future it will be available for other CMSs and technologies too._
 
