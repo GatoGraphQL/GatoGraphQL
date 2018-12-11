@@ -268,7 +268,7 @@ From the two foundations "everything is a module" and "a module is its own API",
 
 PoP is a very ambitious project. We have been working on it for more than 5 years, and we are still on the early stages of it (or so we hope!) It was created by Leonardo Losoviz, and aided by his wife Jun-E Tan, as a solution to connect communities together directly from their own websites, offering an alternative to always depending on Facebook and similar platforms.
 
-![Jun-E and Leo](https://uploads.getpop.org/wp-content/uploads/2018/12/jun-e-leo.jpg)
+<!--![Jun-E and Leo](https://uploads.getpop.org/wp-content/uploads/2018/12/jun-e-leo.jpg)-->
 
 PoP didn't start straight as a framework, but as a website for connecting environmental movements in Malaysia, called [MESYM](https://www.mesym.com). After developing plenty of social networking features for this website, we became aware that the website code could be abstracted and turned into a framework for implementing any kind of social network. The PoP framework was thus born, after which we launched a few more websites: [TPPDebate](https://my.tppdebate.org) and [Agenda Urbana](https://agendaurbana.org). 
 
