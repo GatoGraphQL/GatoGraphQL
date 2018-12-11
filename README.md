@@ -212,7 +212,7 @@ In addition to retrieving database data, the API can also return configuration v
 }
 ```
 
-## Comparison to other APIs
+## Comparison with other APIs
 
 The PoP API has several similarities and differences with REST and GraphQL:
 
