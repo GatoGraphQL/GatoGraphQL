@@ -218,7 +218,7 @@ The PoP API has several similarities and differences with REST and GraphQL:
 
 <table>
 <thead><th>&nbsp;</th><th>REST</th><th>GraphQL</th><th>PoP</th></thead>
-<tr><th>Endpoint</th><td>Custom endpoints based on resources</td><td>1 endpoint for the whole application</td><td>1 endpoint per page, simply adding parameter `output=json` to the page URL</td>tr>
+<tr><th>Endpoint</th><td>Custom endpoints based on resources</td><td>1 endpoint for the whole application</td><td>1 endpoint per page, simply adding parameter `output=json` to the page URL</td></tr>
 <tr><th>Retrieved data</th><td>All data for a resource</td><td>All data for all resources in a component</td><td>All data for all resources in a component, for all components in a page</td></tr>
 <tr><th>How are data fields retrieved?</th><td>Implicitly: already known on server-side</td><td>Explicitly: only known on client-side</td><td>Implicitly: already known on server-side</td></tr>
 <tr><th>Does it under/over-fetch data?</th><td>Yes</td><td>No</td><td>No</td></tr>
