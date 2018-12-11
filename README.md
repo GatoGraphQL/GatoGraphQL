@@ -247,7 +247,7 @@ Using components as the building unit of a website has many advantages over othe
 
 ### To avoid JavaScript fatigue
 
-PoP is not a JavaScript framework, but a framework spanning into the server and client-side. While developers can add client-side JavaScript to enhance the application, it is certainly not a requirement, and powerful applications can be created with a basic knowledge of JavaScript.
+PoP is not a JavaScript framework, but a framework spanning into the server and client-side. While developers can add client-side JavaScript to enhance the application, it is certainly not a requirement, and powerful applications can be created with basic knowledge of JavaScript.
 
 ### To implement COPE or similar techniques
 
