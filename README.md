@@ -1,6 +1,6 @@
-# PoP — “Platform of Platforms”
-
 ![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
+
+# PoP — “Platform of Platforms”
 
 PoP is a framework for building component-based websites. Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.
 
