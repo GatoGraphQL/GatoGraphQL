@@ -222,6 +222,8 @@ The PoP API has several similarities and differences with REST and GraphQL:
 <tr><th>Retrieved data</th><td>All data for a resource</td><td>All data for all resources in a component</td><td>All data for all resources in a component, for all components in a page</td></tr>
 <tr><th>How are data fields retrieved?</th><td>Implicitly: already known on server-side</td><td>Explicitly: only known on client-side</td><td>Implicitly: already known on server-side</td></tr>
 <tr><th>Time complexity</th><td>Constant (O(1))</td><td><a href="https://blog.acolyer.org/2018/05/21/semantics-and-complexity-of-graphql/">Polynomial</a> (O(n^c))</td><td>Linear (O(n))</td></tr>
+<tr><th>Can post data?</th><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><th>Can execute any type of other operation (eg: log in user, send an email, etc)?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Does it under/over-fetch data?</th><td>Yes</td><td>No</td><td>No</td></tr>
 <tr><th>Is data normalized?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Support for configuration values?</th><td>No</td><td>No</td><td>Yes</td></tr>
@@ -232,6 +234,12 @@ The PoP API has several similarities and differences with REST and GraphQL:
 ## When to use PoP
 
 Among others, PoP is suitable for the following use cases:
+
+### As an API to fetch data, or execute any type of operation
+
+The API for fetching data comes out of the box, and specifying what resources to fetch and what data fields to retrieve for each resource is trivial. 
+
+The API can also be used to to execute any operation supported by the underlying CMS: post data, log in the user, send an email, etc. Since the operation is defined for each module, it is even possible to execute multiple operations in a single request, and have each module get a feedback response on the success of their operation.
 
 ### Reduce the complexity of the application, and maximize the output from a small team
 
