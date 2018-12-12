@@ -312,7 +312,7 @@ These 2 sites are proper, established social networks:
 
 ## Installation
 
-Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then download into folder /plugins/ and activate the 7 plugins from this repository:
+Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then download into folder /wp-content/plugins and activate the 7 plugins from this repository:
 
 - pop-cms
 - pop-cms-wp
