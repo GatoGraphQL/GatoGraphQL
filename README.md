@@ -294,7 +294,7 @@ Some examples of PoP in the wild:
 The PoP API is deployed under https://nextapi.getpop.org for demonstration purposes:
 
 - [Homepage](https://nextapi.getpop.org/?output=json&mangled=none), [a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none), [an author](https://nextapi.getpop.org/u/leo/?output=json&mangled=none), [a list of posts](https://nextapi.getpop.org/posts/?output=json&mangled=none) and [a list of users](https://nextapi.getpop.org/users/?output=json&mangled=none)
-- [Filtering an event starting from the "Post content" module](https://nextapi.getpop.org/events/coldplay-in-london/?output=json&mangled=none&modulefilter=modulepaths&modulepaths[]=pagesectiongroup.pagesection-body.block-singlepost.block-single-content)
+- An event, [filtering starting from the "Post content" module](https://nextapi.getpop.org/events/coldplay-in-london/?output=json&mangled=none&modulefilter=modulepaths&modulepaths[]=pagesectiongroup.pagesection-body.block-singlepost.block-single-content), and [filtering a page for a Single-Page Application](https://nextapi.getpop.org/events/coldplay-in-london/?output=json&mangled=none&modulefilter=page)
 
 ### PoP Sites
 
