@@ -35,7 +35,7 @@ Every module, at whichever level inside the component hierarchy (i.e. the compos
 
 Updating database data and configuration data saved in the client throughout the user session makes the layouts using this data be automatically re-rendered.
 
-> _Note: Implementation of this feature is still in progress and not yet available_
+> Note: Implementation of this feature is still in progress and not yet available
 
 ## Framework design goals
 
@@ -79,13 +79,13 @@ We will soon release the current implementation of PoP Server and PoP.js:
 
 Through the open specification, we will promote PoP being implemented in other technologies (eg: Node.js, Java, .NET, etc), as to enable any site implementing the specification to be able to interact with any other such site, no matter which their underlying technology. 
 
-> _Note: The release of the deliverables mentioned above will be done in stages, and expected to be fully completed by the second quarter of 2019._
+> Note: The release of the deliverables mentioned above will be done in stages, and expected to be fully completed by the second quarter of 2019.
 
 ### CMS-agnostic (work in progress)
 
 Because it was originally conceived for WordPress, PoP's current implementation is in PHP, which can be perfectly used for other PHP-based CMSs (such as Joomla or Drupal). For this reason, we are transforming the codebase to make PoP become CMS-agnostic, splitting plugins into 2 entities: a generic implementation that should work for every CMS (eg: "pop-engine") and a specific one for WordPress (eg: "pop-engine-wp"), so that only the latter one should be re-implemented for other CMSs. 
 
-> _Note: This task is a work in progress and nowhere near completion: plenty of code has been implemented following the WordPress architecture (eg: basing the object model on posts, pages and custom post types), and must be assesed if it is compatible for other CMSs._
+> Note: This task is a work in progress and nowhere near completion: plenty of code has been implemented following the WordPress architecture (eg: basing the object model on posts, pages and custom post types), and must be assesed if it is compatible for other CMSs.
 
 ## The API (JSON response) specification
 
@@ -290,7 +290,7 @@ The PoP API is deployed under https://nextapi.getpop.org for demonstration purpo
 
 ### PoP Sites
 
-> _Note: The websites below run on the old API, and will be migrated to the new API once we have added the rendering layer, sometime around 2nd quarter of 2019._
+> Note: The websites below run on the old API, and will be migrated to the new API once we have added the rendering layer, sometime around 2nd quarter of 2019.
 
 These 2 sites below were built for demonstration purposes, so you are encouraged to play with them (create a random post or event, follow a user, add a comment, etc):
 
@@ -320,11 +320,11 @@ That's it. You can then access PoP's API by adding parameter `output=json` to an
 
 ![If adding parameter output=json to your site produces a JSON response, then you got it!](https://uploads.getpop.org/wp-content/uploads/2018/12/api-json-response.png?)
 
-> _Note 1: Currently PoP runs in WordPress only. Hopefully, in the future it will be available for other CMSs and technologies too._
+> Note 1: Currently PoP runs in WordPress only. Hopefully, in the future it will be available for other CMSs and technologies too.
 
-> _Note 2: Only the API has been released so far; we are currently implementing the client-side and server-side rendering layers, which should be released during the first quarter of 2019._
+> Note 2: Only the API has been released so far; we are currently implementing the client-side and server-side rendering layers, which should be released during the first quarter of 2019.
 
-> _Note 3: The retrieved fields are defined in plugin pop-examplemodules. You can explore the contents of this plugin, and modify it to bring more or less data._
+> Note 3: The retrieved fields are defined in plugin pop-examplemodules. You can explore the contents of this plugin, and modify it to bring more or less data.
 
 ### Enhancement: enable PoP only if required
 
