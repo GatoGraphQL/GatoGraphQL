@@ -352,7 +352,7 @@ PoP allows the configuration of the following properties, set in file wp-config.
 
 `POP_SERVER_ENABLECONFIGBYPARAMS` (`true`|`false`, default: `false`): Enable to set the application configuration through URL param "config".
 
-`POP_SERVER_FAILIFMODULESDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name
+`POP_SERVER_FAILIFMODULESDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name.
 
 `POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
 
