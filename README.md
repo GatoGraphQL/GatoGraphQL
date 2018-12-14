@@ -341,6 +341,55 @@ Because currently PoP only works as an API and not to render the site, it can th
 ```
 define('POP_SERVER_DISABLEPOP', !($_REQUEST['output'] == 'json' || substr($_SERVER['REQUEST_URI'], 0, 10) == '/wp-admin/'));
 ```
+
+## Configuration
+
+PoP allows the configuration of the following properties, set in file wp-config.php:
+
+`POP_SERVER_USECACHE` (`true`|`false`, default: `false`): Create and re-use a cache of the settings for the requested page.
+
+`POP_SERVER_COMPACTRESPONSEJSONKEYS` (`true`|`false`, default: `false`): Compress the keys in the JSON response.
+
+`POP_SERVER_ENABLECONFIGBYPARAMS` (`true`|`false`, default: `false`): Enable to set the application configuration through URL param "config".
+
+`POP_SERVER_FAILIFMODULESDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name
+
+`POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
+
+### Decentralization: enabling crossdomain
+
+To have a website consume data coming from other domains, crossdomain access must be allowed. For this, edit your .htaccess file like this:
+
+    <IfModule mod_headers.c>
+      SetEnvIf Origin "http(s)?://(.+\.)?(source-website.com|aggregator-website.com)$" AccessControlAllowOrigin=$0
+      Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+
+      # Allow for cross-domain setting of cookies, so decentralized log-in also works
+      Header set Access-Control-Allow-Credentials true
+      Header add Access-Control-Allow-Methods GET
+      Header add Access-Control-Allow-Methods POST
+    </IfModule>
+
+**Important**: For POST operations to work, we need to make sure the user's browser isn't blocking third-party cookies, otherwise [cross-origin credentialed requests will not work](https://stackoverflow.com/questions/24687313/what-exactly-does-the-access-control-allow-credentials-header-do#24689738). In Chrome, this configuration is set under Settings > Advanced Settings > Privacy > Content Settings > Block third-party cookies and site data.
+
+<!--
+### Integration between the Content CDN and Service Workers
+
+To allow the website's service-worker.js be able to cache content coming from the content CDN, access to reading the ETag header must be granted:
+
+    <IfModule mod_headers.c>
+      Header add Access-Control-Allow-Headers ETag
+      Header add Access-Control-Expose-Headers ETag
+    </IfModule>
+-->
+
+## Want to help?
+
+Anybody willing to can become involved in the development of PoP. If there is any new development you are interested in implementing, such as integration with this or that plugin, please let us know and we'll be able to assist you. In addition, check the [issues tagged with "help wanted"](https://github.com/leoloso/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22), we will be very happy if you can tackle any of them.
+
+For more info or have a chat, just [contact us](https://getpop.org/en/contact-us/).
+
+
 <!-- 
 ## Linked resources
 
