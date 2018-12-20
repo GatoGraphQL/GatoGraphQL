@@ -395,7 +395,7 @@ Please find all documentation in [Documentation.md](Documentation.md).
 
 > Note: We are currently working on the documentation. Sections concerning the API will be progressively completed throughout the last 2 weeks of December 2018; sections concerning rendering and additional layers will be added alongside the corresponding code being completed and added to the repository, throughout 1st and 2nd quarter of 2019.
 
-## Want to help?
+## Want to contribute?
 
 Anybody willing to can become involved in the development of PoP. If there is any new development you are interested in implementing, such as integration with this or that plugin, please let us know and we'll be able to assist you. In addition, check the [issues tagged with "help wanted"](https://github.com/leoloso/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22), we will be very happy if you can tackle any of them.
 
