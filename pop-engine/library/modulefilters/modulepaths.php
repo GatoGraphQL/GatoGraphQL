@@ -21,7 +21,7 @@ class PoP_ModuleFilter_ModulePaths extends PoP_ModuleFilterBase {
 		return POP_MODULEFILTER_MODULEPATHS;
 	}
 
-	function exclude_module($module, &$atts) {
+	function exclude_module($module, &$props) {
 
 		// The module is included for rendering, if either there is no path, or if there is, if it's the last module
 		// on the path or any module thereafter

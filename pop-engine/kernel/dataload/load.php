@@ -5,7 +5,7 @@ require_once 'dataload-actionexecution-manager-factory.php';
 require_once 'dataload-actionexecution-manager.php';
 require_once 'dataload-manager.php';
 require_once 'dataload-datastructureformat-manager.php';
-require_once 'dataload-iohandle-manager.php';
+require_once 'dataload-queryhandler-manager.php';
 // require_once 'dataload-dataloader-fieldprocessor-manager.php';
 require_once 'dataload-actionexecuter.php';
 require_once 'dataload-fieldprocessor.php';

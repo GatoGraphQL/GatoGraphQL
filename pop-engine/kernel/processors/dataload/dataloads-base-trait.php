@@ -65,22 +65,22 @@ trait PoP_Processor_DataloadsBaseTrait {
 	// PROTECTED Functions
 	//-------------------------------------------------
 
-	function meta_init_atts($module, &$atts) {
+	function meta_init_props($module, &$props) {
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Allow to add more stuff
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		do_action(
-			'PoP_Processor_DataloadsBaseTrait:init_model_atts',
-			array(&$atts),
+			'PoP_Processor_DataloadsBaseTrait:init_model_props',
+			array(&$props),
 			$module,
 			$this
 		);
 	}
 
-	function get_model_atts_for_descendant_datasetmodules($module, &$atts) {
+	function get_model_props_for_descendant_datasetmodules($module, &$props) {
 
-		$ret = parent::get_model_atts_for_descendant_datasetmodules($module, $atts);
+		$ret = parent::get_model_props_for_descendant_datasetmodules($module, $props);
 
 		if ($filter_module = $this->get_filter_module($module)) {
 			
@@ -92,10 +92,10 @@ trait PoP_Processor_DataloadsBaseTrait {
 		return $ret;
 	}
 
-	function init_model_atts($module, &$atts) {
+	function init_model_props($module, &$props) {
 
-		$this->meta_init_atts($module, $atts);
-		parent::init_model_atts($module, $atts);
+		$this->meta_init_props($module, $props);
+		parent::init_model_props($module, $props);
 	}
 
 	//-------------------------------------------------

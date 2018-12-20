@@ -24,13 +24,13 @@ class PoP_Engine_EngineHooks {
 		);
 	}
 
-	function start($root_module, $root_model_atts_in_array, $root_atts_in_array, $helperCalculations_in_array) {
+	function start($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array) {
 
 		$helperCalculations = &$helperCalculations_in_array[0];
 		$helperCalculations['has-lazy-load'] = false;
 	}
 
-	function calculate_dataloading_module_data($module, $module_atts_in_array, $data_properties_in_array, $checkpoint_validation, $executed, $dbobjectids, $helperCalculations_in_array) {
+	function calculate_dataloading_module_data($module, $module_props_in_array, $data_properties_in_array, $checkpoint_validation, $executed, $dbobjectids, $helperCalculations_in_array) {
 
 		$data_properties = &$data_properties_in_array[0];
 
@@ -41,7 +41,7 @@ class PoP_Engine_EngineHooks {
 		}
 	}
 
-	function end($root_module, $root_model_atts_in_array, $root_atts_in_array, $helperCalculations_in_array, $engine) {
+	function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine) {
 
 		$helperCalculations = &$helperCalculations_in_array[0];
 

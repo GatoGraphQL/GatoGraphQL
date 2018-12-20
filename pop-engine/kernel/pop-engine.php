@@ -2,7 +2,7 @@
 
 class PoP_Engine {
 
-	var $data, $helperCalculations, $model_atts, $atts;
+	var $data, $helperCalculations, $model_props, $props;
 	protected $nocache_fields, $moduledata, $ids_data_fields, $dbdata, $backgroundload_urls, $extra_uris, $cachedsettings, $output_data;
 
 	function __construct() {
@@ -294,7 +294,7 @@ class PoP_Engine {
 	// 	}
 	// }
 
-	function get_model_atts_moduletree($module) {
+	function get_model_props_moduletree($module) {
 
 		global $pop_module_processor_manager, $pop_module_cachemanager;
 
@@ -306,33 +306,33 @@ class PoP_Engine {
 		$use_cache = PoP_ServerUtils::use_cache();
 		if ($use_cache) {
 			
-			$model_atts = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_ATTS, true);
+			$model_props = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_PROPS, true);
 		}
 
-		// If there is no cached one, or not using the cache, generate the atts and cache it
-		if (!$model_atts) {
+		// If there is no cached one, or not using the cache, generate the props and cache it
+		if (!$model_props) {
 
-			$model_atts = array();
-			$processor->init_model_atts_moduletree($module, $model_atts, array(), array());
+			$model_props = array();
+			$processor->init_model_props_moduletree($module, $model_props, array(), array());
 			
 			if ($use_cache) {
-				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_ATTS, $model_atts, true);
+				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_PROPS, $model_props, true);
 			}
 		}
 
-		return $model_atts;
+		return $model_props;
 	}
 
-	// Notice that $atts is passed by copy, this way the input $model_atts and the returned $immutable_plus_request_atts are different objects
-	function add_request_atts_moduletree($module, $atts) {
+	// Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
+	function add_request_props_moduletree($module, $props) {
 
 		global $pop_module_processor_manager;
 		$processor = $pop_module_processor_manager->get_processor($module);
 		
-		// The input $atts is the model_atts. We add, on object, the mutableonrequest atts, resulting in a "static + mutableonrequest" atts object
-		$processor->init_request_atts_moduletree($module, $atts, array(), array());
+		// The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
+		$processor->init_request_props_moduletree($module, $props, array(), array());
 
-		return $atts;
+		return $props;
 	}
 
 	protected function process_and_generate_data() {
@@ -349,17 +349,17 @@ class PoP_Engine {
 		$module = $this->get_entry_module();
 
 		// Save it to be used by the children class
-		// Static atts are needed for both static/mutableonrequest operations, so build it always
-		$this->model_atts = $this->get_model_atts_moduletree($module);
+		// Static props are needed for both static/mutableonrequest operations, so build it always
+		$this->model_props = $this->get_model_props_moduletree($module);
 
-		// If only getting static content, then no need to add the mutableonrequest atts
+		// If only getting static content, then no need to add the mutableonrequest props
 		if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL) {
 
-			$this->atts = $this->model_atts;
+			$this->props = $this->model_props;
 		}
 		else {
 
-			$this->atts = $this->add_request_atts_moduletree($module, $this->model_atts);
+			$this->props = $this->add_request_props_moduletree($module, $this->model_props);
 		}
 
 		// Allow for extra operations (eg: calculate resources)
@@ -367,19 +367,19 @@ class PoP_Engine {
 			'PoP_Engine:helperCalculations',
 			array(&$this->helperCalculations),
 			$module,
-			array(&$this->atts)
+			array(&$this->props)
 		);
 
 		// Always send back the requestsettings, which indicates which is the entry module
 		$data = array(
-			// 'requestsettings' => $this->get_request_settings($module, $model_atts),
+			// 'requestsettings' => $this->get_request_settings($module, $model_props),
 		);
 				
 		if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems)) {
 
 			$data = array_merge(
 				$data,
-				$this->get_module_settings($module, $this->model_atts, $this->atts)
+				$this->get_module_settings($module, $this->model_props, $this->props)
 			);
 		}
 
@@ -395,7 +395,7 @@ class PoP_Engine {
 
 			$data = array_merge(
 				$data,
-				$this->get_module_data($module, $this->model_atts, $this->atts)
+				$this->get_module_data($module, $this->model_props, $this->props)
 			);
 
 			if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)) {
@@ -486,7 +486,7 @@ class PoP_Engine {
 		}
 	}
 
-	function get_module_settings($module, $model_atts, $atts) {
+	function get_module_settings($module, $model_props, $props) {
 
 		global $pop_module_processor_manager, $pop_module_cachemanager;
 
@@ -519,8 +519,8 @@ class PoP_Engine {
 		}
 		else {
 
-			$immutable_settings = $processor->get_immutable_settings_moduletree($module, $model_atts);
-			$mutableonmodel_settings = $processor->get_mutableonmodel_settings_moduletree($module, $model_atts);
+			$immutable_settings = $processor->get_immutable_settings_moduletree($module, $model_props);
+			$mutableonmodel_settings = $processor->get_mutableonmodel_settings_moduletree($module, $model_props);
 
 			if ($use_cache) {
 				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, $immutable_settings, true);
@@ -529,7 +529,7 @@ class PoP_Engine {
 		}
 		if ($datasources == GD_URLPARAM_DATASOURCES_MODELANDREQUEST) {
 
-			$mutableonrequest_settings = $processor->get_mutableonrequest_settings_moduletree($module, $atts);
+			$mutableonrequest_settings = $processor->get_mutableonrequest_settings_moduletree($module, $props);
 		}
 
 		// If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
@@ -563,7 +563,7 @@ class PoP_Engine {
 		return $ret;
 	}
 
-	// function get_request_settings($module, $atts) {
+	// function get_request_settings($module, $props) {
 
 	// 	return apply_filters(
 	// 		'PoP_Engine:request-settings',
@@ -644,7 +644,7 @@ class PoP_Engine {
 			$meta['sitename'] = get_bloginfo('name');
 
 			$meta[GD_DATALOAD_PARAMS] = array();
-			$pushurlatts = array();
+			$pushurlprops = array();
 
 			// Comment Leo 05/04/2017: Create the params array only in the fetching_site()
 			// Before it was outside, and calling the initial-frames page brought params=[], 
@@ -677,17 +677,17 @@ class PoP_Engine {
 
 			// Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
 			if ($vars['theme'] && !$vars['theme-isdefault']) {
-				$pushurlatts[GD_URLPARAM_THEME] = $vars['theme'];
+				$pushurlprops[GD_URLPARAM_THEME] = $vars['theme'];
 			}
 			if ($vars['thememode'] && !$vars['thememode-isdefault']) {
-				$pushurlatts[GD_URLPARAM_THEMEMODE] = $vars['thememode'];
+				$pushurlprops[GD_URLPARAM_THEMEMODE] = $vars['thememode'];
 			}		
 			if ($vars['themestyle'] && !$vars['themestyle-isdefault']) {
-				$pushurlatts[GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
+				$pushurlprops[GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
 			}	
 
-			if ($pushurlatts) {
-				$meta[GD_DATALOAD_PUSHURLATTS] = $pushurlatts;
+			if ($pushurlprops) {
+				$meta[GD_DATALOAD_PUSHURLATTS] = $pushurlprops;
 			}
 
 			// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
@@ -743,14 +743,14 @@ class PoP_Engine {
 		}
 	}
 
-	protected function get_interreferenced_module_fullpaths($module, &$atts) {
+	protected function get_interreferenced_module_fullpaths($module, &$props) {
 
 		$paths = array();
-		$this->add_interreferenced_module_fullpaths($paths, array(), $module, $atts);
+		$this->add_interreferenced_module_fullpaths($paths, array(), $module, $props);
 		return $paths;
 	}
 
-	private function add_interreferenced_module_fullpaths(&$paths, $module_path, $module, &$atts) {
+	private function add_interreferenced_module_fullpaths(&$paths, $module_path, $module, &$props) {
 
 		global $pop_module_processor_manager;
 		$processor = $pop_module_processor_manager->get_processor($module);
@@ -758,10 +758,10 @@ class PoP_Engine {
 		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
 		
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-		if (!$modulefilter_manager->exclude_module($module, $atts)) {
+		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
 			// If the current module loads data, then add its path to the list
-			if ($interreferenced_modulepath = $processor->get_data_feedback_interreferenced_modulepath($module, $atts)) {
+			if ($interreferenced_modulepath = $processor->get_data_feedback_interreferenced_modulepath($module, $props)) {
 
 				$referenced_modulepath = PoP_ModulePathManager_Utils::stringify_module_path($interreferenced_modulepath);
 				$paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? array();
@@ -790,19 +790,19 @@ class PoP_Engine {
 		$module_path_manager->prepare_for_propagation($module);
 		foreach ($submodules as $submodule) {
 
-			$this->add_interreferenced_module_fullpaths($paths, $submodule_path, $submodule, $atts[$module][POP_ATTS_MODULES]);
+			$this->add_interreferenced_module_fullpaths($paths, $submodule_path, $submodule, $props[$module][POP_PROPS_MODULES]);
 		}
 		$module_path_manager->restore_from_propagation($module);
 	}
 
-	protected function get_dataloading_module_fullpaths($module, &$atts) {
+	protected function get_dataloading_module_fullpaths($module, &$props) {
 
 		$paths = array();
-		$this->add_dataloading_module_fullpaths($paths, array(), $module, $atts);
+		$this->add_dataloading_module_fullpaths($paths, array(), $module, $props);
 		return $paths;
 	}
 
-	private function add_dataloading_module_fullpaths(&$paths, $module_path, $module, &$atts) {
+	private function add_dataloading_module_fullpaths(&$paths, $module_path, $module, &$props) {
 
 		global $pop_module_processor_manager;
 		$processor = $pop_module_processor_manager->get_processor($module);
@@ -810,7 +810,7 @@ class PoP_Engine {
 		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
 		
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-		if (!$modulefilter_manager->exclude_module($module, $atts)) {
+		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
 			// If the current module loads data, then add its path to the list
 			if ($processor->get_dataloader($module)) {
@@ -839,7 +839,7 @@ class PoP_Engine {
 		$module_path_manager->prepare_for_propagation($module);
 		foreach ($submodules as $submodule) {
 
-			$this->add_dataloading_module_fullpaths($paths, $submodule_path, $submodule, $atts[$module][POP_ATTS_MODULES]);
+			$this->add_dataloading_module_fullpaths($paths, $submodule_path, $submodule, $props[$module][POP_PROPS_MODULES]);
 		}
 		$module_path_manager->restore_from_propagation($module);
 	}
@@ -889,7 +889,7 @@ class PoP_Engine {
 	}
 
 	// This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-	function get_module_data($root_module, $root_model_atts, $root_atts) {
+	function get_module_data($root_module, $root_model_props, $root_props) {
 
 		global $pop_module_processor_manager, $pop_module_cachemanager;
 
@@ -915,8 +915,8 @@ class PoP_Engine {
 		do_action(
 			'PoP_Engine:get_module_data:start',
 			$root_module, 
-			array(&$root_model_atts), 
-			array(&$root_atts),
+			array(&$root_model_props), 
+			array(&$root_props),
 			array(&$this->helperCalculations),
 			$this
 		);	
@@ -930,11 +930,11 @@ class PoP_Engine {
 			$mutableonmodel_data_properties = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULDATAPROPERTIES, true);
 		}
 
-		// If there is no cached one, generate the atts and cache it
+		// If there is no cached one, generate the props and cache it
 		if (!$immutable_data_properties) {
 
-			$immutable_data_properties = $root_processor->get_immutable_data_properties_datasetmoduletree($root_module, $root_model_atts);
-			$mutableonmodel_data_properties = $root_processor->get_mutableonmodel_data_properties_datasetmoduletree($root_module, $root_model_atts);
+			$immutable_data_properties = $root_processor->get_immutable_data_properties_datasetmoduletree($root_module, $root_model_props);
+			$mutableonmodel_data_properties = $root_processor->get_mutableonmodel_data_properties_datasetmoduletree($root_module, $root_model_props);
 			if ($use_cache) {
 				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties, true);
 				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties, true);
@@ -952,7 +952,7 @@ class PoP_Engine {
 		}
 		else {
 
-			$mutableonrequest_data_properties = $root_processor->get_mutableonrequest_data_properties_datasetmoduletree($root_module, $root_atts);
+			$mutableonrequest_data_properties = $root_processor->get_mutableonrequest_data_properties_datasetmoduletree($root_module, $root_props);
 			$root_data_properties = array_merge_recursive(
 				$model_data_properties,
 				$mutableonrequest_data_properties
@@ -960,10 +960,10 @@ class PoP_Engine {
 		}
 
 		// Get the list of all modules which calculate their data feedback using another module's results
-		$interreferenced_modulefullpaths = $this->get_interreferenced_module_fullpaths($root_module, $root_atts);
+		$interreferenced_modulefullpaths = $this->get_interreferenced_module_fullpaths($root_module, $root_props);
 
 		// Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
-		$module_fullpaths = $this->get_dataloading_module_fullpaths($root_module, $root_atts);
+		$module_fullpaths = $this->get_dataloading_module_fullpaths($root_module, $root_props);
 
 		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
 
@@ -1007,22 +1007,22 @@ class PoP_Engine {
 				$load_data = !is_wp_error($checkpoint_validation);
 			}
 
-			// The $atts is directly moving the array to the corresponding path 
-			$atts = &$root_atts;
-			$model_atts = &$root_model_atts;
+			// The $props is directly moving the array to the corresponding path 
+			$props = &$root_props;
+			$model_props = &$root_model_props;
 			foreach ($module_path as $submodule) {
-				$atts = &$atts[$submodule][POP_ATTS_MODULES];
-				$model_atts = &$model_atts[$submodule][POP_ATTS_MODULES];
+				$props = &$props[$submodule][POP_PROPS_MODULES];
+				$model_props = &$model_props[$submodule][POP_PROPS_MODULES];
 			}
 
 			if (in_array($datasource, array(
 				POP_DATALOAD_DATASOURCE_IMMUTABLE,
 				POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
 			))) {
-				$module_atts = &$model_atts;
+				$module_props = &$model_props;
 			}
 			elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
-				$module_atts = &$atts;
+				$module_props = &$props;
 			}
 
 			$processor = $pop_module_processor_manager->get_processor($module);
@@ -1062,7 +1062,7 @@ class PoP_Engine {
 				}
 
 				// Allow modules to change their data_properties based on the actionexecution of previous modules. 
-				$processor->prepare_data_properties_after_actionexecution($module, $module_atts, $data_properties);
+				$processor->prepare_data_properties_after_actionexecution($module, $module_props, $data_properties);
 
 				// Re-calculate $data_load, it may have been changed by `prepare_data_properties_after_actionexecution`
 				$load_data = !$data_properties[GD_DATALOAD_SKIPDATALOAD];
@@ -1072,7 +1072,7 @@ class PoP_Engine {
 					// Data Properties Query Args: add mutableonrequest data
 					// ------------------------------------------
 					// Execute and get the ids and the meta
-					$dbobjectids = $processor->get_dbobject_ids($module, $module_atts, $data_properties);
+					$dbobjectids = $processor->get_dbobject_ids($module, $module_props, $data_properties);
 
 					// Store the ids under $data under key dataload_name => id
 					$dataloader_name = $processor->get_dataloader($module);
@@ -1092,12 +1092,12 @@ class PoP_Engine {
 					// Eg: Locations Map for the Create Individual Profile: it allows to pre-select locations,  
 					// these ones must be fetched even if the block has a static dataloader
 					// If it has extend, add those ids under its dataloader_name
-					$dataload_extend_settings = $processor->get_model_supplementary_dbobjectdata_moduletree($module, $model_atts);
+					$dataload_extend_settings = $processor->get_model_supplementary_dbobjectdata_moduletree($module, $model_props);
 					if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
 						
 						$dataload_extend_settings = array_merge_recursive(
 							$dataload_extend_settings,
-							$processor->get_mutableonrequest_supplementary_dbobjectdata_moduletree($module, $atts)
+							$processor->get_mutableonrequest_supplementary_dbobjectdata_moduletree($module, $props)
 						);	
 					}
 					foreach ($dataload_extend_settings as $extend_dataloader_name => $extend_data_properties) {
@@ -1144,13 +1144,13 @@ class PoP_Engine {
 			// Save the meta into $datasetmodulemeta
 			if (!is_null($datasetmodulemeta)) {
 			
-				if ($dataset_meta = $processor->get_datasetmeta($module, $module_atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+				if ($dataset_meta = $processor->get_datasetmeta($module, $module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
 					$this->assign_value_for_module($datasetmodulemeta, $module_path, $module, POP_CONSTANT_META, $dataset_meta);
 				}
 			}
 
 			// Integrate the feedback into $moduledata
-			$this->process_and_add_module_data($module_path, $module, $module_atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+			$this->process_and_add_module_data($module_path, $module, $module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
 
 			// Allow other modules to produce their own feedback using this module's data results
 			if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[PoP_ModulePathManager_Utils::stringify_module_path(array_merge($module_path, array($module)))]) {
@@ -1159,37 +1159,37 @@ class PoP_Engine {
 
 					$referencer_module = array_pop($referencer_modulepath);
 
-					$referencer_atts = &$root_atts;
-					$referencer_model_atts = &$root_model_atts;
+					$referencer_props = &$root_props;
+					$referencer_model_props = &$root_model_props;
 					foreach ($referencer_modulepath as $submodule) {
-						$referencer_atts = &$referencer_atts[$submodule][POP_ATTS_MODULES];
-						$referencer_model_atts = &$referencer_model_atts[$submodule][POP_ATTS_MODULES];
+						$referencer_props = &$referencer_props[$submodule][POP_PROPS_MODULES];
+						$referencer_model_props = &$referencer_model_props[$submodule][POP_PROPS_MODULES];
 					}
 
 					if (in_array($datasource, array(
 						POP_DATALOAD_DATASOURCE_IMMUTABLE,
 						POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
 					))) {
-						$referencer_module_atts = &$referencer_model_atts;
+						$referencer_module_props = &$referencer_model_props;
 					}
 					elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
-						$referencer_module_atts = &$referencer_atts;
+						$referencer_module_props = &$referencer_props;
 					}
-					$this->process_and_add_module_data($referencer_modulepath, $referencer_module, $referencer_module_atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+					$this->process_and_add_module_data($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
 				}
 			}
 
 			// Incorporate the background URLs
 			$this->backgroundload_urls = array_merge(
 				$this->backgroundload_urls,
-				$processor->get_backgroundurls_mergeddatasetmoduletree($module, $module_atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids)
+				$processor->get_backgroundurls_mergeddatasetmoduletree($module, $module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)
 			);
 
 			// Allow PoP UserState to add the lazy-loaded userstate data triggers
 			do_action(
 				'PoP_Engine:get_module_data:dataloading-module',
 				$module, 
-				array(&$module_atts), 
+				array(&$module_props), 
 				array(&$data_properties), 
 				$checkpoint_validation, 
 				$executed, 
@@ -1271,8 +1271,8 @@ class PoP_Engine {
 		do_action(
 			'PoP_Engine:get_module_data:end',
 			$root_module, 
-			array(&$root_model_atts), 
-			array(&$root_atts),
+			array(&$root_model_props), 
+			array(&$root_props),
 			array(&$this->helperCalculations),
 			$this
 		);
@@ -1512,7 +1512,7 @@ class PoP_Engine {
 		return $ret;
 	}
 
-	protected function process_and_add_module_data($module_path, $module, &$atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	protected function process_and_add_module_data($module_path, $module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
 		global $pop_module_processor_manager;
 		$processor = $pop_module_processor_manager->get_processor($module);
@@ -1523,7 +1523,7 @@ class PoP_Engine {
 			$moduledata = &$this->moduledata;
 
 			// Add the feedback into the object
-			if ($feedback = $processor->get_data_feedback_datasetmoduletree($module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+			if ($feedback = $processor->get_data_feedback_datasetmoduletree($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
 
 				// Advance the position of the array into the current module
 				foreach ($module_path as $submodule) {

@@ -19,9 +19,9 @@ define('POP_CONSTANT_MODULESTARTPATH_SEPARATOR', '.');
 
 define ('GD_JSMETHOD_GROUP_MAIN', 'main');
 
-define ('POP_ATTS_DESCENDANTATTRIBUTES', 'descendantattributes');
-define ('POP_ATTS_ATTRIBUTES', 'attributes');
-define ('POP_ATTS_MODULES', 'modules');
+define ('POP_PROPS_DESCENDANTATTRIBUTES', 'descendantattributes');
+define ('POP_PROPS_ATTRIBUTES', 'attributes');
+define ('POP_PROPS_MODULES', 'modules');
 
 define ('POP_CONSTANT_DATAPROPERTIES', 'data-properties');
 define ('POP_CONSTANT_DBOBJECTIDS', 'dbobjectids');

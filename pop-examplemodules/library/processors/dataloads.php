@@ -76,9 +76,9 @@ class PoP_ExampleModules_Module_Processor_Dataloads extends PoP_Processor_Datalo
 		return parent::get_dataloader($module);
 	}
 
-	protected function get_mutableonrequest_dataload_query_args($module, $atts) {
+	protected function get_mutableonrequest_dataload_query_args($module, $props) {
 
-		$ret = parent::get_mutableonrequest_dataload_query_args($module, $atts);
+		$ret = parent::get_mutableonrequest_dataload_query_args($module, $props);
 
 		$vars = PoP_ModuleManager_Vars::get_vars();
 		switch ($module) {
@@ -124,7 +124,7 @@ class PoP_ExampleModules_Module_Processor_Dataloads extends PoP_Processor_Datalo
 		return $ret;
 	}
 
-	function get_data_fields($module, $atts) {
+	function get_data_fields($module, $props) {
 
 		$data_fields = array(
 			POP_MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content'),
@@ -135,7 +135,7 @@ class PoP_ExampleModules_Module_Processor_Dataloads extends PoP_Processor_Datalo
 			POP_MODULE_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
 		);
 		return array_merge(
-			parent::get_data_fields($module, $atts),
+			parent::get_data_fields($module, $props),
 			$data_fields[$module] ?? array()
 		);
 	}

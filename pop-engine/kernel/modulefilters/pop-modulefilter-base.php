@@ -12,7 +12,7 @@ abstract class PoP_ModuleFilterBase {
 		return '';
 	}
 
-	function exclude_module($module, &$atts) {
+	function exclude_module($module, &$props) {
 
 		return false;
 	}

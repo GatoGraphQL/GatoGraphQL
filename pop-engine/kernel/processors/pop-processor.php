@@ -40,49 +40,49 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Atts
 	//-------------------------------------------------
 
-	function execute_init_atts_moduletree($eval_self_fn, $get_atts_for_descendant_modules_fn, $get_atts_for_descendant_datasetmodules_fn, $propagate_fn, $module, &$atts, $wildcard_atts_to_propagate, $targetted_atts_to_propagate) {
+	function execute_init_props_moduletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, $module, &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate) {
 
 		global $pop_module_processor_manager;
 		
-		// Initialize. If this module had been added atts, then use them already
-		// 1st element to merge: the general atts for this module passed down the line
-		// 2nd element to merge: the atts set exactly to the path. They have more priority, that's why they are 2nd
-		// It may contain more than one group (POP_ATTS_ATTRIBUTES). Eg: maybe also POP_ATTS_JSMETHODS
-		$atts[$module] = array_merge_recursive(
-			$targetted_atts_to_propagate[$module] ?? array(),
-			$atts[$module] ?? array()
+		// Initialize. If this module had been added props, then use them already
+		// 1st element to merge: the general props for this module passed down the line
+		// 2nd element to merge: the props set exactly to the path. They have more priority, that's why they are 2nd
+		// It may contain more than one group (POP_PROPS_ATTRIBUTES). Eg: maybe also POP_PROPS_JSMETHODS
+		$props[$module] = array_merge_recursive(
+			$targetted_props_to_propagate[$module] ?? array(),
+			$props[$module] ?? array()
 		);
 
-		// The module must be at the head of the $atts array passed to all `init_model_atts`, so that function `get_path_head_module` can work
-		$module_atts = array(
-			$module => &$atts[$module],
+		// The module must be at the head of the $props array passed to all `init_model_props`, so that function `get_path_head_module` can work
+		$module_props = array(
+			$module => &$props[$module],
 		);
 
-		// If ancestor modules set general atts, or atts targetted at this current module, then add them to the current module atts
-		foreach ($wildcard_atts_to_propagate as $key => $value) {
-			$this->add_att($module, $module_atts, $key, $value);
+		// If ancestor modules set general props, or props targetted at this current module, then add them to the current module props
+		foreach ($wildcard_props_to_propagate as $key => $value) {
+			$this->add_prop($module, $module_props, $key, $value);
 		}
 
-		// Before initiating the current level, set the children attributes on the array, so that doing ->add_att, ->append_att, etc, keeps working
-		$module_atts[$module][POP_ATTS_DESCENDANTATTRIBUTES] = array_merge(
-			$module_atts[$module][POP_ATTS_DESCENDANTATTRIBUTES] ?? array(),
-			$targetted_atts_to_propagate ?? array()
+		// Before initiating the current level, set the children attributes on the array, so that doing ->add_prop, ->append_prop, etc, keeps working
+		$module_props[$module][POP_PROPS_DESCENDANTATTRIBUTES] = array_merge(
+			$module_props[$module][POP_PROPS_DESCENDANTATTRIBUTES] ?? array(),
+			$targetted_props_to_propagate ?? array()
 		);
 
 		// Initiate the current level. 
-		$this->$eval_self_fn($module, $module_atts);
+		$this->$eval_self_fn($module, $module_props);
 
-		// Immediately after initiating the current level, extract all child attributes out from the $atts, and place it on the other variable
-		$targetted_atts_to_propagate = $module_atts[$module][POP_ATTS_DESCENDANTATTRIBUTES];
-		unset($module_atts[$module][POP_ATTS_DESCENDANTATTRIBUTES]);
+		// Immediately after initiating the current level, extract all child attributes out from the $props, and place it on the other variable
+		$targetted_props_to_propagate = $module_props[$module][POP_PROPS_DESCENDANTATTRIBUTES];
+		unset($module_props[$module][POP_PROPS_DESCENDANTATTRIBUTES]);
 
-		// But because modules can't repeat themselves down the line (or it would generate an infinite loop), then can remove the current module from the targeted atts
-		unset($targetted_atts_to_propagate[$module]);
+		// But because modules can't repeat themselves down the line (or it would generate an infinite loop), then can remove the current module from the targeted props
+		unset($targetted_props_to_propagate[$module]);
 
-		// Allow the $module to add general atts for all its descendant modules
-		$wildcard_atts_to_propagate = array_merge(
-			$wildcard_atts_to_propagate,
-			$this->$get_atts_for_descendant_modules_fn($module, $module_atts)
+		// Allow the $module to add general props for all its descendant modules
+		$wildcard_props_to_propagate = array_merge(
+			$wildcard_props_to_propagate,
+			$this->$get_props_for_descendant_modules_fn($module, $module_props)
 		);
 		
 		// Propagate
@@ -95,38 +95,38 @@ class PoP_ProcessorBase {
 		$module_path_manager->prepare_for_propagation($module);
 		if ($submodules) {
 			
-			$atts[$module][POP_ATTS_MODULES] = $atts[$module][POP_ATTS_MODULES] ?? array();
+			$props[$module][POP_PROPS_MODULES] = $props[$module][POP_PROPS_MODULES] ?? array();
 			foreach ($submodules as $submodule) {
 
 				$submodule_processor = $pop_module_processor_manager->get_processor($submodule);
-				$submodule_wildcard_atts_to_propagate = $wildcard_atts_to_propagate;
+				$submodule_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
 				// If the submodule belongs to the same dataset (meaning that it doesn't have a dataloader of its own), then set the shared attributies for the same-dataset modules
 				if (!$submodule_processor->get_dataloader($submodule)) {
 
-					$submodule_wildcard_atts_to_propagate = array_merge(
-						$submodule_wildcard_atts_to_propagate,
-						$this->$get_atts_for_descendant_datasetmodules_fn($module, $module_atts)
+					$submodule_wildcard_props_to_propagate = array_merge(
+						$submodule_wildcard_props_to_propagate,
+						$this->$get_props_for_descendant_datasetmodules_fn($module, $module_props)
 					);
 				}
 
-				$submodule_processor->$propagate_fn($submodule, $atts[$module][POP_ATTS_MODULES], $submodule_wildcard_atts_to_propagate, $targetted_atts_to_propagate);
+				$submodule_processor->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
 			}
 		}
 		$module_path_manager->restore_from_propagation($module);
 	}
 
-	function init_model_atts_moduletree($module, &$atts, $wildcard_atts_to_propagate, $targetted_atts_to_propagate) {
+	function init_model_props_moduletree($module, &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate) {
 
-		$this->execute_init_atts_moduletree('init_model_atts', 'get_model_atts_for_descendant_modules', 'get_model_atts_for_descendant_datasetmodules', __FUNCTION__, $module, $atts, $wildcard_atts_to_propagate, $targetted_atts_to_propagate);
+		$this->execute_init_props_moduletree('init_model_props', 'get_model_props_for_descendant_modules', 'get_model_props_for_descendant_datasetmodules', __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
 	}
 
-	function get_model_atts_for_descendant_modules($module, &$atts) {
+	function get_model_props_for_descendant_modules($module, &$props) {
 
 		$ret = array();
 
 		// If we set property 'skip-data-load' on any module, not just dataset, spread it down to its children so it reaches its contained dataset submodules
-		$skip_data_load = $this->get_att($module, $atts, 'skip-data-load');
+		$skip_data_load = $this->get_prop($module, $props, 'skip-data-load');
 		if (!is_null($skip_data_load)) {
 
 			$ret['skip-data-load'] = $skip_data_load;
@@ -135,20 +135,20 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_model_atts_for_descendant_datasetmodules($module, &$atts) {
+	function get_model_props_for_descendant_datasetmodules($module, &$props) {
 
 		$ret = array();
 
 		// If this module loads data, then add several properties
 		if ($this->get_dataloader($module)) {
 			
-			if ($this->queries_external_domain($module, $atts)) {
+			if ($this->queries_external_domain($module, $props)) {
 
 				$ret['external-domain'] = true;
 			}
 
 			// If it is multidomain, add a flag for inner layouts to know and react
-			if ($this->is_multidomain($module, $atts)) {
+			if ($this->is_multidomain($module, $props)) {
 
 				$ret['multidomain'] = true;
 			}
@@ -157,18 +157,18 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 	
-	function init_model_atts($module, &$atts) {
+	function init_model_props($module, &$props) {
 
-		// If it is a dataloader module, then set all the atts related to data
+		// If it is a dataloader module, then set all the props related to data
 		if ($dataloader = $this->get_dataloader($module)) {
 
 			$vars = PoP_ModuleManager_Vars::get_vars();
 
 			// If it is multidomain, add a flag for inner layouts to know and react
-			if ($this->is_multidomain($module, $atts)) {
+			if ($this->is_multidomain($module, $props)) {
 			
-				// $this->add_general_att($atts, 'is-multidomain', true);
-				$this->append_att($module, $atts, 'class', 'pop-multidomain');
+				// $this->add_general_prop($props, 'is-multidomain', true);
+				$this->append_prop($module, $props, 'class', 'pop-multidomain');
 			}
 		}
 
@@ -176,36 +176,36 @@ class PoP_ProcessorBase {
 		 * Allow to add more stuff
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		do_action(
-			'PoP_ProcessorBase:init_model_atts',
-			array(&$atts),
+			'PoP_ProcessorBase:init_model_props',
+			array(&$props),
 			$module,
 			$this
 		);
 	}
 
-	function init_request_atts_moduletree($module, &$atts, $wildcard_atts_to_propagate, $targetted_atts_to_propagate) {
+	function init_request_props_moduletree($module, &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate) {
 
-		$this->execute_init_atts_moduletree('init_request_atts', 'get_request_atts_for_descendant_modules', 'get_request_atts_for_descendant_datasetmodules', __FUNCTION__, $module, $atts, $wildcard_atts_to_propagate, $targetted_atts_to_propagate);
+		$this->execute_init_props_moduletree('init_request_props', 'get_request_props_for_descendant_modules', 'get_request_props_for_descendant_datasetmodules', __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
 	}
 
-	function get_request_atts_for_descendant_modules($module, &$atts) {
+	function get_request_props_for_descendant_modules($module, &$props) {
 
 		return array();
 	}
 
-	function get_request_atts_for_descendant_datasetmodules($module, &$atts) {
+	function get_request_props_for_descendant_datasetmodules($module, &$props) {
 
 		return array();
 	}
 	
-	function init_request_atts($module, &$atts) {
+	function init_request_props($module, &$props) {
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Allow to add more stuff
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		do_action(
-			'PoP_ProcessorBase:init_request_atts',
-			array(&$atts),
+			'PoP_ProcessorBase:init_request_props',
+			array(&$props),
 			$module,
 			$this
 		);
@@ -215,20 +215,20 @@ class PoP_ProcessorBase {
 	// PRIVATE Functions: Atts
 	//-------------------------------------------------
 
-	private function get_path_head_module(&$atts) {
+	private function get_path_head_module(&$props) {
 
-		// From the root of the $atts we obtain the current module
-		reset($atts);
-		return key($atts);
+		// From the root of the $props we obtain the current module
+		reset($props);
+		return key($props);
 	}
 
-	private function is_descendant_module($module_or_modulepath, &$atts) {
+	private function is_descendant_module($module_or_modulepath, &$props) {
 
 		// If it is an array, then we're passing the path to find the module to which to add the att
 		if (!is_array($module_or_modulepath)) {
 
-			// From the root of the $atts we obtain the current module
-			$module = $this->get_path_head_module($atts);
+			// From the root of the $props we obtain the current module
+			$module = $this->get_path_head_module($props);
 
 			// If the module were we are adding the att, is this same module, then we are already at the path
 			// If it is not, then go down one level to that module
@@ -238,14 +238,14 @@ class PoP_ProcessorBase {
 		return false;
 	}
 
-	protected function get_modulepath($module_or_modulepath, &$atts) {
+	protected function get_modulepath($module_or_modulepath, &$props) {
 
-		if (!$atts) {
+		if (!$props) {
 			return array();
 		}
 
-		// From the root of the $atts we obtain the current module
-		$module = $this->get_path_head_module($atts);
+		// From the root of the $props we obtain the current module
+		$module = $this->get_path_head_module($props);
 		
 		// Calculate the path to iterate down. It always starts with the current module
 		$ret = array($module);
@@ -262,203 +262,203 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	protected function add_att_group_field($group, $module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array(), $options = array()) {
+	protected function add_prop_group_field($group, $module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array(), $options = array()) {
 
 		// Iterate down to the submodule, which must be an array of modules
 		if ($starting_from_modulepath) {
 
 			// Attach the current module, which is not included on "starting_from", to step down this level too
-			$module = $this->get_path_head_module($atts);
+			$module = $this->get_path_head_module($props);
 			array_unshift($starting_from_modulepath, $module);
 
 			// Descend into the path to find the module for which to add the att
-			$module_atts = &$atts;
+			$module_props = &$props;
 			foreach ($starting_from_modulepath as $pathlevel) {
 
-				$last_module_atts = &$module_atts;
+				$last_module_props = &$module_props;
 				$last_module = $pathlevel;
 
-				$module_atts[$pathlevel][POP_ATTS_MODULES] = $module_atts[$pathlevel][POP_ATTS_MODULES] ?? array();
-				$module_atts = &$module_atts[$pathlevel][POP_ATTS_MODULES];
+				$module_props[$pathlevel][POP_PROPS_MODULES] = $module_props[$pathlevel][POP_PROPS_MODULES] ?? array();
+				$module_props = &$module_props[$pathlevel][POP_PROPS_MODULES];
 			}
 
-			// This is the new $atts, so it starts from here
-			// Save the current $atts, and restore later, to make sure this array has only one key, otherwise it will not work
-			$current_atts = $atts;
-			$atts = array(
-				$last_module => &$last_module_atts[$last_module]
+			// This is the new $props, so it starts from here
+			// Save the current $props, and restore later, to make sure this array has only one key, otherwise it will not work
+			$current_props = $props;
+			$props = array(
+				$last_module => &$last_module_props[$last_module]
 			);
 		}
 
 		// If the module is a string, there are 2 possibilities: either it is the current module or not
 		// If it is not, then it is a descendant module, which will appear at some point down the path.
-		// For that case, simply save it under some other entry, from where it will propagate the atts later on in `init_model_atts_moduletree`
-		if ($this->is_descendant_module($module_or_modulepath, $atts)) {
+		// For that case, simply save it under some other entry, from where it will propagate the props later on in `init_model_props_moduletree`
+		if ($this->is_descendant_module($module_or_modulepath, $props)) {
 
 			// It is a child module
 			$att_module = $module_or_modulepath;
 
-			// From the root of the $atts we obtain the current module
-			$module = $this->get_path_head_module($atts);
+			// From the root of the $props we obtain the current module
+			$module = $this->get_path_head_module($props);
 
 			// Set the child attributes under a different entry
-			$atts[$module][POP_ATTS_DESCENDANTATTRIBUTES] = $atts[$module][POP_ATTS_DESCENDANTATTRIBUTES] ?? array();
-			$module_atts = &$atts[$module][POP_ATTS_DESCENDANTATTRIBUTES];
+			$props[$module][POP_PROPS_DESCENDANTATTRIBUTES] = $props[$module][POP_PROPS_DESCENDANTATTRIBUTES] ?? array();
+			$module_props = &$props[$module][POP_PROPS_DESCENDANTATTRIBUTES];
 		}
 		else {
 
 			// Calculate the path to iterate down
-			$modulepath = $this->get_modulepath($module_or_modulepath, $atts);
+			$modulepath = $this->get_modulepath($module_or_modulepath, $props);
 
 			// Extract the lastlevel, that's the module to with to add the att
 			$att_module = array_pop($modulepath);
 
 			// Descend into the path to find the module for which to add the att
-			$module_atts = &$atts;
+			$module_props = &$props;
 			foreach ($modulepath as $pathlevel) {
 
-				$module_atts[$pathlevel][POP_ATTS_MODULES] = $module_atts[$pathlevel][POP_ATTS_MODULES] ?? array();
-				$module_atts = &$module_atts[$pathlevel][POP_ATTS_MODULES];
+				$module_props[$pathlevel][POP_PROPS_MODULES] = $module_props[$pathlevel][POP_PROPS_MODULES] ?? array();
+				$module_props = &$module_props[$pathlevel][POP_PROPS_MODULES];
 			}
 		}
 
 		// Now can proceed to add the att
-		$module_atts[$att_module][$group] = $module_atts[$att_module][$group] ?? array();
+		$module_props[$att_module][$group] = $module_props[$att_module][$group] ?? array();
 
 		if ($options['append']) {
 
-			$module_atts[$att_module][$group][$field] = $module_atts[$att_module][$group][$field] ?? '';
-			$module_atts[$att_module][$group][$field] .= ' ' . $value;
+			$module_props[$att_module][$group][$field] = $module_props[$att_module][$group][$field] ?? '';
+			$module_props[$att_module][$group][$field] .= ' ' . $value;
 		}
 		elseif ($options['array']) {
 			
-			$module_atts[$att_module][$group][$field] = $module_atts[$att_module][$group][$field] ?? array();
+			$module_props[$att_module][$group][$field] = $module_props[$att_module][$group][$field] ?? array();
 			if ($options['merge']) {
-				$module_atts[$att_module][$group][$field] = array_merge(
-					$module_atts[$att_module][$group][$field],
+				$module_props[$att_module][$group][$field] = array_merge(
+					$module_props[$att_module][$group][$field],
 					$value
 				);
 			}
 			elseif ($options['merge-iterate-key']) {
 				foreach ($value as $value_key => $value_value) {
-					if (!$module_atts[$att_module][$group][$field][$value_key]) {
-						$module_atts[$att_module][$group][$field][$value_key] = array();
+					if (!$module_props[$att_module][$group][$field][$value_key]) {
+						$module_props[$att_module][$group][$field][$value_key] = array();
 					}
 					// Doing array_unique, because in the NotificationPreviewLayout, different layouts might impose a JS down the road, many times, and these get duplicated
-					$module_atts[$att_module][$group][$field][$value_key] = array_unique(
+					$module_props[$att_module][$group][$field][$value_key] = array_unique(
 						array_merge(
-							$module_atts[$att_module][$group][$field][$value_key],
+							$module_props[$att_module][$group][$field][$value_key],
 							$value_value
 						)
 					);
 				}
 			}
 			elseif ($options['push']) {
-				array_push($module_atts[$att_module][$group][$field], $value);
+				array_push($module_props[$att_module][$group][$field], $value);
 			}
 		}
 		else {
 			// If already set, then do nothing
-			if (!isset($module_atts[$att_module][$group][$field])) {
-				$module_atts[$att_module][$group][$field] = $value;
+			if (!isset($module_props[$att_module][$group][$field])) {
+				$module_props[$att_module][$group][$field] = $value;
 			}
 		}
 
-		// Restore original $atts
+		// Restore original $props
 		if ($starting_from_modulepath) {
 
-			$atts = $current_atts;
+			$props = $current_props;
 		}
 	}
-	protected function get_att_group_field($group, $module, &$atts, $field, $starting_from_modulepath = array()) {
+	protected function get_prop_group_field($group, $module, &$props, $field, $starting_from_modulepath = array()) {
 
-		$group = $this->get_att_group($group, $module, $atts, $starting_from_modulepath);
+		$group = $this->get_prop_group($group, $module, $props, $starting_from_modulepath);
 		return $group[$field];
 	}
-	protected function get_att_group($group, $module, &$atts, $starting_from_modulepath = array()) {
+	protected function get_prop_group($group, $module, &$props, $starting_from_modulepath = array()) {
 
-		if (!$atts) {
+		if (!$props) {
 			return array();
 		}
 
-		$module_atts = &$atts;
+		$module_props = &$props;
 		foreach ($starting_from_modulepath as $pathlevel) {
 
-			$module_atts = &$module_atts[$pathlevel][POP_ATTS_MODULES];
+			$module_props = &$module_props[$pathlevel][POP_PROPS_MODULES];
 		}
 
-		return $module_atts[$module][$group] ?? array();
+		return $module_props[$module][$group] ?? array();
 	}
-	protected function add_group_att($group, $module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	protected function add_group_prop($group, $module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->add_att_group_field($group, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath);
+		$this->add_prop_group_field($group, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
 	}
-	function add_att($module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function add_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->add_group_att(POP_ATTS_ATTRIBUTES, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath);
+		$this->add_group_prop(POP_PROPS_ATTRIBUTES, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
 	}
-	function append_group_att($group, $module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function append_group_prop($group, $module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->add_att_group_field($group, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath, array('append' => true));
+		$this->add_prop_group_field($group, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath, array('append' => true));
 	}
-	function append_att($module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function append_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->append_group_att(POP_ATTS_ATTRIBUTES, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath);
+		$this->append_group_prop(POP_PROPS_ATTRIBUTES, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
 	}
-	function merge_group_att($group, $module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function merge_group_prop($group, $module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->add_att_group_field($group, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath, array('array' => true, 'merge' => true));
+		$this->add_prop_group_field($group, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath, array('array' => true, 'merge' => true));
 	}
-	function merge_att($module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function merge_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->merge_group_att(POP_ATTS_ATTRIBUTES, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath);
+		$this->merge_group_prop(POP_PROPS_ATTRIBUTES, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
 	}
-	function get_group_att($group, $module, &$atts, $field, $starting_from_modulepath = array()) {
+	function get_group_prop($group, $module, &$props, $field, $starting_from_modulepath = array()) {
 
-		return $this->get_att_group_field($group, $module, $atts, $field, $starting_from_modulepath);
+		return $this->get_prop_group_field($group, $module, $props, $field, $starting_from_modulepath);
 	}
-	function get_att($module, &$atts, $field, $starting_from_modulepath = array()) {
+	function get_prop($module, &$props, $field, $starting_from_modulepath = array()) {
 
-		return $this->get_group_att(POP_ATTS_ATTRIBUTES, $module, $atts, $field, $starting_from_modulepath);
+		return $this->get_group_prop(POP_PROPS_ATTRIBUTES, $module, $props, $field, $starting_from_modulepath);
 	}
-	function merge_group_iterate_key_att($group, $module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function merge_group_iterate_key_prop($group, $module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->add_att_group_field($group, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath, array('array' => true, 'merge-iterate-key' => true));
+		$this->add_prop_group_field($group, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath, array('array' => true, 'merge-iterate-key' => true));
 	}
-	function merge_iterate_key_att($module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function merge_iterate_key_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->merge_group_iterate_key_att(POP_ATTS_ATTRIBUTES, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath);
+		$this->merge_group_iterate_key_prop(POP_PROPS_ATTRIBUTES, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
 	}
-	function push_att($group, $module_or_modulepath, &$atts, $field, $value, $starting_from_modulepath = array()) {
+	function push_prop($group, $module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
-		$this->add_att_group_field($group, $module_or_modulepath, $atts, $field, $value, $starting_from_modulepath, array('array' => true, 'push' => true));
+		$this->add_prop_group_field($group, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath, array('array' => true, 'push' => true));
 	}
 
 	//-------------------------------------------------
 	// New PUBLIC Functions: Model Static Settings
 	//-------------------------------------------------
 
-	function get_immutable_settings_moduletree($module, &$atts) {
+	function get_immutable_settings_moduletree($module, &$props) {
 
-		return $this->execute_on_self_and_propagate_to_modules('get_immutable_settings', __FUNCTION__, $module, $atts);
+		return $this->execute_on_self_and_propagate_to_modules('get_immutable_settings', __FUNCTION__, $module, $props);
 	}
 
-	function get_immutable_settings($module, &$atts) {
+	function get_immutable_settings($module, &$props) {
 
 		$ret = array();
 		
-		if ($configuration = $this->get_immutable_configuration($module, $atts)) {
+		if ($configuration = $this->get_immutable_configuration($module, $props)) {
 			$ret['configuration'] = $configuration;
 		}
 
-		if ($database_keys = $this->get_database_keys($module, $atts)) {
+		if ($database_keys = $this->get_database_keys($module, $props)) {
 			$ret['dbkeys'] = $database_keys;
 		}
 		
 		return $ret;
 	}
 
-	function get_immutable_configuration($module, &$atts) {
+	function get_immutable_configuration($module, &$props) {
 	
 		$ret = array(
 			GD_JS_MODULE => $module,
@@ -472,7 +472,7 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_database_keys($module, &$atts) {
+	function get_database_keys($module, &$props) {
 
 		$ret = array();
 
@@ -512,23 +512,23 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Model Stateful Settings
 	//-------------------------------------------------
 
-	function get_mutableonmodel_settings_moduletree($module, &$atts) {
+	function get_mutableonmodel_settings_moduletree($module, &$props) {
 
-		return $this->execute_on_self_and_propagate_to_modules('get_mutableonmodel_settings', __FUNCTION__, $module, $atts);
+		return $this->execute_on_self_and_propagate_to_modules('get_mutableonmodel_settings', __FUNCTION__, $module, $props);
 	}
 
-	function get_mutableonmodel_settings($module, &$atts) {
+	function get_mutableonmodel_settings($module, &$props) {
 
 		$ret = array();
 		
-		if ($configuration = $this->get_mutableonmodel_configuration($module, $atts)) {
+		if ($configuration = $this->get_mutableonmodel_configuration($module, $props)) {
 			$ret['configuration'] = $configuration;
 		}
 		
 		return $ret;
 	}
 
-	function get_mutableonmodel_configuration($module, &$atts) {
+	function get_mutableonmodel_configuration($module, &$props) {
 	
 		return array();
 	}
@@ -537,23 +537,23 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Stateful Settings
 	//-------------------------------------------------
 
-	function get_mutableonrequest_settings_moduletree($module, &$atts) {
+	function get_mutableonrequest_settings_moduletree($module, &$props) {
 
-		return $this->execute_on_self_and_propagate_to_modules('get_mutableonrequest_settings', __FUNCTION__, $module, $atts);
+		return $this->execute_on_self_and_propagate_to_modules('get_mutableonrequest_settings', __FUNCTION__, $module, $props);
 	}
 
-	function get_mutableonrequest_settings($module, &$atts) {
+	function get_mutableonrequest_settings($module, &$props) {
 
 		$ret = array();
 		
-		if ($configuration = $this->get_mutableonrequest_configuration($module, $atts)) {
+		if ($configuration = $this->get_mutableonrequest_configuration($module, $props)) {
 			$ret['configuration'] = $configuration;
 		}
 		
 		return $ret;
 	}	
 
-	function get_mutableonrequest_configuration($module, &$atts) {
+	function get_mutableonrequest_configuration($module, &$props) {
 
 		return array();
 	}	
@@ -562,14 +562,14 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Static + Stateful Data
 	//-------------------------------------------------
 	
-	function get_datasource($module, &$atts) {
+	function get_datasource($module, &$props) {
 
 		// Each module can only return one piece of data, and it must be indicated if it static or mutableonrequest
 		// Retrieving only 1 piece is needed so that its children do not get confused what data their get_data_fields applies to
 		return POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST;
 	}
 
-	function get_dbobject_ids($module, &$atts, $data_properties) {
+	function get_dbobject_ids($module, &$props, $data_properties) {
 	
 		return array();
 	}
@@ -584,12 +584,12 @@ class PoP_ProcessorBase {
 		return null;
 	}
 
-	function prepare_data_properties_after_actionexecution($module, &$atts, &$data_properties) {
+	function prepare_data_properties_after_actionexecution($module, &$props, &$data_properties) {
     
 		// Do nothing
 	}
 
-	function get_data_fields($module, $atts) {
+	function get_data_fields($module, $props) {
 	
 		return array();
 	}
@@ -603,14 +603,14 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Data Properties
 	//-------------------------------------------------
 
-	function get_immutable_data_properties_datasetmoduletree($module, &$atts) {
+	function get_immutable_data_properties_datasetmoduletree($module, &$props) {
 
 		// The data-properties start on a dataloading module, and finish on the next dataloding module down the line
 		// This way, we can collect all the data-fields that the module will need to load for its dbobjects
-		return $this->execute_on_self_and_propagate_to_modules('get_immutable_data_properties_datasetmoduletree_fullsection', __FUNCTION__, $module, $atts, false);
+		return $this->execute_on_self_and_propagate_to_modules('get_immutable_data_properties_datasetmoduletree_fullsection', __FUNCTION__, $module, $props, false);
 	}
 
-	function get_immutable_data_properties_datasetmoduletree_fullsection($module, &$atts) {
+	function get_immutable_data_properties_datasetmoduletree_fullsection($module, &$props) {
 
 		$ret = array();
 
@@ -620,8 +620,8 @@ class PoP_ProcessorBase {
 			// Load the data-fields from all modules inside this section
 			// And then, only for the top node, add its extra properties
 			$properties = array_merge(
-				$this->get_datasetmoduletree_section_flattened_data_fields($module, $atts), 
-				$this->get_immutable_headdatasetmodule_data_properties($module, $atts)
+				$this->get_datasetmoduletree_section_flattened_data_fields($module, $props), 
+				$this->get_immutable_headdatasetmodule_data_properties($module, $props)
 			);
 
 			if ($properties) {
@@ -633,13 +633,13 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_datasetmoduletree_section_flattened_data_fields($module, $atts) {
+	function get_datasetmoduletree_section_flattened_data_fields($module, $props) {
 
 		$ret = array();
 
 		// Calculate the data-fields from merging them with the subcomponent modules' keys, which are data-fields too
 		if ($data_fields = array_unique(array_merge(
-			$this->get_data_fields($module, $atts),
+			$this->get_data_fields($module, $props),
 			array_keys($this->get_dbobject_relational_successors($module))
 		))) {
 
@@ -647,57 +647,57 @@ class PoP_ProcessorBase {
 		}
 
 		// Propagate down to the components
-		$this->flatten_datasetmoduletree_data_properties(__FUNCTION__, $ret, $module, $atts);
+		$this->flatten_datasetmoduletree_data_properties(__FUNCTION__, $ret, $module, $props);
 
 		// Propagate down to the subcomponent modules
-		$this->flatten_relationaldbobject_data_properties(__FUNCTION__, $ret, $module, $atts);
+		$this->flatten_relationaldbobject_data_properties(__FUNCTION__, $ret, $module, $props);
 		
 		return $ret;
 	}
 
-	function get_immutable_headdatasetmodule_data_properties($module, &$atts) {
+	function get_immutable_headdatasetmodule_data_properties($module, &$props) {
 
 		// By default return nothing at the last level
 		$ret = array();
 
 		// From the State property we find out if it's Static of Stateful
-		$datasource = $this->get_datasource($module, $atts);
+		$datasource = $this->get_datasource($module, $props);
 		$ret[GD_DATALOAD_DATASOURCE] = $datasource;
 
 		// Add the properties below either as static or mutableonrequest
 		if ($datasource == POP_DATALOAD_DATASOURCE_IMMUTABLE) {
 
-			$this->add_headdatasetmodule_data_properties($ret, $module, $atts);
+			$this->add_headdatasetmodule_data_properties($ret, $module, $props);
 		}
 
 		return $ret;
 	}
 
-	function is_lazyload($module, $atts) {
+	function is_lazyload($module, $props) {
 
 		$vars = PoP_ModuleManager_Vars::get_vars();
 
 		// Do not load data if doing lazy load. It can be true only if:
-		// 1. Setting 'lazy-load' => true by $atts
+		// 1. Setting 'lazy-load' => true by $props
 		// 2. When querying data from another domain, since evidently we don't have that data in this site, then the load must be triggered from the client
-		return $this->queries_external_domain($module, $atts) || $this->get_att($module, $atts, 'lazy-load');
+		return $this->queries_external_domain($module, $props) || $this->get_prop($module, $props, 'lazy-load');
 	}
 
-	protected function add_headdatasetmodule_data_properties(&$ret, $module, $atts) {
+	protected function add_headdatasetmodule_data_properties(&$ret, $module, $props) {
 
 		$vars = PoP_ModuleManager_Vars::get_vars();
 
 		// Is the component lazy-load?
-		$ret[GD_DATALOAD_LAZYLOAD] = $this->is_lazyload($module, $atts);
+		$ret[GD_DATALOAD_LAZYLOAD] = $this->is_lazyload($module, $props);
 
 		// Do not load data when doing lazy load, unless passing URL param ?action=loadlazy, which is needed to initialize the lazy components.
 		// Do not load data for Search page (initially, before the query was submitted)
 		$ret[GD_DATALOAD_SKIPDATALOAD] = 
 			($vars['action'] != POP_ACTION_LOADLAZY && $ret[GD_DATALOAD_LAZYLOAD]) || 
-			$this->get_att($module, $atts, 'skip-data-load');
+			$this->get_prop($module, $props, 'skip-data-load');
 
 		// Use Mock DB Object Data for the Skeleton Screen
-		$ret[GD_DATALOAD_USEMOCKDBOBJECTDATA] = $this->get_att($module, $atts, 'use-mock-dbobject-data') ?? false;
+		$ret[GD_DATALOAD_USEMOCKDBOBJECTDATA] = $this->get_prop($module, $props, 'use-mock-dbobject-data') ?? false;
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Allow to add more stuff
@@ -706,24 +706,24 @@ class PoP_ProcessorBase {
 			'PoP_ProcessorBase:add_headdatasetmodule_data_properties',
 			array(&$ret),
 			$module,
-			array(&$atts),
+			array(&$props),
 			$this
 		);
 	}
 
-	function get_mutableonmodel_data_properties_datasetmoduletree($module, &$atts) {
+	function get_mutableonmodel_data_properties_datasetmoduletree($module, &$props) {
 
-		return $this->execute_on_self_and_propagate_to_modules('get_mutableonmodel_data_properties_datasetmoduletree_fullsection', __FUNCTION__, $module, $atts, false);
+		return $this->execute_on_self_and_propagate_to_modules('get_mutableonmodel_data_properties_datasetmoduletree_fullsection', __FUNCTION__, $module, $props, false);
 	}
 
-	function get_mutableonmodel_data_properties_datasetmoduletree_fullsection($module, &$atts) {
+	function get_mutableonmodel_data_properties_datasetmoduletree_fullsection($module, &$props) {
 
 		$ret = array();
 
 		// Only if this module has a dataloader
 		if ($this->get_dataloader($module)) {
 
-			$properties = $this->get_mutableonmodel_headdatasetmodule_data_properties($module, $atts);
+			$properties = $this->get_mutableonmodel_headdatasetmodule_data_properties($module, $props);
 			if ($properties) {
 
 				$ret[POP_CONSTANT_DATAPROPERTIES] = $properties;
@@ -733,26 +733,26 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_mutableonmodel_headdatasetmodule_data_properties($module, &$atts) {
+	function get_mutableonmodel_headdatasetmodule_data_properties($module, &$props) {
 
 		$ret = array();
 
 		// Add the properties below either as static or mutableonrequest
-		$datasource = $this->get_datasource($module, $atts);
+		$datasource = $this->get_datasource($module, $props);
 		if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONMODEL) {
 
-			$this->add_headdatasetmodule_data_properties($ret, $module, $atts);
+			$this->add_headdatasetmodule_data_properties($ret, $module, $props);
 		}
 
 		return $ret;
 	}
 
-	function get_mutableonrequest_data_properties_datasetmoduletree($module, &$atts) {
+	function get_mutableonrequest_data_properties_datasetmoduletree($module, &$props) {
 
-		return $this->execute_on_self_and_propagate_to_modules('get_mutableonrequest_data_properties_datasetmoduletree_fullsection', __FUNCTION__, $module, $atts, false);
+		return $this->execute_on_self_and_propagate_to_modules('get_mutableonrequest_data_properties_datasetmoduletree_fullsection', __FUNCTION__, $module, $props, false);
 	}
 
-	function get_mutableonrequest_data_properties_datasetmoduletree_fullsection($module, &$atts) {
+	function get_mutableonrequest_data_properties_datasetmoduletree_fullsection($module, &$props) {
 
 		$ret = array();
 
@@ -762,10 +762,10 @@ class PoP_ProcessorBase {
 			// // Load the data-fields from all modules inside this section
 			// // And then, only for the top node, add its extra properties
 			// $properties = array_merge(
-			// 	$this->get_mutableonrequest_data_properties_datasetmoduletree_section($module, $atts), 
-			// 	$this->get_mutableonrequest_headdatasetmodule_data_properties($module, $atts)
+			// 	$this->get_mutableonrequest_data_properties_datasetmoduletree_section($module, $props), 
+			// 	$this->get_mutableonrequest_headdatasetmodule_data_properties($module, $props)
 			// );
-			$properties = $this->get_mutableonrequest_headdatasetmodule_data_properties($module, $atts);
+			$properties = $this->get_mutableonrequest_headdatasetmodule_data_properties($module, $props);
 
 			if ($properties) {
 
@@ -776,25 +776,25 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_mutableonrequest_headdatasetmodule_data_properties($module, &$atts) {
+	function get_mutableonrequest_headdatasetmodule_data_properties($module, &$props) {
 
 		$ret = array();
 
 		// Add the properties below either as static or mutableonrequest
-		$datasource = $this->get_datasource($module, $atts);
+		$datasource = $this->get_datasource($module, $props);
 		if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
 
-			$this->add_headdatasetmodule_data_properties($ret, $module, $atts);
+			$this->add_headdatasetmodule_data_properties($ret, $module, $props);
 		}
 
-		if ($dataload_source = $this->get_dataload_source($module, $atts)) {
+		if ($dataload_source = $this->get_dataload_source($module, $props)) {
 			$ret[GD_DATALOAD_SOURCE] = $dataload_source;
 		}
 	
 		// When loading data or execution an action, check if to validate checkpoints?
 		// This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doing_post() 
 		// (such as done to set-up checkpoint configuration for POP_USERSTANCE_PAGE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
-		if ($checkpoint_configuration = $this->get_checkpoint_configuration($module, $atts)) {
+		if ($checkpoint_configuration = $this->get_checkpoint_configuration($module, $props)) {
 			
 			if (PoP_ModuleManager_Utils::checkpoint_validation_required($checkpoint_configuration)) {
 
@@ -804,7 +804,7 @@ class PoP_ProcessorBase {
 		}
 	
 		// To trigger the actionexecuter, its own checkpoints must be successful
-		if ($checkpoint_configuration = $this->get_actionexecution_checkpoint_configuration($module, $atts)) {
+		if ($checkpoint_configuration = $this->get_actionexecution_checkpoint_configuration($module, $props)) {
 			
 			if (PoP_ModuleManager_Utils::checkpoint_validation_required($checkpoint_configuration)) {
 
@@ -820,16 +820,16 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Data Feedback
 	//-------------------------------------------------
 
-	function get_data_feedback_datasetmoduletree($module, &$atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_data_feedback_datasetmoduletree($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
-		return $this->execute_on_self_and_propagate_to_datasetmodules('get_data_feedback_moduletree', __FUNCTION__, $module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		return $this->execute_on_self_and_propagate_to_datasetmodules('get_data_feedback_moduletree', __FUNCTION__, $module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
 	}
 
-	function get_data_feedback_moduletree($module, &$atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_data_feedback_moduletree($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
 		$ret = array();
 
-		if ($feedback = $this->get_data_feedback($module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+		if ($feedback = $this->get_data_feedback($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
 
 			$ret[POP_CONSTANT_FEEDBACK] = $feedback;
 		}
@@ -837,12 +837,12 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_data_feedback($module, &$atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_data_feedback($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 	
 		return array();
 	}
 
-	function get_data_feedback_interreferenced_modulepath($module, &$atts) {
+	function get_data_feedback_interreferenced_modulepath($module, &$props) {
 	
 		return null;
 	}
@@ -851,12 +851,12 @@ class PoP_ProcessorBase {
 	// Background URLs
 	//-------------------------------------------------
 
-	function get_backgroundurls_mergeddatasetmoduletree($module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_backgroundurls_mergeddatasetmoduletree($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
-		return $this->execute_on_self_and_merge_with_datasetmodules('get_backgroundurls', __FUNCTION__, $module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		return $this->execute_on_self_and_merge_with_datasetmodules('get_backgroundurls', __FUNCTION__, $module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
 	}
 
-	function get_backgroundurls($module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_backgroundurls($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 	
 		return array();
 	}
@@ -865,11 +865,11 @@ class PoP_ProcessorBase {
 	// Dataset Meta
 	//-------------------------------------------------
 
-	function get_datasetmeta($module, &$atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_datasetmeta($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
 		$ret = array();
 
-		if ($query_multidomain_urls = $this->get_dataload_multidomain_sources($module, $atts)) {
+		if ($query_multidomain_urls = $this->get_dataload_multidomain_sources($module, $props)) {
 
 			$ret['multidomaindataloadsources'] = $query_multidomain_urls;
 		}
@@ -890,14 +890,14 @@ class PoP_ProcessorBase {
 	// Others
 	//-------------------------------------------------
 
-	function get_relevant_page($module, &$atts) {
+	function get_relevant_page($module, &$props) {
 
 		return null;
 	}
 
-	function get_checkpoint_configuration($module, &$atts) {
+	function get_checkpoint_configuration($module, &$props) {
 
-		if ($page_id = $this->get_relevant_page($module, $atts)) {
+		if ($page_id = $this->get_relevant_page($module, $props)) {
 			
 			return PoP_ModuleManager_Utils::get_checkpoint_configuration($page_id);
 		}
@@ -905,13 +905,13 @@ class PoP_ProcessorBase {
 		return null;
 	}
 
-	protected function get_actionexecution_checkpoint_configuration($module, &$atts) {
+	protected function get_actionexecution_checkpoint_configuration($module, &$props) {
 		
 		// By default, validate that we are doing POST and that the ?actionpath corresponds to the given $module
 		return PoP_Engine_CheckpointUtils::get_checkpoint_configuration(POPENGINE_CHECKPOINTCONFIGURATION_ACTIONPATHISMODULE_POST);
 	}
 
-	function get_dataload_source($module, $atts) {
+	function get_dataload_source($module, $props) {
 
 		// Because a component can interact with itself by adding ?modulepaths=...,
 		// then, by default, we simply set the dataload source to point to itself!
@@ -927,7 +927,7 @@ class PoP_ProcessorBase {
 		);
 
 		// Allow to add extra modulepaths set from above
-		if ($extra_module_paths = $this->get_att($module, $atts, 'dataload-source-add-modulepaths')) {
+		if ($extra_module_paths = $this->get_prop($module, $props, 'dataload-source-add-modulepaths')) {
 
 			foreach ($extra_module_paths as $modulepath) {
 
@@ -961,9 +961,9 @@ class PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_dataload_multidomain_sources($module, $atts) {
+	function get_dataload_multidomain_sources($module, $props) {
 
-		if ($sources = $this->get_att($module, $atts, 'dataload-multidomain-sources')) {
+		if ($sources = $this->get_prop($module, $props, 'dataload-multidomain-sources')) {
 
 			return array_map(
 				function($source) use ($module) {
@@ -984,9 +984,9 @@ class PoP_ProcessorBase {
 		return array();
 	}
 
-	function queries_external_domain($module, $atts) {
+	function queries_external_domain($module, $props) {
 
-		if ($sources = $this->get_dataload_multidomain_sources($module, $atts)) {
+		if ($sources = $this->get_dataload_multidomain_sources($module, $props)) {
 			
 			$domain = get_site_url();
 			foreach ($sources as $source) {
@@ -1001,14 +1001,14 @@ class PoP_ProcessorBase {
 		return false;
 	}
 
-	function is_multidomain($module, $atts) {
+	function is_multidomain($module, $props) {
 
-		if (!$this->queries_external_domain($module, $atts)) {
+		if (!$this->queries_external_domain($module, $props)) {
 
 			return false;
 		}
 
-		$multidomain_urls = $this->get_dataload_multidomain_sources($module, $atts);
+		$multidomain_urls = $this->get_dataload_multidomain_sources($module, $props);
 		return is_array($multidomain_urls) && count($multidomain_urls) >= 2;
 	}
 
@@ -1017,7 +1017,7 @@ class PoP_ProcessorBase {
 		return $this->get_modulecomponents($module, array(POP_MODULECOMPONENT_MODULES));
 	}
 
-	protected function flatten_datasetmoduletree_data_properties($propagate_fn, &$ret, $module, $atts) {
+	protected function flatten_datasetmoduletree_data_properties($propagate_fn, &$ret, $module, $props) {
 	
 		global $pop_module_processor_manager;
 		
@@ -1029,9 +1029,9 @@ class PoP_ProcessorBase {
 				$submodule_processor = $pop_module_processor_manager->get_processor($submodule);
 
 				// Propagate only if the submodule doesn't have a dataloader. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-				if (!$submodule_processor->get_dataloader($submodule, $atts[$module][POP_ATTS_MODULES])) {
+				if (!$submodule_processor->get_dataloader($submodule, $props[$module][POP_PROPS_MODULES])) {
 					
-					if ($submodule_ret = $submodule_processor->$propagate_fn($submodule, $atts[$module][POP_ATTS_MODULES])) {
+					if ($submodule_ret = $submodule_processor->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES])) {
 
 						// array_merge_recursive => data-fields from different sidebar-components can be integrated all together 
 						$ret = array_merge_recursive(
@@ -1050,7 +1050,7 @@ class PoP_ProcessorBase {
 		}
 	}
 
-	protected function flatten_relationaldbobject_data_properties($propagate_fn, &$ret, $module, $atts) {
+	protected function flatten_relationaldbobject_data_properties($propagate_fn, &$ret, $module, $props) {
 	
 		global $pop_module_processor_manager;
 		
@@ -1064,7 +1064,7 @@ class PoP_ProcessorBase {
 				);
 				foreach ($subcomponent_modules as $subcomponent_module) {
 
-					if ($subcomponent_module_data_properties = $pop_module_processor_manager->get_processor($subcomponent_module)->$propagate_fn($subcomponent_module, $atts[$subcomponent_module][POP_ATTS_MODULES])) {
+					if ($subcomponent_module_data_properties = $pop_module_processor_manager->get_processor($subcomponent_module)->$propagate_fn($subcomponent_module, $props[$subcomponent_module][POP_PROPS_MODULES])) {
 
 						$subcomponent_modules_data_properties = array_merge_recursive(
 							$subcomponent_modules_data_properties,
@@ -1105,12 +1105,12 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Static Data
 	//-------------------------------------------------
 
-	function get_model_supplementary_dbobjectdata_moduletree($module, &$atts) {
+	function get_model_supplementary_dbobjectdata_moduletree($module, &$props) {
 	
-		return $this->execute_on_self_and_merge_with_modules('get_model_supplementary_dbobjectdata', __FUNCTION__, $module, $atts);
+		return $this->execute_on_self_and_merge_with_modules('get_model_supplementary_dbobjectdata', __FUNCTION__, $module, $props);
 	}
 
-	function get_model_supplementary_dbobjectdata($module, &$atts) {
+	function get_model_supplementary_dbobjectdata($module, &$props) {
 	
 		return array();
 	}
@@ -1119,12 +1119,12 @@ class PoP_ProcessorBase {
 	// New PUBLIC Functions: Stateful Data
 	//-------------------------------------------------
 
-	function get_mutableonrequest_supplementary_dbobjectdata_moduletree($module, &$atts) {
+	function get_mutableonrequest_supplementary_dbobjectdata_moduletree($module, &$props) {
 	
-		return $this->execute_on_self_and_merge_with_modules('get_mutableonrequest_supplementary_dbobjectdata', __FUNCTION__, $module, $atts);
+		return $this->execute_on_self_and_merge_with_modules('get_mutableonrequest_supplementary_dbobjectdata', __FUNCTION__, $module, $props);
 	}
 
-	function get_mutableonrequest_supplementary_dbobjectdata($module, &$atts) {
+	function get_mutableonrequest_supplementary_dbobjectdata($module, &$props) {
 	
 		return array();
 	}

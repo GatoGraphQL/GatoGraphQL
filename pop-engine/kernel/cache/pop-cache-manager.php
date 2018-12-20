@@ -4,7 +4,7 @@ define ('POP_CACHETYPE_IMMUTABLESETTINGS', 'static-settings');
 define ('POP_CACHETYPE_STATEFULSETTINGS', 'stateful-settings');
 define ('POP_CACHETYPE_STATICDATAPROPERTIES', 'static-data-properties');
 define ('POP_CACHETYPE_STATEFULDATAPROPERTIES', 'stateful-data-properties');
-define ('POP_CACHETYPE_ATTS', 'atts');
+define ('POP_CACHETYPE_PROPS', 'props');
 
 class PoP_Module_CacheManager extends PoP_Module_CacheManagerBase {
 

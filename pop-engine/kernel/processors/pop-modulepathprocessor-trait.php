@@ -35,17 +35,17 @@ trait PoP_ModulePathProcessorTrait {
 	}
 
 	// $use_settings_id_as_key: For response structures (eg: configuration, feedback, etc) must be true
-	// for internal structures (eg: $atts, $data_properties) no need
-	protected function execute_on_self_and_propagate_to_datasetmodules($eval_self_fn, $propagate_fn, $module, &$atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	// for internal structures (eg: $props, $data_properties) no need
+	protected function execute_on_self_and_propagate_to_datasetmodules($eval_self_fn, $propagate_fn, $module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
 		$ret = array();
 		$key = $this->get_settings_id($module);
 
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
 		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
-		if (!$modulefilter_manager->exclude_module($module, $atts)) {
+		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
-			if ($module_ret = $this->$eval_self_fn($module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+			if ($module_ret = $this->$eval_self_fn($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
 		
 				$ret[$key] = $module_ret;
 			}
@@ -63,7 +63,7 @@ trait PoP_ModulePathProcessorTrait {
 		
 			$submodules_ret = array_merge(
 				$submodules_ret,
-				$this->get_module_processor($submodule)->$propagate_fn($submodule, $atts[$module][POP_ATTS_MODULES], $data_properties, $checkpoint_validation, $executed, $dbobjectids)
+				$this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $data_properties, $checkpoint_validation, $executed, $dbobjectids)
 			);
 		}
 		if ($submodules_ret) {
@@ -75,13 +75,13 @@ trait PoP_ModulePathProcessorTrait {
 		return $ret;
 	}
 
-	protected function execute_on_self_and_merge_with_datasetmodules($eval_self_fn, $propagate_fn, $module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	protected function execute_on_self_and_merge_with_datasetmodules($eval_self_fn, $propagate_fn, $module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
 		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
-		if (!$modulefilter_manager->exclude_module($module, $atts)) {
+		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
-			$ret = $this->$eval_self_fn($module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+			$ret = $this->$eval_self_fn($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
 		}
 		else {
 
@@ -99,7 +99,7 @@ trait PoP_ModulePathProcessorTrait {
 		
 			$ret = array_merge_recursive(
 				$ret,
-				$this->get_module_processor($submodule)->$propagate_fn($submodule, $atts[$module][POP_ATTS_MODULES], $data_properties, $checkpoint_validation, $executed, $dbobjectids)
+				$this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $data_properties, $checkpoint_validation, $executed, $dbobjectids)
 			);
 		}
 		$module_path_manager->restore_from_propagation($module);
@@ -108,17 +108,17 @@ trait PoP_ModulePathProcessorTrait {
 	}
 
 	// $use_settings_id_as_key: For response structures (eg: configuration, feedback, etc) must be true
-	// for internal structures (eg: $atts, $data_properties) no need
-	protected function execute_on_self_and_propagate_to_modules($eval_self_fn, $propagate_fn, $module, &$atts, $use_settings_id_as_key = true) {
+	// for internal structures (eg: $props, $data_properties) no need
+	protected function execute_on_self_and_propagate_to_modules($eval_self_fn, $propagate_fn, $module, &$props, $use_settings_id_as_key = true) {
 
 		$ret = array();
 		$key = $use_settings_id_as_key ? $this->get_settings_id($module) : $module;
 		
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
 		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
-		if (!$modulefilter_manager->exclude_module($module, $atts)) {
+		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
-			if ($module_ret = $this->$eval_self_fn($module, $atts)) {
+			if ($module_ret = $this->$eval_self_fn($module, $props)) {
 		
 				$ret[$key] = $module_ret;
 			}
@@ -135,7 +135,7 @@ trait PoP_ModulePathProcessorTrait {
 		
 			$submodules_ret = array_merge(
 				$submodules_ret,
-				$this->get_module_processor($submodule)->$propagate_fn($submodule, $atts[$module][POP_ATTS_MODULES])
+				$this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES])
 			);
 		}
 		if ($submodules_ret) {
@@ -147,13 +147,13 @@ trait PoP_ModulePathProcessorTrait {
 		return $ret;
 	}
 
-	protected function execute_on_self_and_merge_with_modules($eval_self_fn, $propagate_fn, $module, &$atts, $recursive = true) {
+	protected function execute_on_self_and_merge_with_modules($eval_self_fn, $propagate_fn, $module, &$props, $recursive = true) {
 
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
 		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
-		if (!$modulefilter_manager->exclude_module($module, $atts)) {
+		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
-			$ret = $this->$eval_self_fn($module, $atts);
+			$ret = $this->$eval_self_fn($module, $props);
 		}
 		else {
 
@@ -168,7 +168,7 @@ trait PoP_ModulePathProcessorTrait {
 		$module_path_manager->prepare_for_propagation($module);
 		foreach ($submodules as $submodule) {
 		
-			$submodule_ret = $this->get_module_processor($submodule)->$propagate_fn($submodule, $atts[$module][POP_ATTS_MODULES], $recursive);
+			$submodule_ret = $this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $recursive);
 			$ret = $recursive ? 
 				array_merge_recursive(
 					$ret,

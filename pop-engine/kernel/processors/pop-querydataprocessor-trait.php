@@ -2,11 +2,11 @@
 
 trait PoP_QueryDataProcessorTrait {
 
-	protected function get_immutable_dataload_query_args($module, $atts) {
+	protected function get_immutable_dataload_query_args($module, $props) {
 
 		return array();
 	}
-	protected function get_mutableonrequest_dataload_query_args($module, $atts) {
+	protected function get_mutableonrequest_dataload_query_args($module, $props) {
 
 		return array();
 	}
@@ -19,12 +19,12 @@ trait PoP_QueryDataProcessorTrait {
 		return null;
 	}
 
-	function get_immutable_headdatasetmodule_data_properties($module, &$atts) {
+	function get_immutable_headdatasetmodule_data_properties($module, &$props) {
 
-		$ret = parent::get_immutable_headdatasetmodule_data_properties($module, $atts);
+		$ret = parent::get_immutable_headdatasetmodule_data_properties($module, $props);
 
 		// Attributes to pass to the query
-		$ret[GD_DATALOAD_QUERYARGS] = $this->get_immutable_dataload_query_args($module, $atts);
+		$ret[GD_DATALOAD_QUERYARGS] = $this->get_immutable_dataload_query_args($module, $props);
 
 		// Set the filter if it has one
 		if ($filter = $this->get_filter($module)) {
@@ -35,16 +35,16 @@ trait PoP_QueryDataProcessorTrait {
 		return $ret;
 	}
 
-	function get_mutableonrequest_headdatasetmodule_data_properties($module, &$atts) {
+	function get_mutableonrequest_headdatasetmodule_data_properties($module, &$props) {
 
-		$ret = parent::get_mutableonrequest_headdatasetmodule_data_properties($module, $atts);
+		$ret = parent::get_mutableonrequest_headdatasetmodule_data_properties($module, $props);
 
-		$ret[GD_DATALOAD_QUERYARGS] = $this->get_mutableonrequest_dataload_query_args($module, $atts);
+		$ret[GD_DATALOAD_QUERYARGS] = $this->get_mutableonrequest_dataload_query_args($module, $props);
 
 		return $ret;
 	}
 
-	function get_dbobject_ids($module, &$atts, $data_properties) {
+	function get_dbobject_ids($module, &$props, $data_properties) {
 
 		global $gd_dataload_manager;
 
@@ -71,9 +71,9 @@ trait PoP_QueryDataProcessorTrait {
 		return $dataloader->get_dbobject_ids($data_properties);
 	}
 
-	function get_datasetmeta($module, &$atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_datasetmeta($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
-		$ret = parent::get_datasetmeta($module, $atts, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		$ret = parent::get_datasetmeta($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
 
 		if ($queryhandler_name = $this->get_queryhandler($module)) {
 					

@@ -64,7 +64,7 @@ class PoP_ModuleFilterManager {
 		$this->never_exclude = $never_exclude;
 	}
 
-	function exclude_module($module, &$atts) {
+	function exclude_module($module, &$props) {
 
 		if ($this->selected_filter_name) {
 
@@ -78,7 +78,7 @@ class PoP_ModuleFilterManager {
 				return false;
 			}
 
-			return $this->filters[$this->selected_filter_name]->exclude_module($module, $atts);
+			return $this->filters[$this->selected_filter_name]->exclude_module($module, $props);
 		}
 
 		return false;
@@ -106,7 +106,7 @@ class PoP_ModuleFilterManager {
 
 		if ($this->selected_filter_name) {
 
-			if (!$this->never_exclude && is_null($this->not_excluded_ancestor_module) && $this->exclude_module($module, $atts) === false) {
+			if (!$this->never_exclude && is_null($this->not_excluded_ancestor_module) && $this->exclude_module($module, $props) === false) {
 
 				// Set the current module as the one which is not excluded.
 				$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
@@ -130,7 +130,7 @@ class PoP_ModuleFilterManager {
 
 		if ($this->selected_filter_name) {
 
-			if (!$this->never_exclude && !is_null($this->not_excluded_ancestor_module) && $this->exclude_module($module, $atts) === false) {
+			if (!$this->never_exclude && !is_null($this->not_excluded_ancestor_module) && $this->exclude_module($module, $props) === false) {
 
 				$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
 				$module_propagation_current_path = $module_path_manager->get_propagation_current_path();

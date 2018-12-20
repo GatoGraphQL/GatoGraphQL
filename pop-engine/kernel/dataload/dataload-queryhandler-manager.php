@@ -1,6 +1,6 @@
 <?php
 
-class GD_DataLoad_IOHandle_Manager {
+class GD_DataLoad_QueryHandler_Manager {
 
     var $queryhandlers;
     
@@ -30,4 +30,4 @@ class GD_DataLoad_IOHandle_Manager {
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_dataload_queryhandler_manager;
-$gd_dataload_queryhandler_manager = new GD_DataLoad_IOHandle_Manager();
+$gd_dataload_queryhandler_manager = new GD_DataLoad_QueryHandler_Manager();

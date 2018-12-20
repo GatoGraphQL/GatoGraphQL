@@ -9,7 +9,7 @@ class PoP_ModuleFilter_MainContentModule extends PoP_ModuleFilterBase {
 		return POP_MODULEFILTER_MAINCONTENTMODULE;
 	}
 
-	function exclude_module($module, &$atts) {
+	function exclude_module($module, &$props) {
 
 		$vars = PoP_ModuleManager_Vars::get_vars();
 		return $vars['maincontentmodule'] != $module;

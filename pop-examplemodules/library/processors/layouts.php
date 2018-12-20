@@ -19,9 +19,9 @@ class PoP_ExampleModules_Module_Processor_Layouts extends PoP_ProcessorBase {
 		);
 	}
 
-	function get_immutable_configuration($module, &$atts) {
+	function get_immutable_configuration($module, &$props) {
 
-		$ret = parent::get_immutable_configuration($module, $atts);
+		$ret = parent::get_immutable_configuration($module, $props);
 
 		switch ($module) {
 			
@@ -43,9 +43,9 @@ class PoP_ExampleModules_Module_Processor_Layouts extends PoP_ProcessorBase {
 		return $ret;
 	}
 
-	function get_data_fields($module, $atts) {
+	function get_data_fields($module, $props) {
 
-		$ret = parent::get_data_fields($module, $atts);
+		$ret = parent::get_data_fields($module, $props);
 
 		switch ($module) {
 			
