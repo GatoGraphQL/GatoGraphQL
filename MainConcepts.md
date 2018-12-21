@@ -164,7 +164,7 @@ Fetching all the required properties for the DB object can be done automatically
 
 ```
 "single-post"
-  => Load objects from domain "post"
+  => Load objects from domain "post" where ID = 37
   modules
     "post-layout"
       modules
@@ -189,7 +189,7 @@ The query to fetch data from the database is automatically updated whenever the 
 
 ```
 "single-post"
-  => Load objects from domain "post"
+  => Load objects from domain "post" where ID = 37
   modules
     "post-layout"
       modules
@@ -220,7 +220,7 @@ Going back to our previous example, if we need to show data from the post's auth
 
 ```
 "single-post"
-  => Load objects from domain "post"
+  => Load objects from domain "post" where ID = 37
   modules
     "post-layout"
       modules
