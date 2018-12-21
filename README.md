@@ -99,8 +99,8 @@ _Response from calling `/page-url/?output=json`:_
 
 ```json
 {
-  databases {
-    primary {
+  databases: {
+    primary: {
       posts: {
         1: {
           author: 7, 
@@ -136,7 +136,7 @@ _Response from calling `/page-url/?output=json`:_
       }
     }
   },
-  datasetmoduledata {
+  datasetmoduledata: {
     "topmodule": {
       modules: {
         "datamodule1": {
@@ -148,7 +148,7 @@ _Response from calling `/page-url/?output=json`:_
       }
     }
   },
-  modulesettings {
+  modulesettings: {
     "topmodule": {
       modules: {
         "datamodule1": {
@@ -177,7 +177,7 @@ In addition to retrieving database data, the API can also return configuration v
 
 ```json
 {
-  modulesettings {
+  modulesettings: {
     "topmodule": {
       modules: {
         "layoutpostmodule": {
