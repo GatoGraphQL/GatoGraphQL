@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_PARAMCONVERTIBLEPOST', 'paramconvertiblepost');
  
-class GD_Dataloader_ParamConvertiblePost extends GD_Dataloader_ParamPost {
+class Dataloader_ParamConvertiblePost extends Dataloader_ParamPost {
 	
 	function get_name() {
     
@@ -18,4 +19,4 @@ class GD_Dataloader_ParamConvertiblePost extends GD_Dataloader_ParamPost {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_ParamConvertiblePost();
+new Dataloader_ParamConvertiblePost();

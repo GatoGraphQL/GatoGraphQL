@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-trait GD_FilterQueryDataloaderTrait {
+trait FilterQueryDataloaderTrait {
 	
     function filter_query($query, $data_properties) {
 

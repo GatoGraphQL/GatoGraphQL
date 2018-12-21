@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-class GD_DataQuery_HookBase {
+class DataQuery_HookBase {
 
 	function __construct() {
 

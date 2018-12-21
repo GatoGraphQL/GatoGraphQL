@@ -1,5 +1,7 @@
 <?php
-class PoP_Engine_FileLocationBase extends PoP_Engine_FileBase {
+namespace PoP\Engine\FileStorage;
+
+abstract class FileLocationBase extends FileBase {
 
 	function get_url() {
 

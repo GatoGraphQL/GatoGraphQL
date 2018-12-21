@@ -7,6 +7,7 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
+namespace PoP\CMS;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -16,7 +17,7 @@ define ('POP_CMS_DIR', dirname(__FILE__));
 
 define ('POP_CMS_KERNEL', POP_CMS_DIR.'/kernel' );
 
-class PoPCMS {
+class Plugin {
 
 	function __construct() {
 		
@@ -31,7 +32,7 @@ class PoPCMS {
 	function initialize() {
 
 		require_once 'initialization.php';
-		$initialization = new PoPCMS_Initialization();
+		$initialization = new Initialization();
 		return $initialization->initialize();	
 	}
 }
@@ -40,5 +41,5 @@ class PoPCMS {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 if (!defined('POP_SERVER_DISABLEPOP') || !POP_SERVER_DISABLEPOP) {
-	new PoPCMS();
+	new Plugin();
 }

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOAD_FIELDPROCESSOR_TAGS', 'tags');
 
-class GD_DataLoad_FieldProcessor_Tags extends GD_DataLoad_FieldProcessor {
+class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase {
 
 	function get_name() {
 	
@@ -17,8 +18,8 @@ class GD_DataLoad_FieldProcessor_Tags extends GD_DataLoad_FieldProcessor {
 			return $hook_value;
 		}	
 	
-		$cmsresolver = PoP_CMS_ObjectPropertyResolver_Factory::get_instance();
-    	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
+    	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$tag = $resultitem;
 		switch ($field) {
 
@@ -68,7 +69,7 @@ class GD_DataLoad_FieldProcessor_Tags extends GD_DataLoad_FieldProcessor {
 
 	function get_id($resultitem) {
 
-		$cmsresolver = PoP_CMS_ObjectPropertyResolver_Factory::get_instance();
+		$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
 		$tag = $resultitem;
 		return $cmsresolver->get_tag_term_id($tag);
 	}
@@ -77,4 +78,4 @@ class GD_DataLoad_FieldProcessor_Tags extends GD_DataLoad_FieldProcessor {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_FieldProcessor_Tags(); 
+new FieldProcessor_Tags(); 

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('POP_MODULEFILTER_LAZY', 'lazy');
 
-class PoP_ModuleFilter_Lazy extends PoP_ModuleFilterBase {
+class ModuleFilter_Lazy extends \PoP\Engine\ModuleFilterBase {
 
 	function get_name() {
 
@@ -12,8 +13,8 @@ class PoP_ModuleFilter_Lazy extends PoP_ModuleFilterBase {
 	function exclude_module($module, &$props) {
 
 		// Exclude if it is not lazy
-		global $pop_module_processor_manager;
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$processor = $moduleprocessor_manager->get_processor($module);
 		return !$processor->is_lazyload($module, $props);
 	}
 }
@@ -21,4 +22,4 @@ class PoP_ModuleFilter_Lazy extends PoP_ModuleFilterBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ModuleFilter_Lazy();
+new ModuleFilter_Lazy();

@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-abstract class PoP_Module_PageModuleProcessorBase {
+abstract class PageModuleProcessorBase {
 
 	function __construct() {
 
@@ -13,7 +14,7 @@ abstract class PoP_Module_PageModuleProcessorBase {
 
 	function init() {
 
-		$pop_module_pagemoduleprocessor_manager = PoPEngine_Module_PageModuleProcessorManager_Factory::get_instance();
+		$pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::get_instance();
 		$pop_module_pagemoduleprocessor_manager->add($this);
 	}
 

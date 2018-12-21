@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_USERLIST', 'user-list');
 
-class GD_Dataloader_UserList extends GD_Dataloader_UserListBase {
+class Dataloader_UserList extends Dataloader_UserListBase {
 
 	function get_name() {
     
@@ -13,4 +14,4 @@ class GD_Dataloader_UserList extends GD_Dataloader_UserListBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_UserList();
+new Dataloader_UserList();

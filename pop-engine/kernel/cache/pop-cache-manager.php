@@ -1,12 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-define ('POP_CACHETYPE_IMMUTABLESETTINGS', 'static-settings');
-define ('POP_CACHETYPE_STATEFULSETTINGS', 'stateful-settings');
-define ('POP_CACHETYPE_STATICDATAPROPERTIES', 'static-data-properties');
-define ('POP_CACHETYPE_STATEFULDATAPROPERTIES', 'stateful-data-properties');
-define ('POP_CACHETYPE_PROPS', 'props');
-
-class PoP_Module_CacheManager extends PoP_Module_CacheManagerBase {
+class CacheManager extends CacheManagerBase {
 
 	function __construct() {
 
@@ -33,4 +28,4 @@ class PoP_Module_CacheManager extends PoP_Module_CacheManagerBase {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 global $pop_module_cachemanager;
-$pop_module_cachemanager = new PoP_Module_CacheManager();
+$pop_module_cachemanager = new CacheManager();

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
-class PoPCMSModel_Module_SettingsProcessor extends PoPEngine_Module_SettingsProcessorBase {
+class PoPCMSModel_Module_SettingsProcessor extends \PoP\Engine\Settings\SettingsProcessorBase {
 
-	use PoPCMSModel_Module_SettingsProcessor_Trait;
+	use SettingsProcessor_Trait;
 }
 
 /**---------------------------------------------------------------------------------------------------------------

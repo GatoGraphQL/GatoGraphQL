@@ -1,10 +1,11 @@
 <?php
+namespace PoP\CMSModel;
  
 define ('GD_DATALOADER_SINGLE', 'single');
 
-class GD_Dataloader_Single extends GD_Dataloader_PostBase {
+class Dataloader_Single extends Dataloader_PostBase {
 
-	use GD_Dataloader_SingleTrait;
+	use Dataloader_SingleTrait;
 
 	function get_name() {
     
@@ -16,7 +17,7 @@ class GD_Dataloader_Single extends GD_Dataloader_PostBase {
  //     */
 	// function execute_get_data($ids) {
 	
-	// 	$vars = PoP_ModuleManager_Vars::get_vars();
+	// 	$vars = \PoP\Engine\Engine_Vars::get_vars();
 	// 	$post = $vars['global-state']['queried-object'];
 	// 	return array($post);
 	// }
@@ -26,4 +27,4 @@ class GD_Dataloader_Single extends GD_Dataloader_PostBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_Single();
+new Dataloader_Single();

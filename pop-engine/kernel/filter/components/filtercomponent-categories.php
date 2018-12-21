@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_CategoriesBase extends GD_FilterComponent {
+abstract class FilterComponent_CategoriesBase extends FilterComponentBase {
 	
 	function get_categories($filter) {
 	

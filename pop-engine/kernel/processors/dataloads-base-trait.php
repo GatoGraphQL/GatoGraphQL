@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-trait PoP_Processor_DataloadsBaseTrait {
+trait DataloadModuleProcessorBaseTrait {
 
 	//-------------------------------------------------
 	// PUBLIC Functions
@@ -25,8 +26,8 @@ trait PoP_Processor_DataloadsBaseTrait {
 
 		if ($filter_module = $this->get_filter_module($module)) {
 
-			global $pop_module_processor_manager;
-			return $pop_module_processor_manager->get_processor($filter_module)->get_filter($filter_module);
+			$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+			return $moduleprocessor_manager->get_processor($filter_module)->get_filter($filter_module);
 		}
 
 		return parent::get_filter($module);
@@ -71,7 +72,7 @@ trait PoP_Processor_DataloadsBaseTrait {
 		 * Allow to add more stuff
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		do_action(
-			'PoP_Processor_DataloadsBaseTrait:init_model_props',
+			'\PoP\Engine\DataloadModuleProcessorBaseTrait:init_model_props',
 			array(&$props),
 			$module,
 			$this
@@ -84,9 +85,9 @@ trait PoP_Processor_DataloadsBaseTrait {
 
 		if ($filter_module = $this->get_filter_module($module)) {
 			
-			global $pop_module_processor_manager;
+			$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 			$ret['filter-module'] = $filter_module;
-			$ret['filter'] = $pop_module_processor_manager->get_processor($filter_module)->get_filter($filter_module);
+			$ret['filter'] = $moduleprocessor_manager->get_processor($filter_module)->get_filter($filter_module);
 		}
 
 		return $ret;

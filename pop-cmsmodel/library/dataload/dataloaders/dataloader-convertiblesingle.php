@@ -1,10 +1,11 @@
 <?php
+namespace PoP\CMSModel;
  
 define ('GD_DATALOADER_CONVERTIBLESINGLE', 'convertible-single');
 
-class GD_Dataloader_ConvertibleSingle extends GD_Dataloader_PostBase {
+class Dataloader_ConvertibleSingle extends Dataloader_PostBase {
 
-	use GD_Dataloader_SingleTrait;
+	use Dataloader_SingleTrait;
 
 	function get_name() {
     
@@ -21,4 +22,4 @@ class GD_Dataloader_ConvertibleSingle extends GD_Dataloader_PostBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_ConvertibleSingle();
+new Dataloader_ConvertibleSingle();

@@ -1,5 +1,7 @@
 <?php
-class PoP_ExampleModules_Initialization {
+namespace PoP\ExampleModules;
+
+class Initialization {
 
 	function initialize(){
 

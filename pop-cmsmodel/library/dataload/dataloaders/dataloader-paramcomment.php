@@ -1,10 +1,11 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_PARAMCOMMENT', 'paramcomment');
  
-class GD_Dataloader_ParamComment extends GD_Dataloader_CommentBase {
+class Dataloader_ParamComment extends Dataloader_CommentBase {
 
-	use GD_Dataloader_ParamTrait;
+	use Dataloader_ParamTrait;
 
 	function get_name() {
     
@@ -20,4 +21,4 @@ class GD_Dataloader_ParamComment extends GD_Dataloader_CommentBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_ParamComment();
+new Dataloader_ParamComment();

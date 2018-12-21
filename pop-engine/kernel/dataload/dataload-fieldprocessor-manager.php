@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_DataLoad_FieldProcessor_Manager {
+class FieldProcessor_Manager {
 
     var $fieldprocessors;
     
@@ -24,4 +25,4 @@ class GD_DataLoad_FieldProcessor_Manager {
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_dataload_fieldprocessor_manager;
-$gd_dataload_fieldprocessor_manager = new GD_DataLoad_FieldProcessor_Manager();
+$gd_dataload_fieldprocessor_manager = new FieldProcessor_Manager();

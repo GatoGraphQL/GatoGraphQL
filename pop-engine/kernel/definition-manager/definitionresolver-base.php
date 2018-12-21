@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Server;
 
-abstract class PoP_DefinitionResolver_Base implements PoP_DefinitionResolver {
+abstract class DefinitionResolver_Base implements DefinitionResolver {
 
 	function __construct() {
 

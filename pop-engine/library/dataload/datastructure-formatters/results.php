@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('GD_DATALOAD_DATASTRUCTURE_RESULTS', 'results');
 
-class GD_DataLoad_DataStructureFormatter_Results extends GD_DataLoad_DataStructureFormatter {
+class DataStructureFormatter_Results extends \PoP\Engine\DataStructureFormatter {
 
 	function get_name() {
 	
@@ -17,7 +18,7 @@ class GD_DataLoad_DataStructureFormatter_Results extends GD_DataLoad_DataStructu
 	function get_formatted_data($data) {
 
 		// If we are requesting only the databases, then return these as a list of items
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		$dataoutputitems = $vars['dataoutputitems'];
 		if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)) {
 	
@@ -63,5 +64,5 @@ class GD_DataLoad_DataStructureFormatter_Results extends GD_DataLoad_DataStructu
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_DataStructureFormatter_Results();
+new DataStructureFormatter_Results();
 

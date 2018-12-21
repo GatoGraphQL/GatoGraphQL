@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_TaxonomiesBase extends GD_FilterComponent {
+abstract class FilterComponent_TaxonomiesBase extends FilterComponentBase {
 	
 	function get_taxonomies($filter) {
 	

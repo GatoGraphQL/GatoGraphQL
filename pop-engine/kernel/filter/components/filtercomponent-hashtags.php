@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_BaseHashtags extends GD_FilterComponent {
+abstract class FilterComponent_HashtagsBase extends FilterComponentBase {
 	
 	function get_tags($filter) {
 

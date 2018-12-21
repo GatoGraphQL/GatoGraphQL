@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-class GD_DataLoad_DataStructureFormat_Manager {
+class DataStructureFormat_Manager {
 
     var $formatters;
     var $default_name;
@@ -42,4 +43,4 @@ class GD_DataLoad_DataStructureFormat_Manager {
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_dataload_datastructureformat_manager;
-$gd_dataload_datastructureformat_manager = new GD_DataLoad_DataStructureFormat_Manager();
+$gd_dataload_datastructureformat_manager = new DataStructureFormat_Manager();

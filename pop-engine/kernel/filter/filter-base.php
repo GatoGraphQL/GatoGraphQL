@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterBase {
+class FilterBase {
 
 	function __construct() {
 	

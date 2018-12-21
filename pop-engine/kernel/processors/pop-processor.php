@@ -1,16 +1,14 @@
 <?php
+namespace PoP\Engine;
 
-define ('POP_MODULECOMPONENT_MODULES', 'modules');
-define ('POP_MODULECOMPONENT_DBOBJECTRELATIONALSUCCESSORMODULES', 'dbobject-relational-successor-modules');
+abstract class ModuleProcessorBase {
 
-class PoP_ProcessorBase {
-
-	use PoP_ModulePathProcessorTrait;
+	use ModulePathProcessorTrait;
 
 	function __construct() {
 
-		global $pop_module_processor_manager;
-		$pop_module_processor_manager->add($this, $this->get_modules_to_process());
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$moduleprocessor_manager->add($this, $this->get_modules_to_process());
 	}
 
 	//-------------------------------------------------
@@ -42,7 +40,7 @@ class PoP_ProcessorBase {
 
 	function execute_init_props_moduletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, $module, &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate) {
 
-		global $pop_module_processor_manager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		
 		// Initialize. If this module had been added props, then use them already
 		// 1st element to merge: the general props for this module passed down the line
@@ -86,19 +84,19 @@ class PoP_ProcessorBase {
 		);
 		
 		// Propagate
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		$submodules = $this->get_descendant_modules($module);
 		$submodules = $modulefilter_manager->remove_excluded_submodules($module, $submodules);
 
 		// This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_path_manager->prepare_for_propagation($module);
 		if ($submodules) {
 			
 			$props[$module][POP_PROPS_MODULES] = $props[$module][POP_PROPS_MODULES] ?? array();
 			foreach ($submodules as $submodule) {
 
-				$submodule_processor = $pop_module_processor_manager->get_processor($submodule);
+				$submodule_processor = $moduleprocessor_manager->get_processor($submodule);
 				$submodule_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
 				// If the submodule belongs to the same dataset (meaning that it doesn't have a dataloader of its own), then set the shared attributies for the same-dataset modules
@@ -162,7 +160,7 @@ class PoP_ProcessorBase {
 		// If it is a dataloader module, then set all the props related to data
 		if ($dataloader = $this->get_dataloader($module)) {
 
-			$vars = PoP_ModuleManager_Vars::get_vars();
+			$vars = Engine_Vars::get_vars();
 
 			// If it is multidomain, add a flag for inner layouts to know and react
 			if ($this->is_multidomain($module, $props)) {
@@ -176,7 +174,7 @@ class PoP_ProcessorBase {
 		 * Allow to add more stuff
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		do_action(
-			'PoP_ProcessorBase:init_model_props',
+			'\PoP\Engine\ModuleProcessorBase:init_model_props',
 			array(&$props),
 			$module,
 			$this
@@ -204,7 +202,7 @@ class PoP_ProcessorBase {
 		 * Allow to add more stuff
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		do_action(
-			'PoP_ProcessorBase:init_request_props',
+			'\PoP\Engine\ModuleProcessorBase:init_request_props',
 			array(&$props),
 			$module,
 			$this
@@ -675,7 +673,7 @@ class PoP_ProcessorBase {
 
 	function is_lazyload($module, $props) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 
 		// Do not load data if doing lazy load. It can be true only if:
 		// 1. Setting 'lazy-load' => true by $props
@@ -685,7 +683,7 @@ class PoP_ProcessorBase {
 
 	protected function add_headdatasetmodule_data_properties(&$ret, $module, $props) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 
 		// Is the component lazy-load?
 		$ret[GD_DATALOAD_LAZYLOAD] = $this->is_lazyload($module, $props);
@@ -703,7 +701,7 @@ class PoP_ProcessorBase {
 		 * Allow to add more stuff
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		do_action(
-			'PoP_ProcessorBase:add_headdatasetmodule_data_properties',
+			'\PoP\Engine\ModuleProcessorBase:add_headdatasetmodule_data_properties',
 			array(&$ret),
 			$module,
 			array(&$props),
@@ -796,7 +794,7 @@ class PoP_ProcessorBase {
 		// (such as done to set-up checkpoint configuration for POP_USERSTANCE_PAGE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
 		if ($checkpoint_configuration = $this->get_checkpoint_configuration($module, $props)) {
 			
-			if (PoP_ModuleManager_Utils::checkpoint_validation_required($checkpoint_configuration)) {
+			if (Utils::checkpoint_validation_required($checkpoint_configuration)) {
 
 				// Pass info for PoP Engine
 				$ret[GD_DATALOAD_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
@@ -806,7 +804,7 @@ class PoP_ProcessorBase {
 		// To trigger the actionexecuter, its own checkpoints must be successful
 		if ($checkpoint_configuration = $this->get_actionexecution_checkpoint_configuration($module, $props)) {
 			
-			if (PoP_ModuleManager_Utils::checkpoint_validation_required($checkpoint_configuration)) {
+			if (Utils::checkpoint_validation_required($checkpoint_configuration)) {
 
 				// Pass info for PoP Engine
 				$ret[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] = $checkpoint_configuration['checkpoints'];
@@ -899,7 +897,7 @@ class PoP_ProcessorBase {
 
 		if ($page_id = $this->get_relevant_page($module, $props)) {
 			
-			return PoP_ModuleManager_Utils::get_checkpoint_configuration($page_id);
+			return Utils::get_checkpoint_configuration($page_id);
 		}
 		
 		return null;
@@ -908,21 +906,21 @@ class PoP_ProcessorBase {
 	protected function get_actionexecution_checkpoint_configuration($module, &$props) {
 		
 		// By default, validate that we are doing POST and that the ?actionpath corresponds to the given $module
-		return PoP_Engine_CheckpointUtils::get_checkpoint_configuration(POPENGINE_CHECKPOINTCONFIGURATION_ACTIONPATHISMODULE_POST);
+		return Impl\CheckpointUtils::get_checkpoint_configuration(POPENGINE_CHECKPOINTCONFIGURATION_ACTIONPATHISMODULE_POST);
 	}
 
 	function get_dataload_source($module, $props) {
 
 		// Because a component can interact with itself by adding ?modulepaths=...,
 		// then, by default, we simply set the dataload source to point to itself!
-		$stringified_module_propagation_current_path = PoP_ModulePathManager_Utils::get_stringified_module_propagation_current_path($module);
+		$stringified_module_propagation_current_path = ModulePathManager_Utils::get_stringified_module_propagation_current_path($module);
 		$ret = add_query_arg(
 			GD_URLPARAM_MODULEFILTER,
 			POP_MODULEFILTER_MODULEPATHS,
 			add_query_arg(
 				GD_URLPARAM_MODULEPATHS.'[]',
 				$stringified_module_propagation_current_path,
-				PoP_ModuleManager_Utils::get_current_url()
+				Utils::get_current_url()
 			)
 		);
 
@@ -933,7 +931,7 @@ class PoP_ProcessorBase {
 
 				$ret = add_query_arg(
 					GD_URLPARAM_MODULEPATHS.'[]',
-					PoP_ModulePathManager_Utils::stringify_module_path($modulepath),
+					ModulePathManager_Utils::stringify_module_path($modulepath),
 					$ret
 				);
 			}
@@ -950,7 +948,7 @@ class PoP_ProcessorBase {
 		}
 
 		// Add the format to the query url
-		if ($this instanceof FormattableModule) {
+		if ($this instanceof \PoP\Engine\FormattableModule) {
 
 			if ($format = $this->get_format($module)) {
 
@@ -964,6 +962,10 @@ class PoP_ProcessorBase {
 	function get_dataload_multidomain_sources($module, $props) {
 
 		if ($sources = $this->get_prop($module, $props, 'dataload-multidomain-sources')) {
+
+			if (!is_array($sources)) {
+				$sources = array($sources);
+			}
 
 			return array_map(
 				function($source) use ($module) {
@@ -1019,14 +1021,14 @@ class PoP_ProcessorBase {
 
 	protected function flatten_datasetmoduletree_data_properties($propagate_fn, &$ret, $module, $props) {
 	
-		global $pop_module_processor_manager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		
 		// Exclude the subcomponent modules here
 		if ($submodules = $this->get_modules_to_propagate_data_properties($module)) {
 			
 			foreach ($submodules as $submodule) {
 
-				$submodule_processor = $pop_module_processor_manager->get_processor($submodule);
+				$submodule_processor = $moduleprocessor_manager->get_processor($submodule);
 
 				// Propagate only if the submodule doesn't have a dataloader. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
 				if (!$submodule_processor->get_dataloader($submodule, $props[$module][POP_PROPS_MODULES])) {
@@ -1052,7 +1054,7 @@ class PoP_ProcessorBase {
 
 	protected function flatten_relationaldbobject_data_properties($propagate_fn, &$ret, $module, $props) {
 	
-		global $pop_module_processor_manager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		
 		// If it has subcomponent modules, integrate them under 'subcomponents'
 		foreach ($this->get_dbobject_relational_successors($module) as $subcomponent_data_field => $subcomponent_dataloader_options) {
@@ -1064,7 +1066,7 @@ class PoP_ProcessorBase {
 				);
 				foreach ($subcomponent_modules as $subcomponent_module) {
 
-					if ($subcomponent_module_data_properties = $pop_module_processor_manager->get_processor($subcomponent_module)->$propagate_fn($subcomponent_module, $props[$subcomponent_module][POP_PROPS_MODULES])) {
+					if ($subcomponent_module_data_properties = $moduleprocessor_manager->get_processor($subcomponent_module)->$propagate_fn($subcomponent_module, $props[$subcomponent_module][POP_PROPS_MODULES])) {
 
 						$subcomponent_modules_data_properties = array_merge_recursive(
 							$subcomponent_modules_data_properties,
@@ -1131,7 +1133,7 @@ class PoP_ProcessorBase {
 
 	private function get_modulecomponents($module, $components = array()) {
 
-		global $pop_module_processor_manager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
 		if (empty($components)) {
 			$components = array(

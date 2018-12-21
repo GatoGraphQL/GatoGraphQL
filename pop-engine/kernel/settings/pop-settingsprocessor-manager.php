@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Settings;
 
-class PoP_Module_SettingsProcessor_Manager {
+class SettingsProcessor_Manager {
 
 	var $processors, $default_processor;
 
@@ -18,8 +19,7 @@ class PoP_Module_SettingsProcessor_Manager {
 	
 	function __construct() {
 
-		PoPEngine_Module_SettingsProcessorManager_Factory::set_instance($this);
-		
+		SettingsProcessorManager_Factory::set_instance($this);		
 		$this->processors = array();
 	}
 	
@@ -35,7 +35,7 @@ class PoP_Module_SettingsProcessor_Manager {
 			return $this->default_processor;
 		}
 
-		throw new Exception(sprintf('No Settings Processor for $page_id \'%s\' (%s)', $page_id, full_url()));
+		throw new \Exception(sprintf('No Settings Processor for $page_id \'%s\' (%s)', $page_id, full_url()));
 	}
 	
 	function add($processor) {
@@ -55,4 +55,4 @@ class PoP_Module_SettingsProcessor_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_Module_SettingsProcessor_Manager();
+new SettingsProcessor_Manager();

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('GD_DATALOAD_QUERYHANDLER_ACTIONEXECUTION', 'actionexecution');
 
-class GD_DataLoad_QueryHandler_ActionExecution extends GD_DataLoad_QueryHandler {
+class QueryHandler_ActionExecution extends \PoP\Engine\QueryHandler {
 
     function get_name() {
     
@@ -122,4 +123,4 @@ class GD_DataLoad_QueryHandler_ActionExecution extends GD_DataLoad_QueryHandler 
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_QueryHandler_ActionExecution();
+new QueryHandler_ActionExecution();

@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_ModulePathManager_Factory {
+class ModulePathManager_Factory {
 
 	protected static $instance;
 

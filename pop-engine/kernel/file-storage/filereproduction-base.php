@@ -1,5 +1,7 @@
 <?php 
-class PoP_Engine_FileReproductionBase {
+namespace PoP\Engine\FileStorage;
+
+abstract class FileReproductionBase {
 
     function __construct() {
     
@@ -34,4 +36,3 @@ class PoP_Engine_FileReproductionBase {
         return 0;
     }
 }
-

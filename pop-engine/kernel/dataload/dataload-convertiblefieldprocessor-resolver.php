@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_DataLoad_ConvertibleFieldProcessorResolver_Base {
+class ConvertibleFieldProcessorResolverBase {
 
 	function __construct($convertiblefieldprocessor_name) {
 

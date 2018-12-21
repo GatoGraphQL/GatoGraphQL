@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMS;
 
-interface PoP_CMS_ObjectPropertyResolver {
+interface ObjectPropertyResolver {
 
 	/***********************************************************/
 	/** Functions to access object properties */

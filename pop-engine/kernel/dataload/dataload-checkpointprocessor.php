@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_Dataload_CheckpointProcessor {
+class CheckpointProcessor {
 
 	function __construct() {
 

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMS\WP;
 
 define('POP_CMSWP_POP_CMS_MIN_VERSION', 0.1);
 
-class PoP_CMSWP_Validation {
+class Validation {
 
 	function validate() {
 		

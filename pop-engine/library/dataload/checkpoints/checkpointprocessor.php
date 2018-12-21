@@ -1,9 +1,10 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('GD_DATALOAD_CHECKPOINT_ACTIONPATHISMODULE', 'actionpath-is-module');
 define ('GD_DATALOAD_CHECKPOINT_DOINGPOST', 'doing-post');
 
-class PoP_Engine_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProcessor {
+class CheckpointProcessor extends \PoP\Engine\CheckpointProcessor {
 
 	function get_checkpoints_to_process() {
 
@@ -15,15 +16,15 @@ class PoP_Engine_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProc
 
 	function process($checkpoint, $module = null) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		switch ($checkpoint) {
 
 			case GD_DATALOAD_CHECKPOINT_ACTIONPATHISMODULE:
 
 				// Check if the user is logged in
-				if ($vars['actionpath'] != PoP_ModulePathManager_Utils::get_stringified_module_propagation_current_path($module)) {
+				if ($vars['actionpath'] != \PoP\Engine\ModulePathManager_Utils::get_stringified_module_propagation_current_path($module)) {
 
-					return new WP_Error('actionpathisnotmodule');
+					return new \WP_Error('actionpathisnotmodule');
 				}
 				break;
 
@@ -32,7 +33,7 @@ class PoP_Engine_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProc
 				// Check if the user is logged in
 				if (!doing_post()) {
 
-					return new WP_Error('notdoingpost');
+					return new \WP_Error('notdoingpost');
 				}
 				break;
 		}
@@ -44,4 +45,4 @@ class PoP_Engine_Dataload_CheckpointProcessor extends GD_Dataload_CheckpointProc
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_Engine_Dataload_CheckpointProcessor();
+new CheckpointProcessor();

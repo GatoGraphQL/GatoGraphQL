@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
 
-class GD_Dataloader_MenuBase extends GD_QueryDataDataloader {
+abstract class Dataloader_MenuBase extends \PoP\Engine\QueryDataDataloader {
 
 	function get_fieldprocessor() {
 
@@ -14,7 +15,7 @@ class GD_Dataloader_MenuBase extends GD_QueryDataDataloader {
 	
 	function execute_get_data($ids) {
 	
-    	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+    	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$ret = array_map(array($cmsapi, 'wp_get_nav_menu_object'), $ids);
 		return $ret;
 	}

@@ -1,9 +1,10 @@
 <?php
+namespace PoP\CMS;
 
-class PoP_CMS_FunctionAPI_Base {
+abstract class FunctionAPI_Base {
 
 	function __construct() {
 
-		PoP_CMS_FunctionAPI_Factory::set_instance($this);
+		FunctionAPI_Factory::set_instance($this);
 	}
 }

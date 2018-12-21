@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
  
-class GD_Dataloader_PostListBase extends GD_Dataloader_PostBase {
+abstract class Dataloader_PostListBase extends Dataloader_PostBase {
 
-	use GD_Dataloader_ListTrait;
+	use Dataloader_ListTrait;
 
 	/**
      * Function to override
@@ -21,7 +22,7 @@ class GD_Dataloader_PostListBase extends GD_Dataloader_PostBase {
 	
     function execute_query($query) {
 
-    	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+    	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
         return $cmsapi->get_posts($query);
 	}
 
@@ -45,7 +46,7 @@ class GD_Dataloader_PostListBase extends GD_Dataloader_PostBase {
 		
 		// Allow to check for PoP_Application_Engine_Utils::loading_latest():
 		return apply_filters(
-			'GD_Dataloader_PostListBase:query:limit',
+			'Dataloader_PostListBase:query:limit',
 			$this->get_meta_limit_param($query_args)
 		);
 	}
@@ -120,7 +121,7 @@ class GD_Dataloader_PostListBase extends GD_Dataloader_PostBase {
 
 		// Allow to add the timestamp for loading_latest
 		return apply_filters(
-			'GD_Dataloader_PostListBase:query',
+			'Dataloader_PostListBase:query',
 			$query,
 			$query_args
 		);

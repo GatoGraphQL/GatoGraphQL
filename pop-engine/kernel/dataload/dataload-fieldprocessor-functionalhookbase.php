@@ -1,8 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-define ('GD_DATALOAD_FIELDPROCESSOR_FIELDTYPE_FUNCTIONAL', 'functional');
-
-class GD_DataLoad_FieldProcessor_FunctionalHookBase extends GD_DataLoad_FieldProcessor_HookBase {
+class FieldProcessor_FunctionalHookBase extends FieldProcessor_HookBase {
 
 	function get_field_type() {
 

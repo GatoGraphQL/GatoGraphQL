@@ -1,15 +1,16 @@
 <?php
+namespace PoP\CMS;
 
-class PoP_CMS_ObjectPropertyResolver_Factory {
+class ObjectPropertyResolver_Factory {
 
 	protected static $instance;
 
-	public static function set_instance(PoP_CMS_ObjectPropertyResolver $instance) {
+	public static function set_instance(ObjectPropertyResolver $instance) {
 
 		self::$instance = $instance;
 	}
 
-	public static function get_instance(): ?PoP_CMS_ObjectPropertyResolver {
+	public static function get_instance(): ?ObjectPropertyResolver {
 
 		return self::$instance;
 	}

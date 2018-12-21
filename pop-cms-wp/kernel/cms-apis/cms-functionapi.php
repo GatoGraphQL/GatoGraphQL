@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMS\WP;
 
-class PoP_CMSWP_FunctionAPI extends PoP_CMS_FunctionAPI_Base implements PoP_CMS_FunctionAPI {
+class FunctionAPI extends \PoP\CMS\FunctionAPI_Base implements \PoP\CMS\FunctionAPI {
 
 	/***********************************************************/
 	/** Most functions below are 1 to 1 with WordPress signature */
@@ -122,4 +123,4 @@ class PoP_CMSWP_FunctionAPI extends PoP_CMS_FunctionAPI_Base implements PoP_CMS_
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_CMSWP_FunctionAPI();
+new FunctionAPI();

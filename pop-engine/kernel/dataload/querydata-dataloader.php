@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-class GD_QueryDataDataloader extends GD_Dataloader {
+class QueryDataDataloader extends Dataloader {
 
     /**
      * Function to override

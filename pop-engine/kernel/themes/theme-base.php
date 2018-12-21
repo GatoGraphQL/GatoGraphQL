@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Themes;
 
-class GD_ThemeBase {
+class ThemeBase {
 
 	var $thememodes, $themestyles;
 

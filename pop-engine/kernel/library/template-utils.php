@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_Engine_TemplateUtils {
+class TemplateUtils {
 
 	public static function validate_pop_loaded($json = false) {
 
@@ -24,7 +25,7 @@ class PoP_Engine_TemplateUtils {
 
 	public static function maybe_redirect() {
 
-		$pop_module_settingsmanager = PoPEngine_Module_SettingsManager_Factory::get_instance();
+		$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
 		if ($redirect = $pop_module_settingsmanager->get_redirect_url()) {
 
 			if ($query = $_SERVER['QUERY_STRING']) {
@@ -32,7 +33,7 @@ class PoP_Engine_TemplateUtils {
 				$redirect .= '?'.$query;
 			}
 
-			$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+			$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 			$cmsapi->redirect($redirect); 
 			exit;
 		}
@@ -40,7 +41,7 @@ class PoP_Engine_TemplateUtils {
 
 	public static function generate_data() {
 
-		$engine = PoP_Engine_Factory::get_instance();
+		$engine = Engine_Factory::get_instance();
 		$engine->generate_data();
 	}
 }

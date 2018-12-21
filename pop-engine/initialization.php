@@ -1,5 +1,7 @@
 <?php
-class PoPEngine_Initialization {
+namespace PoP\Engine;
+
+class Initialization {
 
 	function initialize() {
 
@@ -11,10 +13,15 @@ class PoPEngine_Initialization {
 		require_once 'config/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
-		 * Load the Server first, so we can access class PoP_ServerUtils
+		 * Load the Server first, so we can access class ServerUtils
 		 * And its required library first
 		 * ---------------------------------------------------------------------------------------------------------------*/
 		require_once 'server/load.php';
+
+		/**---------------------------------------------------------------------------------------------------------------
+		 * Load the Temporary Hacks
+		 * ---------------------------------------------------------------------------------------------------------------*/
+		require_once 'temporary-hacks/load.php';
 
 		/**---------------------------------------------------------------------------------------------------------------
 		 * Load the Kernel

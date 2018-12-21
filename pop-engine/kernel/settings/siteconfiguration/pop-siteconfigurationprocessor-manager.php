@@ -1,12 +1,13 @@
 <?php
+namespace PoP\Engine\Settings;
 
-class PoP_Module_SiteConfigurationProcessor_Manager {
+class SiteConfigurationProcessor_Manager {
 
 	var $processor;
 	
 	function __construct() {
 
-		PoPEngine_Module_SiteConfigurationProcessorManager_Factory::set_instance($this);
+		SiteConfigurationProcessorManager_Factory::set_instance($this);
 	}
 
 	function get_processor() {
@@ -23,4 +24,4 @@ class PoP_Module_SiteConfigurationProcessor_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_Module_SiteConfigurationProcessor_Manager();
+new SiteConfigurationProcessor_Manager();

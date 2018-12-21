@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_DataLoad_QueryHandler_Manager {
+class QueryHandler_Manager {
 
     var $queryhandlers;
     
@@ -19,7 +20,7 @@ class GD_DataLoad_QueryHandler_Manager {
 		$queryhandler = $this->queryhandlers[$name];
 		if (!$queryhandler) {
 
-			throw new Exception(sprintf('No QueryHandler with name \'%s\' (%s)', $name, full_url()));
+			throw new \Exception(sprintf('No QueryHandler with name \'%s\' (%s)', $name, full_url()));
 		}
 
 		return $queryhandler;
@@ -30,4 +31,4 @@ class GD_DataLoad_QueryHandler_Manager {
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_dataload_queryhandler_manager;
-$gd_dataload_queryhandler_manager = new GD_DataLoad_QueryHandler_Manager();
+$gd_dataload_queryhandler_manager = new QueryHandler_Manager();

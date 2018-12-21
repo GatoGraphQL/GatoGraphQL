@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Server;
 
-abstract class PoP_DefinitionPersistanceBase implements PoP_DefinitionPersistance {
+abstract class DefinitionPersistanceBase implements DefinitionPersistance {
 
 	function __construct() {
 

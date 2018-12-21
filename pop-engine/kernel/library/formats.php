@@ -1,4 +1,4 @@
 <?php
 
-define ('POP_FORMAT_FIELDS', 'fields');
-define ('POP_FORMAT_LAYOUTS', 'layouts');
+const POP_FORMAT_FIELDS = 'fields';
+const POP_FORMAT_LAYOUTS = 'layouts';

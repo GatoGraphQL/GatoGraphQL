@@ -1,10 +1,10 @@
 <?php
 
-add_filter('PoP_Module_ModelInstanceProcessor:model_instance_components_from_vars', 'pop_cmsmodel_module_instance_components');
+add_filter('ModelInstanceProcessor:model_instance_components_from_vars', 'pop_cmsmodel_module_instance_components');
 function pop_cmsmodel_module_instance_components($components) {
 
-	$vars = PoP_ModuleManager_Vars::get_vars();
-	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+	$vars = \PoP\Engine\Engine_Vars::get_vars();
+	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 	$hierarchy = $vars['hierarchy'];
 
 	// Properties specific to each hierarchy
@@ -16,7 +16,7 @@ function pop_cmsmodel_module_instance_components($components) {
 
 			// Author: it may depend on its role
 			$component_types = apply_filters(
-				'PoP_Module_ModelInstanceProcessor_Utils:components_from_vars:type:author',
+				'\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:author',
 				array(
 					POP_MODELINSTANCECOMPONENTTYPE_AUTHOR_ROLE,
 				)
@@ -36,7 +36,7 @@ function pop_cmsmodel_module_instance_components($components) {
 			// Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
 			// By default, we check for post type but not for categories
 			$component_types = apply_filters(
-				'PoP_Module_ModelInstanceProcessor_Utils:components_from_vars:type:single',
+				'\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:single',
 				array(
 					POP_MODELINSTANCECOMPONENTTYPE_SINGLE_POSTTYPE,
 				)

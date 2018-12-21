@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_DataLoad_QueryHandler {
+class QueryHandler {
 
     function __construct() {
     

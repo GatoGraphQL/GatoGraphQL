@@ -1,23 +1,24 @@
 <?php
+namespace PoP\Engine\Impl;
 
-class PoP_Engine_EngineHooks {
+class EngineHooks {
 
 	function __construct() {
 
 		add_action(
-			'PoP_Engine:get_module_data:start',
+			'\PoP\Engine\Engine:get_module_data:start',
 			array($this, 'start'),
 			10,
 			4
 		);
 		add_action(
-			'PoP_Engine:get_module_data:dataloading-module',
+			'\PoP\Engine\Engine:get_module_data:dataloading-module',
 			array($this, 'calculate_dataloading_module_data'),
 			10,
 			7
 		);
 		add_action(
-			'PoP_Engine:get_module_data:end',
+			'\PoP\Engine\Engine:get_module_data:end',
 			array($this, 'end'),
 			10,
 			5
@@ -57,7 +58,7 @@ class PoP_Engine_EngineHooks {
 					add_query_arg(
 						GD_URLPARAM_ACTION,
 						POP_ACTION_LOADLAZY,
-						PoP_ModuleManager_Utils::get_current_url()
+						\PoP\Engine\Utils::get_current_url()
 					)
 				)
 			);
@@ -70,4 +71,4 @@ class PoP_Engine_EngineHooks {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_Engine_EngineHooks();
+new EngineHooks();

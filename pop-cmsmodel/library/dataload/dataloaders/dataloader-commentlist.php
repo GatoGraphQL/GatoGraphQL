@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
  
 define ('GD_DATALOADER_COMMENTLIST', 'comments-list');
 
-class GD_Dataloader_CommentList extends GD_Dataloader_CommentListBase {
+class Dataloader_CommentList extends Dataloader_CommentListBase {
 
 	function get_name() {
     
@@ -22,7 +23,7 @@ class GD_Dataloader_CommentList extends GD_Dataloader_CommentListBase {
 	
     function execute_query($query) {
     
-    	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+    	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
     	return $cmsapi->get_comments($query);
 	}
 
@@ -42,4 +43,4 @@ class GD_Dataloader_CommentList extends GD_Dataloader_CommentListBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_CommentList();
+new Dataloader_CommentList();

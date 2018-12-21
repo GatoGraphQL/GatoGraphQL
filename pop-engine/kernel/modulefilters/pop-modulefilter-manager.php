@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_ModuleFilterManager {
+class ModuleFilterManager {
 
 	protected $selected_filter_name, $filters;
 
@@ -12,7 +13,7 @@ class PoP_ModuleFilterManager {
 
 	function __construct() {
 
-		PoP_ModuleFilterManager_Factory::set_instance($this);
+		ModuleFilterManager_Factory::set_instance($this);
 
 		$this->filters = array();
 		add_action('init', array($this, 'init'));
@@ -109,11 +110,11 @@ class PoP_ModuleFilterManager {
 			if (!$this->never_exclude && is_null($this->not_excluded_ancestor_module) && $this->exclude_module($module, $props) === false) {
 
 				// Set the current module as the one which is not excluded.
-				$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+				$module_path_manager = ModulePathManager_Factory::get_instance();
 				$module_propagation_current_path = $module_path_manager->get_propagation_current_path();
 				$module_propagation_current_path[] = $module;
 
-				$this->not_excluded_ancestor_module = PoP_ModulePathManager_Utils::stringify_module_path($module_propagation_current_path);
+				$this->not_excluded_ancestor_module = ModulePathManager_Utils::stringify_module_path($module_propagation_current_path);
 
 				// Add it to the list of not-excluded modules
 				if (!in_array($this->not_excluded_ancestor_module, $this->not_excluded_module_sets_as_string)) {
@@ -132,12 +133,12 @@ class PoP_ModuleFilterManager {
 
 			if (!$this->never_exclude && !is_null($this->not_excluded_ancestor_module) && $this->exclude_module($module, $props) === false) {
 
-				$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+				$module_path_manager = ModulePathManager_Factory::get_instance();
 				$module_propagation_current_path = $module_path_manager->get_propagation_current_path();
 				$module_propagation_current_path[] = $module;
 
 				// If the current module was set as the one not excluded, then reset it
-				if ($this->not_excluded_ancestor_module == PoP_ModulePathManager_Utils::stringify_module_path($module_propagation_current_path)) {
+				if ($this->not_excluded_ancestor_module == ModulePathManager_Utils::stringify_module_path($module_propagation_current_path)) {
 
 					$this->not_excluded_ancestor_module = null;
 				}
@@ -151,4 +152,4 @@ class PoP_ModuleFilterManager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ModuleFilterManager();
+new ModuleFilterManager();

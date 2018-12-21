@@ -1,5 +1,7 @@
 <?php
-class PoP_Engine_RendererFileGeneratorBase extends PoP_Engine_FileLocationBase {
+namespace PoP\Engine\FileStorage;
+
+abstract class RendererFileGeneratorBase extends FileLocationBase {
 
 	function get_renderer() {
 

@@ -1,10 +1,11 @@
 <?php
+namespace PoP\ExampleModules;
 
-define ('POP_MODULE_EXAMPLE_HOME', PoP_DefinitionUtils::get_module_definition('example-home'));
-define ('POP_MODULE_EXAMPLE_AUTHOR', PoP_DefinitionUtils::get_module_definition('example-author'));
-define ('POP_MODULE_EXAMPLE_TAG', PoP_DefinitionUtils::get_module_definition('example-tag'));
+define ('POP_MODULE_EXAMPLE_HOME', \PoP\Engine\DefinitionUtils::get_module_definition('example-home'));
+define ('POP_MODULE_EXAMPLE_AUTHOR', \PoP\Engine\DefinitionUtils::get_module_definition('example-author'));
+define ('POP_MODULE_EXAMPLE_TAG', \PoP\Engine\DefinitionUtils::get_module_definition('example-tag'));
 
-class PoP_ExampleModules_Module_Processor_Groups extends PoP_ProcessorBase {
+class ModuleProcessor_Groups extends \PoP\Engine\ModuleProcessorBase {
 
 	function get_modules_to_process() {
 	
@@ -23,7 +24,7 @@ class PoP_ExampleModules_Module_Processor_Groups extends PoP_ProcessorBase {
 
 			case POP_MODULE_EXAMPLE_HOME:
 
-				$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+				$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 				if ($cmsapi->get_home_static_page()) {
 
 					$ret[] = POP_MODULE_EXAMPLE_HOMESTATICPAGE;
@@ -55,4 +56,4 @@ class PoP_ExampleModules_Module_Processor_Groups extends PoP_ProcessorBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ExampleModules_Module_Processor_Groups();
+new ModuleProcessor_Groups();

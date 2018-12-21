@@ -1,13 +1,14 @@
 <?php
+namespace PoP\CMSModel;
 
-class PoP_CMSModel_Engine_Utils {
+class Engine_Utils {
 	
 	public static function reset() {
 
 		// From the new URI set in $_SERVER['REQUEST_URI'], re-generate $vars
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$query = $cmsapi->get_query_from_request_uri();
-		PoP_ModuleManager_Vars::set_query($query);
+		\PoP\Engine\Engine_Vars::set_query($query);
 	}
 
 	public static function calculate_and_set_vars_state_reset($vars_in_array, $query) {
@@ -38,7 +39,7 @@ class PoP_CMSModel_Engine_Utils {
 		// Attributes needed to match the PageModuleProcessor vars conditions
 		if ($hierarchy == GD_SETTINGS_HIERARCHY_SINGLE) {
 
-			$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+			$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 			$post_id = $vars['global-state']['queried-object-id'];
 			$vars['global-state']['queried-object-post-type'] = $cmsapi->get_post_type($post_id);
 		}
@@ -48,6 +49,6 @@ class PoP_CMSModel_Engine_Utils {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-add_action('PoP_ModuleManager_Utils:reset', array(PoP_CMSModel_Engine_Utils::class, 'reset'), 0); // Priority 0: execute immediately, to set the $query before anyone needs to use it
-add_action('PoP_ModuleManager_Utils:calculate_and_set_vars_state', array(PoP_CMSModel_Engine_Utils::class, 'calculate_and_set_vars_state'), 0, 2);
-add_action('PoP_ModuleManager_Utils:calculate_and_set_vars_state:reset', array(PoP_CMSModel_Engine_Utils::class, 'calculate_and_set_vars_state_reset'), 0, 2);
+add_action('\PoP\Engine\Engine_Vars:reset', array(Engine_Utils::class, 'reset'), 0); // Priority 0: execute immediately, to set the $query before anyone needs to use it
+add_action('\PoP\Engine\Engine_Vars:calculate_and_set_vars_state', array(Engine_Utils::class, 'calculate_and_set_vars_state'), 0, 2);
+add_action('\PoP\Engine\Engine_Vars:calculate_and_set_vars_state:reset', array(Engine_Utils::class, 'calculate_and_set_vars_state_reset'), 0, 2);

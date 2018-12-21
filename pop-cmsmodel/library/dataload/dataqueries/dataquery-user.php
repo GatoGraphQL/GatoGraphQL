@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATAQUERY_USER', 'user');
 
-class GD_DataQuery_User extends GD_DataQuery {
+class DataQuery_User extends \PoP\Engine\DataQuery {
 
 	function get_name() {
 
@@ -26,4 +27,4 @@ class GD_DataQuery_User extends GD_DataQuery {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataQuery_User();
+new DataQuery_User();

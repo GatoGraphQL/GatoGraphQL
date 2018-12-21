@@ -1,6 +1,7 @@
 <?php
- 
-class GD_DataLoad_DataStructureFormatter {
+namespace PoP\Engine;
+
+class DataStructureFormatter {
 
 	function __construct() {
     
@@ -32,7 +33,7 @@ class GD_DataLoad_DataStructureFormatter {
 
 			$value = $fieldprocessor->get_value($resultitem, $field);
 
-			// Comment Leo 29/08/2014: needed for compatibility with GD_Dataloader_ConvertiblePostList
+			// Comment Leo 29/08/2014: needed for compatibility with Dataloader_ConvertiblePostList
 			// (So that data-fields aimed for another post_type are not retrieved)
 			if (!is_wp_error($value)) {
 				$dataitem[$field] = $value;

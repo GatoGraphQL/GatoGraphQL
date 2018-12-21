@@ -1,4 +1,5 @@
 <?php
+namespace PoP\Engine;
 
 interface FormattableModule {
 

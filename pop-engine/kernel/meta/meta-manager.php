@@ -1,11 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-define ('GD_META_TYPE_POST', 'post');
-define ('GD_META_TYPE_USER', 'user');
-define ('GD_META_TYPE_TERM', 'term');
-define ('GD_META_TYPE_COMMENT', 'comment');
-
-class GD_MetaManager {
+class MetaManager {
 
 	public static function get_metakey_prefix() {
 
@@ -50,7 +46,7 @@ class GD_MetaManager {
 
 	public static function get_post_meta($post_id, $key, $single = false) {
 
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		return $cmsapi->get_post_meta($post_id, self::get_meta_key($key, GD_META_TYPE_POST), $single);
 	}
 	public static function update_post_meta($post_id, $key, $values, $single = false, $boolean = false) {
@@ -58,7 +54,7 @@ class GD_MetaManager {
 		$values = self::normalize_values($values);
 
 		// Add the values as independent values so each one of them can be searched using EXISTS on WP_Query
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_post_meta($post_id, self::get_meta_key($key, GD_META_TYPE_POST));
 		foreach ($values as $value) {
 		
@@ -69,18 +65,18 @@ class GD_MetaManager {
 	}
 	public static function add_post_meta($post_id, $key, $value, $unique = false) {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->add_post_meta($post_id, self::get_meta_key($key, GD_META_TYPE_POST), $value, $unique);
 	}
 	public static function delete_post_meta($post_id, $key, $value = '') {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_post_meta($post_id, self::get_meta_key($key, GD_META_TYPE_POST), $value);
 	}
 
 	public static function get_term_meta($term_id, $key, $single = false) {
 
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		return $cmsapi->get_term_meta($term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $single);
 	}
 	public static function update_term_meta($term_id, $key, $values, $single = false, $boolean = false) {
@@ -88,7 +84,7 @@ class GD_MetaManager {
 		$values = self::normalize_values($values);
 
 		// Add the values as independent values so each one of them can be searched using EXISTS on WP_Query
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_term_meta( $term_id, self::get_meta_key($key, GD_META_TYPE_TERM));
 		foreach ($values as $value) {
 		
@@ -99,18 +95,18 @@ class GD_MetaManager {
 	}
 	public static function add_term_meta($term_id, $key, $value, $unique = false) {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->add_term_meta($term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $value, $unique);
 	}
 	public static function delete_term_meta($term_id, $key, $value = null, $unique = false) {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_term_meta($term_id, self::get_meta_key($key, GD_META_TYPE_TERM), $value, $unique);
 	}
 
 	public static function get_user_meta($user_id, $key, $single = false) {
 
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		return $cmsapi->get_user_meta($user_id, self::get_meta_key($key, GD_META_TYPE_USER), $single);
 	}
 	public static function update_user_meta($user_id, $key, $values, $single = false, $boolean = false) {
@@ -118,7 +114,7 @@ class GD_MetaManager {
 		$values = self::normalize_values($values);
 
 		// Add the values as independent values so each one of them can be searched using EXISTS on WP_Query
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_user_meta( $user_id, self::get_meta_key($key, GD_META_TYPE_USER));
 		foreach ($values as $value) {
 		
@@ -129,18 +125,18 @@ class GD_MetaManager {
 	}
 	public static function add_user_meta($user_id, $key, $value, $unique = false) {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->add_user_meta($user_id, self::get_meta_key($key, GD_META_TYPE_USER), $value, $unique);
 	}
 	public static function delete_user_meta($user_id, $key, $value = null, $unique = false) {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_user_meta($user_id, self::get_meta_key($key, GD_META_TYPE_USER), $value, $unique);
 	}
 
 	public static function get_comment_meta($comment_id, $key, $single = false) {
 
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		return $cmsapi->get_comment_meta($comment_id, self::get_meta_key($key, GD_META_TYPE_COMMENT), $single);
 	}
 	public static function update_comment_meta($comment_id, $key, $values, $single = false, $boolean = false) {
@@ -148,7 +144,7 @@ class GD_MetaManager {
 		$values = self::normalize_values($values);
 
 		// Add the values as independent values so each one of them can be searched using EXISTS on WP_Query
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_comment_meta($comment_id, self::get_meta_key($key, GD_META_TYPE_COMMENT));
 		foreach ($values as $value) {
 		
@@ -159,12 +155,12 @@ class GD_MetaManager {
 	}
 	public static function add_comment_meta($comment_id, $key, $value, $unique = false) {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->add_comment_meta($comment_id, self::get_meta_key($key, GD_META_TYPE_COMMENT), $value, $unique);
 	}
 	public static function delete_comment_meta($comment_id, $key, $value = null, $unique = false) {
 		
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$cmsapi->delete_comment_meta($comment_id, self::get_meta_key($key, GD_META_TYPE_COMMENT), $value, $unique);
 	}
 }

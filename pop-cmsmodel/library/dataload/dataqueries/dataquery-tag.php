@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATAQUERY_TAG', 'tag');
 
-class GD_DataQuery_Tag extends GD_DataQuery {
+class DataQuery_Tag extends \PoP\Engine\DataQuery {
 
 	function get_name() {
 
@@ -26,4 +27,4 @@ class GD_DataQuery_Tag extends GD_DataQuery {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataQuery_Tag();
+new DataQuery_Tag();

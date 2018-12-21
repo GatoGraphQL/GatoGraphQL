@@ -1,5 +1,7 @@
 <?php
-class PoP_Engine_FileBase {
+namespace PoP\Engine\FileStorage;
+
+abstract class FileBase {
 
 	function get_dir() {
 

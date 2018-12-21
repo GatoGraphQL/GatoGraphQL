@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_Author extends GD_FilterComponent {
+abstract class FilterComponent_AuthorBase extends FilterComponentBase {
 	
 	function get_author($filter) {
 

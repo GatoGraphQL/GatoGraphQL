@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOAD_CONVERTIBLEFIELDPROCESSOR_USERS', 'convertible-users');
 
-class GD_DataLoad_ConvertibleFieldProcessor_Users extends GD_DataLoad_ConvertibleFieldProcessor {
+class ConvertibleFieldProcessor_Users extends \PoP\Engine\ConvertibleFieldProcessorBase {
 
 	function get_name() {
 	
@@ -18,4 +19,4 @@ class GD_DataLoad_ConvertibleFieldProcessor_Users extends GD_DataLoad_Convertibl
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_ConvertibleFieldProcessor_Users();
+new ConvertibleFieldProcessor_Users();

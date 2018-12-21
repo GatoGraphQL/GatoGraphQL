@@ -1,17 +1,17 @@
 <?php
+namespace PoP\Engine;
 
-class GD_DataLoad_ActionExecution_Manager {
+class ActionExecution_Manager {
 
     var $executioners, $results;
     
     function __construct() {
 
-    	GD_DataLoad_ActionExecution_Manager_Factory::set_instance($this);
-    
+    	ActionExecution_Manager_Factory::set_instance($this);    
 		$this->executioners = $this->results = array();
 
 		add_action(
-			'PoP_Engine:generate_data:reset',
+			'\PoP\Engine\Engine:generate_data:reset',
 			array($this, 'reset')
 		);
 	}
@@ -31,7 +31,7 @@ class GD_DataLoad_ActionExecution_Manager {
 		$actionexecuter = $this->executioners[$name];
 		if (!$actionexecuter) {
 
-			throw new Exception(sprintf('No Action Executer with name \'%s\' (%s)', $name, full_url()));
+			throw new \Exception(sprintf('No Action Executer with name \'%s\' (%s)', $name, full_url()));
 		}
 
 		return $actionexecuter;
@@ -51,4 +51,4 @@ class GD_DataLoad_ActionExecution_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_ActionExecution_Manager();
+new ActionExecution_Manager();

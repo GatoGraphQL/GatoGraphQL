@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_POSTLIST', 'post-list');
 
-class GD_Dataloader_PostList extends GD_Dataloader_PostListBase {
+class Dataloader_PostList extends Dataloader_PostListBase {
 
 	function get_name() {
     
@@ -13,4 +14,4 @@ class GD_Dataloader_PostList extends GD_Dataloader_PostListBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_PostList();
+new Dataloader_PostList();

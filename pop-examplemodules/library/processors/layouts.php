@@ -1,12 +1,13 @@
 <?php
+namespace PoP\ExampleModules;
 
-define ('POP_MODULE_EXAMPLE_404', PoP_DefinitionUtils::get_module_definition('example-404'));
-define ('POP_MODULE_EXAMPLE_HOMEWELCOME', PoP_DefinitionUtils::get_module_definition('example-homewelcome'));
-define ('POP_MODULE_EXAMPLE_COMMENT', PoP_DefinitionUtils::get_module_definition('example-comment'));
-define ('POP_MODULE_EXAMPLE_AUTHORPROPERTIES', PoP_DefinitionUtils::get_module_definition('example-authorproperties'));
-define ('POP_MODULE_EXAMPLE_TAGPROPERTIES', PoP_DefinitionUtils::get_module_definition('example-tagproperties'));
+define ('POP_MODULE_EXAMPLE_404', \PoP\Engine\DefinitionUtils::get_module_definition('example-404'));
+define ('POP_MODULE_EXAMPLE_HOMEWELCOME', \PoP\Engine\DefinitionUtils::get_module_definition('example-homewelcome'));
+define ('POP_MODULE_EXAMPLE_COMMENT', \PoP\Engine\DefinitionUtils::get_module_definition('example-comment'));
+define ('POP_MODULE_EXAMPLE_AUTHORPROPERTIES', \PoP\Engine\DefinitionUtils::get_module_definition('example-authorproperties'));
+define ('POP_MODULE_EXAMPLE_TAGPROPERTIES', \PoP\Engine\DefinitionUtils::get_module_definition('example-tagproperties'));
 
-class PoP_ExampleModules_Module_Processor_Layouts extends PoP_ProcessorBase {
+class ModuleProcessor_Layouts extends \PoP\Engine\ModuleProcessorBase {
 
 	function get_modules_to_process() {
 	
@@ -32,7 +33,7 @@ class PoP_ExampleModules_Module_Processor_Layouts extends PoP_ProcessorBase {
 
 			case POP_MODULE_EXAMPLE_HOMEWELCOME:
 
-				$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+				$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 				$ret['msg'] = sprintf(
 					__('Welcome to %s!', 'pop-examplemodules'),
 					$cmsapi->get_site_name()
@@ -97,4 +98,4 @@ class PoP_ExampleModules_Module_Processor_Layouts extends PoP_ProcessorBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ExampleModules_Module_Processor_Layouts();
+new ModuleProcessor_Layouts();

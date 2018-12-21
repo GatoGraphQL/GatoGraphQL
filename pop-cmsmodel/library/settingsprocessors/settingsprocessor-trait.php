@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
 
-trait PoPCMSModel_Module_SettingsProcessor_Trait {
+trait SettingsProcessor_Trait {
 
 	function pages_to_process() {
 

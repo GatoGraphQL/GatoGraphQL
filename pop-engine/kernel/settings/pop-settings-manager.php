@@ -1,21 +1,22 @@
 <?php
+namespace PoP\Engine\Settings;
 
-class PoPEngine_Module_SettingsManager {
+class SettingsManager {
 
 	function __construct() {
 
-		PoPEngine_Module_SettingsManager_Factory::set_instance($this);
+		SettingsManager_Factory::set_instance($this);
 	}
 
 	function get_checkpoint_configuration($page_id = null) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		if (!$page_id) {
 
-			$page_id = PoP_ModuleManager_Utils::get_hierarchy_page_id();
+			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 
-		$pop_module_settingsprocessor_manager = PoPEngine_Module_SettingsProcessorManager_Factory::get_instance();
+		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
 		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id/*, $hierarchy*/);
 		$checkpoints = $processor->get_checkpoint_configuration();
 		if ($checkpoints[$page_id]) {
@@ -31,13 +32,13 @@ class PoPEngine_Module_SettingsManager {
 
 	function is_functional($page_id = null) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		if (!$page_id) {
 
-			$page_id = PoP_ModuleManager_Utils::get_hierarchy_page_id();
+			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 
-		$pop_module_settingsprocessor_manager = PoPEngine_Module_SettingsProcessorManager_Factory::get_instance();
+		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
 		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
@@ -53,13 +54,13 @@ class PoPEngine_Module_SettingsManager {
 
 	function is_for_internal_use($page_id = null) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		if (!$page_id) {
 
-			$page_id = PoP_ModuleManager_Utils::get_hierarchy_page_id();
+			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 
-		$pop_module_settingsprocessor_manager = PoPEngine_Module_SettingsProcessorManager_Factory::get_instance();
+		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
 		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
@@ -75,13 +76,13 @@ class PoPEngine_Module_SettingsManager {
 
 	function needs_target_id($page_id = null) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		if (!$page_id) {
 
-			$page_id = PoP_ModuleManager_Utils::get_hierarchy_page_id();
+			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 		
-		$pop_module_settingsprocessor_manager = PoPEngine_Module_SettingsProcessorManager_Factory::get_instance();
+		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
 		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
@@ -97,13 +98,13 @@ class PoPEngine_Module_SettingsManager {
 
 	function get_redirect_url($page_id = null) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		if (!$page_id) {
 
-			$page_id = PoP_ModuleManager_Utils::get_hierarchy_page_id();
+			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 		
-		$pop_module_settingsprocessor_manager = PoPEngine_Module_SettingsProcessorManager_Factory::get_instance();
+		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
 		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
@@ -121,4 +122,4 @@ class PoPEngine_Module_SettingsManager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoPEngine_Module_SettingsManager();
+new SettingsManager();

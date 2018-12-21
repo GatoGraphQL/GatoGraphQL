@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_DefinitionUtils {
+class DefinitionUtils {
 
 	public static function get_manager() {
 

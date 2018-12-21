@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Server;
 
-interface PoP_DefinitionResolver {
+interface DefinitionResolver {
 
 	function get_definition($name, $group);
 	function get_data_to_persist();

@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoPEngine_Module_PageModuleProcessorManager_Factory {
+class PageModuleProcessorManager_Factory {
 
 	protected static $instance;
 

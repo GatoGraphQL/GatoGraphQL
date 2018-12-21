@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Themes;
 
-class PoPEngine_ThemeModeBase {
+abstract class ThemeModeBase {
 
 	function __construct() {
 

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
-class GD_Dataloader_TagListBase extends GD_Dataloader_TagBase {
+abstract class Dataloader_TagListBase extends Dataloader_TagBase {
 
-	use GD_Dataloader_ListTrait;
+	use Dataloader_ListTrait;
 
 	function get_data_query($ids) {
     
@@ -24,7 +25,7 @@ class GD_Dataloader_TagListBase extends GD_Dataloader_TagBase {
 	
     function execute_query($query) {
 
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
     	return $cmsapi->get_tags($query);
 	}
 	

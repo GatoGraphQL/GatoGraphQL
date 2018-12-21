@@ -1,8 +1,7 @@
 <?php
+namespace PoP\Engine\Server;
 
-define ('POP_DEFINITIONGROUP_MODULES', 'modules');
-
-class PoP_DefinitionManager {
+class DefinitionManager {
 
 	private $defined_names, $definition_resolver, $definition_persistance;
 
@@ -11,7 +10,7 @@ class PoP_DefinitionManager {
 		$this->defined_names = array();
 	}
 
-	function setDefinitionResolver(PoP_DefinitionResolver $definition_resolver) {
+	function setDefinitionResolver(DefinitionResolver $definition_resolver) {
 
 		$this->definition_resolver = $definition_resolver;
 
@@ -20,7 +19,7 @@ class PoP_DefinitionManager {
 			$this->definition_persistance->setDefinitionResolver($this->definition_resolver);
 		}
 	}
-	function setDefinitionPersistance(PoP_DefinitionPersistance $definition_persistance) {
+	function setDefinitionPersistance(DefinitionPersistance $definition_persistance) {
 
 		$this->definition_persistance = $definition_persistance;
 
@@ -40,12 +39,12 @@ class PoP_DefinitionManager {
 		$group = $group ? $group : POP_DEFINITIONGROUP_MODULES;
 
 		// If the ID has already been defined, then throw an Exception
-		if (PoP_ServerUtils::fail_if_modules_defined_twice()) {
+		if (Utils::fail_if_modules_defined_twice()) {
 
 			$this->defined_names[$group] = $this->defined_names[$group] ?? array();
 			if (in_array($name, $this->defined_names[$group])) {
 
-				throw new Exception(sprintf('Error with the Defining: another constant/object was already registered with name \'%s\' and group \'%s\' (%s)', $name, $group, full_url()));
+				throw new \Exception(sprintf('Error with the Defining: another constant/object was already registered with name \'%s\' and group \'%s\' (%s)', $name, $group, full_url()));
 			}
 			$this->defined_names[$group][] = $name;
 		}
@@ -55,7 +54,7 @@ class PoP_DefinitionManager {
 		// It is simply used to explicitly say that we need the same name as the module, eg: for the filtercomponents,
 		// so that in the URL params it shows names that make sense (author=...&search=...)
 		// If not mangled, then that's it, use the original $module, do not allow plugins to provide a different value
-		if (!PoP_ServerUtils::is_mangled()) {
+		if (!Utils::is_mangled()) {
 
 			return $name;
 		}
@@ -90,4 +89,4 @@ class PoP_DefinitionManager {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 global $pop_definitionmanager;
-$pop_definitionmanager = new PoP_DefinitionManager();
+$pop_definitionmanager = new DefinitionManager();

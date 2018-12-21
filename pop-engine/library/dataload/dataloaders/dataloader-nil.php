@@ -1,4 +1,6 @@
 <?php
+namespace PoP\Engine\Impl;
+
 /**---------------------------------------------------------------------------------------------------------------
  *
  * Ajax Load Posts Library
@@ -7,7 +9,7 @@
 
 define ('GD_DATALOADER_NIL', 'nil');
 
-class GD_Dataloader_Nil extends GD_QueryDataDataloader {
+class Dataloader_Nil extends \PoP\Engine\QueryDataDataloader {
 
     function get_name() {
     
@@ -18,4 +20,4 @@ class GD_Dataloader_Nil extends GD_QueryDataDataloader {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_Nil();
+new Dataloader_Nil();

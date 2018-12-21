@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
  
-class GD_Dataloader_CommentBase extends GD_QueryDataDataloader {
+abstract class Dataloader_CommentBase extends \PoP\Engine\QueryDataDataloader {
 
 	function get_dataquery() {
 
@@ -19,7 +20,7 @@ class GD_Dataloader_CommentBase extends GD_QueryDataDataloader {
 	
 	function execute_get_data($ids) {
 	
-    	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+    	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$ret = array();
 		foreach ($ids as $id) {
 			$ret[] = $cmsapi->get_comment($id);

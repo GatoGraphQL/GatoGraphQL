@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Themes;
 
-class GD_ThemeStyleBase {
+class ThemeStyleBase {
 
 	function __construct() {
 

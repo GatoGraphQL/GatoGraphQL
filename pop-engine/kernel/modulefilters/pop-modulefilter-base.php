@@ -1,10 +1,11 @@
 <?php
+namespace PoP\Engine;
 
-abstract class PoP_ModuleFilterBase {
+abstract class ModuleFilterBase {
 
 	function __construct() {
 
-		PoP_ModuleFilterManager_Factory::get_instance()->add($this);
+		ModuleFilterManager_Factory::get_instance()->add($this);
 	}
 
 	function get_name() {

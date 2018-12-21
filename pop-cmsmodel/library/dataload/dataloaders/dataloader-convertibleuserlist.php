@@ -1,7 +1,9 @@
 <?php
+namespace PoP\CMSModel;
+
 define ('GD_DATALOADER_CONVERTIBLEUSERLIST', 'convertible-user-list');
 
-class GD_Dataloader_ConvertibleUserList extends GD_Dataloader_UserListBase {
+class Dataloader_ConvertibleUserList extends Dataloader_UserListBase {
 
 	function get_name() {
     
@@ -17,4 +19,4 @@ class GD_Dataloader_ConvertibleUserList extends GD_Dataloader_UserListBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_ConvertibleUserList();
+new Dataloader_ConvertibleUserList();

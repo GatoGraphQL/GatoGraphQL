@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_Module_MemoryManager extends PoP_Module_CacheManagerBase {
+class MemoryManager extends CacheManagerBase {
 
 	function init() {
 
@@ -21,4 +22,4 @@ class PoP_Module_MemoryManager extends PoP_Module_CacheManagerBase {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 global $pop_module_memorymanager;
-$pop_module_memorymanager = new PoP_Module_MemoryManager();
+$pop_module_memorymanager = new MemoryManager();

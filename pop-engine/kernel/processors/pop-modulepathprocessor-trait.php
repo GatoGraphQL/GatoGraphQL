@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-trait PoP_ModulePathProcessorTrait {
+trait ModulePathProcessorTrait {
 
 	//-------------------------------------------------
 	// PUBLIC Functions
@@ -21,8 +22,8 @@ trait PoP_ModulePathProcessorTrait {
 
 	protected function get_module_processor($module) {
 
-		global $pop_module_processor_manager;
-		return $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		return $moduleprocessor_manager->get_processor($module);
 	}
 
 	//-------------------------------------------------
@@ -42,7 +43,7 @@ trait PoP_ModulePathProcessorTrait {
 		$key = $this->get_settings_id($module);
 
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
 			if ($module_ret = $this->$eval_self_fn($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
@@ -56,7 +57,7 @@ trait PoP_ModulePathProcessorTrait {
 		$submodules = $modulefilter_manager->remove_excluded_submodules($module, $submodules);
 
 		// This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_path_manager->prepare_for_propagation($module);
 		$submodules_ret = array();
 		foreach ($submodules as $submodule) {
@@ -78,7 +79,7 @@ trait PoP_ModulePathProcessorTrait {
 	protected function execute_on_self_and_merge_with_datasetmodules($eval_self_fn, $propagate_fn, $module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
 			$ret = $this->$eval_self_fn($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
@@ -93,7 +94,7 @@ trait PoP_ModulePathProcessorTrait {
 		$submodules = $modulefilter_manager->remove_excluded_submodules($module, $submodules);
 
 		// This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_path_manager->prepare_for_propagation($module);
 		foreach ($submodules as $submodule) {
 		
@@ -115,7 +116,7 @@ trait PoP_ModulePathProcessorTrait {
 		$key = $use_settings_id_as_key ? $this->get_settings_id($module) : $module;
 		
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
 			if ($module_ret = $this->$eval_self_fn($module, $props)) {
@@ -128,7 +129,7 @@ trait PoP_ModulePathProcessorTrait {
 		$submodules = $modulefilter_manager->remove_excluded_submodules($module, $submodules);
 
 		// This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_path_manager->prepare_for_propagation($module);
 		$submodules_ret = array();		
 		foreach ($submodules as $submodule) {
@@ -150,7 +151,7 @@ trait PoP_ModulePathProcessorTrait {
 	protected function execute_on_self_and_merge_with_modules($eval_self_fn, $propagate_fn, $module, &$props, $recursive = true) {
 
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
 			$ret = $this->$eval_self_fn($module, $props);
@@ -164,7 +165,7 @@ trait PoP_ModulePathProcessorTrait {
 		$submodules = $modulefilter_manager->remove_excluded_submodules($module, $submodules);
 
 		// This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_path_manager->prepare_for_propagation($module);
 		foreach ($submodules as $submodule) {
 		

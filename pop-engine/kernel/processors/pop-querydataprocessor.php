@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_QueryDataProcessorBase extends PoP_ProcessorBase {
+class QueryDataModuleProcessorBase extends ModuleProcessorBase {
 
-	use PoP_QueryDataProcessorTrait;
+	use QueryDataModuleProcessorTrait;
 }

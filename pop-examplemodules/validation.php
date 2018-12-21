@@ -1,8 +1,9 @@
 <?php
+namespace PoP\ExampleModules;
 
 define('POP_EXAMPLEMODULES_POP_CMSMODEL_MIN_VERSION', 0.1);
 
-class PoP_ExampleModules_Validation {
+class Validation {
 
 	function validate() {
 		

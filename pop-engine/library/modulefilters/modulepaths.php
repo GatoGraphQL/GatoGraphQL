@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('POP_MODULEFILTER_MODULEPATHS', 'modulepaths');
 
-class PoP_ModuleFilter_ModulePaths extends PoP_ModuleFilterBase {
+class ModuleFilter_ModulePaths extends \PoP\Engine\ModuleFilterBase {
 
 	protected $paths, $propagation_unsettled_paths;
 	protected $backlog_unsettled_paths;
@@ -11,7 +12,7 @@ class PoP_ModuleFilter_ModulePaths extends PoP_ModuleFilterBase {
 
 		parent::__construct();
 
-		$this->paths = PoP_ModuleManager_Vars::get_modulepaths();
+		$this->paths = \PoP\Engine\Engine_Vars::get_modulepaths();
 		$this->propagation_unsettled_paths = $this->paths;
 		$this->backlog_unsettled_paths = array();
 	}
@@ -119,7 +120,7 @@ class PoP_ModuleFilter_ModulePaths extends PoP_ModuleFilterBase {
 	}
 	protected function get_backlog_entry() {
 
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = \PoP\Engine\ModulePathManager_Factory::get_instance();
 		return json_encode($module_path_manager->get_propagation_current_path());
 	}
 }
@@ -127,4 +128,4 @@ class PoP_ModuleFilter_ModulePaths extends PoP_ModuleFilterBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ModuleFilter_ModulePaths();
+new ModuleFilter_ModulePaths();

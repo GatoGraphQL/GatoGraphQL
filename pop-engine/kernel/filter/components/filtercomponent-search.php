@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_BaseSearch extends GD_FilterComponent {
+abstract class FilterComponent_SearchBase extends FilterComponentBase {
 	
 	function get_search($filter) {
 	

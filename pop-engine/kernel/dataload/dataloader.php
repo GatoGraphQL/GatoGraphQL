@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-abstract class GD_Dataloader {
+abstract class Dataloader {
 
     function __construct() {
     
@@ -55,7 +56,7 @@ abstract class GD_Dataloader {
 				$dbobjectids[] = $id;	
 
 				do_action(
-					'GD_Dataloader:modify_data_fields', 
+					'Dataloader:modify_data_fields', 
 					array(&$data_fields),
 					$this
 				);

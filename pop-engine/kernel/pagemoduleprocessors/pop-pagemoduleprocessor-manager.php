@@ -1,13 +1,14 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_Module_PageModuleProcessor_Manager {
+class PageModuleProcessor_Manager {
 
 	var $processors;
 	// var $module_pages;
 	
 	function __construct() {
 
-		PoPEngine_Module_PageModuleProcessorManager_Factory::set_instance($this);
+		PageModuleProcessorManager_Factory::set_instance($this);
 
 		$this->processors = array();
 		// $this->module_pages = array();
@@ -47,10 +48,10 @@ class PoP_Module_PageModuleProcessor_Manager {
 	function get_page_module_by_most_allmatching_vars_properties($group = null, $page_id = null, $vars = null) {
 
 		$group = $group ?? POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE;
-		$page_id = $page_id ?? PoP_ModuleManager_Utils::get_hierarchy_page_id();
+		$page_id = $page_id ?? Utils::get_hierarchy_page_id();
 
 		// Allow to pass a custom $vars, with custom values
-		$vars = $vars ?? PoP_ModuleManager_Vars::get_vars();
+		$vars = $vars ?? Engine_Vars::get_vars();
 
 		$processors = $this->get_processors($group);
 		$most_matching_module = false;
@@ -114,4 +115,4 @@ class PoP_Module_PageModuleProcessor_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_Module_PageModuleProcessor_Manager();
+new PageModuleProcessor_Manager();

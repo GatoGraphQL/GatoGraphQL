@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
  
-trait GD_Dataloader_ParamTrait {
+trait Dataloader_ParamTrait {
 
 	protected function get_param_name() {
 
@@ -14,7 +15,7 @@ trait GD_Dataloader_ParamTrait {
 
 			if (is_array($id)) {
 
-				return PoP_ModuleManager_Utils::limit_results($id);
+				return \PoP\Engine\Utils::limit_results($id);
 			}
 
 			return array($id);

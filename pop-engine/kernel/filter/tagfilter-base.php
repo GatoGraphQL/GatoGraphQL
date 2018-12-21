@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_TagFilter extends GD_FilterBase {
+abstract class TagFilterBase extends FilterBase {
 
 	function get_filter_args_override_values() {
 	

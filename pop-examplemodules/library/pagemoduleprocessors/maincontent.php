@@ -1,6 +1,7 @@
 <?php
+namespace PoP\ExampleModules;
 
-class PoP_ExampleModules_MainContentPageModuleProcessor extends PoP_Module_MainContentPageModuleProcessorBase {
+class MainContentPageModuleProcessor extends \PoP\Engine\MainContentPageModuleProcessorBase {
 
 	function get_nopage_modules_by_vars_properties() {
 
@@ -28,4 +29,4 @@ class PoP_ExampleModules_MainContentPageModuleProcessor extends PoP_Module_MainC
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ExampleModules_MainContentPageModuleProcessor();
+new MainContentPageModuleProcessor();

@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-class GD_DataQuery {
+abstract class DataQuery {
 
 	// Allow Plugins to inject extra properties. Eg: PoP User Login can inject loggedinuser-fields
 	protected $properties;

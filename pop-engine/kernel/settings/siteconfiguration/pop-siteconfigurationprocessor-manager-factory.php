@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Settings;
 
-class PoPEngine_Module_SiteConfigurationProcessorManager_Factory {
+class SiteConfigurationProcessorManager_Factory {
 
 	protected static $instance;
 

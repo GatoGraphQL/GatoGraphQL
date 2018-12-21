@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
 
-class GD_Dataloader_PageListBase extends GD_Dataloader_PostListBase {
+abstract class Dataloader_PageListBase extends Dataloader_PostListBase {
 
     function get_data_query($ids) {
     

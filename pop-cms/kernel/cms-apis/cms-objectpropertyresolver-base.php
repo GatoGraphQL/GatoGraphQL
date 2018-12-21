@@ -1,9 +1,10 @@
 <?php
+namespace PoP\CMS;
 
-class PoP_CMS_ObjectPropertyResolver_Base {
+abstract class ObjectPropertyResolver_Base {
 
 	function __construct() {
 
-		PoP_CMS_ObjectPropertyResolver_Factory::set_instance($this);
+		ObjectPropertyResolver_Factory::set_instance($this);
 	}
 }

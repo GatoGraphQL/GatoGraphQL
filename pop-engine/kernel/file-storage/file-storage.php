@@ -1,5 +1,7 @@
 <?php
-class PoP_Engine_FileStorage {
+namespace PoP\Engine\FileStorage;
+
+class FileStorage {
 
 	function save_file($file, $contents) {
 
@@ -28,4 +30,4 @@ class PoP_Engine_FileStorage {
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $pop_engine_filestorage;
-$pop_engine_filestorage = new PoP_Engine_FileStorage();
+$pop_engine_filestorage = new FileStorage();

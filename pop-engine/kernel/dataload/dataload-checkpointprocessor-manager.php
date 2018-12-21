@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_Dataload_CheckpointProcessor_Manager {
+class CheckpointProcessor_Manager {
 
 	var $processors;
 	
@@ -33,4 +34,4 @@ class GD_Dataload_CheckpointProcessor_Manager {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_dataload_checkpointprocessor_manager;
-$gd_dataload_checkpointprocessor_manager = new GD_Dataload_CheckpointProcessor_Manager();
+$gd_dataload_checkpointprocessor_manager = new CheckpointProcessor_Manager();

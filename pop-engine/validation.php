@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine;
 
 define('POP_ENGINE_POP_CMS_MIN_VERSION', 0.1);
 
-class PoPEngine_Validation {
+class Validation {
 
 	function validate() {
 		
@@ -25,7 +26,7 @@ class PoPEngine_Validation {
 			add_action('network_admin_notices', array($this, 'version_warning'));
 		}
 		// Validate that there is at least one implementation of the CMS
-		elseif (is_null(PoP_CMS_FunctionAPI_Factory::get_instance())) {
+		elseif (is_null(\PoP\CMS\FunctionAPI_Factory::get_instance())) {
 
 			add_action('admin_notices', array($this, 'cmsimplementation_warning'));
 			add_action('network_admin_notices', array($this, 'cmsimplementation_warning'));

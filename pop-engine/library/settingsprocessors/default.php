@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Settings\Impl;
 
-class PoPEngine_Module_DefaultSettingsProcessor extends PoPEngine_Module_DefaultSettingsProcessorBase {
+class DefaultSettingsProcessor extends \PoP\Engine\Settings\DefaultSettingsProcessorBase {
 
 	
 }
@@ -8,4 +9,4 @@ class PoPEngine_Module_DefaultSettingsProcessor extends PoPEngine_Module_Default
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoPEngine_Module_DefaultSettingsProcessor();
+new DefaultSettingsProcessor();

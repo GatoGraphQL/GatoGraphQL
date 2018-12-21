@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('GD_DATALOAD_QUERYHANDLER_REDIRECT', 'redirect');
 
-class GD_DataLoad_QueryHandler_Redirect extends GD_DataLoad_QueryHandler_ActionExecution {
+class QueryHandler_Redirect extends QueryHandler_ActionExecution {
 
     function get_name() {
     
@@ -60,4 +61,4 @@ class GD_DataLoad_QueryHandler_Redirect extends GD_DataLoad_QueryHandler_ActionE
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_QueryHandler_Redirect();
+new QueryHandler_Redirect();

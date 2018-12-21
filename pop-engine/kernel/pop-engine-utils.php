@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_ModuleManager_Utils {
+class Utils {
 
 	public static $errors = array();
 	
@@ -16,12 +17,12 @@ class PoP_ModuleManager_Utils {
 
 	public static function is_search_engine() {
 
-		return apply_filters('PoP_ModuleManager_Utils:is_search_engine', false);
+		return apply_filters('\PoP\Engine\Utils:is_search_engine', false);
 	}
 
 	public static function get_checkpoint_configuration($page_id = null) {
 
-		$pop_module_settingsmanager = PoPEngine_Module_SettingsManager_Factory::get_instance();
+		$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
 		return $pop_module_settingsmanager->get_checkpoint_configuration($page_id);
 	}
 
@@ -35,7 +36,7 @@ class PoP_ModuleManager_Utils {
 
         // Allow to add 'requires-user-state' by PoP UserState dependency
         return apply_filters(
-            'PoP_ModuleManager_Utils:is_server_access_mandatory',
+            '\PoP\Engine\Utils:is_server_access_mandatory',
             $mandatory,
             $checkpoint_configuration
         );
@@ -62,7 +63,7 @@ class PoP_ModuleManager_Utils {
 
 		// Strip the Target and Output off it, users don't need to see those
 		$remove_params = apply_filters(
-			'PoP_ModuleManager_Utils:current_url:remove_params',
+			'\PoP\Engine\Utils:current_url:remove_params',
 			array(
 				GD_URLPARAM_SETTINGSFORMAT, 
 				GD_URLPARAM_VERSION, 
@@ -87,14 +88,14 @@ class PoP_ModuleManager_Utils {
 		$url = remove_query_arg($remove_params, full_url());
 
 		// Allow plug-ins to do their own logic to the URL
-		$url = apply_filters('PoP_ModuleManager_Utils:get_current_url', $url);
+		$url = apply_filters('\PoP\Engine\Utils:get_current_url', $url);
 
 		return urldecode($url);
 	}
 
 	public static function get_framecomponent_modules() {
 	
-		return apply_filters('PoP_ModuleManager_Utils:get_framecomponent_modules', array());
+		return apply_filters('\PoP\Engine\Utils:get_framecomponent_modules', array());
 	}
 
 	public static function add_tab($url, $page_id) {
@@ -187,7 +188,7 @@ class PoP_ModuleManager_Utils {
 
 	public static function get_hierarchy_page_id() {
 	
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		$hierarchy = $vars['hierarchy'];
 		if ($vars['global-state']['is-page']) {
 
@@ -249,7 +250,7 @@ class PoP_ModuleManager_Utils {
 
 	public static function get_datastructure_formatter() {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 
 		global $gd_dataload_datastructureformat_manager;
 		return $gd_dataload_datastructureformat_manager->get_datastructure_formatter($vars['datastructure']);
@@ -263,7 +264,7 @@ class PoP_ModuleManager_Utils {
 
 	public static function fetching_site() {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		return $vars['fetching-site'];
 	}
 
@@ -271,13 +272,13 @@ class PoP_ModuleManager_Utils {
 
 		// If we are doing JSON (or any other output) AND we setting the target, then we're loading content dynamically and we need it to be JSON
 		// Otherwise, it is the first time loading website => loading_site
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		return $vars['loading-site'];
 	}
 
 	public static function is_page($page_id_or_ids) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		if ($vars['global-state']['is-page']) {
 
 			$vars_page_id = $vars['global-state']['queried-object-id'];

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define('POP_CMSMODEL_POP_ENGINE_MIN_VERSION', 0.1);
 
-class PoP_CMSModel_Validation {
+class Validation {
 
 	function get_provider_validation_class() {
 		

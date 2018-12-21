@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Settings;
 
-class PoPEngine_Module_SettingsProcessorBase {
+abstract class SettingsProcessorBase {
 
 	function __construct() {
 
@@ -13,7 +14,7 @@ class PoPEngine_Module_SettingsProcessorBase {
 
 	function init() {
 
-		$pop_module_settingsprocessor_manager = PoPEngine_Module_SettingsProcessorManager_Factory::get_instance();
+		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
 		$pop_module_settingsprocessor_manager->add($this);
 	}
 

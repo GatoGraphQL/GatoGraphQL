@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_PAGELIST', 'page-list');
 
-class GD_Dataloader_PageList extends GD_Dataloader_PageListBase {
+class Dataloader_PageList extends Dataloader_PageListBase {
 
 	function get_name() {
     
@@ -13,4 +14,4 @@ class GD_Dataloader_PageList extends GD_Dataloader_PageListBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_PageList();
+new Dataloader_PageList();

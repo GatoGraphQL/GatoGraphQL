@@ -1,10 +1,11 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_ModulePathManager_Utils {
+class ModulePathManager_Utils {
 
 	public static function get_stringified_module_propagation_current_path($module) {
 
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_propagation_current_path = $module_path_manager->get_propagation_current_path();
 		$module_propagation_current_path[] = $module;
 		return self::stringify_module_path($module_propagation_current_path);

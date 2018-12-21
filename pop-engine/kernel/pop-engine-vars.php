@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_ModuleManager_Vars {
+class Engine_Vars {
 
 	public static $vars = array();
 	public static $query;
@@ -10,7 +11,7 @@ class PoP_ModuleManager_Vars {
 		self::$vars = array();
 
 		// Allow WP to set the new $query
-		do_action('PoP_ModuleManager_Utils:reset');
+		do_action('\PoP\Engine\Engine_Vars:reset');
 	}
 
 	public static function set_query($query) {
@@ -46,7 +47,7 @@ class PoP_ModuleManager_Vars {
 			foreach ($paths as $path) {
 
 				// Each path must be converted to an array of the modules
-				$ret[] = PoP_ModulePathManager_Utils::recast_module_path($path);
+				$ret[] = ModulePathManager_Utils::recast_module_path($path);
 			}
 		}
 
@@ -55,11 +56,11 @@ class PoP_ModuleManager_Vars {
 
 	public static function get_hierarchy($query) {
 
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		
 		// Check all the available hierarchies, and analyze the query against each. 
 		// The first one that matches, then that's the hierarchy
-		foreach (PoPEngine_Module_HierarchyManager::get_hierarchies() as $maybe_hierarchy) {
+		foreach (HierarchyManager::get_hierarchies() as $maybe_hierarchy) {
 
 			if ($cmsapi->query_is_hierarchy($query, $maybe_hierarchy)) {
 				return $maybe_hierarchy;
@@ -75,7 +76,7 @@ class PoP_ModuleManager_Vars {
 		// If there's no query, set the global one
 		if (!$query) {
 
-			$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+			$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 			return $cmsapi->get_global_query();
 		}
 
@@ -90,14 +91,14 @@ class PoP_ModuleManager_Vars {
 
 		// From the query object we are able to obtain the hierarchy for the current request. Based on the global $wp_query object
 		self::$query = apply_filters(
-			'PoP_ModuleManager_Utils:query',
+			'\PoP\Engine\Engine_Vars:query',
 			self::get_query_object(self::$query)
 		);
 
 		// The hierarchy is a concept taken from WordPress. It depends on the structure of the URL
 		// By default is a page, since everything is a page unless the URL suits a more specialized hierarchy
 		$hierarchy = apply_filters(
-			'PoP_ModuleManager_Utils:hierarchy',
+			'\PoP\Engine\Engine_Vars:hierarchy',
 			self::get_hierarchy(self::$query)
 		);
 
@@ -107,12 +108,12 @@ class PoP_ModuleManager_Vars {
 		$datastructure = $_REQUEST[GD_URLPARAM_DATASTRUCTURE];
 		$dataoutputmode = $_REQUEST[GD_URLPARAM_DATAOUTPUTMODE];
 		$target = $_REQUEST[GD_URLPARAM_TARGET];
-		$mangled = PoP_ServerUtils::is_mangled() ? '' : GD_URLPARAM_MANGLED_NONE;
+		$mangled = Server\Utils::is_mangled() ? '' : GD_URLPARAM_MANGLED_NONE;
 		$tab = $_REQUEST[GD_URLPARAM_TAB];
 		$action = $_REQUEST[GD_URLPARAM_ACTION];
 
 		$outputs = apply_filters(
-			'PoP_ModuleManager_Utils:outputs',
+			'\PoP\Engine\Engine_Vars:outputs',
 			array(
 				GD_URLPARAM_OUTPUT_HTML,
 				GD_URLPARAM_OUTPUT_JSON,
@@ -143,7 +144,7 @@ class PoP_ModuleManager_Vars {
 			$dataoutputitems = array($dataoutputitems);
 		}
 		$alldataoutputitems = apply_filters(
-			'PoP_ModuleManager_Utils:dataoutputitems',
+			'\PoP\Engine\Engine_Vars:dataoutputitems',
 			array(
 				GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
 	            GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
@@ -163,7 +164,7 @@ class PoP_ModuleManager_Vars {
 		// We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
 		// (ie initial load) and when target is provided (ie loading pageSection)
 		$targets = apply_filters(
-			'PoP_ModuleManager_Utils:targets',
+			'\PoP\Engine\Engine_Vars:targets',
 			array(
 				POP_TARGET_MAIN,
 			)
@@ -172,7 +173,7 @@ class PoP_ModuleManager_Vars {
 			$target = POP_TARGET_MAIN;
 		}
 		
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		$modulefilter = $modulefilter_manager->get_selected_filter_name();
 		
 		$fetching_site = is_null($modulefilter);
@@ -230,7 +231,7 @@ class PoP_ModuleManager_Vars {
 		}
 		
 
-		if (PoP_ServerUtils::enable_config_by_params()) {
+		if (Server\Utils::enable_config_by_params()) {
 
 			self::$vars['config'] = $_REQUEST[POP_URLPARAM_CONFIG];
 		}
@@ -240,7 +241,7 @@ class PoP_ModuleManager_Vars {
 
 		// Allow for plug-ins to add their own vars
 		do_action(
-			'PoP_ModuleManager_Utils:add_vars', 
+			'\PoP\Engine\Engine_Vars:add_vars', 
 			array(&self::$vars), 
 			self::$query
 		);
@@ -274,14 +275,14 @@ class PoP_ModuleManager_Vars {
 			self::set_hierarchy_in_global_state();
 
 			do_action(
-				'PoP_ModuleManager_Utils:calculate_and_set_vars_state:reset', 
+				'\PoP\Engine\Engine_Vars:calculate_and_set_vars_state:reset', 
 				array(&self::$vars), 
 				self::$query
 			);
 		}
 
 		do_action(
-			'PoP_ModuleManager_Utils:calculate_and_set_vars_state', 
+			'\PoP\Engine\Engine_Vars:calculate_and_set_vars_state', 
 			array(&self::$vars), 
 			self::$query
 		);
@@ -293,7 +294,7 @@ class PoP_ModuleManager_Vars {
 			// If filtering module by "maincontent", then calculate which is the main content module
 			if (self::$vars['modulefilter'] == POP_MODULEFILTER_MAINCONTENTMODULE) {
 
-				$pop_module_pagemoduleprocessor_manager = PoPEngine_Module_PageModuleProcessorManager_Factory::get_instance();
+				$pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::get_instance();
 				self::$vars['maincontentmodule'] = $pop_module_pagemoduleprocessor_manager->get_page_module_by_most_allmatching_vars_properties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
 			}
 		}

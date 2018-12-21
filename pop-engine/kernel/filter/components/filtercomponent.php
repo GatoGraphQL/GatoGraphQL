@@ -1,19 +1,20 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent {
+abstract class FilterComponentBase {
 
 	function get_filterinput_value($filter) {
 	
-		global $pop_module_processor_manager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		$filterinput = $this->get_filterinput();
-		return $pop_module_processor_manager->get_processor($filterinput)->get_value($filterinput, $filter);
+		return $moduleprocessor_manager->get_processor($filterinput)->get_value($filterinput, $filter);
 	}
 
 	function get_name() {
 	
-		global $pop_module_processor_manager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		$filterinput = $this->get_filterinput();
-		return $pop_module_processor_manager->get_processor($filterinput)->get_name($filterinput);
+		return $moduleprocessor_manager->get_processor($filterinput)->get_name($filterinput);
 	}
 	
 	function get_filterinput() {

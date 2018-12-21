@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-trait PoP_QueryDataProcessorTrait {
+trait QueryDataModuleProcessorTrait {
 
 	protected function get_immutable_dataload_query_args($module, $props) {
 

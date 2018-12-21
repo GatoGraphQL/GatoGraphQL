@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATAQUERY_POST', 'post');
 
-class GD_DataQuery_Post extends GD_DataQuery {
+class DataQuery_Post extends \PoP\Engine\DataQuery {
 
 	function get_name() {
 
@@ -26,4 +27,4 @@ class GD_DataQuery_Post extends GD_DataQuery {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataQuery_Post();
+new DataQuery_Post();

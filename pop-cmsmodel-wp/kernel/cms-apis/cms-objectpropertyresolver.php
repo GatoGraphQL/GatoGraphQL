@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel\WP;
 
-class PoP_CMSModelWP_ObjectPropertyResolver extends PoP_CMSWP_ObjectPropertyResolver implements PoP_CMSModel_CMS_ObjectPropertyResolver {
+class ObjectPropertyResolver extends \PoP\CMS\WP\ObjectPropertyResolver implements \PoP\CMSModel\ObjectPropertyResolver {
 
 	/***********************************************************/
 	/** Functions to access object properties */
@@ -194,4 +195,4 @@ class PoP_CMSModelWP_ObjectPropertyResolver extends PoP_CMSWP_ObjectPropertyReso
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_CMSModelWP_ObjectPropertyResolver();
+new ObjectPropertyResolver();

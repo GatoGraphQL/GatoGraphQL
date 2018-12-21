@@ -1,18 +1,19 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_Engine_Hooks {
+class Engine_Hooks {
 
 	function __construct() {
 
 		// Add functions as hooks, so we allow PoP_Application to set the 'global-state' first
 		add_action(
-			'PoP_ModuleManager_Utils:add_vars',
+			'\PoP\Engine\Engine_Vars:add_vars',
 			array($this, 'add_vars'),
 			10,
 			1
 		);
 		add_filter(
-			'PoP_Module_ModelInstanceProcessor:model_instance_components_from_vars',
+			'ModelInstanceProcessor:model_instance_components_from_vars',
 			array($this, 'get_model_instance_components_from_vars')
 		);
 	}
@@ -52,7 +53,7 @@ class PoP_Engine_Hooks {
 
 		// Allow WP API to set the "global-state" first
 		// Each page is an independent configuration
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		if ($vars['global-state']['is-page']) {
 
 			global $gd_dataquery_manager;
@@ -83,5 +84,5 @@ class PoP_Engine_Hooks {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_Engine_Hooks();
+new Engine_Hooks();
 

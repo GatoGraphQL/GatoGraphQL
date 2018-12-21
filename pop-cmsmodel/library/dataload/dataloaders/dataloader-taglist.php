@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_TAGLIST', 'tag-list');
 
-class GD_Dataloader_TagList extends GD_Dataloader_TagListBase {
+class Dataloader_TagList extends Dataloader_TagListBase {
 
 	function get_name() {
     
@@ -13,4 +14,4 @@ class GD_Dataloader_TagList extends GD_Dataloader_TagListBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_TagList();
+new Dataloader_TagList();

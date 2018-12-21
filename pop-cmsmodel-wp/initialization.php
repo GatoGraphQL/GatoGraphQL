@@ -1,5 +1,7 @@
 <?php
-class PoP_CMSModelWP_Initialization {
+namespace PoP\CMSModel\WP;
+
+class Initialization {
 
 	function initialize(){
 

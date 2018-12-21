@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Server;
 
-class PoP_ServerUtils {
+class Utils {
 
 	protected static $override_configuration;
 
@@ -10,7 +11,7 @@ class PoP_ServerUtils {
 		// "config": comma-separated string with all fields with value "true"
 		// Whatever fields are not there, will be considered "false"
 		self::$override_configuration = array();
-		if (PoP_ServerUtils::enable_config_by_params()) {
+		if (self::enable_config_by_params()) {
 			
 			self::$override_configuration = $_REQUEST[POP_URLPARAM_CONFIG] ? explode(',', $_REQUEST[POP_URLPARAM_CONFIG]) : array();
 		}
@@ -113,4 +114,4 @@ class PoP_ServerUtils {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-PoP_ServerUtils::init();
+Utils::init();

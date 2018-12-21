@@ -1,3 +1,3 @@
 <?php
 
-define ('POP_TARGET_MAIN', 'main');
+const POP_TARGET_MAIN = 'main';

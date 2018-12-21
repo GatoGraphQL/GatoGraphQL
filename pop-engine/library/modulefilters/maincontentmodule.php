@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('POP_MODULEFILTER_MAINCONTENTMODULE', 'maincontentmodule');
 
-class PoP_ModuleFilter_MainContentModule extends PoP_ModuleFilterBase {
+class ModuleFilter_MainContentModule extends \PoP\Engine\ModuleFilterBase {
 
 	function get_name() {
 
@@ -11,7 +12,7 @@ class PoP_ModuleFilter_MainContentModule extends PoP_ModuleFilterBase {
 
 	function exclude_module($module, &$props) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		return $vars['maincontentmodule'] != $module;
 	}
 }
@@ -19,4 +20,4 @@ class PoP_ModuleFilter_MainContentModule extends PoP_ModuleFilterBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ModuleFilter_MainContentModule();
+new ModuleFilter_MainContentModule();

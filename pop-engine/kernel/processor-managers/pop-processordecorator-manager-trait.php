@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-trait PoP_Module_ProcessorDecorator_ManagerTrait {
+trait ProcessorDecorator_ManagerTrait {
 
 	var $settings, $processordecorators;
 	

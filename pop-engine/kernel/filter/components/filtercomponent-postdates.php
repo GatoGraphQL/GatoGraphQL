@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_PostDates extends GD_FilterComponent {
+abstract class FilterComponent_PostDatesBase extends FilterComponentBase {
 	
 	function get_postdates($filter) {
 

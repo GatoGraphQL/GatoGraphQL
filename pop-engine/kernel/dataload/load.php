@@ -30,4 +30,3 @@ require_once 'dataquery-hook-base.php';
 require_once 'dataloader.php';
 require_once 'querydata-dataloader.php';
 require_once 'filterquery-dataloader-trait.php';
-require_once 'dataloader-static.php';

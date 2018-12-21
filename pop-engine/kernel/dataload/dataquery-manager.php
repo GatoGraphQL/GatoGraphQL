@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-class GD_DataQuery_Manager {
+class DataQuery_Manager {
 
     var $dataqueries;
     
@@ -74,4 +75,4 @@ class GD_DataQuery_Manager {
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_dataquery_manager;
-$gd_dataquery_manager = new GD_DataQuery_Manager();
+$gd_dataquery_manager = new DataQuery_Manager();

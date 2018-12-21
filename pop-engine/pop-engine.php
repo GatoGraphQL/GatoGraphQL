@@ -7,6 +7,7 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
+namespace PoP\Engine;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -18,7 +19,7 @@ define ('POP_ENGINE_LIB', POP_ENGINE_DIR.'/library' );
 define ('POP_ENGINE_KERNEL', POP_ENGINE_DIR.'/kernel' );
 define ('POP_ENGINE_TEMPLATES', POP_ENGINE_DIR.'/templates');
 
-class PoPEngine {
+class Plugin {
 
 	function __construct() {
 		
@@ -58,13 +59,13 @@ class PoPEngine {
 	function validate(){
 		
 		require_once 'validation.php';
-		$validation = new PoPEngine_Validation();
+		$validation = new Validation();
 		return $validation->validate();	
 	}
 	function initialize() {
 
 		require_once 'initialization.php';
-		$initialization = new PoPEngine_Initialization();
+		$initialization = new Initialization();
 		return $initialization->initialize();	
 	}
 }
@@ -73,5 +74,5 @@ class PoPEngine {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 if (!defined('POP_SERVER_DISABLEPOP') || !POP_SERVER_DISABLEPOP) {
-	new PoPEngine();
+	new Plugin();
 }

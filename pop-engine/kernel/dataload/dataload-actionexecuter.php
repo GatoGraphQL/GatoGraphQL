@@ -1,10 +1,11 @@
 <?php
+namespace PoP\Engine;
 
-class GD_DataLoad_ActionExecuter {
+class ActionExecuter {
 
 	function __construct() {
     
-		$gd_dataload_actionexecution_manager = GD_DataLoad_ActionExecution_Manager_Factory::get_instance();
+		$gd_dataload_actionexecution_manager = ActionExecution_Manager_Factory::get_instance();
 		$gd_dataload_actionexecution_manager->add_actionexecutioner($this->get_name(), $this);
 	}
 

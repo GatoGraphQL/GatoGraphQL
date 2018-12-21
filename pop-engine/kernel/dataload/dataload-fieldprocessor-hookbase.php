@@ -1,8 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-define ('GD_DATALOAD_FIELDPROCESSOR_FIELDTYPE_DBDATA', 'dbdata');
-
-class GD_DataLoad_FieldProcessor_HookBase {
+class FieldProcessor_HookBase {
 
 	/**
 	 * Function to override
@@ -38,7 +37,7 @@ class GD_DataLoad_FieldProcessor_HookBase {
 
 	function get_value($resultitem, $field, $fieldprocessor) {
 	
-		return new WP_Error('no-field');
+		return new \WP_Error('no-field');
 	}
 
 	function get_field_type() {

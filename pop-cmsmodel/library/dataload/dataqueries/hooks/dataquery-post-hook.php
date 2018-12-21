@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
  
-class GD_DataQuery_PostHook extends GD_DataQuery_PostHookBase {
+class DataQuery_PostHook extends DataQuery_PostHookBase {
 
 	function get_nocachefields() {
 
@@ -11,4 +12,4 @@ class GD_DataQuery_PostHook extends GD_DataQuery_PostHookBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataQuery_PostHook();
+new DataQuery_PostHook();

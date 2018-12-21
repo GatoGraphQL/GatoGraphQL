@@ -1,9 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-define ('POP_CACHE_EXT_JSON', '.json');
-define ('POP_CACHE_EXT_HTML', '.html');
-
-class PoP_Module_CacheManagerBase {
+class CacheManagerBase {
 
 	function __construct() {
 
@@ -44,7 +42,7 @@ class PoP_Module_CacheManagerBase {
 
 	function get_file_by_model_instance($type, $ext = '') {
 
-		$model_instance_id = PoP_Module_ModelInstanceProcessor_Utils::get_model_instance_id();
+		$model_instance_id = ModelInstanceProcessor_Utils::get_model_instance_id();
 		return $this->get_file($model_instance_id, $type, $ext);
 	}
 
@@ -108,7 +106,7 @@ class PoP_Module_CacheManagerBase {
 
 	function cache_exists_by_model_instance($type, $ext = '') {
 
-		$model_instance_id = PoP_Module_ModelInstanceProcessor_Utils::get_model_instance_id();
+		$model_instance_id = ModelInstanceProcessor_Utils::get_model_instance_id();
 		return $this->cache_exists($model_instance_id, $type, $ext);
 	}
 
@@ -120,7 +118,7 @@ class PoP_Module_CacheManagerBase {
 
 	function get_cache_by_model_instance($type, $decode = false, $ext = '') {
 
-		$model_instance_id = PoP_Module_ModelInstanceProcessor_Utils::get_model_instance_id();
+		$model_instance_id = ModelInstanceProcessor_Utils::get_model_instance_id();
 		return $this->get_cache($model_instance_id, $type, $decode, $ext);
 	}
 
@@ -160,7 +158,7 @@ class PoP_Module_CacheManagerBase {
 
 	function store_cache_by_model_instance($type, $contents_or_object, $encode = false, $ext = '') {
 
-		$model_instance_id = PoP_Module_ModelInstanceProcessor_Utils::get_model_instance_id();
+		$model_instance_id = ModelInstanceProcessor_Utils::get_model_instance_id();
 		return $this->store_cache($model_instance_id, $type, $contents_or_object, $encode, $ext);
 	}
 

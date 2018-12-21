@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-class GD_DataLoad_Manager {
+class Manager {
 
     var $dataloaders;
     
@@ -19,7 +20,7 @@ class GD_DataLoad_Manager {
 		$dataloader = $this->dataloaders[$name];
 		if (!$dataloader) {
 
-			throw new Exception(sprintf('Ther is no Dataloader with name \'%s\' (%s)', $name, full_url()));
+			throw new \Exception(sprintf('Ther is no Dataloader with name \'%s\' (%s)', $name, full_url()));
 		}
 
 		return $dataloader;
@@ -30,4 +31,4 @@ class GD_DataLoad_Manager {
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_dataload_manager;
-$gd_dataload_manager = new GD_DataLoad_Manager();
+$gd_dataload_manager = new Manager();

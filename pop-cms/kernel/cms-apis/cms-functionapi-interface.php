@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMS;
 
-interface PoP_CMS_FunctionAPI {
+interface FunctionAPI {
 
 	/***********************************************************/
 	/** Most functions below are 1 to 1 with WordPress signature */

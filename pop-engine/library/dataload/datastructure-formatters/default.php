@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
  
 define ('GD_DATALOAD_DATASTRUCTURE_DEFAULT', 'default');
 
-class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructureFormatter {
+class DataStructureFormatter_Default extends \PoP\Engine\DataStructureFormatter {
 
 	function get_name() {
 			
@@ -13,7 +14,7 @@ class GD_DataLoad_DataStructureFormatter_Default extends GD_DataLoad_DataStructu
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-$gd_dataload_formatter_default = new GD_DataLoad_DataStructureFormatter_Default();
+$gd_dataload_formatter_default = new DataStructureFormatter_Default();
 
 // Set as the default one
 global $gd_dataload_datastructureformat_manager;

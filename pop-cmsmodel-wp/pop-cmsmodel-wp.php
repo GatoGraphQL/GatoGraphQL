@@ -7,6 +7,7 @@ Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
+namespace PoP\CMSModel\WP;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
@@ -15,7 +16,7 @@ define ('POP_CMSMODELWP_VERSION', 0.106);
 define ('POP_CMSMODELWP_DIR', dirname(__FILE__));
 define ('POP_CMSMODELWP_LIB', POP_CMSMODELWP_DIR.'/library');
 
-class PoP_CMSModelWP {
+class Plugin {
 
 	function __construct(){
 		
@@ -30,7 +31,7 @@ class PoP_CMSModelWP {
 	}
 	function get_provider_validation_class($class) {
 
-		return PoP_CMSModelWP_Validation;
+		return Validation::class;
 	}
 	
 	function init(){
@@ -44,13 +45,13 @@ class PoP_CMSModelWP {
 	function validate(){
 		
 		// require_once 'validation.php';
-		$validation = new PoP_CMSModelWP_Validation();
+		$validation = new Validation();
 		return $validation->validate();	
 	}
 	function initialize(){
 
 		require_once 'initialization.php';
-		$initialization = new PoP_CMSModelWP_Initialization();
+		$initialization = new Initialization();
 		return $initialization->initialize();	
 	}
 }
@@ -59,5 +60,5 @@ class PoP_CMSModelWP {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 if (!defined('POP_SERVER_DISABLEPOP') || !POP_SERVER_DISABLEPOP) {
-	new PoP_CMSModelWP();
+	new Plugin();
 }

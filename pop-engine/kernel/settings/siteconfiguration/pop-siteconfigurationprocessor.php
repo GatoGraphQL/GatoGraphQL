@@ -1,10 +1,11 @@
 <?php
+namespace PoP\Engine\Settings;
 
-class PoPEngine_Module_SiteConfigurationProcessorBase {
+class SiteConfigurationProcessorBase {
 
 	function __construct() {
 
-		PoPEngine_Module_SiteConfigurationProcessorManager_Factory::get_instance()->set($this);
+		SiteConfigurationProcessorManager_Factory::get_instance()->set($this);
 	}
 
 	function get_entry_module() {

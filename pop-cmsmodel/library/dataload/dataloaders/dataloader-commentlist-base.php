@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
  
-class GD_Dataloader_CommentListBase extends GD_Dataloader_CommentBase {
+abstract class Dataloader_CommentListBase extends Dataloader_CommentBase {
 
-	use GD_Dataloader_ListTrait;
+	use Dataloader_ListTrait;
 }

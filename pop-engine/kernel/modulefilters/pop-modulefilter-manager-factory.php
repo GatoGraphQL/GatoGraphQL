@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_ModuleFilterManager_Factory {
+class ModuleFilterManager_Factory {
 
 	protected static $instance;
 

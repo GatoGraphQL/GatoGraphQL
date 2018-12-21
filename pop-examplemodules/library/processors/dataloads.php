@@ -1,15 +1,16 @@
 <?php
+namespace PoP\ExampleModules;
 
-define ('POP_MODULE_EXAMPLE_LATESTPOSTS', PoP_DefinitionUtils::get_module_definition('example-latestposts'));
-define ('POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS', PoP_DefinitionUtils::get_module_definition('example-authorlatestposts'));
-define ('POP_MODULE_EXAMPLE_AUTHORDESCRIPTION', PoP_DefinitionUtils::get_module_definition('example-authordescription'));
-define ('POP_MODULE_EXAMPLE_TAGLATESTPOSTS', PoP_DefinitionUtils::get_module_definition('example-taglatestposts'));
-define ('POP_MODULE_EXAMPLE_TAGDESCRIPTION', PoP_DefinitionUtils::get_module_definition('example-tagdescription'));
-define ('POP_MODULE_EXAMPLE_SINGLE', PoP_DefinitionUtils::get_module_definition('example-single'));
-define ('POP_MODULE_EXAMPLE_PAGE', PoP_DefinitionUtils::get_module_definition('example-page'));
-define ('POP_MODULE_EXAMPLE_HOMESTATICPAGE', PoP_DefinitionUtils::get_module_definition('example-homestaticpage'));
+define ('POP_MODULE_EXAMPLE_LATESTPOSTS', \PoP\Engine\DefinitionUtils::get_module_definition('example-latestposts'));
+define ('POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS', \PoP\Engine\DefinitionUtils::get_module_definition('example-authorlatestposts'));
+define ('POP_MODULE_EXAMPLE_AUTHORDESCRIPTION', \PoP\Engine\DefinitionUtils::get_module_definition('example-authordescription'));
+define ('POP_MODULE_EXAMPLE_TAGLATESTPOSTS', \PoP\Engine\DefinitionUtils::get_module_definition('example-taglatestposts'));
+define ('POP_MODULE_EXAMPLE_TAGDESCRIPTION', \PoP\Engine\DefinitionUtils::get_module_definition('example-tagdescription'));
+define ('POP_MODULE_EXAMPLE_SINGLE', \PoP\Engine\DefinitionUtils::get_module_definition('example-single'));
+define ('POP_MODULE_EXAMPLE_PAGE', \PoP\Engine\DefinitionUtils::get_module_definition('example-page'));
+define ('POP_MODULE_EXAMPLE_HOMESTATICPAGE', \PoP\Engine\DefinitionUtils::get_module_definition('example-homestaticpage'));
 
-class PoP_ExampleModules_Module_Processor_Dataloads extends PoP_Processor_DataloadsBase {
+class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase {
 
 	function get_modules_to_process() {
 	
@@ -80,7 +81,7 @@ class PoP_ExampleModules_Module_Processor_Dataloads extends PoP_Processor_Datalo
 
 		$ret = parent::get_mutableonrequest_dataload_query_args($module, $props);
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		switch ($module) {
 
 			case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
@@ -127,9 +128,9 @@ class PoP_ExampleModules_Module_Processor_Dataloads extends PoP_Processor_Datalo
 	function get_data_fields($module, $props) {
 
 		$data_fields = array(
-			POP_MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content'),
-			POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS => array('title', 'content'),
-			POP_MODULE_EXAMPLE_TAGLATESTPOSTS => array('title', 'content'),
+			POP_MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
+			POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS => array('title', 'content', 'url'),
+			POP_MODULE_EXAMPLE_TAGLATESTPOSTS => array('title', 'content', 'url'),
 			POP_MODULE_EXAMPLE_SINGLE => array('title', 'content', 'excerpt', 'status', 'date', 'comments-count', 'post-type', 'cat-slugs', 'tag-names'),
 			POP_MODULE_EXAMPLE_PAGE => array('title', 'content', 'date'),
 			POP_MODULE_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
@@ -144,4 +145,4 @@ class PoP_ExampleModules_Module_Processor_Dataloads extends PoP_Processor_Datalo
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ExampleModules_Module_Processor_Dataloads();
+new ModuleProcessor_Dataloads();

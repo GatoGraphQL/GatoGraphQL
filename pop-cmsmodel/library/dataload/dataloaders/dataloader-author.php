@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_AUTHOR', 'author');
 
-class GD_Dataloader_Author extends GD_Dataloader_UserBase {
+class Dataloader_Author extends Dataloader_UserBase {
 
 	function get_name() {
     
@@ -11,7 +12,7 @@ class GD_Dataloader_Author extends GD_Dataloader_UserBase {
 
 	function get_dbobject_ids($data_properties) {
 	
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		$author = $vars['global-state']['queried-object-id'];
 		return array($author);
 	}
@@ -20,4 +21,4 @@ class GD_Dataloader_Author extends GD_Dataloader_UserBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_Author();
+new Dataloader_Author();

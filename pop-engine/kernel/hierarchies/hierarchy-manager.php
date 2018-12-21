@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoPEngine_Module_HierarchyManager {
+class HierarchyManager {
 
 	public static function get_hierarchies() {
 

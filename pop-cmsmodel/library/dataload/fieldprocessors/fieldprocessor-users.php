@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOAD_FIELDPROCESSOR_USERS', 'users');
  
-class GD_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor {
+class FieldProcessor_Users extends \PoP\Engine\FieldProcessorBase {
 
 	function get_name() {
 	
@@ -17,8 +18,8 @@ class GD_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor {
 			return $hook_value;
 		}
 					
-		$cmsresolver = PoP_CMS_ObjectPropertyResolver_Factory::get_instance();
-    	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
+    	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		$user = $resultitem;
 		switch ($field) {
 		
@@ -27,7 +28,7 @@ class GD_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor {
 
 				// Allow to hook for URE: Make sure we always get the most specific role
 				// Otherwise, users like Leo get role 'administrator'
-			    $value = apply_filters('GD_DataLoad_FieldProcessor_Users:get_value:role', array_shift($user_roles), $this->get_id($user));
+			    $value = apply_filters('FieldProcessor_Users:get_value:role', array_shift($user_roles), $this->get_id($user));
 				break;
 			
 			case 'username' :
@@ -81,7 +82,7 @@ class GD_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor {
 
 	function get_id($resultitem) {
 
-		$cmsresolver = PoP_CMS_ObjectPropertyResolver_Factory::get_instance();
+		$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
 		$user = $resultitem;
 		return $cmsresolver->get_user_id($user);
 	}
@@ -90,4 +91,4 @@ class GD_DataLoad_FieldProcessor_Users extends GD_DataLoad_FieldProcessor {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_FieldProcessor_Users();
+new FieldProcessor_Users();

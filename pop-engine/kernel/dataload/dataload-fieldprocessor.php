@@ -1,8 +1,7 @@
 <?php
+namespace PoP\Engine;
  
-define ('GD_DATALOAD_FIELDPROCESSOR_FILTER', 'pop_module:dataload_fieldprocessor:%s');
-
-class GD_DataLoad_FieldProcessor {
+abstract class FieldProcessorBase {
 
 	function __construct() {
     
@@ -24,9 +23,9 @@ class GD_DataLoad_FieldProcessor {
 				return $this->get_id($resultitem);																													
 		}
 
-		// Comment Leo 29/08/2014: needed for compatibility with GD_Dataloader_ConvertiblePostList
+		// Comment Leo 29/08/2014: needed for compatibility with Dataloader_ConvertiblePostList
 		// (So that data-fields aimed for another post_type are not retrieved)
-		return new WP_Error('no-field');
+		return new \WP_Error('no-field');
 	}	
 
 	function get_hook_value($fieldprocessor, $resultitem, $field) {
@@ -35,7 +34,7 @@ class GD_DataLoad_FieldProcessor {
 		$filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FILTER, $fieldprocessor);
 		
 		// Also send the fieldprocessor along, as to get the id of the $resultitem being passed
-		return apply_filters($filter, new WP_Error('no-field'), $resultitem, $field, $this);
+		return apply_filters($filter, new \WP_Error('no-field'), $resultitem, $field, $this);
 	}
 	
 	function get_name() {

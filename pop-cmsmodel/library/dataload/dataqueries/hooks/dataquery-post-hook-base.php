@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
  
-class GD_DataQuery_PostHookBase extends GD_DataQuery_HookBase {
+abstract class DataQuery_PostHookBase extends \PoP\Engine\DataQuery_HookBase {
 
 	function get_dataquery_name() {
 

@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_Order extends GD_FilterComponent {
+abstract class FilterComponent_OrderBase extends FilterComponentBase {
 	
 	function get_order($filter) {
 	

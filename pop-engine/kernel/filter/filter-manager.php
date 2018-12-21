@@ -1,10 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-define ('GD_FILTER_FILTERING_FIELD', 'filter');
-define ('GD_FORM_INPUT', 'form-input');
-// define ('GD_FILTER_NAME_INPUT', 'filter-name-input');
-
-class GD_Filter_Manager {
+class Filter_Manager {
 
 	var $filters;
 	
@@ -92,7 +89,7 @@ class GD_Filter_Manager {
 		// Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
 		// including both the tag and the already existing taxonomy filtering (eg: categories)
 		// So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		if (($vars['global-state']['is-tag'] || $query['tag']) && $query['tax_query']) {
 
 			// Create the tag item in the taxonomy
@@ -172,4 +169,4 @@ class GD_Filter_Manager {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_filter_manager;
-$gd_filter_manager = new GD_Filter_Manager();
+$gd_filter_manager = new Filter_Manager();

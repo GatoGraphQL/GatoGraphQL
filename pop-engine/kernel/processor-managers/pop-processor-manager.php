@@ -1,11 +1,13 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_Module_Processor_Manager {
+class ModuleProcessor_Manager {
 
 	var $processors;
 	
 	function __construct() {
 	
+		ModuleProcessor_Manager_Factory::set_instance($this);
 		$this->processors = array();
 	}
 	
@@ -14,7 +16,7 @@ class PoP_Module_Processor_Manager {
 		$processor = $this->processors[$module];
 		if (!$processor) {
 
-			throw new Exception(sprintf('No Processor for $module \'%s\' (%s)', $module, full_url()));
+			throw new \Exception(sprintf('No Processor for $module \'%s\' (%s)', $module, full_url()));
 		}
 
 		return $processor;
@@ -32,5 +34,4 @@ class PoP_Module_Processor_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-global $pop_module_processor_manager;
-$pop_module_processor_manager = new PoP_Module_Processor_Manager();
+new ModuleProcessor_Manager();

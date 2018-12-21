@@ -1,14 +1,15 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_Engine {
+class Engine {
 
 	var $data, $helperCalculations, $model_props, $props;
 	protected $nocache_fields, $moduledata, $ids_data_fields, $dbdata, $backgroundload_urls, $extra_uris, $cachedsettings, $output_data;
 
 	function __construct() {
 
-		// Set myself as the PoP_Engine instance in the Factory
-		PoP_Engine_Factory::set_instance($this);
+		// Set myself as the Engine instance in the Factory
+		Engine_Factory::set_instance($this);
 	}
 
 	// function is_cached_settings() {
@@ -28,16 +29,16 @@ class PoP_Engine {
 
 	function get_entry_module() {
 
-		$siteconfiguration = PoPEngine_Module_SiteConfigurationProcessorManager_Factory::get_instance()->get_processor();
+		$siteconfiguration = Settings\SiteConfigurationProcessorManager_Factory::get_instance()->get_processor();
 		if (!$siteconfiguration) {
 
-			throw new Exception('There is no Site Configuration. Hence, we can\'t continue.');
+			throw new \Exception('There is no Site Configuration. Hence, we can\'t continue.');
 		}
 
 		$module = $siteconfiguration->get_entry_module();
 		if (!$module) {
 
-			throw new Exception(sprintf('No entry module for this request (%s)', full_url()));
+			throw new \Exception(sprintf('No entry module for this request (%s)', full_url()));
 		}
 
 		return $module;		
@@ -47,7 +48,7 @@ class PoP_Engine {
 
 		// ETag is needed for the Service Workers
 		// Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
-		if (apply_filters('PoP_Engine:output_data:add_etag_header', true)) {
+		if (apply_filters('\PoP\Engine\Engine:output_data:add_etag_header', true)) {
 
 			// The same page will have different hashs only because of those random elements added each time,
 			// such as the unique_id and the current_time. So remove these to generate the hash
@@ -73,7 +74,7 @@ class PoP_Engine {
 			}
 
 			// Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
-			$commoncode = apply_filters('PoP_Engine:etag_header:commoncode', $commoncode);
+			$commoncode = apply_filters('\PoP\Engine\Engine:etag_header:commoncode', $commoncode);
 
 			header("ETag: ".wp_hash($commoncode));
 		}
@@ -87,7 +88,7 @@ class PoP_Engine {
 		}
 
 		$this->extra_uris = array();
-		if (PoP_ServerUtils::enable_extrauris_by_params()) {
+		if (Server\Utils::enable_extrauris_by_params()) {
 
 			$this->extra_uris = $_REQUEST[GD_URLPARAM_EXTRAURIS] ?? array();
 			$this->extra_uris = is_array($this->extra_uris) ? $this->extra_uris : array($this->extra_uris);
@@ -95,7 +96,7 @@ class PoP_Engine {
 
 		// Enable to add extra URLs in a fixed manner
 		$this->extra_uris = apply_filters(
-			'PoP_Engine:get_extra_uris',
+			'\PoP\Engine\Engine:get_extra_uris',
 			$this->extra_uris
 		);
 
@@ -106,8 +107,8 @@ class PoP_Engine {
 
 		if ($has_extra_uris = !empty($this->get_extra_uris())) {
 
-			$model_instance_id = PoP_Module_ModelInstanceProcessor_Utils::get_model_instance_id();
-			$current_uri = remove_domain(PoP_ModuleManager_Utils::get_current_url());
+			$model_instance_id = ModelInstanceProcessor_Utils::get_model_instance_id();
+			$current_uri = remove_domain(Utils::get_current_url());
 		}
 
 		return array($has_extra_uris, $model_instance_id, $current_uri);
@@ -115,7 +116,7 @@ class PoP_Engine {
 
 	function generate_data() {
 
-		do_action('PoP_Engine:beginning');
+		do_action('\PoP\Engine\Engine:beginning');
 
 		// Process the request and obtain the results
 		$this->data = $this->helperCalculations = array();
@@ -137,10 +138,10 @@ class PoP_Engine {
 				$_SERVER['REQUEST_URI'] = $uri;
 				
 				// Reset $vars so that it gets created anew
-				PoP_ModuleManager_Vars::reset();
+				Engine_Vars::reset();
 
 				// Allow functionalities to be reset too. Eg: ActionExecuter results
-				do_action('PoP_Engine:generate_data:reset');
+				do_action('\PoP\Engine\Engine:generate_data:reset');
 				
 				// Process the request with the new $vars and merge it with all other results
 				// Can't use array_merge_recursive since it creates arrays when the key is the same, which is not what is expected in this case
@@ -149,7 +150,7 @@ class PoP_Engine {
 
 			// Set the previous values back
 			$_SERVER['REQUEST_URI'] = $current_request_uri;
-			PoP_ModuleManager_Vars::reset();
+			Engine_Vars::reset();
 		}
 
 		// Add session/site meta
@@ -167,7 +168,7 @@ class PoP_Engine {
 
 	protected function format_data() {
 
-		$formatter = PoP_ModuleManager_Utils::get_datastructure_formatter();
+		$formatter = Utils::get_datastructure_formatter();
 		$this->data = $formatter->get_formatted_data($this->data);
 	}
 
@@ -190,15 +191,15 @@ class PoP_Engine {
 	// function trigger_output_hooks() {
 		
 	// 	// Allow extra functionalities. Eg: Save the logged-in user meta information
-	// 	do_action('PoP_Engine:output:end');
-	// 	do_action('PoP_Engine:rendered');
+	// 	do_action('\PoP\Engine\Engine:output:end');
+	// 	do_action('\PoP\Engine\Engine:rendered');
 	// }
 
 	// function trigger_outputdata_hooks() {
 		
 	// 	// Allow extra functionalities. Eg: Save the logged-in user meta information
-	// 	do_action('PoP_Engine:output_data:end');
-	// 	do_action('PoP_Engine:rendered');
+	// 	do_action('\PoP\Engine\Engine:output_data:end');
+	// 	do_action('\PoP\Engine\Engine:rendered');
 	// }
 
 	// function output() {
@@ -225,9 +226,9 @@ class PoP_Engine {
 
 	// function check_redirect($addoutput) {
 
-	// 	global $pop_module_processor_manager;
+	// 	$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		
-	// 	$pop_module_settingsmanager = PoPEngine_Module_SettingsManager_Factory::get_instance();
+	// 	$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
 	// 	if ($redirect = $pop_module_settingsmanager->get_redirect_url()) {
 
 	// 		if ($addoutput) {
@@ -263,7 +264,7 @@ class PoP_Engine {
 
 	// 				$redirect = add_query_arg(GD_URLPARAM_ACTIONPATH, $actionpath, $redirect);
 	// 			}
-	// 			if (PoP_ServerUtils::enable_config_by_params()) {
+	// 			if (Server\Utils::enable_config_by_params()) {
 					
 	// 				if ($config = $_REQUEST[POP_URLPARAM_CONFIG]) {
 
@@ -272,16 +273,16 @@ class PoP_Engine {
 	// 			}
 	// 		}
 
-	// 		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+	// 		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 	// 		$cmsapi->redirect($redirect); exit;
 	// 	}
 	// }
 
 	// function maybe_redirect() {
 
-	// 	global $pop_module_processor_manager;
+	// 	$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		
-	// 	$pop_module_settingsmanager = PoPEngine_Module_SettingsManager_Factory::get_instance();
+	// 	$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
 	// 	if ($redirect = $pop_module_settingsmanager->get_redirect_url()) {
 
 	// 		if ($query = $_SERVER['QUERY_STRING']) {
@@ -289,21 +290,22 @@ class PoP_Engine {
 	// 			$redirect .= '?'.$query;
 	// 		}
 
-	// 		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+	// 		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 	// 		$cmsapi->redirect($redirect); exit;
 	// 	}
 	// }
 
 	function get_model_props_moduletree($module) {
 
-		global $pop_module_processor_manager, $pop_module_cachemanager;
+		global $pop_module_cachemanager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$processor = $moduleprocessor_manager->get_processor($module);
 		
 		// Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
 		// Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
 		// First check if there's a cache stored
-		$use_cache = PoP_ServerUtils::use_cache();
+		$use_cache = Server\Utils::use_cache();
 		if ($use_cache) {
 			
 			$model_props = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_PROPS, true);
@@ -326,8 +328,8 @@ class PoP_Engine {
 	// Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
 	function add_request_props_moduletree($module, $props) {
 
-		global $pop_module_processor_manager;
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$processor = $moduleprocessor_manager->get_processor($module);
 		
 		// The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
 		$processor->init_request_props_moduletree($module, $props, array(), array());
@@ -337,7 +339,7 @@ class PoP_Engine {
 
 	protected function process_and_generate_data() {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 
 		// Externalize logic into function so it can be overridden by PoP Frontend Engine
 		$dataoutputitems = $vars['dataoutputitems'];
@@ -364,7 +366,7 @@ class PoP_Engine {
 
 		// Allow for extra operations (eg: calculate resources)
 		do_action(
-			'PoP_Engine:helperCalculations',
+			'\PoP\Engine\Engine:helperCalculations',
 			array(&$this->helperCalculations),
 			$module,
 			array(&$this->props)
@@ -457,7 +459,7 @@ class PoP_Engine {
 
 	protected function add_shared_meta() {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 
 		// Externalize logic into function so it can be overridden by PoP Frontend Engine
 		$dataoutputitems = $vars['dataoutputitems'];
@@ -488,14 +490,15 @@ class PoP_Engine {
 
 	function get_module_settings($module, $model_props, $props) {
 
-		global $pop_module_processor_manager, $pop_module_cachemanager;
+		global $pop_module_cachemanager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
 		$ret = array();
 
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$processor = $moduleprocessor_manager->get_processor($module);
 		
 		// From the state we know if to process static/staful content or both
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		$datasources = $vars['datasources'];
 		$dataoutputmode = $vars['dataoutputmode'];
 
@@ -504,7 +507,7 @@ class PoP_Engine {
 		$this->cachedsettings = false;
 
 		// First check if there's a cache stored
-		$use_cache = PoP_ServerUtils::use_cache();
+		$use_cache = Server\Utils::use_cache();
 		if ($use_cache) {
 			
 			$immutable_settings = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, true);
@@ -566,7 +569,7 @@ class PoP_Engine {
 	// function get_request_settings($module, $props) {
 
 	// 	return apply_filters(
-	// 		'PoP_Engine:request-settings',
+	// 		'\PoP\Engine\Engine:request-settings',
 	// 		array()
 	// 	);
 	// }
@@ -577,8 +580,8 @@ class PoP_Engine {
 			POP_CONSTANT_ENTRYMODULE => $this->get_entry_module(),
 			// Review: is it needed?
 			// POP_UNIQUEID => POP_CONSTANT_UNIQUE_ID,
-			GD_URLPARAM_URL => PoP_ModuleManager_Utils::get_current_url(),
-			'modelinstanceid' => PoP_Module_ModelInstanceProcessor_Utils::get_model_instance_id(),
+			GD_URLPARAM_URL => Utils::get_current_url(),
+			'modelinstanceid' => ModelInstanceProcessor_Utils::get_model_instance_id(),
 		);
 		
 		if ($this->backgroundload_urls) {
@@ -586,7 +589,7 @@ class PoP_Engine {
 		};
 
 		// Starting from what modules must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		$not_excluded_module_sets = $modulefilter_manager->get_not_excluded_module_sets();
 		if (!is_null($not_excluded_module_sets)) {
 			
@@ -596,8 +599,8 @@ class PoP_Engine {
 				
 				$filteredsettings[] = array_map(function($module) {
 
-						global $pop_module_processor_manager;
-						return $pop_module_processor_manager->get_processor($module)->get_settings_id($module);
+						$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+						return $moduleprocessor_manager->get_processor($module)->get_settings_id($module);
 					},
 					$modules
 				);
@@ -607,20 +610,20 @@ class PoP_Engine {
 		}
 
 		// Any errors? Send them back
-		if (PoP_ModuleManager_Utils::$errors) {
+		if (Utils::$errors) {
 
-			if (count(PoP_ModuleManager_Utils::$errors) > 1) {
+			if (count(Utils::$errors) > 1) {
 				
-				$meta[GD_URLPARAM_ERROR] = __('Ops, there were some errors:', 'pop-engine').implode('<br/>', PoP_ModuleManager_Utils::$errors);
+				$meta[GD_URLPARAM_ERROR] = __('Ops, there were some errors:', 'pop-engine').implode('<br/>', Utils::$errors);
 			}
 			else {
 
-				$meta[GD_URLPARAM_ERROR] = __('Ops, there was an error: ', 'pop-engine').PoP_ModuleManager_Utils::$errors[0];
+				$meta[GD_URLPARAM_ERROR] = __('Ops, there was an error: ', 'pop-engine').Utils::$errors[0];
 			}
 		}
 
 		return apply_filters(
-			'PoP_Engine:request-meta',
+			'\PoP\Engine\Engine:request-meta',
 			$meta
 		);
 	}
@@ -628,7 +631,7 @@ class PoP_Engine {
 	function get_session_meta() {
 
 		return apply_filters(
-			'PoP_Engine:session-meta',
+			'\PoP\Engine\Engine:session-meta',
 			array()
 		);
 	}
@@ -636,9 +639,9 @@ class PoP_Engine {
 	function get_site_meta() {
 
 		$meta = array();
-		if (PoP_ModuleManager_Utils::fetching_site()) {
+		if (Utils::fetching_site()) {
 		
-			$vars = PoP_ModuleManager_Vars::get_vars();
+			$vars = Engine_Vars::get_vars();
 
 			// $meta['domain'] = get_site_url();
 			$meta['sitename'] = get_bloginfo('name');
@@ -671,7 +674,7 @@ class PoP_Engine {
 			if ($vars['mangled']) {
 				$meta[GD_DATALOAD_PARAMS][GD_URLPARAM_MANGLED] = $vars['mangled'];
 			}
-			if (PoP_ServerUtils::enable_config_by_params() && $vars['config']) {
+			if (Server\Utils::enable_config_by_params() && $vars['config']) {
 				$meta[GD_DATALOAD_PARAMS][POP_URLPARAM_CONFIG] = $vars['config'];
 			}
 
@@ -696,7 +699,7 @@ class PoP_Engine {
 			};	
 		}
 		return apply_filters(
-			'PoP_Engine:site-meta', 
+			'\PoP\Engine\Engine:site-meta', 
 			$meta
 		);
 	}
@@ -752,10 +755,10 @@ class PoP_Engine {
 
 	private function add_interreferenced_module_fullpaths(&$paths, $module_path, $module, &$props) {
 
-		global $pop_module_processor_manager;
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$processor = $moduleprocessor_manager->get_processor($module);
 
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
@@ -763,7 +766,7 @@ class PoP_Engine {
 			// If the current module loads data, then add its path to the list
 			if ($interreferenced_modulepath = $processor->get_data_feedback_interreferenced_modulepath($module, $props)) {
 
-				$referenced_modulepath = PoP_ModulePathManager_Utils::stringify_module_path($interreferenced_modulepath);
+				$referenced_modulepath = ModulePathManager_Utils::stringify_module_path($interreferenced_modulepath);
 				$paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? array();
 				$paths[$referenced_modulepath][] = array_merge(
 					$module_path, 
@@ -786,7 +789,7 @@ class PoP_Engine {
 		$submodules = $modulefilter_manager->remove_excluded_submodules($module, $submodules);
 		
 		// This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_path_manager->prepare_for_propagation($module);
 		foreach ($submodules as $submodule) {
 
@@ -804,10 +807,10 @@ class PoP_Engine {
 
 	private function add_dataloading_module_fullpaths(&$paths, $module_path, $module, &$props) {
 
-		global $pop_module_processor_manager;
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$processor = $moduleprocessor_manager->get_processor($module);
 
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
@@ -835,7 +838,7 @@ class PoP_Engine {
 		$submodules = $modulefilter_manager->remove_excluded_submodules($module, $submodules);
 		
 		// This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 		$module_path_manager->prepare_for_propagation($module);
 		foreach ($submodules as $submodule) {
 
@@ -846,13 +849,13 @@ class PoP_Engine {
 
 	protected function assign_value_for_module(&$array, $module_path, $module, $key, $value) {
 
-		global $pop_module_processor_manager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
 		$array_pointer = &$array;
 		foreach ($module_path as $submodule) {
 
 			// Notice that when generating the array for the response, we don't use $module anymore, but $settings_id
-			$submodule_settings_id = $pop_module_processor_manager->get_processor($submodule)->get_settings_id($submodule);
+			$submodule_settings_id = $moduleprocessor_manager->get_processor($submodule)->get_settings_id($submodule);
 
 			// If the path doesn't exist, create it
 			if (!isset($array_pointer[$submodule_settings_id][GD_JS_MODULES])) {
@@ -863,7 +866,7 @@ class PoP_Engine {
 			$array_pointer = &$array_pointer[$submodule_settings_id][GD_JS_MODULES];
 		}
 
-		$settings_id = $pop_module_processor_manager->get_processor($module)->get_settings_id($module);
+		$settings_id = $moduleprocessor_manager->get_processor($module)->get_settings_id($module);
 		$array_pointer[$settings_id][$key] = $value;
 	}
 
@@ -891,12 +894,13 @@ class PoP_Engine {
 	// This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
 	function get_module_data($root_module, $root_model_props, $root_props) {
 
-		global $pop_module_processor_manager, $pop_module_cachemanager;
+		global $pop_module_cachemanager;
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
-		$root_processor = $pop_module_processor_manager->get_processor($root_module);
+		$root_processor = $moduleprocessor_manager->get_processor($root_module);
 
 		// From the state we know if to process static/staful content or both
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = Engine_Vars::get_vars();
 		$datasources = $vars['datasources'];
 		$dataoutputmode = $vars['dataoutputmode'];
 
@@ -913,7 +917,7 @@ class PoP_Engine {
 
 		// Allow PoP UserState to add the lazy-loaded userstate data triggers
 		do_action(
-			'PoP_Engine:get_module_data:start',
+			'\PoP\Engine\Engine:get_module_data:start',
 			$root_module, 
 			array(&$root_model_props), 
 			array(&$root_props),
@@ -921,7 +925,7 @@ class PoP_Engine {
 			$this
 		);	
 
-		$use_cache = PoP_ServerUtils::use_cache();
+		$use_cache = Server\Utils::use_cache();
 
 		// First check if there's a cache stored
 		if ($use_cache) {
@@ -965,10 +969,10 @@ class PoP_Engine {
 		// Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
 		$module_fullpaths = $this->get_dataloading_module_fullpaths($root_module, $root_props);
 
-		$module_path_manager = PoP_ModulePathManager_Factory::get_instance();
+		$module_path_manager = ModulePathManager_Factory::get_instance();
 
 		// The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		$modulefilter_manager->never_exclude(true);
 		foreach ($module_fullpaths as $module_path) {
 
@@ -1025,7 +1029,7 @@ class PoP_Engine {
 				$module_props = &$props;
 			}
 
-			$processor = $pop_module_processor_manager->get_processor($module);
+			$processor = $moduleprocessor_manager->get_processor($module);
 
 			// The module path key is used for storing temporary results for later retrieval
 			$module_path_key = $this->get_module_path_key($module_path, $module);
@@ -1055,7 +1059,7 @@ class PoP_Engine {
 
 					if ($execute) {
 					
-						$gd_dataload_actionexecution_manager = GD_DataLoad_ActionExecution_Manager_Factory::get_instance();
+						$gd_dataload_actionexecution_manager = ActionExecution_Manager_Factory::get_instance();
 						$actionexecuter = $gd_dataload_actionexecution_manager->get_actionexecuter($actionexecuter_name);
 						$executed = $actionexecuter->execute($data_properties);
 					}
@@ -1153,7 +1157,7 @@ class PoP_Engine {
 			$this->process_and_add_module_data($module_path, $module, $module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
 
 			// Allow other modules to produce their own feedback using this module's data results
-			if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[PoP_ModulePathManager_Utils::stringify_module_path(array_merge($module_path, array($module)))]) {
+			if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[ModulePathManager_Utils::stringify_module_path(array_merge($module_path, array($module)))]) {
 
 				foreach ($referencer_modulefullpaths as $referencer_modulepath) {
 
@@ -1187,7 +1191,7 @@ class PoP_Engine {
 
 			// Allow PoP UserState to add the lazy-loaded userstate data triggers
 			do_action(
-				'PoP_Engine:get_module_data:dataloading-module',
+				'\PoP\Engine\Engine:get_module_data:dataloading-module',
 				$module, 
 				array(&$module_props), 
 				array(&$data_properties), 
@@ -1269,7 +1273,7 @@ class PoP_Engine {
 
 		// Allow PoP UserState to add the lazy-loaded userstate data triggers
 		do_action(
-			'PoP_Engine:get_module_data:end',
+			'\PoP\Engine\Engine:get_module_data:end',
 			$root_module, 
 			array(&$root_model_props), 
 			array(&$root_props),
@@ -1284,8 +1288,8 @@ class PoP_Engine {
 		
 		global $gd_dataload_manager, $gd_dataquery_manager;
 		
-		$vars = PoP_ModuleManager_Vars::get_vars();
-		$formatter = PoP_ModuleManager_Utils::get_datastructure_formatter();
+		$vars = Engine_Vars::get_vars();
+		$formatter = Utils::get_datastructure_formatter();
 
 		// Save all database elements here, under dataloader
 		$databases = array();
@@ -1377,7 +1381,7 @@ class PoP_Engine {
 					// If we are, then we came here loading a backgroundload-url, and we don't need to load it again
 					// Otherwise, it would create an infinite loop, since the fields loaded here are, exactly, those defined in the noncacheable_fields
 					// Eg: https://www.mesym.com/en/loaders/posts/data/?pid[0]=21636&pid[1]=21632&pid[2]=21630&pid[3]=21628&pid[4]=21624&pid[5]=21622&fields[0]=recommendpost-count&fields[1]=recommendpost-count-plus1&fields[2]=userpostactivity-count&format=updatedata
-					if (!PoP_ModuleManager_Utils::is_page($dataquery->get_noncacheable_page())) {
+					if (!Utils::is_page($dataquery->get_noncacheable_page())) {
 						if ($intersect = array_values(array_intersect($dataitem_fields, $forceserverload_fields))) {
 
 							$forceserverload['ids'][] = $dataitem_id;
@@ -1514,8 +1518,8 @@ class PoP_Engine {
 
 	protected function process_and_add_module_data($module_path, $module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
 
-		global $pop_module_processor_manager;
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$processor = $moduleprocessor_manager->get_processor($module);
 		
 		// Integrate the feedback into $moduledata
 		if (!is_null($this->moduledata)) {
@@ -1527,7 +1531,7 @@ class PoP_Engine {
 
 				// Advance the position of the array into the current module
 				foreach ($module_path as $submodule) {
-					$submodule_settings_id = $pop_module_processor_manager->get_processor($submodule)->get_settings_id($submodule);
+					$submodule_settings_id = $moduleprocessor_manager->get_processor($submodule)->get_settings_id($submodule);
 					$moduledata[$submodule_settings_id][GD_JS_MODULES] = $moduledata[$submodule_settings_id][GD_JS_MODULES] ?? array();
 					$moduledata = &$moduledata[$submodule_settings_id][GD_JS_MODULES];
 				}
@@ -1595,4 +1599,4 @@ class PoP_Engine {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_Engine();
+new Engine();

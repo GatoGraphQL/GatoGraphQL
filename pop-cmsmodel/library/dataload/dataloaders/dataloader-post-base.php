@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
 
-class GD_Dataloader_PostBase extends GD_QueryDataDataloader {
+abstract class Dataloader_PostBase extends \PoP\Engine\QueryDataDataloader {
 
 	function get_dataquery() {
 
@@ -21,7 +22,7 @@ class GD_Dataloader_PostBase extends GD_QueryDataDataloader {
 	
 		if ($ids) {
 
-			$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+			$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 			$query = array(
 				'include' => $ids,
 				'post_type' => array_keys($cmsapi->get_post_types()) // From all post types
@@ -44,7 +45,7 @@ class GD_Dataloader_PostBase extends GD_QueryDataDataloader {
 
 	// function get_post($post_id) {
 	
- //    	$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+ //    	$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 	// 	return $cmsapi->get_post($post_id);
 	// }
 }

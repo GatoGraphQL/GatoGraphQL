@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_PostStatus extends GD_FilterComponent {
+abstract class FilterComponent_PostStatusBase extends FilterComponentBase {
 	
 	function get_poststatus($filter) {
 

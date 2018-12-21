@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine\Themes;
 
-class GD_ThemeManager {
+class ThemeManager {
 
 	var $selected_theme, $themes;
 
@@ -31,7 +32,7 @@ class GD_ThemeManager {
 
 	function get_default_themename() {
 
-		return apply_filters('GD_ThemeManager:default', null);;
+		return apply_filters('\PoP\Engine\Themes\ThemeManager:default', null);;
 	}
 
 	function get_theme($themename = '') {
@@ -101,7 +102,7 @@ class GD_ThemeManager {
 			// 2 reasons for this:
 			// #1. 	Since splitting into poptheme-wassup and poptheme-wassup-frontend, the logic goes in the 1st but the actual templates in the latter, and the 1st doesn't know which the latter will be
 			// #2. 	It allows the templates to be overriden
-			return GD_ThemeManagerUtils::get_thememode_templates_dir($theme->get_name(), $theme->get_thememode()->get_name());
+			return ThemeManagerUtils::get_thememode_templates_dir($theme->get_name(), $theme->get_thememode()->get_name());
 		}
 
 		return null;
@@ -112,4 +113,4 @@ class GD_ThemeManager {
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
 global $gd_theme_manager;
-$gd_theme_manager = new GD_ThemeManager();
+$gd_theme_manager = new ThemeManager();

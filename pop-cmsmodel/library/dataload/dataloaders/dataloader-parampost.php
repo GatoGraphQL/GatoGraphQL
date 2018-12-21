@@ -1,10 +1,11 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_PARAMPOST', 'parampost');
  
-class GD_Dataloader_ParamPost extends GD_Dataloader_PostBase {
+class Dataloader_ParamPost extends Dataloader_PostBase {
 
-	use GD_Dataloader_ParamTrait;
+	use Dataloader_ParamTrait;
 	
 	function get_name() {
     
@@ -20,4 +21,4 @@ class GD_Dataloader_ParamPost extends GD_Dataloader_PostBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_ParamPost();
+new Dataloader_ParamPost();

@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_Engine_Factory {
+class Engine_Factory {
 
 	protected static $instance;
 
@@ -19,4 +20,4 @@ class PoP_Engine_Factory {
 }
 
 // // For HTML Output: call output function on the footer (it won't get called for JSON output)
-// add_action('wp_footer', array(PoP_Engine_Factory::class, 'output'));
+// add_action('wp_footer', array(\PoP\Engine\Engine_Factory::class, 'output'));

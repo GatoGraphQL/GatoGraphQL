@@ -1,9 +1,10 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('POPENGINE_CHECKPOINTCONFIGURATION_ACTIONPATHISMODULE', 'actionpathismodule');
 define ('POPENGINE_CHECKPOINTCONFIGURATION_ACTIONPATHISMODULE_POST', 'actionpathismodule-post');
 
-class PoP_Engine_CheckpointUtils extends PoPEngine_SettingsProcessor_CheckpointHelper {
+class CheckpointUtils extends \PoP\Engine\CheckpointHelperBase {
 
 	public static function get_checkpoint_configuration($name) {
 

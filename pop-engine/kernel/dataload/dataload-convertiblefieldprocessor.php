@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_DataLoad_ConvertibleFieldProcessor extends GD_DataLoad_FieldProcessor {
+abstract class ConvertibleFieldProcessorBase extends FieldProcessorBase {
 
 	protected $fieldprocessor_resolvers;
 

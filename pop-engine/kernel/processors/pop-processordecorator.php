@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine;
 
-abstract class PoP_ProcessorDecoratorBase {
+abstract class ModuleProcessorDecoratorBase {
 
-	use PoP_ModulePathProcessorTrait;
+	use ModulePathProcessorTrait;
 
 	//-------------------------------------------------
 	// PROTECTED Functions
@@ -21,8 +22,8 @@ abstract class PoP_ProcessorDecoratorBase {
 
 	protected function get_decoratedmodule_processor($module) {
 
-		global $pop_module_processor_manager;
-		return $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		return $moduleprocessor_manager->get_processor($module);
 	}
 
 	protected function get_processordecorator_manager() {
@@ -35,15 +36,15 @@ abstract class PoP_ProcessorDecoratorBase {
 	//-------------------------------------------------
 	function get_settings_id($module) {
 
-		global $pop_module_processor_manager;
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$processor = $moduleprocessor_manager->get_processor($module);
 		return $processor->get_settings_id($module);
 	}
 
 	function get_descendant_modules($module) {
 
-		global $pop_module_processor_manager;
-		$processor = $pop_module_processor_manager->get_processor($module);
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		$processor = $moduleprocessor_manager->get_processor($module);
 		return $processor->get_descendant_modules($module);
 	}
 }

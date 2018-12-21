@@ -5,4 +5,4 @@
  --------------------------------------------------------**/
 // Needed to define a "nothing is selected" value so that we can filter and see only entries with no value
 // Eg: My Members privileges
-define ('GD_METAVALUE_NONE', 'none');
+const GD_METAVALUE_NONE = 'none';

@@ -1,12 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-define ('POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID', 'page-id');
-define ('POP_MODELINSTANCECOMPONENTTYPE_PAGE_MAINCONTENTMODULE', 'page-main-content-module');
-define ('POP_MODELINSTANCECOMPONENTTYPE_AUTHOR_ROLE', 'author-role');
-define ('POP_MODELINSTANCECOMPONENTTYPE_SINGLE_POSTTYPE', 'single-posttype');
-define ('POP_MODELINSTANCECOMPONENTTYPE_SINGLE_CATEGORIES', 'single-categories');
-
-class PoP_Module_ModelInstanceProcessor_Utils {
+class ModelInstanceProcessor_Utils {
 
 	public static function get_model_instance_id() {
 
@@ -37,8 +32,8 @@ class PoP_Module_ModelInstanceProcessor_Utils {
 
 		$components = array();
 		
-		$vars = PoP_ModuleManager_Vars::get_vars();
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$vars = Engine_Vars::get_vars();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 
 		// There will always be a hierarchy. Add it.
 		$hierarchy = $vars['hierarchy'];
@@ -53,7 +48,7 @@ class PoP_Module_ModelInstanceProcessor_Utils {
 
 				// Each page may be an independent configuration or not, so allow to configure it through hooks. By default it is true, so it's a conservative approach
 				$component_types = apply_filters(
-					'PoP_Module_ModelInstanceProcessor_Utils:components_from_vars:type:page',
+					'\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:page',
 					array(
 						POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID,
 					)
@@ -61,14 +56,14 @@ class PoP_Module_ModelInstanceProcessor_Utils {
 				if (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID, $component_types)) {
 
 					// We add the page path to help understand what file it is, in addition to the ID (to make sure to make the configuration unique to that page)
-					$components[] = __('page id:', 'pop-engine').PoP_ModuleManager_Utils::get_page_path($page_id).$page_id;
+					$components[] = __('page id:', 'pop-engine').Utils::get_page_path($page_id).$page_id;
 				}
 				// If the page id is added, then there's no need to check the maincontentmodule, since it adds no information
 				elseif (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_MAINCONTENTMODULE, $component_types)) {
 
 					// If different pages share the same main content module, then they are sharing the same configuration.
 					// Eg: a website with all documentation pages may need to generate the configuration only once, for the first page, and then from then on just load data
-			        $pop_module_pagemoduleprocessor_manager = PoPEngine_Module_PageModuleProcessorManager_Factory::get_instance();
+			        $pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::get_instance();
 					$components[] = __('main content module:', 'pop-engine').$pop_module_pagemoduleprocessor_manager->get_page_module_by_most_allmatching_vars_properties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE, $page_id);
 				}
 				break;
@@ -103,7 +98,7 @@ class PoP_Module_ModelInstanceProcessor_Utils {
 
 				$paths = array();
 				foreach ($modulepaths as $modulepath) {
-					$paths[] = PoP_ModulePathManager_Utils::stringify_module_path($modulepath);
+					$paths[] = ModulePathManager_Utils::stringify_module_path($modulepath);
 				}
 				
 				$components[] = __('module paths:', 'pop-engine').implode(',', $paths);
@@ -115,7 +110,7 @@ class PoP_Module_ModelInstanceProcessor_Utils {
 		}
 
 		// Can the configuration change when doing a POST or GET?
-		if (apply_filters('PoP_Module_ModelInstanceProcessor_Utils:components_from_vars:post-or-get-change', false)) {
+		if (apply_filters('\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:post-or-get-change', false)) {
 		
 			$components[] = __('operation:', 'pop-engine').(doing_post() ? 'post' : 'get');
 		}
@@ -139,7 +134,7 @@ class PoP_Module_ModelInstanceProcessor_Utils {
 		}
 
 		// Allow for plug-ins to add their own vars. Eg: URE source parameter
-		$components = apply_filters('PoP_Module_ModelInstanceProcessor:model_instance_components_from_vars', $components);
+		$components = apply_filters('ModelInstanceProcessor:model_instance_components_from_vars', $components);
 
 		return $components;
 	}
@@ -147,7 +142,7 @@ class PoP_Module_ModelInstanceProcessor_Utils {
 	protected function get_single_categories($post_id) {
 
 		$cats = array();
-		$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 		if ($cmsapi->get_post_type($post_id) == 'post') {
 
 			foreach ($cmsapi->get_the_category($post_id) as $cat) {

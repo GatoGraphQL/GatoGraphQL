@@ -1,6 +1,7 @@
 <?php
+namespace PoP\CMSModel;
 
-class GD_Dataloader_UserBase extends GD_QueryDataDataloader {
+abstract class Dataloader_UserBase extends \PoP\Engine\QueryDataDataloader {
 
 	function get_dataquery() {
 
@@ -21,7 +22,7 @@ class GD_Dataloader_UserBase extends GD_QueryDataDataloader {
 	
 		if ($ids) {
 
-			$cmsapi = PoP_CMS_FunctionAPI_Factory::get_instance();
+			$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 			$ret = array();
 			foreach ($ids as $user_id) {
 				

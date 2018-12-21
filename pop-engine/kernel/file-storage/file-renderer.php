@@ -1,5 +1,7 @@
 <?php
-class PoP_Engine_FileRenderer {
+namespace PoP\Engine\FileStorage;
+
+class FileRenderer {
 
     var $files;
     

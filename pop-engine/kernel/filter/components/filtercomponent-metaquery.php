@@ -1,6 +1,7 @@
 <?php
+namespace PoP\Engine;
 
-class GD_FilterComponent_Metaquery extends GD_FilterComponent {
+abstract class FilterComponent_MetaqueryBase extends FilterComponentBase {
 	
 	
 }

@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOAD_CONVERTIBLEFIELDPROCESSOR_POSTS', 'convertible-posts');
 
-class GD_DataLoad_ConvertibleFieldProcessor_Posts extends GD_DataLoad_ConvertibleFieldProcessor {
+class ConvertibleFieldProcessor_Posts extends \PoP\Engine\ConvertibleFieldProcessorBase {
 
 	function get_name() {
 	
@@ -18,4 +19,4 @@ class GD_DataLoad_ConvertibleFieldProcessor_Posts extends GD_DataLoad_Convertibl
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_DataLoad_ConvertibleFieldProcessor_Posts();
+new ConvertibleFieldProcessor_Posts();

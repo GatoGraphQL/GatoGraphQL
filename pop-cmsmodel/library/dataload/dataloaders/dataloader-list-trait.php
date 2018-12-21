@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
  
-trait GD_Dataloader_ListTrait {
+trait Dataloader_ListTrait {
 
-	use GD_FilterQueryDataloaderTrait;
+	use \PoP\Engine\FilterQueryDataloaderTrait;
 	
     /**
      * Function to override

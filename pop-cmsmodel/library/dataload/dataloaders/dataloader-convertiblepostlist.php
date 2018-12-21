@@ -1,8 +1,9 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_CONVERTIBLEPOSTLIST', 'convertible-post-list');
 
-class GD_Dataloader_ConvertiblePostList extends GD_Dataloader_PostListBase {
+class Dataloader_ConvertiblePostList extends Dataloader_PostListBase {
 
 	function get_name() {
     
@@ -18,4 +19,4 @@ class GD_Dataloader_ConvertiblePostList extends GD_Dataloader_PostListBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_ConvertiblePostList();
+new Dataloader_ConvertiblePostList();

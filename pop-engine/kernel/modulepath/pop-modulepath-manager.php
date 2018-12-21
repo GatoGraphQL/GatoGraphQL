@@ -1,12 +1,13 @@
 <?php
+namespace PoP\Engine;
 
-class PoP_ModulePathManager {
+class ModulePathManager {
 
 	protected $propagation_current_path;
 
 	function __construct() {
 
-		PoP_ModulePathManager_Factory::set_instance($this);
+		ModulePathManager_Factory::set_instance($this);
 
 		$this->propagation_current_path = array();
 	}
@@ -28,7 +29,7 @@ class PoP_ModulePathManager {
 
 		// Execute steps in this order
 		// Step 1: call on the filter
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		$modulefilter_manager->prepare_for_propagation($module);
 
 		// Step 2: add the module to the path
@@ -43,7 +44,7 @@ class PoP_ModulePathManager {
 		array_pop($this->propagation_current_path);
 
 		// Step 2: call on the filter
-		$modulefilter_manager = PoP_ModuleFilterManager_Factory::get_instance();
+		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		$modulefilter_manager->restore_from_propagation($module);
 	}
 }
@@ -51,4 +52,4 @@ class PoP_ModulePathManager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ModulePathManager();
+new ModulePathManager();

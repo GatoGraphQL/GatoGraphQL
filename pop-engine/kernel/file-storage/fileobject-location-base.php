@@ -1,5 +1,7 @@
 <?php
-class PoP_Engine_FileObjectBase extends PoP_Engine_FileBase {
+namespace PoP\Engine\FileStorage;
+
+abstract class FileObjectBase extends FileBase {
 
 	public function delete() {
 

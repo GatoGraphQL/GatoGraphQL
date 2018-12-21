@@ -1,10 +1,11 @@
 <?php
+namespace PoP\CMSModel;
 
 define ('GD_DATALOADER_PARAMTAG', 'paramtag');
  
-class GD_Dataloader_ParamTag extends GD_Dataloader_TagBase {
+class Dataloader_ParamTag extends Dataloader_TagBase {
 
-	use GD_Dataloader_ParamTrait;
+	use Dataloader_ParamTrait;
 	
 	function get_name() {
     
@@ -20,4 +21,4 @@ class GD_Dataloader_ParamTag extends GD_Dataloader_TagBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-new GD_Dataloader_ParamTag();
+new Dataloader_ParamTag();

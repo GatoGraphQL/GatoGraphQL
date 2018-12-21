@@ -1,10 +1,11 @@
 <?php
+namespace PoP\Engine\Themes;
 
-class GD_ThemeManagerUtils {
+class ThemeManagerUtils {
 
 	public static function get_theme_dir($themename) {
 
-		return apply_filters('GD_ThemeManagerUtils:get_theme_dir:'.$themename, '');
+		return apply_filters('\PoP\Engine\Themes\ThemeManagerUtils:get_theme_dir:'.$themename, '');
 	}
 
 	public static function get_thememode_templates_dir($themename, $thememode) {

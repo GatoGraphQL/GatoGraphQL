@@ -1,8 +1,9 @@
 <?php
+namespace PoP\Engine\Impl;
 
 define ('POP_MODULEFILTER_HEADMODULE', 'headmodule');
 
-class PoP_ModuleFilter_HeadModule extends PoP_ModuleFilterBase {
+class ModuleFilter_HeadModule extends \PoP\Engine\ModuleFilterBase {
 
 	function get_name() {
 
@@ -11,7 +12,7 @@ class PoP_ModuleFilter_HeadModule extends PoP_ModuleFilterBase {
 
 	function exclude_module($module, &$props) {
 
-		$vars = PoP_ModuleManager_Vars::get_vars();
+		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		return $vars['headmodule'] != $module;
 	}
 }
@@ -19,4 +20,4 @@ class PoP_ModuleFilter_HeadModule extends PoP_ModuleFilterBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-new PoP_ModuleFilter_HeadModule();
+new ModuleFilter_HeadModule();

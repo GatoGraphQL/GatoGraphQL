@@ -7,6 +7,7 @@ require_once 'pop-engine-factory.php';
 require_once 'pop-engine.php';
 require_once 'checkpoint-helper-base.php';
 
+require_once 'definition-manager/load.php';
 require_once 'hierarchies/load.php';
 require_once 'file-storage/load.php';
 require_once 'library/load.php';
