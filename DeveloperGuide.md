@@ -10,10 +10,6 @@ PoP is founded on [Object-Oriented Programming](https://en.wikipedia.org/wiki/Ob
 
 ### Definition of a Module
 
-The module is the building unit of the application. In PoP, everything is a module:
-
-![Everything is a module](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
-
 Every module has a unique name that identifies it, defined as a constant:
 
 ```
