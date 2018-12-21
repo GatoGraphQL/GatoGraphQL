@@ -313,7 +313,7 @@ function init_model_props($module, &$props) {
 }
 ```
 
-When fetching data from several sources, each source will keep its own state in the [QueryHandler](#queryhandler). Then, it is able to query different amounts of data from different domains (eg: 3 results from domain1.com and 6 results from domain2.com), and stop querying from a particular domain when it has no more results.
+When fetching data from several sources, each source will keep its own state in the [QueryHandler](#queryhandlers). Then, it is able to query different amounts of data from different domains (eg: 3 results from domain1.com and 6 results from domain2.com), and stop querying from a particular domain when it has no more results.
 
 ### DataStructureFormatter
 
