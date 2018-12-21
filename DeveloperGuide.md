@@ -12,13 +12,13 @@ PoP is founded on [Object-Oriented Programming](https://en.wikipedia.org/wiki/Ob
 
 Every module has a unique name that identifies it, defined as a constant:
 
-```
+```php
 define ('POP_MODULE_SOMENAME', 'somename'));
 ```
 
 The name of the module must not necessarily remain fixed: it can be shortened for producing a smaller output, constantly modified to evade bots, or others. Different strategies can be applied, done through function [`\PoP\Engine\DefinitionUtils::get_module_definition`](https://github.com/leoloso/PoP/blob/master/pop-engine/server/definition-manager/utils.php#L16):
 
-```
+```php
 define ('POP_MODULE_SOMENAME', \PoP\Engine\DefinitionUtils::get_module_definition('somename'));
 ```
 
@@ -32,7 +32,7 @@ All the properties of the modules are implemented through objects called [Module
 
 A ModuleProcessor is an object class in which to define all the properties of a module. ModuleProcessors are implemented following the [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) methodology, establishing an object inheritance scheme to progressively add properties to modules. The base class for all ModuleProcessors is [`ModuleProcessorBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/processors/pop-processor.php):
 
-```
+```php
 namespace PoP\Engine;
 abstract class ModuleProcessorBase {
 
@@ -42,7 +42,7 @@ abstract class ModuleProcessorBase {
 
 Every ModuleProcessor can handle more than 1 module: Because different modules will naturally share many properties, then having a single ModuleProcessor implement many modules is more legible and reduces the amount of code required compared to having 1 ModuleProcessor per module. What modules are handled by the ModuleProcessor is defined through function `get_modules_to_process`:
 
-```
+```php
 define ('POP_MODULE_SOMENAME1', \PoP\Engine\DefinitionUtils::get_module_definition('somename1'));
 define ('POP_MODULE_SOMENAME2', \PoP\Engine\DefinitionUtils::get_module_definition('somename2'));
 define ('POP_MODULE_SOMENAME3', \PoP\Engine\DefinitionUtils::get_module_definition('somename3'));
@@ -65,7 +65,7 @@ class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
 
 To access the properties of a module, we must obtain its corresponding ModuleProcessor through function `get_processor` from class [`ModuleProcessor_Manager`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/processor-managers/pop-processor-manager.php):
 
-```
+```php
 // Retrive the PoP_ModuleProcessor_Manager object from the factory
 $moduleprocessor_manager = \PoP\Engine\ModuleProcessor_Manager_Factory::get_instance();
 
@@ -102,7 +102,7 @@ Modules are most useful when they are generic and enable customization through p
 
 Setting props works in one direction only: modules can set props on any descendant module, but no module can set props on any ancestor module or on any module belonging to a different branch from the component hierarchy. In the structure below, "module1" can set props on "module2", "module3" and "module4", "module2" on "module3", and "module3" and "module4" on nobody:
 
-```
+```json
 "module1"
   modules
     "module2"
@@ -143,7 +143,7 @@ All 3 methods receive the same parameters:
 
 Every module first initializes its own props, and only then continues the flow to the parent class, so that inheriting classes have priority over their ancestors in the object inheritance scheme:
 
-```
+```php
 function init_model_props($module, &$props) {
 
   // Set prop...
@@ -158,7 +158,7 @@ Accessing the value of the prop is done through [`function get_prop($module, &$p
 
 Let's see an example: a component for rendering maps has 2 orientations: `"horizontal"` and `"vertical"`. It is composed by modules "map" => "map-inner", and both these modules need this property. Module "map" will set the value by default to `"vertical"`, obtain the value for this prop just in case an ancestor module had already set the prop, and then set this value on module "map-inner". Function below is implemented for module "map":
 
-```
+```php
 function init_model_props($module, &$props) {
 
   switch ($module) {
@@ -182,7 +182,7 @@ function init_model_props($module, &$props) {
 
 By default, module map will have prop `"orientation"` set with value `"vertical"`. However, parent module "map-wrapper" can set this prop beforehand to `"horizontal"`:
 
-```
+```php
 function init_model_props($module, &$props) {
 
   switch ($module) {
@@ -225,7 +225,7 @@ Currently working on it, coming soon...
 
 We can instruct a dataloading module to be lazy-loaded (i.e. instead of fetching its database data immediately, it is fetched on a subsequent request from the client) simply by setting its prop `"lazy-load"` to `true`:
 
-```
+```php
 function init_model_props($module, &$props) {
 
   switch ($module) {
@@ -268,7 +268,7 @@ Currently working on it, coming soon...
 
 By default, a module will fetch its data from the domain where the application is hosted. To change this to a different domain(s) or subdomain(s) is done by setting prop `"dataload-multidomain-sources"` on the module:
 
-```
+```php
 function init_model_props($module, &$props) {
     
   switch ($module) {
@@ -290,7 +290,7 @@ function init_model_props($module, &$props) {
 
 We can also pass an array of domains, in which case the module will fetch its data from all of them:
 
-```
+```php
 function init_model_props($module, &$props) {
     
   switch ($module) {
@@ -468,7 +468,7 @@ For instance, plugin [PoP CMS Model](https://github.com/leoloso/PoP/tree/master/
 
 Then, all throughout the application, we must access the functionality through the interface and never directly through the CMS library. For instance, function `get_posts`, which is defined in the interface mentioned above, must be invoked like this:
 
-```
+```php
 $cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
 $query = array(
   // Query parameters here...

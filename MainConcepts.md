@@ -33,7 +33,7 @@ In PoP, everything is a module:
 
 The relationship of all modules wrapping each other, from the top-most module all the way down to the last level, is called the component hierarchy. The PoP API has the component hierarchy at its core, implemented as an associative array on the server-side, in which each module states its name as the key attribute and whatever properties it needs as values, and then nests its descendant modules under property "modules", iteratively adding their own data and that of their own descendant modules. Finally, this associative array is returned as a JSON object for comsumption through the API:
 
-```
+```json
 {
   "topmost-module": {
     someprop: {...},
@@ -74,7 +74,7 @@ The relationship of all modules wrapping each other, from the top-most module al
 
 PoP represents the database data in a relational manner, organized under each object type, object ID and object properties, mirroring the structure of the data in the database. This way, all data is normalized, fetched only once from the database, and printed only once in the output. It is added under entry `databases` in the API response:
 
-```
+```json
 {
   databases: {
     primary: {
@@ -100,7 +100,7 @@ PoP represents the database data in a relational manner, organized under each ob
 
 For instance, if fetching the data for blog posts with titles "Hello World!" and "Everything fine?" and author "Leo" both of them, then PoP brings the response below; please notice how property "author" contains the ID to the author object instead of printing the author data directly:
 
-```
+```json
 {
   databases: {
     primary: {
@@ -126,7 +126,7 @@ For instance, if fetching the data for blog posts with titles "Hello World!" and
 
 Each module knows which are its queried objects from section `datasetmoduledata`, which provides the IDs of the queried objects under property `dbobjectids` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `modulesettings`, which indicates to what type each object belongs under property `dbkeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
 
-```
+```json
 {
   modulesettings: {
     "page" {
@@ -162,7 +162,7 @@ Hence, along the component hierarchy, some modules will be in charge of loading 
 
 Fetching all the required properties for the DB object can be done automatically by traversing the component hierarchy: starting from the data loading module, we iterate all its descendant modules all the way down until reaching a new data loading module, or until the end of the tree; at each level we obtain all required properties, and then merge all properties together and query them from the database, all of them only once. In the structure below, module "single-post" fetches the results from the DB, and submodules "post-title" and "post-content" define properties to be loaded for the queried DB object ("title" and "content" respectively); submodule "post-layout" does not require any data fields. Please notice how the executed query, which is calculated automatically from the component hierarchy and their required data fields, will contain all the properties needed by all the modules and their submodules:
 
-```
+```json
 "single-post"
   => Load objects from domain "post" where ID = 37
   modules
@@ -176,7 +176,7 @@ Fetching all the required properties for the DB object can be done automatically
 
 Which will result in the following (pseudo-)query:
 
-```
+```sql
 SELECT 
   title, content 
 FROM 
@@ -187,7 +187,7 @@ WHERE
 
 The query to fetch data from the database is automatically updated whenever the component hierarchy changes. If we then add submodule "post-thumbnail", which requires data field "thumbnail", under "single-post":
 
-```
+```json
 "single-post"
   => Load objects from domain "post" where ID = 37
   modules
@@ -203,7 +203,7 @@ The query to fetch data from the database is automatically updated whenever the 
 
 Then the query is automatically updated with the new data:
 
-```
+```sql
 SELECT 
   title, content, thumbnail 
 FROM 
@@ -218,7 +218,7 @@ This strategy also applies to relational objects. Consider the image below: Star
 
 Going back to our previous example, if we need to show data from the post's author, stacking submodule "post-author" will change the domain at that level from "post" to the corresponding "user", and from this level downwards the DB object loaded into the context passed to the module is the user. Then, submodules "user-name" and "user-avatar" under "post-author" will load properties "name" and "avatar" under the user object:
 
-```
+```json
 "single-post"
   => Load objects from domain "post" where ID = 37
   modules
@@ -242,7 +242,7 @@ Going back to our previous example, if we need to show data from the post's auth
 
 Resulting in the following query:
 
-```
+```sql
 SELECT 
   p.title, p.content, p.author, u.name, u.avatar 
 FROM 
@@ -257,7 +257,7 @@ WHERE
 
 Instead of hardcoding classnames or other properties such as a title's HTML tag or an avatar max width inside of JavaScript files for rendering in the client, we can pass configuration values already through the API, so that then these can be directly updated on the server and without the need to redeploy JavaScript files:
 
-```
+```json
 {
   modulesettings: {
     "module1" {
@@ -304,7 +304,7 @@ Instead of hardcoding classnames or other properties such as a title's HTML tag 
 
 Configuration values can be set through props, defined across the component hierarchy so that modules can modify the behavior of their descendant modules, and where higher-level modules have priority for setting a prop. Setting props works in one direction only: parent modules can set props on any descendant module, but no module can set props on any ancestor module or on any module belonging to a different branch from the component hierarchy. In the example below, "module1" can set props on "module2", "module3" and "module4", "module2" on "module3", and "module3" and "module4" on nobody:
 
-```
+```json
 "module1"
   modules
     "module2"
@@ -315,7 +315,7 @@ Configuration values can be set through props, defined across the component hier
 
 Let's say we have a module "module3" with property "color", set as "red" by default. By not specifying a module target of the prop, the module in the pseudo-code below is setting a prop on itself:
 
-```
+```php
 Module("module3")->set_prop({
   prop: "color",
   value: "red"
@@ -324,7 +324,7 @@ Module("module3")->set_prop({
 
 Through property "modulepath", a module can target any of its descendant modules any number of levels deep from itself. In the pseudo-code below, parent module "module2" adds property "modulepath" pointing to submodule "module3", overriding its value for property "color" to "green":
 
-```
+```php
 Module("module2")->set_prop({
   modulepath: ["module3"],
   prop: "color",
@@ -334,7 +334,7 @@ Module("module2")->set_prop({
 
 And this can go on for any number of ancestor modules. For instance, in the pseudo-code below, the "module1" module, which is parent to "module2", can further override the value for property "color" applied to module "module3":
 
-```
+```php
 Module("module1")->set_prop({
   modulepath: ["module2", "module3"],
   prop: "color",
@@ -350,7 +350,7 @@ Armed with these capabilities, the API allows for powerful customization of comp
 
 And in the image below, a module can be rendered in three different fashions simply by overriding what classes are printed in the module: 
 
-```
+```php
 // Layout on the left uses default configuration of thumbnail on top of the text
 Module("post-layout")->set_prop({
   prop: "classes",
@@ -390,7 +390,7 @@ Module("floating-window")->set_prop({
 
 PoP will issue only one request to fetch all the data for all components in the page, normalizing the database data for all results. The API endpoint to be called is simply the same as the webpage URL for which we are fetching the data, just adding an additional parameter `output=json` to indicate to bring the data in JSON format instead of printing it as HTML:
 
-```
+```bash
 GET - /url-of-the-page/?output=json
 ```
 
@@ -402,7 +402,7 @@ This is accomplished by allowing to select what module paths (i.e. the path to a
 
 For instance, in the following module hierarchy every module is loading data, hence every level has an entry `dbobjectids`:
 
-```
+```json
 "module1"
   dbobjectids: [...]
   modules
@@ -422,7 +422,7 @@ For instance, in the following module hierarchy every module is loading data, he
 
 Then requesting the webpage URL adding parameters `modulefilter=modulepaths` and `modulepaths[]=module1.module2.module5` will produce the following response:
 
-```
+```json
 "module1"
   modules
     "module2"
@@ -438,7 +438,7 @@ In essence, the API starts loading data starting from module1 => module2 => modu
 
 Each module that loads data exports the URL to interact with it under entry `dataloadsource` from under section `datasetmodulemeta`:
 
-```
+```json
 {
   datasetmodulemeta: {
     "module1" {
