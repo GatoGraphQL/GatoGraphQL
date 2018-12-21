@@ -97,7 +97,7 @@ At its most basic, PoP is an API for retrieving data, accessible under `/page-ur
 
 _Response from calling `/page-url/?output=json`:_
 
-```json
+```javascript
 {
   databases: {
     primary: {
@@ -175,7 +175,7 @@ _Response from calling `/page-url/?output=json`:_
 
 In addition to retrieving database data, the API can also return configuration values:
 
-```json
+```javascript
 {
   modulesettings: {
     "topmodule": {
