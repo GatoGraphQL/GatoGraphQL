@@ -102,7 +102,7 @@ Modules are most useful when they are generic and enable customization through p
 
 Setting props works in one direction only: modules can set props on any descendant module, but no module can set props on any ancestor module or on any module belonging to a different branch from the component hierarchy. In the structure below, "module1" can set props on "module2", "module3" and "module4", "module2" on "module3", and "module3" and "module4" on nobody:
 
-```json
+```javascript
 "module1"
   modules
     "module2"

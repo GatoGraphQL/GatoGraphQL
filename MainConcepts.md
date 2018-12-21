@@ -162,7 +162,7 @@ Hence, along the component hierarchy, some modules will be in charge of loading 
 
 Fetching all the required properties for the DB object can be done automatically by traversing the component hierarchy: starting from the data loading module, we iterate all its descendant modules all the way down until reaching a new data loading module, or until the end of the tree; at each level we obtain all required properties, and then merge all properties together and query them from the database, all of them only once. In the structure below, module "single-post" fetches the results from the DB, and submodules "post-title" and "post-content" define properties to be loaded for the queried DB object ("title" and "content" respectively); submodule "post-layout" does not require any data fields. Please notice how the executed query, which is calculated automatically from the component hierarchy and their required data fields, will contain all the properties needed by all the modules and their submodules:
 
-```json
+```javascript
 "single-post"
   => Load objects from domain "post" where ID = 37
   modules
@@ -187,7 +187,7 @@ WHERE
 
 The query to fetch data from the database is automatically updated whenever the component hierarchy changes. If we then add submodule "post-thumbnail", which requires data field "thumbnail", under "single-post":
 
-```json
+```javascript
 "single-post"
   => Load objects from domain "post" where ID = 37
   modules
@@ -218,7 +218,7 @@ This strategy also applies to relational objects. Consider the image below: Star
 
 Going back to our previous example, if we need to show data from the post's author, stacking submodule "post-author" will change the domain at that level from "post" to the corresponding "user", and from this level downwards the DB object loaded into the context passed to the module is the user. Then, submodules "user-name" and "user-avatar" under "post-author" will load properties "name" and "avatar" under the user object:
 
-```json
+```javascript
 "single-post"
   => Load objects from domain "post" where ID = 37
   modules
@@ -304,7 +304,7 @@ Instead of hardcoding classnames or other properties such as a title's HTML tag 
 
 Configuration values can be set through props, defined across the component hierarchy so that modules can modify the behavior of their descendant modules, and where higher-level modules have priority for setting a prop. Setting props works in one direction only: parent modules can set props on any descendant module, but no module can set props on any ancestor module or on any module belonging to a different branch from the component hierarchy. In the example below, "module1" can set props on "module2", "module3" and "module4", "module2" on "module3", and "module3" and "module4" on nobody:
 
-```json
+```javascript
 "module1"
   modules
     "module2"
@@ -402,7 +402,7 @@ This is accomplished by allowing to select what module paths (i.e. the path to a
 
 For instance, in the following module hierarchy every module is loading data, hence every level has an entry `dbobjectids`:
 
-```json
+```javascript
 "module1"
   dbobjectids: [...]
   modules
@@ -422,7 +422,7 @@ For instance, in the following module hierarchy every module is loading data, he
 
 Then requesting the webpage URL adding parameters `modulefilter=modulepaths` and `modulepaths[]=module1.module2.module5` will produce the following response:
 
-```json
+```javascript
 "module1"
   modules
     "module2"
