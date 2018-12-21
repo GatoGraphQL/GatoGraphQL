@@ -389,11 +389,12 @@ To allow the website's service-worker.js be able to cache content coming from th
     </IfModule>
 -->
 
-## Documentation (work in progress)
+## Documentation
 
-Please find all documentation in [Documentation.md](Documentation.md).
+- [Main Concepts](MainConcepts.md)
+- [Developer Guide](DeveloperGuide.md)  (work in progress)
 
-> Note: We are currently working on the documentation. Sections concerning the API will be progressively completed throughout the last 2 weeks of December 2018; sections concerning rendering and additional layers will be added alongside the corresponding code being completed and added to the repository, throughout 1st and 2nd quarter of 2019.
+> Note: We are currently working on the documentation. Developer guide's sections concerning the API will be progressively completed throughout the last 2 weeks of December 2018; sections concerning rendering and additional layers will be added alongside the corresponding code being completed and added to the repository, throughout 1st and 2nd quarter of 2019.
 
 ## Want to contribute?
 
