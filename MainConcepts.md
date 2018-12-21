@@ -33,7 +33,7 @@ In PoP, everything is a module:
 
 The relationship of all modules wrapping each other, from the top-most module all the way down to the last level, is called the component hierarchy. The PoP API has the component hierarchy at its core, implemented as an associative array on the server-side, in which each module states its name as the key attribute and whatever properties it needs as values, and then nests its descendant modules under property "modules", iteratively adding their own data and that of their own descendant modules. Finally, this associative array is returned as a JSON object for comsumption through the API:
 
-```json
+```javascript
 {
   "topmost-module": {
     someprop: {...},
@@ -74,7 +74,7 @@ The relationship of all modules wrapping each other, from the top-most module al
 
 PoP represents the database data in a relational manner, organized under each object type, object ID and object properties, mirroring the structure of the data in the database. This way, all data is normalized, fetched only once from the database, and printed only once in the output. It is added under entry `databases` in the API response:
 
-```json
+```javascript
 {
   databases: {
     primary: {
@@ -100,7 +100,7 @@ PoP represents the database data in a relational manner, organized under each ob
 
 For instance, if fetching the data for blog posts with titles "Hello World!" and "Everything fine?" and author "Leo" both of them, then PoP brings the response below; please notice how property "author" contains the ID to the author object instead of printing the author data directly:
 
-```json
+```javascript
 {
   databases: {
     primary: {
@@ -126,7 +126,7 @@ For instance, if fetching the data for blog posts with titles "Hello World!" and
 
 Each module knows which are its queried objects from section `datasetmoduledata`, which provides the IDs of the queried objects under property `dbobjectids` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `modulesettings`, which indicates to what type each object belongs under property `dbkeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
 
-```json
+```javascript
 {
   modulesettings: {
     "page": {
@@ -257,7 +257,7 @@ WHERE
 
 Instead of hardcoding classnames or other properties such as a title's HTML tag or an avatar max width inside of JavaScript files for rendering in the client, we can pass configuration values already through the API, so that then these can be directly updated on the server and without the need to redeploy JavaScript files:
 
-```json
+```javascript
 {
   modulesettings: {
     "module1": {
@@ -438,7 +438,7 @@ In essence, the API starts loading data starting from module1 => module2 => modu
 
 Each module that loads data exports the URL to interact with it under entry `dataloadsource` from under section `datasetmodulemeta`:
 
-```json
+```javascript
 {
   datasetmodulemeta: {
     "module1": {
