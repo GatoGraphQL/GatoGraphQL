@@ -137,7 +137,7 @@ _Response from calling `/page-url/?output=json`:_
     }
   },
   datasetmoduledata {
-    "topmodule" {
+    "topmodule": {
       modules: {
         "datamodule1": {
           dbobjectids: [1], 
@@ -149,7 +149,7 @@ _Response from calling `/page-url/?output=json`:_
     }
   },
   modulesettings {
-    "topmodule" {
+    "topmodule": {
       modules: {
         "datamodule1": {
           dbkeys: {
@@ -178,7 +178,7 @@ In addition to retrieving database data, the API can also return configuration v
 ```json
 {
   modulesettings {
-    "topmodule" {
+    "topmodule": {
       modules: {
         "layoutpostmodule": {
           configuration: {

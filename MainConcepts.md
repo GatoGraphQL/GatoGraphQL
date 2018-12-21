@@ -129,7 +129,7 @@ Each module knows which are its queried objects from section `datasetmoduledata`
 ```json
 {
   modulesettings: {
-    "page" {
+    "page": {
       modules: {
         "post-feed": {
           dbkeys: {
@@ -141,7 +141,7 @@ Each module knows which are its queried objects from section `datasetmoduledata`
     }
   },
   datasetmoduledata: {
-    "page" {
+    "page": {
       modules: {
         "post-feed": {
           dbobjectids: [4, 9]
@@ -260,7 +260,7 @@ Instead of hardcoding classnames or other properties such as a title's HTML tag 
 ```json
 {
   modulesettings: {
-    "module1" {
+    "module1": {
       modules: {
         "module2": {
           configuration: {
@@ -441,7 +441,7 @@ Each module that loads data exports the URL to interact with it under entry `dat
 ```json
 {
   datasetmodulemeta: {
-    "module1" {
+    "module1": {
       modules: {
         "module2": {
           modules: {
