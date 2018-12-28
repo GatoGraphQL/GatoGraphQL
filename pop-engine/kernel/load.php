@@ -18,7 +18,7 @@ require_once 'filter/load.php';
 require_once 'meta/load.php';
 require_once 'modulepath/load.php';
 require_once 'modulefilters/load.php';
-require_once 'processor-managers/load.php';
+require_once 'moduleprocessor-managers/load.php';
 require_once 'moduleprocessors/load.php';
 require_once 'pagemoduleprocessors/load.php';
 require_once 'settings/load.php';
