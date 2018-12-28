@@ -311,7 +311,7 @@ Every module has a unique name that identifies it, defined as a constant:
 define ('POP_MODULE_SOMENAME', 'somename');
 ```
 
-The name of the module must not necessarily remain fixed: it can be shortened for producing a smaller output, constantly modified to evade bots, or others. Different strategies can be applied through function [`DefinitionUtils::get_module_definition`](https://github.com/leoloso/PoP/blob/master/pop-engine/server/definition-manager/utils.php#L16):
+The name of the module must not necessarily remain fixed: it can be shortened for producing a smaller output, constantly modified to evade bots, or others. Different strategies can be applied through function [`DefinitionUtils::get_module_definition`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/definition-manager/definition-utils.php#L17):
 
 ```php
 define ('POP_MODULE_SOMENAME', \PoP\Engine\DefinitionUtils::get_module_definition('somename'));
@@ -367,7 +367,7 @@ new CustomModuleProcessor();
 
 > Note: if a module is stray, i.e. no ModuleProcessor handles it, and it is added to the component hierarchy, the engine will throw an exception and terminate the execution of the request. This error happens on runtime, not on compilation time.
 
-To access the properties of a module, we must obtain its corresponding ModuleProcessor through function `get_processor` from class [`ModuleProcessor_Manager`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/processor-managers/pop-processor-manager.php):
+To access the properties of a module, we must obtain its corresponding ModuleProcessor through function `get_processor` from class [`ModuleProcessor_Manager`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessor-managers/pop-moduleprocessor-manager.php):
 
 ```php
 // Retrive the PoP_ModuleProcessor_Manager object from the factory
@@ -632,7 +632,7 @@ Setting props works in one direction only: modules can set props on any descenda
 
 Modules can set props on descendant modules whichever number of levels below in the component hierarchy, and it is done directly, i.e. without involving the modules in between or affecting their props. In the structure above, "module1" can set a prop directly on "module3" without going through "module2".
 
-Setting props is done through functions [`init_model_props($module, &$props)`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L160) and [`init_request_props($module, &$props)`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L201). A prop must be implemented in either function, but not on both of them. `init_request_props` is used for defining props that depend directly on the requested URL, such as adding a classname `post-{id}` to prop `"class"`, where `{id}` is the ID of the requested post on that URL. `init_model_props` is used for everything else. 
+Setting props is done through functions [`init_model_props($module, &$props)`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L158) and [`init_request_props($module, &$props)`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L199). A prop must be implemented in either function, but not on both of them. `init_request_props` is used for defining props that depend directly on the requested URL, such as adding a classname `post-{id}` to prop `"class"`, where `{id}` is the ID of the requested post on that URL. `init_model_props` is used for everything else. 
 
 Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `get_modules` and those inner functions invoked by `get_modules`), every function in the `ModuleProcessor` can receive `$props`. 
 
@@ -640,9 +640,9 @@ Setting props is done at the very beginning: Immediately after obtaining the com
 
 Inside these 2 functions, we get to set the props through the following 3 functions:
 
-- [`function set_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L396)
-- [`function append_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L404)
-- [`function merge_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L412)
+- [`function set_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L394)
+- [`function append_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L402)
+- [`function merge_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L410)
 
 These 3 functions are similar to each other, with the following differences: 
 
@@ -673,7 +673,7 @@ function init_model_props($module, &$props) {
 }
 ```
 
-Accessing the value of the prop is done through [`function get_prop($module, &$props, $field, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L420). The signature of the function is similar to the ones above, however without parameter `$value`.
+Accessing the value of the prop is done through [`function get_prop($module, &$props, $field, $starting_from_modulepath = array())`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L418). The signature of the function is similar to the ones above, however without parameter `$value`.
 
 Let's see an example: a component for rendering maps has 2 orientations: `"horizontal"` and `"vertical"`. It is composed by modules `"map" => "map-inner"`, and both these modules need this property. Module `"map"` will set the value by default to `"vertical"`, obtain the value for this prop just in case an ancestor module had already set the prop, and then set this value on module `"map-inner"`. Function below is implemented for module `"map"`:
 
@@ -790,7 +790,7 @@ Along the component hierarchy, certain modules will define what objects from the
 
 Those modules indicating what DB objects must be loaded are called "dataloading" modules. To do this, dataloading modules must define the functions and properties below.
 
-##### DataSource
+##### Defining the DataSource
 
 Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function [`get_datasource`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L563). By default results are set as `mutable on request` (through constant `POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
 
@@ -808,7 +808,7 @@ function get_datasource($module, &$props) {
 }
 ```
 
-##### Database Object IDs
+##### Defining the Database Object IDs
 
 Define the IDs of the objects to be retrieved from the database, through function [`get_dbobjectids`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L570). If the module already knows what database objects are required, it can simply return them:
 
@@ -826,9 +826,9 @@ function get_dbobject_ids($module, &$props, $data_properties) {
 }
 ```
 
-However, most likely, the objects are not known in advance, and must be found through a query. In this case, the ModuleProcessor must inherit from class [`QueryDataModuleProcessorBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor.php), which implements [`get_dbobject_ids`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor.php#L48) transferring the responsibility of finding the database object IDs to function [`get_dbobject_ids`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/querydata-dataloader.php#L9) from the corresponding [Dataloader](#dataloader).
+However, most likely, the objects are not known in advance, and must be found through a query. In this case, the ModuleProcessor must inherit from class [`QueryDataModuleProcessorBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor.php), which implements [`get_dbobject_ids`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor-trait.php#L48) transferring the responsibility of finding the database object IDs to function [`get_dbobject_ids`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/querydata-dataloader.php#L9) from the corresponding [Dataloader](#dataloader).
 
-##### Dataloader
+##### Defining the Dataloader
 
 Define what [Dataloader](#dataloader) to use, which is the object in charge of fetching data from the database, through function [`get_dataloader`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L575):
 
@@ -846,9 +846,9 @@ function get_dataloader($module) {
 }
 ```
 
-##### Query Args
+##### Defining the Query Args
 
-Customize a query to filter data, which is passed to the Dataloader, through functions [`get_immutable_dataload_query_args`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydataprocessor-trait.php#L6) and [`get_mutableonrequest_dataload_query_args`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydataprocessor-trait.php#L10):
+Customize a query to filter data, which is passed to the Dataloader, through functions [`get_immutable_dataload_query_args`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor-trait.php#L6) and [`get_mutableonrequest_dataload_query_args`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor-trait.php#L10):
 
 ```php
 protected function get_immutable_dataload_query_args($module, $props) {
@@ -885,9 +885,9 @@ protected function get_mutableonrequest_dataload_query_args($module, $props) {
 }
 ```
 
-##### Filter
+##### Defining the Filter
 
-The fetched data can be filtered through [Filter](#filter) objects, defined through function [`get_filter`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydataprocessor-trait.php#L18):
+The fetched data can be filtered through [Filter](#filter) objects, defined through function [`get_filter`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor-trait.php#L18):
 
 ```php
 function get_filter($module) {
@@ -903,9 +903,9 @@ function get_filter($module) {
 }
 ```
 
-##### QueryHandler
+##### Defining the QueryHandler
 
-After fetching data, we can communicate state (eg: are there more results? what's the next paging number? etc) through [QueryHandler](#queryhandler) objects, defined through function [`get_queryhandler`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydataprocessor-trait.php#L14). By default, it returns object with name `GD_DATALOAD_QUERYHANDLER_ACTIONEXECUTION`, needed when executing an operation (see section [Data-Posting and Operations](#data-posting-and-operations)):
+After fetching data, we can communicate state (eg: are there more results? what's the next paging number? etc) through [QueryHandler](#queryhandler) objects, defined through function [`get_queryhandler`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-querydatamoduleprocessor-trait.php#L14). By default, it returns object with name `GD_DATALOAD_QUERYHANDLER_ACTIONEXECUTION`, needed when executing an operation (see section [Data-Posting and Operations](#data-posting-and-operations)):
 
 ```php
 function get_filter($module) {
@@ -921,7 +921,7 @@ function get_filter($module) {
 }
 ```
 
-##### Data Properties
+##### Defining the Data Properties
 
 If the module needs to pass a variable to any other object involved in fetching/processing data ([Dataloader](#dataloader), [QueryHandler](#queryhandler), [ActionExecuter](#actionexecuter), etc), it can do so through "data properties", set through functions `get_immutable_headdatasetmodule_data_properties` and `get_mutableonrequest_headdatasetmodule_data_properties`:
 
@@ -1020,9 +1020,9 @@ Among others, the following are several uses cases for not loading the data for 
 
 Starting from a dataloading module, and including itself, any descendant module can execute the functions described below: loading properties or "data fields" on the database object, and "switching domain" from the current database object to another one. 
 
-##### Data-Fields
+##### Defining the Data-Fields
 
-"Data fields", which are the properties to be required from the loaded database object, are defined through function [`get_data_fields`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php*590):
+"Data fields", which are the properties to be required from the loaded database object, are defined through function [`get_data_fields`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L590):
 
 ```php
 function get_data_fields($module, $props) {
@@ -1165,7 +1165,7 @@ function get_dbobject_ids($data_properties) {
 }
 ```
 
-Dataloaders fetching lists of results (eg: a list of posts, a list of users, etc) will need to execute a query and filter the results. This logic has been implemented in trait [`Dataloader_ListTrait`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataloader-list-trait.php#L42), which requires to implement functions [`get_query`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataloader-list-trait.php#L138) to generate the query from the `$query_args` provided through [Data Properties](#data-properties), and [`execute_query_ids`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataloader-list-trait.php#L16) to, given the generated `$query`, return the list of object IDs:
+Dataloaders fetching lists of results (eg: a list of posts, a list of users, etc) will need to execute a query and filter the results. This logic has been implemented in trait [`Dataloader_ListTrait`](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/library/dataload/dataloaders/dataloader-list-trait.php), which requires to implement functions [`get_query`](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/library/dataload/dataloaders/dataloader-list-trait.php#L138) to generate the query from the `$query_args` provided through [Data Properties](#data-properties), and [`execute_query_ids`](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/library/dataload/dataloaders/dataloader-list-trait.php#L16) to, given the generated `$query`, return the list of object IDs:
 
 ```php
 function get_query($query_args) {
@@ -1308,7 +1308,7 @@ new GD_DataLoad_FieldProcessor_Posts();
 
 #### FieldProcessorHook
 
-A FieldProcessorHook is an object that allows to resolve data-fields for specific FieldProcessors, either to override their value or to extend them. For instance, it can be implemented at the application level, resolving those application-specific data fields. It must inherit from class [`FieldProcessor_HookBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-fieldprocessor-hookbase.php) and implement function [`get_value`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-fieldprocessor-hookbase.php#L38), which receives three parameters, `$resultitem` which is the database object, `$field` which is the data-field to resolve, and `$fieldprocessor` which is the FieldProcessor object hooked into, and must return the value for that property applied to the database object. 
+A FieldProcessorHook is an object that allows to resolve data-fields for specific FieldProcessors, either to override their value or to extend them. For instance, it can be implemented at the application level, resolving those application-specific data fields. It must inherit from class [`FieldProcessor_HookBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-fieldprocessor-hookbase.php) and implement function [`get_value`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-fieldprocessor-hookbase.php#L35), which receives three parameters, `$resultitem` which is the database object, `$field` which is the data-field to resolve, and `$fieldprocessor` which is the FieldProcessor object hooked into, and must return the value for that property applied to the database object. 
 
 For instance, a FieldProcessorHook for posts might add a custom "disclaimer" message, and it looks like this:
 
@@ -1520,7 +1520,7 @@ To achieve this, the ModuleProcessor must define the [ActionExecuter](#actionexe
 
 ```php
 function get_actionexecuter($module) {
-	
+  
   switch ($module) {
 
     case POP_MODULE_SOMENAME:
@@ -1554,35 +1554,35 @@ class ActionExecuter_Logout extends \PoP\Engine\ActionExecuterBase {
 
   function get_name() {
     
-		return GD_DATALOAD_ACTIONEXECUTER_LOGOUT;
-	}
+    return GD_DATALOAD_ACTIONEXECUTER_LOGOUT;
+  }
 
   function execute(&$data_properties) {
 
-		if ('POST' == $_SERVER['REQUEST_METHOD']) { 
+    if ('POST' == $_SERVER['REQUEST_METHOD']) { 
 
-			// If the user is not logged in, then return the error
-			$vars = \PoP\Engine\Engine_Vars::get_vars();
-			if (!$vars['global-state']['is-user-logged-in']) {
+      // If the user is not logged in, then return the error
+      $vars = \PoP\Engine\Engine_Vars::get_vars();
+      if (!$vars['global-state']['is-user-logged-in']) {
 
-				$error = __('You are not logged in.');
-			
-				// Return error string
-				return array(
-					GD_DATALOAD_QUERYHANDLERRESPONSE_ERRORSTRINGS => array($error)
-				);
-			}
+        $error = __('You are not logged in.');
+      
+        // Return error string
+        return array(
+          GD_DATALOAD_QUERYHANDLERRESPONSE_ERRORSTRINGS => array($error)
+        );
+      }
 
-			$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
-			$cmsapi->logout();
+      $cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
+      $cmsapi->logout();
 
-			return array(
-				GD_DATALOAD_QUERYHANDLERRESPONSE_SUCCESS => true
-			);
-		}
+      return array(
+        GD_DATALOAD_QUERYHANDLERRESPONSE_SUCCESS => true
+      );
+    }
 
-		return parent::execute($data_properties);
-	}
+    return parent::execute($data_properties);
+  }
 }
 
 //Initialize
@@ -1605,10 +1605,10 @@ function execute(&$data_properties) {
 
     $errors = array();
     if (empty($form_data['post_id'])) {
-			$errors[] = __('We don\'t know what post the comment is for.');
-		}
-		if (empty($form_data['comment'])) {
-			$errors[] = __('The comment is empty.');
+      $errors[] = __('We don\'t know what post the comment is for.');
+    }
+    if (empty($form_data['comment'])) {
+      $errors[] = __('The comment is empty.');
     }    
     if ($errors) {
 
@@ -1627,7 +1627,7 @@ function execute(&$data_properties) {
     // No errors => success
     return array(
       GD_DATALOAD_QUERYHANDLERRESPONSE_SUCCESS => true
-    );			
+    );      
   }
 
   return parent::execute($data_properties);
@@ -1742,7 +1742,7 @@ Will be added soon...
 
 ### Context Vars
 
-It is a global variable, hosted under [`PoP_ModuleManager_Vars::$vars`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L5), accessed through [`PoP_ModuleManager_Vars::get_vars`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L85), and naturally referred as `$vars`, which holds important information needed to process the webpage. Properties in `$vars` are those which are accessed widely throughout the application, and which, upon changing their value, alter the component hierarchy.
+It is a global variable, hosted under [`PoP_ModuleManager_Vars::$vars`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L6), accessed through [`PoP_ModuleManager_Vars::get_vars`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L86), and naturally referred as `$vars`, which holds important information needed to process the webpage. Properties in `$vars` are those which are accessed widely throughout the application, and which, upon changing their value, alter the component hierarchy.
 
 **1. Properties which are accessed widely throughout the application**
 
@@ -1756,9 +1756,9 @@ Changing the values of certain properties will alter the component hierarchy. Fo
 
 Keeping these properties in `$vars` is needed for the following reasons:
 
-_1. To calculate the `modelInstanceId`:_ the `modelInstanceId` is the unique identifier representing the particular instance of the component hierarchy. This id is calculated by function [`ModelInstanceProcessor_Utils::get_model_instance_id()`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/vars/pop-modelinstance-processor-utils.php#L11), which simply calculates a hash of the values of all properties which alter the component hierarchy. Because not all properties in `$vars` alter the component hierarchy, these ones must be defined by implementing hook [`"ModelInstanceProcessor:model_instance_components"`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/vars/pop-modelinstance-processor-utils.php#L17)
+_1. To calculate the `modelInstanceId`:_ the `modelInstanceId` is the unique identifier representing the particular instance of the component hierarchy. This id is calculated by function [`ModelInstanceProcessor_Utils::get_model_instance_id()`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/vars/pop-modelinstance-processor-utils.php#L12), which simply calculates a hash of the values of all properties which alter the component hierarchy. Because not all properties in `$vars` alter the component hierarchy, these ones must be defined by implementing hook [`"ModelInstanceProcessor:model_instance_components"`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/vars/pop-modelinstance-processor-utils.php#L22)
 
-_2. To determine the entry module_: The component hierarchy's top-most module is called the entry module. Every potential entry module must define a list of conditions, to be evaluated against `$vars`, that need be satisfied to be chosen the entry module  (more on this under [PageModuleProcessors](#pagemoduleprocessors)).
+_2. To determine the entry module_: The component hierarchy's top-most module is called the entry module. Every potential entry module must define a list of conditions, to be evaluated against `$vars`, that need be satisfied to be chosen the entry module  (more on this under [PageModuleProcessors](#pagemoduleprocessor)).
 
 _3. To decouple processed page from requested page_: Storing all properties which modify the component hierarchy under `$vars`, making sure that these properties are only accessed through `$vars` all throughout the application, and then modifying these values directly in `$vars`, makes it possible to manipulate the response, for instance adding more data. This way, it is possible to fetch more than one page's content on a single request (for preloading views to cache on the client or other use cases), or send personalized transactional emails to many users on a single request, among other use cases.
 
@@ -1773,9 +1773,9 @@ When first accessed, `$vars` is initialized with certain current request values,
 - The queried object (the post object in single hierarchy, the user object in author hierarchy, etc)
 - Others
 
-Plugins must add their own properties and corresponding values in `$vars` by implementing hook [`"\PoP\Engine\Engine_Vars:add_vars"`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L242). `$vars` can be [`reset`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L8) at any moment and filled with different values, for instance to process a different request.
+Plugins must add their own properties and corresponding values in `$vars` by implementing hook [`"\PoP\Engine\Engine_Vars:add_vars"`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L243). `$vars` can be [`reset`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/pop-engine-vars.php#L9) at any moment and filled with different values, for instance to process a different request.
 
-### PageModuleProcessors
+### PageModuleProcessor
 
 Will be added soon...
 
@@ -1871,7 +1871,7 @@ We are currently attempting to make the existing implementation of PoP be CMS-ag
 
 Making functionality become CMS-agnostic is accomplished by splitting plugins into 2 entities: a generic one containing definitions of interfaces for all the required functionalities, and the implementation of the interfaces for the specific CMS.
 
-For instance, plugin [PoP CMS Model](https://github.com/leoloso/PoP/tree/master/pop-cmsmodel) is a generic implementation, declaring all the functionalities it requires through [`interface \PoP\CMSModel\FunctionAPI`](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/kernel/cms-apis/cms-functionapi-interface.php). This interface is implemented by plugin [PoP CMS Model for WordPress](https://github.com/leoloso/PoP/tree/master/pop-cmsmodel-wp) through [`class \PoP\CMSModel\WP\FunctionAPI`](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel-wp/kernel/cms-apis/cms-functionapi.php).
+For instance, plugin [PoP CMS Model](https://github.com/leoloso/PoP/tree/master/pop-cmsmodel) is a generic implementation, declaring all the functionalities it requires through [`interface \PoP\CMSModel\FunctionAPI`](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/kernel/cms-apis/cms-functionapi-interface.php). This interface is implemented by plugin [PoP CMS Model for WordPress](https://github.com/leoloso/PoP/tree/master/pop-cmsmodel-wp) through class [`\PoP\CMSModel\WP\FunctionAPI`](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel-wp/kernel/cms-apis/cms-functionapi.php).
 
 Then, all throughout the application, we must access the functionality through the interface and never directly through the CMS library. For instance, function `get_posts`, which is defined in the interface mentioned above, must be invoked like this:
 
@@ -1897,7 +1897,7 @@ Let's analyze, for each of these items, how they can be made CMS-agnostic.
 
 PoP implements the same concept of hierarchies as in WordPress, even though with a subset of its implementations: home, single, author, page, tag and 404 (category will be supported in the future too). 
 
-Deducing the hierarchy from the URL is done through interface's [`function query_is_hierarchy($query, $hierarchy)`](https://github.com/leoloso/PoP/blob/master/pop-cms/kernel/cms-apis/cms-functionapi-interface.php), which is implemented for WordPress [here](https://github.com/leoloso/PoP/blob/master/pop-cms-wp/kernel/cms-apis/cms-functionapi.php#L69).
+Deducing the hierarchy from the URL is done through interface's [`function query_is_hierarchy($query, $hierarchy)`](https://github.com/leoloso/PoP/blob/master/pop-cms/kernel/cms-apis/cms-functionapi-interface.php#L24), which is implemented for WordPress [here](https://github.com/leoloso/PoP/blob/master/pop-cms-wp/kernel/cms-apis/cms-functionapi.php#L70).
 
 The signature of this function receives a `$query` object, which is based on the WordPress `WP_Query` class, and which is in charge of calculating the hierarchy from either the current URL or from the properties in `$vars`. Hence, an implementation of the `$query` object, [through an interface `Query`](https://github.com/leoloso/PoP/issues/78), must be implemented for the other CMSs. This should be relatively easy to accomplish.
 
