@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine\Themes;
 
-class ThemeBase {
+abstract class ThemeBase {
 
 	var $thememodes, $themestyles;
 
@@ -24,10 +24,7 @@ class ThemeBase {
 		$this->themestyles[$themestyle->get_name()] = $themestyle;
 	}
 
-	function get_name() {
-		
-		return '';
-	}
+	abstract function get_name();
 
 	function get_thememodes() {
 

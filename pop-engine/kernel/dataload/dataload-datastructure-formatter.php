@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
 
-class DataStructureFormatter {
+abstract class DataStructureFormatterBase {
 
 	function __construct() {
     
@@ -9,10 +9,7 @@ class DataStructureFormatter {
 		$gd_dataload_datastructureformat_manager->add($this->get_name(), $this);
 	}
 	
-	function get_name() {
-	
-		return '';
-	}
+	abstract function get_name();
 	
 	function get_formatted_data($data) {
 	

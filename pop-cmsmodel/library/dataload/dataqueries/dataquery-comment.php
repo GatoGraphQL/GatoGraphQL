@@ -3,7 +3,7 @@ namespace PoP\CMSModel;
 
 define ('GD_DATAQUERY_COMMENT', 'comment');
 
-class DataQuery_Comment extends \PoP\Engine\DataQuery {
+class DataQuery_Comment extends \PoP\Engine\DataQueryBase {
 
 	function get_name() {
 

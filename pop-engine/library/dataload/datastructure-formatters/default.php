@@ -3,7 +3,7 @@ namespace PoP\Engine\Impl;
  
 define ('GD_DATALOAD_DATASTRUCTURE_DEFAULT', 'default');
 
-class DataStructureFormatter_Default extends \PoP\Engine\DataStructureFormatter {
+class DataStructureFormatter_Default extends \PoP\Engine\DataStructureFormatterBase {
 
 	function get_name() {
 			

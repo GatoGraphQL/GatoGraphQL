@@ -1,15 +1,12 @@
 <?php
 namespace PoP\Engine;
  
-class FieldProcessor_HookBase {
+abstract class FieldProcessor_HookBase {
 
 	/**
 	 * Function to override
 	 */
-	function get_fieldprocessors_to_hook() {
-
-		return array();
-	}
+	abstract function get_fieldprocessors_to_hook();
 
 	function __construct() {
 

@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
 
-abstract class ModuleProcessorDecoratorBase {
+abstract class ModuleDecoratorProcessorBase {
 
 	use ModulePathProcessorTrait;
 
@@ -17,7 +17,7 @@ abstract class ModuleProcessorDecoratorBase {
 	protected function get_module_processordecorator($module) {
 
 		$processor = $this->get_decoratedmodule_processor($module);
-		return $this->get_processordecorator_manager()->get_processordecorator($processor);
+		return $this->get_moduledecoratorprocessor_manager()->get_processordecorator($processor);
 	}
 
 	protected function get_decoratedmodule_processor($module) {
@@ -26,7 +26,7 @@ abstract class ModuleProcessorDecoratorBase {
 		return $moduleprocessor_manager->get_processor($module);
 	}
 
-	protected function get_processordecorator_manager() {
+	protected function get_moduledecoratorprocessor_manager() {
 
 		return null;
 	}

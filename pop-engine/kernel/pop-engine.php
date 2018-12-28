@@ -140,7 +140,7 @@ class Engine {
 				// Reset $vars so that it gets created anew
 				Engine_Vars::reset();
 
-				// Allow functionalities to be reset too. Eg: ActionExecuter results
+				// Allow functionalities to be reset too. Eg: ActionExecuterBase results
 				do_action('\PoP\Engine\Engine:generate_data:reset');
 				
 				// Process the request with the new $vars and merge it with all other results

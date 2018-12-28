@@ -9,12 +9,22 @@ abstract class Dataloader {
 		$gd_dataload_manager->add($this);
 	}
     
+    abstract function get_name();
+
     /**
      * Function to override
      */
-    function get_name() {
-    
+    function get_database_key() {
+
 		return '';
+	}
+
+	/**
+     * Function to override
+     */
+	function get_fieldprocessor() {
+
+		return null;
 	}
 	
 	/**
@@ -34,7 +44,7 @@ abstract class Dataloader {
 		return array();
 	}
 
-	function get_dataitems($formatter, $resultset, $ids_data_fields = array()) {	
+	final function get_dataitems($formatter, $resultset, $ids_data_fields = array()) {	
 		
 		global $gd_dataload_fieldprocessor_manager;
 
@@ -83,7 +93,7 @@ abstract class Dataloader {
 	 * key: id
 	 * value: data-fields to fetch for that id
 	 */
-	function get_data($ids_data_fields = array()) {
+	final function get_data($ids_data_fields = array()) {
 	
 		// Get the ids
 		$ids = array_keys($ids_data_fields);
@@ -91,32 +101,5 @@ abstract class Dataloader {
 		// Execute the query, get data to iterate
 		return $this->execute_get_data($ids);
 	}	
-	
-	/**
-     * Function to override
-     */
-	function get_fieldprocessor() {
-
-		return null;
-	}
- //    function get_fieldprocessor() {
-
-	// 	global $gd_dataloader_fieldprocessor_manager, $gd_dataload_fieldprocessor_manager;
-		
-	// 	// From the dataloader name, obtain the FieldProcessor Name
-	// 	$fieldprocessor_name = $gd_dataloader_fieldprocessor_manager->get_fieldprocessor($this->get_name());
-
-	// 	// And from that, obtain the FieldProcessor
-	// 	return $gd_dataload_fieldprocessor_manager->get($fieldprocessor_name);
-	// }
-	
-	/**
-     * Function to override
-     */
-	function get_database_key() {
-	
-		return '';
-	}
-
 }
 	

@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
  
-abstract class DataQuery {
+abstract class DataQueryBase {
 
 	// Allow Plugins to inject extra properties. Eg: PoP User Login can inject loggedinuser-fields
 	protected $properties;
@@ -17,10 +17,7 @@ abstract class DataQuery {
     /**
      * Function to override
      */
-    function get_name() {
-
-		return '';
-	}
+    abstract function get_name();
 
 	function add_property($name, $value) {
 

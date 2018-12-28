@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
  
-class QueryDataDataloader extends Dataloader {
+abstract class QueryDataDataloader extends Dataloader {
 
     /**
      * Function to override

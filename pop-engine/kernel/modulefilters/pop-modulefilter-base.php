@@ -8,10 +8,7 @@ abstract class ModuleFilterBase {
 		ModuleFilterManager_Factory::get_instance()->add($this);
 	}
 
-	function get_name() {
-
-		return '';
-	}
+	abstract function get_name();
 
 	function exclude_module($module, &$props) {
 

@@ -19,7 +19,7 @@ require_once 'meta/load.php';
 require_once 'modulepath/load.php';
 require_once 'modulefilters/load.php';
 require_once 'processor-managers/load.php';
-require_once 'processors/load.php';
+require_once 'moduleprocessors/load.php';
 require_once 'pagemoduleprocessors/load.php';
 require_once 'settings/load.php';
 require_once 'themes/load.php';

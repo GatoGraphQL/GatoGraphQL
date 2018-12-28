@@ -1,20 +1,14 @@
 <?php
 namespace PoP\Engine\Themes;
 
-class ThemeStyleBase {
+abstract class ThemeStyleBase {
 
 	function __construct() {
 
 		$this->get_theme()->add_themestyle($this);
 	}
 
-	function get_theme() {
+	abstract function get_theme();
 
-		return null;
-	}
-
-	function get_name() {
-		
-		return '';
-	}
+	abstract function get_name();
 }

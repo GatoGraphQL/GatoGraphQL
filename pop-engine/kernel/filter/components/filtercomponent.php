@@ -17,10 +17,7 @@ abstract class FilterComponentBase {
 		return $moduleprocessor_manager->get_processor($filterinput)->get_name($filterinput);
 	}
 	
-	function get_filterinput() {
-	
-		return null;
-	}
+	abstract function get_filterinput();
 	
 	function get_forminput() {
 	

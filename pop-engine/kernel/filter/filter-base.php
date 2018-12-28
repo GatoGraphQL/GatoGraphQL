@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
 
-class FilterBase {
+abstract class FilterBase {
 
 	function __construct() {
 	
@@ -9,15 +9,9 @@ class FilterBase {
 		$gd_filter_manager->add($this);
 	}
 
-	function get_name() {
+	abstract function get_name();
 	
-		return '';
-	}
-	
-	function get_filtercomponents() {
-	
-		return array();
-	}
+	abstract function get_filtercomponents();
 
 	function get_wildcard_filter() {
 	

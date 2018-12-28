@@ -7,7 +7,7 @@ abstract class TagFilterBase extends FilterBase {
 	
 		$args = parent::get_filter_args_override_values();
 
-		if (!($filtercomponents = $this->get_filtercomponents())) {
+		if (!$this->get_filtercomponents()) {
 			return $args;
 		}
 		
@@ -28,12 +28,8 @@ abstract class TagFilterBase extends FilterBase {
 
 	function get_order() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$order = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 
 			if ($order = $filtercomponent->get_order($this)) {
 				
@@ -47,12 +43,8 @@ abstract class TagFilterBase extends FilterBase {
 	
 	function get_search() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$search = '';
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			if ($maybe_search = $filtercomponent->get_search($this)) {
 				

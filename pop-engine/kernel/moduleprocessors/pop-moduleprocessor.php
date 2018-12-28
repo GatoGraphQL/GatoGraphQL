@@ -14,10 +14,10 @@ abstract class ModuleProcessorBase {
 	//-------------------------------------------------
 	// PUBLIC Functions
 	//-------------------------------------------------
-	function get_modules_to_process() {
+	abstract function get_modules_to_process();
+
+
 	
-		return array();
-	}
 
 	function get_modules($module) {
 
@@ -58,10 +58,10 @@ abstract class ModuleProcessorBase {
 
 		// If ancestor modules set general props, or props targetted at this current module, then add them to the current module props
 		foreach ($wildcard_props_to_propagate as $key => $value) {
-			$this->add_prop($module, $module_props, $key, $value);
+			$this->set_prop($module, $module_props, $key, $value);
 		}
 
-		// Before initiating the current level, set the children attributes on the array, so that doing ->add_prop, ->append_prop, etc, keeps working
+		// Before initiating the current level, set the children attributes on the array, so that doing ->set_prop, ->append_prop, etc, keeps working
 		$module_props[$module][POP_PROPS_DESCENDANTATTRIBUTES] = array_merge(
 			$module_props[$module][POP_PROPS_DESCENDANTATTRIBUTES] ?? array(),
 			$targetted_props_to_propagate ?? array()
@@ -391,7 +391,7 @@ abstract class ModuleProcessorBase {
 
 		$this->add_prop_group_field($group, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
 	}
-	function add_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
+	function set_prop($module_or_modulepath, &$props, $field, $value, $starting_from_modulepath = array()) {
 
 		$this->add_group_prop(POP_PROPS_ATTRIBUTES, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
 	}

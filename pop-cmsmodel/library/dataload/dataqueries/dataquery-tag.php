@@ -3,7 +3,7 @@ namespace PoP\CMSModel;
 
 define ('GD_DATAQUERY_TAG', 'tag');
 
-class DataQuery_Tag extends \PoP\Engine\DataQuery {
+class DataQuery_Tag extends \PoP\Engine\DataQueryBase {
 
 	function get_name() {
 

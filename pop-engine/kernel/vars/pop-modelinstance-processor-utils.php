@@ -20,7 +20,7 @@ class ModelInstanceProcessor_Utils {
 
 		// Mix the information specific to the module, with that present in $vars
 		return apply_filters(
-			'PoP_Module_ModelInstanceProcessor:model_instance_components',
+			'ModelInstanceProcessor:model_instance_components',
 			array_merge(
 				$components,
 				self::get_model_instance_components_from_vars()
@@ -151,6 +151,6 @@ class ModelInstanceProcessor_Utils {
 		}
 
 		// Allow for plug-ins to add their own categories. Eg: Events
-		return apply_filters('PoP_Module_ModelInstanceProcessor:get_categories', $cats, $post_id);
+		return apply_filters('ModelInstanceProcessor:get_categories', $cats, $post_id);
 	}
 }

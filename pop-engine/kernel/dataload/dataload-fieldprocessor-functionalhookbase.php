@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
  
-class FieldProcessor_FunctionalHookBase extends FieldProcessor_HookBase {
+abstract class FieldProcessor_FunctionalHookBase extends FieldProcessor_HookBase {
 
 	function get_field_type() {
 

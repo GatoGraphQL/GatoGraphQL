@@ -7,7 +7,7 @@ abstract class PostFilterBase extends FilterBase {
 	
 		$args = parent::get_filter_args_override_values();
 
-		if (!($filtercomponents = $this->get_filtercomponents())) {
+		if (!$this->get_filtercomponents()) {
 			return $args;
 		}
 		
@@ -71,7 +71,7 @@ abstract class PostFilterBase extends FilterBase {
 	
 		$args = parent::get_filter_args();
 		
-		if (!($filtercomponents = $this->get_filtercomponents())) {
+		if (!$this->get_filtercomponents()) {
 			return $args;
 		}
 								
@@ -85,12 +85,8 @@ abstract class PostFilterBase extends FilterBase {
 	
 	function get_metaquery() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$meta_query = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			if ($filtercomponent_metaquery = $filtercomponent->get_metaquery($this)) {
 			
@@ -108,12 +104,8 @@ abstract class PostFilterBase extends FilterBase {
 	
 	function get_author() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$author = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 
 			if ($filtercomponent_author = $filtercomponent->get_author($this)) {
 
@@ -126,12 +118,8 @@ abstract class PostFilterBase extends FilterBase {
 
 	function get_poststatus() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$status = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			if ($filtercomponent_poststatus = $filtercomponent->get_poststatus($this)) {
 				
@@ -144,12 +132,8 @@ abstract class PostFilterBase extends FilterBase {
 
 	function get_categories() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$categories = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			if ($filtercomponent_categories = $filtercomponent->get_categories($this)) {
 			
@@ -162,12 +146,8 @@ abstract class PostFilterBase extends FilterBase {
 
 	function get_taxonomies() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$taxonomies = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			// array_merge_recursive: it allows the terms to be merged together into a single array under the same taxonomy
 			// Eg: if we get array('category' => array(1, 3, 4)) and array('category' => array(2, 5)), the result will be array('category' => array(1, 2, 3, 4, 5))
@@ -179,12 +159,8 @@ abstract class PostFilterBase extends FilterBase {
 
 	function get_tags() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$tags = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			if ($filtercomponent_tags = $filtercomponent->get_tags($this)) {
 
@@ -197,12 +173,8 @@ abstract class PostFilterBase extends FilterBase {
 
 	function get_order() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$order = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 
 			if ($order = $filtercomponent->get_order($this)) {
 				
@@ -216,12 +188,8 @@ abstract class PostFilterBase extends FilterBase {
 	
 	function get_search() {
 	
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$search = '';
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			if ($search = $filtercomponent->get_search($this)) {
 				
@@ -235,12 +203,8 @@ abstract class PostFilterBase extends FilterBase {
 	
 	function get_postdates() {
 		
-		if (!($filtercomponents = $this->get_filtercomponents())) {
-			return;
-		}
-
 		$postdates = array();
-		foreach ($filtercomponents as $filtercomponent) {
+		foreach ($this->get_filtercomponents() as $filtercomponent) {
 		
 			if ($postdates = $filtercomponent->get_postdates($this)) {
 				

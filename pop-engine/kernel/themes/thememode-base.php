@@ -8,13 +8,7 @@ abstract class ThemeModeBase {
 		$this->get_theme()->add_thememode($this);
 	}
 
-	function get_theme() {
+	abstract function get_theme();
 
-		return null;
-	}
-
-	function get_name() {
-		
-		return '';
-	}
+	abstract function get_name();
 }

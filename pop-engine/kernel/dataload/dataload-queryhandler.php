@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
 
-class QueryHandler {
+abstract class QueryHandlerBase {
 
     function __construct() {
     
@@ -9,16 +9,9 @@ class QueryHandler {
 		$gd_dataload_queryhandler_manager->add($this->get_name(), $this);
 	}
 
-    /**
-     * Function to override
-     */
-    function get_name() {
-    
-		return null;
-	}
+    abstract function get_name();
 
 	function prepare_query_args(&$query_args) {
-		// Do nothing
 	}
 
 	function get_query_state($data_properties, $checkpoint_validation, $executed, $dbobjectids) {

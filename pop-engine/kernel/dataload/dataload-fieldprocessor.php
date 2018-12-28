@@ -37,9 +37,6 @@ abstract class FieldProcessorBase {
 		return apply_filters($filter, new \WP_Error('no-field'), $resultitem, $field, $this);
 	}
 	
-	function get_name() {
-	
-		return '';
-	}
+	abstract function get_name();
 }
 	

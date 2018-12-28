@@ -3,7 +3,7 @@ namespace PoP\CMSModel;
 
 define ('GD_DATAQUERY_POST', 'post');
 
-class DataQuery_Post extends \PoP\Engine\DataQuery {
+class DataQuery_Post extends \PoP\Engine\DataQueryBase {
 
 	function get_name() {
 

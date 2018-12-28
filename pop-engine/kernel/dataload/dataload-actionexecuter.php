@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Engine;
 
-class ActionExecuter {
+abstract class ActionExecuterBase {
 
 	function __construct() {
     
@@ -9,10 +9,7 @@ class ActionExecuter {
 		$gd_dataload_actionexecution_manager->add_actionexecutioner($this->get_name(), $this);
 	}
 
-    function get_name() {
-    
-		return '';
-	}
+    abstract function get_name();
 
     function execute(&$data_properties) {
     
