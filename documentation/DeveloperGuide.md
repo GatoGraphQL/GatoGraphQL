@@ -308,7 +308,7 @@ For instance, the API response below contains a component hierarchy with two mod
 Every module has a unique name that identifies it, defined as a constant:
 
 ```php
-define ('POP_MODULE_SOMENAME', 'somename'));
+define ('POP_MODULE_SOMENAME', 'somename');
 ```
 
 The name of the module must not necessarily remain fixed: it can be shortened for producing a smaller output, constantly modified to evade bots, or others. Different strategies can be applied through function [`DefinitionUtils::get_module_definition`](https://github.com/leoloso/PoP/blob/master/pop-engine/server/definition-manager/utils.php#L16):
