@@ -211,6 +211,19 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
 
 		return null;
 	}
+	function logout() {
+
+		wp_logout();
+
+		// Delete the current user, so that it already says "user not logged in" for the toplevel feedback
+		global $current_user;
+		$current_user = null;
+		wp_set_current_user(0);
+	}
+	function insert_comment($comment_data) {
+
+		return wp_insert_comment($comment_data);
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

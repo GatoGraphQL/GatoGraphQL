@@ -54,4 +54,6 @@ interface FunctionAPI extends \PoP\CMS\FunctionAPI {
 	function get_current_user_id();
 	function get_the_user_role($user_id);
 	function get_home_static_page();
+	function logout();
+	function insert_comment($comment_data);
 }
