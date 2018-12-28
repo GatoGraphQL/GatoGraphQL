@@ -272,6 +272,10 @@ PoP supports to set a module as lazy, so that its data is loaded from the client
 
 From the two foundations "everything is a module" and "a module is its own API", we conclude that everything on a PoP site is an API. And since APIs are greatly suitable to take advantage of cloud services (for instance, serving and caching the API response through a CDN), then PoP calls the cloud "home".
 
+## Timeline
+
+Currently, only the 1st layer, data + configuration API, is available in the repository. We are currently working on the 2nd and 3rd layers, client-side rendering and server-side rendering respectively, and these should be ready and available during the 1st quarter of 2019.
+
 ## Motivation
 
 PoP is an ambitious project. We have been working on it for more than 5 years, and we are still on the early stages of it (or so we hope!) It was created by Leonardo Losoviz, and aided by his wife Jun-E Tan, as a solution to connect communities together directly from their own websites, offering an alternative to always depending on Facebook and similar platforms.
@@ -391,8 +395,10 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 ## Documentation
 
-- [Main Concepts](MainConcepts.md)
-- [Developer Guide](DeveloperGuide.md)  (work in progress)
+- [Main Concepts](documentation/MainConcepts.md)
+- [Developer Guide](documentation/DeveloperGuide.md)
+- [Architecture Design and Implementation](documentation/ArchitectureDesignAndImplementation.md)
+- [Tutorials](documentation/Tutorials.md)
 
 > Note: We are currently working on the documentation. Developer guide's sections concerning the API will be progressively completed throughout the last 2 weeks of December 2018; sections concerning rendering and additional layers will be added alongside the corresponding code being completed and added to the repository, throughout 1st and 2nd quarter of 2019.
 

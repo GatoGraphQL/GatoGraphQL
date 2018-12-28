@@ -6,10 +6,18 @@
 
 PoP — “Platform of Platforms” is a framework for building component-based websites, which spans both frontend and backend. It provides a data + configuration API, on top of which can stack layers adding rendering and functionalities, progressively building complex sites. 
 
+Using components as the building unit of the site achieves a high degree of modularity, which [is defined as](https://en.wikipedia.org/wiki/Modularity): 
+
+> the degree to which a system's components may be separated and recombined, often with the benefit of flexibility and variety in use. The concept of modularity is used primarily to reduce complexity by breaking a system into varying degrees of interdependence and independence across and "hide the complexity of each part behind an abstraction and interface."
+
+### Specification and Implementation
+
 PoP can be divided into 2 entities:
 
 1. **The component-based API open specification**, which can be implemented through any platform or technology
 2. **The current implementation of the specification**, done in PHP, wrapping WordPress
+
+In the near future, PoP will refer only to the specification, and its implementation will be moved to a separate repository and renamed accordingly ("PoP for WordPress").
 
 ## Stacked on top of a CMS
 
@@ -396,7 +404,7 @@ GET - /url-of-the-page/?output=json
 
 ## The module is its own API
 
-Instead of fetching the data for all modules in a page, we can also fetch the data for a module, for any module at any level of the component hierarchy: wherever the module is placed, it can interact with itself from client to server just by adding its module path to the page URL in which it has been included. This way, when creating a component, we don't need to create an API to go alongside with it (such as REST or GraphQL), because the module is already able to talk to itself in the server and load its own data: it is completely autonomous and self-serving. 
+Every module can interact with itself from client to server just by adding its module path to the webpage URL in which it has been included. This way, when creating a component, we don't need to create an API to go alongside with it (such as REST or GraphQL), because the module is already able to talk to itself in the server and load its own data: it is completely autonomous and self-serving. 
 
 This is accomplished by allowing to select what module paths (i.e. the path to a specific module starting from the top-most module) will be included in the response, so as to load data only starting from that level, and ignore anything above that level. This is done through adding parameters `modulefilter=modulepaths` and `modulepaths[]=path-to-the-module` to the URL (we use `modulepaths[]` instead of `modulepaths` for versatility, so that we can include more than one module path in a single request). The value for the `modulepaths[]` parameter is a list of modules separated by dots. Hence, fetching data for module "module5", located under `module1 => module2 => module5`, is done by adding parameter `modulepaths[]=module1.module2.module5` to the URL. 
 
@@ -475,7 +483,15 @@ A single component is also able to have many sources of data, each of them comin
 
 ![Multidomain events calendar](https://uploads.getpop.org/wp-content/uploads/2018/12/multidomain-events-calendar.png)
 
+## Rendering through JavaScript templates
+
+Will be added soon...
+
+## Isomorphic Server-Side Rendering
+
+Will be added soon...
+
 ## Reactivity
 
-Coming soon...
+Will be added soon...
 
