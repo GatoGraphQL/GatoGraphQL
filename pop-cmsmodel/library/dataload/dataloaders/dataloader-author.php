@@ -13,8 +13,7 @@ class Dataloader_Author extends Dataloader_UserBase {
 	function get_dbobject_ids($data_properties) {
 	
 		$vars = \PoP\Engine\Engine_Vars::get_vars();
-		$author = $vars['global-state']['queried-object-id'];
-		return array($author);
+		return array($vars['global-state']['queried-object-id']);
 	}
 }
 
