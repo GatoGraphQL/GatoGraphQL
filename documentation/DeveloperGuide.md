@@ -311,7 +311,7 @@ Every module has a unique name that identifies it, defined as a constant:
 define ('POP_MODULE_SOMENAME', 'somename');
 ```
 
-The name of the module must not necessarily remain fixed: it can be shortened for producing a smaller output, constantly modified to evade bots, or others. Different strategies can be applied through function [`DefinitionUtils::get_module_definition`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/definition-manager/definition-utils.php#L17):
+The name of the module must not necessarily remain fixed: it can be shortened for producing a smaller output, constantly modified to evade bots, or others. Different strategies can be applied through function [`DefinitionUtils::get_module_definition`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/definition-manager/definition-utils.php#L11):
 
 ```php
 define ('POP_MODULE_SOMENAME', \PoP\Engine\DefinitionUtils::get_module_definition('somename'));
