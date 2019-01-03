@@ -56,4 +56,5 @@ interface FunctionAPI extends \PoP\CMS\FunctionAPI {
 	function get_home_static_page();
 	function logout();
 	function insert_comment($comment_data);
+	function get_allowed_post_tags();
 }

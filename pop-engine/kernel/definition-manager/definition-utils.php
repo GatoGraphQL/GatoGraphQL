@@ -3,12 +3,6 @@ namespace PoP\Engine;
 
 class DefinitionUtils {
 
-	public static function get_manager() {
-
-		global $pop_definitionmanager;
-		return $pop_definitionmanager;
-	}
-
 	/**
 	 * Function used to create a definition for a module. Needed for reducing the filesize of the html generated for PROD
 	 * Instead of using the name of the $module, we use a unique number in base 36, so the name will occupy much lower size
@@ -16,6 +10,6 @@ class DefinitionUtils {
 	 */
 	public static function get_module_definition($id, $group = null) {
 
-		return self::get_manager()->get_module_definition($id, $group);
+		return Server\DefinitionManager_Factory::get_instance()->get_module_definition($id, $group);
 	}
 }

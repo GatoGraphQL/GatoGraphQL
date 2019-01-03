@@ -297,7 +297,7 @@ class Engine {
 
 	function get_model_props_moduletree($module) {
 
-		global $pop_module_cachemanager;
+		$cachemanager = CacheManager_Factory::get_instance();
 		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
 		$processor = $moduleprocessor_manager->get_processor($module);
@@ -308,7 +308,7 @@ class Engine {
 		$use_cache = Server\Utils::use_cache();
 		if ($use_cache) {
 			
-			$model_props = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_PROPS, true);
+			$model_props = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_PROPS, true);
 		}
 
 		// If there is no cached one, or not using the cache, generate the props and cache it
@@ -318,7 +318,7 @@ class Engine {
 			$processor->init_model_props_moduletree($module, $model_props, array(), array());
 			
 			if ($use_cache) {
-				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_PROPS, $model_props, true);
+				$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_PROPS, $model_props, true);
 			}
 		}
 
@@ -490,7 +490,7 @@ class Engine {
 
 	function get_module_settings($module, $model_props, $props) {
 
-		global $pop_module_cachemanager;
+		$cachemanager = CacheManager_Factory::get_instance();
 		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
 		$ret = array();
@@ -510,8 +510,8 @@ class Engine {
 		$use_cache = Server\Utils::use_cache();
 		if ($use_cache) {
 			
-			$immutable_settings = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, true);
-			$mutableonmodel_settings = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, true);
+			$immutable_settings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, true);
+			$mutableonmodel_settings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, true);
 		}
 
 		// If there is no cached one, generate the configuration and cache it
@@ -526,8 +526,8 @@ class Engine {
 			$mutableonmodel_settings = $processor->get_mutableonmodel_settings_moduletree($module, $model_props);
 
 			if ($use_cache) {
-				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, $immutable_settings, true);
-				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings, true);
+				$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, $immutable_settings, true);
+				$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings, true);
 			}
 		}
 		if ($datasources == GD_URLPARAM_DATASOURCES_MODELANDREQUEST) {
@@ -894,7 +894,7 @@ class Engine {
 	// This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
 	function get_module_data($root_module, $root_model_props, $root_props) {
 
-		global $pop_module_cachemanager;
+		$cachemanager = CacheManager_Factory::get_instance();
 		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 
 		$root_processor = $moduleprocessor_manager->get_processor($root_module);
@@ -930,8 +930,8 @@ class Engine {
 		// First check if there's a cache stored
 		if ($use_cache) {
 			
-			$immutable_data_properties = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATICDATAPROPERTIES, true);
-			$mutableonmodel_data_properties = $pop_module_cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULDATAPROPERTIES, true);
+			$immutable_data_properties = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATICDATAPROPERTIES, true);
+			$mutableonmodel_data_properties = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULDATAPROPERTIES, true);
 		}
 
 		// If there is no cached one, generate the props and cache it
@@ -940,8 +940,8 @@ class Engine {
 			$immutable_data_properties = $root_processor->get_immutable_data_properties_datasetmoduletree($root_module, $root_model_props);
 			$mutableonmodel_data_properties = $root_processor->get_mutableonmodel_data_properties_datasetmoduletree($root_module, $root_model_props);
 			if ($use_cache) {
-				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties, true);
-				$pop_module_cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties, true);
+				$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties, true);
+				$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties, true);
 			}
 		}
 

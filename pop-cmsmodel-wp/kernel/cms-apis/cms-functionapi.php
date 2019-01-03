@@ -224,6 +224,11 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
 
 		return wp_insert_comment($comment_data);
 	}
+	function get_allowed_post_tags() {
+
+		global $allowedposttags;
+		return $allowedposttags;
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

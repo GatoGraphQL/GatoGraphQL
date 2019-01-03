@@ -2,7 +2,10 @@
 
 require_once 'file-base.php';
 require_once 'file-location-base.php';
+require_once 'file-storage-base.php';
+require_once 'file-storage-factory.php';
 require_once 'file-storage.php';
+require_once 'file-jsonstorage-factory.php';
 require_once 'file-jsonstorage.php';
 
 require_once 'filereproduction-base.php';

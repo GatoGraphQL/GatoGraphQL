@@ -3,6 +3,13 @@ namespace PoP\Engine;
 
 class MemoryManager extends CacheManagerBase {
 
+	function __construct() {
+
+		parent::__construct();
+		
+    	MemoryManager_Factory::set_instance($this);    
+	}
+
 	function init() {
 
 		// Allow the Theme to override the cache folder (eg: to add a custom folder after ir, eg: pop-cache/mesym/)
@@ -21,5 +28,4 @@ class MemoryManager extends CacheManagerBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-global $pop_module_memorymanager;
-$pop_module_memorymanager = new MemoryManager();
+new MemoryManager();

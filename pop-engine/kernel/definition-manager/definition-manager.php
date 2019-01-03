@@ -7,6 +7,7 @@ class DefinitionManager {
 
 	function __construct() {
 
+		DefinitionManager_Factory::set_instance($this);
 		$this->defined_names = array();
 	}
 
@@ -88,5 +89,4 @@ class DefinitionManager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-global $pop_definitionmanager;
-$pop_definitionmanager = new DefinitionManager();
+new DefinitionManager();

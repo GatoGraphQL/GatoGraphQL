@@ -7,6 +7,7 @@ class CacheManager extends CacheManagerBase {
 
 		parent::__construct();
 		
+    	CacheManager_Factory::set_instance($this);    
 		add_action('init', array($this, 'init'));
 	}
 
@@ -27,5 +28,4 @@ class CacheManager extends CacheManagerBase {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-global $pop_module_cachemanager;
-$pop_module_cachemanager = new CacheManager();
+new CacheManager();

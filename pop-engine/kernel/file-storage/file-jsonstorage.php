@@ -1,7 +1,12 @@
 <?php
 namespace PoP\Engine\FileStorage;
 
-class FileJSONStorage extends FileStorage {
+class FileJSONStorage extends FileStorageBase {
+
+	function __construct() {
+
+		FileJSONStorage_Factory::set_instance($this);
+	}
 
 	function save($file, $contents) {
 
@@ -37,5 +42,4 @@ class FileJSONStorage extends FileStorage {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-global $pop_engine_filejsonstorage;
-$pop_engine_filejsonstorage = new FileJSONStorage();
+new FileJSONStorage();
