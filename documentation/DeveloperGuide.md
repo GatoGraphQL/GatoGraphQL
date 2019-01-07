@@ -1681,7 +1681,7 @@ function get_dataaccess_checkpoints($module, &$props) {
 
     case POP_MODULE_SOMEMODULE:
     
-      return CHECKPOINT_WHITELISTEDIP;
+      return [CHECKPOINT_WHITELISTEDIP];
   }
   
   return parent::get_dataaccess_checkpoints($module, $props);
