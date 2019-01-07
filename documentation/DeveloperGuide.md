@@ -1692,7 +1692,7 @@ Pages can also be assigned checkpoints through their [SettingsProcessor](#settin
 
 ```php
 function get_relevant_page($module, &$props) {
-		
+    
   switch ($module) {
 
     case POP_MODULE_MYPOSTS_SCROLL:
@@ -1729,7 +1729,7 @@ class PoPSystem_Dataload_CheckpointProcessor extends \PoP\Engine\CheckpointProce
   function process($checkpoint) {
 
     $cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
-		$error_class = $cmsapi->get_error_class();
+    $error_class = $cmsapi->get_error_class();
     switch ($checkpoint) {
 
       case CHECKPOINT_WHITELISTEDIP:
