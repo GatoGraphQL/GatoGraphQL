@@ -34,7 +34,9 @@ abstract class FieldProcessor_HookBase {
 
 	function get_value($resultitem, $field, $fieldprocessor) {
 	
-		return new \WP_Error('no-field');
+		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
+		$error_class = $cmsapi->get_error_class();
+		return new $error_class('no-field');
 	}
 
 	function get_field_type() {

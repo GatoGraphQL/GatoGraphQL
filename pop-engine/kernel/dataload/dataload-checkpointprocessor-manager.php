@@ -7,6 +7,7 @@ class CheckpointProcessor_Manager {
 	
 	function __construct() {
 	
+    	CheckpointProcessor_Manager_Factory::set_instance($this);    
 		$this->processors = array();
 	}
 	
@@ -15,7 +16,7 @@ class CheckpointProcessor_Manager {
 		return $this->processors[$checkpoint];
 	}
 
-	function process($checkpoint, $module = null) {
+	function process($checkpoint/*, $module = null*/) {
 
 		$processor = $this->get_processor($checkpoint);
 		return $processor->process($checkpoint, $module);
@@ -33,5 +34,4 @@ class CheckpointProcessor_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-global $gd_dataload_checkpointprocessor_manager;
-$gd_dataload_checkpointprocessor_manager = new CheckpointProcessor_Manager();
+new CheckpointProcessor_Manager();

@@ -15,7 +15,7 @@ class EngineHooks {
 			'\PoP\Engine\Engine:get_module_data:dataloading-module',
 			array($this, 'calculate_dataloading_module_data'),
 			10,
-			7
+			8
 		);
 		add_action(
 			'\PoP\Engine\Engine:get_module_data:end',
@@ -31,7 +31,7 @@ class EngineHooks {
 		$helperCalculations['has-lazy-load'] = false;
 	}
 
-	function calculate_dataloading_module_data($module, $module_props_in_array, $data_properties_in_array, $checkpoint_validation, $executed, $dbobjectids, $helperCalculations_in_array) {
+	function calculate_dataloading_module_data($module, $module_props_in_array, $data_properties_in_array, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids, $helperCalculations_in_array) {
 
 		$data_properties = &$data_properties_in_array[0];
 

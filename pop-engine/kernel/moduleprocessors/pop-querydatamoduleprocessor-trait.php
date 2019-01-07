@@ -45,7 +45,7 @@ trait QueryDataModuleProcessorTrait {
 		return $ret;
 	}
 
-	function get_dbobject_ids($module, &$props, $data_properties) {
+	function get_dbobject_ids($module, &$props, &$data_properties) {
 
 		global $gd_dataload_manager;
 
@@ -72,24 +72,24 @@ trait QueryDataModuleProcessorTrait {
 		return $dataloader->get_dbobject_ids($data_properties);
 	}
 
-	function get_datasetmeta($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_datasetmeta($module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
-		$ret = parent::get_datasetmeta($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		$ret = parent::get_datasetmeta($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
 		if ($queryhandler_name = $this->get_queryhandler($module)) {
 					
 			global $gd_dataload_queryhandler_manager;
 			$queryhandler = $gd_dataload_queryhandler_manager->get($queryhandler_name);
 			
-			if ($query_state = $queryhandler->get_query_state($data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+			if ($query_state = $queryhandler->get_query_state($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 
 				$ret['querystate'] = $query_state;
 			}
-			if ($query_params = $queryhandler->get_query_params($data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+			if ($query_params = $queryhandler->get_query_params($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 
 				$ret['queryparams'] = $query_params;
 			}
-			if ($query_result = $queryhandler->get_query_result($data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+			if ($query_result = $queryhandler->get_query_result($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 
 				$ret['queryresult'] = $query_result;
 			}

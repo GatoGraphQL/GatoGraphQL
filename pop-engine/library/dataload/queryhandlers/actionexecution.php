@@ -10,9 +10,9 @@ class QueryHandler_ActionExecution extends \PoP\Engine\QueryHandlerBase {
 		return GD_DATALOAD_QUERYHANDLER_ACTIONEXECUTION;
 	}
 
-	function get_query_result($data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_query_result($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
-		$ret = parent::get_query_result($data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		$ret = parent::get_query_result($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
 		if ($executed) {
 
@@ -38,9 +38,9 @@ class QueryHandler_ActionExecution extends \PoP\Engine\QueryHandlerBase {
 		return $ret;
 	}
 
-	// function get_datafeedback($data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	// function get_datafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 	
-	// 	$ret = parent::get_datafeedback($data_properties, $checkpoint_validation, $executed, $dbobjectids);
+	// 	$ret = parent::get_datafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
 	// 	// Feedback comes from the Action Execution response
 	// 	// If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages

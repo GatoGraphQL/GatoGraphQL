@@ -5,7 +5,7 @@ require_once 'pop-engine-utils.php';
 require_once 'pop-engine-hooks.php';
 require_once 'pop-engine-factory.php';
 require_once 'pop-engine.php';
-require_once 'checkpoint-helper-base.php';
+// require_once 'checkpoint-helper-base.php';
 
 require_once 'definition-manager/load.php';
 require_once 'hierarchies/load.php';

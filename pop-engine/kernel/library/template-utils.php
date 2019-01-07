@@ -25,8 +25,7 @@ class TemplateUtils {
 
 	public static function maybe_redirect() {
 
-		$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
-		if ($redirect = $pop_module_settingsmanager->get_redirect_url()) {
+		if ($redirect = Settings\SettingsManager_Factory::get_instance()->get_redirect_url()) {
 
 			if ($query = $_SERVER['QUERY_STRING']) {
 

@@ -7,7 +7,6 @@ abstract class DefaultSettingsProcessorBase extends SettingsProcessorBase {
 
 		parent::init();
 
-		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
-		$pop_module_settingsprocessor_manager->set_default($this);
+		SettingsProcessorManager_Factory::get_instance()->set_default($this);
 	}
 }

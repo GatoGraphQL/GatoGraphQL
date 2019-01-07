@@ -567,7 +567,7 @@ abstract class ModuleProcessorBase {
 		return POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST;
 	}
 
-	function get_dbobject_ids($module, &$props, $data_properties) {
+	function get_dbobject_ids($module, &$props, &$data_properties) {
 	
 		return array();
 	}
@@ -792,23 +792,27 @@ abstract class ModuleProcessorBase {
 		// When loading data or execution an action, check if to validate checkpoints?
 		// This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doing_post() 
 		// (such as done to set-up checkpoint configuration for POP_USERSTANCE_PAGE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
-		if ($checkpoint_configuration = $this->get_checkpoint_configuration($module, $props)) {
+		// if ($checkpoint_configuration = $this->get_dataaccess_checkpoint_configuration($module, $props)) {
+		if ($checkpoints = $this->get_dataaccess_checkpoints($module, $props)) {
 			
-			if (Utils::checkpoint_validation_required($checkpoint_configuration)) {
+			// if (Utils::checkpoint_validation_required($checkpoint_configuration)) {
 
-				// Pass info for PoP Engine
-				$ret[GD_DATALOAD_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
-			}
+			// Pass info for PoP Engine
+			// $ret[GD_DATALOAD_DATAACCESSCHECKPOINTS] = $checkpoint_configuration['checkpoints'];
+			$ret[GD_DATALOAD_DATAACCESSCHECKPOINTS] = $checkpoints;
+			// }
 		}
 	
 		// To trigger the actionexecuter, its own checkpoints must be successful
-		if ($checkpoint_configuration = $this->get_actionexecution_checkpoint_configuration($module, $props)) {
+		// if ($checkpoint_configuration = $this->get_actionexecution_checkpoint_configuration($module, $props)) {
+		if ($checkpoints = $this->get_actionexecution_checkpoints($module, $props)) {
 			
-			if (Utils::checkpoint_validation_required($checkpoint_configuration)) {
+			// if (Utils::checkpoint_validation_required($checkpoint_configuration)) {
 
-				// Pass info for PoP Engine
-				$ret[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] = $checkpoint_configuration['checkpoints'];
-			}
+			// Pass info for PoP Engine
+			// $ret[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] = $checkpoint_configuration['checkpoints'];
+			$ret[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] = $checkpoints;
+			// }
 		}
 
 		return $ret;
@@ -818,16 +822,16 @@ abstract class ModuleProcessorBase {
 	// New PUBLIC Functions: Data Feedback
 	//-------------------------------------------------
 
-	function get_data_feedback_datasetmoduletree($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_data_feedback_datasetmoduletree($module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
-		return $this->execute_on_self_and_propagate_to_datasetmodules('get_data_feedback_moduletree', __FUNCTION__, $module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		return $this->execute_on_self_and_propagate_to_datasetmodules('get_data_feedback_moduletree', __FUNCTION__, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 	}
 
-	function get_data_feedback_moduletree($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_data_feedback_moduletree($module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
 		$ret = array();
 
-		if ($feedback = $this->get_data_feedback($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+		if ($feedback = $this->get_data_feedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 
 			$ret[POP_CONSTANT_FEEDBACK] = $feedback;
 		}
@@ -835,7 +839,7 @@ abstract class ModuleProcessorBase {
 		return $ret;
 	}
 
-	function get_data_feedback($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_data_feedback($module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 	
 		return array();
 	}
@@ -849,12 +853,12 @@ abstract class ModuleProcessorBase {
 	// Background URLs
 	//-------------------------------------------------
 
-	function get_backgroundurls_mergeddatasetmoduletree($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_backgroundurls_mergeddatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
-		return $this->execute_on_self_and_merge_with_datasetmodules('get_backgroundurls', __FUNCTION__, $module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		return $this->execute_on_self_and_merge_with_datasetmodules('get_backgroundurls', __FUNCTION__, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 	}
 
-	function get_backgroundurls($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_backgroundurls($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 	
 		return array();
 	}
@@ -863,7 +867,7 @@ abstract class ModuleProcessorBase {
 	// Dataset Meta
 	//-------------------------------------------------
 
-	function get_datasetmeta($module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_datasetmeta($module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
 		$ret = array();
 
@@ -893,20 +897,57 @@ abstract class ModuleProcessorBase {
 		return null;
 	}
 
-	function get_checkpoint_configuration($module, &$props) {
+	function get_relevant_page_checkpoint_target($module, &$props) {
 
-		if ($page_id = $this->get_relevant_page($module, $props)) {
-			
-			return Utils::get_checkpoint_configuration($page_id);
-		}
-		
-		return null;
+		return GD_DATALOAD_DATAACCESSCHECKPOINTS;
 	}
 
-	protected function get_actionexecution_checkpoint_configuration($module, &$props) {
+	protected function maybe_override_checkpoints($checkpoints) {
+
+		// Allow URE to add the extra checkpoint condition of the user having the Profile role
+		return apply_filters(
+			'ModuleProcessor:checkpoints',
+			 $checkpoints
+		);
+	}
+
+	// function get_dataaccess_checkpoint_configuration($module, &$props) {
+	function get_dataaccess_checkpoints($module, &$props) {
+
+		if ($page_id = $this->get_relevant_page($module, $props)) {
+			if ($this->get_relevant_page_checkpoint_target($module, $props) == GD_DATALOAD_DATAACCESSCHECKPOINTS) {
+			
+				// // return Utils::get_checkpoint_configuration($page_id);
+				// return Utils::get_checkpoints($page_id);
+				return $this->maybe_override_checkpoints(Settings\SettingsManager_Factory::get_instance()->get_checkpoints($page_id));
+			}
+		}
 		
-		// By default, validate that we are doing POST and that the ?actionpath corresponds to the given $module
-		return Impl\CheckpointUtils::get_checkpoint_configuration(POPENGINE_CHECKPOINTCONFIGURATION_ACTIONPATHISMODULE_POST);
+		// return null;
+		return array();
+	}
+
+	// function get_actionexecution_checkpoint_configuration($module, &$props) {
+	function get_actionexecution_checkpoints($module, &$props) {
+
+		if ($page_id = $this->get_relevant_page($module, $props)) {
+			if ($this->get_relevant_page_checkpoint_target($module, $props) == GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS) {
+			
+				// // return Utils::get_checkpoint_configuration($page_id);
+				// return Utils::get_checkpoints($page_id);
+				return $this->maybe_override_checkpoints(Settings\SettingsManager_Factory::get_instance()->get_checkpoints($page_id));
+			}
+		}
+		
+		// return null;
+		return array();
+	}
+
+	function execute_action($module, &$props) {
+
+		// By default, execute only if the module is targeted for execution and doing POST
+		$vars = Engine_Vars::get_vars();		
+		return doing_post() && $vars['actionpath'] == ModulePathManager_Utils::get_stringified_module_propagation_current_path($module);
 	}
 
 	function get_dataload_source($module, $props) {

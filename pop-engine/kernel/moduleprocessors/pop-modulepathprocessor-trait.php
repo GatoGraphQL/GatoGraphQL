@@ -37,7 +37,7 @@ trait ModulePathProcessorTrait {
 
 	// $use_settings_id_as_key: For response structures (eg: configuration, feedback, etc) must be true
 	// for internal structures (eg: $props, $data_properties) no need
-	protected function execute_on_self_and_propagate_to_datasetmodules($eval_self_fn, $propagate_fn, $module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	protected function execute_on_self_and_propagate_to_datasetmodules($eval_self_fn, $propagate_fn, $module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
 		$ret = array();
 		$key = $this->get_settings_id($module);
@@ -46,7 +46,7 @@ trait ModulePathProcessorTrait {
 		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
-			if ($module_ret = $this->$eval_self_fn($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+			if ($module_ret = $this->$eval_self_fn($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 		
 				$ret[$key] = $module_ret;
 			}
@@ -64,7 +64,7 @@ trait ModulePathProcessorTrait {
 		
 			$submodules_ret = array_merge(
 				$submodules_ret,
-				$this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $data_properties, $checkpoint_validation, $executed, $dbobjectids)
+				$this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
 			);
 		}
 		if ($submodules_ret) {
@@ -76,13 +76,13 @@ trait ModulePathProcessorTrait {
 		return $ret;
 	}
 
-	protected function execute_on_self_and_merge_with_datasetmodules($eval_self_fn, $propagate_fn, $module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	protected function execute_on_self_and_merge_with_datasetmodules($eval_self_fn, $propagate_fn, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
 		// If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
 		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
-			$ret = $this->$eval_self_fn($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+			$ret = $this->$eval_self_fn($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 		}
 		else {
 
@@ -100,7 +100,7 @@ trait ModulePathProcessorTrait {
 		
 			$ret = array_merge_recursive(
 				$ret,
-				$this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $data_properties, $checkpoint_validation, $executed, $dbobjectids)
+				$this->get_module_processor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
 			);
 		}
 		$module_path_manager->restore_from_propagation($module);

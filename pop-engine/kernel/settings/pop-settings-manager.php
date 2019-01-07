@@ -8,7 +8,8 @@ class SettingsManager {
 		SettingsManager_Factory::set_instance($this);
 	}
 
-	function get_checkpoint_configuration($page_id = null) {
+	// function get_checkpoint_configuration($page_id = null) {
+	function get_checkpoints($page_id = null) {
 
 		$vars = \PoP\Engine\Engine_Vars::get_vars();
 		if (!$page_id) {
@@ -16,18 +17,19 @@ class SettingsManager {
 			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 
-		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
-		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id/*, $hierarchy*/);
-		$checkpoints = $processor->get_checkpoint_configuration();
+		$processor = SettingsProcessorManager_Factory::get_instance()->get_processor($page_id/*, $hierarchy*/);
+		// $checkpoints = $processor->get_checkpoint_configuration();
+		$checkpoints = $processor->get_checkpoints();
 		if ($checkpoints[$page_id]) {
 
 			return $checkpoints[$page_id];
 		}
 
-		return array(
-			'checkpoints' => array(),
-			'type' => false
-		);
+		// return array(
+		// 	'checkpoints' => array(),
+		// 	// 'type' => false
+		// );
+		return array();
 	}
 
 	function is_functional($page_id = null) {
@@ -38,8 +40,7 @@ class SettingsManager {
 			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 
-		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
-		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
+		$processor = SettingsProcessorManager_Factory::get_instance()->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
 		// Otherwise, it's true/false, just return it
@@ -60,8 +61,7 @@ class SettingsManager {
 			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 
-		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
-		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
+		$processor = SettingsProcessorManager_Factory::get_instance()->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
 		// Otherwise, it's true/false, just return it
@@ -82,8 +82,7 @@ class SettingsManager {
 			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 		
-		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
-		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
+		$processor = SettingsProcessorManager_Factory::get_instance()->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
 		// Otherwise, it's true/false, just return it
@@ -104,8 +103,7 @@ class SettingsManager {
 			$page_id = \PoP\Engine\Utils::get_hierarchy_page_id();
 		}
 		
-		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
-		$processor = $pop_module_settingsprocessor_manager->get_processor($page_id);
+		$processor = SettingsProcessorManager_Factory::get_instance()->get_processor($page_id);
 
 		// If we get an array, then it defines the value on a page by page basis
 		// Otherwise, it's true/false, just return it

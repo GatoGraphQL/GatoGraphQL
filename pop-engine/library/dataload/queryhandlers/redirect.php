@@ -19,9 +19,9 @@ class QueryHandler_Redirect extends QueryHandler_ActionExecution {
 	// 	$query_args[GD_URLPARAM_REDIRECTTO] = $query_args[GD_URLPARAM_REDIRECTTO] ?? $_SERVER['HTTP_REFERER'];
 	// }
 
-	function get_query_params($data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	function get_query_params($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 	
-		$ret = parent::get_query_params($data_properties, $checkpoint_validation, $executed, $dbobjectids);
+		$ret = parent::get_query_params($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
 		$query_args = $data_properties[GD_DATALOAD_QUERYARGS];
 
@@ -32,9 +32,9 @@ class QueryHandler_Redirect extends QueryHandler_ActionExecution {
 		return $ret;
 	}
 
-	// function get_uniquetodomain_querystate($data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	// function get_uniquetodomain_querystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 	
-	// 	$ret = parent::get_uniquetodomain_querystate($data_properties, $checkpoint_validation, $executed, $dbobjectids);
+	// 	$ret = parent::get_uniquetodomain_querystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
 	// 	$query_args = $data_properties[GD_DATALOAD_QUERYARGS];
 
@@ -44,9 +44,9 @@ class QueryHandler_Redirect extends QueryHandler_ActionExecution {
 	// 	return $ret;
 	// }
 	
-	// function get_datafeedback($data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	// function get_datafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 	
-	// 	$ret = parent::get_datafeedback($data_properties, $checkpoint_validation, $executed, $dbobjectids);
+	// 	$ret = parent::get_datafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
 	// 	$query_args = $data_properties[GD_DATALOAD_QUERYARGS];
 		

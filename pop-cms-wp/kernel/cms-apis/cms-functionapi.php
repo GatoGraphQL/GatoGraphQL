@@ -118,6 +118,11 @@ class FunctionAPI extends \PoP\CMS\FunctionAPI_Base implements \PoP\CMS\Function
 
 		return get_bloginfo('name');
 	}
+
+	function get_error_class() {
+
+		return \WP_Error::class;
+	}
 }
 
 /**---------------------------------------------------------------------------------------------------------------

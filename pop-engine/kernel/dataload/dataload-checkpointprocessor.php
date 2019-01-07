@@ -1,25 +1,16 @@
 <?php
 namespace PoP\Engine;
 
-class CheckpointProcessor {
+abstract class CheckpointProcessorBase {
 
 	function __construct() {
 
-		add_action('init', array($this, 'init'));
+		CheckpointProcessor_Manager_Factory::get_instance()->add($this, $this->get_checkpoints_to_process());
 	}
 
-	function init() {
+	abstract function get_checkpoints_to_process();
 
-		global $gd_dataload_checkpointprocessor_manager;
-		$gd_dataload_checkpointprocessor_manager->add($this, $this->get_checkpoints_to_process());
-	}
-	
-	function get_checkpoints_to_process() {
-	
-		return array();
-	}
-
-	function process($checkpoint, $module = null) {
+	function process($checkpoint/*, $module = null*/) {
 	
 		// By default, no problem at all, so always return true
 		return true;

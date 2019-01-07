@@ -1,5 +1,6 @@
 <?php
 
+// require_once 'checkpoint-constants.php';
 require_once 'dataload-constants.php';
 require_once 'dataload-actionexecution-manager-factory.php';
 require_once 'dataload-actionexecution-manager.php';
@@ -22,6 +23,7 @@ require_once 'dataload-queryhandler.php';
 // require_once 'dataload-queryhandler-pagesection.php';
 // require_once 'dataload-queryhandler-block.php';
 // require_once 'dataload-queryhandler-query.php';
+require_once 'dataload-checkpointprocessor-manager-factory.php';
 require_once 'dataload-checkpointprocessor-manager.php';
 require_once 'dataload-checkpointprocessor.php';
 require_once 'dataquery-manager.php';

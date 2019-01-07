@@ -228,8 +228,7 @@ class Engine {
 
 	// 	$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		
-	// 	$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
-	// 	if ($redirect = $pop_module_settingsmanager->get_redirect_url()) {
+	// 	if ($redirect = Settings\SettingsManager_Factory::get_instance()->get_redirect_url()) {
 
 	// 		if ($addoutput) {
 				
@@ -282,8 +281,7 @@ class Engine {
 
 	// 	$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		
-	// 	$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
-	// 	if ($redirect = $pop_module_settingsmanager->get_redirect_url()) {
+	// 	if ($redirect = Settings\SettingsManager_Factory::get_instance()->get_redirect_url()) {
 
 	// 		if ($query = $_SERVER['QUERY_STRING']) {
 
@@ -872,12 +870,12 @@ class Engine {
 
 	protected function validate_checkpoints($checkpoints, $module) {
 
-		global $gd_dataload_checkpointprocessor_manager;
+		$checkpointprocessor_manager = CheckpointProcessor_Manager_Factory::get_instance();
 
 		// Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
 		foreach ($checkpoints as $checkpoint) {
 
-			$result = $gd_dataload_checkpointprocessor_manager->process($checkpoint, $module);
+			$result = $checkpointprocessor_manager->process($checkpoint, $module);
 			if (is_wp_error($result)) {
 				return $result;
 			}
@@ -1004,11 +1002,11 @@ class Engine {
 			// Checkpoint validation
 			// ------------------------------------------
 			// Load data if the checkpoint did not fail
-			if ($load_data && $checkpoints = $data_properties[GD_DATALOAD_CHECKPOINTS]) {
+			if ($load_data && $checkpoints = $data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS]) {
 				
 				// Check if the module fails checkpoint validation. If so, it must not load its data or execute the actionexecuter					
-				$checkpoint_validation = $this->validate_checkpoints($checkpoints, $module);
-				$load_data = !is_wp_error($checkpoint_validation);
+				$dataaccess_checkpoint_validation = $this->validate_checkpoints($checkpoints, $module);
+				$load_data = !is_wp_error($dataaccess_checkpoint_validation);
 			}
 
 			// The $props is directly moving the array to the corresponding path 
@@ -1048,20 +1046,23 @@ class Engine {
 				// Pass data_properties so these can also be modified (eg: set id of newly created Location)
 				if ($actionexecuter_name = $processor->get_actionexecuter($module)) {
 
-					// Validate that the actionexecution must be triggered through its own checkpoints
-					$execute = true;
-					if ($actionexecution_checkpoints = $data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS]) {
-						
-						// Check if the module fails checkpoint validation. If so, it must not load its data or execute the actionexecuter					
-						$actionexecution_checkpoint_validation = $this->validate_checkpoints($actionexecution_checkpoints, $module);
-						$execute = !is_wp_error($actionexecution_checkpoint_validation);
-					}
+					if ($processor->execute_action($module, $props)) {
 
-					if ($execute) {
-					
-						$gd_dataload_actionexecution_manager = ActionExecution_Manager_Factory::get_instance();
-						$actionexecuter = $gd_dataload_actionexecution_manager->get_actionexecuter($actionexecuter_name);
-						$executed = $actionexecuter->execute($data_properties);
+						// Validate that the actionexecution must be triggered through its own checkpoints
+						$execute = true;
+						if ($actionexecution_checkpoints = $data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS]) {
+							
+							// Check if the module fails checkpoint validation. If so, it must not load its data or execute the actionexecuter					
+							$actionexecution_checkpoint_validation = $this->validate_checkpoints($actionexecution_checkpoints, $module);
+							$execute = !is_wp_error($actionexecution_checkpoint_validation);
+						}
+
+						if ($execute) {
+						
+							$gd_dataload_actionexecution_manager = ActionExecution_Manager_Factory::get_instance();
+							$actionexecuter = $gd_dataload_actionexecution_manager->get_actionexecuter($actionexecuter_name);
+							$executed = $actionexecuter->execute($data_properties);
+						}
 					}
 				}
 
@@ -1148,13 +1149,13 @@ class Engine {
 			// Save the meta into $datasetmodulemeta
 			if (!is_null($datasetmodulemeta)) {
 			
-				if ($dataset_meta = $processor->get_datasetmeta($module, $module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+				if ($dataset_meta = $processor->get_datasetmeta($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 					$this->assign_value_for_module($datasetmodulemeta, $module_path, $module, POP_CONSTANT_META, $dataset_meta);
 				}
 			}
 
 			// Integrate the feedback into $moduledata
-			$this->process_and_add_module_data($module_path, $module, $module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+			$this->process_and_add_module_data($module_path, $module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
 			// Allow other modules to produce their own feedback using this module's data results
 			if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[ModulePathManager_Utils::stringify_module_path(array_merge($module_path, array($module)))]) {
@@ -1179,14 +1180,14 @@ class Engine {
 					elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
 						$referencer_module_props = &$referencer_props;
 					}
-					$this->process_and_add_module_data($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids);
+					$this->process_and_add_module_data($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 				}
 			}
 
 			// Incorporate the background URLs
 			$this->backgroundload_urls = array_merge(
 				$this->backgroundload_urls,
-				$processor->get_backgroundurls_mergeddatasetmoduletree($module, $module_props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)
+				$processor->get_backgroundurls_mergeddatasetmoduletree($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
 			);
 
 			// Allow PoP UserState to add the lazy-loaded userstate data triggers
@@ -1195,7 +1196,8 @@ class Engine {
 				$module, 
 				array(&$module_props), 
 				array(&$data_properties), 
-				$checkpoint_validation, 
+				$dataaccess_checkpoint_validation, 
+				$actionexecution_checkpoint_validation,
 				$executed, 
 				$dbobjectids,
 				array(&$this->helperCalculations),
@@ -1516,7 +1518,7 @@ class Engine {
 		return $ret;
 	}
 
-	protected function process_and_add_module_data($module_path, $module, &$props, $data_properties, $checkpoint_validation, $executed, $dbobjectids) {
+	protected function process_and_add_module_data($module_path, $module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
 
 		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 		$processor = $moduleprocessor_manager->get_processor($module);
@@ -1527,7 +1529,7 @@ class Engine {
 			$moduledata = &$this->moduledata;
 
 			// Add the feedback into the object
-			if ($feedback = $processor->get_data_feedback_datasetmoduletree($module, $props, $data_properties, $checkpoint_validation, $executed, $dbobjectids)) {
+			if ($feedback = $processor->get_data_feedback_datasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 
 				// Advance the position of the array into the current module
 				foreach ($module_path as $submodule) {

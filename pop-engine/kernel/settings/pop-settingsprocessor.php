@@ -13,20 +13,14 @@ abstract class SettingsProcessorBase {
 	}
 
 	function init() {
-
-		$pop_module_settingsprocessor_manager = SettingsProcessorManager_Factory::get_instance();
-		$pop_module_settingsprocessor_manager->add($this);
+		
+		SettingsProcessorManager_Factory::get_instance()->add($this);
 	}
 
-	function pages_to_process() {
+	abstract function pages_to_process();
 
-		return array();
-	}
-
-	/**
-	 * Function to override
-	 */
-	function get_checkpoint_configuration() {
+	// function get_checkpoint_configuration() {
+	function get_checkpoints() {
 	
 		return array();
 	}

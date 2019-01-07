@@ -23,4 +23,5 @@ interface FunctionAPI {
 	function get_global_query();
 	function query_is_hierarchy($query, $hierarchy);
 	function get_site_name();
+	function get_error_class();
 }

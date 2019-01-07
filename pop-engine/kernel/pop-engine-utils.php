@@ -20,33 +20,37 @@ class Utils {
 		return apply_filters('\PoP\Engine\Utils:is_search_engine', false);
 	}
 
-	public static function get_checkpoint_configuration($page_id = null) {
+	// // public static function get_checkpoint_configuration($page_id = null) {
 
-		$pop_module_settingsmanager = Settings\SettingsManager_Factory::get_instance();
-		return $pop_module_settingsmanager->get_checkpoint_configuration($page_id);
-	}
+	// // 	return Settings\SettingsManager_Factory::get_instance()->get_checkpoint_configuration($page_id);
+	// // }
+	// public static function get_checkpoints($page_id = null) {
 
-    public static function is_server_access_mandatory($checkpoint_configuration) {
+	// 	return Settings\SettingsManager_Factory::get_instance()->get_checkpoints($page_id);
+	// }
 
-        // If the type if GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER. The Static type can be cached since it contains no data
-        $dynamic_types = array(
-            GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER,
-        );
-        $mandatory = in_array($checkpoint_configuration['type'], $dynamic_types);
+    // public static function is_server_access_mandatory($checkpoint_configuration) {
 
-        // Allow to add 'requires-user-state' by PoP UserState dependency
-        return apply_filters(
-            '\PoP\Engine\Utils:is_server_access_mandatory',
-            $mandatory,
-            $checkpoint_configuration
-        );
-    }
+    //     // The Static type can be cached since it contains no data
+    //     $dynamic_types = array(
+    //         GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER,
+    //     );
+    //     $mandatory = in_array($checkpoint_configuration['type'], $dynamic_types);
 
-	public static function checkpoint_validation_required($checkpoint_configuration) {
+    //     // Allow to add 'requires-user-state' by PoP UserState dependency
+    //     return apply_filters(
+    //         '\PoP\Engine\Utils:is_server_access_mandatory',
+    //         $mandatory,
+    //         $checkpoint_configuration
+    //     );
+    // }
 
-		$type = $checkpoint_configuration['type'];
-		return (doing_post() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATELESS;
-	}
+	// public static function checkpoint_validation_required($checkpoint_configuration) {
+
+	// 	return true;
+	// 	// $type = $checkpoint_configuration['type'];
+	// 	// return (doing_post() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATELESS;
+	// }
 
 	public static function limit_results($results) {
 
