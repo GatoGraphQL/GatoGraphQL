@@ -1661,11 +1661,101 @@ function prepare_data_properties_after_actionexecution($module, &$props, &$data_
 
 ## Validations
 
-Will be added soon...
-
 ### Checkpoints
 
-Will be added soon...
+A "checkpoint" is a condition that must be satisfied when performing an operation-access validation. These validations do not include content validations, such as checking if the user has filled-in the form correctly; instead, they are used to find out if the user can access a certain page or functionality, such as checking if the user is logged in to access the user account page, checking if the user IP has been whitelisted to execute special scripts, etc.
+
+Modules can specify their checkpoints through 2 functions in the ModuleProcessor:
+
+- [`get_dataaccess_checkpoints`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L915): Define the checkpoints to access data for the module: both load data or execute the module's actionexecuter
+- [`get_actionexecution_checkpoints`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L931): Define the checkpoints to execute the module's actionexecuter
+
+The reason why these 2 functions are split like is, is to allow a page perform the validation only when posting data. Then, an "Add Post" page can require no checkpoints when first loaded, which enables to cache it, and only perform the validation (eg: is user logged in?) when executing the POST operation and triggering the actionexecuter.
+
+For instance, a module that needs to validate that the user's IP is whitelisted can do it like this:
+
+```php
+function get_dataaccess_checkpoints($module, &$props) {
+
+  switch ($module) {
+
+    case POP_MODULE_SOMEMODULE:
+    
+      return CHECKPOINT_WHITELISTEDIP;
+  }
+  
+  return parent::get_dataaccess_checkpoints($module, $props);
+}
+```
+
+Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `POP_MODULE_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function [`get_relevant_page`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php#L895) from the ModuleProcessor, like this:
+
+```php
+function get_relevant_page($module, &$props) {
+		
+  switch ($module) {
+
+    case POP_MODULE_MYPOSTS_SCROLL:
+    case POP_MODULE_MYPOSTS_CAROUSEL:
+    case POP_MODULE_MYPOSTS_TABLE:
+
+      return POP_PAGE_MYPOSTS;
+  }
+
+  return parent::get_relevant_page($module, $props);
+}
+```
+
+A checkpoint is resolved through a [CheckpointProcessor](#checkpointprocessor).
+
+#### CheckpointProcessor
+
+A CheckpointProcessor is an object inheriting from class [`CheckpointProcessorBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-checkpointprocessor.php), which handles checkpoints, resolving if a checkpoint is satisfied or not through function [`process`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-checkpointprocessor.php#L13). When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
+
+For instance, to validate if the user IP is whitelisted can be implemented like this:
+
+```php
+define ('CHECKPOINT_WHITELISTEDIP', 'checkpoint-whitelistedip');
+
+class PoPSystem_Dataload_CheckpointProcessor extends \PoP\Engine\CheckpointProcessorBase {
+
+  function get_checkpoints_to_process() {
+
+    return array(
+      CHECKPOINT_WHITELISTEDIP,
+    );
+  }
+
+  function process($checkpoint) {
+
+    $cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
+		$error_class = $cmsapi->get_error_class();
+    switch ($checkpoint) {
+
+      case CHECKPOINT_WHITELISTEDIP:
+
+        // Validate the user's IP
+        $ip = get_client_ip();
+        if (!$ip) {
+          
+          return new $error_class('ipempty');
+        }
+
+        $whitelisted_ips = array(...);
+        if (!in_array($ip, $whitelisted_ips)) {
+          
+          return new $error_class('ipincorrect');
+        }
+        break;
+    }
+  
+    return parent::process($checkpoint, $module);
+  }
+}
+
+// Initialize
+new PoPSystem_Dataload_CheckpointProcessor();
+```
 
 ## Extending and Formatting Data
 
@@ -1778,6 +1868,14 @@ Plugins must add their own properties and corresponding values in `$vars` by imp
 ### PageModuleProcessor
 
 Will be added soon...
+
+### SettingsProcessor
+
+Will be added soon...
+
+<!-- 
+Explain `get_checkpoint_configuration`, etc
+-->
 
 ### User State
 
