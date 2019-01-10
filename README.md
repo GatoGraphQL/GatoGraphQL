@@ -278,7 +278,7 @@ Currently, only the 1st layer, data + configuration API, is available in the rep
 
 ## Motivation
 
-PoP is an ambitious project. We have been working on it for more than 5 years, and we are still on the early stages of it (or so we hope!) It was created by Leonardo Losoviz, and aided by his wife Jun-E Tan, as a solution to connect communities together directly from their own websites, offering an alternative to always depending on Facebook and similar platforms.
+We have been working on it for more than 5 years, and we are still on the early stages of it (or so we hope!) It was created by Leonardo Losoviz, and aided by his wife Jun-E Tan, as a solution to connect communities together directly from their own websites, offering an alternative to always depending on Facebook and similar platforms.
 
 <!--![Jun-E and Leo](https://uploads.getpop.org/wp-content/uploads/2018/12/jun-e-leo.jpg)-->
 
