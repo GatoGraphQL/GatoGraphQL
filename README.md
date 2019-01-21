@@ -258,7 +258,7 @@ Using components as the building unit of a website has many advantages over othe
 
 ### Avoid (or lessen) JavaScript fatigue
 
-PoP is not a JavaScript framework, but a framework spanning into the server and client-side. While developers can add client-side JavaScript to enhance the application, it is certainly not a requirement, and powerful applications can be created with basic knowledge of JavaScript.
+PoP is not a JavaScript framework, but a framework spanning the server and client-side. While developers can add client-side JavaScript to enhance the application, it is certainly not a requirement, and powerful applications can be created with basic knowledge of JavaScript.
 
 ### Implement COPE or similar techniques
 
@@ -304,7 +304,7 @@ The PoP API is deployed under https://nextapi.getpop.org for demonstration purpo
 - [An array of locations, to feed into a typeahead](https://nextapi.getpop.org/locations/?output=json&mangled=none&modulefilter=maincontentmodule&dataoutputmode=combined&datastructure=results)
 - Alternative models for the "Who we are" page: [Normal](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&dataoutputmode=combined), [Printable](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&thememode=print&dataoutputmode=combined), [Embeddable](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&thememode=embed&dataoutputmode=combined)
 - Changing the module names: [original](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined) vs [mangled](https://nextapi.getpop.org/?output=json&dataoutputmode=combined)
-- Filtering information: [only module settings](https://nextapi.getpop.org/?output=json&dataoutputitems[]=modulesettings&dataoutputmode=combined), [module data plus database data](https://nextapi.getpop.org/?output=json&dataoutputitems[]=databases&dataoutputitems[]=moduledata&dataoutputmode=combined)
+- Filtering information: [only module settings](https://nextapi.getpop.org/?output=json&dataoutputitems[]=modulesettings&dataoutputmode=combined&mangled=none), [module data plus database data](https://nextapi.getpop.org/?output=json&dataoutputitems[]=databases&dataoutputitems[]=moduledata&dataoutputmode=combined&mangled=none)
 
 ### PoP Sites
 
