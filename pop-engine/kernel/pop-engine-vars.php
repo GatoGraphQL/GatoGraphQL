@@ -194,7 +194,6 @@ class Engine_Vars {
 		if (!$format) {
 			$format = POP_VALUES_DEFAULT;
 		}
-		global $gd_theme_manager;
 		self::$vars = array(
 			'hierarchy' => $hierarchy,
 			'output' => $output,
@@ -210,13 +209,6 @@ class Engine_Vars {
 			'settingsformat' => $settingsformat,
 			'tab' => $tab,
 			'action' => $action,
-			'theme' => $gd_theme_manager->get_theme() ? $gd_theme_manager->get_theme()->get_name() : '',
-			'thememode' => $gd_theme_manager->get_thememode() ? $gd_theme_manager->get_thememode()->get_name() : '',
-			'themestyle' => $gd_theme_manager->get_themestyle() ? $gd_theme_manager->get_themestyle()->get_name() : '',
-			'theme-isdefault' => $gd_theme_manager->is_default_theme(),
-			'thememode-isdefault' => $gd_theme_manager->is_default_thememode(),
-			'themestyle-isdefault' => $gd_theme_manager->is_default_themestyle(),
-			'theme-path' => $gd_theme_manager->get_theme_path(),
 			'loading-site' => $loading_site,
 			'fetching-site' => $fetching_site,
 		);

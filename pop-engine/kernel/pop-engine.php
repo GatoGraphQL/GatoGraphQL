@@ -645,7 +645,6 @@ class Engine {
 			$meta['sitename'] = get_bloginfo('name');
 
 			$meta[GD_DATALOAD_PARAMS] = array();
-			$pushurlprops = array();
 
 			// Comment Leo 05/04/2017: Create the params array only in the fetching_site()
 			// Before it was outside, and calling the initial-frames page brought params=[], 
@@ -653,17 +652,6 @@ class Engine {
 
 			// Add the version to the topLevel feedback to be sent in the URL params
 			$meta[GD_DATALOAD_PARAMS][GD_URLPARAM_VERSION] = pop_version();
-
-			// Send the current selected theme back
-			if ($vars['theme']) {
-				$meta[GD_DATALOAD_PARAMS][GD_URLPARAM_THEME] = $vars['theme'];
-			}
-			if ($vars['thememode']) {
-				$meta[GD_DATALOAD_PARAMS][GD_URLPARAM_THEMEMODE] = $vars['thememode'];
-			}
-			if ($vars['themestyle']) {
-				$meta[GD_DATALOAD_PARAMS][GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
-			}
 			$meta[GD_DATALOAD_PARAMS][GD_URLPARAM_DATAOUTPUTMODE] = $vars['dataoutputmode'];
 
 			if ($vars['format']) {
@@ -674,21 +662,6 @@ class Engine {
 			}
 			if (Server\Utils::enable_config_by_params() && $vars['config']) {
 				$meta[GD_DATALOAD_PARAMS][POP_URLPARAM_CONFIG] = $vars['config'];
-			}
-
-			// Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
-			if ($vars['theme'] && !$vars['theme-isdefault']) {
-				$pushurlprops[GD_URLPARAM_THEME] = $vars['theme'];
-			}
-			if ($vars['thememode'] && !$vars['thememode-isdefault']) {
-				$pushurlprops[GD_URLPARAM_THEMEMODE] = $vars['thememode'];
-			}		
-			if ($vars['themestyle'] && !$vars['themestyle-isdefault']) {
-				$pushurlprops[GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
-			}	
-
-			if ($pushurlprops) {
-				$meta[GD_DATALOAD_PUSHURLATTS] = $pushurlprops;
 			}
 
 			// Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code

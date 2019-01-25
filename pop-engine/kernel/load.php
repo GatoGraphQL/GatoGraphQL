@@ -22,4 +22,3 @@ require_once 'moduleprocessor-managers/load.php';
 require_once 'moduleprocessors/load.php';
 require_once 'pagemoduleprocessors/load.php';
 require_once 'settings/load.php';
-require_once 'themes/load.php';

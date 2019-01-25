@@ -71,9 +71,6 @@ class Utils {
 			array(
 				GD_URLPARAM_SETTINGSFORMAT, 
 				GD_URLPARAM_VERSION, 
-				GD_URLPARAM_THEME, 
-				GD_URLPARAM_THEMEMODE, 
-				GD_URLPARAM_THEMESTYLE, 
 				GD_URLPARAM_TARGET, 
 				GD_URLPARAM_MODULEFILTER, 
 				GD_URLPARAM_MODULEPATHS, 
@@ -258,12 +255,6 @@ class Utils {
 
 		global $gd_dataload_datastructureformat_manager;
 		return $gd_dataload_datastructureformat_manager->get_datastructure_formatter($vars['datastructure']);
-	}
-
-	public static function get_theme() {
-
-		global $gd_theme_manager;
-		return $gd_theme_manager->get_theme();
 	}
 
 	public static function fetching_site() {

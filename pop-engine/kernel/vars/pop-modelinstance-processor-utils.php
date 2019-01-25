@@ -120,18 +120,6 @@ class ModelInstanceProcessor_Utils {
 			// so only in these exceptional cases the identifier will add this parameter
 			$components[] = __('mangled:', 'pop-engine').$mangled;
 		}
-		if ($theme = $vars['theme']) {
-			
-			$components[] = __('theme:', 'pop-engine').$theme;
-		}
-		if ($thememode = $vars['thememode']) {
-			
-			$components[] = __('thememode:', 'pop-engine').$thememode;
-		}
-		if ($themestyle = $vars['themestyle']) {
-			
-			$components[] = __('themestyle:', 'pop-engine').$themestyle;
-		}
 
 		// Allow for plug-ins to add their own vars. Eg: URE source parameter
 		$components = apply_filters('ModelInstanceProcessor:model_instance_components_from_vars', $components);
