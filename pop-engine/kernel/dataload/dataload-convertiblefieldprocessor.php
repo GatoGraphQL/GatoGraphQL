@@ -46,8 +46,8 @@ abstract class ConvertibleFieldProcessorBase extends FieldProcessorBase {
 		$fieldprocessor_name = $fieldprocessor_name ?? $this->get_default_fieldprocessor();
 
 		// From the fieldprocessor name, return the object
-		global $gd_dataload_fieldprocessor_manager;
-		$fieldprocessor = $gd_dataload_fieldprocessor_manager->get($fieldprocessor_name);
+		$fieldprocessor_manager = FieldProcessor_Manager_Factory::get_instance();
+		$fieldprocessor = $fieldprocessor_manager->get($fieldprocessor_name);
 
 		// Return also the resolver, as to cast the object
 		return array($fieldprocessor, $fieldprocessor_resolver);
@@ -66,5 +66,21 @@ abstract class ConvertibleFieldProcessorBase extends FieldProcessorBase {
 
 		// Delegate to that fieldprocessor to obtain the value
 		return $fieldprocessor->get_value($resultitem, $field);
+	}
+
+	function get_field_default_dataloader($field) {
+
+		// Please notice that we're getting the default dataloader from the default fieldprocessor
+		if ($default_fieldprocessor_name = $this->get_default_fieldprocessor()) {
+			$fieldprocessor_manager = FieldProcessor_Manager_Factory::get_instance();
+			$default_fieldprocessor = $fieldprocessor_manager->get($default_fieldprocessor_name);
+			$default_dataloader = $default_fieldprocessor->get_field_default_dataloader($field);
+			if ($default_dataloader) {
+				
+				return $default_dataloader;
+			}
+		}
+
+		return parent::get_field_default_dataloader($field);
 	}
 }

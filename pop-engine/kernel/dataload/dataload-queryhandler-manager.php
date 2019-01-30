@@ -7,6 +7,7 @@ class QueryHandler_Manager {
     
     function __construct() {
     
+    	QueryHandler_Manager_Factory::set_instance($this);    
 		return $this->queryhandlers = array();
 	}
 	
@@ -30,5 +31,4 @@ class QueryHandler_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-global $gd_dataload_queryhandler_manager;
-$gd_dataload_queryhandler_manager = new QueryHandler_Manager();
+new QueryHandler_Manager();

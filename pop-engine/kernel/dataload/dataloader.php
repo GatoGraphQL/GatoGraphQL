@@ -5,8 +5,8 @@ abstract class Dataloader {
 
     function __construct() {
     
-		global $gd_dataload_manager;
-		$gd_dataload_manager->add($this);
+		$dataloader_manager = Dataloader_Manager_Factory::get_instance();
+		$dataloader_manager->add($this);
 	}
     
     abstract function get_name();
@@ -46,11 +46,11 @@ abstract class Dataloader {
 
 	final function get_dataitems($formatter, $resultset, $ids_data_fields = array()) {	
 		
-		global $gd_dataload_fieldprocessor_manager;
+		$fieldprocessor_manager = FieldProcessor_Manager_Factory::get_instance();
 
 		if ($fieldprocessor_name = $this->get_fieldprocessor()) {
 
-			$fieldprocessor = $gd_dataload_fieldprocessor_manager->get($fieldprocessor_name);
+			$fieldprocessor = $fieldprocessor_manager->get($fieldprocessor_name);
 		}
 
 		// Iterate data, extract into final results

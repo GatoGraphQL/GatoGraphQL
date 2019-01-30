@@ -5,8 +5,8 @@ class ConvertibleFieldProcessorResolverBase {
 
 	function __construct($convertiblefieldprocessor_name) {
 
-		global $gd_dataload_fieldprocessor_manager;
-		$convertiblefieldprocessor = $gd_dataload_fieldprocessor_manager->get($convertiblefieldprocessor_name);
+		$fieldprocessor_manager = FieldProcessor_Manager_Factory::get_instance();
+		$convertiblefieldprocessor = $fieldprocessor_manager->get($convertiblefieldprocessor_name);
 		$convertiblefieldprocessor->add_fieldprocessor_resolver($this);
 	}
 

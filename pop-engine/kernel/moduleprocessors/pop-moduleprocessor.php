@@ -138,7 +138,7 @@ abstract class ModuleProcessorBase {
 		$ret = array();
 
 		// If this module loads data, then add several properties
-		if ($this->get_dataloader($module)) {
+		if ($dataloader_name = $this->get_dataloader($module)) {
 			
 			if ($this->queries_external_domain($module, $props)) {
 
@@ -158,7 +158,7 @@ abstract class ModuleProcessorBase {
 	function init_model_props($module, &$props) {
 
 		// If it is a dataloader module, then set all the props related to data
-		if ($dataloader = $this->get_dataloader($module)) {
+		if ($dataloader_name = $this->get_dataloader($module)) {
 
 			$vars = Engine_Vars::get_vars();
 
@@ -167,6 +167,41 @@ abstract class ModuleProcessorBase {
 			
 				// $this->add_general_prop($props, 'is-multidomain', true);
 				$this->append_prop($module, $props, 'class', 'pop-multidomain');
+			}
+		}
+
+		// Set property "succeeding-dataloader" on every module, so they know which is their dataloader, needed to calculate the subcomponent data-fields when using dataloader "*"
+		if ($dataloader_name) {
+			$this->set_prop($module, $props, 'succeeding-dataloader', $dataloader_name);
+		}
+		// Get the prop assigned to the module by its ancestor
+		else {
+			$dataloader_name = $this->get_prop($module, $props, 'succeeding-dataloader');
+		}
+		if ($dataloader_name) {
+
+			// Set the property "succeeding-dataloader" on all descendants: the same dataloader for all submodules, and the explicit one (or get the default one for "*") for relational objects
+			foreach ($this->get_modules($module) as $submodule) {
+
+				$this->set_prop($submodule, $props, 'succeeding-dataloader', $dataloader_name);
+			}
+			foreach ($this->get_dbobject_relational_successors($module) as $subcomponent_data_field => $subcomponent_dataloader_options) {
+				foreach ($subcomponent_dataloader_options as $subcomponent_dataloader_name => $subcomponent_modules) {
+
+					// If the subcomponent dataloader is not explicitly set in `get_dbobject_relational_successors`, then retrieve it now from the current dataloader's fieldprocessor
+					if ($subcomponent_dataloader_name == POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD) {
+
+						$subcomponent_dataloader_name = DataloadUtils::get_default_dataloader_name_from_subcomponent_data_field($dataloader_name, $subcomponent_data_field);
+					}
+
+					// If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_dataloader_name will be empty
+					if ($subcomponent_dataloader_name) {
+
+						foreach ($subcomponent_modules as $subcomponent_module) {
+							$this->set_prop($subcomponent_module, $props, 'succeeding-dataloader', $subcomponent_dataloader_name);
+						}
+					}
+				}
 			}
 		}
 
@@ -476,8 +511,8 @@ abstract class ModuleProcessorBase {
 
 		if ($dataloader_name = $this->get_dataloader($module)) {
 			
-			global $gd_dataload_manager;
-			$dataloader = $gd_dataload_manager->get($dataloader_name);
+			$dataloader_manager = Dataloader_Manager_Factory::get_instance();
+			$dataloader = $dataloader_manager->get($dataloader_name);
 
 			if ($dbkey = $dataloader->get_database_key()) {
 
@@ -486,9 +521,11 @@ abstract class ModuleProcessorBase {
 			}
 		}
 
-		global $gd_dataload_manager;
+		$dataloader_manager = Dataloader_Manager_Factory::get_instance();
 		if ($subcomponents = $this->get_dbobject_relational_successors($module)) {
 			
+			// This prop is set for both dataloading and non-dataloading modules
+			$dataloader_name = $this->get_prop($module, $props, 'succeeding-dataloader');
 			foreach ($subcomponents as $subcomponent_data_field => $subcomponent_dataloader_options) {
 
 				// Watch out that, if a module has 2 subcomponents on the same data-field but different dataloaders, then
@@ -497,12 +534,92 @@ abstract class ModuleProcessorBase {
 				$subcomponent_dataloader_names = array_keys($subcomponent_dataloader_options);
 				foreach ($subcomponent_dataloader_names as $subcomponent_dataloader_name) {
 
-					$subcomponent_dataloader = $gd_dataload_manager->get($subcomponent_dataloader_name);
-					$ret[$subcomponent_data_field] = $subcomponent_dataloader->get_database_key();
+					// If the subcomponent dataloader is not explicitly set in `get_dbobject_relational_successors`, then retrieve it now from the current dataloader's fieldprocessor
+					if ($subcomponent_dataloader_name == POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD) {
+						
+						$subcomponent_dataloader_name = DataloadUtils::get_default_dataloader_name_from_subcomponent_data_field($dataloader_name, $subcomponent_data_field);
+					}
+
+					// If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_dataloader_name will be empty
+					if ($subcomponent_dataloader_name) {
+
+						$subcomponent_dataloader = $dataloader_manager->get($subcomponent_dataloader_name);
+						$ret[$subcomponent_data_field] = $subcomponent_dataloader->get_database_key();
+					}
 				}
 			}
 		}
 
+		return $ret;
+	}
+
+	//-------------------------------------------------
+	// New PUBLIC Functions: Model Static Settings
+	//-------------------------------------------------
+
+	function get_immutable_settings_datasetmoduletree($module, &$props) {
+
+		$options = array(
+			'only-execute-on-dataloading-modules' => true,
+		);
+		return $this->execute_on_self_and_propagate_to_modules('get_immutable_datasetsettings', __FUNCTION__, $module, $props, true, $options);
+	}
+
+	function get_immutable_datasetsettings($module, &$props) {
+
+		$ret = array();
+		
+		if ($database_keys = $this->get_dataset_database_keys($module, $props)) {
+			$ret['dbkeys'] = $database_keys;
+		}
+		
+		return $ret;
+	}
+
+	protected function has_no_dataloader($module) {
+
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+		return is_null($moduleprocessor_manager->get_processor($module)->get_dataloader($module));
+	}
+
+	function add_to_dataset_database_keys($module, &$props, $path, &$ret) {
+
+		// Add the current module's dbkeys
+		$dbkeys = $this->get_database_keys($module, $props);
+		foreach ($dbkeys as $field => $dbkey) {
+			$ret[implode('.', array_merge($path, [$field]))] = $dbkey;
+		}
+
+		// Propagate to all submodules which have no dataloader
+		$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+
+		$module_path_manager = ModulePathManager_Factory::get_instance();
+		$module_path_manager->prepare_for_propagation($module);
+		foreach ($this->get_dbobject_relational_successors($module) as $subcomponent_data_field => $subcomponent_dataloader_options) {
+
+			foreach ($subcomponent_dataloader_options as $subcomponent_dataloader_name => $subcomponent_modules) {
+				
+				// Only modules without dataloader
+				$subcomponent_modules = array_filter($subcomponent_modules, array($this, 'has_no_dataloader'));
+				foreach ($subcomponent_modules as $subcomponent_module) {
+					$moduleprocessor_manager->get_processor($subcomponent_module)->add_to_dataset_database_keys($subcomponent_module, $props[$module][POP_PROPS_MODULES], array_merge($path, [$subcomponent_data_field]), $ret);
+				}
+			}
+		}
+
+		// Only modules without dataloader
+		$submodules = array_filter($this->get_modules($module), array($this, 'has_no_dataloader'));
+		foreach ($submodules as $submodule) {
+
+			$moduleprocessor_manager->get_processor($submodule)->add_to_dataset_database_keys($submodule, $props[$module][POP_PROPS_MODULES], $path, $ret);
+		}
+		$module_path_manager->restore_from_propagation($module);
+	}
+
+	function get_dataset_database_keys($module, &$props) {
+
+		$ret = array();
+		$this->add_to_dataset_database_keys($module, $props, array(), $ret);
 		return $ret;
 	}
 

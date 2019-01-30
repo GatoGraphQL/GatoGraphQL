@@ -5,8 +5,8 @@ abstract class QueryHandlerBase {
 
     function __construct() {
     
-		global $gd_dataload_queryhandler_manager;
-		$gd_dataload_queryhandler_manager->add($this->get_name(), $this);
+		$queryhandler_manager = QueryHandler_Manager_Factory::get_instance();
+		$queryhandler_manager->add($this->get_name(), $this);
 	}
 
     abstract function get_name();

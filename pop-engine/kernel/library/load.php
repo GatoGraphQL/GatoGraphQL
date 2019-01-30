@@ -8,3 +8,6 @@ require_once 'url-params.php';
 require_once 'js-keys.php';
 require_once 'formats.php';
 require_once 'template-utils.php';
+require_once 'api-utils.php';
+require_once 'virtualmodule-utils.php';
+require_once 'dataload-utils.php';

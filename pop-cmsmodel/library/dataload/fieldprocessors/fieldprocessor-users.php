@@ -61,6 +61,11 @@ class FieldProcessor_Users extends \PoP\Engine\FieldProcessorBase {
 				$value = get_author_posts_url($this->get_id($user));
 				break;
 
+			case 'endpoint' :
+
+				$value = \PoP\Engine\APIUtils::get_endpoint($this->get_value($resultitem, 'url'));
+				break;
+
 			case 'description' :
 				
 				$value = $cmsresolver->get_user_description($user);
@@ -85,6 +90,17 @@ class FieldProcessor_Users extends \PoP\Engine\FieldProcessorBase {
 		$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
 		$user = $resultitem;
 		return $cmsresolver->get_user_id($user);
+	}
+
+	function get_field_default_dataloader($field) {
+
+		// First Check if there's a hook to implement this field
+		$default_dataloader = $this->get_hook_field_default_dataloader(GD_DATALOAD_FIELDPROCESSOR_USERS, $field);
+		if ($default_dataloader) {
+			return $default_dataloader;
+		}
+
+		return parent::get_field_default_dataloader($field);
 	}
 }
 

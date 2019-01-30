@@ -5,8 +5,8 @@ abstract class DataStructureFormatterBase {
 
 	function __construct() {
     
-		global $gd_dataload_datastructureformat_manager;
-		$gd_dataload_datastructureformat_manager->add($this->get_name(), $this);
+		$datastructureformat_manager = DataStructureFormat_Manager_Factory::get_instance();
+		$datastructureformat_manager->add($this->get_name(), $this);
 	}
 	
 	abstract function get_name();

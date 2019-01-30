@@ -47,15 +47,28 @@ trait QueryDataModuleProcessorTrait {
 
 	function get_dbobject_ids($module, &$props, &$data_properties) {
 
-		global $gd_dataload_manager;
+		$dataloader_manager = Dataloader_Manager_Factory::get_instance();
 
 		// Prepare the Query to get data from the DB
 		$datasource = $data_properties[GD_DATALOAD_DATASOURCE];
 		if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
 
 			// Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
+			// But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
+			$whitelisted_params = apply_filters(
+				'QueryDataModuleProcessorTrait:request:whitelisted_params',
+				array(
+					GD_URLPARAM_REDIRECTTO,
+					GD_URLPARAM_PAGED,
+					GD_URLPARAM_LIMIT,
+					// Used for the Comments to know what post to fetch comments from when filtering
+					GD_URLPARAM_POSTID,
+				)
+			);
 			$data_properties[GD_DATALOAD_QUERYARGS] = array_merge(
-				$_REQUEST,
+				array_filter($_REQUEST, function($param) use ($whitelisted_params) {
+				    return in_array($param, $whitelisted_params);
+				}, ARRAY_FILTER_USE_KEY),
 				$data_properties[GD_DATALOAD_QUERYARGS]
 			);
 		}
@@ -63,12 +76,12 @@ trait QueryDataModuleProcessorTrait {
 		if ($queryhandler_name = $this->get_queryhandler($module)) {
 					
 			// Allow the queryhandler to override/normalize the query args
-			global $gd_dataload_queryhandler_manager;
-			$queryhandler = $gd_dataload_queryhandler_manager->get($queryhandler_name);
+			$queryhandler_manager = QueryHandler_Manager_Factory::get_instance();
+			$queryhandler = $queryhandler_manager->get($queryhandler_name);
 			$queryhandler->prepare_query_args($data_properties[GD_DATALOAD_QUERYARGS]);
 		}
 
-		$dataloader = $gd_dataload_manager->get($this->get_dataloader($module));
+		$dataloader = $dataloader_manager->get($this->get_dataloader($module));
 		return $dataloader->get_dbobject_ids($data_properties);
 	}
 
@@ -78,8 +91,8 @@ trait QueryDataModuleProcessorTrait {
 
 		if ($queryhandler_name = $this->get_queryhandler($module)) {
 					
-			global $gd_dataload_queryhandler_manager;
-			$queryhandler = $gd_dataload_queryhandler_manager->get($queryhandler_name);
+			$queryhandler_manager = QueryHandler_Manager_Factory::get_instance();
+			$queryhandler = $queryhandler_manager->get($queryhandler_name);
 			
 			if ($query_state = $queryhandler->get_query_state($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
 

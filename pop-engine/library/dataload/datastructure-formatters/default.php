@@ -17,5 +17,5 @@ class DataStructureFormatter_Default extends \PoP\Engine\DataStructureFormatterB
 $gd_dataload_formatter_default = new DataStructureFormatter_Default();
 
 // Set as the default one
-global $gd_dataload_datastructureformat_manager;
-$gd_dataload_datastructureformat_manager->set_default($gd_dataload_formatter_default);
+$datastructureformat_manager = \PoP\Engine\DataStructureFormat_Manager_Factory::get_instance();
+$datastructureformat_manager->set_default($gd_dataload_formatter_default);

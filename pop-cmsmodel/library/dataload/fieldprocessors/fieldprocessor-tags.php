@@ -27,6 +27,11 @@ class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase {
 				$value = $cmsapi->get_tag_link($this->get_id($tag));
 				break;	
 
+			case 'endpoint' :
+
+				$value = \PoP\Engine\APIUtils::get_endpoint($this->get_value($resultitem, 'url'));
+				break;
+
 			case 'name' :
 				$value = $cmsresolver->get_tag_name($tag);
 				break;
@@ -72,6 +77,23 @@ class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase {
 		$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
 		$tag = $resultitem;
 		return $cmsresolver->get_tag_term_id($tag);
+	}
+
+	function get_field_default_dataloader($field) {
+
+		// First Check if there's a hook to implement this field
+		$default_dataloader = $this->get_hook_field_default_dataloader(GD_DATALOAD_FIELDPROCESSOR_TAGS, $field);
+		if ($default_dataloader) {
+			return $default_dataloader;
+		}
+
+		switch ($field) {
+
+			case 'parent' :
+				return GD_DATALOADER_TAGLIST;
+		}
+
+		return parent::get_field_default_dataloader($field);
 	}
 }
 

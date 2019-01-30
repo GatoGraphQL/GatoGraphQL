@@ -12,6 +12,9 @@ class ModuleProcessor_Manager {
 	}
 	
 	function get_processor($module) {
+
+		// If it is a Virtual Module, then remove the atts
+		list($module) = \PoP\Engine\VirtualModuleUtils::extract_virtualmodule($module);
 	
 		$processor = $this->processors[$module];
 		if (!$processor) {

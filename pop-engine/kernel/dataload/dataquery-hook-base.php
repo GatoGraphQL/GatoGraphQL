@@ -7,6 +7,7 @@ class DataQuery_HookBase {
 
 		$name = $this->get_dataquery_name();
 		add_filter('Dataquery:'.$name.':allowedfields', array($this, 'add_allowedfields'));
+		add_filter('Dataquery:'.$name.':rejectedfields', array($this, 'add_rejectedfields'));
 		add_filter('Dataquery:'.$name.':allowedlayouts', array($this, 'add_allowedlayouts'));
 		add_filter('Dataquery:'.$name.':nocachefields', array($this, 'add_nocachefields'));
 		add_filter('Dataquery:'.$name.':lazylayouts', array($this, 'add_lazylayouts'));
@@ -21,6 +22,15 @@ class DataQuery_HookBase {
 			array_merge(
 				$allowedfields,
 				$this->get_allowedfields()
+			)
+		);
+	}
+	function add_rejectedfields($rejectedfields) {
+
+		return array_unique(
+			array_merge(
+				$rejectedfields,
+				$this->get_rejectedfields()
 			)
 		);
 	}
@@ -51,6 +61,10 @@ class DataQuery_HookBase {
 	function get_allowedfields() {
 
 		return $this->get_nocachefields();
+	}
+	function get_rejectedfields() {
+
+		return array();
 	}
 	function get_allowedlayouts() {
 

@@ -10,8 +10,8 @@ abstract class DataQueryBase {
 
     	$this->properties = array();
     
-		global $gd_dataquery_manager;
-		$gd_dataquery_manager->add($this->get_name(), $this);
+		$dataquery_manager = DataQuery_Manager_Factory::get_instance();
+		$dataquery_manager->add($this->get_name(), $this);
 	}
     
     /**
@@ -61,6 +61,14 @@ abstract class DataQueryBase {
     
 		$allowedfields = $this->get_nocachefields();
 		return apply_filters('Dataquery:'.$this->get_name().':allowedfields', $allowedfields);
+	}
+	/**
+     * What fields are to be rejected
+     */
+	function get_rejectedfields() {
+    
+		$rejectedfields = array();
+		return apply_filters('Dataquery:'.$this->get_name().':rejectedfields', $rejectedfields);
 	}
 	/**
      * What layouts can be requested on the outside-looking API to query data. By default: everything that can be lazy

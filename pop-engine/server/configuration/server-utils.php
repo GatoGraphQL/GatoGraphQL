@@ -13,7 +13,7 @@ class Utils {
 		self::$override_configuration = array();
 		if (self::enable_config_by_params()) {
 			
-			self::$override_configuration = $_REQUEST[POP_URLPARAM_CONFIG] ? explode(',', $_REQUEST[POP_URLPARAM_CONFIG]) : array();
+			self::$override_configuration = $_REQUEST[POP_URLPARAM_CONFIG] ? explode(POP_CONSTANT_PARAMVALUE_SEPARATOR, $_REQUEST[POP_URLPARAM_CONFIG]) : array();
 		}
 	}
 
@@ -66,6 +66,15 @@ class Utils {
 		return false;
 	}
 
+	public static function fail_if_subcomponent_dataloader_undefined() {
+
+		if (defined('POP_SERVER_FAILIFSUBCOMPONENTDATALOADERUNDEFINED')) {
+			return POP_SERVER_FAILIFSUBCOMPONENTDATALOADERUNDEFINED;
+		}
+
+		return false;
+	}
+
 	public static function enable_extrauris_by_params() {
 
 		if (defined('POP_SERVER_ENABLEEXTRAURISBYPARAMS')) {
@@ -105,6 +114,15 @@ class Utils {
 
 		if (defined('POP_SERVER_USECACHE')) {
 			return POP_SERVER_USECACHE;
+		}
+
+		return false;
+	}
+
+	public static function enable_api() {
+
+		if (defined('POP_SERVER_ENABLEAPI')) {
+			return POP_SERVER_ENABLEAPI;
 		}
 
 		return false;

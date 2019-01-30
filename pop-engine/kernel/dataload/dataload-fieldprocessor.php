@@ -5,8 +5,8 @@ abstract class FieldProcessorBase {
 
 	function __construct() {
     
-		global $gd_dataload_fieldprocessor_manager;
-		$gd_dataload_fieldprocessor_manager->add($this->get_name(), $this);
+		$fieldprocessor_manager = FieldProcessor_Manager_Factory::get_instance();
+		$fieldprocessor_manager->add($this->get_name(), $this);
 	}
 
 	function get_id($resultitem) {
@@ -30,10 +30,10 @@ abstract class FieldProcessorBase {
 		return new $error_class('no-field');
 	}	
 
-	function get_hook_value($fieldprocessor, $resultitem, $field) {
+	function get_hook_value($fieldprocessor_name, $resultitem, $field) {
 
 		// First Check if there's a hook to implement this field
-		$filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FILTER, $fieldprocessor);
+		$filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FIELDVALUEFILTER, $fieldprocessor_name);
 		
 		// Also send the fieldprocessor along, as to get the id of the $resultitem being passed
 		$cmsapi = \PoP\CMS\FunctionAPI_Factory::get_instance();
@@ -42,5 +42,17 @@ abstract class FieldProcessorBase {
 	}
 	
 	abstract function get_name();
+
+	function get_field_default_dataloader($field) {
+
+		return null;
+	}	
+
+	function get_hook_field_default_dataloader($fieldprocessor_name, $field) {
+
+		// First Check if there's a hook to implement this field
+		$filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FIELDDATALOADERFILTER, $fieldprocessor_name);
+		return apply_filters($filter, null, $field, $this);
+	}
 }
 	

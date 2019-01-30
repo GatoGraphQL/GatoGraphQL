@@ -25,7 +25,7 @@ class Filter_Manager {
 	 */
 	function get_filteringby_filter() {
 	
-		$filtername = $_REQUEST[GD_FILTER_FILTERING_FIELD];
+		$filtername = $_REQUEST[POP_FILTER_FILTERING_FIELD];
 		return $this->get_filter($filtername);
 	}
 	
@@ -40,9 +40,9 @@ class Filter_Manager {
 		}
 		else {
 
-			global $gd_filter_manager;
+			global $POP_FILTER_manager;
 			$filtername = $filter_or_filtername;
-			$filter = $gd_filter_manager->get_filter($filtername);
+			$filter = $POP_FILTER_manager->get_filter($filtername);
 		}
 	
 		$wildcard_filters = array();
@@ -57,7 +57,7 @@ class Filter_Manager {
 		}
 
 		// Filtering by the same Filter or its wildcard (eg: a General Post Search is a wildcard, it involves all posts filters like Announcements Filter)
-		$requested_filtername = $_REQUEST[GD_FILTER_FILTERING_FIELD];
+		$requested_filtername = $_REQUEST[POP_FILTER_FILTERING_FIELD];
 		return ($requested_filtername == $filter->get_name() || (!empty($wildcard_filters) && in_array($requested_filtername, $wildcard_filters)));
 	}
 
@@ -73,8 +73,8 @@ class Filter_Manager {
 			return $query;
 		}
 
-		global $gd_filter_manager;
-		$filter = $gd_filter_manager->get_filter($filter_name);
+		global $POP_FILTER_manager;
+		$filter = $POP_FILTER_manager->get_filter($filter_name);
 		
 		// Merge with the filter query filters
 		// Using array_merge_recursive on 'meta-query', which can be set in different places (in the filter, eg: when filtering Action category)
@@ -155,7 +155,7 @@ class Filter_Manager {
 	function add_filter_params($url, $filter, $args = array()) {
 	
 		// Add the 'filter' param
-		$url = add_query_arg(GD_FILTER_FILTERING_FIELD, $filter->get_name(), $url);
+		$url = add_query_arg(POP_FILTER_FILTERING_FIELD, $filter->get_name(), $url);
 		foreach ($args as $field => $value) {
 		
 			$url = add_query_arg($field, $value, $url);
@@ -168,5 +168,5 @@ class Filter_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialization
  * ---------------------------------------------------------------------------------------------------------------*/
-global $gd_filter_manager;
-$gd_filter_manager = new Filter_Manager();
+global $POP_FILTER_manager;
+$POP_FILTER_manager = new Filter_Manager();

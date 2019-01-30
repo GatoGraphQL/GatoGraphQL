@@ -26,8 +26,8 @@ class FieldProcessor_Menu extends \PoP\Engine\FieldProcessorBase {
 			case 'items' :
 				
 				// Load needed values for the menu-items
-				global $gd_dataload_fieldprocessor_manager;
-				$gd_dataload_fieldprocessor_menu_items = $gd_dataload_fieldprocessor_manager->get(GD_DATALOAD_FIELDPROCESSOR_MENU_ITEMS);
+				$fieldprocessor_manager = \PoP\Engine\FieldProcessor_Manager_Factory::get_instance();
+				$gd_dataload_fieldprocessor_menu_items = $fieldprocessor_manager->get(GD_DATALOAD_FIELDPROCESSOR_MENU_ITEMS);
 				$items = $cmsapi->wp_get_nav_menu_items($cmsresolver->get_menu_term_id($menu));
 
 				// Load these item data-fields. If other set needed, create another $field
@@ -61,6 +61,17 @@ class FieldProcessor_Menu extends \PoP\Engine\FieldProcessorBase {
     	$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
 		$menu = $resultitem;
 		return $cmsresolver->get_menu_term_id($menu);
+	}
+
+	function get_field_default_dataloader($field) {
+
+		// First Check if there's a hook to implement this field
+		$default_dataloader = $this->get_hook_field_default_dataloader(GD_DATALOAD_FIELDPROCESSOR_MENU, $field);
+		if ($default_dataloader) {
+			return $default_dataloader;
+		}
+
+		return parent::get_field_default_dataloader($field);
 	}
 }
 

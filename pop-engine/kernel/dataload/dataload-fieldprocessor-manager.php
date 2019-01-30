@@ -7,6 +7,7 @@ class FieldProcessor_Manager {
     
     function __construct() {
     
+    	FieldProcessor_Manager_Factory::set_instance($this);    
 		return $this->fieldprocessors = array();
 	}
 	
@@ -24,5 +25,4 @@ class FieldProcessor_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-global $gd_dataload_fieldprocessor_manager;
-$gd_dataload_fieldprocessor_manager = new FieldProcessor_Manager();
+new FieldProcessor_Manager();

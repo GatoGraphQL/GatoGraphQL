@@ -85,9 +85,11 @@ trait DataloadModuleProcessorBaseTrait {
 
 		if ($filter_module = $this->get_filter_module($module)) {
 			
-			$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
 			$ret['filter-module'] = $filter_module;
-			$ret['filter'] = $moduleprocessor_manager->get_processor($filter_module)->get_filter($filter_module);
+		}
+		if ($filter = $this->get_filter($module)) {
+			
+			$ret['filter'] = $filter;
 		}
 
 		return $ret;

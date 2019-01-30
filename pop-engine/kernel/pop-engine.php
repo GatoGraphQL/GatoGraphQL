@@ -374,8 +374,11 @@ class Engine {
 		$data = array(
 			// 'requestsettings' => $this->get_request_settings($module, $model_props),
 		);
-				
-		if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems)) {
+
+		if (
+			in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems) ||
+			in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS, $dataoutputitems)
+		) {
 
 			$data = array_merge(
 				$data,
@@ -409,9 +412,13 @@ class Engine {
 
 		list($has_extra_uris, $model_instance_id, $current_uri) = $this->list_extra_uri_vars();
 
+		// if (
+		// 	in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems) ||
+		// 	in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS, $dataoutputitems) ||
+		// 	in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
+		// ) {
 		if (
-			in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems) ||
-			in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
+			in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
 		) {
 
 			// Also add the request, session and site meta.
@@ -462,9 +469,13 @@ class Engine {
 		// Externalize logic into function so it can be overridden by PoP Frontend Engine
 		$dataoutputitems = $vars['dataoutputitems'];
 
+		// if (
+		// 	in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems) ||
+		// 	in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS, $dataoutputitems) ||
+		// 	in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
+		// ) {
 		if (
-			in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems) ||
-			in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
+			in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
 		) {
 
 			// Also add the request, session and site meta.
@@ -476,12 +487,12 @@ class Engine {
 			if ($sitemeta = $this->get_site_meta()) {
 				$this->data['sitemeta'] = $sitemeta;
 			}
-		}
 
-		if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_SESSION, $dataoutputitems)) {
-		
-			if ($sessionmeta = $this->get_session_meta()) {
-				$this->data['sessionmeta'] = $sessionmeta;
+			if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_SESSION, $dataoutputitems)) {
+			
+				if ($sessionmeta = $this->get_session_meta()) {
+					$this->data['sessionmeta'] = $sessionmeta;
+				}
 			}
 		}
 	}
@@ -499,6 +510,10 @@ class Engine {
 		$vars = Engine_Vars::get_vars();
 		$datasources = $vars['datasources'];
 		$dataoutputmode = $vars['dataoutputmode'];
+		$dataoutputitems = $vars['dataoutputitems'];
+
+		$add_settings = in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems);
+		$add_datasetsettings = in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS, $dataoutputitems);
 
 		// Templates: What modules must be executed after call to loadMore is back with data:
 		// CB: list of modules to merge
@@ -508,29 +523,56 @@ class Engine {
 		$use_cache = Server\Utils::use_cache();
 		if ($use_cache) {
 			
-			$immutable_settings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, true);
-			$mutableonmodel_settings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, true);
+			if ($add_settings) {
+				$immutable_settings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, true);
+				$mutableonmodel_settings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, true);
+			}
+
+			if ($add_datasetsettings) {
+				$immutable_datasetsettings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_IMMUTABLEDATASETSETTINGS, true);
+				$mutableonmodel_datasetsettings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULDATASETSETTINGS, true);
+			}
 		}
 
 		// If there is no cached one, generate the configuration and cache it
 		$this->cachedsettings = false;
-		if ($immutable_settings) {
+		if ($immutable_settings || $immutable_datasetsettings) {
 
 			$this->cachedsettings = true;
 		}
 		else {
 
-			$immutable_settings = $processor->get_immutable_settings_moduletree($module, $model_props);
-			$mutableonmodel_settings = $processor->get_mutableonmodel_settings_moduletree($module, $model_props);
+			if ($add_settings) {
+				$immutable_settings = $processor->get_immutable_settings_moduletree($module, $model_props);
+				$mutableonmodel_settings = $processor->get_mutableonmodel_settings_moduletree($module, $model_props);
+			}
+
+			if ($add_datasetsettings) {
+				$immutable_datasetsettings = $processor->get_immutable_settings_datasetmoduletree($module, $model_props);
+				// $mutableonmodel_datasetsettings = $processor->get_mutableonmodel_settings_datasetmoduletree($module, $model_props);
+			}
 
 			if ($use_cache) {
-				$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, $immutable_settings, true);
-				$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings, true);
+				if ($add_settings) {
+					$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_IMMUTABLESETTINGS, $immutable_settings, true);
+					$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings, true);
+				}
+
+				if ($add_datasetsettings) {
+					$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings, true);
+					// $cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULDATASETSETTINGS, $mutableonmodel_datasetsettings, true);
+				}
 			}
 		}
 		if ($datasources == GD_URLPARAM_DATASOURCES_MODELANDREQUEST) {
 
-			$mutableonrequest_settings = $processor->get_mutableonrequest_settings_moduletree($module, $props);
+			if ($add_settings) {
+				$mutableonrequest_settings = $processor->get_mutableonrequest_settings_moduletree($module, $props);
+			}
+
+			// if ($add_datasetsettings) {
+			// 	$mutableonrequest_datasetsettings = $processor->get_mutableonrequest_settings_datasetmoduletree($module, $props);
+			// }
 		}
 
 		// If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
@@ -539,30 +581,135 @@ class Engine {
 		if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
 
 			// Save the model settings
-			if ($immutable_settings) {
-				$ret['modulesettings']['immutable'] = $immutable_settings;
+			if ($add_settings) {
+				if ($immutable_settings) {
+					$ret['modulesettings']['immutable'] = $immutable_settings;
+				}
+				if ($mutableonmodel_settings) {
+					$ret['modulesettings']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_settings) : $mutableonmodel_settings;
+				}
+				if ($mutableonrequest_settings) {
+					$ret['modulesettings']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
+				}
 			}
-			if ($mutableonmodel_settings) {
-				$ret['modulesettings']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_settings) : $mutableonmodel_settings;
-			}
-			if ($mutableonrequest_settings) {
-				$ret['modulesettings']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
+
+			if ($add_datasetsettings) {
+
+				if ($immutable_datasetsettings) {
+					$ret['datasetmodulesettings']['immutable'] = $immutable_datasetsettings;
+				}
+				// if ($mutableonmodel_datasetsettings) {
+				// 	$ret['datasetmodulesettings']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetsettings) : $mutableonmodel_datasetsettings;
+				// }
+				// if ($mutableonrequest_datasetsettings) {
+				// 	$ret['datasetmodulesettings']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetsettings) : $mutableonrequest_datasetsettings;
+				// }
 			}
 		}
 		elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
 
 			// If everything is combined, then it belongs under "mutableonrequest"
-			if ($combined_settings = array_merge_recursive(
-				$immutable_settings ?? array(),
-				$mutableonmodel_settings ?? array(),
-				$mutableonrequest_settings ?? array()
-			)) {
-				$ret['modulesettings'] = $has_extra_uris ? array($current_uri => $combined_settings) : $combined_settings;
+			if ($add_settings) {
+				if ($combined_settings = array_merge_recursive(
+					$immutable_settings ?? array(),
+					$mutableonmodel_settings ?? array(),
+					$mutableonrequest_settings ?? array()
+				)) {
+					$ret['modulesettings'] = $has_extra_uris ? array($current_uri => $combined_settings) : $combined_settings;
+				}
+			}
+
+			if ($add_datasetsettings) {
+				if ($combined_datasetsettings = array_merge_recursive(
+					$immutable_datasetsettings ?? array(),
+					array(),// $mutableonmodel_datasetsettings ?? array(),
+					array()// $mutableonrequest_datasetsettings ?? array()
+				)) {
+					$ret['datasetmodulesettings'] = $has_extra_uris ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
+				}
 			}
 		}
 
 		return $ret;
 	}
+
+	// function get_module_datasetsettings($module, $model_props, $props) {
+
+	// 	$cachemanager = CacheManager_Factory::get_instance();
+	// 	$moduleprocessor_manager = ModuleProcessor_Manager_Factory::get_instance();
+
+	// 	$ret = array();
+
+	// 	$processor = $moduleprocessor_manager->get_processor($module);
+		
+	// 	// From the state we know if to process static/staful content or both
+	// 	$vars = Engine_Vars::get_vars();
+	// 	$datasources = $vars['datasources'];
+	// 	$dataoutputmode = $vars['dataoutputmode'];
+
+	// 	// Templates: What modules must be executed after call to loadMore is back with data:
+	// 	// CB: list of modules to merge
+	// 	$this->cachedsettings = false;
+
+	// 	// First check if there's a cache stored
+	// 	$use_cache = Server\Utils::use_cache();
+	// 	if ($use_cache) {
+			
+	// 		$immutable_datasetsettings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_IMMUTABLEDATASETSETTINGS, true);
+	// 		$mutableonmodel_datasetsettings = $cachemanager->get_cache_by_model_instance(POP_CACHETYPE_STATEFULDATASETSETTINGS, true);
+	// 	}
+
+	// 	// If there is no cached one, generate the configuration and cache it
+	// 	$this->cachedsettings = false;
+	// 	if ($immutable_datasetsettings) {
+
+	// 		$this->cachedsettings = true;
+	// 	}
+	// 	else {
+
+	// 		$immutable_datasetsettings = $processor->get_immutable_settings_datasetmoduletree($module, $model_props);
+	// 		// $mutableonmodel_datasetsettings = $processor->get_mutableonmodel_settings_datasetmoduletree($module, $model_props);
+
+	// 		if ($use_cache) {
+
+	// 			$cachemanager->store_cache_by_model_instance(POP_CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings, true);
+	// 			// $cachemanager->store_cache_by_model_instance(POP_CACHETYPE_STATEFULDATASETSETTINGS, $mutableonmodel_datasetsettings, true);
+	// 		}
+	// 	}
+	// 	if ($datasources == GD_URLPARAM_DATASOURCES_MODELANDREQUEST) {
+
+	// 	// 	$mutableonrequest_datasetsettings = $processor->get_mutableonrequest_settings_datasetmoduletree($module, $props);
+	// 	}
+
+	// 	// If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
+	// 	list($has_extra_uris, $model_instance_id, $current_uri) = $this->list_extra_uri_vars();
+
+	// 	if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+
+	// 		if ($immutable_datasetsettings) {
+	// 			$ret['datasetmodulesettings']['immutable'] = $immutable_datasetsettings;
+	// 		}
+	// 		// if ($mutableonmodel_datasetsettings) {
+	// 		// 	$ret['datasetmodulesettings']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetsettings) : $mutableonmodel_datasetsettings;
+	// 		// }
+	// 		// if ($mutableonrequest_datasetsettings) {
+	// 		// 	$ret['datasetmodulesettings']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetsettings) : $mutableonrequest_datasetsettings;
+	// 		// }
+	// 	}
+	// 	elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+
+	// 		// If everything is combined, then it belongs under "mutableonrequest"
+	// 		if ($combined_datasetsettings = array_merge_recursive(
+	// 			$immutable_datasetsettings ?? array(),
+	// 			array(),// $mutableonmodel_datasetsettings ?? array(),
+	// 			array()// $mutableonrequest_datasetsettings ?? array()
+	// 		)) {
+	// 			$ret['datasetmodulesettings'] = $has_extra_uris ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
+	// 		}
+	// 	}
+
+	// 	return $ret;
+	// }
 
 	// function get_request_settings($module, $props) {
 
@@ -874,10 +1021,14 @@ class Engine {
 		$vars = Engine_Vars::get_vars();
 		$datasources = $vars['datasources'];
 		$dataoutputmode = $vars['dataoutputmode'];
+		$dataoutputitems = $vars['dataoutputitems'];
+		$add_meta = in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems);
 
 		$immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = array();
 		$immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = array();
-		$immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = array();
+		if ($add_meta) {
+			$immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = array();
+		}
 		$this->dbdata = array();
 
 		// Save all the BACKGROUND_LOAD urls to send back to the browser, to load immediately again (needed to fetch non-cacheable data-fields)
@@ -1098,17 +1249,23 @@ class Engine {
 			// Save the results on either the static or mutableonrequest branches
 			if ($datasource == POP_DATALOAD_DATASOURCE_IMMUTABLE)  {
 				$datasetmoduledata = &$immutable_datasetmoduledata;
-				$datasetmodulemeta = &$immutable_datasetmodulemeta;
+				if ($add_meta) {
+					$datasetmodulemeta = &$immutable_datasetmodulemeta;
+				}
 				$this->moduledata = &$immutable_moduledata;
 			}
 			elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONMODEL)  {
 				$datasetmoduledata = &$mutableonmodel_datasetmoduledata;
-				$datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
+				if ($add_meta) {
+					$datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
+				}
 				$this->moduledata = &$mutableonmodel_moduledata;
 			}
 			elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
 				$datasetmoduledata = &$mutableonrequest_datasetmoduledata;
-				$datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
+				if ($add_meta) {
+					$datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
+				}
 				$this->moduledata = &$mutableonrequest_moduledata;
 			}
 
@@ -1120,10 +1277,12 @@ class Engine {
 			}
 
 			// Save the meta into $datasetmodulemeta
-			if (!is_null($datasetmodulemeta)) {
-			
-				if ($dataset_meta = $processor->get_datasetmeta($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
-					$this->assign_value_for_module($datasetmodulemeta, $module_path, $module, POP_CONSTANT_META, $dataset_meta);
+			if ($add_meta) {
+				if (!is_null($datasetmodulemeta)) {
+				
+					if ($dataset_meta = $processor->get_datasetmeta($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
+						$this->assign_value_for_module($datasetmodulemeta, $module_path, $module, POP_CONSTANT_META, $dataset_meta);
+					}
 				}
 			}
 
@@ -1184,7 +1343,6 @@ class Engine {
 
 		$ret = array();
 
-		$dataoutputitems = $vars['dataoutputitems'];
 		if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)) {
 
 			// If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
@@ -1209,14 +1367,17 @@ class Engine {
 				if ($mutableonrequest_datasetmoduledata) {
 					$ret['datasetmoduledata']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetmoduledata) : $mutableonrequest_datasetmoduledata;
 				}
-				if ($immutable_datasetmodulemeta) {
-					$ret['datasetmodulemeta']['immutable'] = $immutable_datasetmodulemeta;
-				}
-				if ($mutableonmodel_datasetmodulemeta) {
-					$ret['datasetmodulemeta']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetmodulemeta) : $mutableonmodel_datasetmodulemeta;
-				}
-				if ($mutableonrequest_datasetmodulemeta) {
-					$ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
+
+				if ($add_meta) {
+					if ($immutable_datasetmodulemeta) {
+						$ret['datasetmodulemeta']['immutable'] = $immutable_datasetmodulemeta;
+					}
+					if ($mutableonmodel_datasetmodulemeta) {
+						$ret['datasetmodulemeta']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetmodulemeta) : $mutableonmodel_datasetmodulemeta;
+					}
+					if ($mutableonrequest_datasetmodulemeta) {
+						$ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
+					}
 				}
 			}
 			elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
@@ -1236,12 +1397,14 @@ class Engine {
 				)) {
 					$ret['datasetmoduledata'] = $has_extra_uris ? array($current_uri => $combined_datasetmoduledata) : $combined_datasetmoduledata;
 				}
-				if ($combined_datasetmodulemeta = array_merge_recursive(
-					$immutable_datasetmodulemeta ?? array(),
-					$mutableonmodel_datasetmodulemeta ?? array(),
-					$mutableonrequest_datasetmodulemeta ?? array()
-				)) {
-					$ret['datasetmodulemeta'] = $has_extra_uris ? array($current_uri => $combined_datasetmodulemeta) : $combined_datasetmodulemeta;
+				if ($add_meta) {
+					if ($combined_datasetmodulemeta = array_merge_recursive(
+						$immutable_datasetmodulemeta ?? array(),
+						$mutableonmodel_datasetmodulemeta ?? array(),
+						$mutableonrequest_datasetmodulemeta ?? array()
+					)) {
+						$ret['datasetmodulemeta'] = $has_extra_uris ? array($current_uri => $combined_datasetmodulemeta) : $combined_datasetmodulemeta;
+					}
 				}
 			}
 		}
@@ -1261,7 +1424,8 @@ class Engine {
 
 	function get_databases() {
 		
-		global $gd_dataload_manager, $gd_dataquery_manager;
+		$dataloader_manager = Dataloader_Manager_Factory::get_instance();
+		$dataquery_manager = DataQuery_Manager_Factory::get_instance();
 		
 		$vars = Engine_Vars::get_vars();
 		$formatter = Utils::get_datastructure_formatter();
@@ -1300,7 +1464,7 @@ class Engine {
 				$dataloader_ids_data_fields
 			);
 
-			$dataloader = $gd_dataload_manager->get($dataloader_name);
+			$dataloader = $dataloader_manager->get($dataloader_name);
 			$database_key = $dataloader->get_database_key();
 
 			// Execute the dataloader for all combined ids
@@ -1321,7 +1485,7 @@ class Engine {
 			// Keep the list of elements that must be retrieved once again from the server
 			if ($dataquery_name = $dataloader->get_dataquery()) {
 				
-				$dataquery = $gd_dataquery_manager->get($dataquery_name);
+				$dataquery = $dataquery_manager->get($dataquery_name);
 				$objectid_fieldname = $dataquery->get_objectid_fieldname();
 				
 				// Force retrieval of data from the server. Eg: recommendpost-count
@@ -1406,78 +1570,95 @@ class Engine {
 				}
 			}
 
-			foreach ($this->dbdata[$dataloader_name] as $module_path_key => $dataloader_data) {
 
-				// Remove the data immediately, so that subcomponents with the same dataloader can load their own data
+			// Important: query like this: obtain keys first instead of iterating directly on array, because it will keep adding elements
+			$dataloader_dbdata = $this->dbdata[$dataloader_name];
+			foreach (array_keys($dataloader_dbdata) as $module_path_key) {
+
+				$dataloader_data = &$this->dbdata[$dataloader_name][$module_path_key];
+
 				unset($this->dbdata[$dataloader_name][$module_path_key]);
-				
+
 				// Check if it has subcomponents, and then bring this data				
 				if ($subcomponents_data_properties = $dataloader_data['subcomponents']) {
 
 					$dataloader_ids = $dataloader_data['ids'];
 					foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_dataloder_data_properties) {
+						// $subcomponent_module_path_key = $module_path_key.'.'.$subcomponent_data_field;
+						// $subcomponent_module_path_key = $module_path_key;
 						foreach ($subcomponent_dataloder_data_properties as $subcomponent_dataloader_name => $subcomponent_data_properties) {
-							
-							// The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-							if ($subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? array())) {
 
-								$subcomponent_already_loaded_ids_data_fields = array();
-								if ($already_loaded_ids_data_fields && $already_loaded_ids_data_fields[$subcomponent_dataloader_name]) {
-									$subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponent_dataloader_name];
-								}
+							// If the subcomponent dataloader is not explicitly set in `get_dbobject_relational_successors`, then retrieve it now from the current dataloader's fieldprocessor
+							if ($subcomponent_dataloader_name == POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD) {
+								
+								$subcomponent_dataloader_name = DataloadUtils::get_default_dataloader_name_from_subcomponent_data_field($dataloader, $subcomponent_data_field);
+							}
 
-								foreach ($dataloader_ids as $id) {
+							// If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_dataloader_name will be empty
+							if ($subcomponent_dataloader_name) {
 							
-									// $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
-									// Fetch the field_ids from all these DBs
-									$field_ids = array();
-									foreach ($databases as $dbname => $database) {
+								// The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
+								if ($subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? array())) {
+
+									$subcomponent_already_loaded_ids_data_fields = array();
+									if ($already_loaded_ids_data_fields && $already_loaded_ids_data_fields[$subcomponent_dataloader_name]) {
+										$subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponent_dataloader_name];
+									}
+									foreach ($dataloader_ids as $id) {
+								
+										// $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
+										// Fetch the field_ids from all these DBs
+										$field_ids = array();
+										foreach ($databases as $dbname => $database) {
+											
+											if ($database_field_ids = $database[$database_key][$id][$subcomponent_data_field]) {
+
+												$field_ids = array_merge(
+													$field_ids,
+													is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
+												);
+											}
+										}
+										if ($field_ids) {
+
+											foreach ($field_ids as $field_id) {
+
+												// Do not add again the IDs/Fields already loaded
+												if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id]) {
+
+													$id_subcomponent_data_fields = array_values(array_diff(
+														$subcomponent_data_fields,
+														$subcomponent_already_loaded_data_fields
+													));
+												}
+												else {
+
+													$id_subcomponent_data_fields = $subcomponent_data_fields;
+												}
+
+												if ($id_subcomponent_data_fields) {
+
+													$this->combine_ids_datafields($this->ids_data_fields, $subcomponent_dataloader_name, array($field_id), $id_subcomponent_data_fields);
+													$this->initialize_dataloader_entry($this->dbdata, $subcomponent_dataloader_name, $module_path_key/*$subcomponent_module_path_key*/);
+													$this->dbdata[$subcomponent_dataloader_name][$module_path_key/*$subcomponent_module_path_key*/]['ids'][] = $field_id;
+													$this->integrate_subcomponent_data_properties($this->dbdata, $subcomponent_data_properties, $subcomponent_dataloader_name, $module_path_key/*$subcomponent_module_path_key*/);
+												}
+											}
+										}
+									}
+
+									if ($this->dbdata[$subcomponent_dataloader_name][$module_path_key/*$subcomponent_module_path_key*/]) {
 										
-										if ($database_field_ids = $database[$database_key][$id][$subcomponent_data_field]) {
-
-											$field_ids = array_merge(
-												$field_ids,
-												is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
-											);
-										}
+										$this->dbdata[$subcomponent_dataloader_name][$module_path_key/*$subcomponent_module_path_key*/]['ids'] = array_unique($this->dbdata[$subcomponent_dataloader_name][$module_path_key/*$subcomponent_module_path_key*/]['ids']);
+										$this->dbdata[$subcomponent_dataloader_name][$module_path_key/*$subcomponent_module_path_key*/]['data-fields'] = array_unique($this->dbdata[$subcomponent_dataloader_name][$module_path_key/*$subcomponent_module_path_key*/]['data-fields']);
 									}
-									if ($field_ids) {
-
-										foreach ($field_ids as $field_id) {
-
-											// Do not add again the IDs/Fields already loaded
-											if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id]) {
-
-												$id_subcomponent_data_fields = array_values(array_diff(
-													$subcomponent_data_fields,
-													$subcomponent_already_loaded_data_fields
-												));
-											}
-											else {
-
-												$id_subcomponent_data_fields = $subcomponent_data_fields;
-											}
-
-											if ($id_subcomponent_data_fields) {
-
-												$this->combine_ids_datafields($this->ids_data_fields, $subcomponent_dataloader_name, array($field_id), $id_subcomponent_data_fields);
-												$this->initialize_dataloader_entry($this->dbdata, $subcomponent_dataloader_name, $module_path_key);
-												$this->dbdata[$subcomponent_dataloader_name][$module_path_key]['ids'][] = $field_id;
-											}
-										}
-									}
-								}
-
-								if ($this->dbdata[$subcomponent_dataloader_name][$module_path_key]) {
-									
-									$this->dbdata[$subcomponent_dataloader_name][$module_path_key]['ids'] = array_unique($this->dbdata[$subcomponent_dataloader_name][$module_path_key]['ids']);				
-									$this->dbdata[$subcomponent_dataloader_name][$module_path_key]['data-fields'] = array_unique($this->dbdata[$subcomponent_dataloader_name][$module_path_key]['data-fields']);				
 								}
 							}	
 						}	
-					}				
+					}	
 				}			
-			}	
+			}			
+			// }	
 		}
 
 		$ret = array();
@@ -1538,35 +1719,36 @@ class Engine {
 			
 			// Merge them into the data
 			$dbdata[$dataloader_name][$module_path_key]['subcomponents'] = array_merge_recursive(
-				$dbdata[$dataloader_name][$module_path_key]['subcomponents'],
+				$dbdata[$dataloader_name][$module_path_key]['subcomponents'] ?? array(),
 				$subcomponents_data_properties
 			);
 				
-			foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_dataloader_data_properties) {
+			// foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_dataloader_data_properties) {
 				
-				foreach ($subcomponent_dataloader_data_properties as $subcomponent_dataloader_name => $subcomponent_data_properties) {
+			// 	$subcomponent_module_path_key = $module_path_key.'.'.$subcomponent_data_field;
+			// 	foreach ($subcomponent_dataloader_data_properties as $subcomponent_dataloader_name => $subcomponent_data_properties) {
 					
-					// Get the info for the subcomponent dataloader
-					$subcomponent_data_fields = $subcomponent_data_properties['data-fields'];
+			// 		// Get the info for the subcomponent dataloader
+			// 		$subcomponent_data_fields = $subcomponent_data_properties['data-fields'];
 					
-					// Add to data (but do not bring the ids yet, this comes as a result of get_data on the parent dataloader)
-					$this->initialize_dataloader_entry($dbdata, $subcomponent_dataloader_name, $module_path_key);
-					$dbdata[$subcomponent_dataloader_name][$module_path_key]['data-fields'] = array_unique(array_merge(
-						$dbdata[$subcomponent_dataloader_name][$module_path_key]['data-fields'],
-						$subcomponent_data_fields ?? array()
-					));
+			// 		// Add to data (but do not bring the ids yet, this comes as a result of get_data on the parent dataloader)
+			// 		$this->initialize_dataloader_entry($dbdata, $subcomponent_dataloader_name, $subcomponent_module_path_key);
+			// 		$dbdata[$subcomponent_dataloader_name][$subcomponent_module_path_key]['data-fields'] = array_unique(array_merge(
+			// 			$dbdata[$subcomponent_dataloader_name][$subcomponent_module_path_key]['data-fields'],
+			// 			$subcomponent_data_fields ?? array()
+			// 		));
 
-					// Recursion: Keep including levels below
-					if ($subcomponent_subcomponents = $subcomponent_data_properties['subcomponents']) {
+			// 		// // Recursion: Keep including levels below
+			// 		// if ($subcomponent_subcomponents = $subcomponent_data_properties['subcomponents']) {
 						
-						$dbdata[$subcomponent_dataloader_name][$module_path_key]['subcomponents'] = array_merge_recursive(
-							$dbdata[$subcomponent_dataloader_name][$module_path_key]['subcomponents'],
-							$subcomponent_subcomponents
-						);
-						$this->integrate_subcomponent_data_properties($dbdata, $subcomponent_data_properties, $subcomponent_dataloader_name, $module_path_key);
-					}
-				}
-			}
+			// 		// 	$dbdata[$subcomponent_dataloader_name][$subcomponent_module_path_key]['subcomponents'] = array_merge_recursive(
+			// 		// 		$dbdata[$subcomponent_dataloader_name][$subcomponent_module_path_key]['subcomponents'],
+			// 		// 		$subcomponent_subcomponents
+			// 		// 	);
+			// 		// 	$this->integrate_subcomponent_data_properties($dbdata, $subcomponent_data_properties, $subcomponent_dataloader_name, $subcomponent_module_path_key);
+			// 		// }
+			// 	}
+			// }
 		}
 	}
 }

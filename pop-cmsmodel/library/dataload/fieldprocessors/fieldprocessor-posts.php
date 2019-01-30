@@ -102,7 +102,12 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
 				break;
 
 			case 'title-edit' :
-				$value = $cmsresolver->get_post_title($post);
+				if (current_user_can('edit_post', $this->get_id($post))) {
+					$value = $cmsresolver->get_post_title($post);
+				}
+				else {
+					$value = '';
+				}	
 				break;
 			
 			case 'content' :
@@ -113,16 +118,31 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
 				break;
 
 			case 'content-editor' : 
-				$value = apply_filters('the_editor_content', $cmsresolver->get_post_content($post));
+				if (current_user_can('edit_post', $this->get_id($post))) {
+					$value = apply_filters('the_editor_content', $cmsresolver->get_post_content($post));
+				}
+				else {
+					$value = '';
+				}				
 				break;
 
 			case 'content-edit' : 
-				$value = $cmsresolver->get_post_content($post);
+				if (current_user_can( 'edit_post', $this->get_id($post))) {
+					$value = $cmsresolver->get_post_content($post);
+				}
+				else {
+					$value = '';
+				}
 				break;
 		
 			case 'url' :
 
 				$value = $cmsapi->get_permalink($this->get_id($post));
+				break;
+
+			case 'endpoint' :
+
+				$value = \PoP\Engine\APIUtils::get_endpoint($this->get_value($resultitem, 'url'));
 				break;
 
 			case 'excerpt' :
@@ -196,6 +216,29 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
     	$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
 		$post = $resultitem;
 		return $cmsresolver->get_post_id($post);
+	}
+
+	function get_field_default_dataloader($field) {
+
+		// First Check if there's a hook to implement this field
+		$default_dataloader = $this->get_hook_field_default_dataloader(GD_DATALOAD_FIELDPROCESSOR_POSTS, $field);
+		if ($default_dataloader) {
+			return $default_dataloader;
+		}
+
+		switch ($field) {
+
+			case 'tags' :
+				return GD_DATALOADER_TAGLIST;
+
+			case 'comments' :
+				return GD_DATALOADER_COMMENTLIST;
+
+			case 'author' :
+				return GD_DATALOADER_CONVERTIBLEUSERLIST;																													
+		}
+
+		return parent::get_field_default_dataloader($field);
 	}
 }
 

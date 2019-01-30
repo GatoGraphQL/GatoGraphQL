@@ -82,6 +82,17 @@ class FieldProcessor_Menu_Items extends \PoP\Engine\FieldProcessorBase {
 		$menu_item = $resultitem;	
 		return $cmsresolver->get_menu_item_id($menu_item);
 	}
+
+	function get_field_default_dataloader($field) {
+
+		// First Check if there's a hook to implement this field
+		$default_dataloader = $this->get_hook_field_default_dataloader(GD_DATALOAD_FIELDPROCESSOR_MENU_ITEMS, $field);
+		if ($default_dataloader) {
+			return $default_dataloader;
+		}
+
+		return parent::get_field_default_dataloader($field);
+	}
 }
 	
 /**---------------------------------------------------------------------------------------------------------------

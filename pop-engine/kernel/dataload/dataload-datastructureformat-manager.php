@@ -8,6 +8,7 @@ class DataStructureFormat_Manager {
     
     function __construct() {
     
+    	DataStructureFormat_Manager_Factory::set_instance($this);    
 		return $this->formatters = array();
 	}
 	
@@ -42,5 +43,4 @@ class DataStructureFormat_Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-global $gd_dataload_datastructureformat_manager;
-$gd_dataload_datastructureformat_manager = new DataStructureFormat_Manager();
+new DataStructureFormat_Manager();

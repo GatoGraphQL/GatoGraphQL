@@ -253,8 +253,8 @@ class Utils {
 
 		$vars = Engine_Vars::get_vars();
 
-		global $gd_dataload_datastructureformat_manager;
-		return $gd_dataload_datastructureformat_manager->get_datastructure_formatter($vars['datastructure']);
+		$datastructureformat_manager = DataStructureFormat_Manager_Factory::get_instance();
+		return $datastructureformat_manager->get_datastructure_formatter($vars['datastructure']);
 	}
 
 	public static function fetching_site() {

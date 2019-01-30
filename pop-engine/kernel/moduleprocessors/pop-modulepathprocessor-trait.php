@@ -35,6 +35,11 @@ trait ModulePathProcessorTrait {
 		return is_null($this->get_module_processor($module)->get_dataloader($module));
 	}
 
+	protected function has_dataloader($module) {
+
+		return !$this->has_no_dataloader($module);
+	}
+
 	// $use_settings_id_as_key: For response structures (eg: configuration, feedback, etc) must be true
 	// for internal structures (eg: $props, $data_properties) no need
 	protected function execute_on_self_and_propagate_to_datasetmodules($eval_self_fn, $propagate_fn, $module, &$props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
@@ -110,7 +115,7 @@ trait ModulePathProcessorTrait {
 
 	// $use_settings_id_as_key: For response structures (eg: configuration, feedback, etc) must be true
 	// for internal structures (eg: $props, $data_properties) no need
-	protected function execute_on_self_and_propagate_to_modules($eval_self_fn, $propagate_fn, $module, &$props, $use_settings_id_as_key = true) {
+	protected function execute_on_self_and_propagate_to_modules($eval_self_fn, $propagate_fn, $module, &$props, $use_settings_id_as_key = true, $options = array()) {
 
 		$ret = array();
 		$key = $use_settings_id_as_key ? $this->get_settings_id($module) : $module;
@@ -119,9 +124,13 @@ trait ModulePathProcessorTrait {
 		$modulefilter_manager = ModuleFilterManager_Factory::get_instance();
 		if (!$modulefilter_manager->exclude_module($module, $props)) {
 			
-			if ($module_ret = $this->$eval_self_fn($module, $props)) {
-		
-				$ret[$key] = $module_ret;
+			// Maybe only execute function on the dataloading modules
+			if (!$options['only-execute-on-dataloading-modules'] || $this->has_dataloader($module)) {
+				
+				if ($module_ret = $this->$eval_self_fn($module, $props)) {
+			
+					$ret[$key] = $module_ret;
+				}
 			}
 		}
 

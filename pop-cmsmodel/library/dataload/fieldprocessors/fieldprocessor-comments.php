@@ -43,6 +43,7 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase {
 				$value = $cmsresolver->get_comment_user_id($comment);
 				break;
 
+			case 'post' :
 			case 'post-id' :
 				$value = $cmsresolver->get_comment_post_id($comment);
 				break;
@@ -76,6 +77,30 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase {
     	$cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::get_instance();
 		$comment = $resultitem;	
 		return $cmsresolver->get_comment_id($comment);
+	}
+
+	function get_field_default_dataloader($field) {
+
+		// First Check if there's a hook to implement this field
+		$default_dataloader = $this->get_hook_field_default_dataloader(GD_DATALOAD_FIELDPROCESSOR_COMMENTS, $field);
+		if ($default_dataloader) {
+			return $default_dataloader;
+		}
+
+		switch ($field) {
+
+			case 'author' :
+				return GD_DATALOADER_CONVERTIBLEUSERLIST;
+
+			case 'post' :
+			case 'post-id' :																												
+				return GD_DATALOADER_CONVERTIBLEPOSTLIST;	
+		
+			case 'parent' :
+				return GD_DATALOADER_COMMENTLIST;
+		}
+
+		return parent::get_field_default_dataloader($field);
 	}
 }
 

@@ -1,12 +1,13 @@
 <?php
 namespace PoP\Engine;
  
-class Manager {
+class Dataloader_Manager {
 
     var $dataloaders;
     
     function __construct() {
     
+    	Dataloader_Manager_Factory::set_instance($this);    
 		return $this->dataloaders = array();
 	}
 	
@@ -20,7 +21,7 @@ class Manager {
 		$dataloader = $this->dataloaders[$name];
 		if (!$dataloader) {
 
-			throw new \Exception(sprintf('Ther is no Dataloader with name \'%s\' (%s)', $name, full_url()));
+			throw new \Exception(sprintf('There is no Dataloader with name \'%s\' (%s)', $name, full_url()));
 		}
 
 		return $dataloader;
@@ -30,5 +31,4 @@ class Manager {
 /**---------------------------------------------------------------------------------------------------------------
  * Initialize
  * ---------------------------------------------------------------------------------------------------------------*/
-global $gd_dataload_manager;
-$gd_dataload_manager = new Manager();
+new Dataloader_Manager();

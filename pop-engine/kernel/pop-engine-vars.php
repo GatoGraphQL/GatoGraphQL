@@ -102,15 +102,16 @@ class Engine_Vars {
 			self::get_hierarchy(self::$query)
 		);
 
-		$output = $_REQUEST[GD_URLPARAM_OUTPUT];
+		// Convert them to lower to make it insensitive to upper/lower case values
+		$output = strtolower($_REQUEST[GD_URLPARAM_OUTPUT]);
 		$dataoutputitems = $_REQUEST[GD_URLPARAM_DATAOUTPUTITEMS];
-		$datasources = $_REQUEST[GD_URLPARAM_DATASOURCES];
-		$datastructure = $_REQUEST[GD_URLPARAM_DATASTRUCTURE];
-		$dataoutputmode = $_REQUEST[GD_URLPARAM_DATAOUTPUTMODE];
-		$target = $_REQUEST[GD_URLPARAM_TARGET];
+		$datasources = strtolower($_REQUEST[GD_URLPARAM_DATASOURCES]);
+		$datastructure = strtolower($_REQUEST[GD_URLPARAM_DATASTRUCTURE]);
+		$dataoutputmode = strtolower($_REQUEST[GD_URLPARAM_DATAOUTPUTMODE]);
+		$target = strtolower($_REQUEST[GD_URLPARAM_TARGET]);
 		$mangled = Server\Utils::is_mangled() ? '' : GD_URLPARAM_MANGLED_NONE;
-		$tab = $_REQUEST[GD_URLPARAM_TAB];
-		$action = $_REQUEST[GD_URLPARAM_ACTION];
+		$tab = strtolower($_REQUEST[GD_URLPARAM_TAB]);
+		$action = strtolower($_REQUEST[GD_URLPARAM_ACTION]);
 
 		$outputs = apply_filters(
 			'\PoP\Engine\Engine_Vars:outputs',
@@ -140,13 +141,20 @@ class Engine_Vars {
 			$dataoutputmode = GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES;
 		}
 
-		if ($dataoutputitems && !is_array($dataoutputitems)) {
-			$dataoutputitems = array($dataoutputitems);
+		if ($dataoutputitems) {
+			if (!is_array($dataoutputitems)) {
+				$dataoutputitems = explode(POP_CONSTANT_PARAMVALUE_SEPARATOR, strtolower($dataoutputitems));
+			}
+			else {
+				$dataoutputitems = array_map('strtolower', $dataoutputitems);
+			}
 		}
 		$alldataoutputitems = apply_filters(
 			'\PoP\Engine\Engine_Vars:dataoutputitems',
 			array(
+				GD_URLPARAM_DATAOUTPUTITEMS_META,
 				GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
+				GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
 	            GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
 	            GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
 	            GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
@@ -157,7 +165,13 @@ class Engine_Vars {
 			$alldataoutputitems
 		);
 		if (!$dataoutputitems) {
-			$dataoutputitems = $alldataoutputitems;
+			$dataoutputitems = array(
+				GD_URLPARAM_DATAOUTPUTITEMS_META,
+				GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
+	            GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
+	            GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+	            GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
+	        );
 		}
 		
 		// If not target, or invalid, reset it to "main"
@@ -182,12 +196,12 @@ class Engine_Vars {
 		// Format: if not set, then use the default one: "settings-format" can be defined at the settings, and persists as the default option
 		// Use 'format' the first time to set the 'settingsformat' value. So if "loading_site()" is true, take the value from 'format'
 		if ($loading_site) {
-			$settingsformat = $_REQUEST[GD_URLPARAM_FORMAT];
+			$settingsformat = strtolower($_REQUEST[GD_URLPARAM_FORMAT]);
 		}
 		else {
-			$settingsformat = $_REQUEST[GD_URLPARAM_SETTINGSFORMAT];
+			$settingsformat = strtolower($_REQUEST[GD_URLPARAM_SETTINGSFORMAT]);
 		}
-		$format = isset($_REQUEST[GD_URLPARAM_FORMAT]) ? $_REQUEST[GD_URLPARAM_FORMAT] : $settingsformat;
+		$format = isset($_REQUEST[GD_URLPARAM_FORMAT]) ? strtolower($_REQUEST[GD_URLPARAM_FORMAT]) : $settingsformat;
 		// Comment Leo 13/11/2017: If there is not format, then set it to 'default'
 		// This is needed so that the /generate/ generated configurations under a $model_instance_id (based on the value of $vars)
 		// can match the same $model_instance_id when visiting that page

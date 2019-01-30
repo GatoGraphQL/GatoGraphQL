@@ -10,4 +10,5 @@ const GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS = 'actionexecution-checkpoints';
 const GD_DATALOAD_FIELDPROCESSOR_FIELDTYPE_FUNCTIONAL = 'functional';
 const GD_DATALOAD_FIELDPROCESSOR_FIELDTYPE_DBDATA = 'dbdata';
 
-const GD_DATALOAD_FIELDPROCESSOR_FILTER = 'pop_module:dataload_fieldprocessor:%s';
+const GD_DATALOAD_FIELDPROCESSOR_FIELDVALUEFILTER = 'pop_module:fieldprocessor:fieldvalue:%s';
+const GD_DATALOAD_FIELDPROCESSOR_FIELDDATALOADERFILTER = 'pop_module:fieldprocessor:fielddataloader:%s';
