@@ -321,6 +321,26 @@ define ('POP_MODULE_SOMENAME', \PoP\Engine\DefinitionUtils::get_module_definitio
 
 All the properties of the modules are implemented through objects called [ModuleProcessor](#moduleprocessor).
 
+> Note: the name of a module cannot include the special character "|" (`POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`), as will be explained below
+
+### Virtual Modules
+
+Virtual modules are "dynamically-generated" modules: modules with a base personality and dynamic behaviour. For instance, the [custom-querying capabilities of the API](ArchitectureDesignAndImplementation.md#API-Custom-Querying-Capabilities) create the component hierarchy based on the value of URL parameter `fields`, creating a virtual module along its path for each of the nested relationships. Another example (yet to be implemented) involves the integration of PoP with [WordPress Gutenberg](https://wordpress.org/gutenberg/): Gutenberg allows to drag-and-drop blocks to the page and customize them through properties; then, to have Gutenberg input modules and PoP save them, two blocks from the same block/component must be made unique, hence they can be dynamically created by selecting a base module for its personality (a scroll of posts, a calendar of events, etc) and then assigning a random id to each, or a serialization of their properties, for its dynamic behaviour.
+
+Virtual modules cannot depend on props for defining their behaviour, because at the time of creating the component hierarchy we don't have the `$props` available (otherwise it's a chicken or egg situation.) Hence, the particular properties given to a virtual module are coded into the module name itself as a serialized array separated from the module name with a `"|"` (which is represented under constant `POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`): `modulename|virtualmoduleatts`. In this case, the personality of the module is given by the module with name `"modulename"`, and the virtual module attributes (`"virtualmoduleatts"`) are the runtime element which define its dynamic behaviour.
+
+Extracting the pair of module name and virtual module atts from the module is done through function `extract_virtualmodule`, like this:
+
+```php
+list($module, $virtualmoduleatts) = \PoP\Engine\VirtualModuleUtils::extract_virtualmodule($module);
+```
+
+To generate a virtual module is done through function `create_virtualmodule`, like this:
+
+```php
+$virtualmodule = \PoP\Engine\VirtualModuleUtils::create_virtualmodule($module, $virtualmoduleatts),
+```
+
 ### ModuleProcessor
 
 A ModuleProcessor is an object class in which to define all the properties of a module. ModuleProcessors are implemented following the [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) methodology, establishing an object inheritance scheme to progressively add properties to modules. The base class for all ModuleProcessors is [`ModuleProcessorBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/moduleprocessors/pop-moduleprocessor.php):
@@ -1082,6 +1102,34 @@ function get_dbobject_relational_successors($module) {
 
 > Note: Similar to `get_modules`, this method also loads modules into the component hierarchy, hence it cannot receive parameter `$props`.
 
+Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [FieldProcessor](#FieldProcessor). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
+
+```php
+function get_dbobject_relational_successors($module) {
+
+  $ret = parent::get_dbobject_relational_successors($module);
+
+  switch ($module) {
+
+    case POP_MODULE_AUTHORARTICLES:
+    
+      $ret['author'] = [
+        POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
+          POP_MODULE_AUTHORNAME,
+        ]
+      ];
+      $ret['comments'] = [
+        POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
+          POP_MODULE_COMMENTLAYOUT,
+        ]
+      ];
+      break;
+  }
+
+  return $ret;
+}
+```
+
 ## Data-Loading Objects
 
 The following objects below are involved in fetching data from the database, filtering it, processing it and describing the new state of the application.
@@ -1227,6 +1275,8 @@ function execute_query_ids($query) {
 
 The FieldProcessor is the object resolving "data-fields" to their corresponding value. It must inherit from class [`FieldProcessorBase`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-fieldprocessor.php), and implement function [`get_value`](https://github.com/leoloso/PoP/blob/master/pop-engine/kernel/dataload/dataload-fieldprocessor.php#L17), which receives two parameters, `$resultitem` which is the database object, and `$field` which is the data-field to resolve, and must return the value for that property applied to the database object. 
 
+> Note: the names of fields cannot include the following special characters: "," (`POP_CONSTANT_PARAMVALUE_SEPARATOR`), "." (`POP_CONSTANT_DOTSYNTAX_DOT`) or "|" (`POP_CONSTANT_PARAMFIELD_SEPARATOR`)
+
 For instance, a [FieldProcessor for posts](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/library/dataload/fieldprocessors/fieldprocessor-posts.php) looks like this:
 
 ```php
@@ -1304,6 +1354,27 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
 
 // Initialize
 new GD_DataLoad_FieldProcessor_Posts();
+```
+
+The FieldProcessor also allows to select the default dataloader to process a specific field through function `get_field_default_dataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `get_dbobject_relational_successors` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
+
+```php
+function get_field_default_dataloader($field) {
+
+  switch ($field) {
+
+    case 'tags' :
+      return GD_DATALOADER_TAGLIST;
+
+    case 'comments' :
+      return GD_DATALOADER_COMMENTLIST;
+
+    case 'author' :
+      return GD_DATALOADER_CONVERTIBLEUSERLIST;																													
+  }
+
+  return parent::get_field_default_dataloader($field);
+}
 ```
 
 #### FieldProcessorHook

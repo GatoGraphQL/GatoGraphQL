@@ -306,6 +306,46 @@ The PoP API is deployed under https://nextapi.getpop.org for demonstration purpo
 - Changing the module names: [original](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined) vs [mangled](https://nextapi.getpop.org/?output=json&dataoutputmode=combined)
 - Filtering information: [only module settings](https://nextapi.getpop.org/?output=json&dataoutputitems[]=modulesettings&dataoutputmode=combined&mangled=none), [module data plus database data](https://nextapi.getpop.org/?output=json&dataoutputitems[]=databases&dataoutputitems[]=moduledata&dataoutputmode=combined&mangled=none)
 
+### PoP API Custom-Querying Capabilities
+
+In the following links, data for a resource or collection of resources is fetched as typically done through REST; however, through parameter `fields` we can also specify what specific data to retrieve for each resource, avoiding over or underfetching data: 
+
+- A [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title,content,datetime) and a [collection of posts](https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title,content,datetime) adding parameter `fields=title,content,datetime`
+- A [user](https://nextapi.getpop.org/u/leo/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=name,username,description) and a [collection of users](https://nextapi.getpop.org/users/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=name,username,description) adding parameter `fields=name,username,description`
+
+This works for relationships too. For instance, let's say that we want to retrieve a list of posts with fields `"title"` and `"content"`, each post's comments with fields `"content"` and `"date"`, and the author of each comment with fields `"name"` and `"url"`. To achieve this in GraphQL we would implement the following query:
+
+```javascript
+query {
+  post {
+    title
+    content
+    comments {
+      content
+      date
+      author {
+        name
+        url
+      }
+    }
+  }
+}
+```
+
+For PoP, the query is translated into its corresponding "dot syntax" expression, which can then be supplied through parameter `fields`. Querying on a "post" resource, this value is:
+
+```javascript
+fields=title,content,comments.content,comments.date,comments.author.name,comments.author.url
+```
+
+Or it can be simplified, using `|` to group all fields applied to the same resource:
+
+```javascript
+fields=title|content,comments.content|date,comments.author.name|url
+```
+
+When executing this query [on a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources.
+
 ### PoP Sites
 
 > Note: The websites below run on the old API, and will be migrated to the new API once we have added the rendering layer, sometime around 2nd quarter of 2019.
@@ -365,6 +405,10 @@ PoP allows the configuration of the following properties, set in file wp-config.
 `POP_SERVER_FAILIFMODULESDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name.
 
 `POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
+
+`POP_SERVER_ENABLEAPI` (`true`|`false`, default: `false`): Enable the custom-querying capabilities of the API.
+
+`POP_SERVER_FAILIFSUBCOMPONENTDATALOADERUNDEFINED` (`true`|`false`, default: `false`): Whenever switching domain to a field which doesn't have a default dataloader, and without specifying what dataloader to use, throw an exception if `true` or ignore and avoid loading that data if `false`.
 
 ### Decentralization: enabling crossdomain
 
