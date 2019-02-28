@@ -362,7 +362,7 @@ These 2 sites are proper, established social networks:
 
 ## Installation
 
-Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then download into folder /wp-content/plugins and activate the 7 plugins from this repository:
+Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then copy the contents of folders `/mu-plugins` and `/plugins` under `/wp-content/mu-plugins` and `/wp-content/plugins` respectively, and activate the 7 plugins from this repository:
 
 - pop-cms
 - pop-cms-wp
@@ -373,6 +373,8 @@ Have your WordPress instance running (the latest version of WordPress can be dow
 - pop-examplemodules
 
 The first 6 plugins are needed to produce the PoP API, and the 7th plugin (pop-examplemodules) provides basic implementations of modules for all supported hierarchies (home, author, single, tag, page and 404). 
+
+> Note: this way to install PoP is temporary. We are currently introducing Composer to the codebase, which will provide a more convenient way to install PoP. It should be ready sometime in March 2019.
 
 That's it. You can then access PoP's API by adding parameter `output=json` to any URL on the site: https://yoursite.com/?output=json.
 
@@ -439,10 +441,10 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 ## Documentation
 
-- [Main Concepts](documentation/MainConcepts.md)
-- [Developer Guide](documentation/DeveloperGuide.md)
-- [Architecture Design and Implementation](documentation/ArchitectureDesignAndImplementation.md)
-- [Tutorials](documentation/Tutorials.md)
+- [Main Concepts](docs/MainConcepts.md)
+- [Developer Guide](docs/DeveloperGuide.md)
+- [Architecture Design and Implementation](docs/ArchitectureDesignAndImplementation.md)
+- [Tutorials](docs/Tutorials.md)
 
 > Note: We are currently working on the documentation. Developer guide's sections concerning the API will be progressively completed throughout the last 2 weeks of December 2018; sections concerning rendering and additional layers will be added alongside the corresponding code being completed and added to the repository, throughout 1st and 2nd quarter of 2019.
 
