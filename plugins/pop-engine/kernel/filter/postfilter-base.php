@@ -34,19 +34,18 @@ abstract class PostFilterBase extends FilterBase
 
         // Taxonomies
         if ($taxonomyterms = $this->getTaxonomies()) {
-
             // The format of the taxonomies now is array($taxonomy => $terms)
             // Convert it to an array like this: array('taxonomy' => $taxonomy, 'terms' => $terms)
             $taxqueries = array();
             foreach ($taxonomyterms as $taxonomy => $terms) {
                 $taxqueries[] = array(
-                 'taxonomy' => $taxonomy,
-                 'terms' => $terms,
+                    'taxonomy' => $taxonomy,
+                    'terms' => $terms,
                 );
             }
             $args['tax_query'] = array_merge(
                 array(
-                'relation' => 'OR'
+                    'relation' => 'OR'
                 ),
                 $taxqueries
             );
@@ -92,7 +91,6 @@ abstract class PostFilterBase extends FilterBase
         }
         
         if ($meta_query) {
-        
             // When filtering users, it will bring them duplicated. Solution: hook "foundUsersQueryAvoidDuplicates" in users.php
             $meta_query['relation'] = 'AND';
         }
@@ -139,7 +137,6 @@ abstract class PostFilterBase extends FilterBase
     {
         $taxonomies = array();
         foreach ($this->getFiltercomponents() as $filtercomponent) {
-        
             // array_merge_recursive: it allows the terms to be merged together into a single array under the same taxonomy
             // Eg: if we get array('category' => array(1, 3, 4)) and array('category' => array(2, 5)), the result will be array('category' => array(1, 2, 3, 4, 5))
             $taxonomies = array_merge_recursive($taxonomies, $filtercomponent->getTaxonomies($this));
@@ -165,7 +162,6 @@ abstract class PostFilterBase extends FilterBase
         $order = array();
         foreach ($this->getFiltercomponents() as $filtercomponent) {
             if ($order = $filtercomponent->getOrder($this)) {
-                
                 // Only 1 filter can define the Order, so already break
                 break;
             }
@@ -179,7 +175,6 @@ abstract class PostFilterBase extends FilterBase
         $search = '';
         foreach ($this->getFiltercomponents() as $filtercomponent) {
             if ($search = $filtercomponent->getSearch($this)) {
-                
                 // Only 1 filter can do the Search, so already break
                 break;
             }
@@ -193,7 +188,6 @@ abstract class PostFilterBase extends FilterBase
         $postdates = array();
         foreach ($this->getFiltercomponents() as $filtercomponent) {
             if ($postdates = $filtercomponent->getPostdates($this)) {
-                
                 // Only 1 filter can define the post dates, so already break
                 break;
             }

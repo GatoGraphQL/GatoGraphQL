@@ -87,7 +87,6 @@ class Filter_Manager
         // So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
         $vars = Engine_Vars::getVars();
         if (($vars['global-state']['is-tag'] || $query['tag']) && $query['tax_query']) {
-
             // Create the tag item in the taxonomy
             $tag_slug = '';
             if ($vars['global-state']['is-tag']) {
@@ -97,15 +96,15 @@ class Filter_Manager
                 $tag_slug = $query['tag'];
             }
             $tag_item = array(
-            'taxonomy' => 'post_tag',
-            'terms' => explode(',', $tag_slug),
-            'field' => 'slug'
+                'taxonomy' => 'post_tag',
+                'terms' => explode(',', $tag_slug),
+                'field' => 'slug'
             );
 
             // Will replace the current tax_query with a new one
             $tax_query = $query['tax_query'];
             $new_tax_query = array(
-            'relation' => 'AND',//$tax_query['relation']
+                'relation' => 'AND',//$tax_query['relation']
             );
             unset($tax_query['relation']);
             foreach ($tax_query as $tax_item) {
@@ -113,7 +112,7 @@ class Filter_Manager
                     // 'relation' => 'AND',
                     $tax_item,
                     $tag_item,
-                   );
+                );
             }
             $query['tax_query'] = $new_tax_query;
 

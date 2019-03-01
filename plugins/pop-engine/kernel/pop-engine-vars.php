@@ -44,7 +44,6 @@ class Engine_Vars
             );
 
             foreach ($paths as $path) {
-
                    // Each path must be converted to an array of the modules
                 $ret[] = ModulePathManager_Utils::recastModulePath($path);
             }
@@ -115,8 +114,8 @@ class Engine_Vars
         $outputs = apply_filters(
             '\PoP\Engine\Engine_Vars:outputs',
             array(
-            GD_URLPARAM_OUTPUT_HTML,
-            GD_URLPARAM_OUTPUT_JSON,
+                GD_URLPARAM_OUTPUT_HTML,
+                GD_URLPARAM_OUTPUT_JSON,
             )
         );
         if (!in_array($output, $outputs)) {
@@ -125,24 +124,24 @@ class Engine_Vars
 
         // Target/Module default values (for either empty, or if the user is playing around with the url)
         $alldatasources = array(
-        GD_URLPARAM_DATASOURCES_ONLYMODEL,
-        GD_URLPARAM_DATASOURCES_MODELANDREQUEST,
+            GD_URLPARAM_DATASOURCES_ONLYMODEL,
+            GD_URLPARAM_DATASOURCES_MODELANDREQUEST,
         );
         if (!in_array($datasources, $alldatasources)) {
             $datasources = GD_URLPARAM_DATASOURCES_MODELANDREQUEST;
         }
 
         $dataoutputmodes = array(
-        GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES,
-        GD_URLPARAM_DATAOUTPUTMODE_COMBINED,
+            GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES,
+            GD_URLPARAM_DATAOUTPUTMODE_COMBINED,
         );
         if (!in_array($dataoutputmode, $dataoutputmodes)) {
             $dataoutputmode = GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES;
         }
 
         $dboutputmodes = array(
-        GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES,
-        GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED,
+            GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES,
+            GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED,
         );
         if (!in_array($dboutputmode, $dboutputmodes)) {
             $dboutputmode = GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES;
@@ -158,9 +157,9 @@ class Engine_Vars
         $alldataoutputitems = apply_filters(
             '\PoP\Engine\Engine_Vars:dataoutputitems',
             array(
-            GD_URLPARAM_DATAOUTPUTITEMS_META,
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
-            GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
+                GD_URLPARAM_DATAOUTPUTITEMS_META,
+                GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
+                GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
                 GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
                 GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
                 GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
@@ -172,12 +171,12 @@ class Engine_Vars
         );
         if (!$dataoutputitems) {
             $dataoutputitems = array(
-            GD_URLPARAM_DATAOUTPUTITEMS_META,
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
+                GD_URLPARAM_DATAOUTPUTITEMS_META,
+                GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
                 GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
                 GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
                 GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
-               );
+            );
         }
         
         // If not target, or invalid, reset it to "main"
@@ -186,7 +185,7 @@ class Engine_Vars
         $targets = apply_filters(
             '\PoP\Engine\Engine_Vars:targets',
             array(
-            POP_TARGET_MAIN,
+                POP_TARGET_MAIN,
             )
         );
         if (!in_array($target, $targets)) {
@@ -214,23 +213,23 @@ class Engine_Vars
             $format = POP_VALUES_DEFAULT;
         }
         self::$vars = array(
-        'hierarchy' => $hierarchy,
-        'output' => $output,
-        'modulefilter' => $modulefilter,
-        'actionpath' => $_REQUEST[GD_URLPARAM_ACTIONPATH],
-        'target' => $target,
-        'dataoutputitems' => $dataoutputitems,
-        'datasources' => $datasources,
-        'datastructure' => $datastructure,
-        'dataoutputmode' => $dataoutputmode,
-        'dboutputmode' => $dboutputmode,
-        'mangled' => $mangled,
-        'format' => $format,
-        'settingsformat' => $settingsformat,
-        'tab' => $tab,
-        'action' => $action,
-        'loading-site' => $loadingSite,
-        'fetching-site' => $fetchingSite,
+            'hierarchy' => $hierarchy,
+            'output' => $output,
+            'modulefilter' => $modulefilter,
+            'actionpath' => $_REQUEST[GD_URLPARAM_ACTIONPATH],
+            'target' => $target,
+            'dataoutputitems' => $dataoutputitems,
+            'datasources' => $datasources,
+            'datastructure' => $datastructure,
+            'dataoutputmode' => $dataoutputmode,
+            'dboutputmode' => $dboutputmode,
+            'mangled' => $mangled,
+            'format' => $format,
+            'settingsformat' => $settingsformat,
+            'tab' => $tab,
+            'action' => $action,
+            'loading-site' => $loadingSite,
+            'fetching-site' => $fetchingSite,
         );
 
         if ($modulefilter == POP_MODULEFILTER_MODULEPATHS) {
@@ -297,7 +296,6 @@ class Engine_Vars
         // Function `getPageModuleByMostAllmatchingVarsProperties` actually needs to access all values in $vars
         // Hence, calculate only at the very end
         if ($reset) {
-
             // If filtering module by "maincontent", then calculate which is the main content module
             if (self::$vars['modulefilter'] == POP_MODULEFILTER_MAINCONTENTMODULE) {
                 $pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::getInstance();

@@ -56,11 +56,10 @@ abstract class Dataloader
         $databaseitems = $dbobjectids = array();
         if (!empty($resultset)) {
             foreach ($resultset as $resultitem) {
-
                 // Obtain the data-fields for that $id
                 $id = $fieldprocessor->getId($resultitem);
                 $data_fields = array(
-                 'primary' => $ids_data_fields[$id] ?? array(),
+                    'primary' => $ids_data_fields[$id] ?? array(),
                 );
                 $dbobjectids[] = $id;
 
@@ -81,8 +80,8 @@ abstract class Dataloader
         }
         
         return array(
-        'dbobjectids' => $dbobjectids,
-        'dbitems' => $databaseitems,
+            'dbobjectids' => $dbobjectids,
+            'dbitems' => $databaseitems,
         );
     }
     

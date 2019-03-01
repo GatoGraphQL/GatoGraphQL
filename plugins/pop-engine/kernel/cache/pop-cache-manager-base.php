@@ -72,7 +72,6 @@ class CacheManagerBase
     {
         $cache_dir = $this->getCacheDir($type);
         if (!file_exists($cache_dir)) {
-            
             // Create the settings folder
             @mkdir($cache_dir, 0777, true);
         }
@@ -81,18 +80,18 @@ class CacheManagerBase
     public function getSavefileCacheReplacements()
     {
         return array(
-        'from' => array(
-        POP_CONSTANT_UNIQUE_ID,
-        POP_CONSTANT_CURRENTTIMESTAMP,
-        POP_CONSTANT_RAND,
-        POP_CONSTANT_TIME,
-        ),
-        'to' => array(
-        POP_CACHEPLACEHOLDER_UNIQUE_ID,
-        POP_CACHEPLACEHOLDER_CURRENTTIMESTAMP,
-        POP_CACHEPLACEHOLDER_RAND,
-        POP_CACHEPLACEHOLDER_TIME,
-        ),
+            'from' => array(
+                POP_CONSTANT_UNIQUE_ID,
+                POP_CONSTANT_CURRENTTIMESTAMP,
+                POP_CONSTANT_RAND,
+                POP_CONSTANT_TIME,
+            ),
+            'to' => array(
+                POP_CACHEPLACEHOLDER_UNIQUE_ID,
+                POP_CACHEPLACEHOLDER_CURRENTTIMESTAMP,
+                POP_CACHEPLACEHOLDER_RAND,
+                POP_CACHEPLACEHOLDER_TIME,
+            ),
         );
     }
 
@@ -100,8 +99,8 @@ class CacheManagerBase
     {
         $savefile_replacements = $this->getSavefileCacheReplacements();
         return array(
-        'from' => $savefile_replacements['to'],
-        'to' => $savefile_replacements['from'],
+            'from' => $savefile_replacements['to'],
+            'to' => $savefile_replacements['from'],
         );
     }
 
@@ -127,7 +126,6 @@ class CacheManagerBase
     {
         $file = $this->getFile($filename, $type, $ext);
         if (file_exists($file)) {
-
             // Return the file contents
             $contents = file_get_contents($file);
 

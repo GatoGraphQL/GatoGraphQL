@@ -55,18 +55,15 @@ class ModuleFilter_ModulePaths extends \PoP\Engine\ModuleFilterBase
         // This way, the component can interact with itself to fetch or post data, etc
         $matching_submodules = array();
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-
             // Validate that the current module is at the head of the path
             // This validation will work for the entry module only, since the array_intersect below will guarantee that only the path modules are returned
             $unsettled_path_module = $unsettled_path[0];
             if (count($unsettled_path) == 1) {
-
                 // We reached the end of the unsettled path => from now on, all modules must be included
                 if ($unsettled_path_module == $module) {
                     return $submodules;
                 }
             } else {
-
                 // Then, check that the following element in the unsettled_path, which is the submodule, is on the submodules
                 $unsettled_path_submodule = $unsettled_path[1];
                 if ($unsettled_path_module == $module && in_array($unsettled_path_submodule, $submodules) && !in_array($unsettled_path_submodule, $matching_submodules)) {
@@ -84,7 +81,6 @@ class ModuleFilter_ModulePaths extends \PoP\Engine\ModuleFilterBase
     public function prepareForPropagation($module)
     {
         if ($this->paths) {
-
             // Save the current propagation_unsettled_paths, to restore it later on
             $this->backlog_unsettled_paths[$this->getBacklogEntry()] = $this->propagation_unsettled_paths;
 

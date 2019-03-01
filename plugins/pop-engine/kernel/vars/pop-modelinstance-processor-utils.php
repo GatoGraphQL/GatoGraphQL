@@ -42,32 +42,28 @@ class ModelInstanceProcessor_Utils
 
         // Properties specific to each hierarchy
         switch ($hierarchy) {
+            case GD_SETTINGS_HIERARCHY_PAGE:
+                $page_id = $vars['global-state']['queried-object-id'];
 
-        case GD_SETTINGS_HIERARCHY_PAGE:
-
-            $page_id = $vars['global-state']['queried-object-id'];
-
-            // Each page may be an independent configuration or not, so allow to configure it through hooks. By default it is true, so it's a conservative approach
-            $component_types = apply_filters(
-                '\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:page',
-                array(
-                POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID,
-                )
-            );
-            if (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID, $component_types)) {
-
-                  // We add the page path to help understand what file it is, in addition to the ID (to make sure to make the configuration unique to that page)
-                $components[] = __('page id:', 'pop-engine').Utils::getPagePath($page_id).$page_id;
-            }
-            // If the page id is added, then there's no need to check the maincontentmodule, since it adds no information
-            elseif (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_MAINCONTENTMODULE, $component_types)) {
-
-                 // If different pages share the same main content module, then they are sharing the same configuration.
-                // Eg: a website with all documentation pages may need to generate the configuration only once, for the first page, and then from then on just load data
-                $pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::getInstance();
-                $components[] = __('main content module:', 'pop-engine').$pop_module_pagemoduleprocessor_manager->getPageModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE, $page_id);
-            }
-            break;
+                // Each page may be an independent configuration or not, so allow to configure it through hooks. By default it is true, so it's a conservative approach
+                $component_types = apply_filters(
+                    '\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:page',
+                    array(
+                        POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID,
+                    )
+                );
+                if (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID, $component_types)) {
+                      // We add the page path to help understand what file it is, in addition to the ID (to make sure to make the configuration unique to that page)
+                    $components[] = __('page id:', 'pop-engine').Utils::getPagePath($page_id).$page_id;
+                }
+                // If the page id is added, then there's no need to check the maincontentmodule, since it adds no information
+                elseif (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_MAINCONTENTMODULE, $component_types)) {
+                     // If different pages share the same main content module, then they are sharing the same configuration.
+                    // Eg: a website with all documentation pages may need to generate the configuration only once, for the first page, and then from then on just load data
+                    $pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::getInstance();
+                    $components[] = __('main content module:', 'pop-engine').$pop_module_pagemoduleprocessor_manager->getPageModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE, $page_id);
+                }
+                break;
         }
 
         // Other properties
@@ -106,7 +102,6 @@ class ModelInstanceProcessor_Utils
             $components[] = __('operation:', 'pop-engine').(doingPost() ? 'post' : 'get');
         }
         if ($mangled = $vars['mangled']) {
-            
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
             // so only in these exceptional cases the identifier will add this parameter
             $components[] = __('mangled:', 'pop-engine').$mangled;

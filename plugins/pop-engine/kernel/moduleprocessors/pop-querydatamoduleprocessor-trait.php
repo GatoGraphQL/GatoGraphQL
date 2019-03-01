@@ -51,17 +51,16 @@ trait QueryDataModuleProcessorTrait
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[GD_DATALOAD_DATASOURCE];
         if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
-
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = apply_filters(
                 'QueryDataModuleProcessorTrait:request:whitelisted_params',
                 array(
-                GD_URLPARAM_REDIRECTTO,
-                GD_URLPARAM_PAGED,
-                GD_URLPARAM_LIMIT,
-                // Used for the Comments to know what post to fetch comments from when filtering
-                GD_URLPARAM_POSTID,
+                    GD_URLPARAM_REDIRECTTO,
+                    GD_URLPARAM_PAGED,
+                    GD_URLPARAM_LIMIT,
+                    // Used for the Comments to know what post to fetch comments from when filtering
+                    GD_URLPARAM_POSTID,
                 )
             );
             $data_properties[GD_DATALOAD_QUERYARGS] = array_merge(
@@ -77,7 +76,6 @@ trait QueryDataModuleProcessorTrait
         }
 
         if ($queryhandler_name = $this->getQueryhandler($module)) {
-                    
             // Allow the queryhandler to override/normalize the query args
             $queryhandler_manager = QueryHandler_Manager_Factory::getInstance();
             $queryhandler = $queryhandler_manager->get($queryhandler_name);

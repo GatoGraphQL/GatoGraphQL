@@ -30,7 +30,6 @@ abstract class TagFilterBase extends FilterBase
         $order = array();
         foreach ($this->getFiltercomponents() as $filtercomponent) {
             if ($order = $filtercomponent->getOrder($this)) {
-                
                 // Only 1 filter can define the Order, so already break
                 break;
             }

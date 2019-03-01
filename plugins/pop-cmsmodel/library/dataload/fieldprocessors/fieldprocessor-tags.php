@@ -23,51 +23,49 @@ class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $tag = $resultitem;
         switch ($field) {
+            case 'url':
+                $value = $cmsapi->getTagLink($this->getId($tag));
+                break;
 
-        case 'url':
-            $value = $cmsapi->getTagLink($this->getId($tag));
-            break;
+            case 'endpoint':
+                $value = \PoP\Engine\APIUtils::getEndpoint($this->getValue($resultitem, 'url'));
+                break;
 
-        case 'endpoint':
+            case 'name':
+                $value = $cmsresolver->getTagName($tag);
+                break;
 
-            $value = \PoP\Engine\APIUtils::getEndpoint($this->getValue($resultitem, 'url'));
-            break;
+            case 'slug':
+                $value = $cmsresolver->getTagSlug($tag);
+                break;
 
-        case 'name':
-            $value = $cmsresolver->getTagName($tag);
-            break;
+            case 'term_group':
+                $value = $cmsresolver->getTagTermGroup($tag);
+                break;
 
-        case 'slug':
-            $value = $cmsresolver->getTagSlug($tag);
-            break;
+            case 'term_taxonomy_id':
+                $value = $cmsresolver->getTagTermTaxonomyId($tag);
+                break;
 
-        case 'term_group':
-            $value = $cmsresolver->getTagTermGroup($tag);
-            break;
+            case 'taxonomy':
+                $value = $cmsresolver->getTagTaxonomy($tag);
+                break;
 
-        case 'term_taxonomy_id':
-            $value = $cmsresolver->getTagTermTaxonomyId($tag);
-            break;
+            case 'description':
+                $value = $cmsresolver->getTagDescription($tag);
+                break;
 
-        case 'taxonomy':
-            $value = $cmsresolver->getTagTaxonomy($tag);
-            break;
+            case 'parent':
+                $value = $cmsresolver->getTagParent($tag);
+                break;
 
-        case 'description':
-            $value = $cmsresolver->getTagDescription($tag);
-            break;
-
-        case 'parent':
-            $value = $cmsresolver->getTagParent($tag);
-            break;
-
-        case 'count':
-            $value = $cmsresolver->getTagCount($tag);
-            break;
+            case 'count':
+                $value = $cmsresolver->getTagCount($tag);
+                break;
  
-        default:
-            $value = parent::getValue($resultitem, $field);
-            break;
+            default:
+                $value = parent::getValue($resultitem, $field);
+                break;
         }
 
         return $value;
@@ -90,9 +88,8 @@ class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase
         }
 
         switch ($field) {
-
-        case 'parent':
-            return GD_DATALOADER_TAGLIST;
+            case 'parent':
+                return GD_DATALOADER_TAGLIST;
         }
 
         return parent::getFieldDefaultDataloader($field);

@@ -12,7 +12,7 @@ class TemplateUtils
                 header('Content-type: application/json');
                 echo json_encode(
                     array(
-                    'error' => POP_MSG_STARTUPERROR,
+                        'error' => POP_MSG_STARTUPERROR,
                     )
                 );
             } else {

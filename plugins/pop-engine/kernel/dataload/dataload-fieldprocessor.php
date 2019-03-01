@@ -17,10 +17,8 @@ abstract class FieldProcessorBase
     public function getValue($resultitem, $field)
     {
         switch ($field) {
-        
-        case 'id':
-            
-            return $this->getId($resultitem);
+            case 'id':
+                return $this->getId($resultitem);
         }
 
         // Comment Leo 29/08/2014: needed for compatibility with Dataloader_ConvertiblePostList

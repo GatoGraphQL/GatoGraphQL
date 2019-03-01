@@ -20,7 +20,6 @@ abstract class FileStorageBase
     private function createDir($dir)
     {
         if (!file_exists($dir)) {
-
             // Create folder
             @mkdir($dir, 0777, true);
         }

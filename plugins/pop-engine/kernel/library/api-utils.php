@@ -22,9 +22,9 @@ class APIUtils
                             implode(
                                 POP_CONSTANT_PARAMVALUE_SEPARATOR,
                                 array(
-                                GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
-                                GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                                GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+                                    GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
+                                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
+                                    GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
                                 )
                             ),
                             $url

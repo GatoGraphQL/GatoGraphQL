@@ -35,7 +35,6 @@ abstract class ConvertibleFieldProcessorBase extends FieldProcessorBase
         // Among all registered fieldprocessors, check if any is able to process the object, through function `process`
         foreach ($this->fieldprocessor_resolvers as $maybe_fieldprocessor_resolver) {
             if ($maybe_fieldprocessor_resolver->process($resultitem)) {
-
                 // Found it!
                 $fieldprocessor_resolver = $maybe_fieldprocessor_resolver;
                 $fieldprocessor_name = $fieldprocessor_resolver->getFieldprocessor();

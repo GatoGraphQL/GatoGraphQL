@@ -9,7 +9,6 @@ abstract class FilterComponent_HashtagsBase extends FilterComponentBase
 
         // The tags might have the '#' symbol, if so remove it
         if ($value = $this->getFilterinputValue($filter)) {
-
             // tags provided separated by space, color or comma
             foreach (multiexplode(array(',', ';', ' '), $value) as $hashtag) {
                 if ($hashtag) {

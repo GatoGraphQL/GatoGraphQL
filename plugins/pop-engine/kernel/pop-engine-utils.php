@@ -72,22 +72,22 @@ class Utils
         $remove_params = apply_filters(
             '\PoP\Engine\Utils:current_url:remove_params',
             array(
-            GD_URLPARAM_SETTINGSFORMAT,
-            GD_URLPARAM_VERSION,
-            GD_URLPARAM_TARGET,
-            GD_URLPARAM_MODULEFILTER,
-            GD_URLPARAM_MODULEPATHS,
-            GD_URLPARAM_HEADMODULE,
-            GD_URLPARAM_ACTIONPATH,
-            GD_URLPARAM_DATAOUTPUTITEMS,
-            GD_URLPARAM_DATASOURCES,
-            GD_URLPARAM_DATAOUTPUTMODE,
-            GD_URLPARAM_DATABASESOUTPUTMODE,
-            GD_URLPARAM_OUTPUT,
-            GD_URLPARAM_DATASTRUCTURE,
-            GD_URLPARAM_MANGLED,
-            GD_URLPARAM_EXTRAURIS,
-            GD_URLPARAM_ACTION, // Needed to remove ?action=preload, ?action=loaduserstate, ?action=loadlazy
+                GD_URLPARAM_SETTINGSFORMAT,
+                GD_URLPARAM_VERSION,
+                GD_URLPARAM_TARGET,
+                GD_URLPARAM_MODULEFILTER,
+                GD_URLPARAM_MODULEPATHS,
+                GD_URLPARAM_HEADMODULE,
+                GD_URLPARAM_ACTIONPATH,
+                GD_URLPARAM_DATAOUTPUTITEMS,
+                GD_URLPARAM_DATASOURCES,
+                GD_URLPARAM_DATAOUTPUTMODE,
+                GD_URLPARAM_DATABASESOUTPUTMODE,
+                GD_URLPARAM_OUTPUT,
+                GD_URLPARAM_DATASTRUCTURE,
+                GD_URLPARAM_MANGLED,
+                GD_URLPARAM_EXTRAURIS,
+                GD_URLPARAM_ACTION, // Needed to remove ?action=preload, ?action=loaduserstate, ?action=loadlazy
             )
         );
         $url = remove_query_arg($remove_params, fullUrl());
@@ -150,7 +150,6 @@ class Utils
             $permalink = getPermalink($post_id);
             $post_name = getSlug($post_id);
         } else {
-
             // Function get_sample_permalink comes from the file below, so it must be included
             // Code below copied from `function get_sample_permalink_html`
             include_once ABSPATH.'wp-admin/includes/post.php';
@@ -202,7 +201,6 @@ class Utils
         } elseif ($vars['global-state']['is-home'] || $vars['global-state']['is-front-page']) {
             $page_id = self::getHierarchyDefaultPage($hierarchy);
         } elseif ($vars['global-state']['is-author'] || $vars['global-state']['is-single'] || $vars['global-state']['is-tag']) {
-            
             // Get the page from the tab attr
             if ($tab = $vars['tab']) {
                 $page = getPageByPath($tab);
@@ -229,11 +227,11 @@ class Utils
     public static function getHierarchyDefaultPage($hierarchy)
     {
         $default_pages = array(
-        GD_SETTINGS_HIERARCHY_HOME => POPENGINE_PAGEPLACEHOLDER_HOME,
-        GD_SETTINGS_HIERARCHY_TAG => POPENGINE_PAGEPLACEHOLDER_TAG,
-        GD_SETTINGS_HIERARCHY_SINGLE => POPENGINE_PAGEPLACEHOLDER_SINGLE,
-        GD_SETTINGS_HIERARCHY_AUTHOR => POPENGINE_PAGEPLACEHOLDER_AUTHOR,
-        GD_SETTINGS_HIERARCHY_404 => POPENGINE_PAGEPLACEHOLDER_404,
+            GD_SETTINGS_HIERARCHY_HOME => POPENGINE_PAGEPLACEHOLDER_HOME,
+            GD_SETTINGS_HIERARCHY_TAG => POPENGINE_PAGEPLACEHOLDER_TAG,
+            GD_SETTINGS_HIERARCHY_SINGLE => POPENGINE_PAGEPLACEHOLDER_SINGLE,
+            GD_SETTINGS_HIERARCHY_AUTHOR => POPENGINE_PAGEPLACEHOLDER_AUTHOR,
+            GD_SETTINGS_HIERARCHY_404 => POPENGINE_PAGEPLACEHOLDER_404,
         );
     
         // Comment Leo 12/04/2017: there is a problem, in which calling

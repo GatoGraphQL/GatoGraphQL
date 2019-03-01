@@ -23,51 +23,50 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $comment = $resultitem;
         switch ($field) {
-        
-        case 'content':
-            $value = gdCommentsApplyFilters($cmsresolver->getCommentContent($comment), true);
-            break;
+            case 'content':
+                $value = gdCommentsApplyFilters($cmsresolver->getCommentContent($comment), true);
+                break;
 
-        case 'author-name':
-            $value = $cmsapi->getTheAuthorMeta('display_name', $cmsresolver->getCommentUserId($comment));
-            break;
+            case 'author-name':
+                $value = $cmsapi->getTheAuthorMeta('display_name', $cmsresolver->getCommentUserId($comment));
+                break;
 
-        case 'author-url':
-            $value = $cmsapi->getAuthorPostsUrl($cmsresolver->getCommentUserId($comment));
-            break;
+            case 'author-url':
+                $value = $cmsapi->getAuthorPostsUrl($cmsresolver->getCommentUserId($comment));
+                break;
 
-        case 'author-email':
-            $value = $cmsapi->getTheAuthorMeta('user_email', $cmsresolver->getCommentUserId($comment));
-            break;
+            case 'author-email':
+                $value = $cmsapi->getTheAuthorMeta('user_email', $cmsresolver->getCommentUserId($comment));
+                break;
 
-        case 'author':
-            $value = $cmsresolver->getCommentUserId($comment);
-            break;
+            case 'author':
+                $value = $cmsresolver->getCommentUserId($comment);
+                break;
 
-        case 'post':
-        case 'post-id':
-            $value = $cmsresolver->getCommentPostId($comment);
-            break;
+            case 'post':
+            case 'post-id':
+                $value = $cmsresolver->getCommentPostId($comment);
+                break;
 
-        case 'approved':
-            $value = $cmsresolver->getCommentApproved($comment);
-            break;
+            case 'approved':
+                $value = $cmsresolver->getCommentApproved($comment);
+                break;
 
-        case 'type':
-            $value = $cmsresolver->getCommentType($comment);
-            break;
+            case 'type':
+                $value = $cmsresolver->getCommentType($comment);
+                break;
 
-        case 'parent':
-            $value = $cmsresolver->getCommentParent($comment);
-            break;
+            case 'parent':
+                $value = $cmsresolver->getCommentParent($comment);
+                break;
 
-        case 'date':
-            $value = mysql2date($cmsapi->getOption('date_format'), $cmsresolver->getCommentDateGmt($comment));
-            break;
+            case 'date':
+                $value = mysql2date($cmsapi->getOption('date_format'), $cmsresolver->getCommentDateGmt($comment));
+                break;
             
-        default:
-            $value = parent::getValue($resultitem, $field);
-            break;
+            default:
+                $value = parent::getValue($resultitem, $field);
+                break;
         }
 
         return $value;
@@ -90,16 +89,15 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase
         }
 
         switch ($field) {
+            case 'author':
+                return GD_DATALOADER_CONVERTIBLEUSERLIST;
 
-        case 'author':
-            return GD_DATALOADER_CONVERTIBLEUSERLIST;
-
-        case 'post':
-        case 'post-id':
-            return GD_DATALOADER_CONVERTIBLEPOSTLIST;
+            case 'post':
+            case 'post-id':
+                return GD_DATALOADER_CONVERTIBLEPOSTLIST;
         
-        case 'parent':
-            return GD_DATALOADER_COMMENTLIST;
+            case 'parent':
+                return GD_DATALOADER_COMMENTLIST;
         }
 
         return parent::getFieldDefaultDataloader($field);

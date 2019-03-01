@@ -48,10 +48,8 @@ abstract class FilterComponentBase
         
         // Special case for EXISTS: it can switch between EXISTS and NOT EXISTS depending on if the value is true or false
         if ($compare == 'EXISTS') {
-            
             // $value can be a single value, or an array of true/false
             if (is_array($value)) {
-
                 // Do the filtering only if there is 1 value (2 values => same as not filtering)
                 if (count($value) !== 1) {
                     return $meta_query;
@@ -70,9 +68,9 @@ abstract class FilterComponentBase
         
         if ($key && $value) {
             $meta_query[] = array(
-            'key' => $key,
-            'value' => $value,
-            'compare' => $compare
+                'key' => $key,
+                'value' => $value,
+                'compare' => $compare
             );
         }
                                 

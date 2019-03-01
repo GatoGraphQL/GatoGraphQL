@@ -19,11 +19,11 @@ class Engine_Utils
         $vars = &$vars_in_array[0];
         $hierarchy = $vars['hierarchy'];
         $has_queried_object_hierarchies = array(
-        GD_SETTINGS_HIERARCHY_TAG,
-        GD_SETTINGS_HIERARCHY_PAGE,
-        GD_SETTINGS_HIERARCHY_SINGLE,
-        GD_SETTINGS_HIERARCHY_AUTHOR,
-        GD_SETTINGS_HIERARCHY_CATEGORY,
+            GD_SETTINGS_HIERARCHY_TAG,
+            GD_SETTINGS_HIERARCHY_PAGE,
+            GD_SETTINGS_HIERARCHY_SINGLE,
+            GD_SETTINGS_HIERARCHY_AUTHOR,
+            GD_SETTINGS_HIERARCHY_CATEGORY,
         );
         if (in_array($hierarchy, $has_queried_object_hierarchies)) {
             $vars['global-state']['queried-object'] = $query->get_queried_object();

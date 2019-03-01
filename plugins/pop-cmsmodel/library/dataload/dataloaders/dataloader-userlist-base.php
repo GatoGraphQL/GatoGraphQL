@@ -8,7 +8,7 @@ abstract class Dataloader_UserListBase extends Dataloader_UserBase
     public function getDataFromIdsQuery($ids)
     {
         $query = array(
-        'include' => $ids
+            'include' => $ids
         );
         return $query;
     }

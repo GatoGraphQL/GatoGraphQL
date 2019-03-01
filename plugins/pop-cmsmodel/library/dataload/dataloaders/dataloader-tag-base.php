@@ -22,7 +22,7 @@ abstract class Dataloader_TagBase extends \PoP\Engine\QueryDataDataloader
     {
         if ($ids) {
             $query = array(
-            'include' => implode(', ', $ids)
+                'include' => implode(', ', $ids)
             );
             $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
             return $cmsapi->getTags($query);

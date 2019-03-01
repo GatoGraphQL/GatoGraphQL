@@ -20,13 +20,13 @@ class QueryHandler_ActionExecution extends \PoP\Engine\QueryHandlerBase
             // Redirect?
             if ($redirect = $executed[GD_DATALOAD_QUERYHANDLERRESPONSE_SOFTREDIRECT]) {
                 $ret['redirect'] = array(
-                 'url' => $redirect,
-                 'fetch' => true
+                    'url' => $redirect,
+                    'fetch' => true
                 );
             } elseif ($redirect = $executed[GD_DATALOAD_QUERYHANDLERRESPONSE_HARDREDIRECT]) {
                 $ret['redirect'] = array(
-                 'url' => $redirect,
-                 'fetch' => false
+                    'url' => $redirect,
+                    'fetch' => false
                 );
             }
         }

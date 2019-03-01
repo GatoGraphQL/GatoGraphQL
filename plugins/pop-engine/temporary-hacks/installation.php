@@ -7,7 +7,6 @@ class Temporary_Hacks_Installation
         if ($_REQUEST['action'] == 'install-hack') {
             $plugin_version = $this->systemActivateplugins(array());
             foreach ($plugin_version as $plugin => $activate_version) {
-
                 // Activate directly, no need to check for the version (which doesn't exist anyway, since the corresponding "-environment" plugin will be deactivated)
                 $this->runActivatePlugin("${plugin}/${plugin}.php");
             }

@@ -59,14 +59,13 @@ class Engine
         // ETag is needed for the Service Workers
         // Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
         if (apply_filters('\PoP\Engine\Engine:outputData:addEtagHeader', true)) {
-
             // The same page will have different hashs only because of those random elements added each time,
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
-            POP_CONSTANT_UNIQUE_ID,
-            POP_CONSTANT_CURRENTTIMESTAMP,
-            POP_CONSTANT_RAND,
-            POP_CONSTANT_TIME,
+                POP_CONSTANT_UNIQUE_ID,
+                POP_CONSTANT_CURRENTTIMESTAMP,
+                POP_CONSTANT_RAND,
+                POP_CONSTANT_TIME,
             );
             $commoncode = str_replace($differentiators, '', json_encode($this->data));
 
@@ -133,7 +132,6 @@ class Engine
 
         // See if there are extra URIs to be processed in this same request
         if ($extra_uris = $this->getExtraUris()) {
-
             // Combine the response for each extra URI together with the original response, merging all JSON objects together, but under each's URL/model_instance_id
 
             // To obtain the hierarchy for each URI, we use a hack: change the current URI and create a new WP object, which will process the query_vars and from there obtain the hierarchy
@@ -142,7 +140,6 @@ class Engine
 
             // Process each extra URI, and merge its results with all others
             foreach ($extra_uris as $uri) {
-
                 // From this hack, we obtain the hierarchy
                 $_SERVER['REQUEST_URI'] = $uri;
                 
@@ -377,7 +374,7 @@ class Engine
 
         // Always send back the requestsettings, which indicates which is the entry module
         $data = array(
-        // 'requestsettings' => $this->getRequestSettings($module, $model_props),
+            // 'requestsettings' => $this->getRequestSettings($module, $model_props),
         );
 
         if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems)
@@ -419,7 +416,6 @@ class Engine
         // ) {
         if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
         ) {
-
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             if ($requestmeta = $this->getRequestMeta()) {
@@ -475,7 +471,6 @@ class Engine
         // ) {
         if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
         ) {
-
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")
@@ -571,7 +566,6 @@ class Engine
         list($has_extra_uris, $model_instance_id, $current_uri) = $this->listExtraUriVars();
 
         if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
-
             // Save the model settings
             if ($add_settings) {
                 if ($immutable_settings) {
@@ -597,7 +591,6 @@ class Engine
                 // }
             }
         } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
-
             // If everything is combined, then it belongs under "mutableonrequest"
             if ($add_settings) {
                 if ($combined_settings = array_merge_recursive(
@@ -714,10 +707,10 @@ class Engine
     public function getRequestMeta()
     {
         $meta = array(
-        POP_CONSTANT_ENTRYMODULE => $this->getEntryModule(),
-        POP_UNIQUEID => POP_CONSTANT_UNIQUE_ID,
-        GD_URLPARAM_URL => Utils::getCurrentUrl(),
-        'modelinstanceid' => ModelInstanceProcessor_Utils::getModelInstanceId(),
+            POP_CONSTANT_ENTRYMODULE => $this->getEntryModule(),
+            POP_UNIQUEID => POP_CONSTANT_UNIQUE_ID,
+            GD_URLPARAM_URL => Utils::getCurrentUrl(),
+            'modelinstanceid' => ModelInstanceProcessor_Utils::getModelInstanceId(),
         );
         
         if ($this->backgroundload_urls) {
@@ -728,7 +721,6 @@ class Engine
         $modulefilter_manager = ModuleFilterManager_Factory::getInstance();
         $not_excluded_module_sets = $modulefilter_manager->getNotExcludedModuleSets();
         if (!is_null($not_excluded_module_sets)) {
-            
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: POP_MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and POP_MODULE_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = array();
             foreach ($not_excluded_module_sets as $modules) {
@@ -812,7 +804,6 @@ class Engine
     {
         $ids_data_fields[$dataloader_name] = $ids_data_fields[$dataloader_name] ?? array();
         foreach ($ids as $id) {
-
             // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
             $ids_data_fields[$dataloader_name][$id] = $ids_data_fields[$dataloader_name][$id] ?? array('id');
             $ids_data_fields[$dataloader_name][$id] = array_unique(
@@ -867,7 +858,6 @@ class Engine
         
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$modulefilter_manager->excludeModule($module, $props)) {
-            
             // If the current module loads data, then add its path to the list
             if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedModulepath($module, $props)) {
                 $referenced_modulepath = ModulePathManager_Utils::stringifyModulePath($interreferenced_modulepath);
@@ -875,7 +865,7 @@ class Engine
                 $paths[$referenced_modulepath][] = array_merge(
                     $module_path,
                     array(
-                    $module
+                        $module
                     )
                 );
             }
@@ -884,7 +874,7 @@ class Engine
         $submodule_path = array_merge(
             $module_path,
             array(
-            $module,
+                $module,
             )
         );
         
@@ -917,13 +907,12 @@ class Engine
         
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$modulefilter_manager->excludeModule($module, $props)) {
-            
             // If the current module loads data, then add its path to the list
             if ($processor->getDataloader($module)) {
                 $paths[] = array_merge(
                     $module_path,
                     array(
-                    $module
+                        $module
                     )
                 );
             }
@@ -932,7 +921,7 @@ class Engine
         $submodule_path = array_merge(
             $module_path,
             array(
-            $module,
+                $module,
             )
         );
         
@@ -955,7 +944,6 @@ class Engine
 
         $array_pointer = &$array;
         foreach ($module_path as $submodule) {
-
             // Notice that when generating the array for the response, we don't use $module anymore, but $settings_id
             $submodule_settings_id = $moduleprocessor_manager->getProcessor($submodule)->getSettingsId($submodule);
 
@@ -1075,7 +1063,6 @@ class Engine
         $modulefilter_manager = ModuleFilterManager_Factory::getInstance();
         $modulefilter_manager->neverExclude(true);
         foreach ($module_fullpaths as $module_path) {
-
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
             $module = array_pop($module_path);
@@ -1104,7 +1091,6 @@ class Engine
             // ------------------------------------------
             // Load data if the checkpoint did not fail
             if ($load_data && $checkpoints = $data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS]) {
-                
                 // Check if the module fails checkpoint validation. If so, it must not load its data or execute the actionexecuter
                 $dataaccess_checkpoint_validation = $this->validateCheckpoints($checkpoints, $module);
                 $load_data = !is_wp_error($dataaccess_checkpoint_validation);
@@ -1121,8 +1107,8 @@ class Engine
             if (in_array(
                 $datasource,
                 array(
-                POP_DATALOAD_DATASOURCE_IMMUTABLE,
-                POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                    POP_DATALOAD_DATASOURCE_IMMUTABLE,
+                    POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
                 )
             )
             ) {
@@ -1140,7 +1126,6 @@ class Engine
             $dbobjectids = $dataset_meta = array();
             $executed = null;
             if ($load_data) {
-
                 // ------------------------------------------
                 // Action Executers
                 // ------------------------------------------
@@ -1150,11 +1135,9 @@ class Engine
                 // Pass data_properties so these can also be modified (eg: set id of newly created Location)
                 if ($actionexecuter_name = $processor->getActionexecuter($module)) {
                     if ($processor->executeAction($module, $props)) {
-
                         // Validate that the actionexecution must be triggered through its own checkpoints
                         $execute = true;
                         if ($actionexecution_checkpoints = $data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS]) {
-                            
                             // Check if the module fails checkpoint validation. If so, it must not load its data or execute the actionexecuter
                             $actionexecution_checkpoint_validation = $this->validateCheckpoints($actionexecution_checkpoints, $module);
                             $execute = !is_wp_error($actionexecution_checkpoint_validation);
@@ -1174,7 +1157,6 @@ class Engine
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterActionexecution`
                 $load_data = !$data_properties[GD_DATALOAD_SKIPDATALOAD];
                 if ($load_data) {
-
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
@@ -1207,7 +1189,6 @@ class Engine
                         );
                     }
                     foreach ($dataload_extend_settings as $extend_dataloader_name => $extend_data_properties) {
-                        
                          // Get the info for the subcomponent dataloader
                         $extend_data_fields = $extend_data_properties['data-fields'] ? $extend_data_properties['data-fields'] : array();
                         $extend_ids = $extend_data_properties['ids'];
@@ -1277,8 +1258,8 @@ class Engine
                     if (in_array(
                         $datasource,
                         array(
-                        POP_DATALOAD_DATASOURCE_IMMUTABLE,
-                        POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                            POP_DATALOAD_DATASOURCE_IMMUTABLE,
+                            POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
                         )
                     )
                     ) {
@@ -1318,7 +1299,6 @@ class Engine
         $ret = array();
 
         if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)) {
-
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_uris, $model_instance_id, $current_uri) = $this->listExtraUriVars();
 
@@ -1354,7 +1334,6 @@ class Engine
                     }
                 }
             } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
-
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if ($combined_moduledata = array_merge_recursive(
                     $immutable_moduledata ?? array(),
@@ -1419,7 +1398,6 @@ class Engine
 
         // Iterate while there are dataloaders with data to be processed
         while (!empty($this->ids_data_fields)) {
-
             // Move the pointer to the first element, and get it
             reset($this->ids_data_fields);
             $dataloader_name = key($this->ids_data_fields);
@@ -1473,18 +1451,17 @@ class Engine
                 
                 // Store the intersected fields and the corresponding ids
                 $forceserverload = array(
-                 'ids' => array(),
-                 'fields' => array()
+                    'ids' => array(),
+                    'fields' => array()
                 );
                 $lazyload = array(
-                 'ids' => array(),
-                 'layouts' => array()
+                    'ids' => array(),
+                    'layouts' => array()
                 );
 
                 // Compare the fields in the result dbobjectids, with the dataquery's specified list of fields that must always be retrieved from the server
                 // (eg: comment-count, since adding a comment doesn't delete the cache)
                 foreach ($dataitems['dbobjectids'] as $dataitem_id) {
-
                        // Get the fields requested to that dataitem, for both the database and user database
                     $dataitem_fields = array_merge(
                         array_keys($dataitems['dataitems'][$dataitem_id] ?? array()),
@@ -1510,7 +1487,6 @@ class Engine
                     if ($intersect = array_values(array_intersect($dataitem_fields, $lazyload_fields))) {
                         $lazyload['ids'][] = $dataitem_id;
                         foreach ($intersect as $field) {
-                            
                                             // Get the layout for the current format, if it exists, or the default one if not
                             $lazyload['layouts'][] = $lazylayouts[$field][$format] ?? $lazylayouts[$field]['default'];
                         }
@@ -1557,7 +1533,6 @@ class Engine
                         // $subcomponent_module_path_key = $module_path_key.'.'.$subcomponent_data_field;
                         // $subcomponent_module_path_key = $module_path_key;
                         foreach ($subcomponent_dataloder_data_properties as $subcomponent_dataloader_name => $subcomponent_data_properties) {
-
                             // If the subcomponent dataloader is not explicitly set in `getDbobjectRelationalSuccessors`, then retrieve it now from the current dataloader's fieldprocessor
                             if ($subcomponent_dataloader_name == POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD) {
                                 $subcomponent_dataloader_name = DataloadUtils::getDefaultDataloaderNameFromSubcomponentDataField($dataloader, $subcomponent_data_field);
@@ -1565,7 +1540,6 @@ class Engine
 
                             // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_dataloader_name will be empty
                             if ($subcomponent_dataloader_name) {
-                            
                                  // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                                 if ($subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? array())) {
                                     $subcomponent_already_loaded_ids_data_fields = array();
@@ -1573,7 +1547,6 @@ class Engine
                                         $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponent_dataloader_name];
                                     }
                                     foreach ($dataloader_ids as $id) {
-                                
                                         // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                                         // Fetch the field_ids from all these DBs
                                         $field_ids = array();
@@ -1587,7 +1560,6 @@ class Engine
                                         }
                                         if ($field_ids) {
                                             foreach ($field_ids as $field_id) {
-
                                                 // Do not add again the IDs/Fields already loaded
                                                 if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id]) {
                                                     $id_subcomponent_data_fields = array_values(
@@ -1628,7 +1600,6 @@ class Engine
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
         // Otherwise, it messes up integrating the current databases in the frontend with those from the response when deep merging them
         if ($databases) {
-
             // Combine all the databases or send them separate
             if ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES) {
                 $ret['databases'] = $databases;
@@ -1658,7 +1629,6 @@ class Engine
 
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
-
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submodule_settings_id = $moduleprocessor_manager->getProcessor($submodule)->getSettingsId($submodule);
@@ -1678,9 +1648,9 @@ class Engine
     {
         if (is_null($dbdata[$dataloader_name][$module_path_key])) {
             $dbdata[$dataloader_name][$module_path_key] = array(
-            'ids' => array(),
-            'data-fields' => array(),
-            'subcomponents' => array(),
+                'ids' => array(),
+                'data-fields' => array(),
+                'subcomponents' => array(),
             );
         }
     }
@@ -1691,7 +1661,6 @@ class Engine
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary dataloader, execute getData also on the subcomponent dataloader
         if ($subcomponents_data_properties = $data_properties['subcomponents']) {
-            
             // Merge them into the data
             $dbdata[$dataloader_name][$module_path_key]['subcomponents'] = array_merge_recursive(
                 $dbdata[$dataloader_name][$module_path_key]['subcomponents'] ?? array(),

@@ -11,7 +11,7 @@ abstract class MainContentPageModuleProcessorBase extends PageModuleProcessorBas
         return apply_filters(
             '\PoP\Engine\MainContentPageModuleProcessorBase:maincontentgroups',
             array(
-            POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE,
+                POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE,
             )
         );
     }

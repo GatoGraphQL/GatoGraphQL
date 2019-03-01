@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace PoP\Engine\FileStorage;
 
 abstract class FileReproductionBase

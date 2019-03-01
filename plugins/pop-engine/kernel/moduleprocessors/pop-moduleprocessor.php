@@ -53,7 +53,7 @@ abstract class ModuleProcessorBase
 
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
         $module_props = array(
-        $module => &$props[$module],
+            $module => &$props[$module],
         );
 
         // If ancestor modules set general props, or props targetted at this current module, then add them to the current module props
@@ -157,7 +157,6 @@ abstract class ModuleProcessorBase
 
             // If it is multidomain, add a flag for inner layouts to know and react
             if ($this->isMultidomain($module, $props)) {
-            
                 // $this->add_general_prop($props, 'is-multidomain', true);
                 $this->appendProp($module, $props, 'class', 'pop-multidomain');
             }
@@ -172,14 +171,12 @@ abstract class ModuleProcessorBase
             $dataloader_name = $this->getProp($module, $props, 'succeeding-dataloader');
         }
         if ($dataloader_name) {
-
             // Set the property "succeeding-dataloader" on all descendants: the same dataloader for all submodules, and the explicit one (or get the default one for "*") for relational objects
             foreach ($this->getModules($module) as $submodule) {
                 $this->setProp($submodule, $props, 'succeeding-dataloader', $dataloader_name);
             }
             foreach ($this->getDbobjectRelationalSuccessors($module) as $subcomponent_data_field => $subcomponent_dataloader_options) {
                 foreach ($subcomponent_dataloader_options as $subcomponent_dataloader_name => $subcomponent_modules) {
-
                     // If the subcomponent dataloader is not explicitly set in `getDbobjectRelationalSuccessors`, then retrieve it now from the current dataloader's fieldprocessor
                     if ($subcomponent_dataloader_name == POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD) {
                         $subcomponent_dataloader_name = DataloadUtils::getDefaultDataloaderNameFromSubcomponentDataField($dataloader_name, $subcomponent_data_field);
@@ -252,7 +249,6 @@ abstract class ModuleProcessorBase
 
         // If it is an array, then we're passing the path to find the module to which to add the att
         if (!is_array($module_or_modulepath)) {
-
             // From the root of the $props we obtain the current module
             $module = $this->getPathHeadModule($props);
 
@@ -292,7 +288,6 @@ abstract class ModuleProcessorBase
 
         // Iterate down to the submodule, which must be an array of modules
         if ($starting_from_modulepath) {
-
             // Attach the current module, which is not included on "starting_from", to step down this level too
             $module = $this->getPathHeadModule($props);
             array_unshift($starting_from_modulepath, $module);
@@ -311,7 +306,7 @@ abstract class ModuleProcessorBase
             // Save the current $props, and restore later, to make sure this array has only one key, otherwise it will not work
             $current_props = $props;
             $props = array(
-            $last_module => &$last_module_props[$last_module]
+                $last_module => &$last_module_props[$last_module]
             );
         }
 
@@ -319,7 +314,6 @@ abstract class ModuleProcessorBase
         // If it is not, then it is a descendant module, which will appear at some point down the path.
         // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsModuletree`
         if ($this->isDescendantModule($module_or_modulepath, $props)) {
-
             // It is a child module
             $att_module = $module_or_modulepath;
 
@@ -330,7 +324,6 @@ abstract class ModuleProcessorBase
             $props[$module][POP_PROPS_DESCENDANTATTRIBUTES] = $props[$module][POP_PROPS_DESCENDANTATTRIBUTES] ?? array();
             $module_props = &$props[$module][POP_PROPS_DESCENDANTATTRIBUTES];
         } else {
-
             // Calculate the path to iterate down
             $modulepath = $this->getModulepath($module_or_modulepath, $props);
 
@@ -477,7 +470,7 @@ abstract class ModuleProcessorBase
     {
         list($absmodule, $virtualmoduleatts) = \PoP\Engine\VirtualModuleUtils::extractVirtualmodule($module);
         $ret = array(
-        GD_JS_MODULE => $absmodule,
+            GD_JS_MODULE => $absmodule,
         );
 
         if ($this->getDataloader($module)) {
@@ -496,7 +489,6 @@ abstract class ModuleProcessorBase
             $dataloader = $dataloader_manager->get($dataloader_name);
 
             if ($dbkey = $dataloader->getDatabaseKey()) {
-
                 // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
                 $ret['id'] = $dbkey;
             }
@@ -504,17 +496,14 @@ abstract class ModuleProcessorBase
 
         $dataloader_manager = Dataloader_Manager_Factory::getInstance();
         if ($subcomponents = $this->getDbobjectRelationalSuccessors($module)) {
-            
             // This prop is set for both dataloading and non-dataloading modules
             $dataloader_name = $this->getProp($module, $props, 'succeeding-dataloader');
             foreach ($subcomponents as $subcomponent_data_field => $subcomponent_dataloader_options) {
-
                 // Watch out that, if a module has 2 subcomponents on the same data-field but different dataloaders, then
                 // the dataloaders' db-key must be the same! Otherwise, the 2nd one will override the 1st one
                 // Eg: a module using POSTLIST, another one using CONVERTIBLEPOSTLIST, it doesn't conflict since the db-key for both is "posts"
                 $subcomponent_dataloader_names = array_keys($subcomponent_dataloader_options);
                 foreach ($subcomponent_dataloader_names as $subcomponent_dataloader_name) {
-
                     // If the subcomponent dataloader is not explicitly set in `getDbobjectRelationalSuccessors`, then retrieve it now from the current dataloader's fieldprocessor
                     if ($subcomponent_dataloader_name == POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD) {
                         $subcomponent_dataloader_name = DataloadUtils::getDefaultDataloaderNameFromSubcomponentDataField($dataloader_name, $subcomponent_data_field);
@@ -539,7 +528,7 @@ abstract class ModuleProcessorBase
     public function getImmutableSettingsDatasetmoduletree($module, &$props)
     {
         $options = array(
-        'only-execute-on-dataloading-modules' => true,
+            'only-execute-on-dataloading-modules' => true,
         );
         return $this->executeOnSelfAndPropagateToModules('getImmutableDatasetsettings', __FUNCTION__, $module, $props, true, $options);
     }
@@ -577,7 +566,6 @@ abstract class ModuleProcessorBase
         $module_path_manager->prepareForPropagation($module);
         foreach ($this->getDbobjectRelationalSuccessors($module) as $subcomponent_data_field => $subcomponent_dataloader_options) {
             foreach ($subcomponent_dataloader_options as $subcomponent_dataloader_name => $subcomponent_modules) {
-                
                 // Only modules without dataloader
                 $subcomponent_modules = array_filter($subcomponent_modules, array($this, 'hasNoDataloader'));
                 foreach ($subcomponent_modules as $subcomponent_module) {
@@ -712,7 +700,6 @@ abstract class ModuleProcessorBase
 
         // Only if this module has a dataloader => We are at the head nodule of the dataset section
         if ($this->getDataloader($module)) {
-
             // Load the data-fields from all modules inside this section
             // And then, only for the top node, add its extra properties
             $properties = array_merge(
@@ -852,7 +839,6 @@ abstract class ModuleProcessorBase
 
         // Only if this module has a dataloader
         if ($this->getDataloader($module)) {
-
             // // Load the data-fields from all modules inside this section
             // // And then, only for the top node, add its extra properties
             // $properties = array_merge(
@@ -888,7 +874,6 @@ abstract class ModuleProcessorBase
         // (such as done to set-up checkpoint configuration for POP_USERSTANCE_PAGE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
         // if ($checkpoint_configuration = $this->getDataaccessCheckpointConfiguration($module, $props)) {
         if ($checkpoints = $this->getDataaccessCheckpoints($module, $props)) {
-            
             // if (Utils::checkpointValidationRequired($checkpoint_configuration)) {
 
             // Pass info for PoP Engine
@@ -900,7 +885,6 @@ abstract class ModuleProcessorBase
         // To trigger the actionexecuter, its own checkpoints must be successful
         // if ($checkpoint_configuration = $this->getActionexecutionCheckpointConfiguration($module, $props)) {
         if ($checkpoints = $this->getActionexecutionCheckpoints($module, $props)) {
-            
             // if (Utils::checkpointValidationRequired($checkpoint_configuration)) {
 
             // Pass info for PoP Engine
@@ -1006,7 +990,6 @@ abstract class ModuleProcessorBase
     {
         if ($page_id = $this->getRelevantPage($module, $props)) {
             if ($this->getRelevantPageCheckpointTarget($module, $props) == GD_DATALOAD_DATAACCESSCHECKPOINTS) {
-            
                 // // return Utils::getCheckpointConfiguration($page_id);
                 // return Utils::getCheckpoints($page_id);
                 return $this->maybeOverrideCheckpoints(Settings\SettingsManager_Factory::getInstance()->getCheckpoints($page_id));
@@ -1022,7 +1005,6 @@ abstract class ModuleProcessorBase
     {
         if ($page_id = $this->getRelevantPage($module, $props)) {
             if ($this->getRelevantPageCheckpointTarget($module, $props) == GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS) {
-            
                 // // return Utils::getCheckpointConfiguration($page_id);
                 // return Utils::getCheckpoints($page_id);
                 return $this->maybeOverrideCheckpoints(Settings\SettingsManager_Factory::getInstance()->getCheckpoints($page_id));
@@ -1154,7 +1136,6 @@ abstract class ModuleProcessorBase
                 // Propagate only if the submodule doesn't have a dataloader. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                 if (!$submodule_processor->getDataloader($submodule, $props[$module][POP_PROPS_MODULES])) {
                     if ($submodule_ret = $submodule_processor->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES])) {
-
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -1179,8 +1160,8 @@ abstract class ModuleProcessorBase
         foreach ($this->getDbobjectRelationalSuccessors($module) as $subcomponent_data_field => $subcomponent_dataloader_options) {
             foreach ($subcomponent_dataloader_options as $subcomponent_dataloader_name => $subcomponent_modules) {
                 $subcomponent_modules_data_properties = array(
-                 'data-fields' => array(),
-                 'subcomponents' => array()
+                    'data-fields' => array(),
+                    'subcomponents' => array()
                 );
                 foreach ($subcomponent_modules as $subcomponent_module) {
                     if ($subcomponent_module_data_properties = $moduleprocessor_manager->getProcessor($subcomponent_module)->$propagate_fn($subcomponent_module, $props[$subcomponent_module][POP_PROPS_MODULES])) {
@@ -1251,8 +1232,8 @@ abstract class ModuleProcessorBase
 
         if (empty($components)) {
             $components = array(
-            POP_MODULECOMPONENT_MODULES,
-            POP_MODULECOMPONENT_DBOBJECTRELATIONALSUCCESSORMODULES,
+                POP_MODULECOMPONENT_MODULES,
+                POP_MODULECOMPONENT_DBOBJECTRELATIONALSUCCESSORMODULES,
             );
         }
 

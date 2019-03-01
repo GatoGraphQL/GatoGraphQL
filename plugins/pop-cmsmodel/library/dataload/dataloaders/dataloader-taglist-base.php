@@ -8,7 +8,7 @@ abstract class Dataloader_TagListBase extends Dataloader_TagBase
     public function getDataFromIdsQuery($ids)
     {
         $query = array(
-        'include' => implode(', ', $ids)
+            'include' => implode(', ', $ids)
         );
         return $query;
     }

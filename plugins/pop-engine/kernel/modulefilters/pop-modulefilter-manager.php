@@ -25,7 +25,6 @@ class ModuleFilterManager
     public function getSelectedFilterName()
     {
         if ($selected = $_REQUEST[GD_URLPARAM_MODULEFILTER]) {
-
             // Validate that the selected filter exists
             if (in_array($selected, array_keys($this->filters))) {
                 return $selected;
@@ -104,7 +103,6 @@ class ModuleFilterManager
     {
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && is_null($this->not_excluded_ancestor_module) && $this->excludeModule($module, $props) === false) {
-
                 // Set the current module as the one which is not excluded.
                 $module_path_manager = ModulePathManager_Factory::getInstance();
                 $module_propagation_current_path = $module_path_manager->getPropagationCurrentPath();

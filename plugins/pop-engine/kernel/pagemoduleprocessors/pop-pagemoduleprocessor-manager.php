@@ -63,10 +63,8 @@ class PageModuleProcessor_Manager
             if ($module_vars_properties = $page_module_vars_properties[$page_id]) {
                 foreach ($module_vars_properties as $module => $vars_properties_items) {
                     foreach ($vars_properties_items as $vars_properties_set) {
-
                         // Check if the all the $vars_properties_set are satisfied <= if all those key/values are also present in $vars
                         if (arrayIsSubset($vars_properties_set, $vars)) {
-
                             // Check how many matches there are, and if it's the most, this is the most matching module
                             // Check that it is >= instead of >. This is done so that later processors can override the behavior from previous processors,
                             // which makes sense since plugins are loaded in a specific order

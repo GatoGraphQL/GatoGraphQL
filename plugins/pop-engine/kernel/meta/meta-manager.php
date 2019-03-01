@@ -52,7 +52,6 @@ class MetaManager
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $cmsapi->deletePostMeta($post_id, self::getMetaKey($key, GD_META_TYPE_POST));
         foreach ($values as $value) {
-        
             // If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
             if ($boolean && !$value) {
                 continue;
@@ -84,7 +83,6 @@ class MetaManager
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $cmsapi->deleteTermMeta($term_id, self::getMetaKey($key, GD_META_TYPE_TERM));
         foreach ($values as $value) {
-        
             // If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
             if ($boolean && !$value) {
                 continue;
@@ -116,7 +114,6 @@ class MetaManager
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $cmsapi->deleteUserMeta($user_id, self::getMetaKey($key, GD_META_TYPE_USER));
         foreach ($values as $value) {
-        
             // If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
             if ($boolean && !$value) {
                 continue;
@@ -148,7 +145,6 @@ class MetaManager
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $cmsapi->deleteCommentMeta($comment_id, self::getMetaKey($key, GD_META_TYPE_COMMENT));
         foreach ($values as $value) {
-        
             // If dealing with boolean values, do not save a "false" in the DB, so we can use "EXISTS" to find all the entries with "true"
             if ($boolean && !$value) {
                 continue;

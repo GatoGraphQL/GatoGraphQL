@@ -15,14 +15,14 @@ class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
     public function getModulesToProcess()
     {
         return array(
-        POP_MODULE_EXAMPLE_LATESTPOSTS,
-        POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS,
-        POP_MODULE_EXAMPLE_AUTHORDESCRIPTION,
-        POP_MODULE_EXAMPLE_TAGLATESTPOSTS,
-        POP_MODULE_EXAMPLE_TAGDESCRIPTION,
-        POP_MODULE_EXAMPLE_SINGLE,
-        POP_MODULE_EXAMPLE_PAGE,
-        POP_MODULE_EXAMPLE_HOMESTATICPAGE,
+            POP_MODULE_EXAMPLE_LATESTPOSTS,
+            POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS,
+            POP_MODULE_EXAMPLE_AUTHORDESCRIPTION,
+            POP_MODULE_EXAMPLE_TAGLATESTPOSTS,
+            POP_MODULE_EXAMPLE_TAGDESCRIPTION,
+            POP_MODULE_EXAMPLE_SINGLE,
+            POP_MODULE_EXAMPLE_PAGE,
+            POP_MODULE_EXAMPLE_HOMESTATICPAGE,
         );
     }
 
@@ -31,16 +31,13 @@ class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
         $ret = parent::getModules($module);
 
         switch ($module) {
+            case POP_MODULE_EXAMPLE_AUTHORDESCRIPTION:
+                $ret[] = POP_MODULE_EXAMPLE_AUTHORPROPERTIES;
+                break;
 
-        case POP_MODULE_EXAMPLE_AUTHORDESCRIPTION:
-
-            $ret[] = POP_MODULE_EXAMPLE_AUTHORPROPERTIES;
-            break;
-
-        case POP_MODULE_EXAMPLE_TAGDESCRIPTION:
-
-            $ret[] = POP_MODULE_EXAMPLE_TAGPROPERTIES;
-            break;
+            case POP_MODULE_EXAMPLE_TAGDESCRIPTION:
+                $ret[] = POP_MODULE_EXAMPLE_TAGPROPERTIES;
+                break;
         }
 
         return $ret;
@@ -49,29 +46,23 @@ class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
     public function getDataloader($module)
     {
         switch ($module) {
+            case POP_MODULE_EXAMPLE_LATESTPOSTS:
+            case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
+            case POP_MODULE_EXAMPLE_TAGLATESTPOSTS:
+                return GD_DATALOADER_POSTLIST;
 
-        case POP_MODULE_EXAMPLE_LATESTPOSTS:
-        case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
-        case POP_MODULE_EXAMPLE_TAGLATESTPOSTS:
+            case POP_MODULE_EXAMPLE_AUTHORDESCRIPTION:
+                return GD_DATALOADER_AUTHOR;
 
-            return GD_DATALOADER_POSTLIST;
+            case POP_MODULE_EXAMPLE_TAGDESCRIPTION:
+                return GD_DATALOADER_TAG;
 
-        case POP_MODULE_EXAMPLE_AUTHORDESCRIPTION:
+            case POP_MODULE_EXAMPLE_SINGLE:
+            case POP_MODULE_EXAMPLE_PAGE:
+                return GD_DATALOADER_SINGLE;
 
-            return GD_DATALOADER_AUTHOR;
-
-        case POP_MODULE_EXAMPLE_TAGDESCRIPTION:
-
-            return GD_DATALOADER_TAG;
-
-        case POP_MODULE_EXAMPLE_SINGLE:
-        case POP_MODULE_EXAMPLE_PAGE:
-
-            return GD_DATALOADER_SINGLE;
-
-        case POP_MODULE_EXAMPLE_HOMESTATICPAGE:
-
-            return GD_DATALOADER_HOMESTATICPAGE;
+            case POP_MODULE_EXAMPLE_HOMESTATICPAGE:
+                return GD_DATALOADER_HOMESTATICPAGE;
         }
 
         return parent::getDataloader($module);
@@ -83,16 +74,13 @@ class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
 
         $vars = \PoP\Engine\Engine_Vars::getVars();
         switch ($module) {
+            case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
+                $ret['author'] = $vars['global-state']['queried-object-id'];
+                break;
 
-        case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
-
-            $ret['author'] = $vars['global-state']['queried-object-id'];
-            break;
-
-        case POP_MODULE_EXAMPLE_TAGLATESTPOSTS:
-
-            $ret['tag-id'] = $vars['global-state']['queried-object-id'];
-            break;
+            case POP_MODULE_EXAMPLE_TAGLATESTPOSTS:
+                $ret['tag-id'] = $vars['global-state']['queried-object-id'];
+                break;
         }
 
         return $ret;
@@ -103,23 +91,21 @@ class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
         $ret = parent::getDbobjectRelationalSuccessors($module);
 
         switch ($module) {
-
-        case POP_MODULE_EXAMPLE_SINGLE:
-        case POP_MODULE_EXAMPLE_LATESTPOSTS:
-        case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
-        case POP_MODULE_EXAMPLE_TAGLATESTPOSTS:
-
-            $ret['author'] = array(
-            GD_DATALOADER_CONVERTIBLEUSERLIST => array(
-            POP_MODULE_EXAMPLE_AUTHORPROPERTIES,
-            ),
-            );
-            $ret['comments'] = array(
-            GD_DATALOADER_COMMENTLIST => array(
-            POP_MODULE_EXAMPLE_COMMENT,
-            ),
-            );
-            break;
+            case POP_MODULE_EXAMPLE_SINGLE:
+            case POP_MODULE_EXAMPLE_LATESTPOSTS:
+            case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
+            case POP_MODULE_EXAMPLE_TAGLATESTPOSTS:
+                $ret['author'] = array(
+                    GD_DATALOADER_CONVERTIBLEUSERLIST => array(
+                        POP_MODULE_EXAMPLE_AUTHORPROPERTIES,
+                    ),
+                );
+                $ret['comments'] = array(
+                    GD_DATALOADER_COMMENTLIST => array(
+                        POP_MODULE_EXAMPLE_COMMENT,
+                    ),
+                );
+                break;
         }
 
         return $ret;
@@ -128,12 +114,12 @@ class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
     public function getDataFields($module, $props)
     {
         $data_fields = array(
-        POP_MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
-        POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS => array('title', 'content', 'url'),
-        POP_MODULE_EXAMPLE_TAGLATESTPOSTS => array('title', 'content', 'url'),
-        POP_MODULE_EXAMPLE_SINGLE => array('title', 'content', 'excerpt', 'status', 'date', 'comments-count', 'post-type', 'cat-slugs', 'tag-names'),
-        POP_MODULE_EXAMPLE_PAGE => array('title', 'content', 'date'),
-        POP_MODULE_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
+            POP_MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
+            POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS => array('title', 'content', 'url'),
+            POP_MODULE_EXAMPLE_TAGLATESTPOSTS => array('title', 'content', 'url'),
+            POP_MODULE_EXAMPLE_SINGLE => array('title', 'content', 'excerpt', 'status', 'date', 'comments-count', 'post-type', 'cat-slugs', 'tag-names'),
+            POP_MODULE_EXAMPLE_PAGE => array('title', 'content', 'date'),
+            POP_MODULE_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
         );
         return array_merge(
             parent::getDataFields($module, $props),

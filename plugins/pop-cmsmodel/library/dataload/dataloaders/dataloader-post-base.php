@@ -23,8 +23,8 @@ abstract class Dataloader_PostBase extends \PoP\Engine\QueryDataDataloader
         if ($ids) {
             $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
             $query = array(
-            'include' => $ids,
-            'post_type' => array_keys($cmsapi->getPostTypes()) // From all post types
+                'include' => $ids,
+                'post_type' => array_keys($cmsapi->getPostTypes()) // From all post types
             );
             return $cmsapi->getPosts($query);
         }

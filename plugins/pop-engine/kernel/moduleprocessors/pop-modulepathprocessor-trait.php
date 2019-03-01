@@ -117,7 +117,6 @@ trait ModulePathProcessorTrait
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         $modulefilter_manager = ModuleFilterManager_Factory::getInstance();
         if (!$modulefilter_manager->excludeModule($module, $props)) {
-            
             // Maybe only execute function on the dataloading modules
             if (!$options['only-execute-on-dataloading-modules'] || $this->hasDataloader($module)) {
                 if ($module_ret = $this->$eval_self_fn($module, $props)) {

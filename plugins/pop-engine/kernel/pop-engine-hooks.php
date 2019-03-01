@@ -47,19 +47,16 @@ class Engine_Hooks
     private function addFieldsToVars(&$vars)
     {
         if (isset($_REQUEST[GD_URLPARAM_FIELDS])) {
-
             // The fields param can either be an array or a string
             if (is_array($_REQUEST[GD_URLPARAM_FIELDS])) {
                 $fields = $_REQUEST[GD_URLPARAM_FIELDS];
             } else {
-
                 // If it is a string, split the items with ',', the inner items with '.', and the inner fields with '|'
                 $fields = array();
                 $pointer = &$fields;
 
                 // Split the items by ","
                 foreach (explode(POP_CONSTANT_PARAMVALUE_SEPARATOR, $_REQUEST[GD_URLPARAM_FIELDS]) as $commafields) {
-
                     // For each item, advance to the last level by following the "."
                     $dotfields = explode(POP_CONSTANT_DOTSYNTAX_DOT, $commafields);
                     for ($i = 0; $i < count($dotfields)-1; $i++) {
@@ -84,7 +81,6 @@ class Engine_Hooks
     {
         $vars = Engine_Vars::getVars();
         if ($fields = $vars['fields']) {
-
             // Serialize instead of implode, because $fields can contain $key => $value
             $components[] = __('fields:', 'pop-engine').serialize($fields);
         }
