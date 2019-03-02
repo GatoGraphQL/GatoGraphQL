@@ -7,7 +7,7 @@ class Validation
 {
     public function getProviderValidationClass()
     {
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'PoP_CMSModel_Validation:provider-validation-class',
             null
         );
@@ -19,26 +19,26 @@ class Validation
 
         $provider_validation_class = $this->getProviderValidationClass();
         if (is_null($provider_validation_class)) {
-            add_action('admin_notices', array($this, 'providerinstall_warning'));
-            add_action('network_admin_notices', array($this, 'providerinstall_warning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'providerinstall_warning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'providerinstall_warning'));
             $success = false;
         } elseif (!(new $provider_validation_class())->validate()) {
-            add_action('admin_notices', array($this, 'providerinitialize_warning'));
-            add_action('network_admin_notices', array($this, 'providerinitialize_warning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'providerinitialize_warning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'providerinitialize_warning'));
             $success = false;
         }
         
         if (!defined('POP_ENGINE_VERSION')) {
-            add_action('admin_notices', array($this, 'installWarning'));
-            add_action('network_admin_notices', array($this, 'installWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_ENGINE_INITIALIZED')) {
-            add_action('admin_notices', array($this, 'initializeWarning'));
-            add_action('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POP_CMSMODEL_POP_ENGINE_MIN_VERSION > POP_ENGINE_VERSION) {
-            add_action('admin_notices', array($this, 'versionWarning'));
-            add_action('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         return $success;

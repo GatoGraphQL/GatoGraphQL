@@ -6,3 +6,6 @@ require_once 'cms-functionapi-base.php';
 require_once 'cms-objectpropertyresolver-interface.php';
 require_once 'cms-objectpropertyresolver-factory.php';
 require_once 'cms-objectpropertyresolver-base.php';
+require_once 'hooksapi-interface.php';
+require_once 'hooksapi-factory.php';
+require_once 'hooksapi-base.php';

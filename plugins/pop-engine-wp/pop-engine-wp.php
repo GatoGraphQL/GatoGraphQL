@@ -20,7 +20,7 @@ class PoP_EngineWP
     {
 
         // Priority: after PoP Engine, inner circle
-        add_action('plugins_loaded', array($this, 'init'), 102);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 102);
     }
     public function init()
     {

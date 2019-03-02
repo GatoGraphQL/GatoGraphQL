@@ -63,7 +63,7 @@ abstract class Dataloader
                 );
                 $dbobjectids[] = $id;
 
-                do_action(
+                \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
                     'Dataloader:modifyDataFields',
                     array(&$data_fields),
                     $this

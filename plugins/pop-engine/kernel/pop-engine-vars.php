@@ -11,7 +11,7 @@ class Engine_Vars
         self::$vars = array();
 
         // Allow WP to set the new $query
-        do_action('\PoP\Engine\Engine_Vars:reset');
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine_Vars:reset');
     }
 
     public static function setQuery($query)
@@ -87,14 +87,14 @@ class Engine_Vars
         }
 
         // From the query object we are able to obtain the hierarchy for the current request. Based on the global $wp_query object
-        self::$query = apply_filters(
+        self::$query = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine_Vars:query',
             self::getQueryObject(self::$query)
         );
 
         // The hierarchy is a concept taken from WordPress. It depends on the structure of the URL
         // By default is a page, since everything is a page unless the URL suits a more specialized hierarchy
-        $hierarchy = apply_filters(
+        $hierarchy = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine_Vars:hierarchy',
             self::getHierarchy(self::$query)
         );
@@ -111,7 +111,7 @@ class Engine_Vars
         $tab = strtolower($_REQUEST[GD_URLPARAM_TAB]);
         $action = strtolower($_REQUEST[GD_URLPARAM_ACTION]);
 
-        $outputs = apply_filters(
+        $outputs = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine_Vars:outputs',
             array(
                 GD_URLPARAM_OUTPUT_HTML,
@@ -154,7 +154,7 @@ class Engine_Vars
                 $dataoutputitems = array_map('strtolower', $dataoutputitems);
             }
         }
-        $alldataoutputitems = apply_filters(
+        $alldataoutputitems = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine_Vars:dataoutputitems',
             array(
                 GD_URLPARAM_DATAOUTPUTITEMS_META,
@@ -182,7 +182,7 @@ class Engine_Vars
         // If not target, or invalid, reset it to "main"
         // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
         // (ie initial load) and when target is provided (ie loading pageSection)
-        $targets = apply_filters(
+        $targets = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine_Vars:targets',
             array(
                 POP_TARGET_MAIN,
@@ -247,7 +247,7 @@ class Engine_Vars
         self::calculateAndSetVarsState(true);
 
         // Allow for plug-ins to add their own vars
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\Engine_Vars:addVars',
             array(&self::$vars),
             self::$query
@@ -280,14 +280,14 @@ class Engine_Vars
             self::$vars['global-state'] = array();
             self::setHierarchyInGlobalState();
 
-            do_action(
+            \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
                 '\PoP\Engine\Engine_Vars:calculateAndSetVarsState:reset',
                 array(&self::$vars),
                 self::$query
             );
         }
 
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\Engine_Vars:calculateAndSetVarsState',
             array(&self::$vars),
             self::$query

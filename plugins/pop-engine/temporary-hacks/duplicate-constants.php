@@ -1,7 +1,7 @@
 <?php
 
 // These constants are defined at PoP FrontendEngine level. When this plugin is not enabled, the constants still show up in the JSON. To make it nicer, duplicate them for the time being
-add_action('plugins_loaded', 'popEngineDuplicateConstants', 101);
+\PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', 'popEngineDuplicateConstants', 101);
 function popEngineDuplicateConstants()
 {
     define('GD_CONSTANT_LOADING_MSG', __('Loading', 'pop-coreprocessors'));

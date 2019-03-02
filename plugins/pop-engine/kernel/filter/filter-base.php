@@ -5,8 +5,8 @@ abstract class FilterBase
 {
     public function __construct()
     {
-        global $POP_FILTER_manager;
-        $POP_FILTER_manager->add($this);
+        global $filter_manager;
+        $filter_manager->add($this);
     }
 
     abstract public function getName();

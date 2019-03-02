@@ -61,7 +61,7 @@ abstract class DataQueryBase
     public function getAllowedfields()
     {
         $allowedfields = $this->getNocachefields();
-        return apply_filters('Dataquery:'.$this->getName().':allowedfields', $allowedfields);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':allowedfields', $allowedfields);
     }
     /**
      * What fields are to be rejected
@@ -69,7 +69,7 @@ abstract class DataQueryBase
     public function getRejectedfields()
     {
         $rejectedfields = array();
-        return apply_filters('Dataquery:'.$this->getName().':rejectedfields', $rejectedfields);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':rejectedfields', $rejectedfields);
     }
     /**
      * What layouts can be requested on the outside-looking API to query data. By default: everything that can be lazy
@@ -82,7 +82,7 @@ abstract class DataQueryBase
                 $allowedlayouts[] = $layout;
             }
         }
-        return apply_filters('Dataquery:'.$this->getName().':allowedlayouts', array_unique($allowedlayouts));
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':allowedlayouts', array_unique($allowedlayouts));
     }
     /**
      * Fields whose data must be retrieved each single time from the server. Eg: comment-count, since adding a comment doesn't delete the overall cache,
@@ -90,13 +90,13 @@ abstract class DataQueryBase
      */
     public function getNocachefields()
     {
-        return apply_filters('Dataquery:'.$this->getName().':nocachefields', array());
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':nocachefields', array());
     }
     /**
      * Fields whose data is retrieved on a subsequent call to the server
      */
     public function getLazylayouts()
     {
-        return apply_filters('Dataquery:'.$this->getName().':lazylayouts', array());
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':lazylayouts', array());
     }
 }

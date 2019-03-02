@@ -28,7 +28,7 @@ class FieldProcessor_Users extends \PoP\Engine\FieldProcessorBase
 
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
-                $value = apply_filters('FieldProcessor_Users:getValue:role', array_shift($user_roles), $this->getId($user));
+                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('FieldProcessor_Users:getValue:role', array_shift($user_roles), $this->getId($user));
                 break;
             
             case 'username':

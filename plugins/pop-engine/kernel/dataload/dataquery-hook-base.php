@@ -6,11 +6,11 @@ class DataQuery_HookBase
     public function __construct()
     {
         $name = $this->getDataqueryName();
-        addFilter('Dataquery:'.$name.':allowedfields', array($this, 'addAllowedfields'));
-        addFilter('Dataquery:'.$name.':rejectedfields', array($this, 'addRejectedfields'));
-        addFilter('Dataquery:'.$name.':allowedlayouts', array($this, 'addAllowedlayouts'));
-        addFilter('Dataquery:'.$name.':nocachefields', array($this, 'addNocachefields'));
-        addFilter('Dataquery:'.$name.':lazylayouts', array($this, 'addLazylayouts'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':allowedfields', array($this, 'addAllowedfields'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':rejectedfields', array($this, 'addRejectedfields'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':allowedlayouts', array($this, 'addAllowedlayouts'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':nocachefields', array($this, 'addNocachefields'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':lazylayouts', array($this, 'addLazylayouts'));
     }
     public function getDataqueryName()
     {

@@ -1,7 +1,7 @@
 <?php
 
 // Priority: execute last
-addFilter('template_include', 'popEngineTemplateIncludeJson', PHP_INT_MAX);
+\PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('template_include', 'popEngineTemplateIncludeJson', PHP_INT_MAX);
 function popEngineTemplateIncludeJson($template)
 {
 

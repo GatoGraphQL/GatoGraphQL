@@ -11,5 +11,5 @@ function gdCommentsApplyFilters($comment_content, $embed = false)
         $wp_embed = $GLOBALS['wp_embed'];
         $comment_content = $wp_embed->autoembed($comment_content);
     }
-    return apply_filters('gd_comments_content', $comment_content);
+    return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('gd_comments_content', $comment_content);
 }

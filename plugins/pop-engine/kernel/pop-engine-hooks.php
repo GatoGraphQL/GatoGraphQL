@@ -7,13 +7,13 @@ class Engine_Hooks
     {
 
         // Add functions as hooks, so we allow PoP_Application to set the 'global-state' first
-        add_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             '\PoP\Engine\Engine_Vars:addVars',
             array($this, 'addVars'),
             10,
             1
         );
-        addFilter(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter(
             'ModelInstanceProcessor:model_instance_components_from_vars',
             array($this, 'getModelInstanceComponentsFromVars')
         );

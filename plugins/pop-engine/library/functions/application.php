@@ -2,7 +2,7 @@
 
 function popVersion()
 {
-    return apply_filters('PoP:version', POP_ENGINE_VERSION);
+    return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('PoP:version', POP_ENGINE_VERSION);
 }
 
 function popLoaded()

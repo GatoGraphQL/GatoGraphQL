@@ -22,7 +22,7 @@ trait Dataloader_ListTrait
     {
         
         // Allow to check for PoP_Application_Engine_Utils::loadingLatest():
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'GD_Dataloader_List:query:paged',
             $query_args[GD_URLPARAM_PAGED]
         );
@@ -35,7 +35,7 @@ trait Dataloader_ListTrait
     {
         
         // Allow to check for PoP_Application_Engine_Utils::loadingLatest():
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'GD_Dataloader_List:query:limit',
             $query_args[GD_URLPARAM_LIMIT]
         );
@@ -58,7 +58,7 @@ trait Dataloader_ListTrait
         $query = $this->getQuery($query_args);
 
         // Allow URE to modify the role, limiting selected users and excluding others, like 'subscriber'
-        $query = apply_filters('gd_dataload_query:'.$this->getName(), $query, $data_properties);
+        $query = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('gd_dataload_query:'.$this->getName(), $query, $data_properties);
                 
         // Apply filtering of the data
         $query = $this->filterQuery($query, $data_properties);

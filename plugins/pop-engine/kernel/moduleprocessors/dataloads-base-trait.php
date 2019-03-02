@@ -66,11 +66,10 @@ trait DataloadModuleProcessorBaseTrait
 
     public function metaInitProps($module, &$props)
     {
-
         /**
          * Allow to add more stuff
          */
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\DataloadModuleProcessorBaseTrait:initModelProps',
             array(&$props),
             $module,

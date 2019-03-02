@@ -13,10 +13,10 @@ abstract class FieldProcessor_HookBase
     {
         foreach ($this->getFieldprocessorsToHook() as $fieldprocessor_name) {
             $filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FIELDVALUEFILTER, $fieldprocessor_name);
-            addFilter($filter, array($this, 'hookValue'), $this->getPriority(), 4);
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter($filter, array($this, 'hookValue'), $this->getPriority(), 4);
 
             $filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FIELDDATALOADERFILTER, $fieldprocessor_name);
-            addFilter($filter, array($this, 'hookFieldDefaultDataloader'), $this->getPriority(), 3);
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter($filter, array($this, 'hookFieldDefaultDataloader'), $this->getPriority(), 3);
         }
     }
 

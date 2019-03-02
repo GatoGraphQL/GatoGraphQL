@@ -20,7 +20,7 @@ class ModelInstanceProcessor_Utils
         $components[] = __('version:', 'pop-engine').popVersion();
 
         // Mix the information specific to the module, with that present in $vars
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'ModelInstanceProcessor:model_instance_components',
             array_merge(
                 $components,
@@ -46,7 +46,7 @@ class ModelInstanceProcessor_Utils
                 $page_id = $vars['global-state']['queried-object-id'];
 
                 // Each page may be an independent configuration or not, so allow to configure it through hooks. By default it is true, so it's a conservative approach
-                $component_types = apply_filters(
+                $component_types = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
                     '\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:page',
                     array(
                         POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID,
@@ -98,7 +98,7 @@ class ModelInstanceProcessor_Utils
         }
 
         // Can the configuration change when doing a POST or GET?
-        if (apply_filters('\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:post-or-get-change', false)) {
+        if (\PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:post-or-get-change', false)) {
             $components[] = __('operation:', 'pop-engine').(doingPost() ? 'post' : 'get');
         }
         if ($mangled = $vars['mangled']) {
@@ -108,7 +108,7 @@ class ModelInstanceProcessor_Utils
         }
 
         // Allow for plug-ins to add their own vars. Eg: URE source parameter
-        $components = apply_filters('ModelInstanceProcessor:model_instance_components_from_vars', $components);
+        $components = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('ModelInstanceProcessor:model_instance_components_from_vars', $components);
 
         return $components;
     }
@@ -124,6 +124,6 @@ class ModelInstanceProcessor_Utils
         }
 
         // Allow for plug-ins to add their own categories. Eg: Events
-        return apply_filters('ModelInstanceProcessor:getCategories', $cats, $post_id);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('ModelInstanceProcessor:getCategories', $cats, $post_id);
     }
 }

@@ -26,9 +26,9 @@ class Plugin
         
         // Allow the Theme to override definitions. Eg: POP_METAKEY_PREFIX
         // Priority: new section, after PoP CMS section
-        add_action('plugins_loaded', array($this, 'init'), 100);
-        add_action('plugins_loaded', array($this, 'defineStartupConstants'), PHP_INT_MAX);
-        add_action('PoP:version', array($this, 'version'), 100);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 100);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'defineStartupConstants'), PHP_INT_MAX);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('PoP:version', array($this, 'version'), 100);
     }
     public function version($version)
     {
@@ -41,7 +41,7 @@ class Plugin
             define('POP_ENGINE_INITIALIZED', true);
 
             // Allow plug-ins to override values
-            add_action('plugins_loaded', array($this, 'defineConstants'), 110);
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'defineConstants'), 110);
         }
     }
     public function defineStartupConstants()

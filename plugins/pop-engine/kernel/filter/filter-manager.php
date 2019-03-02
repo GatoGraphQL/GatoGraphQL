@@ -37,9 +37,9 @@ class Filter_Manager
         if (is_object($filter_or_filtername)) {
             $filter = $filter_or_filtername;
         } else {
-            global $POP_FILTER_manager;
+            global $filter_manager;
             $filtername = $filter_or_filtername;
-            $filter = $POP_FILTER_manager->getFilter($filtername);
+            $filter = $filter_manager->getFilter($filtername);
         }
     
         $wildcard_filters = array();
@@ -61,7 +61,7 @@ class Filter_Manager
     {
 
         // Allow $gd_filter to filter the query
-        $query = apply_filters('filterQuery', $query, $data_properties);
+        $query = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('filterQuery', $query, $data_properties);
     
         // Validate currently filtering by this blocks' filter
         $filter_name = $data_properties[GD_DATALOAD_FILTER];
@@ -69,8 +69,8 @@ class Filter_Manager
             return $query;
         }
 
-        global $POP_FILTER_manager;
-        $filter = $POP_FILTER_manager->getFilter($filter_name);
+        global $filter_manager;
+        $filter = $filter_manager->getFilter($filter_name);
         
         // Merge with the filter query filters
         // Using array_merge_recursive on 'meta-query', which can be set in different places (in the filter, eg: when filtering Action category)
@@ -125,7 +125,7 @@ class Filter_Manager
 
         // Allow for date filtering
         $query['suppress_filters'] = false;        // Allow for 'posts_where' filter to be called: http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
-        addFilter('posts_where', array(&$filter, 'filterWhere'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('posts_where', array(&$filter, 'filterWhere'));
 
         return $query;
     }
@@ -134,14 +134,14 @@ class Filter_Manager
     {
 
         // Allow $gd_filter to clear (remove unneeded filters)
-        do_action('clearFilter');
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('clearFilter');
 
         if (!($filter = $this->getFilteringbyFilter())) {
             return;
         }
 
         // Remove the filters
-        removeFilter('posts_where', array(&$filter, 'filterWhere'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->removeFilter('posts_where', array(&$filter, 'filterWhere'));
     }
 
     /**
@@ -163,5 +163,5 @@ class Filter_Manager
 /**
  * Initialization
  */
-global $POP_FILTER_manager;
-$POP_FILTER_manager = new Filter_Manager();
+global $filter_manager;
+$filter_manager = new Filter_Manager();

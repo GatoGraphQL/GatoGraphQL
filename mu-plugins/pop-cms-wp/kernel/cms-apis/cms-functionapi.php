@@ -4,13 +4,51 @@ namespace PoP\CMS\WP;
 class FunctionAPI extends \PoP\CMS\FunctionAPI_Base implements \PoP\CMS\FunctionAPI
 {
 
-    /**
-     * Most functions below are 1 to 1 with WordPress signature
-     */
-    public function getOption($option)
+    public function getOption($option, $default = false)
     {
-        return get_option($option);
+        return get_option($option, $default);
     }
+    public function redirect($url)
+    {
+        wp_redirect($url);
+    }
+
+    public function getSiteName()
+    {
+        return get_bloginfo('name');
+    }
+
+    public function getSiteDescription()
+    {
+        return get_bloginfo('description');
+    }
+
+    public function getAdminUserEmail()
+    {
+        return get_bloginfo('admin_email');
+    }
+
+    public function getVersion()
+    {
+        return get_bloginfo('version');
+    }
+
+    public function getHomeURL()
+    {
+        return home_url();
+    }
+
+    public function getSiteURL()
+    {
+        return get_site_url();
+    }
+
+    public function getErrorClass()
+    {
+        return \WP_Error::class;
+    }
+
+
     public function getPostMeta($post_id, $key = '', $single = false)
     {
         return get_post_meta($post_id, $key, $single);
@@ -59,10 +97,6 @@ class FunctionAPI extends \PoP\CMS\FunctionAPI_Base implements \PoP\CMS\Function
     {
         return add_comment_meta($comment_id, $meta_key, $meta_value, $unique);
     }
-    public function redirect($url)
-    {
-        wp_redirect($url);
-    }
     public function getGlobalQuery()
     {
         global $wp_query;
@@ -95,16 +129,6 @@ class FunctionAPI extends \PoP\CMS\FunctionAPI_Base implements \PoP\CMS\Function
         }
 
         return false;
-    }
-
-    public function getSiteName()
-    {
-        return get_bloginfo('name');
-    }
-
-    public function getErrorClass()
-    {
-        return \WP_Error::class;
     }
 }
 

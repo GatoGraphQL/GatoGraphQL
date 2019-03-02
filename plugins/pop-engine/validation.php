@@ -9,21 +9,21 @@ class Validation
     {
         $success = true;
         if (!defined('POP_CMS_VERSION')) {
-            add_action('admin_notices', array($this, 'installWarning'));
-            add_action('network_admin_notices', array($this, 'installWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_CMS_INITIALIZED')) {
-            add_action('admin_notices', array($this, 'initializeWarning'));
-            add_action('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POP_ENGINE_POP_CMS_MIN_VERSION > POP_CMS_VERSION) {
-            add_action('admin_notices', array($this, 'versionWarning'));
-            add_action('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'versionWarning'));
         }
         // Validate that there is at least one implementation of the CMS
         elseif (is_null(\PoP\CMS\FunctionAPI_Factory::getInstance())) {
-            add_action('admin_notices', array($this, 'cmsimplementationWarning'));
-            add_action('network_admin_notices', array($this, 'cmsimplementationWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'cmsimplementationWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'cmsimplementationWarning'));
             $success = false;
         }
 

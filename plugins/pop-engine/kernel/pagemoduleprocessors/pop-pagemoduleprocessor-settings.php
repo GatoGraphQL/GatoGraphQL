@@ -1,6 +1,6 @@
 <?php
 
-add_action('init', 'popEngineDefinePagemodulegroupContentModule');
+\PoP\CMS\HooksAPI_Factory::getInstance()->addAction('init', 'popEngineDefinePagemodulegroupContentModule');
 function popEngineDefinePagemodulegroupContentModule()
 {
 

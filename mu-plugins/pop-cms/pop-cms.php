@@ -1,41 +1,33 @@
 <?php
 /*
-Plugin Name: PoP WordPress CMS
+Plugin Name: PoP CMS
 Version: 1.0
-Description: Implementation of WordPress functions for PoP CMS
+Description: Abstraction plugin to represent the Content Management Syster over which PoP is installed
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
-namespace PoP\CMS\WP;
+namespace PoP\CMS;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define('POP_CMSWP_VERSION', 0.106);
-define('POP_CMSWP_DIR', dirname(__FILE__));
-define('POP_CMSWP_LIB', POP_CMSWP_DIR.'/library');
+define('POP_CMS_VERSION', 0.107);
+define('POP_CMS_DIR', dirname(__FILE__));
 
-class Plugins
+class Plugin
 {
     public function __construct()
     {
         
-        // Priority: mid-section, after PoP CMS section
-        add_action('plugins_loaded', array($this, 'init'), 50);
+        // Priority: first section, load before anything else
+        // \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 0);
+        $this->init();
     }
     public function init()
     {
-        if ($this->validate()) {
-            $this->initialize();
-            define('POP_CMSWP_INITIALIZED', true);
-        }
-    }
-    public function validate()
-    {
-        include_once 'validation.php';
-        $validation = new Validation();
-        return $validation->validate();
+        $this->initialize();
+        define('POP_CMS_INITIALIZED', true);
     }
     public function initialize()
     {
@@ -49,5 +41,5 @@ class Plugins
  * Initialization
  */
 if (!defined('POP_SERVER_DISABLEPOP') || !POP_SERVER_DISABLEPOP) {
-    new Plugins();
+    new Plugin();
 }

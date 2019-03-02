@@ -12,7 +12,7 @@ class Temporary_Hacks_Installation
             }
 
             // Execute the activate method for plugins which are already activate
-            add_action('init', array($this, 'reactivatePlugins'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('init', array($this, 'reactivatePlugins'));
         }
     }
 
@@ -25,16 +25,17 @@ class Temporary_Hacks_Installation
 
     public function runActivatePlugin($plugin)
     {
-        $current = getOption('active_plugins');
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $current = $cmsapi->getOption('active_plugins');
         $plugin = plugin_basename(trim($plugin));
 
         if (!in_array($plugin, $current)) {
             $current[] = $plugin;
             sort($current);
-            do_action('activate_plugin', trim($plugin));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('activate_plugin', trim($plugin));
             update_option('active_plugins', $current);
-            do_action('activate_' . trim($plugin));
-            do_action('activated_plugin', trim($plugin));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('activate_' . trim($plugin));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('activated_plugin', trim($plugin));
         }
 
         return null;

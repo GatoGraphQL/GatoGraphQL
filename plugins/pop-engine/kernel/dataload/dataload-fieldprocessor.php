@@ -37,7 +37,7 @@ abstract class FieldProcessorBase
         // Also send the fieldprocessor along, as to get the id of the $resultitem being passed
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $error_class = $cmsapi->getErrorClass();
-        return apply_filters($filter, new $error_class('no-field'), $resultitem, $field, $this);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters($filter, new $error_class('no-field'), $resultitem, $field, $this);
     }
     
     abstract public function getName();
@@ -52,6 +52,6 @@ abstract class FieldProcessorBase
 
         // First Check if there's a hook to implement this field
         $filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FIELDDATALOADERFILTER, $fieldprocessor_name);
-        return apply_filters($filter, null, $field, $this);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters($filter, null, $field, $this);
     }
 }

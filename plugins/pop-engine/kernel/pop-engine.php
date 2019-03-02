@@ -58,7 +58,7 @@ class Engine
 
         // ETag is needed for the Service Workers
         // Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
-        if (apply_filters('\PoP\Engine\Engine:outputData:addEtagHeader', true)) {
+        if (\PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Engine:outputData:addEtagHeader', true)) {
             // The same page will have different hashs only because of those random elements added each time,
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
@@ -83,7 +83,7 @@ class Engine
             }
 
             // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
-            $commoncode = apply_filters('\PoP\Engine\Engine:etag_header:commoncode', $commoncode);
+            $commoncode = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Engine:etag_header:commoncode', $commoncode);
 
             header("ETag: ".wp_hash($commoncode));
         }
@@ -104,7 +104,7 @@ class Engine
         }
 
         // Enable to add extra URLs in a fixed manner
-        $this->extra_uris = apply_filters(
+        $this->extra_uris = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine:getExtraUris',
             $this->extra_uris
         );
@@ -124,7 +124,7 @@ class Engine
 
     public function generateData()
     {
-        do_action('\PoP\Engine\Engine:beginning');
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:beginning');
 
         // Process the request and obtain the results
         $this->data = $this->helperCalculations = array();
@@ -147,7 +147,7 @@ class Engine
                 Engine_Vars::reset();
 
                 // Allow functionalities to be reset too. Eg: ActionExecuterBase results
-                do_action('\PoP\Engine\Engine:generateData:reset');
+                \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:generateData:reset');
                 
                 // Process the request with the new $vars and merge it with all other results
                 // Can't use array_merge_recursive since it creates arrays when the key is the same, which is not what is expected in this case
@@ -198,15 +198,15 @@ class Engine
     // function triggerOutputHooks() {
         
     //     // Allow extra functionalities. Eg: Save the logged-in user meta information
-    //     do_action('\PoP\Engine\Engine:output:end');
-    //     do_action('\PoP\Engine\Engine:rendered');
+    //     \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:output:end');
+    //     \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:rendered');
     // }
 
     // function triggerOutputdataHooks() {
         
     //     // Allow extra functionalities. Eg: Save the logged-in user meta information
-    //     do_action('\PoP\Engine\Engine:outputData:end');
-    //     do_action('\PoP\Engine\Engine:rendered');
+    //     \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:outputData:end');
+    //     \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:rendered');
     // }
 
     // function output() {
@@ -365,7 +365,7 @@ class Engine
         }
 
         // Allow for extra operations (eg: calculate resources)
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\Engine:helperCalculations',
             array(&$this->helperCalculations),
             $module,
@@ -698,7 +698,7 @@ class Engine
 
     // function getRequestSettings($module, $props) {
 
-    //     return apply_filters(
+    //     return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
     //         '\PoP\Engine\Engine:request-settings',
     //         array()
     //     );
@@ -745,7 +745,7 @@ class Engine
             }
         }
 
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine:request-meta',
             $meta
         );
@@ -753,7 +753,7 @@ class Engine
 
     public function getSessionMeta()
     {
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine:session-meta',
             array()
         );
@@ -764,9 +764,10 @@ class Engine
         $meta = array();
         if (Utils::fetchingSite()) {
             $vars = Engine_Vars::getVars();
+            $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
 
-            // $meta['domain'] = getSiteUrl();
-            $meta['sitename'] = getBloginfo('name');
+            // $meta['domain'] = $cmsapi->getSiteURL();
+            $meta['sitename'] = $cmsapi->getSiteName();
 
             $meta[GD_DATALOAD_PARAMS] = array();
 
@@ -794,7 +795,7 @@ class Engine
                 $meta['cachedsettings'] = $this->cachedsettings;
             };
         }
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine:site-meta',
             $meta
         );
@@ -1009,7 +1010,7 @@ class Engine
         $this->ids_data_fields = array();
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\Engine:getModuleData:start',
             $root_module,
             array(&$root_model_props),
@@ -1278,7 +1279,7 @@ class Engine
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
-            do_action(
+            \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
                 '\PoP\Engine\Engine:getModuleData:dataloading-module',
                 $module,
                 array(&$module_props),
@@ -1365,7 +1366,7 @@ class Engine
         }
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\Engine:getModuleData:end',
             $root_module,
             array(&$root_model_props),
@@ -1381,6 +1382,7 @@ class Engine
     {
         $dataloader_manager = Dataloader_Manager_Factory::getInstance();
         $dataquery_manager = DataQuery_Manager_Factory::getInstance();
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         
         $vars = Engine_Vars::getVars();
         $dboutputmode = $vars['dboutputmode'];
@@ -1495,7 +1497,7 @@ class Engine
                 if ($forceserverload['ids']) {
                     $forceserverload['fields'] = array_unique($forceserverload['fields']);
 
-                    $url = getPermalink($dataquery->getNoncacheablePage());
+                    $url = $cmsapi->getPermalink($dataquery->getNoncacheablePage());
                     $url = add_query_arg($objectid_fieldname, $forceserverload['ids'], $url);
                     $url = add_query_arg(GD_URLPARAM_FIELDS, $forceserverload['fields'], $url);
                     $url = add_query_arg(GD_URLPARAM_FORMAT, POP_FORMAT_FIELDS, $url);
@@ -1510,7 +1512,7 @@ class Engine
                 if ($lazyload['ids']) {
                     $lazyload['layouts'] = array_unique($lazyload['layouts']);
 
-                    $url = getPermalink($dataquery->getCacheablePage());
+                    $url = $cmsapi->getPermalink($dataquery->getCacheablePage());
                     $url = add_query_arg($objectid_fieldname, $lazyload['ids'], $url);
                     $url = add_query_arg(GD_URLPARAM_LAYOUTS, $lazyload['layouts'], $url);
                     $url = add_query_arg(GD_URLPARAM_FORMAT, POP_FORMAT_LAYOUTS, $url);

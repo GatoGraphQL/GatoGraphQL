@@ -22,8 +22,8 @@ class Plugin
     {
         
         // Priority: new section, after PoP Engine section
-        add_action('plugins_loaded', array($this, 'init'), 200);
-        add_action('PoP:version', array($this, 'version'), 200);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 200);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('PoP:version', array($this, 'version'), 200);
     }
     public function version($version)
     {

@@ -94,7 +94,7 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
                 break;
 
             case 'title':
-                $value = apply_filters('the_title', $cmsresolver->getPostTitle($post), $this->getId($post));
+                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_title', $cmsresolver->getPostTitle($post), $this->getId($post));
                 break;
 
             case 'title-edit':
@@ -107,14 +107,14 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
             
             case 'content':
                 $value = $cmsresolver->getPostContent($post);
-                $value = apply_filters('pop_content_pre', $value, $this->getId($post));
-                $value = apply_filters('the_content', $value);
-                $value = apply_filters('pop_content', $value, $this->getId($post));
+                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_content_pre', $value, $this->getId($post));
+                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_content', $value);
+                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_content', $value, $this->getId($post));
                 break;
 
             case 'content-editor':
                 if (current_user_can('edit_post', $this->getId($post))) {
-                    $value = apply_filters('the_editor_content', $cmsresolver->getPostContent($post));
+                    $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_editor_content', $cmsresolver->getPostContent($post));
                 } else {
                     $value = '';
                 }

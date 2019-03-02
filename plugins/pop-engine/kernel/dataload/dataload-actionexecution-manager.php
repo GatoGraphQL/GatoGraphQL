@@ -11,7 +11,7 @@ class ActionExecution_Manager
         ActionExecution_Manager_Factory::setInstance($this);
         $this->executioners = $this->results = array();
 
-        add_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             '\PoP\Engine\Engine:generateData:reset',
             array($this, 'reset')
         );

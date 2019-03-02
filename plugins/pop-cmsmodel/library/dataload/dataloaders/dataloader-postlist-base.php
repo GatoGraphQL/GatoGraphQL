@@ -15,7 +15,8 @@ abstract class Dataloader_PostListBase extends Dataloader_PostBase
         $query['post_status'] = 'any'; // Post status can also be 'pending', so don't limit it here, just select by ID
 
         // Allow absolutely any post type, including events and highlights
-        $query['post_type'] = array_keys(getPostTypes());
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $query['post_type'] = array_keys($cmsapi->getPostTypes());
         
         return $query;
     }
@@ -46,7 +47,7 @@ abstract class Dataloader_PostListBase extends Dataloader_PostBase
     {
         
         // Allow to check for PoP_Application_Engine_Utils::loadingLatest():
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'Dataloader_PostListBase:query:limit',
             $this->getMetaLimitParam($query_args)
         );
@@ -116,7 +117,7 @@ abstract class Dataloader_PostListBase extends Dataloader_PostBase
         $query['suppress_filters'] = false;
 
         // Allow to add the timestamp for loadingLatest
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'Dataloader_PostListBase:query',
             $query,
             $query_args

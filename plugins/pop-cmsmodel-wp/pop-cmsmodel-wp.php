@@ -21,13 +21,13 @@ class Plugin
     public function __construct()
     {
         include_once 'validation.php';
-        addFilter(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter(
             'PoP_CMSModel_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
         
         // Priority: mid section, after PoP CMS Model section
-        add_action('plugins_loaded', array($this, 'init'), 250);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 250);
     }
     public function getProviderValidationClass($class)
     {

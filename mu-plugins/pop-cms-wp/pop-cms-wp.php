@@ -1,39 +1,35 @@
 <?php
 /*
-Plugin Name: PoP CMS Model
+Plugin Name: PoP WordPress CMS
 Version: 1.0
-Description: The foundation for a PoP CMS Model
+Description: Implementation of WordPress functions for PoP CMS
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
 */
-namespace PoP\CMSModel;
+namespace PoP\CMS\WP;
 
 //-------------------------------------------------------------------------------------
 // Constants Definition
 //-------------------------------------------------------------------------------------
-define('POP_CMSMODEL_VERSION', 0.106);
-define('POP_CMSMODEL_DIR', dirname(__FILE__));
-define('POP_CMSMODEL_LIB', POP_CMSMODEL_DIR.'/library');
+define('POP_CMSWP_VERSION', 0.106);
+define('POP_CMSWP_DIR', dirname(__FILE__));
+define('POP_CMSWP_LIB', POP_CMSWP_DIR.'/library');
 
 class Plugins
 {
     public function __construct()
     {
         
-        // Priority: new section, after PoP Engine section
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 200);
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('PoP:version', array($this, 'version'), 200);
-    }
-    public function version($version)
-    {
-        return POP_CMSMODEL_VERSION;
+        // Priority: mid-section, after PoP CMS section
+        // \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 50);
+        $this->init();
     }
     public function init()
     {
         if ($this->validate()) {
             $this->initialize();
-            define('POP_CMSMODEL_INITIALIZED', true);
+            define('POP_CMSWP_INITIALIZED', true);
         }
     }
     public function validate()

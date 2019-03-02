@@ -5,19 +5,19 @@ class EngineHooks
 {
     public function __construct()
     {
-        add_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             '\PoP\Engine\Engine:getModuleData:start',
             array($this, 'start'),
             10,
             4
         );
-        add_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             '\PoP\Engine\Engine:getModuleData:dataloading-module',
             array($this, 'calculateDataloadingModuleData'),
             10,
             8
         );
-        add_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             '\PoP\Engine\Engine:getModuleData:end',
             array($this, 'end'),
             10,

@@ -10,16 +10,16 @@ class Validation
         $success = true;
 
         if (!defined('POP_CMSMODEL_VERSION')) {
-            add_action('admin_notices', array($this, 'installWarning'));
-            add_action('network_admin_notices', array($this, 'installWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
             $success = false;
         } elseif (!defined('POP_CMSMODEL_INITIALIZED')) {
-            add_action('admin_notices', array($this, 'initializeWarning'));
-            add_action('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'initializeWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'initializeWarning'));
             $success = false;
         } elseif (POP_EXAMPLEMODULES_POP_CMSMODEL_MIN_VERSION > POP_CMSMODEL_VERSION) {
-            add_action('admin_notices', array($this, 'versionWarning'));
-            add_action('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('admin_notices', array($this, 'versionWarning'));
+            \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('network_admin_notices', array($this, 'versionWarning'));
         }
 
         return $success;

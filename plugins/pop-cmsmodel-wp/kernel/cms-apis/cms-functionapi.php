@@ -67,11 +67,11 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     {
         return get_user_by($field, $value);
     }
-    public function getUsers($query)
+    public function getUsers($args = array())
     {
-        return get_users($query);
+        return get_users($args);
     }
-    public function getTheAuthorMeta($field = '', $user_id = false)
+    public function getTheAuthorMeta($field, $user_id)
     {
         return get_the_author_meta($field, $user_id);
     }
@@ -147,15 +147,11 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     {
         return get_the_title($post);
     }
-    public function getBloginfo($show = '', $filter = 'raw')
-    {
-        return get_bloginfo($show, $filter);
-    }
     public function getSinglePostTitle($post)
     {
 
         // Copied from `single_post_title` in wp-includes/general-template.php
-        return apply_filters('single_post_title', $post->post_title, $post);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('single_post_title', $post->post_title, $post);
     }
     public function getSearchQuery($escaped = true)
     {
@@ -165,21 +161,17 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     {
 
         // Copied from `single_term_title` in wp-includes/general-template.php
-        return apply_filters('single_cat_title', $cat->name);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('single_cat_title', $cat->name);
     }
     public function getTagTitle($tag)
     {
 
         // Copied from `single_term_title` in wp-includes/general-template.php
-        return apply_filters('single_tag_title', $tag->name);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('single_tag_title', $tag->name);
     }
     public function getQueryVar($var, $default = '')
     {
         return get_query_var($var, $default);
-    }
-    public function homeUrl($path = '', $scheme = null)
-    {
-        return home_url($path, $scheme);
     }
     public function getTerms($args = array())
     {
@@ -236,6 +228,18 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     {
         global $allowedposttags;
         return $allowedposttags;
+    }
+
+    public function getCategoryName($cat_id)
+    {
+        return get_cat_name($cat_id);
+    }
+
+    public function getPostSlug($post_id)
+    {
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $post = $cmsapi->getPost($post_id);
+        return $post->post_name;
     }
 }
 

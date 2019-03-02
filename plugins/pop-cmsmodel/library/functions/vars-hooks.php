@@ -1,6 +1,6 @@
 <?php
 
-addFilter('ModelInstanceProcessor:model_instance_components_from_vars', 'popCmsmodelModuleInstanceComponents');
+\PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('ModelInstanceProcessor:model_instance_components_from_vars', 'popCmsmodelModuleInstanceComponents');
 function popCmsmodelModuleInstanceComponents($components)
 {
     $vars = \PoP\Engine\Engine_Vars::getVars();
@@ -13,7 +13,7 @@ function popCmsmodelModuleInstanceComponents($components)
             $author = $vars['global-state']['queried-object-id'];
 
             // Author: it may depend on its role
-            $component_types = apply_filters(
+            $component_types = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
                 '\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:author',
                 array(
                     POP_MODELINSTANCECOMPONENTTYPE_AUTHOR_ROLE,
@@ -31,7 +31,7 @@ function popCmsmodelModuleInstanceComponents($components)
             // Post and Event may be different
             // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
             // By default, we check for post type but not for categories
-            $component_types = apply_filters(
+            $component_types = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
                 '\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                 array(
                     POP_MODELINSTANCECOMPONENTTYPE_SINGLE_POSTTYPE,

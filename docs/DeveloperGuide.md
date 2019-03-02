@@ -1305,14 +1305,14 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
         break;
 
       case 'title' :
-        $value = apply_filters('the_title', $cmsresolver->getPostTitle($post), $this->getId($post));
+        $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_title', $cmsresolver->getPostTitle($post), $this->getId($post));
         break;
       
       case 'content' :
         $value = $cmsresolver->getPostContent($post);
-        $value = apply_filters('pop_content_pre', $value, $this->getId($post));
-        $value = apply_filters('the_content', $value);
-        $value = apply_filters('pop_content', $value, $this->getId($post));
+        $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_content_pre', $value, $this->getId($post));
+        $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_content', $value);
+        $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_content', $value, $this->getId($post));
         break;
     
       case 'url' :
@@ -2027,9 +2027,7 @@ Being first built as a WordPress website, PoP has taken several concepts from th
 
 - The hierarchy model (home, single, author, page, 404 and tag, and category to be added in the future)
 - Pages, Posts and Custom Post Types
-- Hooks: actions and filters
 - Meta (post meta, user meta, comment meta and tag meta)
-- Plugins for extending functionality
 
 ## Technology Stack
 
@@ -2055,9 +2053,7 @@ Currently, PoP's code adopts several concepts from WordPress, namely:
 
 1. Hierarchy
 2. Pages, Posts and Custom Post Types
-3. Hooks
-4. Meta
-5. Plugins
+3. Meta
 
 Let's analyze, for each of these items, how they can be made CMS-agnostic.
 
@@ -2081,21 +2077,13 @@ PoP is based on the entity model introduced in WordPress, based on the concept o
 
 Hence, PoP can be considered a progressive enhancement, in which WordPress unlocks all the features and capabilities, and other CMSs may have restricted features and capabilities but without breaking.
 
-**3. Hooks**
-
-PoP uses [hooks](https://codex.wordpress.org/Plugin_API) everywhere, through both functions `do_action` and `apply_filters`, allowing any piece of code to be overridable by any 3rd party, or be injected extra functionality.
-
-The code for these 2 functions can be copied from WordPress into PoP so they will always work, on any CMS. [This task must still be done](https://github.com/leoloso/PoP/issues/79).
-
-An issue for the other CMSs is to execute each appropriate hook whenever it is expected by PoP. For instance, PoP uses hook "plugins_loaded" to initialize plugins, and hook "init" when the system is ready. These 2 hooks, and possibly several others, must also be executed at the corresponding stages in the other CMSs. The names themselves ("plugins_loaded", "init", etc) can be abstracted through functions in the interface, if it is not desired to follow the naming by WordPress.
-
-**4. Meta**
+**3. Meta**
 
 Many functionalities depend on post/user/comment/tag meta data (for instance, Recommending a post, Following a user, and many others). CMSs supporting meta for these entities will have no issues, but those which do not may not be able to access these functionalities, as in the progressive enhancement situation described above.
 
-**5. Plugins**
+### Hooks
 
-The codebase is split into plugins, similar to WordPress. Other CMSs will have their own way to install new functionalities, which may or may not work like plugins, so they will need to wrap the plugin-provided code into their own required packaging and activate it using their own methodology.
+A legacy functionality from WordPress is its [hooks](https://codex.wordpress.org/Plugin_API). PoP uses hooks everywhere, through both functions `doAction` and `applyFilters` as defined through interface `HooksAPI`, allowing any piece of code to be overridable by any 3rd party, or be injected extra functionality. For WordPress, the implementation of the interface is trivial. Other systems can rely on packages to implement this functionality (eg: [this one](https://github.com/tormjens/eventy) or [this one](https://github.com/voku/php-hooks)).
 
 ### Handlebars
 

@@ -195,7 +195,7 @@ abstract class ModuleProcessorBase
         /**
          * Allow to add more stuff
          */
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\ModuleProcessorBase:initModelProps',
             array(&$props),
             $module,
@@ -224,7 +224,7 @@ abstract class ModuleProcessorBase
         /**
          * Allow to add more stuff
          */
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\ModuleProcessorBase:initRequestProps',
             array(&$props),
             $module,
@@ -786,7 +786,7 @@ abstract class ModuleProcessorBase
         /**
          * Allow to add more stuff
          */
-        do_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\ModuleProcessorBase:addHeaddatasetmoduleDataProperties',
             array(&$ret),
             $module,
@@ -979,7 +979,7 @@ abstract class ModuleProcessorBase
     {
 
         // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return apply_filters(
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'ModuleProcessor:checkpoints',
             $checkpoints
         );
@@ -1098,7 +1098,8 @@ abstract class ModuleProcessorBase
     public function queriesExternalDomain($module, $props)
     {
         if ($sources = $this->getDataloadMultidomainSources($module, $props)) {
-            $domain = getSiteUrl();
+            $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+            $domain = $cmsapi->getSiteURL();
             foreach ($sources as $source) {
                 if (substr($source, 0, strlen($domain)) != $domain) {
                     return true;

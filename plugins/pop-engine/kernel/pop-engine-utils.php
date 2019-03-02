@@ -13,12 +13,12 @@ class Utils
         $domain_id = str_replace('.', '-', removeScheme($domain));
 
         // Allow to override the domainId, to unify DEV and PROD domains
-        return apply_filters('pop_modulemanager:domain_id', $domain_id, $domain);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_modulemanager:domain_id', $domain_id, $domain);
     }
 
     public static function isSearchEngine()
     {
-        return apply_filters('\PoP\Engine\Utils:isSearchEngine', false);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Utils:isSearchEngine', false);
     }
 
     // // public static function getCheckpointConfiguration($page_id = null) {
@@ -39,7 +39,7 @@ class Utils
     //     $mandatory = in_array($checkpoint_configuration['type'], $dynamic_types);
 
     //     // Allow to add 'requires-user-state' by PoP UserState dependency
-    //     return apply_filters(
+    //     return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
     //         '\PoP\Engine\Utils:isServerAccessMandatory',
     //         $mandatory,
     //         $checkpoint_configuration
@@ -57,7 +57,8 @@ class Utils
     {
 
         // Cut results if more than 4 times the established limit. This is to protect from hackers adding all post ids.
-        $limit = 4 * getOption('posts_per_page');
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $limit = 4 * $cmsapi->getOption('posts_per_page');
         if (count($results) > $limit) {
             array_splice($results, $limit);
         }
@@ -69,7 +70,7 @@ class Utils
     {
 
         // Strip the Target and Output off it, users don't need to see those
-        $remove_params = apply_filters(
+        $remove_params = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Utils:current_url:remove_params',
             array(
                 GD_URLPARAM_SETTINGSFORMAT,
@@ -93,14 +94,14 @@ class Utils
         $url = remove_query_arg($remove_params, fullUrl());
 
         // Allow plug-ins to do their own logic to the URL
-        $url = apply_filters('\PoP\Engine\Utils:getCurrentUrl', $url);
+        $url = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Utils:getCurrentUrl', $url);
 
         return urldecode($url);
     }
 
     public static function getFramecomponentModules()
     {
-        return apply_filters('\PoP\Engine\Utils:getFramecomponentModules', array());
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Utils:getFramecomponentModules', array());
     }
 
     public static function addTab($url, $page_id)
@@ -112,12 +113,12 @@ class Utils
     public static function getPagePath($page_id)
     {
 
-        // Generate the page path. Eg: http://mesym.com/events/past/ will render events/past
-        $permalink = getPermalink($page_id);
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
 
-        // Comment Leo 22/05/2015: Use homeUrl instead of getSiteUrl so that it includes the language when using qTranslate X (eg: https://www.mesym.com/ms/)
-        // $domain = trailingslashit(getSiteUrl());
-        $domain = homeUrl();
+        // Generate the page path. Eg: http://mesym.com/events/past/ will render events/past
+        $permalink = $cmsapi->getPermalink($page_id);
+
+        $domain = $cmsapi->getHomeURL();
 
         // Remove the domain from the permalink => page path
         $page_path = substr($permalink, strlen($domain));
@@ -131,58 +132,15 @@ class Utils
     public static function getPageUri($page_id)
     {
 
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         // Generate the page URI. Eg: http://mesym.com/en/events/past/ will render /en/events/past/
-        $permalink = getPermalink($page_id);
-        $domain = getSiteUrl();
+        $permalink = $cmsapi->getPermalink($page_id);
+        $domain = $cmsapi->getSiteURL();
 
         // Remove the domain from the permalink => page path
         $page_uri = substr($permalink, strlen($domain));
 
         return $page_uri;
-    }
-
-    public static function getPostPath($post_id, $remove_post_slug = false)
-    {
-
-        // Generate the post path. If the post is published, just use permalink. If not, we can't, or it will get the URL to edit the post,
-        // and not the URL the post will be published to, which is what is needed by the ResourceLoader
-        if (getPostType($post_id) == 'publish') {
-            $permalink = getPermalink($post_id);
-            $post_name = getSlug($post_id);
-        } else {
-            // Function get_sample_permalink comes from the file below, so it must be included
-            // Code below copied from `function get_sample_permalink_html`
-            include_once ABSPATH.'wp-admin/includes/post.php';
-            list($permalink, $post_name) = get_sample_permalink($post_id, null, null);
-            $permalink = str_replace(array( '%pagename%', '%postname%' ), $post_name, $permalink);
-        }
-
-        $domain = trailingslashit(homeUrl());
-
-        // Remove the domain from the permalink => page path
-        $post_path = substr($permalink, strlen($domain));
-
-        // Remove the post slug
-        if ($remove_post_slug) {
-            $post_path = substr($post_path, 0, strlen($post_path) - strlen(trailingslashit($post_name)));
-        }
-
-        return $post_path;
-    }
-
-    public static function getCategoryPath($category_id, $taxonomy = 'category')
-    {
-
-        // Convert it to int, otherwise it thinks it's a string and the method below fails
-        $category_path = get_term_link((int) $category_id, $taxonomy);
-
-        // Remove the initial part ("https://www.mesym.com/en/categories/")
-        global $wp_rewrite;
-        $termlink = $wp_rewrite->get_extra_permastruct($taxonomy);
-        $termlink = str_replace("%$taxonomy%", '', $termlink);
-        $termlink = homeUrl(user_trailingslashit($termlink, $taxonomy));
-
-        return substr($category_path, strlen($termlink));
     }
 
     public static function getTab($page_id)

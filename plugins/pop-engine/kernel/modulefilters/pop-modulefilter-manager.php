@@ -19,7 +19,7 @@ class ModuleFilterManager
         ModuleFilterManager_Factory::setInstance($this);
 
         $this->filters = array();
-        add_action('init', array($this, 'init'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('init', array($this, 'init'));
     }
 
     public function getSelectedFilterName()

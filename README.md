@@ -362,17 +362,15 @@ These 2 sites are proper, established social networks:
 
 ## Installation
 
-Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then copy the contents of folders `/mu-plugins` and `/plugins` under `/wp-content/mu-plugins` and `/wp-content/plugins` respectively, and activate the 7 plugins from this repository:
+Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then copy the contents of folders `/mu-plugins` and `/plugins` under `/wp-content/mu-plugins` and `/wp-content/plugins` respectively, and activate the 5 plugins from this repository:
 
-- pop-cms
-- pop-cms-wp
 - pop-cmsmodel
 - pop-cmsmodel-wp
 - pop-engine
 - pop-engine-wp
 - pop-examplemodules
 
-The first 6 plugins are needed to produce the PoP API, and the 7th plugin (pop-examplemodules) provides basic implementations of modules for all supported hierarchies (home, author, single, tag, page and 404). 
+The first 4 plugins are needed to produce the PoP API, and the 5th plugin (pop-examplemodules) provides basic implementations of modules for all supported hierarchies (home, author, single, tag, page and 404). 
 
 > Note: this way to install PoP is temporary. We are currently introducing Composer to the codebase, which will provide a more convenient way to install PoP. It should be ready sometime in March 2019.
 

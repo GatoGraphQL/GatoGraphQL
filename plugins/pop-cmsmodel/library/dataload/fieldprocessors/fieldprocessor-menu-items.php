@@ -24,7 +24,7 @@ class FieldProcessor_Menu_Items extends \PoP\Engine\FieldProcessorBase
         $menu_item = $resultitem;
         switch ($field) {
             case 'title':
-                $value = apply_filters('the_title', $cmsresolver->getMenuItemTitle($menu_item), $cmsresolver->getMenuItemObjectId($menu_item));
+                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_title', $cmsresolver->getMenuItemTitle($menu_item), $cmsresolver->getMenuItemObjectId($menu_item));
                 break;
 
             case 'alt':
@@ -45,7 +45,7 @@ class FieldProcessor_Menu_Items extends \PoP\Engine\FieldProcessorBase
                     $classes[] = 'menu-item-parent';
                     $classes[] = 'menu-item-parent-' . $parent;
                 }
-                $value = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $menu_item, array()));
+                $value = join(' ', \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('nav_menu_css_class', array_filter($classes), $menu_item, array()));
                 break;
             
             case 'target':

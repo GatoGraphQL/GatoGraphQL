@@ -34,5 +34,5 @@ function getTheUserRole($user_id)
     $roles = getUserRoles($user_id);
 
     // Allow URE to override this function
-    return apply_filters('getTheUserRole', $roles[0], $user_id);
+    return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('getTheUserRole', $roles[0], $user_id);
 }

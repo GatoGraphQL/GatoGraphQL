@@ -45,7 +45,7 @@ function doingPost()
 function doingAjax()
 {
     $doingAjax = defined('DOING_AJAX') && DOING_AJAX;
-    return apply_filters('gd_doing_ajax', $doingAjax);
+    return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('gd_doing_ajax', $doingAjax);
 }
 
 function multiexplode($delimiters, $string)

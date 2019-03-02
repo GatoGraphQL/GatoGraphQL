@@ -8,7 +8,7 @@ class CacheManager extends CacheManagerBase
         parent::__construct();
         
         CacheManager_Factory::setInstance($this);
-        add_action('init', array($this, 'init'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('init', array($this, 'init'));
     }
 
     public function init()

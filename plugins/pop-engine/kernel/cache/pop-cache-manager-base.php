@@ -8,11 +8,11 @@ class CacheManagerBase
 
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
-        add_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             'activate_plugin',
             array($this, 'deleteCache')
         );
-        add_action(
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             'deactivate_plugin',
             array($this, 'deleteCache')
         );

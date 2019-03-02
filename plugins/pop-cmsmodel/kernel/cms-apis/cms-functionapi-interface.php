@@ -22,8 +22,8 @@ interface FunctionAPI extends \PoP\CMS\FunctionAPI
     public function addRole($role, $display_name, $capabilities = array());
     public function getTags($query);
     public function getUserBy($field, $value);
-    public function getUsers($query);
-    public function getTheAuthorMeta($field = '', $user_id = false);
+    public function getUsers($args = array());
+    public function getTheAuthorMeta($field, $user_id);
     public function getAuthorPostsUrl($user_id);
     public function wpGetNavMenuItems($menu);
     public function getPostType($post);
@@ -42,13 +42,11 @@ interface FunctionAPI extends \PoP\CMS\FunctionAPI
     public function getTagLink($tag_id);
     public function getPostMimeType($post_thumb_id);
     public function getTheTitle($post = 0);
-    public function getBloginfo($show = '', $filter = 'raw');
     public function getSinglePostTitle($post);
     public function getSearchQuery($escaped = true);
     public function getCatTitle($cat);
     public function getTagTitle($tag);
     public function getQueryVar($var, $default = '');
-    public function homeUrl($path = '', $scheme = null);
     public function getTerms($args = array());
     public function getQueryFromRequestUri();
     public function isUserLoggedIn();
@@ -59,4 +57,6 @@ interface FunctionAPI extends \PoP\CMS\FunctionAPI
     public function logout();
     public function insertComment($comment_data);
     public function getAllowedPostTags();
+    public function getCategoryName($cat_id);
+    public function getPostSlug($post_id);
 }

@@ -53,7 +53,7 @@ trait QueryDataModuleProcessorTrait
         if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
-            $whitelisted_params = apply_filters(
+            $whitelisted_params = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
                 'QueryDataModuleProcessorTrait:request:whitelisted_params',
                 array(
                     GD_URLPARAM_REDIRECTTO,

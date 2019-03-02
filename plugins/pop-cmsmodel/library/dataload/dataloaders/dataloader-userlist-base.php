@@ -28,7 +28,7 @@ abstract class Dataloader_UserListBase extends Dataloader_UserBase
         $query = $this->getMetaQuery($query_args);
 
         // Get the role either from a provided attr, and allow PoP User Platform to set the default role
-        if ($role = apply_filters(
+        if ($role = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'Dataloader_UserListBase:query:role',
             $query_args['role']
         )

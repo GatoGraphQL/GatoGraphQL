@@ -26,7 +26,7 @@ class DataQuery_Manager
 
         // Choose if to reject fields, starting from all of them...
         // By default, if API is enabled, then use this method
-        if (apply_filters('DataQuery_Manager:filter_by_rejection', Server\Utils::enableApi())) {
+        if (\PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('DataQuery_Manager:filter_by_rejection', Server\Utils::enableApi())) {
             return array_values(
                 array_diff(
                     $fields,
@@ -49,7 +49,7 @@ class DataQuery_Manager
     {
 
         // // If allow to return all layouts, then no need to filter them
-        // if (apply_filters('DataQuery_Manager:allow_all_layouts', false)) {
+        // if (\PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('DataQuery_Manager:allow_all_layouts', false)) {
 
         //     return $layouts;
         // }
