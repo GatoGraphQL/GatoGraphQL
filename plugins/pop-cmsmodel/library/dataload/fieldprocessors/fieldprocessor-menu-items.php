@@ -15,7 +15,7 @@ class FieldProcessor_Menu_Items extends \PoP\Engine\FieldProcessorBase
 
         // First Check if there's a hook to implement this field
         $hookValue = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_MENU_ITEMS, $resultitem, $field);
-        if (!is_wp_error($hookValue)) {
+        if (!\PoP\Engine\GeneralUtils::isError($hookValue)) {
             return $hookValue;
         }
     
@@ -24,7 +24,8 @@ class FieldProcessor_Menu_Items extends \PoP\Engine\FieldProcessorBase
         $menu_item = $resultitem;
         switch ($field) {
             case 'title':
-                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_title', $cmsresolver->getMenuItemTitle($menu_item), $cmsresolver->getMenuItemObjectId($menu_item));
+                // $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('popcms:title', $cmsresolver->getMenuItemTitle($menu_item), $cmsresolver->getMenuItemObjectId($menu_item));
+                $value = $cmsapi->getMenuItemTitle($menu_item);
                 break;
 
             case 'alt':

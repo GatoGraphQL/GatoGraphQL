@@ -27,7 +27,7 @@ const GD_URLPARAM_BACKGROUNDLOADURLS = 'backgroundloadurls';
 const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
 
 // Used for the Comments to know what post to fetch comments from when filtering
-const GD_URLPARAM_POSTID = 'post_id';
+const GD_URLPARAM_COMMENTPOSTID = 'commentpid';
 
 // Used to print "active" in the menu navigation
 // const GD_URLPARAM_PARENTPAGEID = 'parentpage_id';
@@ -40,7 +40,7 @@ const GD_URLPARAM_REDIRECTTO = 'redirect_to';
 
 // Paged param: It is 'pagenum' and not 'paged', because if so WP does a redirect to re-adjust the URL
 // From https://www.mesym.com/action?paged=2 it redirects to https://www.mesym.com/action/paged/2/
-const GD_URLPARAM_PAGED = 'pagenum';
+const GD_URLPARAM_PAGENUMBER = 'pagenum';
 const GD_URLPARAM_LIMIT = 'limit';
 
 const GD_URLPARAM_MODULEFILTER = 'modulefilter';

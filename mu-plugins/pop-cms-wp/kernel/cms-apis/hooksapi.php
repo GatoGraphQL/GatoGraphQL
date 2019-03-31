@@ -1,7 +1,7 @@
 <?php
 namespace PoP\CMS\WP;
 
-class HooksAPI extends \PoP\CMS\HooksAPI_Base implements \PoP\CMS\HooksAPI
+class HooksAPI extends \PoP\CMS\HooksAPI_Base
 {
 	public function addFilter($tag, $function_to_add, $priority = 10, $accepted_args = 1) {
 		return add_filter($tag, $function_to_add, $priority, $accepted_args);

@@ -15,7 +15,7 @@ class FieldProcessor_Menu extends \PoP\Engine\FieldProcessorBase
 
         // First Check if there's a hook to implement this field
         $hookValue = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_MENU, $resultitem, $field);
-        if (!is_wp_error($hookValue)) {
+        if (!\PoP\Engine\GeneralUtils::isError($hookValue)) {
             return $hookValue;
         }
     
@@ -27,7 +27,7 @@ class FieldProcessor_Menu extends \PoP\Engine\FieldProcessorBase
                 // Load needed values for the menu-items
                 $fieldprocessor_manager = \PoP\Engine\FieldProcessor_Manager_Factory::getInstance();
                 $gd_dataload_fieldprocessor_menu_items = $fieldprocessor_manager->get(GD_DATALOAD_FIELDPROCESSOR_MENU_ITEMS);
-                $items = $cmsapi->wpGetNavMenuItems($cmsresolver->getMenuTermId($menu));
+                $items = $cmsapi->getNavigationMenuItems($cmsresolver->getMenuTermId($menu));
 
                 // Load these item data-fields. If other set needed, create another $field
                 $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menu-item-parent', 'object-id', 'additional-attrs');

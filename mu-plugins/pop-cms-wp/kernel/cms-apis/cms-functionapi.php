@@ -1,7 +1,7 @@
 <?php
 namespace PoP\CMS\WP;
 
-class FunctionAPI extends \PoP\CMS\FunctionAPI_Base implements \PoP\CMS\FunctionAPI
+class FunctionAPI extends \PoP\CMS\FunctionAPI_Base
 {
 
     public function getOption($option, $default = false)
@@ -43,9 +43,55 @@ class FunctionAPI extends \PoP\CMS\FunctionAPI_Base implements \PoP\CMS\Function
         return get_site_url();
     }
 
-    public function getErrorClass()
+    public function hash($data)
     {
-        return \WP_Error::class;
+        return wp_hash($data);
+    }
+
+    public function kses($string, $allowed_html)
+    {
+        return wp_kses($string, $allowed_html);
+    }
+
+    public function sendEmail($to, $subject, $msg, $headers = '', $attachments = array())
+    {
+        return wp_mail($to, $subject, $msg, $headers, $attachments);
+    }
+
+    protected function returnResultOrConvertError($result)
+    {
+        if ($this->isError($result)) {
+            return $this->convertError($result);
+        }
+        return $result;
+    }
+
+    public function convertError($cmsError)
+    {
+        $error = new \PoP\Engine\Error();
+        foreach ($cmsError->get_error_codes() as $code) {
+            $error->add($code, $cmsError->get_error_message($code), $cmsError->get_error_data($code));
+        }
+        return $error;
+    }
+
+    public function isError($object)
+    {
+        return is_wp_error($object);
+    }
+
+    public function getAssetsDirectory()
+    {
+        return get_stylesheet_directory();
+    }
+    public function getAssetsDirectoryURI()
+    {
+        return get_stylesheet_directory_uri();
+    }
+
+    public function isAdminPanel()
+    {
+        return is_admin();
     }
 
 

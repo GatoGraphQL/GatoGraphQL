@@ -22,4 +22,24 @@ class DataloadUtils
 
         return $subcomponent_dataloader_name;
     }
+    
+    public static function addFilterParams($url, $moduleValues = array())
+    {
+        $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
+        $args = [];
+        foreach ($moduleValues as $module => $value) {
+            if (in_array($module, [
+                POP_MODULE_FILTERINPUT_SEARCH,
+                POP_MODULE_FILTERINPUT_POSTDATES,
+            ])) {
+
+                $moduleprocessor = $moduleprocessor_manager->getProcessor($module);
+                $args[$moduleprocessor->getName($module)] = $value;
+            }
+        }
+        $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
+        $cmshelpers->addQueryArgs($args, $url);
+        
+        return $url;
+    }
 }

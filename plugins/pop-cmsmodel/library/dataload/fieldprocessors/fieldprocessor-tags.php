@@ -15,7 +15,7 @@ class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase
 
         // First Check if there's a hook to implement this field
         $hookValue = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_TAGS, $resultitem, $field);
-        if (!is_wp_error($hookValue)) {
+        if (!\PoP\Engine\GeneralUtils::isError($hookValue)) {
             return $hookValue;
         }
     

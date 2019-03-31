@@ -24,7 +24,7 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
     
         // First Check if there's a hook to implement this field
         $hookValue = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_POSTS, $resultitem, $field);
-        if (!is_wp_error($hookValue)) {
+        if (!\PoP\Engine\GeneralUtils::isError($hookValue)) {
             return $hookValue;
         }
 
@@ -38,7 +38,7 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
                 break;
 
             case 'published':
-                $value = $cmsapi->getPostStatus($this->getId($post)) == 'publish';
+                $value = $cmsapi->getPostStatus($this->getId($post)) == POP_POSTSTATUS_PUBLISHED;
                 break;
 
             case 'not-published':
@@ -75,30 +75,31 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
                 break;
 
             case 'cats':
-                $value = $cmsapi->wpGetPostCategories($this->getId($post), array('fields' => 'ids'));
+                $value = $cmsapi->getPostCategories($this->getId($post), array(/*'fields' => 'ids'*/), ['return-type' => POP_RETURNTYPE_IDS]);
                 if (!$value) {
                     $value = array();
                 }
                 break;
 
             case 'cat-slugs':
-                $value = $cmsapi->wpGetPostCategories($this->getId($post), array('fields' => 'slugs'));
+                $value = $cmsapi->getPostCategories($this->getId($post), array(/*'fields' => 'slugs'*/), ['return-type' => POP_RETURNTYPE_SLUGS]);
                 break;
 
             case 'tags':
-                $value = $cmsapi->wpGetPostTags($this->getId($post), array('fields' => 'ids'));
+                $value = $cmsapi->getPostTags($this->getId($post), array(/*'fields' => 'ids'*/), ['return-type' => POP_RETURNTYPE_IDS]);
                 break;
 
             case 'tag-names':
-                $value = $cmsapi->wpGetPostTags($this->getId($post), array('fields' => 'names'));
+                $value = $cmsapi->getPostTags($this->getId($post), array(/*'fields' => 'names'*/), ['return-type' => POP_RETURNTYPE_NAMES]);
                 break;
 
             case 'title':
-                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_title', $cmsresolver->getPostTitle($post), $this->getId($post));
+                // $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('popcms:title', $cmsresolver->getPostTitle($post), $this->getId($post));
+                $value = $cmsapi->getPostTitle($this->getId($post));
                 break;
 
             case 'title-edit':
-                if (current_user_can('edit_post', $this->getId($post))) {
+                if (current_user_can(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:capability:editPost'), $this->getId($post))) {
                     $value = $cmsresolver->getPostTitle($post);
                 } else {
                     $value = '';
@@ -106,22 +107,20 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
                 break;
             
             case 'content':
-                $value = $cmsresolver->getPostContent($post);
-                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_content_pre', $value, $this->getId($post));
-                $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_content', $value);
+                $value = $cmsapi->getPostContent($this->getId($post));
                 $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_content', $value, $this->getId($post));
                 break;
 
             case 'content-editor':
-                if (current_user_can('edit_post', $this->getId($post))) {
-                    $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_editor_content', $cmsresolver->getPostContent($post));
+                if (current_user_can(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:capability:editPost'), $this->getId($post))) {
+                    $value = $cmsapi->getPostEditorContent($this->getId($post));
                 } else {
                     $value = '';
                 }
                 break;
 
             case 'content-edit':
-                if (current_user_can('edit_post', $this->getId($post))) {
+                if (current_user_can(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:capability:editPost'), $this->getId($post))) {
                     $value = $cmsresolver->getPostContent($post);
                 } else {
                     $value = '';
@@ -142,18 +141,19 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
 
             case 'comments':
                 $query = array(
-                    'status' => 'approve',
-                    'type' => 'comment', // Only comments, no trackbacks or pingbacks
-                    'post_id' => $this->getId($post),
+                    'status' => POP_COMMENTSTATUS_APPROVED,
+                    // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
+                    'post-id' => $this->getId($post),
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
-                    'orderby' => 'comment_date_gmt',
+                    'orderby' => \PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:dbcolumn:orderby:comments:date'),
                 );
-                $comments = $cmsapi->getComments($query);
-                $value = array();
-                foreach ($comments as $comment) {
-                    $value[] = $cmsresolver->getCommentId($comment);
-                }
+                $value = $cmsapi->getComments($query, ['return-type' => POP_RETURNTYPE_IDS]);
+                // $comments = $cmsapi->getComments($query);
+                // $value = array();
+                // foreach ($comments as $comment) {
+                //     $value[] = $cmsresolver->getCommentId($comment);
+                // }
                 break;
 
             case 'has-thumb':
@@ -174,16 +174,19 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
 
             case 'is-draft':
                 $status = $cmsapi->getPostStatus($this->getId($post));
-                $value = ($status == 'draft');
+                $value = ($status == POP_POSTSTATUS_DRAFT);
                 break;
 
             case 'date':
-                $value = mysql2date($cmsapi->getOption('date_format'), $cmsresolver->getPostDate($post));
+                $value = mysql2date($cmsapi->getOption(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:option:dateFormat')), $cmsresolver->getPostDate($post));
                 break;
 
             case 'datetime':
-                // 15 Jul, 21:47
-                $value = mysql2date('j M, H:i', $cmsresolver->getPostDate($post));
+                // If it is the current year, don't add the year. Otherwise, do
+                // 15 Jul, 21:47 or // 15 Jul 2018, 21:47
+                $date = $cmsresolver->getPostDate($post);
+                $format = (mysql2date('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i'; 
+                $value = mysql2date($format, $date);
                 break;
 
             case 'edit-url':

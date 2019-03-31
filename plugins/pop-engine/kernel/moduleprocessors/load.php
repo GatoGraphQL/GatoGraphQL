@@ -2,7 +2,9 @@
 
 require_once 'constants.php';
 require_once 'formattablemodule-interface.php';
+require_once 'formattablemodule-trait.php';
 require_once 'dataloadingmodule-interface.php';
+require_once 'dataloadqueryargs-filter-interface.php';
 
 require_once 'pop-modulepathprocessor-trait.php';
 require_once 'pop-moduleprocessor.php';

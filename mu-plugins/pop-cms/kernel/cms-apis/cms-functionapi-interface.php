@@ -12,7 +12,22 @@ interface FunctionAPI
     public function getVersion();
     public function getHomeURL();
     public function getSiteURL();
-    public function getErrorClass();
+    public function hash($data);
+    public function kses($string, $allowed_html);
+    public function sendEmail($to, $subject, $msg, $headers = '', $attachments = array());
+    public function convertError($cmsError);
+    public function isError($object);
+    public function getAssetsDirectory();
+    public function getAssetsDirectoryURI();
+    public function getImagesDirectory();
+    public function getImagesDirectoryURI();
+    public function getJSAssetsDirectory();
+    public function getJSAssetsDirectoryURI();
+    public function getCSSAssetsDirectory();
+    public function getCSSAssetsDirectoryURI();
+    public function getFontsDirectory();
+    public function getFontsDirectoryURI();
+    public function isAdminPanel();
 
 
     public function getPostMeta($post_id, $key = '', $single = false);

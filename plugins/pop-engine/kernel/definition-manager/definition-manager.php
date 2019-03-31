@@ -50,12 +50,19 @@ class DefinitionManager
             $this->defined_names[$group][] = $name;
         }
 
+        $keepname_groups = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
+            'DefinitionManager:keep-name:groups',
+            [
+                POP_DEFINITIONGROUP_FILTERS,
+            ]
+        );
+
         // Mirror: it simply returns the $module again. It confirms in the code that this decision is deliberate
         // (not calling function getModuleDefinition could also be that the developer forgot about it)
         // It is simply used to explicitly say that we need the same name as the module, eg: for the filtercomponents,
         // so that in the URL params it shows names that make sense (author=...&search=...)
         // If not mangled, then that's it, use the original $module, do not allow plugins to provide a different value
-        if (!Utils::isMangled()) {
+        if (!Utils::isMangled() || in_array($group, $keepname_groups)) {
             return $name;
         }
 

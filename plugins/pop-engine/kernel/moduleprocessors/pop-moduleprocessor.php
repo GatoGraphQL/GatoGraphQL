@@ -126,6 +126,12 @@ abstract class ModuleProcessorBase
             $ret['skip-data-load'] = $skip_data_load;
         }
 
+        // Property 'ignore-request-params' => true makes a dataloader module not get values from $_REQUEST
+        $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
+        if (!is_null($ignore_params_from_request)) {
+            $ret['ignore-request-params'] = $ignore_params_from_request;
+        }
+
         return $ret;
     }
 
@@ -739,6 +745,56 @@ abstract class ModuleProcessorBase
         return $ret;
     }
 
+    public function getDatasetmoduletreeSectionFlattenedModules($module, $includeHeadModule = false)
+    {
+        $ret = [];
+
+        $this->addDatasetmoduletreeSectionFlattenedModules($ret, $module);
+        
+        return array_values(array_unique($ret));
+    }
+
+    protected function addDatasetmoduletreeSectionFlattenedModules(&$ret, $module)
+    {
+        $ret[] = $module;
+
+        // Propagate down to the components
+        // $this->flattenDatasetmoduletreeModules(__FUNCTION__, $ret, $module);
+        // Exclude the subcomponent modules here
+        if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
+            $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
+            foreach ($submodules as $submodule) {
+                $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+
+                // Propagate only if the submodule doesn't have a dataloader. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
+                if (!$submodule_processor->getDataloader($submodule)) {
+                    $submodule_processor->addDatasetmoduletreeSectionFlattenedModules($ret, $submodule);
+                }
+            }
+        }
+    }
+
+    // protected function flattenDatasetmoduletreeModules($propagate_fn, &$ret, $module)
+    // {        
+    //     // Exclude the subcomponent modules here
+    //     if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
+    //         $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
+    //         foreach ($submodules as $submodule) {
+    //             $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+
+    //             // Propagate only if the submodule doesn't have a dataloader. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
+    //             if (!$submodule_processor->getDataloader($submodule)) {
+    //                 if ($submodule_ret = $submodule_processor->$propagate_fn($submodule)) {
+    //                     $ret = array_merge(
+    //                         $ret,
+    //                         $submodule_ret
+    //                     );
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
     public function getImmutableHeaddatasetmoduleDataProperties($module, &$props)
     {
 
@@ -823,6 +879,12 @@ abstract class ModuleProcessorBase
         $datasource = $this->getDatasource($module, $props);
         if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONMODEL) {
             $this->addHeaddatasetmoduleDataProperties($ret, $module, $props);
+        }
+
+        // Fetch params from request?
+        $ignore_params_from_request = $this->getProp($module, $props, 'ignore-request-params');
+        if (!is_null($ignore_params_from_request)) {
+            $ret[GD_DATALOAD_IGNOREREQUESTPARAMS] = $ignore_params_from_request;
         }
 
         return $ret;
@@ -1029,40 +1091,34 @@ abstract class ModuleProcessorBase
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = ModulePathManager_Utils::getStringifiedModulePropagationCurrentPath($module);
-        $ret = add_query_arg(
-            GD_URLPARAM_MODULEFILTER,
-            POP_MODULEFILTER_MODULEPATHS,
-            add_query_arg(
-                GD_URLPARAM_MODULEPATHS.'[]',
-                $stringified_module_propagation_current_path,
-                Utils::getCurrentUrl()
-            )
-        );
+        $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
+        $ret = $cmshelpers->addQueryArgs([
+            GD_URLPARAM_MODULEFILTER => POP_MODULEFILTER_MODULEPATHS,
+            GD_URLPARAM_MODULEPATHS.'[]' => $stringified_module_propagation_current_path,
+        ], Utils::getCurrentUrl());
 
         // Allow to add extra modulepaths set from above
         if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
             foreach ($extra_module_paths as $modulepath) {
-                $ret = add_query_arg(
-                    GD_URLPARAM_MODULEPATHS.'[]',
-                    ModulePathManager_Utils::stringifyModulePath($modulepath),
-                    $ret
-                );
+                $ret = $cmshelpers->addQueryArgs([
+                    GD_URLPARAM_MODULEPATHS.'[]' => ModulePathManager_Utils::stringifyModulePath($modulepath),
+                ], $ret);
             }
         }
 
         // Add the actionpath too
         if ($this->getActionexecuter($module)) {
-            $ret = add_query_arg(
-                GD_URLPARAM_ACTIONPATH,
-                $stringified_module_propagation_current_path,
-                $ret
-            );
+            $ret = $cmshelpers->addQueryArgs([
+                GD_URLPARAM_ACTIONPATH => $stringified_module_propagation_current_path,
+            ], $ret);
         }
 
         // Add the format to the query url
         if ($this instanceof \PoP\Engine\FormattableModule) {
             if ($format = $this->getFormat($module)) {
-                $ret = add_query_arg(GD_URLPARAM_FORMAT, $format, $ret);
+                $ret = $cmshelpers->addQueryArgs([
+                    GD_URLPARAM_FORMAT => $format, 
+                ], $ret);
             }
         }
 
@@ -1076,17 +1132,13 @@ abstract class ModuleProcessorBase
                 $sources = array($sources);
             }
 
+            $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
             return array_map(
                 function ($source) use ($module) {
-                    return add_query_arg(
-                        GD_URLPARAM_MODULEFILTER,
-                        POP_MODULEFILTER_HEADMODULE,
-                        add_query_arg(
-                            GD_URLPARAM_HEADMODULE,
-                            $module,
-                            $source
-                        )
-                    );
+                    return $cmshelpers->addQueryArgs([
+                        GD_URLPARAM_MODULEFILTER => POP_MODULEFILTER_HEADMODULE,
+                        GD_URLPARAM_HEADMODULE => $module,
+                    ], $source);
                 },
                 $sources
             );

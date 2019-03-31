@@ -14,28 +14,25 @@ class Dataloader_CommentList extends Dataloader_CommentListBase
     {
         $query = parent::getQuery($query_args);
 
-        $query['status'] = 'approve';
-        $query['type'] = 'comment'; // Only comments, no trackbacks or pingbacks
-        $query['post_id'] = $query_args[GD_URLPARAM_POSTID];
+        $query['status'] = POP_COMMENTSTATUS_APPROVED;
+        // $query['type'] = 'comment'; // Only comments, no trackbacks or pingbacks
+        $query['post-id'] = $query_args[GD_URLPARAM_COMMENTPOSTID];
 
         return $query;
     }
     
-    public function executeQuery($query)
+    public function executeQuery($query, array $options = [])
     {
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        return $cmsapi->getComments($query);
+        return $cmsapi->getComments($query, $options);
     }
 
     public function executeQueryIds($query)
     {
-        $ret = array();
-        $comments = $this->executeQuery($query);
-        foreach ($comments as $comment) {
-            $ret[] = $comment->comment_ID;
-        }
-
-        return $ret;
+        $options = [
+            'return-type' => POP_RETURNTYPE_IDS,
+        ];
+        return $this->executeQuery($query, $options);
     }
 }
     

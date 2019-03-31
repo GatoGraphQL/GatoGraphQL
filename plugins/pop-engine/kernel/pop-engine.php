@@ -40,6 +40,7 @@ class Engine
 
     public function getEntryModule()
     {
+
         $siteconfiguration = Settings\SiteConfigurationProcessorManager_Factory::getInstance()->getProcessor();
         if (!$siteconfiguration) {
             throw new \Exception('There is no Site Configuration. Hence, we can\'t continue.');
@@ -85,7 +86,8 @@ class Engine
             // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
             $commoncode = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Engine:etag_header:commoncode', $commoncode);
 
-            header("ETag: ".wp_hash($commoncode));
+            $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+            header("ETag: ".$cmsapi->hash($commoncode));
         }
     }
 
@@ -124,6 +126,27 @@ class Engine
 
     public function generateData()
     {
+
+        // Check if there are hooks that must be implemented by the CMS, that have not been done so.
+        // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
+        $loosecontract_manager = \PoP\CMS\CMSLooseContract_Manager_Factory::getInstance();
+        if ($notImplementedHooks = $loosecontract_manager->getNotImplementedRequiredHooks()) {
+            throw new \Exception(
+                sprintf(
+                    __('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode(__('", "'), $notImplementedHooks)
+                )
+            );
+        }
+        if ($notImplementedNames = $loosecontract_manager->getNotImplementedRequiredNames()) {
+            throw new \Exception(
+                sprintf(
+                    __('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode(__('", "'), $notImplementedNames)
+                )
+            );
+        }
+        
         \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:beginning');
 
         // Process the request and obtain the results
@@ -968,7 +991,7 @@ class Engine
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
             $result = $checkpointprocessor_manager->process($checkpoint, $module);
-            if (is_wp_error($result)) {
+            if (\PoP\Engine\GeneralUtils::isError($result)) {
                 return $result;
             }
         }
@@ -1094,7 +1117,7 @@ class Engine
             if ($load_data && $checkpoints = $data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS]) {
                 // Check if the module fails checkpoint validation. If so, it must not load its data or execute the actionexecuter
                 $dataaccess_checkpoint_validation = $this->validateCheckpoints($checkpoints, $module);
-                $load_data = !is_wp_error($dataaccess_checkpoint_validation);
+                $load_data = !\PoP\Engine\GeneralUtils::isError($dataaccess_checkpoint_validation);
             }
 
             // The $props is directly moving the array to the corresponding path
@@ -1141,7 +1164,7 @@ class Engine
                         if ($actionexecution_checkpoints = $data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS]) {
                             // Check if the module fails checkpoint validation. If so, it must not load its data or execute the actionexecuter
                             $actionexecution_checkpoint_validation = $this->validateCheckpoints($actionexecution_checkpoints, $module);
-                            $execute = !is_wp_error($actionexecution_checkpoint_validation);
+                            $execute = !\PoP\Engine\GeneralUtils::isError($actionexecution_checkpoint_validation);
                         }
 
                         if ($execute) {
@@ -1383,6 +1406,7 @@ class Engine
         $dataloader_manager = Dataloader_Manager_Factory::getInstance();
         $dataquery_manager = DataQuery_Manager_Factory::getInstance();
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
         
         $vars = Engine_Vars::getVars();
         $dboutputmode = $vars['dboutputmode'];
@@ -1498,9 +1522,11 @@ class Engine
                     $forceserverload['fields'] = array_unique($forceserverload['fields']);
 
                     $url = $cmsapi->getPermalink($dataquery->getNoncacheablePage());
-                    $url = add_query_arg($objectid_fieldname, $forceserverload['ids'], $url);
-                    $url = add_query_arg(GD_URLPARAM_FIELDS, $forceserverload['fields'], $url);
-                    $url = add_query_arg(GD_URLPARAM_FORMAT, POP_FORMAT_FIELDS, $url);
+                    $url = $cmshelpers->addQueryArgs([
+                        $objectid_fieldname => $forceserverload['ids'],
+                        GD_URLPARAM_FIELDS => $forceserverload['fields'],
+                        GD_URLPARAM_FORMAT => POP_FORMAT_FIELDS, 
+                    ], $url);
                     $this->backgroundload_urls[urldecode($url)] = array(POP_TARGET_MAIN);
 
                     // Keep the nocache fields to remove those from the code when generating the ETag
@@ -1513,9 +1539,11 @@ class Engine
                     $lazyload['layouts'] = array_unique($lazyload['layouts']);
 
                     $url = $cmsapi->getPermalink($dataquery->getCacheablePage());
-                    $url = add_query_arg($objectid_fieldname, $lazyload['ids'], $url);
-                    $url = add_query_arg(GD_URLPARAM_LAYOUTS, $lazyload['layouts'], $url);
-                    $url = add_query_arg(GD_URLPARAM_FORMAT, POP_FORMAT_LAYOUTS, $url);
+                    $url = $cmshelpers->addQueryArgs([
+                        $objectid_fieldname => $lazyload['ids'], 
+                        GD_URLPARAM_LAYOUTS => $lazyload['layouts'],
+                        GD_URLPARAM_FORMAT => POP_FORMAT_LAYOUTS,
+                    ], $url);
                     $this->backgroundload_urls[urldecode($url)] = array(POP_TARGET_MAIN);
                 }
             }

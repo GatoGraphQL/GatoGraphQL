@@ -143,10 +143,6 @@ class ObjectPropertyResolver extends \PoP\CMS\WP\ObjectPropertyResolver implemen
     {
         return $tag->term_id;
     }
-    public function getUserRoles($user)
-    {
-        return $user->roles;
-    }
     public function getUserLogin($user)
     {
         return $user->user_login;
@@ -183,14 +179,14 @@ class ObjectPropertyResolver extends \PoP\CMS\WP\ObjectPropertyResolver implemen
     {
         return $user->user_url;
     }
-    public function getTaxonomyHierarchical($taxonomy)
-    {
-        return $taxonomy->hierarchical;
-    }
-    public function getTaxonomyName($taxonomy)
-    {
-        return $taxonomy->name;
-    }
+    // public function getTaxonomyHierarchical($taxonomy)
+    // {
+    //     return $taxonomy->hierarchical;
+    // }
+    // public function getTaxonomyName($taxonomy)
+    // {
+    //     return $taxonomy->name;
+    // }
 }
 
 /**

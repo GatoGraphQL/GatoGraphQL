@@ -1291,7 +1291,7 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
   
     // First Check if there's a FieldProcessorHook to implement this field
     $hook_value = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_POSTS, $resultitem, $field);
-    if (!is_wp_error($hook_value)) {
+    if (!\PoP\Engine\GeneralUtils::isError($hook_value)) {
       return $hook_value;
     }    
 
@@ -1301,7 +1301,7 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
     switch ($field) {
 
       case 'tags' :
-        $value = $cmsapi->wpGetPostTags($this->getId($post), array('fields' => 'ids'));
+        $value = $cmsapi->getPostTags($this->getId($post), array('fields' => 'ids'));
         break;
 
       case 'title' :
@@ -1410,153 +1410,26 @@ class FieldProcessor_Posts_Hook extends \PoP\Engine\FieldProcessor_HookBase {
 new FieldProcessor_Posts_Hook();
 ```
 
-### Filter and FilterComponent
+### Filtering Data
 
-The Filter is an object that modifies the query to filter data when fetching data from the database. It must inherit from class `FilterBase` and implement functions `getFilterArgsOverrideValues` and `getFilterArgs`, returning an array of property => value for the query. The difference between these 2 functions is that, while `getFilterArgs` doesn't replace values existing under the same property in the query but merges the existing and new values together, `getFilterArgsOverrideValues` overrides existing values under the same property with the new one.
-
-The filter object delegates filtering of each field to FilterComponent objects. The filter must then implement function `getFiltercomponents` to know each FilterComponent objects it is composed of. Each FilterComponent is an object which inherits from class `FilterComponentBase`, and which knows how to filter a specific field (eg: filter by search, by category, by author, etc). The FilterComponent is assigned an input module through function `getFilterinput`, from which it gets the value to filter. Then, when doing the filtering, the Filter makes each of its FilterComponents filter its corresponding field with the values filled in its corresponding input. 
-
-For instance, a filter for posts looks like this:
+By implementing the interface `DataloadQueryArgsFilter` modules can also filter the data fetched by the ancestor dataloading module. For that, they must implement functions `filterDataloadQueryArgs`, to filter the query for some property, and `getValue`, to provide the corresponding value. For instance, a module that performs a search of content looks like this (notice that since it extends from `TextFormInputsBase`, its `getValue` function is already implemented by class `FormInputsBase`):
 
 ```php
-abstract class PostFilterBase extends FilterBase {
+class TextFilterInputs extends TextFormInputsBase implements \PoP\Engine\DataloadQueryArgsFilter
+{
+  public function filterDataloadQueryArgs(array &$query, $module, $value)
+  {
+    switch ($module) {
 
-  function getFilterArgsOverrideValues() {
-  
-    $args = parent::getFilterArgsOverrideValues();
-
-    if (!$this->getFiltercomponents()) {
-      return $args;
-    }
-    
-    // Search
-    if ($search = $this->getSearch()) {
-      $args['is_search'] = true;
-      $args['s'] = $search;
-    }
-
-    // Categories
-    if ($categories = $this->getCategories()) {
-      $args['cat'] = implode(',', $categories);
-    }
-
-    // Author
-    if ($author = $this->getAuthor()) {
-      $args['author'] = implode(",", $author);
-    }
-
-    // Order / Orderby
-    if ($order = $this->getOrder()) {
-      $args['orderby'] = $order['orderby'];
-      $args['order'] = $order['order'];
-    }
-    
-    return $args;
-  }
-
-  function getFilterArgs() {
-  
-    $args = parent::getFilterArgs();
-    
-    if (!$this->getFiltercomponents()) {
-      return $args;
-    }
-                
-    // Meta query
-    if ($meta_query = $this->getMetaquery()) {
-      $args['meta_query'] = $meta_query;
-    }
-    
-    return $args;
-  }
-  
-  function getMetaquery() {
-  
-    $meta_query = array();
-    foreach ($this->getFiltercomponents() as $filtercomponent) {
-    
-      if ($filtercomponent_metaquery = $filtercomponent->getMetaquery($this)) {
-      
-        $meta_query = array_merge($meta_query, $filtercomponent_metaquery);
-      }
-    }
-    
-    if ($meta_query) {
-      $meta_query['relation'] = 'AND';
-    }
-    return $meta_query;  
-  }
-  
-  function getAuthor() {
-  
-    $author = array();
-    foreach ($this->getFiltercomponents() as $filtercomponent) {
-
-      if ($filtercomponent_author = $filtercomponent->getAuthor($this)) {
-
-        $author = array_merge($author, $filtercomponent_author);
-      }
-    }
-    
-    return $author;  
-  }
-
-  function getCategories() {
-  
-    $categories = array();
-    foreach ($this->getFiltercomponents() as $filtercomponent) {
-    
-      if ($filtercomponent_categories = $filtercomponent->getCategories($this)) {
-      
-        $categories = array_merge($categories, $filtercomponent_categories);
-      }
-    }
-    
-    return $categories;  
-  }
-  
-  function getSearch() {
-  
-    $search = '';
-    foreach ($this->getFiltercomponents() as $filtercomponent) {
-    
-      if ($search = $filtercomponent->getSearch($this)) {
-        
-        // Only 1 filter can do the Search, so already break
+      case POP_MODULE_FILTERINPUT_SEARCH:
+        $query['search'] = $value;
         break;
-      }    
     }
-    
-    return $search;  
-  }
-
-  function getOrder() {
-  
-    $order = array();
-    foreach ($this->getFiltercomponents() as $filtercomponent) {
-
-      if ($order = $filtercomponent->getOrder($this)) {
-        
-        // Only 1 filter can define the Order, so already break
-        break;
-      }
-    }
-    
-    return $order;  
   }
 }
-```
 
-Each FilterComponent object can filter only 1 field. It does so by implementing the corresponding function, returning the value of the input through function `getFilterinput_value`. For instance, a FilterComponent to filter by the "search" field is implemented like this:
-
-```php
-abstract class FilterComponent_SearchBase extends FilterComponentBase {
-  
-  function getSearch($filter) {
-  
-    return $this->getFilterinput_value($filter);
-  }  
-}
+// Initialize
+new TextFilterInputs();
 ```
 
 ### QueryHandler
@@ -1798,8 +1671,6 @@ class PoPSystem_Dataload_CheckpointProcessor extends \PoP\Engine\CheckpointProce
 
   function process($checkpoint) {
 
-    $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-    $error_class = $cmsapi->getErrorClass();
     switch ($checkpoint) {
 
       case CHECKPOINT_WHITELISTEDIP:
@@ -1808,13 +1679,13 @@ class PoPSystem_Dataload_CheckpointProcessor extends \PoP\Engine\CheckpointProce
         $ip = get_client_ip();
         if (!$ip) {
           
-          return new $error_class('ipempty');
+          return new \PoP\Engine\Error('ipempty');
         }
 
         $whitelisted_ips = array(...);
         if (!in_array($ip, $whitelisted_ips)) {
           
-          return new $error_class('ipincorrect');
+          return new \PoP\Engine\Error('ipincorrect');
         }
         break;
     }

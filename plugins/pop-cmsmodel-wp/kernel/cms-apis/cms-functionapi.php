@@ -3,36 +3,384 @@ namespace PoP\CMSModel\WP;
 
 class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\FunctionAPI
 {
+    protected $cmsToPoPPostStatusConversion = [
+        'publish' => POP_POSTSTATUS_PUBLISHED,
+        'pending' => POP_POSTSTATUS_PENDING,
+        'draft' => POP_POSTSTATUS_DRAFT,
+        'trash' => POP_POSTSTATUS_TRASH,
+    ];
+    protected $popToCMSPostStatusConversion;
+    protected $cmsToPoPCommentStatusConversion = [
+        // 'all' => POP_COMMENTSTATUS_ALL,
+        'approve' => POP_COMMENTSTATUS_APPROVED,
+        'hold' => POP_COMMENTSTATUS_ONHOLD,
+        'spam' => POP_COMMENTSTATUS_SPAM,
+        'trash' => POP_COMMENTSTATUS_TRASH,
+    ];
+    protected $popToCMSCommentStatusConversion;
+    
+    public function __construct()
+    {
+        parent::__construct();
 
-    /**
-     * Functions 1 to 1 with WordPress signature
-     */
+        $this->popToCMSPostStatusConversion = array_flip($this->cmsToPoPPostStatusConversion);
+        $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
+    }
+
+    protected function convertPostStatusFromCMSToPoP($status)
+    {
+        // Convert from the CMS status to PoP's one
+        return $this->cmsToPoPPostStatusConversion[$status];
+    }
+    protected function convertPostStatusFromPoPToCMS($status)
+    {
+        // Convert from the CMS status to PoP's one
+        return $this->popToCMSPostStatusConversion[$status];
+    }
+
     public function getPostStatus($post_id)
     {
-        return get_post_status($post_id);
+        $status = get_post_status($post_id);
+        return $this->convertPostStatusFromCMSToPoP($status);
     }
-    public function getPosts($query)
+    public function getPosts($query, array $options = [])
     {
+        if ($return_type = $options['return-type']) {
+            if ($return_type == POP_RETURNTYPE_IDS) {
+                $query['fields'] = 'ids';
+            }
+        }
+
+        // If both "tag" and "tax_query" were set, then the filter will not work for tags
+        // Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
+        // including both the tag and the already existing taxonomy filtering (eg: categories)
+        // So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
+        if ((isset($query['tag-ids']) || isset($query['tags'])) && isset($query['tax-query'])) {
+            // Create the tag item in the taxonomy
+            $tag_slugs = [];
+            if (isset($query['tag-ids'])) {
+                foreach ($query['tag-ids'] as $tag_id) {
+                    $tag = get_tag($tag_id);
+                    $tag_slugs[] = $tag->slug;
+                }
+            }
+            if (isset($query['tags'])) {
+                $tag_slugs = array_merge(
+                    $tag_slugs,
+                    $query['tags']
+                );
+            }
+            $tag_item = array(
+                'taxonomy' => 'post_tag',
+                'terms' => $tag_slugs,
+                'field' => 'slug'
+            );
+
+            // Will replace the current tax_query with a new one
+            $tax_query = $query['tax-query'];
+            $new_tax_query = array(
+                'relation' => 'AND',//$tax_query['relation']
+            );
+            unset($tax_query['relation']);
+            foreach ($tax_query as $tax_item) {
+                $new_tax_query[] = array(
+                    // 'relation' => 'AND',
+                    $tax_item,
+                    $tag_item,
+                );
+            }
+            $query['tax-query'] = $new_tax_query;
+
+            // The tag arg is not needed anymore
+            unset($query['tag-ids']);
+            unset($query['tags']);
+        }
+
+        // Convert the parameters
+        if (isset($query['post-status'])) {
+
+            if (is_array($query['post-status'])) {
+                // doing get_posts can accept an array of values
+                $query['post_status'] = array_map([$this, 'convertPostStatusFromPoPToCMS'], $query['post-status']);
+            } else {
+                // doing wp_insert/update_post accepts a single value
+                $query['post_status'] = $this->convertPostStatusFromPoPToCMS($query['post-status']);
+            }
+            unset($query['post-status']);
+        }
+        if ($query['include']) {
+            // Transform from array to string
+            $query['include'] = implode(',', $query['include']);
+        }
+        if (isset($query['post-types'])) {
+            
+            $query['post_type'] = $query['post-types'];
+            unset($query['post-types']);
+        }
+        // if (isset($query['fields'])) {
+        //     // Same param name, so do nothing
+        // }
+        if (isset($query['offset'])) {
+            // Same param name, so do nothing
+        }
+        // if (isset($query['number']) ){ 
+        //     // Same param name, so do nothing
+        // }
+        // if (isset($query['numberposts']) ){ 
+        //     // Same param name, so do nothing
+        // }
+        // if (isset($query['posts-per-page'])) {
+            
+        //     $query['posts_per_page'] = $query['posts-per-page'];
+        //     unset($query['posts-per-page']);
+        // }
+        if (isset($query['limit'])) {
+            
+            $query['posts_per_page'] = $query['limit'];
+            unset($query['limit']);
+        }
+        if (isset($query['order'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['orderby'])) {
+            // Same param name, so do nothing
+            // This param can either be a string or an array. Eg:
+            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+        }
+        if (isset($query['meta-query'])) {
+            
+            $query['meta_query'] = $query['meta-query'];
+            unset($query['meta-query']);
+        }
+        if (isset($query['authors'])) {
+
+            $query['author'] = implode(',', $query['authors']);
+            unset($query['authors']);
+        }
+        // if (isset($query['date-query'])) {
+            
+        //     // The accepted parameter is the one expected by WordPress (https://codex.wordpress.org/Class_Reference/WP_Query)
+        //     $query['date_query'] = $query['date-query'];
+        //     unset($query['date-query']);
+        // }
+        if (isset($query['tag-ids'])) {
+            
+            // Watch out! In WordPress it is a string (either tag ID or comma-separated tag IDs), but in PoP it is an array of IDs!
+            $query['tag_id'] = implode(',', $query['tag-ids']);
+            unset($query['tag-ids']);
+        }
+        if (isset($query['tags']) ){ 
+            
+            // Watch out! In WordPress it is a string (either tag slug or comma-separated tag slugs), but in PoP it is an array of slugs!
+            $query['tag'] = implode(',', $query['tags']);
+            unset($query['tags']);
+        }
+        if (isset($query['categories'])) {
+            
+            // Watch out! In WordPress it is a string (either category id or comma-separated category ids), but in PoP it is an array of category ids!
+            $query['cat'] = implode(',', $query['categories']);
+            unset($query['categories']);
+        }
+        if (isset($query['post-not-in'])) {
+            
+            $query['post__not_in'] = $query['post-not-in'];
+            unset($query['post-not-in']);
+        }
+        if (isset($query['category-in'])) {
+            
+            $query['category__in'] = $query['category-in'];
+            unset($query['category-in']);
+        }
+        if (isset($query['category-not-in'])) {
+            
+            $query['category__not_in'] = $query['category-not-in'];
+            unset($query['category-not-in']);
+        }
+        if (isset($query['tax-query'])) {
+            
+            $query['tax_query'] = $query['tax-query'];
+            unset($query['tax-query']);
+        }
+        if (isset($query['search'])) {
+            
+            $query['is_search'] = true;
+            $query['s'] = $query['search'];
+            unset($query['search']);
+        }
+        // Filtering by date: Instead of operating on the query, it does it through filter 'posts_where'
+        if (isset($query['date-from'])) {
+            
+            $query['date_query'][] = [
+                'after' => $query['date-from'],
+                'inclusive' => false,
+            ];
+            unset($query['date-from']);
+            // $this->filterDateFrom = $query['date-from'];
+            // unset($query['date-from']);
+
+            // // Allow for date filtering
+            // // Allow for 'posts_where' filter to be called: http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
+            // $query['suppress_filters'] = false;
+            // \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('posts_where', array(&$this, 'filterDateFrom'));
+        }
+        if (isset($query['date-from-inclusive'])) {
+            
+            $query['date_query'][] = [
+                'after' => $query['date-from-inclusive'],
+                'inclusive' => true,
+            ];
+            unset($query['date-from-inclusive']);
+        }
+        if (isset($query['date-to'])) {
+            
+            $query['date_query'][] = [
+                'before' => $query['date-to'],
+                'inclusive' => false,
+            ];
+            unset($query['date-to']);
+            // $this->filterDateTo = $query['date-to'];
+            // unset($query['date-to']);
+
+            // // Allow for date filtering
+            // // Allow for 'posts_where' filter to be called: http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
+            // $query['suppress_filters'] = false;
+            // \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('posts_where', array(&$this, 'filterDateTo'));
+        }
+        if (isset($query['date-to-inclusive'])) {
+            
+            $query['date_query'][] = [
+                'before' => $query['date-to-inclusive'],
+                'inclusive' => true,
+            ];
+            unset($query['date-to-inclusive']);
+        }
+
+        // Allow Co-Authors Plus to modify the query
+        $query = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
+            'CMSAPI:posts:query',
+            $query
+        );
         return get_posts($query);
     }
-    public function getPostTypes($args = array())
+    // public function filterDateFrom($where = '')
+    // {
+    //     global $wpdb;
+    //     if ($this->filterDateFrom) {
+            
+    //         // Make sure that the dates are proper dates (protection against hackers) <= data validation/sanitation
+    //         $this->filterDateFrom = date('Y-m-d', strtotime($this->filterDateFrom));
+    //         $where .= " AND {$wpdb->posts}.post_date >= '".$this->filterDateFrom."'";
+    //     }
+    //     unset($this->filterDateFrom);
+
+    //     // Remove myself
+    //     \PoP\CMS\HooksAPI_Factory::getInstance()->removeFilter('posts_where', array(&$this, 'filterDateFrom'));
+
+    //     return $where;
+    // }
+    // public function filterDateTo($where = '')
+    // {
+    //     global $wpdb;
+    //     if ($this->filterDateTo) {
+
+    //         // Make sure that the dates are proper dates (protection against hackers) <= data validation/sanitation
+    //         $this->filterDateTo = date('Y-m-d', strtotime($this->filterDateTo));
+    //         $where .= " AND {$wpdb->posts}.post_date < '".$this->filterDateTo."'";
+    //     }
+    //     unset($this->filterDateTo);
+
+    //     // Remove myself
+    //     \PoP\CMS\HooksAPI_Factory::getInstance()->removeFilter('posts_where', array(&$this, 'filterDateTo'));
+
+    //     return $where;
+    // }
+    public function getPostTypes($query = array())
     {
-        return get_post_types($args);
+        // Convert the parameters
+        if (isset($query['exclude-from-search'])) {
+            
+            $query['exclude_from_search'] = $query['exclude-from-search'];
+            unset($query['exclude-from-search']);
+        }
+        return get_post_types($query);
     }
-    public function getObjectTaxonomies($object, $output = 'names')
+    // public function getObjectTaxonomies($object, $output = 'names')
+    // {
+    //     return get_object_taxonomies($object, $output);
+    // }
+    public function getPageIdByPath($page_path)
     {
-        return get_object_taxonomies($object, $output);
+        $page = get_page_by_path($page_path);
+        return $page->ID;
     }
-    public function getPageByPath($page_path, $output = OBJECT, $post_type = 'page')
+    // public function getUserdata($user_id)
+    // {
+    //     return get_userdata($user_id);
+    // }
+
+    protected function convertCommentStatusFromCMSToPoP($status)
     {
-        return get_page_by_path($page_path, $output, $post_type);
+        // Convert from the CMS status to PoP's one
+        return $this->cmsToPoPCommentStatusConversion[$status];
     }
-    public function getUserdata($user_id)
+    protected function convertCommentStatusFromPoPToCMS($status)
     {
-        return get_userdata($user_id);
+        // Convert from the CMS status to PoP's one
+        return $this->popToCMSCommentStatusConversion[$status];
     }
-    public function getComments($query)
+    public function getComments($query, array $options = [])
     {
+        if ($return_type = $options['return-type']) {
+            if ($return_type == POP_RETURNTYPE_IDS) {
+                $query['fields'] = 'ids';
+            }
+        }
+        // Convert the parameters
+        if (isset($query['status'])) {
+
+            $query['status'] = $this->convertCommentStatusFromPoPToCMS($query['status']);
+        }
+        if (isset($query['post-id'])) {
+
+            $query['post_id'] = $query['post-id'];
+            unset($query['post-id']);
+        }
+        if (isset($query['user-id'])) {
+
+            $query['user_id'] = $query['user-id'];
+            unset($query['user-id']);
+        }
+        if (isset($query['authors'])) {
+
+            // Only 1 author is accepted
+            $query['user_id'] = $query['authors'][0];
+            unset($query['authors']);
+        }
+        if (isset($query['order'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['orderby'])) {
+            // Same param name, so do nothing
+            // This param can either be a string or an array. Eg:
+            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+        }
+        // if (isset($query['fields'])) {
+        //     // Same param name, so do nothing
+        // }
+        // if (isset($query['number'])) {
+        //     // Same param name, so do nothing
+        // }
+        // For the comments, if there's no limit then it brings all results
+        if ($query['limit']) {
+            
+            $query['number'] = $query['limit'];
+            unset($query['limit']);
+        }
+        if (isset($query['search'])) {
+            // Same param name, so do nothing
+        }
+        // Only comments, no trackbacks or pingbacks
+        $query['type'] = 'comment'; 
         return get_comments($query);
     }
     public function getComment($comment_id)
@@ -51,37 +399,194 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     {
         return get_nav_menu_locations();
     }
-    public function wpGetNavMenuObject($menu_object_id)
+    public function getNavigationMenuObject($menu_object_id)
     {
         return wp_get_nav_menu_object($menu_object_id);
+    }
+    public function getNavigationMenuItems($menu)
+    {
+        return wp_get_nav_menu_items($menu);
     }
     public function addRole($role, $display_name, $capabilities = array())
     {
         add_role($role, $display_name, $capabilities);
     }
-    public function getTags($query)
+    public function addRoleToUser($user_id, $role)
     {
+        $user = $this->getUserById($user_id);
+        $user->add_role($role);
+    }
+    public function removeRoleFromUser($user_id, $role)
+    {
+        $user = $this->getUserById($user_id);
+        $user->remove_role($role);
+    }
+    public function getTags($query, array $options = [])
+    {
+        if ($return_type = $options['return-type']) {
+            if ($return_type == POP_RETURNTYPE_IDS) {
+                $query['fields'] = 'ids';
+            }
+        }
+
+        // Convert the parameters
+        if ($query['include']) {
+            // Transform from array to string
+            $query['include'] = implode(',', $query['include']);
+        }
+        if (isset($query['order'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['orderby'])) {
+            // Same param name, so do nothing
+            // This param can either be a string or an array. Eg:
+            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+        }
+        // if (isset($query['fields'])) {
+        //     // Same param name, so do nothing
+        // }
+        if (isset($query['offset'])) {
+            // Same param name, so do nothing
+        }
+        // if (isset($query['number'])) {
+        //     // Same param name, so do nothing
+        // }
+        if (isset($query['limit'])) {
+            
+            // To bring all results, get_tags needs "number => 0" instead of -1
+            $query['number'] = ($query['limit'] == -1) ? 0 : $query['limit'];
+            unset($query['limit']);
+        }
+        if (isset($query['search'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['meta-query']) ){ 
+            
+            $query['meta_query'] = $query['meta-query'];
+            unset($query['meta-query']);
+        }
+        if (isset($query['slugs']) ){ 
+            
+            $query['slug'] = $query['slugs'];
+            unset($query['slugs']);
+        }
         return get_tags($query);
     }
-    public function getUserBy($field, $value)
+    public function getUserById($value)
     {
-        return get_user_by($field, $value);
+        return get_user_by('id', $value);
     }
-    public function getUsers($args = array())
+    public function getUserByEmail($value)
     {
-        return get_users($args);
+        return get_user_by('email', $value);
+    }
+    public function getUserBySlug($value)
+    {
+        return get_user_by('slug', $value);
+    }
+    public function getUserByLogin($value)
+    {
+        return get_user_by('login', $value);
+    }
+    public function getUserRoles($user_id)
+    {
+        $user = $this->getUserById($user_id);
+        return $user->roles;
+    }
+    public function getUsers($query = array(), array $options = [])
+    {
+        if ($return_type = $options['return-type']) {
+            if ($return_type == POP_RETURNTYPE_IDS) {
+                $query['fields'] = 'ID';
+            }
+        }
+
+        // Convert parameters
+        // if (isset($query['fields'])) {
+        //     // Same param name, so do nothing
+        // }
+        if (isset($query['role'])) {
+            // Same param name, so do nothing
+        }
+        if ($query['include']) {
+            // Transform from array to string
+            $query['include'] = implode(',', $query['include']);
+        }
+        if (isset($query['exclude'])) {
+            // Transform from array to string
+            $query['exclude'] = implode(',', $query['exclude']);
+        }
+        if (isset($query['order'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['orderby'])) {
+            // Same param name, so do nothing
+            // This param can either be a string or an array. Eg:
+            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+        }
+        if (isset($query['offset'])) {
+            // Same param name, so do nothing
+        }
+        // if (isset($query['number'])) {
+        //     // Same param name, so do nothing
+        // }
+        if (isset($query['limit'])) {
+            
+            $query['number'] = $query['limit'];
+            unset($query['limit']);
+        }
+        if (isset($query['meta-query']) ){ 
+            
+            $query['meta_query'] = $query['meta-query'];
+            unset($query['meta-query']);
+        }
+        if (isset($query['role-in']) ){ 
+            
+            $query['role__in'] = $query['role-in'];
+            unset($query['role-in']);
+        }
+        if (isset($query['role-not-in']) ){ 
+            
+            $query['role__not_in'] = $query['role-not-in'];
+            unset($query['role-not-in']);
+        }
+        return get_users($query);
     }
     public function getTheAuthorMeta($field, $user_id)
     {
         return get_the_author_meta($field, $user_id);
     }
+    public function getUserDisplayName($user_id)
+    {
+        return $this->getTheAuthorMeta('display_name', $user_id);
+    }
+    public function getUserEmail($user_id)
+    {
+        return $this->getTheAuthorMeta('user_email', $user_id);
+    }
+    public function getUserFirstname($user_id)
+    {
+        return $this->getTheAuthorMeta('user_firstname', $user_id);
+    }
+    public function getUserLastname($user_id)
+    {
+        return $this->getTheAuthorMeta('user_lastname', $user_id);
+    }
+    public function getUserLogin($user_id)
+    {
+        return $this->getTheAuthorMeta('user_login', $user_id);
+    }
+    public function getUserDescription($user_id)
+    {
+        return $this->getTheAuthorMeta('description', $user_id);
+    }
+    public function getUserRegistrationDate($user_id)
+    {
+        return $this->getTheAuthorMeta('user_registered', $user_id);
+    }
     public function getAuthorPostsUrl($user_id)
     {
         return get_author_posts_url($user_id);
-    }
-    public function wpGetNavMenuItems($menu)
-    {
-        return wp_get_nav_menu_items($menu);
     }
     public function getPostType($post)
     {
@@ -95,21 +600,59 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     {
         return get_the_category($post_id);
     }
-    public function wpGetPostCategories($post_id = 0, $args = array())
+    public function getPostCategories($post_id = 0, array $query = [], array $options = [])
     {
-        return wp_get_post_categories($post_id, $args);
+        if ($return_type = $options['return-type']) {
+            if ($return_type == POP_RETURNTYPE_IDS) {
+                $query['fields'] = 'ids';
+            }
+            elseif ($return_type == POP_RETURNTYPE_SLUGS) {
+                $query['fields'] = 'slugs';
+            }
+        }
+        return wp_get_post_categories($post_id, $query);
     }
-    public function wpGetPostTags($post_id = 0, $args = array())
+    public function getPostTags($post_id = 0, array $query = [], array $options = [])
     {
-        return wp_get_post_tags($post_id, $args);
+        if ($return_type = $options['return-type']) {
+            if ($return_type == POP_RETURNTYPE_IDS) {
+                $query['fields'] = 'ids';
+            }
+            elseif ($return_type == POP_RETURNTYPE_NAMES) {
+                $query['fields'] = 'names';
+            }
+        }
+        return wp_get_post_tags($post_id, $query);
     }
-    public function wpGetObjectTerms($object_ids, $taxonomies, $args = array())
+    public function getObjectTerms($object_ids, $taxonomies, $args = array())
     {
         return wp_get_object_terms($object_ids, $taxonomies, $args);
     }
     public function getPermalink($post_id)
     {
-        return get_permalink($post_id);
+        if ($this->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+            return get_permalink($post_id);
+        }
+
+        // Function get_sample_permalink comes from the file below, so it must be included
+        // Code below copied from `function get_sample_permalink_html`
+        include_once ABSPATH.'wp-admin/includes/post.php';
+        list($permalink, $post_name) = get_sample_permalink($post_id, null, null);
+        return str_replace(['%pagename%', '%postname%'], $post_name, $permalink);
+    }
+
+    public function getPostSlug($post_id)
+    {
+        if ($this->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+            $post = $this->getPost($post_id);
+            return $post->post_name;
+        }
+
+        // Function get_sample_permalink comes from the file below, so it must be included
+        // Code below copied from `function get_sample_permalink_html`
+        include_once ABSPATH.'wp-admin/includes/post.php';
+        list($permalink, $post_name) = get_sample_permalink($post_id, null, null);
+        return $post_name;
     }
     public function getTheExcerpt($post_id)
     {
@@ -123,7 +666,7 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     {
         return get_post_thumbnail_id($post_id);
     }
-    public function wpGetAttachmentImageSrc($image_id, $size = null)
+    public function getAttachmentImageSrc($image_id, $size = null)
     {
         return wp_get_attachment_image_src($image_id, $size);
     }
@@ -149,7 +692,6 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     }
     public function getSinglePostTitle($post)
     {
-
         // Copied from `single_post_title` in wp-includes/general-template.php
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('single_post_title', $post->post_title, $post);
     }
@@ -159,22 +701,28 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     }
     public function getCatTitle($cat)
     {
-
         // Copied from `single_term_title` in wp-includes/general-template.php
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('single_cat_title', $cat->name);
     }
     public function getTagTitle($tag)
     {
-
         // Copied from `single_term_title` in wp-includes/general-template.php
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('single_tag_title', $tag->name);
     }
-    public function getQueryVar($var, $default = '')
+    // public function getQueryVar($var, $default = '')
+    // {
+    //     return get_query_var($var, $default);
+    // }
+    public function getCategoryIds($args = array())
     {
-        return get_query_var($var, $default);
-    }
-    public function getTerms($args = array())
-    {
+        $args = array_merge(
+            array(
+                'taxonomy' => 'category',
+                'hide_empty' => false,
+                'fields' => 'ids',
+            ),
+            $args
+        );
         return get_terms($args);
     }
     public function getQueryFromRequestUri()
@@ -222,7 +770,107 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
     }
     public function insertComment($comment_data)
     {
+        // Convert the parameters
+        if (isset($comment_data['user-id'])) {
+
+            $comment_data['user_id'] = $comment_data['user-id'];
+            unset($comment_data['user-id']);
+        }
+        if (isset($comment_data['author'])) {
+
+            $comment_data['comment_author'] = $comment_data['author'];
+            unset($comment_data['author']);
+        }
+        if (isset($comment_data['author-email'])) {
+
+            $comment_data['comment_author_email'] = $comment_data['author-email'];
+            unset($comment_data['author-email']);
+        }
+        if (isset($comment_data['author-URL'])) {
+
+            $comment_data['comment_author_url'] = $comment_data['author-URL'];
+            unset($comment_data['author-URL']);
+        }
+        if (isset($comment_data['author-IP'])) {
+
+            $comment_data['comment_author_IP'] = $comment_data['author-IP'];
+            unset($comment_data['author-IP']);
+        }
+        if (isset($comment_data['agent'])) {
+
+            $comment_data['comment_agent'] = $comment_data['agent'];
+            unset($comment_data['agent']);
+        }
+        if (isset($comment_data['content'])) {
+
+            $comment_data['comment_content'] = $comment_data['content'];
+            unset($comment_data['content']);
+        }
+        if (isset($comment_data['parent'])) {
+
+            $comment_data['comment_parent'] = $comment_data['parent'];
+            unset($comment_data['parent']);
+        }
+        if (isset($comment_data['post-id'])) {
+
+            $comment_data['comment_post_ID'] = $comment_data['post-id'];
+            unset($comment_data['post-id']);
+        }
         return wp_insert_comment($comment_data);
+    }
+    protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(&$query)
+    {
+        // Convert the parameters
+        if (isset($query['post-status'])) {
+
+            $query['post_status'] = $this->convertPostStatusFromPoPToCMS($query['post-status']);
+            unset($query['post-status']);
+        }
+        if (isset($query['id'])) {
+
+            $query['ID'] = $query['id'];
+            unset($query['id']);
+        }
+        if (isset($query['post-content'])) {
+
+            $query['post_content'] = $query['post-content'];
+            unset($query['post-content']);
+        }
+        if (isset($query['post-title'])) {
+
+            $query['post_title'] = $query['post-title'];
+            unset($query['post-title']);
+        }
+        if (isset($query['post-categories'])) {
+
+            $query['post_category'] = $query['post-categories'];
+            unset($query['post-categories']);
+        }
+        if (isset($query['post-type'])) {
+
+            $query['post_type'] = $query['post-type'];
+            unset($query['post-type']);
+        }
+
+        // Moved to cms-functionapi-customcmscode.php
+        // // WordPress-specific parameters!
+        // if (isset($query['menu-order'])) {
+
+        //     $query['menu_order'] = $query['menu-order'];
+        //     unset($query['menu-order']);
+        // }
+    }
+    public function insertPost($post_data)
+    {
+        // Convert the parameters
+        $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($post_data);
+        return wp_insert_post($post_data);
+    }
+    public function updatePost($post_data)
+    {
+        // Convert the parameters
+        $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($post_data);
+        return wp_update_post($post_data);
     }
     public function getAllowedPostTags()
     {
@@ -235,11 +883,357 @@ class FunctionAPI extends \PoP\CMS\WP\FunctionAPI implements \PoP\CMSModel\Funct
         return get_cat_name($cat_id);
     }
 
-    public function getPostSlug($post_id)
+    public function getPostTitle($post_id)
     {
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        $post = $cmsapi->getPost($post_id);
-        return $post->post_name;
+        $post = $this->getPost($post_id);
+        return apply_filters('the_title', $post->post_title, $post_id);
+    }
+
+    public function getPostContent($post_id)
+    {
+        $post = $this->getPost($post_id);
+        return apply_filters('the_content', $post->post_content);
+    }
+
+    public function getPostEditorContent($post_id)
+    {
+        $post = $this->getPost($post_id);
+        return apply_filters('the_editor_content', $post->post_content);
+    }
+
+    public function getBasicPostContent($post_id)
+    {
+        $post = $this->getPost($post_id);
+
+        // Basic content: remove embeds, shortcodes, and tags
+        // Remove the embed functionality, and then add again
+        $wp_embed = $GLOBALS['wp_embed'];
+        \PoP\CMS\HooksAPI_Factory::getInstance()->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+
+        // Do not allow HTML tags or shortcodes
+        $ret = strip_shortcodes($post->post_content);
+        $ret = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('the_content', $ret);
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+
+        return strip_tags($ret);
+    }
+
+    public function getMenuItemTitle($menu_item) {
+
+        return apply_filters('the_title', $menu_item->title, $menu_item->object_id);
+    }
+
+    public function getExcerptMore() {
+
+        return apply_filters('excerpt_more', ' '.'[&hellip;]');
+    }
+
+    public function getExcerptLength()
+    {
+        return apply_filters('excerpt_length', 55);
+    }
+
+    public function getPostCount($query)
+    {
+        // Convert parameters
+        // if (isset($query['fields'])) {
+        //     // Same param name, so do nothing
+        // }
+        $query['fields'] = 'ids';
+        // if (isset($query['posts-per-page'])) {
+            
+        //     $query['posts_per_page'] = $query['posts-per-page'];
+        //     unset($query['posts-per-page']);
+        // }
+        if (isset($query['limit'])) {
+            
+            $query['posts_per_page'] = $query['limit'];
+            unset($query['limit']);
+        }
+        else {
+            
+            // All results
+            $query['posts_per_page'] = 0;
+        }
+        if (isset($query['tax-query'])) {
+            
+            $query['tax_query'] = $query['tax-query'];
+            unset($query['tax-query']);
+        }
+        if (isset($query['meta-query']) ){ 
+            
+            $query['meta_query'] = $query['meta-query'];
+            unset($query['meta-query']);
+        }
+        if (isset($query['post-types'])) {
+            
+            $query['post_type'] = $query['post-types'];
+            unset($query['post-types']);
+        }
+
+        // Taken from https://stackoverflow.com/questions/2504311/wordpress-get-post-count
+        $wp_query = new \WP_Query();
+        $wp_query->query($query);
+        return $wp_query->found_posts;
+    }
+
+    public function getCategoryPath($category_id)
+    {
+        $taxonomy = 'category';
+        
+        // Convert it to int, otherwise it thinks it's a string and the method below fails
+        $category_path = get_term_link((int) $category_id, $taxonomy);
+
+        // Remove the initial part ("https://www.mesym.com/en/categories/")
+        global $wp_rewrite;
+        $termlink = $wp_rewrite->get_extra_permastruct($taxonomy);
+        $termlink = str_replace("%$taxonomy%", '', $termlink);
+        $termlink = $this->getHomeURL(user_trailingslashit($termlink, $taxonomy));
+
+        return substr($category_path, strlen($termlink));
+    }
+
+    public function getAuthorBase()
+    {
+        global $wp_rewrite;
+        return $wp_rewrite->author_base;
+    }
+
+    public function getTagBase()
+    {
+        return $this->getOption('tag_base');
+    }
+
+    public function getPasswordResetKey($user_data)
+    {
+        $result = get_password_reset_key($user_data);
+        return $this->returnResultOrConvertError($result);
+    }
+
+    public function getTrendingHashtagIds($days, $number, $offset)
+    {        
+        global $wpdb;
+        
+        // Solution to get the Trending Tags taken from https://wordpress.org/support/topic/limit-tags-by-date
+        $time_difference = $this->getOption(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:option:gmtOffset')) * HOUR_IN_SECONDS;
+        $timenow = time() + $time_difference;
+        $timelimit = $timenow - ($days * 24 * HOUR_IN_SECONDS);
+        $now = gmdate('Y-m-d H:i:s', $timenow);
+        $datelimit = gmdate('Y-m-d H:i:s', $timelimit);
+        
+        $sql = "
+            SELECT 
+                $wpdb->terms.term_id, 
+                COUNT($wpdb->terms.term_id) as count 
+            FROM 
+                $wpdb->posts, 
+                $wpdb->term_relationships, 
+                $wpdb->term_taxonomy, 
+                $wpdb->terms 
+            WHERE 
+                $wpdb->posts.ID = $wpdb->term_relationships.object_id AND 
+                $wpdb->term_taxonomy.term_taxonomy_id = $wpdb->term_relationships.term_taxonomy_id AND 
+                $wpdb->term_taxonomy.term_id = $wpdb->terms.term_id AND 
+                post_status = 'publish' AND 
+                post_date < '$now' AND 
+                post_date > '$datelimit' AND 
+                $wpdb->term_taxonomy.taxonomy='post_tag' 
+            GROUP BY 
+                $wpdb->terms.term_id 
+            ORDER BY 
+                count 
+            DESC
+        ";
+
+        // Use pagination if a limit was set
+        if ($number && (intval($number) > 0)) {
+            $sql .= sprintf(
+                ' LIMIT %s',
+                intval($number)
+            );
+        }
+        if ($offset && (intval($offset) > 0)) {
+            $sql .= sprintf(
+                ' OFFSET %s',
+                intval($offset)
+            );
+        }
+        
+        $ids = array();
+        if ($results = $wpdb->get_results($sql)) {
+            foreach ($results as $result) {
+                $ids[] = $result->term_id;
+            }
+        }
+
+        return $ids;
+    }
+
+    public function login($credentials)
+    {
+        // Convert params
+        if (isset($credentials['login'])) {
+
+            $credentials['user_login'] = $credentials['login'];
+            unset($credentials['login']);
+        }
+        if (isset($credentials['password'])) {
+
+            $credentials['user_password'] = $credentials['password'];
+            unset($credentials['password']);
+        }
+        if (isset($credentials['remember'])) {
+            // Same param name, so do nothing
+        }
+        $result = wp_signon($credentials);
+        
+        // Set the current user already, so that it already says "user logged in" for the toplevel feedback
+        if (!$this->isError($result)) {
+            $user = $result;
+            wp_set_current_user($user->ID);
+        }
+        
+        return $this->returnResultOrConvertError($result);
+    }
+
+    public function checkPassword($password, $hash)
+    {
+        return wp_check_password($password, $hash);
+    }
+
+    public function checkPasswordResetKey($key, $login)
+    {
+        $result = check_password_reset_key($key, $login);
+        return $this->returnResultOrConvertError($result);
+    }
+
+    public function dequeueScript($handle)
+    {
+        return wp_dequeue_script($handle);
+    }
+
+    public function dequeueStyle($handle)
+    {
+        return wp_dequeue_style($handle);
+    }
+
+    public function enqueueScript($handle, $src = '', $deps = array(), $ver = false, $in_footer = false)
+    {
+        return wp_enqueue_script($handle, $src, $deps, $ver, $in_footer);
+    }
+    public function enqueueStyle($handle, $src = '', $deps = array(), $ver = false, $media = 'all')
+    {
+        return wp_enqueue_style($handle, $src, $deps, $ver, $media);
+    }
+    public function registerScript($handle, $src, $deps = array(), $ver = false, $in_footer = false)
+    {
+        return wp_register_script($handle, $src, $deps, $ver, $in_footer);
+    }
+    public function registerStyle($handle, $src, $deps = array(), $ver = false, $media = 'all')
+    {
+        return wp_register_style($handle, $src, $deps, $ver, $media);
+    }
+
+    public function printFooterHTML()
+    {
+        wp_footer();
+    }
+    public function printHeadHTML()
+    {
+        wp_head();
+    }
+
+    public function localizeScript($handle, $object_name, $l10n)
+    {
+        return wp_localize_script($handle, $object_name, $l10n);
+    }
+
+    protected function convertQueryArgsFromPoPToCMSForInsertUpdateUser(&$query)
+    {
+        // Convert the parameters
+        if (isset($query['id'])) {
+
+            $query['ID'] = $query['id'];
+            unset($query['id']);
+        }
+        if (isset($query['firstname'])) {
+
+            $query['first_name'] = $query['firstname'];
+            unset($query['firstname']);
+        }
+        if (isset($query['lastname'])) {
+
+            $query['last_name'] = $query['lastname'];
+            unset($query['lastname']);
+        }
+        if (isset($query['email'])) {
+
+            $query['user_email'] = $query['email'];
+            unset($query['email']);
+        }
+        if (isset($query['description'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['url'])) {
+            
+            $query['user_url'] = $query['url'];
+            unset($query['url']);
+        }
+        if (isset($query['role'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['password'])) {
+
+            $query['user_pass'] = $query['password'];
+            unset($query['password']);
+        }
+        if (isset($query['login'])) {
+
+            $query['user_login'] = $query['login'];
+            unset($query['login']);
+        }
+    }
+    public function insertUser($user_data)
+    {
+        $this->convertQueryArgsFromPoPToCMSForInsertUpdateUser($user_data);
+        $result = wp_insert_user($user_data);
+        return $this->returnResultOrConvertError($result);
+    }
+    public function updateUser($user_data)
+    {
+        $this->convertQueryArgsFromPoPToCMSForInsertUpdateUser($user_data);
+        $result = wp_update_user($user_data);
+        return $this->returnResultOrConvertError($result);
+    }
+
+    public function resetPassword($user, $pwd)
+    {
+        return reset_password($user, $pwd);
+    }
+
+    public function getLoginURL()
+    {
+        return wp_login_url();
+    }
+
+    public function getLogoutURL()
+    {
+        return wp_logout_url();
+    }
+
+    public function getLostPasswordURL()
+    {
+        return wp_lostpassword_url();
+    }
+
+    public function setPostTags($post_id, array $tags, bool $append = false)
+    {
+        return wp_set_post_tags($post_id, $tags, $append);
+    }
+
+    public function setPostTerms($post_id, $tags, $taxonomy, $append = false)
+    {
+        return wp_set_post_terms($post_id, $tags, $taxonomy, $append);
     }
 }
 

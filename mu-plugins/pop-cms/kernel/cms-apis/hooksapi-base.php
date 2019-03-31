@@ -1,7 +1,7 @@
 <?php
 namespace PoP\CMS;
 
-abstract class HooksAPI_Base
+abstract class HooksAPI_Base implements HooksAPI
 {
     public function __construct()
     {

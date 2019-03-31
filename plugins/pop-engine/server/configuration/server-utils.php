@@ -127,6 +127,15 @@ class Utils
 
         return false;
     }
+
+    public static function enableCustomCMSCode()
+    {
+        if (defined('POP_SERVER_ENABLECUSTOMCMSCODE')) {
+            return POP_SERVER_ENABLECUSTOMCMSCODE;
+        }
+
+        return true;
+    }
 }
 
 /**

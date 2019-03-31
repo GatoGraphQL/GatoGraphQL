@@ -3,12 +3,12 @@ namespace PoP\CMSModel;
 
 trait Dataloader_ListTrait
 {
-    use \PoP\Engine\FilterQueryDataloaderTrait;
+    // use \PoP\Engine\FilterQueryDataloaderTrait;
     
     /**
      * Function to override
      */
-    public function executeQuery($query)
+    public function executeQuery($query, array $options = [])
     {
         return array();
     }
@@ -18,13 +18,13 @@ trait Dataloader_ListTrait
         return $this->executeQuery($query);
     }
 
-    protected function getPagedParam($query_args)
+    protected function getPagenumberParam($query_args)
     {
         
         // Allow to check for PoP_Application_Engine_Utils::loadingLatest():
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
-            'GD_Dataloader_List:query:paged',
-            $query_args[GD_URLPARAM_PAGED]
+            'GD_Dataloader_List:query:pagenumber',
+            $query_args[GD_URLPARAM_PAGENUMBER]
         );
     }
     protected function getLimitParam($query_args)
@@ -47,9 +47,9 @@ trait Dataloader_ListTrait
 
         // If already indicating the ids to get back, then already return them
         if ($include = $query_args['include']) {
-            if (!is_array($include)) {
-                return explode(',', $include);
-            }
+            // if (!is_array($include)) {
+            //     return explode(',', $include);
+            // }
 
             return $include;
         }
@@ -61,13 +61,15 @@ trait Dataloader_ListTrait
         $query = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('gd_dataload_query:'.$this->getName(), $query, $data_properties);
                 
         // Apply filtering of the data
-        $query = $this->filterQuery($query, $data_properties);
+        if ($filtering_modules = $data_properties[GD_DATALOAD_QUERYARGSFILTERINGMODULES]) {
+            $moduleprocessor_manager = \PoP\Engine\ModuleProcessor_Manager_Factory::getInstance();
+            foreach ($filtering_modules as $module) {
+                $moduleprocessor_manager->getProcessor($module)->filterHeadmoduleDataloadQueryArgs($query, $module);
+            }
+        }
 
         // Execute the query, get ids
         $ids = $this->executeQueryIds($query);
-        
-        // Allow $gd_filter to clear (remove unneeded filters)
-        $this->clearFilter();
         
         return $ids;
     }
@@ -75,12 +77,12 @@ trait Dataloader_ListTrait
     /**
      * Function to override
      */
-    public function getDataFromIdsQuery($ids)
+    public function getDataFromIdsQuery(array $ids): array
     {
         return array();
     }
     
-    public function executeGetData($ids)
+    public function executeGetData(array $ids): array
     {
         $query = $this->getDataFromIdsQuery($ids);
         return $this->executeQuery($query);
@@ -98,34 +100,50 @@ trait Dataloader_ListTrait
 
     protected function getMetaQuery($query_args)
     {
-        $query = array();
+        // $query = array();
+        $query = $query_args;
 
         // Allow to check for PoP_Application_Engine_Utils::loadingLatest()
-        $paged = $this->getPagedParam($query_args);
         $limit = $this->getLimitParam($query_args);
-        if ($limit >= 1) {
-            $offset = ($paged - 1) * $limit;
-            $query['offset'] = $offset;
-            $query['number'] = $limit;
-        } else {
-            // $limit is 0 (EM) or -1 (WP)
-            $query['numberposts'] = $limit;
+        $query['limit'] = $limit;
+        $pagenumber = $this->getPagenumberParam($query_args);
+        if ($pagenumber >= 2) {
+            $query['offset'] = ($pagenumber - 1) * $limit;
         }
+        // if ($limit >= 1) {
+        //     $offset = ($pagenumber - 1) * $limit;
+        //     $query['offset'] = $offset;
+        //     $query['number'] = $limit;
+        // } else {
+        //     // $limit is 0 (EM) or -1 (WP)
+        //     $query['numberposts'] = $limit;
+        // }
 
         // Params and values by default
-        if ($orderby = isset($query_args['orderby']) ? $query_args['orderby'] : $this->getOrderbyDefault()) {
-            $query['orderby'] = $orderby;
+        if (!$query['orderby']) {
+            $query['orderby'] = $this->getOrderbyDefault();
         }
-        if ($order = isset($query_args['order']) ? $query_args['order'] : $this->getOrderDefault()) {
-            $query['order'] = $order;
+        if (!$query['order']) {
+            $query['order'] = $this->getOrderDefault();
         }
+        // if ($orderby = isset($query_args['orderby']) ? $query_args['orderby'] : $this->getOrderbyDefault()) {
+        //     $query['orderby'] = $orderby;
+        // }
+        // if ($order = isset($query_args['order']) ? $query_args['order'] : $this->getOrderDefault()) {
+        //     $query['order'] = $order;
+        // }
 
-        // Metaquery: eg: filter only Actions with Locations
-        if ($meta_query = $query_args['meta-query']) {
-            $query['meta_query'] = $meta_query;
-        }
+        // // Metaquery: eg: filter only Actions with Locations
+        // if ($meta_query = $query_args['meta-query']) {
+        //     $query['meta-query'] = $meta_query;
+        // }
 
         return $query;
+    }
+
+    protected function getQueryHookName() {
+
+        return 'Dataloader_ListTrait:query';
     }
      
     /**
@@ -133,6 +151,13 @@ trait Dataloader_ListTrait
      */
     public function getQuery($query_args)
     {
-        return $this->getMetaQuery($query_args);
+        $query = $this->getMetaQuery($query_args);
+
+        // Allow CoAuthors Plus to modify the query to add the coauthors
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
+            $this->getQueryHookName(),
+            $query,
+            $query_args
+        );
     }
 }

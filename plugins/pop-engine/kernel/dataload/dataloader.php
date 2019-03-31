@@ -39,7 +39,7 @@ abstract class Dataloader
     /**
      * Function to override
      */
-    public function executeGetData($ids)
+    public function executeGetData(array $ids): array
     {
         return array();
     }
@@ -90,7 +90,7 @@ abstract class Dataloader
      * key: id
      * value: data-fields to fetch for that id
      */
-    final public function getData($ids_data_fields = array())
+    final public function getData(array $ids_data_fields = array()): array
     {
     
         // Get the ids

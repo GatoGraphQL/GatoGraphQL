@@ -3,11 +3,11 @@ namespace PoP\CMSModel;
 
 abstract class Dataloader_PageListBase extends Dataloader_PostListBase
 {
-    public function getDataFromIdsQuery($ids)
+    public function getDataFromIdsQuery(array $ids): array
     {
         $query = parent::getDataFromIdsQuery($ids);
         
-        $query['post_type'] = 'page';
+        $query['post-types'] = ['page'];
         
         return $query;
     }

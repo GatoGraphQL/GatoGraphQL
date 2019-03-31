@@ -22,4 +22,7 @@ class Engine_Factory
 }
 
 // // For HTML Output: call output function on the footer (it won't get called for JSON output)
-// \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('wp_footer', array(\PoP\Engine\Engine_Factory::class, 'output'));
+// \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
+//     'popcms:footer', 
+//     array(\PoP\Engine\Engine_Factory::class, 'output')
+// );

@@ -1,7 +1,7 @@
 <?php
 namespace PoP\CMS;
 
-abstract class ObjectPropertyResolver_Base
+abstract class ObjectPropertyResolver_Base implements ObjectPropertyResolver
 {
     public function __construct()
     {

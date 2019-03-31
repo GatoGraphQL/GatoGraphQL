@@ -41,7 +41,6 @@ interface ObjectPropertyResolver extends \PoP\CMS\ObjectPropertyResolver
     public function getTagParent($tag);
     public function getTagCount($tag);
     public function getTagTermId($tag);
-    public function getUserRoles($user);
     public function getUserLogin($user);
     public function getUserNicename($user);
     public function getUserDisplayName($user);
@@ -51,6 +50,6 @@ interface ObjectPropertyResolver extends \PoP\CMS\ObjectPropertyResolver
     public function getUserId($user);
     public function getUserDescription($user);
     public function getUserUrl($user);
-    public function getTaxonomyHierarchical($taxonomy);
-    public function getTaxonomyName($taxonomy);
+    // public function getTaxonomyHierarchical($taxonomy);
+    // public function getTaxonomyName($taxonomy);
 }

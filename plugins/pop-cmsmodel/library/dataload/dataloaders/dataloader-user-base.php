@@ -18,13 +18,13 @@ abstract class Dataloader_UserBase extends \PoP\Engine\QueryDataDataloader
         return GD_DATALOAD_FIELDPROCESSOR_USERS;
     }
     
-    public function executeGetData($ids)
+    public function executeGetData(array $ids): array
     {
         if ($ids) {
             $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
             $ret = array();
             foreach ($ids as $user_id) {
-                $ret[] = $cmsapi->getUserBy('id', $user_id);
+                $ret[] = $cmsapi->getUserById($user_id);
             }
             return $ret;
         }

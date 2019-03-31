@@ -18,13 +18,13 @@ abstract class Dataloader_PostBase extends \PoP\Engine\QueryDataDataloader
         return GD_DATALOAD_FIELDPROCESSOR_POSTS;
     }
     
-    public function executeGetData($ids)
+    public function executeGetData(array $ids): array
     {
         if ($ids) {
             $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
             $query = array(
                 'include' => $ids,
-                'post_type' => array_keys($cmsapi->getPostTypes()) // From all post types
+                'post-types' => array_keys($cmsapi->getPostTypes()) // From all post types
             );
             return $cmsapi->getPosts($query);
         }
@@ -32,7 +32,7 @@ abstract class Dataloader_PostBase extends \PoP\Engine\QueryDataDataloader
         return array();
     }
     
-    // function executeGetData($ids) {
+    // function executeGetData(array $ids): array {
     
     //     $ret = array();
     //     foreach ($ids as $post_id) {

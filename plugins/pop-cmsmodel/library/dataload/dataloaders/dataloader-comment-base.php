@@ -18,7 +18,7 @@ abstract class Dataloader_CommentBase extends \PoP\Engine\QueryDataDataloader
         return GD_DATALOAD_FIELDPROCESSOR_COMMENTS;
     }
     
-    public function executeGetData($ids)
+    public function executeGetData(array $ids): array
     {
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $ret = array();

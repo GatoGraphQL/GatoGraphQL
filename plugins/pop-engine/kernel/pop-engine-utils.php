@@ -58,7 +58,7 @@ class Utils
 
         // Cut results if more than 4 times the established limit. This is to protect from hackers adding all post ids.
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        $limit = 4 * $cmsapi->getOption('posts_per_page');
+        $limit = 4 * $cmsapi->getOption(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:option:limit'));
         if (count($results) > $limit) {
             array_splice($results, $limit);
         }
@@ -91,7 +91,8 @@ class Utils
                 GD_URLPARAM_ACTION, // Needed to remove ?action=preload, ?action=loaduserstate, ?action=loadlazy
             )
         );
-        $url = remove_query_arg($remove_params, fullUrl());
+        $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
+        $url = $cmshelpers->removeQueryArgs($remove_params, fullUrl());
 
         // Allow plug-ins to do their own logic to the URL
         $url = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Utils:getCurrentUrl', $url);
@@ -107,7 +108,8 @@ class Utils
     public static function addTab($url, $page_id)
     {
         $tab = self::getTab($page_id);
-        return add_query_arg(GD_URLPARAM_TAB, $tab, $url);
+        $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
+        return $cmshelpers->addQueryArgs([GD_URLPARAM_TAB => $tab], $url);
     }
 
     public static function getPagePath($page_id)
@@ -153,6 +155,7 @@ class Utils
     public static function getHierarchyPageId()
     {
         $vars = Engine_Vars::getVars();
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $hierarchy = $vars['hierarchy'];
         if ($vars['global-state']['is-page']) {
             $page_id = $vars['global-state']['queried-object-id'];
@@ -161,8 +164,7 @@ class Utils
         } elseif ($vars['global-state']['is-author'] || $vars['global-state']['is-single'] || $vars['global-state']['is-tag']) {
             // Get the page from the tab attr
             if ($tab = $vars['tab']) {
-                $page = getPageByPath($tab);
-                $page_id = $page->ID;
+                $page_id = $cmsapi->getPageIdByPath($tab);
             }
             // Otherwise, get the default page for each hierarchy
             else {

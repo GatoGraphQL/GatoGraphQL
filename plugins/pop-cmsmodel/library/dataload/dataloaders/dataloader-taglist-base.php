@@ -5,17 +5,17 @@ abstract class Dataloader_TagListBase extends Dataloader_TagBase
 {
     use Dataloader_ListTrait;
 
-    public function getDataFromIdsQuery($ids)
+    public function getDataFromIdsQuery(array $ids): array
     {
         $query = array(
-            'include' => implode(', ', $ids)
+            'include' => $ids
         );
         return $query;
     }
     
     protected function getOrderbyDefault()
     {
-        return 'count';
+        return \PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:dbcolumn:orderby:tags:count');
     }
 
     protected function getOrderDefault()
@@ -23,17 +23,19 @@ abstract class Dataloader_TagListBase extends Dataloader_TagBase
         return 'DESC';
     }
     
-    public function executeQuery($query)
+    public function executeQuery($query, array $options = [])
     {
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        return $cmsapi->getTags($query);
+        return $cmsapi->getTags($query, $options);
     }
     
     public function executeQueryIds($query)
     {
     
-        // Retrieve only ids
-        $query['fields'] = 'ids';
-        return $this->executeQuery($query);
+        // $query['fields'] = 'ids';
+        $options = [
+            'return-type' => POP_RETURNTYPE_IDS,
+        ];
+        return $this->executeQuery($query, $options);
     }
 }

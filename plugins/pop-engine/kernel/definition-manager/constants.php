@@ -1,3 +1,5 @@
 <?php
 
 const POP_DEFINITIONGROUP_MODULES = 'modules';
+const POP_DEFINITIONGROUP_FILTERS = 'filters';
+const POP_DEFINITIONGROUP_FILTERCOMPONENTS = 'filtercomponents';

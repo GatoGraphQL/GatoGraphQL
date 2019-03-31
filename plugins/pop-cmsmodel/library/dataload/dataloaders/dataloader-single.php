@@ -15,7 +15,7 @@ class Dataloader_Single extends Dataloader_PostBase
     // /**
     //     * Function to override
     //     */
-    // function executeGetData($ids) {
+    // function executeGetData(array $ids): array {
     
     //     $vars = \PoP\Engine\Engine_Vars::getVars();
     //     $post = $vars['global-state']['queried-object'];

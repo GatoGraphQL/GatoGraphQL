@@ -19,7 +19,7 @@ class Dataloader_Menu extends Dataloader_MenuBase
         $cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::getInstance();
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
         $locations = $cmsapi->getNavMenuLocations();
-        $menu_object = $cmsapi->wpGetNavMenuObject($locations[$menu]);
+        $menu_object = $cmsapi->getNavigationMenuObject($locations[$menu]);
 
         return array($cmsresolver->getMenuObjectTermId($menu_object));
     }

@@ -29,7 +29,7 @@ abstract class FieldProcessor_HookBase
     {
 
         // if $value already is not an error, then another filter already could resolve this field, so return it
-        if (!is_wp_error($value)) {
+        if (!\PoP\Engine\GeneralUtils::isError($value)) {
             return $value;
         }
 
@@ -49,9 +49,7 @@ abstract class FieldProcessor_HookBase
 
     public function getValue($resultitem, $field, $fieldprocessor)
     {
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        $error_class = $cmsapi->getErrorClass();
-        return new $error_class('no-field');
+        return new \PoP\Engine\Error('no-field');
     }
 
     public function getFieldType()

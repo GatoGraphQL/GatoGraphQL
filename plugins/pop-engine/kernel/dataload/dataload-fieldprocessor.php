@@ -23,9 +23,7 @@ abstract class FieldProcessorBase
 
         // Comment Leo 29/08/2014: needed for compatibility with Dataloader_ConvertiblePostList
         // (So that data-fields aimed for another post_type are not retrieved)
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        $error_class = $cmsapi->getErrorClass();
-        return new $error_class('no-field');
+        return new \PoP\Engine\Error('no-field');
     }
 
     public function getHookValue($fieldprocessor_name, $resultitem, $field)
@@ -35,9 +33,7 @@ abstract class FieldProcessorBase
         $filter = sprintf(GD_DATALOAD_FIELDPROCESSOR_FIELDVALUEFILTER, $fieldprocessor_name);
         
         // Also send the fieldprocessor along, as to get the id of the $resultitem being passed
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        $error_class = $cmsapi->getErrorClass();
-        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters($filter, new $error_class('no-field'), $resultitem, $field, $this);
+        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters($filter, new \PoP\Engine\Error('no-field'), $resultitem, $field, $this);
     }
     
     abstract public function getName();

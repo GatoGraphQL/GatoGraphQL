@@ -4,7 +4,7 @@ namespace PoP\Engine;
 class ModuleFilterManager
 {
     protected $selected_filter_name;
-    protected $filters;
+    protected $modulefilters;
 
     // From the moment in which a module is not excluded, every module from then on must also be included
     protected $not_excluded_ancestor_module;
@@ -18,15 +18,18 @@ class ModuleFilterManager
     {
         ModuleFilterManager_Factory::setInstance($this);
 
-        $this->filters = array();
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('init', array($this, 'init'));
+        $this->modulefilters = array();
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
+            'popcms:init', 
+            array($this, 'init')
+        );
     }
 
     public function getSelectedFilterName()
     {
         if ($selected = $_REQUEST[GD_URLPARAM_MODULEFILTER]) {
             // Validate that the selected filter exists
-            if (in_array($selected, array_keys($this->filters))) {
+            if (in_array($selected, array_keys($this->modulefilters))) {
                 return $selected;
             }
         }
@@ -51,9 +54,9 @@ class ModuleFilterManager
         return $this->not_excluded_module_sets;
     }
 
-    public function add($filter)
+    public function add($modulefilter)
     {
-        $this->filters[$filter->getName()] = $filter;
+        $this->modulefilters[$modulefilter->getName()] = $modulefilter;
     }
 
     protected function ancestorModuleNotExcluded()
@@ -77,7 +80,7 @@ class ModuleFilterManager
                 return false;
             }
 
-            return $this->filters[$this->selected_filter_name]->excludeModule($module, $props);
+            return $this->modulefilters[$this->selected_filter_name]->excludeModule($module, $props);
         }
 
         return false;
@@ -90,7 +93,7 @@ class ModuleFilterManager
                 return $submodules;
             }
 
-            return $this->filters[$this->selected_filter_name]->removeExcludedSubmodules($module, $submodules);
+            return $this->modulefilters[$this->selected_filter_name]->removeExcludedSubmodules($module, $submodules);
         }
 
         return $submodules;
@@ -117,7 +120,7 @@ class ModuleFilterManager
                 }
             }
 
-            $this->filters[$this->selected_filter_name]->prepareForPropagation($module);
+            $this->modulefilters[$this->selected_filter_name]->prepareForPropagation($module);
         }
     }
     public function restoreFromPropagation($module)
@@ -134,7 +137,7 @@ class ModuleFilterManager
                 }
             }
 
-            $this->filters[$this->selected_filter_name]->restoreFromPropagation($module);
+            $this->modulefilters[$this->selected_filter_name]->restoreFromPropagation($module);
         }
     }
 }

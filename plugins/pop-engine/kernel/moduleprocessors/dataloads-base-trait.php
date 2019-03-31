@@ -4,61 +4,30 @@ namespace PoP\Engine;
 trait DataloadModuleProcessorBaseTrait
 {
 
+    use FormattableModuleTrait;
+
     //-------------------------------------------------
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getDataloadingModule($module)
-    {
-        return $module;
-    }
+    // public function getDataloadingModule($module)
+    // {
+    //     return $module;
+    // }
 
-    public function getFormat($module)
-    {
-        return null;
-    }
+    // public function getFilter($module)
+    // {
+    //     if ($filter_module = $this->getFilterModule($module)) {
+    //         $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
+    //         return $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
+    //     }
 
-    public function getFilterModule($module)
-    {
-        return null;
-    }
-
-    public function getFilter($module)
-    {
-        if ($filter_module = $this->getFilterModule($module)) {
-            $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
-            return $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
-        }
-
-        return parent::getFilter($module);
-    }
+    //     return parent::getFilter($module);
+    // }
     
     //-------------------------------------------------
     // PUBLIC Overriding Functions
     //-------------------------------------------------
-
-    public function getModules($module)
-    {
-        $ret = parent::getModules($module);
-
-        if ($filter = $this->getFilterModule($module)) {
-            $ret[] = $filter;
-        }
-
-        if ($inners = $this->getInnerModules($module)) {
-            $ret = array_merge(
-                $ret,
-                $inners
-            );
-        }
-                
-        return $ret;
-    }
-
-    protected function getInnerModules($module)
-    {
-        return array();
-    }
 
     //-------------------------------------------------
     // PROTECTED Functions
@@ -77,19 +46,19 @@ trait DataloadModuleProcessorBaseTrait
         );
     }
 
-    public function getModelPropsForDescendantDatasetmodules($module, &$props)
-    {
-        $ret = parent::getModelPropsForDescendantDatasetmodules($module, $props);
+    // public function getModelPropsForDescendantDatasetmodules($module, &$props)
+    // {
+    //     $ret = parent::getModelPropsForDescendantDatasetmodules($module, $props);
 
-        if ($filter_module = $this->getFilterModule($module)) {
-            $ret['filter-module'] = $filter_module;
-        }
-        if ($filter = $this->getFilter($module)) {
-            $ret['filter'] = $filter;
-        }
+    //     if ($filter_module = $this->getFilterModule($module)) {
+    //         $ret['filter-module'] = $filter_module;
+    //     }
+    //     // if ($filter = $this->getFilter($module)) {
+    //     //     $ret['filter'] = $filter;
+    //     // }
 
-        return $ret;
-    }
+    //     return $ret;
+    // }
 
     public function initModelProps($module, &$props)
     {

@@ -31,7 +31,7 @@ abstract class DataStructureFormatterBase
 
             // Comment Leo 29/08/2014: needed for compatibility with Dataloader_ConvertiblePostList
             // (So that data-fields aimed for another post_type are not retrieved)
-            if (!is_wp_error($value)) {
+            if (!\PoP\Engine\GeneralUtils::isError($value)) {
                 $dataitem[$field] = $value;
             }
         }

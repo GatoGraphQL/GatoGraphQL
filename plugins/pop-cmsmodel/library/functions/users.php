@@ -12,26 +12,15 @@ function hasRole($role, $user_or_user_id)
         $user_id = $user_or_user_id;
     }
     
-    $roles = getUserRoles($user_id);
-    return (in_array($role, $roles));
-}
-
-/**
- * Roles
- */
-
-function getUserRoles($user_id)
-{
     $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-    $user = $cmsapi->getUserBy('id', $user_id);
-    $user_roles = $user->roles;
-    
-    return $user_roles;
-};
+    $roles = $cmsapi->getUserRoles($user_id);
+    return in_array($role, $roles);
+}
 
 function getTheUserRole($user_id)
 {
-    $roles = getUserRoles($user_id);
+    $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+    $roles = $cmsapi->getUserRoles($user_id);
 
     // Allow URE to override this function
     return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('getTheUserRole', $roles[0], $user_id);

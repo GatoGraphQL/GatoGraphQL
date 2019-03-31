@@ -5,7 +5,7 @@ abstract class Dataloader_UserListBase extends Dataloader_UserBase
 {
     use Dataloader_ListTrait;
 
-    public function getDataFromIdsQuery($ids)
+    public function getDataFromIdsQuery(array $ids): array
     {
         $query = array(
             'include' => $ids
@@ -15,7 +15,7 @@ abstract class Dataloader_UserListBase extends Dataloader_UserBase
     
     protected function getOrderbyDefault()
     {
-        return 'name';
+        return \PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:dbcolumn:orderby:users:name');
     }
 
     protected function getOrderDefault()
@@ -23,33 +23,36 @@ abstract class Dataloader_UserListBase extends Dataloader_UserBase
         return 'ASC';
     }
 
-    public function getQuery($query_args)
-    {
-        $query = $this->getMetaQuery($query_args);
+    // public function getQuery($query_args)
+    // {
+    //     $query = $this->getMetaQuery($query_args);
+
+    //     // Get the role either from a provided attr, and allow PoP User Platform to set the default role
+    //     return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
+    //         'Dataloader_UserListBase:query',
+    //         $query,
+    //         $query_args
+    //     );
+    // }
+
+    protected function getQueryHookName() {
 
         // Get the role either from a provided attr, and allow PoP User Platform to set the default role
-        if ($role = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
-            'Dataloader_UserListBase:query:role',
-            $query_args['role']
-        )
-        ) {
-            $query['role'] = $role;
-        }
-
-        return $query;
+        return 'Dataloader_UserListBase:query';
     }
     
-    public function executeQuery($query)
+    public function executeQuery($query, array $options = [])
     {
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        return $cmsapi->getUsers($query);
+        return $cmsapi->getUsers($query, $options);
     }
     
     public function executeQueryIds($query)
     {
-    
-        // Retrieve only ids
-        $query['fields'] = 'ID';
-        return $this->executeQuery($query);
+        // $query['fields'] = 'ID';
+        $options = [
+            'return-type' => POP_RETURNTYPE_IDS,
+        ];
+        return $this->executeQuery($query, $options);
     }
 }

@@ -47,19 +47,16 @@ class EngineHooks
 
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load']) {
-            $url = add_query_arg(
-                GD_URLPARAM_DATAOUTPUTITEMS,
-                array(GD_URLPARAM_DATAOUTPUTITEMS_META, GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, GD_URLPARAM_DATAOUTPUTITEMS_DATABASES),
-                add_query_arg(
-                    GD_URLPARAM_MODULEFILTER,
-                    POP_MODULEFILTER_LAZY,
-                    add_query_arg(
-                        GD_URLPARAM_ACTION,
-                        POP_ACTION_LOADLAZY,
-                        \PoP\Engine\Utils::getCurrentUrl()
-                    )
-                )
-            );
+            $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
+            $url = $cmshelpers->addQueryArgs([
+                GD_URLPARAM_DATAOUTPUTITEMS => [
+                    GD_URLPARAM_DATAOUTPUTITEMS_META, 
+                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, 
+                    GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+                ],
+                GD_URLPARAM_MODULEFILTER => POP_MODULEFILTER_LAZY,
+                GD_URLPARAM_ACTION => POP_ACTION_LOADLAZY,
+            ], \PoP\Engine\Utils::getCurrentUrl());
             $engine->addBackgroundUrl($url, array(POP_TARGET_MAIN));
         }
     }

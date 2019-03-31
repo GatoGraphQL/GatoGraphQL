@@ -15,7 +15,7 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase
 
         // First Check if there's a hook to implement this field
         $hookValue = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_COMMENTS, $resultitem, $field);
-        if (!is_wp_error($hookValue)) {
+        if (!\PoP\Engine\GeneralUtils::isError($hookValue)) {
             return $hookValue;
         }
     
@@ -28,7 +28,7 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase
                 break;
 
             case 'author-name':
-                $value = $cmsapi->getTheAuthorMeta('display_name', $cmsresolver->getCommentUserId($comment));
+                $value = $cmsapi->getUserDisplayName($cmsresolver->getCommentUserId($comment));
                 break;
 
             case 'author-url':
@@ -36,7 +36,7 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase
                 break;
 
             case 'author-email':
-                $value = $cmsapi->getTheAuthorMeta('user_email', $cmsresolver->getCommentUserId($comment));
+                $value = $cmsapi->getUserEmail($cmsresolver->getCommentUserId($comment));
                 break;
 
             case 'author':
@@ -61,7 +61,7 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase
                 break;
 
             case 'date':
-                $value = mysql2date($cmsapi->getOption('date_format'), $cmsresolver->getCommentDateGmt($comment));
+                $value = mysql2date($cmsapi->getOption(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:option:dateFormat')), $cmsresolver->getCommentDateGmt($comment));
                 break;
             
             default:
