@@ -37,7 +37,7 @@ class DefinitionManager
      * Instead of using the name of the $module, we use a unique number in base 36, so the name will occupy much lower size
      * Comment Leo 27/09/2017: Changed from $module to only $id so that it can also be used with ResourceLoaders
      */
-    public function getModuleDefinition($name/*$module*/, $group = null)
+    public function getDefinition($name/*$module*/, $group = null)
     {
         $group = $group ? $group : POP_DEFINITIONGROUP_MODULES;
 
@@ -58,7 +58,7 @@ class DefinitionManager
         );
 
         // Mirror: it simply returns the $module again. It confirms in the code that this decision is deliberate
-        // (not calling function getModuleDefinition could also be that the developer forgot about it)
+        // (not calling function getDefinition could also be that the developer forgot about it)
         // It is simply used to explicitly say that we need the same name as the module, eg: for the filtercomponents,
         // so that in the URL params it shows names that make sense (author=...&search=...)
         // If not mangled, then that's it, use the original $module, do not allow plugins to provide a different value

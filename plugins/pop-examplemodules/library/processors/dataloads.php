@@ -1,14 +1,14 @@
 <?php
 namespace PoP\ExampleModules;
 
-define('POP_MODULE_EXAMPLE_LATESTPOSTS', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-latestposts'));
-define('POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-authorlatestposts'));
-define('POP_MODULE_EXAMPLE_AUTHORDESCRIPTION', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-authordescription'));
-define('POP_MODULE_EXAMPLE_TAGLATESTPOSTS', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-taglatestposts'));
-define('POP_MODULE_EXAMPLE_TAGDESCRIPTION', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-tagdescription'));
-define('POP_MODULE_EXAMPLE_SINGLE', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-single'));
-define('POP_MODULE_EXAMPLE_PAGE', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-page'));
-define('POP_MODULE_EXAMPLE_HOMESTATICPAGE', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-homestaticpage'));
+define('POP_MODULE_EXAMPLE_LATESTPOSTS', \PoP\Engine\DefinitionUtils::getDefinition('example-latestposts'));
+define('POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS', \PoP\Engine\DefinitionUtils::getDefinition('example-authorlatestposts'));
+define('POP_MODULE_EXAMPLE_AUTHORDESCRIPTION', \PoP\Engine\DefinitionUtils::getDefinition('example-authordescription'));
+define('POP_MODULE_EXAMPLE_TAGLATESTPOSTS', \PoP\Engine\DefinitionUtils::getDefinition('example-taglatestposts'));
+define('POP_MODULE_EXAMPLE_TAGDESCRIPTION', \PoP\Engine\DefinitionUtils::getDefinition('example-tagdescription'));
+define('POP_MODULE_EXAMPLE_SINGLE', \PoP\Engine\DefinitionUtils::getDefinition('example-single'));
+define('POP_MODULE_EXAMPLE_PAGE', \PoP\Engine\DefinitionUtils::getDefinition('example-page'));
+define('POP_MODULE_EXAMPLE_HOMESTATICPAGE', \PoP\Engine\DefinitionUtils::getDefinition('example-homestaticpage'));
 
 class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
 {

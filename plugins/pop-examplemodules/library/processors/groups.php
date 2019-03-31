@@ -1,9 +1,9 @@
 <?php
 namespace PoP\ExampleModules;
 
-define('POP_MODULE_EXAMPLE_HOME', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-home'));
-define('POP_MODULE_EXAMPLE_AUTHOR', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-author'));
-define('POP_MODULE_EXAMPLE_TAG', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-tag'));
+define('POP_MODULE_EXAMPLE_HOME', \PoP\Engine\DefinitionUtils::getDefinition('example-home'));
+define('POP_MODULE_EXAMPLE_AUTHOR', \PoP\Engine\DefinitionUtils::getDefinition('example-author'));
+define('POP_MODULE_EXAMPLE_TAG', \PoP\Engine\DefinitionUtils::getDefinition('example-tag'));
 
 class ModuleProcessor_Groups extends \PoP\Engine\ModuleProcessorBase
 {

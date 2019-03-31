@@ -9,8 +9,8 @@ class DefinitionUtils
      * Instead of using the name of the $module, we use a unique number in base 36, so the name will occupy much lower size
      * Comment Leo 27/09/2017: Changed from $module to only $id so that it can also be used with ResourceLoaders
      */
-    public static function getModuleDefinition($id, $group = null)
+    public static function getDefinition($id, $group = null)
     {
-        return Server\DefinitionManager_Factory::getInstance()->getModuleDefinition($id, $group);
+        return Server\DefinitionManager_Factory::getInstance()->getDefinition($id, $group);
     }
 }

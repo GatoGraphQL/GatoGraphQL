@@ -1,11 +1,11 @@
 <?php
 namespace PoP\ExampleModules;
 
-define('POP_MODULE_EXAMPLE_404', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-404'));
-define('POP_MODULE_EXAMPLE_HOMEWELCOME', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-homewelcome'));
-define('POP_MODULE_EXAMPLE_COMMENT', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-comment'));
-define('POP_MODULE_EXAMPLE_AUTHORPROPERTIES', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-authorproperties'));
-define('POP_MODULE_EXAMPLE_TAGPROPERTIES', \PoP\Engine\DefinitionUtils::getModuleDefinition('example-tagproperties'));
+define('POP_MODULE_EXAMPLE_404', \PoP\Engine\DefinitionUtils::getDefinition('example-404'));
+define('POP_MODULE_EXAMPLE_HOMEWELCOME', \PoP\Engine\DefinitionUtils::getDefinition('example-homewelcome'));
+define('POP_MODULE_EXAMPLE_COMMENT', \PoP\Engine\DefinitionUtils::getDefinition('example-comment'));
+define('POP_MODULE_EXAMPLE_AUTHORPROPERTIES', \PoP\Engine\DefinitionUtils::getDefinition('example-authorproperties'));
+define('POP_MODULE_EXAMPLE_TAGPROPERTIES', \PoP\Engine\DefinitionUtils::getDefinition('example-tagproperties'));
 
 class ModuleProcessor_Layouts extends \PoP\Engine\ModuleProcessorBase
 {
