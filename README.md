@@ -406,7 +406,9 @@ PoP allows the configuration of the following properties, set in file wp-config.
 
 `POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
 
-`POP_SERVER_ENABLEAPI` (`true`|`false`, default: `false`): Enable the custom-querying capabilities of the API.
+`POP_SERVER_ENABLEAPI` (`true`|`false`, default: `true`): Enable the custom-querying capabilities of the API.
+
+`POP_SERVER_EXTERNALSITESRUNSAMESOFTWARE` (`true`|`false`, default: `false`): Indicate if the external sites from which the origin site is fetching data has the same components installed. In this case, the data can be retrieved using the standard methods. Otherwise, it will be done through the custom-querying API.
 
 `POP_SERVER_FAILIFSUBCOMPONENTDATALOADERUNDEFINED` (`true`|`false`, default: `false`): Whenever switching domain to a field which doesn't have a default dataloader, and without specifying what dataloader to use, throw an exception if `true` or ignore and avoid loading that data if `false`.
 
