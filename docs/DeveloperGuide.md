@@ -1237,37 +1237,18 @@ function executeQueryIds($query) {
 }
 ```
 
-For instance, a dataloader fetching a list of posts will implement these functions like this:
+For instance, a dataloader fetching a list of posts will be implemented like this:
 
 ```php
 function getQuery($query_args) {
     
-  $query = array();
-
-  if ($limit = $query_args['limit']) {
-    $query['posts_per_page'] = $limit;
-  }
-  
-  if ($author = $query_args['author']) {
-    $query['author'] = $author;
-  }
-
-  if ($cat = $query_args['cat']) {
-    $query['cat'] = $cat;
-  }
-
-  // Add more args to the query
-  // ...
-
-  return $query;
+  return $query_args;
 }
 
 function executeQueryIds($query) {
     
-  // Retrieve only ids
-  $query['fields'] = 'ids';
   $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-  return $cmsapi->getPosts($query);
+  return $cmsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 }  
 ```
 
@@ -1602,6 +1583,110 @@ function prepareDataPropertiesAfterActionexecution($module, &$props, &$data_prop
 }
 ```
 
+## Custom-Querying API
+
+Similar to GraphQL, PoP also provides an API which can be queried from the client, which retrieves exactly the data fields which are requested and nothing more. The custom-querying API is accessed by adding parameter `action=api` and parameter `fields` with the list of fields to retrieve (and, optionally, a few more parameters, as seen in the example below), on the URL fetching the corresponding resources. 
+
+For instance, the following link fetches a collection of posts. By adding `fields=title,content,datetime` we retrieve only these items:
+
+- Original: https://nextapi.getpop.org/posts/?output=json
+- Custom-querying: https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title,content,datetime
+
+The links above demonstrate fetching data only for the queried resources. What about their relationships? For instance, let’s say that we want to retrieve a list of posts with fields "title" and "content", each post’s comments with fields "content" and "date", and the author of each comment with fields "name" and "url". To achieve this in GraphQL we would implement the following query:
+
+```graph
+query {
+  post {
+    title
+    content
+    comments {
+      content
+      date
+      author {
+        name
+        url
+      }
+    }
+  }
+}
+```
+
+PoP, instead, uses a query translated into its corresponding “dot syntax” expression, which can then be supplied through parameter fields. Querying on a “post” resource, this value is:
+
+```properties
+fields=title,content,comments.content,comments.date,comments.author.name,comments.author.url
+```
+
+Or it can be simplified, using | to group all fields applied to the same resource:
+
+```properties
+fields=title|content,comments.content|date,comments.author.name|url
+```
+
+When executing this query on a [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources:
+
+```javascript
+{
+  "datasetmodulesettings": {
+    "dataload-dataquery-singlepost-fields": {
+      "dbkeys": {
+        "id": "posts",
+        "comments": "comments",
+        "comments.author": "users"
+      }
+    }
+  },
+  "datasetmoduledata": {
+    "dataload-dataquery-singlepost-fields": {
+      "dbobjectids": [
+        23691
+      ]
+    }
+  },
+  "databases": {
+    "posts": {
+      "23691": {
+        "id": 23691,
+        "title": "A lovely tango",
+        "content": "<div class=\"responsiveembed-container\"><iframe width=\"480\" height=\"270\" src=\"https:\\/\\/www.youtube.com\\/embed\\/sxm3Xyutc1s?feature=oembed\" frameborder=\"0\" allowfullscreen><\\/iframe><\\/div>\n",
+        "comments": [
+          "25094",
+          "25164"
+        ]
+      }
+    },
+    "comments": {
+      "25094": {
+        "id": "25094",
+        "content": "<p><a class=\"hashtagger-tag\" href=\"https:\\/\\/newapi.getpop.org\\/tags\\/videos\\/\">#videos<\\/a>\\u00a0<a class=\"hashtagger-tag\" href=\"https:\\/\\/newapi.getpop.org\\/tags\\/tango\\/\">#tango<\\/a><\\/p>\n",
+        "date": "4 Aug 2016",
+        "author": "851"
+      },
+      "25164": {
+        "id": "25164",
+        "content": "<p>fjlasdjf;dlsfjdfsj<\\/p>\n",
+        "date": "19 Jun 2017",
+        "author": "1924"
+      }
+    },
+    "users": {
+      "851": {
+        "id": 851,
+        "name": "Leonardo Losoviz",
+        "url": "https:\\/\\/newapi.getpop.org\\/u\\/leo\\/"
+      },
+      "1924": {
+        "id": 1924,
+        "name": "leo2",
+        "url": "https:\\/\\/newapi.getpop.org\\/u\\/leo2\\/"
+      }
+    }
+  }
+}
+```
+
+Hence, PoP can query resources in a REST fashion, and specify schema-based queries in a GraphQL fashion, and we will obtain exactly what is required, without over or underfetching data, and normalizing data in the database so that no data is duplicated. The query can include any number of nested relationships, and these are resolved with linear complexity time: worst case of O(n+m), where n is the number of nodes that switch domain (in this case 2: `comments` and `comments.author`) and m is the number of retrieved results (in this case 5: 1 post + 2 comments + 2 users), and average case of O(n).
+
 ## Validations
 
 ### Checkpoints
@@ -1754,6 +1839,9 @@ function initModelProps($module, &$props) {
 ```
 
 When fetching data from several sources, each source will keep its own state in the [QueryHandler](#queryhandler). Then, it is able to query different amounts of data from different domains (eg: 3 results from domain1.com and 6 results from domain2.com), and stop querying from a particular domain when it has no more results.
+
+Because the external site may have different components installed, it is not guaranteed that fetching data from the external site by simply adding `?output=json` will bring the data required by the origin site. To solve this issue, when querying data from an external site, PoP will use the [custom-querying API](#Custom-Querying-API) to fetch exactly the required data fields (this works for fetching database data, not configuration). If we have control on the external site and we can guarantee that both sites have the same components installed, then we can define constant `POP_SERVER_EXTERNALSITESRUNSAMESOFTWARE` as true, which will allow to fetch database and configuration data through the regular `?output=json` request.
+
 
 ### DataStructureFormatter
 
@@ -1932,11 +2020,7 @@ Let's analyze, for each of these items, how they can be made CMS-agnostic.
 
 PoP implements the same concept of hierarchies as in WordPress, even though with a subset of its implementations: home, single, author, page, tag and 404 (category will be supported in the future too). 
 
-Deducing the hierarchy from the URL is done through interface's `function queryIsHierarchy($query, $hierarchy)`.
-
-The signature of this function receives a `$query` object, which is based on the WordPress `WP_Query` class, and which is in charge of calculating the hierarchy from either the current URL or from the properties in `$vars`. Hence, an implementation of the `$query` object, [through an interface `Query`](https://github.com/leoloso/PoP/issues/78), must be implemented for the other CMSs. This should be relatively easy to accomplish.
-
-However, if hierarchies could not be deduced from the URL by other CMSs, PoP should still work, even though limited to treating every URL as the "page" hierarchy (i.e. mydomain.com/ will be treated as "page" instead of "home", mydomain.com/author/leo will be treated as "page" instead of "author", etc). This is because if the hierarchy is not provided then it defaults to "page", and treating URLs as pages should work for any CMS
+Deducing the hierarchy from the URL is done through interface `RoutingStateFacade`.
 
 **2. Pages, Posts and Custom Post Types**
 
