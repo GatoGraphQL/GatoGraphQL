@@ -25,20 +25,20 @@ class ModulePathManager
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation($module)
+    public function prepareForPropagation($module, &$props)
     {
 
         // Execute steps in this order
         // Step 1: call on the filter
         $modulefilter_manager = ModuleFilterManager_Factory::getInstance();
-        $modulefilter_manager->prepareForPropagation($module);
+        $modulefilter_manager->prepareForPropagation($module, $props);
 
         // Step 2: add the module to the path
         // Prepare for the submodule, going one level down, and adding it to the current path
         // We add $module instead of the first element from $this->propagation_unsettled_paths, so that calculating $this->propagation_current_path works also when not doing ?modulepaths=...
         $this->propagation_current_path[] = $module;
     }
-    public function restoreFromPropagation($module)
+    public function restoreFromPropagation($module, &$props)
     {
 
         // Execute steps in this order
@@ -47,7 +47,7 @@ class ModulePathManager
 
         // Step 2: call on the filter
         $modulefilter_manager = ModuleFilterManager_Factory::getInstance();
-        $modulefilter_manager->restoreFromPropagation($module);
+        $modulefilter_manager->restoreFromPropagation($module, $props);
     }
 }
 

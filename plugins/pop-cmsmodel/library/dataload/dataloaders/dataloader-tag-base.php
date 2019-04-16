@@ -24,8 +24,8 @@ abstract class Dataloader_TagBase extends \PoP\Engine\QueryDataDataloader
             $query = array(
                 'include' => $ids
             );
-            $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-            return $cmsapi->getTags($query);
+            $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
+            return $taxonomyapi->getTags($query);
         }
         
         return array();
@@ -33,9 +33,9 @@ abstract class Dataloader_TagBase extends \PoP\Engine\QueryDataDataloader
     
     // function executeGetData(array $ids): array {
     
-    //        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+    //     $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
     //     if ($tag_id = $ids[0]) {
-    //         return array($cmsapi->getTag($tag_id));
+    //         return array($taxonomyapi->getTag($tag_id));
     //     }
     //     return array();
     // }

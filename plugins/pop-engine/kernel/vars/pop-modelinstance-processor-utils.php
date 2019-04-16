@@ -36,33 +36,17 @@ class ModelInstanceProcessor_Utils
         $vars = Engine_Vars::getVars();
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
 
-        // There will always be a hierarchy. Add it.
-        $hierarchy = $vars['hierarchy'];
-        $components[] = __('hierarchy:', 'pop-engine').$hierarchy;
+        // There will always be a nature. Add it.
+        $nature = $vars['nature'];
+        $route = $vars['route'];
+        $components[] = __('nature:', 'pop-engine').$nature;
+        $components[] = __('route:', 'pop-engine').$route;
 
-        // Properties specific to each hierarchy
-        switch ($hierarchy) {
-            case GD_SETTINGS_HIERARCHY_PAGE:
-                $page_id = $vars['global-state']['queried-object-id'];
-
-                // Each page may be an independent configuration or not, so allow to configure it through hooks. By default it is true, so it's a conservative approach
-                $component_types = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
-                    '\PoP\Engine\ModelInstanceProcessor_Utils:components_from_vars:type:page',
-                    array(
-                        POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID,
-                    )
-                );
-                if (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_ID, $component_types)) {
-                      // We add the page path to help understand what file it is, in addition to the ID (to make sure to make the configuration unique to that page)
-                    $components[] = __('page id:', 'pop-engine').Utils::getPagePath($page_id).$page_id;
-                }
-                // If the page id is added, then there's no need to check the maincontentmodule, since it adds no information
-                elseif (in_array(POP_MODELINSTANCECOMPONENTTYPE_PAGE_MAINCONTENTMODULE, $component_types)) {
-                     // If different pages share the same main content module, then they are sharing the same configuration.
-                    // Eg: a website with all documentation pages may need to generate the configuration only once, for the first page, and then from then on just load data
-                    $pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::getInstance();
-                    $components[] = __('main content module:', 'pop-engine').$pop_module_pagemoduleprocessor_manager->getPageModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE, $page_id);
-                }
+        // Properties specific to each nature
+        switch ($nature) {
+            case POP_NATURE_PAGE:
+                $page_id = $vars['routing-state']['queried-object-id'];
+                $components[] = __('page id:', 'pop-engine').$page_id;
                 break;
         }
 
@@ -72,9 +56,6 @@ class ModelInstanceProcessor_Utils
         }
         if ($target = $vars['target']) {
             $components[] = __('target:', 'pop-engine').$target;
-        }
-        if ($tab = $vars['tab']) {
-            $components[] = __('tab:', 'pop-engine').$tab;
         }
         if ($action = $vars['action']) {
             $components[] = __('action:', 'pop-engine').$action;
@@ -111,19 +92,5 @@ class ModelInstanceProcessor_Utils
         $components = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('ModelInstanceProcessor:model_instance_components_from_vars', $components);
 
         return $components;
-    }
-
-    protected function getSingleCategories($post_id)
-    {
-        $cats = array();
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        if ($cmsapi->getPostType($post_id) == 'post') {
-            foreach ($cmsapi->getTheCategory($post_id) as $cat) {
-                $cats[] = $cat->slug.$cat->term_id;
-            }
-        }
-
-        // Allow for plug-ins to add their own categories. Eg: Events
-        return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('ModelInstanceProcessor:getCategories', $cats, $post_id);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+require_once 'routes.php';
 require_once 'actions.php';
 require_once 'utils.php';
 require_once 'constants.php';

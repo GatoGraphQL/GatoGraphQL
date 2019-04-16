@@ -11,5 +11,10 @@ class Initialization
          * Load the Kernel
          */
         include_once 'kernel/load.php';
+
+        /**
+         * Load the Library
+         */
+        include_once 'library/load.php';
     }
 }

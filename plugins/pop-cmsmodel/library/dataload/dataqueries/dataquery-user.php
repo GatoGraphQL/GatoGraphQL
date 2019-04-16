@@ -10,13 +10,13 @@ class DataQuery_User extends \PoP\Engine\DataQueryBase
         return GD_DATAQUERY_USER;
     }
 
-    public function getNoncacheablePage()
+    public function getNonCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_USERS_FIELDS;
+        return POP_CMSMODEL_ROUTE_LOADERS_USERS_FIELDS;
     }
-    public function getCacheablePage()
+    public function getCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_USERS_LAYOUTS;
+        return POP_CMSMODEL_ROUTE_LOADERS_USERS_LAYOUTS;
     }
     public function getObjectidFieldname()
     {

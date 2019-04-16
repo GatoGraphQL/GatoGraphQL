@@ -3,21 +3,7 @@ namespace PoP\Engine;
 
 class Engine_Vars
 {
-    public static $vars = array();
-    public static $query;
-
-    public static function reset()
-    {
-        self::$vars = array();
-
-        // Allow WP to set the new $query
-        \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine_Vars:reset');
-    }
-
-    public static function setQuery($query)
-    {
-        self::$query = $query;
-    }
+    public static $vars;
 
     public static function getModulepaths()
     {
@@ -52,52 +38,17 @@ class Engine_Vars
         return $ret;
     }
 
-    public static function getHierarchy($query)
-    {
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        
-        // Check all the available hierarchies, and analyze the query against each.
-        // The first one that matches, then that's the hierarchy
-        foreach (HierarchyManager::getHierarchies() as $maybe_hierarchy) {
-            if ($cmsapi->queryIsHierarchy($query, $maybe_hierarchy)) {
-                return $maybe_hierarchy;
-            }
-        }
-
-        // Default one
-        return GD_SETTINGS_HIERARCHY_PAGE;
-    }
-
-    public static function getQueryObject($query)
-    {
-
-        // If there's no query, set the global one
-        if (!$query) {
-            $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-            return $cmsapi->getGlobalQuery();
-        }
-
-        return $query;
-    }
-
     public static function getVars()
     {
         if (self::$vars) {
             return self::$vars;
         }
 
-        // From the query object we are able to obtain the hierarchy for the current request. Based on the global $wp_query object
-        self::$query = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
-            '\PoP\Engine\Engine_Vars:query',
-            self::getQueryObject(self::$query)
-        );
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
 
-        // The hierarchy is a concept taken from WordPress. It depends on the structure of the URL
-        // By default is a page, since everything is a page unless the URL suits a more specialized hierarchy
-        $hierarchy = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
-            '\PoP\Engine\Engine_Vars:hierarchy',
-            self::getHierarchy(self::$query)
-        );
+        // Only initialize the first time. Then, it will call ->resetState() to retrieve new state, no need to create a new instance
+        $cmsrouting = \PoP\CMS\CMSRoutingState_Factory::getInstance();
+        $nature = $cmsrouting->getNature();
 
         // Convert them to lower to make it insensitive to upper/lower case values
         $output = strtolower($_REQUEST[GD_URLPARAM_OUTPUT]);
@@ -108,8 +59,27 @@ class Engine_Vars
         $dboutputmode = strtolower($_REQUEST[GD_URLPARAM_DATABASESOUTPUTMODE]);
         $target = strtolower($_REQUEST[GD_URLPARAM_TARGET]);
         $mangled = Server\Utils::isMangled() ? '' : GD_URLPARAM_MANGLED_NONE;
-        $tab = strtolower($_REQUEST[GD_URLPARAM_TAB]);
         $action = strtolower($_REQUEST[GD_URLPARAM_ACTION]);
+
+        // If it is a ROUTE, then the URL path is already the route
+        if ($nature == POP_NATURE_STANDARD) {
+            $route = \PoP\Engine\Utils::getCurrentPath();
+        } else {
+        
+            // If having set URL param "route", then use it
+            if (isset($_REQUEST[GD_URLPARAM_ROUTE])) {
+                $route = trim(strtolower($_REQUEST[GD_URLPARAM_ROUTE]), '/');
+            } else {
+                // If not, use the "main" route
+                $route = POP_ROUTE_MAIN;
+            }
+        }
+        // Allow to change it
+        $route = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
+        '\PoP\Engine\Engine_Vars:route',
+            $route,
+            $nature
+        );
 
         $outputs = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             '\PoP\Engine\Engine_Vars:outputs',
@@ -213,7 +183,8 @@ class Engine_Vars
             $format = POP_VALUES_DEFAULT;
         }
         self::$vars = array(
-            'hierarchy' => $hierarchy,
+            'nature' => $nature,
+            'route' => $route,
             'output' => $output,
             'modulefilter' => $modulefilter,
             'actionpath' => $_REQUEST[GD_URLPARAM_ACTIONPATH],
@@ -226,7 +197,6 @@ class Engine_Vars
             'mangled' => $mangled,
             'format' => $format,
             'settingsformat' => $settingsformat,
-            'tab' => $tab,
             'action' => $action,
             'loading-site' => $loadingSite,
             'fetching-site' => $fetchingSite,
@@ -243,64 +213,38 @@ class Engine_Vars
             self::$vars['config'] = $_REQUEST[POP_URLPARAM_CONFIG];
         }
 
-        // The global state below, will need to be hooked in by pop-application
-        self::calculateAndSetVarsState(true);
+        // Set the routing state (eg: PoP Queried Object can add its information)
+        self::$vars['routing-state'] = [];
 
         // Allow for plug-ins to add their own vars
         \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
             '\PoP\Engine\Engine_Vars:addVars',
-            array(&self::$vars),
-            self::$query
+            array(&self::$vars)
         );
+
+        self::inferVarsProperties();
 
         return self::$vars;
     }
 
-    public static function setHierarchyInGlobalState()
+    public static function inferVarsProperties()
     {
-        $hierarchy = self::$vars['hierarchy'];
-        self::$vars['global-state']['is-page'] = $hierarchy == GD_SETTINGS_HIERARCHY_PAGE;
-        self::$vars['global-state']['is-home'] = $hierarchy == GD_SETTINGS_HIERARCHY_HOME;
-        self::$vars['global-state']['is-tag'] = $hierarchy == GD_SETTINGS_HIERARCHY_TAG;
-        self::$vars['global-state']['is-single'] = $hierarchy == GD_SETTINGS_HIERARCHY_SINGLE;
-        self::$vars['global-state']['is-author'] = $hierarchy == GD_SETTINGS_HIERARCHY_AUTHOR;
-        self::$vars['global-state']['is-404'] = $hierarchy == GD_SETTINGS_HIERARCHY_404;
-        self::$vars['global-state']['is-front-page'] = $hierarchy == GD_SETTINGS_HIERARCHY_FRONTPAGE;
-        self::$vars['global-state']['is-search'] = $hierarchy == GD_SETTINGS_HIERARCHY_SEARCH;
-        self::$vars['global-state']['is-category'] = $hierarchy == GD_SETTINGS_HIERARCHY_CATEGORY;
-        self::$vars['global-state']['is-archive'] = $hierarchy == GD_SETTINGS_HIERARCHY_ARCHIVE;
-    }
-
-    public static function calculateAndSetVarsState($reset = true)
-    {
-        $hierarchy = self::$vars['hierarchy'];
-
-        // Reset will set the queried object from $query. By default it's true, but when calculating the resources for the resourceloader, in which the queried-object is set manually, it must be false
-        if ($reset) {
-            self::$vars['global-state'] = array();
-            self::setHierarchyInGlobalState();
-
-            \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
-                '\PoP\Engine\Engine_Vars:calculateAndSetVarsState:reset',
-                array(&self::$vars),
-                self::$query
-            );
-        }
+        $nature = self::$vars['nature'];
+        self::$vars['routing-state']['is-standard'] = $nature == POP_NATURE_STANDARD;
+        self::$vars['routing-state']['is-home'] = $nature == POP_NATURE_HOME;
+        self::$vars['routing-state']['is-404'] = $nature == POP_NATURE_404;
 
         \PoP\CMS\HooksAPI_Factory::getInstance()->doAction(
-            '\PoP\Engine\Engine_Vars:calculateAndSetVarsState',
-            array(&self::$vars),
-            self::$query
+            'inferVarsProperties',
+            array(&self::$vars)
         );
 
-        // Function `getPageModuleByMostAllmatchingVarsProperties` actually needs to access all values in $vars
+        // Function `getRouteModuleByMostAllmatchingVarsProperties` actually needs to access all values in $vars
         // Hence, calculate only at the very end
-        if ($reset) {
-            // If filtering module by "maincontent", then calculate which is the main content module
-            if (self::$vars['modulefilter'] == POP_MODULEFILTER_MAINCONTENTMODULE) {
-                $pop_module_pagemoduleprocessor_manager = PageModuleProcessorManager_Factory::getInstance();
-                self::$vars['maincontentmodule'] = $pop_module_pagemoduleprocessor_manager->getPageModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
-            }
+        // If filtering module by "maincontent", then calculate which is the main content module
+        if (self::$vars['modulefilter'] == POP_MODULEFILTER_MAINCONTENTMODULE) {
+            $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManager_Factory::getInstance();
+            self::$vars['maincontentmodule'] = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
         }
     }
 }

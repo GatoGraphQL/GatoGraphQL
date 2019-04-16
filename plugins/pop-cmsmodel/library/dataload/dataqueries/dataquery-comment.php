@@ -10,13 +10,13 @@ class DataQuery_Comment extends \PoP\Engine\DataQueryBase
         return GD_DATAQUERY_COMMENT;
     }
 
-    public function getNoncacheablePage()
+    public function getNonCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_COMMENTS_FIELDS;
+        return POP_CMSMODEL_ROUTE_LOADERS_COMMENTS_FIELDS;
     }
-    public function getCacheablePage()
+    public function getCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_COMMENTS_LAYOUTS;
+        return POP_CMSMODEL_ROUTE_LOADERS_COMMENTS_LAYOUTS;
     }
     public function getObjectidFieldname()
     {

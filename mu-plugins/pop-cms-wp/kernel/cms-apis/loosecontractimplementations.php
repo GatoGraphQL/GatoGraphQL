@@ -15,10 +15,6 @@ class CMSLooseContractImplementations
 			$hooksapi->doAction('popcms:beforeInit');
 		});
 
-		// The ones below go under some other plugin
-		$hooksapi->addAction('wp_footer', function() use($hooksapi) {
-			$hooksapi->doAction('popcms:footer');
-		});
 		$hooksapi->addAction('publish_to_draft', function($post) use($hooksapi) {
 			$hooksapi->doAction('popcms:publishToDraft', $post);
 		}, 10, 1);
@@ -40,21 +36,6 @@ class CMSLooseContractImplementations
 		$hooksapi->addAction('transition_post_status', function($new_status, $old_status, $post) use($hooksapi) {
 			$hooksapi->doAction('popcms:transitionPostStatus', $new_status, $old_status, $post);
 		}, 10, 3);
-		$hooksapi->addAction('wp_enqueue_scripts', function() use($hooksapi) {
-			$hooksapi->doAction('popcms:enqueueScripts');
-		});
-		$hooksapi->addAction('wp_print_footer_scripts', function() use($hooksapi) {
-			$hooksapi->doAction('popcms:printFooterScripts');
-		});
-		$hooksapi->addAction('wp_head', function() use($hooksapi) {
-			$hooksapi->doAction('popcms:head');
-		});
-		$hooksapi->addAction('wp_print_styles', function() use($hooksapi) {
-			$hooksapi->doAction('popcms:printStyles');
-		});
-		$hooksapi->addAction('wp_print_scripts', function() use($hooksapi) {
-			$hooksapi->doAction('popcms:printScripts');
-		});
 		$hooksapi->addAction('user_register', function($user_id) use($hooksapi) {
 			$hooksapi->doAction('popcms:userRegister', $user_id);
 		}, 10, 1);
@@ -69,7 +50,6 @@ class CMSLooseContractImplementations
 		$loosecontract_manager->implementHooks([
 			'popcms:init',
 			'popcms:beforeInit',
-			'popcms:footer',
 			'popcms:publishToDraft',
 			// 'popcms:retrievePasswordKey',
 			'popcms:savePost',
@@ -77,23 +57,12 @@ class CMSLooseContractImplementations
 			'popcms:insertComment',
 			'popcms:pendingToPublish',
 			'popcms:transitionPostStatus',
-			'popcms:enqueueScripts',
-			'popcms:printFooterScripts',
-			'popcms:head',
-			'popcms:printStyles',
-			'popcms:printScripts',
 			'popcms:userRegister',
 			'popcms:spamComment',
 			'popcms:deleteComment',
 		]);
 
 		// Filters
-		$hooksapi->addFilter('style_loader_src', function($src, $handle) use($hooksapi) {
-			return $hooksapi->applyFilters('popcms:styleSrc', $src, $handle);
-		}, 10, 2);
-		$hooksapi->addFilter('script_loader_src', function($src, $handle) use($hooksapi) {
-			return $hooksapi->applyFilters('popcms:scriptSrc', $src, $handle);
-		}, 10, 2);
 		$hooksapi->addFilter('the_title', function($post_title, $post_id) use($hooksapi) {
 			return $hooksapi->applyFilters('popcms:title', $post_title, $post_id);
 		}, 10, 2);
@@ -115,12 +84,6 @@ class CMSLooseContractImplementations
 		$hooksapi->addFilter('auth_cookie_expiration', function($time_in_seconds, $user_id, $remember) use($hooksapi) {
 			return $hooksapi->applyFilters('popcms:authCookieExpiration', $time_in_seconds, $user_id, $remember);
 		}, 10, 3);
-		$hooksapi->addFilter('script_loader_tag', function($tag, $handle, $src) use($hooksapi) {
-			return $hooksapi->applyFilters('popcms:scriptTag', $tag, $handle, $src);
-		}, 10, 3);
-		$hooksapi->addFilter('style_loader_tag', function($tag, $handle, $href, $media) use($hooksapi) {
-			return $hooksapi->applyFilters('popcms:styleTag', $tag, $handle, $href, $media);
-		}, 10, 4);
 		$hooksapi->addFilter('retrieve_password_title', function($title, $user_login, $user_data) use($hooksapi) {
 			return $hooksapi->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user_data);
 		}, 10, 3);
@@ -129,8 +92,6 @@ class CMSLooseContractImplementations
 		}, 10, 4);
 
 		$loosecontract_manager->implementHooks([
-			'popcms:styleSrc',
-			'popcms:scriptSrc',
 			'popcms:title',
 			'popcms:content',
 			'popcms:excerptMore',
@@ -138,15 +99,12 @@ class CMSLooseContractImplementations
 			'popcms:lostPasswordUrl',
 			'popcms:logoutUrl',
 			'popcms:authCookieExpiration',
-			'popcms:scriptTag',
-			'popcms:styleTag',
 			'popcms:retrievePasswordTitle',
 			'popcms:retrievePasswordMessage',
 		]);
 
 		$nameresolver = \PoP\CMS\NameResolver_Factory::getInstance();
 		$nameresolver->implementNames([
-			'popcms:capability:editPost' => 'edit_post',
 			'popcms:capability:editPosts' => 'edit_posts',
 			'popcms:capability:deletePages' => 'delete_pages',
 			'popcms:option:limit' => 'posts_per_page',

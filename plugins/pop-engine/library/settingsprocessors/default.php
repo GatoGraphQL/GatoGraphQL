@@ -3,7 +3,7 @@ namespace PoP\Engine\Settings\Impl;
 
 class DefaultSettingsProcessor extends \PoP\Engine\Settings\DefaultSettingsProcessorBase
 {
-    public function pagesToProcess()
+    public function routesToProcess()
     {
         return array();
     }

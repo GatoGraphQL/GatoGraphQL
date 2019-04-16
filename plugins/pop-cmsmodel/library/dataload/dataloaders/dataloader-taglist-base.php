@@ -25,8 +25,8 @@ abstract class Dataloader_TagListBase extends Dataloader_TagBase
     
     public function executeQuery($query, array $options = [])
     {
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        return $cmsapi->getTags($query, $options);
+        $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
+        return $taxonomyapi->getTags($query, $options);
     }
     
     public function executeQueryIds($query)

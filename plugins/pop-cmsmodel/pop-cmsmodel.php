@@ -14,7 +14,6 @@ namespace PoP\CMSModel;
 //-------------------------------------------------------------------------------------
 define('POP_CMSMODEL_VERSION', 0.106);
 define('POP_CMSMODEL_DIR', dirname(__FILE__));
-define('POP_CMSMODEL_LIB', POP_CMSMODEL_DIR.'/library');
 
 class Plugins
 {

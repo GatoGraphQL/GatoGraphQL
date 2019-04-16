@@ -10,13 +10,13 @@ class DataQuery_Post extends \PoP\Engine\DataQueryBase
         return GD_DATAQUERY_POST;
     }
 
-    public function getNoncacheablePage()
+    public function getNonCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_POSTS_FIELDS;
+        return POP_CMSMODEL_ROUTE_LOADERS_POSTS_FIELDS;
     }
-    public function getCacheablePage()
+    public function getCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_POSTS_LAYOUTS;
+        return POP_CMSMODEL_ROUTE_LOADERS_POSTS_LAYOUTS;
     }
     public function getObjectidFieldname()
     {

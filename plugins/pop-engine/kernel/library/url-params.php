@@ -8,7 +8,7 @@ const GD_URLPARAM_DATASTRUCTURE = 'datastructure';
 
 const GD_URLPARAM_FORMAT = 'format';
 const GD_URLPARAM_SETTINGSFORMAT = 'settingsformat';
-const GD_URLPARAM_TAB = 'tab';
+const GD_URLPARAM_ROUTE = 'route';
 
 const GD_URLPARAM_DATAOUTPUTMODE = 'dataoutputmode';
 const GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES = 'splitbysources';
@@ -60,7 +60,7 @@ const GD_URLPARAM_DATASOURCES = 'datasource';
 const GD_URLPARAM_DATASOURCES_ONLYMODEL = 'onlymodel';
 const GD_URLPARAM_DATASOURCES_MODELANDREQUEST = 'modelandrequest';
 
-const GD_URLPARAM_EXTRAURIS = 'extrauris';
-const POP_JS_MULTIPLEURIS = 'multiple-uris';
+const GD_URLPARAM_EXTRAROUTES = 'extraroutes';
+const POP_JS_MULTIPLEROUTES = 'multiple-routes';
 
 const GD_URLPARAM_STOPFETCHING = 'stop-fetching';

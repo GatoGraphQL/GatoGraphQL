@@ -80,7 +80,7 @@ function arrayIsSubset($maybe_subset, $set)
     return $maybe_subset == arrayIntersectAssocRecursive($maybe_subset, $set);
 }
 
-// This function is an implementation of a recursive `array_intersect_assoc`, so that in the PageModuleProcessor we can ask for conditions recursively (eg: array('global-state' => array('post-type' => 'event')))
+// This function is an implementation of a recursive `array_intersect_assoc`, so that in the RouteModuleProcessor we can ask for conditions recursively (eg: array('routing-state' => array('post-type' => 'event')))
 // Modified from https://stackoverflow.com/questions/4627076/php-question-how-to-array-intersect-assoc-recursively
 function arrayIntersectAssocRecursive(&$arr1, &$arr2)
 {

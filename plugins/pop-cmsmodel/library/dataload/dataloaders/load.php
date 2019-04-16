@@ -9,6 +9,7 @@ require_once 'dataloader-post-base.php';
 require_once 'dataloader-tag-base.php';
 require_once 'dataloader-menu-base.php';
 require_once 'dataloader-postlist-base.php';
+require_once 'dataloader-page-trait.php';
 require_once 'dataloader-pagelist-base.php';
 require_once 'dataloader-taglist-base.php';
 require_once 'dataloader-userlist-base.php';
@@ -21,6 +22,7 @@ require_once 'dataloader-postlist.php';
 require_once 'dataloader-pagelist.php';
 require_once 'dataloader-single-trait.php';
 require_once 'dataloader-single.php';
+require_once 'dataloader-page.php';
 require_once 'dataloader-homestaticpage.php';
 
 require_once 'dataloader-convertiblepostlist.php';

@@ -5,12 +5,12 @@ function popCmsmodelModuleInstanceComponents($components)
 {
     $vars = \PoP\Engine\Engine_Vars::getVars();
     $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-    $hierarchy = $vars['hierarchy'];
+    $nature = $vars['nature'];
 
-    // Properties specific to each hierarchy
-    switch ($hierarchy) {
-        case GD_SETTINGS_HIERARCHY_AUTHOR:
-            $author = $vars['global-state']['queried-object-id'];
+    // Properties specific to each nature
+    switch ($nature) {
+        case POP_NATURE_AUTHOR:
+            $author = $vars['routing-state']['queried-object-id'];
 
             // Author: it may depend on its role
             $component_types = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
@@ -24,8 +24,8 @@ function popCmsmodelModuleInstanceComponents($components)
             }
             break;
 
-        case GD_SETTINGS_HIERARCHY_SINGLE:
-            $post_id = $vars['global-state']['queried-object-id'];
+        case POP_NATURE_SINGLE:
+            $post_id = $vars['routing-state']['queried-object-id'];
 
             // Single may depend on its post_type and category
             // Post and Event may be different
@@ -39,11 +39,6 @@ function popCmsmodelModuleInstanceComponents($components)
             );
             if (in_array(POP_MODELINSTANCECOMPONENTTYPE_SINGLE_POSTTYPE, $component_types)) {
                 $components[] = __('post type:', 'pop-engine').$cmsapi->getPostType($post_id);
-            }
-            if (in_array(POP_MODELINSTANCECOMPONENTTYPE_SINGLE_CATEGORIES, $component_types)) {
-                if ($categories = $this->getSingleCategories($post_id)) {
-                    $components[] = __('categories:', 'pop-engine').implode('.', $categories);
-                }
             }
             break;
     }

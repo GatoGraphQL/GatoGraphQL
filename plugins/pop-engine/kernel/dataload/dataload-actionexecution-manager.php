@@ -3,23 +3,22 @@ namespace PoP\Engine;
 
 class ActionExecution_Manager
 {
-    public $executioners;
-    public $results;
+    public $executioners = [];
+    public $results = [];
     
     public function __construct()
     {
         ActionExecution_Manager_Factory::setInstance($this);
-        $this->executioners = $this->results = array();
 
         \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
-            '\PoP\Engine\Engine:generateData:reset',
+            'inferVarsProperties',
             array($this, 'reset')
         );
     }
 
     public function reset()
     {
-        $this->results = array();
+        $this->results = [];
     }
     
     public function addActionexecutioner($name, $executioner)

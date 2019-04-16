@@ -5,8 +5,8 @@ class PageModuleSiteConfigurationProcessor extends \PoP\Engine\Settings\SiteConf
 {
     public function getEntryModule()
     {
-        $pop_module_pagemoduleprocessor_manager = \PoP\Engine\PageModuleProcessorManager_Factory::getInstance();
-        return $pop_module_pagemoduleprocessor_manager->getPageModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_ENTRYMODULE);
+        $pop_module_routemoduleprocessor_manager = \PoP\Engine\RouteModuleProcessorManager_Factory::getInstance();
+        return $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_ENTRYMODULE);
     }
 }
 

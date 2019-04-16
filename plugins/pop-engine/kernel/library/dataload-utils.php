@@ -14,7 +14,8 @@ class DataloadUtils
         }
 
         $fieldprocessor_manager = FieldProcessor_Manager_Factory::getInstance();
-        $fieldprocessor = $fieldprocessor_manager->get($dataloader->getFieldprocessor());
+        $fieldprocessor_name = $dataloader->getFieldprocessor();
+        $fieldprocessor = $fieldprocessor_manager->get($fieldprocessor_name);
         $subcomponent_dataloader_name = $fieldprocessor->getFieldDefaultDataloader($subcomponent_data_field);
         if (!$subcomponent_dataloader_name && \PoP\Engine\Server\Utils::failIfSubcomponentDataloaderUndefined()) {
             throw new \Exception(sprintf('There is no default dataloader set for field  "%s" from dataloader "%s" and fieldprocessor "%s" (%s)', $subcomponent_data_field, $dataloader_name, $fieldprocessor_name, fullUrl()));

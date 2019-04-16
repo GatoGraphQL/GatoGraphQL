@@ -75,10 +75,10 @@ class Utils
         return false;
     }
 
-    public static function enableExtraurisByParams()
+    public static function enableExtraRoutesByParams()
     {
-        if (defined('POP_SERVER_ENABLEEXTRAURISBYPARAMS')) {
-            return POP_SERVER_ENABLEEXTRAURISBYPARAMS;
+        if (defined('POP_SERVER_ENABLEEXTRAROUTESBYPARAMS')) {
+            return POP_SERVER_ENABLEEXTRAROUTESBYPARAMS;
         }
 
         return false;
@@ -123,6 +123,15 @@ class Utils
     {
         if (defined('POP_SERVER_ENABLEAPI')) {
             return POP_SERVER_ENABLEAPI;
+        }
+
+        return true;
+    }
+
+    public static function externalSitesRunSameSoftware()
+    {
+        if (defined('POP_SERVER_EXTERNALSITESRUNSAMESOFTWARE')) {
+            return POP_SERVER_EXTERNALSITESRUNSAMESOFTWARE;
         }
 
         return false;

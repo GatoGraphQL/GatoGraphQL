@@ -78,7 +78,7 @@ class ModuleFilter_ModulePaths extends \PoP\Engine\ModuleFilterBase
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation($module)
+    public function prepareForPropagation($module, &$props)
     {
         if ($this->paths) {
             // Save the current propagation_unsettled_paths, to restore it later on
@@ -98,13 +98,14 @@ class ModuleFilter_ModulePaths extends \PoP\Engine\ModuleFilterBase
             $this->propagation_unsettled_paths = $matching_unsettled_paths;
         }
     }
-    public function restoreFromPropagation($module)
+    public function restoreFromPropagation($module, &$props)
     {
 
         // Restore the previous propagation_unsettled_paths
         if ($this->paths) {
             $backlog_entry = $this->getBacklogEntry();
-            $this->propagation_unsettled_paths = $this->backlog_unsettled_paths[$backlog_entry];
+            // If the backlog is NULL and doing Extra URIs, set the propagation to $this->paths instead of NULL so it doesn't fail for the new round of generateAndProcessData
+            $this->propagation_unsettled_paths = $this->backlog_unsettled_paths[$backlog_entry] ?? $this->paths;
             unset($this->backlog_unsettled_paths[$backlog_entry]);
         }
     }

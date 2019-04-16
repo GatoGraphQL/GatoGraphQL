@@ -10,13 +10,13 @@ class DataQuery_Tag extends \PoP\Engine\DataQueryBase
         return GD_DATAQUERY_TAG;
     }
 
-    public function getNoncacheablePage()
+    public function getNonCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_TAGS_FIELDS;
+        return POP_CMSMODEL_ROUTE_LOADERS_TAGS_FIELDS;
     }
-    public function getCacheablePage()
+    public function getCacheableRoute()
     {
-        return POP_CMSMODEL_PAGE_LOADERS_TAGS_LAYOUTS;
+        return POP_CMSMODEL_ROUTE_LOADERS_TAGS_LAYOUTS;
     }
     public function getObjectidFieldname()
     {

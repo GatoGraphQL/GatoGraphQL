@@ -30,7 +30,7 @@ class DataQuery_Manager
             return array_values(
                 array_diff(
                     $fields,
-                    $this->getRejectedfields()
+                    $this->getRejectedFields()
                 )
             );
         }
@@ -40,7 +40,7 @@ class DataQuery_Manager
         return array_values(
             array_intersect(
                 $fields,
-                $this->getAllowedfields()
+                $this->getAllowedFields()
             )
         );
     }
@@ -57,68 +57,68 @@ class DataQuery_Manager
         return array_values(
             array_intersect(
                 $layouts,
-                $this->getAllowedlayouts()
+                $this->getAllowedLayouts()
             )
         );
     }
 
-    public function getAllowedfields()
+    public function getAllowedFields()
     {
         $allowedfields = array();
         foreach ($this->dataqueries as $name => $dataquery) {
             $allowedfields = array_merge(
                 $allowedfields,
-                $dataquery->getAllowedfields()
+                $dataquery->getAllowedFields()
             );
         }
 
         return array_unique($allowedfields);
     }
 
-    public function getRejectedfields()
+    public function getRejectedFields()
     {
         $rejectedfields = array();
         foreach ($this->dataqueries as $name => $dataquery) {
             $rejectedfields = array_merge(
                 $rejectedfields,
-                $dataquery->getRejectedfields()
+                $dataquery->getRejectedFields()
             );
         }
 
         return array_unique($rejectedfields);
     }
 
-    public function getAllowedlayouts()
+    public function getAllowedLayouts()
     {
         $allowedlayouts = array();
         foreach ($this->dataqueries as $name => $dataquery) {
             $allowedlayouts = array_merge(
                 $allowedlayouts,
-                $dataquery->getAllowedlayouts()
+                $dataquery->getAllowedLayouts()
             );
         }
 
         return array_unique($allowedlayouts);
     }
 
-    public function getCacheablepages()
+    public function getCacheableRoutes()
     {
-        $cacheablepages = array();
+        $cacheableroutes = array();
         foreach ($this->dataqueries as $name => $dataquery) {
-            $cacheablepages[] = $dataquery->getCacheablePage();
+            $cacheableroutes[] = $dataquery->getCacheableRoute();
         }
 
-        return $cacheablepages;
+        return $cacheableroutes;
     }
 
-    public function getNoncacheablepages()
+    public function getNonCacheableRoutes()
     {
-        $noncacheablepages = array();
+        $noncacheableroutes = array();
         foreach ($this->dataqueries as $name => $dataquery) {
-            $noncacheablepages[] = $dataquery->getNoncacheablePage();
+            $noncacheableroutes[] = $dataquery->getNonCacheableRoute();
         }
 
-        return $noncacheablepages;
+        return $noncacheableroutes;
     }
 }
     

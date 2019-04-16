@@ -18,7 +18,7 @@ class Dataloader_Single extends Dataloader_PostBase
     // function executeGetData(array $ids): array {
     
     //     $vars = \PoP\Engine\Engine_Vars::getVars();
-    //     $post = $vars['global-state']['queried-object'];
+    //     $post = $vars['routing-state']['queried-object'];
     //     return array($post);
     // }
 }

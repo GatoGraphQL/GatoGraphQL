@@ -6,7 +6,7 @@ class Engine_Hooks
     public function __construct()
     {
 
-        // Add functions as hooks, so we allow PoP_Application to set the 'global-state' first
+        // Add functions as hooks, so we allow PoP_Application to set the 'routing-state' first
         \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             '\PoP\Engine\Engine_Vars:addVars',
             array($this, 'addVars'),
@@ -22,20 +22,20 @@ class Engine_Hooks
     public function addVars($vars_in_array)
     {
 
-        // Allow WP API to set the "global-state" first
+        // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
         $vars = &$vars_in_array[0];
         if (Server\Utils::enableApi() && $vars['action'] == POP_ACTION_API) {
             $this->addFieldsToVars($vars);
-        } elseif ($vars['global-state']['is-page']) {
+        } elseif ($vars['routing-state']['is-standard']) {
             $dataquery_manager = DataQuery_Manager_Factory::getInstance();
-            $post = $vars['global-state']['queried-object'];
+            $route = $vars['route'];
 
             // Special pages: dataqueries' cacheablepages serve layouts, noncacheable pages serve fields.
             // So the settings for these pages depend on the URL params
-            if (in_array($post->ID, $dataquery_manager->getNoncacheablepages())) {
+            if (in_array($route, $dataquery_manager->getNonCacheableRoutes())) {
                 $this->addFieldsToVars($vars);
-            } elseif (in_array($post->ID, $dataquery_manager->getCacheablepages())) {
+            } elseif (in_array($route, $dataquery_manager->getCacheableRoutes())) {
                 if ($layouts = $_REQUEST[GD_URLPARAM_LAYOUTS]) {
                     $layouts = is_array($layouts) ? $layouts : array($layouts);
                     $vars['layouts'] = $layouts;
@@ -89,20 +89,20 @@ class Engine_Hooks
     public function getModelInstanceComponentsFromVars($components)
     {
 
-        // Allow WP API to set the "global-state" first
+        // Allow WP API to set the "routing-state" first
         // Each page is an independent configuration
         $vars = Engine_Vars::getVars();
         if (Server\Utils::enableApi() && $vars['action'] == POP_ACTION_API) {
             $this->addFieldsToComponents($components);
-        } elseif ($vars['global-state']['is-page']) {
+        } elseif ($vars['routing-state']['is-standard']) {
             $dataquery_manager = DataQuery_Manager_Factory::getInstance();
-            $post = $vars['global-state']['queried-object'];
+            $route = $vars['route'];
 
             // Special pages: dataqueries' cacheablepages serve layouts, noncacheable pages serve fields.
             // So the settings for these pages depend on the URL params
-            if (in_array($post->ID, $dataquery_manager->getNoncacheablepages())) {
+            if (in_array($route, $dataquery_manager->getNonCacheableRoutes())) {
                 $this->addFieldsToComponents($components);
-            } elseif (in_array($post->ID, $dataquery_manager->getCacheablepages())) {
+            } elseif (in_array($route, $dataquery_manager->getCacheableRoutes())) {
                 if ($layouts = $vars['layouts']) {
                     $components[] = __('layouts:', 'pop-engine').implode('.', $layouts);
                 }

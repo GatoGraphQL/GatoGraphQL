@@ -59,11 +59,6 @@ class ModuleFilterManager
         $this->modulefilters[$modulefilter->getName()] = $modulefilter;
     }
 
-    protected function ancestorModuleNotExcluded()
-    {
-        return !is_null($this->not_excluded_ancestor_module);
-    }
-
     public function neverExclude($neverExclude)
     {
         $this->neverExclude = $neverExclude;
@@ -75,8 +70,7 @@ class ModuleFilterManager
             if ($this->neverExclude) {
                 return false;
             }
-
-            if ($this->ancestorModuleNotExcluded()) {
+            if (!is_null($this->not_excluded_ancestor_module)) {
                 return false;
             }
 
@@ -102,7 +96,7 @@ class ModuleFilterManager
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation($module)
+    public function prepareForPropagation($module, &$props)
     {
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && is_null($this->not_excluded_ancestor_module) && $this->excludeModule($module, $props) === false) {
@@ -120,10 +114,10 @@ class ModuleFilterManager
                 }
             }
 
-            $this->modulefilters[$this->selected_filter_name]->prepareForPropagation($module);
+            $this->modulefilters[$this->selected_filter_name]->prepareForPropagation($module, $props);
         }
     }
-    public function restoreFromPropagation($module)
+    public function restoreFromPropagation($module, &$props)
     {
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_module) && $this->excludeModule($module, $props) === false) {
@@ -137,7 +131,7 @@ class ModuleFilterManager
                 }
             }
 
-            $this->modulefilters[$this->selected_filter_name]->restoreFromPropagation($module);
+            $this->modulefilters[$this->selected_filter_name]->restoreFromPropagation($module, $props);
         }
     }
 }

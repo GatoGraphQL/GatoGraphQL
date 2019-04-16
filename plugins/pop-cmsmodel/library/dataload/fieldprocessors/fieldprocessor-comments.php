@@ -96,6 +96,7 @@ class FieldProcessor_Comments extends \PoP\Engine\FieldProcessorBase
             case 'post-id':
                 return GD_DATALOADER_CONVERTIBLEPOSTLIST;
         
+            case 'id':
             case 'parent':
                 return GD_DATALOADER_COMMENTLIST;
         }

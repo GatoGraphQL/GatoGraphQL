@@ -14,7 +14,7 @@ class ModuleFilter_Lazy extends \PoP\Engine\ModuleFilterBase
     {
 
         // Exclude if it is not lazy
-        $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
+        $moduleprocessor_manager = \PoP\Engine\ModuleProcessor_Manager_Factory::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($module);
         return !$processor->isLazyload($module, $props);
     }

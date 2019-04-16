@@ -62,7 +62,7 @@ trait ModulePathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         $submodules_ret = array();
         foreach ($submodules as $submodule) {
             $submodules_ret = array_merge(
@@ -73,7 +73,7 @@ trait ModulePathProcessorTrait
         if ($submodules_ret) {
             $ret[$key][GD_JS_MODULES] = $submodules_ret;
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
         
         return $ret;
     }
@@ -95,14 +95,14 @@ trait ModulePathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $ret = array_merge_recursive(
                 $ret,
                 $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
         
         return $ret;
     }
@@ -130,7 +130,7 @@ trait ModulePathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         $submodules_ret = array();
         foreach ($submodules as $submodule) {
             $submodules_ret = array_merge(
@@ -141,7 +141,7 @@ trait ModulePathProcessorTrait
         if ($submodules_ret) {
             $ret[$key][GD_JS_MODULES] = $submodules_ret;
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
         
         return $ret;
     }
@@ -162,7 +162,7 @@ trait ModulePathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $submodule_ret = $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $recursive);
             $ret = $recursive ?
@@ -179,7 +179,7 @@ trait ModulePathProcessorTrait
                 )
             );
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
         
         return $ret;
     }

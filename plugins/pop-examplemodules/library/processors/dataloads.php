@@ -75,11 +75,11 @@ class ModuleProcessor_Dataloads extends \PoP\Engine\DataloadModuleProcessorBase
         $vars = \PoP\Engine\Engine_Vars::getVars();
         switch ($module) {
             case POP_MODULE_EXAMPLE_AUTHORLATESTPOSTS:
-                $ret['authors'] = [$vars['global-state']['queried-object-id']];
+                $ret['authors'] = [$vars['routing-state']['queried-object-id']];
                 break;
 
             case POP_MODULE_EXAMPLE_TAGLATESTPOSTS:
-                $ret['tag-ids'] = [$vars['global-state']['queried-object-id']];
+                $ret['tag-ids'] = [$vars['routing-state']['queried-object-id']];
                 break;
         }
 

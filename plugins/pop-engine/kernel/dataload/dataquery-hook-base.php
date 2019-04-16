@@ -6,70 +6,70 @@ class DataQuery_HookBase
     public function __construct()
     {
         $name = $this->getDataqueryName();
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':allowedfields', array($this, 'addAllowedfields'));
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':rejectedfields', array($this, 'addRejectedfields'));
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':allowedlayouts', array($this, 'addAllowedlayouts'));
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':nocachefields', array($this, 'addNocachefields'));
-        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':lazylayouts', array($this, 'addLazylayouts'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':allowedfields', array($this, 'addAllowedFields'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':rejectedfields', array($this, 'addRejectedFields'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':allowedlayouts', array($this, 'addAllowedLayouts'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':nocachefields', array($this, 'addNocacheFields'));
+        \PoP\CMS\HooksAPI_Factory::getInstance()->addFilter('Dataquery:'.$name.':lazylayouts', array($this, 'addLazyLayouts'));
     }
     public function getDataqueryName()
     {
         return '';
     }
-    public function addAllowedfields($allowedfields)
+    public function addAllowedFields($allowedfields)
     {
         return array_unique(
             array_merge(
                 $allowedfields,
-                $this->getAllowedfields()
+                $this->getAllowedFields()
             )
         );
     }
-    public function addRejectedfields($rejectedfields)
+    public function addRejectedFields($rejectedfields)
     {
         return array_unique(
             array_merge(
                 $rejectedfields,
-                $this->getRejectedfields()
+                $this->getRejectedFields()
             )
         );
     }
-    public function addAllowedlayouts($allowedlayouts)
+    public function addAllowedLayouts($allowedlayouts)
     {
         return array_unique(
             array_merge(
                 $allowedlayouts,
-                $this->getAllowedlayouts()
+                $this->getAllowedLayouts()
             )
         );
     }
-    public function addNocachefields($nocachefields)
+    public function addNocacheFields($nocachefields)
     {
         return array_merge(
             $nocachefields,
-            $this->getNocachefields()
+            $this->getNoCacheFields()
         );
     }
-    public function addLazylayouts($lazylayouts)
+    public function addLazyLayouts($lazylayouts)
     {
         return array_merge(
             $lazylayouts,
-            $this->getLazylayouts()
+            $this->getLazyLayouts()
         );
     }
 
-    public function getAllowedfields()
+    public function getAllowedFields()
     {
-        return $this->getNocachefields();
+        return $this->getNoCacheFields();
     }
-    public function getRejectedfields()
+    public function getRejectedFields()
     {
         return array();
     }
-    public function getAllowedlayouts()
+    public function getAllowedLayouts()
     {
         $allowedlayouts = array();
-        foreach ($this->getLazylayouts() as $field => $lazylayouts) {
+        foreach ($this->getLazyLayouts() as $field => $lazylayouts) {
             foreach ($lazylayouts as $key => $layout) {
                 $allowedlayouts[] = $layout;
             }
@@ -81,11 +81,11 @@ class DataQuery_HookBase
     /**
      * Implement functions below in the hook implementation
      */
-    public function getNocachefields()
+    public function getNoCacheFields()
     {
         return array();
     }
-    public function getLazylayouts()
+    public function getLazyLayouts()
     {
         return array();
     }

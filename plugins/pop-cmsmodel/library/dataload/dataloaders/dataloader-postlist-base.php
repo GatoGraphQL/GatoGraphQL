@@ -107,7 +107,7 @@ abstract class Dataloader_PostListBase extends Dataloader_PostBase
     //     //     $query['categories'] = $categories;
     //     // }
 
-    //     // // post__not_in to remove posts in the Hierarchy (eg: remove current Single post for Block Related)
+    //     // // post__not_in to remove posts in the Nature (eg: remove current Single post for Block Related)
     //     // if ($post_not_in = $query_args['post-not-in']) {
     //     //     $query['post-not-in'] = $post_not_in;
     //     // }

@@ -715,6 +715,20 @@ class Temporary_Hacks_Installation
         // PoP Theme Frontend
         $plugin_version['pop-theme-frontend'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPTHEMEFRONTEND_VERSION;
 
+        // Meta and Taxonomy plugins
+        $plugin_version['pop-meta'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPMETA_VERSION;
+        $plugin_version['pop-meta-wp'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPMETAWP_VERSION;
+        $plugin_version['pop-metaquery'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPMETAQUERY_VERSION;
+        $plugin_version['pop-metaquery-wp'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPMETAQUERYWP_VERSION;
+        $plugin_version['pop-taxonomy'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPTAXONOMY_VERSION;
+        $plugin_version['pop-taxonomy-wp'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPTAXONOMYWP_VERSION;
+        $plugin_version['pop-taxonomyquery'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPTAXONOMYQUERY_VERSION;
+        $plugin_version['pop-taxonomyquery-wp'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPTAXONOMYQUERYWP_VERSION;
+
+        // PoP Queried Object
+        $plugin_version['pop-queriedobject'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPQUERIEDOBJECT_VERSION;
+        $plugin_version['pop-queriedobject-wp'] = CLUSTER_HELPERS_PLUGINACTIVATION_POPQUERIEDOBJECTWP_VERSION;
+
         return $plugin_version;
     }
 }

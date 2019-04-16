@@ -12,7 +12,7 @@ class Engine
     protected $ids_data_fields;
     protected $dbdata;
     protected $backgroundload_urls;
-    protected $extra_uris;
+    protected $extra_routes;
     protected $cachedsettings;
     protected $outputData;
 
@@ -91,37 +91,37 @@ class Engine
         }
     }
 
-    protected function getExtraUris()
+    protected function getExtraRoutes()
     {
 
         // The extra URIs must be cached! That is because we will change the requested URI in $vars, upon which the hook to inject extra URIs (eg: for page INITIALFRAMES) will stop working
-        if (!is_null($this->extra_uris)) {
-            return $this->extra_uris;
+        if (!is_null($this->extra_routes)) {
+            return $this->extra_routes;
         }
 
-        $this->extra_uris = array();
-        if (Server\Utils::enableExtraurisByParams()) {
-            $this->extra_uris = $_REQUEST[GD_URLPARAM_EXTRAURIS] ?? array();
-            $this->extra_uris = is_array($this->extra_uris) ? $this->extra_uris : array($this->extra_uris);
+        $this->extra_routes = array();
+        if (Server\Utils::enableExtraRoutesByParams()) {
+            $this->extra_routes = $_REQUEST[GD_URLPARAM_EXTRAROUTES] ?? array();
+            $this->extra_routes = is_array($this->extra_routes) ? $this->extra_routes : array($this->extra_routes);
         }
 
         // Enable to add extra URLs in a fixed manner
-        $this->extra_uris = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
-            '\PoP\Engine\Engine:getExtraUris',
-            $this->extra_uris
+        $this->extra_routes = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
+            '\PoP\Engine\Engine:getExtraRoutes',
+            $this->extra_routes
         );
 
-        return $this->extra_uris;
+        return $this->extra_routes;
     }
 
-    protected function listExtraUriVars()
+    protected function listExtraRouteVars()
     {
-        if ($has_extra_uris = !empty($this->getExtraUris())) {
+        if ($has_extra_routes = !empty($this->getExtraRoutes())) {
             $model_instance_id = ModelInstanceProcessor_Utils::getModelInstanceId();
             $current_uri = removeDomain(Utils::getCurrentUrl());
         }
 
-        return array($has_extra_uris, $model_instance_id, $current_uri);
+        return array($has_extra_routes, $model_instance_id, $current_uri);
     }
 
     public function generateData()
@@ -154,23 +154,24 @@ class Engine
         $this->processAndGenerateData();
 
         // See if there are extra URIs to be processed in this same request
-        if ($extra_uris = $this->getExtraUris()) {
+        if ($extra_routes = $this->getExtraRoutes()) {
             // Combine the response for each extra URI together with the original response, merging all JSON objects together, but under each's URL/model_instance_id
 
-            // To obtain the hierarchy for each URI, we use a hack: change the current URI and create a new WP object, which will process the query_vars and from there obtain the hierarchy
+            // To obtain the nature for each URI, we use a hack: change the current URI and create a new WP object, which will process the query_vars and from there obtain the nature
             // First make a backup of the current URI to set it again later
-            $current_request_uri = $_SERVER['REQUEST_URI'];
+            // $current_request_uri = $_SERVER['REQUEST_URI'];
+            $vars = &\PoP\Engine\Engine_Vars::$vars;
+            $current_route = $vars['route'];
 
             // Process each extra URI, and merge its results with all others
-            foreach ($extra_uris as $uri) {
-                // From this hack, we obtain the hierarchy
-                $_SERVER['REQUEST_URI'] = $uri;
-                
+            foreach ($extra_routes as $route) {
+                // From this hack, we obtain the nature
                 // Reset $vars so that it gets created anew
-                Engine_Vars::reset();
+                // Engine_Vars::setRoutingStateToURI($uri);
+                $vars['route'] = $route;
 
-                // Allow functionalities to be reset too. Eg: ActionExecuterBase results
-                \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:generateData:reset');
+                // // Allow functionalities to be reset too. Eg: ActionExecuterBase results
+                // \PoP\CMS\HooksAPI_Factory::getInstance()->doAction('\PoP\Engine\Engine:generateData:reset');
                 
                 // Process the request with the new $vars and merge it with all other results
                 // Can't use array_merge_recursive since it creates arrays when the key is the same, which is not what is expected in this case
@@ -178,8 +179,8 @@ class Engine
             }
 
             // Set the previous values back
-            $_SERVER['REQUEST_URI'] = $current_request_uri;
-            Engine_Vars::reset();
+            // Engine_Vars::setRoutingStateToURI($current_request_uri);
+            $vars['route'] = $current_route;
         }
 
         // Add session/site meta
@@ -373,7 +374,7 @@ class Engine
         // From the state we know if to process static/staful content or both
         $datasources = $vars['datasources'];
 
-        // Get the entry module based on the application configuration and the hierarchy
+        // Get the entry module based on the application configuration and the nature
         $module = $this->getEntryModule();
 
         // Save it to be used by the children class
@@ -430,7 +431,7 @@ class Engine
             }
         }
 
-        list($has_extra_uris, $model_instance_id, $current_uri) = $this->listExtraUriVars();
+        list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
         // if (
         //     in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems) ||
@@ -442,7 +443,7 @@ class Engine
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             if ($requestmeta = $this->getRequestMeta()) {
-                $data['requestmeta'] = $has_extra_uris ? array($current_uri => $requestmeta) : $requestmeta;
+                $data['requestmeta'] = $has_extra_routes ? array($current_uri => $requestmeta) : $requestmeta;
             }
         }
 
@@ -497,8 +498,8 @@ class Engine
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")
-            if ($this->getExtraUris()) {
-                $this->data['requestmeta'][POP_JS_MULTIPLEURIS] = true;
+            if ($this->getExtraRoutes()) {
+                $this->data['requestmeta'][POP_JS_MULTIPLEROUTES] = true;
             }
             if ($sitemeta = $this->getSiteMeta()) {
                 $this->data['sitemeta'] = $sitemeta;
@@ -586,7 +587,7 @@ class Engine
         }
 
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
-        list($has_extra_uris, $model_instance_id, $current_uri) = $this->listExtraUriVars();
+        list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
         if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
             // Save the model settings
@@ -595,10 +596,10 @@ class Engine
                     $ret['modulesettings']['immutable'] = $immutable_settings;
                 }
                 if ($mutableonmodel_settings) {
-                    $ret['modulesettings']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_settings) : $mutableonmodel_settings;
+                    $ret['modulesettings']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_settings) : $mutableonmodel_settings;
                 }
                 if ($mutableonrequest_settings) {
-                    $ret['modulesettings']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
+                    $ret['modulesettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
                 }
             }
 
@@ -607,10 +608,10 @@ class Engine
                     $ret['datasetmodulesettings']['immutable'] = $immutable_datasetsettings;
                 }
                 // if ($mutableonmodel_datasetsettings) {
-                //     $ret['datasetmodulesettings']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetsettings) : $mutableonmodel_datasetsettings;
+                //     $ret['datasetmodulesettings']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetsettings) : $mutableonmodel_datasetsettings;
                 // }
                 // if ($mutableonrequest_datasetsettings) {
-                //     $ret['datasetmodulesettings']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetsettings) : $mutableonrequest_datasetsettings;
+                //     $ret['datasetmodulesettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetsettings) : $mutableonrequest_datasetsettings;
                 // }
             }
         } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
@@ -622,7 +623,7 @@ class Engine
                     $mutableonrequest_settings ?? array()
                 )
                 ) {
-                    $ret['modulesettings'] = $has_extra_uris ? array($current_uri => $combined_settings) : $combined_settings;
+                    $ret['modulesettings'] = $has_extra_routes ? array($current_uri => $combined_settings) : $combined_settings;
                 }
             }
 
@@ -633,7 +634,7 @@ class Engine
                     array()// $mutableonrequest_datasetsettings ?? array()
                 )
                 ) {
-                    $ret['datasetmodulesettings'] = $has_extra_uris ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
+                    $ret['datasetmodulesettings'] = $has_extra_routes ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
                 }
             }
         }
@@ -690,7 +691,7 @@ class Engine
     //     }
 
     //     // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
-    //     list($has_extra_uris, $model_instance_id, $current_uri) = $this->listExtraUriVars();
+    //     list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
     //     if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
 
@@ -698,10 +699,10 @@ class Engine
     //             $ret['datasetmodulesettings']['immutable'] = $immutable_datasetsettings;
     //         }
     //         // if ($mutableonmodel_datasetsettings) {
-    //         //     $ret['datasetmodulesettings']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetsettings) : $mutableonmodel_datasetsettings;
+    //         //     $ret['datasetmodulesettings']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetsettings) : $mutableonmodel_datasetsettings;
     //         // }
     //         // if ($mutableonrequest_datasetsettings) {
-    //         //     $ret['datasetmodulesettings']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetsettings) : $mutableonrequest_datasetsettings;
+    //         //     $ret['datasetmodulesettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetsettings) : $mutableonrequest_datasetsettings;
     //         // }
     //     }
     //     elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
@@ -712,7 +713,7 @@ class Engine
     //             array(),// $mutableonmodel_datasetsettings ?? array(),
     //             array()// $mutableonrequest_datasetsettings ?? array()
     //         )) {
-    //             $ret['datasetmodulesettings'] = $has_extra_uris ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
+    //             $ret['datasetmodulesettings'] = $has_extra_routes ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
     //         }
     //     }
 
@@ -908,11 +909,11 @@ class Engine
         
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$module][POP_PROPS_MODULES]);
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
     }
 
     protected function getDataloadingModuleFullpaths($module, &$props)
@@ -955,11 +956,11 @@ class Engine
         
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$module][POP_PROPS_MODULES]);
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
     }
 
     protected function assignValueForModule(&$array, $module_path, $module, $key, $value)
@@ -1324,26 +1325,26 @@ class Engine
 
         if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)) {
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
-            list($has_extra_uris, $model_instance_id, $current_uri) = $this->listExtraUriVars();
+            list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
             if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
                 if ($immutable_moduledata) {
                     $ret['moduledata']['immutable'] = $immutable_moduledata;
                 }
                 if ($mutableonmodel_moduledata) {
-                    $ret['moduledata']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_moduledata) : $mutableonmodel_moduledata;
+                    $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_moduledata) : $mutableonmodel_moduledata;
                 }
                 if ($mutableonrequest_moduledata) {
-                    $ret['moduledata']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_moduledata) : $mutableonrequest_moduledata;
+                    $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_moduledata) : $mutableonrequest_moduledata;
                 }
                 if ($immutable_datasetmoduledata) {
                     $ret['datasetmoduledata']['immutable'] = $immutable_datasetmoduledata;
                 }
                 if ($mutableonmodel_datasetmoduledata) {
-                    $ret['datasetmoduledata']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetmoduledata) : $mutableonmodel_datasetmoduledata;
+                    $ret['datasetmoduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmoduledata) : $mutableonmodel_datasetmoduledata;
                 }
                 if ($mutableonrequest_datasetmoduledata) {
-                    $ret['datasetmoduledata']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetmoduledata) : $mutableonrequest_datasetmoduledata;
+                    $ret['datasetmoduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmoduledata) : $mutableonrequest_datasetmoduledata;
                 }
 
                 if ($add_meta) {
@@ -1351,10 +1352,10 @@ class Engine
                         $ret['datasetmodulemeta']['immutable'] = $immutable_datasetmodulemeta;
                     }
                     if ($mutableonmodel_datasetmodulemeta) {
-                        $ret['datasetmodulemeta']['mutableonmodel'] = $has_extra_uris ? array($model_instance_id => $mutableonmodel_datasetmodulemeta) : $mutableonmodel_datasetmodulemeta;
+                        $ret['datasetmodulemeta']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmodulemeta) : $mutableonmodel_datasetmodulemeta;
                     }
                     if ($mutableonrequest_datasetmodulemeta) {
-                        $ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_uris ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
+                        $ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
                     }
                 }
             } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
@@ -1365,7 +1366,7 @@ class Engine
                     $mutableonrequest_moduledata ?? array()
                 )
                 ) {
-                    $ret['moduledata'] = $has_extra_uris ? array($current_uri => $combined_moduledata) : $combined_moduledata;
+                    $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_moduledata) : $combined_moduledata;
                 }
                 if ($combined_datasetmoduledata = array_merge_recursive(
                     $immutable_datasetmoduledata ?? array(),
@@ -1373,7 +1374,7 @@ class Engine
                     $mutableonrequest_datasetmoduledata ?? array()
                 )
                 ) {
-                    $ret['datasetmoduledata'] = $has_extra_uris ? array($current_uri => $combined_datasetmoduledata) : $combined_datasetmoduledata;
+                    $ret['datasetmoduledata'] = $has_extra_routes ? array($current_uri => $combined_datasetmoduledata) : $combined_datasetmoduledata;
                 }
                 if ($add_meta) {
                     if ($combined_datasetmodulemeta = array_merge_recursive(
@@ -1382,7 +1383,7 @@ class Engine
                         $mutableonrequest_datasetmodulemeta ?? array()
                     )
                     ) {
-                        $ret['datasetmodulemeta'] = $has_extra_uris ? array($current_uri => $combined_datasetmodulemeta) : $combined_datasetmodulemeta;
+                        $ret['datasetmodulemeta'] = $has_extra_routes ? array($current_uri => $combined_datasetmodulemeta) : $combined_datasetmodulemeta;
                     }
                 }
             }
@@ -1416,6 +1417,7 @@ class Engine
         $databases = array();
         $this->nocache_fields = array();
         $format = $vars['format'];
+        $route = $vars['route'];
 
         // Keep an object with all fetched IDs/fields for each dataloader. Then, we can keep using the same dataloader as subcomponent,
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
@@ -1469,10 +1471,10 @@ class Engine
                 $objectid_fieldname = $dataquery->getObjectidFieldname();
                 
                 // Force retrieval of data from the server. Eg: recommendpost-count
-                $forceserverload_fields = $dataquery->getNocachefields();
+                $forceserverload_fields = $dataquery->getNoCacheFields();
                 
                 // Lazy fields. Eg: comments
-                $lazylayouts = $dataquery->getLazylayouts();
+                $lazylayouts = $dataquery->getLazyLayouts();
                 $lazyload_fields = array_keys($lazylayouts);
                 
                 // Store the intersected fields and the corresponding ids
@@ -1499,7 +1501,7 @@ class Engine
                     // If we are, then we came here loading a backgroundload-url, and we don't need to load it again
                     // Otherwise, it would create an infinite loop, since the fields loaded here are, exactly, those defined in the noncacheable_fields
                     // Eg: https://www.mesym.com/en/loaders/posts/data/?pid[0]=21636&pid[1]=21632&pid[2]=21630&pid[3]=21628&pid[4]=21624&pid[5]=21622&fields[0]=recommendpost-count&fields[1]=recommendpost-count-plus1&fields[2]=userpostactivity-count&format=updatedata
-                    if (!Utils::isPage($dataquery->getNoncacheablePage())) {
+                    if ($route != $dataquery->getNonCacheableRoute()) {
                         if ($intersect = array_values(array_intersect($dataitem_fields, $forceserverload_fields))) {
                             $forceserverload['ids'][] = $dataitem_id;
                             $forceserverload['fields'] = array_merge(
@@ -1521,7 +1523,7 @@ class Engine
                 if ($forceserverload['ids']) {
                     $forceserverload['fields'] = array_unique($forceserverload['fields']);
 
-                    $url = $cmsapi->getPermalink($dataquery->getNoncacheablePage());
+                    $url = \PoP\Engine\Utils::getRouteURL($dataquery->getNonCacheableRoute());
                     $url = $cmshelpers->addQueryArgs([
                         $objectid_fieldname => $forceserverload['ids'],
                         GD_URLPARAM_FIELDS => $forceserverload['fields'],
@@ -1538,7 +1540,7 @@ class Engine
                 if ($lazyload['ids']) {
                     $lazyload['layouts'] = array_unique($lazyload['layouts']);
 
-                    $url = $cmsapi->getPermalink($dataquery->getCacheablePage());
+                    $url = \PoP\Engine\Utils::getRouteURL($dataquery->getCacheableRoute());
                     $url = $cmshelpers->addQueryArgs([
                         $objectid_fieldname => $lazyload['ids'], 
                         GD_URLPARAM_LAYOUTS => $lazyload['layouts'],

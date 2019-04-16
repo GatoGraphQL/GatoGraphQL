@@ -14,9 +14,6 @@ namespace PoP\Engine;
 //-------------------------------------------------------------------------------------
 define('POP_ENGINE_VERSION', 0.108);
 define('POP_ENGINE_DIR', dirname(__FILE__));
-
-define('POP_ENGINE_LIB', POP_ENGINE_DIR.'/library');
-define('POP_ENGINE_KERNEL', POP_ENGINE_DIR.'/kernel');
 define('POP_ENGINE_TEMPLATES', POP_ENGINE_DIR.'/templates');
 
 class Plugin
@@ -24,7 +21,7 @@ class Plugin
     public function __construct()
     {
         
-        // Allow the Theme to override definitions. Eg: POP_METAKEY_PREFIX
+        // Allow the Theme to override definitions.
         // Priority: new section, after PoP CMS section
         \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'init'), 100);
         \PoP\CMS\HooksAPI_Factory::getInstance()->addAction('plugins_loaded', array($this, 'defineStartupConstants'), PHP_INT_MAX);

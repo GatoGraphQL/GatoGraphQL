@@ -20,11 +20,11 @@ abstract class ModuleFilterBase
         return $submodules;
     }
 
-    public function prepareForPropagation($module)
+    public function prepareForPropagation($module, &$props)
     {
     }
 
-    public function restoreFromPropagation($module)
+    public function restoreFromPropagation($module, &$props)
     {
     }
 }

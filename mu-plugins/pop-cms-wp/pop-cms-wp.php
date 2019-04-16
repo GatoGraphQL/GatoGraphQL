@@ -14,7 +14,6 @@ namespace PoP\CMS\WP;
 //-------------------------------------------------------------------------------------
 define('POP_CMSWP_VERSION', 0.106);
 define('POP_CMSWP_DIR', dirname(__FILE__));
-define('POP_CMSWP_LIB', POP_CMSWP_DIR.'/library');
 
 class Plugins
 {

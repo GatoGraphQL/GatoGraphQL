@@ -13,7 +13,7 @@ class SettingsProcessor_Manager
         return $this->processors;
     }
 
-    public function getPages()
+    public function getRoutes()
     {
 
         // Filter out $page with no value, since the ID might've not been defined for that page
@@ -26,23 +26,23 @@ class SettingsProcessor_Manager
         $this->processors = array();
     }
     
-    public function getProcessor($page_id)
+    public function getProcessor($route)
     {
-        if ($this->processors[$page_id]) {
-            return $this->processors[$page_id];
+        if ($this->processors[$route]) {
+            return $this->processors[$route];
         }
 
         if ($this->default_processor) {
             return $this->default_processor;
         }
 
-        throw new \Exception(sprintf('No Settings Processor for $page_id \'%s\' (%s)', $page_id, fullUrl()));
+        throw new \Exception(sprintf('No Settings Processor for $route \'%s\' (%s)', $route, fullUrl()));
     }
     
     public function add($processor)
     {
-        foreach ($processor->pagesToProcess() as $page_id) {
-            $this->processors[$page_id] = $processor;
+        foreach ($processor->routesToProcess() as $route) {
+            $this->processors[$route] = $processor;
         }
     }
     

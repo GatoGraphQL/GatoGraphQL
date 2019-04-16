@@ -8,6 +8,6 @@ trait Dataloader_SingleTrait
     
         // Simply return the global $post ID.
         $vars = \PoP\Engine\Engine_Vars::getVars();
-        return array($vars['global-state']['queried-object-id']);
+        return array($vars['routing-state']['queried-object-id']);
     }
 }

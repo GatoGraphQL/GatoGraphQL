@@ -69,6 +69,11 @@ class FieldProcessor_Menu extends \PoP\Engine\FieldProcessorBase
             return $default_dataloader;
         }
 
+        switch ($field) {
+            case 'id':
+                return GD_DATALOADER_MENU;
+        }
+
         return parent::getFieldDefaultDataloader($field);
     }
 }

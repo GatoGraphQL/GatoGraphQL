@@ -68,63 +68,43 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
                 break;
 
             case 'cat-name':
+                $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
                 if ($cat = $this->getValue($post, 'cat')) {
-                    $category = get_category($cat);
-                    $value = $category->name;
+                    $value = $taxonomyapi->getCategoryName($cat);
                 }
                 break;
 
             case 'cats':
-                $value = $cmsapi->getPostCategories($this->getId($post), array(/*'fields' => 'ids'*/), ['return-type' => POP_RETURNTYPE_IDS]);
+                $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
+                $value = $taxonomyapi->getPostCategories($this->getId($post), ['return-type' => POP_RETURNTYPE_IDS]);
                 if (!$value) {
                     $value = array();
                 }
                 break;
 
             case 'cat-slugs':
-                $value = $cmsapi->getPostCategories($this->getId($post), array(/*'fields' => 'slugs'*/), ['return-type' => POP_RETURNTYPE_SLUGS]);
+                $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
+                $value = $taxonomyapi->getPostCategories($this->getId($post), ['return-type' => POP_RETURNTYPE_SLUGS]);
                 break;
 
             case 'tags':
-                $value = $cmsapi->getPostTags($this->getId($post), array(/*'fields' => 'ids'*/), ['return-type' => POP_RETURNTYPE_IDS]);
+                $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
+                $value = $taxonomyapi->getPostTags($this->getId($post), ['return-type' => POP_RETURNTYPE_IDS]);
                 break;
 
             case 'tag-names':
-                $value = $cmsapi->getPostTags($this->getId($post), array(/*'fields' => 'names'*/), ['return-type' => POP_RETURNTYPE_NAMES]);
+                $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
+                $value = $taxonomyapi->getPostTags($this->getId($post), ['return-type' => POP_RETURNTYPE_NAMES]);
                 break;
 
             case 'title':
                 // $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('popcms:title', $cmsresolver->getPostTitle($post), $this->getId($post));
                 $value = $cmsapi->getPostTitle($this->getId($post));
                 break;
-
-            case 'title-edit':
-                if (current_user_can(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:capability:editPost'), $this->getId($post))) {
-                    $value = $cmsresolver->getPostTitle($post);
-                } else {
-                    $value = '';
-                }
-                break;
             
             case 'content':
                 $value = $cmsapi->getPostContent($this->getId($post));
                 $value = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('pop_content', $value, $this->getId($post));
-                break;
-
-            case 'content-editor':
-                if (current_user_can(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:capability:editPost'), $this->getId($post))) {
-                    $value = $cmsapi->getPostEditorContent($this->getId($post));
-                } else {
-                    $value = '';
-                }
-                break;
-
-            case 'content-edit':
-                if (current_user_can(\PoP\CMS\NameResolver_Factory::getInstance()->getName('popcms:capability:editPost'), $this->getId($post))) {
-                    $value = $cmsresolver->getPostContent($post);
-                } else {
-                    $value = '';
-                }
                 break;
         
             case 'url':
@@ -188,14 +168,6 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
                 $format = (mysql2date('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i'; 
                 $value = mysql2date($format, $date);
                 break;
-
-            case 'edit-url':
-                $value = urldecode($cmsapi->getEditPostLink($this->getId($post)));
-                break;
-
-            case 'delete-url':
-                $value = $cmsapi->getDeletePostLink($this->getId($post));
-                break;
             
             default:
                 $value = parent::getValue($resultitem, $field);
@@ -222,6 +194,9 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase
         }
 
         switch ($field) {
+            case 'id':
+                return GD_DATALOADER_CONVERTIBLEPOSTLIST;
+
             case 'tags':
                 return GD_DATALOADER_TAGLIST;
 

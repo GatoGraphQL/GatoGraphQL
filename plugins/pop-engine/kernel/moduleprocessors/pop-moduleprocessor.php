@@ -29,10 +29,10 @@ abstract class ModuleProcessorBase
         return $this->getModulecomponents($module);
     }
 
-    public function getHierarchy($module)
-    {
-        return null;
-    }
+    // public function getNature($module)
+    // {
+    //     return null;
+    // }
 
     //-------------------------------------------------
     // New PUBLIC Functions: Atts
@@ -90,7 +90,7 @@ abstract class ModuleProcessorBase
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         if ($submodules) {
             $props[$module][POP_PROPS_MODULES] = $props[$module][POP_PROPS_MODULES] ?? array();
             foreach ($submodules as $submodule) {
@@ -108,7 +108,7 @@ abstract class ModuleProcessorBase
                 $submodule_processor->$propagate_fn($submodule, $props[$module][POP_PROPS_MODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
     }
 
     public function initModelPropsModuletree($module, &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate)
@@ -556,7 +556,7 @@ abstract class ModuleProcessorBase
         return is_null($moduleprocessor_manager->getProcessor($module)->getDataloader($module));
     }
 
-    public function addToDatasetDatabaseKeys($module, &$props, $path, &$ret)
+    protected function addToDatasetDatabaseKeys($module, &$props, $path, &$ret)
     {
 
         // Add the current module's dbkeys
@@ -569,7 +569,7 @@ abstract class ModuleProcessorBase
         $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
 
         $module_path_manager = ModulePathManager_Factory::getInstance();
-        $module_path_manager->prepareForPropagation($module);
+        $module_path_manager->prepareForPropagation($module, $props);
         foreach ($this->getDbobjectRelationalSuccessors($module) as $subcomponent_data_field => $subcomponent_dataloader_options) {
             foreach ($subcomponent_dataloader_options as $subcomponent_dataloader_name => $subcomponent_modules) {
                 // Only modules without dataloader
@@ -585,7 +585,7 @@ abstract class ModuleProcessorBase
         foreach ($submodules as $submodule) {
             $moduleprocessor_manager->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$module][POP_PROPS_MODULES], $path, $ret);
         }
-        $module_path_manager->restoreFromPropagation($module);
+        $module_path_manager->restoreFromPropagation($module, $props);
     }
 
     public function getDatasetDatabaseKeys($module, &$props)
@@ -815,26 +815,26 @@ abstract class ModuleProcessorBase
 
     public function isLazyload($module, $props)
     {
-        $vars = Engine_Vars::getVars();
-
-        // Do not load data if doing lazy load. It can be true only if:
-        // 1. Setting 'lazy-load' => true by $props
-        // 2. When querying data from another domain, since evidently we don't have that data in this site, then the load must be triggered from the client
-        return $this->queriesExternalDomain($module, $props) || $this->getProp($module, $props, 'lazy-load');
+        return $this->getProp($module, $props, 'lazy-load');
     }
 
     protected function addHeaddatasetmoduleDataProperties(&$ret, $module, $props)
     {
         $vars = Engine_Vars::getVars();
-
+        
         // Is the component lazy-load?
         $ret[GD_DATALOAD_LAZYLOAD] = $this->isLazyload($module, $props);
 
+        // Loading data from a different site?
+        $ret[GD_DATALOAD_EXTERNALLOAD] = $this->queriesExternalDomain($module, $props);
+
         // Do not load data when doing lazy load, unless passing URL param ?action=loadlazy, which is needed to initialize the lazy components.
         // Do not load data for Search page (initially, before the query was submitted)
+        // Do not load data when querying data from another domain, since evidently we don't have that data in this site, then the load must be triggered from the client
         $ret[GD_DATALOAD_SKIPDATALOAD] =
-        ($vars['action'] != POP_ACTION_LOADLAZY && $ret[GD_DATALOAD_LAZYLOAD]) ||
-        $this->getProp($module, $props, 'skip-data-load');
+            ($vars['action'] != POP_ACTION_LOADLAZY && $ret[GD_DATALOAD_LAZYLOAD]) ||
+            $ret[GD_DATALOAD_EXTERNALLOAD] ||
+            $this->getProp($module, $props, 'skip-data-load');
 
         // Use Mock DB Object Data for the Skeleton Screen
         $ret[GD_DATALOAD_USEMOCKDBOBJECTDATA] = $this->getProp($module, $props, 'use-mock-dbobject-data') ?? false;
@@ -933,7 +933,7 @@ abstract class ModuleProcessorBase
     
         // When loading data or execution an action, check if to validate checkpoints?
         // This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doingPost()
-        // (such as done to set-up checkpoint configuration for POP_USERSTANCE_PAGE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
+        // (such as done to set-up checkpoint configuration for POP_USERSTANCE_ROUTE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
         // if ($checkpoint_configuration = $this->getDataaccessCheckpointConfiguration($module, $props)) {
         if ($checkpoints = $this->getDataaccessCheckpoints($module, $props)) {
             // if (Utils::checkpointValidationRequired($checkpoint_configuration)) {
@@ -1010,7 +1010,7 @@ abstract class ModuleProcessorBase
     {
         $ret = array();
 
-        if ($query_multidomain_urls = $this->getDataloadMultidomainSources($module, $props)) {
+        if ($query_multidomain_urls = $this->getDataloadMultidomainQuerySources($module, $props)) {
             $ret['multidomaindataloadsources'] = $query_multidomain_urls;
         } elseif ($dataload_source = $data_properties[GD_DATALOAD_SOURCE]) {
             $ret['dataloadsource'] = $dataload_source;
@@ -1019,6 +1019,9 @@ abstract class ModuleProcessorBase
         if ($data_properties[GD_DATALOAD_LAZYLOAD]) {
             $ret['lazyload'] = true;
         }
+        // if ($data_properties[GD_DATALOAD_EXTERNALLOAD]) {
+        //     $ret['externalload'] = true;
+        // }
 
         return $ret;
     }
@@ -1027,12 +1030,12 @@ abstract class ModuleProcessorBase
     // Others
     //-------------------------------------------------
 
-    public function getRelevantPage($module, &$props)
+    public function getRelevantRoute($module, &$props)
     {
         return null;
     }
 
-    public function getRelevantPageCheckpointTarget($module, &$props)
+    public function getRelevantRouteCheckpointTarget($module, &$props)
     {
         return GD_DATALOAD_DATAACCESSCHECKPOINTS;
     }
@@ -1050,11 +1053,9 @@ abstract class ModuleProcessorBase
     // function getDataaccessCheckpointConfiguration($module, &$props) {
     public function getDataaccessCheckpoints($module, &$props)
     {
-        if ($page_id = $this->getRelevantPage($module, $props)) {
-            if ($this->getRelevantPageCheckpointTarget($module, $props) == GD_DATALOAD_DATAACCESSCHECKPOINTS) {
-                // // return Utils::getCheckpointConfiguration($page_id);
-                // return Utils::getCheckpoints($page_id);
-                return $this->maybeOverrideCheckpoints(Settings\SettingsManager_Factory::getInstance()->getCheckpoints($page_id));
+        if ($route = $this->getRelevantRoute($module, $props)) {
+            if ($this->getRelevantRouteCheckpointTarget($module, $props) == GD_DATALOAD_DATAACCESSCHECKPOINTS) {
+                return $this->maybeOverrideCheckpoints(Settings\SettingsManager_Factory::getInstance()->getCheckpoints($route));
             }
         }
         
@@ -1065,11 +1066,9 @@ abstract class ModuleProcessorBase
     // function getActionexecutionCheckpointConfiguration($module, &$props) {
     public function getActionexecutionCheckpoints($module, &$props)
     {
-        if ($page_id = $this->getRelevantPage($module, $props)) {
-            if ($this->getRelevantPageCheckpointTarget($module, $props) == GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS) {
-                // // return Utils::getCheckpointConfiguration($page_id);
-                // return Utils::getCheckpoints($page_id);
-                return $this->maybeOverrideCheckpoints(Settings\SettingsManager_Factory::getInstance()->getCheckpoints($page_id));
+        if ($route = $this->getRelevantRoute($module, $props)) {
+            if ($this->getRelevantRouteCheckpointTarget($module, $props) == GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS) {
+                return $this->maybeOverrideCheckpoints(Settings\SettingsManager_Factory::getInstance()->getCheckpoints($route));
             }
         }
         
@@ -1096,6 +1095,12 @@ abstract class ModuleProcessorBase
             GD_URLPARAM_MODULEFILTER => POP_MODULEFILTER_MODULEPATHS,
             GD_URLPARAM_MODULEPATHS.'[]' => $stringified_module_propagation_current_path,
         ], Utils::getCurrentUrl());
+
+        // If we are in the API currently, stay in the API
+        $vars = Engine_Vars::getVars();
+        if ($vars['action'] == POP_ACTION_API) {
+            $ret = \PoP\Engine\APIUtils::getEndpoint($ret, $vars['dataoutputitems']);
+        }
 
         // Allow to add extra modulepaths set from above
         if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
@@ -1128,20 +1133,86 @@ abstract class ModuleProcessorBase
     public function getDataloadMultidomainSources($module, $props)
     {
         if ($sources = $this->getProp($module, $props, 'dataload-multidomain-sources')) {
-            if (!is_array($sources)) {
-                $sources = array($sources);
-            }
+            
+            return is_array($sources) ? $sources : [$sources];
+        }
 
-            $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
-            return array_map(
-                function ($source) use ($module) {
-                    return $cmshelpers->addQueryArgs([
-                        GD_URLPARAM_MODULEFILTER => POP_MODULEFILTER_HEADMODULE,
-                        GD_URLPARAM_HEADMODULE => $module,
-                    ], $source);
-                },
-                $sources
-            );
+        return [];
+    }
+
+    public function getDataloadMultidomainQuerySources($module, $props)
+    {
+        if ($sources = $this->getDataloadMultidomainSources($module, $props)) {
+            
+            // If this website and the external one have the same software installed, then the external site can already retrieve the needed data
+            // Otherwise, this website needs to explicitly request what data is needed to the external one
+            if (\PoP\Engine\Server\Utils::externalSitesRunSameSoftware()) {
+                return $sources;
+                // $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
+                // return array_map(
+                //     function ($source) use ($module, $cmshelpers) {
+                //         return $cmshelpers->addQueryArgs([
+                //             GD_URLPARAM_MODULEFILTER => POP_MODULEFILTER_HEADMODULE,
+                //             GD_URLPARAM_HEADMODULE => $module,
+                //         ], $source);
+                //     },
+                //     $sources
+                // );
+            } else {
+                $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
+                $moduleprocessor_manager = ModuleProcessor_Manager_Factory::getInstance();
+                $flattened_datafields = $moduleprocessor_manager->getProcessor($module)->getDatasetmoduletreeSectionFlattenedDataFields($module, $props);
+                $apifields = [];
+                $heap = [
+                    '' => [&$flattened_datafields],
+                ];
+                while (!empty($heap)) {
+
+                    // Obtain and remove first element from the heap
+                    reset($heap);
+                    $key = key($heap);
+                    $key_dataitems = $heap[$key];
+                    unset($heap[$key]);
+
+                    foreach ($key_dataitems as &$key_data) {
+
+                        // If there are data fields, add them separated by "|"
+                        // If not, and we're inside a subcomponent, there is no need to add the subcomponent's key alone, since the engine already includes this field as a data-field (so it was added in the previous iteration)
+                        if ($key_datafields = $key_data['data-fields']) {
+                            // Make sure the fields are not repeated, and no empty values
+                            $apifields[] = $key.implode(POP_CONSTANT_PARAMFIELD_SEPARATOR, array_values(array_unique(array_filter($key_datafields))));
+                        }
+
+                        // If there are subcomponents, add them into the heap
+                        if ($key_data['subcomponents']) {
+                            foreach ($key_data['subcomponents'] as $subcomponent_key => &$subcomponent_dataloader_data) {
+                                foreach ($subcomponent_dataloader_data as $subcomponent_dataloader => &$subcomponent_data) {
+                                    // Add the previous key, generating a path
+                                    $heap[$key.$subcomponent_key.POP_CONSTANT_DOTSYNTAX_DOT][] = &$subcomponent_data;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if ($apifields) {
+                    return array_map(
+                        function ($source) use ($cmshelpers, $apifields) {
+                            return $cmshelpers->addQueryArgs([
+                                    GD_URLPARAM_FIELDS => implode(POP_CONSTANT_PARAMVALUE_SEPARATOR, $apifields),
+                                ],
+                                \PoP\Engine\APIUtils::getEndpoint($source, [
+                                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
+                                    GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+                                    GD_URLPARAM_DATAOUTPUTITEMS_META,
+                                ])
+                            );
+                        },
+                        $sources
+                    );
+                }
+                return $sources;
+            }
         }
 
         return array();

@@ -8,7 +8,7 @@ abstract class SettingsProcessorBase
 
         // Comment Leo 30/09/2017: Important: do it at the very end, to make sure that
         // all constants have been set by then (otherwise, in file settingsprocessor.pht
-        // it may add the configuration under page "POP_CATEGORYPOSTS_PAGE_CATEGORYPOSTS01",
+        // it may add the configuration under page "POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01",
         // it is not treated as false if the constant has not been defined)
         \PoP\CMS\HooksAPI_Factory::getInstance()->addAction(
             'popcms:init', 
@@ -22,7 +22,7 @@ abstract class SettingsProcessorBase
         SettingsProcessorManager_Factory::getInstance()->add($this);
     }
 
-    abstract public function pagesToProcess();
+    abstract public function routesToProcess();
 
     // function getCheckpointConfiguration() {
     public function getCheckpoints()
@@ -30,7 +30,7 @@ abstract class SettingsProcessorBase
         return array();
     }
 
-    public function is_functional()
+    public function isFunctional()
     {
         return false;
     }

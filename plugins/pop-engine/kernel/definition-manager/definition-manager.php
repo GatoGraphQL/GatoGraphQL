@@ -53,7 +53,7 @@ class DefinitionManager
         $keepname_groups = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
             'DefinitionManager:keep-name:groups',
             [
-                POP_DEFINITIONGROUP_FILTERS,
+                POP_DEFINITIONGROUP_ROUTES,
             ]
         );
 

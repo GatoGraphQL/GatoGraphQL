@@ -1,0 +1,6 @@
+{
+    "minimum-stability": "dev",
+    "require": {
+        "brain/cortex": "~1.0.0"
+    }
+}

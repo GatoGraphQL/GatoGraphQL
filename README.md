@@ -362,13 +362,19 @@ These 2 sites are proper, established social networks:
 
 ## Installation
 
-Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then copy the contents of folders `/mu-plugins` and `/plugins` under `/wp-content/mu-plugins` and `/wp-content/plugins` respectively, and activate the 5 plugins from this repository:
+Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then copy the contents of folders `/mu-plugins` and `/plugins` under `/wp-content/mu-plugins` and `/wp-content/plugins` respectively, and activate the 11 plugins from this repository:
 
 - pop-cmsmodel
 - pop-cmsmodel-wp
 - pop-engine
 - pop-engine-wp
 - pop-examplemodules
+- pop-queriedobject
+- pop-queriedobject-wp
+- pop-taxonomy
+- pop-taxonomy-wp
+- pop-taxonomyquery
+- pop-taxonomyquery-wp
 
 The first 4 plugins are needed to produce the PoP API, and the 5th plugin (pop-examplemodules) provides basic implementations of modules for all supported hierarchies (home, author, single, tag, page and 404). 
 

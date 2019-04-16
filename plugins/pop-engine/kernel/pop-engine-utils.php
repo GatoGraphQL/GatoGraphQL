@@ -66,6 +66,36 @@ class Utils
         return $results;
     }
 
+    public static function getRouteURL($route)
+    {
+        // For the route, the ID is the URI applied on the homeURL instead of the domain
+        // (then, the id for domain.com/en/slug/ is "slug" and not "en/slug")
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $homeurl = $cmsapi->getHomeURL();
+        return $homeurl.$route.'/';
+    }
+    public static function getRouteTitle($route)
+    {
+        $title = \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters(
+            'route:title',
+            $route,
+            $route
+        );
+        return $title;
+    }
+    public static function getCurrentPath()
+    {
+        // For the route, the ID is the URI applied on the homeURL instead of the domain
+        // (then, the id for domain.com/en/slug/ is "slug" and not "en/slug")
+        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $homeurl = $cmsapi->getHomeURL();
+        $path = substr(self::getCurrentUrl(), strlen($homeurl));
+        $params_pos = strpos($path, '?');
+        if ($params_pos !== false) {
+            $path = substr($path, 0, $params_pos);
+        }
+        return trim($path, '/');
+    }
     public static function getCurrentUrl()
     {
 
@@ -87,7 +117,7 @@ class Utils
                 GD_URLPARAM_OUTPUT,
                 GD_URLPARAM_DATASTRUCTURE,
                 GD_URLPARAM_MANGLED,
-                GD_URLPARAM_EXTRAURIS,
+                GD_URLPARAM_EXTRAROUTES,
                 GD_URLPARAM_ACTION, // Needed to remove ?action=preload, ?action=loaduserstate, ?action=loadlazy
             )
         );
@@ -105,11 +135,10 @@ class Utils
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('\PoP\Engine\Utils:getFramecomponentModules', array());
     }
 
-    public static function addTab($url, $page_id)
+    public static function addRoute($url, $route)
     {
-        $tab = self::getTab($page_id);
         $cmshelpers = \PoP\CMS\HelperAPI_Factory::getInstance();
-        return $cmshelpers->addQueryArgs([GD_URLPARAM_TAB => $tab], $url);
+        return $cmshelpers->addQueryArgs([GD_URLPARAM_ROUTE => $route], $url);
     }
 
     public static function getPagePath($page_id)
@@ -131,78 +160,64 @@ class Utils
         return $page_path;
     }
 
-    public static function getPageUri($page_id)
-    {
+    // public static function getPageUri($page_id)
+    // {
 
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        // Generate the page URI. Eg: http://mesym.com/en/events/past/ will render /en/events/past/
-        $permalink = $cmsapi->getPermalink($page_id);
-        $domain = $cmsapi->getSiteURL();
+    //     $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+    //     // Generate the page URI. Eg: http://mesym.com/en/events/past/ will render /en/events/past/
+    //     $permalink = $cmsapi->getPermalink($page_id);
+    //     $domain = $cmsapi->getSiteURL();
 
-        // Remove the domain from the permalink => page path
-        $page_uri = substr($permalink, strlen($domain));
+    //     // Remove the domain from the permalink => page path
+    //     $page_uri = substr($permalink, strlen($domain));
 
-        return $page_uri;
-    }
+    //     return $page_uri;
+    // }
 
-    public static function getTab($page_id)
-    {
+    // public static function getNaturePageId()
+    // {
+    //     $vars = Engine_Vars::getVars();
+    //     $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+    //     $nature = $vars['nature'];
+    //     if ($vars['routing-state']['is-page']) {
+    //         $page_id = $vars['routing-state']['queried-object-id'];
+    //     } elseif ($vars['routing-state']['is-home']/* || $vars['routing-state']['is-front-page']*/) {
+    //         $page_id = self::getNatureDefaultPage($nature);
+    //     } elseif ($vars['routing-state']['is-author'] || $vars['routing-state']['is-single'] || $vars['routing-state']['is-tag']) {
+    //         // Get the page from the tab attr
+    //         if ($tab = $vars['tab']) {
+    //             $page_id = $cmsapi->getPageIdByPath($tab);
+    //         }
+    //         // Otherwise, get the default page for each nature
+    //         else {
+    //             $page_id = self::getNatureDefaultPage($nature);
+    //         }
+    //     } elseif ($vars['routing-state']['is-404']) {
+    //         $page_id = self::getNatureDefaultPage($nature);
+    //     }
+    //     // Comment Leo 12/04/2017: there is a problem, in which calling
+    //     // https://www.mesym.com/en/stories/ attempts to load the "stories" category template
+    //     // (even though stories is located under category "posts"). When that happens, since
+    //     // PoP currently doesn't support categories, then simply treat it as a 404
+    //     elseif ($vars['routing-state']['is-category']/* || $vars['routing-state']['is-archive']*/) {
+    //         $page_id = self::getNatureDefaultPage($nature);
+    //     } else {
+    //         // Route is the default case
+    //         $page_id = \PoP\Engine\Utils::getCurrentPath();
+    //     }
 
-        // Add url with the tab pointing to the corresponding page
-        return self::getPagePath($page_id);
-    }
+    //     return $page_id;
+    // }
+    // public static function getRoute()
+    // {
+    //     $vars = Engine_Vars::getVars();
+    //     return $vars['route'];
+    //     // if ($route = $vars['route']) {
+    //     //     return $route;
+    //     // }
 
-    public static function getHierarchyPageId()
-    {
-        $vars = Engine_Vars::getVars();
-        $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
-        $hierarchy = $vars['hierarchy'];
-        if ($vars['global-state']['is-page']) {
-            $page_id = $vars['global-state']['queried-object-id'];
-        } elseif ($vars['global-state']['is-home'] || $vars['global-state']['is-front-page']) {
-            $page_id = self::getHierarchyDefaultPage($hierarchy);
-        } elseif ($vars['global-state']['is-author'] || $vars['global-state']['is-single'] || $vars['global-state']['is-tag']) {
-            // Get the page from the tab attr
-            if ($tab = $vars['tab']) {
-                $page_id = $cmsapi->getPageIdByPath($tab);
-            }
-            // Otherwise, get the default page for each hierarchy
-            else {
-                $page_id = self::getHierarchyDefaultPage($hierarchy);
-            }
-        } elseif ($vars['global-state']['is-404']) {
-            $page_id = self::getHierarchyDefaultPage($hierarchy);
-        }
-        // Comment Leo 12/04/2017: there is a problem, in which calling
-        // https://www.mesym.com/en/stories/ attempts to load the "stories" category template
-        // (even though stories is located under category "posts"). When that happens, since
-        // PoP currently doesn't support categories, then simply treat it as a 404
-        elseif ($vars['global-state']['is-category'] || $vars['global-state']['is-archive']) {
-            $page_id = self::getHierarchyDefaultPage($hierarchy);
-        }
-
-        return $page_id;
-    }
-
-    public static function getHierarchyDefaultPage($hierarchy)
-    {
-        $default_pages = array(
-            GD_SETTINGS_HIERARCHY_HOME => POPENGINE_PAGEPLACEHOLDER_HOME,
-            GD_SETTINGS_HIERARCHY_TAG => POPENGINE_PAGEPLACEHOLDER_TAG,
-            GD_SETTINGS_HIERARCHY_SINGLE => POPENGINE_PAGEPLACEHOLDER_SINGLE,
-            GD_SETTINGS_HIERARCHY_AUTHOR => POPENGINE_PAGEPLACEHOLDER_AUTHOR,
-            GD_SETTINGS_HIERARCHY_404 => POPENGINE_PAGEPLACEHOLDER_404,
-        );
-    
-        // Comment Leo 12/04/2017: there is a problem, in which calling
-        // https://www.mesym.com/en/stories/ attempts to load the "stories" category template
-        // (even though stories is located under category "posts"). When that happens, since
-        // PoP currently doesn't support categories, then simply treat it as a 404
-        $default_pages[GD_SETTINGS_HIERARCHY_CATEGORY] = POPENGINE_PAGEPLACEHOLDER_404;
-        $default_pages[GD_SETTINGS_HIERARCHY_ARCHIVE] = POPENGINE_PAGEPLACEHOLDER_404;
-
-        return $default_pages[$hierarchy];
-    }
+    //     // return \PoP\Engine\Utils::getCurrentPath();
+    // }
 
     public static function getDatastructureFormatter()
     {
@@ -227,20 +242,14 @@ class Utils
         return $vars['loading-site'];
     }
 
-    public static function isPage($page_id_or_ids)
+    public static function isRoute($route_or_routes)
     {
         $vars = Engine_Vars::getVars();
-        if ($vars['global-state']['is-page']) {
-            $vars_page_id = $vars['global-state']['queried-object-id'];
-            if (is_array($page_id_or_ids)) {
-                $page_ids = $page_id_or_ids;
-                return in_array($vars_page_id, $page_ids);
-            }
-
-            $page_id = $page_id_or_ids;
-            return $page_id == $vars_page_id;
+        $route = $vars['route'];
+        if (is_array($route_or_routes)) {
+            return in_array($route, $route_or_routes);
         }
 
-        return false;
+        return $route == $route_or_routes;
     }
 }

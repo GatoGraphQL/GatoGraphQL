@@ -36,14 +36,14 @@ abstract class DataQueryBase
     /**
      * Function to override
      */
-    public function getNoncacheablePage()
+    public function getNonCacheableRoute()
     {
         return null;
     }
     /**
      * Function to override
      */
-    public function getCacheablePage()
+    public function getCacheableRoute()
     {
         return null;
     }
@@ -58,15 +58,15 @@ abstract class DataQueryBase
      * What fields can be requested on the outside-looking API to query data. By default: everything that must be loaded from the server
      * and that depends on the logged-in user
      */
-    public function getAllowedfields()
+    public function getAllowedFields()
     {
-        $allowedfields = $this->getNocachefields();
+        $allowedfields = $this->getNoCacheFields();
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':allowedfields', $allowedfields);
     }
     /**
      * What fields are to be rejected
      */
-    public function getRejectedfields()
+    public function getRejectedFields()
     {
         $rejectedfields = array();
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':rejectedfields', $rejectedfields);
@@ -74,10 +74,10 @@ abstract class DataQueryBase
     /**
      * What layouts can be requested on the outside-looking API to query data. By default: everything that can be lazy
      */
-    public function getAllowedlayouts()
+    public function getAllowedLayouts()
     {
         $allowedlayouts = array();
-        foreach ($this->getLazylayouts() as $field => $lazylayouts) {
+        foreach ($this->getLazyLayouts() as $field => $lazylayouts) {
             foreach ($lazylayouts as $key => $layout) {
                 $allowedlayouts[] = $layout;
             }
@@ -88,14 +88,14 @@ abstract class DataQueryBase
      * Fields whose data must be retrieved each single time from the server. Eg: comment-count, since adding a comment doesn't delete the overall cache,
      * so the number cached in html will be out of date
      */
-    public function getNocachefields()
+    public function getNoCacheFields()
     {
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':nocachefields', array());
     }
     /**
      * Fields whose data is retrieved on a subsequent call to the server
      */
-    public function getLazylayouts()
+    public function getLazyLayouts()
     {
         return \PoP\CMS\HooksAPI_Factory::getInstance()->applyFilters('Dataquery:'.$this->getName().':lazylayouts', array());
     }

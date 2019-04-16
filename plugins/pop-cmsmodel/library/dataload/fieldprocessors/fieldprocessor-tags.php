@@ -21,10 +21,11 @@ class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase
     
         $cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::getInstance();
         $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
+        $taxonomyapi = \PoP\Taxonomy\FunctionAPI_Factory::getInstance();
         $tag = $resultitem;
         switch ($field) {
             case 'url':
-                $value = $cmsapi->getTagLink($this->getId($tag));
+                $value = $taxonomyapi->getTagLink($this->getId($tag));
                 break;
 
             case 'endpoint':
@@ -88,6 +89,7 @@ class FieldProcessor_Tags extends \PoP\Engine\FieldProcessorBase
         }
 
         switch ($field) {
+            case 'id':
             case 'parent':
                 return GD_DATALOADER_TAGLIST;
         }

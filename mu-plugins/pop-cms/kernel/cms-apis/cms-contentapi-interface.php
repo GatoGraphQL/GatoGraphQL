@@ -3,5 +3,4 @@ namespace PoP\CMS;
 
 interface ContentAPI
 {
-
 }

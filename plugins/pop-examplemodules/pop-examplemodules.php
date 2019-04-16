@@ -14,7 +14,6 @@ namespace PoP\ExampleModules;
 //-------------------------------------------------------------------------------------
 define('POP_EXAMPLEMODULES_VERSION', 0.106);
 define('POP_EXAMPLEMODULES_DIR', dirname(__FILE__));
-define('POP_EXAMPLEMODULES_LIB', POP_EXAMPLEMODULES_DIR.'/library');
 
 class Plugin
 {

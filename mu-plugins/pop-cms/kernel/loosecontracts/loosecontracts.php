@@ -8,8 +8,6 @@ class CMSLooseContracts extends CMSLooseContractsBase
 			// Actions
 			'popcms:init',
 			'popcms:beforeInit',
-
-			'popcms:footer',
 			'popcms:publishToDraft',
 			// 'popcms:retrievePasswordKey',
 			'popcms:savePost',
@@ -17,17 +15,10 @@ class CMSLooseContracts extends CMSLooseContractsBase
 			'popcms:insertComment',
 			'popcms:pendingToPublish',
 			'popcms:transitionPostStatus',
-			'popcms:enqueueScripts',
-			'popcms:printFooterScripts',
-			'popcms:head',
-			'popcms:printStyles',
-			'popcms:printScripts',
 			'popcms:userRegister',
 			'popcms:spamComment',
 			'popcms:deleteComment',
 			// Filters
-			'popcms:styleSrc',
-			'popcms:scriptSrc',
 			'popcms:title',
 			'popcms:content',
 			'popcms:excerptMore',
@@ -35,8 +26,6 @@ class CMSLooseContracts extends CMSLooseContractsBase
 			'popcms:lostPasswordUrl',
 			'popcms:logoutUrl',
 			'popcms:authCookieExpiration',
-			'popcms:scriptTag',
-			'popcms:styleTag',
 			'popcms:retrievePasswordTitle',
 			'popcms:retrievePasswordMessage',
 		];
@@ -45,7 +34,6 @@ class CMSLooseContracts extends CMSLooseContractsBase
 	public function getRequiredNames() {
 		return [
 			// Options
-			'popcms:capability:editPost',
 			'popcms:capability:editPosts',
 			'popcms:capability:deletePages',
 			'popcms:option:limit',
