@@ -2,7 +2,7 @@
 
 # PoP — “Platform of Platforms”
 
-PoP is a framework for building component-based websites. Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.
+PoP is set of PHP components for building component-based websites. Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.
 
 PoP is composed of several layers, which can be progressively enabled to unlock further capabilities:
 

@@ -10,7 +10,7 @@
 
 ### Components
 
-PoP is set of PHP components, installable through Composer, for building sites using [components](https://en.wikipedia.org/wiki/Component-based_software_engineering) (i.e. the component as a conceptual unit for building an application). In PoP, a component is called a "module", so from now on the terms "component" and "module" are used interchangeably. 
+PoP is set of PHP components for building sites using [components](https://en.wikipedia.org/wiki/Component-based_software_engineering) (i.e. the component as a conceptual unit for building an application). In PoP, a component is called a "module", so from now on the terms "component" and "module" are used interchangeably. 
 
 ### Component Hierarchy and JSON Output
 
