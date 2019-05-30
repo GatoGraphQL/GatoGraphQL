@@ -71,22 +71,20 @@ PoP is in the process of decoupling the API specification from the implementatio
 1. The API (JSON response) specification
 2. PoP Server, to serve content based on the API specification
 3. PoP.js, to consume the content in the client
-
+<!--
 We will soon release the current implementation of PoP Server and PoP.js:
 
 - PoP Server for WordPress, based on PoP Server for PHP
 - PoP.js through vanilla JS and Handlebars templates
-
-Through the open specification, we will promote PoP being implemented in other technologies (eg: Node.js, Java, .NET, etc), as to enable any site implementing the specification to be able to interact with any other such site, no matter which their underlying technology. 
-
-> Note: The release of the deliverables mentioned above will be done in stages, and expected to be fully completed by the second quarter of 2019.
-
-### CMS-agnostic (work in progress)
+-->
+Through the open specification, we hope this architecture can be migrated to other technologies (eg: Node.js, Java, .NET, etc), enabling any site implementing the specification to be able to interact with any other such site. 
+<!--
+### CMS-agnostic
 
 Because it was originally conceived for WordPress, PoP's current implementation is in PHP, which can be perfectly used for other PHP-based CMSs (such as Joomla or Drupal). For this reason, we are transforming the codebase to make PoP become CMS-agnostic, splitting plugins into 2 entities: a generic implementation that should work for every CMS (eg: "pop-engine") and a specific one for WordPress (eg: "pop-engine-wp"), so that only the latter one should be re-implemented for other CMSs. 
 
 > Note: This task is a work in progress and nowhere near completion: plenty of code has been implemented following the WordPress architecture (eg: basing the object model on posts, pages and custom post types), and must be assessed if it is compatible for other CMSs.
-
+-->
 ## The API (JSON response) specification
 
 The examples below demonstrate the structure of the API specification.
@@ -271,16 +269,15 @@ PoP supports to set a module as lazy, so that its data is loaded from the client
 ### Make the most out of cloud services
 
 From the two foundations "everything is a module" and "a module is its own API", we conclude that everything on a PoP site is an API. And since APIs are greatly suitable to take advantage of cloud services (for instance, serving and caching the API response through a CDN), then PoP calls the cloud "home".
-
+<!--
 ## Timeline
 
 Currently, only the 1st layer, data + configuration API, is available in the repository. We are currently working on the 2nd and 3rd layers, client-side rendering and server-side rendering respectively, and these should be ready and available during the 1st quarter of 2019.
-
+-->
+<!--
 ## Motivation
 
 We have been working on it for more than 5 years, and we are still on the early stages of it (or so we hope!) It was created by Leonardo Losoviz as a solution to connect communities together directly from their own websites, offering an alternative to always depending on Facebook and similar platforms.
-
-<!--![Jun-E and Leo](https://uploads.getpop.org/wp-content/uploads/2018/12/jun-e-leo.jpg)-->
 
 PoP didn't start straight as a framework, but as a website for connecting environmental movements in Malaysia, called [MESYM](https://www.mesym.com). After developing plenty of social networking features for this website, we became aware that the website code could be abstracted and turned into a framework for implementing any kind of social network. The PoP framework was thus born, after which we launched a few more websites: [TPPDebate](https://my.tppdebate.org) and [Agenda Urbana](https://agendaurbana.org). 
 
@@ -289,7 +286,7 @@ We then worked towards connecting all the platforms together, so each community 
 However, at this point PoP was not a progressive framework for building any kind of site, but a framework for building social networks and nothing else. It was all or nothing, certainly not ideal. For this reason, most of 2018 we have been intensively working on transforming PoP into an all-purpose site builder, which led us to design the component-based architecture for the API, split the framework into several layers, and decouple the API specification from the implementation. 
 
 If the open specification succeeds at attracting interest from the development community and eventually gets implemented for other CMSs and technologies, our goal of connecting sites together will have had a big boost. This is the dream that drives us forward and keeps us working long into the night.
-
+-->
 ## Examples
 
 Some examples of PoP in the wild:
@@ -362,6 +359,12 @@ These 2 sites are proper, established social networks:
 
 ## Installation
 
+PoP is currently being migrated into components installable through Composer. Until the migration is complete, PoP cannot be installed 😱. 
+
+We expect the migration to be finished around October 2019, please have patience and stay tuned!
+
+<!--
+
 Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then copy the contents of folders `/mu-plugins` and `/plugins` under `/wp-content/mu-plugins` and `/wp-content/plugins` respectively, and activate the 11 plugins from this repository:
 
 - pop-cmsmodel
@@ -390,6 +393,8 @@ That's it. You can then access PoP's API by adding parameter `output=json` to an
 
 > Note 3: The retrieved fields are defined in plugin pop-examplemodules. You can explore the contents of this plugin, and modify it to bring more or less data.
 
+-->
+<!--
 ### Enhancement: enable PoP only if required
 
 Because currently PoP only works as an API and not to render the site, it can then be enabled only if needed, which is when parameter `output=json` is in the URL or when we are in the wp-admin area. Simply add this line to wp-config.php:
@@ -397,7 +402,8 @@ Because currently PoP only works as an API and not to render the site, it can th
 ```php
 define('POP_SERVER_DISABLEPOP', !($_REQUEST['output'] == 'json' || substr($_SERVER['REQUEST_URI'], 0, 10) == '/wp-admin/'));
 ```
-
+-->
+<!--
 ## Configuration
 
 PoP allows the configuration of the following properties, set in file wp-config.php:
@@ -417,7 +423,8 @@ PoP allows the configuration of the following properties, set in file wp-config.
 `POP_SERVER_EXTERNALSITESRUNSAMESOFTWARE` (`true`|`false`, default: `false`): Indicate if the external sites from which the origin site is fetching data has the same components installed. In this case, the data can be retrieved using the standard methods. Otherwise, it will be done through the custom-querying API.
 
 `POP_SERVER_FAILIFSUBCOMPONENTDATALOADERUNDEFINED` (`true`|`false`, default: `false`): Whenever switching domain to a field which doesn't have a default dataloader, and without specifying what dataloader to use, throw an exception if `true` or ignore and avoid loading that data if `false`.
-
+-->
+<!--
 ### Decentralization: enabling crossdomain
 
 To have a website consume data coming from other domains, crossdomain access must be allowed. For this, edit your .htaccess file like this:
@@ -433,6 +440,7 @@ To have a website consume data coming from other domains, crossdomain access mus
     </IfModule>
 
 **Important**: For POST operations to work, we need to make sure the user's browser isn't blocking third-party cookies, otherwise [cross-origin credentialed requests will not work](https://stackoverflow.com/questions/24687313/what-exactly-does-the-access-control-allow-credentials-header-do#24689738). In Chrome, this configuration is set under Settings > Advanced Settings > Privacy > Content Settings > Block third-party cookies and site data.
+-->
 
 <!--
 ### Integration between the Content CDN and Service Workers
@@ -452,13 +460,31 @@ To allow the website's service-worker.js be able to cache content coming from th
 - [Architecture Design and Implementation](docs/ArchitectureDesignAndImplementation.md)
 - [Tutorials](docs/Tutorials.md)
 
-> Note: We are currently working on the documentation. Developer guide's sections concerning the API will be progressively completed throughout the last 2 weeks of December 2018; sections concerning rendering and additional layers will be added alongside the corresponding code being completed and added to the repository, throughout 1st and 2nd quarter of 2019.
+> Note: The documentation is pretty lacking. We expect to work on it after releasing the first version of the software.
 
+<!--
 ## Want to contribute?
 
 Anybody willing to can become involved in the development of PoP. If there is any new development you are interested in implementing, such as integration with this or that plugin, please let us know and we'll be able to assist you. In addition, check the [issues tagged with "help wanted"](https://github.com/leoloso/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22), we will be very happy if you can tackle any of them.
 
 For more info or have a chat, just [contact us](https://getpop.org/en/contact-us/).
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- 
