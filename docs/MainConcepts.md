@@ -4,27 +4,27 @@
 
 ## What is PoP?
 
-PoP — “Platform of Platforms” is a framework for building component-based websites, which spans both frontend and backend. It provides a data + configuration API, on top of which can stack layers adding rendering and functionalities, progressively building complex sites. 
-
+PoP (for “Platform of Platforms”) is a set of components for rendering HTML on a modular fashion, and for creating APIs. 
+<!--
 Using components as the building unit of the site achieves a high degree of modularity, which [is defined as](https://en.wikipedia.org/wiki/Modularity): 
 
 > the degree to which a system's components may be separated and recombined, often with the benefit of flexibility and variety in use. The concept of modularity is used primarily to reduce complexity by breaking a system into varying degrees of interdependence and independence across and "hide the complexity of each part behind an abstraction and interface."
-
-### Specification and Implementation
+-->
+## Specification and Implementation
 
 PoP can be divided into 2 entities:
 
 1. **The component-based API open specification**, which can be implemented through any platform or technology
-2. **The current implementation of the specification**, done in PHP, wrapping WordPress
+2. **The current implementation of the specification**, done in PHP
 
-In the near future, PoP will refer only to the specification, and its implementation will be moved to a separate repository and renamed accordingly ("PoP for WordPress").
+> Note: The specification is a work in progress
 
-## Stacked on top of a CMS
-
-PoP handles the application logic and rendering, but relies on a Content Management System for system logic, such as routing, saving and loading data to/from the database, user management, etc. The application can be made CMS-agnostic by accessing all functionality through interfaces, and deployed on top of any supported CMS.
-
+<!--
+In the near future, PoP will refer only to the specification, and its implementation will be moved to a separate repository and renamed accordingly (such as "PoP for WordPress").
+-->
+<!--
 ![PoP is a layer wrapping a CMS](https://uploads.getpop.org/wp-content/uploads/2018/12/cms-wrapper.png)
-
+-->
 ## Everything is a Module
 
 The term "component" is often used to describe the concept of [encapsulating a set of related functions](https://en.wikipedia.org/wiki/Component-based_software_engineering#Software_component) for building modular applications. In PoP, a component is called a "module", so from now on the names "component" and "module" are used interchangeably. 

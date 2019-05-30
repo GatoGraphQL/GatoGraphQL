@@ -10,7 +10,7 @@
 
 ### Components
 
-PoP is framework for building sites using [components](https://en.wikipedia.org/wiki/Component-based_software_engineering). In PoP, a component is called a "module", so from now on the terms "component" and "module" are used interchangeably. 
+PoP is set of PHP components, installable through Composer, for building sites using [components](https://en.wikipedia.org/wiki/Component-based_software_engineering) (i.e. the component as a conceptual unit for building an application). In PoP, a component is called a "module", so from now on the terms "component" and "module" are used interchangeably. 
 
 ### Component Hierarchy and JSON Output
 
@@ -161,45 +161,43 @@ Having the component-based structure, we can now add the actual information requ
 }
 ```
 
-Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ModuleProcessor](#moduleprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ModuleProcessor, and create the nested associative array with all properties for all modules. A ModuleProcessor for a module called `POP_MODULE_SOMENAME` looks like this:
+Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ModuleProcessor](#moduleprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ModuleProcessor, and create the nested associative array with all properties for all modules. A ModuleProcessor for a module called `MODULE_SOMENAME` looks like this:
 
 ```php
-define ('POP_MODULE_SOMENAME', \PoP\Engine\DefinitionUtils::get_module_definition('somename'));
+class SomeModuleProcessor extends AbstractModuleProcessor {
 
-class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
+  const MODULE_SOMENAME = 'somename';
 
-  function getModulesToProcess() {
+  function getSubmodulesToProcess() {
   
     return array(
-      POP_MODULE_SOMENAME,
+      MODULE_SOMENAME,
     );
   }
 
-  function getModules($module) {
+  function getSubmodules($module) 
+  {
+    $ret = parent::getSubmodules($module);
 
-    $ret = parent::getModules($module);
-
-    switch ($module) {
+    switch ($module[1]) {
       
-      case POP_MODULE_SOMENAME:
+      case self::MODULE_SOMENAME:
         
-        $ret[] = POP_MODULE_SOMELAYOUT1;
-        $ret[] = POP_MODULE_SOMELAYOUT2;
+        $ret[] = self::MODULE_SOMELAYOUT1;
+        $ret[] = self::MODULE_SOMELAYOUT2;
         break;
     }
 
     return $ret;
   }
 
-  // Implement the modules properties ...
-  function getImmutableConfiguration($module, &$props) {
-
+  function getImmutableConfiguration($module, &$props) 
+  {
     $ret = parent::getImmutableConfiguration($module, $props);
 
-    switch ($module) {
-      
-      case POP_MODULE_SOMENAME:
-        
+    // Print the modules properties ...
+    switch ($module[1]) {
+      case self::MODULE_SOMENAME:        
         $ret['description'] = __('Some description');
         $ret['showmore'] = $this->getProp($module, $props, 'showmore');
         $ret['class'] = $this->getProp($module, $props, 'class');
@@ -209,12 +207,11 @@ class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
     return $ret;
   }
   
-  function initModelProps($module, &$props) {
-
-    switch ($module) {
-        
-      case POP_MODULE_SOMENAME:
-        
+  function initModelProps($module, &$props) 
+  {
+    // Implement the modules properties ...
+    switch ($module[1]) {
+      case self::MODULE_SOMENAME:
         $this->setProp($module, $props, 'showmore', false);
         $this->appendProp($module, $props, 'class', 'text-center');
         break;
@@ -224,9 +221,6 @@ class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
   }
   // ...
 }
-
-// Initialize
-new CustomModuleProcessor();
 ```
 
 Database object data is retrieved and placed under a shared section called `databases`, to avoid duplicating information when 2 or more different modules fetch the same objects from the database. In addition, it is added in a relational manner to the associative array and printed in the JSON response, to avoid duplicating information when 2 or more different database objects are related to a common object (such as 2 posts having the same author). In other words, database object data is normalized. The structure is a dictionary, organized under each object type first and object ID second, from which we can obtain the object properties: 
@@ -308,27 +302,21 @@ For instance, the API response below contains a component hierarchy with two mod
 Every module has a unique name that identifies it, defined as a constant:
 
 ```php
-define ('POP_MODULE_SOMENAME', 'somename');
+const MODULE_SOMENAME = 'somename';
 ```
-
-The name of the module must not necessarily remain fixed: it can be shortened for producing a smaller output, constantly modified to evade bots, or others. Different strategies can be applied through function `DefinitionUtils::getModuleDefinition`:
-
-```php
-define ('POP_MODULE_SOMENAME', \PoP\Engine\DefinitionUtils::getModuleDefinition('somename'));
-```
-
-> Note: It is important to always target a module through its constant name and not through its defined string, since the latter one may change. In the case above, we must use `POP_MODULE_SOMENAME` instead of `"somename"`.
 
 All the properties of the modules are implemented through objects called [ModuleProcessor](#moduleprocessor).
-
+<!--
 > Note: the name of a module cannot include the special character "|" (`POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`), as will be explained below
-
+-->
 ### Virtual Modules
 
-Virtual modules are "dynamically-generated" modules: modules with a base personality and dynamic behaviour. For instance, the [custom-querying capabilities of the API](ArchitectureDesignAndImplementation.md#API-Custom-Querying-Capabilities) create the component hierarchy based on the value of URL parameter `fields`, creating a virtual module along its path for each of the nested relationships. Another example (yet to be implemented) involves the integration of PoP with [WordPress Gutenberg](https://wordpress.org/gutenberg/): Gutenberg allows to drag-and-drop blocks to the page and customize them through properties; then, to have Gutenberg input modules and PoP save them, two blocks from the same block/component must be made unique, hence they can be dynamically created by selecting a base module for its personality (a scroll of posts, a calendar of events, etc) and then assigning a random id to each, or a serialization of their properties, for its dynamic behaviour.
-
-Virtual modules cannot depend on props for defining their behaviour, because at the time of creating the component hierarchy we don't have the `$props` available (otherwise it's a chicken or egg situation.) Hence, the particular properties given to a virtual module are coded into the module name itself as a serialized array separated from the module name with a `"|"` (which is represented under constant `POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`): `modulename|virtualmoduleatts`. In this case, the personality of the module is given by the module with name `"modulename"`, and the virtual module attributes (`"virtualmoduleatts"`) are the runtime element which define its dynamic behaviour.
-
+Virtual modules are "dynamically-generated" modules: modules with a base personality and dynamic behaviour. For instance, the [custom-querying capabilities of the API](ArchitectureDesignAndImplementation.md#API-Custom-Querying-Capabilities) create the component hierarchy based on the value of URL parameter `fields`, creating a virtual module along its path for each of the nested relationships. 
+<!--
+Another example (yet to be implemented) involves the integration of PoP with [WordPress Gutenberg](https://wordpress.org/gutenberg/): Gutenberg allows to drag-and-drop blocks to the page and customize them through properties; then, to have Gutenberg input modules and PoP save them, two blocks from the same block/component must be made unique, hence they can be dynamically created by selecting a base module for its personality (a scroll of posts, a calendar of events, etc) and then assigning a random id to each, or a serialization of their properties, for its dynamic behaviour.
+-->
+Virtual modules cannot depend on props for defining their behaviour, because at the time of creating the component hierarchy we don't have the `$props` available (otherwise it's a chicken or egg situation). Hence, the particular properties given to a virtual module are coded into the module name itself<!-- as a serialized array separated from the module name with a `"|"` (which is represented under constant `POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`): `modulename|virtualmoduleatts`-->. Then, the personality of the module is given by the module with name `"modulename"`, and the virtual module attributes <!--(`"virtualmoduleatts"`)-->are the runtime element which define its dynamic behaviour.
+<!--
 Extracting the pair of module name and virtual module atts from the module is done through function `extract_virtualmodule`, like this:
 
 ```php
@@ -340,14 +328,14 @@ To generate a virtual module is done through function `create_virtualmodule`, li
 ```php
 $virtualmodule = \PoP\Engine\VirtualModuleUtils::createVirtualmodule($module, $virtualmoduleatts),
 ```
-
+-->
 ### ModuleProcessor
 
-A ModuleProcessor is an object class in which to define all the properties of a module. ModuleProcessors are implemented following the [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) methodology, establishing an object inheritance scheme to progressively add properties to modules. The base class for all ModuleProcessors is `ModuleProcessorBase`:
+A ModuleProcessor is an object class in which to define all the properties of a module. ModuleProcessors are implemented following the [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) methodology, establishing an object inheritance scheme to progressively add properties to modules. The base class for all ModuleProcessors is `AbstractModuleProcessor`:
 
 ```php
 namespace PoP\Engine;
-abstract class ModuleProcessorBase {
+abstract class AbstractModuleProcessor {
 
   // ...
 }
@@ -355,21 +343,21 @@ abstract class ModuleProcessorBase {
 
 In practice, because a module is implemented through a ModuleProcessor object, describing a module equals to describing how the ModuleProcessor implements all functions to define the properties of the module.
 
-Every ModuleProcessor can handle more than 1 module: Because different modules will naturally share many properties, then having a single ModuleProcessor implement many modules is more legible and reduces the amount of code required compared to having 1 ModuleProcessor per module. Which modules are handled by the ModuleProcessor is defined through function `getModulesToProcess`:
+Every ModuleProcessor can handle more than 1 module: Because different modules will naturally share many properties, then having a single ModuleProcessor implement many modules is more legible and reduces the amount of code required compared to having 1 ModuleProcessor per module. Which modules are handled by the ModuleProcessor is defined through function `getSubmodulesToProcess`:
 
 ```php
-define ('POP_MODULE_SOMENAME1', \PoP\Engine\DefinitionUtils::getModuleDefinition('somename1'));
-define ('POP_MODULE_SOMENAME2', \PoP\Engine\DefinitionUtils::getModuleDefinition('somename2'));
-define ('POP_MODULE_SOMENAME3', \PoP\Engine\DefinitionUtils::getModuleDefinition('somename3'));
+class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 
-class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
+  const MODULE_SOMENAME1 = 'somename1';
+  const MODULE_SOMENAME2 = 'somename2';
+  const MODULE_SOMENAME3 = 'somename3';
 
-  function getModulesToProcess() {
+  function getSubmodulesToProcess() {
   
     return array(
-      POP_MODULE_SOMENAME1,
-      POP_MODULE_SOMENAME2,
-      POP_MODULE_SOMENAME3,
+      MODULE_SOMENAME1,
+      MODULE_SOMENAME2,
+      MODULE_SOMENAME3,
     );
   }
 
@@ -378,23 +366,16 @@ class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
 }
 ```
 
-Once the ModuleProcessor class is intantiated, all of its defined modules become available to be added to the component hirarchy.
+Once the ModuleProcessor class is instantiated, all of its defined modules become available to be added to the component hirarchy.
 
-```php
-// Initialize
-new CustomModuleProcessor();
-```
-
-> Note: if a module is stray, i.e. no ModuleProcessor handles it, and it is added to the component hierarchy, the engine will throw an exception and terminate the execution of the request. This error happens on runtime, not on compilation time.
-
-To access the properties of a module, we must obtain its corresponding ModuleProcessor through function `getProcessor` from class `ModuleProcessor_Manager`:
+To access the properties of a module, we must reference its corresponding ModuleProcessor through function `getProcessor` from class `ModuleProcessor_Manager`:
 
 ```php
 // Retrive the PoP_ModuleProcessor_Manager object from the factory
 $moduleprocessor_manager = \PoP\Engine\ModuleProcessor_Manager_Factory::getInstance();
 
-// Obtain the ModuleProcessor for module POP_MODULE_SOMENAME
-$processor = $moduleprocessor_manager->getProcessor(POP_MODULE_SOMENAME);
+// Obtain the ModuleProcessor for module MODULE_SOMENAME
+$processor = $moduleprocessor_manager->getProcessor([SomeModuleProcessor::class, SomeModuleProcessor::MODULE_SOMENAME]);
 
 // Do something...
 // $processor->...
@@ -405,25 +386,25 @@ $processor = $moduleprocessor_manager->getProcessor(POP_MODULE_SOMENAME);
 Because a ModuleProcessor can handle several modules, then each of its functions will receive a parameter `$module` indicating which is the module being processed. Please notice how, inside the function, we can conveniently use `switch` statements to operate accordingly (modules with shared properties can easily share the logic) and, according to [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design), we first obtain the results of the parent class and then the ModuleProcessor adds its own properties:
 
 ```php
-class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
+class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 
-  function foo($module) {
-
+  function foo($module) 
+  {
     // First obtain the value from the parent class
     $ret = parent::foo($module);
 
     // Add properties to the module
-    switch ($module) {
-
-      case POP_MODULE_SOMENAME1:
+    switch ($module[1]) 
+    {
+      case self::MODULE_SOMENAME1:
         
         // Do something with $ret
         // ...
         break;
 
       // These modules share the same properties
-      case POP_MODULE_SOMENAME2:
-      case POP_MODULE_SOMENAME3:
+      case self::MODULE_SOMENAME2:
+      case self::MODULE_SOMENAME3:
         
         // Do something with $ret
         // ...
@@ -438,10 +419,10 @@ class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
 In addition to parameter `$module`, most functions will also receive a `$props` parameter, with the value of the "props" set on the module (more on section [Props](#props)):
 
 ```php
-class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
+class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 
-  function foo($module, &$atts) {
-
+  function foo($module, &$atts) 
+  {
     $ret = parent::foo($module, &$atts);
 
     // ...
@@ -453,28 +434,28 @@ class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
 
 ### Composition
 
-Modules are composed of other modules through function `getModules`:
+Modules are composed of other modules through function `getSubmodules`:
 
 ```php
-class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
+class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 
-  function getModules($module) {
+  function getSubmodules($module) 
+  {
+    $ret = parent::getSubmodules($module);
 
-    $ret = parent::getModules($module);
-
-    switch ($module) {
-
-      case POP_MODULE_SOMENAME1:
+    switch ($module[1]) 
+    {
+      case self::MODULE_SOMENAME1:
         
-        $ret[] = POP_MODULE_SOMENAME2;
+        $ret[] = [self::class, self::MODULE_SOMENAME2];
         break;
 
-      case POP_MODULE_SOMENAME2:
-      case POP_MODULE_SOMENAME3:
+      case self::MODULE_SOMENAME2:
+      case self::MODULE_SOMENAME3:
         
-        $ret[] = POP_MODULE_LAYOUT1;
-        $ret[] = POP_MODULE_LAYOUT2;
-        $ret[] = POP_MODULE_LAYOUT3;
+        $ret[] = [LayoutModuleProcessor::class, LayoutModuleProcessor::MODULE_LAYOUT1];
+        $ret[] = [LayoutModuleProcessor::class, LayoutModuleProcessor::MODULE_LAYOUT2];
+        $ret[] = [LayoutModuleProcessor::class, LayoutModuleProcessor::MODULE_LAYOUT3];
         break;
     }
 
@@ -483,27 +464,27 @@ class CustomModuleProcessor extends \PoP\Engine\ModuleProcessorBase {
 }
 ```
 
-> Note: the component hierarchy is created by calling `getModules` on the entry-module and then repeating the process, iteratively, for its descendant modules.
+> Note: the component hierarchy is created by calling `getSubmodules` on the entry-module and then repeating the process, iteratively, for its descendant modules.
 
 Abstract ModuleProcessors can define what descendant modules will be required through placeholder functions, to be implemented by an inheriting ModuleProcessor:
 
 ```php
-abstract class PostLayoutModuleProcessorBase extends \PoP\Engine\ModuleProcessorBase {
+abstract class PostLayoutAbstractModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 
-  function getModules($module) {
+  function getSubmodules($module) {
   
-    $ret = parent::getModules($module);
+    $ret = parent::getSubmodules($module);
 
-    if ($thumbnail_module = $this->getThumbnailModule($module)) {
-
+    if ($thumbnail_module = $this->getThumbnailModule($module)) 
+    {
       $ret[] = $thumbnail_module;
     }
-    if ($content_module = $this->getContentModule($module)) {
-
+    if ($content_module = $this->getContentModule($module)) 
+    {
       $ret[] = $content_module;
     }
-    if ($aftercontent_modules = $this->getAftercontentModules($module)) {
-
+    if ($aftercontent_modules = $this->getAftercontentModules($module)) 
+    {
       $ret = array_merge(
         $ret,
         $aftercontent_modules
@@ -513,64 +494,64 @@ abstract class PostLayoutModuleProcessorBase extends \PoP\Engine\ModuleProcessor
     return $ret;
   }
 
-  protected function getContentModule($module) {
-
+  protected function getContentModule($module) 
+  {
     // Must implement
     return null;
   }
-  protected function getThumbnailModule($module) {
-
+  protected function getThumbnailModule($module) 
+  {
     // Default value
-    return POP_MODULE_LAYOUT_THUMBNAILSMALL;
+    return [self::class, self::MODULE_LAYOUT_THUMBNAILSMALL];
   }
-  protected function getAftercontentModules($module) {
-
+  protected function getAftercontentModules($module) 
+  {
     return array();
   }
 }
 
-class PostLayoutModuleProcessor extends PostLayoutModuleProcessorBase {
+class PostLayoutModuleProcessor extends PostLayoutAbstractModuleProcessor {
 
-  protected function getContentModule($module) {
-
-    switch ($module) {
-
-      case POP_MODULE_SOMENAME1:
+  protected function getContentModule($module) 
+  {
+    switch ($module[1]) 
+    {
+      case self::MODULE_SOMENAME1:
         
-        return POP_MODULE_LAYOUT_POSTCONTENT;
+        return [self::class, self::MODULE_LAYOUT_POSTCONTENT];
 
-      case POP_MODULE_SOMENAME2:
-      case POP_MODULE_SOMENAME3:
+      case self::MODULE_SOMENAME2:
+      case self::MODULE_SOMENAME3:
         
-        return POP_MODULE_LAYOUT_POSTEXCERPT;
+        return [self::class, self::MODULE_LAYOUT_POSTEXCERPT];
     }
 
     return parent::getContentModule($module);
   }
-  protected function getThumbnailModule($module) {
-
-    switch ($module) {
-
-      case POP_MODULE_SOMENAME1:
+  protected function getThumbnailModule($module) 
+  {
+    switch ($module[1]) 
+    {
+      case self::MODULE_SOMENAME1:
         
-        return POP_MODULE_LAYOUT_THUMBNAILBIG;
+        return [self::class, self::MODULE_LAYOUT_THUMBNAILBIG];
 
-      case POP_MODULE_SOMENAME3:
+      case self::MODULE_SOMENAME3:
         
-        return POP_MODULE_LAYOUT_THUMBNAILMEDIUM;
+        return [self::class, self::MODULE_LAYOUT_THUMBNAILMEDIUM];
     }
 
     return parent::getThumbnailModule($module);
   }
-  protected function getAftercontentModules($module) {
-
+  protected function getAftercontentModules($module) 
+  {
     $ret = parent::getAftercontentModules($module);
 
-    switch ($module) {
-
-      case POP_MODULE_SOMENAME2:
+    switch ($module[1]) 
+    {
+      case self::MODULE_SOMENAME2:
         
-        $ret[] = POP_MODULE_LAYOUT_POSTLIKES;
+        $ret[] = self::MODULE_LAYOUT_POSTLIKES;
         break
     }
 
@@ -654,7 +635,7 @@ Modules can set props on descendant modules whichever number of levels below in 
 
 Setting props is done through functions `initModelProps($module, &$props)` and `initRequestProps($module, &$props)`. A prop must be implemented in either function, but not on both of them. `initRequestProps` is used for defining props that depend directly on the requested URL, such as adding a classname `post-{id}` to prop `"class"`, where `{id}` is the ID of the requested post on that URL. `initModelProps` is used for everything else. 
 
-Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `getModules` and those inner functions invoked by `getModules`), every function in the `ModuleProcessor` can receive `$props`. 
+Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `getSubmodules` and those inner functions invoked by `getSubmodules`), every function in the `ModuleProcessor` can receive `$props`. 
 
 `initModelProps` and `initRequestProps` store the props under parameter `$props`, hence it is passed by reference. In all other functions, `$props` may also be passed by reference, but only for performance issues, to not duplicate the object in memory.
 
@@ -683,8 +664,8 @@ All 3 methods receive the same parameters:
 Every module first initializes its own props, and only then continues the flow to the parent class, so that inheriting classes have priority over their ancestors in the object inheritance scheme:
 
 ```php
-function initModelProps($module, &$props) {
-
+function initModelProps($module, &$props) 
+{
   // Set prop...
   // Set prop...
   // Set prop...
@@ -698,12 +679,10 @@ Accessing the value of the prop is done through `function getProp($module, &$pro
 Let's see an example: a component for rendering maps has 2 orientations: `"horizontal"` and `"vertical"`. It is composed by modules `"map" => "map-inner"`, and both these modules need this property. Module `"map"` will set the value by default to `"vertical"`, obtain the value for this prop just in case an ancestor module had already set the prop, and then set this value on module `"map-inner"`. Function below is implemented for module `"map"`:
 
 ```php
-function initModelProps($module, &$props) {
-
-  switch ($module) {
-
-    case POP_MODULE_MAP:
-
+function initModelProps($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_MAP:
       // Module "map" is setting the default value
       $this->setProp($module, $props, 'orientation', 'vertical');
 
@@ -711,7 +690,7 @@ function initModelProps($module, &$props) {
       $orientation = $this->getProp($module, $props, 'orientation');
 
       // Set the value on "map-inner"
-      $this->setProp([POP_MODULE_MAPINNER], $props, 'orientation', $orientation);
+      $this->setProp([[SomeModule::class, SomeModule::MODULE_MAPINNER]], $props, 'orientation', $orientation);
       break;
   }
 
@@ -722,13 +701,11 @@ function initModelProps($module, &$props) {
 By default, module map will have prop `"orientation"` set with value `"vertical"`. However, parent module `"map-wrapper"` can set this prop beforehand to `"horizontal"`:
 
 ```php
-function initModelProps($module, &$props) {
-
-  switch ($module) {
-
-    case POP_MODULE_MAPWRAPPER:
-
-      $this->setProp([POP_MODULE_MAP], $props, 'orientation', 'horizontal');      
+function initModelProps($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_MAPWRAPPER:
+      $this->setProp([[SomeModule::class, SomeModule::MODULE_MAP]], $props, 'orientation', 'horizontal');      
       break;
   }
 
@@ -748,14 +725,12 @@ For instance:
 
 ```php
 // Implement the modules properties ...
-function getImmutableConfiguration($module, &$props) {
-
+function getImmutableConfiguration($module, &$props) 
+{
   $ret = parent::getImmutableConfiguration($module, $props);
 
-  switch ($module) {
-    
-    case POP_MODULE_SOMENAME:
-      
+  switch ($module[1]) {
+    case self::MODULE_SOMENAME:
       $ret['description'] = __('Some description');
       $ret['classes']['description'] = 'jumbotron';
       break;
@@ -769,14 +744,12 @@ Please notice that the configuration receives the `$props` parameter, hence it c
 
 ```php
 // Implement the modules properties ...
-function getImmutableConfiguration($module, &$props) {
-
+function getImmutableConfiguration($module, &$props) 
+{
   $ret = parent::getImmutableConfiguration($module, $props);
 
-  switch ($module) {
-    
-    case POP_MODULE_SOMENAME:
-      
+  switch ($module[1]) {
+    case self::MODULE_SOMENAME:
       $ret['showmore'] = $this->getProp($module, $props, 'showmore');
       $ret['class'] = $this->getProp($module, $props, 'class');
       break;
@@ -785,12 +758,10 @@ function getImmutableConfiguration($module, &$props) {
   return $ret;
 }
 
-function initModelProps($module, &$props) {
-
-  switch ($module) {
-      
-    case POP_MODULE_SOMENAME:
-      
+function initModelProps($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_SOMENAME:      
       $this->setProp($module, $props, 'showmore', false);
       $this->appendProp($module, $props, 'class', 'text-center');
       break;
@@ -815,12 +786,10 @@ Those modules indicating what DB objects must be loaded are called "dataloading"
 Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through constant `POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
 
 ```php
-function getDatasource($module, &$props) {
-
-  switch ($module) {
-      
-    case POP_MODULE_WHOWEARE:
-
+function getDatasource($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_WHOWEARE:
       return POP_DATALOAD_DATASOURCE_IMMUTABLE;
   }
 
@@ -833,12 +802,10 @@ function getDatasource($module, &$props) {
 Define the IDs of the objects to be retrieved from the database, through function `getDbobjectIds`. If the module already knows what database objects are required, it can simply return them:
 
 ```php
-function getDbobjectIds($module, &$props, $data_properties) {
-
-  switch ($module) {
-      
-    case POP_MODULE_WHOWEARE:
-
+function getDbobjectIds($module, &$props, $data_properties) 
+{
+  switch ($module[1]) {
+    case self::MODULE_WHOWEARE:
       return [13, 54, 998];
   }
 
@@ -846,20 +813,18 @@ function getDbobjectIds($module, &$props, $data_properties) {
 }
 ```
 
-However, most likely, the objects are not known in advance, and must be found through a query. In this case, the ModuleProcessor must inherit from class `QueryDataModuleProcessorBase`, which implements `getDbobjectIds` transferring the responsibility of finding the database object IDs to function `getDbobjectIds` from the corresponding [Dataloader](#dataloader).
+However, most likely, the objects are not known in advance, and must be found through a query. In this case, the ModuleProcessor must inherit from class `QueryDataAbstractModuleProcessor`, which implements `getDbobjectIds` transferring the responsibility of finding the database object IDs to function `getDbobjectIds` from the corresponding [Dataloader](#dataloader).
 
 ##### Defining the Dataloader
 
 Define what [Dataloader](#dataloader) to use, which is the object in charge of fetching data from the database, through function `getDataloader`:
 
 ```php
-function getDataloader($module) {
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
-    
-      return GD_DATALOADER_POSTLIST;
+function getDataloader($module) 
+{
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
+      return [Dataloader::class, Dataloader::DATALOADER_POSTLIST];
   }
     
   return parent::getDataloader($module);
@@ -871,14 +836,12 @@ function getDataloader($module) {
 Customize a query to filter data, which is passed to the Dataloader, through functions `getImmutableDataloadQueryArgs` and `getMutableonrequestDataloadQueryArgs`:
 
 ```php
-protected function getImmutableDataloadQueryArgs($module, $props) {
-
+protected function getImmutableDataloadQueryArgs($module, $props) 
+{
   $ret = parent::getImmutableDataloadQueryArgs($module, $props);
   
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
-
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
       // 55: id of "Articles" category
       $ret['cat'] = 55;
       break;
@@ -887,13 +850,12 @@ protected function getImmutableDataloadQueryArgs($module, $props) {
   return $ret;
 }
 
-protected function getMutableonrequestDataloadQueryArgs($module, $props) {
-
+protected function getMutableonrequestDataloadQueryArgs($module, $props) 
+{
   $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
   
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
     
       // Set the logged-in user id
       $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
@@ -904,17 +866,16 @@ protected function getMutableonrequestDataloadQueryArgs($module, $props) {
   return $ret;
 }
 ```
-
+<!--
 ##### Defining the Filter
 
 The fetched data can be filtered through [Filter](#filter) objects, defined through function `getFilter`:
 
 ```php
-function getFilter($module) {
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
+function getFilter($module) 
+{
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
           
       return GD_FILTER_AUTHORARTICLES;
   }
@@ -922,18 +883,16 @@ function getFilter($module) {
   return parent::getFilter($module);
 }
 ```
-
+-->
 ##### Defining the QueryHandler
 
 After fetching data, we can communicate state (eg: are there more results? what's the next paging number? etc) through [QueryHandler](#queryhandler) objects, defined through function `getQueryhandler`. By default, it returns object with name `GD_DATALOAD_QUERYHANDLER_ACTIONEXECUTION`, needed when executing an operation (see section [Data-Posting and Operations](#data-posting-and-operations)):
 
 ```php
-function getQueryhandler($module) {
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
-          
+function getQueryhandler($module) 
+{
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
       return GD_DATALOAD_QUERYHANDLER_LIST;
   }
   
@@ -946,14 +905,12 @@ function getQueryhandler($module) {
 If the module needs to pass a variable to any other object involved in fetching/processing data ([Dataloader](#dataloader), [QueryHandler](#queryhandler), [ActionExecuter](#actionexecuter), etc), it can do so through "data properties", set through functions `getImmutableHeaddatasetmoduleDataProperties` and `getMutableonrequestHeaddatasetmoduleDataProperties`:
 
 ```php
-function getImmutableHeaddatasetmoduleDataProperties($module, &$props) {
-
+function getImmutableHeaddatasetmoduleDataProperties($module, &$props) 
+{
   $ret = parent::getImmutableHeaddatasetmoduleDataProperties($module, $props);
 
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
-          
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
       // Make it not fetch more results
       $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
       break;
@@ -968,11 +925,10 @@ function getImmutableHeaddatasetmoduleDataProperties($module, &$props) {
 We can instruct a dataloading module to be lazy-loaded (i.e. instead of fetching its database data immediately, it is fetched on a subsequent request from the client) simply by setting its prop `"lazy-load"` to `true`:
 
 ```php
-function initModelProps($module, &$props) {
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
+function initModelProps($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
 
       // Set the content lazy
       $this->setProp($module, $props, 'lazy-load', true);
@@ -986,14 +942,13 @@ function initModelProps($module, &$props) {
 Being a prop, this value can be set either by the dataloading module itself, or by any of its ancestor modules:
 
 ```php
-function initModelProps($module, &$props) {
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLESWRAPPER:
+function initModelProps($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLESWRAPPER:
 
       // Set the content lazy
-      $this->setProp([POP_MODULE_AUTHORARTICLES], $props, 'lazy-load', true);
+      $this->setProp([MODULE_AUTHORARTICLES], $props, 'lazy-load', true);
       break;
   }
 
@@ -1013,11 +968,10 @@ Among others, the following are several uses cases for lazy-loading the data for
 We can instruct a dataloading module to not load its data simply by setting its prop `"skip-data-load"` to `true`:
 
 ```php
-function initModelProps($module, &$props) {
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
+function initModelProps($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
 
       // Set the content lazy
       $this->setProp($module, $props, 'skip-data-load', true);
@@ -1045,14 +999,12 @@ Starting from a dataloading module, and including itself, any descendant module 
 "Data fields", which are the properties to be required from the loaded database object, are defined through function `getDataFields`:
 
 ```php
-function getDataFields($module, $props) {
-
+function getDataFields($module, $props) 
+{
   $ret = parent::getDataFields($module, $props);
 
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
-    
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
       $ret[] = 'title';
       $ret[] = 'content';
       break;
@@ -1062,7 +1014,7 @@ function getDataFields($module, $props) {
 }
 ```
 
-The value for "data-fields" is resolved through an object called a [FieldProcessor](#fieldprocessor), described below.
+The value for "data-fields" is resolved through an object called a [FieldValueResolver](#fieldprocessor), described below.
 
 ##### Switching domain to a relational object
 
@@ -1072,25 +1024,24 @@ Consider the image below: Starting from the object type "post", and moving down 
 
 ![Changing the DB object from one domain to another](https://uploads.getpop.org/wp-content/uploads/2018/12/loading-data-at-intervals-relational.jpg)
 
-Switching domins is accomplished through function `getDbobjectRelationalSuccessors`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the modules to use:
+Switching domins is accomplished through function `getDomainSwitchingSubmodules`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the modules to use:
 
 ```php
-function getDbobjectRelationalSuccessors($module) {
+function getDomainSwitchingSubmodules($module) 
+{
+  $ret = parent::getDomainSwitchingSubmodules($module);
 
-  $ret = parent::getDbobjectRelationalSuccessors($module);
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
     
       $ret['author'] = [
         GD_DATALOADER_USERLIST => [
-          POP_MODULE_AUTHORNAME,
+          MODULE_AUTHORNAME,
         ]
       ];
       $ret['comments'] = [
         GD_DATALOADER_COMMENTLIST => [
-          POP_MODULE_COMMENTLAYOUT,
+          MODULE_COMMENTLAYOUT,
         ]
       ];
       break;
@@ -1100,27 +1051,26 @@ function getDbobjectRelationalSuccessors($module) {
 }
 ```
 
-> Note: Similar to `get_modules`, this method also loads modules into the component hierarchy, hence it cannot receive parameter `$props`.
+> Note: Similar to `getModules`, this method also loads modules into the component hierarchy, hence it cannot receive parameter `$props`.
 
-Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [FieldProcessor](#FieldProcessor). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
+Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [FieldValueResolver](#FieldValueResolver). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
 
 ```php
-function getDbobjectRelationalSuccessors($module) {
+function getDomainSwitchingSubmodules($module) 
+{
+  $ret = parent::getDomainSwitchingSubmodules($module);
 
-  $ret = parent::getDbobjectRelationalSuccessors($module);
-
-  switch ($module) {
-
-    case POP_MODULE_AUTHORARTICLES:
+  switch ($module[1]) {
+    case self::MODULE_AUTHORARTICLES:
     
       $ret['author'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          POP_MODULE_AUTHORNAME,
+          [SomeModuleProcessor::class, SomeModuleProcessor::MODULE_AUTHORNAME],
         ]
       ];
       $ret['comments'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          POP_MODULE_COMMENTLAYOUT,
+          [SomeModuleProcessor::class, SomeModuleProcessor::MODULE_COMMENTLAYOUT],
         ]
       ];
       break;
@@ -1165,25 +1115,25 @@ function executeGetData($ids) {
 
 The dataloader must also implement the following functions:
 
-- `getFieldprocessor`: return the name of the [FieldProcessor](#fieldprocessor) that will handle the data-fields for all objects returned by the dataloader
+- `getFieldprocessor`: return the name of the [FieldValueResolver](#fieldprocessor) that will handle the data-fields for all objects returned by the dataloader
 - `getDatabaseKey`: return the object type under which objects returned by the dataloader will be stored under `databases` in the JSON response
 - `getDataquery`: return the name of the [DataQuery](#dataquery) object that will handle the objects returned by the dataloader
 
 For instance, a [dataloader fetching posts](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/library/dataload/dataloaders/dataloader-post-base.php) will implement these functions like this:
 
 ```php
-function getDatabaseKey() {
-
+function getDatabaseKey() 
+{
   return GD_DATABASE_KEY_POSTS;
 }  
 
-function getFieldprocessor() {
-
+function getFieldprocessor() 
+{
   return GD_DATALOAD_FIELDPROCESSOR_POSTS;
 }
 
-function getDataquery() {
-
+function getDataquery() 
+{
   return GD_DATAQUERY_POST;
 }
 ```
@@ -1216,8 +1166,8 @@ function getDbobjectIds($data_properties) {
 Dataloaders fetching lists of results (eg: a list of posts, a list of users, etc) will need to execute a query and filter the results. This logic has been implemented in trait `Dataloader_ListTrait`, which requires to implement functions `getQuery` to generate the query from the `$query_args` provided through [Data Properties](#data-properties), and `executeQueryIds` to, given the generated `$query`, return the list of object IDs:
 
 ```php
-function getQuery($query_args) {
-
+function getQuery($query_args) 
+{
   $query = array();
 
   // Add all the conditions in $query, taking values from $query_args
@@ -1252,25 +1202,20 @@ function executeQueryIds($query) {
 }  
 ```
 
-### FieldProcessor
+### FieldValueResolver
 
-The FieldProcessor is the object resolving "data-fields" to their corresponding value. It must inherit from class `FieldProcessorBase`, and implement function `getValue`, which receives two parameters, `$resultitem` which is the database object, and `$field` which is the data-field to resolve, and must return the value for that property applied to the database object. 
+The FieldValueResolver is the object resolving "data-fields" to their corresponding value. It must inherit from class `AbstractFieldValueResolver`, and implement function `getValue`, which receives two parameters, `$resultitem` which is the database object, and `$field` which is the data-field to resolve, and must return the value for that property applied to the database object. 
 
 > Note: the names of fields cannot include the following special characters: "," (`POP_CONSTANT_PARAMVALUE_SEPARATOR`), "." (`POP_CONSTANT_DOTSYNTAX_DOT`) or "|" (`POP_CONSTANT_PARAMFIELD_SEPARATOR`)
 
-For instance, a FieldProcessor for posts looks like this:
+For instance, a FieldValueResolver for posts looks like this:
 
 ```php
-class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
+class FieldValueResolver_Posts extends \PoP\Engine\AbstractFieldValueResolver {
 
-  function get_name() {
-  
-    return GD_DATALOAD_FIELDPROCESSOR_POSTS;
-  }
-  
   function getValue($resultitem, $field) {
   
-    // First Check if there's a FieldProcessorHook to implement this field
+    // First Check if there's a FieldValueResolverExtension to implement this field
     $hook_value = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_POSTS, $resultitem, $field);
     if (!\PoP\Engine\GeneralUtils::isError($hook_value)) {
       return $hook_value;
@@ -1279,8 +1224,8 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
     $cmsresolver = \PoP\CMS\ObjectPropertyResolver_Factory::getInstance();
     $cmsapi = \PoP\CMS\FunctionAPI_Factory::getInstance();
     $post = $resultitem;
-    switch ($field) {
-
+    switch ($field) 
+    {
       case 'tags' :
         $value = $cmsapi->getPostTags($this->getId($post), array('fields' => 'ids'));
         break;
@@ -1332,18 +1277,15 @@ class FieldProcessor_Posts extends \PoP\Engine\FieldProcessorBase {
     return $value;
   }
 }
-
-// Initialize
-new GD_DataLoad_FieldProcessor_Posts();
 ```
 
-The FieldProcessor also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getDbobjectRelationalSuccessors` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
+The FieldValueResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getDomainSwitchingSubmodules` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
 
 ```php
-function getFieldDefaultDataloader($field) {
-
-  switch ($field) {
-
+function getFieldDefaultDataloader($field) 
+{
+  switch ($field) 
+  {
     case 'tags' :
       return GD_DATALOADER_TAGLIST;
 
@@ -1358,27 +1300,27 @@ function getFieldDefaultDataloader($field) {
 }
 ```
 
-#### FieldProcessorHook
+#### FieldValueResolverExtension
 
-A FieldProcessorHook is an object that allows to resolve data-fields for specific FieldProcessors, either to override their value or to extend them. For instance, it can be implemented at the application level, resolving those application-specific data fields. It must inherit from class `FieldProcessor_HookBase` and implement function `getValue`, which receives three parameters, `$resultitem` which is the database object, `$field` which is the data-field to resolve, and `$fieldprocessor` which is the FieldProcessor object hooked into, and must return the value for that property applied to the database object. 
+A FieldValueResolverExtension is an object that allows to resolve data-fields for specific FieldValueResolvers, either to override their value or to extend them. For instance, it can be implemented at the application level, resolving those application-specific data fields. It must inherit from class `FieldValueResolver_HookBase` and implement function `getValue`, which receives three parameters, `$resultitem` which is the database object, `$field` which is the data-field to resolve, and `$fieldprocessor` which is the FieldValueResolver object hooked into, and must return the value for that property applied to the database object. 
 
-For instance, a FieldProcessorHook for posts might add a custom "disclaimer" message, and it looks like this:
+For instance, a FieldValueResolverExtension for posts might add a custom "disclaimer" message, and it looks like this:
 
 ```php
-class FieldProcessor_Posts_Hook extends \PoP\Engine\FieldProcessor_HookBase {
+class FieldValueResolver_Posts_Hook extends \PoP\Engine\FieldValueResolver_HookBase {
 
-  function getFieldprocessors_to_hook() {
+  function getClassesToAttachTo() {
     
     return array(
-      GD_DATALOAD_FIELDPROCESSOR_POSTS,
+      [FieldValueResolver::class, FieldValueResolver::FIELDPROCESSOR_POSTS],
     );
   }
 
-  function getValue($resultitem, $field, $fieldprocessor) {
-
+  function getValue($resultitem, $field, $fieldprocessor) 
+  {
     $post = $resultitem;
-    switch ($field) {
-
+    switch ($field) 
+    {
       case 'disclaimer':
         return \PoP\Engine\MetaManager::getPostMeta($fieldprocessor->getId($post), "disclaimer", true);
     }
@@ -1386,9 +1328,6 @@ class FieldProcessor_Posts_Hook extends \PoP\Engine\FieldProcessor_HookBase {
     return parent::getValue($resultitem, $field, $fieldprocessor);
   }  
 }
-
-// Initialize
-new FieldProcessor_Posts_Hook();
 ```
 
 ### Filtering Data
@@ -1400,17 +1339,14 @@ class TextFilterInputs extends TextFormInputsBase implements \PoP\Engine\Dataloa
 {
   public function filterDataloadQueryArgs(array &$query, $module, $value)
   {
-    switch ($module) {
-
-      case POP_MODULE_FILTERINPUT_SEARCH:
+    switch ($module[1]) 
+    {
+      case self::MODULE_FILTERINPUT_SEARCH:
         $query['search'] = $value;
         break;
     }
   }
 }
-
-// Initialize
-new TextFilterInputs();
 ```
 
 ### QueryHandler
@@ -1440,25 +1376,24 @@ The DataQueryHooks injects data-fields to mark as noncacheable and modules to ma
 
 In addition to loading data, "dataloading" modules can also post data, or execute any operation supported by the underlying CMS (log in/out the user, send emails, logging, etc).
 
-To achieve this, the ModuleProcessor must define the [ActionExecuter](#actionexecuter) object for the module through function `getActionexecuter`:
+To achieve this, the ModuleProcessor must define the [ActionExecuter](#actionexecuter) object for the module through function `getActionExecuterClass`:
 
 ```php
-function getActionexecuter($module) {
+function getActionExecuterClass($module) {
   
-  switch ($module) {
-
-    case POP_MODULE_SOMENAME:
+  switch ($module[1]) {
+    case self::MODULE_SOMENAME:
   
-      return GD_DATALOAD_ACTIONEXECUTER_SOMENAME;
+      return SomeActionExecuter::class;
   }
 
-  return parent::getActionexecuter($module);
+  return parent::getActionExecuterClass($module);
 }
 ```
 
 ### ActionExecuter
 
-The ActionExecuter is an object to execute actions or operations. It must inherit from class `ActionExecuterBase`, and implement function `execute`:
+The ActionExecuter is an object to execute actions or operations. It must inherit from class `AbstractActionExecuter`, and implement function `execute`:
 
 ```php
 function execute(&$data_properties) {
@@ -1472,23 +1407,16 @@ function execute(&$data_properties) {
 For instance, an ActionExecuter to log the user out will look like this:
 
 ```php
-define ('GD_DATALOAD_ACTIONEXECUTER_LOGOUT', 'logout');
+class ActionExecuter_Logout extends \PoP\Engine\AbstractActionExecuter {
 
-class ActionExecuter_Logout extends \PoP\Engine\ActionExecuterBase {
-
-  function get_name() {
-    
-    return GD_DATALOAD_ACTIONEXECUTER_LOGOUT;
-  }
-
-  function execute(&$data_properties) {
-
+  function execute(&$data_properties) 
+  {
     if ('POST' == $_SERVER['REQUEST_METHOD']) { 
 
       // If the user is not logged in, then return the error
       $vars = \PoP\Engine\Engine_Vars::getVars();
-      if (!$vars['global-state']['is-user-logged-in']) {
-
+      if (!$vars['global-state']['is-user-logged-in']) 
+      {
         $error = __('You are not logged in.');
       
         // Return error string
@@ -1508,9 +1436,6 @@ class ActionExecuter_Logout extends \PoP\Engine\ActionExecuterBase {
     return parent::execute($data_properties);
   }
 }
-
-//Initialize
-new ActionExecuter_Logout();
 ```
 
 #### Storing and reusing the results from an execution
@@ -1520,10 +1445,10 @@ The results obtained in function `execute` can be stored for other objects (Modu
 Storing and accessing the execution results is done through function `setResult` and `getResult` from the `ActionExecution_Manager` object. For instance, an ActionExecuter to create a comment will store the new comment ID:
 
 ```php
-function execute(&$data_properties) {
-
-  if ('POST' == $_SERVER['REQUEST_METHOD']) {
-
+function execute(&$data_properties) 
+{
+  if ('POST' == $_SERVER['REQUEST_METHOD']) 
+  {
     // Function getFormData obtains the filled-in values in the form
     $form_data = $this->getFormData($data_properties);
 
@@ -1534,8 +1459,8 @@ function execute(&$data_properties) {
     if (empty($form_data['comment'])) {
       $errors[] = __('The comment is empty.');
     }    
-    if ($errors) {
-
+    if ($errors) 
+    {
       return array(
         GD_DATALOAD_QUERYHANDLERRESPONSE_ERRORSTRINGS => $errors
       );
@@ -1565,13 +1490,12 @@ function prepareDataPropertiesAfterActionexecution($module, &$props, &$data_prop
     
   parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
 
-  switch ($module) {
-
-    case POP_MODULE_ADDCOMMENT:
+  switch ($module[1]) {
+    case self::MODULE_ADDCOMMENT:
 
       $actionexecution_manager = \PoP\Engine\ActionExecution_Manager_Factory::getInstance();
-      if ($comment_id = $actionexecution_manager->getResult(GD_DATALOAD_ACTIONEXECUTER_ADDCOMMENT)) {
-
+      if ($comment_id = $actionexecution_manager->getResult(GD_DATALOAD_ACTIONEXECUTER_ADDCOMMENT)) 
+      {
         $data_properties[GD_DATALOAD_QUERYARGS]['include'] = array($comment_id);
       }
       else {
@@ -1703,11 +1627,10 @@ The reason why these 2 functions are split like is, is to allow a page perform t
 For instance, a module that needs to validate that the user's IP is whitelisted can do it like this:
 
 ```php
-function getDataaccessCheckpoints($module, &$props) {
-
-  switch ($module) {
-
-    case POP_MODULE_SOMEMODULE:
+function getDataaccessCheckpoints($module, &$props) 
+{
+  switch ($module[1]) {
+    case self::MODULE_SOMEMODULE:
     
       return [CHECKPOINT_WHITELISTEDIP];
   }
@@ -1716,16 +1639,15 @@ function getDataaccessCheckpoints($module, &$props) {
 }
 ```
 
-Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `POP_MODULE_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function `getRelevantPage` from the ModuleProcessor, like this:
+Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `MODULE_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function `getRelevantPage` from the ModuleProcessor, like this:
 
 ```php
 function getRelevantPage($module, &$props) {
     
-  switch ($module) {
-
-    case POP_MODULE_MYPOSTS_SCROLL:
-    case POP_MODULE_MYPOSTS_CAROUSEL:
-    case POP_MODULE_MYPOSTS_TABLE:
+  switch ($module[1]) {
+    case self::MODULE_MYPOSTS_SCROLL:
+    case self::MODULE_MYPOSTS_CAROUSEL:
+    case self::MODULE_MYPOSTS_TABLE:
 
       return POP_PAGE_MYPOSTS;
   }
@@ -1738,27 +1660,28 @@ A checkpoint is resolved through a [CheckpointProcessor](#checkpointprocessor).
 
 #### CheckpointProcessor
 
-A CheckpointProcessor is an object inheriting from class `CheckpointProcessorBase`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
+A CheckpointProcessor is an object inheriting from class `AbstractCheckpointProcessor`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
 
 For instance, to validate if the user IP is whitelisted can be implemented like this:
 
 ```php
-define ('CHECKPOINT_WHITELISTEDIP', 'checkpoint-whitelistedip');
 
-class PoPSystem_Dataload_CheckpointProcessor extends \PoP\Engine\CheckpointProcessorBase {
+class CheckpointProcessor extends \PoP\Engine\AbstractCheckpointProcessor {
 
-  function getCheckpointsToProcess() {
+  const CHECKPOINT_WHITELISTEDIP = 'checkpoint-whitelistedip';
 
+  function getCheckpointsToProcess() 
+  {
     return array(
-      CHECKPOINT_WHITELISTEDIP,
+      [self::class, self::CHECKPOINT_WHITELISTEDIP],
     );
   }
 
-  function process($checkpoint) {
-
-    switch ($checkpoint) {
-
-      case CHECKPOINT_WHITELISTEDIP:
+  function process($checkpoint) 
+  {
+    switch ($checkpoint) 
+    {
+      case self::CHECKPOINT_WHITELISTEDIP:
 
         // Validate the user's IP
         $ip = get_client_ip();
@@ -1778,9 +1701,6 @@ class PoPSystem_Dataload_CheckpointProcessor extends \PoP\Engine\CheckpointProce
     return parent::process($checkpoint, $module);
   }
 }
-
-// Initialize
-new PoPSystem_Dataload_CheckpointProcessor();
 ```
 
 ## Extending and Formatting Data
@@ -1796,9 +1716,8 @@ By default, a module will fetch its data from the domain where the application i
 ```php
 function initModelProps($module, &$props) {
     
-  switch ($module) {
-
-    case POP_MODULE_SOMENAME:
+  switch ($module[1]) {
+    case self::MODULE_SOMENAME:
 
       $this->setProp(
         $module, 
@@ -1818,9 +1737,8 @@ We can also pass an array of domains, in which case the module will fetch its da
 ```php
 function initModelProps($module, &$props) {
     
-  switch ($module) {
-
-    case POP_MODULE_SOMENAME:
+  switch ($module[1]) {
+    case self::MODULE_SOMENAME:
 
       $this->setProp(
         $module, 
@@ -1979,7 +1897,7 @@ Will be added soon...
 Will be added soon...
 
 ## Coding Peculiarities
-
+<!--
 ### WordPress Legacy
 
 Being first built as a WordPress website, PoP has taken several concepts from this CMS, such as: 
@@ -1987,9 +1905,9 @@ Being first built as a WordPress website, PoP has taken several concepts from th
 - The hierarchy model (home, single, author, page, 404 and tag, and category to be added in the future)
 - Pages, Posts and Custom Post Types
 - Meta (post meta, user meta, comment meta and tag meta)
-
+-->
 ## Technology Stack
-
+<!--
 ### CMS-Agnosticism
 
 We are currently attempting to make the existing implementation of PoP be CMS-agnostic, so that it can be used with other PHP-based Content Management Systems (such as Joomla or Drupal) in addition to WordPress. We have already re-architected the codebase to use interfaces to access the CMS-provided functionality, and are migrating all code to use these interfaces.
@@ -2035,10 +1953,10 @@ Hence, PoP can be considered a progressive enhancement, in which WordPress unloc
 **3. Meta**
 
 Many functionalities depend on post/user/comment/tag meta data (for instance, Recommending a post, Following a user, and many others). CMSs supporting meta for these entities will have no issues, but those which do not may not be able to access these functionalities, as in the progressive enhancement situation described above.
-
+-->
 ### Hooks
 
-A legacy functionality from WordPress is its [hooks](https://codex.wordpress.org/Plugin_API). PoP uses hooks everywhere, through both functions `doAction` and `applyFilters` as defined through interface `HooksAPI`, allowing any piece of code to be overridable by any 3rd party, or be injected extra functionality. For WordPress, the implementation of the interface is trivial. Other systems can rely on packages to implement this functionality (eg: [this one](https://github.com/tormjens/eventy) or [this one](https://github.com/voku/php-hooks)).
+PoP uses hooks (as pioneered by [WordPress](https://codex.wordpress.org/Plugin_API)) everywhere, through both functions `doAction` and `applyFilters` as defined through interface `HooksAPI`, allowing any piece of code to be overridable by any 3rd party, or be injected extra functionality. For WordPress, the implementation of the interface is trivial. Other systems can rely on packages to implement this functionality (eg: [this one](https://github.com/tormjens/eventy) or [this one](https://github.com/voku/php-hooks)).
 
 ### Handlebars
 
