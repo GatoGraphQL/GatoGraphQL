@@ -1,3 +1,0 @@
-<?php
-
-Brain\Cortex::boot();

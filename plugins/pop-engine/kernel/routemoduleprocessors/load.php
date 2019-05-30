@@ -1,8 +1,0 @@
-<?php
-
-require_once 'pop-routemoduleprocessor-manager-factory.php';
-require_once 'pop-routemoduleprocessor-manager.php';
-require_once 'pop-routemoduleprocessor-groups.php';
-require_once 'pop-routemoduleprocessor-settings.php';
-require_once 'pop-routemoduleprocessor.php';
-require_once 'maincontent-base.php';
