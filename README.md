@@ -2,6 +2,14 @@
 
 # PoP — “Platform of Platforms”
 
+## Notice
+
+PoP is currently being migrated into components installable through Composer. Until the migration is complete, PoP cannot be installed 😱. 
+
+We expect the migration to be finished around October 2019, please have patience and stay tuned!
+
+## Description
+
 PoP is set of PHP components for building component-based websites. Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.
 
 PoP is composed of several layers, which can be progressively enabled to unlock further capabilities:
@@ -357,13 +365,9 @@ These 2 sites are proper, established social networks:
 - Malaysia-based environmental platform [MESYM](https://www.mesym.com)
 - Buenos Aires-based civic society-activism platform [Agenda Urbana](https://agendaurbana.org)
 
-## Installation
-
-PoP is currently being migrated into components installable through Composer. Until the migration is complete, PoP cannot be installed 😱. 
-
-We expect the migration to be finished around October 2019, please have patience and stay tuned!
-
 <!--
+
+## Installation
 
 Have your WordPress instance running (the latest version of WordPress can be downloaded from [here](https://wordpress.org/download/)). Then copy the contents of folders `/mu-plugins` and `/plugins` under `/wp-content/mu-plugins` and `/wp-content/plugins` respectively, and activate the 11 plugins from this repository:
 
