@@ -4,9 +4,9 @@
 
 ## Notice
 
-PoP is currently being migrated into components installable through Composer. Until the migration is complete, PoP cannot be installed 😱. 
+PoP's codebase is currently being migrated to Composer components. We expect the migration to be completed around end of 2019. Until then, PoP may not be officially available for installation 😱. [Read more here](https://getpop.org/en/blog/notes-on-pops-code-migration-to-composer/).
 
-We expect the migration to be finished around October 2019, please have patience and stay tuned!
+Please feel free to [contact Leo](mailto:leo@getpop.org) to find out about the current status. 
 
 ## Description
 
@@ -465,6 +465,10 @@ To allow the website's service-worker.js be able to cache content coming from th
 - [Tutorials](docs/Tutorials.md)
 
 > Note: The documentation is pretty lacking. We expect to work on it after releasing the first version of the software.
+
+### Related Articles
+
+- [Introducing the Component-based API](https://www.smashingmagazine.com/2019/01/introducing-component-based-api/): article describing all the main concepts of this architecture, published on Smashing Magazine.
 
 <!--
 ## Want to contribute?
