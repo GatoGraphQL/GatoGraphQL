@@ -152,16 +152,16 @@ id|title|url|content,comments.id|content|date,comments.author.id|name|url,commen
 
 **REST:**
 
-- A REST endpoint (for posts), in which data fields are implicit: https://nextapi.getpop.org/en/posts/?action=api&datastructure=rest
-- A REST endpoint (for posts), in which data fields are explicitly set through the URL (notice the relationship among elements, and how the response mirrors exactly the query): https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
+- [Retrieving default data (implicit fields)](https://nextapi.getpop.org/en/posts/?action=api&datastructure=rest)
+- [Retrieving client-custom data (explicit fields)](https://nextapi.getpop.org/en/posts/?action=api&datastructure=rest&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
 
 **GraphQL:**
 
-- Request specific data fields: https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
-- Filtering data in a nested node: https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;search:elephant).id|title|url
-- Passing attributes to format elements: https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url|avatar(size:40)|share-url(provider:facebook)|share-url(provider:twitter),comments.author.posts.id|title|url
+- [Retrieving client-custom data](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
+- [Filtering data in a nested node](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;search:elephant).id|title|url)
+- [Passing attributes to format elements](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url|avatar(size:40)|share-url(provider:facebook)|share-url(provider:twitter),comments.author.posts.id|title|url)
 
-**Note:** Setting parameter `datastructure` to either `graphql` or `rest` formats the response for the corresponding API. If `datastructure` is left empty, the response is the native one for PoP: a relational database structure where data is normalized through tables (see "Data API layer" below).
+**Note:** Setting parameter `datastructure` to either `graphql` or `rest` formats the response for the corresponding API. If `datastructure` is left empty, the response is the native one for PoP: a relational database structure (see "Data API layer" section below).
 
 ## PoP's native API specification
 
