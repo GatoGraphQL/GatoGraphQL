@@ -19,8 +19,8 @@ PoP is set of PHP components for building APIs (PoP native or GraphQL/REST-compa
 PoP is composed of several layers, which can be progressively enabled to unlock further capabilities:
 
 1. **A data API:**<br/>For fetching and posting data, in 2 flavours:
-    1. **PoP native format:**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json`
-    2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/?action=api`
+    1. **PoP native format:**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json` (implicit fields) or `/page-url/?action=api&fields=...` (explicit fields)
+    2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/?action=api&datastructure=graphql|rest&fields=...`
 2. **A configuration API:**<br/>The application can retrieve configuration values from the API, avoiding then to hardcode these on client-side files, making the application become more modular and maintainable
 3. **Rendering on client-side:**<br/>Consume the API data through JavaScript templates to render the website in the client
 4. **Isomorphic rendering on server-side:**<br/>Process the JavaScript templates in the server to produce the HTML already in the server
@@ -169,7 +169,7 @@ The examples below demonstrate the structure of PoP's native API specification.
 
 ### 1. Data API layer
 
-The PoP API, used for retrieving or posting data, is accessible under `/page-url/?output=json`. It represents data the following way:
+The PoP API, used for retrieving or posting data, is accessible under `/page-url/?output=json` (implicit fields) or `/page-url/?action=api&fields=...` (explicit fields). It represents data the following way:
 
 - Database data is retrieved through a relational structure under section `databases`
 - The IDs which are the results for each component are indicated through entry `dbobjectids` (under section `datasetmoduledata`)
