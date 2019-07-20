@@ -4,18 +4,24 @@
 
 ## Notice
 
-PoP's codebase is currently being migrated to Composer components. We expect the migration to be completed around end of 2019. Until then, PoP may not be officially available for installation 😱. [Read more here](https://getpop.org/en/blog/notes-on-pops-code-migration-to-composer/).
+PoP's codebase is currently being migrated to Composer components. PoP 1.0 will be released once the migration is complete. Contributors are welcome! [Find out more](#codebase-migration).
 
-Please feel free to [contact Leo](mailto:leo@getpop.org) to find out about the current status. 
+## Install
+
+Coming soon...
 
 ## Description
 
-PoP is set of PHP components for building component-based websites. Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.
+PoP is set of PHP components for building APIs and, further extending from the API, websites. PoP is components all the way down, implemented partly in the back-end, partly in the front-end.
+
+<!--Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.-->
 
 PoP is composed of several layers, which can be progressively enabled to unlock further capabilities:
 
-1. **A data API:**<br/>For fetching and posting data, accessible under `/page-url/?output=json`, and making all database data normalized under a relational structure
-2. **A configuration API:**<br/>Retrieved through an API, configuration values must not be hardcoded on client-side files, making the application become more modular and maintainable
+1. **A data API:**<br/>For fetching and posting data, in 2 flavours:
+    1. **PoP native format:**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json`
+    2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/?action=api`
+2. **A configuration API:**<br/>The application can retrieve configuration values from the API, avoiding then to hardcode these on client-side files, making the application become more modular and maintainable
 3. **Rendering on client-side:**<br/>Consume the API data through JavaScript templates to render the website in the client
 4. **Isomorphic rendering on server-side:**<br/>Process the JavaScript templates in the server to produce the HTML already in the server
 
@@ -23,7 +29,7 @@ PoP is composed of several layers, which can be progressively enabled to unlock 
 
 The component-based architecture of the API is based on the following foundations:
 
-1. Everything is a module
+1. Everything is a module (or component)
 2. The module is its own API
 3. Reactivity
 
@@ -45,10 +51,11 @@ Updating database data and configuration data saved in the client throughout the
 
 > Note: Implementation of this feature is still in progress and not yet available
 
-## Framework design goals
+## Design goals
 
-The current design and implementation of the framework was done to achieve the following goals:
+PoP's architecture attempts to achieve the following goals:
 
+- Support for creating all-purpose APIs, compatible with both REST and GraphQL, and combining the most important benefits from these two APIs
 - High level of modularity:
     - Strict top-down module hierarchy: ancestor modules know their descendants, but not the other way around
     - One-way setting of props across modules, from ancestors to descendants
@@ -93,15 +100,83 @@ Because it was originally conceived for WordPress, PoP's current implementation 
 
 > Note: This task is a work in progress and nowhere near completion: plenty of code has been implemented following the WordPress architecture (eg: basing the object model on posts, pages and custom post types), and must be assessed if it is compatible for other CMSs.
 -->
-## The API (JSON response) specification
 
-The examples below demonstrate the structure of the API specification.
+## API compatible with GraphQL and REST
+
+The response of the API can use both the REST and GraphQL formats. This way, a PoP API can be used as a drop-in replacement for both REST and GraphQL, providing the benefits of both these APIs at the same time:
+
+- No over/under-fetching data (as in GraphQL)
+- Shape of the response mirrors mirrors the query (as in GraphQL)
+- Passing parameters to the query nodes, at any depth, for filtering/pagination/formatting/etc (as in GraphQL)
+- Server-side caching (as in REST)
+- Secure: Not chance of Denial of Service attacks (as in REST)
+- Provide default data when no query is provided (as in REST)
+
+In a nutshell: the PoP API supports REST endpoints with GraphQL queries.
+
+### How does it work?
+
+Through a parameter `datastructure` in the URL we can select if the response must be REST-compatible or GraphQL-compatible. To fetch the data fields, for REST it supports default fields (as in typical REST behaviour), or explicitly querying for the fields, like in GraphQL. For this, the GraphQL query is converted to dot notation (using `|` to group all fields applied to the same resource) and passed in the URL through parameter `fields`. For instance, the following query:
+
+```graphql
+query {
+  id
+  title
+  url
+  content
+  comments {
+    id
+    content
+    date
+    author {
+      id
+      name
+      url
+      posts {
+        id
+        title
+        url
+      }
+    }
+  }
+}
+```
+
+Is converted to dot notation like this:
+
+```
+id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
+```
+
+### Examples
+
+**REST:**
+
+- A REST endpoint (for posts), in which data fields are implicit: https://nextapi.getpop.org/en/posts/?action=api&datastructure=rest
+- A REST endpoint (for posts), in which data fields are explicitly set through the URL (notice the relationship among elements, and how the response mirrors exactly the query): https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
+
+**GraphQL:**
+
+- Request specific data fields: https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
+- Filtering data in a nested node: https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;search:elephant).id|title|url
+- Passing attributes to format elements: https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url|avatar(size:40)|share-url(provider:facebook)|share-url(provider:twitter),comments.author.posts.id|title|url
+
+**Note:** Setting parameter `datastructure` to either `graphql` or `rest` formats the response for the corresponding API. If `datastructure` is left empty, the response is the native one for PoP: a relational database structure where data is normalized through tables (see "Data API layer" below).
+
+## PoP's native API specification
+
+The examples below demonstrate the structure of PoP's native API specification.
 
 ### 1. Data API layer
 
-At its most basic, PoP is an API for retrieving data, accessible under `/page-url/?output=json`, which normalizes database data under a relational structure under section `databases`, indicates which are the results for each component through entry `dbobjectids` under section `datasetmoduledata`, and where to find those results in the database through entry `dbkeys` under section `modulesettings`. 
+The PoP API, used for retrieving or posting data, is accessible under `/page-url/?output=json`. It represents data the following way:
 
-_Response from calling `/page-url/?output=json`:_
+- Database data is retrieved through a relational structure under section `databases`
+- The IDs which are the results for each component are indicated through entry `dbobjectids` (under section `datasetmoduledata`)
+- Where to find those results in the database is indicated through entry `dbkeys` (under section `modulesettings`)
+- All database data is normalized (i.e. not repeated)
+
+The API response looks like this:
 
 ```javascript
 {
@@ -220,15 +295,15 @@ In addition to retrieving database data, the API can also return configuration v
 
 ## Comparison with other APIs
 
-The PoP API has several similarities and differences with REST and GraphQL:
+The native data structure of the PoP API, and the algorithm it uses to fetch data, compares with REST and GraphQL like this:
 
 <table>
 <thead><th>&nbsp;</th><th>REST</th><th>GraphQL</th><th>PoP</th></thead>
 <tr><th>Nature</th><td>Resource-based</td><td>Schema-based</td><td>Component-based</td></tr>
 <tr><th>Endpoint</th><td>Custom endpoints based on resources</td><td>1 endpoint for the whole application</td><td>1 endpoint per page, simply adding parameter <code>output=json</code> to the page URL</td></tr>
 <tr><th>Retrieved data</th><td>All data for a resource</td><td>All data for all resources in a component</td><td>All data for all resources in a component, for all components in a page</td></tr>
-<tr><th>How are data fields retrieved?</th><td>Implicitly: already known on server-side</td><td>Explicitly: only known on client-side</td><td>Implicitly: already known on server-side</td></tr>
-<tr><th>Time complexity</th><td>Constant (O(1))</td><td><a href="https://blog.acolyer.org/2018/05/21/semantics-and-complexity-of-graphql/">Polynomial</a> (O(n^c))</td><td>Linear (O(n))</td></tr>
+<tr><th>How are data fields retrieved?</th><td>Implicitly: already known on server-side</td><td>Explicitly: only known on client-side</td><td>Both Implicitly and Explicitly are supported (the developer decides)</td></tr>
+<tr><th>Time complexity to fetch data</th><td>Constant (O(1))</td><td>At least <a href="https://blog.acolyer.org/2018/05/21/semantics-and-complexity-of-graphql/">Polynomial</a> (O(n^c))</td><td>Linear (O(n))</td></tr>
 <tr><th>Can post data?</th><td>Yes</td><td>Yes</td><td>Yes</td></tr>
 <tr><th>Can execute any type of other operation (eg: log in user, send an email, etc)?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Does it under/over-fetch data?</th><td>Yes</td><td>No</td><td>No</td></tr>
@@ -236,15 +311,20 @@ The PoP API has several similarities and differences with REST and GraphQL:
 <tr><th>Support for configuration values?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Cacheable on server-side?</th><td>Yes</td><td>No</td><td>Yes</td></tr>
 <tr><th>Open to DoS attack?</th><td>No</td><td><a href="https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b">Yes</a></td><td>No</td></tr>
+<tr><th>Compatible with the other APIs</th><td>No</td><td>No</a></td><td>Yes</td></tr>
 </table>
 
 ## When to use PoP
 
 Among others, PoP is suitable for the following use cases:
 
+### As a drop-in replacement for GraphQL and REST
+
+PoP combines the best of both GraphQL and REST: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. And because its response is compatible with both of these APIs, it can conveniently replace them on the application with minimal effort.
+
 ### As an API to fetch data, or execute any type of operation
 
-The API for fetching data comes out of the box, and specifying what resources to fetch and what data fields to retrieve for each resource is trivial. 
+The API for fetching data comes out of the box, and its component-based architecture makes it a breeze for defining what data fields are required.
 
 The API can also be used to to execute any operation supported by the underlying CMS: post data, log in the user, send an email, etc. Since the operation is defined for each module, it is even possible to execute multiple operations in a single request, and have each module get a feedback response on the success of their operation.
 
@@ -256,15 +336,17 @@ From a single source of truth it is possible to produce HTML on the server-side,
 
 PoP modules are focused on a single task or goal. Hence, to modify a functionality, quite likely just a single module needs be updated, and because of the high degree of modularity attained by the architecture, other modules will not be affected. In addition, each module is cleary decoupled through the use of PHP, CSS, JavaScript templates and JavaScript for functionalities, so only the appropriate team members will need to work on the module (for instance, there is no CSS in JS).
 
-PoP also attains a significant level of self-documentation on two aspects: the website is already the documentation for the API, and component pattern libraries can be automatically generated by rendering each module on their own, reducing the amount of documentation that needs be produced.
+### Avoid having to document your components
 
-### Use components as the site's building unit already on the server-side
+Because the website is already the documentation for the API, and component pattern libraries can be automatically generated by rendering each component on their own, PoP reduces the amount of documentation that needs be produced.
 
-Using components as the building unit of a website has many advantages over other methods, such as through templates. Modern frameworks bring the magic of components to the client-side for functionality (such as JavaScript libraries React and Vue) and for styles through component pattern libraries (such as Bootstrap). PoP extends the benefits of coding with components to the server-side.
+### Robust architecture based on splitting a component's responsibilities into server and client-side
 
-### Avoid (or lessen) JavaScript fatigue
+Using components as the building unit of a website has many advantages over other methods, such as through templates. Modern frameworks bring the magic of components to the client-side for functionality (such as JavaScript libraries React and Vue) and for styles through component pattern libraries (such as Bootstrap). PoP splits a component's responsibilities into server-side (props, configuration, other) and client-side (view, reactivity), creating a more resilient and robust architecture.
 
-PoP is not a JavaScript framework, but a framework spanning the server and client-side. While developers can add client-side JavaScript to enhance the application, it is certainly not a requirement, and powerful applications can be created with basic knowledge of JavaScript.
+<!--### Avoid (or lessen) JavaScript fatigue
+
+PoP is not a JavaScript framework, but a framework spanning the server and client-side. While developers can add client-side JavaScript to enhance the application, it is certainly not a requirement, and powerful applications can be created with basic knowledge of JavaScript.-->
 
 ### Implement COPE or similar techniques
 
@@ -274,9 +356,9 @@ PoP is not a JavaScript framework, but a framework spanning the server and clien
 
 PoP supports to set a module as lazy, so that its data is loaded from the client instead of the server, and change the domain from which to fetch the data to any other domain or subdomain, on a module by module basis, which enables to split an application into microservices. In addition, PoP allows to establish more than one data source for any module, so a module can aggregate its data from several domains concurrently, as demonstrated by the content aggregator SukiPoP's [feed](https://sukipop.com/en/posts/), [events calendar](https://sukipop.com/en/calendar/) and [user's map](https://sukipop.com/en/users/?format=map).
 
-### Make the most out of cloud services
+<!--### Make the most out of cloud services
 
-From the two foundations "everything is a module" and "a module is its own API", we conclude that everything on a PoP site is an API. And since APIs are greatly suitable to take advantage of cloud services (for instance, serving and caching the API response through a CDN), then PoP calls the cloud "home".
+From the two foundations "everything is a module" and "a module is its own API", we conclude that everything on a PoP site is an API. And since APIs are greatly suitable to take advantage of cloud services (for instance, serving and caching the API response through a CDN), then PoP calls the cloud "home".-->
 <!--
 ## Timeline
 
@@ -301,22 +383,14 @@ Some examples of PoP in the wild:
 
 ### PoP API
 
-The PoP API is deployed under https://nextapi.getpop.org for demonstration purposes:
-
-- [The homepage](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined), [a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputmode=combined), [an author](https://nextapi.getpop.org/u/leo/?output=json&mangled=none&dataoutputmode=combined), [a list of posts](https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputmode=combined) and [a list of users](https://nextapi.getpop.org/users/?output=json&mangled=none&dataoutputmode=combined)
-- [An event, filtering from a specific module](https://nextapi.getpop.org/events/coldplay-in-london/?output=json&mangled=none&modulefilter=modulepaths&modulepaths[]=pagesectiongroup.pagesection-body.block-singlepost.block-single-content&dataoutputmode=combined)
-- A tag, [filtering modules which require user state](https://nextapi.getpop.org/tags/internet/?output=json&mangled=none&modulefilter=userstate&dataoutputmode=combined) and [filtering to bring only a page from a Single-Page Application](https://nextapi.getpop.org/tags/internet/?output=json&mangled=none&modulefilter=page&dataoutputmode=combined)
-- [An array of locations, to feed into a typeahead](https://nextapi.getpop.org/locations/?output=json&mangled=none&modulefilter=maincontentmodule&dataoutputmode=combined&datastructure=results)
-- Alternative models for the "Who we are" page: [Normal](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&dataoutputmode=combined), [Printable](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&thememode=print&dataoutputmode=combined), [Embeddable](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&thememode=embed&dataoutputmode=combined)
-- Changing the module names: [original](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined) vs [mangled](https://nextapi.getpop.org/?output=json&dataoutputmode=combined)
-- Filtering information: [only module settings](https://nextapi.getpop.org/?output=json&dataoutputitems[]=modulesettings&dataoutputmode=combined&mangled=none), [module data plus database data](https://nextapi.getpop.org/?output=json&dataoutputitems[]=databases&dataoutputitems[]=moduledata&dataoutputmode=combined&mangled=none)
-
-### PoP API Custom-Querying Capabilities
+You can play with the PoP API here: https://nextapi.getpop.org. Check the following examples:
+<!--
+**Requesting specific fields:**
 
 In the following links, data for a resource or collection of resources is fetched as typically done through REST; however, through parameter `fields` we can also specify what specific data to retrieve for each resource, avoiding over or underfetching data: 
 
-- A [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title,content,datetime) and a [collection of posts](https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title,content,datetime) adding parameter `fields=title,content,datetime`
-- A [user](https://nextapi.getpop.org/u/leo/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=name,username,description) and a [collection of users](https://nextapi.getpop.org/users/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=name,username,description) adding parameter `fields=name,username,description`
+- A [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title,content,datetime) and a [collection of posts](https://nextapi.getpop.org/posts/?output=json&action=api&fields=title,content,datetime) adding parameter `fields=title,content,datetime`
+- A [user](https://nextapi.getpop.org/u/leo/?output=json&action=api&fields=name,username,description) and a [collection of users](https://nextapi.getpop.org/users/?output=json&action=api&fields=name,username,description) adding parameter `fields=name,username,description`
 
 This works for relationships too. For instance, let's say that we want to retrieve a list of posts with fields `"title"` and `"content"`, each post's comments with fields `"content"` and `"date"`, and the author of each comment with fields `"name"` and `"url"`. To achieve this in GraphQL we would implement the following query:
 
@@ -349,11 +423,32 @@ Or it can be simplified, using `|` to group all fields applied to the same resou
 fields=title|content,comments.content|date,comments.author.name|url
 ```
 
-When executing this query [on a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources.
+When executing this query [on a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources.
+-->
+
+**PoP, GraphQL and REST-like API:**
+
+We can fetch exactly the required data for all involved resources from a URL, in different formats:
+
+- [PoP native response](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url)
+- [GraphQL-compatible response](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=graphql)
+- [REST-compatible response](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=rest)
+
+**Application extending from the API:**
+
+The native API can be the backbone of the application, and this can be extended by adding the other layers (configuration, view) to create the application:
+
+- [The homepage](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined), [a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputmode=combined), [an author](https://nextapi.getpop.org/u/leo/?output=json&mangled=none&dataoutputmode=combined), [a list of posts](https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputmode=combined) and [a list of users](https://nextapi.getpop.org/users/?output=json&mangled=none&dataoutputmode=combined)
+- [An event, filtering from a specific module](https://nextapi.getpop.org/events/coldplay-in-london/?output=json&mangled=none&modulefilter=modulepaths&modulepaths[]=pagesectiongroup.pagesection-body.block-singlepost.block-single-content&dataoutputmode=combined)
+- A tag, [filtering modules which require user state](https://nextapi.getpop.org/tags/internet/?output=json&mangled=none&modulefilter=userstate&dataoutputmode=combined) and [filtering to bring only a page from a Single-Page Application](https://nextapi.getpop.org/tags/internet/?output=json&mangled=none&modulefilter=page&dataoutputmode=combined)
+- [An array of locations, to feed into a typeahead](https://nextapi.getpop.org/locations/?output=json&mangled=none&modulefilter=maincontentmodule&dataoutputmode=combined&datastructure=results)
+- Alternative models for the "Who we are" page: [Normal](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&dataoutputmode=combined), [Printable](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&thememode=print&dataoutputmode=combined), [Embeddable](https://nextapi.getpop.org/who-we-are/?output=json&mangled=none&thememode=embed&dataoutputmode=combined)
+- Changing the module names: [original](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined) vs [mangled](https://nextapi.getpop.org/?output=json&dataoutputmode=combined)
+- Filtering information: [only module settings](https://nextapi.getpop.org/?output=json&dataoutputitems[]=modulesettings&dataoutputmode=combined&mangled=none), [module data plus database data](https://nextapi.getpop.org/?output=json&dataoutputitems[]=databases&dataoutputitems[]=moduledata&dataoutputmode=combined&mangled=none)
 
 ### PoP Sites
 
-> Note: The websites below run on the old API, and will be migrated to the new API once we have added the rendering layer, sometime around 2nd quarter of 2019.
+> Note: The websites below run on the old API, and will be migrated to the new API soon.
 
 These 2 sites below were built for demonstration purposes, so you are encouraged to play with them (create a random post or event, follow a user, add a comment, etc):
 
@@ -457,6 +552,28 @@ To allow the website's service-worker.js be able to cache content coming from th
     </IfModule>
 -->
 
+## Codebase Migration
+
+PoP's codebase is currently being migrated to Composer packages. We are welcoming contributors to help with the migration, as to push forward the release date for PoP 1.0.
+
+Currently, many PoP packages are split into 2:
+
+1. The final package
+2. A temporary, "migrate" package
+
+The task is to migrate all code from the "migrate" to the final package, converting all code as required. The "migrate" package contains legacy PHP code written several years ago, targeting PHP 5. The migration must introduce modern PHP techniques to the codebase (such as using Composer, dependency injection, autoloading and others), using PHP 7 code. Once the code migration for each package is complete, the corresponding "migrate" package can be deleted.
+
+Migrating the code involves the implementation of the following features:
+
+- Adding package dependencies in `composer.json`
+- Identification of services and making them available through [Symfony's DependencyInjection component](https://symfony.com/doc/current/components/dependency_injection.html)
+- Identification of options, and setting them through [Symfony's Dotenv component](https://symfony.com/doc/current/components/dotenv.html) (currently they are defined as constants, such as `POP_SERVER_USEAPPSHELL`)
+- Adding namespaces for all PHP classes following the [PSR-4](https://www.php-fig.org/psr/psr-4/) convention, as to support [autoloading through Composer](https://getcomposer.org/doc/01-basic-usage.md#autoloading)
+- Shortening of classnames (eg: from the current `PoP_Posts_Module_Processor_PostsDataloads` to `Dataloads`, after placing the class under namespace `PoP\Posts\ModuleProcessors`)
+- Using `use` statements to import fully-qualified (namespace+classname) classes at the top of the PHP file, to make the code more legible (eg: instead of repeatedly executing `\PoP\Engine\Engine_Vars::getVars()`, we can first import the class with `use PoP\Engine\Engine_Vars;` and then execute `Engine_Vars::getVars()`)
+
+If you want to become involved, or simply want to find out more, please [contact Leo](mailto:leo@getpop.org).
+
 ## Documentation
 
 - [Main Concepts](docs/MainConcepts.md)
@@ -466,9 +583,17 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 > Note: The documentation is pretty lacking. We expect to work on it after releasing the first version of the software.
 
-### Related Articles
+### Development Articles: How PoP works
+
+The following articles give a step-by-step process of how many features in PoP were implemented:
 
 - [Introducing the Component-based API](https://www.smashingmagazine.com/2019/01/introducing-component-based-api/): article describing all the main concepts of this architecture, published on Smashing Magazine.
+- [Caching Smartly In The Age Of Gutenberg](https://www.smashingmagazine.com/2018/12/caching-smartly-gutenberg/): Caching mechanism implemented in PoP, allowing to cache pages even when the user is logged-in (to be emulated for Gutenberg)
+- [Avoiding The Pitfalls Of Automatically Inlined Code](https://www.smashingmagazine.com/2018/11/pitfalls-automatically-inlined-code/): How PoP generates JS/CSS resources to improve performance
+- [Sending Emails Asynchronously Through AWS SES](https://www.smashingmagazine.com/2018/11/sending-emails-asynchronously-through-aws-ses/): Mechanism to send emails through AWS SES implemented for PoP
+- [Adding Code-Splitting Capabilities To A WordPress Website Through PoP](https://www.smashingmagazine.com/2018/02/code-splitting-wordpress-pop/): How PoP implements code-splitting of JavaScript files
+- [How To Make A Dynamic Website Become Static Through A Content CDN](https://www.smashingmagazine.com/2018/02/dynamic-website-static-content-cdn/): Mechanism implemented for PoP to route dynamic content through a CDN to improve performance
+- [Implementing A Service Worker For Single-Page App WordPress Sites](https://www.smashingmagazine.com/2017/10/service-worker-single-page-application-wordpress-sites/): The strategy behind the creation of the service-worker.js file in PoP (when running under WordPress), which powers its offline-first caching strategy
 
 <!--
 ## Want to contribute?
