@@ -561,7 +561,7 @@ Currently, many PoP packages are split into 2:
 1. The final package
 2. A temporary, "migrate" package
 
-The task is to migrate all code from the "migrate" to the final package, converting all code as required. The "migrate" package contains legacy PHP code written several years ago, targeting PHP 5. The migration must introduce modern PHP techniques to the codebase (such as using Composer, dependency injection, autoloading and others), using PHP 7 code. Once the code migration for each package is complete, the corresponding "migrate" package can be deleted.
+The task is to migrate all code from the "migrate" to the final package, converting all code as required. The "migrate" package contains legacy PHP code written several years ago. The migration must introduce modern PHP techniques to the codebase, such as using Composer, dependency injection, autoloading and others. Once the code migration for each package is complete, the corresponding "migrate" package can be deleted.
 
 Migrating the code involves the implementation of the following features:
 
