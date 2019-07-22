@@ -507,7 +507,7 @@ define('POP_SERVER_DISABLEPOP', !($_REQUEST['output'] == 'json' || substr($_SERV
 
 PoP allows the configuration of the following properties, set in file wp-config.php:
 
-`USE_CACHE` (`true`|`false`, default: `false`): Create and re-use a cache of the settings for the requested page.
+`POP_SERVER_USECACHE` (`true`|`false`, default: `false`): Create and re-use a cache of the settings for the requested page.
 
 `POP_SERVER_COMPACTRESPONSEJSONKEYS` (`true`|`false`, default: `false`): Compress the keys in the JSON response.
 
@@ -725,7 +725,7 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true_|_false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different websites can communicate with each other without conflict, mangling all template definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
 
-- `USE_CACHE` (_true_|_false_): Create and re-use a cache of the settings of the requested page.
+- `POP_SERVER_USECACHE` (_true_|_false_): Create and re-use a cache of the settings of the requested page.
 
 - `POP_SERVER_COMPACTJSKEYS` (_true_|_false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
