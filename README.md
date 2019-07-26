@@ -594,12 +594,12 @@ If you want to become involved, or simply want to find out more, please [contact
 
 ## Documentation
 
+> Note: The documentation is pretty lacking. We expect to work on it further after releasing version 1.0
+
 - [Main Concepts](docs/MainConcepts.md)
 - [Developer Guide](docs/DeveloperGuide.md)
 - [Architecture Design and Implementation](docs/ArchitectureDesignAndImplementation.md)
 - [Tutorials](docs/Tutorials.md)
-
-> Note: The documentation is pretty lacking. We expect to work on it after releasing the first version of the software.
 
 ### Development Articles: How PoP works
 
@@ -612,6 +612,10 @@ The following articles give a step-by-step process of how many features in PoP w
 - [Adding Code-Splitting Capabilities To A WordPress Website Through PoP](https://www.smashingmagazine.com/2018/02/code-splitting-wordpress-pop/): How PoP implements code-splitting of JavaScript files
 - [How To Make A Dynamic Website Become Static Through A Content CDN](https://www.smashingmagazine.com/2018/02/dynamic-website-static-content-cdn/): Mechanism implemented for PoP to route dynamic content through a CDN to improve performance
 - [Implementing A Service Worker For Single-Page App WordPress Sites](https://www.smashingmagazine.com/2017/10/service-worker-single-page-application-wordpress-sites/): The strategy behind the creation of the service-worker.js file in PoP (when running under WordPress), which powers its offline-first caching strategy
+
+## Becoming involved
+
+Contributors are welcome! If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀.
 
 <!--
 ## Want to contribute?
