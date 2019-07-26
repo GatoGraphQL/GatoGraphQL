@@ -594,7 +594,7 @@ If you want to become involved, or simply want to find out more, please [contact
 
 ## Documentation
 
-> Note: The documentation is pretty lacking. We expect to work on it further after releasing version 1.0
+> Note: The documentation is currently pretty lacking. We expect to work on it further after releasing version 1.0
 
 - [Main Concepts](docs/MainConcepts.md)
 - [Developer Guide](docs/DeveloperGuide.md)
