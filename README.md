@@ -10,29 +10,60 @@ PoP's codebase is currently being migrated to Composer components. PoP 1.0 will 
 
 > **Note:** Because only the [PoP API for WordPress](https://github.com/leoloso/pop-api-wp) is currently available, the instructions below are for this method. Other installation methods (for other CMSs, and to set-up a website instead of an API) are coming soon.
 
-**1. Download WordPress and all PoP components via Composer**
+Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/):
+
+1. Create the [WordPress database and user](https://wordpress.org/support/article/how-to-install-wordpress/#step-2-create-the-database-and-a-user)
+2. In the terminal, step on the folder where to install the site
+3. Execute the bash script below, replacing all variables values (such as `{YOUR_SITE_FOLDER_NAME}`) with your own values:
 
 ```bash
-$ composer create-project leoloso/pop-api-wp yoursitename
+###################################
+# Replace these values
+###################################
+export FOLDER_NAME={YOUR_SITE_FOLDER_NAME} #eg: root
+export DB_NAME={YOUR_SITE_DB_NAME} #eg: database
+export DB_USER={YOUR_SITE_DB_USER} #eg: admin
+export DB_PASSWORD={YOUR_SITE_DB_PASSWORD} #eg: sADF!kl9diq@#Sjfk
+export DB_HOST={YOUR_SITE_DB_HOST} #eg: 127.0.0.1
+export SITE_URL_WITHOUT_HTTP={YOUR_SITE_URL_WITHOUT_HTTP} #eg: localhost
+export SITE_URL_WITH_HTTP={YOUR_SITE_URL_WITH_HTTP} #eg: http://localhost
+export SITE_NAME="{YOUR_SITE_NAME}" #eg: "My awesome website"
+export ADMIN_USER={ADMIN_USER} #eg: admin
+export ADMIN_PASSWORD={ADMIN_PASSWORD} #eg: JKo$@sfjASD00w
+export ADMIN_EMAIL={ADMIN_EMAIL} #eg: pedro@example.com
+
+###################################
+# Execute script
+###################################
+# Install PoP and WordPress through Composer:
+composer create-project leoloso/pop-api-wp $FOLDER_NAME dev-master
+
+# Install the must-use plugins:
+cd $FOLDER_NAME
+composer install
+
+# Configure wp-config.php through WP-CLI: (reference: https://developer.wordpress.org/cli/commands/config/set/)
+wp config set DB_NAME $DB_NAME
+wp config set DB_USER $DB_USER
+wp config set DB_PASSWORD $DB_PASSWORD
+wp config set DB_HOST $DB_HOST
+
+# Generate random SALT keys through WP-CLI: (reference: https://developer.wordpress.org/cli/commands/config/shuffle-salts/)
+wp config shuffle-salts
+
+# Install WordPress: (reference: https://developer.wordpress.org/cli/commands/core/install/)
+wp core install --url=$SITE_URL_WITHOUT_HTTP --title="$SITE_NAME" --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL
+
+# Update the site URL, adding "/wp"
+wp option update siteurl $SITE_URL_WITH_HTTP/wp
 ```
+4. Wait for a few minutes ☕️😁
+5. Test if successful:
+    - WordPress site under {YOUR_SITE_URL_WITH_HTTP}
+    - WordPress admin under {YOUR_SITE_URL_WITH_HTTP}/wp
+    - PoP API under {YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest
 
-The script above sets the application options for the `DEV` environment. To set them for `PROD`, prepend the command with `ENV=PROD`:
-
-```bash
-$ ENV=PROD composer create-project leoloso/pop-api-wp yoursitename
-```
-
-**2. Install WordPress**
-
-- [Install the WordPress database](https://wordpress.org/support/article/how-to-install-wordpress/#step-2-create-the-database-and-a-user)
-- [Configure `wp-config.php`](https://wordpress.org/support/article/how-to-install-wordpress/#step-3-set-up-wp-config-php)
-- [Run the install script](https://wordpress.org/support/article/how-to-install-wordpress/#step-5-run-the-install-script)
-
-**3. Modify the Site Address (URL)**
-
-Log in to the WordPress admin panel and go to Settings => General (`wp-admin/options-general.php`). There, remove the `/wp` bit from the Site Address (URL) input and save.
-
-**4. Set-up application options (optional)**
+### Configure application options (optional)
 
 Upon installation, the Composer script will create file `config/.env` including default values for application options (passed as environment variables). You can further edit this file, or even create more specific ones (following [Symfony's Dotenv component](https://symfony.com/doc/current/components/dotenv.html)'s file hierarchy).
 
