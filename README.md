@@ -175,9 +175,9 @@ Because it was originally conceived for WordPress, PoP's current implementation 
 
 The response of the API can use both the REST and GraphQL formats. This way, a PoP API can be used as a drop-in replacement for both REST and GraphQL, providing the benefits of both these APIs at the same time:
 
-- 🤘🏻No over/under-fetching data (as in GraphQL)
-- 🤘🏻Shape of the response mirrors mirrors the query (as in GraphQL)
-- 🤘🏻Passing parameters to the query nodes, at any depth, for filtering/pagination/formatting/etc (as in GraphQL)
+- 🤘🏽No over/under-fetching data (as in GraphQL)
+- 🤘🏽Shape of the response mirrors mirrors the query (as in GraphQL)
+- 🤘🏽Passing parameters to the query nodes, at any depth, for filtering/pagination/formatting/etc (as in GraphQL)
 - 💪🏻Server-side caching (as in REST)
 - 💪🏻Secure: Not chance of Denial of Service attacks (as in REST)
 - 💪🏻Provide default data when no query is provided (as in REST)
