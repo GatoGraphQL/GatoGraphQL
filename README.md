@@ -8,18 +8,15 @@ PoP's codebase is currently being migrated to Composer components. PoP 1.0 will 
 
 ## Install
 
-> **Note:** Because only the [PoP API for WordPress](https://github.com/leoloso/pop-api-wp) is currently available, the instructions below are for this method. Other installation methods (for other CMSs, and to set-up a website instead of an API) are coming soon.
+> **Note:** The instructions below will install [PoP API for WordPress](https://github.com/leoloso/pop-api-wp). Installation for other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
 Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/):
 
 1. Create the [WordPress database and user](https://wordpress.org/support/article/how-to-install-wordpress/#step-2-create-the-database-and-a-user)
-2. In the terminal, step on the folder where to install the site
-3. Execute the bash script below, replacing all variables values (such as `{YOUR_SITE_FOLDER_NAME}`) with your own values:
+2. In the terminal, `cd` to the folder where to install the site
+3. Copy the code below to an editor, replace all values (such as `{YOUR_SITE_FOLDER_NAME}`) with your own values, and then paste it on the terminal to execute:
 
 ```bash
-###################################
-# Replace these values
-###################################
 export FOLDER_NAME={YOUR_SITE_FOLDER_NAME} #eg: root
 export DB_NAME={YOUR_SITE_DB_NAME} #eg: database
 export DB_USER={YOUR_SITE_DB_USER} #eg: admin
@@ -31,34 +28,16 @@ export SITE_NAME="{YOUR_SITE_NAME}" #eg: "My awesome website"
 export ADMIN_USER={ADMIN_USER} #eg: admin
 export ADMIN_PASSWORD={ADMIN_PASSWORD} #eg: JKo$@sfjASD00w
 export ADMIN_EMAIL={ADMIN_EMAIL} #eg: pedro@example.com
-
-###################################
-# Execute script
-###################################
-# Install PoP and WordPress through Composer:
-composer create-project leoloso/pop-api-wp $FOLDER_NAME dev-master
-
-# Install the must-use plugins:
-cd $FOLDER_NAME
-composer install
-
-# Configure wp-config.php through WP-CLI: (reference: https://developer.wordpress.org/cli/commands/config/set/)
-wp config set DB_NAME $DB_NAME
-wp config set DB_USER $DB_USER
-wp config set DB_PASSWORD $DB_PASSWORD
-wp config set DB_HOST $DB_HOST
-
-# Generate random SALT keys through WP-CLI: (reference: https://developer.wordpress.org/cli/commands/config/shuffle-salts/)
-wp config shuffle-salts
-
-# Install WordPress: (reference: https://developer.wordpress.org/cli/commands/core/install/)
-wp core install --url=$SITE_URL_WITHOUT_HTTP --title="$SITE_NAME" --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL
-
-# Update the site URL, adding "/wp"
-wp option update siteurl $SITE_URL_WITH_HTTP/wp
 ```
-4. Wait for a few minutes ☕️😁
-5. Test if successful:
+
+4. Execute script:
+
+```bash
+wget -O - https://raw.githubusercontent.com/leoloso/pop-api-wp/master/install.sh | bash
+```
+
+5. Wait for a few minutes ☕️😁
+6. Test if successful:
     - WordPress site under {YOUR_SITE_URL_WITH_HTTP}
     - WordPress admin under {YOUR_SITE_URL_WITH_HTTP}/wp
     - PoP API under {YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest
