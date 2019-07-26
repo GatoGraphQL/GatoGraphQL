@@ -111,8 +111,8 @@ PoP's architecture attempts to achieve the following goals:
 PoP is in the process of decoupling the API specification from the implementation, resulting in the following parts:
 
 1. The API (JSON response) specification
-2. PoP Server, to serve content based on the API specification
-3. PoP.js, to consume the content in the client
+2. PoP Server, to serve content based on the API specification (originally implemented in PHP)
+3. PoP.js, to consume the native PoP API in the client
 <!--
 We will soon release the current implementation of PoP Server and PoP.js:
 
