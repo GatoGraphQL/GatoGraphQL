@@ -82,6 +82,7 @@ Updating database data and configuration data saved in the client throughout the
 PoP's architecture attempts to achieve the following goals:
 
 - Support for creating all-purpose APIs, compatible with both REST and GraphQL, and combining the most important benefits from these two APIs
+- Progressive enhancement: the API becomes an Application
 - High level of modularity:
     - Strict top-down module hierarchy: ancestor modules know their descendants, but not the other way around
     - One-way setting of props across modules, from ancestors to descendants
@@ -90,13 +91,13 @@ PoP's architecture attempts to achieve the following goals:
     - Isomorphism to produce HTML code client and server-side and to be sent as transactional email
     - API output easily customized for different applications (website, mobile app, integration with 3rd party apps, etc)
     - Native code splitting, A/B testing, client-side state management and layout cache
-- Clearly decoupled responsibilities among PHP, JavaScript, JavaScript templates and CSS:
+- Clearly decoupled responsibilities among PHP, JavaScript, JavaScript templates and CSS (defining clear responsibilities across team members):
     - JavaScript templates for markup
     - JavaScript for user interactivity/dynamic functionality
     - CSS for styles
     - PHP for creating the modules
-    - => Easy to divide responsibilities across team members
-- JavaScript as progressive enhancement
+- JavaScript as progressive enhancement:
+    - The application works always, even if JavaScript is disabled
 - Aggressive caching, implemented across several layers: 
     - Pages and configuration in server
     - Content and assets through CDN
