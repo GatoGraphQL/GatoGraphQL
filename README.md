@@ -57,7 +57,7 @@ The component-based architecture of the API is based on the following foundation
 
 1. Everything is a module (or component)
 2. The module is its own API
-3. Reactivity
+3. Reactivity (based on observing a unique client-side database object)
 
 ### 1. Everything is a module
 
