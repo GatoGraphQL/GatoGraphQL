@@ -320,9 +320,9 @@ In addition to retrieving database data, the API can also return configuration v
 }
 ```
 
-## Comparison with other APIs
+## Comparison among APIs
 
-The native data structure of the PoP API, and the algorithm it uses to fetch data, compares with REST and GraphQL like this:
+REST, GraphQL and PoP native compare like this:
 
 <table>
 <thead><th>&nbsp;</th><th>REST</th><th>GraphQL</th><th>PoP</th></thead>
