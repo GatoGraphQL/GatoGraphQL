@@ -494,15 +494,6 @@ That's it. You can then access PoP's API by adding parameter `output=json` to an
 
 -->
 <!--
-### Enhancement: enable PoP only if required
-
-Because currently PoP only works as an API and not to render the site, it can then be enabled only if needed, which is when parameter `output=json` is in the URL or when we are in the wp-admin area. Simply add this line to wp-config.php:
-
-```php
-define('POP_SERVER_DISABLEPOP', !($_REQUEST['output'] == 'json' || substr($_SERVER['REQUEST_URI'], 0, 10) == '/wp-admin/'));
-```
--->
-<!--
 ## Configuration
 
 PoP allows the configuration of the following properties, set in file wp-config.php:
