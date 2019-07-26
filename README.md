@@ -613,7 +613,7 @@ To allow the website's service-worker.js be able to cache content coming from th
     </IfModule>
 -->
 
-## 😤 Codebase Migration
+## Codebase Migration
 
 PoP's codebase is currently being migrated to Composer packages. We are welcoming contributors to help with the migration, as to push forward the release date for PoP 1.0.
 
