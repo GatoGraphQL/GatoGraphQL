@@ -36,10 +36,10 @@ wget -O - https://raw.githubusercontent.com/leoloso/pop-api-wp/master/install.sh
 ```
 
 4. Wait for a few minutes ☕️😁
-5. Test if successful:
-    - WordPress site under {YOUR_SITE_URL_WITH_HTTP}
-    - WordPress admin under {YOUR_SITE_URL_WITH_HTTP}/wp/wp-admin/
-    - PoP API under {YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest
+5. Check that WordPress and PoP were successfully installed:
+    - WordPress site: {YOUR_SITE_URL_WITH_HTTP}
+    - WordPress admin: {YOUR_SITE_URL_WITH_HTTP}/wp/wp-admin/
+    - PoP API (REST for posts): {YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest
 
 ### Configure application options (optional)
 
