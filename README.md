@@ -16,7 +16,7 @@ Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/):
 2. Set environment variables: Copy the code below to an editor, replace all values (such as `{YOUR_SITE_FOLDER_NAME}`) with your own values, and then paste it on the terminal to execute:
 
 ```bash
-export FOLDER_NAME={YOUR_SITE_FOLDER_NAME} #eg: root
+export FOLDER_NAME={YOUR_SITE_FOLDER_NAME} #eg: MyAwesomeSite
 export DB_NAME={YOUR_SITE_DB_NAME} #eg: database
 export DB_USER={YOUR_SITE_DB_USER} #eg: admin
 export DB_PASSWORD={YOUR_SITE_DB_PASSWORD} #eg: sADF!kl9diq@#Sjfk
