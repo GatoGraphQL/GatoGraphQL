@@ -13,8 +13,7 @@ PoP's codebase is currently being migrated to Composer components. PoP 1.0 will 
 Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/):
 
 1. Create the [WordPress database and user](https://wordpress.org/support/article/how-to-install-wordpress/#step-2-create-the-database-and-a-user)
-2. In the terminal, `cd` to the folder where to install the site
-3. Copy the code below to an editor, replace all values (such as `{YOUR_SITE_FOLDER_NAME}`) with your own values, and then paste it on the terminal to execute:
+2. Set environment variables: Copy the code below to an editor, replace all values (such as `{YOUR_SITE_FOLDER_NAME}`) with your own values, and then paste it on the terminal to execute:
 
 ```bash
 export FOLDER_NAME={YOUR_SITE_FOLDER_NAME} #eg: root
@@ -30,16 +29,16 @@ export ADMIN_PASSWORD={ADMIN_PASSWORD} #eg: JKo$@sfjASD00w
 export ADMIN_EMAIL={ADMIN_EMAIL} #eg: pedro@example.com
 ```
 
-4. Execute script:
+3. In the terminal, `cd` to the folder where to install the site, and execute script:
 
 ```bash
 wget -O - https://raw.githubusercontent.com/leoloso/pop-api-wp/master/install.sh | bash
 ```
 
-5. Wait for a few minutes ☕️😁
-6. Test if successful:
+4. Wait for a few minutes ☕️😁
+5. Test if successful:
     - WordPress site under {YOUR_SITE_URL_WITH_HTTP}
-    - WordPress admin under {YOUR_SITE_URL_WITH_HTTP}/wp
+    - WordPress admin under {YOUR_SITE_URL_WITH_HTTP}/wp/wp-admin/
     - PoP API under {YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest
 
 ### Configure application options (optional)
