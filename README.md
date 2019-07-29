@@ -579,7 +579,7 @@ PoP allows the configuration of the following properties, set in file wp-config.
 
 `POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
 
-`ENABLE_API` (`true`|`false`, default: `true`): Enable the custom-querying capabilities of the API.
+`DISABLE_API` (`true`|`false`, default: `false`): Disable the custom-querying capabilities of the API.
 
 `EXTERNAL_SITES_RUN_SAME_SOFTWARE` (`true`|`false`, default: `false`): Indicate if the external sites from which the origin site is fetching data has the same components installed. In this case, the data can be retrieved using the standard methods. Otherwise, it will be done through the custom-querying API.
 
