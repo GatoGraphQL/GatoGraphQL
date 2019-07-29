@@ -569,21 +569,21 @@ That's it. You can then access PoP's API by adding parameter `output=json` to an
 
 PoP allows the configuration of the following properties, set in file wp-config.php:
 
-`POP_SERVER_USECACHE` (`true`|`false`, default: `false`): Create and re-use a cache of the settings for the requested page.
+`USE_CACHE` (`true`|`false`, default: `false`): Create and re-use a cache of the settings for the requested page.
 
-`POP_SERVER_COMPACTRESPONSEJSONKEYS` (`true`|`false`, default: `false`): Compress the keys in the JSON response.
+`COMPACT_RESPONSE_JSON_KEYS` (`true`|`false`, default: `false`): Compress the keys in the JSON response.
 
-`POP_SERVER_ENABLECONFIGBYPARAMS` (`true`|`false`, default: `false`): Enable to set the application configuration through URL param "config".
+`ENABLE_CONFIG_BY_PARAMS` (`true`|`false`, default: `false`): Enable to set the application configuration through URL param "config".
 
 `POP_SERVER_FAILIFMODULESDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name.
 
 `POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
 
-`POP_SERVER_ENABLEAPI` (`true`|`false`, default: `true`): Enable the custom-querying capabilities of the API.
+`ENABLE_API` (`true`|`false`, default: `true`): Enable the custom-querying capabilities of the API.
 
-`POP_SERVER_EXTERNALSITESRUNSAMESOFTWARE` (`true`|`false`, default: `false`): Indicate if the external sites from which the origin site is fetching data has the same components installed. In this case, the data can be retrieved using the standard methods. Otherwise, it will be done through the custom-querying API.
+`EXTERNAL_SITES_RUN_SAME_SOFTWARE` (`true`|`false`, default: `false`): Indicate if the external sites from which the origin site is fetching data has the same components installed. In this case, the data can be retrieved using the standard methods. Otherwise, it will be done through the custom-querying API.
 
-`POP_SERVER_FAILIFSUBCOMPONENTDATALOADERUNDEFINED` (`true`|`false`, default: `false`): Whenever switching domain to a field which doesn't have a default dataloader, and without specifying what dataloader to use, throw an exception if `true` or ignore and avoid loading that data if `false`.
+`FAIL_IF_SUBCOMPONENT_DATALOADER_IS_UNDEFINED` (`true`|`false`, default: `false`): Whenever switching domain to a field which doesn't have a default dataloader, and without specifying what dataloader to use, throw an exception if `true` or ignore and avoid loading that data if `false`.
 -->
 <!--
 ### Decentralization: enabling crossdomain
@@ -629,7 +629,7 @@ Migrating the code involves the implementation of the following features:
 
 - Adding package dependencies in `composer.json`
 - Identification of services and making them available through [Symfony's DependencyInjection component](https://symfony.com/doc/current/components/dependency_injection.html)
-- Identification of options, and setting them through [Symfony's Dotenv component](https://symfony.com/doc/current/components/dotenv.html) (currently they are defined as constants, such as `POP_SERVER_USEAPPSHELL`)
+- Identification of options, and setting them through [Symfony's Dotenv component](https://symfony.com/doc/current/components/dotenv.html) (currently they are defined as constants, such as `USE_APPSHELL`)
 - Adding namespaces for all PHP classes following the [PSR-4](https://www.php-fig.org/psr/psr-4/) convention, as to support [autoloading through Composer](https://getcomposer.org/doc/01-basic-usage.md#autoloading)
 - Shortening of classnames (eg: from the current `PoP_Posts_Module_Processor_PostsDataloads` to `Dataloads`, after placing the class under namespace `PoP\Posts\ModuleProcessors`)
 - Using `use` statements to import fully-qualified (namespace+classname) classes at the top of the PHP file, to make the code more legible (eg: instead of repeatedly executing `\PoP\Engine\Engine_Vars::getVars()`, we can first import the class with `use PoP\Engine\Engine_Vars;` and then execute `Engine_Vars::getVars()`)
@@ -741,27 +741,27 @@ Until then, we provide a zip file including all code (PoP, WordPress and plugins
 
 PoP allows the configuration of the following properties, done in file wp-config.php:
 
-- `POP_SERVER_USEAPPSHELL` (_true_|_false_): Load an empty Application Shell (or appshell), which loads the page content after loading.
+- `USE_APPSHELL` (_true_|_false_): Load an empty Application Shell (or appshell), which loads the page content after loading.
 
-- `POP_SERVER_USESERVERSIDERENDERING` (_true_|_false_): Produce HTML on the server-side for the first-loaded page.
+- `USE_SERVER_SIDE_RENDERING` (_true_|_false_): Produce HTML on the server-side for the first-loaded page.
 
-- `POP_SERVER_USECODESPLITTING` (_true_|_false_): Load only the .js and .css that is needed on each page and nothing more.
+- `USE_CODE_SPLITTING` (_true_|_false_): Load only the .js and .css that is needed on each page and nothing more.
 
-- `POP_SERVER_USEPROGRESSIVEBOOTING` (_true_|_false_): If doing code splitting, load JS resources on 2 stages: critical ones immediately, and non-critical ones deferred, to lower down the Time to Interactive of the application.
+- `USE_PROGRESSIVE_BOOTING` (_true_|_false_): If doing code splitting, load JS resources on 2 stages: critical ones immediately, and non-critical ones deferred, to lower down the Time to Interactive of the application.
 
-- `POP_SERVER_GENERATEBUNDLEGROUPFILES` and `POP_SERVER_GENERATEBUNDLEFILES` (_true_|_false_): (Only if doing code-splitting) When executing the `/generate-theme/` build script, generate a single bundlegroup and/or a series of bundle files for each page on the website containing all resources it needs.
+- `GENERATE_BUNDLEGROUP_FILES` and `GENERATE_BUNDLE_FILES` (_true_|_false_): (Only if doing code-splitting) When executing the `/generate-theme/` build script, generate a single bundlegroup and/or a series of bundle files for each page on the website containing all resources it needs.
 
-- `POP_SERVER_GENERATEBUNDLEFILESONRUNTIME` (_true_|_false_): (Only if doing code-splitting) Generate the bundlegroup or bundle files on runtime, so no need to pre-generate these.
+- `GENERATE_BUNDLE_FILES_ON_RUNTIME` (_true_|_false_): (Only if doing code-splitting) Generate the bundlegroup or bundle files on runtime, so no need to pre-generate these.
 
-- `POP_SERVER_GENERATELOADINGFRAMERESOURCEMAPPING` (_true_|_false_): (Only if doing code-splitting) Pre-generate the mapping listing what resources are needed for each route in the application, created when executing the `/generate-theme/` build script.
+- `GENERATE_LOADING_FRAME_RESOURCE_MAPPING` (_true_|_false_): (Only if doing code-splitting) Pre-generate the mapping listing what resources are needed for each route in the application, created when executing the `/generate-theme/` build script.
 
-- `POP_SERVER_ENQUEUEFILESTYPE` (_resource_|_bundle_|_bundlegroup_): (Only if doing code-splitting) Choose how the initial-page resources are loaded:
+- `ENQUEUE_FILES_TYPE` (_resource_|_bundle_|_bundlegroup_): (Only if doing code-splitting) Choose how the initial-page resources are loaded:
 
     - "resource": Load the required resources straight
-    - "bundle": through a series of bundle files, each of them comprising up to x resources (defined through constant `POP_SERVER_BUNDLECHUNKSIZE`)
+    - "bundle": through a series of bundle files, each of them comprising up to x resources (defined through constant `BUNDLE_CHUNK_SIZE`)
     - "bundlegroup": through a unique bundlegroup file
 
-- `POP_SERVER_BUNDLECHUNKSIZE` (_int_): (Only if doing code-splitting) How many resources to pack inside a bundle file. Default: 4.
+- `BUNDLE_CHUNK_SIZE` (_int_): (Only if doing code-splitting) How many resources to pack inside a bundle file. Default: 4.
 
 - `POP_SERVER_TEMPLATERESOURCESINCLUDETYPE` (_header_|_body_|_body-inline_): (Only if doing server-side rendering, code-splitting and enqueue type = "resource") Choose how to include those resources depended by a module (mainly CSS styles):
 
@@ -771,13 +771,13 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_GENERATERESOURCESONRUNTIME` (_true_|_false_): Allow to extract configuration code from the HTML output and into Javascript files on runtime.
 
-- `POP_SERVER_USEMINIFIEDRESOURCES` (_true_|_false_): Include the minified version of .js and .css files.
+- `USE_MINIFIED_RESOURCES` (_true_|_false_): Include the minified version of .js and .css files.
 
-- `POP_SERVER_USEBUNDLEDRESOURCES` (_true_|_false_): (Only if not doing code-splitting) Insert script and style assets from a single bundled file.
+- `USE_BUNDLED_RESOURCES` (_true_|_false_): (Only if not doing code-splitting) Insert script and style assets from a single bundled file.
 
 - `POP_SERVER_USECDNRESOURCES` (_true_|_false_): Whenever available, use resources from a public CDN.
 
-- `POP_SERVER_SCRIPTSAFTERHTML` (_true_|_false_): If doing server-side rendering, re-order script tags so that they are included only after rendering all HTML.
+- `INCLUDE_SCRIPTS_AFTER_HTML` (_true_|_false_): If doing server-side rendering, re-order script tags so that they are included only after rendering all HTML.
 
 - `POP_SERVER_REMOVEDATABASEFROMOUTPUT` (_true_|_false_): If doing server-side rendering, remove all database data from the HTML output.
 
@@ -791,15 +791,15 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true_|_false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different websites can communicate with each other without conflict, mangling all template definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
 
-- `POP_SERVER_USECACHE` (_true_|_false_): Create and re-use a cache of the settings of the requested page.
+- `USE_CACHE` (_true_|_false_): Create and re-use a cache of the settings of the requested page.
 
 - `POP_SERVER_COMPACTJSKEYS` (_true_|_false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
-- `POP_SERVER_USELOCALSTORAGE` (_true_|_false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
+- `USE_LOCAL_STORAGE` (_true_|_false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
-- `POP_SERVER_ENABLECONFIGBYPARAMS` (_true_|_false_): Enable to set the application configuration through URL param "config".
+- `ENABLE_CONFIG_BY_PARAMS` (_true_|_false_): Enable to set the application configuration through URL param "config".
 
-- `POP_SERVER_DISABLEJS` (_true_|_false_): Strip the output of all Javascript code.
+- `DISABLE_JS` (_true_|_false_): Strip the output of all Javascript code.
 
 - `POP_SERVER_USEGENERATETHEMEOUTPUTFILES` (_true_|_false_): Indicates that we are using all the output files produced from running `/generate-theme/` in this environment, namely:
 
@@ -807,7 +807,7 @@ PoP allows the configuration of the following properties, done in file wp-config
     - resourceloader-generatedfiles.json
     - All `pop-memory/` files
 
-- `POP_SERVER_SKIPLOADINGFRAMERESOURCES` (_true_|_false_): When generating file `resources.js`, with the list of resources to dynamically load on the client, do not include those resources initially loaded in the website (through "loading-frame").
+- `SKIP_LOADING_FRAME_RESOURCES` (_true_|_false_): When generating file `resources.js`, with the list of resources to dynamically load on the client, do not include those resources initially loaded in the website (through "loading-frame").
 
 ### Decentralization: enabling crossdomain
 
