@@ -743,7 +743,7 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `USE_APPSHELL` (_true_|_false_): Load an empty Application Shell (or appshell), which loads the page content after loading.
 
-- `USE_SERVER_SIDE_RENDERING` (_true_|_false_): Produce HTML on the server-side for the first-loaded page.
+- `DISABLE_SERVER_SIDE_RENDERING` (_true_|_false_): Disable producing HTML on the server-side for the first-loaded page.
 
 - `USE_CODE_SPLITTING` (_true_|_false_): Load only the .js and .css that is needed on each page and nothing more.
 
