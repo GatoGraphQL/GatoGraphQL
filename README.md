@@ -807,7 +807,7 @@ PoP allows the configuration of the following properties, done in file wp-config
     - resourceloader-generatedfiles.json
     - All `pop-memory/` files
 
-- `SKIP_LOADING_FRAME_RESOURCES` (_true_|_false_): When generating file `resources.js`, with the list of resources to dynamically load on the client, do not include those resources initially loaded in the website (through "loading-frame").
+- `LOAD_FRAME_RESOURCES` (_true_|_false_): When generating file `resources.js`, with the list of resources to dynamically load on the client, include those resources initially loaded in the website (through "loading-frame").
 
 ### Decentralization: enabling crossdomain
 
