@@ -91,7 +91,7 @@ Add parameters `action=api&datastructure=rest` to the endpoint URL:
 - List of users:<br/>[/users/?action=api&datastructure=rest](https://nextapi.getpop.org/users/?action=api&datastructure=rest)
 - Author:<br/>[/{AUTHOR-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=rest)
 - List of tags:<br/>[/tags/?action=api&datastructure=rest](https://nextapi.getpop.org/tags/?action=api&datastructure=rest)
-- Tag:<br/>[/{TAG-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/tag/html?action=api&datastructure=rest)
+- Tag:<br/>[/{TAG-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/tag/html/?action=api&datastructure=rest)
 - Page:<br/>[/{PAGE-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/about/?action=api&datastructure=rest)
 
 **GraphQL-compatible:**
