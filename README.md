@@ -10,18 +10,12 @@ PoP's codebase is currently being migrated to Composer components. PoP 1.0 will 
 
 > **Note:** The instructions below will install [PoP API for WordPress](https://github.com/leoloso/pop-api-wp). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
-Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/):
+Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/) (both are assumed to be installed globally):
 
 1. Create the [WordPress database and user](https://wordpress.org/support/article/how-to-install-wordpress/#step-2-create-the-database-and-a-user)
-2. Set environment variables: Copy the code below to an editor, replace all values (such as `{YOUR_SITE_FOLDER_NAME}`) with your own values, and then paste it on the terminal to execute.
+2. Configure WordPress through environment variables: 
 
-a. Folder name where to install the site:
-
-```bash
-export FOLDER_NAME={YOUR_SITE_FOLDER_NAME} #eg: MyAwesomeSite
-```
-
-b. `wp-config.php` constants:
+> Copy the code below to an editor, replace all values (such as `{YOUR_SITE_DB_NAME}`) with your own values, and then either paste it on the terminal to execute, or save it in file "~/.bash_profile" and then execute `source ~/.bash_profile`.
 
 ```bash
 export DB_NAME={YOUR_SITE_DB_NAME} #eg: database
@@ -58,19 +52,18 @@ export LOGGED_IN_SALT={YOUR_LOGGED_IN_SALT}
 export NONCE_SALT={YOUR_NONCE_SALT}
 ```
 
-3. In the terminal, `cd` to the folder where to install the site, and execute script:
+3. Bootstrap a new project from this repo:
 
 ```bash
-wget -O - https://raw.githubusercontent.com/leoloso/pop-api-wp/master/install/install.sh | bash
+composer create-project leoloso/pop-api-wp
 ```
 
-(Or copy/paste the contents of [install.sh](https://github.com/leoloso/pop-api-wp/blob/master/install/install.sh) in the terminal, eg: for Windows users)
-
 4. Wait for a few minutes ☕️😁
-5. Check that WordPress and PoP were successfully installed:
-    - WordPress site: {YOUR_SITE_URL_WITH_HTTP}
-    - WordPress admin: {YOUR_SITE_URL_WITH_HTTP}/wp/wp-admin/
-    - PoP API (REST for posts): {YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest
+5. ✅ Check that WordPress was successfully installed:
+
+    - 👉WordPress site: {YOUR_SITE_URL_WITH_HTTP}
+    - 👉WordPress admin: {YOUR_SITE_URL_WITH_HTTP}/wp/wp-admin/
+    - 👉PoP API: {YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest (REST for posts)
 
 ### Configure application options (optional)
 
