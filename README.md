@@ -59,7 +59,7 @@ composer create-project leoloso/pop-api-wp
 ```
 
 4. Wait for a few minutes ☕️😁
-5. ✅ Check that WordPress was successfully installed:
+5. ✅ The site is installed under:
 
     - 👉WordPress site: {YOUR_SITE_URL_WITH_HTTP}
     - 👉WordPress admin: {YOUR_SITE_URL_WITH_HTTP}/wp/wp-admin/
