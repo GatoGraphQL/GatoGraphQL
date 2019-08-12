@@ -207,7 +207,7 @@ The response of the API can use both the REST and GraphQL formats. This way, a P
 
 In a nutshell: the PoP API supports REST endpoints with GraphQL queries.
 
-### How does it work?
+### Defining what data to fetch through fields
 
 Through a parameter `datastructure` in the URL we can select if the response must be REST-compatible or GraphQL-compatible. To fetch the data fields, for REST it supports default fields (as in typical REST behaviour), or explicitly querying for the fields, like in GraphQL. For this, the GraphQL query is passed in the URL through parameter `fields`, converted to a "custom dot notation" format:
 
@@ -253,6 +253,12 @@ And our endpoint URL becomes:
 {ENDPOINT-URL}/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
 ```
 
+### Field modifiers
+
+Similar to GraphQL, a field may have modifiers: an array of `key:value` properties, appended next to the field name enclosed with `()` and separated with `;`, which modify the output from the field. 
+
+For instance, an author's posts can be ordered (`posts(order:asc;orderby:title)`) and limited to a string and number of results (`posts(search:template;limit:3)`), a user avatar can be specified its dimensions in pixels (`avatar(size: 40)`), a share URL can specify the provider (`share-url(provider:facebook)`), and others.
+
 ### Examples
 
 **REST:**
@@ -263,8 +269,11 @@ And our endpoint URL becomes:
 **GraphQL:**
 
 - [Retrieving client-custom data](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
+- [Returning an author's posts that contain a certain string](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=graphql&fields=id|name,posts(search:template).id|title|url)
+<!--
 - [Filtering data in a nested node](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;search:elephant).id|title|url)
 - [Passing attributes to format elements](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url|avatar(size:40)|share-url(provider:facebook)|share-url(provider:twitter),comments.author.posts.id|title|url)
+-->
 
 **Note:** Setting parameter `datastructure` to either `graphql` or `rest` formats the response for the corresponding API. If `datastructure` is left empty, the response is the native one for PoP: a relational database structure (see "Data API layer" section below).
 
