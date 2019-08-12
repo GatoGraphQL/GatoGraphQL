@@ -10,15 +10,15 @@ PoP's codebase is currently being migrated to Composer components. PoP 1.0 will 
 
 > **Note:** The instructions below will install [PoP API for WordPress](https://github.com/leoloso/pop-api-wp). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
+### Installing PoP on an existing WordPress site
+
 Via a WordPress plugin:
 
 _Coming soon..._
 
 -----
 
-Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/) (installed globally):
-
-**I. _Installing PoP on an existing WordPress site:_**
+Via Composer:
 
 1. Make sure your `composer.json` file has the configuration below (since PoP is currently under development, there are no releases yet, so the project must accept minimum stability `"dev"`):
 
@@ -79,9 +79,9 @@ $ composer update
 
 6. ✅ Check that the PoP API works by loading in your site: `/posts/?action=api&datastructure=rest` (assuming that package `"getpop/posts-wp"` was added)
 
-&nbsp;
+### Creating a new WordPress site with PoP installed
 
-**II. _Create a new WordPress site, with PoP installed:_**
+Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/) (installed globally):
 
 1. Create the [WordPress database and user](https://wordpress.org/support/article/how-to-install-wordpress/#step-2-create-the-database-and-a-user)
 2. Configure WordPress through environment variables: 
