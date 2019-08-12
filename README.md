@@ -263,6 +263,21 @@ Updating database data and configuration data saved in the client throughout the
 
 > Note: Implementation of this feature is still in progress and not yet available
 
+## Progressive/Resilient components
+
+In most libraries/frameworks in the market, the implementation of the concept of components is based on JavaScript. In PoP, a component has a progressive approach, and its implementation spans from back to front-end:
+
+<table>
+<thead>
+<tr><th>Back-end</th><th>Front-end</th></tr>
+</thead>
+<tbody>
+<tr valign="top"><td>Component hierarchy<br/>Data loading<br/>Configuration<br/>Props</td><td>Styles (CSS)<br/>View (Handlebars templates)<br/>Reactivity (vanilla JavaScript)</td></tr>
+</tbody>
+</table>
+
+**Bonus:** Because the view is implemented through [Handlebars](https://handlebarsjs.com/) templates, which can be loaded both in the client (through the Handlebars runtime) and in the server (through PHP library [LightnCandy](https://github.com/zordius/lightncandy)), then this approach is isomorphic: the same code works on both environments.
+
 ## Design goals
 
 PoP's architecture attempts to achieve the following goals:
