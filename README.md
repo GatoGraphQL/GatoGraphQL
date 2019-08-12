@@ -79,6 +79,8 @@ For the **GraphQL-compatible API**, add parameters `action=api&datastructure=gra
 
 For the **PoP native API**, add parameters `action=api` to the endpoint URL, and parameter `fields` similar to GraphQL.
 
+----
+
 Currently, the API supports the following entities and fields:
 
 ### Posts
