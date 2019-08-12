@@ -106,7 +106,7 @@ _Single post:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr valign="top"><td>id<br/>post-type<br/>published<br/>not-published<br/>title<br/>content<br/>url<br/>endpoint<br/>excerpt<br/>status<br/>is-draft<br/>date<br/>datetime<br/>comments-url<br/>comments-count<br/>has-comments<br/>published-with-comments<br/>cats<br/>cat<br/>cat-name<br/>cat-slugs<br/>tag-names<br/>post-block-metadata (blockname)</td><td>comments<br/>tags<br/>author</td></tr>
+<tr valign="top"><td>id<br/>post-type<br/>published<br/>not-published<br/>title<br/>content<br/>url<br/>endpoint<br/>excerpt<br/>status<br/>is-draft<br/>date<br/>datetime<br/>comments-url<br/>comments-count<br/>has-comments<br/>published-with-comments<br/>cats<br/>cat<br/>cat-name<br/>cat-slugs<br/>tag-names</td><td>comments<br/>tags<br/>author</td></tr>
 </tbody>
 </table>
 
