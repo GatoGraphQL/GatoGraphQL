@@ -209,7 +209,13 @@ In a nutshell: the PoP API supports REST endpoints with GraphQL queries.
 
 ### How does it work?
 
-Through a parameter `datastructure` in the URL we can select if the response must be REST-compatible or GraphQL-compatible. To fetch the data fields, for REST it supports default fields (as in typical REST behaviour), or explicitly querying for the fields, like in GraphQL. For this, the GraphQL query is converted to dot notation (using `|` to group all fields applied to the same resource) and passed in the URL through parameter `fields`. For instance, the following query:
+Through a parameter `datastructure` in the URL we can select if the response must be REST-compatible or GraphQL-compatible. To fetch the data fields, for REST it supports default fields (as in typical REST behaviour), or explicitly querying for the fields, like in GraphQL. For this, the GraphQL query is passed in the URL through parameter `fields`, converted to a "custom dot notation" format:
+
+- Defining the path to a field with `.`
+- Separating different nodes with `,`
+- Grouping all property fields on a node with `|`
+
+For instance, the following GraphQL query:
 
 ```graphql
 query {
@@ -235,10 +241,16 @@ query {
 }
 ```
 
-Is converted to dot notation like this:
+Is converted to the "custom dot notation" format like this:
 
 ```
 id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
+```
+
+And our endpoint URL becomes:
+
+```
+{ENDPOINT-URL}/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
 ```
 
 ### Examples
