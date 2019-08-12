@@ -271,7 +271,7 @@ In most libraries/frameworks in the market, the implementation of the concept of
 
 <table>
 <thead>
-<tr><th>Back-end</th><th>Front-end</th></tr>
+<tr><th>Back-end (PHP)</th><th>Front-end</th></tr>
 </thead>
 <tbody>
 <tr valign="top"><td>Component hierarchy<br/>Data loading<br/>Configuration<br/>Props</td><td>Styles (CSS)<br/>View (Handlebars templates)<br/>Reactivity (vanilla JavaScript)</td></tr>
