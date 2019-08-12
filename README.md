@@ -10,7 +10,78 @@ PoP's codebase is currently being migrated to Composer components. PoP 1.0 will 
 
 > **Note:** The instructions below will install [PoP API for WordPress](https://github.com/leoloso/pop-api-wp). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
-Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/) (both are assumed to be installed globally):
+Via a WordPress plugin:
+
+_Coming soon..._
+
+-----
+
+Via [Composer](https://getcomposer.org) and [WP-CLI](https://wp-cli.org/) (installed globally):
+
+**I. _Installing PoP on an existing WordPress site:_**
+
+1. Make sure your `composer.json` file has the configuration below (since PoP is currently under development, there are no releases yet, so the project must accept minimum stability `"dev"`):
+
+```javascript
+{
+    ...
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    ...
+}
+```
+
+2. Add the following mandatory packages to the `require` section of your `composer.json` file:
+
+```bash
+{
+    ...
+    "require": {
+        ...
+        "getpop/engine-symfony": "dev-master",
+        "getpop/engine-wp": "dev-master",
+        ...
+    }
+    ...
+}
+```
+
+3. (Suggested) Add the following packages to the `require` section of your `composer.json` file:
+
+```bash
+{
+    ...
+    "require": {
+        ...
+        "getpop/posts-wp": "dev-master",
+        "getpop/postmeta-wp": "dev-master",
+        "getpop/users-wp": "dev-master",
+        "getpop/usermeta-wp": "dev-master",
+        "getpop/pages-wp": "dev-master",
+        "getpop/comments-wp": "dev-master",
+        "getpop/commentmeta-wp": "dev-master",
+        "getpop/taxonomies-wp": "dev-master",
+        "getpop/taxonomymeta-wp": "dev-master",
+        "getpop/taxonomyquery-wp": "dev-master",
+        ...
+    }
+    ...
+}
+```
+
+4. Run `composer update`:
+
+```bash
+$ composer update
+```
+
+5. Wait for a few minutes ☕️😁
+
+6. ✅ Check that the PoP API works by loading in your site: `/posts/?action=api&datastructure=rest` (assuming that package `"getpop/posts-wp"` was added)
+
+&nbsp;
+
+**II. _Create a new WordPress site, with PoP installed:_**
 
 1. Create the [WordPress database and user](https://wordpress.org/support/article/how-to-install-wordpress/#step-2-create-the-database-and-a-user)
 2. Configure WordPress through environment variables: 
@@ -32,13 +103,13 @@ export ADMIN_EMAIL={ADMIN_EMAIL} #eg: pedro@example.com
 
 To set the SALT keys there are two alternatives:
 
-I. Set random values through environment variable `SHUFFLE_SALT_KEYS`:
+a. Set random values through environment variable `SHUFFLE_SALT_KEYS`:
 
 ```bash
 export SHUFFLE_SALT_KEYS=true
 ```
 
-II. Set the corresponding values directly:
+b. Set the corresponding values directly:
 
 ```bash
 # Obtain random values from https://api.wordpress.org/secret-key/1.1/salt
@@ -59,11 +130,12 @@ composer create-project leoloso/pop-api-wp
 ```
 
 4. Wait for a few minutes ☕️😁
+
 5. ✅ The site is installed under:
 
-    - 👉WordPress site: `{YOUR_SITE_URL_WITH_HTTP}`
-    - 👉WordPress admin: `{YOUR_SITE_URL_WITH_HTTP}/wp/wp-admin/`
-    - 👉PoP API: `{YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest` (REST for posts)
+- 👉 WordPress site: `{YOUR_SITE_URL_WITH_HTTP}`
+- 👉 WordPress admin: `{YOUR_SITE_URL_WITH_HTTP}`/wp/wp-admin/
+- 👉 PoP API: `{YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest` (REST for posts)
 
 ### Configure application options (optional)
 
