@@ -104,7 +104,7 @@ _Single post:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr><td>id<br/>post-type<br/>published<br/>not-published<br/>title<br/>content<br/>url<br/>endpoint<br/>excerpt<br/>status<br/>is-draft<br/>date<br/>datetime<br/>comments-url<br/>comments-count<br/>has-comments<br/>published-with-comments<br/>cats<br/>cat<br/>cat-name<br/>cat-slugs<br/>tag-names<br/>post-block-metadata (blockname)</td><td>comments<br/>tags<br/>author</td></tr>
+<tr valign="top"><td>id<br/>post-type<br/>published<br/>not-published<br/>title<br/>content<br/>url<br/>endpoint<br/>excerpt<br/>status<br/>is-draft<br/>date<br/>datetime<br/>comments-url<br/>comments-count<br/>has-comments<br/>published-with-comments<br/>cats<br/>cat<br/>cat-name<br/>cat-slugs<br/>tag-names<br/>post-block-metadata (blockname)</td><td>comments<br/>tags<br/>author</td></tr>
 </tbody>
 </table>
 
@@ -137,7 +137,7 @@ _Author:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr><td>id<br/>username<br/>user-nicename<br/>nicename<br/>name<br/>display-name<br/>firstname<br/>lastname<br/>email<br/>url<br/>endpoint<br/>description<br/>website-url</td><td>posts (limit, offset, order, orderby, search)</td></tr>
+<tr valign="top"><td>id<br/>username<br/>user-nicename<br/>nicename<br/>name<br/>display-name<br/>firstname<br/>lastname<br/>email<br/>url<br/>endpoint<br/>description<br/>website-url</td><td>posts (limit, offset, order, orderby, search)</td></tr>
 </tbody>
 </table>
 
@@ -156,7 +156,7 @@ _Author + all posts, with their tags and comments, and the comment author info:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr><td>id<br/>content<br/>author-name<br/>author-url<br/>author-email<br/>approved<br/>type<br/>date</td><td>author<br/>post<br/>post-id<br/>parent</td></tr>
+<tr valign="top"><td>id<br/>content<br/>author-name<br/>author-url<br/>author-email<br/>approved<br/>type<br/>date</td><td>author<br/>post<br/>post-id<br/>parent</td></tr>
 </tbody>
 </table>
 
@@ -187,7 +187,7 @@ _Tag:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr><td>id<br/>symbol<br/>symbolnamedescription<br/>namedescription<br/>url<br/>endpoint<br/>symbolname<br/>name<br/>slug<br/>term_group<br/>term_taxonomy_id<br/>taxonomy<br/>description<br/>count</td><td>parent<br/>posts (limit, offset, order, orderby, search)</td></tr>
+<tr valign="top"><td>id<br/>symbol<br/>symbolnamedescription<br/>namedescription<br/>url<br/>endpoint<br/>symbolname<br/>name<br/>slug<br/>term_group<br/>term_taxonomy_id<br/>taxonomy<br/>description<br/>count</td><td>parent<br/>posts (limit, offset, order, orderby, search)</td></tr>
 </tbody>
 </table>
 
@@ -214,7 +214,7 @@ _Page:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr><td>id<br/>title<br/>content<br/>url</td><td>&nbsp;</td></tr>
+<tr valign="top"><td>id<br/>title<br/>content<br/>url</td><td>&nbsp;</td></tr>
 </tbody>
 </table>
 
