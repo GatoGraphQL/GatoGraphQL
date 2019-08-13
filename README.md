@@ -728,12 +728,13 @@ However, at this point PoP was not a progressive framework for building any kind
 If the open specification succeeds at attracting interest from the development community and eventually gets implemented for other CMSs and technologies, our goal of connecting sites together will have had a big boost. This is the dream that drives us forward and keeps us working long into the night.
 -->
 ## Examples
-
+<!--
 Some examples of PoP in the wild:
-
+-->
 ### PoP API
-
+<!--
 You can play with the PoP API here: https://nextapi.getpop.org. Check the following examples:
+-->
 <!--
 **Requesting specific fields:**
 
@@ -775,18 +776,18 @@ fields=title|content,comments.content|date,comments.author.name|url
 
 When executing this query [on a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources.
 -->
-
+<!--
 **PoP, GraphQL and REST-like API:**
-
+-->
 We can fetch exactly the required data for all involved resources from a URL, in different formats:
 
-- [PoP native response](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url)
-- [GraphQL-compatible response](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=graphql)
-- [REST-compatible response](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=rest)
+- [PoP native response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&fields=title|content,comments.content|date,comments.author.name|url)
+- [GraphQL-compatible response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=graphql)
+- [REST-compatible response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=rest)
 
-**Application extending from the API:**
+### Application extending from the API
 
-The native API can be the backbone of the application, and this can be extended by adding the other layers (configuration, view) to create the application:
+\[The examples below are currently not deployed... Will do so soon...\] The native API can be extended by adding the other layers (configuration, view) to create the application:
 
 - [The homepage](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined), [a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputmode=combined), [an author](https://nextapi.getpop.org/u/leo/?output=json&mangled=none&dataoutputmode=combined), [a list of posts](https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputmode=combined) and [a list of users](https://nextapi.getpop.org/users/?output=json&mangled=none&dataoutputmode=combined)
 - [An event, filtering from a specific module](https://nextapi.getpop.org/events/coldplay-in-london/?output=json&mangled=none&modulefilter=modulepaths&modulepaths[]=pagesectiongroup.pagesection-body.block-singlepost.block-single-content&dataoutputmode=combined)
@@ -895,7 +896,7 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 ## Codebase Migration
 
-Help needed! 😝
+**Help needed!** 😝
 
 PoP's codebase is currently being migrated to Composer packages. We are welcoming contributors to help with the migration, as to push forward the release date for PoP 1.0.
 
