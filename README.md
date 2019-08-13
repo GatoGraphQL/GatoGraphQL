@@ -11,7 +11,7 @@ PoP's codebase is currently being migrated to Composer components. PoP 1.0 will 
 
 ## Description
 
-PoP is set of PHP components for building APIs (PoP native or GraphQL/REST-compatible) and, further extending from the API, websites. PoP is components all the way down, implemented partly in the back-end (component hierarchy, data loading, configuration and props), and partly in the front-end (view and reactivity).
+PoP is set of PHP components for building APIs (PoP native or GraphQL/REST-compatible) and, further extending from the API, websites. PoP is components all the way down, each of them implemented partly in the back-end, and partly in the front-end.
 
 <!--Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.-->
 
