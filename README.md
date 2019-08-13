@@ -247,7 +247,7 @@ _Author:_
 
 **Examples:**
 
-_List of users + up to 2 posts for each, ordered by date:_<br/>[id|name|url,posts(limit:2;order:desc;orderby:date).id|title|url|date](https://nextapi.getpop.org/users/?action=api&datastructure=graphql&fields=id|name|url,posts(limit:2;order:desc;orderby:date).id|title|url|date)
+_List of users + up to 2 posts for each, ordered by date:_<br/>[id|name|url,posts(limit:2;order:date|desc).id|title|url|date](https://nextapi.getpop.org/users/?action=api&datastructure=graphql&fields=id|name|url,posts(limit:2;order:date|desc).id|title|url|date)
 
 _Author + all posts, with their tags and comments, and the comment author info:_<br/>[id|name|url,posts.id|title,posts.tags.id|slug|count|url,posts.comments.id|content|date,posts.comments.author.id|name](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=graphql&fields=id|name|url,posts.id|title,posts.tags.id|slug|count|url,posts.comments.id|content|date,posts.comments.author.id|name)
 
@@ -297,7 +297,7 @@ _Tag:_
 
 **Examples:**
 
-_List of tags + all their posts ordered by title, their comments, and the comment authors:_<br/>[id|slug|count|url,posts(orderby:title;order:asc).id|title|url|date](https://nextapi.getpop.org/tags/?action=api&datastructure=graphql&fields=id|slug|count|url,posts(orderby:title;order:asc).id|title|url|date)
+_List of tags + all their posts ordered by title, their comments, and the comment authors:_<br/>[id|slug|count|url,posts(order:title|asc).id|title|url|date](https://nextapi.getpop.org/tags/?action=api&datastructure=graphql&fields=id|slug|count|url,posts(order:title|asc).id|title|url|date)
 
 _Tag + all their posts, their comments and the comment authors:_<br/>[id|slug|count|url,posts.id|title,posts.comments.content|date,posts.comments.author.id|name|url](https://nextapi.getpop.org/tag/html/?action=api&datastructure=graphql&fields=id|slug|count|url,posts.id|title,posts.comments.content|date,posts.comments.author.id|name|url)
 
@@ -505,7 +505,7 @@ And our endpoint URL becomes:
 
 Similar to GraphQL, a field may have modifiers: an array of `key:value` properties, appended next to the field name enclosed with `()` and separated with `;`, which modify the output from the field. 
 
-For instance, an author's posts can be ordered (`posts(order:asc;orderby:title)`) and limited to a string and number of results (`posts(search:template;limit:3)`), a user avatar can be specified its dimensions in pixels (`avatar(size: 40)`), a share URL can specify the provider (`share-url(provider:facebook)`), and others.
+For instance, an author's posts can be ordered (`posts(order:title|asc)`) and limited to a string and number of results (`posts(search:template;limit:3)`), a user avatar can be specified its dimensions in pixels (`avatar(size: 40)`), a share URL can specify the provider (`share-url(provider:facebook)`), and others.
 
 ### Examples
 
