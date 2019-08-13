@@ -787,7 +787,9 @@ We can fetch exactly the required data for all involved resources from a URL, in
 
 ### Application extending from the API
 
-\[The examples below are currently not deployed... Will do so soon...\] The native API can be extended by adding the other layers (configuration, view) to create the application:
+> Note: The examples below are currently not deployed... Will do so soon...
+
+The native API can be extended by adding the other layers (configuration, view) to create the application:
 
 - [The homepage](https://nextapi.getpop.org/?output=json&mangled=none&dataoutputmode=combined), [a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputmode=combined), [an author](https://nextapi.getpop.org/u/leo/?output=json&mangled=none&dataoutputmode=combined), [a list of posts](https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputmode=combined) and [a list of users](https://nextapi.getpop.org/users/?output=json&mangled=none&dataoutputmode=combined)
 - [An event, filtering from a specific module](https://nextapi.getpop.org/events/coldplay-in-london/?output=json&mangled=none&modulefilter=modulepaths&modulepaths[]=pagesectiongroup.pagesection-body.block-singlepost.block-single-content&dataoutputmode=combined)
