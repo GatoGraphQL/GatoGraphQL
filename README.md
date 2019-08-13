@@ -1,10 +1,13 @@
 ![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
 
-# PoP — “Platform of Platforms”
+<!--# PoP — “Platform of Platforms”-->
+# PoP
 
+<!--
 ## 🤔 Notice
 
 PoP's codebase is currently being migrated to Composer components. PoP 1.0 will be released once the migration is complete. Contributors are welcome! [Find out more](#codebase-migration).
+-->
 
 ## Install
 
@@ -891,6 +894,8 @@ To allow the website's service-worker.js be able to cache content coming from th
 -->
 
 ## Codebase Migration
+
+Help needed! 😝
 
 PoP's codebase is currently being migrated to Composer packages. We are welcoming contributors to help with the migration, as to push forward the release date for PoP 1.0.
 
