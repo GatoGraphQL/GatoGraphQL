@@ -41,6 +41,8 @@ Process the JavaScript templates in the server to produce the HTML already in th
 
 > **Note:** The instructions below will install [PoP API for WordPress](https://github.com/leoloso/pop-api-wp). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
+PoP requires PHP 7.1 or higher.
+
 ### Installing PoP on an existing WordPress site
 
 Via a WordPress plugin:
