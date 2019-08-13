@@ -2,6 +2,8 @@
 
 # Developer Guide
 
+> Note: Because PoP is currently under development and its internals have changed significantly, this document has become out of date! So please don't use it as a proper reference yet. We will update it once we are approaching the release of version 1.0 of PoP.
+
 ## Getting Started
 
 <!-- PoP is founded on [Object-Oriented Programming](https://en.wikipedia.org/wiki/Object-oriented_programming) (OOP). If you know OOP, then you are all set to go! If not, taking [one](https://www.tutorialspoint.com/php/php_object_oriented.htm) [of](https://code.tutsplus.com/tutorials/object-oriented-php-for-beginners--net-12762) [the](https://www.tutorialrepublic.com/php-tutorial/php-classes-and-objects.php) [many](https://www.killerphp.com/tutorials/object-oriented-php/) tutorials on OOP in PHP before starting will greatly help understand all code in this guide. -->
