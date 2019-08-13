@@ -9,6 +9,33 @@
 PoP's codebase is currently being migrated to Composer components. PoP 1.0 will be released once the migration is complete. Contributors are welcome! [Find out more](#codebase-migration).
 -->
 
+## Description
+
+PoP is set of PHP components for building APIs (PoP native or GraphQL/REST-compatible) and, further extending from the API, websites. PoP is components all the way down, implemented partly in the back-end (component hierarchy, data loading, configuration and props), and partly in the front-end (view and reactivity).
+
+<!--Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.-->
+
+PoP is composed of several layers, which can be progressively enabled to unlock further capabilities:
+
+**1. A data API:** _(currently implemented ✅)
+
+For fetching and posting data, in 2 flavours:
+
+1. **PoP native format:**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json` (implicit fields) or `/page-url/?action=api&fields=...` (explicit fields)
+2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/?action=api&datastructure=rest` (implicit REST fields) or `/page-url/?action=api&datastructure=graphql&fields=...` (explicit GraphQL fields)
+
+**2. A configuration API:** _(coming soon ⚠️)_
+
+The application can retrieve configuration values from the API, avoiding then to hardcode these on client-side files, making the application become more modular and maintainable
+
+**3. Rendering on client-side:** _(coming soon ⚠️)_
+
+Consume the API data through JavaScript templates to render the website in the client
+
+**4. Isomorphic rendering on server-side:** _(coming soon ⚠️)_
+
+Process the JavaScript templates in the server to produce the HTML already in the server
+
 ## Install
 
 > **Note:** The instructions below will install [PoP API for WordPress](https://github.com/leoloso/pop-api-wp). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
@@ -298,21 +325,6 @@ _Page:_
 **Examples:**
 
 _Page:_<br/>[id|title|content|url](https://nextapi.getpop.org/about/?action=api&datastructure=graphql&fields=id|title|content|url)
-
-## Description
-
-PoP is set of PHP components for building APIs (PoP native or GraphQL/REST-compatible) and, further extending from the API, websites. PoP is components all the way down, implemented partly in the back-end (component hierarchy, data loading, configuration and props), and partly in the front-end (view and reactivity).
-
-<!--Out of the box it provides a data + configuration API, over which it allows to build any type of website. Starting on simple sites, we can progressively install plugins to convert them to more complex applications, such as single-page applications, progressive web apps, social networks, decentralized sites, and others.-->
-
-PoP is composed of several layers, which can be progressively enabled to unlock further capabilities:
-
-1. **A data API:** _(currently implemented ✅)_<br/>For fetching and posting data, in 2 flavours:
-    1. **PoP native format:**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json` (implicit fields) or `/page-url/?action=api&fields=...` (explicit fields)
-    2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/?action=api&datastructure=rest` (implicit REST fields) or `/page-url/?action=api&datastructure=graphql&fields=...` (explicit GraphQL fields)
-2. **A configuration API:** _(coming soon ⚠️)_<br/>The application can retrieve configuration values from the API, avoiding then to hardcode these on client-side files, making the application become more modular and maintainable
-3. **Rendering on client-side:** _(coming soon ⚠️)_<br/>Consume the API data through JavaScript templates to render the website in the client
-4. **Isomorphic rendering on server-side:** _(coming soon ⚠️)_<br/>Process the JavaScript templates in the server to produce the HTML already in the server
 
 ## API foundations
 
