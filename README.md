@@ -241,7 +241,7 @@ _Author:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr valign="top"><td>id<br/>username<br/>user-nicename<br/>nicename<br/>name<br/>display-name<br/>firstname<br/>lastname<br/>email<br/>url<br/>endpoint<br/>description<br/>website-url</td><td>posts (limit, offset, order, orderby, search)</td></tr>
+<tr valign="top"><td>id<br/>username<br/>user-nicename<br/>nicename<br/>name<br/>display-name<br/>firstname<br/>lastname<br/>email<br/>url<br/>endpoint<br/>description<br/>website-url</td><td>posts (limit, offset, order, searchfor, date-from, date-to)</td></tr>
 </tbody>
 </table>
 
@@ -291,7 +291,7 @@ _Tag:_
 <tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
 </thead>
 <tbody>
-<tr valign="top"><td>id<br/>symbol<br/>symbolnamedescription<br/>namedescription<br/>url<br/>endpoint<br/>symbolname<br/>name<br/>slug<br/>term_group<br/>term_taxonomy_id<br/>taxonomy<br/>description<br/>count</td><td>parent<br/>posts (limit, offset, order, orderby, search)</td></tr>
+<tr valign="top"><td>id<br/>symbol<br/>symbolnamedescription<br/>namedescription<br/>url<br/>endpoint<br/>symbolname<br/>name<br/>slug<br/>term_group<br/>term_taxonomy_id<br/>taxonomy<br/>description<br/>count</td><td>parent<br/>posts (limit, offset, order, searchfor, date-from, date-to)</td></tr>
 </tbody>
 </table>
 
@@ -505,7 +505,7 @@ And our endpoint URL becomes:
 
 Similar to GraphQL, a field may have modifiers: an array of `key:value` properties, appended next to the field name enclosed with `()` and separated with `;`, which modify the output from the field. 
 
-For instance, an author's posts can be ordered (`posts(order:title|asc)`) and limited to a string and number of results (`posts(search:template;limit:3)`), a user avatar can be specified its dimensions in pixels (`avatar(size: 40)`), a share URL can specify the provider (`share-url(provider:facebook)`), and others.
+For instance, an author's posts can be ordered (`posts(order:title|asc)`) and limited to a string and number of results (`posts(searchfor:template;limit:3)`), a user avatar can be specified its dimensions in pixels (`avatar(size: 40)`), a share URL can specify the provider (`share-url(provider:facebook)`), and others.
 
 ### Examples
 
@@ -517,9 +517,9 @@ For instance, an author's posts can be ordered (`posts(order:title|asc)`) and li
 **GraphQL:**
 
 - [Retrieving client-custom data](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
-- [Returning an author's posts that contain a certain string](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=graphql&fields=id|name,posts(search:template).id|title|url)
+- [Returning an author's posts that contain a certain string](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=graphql&fields=id|name,posts(searchfor:template).id|title|url)
 <!--
-- [Filtering data in a nested node](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;search:elephant).id|title|url)
+- [Filtering data in a nested node](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;searchfor:elephant).id|title|url)
 - [Passing attributes to format elements](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url|avatar(size:40)|share-url(provider:facebook)|share-url(provider:twitter),comments.author.posts.id|title|url)
 -->
 
