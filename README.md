@@ -53,7 +53,7 @@ _Coming soon..._
 
 Via Composer:
 
-1. Make sure your `composer.json` file has the configuration below (since PoP is currently under development, there are no releases yet, so the project must accept minimum stability `"dev"`):
+1. Make sure your `composer.json` file has the configuration below to accept minimum stability `"dev"` (there are no releases for PoP yet, and the code is installed directly from the `master` branch):
 
 ```javascript
 {
@@ -64,7 +64,9 @@ Via Composer:
 }
 ```
 
-2. Add the following mandatory packages to the `require` section of your `composer.json` file:
+2. Add the following packages to the `require` section of your `composer.json` file:
+
+_Mandatory:_
 
 ```bash
 {
@@ -79,7 +81,7 @@ Via Composer:
 }
 ```
 
-3. (Suggested) Add the following packages to the `require` section of your `composer.json` file:
+_Suggested (to load data from posts, users, comments and taxonomies):_
 
 ```bash
 {
@@ -102,15 +104,28 @@ Via Composer:
 }
 ```
 
-4. Run `composer update`:
+3. Download and install the packages in your project:
 
 ```bash
 $ composer update
 ```
 
-5. Wait for a few minutes ☕️😁
+4. Wait for a few minutes ☕️😁
 
-6. ✅ Check that the PoP API works by loading in your site: `/posts/?action=api&datastructure=rest` (assuming that package `"getpop/posts-wp"` was added)
+5. (Suggested) Enable pretty permalinks for the API endpoints (such as `/some-url/api/`): Add the following code to the beginning of the `.htaccess` file (located in your project's root folder):
+
+```apache
+# This code configures Apache to rewrite from /some-url/api/ to /some-url/?action=api
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^(.*)/api/?$ /$1/?action=api [L,P,QSA]
+</IfModule>
+```
+
+6. ✅ Check that the PoP API works by loading in your site: `/posts/api/?datastructure=rest` (assuming that package `"getpop/posts-wp"` and the URL rewrite were added, as suggested)
 
 ### Creating a new WordPress site with PoP installed
 
