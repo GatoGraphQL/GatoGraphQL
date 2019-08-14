@@ -112,7 +112,7 @@ $ composer update
 
 4. Wait for a few minutes ☕️😁
 
-5. (Suggested) Enable pretty permalinks for the API endpoints (such as `/some-url/api/`): Add the following code to the beginning of the `.htaccess` file (located in your project's root folder):
+5. (Suggested) Enable pretty permalinks for the API endpoints (such as `/some-url/api/`): Add the following code in `.htaccess` file (located in your project's root folder) before the WordPress rewrite code (which start with `# BEGIN WordPress`):
 
 ```apache
 # Pretty permalinks for API endpoints: rewrite from /some-url/api/ to /some-url/?action=api
