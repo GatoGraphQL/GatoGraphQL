@@ -1511,12 +1511,12 @@ function prepareDataPropertiesAfterActionexecution($module, &$props, &$data_prop
 
 ## Custom-Querying API
 
-Similar to GraphQL, PoP also provides an API which can be queried from the client, which retrieves exactly the data fields which are requested and nothing more. The custom-querying API is accessed by adding parameter `action=api` and parameter `fields` with the list of fields to retrieve (and, optionally, a few more parameters, as seen in the example below), on the URL fetching the corresponding resources. 
+Similar to GraphQL, PoP also provides an API which can be queried from the client, which retrieves exactly the data fields which are requested and nothing more. The custom-querying API is accessed by appending `/api` to the URL and adding parameter `fields` with the list of fields to retrieve from the queried resources. 
 
 For instance, the following link fetches a collection of posts. By adding `fields=title,content,datetime` we retrieve only these items:
 
 - Original: https://nextapi.getpop.org/posts/?output=json
-- Custom-querying: https://nextapi.getpop.org/posts/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title,content,datetime
+- Custom-querying: https://nextapi.getpop.org/posts/api/?fields=id|title|content|datetime
 
 The links above demonstrate fetching data only for the queried resources. What about their relationships? For instance, let’s say that we want to retrieve a list of posts with fields "title" and "content", each post’s comments with fields "content" and "date", and the author of each comment with fields "name" and "url". To achieve this in GraphQL we would implement the following query:
 
@@ -1549,7 +1549,7 @@ Or it can be simplified, using | to group all fields applied to the same resourc
 fields=title|content,comments.content|date,comments.author.name|url
 ```
 
-When executing this query on a [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&mangled=none&dataoutputitems=moduledata,databases,datasetmodulesettings&dataoutputmode=combined&dboutputmode=combined&action=api&fields=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources:
+When executing this query on a [single post](https://nextapi.getpop.org/posts/a-lovely-tango/api/?fields=id|title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources:
 
 ```javascript
 {

@@ -21,9 +21,9 @@ PoP is composed of several layers, which can be progressively enabled to unlock 
 
 For fetching and posting data, in 2 flavours:
 
-1. **PoP native format**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json` (implicit fields) or `/page-url/?action=api&fields=...` (explicit fields)
+1. **PoP native format**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json` (implicit fields) or `/page-url/api/?fields=...` (explicit fields)
 
-2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/?action=api&datastructure=rest` (implicit REST fields) or `/page-url/?action=api&datastructure=graphql&fields=...` (explicit GraphQL fields)
+2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/api/?datastructure=rest` (implicit REST fields) or `/page-url/api/?datastructure=graphql&fields=...` (explicit GraphQL fields)
 
 **2. A configuration API** (coming soon...)
 
@@ -115,13 +115,13 @@ $ composer update
 5. (Suggested) Enable pretty permalinks for the API endpoints (such as `/some-url/api/`): Add the following code in `.htaccess` file (located in your project's root folder) before the WordPress rewrite code (which start with `# BEGIN WordPress`):
 
 ```apache
-# Pretty permalinks for API endpoints: rewrite from /some-url/api/ to /some-url/?action=api
+# Pretty permalinks for API endpoints: rewrite from /some-url/api/ to /some-url/?scheme=api
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteRule ^(.*)/api/?$ /$1/?action=api [L,P,QSA]
+RewriteRule ^(.*)/api/?$ /$1/?scheme=api [L,P,QSA]
 </IfModule>
 ```
 
@@ -183,7 +183,7 @@ composer create-project leoloso/pop-api-wp
 
 - 👉 WordPress site: `{YOUR_SITE_URL_WITH_HTTP}`
 - 👉 WordPress admin: `{YOUR_SITE_URL_WITH_HTTP}`/wp/wp-admin/
-- 👉 PoP API: `{YOUR_SITE_URL_WITH_HTTP}/posts/?action=api&datastructure=rest` (REST for posts)
+- 👉 PoP API: `{YOUR_SITE_URL_WITH_HTTP}/posts/api/?datastructure=rest` (REST for posts)
 
 ### Configure application options (optional)
 
@@ -193,11 +193,11 @@ PoP can be configured through environment variables. To make it convenient durin
 
 > **Note:** The usage below belong to [PoP API for WordPress](https://github.com/leoloso/pop-api-wp). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
-For the **REST-compatible API**, add parameters `action=api&datastructure=rest` to the endpoint URL. 
+For the **REST-compatible API**, add parameter `datastructure=rest` to the endpoint URL. 
 
-For the **GraphQL-compatible API**, add parameters `action=api&datastructure=graphql` to the endpoint URL, and parameter `fields` with the fields to retrieve (using a [custom dot notation](https://github.com/leoloso/PoP#defining-what-data-to-fetch-through-fields)) from the list of fields defined below. In addition, a field may have [modifiers](https://github.com/leoloso/PoP#field-modifiers) to modify its results.
+For the **GraphQL-compatible API**, add parameter `datastructure=graphql` to the endpoint URL, and parameter `fields` with the fields to retrieve (using a [custom dot notation](https://github.com/leoloso/PoP#defining-what-data-to-fetch-through-fields)) from the list of fields defined below. In addition, a field may have [modifiers](https://github.com/leoloso/PoP#field-modifiers) to modify its results.
 
-For the **PoP native API**, add parameters `action=api` to the endpoint URL, and parameter `fields` similar to GraphQL.
+For the **PoP native API**, add parameter `fields` to the endpoint URL, similar to GraphQL.
 
 ----
 
@@ -209,15 +209,15 @@ Currently, the API supports the following entities and fields:
 
 _List of posts:_
 
-- **REST:** [/posts/?action=api&datastructure=rest](https://nextapi.getpop.org/posts/?action=api&datastructure=rest)
-- **GraphQL:** [/posts/?action=api&datastructure=graphql](https://nextapi.getpop.org/posts/?action=api&datastructure=graphql&fields=id|title|url)
-- **PoP native:** [/posts/?action=api](https://nextapi.getpop.org/posts/?action=api&fields=id|title|url)
+- **REST:** [/posts/api/?datastructure=rest](https://nextapi.getpop.org/posts/api/?datastructure=rest)
+- **GraphQL:** [/posts/api/?datastructure=graphql](https://nextapi.getpop.org/posts/api/?datastructure=graphql&fields=id|title|url)
+- **PoP native:** [/posts/api/](https://nextapi.getpop.org/posts/api/?fields=id|title|url)
 
 _Single post:_
 
-- **REST:** [/{SINGLE-POST-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&datastructure=rest) 
-- **GraphQL:** [/{SINGLE-POST-URL}/?action=api&datastructure=graphql](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&datastructure=graphql&fields=id|title|date|content)
-- **PoP native:** [/{SINGLE-POST-URL}/?action=api](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&fields=id|title|date|content)
+- **REST:** [/{SINGLE-POST-URL}/api/?datastructure=rest](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?datastructure=rest) 
+- **GraphQL:** [/{SINGLE-POST-URL}/api/?datastructure=graphql](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?datastructure=graphql&fields=id|title|date|content)
+- **PoP native:** [/{SINGLE-POST-URL}/api/](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=id|title|date|content)
 
 **GraphQL fields:**
 
@@ -232,9 +232,9 @@ _Single post:_
 
 **Examples:**
 
-_List of posts + author data:_<br/>[id|title|date|url,author.id|name|url,author.posts.id|title|url](https://nextapi.getpop.org/posts/?action=api&datastructure=graphql&fields=id|title|date|url,author.id|name|url,author.posts.id|title|url)
+_List of posts + author data:_<br/>[id|title|date|url,author.id|name|url,author.posts.id|title|url](https://nextapi.getpop.org/posts/api/?datastructure=graphql&fields=id|title|date|url,author.id|name|url,author.posts.id|title|url)
 
-_Single post + tags (ordered by slug), comments and comment author info:_<br/>[id|title|cat-slugs,tags(order:slug|asc).id|slug|count|url,comments.id|content|date,comments.author.id|name|url](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&datastructure=graphql&fields=id|title|cat-slugs,tags(order:slug|asc).id|slug|count|url,comments.id|content|date,comments.author.id|name|url)
+_Single post + tags (ordered by slug), comments and comment author info:_<br/>[id|title|cat-slugs,tags(order:slug|asc).id|slug|count|url,comments.id|content|date,comments.author.id|name|url](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?datastructure=graphql&fields=id|title|cat-slugs,tags(order:slug|asc).id|slug|count|url,comments.id|content|date,comments.author.id|name|url)
 
 ### Users
 
@@ -242,15 +242,15 @@ _Single post + tags (ordered by slug), comments and comment author info:_<br/>[i
 
 _List of users:_
 
-- **REST:** [/users/?action=api&datastructure=rest](https://nextapi.getpop.org/users/?action=api&datastructure=rest)
-- **GraphQL:** [/users/?action=api&datastructure=graphql](https://nextapi.getpop.org/users/?action=api&datastructure=graphql&fields=id|name|url)
-- **PoP native:** [/users/?action=api](https://nextapi.getpop.org/users/?action=api&fields=id|name|url)
+- **REST:** [/users/api/?datastructure=rest](https://nextapi.getpop.org/users/api/?datastructure=rest)
+- **GraphQL:** [/users/api/?datastructure=graphql](https://nextapi.getpop.org/users/api/?datastructure=graphql&fields=id|name|url)
+- **PoP native:** [/users/api/](https://nextapi.getpop.org/users/api/?fields=id|name|url)
 
 _Author:_
 
-- **REST:** [/{AUTHOR-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=rest) 
-- **GraphQL:** [/{AUTHOR-URL}/?action=api&datastructure=graphql](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=graphql&fields=id|name|description)
-- **PoP native:** [/{AUTHOR-URL}/?action=api](https://nextapi.getpop.org/author/themedemos/?action=api&fields=id|name|description)
+- **REST:** [/{AUTHOR-URL}/api/?datastructure=rest](https://nextapi.getpop.org/author/themedemos/api/?datastructure=rest) 
+- **GraphQL:** [/{AUTHOR-URL}/api/?datastructure=graphql](https://nextapi.getpop.org/author/themedemos/api/?datastructure=graphql&fields=id|name|description)
+- **PoP native:** [/{AUTHOR-URL}/api/](https://nextapi.getpop.org/author/themedemos/api/?fields=id|name|description)
 
 **GraphQL fields:**
 
@@ -265,9 +265,9 @@ _Author:_
 
 **Examples:**
 
-_List of users + up to 2 posts for each, ordered by date:_<br/>[id|name|url,posts(limit:2;order:date|desc).id|title|url|date](https://nextapi.getpop.org/users/?action=api&datastructure=graphql&fields=id|name|url,posts(limit:2;order:date|desc).id|title|url|date)
+_List of users + up to 2 posts for each, ordered by date:_<br/>[id|name|url,posts(limit:2;order:date|desc).id|title|url|date](https://nextapi.getpop.org/users/api/?datastructure=graphql&fields=id|name|url,posts(limit:2;order:date|desc).id|title|url|date)
 
-_Author + all posts, with their tags and comments, and the comment author info:_<br/>[id|name|url,posts.id|title,posts.tags.id|slug|count|url,posts.comments.id|content|date,posts.comments.author.id|name](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=graphql&fields=id|name|url,posts.id|title,posts.tags.id|slug|count|url,posts.comments.id|content|date,posts.comments.author.id|name)
+_Author + all posts, with their tags and comments, and the comment author info:_<br/>[id|name|url,posts.id|title,posts.tags.id|slug|count|url,posts.comments.id|content|date,posts.comments.author.id|name](https://nextapi.getpop.org/author/themedemos/api/?datastructure=graphql&fields=id|name|url,posts.id|title,posts.tags.id|slug|count|url,posts.comments.id|content|date,posts.comments.author.id|name)
 
 ### Comments
 
@@ -284,7 +284,7 @@ _Author + all posts, with their tags and comments, and the comment author info:_
 
 **Examples:**
 
-_Single post's comments:_<br/>[comments.id|content|date|type|approved|author-name|author-url|author-email](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&datastructure=graphql&fields=comments.id|content|date|type|approved|author-name|author-url|author-email)
+_Single post's comments:_<br/>[comments.id|content|date|type|approved|author-name|author-url|author-email](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?datastructure=graphql&fields=comments.id|content|date|type|approved|author-name|author-url|author-email)
 
 ### Tags
 
@@ -292,15 +292,15 @@ _Single post's comments:_<br/>[comments.id|content|date|type|approved|author-nam
 
 _List of tags:_
 
-- **REST:** [/tags/?action=api&datastructure=rest](https://nextapi.getpop.org/tags/?action=api&datastructure=rest)
-- **GraphQL:** [/tags/?action=api&datastructure=graphql](https://nextapi.getpop.org/tags/?action=api&datastructure=graphql&fields=id|slug|count|url)
-- **PoP native:** [/tags/?action=api](https://nextapi.getpop.org/tags/?action=api&fields=id|slug|count|url)
+- **REST:** [/tags/api/?datastructure=rest](https://nextapi.getpop.org/tags/api/?datastructure=rest)
+- **GraphQL:** [/tags/api/?datastructure=graphql](https://nextapi.getpop.org/tags/api/?datastructure=graphql&fields=id|slug|count|url)
+- **PoP native:** [/tags/api/](https://nextapi.getpop.org/tags/api/?fields=id|slug|count|url)
 
 _Tag:_
 
-- **REST:** [/{TAG-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/tag/html/?action=api&datastructure=rest) 
-- **GraphQL:** [/{TAG-URL}/?action=api&datastructure=graphql](https://nextapi.getpop.org/tag/html/?action=api&datastructure=graphql&fields=id|name|slug|count)
-- **PoP native:** [/{TAG-URL}/?action=api](https://nextapi.getpop.org/tag/html/?action=api&fields=id|name|slug|count)
+- **REST:** [/{TAG-URL}/api/?datastructure=rest](https://nextapi.getpop.org/tag/html/api/?datastructure=rest) 
+- **GraphQL:** [/{TAG-URL}/api/?datastructure=graphql](https://nextapi.getpop.org/tag/html/api/?datastructure=graphql&fields=id|name|slug|count)
+- **PoP native:** [/{TAG-URL}/api/](https://nextapi.getpop.org/tag/html/api/?fields=id|name|slug|count)
 
 **GraphQL fields:**
 
@@ -315,9 +315,9 @@ _Tag:_
 
 **Examples:**
 
-_List of tags + all their posts filtered by date and ordered by title, their comments, and the comment authors:_<br/>[id|slug|count|url,posts(date-from:2009-09-15;date-to:2010-07-10;order:title|asc).id|title|url|date](https://nextapi.getpop.org/tags/?action=api&datastructure=graphql&fields=id|slug|count|url,posts(date-from:2009-09-15;date-to:2010-07-10;order:title|asc).id|title|url|date)
+_List of tags + all their posts filtered by date and ordered by title, their comments, and the comment authors:_<br/>[id|slug|count|url,posts(date-from:2009-09-15;date-to:2010-07-10;order:title|asc).id|title|url|date](https://nextapi.getpop.org/tags/api/?datastructure=graphql&fields=id|slug|count|url,posts(date-from:2009-09-15;date-to:2010-07-10;order:title|asc).id|title|url|date)
 
-_Tag + all their posts, their comments and the comment authors:_<br/>[id|slug|count|url,posts.id|title,posts.comments.content|date,posts.comments.author.id|name|url](https://nextapi.getpop.org/tag/html/?action=api&datastructure=graphql&fields=id|slug|count|url,posts.id|title,posts.comments.content|date,posts.comments.author.id|name|url)
+_Tag + all their posts, their comments and the comment authors:_<br/>[id|slug|count|url,posts.id|title,posts.comments.content|date,posts.comments.author.id|name|url](https://nextapi.getpop.org/tag/html/api/?datastructure=graphql&fields=id|slug|count|url,posts.id|title,posts.comments.content|date,posts.comments.author.id|name|url)
 
 ### Pages
 
@@ -325,9 +325,9 @@ _Tag + all their posts, their comments and the comment authors:_<br/>[id|slug|co
 
 _Page:_
 
-- **REST:** [/{PAGE-URL}/?action=api&datastructure=rest](https://nextapi.getpop.org/about/?action=api&datastructure=rest)
-- **GraphQL:** [/{PAGE-URL}/?action=api&datastructure=graphql](https://nextapi.getpop.org/about/?action=api&datastructure=graphql&fields=id|title|content)
-- **PoP native:** [/{PAGE-URL}/?action=api](https://nextapi.getpop.org/about/?action=api&fields=id|title|content)
+- **REST:** [/{PAGE-URL}/api/?datastructure=rest](https://nextapi.getpop.org/about/api/?datastructure=rest)
+- **GraphQL:** [/{PAGE-URL}/api/?datastructure=graphql](https://nextapi.getpop.org/about/api/?datastructure=graphql&fields=id|title|content)
+- **PoP native:** [/{PAGE-URL}/api/](https://nextapi.getpop.org/about/api/?fields=id|title|content)
 
 **GraphQL fields:**
 
@@ -342,7 +342,7 @@ _Page:_
 
 **Examples:**
 
-_Page:_<br/>[id|title|content|url](https://nextapi.getpop.org/about/?action=api&datastructure=graphql&fields=id|title|content|url)
+_Page:_<br/>[id|title|content|url](https://nextapi.getpop.org/about/api/?datastructure=graphql&fields=id|title|content|url)
 
 ## API foundations
 
@@ -516,7 +516,7 @@ id|title|url|content,comments.id|content|date,comments.author.id|name|url,commen
 And our endpoint URL becomes:
 
 ```
-{ENDPOINT-URL}/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
+{ENDPOINT-URL}/api/?datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
 ```
 
 ### Field modifiers
@@ -529,16 +529,16 @@ For instance, an author's posts can be ordered (`posts(order:title|asc)`) and li
 
 **REST:**
 
-- [Retrieving default data (implicit fields)](https://nextapi.getpop.org/en/posts/?action=api&datastructure=rest)
-- [Retrieving client-custom data (explicit fields)](https://nextapi.getpop.org/en/posts/?action=api&datastructure=rest&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
+- [Retrieving default data (implicit fields)](https://nextapi.getpop.org/en/posts/api/?datastructure=rest)
+- [Retrieving client-custom data (explicit fields)](https://nextapi.getpop.org/en/posts/api/?datastructure=rest&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
 
 **GraphQL:**
 
-- [Retrieving client-custom data](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
-- [Returning an author's posts that contain a certain string](https://nextapi.getpop.org/author/themedemos/?action=api&datastructure=graphql&fields=id|name,posts(searchfor:template).id|title|url)
+- [Retrieving client-custom data](https://nextapi.getpop.org/en/posts/api/?datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url)
+- [Returning an author's posts that contain a certain string](https://nextapi.getpop.org/author/themedemos/api/?datastructure=graphql&fields=id|name,posts(searchfor:template).id|title|url)
 <!--
-- [Filtering data in a nested node](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;searchfor:elephant).id|title|url)
-- [Passing attributes to format elements](https://nextapi.getpop.org/en/posts/?action=api&datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url|avatar(size:40)|share-url(provider:facebook)|share-url(provider:twitter),comments.author.posts.id|title|url)
+- [Filtering data in a nested node](https://nextapi.getpop.org/en/posts/api/?datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts(limit:2;offset:1;searchfor:elephant).id|title|url)
+- [Passing attributes to format elements](https://nextapi.getpop.org/en/posts/api/?datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url|avatar(size:40)|share-url(provider:facebook)|share-url(provider:twitter),comments.author.posts.id|title|url)
 -->
 
 **Note:** Setting parameter `datastructure` to either `graphql` or `rest` formats the response for the corresponding API. If `datastructure` is left empty, the response is the native one for PoP: a relational database structure (see "Data API layer" section below).
@@ -549,7 +549,7 @@ The examples below demonstrate the structure of PoP's native API specification.
 
 ### 1. Data API layer
 
-The PoP API, used for retrieving or posting data, is accessible under `/page-url/?output=json` (implicit fields) or `/page-url/?action=api&fields=...` (explicit fields). It represents data the following way:
+The PoP API, used for retrieving or posting data, is accessible under `/page-url/?output=json` (implicit fields) or `/page-url/api/?fields=...` (explicit fields). It represents data the following way:
 
 - Database data is retrieved through a relational structure under section `databases`
 - The IDs which are the results for each component are indicated through entry `dbobjectids` (under section `datasetmoduledata`)
@@ -811,9 +811,9 @@ When executing this query [on a single post](https://nextapi.getpop.org/posts/a-
 -->
 We can fetch exactly the required data for all involved resources from a URL, in different formats:
 
-- [PoP native response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&fields=title|content,comments.content|date,comments.author.name|url)
-- [GraphQL-compatible response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=graphql)
-- [REST-compatible response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/?action=api&fields=title|content,comments.content|date,comments.author.name|url&datastructure=rest)
+- [PoP native response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=title|content,comments.content|date,comments.author.name|url)
+- [GraphQL-compatible response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=title|content,comments.content|date,comments.author.name|url&datastructure=graphql)
+- [REST-compatible response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=title|content,comments.content|date,comments.author.name|url&datastructure=rest)
 
 ### Application extending from the API
 
