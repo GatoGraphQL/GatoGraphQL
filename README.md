@@ -115,7 +115,7 @@ $ composer update
 5. (Suggested) Enable pretty permalinks for the API endpoints (such as `/some-url/api/`): Add the following code to the beginning of the `.htaccess` file (located in your project's root folder):
 
 ```apache
-# This code configures Apache to rewrite from /some-url/api/ to /some-url/?action=api
+# Pretty permalinks for API endpoints: rewrite from /some-url/api/ to /some-url/?action=api
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
