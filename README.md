@@ -19,11 +19,13 @@ PoP is composed of several layers, which can be progressively enabled to unlock 
 
 **1. A data API** (currently implemented ✅)
 
-For fetching and posting data, in 2 flavours:
+For fetching and posting data, in 3 flavours:
 
-1. **PoP native format**<br/>A relational database structure, which retrieves object data under the object's ID (thus normalizing all retrieved data), accessible under `/page-url/?output=json` (implicit fields) or `/page-url/api/?fields=...` (explicit fields)
+1. **GraphQL-compatible:**<br/>The shape of the response mirrors the query from the client, accessible under `/page-url/api/?datastructure=graphql&fields=...`
 
-2. **A GraphQL/REST-compatible API:**<br/>A GraphQL-like, query-based data structure which mirrors the query from the client, returning the response in either GraphQL or REST formats, accessible under `/page-url/api/?datastructure=rest` (implicit REST fields) or `/page-url/api/?datastructure=graphql&fields=...` (explicit GraphQL fields)
+2. **REST-compatible:**<br/>The retrieved fields are configurable, accessible under `/page-url/api/?datastructure=rest`
+
+3. **PoP native**<br/>A relational database structure, which retrieves object data under the object's ID (normalizing all retrieved DB data), accessible under `/page-url/?output=json` (implicit fields) or `/page-url/api/?fields=...` (explicit fields)
 
 **2. A configuration API** (coming soon...)
 
