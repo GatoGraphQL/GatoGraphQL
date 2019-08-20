@@ -526,7 +526,7 @@ And our endpoint URL becomes:
 
 Similar to GraphQL, a field may have arguments: an array of `key:value` properties, appended next to the field name enclosed with `()` and separated with `;`, which modify the output from the field. 
 
-For instance, an author's posts can be ordered (`posts(order:title|asc)`) and limited to a string and number of results (`posts(searchfor:template;limit:3)`), a user avatar can be specified its dimensions in pixels (`avatar(size: 40)`), a share URL can specify the provider (`share-url(provider:facebook)`), and others.
+For instance, an author's posts can be ordered (`posts(order:title|asc)`) and limited to a string and number of results (`posts(searchfor:template;limit:3)`), the featured image can be retrieved for a specific size (`featuredimage-props(size:large)`), and others.
 
 ### Examples
 
