@@ -198,7 +198,7 @@ PoP can be configured through environment variables. To make it convenient durin
 
 For the **REST-compatible API**, add parameter `datastructure=rest` to the endpoint URL. 
 
-For the **GraphQL-compatible API**, add parameter `datastructure=graphql` to the endpoint URL, and parameter `fields` with the fields to retrieve (using a [custom dot notation](https://github.com/leoloso/PoP#defining-what-data-to-fetch-through-fields)) from the list of fields defined below. In addition, a field may have [modifiers](https://github.com/leoloso/PoP#field-modifiers) to modify its results.
+For the **GraphQL-compatible API**, add parameter `datastructure=graphql` to the endpoint URL, and parameter `fields` with the fields to retrieve (using a [custom dot notation](https://github.com/leoloso/PoP#defining-what-data-to-fetch-through-fields)) from the list of fields defined below. In addition, a field may have [arguments](https://github.com/leoloso/PoP#field-arguments) to modify its results.
 
 For the **PoP native API**, add parameter `fields` to the endpoint URL, similar to GraphQL.
 
@@ -226,7 +226,7 @@ _Single post:_
 
 <table>
 <thead>
-<tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
+<tr><th>Property (arguments)</th><th>Relational (arguments)</th></tr>
 </thead>
 <tbody>
 <tr valign="top"><td>id<br/>post-type<br/>published<br/>not-published<br/>title<br/>content<br/>url<br/>endpoint<br/>excerpt<br/>status<br/>is-draft<br/>date<br/>datetime<br/>comments-url<br/>comments-count<br/>has-comments<br/>published-with-comments<br/>cats<br/>cat<br/>cat-name<br/>cat-slugs<br/>tag-names<br/>has-thumb<br/>featuredimage<br/>featuredimage-props (size)</td><td>comments<br/>tags (limit, offset, order, searchfor)<br/>author</td></tr>
@@ -259,7 +259,7 @@ _Author:_
 
 <table>
 <thead>
-<tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
+<tr><th>Property (arguments)</th><th>Relational (arguments)</th></tr>
 </thead>
 <tbody>
 <tr valign="top"><td>id<br/>username<br/>user-nicename<br/>nicename<br/>name<br/>display-name<br/>firstname<br/>lastname<br/>email<br/>url<br/>endpoint<br/>description<br/>website-url</td><td>posts (limit, offset, order, searchfor, date-from, date-to)</td></tr>
@@ -278,7 +278,7 @@ _Author + all posts, with their tags and comments, and the comment author info:_
 
 <table>
 <thead>
-<tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
+<tr><th>Property (arguments)</th><th>Relational (arguments)</th></tr>
 </thead>
 <tbody>
 <tr valign="top"><td>id<br/>content<br/>author-name<br/>author-url<br/>author-email<br/>approved<br/>type<br/>date</td><td>author<br/>post<br/>post-id<br/>parent</td></tr>
@@ -309,7 +309,7 @@ _Tag:_
 
 <table>
 <thead>
-<tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
+<tr><th>Property (arguments)</th><th>Relational (arguments)</th></tr>
 </thead>
 <tbody>
 <tr valign="top"><td>id<br/>symbol<br/>symbolnamedescription<br/>namedescription<br/>url<br/>endpoint<br/>symbolname<br/>name<br/>slug<br/>term_group<br/>term_taxonomy_id<br/>taxonomy<br/>description<br/>count</td><td>parent<br/>posts (limit, offset, order, searchfor, date-from, date-to)</td></tr>
@@ -336,7 +336,7 @@ _Page:_
 
 <table>
 <thead>
-<tr><th>Property (modifiers)</th><th>Relational (modifiers)</th></tr>
+<tr><th>Property (arguments)</th><th>Relational (arguments)</th></tr>
 </thead>
 <tbody>
 <tr valign="top"><td>id<br/>title<br/>content<br/>url</td><td>&nbsp;</td></tr>
@@ -522,9 +522,9 @@ And our endpoint URL becomes:
 {ENDPOINT-URL}/api/?datastructure=graphql&fields=id|title|url|content,comments.id|content|date,comments.author.id|name|url,comments.author.posts.id|title|url
 ```
 
-### Field modifiers
+### Field arguments
 
-Similar to GraphQL, a field may have modifiers: an array of `key:value` properties, appended next to the field name enclosed with `()` and separated with `;`, which modify the output from the field. 
+Similar to GraphQL, a field may have arguments: an array of `key:value` properties, appended next to the field name enclosed with `()` and separated with `;`, which modify the output from the field. 
 
 For instance, an author's posts can be ordered (`posts(order:title|asc)`) and limited to a string and number of results (`posts(searchfor:template;limit:3)`), a user avatar can be specified its dimensions in pixels (`avatar(size: 40)`), a share URL can specify the provider (`share-url(provider:facebook)`), and others.
 
