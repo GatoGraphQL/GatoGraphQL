@@ -97,6 +97,7 @@ _Suggested (to load data from posts, users, comments and taxonomies):_
         "getpop/pages-wp": "dev-master",
         "getpop/comments-wp": "dev-master",
         "getpop/commentmeta-wp": "dev-master",
+        "getpop/media-wp": "dev-master",
         "getpop/taxonomies-wp": "dev-master",
         "getpop/taxonomymeta-wp": "dev-master",
         "getpop/taxonomyquery-wp": "dev-master",
