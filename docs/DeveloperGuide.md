@@ -1160,7 +1160,7 @@ For instance, a dataloader fetching the single post will simply return the objec
 function getDbobjectIds($data_properties) {
   
   // Simply return the global $post ID. 
-  $vars = \PoP\Engine\Engine_Vars::getVars();
+  $vars = \PoP\ComponentModel\Engine_Vars::getVars();
   return array($vars['global-state']['queried-object-id']);
 }
 ```
@@ -1337,7 +1337,7 @@ class FieldValueResolver_Posts_Hook extends \PoP\Engine\FieldValueResolver_HookB
 By implementing the interface `DataloadQueryArgsFilter` modules can also filter the data fetched by the ancestor dataloading module. For that, they must implement functions `filterDataloadQueryArgs`, to filter the query for some property, and `getValue`, to provide the corresponding value. For instance, a module that performs a search of content looks like this (notice that since it extends from `TextFormInputsBase`, its `getValue` function is already implemented by class `FormInputsBase`):
 
 ```php
-class TextFilterInputs extends TextFormInputsBase implements \PoP\Engine\DataloadQueryArgsFilter
+class TextFilterInputs extends TextFormInputsBase implements \PoP\ComponentModel\DataloadQueryArgsFilter
 {
   public function filterDataloadQueryArgs(array &$query, $module, $value)
   {
@@ -1416,7 +1416,7 @@ class ActionExecuter_Logout extends \PoP\Engine\AbstractActionExecuter {
     if ('POST' == $_SERVER['REQUEST_METHOD']) { 
 
       // If the user is not logged in, then return the error
-      $vars = \PoP\Engine\Engine_Vars::getVars();
+      $vars = \PoP\ComponentModel\Engine_Vars::getVars();
       if (!$vars['global-state']['is-user-logged-in']) 
       {
         $error = __('You are not logged in.');
@@ -1689,13 +1689,13 @@ class CheckpointProcessor extends \PoP\Engine\AbstractCheckpointProcessor {
         $ip = get_client_ip();
         if (!$ip) {
           
-          return new \PoP\Engine\Error('ipempty');
+          return new \PoP\ComponentModel\Error('ipempty');
         }
 
         $whitelisted_ips = array(...);
         if (!in_array($ip, $whitelisted_ips)) {
           
-          return new \PoP\Engine\Error('ipincorrect');
+          return new \PoP\ComponentModel\Error('ipincorrect');
         }
         break;
     }
@@ -1812,7 +1812,7 @@ When first accessed, `$vars` is initialized with certain current request values,
 - The queried object (the post object in single hierarchy, the user object in author hierarchy, etc)
 - Others
 
-Plugins must add their own properties and corresponding values in `$vars` by implementing hook `"\PoP\Engine\Engine_Vars:add_vars"`. `$vars` can be `reset` at any moment and filled with different values, for instance to process a different request.
+Plugins must add their own properties and corresponding values in `$vars` by implementing hook `"\PoP\ComponentModel\Engine_Vars:add_vars"`. `$vars` can be `reset` at any moment and filled with different values, for instance to process a different request.
 
 ### PageModuleProcessor
 
