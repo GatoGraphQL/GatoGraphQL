@@ -101,6 +101,8 @@ _Suggested (to load data from posts, users, comments and taxonomies):_
         "getpop/taxonomies-wp": "dev-master",
         "getpop/taxonomymeta-wp": "dev-master",
         "getpop/taxonomyquery-wp": "dev-master",
+        "getpop/api-graphql": "dev-master",
+        "getpop/api-rest": "dev-master",
         ...
     }
     ...
@@ -948,7 +950,7 @@ Migrating the code involves the implementation of the following features:
 - Identification of services and making them available through [Symfony's DependencyInjection component](https://symfony.com/doc/current/components/dependency_injection.html)
 - Adding namespaces for all PHP classes following the [PSR-4](https://www.php-fig.org/psr/psr-4/) convention, as to support [autoloading through Composer](https://getcomposer.org/doc/01-basic-usage.md#autoloading)
 - Shortening of classnames (eg: from the current `PoP_Posts_Module_Processor_PostsDataloads` to `Dataloads`, after placing the class under namespace `PoP\Posts\ModuleProcessors`)
-- Using `use` statements to import fully-qualified (namespace+classname) classes at the top of the PHP file, to make the code more legible (eg: instead of repeatedly executing `\PoP\Engine\Engine_Vars::getVars()`, we can first import the class with `use PoP\Engine\Engine_Vars;` and then execute `Engine_Vars::getVars()`)
+- Using `use` statements to import fully-qualified (namespace+classname) classes at the top of the PHP file, to make the code more legible (eg: instead of repeatedly executing `\PoP\ComponentModel\Engine_Vars::getVars()`, we can first import the class with `use PoP\ComponentModel\Engine_Vars;` and then execute `Engine_Vars::getVars()`)
 
 If you want to become involved, or simply want to find out more, please [contact Leo](mailto:leo@getpop.org).
 
