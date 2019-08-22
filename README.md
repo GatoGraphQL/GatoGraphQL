@@ -886,7 +886,7 @@ That's it. You can then access PoP's API by adding parameter `output=json` to an
 
 PoP allows the configuration of the following properties, set in file wp-config.php:
 
-`USE_CACHE` (`true`|`false`, default: `false`): Create and re-use a cache of the settings for the requested page.
+`USE_COMPONENT_MODEL_CACHE` (`true`|`false`, default: `false`): Create and re-use a cache of the settings for the requested page.
 
 `COMPACT_RESPONSE_JSON_KEYS` (`true`|`false`, default: `false`): Compress the keys in the JSON response.
 
@@ -1109,7 +1109,7 @@ PoP allows the configuration of the following properties, done in file wp-config
 
 - `POP_SERVER_TEMPLATEDEFINITION_USENAMESPACES` (_true_|_false_): If the template definition type is set to 2, then we can set namespaces for each plugin, to add before each template definition. It is needed for decentralization, so that different websites can communicate with each other without conflict, mangling all template definitions the same way. (Otherwise, having different plugins activated will alter the mangling counter, and produce different template definitions).
 
-- `USE_CACHE` (_true_|_false_): Create and re-use a cache of the settings of the requested page.
+- `USE_COMPONENT_MODEL_CACHE` (_true_|_false_): Create and re-use a cache of the settings of the requested page.
 
 - `POP_SERVER_COMPACTJSKEYS` (_true_|_false_): Common keys from the JSON code sent to the front-end are replaced with a compact string. Output response will be smaller.
 
