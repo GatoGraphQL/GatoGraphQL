@@ -1219,7 +1219,7 @@ class FieldValueResolver_Posts extends \PoP\Engine\AbstractFieldValueResolver {
   
     // First Check if there's a FieldValueResolverExtension to implement this field
     $hook_value = $this->getHookValue(GD_DATALOAD_FIELDPROCESSOR_POSTS, $resultitem, $field);
-    if (!\PoP\Engine\GeneralUtils::isError($hook_value)) {
+    if (!\PoP\ComponentModel\GeneralUtils::isError($hook_value)) {
       return $hook_value;
     }    
 
