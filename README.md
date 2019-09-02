@@ -491,7 +491,7 @@ To allow the website's service-worker.js be able to cache content coming from th
 - [Architecture Design and Implementation](docs/ArchitectureDesignAndImplementation.md)
 - [Tutorials](docs/Tutorials.md)
 
-### Development Articles: How PoP works
+## Development Articles: How PoP works
 
 The following articles give a step-by-step process of how many features in PoP were implemented:
 
