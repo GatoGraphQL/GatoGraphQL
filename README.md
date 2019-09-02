@@ -72,7 +72,7 @@ In most libraries/frameworks in the market, the implementation of the concept of
 
 PoP's architecture attempts to achieve the following goals:
 
-✅ Support for creating all-purpose APIs, compatible with both REST and GraphQL, and combining the most important benefits from these two APIs
+✅ Support for creating all-purpose APIs, compatible with industry standards (such as REST and GraphQL), and incorporating the advantages from other APIs
 
 ✅ Progressive enhancement: the API becomes an Application
 
@@ -88,7 +88,7 @@ PoP's architecture attempts to achieve the following goals:
 - API output easily customized for different applications (website, mobile app, integration with 3rd party apps, etc)
 - Native code splitting, A/B testing, client-side state management and layout cache
 
-✅ Clearly decoupled responsibilities among PHP, JavaScript, JavaScript templates and CSS (defining clear responsibilities across team members):
+✅ Clearly decoupled responsibilities in the stack, which defines clear responsibilities across team members. Eg:
 
 - JavaScript templates for markup
 - JavaScript for user interactivity/dynamic functionality
