@@ -1,18 +1,12 @@
 ![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
 
-<!--# PoP — “Platform of Platforms”-->
 # PoP
 
-<!--
-## 🤔 Notice
+_This repo contains documentation for PoP until the website (https://getpop.org) can be updated (it is extremely out of date)._
+ 
+ PoP is a component model for the back-end, describing a specification so that it can be implemented in different languages. 
 
-PoP's codebase is currently being migrated to Composer components. PoP 1.0 will be released once the migration is complete. Contributors are welcome! [Find out more](#codebase-migration).
-
-## Description
--->
-PoP is a component model for the back-end, describing a specification so that it can be implemented in different languages. 
-
-PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. Based on the component model, we can build complex applications, such as: [APIs](https://github.com/getpop/api) (currently implemented ✅), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon). 
+PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture enables to build complex applications, such as: [APIs](https://github.com/getpop/api) (currently implemented ✅), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon). 
 
 Currently, there are the following implementations of PoP:
 
@@ -23,6 +17,7 @@ Currently, there are the following implementations of PoP:
 Follow the instructions for the corresponding platform:
 
 - [PoP API for WordPress](https://github.com/leoloso/pop-api-wp)
+- PoP API for Laravel + WordPress (coming soon)
 <!--- [PoP API for Laravel + WordPress](https://github.com/leoloso/PoP-API-Lavarel-plus-WP)-->
 
 ## Architecture foundations
