@@ -482,15 +482,6 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 **Help needed!** 😝 [PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming contributors to help with the migration, as to push forward the release date for PoP 1.0. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
 
-## Documentation
-
-> Note: The documentation is currently pretty lacking. We expect to work on it further after releasing version 1.0
-
-- [Main Concepts](docs/MainConcepts.md)
-- [Developer Guide](docs/DeveloperGuide.md)
-- [Architecture Design and Implementation](docs/ArchitectureDesignAndImplementation.md)
-- [Tutorials](docs/Tutorials.md)
-
 ## Development Articles: How PoP works
 
 The following articles give a step-by-step process of how many features in PoP were implemented:
