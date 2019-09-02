@@ -18,7 +18,7 @@ Currently, there are the following implementations of PoP:
 
 Follow the instructions for the corresponding platform:
 
-- [PoP API for WordPress](https://github.com/leoloso/pop-api-wp)
+- [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP)
 - PoP API for Laravel + WordPress (coming soon)
 - PoP site for WordPress (coming soon)
 
