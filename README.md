@@ -2,11 +2,13 @@
 
 # PoP
 
-_This repo contains documentation for PoP until the website (https://getpop.org) can be updated (it is extremely out of date)._
+_This repo contains documentation for PoP until [its website](https://getpop.org) is updated (it still concerns a previous version of the software, uncompatible with the most up-to-date version)._
  
- PoP is a component model for the back-end, describing a specification so that it can be implemented in different languages. 
+PoP is a component model for the back-end, describing a specification so that it can be implemented in different languages. 
 
 PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture enables to build complex applications, such as: [APIs](https://github.com/getpop/api) (currently implemented ✅), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon). 
+
+## Implementations
 
 Currently, there are the following implementations of PoP:
 
@@ -18,15 +20,15 @@ Follow the instructions for the corresponding platform:
 
 - [PoP API for WordPress](https://github.com/leoloso/pop-api-wp)
 - PoP API for Laravel + WordPress (coming soon)
+- PoP site for WordPress (coming soon)
 <!--- [PoP API for Laravel + WordPress](https://github.com/leoloso/PoP-API-Lavarel-plus-WP)-->
 
 ## Architecture foundations
 
-The component-based architecture of the API is based on the following foundations:
+The architecture establishes the following foundations:
 
 1. Everything is a module (or component)
 2. The module is its own API
-3. Reactivity (based on observing a unique client-side database object)
 
 ### 1. Everything is a module
 
@@ -40,19 +42,13 @@ Hence, in PoP everything is a module, and the top-most module represents the pag
 
 Every module, at whichever level inside the component hierarchy (i.e. the composition of modules starting from the top-most, all the way down to the last level), is independently accessible through the API simply by passing along its module path in the URL: `/page-url/?output=json&modulefilter=modulepaths&modulepaths[]=path-to-the-module`
 
-### 3. Reactivity
-
-Updating database data and configuration data saved in the client throughout the user session makes the layouts using this data be automatically re-rendered.
-
-> Note: Implementation of this feature is still in progress and not yet available
-
 ## Progressive/Resilient components
 
 In most libraries/frameworks in the market, the implementation of the concept of components is based on JavaScript. In PoP, a component has a progressive approach, and its implementation spans from back to front-end:
 
 <table>
 <thead>
-<tr><th>Back-end (eg: PHP)</th><th>Front-end</th></tr>
+<tr><th>Back-end</th><th>Front-end</th></tr>
 </thead>
 <tbody>
 <tr valign="top"><td>
@@ -64,15 +60,13 @@ In most libraries/frameworks in the market, the implementation of the concept of
 </ul>
 </td><td>
 <ul>
-<li>Styles (CSS)</li>
-<li>View (Handlebars templates)</li>
-<li>Reactivity (vanilla JavaScript)</li>
+<li>Styles</li>
+<li>View</li>
+<li>Reactivity</li>
 </ul>
 </td></tr>
 </tbody>
 </table>
-
-**Bonus:** Because the view is implemented through [Handlebars](https://handlebarsjs.com/) templates, which can be loaded both in the client (through the Handlebars runtime) and in the server (through PHP library [LightnCandy](https://github.com/zordius/lightncandy)), then this approach is isomorphic: the same code works on both environments.
 
 ## Design goals
 
