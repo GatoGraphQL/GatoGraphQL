@@ -8,7 +8,7 @@ This repo contains only documentation for PoP (until website [getpop.org](https:
  
 PoP is a component model for the back-end, describing a specification so that it can be implemented in different languages. 
 
-PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture enables to build complex applications, such as: [APIs](https://github.com/getpop/api) (currently implemented ✅), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon). 
+PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture enables to build complex applications, such as: [APIs](https://github.com/getpop/api) (currently implemented), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon). 
 
 ## Implementations
 
