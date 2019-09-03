@@ -2,7 +2,9 @@
 
 # PoP
 
-_This repo contains only documentation for PoP (until website [getpop.org](https://getpop.org) can be updated... it still concerns a previous version of the software, uncompatible with the most up-to-date version). All actual code (and corresponding documentation) is found on different repositories under the [PoP organization account](https://github.com/getpop/)._
+This repo contains only documentation for PoP (until website [getpop.org](https://getpop.org) can be updated... it still concerns a previous version of the software, uncompatible with the most up-to-date version). All actual code (and corresponding documentation) is found on different repositories under the [PoP organization account](https://github.com/getpop/).
+
+## Description
  
 PoP is a component model for the back-end, describing a specification so that it can be implemented in different languages. 
 
