@@ -389,11 +389,9 @@ Implementation of APIs through PoP:
 
 > Note: The websites below run on an old version of the software, and will be migrated to the version eventually.
 
-[PoP Demo](https://demo.getpop.org) is a playground for PoP: create a random post or event, follow a user, add a comment, etc.
-
-[MESYM](https://www.mesym.com) and [Agenda Urbana](https://agendaurbana.org) are social networks.
-
-[SukiPoP](https://sukipop.com) is a decentralized social network.
+- [PoP Demo](https://demo.getpop.org) is a playground for PoP: create a random post or event, follow a user, add a comment, etc.
+- [MESYM](https://www.mesym.com) and [Agenda Urbana](https://agendaurbana.org) are social networks.
+- [SukiPoP](https://sukipop.com) is a decentralized social network.
 
 <!--
 
