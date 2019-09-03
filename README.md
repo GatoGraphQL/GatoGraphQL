@@ -260,9 +260,9 @@ The configuration layer can provide those properties and values required to buil
 
 Among others, PoP is suitable for the following use cases:
 
-### 👉🏽 As a drop-in replacement for GraphQL and REST
+### 👉🏽 As a replacement for GraphQL and REST
 
-PoP can combine the best of both GraphQL and REST: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. And because its response is compatible with both of these APIs, it can conveniently replace them on the application with minimal effort.
+The [PoP API](https://github.com/getpop/api) can combine the best of both GraphQL and REST in a single API: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. API extensions [PoP GraphQL API](https://github.com/getpop/api-graphql) and [PoP REST API](https://github.com/getpop/api-rest) change the shape of the API's response to that produced by GraphQL and REST respectively, so they are compatible with these APIs.
 
 ### 👉🏽 As an API to fetch data, or execute any type of operation
 
