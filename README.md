@@ -478,7 +478,7 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 ## Codebase Migration
 
-**Help needed!** 😝 [PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming contributors to help with the migration, as to push forward the release date for PoP 1.0. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
+**Help needed!** 😝 [PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming contributors to help with the migration. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
 
 ## Development Articles: How PoP works
 
