@@ -324,17 +324,6 @@ However, at this point PoP was not a progressive framework for building any kind
 
 If the open specification succeeds at attracting interest from the development community and eventually gets implemented for other CMSs and technologies, our goal of connecting sites together will have had a big boost. This is the dream that drives us forward and keeps us working long into the night.
 -->
-## Technical documentation
-
-Alongside the code, each repository on the [PoP organization account](https://github.com/getpop/) contains its corresponding technical documentation, in its README file.
-
-Currently, most of the technical documentation is found on these repositories:
-
-- [Component Model](https://github.com/getpop/component-model)<!--- [Engine](https://github.com/getpop/engine): Adds services over the component model-->
-- [Configuration for Component Model](https://github.com/getpop/component-model-configuration)
-- [API](https://github.com/getpop/api)<!--- [GraphQL API](https://github.com/getpop/api-graphql)- [REST API](https://github.com/getpop/api-rest)-->
-- [Site Builder](https://github.com/getpop/site-builder)<!--- [Static Site Generator](https://github.com/getpop/static-site-generator)-->
-
 
 ## Examples
 <!--
@@ -406,6 +395,18 @@ Implementation of APIs through PoP:
 - [PoP Demo](https://demo.getpop.org) is a playground for PoP: create a random post or event, follow a user, add a comment, etc.
 - [MESYM](https://www.mesym.com) and [Agenda Urbana](https://agendaurbana.org) are social networks.
 - [SukiPoP](https://sukipop.com) is a decentralized social network.
+
+## Technical documentation
+
+Alongside the code, each repository on the [PoP organization account](https://github.com/getpop/) contains its corresponding technical documentation, in its README file.
+
+Currently, most of the technical documentation is found on these repositories:
+
+- [Component Model](https://github.com/getpop/component-model)<!--- [Engine](https://github.com/getpop/engine): Adds services over the component model-->
+- [Configuration for Component Model](https://github.com/getpop/component-model-configuration)
+- [API](https://github.com/getpop/api)<!--- [GraphQL API](https://github.com/getpop/api-graphql)- [REST API](https://github.com/getpop/api-rest)-->
+- [Site Builder](https://github.com/getpop/site-builder)<!--- [Static Site Generator](https://github.com/getpop/static-site-generator)-->
+
 
 <!--
 
