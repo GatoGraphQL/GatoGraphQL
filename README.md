@@ -490,10 +490,6 @@ To allow the website's service-worker.js be able to cache content coming from th
     </IfModule>
 -->
 
-## Codebase Migration
-
-[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
-
 ## Development Articles: How PoP works
 
 The following articles give a step-by-step process of how many features in PoP were implemented:
@@ -505,6 +501,10 @@ The following articles give a step-by-step process of how many features in PoP w
 - [Adding Code-Splitting Capabilities To A WordPress Website Through PoP](https://www.smashingmagazine.com/2018/02/code-splitting-wordpress-pop/): How PoP implements code-splitting of JavaScript files
 - [How To Make A Dynamic Website Become Static Through A Content CDN](https://www.smashingmagazine.com/2018/02/dynamic-website-static-content-cdn/): Mechanism implemented for PoP to route dynamic content through a CDN to improve performance
 - [Implementing A Service Worker For Single-Page App WordPress Sites](https://www.smashingmagazine.com/2017/10/service-worker-single-page-application-wordpress-sites/): The strategy behind the creation of the service-worker.js file in PoP (when running under WordPress), which powers its offline-first caching strategy
+
+## Codebase Migration
+
+[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
 
 ## 🔥 Become involved!
 
