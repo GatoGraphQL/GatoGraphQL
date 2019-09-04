@@ -396,7 +396,9 @@ Implementation of APIs through PoP:
 - [MESYM](https://www.mesym.com) and [Agenda Urbana](https://agendaurbana.org) are social networks.
 - [SukiPoP](https://sukipop.com) is a decentralized social network.
 
-## Technical documentation
+## Documentation
+
+### Technical documentation
 
 Alongside the code, each repository on the [PoP organization account](https://github.com/getpop/) contains its corresponding technical documentation, in its README file.
 
@@ -491,7 +493,7 @@ To allow the website's service-worker.js be able to cache content coming from th
     </IfModule>
 -->
 
-## Development Articles: How PoP works
+### Articles concerning PoP
 
 The following articles give a step-by-step process of how many features in PoP were implemented:
 
