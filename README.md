@@ -454,6 +454,8 @@ PoP allows the configuration of the following properties, set in file wp-config.
 
 `ENABLE_CONFIG_BY_PARAMS` (`true`|`false`, default: `false`): Enable to set the application configuration through URL param "config".
 
+`ENABLE_VERSION_BY_PARAMS` (`true`|`false`, default: `false`): Enable to set the application version through URL param "version".
+
 `POP_SERVER_FAILIFMODULESDEFINEDTWICE` (`true`|`false`, default: `false`): Throw an exception if two different modules have the same name.
 
 `POP_SERVER_ENABLEEXTRAURISBYPARAMS` (`true`|`false`, default: `false`): Allow to request extra URIs through URL param "extrauris".
@@ -650,6 +652,8 @@ PoP allows the configuration of the following properties, done in file wp-config
 - `USE_LOCAL_STORAGE` (_true_|_false_): Save special loaded-in-the-background pages in localStorage, to not have to retrieve them again (until software version changes).
 
 - `ENABLE_CONFIG_BY_PARAMS` (_true_|_false_): Enable to set the application configuration through URL param "config".
+
+`ENABLE_VERSION_BY_PARAMS` (`true`|`false`, default: `false`): Enable to set the application version through URL param "version".
 
 - `DISABLE_JS` (_true_|_false_): Strip the output of all Javascript code.
 
