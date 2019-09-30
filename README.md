@@ -21,8 +21,11 @@ Currently, PoP has been implemented in the following languages:
 Follow the instructions for the corresponding platform:
 
 - [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP)
+- Others coming soon...
+<!--
 - PoP API for Laravel + WordPress (coming soon)
 - PoP site for WordPress (coming soon)
+-->
 
 ## Architecture foundations
 
