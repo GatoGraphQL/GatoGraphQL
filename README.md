@@ -8,7 +8,7 @@ This repo contains only documentation concerning the component-model architectur
  
 PoP describes an architecture based on a server-side component model. It is intended to become a specification, so that it can be implemented in different languages. 
 
-PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture enables to build complex applications, such as: [APIs](https://github.com/getpop/api) (currently implemented), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon). 
+PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build the application, and guides how it can be deployed (eg: it supports the serverless paradigm). Native applications to PoP are [APIs](https://github.com/getpop/api) (WIP, almost finished), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon).
 
 ## Implementations
 
