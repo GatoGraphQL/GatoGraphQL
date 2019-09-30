@@ -274,9 +274,13 @@ The [PoP API](https://github.com/getpop/api) can combine the best of both GraphQ
 
 PoP is CMS-agnostic, and can run on top of any CMS and be a proxy to execute its functionality (retrieve data, post data, log the user in, send an email, etc). It is extremely simple to set-up and use: PoP exposes a single URL-based interface to execute the whole functionality.
 
-### 👉🏽 Reduce the complexity of the application, and maximize the output from a small team
+### 👉🏽 Homogenize the architecture of the application
 
-The component-based architecture supports many useful features out of the box (code splitting, A/B testing, client-side state management and layout cache), so there is no need to implement them. It establishes an architectural single source of truth, from which it is possible to produce HTML on the server-side, client-side and for transactional emails (so only 1 person can handle all of them), and power more than one application (a website + a mobile app).
+The component-based architecture acts as the foundation for the overall application, including accessing data through the API, and implementation of its many features (many of them already provided out of the box, such as code splitting, A/B testing, client-side state management and layout cache).
+
+### 👉🏽 Maximize the output from a small team
+
+The architectural single source of truth makes it possible to produce HTML for the server-side, client-side, transactional emails, and any other desired output, and power more than one application (for instance, a website + a mobile app), allowing a single developer to handle all these tasks.
 
 ### 👉🏽 Make the application easily maintainable in the long term
 
