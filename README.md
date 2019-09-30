@@ -262,13 +262,17 @@ The configuration layer can provide those properties and values required to buil
 
 Among others, PoP is suitable for the following use cases:
 
+### 👉🏽 As an API
+
+The [PoP API](https://github.com/getpop/api) is a world-class API, very easy to be consumed in the client, and also very easy to be created on the server. Its component-based architecture offers features that can't be supported through schemas, such as composition of fields.
+
 ### 👉🏽 As a replacement for GraphQL and REST
 
 The [PoP API](https://github.com/getpop/api) can combine the best of both GraphQL and REST in a single API: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. API extensions [PoP GraphQL API](https://github.com/getpop/api-graphql) and [PoP REST API](https://github.com/getpop/api-rest) change the shape of the API's response to that produced by GraphQL and REST respectively, so they are compatible with these APIs.
 
-### 👉🏽 As an API to fetch data, or execute any type of operation
+### 👉🏽 To execute any type of operation supported by the CMS
 
-Build an API to execute any operation supported by the underlying CMS: retrieve data, post data, log in the user, send an email, etc. Since the operation is defined for each module, it is possible to execute multiple operations in a single request, and have each module get a feedback response on the success of their own operation.
+PoP is CMS-agnostic, and can run on top of any CMS and be a proxy to execute its functionality (retrieve data, post data, log the user in, send an email, etc). It is extremely simple to set-up and use: PoP exposes a single URL-based interface to execute the whole functionality.
 
 ### 👉🏽 Reduce the complexity of the application, and maximize the output from a small team
 
