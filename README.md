@@ -73,9 +73,9 @@ In most libraries/frameworks in the market, the implementation of the concept of
 
 PoP's architecture attempts to achieve the following goals:
 
-✅ Support for creating all-purpose APIs, compatible with industry standards (such as REST and GraphQL), and incorporating the advantages from other APIs
+✅ The API and the application share the same architecture/foundations
 
-✅ Progressive enhancement: the API becomes an Application
+✅ Support for creating all-purpose APIs, compatible with industry standards (such as REST and GraphQL), and incorporating the advantages from other APIs
 
 ✅ High level of modularity:
 
