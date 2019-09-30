@@ -8,7 +8,11 @@ This repo contains only documentation concerning the component-model architectur
  
 PoP describes an architecture based on a server-side component model. It is intended to become a specification, so that it can be implemented in different languages. 
 
-PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build the application, and guides how it can be deployed (eg: it supports the serverless paradigm). Native applications to PoP are [APIs](https://github.com/getpop/api) (WIP, almost finished), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon).
+PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build the application, and guides how it can be deployed (eg: it supports the serverless paradigm). 
+
+![In PoP, everything is a module](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
+
+Native applications to PoP are [APIs](https://github.com/getpop/api) (WIP, almost finished), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon).
 
 ## Implementations
 
@@ -38,7 +42,7 @@ The architecture establishes the following foundations:
 
 A PoP application contains a top-most module (also called a component) which wraps other modules, which themselves wrap other modules, and so on until reaching the last level:
 
-![In PoP, everything is a module](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
+![Sequence of modules wrapping modules wrapping modules, from an avatar all the way up to the webpage](https://uploads.getpop.org/wp-content/uploads/2018/12/module-sequence.gif)
 
 Hence, in PoP everything is a module, and the top-most module represents the page.
 
