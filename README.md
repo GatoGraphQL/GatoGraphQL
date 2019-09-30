@@ -12,7 +12,7 @@ PoP is components all the way down. Each component is implemented partly in the 
 
 ## Implementations
 
-Currently, there are the following implementations of PoP:
+Currently, PoP has been implemented in the following languages:
 
 - [PoP in PHP](https://github.com/leoloso/PoP-PHP)
 
