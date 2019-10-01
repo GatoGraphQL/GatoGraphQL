@@ -403,10 +403,9 @@ We can fetch exactly the required data for all involved resources from a URL, in
 - [PoP native response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=title|content,comments.content|date,comments.author.name|url)
 -->
 
-Implementation of APIs through PoP:
+Refer to [PoP API](https://github.com/getpop/api#examples) for more examples.
 
-- [GraphQL-compatible](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=title|content,comments.content|date,comments.author.name|url&datastructure=graphql)
-- [REST-compatible](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=title|content,comments.content|date,comments.author.name|url&datastructure=rest)
+- Query: [posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url](https://nextapi.getpop.org/api/graphql/?fields=posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url)
 
 ### PoP Sites
 
