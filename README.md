@@ -12,7 +12,7 @@ PoP is components all the way down. Each component is implemented partly in the 
 
 ![In PoP, everything is a module](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
 
-Native applications to PoP are [APIs](https://github.com/getpop/api) (WIP, almost finished), [websites](https://github.com/getpop/site-builder) and [static sites](https://github.com/getpop/static-site-generator) (coming soon).
+Native applications to PoP are [APIs](https://github.com/getpop/api) (working on it currently, almost finished), and [dynamic](https://github.com/getpop/site) and [static](https://github.com/getpop/static-site-generator) sites (foundations laid out, implementation coming soon).
 
 ## Implementations
 
@@ -426,7 +426,7 @@ Currently, most of the technical documentation is found on these repositories:
 - [Component Model](https://github.com/getpop/component-model)<!--- [Engine](https://github.com/getpop/engine): Adds services over the component model-->
 - [Configuration for Component Model](https://github.com/getpop/component-model-configuration)
 - [API](https://github.com/getpop/api)<!--- [GraphQL API](https://github.com/getpop/api-graphql)- [REST API](https://github.com/getpop/api-rest)-->
-- [Site Builder](https://github.com/getpop/site-builder)<!--- [Static Site Generator](https://github.com/getpop/static-site-generator)-->
+- [Site](https://github.com/getpop/site)<!--- [Static Site Generator](https://github.com/getpop/static-site-generator)-->
 
 
 <!--
