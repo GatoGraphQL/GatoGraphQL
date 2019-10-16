@@ -276,7 +276,7 @@ Among others, PoP is suitable for the following use cases:
 
 ### 👉🏽 As an API
 
-The [PoP API](https://github.com/getpop/api) is a world-class API, very easy to be consumed in the client, and also very easy to be created on the server. Its component-based architecture offers features that can't be supported through schemas, such as composition of fields.
+The [PoP API](https://github.com/getpop/api) is an incredibly powerful API, very easy to consume in the client, and also very easy to create on the server. Its component-based architecture offers features that can't be supported through schemas, such as composition of fields.
 
 ### 👉🏽 As a replacement for GraphQL and REST
 
