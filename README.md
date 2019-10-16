@@ -358,8 +358,8 @@ You can play with the PoP API here: https://nextapi.getpop.org. Check the follow
 
 In the following links, data for a resource or collection of resources is fetched as typically done through REST; however, through parameter `query` we can also specify what specific data to retrieve for each resource, avoiding over or underfetching data: 
 
-- A [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title,content,datetime) and a [collection of posts](https://nextapi.getpop.org/posts/?output=json&action=api&fields=title,content,datetime) adding parameter `fields=title,content,datetime`
-- A [user](https://nextapi.getpop.org/u/leo/?output=json&action=api&fields=name,username,description) and a [collection of users](https://nextapi.getpop.org/users/?output=json&action=api&fields=name,username,description) adding parameter `fields=name,username,description`
+- A [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&query=title,content,datetime) and a [collection of posts](https://nextapi.getpop.org/posts/?output=json&action=api&query=title,content,datetime) adding parameter `query=title,content,datetime`
+- A [user](https://nextapi.getpop.org/u/leo/?output=json&action=api&query=name,username,description) and a [collection of users](https://nextapi.getpop.org/users/?output=json&action=api&query=name,username,description) adding parameter `query=name,username,description`
 
 This works for relationships too. For instance, let's say that we want to retrieve a list of posts with fields `"title"` and `"content"`, each post's comments with fields `"content"` and `"date"`, and the author of each comment with fields `"name"` and `"url"`. To achieve this in GraphQL we would implement the following query:
 
@@ -383,16 +383,16 @@ query {
 For PoP, the query is translated into its corresponding "dot syntax" expression, which can then be supplied through parameter `query`. Querying on a "post" resource, this value is:
 
 ```javascript
-fields=title,content,comments.content,comments.date,comments.author.name,comments.author.url
+query=title,content,comments.content,comments.date,comments.author.name,comments.author.url
 ```
 
 Or it can be simplified, using `|` to group all fields applied to the same resource:
 
 ```javascript
-fields=title|content,comments.content|date,comments.author.name|url
+query=title|content,comments.content|date,comments.author.name|url
 ```
 
-When executing this query [on a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources.
+When executing this query [on a single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&query=title|content,comments.content|date,comments.author.name|url) we obtain exactly the required data for all involved resources.
 -->
 <!--
 **PoP, GraphQL and REST-like API:**
@@ -400,12 +400,12 @@ When executing this query [on a single post](https://nextapi.getpop.org/posts/a-
 <!--
 We can fetch exactly the required data for all involved resources from a URL, in different formats:
 
-- [PoP native response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?fields=title|content,comments.content|date,comments.author.name|url)
+- [PoP native response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?query=title|content,comments.content|date,comments.author.name|url)
 -->
 
 Refer to [PoP API](https://github.com/getpop/api#examples) for more examples.
 
-- Query: [posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url](https://nextapi.getpop.org/api/graphql/?fields=posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url)
+- Query: [posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url)
 
 ### PoP Sites
 
