@@ -37,7 +37,7 @@ The architecture establishes the following foundations:
 
 1. Everything is a module (or component)
 2. The module is its own API
-3. The API and the application share the same foundations
+3. The API and the application use the same code
 
 ### 1. Everything is a module
 
