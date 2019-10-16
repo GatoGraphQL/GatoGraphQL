@@ -356,7 +356,7 @@ You can play with the PoP API here: https://nextapi.getpop.org. Check the follow
 <!--
 **Requesting specific fields:**
 
-In the following links, data for a resource or collection of resources is fetched as typically done through REST; however, through parameter `fields` we can also specify what specific data to retrieve for each resource, avoiding over or underfetching data: 
+In the following links, data for a resource or collection of resources is fetched as typically done through REST; however, through parameter `query` we can also specify what specific data to retrieve for each resource, avoiding over or underfetching data: 
 
 - A [single post](https://nextapi.getpop.org/posts/a-lovely-tango/?output=json&action=api&fields=title,content,datetime) and a [collection of posts](https://nextapi.getpop.org/posts/?output=json&action=api&fields=title,content,datetime) adding parameter `fields=title,content,datetime`
 - A [user](https://nextapi.getpop.org/u/leo/?output=json&action=api&fields=name,username,description) and a [collection of users](https://nextapi.getpop.org/users/?output=json&action=api&fields=name,username,description) adding parameter `fields=name,username,description`
@@ -380,7 +380,7 @@ query {
 }
 ```
 
-For PoP, the query is translated into its corresponding "dot syntax" expression, which can then be supplied through parameter `fields`. Querying on a "post" resource, this value is:
+For PoP, the query is translated into its corresponding "dot syntax" expression, which can then be supplied through parameter `query`. Querying on a "post" resource, this value is:
 
 ```javascript
 fields=title,content,comments.content,comments.date,comments.author.name,comments.author.url
