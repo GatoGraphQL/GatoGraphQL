@@ -406,9 +406,37 @@ We can fetch exactly the required data for all involved resources from a URL, in
 - [PoP native response](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/?query=title|content,comments.content|date,comments.author.name|url)
 -->
 
-Refer to [PoP API](https://github.com/getpop/api#examples) for more examples.
+Refer to package [Field Query](https://github.com/getpop/field-query) for many more examples.
 
-- Query: [posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url)
+_**Retrieving properties from a nested query:**_<br/>
+[/?query=posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url|comments.id|content|date|author.id|name|url|posts.id|title|url)
+
+_**Field arguments:**_<br/>
+[/?query=posts(searchfor:template,limit:3).id|title](https://nextapi.getpop.org/api/graphql/?query=posts(searchfor:template,limit:3).id|title)
+
+_**Variables:**_<br/>
+[/?query=posts(searchfor:$search,limit:$limit).id|title&limit=3&search=template](https://nextapi.getpop.org/api/graphql/?query=posts(searchfor:$search,limit:$limit).id|title&limit=3&search=template)
+
+_**Aliases:**_<br/>
+[/?query=posts(searchfor:template,limit:3)@searchposts.id|title](https://nextapi.getpop.org/api/graphql/?query=posts(searchfor:template,limit:3)@searchposts.id|title)
+
+_**Fragments:**_<br/>
+[/?query=posts(limit:3).--postProps,posts(limit:4).author.posts.--postProps&postProps=id|title|url](https://nextapi.getpop.org/api/graphql/?query=posts(limit:3).--postProps,posts(limit:4).author.posts.--postProps&postProps=id|title|url)
+
+_**Directives:**_<br/>
+[/?query=posts.id|title|url<include(if:$include)>&variables[include]=true](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url<include(if:$include)>&variables[include]=true)<br/>
+[/?query=posts.id|title|url<include(if:$include)>&variables[include]=](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url<include(if:$include)>&variables[include]=)
+
+_**Nested fields:**_<br/>
+<a href="https://nextapi.getpop.org/api/graphql/?query=posts.if(has-comments(),sprintf(Post with title '%s' has %s comments,[title(), comments-count()]),sprintf(Post with ID %s was created on %s, [id(),date(d/m/Y)]))@postDesc">/?query=posts.if(has-comments(),sprintf(Post with title '%s' has %s comments,[title(), comments-count()]),sprintf(Post with ID %s was created on %s, [id(),date(d/m/Y)]))@postDesc</a>
+
+_**Nested fields with directives:**_<br/>
+
+[/?query=posts.id|title|featuredimage<include(if:not(isNull(featuredimage())))>.id|src](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|featuredimage<include(if:not(isNull(featuredimage())))>.id|src)
+
+_**Skip output if null:**_<br/>
+
+[/?query=posts.id|title|featuredimage?.id|src](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|featuredimage?.id|src)
 
 ### PoP Sites
 
