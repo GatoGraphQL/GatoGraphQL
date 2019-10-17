@@ -97,9 +97,9 @@ PoP's architecture attempts to achieve the following goals:
 
 ✅ Minimal effort to produced a maximum output:
 
-- Isomorphism to produce HTML code client and server-side and to be sent as transactional email
+- Isomorphism of code (to produce HTML code client and server-side and to be sent as transactional email)
 - API output easily customized for different applications (website, mobile app, integration with 3rd party apps, etc)
-- Native code splitting, A/B testing, client-side state management and layout cache
+- Architecture supports features that remove the need for 3rd party libraries (for code splitting, A/B testing, client-side state management and layout cache, among others)
 
 ✅ Clearly decoupled responsibilities in the stack, which defines clear responsibilities across team members. Eg:
 
