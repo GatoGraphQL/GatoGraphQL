@@ -65,18 +65,14 @@ In most libraries/frameworks in the market, the implementation of the concept of
 </thead>
 <tbody>
 <tr valign="top"><td>
-<ul>
-<li>Component hierarchy</li>
-<li>Data loading</li>
-<li>Configuration</li>
-<li>Props</li>
-</ul>
+Component hierarchy<br/>
+Data loading<br/>
+Configuration<br/>
+Props
 </td><td>
-<ul>
-<li>Styles</li>
-<li>View</li>
-<li>Reactivity</li>
-</ul>
+Styles<br/>
+View<br/>
+Reactivity
 </td></tr>
 </tbody>
 </table>
