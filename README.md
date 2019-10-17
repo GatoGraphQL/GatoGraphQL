@@ -87,7 +87,7 @@ PoP's architecture attempts to achieve the following goals:
 
 ✅ The API and the application share the same architecture/foundations
 
-✅ Support for creating all-purpose APIs, compatible with industry standards (such as REST and GraphQL), and incorporating the advantages from other APIs
+✅ Support for creating all-purpose APIs, compatible with both REST and GraphQL, and offering the benefits of both these APIs at the same time
 
 ✅ High level of modularity:
 
