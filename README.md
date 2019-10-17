@@ -8,7 +8,7 @@ This repo contains only documentation concerning the component-model architectur
  
 PoP describes an architecture based on a server-side component model. It is intended to become a specification, so that it can be implemented in different languages. 
 
-PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build the application, and guides how it can be deployed (eg: it supports the serverless paradigm). 
+PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build, configure and even deploy the application (eg: it supports the serverless paradigm). 
 
 ![In PoP, everything is a module](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
 
@@ -107,6 +107,10 @@ PoP's architecture attempts to achieve the following goals:
 - JavaScript for user interactivity/dynamic functionality
 - CSS for styles
 - PHP for creating the modules
+
+✅ Easy to maintain in the long term
+
+- Modules are focused on a single task or goal
 
 ✅ JavaScript as progressive enhancement (the application works always, even if JavaScript is disabled)
 
@@ -270,22 +274,26 @@ The configuration layer can provide those properties and values required to buil
 }
 ```
 
-## When to use PoP
+## Use cases for PoP
 
-Among others, PoP is suitable for the following use cases:
+Among others, PoP is suitable for the following applications:
 
 ### 👉🏽 As an API
 
-The [PoP API](https://github.com/getpop/api) is an incredibly powerful API, very easy to consume in the client, and also very easy to create on the server. Its component-based architecture offers features that can't be supported through schemas, such as composition of fields.
+The [PoP API](https://github.com/getpop/api) can combine the best of both GraphQL and REST in a single API: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. Through extension [GraphQL API](https://github.com/getpop/api-graphql) the application becomes a GraphQL server, and through extension [REST API](https://github.com/getpop/api-rest) the application can add custom REST endpoints.
 
-### 👉🏽 As a replacement for GraphQL and REST
+### As a hybrid dynamic/static website (currently not available)
 
-The [PoP API](https://github.com/getpop/api) can combine the best of both GraphQL and REST in a single API: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. API extensions [PoP GraphQL API](https://github.com/getpop/api-graphql) and [PoP REST API](https://github.com/getpop/api-rest) change the shape of the API's response to that produced by GraphQL and REST respectively, so they are compatible with these APIs.
+By using javascript templates, components can be rendered into HTML, as to produce the website. By pre-rendering the components, the website can be partly exported as static. Then, the application is a hybrid: While the dynamic part of the site is handled from the server, the static sections can be served from a CDN.
+
+### To be deployed on serverless PHP
+
+Components are the perfect mechanism to execute atomic operations on a serverless environment. For instance, WordPress can't run on serverless. However, a standalone component, deployed on serverless, can access the data from the WordPress database and render it for the visitors.
 
 ### 👉🏽 To execute any type of operation supported by the CMS
 
 PoP is CMS-agnostic, and can run on top of any CMS and be a proxy to execute its functionality (retrieve data, post data, log the user in, send an email, etc). It is extremely simple to set-up and use: PoP exposes a single URL-based interface to execute the whole functionality.
-
+<!--
 ### 👉🏽 Homogenize the architecture of the application
 
 The component-based architecture acts as the foundation for the overall application, including accessing data through the API, and implementation of its many features (many of them already provided out of the box, such as code splitting, A/B testing, client-side state management and layout cache).
@@ -293,16 +301,11 @@ The component-based architecture acts as the foundation for the overall applicat
 ### 👉🏽 Maximize the output from a small team
 
 The architectural single source of truth makes it possible to produce HTML for the server-side, client-side, transactional emails, and any other desired output, and power more than one application (for instance, a website + a mobile app), allowing a single developer to handle all these tasks.
+-->
 
-### 👉🏽 Make the application easily maintainable in the long term
+### 👉🏽 To produce component stylesheets
 
-PoP modules are focused on a single task or goal. Hence, to modify a functionality, quite likely just a single module needs be updated, and because of the high degree of modularity attained by the architecture, other modules will not be affected. 
-
-Also, each module is cleary decoupled in its responsibilities across its stack (eg: PHP, CSS, JavaScript templates and JavaScript for functionalities), so only the appropriate team members will need to work on the module.
-
-### 👉🏽 Avoid having to document your components
-
-Because the website is already the documentation for the API, and component pattern libraries can be automatically generated by rendering each component on their own, PoP reduces the amount of documentation that needs be produced.
+Component pattern libraries can be automatically generated by rendering each component on its own.
 <!--
 ### 👉🏽 Robust architecture based on splitting a component's responsibilities into server and client-side
 
@@ -312,9 +315,9 @@ Using components as the building unit of a website has many advantages over othe
 
 PoP is not a JavaScript framework, but a framework spanning the server and client-side. While developers can add client-side JavaScript to enhance the application, it is certainly not a requirement, and powerful applications can be created with basic knowledge of JavaScript.-->
 
-### 👉🏽 Implement the "Create Once, Publish Everywhere" strategy
+### 👉🏽 Publish content to several platforms (web, app, email) with minimal effort
 
-[COPE](https://www.programmableweb.com/news/cope-create-once-publish-everywhere/2009/10/13) ("Create Once, Publish Everywhere") is a technique for creating several outputs (website, AMP, newsletters, mobile app, etc) from a single source of truth of content. PoP supports the implementation of COPE or similar techniques.
+PoP supports the ["Create Once, Publish Everywhere"](https://www.programmableweb.com/news/cope-create-once-publish-everywhere/2009/10/13) strategy to create several a custom output for different mediums or platforms (website, AMP, newsletters, mobile app, etc) from a single source of truth of content. 
 
 ### 👉🏽 Decentralize data sources across domains
 
