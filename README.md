@@ -278,11 +278,11 @@ Among others, PoP is suitable for the following applications:
 
 The [PoP API](https://github.com/getpop/api) can combine the best of both GraphQL and REST in a single API: no under or over-fetching or data while supporting server-side cache and not being open to DoS attacks. Through extension [GraphQL API](https://github.com/getpop/api-graphql) the application becomes a GraphQL server, and through extension [REST API](https://github.com/getpop/api-rest) the application can add custom REST endpoints.
 
-### As a hybrid dynamic/static website (currently not available)
+### 👉🏽 As a hybrid dynamic/static website (currently not available)
 
 By using javascript templates, components can be rendered into HTML, as to produce the website. By pre-rendering the components, the website can be partly exported as static. Then, the application is a hybrid: While the dynamic part of the site is handled from the server, the static sections can be served from a CDN.
 
-### To be deployed on serverless PHP
+### 👉🏽 To be deployed on serverless PHP
 
 Components are the perfect mechanism to execute atomic operations on a serverless environment. For instance, WordPress can't run on serverless. However, a standalone component, deployed on serverless, can access the data from the WordPress database and render it for the visitors.
 
