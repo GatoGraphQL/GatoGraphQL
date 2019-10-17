@@ -49,7 +49,7 @@ Hence, in PoP everything is a module, and the top-most module represents the pag
 
 ### 2. The module is its own API
 
-Every module, at whichever level inside the component hierarchy (i.e. the composition of modules starting from the top-most, all the way down to the last level), is independently accessible through the API simply by passing along its module path in the URL: `/page-url/?output=json&modulefilter=modulepaths&modulepaths[]=path-to-the-module`
+Every module, at whichever level inside the component hierarchy (i.e. the composition of modules starting from the top-most, all the way down to the last level), is independently accessible simply by passing along its module path in the URL: `/page-url/?output=json&modulefilter=modulepaths&modulepaths[]=path-to-the-module`
 
 ### 3. The API and the application use the same code
 
