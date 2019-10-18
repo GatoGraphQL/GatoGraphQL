@@ -417,7 +417,7 @@ _**Aliases:**_<br/>
 [/?query=posts(searchfor:template,limit:3)@searchposts.id|title](https://nextapi.getpop.org/api/graphql/?query=posts(searchfor:template,limit:3)@searchposts.id|title)
 
 _**Fragments:**_<br/>
-[/?query=posts(limit:3).--postProps,posts(limit:4).author.posts.--postProps&postProps=id|title|url](https://nextapi.getpop.org/api/graphql/?query=posts(limit:3).--postProps,posts(limit:4).author.posts.--postProps&postProps=id|title|url)
+[/?query=posts(limit:3).--postProps,posts(limit:3).author.posts.--postProps&postProps=id|title|url](https://nextapi.getpop.org/api/graphql/?query=posts(limit:3).--postProps,posts(limit:3).author.posts.--postProps&postProps=id|title|url)
 
 _**Directives:**_<br/>
 [/?query=posts.id|title|url<include(if:$include)>&variables[include]=true](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url<include(if:$include)>&variables[include]=true)<br/>
