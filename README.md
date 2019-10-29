@@ -547,6 +547,7 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 The following articles give a step-by-step process of how many features in PoP were implemented:
 
+- [“Create Once, Publish Everywhere” with WordPress](https://www.smashingmagazine.com/2019/10/create-once-publish-everywhere-wordpress/)
 - [Introducing the Component-based API](https://www.smashingmagazine.com/2019/01/introducing-component-based-api/): article describing all the main concepts of this architecture, published on Smashing Magazine.
 - [Caching Smartly In The Age Of Gutenberg](https://www.smashingmagazine.com/2018/12/caching-smartly-gutenberg/): Caching mechanism implemented in PoP, allowing to cache pages even when the user is logged-in (to be emulated for Gutenberg)
 - [Avoiding The Pitfalls Of Automatically Inlined Code](https://www.smashingmagazine.com/2018/11/pitfalls-automatically-inlined-code/): How PoP generates JS/CSS resources to improve performance
