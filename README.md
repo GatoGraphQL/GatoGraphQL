@@ -2,30 +2,39 @@
 
 # PoP
 
-This repo contains only documentation concerning the component-model architecture. All actual code (and corresponding documentation) is found on different repositories under the [PoP organization account](https://github.com/getpop/).
+This repo contains only documentation concerning the component-model architecture. All actual code (and their corresponding documentation) is found on all the different repositories under the [PoP organization account](https://github.com/getpop/).
 
 ## Description
  
-PoP describes an architecture based on a server-side component model. It is intended to become a specification, so that it can be implemented in different languages. 
+PoP describes an architecture based on a server-side component model. It has been [implemented in PHP](https://github.com/leoloso/PoP-PHP), but can also be considered a mental model for building applications in any language.
 
-PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build, configure and even deploy the application (eg: it supports the serverless paradigm). 
+PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build, configure and even deploy the application (eg: by providing support for the serverless paradigm). 
 
 ![In PoP, everything is a module](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
 
-Native applications to PoP are [APIs](https://github.com/getpop/api) (working on it currently, almost finished), and [dynamic](https://github.com/getpop/site) and [static](https://github.com/getpop/static-site-generator) sites (foundations laid out, implementation coming soon).
+### CMS-agnostic, based on contracts
 
-## Implementations
+PoP relies on contracts to interact with the underlying CMS or framework, where all logic resides. As such, it is CMS-agnostic, and it can work with any PHP-based CMS or framework (WordPress, Symfony, Laravel, Joomla, Drupal). 
 
-Currently, PoP has been implemented in the following languages:
+So far only the [contracts for WordPress](https://github.com/leoloso/PoP-API-WP) have been implemented, but extending it to any other platform is very simple: Only all the [repos ending on `"-wp"`](https://github.com/getpop?utf8=%E2%9C%93&q=-wp&type=&language=), which contain the implementation of the contracts for WordPress, need be re-implemented.
 
-- [PoP in PHP](https://github.com/leoloso/PoP-PHP)
+### No creeping business logic
+
+PoP doesn't implement any business logic, and doesn't attempt to re-invent the wheel: Authentication, CRUD operations, validation, etc are all implemented by the CMS; PoP is simply a layer which makes use of all this already-existing functionality, and makes it easily available to the application.
+
+### Success stories
+
+PoP is the foundation for the [GraphQL API for PoP](https://github.com/getpop/api-graphql), an exceptional implementation of [GraphQL](https://graphql.org) which supports features not typically supported in GraphQL: HTTP caching, nested fields, nested directives, linear complexity time to resolve queries, and native federation and decentralization, among others.
+
+In the near future, PoP will enable to [build websites](https://github.com/getpop/site) and [export them as static](https://github.com/getpop/static-site-generator).
 
 ## Install
 
-Follow the instructions for the corresponding platform:
+Follow the instructions in:
 
 - [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP)
-- Others coming soon...
+
+(Other projects coming soon...)
 <!--
 - PoP API for Laravel + WordPress (coming soon)
 - PoP site for WordPress (coming soon)
@@ -35,7 +44,7 @@ Follow the instructions for the corresponding platform:
 
 The architecture establishes the following foundations:
 
-1. Everything is a module (or component)
+1. Everything is a module (also called component)
 2. The module is its own API
 3. The API and the application use the same code
 
