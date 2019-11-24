@@ -443,8 +443,6 @@ _**Skip output if null:**_<br/>
 -->
 ## Documentation
 
-### Technical documentation
-
 Alongside the code, each repository on the [PoP organization account](https://github.com/getpop/) contains its corresponding technical documentation, in its README file.
 
 Currently, most of the technical documentation is found on these repositories:
@@ -542,7 +540,7 @@ To allow the website's service-worker.js be able to cache content coming from th
     </IfModule>
 -->
 
-### Articles concerning PoP
+## Articles concerning PoP
 
 The following articles concern how different features in PoP were implemented:
 
