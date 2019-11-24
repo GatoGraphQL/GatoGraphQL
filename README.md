@@ -544,25 +544,40 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 ### Articles concerning PoP
 
-The following articles give a step-by-step process of how many features in PoP were implemented:
+The following articles concern how different features in PoP were implemented:
 
-- [Abstracting WordPress Code To Reuse With Other CMSs: Concepts (Part 1)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-cms-concepts/): Description of the strategies used to make PoP become CMS-agnostic
-- [“Create Once, Publish Everywhere” with WordPress](https://www.smashingmagazine.com/2019/10/create-once-publish-everywhere-wordpress/)
-- [Introducing the Component-based API](https://www.smashingmagazine.com/2019/01/introducing-component-based-api/): Article describing all the main concepts of this architecture, published on Smashing Magazine.
-- [Caching Smartly In The Age Of Gutenberg](https://www.smashingmagazine.com/2018/12/caching-smartly-gutenberg/): Caching mechanism implemented in PoP, allowing to cache pages even when the user is logged-in (to be emulated for Gutenberg)
-- [Avoiding The Pitfalls Of Automatically Inlined Code](https://www.smashingmagazine.com/2018/11/pitfalls-automatically-inlined-code/): How PoP generates JS/CSS resources to improve performance
-- [Sending Emails Asynchronously Through AWS SES](https://www.smashingmagazine.com/2018/11/sending-emails-asynchronously-through-aws-ses/): Mechanism to send emails through AWS SES implemented for PoP
-- [Adding Code-Splitting Capabilities To A WordPress Website Through PoP](https://www.smashingmagazine.com/2018/02/code-splitting-wordpress-pop/): How PoP implements code-splitting of JavaScript files
-- [How To Make A Dynamic Website Become Static Through A Content CDN](https://www.smashingmagazine.com/2018/02/dynamic-website-static-content-cdn/): Mechanism implemented for PoP to route dynamic content through a CDN to improve performance
-- [Implementing A Service Worker For Single-Page App WordPress Sites](https://www.smashingmagazine.com/2017/10/service-worker-single-page-application-wordpress-sites/): The strategy behind the creation of the service-worker.js file in PoP (when running under WordPress), which powers its offline-first caching strategy
+🔗 [Introduction to the “schemaless” GraphQL](https://slides.com/leoloso/schemaless-graphql): Description of how the [GraphQL API for PoP](https://github.com/getpop/api-graphql) compares against a typical [GraphQL](https://graphql.org)
 
-## Codebase Migration
+🔗 [Demonstrating the PoP API, an implementation of GraphQL on steroids](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/): Step-by-step description of solving a complex use case using the [GraphQL API for PoP](https://github.com/getpop/api-graphql)
 
-[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
+🔗 [Abstracting WordPress Code To Reuse With Other CMSs: Concepts (Part 1)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-cms-concepts/): Description of the strategies used to make PoP become CMS-agnostic
+
+🔗 [“Create Once, Publish Everywhere” with WordPress](https://www.smashingmagazine.com/2019/10/create-once-publish-everywhere-wordpress/): How through the WordPress editor Gutenberg” a PoP application can export data to be consumed in different mediums or platforms (website, app, emails, etc)
+
+🔗 [Introducing the Component-based API](https://www.smashingmagazine.com/2019/01/introducing-component-based-api/): Article describing all the main concepts of the PoP architecture
+
+🔗 [Caching Smartly In The Age Of Gutenberg](https://www.smashingmagazine.com/2018/12/caching-smartly-gutenberg/): Caching mechanism implemented in PoP, allowing to cache pages even when the user is logged-in (to be emulated for Gutenberg)
+
+🔗 [Avoiding The Pitfalls Of Automatically Inlined Code](https://www.smashingmagazine.com/2018/11/pitfalls-automatically-inlined-code/): How PoP generates JS/CSS resources to improve performance
+
+🔗 [Sending Emails Asynchronously Through AWS SES](https://www.smashingmagazine.com/2018/11/sending-emails-asynchronously-through-aws-ses/): Mechanism to send emails through AWS SES implemented for PoP
+
+🔗 [Adding Code-Splitting Capabilities To A WordPress Website Through PoP](https://www.smashingmagazine.com/2018/02/code-splitting-wordpress-pop/): How PoP implements code-splitting of JavaScript files
+
+🔗 [How To Make A Dynamic Website Become Static Through A Content CDN](https://www.smashingmagazine.com/2018/02/dynamic-website-static-content-cdn/): Mechanism implemented for PoP to route dynamic content through a CDN to improve performance
+
+🔗 [Implementing A Service Worker For Single-Page App WordPress Sites](https://www.smashingmagazine.com/2017/10/service-worker-single-page-application-wordpress-sites/): The strategy behind the creation of the service-worker.js file in PoP (when running under WordPress), which powers its offline-first caching strategy
 
 ## 🔥 Become involved!
 
 Contributors are welcome! If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀❤️.
+
+### We are looking for help with...
+
+**Codebase Migration**
+
+[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
+
 
 <!--
 ## Want to contribute?
