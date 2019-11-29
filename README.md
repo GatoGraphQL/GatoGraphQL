@@ -584,14 +584,15 @@ The following articles concern how different features in PoP were implemented:
 
 ## 🔥 Become involved!
 
-Contributors are welcome! If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀❤️.
+Contributors are welcome! Please check [PoP in PHP](https://github.com/leoloso/PoP-PHP) to see what we need help with. If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀❤️.
 
+<!--
 ### We are looking for help with...
 
 **Codebase Migration**
 
 [PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
-
+-->
 
 <!--
 ## Want to contribute?
