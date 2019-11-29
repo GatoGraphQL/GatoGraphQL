@@ -564,7 +564,7 @@ The following articles concern how different features in PoP were implemented:
 
 🔗 [Demonstrating the PoP API, an implementation of GraphQL on steroids](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/): Step-by-step description of solving a complex use case using the [GraphQL API for PoP](https://github.com/getpop/api-graphql)
 
-🔗 [Abstracting WordPress Code To Reuse With Other CMSs: [Concepts (Part 1)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-cms-concepts/) and [Implementation (Part 2)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-reuse-with-other-cms-implementation/): Design and implementation of strategies to make PoP become CMS-agnostic
+🔗 Abstracting WordPress Code To Reuse With Other CMSs: [Concepts (Part 1)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-cms-concepts/) and [Implementation (Part 2)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-reuse-with-other-cms-implementation/): Design and implementation of strategies to make PoP become CMS-agnostic
 
 🔗 [“Create Once, Publish Everywhere” with WordPress](https://www.smashingmagazine.com/2019/10/create-once-publish-everywhere-wordpress/): How through the WordPress editor Gutenberg” a PoP application can export data to be consumed in different mediums or platforms (website, app, emails, etc)
 
