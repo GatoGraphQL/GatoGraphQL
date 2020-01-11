@@ -280,7 +280,7 @@ The configuration layer can provide those properties and values required to buil
 
 ## Success stories
 
-PoP is the foundation for the [GraphQL API for PoP](https://github.com/getpop/api-graphql), an exceptional implementation of [GraphQL](https://graphql.org) which supports features not typically supported in GraphQL: HTTP caching, nested fields, nested directives, linear complexity time to resolve queries, and native federation and decentralization, among others.
+PoP is the foundation for the [GraphQL API for PoP](https://github.com/getpop/api-graphql), an exceptional implementation of [GraphQL](https://graphql.org) which supports features not typically supported in GraphQL: HTTP caching, composable fields, composable directives, linear complexity time to resolve queries, and native federation and decentralization, among others.
 
 In the near future, PoP will enable to [build websites](https://github.com/getpop/site) and [export them as static](https://github.com/getpop/static-site-generator).
 <!--
@@ -437,10 +437,10 @@ _**Directives:**_<br/>
 [/?query=posts.id|title|url<include(if:$include)>&variables[include]=true](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url<include(if:$include)>&variables[include]=true)<br/>
 [/?query=posts.id|title|url<include(if:$include)>&variables[include]=](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|url<include(if:$include)>&variables[include]=)
 
-_**Nested fields:**_<br/>
+_**Composable fields:**_<br/>
 <a href="https://nextapi.getpop.org/api/graphql/?query=posts.if(has-comments(),sprintf(Post with title '%s' has %s comments,[title(), comments-count()]),sprintf(Post with ID %s was created on %s, [id(),date(d/m/Y)]))@postDesc">/?query=posts.if(has-comments(),sprintf(Post with title '%s' has %s comments,[title(), comments-count()]),sprintf(Post with ID %s was created on %s, [id(),date(d/m/Y)]))@postDesc</a>
 
-_**Nested fields with directives:**_<br/>
+_**Composable fields with directives:**_<br/>
 
 [/?query=posts.id|title|featuredimage<include(if:not(isNull(featuredimage())))>.id|src](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|featuredimage<include(if:not(isNull(featuredimage())))>.id|src)
 
