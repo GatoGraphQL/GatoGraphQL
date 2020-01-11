@@ -561,7 +561,7 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 The following articles concern how different features in PoP were implemented:
 
-🔗 [Iterating and improving GraphQL with PoP API](https://slides.com/leoloso/schemaless-graphql): Description of how the [GraphQL API for PoP](https://github.com/getpop/api-graphql) compares against a typical [GraphQL](https://graphql.org)
+🔗 [Intro to PoP API, a new GraphQL server in PHP](https://slides.com/leoloso/graphql): Description of how the [GraphQL API for PoP](https://github.com/getpop/api-graphql) compares against a typical [GraphQL](https://graphql.org)
 
 🔗 [Demonstrating the PoP API, an implementation of GraphQL on steroids](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/): Step-by-step description of solving a complex use case using the [GraphQL API for PoP](https://github.com/getpop/api-graphql)
 
