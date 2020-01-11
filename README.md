@@ -464,6 +464,7 @@ Currently, most of the technical documentation is found on these repositories:
 
 - [Component Model](https://github.com/getpop/component-model)<!--- [Engine](https://github.com/getpop/engine): Adds services over the component model-->
 - [Configuration for Component Model](https://github.com/getpop/component-model-configuration)
+- [GraphQL](https://github.com/getpop/graphql)
 - [GraphQL API](https://github.com/getpop/api-graphql)
 - [API](https://github.com/getpop/api)
 - [Field Query](https://github.com/getpop/field-query)
