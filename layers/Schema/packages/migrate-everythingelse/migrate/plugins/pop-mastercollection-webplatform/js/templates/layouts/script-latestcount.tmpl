@@ -1,0 +1,25 @@
+{{#with dbObject}}
+	<script type="text/javascript">
+	(function($){
+		{{! Add +1 to the number, and then unhide the prompts}}
+		var targets = $('{{latestCountTargets .}}');
+		targets.find('.pop-count').each(function() {
+
+			var count = $(this);
+			var plusone = parseInt(count.text()) + 1;
+			count.text(plusone);
+
+			// Name: either singular (View 1 new project) or plural (View 3 new projects)
+			if (plusone === 1) {
+				count.siblings('.pop-plural').addClass('hidden');
+				count.siblings('.pop-singular').removeClass('hidden');
+			}
+			else {
+				count.siblings('.pop-plural').removeClass('hidden');
+				count.siblings('.pop-singular').addClass('hidden');
+			}
+		});
+		targets.removeClass('hidden');
+	})(jQuery);
+	</script>
+{{/with}}

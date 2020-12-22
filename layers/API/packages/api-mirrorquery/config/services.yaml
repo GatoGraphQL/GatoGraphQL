@@ -1,0 +1,4 @@
+services:
+    PoP\APIMirrorQuery\DataStructureFormatters\:
+        resource: '../src/DataStructureFormatters/*'
+        public: true

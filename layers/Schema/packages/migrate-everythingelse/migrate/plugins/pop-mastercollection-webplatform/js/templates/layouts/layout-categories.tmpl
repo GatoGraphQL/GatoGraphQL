@@ -1,0 +1,7 @@
+{{#with dbObject}}
+	<div class="{{../class}}" style="{{../style}}">
+		{{#withget . ../categories-field}}
+			{{labelize . ../../classes.label}}
+		{{/withget}}
+	</div>
+{{/with}}

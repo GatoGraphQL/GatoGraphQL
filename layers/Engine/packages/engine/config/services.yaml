@@ -1,0 +1,39 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    persistent_cache:
+        class: \PoP\Engine\Cache\Cache
+        arguments:
+            $cacheItemPool: '@persistent_cache_item_pool'
+
+    memory_cache:
+        class: \PoP\Engine\Cache\Cache
+        arguments:
+            $cacheItemPool: '@memory_cache_item_pool'
+
+    PoP\ComponentModel\Engine\EngineInterface:
+        class: \PoP\Engine\Engine\Engine
+
+    PoP\Engine\ObjectModels\Root:
+        class: \PoP\Engine\ObjectModels\Root
+
+    PoP\Engine\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoP\Engine\ModuleFilters\:
+        resource: '../src/ModuleFilters/*'
+        public: false
+
+    PoP\Engine\RouteModuleProcessors\:
+        resource: '../src/RouteModuleProcessors/*'
+
+    PoP\Engine\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoP\Engine\Schema\SchemaDefinitionServiceInterface:
+        class: \PoP\Engine\Schema\SchemaDefinitionService
+
+    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
+        class: \PoP\Engine\Schema\SchemaDefinitionService

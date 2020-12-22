@@ -1,0 +1,89 @@
+parameters:
+    version: '0.1.0'
+
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    memory_cache_item_pool:
+        class: \Symfony\Component\Cache\Adapter\ArrayAdapter
+
+    persistent_cache_item_pool:
+        class: \Symfony\Component\Cache\Adapter\FilesystemAdapter
+
+    PoP\ComponentModel\Container\ObjectDictionaryInterface:
+        class: \PoP\ComponentModel\Container\ObjectDictionary
+
+    PoP\ComponentModel\Engine\EngineInterface:
+        class: \PoP\ComponentModel\Engine\Engine
+
+    PoP\ComponentModel\Engine\DataloadingEngineInterface:
+        class: \PoP\ComponentModel\Engine\DataloadingEngine
+
+    memory_cache:
+        class: \PoP\ComponentModel\Cache\Cache
+        arguments:
+            $cacheItemPool: '@memory_cache_item_pool'
+
+    PoP\ComponentModel\ModelInstance\ModelInstanceInterface:
+        class: \PoP\ComponentModel\ModelInstance\ModelInstance
+
+    PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface:
+        class: \PoP\ComponentModel\MutationResolution\MutationResolutionManager
+
+    PoP\ComponentModel\Info\ApplicationInfoInterface:
+        class: \PoP\ComponentModel\Info\ApplicationInfo
+        arguments:
+            $version: '%version%'
+
+    PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
+        class: '\PoP\ComponentModel\ModuleFiltering\ModuleFilterManager'
+
+    PoP\ComponentModel\ModuleFilters\:
+        resource: '../src/ModuleFilters/*'
+        exclude: '../src/ModuleFilters/*Interface.php'
+        public: false
+
+    PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
+        class: \PoP\ComponentModel\ModulePath\ModulePathManager
+
+    PoP\ComponentModel\DataStructure\DataStructureManagerInterface:
+        class: \PoP\ComponentModel\DataStructure\DataStructureManager
+
+    PoP\ComponentModel\ModulePath\ModulePathHelpersInterface:
+        class: \PoP\ComponentModel\ModulePath\ModulePathHelpers
+
+    PoP\ComponentModel\Instances\InstanceManagerInterface:
+        class: \PoP\ComponentModel\Instances\InstanceManager
+
+    PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface:
+        class: \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManager
+
+    PoP\ComponentModel\Registries\TypeRegistryInterface:
+        class: \PoP\ComponentModel\Registries\TypeRegistry
+
+    PoP\ComponentModel\Registries\DirectiveRegistryInterface:
+        class: \PoP\ComponentModel\Registries\DirectiveRegistry
+
+    PoP\ComponentModel\Registries\FieldInterfaceRegistryInterface:
+        class: \PoP\ComponentModel\Registries\FieldInterfaceRegistry
+
+    PoP\ComponentModel\Schema\FeedbackMessageStoreInterface:
+        class: \PoP\ComponentModel\Schema\FeedbackMessageStore
+
+    # Override the service from FieldQuery
+    PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
+        class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
+
+    PoP\ComponentModel\Schema\TypeCastingExecuterInterface:
+        class: \PoP\ComponentModel\Schema\TypeCastingExecuter
+
+    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
+        class: \PoP\ComponentModel\Schema\SchemaDefinitionService
+
+    PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface:
+        class: \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManager
+
+    PoP\ModuleRouting\RouteModuleProcessorManagerInterface:
+        class: \PoP\ComponentModel\ModuleRouting\RouteModuleProcessorManager

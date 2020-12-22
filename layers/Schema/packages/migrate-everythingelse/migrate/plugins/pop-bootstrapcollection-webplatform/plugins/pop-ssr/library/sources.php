@@ -1,0 +1,11 @@
+<?php
+
+PoP_ServerSideRenderingFactory::getInstance()->addTemplatePath(
+    POP_BOOTSTRAPCOLLECTIONWEBPLATFORM_PHPTEMPLATES_DIR,
+    array(
+        POP_TEMPLATE_ALERT,
+        POP_TEMPLATE_CAROUSEL,
+        POP_TEMPLATE_CAROUSEL_CONTROLS,
+        POP_TEMPLATE_CAROUSEL_INNER,
+    )
+);

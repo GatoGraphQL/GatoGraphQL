@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-24 14:43+0800\n"
+"PO-Revision-Date: 2016-07-24 15:06+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././initialization.php:94
+msgid "Draft"
+msgstr "Borrador"
+
+#: .././initialization.php:95
+msgid "Pending to be published"
+msgstr "Pendiente de publicación"
+
+#: .././initialization.php:96
+msgid "Published"
+msgstr "Publicado"
+
+#: .././initialization.php:102
+msgid "(None)"
+msgstr "(Nada)"
+
+#: .././initialization.php:108
+#, php-format
+msgid "<small>on</small> %s"
+msgstr "<small>el</small> %s"
+
+#: .././initialization.php:159
+msgid "Download"
+msgstr "Descargar"
+
+#: .././initialization.php:160
+msgid "Set Featured Image"
+msgstr "Establecer la image destacada"
+
+#: .././initialization.php:161
+msgid "Set"
+msgstr "Establecer"
+
+#: .././initialization.php:175
+msgid "more..."
+msgstr "más…"
+
+#: .././initialization.php:176
+msgid "less..."
+msgstr "menos…"
+
+#: .././validation.php:32
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:37
+msgid ""
+"Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without "
+"it, <b>PoP Frontend</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP—Platform of Platforms</b> is not installed/activated. Without "
+"it, <b>PoP Frontend</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."
+
+#: .././validation.php:43
+#, php-format
+msgid ""
+"Error: this version of <b>PoP Frontend</b> requires version %s or bigger of "
+"<b>PoP—Platform of Platforms</b>. Please update this plugin from your plugin "
+"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
+"\">from here</a>."
+msgstr ""
+"Error: this version of <b>PoP Frontend</b> requires version %s or bigger of "
+"<b>PoP—Platform of Platforms</b>. Please update this plugin from your plugin "
+"installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."

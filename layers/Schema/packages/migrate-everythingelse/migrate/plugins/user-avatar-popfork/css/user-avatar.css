@@ -1,0 +1,117 @@
+/*
+Plugin Name: User Avatar
+Plugin URI: http://wordpress.org/extend/plugins/user-avatar/
+Description: Allows users to associate photos with their accounts by accessing their "Your Profile" page that default as Gravatar or WordPress Default image (from Discussion Page). 
+Version: 1.2.1
+Author: Enej Bajgoric / Gagan Sandhu / CTLT DEV
+
+
+GNU General Public License, Free Software Foundation <http://creativecommons.org/licenses/GPL/2.0/>
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+#user-avatar-step1{
+	float:left;
+	margin-top: 15px;
+	margin-left:-200px;
+}
+#testWrap{
+	position: relative; 
+	width:400px; 
+	float:left;
+}
+#user-avatar-preview{
+	float:right; 
+	width:200px;
+}
+#step1-image{
+	float:left;
+	margin: 15px 0px 0px 15px;
+}
+.folded #user-avatar-display{
+	left:750px;
+}
+#user-avatar-display{
+	position: absolute;
+	top:100px;
+	right: 10%;
+	left:900px;
+	text-align: center;	
+	padding: 0 10px 10px; 
+	width: 170px;
+	background: #EEE;
+		-moz-border-radius: 6px; /* FF1+ */
+  -webkit-border-radius: 6px; /* Saf3-4, iOS 1+, Android 1.5+ */
+          border-radius: 6px; /* Opera 10.5, IE9, Saf5, Chrome, FF4 */
+}
+
+@media all and (max-width: 1104px) {
+  #user-avatar-display {
+   left: auto;
+   right:0;
+   
+  }
+}
+
+@media all and (max-width: 930px) {
+ .folded #user-avatar-display {
+   left: auto;
+   right:0;
+   
+  }
+}
+
+#user-avatar-display h3{
+	margin-bottom: 0;
+	margin-top: 5px;
+    text-shadow: 0 1px 0 #FFFFFF;
+    text-align: left;
+    font-size: 12px;
+
+}
+#user-avatar-display-image{
+	border:3px solid #E3E3E3;
+	background: #FFF;
+	padding: 8px;
+	width: 150px;
+	margin-top:2px;
+	border:1px solid #E3E3E3;
+	-moz-border-radius: 6px; /* FF1+ */
+  -webkit-border-radius: 6px; /* Saf3-4, iOS 1+, Android 1.5+ */
+          border-radius: 6px; /* Opera 10.5, IE9, Saf5, Chrome, FF4 */	
+}
+#user-avatar-link{
+	user-avatar-remove
+}
+#user-avatar-remove{
+	font-size: 11px;
+
+}
+#uploadForm{
+	margin-left:230px;
+}
+#iframe-crop-form{
+	margin-left:15px;
+}
+#user-avatar-step3{
+	margin-left:15px;
+}
+#user-avatar-step3-close{
+	float:left;
+	margin-top: 15px;
+	clear:both;
+}
+
+/* --- END OF FILE --- */

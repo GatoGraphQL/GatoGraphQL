@@ -1,0 +1,55 @@
+{
+    "name": "getpop/function-fields",
+    "type": "library",
+    "description": "Set of function global fields",
+    "keywords": [
+        "PoP",
+        "function-fields"
+    ],
+    "homepage": "https://github.com/getpop/function-fields",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "getpop/engine": "dev-master"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.8.17",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoP\\FunctionFields\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoP\\FunctionFields\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse -c phpstan.neon.dist",
+        "downgrade-code": "rector process --dry-run --ansi"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

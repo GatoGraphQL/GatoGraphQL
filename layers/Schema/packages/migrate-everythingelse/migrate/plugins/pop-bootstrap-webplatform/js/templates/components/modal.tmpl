@@ -1,0 +1,18 @@
+{{#if submoduleoutputnames.inners}}
+	<div {{#generateId}}{{id}}{{/generateId}} role="dialog" class="modal {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}} aria-hidden="true" aria-labelledby="{{lastGeneratedId}}">	
+		<div class="pop-modaldialog modal-dialog {{classes.dialog}}" style="{{styles.dialog}}">
+			<div class="pop-modalcontent modal-content">
+				<div class="modal-header">
+					<button {{#generateId group='close'}}{{id}}{{/generateId}} type="button" class="close close-lg" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="pop-modalbody {{classes.body}}" style="{{styles.body}}">
+					{{#each submoduleoutputnames.inners}}
+						{{#withModule ../. this}}
+							{{enterModule ../../.}}
+						{{/withModule}}
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+{{/if}}

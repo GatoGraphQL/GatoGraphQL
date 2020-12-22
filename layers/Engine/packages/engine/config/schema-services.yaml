@@ -1,0 +1,16 @@
+services:
+    PoP\Engine\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoP\Engine\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true
+
+    PoP\Engine\TypeResolverDecorators\:
+        resource: '../src/TypeResolverDecorators/*'
+        public: true
+
+    PoP\Engine\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true

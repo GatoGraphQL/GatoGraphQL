@@ -1,0 +1,32 @@
+{
+    "name": "getpop/migrate-api",
+    "type": "library",
+    "description": "(Temporary package) Migrate code to package https://github.com/getpop/api",
+    "keywords": [
+        "PoP",
+        "api"
+    ],
+    "homepage": "https://github.com/getpop/migrate-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "getpop/engine": "dev-master"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

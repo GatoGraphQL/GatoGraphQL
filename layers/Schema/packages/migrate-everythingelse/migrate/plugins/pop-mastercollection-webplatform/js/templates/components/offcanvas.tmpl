@@ -1,0 +1,18 @@
+<{{html-tag}} {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="{{classes.wrapper}}" style="{{styles.wrapper}}">
+		{{#if add-closebutton}}
+			<div class="clearfix">
+				<a {{#generateId group='close'}}{{id}}{{/generateId}} href="#" class="{{classes.closebutton}}" style="{{styles.closebutton}}" title="{{titles.closebutton}}" data-target="#{{lastGeneratedId}}" data-toggle="offcanvas-close">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+			</div>
+		{{/if}}
+		<div class="{{classes.content}}" style="{{styles.content}}">
+			{{#each submoduleoutputnames.elements}}
+				{{#withModule ../. this}}
+					{{enterModule ../../.}}
+				{{/withModule}}
+			{{/each}}
+		</div>
+	</div>
+</{{html-tag}}>

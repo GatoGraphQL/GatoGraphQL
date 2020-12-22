@@ -1,0 +1,4 @@
+services:
+    PoPSchema\Comments\Conditional\Users\FieldResolvers\:
+        resource: '../../../src/Conditional/Users/FieldResolvers/*'
+        public: true

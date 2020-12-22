@@ -1,0 +1,14 @@
+{{#withModule . "map-div"}}
+	{{enterModule ../.}}
+{{/withModule}}
+{{#with dbObject}}
+	{{#withModule ../. "map-script-resetmarkers"}}
+		{{enterModule ../../.}}
+	{{/withModule}}
+	{{#withModule ../. "map-script"}}
+		{{enterModule ../../.}}
+	{{/withModule}}
+	{{#withModule ../. "map-script-drawmarkers"}}
+		{{enterModule ../../.}}
+	{{/withModule}}
+{{/with}}

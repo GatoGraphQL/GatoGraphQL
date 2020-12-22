@@ -1,0 +1,67 @@
+<?php
+
+define('GD_SIDEBARSECTION_EVENT', 'event');
+define('GD_SIDEBARSECTION_PASTEVENT', 'pastevent');
+
+define('GD_COMPACTSIDEBARSECTION_EVENT', 'compact-event');
+define('GD_COMPACTSIDEBARSECTION_PASTEVENT', 'compact-pastevent');
+
+class EM_FullViewSidebarSettings
+{
+    public static function getSidebarSubmodules($section)
+    {
+        $ret = array();
+
+        switch ($section) {
+            case GD_SIDEBARSECTION_EVENT:
+                $ret[] = [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE];
+                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_POSTSOCIALMEDIA_POSTWRAPPER];
+                // Only if the Volunteering is enabled
+                if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
+                    $ret[] = [PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::class, PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG];
+                }
+                if (PoP_ApplicationProcessors_Utils::addCategoriesToWidget()) {
+                    $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, PoP_Module_Processor_CustomPostWidgets::MODULE_WIDGET_CATEGORIES];
+                }
+                if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
+                    $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, PoP_Module_Processor_CustomPostWidgets::MODULE_WIDGET_APPLIESTO];
+                }
+                $ret[] = [GD_EM_Module_Processor_SidebarComponents::class, GD_EM_Module_Processor_SidebarComponents::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS];
+                $ret[] = [PoP_Locations_Module_Processor_SidebarComponents::class, PoP_Locations_Module_Processor_SidebarComponents::MODULE_EM_WIDGET_POSTLOCATIONSMAP];
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_POST_AUTHORS];
+                break;
+
+            case GD_SIDEBARSECTION_PASTEVENT:
+                $ret[] = [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE];
+                $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_POSTSOCIALMEDIA_POSTWRAPPER];
+                if (PoP_ApplicationProcessors_Utils::addCategoriesToWidget()) {
+                    $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, PoP_Module_Processor_CustomPostWidgets::MODULE_WIDGET_CATEGORIES];
+                }
+                if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
+                    $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, PoP_Module_Processor_CustomPostWidgets::MODULE_WIDGET_APPLIESTO];
+                }
+                $ret[] = [GD_EM_Module_Processor_SidebarComponents::class, GD_EM_Module_Processor_SidebarComponents::MODULE_EM_WIDGET_DATETIME];
+                $ret[] = [PoP_Locations_Module_Processor_SidebarComponents::class, PoP_Locations_Module_Processor_SidebarComponents::MODULE_EM_WIDGET_POSTLOCATIONSMAP];
+                $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_POST_AUTHORS];
+                break;
+
+
+            case GD_COMPACTSIDEBARSECTION_EVENT:
+                // Only if the Volunteering is enabled
+                if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
+                    $ret[] = [PoP_Module_Processor_CustomPostMultipleSidebarComponents::class, PoP_Module_Processor_CustomPostMultipleSidebarComponents::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER];
+                } else {
+                    $ret[] = [PoP_Module_Processor_CustomPostMultipleSidebarComponents::class, PoP_Module_Processor_CustomPostMultipleSidebarComponents::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE];
+                }
+                $ret[] = [GD_EM_Module_Processor_PostMultipleSidebarComponents::class, GD_EM_Module_Processor_PostMultipleSidebarComponents::MODULE_SIDEBARMULTICOMPONENT_EVENT];
+                break;
+
+            case GD_COMPACTSIDEBARSECTION_PASTEVENT:
+                $ret[] = [PoP_Module_Processor_CustomPostMultipleSidebarComponents::class, PoP_Module_Processor_CustomPostMultipleSidebarComponents::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE];
+                $ret[] = [GD_EM_Module_Processor_PostMultipleSidebarComponents::class, GD_EM_Module_Processor_PostMultipleSidebarComponents::MODULE_SIDEBARMULTICOMPONENT_PASTEVENT];
+                break;
+        }
+        
+        return $ret;
+    }
+}

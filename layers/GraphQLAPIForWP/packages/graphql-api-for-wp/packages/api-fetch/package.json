@@ -1,0 +1,33 @@
+{
+  "name": "@graphqlapi/api-fetch",
+  "version": "0.1.0",
+  "description": "Fetch data from the server through the GraphQL API",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GraphQLAPI/graphql-api.git",
+    "directory": "packages/api-fetch"
+  },
+  "keywords": [
+    "GraphQL",
+    "API",
+    "WordPress",
+    "Fetch",
+    "Query"
+  ],
+  "author": "Leonardo Losoviz",
+  "license": "MIT",
+  "main": "build/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format:js": "wp-scripts format-js",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^12.1.0",
+    "graphql-request": "^1.8.2"
+  }
+}

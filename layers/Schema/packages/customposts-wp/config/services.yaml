@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+
+    PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
+        class: \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
+

@@ -1,0 +1,65 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="pop-post-{{id}} post-layout fullview {{../class}} {{#each cat-slugs}} {{.}}{{/each}}" style="{{../style}}">
+		<div class="wrapper {{../classes.wrapper}}" style="{{../styles.wrapper}}">
+			{{#compare ../title-position "top"}}
+				{{#withModule ../. "title"}}
+					{{enterModule ../../.}}
+				{{/withModule}}
+			{{/compare}}
+			<div class="{{../classes.inner-wrapper}}" style="{{../styles.inner-wrapper}}">
+				{{#withModule ../. "sidebar"}}
+					<div class="sidebar topsidebar {{../../classes.sidebar}}" style="{{../../styles.sidebar}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
+					{{#if ../submoduleoutputnames.headers}}
+						<div class="headers {{../classes.headers}}" style="{{../styles.headers}}">
+							{{#each ../submoduleoutputnames.headers}}
+								{{#withModule ../../. this}}
+									<div class="header {{../../../classes.header}}" style="{{../../../styles.header}}">
+										{{enterModule ../../../.}}
+									</div>
+								{{/withModule}}
+							{{/each}}
+						</div>
+					{{/if}}
+					{{#compare ../title-position "body"}}
+						{{#withModule ../. "title"}}
+							{{enterModule ../../.}}
+						{{/withModule}}
+					{{/compare}}
+					<div class="content pop-content {{../classes.content}} clearfix" style="{{../styles.content}}">
+						{{#if ../submoduleoutputnames.abovecontent}}
+							<div class="abovecontent {{../classes.abovecontent}}" style="{{../styles.abovecontent}}">
+								{{#each ../submoduleoutputnames.abovecontent}}
+									{{#withModule ../../. this}}
+										{{enterModule ../../../.}}
+									{{/withModule}}
+								{{/each}}
+							</div>
+						{{/if}}
+						<div class="{{../classes.content-inner}}" style="{{../styles.content-inner}}">
+							{{#each ../submoduleoutputnames.content}}
+								{{#withModule ../../. this}}
+									{{enterModule ../../../.}}
+								{{/withModule}}
+							{{/each}}
+						</div>
+					</div>	
+					{{#if ../submoduleoutputnames.footers}}
+						<div class="footers {{../classes.footers}}" style="{{../styles.footers}}">
+							{{#each ../submoduleoutputnames.footers}}
+								{{#withModule ../../. this}}
+									<div class="footer {{../../../classes.footer}}" style="{{../../../styles.footer}}">
+										{{enterModule ../../../.}}
+									</div>
+								{{/withModule}}
+							{{/each}}
+						</div>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+{{/with}}

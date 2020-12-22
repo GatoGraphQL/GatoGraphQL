@@ -1,0 +1,48 @@
+
+body.non-scrollable .pop-block.pop-functionalblock .dataload-feedbackmessage {
+	z-index: 650; /* Below 'hover' pagesection (for if clicking on "login" in the feedbackmessage) */
+	position: relative;
+	float: right;
+}
+@media (min-width: 768px) {
+	body.non-scrollable .pop-block.pop-functionalblock .dataload-feedbackmessage {
+		max-width: 33%;
+	}
+}
+@media (min-width: 992px) {
+	body.non-scrollable .pop-block.pop-functionalblock .dataload-feedbackmessage {
+		max-width: 25%;
+	}
+}
+.pop-block.pop-functionalblock .dataload-feedbackmessage .alert {
+	/* Put only a tiny bit of spacing between the multiple feedbackmessages */
+	margin-bottom: 2px;
+}
+
+/* Make the feedbackmessage alerts have a slight transparency */
+.pop-block.pop-functionalblock .dataload-feedbackmessage .alert {
+	-webkit-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+}
+.pop-block.pop-functionalblock > .dataload-feedbackmessage .alert.alert-success {
+	background-color: rgb(223, 240, 216);
+	background-color: rgba(223, 240, 216, 0.85); /* #dff0d8 */
+}
+.pop-block.pop-functionalblock > .dataload-feedbackmessage .alert.alert-warning {
+	background-color: rgb(252, 248, 227);
+	background-color: rgba(252, 248, 227, 0.85); /* #fcf8e3 */
+}
+.pop-block.pop-functionalblock > .dataload-feedbackmessage .alert.alert-danger {
+	background-color: rgb(242, 222, 222);
+	background-color: rgba(242, 222, 222, 0.85); /* #f2dede */
+}
+.pop-block.pop-functionalblock > .dataload-feedbackmessage .alert.alert-success.hover {
+	background-color: #dff0d8;
+}
+.pop-block.pop-functionalblock > .dataload-feedbackmessage .alert.alert-warning.hover {
+	background-color: #fcf8e3;
+}
+.pop-block.pop-functionalblock > .dataload-feedbackmessage .alert.alert-danger.hover {
+	background-color: #f2dede;
+}

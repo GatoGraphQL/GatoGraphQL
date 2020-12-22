@@ -1,0 +1,14 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="js-dynamic-height {{../class}}" style="{{../style}}" data-maxheight="{{../maxheight}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+		<div class="inner dynamic-height-wrap">
+			{{#each ../submoduleoutputnames.inners}}
+				{{#withModule ../../. this}}
+					{{enterModule ../../../.}}
+				{{/withModule}}
+			{{/each}}
+		</div>
+		<div class="dynamicbtn-wrapper">
+			<button class="js-dynamic-show-hide button {{../classes.btn}}" style="{{../styles.btn}}" title="{{../titles.more}}" data-replace-text="{{../titles.less}}">{{../titles.more}}</button>
+		</div>
+	</div>
+{{/with}}

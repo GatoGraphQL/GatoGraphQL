@@ -1,0 +1,12 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}} row" style="{{style}}">
+	<div class="col-sm-4">
+		{{#withModule . "form-createlocation"}}
+			{{enterModule ../.}}
+		{{/withModule}}
+	</div>
+	<div class="col-sm-8">
+		{{#withModule . "map-div"}}
+			{{enterModule ../.}}
+		{{/withModule}}
+	</div>
+</div>

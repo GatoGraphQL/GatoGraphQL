@@ -1,0 +1,24 @@
+<div class="sidebar-widget {{classes.widget}} {{class}}" style="{{style}} {{styles.widget}}" {{#generateId}}{{id}}{{/generateId}}>
+	{{#if show-header}}
+		<div class="{{classes.title-wrapper}} clearfix" style="{{styles.title-wrapper}}">
+			{{#withModule . "quicklinkgroup"}}
+				<div class="quicklinkgroup {{../classes.quicklinkgroup}}" style="{{../styles.quicklinkgroup}}">
+					{{enterModule ../.}}
+				</div>
+			{{/withModule}}
+			{{#if collapsible}}
+				<a href="#{{lastGeneratedId}}-body" data-toggle="collapse" class="{{classes.collapse-link}}" style="{{styles.collapse-link}}">{{{titles.collapse-link}}}</a>
+			{{/if}}
+			<{{title-htmltag}} class="sidebar-title {{classes.title}}" style="{{styles.title}}">
+				{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{menu-title}}}
+			</{{title-htmltag}}>
+		</div>
+	{{/if}}
+	<div class="{{classes.body}} {{#with collapsible}}collapse {{class}}{{/with}}" style="{{styles.body}}" id="{{lastGeneratedId}}-body">
+		{{#each submoduleoutputnames.layouts}}
+			{{#withModule ../. this}}
+				{{enterModule ../../.}}
+			{{/withModule}}
+		{{/each}}
+	</div>
+</div>

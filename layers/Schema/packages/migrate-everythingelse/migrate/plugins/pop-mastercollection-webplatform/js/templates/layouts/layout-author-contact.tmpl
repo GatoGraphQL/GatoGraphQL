@@ -1,0 +1,9 @@
+{{#with dbObject}}
+	{{#each contact}}
+		<div class="{{../../class}}" style="{{../../style}}">
+			<a href="{{url}}" target="{{target}}" title="{{tooltip}}" class="contact-item">
+				<i class="fa {{fontawesome}} fa-lg fa-fw"></i>{{text}}
+			</a>
+		</div>
+	{{/each}}
+{{/with}}

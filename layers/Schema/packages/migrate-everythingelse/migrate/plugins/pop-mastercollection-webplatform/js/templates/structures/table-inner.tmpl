@@ -1,0 +1,11 @@
+{{#each dbObjectIDs}}
+	<tr class="pop-structureinner">
+		{{#each ../submoduleoutputnames.layouts}}
+			{{#withModule ../../. this}}
+				<td>
+					{{enterModule ../../../. dbKey=../../../dbKey dbObjectID=../../.}}
+				</td>
+			{{/withModule}}
+		{{/each}}
+	</tr>
+{{/each}}

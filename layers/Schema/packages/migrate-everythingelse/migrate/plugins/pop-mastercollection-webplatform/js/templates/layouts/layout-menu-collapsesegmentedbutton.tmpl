@@ -1,0 +1,69 @@
+<div class="{{class}}" style="{{style}}" {{#generateId}}{{id}}{{/generateId}}>
+</div>
+
+<script type="text/javascript">
+(function($){
+
+	var item = '', submenus = {};
+	{{#each dbObject.items}}
+		
+		{{!Check if the menu item has a parent, if so add below it, if not, add under the menu}}
+		{{#compare menu-item-parent 0 operator=">"}}		
+			if (!submenus['menu-item-{{menu-item-parent}}']) {
+				submenus['menu-item-{{menu-item-parent}}'] = [];
+			}
+
+			{{! Using alt instead of title because title includes the fontawesome icons html}}
+			{{#compare title "divider"}}
+				item = '<hr />';
+			{{else}}
+				item = '<div class="{{#if ../submoduleoutputnames.dropdownsegmentedbuttons}}input-group{{else}}input-unique{{/if}} child">';
+				item += '<a id="menu-item-{{id}}" href="{{url}}" title="{{alt}}" class="form-control {{../classes.btn}} {{classes}}" style="{{../styles.btn}}">';
+				item += unescapeHtml('{{title}}');
+				item += '</a>';
+
+				{{#if ../submoduleoutputnames.dropdownsegmentedbuttons}}
+					item += '<div class="input-group-btn">';
+					{{#each ../submoduleoutputnames.dropdownsegmentedbuttons}}
+						{{#withModule ../../. this}}
+							item += '{{enterModule ../../../.}}';
+						{{/withModule}}
+					{{/each}}
+					item += '</div>';
+				{{/if}}
+
+				item += '</div>';
+			{{/compare}}
+			submenus['menu-item-{{menu-item-parent}}'].push(item);
+		{{else}}
+			{{#compare title "divider"}}
+				item = '<hr />';
+			{{else}}
+				item = '<div class="input-block" id="menu-item-{{id}}"><div class="input-group parent">';
+				item += 	'<a href="{{url}}" class="form-control {{../classes.btn}} {{classes}}" style="{{../styles.btn}}" title="{{alt}}">';
+				item += unescapeHtml('{{title}}');
+				item += '</a>';
+				item += 	'<div class="input-group-btn">';
+				{{#each ../submoduleoutputnames.segmentedbuttons}}
+					{{#withModule ../../. this}}
+						item += '{{enterModule ../../../.}}';
+					{{/withModule}}
+				{{/each}}
+				item += 	'</div>';
+				item += '</div></div>';
+			{{/compare}}
+
+			$('#{{lastGeneratedId context=../.}}').append(item);
+		{{/compare}}
+	{{/each}}
+
+	{{!Iterate all submenus and add them under the corresponding parent}}
+	$.each(submenus, function(key, value) {
+		$('#'+key).children('div.input-group').children('div.input-group-btn')
+			.prepend($('<a href="#'+key+'-collapse" role="button" class="{{classes.btn}}" style="{{styles.btn}}" data-toggle="collapse"><i class="fa fa-fw fa-caret-down"></i><span class="sr-only">{{titles.toggle}}</span></a>'));
+		$('#'+key)
+			.append($('<div id="'+key+'-collapse" class="submenu collapse {{classes.collapse}}" style="{{styles.collapse}}" role="menu">'+value.join('')+'</div>'));
+	});
+
+})(jQuery);
+</script>

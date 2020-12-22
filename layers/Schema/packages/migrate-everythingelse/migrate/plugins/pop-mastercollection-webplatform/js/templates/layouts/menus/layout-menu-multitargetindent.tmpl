@@ -1,0 +1,14 @@
+<ul class="nav {{class}}" style="{{style}}" role="menu" {{#generateId}}{{id}}{{/generateId}}>
+	{{#each dbObject.items}}
+		<li id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{classes}}'>
+			{{#compare title "divider"}}
+				<hr />
+			{{else}}
+				{{#each ../targets}}
+					<a href="{{../url}}" class="pop-multitarget-link pop-multitarget-link-{{@index}} {{../../classes.multitarget}}" style="{{../../styles.multitarget}}" {{#if ../../titles.tooltip}} title="{{../../titles.tooltip}}" {{#generateId context=../../. group='tooltip'}}{{../../../id}}-{{../../id}}{{/generateId}} {{/if}} target="{{@key}}">{{{this}}}</a>
+				{{/each}}
+				<a href="{{url}}" title="{{alt}}" {{{additional-attrs}}}>{{{title}}}</a>
+			{{/compare}}
+		</li>
+	{{/each}}
+</ul>

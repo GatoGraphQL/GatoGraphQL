@@ -1,0 +1,27 @@
+<div class="featuredimage-container pull-left" {{#generateId}}{{id}}{{/generateId}}>
+	<a {{#generateId group='set'}}{{id}}{{/generateId}} href="#" class="visible-loggedin-{{tls.domain-id}}">
+		{{#if (formcomponentValue value dbObject dbobject-field default-value)}}
+			<img src="{{formcomponentValue value dbObject fields.featuredimage-attrs default-value subfields=subfields.featuredimage-attrs.src}}" width="{{formcomponentValue value dbObject fields.featuredimage-attrs default-value subfields=subfields.featuredimage-attrs.width}}" height="{{formcomponentValue value dbObject fields.featuredimage-attrs default-value subfields=subfields.featuredimage-attrs.height}}" class="{{classes.img}}" style="{{styles.img}}">
+		{{else}}
+			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}" style="{{styles.img}}">
+		{{/if}}
+	</a>
+	<span class="visible-notloggedin-{{tls.domain-id}}">
+		{{#if (formcomponentValue value dbObject dbobject-field default-value)}}
+			<img src="{{formcomponentValue value dbObject fields.featuredimage-attrs default-value subfields=subfields.featuredimage-attrs.src}}" width="{{formcomponentValue value dbObject fields.featuredimage-attrs default-value subfields=subfields.featuredimage-attrs.width}}" height="{{formcomponentValue value dbObject fields.featuredimage-attrs default-value subfields=subfields.featuredimage-attrs.height}}" class="{{classes.img}}" style="{{styles.img}}">
+		{{else}}
+			<img src="{{default-img.src}}" width="{{default-img.width}}" height="{{default-img.height}}" class="{{classes.img}}" style="{{styles.img}}">
+		{{/if}}
+	</span>
+	<div class="{{classes.options}} visible-loggedin-{{tls.domain-id}}" style="{{styles.options}}">
+		<a {{#generateId group='set'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn set {{classes.set-btn}}" style="{{styles.set-btn}}"><span class="glyphicon glyphicon-upload"></span> {{titles.btn-add}}</a>
+		{{#if (formcomponentValue value dbObject dbobject-field default-value)}}
+			<a {{#generateId group='remove'}}{{id}}{{/generateId}} href="#" class="loggedin-btn pop-featuredimage-btn remove {{classes.remove-btn}}" style="{{styles.remove-btn}}"><span class="glyphicon glyphicon-remove-sign"></span> {{titles.btn-remove}}</a>
+		{{/if}}
+	</div>
+	<div class="{{classes.options}} visible-notloggedin-{{tls.domain-id}}" style="{{styles.options}}">
+		{{{titles.usernotloggedin}}}
+	</div>
+</div>
+<input type="hidden" value="{{formcomponentValue value dbObject dbobject-field default-value}}" name="{{name}}" id="{{lastGeneratedId}}-{{name}}" class="form-control">
+<div class="clearfix"></div>

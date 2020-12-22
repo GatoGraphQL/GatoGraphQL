@@ -1,0 +1,60 @@
+{
+    "name": "pop-schema/custompostmedia-wp",
+    "type": "library",
+    "description": "Implementation for WordPress of contracts from package \"Custom Post Media\"",
+    "keywords": [
+        "PoP",
+        "custompostmedia-wp"
+    ],
+    "homepage": "https://github.com/PoPSchema/custompostmedia-wp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "pop-schema/custompostmedia": "dev-master",
+        "pop-schema/customposts-wp": "dev-master",
+        "pop-schema/media-wp": "dev-master",
+        "pop-schema/migrate-custompostmedia-wp": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.8.17",
+        "squizlabs/php_codesniffer": "^3.0",
+        "szepeviktor/phpstan-wordpress": "^0.6.2",
+        "johnpbloch/wordpress": ">=5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPSchema\\CustomPostMediaWP\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPSchema\\CustomPostMediaWP\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse -c phpstan.neon.dist",
+        "downgrade-code": "rector process --dry-run --ansi"
+    },
+    "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

@@ -1,0 +1,25 @@
+<div class="{{classes.dropdown-btn}} {{class}}" style="{{styles.dropdown-btn}}{{style}}" {{#generateId}}{{id}}{{/generateId}}>
+	<button type="button" class="{{classes.btn}} dropdown-toggle" style="{{styles.btn}}" data-toggle="dropdown" aria-expanded="false">
+		{{{titles.btn}}}
+	</button>
+	{{#if inner-list}}
+		<div class="dropdown-menu"><ul class="{{classes.dropdown-menu}}" style="{{styles.dropdown-menu}}" role="menu">
+	{{else}}
+		<ul class="dropdown-menu {{classes.dropdown-menu}}" style="{{styles.dropdown-menu}}" role="menu">
+	{{/if}}
+		{{#each dbObject.items}}
+			<li id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{../classes.item}} {{classes}}' style="{{../styles.item}}">
+				{{#compare title "divider"}}
+					<hr />
+				{{else}}
+					{{! Using alt instead of title because title includes the fontawesome icons html}}
+					<a href="{{url}}" title="{{alt}}" {{{additional-attrs}}}>{{{title}}}</a>
+				{{/compare}}
+			</li>
+		{{/each}}
+	{{#if inner-list}}
+		</ul></div>
+	{{else}}
+		</ul>
+	{{/if}}
+</div>

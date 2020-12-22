@@ -1,0 +1,4 @@
+services:
+    PoPSchema\HighlightsWP\TypeResolverPickers\:
+        resource: '../src/TypeResolverPickers/*'
+        public: true

@@ -1,0 +1,31 @@
+{{#each o.files}}
+    <div class="module-download fade">
+		{{#if error}}
+            <div class="error">
+            	<span class="label label-danger">{{error}}</span>
+            </div>
+        {{else}}
+        	<div class="preview">
+        		<div class="row">
+					<div class="col-sm-4 col-md-3">
+						<label>{{../titles.avatar}}</label>
+						<a href="{{thumbUrl}}" rel="{{../image-rel}}" title="{{../titles.avatar}}">
+							<img class="thumbnail img-responsive" src="{{thumbUrl}}" width="{{thumbSize}}" height="{{thumbSize}}">
+						</a>
+					</div>
+					<div class="col-sm-8 col-md-9">
+						<label>{{../titles.photo}}</label>
+						<a href="{{photoUrl}}" rel="{{../image-rel}}" title="{{../titles.photo}}">
+							<img class="img-responsive" src="{{photoUrl}}" width="{{photoWidth}}" height="{{photoHeight}}">
+						</a>
+					</div>
+				</div>
+			</div>
+        {{/if}}
+		<div class="delete clearfix" style="padding-top: 5px;">
+			<button class="btn btn-danger delete" data-type="{{deleteType}}" data-url="{{deleteUrl}}">
+				<span class="glyphicon glyphicon-trash"></span> {{../titles.destroy}}
+			</button>
+		</div>
+    </div>
+{{/each}}

@@ -1,0 +1,15 @@
+{{#withModule . "map-script-resetmarkers"}}
+	{{enterModule ../.}}
+{{/withModule}}
+
+{{#each dbObjectIDs}}
+	{{#each ../submoduleoutputnames.layouts}}
+		{{#withModule ../../. this}}
+			{{enterModule ../../../. dbKey=../../../dbKey dbObjectID=../../.}}
+		{{/withModule}}
+	{{/each}}
+{{/each}}
+
+{{#withModule . "map-script-drawmarkers"}}
+	{{enterModule ../.}}
+{{/withModule}}

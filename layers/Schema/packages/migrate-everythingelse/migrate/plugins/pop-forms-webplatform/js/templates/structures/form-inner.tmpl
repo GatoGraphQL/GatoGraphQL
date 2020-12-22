@@ -1,0 +1,5 @@
+{{#each submoduleoutputnames.layouts}}
+	{{#withModule ../. this}}
+		{{enterModule ../../. dbKey=../../dbKey dbObjectID=../../dbObjectIDs}}
+	{{/withModule}}
+{{/each}}

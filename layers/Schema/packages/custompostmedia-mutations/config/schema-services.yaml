@@ -1,0 +1,4 @@
+services:
+    PoPSchema\CustomPostMediaMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true

@@ -1,0 +1,4 @@
+services:
+    PoPSchema\UserStateMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true

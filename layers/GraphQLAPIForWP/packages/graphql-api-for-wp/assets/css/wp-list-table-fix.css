@@ -1,0 +1,24 @@
+/**
+ * Fix issues in styles from the WP_List_Table
+ * Viewing a table with less than 782px looks really bad, it's buggy.
+ */
+@media screen and (max-width: 782px) {
+    .wp-list-table tr:not(.inline-edit-row):not(.no-items) td:not(.column-primary)::before {
+        /**
+        * Do not have the title be placed on top of the content
+        */
+        position: static;
+    }
+
+    /* Make row actions more easy to select on mobile */
+    body:not(.plugins-php) .row-actions {
+        /**
+        * Override grid
+        */
+        display: block;
+        /**
+        * Show always
+        */
+        position: static;
+    }
+}

@@ -1,0 +1,36 @@
+
+.preview.notification-layout .quicklinkgroup-bottom + .extra {
+	margin-top: 0;
+}
+.preview.notification-layout .quicklinkgroup-bottom > .controls > .btn-group {
+	margin-top: -5px; /* Show the buttons at same height of message, and avoid jumping the time below the message when doing on hover and the buttons show up */
+}
+.preview.notification-layout .media {
+	margin-top: 0;
+}
+.layout.preview.notification-layout .extra-inner {
+	margin-bottom: 0;
+}
+/* The last 2 items in the notifications are always the "icon" and the "time ago". Make these 2 in the same line */
+.layout.preview.notification-layout .extra-inner:last-child,
+.layout.preview.notification-layout .extra-inner:nth-last-child(2) {
+	display: inline-block;
+	color: #5a5a5b;
+}
+#ps-top .layout.preview.notification-layout .extra-inner:last-child,
+#ps-top .layout.preview.notification-layout .extra-inner:nth-last-child(2) {
+	color: #eee;
+}
+.layout.preview.notification-layout .extra-inner {
+	margin-bottom: 0;
+}
+.layout.preview.notification-layout .btn.btn-xs {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.layout.preview.notification-layout .pop-usermembership > .item {
+	margin-right: 5px;
+}
+.layout.preview.notification-layout .pop-usermembership > .item:last-child {
+	margin-right: 0;
+}

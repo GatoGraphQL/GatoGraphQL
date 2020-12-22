@@ -1,0 +1,15 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}" {{#if max-selected}}data-max-selected="{{max-selected}}"{{/if}} {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="pop-operation {{classes.input}}" style="{{styles.input}}">
+		{{#withModule . "input"}}
+			{{enterModule ../.}}
+		{{/withModule}}
+	</div>
+	<div class="pop-trigger {{classes.trigger}}" style="{{styles.trigger}}">
+		{{#withModule . "trigger-layout"}}
+			{{enterModule ../.}}
+		{{/withModule}}
+	</div>
+	{{#each templates.extras}}
+		{{enterTemplate . context=../.}}
+	{{/each}}
+</div>

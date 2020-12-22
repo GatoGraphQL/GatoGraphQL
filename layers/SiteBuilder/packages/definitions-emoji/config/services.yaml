@@ -1,0 +1,4 @@
+services:
+    emoji_definition_resolver:
+        class: \PoP\EmojiDefinitions\DefinitionResolver
+        public: true

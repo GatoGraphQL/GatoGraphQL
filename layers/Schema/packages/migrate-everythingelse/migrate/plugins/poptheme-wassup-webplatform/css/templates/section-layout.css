@@ -1,0 +1,33 @@
+.label-locationposts {
+  background-color: #f0ad4e;
+}
+.label-locationposts[href]:hover,
+.label-locationposts[href]:focus {
+  background-color: #ec971f;
+}
+
+.layout.preview.locationposts > .wrapper > .content-body > .authors.belowcontent,
+.layout.preview.locationposts.locationpostlinks .authors.abovetitle {
+  display: none;
+}
+.locationpostlinks .visible-link,
+.layout.preview.locationposts.locationpostlinks > .wrapper > .content-body > .authors.belowcontent {
+  display: block;
+}
+.locationpostlinks .visible-link.inline {
+  display: inline-block;
+}
+.layout.preview.locationposts.locationpostlinks .content-body.simpleview > .authors.abovetitle {
+  display: block;
+}
+
+.layout.preview.locationposts > .wrapper > .content-body.simpleview > .abovecontent {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    /* Using -1px for left/right margin, so the featured image has exactly 500px (col-sm-10 in container 588px wide and no padding-left) */
+    margin: 0 -1px 10px;
+}
+
+.block-locationposts-scrollmap {
+  margin-bottom: 20px;
+}

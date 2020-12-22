@@ -1,0 +1,15 @@
+
+#ps-body .pop-homemessage {
+	margin-left: -15px;
+	margin-right: -15px;
+}
+#ps-body .pop-homemessage .blockinner-row {
+	background-color: #dff0d8; 
+}
+#ps-body .pop-homemessage h2 {
+	margin-top: 0; 
+}
+#ps-body .pop-homemessage .pop-elem.blockinner-elem {
+	padding-top: 0;
+	padding-bottom: 0;
+}

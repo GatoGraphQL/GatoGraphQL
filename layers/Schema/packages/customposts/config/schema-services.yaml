@@ -1,0 +1,12 @@
+services:
+    PoPSchema\CustomPosts\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoPSchema\CustomPosts\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true
+
+    PoPSchema\CustomPosts\FieldInterfaceResolvers\:
+        resource: '../src/FieldInterfaceResolvers/*'
+        public: true

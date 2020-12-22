@@ -1,0 +1,15 @@
+/*
+Keeping 468x267px for the thumb only works when the viewport is on the restricted sizes below
+Otherwise, it may make the picture stick out of the column, making it very ugly
+Specially with mobile phone, it makes the app have to scroll left to right
+*/
+@media screen and (min-width: 544px) and (max-width: 767px), screen and (min-width: 1200px) {
+
+	.thumb-feed {
+		background-image: url({{$backgroundImageURL}});
+		width: {{$backgroundImageWidth}}px;
+		height: {{$backgroundImageHeight}}px;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+}

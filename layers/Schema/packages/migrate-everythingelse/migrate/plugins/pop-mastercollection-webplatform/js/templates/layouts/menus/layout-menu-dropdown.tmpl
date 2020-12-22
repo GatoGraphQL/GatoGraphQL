@@ -1,0 +1,41 @@
+<ul class="nav {{class}}" style="{{style}}" role="menu" {{#generateId}}{{id}}{{/generateId}}>
+</ul>
+<script type="text/javascript">
+(function($){
+
+	var item = '', submenus = {};
+	{{#each dbObject.items}}
+
+		item = '<li id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class="{{classes}}">';
+		{{#compare title "divider"}}
+			item += '<hr />';
+		{{else}}
+			{{! Using alt instead of title because title includes the fontawesome icons html}}
+			item += '<a href="{{url}}" title="{{alt}}" {{{additional-attrs}}}>{{{title}}}</a>';
+		{{/compare}}
+		item += '</li>';
+
+		{{!Check if the menu item has a parent, if so add below it, if not, add under the menu}}
+		{{#compare menu-item-parent 0 operator=">"}}		
+			if (!submenus['menu-item-{{menu-item-parent}}']) {
+				submenus['menu-item-{{menu-item-parent}}'] = [];
+			}
+			submenus['menu-item-{{menu-item-parent}}'].push(item);
+		{{else}}
+			$('#{{lastGeneratedId context=../.}}').append(item);
+		{{/compare}}
+	{{/each}}
+
+	{{!Iterate all submenus and add them under the corresponding parent}}
+	$.each(submenus, function(key, value) {
+		$('#'+key+'>a')
+			.addClass('dropdown-toggle')
+			.data('toggle', 'dropdown')
+			.append(' <span class="caret"></span>');
+		$('#'+key)
+			.addClass('dropdown')
+			.append($('<ul class="dropdown-menu" role="menu"></ul>').html(value.join('')));
+	});
+
+})(jQuery);
+</script>

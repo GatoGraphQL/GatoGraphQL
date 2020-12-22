@@ -1,0 +1,17 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="pop-carousel-controls {{class}}" style="{{style}}" data-target="#{{lastGeneratedId module=carousel-module domain=bs.toplevel-domain}}">
+	<a {{#generateId group="control-left"}}{{id}}-control-left{{/generateId}} href="#" class="pop-carousel-control left {{classes.control}} {{classes.control-prev}}" style="{{styles.control}} {{styles.control-prev}}">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+	{{#if title}}
+		{{#if title-link}}
+			<a href="{{title-link}}" class="{{classes.title}}" style="{{styles.title}}" {{#if target}}target="{{target}}"{{/if}}>
+				<{{html-tag}}>{{{title}}}</{{html-tag}}>
+			</a>
+		{{else}}
+			<{{html-tag}} class="{{classes.title}}" style="{{styles.title}}">{{{title}}}</{{html-tag}}>
+		{{/if}}
+	{{/if}}
+	<a {{#generateId group="control-right"}}{{id}}-control-right{{/generateId}} href="#" class="pop-carousel-control right {{classes.control}} {{classes.control-next}}" style="{{styles.control}} {{styles.control-next}}">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+</div>

@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{41:function(e,a){e.exports="<p>Allow URL params to be the input for variables in the query.</p> <p>For instance, the persisted query can have a variable <code>$limit</code> with a default value, and be overriden through URL param <code>limit</code> when executing the endpoint.</p> "}}]);

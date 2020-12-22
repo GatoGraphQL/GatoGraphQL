@@ -1,0 +1,8 @@
+services:
+    PoP\Multisite\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoP\Multisite\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true

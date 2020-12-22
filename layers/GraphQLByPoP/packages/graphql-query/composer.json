@@ -1,0 +1,58 @@
+{
+    "name": "graphql-by-pop/graphql-query",
+    "type": "library",
+    "description": "Utilities to transform the query from the GraphQL syntax to the Field query syntax",
+    "keywords": [
+        "PoP",
+        "graphql-query"
+    ],
+    "homepage": "https://github.com/GraphQLByPoP/graphql-query",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "getpop/field-query": "dev-master",
+        "getpop/engine": "dev-master",
+        "getpop/api-graphql": "dev-master",
+        "graphql-by-pop/graphql-parser": "dev-master"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.8.17",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GraphQLByPoP\\GraphQLQuery\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GraphQLByPoP\\GraphQLQuery\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse -c phpstan.neon.dist",
+        "downgrade-code": "rector process --dry-run --ansi"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

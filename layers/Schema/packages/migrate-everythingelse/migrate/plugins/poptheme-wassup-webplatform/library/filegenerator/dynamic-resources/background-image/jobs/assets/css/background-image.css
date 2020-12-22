@@ -1,0 +1,13 @@
+@media screen {
+	body.sliding,
+	body.embed #background-screen {
+	  background: {{$backgroundColor}} url({{$imageURLs-1440x900}}) no-repeat fixed center;
+	  background-size: cover;
+	}
+}
+@media screen and (min-width: 1440px), screen and (min-height: 900px) {
+	body.sliding,
+	body.embed #background-screen {
+	  background-image: url({{$imageURLs-1920x1080}});
+	}
+}

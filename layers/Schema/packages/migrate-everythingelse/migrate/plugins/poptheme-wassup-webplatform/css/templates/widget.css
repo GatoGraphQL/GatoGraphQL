@@ -1,0 +1,13 @@
+
+#ps-addons .widget-collapselink {
+	/* Make the widget collapse link span all the width */
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: right;
+	padding-right: 15px;
+}
+#ps-addons .widget-collapselink > i.fa {
+	/* Do not show the icon */
+	visibility: hidden;
+}

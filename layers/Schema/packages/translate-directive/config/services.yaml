@@ -1,0 +1,4 @@
+services:
+    PoPSchema\TranslateDirective\Translation\TranslationServiceInterface:
+        class: \PoPSchema\TranslateDirective\Translation\TranslationService
+        public: true

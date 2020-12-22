@@ -1,0 +1,12 @@
+{{#with dbObject}}
+	<span class="make-popover {{../class}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} data-popover-target="#popover-{{../tls.domain-id}}-{{../dbObjectDBKey}}-{{id}}">
+		{{#withModule ../. "layout-content"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</span>
+	<span id="popover-{{../tls.domain-id}}-{{../dbObjectDBKey}}-{{id}}" style="display: none;" class="make-popover-content">
+		{{#withModule ../. "layout"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</span>
+{{/with}}

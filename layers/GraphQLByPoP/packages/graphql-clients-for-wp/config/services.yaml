@@ -1,0 +1,4 @@
+services:
+    GraphQLByPoP\GraphQLClientsForWP\Clients\:
+        resource: '../src/Clients/*'
+        public: true

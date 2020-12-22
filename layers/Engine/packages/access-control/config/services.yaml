@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\AccessControl\Services\AccessControlManagerInterface:
+        class: \PoP\AccessControl\Services\AccessControlManager
+
+    PoP\AccessControl\Hooks\:
+        resource: '../src/Hooks/*'

@@ -1,0 +1,7 @@
+{{#with dbObject}}
+	<a {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} href="{{#if ../url}}{{../url}}{{else}}{{#if ../url-field}}{{get . ../url-field}}{{/if}}{{/if}}" {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../classes.link}} {{../classes.btn}} {{../class}} target-{{id}}-{{../tls.domain-id}}" style="{{../styles.link}}{{../styles.btn}}{{../style}}" data-header="{{#withModule ../. 'header'}}{{enterModule ../../.}}{{/withModule}}" title="{{../title}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}} {{#each ../dbobject-params}} {{@key}}="{{get ../. this}}"{{/each}}>
+		{{#withModule ../. "buttoninner"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</a>
+{{/with}}

@@ -1,0 +1,31 @@
+{
+  "name": "graphql-by-pop/graphql-parser",
+  "description": "Pure PHP GraphQL",
+  "homepage": "https://github.com/GraphQLByPoP/graphql-parser",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Leonardo Losoviz",
+      "email": "leo@getpop.org",
+      "homepage": "https://getpop.org"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-mbstring": "*",
+    "symfony/property-access": "^2.8 || ^3.4 || ^4.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=9.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Youshido\\GraphQL\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Youshido\\Tests\\": "tests"
+    }
+  }
+}

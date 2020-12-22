@@ -1,0 +1,56 @@
+<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="panel-group {{class}}" style="{{style}}">
+	{{#each submoduleoutputnames.panels}}
+		<div class="{{../classes.collapsepanel}}" style="{{../styles.collapsepanel}}">
+			{{#compare ../panel-header-type "heading"}}
+				<div class="panel-heading">
+					{{#if ../intercept}}
+						<a href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../this}}{{/withSublevel}}{{/with}}">
+					{{else}}
+						<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" data-toggle="collapse" class="collapselink {{#compare ../active .}}{{else}}collapsed{{/compare}}" {{#if ../close-parent}}data-parent="#{{lastGeneratedId context=../. group=../bootstrap-type}}"{{/if}}>
+					{{/if}}
+						<{{../html-tags.title}} class="{{../classes.title}}" style="{{../styles.title}}">
+							{{#ifget ../icon this}}{{{get ../icon this}}}{{/ifget}}{{{get ../panel-title this}}}
+						</{{../html-tags.title}}>
+					</a>
+				</div>
+			{{/compare}}
+			<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" class="panel-collapse collapse {{../classes.bootstrap-component}} {{#compare ../active this}}in{{/compare}} {{../classes.panel}} {{get ../custom-panel-class this}}" style="{{../styles.bootstrap-component}}{{../styles.panel}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>				
+				{{#if ../dropdown-items}}
+					<div class="dropdown pull-left">
+						<a href="#" class="dropdown-toggle close close-sm" data-toggle="dropdown" role="button">{{{../titles.dropdown}}}</a>
+						<ul class="dropdown-menu" role="menu">
+							{{#each ../dropdown-items}}
+								<li class="{{#compare @key ../this}}active{{/compare}}"><a href="{{url}}"><h4 class="media-heading">{{{title}}}</h4></a></li>
+							{{/each}}
+						</ul>			
+					</div>
+				{{/if}}
+				{{#if ../buttons}}
+					<div class="buttons clearfix {{get ../buttons-class this}}">
+						{{#compare "close" ../buttons operator="in"}}
+							<button class="close collapsepanelgroup-closepanel" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+						{{/compare}}
+					</div>
+					<div class="buttons-disabled clearfix {{get ../buttons-class this}}">
+						{{#compare "close" ../buttons operator="in"}}
+							<span class="close disabled" aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></span>
+						{{/compare}}
+					</div>
+				{{/if}}	
+				{{#compare ../panel-header-type "panel"}}
+					<div class="panel-heading">
+						<{{../../html-tags.title}} class="{{../../classes.title}}" style="{{../../styles.title}}">
+							{{#ifget ../../icon ../this}}{{{get ../../icon ../this}}}{{/ifget}}{{{get ../../panel-title ../this}}}
+						</{{../../html-tags.title}}>
+					</div>
+				{{/compare}}
+				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.body}}" style="{{../styles.body}}">
+					{{#withModule ../. this}}
+						{{enterModule ../../.}}
+						<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="collapse" {{#if ../../close-parent}}data-parent="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}"{{/if}} data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../module}}{{/withSublevel}}"></a>
+					{{/withModule}}
+				</div>
+			</div>
+		</div>
+	{{/each}}
+</div>

@@ -1,0 +1,11 @@
+{{#if dbObject.locations}}
+	{{#withModule . "map-script-customize"}}	
+		{{enterModule ../.}}
+	{{/withModule}}
+{{/if}}
+
+{{#each dbObject.locations}}
+	{{#withModule ../. "map-script-markers"}}
+		{{enterModule ../../. dbKey=../../bs.dbkeys.locations dbObjectID=../.}}
+	{{/withModule}}
+{{/each}}

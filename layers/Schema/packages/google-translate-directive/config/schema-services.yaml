@@ -1,0 +1,4 @@
+services:
+    PoPSchema\GoogleTranslateDirective\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true

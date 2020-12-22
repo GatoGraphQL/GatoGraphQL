@@ -1,0 +1,4 @@
+services:
+    PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeAPIInterface:
+        class: \PoPSchema\UserStateMutationsWP\TypeAPIs\UserStateTypeAPI
+        public: true

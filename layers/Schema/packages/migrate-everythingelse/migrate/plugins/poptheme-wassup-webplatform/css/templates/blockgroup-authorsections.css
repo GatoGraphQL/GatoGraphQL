@@ -1,0 +1,15 @@
+
+@media (min-width: 360px) {
+	.blockgroup-authorsections > .blocksection-inners {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+		z-index: 0; /* So that the dropdown from the submenu shows on top of the organization/community content source */
+	}
+}
+@media (min-width: 768px) {
+	.blockgroup-authorsections > .blocksection-inners {
+		width: auto;
+		right: 0;
+	}
+}

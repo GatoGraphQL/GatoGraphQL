@@ -1,0 +1,8 @@
+services:
+    PoP\AccessControl\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true
+
+    PoP\AccessControl\TypeResolverDecorators\:
+        resource: '../src/TypeResolverDecorators/*'
+        public: true

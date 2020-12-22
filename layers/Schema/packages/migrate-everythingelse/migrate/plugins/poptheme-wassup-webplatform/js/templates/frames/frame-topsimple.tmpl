@@ -1,0 +1,66 @@
+<ul class="nav navbar-nav framesection-navbar-left" role="menu">
+	<li class="activeside-hidden">
+		<a class="logo pop-hidden-embed" href="{{links.home}}" title="{{titles.home}}">
+			{{#with logo-small}}
+				<img src="{{src}}" alt="{{../titles.home}}">
+			{{/with}}
+		</a>
+		<a {{#generateId targetId=pss.pssId group="logo"}}{{id}}{{/generateId}} class="logo pop-hidden-simple" href="{{links.home}}" target="{{targets.home}}" title="{{titles.homenewtab}}" data-tooltip-placement="bottom">
+			{{#with logo-small}}
+				<img src="{{src}}" alt="{{../titles.homenewtab}}">
+			{{/with}}
+		</a>
+	</li>
+</ul>
+<ul class="nav navbar-nav navbar-nav-togglenav pop-hidden-embed" role="menu">
+	<li class="hidden-sm hidden-md hidden-lg">
+		<a {{#generateId targetId=pss.pssId group="togglenav-xs"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglenavigation}}" data-target="{{offcanvas-sidenav-target}}" data-toggle="offcanvas-toggle" data-mode="xs">
+			<span class="glyphicon {{icons.togglenavigation}}"></span>
+		</a>
+	</li>
+	<li class="hidden-xs">
+		<a {{#generateId targetId=pss.pssId group="togglenav"}}{{id}}{{/generateId}} href="#" class="toggle-side activenavigator-hidden" title="{{titles.togglenavigation}}" data-target="{{offcanvas-sidenav-target}}" data-toggle="offcanvas-toggle" data-tooltip-placement="bottom" {{#each togglenav-params}} {{@key}}="{{this}}"{{/each}}>
+			<span class="glyphicon {{icons.togglenavigation}}"></span>
+		</a>
+		<a {{#generateId targetId=pss.pssId group="togglenavigator"}}{{id}}{{/generateId}} href="#" class="toggle-side activenavigator-visible" title="{{titles.togglenavigation}}" data-target="{{offcanvas-navigator-target}}" data-toggle="offcanvas-toggle" data-tooltip-placement="bottom">
+			<span class="glyphicon {{icons.togglenavigation}}"></span>
+		</a>
+	</li>
+</ul>
+<ul class="nav navbar-nav framesection-navbar-title" role="menu">
+	<li class="framesection-title">
+		<h4 {{#generateId targetId=pss.pssId group="title"}}{{id}}{{/generateId}}>{{{titles.document}}}</h4>
+	</li>
+</ul>
+<ul class="nav navbar-nav navbar-right framesection-navbar-right" role="menu">
+	<li class="hidden-sm hidden-md hidden-lg">
+		<a {{#generateId targetId=pss.pssId group="togglepagetabs-xs"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglepagetabs}}" data-target="{{offcanvas-pagetabs-target}}" data-toggle="offcanvas-toggle" data-mode="xs">
+			<span class="glyphicon glyphicon-time"></span>
+		</a>
+	</li>
+	<li class="hidden-xs">
+		<a {{#generateId targetId=pss.pssId group="togglepagetabs"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglepagetabs}}" data-target="{{offcanvas-pagetabs-target}}" data-toggle="offcanvas-toggle" data-tooltip-placement="bottom">
+			<span class="glyphicon glyphicon-time"></span>
+		</a>
+	</li>
+	<li class="pop-hidden-simple hidden-sm hidden-md hidden-lg">
+		<a {{#generateId targetId=pss.pssId group="fullscreen-xs"}}{{id}}{{/generateId}} title="{{titles.fullscreen}}" href="#" data-toggle="button" class="pop-fullscreen-btn">
+			<span class="glyphicon glyphicon-fullscreen"></span>
+		</a>
+	</li>
+	<li class="pop-hidden-simple hidden-xs">
+		<a {{#generateId targetId=pss.pssId group="fullscreen"}}{{id}}{{/generateId}} title="{{titles.fullscreen}}" href="#" data-toggle="button" class="pop-fullscreen-btn" data-tooltip-placement="bottom">
+			<span class="glyphicon glyphicon-fullscreen"></span>
+		</a>
+	</li>
+	<li class="pop-hidden-simple hidden-sm hidden-md hidden-lg">
+		<a {{#generateId targetId=pss.pssId group="new-window-xs"}}{{id}}{{/generateId}} title="{{titles.newwindow}}" href="#" data-toggle="button" class="module-newwindow-btn">
+			<span class="glyphicon glyphicon-new-window"></span>
+		</a>
+	</li>
+	<li class="pop-hidden-simple hidden-xs">
+		<a {{#generateId targetId=pss.pssId group="new-window"}}{{id}}{{/generateId}} title="{{titles.newwindow}}" href="#" data-toggle="button" class="module-newwindow-btn" data-tooltip-placement="bottom">
+			<span class="glyphicon glyphicon-new-window"></span>
+		</a>
+	</li>
+</ul>

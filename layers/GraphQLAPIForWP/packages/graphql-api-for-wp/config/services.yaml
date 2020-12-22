@@ -1,0 +1,34 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    GraphQLAPI\GraphQLAPI\Admin\Menus\:
+        resource: '../src/Admin/Menus/*'
+
+    GraphQLAPI\GraphQLAPI\Admin\EndpointResolvers\:
+        resource: '../src/Admin/EndpointResolvers/*'
+
+    GraphQLAPI\GraphQLAPI\Taxonomies\:
+        resource: '../src/Taxonomies/*'
+
+    GraphQLAPI\GraphQLAPI\PostTypes\:
+        resource: '../src/PostTypes/*'
+
+    GraphQLAPI\GraphQLAPI\EditorScripts\:
+        resource: '../src/EditorScripts/*'
+
+    GraphQLAPI\GraphQLAPI\Blocks\:
+        resource: '../src/Blocks/*'
+
+    GraphQLAPI\GraphQLAPI\BlockCategories\:
+        resource: '../src/BlockCategories/*'
+
+    GraphQLAPI\GraphQLAPI\Hooks\:
+        resource: '../src/Hooks/*'
+
+    GraphQLAPI\GraphQLAPI\Clients\:
+        resource: '../src/Clients/*'
+
+    GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface:
+        class: '\GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParser'

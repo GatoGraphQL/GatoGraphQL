@@ -1,0 +1,15 @@
+{{#with dbObject}}
+	{{#if ../submoduleoutputnames.location-layout}}
+		{{#each locations}}
+			{{#if @index}}{{../../separator}}{{/if}}
+			{{#if ../../fontawesome}}
+				<i class="fa {{../../fontawesome}}"></i>
+			{{/if}}
+			{{#withModule ../../. "location-layout"}}
+				{{enterModule ../../../. dbKey=../../../bs.dbkeys.locations dbObjectID=../this}}
+			{{/withModule}}
+		{{/each}}
+	{{else}}
+		{{../titles.locations}}
+	{{/if}}
+{{/with}}

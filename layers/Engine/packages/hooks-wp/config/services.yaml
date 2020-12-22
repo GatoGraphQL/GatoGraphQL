@@ -1,0 +1,6 @@
+services:
+    _defaults:
+        public: true
+
+    PoP\Hooks\HooksAPIInterface:
+        class: \PoP\HooksWP\HooksAPI

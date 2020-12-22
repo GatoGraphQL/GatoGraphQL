@@ -1,0 +1,4407 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-05 23:13+0730\n"
+"PO-Revision-Date: 2016-05-05 23:16+0730\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"Language: en_MY\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././validation.php:51
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:56
+msgid "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, <b>PoP Core Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+msgstr "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, <b>PoP Core Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:62
+#, php-format
+msgid "Error: this version of <b>PoP Core Processors</b> requires version %s or bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+msgstr "Error: this version of <b>PoP Core Processors</b> requires version %s or bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:69
+msgid "Error: <b>PoP WP API</b> is not installed/activated. Without it, <b>PoP Core Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+msgstr "Error: <b>PoP WP API</b> is not installed/activated. Without it, <b>PoP Core Processors</b> will not work. Please install this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+
+#: .././validation.php:75
+#, php-format
+msgid "Error: this version of <b>PoP Core Processors</b> requires version %s or bigger of <b>PoP WP API</b>. Please update this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+msgstr "Error: this version of <b>PoP Core Processors</b> requires version %s or bigger of <b>PoP WP API</b>. Please update this plugin from your plugin installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/\">from here</a>."
+
+#: .././library/content.php:68
+#, php-format
+msgid "More %s"
+msgstr "%s lagi"
+
+#: .././library/content.php:77
+#, php-format
+msgid "Member %s"
+msgstr "%s Ahli"
+
+#: .././library/content.php:86
+#, php-format
+msgid "Related %s"
+msgstr "%s berkaitan"
+
+#: .././library/core.php:19
+msgid "Post"
+msgstr "Terbit"
+
+#: .././library/date.php:30
+msgid "Apply"
+msgstr "Mohon"
+
+#: .././library/date.php:31
+msgid "From"
+msgstr "Daripada"
+
+#: .././library/date.php:32
+msgid "To"
+msgstr "Kepada"
+
+#: .././library/date.php:33
+msgid "Custom Range"
+msgstr "Ruang tersuai"
+
+#: .././library/date.php:36
+msgid "Su"
+msgstr "Ah"
+
+#: .././library/date.php:37
+msgid "Mo"
+msgstr "Is"
+
+#: .././library/date.php:38
+msgid "Tu"
+msgstr "Se"
+
+#: .././library/date.php:39
+msgid "We"
+msgstr "Ra"
+
+#: .././library/date.php:40
+msgid "Th"
+msgstr "Kh"
+
+#: .././library/date.php:41
+msgid "Fr"
+msgstr "Ju"
+
+#: .././library/date.php:42
+msgid "Sa"
+msgstr "Sa"
+
+#: .././library/date.php:46
+msgid "January"
+msgstr "Januari"
+
+#: .././library/date.php:47
+msgid "February"
+msgstr "Februari"
+
+#: .././library/date.php:48
+msgid "March"
+msgstr "Mac"
+
+#: .././library/date.php:49
+msgid "April"
+msgstr "April"
+
+#: .././library/date.php:50
+msgid "May"
+msgstr "Mei"
+
+#: .././library/date.php:51
+msgid "June"
+msgstr "Jun"
+
+#: .././library/date.php:52
+msgid "July"
+msgstr "Julai"
+
+#: .././library/date.php:53
+msgid "August"
+msgstr "Ogos"
+
+#: .././library/date.php:54
+msgid "September"
+msgstr "September"
+
+#: .././library/date.php:55
+msgid "October"
+msgstr "Oktober"
+
+#: .././library/date.php:56
+msgid "November"
+msgstr "November"
+
+#: .././library/date.php:57
+msgid "December"
+msgstr "Disember"
+
+#: .././library/email.php:84
+#, php-format
+msgid "<p>Dear %s,</p>"
+msgstr "<p>Kepada %s,</p>"
+
+#: .././library/email.php:87
+msgid "<p>Howdy!</p>"
+msgstr "<p>Apa Khabar!</p>"
+
+#: .././library/email.php:172
+#, php-format
+msgid "Your %s was created successfully!"
+msgstr "%s anda telah berjaya diciptakan!"
+
+#: .././library/email.php:175
+#, fuzzy, php-format
+msgid "<p>Your %s was created successfully!</p>"
+msgstr "%s anda telah berjaya diciptakan!"
+
+#: .././library/email.php:179
+#, php-format
+msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
+msgstr "<p>anda %s <a href=\"%s\">%s</a> telah berjaya diciptakan!</p>"
+
+#: .././library/email.php:195
+#, fuzzy, php-format
+msgid "Please notice that the status of the %s is <strong>'Draft'</strong>, so it won't be published online."
+msgstr "<p>Sila perhatikan status %s anda masih dilabel sebangai 'Draf'. Label ini mesti ditukar kepada 'Menunggu' sebelum admin laman web boleh menerbitkan ini.</p>"
+
+#: .././library/email.php:202
+msgid "<p>Please wait for our moderators approval. You will receive an email with the confirmation.</p>"
+msgstr "</p>Sila tunggu untuk kelulusan moderator kami. Anda akan menerima sebuah e-mel yang akan merangkumi pengesahan.</p>"
+
+#: .././library/email.php:238
+#, php-format
+msgid "[%s]: New %s by %s"
+msgstr "[%s]: %s baru oleh %s"
+
+#: .././library/email.php:239
+#, php-format
+msgid "A new %s has been submitted on %s:"
+msgstr "Sebuah %s baru telah dikemukakan pada %s:"
+
+#: .././library/email.php:242
+#, php-format
+msgid "[%s]: %s updated by %s"
+msgstr "[%s]: %s dikemaskini oleh %s"
+
+#: .././library/email.php:243
+#, php-format
+msgid "%s updated on %s:"
+msgstr "%s telah dikemaskini pada %s:"
+
+#: .././library/email.php:247
+#, php-format
+msgid "<b>Author:</b> %s"
+msgstr "<b>Penulis:</b> %s"
+
+#: .././library/email.php:248
+#, php-format
+msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+msgstr "<b>Penulis E-mell:</b> <a href=\"melkepada:%1$s\">%1$s</a>"
+
+#: .././library/email.php:249
+#, php-format
+msgid "<b>Title:</b> %s"
+msgstr "<b>Tajuk:</b> %s"
+
+#: .././library/email.php:250
+#, php-format
+msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+msgstr "<b>Pautan tetap:</b> <a href=\"%1$s\">%1$s</a>"
+
+#: .././library/email.php:251
+#, php-format
+msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
+msgstr "<b>Sunting Pautan:</b> <a href=\"%1$s\">%1$s</a>"
+
+#: .././library/email.php:252
+#, php-format
+msgid "<b>Status:</b> %s"
+msgstr "<b>Status:</b> %s"
+
+#: .././library/email.php:289
+#, php-format
+msgid "[%s]: New Profile: %s"
+msgstr "[%s]: Profil Baru: %s"
+
+#: .././library/email.php:290
+#, php-format
+msgid "A Profile was created on %s."
+msgstr "Sebuah Profil telah dicipta pada %s."
+
+#: .././library/email.php:293
+#, php-format
+msgid "[%s]: Profile updated: %s"
+msgstr "[%s]: Profil telah dikemaskini: %s"
+
+#: .././library/email.php:294
+#, php-format
+msgid "Profile updated on %s."
+msgstr "Profil telah dikemaskini pada %s."
+
+#: .././library/email.php:298
+#, php-format
+msgid "<b>Profile:</b> %s"
+msgstr "<b>Profil:</b> %s"
+
+#: .././library/email.php:299
+#, php-format
+msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
+msgstr "<b>Pautan Profil:</b> <a href=\"%1$s\">%1$s</a>"
+
+#: .././library/email.php:307
+#, php-format
+msgid "Welcome to %s!"
+msgstr "Selamat Datang ke %s!"
+
+#: .././library/email.php:314
+msgid "<p>Your user account was created successfully. This is your public profile page:</p>"
+msgstr ""
+
+#: .././library/email.php:321
+msgid "Now you can share your content/activities with our community:"
+msgstr ""
+
+#: .././library/email.php:342
+#, php-format
+msgid "About %s"
+msgstr ""
+
+#: .././library/email.php:519
+#, fuzzy, php-format
+msgid "A new %s was posted referencing \"%s\""
+msgstr "Sebuah %s baru mengenai \"%s\" telah diterbitkan."
+
+#: .././library/email.php:524
+#, fuzzy, php-format
+msgid "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
+msgstr "<p>%s anda <a href=\"%s\">%s</a>telah menerima sebuah %s baru: <a href=\"%s\">%s</a>.</p>"
+
+#: .././library/email.php:547
+#, php-format
+msgid "Your %s was approved!"
+msgstr "%s anda telah diluluskan!"
+
+#: .././library/email.php:549
+#, fuzzy, php-format
+msgid "<p>Hurray! Your %s was approved!</p>"
+msgstr "<p>Yay! %s anda <a href=\"%s\">%s</a> telah diluluskan!</p>"
+
+#: .././library/email.php:583
+#, php-format
+msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
+msgstr "<p>Terdapat sebuah respon untuk komen daripada <a href=\"%s\">%s</a>:</p>"
+
+#: .././library/email.php:584
+#, php-format
+msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
+msgstr "<p>Satu komen baru telah disertakan pada <a href=\"%s\">%s</a>:</p>"
+
+#: .././library/email.php:598
+#: .././library/email.php:761
+msgid "In response to:"
+msgstr "Sebagai balasan kepada:"
+
+#: .././library/email.php:607
+#: .././library/email.php:768
+msgid "Click here to reply the comment"
+msgstr "Sila klik di sini untuk membalas komen tersebut"
+
+#: .././library/email.php:624
+#, fuzzy, php-format
+msgid "%s replied your comment in “%s”"
+msgstr "%s telah membalas kepada komen anda pada %s"
+
+#: .././library/email.php:673
+#, fuzzy, php-format
+msgid "New comment added in “%s”"
+msgstr "Komen baru telah disertakan pada %s"
+
+#: .././library/email.php:708
+#, fuzzy, php-format
+msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
+msgstr "<p>%s anda <a href=\"%s\">%s</a>telah menerima sebuah %s baru: <a href=\"%s\">%s</a>.</p>"
+
+#: .././library/email.php:721
+#, fuzzy, php-format
+msgid "You were mentioned in %s “%s”"
+msgstr "Komen baru telah disertakan pada %s"
+
+#: .././library/email.php:744
+#, fuzzy, php-format
+msgid "<p><a href=\"%s\">%s</a> mentioned you in a comment from %s <a href=\"%s\">%s</a>:</p>"
+msgstr "<p>Terdapat sebuah respon untuk komen daripada <a href=\"%s\">%s</a>:</p>"
+
+#: .././library/email.php:781
+#, fuzzy, php-format
+msgid "You were mentioned in a comment from %s “%s”"
+msgstr "%s telah membalas kepada komen anda pada %s"
+
+#: .././library/email.php:800
+#, fuzzy
+msgid "Password reset code"
+msgstr "%s: Kata kekunci telah ditukar."
+
+#: .././library/email.php:805
+#, fuzzy
+msgid "Retrieve password"
+msgstr "Tukar kata kekunci"
+
+#: .././library/email.php:810
+#, fuzzy
+msgid "Password reset successful"
+msgstr "Kata kekunci telah dikemaskini. "
+
+#: .././library/email.php:813
+#, fuzzy
+msgid "Your password has been changed successfully."
+msgstr "%s anda telah berjaya diciptakan!"
+
+#: .././library/email.php:815
+#, php-format
+msgid "Please <a href=\"%s\">click here to log-in</a>."
+msgstr "Sila <a href=\"%s\">klik di sini untuk log masuk</a>."
+
+#: .././library/email.php:844
+msgid "You have a new follower!"
+msgstr ""
+
+#: .././library/email.php:847
+#, fuzzy, php-format
+msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
+msgstr "<p>Tahniah! <a href=\"%s\">Organisasi anda mempunyai ahli baru</a>:</p>"
+
+#: .././library/email.php:853
+msgid "<p>This user will receive notifications following your activity, such as recommending content, posting a new discussion, comment or thought, and others.</p>"
+msgstr ""
+
+#: .././library/email.php:869
+#, fuzzy, php-format
+msgid "Your %s was recommended!"
+msgstr "%s anda telah diluluskan!"
+
+#: .././library/email.php:871
+#, fuzzy, php-format
+msgid "<p>Your %s <a href=\"%s\">%s</a> was recommended by:</p>"
+msgstr "<p>%s anda <a href=\"%s\">%s</a>telah menerima sebuah %s baru: <a href=\"%s\">%s</a>.</p>"
+
+#: .././library/media.php:43
+msgid "Upload media files"
+msgstr "Muat naik fail-fail"
+
+#: .././library/media.php:46
+msgid "Set"
+msgstr "Set"
+
+#: .././library/captcha/captcha.php:25
+msgid "Captcha was not generated properly, please refresh page."
+msgstr "Captcha tidak dihasilkan dengan tepat. Sila muat semula halaman ini."
+
+#: .././library/captcha/captcha.php:32
+msgid "Captcha is empty."
+msgstr "Captcha adalah kosong."
+
+#: .././library/captcha/captcha.php:41
+msgid "Captcha doesn't match."
+msgstr "Captcha tidak padan."
+
+#: .././library/login/login.php:22
+msgid "Log in"
+msgstr "Daftar masuk"
+
+#: .././library/login/login.php:22
+#, fuzzy
+msgid "log in"
+msgstr "Daftar masuk"
+
+#: .././library/users/user-registration.php:43
+msgid "Title"
+msgstr "Tajuk"
+
+#: .././library/users/user-registration.php:47
+msgid "Short Description"
+msgstr "Penerangan singkat"
+
+#: .././library/users/user-registration.php:51
+#: .././library/users/user-registration.php:54
+msgid "Display email in the Profile page?"
+msgstr "Paparkan e-mel ini pada halaman profil?"
+
+#: .././pop-library/constants.php:8
+msgid "Loading"
+msgstr "Memuatkan"
+
+#: .././pop-library/constants.php:9
+#, fuzzy
+msgid "Ops, there was a connection problem."
+msgstr "Ops, terdapat sebuah masalah: %s"
+
+#: .././pop-library/constants.php:10
+#, fuzzy
+msgid "Retry"
+msgstr "Daftar"
+
+#: .././pop-library/constants.php:82
+#, fuzzy
+msgid "Ops, this is a broken link."
+msgstr "Ops, pautan ini tidak betul!"
+
+#: .././pop-library/constants.php:109
+msgid "Ops, the upload failed. Let's fix this: please save your post as 'Draft', refresh the browser window, and try again."
+msgstr "Ops, memuat naik gagal. Mari kita membetulkannya: sila simpan catatan anda sebagai 'Draf', menyegarkan tetingkap penyemak imbas, dan cuba lagi."
+
+#: .././pop-library/dataload/actionexecuters/downvotepost.php:32
+#, php-format
+msgid "You have down-voted <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/email-invite.php:34
+#, fuzzy, php-format
+msgid "Invitation sent to the following emails: <strong>%s</strong>"
+msgstr "E-mel yang berikut tidak sah: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/followuser.php:32
+#, fuzzy, php-format
+msgid "You are now following <em><strong>%s</strong></em>."
+msgstr "Jemputan dihantar ke e-mel berikut: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/recommendpost.php:32
+#, php-format
+msgid "You have recommended <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/undo-downvotepost.php:32
+#, php-format
+msgid "You have stopped down-voting <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/undo-upvotepost.php:32
+#, php-format
+msgid "You have stopped up-voting <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/unfollowuser.php:32
+#, fuzzy, php-format
+msgid "You have stopped following <em><strong>%s</strong></em>."
+msgstr "Jemputan dihantar ke e-mel berikut: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/unrecommendpost.php:32
+#, php-format
+msgid "You have stopped recommending <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/upvotepost.php:32
+#, php-format
+msgid "You have up-voted <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/downvotepost.php:24
+#, php-format
+msgid "You have already down-voted <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:83
+#, php-format
+msgid "The following emails are invalid: <strong>%s</strong>"
+msgstr "E-mel yang berikut tidak sah: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:89
+msgid "Email(s) cannot be empty."
+msgstr "E-me tidak boleh kosong."
+
+#: .././pop-library/dataload/actionexecuters/library/followuser.php:21
+msgid "You can't follow yourself!"
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/followuser.php:30
+#, fuzzy, php-format
+msgid "You are already following <em><strong>%s</strong></em>."
+msgstr "Jemputan dihantar ke e-mel berikut: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:20
+#, fuzzy, php-format
+msgid "<p>%s is inviting you to join %s!</p>"
+msgstr "%s mempelawa anda untuk menjadi ahli mereka!"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:28
+#, php-format
+msgid "<p>You have been invited to join %s!</p>"
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:45
+#, fuzzy, php-format
+msgid "What is %s?"
+msgstr "Apa yang menjadi ahli?"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:53
+#, fuzzy
+msgid "Check it out here"
+msgstr "Klik untuk Sukarelawan"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:75
+#, fuzzy, php-format
+msgid "%s is inviting you to join %s!"
+msgstr "%s mempelawa anda untuk menjadi ahli mereka!"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:82
+#, php-format
+msgid "You have been invited to join %s!"
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/post-update-user-metavalue.php:27
+msgid "The requested post does not exist."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/post-update-user-metavalue.php:34
+msgid "The requested functionality does not apply on this post."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/recommendpost.php:24
+#, php-format
+msgid "You have already recommended <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/undo-downvotepost.php:24
+#, php-format
+msgid "You had not down-voted <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/undo-upvotepost.php:24
+#, php-format
+msgid "You had not up-voted <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/unfollowuser.php:24
+#, fuzzy, php-format
+msgid "You were not following <em><strong>%s</strong></em>."
+msgstr "Jemputan dihantar ke e-mel berikut: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/library/unrecommendpost.php:24
+#, php-format
+msgid "You had not recommended <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/update-user-metavalue.php:15
+msgid "This URL is incorrect."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/upvotepost.php:24
+#, php-format
+msgid "You have already up-voted <em><strong>%s</strong></em>."
+msgstr ""
+
+#: .././pop-library/dataload/actionexecuters/library/user-update-user-metavalue.php:22
+msgid "The requested user does not exist."
+msgstr ""
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users-hook.php:57
+msgid "Website"
+msgstr "Laman Web"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users-hook.php:69
+msgid "Email"
+msgstr "E-mel"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:21
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus-description.php:18
+msgid "Draft (still editing)"
+msgstr ""
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:22
+msgid "Finished editing"
+msgstr ""
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:23
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus-description.php:19
+#, fuzzy
+msgid "Already published"
+msgstr "Terbitan terawal"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:18
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus.php:18
+msgid "Draft"
+msgstr "Draf"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:19
+msgid "Pending to be published"
+msgstr "Sedang menunggu untuk diterbitkan"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:20
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus.php:19
+msgid "Published"
+msgstr "Telah diterbit"
+
+#: .././pop-library/formcomponent-inputs/implementations/yesno-multi.php:18
+#: .././pop-library/formcomponent-inputs/implementations/yesno.php:18
+msgid "Yes"
+msgstr "Ya"
+
+#: .././pop-library/formcomponent-inputs/implementations/yesno-multi.php:19
+#: .././pop-library/formcomponent-inputs/implementations/yesno.php:19
+msgid "No"
+msgstr "Tiada"
+
+#: .././pop-library/processors/abstract-classes/alerts-base.php:36
+msgid "Dismiss"
+msgstr "Biarkan"
+
+#: .././pop-library/processors/abstract-classes/elements/fetchmore-base.php:47
+msgid "Load more"
+msgstr "Muatkan lagi"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:165
+msgid "Please write the content here..."
+msgstr "Sila menulis kandungan di sini..."
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:33
+msgid "Set Featured Image"
+msgstr "Tetapkan imej khas"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:34
+msgid "Remove"
+msgstr "Alih"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:36
+#, fuzzy, php-format
+msgid "Please %s to set the featured image."
+msgstr "Sila %s pertama untuk mewujudkan Profil baru."
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/post-typeaheadcomponent-formcomponents-base.php:39
+msgid "Loading Content"
+msgstr "Memuatkan Kandungan"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/post-typeaheadcomponent-formcomponents-base.php:43
+msgid "No Content found"
+msgstr "Tiada Kandungan ditemui"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/selectabletypeahead-formcomponents-base.php:84
+#, fuzzy
+msgid "Suggestions"
+msgstr "Memuatkan Cadangan"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/tag-typeaheadcomponent-formcomponents-base.php:66
+#, fuzzy
+msgid "Loading Tags"
+msgstr "Memuatkan"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/tag-typeaheadcomponent-formcomponents-base.php:70
+#, fuzzy
+msgid "No Tags found"
+msgstr " Tiada %s didapati."
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/typeaheadcomponent-formcomponents-base.php:97
+msgid "Loading Suggestions"
+msgstr "Memuatkan Cadangan"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/typeaheadcomponent-formcomponents-base.php:101
+msgid "No Results"
+msgstr "Tiada Keputusan"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/user-typeaheadcomponent-formcomponents-base.php:49
+msgid "Loading Users"
+msgstr "Memuatkan Pengguna"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/user-typeaheadcomponent-formcomponents-base.php:53
+msgid "No Users found"
+msgstr "Tiada pengguna dijumpai"
+
+#: .././pop-library/processors/abstract-classes/forms/submit-buttons-base.php:16
+msgid "Submit"
+msgstr "Hantar"
+
+#: .././pop-library/processors/abstract-classes/layouts/published-base.php:26
+#, fuzzy
+msgid "Pending"
+msgstr "Sedang dihantar..."
+
+#: .././pop-library/processors/abstract-classes/layouts/userquicklinks-base.php:22
+msgid "No contact channels"
+msgstr "Tiada saluran hubungan"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:32
+#, fuzzy
+msgid "post"
+msgstr "Terbit"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:37
+#, fuzzy
+msgid "posts"
+msgstr "Terbit"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:45
+#, fuzzy, php-format
+msgid "View %s new %s"
+msgstr "Lihat semua %s"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/form-messagefeedbacklayouts-base.php:13
+msgid "Ops, there were some problems:"
+msgstr "Ops, terdapat beberapa masalah:"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/form-messagefeedbacklayouts-base.php:14
+#, fuzzy
+msgid "Success!"
+msgstr "Mesej Kejayaan."
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/list-messagefeedbacklayouts-base.php:13
+msgid "No results"
+msgstr "Tiada keputusan"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/list-messagefeedbacklayouts-base.php:14
+msgid "No more results found"
+msgstr "Tiada hasil yang lebih dijumpai"
+
+#: .././pop-library/processors/abstract-classes/socialmedia/socialmedia-items-base.php:96
+#, php-format
+msgid "Share on %s"
+msgstr "Kongis pada %s"
+
+#: .././pop-library/processors/abstract-classes/structures/carousels/controls/button-controls.php:27
+msgid "Previous"
+msgstr "Sebelum"
+
+#: .././pop-library/processors/abstract-classes/structures/carousels/controls/button-controls.php:31
+msgid "Next"
+msgstr "Seterusnya"
+
+#: .././pop-library/processors/abstract-classes/structures/menus/segmentedbuttonlayouts-base.php:58
+msgid "Toggle menu"
+msgstr "Menu Togol"
+
+#: .././pop-library/processors/blocks/blocks.php:31
+#, fuzzy, php-format
+msgid "Send an invite to your friends/colleagues/etc to join <em><strong>%s</strong></em>:"
+msgstr "Jemputan dihantar ke e-mel berikut: <strong>%s</strong>"
+
+#: .././pop-library/processors/blocks/blocks.php:234
+#: .././pop-library/processors/comments/blocks.php:175
+msgid "Sending..."
+msgstr "Sedang dihantar..."
+
+#: .././pop-library/processors/buttons/buttoninners.php:152
+#: .././pop-library/processors/buttons/buttons.php:224
+msgid "Quickview"
+msgstr "Paparan pantas"
+
+#: .././pop-library/processors/buttons/buttoninners.php:156
+#: .././pop-library/processors/buttons/buttons.php:229
+msgid "Print"
+msgstr "Cetak"
+
+#: .././pop-library/processors/buttons/buttoninners.php:160
+#: .././pop-library/processors/buttons/buttons.php:233
+msgid "Edit"
+msgstr "Sunting"
+
+#: .././pop-library/processors/buttons/buttoninners.php:164
+#: .././pop-library/processors/buttons/buttons.php:237
+msgid "View"
+msgstr "Lihat"
+
+#: .././pop-library/processors/buttons/buttoninners.php:168
+#: .././pop-library/processors/buttons/buttons.php:241
+msgid "Preview"
+msgstr "Pratonton"
+
+#: .././pop-library/processors/buttons/buttoninners.php:172
+#: .././pop-library/processors/buttons/buttons.php:245
+msgid "Permalink"
+msgstr ""
+
+#: .././pop-library/processors/buttons/buttoninners.php:177
+#: .././pop-library/processors/buttons/buttons.php:254
+msgid "Follow"
+msgstr ""
+
+#: .././pop-library/processors/buttons/buttoninners.php:182
+#: .././pop-library/processors/buttons/buttons.php:259
+msgid "Following"
+msgstr ""
+
+#: .././pop-library/processors/buttons/buttoninners.php:189
+#: .././pop-library/processors/buttons/buttons.php:264
+#, fuzzy
+msgid "Recommend"
+msgstr "Komen "
+
+#: .././pop-library/processors/buttons/buttons.php:249
+#, fuzzy
+msgid "Comments"
+msgstr "Komen "
+
+#: .././pop-library/processors/buttons/buttons.php:269
+#, fuzzy
+msgid "Recommended"
+msgstr "Komen "
+
+#: .././pop-library/processors/buttons/buttons.php:274
+#, fuzzy
+msgid "Up-vote"
+msgstr "Kemaskini"
+
+#: .././pop-library/processors/buttons/buttons.php:279
+msgid "Up-voted"
+msgstr ""
+
+#: .././pop-library/processors/buttons/buttons.php:284
+msgid "Down-vote"
+msgstr ""
+
+#: .././pop-library/processors/buttons/buttons.php:289
+#, fuzzy
+msgid "Down-voted"
+msgstr "Muat turun"
+
+#: .././pop-library/processors/comments/blockgroups.php:98
+#, fuzzy
+msgid "Add Comment"
+msgstr "Sertakan komen"
+
+#: .././pop-library/processors/comments/blockgroups.php:124
+msgid "Add a comment for:"
+msgstr "Tambah komen untuk:"
+
+#: .././pop-library/processors/comments/formcomponents-inputs/editor-formcomponents-inputs.php:50
+msgid "Comment*"
+msgstr "Komen*"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "comments"
+msgstr "Komen "
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:31
+#, php-format
+msgid "No %s yet."
+msgstr "Tiada %s lagi."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:35
+#, php-format
+msgid "That's it, no more %s found."
+msgstr "Itu sahaja,tiada lagi %s didapati."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:43
+msgid "Comment added successfully!"
+msgstr "Komen telah berjaya disertakan!"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:44
+msgid "Comment is missing."
+msgstr "Tiada komen."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:45
+msgid "Your comment was added."
+msgstr "Komen anda telah disertakan."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:46
+msgid "Login/Register"
+msgstr "Log Masuk / Daftar"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:48
+#, fuzzy, php-format
+msgid "Please %s to add a comment."
+msgstr "Sila %s atau mendaftar%s /%s untuk menambah komen."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:53
+#, fuzzy, php-format
+msgid "You need a %s account to add a comment."
+msgstr "Adakah saya perlu log masuk untuk menambah kandungan?"
+
+#: .././pop-library/processors/controls/anchor-controls.php:66
+msgid "Toggle compact/full form"
+msgstr ""
+
+#: .././pop-library/processors/controls/anchor-controls.php:70
+msgid "Expand"
+msgstr "Kembang"
+
+#: .././pop-library/processors/controls/anchor-controls.php:74
+#, fuzzy
+msgid "Filter"
+msgstr "Twitter"
+
+#: .././pop-library/processors/controls/anchor-controls.php:86
+msgid "Embed"
+msgstr "Benamkan:"
+
+#: .././pop-library/processors/controls/anchor-controls.php:90
+msgid "Copy Search URL"
+msgstr "Salinan Carian URL"
+
+#: .././pop-library/processors/controls/anchor-controls.php:94
+msgid "Share by email"
+msgstr "Hantar melalui e-mel"
+
+#: .././pop-library/processors/controls/anchor-controls.php:98
+msgid "Invite your friends to join!"
+msgstr ""
+
+#: .././pop-library/processors/controls/anchor-controls.php:108
+msgid "Close"
+msgstr "Tutup"
+
+#: .././pop-library/processors/controls/anchor-controls.php:114
+#, fuzzy
+msgid "Information"
+msgstr "Lokasi"
+
+#: .././pop-library/processors/controls/anchor-controls.php:119
+msgid "Go back"
+msgstr "Pergi balik"
+
+#: .././pop-library/processors/controls/anchor-controls.php:127
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .././pop-library/processors/controls/anchor-controls.php:131
+msgid "Twitter"
+msgstr "Twitter"
+
+#: .././pop-library/processors/controls/anchor-controls.php:135
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .././pop-library/processors/controls/button-controls.php:59
+msgid "Refresh"
+msgstr "Muat semula"
+
+#: .././pop-library/processors/controls/button-controls.php:63
+msgid "Reset"
+msgstr "Menetapkan semula"
+
+#: .././pop-library/processors/controls/button-controls.php:71
+msgid "Open all"
+msgstr "Buka semua"
+
+#: .././pop-library/processors/controls/button-controls.php:77
+msgid "Show in Navigator"
+msgstr "Tunjukkan dalam Navigasi"
+
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:141
+#, fuzzy
+msgid "Add response/additional"
+msgstr "Diterbitkan bagi balasan / sebagai tambahan kepada"
+
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:84
+#, fuzzy
+msgid "Options"
+msgstr "Pilihan-Pilihan %s "
+
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:88
+msgid "Contact/Links"
+msgstr "Hubungi / Pautan"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:27
+#, fuzzy
+msgid "Awesome! Your user account was created successfully!"
+msgstr "Bagus! Nama pengguna anda telah berjaya didaftarkan!"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:28
+msgid "Already logged in!"
+msgstr "Telah log masuk!"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:32
+#, fuzzy, php-format
+msgid "Please %s first to create a new user account."
+msgstr "Sila %s pertama untuk mewujudkan Profil baru."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:27
+msgid "Profile updated successfully."
+msgstr "Profil telah berjaya dikemaskini."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:28
+msgid "Login"
+msgstr "Log masuk"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:32
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your Profile."
+msgstr "Sila <a href=\"%s\">log masuk</a> untuk menyunting Profil anda."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:37
+#, php-format
+msgid "Only %s accounts can be edited."
+msgstr "Hanya akaun %s boleh disunting."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:43
+msgid "Your profile is not of 'Organization' type, so you cannot edit it here."
+msgstr "Profil anda bukan dari jenis 'Organisasi', jadi anda tidak boleh menyunting di sini."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:44
+msgid "Your profile is not of 'Individual' type, so you cannot edit it here."
+msgstr "Profil anda bukan dari jenis 'Individu', jadi anda tidak boleh menyunting di sini."
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
+#, fuzzy
+msgid "Show email in your user profile?"
+msgstr "Papar E-mel dalam Profil anda?"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:33
+msgid "Short description"
+msgstr "Penerangan Singkat"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:38
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:122
+msgid "Facebook URL"
+msgstr "URL Facebook"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:43
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:123
+msgid "Twitter URL"
+msgstr "URL Twitter"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:48
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:124
+msgid "LinkedIn URL"
+msgstr "URL LinkedIn"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:53
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:125
+msgid "Youtube URL"
+msgstr "URL Youtube "
+
+#: .././pop-library/processors/createupdateuser/blocks.php:100
+#: .././pop-library/processors/createupdateuser/abstract-classes/createupdateuser-blocks-base.php:12
+msgid "Submitting..."
+msgstr "Sedang dihantar..."
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:14
+msgid "Awesome! Your User Account was created successfully!"
+msgstr "Bagus! Nama pengguna anda telah berjaya didaftarkan!"
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:17
+msgid "Please add the following emails to your contact list, to make sure you receive our notifications:"
+msgstr ""
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:19
+#, php-format
+msgid "<ul><li>%s</li><li>%s</li></ul>"
+msgstr ""
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:14
+msgid "User Account updated successfully."
+msgstr "Akaun pengguna telah berjaya dikemaskini."
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:16
+#, php-format
+msgid "View your <a href=\"%s\">updated user account</a>."
+msgstr "Lihat <a href=\"%s\">akaun pengguna anda yang telah dikemaskini</a>."
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:41
+msgid "Username"
+msgstr "Nama pengguna"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:49
+msgid "Current Password"
+msgstr "Kata Kekunci Semasa"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:53
+msgid "Password"
+msgstr "Kata kekunci"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:57
+msgid "New password"
+msgstr "Kata kekunci baru"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:61
+#, fuzzy
+msgid "Repeat password"
+msgstr "Ulang Kata Kekunci*"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:65
+msgid "Repeat new password"
+msgstr "Ulang kata kekunci"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:69
+msgid "Name"
+msgstr "Nama"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:74
+msgid "Website URL"
+msgstr "URL Laman Web"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/textarea-formcomponents-inputs.php:37
+msgid "Description"
+msgstr "Penerangan"
+
+#: .././pop-library/processors/createupdateuser/forms/formgroups.php:81
+msgid "Please be careful to fill-in the email properly! It will not only appear in the Profile page, but also be used by our system to send all notifications from the website, eg: log-in information / volunteering requests / inline contact profile / etc."
+msgstr "Sila berhati-hati untuk mengisi dalam e-mel dengan betul! Ia bukan hanya akan muncul dalam halaman Profil, tetapi juga boleh digunakan oleh sistem kami untuk menghantar semua pemberitahuan dari laman web, contoh: maklumat log masuk / permintaan sukarelawan/ sebaris profil kenalan / dan lain-lain"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:28
+msgid "Password updated successfully."
+msgstr "Kata kekunci telah dikemaskini. "
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "Yep, it's good to change it every now and then, with so many crooks around!"
+msgstr "Ya, tindakan anda untuk menukarkan ini adalah baik."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:31
+#, fuzzy
+msgid "Ops, there is a problem:"
+msgstr "Ops, terdapat beberapa masalah:"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:35
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to change your password."
+msgstr "Sila <a href=\"%s\">log masuk</a> untuk menukar kata laluan anda."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:40
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:45
+#, php-format
+msgid "Only %s accounts can change their password."
+msgstr "Hanya akaun %s boleh menukar kata laluan mereka."
+
+#: .././pop-library/processors/formcomponents-inputs/captcha-formcomponents-inputs.php:25
+#, fuzzy
+msgid "Captcha"
+msgstr "Captcha*"
+
+#: .././pop-library/processors/formcomponents-inputs/daterange-formcomponents-inputs.php:54
+msgid "Dates"
+msgstr "Tarikh"
+
+#: .././pop-library/processors/formcomponents-inputs/daterange-formcomponents-inputs.php:58
+msgid "Date/Time"
+msgstr "Tarikh/Masa"
+
+#: .././pop-library/processors/formcomponents-inputs/editor-formcomponents-inputs.php:25
+msgid "Content"
+msgstr "Kandungan"
+
+#: .././pop-library/processors/formcomponents-inputs/featuredimage-formcomponents-inputs.php:37
+#, fuzzy
+msgid "Featured Image"
+msgstr "Paparan Imej *"
+
+#: .././pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:41
+msgid "Status"
+msgstr "Status"
+
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:48
+msgid "Order by"
+msgstr "Tempah sebelum"
+
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:52
+#, fuzzy
+msgid "Default view"
+msgstr "Lalai"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:55
+msgid "Search"
+msgstr "Cari"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:59
+msgid "Hashtags"
+msgstr ""
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:67
+#, fuzzy
+msgid "Your name"
+msgstr "Nama Anda"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:45
+#, fuzzy
+msgid "Email(s)"
+msgstr "E-mel"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:49
+msgid "Additional message"
+msgstr "Mesej Tambahan"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/post-typeahead-formcomponents-inputs.php:40
+msgid "Posted in response / as an addition to"
+msgstr "Diterbitkan bagi balasan / sebagai tambahan kepada"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/post-typeaheadcomponent-formcomponents-inputs.php:25
+msgid "Content:"
+msgstr "Kandungan:"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:26
+msgid "Search:"
+msgstr "Carian:"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:44
+#, fuzzy
+msgid "Content with \"%QUERY\""
+msgstr "Cari Kandungan dengan \"%PERTANYAAN\""
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:49
+#, fuzzy
+msgid "Users with \"%QUERY\""
+msgstr "Cari Pengguna dengan \"%PERTANYAAN\""
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/tag-typeaheadcomponent-formcomponents-inputs.php:25
+#, fuzzy
+msgid "Tags:"
+msgstr "Tag"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:33
+#, php-format
+msgid "Search %s"
+msgstr "Cari %s"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:38
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:60
+msgid "Author(s)"
+msgstr "Pengarang"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:44
+#, fuzzy
+msgid "In response/as an addition to"
+msgstr "Diterbitkan bagi balasan / sebagai tambahan kepada"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:56
+msgid "Users"
+msgstr "Pengguna-pengguna"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:64
+#, fuzzy
+msgid "Co-authors"
+msgstr "Pengarang"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:28
+msgid "Users:"
+msgstr "Pengguna-pengguna"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:186
+#, fuzzy
+msgid "Type post title..."
+msgstr "Tajuk*"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:187
+#: .././pop-library/processors/forms/formcomponentgroups.php:188
+#, fuzzy
+msgid "Type name..."
+msgstr "Taipkan komen di sini..."
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:197
+msgid "Type emails here, separated by space or comma (\" \" or \",\"), or 1 email per line"
+msgstr "Taipkan e-mel di sini, dipisahkan oleh ruang atau koma (\"\" atau \",\"), atau 1 e-mel setiap baris"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:212
+msgid "Co-authoring this post with other Organizations/Individuals? Select them all here, they will not only appear as co-owners in the webpage, but will also be able to edit this post."
+msgstr "Mengarang paparan ini bersama-sama dengan Organisasi lain / individu? Pilih mereka semua di sini, mereka bukan sahaja akan muncul sebagai pemilik bersama dalam laman web, tetapi juga akan berupaya untuk menyunting catatan ini."
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:216
+msgid "Please select all related content, so the reader can easily access this inter-related information."
+msgstr "sila pilih semua kandungan yang berkaitan, supaya pembaca boleh mengakses maklumat yang saling berkaitan ini"
+
+#: .././pop-library/processors/forms/submit-buttons.php:35
+msgid "OK"
+msgstr "Okay"
+
+#: .././pop-library/processors/forms/submit-buttons.php:39
+msgid "Send"
+msgstr "Hantar "
+
+#: .././pop-library/processors/forms/submit-buttons.php:43
+msgid "Save"
+msgstr "Simpan semua perubahan"
+
+#: .././pop-library/processors/forms/submit-buttons.php:47
+msgid "Update"
+msgstr "Kemaskini"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:43
+msgid "follow users"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:44
+msgid "stop following users"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:45
+#, fuzzy
+msgid "recommend posts"
+msgstr "Komen "
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:46
+#, fuzzy
+msgid "stop recommending posts"
+msgstr "Komen terbanyak"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:47
+msgid "up-vote posts"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:48
+msgid "stop up-voting posts"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:49
+msgid "down-vote posts"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:50
+msgid "stop down-voting posts"
+msgstr ""
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:56
+#, fuzzy, php-format
+msgid "Please %s to %s."
+msgstr "Sila pilih"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:64
+#, php-format
+msgid "You need a %s account to access this functionality."
+msgstr ""
+
+#: .././pop-library/processors/layouts/menus/dropdownbutton-menulayouts.php:47
+msgid "Add new"
+msgstr "Sertakan yang baru"
+
+#: .././pop-library/processors/layouts/menus/multitargetindent-menulayouts.php:58
+#, fuzzy
+msgid "Navigate"
+msgstr "%sNavigasi"
+
+#: .././pop-library/processors/login/blocks.php:123
+msgid "You are not logged in."
+msgstr "Anda tidak log masuk."
+
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:36
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:44
+msgid "Username or email"
+msgstr "Nama pengguna atau e-mel"
+
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:48
+#, fuzzy
+msgid "Code"
+msgstr "Tutup"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:35
+#, fuzzy
+msgid "Get password reset code"
+msgstr "Phew, kata kekunci telah ditukar..."
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:39
+msgid "Reset password"
+msgstr "Tukar kata kekunci"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:43
+msgid "Yes, please log me out"
+msgstr "Ya, sila layari saya keluar"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "Still not there..."
+msgstr "Belum habis lagi..."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:34
+msgid "Hurray, login successful!"
+msgstr "Yayy, daftar masuk telah berjaya!"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:35
+msgid "Add"
+msgstr "Tambah"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:36
+msgid "Ready to connect the green dots?"
+msgstr "Sedia untuk menyambungkan initiatif-initiatif hijau?"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:41
+#, fuzzy
+msgid "Almost there..."
+msgstr "Belum habis lagi..."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:43
+#, fuzzy, php-format
+msgid "We sent you an email with a code. Please copy it and <a href=\"%s\">paste it here</a>."
+msgstr "Kami telah menghantar sebuah e-mel kepada anda. Sila <a href=\"%s\">klik di sini untuk daftar masuk</a>"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:52
+#, fuzzy, php-format
+msgid "Please <a href=\"%s\">click here to log in</a>."
+msgstr "Sila <a href=\"%s\">klik di sini untuk log masuk</a>."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:55
+#, fuzzy
+msgid "The code is missing"
+msgstr "Pengguna ini hilang"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:56
+#, fuzzy
+msgid "The code is not correct"
+msgstr "Alamat e-mel tidak betul."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:57
+#, fuzzy
+msgid "Password is missing"
+msgstr "Tiada nama."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:58
+msgid "The password must be at least 8 characters long."
+msgstr "Kata kekunci mesti merangkumi 8 abjad/huruf sekurang-kurangnya."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:59
+#, fuzzy
+msgid "Repeat password is missing"
+msgstr "Ulang Kata Kekunci*"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:60
+#, fuzzy
+msgid "The passwords do not match"
+msgstr "Kata kekunci tidak padan."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:62
+#, fuzzy, php-format
+msgid "The code is invalid or expired. Please <a href=\"%s\">generate it again</a>."
+msgstr "Kami telah menghantar sebuah e-mel kepada anda. Sila <a href=\"%s\">klik di sini untuk daftar masuk</a>"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:69
+msgid "Logged out now"
+msgstr "Log keluar sekarang"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:70
+msgid "But please make sure to come back!"
+msgstr "Tetapi sila pastikan anda datang kembali!"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:81
+#, php-format
+msgid "You are already logged in, please %s first to re-set your password."
+msgstr "Anda sudah log masuk, sila %s pertama sekali untuk menetapkan semula kata laluan anda."
+
+#: .././pop-library/processors/login/structures/forms/forms.php:70
+msgid "Please type in your account username or email, and you will receive a code in your email to reset your password."
+msgstr ""
+
+#: .././pop-library/processors/login/structures/forms/forms.php:85
+msgid "We sent you an email with a code."
+msgstr ""
+
+#: .././pop-library/processors/login/structures/forms/forms.php:86
+#, fuzzy
+msgid "Please copy/paste it in the input below, and choose your new password."
+msgstr "Sila salin / tampal kod html di bawah ke dalam laman web anda."
+
+#: .././pop-library/processors/login/structures/forms/forms.php:100
+msgid "Are you sure you want to log out?"
+msgstr "Adakah anda pasti anda mahu log keluar?"
+
+#: .././pop-library/processors/media/formcomponents-inputs/multiselect-formcomponents-inputs.php:40
+msgid "Resource type"
+msgstr "Jenis sumber"
+
+#: .././pop-library/processors/media/formcomponents-inputs/multiselect-formcomponents-inputs.php:44
+msgid "Is Resource"
+msgstr "adalah sumber"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Invite successful!"
+msgstr "Jemputan Berjaya!"
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:46
+msgid "Embed:"
+msgstr "Benamkan:"
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:50
+msgid "Copy Search URL:"
+msgstr "Salinan Carian URL:"
+
+#: .././pop-library/processors/share/formcomponents-inputs/textarea-formcomponents-inputs.php:26
+msgid "Embed code"
+msgstr "kod terbenam"
+
+#: .././pop-library/processors/share/structures/contents.php:31
+msgid "Preview:"
+msgstr "Pratonton:"
+
+#: .././pop-library/processors/share/structures/contents.php:38
+msgid "Please copy/paste the html code below into your website."
+msgstr "Sila salin / tampal kod html di bawah ke dalam laman web anda."
+
+#: .././pop-library/processors/share/structures/contents.php:45
+msgid "Please select and copy (Ctrl + C) the URL below."
+msgstr "Sila pilih dan salin (Ctrl + C) URL di bawah."
+
+#: .././pop-library/processors/sidebars/messages.php:27
+msgid "Nothing here"
+msgstr "Ops, tiada apa di sini!"
+
+#: .././pop-library/processors/sidebars/messages.php:31
+msgid "No contact details"
+msgstr "Tiada maklumat"
+
+#: .././pop-library/processors/sidebars/widgetries.php:96
+#, fuzzy
+msgid "In response/addition to"
+msgstr "Diterbitkan bagi balasan / sebagai tambahan kepada"
+
+#: .././pop-library/processors/sidebars/widgetries.php:97
+#, fuzzy
+msgid "Responses / Additionals"
+msgstr "Tambahan"
+
+#: .././pop-library/processors/sidebars/widgetries.php:99
+msgid "Contact info"
+msgstr "Maklumat hubungan"
+
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:138
+msgid "Google+"
+msgstr "Google+"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:27
+#, fuzzy
+msgid "Welcome"
+msgstr "Selamat Datang ke %s!"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:31
+#, fuzzy
+msgid "You are already logged in as"
+msgstr "Anda tidak log masuk."
+
+#: .././pop-library/processors/useraccount/userloggedins.php:46
+msgid "Logout?"
+msgstr ""
+
+#: .././pop-library/processors/viewcomponents/addcomment-post-buttons.php:76
+#, fuzzy
+msgid "Write a comment"
+msgstr "Tulis komen..."
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:120
+#: .././pop-library/processors/viewcomponents/post-buttons.php:130
+msgid "Volunteer!"
+msgstr "Bantu!"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:124
+#: .././pop-library/processors/viewcomponents/post-buttons.php:135
+#, fuzzy
+msgid "Flag"
+msgstr "Memuatkan"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:128
+msgid "Click to Volunteer"
+msgstr "Klik untuk Sukarelawan"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:142
+#: .././pop-library/processors/viewcomponents/user-buttons.php:77
+msgid "Send message"
+msgstr "Hantar mesej"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:146
+msgid "Reply"
+msgstr "Balas"
+
+#~ msgid "(None)"
+#~ msgstr "(Tiada)"
+
+#~ msgid "Download"
+#~ msgstr "Muat turun"
+
+#, fuzzy
+#~ msgid "Connecting the green dots."
+#~ msgstr ""
+#~ "Mari kita teruskan usaha kita untuk menggabungkan titik-titik hijau."
+
+#~ msgid "No access allowed"
+#~ msgstr "Tiada akses dibenarkan"
+
+#~ msgid "There was a problem, please contact the website admin"
+#~ msgstr "Terdapat sebuah masalah, sila hubungi admin laman web"
+
+#~ msgid "You do not have permissions to edit this attachment"
+#~ msgstr "Anda tidak mempunyai kebenaran untuk menyunting lampiran ini."
+
+#~ msgid "There is no user with this username or email."
+#~ msgstr "Tiada pengguna berdaftar dengan nama pengguna atau email ini."
+
+#~ msgid "Please supply your username or email."
+#~ msgstr "Sila kemukakan nama pengguna dan kata kekunci anda."
+
+#~ msgid "%s: Password Reset"
+#~ msgstr "%s: Kata kekunci telah ditukar."
+
+#~ msgid "Your user: "
+#~ msgstr "Nama pengguna anda:"
+
+#~ msgid "Your new password: "
+#~ msgstr "Kata kekunci baru:"
+
+#~ msgid "Click here to log-in: "
+#~ msgstr "Sila klik di sini untuk daftar masuk:"
+
+#~ msgid "Login to %s"
+#~ msgstr "Daftar masuk untuk %s"
+
+#~ msgid "The e-mail could not be sent."
+#~ msgstr "E-mel tersebut tidak boleh dihantar."
+
+#~ msgid "Possible reason: your host may have disabled the mail() function."
+#~ msgstr "Kemungkinan besar, fungsi mel() anda telah disekat."
+
+#~ msgid "Avatar"
+#~ msgstr "Avatar"
+
+#~ msgid "Profile picture"
+#~ msgstr "Gambar profil"
+
+#~ msgid "Upload picture"
+#~ msgstr "Muat naik gambar"
+
+#~ msgid ""
+#~ "Please log in using your <strong>%s</strong> account to add a comment:"
+#~ msgstr ""
+#~ "Sila daftar masuk menggunakan <strong>%s</strong> akaun anda untuk "
+#~ "menyertakan komen:"
+
+#~ msgid "All Content"
+#~ msgstr "Semua Kandungan"
+
+#~ msgid "Advanced Search"
+#~ msgstr "Carian terperinci"
+
+#~ msgid "Invite new members"
+#~ msgstr "Menjemput ahli baru"
+
+#~ msgid "Share"
+#~ msgstr "Kongis "
+
+#~ msgid "Awesome! Your Profile was created successfully!"
+#~ msgstr "Bagus! Profil anda telah berjaya didaftarkan."
+
+#~ msgid "Picture updated successfully."
+#~ msgstr "Gambar berjaya dikemaskini"
+
+#~ msgid "Such a good shot!"
+#~ msgstr "Pukulan yang baik!"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to update your picture."
+#~ msgstr "Sila <a href=\"%s\">log masuk> untuk mengemaskini gambar anda."
+
+#~ msgid "Only %s accounts can update their picture."
+#~ msgstr "Hanya akaun %s boleh mengemaskini gambar mereka."
+
+#~ msgid "Saving..."
+#~ msgstr "Simpan....."
+
+#~ msgid "Delete"
+#~ msgstr "Padam"
+
+#~ msgid "Type comment here..."
+#~ msgstr "Taipkan komen di sini..."
+
+#~ msgid "Locations"
+#~ msgstr "Lokasi-lokasi"
+
+#~ msgid ""
+#~ "If you can't find the location in the input below, click on the \"+\" "
+#~ "button to add a new one."
+#~ msgstr ""
+#~ "Jika anda tidak dapat mencari lokasi dalam masukan di bawah, klik pada "
+#~ "butang \"+\" untuk menambah yang baru."
+
+#~ msgid "Picture"
+#~ msgstr "Gambar"
+
+#~ msgid "Phew, password reseted..."
+#~ msgstr "Phew, kata kekunci telah ditukar..."
+
+#~ msgid "We sent you an email. Please <a href=\"%s\">click here to log in</a>"
+#~ msgstr ""
+#~ "Kami telah menghantar sebuah e-mel kepada anda. Sila <a href=\"%s\">klik "
+#~ "di sini untuk daftar masuk</a>"
+
+#~ msgid "Lost password"
+#~ msgstr "Lupa kata kekunci"
+
+#~ msgid "<p><em>Please log in:</em></p>"
+#~ msgstr "<p><em>Sila daftar masuk:</em></p>"
+
+#~ msgid "Title:"
+#~ msgstr "Tajuk:"
+
+#~ msgid "Source:"
+#~ msgstr "Sumber:"
+
+#~ msgid "Source"
+#~ msgstr "Sumber"
+
+#~ msgid "Is resource:"
+#~ msgstr "Adalah sumberL"
+
+#~ msgid "Description:"
+#~ msgstr "Penerangan:"
+
+#~ msgid "No items"
+#~ msgstr "Tiada maklumat"
+
+#~ msgid "%s latest posts"
+#~ msgstr "%s pos terkini"
+
+#~ msgid "%s latest comments"
+#~ msgstr "%s komen terkini"
+
+#~ msgid "View %1$s profile and get in touch through %2$s."
+#~ msgstr "Lihat profil %1$s dan hubungi melalui %2$s."
+
+#~ msgid "Project"
+#~ msgstr "Projek"
+
+#~ msgid "Story"
+#~ msgstr "Cerita"
+
+#~ msgid "Announcement"
+#~ msgstr "Pengumuman"
+
+#~ msgid "Discussion"
+#~ msgstr "Perbincangan"
+
+#~ msgid "Featured"
+#~ msgstr "Khas"
+
+#~ msgid "Event"
+#~ msgstr "Aktiviti"
+
+#~ msgid "Resource"
+#~ msgstr "Sumber"
+
+#~ msgid "Loading pure awesomeness"
+#~ msgstr "Memuatkan kehebatan tulen"
+
+#~ msgid ""
+#~ "MESYM.com is a platform for environmental movements in Malaysia. There "
+#~ "are many good actions being done out there. Our goal is to bring them "
+#~ "together. We connect the green dots."
+#~ msgstr ""
+#~ "MESYM.com adalah sebuah wadah bagi pergerakan alam sekitar di Malaysia. "
+#~ "Terdapat banyak usaha-usaha yang diambil oleh pelbagai pihak. Matlamat "
+#~ "kami adalah untuk menyatukan semua pihak dan usaha-usaha mereka. Kami "
+#~ "berperanan sebagai pengantara antara mereka."
+
+#~ msgid ""
+#~ " Join our environmental community and find out who is doing what, where "
+#~ "and when."
+#~ msgstr ""
+#~ "Sertai pergerakan kami untuk mengetahui pihak-pihak yang menerajui "
+#~ "pergerakan alam sekitar dan maklumat tambahan seperti usaha-usaha yang "
+#~ "diambil, tempat dan masa."
+
+#~ msgid " on %s."
+#~ msgstr "tentang %s."
+
+#~ msgid "Add your %s"
+#~ msgstr "Tambah %s anda"
+
+#~ msgid "Upcoming Events"
+#~ msgstr "Aktiviti-aktiviti Baru"
+
+#~ msgid "Upcoming and Past Events"
+#~ msgstr "Aktiviti-Aktiviti Baru dan Lama"
+
+#~ msgid "Environmental Projects"
+#~ msgstr "Projek-Projek bertema Alam Sekitar"
+
+#~ msgid "Environmental Stories"
+#~ msgstr "Cerita-cerita mengenai Alam Sekitar"
+
+#~ msgid "Environmental Discussions"
+#~ msgstr "Perbincangan mengenai Alam Sekitar"
+
+#~ msgid "Environmental Announcements"
+#~ msgstr "Pengumuman mengenai Alam Sekitar"
+
+#~ msgid "Featured Articles"
+#~ msgstr "Rencana Khas"
+
+#~ msgid "MESYM Blogs"
+#~ msgstr "Blog-Blog MESYM"
+
+#~ msgid "Environmental Resources"
+#~ msgstr "Sumber-Sumber mengenai Alam Sekitar"
+
+#~ msgid "Organizations"
+#~ msgstr "Organisasi-organisasi"
+
+#~ msgid "People"
+#~ msgstr "Orang"
+
+#~ msgid "Organization Profile"
+#~ msgstr "Profil Organisasi"
+
+#~ msgid "Individual Profile"
+#~ msgstr "Profil Orang"
+
+#~ msgid ""
+#~ "The views expressed in this article/discussion do not necessarily "
+#~ "represent the views of MESYM.com. Comments or opinions expressed are "
+#~ "those of their respective contributors only. MESYM.com is not responsible "
+#~ "for, and disclaims any and all liability for the content of the article/"
+#~ "discussion and related comments."
+#~ msgstr ""
+#~ "Pandangan-pandangan yang dinyatakan dalam artikel/perbincangan tidak "
+#~ "semestinya mewakili pandangan MESYM.com. Komen-komen atau pendapat-"
+#~ "pendapat yang dinyatakan adalah pandangan peribadi penulis-penulis. "
+
+#~ msgid ""
+#~ "MESYM.com source code will soon be open source! Download the software "
+#~ "running MESYM.com and make your own community-building website! Coming "
+#~ "soon..."
+#~ msgstr ""
+#~ "Kod sumber MESYM.com akan dijadikan sumber terbuka dalam masa terdekat. "
+#~ "Muat turun pelantar perisian MESYM.com dan menggunakannya untuk buat "
+#~ "laman web pembinaan masyarakat anda yang tersendiri. Tidak lama lagi..."
+
+#~ msgid "Upcoming Event"
+#~ msgstr "Aktiviti akan datang"
+
+#~ msgid "Current Event"
+#~ msgstr "Acara semasa"
+
+#~ msgid "Past Event"
+#~ msgstr "Aktiviti lepas"
+
+#~ msgid "The dates/time cannot be empty"
+#~ msgstr "Ruang tarikh/masa tidak diisikan "
+
+#~ msgid ""
+#~ "Aiyoooo, it seems there is nothing here. Where else would you like to go?"
+#~ msgstr ""
+#~ "Aiyoooo, nampaknya tiada apa-apa di sini.Ke mana Dimanakah anda ingin "
+#~ "pergi?"
+
+#~ msgid "Ops, this page doesn't exist!"
+#~ msgstr "Ops, pautan ini tidak wujud!"
+
+#~ msgid "Latest"
+#~ msgstr "Terbitan terkini"
+
+#~ msgid "Show description"
+#~ msgstr "Menunjukkan Penerangan "
+
+#~ msgid "%sBack"
+#~ msgstr "%sKembali"
+
+#~ msgid "Details"
+#~ msgstr "Maklumat akaun"
+
+#~ msgid "Full view"
+#~ msgstr "Paparan penuh"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Lakaran kenit"
+
+#~ msgid "List"
+#~ msgstr "Senarai"
+
+#~ msgid "Map"
+#~ msgstr "Peta"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender "
+
+#~ msgid "View/Preview"
+#~ msgstr "Pandangan/Pratonton"
+
+#~ msgid "FAQ: Adding Content"
+#~ msgstr "SL: Menambah Kandungan"
+
+#~ msgid "FAQ: Registration"
+#~ msgstr "SL: Pendaftaran"
+
+#~ msgid "The Drivers"
+#~ msgstr "Pemandu-pemandu"
+
+#~ msgid "The Advisors"
+#~ msgstr "Penasihat-penasihat"
+
+#~ msgid "The Volunteers"
+#~ msgstr "Sukarelawan-sukarelawan"
+
+#~ msgid "Show Help"
+#~ msgstr "Menunjukkan Bantuan"
+
+#~ msgid "Inviting users to become your members"
+#~ msgstr "Menjemput pengguna untuk menjadi ahli anda"
+
+#~ msgid ""
+#~ "Please click on %s to invite your physical Organization's members to "
+#~ "become your members in the website."
+#~ msgstr ""
+#~ "Sila klik pada %s untuk menjemput ahli Pertubuhan fizikal anda untuk "
+#~ "menjadi ahli anda di laman web ini."
+
+#~ msgid "Current members"
+#~ msgstr "Ahli-ahli semasa"
+
+#~ msgid ""
+#~ "The users listed below have declared themselves to be members of your "
+#~ "Organization. You can click on \"Edit Membership\" to edit the settings "
+#~ "for each one of them:"
+#~ msgstr ""
+#~ "Para pengguna yang disenaraikan di bawah telah mengisytiharkan diri "
+#~ "mereka sebagai ahli Pertubuhan anda. Anda boleh klik pada \"Sunting "
+#~ "Keahlian\" untuk menyunting tetapan untuk setiap seorang daripada mereka:"
+
+#~ msgid ""
+#~ "\"Active\" if the user is truly your member, or \"Rejected\" otherwise."
+#~ "<br/>Rejected users will not appear as your Organization's members, or "
+#~ "contribute content."
+#~ msgstr ""
+#~ "\"Aktif\" jika pengguna adalah benar-benar ahli anda, atau \"Ditolak\" "
+#~ "sebaliknya.  <br/>Pengguna yang telah ditolak tidak akan muncul sebagai "
+#~ "ahli Pertubuhan anda, atau menyumbang kandungan."
+
+#~ msgid "Privileges"
+#~ msgstr "Keistimewaan"
+
+#~ msgid ""
+#~ "\"Contribute content\" will add the member's content to your profile."
+#~ msgstr ""
+#~ "\"Menyumbang kandungan\" akan menambah kandungan ahli untuk profil anda."
+
+#~ msgid ""
+#~ "What is the type of relationship from this member to your Organization."
+#~ msgstr "Apakah jenis hubungan dari ahli ini kepada Pertubuhan anda."
+
+#~ msgid ""
+#~ "The users listed below have declared themselves to be members of your "
+#~ "Organization."
+#~ msgstr ""
+#~ "Para pengguna yang disenaraikan di bawah telah mengisytiharkan diri "
+#~ "mereka sebagai ahli Pertubuhan anda."
+
+#~ msgid ""
+#~ "Click on \"Edit Membership\" to edit the settings for each one of them:"
+#~ msgstr ""
+#~ "Klik pada \"Sunting Keahlian\" untuk menyunting tetapan untuk setiap "
+#~ "seorang daripada mereka:"
+
+#~ msgid "Go to Full Profile <i class=\"fa fa-fw fa-arrow-right\"></i>"
+#~ msgstr ""
+#~ "Pergi ke profil penuh <i class=\"fa fa-fw fa-anak panah kanan\"></i>"
+
+#~ msgid "FAQ: Adding Content in %s"
+#~ msgstr "SL: Menambah Kandungan dalam %s"
+
+#~ msgid "FAQ: Registering in %s"
+#~ msgstr "SL: Pendaftaran dalam %s"
+
+#~ msgid "Editing current members' status"
+#~ msgstr "Menyunting status ahli semasa"
+
+#~ msgid ""
+#~ "<em>Active</em> if the user is truly your member, or <em>Rejected</em> "
+#~ "otherwise.<br/><em>Rejected</em> users will not appear as your "
+#~ "Organization's members, or contribute content."
+#~ msgstr ""
+#~ "<em>Aktif</em> jika pengguna adalah benar-benar ahli anda, atau "
+#~ "<em>Ditolak</em> sebaliknya. <br/><em>Ditolak</em> Pengguna tidak akan "
+#~ "muncul sebagai ahli Pertubuhan anda, atau menyumbang kandungan."
+
+#~ msgid ""
+#~ "<em>Contribute content</em> will add the member's content to your profile."
+#~ msgstr ""
+#~ "<em>Menyumbang kandungan</em> akan menambah kandungan ahli untuk profil "
+#~ "anda."
+
+#~ msgid "Show FAQs"
+#~ msgstr "Tunjukkan Soalan Lazim"
+
+#~ msgid "This depends on your Organization. Some examples:<br/>"
+#~ msgstr "Ini bergantung kepada Pertubuhan anda. Beberapa contoh: <br/>"
+
+#~ msgid "University teachers/students"
+#~ msgstr "Guru universiti / pelajar"
+
+#~ msgid "NGO volunteers"
+#~ msgstr "Sukarelawan-sukarelawan Badan Bukan Kerajaan"
+
+#~ msgid "Company staff"
+#~ msgstr "kakitangan syarikat"
+
+#~ msgid "etc"
+#~ msgstr "dan lain-lain"
+
+#~ msgid "What happens when my Organization has members?"
+#~ msgstr "Apa yang berlaku apabila Pertubuhan saya mempunyai ahli?"
+
+#~ msgid ""
+#~ "If they have privilege <em>Contribute content</em> on, whenever they post "
+#~ "any content in the website (eg: a new event, discussion, project, etc) "
+#~ "will also show up under your Organization's profile. If this privilege is "
+#~ "off, they will just appear under \"My members\""
+#~ msgstr ""
+#~ "Jika mereka mempunyai keistimewaan <em>Menyumbang kandungan</em> pada, "
+#~ "setiap kali mereka menghantar mana-mana kandungan di laman web (contoh: "
+#~ "acara baru, perbincangan, projek, dan lain-lain) juga akan muncul di "
+#~ "bawah Profil Organisasi anda. Jika keistimewaan ini dimatikan, mereka "
+#~ "hanya akan muncul di bawah \"Ahli-ahli saya\""
+
+#~ msgid "What is the benefit of having members for my Organization?"
+#~ msgstr "Apakah manfaat yang mempunyai ahli-ahli untuk Pertubuhan saya?"
+
+#~ msgid ""
+#~ "Your Organization will get the credit for the content posted by your "
+#~ "members without having to do much: they are the ones creating and posting "
+#~ "their own content."
+#~ msgstr ""
+#~ "Organisasi Anda akan mendapat kredit untuk kandungan yang disiarkan oleh "
+#~ "ahli-ahli anda tanpa perlu berbuat banyak, mereka itulah orang-orang yang "
+#~ "mencipta dan menghantar kandungan mereka sendiri."
+
+#~ msgid "Can you give me an example of this?"
+#~ msgstr "Bolehkah anda memberi saya satu contoh ini?"
+
+#~ msgid ""
+#~ "Sure! Imagine your Organization is a University and has many students "
+#~ "registered as members, and each one of them posts Discussions explaining "
+#~ "their knowledge on some environmental topic they learn in class, and "
+#~ "Projects initiated in their campuses.<br/><br/>"
+#~ msgstr ""
+#~ "Pasti! Bayangkan Organisasi anda adalah sebuah Universiti dan mempunyai "
+#~ "ramai pelajar yang mendaftar sebagai ahli, dan setiap seorang daripada "
+#~ "mereka menghantar Perbincangan menjelaskan pengetahuan mereka mengenai "
+#~ "beberapa topik alam sekitar yang mereka belajar di dalam kelas, dan "
+#~ "Projek yang dimulakan di kampus mereka. <br/><br/>"
+
+#~ msgid ""
+#~ "All this environmental content will also show up in the University's "
+#~ "profile, with the following positive consequences:<br/>"
+#~ msgstr ""
+#~ "Semua kandungan alam sekitar ini juga akan muncul dalam profil "
+#~ "Universiti, dengan akibat positif yang berikut: <br/>"
+
+#~ msgid ""
+#~ "The University can show off its environmental record, and gain more "
+#~ "environmentally-aware new students."
+#~ msgstr ""
+#~ "Universiti boleh menunjukkan rekod alam sekitarnya, dan mendapat pelajar "
+#~ "baru yang lebih mesra alam sekitar."
+
+#~ msgid ""
+#~ "The students can share their knowledge with their classmates, year-on-"
+#~ "year fellow students, and even other University students."
+#~ msgstr ""
+#~ "Pelajar-pelajar boleh berkongsi pengetahuan mereka dengan rakan-rakan "
+#~ "mereka,  rakan-rakan pelajar dari tahun ke tahun dan  malahan dengan "
+#~ "pelajar Universiti  lain."
+
+#~ msgid ""
+#~ "Other Universities will follow, eventually creating a network of "
+#~ "environmental knowledge and action."
+#~ msgstr ""
+#~ "Universiti lain akan mengikuti, akhirnya mewujudkan satu rangkaian "
+#~ "pengetahuan alam sekitar dan tindakan."
+
+#~ msgid "What is the benefit for my members?"
+#~ msgstr "Apakah faedah untuk ahli-ahli saya?"
+
+#~ msgid ""
+#~ "In addition to being part of the network mentioned above, they will "
+#~ "benefit by showing off themselves: their profile effectively constitutes "
+#~ "an \"Environmental CV\"."
+#~ msgstr ""
+#~ "Di samping menjadi sebahagian daripada rangkaian di atas, mereka akan "
+#~ "mendapat manfaat dengan menunjukkan diri mereka sendiri: Profil mereka "
+#~ "dengan berkesannya merupakan suatu \"CV Alam Sekitar\"."
+
+#~ msgid "View all Content <i class=\"fa fa-fw fa-arrow-right\"></i>"
+#~ msgstr ""
+#~ "Lihat semua kandungan <i class=\"fa fa-fw fa-anak panah kanan\"></i>"
+
+#~ msgid "Latest Content"
+#~ msgstr "kandungan terkini"
+
+#~ msgid "Our Sponsors"
+#~ msgstr "Penaja kami"
+
+#~ msgid "Our Supporters"
+#~ msgstr "Penyokong kami"
+
+#~ msgid "Projects"
+#~ msgstr "Projek - Projek"
+
+#~ msgid "Stories"
+#~ msgstr "Cerita-cerita"
+
+#~ msgid "Announcements"
+#~ msgstr "Pengumuman mengenai Alam Sekitar"
+
+#~ msgid "Discussions"
+#~ msgstr "Perbincangan mengenai Alam Sekitar"
+
+#~ msgid "Links"
+#~ msgstr "Pautan-pautan "
+
+#~ msgid "Publishing Status"
+#~ msgstr "Status Penerbitan"
+
+#~ msgid "Title*"
+#~ msgstr "Tajuk*"
+
+#~ msgid ""
+#~ "'Draft': still editing, please do not publish yet. 'Pending': finished "
+#~ "editing, please publish it immediately! 'Publish': already published, "
+#~ "already online."
+#~ msgstr ""
+#~ "'Draf': masih menyunting, jangan menerbitkan lagi. 'Penggantungan': "
+#~ "penyuntingan selesai, sila menyiarkannya serta-merta! 'Terbitkan': sudah "
+#~ "diterbitkan, sudah di talian"
+
+#~ msgid "Yay! Your %s was created successfully!"
+#~ msgstr "Yay! %s anda telah berjaya dibuat!"
+
+#~ msgid "Yay! Your %s was updated successfully!"
+#~ msgstr "Yay! %s anda telah berjaya dikemas kini!"
+
+#~ msgid "Please %s or register %s / %s to create your %s."
+#~ msgstr "Sila %s atau mendaftar %s / %s untuk mewujudkan %s anda."
+
+#~ msgid ""
+#~ "Please <a href=\"%s\">log in</a> with a %s account to create your %s."
+#~ msgstr ""
+#~ "Sila <a href=\"%s\">log masuk</a> menggunakan akaun %s untuk mewujudkan%s "
+#~ "anda."
+
+#~ msgid "%s updated successfully."
+#~ msgstr "%s berjaya dikemas kini."
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+#~ msgstr "Sila <a href=\"%s\">log masuk</a> untuk menyunting %s anda."
+
+#~ msgid "Please <a href=\"%s\">log in</a> with a %s account to edit your %s."
+#~ msgstr ""
+#~ "Sila <a href=\"%s\">login</a> menggunakan akaun %s untuk menyunting %s "
+#~ "anda."
+
+#~ msgid "Ops, it seems you have no rights to edit this %s."
+#~ msgstr ""
+#~ "Ops, ia seolah-olah anda tidak mempunyai hak untuk menyunting %s ini."
+
+#~ msgid "What's going on all over Malaysia."
+#~ msgstr "Apa yang berlaku di seluruh Malaysia."
+
+#~ msgid "Volunteer for projects from many NGOs, or even start your own!"
+#~ msgstr ""
+#~ "Sukarelawan untuk projek-projek dari pelbagai Badan Bukan Kerajaan, atau "
+#~ "anda sendiri memulakan!"
+
+#~ msgid ""
+#~ "After volunteering, post your photo blog, share your experience with the "
+#~ "world."
+#~ msgstr ""
+#~ "Selepas sukarela, paparkan blog foto anda, berkongsi pengalaman anda "
+#~ "dengan dunia"
+
+#~ msgid "Have vacancies? Need green-minded people? Post it here."
+#~ msgstr ""
+#~ "Mempunyai kekosongan jawatan? Perlu orang yang berfikiran-hijau? Paparkan "
+#~ "di sini."
+
+#~ msgid ""
+#~ "Anything and everything: what do you want to express concerning the "
+#~ "environment situation in Malaysia?"
+#~ msgstr ""
+#~ "Apa-apa dan segala-galanya: apa yang anda mahu untuk menyatakan mengenai "
+#~ "keadaan alam sekitar di Malaysia?"
+
+#~ msgid ""
+#~ "Browse the living database of Organizations and find out who is doing "
+#~ "what, when and where."
+#~ msgstr ""
+#~ "Semak imbas pangkalan data Organisasi yang hidup dan cari siapa yang "
+#~ "melakukan apa, bila dan di mana."
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "Siapa yang boleh menambah kandungan dalam %s?"
+
+#~ msgid "Anyone."
+#~ msgstr "Sesiapa sahaja."
+
+#~ msgid "Is it free?"
+#~ msgstr "Adakah ia percuma?"
+
+#~ msgid "Yes."
+#~ msgstr "Ya"
+
+#~ msgid "Yes, only registered users can add content."
+#~ msgstr "Ya, hanya pengguna berdaftar boleh menambah kandungan."
+
+#~ msgid "Do the users of the website also need to log in to read my content?"
+#~ msgstr ""
+#~ "Adakah pengguna laman web itu juga perlu log masuk untuk membaca "
+#~ "kandungan saya?"
+
+#~ msgid "No, anyone can access the website and read all the content."
+#~ msgstr ""
+#~ "Tidak, sesiapa sahaja boleh mengakses laman web tersebut dan membaca "
+#~ "semua kandungan."
+
+#~ msgid "Will my content be published immediately?"
+#~ msgstr "Adakah kandungan saya akan diterbitkan serta-merta?"
+
+#~ msgid ""
+#~ "No. Before that, our moderators must approve the content, in order to "
+#~ "avoid spam and inappropriate content."
+#~ msgstr ""
+#~ "Tidak. Sebelum itu, moderator kami mesti meluluskan kandungan, untuk "
+#~ "mengelakkan spam dan kandungan yang tidak sesuai."
+
+#~ msgid "Where will my content appear?"
+#~ msgstr "Di mana kandungan saya akan muncul?"
+
+#~ msgid ""
+#~ "As soon as it gets published, it will appear in our homepage, in the "
+#~ "corresponding section (Events, Projects, etc), and in your profile.<br/"
+#~ "><br/>In addition, if you are member of any Community, it will also "
+#~ "appear under their profile."
+#~ msgstr ""
+#~ "Sebaik sahaja ia diterbitkan, ia akan dipaparkan di laman utama kami, "
+#~ "dalam bahagian yang sama (Acara, Projek, dan lain-lain), dan dalam profil "
+#~ "anda. <br/><br/>Di samping itu, jika anda adalah ahli mana-mana komuniti, "
+#~ "ia juga akan muncul di bawah profil mereka."
+
+#~ msgid "Can I share my post with more authors?"
+#~ msgstr "Bolehkah saya berkongsi paparan saya dengan lebih pengarang?"
+
+#~ msgid ""
+#~ "Yes. In field 'Authors' you can add more users (either Organizations or "
+#~ "Individuals) to own the post. They will both appear as authors and have "
+#~ "full editing access."
+#~ msgstr ""
+#~ "Ya. Pada bidang'Pengarang' anda boleh menambah lebih pengguna (sama ada "
+#~ "organisasi atau individu) untuk memiliki paparan itu. Kedua-duanya akan "
+#~ "muncul sebagai pengarang dan mempunyai akses untuk penyuntingan penuh."
+
+#~ msgid "Can I request volunteers?"
+#~ msgstr "Bolehkah saya meminta sukarelawan?"
+
+#~ msgid ""
+#~ "Yes. Choose 'Yes' in field 'Volunteers needed?', each time someone "
+#~ "applies to volunteer for your Project/Event/Announcement you will receive "
+#~ "an email immediately with the person's information.<br/><br/>We do not "
+#~ "engage the volunteer in any way."
+#~ msgstr ""
+#~ "Ya. Pilih 'Ya' dalam bidang 'Sukarelawan diperlukan?', Setiap kali "
+#~ "seseorang memohon secara sukarela untuk Projek / acara / Pengumuman anda, "
+#~ "anda akan menerima e-mel dengan segera dengan maklumat orang itu. <br/"
+#~ "><br/>Kami tidak terlibat dengan sukarelawan dalam apa-apa cara pun."
+
+#~ msgid "Is it free to register in the website?"
+#~ msgstr "Adakah ia percuma untuk mendaftar di laman web ini?"
+
+#~ msgid "What are the benefits of registering?"
+#~ msgstr "Apakah manfaat mendaftar?"
+
+#~ msgid ""
+#~ "You will be able to post all your content (events, projects, discussions, "
+#~ "etc), look for volunteers, and appear in the User Directory."
+#~ msgstr ""
+#~ "Anda akan dapat untuk menghantar semua kandungan (peristiwa, projek, "
+#~ "perbincangan dan sebagainya) anda, mencari sukarelawan, dan muncul dalam "
+#~ "Direktori Pengguna."
+
+#~ msgid "What is the User Directory?"
+#~ msgstr "Apa itu Direktori Pengguna?"
+
+#~ msgid ""
+#~ "The User Directory is a database of all Organizations/Individuals in the "
+#~ "country doing something about the environment. Just by signing up in the "
+#~ "website, all your provided information (description, contact details, "
+#~ "facebook page, etc) will appear in this directory, and will be easily "
+#~ "accessible to anyone."
+#~ msgstr ""
+#~ "Buku Panduan Pengguna adalah pangkalan data semua Organisasi / Individu "
+#~ "di negara ini yang melakukan sesuatu tentang alam sekitar. Hanya dengan "
+#~ "mendaftar di laman web ini, semua maklumat yang diberikan oleh anda "
+#~ "(penerangan, butiran perhubungan, laman facebook, dan lain-lain) akan "
+#~ "muncul dalam direktori ini, dan akan mudah diakses oleh sesiapa sahaja."
+
+#~ msgid "What is the difference between Organization/Individual accounts?"
+#~ msgstr "Apakah perbezaan di antara akaun Organisasi / Individu?"
+
+#~ msgid ""
+#~ "Organizations can have 'members' in the website, and each piece of "
+#~ "content posted by any member will also appear under the Organization "
+#~ "profile page."
+#~ msgstr ""
+#~ "Organisasi boleh mempunyai 'ahli' dalam laman web, dan setiap bahagian "
+#~ "daripada kandungan yang disiarkan oleh mana-mana anggota itu akan turut "
+#~ "muncul di bawah halaman profil Pertubuhan."
+
+#~ msgid ""
+#~ "Many thanks to our sponsors and supporters, who help us do our bit of "
+#~ "environmental action. If you or your organization wishes to participate, "
+#~ "please visit <a href=\"%s\">%s</a>."
+#~ msgstr ""
+#~ "Ribuan terima kasih kepada penaja dan penyokong kami, yang membantu kami "
+#~ "melakukan sedikit  tindakan alam sekitar. Jika anda atau organisasi anda "
+#~ "ingin mengambil bahagian, sila lawati <a href=\"%s\">%s</a>."
+
+#~ msgid ""
+#~ "Many thanks to our volunteers, who are selfishly helping us do our bit of "
+#~ "environmental action. If you'd like to join us, please visit <a href=\"%s"
+#~ "\">%s</a>."
+#~ msgstr ""
+#~ "Ribuan terima kasih kepada sukarelawan kami yang tanpa mementingkan diri "
+#~ "membantu kami melakukan sedikiti tindakan alam sekitar. Jika anda ingin "
+#~ "menyertai kami, sila lawati <a href=\"%s\">%s</a>."
+
+#~ msgid ""
+#~ "We are constantly on the lookout for worthy, knowledgeable and "
+#~ "experienced people who sympathize with our cause and want to empower us. "
+#~ "If you are such a person, please <a href=\"%s\">%s</a>."
+#~ msgstr ""
+#~ "Kami sentiasa mencari untuk orang yang layak , berilmu dan berpengalaman  "
+#~ "yang bersimpati dengan perjuangan kami serta mahu memberi kuasa kepada "
+#~ "kami . Jika anda adalah orang yang sedemikian, sila <a href=\"%s\">%s</a>."
+
+#~ msgid ""
+#~ "<h1>Welcome to MESYM!</h1><strong>MESYM.com</strong> is a crowd-sourced "
+#~ "platform and a living database for environmental movements in Malaysia. "
+#~ "There are many good actions being done out there. Our goal is to bring "
+#~ "them together. <a href=\"%s\">We connect the green dots</a>."
+#~ msgstr ""
+#~ "<h1>Selamat datang ke MESYM!</h1><strong>MESYM.com</strong> adalah sumber "
+#~ "platform orang ramai dan pangkalan data yang hidup untuk pergerakan alam "
+#~ "sekitar di Malaysia. Terdapat banyak amalan yang baik yang dilakukan di "
+#~ "luar sana. Matlamat kami adalah untuk membawa mereka bersama-sama. <a "
+#~ "href=\"%s\">Kami menyambung titik-titik hijau</a>."
+
+#~ msgid "Here you will find:"
+#~ msgstr "Di sini anda akan menemui:"
+
+#~ msgid "Disclaimer:"
+#~ msgstr "Penolakan"
+
+#~ msgid "Categories"
+#~ msgstr "Kategori"
+
+#~ msgid "Volunteers Needed?"
+#~ msgstr "Memerlukan sukarelawan?"
+
+#~ msgid ""
+#~ "Do you need volunteers? Each time a user applies to volunteer, you will "
+#~ "get a notification email with the volunteer's contact information."
+#~ msgstr ""
+#~ "Adakah anda memerlukan sukarelawan? Setiap kali pengguna memohon untuk "
+#~ "menjadi sukarelawan, anda akan mendapat e-mel pemberitahuan dengan "
+#~ "maklumat hubungan sukarelawan ini."
+
+#~ msgid "Events"
+#~ msgstr "Aktiviti - Aktiviti"
+
+#~ msgid "Past Events"
+#~ msgstr "Peristiwa lalu"
+
+#~ msgid "User"
+#~ msgstr "Pengguna"
+
+#~ msgid "Featured article"
+#~ msgstr "artikel yang ditampilkan"
+
+#~ msgid "Featured articles"
+#~ msgstr "Artikel Pilihan"
+
+#~ msgid "Blog entry"
+#~ msgstr "Blog "
+
+#~ msgid "Blog entries"
+#~ msgstr "Catatan Blog"
+
+#~ msgid "Resources"
+#~ msgstr "Sumber"
+
+#~ msgid "Thought"
+#~ msgstr "Fikir"
+
+#~ msgid "Thoughts"
+#~ msgstr "Pemikiran"
+
+#~ msgid "Organization"
+#~ msgstr "Organisasi"
+
+#~ msgid "Individual"
+#~ msgstr "Individu"
+
+#~ msgid "Individuals"
+#~ msgstr "Orang-orang"
+
+#~ msgid "Sponsor"
+#~ msgstr "Menaja"
+
+#~ msgid "Sponsors"
+#~ msgstr "Penaja "
+
+#~ msgid "Featured Community"
+#~ msgstr "Komuniti yang diketengahkan"
+
+#~ msgid "Featured Communities"
+#~ msgstr "Komuniti-komuniti khas"
+
+#~ msgid "No more %s found."
+#~ msgstr "Tidak lagi %s didapati."
+
+#~ msgid "Please %s or register %s / %s to access your %s."
+#~ msgstr "Sila %s atau mendaftar %s / %s untuk mengakses %s anda."
+
+#~ msgid ""
+#~ "Your account has no access to this functionality. Please <a href=\"%s"
+#~ "\">log in</a> with a different user account."
+#~ msgstr ""
+#~ "Akaun anda tidak mempunyai akses kepada fungsi ini. Sila <a href=\"%s"
+#~ "\">login</a> dengan akaun pengguna yang berbeza."
+
+#~ msgid ""
+#~ "Your account has no permission to edit this %s. Please <a href=\"%s\">log "
+#~ "in</a> with a different user account."
+#~ msgstr ""
+#~ "Akaun anda tidak mempunyai keizinan untuk menyunting %s ini. Sila <a href="
+#~ "\"%s\">login</a> dengan akaun pengguna yang berbeza."
+
+#~ msgid "event"
+#~ msgstr "Acara"
+
+#~ msgid "events"
+#~ msgstr "Peristiwa"
+
+#~ msgid "past event"
+#~ msgstr "Peristiwa lalu"
+
+#~ msgid "past Events"
+#~ msgstr "Peristiwa yang lepas"
+
+#~ msgid "project"
+#~ msgstr "Projek"
+
+#~ msgid "projects"
+#~ msgstr "Projek - Projek"
+
+#~ msgid "content"
+#~ msgstr "Kandungan"
+
+#~ msgid "user"
+#~ msgstr "Pengguna"
+
+#~ msgid "users"
+#~ msgstr "Pengguna-pengguna"
+
+#~ msgid "story"
+#~ msgstr "Cerita"
+
+#~ msgid "stories"
+#~ msgstr "Cerita-cerita"
+
+#~ msgid "announcement"
+#~ msgstr "Pengumuman"
+
+#~ msgid "announcements"
+#~ msgstr "Pengumuman "
+
+#~ msgid "discussion"
+#~ msgstr "Perbincangan"
+
+#~ msgid "discussions"
+#~ msgstr "Perbincangan "
+
+#~ msgid "featured article"
+#~ msgstr "artikel yang ditampilkan"
+
+#~ msgid "featured articles"
+#~ msgstr "Artikel Pilihan"
+
+#~ msgid "blog entry"
+#~ msgstr "Kemasukan Blog "
+
+#~ msgid "blog entries"
+#~ msgstr "Catatan Blog"
+
+#~ msgid "resource"
+#~ msgstr "Sumber"
+
+#~ msgid "resources"
+#~ msgstr "Sumber"
+
+#~ msgid "thought"
+#~ msgstr "Pemikiran"
+
+#~ msgid "thoughts"
+#~ msgstr "Pemikiran"
+
+#~ msgid "member"
+#~ msgstr "Ahli"
+
+#~ msgid "members"
+#~ msgstr " Ahli-ahli"
+
+#~ msgid "organization"
+#~ msgstr "Organisasi"
+
+#~ msgid "organizations"
+#~ msgstr "Organisasi-organisasi"
+
+#~ msgid "individual"
+#~ msgstr "Individu"
+
+#~ msgid "individuals"
+#~ msgstr "Orang-orang"
+
+#~ msgid "sponsor"
+#~ msgstr "Menaja"
+
+#~ msgid "sponsors"
+#~ msgstr "Penaja "
+
+#~ msgid "featured community"
+#~ msgstr "Komuniti yang diketengahkan"
+
+#~ msgid "featured communities"
+#~ msgstr "masyarakat yang diketengahkan"
+
+#~ msgid "Toggle Navigation"
+#~ msgstr "Navigasi Togol"
+
+#~ msgid "Toggle Browsing History"
+#~ msgstr "Sejarah Pelayaran Togol"
+
+#~ msgid "Toggle Search"
+#~ msgstr "Carian Togol"
+
+#~ msgid "Featured Organizations"
+#~ msgstr "Organisasi yang ditampilkan"
+
+#~ msgid "The website is currently in beta, please forgive all the bugs."
+#~ msgstr "Laman web ini kini dalam beta, maafkanlah semua pepijat."
+
+#~ msgid "My Profile"
+#~ msgstr "Profil Saya"
+
+#~ msgid "Settings"
+#~ msgstr "Tetapan"
+
+#~ msgid ""
+#~ "<em>Many thanks to our <strong>Sponsors and Supporters</strong>:</em>"
+#~ msgstr ""
+#~ "<em>Ribuan terima kasih kepada <strong>Penaja dan Penyokong kami</"
+#~ "strong></em>"
+
+#~ msgid "Our Sponsors and Supporters"
+#~ msgstr "Penaja dan Penyokong kami"
+
+#~ msgid "Go to %s.com"
+#~ msgstr "Pergi ke %s.com"
+
+#~ msgid "Toggle Full Screen"
+#~ msgstr "Togol Skrin Penuh"
+
+#~ msgid "Open in new Window"
+#~ msgstr "Buka dalam tetingkap baru"
+
+#~ msgid ""
+#~ "<strong><a href=\"%s\">MESYM.com</a></strong> is a platform for "
+#~ "environmental movements in Malaysia. There are many good actions being "
+#~ "done out there. Our goal is to bring them together. <a href=\"%s\">We "
+#~ "connect the green dots</a>."
+#~ msgstr ""
+#~ "<strong><a href=\"%s\">MESYM.com</a></strong> adalah satu platform bagi "
+#~ "pergerakan alam sekitar di Malaysia. Terdapat banyak amalan yang baik "
+#~ "yang dilakukan di luar sana. Matlamat kami adalah untuk membawa mereka "
+#~ "bersama-sama. <a href=\"%s\">Kami menyambung titik-titik hijau</a>."
+
+#~ msgid "Send message to:"
+#~ msgstr "Hantar mesej kepada:"
+
+#~ msgid "Volunteer for:"
+#~ msgstr "Menjadi sukarelawan untuk:"
+
+#~ msgid "Ops, there's nothing here!"
+#~ msgstr "Ops, tiada apa di sini!"
+
+#~ msgid ""
+#~ "<p>We couldn't find anything under this URL...</p><ul class=\"nav pull-"
+#~ "left clearfix\"><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></"
+#~ "ul>"
+#~ msgstr ""
+#~ "<p>Kami tidak dapat mencari apa-apa di bawah URL ini...</p> <ul class="
+#~ "\"nav tarik kiri clearfix\"><li>%s</li><li>%s</li><li>%s</li><li>%s</"
+#~ "li><li>%s</li></ul>"
+
+#~ msgid "Alright, everything set up"
+#~ msgstr "Baiklah, semua sudah disediakan"
+
+#~ msgid "Redirecting..."
+#~ msgstr "Pengarahan semula...."
+
+#~ msgid "Redirecting, please wait..."
+#~ msgstr "Pengarahan semula, sila tunggu..."
+
+#~ msgid "No categories"
+#~ msgstr "Tiada Kategori"
+
+#~ msgid "No Categories"
+#~ msgstr "Tiada Kategori"
+
+#~ msgid "Section links"
+#~ msgstr "Pautan-pautan bahagian"
+
+#~ msgid "Blog"
+#~ msgstr "Blog"
+
+#~ msgid ""
+#~ "<span class=\"hidden-sm hidden-md hidden-lg\">Events</span><span class="
+#~ "\"hidden-xs\">Upcoming Events</span>"
+#~ msgstr ""
+#~ "<span class=\"sm- tersembunyi md -tersembunyi lg-tersembunyi\"> "
+#~ "Peristiwa</span> <span class=\"tersembunyi-xs\"> Acara akan datang</span>"
+
+#~ msgid "Members"
+#~ msgstr " Ahli-ahli"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "atal ke bawah untuk memuatkan lebih banyak keputusan"
+
+#~ msgid "Date"
+#~ msgstr "Tarikh"
+
+#~ msgid "When"
+#~ msgstr "Bila"
+
+#~ msgid "Problem found in %s"
+#~ msgstr "Masalah-masalah yang dikenal pasti dalam %s"
+
+#~ msgid ""
+#~ "If you don't mind, please <a href=\"mailto:%s?subject=%s&body={0}"
+#~ "\">notify our admins</a> about this problem."
+#~ msgstr ""
+#~ "Sila <a href=\"mailto:%s?subject=%s&body={0}\">memberitahu admin-admin "
+#~ "kami</a>  tentang masalah ini."
+
+#~ msgid "Ops, there was a problem!<br/>Please try again, or reload this page."
+#~ msgstr "Ops, ada masalah! <br/>Sila cuba lagi, atau muat semula laman ini."
+
+#~ msgid "Search Results for:"
+#~ msgstr "Hasil carian bagi:"
+
+#~ msgid "Ops, nothing found here!"
+#~ msgstr "Ops, tiada hasil carian!"
+
+#~ msgid ""
+#~ "<br/><hr/><p><a href=\"%s\">MESYM</a><br/>Connecting the green dots.</p>"
+#~ msgstr ""
+#~ "<br/><hr/><p><a href=\"%s\">MESYM</a><br/>Gabungkan titik-titik hijau.</p>"
+
+#~ msgid "<p><u>Author:</u><br/><a href=\"%s\">%s</a></p>"
+#~ msgstr "<p><u>Penulis:</u><br/><a href=\"%s\">%s</a></p>"
+
+#~ msgid "<p><u>Comment:</u><br/>%s</p>"
+#~ msgstr "<p><u>Komen:</u><br/>%s</p>"
+
+#~ msgid "<p><b><em>In response to:</em></b></p>"
+#~ msgstr "<p><b><em>Sebagai respon kepada:</em></b></p>"
+
+#~ msgid "Subscribe to our Newsletter?"
+#~ msgstr "Langani surat berita kami?"
+
+#~ msgid ""
+#~ "Keep up to date with our weekly newsletters, detailing what's going on in "
+#~ "the Malaysian environmental scene: Upcoming Events, latest Projects, "
+#~ "worthy discussions, and much more."
+#~ msgstr ""
+#~ "Teruskan mengikuti dari masa ke semasa berita mingguan kami, "
+#~ "memperincikan apa yang berlaku di adegan alam sekitar Malaysia: Kalendar "
+#~ "Peristiwa, Projek terkini, perbincangan yang berbaloi, dan banyak lagi."
+
+#~ msgid "Email*"
+#~ msgstr "E-mel*"
+
+#~ msgid "Language"
+#~ msgstr "Bahasa "
+
+#~ msgid "The address was not found on the map"
+#~ msgstr "Alamat tidak dapat dicari pada peta"
+
+#~ msgid "Name or Address"
+#~ msgstr "Nama atau Alamat"
+
+#~ msgid "No Location"
+#~ msgstr "Tiada lokasi"
+
+#~ msgid "Google Calendar"
+#~ msgstr "Kalender Google"
+
+#~ msgid "iCal"
+#~ msgstr "iCal"
+
+#~ msgid "Events Calendar"
+#~ msgstr "Kalender Aktiviti"
+
+#~ msgid "Location created successfully!"
+#~ msgstr "Lokasi telah berjaya diciptakan!"
+
+#~ msgid "City is missing."
+#~ msgstr "Ruang bandar tidak diisikan."
+
+#~ msgid "Now adding to your list of Locations."
+#~ msgstr "Sedang menambahkan senarai lokasi anda."
+
+#~ msgid "Adding Location..."
+#~ msgstr "Sedang menambahkan lokasi..."
+
+#~ msgid "Add Location"
+#~ msgstr "Sertakan lokasi"
+
+#~ msgid "Country"
+#~ msgstr "Negara"
+
+#~ msgid "Name*"
+#~ msgstr "Nama*"
+
+#~ msgid "Address"
+#~ msgstr "Alamat"
+
+#~ msgid "City*"
+#~ msgstr "Bandar*"
+
+#~ msgid "State"
+#~ msgstr "Negeri"
+
+#~ msgid "Post code"
+#~ msgstr "Poskod"
+
+#~ msgid "Region"
+#~ msgstr "Kawasan"
+
+#~ msgid "Location(s)"
+#~ msgstr "Lokasi"
+
+#~ msgid "All Locations"
+#~ msgstr "Semua Lokasi"
+
+#~ msgid "Bank Transfer"
+#~ msgstr "Pemindahan wang melalui bank"
+
+#~ msgid "Booking successful."
+#~ msgstr "Penempahan telah berjaya diterima. "
+
+#~ msgid ""
+#~ "Make your payment directly into our bank account. Please use your Order "
+#~ "ID as the payment reference. Once the payment has been done, please send "
+#~ "an email to <a href=\"mailto:info@greendrinks.cn?subject=Bank Transfer"
+#~ "\">info@greendrinks.cn</a> with the Order ID and the Event Booking will "
+#~ "be confirmed."
+#~ msgstr ""
+#~ "Sila mengemukakan bayaran anda terus kepada akaun bank kami. Sila guna "
+#~ "Order ID anda sebagai rujukan bayaran. Selepas mengemukakan bayaran, sila "
+#~ "e-mel kepada <a href=\"mailto:info@greendrinks.cn?subject=Bank Transfer"
+#~ "\">info@greendrinks.cn</a>. Sila sertakan Order ID pada e-mel tersebut. "
+#~ "Penempahan aktiviti akan disahkan."
+
+#~ msgid "Account details"
+#~ msgstr "Maklumat akaun"
+
+#~ msgid "Alipay"
+#~ msgstr "Alipay"
+
+#~ msgid ""
+#~ "Pay via Alipay, if you don't have an Alipay account, you can also pay "
+#~ "with your debit card or credit card"
+#~ msgstr ""
+#~ "Bayar melalui Alipay. Sekiranya anda tidak memiliki akaun Alipay, anda "
+#~ "boleh mengemukakan bayaran menggunaka kad debit kad kredit anda"
+
+#~ msgid ""
+#~ "Please wait whilst you are redirected to Alipay to proceed with payment."
+#~ msgstr ""
+#~ "Sila tunggu. Kami sedang mengarahkan anda ke Alipay untuk meneruskan "
+#~ "bayaran."
+
+#~ msgid ""
+#~ "Thank you for your payment. Your transaction has been completed, and a "
+#~ "receipt for your purchase has been emailed to you along with a seperate "
+#~ "email containing account details to access your booking information on "
+#~ "this site. You may log into your account at www.paypal.com to view "
+#~ "details of this transaction."
+#~ msgstr ""
+#~ "Terima kasih untuk bayaran anda. Transaksi anda telah dilengkapkan. "
+#~ "Sebuah e-mel merangkumi resit pembelian anda telah dihantar ke e-mel "
+#~ "anda. Sebuah lagi e-mel merangkumi maklumat akaun untuk mengakses butiran-"
+#~ "butiran penempahan pada laman web ini telah dihantar ke e-mel anda. Anda "
+#~ "juga boleh daftar masuk pada www.paypal.com untuk melihat butiran-butiran "
+#~ "transaksi."
+
+#~ msgid "Simply come and pay at the Event ;)"
+#~ msgstr "Datang dan bayar pada hari tersebut ;)"
+
+#~ msgid "Unknown"
+#~ msgstr "Tidak diketahui"
+
+#~ msgid "Unprocessed payment needs refund"
+#~ msgstr "Bayaran yang tidak diproses memerlukan bayaran pulang."
+
+#~ msgid ""
+#~ "<strong>Important:</strong>In order to connect Alipay with your site, you "
+#~ "need to configure the return URL."
+#~ msgstr ""
+#~ "<strong>Penting:</strong>Untuk menyambungkan Alipay dengan halaman anda, "
+#~ "anda perlu mengkonfigurasi URL pulang."
+
+#~ msgid "Your return url is %s"
+#~ msgstr "URL pulang anda adalah %s"
+
+#~ msgid ""
+#~ "Please visit the <a href=\"%s\">documentation</a> for further "
+#~ "instructions."
+#~ msgstr "Sila lawat <a href=\"%s\">dokumentasi</a> untuk arahan selanjutnya."
+
+#~ msgid "Alipay account"
+#~ msgstr "Akaun Alipay"
+
+#~ msgid ""
+#~ "Please enter your Alipay Email; this is needed in order to take payment."
+#~ msgstr ""
+#~ "Sila masukkan e-mel Alipay anda. Maklumat ini diperlukan untuk menerima "
+#~ "bayaran."
+
+#~ msgid "Alipay partner ID"
+#~ msgstr "ID Rakan Alipay"
+
+#~ msgid ""
+#~ "Please enter the partner ID. If you don't have one, <a href=\"https://b."
+#~ "alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+#~ msgstr ""
+#~ "Sila masukkan ID Rakan Alipay. Sekiranya anda belum memiliki ID Rakan "
+#~ "Alipay, <a href=\"https://b.alipay.com/newIndex.htm\" target=\"_blank"
+#~ "\">sila klik</a> untuk mendapat satu."
+
+#~ msgid "Alipay security key"
+#~ msgstr "Alipay kekunci keselamatan"
+
+#~ msgid ""
+#~ "Please enter the security key. If you don't have one, <a href=\"https://b."
+#~ "alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+#~ msgstr ""
+#~ "Sila masukkan kekunci keselamatan. Sekiranya anda tidak mempunyai kekunci "
+#~ "keselamatan, <a href=\"https://b.alipay.com/newIndex.htm\" target=\"_blank"
+#~ "\">klik di sini</a> untuk menerima satu."
+
+#~ msgid "Payment method"
+#~ msgstr "Cara bayaran"
+
+#~ msgid ""
+#~ "Be aware that by approving a booking awaiting payment, a full payment "
+#~ "transaction will be registered against this booking, meaning that it will "
+#~ "be considered as paid."
+#~ msgstr ""
+#~ "Sila ambil perhatian. Dengan meluluskan sebuah penempahan yang sedang "
+#~ "menunggu bayaran, satu transaksi bayaran penuh akan didaftarkan terhadap "
+#~ "penempahan ini dan penempahan ini akan dianggap berbayar."
+
+#~ msgid ""
+#~ "The message that is shown to a user when a booking with bank transfer "
+#~ "payments is successful."
+#~ msgstr ""
+#~ "Mesej yang akan dipaparkan kepada pengguna apabila sebuah penempahan "
+#~ "dengan pemindahan wang melalui bank telah berjaya."
+
+#~ msgid "Customer Message"
+#~ msgstr "Mesej Pengguna"
+
+#~ msgid ""
+#~ "Give the customer instructions for paying via Bank Transfer, and let them "
+#~ "know that the Event Booking will be confirmed once the money is received"
+#~ msgstr ""
+#~ "Mesej ini memberi maklumat bayaran tentang pemindahan wang melalui bank "
+#~ "kepada pengguna. Mesej ini juga memberitahu pengguna bahawa penempahan "
+#~ "aktiviti akan disahkan apabila bayaran diterima. "
+
+#~ msgid "Account details title"
+#~ msgstr "Tajuk maklumat akaun"
+
+#~ msgid "Account Name"
+#~ msgstr "Nama Akaun"
+
+#~ msgid "Account Number"
+#~ msgstr "Nombor Akaun"
+
+#~ msgid "Sort Code"
+#~ msgstr "Kod Jenis"
+
+#~ msgid "Bank Name"
+#~ msgstr "Nama Bank"
+
+#~ msgid "IBAN"
+#~ msgstr "IBAN"
+
+#~ msgid "BIC (formerly Swift)"
+#~ msgstr "BIC (dikenal sebagai Swift sebelum ini)"
+
+#~ msgid "Account name: %s"
+#~ msgstr "Nama akaun: %s"
+
+#~ msgid "Account number: %s"
+#~ msgstr "Nombor akaun: %s"
+
+#~ msgid "Sort code: %s"
+#~ msgstr "Kod jenis: %s"
+
+#~ msgid "Bank name: %s"
+#~ msgstr "Nama bank: %s"
+
+#~ msgid "IBAN: %s"
+#~ msgstr "IBAN: %s"
+
+#~ msgid "BIC (formerly Swift): %s"
+#~ msgstr "BIC (dikenal sebagai Swift sebelum ini): %s"
+
+#~ msgid "Awaiting %s Payment"
+#~ msgstr "Sedang menunggu bayaran %s"
+
+#~ msgid ""
+#~ "To finalize your booking, please click the following button to proceed to "
+#~ "%s."
+#~ msgstr ""
+#~ "Untuk memuktamadkan penempahan anda, sila klik butang seterusnya untuk "
+#~ "meneruskan ke %s."
+
+#~ msgid "Resume Payment"
+#~ msgstr "Menyambung semula bayaran"
+
+#~ msgid "Approve"
+#~ msgstr "Lulus"
+
+#~ msgid "Edit/View"
+#~ msgstr "Sunting/Lihat"
+
+#~ msgid ""
+#~ "The message that is shown to a user when a booking is successful whilst "
+#~ "being redirected to PayPal for payment."
+#~ msgstr ""
+#~ "Mesej ini akan dipaparkan kepada seorang pengguna apabila sebuah "
+#~ "penempahan telah berjaya dan pengguna tersebut sedang dihala ke PayPal "
+#~ "untuk menjelaskan bayaran."
+
+#~ msgid "Success Free Message"
+#~ msgstr "Mesej Percuma Berjaya"
+
+#~ msgid ""
+#~ "If some cases if you allow a free ticket (e.g. pay at gate) as well as "
+#~ "paid tickets, this message will be shown and the user will not be "
+#~ "redirected to PayPal."
+#~ msgstr ""
+#~ "Sekiranya anda membenarkan tiket percuma (e.g. bayar di pintu) dan tiket "
+#~ "berbayar, mesej ini akan dipaparkan. Pengguna tidak akan dihala ke "
+#~ "PayPal. "
+
+#~ msgid "Thank You Message"
+#~ msgstr "Mesej Terima Kasih"
+
+#~ msgid ""
+#~ "If you choose to return users to the default Events Manager thank you "
+#~ "page after a user has paid on PayPal, you can customize the thank you "
+#~ "message here."
+#~ msgstr ""
+#~ "Sekiranya anda ingin menghala pengguna kepada halaman yang menyatakan "
+#~ "terima kasih daripada Pengurus Aktiviti lalai setelah menerima bayaran "
+#~ "pengguna, anda boleh merangka mesej terima kasih tersebut di sini."
+
+#~ msgid "Return URL"
+#~ msgstr "URL Pulang"
+
+#~ msgid ""
+#~ "Once a payment is completed, users will be offered a link to this URL "
+#~ "which confirms to the user that a payment is made. If you would to "
+#~ "customize the thank you page, create a new page and add the link here. "
+#~ "For automatic redirect, you need to turn auto-return on in your PayPal "
+#~ "settings."
+#~ msgstr ""
+#~ "Setelah sebuah bayaran telah selesai, pengguna akan diberi satu pautan ke "
+#~ "URL ini, yang akan mengesahkan penerimaan bayaran daripada pengguna "
+#~ "tersebut. Sekiranya anda ingin merangka halaman tersebut yang akan "
+#~ "menyatakan terima kasih, sila cipta satu halaman baru dan menambah pautan "
+#~ "ini pada halaman tersebut. Untuk penghalaan automatik, anda perlu "
+#~ "memulakan auto-pulang pada seting PayPal anda."
+
+#~ msgid "Cancel URL"
+#~ msgstr "Batalkan URL"
+
+#~ msgid ""
+#~ "Whilst paying on PayPal, if a user cancels, they will be redirected to "
+#~ "this page."
+#~ msgstr ""
+#~ "Apabila seorang pengguna membatalkan bayaran semasa pembayaran sedang "
+#~ "diproses pada PayPal, pengguna tersebut akan dihala ke halaman ini."
+
+#~ msgid "Delete Bookings Pending Payment"
+#~ msgstr "Padam penempahan dengan bayaran menunggu"
+
+#~ msgid "minutes"
+#~ msgstr "minit"
+
+#~ msgid ""
+#~ "Once a booking is started and the user is taken to PayPal, Events Manager "
+#~ "stores a booking record in the database to identify the incoming payment. "
+#~ "These spaces may be considered reserved if you enable <em>Reserved "
+#~ "unconfirmed spaces?</em> in your Events &gt; Settings page. If you would "
+#~ "like these bookings to expire after x minutes, please enter a value above "
+#~ "(note that bookings will be deleted, and any late payments will need to "
+#~ "be refunded manually via PayPal)."
+#~ msgstr ""
+#~ "Setelah sebuah proses penempahan telah dimulakan dan pengguna telah "
+#~ "dibawa ke PayPal, Pengurus Aktiviti akan menyimpan sebuah rekod "
+#~ "penempahan pada pangkalan data untuk mengidentifikasi bayaran mendatang. "
+#~ "Tempat-tempat ini akan dianggap ditempah sekiranya anda telah mendayakan "
+#~ "<em>Tempat Ditempah yang belum disahkan?</em> pada halaman Aktiviti &gt; "
+#~ "Seting anda. Sekiranya anda ingin membatalkan tempat-tempat ini selepas x "
+#~ "minit, sila nyatakan nombor tersebut di atas (sila perhatikan bahawa "
+#~ "penempahan akan dibatalkan, dan apa-apa bayaran lambat perlu dipulangkan "
+#~ "secara manual melalui PayPal)."
+
+#~ msgid "Manually approve completed transactions?"
+#~ msgstr "Luluskan penempahan yang sempurna secara manual?"
+
+#~ msgid ""
+#~ "By default, when someone pays for a booking, it gets automatically "
+#~ "approved once the payment is confirmed. If you would like to manually "
+#~ "verify and approve bookings, tick this box."
+#~ msgstr ""
+#~ "Secara lalai, apabila seorang membayar untuk sebuah penempahan, "
+#~ "penempahan tersebut akan diluluskan secara automatik apabila penerimaan "
+#~ "bayaran telah disahkan. Sekiranya anda ingin mengesahkan dan meluluskan "
+#~ "penempahan secara manual, sila tanda petak ini."
+
+#~ msgid ""
+#~ "Approvals must also be required for all bookings in your <a href=\"%s"
+#~ "\">settings</a> for this to work properly."
+#~ msgstr ""
+#~ "Kelulusan diperlukan bagi semua penempahan <a href=\"%s\">settings</a> "
+#~ "anda untuk kejayaan proses ini."
+
+#~ msgid ""
+#~ "<strong>Important:</strong>In order to connect PayPal with your site, you "
+#~ "need to enable IPN on your account."
+#~ msgstr ""
+#~ "<strong>Penting:</strong>Untuk menggabungkan PayPal dengan halaman anda, "
+#~ "anda perlu mendayakan IPN pada akaun anda."
+
+#~ msgid "PayPal Email"
+#~ msgstr "E-mel PayPal"
+
+#~ msgid "Paypal Currency"
+#~ msgstr "Mata Wang PayPal"
+
+#~ msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+#~ msgstr "Nyatakan mata wang anda pada <a href=\"%s\">settings</a> halaman."
+
+#~ msgid "PayPal Language"
+#~ msgstr "Bahasa PayPal"
+
+#~ msgid ""
+#~ "PayPal allows you to select a default language users will see. This is "
+#~ "also determined by PayPal which detects the locale of the users browser. "
+#~ "The default would be US."
+#~ msgstr ""
+#~ "Paypal membenarkan anda untuk memillih satu bahasa lalai yang dipaparkan "
+#~ "kepada pengguna. Pilihan ini akan juga ditentukan oleh PayPal yang "
+#~ "mengenalpasti kawasan pelayar pengguna. Kawasan lalai adalah Amerika "
+#~ "Syarikat. "
+
+#~ msgid "PayPal Mode"
+#~ msgstr "Mod PayPal"
+
+#~ msgid "Live Site"
+#~ msgstr "Halaman Hidup"
+
+#~ msgid "Test Mode (Sandbox)"
+#~ msgstr "Mod Ujian (Sandbox)"
+
+#~ msgid "PayPal Page Logo"
+#~ msgstr "Halaman Logo PayPal"
+
+#~ msgid ""
+#~ "Add your logo to the PayPal payment page. It's highly recommended you "
+#~ "link to a https:// address."
+#~ msgstr ""
+#~ "Tambah logo anda kepada halaman bayaran PayPal. Anda digalakkan untuk "
+#~ "mempaut logo tersebut pada satu alamat https://"
+
+#~ msgid "Border Color"
+#~ msgstr "Warna Lingkaran"
+
+#~ msgid ""
+#~ "Provide a hex value color to change the color from the default blue to "
+#~ "another color (e.g. #CCAAAA)."
+#~ msgstr ""
+#~ "Nyatakan satu warna nilai heks untuk menukarkan warna lalai dari biru "
+#~ "kepada warna lain (e.g. #CCAAAA)."
+
+#~ msgid "Send Message"
+#~ msgstr "Hantar mesej."
+
+#~ msgid "Send Email"
+#~ msgstr "Hantar e-mel"
+
+#~ msgid "Subscribe"
+#~ msgstr "Langgan"
+
+#~ msgid ""
+#~ "Please write an email to <a href=\"mailto:%1$s\">%1$s</a>, or fill in the "
+#~ "form below:"
+#~ msgstr ""
+#~ "Sila tulis e-mel kepada <a href=\"mailto:%1$s\">%1$s</a>, atau isi borang "
+#~ "di bawah:"
+
+#~ msgid ""
+#~ "We will send the info below to the organizers, who should then get in "
+#~ "touch with you."
+#~ msgstr ""
+#~ "Kami akan menghantar maklumat di bawah kepada para penganjur. Mereka akan "
+#~ "menghubungi anda."
+
+#~ msgid "Email is missing."
+#~ msgstr "Tiada e-mel."
+
+#~ msgid "Message is missing."
+#~ msgstr "Tiada mesej."
+
+#~ msgid "High five! Message sent successfully!"
+#~ msgstr "Bagus! Mesej telah berjaya dihantar!"
+
+#~ msgid "Thanks for contacting us, we will get in touch with you shortly."
+#~ msgstr ""
+#~ "Terima kasih kerana hubungi kami. Kami akan hubungi anda dalam masa "
+#~ "terdekat."
+
+#~ msgid "Email sent successfully."
+#~ msgstr "E-mel telah berjaya dihantar."
+
+#~ msgid "Any more friends who might be interested? Keep sending!"
+#~ msgstr ""
+#~ "Ada lagi kawan-kawan yang mungkin berminat? Teruskan penghantaran mesej!"
+
+#~ msgid "To Email is missing."
+#~ msgstr "Tiada e-mel penerima."
+
+#~ msgid "Awesome! Thanks for taking part!"
+#~ msgstr "Bagus! Terima kasih atas usaha anda!"
+
+#~ msgid ""
+#~ "We have sent a message with your information to the organizers. They "
+#~ "should contact you soon."
+#~ msgstr ""
+#~ "Kami telah menghantar sebuah mesej mengandungi maklumat anda kepada para "
+#~ "penganjur. Mereka akan menghubungi anda tidak lama lagi."
+
+#~ msgid "\"Why do you want to volunteer?\" is missing."
+#~ msgstr "Tiada \"Mengapakah anda ingin menjadi seorang sukarelawan?\"."
+
+#~ msgid "Subscription Successful!"
+#~ msgstr "Pelangganan Berjaya!"
+
+#~ msgid ""
+#~ "To make sure you get the newsletter, please add <strong>%s</strong> in "
+#~ "your contact list. Thanks!"
+#~ msgstr ""
+#~ "Untuk memastikan anda mendapat surat berita, sila tambah <strong>%s</"
+#~ "strong> dalam senarai kenalan anda. Terima kasih!"
+
+#~ msgid "Subscribe to our weekly newsletter:"
+#~ msgstr "Langgani surat berita mingguan kami:"
+
+#~ msgid "Take a peek at our regular newsletter campaigns"
+#~ msgstr "Sila lihat kempen surat berita biasa kami"
+
+#~ msgid "Share by email:"
+#~ msgstr "Berkongsi melalui e-mel:"
+
+#~ msgid "Topic"
+#~ msgstr "Topik"
+
+#~ msgid "Your Name*"
+#~ msgstr "Nama Anda*"
+
+#~ msgid "Your Email*"
+#~ msgstr "E-mel Anda*"
+
+#~ msgid "To Email*"
+#~ msgstr "E-mel Kepada*"
+
+#~ msgid "Subject"
+#~ msgstr "Tema"
+
+#~ msgid "Your Phone number"
+#~ msgstr "Nombor Telefon Anda"
+
+#~ msgid "Message*"
+#~ msgstr "Mesej*"
+
+#~ msgid "Why do you want to volunteer?*"
+#~ msgstr "Mengapakah anda ingin menjadi seorang sukarelawan?*"
+
+#~ msgid ""
+#~ "Keep up to date with our weekly newsletter, detailing what's going on in "
+#~ "the Malaysian environmental scene: upcoming events, latest projects, "
+#~ "worthy discussions, and much more."
+#~ msgstr ""
+#~ "Teruskan mengikuti dari masa ke semasa berita mingguan kami, "
+#~ "memperincikan apa yang berlaku di adegan alam sekitar Malaysia: Kalendar "
+#~ "Peristiwa, Projek terkini, perbincangan yang berbaloi, dan banyak lagi."
+
+#~ msgid "Email is missing or format is incorrect."
+#~ msgstr "E-mel tiada atau format tidak betul."
+
+#~ msgid "Insert with Media Player"
+#~ msgstr "Sisip dengan Media Player"
+
+#~ msgid "Add external media files, Youtube videos, podcasts, etc"
+#~ msgstr ""
+#~ "Tambah fail-fail media luaran, video-video Youtube, podcast-podcast, dan "
+#~ "lain-lain."
+
+#~ msgid "Save all changes"
+#~ msgstr "Simpan semua perubahan"
+
+#~ msgid "Save, Close and Refresh"
+#~ msgstr "Simpan, Tutup dan Muat Semula"
+
+#~ msgid "Click here to watch the video"
+#~ msgstr "Klik di sini untuk menonton video "
+
+#~ msgid "Do not add"
+#~ msgstr "Jangan sertakan"
+
+#~ msgid "Add to Resources"
+#~ msgstr "Sertakan pada Sumber"
+
+#~ msgid "Video"
+#~ msgstr "Video"
+
+#~ msgid "Images"
+#~ msgstr "Gambar-Gambar"
+
+#~ msgid "Podcasts"
+#~ msgstr "Podcast-Podcast"
+
+#~ msgid "Documents"
+#~ msgstr "Dokumen-Dokumen"
+
+#~ msgid " <a href=\"%1$s\" target=\""
+#~ msgstr " <a href=\"%1$s\" target=\""
+
+#~ msgid ""
+#~ "Ops, it seems this content is not available in <strong>%s</strong>. <a "
+#~ "href=\"%s\">Would you like to help us translate it?</a>"
+#~ msgstr ""
+#~ "Ops, ia seolah-olah kandungan ini tidak terdapat di <strong>%s</strong>. "
+#~ "<a href=\"%s\">Adakah anda ingin membantu kami menterjemahkannya?</a>"
+
+#~ msgid "%s has a new member!"
+#~ msgstr "%s mempunyai ahli baru!"
+
+#~ msgid ""
+#~ "<p>Please <a href=\"%s\">click here to configure the settings of this "
+#~ "user as a member of your Organization</a>:</p>"
+#~ msgstr ""
+#~ "<p>Sila <a href=\"%s\">klik di sini untuk mengkonfigurasi tetapan "
+#~ "pengguna ini sebagai ahli Organisasi anda</a>:</p>"
+
+#~ msgid ""
+#~ "<li>Accept or Reject <b>%s</b> as a member of your Organization. "
+#~ "Currently: accepted.</li>"
+#~ msgstr ""
+#~ "<li> Terima atau Tolak <b>%s</b> sebagai ahli Pertubuhan anda. Pada masa "
+#~ "ini: Diterima.</li>"
+
+#~ msgid ""
+#~ "<li>Determine if the content posted by <b>%s</b> will also appear under %"
+#~ "s. Currently: yes.</li>"
+#~ msgstr ""
+#~ "<li> Tentukan sama ada kandungan yang disiarkan oleh <b>%s</b> juga akan "
+#~ "muncul di bawah%s. Pada masa ini: Ya.</li>"
+
+#~ msgid ""
+#~ "<li>Choose what type of member <b>%s</b> is (Staff, Volunteer, Student, "
+#~ "etc). Currently: 'Member'.</li>"
+#~ msgstr ""
+#~ "<li> Pilih jenis ahli <b>%s</b> adalah (Staf, Sukarelawan, Pelajar, dan "
+#~ "lain-lain). Pada masa ini: 'Ahli'.</li>"
+
+#~ msgid ""
+#~ "<p>To view all your current members, and edit their membership settings, "
+#~ "please click on <a href=\"%s\">%s</a>.</p>"
+#~ msgstr ""
+#~ "<p>Untuk melihat semua ahli semasa anda, dan menyunting tetapan keahlian "
+#~ "mereka, sila klik pada <a href=\"%s\">%s</a>.</p>"
+
+#~ msgid "Member of"
+#~ msgstr "Ahli"
+
+#~ msgid "You are not allowed to be a Community member of yourself!"
+#~ msgstr "Anda tidak dibenarkan untuk menjadi ahli komuniti anda tersendiri."
+
+#~ msgid ""
+#~ "The following Organization(s) were not added, since they claim you are "
+#~ "not their member: %s."
+#~ msgstr ""
+#~ "Pertubuhan-pertubuhan berikut tidak ditambah, kerana mereka mendakwa anda "
+#~ "bukan anggota mereka :%s."
+
+#~ msgid "Incorrect URL"
+#~ msgstr "URL yang salah"
+
+#~ msgid "The status has not been set"
+#~ msgstr "Status belum ditetapkan"
+
+#~ msgid ""
+#~ "<p><a href=\"%s\">%s</a> is inviting you to <a href=\"%s\">become their "
+#~ "member</a>:</p>"
+#~ msgstr ""
+#~ "<p><a href=\"%s\">%s</a> menjemput anda ke <a href=\"%s\">menjadi ahli "
+#~ "mereka</a>:</p>"
+
+#~ msgid "How to become %s's member?"
+#~ msgstr "Bagaimana untuk menjadi ahli %s?"
+
+#~ msgid ""
+#~ "If you do not have an account in %s yet:<br/>Register <a href=\"%s\">as "
+#~ "an Individual</a> / <a href=\"%s\">as an Organization</a>, and while "
+#~ "doing so, select <strong>%s</strong> in section \"My Organizations\"."
+#~ msgstr ""
+#~ "Jika anda tidak mempunyai akaun dalam %s lagi: <br/>Daftar <a href=\"%s"
+#~ "\"> sebagai individu</a> / <a href=\"%s\">sebagai Pertubuhan</a> dan "
+#~ "semasa berbuat demikian, pilih <strong>%s</strong> dalam seksyen "
+#~ "\"Organisasi Saya\"."
+
+#~ msgid ""
+#~ "<p>If you have already have an account in %s:<br/>Go to <a href=\"%s\">%"
+#~ "s</a>, select <strong>%s</strong> and submit.</p>"
+#~ msgstr ""
+#~ "<p>Jika anda sudah mempunyai akaun dalam%s:<br/>Pergi ke <a href=\"%s\">%"
+#~ "s</a>, pilih <strong>%s</strong> dan hantar.</p>"
+
+#~ msgid ""
+#~ "The following Organization(s) will not be active, since they claim you "
+#~ "are not their member: %s."
+#~ msgstr ""
+#~ "Pertubuhan berikut tidak akan aktif, kerana mereka mendakwa anda bukan "
+#~ "anggota mereka: %s."
+
+#~ msgid "No Organizations"
+#~ msgstr " Tiada Organisasi"
+
+#~ msgid "Not much"
+#~ msgstr "Tidak banyak"
+
+#~ msgid "No details"
+#~ msgstr "Tiada maklumat"
+
+#~ msgid "Edit membership"
+#~ msgstr "Sunting keahlian"
+
+#~ msgid "Show Content from: Organization + Members"
+#~ msgstr "Tunjuk Kandungan daripada: Pertubuhan + Ahli"
+
+#~ msgid "Show Content from: Organization"
+#~ msgstr "Tunjuk Kandungan daripada: Pertubuhan"
+
+#~ msgid "Update successful!"
+#~ msgstr "Kemaskini berjaya!"
+
+#~ msgid "Your changes have been saved."
+#~ msgstr "Perubahan yang anda buat telah disimpan."
+
+#~ msgid "User account"
+#~ msgstr "akaun pengguna"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your Organizations."
+#~ msgstr "Sila <a href=\"%s\">login</a> untuk menyunting Pertubuhan anda."
+
+#~ msgid "Only %s accounts can add Organizations' membership."
+#~ msgstr "Hanya akaun%s boleh menambah keahlian Pertubuhan ."
+
+#~ msgid "Please <a href=\"%s\">log in</a> to invite your members."
+#~ msgstr "Sila <a href=\"%s\">log masuk</a> untuk menjemput ahli anda."
+
+#~ msgid "Only %s accounts can invite members."
+#~ msgstr "Hanya akaun %s boleh menjemput ahli."
+
+#~ msgid "Only Organizations can invite members."
+#~ msgstr "Hanya Organisasi boleh menjemput ahli."
+
+#~ msgid ""
+#~ "Your Organization is configured to not accept members. Please edit your "
+#~ "user account to change this setting."
+#~ msgstr ""
+#~ "Organisasi anda dikonfigurasikan untuk tidak menerima ahli. Sila "
+#~ "menyunting akaun pengguna anda untuk menukar tetapan ini."
+
+#~ msgid "Status update successful!"
+#~ msgstr "Status kemaskini berjaya!"
+
+#~ msgid ""
+#~ "Please <a href=\"%s\">log in</a> to update your members' information."
+#~ msgstr ""
+#~ "Sila <a href=\"%s\">log masuk</a> untuk mengemaskini maklumat ahli anda."
+
+#~ msgid "Only %s accounts can edit their members' information."
+#~ msgstr "Hanya akaun %s boleh menyunting maklumat ahli-ahli mereka."
+
+#~ msgid "Only Organizations can have members."
+#~ msgstr "Hanya Organisasi boleh mempunyai ahli."
+
+#~ msgid "This user is not a member of your Organization."
+#~ msgstr "Pengguna ini bukan ahli Organisasi anda."
+
+#~ msgid "No members found."
+#~ msgstr "Tiada ahli dijumpai."
+
+#~ msgid "No more members found."
+#~ msgstr "Tiada lagi ahli dijumpai."
+
+#~ msgid "Please <a href=\"%s\">log in</a> to see your members."
+#~ msgstr "Sila <a href=\"%s\">log masuk</a> untuk melihat ahli-ahli anda."
+
+#~ msgid "Only %s accounts can have members."
+#~ msgstr "Hanya akaun %s boleh mempunyai ahli."
+
+#~ msgid "Do you accept members?"
+#~ msgstr "Adakah anda menerima ahli?"
+
+#~ msgid "Status*"
+#~ msgstr "Status*"
+
+#~ msgid "Last name"
+#~ msgstr "Nama Keluarga"
+
+#~ msgid "Contact person"
+#~ msgstr "Hubungi"
+
+#~ msgid "Telephone / Fax"
+#~ msgstr "No. Telefon/Faks"
+
+#~ msgid "Invite members: Emails*"
+#~ msgstr "Menjemput ahli: E-mel *"
+
+#~ msgid ""
+#~ "Become a Community: all the content posted by your members will also "
+#~ "appear under your Organization's profile."
+#~ msgstr ""
+#~ "Menjadi Komuniti: semua kandungan yang diberikan oleh ahli-ahli anda juga "
+#~ "akan muncul di bawah Profil Organisasi anda."
+
+#~ msgid ""
+#~ "Status \"Active\" if the user is truly your member, or \"Rejected\" "
+#~ "otherwise. Rejected users will not appear as your Organization's members, "
+#~ "or contribute content."
+#~ msgstr ""
+#~ "Status \"aktif\" jika pengguna adalah benar-benar ahli anda, atau "
+#~ "\"Ditolak\" sebaliknya. Pengguna yang ditolak tidak akan muncul sebagai "
+#~ "ahli Organisasi anda, atau menyumbang kandungan."
+
+#~ msgid ""
+#~ "All the emails below will receive an invitation to join your Organization "
+#~ "as members."
+#~ msgstr ""
+#~ "Semua e-mel di bawah akan menerima jemputan untuk menyertai Organisasi "
+#~ "anda sebagai ahli."
+
+#~ msgid "Organization Name*"
+#~ msgstr "Nama Organisasi *"
+
+#~ msgid "Organization Email*"
+#~ msgstr "E-mel Organisasi *"
+
+#~ msgid "Tell us about yourself"
+#~ msgstr "Beritahu kami mengenai diri anda"
+
+#~ msgid "Interests"
+#~ msgstr "Minat-minat"
+
+#~ msgid "Organization Categories"
+#~ msgstr "Kategori Organisasi"
+
+#~ msgid "Organization Types"
+#~ msgstr "Jenis Organisasi"
+
+#~ msgid "Content Contributor: add member's content under my profile"
+#~ msgstr "Kandungan Penyumbang: menambah kandungan ahli di bawah profil saya"
+
+#~ msgid ""
+#~ "Just member: show Under \"My Members\", but do not add member's content "
+#~ "under my profile"
+#~ msgstr ""
+#~ "Hanya ahli: Tunjukkan Di bawah \"Ahli-ahli saya\", tetapi jangan menambah "
+#~ "kandungan ahli di bawah profil saya"
+
+#~ msgid "Rejected: reject this user as a member of your Organization"
+#~ msgstr "Ditolak: menolak pengguna ini sebagai ahli Organisasi anda"
+
+#~ msgid "Contribute content"
+#~ msgstr "Menyumbang kandungan"
+
+#~ msgid "Active"
+#~ msgstr "Aktif"
+
+#~ msgid "Rejected"
+#~ msgstr "Ditolak"
+
+#~ msgid "Member"
+#~ msgstr "Ahli"
+
+#~ msgid "Staff"
+#~ msgstr "Kakitangan"
+
+#~ msgid "Volunteer"
+#~ msgstr "Sukarelawan"
+
+#~ msgid "Student"
+#~ msgstr "Pelajar"
+
+#~ msgid "Teacher/Lecturer"
+#~ msgstr "Guru / Pensyarah"
+
+#~ msgid "Member of which Organizations"
+#~ msgstr "Ahli Organisasi yang mana"
+
+#~ msgid "Which Organizations are you member of?"
+#~ msgstr "Anda ahli Organisasi yang mana?"
+
+#~ msgid "Loading Organizations"
+#~ msgstr "Memuatkan Organisasi"
+
+#~ msgid "Loading Individuals"
+#~ msgstr "Memuatkan Individu"
+
+#~ msgid "No Organizations found"
+#~ msgstr "Tiada Organisasi dijumpai"
+
+#~ msgid "No Individuals found"
+#~ msgstr "Tiada Individu dijumpai."
+
+#~ msgid ""
+#~ "Please select the Organizations you are a member of: all your content "
+#~ "will also show under their profiles."
+#~ msgstr ""
+#~ "Sila pilih Organisasi di mana anda seorang ahli: semua kandungan anda "
+#~ "juga akan ditunjukkan di bawah profil mereka."
+
+#~ msgid "Type"
+#~ msgstr "Jenis"
+
+#~ msgid "Contact Person"
+#~ msgstr "Hubungi"
+
+#~ msgid "Tel / Fax"
+#~ msgstr "No Tel./Faks"
+
+#~ msgid "Interests:"
+#~ msgstr "Minat-minat:"
+
+#~ msgid "we also don't know!"
+#~ msgstr "Kami tidak tahu juga!"
+
+#~ msgid "Include members?"
+#~ msgstr "Merangkumi ahli-ahli?"
+
+#~ msgid "Connect with"
+#~ msgstr "Hubungkan"
+
+#~ msgid "Connecting"
+#~ msgstr "Sedang hubungi"
+
+#~ msgid "Or log in using:"
+#~ msgstr "Atau daftar masuk menggunakan:"
+
+#~ msgid ""
+#~ "You are already logged in as <a href=\"%s\">%s</a>, <a href=\"%s"
+#~ "\">logout</a>?"
+#~ msgstr ""
+#~ "Anda telah log masuk sebagai <a href=\"%s\">%s</a>, <a href=\"%s\">log "
+#~ "keluar</a>?"
+
+#~ msgid "An undefined error has ocurred"
+#~ msgstr "Ralat. Punca tidak dapat dipastikan."
+
+#~ msgid "Please supply your username and password."
+#~ msgstr "Sila kemukakan nama pengguna dan kata kekunci anda."
+
+#~ msgid "<a href=\"%s\">Click here to view it</a>."
+#~ msgstr "<a href=\"%s\">Klik di sini untuk melihatnya</a>."
+
+#~ msgid ""
+#~ "The status is still \"Draft\". Please don't forget to change it to "
+#~ "\"Pending\" after finish editing."
+#~ msgstr ""
+#~ "Status pos ini adalah \"Draft\". Jangan lupa untuk menukar statusnya "
+#~ "kepada \"Pending\" selepas menyunting."
+
+#~ msgid "Now waiting for approval from the admins."
+#~ msgstr "Sedang menunggu kelulusan para admin."
+
+#~ msgid "View your <a href=\"%s\" target=\"%s\">updated profile</a>."
+#~ msgstr "Lihat <a href=\"%s\" target=\"%s\">profil kemaskini</a> anda."
+
+#~ msgid "... <a href=\"%s\">Read more</a>"
+#~ msgstr "... <a href=\"%s\">Baca lebih lanjut</a>"
+
+#~ msgid "Youtube"
+#~ msgstr "Youtube"
+
+#~ msgid "Page not found!"
+#~ msgstr "Halaman tidak dijumpai!"
+
+#~ msgid "Home"
+#~ msgstr "Laman"
+
+#~ msgid "Latest published"
+#~ msgstr "Terbitan terkini"
+
+#~ msgid "Less comments"
+#~ msgstr "Komen terkurang"
+
+#~ msgid "Title ascending"
+#~ msgstr "Tajuk berdasarkan urutan menaik A-Z"
+
+#~ msgid "Title descending"
+#~ msgstr "Tajuk berdasarkan urutan menurun Z-A"
+
+#~ msgid "Name ascending"
+#~ msgstr "Nama berdasarkan urutan menaik A-Z"
+
+#~ msgid "Name descending"
+#~ msgstr "Nama berdasarkan urutan menurun Z-A"
+
+#~ msgid "Most active"
+#~ msgstr "Paling aktif"
+
+#~ msgid "Less active"
+#~ msgstr "Kurang aktif"
+
+#~ msgid "Recently registered"
+#~ msgstr "Pendaftaran terbaru"
+
+#~ msgid "Early registered"
+#~ msgstr "Pendaftaran awal"
+
+#~ msgid "Draft (still editing, it will not show up in the website)"
+#~ msgstr "Draf (masih menyunting, ini tidak akan dipaparkan pada laman web)"
+
+#~ msgid "Finished editing (request website admins to publish it)"
+#~ msgstr "Sudah disunting (minta para admin laman web untuk menerbitkan ini)"
+
+#~ msgid "Already published (by website admins)"
+#~ msgstr "Sudah diterbitan (oleh para admin laman web)"
+
+#~ msgid "No \"post_id\"? Hmmmm, strange indeed!"
+#~ msgstr "Tiada \"post_id\"? Hmmmm, pelik betul!"
+
+#~ msgid "The comment is empty."
+#~ msgstr "Ruang komen adalah kosong."
+
+#~ msgid "Please provide the current password."
+#~ msgstr "Sila kemukakan kata kekunci semasa."
+
+#~ msgid "Current password is incorrect."
+#~ msgstr "Kata kekunci semasa adalah salah."
+
+#~ msgid "The password cannot be emtpy."
+#~ msgstr "Ruang kata kekunci perlu diisi."
+
+#~ msgid "Please confirm the password."
+#~ msgstr "Sila pastikan kata kekunci."
+
+#~ msgid "The title cannot be empty"
+#~ msgstr "Ruang tajuk perlu diisi."
+
+#~ msgid "The content cannot be empty"
+#~ msgstr "Ruang kandungan perlu diisi."
+
+#~ msgid "The Featured Image has not been set"
+#~ msgstr "Imej khas belum disertakan."
+
+#~ msgid "Your user doesn't have permission for editing."
+#~ msgstr "Pengguna anda tidak mempunyai kebenaran untuk menyunting."
+
+#~ msgid "Cheating, huh?"
+#~ msgstr "Menipu, eh?"
+
+#~ msgid "Mmmmm, this post seems to have been deleted..."
+#~ msgstr "Mmmmm, terbitan ini telah dipadam."
+
+#~ msgid "Ops, there was a problem... this is embarrassing, huh?"
+#~ msgstr "Ops, terdapat sebuah masalah."
+
+#~ msgid "The name cannot be empty"
+#~ msgstr "Ruang nama perlu diisi"
+
+#~ msgid "The e-mail cannot be empty"
+#~ msgstr "Ruang e-mel perlu diisi"
+
+#~ msgid "That email address is not allowed!"
+#~ msgstr "E-mel ini tidak dibenarkan!"
+
+#~ msgid "The username cannot be empty."
+#~ msgstr "Nama pengguna perlu diisi."
+
+#~ msgid ""
+#~ "This username is invalid because it uses illegal characters. Please enter "
+#~ "a valid username."
+#~ msgstr ""
+#~ "Nama pengguna ini tidak sah kerana ini menggunakan karakter yang tidak "
+#~ "sah. Sila nyatakan nama pengguna yang sah."
+
+#~ msgid "This username is already registered. Please choose another one."
+#~ msgstr "Nama pengguna ini telah didaftarkan. Sila pilih yang lain."
+
+#~ msgid "This email is already registered, please choose another one."
+#~ msgstr "E-mel ini telah didaftarkan. Sila pilih yang lain."
+
+#~ msgid "That email address already exists in our system!"
+#~ msgstr "E-mel ini sudah wujud dalam sistem kami!"
+
+#~ msgid "Username*"
+#~ msgstr "Nama Pengguna*"
+
+#~ msgid "Password*"
+#~ msgstr "Kata Kekunci*"
+
+#~ msgid "New password*"
+#~ msgstr "Kata laluan baru*"
+
+#~ msgid "Repeat new password*"
+#~ msgstr "Ulangi kata laluan baru *"
+
+#~ msgid "Location(s) for:"
+#~ msgstr "Lokasi untuk:"
+
+#~ msgid "Loading data from:<div class=\"template-status-domains\"></div>"
+#~ msgstr ""
+#~ "Memuatkan data daripada: <div class=\"template-status-domain\"></div>"
+
+#~ msgid "Loading Events"
+#~ msgstr "Memuatkan Acara"
+
+#~ msgid "No Events found"
+#~ msgstr "Tiada Acara dijumpai"
+
+#~ msgid "Loading Locations"
+#~ msgstr "Memuatkan lokasi"
+
+#~ msgid "No Locations found"
+#~ msgstr "Tiada lokasi ditemui"
+
+#~ msgid "Previous month"
+#~ msgstr "Bulan lepas"
+
+#~ msgid "Next month"
+#~ msgstr "Bulan hadapan"
+
+#~ msgid "Show/Hide information"
+#~ msgstr "Papar / Sembunyi maklumat"
+
+#~ msgid "Content*"
+#~ msgstr "Kandungan*"
+
+#~ msgid "Default format"
+#~ msgstr "Format lalai"
+
+#~ msgid ""
+#~ "%sThis information was gathered and published by %s from <a href=\"%s"
+#~ "\">this source</a>."
+#~ msgstr ""
+#~ "%sMaklumat ini dikumpulkan dan diterbitkan oleh %s daripada <a href=\"%s"
+#~ "\">sumber ini</a> ."
+
+#~ msgid "Disclaimer"
+#~ msgstr "Penafian"
+
+#~ msgid "Original URL (for Disclaimer): %s"
+#~ msgstr "URL asal (untuk penafian): %s"
+
+#~ msgid ""
+#~ "This Profile was created by %s with information available on the "
+#~ "Organization's website."
+#~ msgstr ""
+#~ "Profil ini telah dicipta oleh %s dengan maklumat yang terdapat pada laman "
+#~ "web organisasi tersebut."
+
+#~ msgid "Profile owned by %s?"
+#~ msgstr "Profil ini dimiliki oleh %s?"
+
+#~ msgid "Organization info"
+#~ msgstr "Maklumat organisasi"
+
+#~ msgid "Contact number"
+#~ msgstr "Nombor telefon"
+
+#~ msgid "Linkedin"
+#~ msgstr "Linkedin"
+
+#~ msgid "Add Profile"
+#~ msgstr "Daftar profil"
+
+#~ msgid "please wait..."
+#~ msgstr "sila tunggu..."
+
+#~ msgid "Open %s in new window"
+#~ msgstr " Buka%s dalam tetingkap baru"
+
+#~ msgid "Full size"
+#~ msgstr "Saiz penuh"
+
+#~ msgid "Maximize"
+#~ msgstr "Memaksimumkan"
+
+#~ msgid "Minimize"
+#~ msgstr "Mengurangkan"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p>If this is not right, please <a href=\"%s\">click here and inform us</"
+#~ "a>.</p>"
+#~ msgstr ""
+#~ "Kami telah menghantar sebuah e-mel kepada anda. Sila <a href=\"%s\">klik "
+#~ "di sini untuk daftar masuk</a>"
+
+#~ msgid "Contact info / Social media"
+#~ msgstr "Maklumat hubungan / Media sosial"
+
+#, fuzzy
+#~ msgid "My Organizations"
+#~ msgstr "Organisasi-organisasi"
+
+#~ msgid "Individual info"
+#~ msgstr "Maklumat orang"
+
+#~ msgid "Date and Time"
+#~ msgstr "Tarikh dan Masa"
+
+#~ msgid "Add an Event"
+#~ msgstr "Sertakan sebuah aktiviti"
+
+#~ msgid "Add a Project"
+#~ msgstr "Sertakan sebuah projek"
+
+#~ msgid "Add a Story"
+#~ msgstr "Sertakan sebuah cerita"
+
+#~ msgid "Add an Announcement"
+#~ msgstr "Sertakan sebuah pengumuman"
+
+#~ msgid "Add a Discussion"
+#~ msgstr "Sertakan sebuah perbincangan"
+
+#, fuzzy
+#~ msgid "Add location"
+#~ msgstr "Sertakan lokasi"
+
+#, fuzzy
+#~ msgid "Submit comment"
+#~ msgstr "Komen terbanyak"
+
+#~ msgid "Profile info"
+#~ msgstr "Maklumat profil"
+
+#~ msgid "Social media"
+#~ msgstr "Media sosial"
+
+#~ msgid "Log-in info"
+#~ msgstr "Makumat daftar masuk"
+
+#~ msgid "User info"
+#~ msgstr "Info pengguna"
+
+#~ msgid "Locations for:"
+#~ msgstr "Ruangan untuk:"
+
+#~ msgid "Forgot password?"
+#~ msgstr "Lupa kata kekunci anda?"
+
+#, fuzzy
+#~ msgid "Set new"
+#~ msgstr "Set"
+
+#, fuzzy
+#~ msgid "In response to"
+#~ msgstr "Sebagai balasan kepada:"
+
+#~ msgid ""
+#~ "This information is published by %s based on information available on the "
+#~ "following URL: <a href=\"%2$s\">%2$s</a>."
+#~ msgstr ""
+#~ "Maklumat ini telah diterbitkan oleh %s berdasarkan maklumat yang terdapat "
+#~ "pada URL ini: <a href=\"%2$s\">%2$s</a>."
+
+#~ msgid "Organizations: Is Community? (Accepts Members?)"
+#~ msgstr "Organisasi-organisasi: Sebuah komuniti? (Menerima ahli?)"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "F jS, Y"
+#~ msgstr "F jS, Y"
+
+#~ msgid "F, Y"
+#~ msgstr "F, Y"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "Author"
+#~ msgstr "Penulis"
+
+#~ msgid "Older Entries"
+#~ msgstr "Rencana lama"
+
+#~ msgid "Newer Entries"
+#~ msgstr "Rencana baru"
+
+#~ msgid "Search Results"
+#~ msgstr "Hasil carian"
+
+#~ msgid "Search Results for <strong>&#8216;%s&#8217;</strong></p>"
+#~ msgstr "Hasil carian untuk <strong>&#8216;%s&#8217;</strong></p>"
+
+#~ msgid "Newer Entries &raquo;"
+#~ msgstr "Penyertaan baru &raquo;"
+
+#~ msgid "&laquo; Older Entries"
+#~ msgstr "&laquo; Penyertaan lama"
+
+#~ msgid ""
+#~ "<strong>Sorry, we couldn't find any results based on your search query.</"
+#~ "strong>"
+#~ msgstr ""
+#~ "<strong>Harap maaf, kami tidak dapat mencari jawapan bagi pertanyaan anda."
+#~ "</strong>"
+
+#~ msgid "Show Profile content"
+#~ msgstr "Papar maklumat profil"
+
+#~ msgid "Communities"
+#~ msgstr "Komuniti-Komuniti"
+
+#~ msgid ""
+#~ "Become a Community? (Accept other Organizations/Individuals as Members)"
+#~ msgstr ""
+#~ "Ingin menjadi sebuah komuniti? (Terima organisasi/orang lain sebagai ahli)"
+
+#, fuzzy
+#~ msgid "View all Communities"
+#~ msgstr "Komuniti-Komuniti"
+
+#, fuzzy
+#~ msgid "Howdy"
+#~ msgstr "Salam, %s!"
+
+#~ msgid "No more Events found."
+#~ msgstr "Tiada aktiviti lain yang ditemui."
+
+#~ msgid "No Projects found."
+#~ msgstr "Tiada projek-projek yang ditemui. "
+
+#~ msgid "No more Projects found."
+#~ msgstr "Tiada projek-projek lain yang ditemui."
+
+#~ msgid "No more Content found."
+#~ msgstr "Tidak makumat lain yang ditemui."
+
+#~ msgid "No Profiles found."
+#~ msgstr "Tiada profil-profil yang ditemui."
+
+#~ msgid "No more Profiles found."
+#~ msgstr "Tiada profil-profil lain yang ditemui."
+
+#~ msgid "No Stories found."
+#~ msgstr "Tiada cerita-cerita yang ditemui."
+
+#~ msgid "No more Stories found."
+#~ msgstr "Tiada cerita lain yang ditemui."
+
+#~ msgid "No Announcements found."
+#~ msgstr "Tiada pengumuman-pengumuman yang ditemui."
+
+#~ msgid "No more Announcements found."
+#~ msgstr "Tiada pengumuman lain yang ditemui."
+
+#~ msgid "No Discussions found."
+#~ msgstr "Tiada perbincangan-perbincangan yang ditemui."
+
+#~ msgid "No more Discussions found."
+#~ msgstr "Tiada perbincangan lain yang ditemui."
+
+#~ msgid "No Featured Articles found."
+#~ msgstr "Tiada artikel-artikel khas yang ditemui."
+
+#~ msgid "No more Featured Articles found."
+#~ msgstr "Tiada artikel-artikel khas lain yang ditemui."
+
+#, fuzzy
+#~ msgid "No Blog entries found."
+#~ msgstr "Tiada cerita lain yang ditemui."
+
+#, fuzzy
+#~ msgid "No more Blog entries found."
+#~ msgstr "Tiada cerita lain yang ditemui."
+
+#~ msgid "No Resources found."
+#~ msgstr "Tiada sumber-sumber yang ditemui."
+
+#~ msgid "No more Resources found."
+#~ msgstr "Tiada sumber-sumber lain yang ditemui."
+
+#~ msgid "No Thoughts found."
+#~ msgstr "Tiada cetusan pemikiran yang ditemui."
+
+#~ msgid "No more Thoughts, we run out of ideas!"
+#~ msgstr "Tiada idea-idea lain. Kami tidak dapat mencetus idea-idea lain. "
+
+#~ msgid "The Specialists"
+#~ msgstr "Pakar-pakar"
+
+#~ msgid "Search Profiles"
+#~ msgstr "Pencarian Profil"
+
+#~ msgid "Search Content"
+#~ msgstr "Pencarian Kandungan"
+
+#~ msgid "Subscribe to our Newsletter"
+#~ msgstr "Langgani surat berita kami"
+
+#~ msgid "No MESYM Blogs found."
+#~ msgstr "Tiada blog-blog MESYM yang ditemui."
+
+#~ msgid "No more MESYM Blogs found."
+#~ msgstr "Tiada blog-blog MESYM lain yang ditemui."
+
+#~ msgid "No more Organizations found."
+#~ msgstr "Tiada organisasi lain yang dijumpai."
+
+#~ msgid "No Communities found."
+#~ msgstr "Tiada komuniti yang dijumpai."
+
+#~ msgid "No more Communities found."
+#~ msgstr "Tiada komuniti lain yang dijumpai."
+
+#~ msgid "No more Individuals found."
+#~ msgstr "Tiada orang lain yang dijumpai."
+
+#~ msgid ""
+#~ "We sent you an email with your log-in information. Please <a href=\"%s"
+#~ "\">click here to log-in</a>."
+#~ msgstr ""
+#~ "Kami telah menghantar sebuah e-mel yang merangkumi maklumat-maklumat "
+#~ "daftar masuk. Sila <a href=\"%s\">klik di sini untuk daftar masuk</a>."
+
+#~ msgid "View your <a href=\"%s\">updated profile</a>."
+#~ msgstr "Lihat <a href=\"%s\">profil anda yang telah dikemaskini</a>."
+
+#, fuzzy
+#~ msgid "My Content"
+#~ msgstr "Kandungan"
+
+#, fuzzy
+#~ msgid "Contact"
+#~ msgstr "Maklumat hubungan"
+
+#~ msgid "Nothing found."
+#~ msgstr "Tiada maklumat yang ditemui."
+
+#~ msgid "Nothing else found."
+#~ msgstr "Tiada maklumat lain yang ditemui."
+
+#~ msgid "Awesome! Your Organization Profile was created successfully!"
+#~ msgstr "Bagus! Profil organisasi anda telah berjaya didaftarkan!"
+
+#~ msgid "Awesome! Your Individual Profile was created successfully!"
+#~ msgstr "Bagus! Profil persendirian anda telah berjaya didaftarkan!"
+
+#~ msgid "... but pssshht, don't tell anyone!"
+#~ msgstr "... tetapi pssshht, jangan beritahu sesiapa!"
+
+#~ msgid "Display email in Profile page?"
+#~ msgstr "Papar e-mel pada Laman Profil?"
+
+#~ msgid "Description*"
+#~ msgstr "Penerangan*"
+
+#~ msgid "Year started"
+#~ msgstr "Tahun Penubuhan"
+
+#~ msgid "Subscribe to MESYM Newsletter?"
+#~ msgstr "Langani surat berita MESYM?"
+
+#~ msgid "Become a Community? (Accept Organizations / Individuals as Members)"
+#~ msgstr ""
+#~ "Ingin menjadi sebuah Komuniti? (Terima Organisasi-Organisasi/Orang-Orang "
+#~ "sebagai Ahli)"
+
+#~ msgid ""
+#~ "Please be careful to fill-in the email properly! It will not only appear "
+#~ "in the Profile page, but also be used to send all activity from the "
+#~ "website, eg: log-in information / volunteering requests / inline contact "
+#~ "profile / etc."
+#~ msgstr ""
+#~ "Sila isi e-mel anda dengan betul! E-mel anda bukan sahaja akan dipaparkan "
+#~ "pada Laman Profil, tetapi juga akan digunakan untuk hubungi anda melalui "
+#~ "laman web ini, Cth: maklumat daftar masuk / maklumat permohonan "
+#~ "sukarelawan / perhubungan melalui profil / dan lain-lain."
+
+#~ msgid ""
+#~ "This short description will appear in the Profile hover card, and in each "
+#~ "post/event."
+#~ msgstr "Penerangan singkat ini akan dipaparkan pada proful "
+
+#~ msgid ""
+#~ "Volunteers are needed? Please add an additional section in the Content "
+#~ "below, describing what is expected from the volunteers."
+#~ msgstr ""
+#~ "Adakah sukarelawan-sukarelawan diperlukan? Sila menambah satu bahagian "
+#~ "tambahan menghuraikan bagaiman sukarelawan boleh membantu anda kepada "
+#~ "kandungan yang dinyatakan di bawah."
+
+#~ msgid "Stories about this %s"
+#~ msgstr "Cerita-cerita tentang %s"
+
+#~ msgid "Add a Resource"
+#~ msgstr "Sertakan sebuah sumber"
+
+#~ msgid "Add Media Files"
+#~ msgstr "Sertakan fail-fail media"
+
+#~ msgid "Add your Profile"
+#~ msgstr "Sertakan profil anda"
+
+#~ msgid "Filter results"
+#~ msgstr "Saring hasil carian"
+
+#~ msgid "Profile(s)"
+#~ msgstr "Profil-Profil"
+
+#~ msgid "Project Details"
+#~ msgstr "Maklumat Projek"
+
+#~ msgid "Related Projects/Events"
+#~ msgstr "Projek-Projek/Aktiviti-Aktiviti berkaitan"
+
+#~ msgid "Discussion Details"
+#~ msgstr "Maklumat Perbincangan"
+
+#, fuzzy
+#~ msgid "All Sections"
+#~ msgstr "Pautan-pautan bahagian"
+
+#, fuzzy
+#~ msgid "All Users' Content"
+#~ msgstr "Pencarian Kandungan"
+
+#, fuzzy
+#~ msgid "Editor"
+#~ msgstr "Sunting"
+
+#~ msgid "Yay! Your Project was created successfully!"
+#~ msgstr "Yay! Projek anda telah berjaya dicipta!"
+
+#~ msgid "Project updated successfully."
+#~ msgstr "Projek anda telah berjaya dikemaskini."
+
+#~ msgid "Yay! Your Story was created successfully!"
+#~ msgstr "Yay! Cerita anda telah berjaya diterbitkan!"
+
+#~ msgid "Story updated successfully."
+#~ msgstr "Cerita anda telah berjaya dikemaskini."
+
+#~ msgid "Yay! Your Announcement was created successfully!"
+#~ msgstr "Yay! Pengumuman anda telah berjaya diterbitkan!"
+
+#~ msgid "Announcement updated successfully."
+#~ msgstr "Pengumuman anda telah berjaya dikemaskini."
+
+#~ msgid "Yay! Your Discussion was created successfully!"
+#~ msgstr "Yay! Perbincangan anda telah berjaya diterbitkan!"
+
+#~ msgid "Discussion updated successfully."
+#~ msgstr "Perbincangan anda telah berjaya dikemaskini."
+
+#~ msgid "Yay! Your Event was created successfully!"
+#~ msgstr "Yay! Aktiviti anda telah berjaya diterbitkan!"
+
+#~ msgid "Event updated successfully."
+#~ msgstr "Aktiviti anda telah berjaya dikemaskini."
+
+#~ msgid ""
+#~ "Is this %s related to any Project(s) and/or Event(s) already existing in "
+#~ "the website? If so, please select them here."
+#~ msgstr ""
+#~ "Adakah %s berkaitan dengan projek dan/atau aktiviti yang sedia ada di "
+#~ "laman web ini? Sekiranya ya, sila pilih projek/aktiviti di sini."
+
+#~ msgid "Owner Profiles"
+#~ msgstr "Profil Pemilik"
+
+#~ msgid ""
+#~ "Co-owned with other Profiles? These other Profiles will not only appear "
+#~ "as co-owners, but will also be able to edit this post."
+#~ msgstr ""
+#~ "Adakah pemilikan profil ini dikongsi dengan orang/organisasi lain? Bukan "
+#~ "sahaja mereka akan disenaraikan sebagai pekongsi-pekongsi pemilikan, "
+#~ "tetapi juga, akan mempunyai kebenaran untuk menyunting maklumat ini."
+
+#~ msgid "Original URL (Disclaimer)"
+#~ msgstr "URL Asal (Penafian)"
+
+#~ msgid "Status (Draft / Pending / Publish)"
+#~ msgstr "Status (Draf / Menunggu / Terbit)"
+
+#~ msgid "Choose a post"
+#~ msgstr "Pilih satu terbitan"
+
+#~ msgid "There are no posts"
+#~ msgstr "Tiada terbitan"
+
+#~ msgid "j M Y"
+#~ msgstr "j M Y"
+
+#~ msgid "Download "
+#~ msgstr "Muat Turun"
+
+#~ msgid "Sidebar"
+#~ msgstr "Sisi lanjutan"
+
+#, fuzzy
+#~ msgid "View all posts"
+#~ msgstr "Lihat semua %s"
+
+#~ msgid ""
+#~ "We couldn't find anything under this URL... <a href=\"%s\">Go back to "
+#~ "homepage</a>."
+#~ msgstr ""
+#~ "Kami tidak dapat mencari apa-apa pada URL ini... <a href=\"%s\">Go back "
+#~ "to homepage</a>."
+
+#~ msgid ""
+#~ "If you can't find the %s in the input below, <a href=\"#\" class=\"%s\" "
+#~ "data-target=\"%s\" data-header=\"%s\">click here to add a new Location</"
+#~ "a>."
+#~ msgstr ""
+#~ "Sekiranya anda tidak dapat mencari %s pada maklumat di bawah, <a href=\"#"
+#~ "\" class=\"%s\" data-target=\"%s\" data-header=\"%s\">sila klik di sini "
+#~ "untuk menyertakan sebuah lokasi baru</a>."
+
+#~ msgid "Name or address"
+#~ msgstr "Nama atau alamat"
+
+#~ msgid "Featured image"
+#~ msgstr "Imej khas"
+
+#~ msgid "Upload new"
+#~ msgstr "Muat naik baru"
+
+#~ msgid "Select"
+#~ msgstr "Pilih"
+
+#~ msgid "No Projects/Events referenced"
+#~ msgstr "Tiada projek/aktiviti telah direferen"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Username or password"
+#~ msgstr "Nama pengguna atau kata kekunci"
+
+#~ msgid "Enter username or email"
+#~ msgstr "Nyatakan nama pengguna atau e-mel"
+
+#~ msgid "Profiles Quicklinks"
+#~ msgstr "Rangkaian profil"
+
+#, fuzzy
+#~ msgid "Events:"
+#~ msgstr "Aktiviti - Aktiviti"
+
+#, fuzzy
+#~ msgid "facebook"
+#~ msgstr "Facebook"
+
+#, fuzzy
+#~ msgid "twitter"
+#~ msgstr "Twitter"
+
+#, fuzzy
+#~ msgid "linkedin"
+#~ msgstr "Linkedin"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p><strong><a href=\"%s\">MESYM.com</a></strong> is a platform for "
+#~ "environmental movements in Malaysia. There are many good actions being "
+#~ "done out there. Our goal is to bring them together. <a href=\"%s\">We "
+#~ "connect the green dots</a>.</p>"
+#~ msgstr ""
+#~ "MESYM.com adalah sebuah wadah bagi pergerakan alam sekitar di Malaysia. "
+#~ "Terdapat banyak usaha-usaha yang diambil oleh pelbagai pihak. Matlamat "
+#~ "kami adalah untuk menyatukan semua pihak dan usaha-usaha mereka. Kami "
+#~ "berperanan sebagai pengantara antara mereka."
+
+#, fuzzy
+#~ msgid "Media Player"
+#~ msgstr "Sisip dengan Media Player"
+
+#~ msgid "Individual Details"
+#~ msgstr "Maklumat Orang"
+
+#~ msgid "No Sponsors found."
+#~ msgstr "Tiada penaja yang dijumpai."
+
+#~ msgid "No more Sponsors found."
+#~ msgstr "Tiada penaja lain yang dijumpai."
+
+#~ msgid "No Featured Communities found."
+#~ msgstr "Tiada komuniti khas yang dijumpai."
+
+#~ msgid "No more Featured Communities found."
+#~ msgstr "Tiada komuniti khas lain yang dijumpai."
+
+#~ msgid "No Communities"
+#~ msgstr "Tiada Komuniti"
+
+#~ msgid "Related Projects/Events:"
+#~ msgstr "Projek-Projek/Aktiviti-Aktiviti yang berkaitan:"
+
+#~ msgid "No related Projects or Events"
+#~ msgstr "Tiada Projek atau Aktiviti yang berkaitan"
+
+#~ msgid "more..."
+#~ msgstr "lagi..."
+
+#~ msgid "less..."
+#~ msgstr "kurangkan..."
+
+#~ msgid "Create and add Location"
+#~ msgstr "Cipta dan tambahkan Lokasi"
+
+#~ msgid "No bookings"
+#~ msgstr "Tiada penempahan"
+
+#~ msgid "Please select Topic"
+#~ msgstr "Sila pilih topik"
+
+#~ msgid ""
+#~ " In the meantime, <a href=\"%s\" target=\"gd-preview\">click here to "
+#~ "preview it</a>."
+#~ msgstr ""
+#~ "Pada masa semasa, <a href=\"%s\" target=\"gd-preview\">sila klik di sini "
+#~ "untuk pratonton</a>."
+
+#~ msgid "Locations Map"
+#~ msgstr "Peta Lokasi"
+
+#~ msgid "The description cannot be empty"
+#~ msgstr "Ruang penerangan perlu diisi"
+
+#~ msgid ""
+#~ "No Comments found, <a href=\"#\" class=\"%s\" data-target=\"%s\">click "
+#~ "here to add a comment</a>."
+#~ msgstr ""
+#~ "Tiada komen, <a href=\"#\" class=\"%s\" data-target=\"%s\">Sila klik di "
+#~ "sini untuk menyertakan komen</a>."

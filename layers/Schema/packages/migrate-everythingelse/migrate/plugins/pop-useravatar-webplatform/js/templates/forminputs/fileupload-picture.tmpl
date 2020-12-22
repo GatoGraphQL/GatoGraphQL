@@ -1,0 +1,45 @@
+<div {{#generateId}}{{id}}{{/generateId}} data-action="{{dbObject.fileupload-picture-url}}" data-module-download="{{module-download}}" data-module-upload="{{module-upload}}" class="{{class}}" style="{{style}}">
+	<div class="fileupload">
+		
+		{{!The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload}}
+		<div class="fileupload-buttonbar">		
+			
+			{{! The global progress information }}
+			<!--div class="fileupload-progress fade"></div-->	
+			{{! The loading indicator is shown during file processing }}
+			<div class="fileupload-loading"></div>
+			{{! The table listing the files available for upload/download }}
+			<div role="presentation" class="clearfix">
+				<div class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></div>
+			</div>
+
+			<div class="preview pop-fileuploaded-hide">
+				<div class="row">
+					<div class="col-sm-4 col-md-3">
+						<label>{{titles.avatar}}</label>
+						{{#with default-thumb}}
+							<a href="{{url}}" rel="{{../image-rel}}" title="{{../titles.avatar}}">
+								<img class="thumbnail img-responsive" src="{{url}}" width="{{size}}" height="{{size}}">
+							</a>
+						{{/with}}
+					</div>
+					<div class="col-sm-4 col-md-9">
+						<label>{{titles.photo}}</label>
+						{{#with default-image}}
+							<a href="{{url}}" rel="{{../image-rel}}" title="{{../titles.photo}}">
+								<img class="img-responsive" src="{{url}}" width="{{width}}" height="{{height}}">
+							</a>
+						{{/with}}
+					</div>
+				</div>
+			</div>
+
+			{{! The fileinput-button span is used to style the file input field as button }}
+			<span class="btn btn-primary fileinput-button pop-fileuploaded-hide">
+				<span class="glyphicon glyphicon-plus"></span> {{titles.upload}}
+				<input type="file" name="files[]">
+			</span>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>

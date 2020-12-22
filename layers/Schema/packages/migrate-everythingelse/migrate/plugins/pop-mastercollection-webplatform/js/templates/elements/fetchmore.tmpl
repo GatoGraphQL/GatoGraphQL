@@ -1,0 +1,8 @@
+<button {{#generateId}}{{id}}{{/generateId}} type="button" data-loading-text="{{titles.loading}}" class="hidden-loadinghtml {{class}} {{#if feedback.stop-fetching}}hidden{{/if}}" style="{{style}}">
+	{{titles.fetchmore}}
+</button>
+{{#if feedback.query-next-url}}
+	<a class="visible-loadinghtml {{class}} {{#if feedback.stop-fetching}}hidden{{/if}}" href="{{feedback.query-next-url}}" style="{{style}}" role="button">
+		{{titles.fetchmore}}
+	</a>
+{{/if}}

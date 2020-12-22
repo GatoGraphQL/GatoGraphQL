@@ -1,0 +1,4 @@
+services:
+    PoP\Definitions\DefinitionManagerInterface:
+        class: \PoP\Definitions\DefinitionManager
+        public: true

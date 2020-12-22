@@ -1,0 +1,5 @@
+{
+    "require": {
+        "sabberworm/php-css-parser": "*"
+    }
+}

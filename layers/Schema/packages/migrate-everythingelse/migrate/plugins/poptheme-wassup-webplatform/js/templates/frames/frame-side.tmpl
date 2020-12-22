@@ -1,0 +1,20 @@
+<a id="logo" class="logo" href="{{links.home}}" title="{{titles.home}}">
+	{{#with logo-main}}
+		<img src="{{src}}" class="img-responsive" alt="{{title}}">
+	{{/with}}
+</a>
+<br/>
+{{#withModule . "side"}}
+	<div id="{{../id}}-side">
+		{{enterModule ../.}}
+	</div>
+{{/withModule}}
+<div class="navbar navbar-main navbar-inverse pop-menu-xs hidden-sm hidden-md hidden-lg">
+	<ul role="menu" class="nav">
+		<li>
+			<a {{#generateId targetId=pss.pssId group="togglenav"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglenavigation}}" data-target="#{{pss.psId}}" data-toggle="offcanvas-toggle" data-mode="xs">
+				<span class="glyphicon glyphicon-menu-hamburger"></span>
+			</a>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,8 @@
+services:
+    PoPSchema\Media\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoPSchema\Media\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true

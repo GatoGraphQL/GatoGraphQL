@@ -1,0 +1,377 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-20 19:13+0800\n"
+"PO-Revision-Date: 2017-03-20 19:13+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././library/tag-utils.php:30
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
+#: .././library/utils.php:11
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:139
+#, php-format
+msgid "... <a href=\"%s\">Read more</a>"
+msgstr "... <a href=\"%s\">Leer más</a>"
+
+#: .././pop-library/dataload/actionexecuters/library/addcomment.php:13
+msgid ""
+"We don't know what post the comment is for. Please reload the page and try "
+"again."
+msgstr ""
+"No sabemos para qué post es el comentario. Refresque la página y vuelva a "
+"intentarlo."
+
+#: .././pop-library/dataload/actionexecuters/library/addcomment.php:24
+msgid "The comment is empty."
+msgstr "El comentario está vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/changepassword-user.php:20
+msgid "Please provide the current password."
+msgstr "Por favor, introduzca la contraseña actual."
+
+#: .././pop-library/dataload/actionexecuters/library/changepassword-user.php:23
+msgid "Current password is incorrect."
+msgstr "La contraseña actual es incorrecta."
+
+#: .././pop-library/dataload/actionexecuters/library/changepassword-user.php:27
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:63
+msgid "The password cannot be emtpy."
+msgstr "La contraseña no puede ser vacía."
+
+#: .././pop-library/dataload/actionexecuters/library/changepassword-user.php:30
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:66
+msgid "The password must be at least 8 characters long."
+msgstr "La contraseña debe tener al menos 8 caracteres de longitud."
+
+#: .././pop-library/dataload/actionexecuters/library/changepassword-user.php:34
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:70
+msgid "Please confirm the password."
+msgstr "Por favor, confirme la contraseña."
+
+#: .././pop-library/dataload/actionexecuters/library/changepassword-user.php:37
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:73
+msgid "Passwords do not match."
+msgstr "Las contraseñas no coinciden."
+
+#: .././pop-library/dataload/actionexecuters/library/changepassword-user.php:80
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:205
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:234
+#, php-format
+msgid "Ops, there was a problem: %s"
+msgstr "Ops, hubo un problema: %s"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:44
+msgid "The title cannot be empty"
+msgstr "El título no puede estar vacío"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:53
+msgid "The content cannot be empty"
+msgstr "El contenido no puede estar vacío"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:57
+msgid "The featured image has not been set"
+msgstr "La imagen destacada no se ha establecido"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:73
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:105
+msgid "Your user doesn't have permission for editing."
+msgstr "Su usuario no tiene permiso para editar."
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:88
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:94
+msgid "Cheating, huh?"
+msgstr "Haciendo trampa, ¿eh?"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:99
+msgid "Hmmmmm, this post seems to have been deleted..."
+msgstr "Mmmmm, este post parece haber sido borrado…"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:113
+msgid "Incorrect URL"
+msgstr "URL incorrecta"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:234
+#: .././pop-library/dataload/actionexecuters/library/createupdate-post.php:261
+msgid "Ops, there was a problem... this is embarrassing, huh?"
+msgstr "Ops, hubo un problema ... esto es vergonzoso, ¿eh?"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:18
+msgid "The name cannot be empty"
+msgstr "El nombre no puede estar vacío"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:24
+msgid "The e-mail cannot be empty"
+msgstr "El correo electrónico no puede estar vacío"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:27
+msgid "The email address isn&#8217;t correct."
+msgstr "La dirección de correo electrónico no es correcta."
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:34
+msgid "That email address is not allowed!"
+msgstr "Esa dirección de correo electrónico no está permitida!"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:43
+msgid "The username cannot be empty."
+msgstr "El nombre de usuario no puede estar vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:46
+msgid ""
+"This username is invalid because it uses illegal characters. Please enter a "
+"valid username."
+msgstr ""
+"Este nombre de usuario no es válido, ya que utiliza caracteres no válidos. "
+"Por favor inserte un nombre de usuario válido."
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:49
+msgid "This username is already registered. Please choose another one."
+msgstr "Este nombre de usuario ya está registrado. Por favor elija otro."
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:55
+msgid "This email is already registered, please choose another one."
+msgstr "Este correo electrónico ya está registrado, por favor elija otro."
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-user.php:93
+msgid "That email address already exists in our system!"
+msgstr "Esa dirección de correo electrónico ya existe en nuestro sistema!"
+
+#: .././pop-library/dataload/actionexecuters/login.php:28
+#, php-format
+msgid ""
+"You are already logged in as <a href=\"%s\">%s</a>, <a href=\"%s\">logout</"
+"a>?"
+msgstr ""
+"Ya has iniciado sesión como <a href=\"%s\">%s</a>, ¿<a href=\"%s\">cerrar "
+"sesión</a>?"
+
+#: .././pop-library/dataload/actionexecuters/login.php:52
+msgid "There is no user registered with that email address."
+msgstr ""
+"No hay ningún usuario registrado con esa dirección de correo electrónico."
+
+#: .././pop-library/dataload/actionexecuters/login.php:79
+#, php-format
+msgid ""
+"<strong>ERROR</strong>: The password you entered for the email %s is "
+"incorrect."
+msgstr ""
+"<strong>ERROR</strong>: La contraseña que ha introducido para el correo "
+"electrónico %s es incorrecta."
+
+#: .././pop-library/dataload/actionexecuters/login.php:83
+msgid "Lost your password?"
+msgstr "¿Perdiste tu contraseña?"
+
+#: .././pop-library/dataload/actionexecuters/login.php:93
+msgid "An undefined error has ocurred"
+msgstr "Un error indefinido ha ocurrido"
+
+#: .././pop-library/dataload/actionexecuters/login.php:99
+msgid "Please supply your username and password."
+msgstr "Por favor, proporcione su nombre de usuario y contraseña."
+
+#: .././pop-library/dataload/actionexecuters/logout.php:30
+msgid "You are not logged in."
+msgstr "Usted no ha iniciado sesión de usuario."
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:60
+#, php-format
+msgid ""
+"To reset your password, please copy the following code, and <a href=\"%s"
+"\">paste it in the \"Code\" input</a>:"
+msgstr ""
+"Para restablecer su contraseña, por favor copie el código siguiente y, <a "
+"href=\"%s\">péguelo en el campo \"Código\"</a>:"
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:71
+msgid ""
+"If this was a mistake, or if it was not you who requested the password "
+"reset, just ignore this email and nothing will happen."
+msgstr ""
+"Si esto fue un error, o si no fue usted quien solicitó el restablecimiento "
+"de la contraseña, simplemente ignore este mensaje y no pasará nada."
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:111
+msgid "<strong>ERROR</strong>: Enter a username or e-mail address."
+msgstr ""
+"<strong>ERROR</strong>: Introduzca un nombre de usuario o dirección de "
+"correo electrónico."
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:115
+msgid ""
+"<strong>ERROR</strong>: There is no user registered with that email address."
+msgstr ""
+"<strong>ERROR</strong>: No hay ningún usuario registrado con esa dirección "
+"de correo electrónico."
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:132
+msgid "<strong>ERROR</strong>: Invalid username or e-mail."
+msgstr "<strong>ERROR</strong>: nombre de usuario o e-mail inválido."
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:170
+msgid "Password reset is not allowed for this user"
+msgstr "Restablecimiento de contraseña no está permitido para este usuario"
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:196
+msgid "Someone requested that the password be reset for the following account:"
+msgstr ""
+"Alguien pidió que se restablezca la contraseña para la cuenta siguiente:"
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:198
+#, php-format
+msgid "Username: %s"
+msgstr "Nombre de usuario: %s"
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:199
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+"Si esto fue un error, simplemente ignore este mensaje y no pasará nada."
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:200
+msgid "To reset your password, visit the following address:"
+msgstr "Para restablecer su contraseña, visite la siguiente dirección:"
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:212
+#, php-format
+msgid "[%s] Password Reset"
+msgstr "[%s] Restablecimiento de contraseña"
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:237
+msgid "The e-mail could not be sent."
+msgstr "El correo electrónico no pudo ser enviado."
+
+#: .././pop-library/dataload/actionexecuters/lostpwd.php:237
+msgid "Possible reason: your host may have disabled the mail() function."
+msgstr "Posible motivo: su anfitrión puede haber bloqueado la función mail()."
+
+#: .././pop-library/dataload/actionexecuters/post-createupdate.php:15
+#, php-format
+msgid "<a href=\"%s\" %s>Click here to view it</a>."
+msgstr "<a href=\"%s\" %s>Haga clic aquí para visualizarlo</a>."
+
+#: .././pop-library/dataload/actionexecuters/post-createupdate.php:22
+msgid "The status is still “Draft”, so it won't be online."
+msgstr ""
+"El estado sigue siendo \"Borrador\", por lo que no se va a ver publicado."
+
+#: .././pop-library/dataload/actionexecuters/post-createupdate.php:26
+msgid "Now waiting for approval from the admins."
+msgstr "Ahora la espera de la aprobación de los administradores."
+
+#: .././pop-library/dataload/actionexecuters/user-createupdate.php:35
+#, php-format
+msgid "View your <a href=\"%s\" target=\"%s\" %s>updated profile</a>."
+msgstr "Ver su <a href=\"%s\" target=\"%s\" %s>perfil actualizado</a>."
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:84
+#, php-format
+msgid "<p>%s: %s</p>"
+msgstr "<p>%s: %s</p>"
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:85
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:98
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:121
+msgid "Website"
+msgstr "Sitio web"
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-user.php:108
+#, php-format
+msgid "<p><a href=\"%1$s\" alt=\"%2$s\">%3$s: %1$s</a></p>"
+msgstr "<p><a href=“%1$s” alt=“%2$s”>%3$s: %1$s</a></p>"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderpost.php:18
+msgid "Latest published"
+msgstr "Últimos publicados"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderpost.php:19
+msgid "Earliest published"
+msgstr "Primeros publicados"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderpost.php:20
+msgid "Most comments"
+msgstr "Mayor número de comentarios"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderpost.php:21
+msgid "Less comments"
+msgstr "Menor número de comentarios"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderpost.php:22
+msgid "Title ascending"
+msgstr "Título ascendente"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderpost.php:23
+msgid "Title descending"
+msgstr "Título descendente"
+
+#: .././pop-library/formcomponent-inputs/implementations/ordertag.php:18
+#: .././pop-library/formcomponent-inputs/implementations/orderuser.php:18
+msgid "Name ascending"
+msgstr "Nombre ascendente"
+
+#: .././pop-library/formcomponent-inputs/implementations/ordertag.php:19
+#: .././pop-library/formcomponent-inputs/implementations/orderuser.php:19
+msgid "Name descending"
+msgstr "Nombre descendente"
+
+#: .././pop-library/formcomponent-inputs/implementations/ordertag.php:20
+msgid "Count highest"
+msgstr "Contar más alto"
+
+#: .././pop-library/formcomponent-inputs/implementations/ordertag.php:21
+msgid "Count lowest"
+msgstr "Contar más bajo"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderuser.php:20
+msgid "Most active"
+msgstr "Más activo"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderuser.php:21
+msgid "Less active"
+msgstr "Menos activo"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderuser.php:22
+msgid "Recently registered"
+msgstr "Recientemente registrado"
+
+#: .././pop-library/formcomponent-inputs/implementations/orderuser.php:23
+msgid "Early registered"
+msgstr "Tempranamente registrado"
+
+#~ msgid "There is no user with this username or email."
+#~ msgstr "No hay un usuario con este nombre de usuario o correo electrónico."
+
+#~ msgid "Please supply your username or email."
+#~ msgstr "Por favor, proporcione su nombre de usuario o correo electrónico."
+
+#~ msgid "%s: Password Reset"
+#~ msgstr "%s: Restablecer contraseña"
+
+#~ msgid "Your user: "
+#~ msgstr "Su usuario: "
+
+#~ msgid "Your new password: "
+#~ msgstr "Su nueva contraseña: "
+
+#~ msgid "Click here to log-in: "
+#~ msgstr "Haga clic aquí para ingresar: "
+
+#~ msgid "Login to %s"
+#~ msgstr "Acceder a %s"

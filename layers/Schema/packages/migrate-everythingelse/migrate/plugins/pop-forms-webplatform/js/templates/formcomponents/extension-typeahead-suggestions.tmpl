@@ -1,0 +1,15 @@
+{{#if suggestions}}
+	<div class="suggestions {{classes.suggestions}}" style="{{styles.suggestions}}">
+		{{{titles.suggestions}}}
+		{{#each suggestions}}
+			<a {{#generateId context=../. group="suggestions"}}{{../id}}-{{this}}{{/generateId}} href="#" data-objectid="{{this}}" data-dbkey="{{../dbkeys.suggestions}}" data-target="#{{lastGeneratedId context=../.}}" class="{{../classes.suggestion}}" style="{{../styles.suggestion}}">
+				{{#if ../suggestions-fontawesome}}
+					<i class="fa {{../suggestions-fontawesome}}"></i>
+				{{/if}}
+				{{#withModule ../. "suggestions-layout"}}
+					{{enterModule ../../. dbKey=../../dbkeys.suggestions dbObjectID=../.}}
+				{{/withModule}}
+			</a>
+		{{/each}}
+	</div>
+{{/if}}

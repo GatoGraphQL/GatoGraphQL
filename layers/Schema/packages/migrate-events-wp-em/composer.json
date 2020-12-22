@@ -1,0 +1,32 @@
+{
+    "name": "pop-schema/migrate-events-wp-em",
+    "type": "library",
+    "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/events-wp-em. Target package description: Implementation for WordPress of contracts from package \"Events\"",
+    "keywords": [
+        "PoP",
+        "events-wp-em"
+    ],
+    "homepage": "https://github.com/PoPSchema/migrate-events-wp-em",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "pop-schema/migrate-locations-wp-em": "dev-master"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

@@ -1,0 +1,7 @@
+{{#each bs.feedback.checkpoint-msgs}}
+	{{#each ../module-names.layouts}}
+		{{#withModule ../../. this}}
+			{{enterModule ../../../. feedbackObject=../../.}}
+		{{/withModule}}
+	{{/each}}
+{{/each}}

@@ -1,0 +1,23 @@
+/**
+ * Remove the top margin for the first inner block, so it's aligned top
+ */
+ .editor-styles-wrapper {
+	.wp-block-graphql-api-access-control__who .block-editor-inner-blocks {
+		.block-editor-block-list__block {
+			margin-top: 0;
+		}
+	}
+}
+
+.wp-block-graphql-api-access-control {
+	&__item_data {
+		&__title {
+			text-align: center;
+		}
+	}
+}
+
+.wp-block-graphql-api-access-control__item_data_schema_mode {
+	margin-bottom: 28px;
+}
+

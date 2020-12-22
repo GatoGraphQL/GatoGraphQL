@@ -1,0 +1,2 @@
+{{! It will be printed inside data-header attr, so we can't use "double quotes" but only 'single quotes'}}
+{{#withModule . 'post'}}{{enterModule ../.}}{{/withModule}}{{{titles.inresponseto}}}{{#withModule . 'comment'}}{{enterModule ../.}}{{/withModule}}

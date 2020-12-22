@@ -1,0 +1,4 @@
+services:
+    base36_definition_resolver:
+        class: \PoP\Base36Definitions\DefinitionResolver
+        public: true

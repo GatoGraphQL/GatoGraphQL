@@ -1,0 +1,13 @@
+{{#with dbObject}}
+	<div class="datetime {{../class}}" style="{{../style}}">
+		{{#withModule ../. "layout-downloadlinks"}}
+			<div class="downloadlinks {{../../classes.downloadlinks}}" style="{{../../styles.downloadlinks}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/withModule}}	
+		<div class="{{../classes.calendar}}" style="{{../styles.calendar}}">
+			<span class="{{../classes.date}}" style="{{../styles.date}}"><i class="fa fa-fw fa-calendar"></i>{{dates}}</span>{{{../separator}}}
+			<span class="{{../classes.time}}" style="{{../styles.time}}"><i class="fa fa-fw fa-clock-o"></i>{{times}}</span>
+		</div>
+	</div>
+{{/with}}

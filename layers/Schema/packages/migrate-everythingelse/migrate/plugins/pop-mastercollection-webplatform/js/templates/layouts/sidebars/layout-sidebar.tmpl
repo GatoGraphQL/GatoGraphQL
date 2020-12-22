@@ -1,0 +1,7 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} class="sidebar {{../class}}" style="{{../style}}">
+		{{#withModule ../. "sidebar-inner"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</div>
+{{/with}}

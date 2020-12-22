@@ -1,0 +1,4 @@
+<?php
+
+require_once 'fieldprocessors/load.php';
+// require_once 'hooks/load.php';

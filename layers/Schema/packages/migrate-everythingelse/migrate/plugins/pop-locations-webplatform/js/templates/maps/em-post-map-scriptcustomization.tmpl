@@ -1,0 +1,12 @@
+{{#with dbObject}}
+	<script type="text/javascript">
+	(function($){
+		$(document).one('module:merged', function() {
+
+			var block = $('#{{../bs.bId}}');
+			var pageSection = $('#{{../pss.psId}}');
+			pop.MapRuntime.setMarkerData(pageSection, block, '{{title}}', '<div class="media">{{#withSublevel ../thumb.name}}<a class="media-left" href="{{../url}}"><img src="{{src}}" width="{{width}}" height="{{height}}" alt="{{../title}}"></a>{{/withSublevel}}<div class="media-body"><div class="authors">{{#each authors}}{{#if @index}}{{{../../authors-sep}}}{{/if}}{{#withModule ../../. "authors"}}{{enterModule ../../../. dbKey=../../../bs.dbkeys.authors dbObjectID=../.}}{{/withModule}}{{/each}}</div><a href="{{url}}"><h4 class="media-heading">{{{title}}}</h4></a>{{#withModule ../. "layout-extra"}}{{enterModule ../../.}}{{/withModule}}</div></div>');
+		});
+	})(jQuery);
+	</script>
+{{/with}}

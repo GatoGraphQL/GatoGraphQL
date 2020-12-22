@@ -1,0 +1,8 @@
+services:
+    PoP\FunctionFields\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoP\FunctionFields\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true

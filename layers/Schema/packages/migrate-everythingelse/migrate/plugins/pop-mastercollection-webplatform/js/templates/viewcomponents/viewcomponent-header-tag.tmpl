@@ -1,0 +1,2 @@
+{{! It will be printed inside data-header attr, so we can't use "double quotes" but only 'single quotes'}}
+{{#with dbObject}}<h4 class='media-heading'>{{#if ../header-show-url}}<a href='{{url}}'>{{{symbolnamedescription}}}</a>{{else}}{{{symbolnamedescription}}}{{/if}}</h4>{{/with}}

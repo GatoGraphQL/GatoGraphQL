@@ -1,0 +1,547 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PoP Category Processors\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-12 19:43+0200\n"
+"PO-Revision-Date: 2017-07-12 19:44+0200\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <leo@getpop.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././library/_scopes.php:27
+#: .././plugins/events-manager/library/scopes.php:27
+msgid "week"
+msgstr "semana"
+
+#: .././plugins/aryo-activity-log-popprocessors/pop-library/automatedemails/daily-latestnotifications.php:25
+#, php-format
+msgid "Your daily notifications — %s"
+msgstr "Tus notificaciones del día — %s"
+
+#: .././plugins/aryo-activity-log-popprocessors/pop-library/processors/blocks/sections.php:75
+msgid "These are your unread notifications from the last day."
+msgstr "Estas son tus notificaciones no leídas del día pasado."
+
+#: .././plugins/aryo-activity-log-popprocessors/pop-library/processors/blocks/sections.php:77
+#, php-format
+msgid ""
+"Your daily notifications — %s <small><a href=\"%s\">View online</a></small>"
+msgstr ""
+"Tus notificaciones del día — %s <small><a href=\"%s\">View online</a></small>"
+
+#: .././plugins/aryo-activity-log-popprocessors/pop-library/processors/blocks/sections.php:100
+#, php-format
+msgid "View all your notifications on %s"
+msgstr "Ver todas tus notificaciones en %s"
+
+#: .././plugins/events-manager/pop-library/automatedemails/weekly-upcomingevents.php:25
+#, php-format
+msgid "Upcoming events — %s"
+msgstr "Próximos eventos — %s"
+
+#: .././plugins/events-manager/pop-library/processors/blocks/sections.php:183
+#, php-format
+msgid ""
+"These are our events for this week. Do you have an event? <a href=\"%s\" "
+"target=\"%s\">Click here</a> to share it with our community."
+msgstr ""
+"Estos son los eventos de esta semana. ¿Organizás un evento? <a href=\"%s\" "
+"target=\"%s\">Hacé click acá</a> para compartirlo con nuestra comunidad."
+
+#: .././plugins/events-manager/pop-library/processors/blocks/sections.php:188
+#, php-format
+msgid "Upcoming events — %s <small><a href=\"%s\">View online</a></small>"
+msgstr "Eventos próximos — %s <small><a href=\"%s\">Ver online</a></small>"
+
+#: .././plugins/events-manager/pop-library/processors/blocks/sections.php:232
+#, php-format
+msgid "View all events on %s"
+msgstr "Ver todos los eventos en %s"
+
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:53
+msgid "Event"
+msgstr "Evento"
+
+#: .././pop-library/automatedemails/weekly-latestposts.php:25
+#, php-format
+msgid "Latest content — %s"
+msgstr "Último contenido — %s"
+
+#: .././pop-library/processors/blocks/contents.php:42
+#, php-format
+msgid "Here we send you this special %s:"
+msgstr "Aquí te enviamos este especial %s:"
+
+#: .././pop-library/processors/blocks/sections.php:89
+#, php-format
+msgid ""
+"This is the latest content uploaded to %s during last week. Do you want to "
+"add your content? <a href=\"%s\">Click here</a> to share it with our "
+"community."
+msgstr ""
+"Este es el último contenido subido a %s durante la última semana. ¿Querés "
+"agregar tu contenido? <a href=\"%s\">Hacé click acá</a> para compartirlo con "
+"nuestra comunidad."
+
+#: .././pop-library/processors/blocks/sections.php:94
+#, php-format
+msgid "Latest content — %s <small><a href=\"%s\">View online</a></small>"
+msgstr "Último contenido — %s <small><a href=\"%s\">Ver online</a></small>"
+
+#: .././pop-library/processors/blocks/sections.php:120
+#, php-format
+msgid "View all content on %s"
+msgstr "Ver todo el contenido en %s"
+
+#: .././pop-library/processors/sidebars/widgetries.php:51
+msgid "Author(s)"
+msgstr "Autor(es)"
+
+#: .././pop-library/processors/sidebars/widgetries.php:52
+msgid "Post"
+msgstr "Post"
+
+#: .././validation.php:50
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:55
+msgid ""
+"Error: <b>PoP Theme: Wassup</b> is not installed/activated. Without it, "
+"<b>PoP Theme Wassup Category Processors</b> will not work. Please install "
+"this plugin from your plugin installer or download it <a href=\"https://"
+"github.com/leoloso/PoP/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Theme: Wassup</b> is not installed/activated. Without it, "
+"<b>PoP Theme Wassup Category Processors</b> will not work. Please install "
+"this plugin from your plugin installer or download it <a href=\"https://"
+"github.com/leoloso/PoP/\">from here</a>."
+
+#: .././validation.php:59
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Theme: Wassup</b> installed, or "
+"otherwise <b>PoP Theme Category Processors</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Theme: Wassup</b> installed, or "
+"otherwise <b>PoP Theme Category Processors</b> might not function properly."
+
+#: .././validation.php:63
+msgid ""
+"Error: <b>PoP Automated Emails</b> is not installed/activated. Without it, "
+"<b>PoP Theme Wassup Automated Emails</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"https://github."
+"com/leoloso/PoP/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Automated Emails</b> is not installed/activated. Without it, "
+"<b>PoP Theme Wassup Automated Emails</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"https://github."
+"com/leoloso/PoP/\">from here</a>."
+
+#: .././validation.php:67
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Automated Emails</b> installed, or "
+"otherwise <b>PoP Theme Wassup Automated Emails</b> might not function "
+"properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Automated Emails</b> installed, or "
+"otherwise <b>PoP Theme Wassup Automated Emails</b> might not function "
+"properly."
+
+#~ msgid "Details"
+#~ msgstr "Detalles"
+
+#~ msgid "Feed"
+#~ msgstr "Feed"
+
+#~ msgid "Extended"
+#~ msgstr "Extendido"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Miniatura"
+
+#~ msgid "List"
+#~ msgstr "Lista"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "No %s found."
+#~ msgstr "No se han encontrado %s."
+
+#~ msgid "No more %s found."
+#~ msgstr "No se han encontrado más %s."
+
+#~ msgid "Login/Register"
+#~ msgstr "Iniciar sesión/Registrarse"
+
+#~ msgid "Please %s to access your %s."
+#~ msgstr "Por favor, %s para acceder a su %s."
+
+#~ msgid "You need a %s account to access this functionality."
+#~ msgstr "Es necesario una cuenta de %s para acceder a esta funcionalidad."
+
+#~ msgid "Your account has no permission to edit this %s."
+#~ msgstr "Su cuenta no tiene permiso para modificar esta %s."
+
+#~ msgid "Incorrect URL"
+#~ msgstr "URL incorrecta"
+
+#~ msgid "Farm"
+#~ msgstr "Granja"
+
+#~ msgid "Farms"
+#~ msgstr "Granjas"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "as Link"
+#~ msgstr "como Enlace"
+
+#~ msgid "Farm link"
+#~ msgstr "Enlace a la Granja"
+
+#~ msgid "Add Farm"
+#~ msgstr "Añadir Granja"
+
+#~ msgid "Submitting..."
+#~ msgstr "Enviando…"
+
+#~ msgid "Yay! Your %s was created successfully!"
+#~ msgstr "¡Hurra! Su %s se ha creado correctamente!"
+
+#~ msgid "Yay! Your %s was updated successfully!"
+#~ msgstr "¡Hurra! Su %s se ha actualizado correctamente!"
+
+#~ msgid "Please %s to create your %s."
+#~ msgstr "Por favor, %s para crear su %s."
+
+#~ msgid "You need a %s account to create your %s."
+#~ msgstr "Es necesario una cuenta de %s para crear su %s."
+
+#~ msgid "%s updated successfully."
+#~ msgstr "%s ha actualizado correctamente."
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+#~ msgstr ""
+#~ "Por favor <a href=“%s”>inicie su sesión de usuario</a> para editar su %s."
+
+#~ msgid "You need a %s account to edit your %s."
+#~ msgstr "Es necesario una cuenta de %s para editar su %s."
+
+#~ msgid "Ops, it seems you have no rights to edit this %s."
+#~ msgstr "Ops, parece que no tiene derechos para editar este %s."
+
+#~ msgid "Farm details"
+#~ msgstr "Detalles de la Granja"
+
+#~ msgid "Farm link details"
+#~ msgstr "Detalle del Enlace a la Granja"
+
+#~ msgid "Categories"
+#~ msgstr "Categorías"
+
+#~ msgid "Select categories"
+#~ msgstr "Seleccionar categorías"
+
+#~ msgid "posted by"
+#~ msgstr "publicado por"
+
+#~ msgid "farm"
+#~ msgstr "granja"
+
+#~ msgid "farms"
+#~ msgstr "granjas"
+
+#~ msgid "Date"
+#~ msgstr "Fecha"
+
+#~ msgid "Status"
+#~ msgstr "Estado"
+
+#~ msgid "Project"
+#~ msgstr "Proyecto"
+
+#~ msgid "Story"
+#~ msgstr "Historia"
+
+#~ msgid "Announcement"
+#~ msgstr "Anuncio"
+
+#~ msgid "Article"
+#~ msgstr "Artículo"
+
+#~ msgid "Featured"
+#~ msgstr "Destacado"
+
+#~ msgid "Projects"
+#~ msgstr "Proyectos"
+
+#~ msgid "Stories"
+#~ msgstr "Historias"
+
+#~ msgid "Announcements"
+#~ msgstr "Anuncios"
+
+#~ msgid "Articles"
+#~ msgstr "Artículos"
+
+#~ msgid "Blog"
+#~ msgstr "Blog"
+
+#~ msgid "Charity"
+#~ msgstr "Caridad"
+
+#~ msgid "Communities"
+#~ msgstr "Comunidades"
+
+#~ msgid "Company or Corporate"
+#~ msgstr "Compañía o Empresarial"
+
+#~ msgid "Government"
+#~ msgstr "Gobierno"
+
+#~ msgid "Education"
+#~ msgstr "Educación"
+
+#~ msgid "NGO/NPO"
+#~ msgstr "ONG/Organización sin fines de lucro"
+
+#~ msgid "Social Enterprise"
+#~ msgstr "Empresa social"
+
+#~ msgid "Youth"
+#~ msgstr "Jóvenes"
+
+#~ msgid "Full view"
+#~ msgstr "Vista completa"
+
+#~ msgid "View/Preview"
+#~ msgstr "Ver/Vista previa"
+
+#~ msgid "The Drivers"
+#~ msgstr "Quiénes lo llevan adelante"
+
+#~ msgid "The Advisors"
+#~ msgstr "Los Consejeros"
+
+#~ msgid "The Volunteers"
+#~ msgstr "Los Voluntarios"
+
+#~ msgid "Project link"
+#~ msgstr "Enlace a Proyecto"
+
+#~ msgid "Article link"
+#~ msgstr "Enlace a Artículo"
+
+#~ msgid "Announcement link"
+#~ msgstr "Enlace a Anuncio"
+
+#~ msgid "Add Project"
+#~ msgstr "Añadir Proyecto"
+
+#~ msgid "Add Story"
+#~ msgstr "Añadir Historia"
+
+#~ msgid "Add Announcement"
+#~ msgstr "Añadir Anuncio"
+
+#~ msgid "Add Article"
+#~ msgstr "Añadir Artículo"
+
+#~ msgid "Project details"
+#~ msgstr "Detalles del Proyecto"
+
+#~ msgid "Project link details"
+#~ msgstr "Detalles del Enlace al Proyecto"
+
+#~ msgid "Article details"
+#~ msgstr "Detalles del Artículo"
+
+#~ msgid "Article link details"
+#~ msgstr "Detalles del Enlace al Artículo"
+
+#~ msgid "Announcement details"
+#~ msgstr "Detalles del Anuncio"
+
+#~ msgid "Announcement link details"
+#~ msgstr "Detalles del Enlace al Anuncio"
+
+#~ msgid "Featured article details"
+#~ msgstr "Detalle del Artículo Destacado"
+
+#~ msgid ""
+#~ "We are constantly on the lookout for worthy, knowledgeable and "
+#~ "experienced people who sympathize with our cause and want to empower us. "
+#~ "If you are such a person, please <a href=\"%s\">%s</a>."
+#~ msgstr ""
+#~ "Estamos constantemente en busca de personas dignas, con conocimientos y "
+#~ "experiencia que simpaticen con nuestra causa y nos quieren empoderar. Si "
+#~ "usted es una persona así, por favor <a href=\"%s\">%s</a>."
+
+#~ msgid "Disclaimer:"
+#~ msgstr "Descargo de responsabilidad"
+
+#~ msgid ""
+#~ "The views expressed in this article/discussion do not necessarily "
+#~ "represent the views of %1$s. Comments or opinions expressed are those of "
+#~ "their respective contributors only. %1$s is not responsible for, and "
+#~ "disclaims any and all liability for the content of the article/discussion "
+#~ "and related comments."
+#~ msgstr ""
+#~ "Las opiniones expresadas en este artículo/discusión no representan "
+#~ "necesariamente los puntos de vista de %1$s. Comentarios u opiniones "
+#~ "expresadas son de sus respectivos contribuyentes solamente. %1$s no es "
+#~ "responsable de, y declina toda responsabilidad por el contenido del "
+#~ "artículo/discusión y comentarios relacionados."
+
+#~ msgid "project"
+#~ msgstr "proyecto"
+
+#~ msgid "projects"
+#~ msgstr "proyectos"
+
+#~ msgid "story"
+#~ msgstr "historia"
+
+#~ msgid "stories"
+#~ msgstr "historias"
+
+#~ msgid "announcement"
+#~ msgstr "anuncio"
+
+#~ msgid "announcements"
+#~ msgstr "anuncios"
+
+#~ msgid "article"
+#~ msgstr "artículo"
+
+#~ msgid "articles"
+#~ msgstr "artículos"
+
+#~ msgid "featured article"
+#~ msgstr "artículo destacado"
+
+#~ msgid "featured articles"
+#~ msgstr "artículos destacados"
+
+#~ msgid "blog entry"
+#~ msgstr "entrada del blog"
+
+#~ msgid "blog entries"
+#~ msgstr "entradas del blog"
+
+#~ msgid "thought"
+#~ msgstr "pensamiento"
+
+#~ msgid "thoughts"
+#~ msgstr "pensamientos"
+
+#~ msgid "Section links"
+#~ msgstr "Enlaces de Sección"
+
+#~ msgid "From our blog"
+#~ msgstr "De nuestro blog"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "Desplazarse hacia abajo para cargar más resultados"
+
+#~ msgid "Discussion link"
+#~ msgstr "En"
+
+#, fuzzy
+#~ msgid "Add a comment for:"
+#~ msgstr "Añadir un comentario para:"
+
+#, fuzzy
+#~ msgid "Send message to:"
+#~ msgstr "Enviar un mensaje a:"
+
+#, fuzzy
+#~ msgid "Volunteer for:"
+#~ msgstr "Ofrecerse como voluntario para:"
+
+#, fuzzy
+#~ msgid "In response to:"
+#~ msgstr "Rápida respuesta del servidor"
+
+#, fuzzy
+#~ msgid "Ops, there's nothing here!"
+#~ msgstr "Ops, no se encontró nada aquí!"
+
+#, fuzzy
+#~ msgid "Welcome to %s!"
+#~ msgstr "Bienvenidos a %s!"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#, fuzzy
+#~ msgid "Events"
+#~ msgstr "Eventos"
+
+#, fuzzy
+#~ msgid "Past Events"
+#~ msgstr "Eventos Pasados"
+
+#, fuzzy
+#~ msgid "Content"
+#~ msgstr "Contenido"
+
+#, fuzzy
+#~ msgid "User"
+#~ msgstr "Usuario"
+
+#, fuzzy
+#~ msgid "Users"
+#~ msgstr "Usuarios"
+
+#, fuzzy
+#~ msgid "Resources"
+#~ msgstr "Recursos"
+
+#, fuzzy
+#~ msgid "Organization"
+#~ msgstr "Organización"
+
+#, fuzzy
+#~ msgid "Organizations"
+#~ msgstr "organizaciones"
+
+#, fuzzy
+#~ msgid "Individual"
+#~ msgstr "Individuo"
+
+#, fuzzy
+#~ msgid "Individuals"
+#~ msgstr "individuos"
+
+#, fuzzy
+#~ msgid "Sponsor"
+#~ msgstr "patrocinador"
+
+#, fuzzy
+#~ msgid "Sponsors"
+#~ msgstr "patrocinadores"
+
+#, fuzzy
+#~ msgid "No categories"
+#~ msgstr "Sin categorías"
+
+#, fuzzy
+#~ msgid "Members"
+#~ msgstr "Miembros"

@@ -1,0 +1,10 @@
+<?php
+
+// Gravity Forms Field Ids
+//--------------------------------------------------------
+define('POP_GENERICFORMS_GF_FORM_FLAG_FORM_ID', false);
+define('POP_GENERICFORMS_GF_FORM_FLAG_FIELDNAME_NAME_ID', false);
+define('POP_GENERICFORMS_GF_FORM_FLAG_FIELDNAME_EMAIL_ID', false);
+define('POP_GENERICFORMS_GF_FORM_FLAG_FIELDNAME_WHYFLAG_ID', false);
+define('POP_GENERICFORMS_GF_FORM_FLAG_FIELDNAME_PAGEURL_ID', false);
+define('POP_GENERICFORMS_GF_FORM_FLAG_FIELDNAME_PAGETITLE_ID', false);

@@ -1,0 +1,8 @@
+services:
+    PoP\API\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true
+
+    PoP\API\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true

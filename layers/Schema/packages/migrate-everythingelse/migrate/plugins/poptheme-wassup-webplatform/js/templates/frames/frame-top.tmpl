@@ -1,0 +1,219 @@
+<ul class="nav navbar-nav navbar-right visiblesearch-visible-right" role="menu">
+	{{#withModule . "block-oursponsors"}}
+		{{#if bs.dbobjectids}}
+			<li class="dropdown nav-sponsors nav-dropdown visiblesearch-visible">
+				<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId module=../module group="void-link"}}{{../id}}-sponsors{{/generateId}} title="{{../titles.sponsors}}">
+					<span class="glyphicon {{../icons.sponsors}}"></span>
+				</a>
+				<div class="dropdown-menu pull-right" role="menu">
+					<div class="col-xs-12" id="{{../id}}-sponsors">
+						<p>{{{../titles.sponsors-description}}}</p>
+						{{enterModule .}}
+						<hr/>
+						<div><span class="pull-right">{{{../titles.sponsorus}}}</a></span>{{{../titles.viewallsponsors}}}</div>
+					</div>
+				</div>
+			</li>
+		{{/if}}
+	{{/withModule}}
+	<li class="dropdown nav-about nav-dropdown visiblesearch-visible">
+		<a title="{{titles.about}}" href="#" {{#generateId targetId=pss.pssId group="void-link"}}{{id}}-info{{/generateId}}>
+			<span class="glyphicon {{icons.about}}"></span>
+		</a>
+		<div class="dropdown-menu dropdown-menu-right" role="menu">
+			<div class="row">
+				<div class="col-sm-6 col-logo hidden-xs">
+					{{#with logo-large-white}}
+						<img src="{{src}}" class="img-responsive" alt="{{title}}">
+					{{/with}}<br/>
+					{{#each socialmedias}}
+						<a href="{{link}}" class="{{../classes.socialmedia}}" style="{{../styles.socialmedia}}" title="{{name}}">
+							{{{title}}}
+						</a><br/>
+					{{/each}}
+				</div>
+				<div class="col-sm-6" id="{{id}}-menu-about">
+					{{#withModule . "menu-about"}}
+						{{enterModule .}}
+					{{/withModule}}
+					<div class="hidden-sm hidden-md hidden-lg">
+						<hr/>
+						<div class="row">
+							<div class="col-xs-6 col-logo">
+								{{#with logo-large-white}}
+									<img src="{{src}}" class="img-responsive" alt="{{title}}">
+								{{/with}}					
+							</div>
+							<div class="col-xs-6">								
+								{{#each socialmedias}}
+									<a href="{{link}}" class="{{../classes.socialmedia}}" style="{{../styles.socialmedia}}" title="{{name}}">
+										{{{title}}}
+									</a><br/>
+								{{/each}}
+							</div>
+						</div>
+					</div>				
+				</div>
+			</div>
+			<hr/>
+			<div class="text-padded text-center"><small>{{{titles.footer}}}</small></div>
+		</div>
+	</li>
+	<li class="nav-settings visiblesearch-visible">
+		<a title="{{titles.settings}}" href="{{links.settings}}">
+			<span class="glyphicon {{icons.settings}}"></span>
+		</a>
+	</li>
+	<li class="hidden-sm hidden-md hidden-lg pop-toggle-search">
+		<a {{#generateId targetId=pss.pssId group="togglesearch-xs"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglesearch}}" data-target="{{togglesearch-target}}" data-mode="toggle" data-class="pop-search-visible">
+			<span class="glyphicon {{icons.togglesearch}}"></span>
+		</a>
+	</li>
+</ul>
+
+<ul class="nav navbar-nav framesection-navbar-left visiblesearch-hidden" role="menu">
+	<li class="activeside-hidden">
+		<a {{#generateId targetId=pss.pssId group="logo"}}{{id}}{{/generateId}} class="logo" href="{{links.home}}" target="{{targets.home}}" title="{{titles.home}}" data-tooltip-placement="bottom">
+			{{#with logo-small}}
+				<img src="{{src}}" alt="{{../titles.home}}">
+			{{/with}}
+		</a>
+	</li>
+	<li class="dropdown nav-addcontent nav-dropdown activeside-hidden">
+		<a title="{{titles.addcontent}}" href="#" {{#generateId targetId=pss.pssId group="void-link"}}{{id}}-addcontent{{/generateId}}>
+			<span class="glyphicon {{icons.addcontent}}"></span>
+		</a>
+		<div class="dropdown-menu" role="menu">
+			<div class="media">
+				<div class="media-left">
+					<div class="top-iconleft-container">
+						{{{titles.addcontent-left}}}
+					</div>
+				</div>
+				<div class="media-body" id="{{id}}-menu-addcontent">
+					<h3 class="media-heading">{{titles.addcontent-right}}</h3>
+					{{#withModule . "menu-addnew"}}
+						{{enterModule .}}
+					{{/withModule}}
+				</div>				
+			</div>
+		</div>
+	</li>
+</ul>
+<ul class="nav navbar-nav navbar-nav-togglenav visiblesearch-hidden" role="menu">
+	<li class="hidden-sm hidden-md hidden-lg">
+		<a {{#generateId targetId=pss.pssId group="togglenav-xs"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglenavigation}}" data-target="{{offcanvas-sidenav-target}}" data-toggle="offcanvas-toggle" data-mode="xs">
+			<span class="glyphicon {{icons.togglenavigation}}"></span>
+		</a>
+	</li>
+	<li class="hidden-xs">
+		<a {{#generateId targetId=pss.pssId group="togglenav"}}{{id}}{{/generateId}} href="#" class="toggle-side activenavigator-hidden" title="{{titles.togglenavigation}}" data-target="{{offcanvas-sidenav-target}}" data-toggle="offcanvas-toggle" data-tooltip-placement="bottom" {{#each togglenav-params}} {{@key}}="{{this}}"{{/each}}>
+			<span class="glyphicon {{icons.togglenavigation}}"></span>
+		</a>
+		<a {{#generateId targetId=pss.pssId group="togglenavigator"}}{{id}}{{/generateId}} href="#" class="toggle-side activenavigator-visible" title="{{titles.togglenavigation}}" data-target="{{offcanvas-navigator-target}}" data-toggle="offcanvas-toggle" data-tooltip-placement="bottom">
+			<span class="glyphicon {{icons.togglenavigation}}"></span>
+		</a>
+	</li>
+	<li class="hidden-sm hidden-md hidden-lg">
+		<a {{#generateId targetId=pss.pssId group="togglepagetabs-xs"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglepagetabs}}" data-target="{{offcanvas-pagetabs-target}}" data-toggle="offcanvas-toggle" data-mode="xs">
+			<span class="glyphicon {{icons.togglepagetabs}}"></span>
+		</a>
+	</li>
+	<li class="hidden-xs">
+		<a {{#generateId targetId=pss.pssId group="togglepagetabs"}}{{id}}{{/generateId}} href="#" class="toggle-side" title="{{titles.togglepagetabs}}" data-target="{{offcanvas-pagetabs-target}}" data-toggle="offcanvas-toggle" data-tooltip-placement="bottom">
+			<span class="glyphicon {{icons.togglepagetabs}}"></span>
+		</a>
+	</li>
+</ul>
+<div id="account-loading-msg" class="hidden visiblesearch-hidden">{{{titles.account-loading-msg}}}</div>
+<ul class="nav navbar-nav navbar-nav-account visiblesearch-hidden" role="menu">
+	<li class="dropdown nav-account nav-dropdown visible-loggedin-localdomain">
+		<a title="{{titles.myprofile}}" href="{{sessionmeta.user.url}}" class="pop-user-url {{tls.domain-id}} {{#if titles.useravatar}}user-avatar{{/if}} hidden-xs hidden-sm">
+			{{#if titles.useravatar}}
+				<img src="{{sessionmeta.user.avatar}}" class="pop-user-avatar {{tls.domain-id}} img-thumbnail">
+			{{else}}
+				<span class="glyphicon {{icons.account}}"></span>
+			{{/if}}
+		</a>
+		<a title="{{titles.myprofile}}" href="#" class="user-avatar hidden-md hidden-lg" {{#generateId targetId=pss.pssId group="void-link"}}{{id}}-useraccount-loggedin{{/generateId}}>
+			{{#if titles.useravatar}}
+				<img src="{{sessionmeta.user.avatar}}" class="pop-user-avatar {{tls.domain-id}} img-thumbnail">
+			{{else}}
+				<span class="glyphicon {{icons.account}}"></span>
+			{{/if}}
+		</a>
+		<div class="dropdown-menu" role="menu">
+			<div class="media">
+				<div class="media-left">
+					{{#if titles.useravatar}}
+						<div class="top-useravatar-container">
+							<a title="{{titles.myprofile}}" href="{{sessionmeta.user.url}}" class="pop-user-url {{tls.domain-id}} user-avatar thumbnail">
+								<img src="{{sessionmeta.user.avatar}}" class="pop-user-avatar {{tls.domain-id}}">
+							</a>
+							<a href="{{links.useravatar}}" class="{{classes.useravatar}} useravatar-link" style="{{styles.useravatar}}">
+								{{{titles.useravatar}}}
+							</a>
+						</div>
+					{{else}}
+						<div class="top-iconleft-container">
+							{{{titles.account-left}}}
+						</div>
+					{{/if}}
+				</div>
+				<div class="media-body" id="{{id}}-menu-userloggedin">
+					<h3 class="media-heading"><a title="{{titles.myprofile}}" href="{{sessionmeta.user.url}}" class="pop-user-url {{tls.domain-id}} user-avatar"><span class="pop-user-name {{tls.domain-id}}">{{{sessionmeta.user.name}}}</span></a></h3>
+					{{#withModule . "menu-userloggedin"}}
+						{{enterModule .}}
+					{{/withModule}}
+				</div>				
+			</div>
+		</div>
+	</li>
+	<li class="dropdown nav-account nav-dropdown visible-notloggedin-localdomain">
+		<a title="{{titles.loginaddprofile}}" href="{{links.login}}" class="hidden-xs hidden-sm">
+			<span class="glyphicon {{icons.account}}"></span>
+		</a>
+		<a title="{{titles.loginaddprofile}}" href="#" class="hidden-md hidden-lg" {{#generateId targetId=pss.pssId group="void-link"}}{{id}}-useraccount-notloggedin{{/generateId}}>
+			<span class="glyphicon {{icons.account}}"></span>
+		</a>
+		<div class="dropdown-menu" role="menu" id="{{id}}-menu-usernotloggedin">
+			<div class="media">
+				<div class="media-left">
+					<div class="top-iconleft-container">
+						{{{titles.account-left}}}
+					</div>
+				</div>
+				<div class="media-body" id="{{id}}-menu-addcontent">
+					<h3 class="media-heading">{{titles.account-right}}</h3>
+					{{#withModule . "menu-usernotloggedin"}}
+						{{enterModule .}}
+					{{/withModule}}
+				</div>				
+			</div>
+		</div>
+	</li>
+	{{#withModule . "block-notifications"}}
+		<li class="dropdown nav-notifications nav-dropdown">
+			<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId module=../module group="notification-link"}}{{../id}}-notificationslink{{/generateId}} title="{{../titles.notifications}}" {{#each ../params.notifications-link}} {{@key}}="{{this}}"{{/each}}>
+				<span class="glyphicon {{../icons.notifications}}"></span>
+				<span id="{{../ids.notifications-count}}" class="hidden {{../classes.notifications-count}}" style="{{../styles.notifications-count}}"></span>
+			</a>
+			<div class="dropdown-menu" role="menu">
+				<div class="col-xs-12" id="{{../id}}-notifications">
+					<div {{#generateId targetId=../pss.pssId module=../module group="notifications"}}{{../id}}{{/generateId}} class="{{../classes.notifications}}" style="{{../styles.notifications}}">
+						{{enterModule .}}
+					</div>
+					<hr/>
+					<div><span class="pull-right">{{{../titles.viewallnotifications}}}</a></span></div>
+				</div>
+			</div>
+		</li>
+	{{/withModule}}
+</ul>
+<ul class="nav navbar-nav visiblesearch-visible" role="menu">
+	<li class="nav-quicklink" id="{{id}}-quicklink-everything">
+		{{#withModule . "search"}}
+			{{enterModule .}}
+		{{/withModule}}
+	</li>
+</ul>

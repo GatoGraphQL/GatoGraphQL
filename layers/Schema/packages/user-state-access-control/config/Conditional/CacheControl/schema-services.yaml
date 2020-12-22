@@ -1,0 +1,4 @@
+services:
+    PoPSchema\UserStateAccessControl\Conditional\CacheControl\TypeResolverDecorators\:
+        resource: '../../../src/Conditional/CacheControl/TypeResolverDecorators/*'
+        public: true

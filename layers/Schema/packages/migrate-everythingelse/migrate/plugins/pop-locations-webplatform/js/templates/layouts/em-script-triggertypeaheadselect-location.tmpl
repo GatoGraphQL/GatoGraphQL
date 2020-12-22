@@ -1,0 +1,19 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} style="display: none;"></div>
+	<script type="text/javascript">
+	(function($){
+		{{! Comment Leo 11/06/2017: do it inside "module:merged", so that it works also for server-side rendering (object pop.Manager is only available at the end)}}
+		$(document).one('module:merged', function() {
+			var myself = $('#{{lastGeneratedId context=../.}}');
+			var createlocation = myself.closest('.pop-createlocation');
+			var typeahead = $(createlocation.data('typeahead-target'));
+			var trigger = pop.TypeaheadSelectable.getTypeaheadTrigger(typeahead);
+			var block = pop.Manager.getBlock(typeahead);
+			var pageSection = pop.Manager.getPageSection(block);
+			var domain = '{{../tls.domain}}';
+			var location = pop.Manager.getDBObject(domain, '{{../dbKey}}', '{{id}}');
+			pop.DynamicRender.renderDBObjectLayoutFromDatum(domain, pageSection, block, trigger, location);
+		});
+	})(jQuery);
+	</script>
+{{/with}}

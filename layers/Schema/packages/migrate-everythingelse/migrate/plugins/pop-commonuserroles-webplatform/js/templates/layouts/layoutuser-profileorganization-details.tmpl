@@ -1,0 +1,26 @@
+{{#with dbObject}}
+	{{#if organizationtypes-byname}}
+		<p class="post-categories {{../class}}" style="{{../style}}">
+			<em>{{../titles.types}}</em><br/>
+			{{labelize organizationtypes-byname ../classes.label}}
+		</p>
+	{{/if}}
+	{{#if organizationcategories-byname}}
+		<p class="post-categories {{../class}}" style="{{../style}}">
+			<em>{{../titles.categories}}</em><br/>
+			{{labelize organizationcategories-byname ../classes.label2}}
+		</p>
+	{{/if}}
+	{{#if contact-person}}
+		<p class="user-contactperson {{../class}}" style="{{../style}}">
+			<em>{{../titles.contactperson}}</em><br/>
+			{{{contact-person}}}
+		</p>
+	{{/if}}
+	{{#if contact-number}}
+		<p class="user-contactnumber {{../class}}" style="{{../style}}">
+			<em>{{../titles.number}}</em><br/>
+			{{{contact-number}}}
+		</p>
+	{{/if}}
+{{/with}}

@@ -1,0 +1,11 @@
+
+/* Class .multiselect-btn-group needed to make the multiselect come below its label (now shows inline-block) */
+.multiselect-btn-group {
+	display: block;
+}
+.multiselect-btn-group:before,
+.multiselect-btn-group:after {
+  display: table;
+  content: " ";
+  clear: both;
+}

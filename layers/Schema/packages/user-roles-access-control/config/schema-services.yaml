@@ -1,0 +1,8 @@
+services:
+    PoPSchema\UserRolesAccessControl\TypeResolverDecorators\:
+        resource: '../src/TypeResolverDecorators/*'
+        public: true
+
+    PoPSchema\UserRolesAccessControl\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true

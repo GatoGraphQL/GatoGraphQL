@@ -1,0 +1,12 @@
+<ul class="nav {{class}}" style="{{style}}" role="menu" {{#generateId}}{{id}}{{/generateId}}>
+	{{#each dbObject.items}}
+		<li id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{classes}} {{#compare title "divider"}}divider{{/compare}}'>
+			{{#compare title "divider"}}
+				<hr />
+			{{else}}
+				{{! Using alt instead of title because title includes the fontawesome icons html}}
+				<a href="{{url}}" title="{{alt}}" {{{additional-attrs}}}>{{{title}}}</a>
+			{{/compare}}
+		</li>
+	{{/each}}
+</ul>

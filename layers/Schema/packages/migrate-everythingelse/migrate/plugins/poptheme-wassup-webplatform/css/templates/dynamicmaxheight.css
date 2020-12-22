@@ -1,0 +1,9 @@
+
+/* Dynamic Max Height: make it no more than 380px at the beginning, so that it doesn't become jumpy when the JS finally executes*/
+/*.pop-loadinghtml .dynamic-height-wrap {*/
+body.pop-loadinghtml .dynamic-height-wrap {
+	max-height: 414px; /* = 380px for dynamic-height-wrap height + 34px for "Show more" button */
+}
+body.no-js.pop-loadinghtml .dynamic-height-wrap {
+	max-height: initial;
+}

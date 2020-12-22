@@ -1,0 +1,7 @@
+{{#with dbObject}}
+	<a href="{{get . ../url-field}}" title="{{display-name}}" class="avatar thumbnail thumbnail-sm">
+		{{#withSublevel ../avatar.name}}
+			<img width="{{size}}" height="{{size}}" src="{{src}}" title="{{../display-name}}">
+		{{/withSublevel}}
+	</a>
+{{/with}}

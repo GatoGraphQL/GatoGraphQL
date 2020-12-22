@@ -1,0 +1,4 @@
+services:
+    PoPSchema\Stances\TypeAPIs\StanceTypeAPIInterface:
+        class: \PoPSchema\StancesWP\TypeAPIs\StanceTypeAPI
+        public: true

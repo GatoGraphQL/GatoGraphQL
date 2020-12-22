@@ -1,0 +1,10 @@
+{{#with dbObject}}
+	target = current.closest('.pop-structureinner');
+	{{! parent == 0 => no parent}}
+	{{#compare parent 0 operator=">"}}
+		destination = $('div.pop-commentreplies-{{parent}}');
+	{{else}}
+		destination = $('div.pop-append-{{../post-dbkey}}-{{post-id}}.{{../classes.appendable}}');
+	{{/compare}}
+	destination = destination.not('.'+controlClass);
+{{/with}}

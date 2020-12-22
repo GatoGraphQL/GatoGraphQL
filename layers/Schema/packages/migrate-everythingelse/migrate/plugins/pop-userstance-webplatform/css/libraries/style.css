@@ -1,0 +1,157 @@
+
+.pop-updownvote-stancelabel,
+.stances .pop-updownvote-label,
+.contentinner-stancesingle+.contentinner-subjugatedpostconclusionsidebar-horizontal .pop-updownvote-label {
+  display: none;
+}
+.stances .pop-updownvote-stancelabel,
+.contentinner-stancesingle+.contentinner-subjugatedpostconclusionsidebar-horizontal .pop-updownvote-stancelabel {
+  display: inline;
+}
+
+.stances .alert .readable,
+.stances.alert .readable {
+  margin-bottom: 5px;
+}
+.stances.alert .readable p {
+  margin-bottom: 10px;
+}
+.stances.alert .readable p:last-child {
+  margin-bottom: 0;
+}
+.stances .pop-content.readable {
+  padding-bottom: 0;
+}
+
+/*.alert-success*/
+.stances.pro .alert.alert-stance,
+.stances.pro.alert.alert-stance {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.stances.pro .alert.alert-stance hr,
+.stances.pro.alert.alert-stance hr {
+  border-top-color: #c9e2b3;
+}
+.stances.pro .alert.alert-stance .alert-link,
+.stances.pro.alert.alert-stance .alert-link {
+  color: #2b542c;
+}
+
+/*.alert-info*/
+.stances.neutral .alert.alert-stance,
+.stances.neutral.alert.alert-stance {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.stances.neutral .alert.alert-stance hr,
+.stances.neutral.alert.alert-stance hr {
+  border-top-color: #a6e1ec;
+}
+.stances.neutral .alert.alert-stance .alert-link,
+.stances.neutral.alert.alert-stance .alert-link {
+  color: #245269;
+}
+
+/*.alert-danger*/
+.stances.against .alert.alert-stance,
+.stances.against.alert.alert-stance {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.stances.against .alert.alert-stance hr,
+.stances.against.alert.alert-stance hr {
+  border-top-color: #e4b9c0;
+}
+.stances.against .alert.alert-stance .alert-link,
+.stances.against.alert.alert-stance .alert-link {
+  color: #843534;
+}
+
+
+.block-stances-carousel .blocksection-controls.right {
+  position: absolute;
+  right: 0;
+  z-index: 100;
+}
+.block-stances-carousel .carousel.widget .carousel-item .alert {
+  margin-bottom: 0;
+}
+#ps-body .block-stances-carousel .blockinner-row, 
+#ps-quickview .block-stances-carousel .blockinner-row {
+  background-color: transparent;
+}
+
+.pop-blockstance-createorupdate.pop-widget {
+    /*background-color: #fff;
+    border: 1px solid #dcddde;*/
+    padding-bottom: 20px;
+}
+.pop-blockstance-createorupdate.pop-widget > .blocksection-controls {
+  display: none;
+}
+.pop-blockstance-createorupdate.pop-singlepoststance {
+    margin-bottom: 20px;
+    margin-top: -30px;
+}
+.pop-blockstance-createorupdate.pop-singlepoststance .pop-uniqueornone-selectabletypeahead-formgroup {
+  display: none; /* Do not show the referenced typeahead, it's too much repetition */
+}
+.pop-blockstance-createorupdate.pop-singlepoststance .blocksection-title > h1 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.vt-author-thoughtslides > .blocksection-extensions {
+  padding: 15px 15px 0;
+}
+.vt-author-thoughtslides > .blocksection-extensions,
+.vt-home-widgetarea > .blocksection-extensions {
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 4px 2px #ccc;
+  -moz-box-shadow: 0 2px 4px 2px #ccc;
+  box-shadow: 0 2px 4px 2px #ccc;
+  margin-bottom: 20px;
+}
+
+
+/* Events Manager */
+.pop-fullevent-addstance-title {
+  display: none;
+}
+.fullview.event .pop-fullview-addstance-title {
+  display: none;
+}
+.fullview.event .pop-fullevent-addstance-title {
+  display: inline;
+}
+
+/* Navigator */
+.navigator > .scroll-inner.scrollinner-stances-navigator .pop-blockinner-row {
+  border-top: 0;
+  padding: 0;
+}
+
+.pop-stance-combined {
+  border-top: 1px solid #7a7a7b;
+  padding-top: 5px;
+  margin-top: 5px;
+}
+
+.block-stancestats > .blocksection-controls.right {
+  margin-top: 15px;
+}
+/*.block-stancestats > .blocksection-inners.well {
+  margin-bottom: 0;
+}*/
+
+.pop-stance-count {
+  background-color: #fcf8e3;
+}
+#ps-body .sidebar .pop-stancecount-wrapper,
+#ps-quickview .sidebar .pop-stancecount-wrapper {
+  margin-bottom: 20px;
+  text-align: center;
+}

@@ -1,0 +1,12 @@
+{
+    "phpVersion": "7.4",
+    "plugins": [
+        "."
+	],
+	"port": 8088,
+	"testsPort": 8089,
+	"config": {
+        "WP_DEBUG_DISPLAY": true,
+        "GRAPHQL_API_PLUGIN_ENVIRONMENT": "development"
+	}
+}

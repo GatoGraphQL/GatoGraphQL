@@ -1,0 +1,30 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}}>
+		{{#if ../print-source}}
+			<p>
+				{{{../titles.source}}} <a href="{{link}}" target="_blank">{{link}}</a>
+			</p>
+		{{/if}}
+		<p class="btn-group">
+			{{#if (and ../show-frame-in-collapse is-link-embeddable)}}	
+				<a href="#{{lastGeneratedId context=../.}} > .collapse" class="{{../classes.loadlink-btn}}" style="{{../styles.loadlink-btn}}" data-toggle="collapse"><i class="fa fa-fw fa-link"></i>{{../titles.loadlink}}</a>
+			{{/if}}
+			<a href="{{link}}" class="{{../classes.opennewtab-btn}}" style="{{../styles.opennewtab-btn}}" target="_blank"><i class="fa fa-fw fa-external-link"></i>{{../titles.opennewtab}}</a>
+		</p>
+		{{#if is-link-embeddable}}
+			{{#if ../show-frame-in-collapse}}
+				<div class="collapse {{../classes.collapse}}" style="{{../styles.collapse}}"></div>
+				<script type="text/javascript">
+				(function($){
+					var collapse = $("#{{lastGeneratedId context=../.}}").children('.collapse');
+					collapse.one('show.bs.collapse', function() { 
+						collapse.html('{{#withModule ../. "layout"}}{{enterModule ../../.}}{{/withModule}}'); 
+					});
+				})(jQuery);
+				</script>
+			{{else}}
+				{{#withModule ../. "layout"}}{{enterModule ../../.}}{{/withModule}}
+			{{/if}}
+		{{/if}}
+	</div>
+{{/with}}

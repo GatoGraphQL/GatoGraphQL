@@ -1,0 +1,5 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}}" style="{{../style}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+		{{{linkcontent}}}
+	</div>
+{{/with}}

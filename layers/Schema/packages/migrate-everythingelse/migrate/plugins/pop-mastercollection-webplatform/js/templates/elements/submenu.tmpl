@@ -1,0 +1,35 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="submenu {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="btn-group hidden-xs submenu-group" role="group">
+		{{#each headers}}
+			<a class="{{#if active}}active{{/if}} {{../classes.item}}" style="{{../styles.item}}" href="{{url}}">
+				{{{title}}}
+			</a>
+			{{#if subheaders}}
+				<span class="{{#if active}}active{{/if}} {{../classes.item}} dropdown" style="{{../styles.item}}">
+					<a href="#" role="button" class="{{#if active}}active{{/if}} {{../classes.item-dropdown}} dropdown-toggle" style="{{../styles.item-dropdown}}" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+					<ul class="dropdown-menu pull-right" role="menu">
+						{{#each subheaders}}
+							<li role="presentation" class="{{#if active}}active{{/if}}">
+								<a href="{{url}}">
+									{{{title}}}
+								</a>
+							</li>
+						{{/each}}
+					</ul>
+				</span>
+			{{/if}}
+		{{/each}}
+	</div>
+	<div id="{{lastGeneratedId}}-xs" class="submenu-xs hidden-sm hidden-md hidden-lg collapse submenu-group">
+		{{#each headers}}
+			<a class="{{#if active}}active{{/if}} {{../classes.item-xs}}" style="{{../styles.item-xs}}" href="{{url}}">
+				{{{title}}}
+			</a>
+			{{#each subheaders}}
+				<a class="{{#if active}}active{{/if}} {{../../classes.item-xs}}" style="{{../../styles.item-xs}}" href="{{url}}">
+					{{{title}}}
+				</a>
+			{{/each}}
+		{{/each}}
+	</div>
+</div>

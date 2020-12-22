@@ -1,0 +1,75 @@
+{{#with dbObject}}
+	<div class="layout user-layout preview {{../class}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+		{{#withModule ../. "quicklinkgroup-top"}}
+			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}" style="{{../../styles.quicklinkgroup-top}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/withModule}}		
+		<div class="wrapper {{../classes.wrapper}}" style="{{../styles.wrapper}}">
+			<div class="{{../classes.avatar-wrapper}}" style="{{../styles.avatar-wrapper}}">
+				{{#withModule ../. "useravatar"}}				
+					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">
+						{{enterModule ../../.}}
+
+						{{#if ../../submoduleoutputnames.avatar-extras}}
+							<div class="avatar-extras">
+								{{#each ../../submoduleoutputnames.avatar-extras}}
+									{{#withModule ../../../. this}}
+										{{enterModule ../../../../.}}
+									{{/withModule}}
+								{{/each}}
+							</div>
+						{{/if}}
+					</div>
+				{{/withModule}}
+				{{#if ../submoduleoutputnames.belowavatar}}
+					<div class="extra {{../classes.belowavatar}}" style="{{../styles.belowavatar}}">
+						{{#each ../submoduleoutputnames.belowavatar}}
+							{{#withModule ../../. this}}
+								<div class="extra-inner">
+									{{enterModule ../../../.}}
+								</div>
+							{{/withModule}}
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+			<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
+				<{{../title-htmlmarkup}} class="name {{../classes.name}}" style="{{../styles.name}}">
+					{{#if is-profile}}
+						<a href="{{get . ../url-field}}" title="{{{display-name}}}" target="{{../link-target}}">{{{display-name}}}</a>
+					{{else}}
+						{{{display-name}}}
+					{{/if}}
+					{{#if title}}<br/><small>{{{title}}}</small>{{/if}}
+				</{{../title-htmlmarkup}}>
+				{{#if ../show-short-description}}
+					{{#if short-description-formatted}}
+						<p class="description {{../../classes.short-description}}" style="{{../../styles.short-description}}">{{{short-description-formatted}}}</p>
+					{{/if}}
+				{{/if}}
+				{{#if ../show-excerpt}}
+					{{#if excerpt}}
+						<p class="excerpt {{../../classes.excerpt}}" style="{{../../styles.excerpt}}">{{{excerpt}}}</p>
+					{{/if}}
+				{{/if}}
+				{{#if ../submoduleoutputnames.belowexcerpt}}
+					<div class="extra {{../classes.belowexcerpt}}" style="{{../styles.belowexcerpt}}">
+						{{#each ../submoduleoutputnames.belowexcerpt}}
+							{{#withModule ../../. this}}
+								<div class="extra-inner">
+									{{enterModule ../../../.}}
+								</div>
+							{{/withModule}}
+						{{/each}}
+					</div>
+				{{/if}}
+				{{#withModule ../. "quicklinkgroup-bottom"}}
+					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}" style="{{../../styles.quicklinkgroup-bottom}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+			</div>
+		</div>
+	</div>
+{{/with}}

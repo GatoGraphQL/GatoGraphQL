@@ -1,0 +1,74 @@
+{
+    "name": "graphql-api/schema-feedback",
+    "type": "library",
+    "description": "Schema Feedback for the GraphQL API",
+    "keywords": [
+        "PoP",
+        "WordPress",
+        "GraphQL",
+        "API"
+    ],
+    "homepage": "https://github.com/GraphQLAPI/schema-feedback",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "getpop/configurable-schema-feedback": "dev-master",
+        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": ">=9.3",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GraphQLAPI\\SchemaFeedback\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GraphQLAPI\\SchemaFeedback\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "phpstan": "phpstan analyse -l 8 src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "merge-plugin": {
+            "include": [
+                "composer.local.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "ignore-duplicates": false,
+            "merge-dev": true,
+            "merge-extra": false,
+            "merge-extra-deep": false,
+            "merge-scripts": false
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

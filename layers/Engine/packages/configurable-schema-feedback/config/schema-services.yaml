@@ -1,0 +1,4 @@
+services:
+    PoP\ConfigurableSchemaFeedback\TypeResolverDecorators\:
+        resource: '../src/TypeResolverDecorators/*'
+        public: true

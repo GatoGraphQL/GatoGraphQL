@@ -1,0 +1,63 @@
+{
+    "name": "pop-schema/events",
+    "type": "library",
+    "description": "Adds support for events",
+    "keywords": [
+        "PoP",
+        "events"
+    ],
+    "homepage": "https://github.com/PoPSchema/events",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "pop-schema/customposts": "dev-master",
+        "pop-schema/locations": "dev-master",
+        "pop-schema/migrate-events": "dev-master"
+    },
+    "require-dev": {
+        "pop-schema/users": "dev-master",
+        "pop-schema/tags": "dev-master",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.8.17",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "suggest": {
+        "pop-schema/users": "Integration with Users",
+        "pop-schema/tags": "Integration with Tags"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPSchema\\Events\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPSchema\\Events\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse -c phpstan.neon.dist",
+        "downgrade-code": "rector process --dry-run --ansi"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

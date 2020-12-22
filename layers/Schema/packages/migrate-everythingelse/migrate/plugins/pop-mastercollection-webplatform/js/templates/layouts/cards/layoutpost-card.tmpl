@@ -1,0 +1,13 @@
+{{#with dbObject}}
+	<div class="media">
+		{{! Maybe there is no thumb-sm: when preselecting the value to filter, eg: preselecting Action in submain Stories carousel in Single Action page}}
+		{{#withSublevel ../thumb.name}}
+			<div class="media-left">
+				<a href="{{../url}}"><img src="{{src}}" width="{{width}}" height="{{height}}"></a>
+			</div>
+		{{/withSublevel}}
+		<div class="media-body">
+			<h4 class="media-heading"><a href="{{url}}">{{{title}}}</a></h4>
+		</div>
+	</div>
+{{/with}}

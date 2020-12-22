@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\Application\ModuleFilters\:
+        resource: '../src/ModuleFilters/*'
+        public: false
+
+    PoP\Application\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoP\Application\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
+    PoP\ComponentModel\Engine\EngineInterface:
+        class: \PoP\Application\Engine\Engine

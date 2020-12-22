@@ -1,0 +1,10 @@
+<?php
+
+PoP_ServerSideRenderingFactory::getInstance()->addTemplatePath(
+    POP_AVATARWEBPLATFORM_PHPTEMPLATES_DIR,
+    array(
+        POP_TEMPLATE_LAYOUT_AUTHOR_USERPHOTO,
+        POP_TEMPLATE_LAYOUT_USERAVATAR,
+        POP_TEMPLATE_LAYOUTPOST_AUTHORAVATAR,
+    )
+);

@@ -1,0 +1,8 @@
+services:
+    PoPSchema\PostTags\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoPSchema\PostTags\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true

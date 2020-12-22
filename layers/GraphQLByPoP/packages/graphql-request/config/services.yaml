@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface:
+        class: \GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManager
+
+    GraphQLByPoP\GraphQLRequest\Hooks\:
+        resource: '../src/Hooks/*'

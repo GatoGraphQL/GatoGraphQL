@@ -1,0 +1,5 @@
+# Enable execution of command to delete current user pic: https://www.mesym.com/wp-content/plugins/pop-coreprocessors/library/fileupload-userphoto/server/?file=piramide_cairo.jpg&upload_path=851&_method=DELETE
+Allow from all
+<IfModule mod_headers.c>
+  Header set Cache-Control 'no-store, no-cache, must-revalidate'
+</IfModule>

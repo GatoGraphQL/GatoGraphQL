@@ -1,0 +1,10 @@
+{
+  "short_name": "$short_name",
+  "name": "$name",
+  "icons": $icons,
+  "start_url": "$start_url",
+  "display": "$display",
+  "orientation": "$orientation",
+  "theme_color": "$theme_color",
+  "background_color": "$background_color"
+}

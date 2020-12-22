@@ -1,0 +1,44 @@
+<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="carousel {{classes.bootstrap-component}} {{classes.carousel}}" style="{{styles.bootstrap-component}}{{styles.carousel}}" {{#each carousel-params}} {{@key}}="{{this}}"{{/each}}> 
+	{{#if (or 
+		(eq panel-header-type "indicators")
+		(eq panel-header-type "prevnext")
+	)}}
+		<div class="carousel-indicators {{classes.panelheader}}" style="{{styles.panelheader}}" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
+			{{#compare panel-header-type "indicators"}}
+				{{#each panel-headers}}
+					<div class="{{#compare ../active moduleoutputname}}active{{/compare}}" data-target="#{{lastGeneratedId context=../. group=../bootstrap-type}}" data-slide-to="{{@index}}">
+						{{{title}}}
+					</div>
+				{{/each}}
+			{{/compare}}
+			{{#compare panel-header-type "prevnext"}}
+				<a class="left carousel-control" href="#{{lastGeneratedId group=bootstrap-type}}" role="button" data-slide="prev">
+					{{{titles.prev}}}
+				</a>
+				<a class="right carousel-control" href="#{{lastGeneratedId group=bootstrap-type}}" role="button" data-slide="next">
+					{{{titles.next}}}
+				</a>
+			{{/compare}}
+		</div>
+	{{/if}}
+	<div class="carousel-inner" role="listbox">
+		{{#each submoduleoutputnames.panels}}
+			<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" class="item {{#compare ../active this}}active{{/compare}} {{../classes.panel}} {{get ../custom-panel-class this}}" style="{{../styles.panel}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
+				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}" style="{{../styles.container}}">
+					{{#compare ../panel-header-type "indicators-internal"}}
+						<div class="carousel-indicators {{../panelheader-class}}" style="{{../styles.panelheader}}" {{#each ../panelheader-params}} {{@key}}="{{this}}"{{/each}}>
+							{{#each ../panel-headers}}
+								<div class="{{#compare ../../active moduleoutputname}}active{{/compare}}" data-target="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}" data-slide-to="{{@index}}">
+									<h5>{{{title}}}</h5>
+								</div>
+							{{/each}}
+						</div>
+					{{/compare}}
+					{{#withModule ../. this}}
+						{{enterModule ../../.}}
+					{{/withModule}}
+				</div>
+			</div>
+		{{/each}}
+	</div>
+</div>

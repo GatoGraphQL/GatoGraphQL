@@ -1,0 +1,12 @@
+parameters:
+    version: '0.1.0'
+
+services:
+    _defaults:
+        public: true
+
+    PoP\ComponentModel\Engine\EngineInterface:
+        class: \PoP\ConfigurationComponentModel\Engine\Engine
+
+    PoP\ConfigurationComponentModel\RouteModuleProcessors\:
+        resource: '../src/RouteModuleProcessors/*'

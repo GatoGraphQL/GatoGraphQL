@@ -1,0 +1,67 @@
+{
+    "name": "pop-schema/block-metadata-for-wp",
+    "type": "library",
+    "description": "Integration with WordPress plugin \"Block Metadata\"",
+    "keywords": [
+        "PoP",
+        "block-metadata-for-wp"
+    ],
+    "homepage": "https://github.com/PoPSchema/block-metadata-for-wp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "pop-schema/posts-wp": "dev-master"
+    },
+    "require-dev": {
+        "wpackagist-plugin/block-metadata": "^1.0",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.8.17",
+        "squizlabs/php_codesniffer": "^3.0",
+        "szepeviktor/phpstan-wordpress": "^0.6.2",
+        "johnpbloch/wordpress": ">=5.5"
+    },
+    "suggest": {
+        "wpackagist-plugin/block-metadata": "This plugin is required"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPSchema\\BlockMetadataWP\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPSchema\\BlockMetadataWP\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse -c phpstan.neon.dist",
+        "downgrade-code": "rector process --dry-run --ansi"
+    },
+    "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

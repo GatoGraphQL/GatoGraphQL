@@ -1,0 +1,9 @@
+<div class="{{class}}" style="{{style}}" role="menu" {{#generateId}}{{id}}{{/generateId}}>
+	{{#each dbObject.items}}
+		{{#compare title "divider"}}
+			<hr />
+		{{else}}
+			<a id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{../classes.item}} {{classes}}' style="{{../styles.item}}" href="{{url}}" title="{{alt}}" {{{additional-attrs}}}>{{{title}}}</a>
+		{{/compare}}
+	{{/each}}
+</div>

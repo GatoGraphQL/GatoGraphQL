@@ -1,0 +1,50 @@
+
+#ps-top-menu-addcontent li.menu-item-parent > a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: -27px;
+}
+
+/* Hide the "as Link" text in the controls from "My Events", etc */
+.aslink .pop-btn-title {
+	display: none;
+}
+/* Hide the "as Link" text in the top and side navigations "Add Content" */
+#ps-side .addnew-menu li.nav-linkitem > a,
+#ps-top.navbar li.nav-linkitem > a {
+	overflow: hidden;
+    width: 32px;
+    white-space: nowrap;
+    padding-left: 5px;
+}
+#ps-side .addnew-menu li.nav-linkitem > a > i,
+#ps-top.navbar li.nav-linkitem > a > i {
+	margin-right: 10px;
+}
+
+
+/* Add a space before the "as Link" from the single post => Response/additional dropdown menu at the bottom of the page */
+/* Assuming we have "QuickPost" at the top, which as no "as Link", that's why we ask for even and not even */
+/* Also, the QuickPost has no extra padding, it is the element on the first position */
+.pop-addrelatedpost-dropdown > ul.dropdown-menu {
+	width: 200px;
+}
+#ps-side .addnew-menu ul.dropdown-menu > li:nth-child(even),
+.pop-addrelatedpost-dropdown > ul.dropdown-menu > li:nth-child(even) {
+	position: relative;
+}
+#ps-side .addnew-menu ul.dropdown-menu > li:nth-child(even) > a,
+.pop-addrelatedpost-dropdown > ul.dropdown-menu > li:nth-child(even) > a {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-top: -26px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.pop-addrelatedpost-dropdown > ul.dropdown-menu > li:nth-child(even) .pop-btn-title {
+	/* Hide "as Link" */
+	display: none;
+}
+

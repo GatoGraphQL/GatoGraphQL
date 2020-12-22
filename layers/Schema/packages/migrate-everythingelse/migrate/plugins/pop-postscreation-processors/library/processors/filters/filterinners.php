@@ -1,0 +1,72 @@
+<?php
+use PoP\Hooks\Facades\HooksAPIFacade;
+
+class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
+{
+    public const MODULE_FILTERINNER_MYLINKS = 'filterinner-mylinks';
+
+    public function getModulesToProcess(): array
+    {
+        return array(
+            [self::class, self::MODULE_FILTERINNER_MYLINKS],
+        );
+    }
+
+    protected function getInputSubmodules(array $module)
+    {
+        $ret = parent::getInputSubmodules($module);
+
+        $inputmodules = [
+            self::MODULE_FILTERINNER_MYLINKS => [
+                GD_CreateUpdate_Utils::moderate() ?
+                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS] :
+                    [GD_Core_Bootstrap_Module_Processor_FormInputGroups::class, GD_Core_Bootstrap_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
+                [GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::class, GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups::MODULE_FILTERINPUTGROUP_POSTDATES],
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
+            ],
+        ];
+        // Add the link access filter
+        if ($inputmodules[$module[1]] && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+
+            array_splice(
+                $ret, 
+                array_search(
+                    [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH], 
+                    $ret
+                ), 
+                0, 
+                [
+                    [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_LINKACCESS],
+                ]
+            );
+        }
+        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
+            'Links:FilterInners:inputmodules',
+            $inputmodules[$module[1]],
+            $module
+        )) {
+            $ret = array_merge(
+                $ret,
+                $modules
+            );
+        }
+        return $ret;
+    }
+    
+    // public function getFilter(array $module)
+    // {
+    //     $filters = array(
+    //         self::MODULE_FILTERINNER_MYLINKS => POP_FILTER_MYLINKS,
+    //     );
+    //     if ($filter = $filters[$module[1]]) {
+    //         return $filter;
+    //     }
+        
+    //     return parent::getFilter($module);
+    // }
+}
+
+
+

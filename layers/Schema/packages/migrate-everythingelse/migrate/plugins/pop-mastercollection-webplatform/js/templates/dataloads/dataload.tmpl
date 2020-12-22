@@ -1,0 +1,49 @@
+{{#unless feedback.do-not-render}}
+	<div class="{{class}} {{runtime-class}} {{feedback.class}}" style="{{style}}{{runtime-style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-moduleoutputname="{{moduleoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+
+		{{#if show-filter}}
+			{{#withModule . "filter"}}		
+				<div class="dataload-filter">
+					{{enterModule ../.}}
+				</div>
+			{{/withModule}}
+		{{/if}}
+
+		{{#withModule . "status"}}
+			<div class="dataload-status">
+				{{enterModule ../.}}
+			</div>
+		{{/withModule}}
+
+		{{#if feedbackmessages-top}}
+			<div class="dataload-feedbackmessage">
+				{{#each submoduleoutputnames.feedbackmessages}}
+					{{#withModule ../. this}}
+						{{enterModule ../../.}}
+					{{/withModule}}
+				{{/each}}
+			</div>
+		{{/if}}
+
+		{{!This will be empty for BlockGroup}}
+		{{#if submoduleoutputnames.inners}}
+			<div class="dataload-inners clearfix">
+				{{#each submoduleoutputnames.inners}}
+					{{#withModule ../. this}}
+						{{enterModule ../../. dbKey=../../bs.dbkeys.id dbObjectIDs=../../bs.dbobjectids}}
+					{{/withModule}}
+				{{/each}}
+			</div>
+		{{/if}}
+
+		{{#if feedbackmessages-bottom}}
+			<div class="dataload-feedbackmessage">
+				{{#each submoduleoutputnames.feedbackmessages}}
+					{{#withModule ../. this}}
+						{{enterModule ../../.}}
+					{{/withModule}}
+				{{/each}}
+			</div>
+		{{/if}}
+	</div>
+{{/unless}}

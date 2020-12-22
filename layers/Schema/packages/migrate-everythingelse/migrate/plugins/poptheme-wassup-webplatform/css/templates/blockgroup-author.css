@@ -1,0 +1,27 @@
+
+.blockgroup-author .top-collapse {
+	position: absolute;
+	z-index: 100;
+	margin: 0;
+	/* For mobile phone place on the left because it falls on top of the "options" floating button, and for iPad there's more space so move to the right*/
+	left: 0;
+}
+@media (min-width: 768px) {
+	.blockgroup-author .top-collapse {
+	    right: 0;
+	    left: auto;
+	}
+}
+
+.blockgroup-author .blockgroup-author-description > .top-expand {
+	margin: 0 0 10px;
+}
+.blockgroup-author .blockgroup-author-description {
+	margin-bottom: 10px;
+}
+.blockgroup-author .blockgroup-author-description > .collapse.in {
+	margin-bottom: 20px;
+}
+.blockgroup-author .blocksection-submenu .submenu-group {
+	margin-bottom: 10px;
+}

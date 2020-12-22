@@ -1,0 +1,3 @@
+.pop-multidomain .fc-event.{{$domainId}} {
+	background-color: {{$backgroundColor}};
+}

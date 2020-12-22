@@ -1,0 +1,9 @@
+parameters:
+    version: '0.1.0'
+
+services:
+    _defaults:
+        public: true
+
+    PoP\QueryParsing\QueryParserInterface:
+        class: \PoP\QueryParsing\QueryParser

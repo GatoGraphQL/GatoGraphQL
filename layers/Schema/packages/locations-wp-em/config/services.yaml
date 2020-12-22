@@ -1,0 +1,4 @@
+services:
+    PoPSchema\Locations\TypeAPIs\LocationTypeAPIInterface:
+        class: \PoPSchema\LocationsWPEM\TypeAPIs\LocationTypeAPI
+        public: true

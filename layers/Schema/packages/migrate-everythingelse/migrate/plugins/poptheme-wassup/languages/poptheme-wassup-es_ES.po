@@ -1,0 +1,2429 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PoP Theme Wassup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-05 12:34+0800\n"
+"PO-Revision-Date: 2018-03-05 12:34+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <leo@getpop.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././config/config.php:44 .././config/config.php:70
+#: .././pop-library/dataload/actionexecuters/library/createupdate-highlight.php:36
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:36
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:37
+#: .././pop-library/processors/sidebars/posts/widgetries.php:100
+#: .././pop-library/processors/structures/tables/tables.php:72
+msgid "Highlight"
+msgstr "Destacar"
+
+#: .././config/config.php:49 .././config/config.php:73
+#: .././pop-library/processors/buttons/buttoninners.php:47
+#: .././pop-library/processors/buttons/post-buttons.php:99
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:38
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:39
+#: .././pop-library/processors/sidebars/posts/widgetries.php:98
+#: .././pop-library/processors/sidebars/posts/widgetries.php:101
+#: .././pop-library/processors/structures/tables/tables.php:79
+msgid "Post"
+msgstr "Post"
+
+#: .././config/config.php:67
+#: .././pop-library/processors/buttons/buttoninners.php:46
+#: .././pop-library/processors/buttons/post-buttons.php:98
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/text-formcomponents-inputs.php:31
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:34
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:35
+#: .././pop-library/processors/sidebars/posts/widgetries.php:99
+#: .././pop-library/processors/structures/tables/tables.php:65
+msgid "Link"
+msgstr "Enlace"
+
+#: .././library/disclaimer.php:30
+#, php-format
+msgid ""
+"%sThis information was gathered and published by %s from <a href=\"%s\">this "
+"source</a>."
+msgstr ""
+"%sEsta información fue recogida y publicada por %s a partir de <a href=\"%s"
+"\">esta fuente</a>."
+
+#: .././library/disclaimer.php:69
+msgid "Disclaimer"
+msgstr "Descargo de responsabilidad"
+
+#: .././library/disclaimer.php:88
+#, php-format
+msgid "Original URL (for Disclaimer):<br/>%s"
+msgstr "URL original (para el descargo de responsabilidad):<br/>%s"
+
+#: .././library/disclaimer.php:125
+#, php-format
+msgid ""
+"This Profile was created by %s with information available on the "
+"Organization's website."
+msgstr ""
+"Este perfil fue creado por %s con información disponible en el sitio web de "
+"la Organización."
+
+#: .././library/gallery.php:39 .././library/gallery.php:46
+msgid "Wide"
+msgstr "Ancho"
+
+#: .././library/gallery.php:45
+msgid "Full Size"
+msgstr "Tamaño completo"
+
+#: .././library/gallery.php:47
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:264
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:372
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:242
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:149
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:289
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:22
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:38
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:595
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:759
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:534
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:429
+msgid "Thumbnail"
+msgstr "Miniatura"
+
+#: .././library/user-registration.php:15
+msgid "Linkedin"
+msgstr "Linkedin"
+
+#: .././library/user-registration.php:16
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:25
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:46
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .././library/user-registration.php:17
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:33
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:56
+msgid "Twitter"
+msgstr "Twitter"
+
+#: .././library/user-registration.php:18
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:49
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:76
+msgid "Youtube"
+msgstr "Youtube"
+
+#: .././library/user-registration.php:19
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:57
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:86
+msgid "Instagram"
+msgstr "Instagram"
+
+#: .././library/user-registration.php:20
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:65
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:36
+msgid "Blog"
+msgstr "Blog"
+
+#: .././library/user-registration.php:37 .././library/user-registration.php:40
+#, php-format
+msgid "Profile owned by %s?"
+msgstr "Perfil propiedad de %s?"
+
+#: .././library/user-registration.php:47
+msgid "Organization info"
+msgstr "Datos de la organización"
+
+#: .././library/user-registration.php:51
+msgid "Contact person"
+msgstr "Persona de contacto"
+
+#: .././library/user-registration.php:55
+msgid "Contact number"
+msgstr "Número de contacto"
+
+#: .././plugins/aryo-activity-log-pop/pop-library/dataload/fieldprocessors/fieldprocessor-notifications-hooks.php:66
+#, php-format
+msgid "<strong>%s</strong> has made a highlight from <strong>%s</strong>"
+msgstr "<strong>%s</strong> ha extraído información de <strong>%s</strong>"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:186
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:252
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:188
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:254
+msgid "Unprocessed payment needs refund"
+msgstr "El pago no procesado necesita reembolso"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:224
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:295
+#, php-format
+msgid "%s Options"
+msgstr "%s Opciones"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:225
+msgid ""
+"<strong>Important:</strong>In order to connect Alipay with your site, you "
+"need to configure the return URL."
+msgstr ""
+"<strong>Importante:</strong> Con el fin de conectar Alipay con su sitio, es "
+"necesario configurar la dirección URL de retorno."
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:225
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:296
+#, php-format
+msgid "Your return url is %s"
+msgstr "Su URL de retorno es %s"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:226
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:297
+#, php-format
+msgid ""
+"Please visit the <a href=\"%s\">documentation</a> for further instructions."
+msgstr ""
+"Por favor, <a href=\"%s\">visite la documentación</a> para obtener más "
+"instrucciones."
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:230
+msgid "Alipay account"
+msgstr "Cuenta Alipay"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:233
+msgid ""
+"Please enter your Alipay Email; this is needed in order to take payment."
+msgstr ""
+"Por favor, introduzca su correo electrónico Alipay; esto es necesario con el "
+"fin de recibir el pago."
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:237
+msgid "Alipay partner ID"
+msgstr "Alipay partner ID"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:240
+msgid ""
+"Please enter the partner ID. If you don't have one, <a href=\"https://b."
+"alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+msgstr ""
+"Por favor, introduzca el partner id. Si no tiene uno, <a target=\"_blank\" "
+"href=\"https://b.alipay.com/newIndex.htm\">clic aquí para obtenerlo</a>."
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:244
+msgid "Alipay security key"
+msgstr "Alipay security key"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:247
+msgid ""
+"Please enter the security key. If you don't have one, <a href=\"https://b."
+"alipay.com/newIndex.htm\" target=\"_blank\">click here</a> to get."
+msgstr ""
+"Por favor, introduzca la clave de seguridad (security key). Si no tiene una, "
+"<a target=\"_blank\" href=\"https://b.alipay.com/newIndex.htm\">clic aquí "
+"para obtenerla</a>."
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.alipay.php:251
+msgid "Payment method"
+msgstr "Método de pago"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:33
+msgid ""
+"Be aware that by approving a booking awaiting payment, a full payment "
+"transaction will be registered against this booking, meaning that it will be "
+"considered as paid."
+msgstr ""
+"Tenga en cuenta que, al aprobar un pago de la reserva a la espera, una "
+"operación de pago completo será registrado contra de esta reserva, lo que "
+"significa que será considerado como pagado."
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:80
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:222
+msgid "Success Message"
+msgstr "Mensaje existoso"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:83
+msgid ""
+"The message that is shown to a user when a booking with bank transfer "
+"payments is successful."
+msgstr ""
+"El mensaje que se muestra a un usuario cuando una reserva con pagos mediante "
+"transferencia bancaria es exitoso."
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:87
+msgid "Customer Message"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:90
+msgid ""
+"Give the customer instructions for paying via Bank Transfer, and let them "
+"know that the Event Booking will be confirmed once the money is received"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:94
+#: .././plugins/events-manager-pro/library/functions.php:36
+msgid "Account details"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:97
+msgid "Account details title"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:108
+msgid "Account Name"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:114
+msgid "Account Number"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:120
+msgid "Sort Code"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:126
+msgid "Bank Name"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:132
+msgid "IBAN"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:138
+msgid "BIC (formerly Swift)"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:163
+#, php-format
+msgid "Account name: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:164
+#, php-format
+msgid "Account number: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:165
+#, php-format
+msgid "Sort code: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:166
+#, php-format
+msgid "Bank name: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:167
+#, php-format
+msgid "IBAN: %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.banktransfer.php:168
+#, php-format
+msgid "BIC (formerly Swift): %s"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:30
+#, php-format
+msgid "Awaiting %s Payment"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:95
+#, php-format
+msgid ""
+"To finalize your booking, please click the following button to proceed to %s."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:137
+msgid "Resume Payment"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:169
+msgid "Approve"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:170
+msgid "Delete"
+msgstr "Borrar"
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:171
+msgid "Edit/View"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:225
+msgid ""
+"The message that is shown to a user when a booking is successful whilst "
+"being redirected to PayPal for payment."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:229
+msgid "Success Free Message"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:232
+msgid ""
+"If some cases if you allow a free ticket (e.g. pay at gate) as well as paid "
+"tickets, this message will be shown and the user will not be redirected to "
+"PayPal."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:236
+msgid "Thank You Message"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:239
+msgid ""
+"If you choose to return users to the default Events Manager thank you page "
+"after a user has paid on PayPal, you can customize the thank you message "
+"here."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:243
+msgid "Return URL"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:246
+msgid ""
+"Once a payment is completed, users will be offered a link to this URL which "
+"confirms to the user that a payment is made. If you would to customize the "
+"thank you page, create a new page and add the link here. For automatic "
+"redirect, you need to turn auto-return on in your PayPal settings."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:250
+msgid "Cancel URL"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:253
+msgid ""
+"Whilst paying on PayPal, if a user cancels, they will be redirected to this "
+"page."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:257
+msgid "Delete Bookings Pending Payment"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:259
+msgid "minutes"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:260
+msgid ""
+"Once a booking is started and the user is taken to PayPal, Events Manager "
+"stores a booking record in the database to identify the incoming payment. "
+"These spaces may be considered reserved if you enable <em>Reserved "
+"unconfirmed spaces?</em> in your Events &gt; Settings page. If you would "
+"like these bookings to expire after x minutes, please enter a value above "
+"(note that bookings will be deleted, and any late payments will need to be "
+"refunded manually via PayPal)."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:264
+msgid "Manually approve completed transactions?"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:267
+msgid ""
+"By default, when someone pays for a booking, it gets automatically approved "
+"once the payment is confirmed. If you would like to manually verify and "
+"approve bookings, tick this box."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.online.php:268
+#, php-format
+msgid ""
+"Approvals must also be required for all bookings in your <a href=\"%s"
+"\">settings</a> for this to work properly."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:296
+msgid ""
+"<strong>Important:</strong>In order to connect PayPal with your site, you "
+"need to enable IPN on your account."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:301
+msgid "PayPal Email"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:307
+msgid "Paypal Currency"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:308
+#, php-format
+msgid "Set your currency in the <a href=\"%s\">settings</a> page."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:312
+msgid "PayPal Language"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:315
+msgid "Default"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:332
+msgid ""
+"PayPal allows you to select a default language users will see. This is also "
+"determined by PayPal which detects the locale of the users browser. The "
+"default would be US."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:336
+msgid "PayPal Mode"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:339
+msgid "Live Site"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:340
+msgid "Test Mode (Sandbox)"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:346
+msgid "PayPal Page Logo"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:349
+msgid ""
+"Add your logo to the PayPal payment page. It's highly recommended you link "
+"to a https:// address."
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:353
+msgid "Border Color"
+msgstr ""
+
+#: .././plugins/events-manager-pro/add-ons/gateways/gateway.paypal.php:356
+msgid ""
+"Provide a hex value color to change the color from the default blue to "
+"another color (e.g. #CCAAAA)."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:32
+#: .././plugins/events-manager-pro/library/functions.php:34
+msgid "Bank Transfer"
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:33
+#: .././plugins/events-manager-pro/library/functions.php:42
+msgid "Booking successful."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:35
+msgid ""
+"Make your payment directly into our bank account. Please use your Order ID "
+"as the payment reference. Once the payment has been done, please send an "
+"email to <a href=\"mailto:info@greendrinks.cn?subject=Bank Transfer"
+"\">info@greendrinks.cn</a> with the Order ID and the Event Booking will be "
+"confirmed."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:39
+msgid "Alipay"
+msgstr "Alipay"
+
+#: .././plugins/events-manager-pro/library/functions.php:40
+msgid ""
+"Pay via Alipay, if you don't have an Alipay account, you can also pay with "
+"your debit card or credit card"
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:41
+msgid ""
+"Please wait whilst you are redirected to Alipay to proceed with payment."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:44
+msgid ""
+"Thank you for your payment. Your transaction has been completed, and a "
+"receipt for your purchase has been emailed to you along with a seperate "
+"email containing account details to access your booking information on this "
+"site. You may log into your account at www.paypal.com to view details of "
+"this transaction."
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:47
+msgid "Simply come and pay at the Event ;)"
+msgstr ""
+
+#: .././plugins/events-manager-pro/library/functions.php:51
+msgid "Please select"
+msgstr "Por favor seleccione"
+
+#: .././plugins/events-manager/library/functions.php:45
+msgid "Upcoming Event"
+msgstr "Evento próximo"
+
+#: .././plugins/events-manager/library/functions.php:50
+msgid "Current Event"
+msgstr "Evento actual"
+
+#: .././plugins/events-manager/library/functions.php:55
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:111
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:54
+msgid "Past Event"
+msgstr "Evento pasado"
+
+#: .././plugins/events-manager/library/functions.php:298
+msgid "The address was not found on the map"
+msgstr "La dirección no se encontró en el mapa"
+
+#: .././plugins/events-manager/library/functions.php:502
+#: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:38
+#: .././plugins/events-manager/pop-library/processors/buttons/post-buttons.php:68
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:26
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:27
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:110
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:47
+msgid "Event"
+msgstr "Evento"
+
+#: .././plugins/events-manager/library/rss.php:127
+#, php-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#: .././plugins/events-manager/library/rss.php:129
+msgid "days"
+msgstr "días"
+
+#: .././plugins/events-manager/pop-library/dataload/actionexecuters/library/createupdate-event.php:22
+msgid "The dates/time cannot be empty"
+msgstr "La fecha/hora no puede estar vacío"
+
+#: .././plugins/events-manager/pop-library/functions.php:361
+#, php-format
+msgid "%sMap"
+msgstr "%sMapa"
+
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:120
+msgid "Location(s) for:"
+msgstr "Ubicación(es) para:"
+
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:123
+msgid "Add location"
+msgstr "Añadir ubicación"
+
+#: .././plugins/events-manager/pop-library/pagesection-hooks.php:175
+msgid "View all events"
+msgstr "Ver todos los eventos"
+
+#: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:18
+msgid "Scroll right to load more results"
+msgstr "Desplazarse hacia la derecha para cargar más resultados"
+
+#: .././plugins/events-manager/pop-library/processors/abstract-classes/structures/scrolls/scrollmaps-base.php:24
+msgid "Scroll down to load more results"
+msgstr "Desplazarse hacia abajo para cargar más resultados"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:252
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:360
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:230
+#: .././plugins/user-role-editor/library/functions.php:32
+#: .././plugins/user-role-editor/library/functions.php:47
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:141
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:281
+#: .././plugins/user-role-editor/pop-library/processors/widgetries.php:44
+#: .././plugins/user-role-editor/pop-library/processors/widgetries.php:45
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:21
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:39
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:579
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:743
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:518
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:417
+msgid "Details"
+msgstr "Detalles"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:256
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:364
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:234
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:18
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:35
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:583
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:747
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:522
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:421
+msgid "Feed"
+msgstr "Feed"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:260
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:368
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:238
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:36
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:587
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:751
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:526
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:425
+msgid "Extended"
+msgstr "Extendido"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:268
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:376
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:246
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:153
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:293
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:23
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:37
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:603
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:767
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:542
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:433
+msgid "List"
+msgstr "Lista"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:272
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:380
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:250
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:157
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:297
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:20
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:41
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:607
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:771
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:546
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:437
+msgid "Map"
+msgstr "Mapa"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-authorsections.php:276
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:384
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-tagsections.php:254
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:44
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:40
+msgid "Calendar"
+msgstr "Calendario"
+
+#: .././plugins/events-manager/pop-library/processors/blockgroups/tabpanels-sections.php:388
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:301
+#: .././pop-library/processors/abstract-classes/buttons/buttongroups-base.php:42
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:775
+#: .././pop-library/processors/buttons/buttons.php:60
+#: .././pop-library/processors/buttons/buttons.php:62
+#: .././pop-library/processors/buttons/buttons.php:63
+msgid "Edit"
+msgstr "Editar"
+
+#: .././plugins/events-manager/pop-library/processors/buttons/buttoninners.php:39
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:62
+#: .././pop-library/processors/controls/anchor-controls.php:45
+msgid "as Link"
+msgstr "como Enlace"
+
+#: .././plugins/events-manager/pop-library/processors/buttons/post-buttons.php:69
+msgid "Event link"
+msgstr "Enlace a Evento"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:50
+msgid "Past Events"
+msgstr "Eventos Pasados"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:54
+msgid "My Past Events"
+msgstr "Mis Eventos Pasados"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:58
+msgid "Add Event"
+msgstr "Añadir Evento"
+
+#: .././plugins/events-manager/pop-library/processors/controls/anchor-controls.php:68
+msgid "Toggle Map"
+msgstr "Alternar Mapa"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/blocks.php:131
+#: .././pop-library/processors/createupdatepost/blocks.php:139
+msgid "Submitting..."
+msgstr "Enviando…"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:37
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:70
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:53
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:149
+#: .././pop-library/processors/pagesections/pagesections.php:471
+msgid "Login/Register"
+msgstr "Iniciar sesión/Registrarse"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:42
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:57
+#, php-format
+msgid "Yay! Your %s was created successfully!"
+msgstr "¡Hurra! Su %s se ha creado correctamente!"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:46
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:61
+#, php-format
+msgid "Yay! Your %s was updated successfully!"
+msgstr "¡Hurra! Su %s se ha actualizado correctamente!"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:56
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:67
+#, php-format
+msgid "Please %s to create your %s."
+msgstr "Por favor, %s para crear su %s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:62
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:73
+#, php-format
+msgid "You need a %s account to create your %s."
+msgstr "Es necesario una cuenta de %s para crear su %s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:70
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:81
+#, php-format
+msgid "%s updated successfully."
+msgstr "%s ha actualizado correctamente."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:76
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:87
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+msgstr ""
+"Por favor <a href=\"%s\">inicie su sesión de usuario</a> para editar su %s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:82
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:93
+#, php-format
+msgid "You need a %s account to edit your %s."
+msgstr "Es necesario una cuenta de %s para editar su %s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:89
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:100
+#, php-format
+msgid "Ops, it seems you have no rights to edit this %s."
+msgstr "Ops, parece que no tiene derechos para editar este %s."
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:94
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:92
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:105
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:171
+msgid "Incorrect URL"
+msgstr "URL incorrecta"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/structures/forms/widgetries.php:57
+msgid "Event details"
+msgstr "Detalles del evento"
+
+#: .././plugins/events-manager/pop-library/processors/createupdatepost/structures/forms/widgetries.php:58
+msgid "Event link details"
+msgstr "Detalles del enlace al evento"
+
+#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:31
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:47
+msgid "event"
+msgstr "evento"
+
+#: .././plugins/events-manager/pop-library/processors/latestcounts/section-latestcounts.php:45
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:48
+msgid "events"
+msgstr "eventos"
+
+#: .././plugins/events-manager/pop-library/processors/layouts/posts/previewpostlayouts.php:404
+#: .././pop-library/processors/layouts/posts/previewpostlayouts.php:697
+msgid "posted by"
+msgstr "publicado por"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:54
+msgid "past event"
+msgstr "evento pasado"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:55
+msgid "past events"
+msgstr "eventos pasados"
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:60
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:49
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:139
+#, php-format
+msgid "No %s found."
+msgstr "No se han encontrado %s."
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:64
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:53
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:143
+#, php-format
+msgid "No more %s found."
+msgstr "No se han encontrado más %s."
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:74
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:153
+#, php-format
+msgid "Please %s to access your %s."
+msgstr "Por favor, %s para acceder a su %s."
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:81
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:160
+#, php-format
+msgid "You need a %s account to access this functionality."
+msgstr "Es necesario una cuenta de %s para acceder a esta funcionalidad."
+
+#: .././plugins/events-manager/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:87
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:166
+#, php-format
+msgid "Your account has no permission to edit this %s."
+msgstr "Su cuenta no tiene permiso para modificar esta %s."
+
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:106
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:107
+msgid "Location(s)"
+msgstr "Ubicación(es)"
+
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:108
+#: .././plugins/events-manager/pop-library/processors/sidebars/widgetries.php:109
+msgid "Date/Time"
+msgstr "Fecha y hora"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:57
+msgid "Sunday"
+msgstr "Domingo"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:58
+msgid "Monday"
+msgstr "Lunes"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:59
+msgid "Tuesday"
+msgstr "Martes"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:60
+msgid "Wednesday"
+msgstr "Miércoles"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:61
+msgid "Thursday"
+msgstr "Jueves"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:62
+msgid "Friday"
+msgstr "Viernes"
+
+#: .././plugins/events-manager/pop-library/processors/structures/calendars/calendars.php:63
+msgid "Saturday"
+msgstr "Sábado"
+
+#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:60
+msgid "Events"
+msgstr "Eventos"
+
+#: .././plugins/events-manager/pop-library/processors/structures/carousels/carousel-controls.php:61
+msgid "Upcoming Events"
+msgstr "Eventos próximos"
+
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:48
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:55
+msgid "When"
+msgstr "Cuándo"
+
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:49
+#: .././plugins/events-manager/pop-library/processors/structures/tables/tables.php:56
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:631
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:44
+#: .././pop-library/processors/structures/tables/tables.php:60
+#: .././pop-library/processors/structures/tables/tables.php:67
+#: .././pop-library/processors/structures/tables/tables.php:74
+#: .././pop-library/processors/structures/tables/tables.php:81
+msgid "Status"
+msgstr "Estado"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:47
+msgid "Insert with Media Player"
+msgstr "Insertar con Media Player"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:65
+msgid "External media files"
+msgstr "Archivos multimedia externos"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:87
+msgid "Save all changes"
+msgstr "Guardar todos los cambios"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:88
+msgid "Save, Close and Refresh"
+msgstr "Guardar, cerrar y refrescar"
+
+#: .././plugins/jw-player-plugin-for-wordpress/library/functions.php:263
+msgid "Click here to watch the video"
+msgstr "Haz click aquí para ver el vídeo"
+
+#: .././plugins/media-library-assistant/library/functions.php:30
+msgid "Do not add"
+msgstr "No añada"
+
+#: .././plugins/media-library-assistant/library/functions.php:31
+msgid "Add to Resources"
+msgstr "Añadir a los recursos"
+
+#: .././plugins/media-library-assistant/library/functions.php:43
+msgid "Resources"
+msgstr "Recursos"
+
+#: .././plugins/media-library-assistant/library/media.php:14
+msgid "Source"
+msgstr "Fuente"
+
+#: .././plugins/pop-coreprocessors/pop-library/functions.php:14
+msgid ""
+"Please add the following emails to your contact list, to make sure you "
+"receive our notifications:"
+msgstr ""
+"Por favor, añada los siguientes emails a tu lista de contactos, para "
+"asegurar de que recibas nuestras notificaciones:"
+
+#: .././plugins/pop-genericforms/plugins/pop-emailsender/library/implementations/email-newslettertemplates.php:33
+#, php-format
+msgid "<a href=\"%s\">Unsubscribe</a> from this newsletter."
+msgstr "<a href=\"%s\">Desuscribirse</a> de esta newsletter."
+
+#: .././plugins/pop-genericforms/pop-library/pagesection-hooks.php:40
+msgid "Send message to:"
+msgstr "Enviar un mensaje a:"
+
+#: .././plugins/pop-genericforms/pop-library/pagesection-hooks.php:41
+msgid "Volunteer for:"
+msgstr "Ofrecerse como voluntario para:"
+
+#: .././plugins/pop-genericforms/pop-library/pagesection-hooks.php:42
+msgid "Flag as inappropriate:"
+msgstr "Marcar como inapropiado:"
+
+#: .././plugins/qtranslate-x/library/functions.php:22
+#, php-format
+msgid ""
+"Ops, it seems this content is not available in <strong>%s</strong>. <a href="
+"\"%s\">Would you like to help us translate it?</a>"
+msgstr ""
+"Ops, parece que este contenido no está disponible en <strong>%s</strong>. <a "
+"href=\"%s\">¿Le gustaría ayudar a traducirlo?</a>"
+
+#: .././plugins/qtranslate-x/pop-library/processors/formcomponent-inputs/select-formcomponents-inputs.php:25
+msgid "Language"
+msgstr "Idioma"
+
+#: .././plugins/user-role-editor/library/functions.php:40
+msgid "Member of"
+msgstr "Miembro de"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttoninners.php:43
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttons.php:59
+msgid "Edit membership"
+msgstr "Editar afiliación"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttoninners.php:47
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/buttons/buttons.php:63
+msgid "View all members"
+msgstr "Ver todos los miembros"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/layouts/usermembership/memberprivileges-layouts.php:27
+msgid "Privileges:"
+msgstr "Privilegios:"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/layouts/usermembership/memberstatus-layouts.php:27
+msgid "Status:"
+msgstr "Estatus:"
+
+#: .././plugins/user-role-editor/plugins/aryo-activity-log-popprocessors/pop-library/processors/layouts/usermembership/membertags-layouts.php:27
+msgid "Tags:"
+msgstr "Etiquetas:"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:19
+#, php-format
+msgid "<p>%s: %s</p>"
+msgstr "<p>%s: %s</p>"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:20
+msgid ", "
+msgstr ", "
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:25
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:33
+msgid "Contact Person"
+msgstr "Persona de contacto"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:33
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:31
+msgid "Type"
+msgstr "Tipo"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:41
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:32
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:65
+#: .././pop-library/processors/sidebars/posts/widgetries.php:95
+#: .././pop-library/processors/sidebars/posts/widgetries.php:96
+msgid "Categories"
+msgstr "Categorías"
+
+#: .././plugins/user-role-editor/pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:49
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-individuals-base.php:27
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:50
+msgid "Interests"
+msgstr "Intereses"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:16
+msgid "Charity"
+msgstr "Caridad"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:17
+msgid "Communities"
+msgstr "Comunidades"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:18
+msgid "Company or Corporate"
+msgstr "Compañía o Empresarial"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:19
+msgid "Government"
+msgstr "Gobierno"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:20
+msgid "Education"
+msgstr "Educación"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:21
+msgid "NGO/NPO"
+msgstr "ONG/Organización sin fines de lucro"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:22
+msgid "Social Enterprise"
+msgstr "Empresa social"
+
+#: .././plugins/user-role-editor/pop-library/formcomponent-inputs/implementations/organizationtypes.php:23
+msgid "Youth"
+msgstr "Jóvenes"
+
+#: .././plugins/user-role-editor/pop-library/processors/abstract-classes/layouts/layouts-organizations-base.php:34
+msgid "Tel / Fax"
+msgstr "Tel / Fax"
+
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-authorsections.php:145
+#: .././plugins/user-role-editor/pop-library/processors/blockgroups/tabpanels-sections.php:285
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:591
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:755
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:530
+msgid "Full view"
+msgstr "Vista completa"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:594
+msgid "Show Help"
+msgstr "Mostrar ayuda"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:599
+msgid "Inviting users to become your members"
+msgstr "Invitando usuarios a convertirse en sus miembros"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:601
+#, php-format
+msgid ""
+"Please click on %s to invite your physical Organization's members to become "
+"your members in the website."
+msgstr ""
+"Por favor, haga clic en %s para invitar a los miembros de su organización "
+"física para convertirse en sus miembros en el sitio web."
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:607
+msgid "What is a member?"
+msgstr "¿Qué es un miembro?"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:608
+msgid "This depends on your Organization. Some examples:<br/>"
+msgstr "Esto depende de su Organización. Algunos ejemplos: <br/>"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:610
+msgid "University teachers/students"
+msgstr "Profesores universitarios / estudiantes"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:611
+msgid "NGO volunteers"
+msgstr "Voluntarios de ONG"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:612
+msgid "Company staff"
+msgstr "Personal de la empresa"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:613
+msgid "etc"
+msgstr "etc"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:618
+msgid "What happens when my Organization has members?"
+msgstr "¿Qué sucede cuando mi organización tiene miembros?"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:619
+msgid ""
+"If they have privilege <em>Contribute content</em> on, whenever they post "
+"any content in the website (eg: a new event, article, project, etc) will "
+"also show up under your Organization's profile. If this privilege is off, "
+"they will just appear under \"My members\""
+msgstr ""
+"Si tienen el privilegio <em>Contribuir contenido</em>, cada vez que publican "
+"cualquier contenido en el sitio web (por ejemplo: un nuevo evento, artículo, "
+"proyecto, etc) también aparecerá bajo el perfil de su organización. Si este "
+"privilegio está desactivado, sólo aparecerá en \"Mis miembros\""
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:623
+msgid "Editing current members' status"
+msgstr "Edición de estatus de los miembros actuales"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:624
+msgid ""
+"The users listed below have declared themselves to be members of your "
+"Organization. You can click on \"Edit Membership\" to edit the settings for "
+"each one of them:"
+msgstr ""
+"Los usuarios que figuran a continuación se han declarado a sí mismos como "
+"miembros de su organización. Puede hacer clic en \"Editar afiliación\" para "
+"editar la configuración para cada uno de ellos:"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:632
+msgid ""
+"<em>Active</em> if the user is truly your member, or <em>Rejected</em> "
+"otherwise.<br/><em>Rejected</em> users will not appear as your "
+"Organization's members, or contribute content."
+msgstr ""
+"<em>Activo</em> si el usuario es verdaderamente su miembro, o <em>Rechazado</"
+"em> por caso contrario.<br/>Usuarios con estado <em>Rechazado</em> no "
+"aparecerán como miembros de su organización, y no contribuyerán contenido."
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:639
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:45
+msgid "Privileges"
+msgstr "Privilegios"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:640
+msgid ""
+"<em>Contribute content</em> will add the member's content to your profile."
+msgstr ""
+"<em>Contribuir contenido</em> añadirá el contenido del miembro a su perfil."
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:647
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:46
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: .././plugins/user-role-editor/pop-library/processors/blocks/sections.php:648
+msgid "What is the type of relationship from this member to your Organization."
+msgstr "Cuál es el tipo de relación de este miembro a su Organización."
+
+#: .././plugins/user-role-editor/pop-library/processors/controls/anchor-controls.php:28
+msgid "Invite new members"
+msgstr "Invitar a nuevos miembros"
+
+#: .././plugins/user-role-editor/pop-library/processors/elements/codes.php:27
+msgid "Members:"
+msgstr "Miembros:"
+
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:58
+msgid "Organization Categories"
+msgstr "Categorías de organización"
+
+#: .././plugins/user-role-editor/pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:67
+msgid "Organization Types"
+msgstr "Tipos de organización"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:31
+msgid "member"
+msgstr "miembro"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:32
+msgid "members"
+msgstr "miembros"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:37
+msgid "organization"
+msgstr "organización"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:38
+msgid "organizations"
+msgstr "organizaciones"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:43
+msgid "individual"
+msgstr "individuo"
+
+#: .././plugins/user-role-editor/pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:44
+msgid "individuals"
+msgstr "individuos"
+
+#: .././plugins/user-role-editor/pop-library/processors/messages.php:25
+msgid "No details"
+msgstr "Sin detalles"
+
+#: .././plugins/user-role-editor/pop-library/processors/sidebars/users/widgetries.php:48
+msgid "Organization"
+msgstr "Organización"
+
+#: .././plugins/user-role-editor/pop-library/processors/sidebars/users/widgetries.php:49
+msgid "Individual"
+msgstr "Individuo"
+
+#: .././plugins/user-role-editor/pop-library/processors/structures/carousels/carousel-controls.php:48
+msgid "Members"
+msgstr "Miembros"
+
+#: .././plugins/user-role-editor/pop-library/processors/structures/tables/tables.php:43
+#: .././pop-library/processors/sidebars/users/widgetries.php:38
+msgid "User"
+msgstr "Usuario"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-highlight.php:31
+#, php-format
+msgid "Highlight from “%s”"
+msgstr "Destacado de “%s”"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-link-utils.php:16
+msgid "The content cannot be empty"
+msgstr "El contenido no puede ser vacío"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-link-utils.php:17
+msgid "The link cannot be empty"
+msgstr "El enlace no puede ser vacío"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-link-utils.php:25
+msgid "Invalid Link URL"
+msgstr "URL no válida"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:42
+msgid "No post has been referenced"
+msgstr "Ningún post ha sido referenciado"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:47
+msgid "Only one post can be referenced"
+msgstr "Sólo un post puede ser referenciado"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:57
+msgid "The referenced post does not exist"
+msgstr "El post al que se hace referencia no existe"
+
+#: .././pop-library/dataload/actionexecuters/library/createupdate-uniquereference-base.php:64
+msgid "The referenced post is not published yet"
+msgstr "El post al que se hace referencia no está publicado aún"
+
+#: .././pop-library/dataload/actionexecuters/referencepermalink-createupdate-base.php:17
+#, php-format
+msgid "<a href=\"%s\" %s>Click here to view it</a>."
+msgstr "<a href=\"%s\" %s>Haga clic aquí para visualizarlo</a>."
+
+#: .././pop-library/dataload/actionexecuters/referencepermalink-createupdate-base.php:24
+msgid ""
+"Please note that the status is still \"Draft\", so the post is not online "
+"yet."
+msgstr ""
+"Tenga en cuenta que el estado sigue siendo \"Borrador\", por lo que el "
+"artículo no se verá publicado."
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:18
+#, php-format
+msgid "<a href=\"%1$s\">%2$s: %1$s</a>"
+msgstr "<a href=“%1$s”>%2$s: %1$s</a>"
+
+#: .././pop-library/dataload/crawlabledataprinters/crawlabledataprinter-users-hook.php:41
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users.php:66
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .././pop-library/dataload/iohandlers/pagetabs/404.php:22
+msgid "Page not found!"
+msgstr "¡Página no encontrada!"
+
+#: .././pop-library/dataload/iohandlers/pagetabs/home.php:22
+#: .././pop-library/processors/pagesections/pagesections.php:455
+#: .././pop-library/processors/pagesections/pagesections.php:546
+msgid "Home"
+msgstr "Principal"
+
+#: .././pop-library/formcomponent-inputs/implementations/settingsformat.php:19
+msgid "Extended feed"
+msgstr "Feed extendido"
+
+#: .././pop-library/processors/abstract-classes/layouts/posts/_simpleview-previewpostlayouts-base.php:95
+#: .././pop-library/processors/abstract-classes/layouts/posts/simpleview-previewpostlayouts-base.php:53
+msgid "link by"
+msgstr "enlace por"
+
+#: .././pop-library/processors/abstract-classes/layouts/volunteertag-base.php:22
+msgid "Volunteer!"
+msgstr "¡Ofrecerse como voluntario!"
+
+#: .././pop-library/processors/blockgroups/_carousels-toplevel.php:60
+#, php-format
+msgid "%sBack"
+msgstr "%sAtrás"
+
+#: .././pop-library/processors/blockgroups/_carousels-toplevel.php:67
+#, php-format
+msgid "%sNavigator"
+msgstr "%sNavegador"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:227
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:413
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:78
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:285
+msgid "Latest content"
+msgstr "Contenido más reciente"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:241
+#: .././pop-library/processors/structures/tables/tables.php:59
+msgid "Content"
+msgstr "Contenido"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:242
+msgid "My Content"
+msgstr "Mi Contenido"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:243
+msgid "Add Content"
+msgstr "Agregar Contenido"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:250
+#, php-format
+msgid "%s:"
+msgstr "%s:"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:271
+msgid ""
+"Aiyoooo, it seems there is nothing here. Where else would you like to go?"
+msgstr "Aiyoooo, parece que no hay nada aquí. ¿Dónde más le gustaría ir?"
+
+#: .././pop-library/processors/blockgroups/blockgroups-main.php:292
+msgid "Ops, this page doesn't exist!"
+msgstr "Ops, esta página no existe!"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:66
+msgid "Show description"
+msgstr "Mostrar descripción"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:465
+#: .././templates/hover.php:4 .././templates/navigator.php:4
+msgid "Close"
+msgstr "Cerrar"
+
+#: .././pop-library/processors/blockgroups/blockgroups.php:526
+msgid "Log in or Register"
+msgstr "Iniciar sesión o Registrarse"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:599
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:763
+#: .././pop-library/processors/blockgroups/tabpanels-singlesections.php:538
+msgid "Grid"
+msgstr "Cuadrícula"
+
+#: .././pop-library/processors/blocks/contents.php:45
+msgid "Go to Full Profile "
+msgstr "Ir al perfil completo "
+
+#: .././pop-library/processors/blocks/sections-utils.php:39
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
+#: .././pop-library/processors/blocks/sections.php:2621
+msgid "View all Content "
+msgstr "Ver todo el contenido "
+
+#: .././pop-library/processors/blocks/sections.php:3494
+msgid "Latest Content"
+msgstr "Contenido más reciente"
+
+#: .././pop-library/processors/blocks/sections.php:3498
+msgid "Our Sponsors"
+msgstr "Nuestros patrocinadores"
+
+#: .././pop-library/processors/blocks/sections.php:3502
+msgid "Our Supporters"
+msgstr "Quiénes nos apoyan"
+
+#: .././pop-library/processors/blocks/sections.php:3509
+msgid "Who we are"
+msgstr "Quiénes somos"
+
+#: .././pop-library/processors/buttons/buttoninners.php:44
+#: .././pop-library/processors/buttons/post-buttons.php:96
+msgid "Add Highlight"
+msgstr "Destacar"
+
+#: .././pop-library/processors/buttons/buttons.php:61
+msgid "View"
+msgstr "Ver"
+
+#: .././pop-library/processors/controls/anchor-controls.php:33
+msgid "FAQ: Adding Content"
+msgstr "Preguntas frecuentes: Adición de contenido"
+
+#: .././pop-library/processors/controls/anchor-controls.php:37
+msgid "FAQ: Registration"
+msgstr "Preguntas frecuentes: Registro"
+
+#: .././pop-library/processors/controls/anchor-controls.php:41
+msgid "Add Post"
+msgstr "Añadir Post"
+
+#: .././pop-library/processors/controls/anchor-controls.php:49
+msgid "View all tags"
+msgstr "Ver todos los tags"
+
+#: .././pop-library/processors/controls/codes.php:27
+msgid "Important?"
+msgstr "¿Importante?"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/buttongroup-formcomponents-inputs.php:46
+msgid "Section"
+msgstr "Sección"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
+msgid "Keep as draft?"
+msgstr "¿Guardar como borrador?"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess-description.php:18
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess.php:18
+msgid "Free access"
+msgstr "Acceso libre"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess-description.php:20
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess.php:20
+msgid "Behind a paywall"
+msgstr "Detrás de un muro de pago"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess-description.php:22
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/implementations/linkaccess.php:22
+msgid "User account needed"
+msgstr "Cuenta de usuario necesaria"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:72
+msgid "Sections"
+msgstr "Secciones"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:77
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:276
+#: .././pop-library/processors/sidebars/posts/widgetries.php:97
+msgid "Applies to"
+msgstr "Se aplica a"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/multiselect-formcomponents-inputs.php:81
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/select-formcomponents-inputs.php:31
+#: .././pop-library/processors/sidebars/posts/widgetries.php:94
+msgid "Access type"
+msgstr "Tipo de acceso"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/select-formcomponents-inputs.php:27
+msgid "Publishing status"
+msgstr "Estado de publicación"
+
+#: .././pop-library/processors/createupdatepost/formcomponents-inputs/text-formcomponents-inputs.php:27
+msgid "Title"
+msgstr "Título"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:208
+msgid ""
+"'Draft': still editing, our website admin will not publish it yet. 'Finished "
+"editing': our website admin will publish it (almost) immediately. 'Already "
+"published': our website admin has published it, post is already online."
+msgstr ""
+"'Borrador': Todavía editando, nuestro admin no publicará todavía. 'Terminado "
+"de editar': nuestro admin lo publicará (casi) inmediatamente. 'Publicado': "
+"la página ya ha sido publicada."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:212
+msgid ""
+"The URL from any webpage. (Not all websites can be embedded: Facebook, "
+"Dropbox and others do not permit it, and browsers do not embed websites on "
+"HTTP for security reasons.)"
+msgstr ""
+"La URL de cualquier página web. (No todos los sitios web pueden ser "
+"incrustados: Facebook, Dropbox y otros no lo permiten, y los navegadores web "
+"no incrustan sitios web bajo HTTP por razones de seguridad.)"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:216
+msgid "Please copy/paste here the title from the original article."
+msgstr "Por favor, copie y pegue aquí el título del artículo original."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:220
+msgid "Please copy/paste any important content from the original post."
+msgstr ""
+"Por favor, copie y pegue cualquier contenido importante de la publicación "
+"original."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:239
+msgid "Copy/paste here..."
+msgstr "Copie y pegue aquí..."
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:261
+msgid "Select categories"
+msgstr "Seleccionar categorías"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:268
+msgid "Select sections"
+msgstr "Seleccionar secciones"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:294
+msgid "Highlight from:"
+msgstr "Destacar de:"
+
+#: .././pop-library/processors/createupdatepost/forms/formcomponentgroups.php:299
+msgid "Highlight:"
+msgstr "Destacado:"
+
+#: .././pop-library/processors/createupdatepost/forms/formgroups.php:38
+msgid "Preview"
+msgstr "Vista previa"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:90
+msgid "Featured Image"
+msgstr "Imagen destacada"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:91
+msgid "Meta information"
+msgstr "Meta informacion"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:92
+msgid "Link details"
+msgstr "Detalles del Enlace"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:93
+msgid "Post details"
+msgstr "Detalles del Post"
+
+#: .././pop-library/processors/elements/codes.php:76
+msgid "Here you will find:"
+msgstr "Aquí encontrarás:"
+
+#: .././pop-library/processors/elements/codes.php:113
+msgid "Many thanks to our sponsors and supporters."
+msgstr ""
+"Muchas gracias a nuestros patrocinadores y todos aquéllos que nos apoyan."
+
+#: .././pop-library/processors/elements/codes.php:117
+#, php-format
+msgid ""
+"If you or your organization wishes to participate, please visit <a href=\"%s"
+"\">%s</a>."
+msgstr ""
+"Si usted o su organización desean participar, por favor visite <a href=\"%s"
+"\">%s</a>."
+
+#: .././pop-library/processors/elements/codes.php:137
+msgid "Loading data"
+msgstr "Cargando datos"
+
+#: .././pop-library/processors/elements/codes.php:146
+msgid "Many thanks to our volunteers."
+msgstr "Muchas gracias a nuestros voluntarios."
+
+#: .././pop-library/processors/elements/codes.php:150
+#, php-format
+msgid "If you'd like to join us, please visit <a href=\"%s\">%s</a>."
+msgstr "Si desea unirse a nosotros, por favor visite <a href=\"%s\">%s</a>."
+
+#: .././pop-library/processors/elements/codes.php:163
+#, php-format
+msgid ""
+"<strong>#Trending tags are:</strong><br/>Those tags which appear in the "
+"highest number of posts, during the last %s days."
+msgstr ""
+"<strong>#Trending tags son:</strong><br/>Aquéllos tags que aparecen la mayor "
+"cantidad de veces, durante los últimos %s días."
+
+#: .././pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:40
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:25
+msgid "Volunteers Needed?"
+msgstr "¿Se requieren voluntarios?"
+
+#: .././pop-library/processors/forms/formgroups.php:60
+msgid ""
+"Do you need volunteers? Each time a user applies to volunteer, you will get "
+"a notification email with the volunteer's contact information."
+msgstr ""
+"¿Necesita voluntarios? Cada vez que un usuario se ofrezca como voluntario, "
+"obtendrás una notificación por correo electrónico con la información de "
+"contacto del mismo."
+
+#: .././pop-library/processors/forms/submit-buttons.php:25
+msgid "Search"
+msgstr "Buscar"
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:27
+msgid "Show comments, responses and highlights"
+msgstr "Mostrar comentarios, respuestas y destacados"
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:28
+msgid "Hide comments, responses and highlights"
+msgstr "Ocultar comentarios, respuestas y destacados"
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:54
+msgid "("
+msgstr "("
+
+#: .././pop-library/processors/layouts/feed/buttoninners.php:65
+msgid ")"
+msgstr ")"
+
+#: .././pop-library/processors/layouts/feed/buttons.php:38
+msgid "Comments, responses and highlights"
+msgstr "Comentarios, respuestas y destacados"
+
+#: .././pop-library/processors/layouts/posts/previewpostlayouts.php:703
+msgid "added by"
+msgstr "añadido por"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:74
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:75
+msgid "content"
+msgstr "contenido"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:81
+msgid "link"
+msgstr "enlace"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:82
+msgid "links"
+msgstr "enlaces"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:88
+msgid "extract"
+msgstr "extracto"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:89
+msgid "extracts"
+msgstr "extractos"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:95
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:96
+msgid "posts"
+msgstr "posts"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:102
+msgid "user"
+msgstr "usuario"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:103
+msgid "users"
+msgstr "usuarios"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:115
+msgid "follower"
+msgstr "seguidor"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:116
+msgid "followers"
+msgstr "seguidores"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:121
+msgid "sponsor"
+msgstr "patrocinador"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:122
+msgid "sponsors"
+msgstr "patrocinadores"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:127
+msgid "tag"
+msgstr "etiqueta"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:128
+msgid "tags"
+msgstr "etiquetas"
+
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:141
+msgid "FAQs"
+msgstr "Preguntas frecuentes"
+
+#: .././pop-library/processors/pagesections/pagesection-hooks.php:157
+msgid "Add a comment for:"
+msgstr "Añadir un comentario para:"
+
+#: .././pop-library/processors/pagesections/pagesections.php:355
+msgid "Toggle Navigation"
+msgstr "Alternar menú de navegación"
+
+#: .././pop-library/processors/pagesections/pagesections.php:356
+msgid "Toggle Browsing Tabs"
+msgstr "Alternar pestañas de navegación"
+
+#: .././pop-library/processors/pagesections/pagesections.php:457
+msgid "Toggle Search"
+msgstr "Alternar búsqueda"
+
+#: .././pop-library/processors/pagesections/pagesections.php:463
+#, php-format
+msgid ""
+"Powered by <a href=\"%s\" target=\"_blank\">the PoP framework</a> through <a "
+"href=\"%s\" target=\"_blank\">Verticals</a>"
+msgstr ""
+"Hecho con <a href=\"%s\" target=\"_blank\">the PoP framework</a> a través de "
+"<a href=\"%s\" target=\"_blank\">Verticals</a>"
+
+#: .././pop-library/processors/pagesections/pagesections.php:468
+msgid "About us"
+msgstr "Sobre nosotros"
+
+#: .././pop-library/processors/pagesections/pagesections.php:469
+msgid "My Profile"
+msgstr "Mi perfil"
+
+#: .././pop-library/processors/pagesections/pagesections.php:472
+msgid "Settings"
+msgstr "Ajustes"
+
+#: .././pop-library/processors/pagesections/pagesections.php:473
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: .././pop-library/processors/pagesections/pagesections.php:474
+msgid "<em>Many thanks to our <strong>Sponsors and Supporters</strong>:</em>"
+msgstr ""
+"<em>Muchas gracias a nuestros <strong>Patrocinadores y Colaboradores</"
+"strong>:</em>"
+
+#: .././pop-library/processors/pagesections/pagesections.php:475
+msgid "Our Sponsors and Supporters"
+msgstr "Nuestros Patrocinadores y Colaboradores"
+
+#: .././pop-library/processors/pagesections/pagesections.php:477
+#: .././pop-library/processors/pagesections/pagesections.php:482
+#, php-format
+msgid "View all <a href=\"%s\">%s</a>"
+msgstr "Ver todas <a href=\"%s\">%s</a>"
+
+#: .././pop-library/processors/pagesections/pagesections.php:491
+msgid "Add content"
+msgstr "Agregar contenido"
+
+#: .././pop-library/processors/pagesections/pagesections.php:492
+msgid "Add new..."
+msgstr "Añadir un nuevo..."
+
+#: .././pop-library/processors/pagesections/pagesections.php:495
+#, php-format
+msgid "Your account in %s"
+msgstr "Tu cuenta en %s"
+
+#: .././pop-library/processors/pagesections/pagesections.php:548
+#, php-format
+msgid "Open %s in a new tab"
+msgstr "Abrir %s en una nueva pestaña"
+
+#: .././pop-library/processors/pagesections/pagesections.php:551
+msgid "Toggle full screen"
+msgstr "Alternar pantalla completa"
+
+#: .././pop-library/processors/pagesections/pagesections.php:552
+msgid "Open in new window"
+msgstr "Abrir en Nueva ventana"
+
+#: .././pop-library/processors/pagesections/tabpane-pagesections.php:886
+msgid "Ops, there's nothing here!"
+msgstr "Ops, no se encontró nada aquí!"
+
+#: .././pop-library/processors/pagesections/tabpane-pagesections.php:888
+msgid "<p>We couldn't find anything under this URL...</p>"
+msgstr "<p>No hemos encontrado nada bajo este URL...</p>"
+
+#: .././pop-library/processors/settings/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Alright, everything set up"
+msgstr "Muy bien, todo está listo"
+
+#: .././pop-library/processors/settings/messagefeedbacks/messagefeedbacks-layouts.php:31
+msgid "Redirecting, please wait..."
+msgstr "Redireccionando, por favor espere..."
+
+#: .././pop-library/processors/sidebars/menus/widgetries.php:36
+msgid "Section links"
+msgstr "Enlaces de Sección"
+
+#: .././pop-library/processors/sidebars/messages.php:25
+msgid "No Categories"
+msgstr "Sin categorías"
+
+#: .././pop-library/processors/sidebars/tags/widgetries.php:37
+msgid "Tag/topic"
+msgstr "Tag/tópico"
+
+#: .././pop-library/processors/sidebars/widgetries.php:63
+msgid "Highlights"
+msgstr "Destacados"
+
+#: .././pop-library/processors/sidebars/widgetries.php:65
+msgid "Highlighted from"
+msgstr "Destacado de"
+
+#: .././pop-library/processors/structures/carousels/carousel-controls.php:54
+msgid "Users"
+msgstr "Usuarios"
+
+#: .././pop-library/processors/structures/tables/tables.php:66
+#: .././pop-library/processors/structures/tables/tables.php:73
+#: .././pop-library/processors/structures/tables/tables.php:80
+msgid "Date"
+msgstr "Fecha"
+
+#: .././pop-library/utils.php:193
+#, php-format
+msgid "Welcome to %s!"
+msgstr "Bienvenidos a %s!"
+
+#: .././templates/addons.php:23
+msgid "Full size"
+msgstr "Tamaño completo"
+
+#: .././templates/addons.php:24
+msgid "Maximize"
+msgstr "Maximizar"
+
+#: .././templates/addons.php:25
+msgid "Minimize"
+msgstr "Minimizar"
+
+#: .././templates/header.php:24
+#, php-format
+msgid "%s latest posts"
+msgstr "%s últimos posts"
+
+#: .././templates/header.php:25
+#, php-format
+msgid "%s latest comments"
+msgstr "%s últimos comentarios"
+
+#: .././templates/header.php:53
+#, php-format
+msgid "View %1$s profile and get in touch through %2$s."
+msgstr "Ver el perfil de %1$s y ponerse en contacto a través de %2$s."
+
+#: .././templates/header.php:56
+#, php-format
+msgid "Entries tagged “%1$s” in %2$s."
+msgstr "Entradas con la etiqueta \"%1$s\" en %2$s."
+
+#: .././templates/loading-screen.php:5
+msgid "The website is loading, please wait a few moments to click on links."
+msgstr ""
+"El sitio web está cargando, por favor espere unos momentos para hacer click "
+"en enlaces."
+
+#: .././templates/loading-screen.php:20
+msgid "Loading pure awesomeness"
+msgstr "Cargando genialidad pura"
+
+#: .././templates/loading-screen.php:21
+msgid "please wait..."
+msgstr "por favor espere..."
+
+#: .././validation.php:107
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:112
+msgid ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+msgstr ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+
+#: .././validation.php:116
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Core Processors</b> installed, or "
+"otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Core Processors</b> installed, or "
+"otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#: .././validation.php:120
+msgid ""
+"Error: <b>PoP Email Sender</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+msgstr ""
+"Error: <b>PoP Email Sender</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+
+#: .././validation.php:124
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Email Sender</b> installed, or otherwise "
+"<b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PoP Email Sender</b> installed, or otherwise "
+"<b>PoP Theme: Wassup</b> might not function properly."
+
+#: .././validation.php:128
+msgid ""
+"Error: <b>Events Manager PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"https://github."
+"com/leoloso/PoP/\">from here</a>."
+msgstr ""
+"Error: <b>Events Manager PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"https://github."
+"com/leoloso/PoP/\">from here</a>."
+
+#: .././validation.php:132
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>Events Manager PoP Processors</b> installed, "
+"or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>Events Manager PoP Processors</b> installed, "
+"or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#: .././validation.php:136
+msgid ""
+"Error: <b>User Role Editor PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"https://github."
+"com/leoloso/PoP/\">from here</a>."
+msgstr ""
+"Error: <b>User Role Editor PoP Processors</b> is not installed/activated. "
+"Without it, <b>PoP Theme: Wassup</b> will not work. Please install this "
+"plugin from your plugin installer or download it <a href=\"https://github."
+"com/leoloso/PoP/\">from here</a>."
+
+#: .././validation.php:140
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>User Role Editor PoP Processors</b> "
+"installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>User Role Editor PoP Processors</b> "
+"installed, or otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#: .././validation.php:144
+msgid ""
+"Error: <b>PhotoSwipe for PoP</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+msgstr ""
+"Error: <b>PhotoSwipe for PoP</b> is not installed/activated. Without it, "
+"<b>PoP Theme: Wassup</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"https://github.com/leoloso/PoP/"
+"\">from here</a>."
+
+#: .././validation.php:148
+msgid ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PhotoSwipe for PoP</b> installed, or "
+"otherwise <b>PoP Theme: Wassup</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=\"https://github.com/leoloso/"
+"PoP/\">latest version</a> of <b>PhotoSwipe for PoP</b> installed, or "
+"otherwise <b>PoP Theme: Wassup</b> might not function properly."
+
+#~ msgid "Notification from %s"
+#~ msgstr "Notificación de %s"
+
+#~ msgid "Email cannot be empty."
+#~ msgstr "El email no puede ser vacío."
+
+#~ msgid ""
+#~ "Please make sure you have clicked on the unsubscription link in the "
+#~ "newsletter."
+#~ msgstr ""
+#~ "Asegurate de haber hecho clic en el enlace de desuscripción en la "
+#~ "newsletter."
+
+#~ msgid "The verification code is missing."
+#~ msgstr "El código de verificación no puede ser vacío."
+
+#~ msgid "The verification code does not match the email."
+#~ msgstr "El código de verificación no coincide con el correo electrónico."
+
+#~ msgid "Your email is not subscribed to our newsletter."
+#~ msgstr "Tu email no está suscrito a nuestro newsletter."
+
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Website"
+#~ msgstr "Sitio web"
+
+#~ msgid "Others"
+#~ msgstr "Otros"
+
+#~ msgid "Volunteer"
+#~ msgstr "Ofrecerse como voluntario"
+
+#~ msgid "Flag as inappropriate"
+#~ msgstr "Marcar como inapropiado"
+
+#~ msgid "Send message"
+#~ msgstr "Enviar mensaje"
+
+#~ msgid "Send a message to:"
+#~ msgstr "Enviar un mensaje a:"
+
+#~ msgid "Share by email:"
+#~ msgstr "Compartir por correo electrónico:"
+
+#~ msgid "Sending..."
+#~ msgstr "Enviando..."
+
+#~ msgid "Subscribe to our newsletter:"
+#~ msgstr "Suscríbete a nuestro newsletter:"
+
+#~ msgid "Take a peek at our regular newsletter campaigns"
+#~ msgstr "Echar un vistazo a nuestras campañas de newsletters regulares"
+
+#~ msgid "Subscribe to our Newsletter?"
+#~ msgstr "¿Suscríbirse a nuestro newsletter?"
+
+#~ msgid "Topic"
+#~ msgstr "Tema"
+
+#~ msgid "Your Name"
+#~ msgstr "Tu nombre"
+
+#~ msgid "Your Email"
+#~ msgstr "Tu correo electrónico"
+
+#~ msgid "Verification code"
+#~ msgstr "Código de verificación"
+
+#~ msgid "To Email(s)"
+#~ msgstr "A correo electrónico(s)"
+
+#~ msgid "Subject"
+#~ msgstr "Asunto"
+
+#~ msgid "Your Phone number"
+#~ msgstr "Tu número de teléfono"
+
+#~ msgid "Message"
+#~ msgstr "Mensaje"
+
+#~ msgid "Additional message"
+#~ msgstr "Mensaje adicional"
+
+#~ msgid "Why do you want to volunteer?"
+#~ msgstr "¿Por qué quieres ser voluntario?"
+
+#~ msgid "Please explain why this post is inappropriate"
+#~ msgstr "Por favor, explique por qué este post es inapropiado"
+
+#~ msgid ""
+#~ "Keep up to date with our community activity through our weekly newsletter."
+#~ msgstr ""
+#~ "Mantener al día con nuestra actividad de la comunidad a través de nuestro "
+#~ "newsletter semanal."
+
+#~ msgid "Send Message"
+#~ msgstr "Enviar mensaje"
+
+#~ msgid "Send Email"
+#~ msgstr "Enviar correo electrónico"
+
+#~ msgid "Subscribe"
+#~ msgstr "Suscribirse"
+
+#~ msgid "Confirm unsubscription"
+#~ msgstr "Confirmar descripción"
+
+#~ msgid "Name is missing."
+#~ msgstr "Falta el nombre."
+
+#~ msgid "Email is missing or format is incorrect."
+#~ msgstr "El correo electrónico no se encuentra o el formato es incorrecto."
+
+#~ msgid "Message is missing."
+#~ msgstr "El mensaje no puede ser vacío."
+
+#~ msgid "Message sent successfully!"
+#~ msgstr "¡Mensaje enviado con éxito!"
+
+#~ msgid "Thanks for contacting us, we will get in touch with you shortly."
+#~ msgstr ""
+#~ "Gracias por contactarse con nosotros, nos pondremos en contacto a la "
+#~ "brevedad."
+
+#~ msgid "Your message has been sent to the user by email."
+#~ msgstr "Su mensaje ha sido enviado al usuario por correo electrónico."
+
+#~ msgid "Email sent successfully."
+#~ msgstr "Email enviado con éxito."
+
+#~ msgid "Any more friends who might be interested? Keep sending!"
+#~ msgstr "Más amigos que puedan estar interesados? ¡Siga enviando!"
+
+#~ msgid "To Email(s) missing."
+#~ msgstr "A correo electrónico(s) no puede ser vacío."
+
+#~ msgid "Awesome! Thanks for taking part!"
+#~ msgstr "¡Increíble! Gracias por participar!"
+
+#~ msgid ""
+#~ "We have sent a message with your information to the organizers. They "
+#~ "should contact you soon."
+#~ msgstr ""
+#~ "Hemos enviado un mensaje con sus datos a los organizadores. Ellos "
+#~ "debieran ponerse en contacto con usted a la brevedad."
+
+#~ msgid "\"Why do you want to volunteer?\" is missing."
+#~ msgstr "\"¿Por qué quieres ser voluntario?\" no puede ser vacío."
+
+#~ msgid "Flag received successfully."
+#~ msgstr "Información recibida correctamente."
+
+#~ msgid "Noted, we will evaluate your feedback and take appropriate action."
+#~ msgstr "Ok, vamos a evaluar su información y tomar medidas apropiadas."
+
+#~ msgid "\"Description on why this post is inappropriate\" is missing."
+#~ msgstr ""
+#~ "\"Descripción de por qué este post es inapropiado\" no puede ser vacío."
+
+#~ msgid "Subscription Successful!"
+#~ msgstr "Suscripción exitosa!"
+
+#~ msgid ""
+#~ "To make sure you get the newsletter, please add <strong>%s</strong> in "
+#~ "your contact list. Thanks!"
+#~ msgstr ""
+#~ "Para asegurarse de obtener el newsletter, por favor, añada <strong>%s</"
+#~ "strong> en su lista de contactos. ¡Gracias!"
+
+#~ msgid "Unsubscription successful"
+#~ msgstr "Cancelación de la suscripción exitosa"
+
+#~ msgid ""
+#~ "It is a pity to see you go. Hopefully you will keep visiting our website."
+#~ msgstr ""
+#~ "Es una lástima verte partir. Esperamos que sigas visitando nuestro sitio "
+#~ "web."
+
+#~ msgid "And if anything, you can always <a href=\"%s\">contact us</a>."
+#~ msgstr ""
+#~ "Y en todo caso, siempre puede <a href=“%s”>ponerse en contacto con "
+#~ "nosotros</a>."
+
+#~ msgid ""
+#~ "Please write an email to <a href=\"mailto:%1$s\">%1$s</a>, or fill in the "
+#~ "form below:"
+#~ msgstr ""
+#~ "Por favor, escribí un correo electrónico a <a href=\"mailto:%1$s\">%1$s</"
+#~ "a>, o completá el siguiente formulario:"
+
+#~ msgid ""
+#~ "We will send the info below to the organizers, who should then get in "
+#~ "touch with you."
+#~ msgstr ""
+#~ "Vamos a enviar la información siguiente a los organizadores, quienes "
+#~ "debieran ponerse en contacto contigo."
+
+#~ msgid ""
+#~ "Based on our users' feedback, we will consider removing this post. You "
+#~ "will receive a confirmation by email."
+#~ msgstr ""
+#~ "Basados en la información provista por nuestros usuarios, vamos a "
+#~ "considerar la eliminación de este post. Usted recibirá una confirmación "
+#~ "por correo electrónico."
+
+#~ msgid "Powered by <a href=\"%s\">the PoP framework</a>"
+#~ msgstr "Implementado con <a href=\"%s\">the PoP framework</a>"
+
+#~ msgid "View all"
+#~ msgstr "Ver todos"
+
+#~ msgid "Content tagged with “#%s”"
+#~ msgstr "Contenido etiquetado con \"#%s\""
+
+#~ msgid "Section(s)"
+#~ msgstr "Sección(es)"
+
+#~ msgid "Calendar Map"
+#~ msgstr "Mapa Calendario"
+
+#~ msgid "Show FAQs"
+#~ msgstr "Mostrar preguntas frecuentes"
+
+#~ msgid "What is the benefit of having members for my Organization?"
+#~ msgstr "¿Cuál es el beneficio de tener miembros de mi organización?"
+
+#~ msgid ""
+#~ "Your Organization will get the credit for the content posted by your "
+#~ "members without having to do much: they are the ones creating and posting "
+#~ "their own content."
+#~ msgstr ""
+#~ "Su organización recibirá el crédito por el contenido publicado por sus "
+#~ "miembros y sin tener que hacer mucho: son ellos los que están creando y "
+#~ "publicando sus propios contenidos."
+
+#~ msgid "Can you give me an example of this?"
+#~ msgstr "¿Me puede dar un ejemplo de esto?"
+
+#~ msgid ""
+#~ "Sure! Imagine your Organization is a University and has many students "
+#~ "registered as members, and each one of them posts Discussions explaining "
+#~ "their knowledge on some environmental topic they learn in class, and "
+#~ "Projects initiated in their campuses.<br/><br/>"
+#~ msgstr ""
+#~ "¡Por supuesto! Imagine que su organización es una Universidad y tiene "
+#~ "muchos estudiantes registrados como miembros, y cada uno de ellos publica "
+#~ "artículos que explican su conocimiento sobre algún tema medioambiental "
+#~ "que aprenden en clase, y proyectos iniciados en sus campus.<br/><br/>"
+
+#~ msgid ""
+#~ "All this environmental content will also show up in the University's "
+#~ "profile, with the following positive consequences:<br/>"
+#~ msgstr ""
+#~ "Todo este contenido ambiental también se mostrará en el perfil de la "
+#~ "Universidad, con las siguientes consecuencias positivas:<br/>"
+
+#~ msgid ""
+#~ "The University can show off its environmental record, and gain more "
+#~ "environmentally-aware new students."
+#~ msgstr ""
+#~ "La Universidad puede mostrar su historial medioambiental, y ganar nuevos "
+#~ "estudiantes que tengan conciencia ambiental."
+
+#~ msgid ""
+#~ "The students can share their knowledge with their classmates, year-on-"
+#~ "year fellow students, and even other University students."
+#~ msgstr ""
+#~ "Los estudiantes pueden compartir sus conocimientos con sus compañeros de "
+#~ "clase, compañeros de estudios inter-anuales, e incluso con estudiantes de "
+#~ "otras universidades."
+
+#~ msgid ""
+#~ "Other Universities will follow, eventually creating a network of "
+#~ "environmental knowledge and action."
+#~ msgstr ""
+#~ "Otras Universidades eventualmente seguirán el ejemplo, con el tiempo "
+#~ "creando una red de conocimiento y acción sobre el medio ambiente."
+
+#~ msgid "What is the benefit for my members?"
+#~ msgstr "¿Cuál es el beneficio para mis miembros?"
+
+#~ msgid ""
+#~ "In addition to being part of the network mentioned above, they will "
+#~ "benefit by showing off themselves: their profile effectively constitutes "
+#~ "an \"Environmental CV\"."
+#~ msgstr ""
+#~ "Además de ser parte de la red que se ha mencionado anteriormente, se "
+#~ "beneficiarán mostrando lo que han hecho: su perfil constituye "
+#~ "efectivamente un \"CV del Medio Ambiente\"."
+
+#~ msgid "quick post"
+#~ msgstr "post rápido"
+
+#~ msgid "Extract"
+#~ msgstr "Extracción"
+
+#~ msgid "Quick Post"
+#~ msgstr "Post rápido"
+
+#~ msgid "Source: "
+#~ msgstr "Fuente: "
+
+#~ msgid ""
+#~ "This webpage cannot be embedded, please <a href=\"%s\" target=\"_blank"
+#~ "\">click here</a> to open it in a new tab."
+#~ msgstr ""
+#~ "Este página web no puede ser incluída aquí, por favor <a href=“%s” "
+#~ "target=“_blank”>haga clic aquí fuente</a> para abrirla en una nueva "
+#~ "pestaña."
+
+#~ msgid "View/Preview"
+#~ msgstr "Ver/Vista previa"
+
+#~ msgid "Extract important information"
+#~ msgstr "Extraer información importante"
+
+#~ msgid "Extract from:"
+#~ msgstr "Extracto de:"
+
+#~ msgid "Important information:"
+#~ msgstr "Información importante:"
+
+#~ msgid "Quick Post details"
+#~ msgstr "Detalles del Post rápido"
+
+#~ msgid "Important information"
+#~ msgstr "Información importante"
+
+#~ msgid "Extracts from our users"
+#~ msgstr "Extractos de los usuarios"
+
+#~ msgid "Extracted from"
+#~ msgstr "Extraído de"
+
+#~ msgid ""
+#~ "For security reasons, the browser can only embed pages using HTTPS, so "
+#~ "please click on the <a href=\"%s\" target=\"_blank\">source</a> to open "
+#~ "the page in a new tab."
+#~ msgstr ""
+#~ "Por razones de seguridad, el navegador sólo puede incrustar páginas "
+#~ "utilizando HTTPS, así que por favor haga clic en la <a href=“%s” "
+#~ "target=“blank”>fuente</a> para abrir la página en una nueva pestaña."
+
+#~ msgid ""
+#~ "Any URL from any website. (Most websites can be embedded. However, there "
+#~ "are websites, such as Facebook, Dropbox or Google Translate, which do not "
+#~ "permit being embedded. For these, you can still add the URL, but no "
+#~ "webpage will be shown.)"
+#~ msgstr ""
+#~ "La URL de cualquier página web. (La mayoría de los sitios web puede ser "
+#~ "embebido. Sin embargo, hay sitios web, como Facebook, Dropbox o Google "
+#~ "Translate, que no lo permiten. Para estos, todavía se puede añadir la "
+#~ "URL, pero no se verá el contenido.)"
+
+#~ msgid "Who can add content in %s?"
+#~ msgstr "¿Quién puede agregar contenido en %s?"
+
+#~ msgid "Anyone."
+#~ msgstr "Todo el mundo."
+
+#~ msgid "Is it free?"
+#~ msgstr "¿Es gratis?"
+
+#~ msgid "Yes."
+#~ msgstr "Sí."
+
+#~ msgid "Project"
+#~ msgstr "Proyecto"
+
+#~ msgid "Story"
+#~ msgstr "Historia"
+
+#~ msgid "Announcement"
+#~ msgstr "Anuncio"
+
+#~ msgid "Projects"
+#~ msgstr "Proyectos"
+
+#~ msgid "Stories"
+#~ msgstr "Historias"
+
+#~ msgid "Announcements"
+#~ msgstr "Anuncio"
+
+#, fuzzy
+#~ msgid "past Events"
+#~ msgstr "Eventos pasados"
+
+#, fuzzy
+#~ msgid "announcements"
+#~ msgstr ""
+#~ "El software ha incorporado soporte para los siguientes tipos de post: "
+#~ "posts rápidos, artículos, anuncios, proyectos, historias y eventos, cada "
+#~ "una de ellos con sus propias características. Además, todos los tipos de "
+#~ "contenido también se pueden añadir como \"enlaces\", es decir, en lugar "
+#~ "de tener que copiar y pegar el contenido desde otros sitios web, uno "
+#~ "puede simplemente insertar su enlace directamente de su sitio web "
+#~ "original."

@@ -1,0 +1,4 @@
+services:
+    PoP\APIEndpointsForWP\EndpointHandlers\:
+        resource: '../src/EndpointHandlers/*'
+        public: true

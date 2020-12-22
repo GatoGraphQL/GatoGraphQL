@@ -1,0 +1,5 @@
+<?php
+
+abstract class PoP_Module_Processor_CreateUserDataloadsBase extends PoP_Module_Processor_CreateUpdateUserDataloadsBase
+{
+}

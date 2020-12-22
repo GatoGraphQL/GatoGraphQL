@@ -1,0 +1,7 @@
+<input {{#generateId}}{{id}}{{/generateId}} type="text" value="{{formatValue (formcomponentValue value dbObject dbobject-field default-value subfields=subfields.readable) value-format}}" class="form-control {{class}} {{timepicker}}" style="{{style}}" placeholder="{{placeholder}}">
+<input type="hidden" value="{{formatValue (formcomponentValue value dbObject dbobject-field default-value subfields=subfields.from) value-format}}" name="{{name.from}}" class="{{classes.input}} from" style="{{styles.input}}">
+<input type="hidden" value="{{formatValue (formcomponentValue value dbObject dbobject-field default-value subfields=subfields.to) value-format}}" name="{{name.to}}" class="{{classes.input}} to" style="{{styles.input}}">
+{{#if timepicker}}
+	<input type="hidden" value="{{formatValue (formcomponentValue value dbObject dbobject-field default-value subfields=subfields.fromtime) value-format}}" name="{{name.fromtime}}" class="{{classes.input}} fromtime" style="{{styles.input}}">
+	<input type="hidden" value="{{formatValue (formcomponentValue value dbObject dbobject-field default-value subfields=subfields.totime) value-format}}" name="{{name.totime}}" class="{{classes.input}} totime" style="{{styles.input}}">
+{{/if}}

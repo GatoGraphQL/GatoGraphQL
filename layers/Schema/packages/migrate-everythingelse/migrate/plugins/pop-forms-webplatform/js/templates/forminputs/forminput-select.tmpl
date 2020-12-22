@@ -1,0 +1,7 @@
+<select {{#generateId}}{{id}}{{/generateId}} name="{{name}}" class="{{classes.input}} form-control {{class}}" style="{{style}} {{styles.input}}" {{#if multiple}}multiple="multiple"{{/if}} {{#if title}}title="{{title}}"{{/if}}>
+	{{#if title}}<optgroup label="{{title}}">{{/if}}
+	{{#each options}}
+		<option value="{{@key}}" {{#compare @key (formatValue (formcomponentValue ../value ../dbObject ../dbobject-field ../default-value) ../value-format) operator=../compare-by}}selected="selected"{{/compare}} {{#compare @key ../disabledvalues operator="in"}}disabled="disabled"{{/compare}}>{{this}}</option>
+	{{/each}}
+	{{#if title}}</optgroup>{{/if}}
+</select>

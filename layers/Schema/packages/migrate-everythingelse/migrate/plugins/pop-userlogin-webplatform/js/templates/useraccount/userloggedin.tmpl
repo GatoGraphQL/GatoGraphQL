@@ -1,0 +1,30 @@
+<div class="{{class}} visible-loggedin-{{tls.domain-id}}" style="{{style}}" {{#generateId}}{{id}}{{/generateId}}>
+	<div class="media">
+		{{#if add-useravatar}}
+			<div class="media-left">
+				<div class="top-useravatar-container">
+					{{#if add-link}}
+						<a href="{{sessionmeta.user.url}}" class="pop-user-url user-avatar thumbnail {{tls.domain-id}}">
+							<img src="{{sessionmeta.user.avatar}}" class="pop-user-avatar {{tls.domain-id}}">
+						</a>
+					{{else}}
+						<img src="{{sessionmeta.user.avatar}}" class="pop-user-avatar {{tls.domain-id}}">
+					{{/if}}
+				</div>
+			</div>
+		{{/if}}
+		<div class="media-body">
+			<{{name-htmlmarkup}} class="media-heading">
+				<small>{{{titles.top}}}</small><br/>
+				{{#if add-link}}
+					<a href="{{sessionmeta.user.url}}" class="pop-user-url {{tls.domain-id}}">
+						<span class="pop-user-name {{tls.domain-id}}">{{{sessionmeta.user.name}}}</span>
+					</a>
+				{{else}}
+					<span class="pop-user-name {{tls.domain-id}}">{{{sessionmeta.user.name}}}</span>
+				{{/if}}
+			</{{name-htmlmarkup}}>
+			{{{titles.bottom}}}
+		</div>
+	</div>
+</div>

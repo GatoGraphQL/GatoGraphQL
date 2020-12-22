@@ -1,0 +1,2 @@
+{{! It will be printed inside data-header attr, so we can't use "double quotes" but only 'single quotes'}}
+{{#withModule . 'header-post'}}<div class='{{../class}}' style='{{../style}}'>{{enterModule ../. dbKey=../bs.dbkeys.post-id dbObjectID=../dbObject.post-id}}</div>{{/withModule}}

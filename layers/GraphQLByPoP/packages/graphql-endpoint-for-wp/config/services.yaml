@@ -1,0 +1,4 @@
+services:
+    GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\:
+        resource: '../src/EndpointHandlers/*'
+        public: true

@@ -1,0 +1,6 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	{{#each submodules}}						
+		{{! Comment Leo: the dbKey/dbObject below might be null (controlgroup) or have a value (quicklinkgroup)}}
+		{{enterModule ../.}}
+	{{/each}}
+</div>

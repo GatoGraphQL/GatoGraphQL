@@ -1,0 +1,43 @@
+
+/* Navigator Calendar: loading msg not over the prev/next controls */
+#ps-side .pop-block-calendar .dataload-status .pop-loading,
+#ps-side .pop-block-calendar .dataload-status .pop-error,
+#ps-navigator .pop-block-calendar .dataload-status .pop-loading,
+#ps-navigator .pop-block-calendar .dataload-status .pop-error {
+	top: 150px;
+}
+
+#ps-sideinfo .pop-block-calendar .pop-loading,
+#ps-sideinfo .pop-block-calendar .pop-error {
+	top: 53px;
+}
+
+.fc-toolbar {
+	margin: 10px 0 0 0;
+}
+
+/* Make the calendar's month name smaller */
+#ps-sideinfo .calendar .fc-toolbar h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* Comment Leo 18/07/2017: instead of making it one line just for the collapse in the home top, do it everywhere, so this solution also works for smartphones */
+.pop-block.calendar .fc-event {
+	max-height: 16px;
+	overflow: hidden;
+    word-break: break-all;
+}
+
+
+.pop-calendar-controls {
+	text-align: right;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	margin-top: 5px;
+}
+
+#ps-sideinfo .pop-calendar-controls .btn {
+    padding: 2px 5px;
+}

@@ -1,0 +1,13 @@
+.voyager-client  {
+    height: 100vh;
+}
+#wpcontent .voyager-client  {
+    height: calc(100vh - 32px);
+    margin-left: -20px;
+}
+/**
+ * Fix the .menu-content being shown at the bottom of the screen, out of the viewport
+ */
+.graphql-voyager {
+    position: relative;
+}

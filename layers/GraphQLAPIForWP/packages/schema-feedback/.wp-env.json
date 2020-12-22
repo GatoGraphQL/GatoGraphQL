@@ -1,0 +1,11 @@
+{
+	"plugins": [
+        ".",
+        "../graphql-api"
+	],
+	"port": 6668,
+	"testsPort": 6669,
+	"config": {
+        "WP_DEBUG_DISPLAY": true
+	}
+}

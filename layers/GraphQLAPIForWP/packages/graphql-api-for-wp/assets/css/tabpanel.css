@@ -1,0 +1,6 @@
+/**
+* Override the box-shadow added to a:focus, when clicking on the tab
+*/
+.graphql-api-tabpanel .nav-tab-active:focus {
+    box-shadow: none;
+}

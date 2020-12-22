@@ -1,0 +1,25 @@
+{{#unless feedback.do-not-render}}
+	<div class="{{class}}" style="{{style}}" {{#generateId addURL="true"}}{{id}}{{/generateId}} data-moduleoutputname="{{moduleoutputname}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+		{{#if title}}
+			<div class="blocksection-title {{classes.blocksection-title}}" style="{{styles.blocksection-title}}">
+				<{{title-htmltag}} class="title {{classes.block-title}}" style="{{styles.block-title}}">
+					{{#if title-link}}
+						<a href="{{title-link}}">{{{title}}}</a>
+					{{else}}
+						{{{title}}}
+					{{/if}}
+				</{{title-htmltag}}>
+			</div>
+		{{/if}}
+		{{{description}}}
+		{{#if submoduleoutputnames.block-inners}}
+			<div class="blocksection-inners clearfix {{classes.blocksection-inners}}" style="{{styles.blocksection-inners}}">
+				{{#each submoduleoutputnames.block-inners}}
+					{{#withModule ../. this}}
+						{{enterModule ../../.}}
+					{{/withModule}}
+				{{/each}}
+			</div>
+		{{/if}}
+	</div>
+{{/unless}}

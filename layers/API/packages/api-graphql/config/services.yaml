@@ -1,0 +1,4 @@
+services:
+    PoP\GraphQLAPI\DataStructureFormatters\:
+        resource: '../src/DataStructureFormatters/*'
+        public: true

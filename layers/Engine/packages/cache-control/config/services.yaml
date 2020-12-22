@@ -1,0 +1,8 @@
+services:
+    PoP\CacheControl\Managers\CacheControlEngineInterface:
+        class: \PoP\CacheControl\Managers\CacheControlEngine
+        public: true
+
+    PoP\CacheControl\Managers\CacheControlManagerInterface:
+        class: \PoP\CacheControl\Managers\CacheControlManager
+        public: true

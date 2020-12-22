@@ -1,0 +1,16 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}}" style="{{../style}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+		{{#if ../submoduleoutputnames.abovecontent}}
+			<div class="abovecontent {{../classes.abovecontent}}" style="{{../styles.abovecontent}}">
+				{{#each ../submoduleoutputnames.abovecontent}}
+					{{#withModule ../../. this}}
+						{{enterModule ../../../.}}
+					{{/withModule}}
+				{{/each}}
+			</div>
+		{{/if}}
+		<div {{#generateId context=../. group="inner"}}{{../id}}{{/generateId}} class="inner {{../classes.inner}}" style="{{../styles.inner}}">
+			{{{showmore content len=../content-maxlength}}}
+		</div>
+	</div>
+{{/with}}

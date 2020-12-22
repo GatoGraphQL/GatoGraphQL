@@ -1,0 +1,126 @@
+
+.socialmedia-item {
+	color: #4d4d4f;
+}
+
+.socialmedia-item:hover {
+	color: #ffffff;
+}
+
+#ps-body .sidebar .pop-sm,
+#ps-quickview .sidebar .pop-sm {
+	margin-bottom: 10px;
+}
+#ps-sideinfo .pop-sm,
+#ps-quickviewinfo .sidebar .pop-sm {
+	text-align: center;
+	margin-bottom: 20px;
+}
+#ps-body .sidebar.horizontal.conclusion .pop-sm,
+#ps-quickview .sidebar.horizontal.conclusion .pop-sm,
+#ps-quickviewinfo .sidebar.horizontal.conclusion .pop-sm {
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+.socialmedia-item,
+.pop-sm .options-group,
+.pop-sm .pop-functiongroup {
+	display: inline-block;
+}
+#ps-body .fullview .socialmedia .socialmedia-item {
+	width: 18%;
+	margin: 0 0 10px 0;
+	background-color: #80c342;
+	padding: 5px 2px;
+}
+#ps-sideinfo .pop-sm .socialmedia-item,
+#ps-body .pop-sm .socialmedia-item,
+#ps-quickview .pop-sm .socialmedia-item,
+#ps-quickviewinfo .pop-sm .socialmedia-item {
+	padding: 5px 2px;
+}
+@media (min-width: 768px) {
+
+	#ps-body .fullview .socialmedia .pop-sm {
+		margin-right: -10px;
+	}
+	#ps-body .fullview .socialmedia .pop-sm .socialmedia-item {
+		display: block;
+		width: 100%;
+		margin: 0 0 6px 0;
+	}
+}
+@media (min-width: 992px) {
+
+	#ps-body .fullview .socialmedia .pop-sm .pop-sm {
+		margin-right: -15px;
+	}
+}
+.btn.btn-default.socialmedia-facebook,
+.btn.btn-default.socialmedia-twitter {
+	color: #fff;
+}
+.btn.btn-default.socialmedia-facebook:hover {
+	background-color: #045fa6;
+}
+.btn.btn-default.socialmedia-facebook {
+	border-color: #045fa6;
+}
+.btn.btn-default.socialmedia-facebook,
+.socialmedia-changebg.socialmedia-facebook:hover {
+	background-color: #243d7f;
+}
+.socialmedia-changefont.socialmedia-facebook:hover {
+	color: #243d7f;
+}
+.btn.btn-default.socialmedia-twitter:hover {
+	background-color: #6faed4;
+}
+.btn.btn-default.socialmedia-twitter {
+	border-color: #6faed4;
+}
+.btn.btn-default.socialmedia-twitter,
+.socialmedia-changebg.socialmedia-twitter:hover {
+	background-color: #4e97c3;
+}
+.socialmedia-changefont.socialmedia-twitter:hover {
+	color: #4e97c3;
+}
+.socialmedia-changebg.socialmedia-linkedin:hover {
+	background-color: #0077BB;
+}
+.socialmedia-changefont.socialmedia-linkedin:hover {
+	color: #0077BB;
+}
+.socialmedia-changebg.socialmedia-gplus:hover {
+	background-color: #be1f14;
+}
+.socialmedia-changefont.socialmedia-gplus:hover {
+	color: #be1f14;
+}
+.socialmedia-changebg.socialmedia-yahoo:hover {
+	background-color: #500095;
+}
+.socialmedia-changefont.socialmedia-yahoo:hover {
+	color: #500095;
+}
+.socialmedia-email:hover {
+	background-color: #b325ad;
+}
+.socialmedia-embed:hover {
+	background-color: #642dcd;
+}
+.socialmedia-api:hover {
+	background-color: #1d9d74;
+}
+.socialmedia-flag:hover {
+	background-color: #6992dc;
+}
+.socialmedia-print:hover {
+	background-color: #ff3d00;
+}
+
+.socialmedia-item.icon-only .pop-smname {
+	display: none;
+}

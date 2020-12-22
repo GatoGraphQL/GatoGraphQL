@@ -1,0 +1,574 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MESYM\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-03 21:42+0800\n"
+"PO-Revision-Date: 2016-12-03 21:43+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././config/config.php:63 .././config/config.php:125
+#: .././pop-library/processors/buttons/buttoninners.php:63
+#: .././pop-library/processors/buttons/post-buttons.php:130
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:44
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:45
+#: .././pop-library/processors/sidebars/posts/widgetries.php:95
+#: .././pop-library/processors/structures/tables/tables.php:76
+msgid "Story"
+msgstr "Historia"
+
+#: .././config/config.php:70 .././config/config.php:128
+#: .././pop-library/processors/buttons/buttoninners.php:65
+#: .././pop-library/processors/buttons/post-buttons.php:132
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:46
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:47
+#: .././pop-library/processors/sidebars/posts/widgetries.php:96
+#: .././pop-library/processors/structures/tables/tables.php:55
+msgid "Announcement"
+msgstr "Anuncio"
+
+#: .././config/config.php:77 .././config/config.php:131
+#: .././pop-library/processors/buttons/buttoninners.php:61
+#: .././pop-library/processors/buttons/post-buttons.php:128
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:48
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:49
+#: .././pop-library/processors/sidebars/posts/widgetries.php:94
+#: .././pop-library/processors/structures/tables/tables.php:62
+msgid "Article"
+msgstr "Artículo"
+
+#: .././config/config.php:84 .././config/config.php:134
+#: .././pop-library/processors/buttons/buttoninners.php:67
+#: .././pop-library/processors/buttons/post-buttons.php:134
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:50
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:51
+#: .././pop-library/processors/sidebars/posts/widgetries.php:97
+msgid "Featured"
+msgstr "Destacado"
+
+#: .././config/config.php:125
+msgid "Stories"
+msgstr "Historias"
+
+#: .././config/config.php:128
+msgid "Announcements"
+msgstr "Anuncios"
+
+#: .././config/config.php:131
+msgid "Articles"
+msgstr "Artículos"
+
+#: .././config/config.php:137
+#: .././pop-library/processors/sidebars/posts/widgetries.php:98
+msgid "Blog"
+msgstr "Blog"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:312
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:548
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:290
+msgid "Details"
+msgstr "Detalles"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:316
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:552
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:294
+msgid "Feed"
+msgstr "Feed"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:320
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:556
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:298
+msgid "Extended"
+msgstr "Extendido"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:324
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:560
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:302
+msgid "Thumbnail"
+msgstr "Miniatura"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:328
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:564
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:306
+msgid "List"
+msgstr "Lista"
+
+#: .././pop-library/processors/blockgroups/tabpanels-authorsections.php:332
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:568
+#: .././pop-library/processors/blockgroups/tabpanels-tagsections.php:310
+msgid "Map"
+msgstr "Mapa"
+
+#: .././pop-library/processors/blockgroups/tabpanels-sections.php:572
+msgid "Edit"
+msgstr "Editar"
+
+#: .././pop-library/processors/blocks/scrollmap-sections.php:75
+#, php-format
+msgid "%s tagged with “#%s”"
+msgstr "%s etiquetados con “#%s”"
+
+#: .././pop-library/processors/blocks/sections.php:2039
+msgid "The Drivers"
+msgstr "Quiénes lo llevan adelante"
+
+#: .././pop-library/processors/blocks/sections.php:2044
+msgid "The Advisors"
+msgstr "Los Consejeros"
+
+#: .././pop-library/processors/blocks/sections.php:2049
+msgid "The Volunteers"
+msgstr "Los Voluntarios"
+
+#: .././pop-library/processors/buttons/buttoninners.php:60
+#: .././pop-library/processors/buttons/buttoninners.php:62
+#: .././pop-library/processors/buttons/buttoninners.php:64
+#: .././pop-library/processors/buttons/buttoninners.php:66
+#: .././pop-library/processors/controls/anchor-controls.php:62
+msgid "as Link"
+msgstr "como Enlace"
+
+#: .././pop-library/processors/buttons/post-buttons.php:124
+#, php-format
+msgid "%s link"
+msgstr "%s link"
+
+#: .././pop-library/processors/buttons/post-buttons.php:129
+msgid "Article link"
+msgstr "Enlace a Artículo"
+
+#: .././pop-library/processors/buttons/post-buttons.php:131
+msgid "Story link"
+msgstr "Enlace a Historia"
+
+#: .././pop-library/processors/buttons/post-buttons.php:133
+msgid "Announcement link"
+msgstr "Enlace a Anuncio"
+
+#: .././pop-library/processors/controls/anchor-controls.php:41
+#, php-format
+msgid "Add %s"
+msgstr "Agregar %s"
+
+#: .././pop-library/processors/controls/anchor-controls.php:47
+msgid "Add Story"
+msgstr "Añadir Historia"
+
+#: .././pop-library/processors/controls/anchor-controls.php:51
+msgid "Add Announcement"
+msgstr "Añadir Anuncio"
+
+#: .././pop-library/processors/controls/anchor-controls.php:55
+msgid "Add Article"
+msgstr "Añadir Artículo"
+
+#: .././pop-library/processors/createupdatepost/blocks.php:229
+msgid "Submitting..."
+msgstr "Enviando…"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:69
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:121
+msgid "Login/Register"
+msgstr "Iniciar sesión/Registrarse"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:74
+#, php-format
+msgid "Yay! Your %s was created successfully!"
+msgstr "¡Hurra! Su %s se ha creado correctamente!"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:78
+#, php-format
+msgid "Yay! Your %s was updated successfully!"
+msgstr "¡Hurra! Su %s se ha actualizado correctamente!"
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:88
+#, php-format
+msgid "Please %s to create your %s."
+msgstr "Por favor, %s para crear su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:94
+#, php-format
+msgid "You need a %s account to create your %s."
+msgstr "Es necesario una cuenta de %s para crear su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:102
+#, php-format
+msgid "%s updated successfully."
+msgstr "%s ha actualizado correctamente."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:108
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your %s."
+msgstr ""
+"Por favor <a href=“%s”>inicie su sesión de usuario</a> para editar su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:114
+#, php-format
+msgid "You need a %s account to edit your %s."
+msgstr "Es necesario una cuenta de %s para editar su %s."
+
+#: .././pop-library/processors/createupdatepost/messagefeedbacks/messagefeedbacks-layouts.php:121
+#, php-format
+msgid "Ops, it seems you have no rights to edit this %s."
+msgstr "Ops, parece que no tiene derechos para editar este %s."
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:136
+#, php-format
+msgid "%s details"
+msgstr "Detalles de %s"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:137
+#, php-format
+msgid "%s link details"
+msgstr "Detalles del Enlace %s"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:138
+msgid "Article details"
+msgstr "Detalles del Artículo"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:139
+msgid "Article link details"
+msgstr "Detalles del Enlace al Artículo"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:140
+msgid "Announcement details"
+msgstr "Detalles del Anuncio"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:141
+msgid "Announcement link details"
+msgstr "Detalles del Enlace al Anuncio"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:142
+msgid "Story details"
+msgstr "Detalle de la Historia"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:143
+msgid "Story link details"
+msgstr "Detalle del Enlace a la Historia"
+
+#: .././pop-library/processors/createupdatepost/structures/forms/widgetries.php:144
+msgid "Featured article details"
+msgstr "Detalle del Artículo Destacado"
+
+#: .././pop-library/processors/elements/codes.php:66
+#, php-format
+msgid ""
+"We are constantly on the lookout for worthy, knowledgeable and experienced "
+"people who sympathize with our cause and want to empower us. If you are such "
+"a person, please <a href=\"%s\">%s</a>."
+msgstr ""
+"Estamos constantemente en busca de personas dignas, con conocimientos y "
+"experiencia que simpaticen con nuestra causa y nos quieren empoderar. Si "
+"usted es una persona así, por favor <a href=\"%s\">%s</a>."
+
+#: .././pop-library/processors/elements/codes.php:76
+msgid "Disclaimer:"
+msgstr "Descargo de responsabilidad"
+
+#: .././pop-library/processors/elements/codes.php:78
+#, php-format
+msgid ""
+"The views expressed in this article/discussion do not necessarily represent "
+"the views of %1$s. Comments or opinions expressed are those of their "
+"respective contributors only. %1$s is not responsible for, and disclaims any "
+"and all liability for the content of the article/discussion and related "
+"comments."
+msgstr ""
+"Las opiniones expresadas en este artículo/discusión no representan "
+"necesariamente los puntos de vista de %1$s. Comentarios u opiniones "
+"expresadas son de sus respectivos contribuyentes solamente. %1$s no es "
+"responsable de, y declina toda responsabilidad por el contenido del artículo/"
+"discusión y comentarios relacionados."
+
+#: .././pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:47
+#: .././pop-library/processors/sidebars/posts/widgetries.php:87
+msgid "Categories"
+msgstr "Categorías"
+
+#: .././pop-library/processors/forms/formgroups.php:92
+msgid "Select categories"
+msgstr "Seleccionar categorías"
+
+#: .././pop-library/processors/layouts/posts/previewpostlayouts.php:641
+msgid "posted by"
+msgstr "publicado por"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:73
+msgid "story"
+msgstr "historia"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:74
+msgid "stories"
+msgstr "historias"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:80
+msgid "announcement"
+msgstr "anuncio"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:81
+msgid "announcements"
+msgstr "anuncios"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:87
+msgid "article"
+msgstr "artículo"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:88
+msgid "articles"
+msgstr "artículos"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:93
+msgid "featured article"
+msgstr "artículo destacado"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:94
+msgid "featured articles"
+msgstr "artículos destacados"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:99
+msgid "blog entry"
+msgstr "entrada del blog"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:100
+msgid "blog entries"
+msgstr "entradas del blog"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:105
+msgid "thought"
+msgstr "pensamiento"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:106
+msgid "thoughts"
+msgstr "pensamientos"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:111
+#, php-format
+msgid "No %s found."
+msgstr "No se han encontrado %s."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:115
+#, php-format
+msgid "No more %s found."
+msgstr "No se han encontrado más %s."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:125
+#, php-format
+msgid "Please %s to access your %s."
+msgstr "Por favor, %s para acceder a su %s."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:132
+#, php-format
+msgid "You need a %s account to access this functionality."
+msgstr "Es necesario una cuenta de %s para acceder a esta funcionalidad."
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:138
+#, php-format
+msgid "Your account has no permission to edit this %s."
+msgstr "Su cuenta no tiene permiso para modificar esta %s."
+
+#: .././pop-library/processors/sidebars/posts/widgetries.php:88
+msgid "Section links"
+msgstr "Enlaces de Sección"
+
+#: .././pop-library/processors/structures/carousels/carousel-controls.php:52
+msgid "From our blog"
+msgstr "De nuestro blog"
+
+#: .././pop-library/processors/structures/scrolls/scrollmaps.php:45
+msgid "Scroll down to load more results"
+msgstr "Desplazarse hacia abajo para cargar más resultados"
+
+#: .././pop-library/processors/structures/tables/tables.php:56
+#: .././pop-library/processors/structures/tables/tables.php:63
+#: .././pop-library/processors/structures/tables/tables.php:70
+#: .././pop-library/processors/structures/tables/tables.php:77
+msgid "Date"
+msgstr "Fecha"
+
+#: .././pop-library/processors/structures/tables/tables.php:57
+#: .././pop-library/processors/structures/tables/tables.php:64
+#: .././pop-library/processors/structures/tables/tables.php:71
+#: .././pop-library/processors/structures/tables/tables.php:78
+msgid "Status"
+msgstr "Estado"
+
+#: .././validation.php:32
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:37
+msgid ""
+"Error: <b>PoP Theme: Wassup</b> is not installed/activated. Without it, "
+"<b>PoP Theme MESYM Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=\"http://wordpress.org/"
+"extend/plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Theme: Wassup</b> is not installed/activated. Without it, "
+"<b>PoP Theme MESYM Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=“http://wordpress.org/"
+"extend/plugins/pop/“>from here</a>."
+
+#: .././validation.php:41
+msgid ""
+"Warning: please make sure to have the <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">latest version</a> of <b>PoP Theme: Wassup</b> installed, or "
+"otherwise <b>PoP Theme MESYM Processors</b> might not function properly."
+msgstr ""
+"Warning: please make sure to have the <a href=“http://wordpress.org/extend/"
+"plugins/pop/“>latest version</a> of <b>PoP Theme: Wassup</b> installed, or "
+"otherwise <b>PoP Theme MESYM Processors</b> might not function properly."
+
+#~ msgid "Project"
+#~ msgstr "Proyecto"
+
+#~ msgid "Projects"
+#~ msgstr "Proyectos"
+
+#~ msgid "Project link"
+#~ msgstr "Enlace a Proyecto"
+
+#~ msgid "Add Project"
+#~ msgstr "Añadir Proyecto"
+
+#~ msgid "Project details"
+#~ msgstr "Detalles del Proyecto"
+
+#~ msgid "Project link details"
+#~ msgstr "Detalles del Enlace al Proyecto"
+
+#~ msgid "project"
+#~ msgstr "proyecto"
+
+#~ msgid "projects"
+#~ msgstr "proyectos"
+
+#~ msgid "Charity"
+#~ msgstr "Caridad"
+
+#~ msgid "Communities"
+#~ msgstr "Comunidades"
+
+#~ msgid "Company or Corporate"
+#~ msgstr "Compañía o Empresarial"
+
+#~ msgid "Government"
+#~ msgstr "Gobierno"
+
+#~ msgid "Education"
+#~ msgstr "Educación"
+
+#~ msgid "NGO/NPO"
+#~ msgstr "ONG/Organización sin fines de lucro"
+
+#~ msgid "Social Enterprise"
+#~ msgstr "Empresa social"
+
+#~ msgid "Youth"
+#~ msgstr "Jóvenes"
+
+#~ msgid "Full view"
+#~ msgstr "Vista completa"
+
+#~ msgid "View/Preview"
+#~ msgstr "Ver/Vista previa"
+
+#~ msgid "Discussion link"
+#~ msgstr "En"
+
+#, fuzzy
+#~ msgid "Add a comment for:"
+#~ msgstr "Añadir un comentario para:"
+
+#, fuzzy
+#~ msgid "Send message to:"
+#~ msgstr "Enviar un mensaje a:"
+
+#, fuzzy
+#~ msgid "Volunteer for:"
+#~ msgstr "Ofrecerse como voluntario para:"
+
+#, fuzzy
+#~ msgid "In response to:"
+#~ msgstr "Rápida respuesta del servidor"
+
+#, fuzzy
+#~ msgid "Ops, there's nothing here!"
+#~ msgstr "Ops, no se encontró nada aquí!"
+
+#, fuzzy
+#~ msgid "Welcome to %s!"
+#~ msgstr "Bienvenidos a %s!"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#, fuzzy
+#~ msgid "Event"
+#~ msgstr "Evento"
+
+#, fuzzy
+#~ msgid "Events"
+#~ msgstr "Eventos"
+
+#, fuzzy
+#~ msgid "Past Events"
+#~ msgstr "Eventos Pasados"
+
+#, fuzzy
+#~ msgid "Content"
+#~ msgstr "Contenido"
+
+#, fuzzy
+#~ msgid "User"
+#~ msgstr "Usuario"
+
+#, fuzzy
+#~ msgid "Users"
+#~ msgstr "Usuarios"
+
+#, fuzzy
+#~ msgid "Resources"
+#~ msgstr "Recursos"
+
+#, fuzzy
+#~ msgid "Organization"
+#~ msgstr "Organización"
+
+#, fuzzy
+#~ msgid "Organizations"
+#~ msgstr "organizaciones"
+
+#, fuzzy
+#~ msgid "Individual"
+#~ msgstr "Individuo"
+
+#, fuzzy
+#~ msgid "Individuals"
+#~ msgstr "individuos"
+
+#, fuzzy
+#~ msgid "Sponsor"
+#~ msgstr "patrocinador"
+
+#, fuzzy
+#~ msgid "Sponsors"
+#~ msgstr "patrocinadores"
+
+#, fuzzy
+#~ msgid "No categories"
+#~ msgstr "Sin categorías"
+
+#, fuzzy
+#~ msgid "Members"
+#~ msgstr "Miembros"

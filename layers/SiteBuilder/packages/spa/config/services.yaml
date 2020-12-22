@@ -1,0 +1,3 @@
+services:
+    PoP\SPA\ModuleFilters\:
+        resource: '../src/ModuleFilters/*'

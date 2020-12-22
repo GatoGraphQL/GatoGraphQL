@@ -1,0 +1,129 @@
+
+.blocksection-submenu .submenu-group {
+	margin-bottom: 20px;
+}
+
+body.print .blocksection-submenu {
+	display: none;
+}
+
+.pop-disabledlayer > .layer {
+
+	/* Make sure this is the highest z-index value used by layers on that page */
+    z-index:301;
+     
+    /* make it cover the whole screen */
+    position: absolute; 
+    top: 0%; 
+    left: 0%; 
+    width: 100%; 
+    height: 100%; 
+    background-color: white; 
+    opacity:.60; 
+    filter: alpha(opacity=60);
+}
+.pop-disabledlayer > .spinner {
+    
+    z-index:502;
+    position: absolute; 
+    text-align: center;	
+	width: 100%;
+	left: 0;
+	top: 0;
+	padding-top: 40px;
+}
+
+/* Block filter */
+.dataload-filter > .filter.collapse.in,
+.dataload-filter > .filter.collapsing {
+	margin-bottom: 10px;
+}
+
+.blocksection-inners {
+	position: relative; /* Needed for the frame-side navigator events calendar to keep the prev/next controls next to the month */
+}
+
+#ps-sideinfo .blocksection-controls.top .btn {
+	padding: 0;
+	border-radius: 0;
+}
+
+/* Whenever we have a blockgroup of details/thumb/full etc, we can place the controlgroup_bottom to the right of these tabs */
+.blockgroup-author > .blocksection-controls.bottom,
+.pop-blockgroup > .blocksection-controls.bottom,
+body.embed .pop-blockgroup > .blocksection-controls.right {
+  position: absolute;
+  right: 0;
+  z-index: 350;
+}
+@media (min-width: 768px) {
+
+	.blockgroup-author > .blocksection-controls.bottom,
+	.pop-blockgroup > .blocksection-controls.bottom {
+	  position: static;
+	  right: auto;
+	}
+
+	.pop-blockgroup > .blocksection-controls.bottom {
+	  background-color: transparent;
+	}
+}
+
+#ps-sideinfo .pop-block.feed > .blocksection-title > h4 {
+	/* Sideinfo's Calendar and Trending: compact the style */
+	margin-bottom: 0;
+}
+#ps-sideinfo .pop-block > .blocksection-title a {
+	color: #4d4d4f;
+}
+#ps-sideinfo .pop-block > .blocksection-title a:hover {
+	text-decoration: underline;
+}
+#ps-sideinfo .pop-block {
+	margin-bottom: 20px;
+}
+#ps-sideinfo form.alert {
+	margin-bottom: 0;
+}
+#ps-sideinfo .blocksection-controls .btn.btn-link {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.pop-block > .media {
+	margin-top: 0;	
+}
+
+/* Template Manager Controls */
+/* Template Manager Status */
+.pop-block {
+
+	position: relative;
+}
+
+.pop-disabledlayer .pop-box {
+
+	text-align: center;
+}
+.pop-disabledlayer .loading {
+
+	width: 180px;
+	display: inline-block;
+}
+
+.controls.icon-only > .btn-group > .btn > .btn-inner >.pop-btn-title,
+.controls.icon-only > .btn-group > .wrapper > .btn > .btn-inner > .pop-btn-title,
+.controls.icon-only > .btn-group > .dropdown > .btn > .pop-btn-title,
+.quicklinkgroup.icon-only > .controls > .btn-group > .btn > .btn-inner > .pop-btn-title,
+.quicklinkgroup.icon-only > .controls > .btn-group > .wrapper > .btn > .btn-inner > .pop-btn-title,
+.quicklinkgroup.icon-only > .controls > .btn-group > .dropdown > .btn > .pop-btn-title {
+	display: none;
+}
+.controls.icon-only > .btn-group > .btn.pop-showtitle > .btn-inner >.pop-btn-title,
+.controls.icon-only > .btn-group > .wrapper > .btn.pop-showtitle > .btn-inner > .pop-btn-title,
+.controls.icon-only > .btn-group > .dropdown > .btn.pop-showtitle > .pop-btn-title,
+.quicklinkgroup.icon-only > .controls > .btn-group > .btn.pop-showtitle > .btn-inner > .pop-btn-title,
+.quicklinkgroup.icon-only > .controls > .btn-group > .wrapper > .btn.pop-showtitle > .btn-inner > .pop-btn-title,
+.quicklinkgroup.icon-only > .controls > .btn-group > .dropdown > .btn.pop-showtitle > .pop-btn-title {
+	display: inline-block;
+}

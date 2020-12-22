@@ -1,0 +1,63 @@
+<?php
+
+class PoP_TinyMCE_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
+{
+    public const RESOURCE_EDITOR = 'editor';
+
+    public function getResourcesToProcess()
+    {
+        return [
+            [self::class, self::RESOURCE_EDITOR],
+        ];
+    }
+    
+    public function getFilename(array $resource)
+    {
+        $filenames = array(
+            self::RESOURCE_EDITOR => 'editor',
+        );
+        if ($filename = $filenames[$resource[1]]) {
+            return $filename;
+        }
+
+        return parent::getFilename($resource);
+    }
+    
+    public function getVersion(array $resource)
+    {
+        return POP_TINYMCEWEBPLATFORM_VERSION;
+    }
+    
+    public function getDir(array $resource)
+    {
+        $subpath = PoP_WebPlatform_ServerUtils::useMinifiedResources() ? 'dist/' : '';
+        return POP_TINYMCEWEBPLATFORM_DIR.'/js/'.$subpath.'libraries';
+    }
+    
+    public function getAssetPath(array $resource)
+    {
+        return POP_TINYMCEWEBPLATFORM_DIR.'/js/libraries/'.$this->getFilename($resource).'.js';
+    }
+    
+    public function getPath(array $resource)
+    {
+        $subpath = PoP_WebPlatform_ServerUtils::useMinifiedResources() ? 'dist/' : '';
+        return POP_TINYMCEWEBPLATFORM_URL.'/js/'.$subpath.'libraries';
+    }
+
+    public function getJsobjects(array $resource)
+    {
+        $objects = array(
+            self::RESOURCE_EDITOR => array(
+                'Editor',
+            ),
+        );
+        if ($object = $objects[$resource[1]]) {
+            return $object;
+        }
+
+        return parent::getJsobjects($resource);
+    }
+}
+
+

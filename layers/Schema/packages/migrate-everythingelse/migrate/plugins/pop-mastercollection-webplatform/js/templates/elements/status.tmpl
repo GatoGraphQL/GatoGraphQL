@@ -1,0 +1,7 @@
+<div class="pop-loading alert alert-warning alert-sm hidden {{class}}" style="{{style}}">
+	<span class="pop-loading-msg">{{{titles.loading}}}</span> <small><span class="pop-box"></span></small>
+</div>
+<div class="pop-error alert alert-warning alert-sm hidden {{class}}" style="{{style}}" {{#generateId group='error'}}{{id}}{{/generateId}}>
+	<button type="button" class="close" aria-hidden="true" {{#generateId group='error-dismiss'}}{{id}}{{/generateId}} data-target="#{{lastGeneratedId group='error'}}" data-class="hidden">&times;</button>
+	{{{titles.error}}} <a href="#" data-action="retry" class="hidden" {{#generateId group='retry'}}{{id}}{{/generateId}}>{{{titles.retry}}}</a>
+</div>

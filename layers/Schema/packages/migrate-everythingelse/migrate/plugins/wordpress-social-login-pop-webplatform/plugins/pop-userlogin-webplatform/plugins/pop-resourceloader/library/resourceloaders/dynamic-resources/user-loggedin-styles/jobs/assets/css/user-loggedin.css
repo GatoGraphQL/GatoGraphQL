@@ -1,0 +1,4 @@
+/* WSL Users: do not show "Change Password" link */
+body.loggedin-{{$domainId}}.sociallogin-user-{{$domainId}} .hidden-sociallogin-user {
+	display: none;
+}

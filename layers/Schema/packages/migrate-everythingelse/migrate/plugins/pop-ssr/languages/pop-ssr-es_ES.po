@@ -1,0 +1,1463 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PoP Core Processors\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-04 12:33+0800\n"
+"PO-Revision-Date: 2017-04-04 12:34+0800\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././validation.php:51
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:56
+msgid ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>PoP CDNCore</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Core Processors</b> is not installed/activated. Without it, "
+"<b>PoP CDNCore</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."
+
+#: .././validation.php:62
+#, php-format
+msgid ""
+"Error: this version of <b>PoP CDNCore</b> requires version %s or bigger of "
+"<b>PoP Core Processors</b>. Please update this plugin from your plugin "
+"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
+"\">from here</a>."
+msgstr ""
+"Error: this version of <b>PoP CDNCore</b> requires version %s or bigger of "
+"<b>PoP Core Processors</b>. Please update this plugin from your plugin "
+"installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."
+
+#: .././validation.php:69
+msgid ""
+"Error: <b>PoP CDN</b> is not installed/activated. Without it, <b>PoP CDN for "
+"Core Processors</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=\"http://wordpress.org/extend/"
+"plugins/pop/\">from here</a>."
+msgstr ""
+"Error: <b>PoP CDN</b> is not installed/activated. Without it, <b>PoP CDN for "
+"Core Processors</b> will not work. Please install this plugin from your "
+"plugin installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."
+
+#: .././validation.php:75
+#, php-format
+msgid ""
+"Error: this version of <b>PoP CDN for Core Processors</b> requires version "
+"%s or bigger of <b>PoP CDN</b>. Please update this plugin from your plugin "
+"installer or download it <a href=\"http://wordpress.org/extend/plugins/pop/"
+"\">from here</a>."
+msgstr ""
+"Error: this version of <b>PoP CDN for Core Processors</b> requires version "
+"%s or bigger of <b>PoP CDN</b>. Please update this plugin from your plugin "
+"installer or download it <a href=“http://wordpress.org/extend/plugins/"
+"pop/“>from here</a>."
+
+#~ msgid ""
+#~ "This page has been updated, please <a href=\"%s\" target=\"%s\" %s>click "
+#~ "here to refresh it</a>."
+#~ msgstr ""
+#~ "Esta página ha sido actualizada, por favor <a href=\"%s\" target=\"%s\" "
+#~ "%s>haga click aquí para refrescarla</a>."
+
+#~ msgid ""
+#~ "There is a new version of the website, please <a href=\"%s\" target=\"%s"
+#~ "\">click here to reload it</a>."
+#~ msgstr ""
+#~ "Hay una nueva versión del sitio web, por favor <a href=\"%s\" target=\"%s"
+#~ "\">haga click aquí para recargarlo</a>."
+
+#~ msgid "Accept"
+#~ msgstr "Aceptar"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid "Remember"
+#~ msgstr "Recordar"
+
+#~ msgid "Reopen previous session tabs?"
+#~ msgstr "Abrir tabs de la sesión anterior?"
+
+#~ msgid "Captcha was not generated properly, please refresh page."
+#~ msgstr ""
+#~ "El captcha no se ha generado correctamente, por favor actualice la página."
+
+#~ msgid "Captcha is empty."
+#~ msgstr "El captcha no puede estar vacío."
+
+#~ msgid "Captcha doesn't match."
+#~ msgstr "El captcha no coincide."
+
+#~ msgid "Post"
+#~ msgstr "Post"
+
+#~ msgid "Apply"
+#~ msgstr "Aplicar"
+
+#~ msgid "From"
+#~ msgstr "Desde"
+
+#~ msgid "To"
+#~ msgstr "Hasta"
+
+#~ msgid "Custom Range"
+#~ msgstr "Rango personalizado"
+
+#~ msgid "DD/MM/YYYY"
+#~ msgstr "DD/MM/YYYY"
+
+#~ msgid "h:mm A"
+#~ msgstr "H:mm"
+
+#~ msgid "Su"
+#~ msgstr "Do"
+
+#~ msgid "Mo"
+#~ msgstr "Lu"
+
+#~ msgid "Tu"
+#~ msgstr "Ma"
+
+#~ msgid "We"
+#~ msgstr "Mi"
+
+#~ msgid "Th"
+#~ msgstr "Ju"
+
+#~ msgid "Fr"
+#~ msgstr "Vi"
+
+#~ msgid "Sa"
+#~ msgstr "Sá"
+
+#~ msgid "January"
+#~ msgstr "Enero"
+
+#~ msgid "February"
+#~ msgstr "Febrero"
+
+#~ msgid "March"
+#~ msgstr "Marzo"
+
+#~ msgid "April"
+#~ msgstr "Abril"
+
+#~ msgid "May"
+#~ msgstr "Mayo"
+
+#~ msgid "June"
+#~ msgstr "Junio"
+
+#~ msgid "July"
+#~ msgstr "Julio"
+
+#~ msgid "August"
+#~ msgstr "Agosto"
+
+#~ msgid "September"
+#~ msgstr "Septiembre"
+
+#~ msgid "October"
+#~ msgstr "Octubre"
+
+#~ msgid "November"
+#~ msgstr "Noviembre"
+
+#~ msgid "Add Photo/File"
+#~ msgstr "Añadir Foto/Archivo"
+
+#~ msgid "Add Image Gallery"
+#~ msgstr "Añadir Galería de Imágenes"
+
+#~ msgid "Embed Youtube videos, Tweets or others"
+#~ msgstr "Agregar videos de Youtube, Twits y otros"
+
+#~ msgid ""
+#~ "<p>To embed a video or another object, simply place its URL into the "
+#~ "content area. Make sure the URL is on its own line and not hyperlinked. "
+#~ "For example:</p><pre>Check out this cool video:\n"
+#~ "\n"
+#~ "https://www.youtube.com/watch?v=sxm3Xyutc1s\n"
+#~ "\n"
+#~ "That is a lovely tango!</pre><p>You can embed URLs from all these "
+#~ "services:</p><p><i class=\"fa fa-fw fa-flickr\"></i>Flickr, <i class=\"fa "
+#~ "fa-fw fa-instagram\"></i>Instagram, <i class=\"fa fa-fw fa-reddit\"></"
+#~ "i>Reddit, <i class=\"fa fa-fw fa-slideshare\"></i>SlideShare, <i class="
+#~ "\"fa fa-fw fa-soundcloud\"></i>SoundCloud, <i class=\"fa fa-fw fa-spotify"
+#~ "\"></i>Spotify, <i class=\"fa fa-fw fa-twitter\"></i>Twitter, <i class="
+#~ "\"fa fa-fw fa-vimeo\"></i>Vimeo, <i class=\"fa fa-fw fa-vine\"></i>Vine, "
+#~ "<i class=\"fa fa-fw fa-youtube\"></i>YouTube, and others.</p>"
+#~ msgstr ""
+#~ "<p>Para incrustar un video u otro objeto, simplemente pegue su URL en el "
+#~ "área de contenido. Asegúrese de que la URL esté en su propia línea y no "
+#~ "tenga enlace. Por ejemplo: </p><pre>Mirá este video copado:\n"
+#~ "\n"
+#~ "https://www.youtube.com/watch?v=sxm3Xyutc1s\n"
+#~ "\n"
+#~ "Qué tango tan hermoso!</pre><p>Se pueden incrustar URLs de todos estos "
+#~ "servicios:</p><p><i class=“fa fa-fw fa-flickr”></i>Flickr, <i class=“fa "
+#~ "fa-fw fa-instagram”></i>Instagram, <i class=“fa fa-fw fa-reddit”></"
+#~ "i>Reddit, <i class=“fa fa-fw fa-slideshare”></i>SlideShare, <i class=“fa "
+#~ "fa-fw fa-soundcloud”></i>SoundCloud, <i class=“fa fa-fw fa-spotify”></"
+#~ "i>Spotify, <i class=“fa fa-fw fa-twitter”></i>Twitter, <i class=“fa fa-fw "
+#~ "fa-vimeo”></i>Vimeo, <i class=“fa fa-fw fa-vine”></i>Vine, <i class=“fa "
+#~ "fa-fw fa-youtube”></i>YouTube, y otros.</p>"
+
+#~ msgid "<p>Dear %s,</p>"
+#~ msgstr "<p>Estimado/a %s,</p>"
+
+#~ msgid "<p>Howdy!</p>"
+#~ msgstr "<p>¡Hola!</p>"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "Tu %s se ha creado con éxito"
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
+#~ msgstr "<p>Tu %s <a href=\"%s\">%s</a> fue creado con éxito!</p>"
+
+#~ msgid ""
+#~ "Please notice that the status of the %s is <strong>'Draft'</strong>, so "
+#~ "it won't be published online."
+#~ msgstr ""
+#~ "Por favor, tenga en cuenta que el estado del %s es <strong>'borrador'</"
+#~ "strong>, de modo que no será publicado."
+
+#~ msgid ""
+#~ "<p>Please wait for our moderators approval. You will receive an email "
+#~ "with the confirmation.</p>"
+#~ msgstr ""
+#~ "<p>Por favor espere a que nuestros moderadores aprueben su post. "
+#~ "Recibirás un correo electrónico con la confirmación.</p>"
+
+#~ msgid "[%s]: New %s by %s"
+#~ msgstr "[%s]: Nuevo %s por %s"
+
+#~ msgid "A new %s has been submitted on %s:"
+#~ msgstr "Se ha creado un nuevo %s en %s:"
+
+#~ msgid "[%s]: %s updated by %s"
+#~ msgstr "[%s]: %s actualizado por %s"
+
+#~ msgid "%s updated on %s:"
+#~ msgstr "%s actualizado en %s:"
+
+#~ msgid "<b>Author:</b> %s"
+#~ msgstr "<b>Autor:</b> %s"
+
+#~ msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+#~ msgstr ""
+#~ "<b>Correo electrónico del autor:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+
+#~ msgid "<b>Title:</b> %s"
+#~ msgstr "<b>Titulo:</b> %s"
+
+#~ msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Enlace de edición:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Status:</b> %s"
+#~ msgstr "<b>Estado:</b> %s"
+
+#~ msgid "[%s]: New Profile: %s"
+#~ msgstr "[%s]: Nuevo perfil: %s"
+
+#~ msgid "A Profile was created on %s."
+#~ msgstr "Un perfil fue creado en %s."
+
+#~ msgid "[%s]: Profile updated: %s"
+#~ msgstr "[%s]: Perfil actualizado: %s"
+
+#~ msgid "Profile updated on %s."
+#~ msgstr "Perfil actualizado en %s."
+
+#~ msgid "<b>Profile:</b> %s"
+#~ msgstr "<b>Perfil:</b> %s"
+
+#~ msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Enlace al perfil:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "Welcome to %s!"
+#~ msgstr "¡Bienvenido a %s!"
+
+#~ msgid ""
+#~ "<p>Your user account was created successfully. This is your public "
+#~ "profile page:</p>"
+#~ msgstr ""
+#~ "<p>Tu cuenta de usuario se ha creado con éxito. Esta es la página con tu "
+#~ "perfil público</p> "
+
+#~ msgid "Now you can share your content/activities with our community:"
+#~ msgstr ""
+#~ "Ahora puedes compartir tu contenido/actividades con nuestra comunidad:"
+
+#~ msgid "About %s"
+#~ msgstr "Acerca de %s"
+
+#~ msgid "A new %s was posted referencing \"%s\""
+#~ msgstr "Un nuevo %s fue publicado haciendo referencia a \"%s\""
+
+#~ msgid ""
+#~ "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
+#~ msgstr ""
+#~ "<p>Tu %s <a href=\"%s\">%s</a> ha recibido una referencia por un nuevo %s:"
+#~ "</p>"
+
+#~ msgid "Your %s was approved!"
+#~ msgstr "¡Tu %s fue aprobado!"
+
+#~ msgid "<p>Hurray! Your %s was approved!</p>"
+#~ msgstr "<p>¡Hurra! Tu %s fue aprobado.</p>"
+
+#~ msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>Hay una respuesta a un comentario de <a href=\"%s\">%s</a>:</p>"
+
+#~ msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>Un nuevo comentario ha sido añadido a <a href=\"%s\">%s</a>:</p>"
+
+#~ msgid "In response to:"
+#~ msgstr "En respuesta a:"
+
+#~ msgid "Click here to reply the comment"
+#~ msgstr "Haga clic aquí para responder el comentario"
+
+#~ msgid "%s replied your comment in “%s”"
+#~ msgstr " %s ha contestado tu comentario en “%s”"
+
+#~ msgid "New comment added in “%s”"
+#~ msgstr "Nuevo comentario añadido en “%s”"
+
+#~ msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
+#~ msgstr "<p><a href=\"%s\">%s</a> te ha mencionado en %s:</p>"
+
+#~ msgid "You were mentioned in %1$s “%2$s”"
+#~ msgstr "Has sido mencionado en %1$s “%2$s”"
+
+#~ msgid ""
+#~ "<p><a href=\"%1$s\">%2$s</a> mentioned you in a comment from %3$s <a href="
+#~ "\"%4%s\">%5$s</a>:</p>"
+#~ msgstr ""
+#~ "<p><a href=“%1$s”>%2$s</a> te ha mencionado en un comentario en %3$s <a "
+#~ "href=“%4$s”>%5$s</a>:</p>"
+
+#~ msgid "You were mentioned in a comment from %1$s “%2$s”"
+#~ msgstr "Has sido mencionado en un comentario en %1$s “%2$s”"
+
+#~ msgid "Password reset code"
+#~ msgstr "Código de restablecimiento de contraseña"
+
+#~ msgid "Retrieve password"
+#~ msgstr "Recuperar contraseña"
+
+#~ msgid "Password reset successful"
+#~ msgstr "Restablecimiento de contraseña exitoso"
+
+#~ msgid "Your password has been changed successfully."
+#~ msgstr "Tu contraseña ha sido cambiada con éxito."
+
+#~ msgid "Please <a href=\"%s\">click here to log-in</a>."
+#~ msgstr "Por favor, <a href=\"%s\">haga click aquí para iniciar sesión</a>."
+
+#~ msgid ""
+#~ "You are receiving this notification for belonging to this author’s "
+#~ "network. Soon you will be able to configure your notification email’s "
+#~ "preferences."
+#~ msgstr ""
+#~ "Estás recibiendo esta notificación por pertenecer a la red de este autor. "
+#~ "Pronto podrás configurar tus preferencias de notificaciones en tu correo "
+#~ "electrónico."
+
+#~ msgid "%s has created a new %s: “%s”"
+#~ msgstr "%s creó un nuevo %s: “%s”"
+
+#~ msgid "<b><a href=\"%s\">%s</a></b> has created a new %s:"
+#~ msgstr "<b><a href=\"%s\">%s</a></b> creó un nuevo %s:"
+
+#~ msgid "You have a new follower!"
+#~ msgstr "¡Tienes un nuevo seguidor!"
+
+#~ msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
+#~ msgstr ""
+#~ "<p>¡Felicitaciones! <a href=\"%s\">Tienes un nuevo seguidor</a>:</p>"
+
+#~ msgid ""
+#~ "<p>This user will receive notifications following your activity, such as "
+#~ "recommending content, posting a new discussion or comment, and others.</p>"
+#~ msgstr ""
+#~ "<p>Este usuario recibirá notificaciones sobre tu actividad, tales como "
+#~ "recomendar contenido, publicar un nuevo artículo ó comentario, entre "
+#~ "otros.</p>"
+
+#~ msgid "Your %s was recommended!"
+#~ msgstr "¡Tu %s fue recomendado!"
+
+#~ msgid "<p>Your %1$s <a href=\"%2$s\">%3$s</a> was recommended by:</p>"
+#~ msgstr "<p>Tu %1$s <a href=“%2$s”>%3$s</a> fue recomendado por:</p>"
+
+#~ msgid "Log in"
+#~ msgstr "Iniciar sesión"
+
+#~ msgid "log in"
+#~ msgstr "iniciar sesión"
+
+#~ msgid "Upload media files"
+#~ msgstr "Subir archivos"
+
+#~ msgid "Set"
+#~ msgstr "Establecer"
+
+#~ msgid "None selected"
+#~ msgstr "Ninguna seleccionada"
+
+#~ msgid "selected"
+#~ msgstr "seleccionadas"
+
+#~ msgid "All selected"
+#~ msgstr "Todas seleccionadas"
+
+#~ msgid "Title"
+#~ msgstr "Título"
+
+#~ msgid "Short Description"
+#~ msgstr "Descripción breve"
+
+#~ msgid "Display email in the Profile page?"
+#~ msgstr ""
+#~ "¿Hacer tu dirección de correo electrónico visible a todos los usuarios?"
+
+#~ msgid "Loading"
+#~ msgstr "Cargando"
+
+#~ msgid "Ops, there was a connection problem."
+#~ msgstr "Ops, hubo un problema con la conexión."
+
+#~ msgid "Retry"
+#~ msgstr "Reintentar"
+
+#~ msgid "Ops, this is a broken link."
+#~ msgstr "Ops, este es un enlace roto."
+
+#~ msgid ""
+#~ "Ops, the upload failed. Let's fix this: please save your post as 'Draft', "
+#~ "refresh the browser window, and try again."
+#~ msgstr ""
+#~ "Ops, hubo un problema subiendo el archivo. Vamos a arreglar esto: por "
+#~ "favor, guarde el post como 'borrador', refresque la ventana del "
+#~ "navegador, y pruebe de nuevo."
+
+#~ msgid "You have down-voted <em><strong>%s</strong></em>."
+#~ msgstr "Has expresado estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "Invitation sent to the following emails: <strong>%s</strong>"
+#~ msgstr "Invitación enviada a los siguientes correos: <strong>%s</strong>"
+
+#~ msgid "You are now following <em><strong>%s</strong></em>."
+#~ msgstr "Ahora estás siguiendo a <em><strong>%s</strong></em>."
+
+#~ msgid "You have already down-voted <em><strong>%s</strong></em>."
+#~ msgstr ""
+#~ "Ya has expresado estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "The following emails are invalid: <strong>%s</strong>"
+#~ msgstr "Los siguientes emails son inválidos: <strong>%s</strong>"
+
+#~ msgid "Email(s) cannot be empty."
+#~ msgstr "Correo(s) electrónico(s) no puede estar vacío."
+
+#~ msgid "You can't follow yourself!"
+#~ msgstr "¡No puedes seguirte a tu mismo!"
+
+#~ msgid "You are already following <em><strong>%s</strong></em>."
+#~ msgstr "Ya estás siguiendo a <em><strong>%s</strong></em>."
+
+#~ msgid "<p>%s is inviting you to join %s!</p>"
+#~ msgstr "<p>¡%s te está invitando a unirte a %s!</p>"
+
+#~ msgid "<p>You have been invited to join %s!</p>"
+#~ msgstr "<p>¡Has sido invitado a unirte a %s!</p>"
+
+#~ msgid "What is %s?"
+#~ msgstr "¿Qué es %s?"
+
+#~ msgid "Check it out here"
+#~ msgstr "Averigüálo aquí"
+
+#~ msgid "%s is inviting you to join %s!"
+#~ msgstr "¡%s te está invitando a unirte a %s!"
+
+#~ msgid "You have been invited to join %s!"
+#~ msgstr "¡Has sido invitado a unirte a %s!"
+
+#~ msgid "The requested post does not exist."
+#~ msgstr "El post solicitado no existe."
+
+#~ msgid "The requested functionality does not apply on this post."
+#~ msgstr "La funcionalidad no se puede aplicar en este post."
+
+#~ msgid "You have already recommended <em><strong>%s</strong></em>."
+#~ msgstr "Ya has recomendado <em><strong>%s</strong></em>."
+
+#~ msgid "You had not down-voted <em><strong>%s</strong></em>."
+#~ msgstr ""
+#~ "No habías expresado estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "You had not up-voted <em><strong>%s</strong></em>."
+#~ msgstr ""
+#~ "No habías expresado estar de acuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "You were not following <em><strong>%s</strong></em>."
+#~ msgstr "No estabas siguiendo <em><strong>%s</strong></em>."
+
+#~ msgid "You had not recommended <em><strong>%s</strong></em>."
+#~ msgstr "No habías recomendado <em><strong>%s</strong></em>."
+
+#~ msgid "This URL is incorrect."
+#~ msgstr "Esta URL es incorrecta."
+
+#~ msgid "You have already up-voted <em><strong>%s</strong></em>."
+#~ msgstr "Ya has expresado estar de acuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "The requested user does not exist."
+#~ msgstr "El usuario solicitado no existe."
+
+#~ msgid "You have recommended <em><strong>%s</strong></em>."
+#~ msgstr "Has recomendado <em><strong>%s</strong></em>."
+
+#~ msgid "You have stopped down-voting <em><strong>%s</strong></em>."
+#~ msgstr "Has dejado de estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "You have stopped up-voting <em><strong>%s</strong></em>."
+#~ msgstr "Has dejado de estar de acuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "You have stopped following <em><strong>%s</strong></em>."
+#~ msgstr "Has dejado de seguir a <em><strong>%s</strong></em>."
+
+#~ msgid "You have stopped recommending <em><strong>%s</strong></em>."
+#~ msgstr "Has dejado de recomendar <em><strong>%s</strong></em>."
+
+#~ msgid "You have up-voted <em><strong>%s</strong></em>."
+#~ msgstr "Has expresado estar de acuerdo con <em><strong>%s</strong></em>."
+
+#~ msgid "Source: "
+#~ msgstr "Fuente: "
+
+#~ msgid "Load link"
+#~ msgstr "Cargar link"
+
+#~ msgid "Open link in new tab"
+#~ msgstr "Abrir link en una nueva pestaña"
+
+#~ msgid "Website"
+#~ msgstr "Sitio web"
+
+#~ msgid "Email"
+#~ msgstr "Correo electrónico"
+
+#~ msgid "Draft (still editing)"
+#~ msgstr "Borrador (editando)"
+
+#~ msgid "Finished editing"
+#~ msgstr "Terminado de editar"
+
+#~ msgid "Already published"
+#~ msgstr "Ya publicado"
+
+#~ msgid "Draft"
+#~ msgstr "Borrador"
+
+#~ msgid "Pending to be published"
+#~ msgstr "A la espera de ser publicado"
+
+#~ msgid "Published"
+#~ msgstr "Publicado"
+
+#~ msgid "Yes"
+#~ msgstr "Sí"
+
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgid "Dismiss"
+#~ msgstr "Descartar"
+
+#~ msgid "Load more"
+#~ msgstr "Cargar más"
+
+#~ msgid "Please write the content here..."
+#~ msgstr "Por favor, escriba el contenido aquí..."
+
+#~ msgid "Set Featured Image"
+#~ msgstr "Establecer la imagen destacada"
+
+#~ msgid "Remove"
+#~ msgstr "Eliminar"
+
+#~ msgid "Please %s to set the featured image."
+#~ msgstr "Por favor, %s para establecer la imagen destacada."
+
+#~ msgid "Loading Content"
+#~ msgstr "Cargando contenido"
+
+#~ msgid "No Content found"
+#~ msgstr "No se encontró contenido"
+
+#~ msgid "Suggestions"
+#~ msgstr "Sugerencias"
+
+#~ msgid "Loading Tags"
+#~ msgstr "Cargando etiquetas"
+
+#~ msgid "No Tags found"
+#~ msgstr "No se encontraron etiquetas"
+
+#~ msgid "Loading Suggestions"
+#~ msgstr "Cargando sugerencias"
+
+#~ msgid "No Results"
+#~ msgstr "No hay resultados"
+
+#~ msgid "Loading Users"
+#~ msgstr "Cargando usuarios"
+
+#~ msgid "No Users found"
+#~ msgstr "No se encontraron usuarios"
+
+#~ msgid "Submit"
+#~ msgstr "Enviar"
+
+#~ msgid "post"
+#~ msgstr "post"
+
+#~ msgid "posts"
+#~ msgstr "posts"
+
+#~ msgid "View %s new %s"
+#~ msgstr "Ver %s nuevos %s"
+
+#~ msgid "Show more"
+#~ msgstr "Mostrar más"
+
+#~ msgid "Show less"
+#~ msgstr "Mostrar menos"
+
+#~ msgid "Ops, there were some problems:"
+#~ msgstr "Ops, hubo algunos problemas:"
+
+#~ msgid "Success!"
+#~ msgstr "¡Éxito!"
+
+#~ msgid "No results"
+#~ msgstr "No hay resultados"
+
+#~ msgid "No more results found"
+#~ msgstr "No se encontraron más resultados"
+
+#~ msgid "Go to permalink"
+#~ msgstr "Ir al permalink"
+
+#~ msgid "Pending"
+#~ msgstr "Pendiente"
+
+#~ msgid "No contact channels"
+#~ msgstr "Sin métodos de contacto"
+
+#~ msgid "Share on %s"
+#~ msgstr "Compartir en %s"
+
+#~ msgid "Previous"
+#~ msgstr "Anterior"
+
+#~ msgid "Next"
+#~ msgstr "Siguiente"
+
+#~ msgid "Toggle menu"
+#~ msgstr "Abrir/Cerrar el menú"
+
+#~ msgid ""
+#~ "Send an invite to your friends/colleagues/etc to join <em><strong>%s</"
+#~ "strong></em>:"
+#~ msgstr ""
+#~ "Enviar una invitación a tus amigos/colegas/etc para unirse a <em><strong>"
+#~ "%s</strong></em>:"
+
+#~ msgid "Sending..."
+#~ msgstr "Enviando..."
+
+#~ msgid "Quickview"
+#~ msgstr "Vista rápida"
+
+#~ msgid "Print"
+#~ msgstr "Imprimir"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "View"
+#~ msgstr "Ver"
+
+#~ msgid "Preview"
+#~ msgstr "Previsualizar"
+
+#~ msgid "Permalink"
+#~ msgstr "Permalink"
+
+#~ msgid "Follow"
+#~ msgstr "Seguir"
+
+#~ msgid "Following"
+#~ msgstr "Siguiendo"
+
+#~ msgid "Recommend"
+#~ msgstr "Recomendar"
+
+#~ msgid "Comments"
+#~ msgstr "Comentarios"
+
+#~ msgid "Recommended"
+#~ msgstr "Recomendado"
+
+#~ msgid "Up-vote"
+#~ msgstr "De acuerdo"
+
+#~ msgid "Up-voted"
+#~ msgstr "Estoy de acuerdo"
+
+#~ msgid "Down-vote"
+#~ msgstr "En desacuerdo"
+
+#~ msgid "Down-voted"
+#~ msgstr "Estoy en desacuerdo"
+
+#~ msgid "Add Comment"
+#~ msgstr "Añadir comentario"
+
+#~ msgid "Add a comment for:"
+#~ msgstr "Añadir un comentario en:"
+
+#~ msgid "Comment*"
+#~ msgstr "Comentario*"
+
+#~ msgid "comments"
+#~ msgstr "comentarios"
+
+#~ msgid "No %s yet."
+#~ msgstr "No hay %s aún."
+
+#~ msgid "That's it, no more %s found."
+#~ msgstr "Esto es todo, no se encontraron más %s."
+
+#~ msgid "Comment added successfully!"
+#~ msgstr "¡Comentario agregado con éxito!"
+
+#~ msgid "Comment is missing."
+#~ msgstr "El comentario no puede ser vacío."
+
+#~ msgid "Your comment was added."
+#~ msgstr "Tu comentario fue añadido."
+
+#~ msgid "Login/Register"
+#~ msgstr "Iniciar sesión/Registrarse"
+
+#~ msgid "Please %s to add a comment."
+#~ msgstr "Por favor %s para añadir un comentario."
+
+#~ msgid "You need a %s account to add a comment."
+#~ msgstr "Necesitás una cuenta de %s para añadir un comentario."
+
+#~ msgid "Toggle compact/full form"
+#~ msgstr "Alternar formulario compacto/extendido"
+
+#~ msgid "Expand"
+#~ msgstr "Ampliar"
+
+#~ msgid "Filter"
+#~ msgstr "Filtrar"
+
+#~ msgid "Embed"
+#~ msgstr "Insertar código HTML"
+
+#~ msgid "Copy Search URL"
+#~ msgstr "Copiar URL de búsqueda"
+
+#~ msgid "Share by email"
+#~ msgstr "Compartir por email"
+
+#~ msgid "Invite your friends to join!"
+#~ msgstr "¡Invitá a tus amigos a unirse!"
+
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#~ msgid "Toggle sidebar"
+#~ msgstr "Abrir/Cerrar barra lateral"
+
+#~ msgid "Go back"
+#~ msgstr "Volver"
+
+#~ msgid "Facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "Twitter"
+#~ msgstr "Twitter"
+
+#~ msgid "LinkedIn"
+#~ msgstr "LinkedIn"
+
+#~ msgid "Refresh"
+#~ msgstr "Refrescar"
+
+#~ msgid "Reset"
+#~ msgstr "Resetear"
+
+#~ msgid "Reply with..."
+#~ msgstr "Responder con…"
+
+#~ msgid "Options"
+#~ msgstr "Opciones"
+
+#~ msgid "Contact/Links"
+#~ msgstr "Contacto/enlaces"
+
+#~ msgid "Awesome! Your user account was created successfully!"
+#~ msgstr "¡Buenísimo! Tu cuenta de usuario se ha creado con éxito"
+
+#~ msgid "Already logged in!"
+#~ msgstr "Ya has iniciado tu sesión"
+
+#~ msgid "Please %s first to create a new user account."
+#~ msgstr "Por favor primero %s para crear una nueva cuenta de usuario."
+
+#~ msgid "Profile updated successfully."
+#~ msgstr "Perfil actualizado satisfactoriamente."
+
+#~ msgid "Login"
+#~ msgstr "Iniciar sesión"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to edit your Profile."
+#~ msgstr ""
+#~ "Por favor <a href=\"%s\">iniciá tu sesión</a> para editar tu perfil."
+
+#~ msgid "Only %s accounts can be edited."
+#~ msgstr "Sólo cuentas de  %s pueden ser editadas."
+
+#~ msgid ""
+#~ "Your profile is not of 'Organization' type, so you cannot edit it here."
+#~ msgstr ""
+#~ "Tu perfil no es de tipo 'organización', así que no se puede editar aquí."
+
+#~ msgid ""
+#~ "Your profile is not of 'Individual' type, so you cannot edit it here."
+#~ msgstr ""
+#~ "Tu perfil no es de tipo 'personal', así que no se puede editar aquí."
+
+#~ msgid "Show email in your user profile?"
+#~ msgstr "Hacer tu correo electrónico visible a todos los usuarios?"
+
+#~ msgid "Short description"
+#~ msgstr "Descripción breve"
+
+#~ msgid "Facebook URL"
+#~ msgstr "URL de Facebook"
+
+#~ msgid "Twitter URL"
+#~ msgstr "URL de Twitter"
+
+#~ msgid "LinkedIn URL"
+#~ msgstr "URL de LinkedIn"
+
+#~ msgid "Youtube URL"
+#~ msgstr "URL de YouTube"
+
+#~ msgid "Instagram URL"
+#~ msgstr "URL de Instagram"
+
+#~ msgid "Blog URL"
+#~ msgstr "URL de tu Blog"
+
+#~ msgid "Submitting..."
+#~ msgstr "Enviando…"
+
+#~ msgid "Awesome! Your User Account was created successfully!"
+#~ msgstr "¡Buenísimo! Tu cuenta de usuario se ha creado con éxito"
+
+#~ msgid ""
+#~ "Please add the following emails to your contact list, to make sure you "
+#~ "receive our notifications:"
+#~ msgstr ""
+#~ "Por favor, añadí los siguientes emails a tu lista de contactos, para "
+#~ "asegurar de que recibas nuestras notificaciones:"
+
+#~ msgid "User Account updated successfully."
+#~ msgstr "Cuenta de usuario actualizada satisfactoriamente."
+
+#~ msgid "View your <a href=\"%s\">updated user account</a>."
+#~ msgstr "Ver tu <a href=\"%s\">cuenta de usuario actualizada</a>."
+
+#~ msgid "Username"
+#~ msgstr "Nombre de usuario"
+
+#~ msgid "Current Password"
+#~ msgstr "Contraseña actual"
+
+#~ msgid "Password"
+#~ msgstr "Contraseña"
+
+#~ msgid "New password"
+#~ msgstr "Nueva contraseña"
+
+#~ msgid "Repeat password"
+#~ msgstr "Repetir contraseña"
+
+#~ msgid "Repeat new password"
+#~ msgstr "Repetir nueva contraseña"
+
+#~ msgid "Name"
+#~ msgstr "Nombre"
+
+#~ msgid "Website URL"
+#~ msgstr "URL de tu sitio web"
+
+#~ msgid "Description"
+#~ msgstr "Descripción"
+
+#~ msgid ""
+#~ "Please be careful to fill-in the email properly! It will not only appear "
+#~ "in the profile page, but also be used by our system to send you "
+#~ "notifications."
+#~ msgstr ""
+#~ "¡Por favor, ingresá tu email correctamente! Este no sólo aparecerá en tu "
+#~ "perfil de usuario, sino también será utilizado por nuestro sistema para "
+#~ "enviarte notificaciones."
+
+#~ msgid "Password updated successfully."
+#~ msgstr "Contraseña actualizada satisfactoriamente."
+
+#~ msgid ""
+#~ "Yep, it's good to change it every now and then, with so many crooks "
+#~ "around!"
+#~ msgstr "Sí, es bueno cambiarla cada tanto, con tantos ladrones sueltos!"
+
+#~ msgid "Ops, there is a problem:"
+#~ msgstr "Ops, hay un problema:"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to change your password."
+#~ msgstr ""
+#~ "Por favor, <a href=\"%s\">iniciá tu sesión</a> para cambiar tu contraseña."
+
+#~ msgid "Only %s accounts can change their password."
+#~ msgstr "Sólo cuentas de %s pueden cambiar contraseña."
+
+#~ msgid "Captcha"
+#~ msgstr "Captcha"
+
+#~ msgid "Dates"
+#~ msgstr "Fechas"
+
+#~ msgid "Date/Time"
+#~ msgstr "Fecha/hora"
+
+#~ msgid "Content"
+#~ msgstr "Contenido"
+
+#~ msgid "Featured Image"
+#~ msgstr "Imagen destacada"
+
+#~ msgid "Status"
+#~ msgstr "Estado"
+
+#~ msgid "Order by"
+#~ msgstr "Ordenar por"
+
+#~ msgid "Default view"
+#~ msgstr "Vista predeterminada"
+
+#~ msgid "Search"
+#~ msgstr "Buscar"
+
+#~ msgid "Hashtags"
+#~ msgstr "Hashtags"
+
+#~ msgid "Your name"
+#~ msgstr "Tu nombre"
+
+#~ msgid "Email(s)"
+#~ msgstr "Correo(s) electrónico(s)"
+
+#~ msgid "Additional message"
+#~ msgstr "Mensaje adicional"
+
+#~ msgid "Posted in response / as an addition to"
+#~ msgstr "Publicado en respuesta/adición a"
+
+#~ msgid "Content:"
+#~ msgstr "Contenido:"
+
+#~ msgid "Search:"
+#~ msgstr "Buscar:"
+
+#~ msgid "Content with "
+#~ msgstr "Contenido con"
+
+#~ msgid "Users with "
+#~ msgstr "Usuarios con"
+
+#~ msgid "Tags:"
+#~ msgstr "Etiquetas:"
+
+#~ msgid "Search %s"
+#~ msgstr "Buscar %s"
+
+#~ msgid "Author(s)"
+#~ msgstr "Autor(es)"
+
+#~ msgid "In response to"
+#~ msgstr "En respuesta a"
+
+#~ msgid "Users"
+#~ msgstr "Usuarios"
+
+#~ msgid "Co-authors"
+#~ msgstr "Co-autores"
+
+#~ msgid "Users:"
+#~ msgstr "Usuarios:"
+
+#~ msgid "Type post title..."
+#~ msgstr "Escribir título del post..."
+
+#~ msgid "Type name..."
+#~ msgstr "Escribir el nombre…"
+
+#~ msgid ""
+#~ "Type emails here, separated by space or comma (\" \" or \",\"), or 1 "
+#~ "email per line"
+#~ msgstr ""
+#~ "Escriba los emails aquí, separados por espacio o coma (\" \" or \",\"), ó "
+#~ "1 email por línea"
+
+#~ msgid ""
+#~ "Co-authoring this post with other users? Select them all here, they will "
+#~ "not only appear as co-owners in the webpage, but will also be able to "
+#~ "edit this post."
+#~ msgstr ""
+#~ "Desea compartir la autoría de este post con otros usuarios? Selecciónelos "
+#~ "aquí, los mismos no sólo aparecerán como co-autores en la página web, "
+#~ "sino también serán capaces de editar este post."
+
+#~ msgid ""
+#~ "Please select all related content, so the reader can easily access this "
+#~ "inter-related information."
+#~ msgstr ""
+#~ "Por favor, seleccione todo el contenido relacionado, así el lector puede "
+#~ "acceder fácilmente a esta información relacionada."
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Send"
+#~ msgstr "Enviar"
+
+#~ msgid "Save"
+#~ msgstr "Guardar"
+
+#~ msgid "Update"
+#~ msgstr "Guardar cambios"
+
+#~ msgid "follow users"
+#~ msgstr "seguir a usuarios"
+
+#~ msgid "stop following users"
+#~ msgstr "dejar de seguir a usuarios"
+
+#~ msgid "recommend posts"
+#~ msgstr "recomendar posts"
+
+#~ msgid "stop recommending posts"
+#~ msgstr "dejar de recomendar posts"
+
+#~ msgid "up-vote posts"
+#~ msgstr "expresar estar de acuerdo con un post"
+
+#~ msgid "stop up-voting posts"
+#~ msgstr "dejar de estar de acuerdo con un post"
+
+#~ msgid "down-vote posts"
+#~ msgstr "expresar estar en desacuerdo con un post"
+
+#~ msgid "stop down-voting posts"
+#~ msgstr "dejar de estar en desacuerdo con un post"
+
+#~ msgid "Please %s to %s."
+#~ msgstr "Por favor %s para %s."
+
+#~ msgid "You need a %s account to access this functionality."
+#~ msgstr "Necesitás una cuenta de %s para acceder a esta funcionalidad."
+
+#~ msgid "Add new"
+#~ msgstr "Añadir nuevo"
+
+#~ msgid "Navigate"
+#~ msgstr "Navegar"
+
+#~ msgid "You are not logged in."
+#~ msgstr "Aún no has iniciado tu sesión."
+
+#~ msgid "Username or email"
+#~ msgstr "Nombre de usuario o correo electrónico"
+
+#~ msgid "Code"
+#~ msgstr "Código"
+
+#~ msgid "Get password reset code"
+#~ msgstr "Obtener código para restablecer la contraseña"
+
+#~ msgid "Reset password"
+#~ msgstr "Restablecer la contraseña"
+
+#~ msgid "Yes, please log me out"
+#~ msgstr "Sí, por favor finalizá mi sesión de usuario"
+
+#~ msgid "Still not there..."
+#~ msgstr "Aún no hemos terminado..."
+
+#~ msgid "Hurray, login successful!"
+#~ msgstr "¡Hurra, inicio de sesión exitoso!"
+
+#~ msgid "Add"
+#~ msgstr "Añadir"
+
+#~ msgid "You can now add posts and comments, follow users, etc"
+#~ msgstr "Ahora puedes agregar posts y comentarios, seguir a usuarios, etc"
+
+#~ msgid "Almost there..."
+#~ msgstr "Casi estamos..."
+
+#~ msgid ""
+#~ "We sent you an email with a code. Please copy it and <a href=\"%s\">paste "
+#~ "it here</a>."
+#~ msgstr ""
+#~ "Te hemos enviado un email con un código. Por favor, copiálo y <a href=\"%s"
+#~ "\">pegálo aquí</a>."
+
+#~ msgid "Please <a href=\"%s\">click here to log in</a>."
+#~ msgstr "Por favor, <a href=\"%s\">haga clic aquí para iniciar sesión</a>."
+
+#~ msgid "The code is missing"
+#~ msgstr "El código no puede ser vacío"
+
+#~ msgid "The code is not correct"
+#~ msgstr "El código no es correcto"
+
+#~ msgid "Password is missing"
+#~ msgstr "La contraseña no puede ser vacía"
+
+#~ msgid "The password must be at least 8 characters long."
+#~ msgstr "La contraseña debe tener al menos 8 caracteres de longitud."
+
+#~ msgid "Repeat password is missing"
+#~ msgstr "Repetir contraseña no puede estar vacía"
+
+#~ msgid "The passwords do not match"
+#~ msgstr "Las contraseñas no coinciden"
+
+#~ msgid ""
+#~ "The code is invalid or expired. Please <a href=\"%s\">generate it again</"
+#~ "a>."
+#~ msgstr ""
+#~ "El código es inválido o ha expirado. Por favor, <a href=\"%s\">generálo "
+#~ "de nuevo</a>."
+
+#~ msgid "Logged out now"
+#~ msgstr "Sesión finalizada"
+
+#~ msgid "But please make sure to come back!"
+#~ msgstr "¡Pero por favor asegúrese de volver!"
+
+#~ msgid "You are already logged in, please %s first to re-set your password."
+#~ msgstr ""
+#~ "Ya has iniciado sesión en el sitio web, por favor primero %s para "
+#~ "restablecer tu contraseña."
+
+#~ msgid ""
+#~ "Please type in your account username or email, and you will receive a "
+#~ "code in your email to reset your password."
+#~ msgstr ""
+#~ "Por favor escribí tu nombre de usuario o email, y recibirás un código en "
+#~ "tu email para restablecer tu contraseña."
+
+#~ msgid "We sent you an email with a code."
+#~ msgstr "Te hemos enviado un email con un código."
+
+#~ msgid ""
+#~ "Please copy/paste it in the input below, and choose your new password."
+#~ msgstr ""
+#~ "Por favor, copiálo y pegálo en la entrada acá abajo, y elegí tu nueva "
+#~ "contraseña."
+
+#~ msgid "Are you sure you want to log out?"
+#~ msgstr "¿Estás seguro que querés finalizar tu sesión?"
+
+#~ msgid "Resource type"
+#~ msgstr "Tipo de recurso"
+
+#~ msgid "Is Resource"
+#~ msgstr "Es recurso"
+
+#~ msgid "Invite successful!"
+#~ msgstr "¡Invitación enviada con éxito!"
+
+#~ msgid "Embed:"
+#~ msgstr "Insertar código HTML:"
+
+#~ msgid "Copy Search URL:"
+#~ msgstr "Copiar URL de la búsqueda:"
+
+#~ msgid "Embed code"
+#~ msgstr "Insertar código"
+
+#~ msgid "Preview:"
+#~ msgstr "Vista previa:"
+
+#~ msgid "Please copy/paste the html code below into your website."
+#~ msgstr "Por favor, copiá y pegá el siguiente código HTML en tu sitio web."
+
+#~ msgid "Please select and copy (Ctrl + C) the URL below."
+#~ msgstr "Por favor, seleccioná y copiá (Ctrl + C) la URL aquí abajo."
+
+#~ msgid "Nothing here"
+#~ msgstr "Nada aquí"
+
+#~ msgid "No contact details"
+#~ msgstr "Sin detalles de contacto"
+
+#~ msgid "Responses"
+#~ msgstr "Respuestas"
+
+#~ msgid "Contact info"
+#~ msgstr "Información de contacto"
+
+#~ msgid "Google+"
+#~ msgstr "Google+"
+
+#~ msgid "Welcome"
+#~ msgstr "Bienvenido/a"
+
+#~ msgid "You are already logged in as"
+#~ msgstr "Has iniciado tu sesión como"
+
+#~ msgid "Logout?"
+#~ msgstr "¿Finalizar sesión?"
+
+#~ msgid "Write a comment"
+#~ msgstr "Escribir un comentario"
+
+#~ msgid "Volunteer!"
+#~ msgstr "¡Ofrecerme como voluntario!"
+
+#~ msgid "Flag"
+#~ msgstr "Marcar como inapropiado"
+
+#~ msgid "Click to Volunteer"
+#~ msgstr "Ofrecerme como voluntario"
+
+#~ msgid "Send message"
+#~ msgstr "Enviar Mensaje"
+
+#~ msgid "Reply"
+#~ msgstr "Respuesta"
+
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#~ msgid "DD/MM/YYYY h:mm A"
+#~ msgstr "DD/MM/YYYY H:mm"
+
+#~ msgid "Open all"
+#~ msgstr "Abrir todos"
+
+#~ msgid "Show in Navigator"
+#~ msgstr "Mostrar en el navegador"
+
+#~ msgid "Information"
+#~ msgstr "Información"
+
+#~ msgid "In response/as an addition to"
+#~ msgstr "En respuesta/adición a"
+
+#~ msgid "No access allowed"
+#~ msgstr "Acceso no permitido"
+
+#~ msgid "There was a problem, please contact the website admin"
+#~ msgstr ""
+#~ "Hubo un problema, por favor póngase en contacto con el administrador del "
+#~ "sitio web"
+
+#~ msgid "You do not have permissions to edit this attachment"
+#~ msgstr "Usted no tiene permisos para editar este adjunto"
+
+#~ msgid "(None)"
+#~ msgstr "(ninguno)"
+
+#~ msgid "Download"
+#~ msgstr "Descargar"
+
+#~ msgid "There is no user with this username or email."
+#~ msgstr ""
+#~ "No existe ningún usuario con este nombre de usuario o correo electrónico."
+
+#~ msgid "Please supply your username or email."
+#~ msgstr "Por favor escriba su nombre de usuario o correo electrónico."
+
+#~ msgid "%s: Password Reset"
+#~ msgstr " %s: Re-establecimiento de la contraseña"
+
+#~ msgid "Your user: "
+#~ msgstr "Tu usuario:"
+
+#~ msgid "Your new password: "
+#~ msgstr "Tu nueva contraseña:"
+
+#~ msgid "Click here to log-in: "
+#~ msgstr "Hacé click aquí para iniciar sesión:"
+
+#~ msgid "Login to %s"
+#~ msgstr "Iniciar sesión en %s"
+
+#~ msgid "The e-mail could not be sent."
+#~ msgstr "El email no pudo ser enviado."
+
+#~ msgid "Possible reason: your host may have disabled the mail() function."
+#~ msgstr ""
+#~ "Posible razón: el admin puede haber deshabilitado la función mail()."
+
+#~ msgid "Avatar"
+#~ msgstr "Avatar"
+
+#~ msgid "Profile photo"
+#~ msgstr "Foto de perfil"
+
+#~ msgid "Upload photo"
+#~ msgstr "Subir foto"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "Desplazarse hacia abajo para cargar más resultados"
+
+#~ msgid ""
+#~ "Please log in using your <strong>%s</strong> account to add a comment:"
+#~ msgstr ""
+#~ "Por favor inicie sesión usando su cuenta de <strong>%s</strong> para "
+#~ "añadir un comentario:"
+
+#~ msgid "All Content"
+#~ msgstr "Todo el contenido"
+
+#~ msgid "Add response/additional"
+#~ msgstr "Añadir respuesta/adicional"
+
+#~ msgid "Awesome! Your Profile was created successfully!"
+#~ msgstr "¡Buenísimo! Tu perfil fue creado con éxito"
+
+#~ msgid "Please %s first to create a new Profile."
+#~ msgstr "Por favor primero %s para crear un nuevo perfil."
+
+#~ msgid "Display email in your Profile?"
+#~ msgstr "Hacer tu correo electrónico visible a todos los usuarios?"
+
+#~ msgid "Picture updated successfully."
+#~ msgstr "Foto actualizada satisfactoriamente."
+
+#~ msgid "Such a good shot!"
+#~ msgstr "¡Qué buena foto!"
+
+#~ msgid "Please <a href=\"%s\">log in</a> to update your picture."
+#~ msgstr ""
+#~ "Por favor <a href=\"%s\">iniciá tu sesión</a> para actualizar tu foto."
+
+#~ msgid "Only %s accounts can update their picture."
+#~ msgstr "Solo cuentas de %s pueden actualizar la foto."
+
+#~ msgid "Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "Picture"
+#~ msgstr "Foto"
+
+#~ msgid "Type comment here..."
+#~ msgstr "Escribir comentario aquí..."
+
+#~ msgid "Locations"
+#~ msgstr "Ubicaciones"
+
+#~ msgid ""
+#~ "If you can't find the location in the input below, click on the \"+\" "
+#~ "button to add a new one."
+#~ msgstr ""
+#~ "Si no puede encontrar la ubicación en la entrada debajo, haga click en el "
+#~ "botón \"+\" para añadir una nueva."
+
+#~ msgid "Content with \"%QUERY\""
+#~ msgstr "Contenido con “%QUERY”"
+
+#~ msgid "Users with \"%QUERY\""
+#~ msgstr "Usuarios con “%QUERY”"
+
+#~ msgid "Extracts from our users"
+#~ msgstr "Extractos de nuestros usuarios"
+
+#~ msgid "Ready to connect the green dots?"
+#~ msgstr "Ready to connect the green dots?"
+
+#~ msgid "Phew, password reseted..."
+#~ msgstr "Ufff, contraseña reseteada."
+
+#~ msgid "We sent you an email. Please <a href=\"%s\">click here to log in</a>"
+#~ msgstr ""
+#~ "Te hemos enviado un correo electrónico. Por favor, <a href=\"%s\">haga "
+#~ "clic aquí para iniciar sesión</a>"
+
+#~ msgid "Lost password"
+#~ msgstr "Contraseña perdida"
+
+#~ msgid "<p><em>Please log in:</em></p>"
+#~ msgstr "<p><em>Por favor iniciar sesión:</em></p>"
+
+#~ msgid "Title:"
+#~ msgstr "Titulo:"
+
+#~ msgid "Source"
+#~ msgstr "Origen"
+
+#~ msgid "Is resource:"
+#~ msgstr "Es recurso:"
+
+#~ msgid "Description:"
+#~ msgstr "Descripción:"
+
+#~ msgid "No items"
+#~ msgstr "No hay items"
+
+#~ msgid "In response/addition to"
+#~ msgstr "En respuesta/adición a"
+
+#~ msgid "Responses / Additionals"
+#~ msgstr "Respuestas/adicionales"

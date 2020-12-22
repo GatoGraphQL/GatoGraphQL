@@ -1,0 +1,8 @@
+services:
+    PoPSchema\Pages\Conditional\API\RouteModuleProcessors\:
+        resource: '../src/Conditional/API/RouteModuleProcessors/*'
+        public: true
+
+    PoPSchema\Pages\Conditional\RESTAPI\RouteModuleProcessors\:
+        resource: '../src/Conditional/RESTAPI/RouteModuleProcessors/*'
+        public: true

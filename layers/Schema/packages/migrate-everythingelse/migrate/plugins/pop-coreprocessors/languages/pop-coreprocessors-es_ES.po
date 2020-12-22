@@ -1,0 +1,2119 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PoP Core Processors\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-26 13:44+0200\n"
+"PO-Revision-Date: 2017-08-26 13:45+0200\n"
+"Last-Translator: Leo\n"
+"Language-Team: Leo Jun-E <info@mesym.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.3\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././library/captcha/captcha.php:25
+msgid "Captcha was not generated properly, please refresh page."
+msgstr ""
+"El captcha no se ha generado correctamente, por favor actualice la página."
+
+#: .././library/captcha/captcha.php:32
+msgid "Captcha is empty."
+msgstr "El captcha no puede estar vacío."
+
+#: .././library/captcha/captcha.php:41
+msgid "Captcha doesn't match."
+msgstr "El captcha no coincide."
+
+#: .././library/core.php:20
+msgid "Post"
+msgstr "Post"
+
+#: .././library/date.php:30
+msgid "Apply"
+msgstr "Aplicar"
+
+#: .././library/date.php:31 .././library/tabs.php:29
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .././library/date.php:32
+msgid "From"
+msgstr "Desde"
+
+#: .././library/date.php:33
+msgid "To"
+msgstr "Hasta"
+
+#: .././library/date.php:34
+msgid "Custom Range"
+msgstr "Rango personalizado"
+
+#: .././library/date.php:35
+msgid "DD/MM/YYYY"
+msgstr "DD/MM/YYYY"
+
+#: .././library/date.php:36
+msgid "h:mm A"
+msgstr "H:mm"
+
+#: .././library/date.php:38
+msgid "Su"
+msgstr "Do"
+
+#: .././library/date.php:39
+msgid "Mo"
+msgstr "Lu"
+
+#: .././library/date.php:40
+msgid "Tu"
+msgstr "Ma"
+
+#: .././library/date.php:41
+msgid "We"
+msgstr "Mi"
+
+#: .././library/date.php:42
+msgid "Th"
+msgstr "Ju"
+
+#: .././library/date.php:43
+msgid "Fr"
+msgstr "Vi"
+
+#: .././library/date.php:44
+msgid "Sa"
+msgstr "Sá"
+
+#: .././library/date.php:47
+msgid "January"
+msgstr "Enero"
+
+#: .././library/date.php:48
+msgid "February"
+msgstr "Febrero"
+
+#: .././library/date.php:49
+msgid "March"
+msgstr "Marzo"
+
+#: .././library/date.php:50
+msgid "April"
+msgstr "Abril"
+
+#: .././library/date.php:51
+msgid "May"
+msgstr "Mayo"
+
+#: .././library/date.php:52
+msgid "June"
+msgstr "Junio"
+
+#: .././library/date.php:53
+msgid "July"
+msgstr "Julio"
+
+#: .././library/date.php:54
+msgid "August"
+msgstr "Agosto"
+
+#: .././library/date.php:55
+msgid "September"
+msgstr "Septiembre"
+
+#: .././library/date.php:56
+msgid "October"
+msgstr "Octubre"
+
+#: .././library/date.php:57
+msgid "November"
+msgstr "Noviembre"
+
+#: .././library/date.php:58
+msgid "December"
+msgstr "Diciembre"
+
+#: .././library/editor/editor.php:192
+msgid "Add Photo/File"
+msgstr "Añadir Foto/Archivo"
+
+#: .././library/editor/editor.php:198
+msgid "Add Image Gallery"
+msgstr "Añadir Galería de Imágenes"
+
+#: .././library/editor/editor.php:206
+msgid "Embed Youtube videos, Tweets or others"
+msgstr "Agregar videos de Youtube, Twits y otros"
+
+#: .././library/editor/editor.php:212
+msgid ""
+"<p>To embed a video or another object, simply place its URL into the content "
+"area. Make sure the URL is on its own line and not hyperlinked. For example:"
+"</p><pre>Check out this cool video:\n"
+"\n"
+"https://www.youtube.com/watch?v=sxm3Xyutc1s\n"
+"\n"
+"That is a lovely tango!</pre><p>You can embed URLs from all these services:</"
+"p><p><i class=\"fa fa-fw fa-flickr\"></i>Flickr, <i class=\"fa fa-fw fa-"
+"instagram\"></i>Instagram, <i class=\"fa fa-fw fa-reddit\"></i>Reddit, <i "
+"class=\"fa fa-fw fa-slideshare\"></i>SlideShare, <i class=\"fa fa-fw fa-"
+"soundcloud\"></i>SoundCloud, <i class=\"fa fa-fw fa-spotify\"></i>Spotify, "
+"<i class=\"fa fa-fw fa-twitter\"></i>Twitter, <i class=\"fa fa-fw fa-vimeo"
+"\"></i>Vimeo, <i class=\"fa fa-fw fa-vine\"></i>Vine, <i class=\"fa fa-fw fa-"
+"youtube\"></i>YouTube, and others.</p>"
+msgstr ""
+"<p>Para incrustar un video u otro objeto, simplemente pegue su URL en el "
+"área de contenido. Asegúrese de que la URL esté en su propia línea y no "
+"tenga enlace. Por ejemplo: </p><pre>Mirá este video copado:\n"
+"\n"
+"https://www.youtube.com/watch?v=sxm3Xyutc1s\n"
+"\n"
+"Qué tango tan hermoso!</pre><p>Se pueden incrustar URLs de todos estos "
+"servicios:</p><p><i class=“fa fa-fw fa-flickr”></i>Flickr, <i class=“fa fa-"
+"fw fa-instagram”></i>Instagram, <i class=“fa fa-fw fa-reddit”></i>Reddit, <i "
+"class=“fa fa-fw fa-slideshare”></i>SlideShare, <i class=“fa fa-fw fa-"
+"soundcloud”></i>SoundCloud, <i class=“fa fa-fw fa-spotify”></i>Spotify, <i "
+"class=“fa fa-fw fa-twitter”></i>Twitter, <i class=“fa fa-fw fa-vimeo”></"
+"i>Vimeo, <i class=“fa fa-fw fa-vine”></i>Vine, <i class=“fa fa-fw fa-"
+"youtube”></i>YouTube, y otros.</p>"
+
+#: .././library/login/login.php:22
+#: .././pop-library/processors/login/forms/submit-buttons.php:31
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+#: .././library/login/login.php:22
+msgid "log in"
+msgstr "iniciar sesión"
+
+#: .././library/media.php:52
+msgid "Upload media files"
+msgstr "Subir archivos"
+
+#: .././library/media.php:55
+msgid "Set"
+msgstr "Establecer"
+
+#: .././library/mentions/tinymce.php:64
+msgid "#Hashtags"
+msgstr "#Hashtags"
+
+#: .././library/multiselect.php:12
+msgid "None selected"
+msgstr "Ninguna seleccionada"
+
+#: .././library/multiselect.php:13
+msgid "selected"
+msgstr "seleccionadas"
+
+#: .././library/multiselect.php:14
+msgid "All selected"
+msgstr "Todas seleccionadas"
+
+#: .././library/tabs.php:24
+msgid "Accept"
+msgstr "Aceptar"
+
+#: .././library/tabs.php:39
+msgid "Remember"
+msgstr "Recordar"
+
+#: .././library/tabs.php:50
+msgid "Reopen previous session tabs?"
+msgstr "Abrir tabs de la sesión anterior?"
+
+#: .././library/users/user-registration.php:44
+msgid "Title"
+msgstr "Título"
+
+#: .././library/users/user-registration.php:48
+msgid "Short Description"
+msgstr "Descripción breve"
+
+#: .././library/users/user-registration.php:52
+#: .././library/users/user-registration.php:55
+msgid "Display email in the Profile page?"
+msgstr ""
+"¿Hacer tu dirección de correo electrónico visible a todos los usuarios?"
+
+#: .././library/users/user-registration.php:61
+msgid "User preferences"
+msgstr "Preferencias de usuario"
+
+#: .././library/users/user-registration.php:62
+#: .././pop-library/processors/createupdateuser/forms/codes.php:35
+msgid "Email notifications"
+msgstr "Notificaciones por email"
+
+#: .././library/users/user-registration.php:63
+#: .././pop-library/processors/createupdateuser/forms/codes.php:48
+msgid "General:"
+msgstr "General:"
+
+#: .././library/users/user-registration.php:66
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:54
+msgid "New content is posted on the website"
+msgstr "Nuevo contenido es agregado al sitio web"
+
+#: .././library/users/user-registration.php:72
+#: .././pop-library/processors/createupdateuser/forms/codes.php:49
+msgid "A user on my network:"
+msgstr "Un usuario en mi red:"
+
+#: .././library/users/user-registration.php:75
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:58
+msgid "Created content"
+msgstr "Contenido"
+
+#: .././library/users/user-registration.php:81
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:62
+msgid "Recommends content"
+msgstr "Recomienda contenido"
+
+#: .././library/users/user-registration.php:87
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:66
+msgid "Follows another user"
+msgstr "Sigue a otro usuario"
+
+#: .././library/users/user-registration.php:93
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:70
+msgid "Subscribed to a topic"
+msgstr "Suscrito a un tópico"
+
+#: .././library/users/user-registration.php:99
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:74
+msgid "Added a comment"
+msgstr "Añadió un comentario"
+
+#: .././library/users/user-registration.php:105
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:78
+msgid "Up/down-voted a highlight"
+msgstr "Evaluó un destacado"
+
+#: .././library/users/user-registration.php:113
+msgid "Joins a community"
+msgstr "Se une a una comunidad"
+
+#: .././library/users/user-registration.php:120
+#: .././pop-library/processors/createupdateuser/forms/codes.php:50
+msgid "A topic I am subscribed to:"
+msgstr "Un tópico al que estoy suscrito:"
+
+#: .././library/users/user-registration.php:123
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:86
+msgid "Has new content"
+msgstr "Tiene nuevo contenido"
+
+#: .././library/users/user-registration.php:129
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:90
+msgid "Has a comment added"
+msgstr "Tiene un comentario añadido"
+
+#: .././library/users/user-registration.php:135
+#: .././pop-library/processors/createupdateuser/forms/codes.php:36
+msgid "Email digests"
+msgstr "Resúmenes por email"
+
+#: .././library/users/user-registration.php:138
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:94
+msgid "New content by the community (weekly)"
+msgstr "Nuevo contenido de nuestra comunidad (semanal)"
+
+#: .././library/users/user-registration.php:144
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:98
+msgid "Upcoming events (weekly)"
+msgstr "Eventos próximos (semanal)"
+
+#: .././library/users/user-registration.php:150
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:102
+msgid "My notifications (daily)"
+msgstr "Mis notificaciones (diario)"
+
+#: .././library/users/user-registration.php:156
+msgid "Special posts"
+msgstr "Posts especiales"
+
+#: .././pop-library/constants.php:8
+msgid "Loading"
+msgstr "Cargando"
+
+#: .././pop-library/constants.php:9
+msgid "Ops, there was a connection problem."
+msgstr "Ops, hubo un problema con la conexión."
+
+#: .././pop-library/constants.php:10
+msgid "It seems you are offline."
+msgstr "Parece que estás offline."
+
+#: .././pop-library/constants.php:11
+msgid "Retry"
+msgstr "Reintentar"
+
+#: .././pop-library/constants.php:16
+msgid "(<em>{0}</em>) {1}"
+msgstr "(<em>{0}</em>) {1}"
+
+#: .././pop-library/constants.php:92
+msgid "Ops, this is a broken link."
+msgstr "Ops, este es un enlace roto."
+
+#: .././pop-library/constants.php:127
+msgid ""
+"Ops, the upload failed. Let's fix this: please save your post as 'Draft', "
+"refresh the browser window, and try again."
+msgstr ""
+"Ops, hubo un problema subiendo el archivo. Vamos a arreglar esto: por favor, "
+"guarde el post como 'borrador', refresque la ventana del navegador, y pruebe "
+"de nuevo."
+
+#: .././pop-library/dataload/actionexecuters/downvotepost.php:32
+#, php-format
+msgid "You have down-voted <em><strong>%s</strong></em>."
+msgstr "Has expresado estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/email-invite.php:34
+#, php-format
+msgid "Invitation sent to the following emails: <strong>%s</strong>"
+msgstr "Invitación enviada a los siguientes correos: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/followuser.php:32
+#, php-format
+msgid "You are now following <em><strong>%s</strong></em>."
+msgstr "Ahora estás siguiendo a <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/downvotepost.php:25
+#, php-format
+msgid "You have already down-voted <em><strong>%s</strong></em>."
+msgstr "Ya has expresado estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:107
+#, php-format
+msgid "The following emails are invalid: <strong>%s</strong>"
+msgstr "Los siguientes emails son inválidos: <strong>%s</strong>"
+
+#: .././pop-library/dataload/actionexecuters/library/email-invite.php:113
+msgid "Email(s) cannot be empty."
+msgstr "Correo(s) electrónico(s) no puede estar vacío."
+
+#: .././pop-library/dataload/actionexecuters/library/followuser.php:22
+msgid "You can't follow yourself!"
+msgstr "¡No puedes seguirte a tu mismo!"
+
+#: .././pop-library/dataload/actionexecuters/library/followuser.php:31
+#, php-format
+msgid "You are already following <em><strong>%s</strong></em>."
+msgstr "Ya estás siguiendo a <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:25
+#, php-format
+msgid "<p>%s is inviting you to join %s!</p>"
+msgstr "<p>¡%s te está invitando a unirte a %s!</p>"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:33
+#, php-format
+msgid "<p>You have been invited to join %s!</p>"
+msgstr "<p>¡Has sido invitado a unirte a %s!</p>"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:58
+#, php-format
+msgid "What is %s?"
+msgstr "¿Qué es %s?"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:65
+msgid "Check it out here"
+msgstr "Averigüálo aquí"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:79
+#, php-format
+msgid "%s is inviting you to join %s!"
+msgstr "¡%s te está invitando a unirte a %s!"
+
+#: .././pop-library/dataload/actionexecuters/library/inviteusers.php:87
+#, php-format
+msgid "You have been invited to join %s!"
+msgstr "¡Has sido invitado a unirte a %s!"
+
+#: .././pop-library/dataload/actionexecuters/library/post-update-user-metavalue.php:27
+msgid "The requested post does not exist."
+msgstr "El post solicitado no existe."
+
+#: .././pop-library/dataload/actionexecuters/library/post-update-user-metavalue.php:34
+msgid "The requested functionality does not apply on this post."
+msgstr "La funcionalidad no se puede aplicar en este post."
+
+#: .././pop-library/dataload/actionexecuters/library/recommendpost.php:25
+#, php-format
+msgid "You have already recommended <em><strong>%s</strong></em>."
+msgstr "Ya has recomendado <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/subscribetotag.php:26
+#, php-format
+msgid "You have already subscribed to <em><strong>%s</strong></em>."
+msgstr "Ya te has suscrito a <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/subscribetounsubscribefromtag.php:22
+msgid "The requested topic/tag does not exist."
+msgstr "El tag/tópico solicitado no existe."
+
+#: .././pop-library/dataload/actionexecuters/library/undo-downvotepost.php:25
+#, php-format
+msgid "You had not down-voted <em><strong>%s</strong></em>."
+msgstr ""
+"No habías expresado estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/undo-upvotepost.php:25
+#, php-format
+msgid "You had not up-voted <em><strong>%s</strong></em>."
+msgstr "No habías expresado estar de acuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/unfollowuser.php:25
+#, php-format
+msgid "You were not following <em><strong>%s</strong></em>."
+msgstr "No estabas siguiendo <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/unrecommendpost.php:25
+#, php-format
+msgid "You had not recommended <em><strong>%s</strong></em>."
+msgstr "No habías recomendado <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/unsubscribefromtag.php:26
+#, php-format
+msgid "You had not subscribed to <em><strong>%s</strong></em>."
+msgstr "No estabas suscrito a <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/update-user-metavalue.php:15
+msgid "This URL is incorrect."
+msgstr "Esta URL es incorrecta."
+
+#: .././pop-library/dataload/actionexecuters/library/upvotepost.php:25
+#, php-format
+msgid "You have already up-voted <em><strong>%s</strong></em>."
+msgstr "Ya has expresado estar de acuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/library/user-update-user-metavalue.php:22
+msgid "The requested user does not exist."
+msgstr "El usuario solicitado no existe."
+
+#: .././pop-library/dataload/actionexecuters/recommendpost.php:32
+#, php-format
+msgid "You have recommended <em><strong>%s</strong></em>."
+msgstr "Has recomendado <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/subscribetotag.php:33
+#, php-format
+msgid "You have subscribed to <em><strong>%s</strong></em>."
+msgstr "Te has suscrito a <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/undo-downvotepost.php:32
+#, php-format
+msgid "You have stopped down-voting <em><strong>%s</strong></em>."
+msgstr "Has dejado de estar en desacuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/undo-upvotepost.php:32
+#, php-format
+msgid "You have stopped up-voting <em><strong>%s</strong></em>."
+msgstr "Has dejado de estar de acuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/unfollowuser.php:32
+#, php-format
+msgid "You have stopped following <em><strong>%s</strong></em>."
+msgstr "Has dejado de seguir a <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/unrecommendpost.php:32
+#, php-format
+msgid "You have stopped recommending <em><strong>%s</strong></em>."
+msgstr "Has dejado de recomendar <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/unsubscribefromtag.php:33
+#, php-format
+msgid "You have unsubscribed from <em><strong>%s</strong></em>."
+msgstr "Te has desuscrito de <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/actionexecuters/update-mypreferences.php:30
+msgid "You have successfully updated your preferences."
+msgstr "Has editado editado tus preferencias en forma exitosa."
+
+#: .././pop-library/dataload/actionexecuters/upvotepost.php:32
+#, php-format
+msgid "You have up-voted <em><strong>%s</strong></em>."
+msgstr "Has expresado estar de acuerdo con <em><strong>%s</strong></em>."
+
+#: .././pop-library/dataload/crawlabledataprinters/_crawlabledataprinter-posts-hook.php:22
+#, php-format
+msgid "<p>%s: %s</p>"
+msgstr "<p>%s: %s</p>"
+
+#: .././pop-library/dataload/crawlabledataprinters/_crawlabledataprinter-posts-hook.php:23
+msgid "Link"
+msgstr "Enlace"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-posts-utils.php:16
+msgid "Source: "
+msgstr "Fuente: "
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-posts-utils.php:117
+msgid "Load link"
+msgstr "Cargar link"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-posts-utils.php:136
+msgid "Open link in new tab"
+msgstr "Abrir link en una nueva pestaña"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users-hook.php:57
+msgid "Website"
+msgstr "Sitio web"
+
+#: .././pop-library/dataload/fieldprocessors/fieldprocessor-users-hook.php:69
+#: .././pop-library/processors/controls/anchor-controls.php:113
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:45
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:21
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus-description.php:18
+msgid "Draft (still editing)"
+msgstr "Borrador (editando)"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:22
+msgid "Finished editing"
+msgstr "Terminado de editar"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus-description.php:23
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus-description.php:19
+msgid "Already published"
+msgstr "Ya publicado"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:18
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus.php:18
+#: .././pop-library/processors/abstract-classes/layouts/published-base.php:27
+msgid "Draft"
+msgstr "Borrador"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:19
+msgid "Pending to be published"
+msgstr "A la espera de ser publicado"
+
+#: .././pop-library/formcomponent-inputs/implementations/moderatedstatus.php:20
+#: .././pop-library/formcomponent-inputs/implementations/unmoderatedstatus.php:19
+#: .././pop-library/processors/abstract-classes/layouts/published-base.php:25
+msgid "Published"
+msgstr "Publicado"
+
+#: .././pop-library/formcomponent-inputs/implementations/yesno-multi.php:18
+#: .././pop-library/formcomponent-inputs/implementations/yesno.php:18
+msgid "Yes"
+msgstr "Sí"
+
+#: .././pop-library/formcomponent-inputs/implementations/yesno-multi.php:19
+#: .././pop-library/formcomponent-inputs/implementations/yesno.php:19
+msgid "No"
+msgstr "No"
+
+#: .././pop-library/processors/_domain/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Domain Initialization"
+msgstr "Inicialización del Dominio"
+
+#: .././pop-library/processors/_domain/messagefeedbacks/messagefeedbacks-layouts.php:28
+msgid "The domain is empty."
+msgstr "El dominio está vacío."
+
+#: .././pop-library/processors/_domain/messagefeedbacks/messagefeedbacks-layouts.php:30
+#, php-format
+msgid "Domain <strong>%s</strong> is not valid."
+msgstr "El dominio <strong>%s</strong> no es válido."
+
+#: .././pop-library/processors/abstract-classes/alerts-base.php:36
+msgid "Dismiss"
+msgstr "Descartar"
+
+#: .././pop-library/processors/abstract-classes/elements/fetchmore-base.php:47
+msgid "Load more"
+msgstr "Cargar más"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/editor-formcomponents-base.php:183
+msgid "Please write the content here..."
+msgstr "Por favor, escriba el contenido aquí..."
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:44
+msgid "Set Featured Image"
+msgstr "Establecer la imagen destacada"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:45
+msgid "Remove"
+msgstr "Eliminar"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/featuredimage/featuredimageinner-formcomponents-base.php:47
+#, php-format
+msgid "Please %s to set the featured image."
+msgstr "Por favor, %s para establecer la imagen destacada."
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/post-typeaheadcomponent-formcomponents-base.php:39
+msgid "Loading Content"
+msgstr "Cargando contenido"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/post-typeaheadcomponent-formcomponents-base.php:43
+msgid "No Content found"
+msgstr "No se encontró contenido"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/selectabletypeahead-formcomponents-base.php:87
+msgid "Suggestions"
+msgstr "Sugerencias"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/tag-typeaheadcomponent-formcomponents-base.php:66
+msgid "Loading Tags"
+msgstr "Cargando etiquetas"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/tag-typeaheadcomponent-formcomponents-base.php:70
+msgid "No Tags found"
+msgstr "No se encontraron etiquetas"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/typeaheadcomponent-formcomponents-base.php:104
+msgid "Loading Suggestions"
+msgstr "Cargando sugerencias"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/typeaheadcomponent-formcomponents-base.php:108
+msgid "No Results"
+msgstr "No hay resultados"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/user-typeaheadcomponent-formcomponents-base.php:49
+msgid "Loading Users"
+msgstr "Cargando usuarios"
+
+#: .././pop-library/processors/abstract-classes/formcomponents/typeaheads/user-typeaheadcomponent-formcomponents-base.php:53
+msgid "No Users found"
+msgstr "No se encontraron usuarios"
+
+#: .././pop-library/processors/abstract-classes/forms/submit-buttons-base.php:16
+msgid "Submit"
+msgstr "Enviar"
+
+#: .././pop-library/processors/abstract-classes/layouts/embedpreviews-base.php:35
+msgid "Source:"
+msgstr "Origen:"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:32
+msgid "post"
+msgstr "post"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:37
+msgid "posts"
+msgstr "posts"
+
+#: .././pop-library/processors/abstract-classes/layouts/latestcounts/latestcounts-base.php:45
+#, php-format
+msgid "View %s new %s"
+msgstr "Ver %s nuevos %s"
+
+#: .././pop-library/processors/abstract-classes/layouts/maxheight-layouts-base.php:55
+msgid "Show more"
+msgstr "Mostrar más"
+
+#: .././pop-library/processors/abstract-classes/layouts/maxheight-layouts-base.php:56
+msgid "Show less"
+msgstr "Mostrar menos"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/form-messagefeedbacklayouts-base.php:13
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:42
+msgid "Ops, there were some problems:"
+msgstr "Ops, hubo algunos problemas:"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/form-messagefeedbacklayouts-base.php:14
+msgid "Success!"
+msgstr "¡Éxito!"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/list-messagefeedbacklayouts-base.php:13
+msgid "No results"
+msgstr "No hay resultados"
+
+#: .././pop-library/processors/abstract-classes/layouts/messagefeedbacks/list-messagefeedbacklayouts-base.php:14
+msgid "No more results found"
+msgstr "No se encontraron más resultados"
+
+#: .././pop-library/processors/abstract-classes/layouts/posts/previewpostlayouts-base.php:325
+msgid "Go to permalink"
+msgstr "Ir al permalink"
+
+#: .././pop-library/processors/abstract-classes/layouts/published-base.php:26
+msgid "Pending"
+msgstr "Pendiente"
+
+#: .././pop-library/processors/abstract-classes/layouts/taginfo-base.php:25
+msgid "Count"
+msgstr "Número"
+
+#: .././pop-library/processors/abstract-classes/layouts/userquicklinks-base.php:22
+msgid "No contact channels"
+msgstr "Sin métodos de contacto"
+
+#: .././pop-library/processors/abstract-classes/socialmedia/socialmedia-items-base.php:96
+#, php-format
+msgid "Share on %s"
+msgstr "Compartir en %s"
+
+#: .././pop-library/processors/abstract-classes/structures/carousels/controls/button-controls.php:27
+msgid "Previous"
+msgstr "Anterior"
+
+#: .././pop-library/processors/abstract-classes/structures/carousels/controls/button-controls.php:31
+msgid "Next"
+msgstr "Siguiente"
+
+#: .././pop-library/processors/abstract-classes/structures/menus/segmentedbuttonlayouts-base.php:58
+msgid "Toggle menu"
+msgstr "Abrir/Cerrar el menú"
+
+#: .././pop-library/processors/abstract-classes/viewcomponents/replycomment-headers-base.php:43
+#: .././pop-library/processors/comments/blockgroups.php:131
+msgid "In response to:"
+msgstr "En respuesta a:"
+
+#: .././pop-library/processors/blocks/blocks.php:35
+#, php-format
+msgid "Send an invite to your friends to join <em><strong>%s</strong></em>:"
+msgstr ""
+"Enviá una invitación a tus amigos para sumarse a <em><strong>%s</strong></"
+"em>:"
+
+#: .././pop-library/processors/blocks/blocks.php:220
+#: .././pop-library/processors/comments/blocks.php:175
+#: .././pop-library/processors/login/blocks.php:174
+msgid "Sending..."
+msgstr "Enviando..."
+
+#: .././pop-library/processors/buttons/buttoninners.php:170
+#: .././pop-library/processors/buttons/buttons.php:279
+#: .././pop-library/processors/comments/structures/scrolls/widgetries.php:58
+#: .././pop-library/processors/comments/structures/scrolls/widgetries.php:59
+msgid "Comments"
+msgstr "Comentarios"
+
+#: .././pop-library/processors/buttons/buttoninners.php:174
+#: .././pop-library/processors/buttons/buttons.php:253
+msgid "Quickview"
+msgstr "Vista rápida"
+
+#: .././pop-library/processors/buttons/buttoninners.php:178
+#: .././pop-library/processors/buttons/buttons.php:258
+#: .././pop-library/processors/controls/anchor-controls.php:93
+msgid "Print"
+msgstr "Imprimir"
+
+#: .././pop-library/processors/buttons/buttoninners.php:182
+#: .././pop-library/processors/buttons/buttons.php:262
+msgid "Edit"
+msgstr "Editar"
+
+#: .././pop-library/processors/buttons/buttoninners.php:186
+#: .././pop-library/processors/buttons/buttons.php:266
+msgid "View"
+msgstr "Ver"
+
+#: .././pop-library/processors/buttons/buttoninners.php:190
+#: .././pop-library/processors/buttons/buttons.php:270
+msgid "Preview"
+msgstr "Previsualizar"
+
+#: .././pop-library/processors/buttons/buttoninners.php:194
+#: .././pop-library/processors/buttons/buttons.php:274
+#: .././pop-library/processors/controls/anchor-controls.php:89
+msgid "Permalink"
+msgstr "Permalink"
+
+#: .././pop-library/processors/buttons/buttoninners.php:199
+#: .././pop-library/processors/buttons/buttons.php:284
+msgid "Follow"
+msgstr "Seguir"
+
+#: .././pop-library/processors/buttons/buttoninners.php:204
+#: .././pop-library/processors/buttons/buttons.php:289
+msgid "Following"
+msgstr "Siguiendo"
+
+#: .././pop-library/processors/buttons/buttoninners.php:211
+#: .././pop-library/processors/buttons/buttons.php:294
+msgid "Recommend"
+msgstr "Recomendar"
+
+#: .././pop-library/processors/buttons/buttoninners.php:218
+#: .././pop-library/processors/buttons/buttons.php:304
+msgid "Subscribe"
+msgstr "Subscribirse"
+
+#: .././pop-library/processors/buttons/buttoninners.php:288
+msgid "("
+msgstr "("
+
+#: .././pop-library/processors/buttons/buttoninners.php:300
+msgid ")"
+msgstr ")"
+
+#: .././pop-library/processors/buttons/buttons.php:299
+msgid "Recommended"
+msgstr "Recomendado"
+
+#: .././pop-library/processors/buttons/buttons.php:309
+msgid "Subscribed"
+msgstr "Suscrito"
+
+#: .././pop-library/processors/buttons/buttons.php:314
+msgid "Up-vote"
+msgstr "De acuerdo"
+
+#: .././pop-library/processors/buttons/buttons.php:319
+msgid "Up-voted"
+msgstr "Estoy de acuerdo"
+
+#: .././pop-library/processors/buttons/buttons.php:324
+msgid "Down-vote"
+msgstr "En desacuerdo"
+
+#: .././pop-library/processors/buttons/buttons.php:329
+msgid "Down-voted"
+msgstr "Estoy en desacuerdo"
+
+#: .././pop-library/processors/comments/blockgroups.php:98
+msgid "Add Comment"
+msgstr "Añadir comentario"
+
+#: .././pop-library/processors/comments/blockgroups.php:124
+msgid "Add a comment for:"
+msgstr "Añadir un comentario en:"
+
+#: .././pop-library/processors/comments/formcomponents-inputs/editor-formcomponents-inputs.php:50
+msgid "Comment*"
+msgstr "Comentario*"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "comments"
+msgstr "comentarios"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:31
+#, php-format
+msgid "No %s yet."
+msgstr "No hay %s aún."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:35
+#, php-format
+msgid "That's it, no more %s found."
+msgstr "Esto es todo, no se encontraron más %s."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:43
+msgid "Comment added successfully!"
+msgstr "¡Comentario agregado con éxito!"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:44
+msgid "Comment is missing."
+msgstr "El comentario no puede ser vacío."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:45
+msgid "Your comment was added."
+msgstr "Tu comentario fue añadido."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:46
+msgid "Login/Register"
+msgstr "Iniciar sesión/Registrarse"
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:48
+#, php-format
+msgid "Please %s to add a comment."
+msgstr "Por favor %s para añadir un comentario."
+
+#: .././pop-library/processors/comments/messagefeedbacks/messagefeedbacks-layouts.php:53
+#, php-format
+msgid "You need a %s account to add a comment."
+msgstr "Necesitás una cuenta de %s para añadir un comentario."
+
+#: .././pop-library/processors/controls/anchor-controls.php:77
+msgid "Toggle compact/full form"
+msgstr "Alternar formulario compacto/extendido"
+
+#: .././pop-library/processors/controls/anchor-controls.php:81
+msgid "Expand"
+msgstr "Ampliar"
+
+#: .././pop-library/processors/controls/anchor-controls.php:85
+msgid "Filter"
+msgstr "Filtrar"
+
+#: .././pop-library/processors/controls/anchor-controls.php:97
+#: .././pop-library/processors/viewcomponents/buttoninners.php:148
+#: .././pop-library/processors/viewcomponents/post-buttons.php:137
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:59
+#: .././pop-library/processors/viewcomponents/user-buttons.php:78
+msgid "Embed"
+msgstr "Insertar código HTML"
+
+#: .././pop-library/processors/controls/anchor-controls.php:101
+#: .././pop-library/processors/viewcomponents/buttoninners.php:152
+#: .././pop-library/processors/viewcomponents/post-buttons.php:142
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:64
+#: .././pop-library/processors/viewcomponents/user-buttons.php:83
+msgid "API Data"
+msgstr "Data API"
+
+#: .././pop-library/processors/controls/anchor-controls.php:105
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:27
+msgid "Copy Search URL"
+msgstr "Copiar URL de búsqueda"
+
+#: .././pop-library/processors/controls/anchor-controls.php:109
+#: .././pop-library/processors/viewcomponents/buttoninners.php:144
+#: .././pop-library/processors/viewcomponents/post-buttons.php:132
+#: .././pop-library/processors/viewcomponents/tag-buttons.php:54
+#: .././pop-library/processors/viewcomponents/user-buttons.php:73
+msgid "Share by email"
+msgstr "Compartir por email"
+
+#: .././pop-library/processors/controls/anchor-controls.php:117
+msgid "Invite your friends to join!"
+msgstr "¡Invitá a tus amigos a unirse!"
+
+#: .././pop-library/processors/controls/anchor-controls.php:123
+msgid "Close"
+msgstr "Cerrar"
+
+#: .././pop-library/processors/controls/anchor-controls.php:129
+msgid "Toggle sidebar"
+msgstr "Abrir/Cerrar barra lateral"
+
+#: .././pop-library/processors/controls/anchor-controls.php:133
+msgid "Go back"
+msgstr "Volver"
+
+#: .././pop-library/processors/controls/anchor-controls.php:138
+msgid "Toggle tabs"
+msgstr "Abrir/Cerrar pestañas"
+
+#: .././pop-library/processors/controls/anchor-controls.php:143
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:161
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .././pop-library/processors/controls/anchor-controls.php:148
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:170
+msgid "Twitter"
+msgstr "Twitter"
+
+#: .././pop-library/processors/controls/anchor-controls.php:153
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:188
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .././pop-library/processors/controls/button-controls.php:57
+msgid "Refresh"
+msgstr "Refrescar"
+
+#: .././pop-library/processors/controls/button-controls.php:61
+msgid "Reset"
+msgstr "Resetear"
+
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:178
+msgid "Share with your friends"
+msgstr "Compartí con tus amigos"
+
+#: .././pop-library/processors/controls/dropdownbutton-controls.php:184
+msgid "Reply with..."
+msgstr "Responder con…"
+
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:100
+msgid "Options"
+msgstr "Opciones"
+
+#: .././pop-library/processors/controls/dropdownbutton-quicklinks.php:104
+msgid "Contact/Links"
+msgstr "Contacto/enlaces"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:27
+msgid "Awesome! Your user account was created successfully!"
+msgstr "¡Buenísimo! Tu cuenta de usuario se ha creado con éxito"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:28
+msgid "Already logged in!"
+msgstr "Ya has iniciado tu sesión"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/createprofile-messagefeedbacks-layouts.php:32
+#, php-format
+msgid "Please %s first to create a new user account."
+msgstr "Por favor primero %s para crear una nueva cuenta de usuario."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:27
+msgid "Profile updated successfully."
+msgstr "Perfil actualizado satisfactoriamente."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:28
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:56
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:32
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your Profile."
+msgstr "Por favor <a href=\"%s\">iniciá tu sesión</a> para editar tu perfil."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:37
+#, php-format
+msgid "Only %s accounts can be edited."
+msgstr "Sólo cuentas de  %s pueden ser editadas."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:43
+msgid "Your profile is not of 'Organization' type, so you cannot edit it here."
+msgstr ""
+"Tu perfil no es de tipo 'organización', así que no se puede editar aquí."
+
+#: .././pop-library/processors/createupdateprofile/abstract-classes/messagefeedbacks/updateprofile-messagefeedbacks-layouts.php:44
+msgid "Your profile is not of 'Individual' type, so you cannot edit it here."
+msgstr "Tu perfil no es de tipo 'personal', así que no se puede editar aquí."
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/checkbox-formcomponents-inputs.php:25
+msgid "Show email in your user profile?"
+msgstr "Hacer tu correo electrónico visible a todos los usuarios?"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:37
+msgid "Short description"
+msgstr "Descripción breve"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:42
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:146
+msgid "Facebook URL"
+msgstr "URL de Facebook"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:47
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:147
+msgid "Twitter URL"
+msgstr "URL de Twitter"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:52
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:148
+msgid "LinkedIn URL"
+msgstr "URL de LinkedIn"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:57
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:149
+msgid "Youtube URL"
+msgstr "URL de YouTube"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:62
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:150
+msgid "Instagram URL"
+msgstr "URL de Instagram"
+
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:67
+#: .././pop-library/processors/createupdateprofile/formcomponents-inputs/text-formcomponents-inputs.php:151
+msgid "Blog URL"
+msgstr "URL de tu Blog"
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createupdateuser-blocks-base.php:12
+#: .././pop-library/processors/createupdateuser/blocks.php:101
+msgid "Submitting..."
+msgstr "Enviando…"
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:14
+msgid "Awesome! Your User Account was created successfully."
+msgstr "¡Buenísimo! Tu cuenta de usuario se ha creado con éxito."
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/createuser-messagefeedback-layouts-base.php:22
+#, php-format
+msgid "Please <a href=\"%s\">click here to log-in</a>."
+msgstr "Por favor, <a href=\"%s\">haga click aquí para iniciar sesión</a>."
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:15
+msgid "User Account updated successfully."
+msgstr "Cuenta de usuario actualizada satisfactoriamente."
+
+#: .././pop-library/processors/createupdateuser/abstract-classes/updateuser-messagefeedback-layouts-base.php:17
+#, php-format
+msgid "View your <a href=\"%s\">updated user account</a>."
+msgstr "Ver tu <a href=\"%s\">cuenta de usuario actualizada</a>."
+
+#: .././pop-library/processors/createupdateuser/blocks.php:96
+msgid "Saving..."
+msgstr "Guardando…"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/checkbox-formcomponents-inputs.php:106
+msgid "Special posts or announcements"
+msgstr "Posts o anuncios especiales"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:41
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:49
+msgid "Current Password"
+msgstr "Contraseña actual"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:53
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:40
+msgid "Password"
+msgstr "Contraseña"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:57
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:52
+msgid "New password"
+msgstr "Nueva contraseña"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:61
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:56
+msgid "Repeat password"
+msgstr "Repetir contraseña"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:65
+msgid "Repeat new password"
+msgstr "Repetir nueva contraseña"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:69
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:63
+msgid "Name"
+msgstr "Nombre"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/text-formcomponents-inputs.php:74
+msgid "Website URL"
+msgstr "URL de tu sitio web"
+
+#: .././pop-library/processors/createupdateuser/formcomponents-inputs/textarea-formcomponents-inputs.php:37
+#: .././pop-library/processors/sidebars/widgetries.php:117
+msgid "Description"
+msgstr "Descripción"
+
+#: .././pop-library/processors/createupdateuser/forms/formgroups.php:128
+msgid ""
+"Please be careful to fill-in the email properly! It will not only appear in "
+"the profile page, but also be used by our system to send you notifications."
+msgstr ""
+"¡Por favor, ingresá tu email correctamente! Este no sólo aparecerá en tu "
+"perfil de usuario, sino también será utilizado por nuestro sistema para "
+"enviarte notificaciones."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "Password updated successfully."
+msgstr "Contraseña actualizada satisfactoriamente."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:30
+msgid ""
+"Yep, it's good to change it every now and then, with so many crooks around!"
+msgstr "Sí, es bueno cambiarla cada tanto, con tantos ladrones sueltos!"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:32
+msgid "Ops, there is a problem:"
+msgstr "Ops, hay un problema:"
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:36
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to change your password."
+msgstr ""
+"Por favor, <a href=\"%s\">iniciá tu sesión</a> para cambiar tu contraseña."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:41
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:46
+#, php-format
+msgid "Only %s accounts can change their password."
+msgstr "Sólo cuentas de %s pueden cambiar contraseña."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:53
+msgid "Preferences saved."
+msgstr "Preferencias guardadas."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:60
+#, php-format
+msgid "Please <a href=\"%s\">log in</a> to edit your preferences."
+msgstr ""
+"Por favor <a href=\"%s\">iniciá tu sesión</a> para editar tus preferencias."
+
+#: .././pop-library/processors/createupdateuser/messagefeedbacks/messagefeedbacks-layouts.php:65
+#, php-format
+msgid "Only %s accounts can edit preferences."
+msgstr "Sólo cuentas de  %s pueden editar preferencias."
+
+#: .././pop-library/processors/formcomponents-inputs/captcha-formcomponents-inputs.php:25
+msgid "Captcha"
+msgstr "Captcha"
+
+#: .././pop-library/processors/formcomponents-inputs/daterange-formcomponents-inputs.php:54
+msgid "Dates"
+msgstr "Fechas"
+
+#: .././pop-library/processors/formcomponents-inputs/daterange-formcomponents-inputs.php:58
+msgid "Date/Time"
+msgstr "Fecha/hora"
+
+#: .././pop-library/processors/formcomponents-inputs/editor-formcomponents-inputs.php:25
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:41
+msgid "Content"
+msgstr "Contenido"
+
+#: .././pop-library/processors/formcomponents-inputs/featuredimage-formcomponents-inputs.php:37
+msgid "Featured Image"
+msgstr "Imagen destacada"
+
+#: .././pop-library/processors/formcomponents-inputs/multiselect-formcomponents-inputs.php:41
+msgid "Status"
+msgstr "Estado"
+
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:48
+msgid "Order by"
+msgstr "Ordenar por"
+
+#: .././pop-library/processors/formcomponents-inputs/select-formcomponents-inputs.php:52
+msgid "Default view"
+msgstr "Vista predeterminada"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:55
+#: .././pop-library/processors/forms/submit-buttons.php:51
+msgid "Search"
+msgstr "Buscar"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:59
+msgid "Hashtags"
+msgstr "Hashtags"
+
+#: .././pop-library/processors/formcomponents-inputs/text-formcomponents-inputs.php:67
+msgid "Your name"
+msgstr "Tu nombre"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:45
+msgid "Email(s)"
+msgstr "Correo(s) electrónico(s)"
+
+#: .././pop-library/processors/formcomponents-inputs/textarea-formcomponents-inputs.php:49
+msgid "Additional message"
+msgstr "Mensaje adicional"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/post-typeahead-formcomponents-inputs.php:40
+msgid "Posted in response / as an addition to"
+msgstr "Publicado en respuesta/adición a"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/post-typeaheadcomponent-formcomponents-inputs.php:25
+msgid "Content:"
+msgstr "Contenido:"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:26
+msgid "Search:"
+msgstr "Buscar:"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:44
+msgid "Content with "
+msgstr "Contenido con "
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/static-typeaheadcomponent-formcomponents-inputs.php:49
+msgid "Users with "
+msgstr "Usuarios con "
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/tag-typeaheadcomponent-formcomponents-inputs.php:25
+msgid "Tags:"
+msgstr "Etiquetas:"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:33
+#, php-format
+msgid "Search %s"
+msgstr "Buscar %s"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:38
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:60
+#: .././pop-library/processors/sidebars/widgetries.php:116
+#: .././pop-library/processors/sidebars/widgetries.php:118
+msgid "Author(s)"
+msgstr "Autor(es)"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/text-formcomponents-inputs.php:44
+#: .././pop-library/processors/sidebars/widgetries.php:111
+msgid "In response to"
+msgstr "En respuesta a"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:56
+msgid "Users"
+msgstr "Usuarios"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeahead-formcomponents-inputs.php:64
+#: .././pop-library/processors/forms/formcomponentgroups.php:265
+msgid "Co-authors"
+msgstr "Co-autores"
+
+#: .././pop-library/processors/formcomponents-inputs/typeaheads/user-typeaheadcomponent-formcomponents-inputs.php:28
+msgid "Users:"
+msgstr "Usuarios:"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:223
+msgid "Type post title..."
+msgstr "Escribir título del post..."
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:224
+#: .././pop-library/processors/forms/formcomponentgroups.php:225
+msgid "Type name..."
+msgstr "Escribir el nombre…"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:234
+msgid ""
+"Type emails here, separated by space or comma (\" \" or \",\"), or 1 email "
+"per line"
+msgstr ""
+"Escriba los emails aquí, separados por espacio o coma (\" \" or \",\"), ó 1 "
+"email por línea"
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:249
+msgid ""
+"Co-authoring this post with other users? Select them all here, they will not "
+"only appear as co-owners in the webpage, but will also be able to edit this "
+"post."
+msgstr ""
+"Desea compartir la autoría de este post con otros usuarios? Selecciónelos "
+"aquí, los mismos no sólo aparecerán como co-autores en la página web, sino "
+"también serán capaces de editar este post."
+
+#: .././pop-library/processors/forms/formcomponentgroups.php:253
+msgid ""
+"Please select all related content, so the reader can easily access this "
+"inter-related information."
+msgstr ""
+"Por favor, seleccione todo el contenido relacionado, así el lector puede "
+"acceder fácilmente a esta información relacionada."
+
+#: .././pop-library/processors/forms/submit-buttons.php:35
+msgid "OK"
+msgstr "OK"
+
+#: .././pop-library/processors/forms/submit-buttons.php:39
+msgid "Send"
+msgstr "Enviar"
+
+#: .././pop-library/processors/forms/submit-buttons.php:43
+msgid "Save"
+msgstr "Guardar"
+
+#: .././pop-library/processors/forms/submit-buttons.php:47
+msgid "Update"
+msgstr "Guardar cambios"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:47
+msgid "follow users"
+msgstr "seguir a usuarios"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:48
+msgid "stop following users"
+msgstr "dejar de seguir a usuarios"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:49
+msgid "recommend posts"
+msgstr "recomendar posts"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:50
+msgid "stop recommending posts"
+msgstr "dejar de recomendar posts"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:51
+msgid "subscribe to tags/topics"
+msgstr "suscribirse a tags/tópicos"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:52
+msgid "unsubscribe from tags/topics"
+msgstr "desuscribirse de tags/tópicos"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:53
+msgid "up-vote posts"
+msgstr "expresar estar de acuerdo con un post"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:54
+msgid "stop up-voting posts"
+msgstr "dejar de estar de acuerdo con un post"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:55
+msgid "down-vote posts"
+msgstr "expresar estar en desacuerdo con un post"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:56
+msgid "stop down-voting posts"
+msgstr "dejar de estar en desacuerdo con un post"
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:62
+#, php-format
+msgid "Please %s to %s."
+msgstr "Por favor %s para %s."
+
+#: .././pop-library/processors/functions/messagefeedbacks/messagefeedbacks-layouts.php:70
+#, php-format
+msgid "You need a %s account to access this functionality."
+msgstr "Necesitás una cuenta de %s para acceder a esta funcionalidad."
+
+#: .././pop-library/processors/layouts/menus/dropdownbutton-menulayouts.php:47
+msgid "Add new"
+msgstr "Añadir nuevo"
+
+#: .././pop-library/processors/layouts/menus/multitargetindent-menulayouts.php:58
+msgid "Navigate"
+msgstr "Navegar"
+
+#: .././pop-library/processors/login/blocks.php:125
+msgid "You are not logged in."
+msgstr "Aún no has iniciado tu sesión."
+
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:36
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:44
+msgid "Username or email"
+msgstr "Nombre de usuario o correo electrónico"
+
+#: .././pop-library/processors/login/formcomponents-inputs/text-formcomponents-inputs.php:48
+msgid "Code"
+msgstr "Código"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:35
+msgid "Get password reset code"
+msgstr "Obtener código para restablecer la contraseña"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:39
+msgid "Reset password"
+msgstr "Restablecer la contraseña"
+
+#: .././pop-library/processors/login/forms/submit-buttons.php:43
+msgid "Yes, please log me out"
+msgstr "Sí, por favor finalizá mi sesión de usuario"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:29
+msgid "Still not there..."
+msgstr "Aún no hemos terminado..."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:34
+msgid "Hurray, login successful!"
+msgstr "¡Hurra, inicio de sesión exitoso!"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:35
+msgid "Add"
+msgstr "Añadir"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:36
+msgid "You can now add posts and comments, follow users, etc"
+msgstr "Ahora puedes agregar posts y comentarios, seguir a usuarios, etc"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:41
+msgid "Almost there..."
+msgstr "Casi estamos..."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:43
+#, php-format
+msgid ""
+"We sent you an email with a code. Please copy it and <a href=\"%s\">paste it "
+"here</a>."
+msgstr ""
+"Te hemos enviado un email con un código. Por favor, copiálo y <a href=\"%s"
+"\">pegálo aquí</a>."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:50
+msgid "Password reset successful"
+msgstr "Restablecimiento de contraseña exitoso"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:52
+#, php-format
+msgid "Please <a href=\"%s\">click here to log in</a>."
+msgstr "Por favor, <a href=\"%s\">haga clic aquí para iniciar sesión</a>."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:55
+msgid "The code is missing"
+msgstr "El código no puede ser vacío"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:56
+msgid "The code is not correct"
+msgstr "El código no es correcto"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:57
+msgid "Password is missing"
+msgstr "La contraseña no puede ser vacía"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:58
+msgid "The password must be at least 8 characters long."
+msgstr "La contraseña debe tener al menos 8 caracteres de longitud."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:59
+msgid "Repeat password is missing"
+msgstr "Repetir contraseña no puede estar vacía"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:60
+msgid "The passwords do not match"
+msgstr "Las contraseñas no coinciden"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:62
+#, php-format
+msgid ""
+"The code is invalid or expired. Please <a href=\"%s\">generate it again</a>."
+msgstr ""
+"El código es inválido o ha expirado. Por favor, <a href=\"%s\">generálo de "
+"nuevo</a>."
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:69
+msgid "Logged out now"
+msgstr "Sesión finalizada"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:70
+msgid "But please make sure to come back!"
+msgstr "¡Pero por favor asegúrese de volver!"
+
+#: .././pop-library/processors/login/messagefeedbacks/messagefeedbacks-layouts.php:81
+#, php-format
+msgid "You are already logged in, please %s first to re-set your password."
+msgstr ""
+"Ya has iniciado sesión en el sitio web, por favor primero %s para "
+"restablecer tu contraseña."
+
+#: .././pop-library/processors/login/structures/forms/forms.php:107
+msgid ""
+"Please type in your account username or email, and you will receive a code "
+"in your email to reset your password."
+msgstr ""
+"Por favor escribí tu nombre de usuario o email, y recibirás un código en tu "
+"email para restablecer tu contraseña."
+
+#: .././pop-library/processors/login/structures/forms/forms.php:122
+msgid "We sent you an email with a code."
+msgstr "Te hemos enviado un email con un código."
+
+#: .././pop-library/processors/login/structures/forms/forms.php:123
+msgid "Please copy/paste it in the input below, and choose your new password."
+msgstr ""
+"Por favor, copiálo y pegálo en la entrada acá abajo, y elegí tu nueva "
+"contraseña."
+
+#: .././pop-library/processors/login/structures/forms/forms.php:138
+msgid "Are you sure you want to log out?"
+msgstr "¿Estás seguro que querés finalizar tu sesión?"
+
+#: .././pop-library/processors/media/formcomponents-inputs/multiselect-formcomponents-inputs.php:40
+msgid "Resource type"
+msgstr "Tipo de recurso"
+
+#: .././pop-library/processors/media/formcomponents-inputs/multiselect-formcomponents-inputs.php:44
+msgid "Is Resource"
+msgstr "Es recurso"
+
+#: .././pop-library/processors/messagefeedbacks/messagefeedbacks-layouts.php:27
+msgid "Invite successful!"
+msgstr "¡Invitación enviada con éxito!"
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:54
+msgid "Embed:"
+msgstr "Insertar código HTML:"
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:58
+msgid "API Data:"
+msgstr "Data API:"
+
+#: .././pop-library/processors/share/blockgroups/viewcomponents.php:62
+msgid "Copy Search URL:"
+msgstr "Copiar URL de la búsqueda:"
+
+#: .././pop-library/processors/share/formcomponents-inputs/text-formcomponents-inputs.php:31
+msgid "Copy URL"
+msgstr "Copiar URL"
+
+#: .././pop-library/processors/share/formcomponents-inputs/textarea-formcomponents-inputs.php:26
+msgid "Embed code"
+msgstr "Insertar código"
+
+#: .././pop-library/processors/share/structures/contents.php:33
+msgid "Preview:"
+msgstr "Vista previa:"
+
+#: .././pop-library/processors/share/structures/contents.php:40
+msgid "Please copy/paste the html code below into your website."
+msgstr "Por favor, copiá y pegá el siguiente código HTML en tu sitio web."
+
+#: .././pop-library/processors/share/structures/contents.php:48
+msgid "Please select and copy (Ctrl + C) the URL below."
+msgstr "Por favor, seleccioná y copiá (Ctrl + C) la URL aquí abajo."
+
+#: .././pop-library/processors/sidebars/messages.php:27
+msgid "Nothing here"
+msgstr "Nada aquí"
+
+#: .././pop-library/processors/sidebars/messages.php:31
+msgid "No contact details"
+msgstr "Sin detalles de contacto"
+
+#: .././pop-library/processors/sidebars/widgetries.php:113
+msgid "Responses"
+msgstr "Respuestas"
+
+#: .././pop-library/processors/sidebars/widgetries.php:115
+msgid "Contact info"
+msgstr "Información de contacto"
+
+#: .././pop-library/processors/socialmedia/socialmedia-items.php:179
+msgid "Google+"
+msgstr "Google+"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:27
+msgid "Welcome"
+msgstr "Bienvenido/a"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:31
+msgid "You are already logged in as"
+msgstr "Has iniciado tu sesión como"
+
+#: .././pop-library/processors/useraccount/userloggedins.php:46
+msgid "Logout?"
+msgstr "¿Finalizar sesión?"
+
+#: .././pop-library/processors/viewcomponents/addcomment-post-buttons.php:76
+#: .././pop-library/processors/viewcomponents/buttoninners.php:167
+msgid "Write a comment"
+msgstr "Escribir un comentario"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:132
+#: .././pop-library/processors/viewcomponents/post-buttons.php:148
+msgid "Volunteer!"
+msgstr "¡Ofrecerme como voluntario!"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:136
+#: .././pop-library/processors/viewcomponents/post-buttons.php:153
+msgid "Flag as inappropriate"
+msgstr "Marcar como inapropiado"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:140
+msgid "Click to Volunteer"
+msgstr "Ofrecerme como voluntario"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:158
+#: .././pop-library/processors/viewcomponents/user-buttons.php:88
+msgid "Send message"
+msgstr "Enviar Mensaje"
+
+#: .././pop-library/processors/viewcomponents/buttoninners.php:162
+msgid "Reply"
+msgstr "Respuesta"
+
+#: .././validation.php:32
+msgid "Only admins see this message."
+msgstr "Only admins see this message."
+
+#: .././validation.php:37
+msgid ""
+"Error: <b>PoP Bootstrap Processors</b> is not installed/activated. Without "
+"it, <b>PoP Core Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=\"https://github.com/"
+"leoloso/PoP/\">from here</a>."
+msgstr ""
+"Error: <b>PoP Bootstrap Processors</b> is not installed/activated. Without "
+"it, <b>PoP Core Processors</b> will not work. Please install this plugin "
+"from your plugin installer or download it <a href=\"https://github.com/"
+"leoloso/PoP/\">from here</a>."
+
+#: .././validation.php:43
+#, php-format
+msgid ""
+"Error: this version of <b>PoP Core Processors</b> requires version %s or "
+"bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
+"your plugin installer or download it <a href=\"https://github.com/leoloso/"
+"PoP/\">from here</a>."
+msgstr ""
+"Error: this version of <b>PoP Core Processors</b> requires version %s or "
+"bigger of <b>PoP Bootstrap Processors</b>. Please update this plugin from "
+"your plugin installer or download it <a href=\"https://github.com/leoloso/"
+"PoP/\">from here</a>."
+
+#~ msgid "Special announcements from %s"
+#~ msgstr "Anuncio especial de %s"
+
+#~ msgid "(Coming soon) Activity from users on my network (daily)"
+#~ msgstr "(Próximamente) Actividad de los usuarios en mi red (diario)"
+
+#~ msgid "Activity from users on my network (daily)"
+#~ msgstr "Actividad de los usuarios en mi red (diario)"
+
+#~ msgid "(Coming soon) %s"
+#~ msgstr "(Próximamente) %s"
+
+#~ msgid "(Coming soon) New content posted on the website (daily)"
+#~ msgstr "(Próximamente) Nuevo contenido agregado al sitio web (diario)"
+
+#~ msgid "(Coming soon) Upcoming events (bi-weekly)"
+#~ msgstr "(Próximamente) Eventos próximos (2 veces x semana)"
+
+#~ msgid "(Coming soon) Activity on my subscribed topics (daily)"
+#~ msgstr "(Próximamente) Actividad en mis tópicos subscriptos (diario)"
+
+#~ msgid "Activity on my subscribed topics (daily)"
+#~ msgstr "Actividad en mis tópicos subscriptos (diario)"
+
+#~ msgid "Flag"
+#~ msgstr "Marcar como inapropiado"
+
+#~ msgid ""
+#~ "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+#~ "<b>PoP Core Processors</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=\"http://wordpress.org/"
+#~ "extend/plugins/pop/\">from here</a>."
+#~ msgstr ""
+#~ "Error: <b>PoP Frontend Engine</b> is not installed/activated. Without it, "
+#~ "<b>PoP Core Processors</b> will not work. Please install this plugin from "
+#~ "your plugin installer or download it <a href=“http://wordpress.org/extend/"
+#~ "plugins/pop/“>from here</a>."
+
+#~ msgid ""
+#~ "Error: this version of <b>PoP Core Processors</b> requires version %s or "
+#~ "bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+#~ "plugin installer or download it <a href=\"http://wordpress.org/extend/"
+#~ "plugins/pop/\">from here</a>."
+#~ msgstr ""
+#~ "Error: this version of <b>PoP Core Processors</b> requires version %s or "
+#~ "bigger of <b>PoP Frontend Engine</b>. Please update this plugin from your "
+#~ "plugin installer or download it <a href=“http://wordpress.org/extend/"
+#~ "plugins/pop/“>from here</a>."
+
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#~ msgid "<p>Howdy!</p>"
+#~ msgstr "<p>¡Hola!</p>"
+
+#~ msgid "Your %s was created successfully!"
+#~ msgstr "Tu %s se ha creado con éxito"
+
+#~ msgid "<p>Your %s <a href=\"%s\">%s</a> was created successfully!</p>"
+#~ msgstr "<p>Tu %s <a href=\"%s\">%s</a> fue creado con éxito!</p>"
+
+#~ msgid ""
+#~ "Please notice that the status of the %s is <strong>'Draft'</strong>, so "
+#~ "it won't be published online."
+#~ msgstr ""
+#~ "Por favor, tenga en cuenta que el estado del %s es <strong>'borrador'</"
+#~ "strong>, de modo que no será publicado."
+
+#~ msgid ""
+#~ "<p>Please wait for our moderators approval. You will receive an email "
+#~ "with the confirmation.</p>"
+#~ msgstr ""
+#~ "<p>Por favor espere a que nuestros moderadores aprueben su post. "
+#~ "Recibirás un correo electrónico con la confirmación.</p>"
+
+#~ msgid "[%s]: New %s by %s"
+#~ msgstr "[%s]: Nuevo %s por %s"
+
+#~ msgid "A new %s has been submitted on %s:"
+#~ msgstr "Se ha creado un nuevo %s en %s:"
+
+#~ msgid "[%s]: %s updated by %s"
+#~ msgstr "[%s]: %s actualizado por %s"
+
+#~ msgid "%s updated on %s:"
+#~ msgstr "%s actualizado en %s:"
+
+#~ msgid "<b>Author:</b> %s"
+#~ msgstr "<b>Autor:</b> %s"
+
+#~ msgid "<b>Author Email:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+#~ msgstr ""
+#~ "<b>Correo electrónico del autor:</b> <a href=\"mailto:%1$s\">%1$s</a>"
+
+#~ msgid "<b>Title:</b> %s"
+#~ msgstr "<b>Titulo:</b> %s"
+
+#~ msgid "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Permalink:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Edit Link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Enlace de edición:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "<b>Status:</b> %s"
+#~ msgstr "<b>Estado:</b> %s"
+
+#~ msgid "[%s]: New Profile: %s"
+#~ msgstr "[%s]: Nuevo perfil: %s"
+
+#~ msgid "A Profile was created on %s."
+#~ msgstr "Un perfil fue creado en %s."
+
+#~ msgid "[%s]: Profile updated: %s"
+#~ msgstr "[%s]: Perfil actualizado: %s"
+
+#~ msgid "Profile updated on %s."
+#~ msgstr "Perfil actualizado en %s."
+
+#~ msgid "<b>Profile:</b> %s"
+#~ msgstr "<b>Perfil:</b> %s"
+
+#~ msgid "<b>Profile link:</b> <a href=\"%1$s\">%1$s</a>"
+#~ msgstr "<b>Enlace al perfil:</b> <a href=\"%1$s\">%1$s</a>"
+
+#~ msgid "Welcome to %s!"
+#~ msgstr "¡Bienvenido a %s!"
+
+#~ msgid ""
+#~ "<p>Your user account was created successfully. This is your public "
+#~ "profile page:</p>"
+#~ msgstr ""
+#~ "<p>Tu cuenta de usuario se ha creado con éxito. Esta es la página con tu "
+#~ "perfil público</p> "
+
+#~ msgid "Now you can share your content/activities with our community:"
+#~ msgstr ""
+#~ "Ahora puedes compartir tu contenido/actividades con nuestra comunidad:"
+
+#~ msgid "About %s"
+#~ msgstr "Acerca de %s"
+
+#~ msgid "A new %s was posted referencing \"%s\""
+#~ msgstr "Un nuevo %s fue publicado haciendo referencia a \"%s\""
+
+#~ msgid ""
+#~ "<p>Your %s <a href=\"%s\">%s</a> has been referenced by a new %s:</p>"
+#~ msgstr ""
+#~ "<p>Tu %s <a href=\"%s\">%s</a> ha recibido una referencia por un nuevo %s:"
+#~ "</p>"
+
+#~ msgid "Your %s was approved!"
+#~ msgstr "¡Tu %s fue aprobado!"
+
+#~ msgid "<p>Hurray! Your %s was approved!</p>"
+#~ msgstr "<p>¡Hurra! Tu %s fue aprobado.</p>"
+
+#~ msgid "<p>There is a response to a comment from <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>Hay una respuesta a un comentario de <a href=\"%s\">%s</a>:</p>"
+
+#~ msgid "<p>A new comment has been added to <a href=\"%s\">%s</a>:</p>"
+#~ msgstr "<p>Un nuevo comentario ha sido añadido a <a href=\"%s\">%s</a>:</p>"
+
+#~ msgid "Click here to reply the comment"
+#~ msgstr "Haga clic aquí para responder el comentario"
+
+#~ msgid "%s replied your comment in “%s”"
+#~ msgstr " %s ha contestado tu comentario en “%s”"
+
+#~ msgid "New comment added in “%s”"
+#~ msgstr "Nuevo comentario añadido en “%s”"
+
+#~ msgid "<p><a href=\"%s\">%s</a> mentioned you in %s:</p>"
+#~ msgstr "<p><a href=\"%s\">%s</a> te ha mencionado en %s:</p>"
+
+#~ msgid "You were mentioned in %1$s “%2$s”"
+#~ msgstr "Has sido mencionado en %1$s “%2$s”"
+
+#~ msgid ""
+#~ "<p><a href=\"%1$s\">%2$s</a> mentioned you in a comment from %3$s <a href="
+#~ "\"%4%s\">%5$s</a>:</p>"
+#~ msgstr ""
+#~ "<p><a href=“%1$s”>%2$s</a> te ha mencionado en un comentario en %3$s <a "
+#~ "href=“%4$s”>%5$s</a>:</p>"
+
+#~ msgid "You were mentioned in a comment from %1$s “%2$s”"
+#~ msgstr "Has sido mencionado en un comentario en %1$s “%2$s”"
+
+#~ msgid "Password reset code"
+#~ msgstr "Código de restablecimiento de contraseña"
+
+#~ msgid "Retrieve password"
+#~ msgstr "Recuperar contraseña"
+
+#~ msgid "Your password has been changed successfully."
+#~ msgstr "Tu contraseña ha sido cambiada con éxito."
+
+#~ msgid ""
+#~ "You are receiving this notification for belonging to this author’s "
+#~ "network. Soon you will be able to configure your notification email’s "
+#~ "preferences."
+#~ msgstr ""
+#~ "Estás recibiendo esta notificación por pertenecer a la red de este autor. "
+#~ "Pronto podrás configurar tus preferencias de notificaciones en tu correo "
+#~ "electrónico."
+
+#~ msgid "%s has created a new %s: “%s”"
+#~ msgstr "%s creó un nuevo %s: “%s”"
+
+#~ msgid "<b><a href=\"%s\">%s</a></b> has created a new %s:"
+#~ msgstr "<b><a href=\"%s\">%s</a></b> creó un nuevo %s:"
+
+#~ msgid "You have a new follower!"
+#~ msgstr "¡Tienes un nuevo seguidor!"
+
+#~ msgid "<p>Congratulations! <a href=\"%s\">You have a new follower</a>:</p>"
+#~ msgstr ""
+#~ "<p>¡Felicitaciones! <a href=\"%s\">Tienes un nuevo seguidor</a>:</p>"
+
+#~ msgid ""
+#~ "<p>This user will receive notifications following your activity, such as "
+#~ "recommending content, posting a new discussion or comment, and others.</p>"
+#~ msgstr ""
+#~ "<p>Este usuario recibirá notificaciones sobre tu actividad, tales como "
+#~ "recomendar contenido, publicar un nuevo artículo ó comentario, entre "
+#~ "otros.</p>"
+
+#~ msgid "Your %s was recommended!"
+#~ msgstr "¡Tu %s fue recomendado!"
+
+#~ msgid "<p>Your %1$s <a href=\"%2$s\">%3$s</a> was recommended by:</p>"
+#~ msgstr "<p>Tu %1$s <a href=“%2$s”>%3$s</a> fue recomendado por:</p>"
+
+#~ msgid ""
+#~ "Please add the following emails to your contact list, to make sure you "
+#~ "receive our notifications:"
+#~ msgstr ""
+#~ "Por favor, añadí los siguientes emails a tu lista de contactos, para "
+#~ "asegurar de que recibas nuestras notificaciones:"
+
+#~ msgid "DD/MM/YYYY h:mm A"
+#~ msgstr "DD/MM/YYYY H:mm"
+
+#~ msgid "Open all"
+#~ msgstr "Abrir todos"
+
+#~ msgid "Show in Navigator"
+#~ msgstr "Mostrar en el navegador"
+
+#~ msgid "Information"
+#~ msgstr "Información"
+
+#~ msgid "In response/as an addition to"
+#~ msgstr "En respuesta/adición a"
+
+#~ msgid "No access allowed"
+#~ msgstr "Acceso no permitido"
+
+#~ msgid "There was a problem, please contact the website admin"
+#~ msgstr ""
+#~ "Hubo un problema, por favor póngase en contacto con el administrador del "
+#~ "sitio web"
+
+#~ msgid "You do not have permissions to edit this attachment"
+#~ msgstr "Usted no tiene permisos para editar este adjunto"
+
+#~ msgid "(None)"
+#~ msgstr "(ninguno)"
+
+#~ msgid "Download"
+#~ msgstr "Descargar"
+
+#~ msgid "There is no user with this username or email."
+#~ msgstr ""
+#~ "No existe ningún usuario con este nombre de usuario o correo electrónico."
+
+#~ msgid "Please supply your username or email."
+#~ msgstr "Por favor escriba su nombre de usuario o correo electrónico."
+
+#~ msgid "%s: Password Reset"
+#~ msgstr " %s: Re-establecimiento de la contraseña"
+
+#~ msgid "Your user: "
+#~ msgstr "Tu usuario:"
+
+#~ msgid "Your new password: "
+#~ msgstr "Tu nueva contraseña:"
+
+#~ msgid "Click here to log-in: "
+#~ msgstr "Hacé click aquí para iniciar sesión:"
+
+#~ msgid "Login to %s"
+#~ msgstr "Iniciar sesión en %s"
+
+#~ msgid "The e-mail could not be sent."
+#~ msgstr "El email no pudo ser enviado."
+
+#~ msgid "Possible reason: your host may have disabled the mail() function."
+#~ msgstr ""
+#~ "Posible razón: el admin puede haber deshabilitado la función mail()."
+
+#~ msgid "Avatar"
+#~ msgstr "Avatar"
+
+#~ msgid "Profile photo"
+#~ msgstr "Foto de perfil"
+
+#~ msgid "Upload photo"
+#~ msgstr "Subir foto"
+
+#~ msgid "Scroll down to load more results"
+#~ msgstr "Desplazarse hacia abajo para cargar más resultados"
+
+#~ msgid ""
+#~ "Please log in using your <strong>%s</strong> account to add a comment:"
+#~ msgstr ""
+#~ "Por favor inicie sesión usando su cuenta de <strong>%s</strong> para "
+#~ "añadir un comentario:"
+
+#~ msgid "All Content"
+#~ msgstr "Todo el contenido"
+
+#~ msgid "Add response/additional"
+#~ msgstr "Añadir respuesta/adicional"
+
+#~ msgid "Awesome! Your Profile was created successfully!"
+#~ msgstr "¡Buenísimo! Tu perfil fue creado con éxito"
+
+#~ msgid "Please %s first to create a new Profile."
+#~ msgstr "Por favor primero %s para crear un nuevo perfil."
+
+#~ msgid "Display email in your Profile?"
+#~ msgstr "Hacer tu correo electrónico visible a todos los usuarios?"
+
+#~ msgid "Picture updated successfully."
+#~ msgstr "Foto actualizada satisfactoriamente."
+
+#~ msgid "Such a good shot!"
+#~ msgstr "¡Qué buena foto!"
+
+#~ msgid "Only %s accounts can update their picture."
+#~ msgstr "Solo cuentas de %s pueden actualizar la foto."
+
+#~ msgid "Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "Picture"
+#~ msgstr "Foto"
+
+#~ msgid "Type comment here..."
+#~ msgstr "Escribir comentario aquí..."
+
+#~ msgid "Locations"
+#~ msgstr "Ubicaciones"
+
+#~ msgid ""
+#~ "If you can't find the location in the input below, click on the \"+\" "
+#~ "button to add a new one."
+#~ msgstr ""
+#~ "Si no puede encontrar la ubicación en la entrada debajo, haga click en el "
+#~ "botón \"+\" para añadir una nueva."
+
+#~ msgid "Content with \"%QUERY\""
+#~ msgstr "Contenido con “%QUERY”"
+
+#~ msgid "Users with \"%QUERY\""
+#~ msgstr "Usuarios con “%QUERY”"
+
+#~ msgid "Extracts from our users"
+#~ msgstr "Extractos de nuestros usuarios"
+
+#~ msgid "Ready to connect the green dots?"
+#~ msgstr "Ready to connect the green dots?"
+
+#~ msgid "Phew, password reseted..."
+#~ msgstr "Ufff, contraseña reseteada."
+
+#~ msgid "We sent you an email. Please <a href=\"%s\">click here to log in</a>"
+#~ msgstr ""
+#~ "Te hemos enviado un correo electrónico. Por favor, <a href=\"%s\">haga "
+#~ "clic aquí para iniciar sesión</a>"
+
+#~ msgid "Lost password"
+#~ msgstr "Contraseña perdida"
+
+#~ msgid "<p><em>Please log in:</em></p>"
+#~ msgstr "<p><em>Por favor iniciar sesión:</em></p>"
+
+#~ msgid "Title:"
+#~ msgstr "Titulo:"
+
+#~ msgid "Source"
+#~ msgstr "Origen"
+
+#~ msgid "Is resource:"
+#~ msgstr "Es recurso:"
+
+#~ msgid "Description:"
+#~ msgstr "Descripción:"
+
+#~ msgid "No items"
+#~ msgstr "No hay items"
+
+#~ msgid "In response/addition to"
+#~ msgstr "En respuesta/adición a"
+
+#~ msgid "Responses / Additionals"
+#~ msgstr "Respuestas/adicionales"

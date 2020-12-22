@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecorators;
+
+use PoP\AccessControl\TypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaTypeResolverDecorator;
+use PoPSchema\UserStateAccessControl\Conditional\CacheControl\TypeResolverDecorators\NoCacheConfigurableAccessControlTypeResolverDecoratorTrait;
+
+abstract class AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaTypeResolverDecorator
+{
+    use NoCacheConfigurableAccessControlTypeResolverDecoratorTrait;
+}

@@ -1,0 +1,11 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}} {{#if add-feedbackobject-class}}{{feedbackObject.class}}{{/if}}" style="{{style}}" {{#if use-cookies}}data-cookieid="cookie{{dbObject.id}}"{{/if}} {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+	{{{description}}}
+	{{#if show-close-btn}}
+		<button type="button" class="{{classes.close-btn}}" title="{{titles.closebtn-title}}" data-dismiss="alert" aria-hidden="true">{{titles.closebtn-text}}</button>
+	{{/if}}
+	{{#each submoduleoutputnames.layouts}}
+		{{#withModule ../. this}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	{{/each}}
+</div>

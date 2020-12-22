@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\EngineWP\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoP\Engine\ErrorHandling\ErrorManagerInterface:
+        class: \PoP\EngineWP\ErrorHandling\ErrorManager

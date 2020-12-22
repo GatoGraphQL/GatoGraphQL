@@ -1,0 +1,161 @@
+/**
+ * Improve the styles of the table:
+ * - better contrast for disable items
+ * - actions not in bold
+ */
+.row-actions span.disabled {
+    color: #969696;
+}
+.plugins .name {
+    font-weight: normal;
+}
+/* .plugins .dashicons {
+    font-size: 16px;
+} */
+
+.subsubsub a.module-type-view {
+    border: 1px solid;
+}
+
+.plugins .active.module-schema-type td,
+.plugins .active.module-schema-type th,
+.subsubsub a.module-type-schema-type {
+    background-color: #f9fef7;
+}
+.plugin-update-tr.active.module-schema-type td,
+.plugins .active.module-schema-type th.check-column {
+    border-left-color: #00d251;
+}
+.subsubsub a.module-type-schema-type {
+    border-color: #00d251;
+}
+
+.plugins .active.module-functionality td,
+.plugins .active.module-functionality th,
+.subsubsub a.module-type-functionality {
+    background-color: #fefdf7;
+}
+.plugin-update-tr.active.module-functionality td,
+.plugins .active.module-functionality th.check-column {
+    border-left-color: #c4d200;
+}
+.subsubsub a.module-type-functionality {
+    border-color: #c4d200;
+}
+
+.plugins .active.module-operational td,
+.plugins .active.module-operational th,
+.subsubsub a.module-type-operational {
+    background-color: #f7fefd;
+}
+.plugin-update-tr.active.module-operational td,
+.plugins .active.module-operational th.check-column {
+    border-left-color: #00cbd2;
+}
+.subsubsub a.module-type-operational {
+    border-color: #00cbd2;
+}
+
+.plugins .active.module-access-control td,
+.plugins .active.module-access-control th,
+.subsubsub a.module-type-access-control {
+    background-color: #fef7f9;
+}
+.plugin-update-tr.active.module-access-control td,
+.plugins .active.module-access-control th.check-column {
+    border-left-color: #d20046;
+}
+.subsubsub a.module-type-access-control {
+    border-color: #d20046;
+}
+
+.plugins .active.module-client td,
+.plugins .active.module-client th,
+.subsubsub a.module-type-client {
+    background-color: #f7fbfe;
+}
+.plugin-update-tr.active.module-client td,
+.plugins .active.module-client th.check-column {
+    border-left-color: #005bd2;
+}
+.subsubsub a.module-type-client {
+    border-color: #005bd2;
+}
+
+.plugins .active.module-versioning td,
+.plugins .active.module-versioning th,
+.subsubsub a.module-type-versioning {
+    background-color: #f7f9fe;
+}
+.plugin-update-tr.active.module-versioning td,
+.plugins .active.module-versioning th.check-column {
+    border-left-color: #0062d2;
+}
+.subsubsub a.module-type-versioning {
+    border-color: #0062d2;
+}
+
+.plugins .active.module-user-interface td,
+.plugins .active.module-user-interface th,
+.subsubsub a.module-type-user-interface {
+    background-color: #fefbf7;
+}
+.plugin-update-tr.active.module-user-interface td,
+.plugins .active.module-user-interface th.check-column {
+    border-left-color: #d29a00;
+}
+.subsubsub a.module-type-user-interface {
+    border-color: #d29a00;
+}
+
+.plugins .active.module-plugin-management td,
+.plugins .active.module-plugin-management th,
+.subsubsub a.module-type-plugin-management {
+    background-color: #fef9f7;
+}
+.plugin-update-tr.active.module-plugin-management td,
+.plugins .active.module-plugin-management th.check-column {
+    border-left-color: #d25400;
+}
+.subsubsub a.module-type-plugin-management {
+    border-color: #d25400;
+}
+
+.plugins .active.module-schema-configuration td,
+.plugins .active.module-schema-configuration th,
+.subsubsub a.module-type-schema-configuration {
+    background-color: #f7fefb;
+}
+.plugin-update-tr.active.module-schema-configuration td,
+.plugins .active.module-schema-configuration th.check-column {
+    border-left-color: #00d2a5;
+}
+.subsubsub a.module-type-schema-configuration {
+    border-color: #00d2a5;
+}
+
+.plugins .active.module-performance td,
+.plugins .active.module-performance th,
+.subsubsub a.module-type-performance {
+    background-color: #fdf7fe;
+}
+.plugin-update-tr.active.module-performance td,
+.plugins .active.module-performance th.check-column {
+    border-left-color: #9700d2;
+}
+.subsubsub a.module-type-performance {
+    border-color: #9700d2;
+}
+
+.plugins .active.module-endpoint td,
+.plugins .active.module-endpoint th,
+.subsubsub a.module-type-endpoint {
+    background-color: #fcf7fe;
+}
+.plugin-update-tr.active.module-endpoint td,
+.plugins .active.module-endpoint th.check-column {
+    border-left-color: #d200cf;
+}
+.subsubsub a.module-type-endpoint {
+    border-color: #d200cf;
+}

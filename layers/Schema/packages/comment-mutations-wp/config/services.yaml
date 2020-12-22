@@ -1,0 +1,4 @@
+services:
+    PoPSchema\CommentMutations\TypeAPIs\CommentTypeAPIInterface:
+        class: \PoPSchema\CommentMutationsWP\TypeAPIs\CommentTypeAPI
+        public: true

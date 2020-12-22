@@ -1,0 +1,14 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="window maximized {{class}}" style="{{style}}">
+	<div class="window-controls">
+		<a {{#generateId group='fullsize'}}{{id}}{{/generateId}} data-target="#{{lastGeneratedId}}" data-toggle="window-fullsize" href="#" class="fullsize close" title="{{titles.fullsize}}"><span class="glyphicon glyphicon-resize-full"></span></a>
+		<a {{#generateId group='maximize'}}{{id}}{{/generateId}} data-target="#{{lastGeneratedId}}" data-toggle="window-maximize" href="#" class="maximize close" title="{{titles.maximize}}"><span class="glyphicon glyphicon-resize-small"></span></a>
+		<a {{#generateId group='minimize'}}{{id}}{{/generateId}} data-target="#{{lastGeneratedId}}" data-toggle="window-minimize" href="#" class="minimize close" title="{{titles.minimize}}"><span class="glyphicon glyphicon-minus"></span></a>
+	</div>
+	{{#each submoduleoutputnames.elements}}
+		<div class="{{../classes.wrapper}} {{{get ../moduleclasses .}}}" style="{{styles.wrapper}}" {{#withget ../moduleparams .}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
+			{{#withModule ../. this}}
+				{{enterModule ../../.}}
+			{{/withModule}}
+		</div>
+	{{/each}}
+</div>

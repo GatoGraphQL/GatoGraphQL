@@ -1,0 +1,4 @@
+services:
+    PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface:
+        class: \PoPSchema\MenusWP\TypeAPIs\MenuTypeAPI
+        public: true

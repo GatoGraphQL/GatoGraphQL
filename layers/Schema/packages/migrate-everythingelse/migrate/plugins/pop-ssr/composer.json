@@ -1,0 +1,5 @@
+{
+    "require": {
+        "zordius/lightncandy": "dev-master"
+    }
+}

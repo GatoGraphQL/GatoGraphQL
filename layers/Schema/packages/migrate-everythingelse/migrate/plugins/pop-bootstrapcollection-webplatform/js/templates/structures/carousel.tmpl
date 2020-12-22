@@ -1,0 +1,18 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="carousel {{mode}} {{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}> 
+	{{#withModule . "carousel-indicators"}}
+		<div class="{{../classes.indicators}}" style="{{../styles.indicators}}">
+			{{enterModule ../.}}
+		</div>
+	{{/withModule}}
+	{{#withModule . "controls-top"}}
+		{{enterModule ../.}}
+	{{/withModule}}
+	{{#withModule . "inner"}}
+		<div class="carousel-inner {{../class-merge}} clearfix">		
+			{{enterModule ../. dbKey=../dbKey dbObjectIDs=../dbObjectIDs}}
+		</div>
+	{{/withModule}}
+	{{#withModule . "controls-bottom"}}
+		{{enterModule ../.}}
+	{{/withModule}}
+</div>

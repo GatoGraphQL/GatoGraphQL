@@ -1,0 +1,8 @@
+{{#each submoduleoutputnames.inners}}
+	{{#withModule ../. this}}
+		{{enterModule ../../.}}
+		{{#each ../../templates.extensions}}
+			{{enterTemplate . context=../../../.}}
+		{{/each}}
+	{{/withModule}}
+{{/each}}

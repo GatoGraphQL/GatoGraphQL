@@ -1,0 +1,12 @@
+services:
+    PoPSchema\Comments\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoPSchema\Comments\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true
+
+    PoPSchema\Comments\FieldInterfaceResolvers\:
+        resource: '../src/FieldInterfaceResolvers/*'
+        public: true

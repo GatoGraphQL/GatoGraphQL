@@ -1,0 +1,22 @@
+<label>
+	<input 
+		{{#generateId}}{{id}}{{/generateId}} 
+		type="checkbox" 
+		name="{{name}}" 
+		{{!-- If checkbox-value is defined, then that is the value of the checkbox, and to be compared against the value in the dbObject field. --}}
+		{{!-- Otherwise, the value is that from the dbObject field, and to compare against the provided value property --}}
+		{{#if checkbox-value}}
+			value="{{formatValue checkbox-value value-format}}" 
+			{{#compare (formatValue checkbox-value value-format) (formatValue (formcomponentValue value dbObject dbobject-field default-value) value-format) operator=compare-by}}checked="checked"{{/compare}} 
+		{{else}}
+			value="{{formatValue (get dbObject dbobject-field) value-format}}" 
+			{{#compare (formatValue (get dbObject dbobject-field) value-format) value operator=compare-by}}checked="checked"{{/compare}} 
+		{{/if}}
+		class="{{class}} {{classes.input}}" 
+		style="{{style}} {{styles.input}}" 
+		{{#if readonly}}readonly{{/if}} 
+		{{#if disabled}}disabled="disabled"{{/if}} 
+		{{#each params}} {{@key}}="{{this}}"{{/each}} 
+		{{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. module=this}}"{{/each}}
+	> {{{label}}}
+</label>

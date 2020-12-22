@@ -1,0 +1,10 @@
+<div class="map {{class}}" style="{{style}}" {{#generateId}}{{id}}{{/generateId}}>
+	{{#withModule . "map-div"}}
+		{{enterModule ../.}}
+	{{/withModule}}
+	<div class="{{class-merge}}" id="{{lastGeneratedId}}-merge">
+		{{#withModule . "inner"}}
+			{{enterModule ../. dbKey=../dbKey dbObjectIDs=../dbObjectIDs}}
+		{{/withModule}}	
+	</div>
+</div>

@@ -1,0 +1,8 @@
+services:
+    PoP\CacheControl\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true
+
+    PoP\CacheControl\TypeResolverDecorators\:
+        resource: '../src/TypeResolverDecorators/*'
+        public: true

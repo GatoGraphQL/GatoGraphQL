@@ -1,0 +1,4 @@
+services:
+    PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface:
+        class: \PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI
+        public: true

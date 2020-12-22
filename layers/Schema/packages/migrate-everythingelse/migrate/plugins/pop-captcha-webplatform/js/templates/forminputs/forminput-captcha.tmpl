@@ -1,0 +1,8 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{classes.wrapper}}">
+	<div class="input-group">
+		<span class="input-group-addon"><img src="{{captcha-imgsrc}}"></span>
+		<input type="text" name="{{name.input}}" class="{{class}} {{classes.input}} form-control" style="{{style}} {{styles.input}}" placeholder="{{placeholder}}">
+	</div>
+	<input type="hidden" name="{{name.encoded}}" value="{{encoded}}">
+	<input type="hidden" name="{{name.random}}" value="{{random}}">
+</div>

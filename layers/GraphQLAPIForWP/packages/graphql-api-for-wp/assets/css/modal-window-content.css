@@ -1,0 +1,84 @@
+/**
+ * Add some spacing to the right
+ */
+.modal-window-content-wrapper {
+    padding-right: 10px;
+}
+
+/**
+ * Make images fit within the iframe
+ */
+.modal-window-content-wrapper img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+/**
+ * Make iframes (like the embedded videos) fit within the iframe
+ */
+.modal-window-content-wrapper iframe {
+    max-width: 100%;
+}
+
+/**
+ * Add some spacing between 2 tables
+ */
+.modal-window-content-wrapper table + table {
+    margin-top: 1em;
+}
+
+/**
+ * Table styles
+ */
+.modal-window-content-wrapper table.striped tbody tr:nth-child(odd) {
+    background-color: #edf9f9;
+}
+
+/**
+ * Re-establish the list styles
+ */
+.modal-window-content-wrapper ul {
+    padding-left: 20px;
+    list-style: initial;
+}
+
+/**
+ * Make the embedded videos responsive
+ */
+.video-responsive-container {
+    position:relative;
+    padding-bottom:56.25%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+}
+.video-responsive-container iframe,
+.video-responsive-container object,
+.video-responsive-container embed {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+/**
+ * Style code. Must select all <pre> because it is not given any class
+ * but it is aimed at <pre><code> only. Selector "pre:has(> code)" will
+ * eventually solve it
+ */
+pre {
+    background-color: #282c34;
+    color: #fff;
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    overflow: auto;
+    /* line-height: 1.4; */
+    /* margin: .85rem 0; */
+    /* position: relative; */
+    /* z-index: 1; */
+}
+pre > code {
+    padding: 0;
+}

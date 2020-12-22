@@ -1,0 +1,4 @@
+services:
+    PoPSchema\BasicDirectives\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true

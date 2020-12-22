@@ -1,0 +1,53 @@
+/* Align the time in the DateRange calendar to the left, not the center that looks ugly in Spanish */
+.daterangepicker .calendar-time {
+	text-align: left;
+}
+
+.daterangepicker.dropdown-menu {
+    background-color: #dcddde;
+}
+.daterangepicker.dropdown-menu.opensleft:after,
+.daterangepicker.dropdown-menu.opensleft:before {
+	left: auto;
+}
+
+
+/* Daterangepicker: because it is attached to the Container DIV, when scrolling down it will the daterangepicker does not scroll down, so we can't reach the "To" calendar if it's placed below. Then, for mobile phones, place the "from" and "to" calendars one next to each other, on 1 line. Breakpoint at 564px because the library has such a style breakpoint itself in daterangepicker.2.1.24.min.css */
+.daterangepicker .calendar td, .daterangepicker .calendar th {
+    min-width: auto; 
+}
+.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
+    padding: 1px; 
+}
+.daterangepicker.show-calendar .calendar {
+    display: inline-block;
+}
+.daterangepicker {
+    width: 396px;
+    padding: 1px;
+}
+.daterangepicker .calendar {
+    max-width: 194px;
+    margin: 1px;
+}
+@media (min-width: 564px) {
+	.daterangepicker .calendar td, .daterangepicker .calendar th {
+	    min-width: 32px; 
+	}
+	.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
+	    padding: 5px; 
+	}
+	.daterangepicker {
+	    width: auto;
+	    padding: 4px;
+	}
+	.daterangepicker .calendar {
+	    max-width: 270px;
+	    margin: 4px;
+	}
+}
+@media (min-width: 768px) {
+	.daterangepicker.show-calendar .calendar {
+	    display: block;
+	}
+}

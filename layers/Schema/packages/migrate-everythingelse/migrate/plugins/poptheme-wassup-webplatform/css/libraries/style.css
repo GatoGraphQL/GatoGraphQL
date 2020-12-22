@@ -1,0 +1,2065 @@
+/* Extra classes to add to the body for specific items (locale, WP quicklink bar, Filtering by location) */
+/* Also the role is added */
+#background-screen {
+	display: none;
+}
+#ps-sideinfo {
+	padding-top: 10px;
+}
+body.sliding,
+body.sliding #ps-side,
+body.sliding #ps-sideinfo,
+body.sliding #ps-body > .container-fluid,
+body.sliding #ps-hover .container-fluid {
+	background-color: #f1f1f2;
+}
+body.sliding #ps-navigator {
+	background-color: #4d4d4f;
+}
+#ps-side h1,
+#ps-side h2,
+#ps-side h3,
+#ps-navigator h1,
+#ps-navigator h2,
+#ps-navigator h3,
+#ps-navigator .text-inverse .excerpt,
+#ps-navigator .text-inverse .authors,
+#ps-side .carousel-indicators {
+  color: #f1f1f2;
+}
+#ps-side .block-title,
+#ps-navigator .block-title,
+#ps-sideinfo .block-title,
+#ps-side .description,
+#ps-navigator .description {
+	color: #f1f1f2;
+}
+#ps-side {
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+	box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+}
+#ps-sideinfo {
+	-webkit-box-shadow: 0 0 5px rgba(77, 77, 79, .2);
+	-moz-box-shadow: 0 0 5px rgba(77, 77, 79, .2);
+	box-shadow: 0 0 5px rgba(77, 77, 79, .2);
+}
+@media (min-width: 768px) {
+	#ps-side .nav>li>a {
+		font-size: 12px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+}
+
+
+body.swift #ps-body .pop-outerblock.blockgroup-home.narrow:before,
+body.swift #ps-body .pop-outerblock.narrowblock:before,
+body.swift #ps-body .pop-outerblock.blockgroup-singlepost:before,
+body.swift #ps-body .pop-outerblock.blockgroup-author:before,
+body.swift #ps-body .pop-outerblock.blockgroup-tag:before,
+body.swift #ps-body .pop-outerblock.controlblock:before,
+body.swift #ps-body .pop-outerblock.feed:before,
+/*body.expansive #ps-body .simpleview > .scroll-inner:before,
+body.expansive #ps-body .fullview > .scroll-inner:before,*/
+body.swift #ps-body .pop-outerblock.blockgroup-home.narrow:after,
+body.swift #ps-body .pop-outerblock.narrowblock:after,
+body.swift #ps-body .pop-outerblock.blockgroup-singlepost:after,
+body.swift #ps-body .pop-outerblock.blockgroup-author:after,
+body.swift #ps-body .pop-outerblock.blockgroup-tag:after,
+body.swift #ps-body .pop-outerblock.controlblock:after,
+body.swift #ps-body .pop-outerblock.feed:after/*,
+body.expansive #ps-body .simpleview > .scroll-inner:after,
+body.expansive #ps-body .fullview > .scroll-inner:after*/ {
+  display: table;
+  content: " ";
+}
+body.swift #ps-body .pop-outerblock.blockgroup-home.narrow:after,
+body.swift #ps-body .pop-outerblock.narrowblock:after,
+body.swift #ps-body .pop-outerblock.blockgroup-singlepost:after,
+body.swift #ps-body .pop-outerblock.blockgroup-author:after,
+body.swift #ps-body .pop-outerblock.blockgroup-tag:after,
+body.swift #ps-body .pop-outerblock.controlblock:after,
+body.swift #ps-body .pop-outerblock.feed:after/*,
+body.expansive #ps-body .simpleview > .scroll-inner:after,
+body.expansive #ps-body .fullview > .scroll-inner:after*/ {
+  clear: both;
+}
+body.swift #ps-body .pop-outerblock.blockgroup-home.narrow,
+body.swift #ps-body .pop-outerblock.narrowblock,
+body.swift #ps-body .pop-outerblock.blockgroup-singlepost,
+body.swift #ps-body .pop-outerblock.blockgroup-author,
+body.swift #ps-body .pop-outerblock.blockgroup-tag,
+body.swift #ps-body .pop-outerblock.controlblock,
+body.swift #ps-body .pop-outerblock.feed,
+body.swift #ps-body .pop-outerblock.calendar,
+body.swift #ps-body .pop-outerblock.menu,
+body.swift #ps-body .pop-outerblock.block-singleabout-content,
+body.swift #ps-body .pop-outerblock > .blocksection-extensions > .block-singleabout-content,
+body.swift #ps-body .pop-outerblock.block-single-content,
+body.swift #ps-quickview .pop-outerblock.blockgroup-home,
+body.swift #ps-quickview .pop-outerblock.blockgroup-singlepost,
+body.swift #ps-quickview .pop-outerblock.blockgroup-author,
+body.swift #ps-quickview .pop-outerblock.controlblock,
+body.swift #ps-quickview .pop-outerblock.feed,
+body.swift #ps-quickview .pop-outerblock.block-singleabout-content,
+body.swift #ps-quickview .pop-outerblock.block-single-content/*,
+body.expansive #ps-body .simpleview > .scroll-inner,
+body.expansive #ps-body .fullview > .scroll-inner,
+body.expansive #ps-body .blockgroup-singlepost*/ {
+	/* Limit the width of the feed for the Swift ThemeStyle, and center it */
+	/* 588px so that the featured image has exactly 500px wide, and we use a cropped thumb 500x278px */
+    /*max-width: 588px;*/
+    /* 564px so that the featured image has exactly 480px wide, and we use a cropped thumb 480x267px */
+    max-width: 564px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.dropdown-menu > li > div.pop-block {
+  padding: 3px 20px;
+}
+
+.sidebar .contact-item {
+	overflow: hidden;
+}
+
+/* Hide all labels inside modals and other forms */
+.notitle .block-title {
+	display: none;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.more-teaser, .more-full, .more, .less { display: inline; }
+.sortable > div { cursor: move; }
+
+body {
+	position: relative;
+}
+
+
+/* Comments */
+.comment-date {
+	margin-left: 5px;
+}
+.comment-author > .item {
+	display: inline-block;
+}
+
+
+.loadinglogo {
+	text-align: center;
+	padding: 15px 5px;
+	display: none;
+}
+body.pop-loadingframe .loadinglogo {
+	display: block;
+}
+.loadinglogo .img-responsive {
+	display: initial;
+}
+.loading-screen {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	/* Over topnav */
+	z-index: 1110;
+	display: none;
+	overflow: hidden;
+}
+/* Do not allow the user to click yet, because JS not yet initialized, by placing the loading-screen div with a transparent background on top of everything */
+body.pop-loadingjs.no-js .loading-screen {
+	display: none;
+}
+body.pop-loadingjs .loading-screen {
+	display: block;
+}
+/* The top has a background color, so don't show it while showing the loading screen */
+body.pop-loadingframe.pop-loadingjs #ps-top,
+body.pop-loadingframe.pop-loadingjs #ps-side,
+body.pop-loadingframe.pop-loadingjs #ps-pagetabs {
+	display: none;
+}
+
+/* Show the following message when users click on the loading-screen layer: "The website is still loading, please wait a few moments to interact with it." */
+.loading-screen > .pop-notificationmsg {
+	display: none;
+}
+.loading-screen:focus > .pop-notificationmsg,
+.loading-screen:active > .pop-notificationmsg {
+	display: block;
+}
+
+.pop-feedbackmessage .media {
+	margin-top: 0;
+}
+.btn-important {
+	margin-bottom: 20px;
+}
+
+/* Make youtube video player responsive. Source: http://alxmedia.se/code/2013/10/make-wordpress-default-video-embeds-responsive/ */
+.responsiveembed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 10px;}
+.responsiveembed-container iframe, .responsiveembed-container object, .responsiveembed-container embed, .responsiveembed-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+
+
+
+/* Carousel: allow to have no results, so have min-height: 0 or otherwise it shows a 1px line that's ugly */
+.carousel>.row>.col-xs-1, .carousel>.row>.col-sm-1, .carousel>.row>.col-md-1, .carousel>.row>.col-lg-1, .carousel>.row>.col-xs-2, .carousel>.row>.col-sm-2, .carousel>.row>.col-md-2, .carousel>.row>.col-lg-2, .carousel>.row>.col-xs-3, .carousel>.row>.col-sm-3, .carousel>.row>.col-md-3, .carousel>.row>.col-lg-3, .carousel>.row>.col-xs-4, .carousel>.row>.col-sm-4, .carousel>.row>.col-md-4, .carousel>.row>.col-lg-4, .carousel>.row>.col-xs-5, .carousel>.row>.col-sm-5, .carousel>.row>.col-md-5, .carousel>.row>.col-lg-5, .carousel>.row>.col-xs-6, .carousel>.row>.col-sm-6, .carousel>.row>.col-md-6, .carousel>.row>.col-lg-6, .carousel>.row>.col-xs-7, .carousel>.row>.col-sm-7, .carousel>.row>.col-md-7, .carousel>.row>.col-lg-7, .carousel>.row>.col-xs-8, .carousel>.row>.col-sm-8, .carousel>.row>.col-md-8, .carousel>.row>.col-lg-8, .carousel>.row>.col-xs-9, .carousel>.row>.col-sm-9, .carousel>.row>.col-md-9, .carousel>.row>.col-lg-9, .carousel>.row>.col-xs-10, .carousel>.row>.col-sm-10, .carousel>.row>.col-md-10, .carousel>.row>.col-lg-10, .carousel>.row>.col-xs-11, .carousel>.row>.col-sm-11, .carousel>.row>.col-md-11, .carousel>.row>.col-lg-11, .carousel>.row>.col-xs-12, .carousel>.row>.col-sm-12, .carousel>.row>.col-md-12, .carousel>.row>.col-lg-12 {
+	min-height: 0;
+}
+
+.pop-feedbackmessage-icon {
+	font-size: 40px;
+	margin-left: 5px; /* So that it doesn't get cut inside the class="media" => class="pull-left" div */
+}
+.layout-media .media-item {
+	margin-top: 10px;
+}
+
+
+#ps-body .horizontal.sidebar.conclusion > .pop-structureinner, 
+#ps-quickview .horizontal.sidebar.conclusion > .pop-structureinner {
+	margin-left: -15px;
+	margin-right: -15px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
+.post-thumb {
+	position: relative;
+	overflow: hidden; /* Needed for the labels (eg: "Volunteer") on top of the thumbnail, when image too small should not come out from it */
+}
+
+/* Fix WP Editor front-end style problems */
+.wp-editor-container {
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.wp-editor-tabs .wp-switch-editor {
+	height: 26px;
+}
+.tmce-active .wp-editor-tabs .switch-tmce, 
+.html-active .wp-editor-tabs .switch-html {
+	height: 26px;
+}
+.wp-editor-container *,
+.wp-editor-container *:before,
+.wp-editor-container *:after {
+	webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+
+.pop-notificationmsg.website-level.sessiontabs .btn-group {
+	margin: 0 5px;
+}
+.pop-notificationmsg.website-level.sessiontabs .checkbox {
+	display: inline-block;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.pop-notificationmsg.website-level.sessiontabs .checkbox input[type=checkbox] {
+	margin-left: -15px;
+}
+
+/* Service Workers message to the user to refresh the page */
+.pop-notificationmsg.website-level,
+.pop-notificationmsg.page-level,
+.pop-loading,
+.pop-error {
+
+	text-align: center;
+}
+.pop-loading,
+.pop-error {
+
+	z-index: 580;
+}
+.pop-notificationmsg.website-level {
+
+	/* On top of offcanvas.hover */
+	z-index: 720;
+}
+.pop-notificationmsg.page-level {
+
+	z-index: 730;
+}
+.pop-notificationmsg.website-level.topmost {
+
+	/* On top of offcanvas.hover */
+	z-index: 750;
+}
+.pop-loading.top-level,
+.pop-error.top-level {
+
+	position: fixed;
+	top: 0;
+	left: 50%;
+}
+.pop-notificationmsg.page-level,
+.pop-notificationmsg.website-level {
+	position: fixed;
+	bottom: 0;
+	/*left: 50%;*/
+	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
+}
+
+.pop-loading {
+
+	width: 180px;
+	margin-left: -90px;
+}
+/*.pop-notificationmsg.page-level,
+.pop-notificationmsg.website-level,
+.pop-error.top-level {
+
+	width: 400px;
+	margin-left: -200px;
+}*/
+@media (min-width: 500px) {
+	.pop-notificationmsg.page-level,
+	.pop-notificationmsg.website-level {
+
+		left: 50%;
+	}
+	.pop-notificationmsg.page-level,
+	.pop-notificationmsg.website-level,
+	.pop-error.top-level {
+
+		width: 500px;
+		margin-left: -250px;
+	}
+}
+.pop-notificationmsg.page-level,
+.pop-notificationmsg.website-level,
+.pop-error.alert {
+	margin-bottom: 0;
+}
+.pop-loading.top {
+
+	position: absolute;
+	left: 50%;
+}
+.pop-block.withsectionfilter .dataload-status .pop-loading.top {
+	/* push the "Loading" status a tiny bit down, so it doesn't show on top of the sectionfilter */
+	margin-top: 40px;
+}
+/* Google Map 'Adding location' */
+#block-createlocation .pop-loading {
+
+	width: 300px;
+	margin-left: -150px;
+}
+
+/* Hide nested submenus (eg: blockgroup and block both have submenu) */
+.pop-block.withsubmenu .pop-block.withsubmenu > .blocksection-submenu .submenu {
+	display: none;
+}
+
+/* Taken from Facebook: show Play icon on top of image */
+/*.icon-wrapper {
+
+	position: relative;
+}
+.video-icon {
+	background: url( img/video-icon.png ) no-repeat 0 0;
+	height: 26px;
+	left: 50%;
+	margin: -13px 0 0 -17px;
+	position: absolute;
+	top: 50%;
+	width: 35px;
+}*/
+
+/* Typeahead */
+/*#ps-body .pop-typeahead .pop-merge > .hiddeninputalert:last-child {
+	margin-bottom: 0;
+}
+#ps-body .pop-operation+.pop-merge > .hiddeninputalert:first-child {
+	margin-top: 5px;
+}
+#ps-sideinfo .pop-operation+.pop-merge > .hiddeninputalert {
+	margin-bottom: 0;
+}
+.pop-operation.hidden+.pop-merge {
+	padding-top: 0px;
+}*/
+/* When there's either 0 or 1 selectable-typeahead selected alerts, eg: references in Create Stance */
+/* Do not add the padding on the form-group but on the alert, so that if there's none, everything comes up */
+.form-group.pop-uniqueornone-selectabletypeahead-formgroup {
+	margin-bottom: 0;
+}
+.form-group.pop-uniqueornone-selectabletypeahead-formgroup .alert:last-child {
+	margin-bottom: 15px;
+}
+
+/* Allow for words to be braken (from long URLs) */
+table td { 
+	word-break: break-word; 
+}
+
+/* Main */
+@media (min-width: 768px) {
+	.hiddeninputalert.alert-narrow {
+		max-width: 276px;
+	}
+}
+.hiddeninputalert .media {
+	margin-top: 0;
+}
+
+
+/* Copied from http://localhost/wp-includes/css/media-views.min.css?ver=3.5.1 definition: .media-sidebar .setting span */
+.compat-attachment-fields .label > label {
+	font-size: 12px;
+}
+.compat-attachment-fields .label {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+
+	font-weight: normal;
+	white-space: auto;
+	background-color: transparent;	
+}
+.compat-attachment-fields .field select {
+	width: 100%;
+}
+
+.visible-loggedin-anydomain,
+.visible-loggedin-localdomain,
+body.loggedin-anydomain .visible-notloggedin-anydomain,
+body.loggedin-localdomain .visible-notloggedin-localdomain,
+.visible-community, /* classes with roles are added in the Menu in the DB, so they don't have the domain */
+.visible-organization,
+.visible-individual {
+	display: none !important;
+}
+
+body.loggedin-anydomain .visible-loggedin-anydomain,
+body.loggedin-localdomain .visible-loggedin-localdomain {
+	display: block !important;
+}
+
+
+.offcanvas-collapse {
+	position: relative;
+}
+
+.btn-group-dropdown {
+	position: relative;
+	margin-left: -10px;
+}
+.btn-group-dropdown > .btn {
+	border-left: 0;
+}
+.btn-group-dropdown > .dropdown-menu {
+	margin-top: 8px;
+}
+
+.alert.hiddeninputalert { margin-bottom: 5px; }
+
+/* Layouts: do not show them */
+.pop-multilayout-label {
+	display: none;
+}
+/*.pop-multilayout .pop-multilayout-label {
+	display: block;
+}*/
+
+
+.form-group.submit-btn {
+	margin-bottom: 0;
+}
+
+.pop-frame-container {
+	position: fixed;
+	z-index: 1100; /* On top of bootstrap modal */
+	height: 0;
+	top: 0;
+	width: 100%;
+}
+
+.label-none {
+	background-color: transparent;
+	color: #000000;
+	font-weight: normal;
+}
+
+
+.layout {
+	position: relative;
+}
+
+
+
+a.loading {
+    background-color: rgba(77, 77, 79, 0.3);
+    position: relative;
+}
+.pop-spinner {
+    position: absolute;
+    z-index: 650;
+    background-color: rgba(77, 77, 79, 0.85);
+    color: #fff;
+    margin-left: -17px;
+}
+.pop-spinner.spinner-img {
+	margin-left: 0;
+}
+h1 .pop-spinner {
+    margin-left: -35px;
+}
+h2 .pop-spinner {
+    margin-left: -32px;
+}
+h3 .pop-spinner {
+    margin-left: -26px;
+}
+h4 .pop-spinner {
+    margin-left: -22px;
+}
+
+.block-tag-content,
+.content-single,
+.sidebar.horizontal.conclusion {
+	margin-bottom: 20px;
+}
+
+.spacing-bottom-md {
+	margin-bottom: 10px;
+}
+
+#ps-side li.menu-item-parent > a {
+    padding-left: 35px;
+}
+#ps-sideinfo li.menu-item-parent > a {
+    padding-left: 30px;
+}
+
+/* The login blockgroup needs the title to show it in the tab, but it must not show in the page since the login block also has it */
+.blockgroup-login > .blocksection-title {
+	display: none;
+}
+
+/* Hide the FAQ link in the control group for the addons window. eg: Add Highlight */
+#ps-addons .pop-block.addons-nocontrols .blocksection-controls {
+	display: none;
+}
+
+.nav>li>a.pop-multitarget-link {
+	position: absolute;
+	right: 0;
+	padding-left: 3px;
+	padding-right: 3px;
+	z-index: 100;
+}
+#ps-side li.menu-item-parent > a.pop-multitarget-link,
+#ps-side li.menu-item-parent.pop-parentmenu-2ndlevel > a.pop-multitarget-link {
+	padding-left: 3px;
+}
+.nav>li.pop-hidden-multitarget>a.pop-multitarget-link {
+	display: none;
+}
+
+#ps-side li.menu-item-parent.pop-parentmenu-2ndlevel > a {
+	padding-left: 50px;
+}
+
+.pop-tabtitle-hidden .tab-title {
+	display: none;
+}
+
+#body {
+  padding-bottom: 30px;
+}
+
+/* Highlights */
+.thumb-extras {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+}
+a.thumbnail+.thumb-extras {
+	top: 5px;
+	left: 7px;
+}
+
+
+/* Copied and edited from wp-includes/js/tinymce/themes/advanced/skins/wp_theme/content.css */
+.aligncenter,
+dl.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.alignleft {
+	float: left;
+	margin-right: 10px;
+}
+.alignright {
+	float: right;
+	margin-left: 10px;
+}
+.wp-caption {
+	border: 1px solid #dcddde;
+	text-align: center;
+	background-color: #f1f1f2;
+	padding-top: 4px;
+	margin-bottom: 10px;
+}
+.mceIEcenter {
+	text-align: center;
+}
+.wp-caption img {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	-webkit-user-drag: none;
+}
+.wp-caption-dd {
+	font-size: 11px;
+	line-height: 17px;
+	padding: 0 4px 5px;
+	margin: 0;
+}
+.wp-caption-text {
+	margin: 0 5px 5px 5px;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+
+
+.topnav .navbar-nav>li {
+	float: left;
+}
+.topnav .navbar-nav {
+	float: left;
+	margin: 0;
+}
+.topnav .navbar-nav.navbar-right {
+	float: right;
+}
+
+.nav-about .col-logo {
+	padding-right: 0;
+}
+
+body {
+	background-color: #fff;
+}
+
+/* Sidebar navigation */
+.navbar .nav > li.menu-item-parent > a {
+	padding-left: 25px;
+}
+.navbar .nav > li.menu-item-parent.indent-level2 > a {
+	padding-left: 35px;
+}
+
+#ps-body .nav > li.menu-item-parent > a {
+	padding-left: 25px;
+}
+#ps-background .nav > li.menu-item-parent > a {
+	padding-left: 35px;
+}
+#ps-background .nav>li>a:focus, 
+#ps-background .nav>li>a:hover {
+	background-color: #fff;
+}
+
+
+.dropdown-close {
+	 position: absolute; 
+	 right: 0; 
+	 margin-right: 25px; 
+	 top: 0;
+}
+.dropdown-close .close {
+	float: none;
+}
+
+span.twitter-typeahead {
+	width: 100%;
+}
+
+.pop-map-modal .modal-body {
+	padding: 0;
+}
+
+
+#quickview-modal .modal-body {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+#quickview-modal .body,
+#quickview-modal .sideinfo {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#ps-top.navbar .nav > li > a.user-avatar, 
+#ps-top.navbar .nav .sub-menu > li > a.user-avatar {
+	padding: 6px 3px 8px;
+}
+.topnav .pop-user-avatar {
+	width: 31px;
+	height: 31px;
+
+}
+.topnav .pop-user-avatar.img-thumbnail {
+	padding: 0;
+	border-radius: 0;
+}
+.topnav .dropdown-menu .pop-user-avatar {
+	width: 100px;
+	height: 100px;
+}
+.topnav .dropdown-menu .pop-user-avatar.img-thumbnail {
+	padding: 2px;
+}
+
+.offcanvas-collapse.panel-collapse .panel-heading {
+	padding-top: 0;
+}
+
+.post-layout .media,
+.user-layout .media {
+	margin-top: 0;
+}
+
+#ps-top .activenavigator-hidden,
+.pagesection-group.active-navigator-xs #ps-top .activenavigator-visible {
+	display: block;
+}
+#ps-top .activenavigator-visible,
+.pagesection-group.active-navigator-xs #ps-top .activenavigator-hidden {
+	display: none;
+}
+#ps-top .activeside-hidden,
+.pagesection-group.active-side-xs #ps-top .activeside-visible {
+	display: block;
+}
+#ps-top .activeside-visible,
+.pagesection-group.active-side-xs #ps-top .activeside-hidden {
+	display: none;
+}
+@media (min-width: 768px) {
+	.pagesection-group.active-navigator-xs #ps-top .activenavigator-hidden {
+		display: block;
+	}
+	.pagesection-group.active-navigator-xs #ps-top .activenavigator-visible {
+		display: none;
+	}
+	.pagesection-group.active-navigator #ps-top .activenavigator-visible,
+	.pagesection-group.active-navigator.active-navigator-xs #ps-top .activenavigator-visible {
+		display: block;
+	}
+	.pagesection-group.active-navigator #ps-top .activenavigator-hidden,
+	.pagesection-group.active-navigator.active-navigator-xs #ps-top .activenavigator-hidden {
+		display: none;
+	}
+
+	.pagesection-group.active-side-xs #ps-top .activeside-hidden {
+		display: block;
+	}
+	.pagesection-group.active-side-xs #ps-top .activeside-visible {
+		display: none;
+	}
+	.pagesection-group.active-side #ps-top .activeside-visible,
+	.pagesection-group.active-side.active-side-xs #ps-top .activeside-visible {
+		display: block;
+	}
+	.pagesection-group.active-side #ps-top .activeside-hidden,
+	.pagesection-group.active-side.active-side-xs #ps-top .activeside-hidden {
+		display: none;
+	}
+}
+
+.pagesection-group.active-top .pop-loading.top-level,
+.pagesection-group.active-top .pop-error.top-level {
+  top: 45px;
+}
+
+.pagesection-group.active-pagetabs-xs .pop-loading.top-level,
+.pagesection-group.active-pagetabs-xs .pop-error.top-level {
+	top: 35px;
+}
+.pagesection-group.active-top.active-pagetabs-xs .pop-loading.top-level,
+.pagesection-group.active-top.active-pagetabs-xs .pop-error.top-level {
+	top: 80px;
+}
+
+/* If we're in ps-side in mobile phone, then keep it top */
+body.sliding .pagesection-group.active-top.active-side-xs .pop-loading.top-level,
+body.sliding .pagesection-group.active-top.active-side-xs .pop-error.top-level,
+body.sliding .pagesection-group.active-pagetabs.active-side-xs .pop-loading.top-level,
+body.sliding .pagesection-group.active-pagetabs.active-side-xs .pop-error.top-level,
+body.sliding .pagesection-group.active-top.active-pagetabs.active-side-xs .pop-loading.top-level,
+body.sliding .pagesection-group.active-top.active-pagetabs.active-side-xs .pop-error.top-level,
+body.sliding .pagesection-group.active-top.active-navigator-xs .pop-loading.top-level,
+body.sliding .pagesection-group.active-top.active-navigator-xs .pop-error.top-level,
+body.sliding .pagesection-group.active-pagetabs.active-navigator-xs .pop-loading.top-level,
+body.sliding .pagesection-group.active-pagetabs.active-navigator-xs .pop-error.top-level,
+body.sliding .pagesection-group.active-top.active-pagetabs.active-navigator-xs .pop-loading.top-level,
+body.sliding .pagesection-group.active-top.active-pagetabs.active-navigator-xs .pop-error.top-level {
+	top: 0;
+}
+
+@media (min-width: 768px) {
+
+	.pagesection-group.active-pagetabs-xs .pop-loading.top-level,
+	.pagesection-group.active-pagetabs-xs .pop-error.top-level {
+		top: 0;
+	}
+	.pagesection-group.active-top.active-pagetabs-xs .pop-loading.top-level,
+	.pagesection-group.active-top.active-pagetabs-xs .pop-error.top-level {
+		top: 45px;
+	}
+
+	.pagesection-group.active-pagetabs .pop-loading.top-level,
+	.pagesection-group.active-pagetabs.active-pagetabs-xs .pop-loading.top-level,
+	.pagesection-group.active-pagetabs .pop-error.top-level,
+	.pagesection-group.active-pagetabs.active-pagetabs-xs .pop-error.top-level {
+		top: 35px;
+	}
+	.pagesection-group.active-top.active-pagetabs .pop-loading.top-level,
+	.pagesection-group.active-top.active-pagetabs.active-pagetabs-xs .pop-loading.top-level,
+	.pagesection-group.active-top.active-pagetabs .pop-error.top-level,
+	.pagesection-group.active-top.active-pagetabs-xs .pop-error.top-level {
+		top: 80px;
+	}
+
+	body.sliding .pagesection-group.active-side .pop-loading.top-level,
+	body.sliding .pagesection-group.active-side .pop-error.top-level,
+	body.sliding .pagesection-group.active-navigator .pop-loading.top-level,
+	body.sliding .pagesection-group.active-navigator .pop-error.top-level {
+		left: 60%;
+	}
+	body.sliding .pagesection-group.active-sideinfo .pop-loading.top-level,
+	body.sliding .pagesection-group.active-sideinfo .pop-error.top-level {
+		left: 40%;
+	}
+	body.sliding .pagesection-group.active-side.active-sideinfo .pop-loading.top-level,
+	body.sliding .pagesection-group.active-side.active-sideinfo .pop-error.top-level,
+	body.sliding .pagesection-group.active-navigator.active-sideinfo .pop-loading.top-level,
+	body.sliding .pagesection-group.active-navigator.active-sideinfo .pop-error.top-level {
+		left: 50%;
+	}
+}
+
+/* pageSections (offcanvas) visibility */
+body.non-scrollable {
+  overflow-x: hidden;  /*Prevent scroll on narrow devices  */
+}
+body.non-scrollable.sliding {
+	overflow: hidden;
+}
+
+.pagesection-group .offcanvas,
+#ps-body .blocksection-controls.top,
+#ps-sideinfo .blocksection-controls.top {
+	position: fixed;
+}
+#ps-body .blocksection-controls.top,
+#ps-sideinfo .blocksection-controls.top {
+	position: fixed;
+	-webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
+}
+.pagesection-group .offcanvas.scrollable,
+body.non-scrollable .pagesection-group .offcanvas.body {
+	overflow: scroll; /* Needed for Waypoints */
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.offcanvas.hover,
+.offcanvas.side,
+.offcanvas.navigator,
+.offcanvas.sideinfo,
+.offcanvas.top,
+.offcanvas.body,
+.offcanvas.pagetabs,
+.offcanvas.background,
+#ps-body .blocksection-controls.top,
+#ps-sideinfo .blocksection-controls.top,
+.pop-loading.top-level,
+.pop-error.top-level {
+  -webkit-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+}
+
+
+#ps-body .blocksection-controls.top {
+	top: 0;
+	right: 0;
+}
+#ps-sideinfo .blocksection-controls.top {
+	top: 0;
+	left: 100%;
+}
+body.sliding .pagesection-group.active-sideinfo-xs #ps-sideinfo .blocksection-controls.top {
+	left: 0;
+}
+body.sliding .pagesection-group.active-side-xs.active-sideinfo-xs #ps-sideinfo .blocksection-controls.top {
+	left: 100%;
+}
+.pagesection-group.active-top #ps-sideinfo .blocksection-controls.top,
+.pagesection-group.active-top #ps-body .blocksection-controls.top {
+	top: 45px;
+}
+
+#ps-body .blocksection-controls.top,
+#ps-sideinfo .blocksection-controls.top {
+	z-index: 400;
+}
+
+#ps-addons-merge {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+#ps-addons .window-controls {
+  position: fixed;
+  right: 0;
+  z-index: 750;
+  padding: 5px 10px;
+  -webkit-transform: translateZ(0); /* Fixes error of div randomly disappearing. Solution here: https://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome*/
+}
+#ps-addons .window-controls > a {
+  padding-left: 5px;
+}
+
+body.sliding #ps-body > .container-fluid,
+body.sliding #ps-hover .container-fluid {
+	min-height: 100%;
+}
+#ps-hover {
+	background-color: rgb(77, 77, 79);
+	background-color: rgba(77, 77, 79, 0.85);
+}
+
+
+
+#ps-hover .container-fluid {
+	padding: 15px 30px;
+}
+@media (min-width: 768px) {
+	#ps-hover {
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	#ps-hover .container-fluid {
+		max-width: 700px;
+	}
+}
+@media (min-width: 992px) {
+	#ps-hover .container-fluid {
+		max-width: 800px;
+	}
+}
+@media (min-width: 1200px) {
+	#ps-hover .container-fluid {
+		max-width: 900px;
+	}
+}
+
+.dropdown-menu>li.menu-item-parent>a {
+	padding-left: 30px;
+}
+
+.pagesection-group.theater #ps-body .container-fluid {
+	max-width: 100%;
+	padding: 0;
+}
+.pagesection-group.theater #ps-body-merge {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#ps-side .carousel-indicators h5 {
+	margin: 0;
+}
+#ps-side > .container-fluid,
+#ps-navigator > .container-fluid {
+	padding-bottom: 20px;
+}
+
+#ps-sideinfo-merge {
+	/* Needed for when there are addons minimized, so everything is still visible */
+	padding-bottom: 20px;
+}
+
+#ps-addons {	
+	background-color: #f1f1f2;
+}
+#ps-addons .container-fluid {
+	background-color: #fff;
+	border-left: 1px solid #f0ad4e;
+	border-right: 1px solid #f0ad4e;
+	min-height: 100%;
+}
+.navbar-addons {
+  background-color: #f0ad4e;
+}
+
+#ps-top .addnew-menu {
+	margin: 5px 5px 0;
+}
+#ps-side .addnew-menu .btn-group {
+	margin-bottom: 20px;
+}
+#ps-side .addnew-menu .btn-group,
+#ps-side .addnew-menu .btn-group>.btn-block,
+#ps-side .addnew-menu .btn-group>.dropdown-menu {
+	width: 100%;
+}
+
+#ps-body .fullview > .wrapper > h1.title {
+    margin: 25px 0 15px;
+}
+
+#ps-body .horizontal.sidebar > .pop-structureinner,
+#ps-quickview .horizontal.sidebar > .pop-structureinner {
+	padding-top: 10px;
+}
+#ps-body .horizontal.sidebar > .pop-structureinner .thumbnail,
+#ps-quickview .horizontal.sidebar > .pop-structureinner .thumbnail {
+	margin-bottom: 10px;
+}
+#ps-body .fullview .vertical.sidebar,
+#ps-quickview .fullview .vertical.sidebar {
+	padding-top: 15px;
+}
+#ps-body .blockinner-row,
+#ps-quickview .blockinner-row {
+	background-color: #fff;
+
+	/* Hide the overflow, so that in mobile phone it doesn't make the screen bigger than the actual device width */
+	overflow: hidden;
+}
+@media (min-width: 768px) {
+	#ps-body .blockinner-row,
+	#ps-quickview .blockinner-row {
+		/* Hide the overflow, so that in mobile phone it doesn't make the screen bigger than the actual device width */
+		overflow: initial;
+	}
+}
+
+.submenu .submenu-xs .btn {
+	border: 0;
+	border-radius: 0;
+	height: auto;
+	text-align: left;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+.submenu .submenu-xs .subheader.btn {
+	padding-left: 25px;
+}
+.submenu .submenu-xs .btn {
+	margin: 0;
+}
+
+
+/* Side Carousel: hide the indicators to go to the Navigator always / Menu when on the menu slide */
+#ps-side .carousel div.carousel-indicators {
+	cursor: pointer;
+}
+#ps-side .carousel .item:first-child div.carousel-indicators,
+#ps-side .carousel .item:nth-child(2) div.carousel-indicators > div:nth-child(2) {
+	display: none;
+}
+
+#ps-pagetabs,
+#ps-addontabs {
+	white-space: nowrap;
+}
+#ps-pagetabs .pop-pagesection-page,
+#ps-addontabs .pop-pagesection-page {
+	display: inline-block;
+	margin-right: 5px;
+}
+#ps-addontabs-merge {
+	padding: 5px;
+}
+.pop-pagetab-btn {
+	max-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+
+.input-group-btn:last-child>.btn.pop-createlocation-btn {
+	margin-left: 10px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+
+/*
+ * Offcanvas
+ * --------------------------------------------------
+ */
+.pagesection-group {
+  position: relative;
+}
+
+#ps-body-merge {
+	padding: 10px 15px 30px 15px;
+}
+@media (min-width: 768px) {
+	#ps-body-merge {
+		/* So much top padding needed to accomodate the tabs in Single/Author */
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+@media (min-width: 992px) {
+	#ps-body-merge {
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+}
+
+
+/* Give the same padding to these 2 (eg: mesym.com/u/leo/): #ps-body .nav>li>a is the tabs placed on the left, .btn-compact is the controlgroup placed on the right*/
+#ps-body .nav>li>a {
+	padding: 5px 3px;
+}
+.btn-compact {
+	padding: 5px;
+}
+.btn-nopadding {
+	padding: 0;
+}
+.btn-text-left {
+	text-align: left;
+}
+@media (min-width: 768px) {
+	#ps-body .nav>li>a {
+		padding: 5px 10px;
+	}	
+}
+#ps-body .nav>li>a>h4 {
+	font-size: 17px;
+}
+
+/* This fixes a bug in which the TinyMCE floating panels are not visible since they are attached to the body instead of the offcanvas div (which is made fixed and shows on top of the body) */
+/* There's still a problem with it, because now the position is fixed, if scrolling down the page then the floatpanel will not follow */
+/*div.mce-floatpanel, 
+div.mce-tooltip {
+	position: fixed;
+}*/
+
+
+
+a.author {
+	text-decoration: underline;
+	color: #7a7a7b;
+}
+
+.btn.btn-link.btn-preview {
+	padding: 0 2px 5px 2px;
+}
+
+
+.hiddeninputalert label {
+	font-weight: normal;
+}
+
+.pop-postcomment .pop-blockinner-row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+
+#ps-side .pop-menu-xs,
+#ps-navigator .pop-menu-xs {
+	position: fixed;
+	top: 0;
+	right: 0;
+}
+
+
+#ps-background .pop-background-img {
+	width: 100%; 
+	max-width: 320px; 
+}
+@media (min-width: 500px) {
+	#ps-background .pop-background-img {
+		max-width: 420px; 
+	}
+}
+@media (min-width: 768px) {
+	#ps-background .pop-background-img {
+		max-width: 680px; 
+	}
+}
+@media (min-width: 992px) {
+  #ps-background .pop-background-img {
+    max-width: 890px; 
+  }
+}
+@media (min-width: 1200px) {
+  #ps-background .pop-background-img {
+    max-width: 940px; 
+  }
+}
+
+/* Print Theme: hide the controls */
+#ps-quickview .pop-hidden-quickview,
+body.print .pop-hidden-print,
+body.embed .pop-hidden-embed,
+.pop-visible-embed,
+body.simple .pop-hidden-simple,
+.pop-visible-simple {
+	display: none;
+}
+body.embed .pop-visible-embed,
+body.simple .pop-visible-simple {
+	display: block;
+}
+/* Hide the title only for the first pop-block in the tabpane, not for the ones below in the same pop-block, or the sibling ones (until we fix changing the embed title whenever the user clicks on a new page) */
+body.embed .pop-pagesection-page:first-child>.pop-block>.blocksection-title {
+	display: none;
+}
+
+
+/* Embed Theme */
+#ps-top.navbar .nav > li > a.logo {
+	padding: 3px 5px;
+}
+
+/* Add the width to the anchor containing the image, so that when this one hasn't loaded yet,
+the 'loading' over the user icon is not displaced (appearing over the '+' icon) */
+#ps-top.navbar .nav > li > a.logo {
+	width: 51px;
+}
+#ps-top.navbar .nav > li > a.logo > img {
+	height: 39px;
+	margin-right: 2px;
+}
+
+#ps-top.navbar .nav.nav-condensed > li > a, 
+#ps-top.navbar .nav.nav-condensed .sub-menu > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#ps-top.navbar .nav > li > a {
+  padding: 14px 10px;
+}
+body.sliding #ps-top.navbar .navbar-nav-togglenav {
+	padding-right: 10px;
+    margin-right: 20px;
+    border-right: 1px dotted #909090;
+}
+body.sliding.simple #ps-top.navbar .navbar-nav-togglenav {
+	padding-right: 0;
+    margin-right: 0;
+    border-right: 0;
+}
+body.sliding #ps-top.navbar .navbar-nav-account {
+    margin-right: 10px;
+}
+
+.one-sixth,
+.one-third,
+.one-half {
+	float: left;
+}
+.one-sixth {
+	max-width: 16.66%;
+}
+.one-third {
+	max-width: 33.33%;
+}
+.one-half {
+	max-width: 50%;
+}
+
+#ps-background .jumbotron {
+  margin-bottom: 0;
+}
+#ps-background .container .jumbotron, 
+#ps-background .container-fluid .jumbotron {
+  border-radius: 0;
+}
+
+
+.pop-home-latesteverything {
+	margin-top: 20px;
+}
+
+.framesection-navbar-right {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #4d4d4f;
+}
+.framesection-navbar-title {
+	white-space: nowrap;
+	position: absolute;
+	top: 0;
+	left: 95px;
+	padding-top: 3px;
+	color: #fff;
+}
+
+/* Title on the frametop simple/embed */
+.pagesection-group.active-side .framesection-navbar-title {
+	left: 88px; /* logo icon + hamburguer menu icon */
+}
+@media (min-width: 768px) {
+	.pagesection-group.active-side .framesection-navbar-title {
+		left: 51px; /* no logo icon, so only hamburguer menu icon */
+	}
+}
+body.embed .pagesection-group .framesection-navbar-title {
+	left: 51px; /* no hamburguer menu icon in embed, so only logo icon */
+}
+
+.pop-home-latesteverything {
+	margin-top: 20px;
+}
+
+
+.pop-visible-embed.author-title,
+.pop-visible-embed.content-title {
+	margin-top: 0;
+}
+
+.text-padded {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.pop-btn-title.visible {
+	display: inline-block !important;
+}
+
+.all-locations-titlelink {
+	text-decoration: underline;
+}
+
+.row-item {
+  background-color: #fff;
+  border: 1px solid #dcddde;
+  -webkit-box-shadow: 0 2px 4px #ccc;
+	-moz-box-shadow: 0 2px 4px #ccc;
+	box-shadow: 0 2px 4px #ccc;
+}
+
+#quickview-modal .body > .tab-pane {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.top-useravatar-container .useravatar-link {
+	margin-top: 5px;
+}
+
+.top-iconleft-container {
+	font-size: 75px;
+    padding: 10px 15px 0 15px;
+}
+
+
+.datetime > .downloadlinks {
+	margin-top: -5px;
+}
+
+.panel-sm .quicklinkgroup-top {
+  margin-top: -7px;
+  margin-right: -10px;
+}
+.popover .quicklinkgroup-top,
+.list-group .quicklinkgroup-top,
+.mapdetails > .scroll-inner .pop-blockinner-row .quicklinkgroup-top {
+  margin-top: -10px;
+}
+.list-group.list-group-sm .quicklinkgroup-top,
+.panel-sm .list-group-item .quicklinkgroup-top {
+  margin-top: -7px;
+  margin-right: -10px;
+}
+
+.alert.readable,
+.well.readable {
+	margin-bottom: 40px;
+}
+.readable {
+	overflow: hidden;
+}
+.pop-content.readable {
+	padding-bottom: 15px;
+}
+
+.pop-content .iframe-wrapper {
+	margin-bottom: 20px;
+}
+
+/* Iframe size does not appear right in iOS safar, so this class fixes the problem. Taken from https://stackoverflow.com/questions/16937070/iframe-size-with-css-on-ios */
+.iframe-wrapper {
+	overflow: auto;
+	-webkit-overflow-scrolling:touch;
+}
+.content-iframe-wrapper {
+	position: relative;
+	/*background-color: #f1f1f2;*/
+	background-color: #dcddde;
+}
+
+.fullview > .wrapper > .row > .content-body,
+.layoutauthor,
+.content-single {
+	padding: 30px 10px;
+}
+@media (min-width: 700px) {
+	.fullview > .wrapper > .row > .content-body {
+		padding: 30px 57px; /* With 57px, the width of the content inside is exactly 480px */
+	}
+	.layoutauthor,
+	.content-single {
+		padding: 30px 41px; /* With 41px, the width of the content inside is exactly 480px */
+	}
+}
+
+.block-single-content > .blocksection-inners > hr {
+	margin-right: 15px;
+	margin-left: 15px;
+}
+
+
+.alert.form-horizontal .form-group:last-child {
+	margin-bottom: 0;
+}
+
+/* Hide the annoying "Close media panel" message next to the "X" in the Media Panel*/
+.media-modal .screen-reader-text {
+	display: none;
+}
+
+.comment-layout {
+	margin-bottom: 10px;
+}
+
+/* Homepage Newsletter: make inputs get closer */
+.blockgroup-home .block-newsletter .form-group {
+	margin-bottom: 5px;
+}
+
+/* For mobile phone: switch between Search input on frame-top and the other icons, not all of them fit at the same time */
+#ps-top .visiblesearch-hidden,
+#ps-top.pop-search-visible .visiblesearch-visible {
+  display: block !important;
+}
+#ps-top .visiblesearch-hidden.hidden,
+#ps-top.pop-search-visible .visiblesearch-visible.hidden,
+#ps-top .visiblesearch-visible,
+#ps-top.pop-search-visible .visiblesearch-hidden {
+  display: none !important;
+}
+/* Place the Search button on the right of the Search input */
+#ps-top.pop-search-visible .visiblesearch-visible-right {
+	position: absolute;
+	right: 0;
+}
+#ps-top.pop-search-visible .nav-quicklink {
+	margin-right: 148px;/*37px;*/
+	padding-left: 5px;
+	padding-right: 5px;
+}
+/* Reset effects for iPad onwards */
+@media (min-width: 768px) {
+	#ps-top .visiblesearch-hidden,
+	#ps-top.pop-search-visible .visiblesearch-visible,
+	#ps-top .visiblesearch-visible,
+	#ps-top.pop-search-visible .visiblesearch-hidden {
+	  display: block !important;
+	}
+	#ps-top.pop-search-visible .pop-toggle-search {
+		position: static;
+	}
+	#ps-top.pop-search-visible .nav-quicklink {
+		margin-right: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.navbar .nav-quicklink {
+	padding-top: 5px;
+}
+.navbar .nav-quicklink .btn {
+	padding: 6px 3px;
+}
+.tt-menu .media {
+	margin-top: 0;
+}
+
+
+#ps-top .nav-dropdown > .dropdown-menu {
+	width: 280px;
+}
+#ps-top .tt-menu > div,
+#ps-top .tt-suggestions {
+  min-width: 280px;
+}
+@media (min-width: 320px) {
+	#ps-top .nav-dropdown > .dropdown-menu {
+		width: 320px;
+	}
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 310px;
+	}
+}
+@media (min-width: 360px) {
+	#ps-top .nav-dropdown > .dropdown-menu {
+		width: 360px;
+	}
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 350px;
+	}
+}
+@media (min-width: 400px) {
+	#ps-top .nav-dropdown > .dropdown-menu {
+		width: 400px;
+	}
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 390px;
+	}
+}
+@media (min-width: 500px) {
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 490px;
+	}
+}
+@media (min-width: 600px) {
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 590px;
+	}
+}
+@media (min-width: 700px) {
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 690px;
+	}
+}
+
+#ps-top .nav-account .dropdown-menu {
+	left: -192px;
+}
+#ps-top .nav-account .dropdown-menu:before {
+	left: 206px;
+}
+#ps-top .nav-account .dropdown-menu:after {
+	left: 207px;
+}
+#ps-top .nav-notifications .dropdown-menu {
+	left: -229px;
+}
+#ps-top .nav-notifications .dropdown-menu:before {
+	left: 243px;
+}
+#ps-top .nav-notifications .dropdown-menu:after {
+	left: 244px;
+}
+#ps-top .nav-addcontent .dropdown-menu {
+	left: -51px;	
+}
+#ps-top .nav-addcontent .dropdown-menu:before {
+	left: 65px;
+}
+#ps-top .nav-addcontent .dropdown-menu:after {
+	left: 66px;
+}
+#account-loading-msg {
+	position: absolute;
+	top: 7px;
+    left: 197px;
+}
+
+/* Because when the side is active we're hiding the small MESYM logo, then gotta put back the logo width (51px) for all the dropdowns on the left side */
+/* We don't care about mobile phone version, since the side covers the main anyway */
+@media (min-width: 768px) {
+	#ps-top .nav-account .dropdown-menu {
+		left: -192px;
+	}
+	#ps-top .nav-account .dropdown-menu:before {
+		left: 206px;
+	}
+	#ps-top .nav-account .dropdown-menu:after {
+		left: 207px;
+	}
+	#ps-top .nav-notifications .dropdown-menu {
+		left: -229px;
+	}
+	#ps-top .nav-notifications .dropdown-menu:before {
+		left: 243px;
+	}
+	#ps-top .nav-notifications .dropdown-menu:after {
+		left: 244px;
+	}
+	.pagesection-group.active-side #ps-top .nav-account .dropdown-menu {
+		left: -104px;	
+	}
+	.pagesection-group.active-side #ps-top .nav-account .dropdown-menu:before {
+		left: 118px;
+	}
+	.pagesection-group.active-side #ps-top .nav-account .dropdown-menu:after {
+		left: 119px;
+	}
+	.pagesection-group.active-side #ps-top .nav-notifications .dropdown-menu {
+		left: -141px;	
+	}
+	.pagesection-group.active-side #ps-top .nav-notifications .dropdown-menu:before {
+		left: 155px;
+	}
+	.pagesection-group.active-side #ps-top .nav-notifications .dropdown-menu:after {
+		left: 156px;
+	}
+
+	.pagesection-group.active-side #account-loading-msg {
+		left: 108px;
+	}
+}
+
+
+/* Search button is on the further right on mobile phone, it disappear for iPad, so arrange the dropdown positions accordingly */
+#ps-top .nav-about .dropdown-menu {
+	right: -74px;
+}
+#ps-top .nav-about .dropdown-menu:before {
+	right: 88px;
+}
+#ps-top .nav-about .dropdown-menu:after {
+	right: 89px;
+}
+#ps-top .nav-sponsors .dropdown-menu {
+	right: -111px;
+}
+#ps-top .nav-sponsors .dropdown-menu:before {
+	right: 125px;
+}
+#ps-top .nav-sponsors .dropdown-menu:after {
+	right: 126px;
+}
+@media (min-width: 768px) {
+
+	#ps-top .nav-dropdown > .dropdown-menu {
+		width: 420px;
+	}
+
+	#ps-top .nav-about .dropdown-menu {
+		right: -37px;
+	}
+	#ps-top .nav-about .dropdown-menu:before {
+		right: 51px;
+	}
+	#ps-top .nav-about .dropdown-menu:after {
+		right: 52px;
+	}
+	#ps-top .nav-sponsors .dropdown-menu {
+		right: -74px;
+	}
+	#ps-top .nav-sponsors .dropdown-menu:before {
+		right: 88px;
+	}
+	#ps-top .nav-sponsors .dropdown-menu:after {
+		right: 89px;
+	}
+
+	.navbar .nav-quicklink {
+		width: 270px;
+	}
+	.navbar .nav-quicklink .btn {
+		padding: 6px 12px;
+	}
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 270px;
+	}
+}
+@media (min-width: 992px) {
+	.navbar .nav-quicklink {
+		width: 450px;
+	}
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 450px;
+	}
+}
+@media (min-width: 1200px) {
+	.navbar .nav-quicklink {
+		width: 620px;
+	}
+	#ps-top .tt-menu > div,
+	#ps-top .tt-suggestions {
+	  min-width: 620px;
+	}
+}
+
+
+
+
+div.inline {
+	display: inline;
+}
+.pop-pulltextleft {
+	margin-left: -4px;
+}
+.pop-pulltextright {
+	margin-right: -4px;
+}
+
+
+.pop-typeahead .suggestions {
+	overflow: hidden;
+}
+
+.post-thumb.pop-thumb-framed img {
+	border: 2px solid #d9edf7;
+}
+
+
+.panel > .panel-heading > .btn.btn-link {
+	/* When inside the panel heading, the links should have no padding, or it makes the heading too big */
+	padding: 0;
+}
+
+#ps-top-menu-addcontent li > a {
+    background-color: #4d4d4f;
+}
+
+.visible-link {
+	display: none;
+}
+.postlinks .visible-link,
+.eventlinks .visible-link {
+	display: block;
+}
+.postlinks .visible-link.inline,
+.eventlinks .visible-link.inline {
+  display: inline-block;
+}
+
+
+.post-thumb-description {
+	margin: -20px 0 20px;
+}
+
+.sociallogin-networklinks {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.top-useravatar-container img.pop-user-avatar {
+	/* Dimensions needed for WSL avatars from FB/Twitter */
+	max-width: 100px;
+	max-height: 100px;
+}
+
+
+#ps-top .label-none {
+    color: #fff;
+}
+
+
+
+
+#ps-top .notifications.scrollable {
+ 	position: relative; 
+ 	overflow: scroll; 
+ 	overflow-x: hidden; 
+ 	overflow-y: hidden; 
+}
+ #ps-top .notifications.scrollable {
+ 	max-height: 400px;
+}
+
+/* Simulate adding class "pull-right" to the dropdown menu */
+#ps-top .notifications.scrollable .dropdown-menu.login {
+ 	right: 0;
+ 	left: auto;
+ }
+
+ #ps-top .notifications.scrollable .pop-spinner {
+    margin-left: 0px;
+}
+ #ps-top .notifications.scrollable h1.title {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+#notifications-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #337ab7;
+}
+
+/* Highlight elements */
+.pop-highlight {
+  -moz-animation: flash 2s ease-out;
+  -moz-animation-iteration-count: 1;
+
+  -webkit-animation: flash 2s ease-out;
+  -webkit-animation-iteration-count: 1;
+
+  -ms-animation: flash 2s ease-out;
+  -ms-animation-iteration-count: 1;
+}
+@-webkit-keyframes flash {
+    0% { background-color:none;}
+    50% { background-color:#5bc0de;}        
+    100% {background-color:none;}
+}
+@-moz-keyframes flash {
+    0% { background-color:none;}
+    50% { background-color:#5bc0de;}        
+    100% {background-color:none;}
+}
+@-ms-keyframes flash {
+    0% { background-color:none;}
+    50% { background-color:#5bc0de;}        
+    100% {background-color:none;}
+}
+
+/* #ps-top must not highlight, eg: notifications comments */
+#ps-top .pop-highlight {
+  -moz-animation: none;
+  -webkit-animation: none;
+  -ms-animation: none;
+}
+
+.preview .col-sm-1.avatar {
+	padding-right: 0;
+}
+
+.iframe-code {
+	background-color: #fff;
+}
+
+
+pre.breakable {
+    white-space: normal;
+    word-wrap: normal;
+    word-break: normal;
+}
+
+/* Needed because there is a dropdown inside the feedbackmessage, if overflow: hidden; then it's not seen */
+/*.media.overflow-visible,
+.media.overflow-visible .media-body {
+	overflow: visible;
+}*/
+
+#ps-sideinfo .buttongroup-wrapper {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+
+
+/* Make the Add Media button in the addons pageSection more prominent */
+div.wp-media-buttons {
+	float: none;
+}
+div.wp-media-buttons .button.pop-mediabutton {
+	width: 100%;
+	margin-bottom: 5px;
+	font-weight: 700;
+}
+div.wp-media-buttons .button.pop-mediabutton.insert-media {
+	
+	/* When having 2 buttons: Add Photo/File, and Add Image Gallery */
+	width: 50%;
+}
+/* Hide the original "Add Media" button, only mine will be shown */
+div.wp-media-buttons .insert-media {
+	display: none;
+}
+div.wp-media-buttons .insert-media.pop-mediabutton {
+	display: inline-block;
+}
+div.wp-media-buttons .button {
+    margin: 0;
+}
+
+/* Gallery Thumbnail */
+.gallery dl.gallery-item {
+	display: inline-block;
+}
+.gallery.gallery-size-thumbnail dl.gallery-item {
+	margin-bottom: 0;
+}
+
+/* Gallery "thumb-gallery" */
+.content-single .gallery.gallery-size-thumbnail,
+.simpleview .gallery.gallery-size-thumbnail,
+.simpleview .gallery.gallery-size-thumb-gallery dl.gallery-item {
+	/* .gallery-size-thumb-gallery: -3px = 2px padding + 1px border => img can keep its 480px of width, useful for .simpleview */
+	/* .gallery-size-thumbnail: it also fits just fine */
+	margin: 0 -3px;
+}
+.gallery.gallery-size-thumbnail dt.gallery-icon,
+.gallery.gallery-size-thumb-gallery dl.gallery-item {
+    background-color: #FFFFFF;
+    border: 1px solid #dcddde;
+    padding: 2px;
+}
+.gallery.gallery-size-thumbnail dt.gallery-icon {
+	margin: 2px 3px;	
+}
+.gallery.gallery-size-thumb-gallery dl.gallery-item {
+    margin: 2px 0;
+}
+/* The caption doesn't look fine, so hide it */
+.gallery dd.gallery-caption {
+    display: none;
+}
+   
+#ps-sideinfo .buttongroup-wrapper .btn.dropdown {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.dynamicbtn-wrapper {
+	text-align: center;
+}
+
+.collapse.in+.pop-collapse-btn .collapsed,
+.pop-collapse-btn .expanded {
+	display: none;
+}
+.collapse.in+.pop-collapse-btn .expanded,
+.pop-collapse-btn .collapsed {
+	display: inline-block;
+}
+
+
+.pop-collapse-btn.wrapper {
+	text-align: center;
+}
+
+.sm-group+.volunteer-wrapper,
+.secinteractions-group+.volunteer-wrapper {
+	float: right;
+	margin-top: 5px;
+}
+
+
+
+#ps-side .addnew-menu ul.dropdown-menu {
+	background-color: #dbe0e2;	
+}
+
+/* The formats in sideinfo are cut, so make the dropdowns narrower */
+#ps-sideinfo .buttongroup-wrapper .dropdown-menu {
+	min-width: auto;
+}
+#ps-sideinfo .buttongroup-wrapper .dropdown-menu > li > a {
+	padding: 3px 10px;
+}
+
+
+.pop-functiongroup {
+	background-color: #fff;
+}
+
+a.pop-modalmap-link {
+	/* Same as btn-link */
+	color: #337ab7;
+}
+a.pop-modalmap-link:hover,
+a.pop-modalmap-link:focus {
+	/* Same as btn-link */
+	color: #23527c;
+}
+
+/* Make the Sideinfo invisible in the Print thememode */
+body.print #ps-sideinfo {
+	display: none;
+}
+
+
+form.pop-filterform-instantaneous {
+	margin-bottom: 10px;
+}
+
+
+/* Hide the conclusion sidebar for draft posts */
+.block-single-content.draft .conclusion.horizontal.sidebar {
+  display: none;
+}
+
+.block-events-scrollmap {
+  margin-bottom: 20px;
+}
+
+iframe.embedpreview {
+	background-color: #fff;
+}
+
+/* prettyPrint for theme "desert", which adds background-color #333. Before prettyPrint is run, the font is not visible, since it's also #333 (coming from bootstrap) */
+pre.prettyprint {
+	color: #fff;
+}
+
+.layout-tag-details h4 {
+	margin-top: 0;
+}
+
+/* Rotate the collapse link arrow down when opening the collapse */
+.collapselink .collapse-arrow {
+	-webkit-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+}
+.collapselink.collapsed .collapse-arrow {
+	-moz-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+}
+
+
+
+/* Make the background-size: cover; work also in Chrome in Android phone */
+/* Taken from https://stackoverflow.com/questions/14876035/background-size-cover-not-working-in-portrait-on-android-tablet#19452558 */
+html{
+ height:100%;
+ min-height:100%;
+}
+body{
+ min-height:100%;
+}
+
+.visible-loadinghtml,
+.pop-loadinghtml .hidden-loadinghtml {
+	display: none;
+}
+.hidden-loadinghtml,
+.pop-loadinghtml .visible-loadinghtml {
+	display: block;
+}

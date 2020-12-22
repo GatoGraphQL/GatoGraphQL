@@ -1,0 +1,49 @@
+{{#with dbObject}}
+	<div class="layout notification-layout preview {{../class}} {{status}} target-{{id}}-{{../tls.domain-id}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
+		{{#withModule ../. "link"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+		{{#withModule ../. "quicklinkgroup-top"}}
+			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}" style="{{../../styles.quicklinkgroup-top}}">
+				{{enterModule ../../.}}
+			</div>
+		{{/withModule}}
+		<div class="wrapper {{../classes.wrapper}}" style="{{../styles.wrapper}}">
+			<div class="{{../classes.thumb-wrapper}}" style="{{../styles.thumb-wrapper}}">
+				{{#withModule ../. "postthumb"}}				
+					<div class="post-thumb {{../../classes.thumb}}" style="{{../../styles.thumb}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				{{#withModule ../. "user-avatar"}}
+					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">					
+						{{enterModule ../../. dbKey=../../bs.dbkeys.user-id dbObjectID=../user-id}}
+					</div>
+				{{/withModule}}
+			</div>
+			<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
+				<div class="message {{../classes.content}}" style="{{../styles.content}}">
+					{{#if ../add-url-link}}<a href="{{url}}" {{#if target}}target="{{target}}"{{/if}}>{{/if}}
+						{{{message}}}
+					{{#if ../add-url-link}}</a>{{/if}}
+				</div>
+				{{#withModule ../. "quicklinkgroup-bottom"}}
+					<div class="quicklinkgroup quicklinkgroup-bottom {{../../classes.quicklinkgroup-bottom}}" style="{{../../styles.quicklinkgroup-bottom}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				{{#if ../submoduleoutputnames.bottom}}
+					<div class="extra {{../classes.bottom}}" style="{{../styles.bottom}}">
+						{{#each ../submoduleoutputnames.bottom}}
+							<div class="extra-inner {{../../classes.bottom-inner}}" style="{{../../styles.bottom-inner}}">
+								{{#withModule ../../. this}}
+									{{enterModule ../../../.}}
+								{{/withModule}}
+							</div>
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+{{/with}}

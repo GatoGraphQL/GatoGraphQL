@@ -1,0 +1,31 @@
+<script type="text/javascript">
+(function($){
+	{{!Format of events data to generate: }}
+	{{!http://arshaw.com/fullcalendar/docs/event_data/Event_Object/}}
+	{{!http://arshaw.com/fullcalendar/docs/event_data/Event_Source_Object/}}
+	var events_data = [];
+	
+	{{#each dbObjectIDs}}
+		{{#withDBObject ../dbKey this context=../.}}
+			events_data.push({
+				id: "{{id}}",
+				title: "{{title}}",
+				start: "{{start-date}}",
+				end: "{{end-date}}",
+				allDay: {{all-day}},
+				domain: "{{../../tls.domain}}", {{!Domain is needed because all events are redrawn all together, so each of them needs to know from where to get its object data}}
+				className: "{{../../tls.domain-id}}",
+			});
+		{{/withDBObject}}
+	{{/each}}
+
+	{{! The elements below dont exist yet, we must wait until they are inserted into the DOM }}
+	$(document).one('module:merged', function() {
+
+		var block = pop.Manager.getBlock($('#{{bs.bId}}'));
+		var pageSection = pop.Manager.getPageSection(block);
+		pop.FullCalendarAddEvents.addEvents(pageSection, block, events_data);
+	});
+	
+})(jQuery);
+</script>

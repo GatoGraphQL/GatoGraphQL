@@ -1,0 +1,7 @@
+{{#with dbObject}}
+	<a href="{{{get . ../url-field}}}" {{#if ../linktarget}}target="{{../linktarget}}"{{/if}} class="{{../class}} {{../classes.link}}" style="{{../style}} {{../styles.link}}" data-header="{{#withModule ../. 'header'}}{{enterModule ../../.}}{{/withModule}}" title="{{{../title}}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
+		{{#withModule ../. "buttoninner"}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	</a>
+{{/with}}

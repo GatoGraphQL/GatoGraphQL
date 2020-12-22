@@ -1,0 +1,24 @@
+
+/* Adding the Opinionated Votes Counts in the feed: it is done before the Share, so the styles for the Share must be shifted one level down */
+.simpleview .layout .aftercontent > .inner:first-child {
+    background-color: transparent;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.simpleview .aftercontent > .inner:nth-child(2) {
+    background-color: #d9edf7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* Only add margin-top for the first 2 rows: the "Share" and the "User post interaction" ones */
+/*.simpleview .aftercontent > .inner:first-child,
+.simpleview .aftercontent > .inner:nth-child(2) {*/
+.simpleview .aftercontent > .inner:nth-child(3) {
+    margin-top: 15px;
+}
+
+/* Show the author in the Thought, displayed belowcontent */
+.layout.preview.stances>.wrapper>.content-body>.authors.belowcontent {
+    display: inline-block;
+}

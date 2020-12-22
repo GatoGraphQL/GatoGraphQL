@@ -1,0 +1,12 @@
+{{#with dbObject}}
+	<script type="text/javascript">
+	(function($){
+		$(document).one('module:merged', function() {
+
+			var block = $('#{{../bs.bId}}');
+			var pageSection = $('#{{../pss.psId}}');
+			pop.MapRuntime.initMarker('{{../tls.domain}}', pageSection, block, '{{id}}', '{{coordinates.lat}}', '{{coordinates.lng}}', '{{{name}}}', '{{address}}');
+		});
+	})(jQuery);
+	</script>
+{{/with}}

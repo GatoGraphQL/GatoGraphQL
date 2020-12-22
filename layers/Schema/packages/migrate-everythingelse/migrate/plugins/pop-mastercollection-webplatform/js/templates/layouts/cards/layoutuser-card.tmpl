@@ -1,0 +1,18 @@
+{{#with dbObject}}
+	<div class="media">
+		{{! Maybe there is no avatar-sm: when preselecting the value to filter, the avatar-sm might've not been fetched}}
+		{{#withSublevel ../avatar.name}}
+			<div class="media-left">
+				<img width="{{size}}" height="{{size}}" src="{{src}}" title="{{../display-name}}">
+			</div>
+		{{/withSublevel}}
+		<div class="media-body">
+			<h4 class="media-heading"><a href="{{url}}">{{{display-name}}}</a></h4>
+			{{#each ../submoduleoutputnames.extras}}
+				{{#withModule ../../. this}}
+					{{enterModule ../../../.}}
+				{{/withModule}}
+			{{/each}}
+		</div>
+	</div>
+{{/with}}

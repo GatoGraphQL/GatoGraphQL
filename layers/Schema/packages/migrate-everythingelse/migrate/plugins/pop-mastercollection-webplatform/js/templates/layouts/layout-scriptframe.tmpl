@@ -1,0 +1,8 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}">
+	{{#withModule . "script"}}
+		{{enterModule ../.}}
+	{{/withModule}}
+	{{#withModule . "layout"}}
+		{{enterModule ../.}}
+	{{/withModule}}
+</div>

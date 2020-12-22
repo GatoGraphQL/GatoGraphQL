@@ -1,0 +1,11 @@
+parameters:
+    version: '0.1.0'
+
+services:
+    PoPSchema\Categories\Conditional\API\RouteModuleProcessors\:
+        resource: '../src/Conditional/API/RouteModuleProcessors/*'
+        public: true
+
+    PoPSchema\Categories\Conditional\RESTAPI\RouteModuleProcessors\:
+        resource: '../src/Conditional/RESTAPI/RouteModuleProcessors/*'
+        public: true

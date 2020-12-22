@@ -1,0 +1,7 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	{{#each (maybe_make_array (formcomponentValue value dbObject dbobject-field default-value))}}
+		{{#withModule ../. "trigger-layout"}}
+			{{enterModule ../../. dbKey=../../dbkey dbObjectID=../.}}
+		{{/withModule}}
+	{{/each}}
+</div>

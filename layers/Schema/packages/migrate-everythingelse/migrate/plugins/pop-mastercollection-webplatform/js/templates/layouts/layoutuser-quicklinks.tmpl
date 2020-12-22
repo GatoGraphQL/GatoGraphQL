@@ -1,0 +1,13 @@
+{{#with dbObject}}
+	{{#if contact-small}}
+		{{#each contact-small}}
+			<a href="{{url}}" target="{{target}}">
+				<i class="fa {{fontawesome}} fa-fw"></i> {{tooltip}}
+			</a>
+		{{/each}}
+	{{else}}
+		<a href="#" {{#generateId context=../. group="void-link"}}{{../id}}{{/generateId}}>
+			{{../titles.nocontact}}
+		</a>
+	{{/if}}
+{{/with}}

@@ -1,0 +1,12 @@
+{{#each o.files}}
+    <div class="module-upload fade">
+    	<div class="preview"><span class="fade"></span></div>
+		{{#if error}}
+            <div class="error">
+            	<span class="label label-danger">{{error}}</span>
+            </div>
+        {{else}}
+        	<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        {{/if}}
+    </div>
+{{/each}}

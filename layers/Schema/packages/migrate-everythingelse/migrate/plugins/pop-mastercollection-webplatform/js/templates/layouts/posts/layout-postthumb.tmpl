@@ -1,0 +1,19 @@
+{{#with dbObject}}
+	{{#withSublevel ../thumb.name}}
+		<div {{#generateId context=../../.}}{{../../id}}{{/generateId}} class="post-thumb {{../../class}}" style="{{../../style}}">
+			<a href="{{get ../. ../../url-field}}" class="{{../../classes.link}}" style="{{../../styles.link}}" target="{{../../link-target}}" {{#each ../../dbobject-params}} {{@key}}="{{get ../../. this}}"{{/each}}>
+				<img src="{{src}}" class="{{../../classes.img}}" style="{{../../styles.img}}" alt="{{{../title}}}" width="{{width}}" height="{{height}}">
+			</a>
+			{{#if description}}<p class="post-thumb-description"><small>{{description}}</small></p>{{/if}}
+			{{#if ../../submoduleoutputnames.thumb-extras}}
+				<div class="{{../../classes.thumb-extras}}" style="{{../../styles.thumb-extras}}">
+					{{#each ../../submoduleoutputnames.thumb-extras}}
+						{{#withModule ../../../. this}}
+							{{enterModule ../../../../.}}
+						{{/withModule}}
+					{{/each}}
+				</div>
+			{{/if}}
+		</div>
+	{{/withSublevel}}
+{{/with}}

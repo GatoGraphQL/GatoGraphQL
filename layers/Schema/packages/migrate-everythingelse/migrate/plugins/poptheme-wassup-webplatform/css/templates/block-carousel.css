@@ -1,0 +1,47 @@
+.pop-block-carousel {
+	margin-bottom: 20px;
+}
+.pop-block-carousel .pop-feedbackmessage.alert {
+	margin-bottom: 0;
+}
+
+.block-posts-carousel .carousel.widget .carousel-inner,
+.block-users-carousel .carousel.widget .carousel-inner {
+  background-color: #fff;
+}
+.block-posts-carousel .carousel.widget .carousel-item {
+  padding: 15px;
+}
+.block-posts-carousel .carousel.widget .carousel-row {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.block-posts-carousel .carousel.widget .carousel-row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.block-posts-carousel .carousel.widget .carousel-row:last-child {
+  padding-bottom: 0;
+}
+.carousel.widget .btn {
+  border: 0;
+  border-radius: 0;
+}
+.carousel.widget .pop-carousel-controls {
+  text-align: center;
+}
+.carousel.widget .pop-carousel-controls h4 {
+  margin: 0;
+}
+@media (min-width: 768px) {
+	.block-posts-carousel > .blocksection-extensions > .pop-block {
+		margin-top: 0;
+	}
+}
+.block-users-carousel .carousel-row {
+	margin: 0;
+	padding: 5px;
+}
+.block-users-carousel .thumbnail {
+	margin-bottom: 0;
+}

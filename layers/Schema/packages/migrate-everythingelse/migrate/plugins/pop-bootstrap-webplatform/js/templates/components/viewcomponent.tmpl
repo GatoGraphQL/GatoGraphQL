@@ -1,0 +1,18 @@
+<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} class="{{type}} {{classes.bootstrap-component}} {{classes.viewcomponent}}" style="{{styles.bootstrap-component}}{{styles.viewcomponent}}" tabindex="-1" role="dialog" aria-labelledby="{{lastGeneratedId group=bootstrap-type}}" aria-hidden="true" {{#each viewcomponent-params}} {{@key}}="{{this}}"{{/each}}>
+	<div class="{{type}}-dialog {{classes.dialog}}" style="{{styles.dialog}}">
+		<div class="{{type}}-content">
+			<div class="{{type}}-header">
+				<button type="button" class="close close-lg" data-dismiss="{{type}}" aria-hidden="true">&times;</button>
+				{{{titles.header}}}
+				<div class="pop-box"></div>
+			</div>
+			<div id="{{lastGeneratedId group=bootstrap-type}}-container" class="{{type}}-body {{classes.container}}" style="{{styles.container}}">
+				{{#each submoduleoutputnames.inners}}
+					{{#withModule ../. this}}
+						{{enterModule .}}
+					{{/withModule}}
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>

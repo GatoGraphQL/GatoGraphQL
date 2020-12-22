@@ -1,0 +1,4 @@
+services:
+    PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeAPIInterface:
+        class: \PoPSchema\CustomPostMediaMutationsWP\TypeAPIs\CustomPostMediaTypeAPI
+        public: true

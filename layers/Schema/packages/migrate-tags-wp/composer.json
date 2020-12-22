@@ -1,0 +1,31 @@
+{
+    "name": "pop-schema/migrate-tags-wp",
+    "type": "library",
+    "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/tags-wp. Target package description: Implementation for WordPress of contracts from package \"Tags\"",
+    "keywords": [
+        "PoP",
+        "tags-wp"
+    ],
+    "homepage": "https://github.com/pop-schema/migrate-tags-wp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

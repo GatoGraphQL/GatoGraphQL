@@ -1,0 +1,4 @@
+# Allow the generation of the captcha
+<Files captcha.png.php>
+Allow from all
+</Files>

@@ -1,0 +1,10 @@
+{{#with dbObject}}
+	<script type="text/javascript">
+	(function($){
+		$(document).one('module:merged', function() {
+			var destination = $('div.pop-append-{{../dbObjectDBKey}}-{{id}}.{{../classes.spinner}}');
+			destination.addClass('hidden');
+		});
+	})(jQuery);
+	</script>
+{{/with}}

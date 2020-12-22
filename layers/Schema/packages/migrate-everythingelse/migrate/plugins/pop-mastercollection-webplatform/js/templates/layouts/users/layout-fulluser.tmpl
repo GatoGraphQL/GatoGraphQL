@@ -1,0 +1,55 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="pop-user-{{id}} user-layout fullview {{../class}}" style="{{../style}}">
+		<div class="wrapper {{../classes.wrapper}}" style="{{../styles.wrapper}}">
+			{{#compare ../title-position "top"}}
+				{{#withModule ../. "title"}}
+					{{enterModule ../../.}}
+				{{/withModule}}
+			{{/compare}}
+			<div class="{{../classes.inner-wrapper}}" style="{{../styles.inner-wrapper}}">
+				{{#withModule ../. "sidebar"}}
+					<div class="sidebar topsidebar {{../../classes.sidebar}}" style="{{../../styles.sidebar}}">
+						{{enterModule ../../.}}
+					</div>
+				{{/withModule}}
+				<div class="content-body {{../classes.content-body}}" style="{{../styles.content-body}}">
+					{{#if ../submoduleoutputnames.headers}}
+						<div class="headers {{../classes.headers}}" style="{{../styles.headers}}">
+							{{#each ../submoduleoutputnames.headers}}
+								{{#withModule ../../. this}}
+									<div class="header {{../../../classes.header}}" style="{{../../../styles.header}}">
+										{{enterModule ../../../.}}
+									</div>
+								{{/withModule}}
+							{{/each}}
+						</div>
+					{{/if}}
+					{{#compare ../title-position "body"}}
+						{{#withModule ../. "title"}}
+							{{enterModule ../../.}}
+						{{/withModule}}
+					{{/compare}}
+					{{#if ../show-description}}
+						<div class="{{../classes.content}}" style="{{../styles.content}}">
+							{{#if short-description-formatted}}
+								<p class="{{../classes.short-description}}" style="{{../styles.short-description}}"><strong>{{{short-description-formatted}}}</strong></p>
+							{{/if}}							
+							{{{description-formatted}}}
+						</div>	
+					{{/if}}
+					{{#if ../submoduleoutputnames.footers}}
+						<div class="footers {{../classes.footers}}" style="{{../styles.footers}}">
+							{{#each ../submoduleoutputnames.footers}}
+								{{#withModule ../../. this}}
+									<div class="footer {{../../../classes.footer}}" style="{{../../../styles.footer}}">
+										{{enterModule ../../../.}}
+									</div>
+								{{/withModule}}
+							{{/each}}
+						</div>
+					{{/if}}
+				</div>
+			</div>	
+		</div>
+	</div>
+{{/with}}

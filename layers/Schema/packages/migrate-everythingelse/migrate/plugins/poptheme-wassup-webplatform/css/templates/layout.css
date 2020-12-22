@@ -1,0 +1,170 @@
+
+#ps-body .layout.preview .blockinner-row,
+#ps-quickview .layout.preview .blockinner-row {
+	background-color: transparent;
+}
+
+.layout.preview .extra.belowthumb,
+.layout.preview .extra.belowavatar {
+	padding: 5px 10px;
+	margin-bottom: 10px;
+}
+.layout.preview .extra-inner {
+	margin-bottom: 5px;
+}
+.layout.preview .extra-inner:last-child {
+	margin-bottom: 0;
+}
+
+.layout.preview > .wrapper > .content-body > .authors.belowcontent,
+/*.layout.preview.postlinks > .wrapper > .content-body > .authors.abovetitle,*/
+.layout.preview.event > .wrapper > .content-body > .authors.belowcontent/*,
+.layout.preview.event.eventlinks > .wrapper > .content-body > .authors.abovetitle*/ {
+	display: none;
+}
+/*.layout.preview.postlinks > .wrapper > .content-body > .authors.belowcontent,
+.layout.preview.postlinks > .wrapper > .content-body.simpleview > .authors.abovetitle,
+.layout.preview.event.eventlinks > .wrapper > .content-body > .authors.belowcontent,
+.layout.preview.event.eventlinks > .wrapper > .content-body.simpleview > .authors.abovetitle,
+.layout.preview.event.eventlinks.events-carousel .authors.abovetitle {
+	display: block;
+}
+*/
+/* Posts only has featured image, which might not be there, so then add the border only if it is there */
+.layout.preview.posts > .wrapper > .content-body.simpleview > .abovecontent > .wrapper,
+.layout.preview.event > .wrapper > .content-body.simpleview > .abovecontent {
+    background-color: #d9edf7;
+	border: 1px solid #bce8f1;
+	/* Using -1px for left/right margin, so the featured image has exactly 500px (col-sm-10 in container 588px wide and no padding-left) */
+    margin: 0 -1px 10px;
+}
+.content-body.simpleview > .abovecontent .event-datelocation,
+.content-body.simpleview > .abovecontent .location {
+    padding: 5px;
+    position: relative;
+}
+
+.simpleview.content-body > .authors.abovetitle {
+	/* Make the authors only appear on 1 line, otherwise long names (like CETDEM's) look in a 2nd line, because of the date on the right side, and ugly */
+    overflow: hidden;
+    white-space: nowrap;
+}
+.layout.preview > .wrapper > .content-body > .date {
+	margin-right: 20px;
+	margin-left: 5px;
+}
+
+.simpleview .top > .inner > .wrapper-featuredimage {
+  margin-bottom: 15px;
+}
+
+/* Place the Event date/time on top of the featured image, only if the post has one (obviously) */
+.simpleview .abovecontent>.wrapper-featuredimage+.event-datelocation .datetime,
+.simpleview .abovecontent>.wrapper-featuredimage+.pop-multilayout .event-datelocation .datetime {
+    position: absolute;
+    top: -56px;
+    left: 5px;
+    right: 5px;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px dotted #4d4d4f;
+    padding: 2px 10px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.simpleview .datetime {
+    position: relative;
+}
+
+.datetime > .calendar > .date {
+    font-size: 115%;
+}
+.details .datetime > .calendar > .date {
+    font-size: 125%;
+}
+@media (min-width: 768px) {
+	.simpleview .datetime > .calendar > .date {
+	    font-size: 170%;
+	    font-weight: 700;
+	}
+	.simpleview .abovecontent>.wrapper-featuredimage+.event-datelocation .datetime,
+	.simpleview .abovecontent>.wrapper-featuredimage+.pop-multilayout .event-datelocation .datetime {
+	    top: -66px;
+	}
+}
+
+
+.preview-author,
+.preview-author-sep {
+	display: inline-block;
+}
+
+.preview-author-sep {
+    color: #337ab7;
+    margin: 0 5px;
+}
+
+.table-myhighlights .preview .quicklinkgroup-bottom,
+.table-mystances .preview .quicklinkgroup-bottom  {
+	margin-bottom: 10px;
+}
+.table-myhighlights .preview .preview,
+.table-mystances .preview .preview  {
+	padding-left: 25px;
+}
+
+.preview .authors-bottom {
+	/* This space at the top is because there is a quicklinkgroup at the left of the author (eg: for Highlight), which have "btn btn-link" class, with margin top 6. So now they are at same level */
+	margin-top: 6px;
+}
+.preview .quicklinkgroup-bottom + .extra {
+	margin-top: 10px;
+}
+.preview.blog .quicklinkgroup-bottom + .extra {
+	margin-top: 5px;
+}
+
+
+.label-none {
+	color: #4d4d4f;
+}
+.label-posts,
+.label-webposts {
+  background-color: #36b4a7;
+}
+.label-posts[href]:hover,
+.label-posts[href]:focus,
+.label-webposts[href]:hover,
+.label-webposts[href]:focus {
+  background-color: #37444e;
+}
+.label-future-events {
+  background-color: #5cb85c;
+}
+.label-future-events[href]:hover,
+.label-future-events[href]:focus {
+  background-color: #449d44;
+}
+.label-current-events {
+  background-color: #ca953a;
+}
+.label-current-events[href]:hover,
+.label-current-events[href]:focus {
+  background-color: #ad953a;
+}
+.label-past-events {
+  background-color: #1ab394;
+}
+.label-past-events[href]:hover,
+.label-past-events[href]:focus {
+  background-color: #199394;
+}
+
+.user-layout.preview .description {
+    /* font-weight: bold; */
+    font-style: italic;
+}
+.user-layout .avatar > .thumbnail {
+	margin-bottom: 0;
+}

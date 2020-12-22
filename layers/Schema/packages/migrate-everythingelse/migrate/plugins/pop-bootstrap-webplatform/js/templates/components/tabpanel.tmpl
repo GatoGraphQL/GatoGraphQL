@@ -1,0 +1,101 @@
+<div {{#generateId group=bootstrap-type}}{{id}}{{/generateId}} role="tabpanel">
+	{{#compare panel-header-type "tab"}}
+		<ul id="{{lastGeneratedId group=bootstrap-type}}-panel-title" class="nav nav-tabs {{classes.panelheader}}" style="{{styles.panelheader}}" role="tablist" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
+			{{#each panel-headers}}
+				<li role="presentation" class="{{../classes.panelheader-item}} {{#compare ../active moduleoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active moduleoutputname}}active{{/compare}}{{/each}}{{/compare}} {{#if subheaders}}dropdown{{/if}}" style="{{../styles.panelheader-item}}" {{#if tooltip}} {{#generateId context=../. group="tooltip"}}{{../id}}-{{moduleoutputname}}{{/generateId}} title="{{tooltip}}"{{/if}}>
+					{{#if ../intercept}}
+						<a {{#generateId context=../. group='tablink'}}{{../id}}-{{moduleoutputname}}{{/generateId}} href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+					{{else}}
+						<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+					{{/if}}
+						{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}<span class="tab-title">{{{title}}}</span>{{#if subheaders}} <span class="caret"></span>{{/if}}
+					</a>
+					{{#if subheaders}}
+						<ul class="dropdown-menu pull-right" role="menu">
+							{{#each subheaders}}
+								<li role="presentation" class="{{#compare ../../active moduleoutputname}}active{{/compare}}">
+									{{#if ../../intercept}}
+										<a href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+									{{else}}
+										<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+									{{/if}}
+										{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}<span class="tab-subtitle">{{{title}}}</span>
+									</a>
+								</li>
+							{{/each}}
+						</ul>
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+	{{/compare}}
+	{{#compare panel-header-type "btn-group"}}
+		<div id="{{lastGeneratedId group=bootstrap-type}}-panel-title" class="{{classes.panelheader}}" style="{{styles.panelheader}}" role="group" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
+			{{#each panel-headers}}
+				<a class="{{#compare ../active moduleoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active moduleoutputname}}active{{/compare}}{{/each}}{{/compare}} {{../classes.panelheader-item}}" style="{{../styles.panelheader-item}}" {{#if ../intercept}} href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab"{{/if}}>
+					{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
+				</a>
+				{{#if subheaders}}
+					<span class="btn-group-dropdown dropdown">
+						<button type="button" class="{{#compare ../active moduleoutputname}}active{{else}}{{#each subheaders}}{{#compare ../../active moduleoutputname}}active{{/compare}}{{/each}}{{/compare}} {{classes.panelheader-item}} dropdown-toggle" style="{{styles.panelheader-item}}" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+						<ul class="dropdown-menu pull-right" role="menu">
+							{{#each subheaders}}
+								<li role="presentation" class="{{#compare ../../active moduleoutputname}}active{{/compare}}">
+									<a {{#if ../../intercept}}
+										href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}" {{else}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab" {{/if}}</a>
+										{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
+									</a>
+								</li>
+							{{/each}}
+						</ul>
+					</span>
+				{{/if}}
+			{{/each}}
+		</div>
+	{{/compare}}
+	{{#compare panel-header-type "dropdown"}}
+		<div id="{{lastGeneratedId group=bootstrap-type}}-panel-title" class="clearfix {{classes.panelheader}}" style="{{styles.panelheader}}" {{#each panelheader-params}} {{@key}}="{{this}}"{{/each}}>
+			<div class="dropdown pull-right">
+				<a href="#" class="dropdown-toggle close close-sm" data-toggle="dropdown" role="button">{{{titles.dropdown}}}</a>
+				<ul class="dropdown-menu" role="menu">
+					{{#each panel-headers}}
+						<li role="presentation">
+							{{#if ../intercept}}
+								<a href="{{#with ../intercept-urls}}{{#withSublevel ../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+							{{else}}
+								<a href="#{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+							{{/if}}
+								{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
+							</a>
+						</li>
+						{{#each subheaders}}
+							<li role="presentation" class="menu-item-parent">
+								{{#if ../../intercept}}
+									<a href="{{#with ../../intercept-urls}}{{#withSublevel ../../../bs.bsId}}{{get this ../../moduleoutputname}}{{/withSublevel}}{{/with}}">
+								{{else}}
+									<a href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" aria-controls="{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{moduleoutputname}}" role="tab" data-toggle="tab">
+								{{/if}}
+									{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{{title}}}
+								</a>
+							</li>
+						{{/each}}
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	{{/compare}}
+	{{#if submoduleoutputnames.panels}}
+		<div class="tab-content {{classes.content}}" style="{{styles.content}}">
+			{{#each submoduleoutputnames.panels}}
+				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}" role="tabpanel" class="tab-pane {{../classes.bootstrap-component}} {{#compare ../active this}}active{{/compare}} {{../classes.panel}} {{get ../custom-panel-class this}}" style="{{../styles.bootstrap-component}}{{../styles.panel}}" {{#each ../panel-params}} {{@key}}="{{this}}"{{/each}} {{#withget ../custom-panel-params this}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
+					<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}" style="{{../styles.container}}">
+						{{#withModule ../. this}}
+							{{enterModule ../../.}}
+							<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="tab" role="tab" data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../module}}{{/withSublevel}}"></a>
+						{{/withModule}}
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	{{/if}}
+</div>

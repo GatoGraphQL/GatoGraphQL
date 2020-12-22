@@ -1,0 +1,12 @@
+<div id="loadingscreen" class="jumbotron text-center">
+	<h1 class="title">{{{titles.title}}}</h1>
+	{{#if img.src}}
+		<img src="{{img.src}}" class="pop-background-img">
+	{{/if}}
+	<p class="description text-center">{{{titles.description}}}</p>
+	<div class="menu text-left" id="{{id}}-menu">
+		{{#withModule . "menu"}}
+			{{enterModule ../.}}
+		{{/withModule}}
+	</div>
+</div>

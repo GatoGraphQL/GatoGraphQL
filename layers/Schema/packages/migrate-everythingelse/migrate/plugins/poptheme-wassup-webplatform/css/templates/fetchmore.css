@@ -1,0 +1,9 @@
+
+.btn-block+.btn-block.pop-scrollformore,
+.pop-scrollformore {
+	margin-top: 20px;
+}
+
+button.pop-scrollformore {
+	margin-bottom: 20px;
+}

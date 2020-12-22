@@ -1,0 +1,25 @@
+{{#each dbObjectIDs}}
+	{{#mod @index ../layout-grid.divider}}<div class="pop-structureinner item blockinner-item carousel-item {{#unless @index}}{{#iffirstload context=../.}}active{{/iffirstload}}{{/unless}}">{{/mod}}
+	{{#if ../layout-grid.row-items}}
+		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row blockinner-row carousel-row {{../extend-class}} {{../tls.domain-id}} {{!../layout-grid.wrapper-class}} {{../classes.layoutgrid-wrapper}}" style="{{../styles.layoutgrid-wrapper}}">{{/mod}}
+	{{/if}}
+	<div class="pop-elem {{../class}} blockinner-elem {{!../layout-grid.class}}" style="{{../style}}">
+		{{#each ../submoduleoutputnames.layouts}}
+			{{#withModule ../../. this}}
+				{{enterModule ../../../. dbKey=../../../dbKey dbObjectID=../../.}}
+			{{/withModule}}
+		{{/each}}
+	</div>
+	{{#if ../layout-grid.row-items}}
+		{{#mod @index ../layout-grid.row-items offset=1}}</div>{{/mod}}
+	{{/if}}
+	{{#mod @index ../layout-grid.divider offset=1}}</div>{{/mod}}
+{{/each}}
+
+{{! Complete the "</div>" in case that there were fewer elements than row-items / divider than the whole unit }}
+{{#if dbObjectIDs}}
+	{{#if layout-grid.row-items}}
+		{{#mod dbObjectIDs.length layout-grid.row-items}}{{else}}</div>{{/mod}}
+	{{/if}}
+	{{#mod dbObjectIDs.length layout-grid.divider}}{{else}}</div>{{/mod}}
+{{/if}}

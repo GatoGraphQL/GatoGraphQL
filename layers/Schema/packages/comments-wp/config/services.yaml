@@ -1,0 +1,6 @@
+services:
+    _defaults:
+        public: true
+
+    PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
+        class: \PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI

@@ -1,0 +1,7 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}}>
+	{{#each submoduleoutputnames.elements}}
+		{{#withModule ../. this}}
+			{{enterModule ../../.}}
+		{{/withModule}}
+	{{/each}}
+</div>

@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\UserStateAccessControl\Conditional\CacheControl\TypeResolverDecorators;
+
+use PoPSchema\UserStateAccessControl\TypeResolverDecorators\ValidateUserLoggedInForFieldsTypeResolverDecoratorTrait;
+use PoPSchema\UserStateAccessControl\Conditional\CacheControl\TypeResolverDecorators\AbstractNoCacheConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator;
+
+class ValidateUserLoggedInForFieldsPrivateSchemaTypeResolverDecorator extends AbstractNoCacheConfigurableAccessControlForFieldsInPrivateSchemaTypeResolverDecorator
+{
+    use ValidateUserLoggedInForFieldsTypeResolverDecoratorTrait;
+}

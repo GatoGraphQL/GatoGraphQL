@@ -1,0 +1,6 @@
+<?php
+
+// Aliases
+//-----------------------
+define('POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS', false);
+define('POP_NOTIFICATIONS_URLPLACEHOLDER_USERWELCOME', false);

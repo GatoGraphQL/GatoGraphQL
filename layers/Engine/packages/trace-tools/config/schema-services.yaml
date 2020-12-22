@@ -1,0 +1,8 @@
+services:
+    PoP\TraceTools\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true
+
+    PoP\TraceTools\TypeResolverDecorators\:
+        resource: '../src/TypeResolverDecorators/*'
+        public: true

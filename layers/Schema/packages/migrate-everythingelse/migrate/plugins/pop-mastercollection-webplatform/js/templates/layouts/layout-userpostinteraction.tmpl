@@ -1,0 +1,18 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}}" style="{{style}}">
+	<div class="media">
+		{{#if add-useravatar}}
+			<div class="media-left">
+				{{#withModule . "useravatar"}}
+					{{enterModule ../.}}
+				{{/withModule}}
+			</div>
+		{{/if}}
+		<div class="media-body">
+			{{#each submoduleoutputnames.layouts}}
+				{{#withModule ../. this}}
+					{{enterModule ../../.}}
+				{{/withModule}}
+			{{/each}}
+		</div>
+	</div>	
+</div>

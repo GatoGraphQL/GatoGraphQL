@@ -1,0 +1,5 @@
+node_modules
+
+# The files below shouldn't be in .gitignore... added them just temporarily
+gulpfile.js
+package.json

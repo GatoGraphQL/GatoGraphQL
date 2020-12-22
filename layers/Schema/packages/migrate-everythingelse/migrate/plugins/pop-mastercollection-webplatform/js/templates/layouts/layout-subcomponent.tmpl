@@ -1,0 +1,19 @@
+{{#with dbObject}}
+	{{#withget . ../subcomponent-field}}
+		{{#each ../../submoduleoutputnames.layouts}}
+			{{#withModule ../../../. this}}
+				{{#if ../../../../individual}}
+					{{#each (maybe_make_array ../../.)}}
+						<{{../../../../../html-tag}} class="{{../../../../../class}}" style="{{../../../../../style}}"  {{#each ../../../../../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../../. module=this}}"{{/each}}>
+							{{enterModule ../../../../../. subcomponent=../../../../../subcomponent-field dbObjectID=. context=../.}}
+						</{{../../../../../html-tag}}>
+					{{/each}}
+				{{else}}
+					<{{../../../../html-tag}} class="{{../../../../class}}" style="{{../../../../style}}" {{#each ../../../../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../. module=this}}"{{/each}}>
+						{{enterModule ../../../../. subcomponent=../../../../subcomponent-field dbObjectIDs=../../.}}
+					</{{../../../../html-tag}}>
+				{{/if}}
+			{{/withModule}}
+		{{/each}}
+	{{/withget}}
+{{/with}}

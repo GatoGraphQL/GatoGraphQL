@@ -1,0 +1,1 @@
+{"templates":{"path":"templates\/","keys":{"html":"email.html","txt":"email.txt"}},"styles":{"path":"styles\/","key":"styles.js"}}

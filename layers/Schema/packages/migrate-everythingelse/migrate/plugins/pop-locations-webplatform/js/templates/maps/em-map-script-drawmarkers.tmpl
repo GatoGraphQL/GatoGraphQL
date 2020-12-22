@@ -1,0 +1,13 @@
+<script type="text/javascript">
+(function($){
+	$(document).one('module:merged', function() {
+
+		{{! the "mapdiv-module" gets drawn on the block-toplevel-domain, not on the data domain }}
+		var mapDiv = $('#{{lastGeneratedId module=mapdiv-module domain=bs.toplevel-domain}}');
+		var block = pop.Manager.getBlock(mapDiv);
+		var pageSection = pop.Manager.getPageSection(block);
+
+		pop.MapRuntime.drawMarkers("{{tls.domain}}", pageSection, block, mapDiv);
+	});
+})(jQuery);
+</script>

@@ -1,0 +1,4 @@
+services:
+    PoPSchema\CommentMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true

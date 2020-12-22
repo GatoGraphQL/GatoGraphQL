@@ -1,0 +1,8 @@
+services:
+    PoPSchema\Notifications\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    PoPSchema\Notifications\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true

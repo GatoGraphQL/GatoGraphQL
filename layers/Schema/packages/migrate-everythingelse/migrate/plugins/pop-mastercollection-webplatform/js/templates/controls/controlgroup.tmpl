@@ -1,0 +1,6 @@
+<div {{#generateId}}{{id}}{{/generateId}} class="controls {{class}}" style="{{style}}">	
+	{{#each submodules}}
+		{{! Comment Leo: the dbKey/dbObject below might be null (controlgroup) or have a value (quicklinkgroup)}}
+		{{enterModule ../.}}
+	{{/each}}
+</div>

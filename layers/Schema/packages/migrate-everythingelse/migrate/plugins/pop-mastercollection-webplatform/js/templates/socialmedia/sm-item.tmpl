@@ -1,0 +1,6 @@
+{{#with dbObject}}
+	<a {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} rel="nofollow" target="{{../targets.socialmedia}}" title="{{../titles.share}}" class="socialmedia-item socialmedia-{{../short-name}} pop-sm-{{../short-name}} {{../class}}" style="{{../style}}" href="{{{get . ../shareurl-field}}}" data-url="{{url}}" {{#if ../provider}}data-provider="{{../provider}}"{{/if}} {{#if ../disabled}}disabled="disabled"{{/if}}>
+		<i class="fa fa-fw {{../fontawesome}}"></i><span class="pop-smname">{{../name}}</span>
+		<span class="pop-counter"></span>
+	</a>
+{{/with}}

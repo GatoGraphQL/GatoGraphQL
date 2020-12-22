@@ -1,0 +1,11 @@
+services:
+    file_store:
+        class: \PoP\FileStore\Store\FileStore
+    json_file_store:
+        class: \PoP\FileStore\Store\JSONFileStore
+        public: true
+    PoP\FileStore\Renderer\FileRendererInterface:
+        class: \PoP\FileStore\Renderer\FileRenderer
+        public: true
+        arguments:
+            $fileStore: '@file_store'

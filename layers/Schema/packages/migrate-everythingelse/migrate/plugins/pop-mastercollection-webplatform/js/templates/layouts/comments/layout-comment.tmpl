@@ -1,0 +1,50 @@
+{{#with dbObject}}
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}} pop-comment-{{id}} module-comment" style="{{../style}}">
+		<div class="comment-layout">
+			<div class="media">
+				{{#withModule ../. "authoravatar"}}
+					<div class="media-left">
+						<div class="comment-author-avatar">					
+							{{enterModule ../../. dbKey=../../bs.dbkeys.author dbObjectID=../author}}
+						</div>
+					</div>
+				{{/withModule}}
+				<div class="media-body">
+					<div class="module-remove pull-right">
+						{{#withModule ../. "btn-replycomment"}}
+							{{enterModule ../../.}}
+						{{/withModule}}
+					</div>
+					<div class="comment">
+						{{#withModule ../. "authorname"}}
+							<div class="comment-author">
+								<div class="item">
+									{{enterModule ../../. dbKey=../../bs.dbkeys.author dbObjectID=../author}}
+								</div>
+								<div class="item comment-date">
+									<small><em>{{../date}}</em></small>
+								</div>
+							</div>
+						{{/withModule}}
+						{{#if ../submoduleoutputnames.abovelayout}}
+							<div class="abovelayout {{../classes.abovelayout}}" style="{{../styles.abovelayout}}">
+								{{#each ../submoduleoutputnames.abovelayout}}
+									{{#withModule ../../. this}}
+										{{enterModule ../../../.}}
+									{{/withModule}}
+								{{/each}}
+							</div>
+						{{/if}}
+						{{#withModule ../. "content"}}				
+							<div class="comment-content pop-content">
+								{{enterModule ../../.}}
+							</div>
+						{{/withModule}}
+					</div>
+					<div class="clearfix"></div>
+					<div class="pop-commentreplies-{{id}}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+{{/with}}

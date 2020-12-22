@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\UserRolesAccessControl\Hooks\:
+        resource: '../src/Hooks/*'

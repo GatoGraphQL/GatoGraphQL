@@ -1,0 +1,33 @@
+{{! Message can be given as text, or as a code (to eval against the pre-loaded messages in the configuration) }}
+{{#with feedbackObject}}
+	<div class="media {{../class}}" style="{{../style}}">
+		{{#if icon}}
+			<div class="media-left">
+				<span class="pop-feedbackmessage-icon glyphicon {{icon}} media-object"></span>
+			</div>
+		{{/if}}
+		<div class="media-body">
+			{{#if header.code}}
+				{{#ifget ../messages header.code}}
+					<h4 class="media-heading">{{{get ../messages header.code}}}</h4>
+				{{/ifget}}
+			{{/if}}	
+			{{#each codes}}
+				{{#if @index}}<br/>{{/if}}
+				{{#ifget ../../messages this}}
+					{{{formatFeedbackMessage (get ../../messages .) tls=../../tls pss=../../pss bs=../../bs}}}
+				{{/ifget}}
+			{{/each}}
+			{{#if codes}}{{#if strings}}<br/>{{/if}}{{/if}}
+			{{#each strings}}
+				{{#if @index}}<br/>{{/if}}
+				{{{formatFeedbackMessage . tls=../../tls pss=../../pss bs=../../bs}}}
+			{{/each}}
+			{{#if footer.code}}
+				{{#ifget ../messages footer.code}}
+					{{{get ../messages footer.code}}}
+				{{/ifget}}
+			{{/if}}	
+		</div>
+	</div>
+{{/with}}

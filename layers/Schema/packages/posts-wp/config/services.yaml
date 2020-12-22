@@ -1,0 +1,4 @@
+services:
+    PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface:
+        class: \PoPSchema\PostsWP\TypeAPIs\PostTypeAPI
+        public: true

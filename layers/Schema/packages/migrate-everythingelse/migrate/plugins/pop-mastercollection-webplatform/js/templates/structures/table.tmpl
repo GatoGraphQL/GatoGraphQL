@@ -1,0 +1,23 @@
+<table {{#generateId}}{{id}}{{/generateId}} class="table table-hover {{class}}" style="{{style}}">
+	{{#if header.titles}}	
+		<thead>
+			{{#if description}}
+				<tr>
+					<td colspan="{{header.titles.length}}">
+						{{{description}}}
+					</td>
+				</tr>
+			{{/if}}
+			<tr>
+				{{#each header.titles}}
+					<th>{{this}}</th>
+				{{/each}}
+			</tr>
+		</thead>
+	{{/if}}
+	{{#withModule . "inner"}}
+		<tbody class="{{../class-merge}} table-inner" id="{{lastGeneratedId context=../.}}-merge">
+			{{enterModule ../. dbKey=../dbKey dbObjectIDs=../dbObjectIDs}}
+		</tbody>
+	{{/withModule}}	
+</table>
