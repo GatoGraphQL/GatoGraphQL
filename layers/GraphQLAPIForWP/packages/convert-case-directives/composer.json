@@ -21,7 +21,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/convert-case-directives": "dev-master",
+        "pop-schema/convert-case-directives": "dev-master",
         "wikimedia/composer-merge-plugin": "dev-feature/composer-v2"
     },
     "require-dev": {
