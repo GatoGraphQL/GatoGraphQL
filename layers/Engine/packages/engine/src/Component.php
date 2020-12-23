@@ -39,8 +39,10 @@ class Component extends AbstractComponent
 
     public static function getDependedMigrationPlugins(): array
     {
+        $packageName = basename(dirname(__DIR__));
+        $folder = dirname(__DIR__, 2);
         return [
-            'getpop/migrate-engine',
+            $folder . '/migrate-' . $packageName . '/initialize.php',
         ];
     }
 

@@ -50,10 +50,8 @@ class ComponentLoader
         foreach ($orderedComponentClasses as $componentClass) {
             // Temporary solution until migrated:
             // Initialize all depended-upon migration plugins
-            foreach ($componentClass::getDependedMigrationPlugins() as $migrationPlugin) {
-                // All migration plugins must be composed of "owner/package",
-                // and have `initialize.php` as entry point
-                require_once dirname(__DIR__, 3) . '/' . $migrationPlugin . '/initialize.php';
+            foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
+                require_once $migrationPluginPath;
             }
 
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
