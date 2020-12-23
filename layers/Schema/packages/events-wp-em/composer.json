@@ -2,10 +2,7 @@
     "name": "pop-schema/events-wp-em",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Events\", through plugin \"Events Manager\"",
-    "keywords": [
-        "PoP",
-        "events-wp-em"
-    ],
+    "keywords": ["PoP", "events-wp-em"],
     "homepage": "https://github.com/PoPSchema/events-wp-em",
     "license": "MIT",
     "authors": [
@@ -15,10 +12,10 @@
             "homepage": "https://getpop.org"
         }
     ],
-    "repositories":[
+    "repositories": [
         {
-            "type":"composer",
-            "url":"https://wpackagist.org"
+            "type": "composer",
+            "url": "https://wpackagist.org"
         }
     ],
     "minimum-stability": "dev",

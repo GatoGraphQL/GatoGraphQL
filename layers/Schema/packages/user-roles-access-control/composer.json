@@ -2,10 +2,7 @@
     "name": "pop-schema/user-roles-access-control",
     "type": "library",
     "description": "Access Control based on the user having a given role/capability",
-    "keywords": [
-        "PoP",
-        "UserRolesAccessControl"
-    ],
+    "keywords": ["PoP", "UserRolesAccessControl"],
     "homepage": "https://github.com/pop-schema/user-roles-access-control",
     "license": "MIT",
     "authors": [

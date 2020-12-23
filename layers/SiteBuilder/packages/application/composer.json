@@ -2,10 +2,7 @@
     "name": "getpop/application",
     "type": "library",
     "description": "Create a component-based application",
-    "keywords": [
-        "PoP",
-        "application"
-    ],
+    "keywords": ["PoP", "application"],
     "homepage": "https://github.com/getpop/application",
     "license": "MIT",
     "authors": [

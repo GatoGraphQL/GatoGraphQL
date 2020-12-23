@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/location-mutations",
     "type": "library",
     "description": "Adds support for location mutations",
-    "keywords": [
-        "PoP",
-        "location-mutations"
-    ],
+    "keywords": ["PoP", "location-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/location-mutations",
     "license": "MIT",
     "authors": [

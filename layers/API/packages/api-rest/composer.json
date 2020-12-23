@@ -2,10 +2,7 @@
     "name": "getpop/api-rest",
     "type": "library",
     "description": "Create REST endpoints in the PoP API",
-    "keywords": [
-        "PoP",
-        "api-rest"
-    ],
+    "keywords": ["PoP", "api-rest"],
     "homepage": "https://github.com/getpop/api-rest",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/posts",
     "type": "library",
     "description": "Adds support for posts",
-    "keywords": [
-        "PoP",
-        "posts"
-    ],
+    "keywords": ["PoP", "posts"],
     "homepage": "https://github.com/PoPSchema/posts",
     "license": "MIT",
     "authors": [

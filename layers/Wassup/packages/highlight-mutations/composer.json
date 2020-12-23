@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/highlight-mutations",
     "type": "library",
     "description": "Adds support for highlight mutations",
-    "keywords": [
-        "PoP",
-        "highlight-mutations"
-    ],
+    "keywords": ["PoP", "highlight-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/highlight-mutations",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/generic-customposts",
     "type": "library",
     "description": "Query for any custom post, with or without having a type associated to the schema",
-    "keywords": [
-        "PoP",
-        "generic-customposts"
-    ],
+    "keywords": ["PoP", "generic-customposts"],
     "homepage": "https://github.com/PoPSchema/generic-customposts",
     "license": "MIT",
     "authors": [

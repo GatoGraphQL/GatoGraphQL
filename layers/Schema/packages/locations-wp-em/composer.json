@@ -2,10 +2,7 @@
     "name": "pop-schema/locations-wp-em",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Locations\"",
-    "keywords": [
-        "PoP",
-        "locations-wp-em"
-    ],
+    "keywords": ["PoP", "locations-wp-em"],
     "homepage": "https://github.com/PoPSchema/locations-wp-em",
     "license": "MIT",
     "authors": [

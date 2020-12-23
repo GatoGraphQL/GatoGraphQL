@@ -2,10 +2,7 @@
     "name": "pop-schema/everythingelse-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"EverythingElse\"",
-    "keywords": [
-        "PoP",
-        "everythingelse-wp"
-    ],
+    "keywords": ["PoP", "everythingelse-wp"],
     "homepage": "https://github.com/PoPSchema/everythingelse-wp",
     "license": "MIT",
     "authors": [

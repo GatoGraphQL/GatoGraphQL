@@ -2,10 +2,7 @@
     "name": "pop-schema/metaquery",
     "type": "library",
     "description": "Adds support for meta queries",
-    "keywords": [
-        "PoP",
-        "metaquery"
-    ],
+    "keywords": ["PoP", "metaquery"],
     "homepage": "https://github.com/pop-schema/metaquery",
     "license": "MIT",
     "authors": [

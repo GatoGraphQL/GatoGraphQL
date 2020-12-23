@@ -2,10 +2,7 @@
     "name": "getpop/definitions-emoji",
     "type": "library",
     "description": "Provides definitions using emojis",
-    "keywords": [
-        "PoP",
-        "definitions-emoji"
-    ],
+    "keywords": ["PoP", "definitions-emoji"],
     "homepage": "https://github.com/getpop/definitions-emoji",
     "license": "MIT",
     "authors": [

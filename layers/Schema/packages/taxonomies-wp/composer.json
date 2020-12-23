@@ -2,10 +2,7 @@
     "name": "pop-schema/taxonomies-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Taxonomies\"",
-    "keywords": [
-        "PoP",
-        "taxonomies-wp"
-    ],
+    "keywords": ["PoP", "taxonomies-wp"],
     "homepage": "https://github.com/PoPSchema/taxonomies-wp",
     "license": "MIT",
     "authors": [

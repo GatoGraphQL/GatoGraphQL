@@ -2,10 +2,7 @@
     "name": "pop-schema/pages",
     "type": "library",
     "description": "Adds support for pages",
-    "keywords": [
-        "PoP",
-        "pages"
-    ],
+    "keywords": ["PoP", "pages"],
     "homepage": "https://github.com/PoPSchema/pages",
     "license": "MIT",
     "authors": [

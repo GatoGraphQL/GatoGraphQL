@@ -2,11 +2,7 @@
     "name": "getpop/translation-wp",
     "type": "library",
     "description": "Implementation of the Translation API for WordPress",
-    "keywords": [
-        "PoP",
-        "translation",
-        "WordPress"
-    ],
+    "keywords": ["PoP", "translation", "WordPress"],
     "homepage": "https://github.com/getpop/translation-wp",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/stances",
     "type": "library",
     "description": "Adds support for stances",
-    "keywords": [
-        "PoP",
-        "stances"
-    ],
+    "keywords": ["PoP", "stances"],
     "homepage": "https://github.com/PoPSchema/stances",
     "license": "MIT",
     "authors": [

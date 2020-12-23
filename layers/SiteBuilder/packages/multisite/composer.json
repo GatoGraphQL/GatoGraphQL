@@ -2,10 +2,7 @@
     "name": "getpop/multisite",
     "type": "library",
     "description": "Multisite",
-    "keywords": [
-        "PoP",
-        "multisite"
-    ],
+    "keywords": ["PoP", "multisite"],
     "homepage": "https://github.com/getpop/multisite",
     "license": "MIT",
     "authors": [

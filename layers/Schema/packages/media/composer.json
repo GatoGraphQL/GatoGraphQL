@@ -2,10 +2,7 @@
     "name": "pop-schema/media",
     "type": "library",
     "description": "Adds support for media",
-    "keywords": [
-        "PoP",
-        "media"
-    ],
+    "keywords": ["PoP", "media"],
     "homepage": "https://github.com/PoPSchema/media",
     "license": "MIT",
     "authors": [

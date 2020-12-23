@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/system-mutations",
     "type": "library",
     "description": "Adds support for system mutations",
-    "keywords": [
-        "PoP",
-        "system-mutations"
-    ],
+    "keywords": ["PoP", "system-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/system-mutations",
     "license": "MIT",
     "authors": [

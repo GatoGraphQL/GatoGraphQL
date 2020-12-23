@@ -2,10 +2,7 @@
     "name": "pop-schema/custompostmedia-mutations",
     "type": "library",
     "description": "Integrates media with custom post mutations",
-    "keywords": [
-        "PoP",
-        "custompostmedia-mutations"
-    ],
+    "keywords": ["PoP", "custompostmedia-mutations"],
     "homepage": "https://github.com/PoPSchema/custompostmedia-mutations",
     "license": "MIT",
     "authors": [

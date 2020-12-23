@@ -2,10 +2,7 @@
     "name": "pop-schema/notifications",
     "type": "library",
     "description": "Adds support for notifications",
-    "keywords": [
-        "PoP",
-        "notifications"
-    ],
+    "keywords": ["PoP", "notifications"],
     "homepage": "https://github.com/PoPSchema/notifications",
     "license": "MIT",
     "authors": [

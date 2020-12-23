@@ -2,10 +2,7 @@
     "name": "getpop/cache-control",
     "type": "library",
     "description": "Add HTTP caching to the response",
-    "keywords": [
-        "PoP",
-        "cache-control"
-    ],
+    "keywords": ["PoP", "cache-control"],
     "homepage": "https://github.com/getpop/cache-control",
     "license": "MIT",
     "authors": [

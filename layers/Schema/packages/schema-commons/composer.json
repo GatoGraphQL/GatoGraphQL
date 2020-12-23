@@ -2,10 +2,7 @@
     "name": "pop-schema/schema-commons",
     "type": "library",
     "description": "Code shared by the schema packages",
-    "keywords": [
-        "PoP",
-        "schema-commons"
-    ],
+    "keywords": ["PoP", "schema-commons"],
     "homepage": "https://github.com/pop-schema/schema-commons",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/menus",
     "type": "library",
     "description": "Adds support for menus",
-    "keywords": [
-        "PoP",
-        "menus"
-    ],
+    "keywords": ["PoP", "menus"],
     "homepage": "https://github.com/PoPSchema/menus",
     "license": "MIT",
     "authors": [

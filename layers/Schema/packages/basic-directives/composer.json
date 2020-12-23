@@ -2,10 +2,7 @@
     "name": "pop-schema/basic-directives",
     "type": "library",
     "description": "Set of basic directives",
-    "keywords": [
-        "PoP",
-        "basic-directives"
-    ],
+    "keywords": ["PoP", "basic-directives"],
     "homepage": "https://github.com/pop-schema/basic-directives",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/socialnetwork-mutations",
     "type": "library",
     "description": "Adds mutations for social network functionality",
-    "keywords": [
-        "PoP",
-        "socialnetwork-mutations"
-    ],
+    "keywords": ["PoP", "socialnetwork-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/socialnetwork-mutations",
     "license": "MIT",
     "authors": [

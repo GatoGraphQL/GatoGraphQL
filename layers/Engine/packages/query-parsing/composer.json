@@ -2,10 +2,7 @@
     "name": "getpop/query-parsing",
     "type": "library",
     "description": "Utilities to parse the query",
-    "keywords": [
-        "PoP",
-        "query-parsing"
-    ],
+    "keywords": ["PoP", "query-parsing"],
     "homepage": "https://github.com/getpop/query-parsing",
     "license": "MIT",
     "authors": [

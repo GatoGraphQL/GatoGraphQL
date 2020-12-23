@@ -2,10 +2,7 @@
     "name": "getpop/mandatory-directives-by-configuration",
     "type": "library",
     "description": "Set configurable mandatory directives for fields and directives",
-    "keywords": [
-        "PoP",
-        "MandatoryDirectivesByConfiguration"
-    ],
+    "keywords": ["PoP", "MandatoryDirectivesByConfiguration"],
     "homepage": "https://github.com/getpop/mandatory-directives-by-configuration",
     "license": "MIT",
     "authors": [

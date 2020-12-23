@@ -2,10 +2,7 @@
     "name": "pop-schema/google-translate-directive",
     "type": "library",
     "description": "Use Google Translate as a provider for the <translate> directive",
-    "keywords": [
-        "PoP",
-        "google-translate-directive"
-    ],
+    "keywords": ["PoP", "google-translate-directive"],
     "homepage": "https://github.com/PoPSchema/google-translate-directive",
     "license": "MIT",
     "authors": [

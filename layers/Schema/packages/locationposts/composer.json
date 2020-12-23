@@ -2,10 +2,7 @@
     "name": "pop-schema/locationposts",
     "type": "library",
     "description": "Adds support for locationposts",
-    "keywords": [
-        "PoP",
-        "locationposts"
-    ],
+    "keywords": ["PoP", "locationposts"],
     "homepage": "https://github.com/PoPSchema/locationposts",
     "license": "MIT",
     "authors": [

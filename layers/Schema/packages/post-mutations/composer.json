@@ -2,10 +2,7 @@
     "name": "pop-schema/post-mutations",
     "type": "library",
     "description": "Adds support for post mutations",
-    "keywords": [
-        "PoP",
-        "post-mutations"
-    ],
+    "keywords": ["PoP", "post-mutations"],
     "homepage": "https://github.com/PoPSchema/post-mutations",
     "license": "MIT",
     "authors": [

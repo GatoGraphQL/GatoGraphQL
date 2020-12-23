@@ -2,10 +2,7 @@
     "name": "pop-schema/comment-mutations",
     "type": "library",
     "description": "Adds support for comment mutations",
-    "keywords": [
-        "PoP",
-        "comment-mutations"
-    ],
+    "keywords": ["PoP", "comment-mutations"],
     "homepage": "https://github.com/PoPSchema/comment-mutations",
     "license": "MIT",
     "authors": [

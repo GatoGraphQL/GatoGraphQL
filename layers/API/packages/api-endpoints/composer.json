@@ -2,10 +2,7 @@
     "name": "getpop/api-endpoints",
     "type": "library",
     "description": "Utilities for implementing API endpoints",
-    "keywords": [
-        "PoP",
-        "api-endpoints"
-    ],
+    "keywords": ["PoP", "api-endpoints"],
     "homepage": "https://github.com/getpop/api-endpoints",
     "license": "MIT",
     "authors": [

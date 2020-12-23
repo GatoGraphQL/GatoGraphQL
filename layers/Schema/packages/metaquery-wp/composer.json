@@ -2,10 +2,7 @@
     "name": "pop-schema/metaquery-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Meta Query\"",
-    "keywords": [
-        "PoP",
-        "metaquery-wp"
-    ],
+    "keywords": ["PoP", "metaquery-wp"],
     "homepage": "https://github.com/pop-schema/metaquery-wp",
     "license": "MIT",
     "authors": [

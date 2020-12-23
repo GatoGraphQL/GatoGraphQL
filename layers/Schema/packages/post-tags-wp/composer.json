@@ -2,10 +2,7 @@
     "name": "pop-schema/post-tags-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Tags\"",
-    "keywords": [
-        "PoP",
-        "post-tags-wp"
-    ],
+    "keywords": ["PoP", "post-tags-wp"],
     "homepage": "https://github.com/PoPSchema/post-tags-wp",
     "license": "MIT",
     "authors": [

@@ -2,12 +2,7 @@
     "name": "graphql-api/schema-feedback",
     "type": "library",
     "description": "Schema Feedback for the GraphQL API",
-    "keywords": [
-        "PoP",
-        "WordPress",
-        "GraphQL",
-        "API"
-    ],
+    "keywords": ["PoP", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/GraphQLAPI/schema-feedback",
     "license": "MIT",
     "authors": [

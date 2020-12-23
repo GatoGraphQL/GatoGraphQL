@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/notification-mutations",
     "type": "library",
     "description": "Adds mutations for notifications",
-    "keywords": [
-        "PoP",
-        "notification-mutations"
-    ],
+    "keywords": ["PoP", "notification-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/notification-mutations",
     "license": "MIT",
     "authors": [

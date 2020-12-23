@@ -2,10 +2,7 @@
     "name": "pop-schema/cdn-directive",
     "type": "library",
     "description": "CDN directive",
-    "keywords": [
-        "PoP",
-        "cdn-directive"
-    ],
+    "keywords": ["PoP", "cdn-directive"],
     "homepage": "https://github.com/PoPSchema/cdn-directive",
     "license": "MIT",
     "authors": [

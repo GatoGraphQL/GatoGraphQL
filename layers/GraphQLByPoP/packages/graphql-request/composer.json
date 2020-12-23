@@ -2,10 +2,7 @@
     "name": "graphql-by-pop/graphql-request",
     "type": "library",
     "description": "Enables GraphQL for PoP to process the GraphQL query using the standard syntax",
-    "keywords": [
-        "PoP",
-        "graphql-request"
-    ],
+    "keywords": ["PoP", "graphql-request"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-request",
     "license": "MIT",
     "authors": [

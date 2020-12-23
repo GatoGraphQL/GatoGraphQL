@@ -2,10 +2,7 @@
     "name": "getpop/definitions-base36",
     "type": "library",
     "description": "Provides definitions using a base 36 counter",
-    "keywords": [
-        "PoP",
-        "definitions-base36"
-    ],
+    "keywords": ["PoP", "definitions-base36"],
     "homepage": "https://github.com/getpop/definitions-base36",
     "license": "MIT",
     "authors": [

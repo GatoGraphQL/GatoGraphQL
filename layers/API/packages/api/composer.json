@@ -2,10 +2,7 @@
     "name": "getpop/api",
     "type": "library",
     "description": "Component-based API",
-    "keywords": [
-        "PoP",
-        "api"
-    ],
+    "keywords": ["PoP", "api"],
     "homepage": "https://github.com/getpop/api",
     "license": "MIT",
     "authors": [

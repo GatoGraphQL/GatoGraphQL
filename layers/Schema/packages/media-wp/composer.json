@@ -2,10 +2,7 @@
     "name": "pop-schema/media-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Media\"",
-    "keywords": [
-        "PoP",
-        "media-wp"
-    ],
+    "keywords": ["PoP", "media-wp"],
     "homepage": "https://github.com/PoPSchema/media-wp",
     "license": "MIT",
     "authors": [

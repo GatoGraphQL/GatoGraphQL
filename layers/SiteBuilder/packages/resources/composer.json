@@ -2,10 +2,7 @@
     "name": "getpop/resources",
     "type": "library",
     "description": "Resources for the website (CSS, JS files)",
-    "keywords": [
-        "PoP",
-        "resources"
-    ],
+    "keywords": ["PoP", "resources"],
     "homepage": "https://github.com/getpop/resources",
     "license": "MIT",
     "authors": [

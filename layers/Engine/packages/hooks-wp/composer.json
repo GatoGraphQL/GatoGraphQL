@@ -2,11 +2,7 @@
     "name": "getpop/hooks-wp",
     "type": "library",
     "description": "WordPress implementation of the contracts to implement hooks (filters and actions) for PoP",
-    "keywords": [
-        "PoP",
-        "hooks",
-        "WordPress"
-    ],
+    "keywords": ["PoP", "hooks", "WordPress"],
     "homepage": "https://github.com/getpop/hooks-wp",
     "license": "MIT",
     "authors": [

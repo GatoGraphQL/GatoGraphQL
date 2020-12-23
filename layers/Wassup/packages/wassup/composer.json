@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/wassup",
     "type": "library",
     "description": "PoP site => Wassup",
-    "keywords": [
-        "PoP",
-        "wassup"
-    ],
+    "keywords": ["PoP", "wassup"],
     "homepage": "https://github.com/PoPSites-Wassup/wassup",
     "license": "MIT",
     "authors": [
@@ -23,10 +20,8 @@
         "getpop/engine-wp-bootloader": "dev-master",
         "getpop/function-fields": "dev-master",
         "getpop/trace-tools": "dev-master",
-
         "getpop/site-wp": "dev-master",
         "getpop/spa": "dev-master",
-
         "graphql-by-pop/graphql-server": "dev-master",
         "leoloso/examples-for-pop": "dev-master",
         "pop-schema/block-metadata-for-wp": "dev-master",
@@ -48,7 +43,6 @@
         "pop-schema/custompostmedia-mutations-wp": "dev-master",
         "pop-schema/comment-mutations-wp": "dev-master",
         "pop-schema/user-state-mutations-wp": "dev-master",
-
         "pop-schema/categories-wp": "dev-master",
         "pop-schema/notifications-wp": "dev-master",
         "pop-schema/menus-wp": "dev-master",
@@ -57,7 +51,6 @@
         "pop-schema/highlights-wp": "dev-master",
         "pop-schema/locationposts-wp": "dev-master",
         "pop-schema/stances-wp": "dev-master",
-
         "pop-sites-wassup/post-mutations": "dev-master",
         "pop-sites-wassup/highlight-mutations": "dev-master",
         "pop-sites-wassup/stance-mutations": "dev-master",

@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/gravityforms-mutations",
     "type": "library",
     "description": "Adds support for mutations with plugin Gravity Forms",
-    "keywords": [
-        "PoP",
-        "gravityforms-mutations"
-    ],
+    "keywords": ["PoP", "gravityforms-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/gravityforms-mutations",
     "license": "MIT",
     "authors": [

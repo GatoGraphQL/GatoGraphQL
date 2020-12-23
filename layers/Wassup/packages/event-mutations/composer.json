@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/event-mutations",
     "type": "library",
     "description": "Adds support for event mutations",
-    "keywords": [
-        "PoP",
-        "event-mutations"
-    ],
+    "keywords": ["PoP", "event-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/event-mutations",
     "license": "MIT",
     "authors": [

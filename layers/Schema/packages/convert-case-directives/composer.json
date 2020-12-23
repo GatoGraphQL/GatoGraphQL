@@ -2,10 +2,7 @@
     "name": "pop-schema/convert-case-directives",
     "type": "library",
     "description": "Directives to convert lower/title/upper case",
-    "keywords": [
-        "PoP",
-        "convert-case-directives"
-    ],
+    "keywords": ["PoP", "convert-case-directives"],
     "homepage": "https://github.com/PoPSchema/convert-case-directives",
     "license": "MIT",
     "authors": [

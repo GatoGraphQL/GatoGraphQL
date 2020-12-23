@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/eventlink-mutations",
     "type": "library",
     "description": "Adds support for event link mutations",
-    "keywords": [
-        "PoP",
-        "eventlink-mutations"
-    ],
+    "keywords": ["PoP", "eventlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/eventlink-mutations",
     "license": "MIT",
     "authors": [

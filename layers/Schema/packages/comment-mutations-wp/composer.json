@@ -2,10 +2,7 @@
     "name": "pop-schema/comment-mutations-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Comment Mutations\"",
-    "keywords": [
-        "PoP",
-        "comment-mutations-wp"
-    ],
+    "keywords": ["PoP", "comment-mutations-wp"],
     "homepage": "https://github.com/PoPSchema/comment-mutations-wp",
     "license": "MIT",
     "authors": [

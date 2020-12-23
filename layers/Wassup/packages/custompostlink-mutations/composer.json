@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/custompostlink-mutations",
     "type": "library",
     "description": "Adds support for custom post link mutations",
-    "keywords": [
-        "PoP",
-        "custompostlink-mutations"
-    ],
+    "keywords": ["PoP", "custompostlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/custompostlink-mutations",
     "license": "MIT",
     "authors": [

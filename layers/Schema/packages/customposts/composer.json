@@ -2,10 +2,7 @@
     "name": "pop-schema/customposts",
     "type": "library",
     "description": "Interfaces and helpers for custom posts (eg: posts, articles, etc)",
-    "keywords": [
-        "PoP",
-        "customposts"
-    ],
+    "keywords": ["PoP", "customposts"],
     "homepage": "https://github.com/PoPSchema/customposts",
     "license": "MIT",
     "authors": [

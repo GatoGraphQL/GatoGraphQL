@@ -2,10 +2,7 @@
     "name": "pop-schema/taxonomymeta",
     "type": "library",
     "description": "Adds support for taxonomy (category and tag) meta",
-    "keywords": [
-        "PoP",
-        "taxonomymeta"
-    ],
+    "keywords": ["PoP", "taxonomymeta"],
     "homepage": "https://github.com/PoPSchema/taxonomymeta",
     "license": "MIT",
     "authors": [

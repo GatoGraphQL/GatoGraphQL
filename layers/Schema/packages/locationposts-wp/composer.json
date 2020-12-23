@@ -2,10 +2,7 @@
     "name": "pop-schema/locationposts-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"LocationPosts\"",
-    "keywords": [
-        "PoP",
-        "locationposts-wp"
-    ],
+    "keywords": ["PoP", "locationposts-wp"],
     "homepage": "https://github.com/PoPSchema/locationposts-wp",
     "license": "MIT",
     "authors": [

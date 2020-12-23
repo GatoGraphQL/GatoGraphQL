@@ -2,10 +2,7 @@
     "name": "getpop/migrate-api",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/getpop/api",
-    "keywords": [
-        "PoP",
-        "api"
-    ],
+    "keywords": ["PoP", "api"],
     "homepage": "https://github.com/getpop/migrate-api",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/taxonomyquery",
     "type": "library",
     "description": "Adds support for taxonomy (category and tag) queries",
-    "keywords": [
-        "PoP",
-        "taxonomyquery"
-    ],
+    "keywords": ["PoP", "taxonomyquery"],
     "homepage": "https://github.com/PoPSchema/taxonomyquery",
     "license": "MIT",
     "authors": [

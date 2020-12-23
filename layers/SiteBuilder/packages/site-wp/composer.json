@@ -2,11 +2,7 @@
     "name": "getpop/site-wp",
     "type": "library",
     "description": "Implementation for WordPress of package Site",
-    "keywords": [
-        "PoP",
-        "site",
-        "WordPress"
-    ],
+    "keywords": ["PoP", "site", "WordPress"],
     "homepage": "https://github.com/getpop/site-wp",
     "license": "MIT",
     "authors": [

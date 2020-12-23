@@ -2,10 +2,7 @@
     "name": "pop-schema/queriedobject",
     "type": "library",
     "description": "Adds support to query single objects (users, posts, etc) in the request",
-    "keywords": [
-        "PoP",
-        "queriedobject"
-    ],
+    "keywords": ["PoP", "queriedobject"],
     "homepage": "https://github.com/pop-schema/queriedobject",
     "license": "MIT",
     "authors": [

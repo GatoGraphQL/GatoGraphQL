@@ -2,10 +2,7 @@
     "name": "getpop/hooks",
     "type": "library",
     "description": "Contracts to implement hooks (filters and actions) for PoP",
-    "keywords": [
-        "PoP",
-        "hooks"
-    ],
+    "keywords": ["PoP", "hooks"],
     "homepage": "https://github.com/getpop/hooks",
     "license": "MIT",
     "authors": [

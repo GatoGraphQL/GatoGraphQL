@@ -2,10 +2,7 @@
     "name": "pop-schema/user-roles",
     "type": "library",
     "description": "Adds support for user roles",
-    "keywords": [
-        "PoP",
-        "user-roles"
-    ],
+    "keywords": ["PoP", "user-roles"],
     "homepage": "https://github.com/pop-schema/user-roles",
     "license": "MIT",
     "authors": [

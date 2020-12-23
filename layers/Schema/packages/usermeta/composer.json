@@ -2,10 +2,7 @@
     "name": "pop-schema/usermeta",
     "type": "library",
     "description": "Adds support for user meta",
-    "keywords": [
-        "PoP",
-        "usermeta"
-    ],
+    "keywords": ["PoP", "usermeta"],
     "homepage": "https://github.com/PoPSchema/usermeta",
     "license": "MIT",
     "authors": [

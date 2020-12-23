@@ -2,10 +2,7 @@
     "name": "getpop/translation",
     "type": "library",
     "description": "Translation API for PoP components",
-    "keywords": [
-        "PoP",
-        "translation"
-    ],
+    "keywords": ["PoP", "translation"],
     "homepage": "https://github.com/getpop/translation",
     "license": "MIT",
     "authors": [

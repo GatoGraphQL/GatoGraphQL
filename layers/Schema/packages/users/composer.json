@@ -2,10 +2,7 @@
     "name": "pop-schema/users",
     "type": "library",
     "description": "Adds support for users",
-    "keywords": [
-        "PoP",
-        "users"
-    ],
+    "keywords": ["PoP", "users"],
     "homepage": "https://github.com/PoPSchema/users",
     "license": "MIT",
     "authors": [

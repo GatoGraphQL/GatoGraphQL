@@ -2,10 +2,7 @@
     "name": "pop-schema/events",
     "type": "library",
     "description": "Adds support for events",
-    "keywords": [
-        "PoP",
-        "events"
-    ],
+    "keywords": ["PoP", "events"],
     "homepage": "https://github.com/PoPSchema/events",
     "license": "MIT",
     "authors": [

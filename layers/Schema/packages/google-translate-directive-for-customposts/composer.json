@@ -2,10 +2,7 @@
     "name": "pop-schema/google-translate-directive-for-customposts",
     "type": "library",
     "description": "Use the <translate(provider:google)> directive with custom posts",
-    "keywords": [
-        "PoP",
-        "google-translate-directive-for-customposts"
-    ],
+    "keywords": ["PoP", "google-translate-directive-for-customposts"],
     "homepage": "https://github.com/PoPSchema/google-translate-directive-for-customposts",
     "license": "MIT",
     "authors": [

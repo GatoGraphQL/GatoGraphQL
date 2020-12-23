@@ -2,10 +2,7 @@
     "name": "pop-schema/user-state-mutations",
     "type": "library",
     "description": "Adds support for user state mutations",
-    "keywords": [
-        "PoP",
-        "user-state-mutations"
-    ],
+    "keywords": ["PoP", "user-state-mutations"],
     "homepage": "https://github.com/PoPSchema/user-state-mutations",
     "license": "MIT",
     "authors": [

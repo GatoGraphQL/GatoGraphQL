@@ -2,10 +2,7 @@
     "name": "pop-schema/translate-directive-acl",
     "type": "library",
     "description": "Access Control List for Translate Directive",
-    "keywords": [
-        "PoP",
-        "translate-directive-acl"
-    ],
+    "keywords": ["PoP", "translate-directive-acl"],
     "homepage": "https://github.com/PoPSchema/translate-directive-acl",
     "license": "MIT",
     "authors": [

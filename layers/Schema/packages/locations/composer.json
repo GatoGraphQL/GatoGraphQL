@@ -2,10 +2,7 @@
     "name": "pop-schema/locations",
     "type": "library",
     "description": "Adds support for locations",
-    "keywords": [
-        "PoP",
-        "locations"
-    ],
+    "keywords": ["PoP", "locations"],
     "homepage": "https://github.com/PoPSchema/locations",
     "license": "MIT",
     "authors": [

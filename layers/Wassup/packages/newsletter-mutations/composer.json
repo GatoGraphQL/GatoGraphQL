@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/newsletter-mutations",
     "type": "library",
     "description": "Adds mutations for newsletter functionality",
-    "keywords": [
-        "PoP",
-        "newsletter-mutations"
-    ],
+    "keywords": ["PoP", "newsletter-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/newsletter-mutations",
     "license": "MIT",
     "authors": [

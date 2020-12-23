@@ -2,10 +2,7 @@
     "name": "getpop/site",
     "type": "library",
     "description": "Create a component-based website",
-    "keywords": [
-        "PoP",
-        "site"
-    ],
+    "keywords": ["PoP", "site"],
     "homepage": "https://github.com/getpop/site",
     "license": "MIT",
     "authors": [

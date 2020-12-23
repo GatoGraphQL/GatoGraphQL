@@ -2,10 +2,7 @@
     "name": "pop-schema/meta",
     "type": "library",
     "description": "Adds support for meta",
-    "keywords": [
-        "PoP",
-        "meta"
-    ],
+    "keywords": ["PoP", "meta"],
     "homepage": "https://github.com/pop-schema/meta",
     "license": "MIT",
     "authors": [

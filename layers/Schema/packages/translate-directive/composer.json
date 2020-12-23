@@ -2,10 +2,7 @@
     "name": "pop-schema/translate-directive",
     "type": "library",
     "description": "Directive <translate> to translate content using different provider APIs",
-    "keywords": [
-        "PoP",
-        "translate-directive"
-    ],
+    "keywords": ["PoP", "translate-directive"],
     "homepage": "https://github.com/PoPSchema/translate-directive",
     "license": "MIT",
     "authors": [

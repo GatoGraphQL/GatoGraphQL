@@ -2,10 +2,7 @@
     "name": "pop-schema/categories",
     "type": "library",
     "description": "Adds support for categories",
-    "keywords": [
-        "PoP",
-        "categories"
-    ],
+    "keywords": ["PoP", "categories"],
     "homepage": "https://github.com/PoPSchema/categories",
     "license": "MIT",
     "authors": [

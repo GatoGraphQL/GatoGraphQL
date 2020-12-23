@@ -2,10 +2,7 @@
     "name": "pop-schema/custompostmeta-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Meta\"",
-    "keywords": [
-        "PoP",
-        "custompostmeta-wp"
-    ],
+    "keywords": ["PoP", "custompostmeta-wp"],
     "homepage": "https://github.com/PoPSchema/custompostmeta-wp",
     "license": "MIT",
     "authors": [

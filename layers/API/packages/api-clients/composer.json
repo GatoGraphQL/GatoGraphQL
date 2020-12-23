@@ -2,10 +2,7 @@
     "name": "getpop/api-clients",
     "type": "library",
     "description": "Utilities for implementing API clients",
-    "keywords": [
-        "PoP",
-        "api-clients"
-    ],
+    "keywords": ["PoP", "api-clients"],
     "homepage": "https://github.com/getpop/api-clients",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/stances-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Stances\"",
-    "keywords": [
-        "PoP",
-        "stances-wp"
-    ],
+    "keywords": ["PoP", "stances-wp"],
     "homepage": "https://github.com/PoPSchema/stances-wp",
     "license": "MIT",
     "authors": [

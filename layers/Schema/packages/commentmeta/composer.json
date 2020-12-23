@@ -2,10 +2,7 @@
     "name": "pop-schema/commentmeta",
     "type": "library",
     "description": "Adds support for comment meta",
-    "keywords": [
-        "PoP",
-        "commentmeta"
-    ],
+    "keywords": ["PoP", "commentmeta"],
     "homepage": "https://github.com/PoPSchema/commentmeta",
     "license": "MIT",
     "authors": [

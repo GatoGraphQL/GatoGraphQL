@@ -2,10 +2,7 @@
     "name": "getpop/api-mirrorquery",
     "type": "library",
     "description": "Mirror the query in the API response",
-    "keywords": [
-        "PoP",
-        "api-mirrorquery"
-    ],
+    "keywords": ["PoP", "api-mirrorquery"],
     "homepage": "https://github.com/getpop/api-mirrorquery",
     "license": "MIT",
     "authors": [

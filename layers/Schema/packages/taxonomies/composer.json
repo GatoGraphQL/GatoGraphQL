@@ -2,10 +2,7 @@
     "name": "pop-schema/taxonomies",
     "type": "library",
     "description": "Adds support for taxonomies",
-    "keywords": [
-        "PoP",
-        "taxonomies"
-    ],
+    "keywords": ["PoP", "taxonomies"],
     "homepage": "https://github.com/PoPSchema/taxonomies",
     "license": "MIT",
     "authors": [

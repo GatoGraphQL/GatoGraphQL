@@ -2,10 +2,7 @@
     "name": "getpop/guzzle-helpers",
     "type": "library",
     "description": "Helper functions for Guzzle",
-    "keywords": [
-        "PoP",
-        "guzzle-helpers"
-    ],
+    "keywords": ["PoP", "guzzle-helpers"],
     "homepage": "https://github.com/getpop/guzzle-helpers",
     "license": "MIT",
     "authors": [

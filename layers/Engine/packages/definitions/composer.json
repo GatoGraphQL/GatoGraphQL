@@ -2,10 +2,7 @@
     "name": "getpop/definitions",
     "type": "library",
     "description": "Enables to define a name for an element (such as modules, resources, etc) through different strategies",
-    "keywords": [
-        "PoP",
-        "definitions"
-    ],
+    "keywords": ["PoP", "definitions"],
     "homepage": "https://github.com/getpop/definitions",
     "license": "MIT",
     "authors": [

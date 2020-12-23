@@ -2,10 +2,7 @@
     "name": "pop-schema/custompostmeta",
     "type": "library",
     "description": "Adds support for post meta",
-    "keywords": [
-        "PoP",
-        "custompostmeta"
-    ],
+    "keywords": ["PoP", "custompostmeta"],
     "homepage": "https://github.com/PoPSchema/custompostmeta",
     "license": "MIT",
     "authors": [

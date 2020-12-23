@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/flag-mutations",
     "type": "library",
     "description": "Adds mutations for flagging functionality",
-    "keywords": [
-        "PoP",
-        "flag-mutations"
-    ],
+    "keywords": ["PoP", "flag-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/flag-mutations",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/user-state",
     "type": "library",
     "description": "Enables users to log in and have user state",
-    "keywords": [
-        "PoP",
-        "user-state"
-    ],
+    "keywords": ["PoP", "user-state"],
     "homepage": "https://github.com/pop-schema/user-state",
     "license": "MIT",
     "authors": [

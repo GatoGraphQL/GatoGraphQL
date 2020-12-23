@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/post-mutations",
     "type": "library",
     "description": "Adds support for post mutations",
-    "keywords": [
-        "PoP",
-        "post-mutations"
-    ],
+    "keywords": ["PoP", "post-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/post-mutations",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/notifications-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Notifications\"",
-    "keywords": [
-        "PoP",
-        "notifications-wp"
-    ],
+    "keywords": ["PoP", "notifications-wp"],
     "homepage": "https://github.com/PoPSchema/notifications-wp",
     "license": "MIT",
     "authors": [

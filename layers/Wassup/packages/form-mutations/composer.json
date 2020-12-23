@@ -2,10 +2,7 @@
     "name": "pop-sites-wassup/form-mutations",
     "type": "library",
     "description": "Adds support for form mutations",
-    "keywords": [
-        "PoP",
-        "form-mutations"
-    ],
+    "keywords": ["PoP", "form-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/form-mutations",
     "license": "MIT",
     "authors": [

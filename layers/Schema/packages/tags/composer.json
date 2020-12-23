@@ -2,10 +2,7 @@
     "name": "pop-schema/tags",
     "type": "library",
     "description": "Adds support for tags",
-    "keywords": [
-        "PoP",
-        "tags"
-    ],
+    "keywords": ["PoP", "tags"],
     "homepage": "https://github.com/PoPSchema/tags",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "pop-schema/user-state-access-control",
     "type": "library",
     "description": "Access Control based on the user being logged-in or not",
-    "keywords": [
-        "PoP",
-        "UserStateAccessControl"
-    ],
+    "keywords": ["PoP", "UserStateAccessControl"],
     "homepage": "https://github.com/pop-schema/user-state-access-control",
     "license": "MIT",
     "authors": [
