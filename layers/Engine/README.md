@@ -10,8 +10,8 @@ PoP describes an architecture based on a server-side component model, designed a
 
 The core packages are:
 
-1. [Component Model](getpop/component-model): Implementation of the basic component model, dealing with component data (but no configuration)
-2. [Engine](getpop/engine): Adds services over the component model
+1. [Component Model](packages/component-model): Implementation of the basic component model, dealing with component data (but no configuration)
+2. [Engine](packages/engine): Adds services over the component model
 
 PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build, configure and even deploy the application (eg: by providing support for the serverless paradigm). 
 
