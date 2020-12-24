@@ -1,6 +1,6 @@
 {
     "name": "graphql-by-pop/graphql-parser",
-    "description": "Pure PHP GraphQL",
+    "description": "GraphQL parser",
     "homepage": "https://github.com/GraphQLByPoP/graphql-parser",
     "license": "MIT",
     "authors": [
