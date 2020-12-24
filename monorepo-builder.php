@@ -22,7 +22,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/layers/API/packages',
         __DIR__ . '/layers/Schema/packages',
         __DIR__ . '/layers/GraphQLByPoP/packages',
-        __DIR__ . '/layers/GraphQLAPIForWP/packages',
+        __DIR__ . '/layers/GraphQLAPIForWP/plugins',
         __DIR__ . '/layers/SiteBuilder/packages',
         __DIR__ . '/layers/Wassup/packages',
     ]);
