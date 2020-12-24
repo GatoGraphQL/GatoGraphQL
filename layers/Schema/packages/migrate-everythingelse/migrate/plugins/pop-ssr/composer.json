@@ -1,5 +1,5 @@
 {
-    "name": "pop/ssr",
+    "name": "pop-migrate-everythingelse/ssr",
     "require": {
         "zordius/lightncandy": "dev-master"
     }
