@@ -1,11 +1,52 @@
 {
+    "name": "leoloso/pop",
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-mbstring": "*",
+        "brain/cortex": "~1.0.0",
+        "composer/installers": "~1.0",
+        "composer/semver": "^1.5",
+        "erusev/parsedown": "^1.7",
+        "guzzlehttp/guzzle": "~6.3",
+        "jrfnl/php-cast-to-type": "^2.0",
+        "league/pipeline": "^1.0",
+        "leoloso/examples-for-pop": "dev-master",
+        "lkwdwrd/wp-muplugin-loader": "dev-master",
+        "obsidian/polyfill-hrtime": "^0.1",
+        "psr/cache": "^1.0",
+        "sabberworm/php-css-parser": "*",
+        "symfony/cache": "^4.3",
+        "symfony/config": "^4.3",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/dotenv": "^4.3",
+        "symfony/expression-language": "^5.1",
+        "symfony/polyfill-php72": "^1.18",
+        "symfony/polyfill-php73": "^1.18",
+        "symfony/polyfill-php74": "^1.18",
+        "symfony/polyfill-php80": "^1.18",
+        "symfony/property-access": "^2.8 || ^3.4 || ^4.4",
+        "symfony/yaml": "^4.3",
+        "zordius/lightncandy": "dev-master"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": ">=5.5",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.8.17",
+        "squizlabs/php_codesniffer": "^3.0",
+        "szepeviktor/phpstan-wordpress": "^0.6.2",
+        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2",
+        "wpackagist-plugin/block-metadata": "^1.0",
+        "wpackagist-plugin/events-manager": "^5.9"
+    },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/packages/convert-case-directives/src",
-            "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/packages/graphql-api-for-wp/src",
-            "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/packages/schema-feedback/src",
+            "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/plugins/convert-case-directives/src",
+            "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src",
+            "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/plugins/schema-feedback/src",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/src",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/src",
+            "GraphQLByPoP\\GraphQLParser\\": "layers/GraphQLByPoP/packages/graphql-parser/src",
             "GraphQLByPoP\\GraphQLQuery\\": "layers/GraphQLByPoP/packages/graphql-query/src",
             "GraphQLByPoP\\GraphQLRequest\\": "layers/GraphQLByPoP/packages/graphql-request/src",
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/src",
@@ -158,18 +199,17 @@
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
             "PoP\\TraceTools\\": "layers/Engine/packages/trace-tools/src",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/src",
-            "Youshido\\GraphQL\\": "layers/GraphQLByPoP/packages/graphql-parser/src"
+            "PoP\\Translation\\": "layers/Engine/packages/translation/src"
         }
     },
-    "name": "leoloso/pop",
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/packages/convert-case-directives/tests",
-            "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/packages/graphql-api-for-wp/tests",
-            "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/packages/schema-feedback/tests",
+            "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/plugins/convert-case-directives/tests",
+            "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests",
+            "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/plugins/schema-feedback/tests",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/tests",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/tests",
+            "GraphQLByPoP\\GraphQLParser\\": "layers/GraphQLByPoP/packages/graphql-parser/tests",
             "GraphQLByPoP\\GraphQLQuery\\": "layers/GraphQLByPoP/packages/graphql-query/tests",
             "GraphQLByPoP\\GraphQLRequest\\": "layers/GraphQLByPoP/packages/graphql-request/tests",
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/tests",
@@ -322,57 +362,9 @@
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
             "PoP\\TraceTools\\": "layers/Engine/packages/trace-tools/tests",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/tests",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/tests",
-            "Youshido\\Tests\\": "layers/GraphQLByPoP/packages/graphql-parser/tests"
+            "PoP\\Translation\\": "layers/Engine/packages/translation/tests"
         }
     },
-    "require": {
-        "php": "^7.4|^8.0",
-        "ext-mbstring": "*",
-        "brain/cortex": "~1.0.0",
-        "composer/installers": "~1.0",
-        "composer/semver": "^1.5",
-        "erusev/parsedown": "^1.7",
-        "getpop/convert-case-directives": "dev-master",
-        "getpop/hooks-contracts-implementation": "~0.1",
-        "getpop/routing-contracts-implementation": "~0.1",
-        "getpop/translation-contracts-implementation": "~0.1",
-        "guzzlehttp/guzzle": "~6.3",
-        "jrfnl/php-cast-to-type": "^2.0",
-        "league/pipeline": "^1.0",
-        "leoloso/examples-for-pop": "dev-master",
-        "lkwdwrd/wp-muplugin-loader": "dev-master",
-        "obsidian/polyfill-hrtime": "^0.1",
-        "psr/cache": "^1.0",
-        "sabberworm/php-css-parser": "*",
-        "symfony/cache": "^4.3",
-        "symfony/config": "^4.3",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/dotenv": "^4.3",
-        "symfony/expression-language": "^5.1",
-        "symfony/polyfill-php72": "^1.18",
-        "symfony/polyfill-php73": "^1.18",
-        "symfony/polyfill-php74": "^1.18",
-        "symfony/polyfill-php80": "^1.18",
-        "symfony/property-access": "^2.8 || ^3.4 || ^4.4",
-        "symfony/yaml": "^4.3",
-        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2",
-        "zordius/lightncandy": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://wpackagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/leoloso/wp-muplugin-loader.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcaskill/composer-merge-plugin.git"
-        }
-    ],
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "merge-plugin": {
@@ -449,6 +441,8 @@
         "graphql-by-pop/graphql-query": "self.version",
         "graphql-by-pop/graphql-request": "self.version",
         "graphql-by-pop/graphql-server": "self.version",
+        "pop-migrate-everythingelse/cssconverter": "self.version",
+        "pop-migrate-everythingelse/ssr": "self.version",
         "pop-schema/basic-directives": "self.version",
         "pop-schema/block-metadata-for-wp": "self.version",
         "pop-schema/categories": "self.version",
@@ -599,8 +593,6 @@
         "pop-sites-wassup/volunteer-mutations": "self.version",
         "pop-sites-wassup/wassup": "self.version"
     },
-    "description": "Monorepo for all the PoP packages",
-    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",
@@ -608,19 +600,31 @@
             "homepage": "https://getpop.org"
         }
     ],
+    "description": "Monorepo for all the PoP packages",
+    "license": "GPLv2",
     "config": {
         "sort-packages": true
     },
-    "require-dev": {
-        "johnpbloch/wordpress": ">=5.5",
-        "phpstan/phpstan": "^0.12",
-        "phpunit/phpunit": ">=9.3",
-        "rector/rector": "^0.8.17",
-        "squizlabs/php_codesniffer": "^3.0",
-        "symplify/monorepo-builder": "^9.0",
-        "szepeviktor/phpstan-wordpress": "^0.6.2",
-        "wpackagist-plugin/block-metadata": "^1.0",
-        "wpackagist-plugin/events-manager": "^5.9"
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/leoloso/wp-muplugin-loader.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/mcaskill/composer-merge-plugin.git"
+        }
+    ],
+    "scripts": {
+        "init-graphql-api": [
+            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json');\"",
+            "vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json symlink=true use_dev_master=false",
+            "cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
