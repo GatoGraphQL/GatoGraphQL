@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "provide": {
-        "getpop/routing-contracts-implementation": "~0.1"
+        "getpop/routing-contracts-implementation": "dev-master"
     },
     "require": {
         "php": "^7.4|^8.0",

@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "provide": {
-        "getpop/translation-contracts-implementation": "~0.1"
+        "getpop/translation-contracts-implementation": "dev-master"
     },
     "require": {
         "php": "^7.4|^8.0",

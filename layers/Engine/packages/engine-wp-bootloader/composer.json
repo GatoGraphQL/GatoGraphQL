@@ -28,9 +28,9 @@
     "require": {
         "php": "^7.4|^8.0",
         "composer/installers": "~1.0",
-        "getpop/hooks-contracts-implementation": "~0.1",
-        "getpop/translation-contracts-implementation": "~0.1",
-        "getpop/routing-contracts-implementation": "~0.1",
+        "getpop/hooks-contracts-implementation": "dev-master",
+        "getpop/translation-contracts-implementation": "dev-master",
+        "getpop/routing-contracts-implementation": "dev-master",
         "lkwdwrd/wp-muplugin-loader": "dev-master"
     },
     "require-dev": {
