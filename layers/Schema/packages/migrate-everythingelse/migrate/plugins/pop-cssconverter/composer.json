@@ -1,4 +1,5 @@
 {
+    "name": "pop-cssconverter",
     "require": {
         "sabberworm/php-css-parser": "*"
     }

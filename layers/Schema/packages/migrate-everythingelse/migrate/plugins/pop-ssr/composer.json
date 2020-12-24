@@ -1,4 +1,5 @@
 {
+    "name": "pop-ssr",
     "require": {
         "zordius/lightncandy": "dev-master"
     }
