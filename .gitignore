@@ -1,4 +1,5 @@
 
+/wp-content/
 /vendor/
 /build/
 phpcs.xml
