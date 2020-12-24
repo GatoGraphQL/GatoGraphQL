@@ -6,7 +6,12 @@ This repo concerns the component-model architecture.
 
 ## Description
  
-PoP describes an architecture based on a server-side component model. It has been [implemented in PHP](https://github.com/leoloso/PoP-PHP), but can also be considered a mental model for building applications in any language.
+PoP describes an architecture based on a server-side component model, designed as a set of PHP packages distributed through [Composer](https://getcomposer.org). 
+
+The core packages are:
+
+1. [Component Model](getpop/component-model): Implementation of the basic component model, dealing with component data (but no configuration)
+2. [Engine](getpop/engine): Adds services over the component model
 
 PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build, configure and even deploy the application (eg: by providing support for the serverless paradigm). 
 
