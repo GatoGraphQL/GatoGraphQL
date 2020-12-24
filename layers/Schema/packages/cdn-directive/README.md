@@ -105,5 +105,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/cdn-directive/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/cdn-directive
 [link-downloads]: https://packagist.org/packages/pop-schema/cdn-directive
-[link-contributors]: ../../contributors
+[link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso

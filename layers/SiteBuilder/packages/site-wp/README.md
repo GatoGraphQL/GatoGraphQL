@@ -90,5 +90,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/site-wp/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/getpop/site-wp
 [link-downloads]: https://packagist.org/packages/getpop/site-wp
-[link-contributors]: ../../contributors
+[link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso

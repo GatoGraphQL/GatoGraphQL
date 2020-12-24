@@ -112,5 +112,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/engine/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/getpop/engine
 [link-downloads]: https://packagist.org/packages/getpop/engine
-[link-contributors]: ../../contributors
+[link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso

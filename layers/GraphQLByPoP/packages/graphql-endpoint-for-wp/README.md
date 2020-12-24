@@ -93,4 +93,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-code-quality]: https://scrutinizer-ci.com/g/graphql-by-pop/graphql-endpoint-for-wp
 [link-downloads]: https://packagist.org/packages/graphql-by-pop/graphql-endpoint-for-wp
 [link-author]: https://github.com/getpop
-[link-contributors]: ../../contributors
+[link-contributors]: ../../../../../../contributors

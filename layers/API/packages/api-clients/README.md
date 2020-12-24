@@ -93,4 +93,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-code-quality]: https://scrutinizer-ci.com/g/getpop/api-clients
 [link-downloads]: https://packagist.org/packages/getpop/api-clients
 [link-author]: https://github.com/getpop
-[link-contributors]: ../../contributors
+[link-contributors]: ../../../../../../contributors

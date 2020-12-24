@@ -429,7 +429,7 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [link-downloads]: https://GitHub.com/GraphQLAPI/graphql-api-for-wp/releases/
 [link-release]: https://GitHub.com/GraphQLAPI/graphql-api-for-wp/releases/
 [link-downloads]: https://GitHub.com/GraphQLAPI/graphql-api-for-wp/releases/
-[link-contributors]: ../../contributors
+[link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 
 [latest-release-url]: https://github.com/GraphQLAPI/graphql-api-for-wp/releases/latest/download/graphql-api.zip
