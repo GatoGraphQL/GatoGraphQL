@@ -5,12 +5,12 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Parser\Ast\ArgumentValue;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue;
 
 
-use Youshido\GraphQL\Parser\Ast\AbstractAst;
-use Youshido\GraphQL\Parser\Ast\Interfaces\ValueInterface;
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\AbstractAst;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 class InputList extends AbstractAst implements ValueInterface
 {

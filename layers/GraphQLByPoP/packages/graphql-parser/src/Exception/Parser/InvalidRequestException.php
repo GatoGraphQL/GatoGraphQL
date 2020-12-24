@@ -5,7 +5,7 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Exception\Parser;
+namespace GraphQLByPoP\GraphQLParser\Exception\Parser;
 
 class InvalidRequestException extends AbstractParserError
 {

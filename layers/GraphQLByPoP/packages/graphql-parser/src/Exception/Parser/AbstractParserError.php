@@ -5,11 +5,11 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Exception\Parser;
+namespace GraphQLByPoP\GraphQLParser\Exception\Parser;
 
 
-use Youshido\GraphQL\Exception\Interfaces\LocationableExceptionInterface;
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 abstract class AbstractParserError extends \Exception implements LocationableExceptionInterface
 {

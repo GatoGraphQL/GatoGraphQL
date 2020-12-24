@@ -5,10 +5,10 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Parser\Ast;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
 
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 class Fragment extends AbstractAst
 {

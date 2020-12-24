@@ -5,19 +5,19 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\Tests\Parser;
+namespace GraphQLByPoP\GraphQLParser\Parser;
 
-use Youshido\GraphQL\Parser\Ast\Argument;
-use Youshido\GraphQL\Parser\Ast\ArgumentValue\InputList;
-use Youshido\GraphQL\Parser\Ast\ArgumentValue\InputObject;
-use Youshido\GraphQL\Parser\Ast\ArgumentValue\Literal;
-use Youshido\GraphQL\Parser\Ast\ArgumentValue\Variable;
-use Youshido\GraphQL\Parser\Ast\Field;
-use Youshido\GraphQL\Parser\Ast\Fragment;
-use Youshido\GraphQL\Parser\Ast\FragmentReference;
-use Youshido\GraphQL\Parser\Ast\Query;
-use Youshido\GraphQL\Parser\Ast\TypedFragmentReference;
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Field;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Fragment;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 use PHPUnit\Framework\TestCase;
 
 class AstTest extends TestCase

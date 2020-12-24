@@ -6,7 +6,7 @@
 * created: 2/5/17 11:31 AM
 */
 
-namespace Youshido\GraphQL\Parser\Ast;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
 
 trait AstArgumentsTrait

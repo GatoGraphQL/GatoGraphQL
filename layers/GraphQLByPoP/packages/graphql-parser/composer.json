@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Youshido\\GraphQL\\": "src"
+            "GraphQLByPoP\\GraphQLParser\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Youshido\\Tests\\": "tests"
+            "GraphQLByPoP\\GraphQLParser\\": "tests"
         }
     },
     "extra": {

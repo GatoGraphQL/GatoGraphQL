@@ -5,10 +5,10 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Parser\Ast\Interfaces;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
 
 
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 interface LocatableInterface
 {

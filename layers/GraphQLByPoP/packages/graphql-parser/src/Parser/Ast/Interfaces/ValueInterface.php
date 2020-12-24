@@ -5,7 +5,7 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Parser\Ast\Interfaces;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
 
 
 interface ValueInterface

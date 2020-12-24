@@ -5,9 +5,9 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\Tests\Parser;
+namespace GraphQLByPoP\GraphQLParser\Parser;
 
-use Youshido\GraphQL\Parser\Parser;
+use GraphQLByPoP\GraphQLParser\Parser\Parser;
 
 class TokenizerTestingParser extends Parser
 {

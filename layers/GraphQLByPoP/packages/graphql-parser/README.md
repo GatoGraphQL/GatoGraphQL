@@ -83,10 +83,10 @@ Create an `index.php` file with the following content:
 <?php
 namespace Sandbox;
 
-use Youshido\GraphQL\Execution\Processor;
-use Youshido\GraphQL\Schema\Schema;
-use Youshido\GraphQL\Type\Object\ObjectType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Execution\Processor;
+use GraphQLByPoP\GraphQLParser\Schema\Schema;
+use GraphQLByPoP\GraphQLParser\Type\Object\ObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 require_once 'vendor/autoload.php';
 
@@ -170,10 +170,10 @@ You can create `inline-index.php` file in your project folder and paste the foll
 <?php
 namespace InlineSchema;
 
-use Youshido\GraphQL\Execution\Processor;
-use Youshido\GraphQL\Schema\Schema;
-use Youshido\GraphQL\Type\Object\ObjectType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Execution\Processor;
+use GraphQLByPoP\GraphQLParser\Schema\Schema;
+use GraphQLByPoP\GraphQLParser\Type\Object\ObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 // including autoloader
 require_once __DIR__ . '/vendor/autoload.php';
@@ -235,8 +235,8 @@ Create a file `Schema/PostType.php` and put the following code in there:
 <?php
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class PostType extends AbstractObjectType   // extending abstract Object type
 {
@@ -263,9 +263,9 @@ Now let's create the main entry point for this example – `index.php`:
 namespace Examples\Blog;
 
 use Examples\Blog\Schema\PostType;
-use Youshido\GraphQL\Execution\Processor;
-use Youshido\GraphQL\Schema\Schema;
-use Youshido\GraphQL\Type\Object\ObjectType;
+use GraphQLByPoP\GraphQLParser\Execution\Processor;
+use GraphQLByPoP\GraphQLParser\Schema\Schema;
+use GraphQLByPoP\GraphQLParser\Type\Object\ObjectType;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Schema/PostType.php';       // including PostType definition
@@ -304,8 +304,8 @@ Next step would be to create a separate class for the latestPostField by extendi
 
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Execution\ResolveInfo;
-use Youshido\GraphQL\Field\AbstractField;
+use GraphQLByPoP\GraphQLParser\Execution\ResolveInfo;
+use GraphQLByPoP\GraphQLParser\Field\AbstractField;
 
 class LatestPostField extends AbstractField
 {
@@ -330,9 +330,9 @@ And now we can update our `index.php`:
 namespace Examples\Blog;
 
 use Examples\Blog\Schema\LatestPostField;
-use Youshido\GraphQL\Execution\Processor;
-use Youshido\GraphQL\Schema\Schema;
-use Youshido\GraphQL\Type\Object\ObjectType;
+use GraphQLByPoP\GraphQLParser\Execution\Processor;
+use GraphQLByPoP\GraphQLParser\Schema\Schema;
+use GraphQLByPoP\GraphQLParser\Type\Object\ObjectType;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Schema/PostType.php';       // including PostType definition
@@ -407,11 +407,11 @@ Of course in real life you'll more likely have a response of type `Post` for suc
 namespace Examples\Blog;
 
 use Examples\Blog\Schema\LatestPostField;
-use Youshido\GraphQL\Execution\Processor;
-use Youshido\GraphQL\Schema\Schema;
-use Youshido\GraphQL\Type\NonNullType;
-use Youshido\GraphQL\Type\Object\ObjectType;
-use Youshido\GraphQL\Type\Scalar\IntType;
+use GraphQLByPoP\GraphQLParser\Execution\Processor;
+use GraphQLByPoP\GraphQLParser\Schema\Schema;
+use GraphQLByPoP\GraphQLParser\Type\NonNullType;
+use GraphQLByPoP\GraphQLParser\Type\Object\ObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\IntType;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Schema/PostType.php';       // including PostType definition
@@ -464,9 +464,9 @@ First, we'll add `likesCount` field to the `PostType`:
 <?php
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\IntType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\IntType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class PostType extends AbstractObjectType
 {
@@ -580,10 +580,10 @@ Let's take a closer look at the structure of `PostType` and see what parameters 
 <?php
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\BooleanType;
-use Youshido\GraphQL\Type\Scalar\IntType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\BooleanType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\IntType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class PostType extends AbstractObjectType
 {
@@ -628,9 +628,9 @@ Let's create a `ContentBlockInterface` that can represent a piece of content for
  */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\InterfaceType\AbstractInterfaceType;
-use Youshido\GraphQL\Type\NonNullType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\InterfaceType\AbstractInterfaceType;
+use GraphQLByPoP\GraphQLParser\Type\NonNullType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class ContentBlockInterface extends AbstractInterfaceType
 {
@@ -656,9 +656,9 @@ In order to associate this Interface to the `PostType` we have to override it's 
 */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\IntType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\IntType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class PostType extends AbstractObjectType
 {
@@ -698,8 +698,8 @@ For the convenience we also created `$config->applyInterface()` method that coul
  */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\IntType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\IntType;
 
 class PostType extends AbstractObjectType
 {
@@ -732,7 +732,7 @@ To show you how Enums work we're going to create a new class - `PostStatus`:
  */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Enum\AbstractEnumType;
+use GraphQLByPoP\GraphQLParser\Type\Enum\AbstractEnumType;
 
 class PostStatus extends AbstractEnumType
 {
@@ -759,10 +759,10 @@ Now, add a status field to the `PostType`:
  */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\NonNullType;
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\IntType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\NonNullType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\IntType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class PostType extends AbstractObjectType
 {
@@ -789,8 +789,8 @@ and update the resolve function inside latestPost field:
 
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Execution\ResolveInfo;
-use Youshido\GraphQL\Field\AbstractField;
+use GraphQLByPoP\GraphQLParser\Execution\ResolveInfo;
+use GraphQLByPoP\GraphQLParser\Field\AbstractField;
 
 class LatestPostField extends AbstractField
 {
@@ -835,8 +835,8 @@ Create a `BannerType`:
  */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class BannerType extends AbstractObjectType
 {
@@ -858,7 +858,7 @@ Each `UnionType` needs to define a list of types it unites by implementing the `
 
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Union\AbstractUnionType;
+use GraphQLByPoP\GraphQLParser\Type\Union\AbstractUnionType;
 
 class ContentBlockUnion extends AbstractUnionType
 {
@@ -916,9 +916,9 @@ As we're getting our schema bigger we'd like to extract it to a separate file as
  */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Config\Schema\SchemaConfig;
-use Youshido\GraphQL\Schema\AbstractSchema;
-use Youshido\GraphQL\Type\ListType\ListType;
+use GraphQLByPoP\GraphQLParser\Config\Schema\SchemaConfig;
+use GraphQLByPoP\GraphQLParser\Schema\AbstractSchema;
+use GraphQLByPoP\GraphQLParser\Type\ListType\ListType;
 
 class BlogSchema extends AbstractSchema
 {
@@ -953,7 +953,7 @@ Having this separate schema file you should update your `index.php` to look like
 namespace Examples\Blog;
 
 use Examples\Blog\Schema\BlogSchema;
-use Youshido\GraphQL\Execution\Processor;
+use GraphQLByPoP\GraphQLParser\Execution\Processor;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Schema/PostType.php';
@@ -996,9 +996,9 @@ Let's go ahead and add `ListType` field to our BlogSchema.
  */
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Config\Schema\SchemaConfig;
-use Youshido\GraphQL\Schema\AbstractSchema;
-use Youshido\GraphQL\Type\ListType\ListType;
+use GraphQLByPoP\GraphQLParser\Config\Schema\SchemaConfig;
+use GraphQLByPoP\GraphQLParser\Schema\AbstractSchema;
+use GraphQLByPoP\GraphQLParser\Type\ListType\ListType;
 
 class BlogSchema extends AbstractSchema
 {
@@ -1053,10 +1053,10 @@ To fix this we just need to add `ContentBlockInterface` by implementing `getInte
 
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Config\TypeConfigInterface;
-use Youshido\GraphQL\Type\NonNullType;
-use Youshido\GraphQL\Type\Object\AbstractObjectType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\Config\TypeConfigInterface;
+use GraphQLByPoP\GraphQLParser\Type\NonNullType;
+use GraphQLByPoP\GraphQLParser\Type\Object\AbstractObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class BannerType extends AbstractObjectType
 {
@@ -1100,10 +1100,10 @@ Let's develop a `PostInputType` that could be used to create a new Post in our s
 
 namespace Examples\Blog\Schema;
 
-use Youshido\GraphQL\Type\Config\InputTypeConfigInterface;
-use Youshido\GraphQL\Type\NonNullType;
-use Youshido\GraphQL\Type\InputObject\AbstractInputObjectType;
-use Youshido\GraphQL\Type\Scalar\StringType;
+use GraphQLByPoP\GraphQLParser\Type\Config\InputTypeConfigInterface;
+use GraphQLByPoP\GraphQLParser\Type\NonNullType;
+use GraphQLByPoP\GraphQLParser\Type\InputObject\AbstractInputObjectType;
+use GraphQLByPoP\GraphQLParser\Type\Scalar\StringType;
 
 class PostInputType extends AbstractInputObjectType
 {

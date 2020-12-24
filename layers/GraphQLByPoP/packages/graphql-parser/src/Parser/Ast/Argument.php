@@ -5,11 +5,11 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Parser\Ast;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
 
-use Youshido\GraphQL\Parser\Ast\Interfaces\ValueInterface;
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 class Argument extends AbstractAst
 {
@@ -50,7 +50,7 @@ class Argument extends AbstractAst
     }
 
     /**
-     * @return \Youshido\GraphQL\Parser\Ast\Interfaces\ValueInterface
+     * @return \GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface
      */
     public function getValue()
     {

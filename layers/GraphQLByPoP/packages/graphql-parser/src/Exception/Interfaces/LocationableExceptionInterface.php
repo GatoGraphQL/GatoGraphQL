@@ -5,10 +5,10 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Exception\Interfaces;
+namespace GraphQLByPoP\GraphQLParser\Exception\Interfaces;
 
 
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 interface LocationableExceptionInterface
 {

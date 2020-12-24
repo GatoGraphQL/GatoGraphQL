@@ -5,11 +5,11 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Parser\Ast;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
 
-use Youshido\GraphQL\Parser\Ast\Interfaces\LocatableInterface;
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\LocatableInterface;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 abstract class AbstractAst implements LocatableInterface
 {

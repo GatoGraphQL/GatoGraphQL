@@ -5,10 +5,10 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace Youshido\GraphQL\Parser\Ast\Interfaces;
+namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
 
 
-use Youshido\GraphQL\Parser\Ast\Argument;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
 
 interface FieldInterface extends LocatableInterface
 {

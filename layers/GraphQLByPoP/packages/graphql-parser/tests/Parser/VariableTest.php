@@ -1,9 +1,9 @@
 <?php
 
-namespace Youshido\Tests\Parser;
+namespace GraphQLByPoP\GraphQLParser\Parser;
 
-use Youshido\GraphQL\Parser\Ast\ArgumentValue\Variable;
-use Youshido\GraphQL\Parser\Location;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use GraphQLByPoP\GraphQLParser\Parser\Location;
 use PHPUnit\Framework\TestCase;
 
 class VariableTest extends TestCase
