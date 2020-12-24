@@ -21,7 +21,7 @@ PoP is components all the way down. Each component is implemented partly in the 
 
 PoP relies on contracts to interact with the underlying CMS or framework, where all logic resides. As such, it is CMS-agnostic, and it can work with any PHP-based CMS or framework (WordPress, Symfony, Laravel, Joomla, Drupal). 
 
-So far only the [contracts for WordPress](https://github.com/leoloso/PoP-API-WP) have been implemented, but extending it to any other platform is very simple: Only all the [repos ending on `"-wp"`](https://github.com/getpop?utf8=%E2%9C%93&q=-wp&type=&language=), which contain the implementation of the contracts for WordPress, need be re-implemented.
+<!-- So far only the [contracts for WordPress](https://github.com/leoloso/PoP-API-WP) have been implemented, but extending it to any other platform is very simple: Only all the [repos ending on `"-wp"`](https://github.com/getpop?utf8=%E2%9C%93&q=-wp&type=&language=), which contain the implementation of the contracts for WordPress, need be re-implemented. -->
 
 ### No creeping business logic
 
@@ -75,17 +75,13 @@ PoP's architecture attempts to achieve the following goals:
 - PHP for creating the modules
 -->
 
-## Install
+<!-- ## Install
 
 Follow the instructions in:
 
 - [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP)
 
-(Other projects coming soon...)
-<!--
-- PoP API for Laravel + WordPress (coming soon)
-- PoP site for WordPress (coming soon)
--->
+(Other projects coming soon...) -->
 
 ## Architecture foundations
 
@@ -283,11 +279,12 @@ The configuration layer can provide those properties and values required to buil
 }
 ```
 
-## Success stories
+<!-- ## Success stories
 
 PoP is the foundation for the [GraphQL API for PoP](https://github.com/getpop/api-graphql), an exceptional implementation of [GraphQL](https://graphql.org) which supports features not typically supported in GraphQL: HTTP caching, composable fields, composable directives, linear complexity time to resolve queries, and native federation and decentralization, among others.
 
-In the near future, PoP will enable to [build websites](https://github.com/getpop/site) and [export them as static](https://github.com/getpop/static-site-generator).
+In the near future, PoP will enable to [build websites](https://github.com/getpop/site) and [export them as static](https://github.com/getpop/static-site-generator). -->
+
 <!--
 ## Use cases for PoP
 
@@ -563,7 +560,7 @@ To allow the website's service-worker.js be able to cache content coming from th
     </IfModule>
 -->
 
-## Articles concerning PoP
+## Resources
 
 The following articles concern how different features in PoP were implemented:
 
