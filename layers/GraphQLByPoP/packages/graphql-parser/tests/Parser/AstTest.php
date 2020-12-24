@@ -7,7 +7,6 @@
 
 namespace Youshido\Tests\Parser;
 
-
 use Youshido\GraphQL\Parser\Ast\Argument;
 use Youshido\GraphQL\Parser\Ast\ArgumentValue\InputList;
 use Youshido\GraphQL\Parser\Ast\ArgumentValue\InputObject;
@@ -19,8 +18,9 @@ use Youshido\GraphQL\Parser\Ast\FragmentReference;
 use Youshido\GraphQL\Parser\Ast\Query;
 use Youshido\GraphQL\Parser\Ast\TypedFragmentReference;
 use Youshido\GraphQL\Parser\Location;
+use PHPUnit\Framework\TestCase;
 
-class AstTest extends \PHPUnit_Framework_TestCase
+class AstTest extends TestCase
 {
 
     public function testArgument()
@@ -194,11 +194,9 @@ class AstTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new Literal('text', new Location(1, 1)), $variable->getValue());
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testVariableLogicException()
     {
+        $this->expectException(\LogicException::class);
         $variable = new Variable('id', 'int', false, false, true, new Location(1, 1));
         $variable->getValue();
     }

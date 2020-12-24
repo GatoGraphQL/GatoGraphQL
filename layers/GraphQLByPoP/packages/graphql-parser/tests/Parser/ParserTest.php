@@ -22,21 +22,9 @@ use Youshido\GraphQL\Parser\Ast\TypedFragmentReference;
 use Youshido\GraphQL\Parser\Location;
 use Youshido\GraphQL\Parser\Parser;
 use Youshido\GraphQL\Parser\Token;
+use PHPUnit\Framework\TestCase;
 
-class TokenizerTestingParser extends Parser
-{
-    public function initTokenizerForTesting($source)
-    {
-        $this->initTokenizer($source);
-    }
-
-    public function getTokenForTesting()
-    {
-        return $this->lookAhead;
-    }
-}
-
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
 
     public function testEmptyParser()
@@ -45,8 +33,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals([
             'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [],
+            'mutationOperations' => [],
+            'queries'            => [],
             'mutations'          => [],
             'fragments'          => [],
             'fragmentReferences' => [],
@@ -55,11 +43,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         ], $parser->parse());
     }
 
-    /**
-     * @expectedException Youshido\GraphQL\Exception\Parser\SyntaxErrorException
-     */
     public function testInvalidSelection()
     {
+        $this->expectException(\Youshido\GraphQL\Exception\Parser\SyntaxErrorException::class);
         $parser = new Parser();
         $data   = $parser->parse('
         {
@@ -161,10 +147,10 @@ GRAPHQL;
      * @param $query string
      *
      * @dataProvider wrongQueriesProvider
-     * @expectedException Youshido\GraphQL\Exception\Parser\SyntaxErrorException
      */
     public function testWrongQueries($query)
     {
+        $this->expectException(\Youshido\GraphQL\Exception\Parser\SyntaxErrorException::class);
         $parser = new Parser();
 
         $parser->parse($query);
