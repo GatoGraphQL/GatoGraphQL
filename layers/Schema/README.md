@@ -25,7 +25,7 @@ The `Schema` layer is CMS-agnostic, so the same data entity can work on any CMS.
 
 In addition, this layer is platform-agnostic, independent from both the `API` and `SiteBuilder` layers: a data entity has a single source of truth of code, which can interact with any API (whether it is REST or GraphQL or any other one) or with the engine when rendering the website.
 
-### CMS-agnostic convention
+### Package architecture convention
 
 The code for some component is divided into 2 separate packages:
 
