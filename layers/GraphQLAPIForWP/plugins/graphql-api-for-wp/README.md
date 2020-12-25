@@ -211,14 +211,6 @@ Requirements:
 | 8.0 | [Union types](https://php.watch/versions/8.0/union-types)<br/><br/>[`mixed` pseudo type](https://php.watch/versions/8.0#mixed-type)<br/><br/>[`static` return type](https://wiki.php.net/rfc/static_return_type)<br/><br/>Interfaces:<ul><li>`Stringable`</li></ul>Classes:<ul><li>`ValueError`</li><li>`UnhandledMatchError`</li></ul>Constants:<ul><li>`FILTER_VALIDATE_BOOL`</li></ul>Functions:<ul><li>[`fdiv`](https://php.net/fdiv)</li><li>[`get_debug_type`](https://php.net/get_debug_type)</li><li>[`preg_last_error_msg`](https://php.net/preg_last_error_msg)</li><li>[`str_contains`](https://php.net/str_contains)</li><li>[`str_starts_with`](https://php.net/str_starts_with)</li><li>[`str_ends_with`](https://php.net/str_ends_with)</li><li>[`get_resource_id`](https://php.net/get_resource_id)</li></ul> |
 -->
 
-### Downgrading code to PHP 7.1
-
-Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
-
-```bash
-composer downgrade-code
-```
-
 ## Modules
 
 GraphQL API is extensible, and ships with the following modules (organized by category):
@@ -386,6 +378,14 @@ To run checks for level 0 (or any level from 0 to 8):
 
 ``` bash
 ./vendor/bin/phpstan analyse -l 0 src tests
+```
+
+## Downgrading code to PHP 7.1
+
+Execute [Rector](https://github.com/rectorphp/rector) in `dry-run` mode:
+
+```bash
+composer downgrade-code
 ```
 
 ## Contributing
