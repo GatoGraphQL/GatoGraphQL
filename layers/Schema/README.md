@@ -4,7 +4,7 @@ Definitions for all the data entities.
 
 ## Type of data entities
 
-The PoP schema is a superset of the GraphQL schema, so it involves the same elements, including:
+The PoP schema is a superset of the GraphQL schema, and it involves the same elements:
 
 - types (such as posts, users, comments, etc)
 - fields
@@ -13,7 +13,11 @@ The PoP schema is a superset of the GraphQL schema, so it involves the same elem
 - custom scalars
 - directives
 
-In addition, some data entities support extra features, including [composable fields](../API#composable-fields), [composable directives](../API#composable-directives), and others.
+In addition, data entities may support extra features. For instance: 
+
+- [Fields are composable](../API#composable-fields) and can be added to every type, enabling to produces [global fields](../API#operators-and-helpers)
+- [Directives are composable](../API#composable-directives), so they can modify the behavior of another directive
+- [Directives can accept "expressions"](../API#directive-expressions), which are dynamic variables created on runtime, during the query resolution
 
 ## CMS-agnosticism
 
