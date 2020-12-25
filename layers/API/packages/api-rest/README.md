@@ -108,13 +108,9 @@ _**Collection of posts, default fields**_:<br/>
 _**Collection of posts, custom fields**_:<br/>
 [{post-list-url}/api/rest/?query=id|title|author.id|name](https://nextapi.getpop.org/posts/api/rest/?query=id|title|author.id|name)
 
-## More information
+<!-- ## More information
 
-Please refer to package [API](https://github.com/getpop/api), on which the REST API is based, and which contains plenty of extra documentation.
-
----
----
----
+Please refer to package [API](https://github.com/getpop/api), on which the REST API is based, and which contains plenty of extra documentation. -->
 
 ## PHP versions
 

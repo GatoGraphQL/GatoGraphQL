@@ -126,9 +126,9 @@ Initialize the component:
 
 2. Add your query under URL parameter `query`, following [this syntax](https://github.com/getpop/field-query)
 
-## Features
+<!-- ## Features
 
-Please refer to the [features in the GraphQL package](https://github.com/getpop/api-graphql#features).
+Please refer to the [features in the GraphQL package](https://github.com/getpop/api-graphql#features). -->
 
 <!--
 ### Query the root or URL-based resources
