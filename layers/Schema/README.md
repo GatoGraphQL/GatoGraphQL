@@ -23,7 +23,7 @@ In addition, data entities may support extra features. For instance:
 
 The `Schema` layer is CMS-agnostic, so the same data entity can work on any CMS. It involves packages with the contracts, and also with the implementation of the contracts for some specific CMS. For instance, all packages ending in `-wp` provide an implementation for WordPress.
 
-In addition, this layer is platform-agnostic, independent from both the `API` and `SiteBuilder` layers: the same single source of truth can power any API (whether it is REST or GraphQL or any other one), and also the creation of the website via the `SiteBuilder` layer.
+In addition, this layer is platform-agnostic, independent from both the `API` and `SiteBuilder` layers: a data entity has a single source of truth of code, which can interact with any API (whether it is REST or GraphQL or any other one) or with the engine when rendering the website.
 
 ### CMS-agnostic convention
 
