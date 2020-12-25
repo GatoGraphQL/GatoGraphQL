@@ -138,6 +138,12 @@ Please refer to package [API](https://github.com/getpop/api), on which the Graph
 
 ## Features
 
+## Everything from the API layer, adapted to GraphQL
+
+The [API](https://github.com/leoloso/PoP/tree/master/layers/API/) layer provides plenty of features, based on the [field-query](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/field-query) syntax.
+
+This package adapts all those features to GraphQL.
+
 ### Automatic namespacing of types and interfaces
 
 Namespaces ([proposed to be added to the GraphQL spec](https://github.com/graphql/graphql-spec/issues/163)) help manage the complexity of the schema. This can avoid different types having the same name, which can happen when embedding components from a 3rd party.
