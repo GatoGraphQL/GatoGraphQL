@@ -12,7 +12,6 @@ The core packages are:
 
 - [Component Model](packages/component-model): Implementation of the basic component model, dealing with component data (but no configuration)
 - [Engine](packages/engine): Adds services over the component model
-- [Field query](packages/field-query): Syntax for querying data for the fields
 
 PoP is components all the way down. Each component is implemented partly in the back-end, and partly in the front-end. The component-based architecture provides the mechanism to build, configure and even deploy the application (eg: by providing support for the serverless paradigm). 
 
