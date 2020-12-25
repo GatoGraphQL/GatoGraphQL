@@ -18,6 +18,12 @@ This is a monorepo containing all layers from the PoP project:
 
 [Wassup](layers/Wassup):<br/>Implementation of a PoP website (check [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)).
 
+## Dependency graph
+
+This is how the layers in PoP relate to each other:
+
+![Dependency graph](assets/img/dependency-graph.svg)
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.
