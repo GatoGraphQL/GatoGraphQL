@@ -51,7 +51,7 @@ composer analyse
 ## Dry-running PHP-version Downgrades
 
 ``` bash
-composer downgrade-code
+composer preview-code-downgrade
 ```
 
 

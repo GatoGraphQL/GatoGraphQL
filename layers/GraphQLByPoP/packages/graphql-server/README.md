@@ -135,7 +135,7 @@ Requirements:
 Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
-composer downgrade-code
+composer preview-code-downgrade
 ```
 
 ## Standards

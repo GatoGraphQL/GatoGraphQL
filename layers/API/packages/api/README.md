@@ -496,7 +496,7 @@ Same as the [Supported PHP features for `getpop/root`](https://github.com/getpop
 Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
-composer downgrade-code
+composer preview-code-downgrade
 ```
 
 ## Standards

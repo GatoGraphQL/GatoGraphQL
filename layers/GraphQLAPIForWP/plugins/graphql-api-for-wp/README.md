@@ -385,7 +385,7 @@ To run checks for level 0 (or any level from 0 to 8):
 To visualize how [Rector](https://github.com/rectorphp/rector) will downgrade the code to PHP 7.1:
 
 ```bash
-composer downgrade-code
+composer preview-code-downgrade
 ```
 
 ## Contributing
