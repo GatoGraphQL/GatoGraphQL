@@ -172,7 +172,7 @@ wp-env run cli wp rewrite structure '/%postname%/'
 Whenever pulling changes from this repo, install again the dependencies:
 
 ```bash
-composer install
+composer update
 ```
 
 ### Pushing code
@@ -181,28 +181,7 @@ Compiled JavaScript code (such as all files under a block's `build/` folder) is 
 
 Code compiled for development, i.e. after running `npm start`, is not allowed in the repo.
 
-### Clone own dependencies
-
-GraphQL API is not a monorepo. Instead, every package lives under its own repo, and everything is managed and assembled together through Composer.
-
-File [`dev-helpers/scripts/clone-all-dependencies-from-github.sh`](https://github.com/GraphQLAPI/graphql-api/blob/master/dev-helpers/scripts/clone-all-dependencies-from-github.sh) contains the list of all own dependencies, ready to be cloned.
-
-For development, the GraphQL API plugin can use these local projects by overriding Composer's autoload `PSR-4` sources. To do so:
-
-- Duplicate file [`composer.local-sample.json`](https://github.com/GraphQLAPI/graphql-api/blob/master/composer.local-sample.json) as `composer.local.json`
-- Customize it with the paths to the folders
-
-This file will override any corresponding entry defined in `composer.json`.
-
-### PSR-4 Namespaces
-
-The package owner for this plugin is `GraphQLAPI`. In addition, there are 3 other package owners for all the required components, each as an organization in GitHub:
-
-- [GraphQLByPoP](https://github.com/GraphQLByPoP): components belonging to "GraphQL by PoP", the CMS-agnostic GraphQL server which powers the plugin
-- [PoPSchema](https://github.com/PoPSchema): components to add entities to the schema (types, field resolvers, directives)
-- [PoP](https://github.com/getpop): the core server-side component architecture, used by the server to load the graph data
-
-### CMS-agnosticism
+<!-- ### CMS-agnosticism
 
 Even though this plugin is already the implementation for WordPress, it is recommended to develop components following the [CMS-agnostic method employed by GraphQL by PoP](https://graphql-by-pop.com/docs/architecture/cms-agnosticism.html), so that they can benefit from architectural optimizations and future developments.
 
@@ -211,7 +190,7 @@ In particular, support for serverless PHP (a feature which is [on the roadmap](h
 This method requires the code for the component to be divided into 2 separate packages:
 
 - A CMS-agnostic package, containing the business code and generic contracts, but without using any WordPress code (eg: [posts](https://github.com/PoPSchema/posts))
-- A CMS-specific package, containing the implementation of the contracts for WordPress (eg: [posts-wp](https://github.com/PoPSchema/posts-wp))
+- A CMS-specific package, containing the implementation of the contracts for WordPress (eg: [posts-wp](https://github.com/PoPSchema/posts-wp)) -->
 
 ## PHP versions
 
