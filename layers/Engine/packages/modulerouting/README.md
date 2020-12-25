@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/modulerouting
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/modulerouting`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/modulerouting).
+
 ## Usage
 
 Initialize the component:

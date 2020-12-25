@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/field-query
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/field-query`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/field-query).
+
 ## Usage
 
 Initialize the component:

@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/component-model-configuration
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/component-model-configuration`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/component-model-configuration).
+
 ## Usage
 
 Initialize the component:

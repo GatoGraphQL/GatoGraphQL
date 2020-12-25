@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/cache-control
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/cache-control`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/cache-control).
+
 ## Usage
 
 Initialize the component:

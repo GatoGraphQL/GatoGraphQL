@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/definitionpersistence
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/definitionpersistence`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/definitionpersistence).
+
 ## Usage
 
 Initialize the component:

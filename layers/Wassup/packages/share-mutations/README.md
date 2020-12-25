@@ -20,6 +20,10 @@ Via Composer
 composer require pop-sites-wassup/share-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Wassup/packages/share-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Wassup/packages/share-mutations).
+
 ## Usage
 
 Initialize the component:

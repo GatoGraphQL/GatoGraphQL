@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/events
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/events`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/events).
+
 ## Usage
 
 Initialize the component:

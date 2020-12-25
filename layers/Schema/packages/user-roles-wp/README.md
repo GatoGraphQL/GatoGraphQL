@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/user-roles-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/user-roles-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/user-roles-wp).
+
 ## Usage
 
 Initialize the component:

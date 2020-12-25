@@ -10,6 +10,10 @@ Via Composer
 composer require pop-schema/migrate-everythingelse
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/migrate-everythingelse`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/migrate-everythingelse).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

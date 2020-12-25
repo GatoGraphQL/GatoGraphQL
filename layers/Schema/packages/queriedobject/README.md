@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/queriedobject
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/queriedobject`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/queriedobject).
+
 ## Usage
 
 Initialize the component:

@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/static-site-generator
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/static-site-generator`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/static-site-generator).
+
 ## Usage
 
 Initialize the component:

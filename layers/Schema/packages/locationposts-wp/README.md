@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/locationposts-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/locationposts-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/locationposts-wp).
+
 ## Usage
 
 Initialize the component:

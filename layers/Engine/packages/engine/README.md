@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/engine
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/engine`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/engine).
+
 ## Usage
 
 Initialize the component:

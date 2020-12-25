@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/api-rest
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-rest`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-rest).
+
 <!-- To enable pretty API endpoint `/api/rest/`, follow the instructions [here](https://github.com/getpop/api#enable-pretty-permalinks) -->
 
 ### Enable pretty permalinks

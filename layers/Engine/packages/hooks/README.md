@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/hooks
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/hooks`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/hooks).
+
 ## Usage
 
 Initialize the component:

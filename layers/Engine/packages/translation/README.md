@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/translation
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/translation`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/translation).
+
 ## Usage
 
 Initialize the component:

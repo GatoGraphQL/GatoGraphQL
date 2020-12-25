@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/convert-case-directives
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/convert-case-directives`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/convert-case-directives).
+
 ## Usage
 
 Initialize the component:

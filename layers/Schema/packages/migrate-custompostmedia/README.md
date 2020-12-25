@@ -10,6 +10,10 @@ Via Composer
 composer require pop-schema/migrate-custompostmedia
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/migrate-custompostmedia`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/migrate-custompostmedia).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

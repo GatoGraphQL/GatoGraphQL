@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/definitions-emoji
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/definitions-emoji`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/definitions-emoji).
+
 ## Usage
 
 Initialize the component:

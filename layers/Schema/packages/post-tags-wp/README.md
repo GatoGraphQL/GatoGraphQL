@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/post-tags-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/post-tags-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/post-tags-wp).
+
 ## Usage
 
 Initialize the component:

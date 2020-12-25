@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/translate-directive-acl
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/translate-directive-acl`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/translate-directive-acl).
+
 ## Usage
 
 Initialize the component:

@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/post-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/post-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/post-mutations).
+
 ## Usage
 
 Initialize the component:

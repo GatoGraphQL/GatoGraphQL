@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/application-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/application-wp`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/application-wp).
+
 ## Usage
 
 Initialize the component:

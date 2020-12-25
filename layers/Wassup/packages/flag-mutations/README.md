@@ -20,6 +20,10 @@ Via Composer
 composer require pop-sites-wassup/flag-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Wassup/packages/flag-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Wassup/packages/flag-mutations).
+
 ## Usage
 
 Initialize the component:

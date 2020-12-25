@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/user-roles-access-control
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/user-roles-access-control`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/user-roles-access-control).
+
 ## Usage
 
 Initialize the component:

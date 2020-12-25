@@ -19,6 +19,10 @@ Via Composer
 composer require getpop/spa
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/spa`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/spa).
+
 ## Usage
 
 Initialize the component:

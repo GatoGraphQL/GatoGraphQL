@@ -10,6 +10,10 @@ Via Composer
 composer require getpop/migrate-engine-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/migrate-engine-wp`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/migrate-engine-wp).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/custompostmedia-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/custompostmedia-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/custompostmedia-mutations).
+
 ## Usage
 
 Initialize the component:

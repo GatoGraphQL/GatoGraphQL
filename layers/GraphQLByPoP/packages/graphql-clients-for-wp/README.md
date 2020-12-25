@@ -20,6 +20,10 @@ Via Composer
 composer require graphql-by-pop/graphql-clients-for-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLByPoP/packages/graphql-clients-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLByPoP/packages/graphql-clients-for-wp).
+
 ## Usage
 
 Initialize the component:

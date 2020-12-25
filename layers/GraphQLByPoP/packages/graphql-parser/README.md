@@ -22,6 +22,10 @@ Via Composer
 composer require graphql-by-pop/graphql-parser
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLByPoP/packages/graphql-parser`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLByPoP/packages/graphql-parser).
+
 ## Usage
 
 Initialize the component:

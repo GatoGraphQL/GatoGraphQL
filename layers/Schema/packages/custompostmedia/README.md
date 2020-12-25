@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/custompostmedia
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/custompostmedia`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/custompostmedia).
+
 ## Usage
 
 Initialize the component:

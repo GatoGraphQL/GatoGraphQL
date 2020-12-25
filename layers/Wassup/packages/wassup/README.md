@@ -20,6 +20,10 @@ Via Composer
 composer require pop-sites-wassup/wassup
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Wassup/packages/wassup`](https://github.com/leoloso/PoP/tree/master/layers/Wassup/packages/wassup).
+
 ## Usage
 
 Initialize the component:

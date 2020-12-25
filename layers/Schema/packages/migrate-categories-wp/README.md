@@ -10,6 +10,10 @@ Via Composer
 composer require pop-schema/migrate-categories-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/migrate-categories-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/migrate-categories-wp).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

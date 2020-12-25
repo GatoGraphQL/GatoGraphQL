@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/usermeta-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/usermeta-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/usermeta-wp).
+
 ## Usage
 
 Initialize the component:

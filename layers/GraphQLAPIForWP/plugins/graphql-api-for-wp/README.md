@@ -105,7 +105,7 @@ To install via [WP-CLI](http://wp-cli.org/), execute this command:
 wp plugin install --activate https://github.com/GraphQLAPI/graphql-api-for-wp/releases/latest/download/graphql-api.zip
 ```
 
-## Update
+### GitHub Updater
 
 This plugin support automatic updating via the [GitHub Updater](https://github.com/afragen/github-updater).
 
@@ -180,12 +180,20 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 
 ## Development
 
-Clone repo, and then install Composer dependencies, by running:
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/plugins/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp).
+
+To set it up:
+
+1. Clone the monorepo:
 
 ```bash
-$ git clone https://github.com/GraphQLAPI/graphql-api-for-wp.git
-$ cd graphql-api-for-wp
-$ composer install
+git clone https://github.com/leoloso/PoP.git && cd PoP
+```
+
+2. Install Composer dependencies, and create symlinks to local packages:
+
+```bash
+composer init-graphql-api
 ```
 
 ### Launch a development environment with `wp-env`
@@ -207,7 +215,8 @@ npm -g i @wordpress/env
 To start a new WordPress instance with the GraphQL API plugin already installed and activated, execute in the root folder of the plugin (make sure Docker is running):
 
 ```bash
-wp-env start
+$ cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+$ wp-env start
 ```
 
 > Please notice: The first time using `wp-env`, this process may take a long time. To see what is happening, execute with the `--debug` option: `wp-env start --debug`

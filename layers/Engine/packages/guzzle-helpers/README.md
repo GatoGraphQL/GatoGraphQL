@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/guzzle-helpers
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/guzzle-helpers`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/guzzle-helpers).
+
 ## Usage
 
 Initialize the component:

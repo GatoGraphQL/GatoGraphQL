@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/comments
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/comments`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/comments).
+
 ## Usage
 
 Initialize the component:

@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/engine-wp-bootloader
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/engine-wp-bootloader`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/engine-wp-bootloader).
+
 ## Usage
 
 Install file `pop-engine-wp-bootloader.php` as a WordPress must-use plugin, by copying it under folder `/mu-plugins`.

@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/locations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/locations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/locations).
+
 ## Usage
 
 Initialize the component:

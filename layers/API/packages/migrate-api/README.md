@@ -10,6 +10,10 @@ Via Composer
 composer require getpop/migrate-api
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso), under [`API/packages/migrate-api`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/migrate-api).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

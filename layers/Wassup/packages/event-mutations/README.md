@@ -20,6 +20,10 @@ Via Composer
 composer require pop-sites-wassup/event-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Wassup/packages/event-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Wassup/packages/event-mutations).
+
 ## Usage
 
 Initialize the component:

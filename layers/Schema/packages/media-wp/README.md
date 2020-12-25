@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/media-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/media-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/media-wp).
+
 ## Usage
 
 Initialize the component:

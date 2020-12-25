@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/definitions-base36
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/definitions-base36`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/definitions-base36).
+
 ## Usage
 
 Initialize the component:

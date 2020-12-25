@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/api-endpoints
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-endpoints`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-endpoints).
+
 ## Usage
 
 Initialize the component:

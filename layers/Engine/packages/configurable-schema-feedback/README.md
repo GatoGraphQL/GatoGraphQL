@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/configurable-schema-feedback
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/configurable-schema-feedback`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/configurable-schema-feedback).
+
 ## Usage
 
 Initialize the component:

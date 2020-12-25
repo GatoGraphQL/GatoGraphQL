@@ -10,6 +10,10 @@ Via Composer
 composer require pop-schema/migrate-pages
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/migrate-pages`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/migrate-pages).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

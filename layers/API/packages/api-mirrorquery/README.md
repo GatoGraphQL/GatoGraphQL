@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/api-mirrorquery
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-mirrorquery`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-mirrorquery).
+
 ## Usage
 
 Initialize the component:

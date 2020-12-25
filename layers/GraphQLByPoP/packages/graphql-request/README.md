@@ -20,6 +20,10 @@ Via Composer
 composer require graphql-by-pop/graphql-request
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLByPoP/packages/graphql-request`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLByPoP/packages/graphql-request).
+
 ## Usage
 
 Initialize the component:

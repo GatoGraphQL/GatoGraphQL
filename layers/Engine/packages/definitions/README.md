@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/definitions
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/definitions`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/definitions).
+
 ## Usage
 
 Initialize the component:

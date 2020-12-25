@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/taxonomymeta-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/taxonomymeta-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/taxonomymeta-wp).
+
 ## Usage
 
 Initialize the component:

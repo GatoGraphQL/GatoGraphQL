@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/query-parsing
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/query-parsing`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/query-parsing).
+
 ## Usage
 
 Initialize the component:

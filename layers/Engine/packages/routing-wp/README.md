@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/routing-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/routing-wp`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/routing-wp).
+
 ## Usage
 
 Initialize the component:

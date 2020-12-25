@@ -102,6 +102,10 @@ location ~ ^(.*)/api/(rest|graphql)/?$ {
 }
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api).
+
 ## Usage
 
 Initialize the component:

@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/resources
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/resources`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/resources).
+
 ## Usage
 
 Initialize the component:

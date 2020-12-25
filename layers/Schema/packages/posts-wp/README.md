@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/posts-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/posts-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/posts-wp).
+
 ## Usage
 
 Initialize the component:

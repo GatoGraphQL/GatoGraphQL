@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/trace-tools
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/trace-tools`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/trace-tools).
+
 ## Usage
 
 Initialize the component:

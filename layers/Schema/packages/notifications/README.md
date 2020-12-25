@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/notifications
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/notifications`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/notifications).
+
 ## Usage
 
 Initialize the component:

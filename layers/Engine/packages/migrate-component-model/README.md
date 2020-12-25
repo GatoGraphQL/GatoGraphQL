@@ -10,6 +10,10 @@ Via Composer
 composer require getpop/migrate-component-model
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/migrate-component-model`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/migrate-component-model).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

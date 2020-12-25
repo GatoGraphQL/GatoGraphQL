@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/custompostmeta
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/custompostmeta`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/custompostmeta).
+
 ## Usage
 
 Initialize the component:

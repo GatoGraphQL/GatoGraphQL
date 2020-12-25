@@ -54,6 +54,10 @@ RewriteRule ^api/graphql/?$ /?scheme=api&datastructure=graphql [L,P,QSA]
 ```
 -->
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLByPoP/packages/graphql-server`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLByPoP/packages/graphql-server).
+
 ## Usage
 
 Initialize the component:

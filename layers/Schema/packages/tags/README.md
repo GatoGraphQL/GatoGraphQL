@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/tags
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/tags`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/tags).
+
 ## Usage
 
 Initialize the component:

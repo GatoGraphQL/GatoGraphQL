@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/user-roles-acl
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/user-roles-acl`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/user-roles-acl).
+
 ## Usage
 
 Initialize the component:

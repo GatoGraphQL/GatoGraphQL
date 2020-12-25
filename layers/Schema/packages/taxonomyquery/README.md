@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/taxonomyquery
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/taxonomyquery`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/taxonomyquery).
+
 ## Usage
 
 Initialize the component:

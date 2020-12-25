@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/multisite
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/multisite`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/multisite).
+
 ## Usage
 
 Initialize the component:

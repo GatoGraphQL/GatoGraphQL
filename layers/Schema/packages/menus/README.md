@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/menus
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/menus`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/menus).
+
 ## Usage
 
 Initialize the component:

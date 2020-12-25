@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/routing
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/routing`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/routing).
+
 ## Usage
 
 Initialize the component:

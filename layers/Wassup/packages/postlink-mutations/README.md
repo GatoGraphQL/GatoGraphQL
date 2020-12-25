@@ -20,6 +20,10 @@ Via Composer
 composer require pop-sites-wassup/postlink-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Wassup/packages/postlink-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Wassup/packages/postlink-mutations).
+
 ## Usage
 
 Initialize the component:

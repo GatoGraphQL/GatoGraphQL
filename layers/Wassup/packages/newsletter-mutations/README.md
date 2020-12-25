@@ -20,6 +20,10 @@ Via Composer
 composer require pop-sites-wassup/newsletter-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Wassup/packages/newsletter-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Wassup/packages/newsletter-mutations).
+
 ## Usage
 
 Initialize the component:

@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/stances-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/stances-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/stances-wp).
+
 ## Usage
 
 Initialize the component:

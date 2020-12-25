@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/hooks-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/hooks-wp`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/hooks-wp).
+
 ## Usage
 
 Initialize the component:

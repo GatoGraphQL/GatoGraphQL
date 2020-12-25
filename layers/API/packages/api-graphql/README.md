@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/api-graphql
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-graphql`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-graphql).
+
 To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/getpop/api#enable-pretty-permalinks)
 
 > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).

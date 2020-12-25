@@ -10,6 +10,10 @@ Via Composer
 composer require getpop/migrate-api-graphql
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP.git), under [`API/packages/migrate-api-graphql`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/migrate-api-graphql).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/users
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/users`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/users).
+
 ## Usage
 
 Initialize the component:

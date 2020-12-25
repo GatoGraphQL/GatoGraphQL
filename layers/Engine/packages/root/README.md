@@ -22,6 +22,10 @@ Via Composer
 composer require getpop/root
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/root`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/root).
+
 ## Usage
 
 Initialize the component:

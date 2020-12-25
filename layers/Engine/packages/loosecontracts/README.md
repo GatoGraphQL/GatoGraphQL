@@ -20,6 +20,10 @@ Via Composer
 composer require getpop/loosecontracts
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/loosecontracts`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/loosecontracts).
+
 ## Usage
 
 Initialize the component:

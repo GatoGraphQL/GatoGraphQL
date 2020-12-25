@@ -20,6 +20,10 @@ Via Composer
 composer require pop-sites-wassup/stance-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Wassup/packages/stance-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Wassup/packages/stance-mutations).
+
 ## Usage
 
 Initialize the component:

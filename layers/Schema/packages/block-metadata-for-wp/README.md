@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/block-metadata-for-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/block-metadata-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/block-metadata-for-wp).
+
 ## Usage
 
 Initialize the component:

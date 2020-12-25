@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/events-wp-em
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/events-wp-em`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/events-wp-em).
+
 ## Usage
 
 Initialize the component:

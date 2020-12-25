@@ -10,6 +10,10 @@ Via Composer
 composer require getpop/migrate-static-site-generator
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`SiteBuilder/packages/migrate-static-site-generator`](https://github.com/leoloso/PoP/tree/master/layers/SiteBuilder/packages/migrate-static-site-generator).
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.

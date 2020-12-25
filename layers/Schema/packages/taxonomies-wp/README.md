@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/taxonomies-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/taxonomies-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/taxonomies-wp).
+
 ## Usage
 
 Initialize the component:

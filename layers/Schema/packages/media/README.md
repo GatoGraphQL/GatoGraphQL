@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/media
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/media`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/media).
+
 ## Usage
 
 Initialize the component:

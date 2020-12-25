@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/comment-mutations
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/comment-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/comment-mutations).
+
 ## Usage
 
 Initialize the component:

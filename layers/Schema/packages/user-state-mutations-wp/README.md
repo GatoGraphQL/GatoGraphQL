@@ -20,6 +20,10 @@ Via Composer
 composer require pop-schema/user-state-mutations-wp
 ```
 
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/user-state-mutations-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/user-state-mutations-wp).
+
 ## Usage
 
 Initialize the component:
