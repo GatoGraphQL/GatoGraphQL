@@ -1,6 +1,6 @@
 # (Temporary package) Migrate code to package: GraphQL API
 
-Code to be migrated, from legacy PHP 5 code to modern PHP 7 code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description: Output the PoP API using the GraphQL format
+Code to be migrated, from legacy to modern PHP code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description: Output the PoP API using the GraphQL format
 
 ## Install
 

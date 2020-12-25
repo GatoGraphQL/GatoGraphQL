@@ -1,6 +1,6 @@
 # (Temporary package) Migrate code to package: Configuration Engine
 
-Code to be migrated, from legacy PHP 5 code to modern PHP 7 code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Adds the configuration level to the component hierarchy, through which the data API can be extended into an application
+Code to be migrated, from legacy to modern PHP code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Adds the configuration level to the component hierarchy, through which the data API can be extended into an application
 
 ## Install
 

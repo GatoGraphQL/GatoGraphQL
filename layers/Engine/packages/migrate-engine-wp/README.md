@@ -1,6 +1,6 @@
 # (Temporary package) Migrate code to package: Engine for WordPress
 
-Code to be migrated, from legacy PHP 5 code to modern PHP 7 code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Implementation for WordPress of contracts from package "Engine"
+Code to be migrated, from legacy to modern PHP code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Implementation for WordPress of contracts from package "Engine"
 
 ## Install
 
