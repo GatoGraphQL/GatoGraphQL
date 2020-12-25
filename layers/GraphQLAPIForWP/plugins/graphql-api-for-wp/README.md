@@ -380,9 +380,9 @@ To run checks for level 0 (or any level from 0 to 8):
 ./vendor/bin/phpstan analyse -l 0 src tests
 ```
 
-## Downgrading code to PHP 7.1
+## Downgrading code
 
-Execute [Rector](https://github.com/rectorphp/rector) in `dry-run` mode:
+To visualize how [Rector](https://github.com/rectorphp/rector) will downgrade the code to PHP 7.1:
 
 ```bash
 composer downgrade-code
