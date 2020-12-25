@@ -5,7 +5,7 @@ API layer to access the data from the underlying CMS.
 It is influenced by GraphQL as an interface (for instance, it has types, fields and directives), but it has important differences:
 
 - It uses the [field query](../Engine/packages/field-query) syntax (an superset and variation of the GraphQL syntax), which is URL-based
-- The fields with data can be defined in the [component model](../Engine/packages/component-model), allowing a component to define what data it needs, and the engine will resolve and provide it.
+- The fields with data can be defined in the [component model](../Engine/packages/component-model). This allows a component to define what data it needs, and the engine will resolve and provide this data already on the back-end (thus avoiding the round-trip from the client-side communicating with the API).
 
 ## Features
 
