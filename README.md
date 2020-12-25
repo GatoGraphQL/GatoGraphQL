@@ -16,7 +16,7 @@ This is a monorepo containing all layers from the PoP project:
 
 [Site Builder](layers/SiteBuilder):<br/>Packages to build a website using the component-model architecture.
 
-[Wassup](layers/Wassup):<br/>Implementation of a PoP website (check [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)).
+[Wassup](layers/Wassup):<br/>Implementation of a PoP website for WordPress (check [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)).
 
 ## Dependency graph
 
