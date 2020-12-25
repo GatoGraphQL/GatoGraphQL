@@ -1,4 +1,4 @@
-# Configuration Engine
+# Component Model Configuration
 
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-code-quality]][link-code-quality]
@@ -358,7 +358,7 @@ and
         class: "post-224"
 ```
 
-The solution I found to deep merge the configurations from different requests without overriding differing properties, either at the component hierarchy or URL levels, is to have the configuration split into 3 separate subsections: "immutable", "mutableonmodel" (where "model" is equivalent to "component hierarchy") and "mutableonrequest". Every property in the configuration must be placed under exactly 1 of the 3 sections, like this:
+The solution is to deep merge the configurations from different requests without overriding differing properties, either at the component hierarchy or URL levels, is to have the configuration split into 3 separate subsections: "immutable", "mutableonmodel" (where "model" is equivalent to "component hierarchy") and "mutableonrequest". Every property in the configuration must be placed under exactly 1 of the 3 sections, like this:
 
 - **immutable:** Contains properties which never change, such as `class: "topmodule"`
 - **mutableonmodel:** Contains properties which can change based on the component hierarchy, such as `descendants: ["module2"]`
