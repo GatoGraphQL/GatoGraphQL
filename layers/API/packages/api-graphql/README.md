@@ -1155,8 +1155,6 @@ query=
 
 <a href="https://newapi.getpop.org/api/graphql/?query=posts.echo(({{%20commentCount%20}})%20{{%20title%20}}%20-%20posted%20on%20{{%20date(d/m/Y)%20}})@title%3Cinclude({{%20hasComments%20}})%3E|title%3Cskip({{%20hasComments%20}})%3E">View query results</a>
 
-## Features coming next
-
 ### Mutations
 
 The query will be able to place mutations anywhere (not only on the root) and these will be integrated to the graph: The mutation result can, itself, be input to another field, be added to a nested subquery, and so on.
