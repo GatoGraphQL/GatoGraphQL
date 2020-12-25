@@ -6,7 +6,7 @@ This is a monorepo containing all layers from the PoP project:
 
 [Engine](layers/Engine):<br/>A server-side component model in PHP.
 
-[Schema](layers/Schema):<br/>The CMS-agnostic definition for all the data entities (posts, users, comments, etc), and the implementation of the contracts for specific CMSs.
+[Schema](layers/Schema):<br/>The definitions for data entities (posts, users, comments, etc).
 
 [API](layers/API):<br/>Packages to access the schema data through an API, including REST and GraphQL.
 
