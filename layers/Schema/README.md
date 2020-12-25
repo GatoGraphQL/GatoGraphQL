@@ -1,6 +1,6 @@
 # Schema
 
-Definitions for all the data entities.
+This layer contains packages with definitions concerning data entities: their CMS-agnostic business logic, and their implementation for some specific CMS.
 
 ## Type of data entities
 
