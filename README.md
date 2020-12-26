@@ -22,7 +22,7 @@ This is a monorepo containing all layers from the PoP project:
 
 This is how the layers in PoP relate to each other:
 
-<p align="center"><img src="assets/img/dependency-graph.svg" width="650" style="max-width: 650px;" alt="Dependency graph" /></p>
+<p align="center"><img src="assets/img/dependency-graph.svg" width="650" alt="Dependency graph" /></p>
 
 ## Security
 
