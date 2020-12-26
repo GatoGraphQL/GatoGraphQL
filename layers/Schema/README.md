@@ -132,7 +132,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
 }
 ```
 
-The definition of a field for the GraphQL schema, and its resolution, is split into a multitude of functions from the `FieldResolver`: 
+The definition of a field for the schema, and its resolution, is split into a multitude of functions from the `FieldResolver`: 
 
 - `getSchemaFieldDescription`
 - `getSchemaFieldType`
