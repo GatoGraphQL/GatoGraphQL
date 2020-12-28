@@ -2,16 +2,20 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualDependenciesReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
+require_once 'src/Dependencies/Symplify/MonorepoBuilder/ValueObject/Option.php';
+require_once 'src/Dependencies/Symplify/MonorepoBuilder/Command/SymlinkLocalPackagesCommand.php';
+
+use PoP\PoP\Dependencies\Symplify\MonorepoBuilder\Command\SymlinkLocalPackagesCommand;
 use Symplify\MonorepoBuilder\ValueObject\Option;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesReleaseWorker;
+use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualDependenciesReleaseWorker;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
@@ -52,8 +56,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // ]);
 
     $services = $containerConfigurator->services();
+    $services->defaults()
+        ->autowire()
+        ->autoconfigure();
 
-    # release workers - in order to execute
+    /** Commands */
+    $services
+        ->set(SymlinkLocalPackagesCommand::class)
+        ->tag('console.command');
+
+    /** release workers - in order to execute */
     $services->set(UpdateReplaceReleaseWorker::class);
     $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
     $services->set(AddTagToChangelogReleaseWorker::class);
