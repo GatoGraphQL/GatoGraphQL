@@ -61,8 +61,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     /** Commands */
     $services
-        ->set(SymlinkLocalPackageCommand::class)
-        ->tag('console.command');
+        ->set(SymlinkLocalPackageCommand::class);
 
     /** release workers - in order to execute */
     $services->set(UpdateReplaceReleaseWorker::class);
