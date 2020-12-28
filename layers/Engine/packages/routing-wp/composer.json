@@ -14,12 +14,10 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "provide": {
-        "getpop/routing-contracts-implementation": "dev-master"
-    },
     "require": {
         "php": "^7.4|^8.0",
         "getpop/routing": "dev-master",
+        "getpop/hooks-wp": "dev-master",
         "brain/cortex": "~1.0.0"
     },
     "require-dev": {
