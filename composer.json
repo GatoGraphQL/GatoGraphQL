@@ -17,7 +17,7 @@
         "sabberworm/php-css-parser": "*",
         "symfony/cache": "^4.3",
         "symfony/config": "^4.3",
-        "symfony/dependency-injection": "^4.3",
+        "symfony/dependency-injection": "^4.3|^5.1",
         "symfony/dotenv": "^4.3",
         "symfony/expression-language": "^5.1",
         "symfony/polyfill-php72": "^1.18",

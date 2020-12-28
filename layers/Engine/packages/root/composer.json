@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "symfony/config": "^4.3",
-        "symfony/dependency-injection": "^4.3",
+        "symfony/dependency-injection": "^4.3|^5.1",
         "symfony/dotenv": "^4.3",
         "symfony/polyfill-php72": "^1.18",
         "symfony/polyfill-php73": "^1.18",
