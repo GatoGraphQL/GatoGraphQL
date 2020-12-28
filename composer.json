@@ -623,8 +623,8 @@
     ],
     "scripts": {
         "init-graphql-api": [
-            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json');\"",
-            "vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json symlink=true use_dev_master=false",
+            "php -r \"copy('monorepo-builder/templates/composer.local.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json');\"",
+            "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json",
             "cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install"
         ],
         "merge-monorepo": "vendor/bin/monorepo-builder merge --ansi",
