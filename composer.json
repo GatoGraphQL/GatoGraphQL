@@ -613,10 +613,6 @@
             "url": "https://wpackagist.org"
         },
         {
-            "type": "path",
-            "url": "/Users/mac/GitRepos/GitHub/Libraries/symplify/symplify/packages/monorepo-builder"
-        },
-        {
             "type": "vcs",
             "url": "https://github.com/leoloso/wp-muplugin-loader.git"
         },
