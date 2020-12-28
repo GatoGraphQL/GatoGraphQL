@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once 'monorepo-builder/vendor/autoload.php';
 
-use PoP\PoP\Symplify\MonorepoBuilder\Command\SymlinkLocalPackagesCommand;
+use PoP\PoP\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
@@ -61,7 +61,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     /** Commands */
     $services
-        ->set(SymlinkLocalPackagesCommand::class)
+        ->set(SymlinkLocalPackageCommand::class)
         ->tag('console.command');
 
     /** release workers - in order to execute */

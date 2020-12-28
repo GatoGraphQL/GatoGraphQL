@@ -16,7 +16,7 @@ use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class SymlinkLocalPackagesCommand extends AbstractSymplifyCommand
+final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
 {
     /**
      * @var ComposerJsonProvider
