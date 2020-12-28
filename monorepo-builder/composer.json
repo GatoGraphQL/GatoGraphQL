@@ -13,12 +13,6 @@
             "PoP\\PoP\\Symplify\\MonorepoBuilder\\": "src"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/Users/mac/GitRepos/GitHub/Libraries/symplify/symplify/packages/monorepo-builder"
-        }
-    ],
     "config": {
         "sort-packages": true
     },
