@@ -1,7 +1,7 @@
 
 /wp-content/
-/vendor/
 /build/
+vendor/
 phpcs.xml
 phpunit.xml
 .phpunit.result.cache
