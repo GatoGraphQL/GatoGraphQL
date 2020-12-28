@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Symplify\MonorepoBuilder\Command;
 
-use PoP\PoP\Symplify\MonorepoBuilder\ValueObject\Option as PoPOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\Testing\ComposerJsonRepositoriesUpdater;
@@ -46,12 +44,6 @@ final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
             InputArgument::REQUIRED,
             'Path to the package\'s "composer(.local).json"'
         );
-        $this->addOption(
-            PoPOption::NO_SYMLINK,
-            null,
-            InputOption::VALUE_NONE,
-            'Do not create symlink when pointing to the local package\'s source code'
-        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -65,11 +57,10 @@ final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
         // Add "repository" entry in composer.json
         // $symlink => `true` is needed to point to local packages
         // during development, avoiding Packagist
-        $skipSymlink = (bool) $input->getOption(PoPOption::NO_SYMLINK);
         $this->composerJsonRepositoriesUpdater->processPackage(
             $packageComposerJsonFileInfo,
             $rootComposerJson,
-            !$skipSymlink
+            true
         );
 
         $message = sprintf(
