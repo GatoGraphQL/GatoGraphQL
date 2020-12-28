@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Dependencies\Symplify\MonorepoBuilder\Command;
+namespace PoP\PoP\Symplify\MonorepoBuilder\Command;
 
-use PoP\PoP\Dependencies\Symplify\MonorepoBuilder\ValueObject\Option as PoPOption;
+use PoP\PoP\Symplify\MonorepoBuilder\ValueObject\Option as PoPOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Dependencies\Symplify\MonorepoBuilder\ValueObject;
+namespace PoP\PoP\Symplify\MonorepoBuilder\ValueObject;
 
 final class Option
 {

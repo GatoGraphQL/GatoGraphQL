@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-require_once 'src/Dependencies/Symplify/MonorepoBuilder/ValueObject/Option.php';
-require_once 'src/Dependencies/Symplify/MonorepoBuilder/Command/SymlinkLocalPackagesCommand.php';
+require_once 'monorepo-builder/vendor/autoload.php';
 
-use PoP\PoP\Dependencies\Symplify\MonorepoBuilder\Command\SymlinkLocalPackagesCommand;
+use PoP\PoP\Symplify\MonorepoBuilder\Command\SymlinkLocalPackagesCommand;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
