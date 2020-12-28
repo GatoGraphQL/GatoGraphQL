@@ -34,6 +34,7 @@
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.9.0",
         "squizlabs/php_codesniffer": "^3.0",
+        "symfony/var-dumper": "^5.1",
         "symplify/monorepo-builder": "^9.0",
         "szepeviktor/phpstan-wordpress": "^0.6.2",
         "wikimedia/composer-merge-plugin": "dev-feature/composer-v2",
@@ -612,6 +613,10 @@
             "url": "https://wpackagist.org"
         },
         {
+            "type": "path",
+            "url": "/Users/mac/GitRepos/GitHub/Libraries/symplify/symplify/packages/monorepo-builder"
+        },
+        {
             "type": "vcs",
             "url": "https://github.com/leoloso/wp-muplugin-loader.git"
         },
@@ -625,7 +630,11 @@
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json');\"",
             "vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json symlink=true use_dev_master=false",
             "cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install"
-        ]
+        ],
+        "merge-monorepo": "vendor/bin/monorepo-builder merge --ansi",
+        "propagate-monorepo": "vendor/bin/monorepo-builder propagate --ansi",
+        "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
+        "release": "vendor/bin/monorepo-builder release patch --ansi"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
