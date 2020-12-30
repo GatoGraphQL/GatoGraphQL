@@ -126,45 +126,28 @@ git clone https://github.com/leoloso/PoP.git && cd PoP
 cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install
 ```
 
-### Launch a development environment with `wp-env`
+### Using Lando
 
-Quickly launch a WordPress environment with the GraphQL API plugin activated through [`wp-env`](https://www.npmjs.com/package/@wordpress/env).
+Launch a server, with WordPress installed and the GraphQL API plugin activated, through [Lando](https://lando.dev/).
 
-[Prerequisites](https://www.npmjs.com/package/@wordpress/env#prerequisites):
-
-- Node.js
-- npm
-- Docker
-
-To [install `wp-env`](https://www.npmjs.com/package/@wordpress/env#installation) globally, run in the terminal:
+The first time, to install the server, execute:
 
 ```bash
-npm -g i @wordpress/env
+composer init-server
 ```
 
-To start a new WordPress instance with the GraphQL API plugin already installed and activated, execute in the root folder of the plugin (make sure Docker is running):
+From then on, to start the server, execute:
 
 ```bash
-$ cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
-$ wp-env start
+composer start-server
 ```
 
-> Please notice: The first time using `wp-env`, this process may take a long time. To see what is happening, execute with the `--debug` option: `wp-env start --debug`
+The site will be available under `http://graphql-api-dev.lndo.site`.
 
-The site will be available under `http://localhost:8088`.
-
-To access the wp-admin, under `http://localhost:8088/wp-admin/`:
+To access the [wp-admin](http://graphql-api-dev.lndo.site/wp-admin/):
 
 - User: `admin`
-- Password: `password`
-
-If for some reason `wp-env` fails to automatically activate the plugin, then go to Plugins => Installed Plugins in the menu, and activate "GraphQL API for WordPress".
-
-To enable pretty permalinks, run:
-
-```bash
-wp-env run cli wp rewrite structure '/%postname%/'
-```
+- Password: `admin`
 
 ### Pulling code
 
