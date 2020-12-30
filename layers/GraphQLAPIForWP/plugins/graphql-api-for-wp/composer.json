@@ -76,6 +76,14 @@
         }
     },
     "scripts": {
+        "init-server": [
+            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
+            "@start-server"
+        ],
+        "start-server": [
+            "composer install",
+            "lando start"
+        ],
         "test": "phpunit",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",
