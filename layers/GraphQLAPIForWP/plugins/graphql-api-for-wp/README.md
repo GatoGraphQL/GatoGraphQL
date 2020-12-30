@@ -120,10 +120,10 @@ To set it up:
 git clone https://github.com/leoloso/PoP.git && cd PoP
 ```
 
-2. Install Composer dependencies, and create symlinks to local packages:
+2. Install Composer dependencies:
 
 ```bash
-composer init-graphql-api
+cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install
 ```
 
 ### Launch a development environment with `wp-env`
