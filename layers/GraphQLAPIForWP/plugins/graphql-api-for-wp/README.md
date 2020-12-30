@@ -149,6 +149,21 @@ To access the [wp-admin](http://graphql-api-dev.lndo.site/wp-admin/):
 - User: `admin`
 - Password: `admin`
 
+#### Enable XDebug
+
+To enable debugging, update the following configuration in `.lando.yml`:
+
+```yaml
+config:
+  xdebug: true
+```
+
+And then rebuild the server:
+
+```bash
+composer rebuild-server
+```
+
 <!-- ### Pulling code
 
 Whenever pulling changes from this repo, install again the dependencies:

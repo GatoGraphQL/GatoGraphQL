@@ -84,6 +84,7 @@
             "composer install",
             "lando start"
         ],
+        "rebuild-server": "lando rebuild -y",
         "test": "phpunit",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",

@@ -5,6 +5,9 @@ config:
   php: '7.4'
   ssl: true
   database: mariadb
+  xdebug: false
+  config:
+    php: lando/config/php.ini
 services:
   database:
     portforward: true

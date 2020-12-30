@@ -630,6 +630,7 @@
             "cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install",
             "lando start"
         ],
+        "rebuild-server": "lando rebuild -y",
         "merge-monorepo": "vendor/bin/monorepo-builder merge --ansi",
         "propagate-monorepo": "vendor/bin/monorepo-builder propagate --ansi",
         "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
