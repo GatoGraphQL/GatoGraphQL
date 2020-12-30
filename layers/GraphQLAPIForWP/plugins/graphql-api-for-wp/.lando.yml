@@ -21,5 +21,4 @@ services:
         wp core install --url=graphql-api-dev.lndo.site --title="GraphQL API"
         --admin_user=admin --admin_password=admin
         --admin_email=admin@example.com --path=wordpress
-      - wp rewrite structure '/%postname%/' --hard --path=wordpress
       - wp plugin activate graphql-api --path=wordpress
