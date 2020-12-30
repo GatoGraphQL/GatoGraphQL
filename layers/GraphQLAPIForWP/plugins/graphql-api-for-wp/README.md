@@ -149,13 +149,13 @@ To access the [wp-admin](http://graphql-api-dev.lndo.site/wp-admin/):
 - User: `admin`
 - Password: `admin`
 
-### Pulling code
+<!-- ### Pulling code
 
 Whenever pulling changes from this repo, install again the dependencies:
 
 ```bash
 composer update
-```
+``` -->
 
 ### Pushing code
 
