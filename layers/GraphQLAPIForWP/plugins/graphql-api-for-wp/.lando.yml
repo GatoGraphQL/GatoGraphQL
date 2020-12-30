@@ -1,0 +1,26 @@
+name: graphql-api-dev
+recipe: wordpress
+config:
+  webroot: wordpress
+  php: '7.4'
+  ssl: true
+  database: mariadb
+services:
+  database:
+    portforward: true
+  appserver:
+    overrides:
+      volumes:
+        - '.:/app/wordpress/wp-content/plugins/graphql-api'
+    run:
+      - >-
+        wp config create --dbname=wordpress --dbuser=wordpress
+        --dbpass=wordpress --dbhost=database
+        --skip-check --force
+        --path=wordpress
+      - >-
+        wp core install --url=graphql-api-dev.lndo.site --title="GraphQL API"
+        --admin_user=admin --admin_password=admin
+        --admin_email=admin@example.com --path=wordpress
+      - wp rewrite structure '/%postname%/' --hard --path=wordpress
+      - wp plugin activate graphql-api --path=wordpress
