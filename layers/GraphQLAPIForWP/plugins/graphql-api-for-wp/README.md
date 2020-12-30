@@ -157,11 +157,11 @@ Whenever pulling changes from this repo, install again the dependencies:
 composer update
 ``` -->
 
-### Pushing code
+### Gutenberg JS builds
 
 Compiled JavaScript code (such as all files under a block's `build/` folder) is added to the repo, but only as compiled for production, i.e. after running `npm run build`.
 
-Code compiled for development, i.e. after running `npm start`, is not allowed in the repo.
+Code compiled for development, i.e. after running `npm start`, cannot be commited/pushed to the repo.
 
 <!-- ### CMS-agnosticism
 
