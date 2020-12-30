@@ -1,0 +1,5 @@
+*
+!.gitignore
+!.lando.yml
+!/assets/
+!/config/
