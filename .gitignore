@@ -7,3 +7,4 @@ phpunit.xml
 .phpunit.result.cache
 composer.lock
 composer.local.json
+/wordpress/

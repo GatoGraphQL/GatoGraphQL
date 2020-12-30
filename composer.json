@@ -622,6 +622,14 @@
         }
     ],
     "scripts": {
+        "init-server": [
+            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
+            "@start-server"
+        ],
+        "start-server": [
+            "cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install",
+            "lando start"
+        ],
         "merge-monorepo": "vendor/bin/monorepo-builder merge --ansi",
         "propagate-monorepo": "vendor/bin/monorepo-builder propagate --ansi",
         "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
