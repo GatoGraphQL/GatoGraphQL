@@ -15,8 +15,7 @@ services:
     run:
       - >-
         wp config create --dbname=wordpress --dbuser=wordpress
-        --dbpass=wordpress --dbhost=database
-        --skip-check --force
+        --dbpass=wordpress --dbhost=database --skip-check --force
         --path=wordpress
       - >-
         wp core install --url=graphql-api-dev.lndo.site --title="GraphQL API"
