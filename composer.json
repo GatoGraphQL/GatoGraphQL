@@ -10,7 +10,6 @@
         "guzzlehttp/guzzle": "~6.3",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
-        "leoloso/examples-for-pop": "dev-master",
         "lkwdwrd/wp-muplugin-loader": "dev-master",
         "obsidian/polyfill-hrtime": "^0.1",
         "psr/cache": "^1.0",

@@ -23,7 +23,6 @@
         "getpop/site-wp": "dev-master",
         "getpop/spa": "dev-master",
         "graphql-by-pop/graphql-server": "dev-master",
-        "leoloso/examples-for-pop": "dev-master",
         "pop-schema/block-metadata-for-wp": "dev-master",
         "pop-schema/cdn-directive": "dev-master",
         "pop-schema/commentmeta-wp": "dev-master",
