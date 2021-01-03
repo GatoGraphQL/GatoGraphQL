@@ -25,6 +25,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   run: composer install --no-progress --ansi
+            -   run: cd monorepo-builder && composer install --no-progress --ansi
 
             # get package json list
             -
