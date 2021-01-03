@@ -45,13 +45,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::DATA_TO_REMOVE, [
-        // 'require' => [`
-        //     # remove these to merge of packages' composer.json
-        //     'tracy/tracy' => '*',
-        //     'phpunit/phpunit' => '*',
-        // ],`
-        'minimum-stability' => 'dev',
-        'prefer-stable' => true,
+        'require-dev' => [
+            'wikimedia/composer-merge-plugin' => '*',
+            'phpunit/phpunit' => '*',
+        ],
+        // 'minimum-stability' => 'dev',
+        // 'prefer-stable' => true,
     ]);
 
     // // how skip packages in loaded direectories?

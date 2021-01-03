@@ -14,7 +14,6 @@
         "lkwdwrd/wp-muplugin-loader": "dev-master",
         "obsidian/polyfill-hrtime": "^0.1",
         "psr/cache": "^1.0",
-        "sabberworm/php-css-parser": "*",
         "symfony/cache": "^5.1",
         "symfony/config": "^5.1",
         "symfony/dependency-injection": "^5.1",
@@ -25,19 +24,15 @@
         "symfony/polyfill-php74": "^1.18",
         "symfony/polyfill-php80": "^1.18",
         "symfony/property-access": "^5.1",
-        "symfony/yaml": "^5.1",
-        "zordius/lightncandy": "dev-master"
+        "symfony/yaml": "^5.1"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^0.12",
-        "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.9",
         "squizlabs/php_codesniffer": "^3.0",
         "symfony/var-dumper": "^5.1",
-        "symplify/monorepo-builder": "^9.0",
         "szepeviktor/phpstan-wordpress": "^0.6.2",
-        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2",
         "wpackagist-plugin/block-metadata": "^1.0",
         "wpackagist-plugin/events-manager": "^5.9"
     },
