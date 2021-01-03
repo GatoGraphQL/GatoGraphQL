@@ -327,8 +327,8 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 
 ## Feature Roadmap
 
-- [Baseline features](https://github.com/GraphQLAPI/graphql-api-for-wp/projects/1)
-- [Sponsored features](https://github.com/GraphQLAPI/graphql-api-for-wp/projects/2)
+- [Baseline features](https://github.com/leoloso/PoP/projects/2)
+- [Sponsored features](https://github.com/leoloso/PoP/projects/1)
 
 ## Sponsorship
 
