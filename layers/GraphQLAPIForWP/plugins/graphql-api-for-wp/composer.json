@@ -1,6 +1,6 @@
 {
     "name": "graphql-api/graphql-api-for-wp",
-    "type": "library",
+    "type": "wordpress-plugin",
     "description": "GraphQL API for WordPress",
     "keywords": ["PoP", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/GraphQLAPI/graphql-api-for-wp",
