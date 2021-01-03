@@ -27,6 +27,7 @@
         "symfony/yaml": "^5.1"
     },
     "require-dev": {
+        "symplify/monorepo-builder": "^9.0",
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^0.12",
         "rector/rector": "^0.9",
