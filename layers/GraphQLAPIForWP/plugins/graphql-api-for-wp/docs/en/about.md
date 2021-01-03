@@ -1,10 +1,13 @@
 # About the GraphQL API for WordPress
 
-The GraphQL API for WordPress is open source software: [github.com/GraphQLAPI/graphql-api-for-wp](https://github.com/GraphQLAPI/graphql-api-for-wp/).
+The GraphQL API for WordPress is open source software.
+
+Visit the website: [graphql-api.com](https://graphql-api.com).
 
 ## Release Notes
 
 New features released on each version:
 
-👉🏽 [0.6](release-notes/0.6.md) (current version)
+👉🏽 [0.7](release-notes/0.7.md) (current version)
+👉🏽 [0.6](release-notes/0.6.md)
 
