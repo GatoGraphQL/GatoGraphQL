@@ -25,7 +25,7 @@ jobs:
             -
                 id: output_data
                 run: |
-                    echo "::set-output name=matrix::$(packages/monorepo-builder/bin/monorepo-builder package-entries-json)"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json)"
 
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
@@ -52,7 +52,7 @@ jobs:
 
             -   run: composer install --no-progress --ansi
 
-            -   run: packages/monorepo-builder/bin/monorepo-builder localize-composer-paths ${{ matrix.package.path }}/composer.json --ansi
+            -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package.path }}/composer.json --ansi
 
             -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package.path }}
 

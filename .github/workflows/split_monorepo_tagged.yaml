@@ -28,7 +28,7 @@ jobs:
             -
                 id: output_data
                 run: |
-                    echo "::set-output name=matrix::$(packages/monorepo-builder/bin/monorepo-builder package-entries-json)"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json)"
 
         # this step is needed, so the output gets to the next defined job
         outputs:
