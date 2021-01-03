@@ -603,7 +603,7 @@
         }
     ],
     "description": "Monorepo for all the PoP packages",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "config": {
         "sort-packages": true
     },
