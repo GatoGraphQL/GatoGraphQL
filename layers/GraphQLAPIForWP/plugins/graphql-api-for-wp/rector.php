@@ -19,7 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     // is there a file you need to skip?
-    $parameters->set(Option::EXCLUDE_PATHS, [
+    $parameters->set(Option::SKIP, [
         __DIR__ . '/vendor/getpop/migrate-*/*',
         __DIR__ . '/vendor/pop-schema/migrate-*/*',
         __DIR__ . '/vendor/graphql-by-pop/graphql-parser/*',
@@ -34,8 +34,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::DOWNGRADE_PHP72,
     ]);
 
-    // is your PHP version different from the one your refactor to? [default: your PHP version]
-    $parameters->set(Option::PHP_VERSION_FEATURES, '7.1');
+    // // is your PHP version different from the one your refactor to? [default: your PHP version]
+    // $parameters->set(Option::PHP_VERSION_FEATURES, '7.1');
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::AUTOLOAD_PATHS, [

@@ -19,7 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     // is there a file you need to skip?
-    $parameters->set(Option::EXCLUDE_PATHS, [
+    $parameters->set(Option::SKIP, [
         __DIR__ . '/vendor/getpop/migrate-*/*',
         __DIR__ . '/vendor/pop-schema/migrate-*/*',
         __DIR__ . '/vendor/pop-sites-wassup/migrate-*/*',
@@ -34,6 +34,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::DOWNGRADE_PHP72,
     ]);
 
-    // is your PHP version different from the one your refactor to? [default: your PHP version]
-    $parameters->set(Option::PHP_VERSION_FEATURES, '7.1');
+    // // is your PHP version different from the one your refactor to? [default: your PHP version]
+    // $parameters->set(Option::PHP_VERSION_FEATURES, '7.1');
 };
