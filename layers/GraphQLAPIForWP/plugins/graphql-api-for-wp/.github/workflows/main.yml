@@ -71,3 +71,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      ## Copy the downgraded code to the DIST repo
+      ## 1. Unzip the plugin into a temp folder
+      - name: Uncompress artifact
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+
+      # 2. Publish it to the remote repository
+      -
+          uses: symplify/github-action-monorepo-split@master
+          env:
+              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          with:
+              package-directory: 'build/downgraded-code'
+              split-repository-organization: 'GraphQLAPI'
+              split-repository-name: 'graphql-api-for-wp-dist'
+              user-name: "leoloso"
+              user-email: "leo@getpop.org"
+
