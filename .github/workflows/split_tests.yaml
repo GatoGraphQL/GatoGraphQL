@@ -18,6 +18,8 @@ jobs:
                 with:
                     php-version: 7.4
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   run: composer install --no-progress --ansi
 
@@ -49,6 +51,8 @@ jobs:
                 with:
                     php-version: 7.3
                     coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   run: composer install --no-progress --ansi
 
