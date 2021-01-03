@@ -874,9 +874,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             function ($directiveName) use ($hooksAPI, $directiveNameClasses, $instanceManager) {
                 $directiveResolverClasses = $directiveNameClasses[$directiveName];
                 foreach ($directiveResolverClasses as $directiveResolverClass) {
-                    /**
-                     * @var DirectiveResolverInterface
-                     */
+                    /** @var DirectiveResolverInterface */
                     $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
                     // Execute 2 filters: a generic one, and a specific one
                     if ($hooksAPI->applyFilters(
@@ -1639,9 +1637,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $directiveNameClasses = $this->getDirectiveNameClasses();
         foreach ($directiveNameClasses as $directiveName => $directiveClasses) {
             foreach ($directiveClasses as $directiveClass) {
-                /**
-                 * @var DirectiveResolverInterface
-                 */
+                /** @var DirectiveResolverInterface */
                 $directiveResolverInstance = $instanceManager->getInstance($directiveClass);
                 // A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
                 if ($directiveResolverInstance->skipAddingToSchemaDefinition()) {
