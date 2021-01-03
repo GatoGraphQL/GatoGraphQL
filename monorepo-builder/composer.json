@@ -13,6 +13,9 @@
             "PoP\\PoP\\Symplify\\MonorepoBuilder\\": "src"
         }
     },
+    "require-dev": {
+        "symplify/monorepo-builder": "^9.0"
+    },
     "config": {
         "sort-packages": true
     },

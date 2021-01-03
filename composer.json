@@ -32,7 +32,6 @@
         "rector/rector": "^0.9",
         "squizlabs/php_codesniffer": "^3.0",
         "symfony/var-dumper": "^5.1",
-        "symplify/monorepo-builder": "^9.0",
         "szepeviktor/phpstan-wordpress": "^0.6.2"
     },
     "autoload": {
@@ -625,10 +624,10 @@
             "lando start"
         ],
         "rebuild-server": "lando rebuild -y",
-        "merge-monorepo": "vendor/bin/monorepo-builder merge --ansi",
-        "propagate-monorepo": "vendor/bin/monorepo-builder propagate --ansi",
-        "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
-        "release": "vendor/bin/monorepo-builder release patch --ansi"
+        "merge-monorepo": "cd monorepo-builder && composer install --no-progress --ansi && vendor/bin/monorepo-builder merge --ansi",
+        "propagate-monorepo": "cd monorepo-builder && composer install --no-progress --ansi && vendor/bin/monorepo-builder propagate --ansi",
+        "validate-monorepo": "cd monorepo-builder && composer install --no-progress --ansi && vendor/bin/monorepo-builder validate --ansi",
+        "release": "cd monorepo-builder && composer install --no-progress --ansi && vendor/bin/monorepo-builder release patch --ansi"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
