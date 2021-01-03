@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Rector\Set\ValueObject\SetList;
+use Rector\Set\ValueObject\DowngradeSetList;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
@@ -32,10 +32,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // here we can define, what sets of rules will be applied
     $parameters->set(Option::SETS, [
         // @todo Uncomment when PHP 8.0 released
-        // SetList::DOWNGRADE_PHP80,
-        SetList::DOWNGRADE_PHP74,
-        SetList::DOWNGRADE_PHP73,
-        SetList::DOWNGRADE_PHP72,
+        // DowngradeSetList::PHP_80,
+        DowngradeSetList::PHP_74,
+        DowngradeSetList::PHP_73,
+        DowngradeSetList::PHP_72,
     ]);
 
     // // is your PHP version different from the one your refactor to? [default: your PHP version]
