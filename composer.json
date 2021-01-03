@@ -27,15 +27,13 @@
         "symfony/yaml": "^5.1"
     },
     "require-dev": {
-        "symplify/monorepo-builder": "^9.0",
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^0.12",
         "rector/rector": "^0.9",
         "squizlabs/php_codesniffer": "^3.0",
         "symfony/var-dumper": "^5.1",
-        "szepeviktor/phpstan-wordpress": "^0.6.2",
-        "wpackagist-plugin/block-metadata": "^1.0",
-        "wpackagist-plugin/events-manager": "^5.9"
+        "symplify/monorepo-builder": "^9.0",
+        "szepeviktor/phpstan-wordpress": "^0.6.2"
     },
     "autoload": {
         "psr-4": {
