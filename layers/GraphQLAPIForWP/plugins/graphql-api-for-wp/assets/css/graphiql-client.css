@@ -1,7 +1,7 @@
-.graphiql-client  {
+.graphiql-container  {
     height: 100vh;
 }
-#wpcontent .graphiql-client  {
+#wpcontent .graphiql-container  {
     height: calc(100vh - 32px);
 }
 /**
