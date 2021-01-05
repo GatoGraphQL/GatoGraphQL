@@ -1,3 +1,12 @@
+####################################################################
+# Workflow temporarily disabled because it's too slow:
+# At 210 packages, it takes more than 1 hour to complete.
+# A better approach would be to have `monorepo-builder package-entries-json`
+# only deliver the list of packages that are affected by the PR.
+# For instance, if "getpop/root" is modified, everything is tested,
+# but if "graphql-api/graphql-api-for-wp" is, then nothing else is tested,
+# since nobody else depends on this package
+####################################################################
 name: Split Code Analisys (Tests, Coding Standards, Static Analysis)
 
 on:
@@ -45,7 +54,7 @@ jobs:
             matrix:
                 package: ${{ fromJson(needs.provide_packages_json.outputs.matrix )}}
 
-        name: Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})
+        name: Split Tests of ${{ matrix.package.name }}
 
         steps:
             -   uses: actions/checkout@v2
