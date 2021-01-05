@@ -25,7 +25,7 @@ class GD_FormInput
     protected function getValueFromSource(array $source)
     {
         // If not set, it will be NULL
-        $value =  $source[$this->getName()];
+        $value =  $source[$this->getName()] ?? null;
 
         // If it is multiple and the URL contains an empty value (eg: &searchfor[]=&), it will interpret it as array(''),
         // but instead it must be an empty array
