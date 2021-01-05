@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP\DirectiveResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
-class MakeTitle_Version_0_2_0_DirectiveResolver extends MakeTitle_Version_0_1_0_DirectiveResolver
+class MakeTitleVersion020DirectiveResolver extends MakeTitleVersion010DirectiveResolver
 {
     public static function getPriorityToAttachClasses(): ?int
     {

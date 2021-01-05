@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
-class MakeTitle_Version_0_1_0_DirectiveResolver extends AbstractGlobalDirectiveResolver
+class MakeTitleVersion010DirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     public const DIRECTIVE_NAME = 'makeTitle';
     public static function getDirectiveName(): string

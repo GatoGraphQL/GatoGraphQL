@@ -162,9 +162,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // Set property "succeeding-typeResolver" on every module, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
         if ($typeResolver_class = $this->getTypeResolverClass($module)) {
             $this->setProp($module, $props, 'succeeding-typeResolver', $typeResolver_class);
-        }
-        // Get the prop assigned to the module by its ancestor
-        else {
+        } else {
+            // Get the prop assigned to the module by its ancestor
             $typeResolver_class = $this->getProp($module, $props, 'succeeding-typeResolver');
         }
         if ($typeResolver_class) {

@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-class MakeTitleDirectiveResolver extends MakeTitle_Version_0_1_0_DirectiveResolver
+class MakeTitleDirectiveResolver extends MakeTitleVersion010DirectiveResolver
 {
     public static function getPriorityToAttachClasses(): ?int
     {

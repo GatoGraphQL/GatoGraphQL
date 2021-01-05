@@ -23,7 +23,7 @@ trait XMLDataStructureFormatterTrait
     {
         // Code taken from Function taken from https://stackoverflow.com/a/5965940
         $xml_data = new SimpleXMLElement('<?xml version="1.0"?><data></data>');
-        $this->array_to_xml($data, $xml_data);
+        $this->arrayToXML($data, $xml_data);
         echo $xml_data->asXML();
     }
 
@@ -35,7 +35,7 @@ trait XMLDataStructureFormatterTrait
      * @param array $data
      * @return void
      */
-    protected function array_to_xml($data, &$xml_data)
+    protected function arrayToXML($data, &$xml_data)
     {
         foreach ($data as $key => $value) {
             if (is_numeric($key)) {
@@ -43,7 +43,7 @@ trait XMLDataStructureFormatterTrait
             }
             if (is_array($value)) {
                 $subnode = $xml_data->addChild($key);
-                $this->array_to_xml($value, $subnode);
+                $this->arrayToXML($value, $subnode);
             } else {
                 $xml_data->addChild("$key", htmlspecialchars("$value"));
             }
