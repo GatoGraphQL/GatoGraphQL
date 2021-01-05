@@ -60,7 +60,7 @@ jobs:
 
             -
                 # Uses an action in the root directory
-                name: Monorepo Split of ${{ matrix.package.name }}
+                name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
                 uses: symplify/github-action-monorepo-split@master
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

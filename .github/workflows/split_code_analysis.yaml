@@ -45,7 +45,7 @@ jobs:
             matrix:
                 package: ${{ fromJson(needs.provide_packages_json.outputs.matrix )}}
 
-        name: Split Tests of ${{ matrix.package.name }}
+        name: Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})
 
         steps:
             -   uses: actions/checkout@v2
