@@ -24,8 +24,10 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   run: composer install --no-progress --ansi
-            -   run: cd monorepo-builder && composer install --no-progress --ansi
+            -   uses: "ramsey/composer-install@v1"
+            -   
+                uses: "ramsey/composer-install@v1"
+                working-directory: monorepo-builder
 
             # get package json list
             -
@@ -57,9 +59,11 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   uses: "ramsey/composer-install@v1"
+            -   
+                uses: "ramsey/composer-install@v1"
+                working-directory: monorepo-builder
 
-            -   run: composer install --no-progress --ansi
-            -   run: cd monorepo-builder && composer install --no-progress --ansi
 
             -   run: monorepo-builder/vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package.path }}/composer.json --ansi
 
