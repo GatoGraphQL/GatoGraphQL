@@ -151,7 +151,7 @@ To access the [wp-admin](http://graphql-api-dev.lndo.site/wp-admin/):
 
 #### Enable XDebug
 
-To enable debugging, update the following configuration in `.lando.yml`:
+To enable debugging, create Lando config file `.lando.local.yml` with this content:
 
 ```yaml
 config:
