@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require_once 'monorepo-builder/vendor/autoload.php';
-
 use PoP\PoP\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
 use PoP\PoP\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
 use PoP\PoP\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
@@ -56,29 +54,17 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // 'prefer-stable' => true,
     ]);
 
-    // // how skip packages in loaded direectories?
-    // $parameters->set(Option::PACKAGE_DIRECTORIES_EXCLUDES, [__DIR__ . '/packages/secret-package']);
-
-    // // "merge" command related
-
-    // // what extra parts to add after merge?
-    // $parameters->set(Option::DATA_TO_APPEND, [
-    //     'autoload-dev' => [
-    //         'psr-4' => [
-    //             'Symplify\Tests\\' => 'tests',
-    //         ],
-    //     ],
-    //     'require-dev' => [
-    //         'phpstan/phpstan' => '^0.12',
-    //     ],
-    // ]);
-
-    // $parameters->set(Option::DATA_TO_REMOVE, [
-    //     'require' => [
-    //         // the line is removed by key, so version is irrelevant, thus *
-    //         'phpunit/phpunit' => '*',
-    //     ],
-    // ]);
+    // Install also the monorepo-builder! So it can be used in CI
+    $parameters->set(Option::DATA_TO_APPEND, [
+        'require-dev' => [
+            'symplify/monorepo-builder' => '^9.0',
+        ],
+        'autoload' => [
+            'psr-4' => [
+                'PoP\\PoP\\Symplify\\MonorepoBuilder\\'=> 'monorepo-builder/src',
+            ],
+        ],
+    ]);
 
     $services = $containerConfigurator->services();
     $services->defaults()
