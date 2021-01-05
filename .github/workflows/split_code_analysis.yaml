@@ -75,4 +75,4 @@ jobs:
             -
                 name: PHP Code Sniffer
                 working-directory: ${{ matrix.package.path }}
-                run: vendor/bin/phpcs -n --standard=PSR2 src/
+                run: vendor/bin/phpcs -n src/
