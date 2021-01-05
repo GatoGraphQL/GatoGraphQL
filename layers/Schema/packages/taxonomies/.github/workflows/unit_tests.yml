@@ -1,0 +1,30 @@
+name: PHPUnit tests
+on:
+    push:
+        branches:
+            - master
+    pull_request: null
+
+jobs:
+  main:
+    name: Execute PHPUnit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+        # see https://github.com/shivammathur/setup-php
+      - name: Set-up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --ansi
+
+      - name: Run tests
+        run: vendor/bin/phpunit
+
