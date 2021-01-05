@@ -1,6 +1,9 @@
 name: Split Code Analisys (Tests, Coding Standards, Static Analysis)
 
 on:
+    push:
+        branches:
+            - master
     pull_request: null
 
 env:
