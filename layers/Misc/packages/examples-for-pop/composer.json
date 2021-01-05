@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php" : "~7.1",
+        "php" : "^7.4|^8.0",
         "graphql-by-pop/graphql-server": "dev-master",
         "pop-schema/translate-directive": "dev-master",
         "pop-schema/media": "dev-master",
