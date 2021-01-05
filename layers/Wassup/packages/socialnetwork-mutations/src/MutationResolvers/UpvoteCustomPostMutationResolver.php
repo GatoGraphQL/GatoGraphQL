@@ -71,4 +71,3 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         return parent::update($form_data);
     }
 }
-

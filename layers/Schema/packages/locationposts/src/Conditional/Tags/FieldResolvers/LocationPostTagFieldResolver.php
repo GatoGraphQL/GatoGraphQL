@@ -7,6 +7,7 @@ namespace PoPSchema\LocationPosts\Conditional\Tags\FieldResolvers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\LocationPosts\FieldResolvers\AbstractLocationPostFieldResolver;
+
 // use PoPSchema\LocationTags\TypeResolvers\LocationTagTypeResolver;
 
 /**

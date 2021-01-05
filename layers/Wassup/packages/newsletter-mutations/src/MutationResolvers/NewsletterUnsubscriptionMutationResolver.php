@@ -49,7 +49,6 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         $newsletter_data = $this->getNewsletterData($form_data);
         $this->validateData($errors, $newsletter_data);
         return $errors;
-
     }
 
     /**
@@ -109,5 +108,4 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 
         return $result;
     }
-
 }

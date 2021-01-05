@@ -228,11 +228,15 @@ class Request
         $this->variables = $variables;
         foreach ($this->variableReferences as $reference) {
             /** invalid request with no variable */
-            if (!$reference->getVariable()) continue;
+            if (!$reference->getVariable()) {
+                continue;
+            }
             $variableName = $reference->getVariable()->getName();
 
             /** no variable was set at the time */
-            if (!array_key_exists($variableName, $variables)) continue;
+            if (!array_key_exists($variableName, $variables)) {
+                continue;
+            }
 
             $reference->getVariable()->setValue($variables[$variableName]);
             $reference->setValue($variables[$variableName]);

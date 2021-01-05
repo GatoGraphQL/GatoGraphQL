@@ -788,7 +788,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * @param array $schemaWarnings
      * @return void
      */
-    protected function processFailure(string $failureMessage, array $failedFields = [], array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$schemaErrors, array &$schemaWarnings)
+    protected function processFailure(string $failureMessage, array $failedFields, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$schemaErrors, array &$schemaWarnings)
     {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {

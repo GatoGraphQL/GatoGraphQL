@@ -18,4 +18,3 @@ interface MutationResolutionManagerInterface
      */
     public function getResult(string $class);
 }
-

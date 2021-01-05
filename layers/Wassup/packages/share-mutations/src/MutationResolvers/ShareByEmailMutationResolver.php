@@ -84,5 +84,4 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
 
         return $result;
     }
-
 }

@@ -52,9 +52,8 @@ class EventMutationTypeAPI extends CustomPostTypeAPI implements EventMutationTyp
         if ($post_data['location'] ?? null) {
             $EM_Location = \em_get_location($post_data['location'], 'post_id');
             $EM_Event->location_id = $EM_Location->location_id;
-        }
-        // No location
-        else {
+        } else {
+            // No location
             $EM_Event->location_id = 0;
         }
 

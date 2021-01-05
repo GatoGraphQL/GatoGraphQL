@@ -67,4 +67,3 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
         return $this->update($form_data);
     }
 }
-

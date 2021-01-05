@@ -6,6 +6,7 @@ namespace PoPSchema\CommentsWP\TypeAPIs;
 
 use WP_Comment;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */

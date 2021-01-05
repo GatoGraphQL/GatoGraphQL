@@ -58,4 +58,3 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $form_data['instagram'], true);
     }
 }
-

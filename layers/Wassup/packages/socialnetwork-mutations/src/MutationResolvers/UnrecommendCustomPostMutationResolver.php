@@ -66,4 +66,3 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
         return parent::update($form_data);
     }
 }
-

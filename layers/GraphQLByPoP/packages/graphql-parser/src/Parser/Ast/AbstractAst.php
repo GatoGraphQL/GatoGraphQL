@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\LocatableInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 

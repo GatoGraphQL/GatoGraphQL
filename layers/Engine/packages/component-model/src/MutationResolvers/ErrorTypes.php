@@ -9,4 +9,3 @@ class ErrorTypes
     public const DESCRIPTIONS = 0;
     public const CODES = 1;
 }
-

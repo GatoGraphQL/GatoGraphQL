@@ -7,6 +7,7 @@ namespace PoPSchema\HighlightsWP\TypeAPIs;
 use function get_post;
 use WP_Post;
 use PoPSchema\Highlights\TypeAPIs\HighlightTypeAPIInterface;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */

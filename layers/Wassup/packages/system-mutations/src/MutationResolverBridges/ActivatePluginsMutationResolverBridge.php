@@ -26,4 +26,3 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
         ) : TranslationAPIFacade::getInstance()->__('There were no plugins to activate.', 'pop-system-wp');
     }
 }
-

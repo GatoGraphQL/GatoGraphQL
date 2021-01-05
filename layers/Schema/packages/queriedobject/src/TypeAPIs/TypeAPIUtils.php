@@ -19,8 +19,7 @@ class TypeAPIUtils
      */
     public static function getLimitOrMaxLimit(
         ?int $limit,
-        ?int $maxLimit/*,
-        bool $addSchemaWarning = true*/
+        ?int $maxLimit/*, bool $addSchemaWarning = true*/
     ): ?int {
         // $limit with values -1 or 0 could mean "unlimited"
         if (!is_null($maxLimit) && $maxLimit != -1 && ($limit <= 0 || $limit > $maxLimit)) {

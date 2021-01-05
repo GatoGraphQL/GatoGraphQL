@@ -69,4 +69,3 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         );
     }
 }
-

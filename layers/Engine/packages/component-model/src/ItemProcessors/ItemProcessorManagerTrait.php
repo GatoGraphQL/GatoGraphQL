@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace PoP\ComponentModel\ItemProcessors;
+
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 trait ItemProcessorManagerTrait

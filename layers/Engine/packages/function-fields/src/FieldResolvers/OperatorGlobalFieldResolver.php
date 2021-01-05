@@ -367,6 +367,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                             ),
                         ];
                     };
+                    return null;
                 case 'divide':
                     if ($fieldArgs['by'] === (float)0) {
                         return [

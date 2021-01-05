@@ -10,4 +10,3 @@ abstract class AbstractCreateUpdateStanceMutationResolverBridge extends Abstract
 {
 
 }
-

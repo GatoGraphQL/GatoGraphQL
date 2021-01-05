@@ -33,4 +33,3 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
         );
     }
 }
-

@@ -30,4 +30,3 @@ class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationRe
         return $form_data;
     }
 }
-

@@ -212,4 +212,3 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return \GD_CreateUpdate_Utils::moderate();
     }
 }
-

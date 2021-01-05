@@ -36,4 +36,3 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
         return null;
     }
 }
-

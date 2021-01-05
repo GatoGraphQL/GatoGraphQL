@@ -7,12 +7,10 @@
 
 namespace GraphQLByPoP\GraphQLParser\Validator\RequestValidator;
 
-
 use GraphQLByPoP\GraphQLParser\Execution\Request;
 
 interface RequestValidatorInterface
 {
 
     public function validate(Request $request);
-
 }

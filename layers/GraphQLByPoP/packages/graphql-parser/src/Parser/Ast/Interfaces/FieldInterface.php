@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
 
 interface FieldInterface extends LocatableInterface
@@ -44,5 +43,4 @@ interface FieldInterface extends LocatableInterface
      * @return array
      */
     public function getFields();
-
 }

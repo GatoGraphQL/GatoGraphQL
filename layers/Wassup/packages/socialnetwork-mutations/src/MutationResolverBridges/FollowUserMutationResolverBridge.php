@@ -31,4 +31,3 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
         );
     }
 }
-

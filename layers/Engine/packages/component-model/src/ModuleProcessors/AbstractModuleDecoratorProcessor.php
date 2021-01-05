@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
+
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class AbstractModuleDecoratorProcessor implements ModuleDecoratorProcessorInterface

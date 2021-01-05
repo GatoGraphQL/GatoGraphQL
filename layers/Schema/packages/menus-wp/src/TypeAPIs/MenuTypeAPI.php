@@ -6,6 +6,7 @@ namespace PoPSchema\MenusWP\TypeAPIs;
 
 use WP_Menu;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */

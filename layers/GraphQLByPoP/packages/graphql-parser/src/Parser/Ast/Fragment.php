@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 class Fragment extends AbstractAst

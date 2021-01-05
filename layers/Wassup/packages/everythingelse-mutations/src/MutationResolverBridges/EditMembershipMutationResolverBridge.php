@@ -36,4 +36,3 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
         return $form_data;
     }
 }
-

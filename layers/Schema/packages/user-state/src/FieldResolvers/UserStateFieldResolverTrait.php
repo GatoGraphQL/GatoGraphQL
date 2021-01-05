@@ -28,12 +28,12 @@ trait UserStateFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      */
     protected function getValidationCheckpointsErrorMessage(
+        Error $error,
         string $errorMessage,
         TypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
-        array $fieldArgs = [],
-        Error $error
+        array $fieldArgs = []
     ): string {
         $translationAPI = TranslationAPIFacade::getInstance();
         return sprintf(

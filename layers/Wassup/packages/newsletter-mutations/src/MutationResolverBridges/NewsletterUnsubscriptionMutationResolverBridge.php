@@ -26,4 +26,3 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
         return $form_data;
     }
 }
-

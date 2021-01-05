@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace PoPSchema\EverythingElse\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class Tags_CustomPostFieldResolver extends AbstractDBDataFieldResolver
+class CommentsCustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
@@ -24,34 +22,23 @@ class Tags_CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'tagNames',
+            'commentsURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'tagNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'commentsURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
-    }
-
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        $nonNullableFieldNames = [
-            'tagNames',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
-        }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'tagNames' => $translationAPI->__('Names of the tags added to this post', 'pop-tags'),
+            'commentsURL' => $translationAPI->__('URL of the comments section in the post page', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -72,11 +59,12 @@ class Tags_CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ) {
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
-            case 'tagNames':
-                return $posttagapi->getCustomPostTags($typeResolver->getID($post), [], ['return-type' => ReturnTypes::NAMES]);
+            case 'commentsURL':
+                // @todo: fix this, add the ?#comment_id=... to the post URL
+                return $typeResolver->resolveValue($post, 'url', $variables, $expressions, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

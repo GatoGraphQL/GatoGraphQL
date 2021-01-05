@@ -43,8 +43,7 @@ class Tokenizer
                 $this->pos++;
             } elseif ($ch === '#') {
                 $this->pos++;
-                while (
-                    $this->pos < strlen($this->source) &&
+                while ($this->pos < strlen($this->source) &&
                     ($code = ord($this->source[$this->pos])) &&
                     $code !== 10 && $code !== 13 && $code !== 0x2028 && $code !== 0x2029
                 ) {
@@ -294,7 +293,7 @@ class Tokenizer
     }
 
     /*
-  		http://facebook.github.io/graphql/October2016/#sec-String-Value
+        http://facebook.github.io/graphql/October2016/#sec-String-Value
     */
     protected function scanString()
     {
@@ -311,10 +310,10 @@ class Tokenizer
                 return $token;
             }
             
-            if($ch === '\\' && ($this->pos < ($len - 1))) {
+            if ($ch === '\\' && ($this->pos < ($len - 1))) {
                 $this->pos++;
                 $ch = $this->source[$this->pos];
-                switch($ch) {
+                switch ($ch) {
                     case '"':
                     case '\\':
                     case '/':
@@ -333,7 +332,7 @@ class Tokenizer
                         break;
                     case 'u':
                         $codepoint = substr($this->source, $this->pos + 1, 4);
-                        if( !preg_match('/[0-9A-Fa-f]{4}/', $codepoint)) {
+                        if (!preg_match('/[0-9A-Fa-f]{4}/', $codepoint)) {
                             throw $this->createException(sprintf('Invalid string unicode escape sequece "%s"', $codepoint));
                         }
                         $ch = html_entity_decode("&#x{$codepoint};", ENT_QUOTES, 'UTF-8');
@@ -342,9 +341,8 @@ class Tokenizer
                     default:
                         throw $this->createException(sprintf('Unexpected string escaped character "%s"', $ch));
                         break;
-
                 }
-            } 
+            }
             
             $value .= $ch;
             $this->pos++;

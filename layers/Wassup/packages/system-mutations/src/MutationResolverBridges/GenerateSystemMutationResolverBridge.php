@@ -22,4 +22,3 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
         return TranslationAPIFacade::getInstance()->__('System action "generate" executed successfully.', 'pop-system');
     }
 }
-

@@ -6,6 +6,7 @@ namespace PoPSchema\MediaWP\TypeAPIs;
 
 use WP_Post;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */

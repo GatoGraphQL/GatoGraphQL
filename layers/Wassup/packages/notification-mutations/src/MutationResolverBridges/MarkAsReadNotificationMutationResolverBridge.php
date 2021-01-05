@@ -18,4 +18,3 @@ class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrU
         return false;
     }
 }
-

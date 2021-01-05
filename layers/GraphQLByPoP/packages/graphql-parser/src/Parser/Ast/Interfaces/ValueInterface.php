@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
 
-
 interface ValueInterface
 {
 

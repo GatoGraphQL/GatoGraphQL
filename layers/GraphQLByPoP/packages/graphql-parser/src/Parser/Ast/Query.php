@@ -36,7 +36,7 @@ class Query extends AbstractAst implements FieldInterface
      * @param array    $directives
      * @param Location $location
      */
-    public function __construct($name, $alias = '', array $arguments, array $fields, array $directives, Location $location)
+    public function __construct($name, $alias, array $arguments, array $fields, array $directives, Location $location)
     {
         parent::__construct($location);
 
@@ -77,7 +77,7 @@ class Query extends AbstractAst implements FieldInterface
          * we cannot store fields by name because of TypedFragments
          */
         $this->fields = $fields;
-        }
+    }
 
     public function getAlias()
     {
@@ -100,5 +100,4 @@ class Query extends AbstractAst implements FieldInterface
 
         return false;
     }
-
 }

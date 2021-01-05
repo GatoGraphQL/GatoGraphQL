@@ -35,4 +35,3 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         return $form_data;
     }
 }
-

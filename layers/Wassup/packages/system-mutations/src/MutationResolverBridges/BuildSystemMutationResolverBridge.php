@@ -19,7 +19,7 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
      */
     public function getSuccessString($result_id): ?string
     {
-        return TranslationAPIFacade::getInstance()->__('System action "build" executed successfully.', 'pop-system');;
+        return TranslationAPIFacade::getInstance()->__('System action "build" executed successfully.', 'pop-system');
+        ;
     }
 }
-

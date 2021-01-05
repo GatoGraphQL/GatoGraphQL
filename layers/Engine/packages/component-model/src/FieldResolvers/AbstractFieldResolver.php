@@ -443,12 +443,12 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @param array<string, mixed> $fieldArgs
      */
     protected function getValidationCheckpointsErrorMessage(
+        Error $error,
         string $errorMessage,
         TypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
-        array $fieldArgs = [],
-        Error $error
+        array $fieldArgs = []
     ): string {
         return $errorMessage;
     }
@@ -478,7 +478,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 }
                 // Allow to customize the error message for the failing entity
                 return [
-                    $this->getValidationCheckpointsErrorMessage($errorMessage, $typeResolver, $resultItem, $fieldName, $fieldArgs, $error)
+                    $this->getValidationCheckpointsErrorMessage($error, $errorMessage, $typeResolver, $resultItem, $fieldName, $fieldArgs)
                 ];
             }
         }

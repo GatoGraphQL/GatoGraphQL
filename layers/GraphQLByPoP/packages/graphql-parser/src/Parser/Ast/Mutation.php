@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 class Mutation extends Query
 {
 

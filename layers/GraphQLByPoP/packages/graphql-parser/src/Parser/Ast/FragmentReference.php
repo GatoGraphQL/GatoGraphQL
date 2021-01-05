@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FragmentInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
@@ -43,6 +42,4 @@ class FragmentReference extends AbstractAst implements FragmentInterface
     {
         $this->name = $name;
     }
-
-
 }

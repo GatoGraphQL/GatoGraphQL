@@ -13,7 +13,7 @@ use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
-class Cat_EventFieldResolver extends AbstractDBDataFieldResolver
+class CatEventFieldResolver extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
@@ -77,7 +77,6 @@ class Cat_EventFieldResolver extends AbstractDBDataFieldResolver
         $cmstagsresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
         $event = $resultItem;
         switch ($fieldName) {
-
              // Override
             case 'catSlugs':
                 $value = array();

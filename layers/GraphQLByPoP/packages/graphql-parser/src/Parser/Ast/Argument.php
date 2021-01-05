@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
@@ -64,6 +63,4 @@ class Argument extends AbstractAst
     {
         $this->value = $value;
     }
-
-
 }
