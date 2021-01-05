@@ -8,3 +8,4 @@ phpunit.xml
 composer.lock
 composer.local.json
 /wordpress/
+.lando.local.yml
