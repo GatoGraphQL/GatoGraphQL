@@ -29,7 +29,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL],
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTSTANCE_AGAINST],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -44,7 +44,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => 'postStancesNeutralURL',
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => 'postStancesAgainstURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
 
@@ -60,10 +60,10 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -78,7 +78,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             case self::MODULE_BUTTON_POSTSTANCES_AGAINST:
                 return POP_TARGET_QUICKVIEW;
         }
-        
+
         return parent::getLinktarget($module, $props);
     }
 

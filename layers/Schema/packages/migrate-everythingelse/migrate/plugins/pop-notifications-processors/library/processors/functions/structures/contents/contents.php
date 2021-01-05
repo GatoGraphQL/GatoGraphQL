@@ -19,7 +19,7 @@ class GD_AAL_Module_Processor_FunctionsContents extends PoP_Module_Processor_Con
             self::MODULE_CONTENT_MARKNOTIFICATIONASREAD => [GD_AAL_Module_Processor_FunctionsContentMultipleInners::class, GD_AAL_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD],
             self::MODULE_CONTENT_MARKNOTIFICATIONASUNREAD => [GD_AAL_Module_Processor_FunctionsContentMultipleInners::class, GD_AAL_Module_Processor_FunctionsContentMultipleInners::MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

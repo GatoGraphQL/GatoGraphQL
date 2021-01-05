@@ -49,10 +49,10 @@ class PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples extends PoP_Modu
             self::MODULE_MULTIPLE_SINGLE_EVENT_RELATEDCONTENTSIDEBAR => POP_SCREEN_SINGLESECTION,
             self::MODULE_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR => POP_SCREEN_SINGLESECTION,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -63,7 +63,7 @@ class PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples extends PoP_Modu
             case self::MODULE_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

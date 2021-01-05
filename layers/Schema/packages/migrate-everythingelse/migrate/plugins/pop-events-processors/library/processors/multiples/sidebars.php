@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR],
             self::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR],
         );
-        if ($block = $blocks[$module[1]]) {
+        if ($block = $blocks[$module[1]] ?? null) {
             $ret[] = $block;
         } else {
             $vars = ApplicationState::getVars();
@@ -91,10 +91,10 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR => POP_SCREEN_AUTHORSECTIONCALENDAR,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -114,7 +114,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             case self::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
-        
+
         return parent::getScreengroup($module);
     }
 

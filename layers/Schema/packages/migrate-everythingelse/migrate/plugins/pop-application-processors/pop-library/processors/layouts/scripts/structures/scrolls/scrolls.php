@@ -22,13 +22,13 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS];
-            
+
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW];
-            
+
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW];
-            
+
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE];
         }
@@ -45,7 +45,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
                 return false;
         }
-    
+
         return parent::addFetchedData($module, $props);
     }
 
@@ -56,9 +56,9 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
                 $classes = array(
                     self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE => 'references',
                 );
-        
+
                 $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]]);
+                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
 
                 break;
         }

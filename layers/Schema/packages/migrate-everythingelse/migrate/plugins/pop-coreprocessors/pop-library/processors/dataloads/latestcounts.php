@@ -23,7 +23,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
             self::MODULE_DATALOAD_LATESTCOUNTS => [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_LATESTCOUNTS],
         );
 
-        if ($inner = $inner_modules[$module[1]]) {
+        if ($inner = $inner_modules[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

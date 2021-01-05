@@ -12,7 +12,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilters extends PoP_Module_Proc
             [self::class, self::MODULE_FILTER_ORGANIZATIONS],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -20,10 +20,10 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilters extends PoP_Module_Proc
             self::MODULE_FILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_ORGANIZATIONS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

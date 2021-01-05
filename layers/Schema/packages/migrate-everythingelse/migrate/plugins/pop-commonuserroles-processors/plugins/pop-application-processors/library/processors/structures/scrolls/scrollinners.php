@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
             self::MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomFullUserLayouts::class, GD_URE_Module_Processor_CustomFullUserLayouts::MODULE_LAYOUT_FULLUSER_INDIVIDUAL],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

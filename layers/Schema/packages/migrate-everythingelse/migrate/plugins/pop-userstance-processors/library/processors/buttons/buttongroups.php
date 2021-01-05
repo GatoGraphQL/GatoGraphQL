@@ -25,7 +25,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
             self::MODULE_BUTTONGROUP_AUTHORSTANCES => POP_USERSTANCE_SCREEN_AUTHORSTANCES,
             self::MODULE_BUTTONGROUP_TAGSTANCES => POP_USERSTANCE_SCREEN_TAGSTANCES,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
 

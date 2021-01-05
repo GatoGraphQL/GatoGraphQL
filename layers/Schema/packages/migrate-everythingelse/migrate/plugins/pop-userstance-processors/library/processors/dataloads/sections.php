@@ -714,7 +714,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                     self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
                     self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
                 );
-                if ($cat = $cats[$module[1]]) {
+                if ($cat = $cats[$module[1]] ?? null) {
                     $ret['tax-query'][] = [
                         'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
                         'terms'    => $cat,

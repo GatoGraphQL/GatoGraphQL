@@ -57,7 +57,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
             self::MODULE_DATALOAD_LOGOUT => [GD_UserLogin_Module_Processor_UserForms::class, GD_UserLogin_Module_Processor_UserForms::MODULE_FORM_LOGOUT],
         );
 
-        if ($inner = $inner_modules[$module[1]]) {
+        if ($inner = $inner_modules[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

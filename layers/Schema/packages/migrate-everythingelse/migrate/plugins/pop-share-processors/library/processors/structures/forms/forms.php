@@ -17,7 +17,7 @@ class PoP_Share_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
             self::MODULE_FORM_SHAREBYEMAIL => [PoP_Share_Module_Processor_GFFormInners::class, PoP_Share_Module_Processor_GFFormInners::MODULE_FORMINNER_SHAREBYEMAIL],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

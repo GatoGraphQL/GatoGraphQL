@@ -104,7 +104,7 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
     //         self::MODULE_SIMPLEFILTERINNER_AUTHORSTANCES_STANCE => POP_FILTER_AUTHORSTANCES_STANCE,
     //         self::MODULE_SIMPLEFILTERINNER_STANCES_GENERALSTANCE => POP_FILTER_STANCES_GENERALSTANCE,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
 

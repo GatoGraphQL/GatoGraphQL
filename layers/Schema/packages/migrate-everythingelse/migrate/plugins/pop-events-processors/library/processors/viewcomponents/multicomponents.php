@@ -67,7 +67,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
                     self::MODULE_MULTICOMPONENT_LOCATION => 'location',
                 );
 
-                $this->appendProp($module, $props, 'class', $classes[$module[1]]);
+                $this->appendProp($module, $props, 'class', $classes[$module[1]] ?? null);
                 $this->appendProp([PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS], $props, 'btn-class', 'btn btn-link btn-nopadding');
                 break;
         }
@@ -80,7 +80,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

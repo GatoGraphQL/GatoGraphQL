@@ -24,7 +24,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
             self::MODULE_CONTENT_LATESTCOUNTS => [PoPCore_Module_Processor_MultipleContentInners::class, PoPCore_Module_Processor_MultipleContentInners::MODULE_CONTENTINNER_LATESTCOUNTS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -41,7 +41,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
                 $this->appendProp($module, $props, 'class', 'conclusion horizontal sidebar');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

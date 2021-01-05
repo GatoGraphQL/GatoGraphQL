@@ -18,7 +18,7 @@ class PoP_UserCommunities_EM_ModuleProcessor_CustomScrollMaps extends PoP_Module
             self::MODULE_SCROLL_COMMUNITIES_MAP => [PoP_UserCommunities_EM_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_EM_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_COMMUNITIES_MAP],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

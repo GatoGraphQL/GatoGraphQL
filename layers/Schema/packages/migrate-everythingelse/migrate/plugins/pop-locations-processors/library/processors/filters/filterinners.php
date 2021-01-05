@@ -33,16 +33,16 @@ class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Proce
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINNER_LOCATIONS => POP_FILTER_LOCATIONS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

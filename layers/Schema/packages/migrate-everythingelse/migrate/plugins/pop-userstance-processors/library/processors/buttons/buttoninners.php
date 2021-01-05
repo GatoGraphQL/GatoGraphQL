@@ -32,16 +32,16 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
             self::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::MODULE_BUTTONINNER_POSTSTANCE_AGAINST => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
-        
+
         return parent::getFontawesome($module, $props);
     }
 
     public function getBtnTitle(array $module)
     {
-        
+
         // Allow Events to have a different title
         $stance = sprintf(
             TranslationAPIFacade::getInstance()->__('%s, %s', 'pop-userstance-processors'),
@@ -59,10 +59,10 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
             self::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::MODULE_BUTTONINNER_POSTSTANCE_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getBtnTitle($module);
     }
 
@@ -78,7 +78,7 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
             case self::MODULE_BUTTONINNER_POSTSTANCE_AGAINST:
                 return 'stanceAgainstCount';
         }
-        
+
         return parent::getTextField($module, $props);
     }
 }

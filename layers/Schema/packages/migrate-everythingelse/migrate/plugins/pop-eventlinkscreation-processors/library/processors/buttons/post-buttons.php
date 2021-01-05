@@ -17,7 +17,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         $buttoninners = array(
             self::MODULE_BUTTON_EVENTLINK_CREATE => [PoP_EventLinksCreation_Module_Processor_ButtonInners::class, PoP_EventLinksCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_EVENTLINK_CREATE],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -54,10 +54,10 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         $titles = array(
             self::MODULE_BUTTON_EVENTLINK_CREATE => TranslationAPIFacade::getInstance()->__('Event link', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -66,10 +66,10 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         $fields = array(
             self::MODULE_BUTTON_EVENTLINK_CREATE => 'addEventLinkURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

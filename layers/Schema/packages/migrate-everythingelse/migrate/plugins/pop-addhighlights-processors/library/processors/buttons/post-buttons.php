@@ -20,7 +20,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
             self::MODULE_BUTTON_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::MODULE_BUTTONINNER_HIGHLIGHT_CREATE],
             self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::MODULE_BUTTONINNER_HIGHLIGHT_CREATEBTN],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -71,10 +71,10 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
             self::MODULE_BUTTON_HIGHLIGHT_CREATE => $extract,
             self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => $extract,
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -84,10 +84,10 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
             self::MODULE_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',
             self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlightURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

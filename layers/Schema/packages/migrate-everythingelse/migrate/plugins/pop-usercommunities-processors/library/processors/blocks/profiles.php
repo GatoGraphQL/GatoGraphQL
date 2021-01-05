@@ -41,7 +41,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
                     TranslationAPIFacade::getInstance()->__('<strong>Keep them engaged: </strong>all members will receive notifications of any activity by any member or your community')
                 );
         }
-        
+
         return parent::getDescription($module, $props);
     }
 
@@ -54,10 +54,10 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
             self::MODULE_BLOCK_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_INVITENEWMEMBERS],
             self::MODULE_BLOCK_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_EDITMEMBERSHIP],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 

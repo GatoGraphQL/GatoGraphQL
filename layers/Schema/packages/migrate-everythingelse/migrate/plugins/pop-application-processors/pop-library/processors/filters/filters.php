@@ -38,7 +38,7 @@ class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBas
             [self::class, self::MODULE_FILTER_MYCATEGORYPOSTS],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -59,10 +59,10 @@ class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBas
             self::MODULE_FILTER_MYCATEGORYPOSTS => [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_MYCATEGORYPOSTS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

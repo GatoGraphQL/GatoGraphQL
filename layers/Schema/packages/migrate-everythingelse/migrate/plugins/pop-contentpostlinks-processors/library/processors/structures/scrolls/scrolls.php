@@ -39,7 +39,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
             self::MODULE_SCROLL_AUTHORLINKS_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinks_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORLINKS_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -48,7 +48,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [self::class, self::MODULE_SCROLL_LINKS_THUMBNAIL],
@@ -72,7 +72,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
             [self::class, self::MODULE_SCROLL_LINKS_FULLVIEW],
             [self::class, self::MODULE_SCROLL_AUTHORLINKS_FULLVIEW],
         );
-        
+
         $extra_class = '';
         if (in_array($module, $navigators)) {
             $extra_class = 'navigator text-inverse';
@@ -97,7 +97,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

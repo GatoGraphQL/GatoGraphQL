@@ -17,7 +17,7 @@ class Wassup_Module_Processor_LayoutContents extends PoP_Module_Processor_Conten
         switch ($module[1]) {
             case self::MODULE_CONTENTLAYOUT_HIGHLIGHTS:
                 return [Wassup_Module_Processor_ContentMultipleInners::class, Wassup_Module_Processor_ContentMultipleInners::MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS];
-            
+
             case self::MODULE_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE:
                 return [Wassup_Module_Processor_ContentMultipleInners::class, Wassup_Module_Processor_ContentMultipleInners::MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE];
         }
@@ -32,7 +32,7 @@ class Wassup_Module_Processor_LayoutContents extends PoP_Module_Processor_Conten
             case self::MODULE_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE:
                 return false;
         }
-    
+
         return parent::addFetchedData($module, $props);
     }
 
@@ -43,9 +43,9 @@ class Wassup_Module_Processor_LayoutContents extends PoP_Module_Processor_Conten
                 $classes = array(
                     self::MODULE_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE => 'highlights',
                 );
-        
+
                 $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]]);
+                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
 
                 // Show the lazy loading spinner?
                 // if ($this->getProp($module, $props, 'show-lazyloading-spinner')) {

@@ -21,7 +21,7 @@ class PoPCore_GenericForms_Module_Processor_TagViewComponentButtons extends PoP_
             self::MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA => [PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::class, PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA],
             self::MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_PREVIEWDROPDOWN => [PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::class, PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -38,7 +38,7 @@ class PoPCore_GenericForms_Module_Processor_TagViewComponentButtons extends PoP_
 
         return parent::getTitle($module, $props);
     }
-    
+
     public function getBtnClass(array $module, array &$props)
     {
         $ret = parent::getBtnClass($module, $props);
@@ -74,7 +74,7 @@ class PoPCore_GenericForms_Module_Processor_TagViewComponentButtons extends PoP_
                 $this->setProp($module, $props, 'resourceloader', 'socialmedia');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

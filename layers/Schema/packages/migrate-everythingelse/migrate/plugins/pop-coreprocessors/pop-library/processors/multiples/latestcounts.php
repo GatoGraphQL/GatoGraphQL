@@ -19,17 +19,17 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
         $inner_modules = array(
             self::MODULE_MULTIPLE_LATESTCOUNTS => [GD_Core_Module_Processor_Dataloads::class, GD_Core_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTCOUNTS],
         );
-        if ($inner = $inner_modules[$module[1]]) {
+        if ($inner = $inner_modules[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_LATESTCOUNTS:
                 // Fetch latest notifications every 30 seconds
@@ -43,7 +43,7 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
                 }
                 break;
         }
-        
+
         return $ret;
     }
 }

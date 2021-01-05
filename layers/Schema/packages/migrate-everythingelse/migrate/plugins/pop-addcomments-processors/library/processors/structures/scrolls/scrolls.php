@@ -45,7 +45,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
                 return false;
         }
-    
+
         return parent::addFetchedData($module, $props);
     }
 
@@ -58,14 +58,14 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                 $this->appendProp($module, $props, 'class', 'pop-commentpost-'.$post_id);
                 $this->appendProp($module, $props, 'class', 'pop-postcomment');
                 break;
-        
+
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
                 $classes = array(
                     self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE => 'comments',
                 );
-        
+
                 $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]]);
+                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
 
                 break;
         }

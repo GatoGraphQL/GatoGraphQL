@@ -17,7 +17,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostForms extends PoP_
             GD_EM_Module_Processor_CreateUpdatePostForms::MODULE_FORM_EVENTLINK => [GD_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_EM_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_EVENTLINK],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -35,7 +35,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostForms extends PoP_
                 $this->appendProp($module, $props, 'class', $form_row_classs);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

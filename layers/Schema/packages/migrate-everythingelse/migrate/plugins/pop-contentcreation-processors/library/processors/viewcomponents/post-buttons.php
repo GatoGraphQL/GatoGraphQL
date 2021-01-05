@@ -20,10 +20,10 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
 
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
-            
+
     //             return true;
     //     }
-        
+
     //     return parent::headerShowUrl($module);
     // }
 
@@ -33,7 +33,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA],
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -60,7 +60,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Flag as inappropriate', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -72,7 +72,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
                 $this->setProp($module, $props, 'resourceloader', 'socialmedia');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
     public function getUrlField(array $module)
@@ -82,7 +82,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return 'flagURL';
         }
-        
+
         return parent::getUrlField($module);
     }
 

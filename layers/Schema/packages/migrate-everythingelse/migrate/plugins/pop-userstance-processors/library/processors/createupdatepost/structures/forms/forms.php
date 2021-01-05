@@ -17,7 +17,7 @@ class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Proce
             self::MODULE_FORM_STANCE => [UserStance_Module_Processor_CreateUpdatePostFormInners::class, UserStance_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_STANCE],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -36,7 +36,7 @@ class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Proce
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -17,10 +17,10 @@ class Wassup_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
         $routes = array(
             self::MODULE_BUTTONINNER_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
-        
+
         return parent::getFontawesome($module, $props);
     }
 
@@ -29,10 +29,10 @@ class Wassup_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
         $titles = array(
             self::MODULE_BUTTONINNER_POST_CREATE => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getBtnTitle($module);
     }
 }

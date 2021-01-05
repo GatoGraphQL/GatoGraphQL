@@ -17,7 +17,7 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
         $buttoninners = array(
             self::MODULE_BUTTON_POST_CREATE => [Wassup_Module_Processor_ButtonInners::class, Wassup_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POST_CREATE],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -54,10 +54,10 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
         $titles = array(
             self::MODULE_BUTTON_POST_CREATE => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -66,10 +66,10 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
         $fields = array(
             self::MODULE_BUTTON_POST_CREATE => 'addpostURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

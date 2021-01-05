@@ -42,7 +42,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
             case self::MODULE_FILTERINPUTGROUP_EVENTSCOPE:
                 return 'readable';
         }
-        
+
         return parent::getComponentSubname($module);
     }
 
@@ -52,10 +52,10 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
             self::MODULE_FILTERINPUTGROUP_EVENTSCOPE => [PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 }

@@ -55,7 +55,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
 
         return $ret;
     }
-    
+
     public function getComponentSubmodule(array $module)
     {
         $components = array(
@@ -70,10 +70,10 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
             self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 }

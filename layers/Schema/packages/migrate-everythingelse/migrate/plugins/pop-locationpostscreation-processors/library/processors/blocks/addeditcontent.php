@@ -30,10 +30,10 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
             self::MODULE_BLOCK_LOCATIONPOST_UPDATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_LOCATIONPOST_UPDATE],
             self::MODULE_BLOCK_LOCATIONPOST_CREATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_LOCATIONPOST_CREATE],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -66,7 +66,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

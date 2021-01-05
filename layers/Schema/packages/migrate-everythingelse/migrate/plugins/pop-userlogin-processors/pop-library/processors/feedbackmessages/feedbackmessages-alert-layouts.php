@@ -29,7 +29,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             return $layout;
         }
 

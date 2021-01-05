@@ -53,7 +53,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
@@ -61,10 +61,10 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
     //         self::MODULE_FILTERINNER_AUTHORHIGHLIGHTS => POP_FILTER_AUTHORHIGHLIGHTS,
     //         self::MODULE_FILTERINNER_MYHIGHLIGHTS => POP_FILTER_MYHIGHLIGHTS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

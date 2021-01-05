@@ -24,7 +24,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
-            
+
         );
     }
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

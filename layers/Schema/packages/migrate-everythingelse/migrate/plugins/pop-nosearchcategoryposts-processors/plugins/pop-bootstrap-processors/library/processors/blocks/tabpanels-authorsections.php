@@ -108,10 +108,10 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18],
             self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -130,7 +130,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS09:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCATEGORYPOSTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

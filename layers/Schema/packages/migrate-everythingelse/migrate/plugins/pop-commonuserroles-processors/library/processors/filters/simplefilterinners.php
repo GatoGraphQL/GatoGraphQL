@@ -42,17 +42,17 @@ class PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners extends PoP_
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINNER_INDIVIDUALS => POP_FILTER_INDIVIDUALS,
     //         self::MODULE_SIMPLEFILTERINNER_ORGANIZATIONS => POP_FILTER_ORGANIZATIONS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

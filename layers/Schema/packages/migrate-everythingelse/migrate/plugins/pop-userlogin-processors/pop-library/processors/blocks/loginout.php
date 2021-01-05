@@ -38,7 +38,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
             case self::MODULE_BLOCK_LOSTPWDRESET:
                 return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::MODULE_SUBMENU_ACCOUNT];
         }
-        
+
         return parent::getSubmenuSubmodule($module);
     }
 
@@ -50,7 +50,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
             case self::MODULE_BLOCK_LOSTPWDRESET:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_ACCOUNT];
         }
-        
+
         return parent::getControlgroupTopSubmodule($module);
     }
 
@@ -65,14 +65,14 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
             self::MODULE_BLOCK_LOGOUT => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::MODULE_DATALOAD_LOGOUT],
         );
 
-        if ($inner = $inner_modules[$module[1]]) {
+        if ($inner = $inner_modules[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
         if ($module == [self::class, self::MODULE_BLOCK_LOGIN]) {
             $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINWELCOME];
         }
-    
+
         return $ret;
     }
 
@@ -88,7 +88,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
                     TranslationAPIFacade::getInstance()->__('You are not logged in.', 'pop-coreprocessors')
                 );
         }
-    
+
         return parent::getDescription($module, $props);
     }
 
@@ -99,7 +99,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
                 $this->appendProp([[PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINWELCOME]], $props, 'class', 'well');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

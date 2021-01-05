@@ -56,7 +56,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
             self::MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_SINGLELAYOUT_FULLVIEW_POST],
         );
 
-        if ($default = $defaults[$module[1]]) {
+        if ($default = $defaults[$module[1]] ?? null) {
             return $default;
         }
 
@@ -101,7 +101,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                     self::MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => POP_FORMAT_FULLVIEW,
                 );
                 $format = $formats[$module[1]] ?? '';
-            
+
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
                 return $multilayout_manager->getLayoutModules($handle, $format);
         }

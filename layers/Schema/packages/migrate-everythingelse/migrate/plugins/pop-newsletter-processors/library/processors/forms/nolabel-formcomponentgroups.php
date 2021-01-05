@@ -18,7 +18,7 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
             case self::MODULE_FORMINPUTGROUP_CUP_NEWSLETTER:
                 return TranslationAPIFacade::getInstance()->__('Keep up to date with our community activity through our weekly newsletter.', 'pop-genericforms');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 
@@ -28,10 +28,10 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
             self::MODULE_FORMINPUTGROUP_CUP_NEWSLETTER => [GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::MODULE_FORMINPUT_CUP_NEWSLETTER],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 }

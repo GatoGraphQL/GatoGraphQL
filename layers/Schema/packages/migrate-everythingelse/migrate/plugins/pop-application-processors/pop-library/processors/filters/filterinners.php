@@ -154,7 +154,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
@@ -174,10 +174,10 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     //         self::MODULE_FILTERINNER_MYPOSTS => POP_FILTER_MYPOSTS,
     //         self::MODULE_FILTERINNER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

@@ -2,46 +2,46 @@
 
 class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
 {
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00 = 'carousel-nosearchcategoryposts00'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS01 = 'carousel-nosearchcategoryposts01'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS02 = 'carousel-nosearchcategoryposts02'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS03 = 'carousel-nosearchcategoryposts03'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS04 = 'carousel-nosearchcategoryposts04'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS05 = 'carousel-nosearchcategoryposts05'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS06 = 'carousel-nosearchcategoryposts06'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS07 = 'carousel-nosearchcategoryposts07'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS08 = 'carousel-nosearchcategoryposts08'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS09 = 'carousel-nosearchcategoryposts09'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS10 = 'carousel-nosearchcategoryposts10'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS11 = 'carousel-nosearchcategoryposts11'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS12 = 'carousel-nosearchcategoryposts12'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS13 = 'carousel-nosearchcategoryposts13'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS14 = 'carousel-nosearchcategoryposts14'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS15 = 'carousel-nosearchcategoryposts15'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS16 = 'carousel-nosearchcategoryposts16'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS17 = 'carousel-nosearchcategoryposts17'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS18 = 'carousel-nosearchcategoryposts18'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS19 = 'carousel-nosearchcategoryposts19'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00_CONTENT = 'carousel-nosearchcategoryposts00-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS01_CONTENT = 'carousel-nosearchcategoryposts01-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS02_CONTENT = 'carousel-nosearchcategoryposts02-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS03_CONTENT = 'carousel-nosearchcategoryposts03-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS04_CONTENT = 'carousel-nosearchcategoryposts04-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS05_CONTENT = 'carousel-nosearchcategoryposts05-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS06_CONTENT = 'carousel-nosearchcategoryposts06-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS07_CONTENT = 'carousel-nosearchcategoryposts07-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS08_CONTENT = 'carousel-nosearchcategoryposts08-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS09_CONTENT = 'carousel-nosearchcategoryposts09-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS10_CONTENT = 'carousel-nosearchcategoryposts10-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS11_CONTENT = 'carousel-nosearchcategoryposts11-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS12_CONTENT = 'carousel-nosearchcategoryposts12-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS13_CONTENT = 'carousel-nosearchcategoryposts13-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS14_CONTENT = 'carousel-nosearchcategoryposts14-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS15_CONTENT = 'carousel-nosearchcategoryposts15-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS16_CONTENT = 'carousel-nosearchcategoryposts16-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS17_CONTENT = 'carousel-nosearchcategoryposts17-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS18_CONTENT = 'carousel-nosearchcategoryposts18-content'; 
-    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS19_CONTENT = 'carousel-nosearchcategoryposts19-content'; 
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00 = 'carousel-nosearchcategoryposts00';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS01 = 'carousel-nosearchcategoryposts01';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS02 = 'carousel-nosearchcategoryposts02';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS03 = 'carousel-nosearchcategoryposts03';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS04 = 'carousel-nosearchcategoryposts04';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS05 = 'carousel-nosearchcategoryposts05';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS06 = 'carousel-nosearchcategoryposts06';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS07 = 'carousel-nosearchcategoryposts07';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS08 = 'carousel-nosearchcategoryposts08';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS09 = 'carousel-nosearchcategoryposts09';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS10 = 'carousel-nosearchcategoryposts10';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS11 = 'carousel-nosearchcategoryposts11';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS12 = 'carousel-nosearchcategoryposts12';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS13 = 'carousel-nosearchcategoryposts13';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS14 = 'carousel-nosearchcategoryposts14';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS15 = 'carousel-nosearchcategoryposts15';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS16 = 'carousel-nosearchcategoryposts16';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS17 = 'carousel-nosearchcategoryposts17';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS18 = 'carousel-nosearchcategoryposts18';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS19 = 'carousel-nosearchcategoryposts19';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00_CONTENT = 'carousel-nosearchcategoryposts00-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS01_CONTENT = 'carousel-nosearchcategoryposts01-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS02_CONTENT = 'carousel-nosearchcategoryposts02-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS03_CONTENT = 'carousel-nosearchcategoryposts03-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS04_CONTENT = 'carousel-nosearchcategoryposts04-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS05_CONTENT = 'carousel-nosearchcategoryposts05-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS06_CONTENT = 'carousel-nosearchcategoryposts06-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS07_CONTENT = 'carousel-nosearchcategoryposts07-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS08_CONTENT = 'carousel-nosearchcategoryposts08-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS09_CONTENT = 'carousel-nosearchcategoryposts09-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS10_CONTENT = 'carousel-nosearchcategoryposts10-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS11_CONTENT = 'carousel-nosearchcategoryposts11-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS12_CONTENT = 'carousel-nosearchcategoryposts12-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS13_CONTENT = 'carousel-nosearchcategoryposts13-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS14_CONTENT = 'carousel-nosearchcategoryposts14-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS15_CONTENT = 'carousel-nosearchcategoryposts15-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS16_CONTENT = 'carousel-nosearchcategoryposts16-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS17_CONTENT = 'carousel-nosearchcategoryposts17-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS18_CONTENT = 'carousel-nosearchcategoryposts18-content';
+    public const MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS19_CONTENT = 'carousel-nosearchcategoryposts19-content';
     public const MODULE_CAROUSEL_AUTHORNOSEARCHCATEGORYPOSTS00 = 'carousel-authornosearchcategoryposts00';
     public const MODULE_CAROUSEL_AUTHORNOSEARCHCATEGORYPOSTS01 = 'carousel-authornosearchcategoryposts01';
     public const MODULE_CAROUSEL_AUTHORNOSEARCHCATEGORYPOSTS02 = 'carousel-authornosearchcategoryposts02';
@@ -251,7 +251,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // switch ($module[1]) {
 
         //     case self::MODULE_CAROUSEL_NOSEARCHCATEGORYPOSTS00:
@@ -381,7 +381,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
         // }
         $this->appendProp($module, $props, 'class', 'slide');
         $this->appendProp($module, $props, 'class', 'widget widget-info');
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -509,7 +509,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT],
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -754,7 +754,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS18],
             self::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS19],
         );
-        if ($control = $controls[$module[1]]) {
+        if ($control = $controls[$module[1]] ?? null) {
             return $control;
         }
 

@@ -17,7 +17,7 @@ class GD_SP_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Prel
         $buttoninners = array(
             self::MODULE_BUTTON_LOCATIONPOSTLINK_CREATE => [GD_SP_Custom_EM_Module_Processor_ButtonInners::class, GD_SP_Custom_EM_Module_Processor_ButtonInners::MODULE_BUTTONINNER_LOCATIONPOSTLINK_CREATE],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -55,10 +55,10 @@ class GD_SP_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Prel
         $titles = array(
             self::MODULE_BUTTON_LOCATIONPOSTLINK_CREATE => sprintf($link, PoP_LocationPosts_PostNameUtils::getNameUc()),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -67,10 +67,10 @@ class GD_SP_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Prel
         $fields = array(
             self::MODULE_BUTTON_LOCATIONPOSTLINK_CREATE => 'addLocationPostLinkURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

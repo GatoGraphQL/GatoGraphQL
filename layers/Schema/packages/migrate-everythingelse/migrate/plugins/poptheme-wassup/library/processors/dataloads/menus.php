@@ -38,7 +38,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
     }
 
     // function getRelevantRoute(array $module, array &$props) {
-        
+
     //     $routes = array(
     //         self::MODULE_DATALOAD_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
     //         self::MODULE_DATALOAD_MENU_BODY_ADDCONTENT => POP_CONTENTCREATION_ROUTE_ADDCONTENT,
@@ -67,7 +67,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
             self::MODULE_DATALOAD_MENU_BODY_ABOUT => [PoP_Module_Processor_IndentMenus::class, PoP_Module_Processor_IndentMenus::MODULE_INDENTMENU],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

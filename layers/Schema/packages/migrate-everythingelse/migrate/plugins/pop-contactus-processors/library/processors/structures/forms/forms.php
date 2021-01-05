@@ -19,7 +19,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
             self::MODULE_FORM_CONTACTUS => [PoP_ContactUs_Module_Processor_GFFormInners::class, PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -55,7 +55,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

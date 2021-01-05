@@ -43,7 +43,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
             self::MODULE_DATALOAD_NEWSLETTER => NewsletterSubscriptionMutationResolverBridge::class,
             self::MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION => NewsletterUnsubscriptionMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$module[1]]) {
+        if ($actionexecuter = $actionexecuters[$module[1]] ?? null) {
             return $actionexecuter;
         }
 

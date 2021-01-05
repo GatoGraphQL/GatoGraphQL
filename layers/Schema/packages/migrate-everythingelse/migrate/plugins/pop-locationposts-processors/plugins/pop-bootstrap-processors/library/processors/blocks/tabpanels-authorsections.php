@@ -32,10 +32,10 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks extends PoP
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORLOCATIONPOSTS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -45,7 +45,7 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks extends PoP
             case self::MODULE_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS:
                 return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORLOCATIONPOSTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

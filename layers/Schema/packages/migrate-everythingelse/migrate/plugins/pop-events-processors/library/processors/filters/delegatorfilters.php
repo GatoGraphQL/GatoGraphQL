@@ -20,7 +20,7 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
             [self::class, self::MODULE_DELEGATORFILTER_TAGEVENTSCALENDAR],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -32,10 +32,10 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
             self::MODULE_DELEGATORFILTER_TAGEVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSimpleFilterInners::class, PoP_Events_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_TAGEVENTSCALENDAR],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

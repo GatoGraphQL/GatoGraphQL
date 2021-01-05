@@ -14,7 +14,7 @@ class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Modu
             [self::class, self::MODULE_DELEGATORFILTER_TAGLOCATIONPOSTS],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -23,10 +23,10 @@ class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Modu
             self::MODULE_DELEGATORFILTER_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_TAGLOCATIONPOSTS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

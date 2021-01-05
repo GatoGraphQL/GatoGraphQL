@@ -20,10 +20,10 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
             self::MODULE_FORMINPUTGROUP_EMAIL => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -37,7 +37,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -68,7 +68,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

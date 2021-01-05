@@ -21,7 +21,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
             [self::class, self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS],
         );
     }
-    
+
     public function getLabelClass(array $module)
     {
         $ret = parent::getLabelClass($module);
@@ -62,10 +62,10 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
             self::MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::MODULE_URE_FILTERINPUT_MEMBERSTATUS],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -81,7 +81,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
             case self::MODULE_URE_FORMINPUTGROUP_MEMBERTAGS:
                 return TranslationAPIFacade::getInstance()->__('What is the type of relationship from this member to your community.', 'ure-popprocessors');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 }

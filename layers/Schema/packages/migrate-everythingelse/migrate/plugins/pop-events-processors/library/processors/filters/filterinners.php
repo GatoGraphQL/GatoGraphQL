@@ -72,7 +72,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
@@ -83,10 +83,10 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::MODULE_FILTERINNER_AUTHOREVENTSCALENDAR => POP_FILTER_AUTHOREVENTSCALENDAR,
     //         self::MODULE_FILTERINNER_TAGEVENTSCALENDAR => POP_FILTER_TAGEVENTSCALENDAR,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

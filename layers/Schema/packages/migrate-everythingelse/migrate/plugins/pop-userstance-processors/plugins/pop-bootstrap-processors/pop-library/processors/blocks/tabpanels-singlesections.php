@@ -30,7 +30,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
             self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

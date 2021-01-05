@@ -27,7 +27,7 @@ class PoP_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -62,7 +62,7 @@ class PoP_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('API Data', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -91,7 +91,7 @@ class PoP_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor
                 $this->setProp($module, $props, 'resourceloader', 'socialmedia');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

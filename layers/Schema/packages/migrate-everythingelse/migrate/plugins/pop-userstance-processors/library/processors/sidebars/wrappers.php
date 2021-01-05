@@ -102,7 +102,7 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
                     self::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE => 'createorupdatestance',
                 );
                 $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]]);
+                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
                 break;
         }
 

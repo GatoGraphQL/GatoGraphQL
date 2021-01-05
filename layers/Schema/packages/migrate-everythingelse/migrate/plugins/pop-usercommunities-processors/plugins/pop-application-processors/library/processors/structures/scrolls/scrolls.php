@@ -30,7 +30,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
             self::MODULE_SCROLL_COMMUNITIES_LIST => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_COMMUNITIES_LIST],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -39,7 +39,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [self::class, self::MODULE_SCROLL_COMMUNITIES_THUMBNAIL],

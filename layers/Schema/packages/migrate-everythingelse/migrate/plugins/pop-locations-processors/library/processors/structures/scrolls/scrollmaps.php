@@ -36,7 +36,7 @@ class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Process
             self::MODULE_SCROLL_EVENTS_HORIZONTALMAP => [PoP_Locations_Module_Processor_CustomScrollInners::class, PoP_Locations_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_HORIZONTALMAP],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

@@ -333,7 +333,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteTitle($route);
         }
 
@@ -410,13 +410,13 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
-        } elseif ($route = $authorroutes[$module[1]]) {
+        } elseif ($route = $authorroutes[$module[1]] ?? null) {
             $author = $vars['routing-state']['queried-object-id'];
             $url = $cmsusersapi->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
-        } elseif ($route = $tagroutes[$module[1]]) {
+        } elseif ($route = $tagroutes[$module[1]] ?? null) {
             $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
             return RequestUtils::addRoute($url, $route);
         }

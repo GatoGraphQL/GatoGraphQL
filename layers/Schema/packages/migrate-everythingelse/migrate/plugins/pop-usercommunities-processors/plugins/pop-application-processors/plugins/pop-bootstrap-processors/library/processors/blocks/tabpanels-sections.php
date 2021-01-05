@@ -21,7 +21,7 @@ class PoP_UserCommunities_ModuleProcessor_SectionBlocks extends PoP_Module_Proce
             self::MODULE_BLOCK_TABPANEL_COMMUNITIES => [PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::MODULE_TABPANEL_COMMUNITIES],
             self::MODULE_BLOCK_TABPANEL_MYMEMBERS => [PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::MODULE_TABPANEL_MYMEMBERS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -50,7 +50,7 @@ class PoP_UserCommunities_ModuleProcessor_SectionBlocks extends PoP_Module_Proce
             case self::MODULE_BLOCK_TABPANEL_MYMEMBERS:
                 return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::MODULE_FILTER_MYMEMBERS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

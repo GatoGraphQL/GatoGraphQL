@@ -74,7 +74,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             self::MODULE_BUTTON_UNDODOWNVOTEPOST_FULL => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL],
             self::MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -91,7 +91,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNFOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_UNFOLLOWUSER_FULL:
                 return 'unfollowUserURL';
-                    
+
             case self::MODULE_BUTTON_RECOMMENDPOST_PREVIEW:
             case self::MODULE_BUTTON_RECOMMENDPOST_FULL:
                 return 'recommendPostURL';
@@ -99,7 +99,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNRECOMMENDPOST_PREVIEW:
             case self::MODULE_BUTTON_UNRECOMMENDPOST_FULL:
                 return 'unrecommendPostURL';
-                    
+
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_FULL:
                 return 'subscribeToTagURL';
@@ -138,7 +138,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNFOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_UNFOLLOWUSER_FULL:
                 return TranslationAPIFacade::getInstance()->__('Following', 'pop-coreprocessors');
-            
+
             case self::MODULE_BUTTON_RECOMMENDPOST_FULL:
             case self::MODULE_BUTTON_RECOMMENDPOST_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Recommend', 'pop-coreprocessors');
@@ -146,7 +146,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNRECOMMENDPOST_FULL:
             case self::MODULE_BUTTON_UNRECOMMENDPOST_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Recommended', 'pop-coreprocessors');
-            
+
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_FULL:
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Subscribe', 'pop-coreprocessors');
@@ -171,7 +171,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNDODOWNVOTEPOST_FULL:
                 return TranslationAPIFacade::getInstance()->__('Down-voted', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -224,7 +224,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNFOLLOWUSER_PREVIEW:
                 $ret .= ' '.GD_CLASS_UNFOLLOWUSER;
                 break;
-            
+
             case self::MODULE_BUTTON_RECOMMENDPOST_FULL:
             case self::MODULE_BUTTON_RECOMMENDPOST_PREVIEW:
                 $ret .= ' '.GD_CLASS_RECOMMENDPOST;
@@ -234,7 +234,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNRECOMMENDPOST_PREVIEW:
                 $ret .= ' '.GD_CLASS_UNRECOMMENDPOST;
                 break;
-            
+
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_FULL:
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
                 $ret .= ' '.GD_CLASS_SUBSCRIBETOTAG;
@@ -265,7 +265,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 $ret .= ' '.GD_CLASS_UNDODOWNVOTEPOST;
                 break;
         }
-        
+
         switch ($module[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
@@ -290,7 +290,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 $ret .= ' pop-functionbutton';
                 break;
         }
-        
+
         switch ($module[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
@@ -375,7 +375,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 );
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

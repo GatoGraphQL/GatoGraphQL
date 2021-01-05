@@ -17,7 +17,7 @@ class PoP_Application_Module_Processor_UserCheckpointMessages extends PoP_Module
             self::MODULE_CHECKPOINTMESSAGE_DOMAIN => [PoP_Application_Module_Processor_UserCheckpointMessageInners::class, PoP_Application_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_DOMAIN],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

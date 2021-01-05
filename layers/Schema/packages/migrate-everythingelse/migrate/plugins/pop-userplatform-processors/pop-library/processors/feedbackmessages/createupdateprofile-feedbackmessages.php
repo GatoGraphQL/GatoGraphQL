@@ -20,7 +20,7 @@ class PoP_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Processor_
             self::MODULE_FEEDBACKMESSAGE_UPDATEPROFILE => [PoP_Module_Processor_ProfileFeedbackMessageInners::class, PoP_Module_Processor_ProfileFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_UPDATEPROFILE],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

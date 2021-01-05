@@ -62,10 +62,10 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             self::MODULE_BLOCK_DOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::MODULE_DATALOADACTION_DOWNVOTEPOST],
             self::MODULE_BLOCK_UNDODOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::MODULE_DATALOADACTION_UNDODOWNVOTEPOST],
         );
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
-    
+
         return $ret;
     }
 
@@ -107,7 +107,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
 
         parent::initWebPlatformModelProps($module, $props);
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -126,7 +126,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
                 $this->appendProp($module, $props, 'class', 'pop-functionalblock');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

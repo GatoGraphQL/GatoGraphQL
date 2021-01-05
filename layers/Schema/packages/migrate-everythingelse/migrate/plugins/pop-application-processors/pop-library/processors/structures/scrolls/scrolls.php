@@ -129,7 +129,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             self::MODULE_SCROLL_SINGLERELATEDCONTENT_FULLVIEW => [PoP_Module_Processor_CustomScrollInners::class, PoP_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -138,12 +138,12 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [self::class, self::MODULE_SCROLL_CONTENT_THUMBNAIL],
             [self::class, self::MODULE_SCROLL_POSTS_THUMBNAIL],
-            
+
             [self::class, self::MODULE_SCROLL_USERS_THUMBNAIL],
             [self::class, self::MODULE_SCROLL_USER_THUMBNAIL],
         );
@@ -154,7 +154,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             [self::class, self::MODULE_SCROLL_CONTENT_LIST],
             [self::class, self::MODULE_SCROLL_TAGS_LIST],
             [self::class, self::MODULE_SCROLL_POSTS_LIST],
-            
+
             [self::class, self::MODULE_SCROLL_USERS_LIST],
             [self::class, self::MODULE_SCROLL_USER_LIST],
         );
@@ -168,7 +168,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             [self::class, self::MODULE_SCROLL_CONTENT_DETAILS],
             [self::class, self::MODULE_SCROLL_POSTS_DETAILS],
             [self::class, self::MODULE_SCROLL_TAGS_DETAILS],
-            
+
             [self::class, self::MODULE_SCROLL_USERS_DETAILS],
             [self::class, self::MODULE_SCROLL_USER_DETAILS],
         );
@@ -194,7 +194,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             [self::class, self::MODULE_SCROLL_CONTENT_FULLVIEW],
             [self::class, self::MODULE_SCROLL_HIGHLIGHTS_FULLVIEW],
             [self::class, self::MODULE_SCROLL_POSTS_FULLVIEW],
-            
+
             [self::class, self::MODULE_SCROLL_USERS_FULLVIEW],
             [self::class, self::MODULE_SCROLL_USER_FULLVIEW],
 
@@ -204,7 +204,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
 
             [self::class, self::MODULE_SCROLL_SINGLERELATEDCONTENT_FULLVIEW],
         );
-        
+
         $extra_class = '';
         if (in_array($module, $navigators)) {
             $extra_class = 'navigator text-inverse';
@@ -235,7 +235,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

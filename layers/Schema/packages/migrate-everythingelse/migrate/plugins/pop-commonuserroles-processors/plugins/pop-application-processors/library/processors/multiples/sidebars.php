@@ -21,7 +21,7 @@ class GD_URE_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Side
             self::MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR => [GD_URE_Module_Processor_CustomSectionSidebarInners::class, GD_URE_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_INDIVIDUALS_SIDEBAR],
             self::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR => [GD_URE_Module_Processor_CustomSectionSidebarInners::class, GD_URE_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR],
         );
-        if ($block = $blocks[$module[1]]) {
+        if ($block = $blocks[$module[1]] ?? null) {
             $ret[] = $block;
         }
 
@@ -34,10 +34,10 @@ class GD_URE_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Side
             self::MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR => POP_SCREEN_USERS,
             self::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR => POP_SCREEN_USERS,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -48,7 +48,7 @@ class GD_URE_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Side
             case self::MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

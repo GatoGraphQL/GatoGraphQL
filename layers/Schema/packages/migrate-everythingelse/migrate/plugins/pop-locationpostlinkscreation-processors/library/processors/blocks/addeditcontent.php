@@ -30,10 +30,10 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
             self::MODULE_BLOCK_LOCATIONPOSTLINK_UPDATE => [PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_LOCATIONPOSTLINK_UPDATE],
             self::MODULE_BLOCK_LOCATIONPOSTLINK_CREATE => [PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_LOCATIONPOSTLINK_CREATE],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -66,7 +66,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

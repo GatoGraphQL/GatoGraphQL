@@ -71,12 +71,12 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                     self::MODULE_PAGE_BODYSIDEINFO => POP_PAGEMODULEGROUP_PAGESECTION_SIDEINFOCONTENT,
                     self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_MAINCONTENT,
                 );
-                if ($page_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($module_groups[$module[1]])) {
+                if ($page_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($module_groups[$module[1]] ?? null)) {
                     $ret[] = $page_module;
                 }
                 break;
         }
-        
+
         switch ($module[1]) {
             case self::MODULE_PAGE_FRAMECOMPONENTS:
                 $moduleAtts = count($module) >= 3 ? $module[2] : null;
@@ -103,7 +103,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         $ret = parent::getFrametopoptionsSubmodules($module);
 
         $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
-        
+
         switch ($module[1]) {
             case self::MODULE_PAGE_BODY:
             case self::MODULE_PAGE_QUICKVIEW:
@@ -113,7 +113,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                         self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMETOPOPTIONS,
                         self::MODULE_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS,
                     );
-                    if ($frameoptions_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]])) {
+                    if ($frameoptions_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]] ?? null)) {
                         $ret[] = $frameoptions_module;
                     }
                 }
@@ -140,7 +140,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         $ret = parent::getFramebottomoptionsSubmodules($module);
 
         $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
-        
+
         switch ($module[1]) {
             case self::MODULE_PAGE_BODY:
             case self::MODULE_PAGE_QUICKVIEW:
@@ -150,7 +150,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                         self::MODULE_PAGE_BODY => POP_PAGEMODULEGROUP_PAGESECTION_BODYFRAMEBOTTOMOPTIONS,
                         self::MODULE_PAGE_QUICKVIEW => POP_PAGEMODULEGROUP_PAGESECTION_QUICKVIEWFRAMEBOTTOMOPTIONS,
                     );
-                    if ($frameoptions_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]])) {
+                    if ($frameoptions_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties($groups[$module[1]] ?? null)) {
                         $ret[] = $frameoptions_module;
                     }
                 }

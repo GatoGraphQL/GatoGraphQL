@@ -18,7 +18,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
             self::MODULE_TABLE_MYSTANCES => [UserStance_Module_Processor_TableInners::class, UserStance_Module_Processor_TableInners::MODULE_TABLEINNER_MYSTANCES],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -36,7 +36,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'pop-userstance-processors');
                 break;
         }
-    
+
         return $ret;
     }
 

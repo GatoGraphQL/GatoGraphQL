@@ -17,7 +17,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages extends PoP
             self::MODULE_FEEDBACKMESSAGE_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

@@ -24,10 +24,10 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
             self::MODULE_CALENDAR_EVENTS_MAIN => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::MODULE_CALENDARINNER_EVENTS_MAIN],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-            
+
         return parent::getInnerSubmodule($module);
     }
 
@@ -54,7 +54,7 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
                 $ret['titleFormat'] = 'MMM YYYY';
                 break;
         }
-            
+
         return $ret;
     }
 
@@ -74,7 +74,7 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
                 $this->appendProp([GD_EM_Module_Processor_CustomPopoverLayouts::class, GD_EM_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_EVENT], $props, 'class', 'pop-openmapmarkers');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

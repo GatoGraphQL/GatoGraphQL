@@ -21,10 +21,10 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
             self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS => [GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -42,7 +42,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
                 $this->setProp($component, $props, 'placeholder', $placeholder);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -53,7 +53,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
             case self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return TranslationAPIFacade::getInstance()->__('Co-authoring this post with other users? Select them all here, they will not only appear as co-owners in the webpage, but will also be able to edit this post.', 'pop-coreprocessors');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 
@@ -63,7 +63,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
             case self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return TranslationAPIFacade::getInstance()->__('Co-authors', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabel($module, $props);
     }
 }

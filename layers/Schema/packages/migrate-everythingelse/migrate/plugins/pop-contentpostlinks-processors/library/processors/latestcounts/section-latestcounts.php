@@ -22,10 +22,10 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
             self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::MODULE_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
-        if ($cat = $cats[$module[1]]) {
+        if ($cat = $cats[$module[1]] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
-    
+
         return parent::getObjectNames($module, $props);
     }
 
@@ -36,11 +36,11 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
             self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::MODULE_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
-        if ($cat = $cats[$module[1]]) {
+        if ($cat = $cats[$module[1]] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
             ;
         }
-    
+
         return parent::getObjectNames($module, $props);
     }
 
@@ -55,7 +55,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
                 $ret[] = 'post-'.POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -65,7 +65,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
             case self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS:
                 return true;
         }
-    
+
         return parent::isAuthor($module, $props);
     }
 
@@ -75,7 +75,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
             case self::MODULE_LATESTCOUNT_TAG_POSTLINKS:
                 return true;
         }
-    
+
         return parent::isTag($module, $props);
     }
 }

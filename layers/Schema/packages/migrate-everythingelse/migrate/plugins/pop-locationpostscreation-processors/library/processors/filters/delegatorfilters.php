@@ -10,17 +10,17 @@ class PoPSPEM_Module_Processor_CustomDelegatorFilters extends PoP_Module_Process
             [self::class, self::MODULE_DELEGATORFILTER_MYLOCATIONPOSTS],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
             self::MODULE_DELEGATORFILTER_MYLOCATIONPOSTS => [PoPSPEM_Module_Processor_CustomSimpleFilterInners::class, PoPSPEM_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_MYLOCATIONPOSTS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

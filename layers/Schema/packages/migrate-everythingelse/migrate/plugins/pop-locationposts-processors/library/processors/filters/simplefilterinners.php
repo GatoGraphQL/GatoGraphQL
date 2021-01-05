@@ -61,7 +61,7 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     //         self::MODULE_SIMPLEFILTERINNER_AUTHORLOCATIONPOSTS => POP_FILTER_AUTHORLOCATIONPOSTS,
     //         self::MODULE_SIMPLEFILTERINNER_TAGLOCATIONPOSTS => POP_FILTER_TAGLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
 

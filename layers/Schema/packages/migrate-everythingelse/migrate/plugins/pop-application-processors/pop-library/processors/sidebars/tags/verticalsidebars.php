@@ -17,7 +17,7 @@ class Wassup_Module_Processor_CustomVerticalTagSidebars extends PoP_Module_Proce
             self::MODULE_VERTICALSIDEBAR_TAG => [Wassup_Module_Processor_CustomVerticalTagSidebarInners::class, Wassup_Module_Processor_CustomVerticalTagSidebarInners::MODULE_VERTICALSIDEBARINNER_TAG],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

@@ -16,10 +16,10 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
             [self::class, self::MODULE_BLOCK_TABPANEL_SEARCHCONTENT],
             [self::class, self::MODULE_BLOCK_TABPANEL_CONTENT],
             [self::class, self::MODULE_BLOCK_TABPANEL_POSTS],
-            
+
             [self::class, self::MODULE_BLOCK_TABPANEL_SEARCHUSERS],
             [self::class, self::MODULE_BLOCK_TABPANEL_USERS],
-            
+
             [self::class, self::MODULE_BLOCK_TABPANEL_MYCONTENT],
             [self::class, self::MODULE_BLOCK_TABPANEL_MYPOSTS],
         );
@@ -38,7 +38,7 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
             self::MODULE_BLOCK_TABPANEL_MYCONTENT => [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYCONTENT],
             self::MODULE_BLOCK_TABPANEL_MYPOSTS => [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYPOSTS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -65,7 +65,7 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
             case self::MODULE_BLOCK_TABPANEL_MYPOSTS:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYPOSTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 
@@ -77,7 +77,7 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
             case self::MODULE_BLOCK_TABPANEL_CONTENT:
             case self::MODULE_BLOCK_TABPANEL_POSTS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
-            
+
             case self::MODULE_BLOCK_TABPANEL_USERS:
             case self::MODULE_BLOCK_TABPANEL_SEARCHUSERS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_USERLIST];

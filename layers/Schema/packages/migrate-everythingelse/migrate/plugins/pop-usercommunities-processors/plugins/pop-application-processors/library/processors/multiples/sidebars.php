@@ -29,7 +29,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
                 $filters = array(
                     self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::MODULE_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR],
                 );
-                if ($filter = $filters[$module[1]]) {
+                if ($filter = $filters[$module[1]] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -41,13 +41,13 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
                     $module
                 );
                 break;
-            
+
             default:
                 $inners = array(
                     self::MODULE_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR],
                     self::MODULE_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR],
                 );
-                if ($inner = $inners[$module[1]]) {
+                if ($inner = $inners[$module[1]] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -63,10 +63,10 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
             self::MODULE_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR => POP_SCREEN_USERS,
             self::MODULE_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR => POP_SCREEN_AUTHORUSERS,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -80,7 +80,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
             case self::MODULE_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

@@ -26,7 +26,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
             self::MODULE_CHECKPOINTMESSAGE_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageInners::class, GD_UserLogin_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

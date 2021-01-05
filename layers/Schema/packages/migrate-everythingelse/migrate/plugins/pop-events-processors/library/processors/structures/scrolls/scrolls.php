@@ -63,7 +63,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
             self::MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -72,7 +72,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [self::class, self::MODULE_SCROLL_PASTEVENTS_THUMBNAIL],
@@ -129,7 +129,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

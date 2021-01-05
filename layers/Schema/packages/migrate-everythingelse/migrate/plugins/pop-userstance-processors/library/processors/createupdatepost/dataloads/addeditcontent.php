@@ -56,7 +56,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_CREATECONTENT],
         );
 
-        if ($feedback = $feedbacks[$module[1]]) {
+        if ($feedback = $feedbacks[$module[1]] ?? null) {
             return $feedback;
         }
 

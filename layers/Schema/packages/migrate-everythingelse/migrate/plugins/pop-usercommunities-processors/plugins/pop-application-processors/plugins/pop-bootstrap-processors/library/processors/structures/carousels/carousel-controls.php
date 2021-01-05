@@ -53,7 +53,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
                 );
-                return RequestUtils::addRoute($url, $routes[$module[1]]);
+                return RequestUtils::addRoute($url, $routes[$module[1]] ?? null);
         }
 
         return parent::getTitleLink($module, $props);

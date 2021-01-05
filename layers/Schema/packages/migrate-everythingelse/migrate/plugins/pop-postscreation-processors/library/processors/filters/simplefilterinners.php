@@ -59,7 +59,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINNER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
 

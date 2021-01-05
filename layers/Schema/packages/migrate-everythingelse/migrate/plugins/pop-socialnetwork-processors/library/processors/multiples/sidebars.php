@@ -37,7 +37,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                     self::MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR],
                     self::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
                 );
-                if ($filter = $filters[$module[1]]) {
+                if ($filter = $filters[$module[1]] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -62,10 +62,10 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             self::MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => POP_SCREEN_AUTHORTAGS,
             self::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -78,7 +78,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             case self::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

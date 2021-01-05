@@ -152,7 +152,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return getRouteIcon($route, false);
         }
 
@@ -172,7 +172,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
         }
 

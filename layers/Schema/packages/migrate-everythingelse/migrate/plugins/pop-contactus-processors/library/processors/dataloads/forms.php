@@ -46,7 +46,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         $actionexecuters = array(
             self::MODULE_DATALOAD_CONTACTUS => ContactUsComponentMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$module[1]]) {
+        if ($actionexecuter = $actionexecuters[$module[1]] ?? null) {
             return $actionexecuter;
         }
 

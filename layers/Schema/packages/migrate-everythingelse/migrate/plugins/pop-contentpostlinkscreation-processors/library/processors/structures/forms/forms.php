@@ -17,7 +17,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extend
             self::MODULE_FORM_CONTENTPOSTLINK => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_CONTENTPOSTLINK],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -35,7 +35,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extend
                 $this->appendProp($module, $props, 'class', $form_row_classs);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -19,7 +19,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         $inners = array(
             self::MODULE_MULTIPLE_LATESTNOTIFICATIONS => [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTNOTIFICATIONS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -57,10 +57,10 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
                 $module_propagation_current_path[] = [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTNOTIFICATIONS];
                 return $module_propagation_current_path;
         }
-    
+
         return parent::getDataFeedbackInterreferencedModulepath($module, $props);
     }
-    
+
     public function getJsdataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getJsdataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
@@ -82,16 +82,16 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
                 $this->addJsmethod($ret, 'displayBlockDatasetCount');
                 break;
         }
-        
+
         return $ret;
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -107,7 +107,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
                 );
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

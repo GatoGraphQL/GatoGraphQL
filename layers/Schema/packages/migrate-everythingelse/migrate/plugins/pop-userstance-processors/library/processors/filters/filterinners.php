@@ -92,7 +92,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
@@ -104,10 +104,10 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::MODULE_FILTERINNER_AUTHORSTANCES_STANCE => POP_FILTER_AUTHORSTANCES_STANCE,
     //         self::MODULE_FILTERINNER_STANCES_GENERALSTANCE => POP_FILTER_STANCES_GENERALSTANCE,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

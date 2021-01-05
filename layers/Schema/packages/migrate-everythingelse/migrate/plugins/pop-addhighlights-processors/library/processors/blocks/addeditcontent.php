@@ -30,10 +30,10 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
             self::MODULE_BLOCK_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_HIGHLIGHT_UPDATE],
             self::MODULE_BLOCK_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_HIGHLIGHT_CREATE],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -64,7 +64,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
                 $this->appendProp($module, $props, 'class', 'addons-nocontrols');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

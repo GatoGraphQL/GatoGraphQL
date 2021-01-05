@@ -27,7 +27,7 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
             self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
             self::MODULE_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -48,7 +48,7 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
 
         return parent::getTitle($module, $props);
     }
-    
+
     public function getBtnClass(array $module, array &$props)
     {
         $ret = parent::getBtnClass($module, $props);
@@ -91,7 +91,7 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
                 $this->setProp($module, $props, 'resourceloader', 'socialmedia');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

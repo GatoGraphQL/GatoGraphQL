@@ -17,7 +17,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostForms extends PoP_Modul
             self::MODULE_FORM_POST => [PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_POST],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -35,7 +35,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostForms extends PoP_Modul
                 $this->appendProp($module, $props, 'class', $form_row_classs);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

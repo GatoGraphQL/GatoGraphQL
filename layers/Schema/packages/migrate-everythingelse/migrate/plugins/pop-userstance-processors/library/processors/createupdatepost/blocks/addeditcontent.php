@@ -36,7 +36,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
             case self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_EDITPOST];
         }
-        
+
         return parent::getControlgroupTopSubmodule($module);
     }
 
@@ -50,10 +50,10 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_STANCE_CREATEORUPDATE => [UserStance_Module_Processor_CreateUpdatePostDataloads::class, UserStance_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_STANCE_CREATEORUPDATE],
             self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE => [UserStance_Module_Processor_CreateUpdatePostDataloads::class, UserStance_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -103,7 +103,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
                     getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).$title
                 );
         }
-    
+
         return parent::getTitle($module, $props);
     }
 
@@ -145,7 +145,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
                 $this->appendProp($module, $props, 'class', 'addons-nocontrols');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

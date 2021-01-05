@@ -9,7 +9,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     public const MODULE_FORMINPUT_CUP_LINKEDIN = 'forminput-cup-linkedin';
     public const MODULE_FORMINPUT_CUP_YOUTUBE = 'forminput-cup-youtube';
     public const MODULE_FORMINPUT_CUP_INSTAGRAM = 'forminput-cup-instagram';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -43,7 +43,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
             case self::MODULE_FORMINPUT_CUP_INSTAGRAM:
                 return TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -68,7 +68,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
             case self::MODULE_FORMINPUT_CUP_INSTAGRAM:
                 return 'instagram';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 
@@ -83,10 +83,10 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
             self::MODULE_FORMINPUT_CUP_YOUTUBE => TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors'),
             self::MODULE_FORMINPUT_CUP_INSTAGRAM => TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors'),
         );
-        if ($placeholder = $placeholders[$module[1]]) {
+        if ($placeholder = $placeholders[$module[1]] ?? null) {
             $this->setProp($module, $props, 'placeholder', $placeholder);
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

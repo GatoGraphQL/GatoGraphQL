@@ -75,7 +75,7 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
             self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS18 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYCATEGORYPOSTS18],
             self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -136,7 +136,7 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
             case self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS19:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYCATEGORYPOSTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

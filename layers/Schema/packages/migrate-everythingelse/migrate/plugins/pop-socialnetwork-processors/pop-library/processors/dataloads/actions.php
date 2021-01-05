@@ -80,7 +80,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_DOWNVOTEPOST => DownvoteCustomPostMutationResolverBridge::class,
             self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => UndoDownvoteCustomPostMutationResolverBridge::class,
         );
-        if ($executer = $executers[$module[1]]) {
+        if ($executer = $executers[$module[1]] ?? null) {
             return $executer;
         }
 
@@ -208,7 +208,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_DOWNVOTEPOST => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_DOWNVOTESPOSTS],
             self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_UNDODOWNVOTESPOSTS],
         );
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 
@@ -290,7 +290,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_DOWNVOTEPOST => TranslationAPIFacade::getInstance()->__('down-vote posts', 'pop-coreprocessors'),
             self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => TranslationAPIFacade::getInstance()->__('stop down-voting posts', 'pop-coreprocessors'),
         );
-        if ($towhat = $towhats[$module[1]]) {
+        if ($towhat = $towhats[$module[1]] ?? null) {
             $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', $towhat);
         }
 

@@ -39,7 +39,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
             self::MODULE_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW => [PoP_LocationPosts_Module_Processor_CustomScrollInners::class, PoP_LocationPosts_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -48,7 +48,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $simpleviews = array(
             [GD_Custom_EM_Module_Processor_CustomScrolls::class, GD_Custom_EM_Module_Processor_CustomScrolls::MODULE_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
@@ -68,7 +68,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
         }
         $this->appendProp($module, $props, 'class', $extra_class);
 
-        
+
         parent::initModelProps($module, $props);
     }
 }

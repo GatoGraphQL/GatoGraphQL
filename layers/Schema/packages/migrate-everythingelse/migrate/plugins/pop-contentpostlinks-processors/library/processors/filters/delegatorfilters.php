@@ -12,7 +12,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomDelegatorFilters extends PoP_M
             [self::class, self::MODULE_DELEGATORFILTER_AUTHORCONTENTPOSTLINKS],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -20,10 +20,10 @@ class PoP_ContentPostLinks_Module_Processor_CustomDelegatorFilters extends PoP_M
             self::MODULE_DELEGATORFILTER_AUTHORCONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_AUTHORLINKS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

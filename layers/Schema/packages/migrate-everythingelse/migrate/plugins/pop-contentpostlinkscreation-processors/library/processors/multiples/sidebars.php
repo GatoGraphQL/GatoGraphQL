@@ -14,11 +14,11 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
     public function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
-                
+
         $inners = array(
             self::MODULE_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR => [PoP_ContentPostLinksCreation_Module_Processor_SidebarInners::class, PoP_ContentPostLinksCreation_Module_Processor_SidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYCONTENTPOSTLINKS_SIDEBAR],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -30,10 +30,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR => POP_SCREEN_MYCONTENT,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -43,7 +43,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
             case self::MODULE_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

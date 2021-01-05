@@ -42,7 +42,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
             self::MODULE_DATALOAD_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::MODULE_FORM_HIGHLIGHT],
             self::MODULE_DATALOAD_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::MODULE_FORM_HIGHLIGHT],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
 

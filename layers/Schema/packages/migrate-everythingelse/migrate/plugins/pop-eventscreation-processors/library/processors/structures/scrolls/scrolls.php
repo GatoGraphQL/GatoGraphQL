@@ -26,7 +26,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
             self::MODULE_SCROLL_MYEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW],
             self::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -35,7 +35,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $simpleviews = array(
             [self::class, self::MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
@@ -53,7 +53,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
             $extra_class = 'fullview';
         }
         $this->appendProp($module, $props, 'class', $extra_class);
-        
+
         parent::initModelProps($module, $props);
     }
 }

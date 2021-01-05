@@ -18,7 +18,7 @@ class PoP_Volunteering_Module_Processor_GFForms extends PoP_Module_Processor_For
             self::MODULE_FORM_VOLUNTEER => [PoP_Volunteering_Module_Processor_GFFormInners::class, PoP_Volunteering_Module_Processor_GFFormInners::MODULE_FORMINNER_VOLUNTEER],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -37,7 +37,7 @@ class PoP_Volunteering_Module_Processor_GFForms extends PoP_Module_Processor_For
                 $this->setProp($module, $props, 'description', $description);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

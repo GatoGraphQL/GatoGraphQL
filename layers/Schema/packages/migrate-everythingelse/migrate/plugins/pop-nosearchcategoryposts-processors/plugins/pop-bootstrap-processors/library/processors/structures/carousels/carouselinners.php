@@ -202,7 +202,7 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
             self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
             self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
         );
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] =$layout;
         }
 

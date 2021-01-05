@@ -21,7 +21,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
             self::MODULE_SCROLL_MYLINKS_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -30,7 +30,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $simpleviews = array(
             [self::class, self::MODULE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
@@ -38,7 +38,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
         $fullviews = array(
             [self::class, self::MODULE_SCROLL_MYLINKS_FULLVIEWPREVIEW],
         );
-        
+
         $extra_class = '';
         if (in_array($module, $simpleviews)) {
             $extra_class = 'simpleview';

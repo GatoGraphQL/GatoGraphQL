@@ -17,7 +17,7 @@ class PoP_Module_Processor_SettingsFeedbackMessageAlertLayouts extends PoP_Modul
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageLayouts::class, PoP_Module_Processor_SettingsFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             return $layout;
         }
 
