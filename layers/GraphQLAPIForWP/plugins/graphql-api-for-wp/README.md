@@ -331,9 +331,9 @@ Ongoing development for this project is funded via [Leonardo Losoviz](https://le
 
 ![Leo and wife](docs/images/jun-e-leo.jpg)<br/>_Leo and wife_ -->
 
-## Sponsors
+<!-- ## Sponsors
 
-<a href="https://getrector.org/"><img src="assets/img/rector-logo.svg" width="150" alt="Rector" title="Rector"></a>
+<a href="https://getrector.org/"><img src="assets/img/rector-logo.svg" width="150" alt="Rector" title="Rector"></a> -->
 
 ## Standards
 
