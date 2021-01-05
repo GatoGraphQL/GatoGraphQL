@@ -28,7 +28,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
             ],
         ];
         // Add the link access filter
-        if ($inputmodules[$module[1]] && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputmodules[$module[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
 
             array_splice(
                 $ret,
