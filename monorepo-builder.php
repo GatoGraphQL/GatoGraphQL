@@ -48,7 +48,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::DATA_TO_REMOVE, [
         'require-dev' => [
             'wikimedia/composer-merge-plugin' => '*',
-            'phpunit/phpunit' => '*',
+            // 'phpunit/phpunit' => '*',
             'wpackagist-plugin/block-metadata' => '*',
             'wpackagist-plugin/events-manager' => '*',
         ],
