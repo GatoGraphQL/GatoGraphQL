@@ -10,7 +10,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Implementation of features to demonstrate the GraphQL API, for the demo site [newapi.getpop.org](https://newapi.getpop.org).
+Implementation of features to demonstrate GraphQL by PoP, for the demo site [newapi.getpop.org](https://newapi.getpop.org).
 
 ## Install
 
