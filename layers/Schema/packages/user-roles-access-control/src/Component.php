@@ -15,7 +15,8 @@ use PoP\ComponentModel\Container\ContainerBuilderUtils;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait, CanDisableComponentTrait;
+    use YAMLServicesTrait;
+    use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;
     // const VERSION = '0.1.0';
@@ -62,7 +63,8 @@ class Component extends AbstractComponent
             self::initYAMLServices(self::$COMPONENT_DIR);
             self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-            if (class_exists('\PoP\CacheControl\Component')
+            if (
+                class_exists('\PoP\CacheControl\Component')
                 && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
             ) {
                 \PoPSchema\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::initialize(

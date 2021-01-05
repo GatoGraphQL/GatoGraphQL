@@ -47,11 +47,13 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                 ];
                 break;
         }
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'GenericCustomPosts:FilterInners:inputmodules',
-            $inputmodules,
-            $module
-        )) {
+        if (
+            $modules = HooksAPIFacade::getInstance()->applyFilters(
+                'GenericCustomPosts:FilterInners:inputmodules',
+                $inputmodules,
+                $module
+            )
+        ) {
             $ret = array_merge(
                 $ret,
                 $modules

@@ -17,6 +17,7 @@ use PoPSchema\Stances\TypeResolverPickers\Optional\StanceCustomPostTypeResolverP
 class Component extends AbstractComponent
 {
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**
@@ -69,7 +70,8 @@ class Component extends AbstractComponent
      */
     protected static function attachTypeResolverPickers()
     {
-        if (Environment::addStanceTypeToCustomPostUnionTypes()
+        if (
+            Environment::addStanceTypeToCustomPostUnionTypes()
             // If $skipSchema is `true`, then services are not registered
             && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
         ) {

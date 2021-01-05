@@ -40,7 +40,8 @@ class NestedMutationHooks extends AbstractHookSet
             return $include;
         }
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-        if ($include
+        if (
+            $include
             && !in_array(get_class($typeResolver), [
                 $graphQLSchemaDefinitionService->getRootTypeResolverClass(),
                 $graphQLSchemaDefinitionService->getMutationRootTypeResolverClass(),

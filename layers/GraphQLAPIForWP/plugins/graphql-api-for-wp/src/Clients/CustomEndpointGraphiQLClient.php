@@ -8,7 +8,8 @@ use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient;
 
 class CustomEndpointGraphiQLClient extends GraphiQLClient
 {
-    use CustomEndpointClientTrait, CustomEndpointGraphiQLClientTrait;
+    use CustomEndpointClientTrait;
+    use CustomEndpointGraphiQLClientTrait;
 
     /**
      * Use GraphiQL Explorer for this screen?

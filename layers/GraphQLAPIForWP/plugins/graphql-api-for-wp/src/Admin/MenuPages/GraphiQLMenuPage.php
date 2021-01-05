@@ -162,7 +162,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
             $cssFileURLs = $matches[1];
             foreach ($cssFileURLs as $index => $cssFileURL) {
                 \wp_enqueue_style(
-                    'graphql-api-graphiql-with-explorer-'.$index,
+                    'graphql-api-graphiql-with-explorer-' . $index,
                     $cssFileURL,
                     array(),
                     \GRAPHQL_API_VERSION
@@ -172,7 +172,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
             $jsFileURLs = $matches[1];
             foreach ($jsFileURLs as $index => $jsFileURL) {
                 \wp_enqueue_script(
-                    'graphql-api-graphiql-with-explorer-'.$index,
+                    'graphql-api-graphiql-with-explorer-' . $index,
                     $jsFileURL,
                     array(),
                     \GRAPHQL_API_VERSION,

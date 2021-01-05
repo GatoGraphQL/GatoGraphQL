@@ -13,9 +13,10 @@ use PoP\ComponentModel\Container\ContainerBuilderUtils;
  */
 class Component extends AbstractComponent
 {
+    use YAMLServicesTrait;
+
     public static $COMPONENT_DIR;
 
-    use YAMLServicesTrait;
     // const VERSION = '0.1.0';
 
     /**
@@ -67,7 +68,8 @@ class Component extends AbstractComponent
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-        if (class_exists('\PoPSchema\Users\Component')
+        if (
+            class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
             \PoPSchema\Media\Conditional\Users\ConditionalComponent::initialize(

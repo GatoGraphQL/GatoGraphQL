@@ -17,6 +17,7 @@ use PoPSchema\Pages\TypeResolverPickers\Optional\PageCustomPostTypeResolverPicke
 class Component extends AbstractComponent
 {
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**
@@ -93,7 +94,8 @@ class Component extends AbstractComponent
      */
     protected static function attachTypeResolverPickers()
     {
-        if (ComponentConfiguration::addPageTypeToCustomPostUnionTypes()
+        if (
+            ComponentConfiguration::addPageTypeToCustomPostUnionTypes()
             // If $skipSchema is `true`, then services are not registered
             && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
         ) {

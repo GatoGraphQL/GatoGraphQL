@@ -15,7 +15,9 @@ use PoP\Root\Component\YAMLServicesTrait;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait, CanDisableComponentTrait;
+    use YAMLServicesTrait;
+    use CanDisableComponentTrait;
+
     // const VERSION = '0.1.0';
 
     /**

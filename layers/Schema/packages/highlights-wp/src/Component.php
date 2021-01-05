@@ -14,6 +14,7 @@ use PoPSchema\HighlightsWP\Config\ServiceConfiguration;
 class Component extends AbstractComponent
 {
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**

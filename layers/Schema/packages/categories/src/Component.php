@@ -14,8 +14,10 @@ use PoP\ComponentModel\Container\ContainerBuilderUtils;
  */
 class Component extends AbstractComponent
 {
-    public static $COMPONENT_DIR;
     use YAMLServicesTrait;
+
+    public static $COMPONENT_DIR;
+
     // const VERSION = '0.1.0';
 
     /**

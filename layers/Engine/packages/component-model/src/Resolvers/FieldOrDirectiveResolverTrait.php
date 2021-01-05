@@ -20,12 +20,14 @@ trait FieldOrDirectiveResolverTrait
     protected function maybeValidateNotMissingFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $schemaFieldOrDirectiveArgs, string $type): ?string
     {
         if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldArgs($schemaFieldOrDirectiveArgs)) {
-            if ($maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
-                SchemaHelpers::getSchemaFieldArgNames($mandatoryArgs),
-                $fieldOrDirectiveName,
-                $fieldOrDirectiveArgs,
-                $type
-            )) {
+            if (
+                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                    SchemaHelpers::getSchemaFieldArgNames($mandatoryArgs),
+                    $fieldOrDirectiveName,
+                    $fieldOrDirectiveArgs,
+                    $type
+                )
+            ) {
                 return $maybeError;
             }
         }

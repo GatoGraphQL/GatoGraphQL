@@ -69,14 +69,15 @@ class Menu extends AbstractMenu
          * @var GraphiQLMenuPage
          */
         $graphiQLMenuPage = $instanceManager->getInstance(GraphiQLMenuPage::class);
-        if ($hookName = \add_submenu_page(
-            self::NAME,
-            __('GraphiQL', 'graphql-api'),
-            __('GraphiQL', 'graphql-api'),
-            $schemaEditorAccessCapability,
-            self::NAME,
-            [$graphiQLMenuPage, 'print']
-        )
+        if (
+            $hookName = \add_submenu_page(
+                self::NAME,
+                __('GraphiQL', 'graphql-api'),
+                __('GraphiQL', 'graphql-api'),
+                $schemaEditorAccessCapability,
+                self::NAME,
+                [$graphiQLMenuPage, 'print']
+            )
         ) {
             $graphiQLMenuPage->setHookName($hookName);
         }
@@ -85,14 +86,15 @@ class Menu extends AbstractMenu
          * @var GraphQLVoyagerMenuPage
          */
         $graphQLVoyagerMenuPage = $instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
-        if ($hookName = \add_submenu_page(
-            self::NAME,
-            __('Interactive Schema', 'graphql-api'),
-            __('Interactive Schema', 'graphql-api'),
-            $schemaEditorAccessCapability,
-            $graphQLVoyagerMenuPage->getScreenID(),
-            [$graphQLVoyagerMenuPage, 'print']
-        )
+        if (
+            $hookName = \add_submenu_page(
+                self::NAME,
+                __('Interactive Schema', 'graphql-api'),
+                __('Interactive Schema', 'graphql-api'),
+                $schemaEditorAccessCapability,
+                $graphQLVoyagerMenuPage->getScreenID(),
+                [$graphQLVoyagerMenuPage, 'print']
+            )
         ) {
             $graphQLVoyagerMenuPage->setHookName($hookName);
         }
@@ -136,14 +138,15 @@ class Menu extends AbstractMenu
          * @var callable
          */
         $callable = [$modulesMenuPage, 'print'];
-        if ($hookName = \add_submenu_page(
-            self::NAME,
-            __('Modules', 'graphql-api'),
-            __('Modules', 'graphql-api'),
-            'manage_options',
-            $modulesMenuPage->getScreenID(),
-            $callable
-        )
+        if (
+            $hookName = \add_submenu_page(
+                self::NAME,
+                __('Modules', 'graphql-api'),
+                __('Modules', 'graphql-api'),
+                'manage_options',
+                $modulesMenuPage->getScreenID(),
+                $callable
+            )
         ) {
             $modulesMenuPage->setHookName($hookName);
         }
@@ -152,14 +155,15 @@ class Menu extends AbstractMenu
          * @var SettingsMenuPage
          */
         $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-        if ($hookName = \add_submenu_page(
-            self::NAME,
-            __('Settings', 'graphql-api'),
-            __('Settings', 'graphql-api'),
-            'manage_options',
-            $settingsMenuPage->getScreenID(),
-            [$settingsMenuPage, 'print']
-        )
+        if (
+            $hookName = \add_submenu_page(
+                self::NAME,
+                __('Settings', 'graphql-api'),
+                __('Settings', 'graphql-api'),
+                'manage_options',
+                $settingsMenuPage->getScreenID(),
+                [$settingsMenuPage, 'print']
+            )
         ) {
             $settingsMenuPage->setHookName($hookName);
         }
@@ -196,14 +200,15 @@ class Menu extends AbstractMenu
          */
         $aboutMenuPage = $instanceManager->getInstance($aboutPageClass);
         if (isset($_GET['page']) && $_GET['page'] == $aboutMenuPage->getScreenID()) {
-            if ($hookName = \add_submenu_page(
-                self::NAME,
-                __('About', 'graphql-api'),
-                __('About', 'graphql-api'),
-                'read',
-                $aboutMenuPage->getScreenID(),
-                [$aboutMenuPage, 'print']
-            )
+            if (
+                $hookName = \add_submenu_page(
+                    self::NAME,
+                    __('About', 'graphql-api'),
+                    __('About', 'graphql-api'),
+                    'read',
+                    $aboutMenuPage->getScreenID(),
+                    [$aboutMenuPage, 'print']
+                )
             ) {
                 $aboutMenuPage->setHookName($hookName);
             }
@@ -213,14 +218,15 @@ class Menu extends AbstractMenu
          * @var SupportMenuPage
          */
         $supportMenuPage = $instanceManager->getInstance(SupportMenuPage::class);
-        if ($hookName = \add_submenu_page(
-            self::NAME,
-            __('Support', 'graphql-api'),
-            __('Support', 'graphql-api'),
-            'read',
-            $supportMenuPage->getScreenID(),
-            [$supportMenuPage, 'print']
-        )
+        if (
+            $hookName = \add_submenu_page(
+                self::NAME,
+                __('Support', 'graphql-api'),
+                __('Support', 'graphql-api'),
+                'read',
+                $supportMenuPage->getScreenID(),
+                [$supportMenuPage, 'print']
+            )
         ) {
             $supportMenuPage->setHookName($hookName);
         }

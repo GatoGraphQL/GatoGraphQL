@@ -84,7 +84,8 @@ class CustomPostUnionTypeDataLoader extends CustomPostTypeDataLoader
                 $castedCustomPosts
             ) {
                 $targetTypeResolverPicker = $customPostUnionTypeResolver->getTargetTypeResolverPicker($customPost);
-                if (is_null($targetTypeResolverPicker)
+                if (
+                    is_null($targetTypeResolverPicker)
                     || !($targetTypeResolverPicker instanceof CustomPostTypeResolverPickerInterface)
                 ) {
                     return $customPost;

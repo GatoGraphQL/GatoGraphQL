@@ -64,10 +64,12 @@ class ServiceConfiguration
         // Maybe use GraphiQL with Explorer
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER) && $userSettingsManager->getSetting(
-            ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-            ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
-        )) {
+        if (
+            $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER) && $userSettingsManager->getSetting(
+                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
+            )
+        ) {
             ContainerBuilderUtils::injectValuesIntoService(
                 InstanceManagerInterface::class,
                 'overrideClass',

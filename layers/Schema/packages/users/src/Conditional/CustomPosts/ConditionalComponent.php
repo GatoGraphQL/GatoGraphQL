@@ -22,7 +22,8 @@ class ConditionalComponent
     ): void {
         self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CustomPosts');
 
-        if (class_exists('\PoP\RESTAPI\Component')
+        if (
+            class_exists('\PoP\RESTAPI\Component')
             && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
         ) {
             \PoPSchema\Users\Conditional\CustomPosts\Conditional\RESTAPI\ConditionalComponent::initialize(

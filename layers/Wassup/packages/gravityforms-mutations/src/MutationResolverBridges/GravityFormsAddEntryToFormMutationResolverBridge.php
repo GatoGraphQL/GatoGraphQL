@@ -141,7 +141,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // (in file plugins/gravityforms/form_display.php function validate)
         // So here re-create that field
         if ($form_id = $_POST["gform_submit"] ?? null) {
-            $_POST['is_submit_'.$form_id] = true;
+            $_POST['is_submit_' . $form_id] = true;
         }
     }
 

@@ -14,7 +14,9 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 
 class InterfaceType extends AbstractType implements HasFieldsTypeInterface, HasPossibleTypesTypeInterface, HasInterfacesTypeInterface
 {
-    use HasFieldsTypeTrait, HasPossibleTypesTypeTrait, HasInterfacesTypeTrait;
+    use HasFieldsTypeTrait;
+    use HasPossibleTypesTypeTrait;
+    use HasInterfacesTypeTrait;
 
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
     {

@@ -12,10 +12,10 @@ use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
  */
 abstract class AbstractControlBlock extends AbstractBlock
 {
+    use WithTypeFieldControlBlockTrait;
+
     public const ATTRIBUTE_NAME_TYPE_FIELDS = 'typeFields';
     public const ATTRIBUTE_NAME_DIRECTIVES = 'directives';
-
-    use WithTypeFieldControlBlockTrait;
 
     protected function isDynamicBlock(): bool
     {

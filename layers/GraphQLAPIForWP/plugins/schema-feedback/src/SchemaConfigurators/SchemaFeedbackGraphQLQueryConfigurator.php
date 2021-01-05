@@ -42,14 +42,16 @@ class SchemaFeedbackGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigu
             if ($feedbackMessage = $fdlBlockItem['attrs'][SchemaFeedbackBlock::ATTRIBUTE_NAME_FEEDBACK_MESSAGE] ?? null) {
                 if ($typeFields = $fdlBlockItem['attrs'][AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS] ?? null) {
                     // Extract the saved fields
-                    if ($entriesForFields = GeneralUtils::arrayFlatten(
-                        array_map(
-                            function ($selectedField) use ($feedbackMessage) {
-                                return $this->getEntriesFromField($selectedField, $feedbackMessage);
-                            },
-                            $typeFields
+                    if (
+                        $entriesForFields = GeneralUtils::arrayFlatten(
+                            array_map(
+                                function ($selectedField) use ($feedbackMessage) {
+                                    return $this->getEntriesFromField($selectedField, $feedbackMessage);
+                                },
+                                $typeFields
+                            )
                         )
-                    )) {
+                    ) {
                         $schemaFeedbackManager->addEntriesForFields(
                             $entriesForFields
                         );

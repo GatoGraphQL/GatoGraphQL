@@ -16,7 +16,8 @@ use PoP\ComponentModel\Container\ContainerBuilderUtils;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait, CanDisableComponentTrait;
+    use YAMLServicesTrait;
+    use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;
     // const VERSION = '0.1.0';
@@ -90,7 +91,8 @@ class Component extends AbstractComponent
             self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
             ServiceConfiguration::initialize();
 
-            if (class_exists('\PoP\AccessControl\Component')
+            if (
+                class_exists('\PoP\AccessControl\Component')
                 && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
             ) {
                 \PoP\API\Conditional\AccessControl\ConditionalComponent::initialize(

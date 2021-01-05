@@ -40,11 +40,13 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
                     return in_array($fieldName, $fieldInterfaceResolverClass::getFieldNamesToImplement());
                 }
             ));
-            foreach ($this->getEntries(
-                $typeResolver,
-                $fieldInterfaceResolverClassesForField,
-                $fieldName
-            ) as $entry) {
+            foreach (
+                $this->getEntries(
+                    $typeResolver,
+                    $fieldInterfaceResolverClassesForField,
+                    $fieldName
+                ) as $entry
+            ) {
                 $entryValue = $entry[2] ?? null;
                 if ($this->removeFieldNameBasedOnMatchingEntryValue($entryValue)) {
                     $mandatoryDirectivesForFields[$fieldName] = $this->getMandatoryDirectives($entryValue);

@@ -30,7 +30,8 @@ class CDNTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {
         $mandatoryDirectivesForFields = [];
-        if (CDNComponentConfiguration::getFromURLSection() &&
+        if (
+            CDNComponentConfiguration::getFromURLSection() &&
             CDNComponentConfiguration::getToURLSection()
         ) {
             // Add the mapping

@@ -168,10 +168,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $entry['name'] = $name;
         }
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if ($extensions = array_merge(
-                $this->getDBEntryExtensions($dbKey, $id, $item),
-                $item[Tokens::EXTENSIONS] ?? []
-            )) {
+            if (
+                $extensions = array_merge(
+                    $this->getDBEntryExtensions($dbKey, $id, $item),
+                    $item[Tokens::EXTENSIONS] ?? []
+                )
+            ) {
                 $entry['extensions'] = $extensions;
             }
         }
@@ -209,10 +211,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $entry['name'] = $name;
         }
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if ($extensions = array_merge(
-                $this->getSchemaEntryExtensions($dbKey, $item),
-                $item[Tokens::EXTENSIONS] ?? []
-            )) {
+            if (
+                $extensions = array_merge(
+                    $this->getSchemaEntryExtensions($dbKey, $item),
+                    $item[Tokens::EXTENSIONS] ?? []
+                )
+            ) {
                 $entry['extensions'] = $extensions;
             }
         }
@@ -243,10 +247,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             'message' => $message,
         ];
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if ($extensions = array_merge(
-                $this->getQueryEntryExtensions(),
-                $extensions
-            )) {
+            if (
+                $extensions = array_merge(
+                    $this->getQueryEntryExtensions(),
+                    $extensions
+                )
+            ) {
                 $entry['extensions'] = $extensions;
             };
         }

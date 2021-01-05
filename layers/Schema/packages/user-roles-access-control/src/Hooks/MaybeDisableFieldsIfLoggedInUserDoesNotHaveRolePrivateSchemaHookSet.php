@@ -62,11 +62,13 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
         }
 
         // Obtain all roles allowed for the current combination of typeResolver/fieldName
-        if ($matchingEntries = $this->getEntries(
-            $typeResolver,
-            $fieldInterfaceResolverClasses,
-            $fieldName
-        )) {
+        if (
+            $matchingEntries = $this->getEntries(
+                $typeResolver,
+                $fieldInterfaceResolverClasses,
+                $fieldName
+            )
+        ) {
             foreach ($matchingEntries as $entry) {
                 // Check if the current user has any of the required roles, then access is granted, otherwise reject it
                 $roles = $entry[2] ?? [];

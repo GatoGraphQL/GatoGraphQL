@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
 
-use \WP_Post;
+use WP_Post;
 use PoP\AccessControl\Schema\SchemaModes;
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use PoP\Engine\Environment as EngineEnvironment;
@@ -171,7 +171,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             // Only execute if it has value "enabled" or "disabled".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
-            if (!in_array($useNamespacing, [
+            if (
+                !in_array($useNamespacing, [
                     SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED,
                     SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED,
                 ])
@@ -219,7 +220,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             // Only execute if it has value "standard", "nested" or "lean_nested".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
-            if (!in_array($mutationScheme, [
+            if (
+                !in_array($mutationScheme, [
                     MutationSchemes::STANDARD,
                     MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
                     MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
@@ -277,7 +279,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             // Only execute if it has value "public" or "private".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
-            if (!in_array($defaultSchemaMode, [
+            if (
+                !in_array($defaultSchemaMode, [
                     SchemaModes::PUBLIC_SCHEMA_MODE,
                     SchemaModes::PRIVATE_SCHEMA_MODE,
                 ])

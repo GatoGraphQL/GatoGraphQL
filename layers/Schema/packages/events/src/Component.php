@@ -16,6 +16,7 @@ use PoPSchema\Events\TypeResolverPickers\Optional\EventCustomPostTypeResolverPic
 class Component extends AbstractComponent
 {
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**
@@ -100,7 +101,8 @@ class Component extends AbstractComponent
      */
     protected static function attachTypeResolverPickers()
     {
-        if (Environment::addEventTypeToCustomPostUnionTypes()
+        if (
+            Environment::addEventTypeToCustomPostUnionTypes()
             // If $skipSchema is `true`, then services are not registered
             && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
         ) {

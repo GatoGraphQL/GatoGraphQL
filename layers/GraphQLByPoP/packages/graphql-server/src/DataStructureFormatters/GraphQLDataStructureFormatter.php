@@ -144,10 +144,12 @@ class GraphQLDataStructureFormatter extends \PoP\GraphQLAPI\DataStructureFormatt
             $entry['location'] = $location;
         }
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if ($extensions = array_merge(
-                $this->getQueryEntryExtensions(),
-                $extensions
-            )) {
+            if (
+                $extensions = array_merge(
+                    $this->getQueryEntryExtensions(),
+                    $extensions
+                )
+            ) {
                 $entry['extensions'] = $extensions;
             };
         }

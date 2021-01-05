@@ -115,7 +115,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
     {
         /** Check if to validate the version */
-        if (Environment::enableSemanticVersionConstraints() &&
+        if (
+            Environment::enableSemanticVersionConstraints() &&
             $this->decideCanProcessBasedOnVersionConstraint($typeResolver)
         ) {
             /**
@@ -171,13 +172,15 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             /**
              * Validate mandatory values
              */
-            if ($maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
-                $typeResolver,
-                $fieldName,
-                $fieldArgs,
-                $schemaFieldArgs,
-                ResolverTypes::FIELD
-            )) {
+            if (
+                $maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
+                    $typeResolver,
+                    $fieldName,
+                    $fieldArgs,
+                    $schemaFieldArgs,
+                    ResolverTypes::FIELD
+                )
+            ) {
                 return [$maybeError];
             }
 

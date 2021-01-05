@@ -21,14 +21,14 @@ class FileStore implements FileStoreInterface
         if (!file_exists($dir)) {
             // Create folder
             if (@mkdir($dir, 0777, true) === false) {
-                throw new RuntimeException('The directory '.$dir.' could not be created.');
+                throw new RuntimeException('The directory ' . $dir . ' could not be created.');
             }
         }
 
         // Open the file, write content and close it
         $handle = fopen($filePath, "wb");
         if ($handle === false) {
-            throw new RuntimeException('The file '.$filePath.' could not be opened.');
+            throw new RuntimeException('The file ' . $filePath . ' could not be opened.');
         }
         fwrite($handle, $contents);
         fclose($handle);

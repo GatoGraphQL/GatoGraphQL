@@ -12,7 +12,8 @@ use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
  */
 class ModulesMenuPage extends AbstractTableMenuPage
 {
-    use GraphQLAPIMenuPageTrait, OpenInModalTriggerMenuPageTrait;
+    use GraphQLAPIMenuPageTrait;
+    use OpenInModalTriggerMenuPageTrait;
 
     public const SCREEN_OPTION_NAME = 'graphql_api_modules_per_page';
 

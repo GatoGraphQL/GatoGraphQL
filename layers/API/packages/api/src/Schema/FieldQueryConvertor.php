@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-use function count;
-use function strlen;
-use function substr;
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
@@ -18,6 +15,10 @@ use PoP\Translation\TranslationAPIInterface;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+
+use function count;
+use function strlen;
+use function substr;
 
 class FieldQueryConvertor implements FieldQueryConvertorInterface
 {
@@ -116,7 +117,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                         if ($fieldDirectiveSplit = $this->queryParser->splitElements($firstPathLevel, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING)) {
                             $firstPathLevel = $fieldDirectiveSplit[0];
                         }
-                        if ((substr($firstPathLevel, 0, strlen(FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING)) == FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING) &&
+                        if (
+                            (substr($firstPathLevel, 0, strlen(FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING)) == FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING) &&
                             (substr($firstPathLevel, -1 * strlen(FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING)) == FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING)
                         ) {
                             $bookmark = substr($firstPathLevel, strlen(FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING), strlen($firstPathLevel) - 1 - strlen(FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING));
@@ -323,11 +325,13 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         );
         foreach ($fieldOrDirectiveArgValues as $fieldOrDirectiveArgValue) {
             $matches = [];
-            if (preg_match_all(
-                $regex,
-                $fieldOrDirectiveArgValue,
-                $matches
-            )) {
+            if (
+                preg_match_all(
+                    $regex,
+                    $fieldOrDirectiveArgValue,
+                    $matches
+                )
+            ) {
                 // If there is only one item, and it occupies the whole param
                 // (eg: echoStr("{{ title }}")), then don't use "sprintf" but that field directly.
                 // That is to be able to retrieve objects other than strings
@@ -337,7 +341,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                     // Check if the embedded field is exactly the requested field
                     // Notice that it has '"' at the beginning and end
                     $embeddedField = $matches[0][0];
-                    if ($embeddedField == $fieldOrDirectiveArgValue
+                    if (
+                        $embeddedField == $fieldOrDirectiveArgValue
                         || $fieldQueryInterpreter->wrapStringInQuotes($embeddedField) == $fieldOrDirectiveArgValue
                     ) {
                         $isSingleWholeEmbed = true;
@@ -862,7 +867,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         $skipOutputIfNullSymbolPos = QueryHelpers::findSkipOutputIfNullSymbolPosition($property);
         if ($fieldArgsClosingSymbolPos !== false) {
             $nextCharPos = $fieldArgsClosingSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING);
-            if (!(
+            if (
+                !(
                 // It's in the last position
                 ($fieldArgsClosingSymbolPos == strlen($property) - strlen(FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING)) ||
                 // Next comes "["
@@ -873,7 +879,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 ($skipOutputIfNullSymbolPos !== false && $skipOutputIfNullSymbolPos == $nextCharPos) ||
                 // Next comes "<"
                 ($fieldDirectivesOpeningSymbolPos !== false && $fieldDirectivesOpeningSymbolPos == $nextCharPos)
-            )) {
+                )
+            ) {
                 return sprintf(
                     $this->translationAPI->__('After \'%s\', property \'%s\' must either end or be followed by \'%s\', \'%s\', \'%s\' or \'%s\'. %s', 'api'),
                     FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING,
@@ -890,14 +897,16 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // After the "]", it must be either the end, "?" or "<"
         if ($bookmarkClosingSymbolPos !== false) {
             $nextCharPos = $bookmarkClosingSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING);
-            if (!(
+            if (
+                !(
                 // It's in the last position
                 ($bookmarkClosingSymbolPos == strlen($property) - strlen(FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING)) ||
                 // Next comes "?"
                 ($skipOutputIfNullSymbolPos !== false && $skipOutputIfNullSymbolPos == $nextCharPos) ||
                 // Next comes "<"
                 ($fieldDirectivesOpeningSymbolPos !== false && $fieldDirectivesOpeningSymbolPos == $nextCharPos)
-            )) {
+                )
+            ) {
                 return sprintf(
                     $this->translationAPI->__('After \'%s\', property \'%s\' must either end or be followed by \'%s\' or \'%s\'. %s', 'api'),
                     FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING,
@@ -912,12 +921,14 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // After the "?", it must be either the end or "<"
         if ($skipOutputIfNullSymbolPos !== false) {
             $nextCharPos = $skipOutputIfNullSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_SKIPOUTPUTIFNULL);
-            if (!(
+            if (
+                !(
                 // It's in the last position
                 ($skipOutputIfNullSymbolPos == strlen($property) - strlen(FieldQueryQuerySyntax::SYMBOL_SKIPOUTPUTIFNULL)) ||
                 // Next comes "<"
                 ($fieldDirectivesOpeningSymbolPos !== false && $fieldDirectivesOpeningSymbolPos == $nextCharPos)
-            )) {
+                )
+            ) {
                 return sprintf(
                     $this->translationAPI->__('After \'%s\', property \'%s\' must either end or be followed by \'%s\'. %s', 'api'),
                     FieldQueryQuerySyntax::SYMBOL_SKIPOUTPUTIFNULL,
@@ -930,10 +941,12 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
 
         // After the ">", it must be the end
         if ($fieldDirectivesClosingSymbolPos !== false) {
-            if (!(
+            if (
+                !(
                 // It's in the last position
                 ($fieldDirectivesClosingSymbolPos == strlen($property) - strlen(FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING))
-            )) {
+                )
+            ) {
                 return sprintf(
                     $this->translationAPI->__('After \'%s\', property \'%s\' must end (there cannot be any extra character). %s', 'api'),
                     FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING,

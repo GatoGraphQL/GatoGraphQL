@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\LocationPostsWP\TypeAPIs;
 
 use WP_Post;
-use function get_post;
 use PoPSchema\PostsWP\TypeAPIs\PostTypeAPI;
 use PoPSchema\LocationPosts\TypeAPIs\LocationPostTypeAPIInterface;
+
+use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

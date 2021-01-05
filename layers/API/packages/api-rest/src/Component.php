@@ -15,7 +15,9 @@ use PoP\API\Component as APIComponent;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait, CanDisableComponentTrait;
+    use YAMLServicesTrait;
+    use CanDisableComponentTrait;
+
     // const VERSION = '0.1.0';
 
     /**

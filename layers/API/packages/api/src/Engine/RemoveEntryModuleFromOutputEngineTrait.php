@@ -17,7 +17,8 @@ trait RemoveEntryModuleFromOutputEngineTrait
 
         // For the API: maybe remove the entry module from the output
         $vars = ApplicationState::getVars();
-        if (APIComponent::isEnabled() &&
+        if (
+            APIComponent::isEnabled() &&
             $vars['scheme'] == APISchemes::API &&
             in_array(POP_ACTION_REMOVE_ENTRYMODULE_FROM_OUTPUT, $vars['actions']) &&
             $vars['dataoutputmode'] == GD_URLPARAM_DATAOUTPUTMODE_COMBINED

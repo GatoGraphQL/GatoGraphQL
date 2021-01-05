@@ -33,11 +33,13 @@ class CommentFilterInnerModuleProcessor extends AbstractModuleProcessor
                 [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ID],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Comments:FilterInners:inputmodules',
-            $inputmodules[$module[1]],
-            $module
-        )) {
+        if (
+            $modules = HooksAPIFacade::getInstance()->applyFilters(
+                'Comments:FilterInners:inputmodules',
+                $inputmodules[$module[1]],
+                $module
+            )
+        ) {
             $ret = array_merge(
                 $ret,
                 $modules

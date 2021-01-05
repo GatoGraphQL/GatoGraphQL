@@ -220,7 +220,8 @@ abstract class AbstractPostType
         /**
          * Check if it is enabled and it is this CPT...
          */
-        if ($moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION)
+        if (
+            $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION)
             && UserAuthorization::canAccessSchemaEditor()
             && \is_singular($this->getPostType())
         ) {

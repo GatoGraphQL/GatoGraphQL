@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Date: 23.11.15
  *
@@ -43,7 +44,8 @@ class Tokenizer
                 $this->pos++;
             } elseif ($ch === '#') {
                 $this->pos++;
-                while ($this->pos < strlen($this->source) &&
+                while (
+                    $this->pos < strlen($this->source) &&
                     ($code = ord($this->source[$this->pos])) &&
                     $code !== 10 && $code !== 13 && $code !== 0x2028 && $code !== 0x2029
                 ) {
@@ -309,7 +311,7 @@ class Tokenizer
 
                 return $token;
             }
-            
+
             if ($ch === '\\' && ($this->pos < ($len - 1))) {
                 $this->pos++;
                 $ch = $this->source[$this->pos];
@@ -343,7 +345,7 @@ class Tokenizer
                         break;
                 }
             }
-            
+
             $value .= $ch;
             $this->pos++;
         }

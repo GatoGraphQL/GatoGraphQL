@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use function apply_filters;
-use function get_post_status;
 use PoPSchema\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\ComponentConfiguration;
@@ -17,12 +15,16 @@ use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
+use function apply_filters;
+use function get_post_status;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     use APITypeDataResolverTrait;
+
     // public const NON_EXISTING_ID = "non-existing";
 
     /**
