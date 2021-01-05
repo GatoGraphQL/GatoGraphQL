@@ -623,10 +623,23 @@
             "lando start"
         ],
         "rebuild-server": "lando rebuild -y",
-        "merge-monorepo": "cd monorepo-builder && composer install --no-progress --ansi && monorepo-builder/vendor/bin/monorepo-builder merge --ansi",
-        "propagate-monorepo": "cd monorepo-builder && composer install --no-progress --ansi && monorepo-builder/vendor/bin/monorepo-builder propagate --ansi",
-        "validate-monorepo": "cd monorepo-builder && composer install --no-progress --ansi && monorepo-builder/vendor/bin/monorepo-builder validate --ansi",
-        "release": "cd monorepo-builder && composer install --no-progress --ansi && monorepo-builder/vendor/bin/monorepo-builder release patch --ansi"
+        "install-monorepo-builder": "cd monorepo-builder && composer install --no-progress --ansi",
+        "merge-monorepo": [
+            "@install-monorepo-builder",
+            "monorepo-builder/vendor/bin/monorepo-builder merge --ansi"
+        ],
+        "propagate-monorepo": [
+            "@install-monorepo-builder",
+            "monorepo-builder/vendor/bin/monorepo-builder propagate --ansi"
+        ],
+        "validate-monorepo": [
+            "@install-monorepo-builder",
+            "monorepo-builder/vendor/bin/monorepo-builder validate --ansi"
+        ],
+        "release": [
+            "@install-monorepo-builder",
+            "monorepo-builder/vendor/bin/monorepo-builder release patch --ansi"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
