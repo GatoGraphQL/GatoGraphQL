@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Symplify\MonorepoBuilder\Command;
+namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 
 use Nette\Utils\Json;
-use PoP\PoP\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
-use PoP\PoP\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
-use PoP\PoP\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
-use PoP\PoP\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
@@ -61,7 +61,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         'autoload' => [
             'psr-4' => [
-                'PoP\\PoP\\Symplify\\MonorepoBuilder\\'=> 'monorepo-builder/src',
+                'PoP\\PoP\\'=> 'src',
             ],
         ],
     ]);

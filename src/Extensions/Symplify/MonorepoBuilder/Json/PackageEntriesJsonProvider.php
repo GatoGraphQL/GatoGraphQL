@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Symplify\MonorepoBuilder\Json;
+namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
-use PoP\PoP\Symplify\MonorepoBuilder\ValueObject\Option;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;

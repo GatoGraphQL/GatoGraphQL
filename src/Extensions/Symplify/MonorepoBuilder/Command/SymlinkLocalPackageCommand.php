@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Symplify\MonorepoBuilder\Command;
+namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

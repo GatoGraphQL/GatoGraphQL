@@ -1,7 +1,0 @@
-{
-    "name": "pop/local-package-repositories",
-    "description": "All local package repositories hosted in the monorepo",
-    "require": {
-        "getpop/root": "*"
-    }
-}
