@@ -1,4 +1,4 @@
-name: Split Tests
+name: Split Code Analisys (Tests, Coding Standards, Static Analysis)
 
 on:
     pull_request: null
