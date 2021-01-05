@@ -63,5 +63,16 @@ jobs:
             -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package.path }}
 
             -
+                name: PHPUnit
                 working-directory: ${{ matrix.package.path }}
                 run: vendor/bin/phpunit
+
+            -
+                name: PHPStan
+                working-directory: ${{ matrix.package.path }}
+                run: vendor/bin/phpstan analyse -c phpstan.neon.dist
+
+            -
+                name: PHP Code Sniffer
+                working-directory: ${{ matrix.package.path }}
+                run: vendor/bin/phpcs -n --standard=PSR2 src/
