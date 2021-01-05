@@ -31,7 +31,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
             self::MODULE_DATALOAD_LOCATIONS_SCROLL => [PoP_Locations_Module_Processor_CustomScrolls::class, PoP_Locations_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONS],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -41,7 +41,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_LOCATIONS_TYPEAHEAD:
                 return [PoP_Locations_Module_Processor_CustomFilters::class, PoP_Locations_Module_Processor_CustomFilters::MODULE_FILTER_LOCATIONS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -78,7 +78,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('locations', 'poptheme-wassup'));
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

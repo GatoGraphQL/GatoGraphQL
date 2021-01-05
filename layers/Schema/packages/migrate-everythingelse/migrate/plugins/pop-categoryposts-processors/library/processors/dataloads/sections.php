@@ -2220,7 +2220,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT => [CPP_Module_Processor_Carousels::class, CPP_Module_Processor_Carousels::MODULE_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

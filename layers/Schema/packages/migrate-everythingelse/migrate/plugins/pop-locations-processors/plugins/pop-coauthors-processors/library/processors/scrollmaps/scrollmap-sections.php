@@ -17,7 +17,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections extends G
             self::MODULE_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function isUserMap(array $module)

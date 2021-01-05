@@ -44,7 +44,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
             self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => [PoPTheme_Wassup_AE_Module_Processor_Scrolls::class, PoPTheme_Wassup_AE_Module_Processor_Scrolls::MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

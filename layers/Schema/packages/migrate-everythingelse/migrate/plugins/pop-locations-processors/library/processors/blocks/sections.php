@@ -25,7 +25,7 @@ class PoP_Locations_Module_Processor_CustomSectionBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_LOCATIONS_SCROLL => [PoP_Locations_Module_Processor_CustomSectionDataloads::class, PoP_Locations_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_LOCATIONS_SCROLL],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 }
 

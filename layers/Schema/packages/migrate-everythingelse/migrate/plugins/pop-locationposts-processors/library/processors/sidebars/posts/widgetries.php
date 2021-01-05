@@ -18,7 +18,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_LOCATIONPOST_CATEGORIES:
                 $ret[] = [GD_Custom_EM_Module_Processor_WidgetWrappers::class, GD_Custom_EM_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES];
@@ -46,7 +46,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
             self::MODULE_WIDGETCOMPACT_LOCATIONPOSTINFO => PoP_LocationPosts_PostNameUtils::getNameUc(),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -56,7 +56,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
             self::MODULE_WIDGETCOMPACT_LOCATIONPOSTINFO => getRouteIcon(POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS, false),
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
 
     public function getBodyClass(array $module, array &$props)

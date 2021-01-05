@@ -2220,7 +2220,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
             self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT => [NSCPP_Module_Processor_Carousels::class, NSCPP_Module_Processor_Carousels::MODULE_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

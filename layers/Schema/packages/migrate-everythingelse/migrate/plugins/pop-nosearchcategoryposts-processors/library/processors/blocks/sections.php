@@ -2111,7 +2111,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

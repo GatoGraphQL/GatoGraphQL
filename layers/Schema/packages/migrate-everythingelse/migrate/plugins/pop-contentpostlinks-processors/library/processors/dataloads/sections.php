@@ -115,7 +115,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST => [PoP_ContentPostLinks_Module_Processor_CustomScrolls::class, PoP_ContentPostLinks_Module_Processor_CustomScrolls::MODULE_SCROLL_LINKS_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

@@ -15,7 +15,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_FORM_EVENTLINKDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
@@ -48,7 +48,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
             self::MODULE_WIDGET_FORM_EVENTLINKDETAILS => TranslationAPIFacade::getInstance()->__('Event link details', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
 
     public function getWidgetClass(array $module, array &$props)

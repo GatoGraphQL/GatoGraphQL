@@ -31,7 +31,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
             self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputProcessor::class, PoP_Module_Processor_MultiSelectFilterInputProcessor::FILTERINPUT_MODERATEDPOSTSTATUS],
             self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputProcessor::class, PoP_Module_Processor_MultiSelectFilterInputProcessor::FILTERINPUT_UNMODERATEDPOSTSTATUS],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -87,7 +87,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
             self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
             self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -97,7 +97,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
             self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 
     protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module)

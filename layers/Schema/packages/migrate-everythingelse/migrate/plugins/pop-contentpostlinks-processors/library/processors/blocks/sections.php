@@ -88,7 +88,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
             self::MODULE_BLOCK_TAGLINKS_SCROLL_LIST => [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

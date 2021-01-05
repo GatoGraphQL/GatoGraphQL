@@ -31,7 +31,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER],
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS => [GD_URE_Module_Processor_FilterInputProcessor::class, GD_URE_Module_Processor_FilterInputProcessor::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     public function getLabel(array $module, array &$props)
@@ -97,7 +97,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -108,7 +108,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

@@ -45,7 +45,7 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
             self::MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)
@@ -55,7 +55,7 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
             case self::MODULE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_EventsCreation_Module_Processor_CustomControlGroups::class, PoP_EventsCreation_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYBLOCKEVENTLIST];
-            
+
             case self::MODULE_BLOCK_MYPASTEVENTS_TABLE_EDIT:
             case self::MODULE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW:

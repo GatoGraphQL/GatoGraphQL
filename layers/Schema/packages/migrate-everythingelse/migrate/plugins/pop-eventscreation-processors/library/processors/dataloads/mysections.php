@@ -43,14 +43,14 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
         $inner_modules = array(
 
             /*********************************************
-         * My Content Tables
-         *********************************************/
+             * My Content Tables
+             *********************************************/
             self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT => [GD_EM_Module_Processor_Tables::class, GD_EM_Module_Processor_Tables::MODULE_TABLE_MYEVENTS],
             self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT => [GD_EM_Module_Processor_Tables::class, GD_EM_Module_Processor_Tables::MODULE_TABLE_MYPASTEVENTS],
-            
+
             /*********************************************
-         * My Content Full Post Previews
-         *********************************************/
+             * My Content Full Post Previews
+             *********************************************/
             self::MODULE_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrolls::class, PoP_EventsCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
             self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrolls::class, PoP_EventsCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
 
@@ -58,7 +58,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrolls::class, PoP_EventsCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -72,7 +72,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_EventsCreation_Module_Processor_CustomFilters::class, PoP_EventsCreation_Module_Processor_CustomFilters::MODULE_FILTER_MYEVENTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -106,7 +106,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
@@ -135,7 +135,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Events: choose to only select past/future
         $past = array(
             [self::class, self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT],
@@ -155,7 +155,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
         if ($daterange_class) {
             $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

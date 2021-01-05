@@ -5,7 +5,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 {
     public const MODULE_WIDGET_POSTCOMMENTS = 'widget-postcomments';
     public const MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT = 'widget-postcomments-appendtoscript';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -17,7 +17,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
@@ -27,7 +27,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
                 $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::MODULE_LAYOUT_COMMENTS_APPENDTOSCRIPT];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
             self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -47,7 +47,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
             self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => 'fa-comments',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
     public function getBodyClass(array $module, array &$props)
     {

@@ -69,7 +69,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             [self::class, self::MODULE_BLOCK_PASTEVENTS_SCROLL_LIST],
             [self::class, self::MODULE_BLOCK_EVENTSCALENDAR_CALENDARMAP],
             [self::class, self::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR],
-            
+
             [self::class, self::MODULE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
@@ -82,7 +82,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             [self::class, self::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST],
             [self::class, self::MODULE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP],
             [self::class, self::MODULE_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR],
-            
+
             [self::class, self::MODULE_BLOCK_TAGEVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW],
@@ -95,7 +95,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             [self::class, self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_LIST],
             [self::class, self::MODULE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP],
             [self::class, self::MODULE_BLOCK_TAGEVENTSCALENDAR_CALENDAR],
-            
+
             [self::class, self::MODULE_BLOCK_EVENTS_CAROUSEL],
             [self::class, self::MODULE_BLOCK_AUTHOREVENTS_CAROUSEL],
             [self::class, self::MODULE_BLOCK_TAGEVENTS_CAROUSEL],
@@ -204,7 +204,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGEVENTS_CAROUSEL => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGEVENTS_CAROUSEL],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)
@@ -278,7 +278,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             case self::MODULE_BLOCK_TAGEVENTS_CAROUSEL:
                 return '';
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -293,7 +293,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
                 $this->appendProp($module, $props, 'class', 'pop-block-carousel block-posts-carousel block-events-carousel');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

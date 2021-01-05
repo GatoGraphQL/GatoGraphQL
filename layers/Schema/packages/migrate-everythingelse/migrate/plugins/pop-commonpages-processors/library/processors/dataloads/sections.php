@@ -38,7 +38,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
             self::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW => [GD_Custom_Module_Processor_CustomScrolls::class, GD_Custom_Module_Processor_CustomScrolls::MODULE_SCROLL_WHOWEARE_FULLVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getTypeResolverClass(array $module): ?string
@@ -50,7 +50,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW:
                 return UserTypeResolver::class;
         }
-            
+
         return parent::getTypeResolverClass($module);
     }
 

@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_
             self::MODULE_BLOCK_INDIVIDUALS_SCROLLMAP => [GD_URE_Module_Processor_CustomScrollMapSectionDataloads::class, GD_URE_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

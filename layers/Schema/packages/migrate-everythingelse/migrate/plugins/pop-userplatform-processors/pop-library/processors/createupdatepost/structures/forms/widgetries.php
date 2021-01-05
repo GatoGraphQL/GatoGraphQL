@@ -21,7 +21,7 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_FORM_FEATUREDIMAGE:
                 $ret[] = [GD_ContentCreation_Module_Processor_FormInputGroups::class, GD_ContentCreation_Module_Processor_FormInputGroups::MODULE_FORMCOMPONENTGROUP_FEATUREDIMAGE];
@@ -72,7 +72,7 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
             self::MODULE_WIDGET_FORM_CONTENTPOSTDETAILS => TranslationAPIFacade::getInstance()->__('Post details', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
 
     public function getWidgetClass(array $module, array &$props)

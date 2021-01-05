@@ -303,7 +303,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGSTANCES_CAROUSEL],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

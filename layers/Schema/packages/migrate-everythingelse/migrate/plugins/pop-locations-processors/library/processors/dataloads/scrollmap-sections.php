@@ -69,7 +69,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

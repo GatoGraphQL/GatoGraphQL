@@ -41,7 +41,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST => [PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::class, PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getSectionfilterModule(array $module)

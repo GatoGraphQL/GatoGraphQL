@@ -8,7 +8,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_SEARCH = 'filterinput-search';
     public const MODULE_FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
     public const MODULE_FILTERINPUT_NAME = 'filterinput-name';
@@ -29,7 +29,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
             self::MODULE_FILTERINPUT_NAME => [\PoPSchema\Users\FilterInputProcessor::class, \PoPSchema\Users\FilterInputProcessor::FILTERINPUT_NAME],
             self::MODULE_FILTERINPUT_HASHTAGS => [PoP_Module_Processor_FormsFilterInputProcessor::class, PoP_Module_Processor_FormsFilterInputProcessor::FILTERINPUT_HASHTAGS],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -40,7 +40,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     //         case self::MODULE_FILTERINPUT_NAME:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -56,7 +56,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
             case self::MODULE_FILTERINPUT_NAME:
                 return TranslationAPIFacade::getInstance()->__('Name', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -85,7 +85,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
             self::MODULE_FILTERINPUT_HASHTAGS => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -96,7 +96,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
             self::MODULE_FILTERINPUT_HASHTAGS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_NAME => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

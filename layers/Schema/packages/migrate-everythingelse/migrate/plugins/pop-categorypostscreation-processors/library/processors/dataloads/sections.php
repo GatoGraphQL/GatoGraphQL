@@ -274,7 +274,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -342,7 +342,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYCATEGORYPOSTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -430,7 +430,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_SIMPLEVIEWPREVIEW:
@@ -455,97 +455,97 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS11_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS11];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS02_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS02_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS02_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS02];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS12_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS12_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS12_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS12];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS03_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS03_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS03_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS03];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS13_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS13_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS13_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS13];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS04_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS04_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS04_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS04];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS14_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS14_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS14_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS14];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS05_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS05_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS05_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS05];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS15_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS15_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS15_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS15];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS06_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS06_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS06_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS06];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS16_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS16_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS16_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS16];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS07_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS07_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS07_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS07];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS17_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS17_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS17_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS17];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS08_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS08_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS08_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS08];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS18_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS18_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS18_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS09_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS09_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS09_FULLVIEWPREVIEW:
                 $ret['categories'] = [POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS09];
                 break;
-            
+
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS19_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS19_FULLVIEWPREVIEW:
@@ -699,7 +699,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
                 )
             );
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

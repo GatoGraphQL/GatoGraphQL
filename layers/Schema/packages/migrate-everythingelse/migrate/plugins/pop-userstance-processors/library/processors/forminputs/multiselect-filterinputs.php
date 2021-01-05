@@ -24,7 +24,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
         $filterInputs = [
             self::MODULE_FILTERINPUT_STANCE_MULTISELECT => [PoP_Module_Processor_UserStanceFilterInputProcessor::class, PoP_Module_Processor_UserStanceFilterInputProcessor::FILTERINPUT_STANCE_MULTISELECT],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -72,7 +72,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
         $types = [
             self::MODULE_FILTERINPUT_STANCE_MULTISELECT => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -81,7 +81,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
         $descriptions = [
             self::MODULE_FILTERINPUT_STANCE_MULTISELECT => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

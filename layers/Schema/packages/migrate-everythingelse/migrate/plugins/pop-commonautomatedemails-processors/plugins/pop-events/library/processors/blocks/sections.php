@@ -44,7 +44,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getTitle(array $module, array &$props)

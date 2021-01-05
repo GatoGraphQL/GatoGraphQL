@@ -32,7 +32,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections exten
             self::MODULE_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function isUserMap(array $module)

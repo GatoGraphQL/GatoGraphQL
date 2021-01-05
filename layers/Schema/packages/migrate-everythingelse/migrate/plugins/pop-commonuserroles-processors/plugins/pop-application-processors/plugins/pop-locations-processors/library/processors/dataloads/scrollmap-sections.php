@@ -31,7 +31,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP => [GD_URE_Module_Processor_CustomScrollMapSections::class, GD_URE_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_INDIVIDUALS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -43,7 +43,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP:
                 return [PoP_CommonUserRoles_Module_Processor_CustomFilters::class, PoP_CommonUserRoles_Module_Processor_CustomFilters::MODULE_FILTER_ORGANIZATIONS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 

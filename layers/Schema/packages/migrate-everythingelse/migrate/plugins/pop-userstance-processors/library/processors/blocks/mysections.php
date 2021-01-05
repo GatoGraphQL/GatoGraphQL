@@ -30,7 +30,7 @@ class UserStance_Module_Processor_MySectionBlocks extends PoP_Module_Processor_M
             self::MODULE_BLOCK_MYSTANCES_SCROLL_FULLVIEWPREVIEW => [UserStance_Module_Processor_MySectionDataloads::class, UserStance_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

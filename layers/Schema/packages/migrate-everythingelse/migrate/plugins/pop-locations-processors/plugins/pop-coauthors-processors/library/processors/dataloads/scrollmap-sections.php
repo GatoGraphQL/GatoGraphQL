@@ -28,7 +28,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
             self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

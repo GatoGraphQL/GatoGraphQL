@@ -27,7 +27,7 @@ class PoP_Users_Module_Processor_FilterInputs extends \PoP\ComponentModel\Abstra
             self::MODULE_FILTERINPUT_NAME => [\PoPSchema\Users\FilterInputProcessor::class, \PoPSchema\Users\FilterInputProcessor::FILTERINPUT_NAME],
             self::MODULE_FILTERINPUT_EMAILS => [\PoPSchema\Users\FilterInputProcessor::class, \PoPSchema\Users\FilterInputProcessor::FILTERINPUT_EMAILS],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     public function getName(array $module)
@@ -52,7 +52,7 @@ class PoP_Users_Module_Processor_FilterInputs extends \PoP\ComponentModel\Abstra
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_EMAILS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_EMAIL),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -62,7 +62,7 @@ class PoP_Users_Module_Processor_FilterInputs extends \PoP\ComponentModel\Abstra
             self::MODULE_FILTERINPUT_NAME => $translationAPI->__('Search users whose name contains this string', 'pop-users'),
             self::MODULE_FILTERINPUT_EMAILS => $translationAPI->__('Search users with any of the provided emails', 'pop-users'),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

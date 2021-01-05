@@ -35,7 +35,7 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW => [GD_Custom_EM_Module_Processor_CustomScrolls::class, GD_Custom_EM_Module_Processor_CustomScrolls::MODULE_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -46,10 +46,10 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW:
                 return [GD_Custom_EM_Module_Processor_CustomFilters::class, GD_Custom_EM_Module_Processor_CustomFilters::MODULE_FILTER_MYLOCATIONPOSTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
-    
+
     public function getFormat(array $module): ?string
     {
         $tables = array(
@@ -80,7 +80,7 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW:
                 return LocationPostTypeResolver::class;
         }
-            
+
         return parent::getTypeResolverClass($module);
     }
 

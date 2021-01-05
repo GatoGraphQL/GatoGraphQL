@@ -29,7 +29,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks extends G
             self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

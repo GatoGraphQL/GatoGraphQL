@@ -21,7 +21,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
@@ -30,7 +30,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
             case self::MODULE_EM_WIDGET_DATETIME:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIME];
                 break;
-            
+
             case self::MODULE_EM_WIDGETCOMPACT_EVENTINFO:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
                     $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
@@ -41,7 +41,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS];
                 break;
-            
+
             case self::MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
                     $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
@@ -53,7 +53,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -66,7 +66,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
             self::MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO => TranslationAPIFacade::getInstance()->__('Past Event', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -77,7 +77,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
             self::MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO => 'fa-calendar',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
     public function getBodyClass(array $module, array &$props)
     {

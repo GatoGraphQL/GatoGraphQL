@@ -15,7 +15,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_MENU_ABOUT:
                 $ret[] = [PoP_Module_Processor_IndentMenuLayouts::class, PoP_Module_Processor_IndentMenuLayouts::MODULE_LAYOUT_MENU_INDENT];
@@ -33,7 +33,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::MODULE_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -43,7 +43,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::MODULE_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
 
     public function getBodyClass(array $module, array &$props)

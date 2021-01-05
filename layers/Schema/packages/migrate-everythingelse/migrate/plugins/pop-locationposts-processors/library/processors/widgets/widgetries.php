@@ -15,7 +15,7 @@ class GD_Custom_EM_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_FORM_LOCATIONPOSTDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
@@ -25,7 +25,7 @@ class GD_Custom_EM_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
                     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FORMINPUTGROUP_APPLIESTO];
                 }
                 $ret[] = [GD_EM_Module_Processor_FormComponentGroups::class, GD_EM_Module_Processor_FormComponentGroups::MODULE_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP];
-                
+
                 // Only if the Volunteering is enabled
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                     $ret[] = [PoPTheme_Wassup_Module_Processor_FormGroups::class, PoPTheme_Wassup_Module_Processor_FormGroups::MODULE_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT];
@@ -43,7 +43,7 @@ class GD_Custom_EM_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
             self::MODULE_WIDGET_FORM_LOCATIONPOSTDETAILS => sprintf(TranslationAPIFacade::getInstance()->__('%s details', 'pop-locationposts-processors'), $locationpost),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
 
     public function getWidgetClass(array $module, array &$props)

@@ -37,7 +37,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

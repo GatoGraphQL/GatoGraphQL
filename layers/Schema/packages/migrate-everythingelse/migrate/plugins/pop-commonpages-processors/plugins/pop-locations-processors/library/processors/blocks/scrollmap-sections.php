@@ -17,7 +17,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD
             self::MODULE_BLOCK_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 }
 

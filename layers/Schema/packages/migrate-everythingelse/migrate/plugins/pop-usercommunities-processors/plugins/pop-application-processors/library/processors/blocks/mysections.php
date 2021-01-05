@@ -28,7 +28,7 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
             self::MODULE_BLOCK_MYMEMBERS_TABLE_EDIT => [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT],
             self::MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW],
         );
-        return $inners[$module[1]];
+        return $inners[$module[1]] ?? null;
     }
 
     protected function showDisabledLayerIfCheckpointFailed(array $module, array &$props)

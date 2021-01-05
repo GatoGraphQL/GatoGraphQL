@@ -29,7 +29,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW => [PoP_AddHighlights_Module_Processor_MySectionDataloads::class, PoP_AddHighlights_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

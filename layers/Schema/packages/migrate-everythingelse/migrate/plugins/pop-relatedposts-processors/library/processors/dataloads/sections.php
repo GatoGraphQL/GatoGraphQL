@@ -44,7 +44,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
             self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_CONTENT_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

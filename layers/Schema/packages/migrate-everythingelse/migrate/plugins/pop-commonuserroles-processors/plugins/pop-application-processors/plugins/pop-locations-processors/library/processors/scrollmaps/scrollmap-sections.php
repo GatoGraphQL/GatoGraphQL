@@ -31,7 +31,7 @@ class GD_URE_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proce
             self::MODULE_SCROLLMAP_INDIVIDUALS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USER_MAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 }
 

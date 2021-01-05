@@ -33,7 +33,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
             self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSections::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSections::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -45,7 +45,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCOMMUNITYMEMBERS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -68,13 +68,13 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
     //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
     //             return UserRouteNatures::USER;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 $ret['orderby'] = NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:registrationdate');
@@ -91,7 +91,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
@@ -141,7 +141,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads extend
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('communities', 'poptheme-wassup'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

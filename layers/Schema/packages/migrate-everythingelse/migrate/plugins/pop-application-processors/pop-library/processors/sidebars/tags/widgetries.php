@@ -31,7 +31,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
             self::MODULE_WIDGETCOMPACT_TAGINFO => TranslationAPIFacade::getInstance()->__('Tag/topic', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -39,7 +39,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
             self::MODULE_WIDGETCOMPACT_TAGINFO => getRouteIcon(POP_POSTTAGS_ROUTE_POSTTAGS, false),
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
 
     public function getBodyClass(array $module, array &$props)

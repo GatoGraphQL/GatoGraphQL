@@ -47,7 +47,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getTitle(array $module, array &$props)

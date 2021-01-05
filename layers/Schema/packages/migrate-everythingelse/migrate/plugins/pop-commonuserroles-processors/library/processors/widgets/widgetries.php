@@ -17,7 +17,7 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS:
                 $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS];
@@ -38,7 +38,7 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
             self::MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -48,7 +48,7 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
 
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
 }
 
