@@ -183,7 +183,7 @@
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/src",
             "PoP\\ModuleRouting\\": "layers/Engine/packages/modulerouting/src",
             "PoP\\Multisite\\": "layers/SiteBuilder/packages/multisite/src",
-            "PoP\\PoP\\Symplify\\MonorepoBuilder\\": "monorepo-builder/src",
+            "PoP\\PoP\\": "src",
             "PoP\\QueryParsing\\": "layers/Engine/packages/query-parsing/src",
             "PoP\\RESTAPI\\": "layers/API/packages/api-rest/src",
             "PoP\\ResourceLoader\\": "layers/SiteBuilder/packages/resourceloader/src",
@@ -629,23 +629,10 @@
             "lando start"
         ],
         "rebuild-server": "lando rebuild -y",
-        "install-monorepo-builder": "cd monorepo-builder && composer install --no-progress --ansi",
-        "merge-monorepo": [
-            "@install-monorepo-builder",
-            "vendor/bin/monorepo-builder merge --ansi"
-        ],
-        "propagate-monorepo": [
-            "@install-monorepo-builder",
-            "vendor/bin/monorepo-builder propagate --ansi"
-        ],
-        "validate-monorepo": [
-            "@install-monorepo-builder",
-            "vendor/bin/monorepo-builder validate --ansi"
-        ],
-        "release": [
-            "@install-monorepo-builder",
-            "vendor/bin/monorepo-builder release patch --ansi"
-        ]
+        "merge-monorepo": "vendor/bin/monorepo-builder merge --ansi",
+        "propagate-monorepo": "vendor/bin/monorepo-builder propagate --ansi",
+        "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
+        "release": "vendor/bin/monorepo-builder release patch --ansi"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
