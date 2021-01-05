@@ -77,7 +77,7 @@ class Query extends AbstractAst implements FieldInterface
          * we cannot store fields by name because of TypedFragments
          */
         $this->fields = $fields;
-        }
+    }
 
     public function getAlias()
     {
@@ -100,5 +100,4 @@ class Query extends AbstractAst implements FieldInterface
 
         return false;
     }
-
 }

@@ -19,4 +19,3 @@ abstract class AbstractUpdateUserMetaValueMutationResolverBridge extends Abstrac
         return $form_data;
     }
 }
-

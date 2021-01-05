@@ -19,4 +19,3 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
         return [];
     }
 }
-

@@ -8,7 +8,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser;
 
-
 use GraphQLByPoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
@@ -69,7 +68,7 @@ class Parser extends Tokenizer
                             'name' => $operationName,
                             'position' => count($this->data['mutations']),
                             'numberItems' => count($mutations),
-                        ]; 
+                        ];
                     }
                     foreach ($mutations as $query) {
                         $this->data['mutations'][] = $query;
@@ -127,7 +126,6 @@ class Parser extends Tokenizer
             if ($this->match(Token::TYPE_AT)) {
                 $directives = $this->parseDirectiveList();
             }
-
         }
 
         $this->lex();

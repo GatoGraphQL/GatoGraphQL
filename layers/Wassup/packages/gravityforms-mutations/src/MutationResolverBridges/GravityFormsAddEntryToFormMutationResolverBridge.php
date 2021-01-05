@@ -226,4 +226,3 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         }
     }
 }
-

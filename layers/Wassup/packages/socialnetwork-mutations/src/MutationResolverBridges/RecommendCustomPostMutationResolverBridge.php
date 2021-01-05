@@ -32,4 +32,3 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
         );
     }
 }
-

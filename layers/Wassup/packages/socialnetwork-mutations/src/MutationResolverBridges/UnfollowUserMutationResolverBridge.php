@@ -31,4 +31,3 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
         );
     }
 }
-

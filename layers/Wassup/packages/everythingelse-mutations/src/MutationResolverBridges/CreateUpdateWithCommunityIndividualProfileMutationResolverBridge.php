@@ -13,4 +13,3 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
         return CreateUpdateWithCommunityIndividualProfileMutationResolver::class;
     }
 }
-

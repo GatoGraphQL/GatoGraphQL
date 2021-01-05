@@ -25,4 +25,3 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge exte
         return 'nid';
     }
 }
-

@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Exception\Parser;
 
-
 use GraphQLByPoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 

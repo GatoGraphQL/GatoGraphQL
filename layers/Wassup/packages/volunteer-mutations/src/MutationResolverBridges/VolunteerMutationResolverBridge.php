@@ -29,6 +29,4 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
 
         return $form_data;
     }
-
 }
-

@@ -67,4 +67,3 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
         return $this->update($form_data);
     }
 }
-

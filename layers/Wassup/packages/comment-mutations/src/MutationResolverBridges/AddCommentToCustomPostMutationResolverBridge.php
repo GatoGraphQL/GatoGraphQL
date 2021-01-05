@@ -29,4 +29,3 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
         return $form_data;
     }
 }
-

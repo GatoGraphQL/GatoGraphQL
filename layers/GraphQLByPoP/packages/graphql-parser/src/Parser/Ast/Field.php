@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
@@ -80,5 +79,4 @@ class Field extends AbstractAst implements FieldInterface
     {
         return [];
     }
-
 }

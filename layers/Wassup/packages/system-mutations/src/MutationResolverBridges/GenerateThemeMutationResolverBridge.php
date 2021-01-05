@@ -22,4 +22,3 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
         return TranslationAPIFacade::getInstance()->__('System action "generate theme" executed successfully.', 'pop-system');
     }
 }
-

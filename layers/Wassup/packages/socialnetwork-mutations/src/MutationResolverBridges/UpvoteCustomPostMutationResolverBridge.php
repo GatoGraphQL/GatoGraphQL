@@ -32,4 +32,3 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
         );
     }
 }
-

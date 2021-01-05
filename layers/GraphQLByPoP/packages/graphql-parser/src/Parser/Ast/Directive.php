@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 class Directive extends AbstractAst
@@ -46,5 +45,4 @@ class Directive extends AbstractAst
     {
         $this->name = $name;
     }
-
 }

@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser;
 
-
 class Location
 {
 
@@ -47,5 +46,4 @@ class Location
             'column' => $this->getColumn()
         ];
     }
-
 }

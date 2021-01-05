@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 interface LocatableInterface
@@ -17,5 +16,4 @@ interface LocatableInterface
      * @return Location
      */
     public function getLocation();
-
 }

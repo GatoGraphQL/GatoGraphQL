@@ -51,4 +51,3 @@ class MutationResolutionManager implements MutationResolutionManagerInterface
         return $this->results[$class];
     }
 }
-

@@ -71,4 +71,3 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractCreateUpdateUser
         return $inputs;
     }
 }
-

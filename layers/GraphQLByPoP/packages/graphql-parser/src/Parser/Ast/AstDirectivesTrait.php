@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 trait AstDirectivesTrait
 {
 
@@ -67,7 +66,7 @@ trait AstDirectivesTrait
     {
         /**
          * Watch out! In this query, a field contains the same directive twice:
-         * 
+         *
          * ```
          * {
          *   user(id:1) {
@@ -75,18 +74,18 @@ trait AstDirectivesTrait
          *   }
          * }
          * ```
-         * 
+         *
          * This behavior is allowed through `isRepeatable`:
          * @see https://spec.graphql.org/draft/#sel-FAJbLACvIDDxIAA6P
-         * 
+         *
          * The code here, originally, would not allow this behavior, since it
          * uses the directive's name as the key of the array, so if it happens
          * more than once, only one instance of it would remain:
-         * 
+         *
          * ```
          * $this->directives[$directive->getName()] = $directive;
          * ```
-         * 
+         *
          * As a solution, if the key already exists, place the directive
          * under a different key using a counter. There is no need to
          * remove this key later on, because the Parser will retrieve

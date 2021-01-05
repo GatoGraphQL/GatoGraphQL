@@ -33,4 +33,3 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
         );
     }
 }
-

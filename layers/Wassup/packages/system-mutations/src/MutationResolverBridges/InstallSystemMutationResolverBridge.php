@@ -22,4 +22,3 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
         return TranslationAPIFacade::getInstance()->__('System action "install" executed successfully.', 'pop-system');
     }
 }
-

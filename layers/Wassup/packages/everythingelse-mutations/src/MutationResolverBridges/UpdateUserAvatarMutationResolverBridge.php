@@ -26,4 +26,3 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
         return $form_data;
     }
 }
-

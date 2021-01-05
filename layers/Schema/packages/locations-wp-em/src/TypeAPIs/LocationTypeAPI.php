@@ -6,6 +6,7 @@ namespace PoPSchema\LocationsWPEM\TypeAPIs;
 
 use WP_Post;
 use PoPSchema\Locations\TypeAPIs\LocationTypeAPIInterface;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */

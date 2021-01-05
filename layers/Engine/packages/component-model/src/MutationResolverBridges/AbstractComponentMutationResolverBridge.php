@@ -119,4 +119,3 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     {
     }
 }
-

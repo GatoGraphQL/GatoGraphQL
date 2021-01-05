@@ -60,4 +60,3 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
         return parent::update($form_data);
     }
 }
-

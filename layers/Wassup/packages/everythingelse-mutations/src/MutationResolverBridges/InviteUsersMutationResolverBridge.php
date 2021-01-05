@@ -13,4 +13,3 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
         return InviteUsersMutationResolver::class;
     }
 }
-

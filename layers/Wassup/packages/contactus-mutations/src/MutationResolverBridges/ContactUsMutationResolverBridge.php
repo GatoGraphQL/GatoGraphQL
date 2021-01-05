@@ -29,4 +29,3 @@ class ContactUsMutationResolverBridge extends AbstractFormComponentMutationResol
         return $form_data;
     }
 }
-

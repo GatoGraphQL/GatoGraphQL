@@ -30,4 +30,3 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
         return $form_data;
     }
 }
-

@@ -103,4 +103,3 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         return $warnings;
     }
 }
-

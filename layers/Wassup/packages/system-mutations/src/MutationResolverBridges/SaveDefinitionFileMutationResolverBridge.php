@@ -23,4 +23,3 @@ class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMu
         return TranslationAPIFacade::getInstance()->__('System action "save definition file" executed successfully.', 'pop-system');
     }
 }
-

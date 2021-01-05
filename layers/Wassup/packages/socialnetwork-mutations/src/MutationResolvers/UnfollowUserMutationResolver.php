@@ -64,4 +64,3 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
         return parent::update($form_data);
     }
 }
-

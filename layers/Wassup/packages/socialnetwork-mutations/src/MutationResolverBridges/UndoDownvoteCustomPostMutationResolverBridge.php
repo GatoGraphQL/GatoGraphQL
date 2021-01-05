@@ -32,4 +32,3 @@ class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpd
         );
     }
 }
-

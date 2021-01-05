@@ -77,7 +77,6 @@ class Cat_EventFieldResolver extends AbstractDBDataFieldResolver
         $cmstagsresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
         $event = $resultItem;
         switch ($fieldName) {
-
              // Override
             case 'catSlugs':
                 $value = array();

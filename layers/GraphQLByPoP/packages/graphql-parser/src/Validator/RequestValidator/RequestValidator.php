@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Validator\RequestValidator;
 
-
 use GraphQLByPoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use GraphQLByPoP\GraphQLParser\Execution\Request;
 

@@ -106,4 +106,3 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 }
-

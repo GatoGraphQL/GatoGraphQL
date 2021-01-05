@@ -31,4 +31,3 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
         return $form_data;
     }
 }
-

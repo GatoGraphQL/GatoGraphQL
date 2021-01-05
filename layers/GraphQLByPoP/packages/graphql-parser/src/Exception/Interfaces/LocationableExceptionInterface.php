@@ -7,7 +7,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Exception\Interfaces;
 
-
 use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 interface LocationableExceptionInterface
@@ -17,5 +16,4 @@ interface LocationableExceptionInterface
      * @return Location
      */
     public function getLocation();
-
 }

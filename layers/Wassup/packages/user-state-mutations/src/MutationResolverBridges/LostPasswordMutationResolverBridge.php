@@ -40,4 +40,3 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
         return $executed;
     }
 }
-

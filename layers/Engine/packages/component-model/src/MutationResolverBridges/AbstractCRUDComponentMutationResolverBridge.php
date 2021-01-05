@@ -24,4 +24,3 @@ abstract class AbstractCRUDComponentMutationResolverBridge extends AbstractCompo
         $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($result_id);
     }
 }
-

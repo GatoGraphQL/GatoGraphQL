@@ -32,4 +32,3 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
         return $form_data;
     }
 }
-

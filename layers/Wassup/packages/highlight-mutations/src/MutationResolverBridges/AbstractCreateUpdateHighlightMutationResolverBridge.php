@@ -81,4 +81,3 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return $form_data;
     }
 }
-

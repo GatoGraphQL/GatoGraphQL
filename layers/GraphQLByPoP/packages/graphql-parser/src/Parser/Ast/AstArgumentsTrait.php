@@ -8,7 +8,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-
 trait AstArgumentsTrait
 {
 

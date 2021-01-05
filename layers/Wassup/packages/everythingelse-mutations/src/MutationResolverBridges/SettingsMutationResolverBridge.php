@@ -37,4 +37,3 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
         return $executed;
     }
 }
-

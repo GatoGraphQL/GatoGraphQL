@@ -29,4 +29,3 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
         return $form_data;
     }
 }
-

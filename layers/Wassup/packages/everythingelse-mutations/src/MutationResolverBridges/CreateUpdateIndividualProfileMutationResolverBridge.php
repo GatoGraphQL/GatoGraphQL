@@ -60,4 +60,3 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         );
     }
 }
-
