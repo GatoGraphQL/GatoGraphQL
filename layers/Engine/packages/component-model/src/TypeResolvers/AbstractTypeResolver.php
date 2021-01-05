@@ -518,12 +518,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // If it is a repeated directive, no need to do the validation again
             if ($isRepeatedFieldDirective) {
                 // If there is an existing error, then skip adding this resolver to the pipeline
-                if (!empty(array_filter(
-                    $schemaErrors,
-                    function ($schemaError) use ($fieldDirective) {
-                        return $schemaError[Tokens::PATH][0] == $fieldDirective;
-                    }
-                ))) {
+                if (
+                    !empty(array_filter(
+                        $schemaErrors,
+                        function ($schemaError) use ($fieldDirective) {
+                            return $schemaError[Tokens::PATH][0] == $fieldDirective;
+                        }
+                    ))
+                ) {
                     continue;
                 }
             } else {
@@ -832,10 +834,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         foreach ($directives as $directive) {
             $directiveName = $fieldQueryInterpreter->getDirectiveName($directive);
             // Add preceding mandatory directives
-            if ($mandatoryDirectivesForDirective = array_merge(
-                $precedingMandatoryDirectivesForDirectives[FieldSymbols::ANY_FIELD] ?? [],
-                $precedingMandatoryDirectivesForDirectives[$directiveName] ?? []
-            )) {
+            if (
+                $mandatoryDirectivesForDirective = array_merge(
+                    $precedingMandatoryDirectivesForDirectives[FieldSymbols::ANY_FIELD] ?? [],
+                    $precedingMandatoryDirectivesForDirectives[$directiveName] ?? []
+                )
+            ) {
                 $allDirectives = array_merge(
                     $allDirectives,
                     $this->addMandatoryDirectivesForDirectives($mandatoryDirectivesForDirective)
@@ -844,10 +848,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Add the directive
             $allDirectives[] = $directive;
             // Add succeeding mandatory directives
-            if ($mandatoryDirectivesForDirective = array_merge(
-                $succeedingMandatoryDirectivesForDirectives[FieldSymbols::ANY_FIELD] ?? [],
-                $succeedingMandatoryDirectivesForDirectives[$directiveName] ?? []
-            )) {
+            if (
+                $mandatoryDirectivesForDirective = array_merge(
+                    $succeedingMandatoryDirectivesForDirectives[FieldSymbols::ANY_FIELD] ?? [],
+                    $succeedingMandatoryDirectivesForDirectives[$directiveName] ?? []
+                )
+            ) {
                 $allDirectives = array_merge(
                     $allDirectives,
                     $this->addMandatoryDirectivesForDirectives($mandatoryDirectivesForDirective)
@@ -877,13 +883,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     /** @var DirectiveResolverInterface */
                     $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
                     // Execute 2 filters: a generic one, and a specific one
-                    if ($hooksAPI->applyFilters(
-                        HookHelpers::getHookNameToFilterDirective(),
-                        true,
-                        $this,
-                        $directiveResolver,
-                        $directiveName
-                    )) {
+                    if (
+                        $hooksAPI->applyFilters(
+                            HookHelpers::getHookNameToFilterDirective(),
+                            true,
+                            $this,
+                            $directiveResolver,
+                            $directiveName
+                        )
+                    ) {
                         return $hooksAPI->applyFilters(
                             HookHelpers::getHookNameToFilterDirective($directiveName),
                             true,
@@ -979,10 +987,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
                     // Add the mandatory directives defined for this field or for any field in this typeResolver
                     $fieldName = $fieldQueryInterpreter->getFieldName($field);
-                    if ($mandatoryDirectivesForField = array_merge(
-                        $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
-                        $mandatoryDirectivesForFields[$fieldName] ?? []
-                    )) {
+                    if (
+                        $mandatoryDirectivesForField = array_merge(
+                            $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
+                            $mandatoryDirectivesForFields[$fieldName] ?? []
+                        )
+                    ) {
                         // The mandatory directives must be placed first!
                         $directives = array_merge(
                             $mandatoryDirectivesForField,
@@ -1738,14 +1748,16 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         ));
         // Execute 2 filters: a generic one, and a specific one
         $hooksAPI = HooksAPIFacade::getInstance();
-        if ($hooksAPI->applyFilters(
-            HookHelpers::getHookNameToFilterField(),
-            true,
-            $this,
-            $fieldResolver,
-            $fieldInterfaceResolverClassesForField,
-            $fieldName
-        )) {
+        if (
+            $hooksAPI->applyFilters(
+                HookHelpers::getHookNameToFilterField(),
+                true,
+                $this,
+                $fieldResolver,
+                $fieldInterfaceResolverClassesForField,
+                $fieldName
+            )
+        ) {
             return $hooksAPI->applyFilters(
                 HookHelpers::getHookNameToFilterField($fieldName),
                 true,

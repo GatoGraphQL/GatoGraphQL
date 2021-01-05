@@ -145,10 +145,12 @@ class Plugin
                 \update_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
                 // Admin notice: Check if it is enabled
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                if (!$userSettingsManager->getSetting(
-                    PluginManagementFunctionalityModuleResolver::GENERAL,
-                    PluginManagementFunctionalityModuleResolver::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE
-                )) {
+                if (
+                    !$userSettingsManager->getSetting(
+                        PluginManagementFunctionalityModuleResolver::GENERAL,
+                        PluginManagementFunctionalityModuleResolver::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE
+                    )
+                ) {
                     return;
                 }
                 // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions

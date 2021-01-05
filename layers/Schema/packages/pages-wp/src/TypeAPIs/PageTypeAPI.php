@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\PagesWP\TypeAPIs;
 
 use WP_Post;
+
 use function get_post;
 use function get_option;
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;

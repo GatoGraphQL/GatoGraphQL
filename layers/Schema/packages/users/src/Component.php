@@ -73,7 +73,8 @@ class Component extends AbstractComponent
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
         ServiceConfiguration::initialize();
 
-        if (class_exists('\PoPSchema\CustomPosts\Component')
+        if (
+            class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
             \PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent::initialize(

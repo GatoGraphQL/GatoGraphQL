@@ -50,9 +50,9 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
-use \GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use \GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
-use \GraphQLByPoP\GraphQLQuery\Environment as GraphQLQueryEnvironment;
+use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use GraphQLByPoP\GraphQLQuery\Environment as GraphQLQueryEnvironment;
 
 /**
  * Sets the configuration in all the PoP components.
@@ -122,7 +122,8 @@ class PluginConfiguration
     protected static function maybeOverrideValueFromForm($value, string $module, string $option)
     {
         global $pagenow;
-        if ($pagenow == 'options.php'
+        if (
+            $pagenow == 'options.php'
             && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
             && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
         ) {

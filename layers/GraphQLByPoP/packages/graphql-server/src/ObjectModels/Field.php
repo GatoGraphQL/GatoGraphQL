@@ -10,7 +10,8 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasTypeSchemaDefinitionReferenceTrai
 
 class Field extends AbstractSchemaDefinitionReferenceObject
 {
-    use HasTypeSchemaDefinitionReferenceTrait, HasArgsSchemaDefinitionReferenceTrait;
+    use HasTypeSchemaDefinitionReferenceTrait;
+    use HasArgsSchemaDefinitionReferenceTrait;
 
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
     {

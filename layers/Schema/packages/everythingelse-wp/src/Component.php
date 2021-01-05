@@ -14,6 +14,7 @@ class Component extends AbstractComponent
 {
     public static $COMPONENT_DIR;
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**
@@ -55,7 +56,8 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::$COMPONENT_DIR = dirname(__DIR__);
 
-        if (class_exists('\PoPSchema\CustomPosts\Component')
+        if (
+            class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
             \PoPSchema\EverythingElseWP\Conditional\CustomPosts\ConditionalComponent::initialize(

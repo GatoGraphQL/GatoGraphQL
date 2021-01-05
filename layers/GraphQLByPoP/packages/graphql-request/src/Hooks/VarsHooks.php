@@ -92,7 +92,8 @@ class VarsHooks extends AbstractHookSet
         // Unless it is a persisted query for GraphQL, then deal with it here
         $graphQLPersistedQueryManager = GraphQLPersistedQueryManagerFacade::getInstance();
         $isGraphQLPersistedQuery = isset($_REQUEST[QueryInputs::QUERY]) && $graphQLPersistedQueryManager->isPersistedQuery($_REQUEST[QueryInputs::QUERY]);
-        if (!isset($_REQUEST[QueryInputs::QUERY])
+        if (
+            !isset($_REQUEST[QueryInputs::QUERY])
             || ComponentConfiguration::disableGraphQLAPIForPoP()
             || $isGraphQLPersistedQuery
         ) {

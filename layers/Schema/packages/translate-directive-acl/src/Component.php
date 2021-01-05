@@ -15,7 +15,9 @@ use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponen
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait, CanDisableComponentTrait;
+    use YAMLServicesTrait;
+    use CanDisableComponentTrait;
+
     // const VERSION = '0.1.0';
 
     /**

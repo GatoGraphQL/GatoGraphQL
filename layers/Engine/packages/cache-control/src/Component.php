@@ -17,7 +17,8 @@ use PoP\CacheControl\DirectiveResolvers\NestedFieldCacheControlDirectiveResolver
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait, CanDisableComponentTrait;
+    use YAMLServicesTrait;
+    use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';
 

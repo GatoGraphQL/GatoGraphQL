@@ -8,7 +8,7 @@ class MutationResolverUtils
 {
     public static function getLostPasswordCode($key, $user_login)
     {
-        return $key.'|'.rawurlencode($user_login);
+        return $key . '|' . rawurlencode($user_login);
     }
 
     public static function decodeLostPasswordCode($code)

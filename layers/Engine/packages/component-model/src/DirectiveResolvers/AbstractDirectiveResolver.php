@@ -240,11 +240,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     public function validateDirectiveArgumentsForSchema(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
-        if ($maybeDeprecation = $this->resolveSchemaDirectiveDeprecationDescription(
-            $typeResolver,
-            $directiveName,
-            $directiveArgs
-        )) {
+        if (
+            $maybeDeprecation = $this->resolveSchemaDirectiveDeprecationDescription(
+                $typeResolver,
+                $directiveName,
+                $directiveArgs
+            )
+        ) {
             $schemaDeprecations[] = [
                 Tokens::PATH => [$this->directive],
                 Tokens::MESSAGE => $maybeDeprecation,
@@ -330,7 +332,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
         /** Check if to validate the version */
-        if (Environment::enableSemanticVersionConstraints() &&
+        if (
+            Environment::enableSemanticVersionConstraints() &&
             $this->decideCanProcessBasedOnVersionConstraint($typeResolver)
         ) {
             /**
@@ -379,13 +382,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             /**
              * Validate mandatory values
              */
-            if ($maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
-                $typeResolver,
-                $directiveName,
-                $directiveArgs,
-                $schemaDirectiveArgs,
-                ResolverTypes::DIRECTIVE
-            )) {
+            if (
+                $maybeError = $this->maybeValidateNotMissingFieldOrDirectiveArguments(
+                    $typeResolver,
+                    $directiveName,
+                    $directiveArgs,
+                    $schemaDirectiveArgs,
+                    ResolverTypes::DIRECTIVE
+                )
+            ) {
                 return [$maybeError];
             }
 

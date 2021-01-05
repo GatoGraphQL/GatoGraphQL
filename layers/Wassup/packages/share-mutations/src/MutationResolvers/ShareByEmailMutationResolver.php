@@ -63,7 +63,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
                 $form_data['target-url'],
                 $form_data['target-title']
             )
-        ).($form_data['message'] ? sprintf(
+        ) . ($form_data['message'] ? sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Additional message', 'pop-genericforms'),
             $form_data['message']

@@ -547,11 +547,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$dbErrors
     ): array {
         // Only need to extract arguments if they have fields or arrays
-        if (FieldQueryUtils::isAnyFieldArgumentValueDynamic(
-            array_values(
-                $fieldOrDirectiveArgs
+        if (
+            FieldQueryUtils::isAnyFieldArgumentValueDynamic(
+                array_values(
+                    $fieldOrDirectiveArgs
+                )
             )
-        )) {
+        ) {
             $id = $typeResolver->getID($resultItem);
             foreach ($fieldOrDirectiveArgs as $directiveArgName => $directiveArgValue) {
                 $directiveArgValue = $this->maybeResolveFieldArgumentValueForResultItem($typeResolver, $resultItem, $directiveArgValue, $variables, $expressions);
@@ -604,7 +606,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // 1. $forSchema = true: Cast all items except fields (eg: hasComments()) or arrays with fields (eg: [hasComments()])
                 // 2. $forSchema = false: Should be cast only fields, however by now we can't tell which are fields and which are not, since fields have already been resolved to their value. Hence, cast everything (fieldArgValues that failed at the schema level will not be provided in the input array, so won't be validated twice)
                 // Otherwise, simply add the argValue directly, it will be eventually casted by the other function
-                if (!$forSchema
+                if (
+                    !$forSchema
                     || (
                         $forSchema && (
                             (!is_array($argValue) && !$this->isFieldArgumentValueDynamic($argValue))
@@ -813,9 +816,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function castAndValidateDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
-        if ($failedCastingDirectiveArgs = array_filter($castedDirectiveArgs, function ($directiveArgValue) {
-            return is_null($directiveArgValue);
-        })) {
+        if (
+            $failedCastingDirectiveArgs = array_filter($castedDirectiveArgs, function ($directiveArgValue) {
+                return is_null($directiveArgValue);
+            })
+        ) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
             $directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
             foreach (array_keys($failedCastingDirectiveArgs) as $failedCastingDirectiveArgName) {
@@ -851,9 +856,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function castAndValidateFieldArguments(TypeResolverInterface $typeResolver, array $castedFieldArgs, array &$failedCastingFieldArgErrorMessages, string $field, array $fieldArgs, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
-        if ($failedCastingFieldArgs = array_filter($castedFieldArgs, function ($fieldArgValue) {
-            return is_null($fieldArgValue);
-        })) {
+        if (
+            $failedCastingFieldArgs = array_filter($castedFieldArgs, function ($fieldArgValue) {
+                return is_null($fieldArgValue);
+            })
+        ) {
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);

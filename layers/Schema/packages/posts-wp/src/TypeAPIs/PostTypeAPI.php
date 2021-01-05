@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostsWP\TypeAPIs;
 
 use WP_Post;
+
 use function get_post;
 
 use PoP\Hooks\Facades\HooksAPIFacade;

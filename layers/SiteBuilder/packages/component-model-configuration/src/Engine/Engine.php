@@ -101,11 +101,12 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
             }
         } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
-            if ($combined_settings = array_merge_recursive(
-                $immutable_settings ?? array(),
-                $mutableonmodel_settings ?? array(),
-                $mutableonrequest_settings ?? array()
-            )
+            if (
+                $combined_settings = array_merge_recursive(
+                    $immutable_settings ?? array(),
+                    $mutableonmodel_settings ?? array(),
+                    $mutableonrequest_settings ?? array()
+                )
             ) {
                 $ret['modulesettings'] = $has_extra_routes ? array($current_uri => $combined_settings) : $combined_settings;
             }

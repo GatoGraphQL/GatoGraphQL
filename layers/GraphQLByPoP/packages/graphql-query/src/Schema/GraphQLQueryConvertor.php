@@ -151,7 +151,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         /**
          * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
          */
-        if ($value instanceof VariableReference &&
+        if (
+            $value instanceof VariableReference &&
             ComponentConfiguration::enableVariablesAsExpressions() &&
             $this->treatVariableAsExpression($value->getName())
         ) {

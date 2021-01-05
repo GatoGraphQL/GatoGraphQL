@@ -104,17 +104,18 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
             // The rule to apply is contained inside the nested blocks
             if ($aclBlockItemNestedBlocks = $aclBlockItem['innerBlocks']) {
                 // Filter out the rules not enabled by module
-                if ($aclBlockItemNestedBlocks = array_filter(
-                    $aclBlockItemNestedBlocks,
-                    function ($block) use ($moduleRegistry) {
-                        // If it has a corresponding module, check if it is enabled
-                        if ($module = $this->getACLRuleBlockModule($block['blockName'])) {
-                            return $moduleRegistry->isModuleEnabled($module);
+                if (
+                    $aclBlockItemNestedBlocks = array_filter(
+                        $aclBlockItemNestedBlocks,
+                        function ($block) use ($moduleRegistry) {
+                            // If it has a corresponding module, check if it is enabled
+                            if ($module = $this->getACLRuleBlockModule($block['blockName'])) {
+                                return $moduleRegistry->isModuleEnabled($module);
+                            }
+                            // Otherwise it's always enabled
+                            return true;
                         }
-                        // Otherwise it's always enabled
-                        return true;
-                    }
-                )
+                    )
                 ) {
                     $aclBlockItemTypeFields = $aclBlockItem['attrs'][AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
                     $aclBlockItemDirectives = $aclBlockItem['attrs'][AbstractControlBlock::ATTRIBUTE_NAME_DIRECTIVES] ?? [];
@@ -131,18 +132,20 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                             $value = $aclBlockItemNestedBlock['attrs'][AbstractAccessControlRuleBlock::ATTRIBUTE_NAME_VALUE] ?? null;
 
                             // Extract the saved fields
-                            if ($entriesForFields = GeneralUtils::arrayFlatten(
-                                array_map(
-                                    function ($selectedField) use ($value, $schemaMode) {
-                                        return $this->getIndividualControlEntriesFromField(
-                                            $selectedField,
-                                            $value,
-                                            $schemaMode
-                                        );
-                                    },
-                                    $aclBlockItemTypeFields
+                            if (
+                                $entriesForFields = GeneralUtils::arrayFlatten(
+                                    array_map(
+                                        function ($selectedField) use ($value, $schemaMode) {
+                                            return $this->getIndividualControlEntriesFromField(
+                                                $selectedField,
+                                                $value,
+                                                $schemaMode
+                                            );
+                                        },
+                                        $aclBlockItemTypeFields
+                                    )
                                 )
-                            )) {
+                            ) {
                                 $accessControlManager->addEntriesForFields(
                                     $accessControlGroup,
                                     $entriesForFields
@@ -150,18 +153,19 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                             }
 
                             // Extract the saved directives
-                            if ($entriesForDirectives = GeneralUtils::arrayFlatten(array_filter(
-                                array_map(
-                                    function ($selectedDirective) use ($value, $schemaMode) {
-                                        return $this->getIndividualControlEntriesFromDirective(
-                                            $selectedDirective,
-                                            $value,
-                                            $schemaMode
-                                        );
-                                    },
-                                    $aclBlockItemDirectives
-                                )
-                            ))
+                            if (
+                                $entriesForDirectives = GeneralUtils::arrayFlatten(array_filter(
+                                    array_map(
+                                        function ($selectedDirective) use ($value, $schemaMode) {
+                                            return $this->getIndividualControlEntriesFromDirective(
+                                                $selectedDirective,
+                                                $value,
+                                                $schemaMode
+                                            );
+                                        },
+                                        $aclBlockItemDirectives
+                                    )
+                                ))
                             ) {
                                 $accessControlManager->addEntriesForDirectives(
                                     $accessControlGroup,

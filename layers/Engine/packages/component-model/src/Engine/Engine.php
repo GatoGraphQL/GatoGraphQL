@@ -327,7 +327,8 @@ class Engine implements EngineInterface
         // calculating $loadingframe_resources needs to know all the Handlebars templates from the sitemapping as to generate file "resources.js",
         // which is done through an action, called through getData()
         // Data = dbobjectids (data-ids) + feedback + database
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
+        if (
+            in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
             || in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)
         ) {
             $data = array_merge(
@@ -345,7 +346,8 @@ class Engine implements EngineInterface
 
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
+        if (
+            in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
         ) {
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
@@ -395,7 +397,8 @@ class Engine implements EngineInterface
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
         $dataoutputitems = $vars['dataoutputitems'];
 
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
+        if (
+            in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
         ) {
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
@@ -916,13 +919,14 @@ class Engine implements EngineInterface
                 $model_props = &$model_props[$submoduleFullName][POP_PROPS_SUBMODULES];
             }
 
-            if (in_array(
-                $datasource,
-                array(
+            if (
+                in_array(
+                    $datasource,
+                    array(
                     POP_DATALOAD_DATASOURCE_IMMUTABLE,
                     POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                    )
                 )
-            )
             ) {
                 $module_props = &$model_props;
             } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
@@ -1085,13 +1089,14 @@ class Engine implements EngineInterface
                         $referencer_model_props = &$referencer_model_props[$submoduleFullName][POP_PROPS_SUBMODULES];
                     }
 
-                    if (in_array(
-                        $datasource,
-                        array(
+                    if (
+                        in_array(
+                            $datasource,
+                            array(
                             POP_DATALOAD_DATASOURCE_IMMUTABLE,
                             POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                            )
                         )
-                    )
                     ) {
                         $referencer_module_props = &$referencer_model_props;
                     } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
@@ -1165,28 +1170,31 @@ class Engine implements EngineInterface
                 }
             } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
                 // If everything is combined, then it belongs under "mutableonrequest"
-                if ($combined_moduledata = array_merge_recursive(
-                    $immutable_moduledata ?? array(),
-                    $mutableonmodel_moduledata ?? array(),
-                    $mutableonrequest_moduledata ?? array()
-                )
+                if (
+                    $combined_moduledata = array_merge_recursive(
+                        $immutable_moduledata ?? array(),
+                        $mutableonmodel_moduledata ?? array(),
+                        $mutableonrequest_moduledata ?? array()
+                    )
                 ) {
                     $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_moduledata) : $combined_moduledata;
                 }
-                if ($combined_datasetmoduledata = array_merge_recursive(
-                    $immutable_datasetmoduledata ?? array(),
-                    $mutableonmodel_datasetmoduledata ?? array(),
-                    $mutableonrequest_datasetmoduledata ?? array()
-                )
+                if (
+                    $combined_datasetmoduledata = array_merge_recursive(
+                        $immutable_datasetmoduledata ?? array(),
+                        $mutableonmodel_datasetmoduledata ?? array(),
+                        $mutableonrequest_datasetmoduledata ?? array()
+                    )
                 ) {
                     $ret['datasetmoduledata'] = $has_extra_routes ? array($current_uri => $combined_datasetmoduledata) : $combined_datasetmoduledata;
                 }
                 if ($add_meta) {
-                    if ($combined_datasetmodulemeta = array_merge_recursive(
-                        $immutable_datasetmodulemeta ?? array(),
-                        $mutableonmodel_datasetmodulemeta ?? array(),
-                        $mutableonrequest_datasetmodulemeta ?? array()
-                    )
+                    if (
+                        $combined_datasetmodulemeta = array_merge_recursive(
+                            $immutable_datasetmodulemeta ?? array(),
+                            $mutableonmodel_datasetmodulemeta ?? array(),
+                            $mutableonrequest_datasetmodulemeta ?? array()
+                        )
                     ) {
                         $ret['datasetmodulemeta'] = $has_extra_routes ? array($current_uri => $combined_datasetmodulemeta) : $combined_datasetmodulemeta;
                     }

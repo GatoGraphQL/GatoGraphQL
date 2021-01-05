@@ -38,7 +38,8 @@ class ComponentBoot
          * Fields will be available or not depending on the user being logged in or not
          * Then, the CacheControl for field "__schema" must be set to "no-cache"
          */
-        if (AccessControlComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode() ||
+        if (
+            AccessControlComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode() ||
             AccessControlComponentConfiguration::usePrivateSchemaMode()
         ) {
             SchemaNoCacheCacheControlDirectiveResolver::attach(AttachableExtensionGroups::DIRECTIVERESOLVERS);

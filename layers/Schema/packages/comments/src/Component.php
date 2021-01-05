@@ -67,7 +67,8 @@ class Component extends AbstractComponent
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-        if (class_exists('\PoP\RESTAPI\Component')
+        if (
+            class_exists('\PoP\RESTAPI\Component')
             && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
         ) {
             \PoPSchema\Comments\Conditional\RESTAPI\ConditionalComponent::initialize(
@@ -76,7 +77,8 @@ class Component extends AbstractComponent
             );
         }
 
-        if (class_exists('\PoPSchema\Users\Component')
+        if (
+            class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
             \PoPSchema\Comments\Conditional\Users\ConditionalComponent::initialize(

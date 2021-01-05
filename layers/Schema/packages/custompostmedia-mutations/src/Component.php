@@ -16,6 +16,7 @@ class Component extends AbstractComponent
     public static $COMPONENT_DIR;
 
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**

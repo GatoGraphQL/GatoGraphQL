@@ -7,8 +7,10 @@ namespace PoPSchema\EventsWPEM\TypeAPIs;
 use WP_Post;
 use EM_Event;
 use EM_Events;
+
 use function date_i18n;
 use function em_get_event;
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\Events\TypeAPIs\EventTypeAPIInterface;

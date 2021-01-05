@@ -8,7 +8,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use PoP\ComponentModel\ErrorHandling\Error;
 use GuzzleHttp\RequestOptions;
-
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use PoP\Translation\Facades\TranslationAPIFacade;

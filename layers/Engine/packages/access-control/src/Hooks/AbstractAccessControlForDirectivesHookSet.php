@@ -18,12 +18,14 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
             return;
         }
         // If no directiveNames defined, apply to all of them
-        if ($directiveNames = array_map(
-            function ($directiveResolverClass) {
-                return $directiveResolverClass::getDirectiveName();
-            },
-            $this->getDirectiveResolverClasses()
-        )) {
+        if (
+            $directiveNames = array_map(
+                function ($directiveResolverClass) {
+                    return $directiveResolverClass::getDirectiveName();
+                },
+                $this->getDirectiveResolverClasses()
+            )
+        ) {
             foreach ($directiveNames as $directiveName) {
                 $this->hooksAPI->addFilter(
                     HookHelpers::getHookNameToFilterDirective($directiveName),

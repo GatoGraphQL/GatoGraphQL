@@ -15,7 +15,8 @@ use PoP\ComponentModel\Container\ContainerBuilderUtils;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait, CanDisableComponentTrait;
+    use YAMLServicesTrait;
+    use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;
 

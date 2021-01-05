@@ -161,7 +161,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return null;
         }
         // If there is only one of them, it's a query error, so discard the query bit
-        if ((
+        if (
+            (
                 $fieldArgsClosingSymbolPos === false
                 && $fieldArgsOpeningSymbolPos !== false
             )
@@ -461,7 +462,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return null;
         }
         // If there is only one of them, it's a query error, so discard the query bit
-        if ((
+        if (
+            (
                 $fieldDirectivesClosingSymbolPos === false
                 && $fieldDirectivesOpeningSymbolPos !== false
             ) || (

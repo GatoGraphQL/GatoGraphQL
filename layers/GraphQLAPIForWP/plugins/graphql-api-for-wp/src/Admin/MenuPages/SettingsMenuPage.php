@@ -16,7 +16,8 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
  */
 class SettingsMenuPage extends AbstractMenuPage
 {
-    use GraphQLAPIMenuPageTrait, UseTabpanelMenuPageTrait;
+    use GraphQLAPIMenuPageTrait;
+    use UseTabpanelMenuPageTrait;
 
     public const FORM_ORIGIN = 'form-origin';
     public const SETTINGS_FIELD = 'graphql-api-settings';
@@ -157,7 +158,8 @@ class SettingsMenuPage extends AbstractMenuPage
                  * Ignore for bool since empty means `false` (tackled below)
                  * For int, "0" is valid, it must not be considered empty
                  */
-                if (empty($value[$name])
+                if (
+                    empty($value[$name])
                     && $type != Properties::TYPE_BOOL
                     && !($type == Properties::TYPE_INT && $value[$name] == '0')
                 ) {
@@ -371,7 +373,7 @@ class SettingsMenuPage extends AbstractMenuPage
         }
         ?>
             <label for="<?php echo $name; ?>">
-                <input name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber .'"' : '')) : 'type="text"' ?>/>
+                <input name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
                 <?php echo $label; ?>
             </label>
         <?php

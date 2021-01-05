@@ -35,7 +35,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
             throw new Exception(
                 sprintf(
                     'No form inputs defined for: %s',
-                    '"'.implode('", "', array_keys($null_inputs)).'"'
+                    '"' . implode('", "', array_keys($null_inputs)) . '"'
                 )
             );
         }

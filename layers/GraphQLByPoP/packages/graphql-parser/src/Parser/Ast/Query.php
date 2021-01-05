@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Date: 23.11.15
  *
@@ -13,7 +14,6 @@ use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 class Query extends AbstractAst implements FieldInterface
 {
-
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 

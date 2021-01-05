@@ -85,7 +85,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         $msg = sprintf(
             '<p>%s</p>',
             TranslationAPIFacade::getInstance()->__('User unsubscribed from newsletter', 'pop-genericforms')
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Email', 'pop-genericforms'),
             $newsletter_data['email']

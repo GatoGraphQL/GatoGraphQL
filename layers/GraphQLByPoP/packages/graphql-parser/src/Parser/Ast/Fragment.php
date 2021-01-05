@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Date: 23.11.15
  *
@@ -11,7 +12,6 @@ use GraphQLByPoP\GraphQLParser\Parser\Location;
 
 class Fragment extends AbstractAst
 {
-
     use AstDirectivesTrait;
 
     protected $name;

@@ -107,10 +107,12 @@ class ModelInstance implements ModelInstanceInterface
         }
 
         // Can the configuration change when doing a POST or GET?
-        if ($this->hooksAPI->applyFilters(
-            self::HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE,
-            false
-        )) {
+        if (
+            $this->hooksAPI->applyFilters(
+                self::HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE,
+                false
+            )
+        ) {
             $components[] = $this->translationAPI->__('operation:', 'component-model') . (doingPost() ? 'post' : 'get');
         }
         if ($mangled = $vars['mangled'] ?? null) {

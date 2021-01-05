@@ -52,20 +52,24 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
                 break;
         }
         // Fields "customPosts" and "customPostCount" also have the "postTypes" filter
-        if (in_array($module[1], [
+        if (
+            in_array($module[1], [
             self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST,
             self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
-        ])) {
+            ])
+        ) {
             $inputmodules[] = [
                 \PoP_CustomPosts_Module_Processor_FilterInputs::class,
                 \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES
             ];
         }
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'CustomPosts:FilterInners:inputmodules',
-            $inputmodules,
-            $module
-        )) {
+        if (
+            $modules = HooksAPIFacade::getInstance()->applyFilters(
+                'CustomPosts:FilterInners:inputmodules',
+                $inputmodules,
+                $module
+            )
+        ) {
             $ret = array_merge(
                 $ret,
                 $modules

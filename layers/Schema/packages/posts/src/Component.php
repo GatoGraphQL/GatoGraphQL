@@ -19,6 +19,7 @@ class Component extends AbstractComponent
     public static $COMPONENT_DIR;
 
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**
@@ -73,7 +74,8 @@ class Component extends AbstractComponent
         self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-        if (class_exists('\PoPSchema\Users\Component')
+        if (
+            class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
             \PoPSchema\Posts\Conditional\Users\ConditionalComponent::initialize(
@@ -112,7 +114,8 @@ class Component extends AbstractComponent
      */
     protected static function attachTypeResolverPickers()
     {
-        if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()
+        if (
+            ComponentConfiguration::addPostTypeToCustomPostUnionTypes()
             // If $skipSchema is `true`, then services are not registered
             && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
         ) {

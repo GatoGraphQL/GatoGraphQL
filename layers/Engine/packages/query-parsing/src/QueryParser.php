@@ -121,7 +121,8 @@ class QueryParser implements QueryParserInterface
                         $restStr = substr($query, $charPos + 1);
                         $restStrEndBracketPos = strpos($restStr, (string) $skipUntilChars[0]);
                         $restStrSeparatorPos = strpos($restStr, $separator);
-                        if ($restStrEndBracketPos === false
+                        if (
+                            $restStrEndBracketPos === false
                             || (
                                 $restStrSeparatorPos !== false
                                 && $restStrEndBracketPos !== false

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\HighlightsWP\TypeAPIs;
 
 use function get_post;
+
 use WP_Post;
 use PoPSchema\Highlights\TypeAPIs\HighlightTypeAPIInterface;
 

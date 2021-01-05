@@ -42,14 +42,14 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
         $msg = sprintf(
             '<p>%s</p>',
             TranslationAPIFacade::getInstance()->__('User subscribed to newsletter', 'pop-genericforms')
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Name', 'pop-genericforms'),
             $form_data['name']

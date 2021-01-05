@@ -11,7 +11,9 @@ use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AbstractMenuPage;
  */
 abstract class AbstractDocsMenuPage extends AbstractMenuPage
 {
-    use GraphQLAPIMenuPageTrait, OpenInModalMenuPageTrait, UseTabpanelMenuPageTrait;
+    use GraphQLAPIMenuPageTrait;
+    use OpenInModalMenuPageTrait;
+    use UseTabpanelMenuPageTrait;
 
     public function print(): void
     {

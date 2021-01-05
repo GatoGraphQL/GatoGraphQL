@@ -80,7 +80,7 @@ abstract class AbstractPlugin
                 // Add to the registry the ModuleResolvers from this plugin
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
                 foreach ($this->getModuleResolverClasses() as $moduleResolverClass) {
-                    $moduleRegistry->addModuleResolver(new $moduleResolverClass);
+                    $moduleRegistry->addModuleResolver(new $moduleResolverClass());
                 }
                 // Execute the plugin's custom setup, if any
                 $this->doSetup();

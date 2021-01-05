@@ -6,7 +6,7 @@ namespace PoP\EngineWP\ErrorHandling;
 
 use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\ComponentModel\ErrorHandling\Error;
-use \WP_Error;
+use WP_Error;
 
 class ErrorManager extends AbstractErrorManager
 {

@@ -67,7 +67,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         $msg = sprintf(
             '<p>%s</p>',
             TranslationAPIFacade::getInstance()->__('You have a new volunteer! Please contact the volunteer directly through the contact details below.', 'pop-genericforms')
-        ).sprintf(
+        ) . sprintf(
             '<p>%s</p>',
             sprintf(
                 TranslationAPIFacade::getInstance()->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
@@ -75,18 +75,18 @@ class VolunteerMutationResolver extends AbstractMutationResolver
                 $customPostTypeAPI->getPermalink($form_data['target-id']),
                 $post_title
             )
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Phone', 'pop-genericforms'),
             $form_data['phone']
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Why volunteer', 'pop-genericforms'),
             $form_data['whyvolunteer']

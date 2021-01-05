@@ -16,6 +16,7 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
 class Component extends AbstractComponent
 {
     use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**

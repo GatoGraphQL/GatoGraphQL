@@ -66,22 +66,22 @@ class ContactUserMutationResolver extends AbstractMutationResolver
                 TranslationAPIFacade::getInstance()->__('You have been sent a message from a user in %s', 'pop-genericforms'),
                 $websitename
             )
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Name', 'pop-genericforms'),
             $form_data['name']
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Subject', 'pop-genericforms'),
             $form_data['subject']
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Message', 'pop-genericforms'),
             $form_data['message']
