@@ -52,7 +52,7 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 ## License
 
-- WordPress plugin: GPLv2
+- WordPress plugin: GPLv2 or later
 - Everything else: MIT
 
 [link-author]: https://github.com/leoloso
