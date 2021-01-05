@@ -43,7 +43,7 @@ Requirements:
 
 ### Supported PHP features
 
-Same as the [Supported PHP features for `getpop/root`](https://github.com/getpop/root/#supported-php-features)
+Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/#supported-php-features)
 
 ### Downgrading code to PHP 7.1
 

@@ -25,5 +25,9 @@ class TranslationAPITest extends \PHPUnit\Framework\TestCase
     public function testTranslate(): void
     {
         $translationapi = TranslationAPIFacade::getInstance();
+        $this->assertEquals(
+            'There is no translation for this yet, sorry!',
+            $translationapi->__('There is no translation for this yet, sorry!')
+        );
     }
 }

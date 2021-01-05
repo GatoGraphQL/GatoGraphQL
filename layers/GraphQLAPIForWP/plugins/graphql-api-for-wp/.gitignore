@@ -5,3 +5,4 @@ bin/
 # Root folder build/ is ignored, but not blocks/**/build/
 /build/
 /wordpress/
+.lando.local.yml

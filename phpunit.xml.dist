@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    verbose="true"
+>
+    <testsuite name="all">
+        <directory>layers/**/packages/**/tests</directory>
+        <directory>layers/**/plugins/**/tests</directory>
+    </testsuite>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">layers/**/packages/*/src</directory>
+            <directory suffix=".php">layers/**/plugins/*/src</directory>
+        </whitelist>
+    </filter>
+</phpunit>

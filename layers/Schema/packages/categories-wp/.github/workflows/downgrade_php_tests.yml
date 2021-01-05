@@ -1,0 +1,47 @@
+name: Downgrade PHP tests
+on:
+    push:
+        branches:
+            - master
+    pull_request: null
+
+jobs:
+  main:
+    name: Downgrade code to PHP 7.1 via Rector, and execute tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+        # see https://github.com/shivammathur/setup-php
+      - name: Set-up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --ansi
+
+      - name: Downgrade PHP code via Rector
+        run: vendor/bin/rector process --config=rector-downgrade-code.php
+
+      # dumpautoload will remove vendor/composer/platform_check.php, otherwise executing phpstan on 7.1 fails
+      - name: Avoid Composer v2 platform checks
+        run: |
+            composer config platform-check false
+            composer dumpautoload
+
+      - name: Switch to PHP 7.1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.1
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run static analysis via PHPStan on PHP 7.1
+        run: vendor/bin/phpstan analyse src/ --level 0
+

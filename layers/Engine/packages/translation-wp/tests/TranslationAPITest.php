@@ -1,10 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PoP\TranslationWP;
 
+use PHPUnit\Framework\TestCase;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class TranslationAPITestCase extends \PHPUnit\Framework\TestCase
+class TranslationAPITest extends TestCase
 {
     /**
      * Test that applyFilter returns $value

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\TranslationWP;
 
 use PHPUnit\Framework\TestCase;
