@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-use function count;
-use function strlen;
-use function substr;
-
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
@@ -19,6 +15,10 @@ use PoP\Translation\TranslationAPIInterface;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+
+use function count;
+use function strlen;
+use function substr;
 
 class FieldQueryConvertor implements FieldQueryConvertorInterface
 {

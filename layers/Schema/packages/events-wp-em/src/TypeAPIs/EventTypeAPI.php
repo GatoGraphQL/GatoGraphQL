@@ -7,16 +7,15 @@ namespace PoPSchema\EventsWPEM\TypeAPIs;
 use WP_Post;
 use EM_Event;
 use EM_Events;
-
-use function date_i18n;
-use function em_get_event;
-
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\Events\TypeAPIs\EventTypeAPIInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+
+use function date_i18n;
+use function em_get_event;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

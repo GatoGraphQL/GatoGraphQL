@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-
-use function apply_filters;
-use function get_post_status;
-
 use PoPSchema\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\ComponentConfiguration;
@@ -18,6 +14,9 @@ use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+
+use function apply_filters;
+use function get_post_status;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
