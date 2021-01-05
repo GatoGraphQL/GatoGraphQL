@@ -1,0 +1,12 @@
+services:
+    Leoloso\ExamplesForPoP\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
+
+    Leoloso\ExamplesForPoP\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+        public: true
+
+    Leoloso\ExamplesForPoP\TypeResolverDecorators\:
+        resource: '../src/TypeResolverDecorators/*'
+        public: true
