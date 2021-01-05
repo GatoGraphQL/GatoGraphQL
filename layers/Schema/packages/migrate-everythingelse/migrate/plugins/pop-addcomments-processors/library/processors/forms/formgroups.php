@@ -3,7 +3,7 @@
 class PoP_Module_Processor_CommentFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
     public const MODULE_FORMINPUTGROUP_COMMENTEDITOR = 'forminputgroupcommenteditor';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -17,10 +17,10 @@ class PoP_Module_Processor_CommentFormGroups extends PoP_Module_Processor_FormCo
             self::MODULE_FORMINPUTGROUP_COMMENTEDITOR => [PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::MODULE_FORMINPUT_COMMENTEDITOR],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 }

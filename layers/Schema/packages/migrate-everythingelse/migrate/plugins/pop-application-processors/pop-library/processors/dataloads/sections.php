@@ -40,7 +40,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
             self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     // // Single Authors has no filter, because the authors are provided using 'include' which can't be filtered

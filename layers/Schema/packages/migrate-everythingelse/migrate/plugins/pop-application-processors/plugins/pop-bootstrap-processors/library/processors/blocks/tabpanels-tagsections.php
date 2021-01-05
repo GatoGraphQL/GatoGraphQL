@@ -25,7 +25,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_TABPANEL_TAGPOSTS => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGPOSTS],
             self::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS => [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSUBSCRIBERS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -48,7 +48,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
             case self::MODULE_BLOCK_TABPANEL_TAGCONTENT:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest content', 'poptheme-wassup');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -70,11 +70,11 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
 
             case self::MODULE_BLOCK_TABPANEL_TAGPOSTS:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGPOSTS];
-        
+
             case self::MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

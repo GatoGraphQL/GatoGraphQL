@@ -76,27 +76,27 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_NAVIGATOR],
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_NAVIGATOR],
-            
+
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_ADDONS],
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_ADDONS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_ADDONS],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Home/Page blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS => [GD_URE_Module_Processor_CustomScrolls::class, GD_URE_Module_Processor_CustomScrolls::MODULE_SCROLL_ORGANIZATIONS_DETAILS],
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_DETAILS => [GD_URE_Module_Processor_CustomScrolls::class, GD_URE_Module_Processor_CustomScrolls::MODULE_SCROLL_INDIVIDUALS_DETAILS],
-            
+
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW => [GD_URE_Module_Processor_CustomScrolls::class, GD_URE_Module_Processor_CustomScrolls::MODULE_SCROLL_ORGANIZATIONS_FULLVIEW],
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW => [GD_URE_Module_Processor_CustomScrolls::class, GD_URE_Module_Processor_CustomScrolls::MODULE_SCROLL_INDIVIDUALS_FULLVIEW],
-            
+
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_THUMBNAIL],
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_THUMBNAIL],
-            
+
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_LIST],
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USER_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -116,7 +116,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_LIST:
                 return [PoP_CommonUserRoles_Module_Processor_CustomFilters::class, PoP_CommonUserRoles_Module_Processor_CustomFilters::MODULE_FILTER_ORGANIZATIONS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 

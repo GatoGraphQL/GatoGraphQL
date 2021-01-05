@@ -195,7 +195,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
             self::MODULE_SCROLLINNER_AUTHORPOSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_AUTHORLAYOUT_FULLVIEW_POST],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

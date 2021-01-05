@@ -16,7 +16,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         $buttoninners = array(
             self::MODULE_BUTTON_LOCATIONPOST_CREATE => [PoP_LocationPostsCreation_Module_Processor_ButtonInners::class, PoP_LocationPostsCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_LOCATIONPOST_CREATE],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -53,10 +53,10 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         $titles = array(
             self::MODULE_BUTTON_LOCATIONPOST_CREATE => PoP_LocationPosts_PostNameUtils::getNameUc(),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -65,10 +65,10 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         $fields = array(
             self::MODULE_BUTTON_LOCATIONPOST_CREATE => 'addLocationPostURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

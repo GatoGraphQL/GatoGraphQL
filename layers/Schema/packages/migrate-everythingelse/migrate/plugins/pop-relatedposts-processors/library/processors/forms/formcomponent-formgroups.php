@@ -46,10 +46,10 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
             self::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -65,7 +65,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
                 $this->setProp($component, $props, 'placeholder', $placeholder);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -75,7 +75,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
             case self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Please select all related content, so the reader can easily access this inter-related information.', 'pop-coreprocessors');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 }

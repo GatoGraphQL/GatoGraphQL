@@ -61,10 +61,10 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
             self::MODULE_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_USER => [GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -74,7 +74,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
             case self::MODULE_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return TranslationAPIFacade::getInstance()->__('Please select the communities you are a member of: all your content will also show under their profiles.', 'ure-popprocessors');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 
@@ -86,7 +86,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
                 $this->setProp([GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::class, GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES], $props, 'placeholder', $placeholder);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

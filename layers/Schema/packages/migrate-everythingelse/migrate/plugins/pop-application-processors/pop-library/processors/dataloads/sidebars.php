@@ -36,7 +36,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
                 [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
         );
 
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
 

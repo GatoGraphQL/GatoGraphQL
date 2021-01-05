@@ -199,7 +199,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
             self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

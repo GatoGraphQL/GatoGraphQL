@@ -19,7 +19,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_LINK_ACCESS:
                 $ret[] = [PoP_ContentPostLinks_Module_Processor_Layouts::class, PoP_ContentPostLinks_Module_Processor_Layouts::MODULE_LAYOUT_LINK_ACCESS];
@@ -49,7 +49,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::MODULE_WIDGETCOMPACT_LINKINFO => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -59,7 +59,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::MODULE_WIDGETCOMPACT_LINKINFO => 'fa-link',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
 
     public function getBodyClass(array $module, array &$props)

@@ -22,7 +22,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageInners extends Po
             self::MODULE_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP => [GD_UserCommunities_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageAlertLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_PROFILECOMMUNITYEDITMEMBERSHIP],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

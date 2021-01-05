@@ -51,7 +51,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
         $actionexecuters = array(
             self::MODULE_DATALOAD_FLAG => FlagCustomPostMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$module[1]]) {
+        if ($actionexecuter = $actionexecuters[$module[1]] ?? null) {
             return $actionexecuter;
         }
 

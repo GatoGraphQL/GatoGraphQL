@@ -45,7 +45,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
             self::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getTitle(array $module, array &$props)
@@ -63,7 +63,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
             case self::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleTitle();
         }
-        
+
         return parent::getTitle($module, $props);
     }
 

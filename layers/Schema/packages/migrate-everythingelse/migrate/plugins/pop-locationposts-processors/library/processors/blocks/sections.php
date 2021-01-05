@@ -91,7 +91,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

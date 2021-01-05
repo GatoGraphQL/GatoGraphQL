@@ -31,19 +31,19 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
     {
         $inner_modules = array(
 
-            /*********************************************
+        /*********************************************
          * My Content Tables
          *********************************************/
             self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT => [PoP_ContentPostLinksCreation_Module_Processor_Tables::class, PoP_ContentPostLinksCreation_Module_Processor_Tables::MODULE_TABLE_MYLINKS],
 
-            /*********************************************
+        /*********************************************
          * My Content Full Post Previews
          *********************************************/
             self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYLINKS_SIMPLEVIEWPREVIEW],
             self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYLINKS_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

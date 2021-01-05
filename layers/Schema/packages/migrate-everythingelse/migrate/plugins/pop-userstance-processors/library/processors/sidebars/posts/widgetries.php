@@ -14,7 +14,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGETCOMPACT_STANCEINFO:
                 $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_WIDGETPUBLISHED];
@@ -30,7 +30,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
             self::MODULE_WIDGETCOMPACT_STANCEINFO => PoP_UserStance_PostNameUtils::getNameUc(),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -38,7 +38,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
             self::MODULE_WIDGETCOMPACT_STANCEINFO => 'fa-commenting-o',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
 
     public function getBodyClass(array $module, array &$props)

@@ -17,7 +17,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
         $buttoninners = array(
             self::MODULE_BUTTON_EVENT_CREATE => [GD_Custom_EM_Module_Processor_ButtonInners::class, GD_Custom_EM_Module_Processor_ButtonInners::MODULE_BUTTONINNER_EVENT_CREATE],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -54,10 +54,10 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
         $titles = array(
             self::MODULE_BUTTON_EVENT_CREATE => TranslationAPIFacade::getInstance()->__('Event', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -66,10 +66,10 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
         $fields = array(
             self::MODULE_BUTTON_EVENT_CREATE => 'addEventURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

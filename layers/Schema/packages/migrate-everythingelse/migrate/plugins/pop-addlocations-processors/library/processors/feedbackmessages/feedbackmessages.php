@@ -17,7 +17,7 @@ class PoP_Module_Processor_CreateLocationFeedbackMessages extends PoP_Module_Pro
             self::MODULE_FEEDBACKMESSAGE_CREATELOCATION => [PoP_Module_Processor_CreateLocationFeedbackMessageInners::class, PoP_Module_Processor_CreateLocationFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_CREATELOCATION],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

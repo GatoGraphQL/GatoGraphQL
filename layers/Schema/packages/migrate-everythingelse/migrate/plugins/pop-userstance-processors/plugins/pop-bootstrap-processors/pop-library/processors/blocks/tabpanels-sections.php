@@ -48,10 +48,10 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
             self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_NEUTRAL_ARTICLE],
             self::MODULE_BLOCK_TABPANEL_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYSTANCES],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -69,7 +69,7 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
             case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE:
             case self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
-            
+
             case self::MODULE_BLOCK_TABPANEL_MYSTANCES:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST];
         }
@@ -99,7 +99,7 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
             case self::MODULE_BLOCK_TABPANEL_MYSTANCES:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_MYSTANCES];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

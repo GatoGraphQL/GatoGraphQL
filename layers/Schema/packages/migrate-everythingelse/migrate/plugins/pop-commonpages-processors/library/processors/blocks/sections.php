@@ -38,7 +38,7 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
             self::MODULE_BLOCK_WHOWEARE_SCROLL_FULLVIEW => [GD_Custom_Module_Processor_CustomSectionDataloads::class, GD_Custom_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getTitle(array $module, array &$props)

@@ -27,7 +27,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_POST_AUTHORS:
             case self::MODULE_WIDGETCOMPACT_POST_AUTHORS:
@@ -54,7 +54,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
                 $ret[] = [PoP_Module_Processor_HighlightedPostSubcomponentLayouts::class, PoP_Module_Processor_HighlightedPostSubcomponentLayouts::MODULE_LAYOUT_HIGHLIGHTEDPOST_LINE];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -75,7 +75,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::MODULE_WIDGET_HIGHLIGHTEDPOST_LINE => TranslationAPIFacade::getInstance()->__('Highlighted from', 'pop-coreprocessors'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -89,7 +89,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::MODULE_WIDGET_HIGHLIGHTEDPOST_LINE => 'fa-circle',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
     public function getBodyClass(array $module, array &$props)
     {

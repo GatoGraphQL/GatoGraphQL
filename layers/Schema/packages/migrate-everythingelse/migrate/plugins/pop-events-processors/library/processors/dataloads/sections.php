@@ -192,25 +192,25 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::MODULE_CALENDAR_EVENTSMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getInnerSubmodule(array $module)
     {
         $inner_modules = array(
 
-            /*********************************************
+        /*********************************************
          * Typeaheads
          *********************************************/
             // Straight to the layout
             self::MODULE_DATALOAD_EVENTS_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
             self::MODULE_DATALOAD_PASTEVENTS_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
 
-            /*********************************************
+        /*********************************************
          * Scrolls
          *********************************************/
 
-            /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+        /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Common blocks (Home/Page/Author/Single)
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
@@ -224,7 +224,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
             self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR_ADDONS => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_ADDONS],
 
-            /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+        /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Home/Page blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
@@ -245,7 +245,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
             self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_MAIN],
 
-            /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+        /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Author blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
@@ -266,7 +266,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
             self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_MAIN],
 
-            /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+        /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Tag blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
@@ -287,7 +287,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
             self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_MAIN],
 
-            /*********************************************
+        /*********************************************
          * Post Carousels
          *********************************************/
 
@@ -296,7 +296,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL => [GD_EM_Module_Processor_CustomCarousels::class, GD_EM_Module_Processor_CustomCarousels::MODULE_CAROUSEL_TAGEVENTS],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getFeedbackmessagesPosition(array $module)

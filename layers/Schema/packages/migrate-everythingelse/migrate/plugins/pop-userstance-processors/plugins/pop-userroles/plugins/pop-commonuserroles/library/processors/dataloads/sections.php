@@ -46,8 +46,8 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         $inner_modules = array(
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Home/Page blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Home/Page blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
             self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_FULLVIEW],
             self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_THUMBNAIL],
             self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_LIST],
@@ -57,14 +57,14 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_LIST],
 
             /*********************************************
-         * Post Carousels
-         *********************************************/
+             * Post Carousels
+             *********************************************/
 
             self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL => [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::MODULE_CAROUSEL_STANCES_BYORGANIZATIONS],
             self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL => [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::MODULE_CAROUSEL_STANCES_BYINDIVIDUALS],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

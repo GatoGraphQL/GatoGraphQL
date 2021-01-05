@@ -33,7 +33,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_CONTENTSECTIONS => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_CONTENTSECTIONS],
             self::MODULE_FILTERINPUT_APPLIESTO => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_APPLIESTO],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -107,7 +107,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_CONTENTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             self::MODULE_FILTERINPUT_POSTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -119,7 +119,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_CONTENTSECTIONS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_POSTSECTIONS => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

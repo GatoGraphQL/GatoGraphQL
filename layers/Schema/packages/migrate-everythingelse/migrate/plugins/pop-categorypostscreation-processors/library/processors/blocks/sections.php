@@ -266,7 +266,7 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
             self::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

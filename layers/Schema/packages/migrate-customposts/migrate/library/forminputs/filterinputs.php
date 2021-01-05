@@ -34,7 +34,7 @@ class PoP_CustomPosts_Module_Processor_FilterInputs extends \PoP\ComponentModel\
             self::MODULE_FILTERINPUT_GENERICPOSTTYPES => [\PoPSchema\CustomPosts\FilterInputProcessor::class, \PoPSchema\CustomPosts\FilterInputProcessor::FILTERINPUT_GENERICCUSTOMPOSTTYPES],
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => [\PoPSchema\CustomPosts\FilterInputProcessor::class, \PoPSchema\CustomPosts\FilterInputProcessor::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     public function getInputName(array $module)
@@ -107,7 +107,7 @@ class PoP_CustomPosts_Module_Processor_FilterInputs extends \PoP\ComponentModel\
             self::MODULE_FILTERINPUT_GENERICPOSTTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -129,7 +129,7 @@ class PoP_CustomPosts_Module_Processor_FilterInputs extends \PoP\ComponentModel\
             self::MODULE_FILTERINPUT_GENERICPOSTTYPES => $translationAPI->__('Return results from Custom Post Types', 'pop-posts'),
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $translationAPI->__('Return results from Union of the Custom Post Types', 'pop-posts'),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

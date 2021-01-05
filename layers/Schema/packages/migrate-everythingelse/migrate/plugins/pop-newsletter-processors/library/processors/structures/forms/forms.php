@@ -20,7 +20,7 @@ class PoP_Newsletter_Module_Processor_GFForms extends PoP_Module_Processor_Forms
             self::MODULE_FORM_NEWSLETTERUNSUBSCRIPTION => [PoP_Newsletter_Module_Processor_GFFormInners::class, PoP_Newsletter_Module_Processor_GFFormInners::MODULE_FORMINNER_NEWSLETTERUNSUBSCRIPTION],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

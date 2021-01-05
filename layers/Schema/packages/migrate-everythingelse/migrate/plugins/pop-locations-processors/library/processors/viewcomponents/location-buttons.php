@@ -20,7 +20,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS],
         );
     }
-    
+
     public function initMarkers(array $module)
     {
 
@@ -132,7 +132,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
     //             return [PoP_Module_Processor_UserViewComponentHeaders::class, PoP_Module_Processor_UserViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_USER];
     //     }
-        
+
     //     return parent::getHeaderSubmodule($module);
     // }
 }

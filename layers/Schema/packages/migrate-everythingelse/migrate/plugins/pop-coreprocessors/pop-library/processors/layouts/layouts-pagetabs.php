@@ -37,7 +37,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
             self::MODULE_LAYOUT_PAGETABS_TAG => 'fa-hashtag',
             self::MODULE_LAYOUT_PAGETABS_404 => 'fa-exclamation-circle',
         );
-        if ($fontawesome = $fontawesomes[$module[1]]) {
+        if ($fontawesome = $fontawesomes[$module[1]] ?? null) {
             return $fontawesome;
         }
         return parent::getFontawesome($module, $props);
@@ -85,7 +85,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
     //             // For the default page add the thumbnail. For the others, add the pretitle
     //             $page_id = RequestUtils::getRoute();
-    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$module[1]])) {
+    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$module[1]] ?? null)) {
     //                 return $cmsengineapi->getTitle($page_id);
     //             }
     //             break;
@@ -122,7 +122,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
             self::MODULE_LAYOUT_PAGETABS_HOME => TranslationAPIFacade::getInstance()->__('Home', 'poptheme-wassup'),
             self::MODULE_LAYOUT_PAGETABS_404 => TranslationAPIFacade::getInstance()->__('Page not found!', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
         return parent::getTitle($module, $props);

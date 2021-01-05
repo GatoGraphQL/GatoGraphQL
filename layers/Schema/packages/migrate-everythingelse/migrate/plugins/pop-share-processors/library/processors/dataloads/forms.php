@@ -47,7 +47,7 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
         $actionexecuters = array(
             self::MODULE_DATALOAD_SHAREBYEMAIL => ShareByEmailMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$module[1]]) {
+        if ($actionexecuter = $actionexecuters[$module[1]] ?? null) {
             return $actionexecuter;
         }
 

@@ -31,7 +31,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONTYPES],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -109,7 +109,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -120,7 +120,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

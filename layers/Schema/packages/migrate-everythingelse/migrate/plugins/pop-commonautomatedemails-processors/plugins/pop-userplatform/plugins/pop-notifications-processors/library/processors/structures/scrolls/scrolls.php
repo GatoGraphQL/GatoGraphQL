@@ -21,7 +21,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
             self::MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST => [GD_AAL_Module_Processor_AutomatedEmailsScrollInners::class, GD_AAL_Module_Processor_AutomatedEmailsScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -30,7 +30,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $lists = array(
             [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST],
@@ -53,7 +53,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
                 $this->appendProp($module, $props, 'class', 'scroll-notifications');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

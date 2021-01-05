@@ -18,7 +18,7 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT],
-            
+
         );
     }
 
@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Process
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

@@ -25,7 +25,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
                 $ret[] = 'createStanceButtonLazy';
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -36,7 +36,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
             self::MODULE_BUTTON_STANCE_UPDATE => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_STANCE_UPDATE],
             self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_LAZYBUTTONINNER_STANCE_CREATEORUPDATE],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -107,10 +107,10 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
                 PoP_UserStance_PostNameUtils::getNameLc()
             ),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -121,10 +121,10 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
             self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE => 'addStanceURL',
             self::MODULE_BUTTON_STANCE_UPDATE => 'editStanceURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

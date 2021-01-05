@@ -49,7 +49,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
             self::MODULE_BUTTONGROUP_TAGS => POP_SCREEN_TAGS,
             self::MODULE_BUTTONGROUP_AUTHORTAGS => POP_SCREEN_AUTHORTAGS,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
 

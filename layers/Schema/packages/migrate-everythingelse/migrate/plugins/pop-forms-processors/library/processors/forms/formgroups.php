@@ -30,10 +30,10 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
             self::MODULE_SUBMITBUTTONFORMGROUP_SEARCH => [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SEARCH],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 }

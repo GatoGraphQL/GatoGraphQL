@@ -21,7 +21,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA => [PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::class, PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA],
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN => [PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::class, PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -48,7 +48,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Share by email', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -74,7 +74,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
                 $this->setProp($module, $props, 'resourceloader', 'socialmedia');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

@@ -46,7 +46,7 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR],
             self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -77,10 +77,10 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR => POP_SCREEN_SINGLE,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -101,7 +101,7 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             case self::MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
-        
+
         return parent::getScreengroup($module);
     }
 

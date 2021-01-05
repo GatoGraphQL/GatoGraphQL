@@ -42,10 +42,10 @@ class PoP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Form
             self::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES => [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 }

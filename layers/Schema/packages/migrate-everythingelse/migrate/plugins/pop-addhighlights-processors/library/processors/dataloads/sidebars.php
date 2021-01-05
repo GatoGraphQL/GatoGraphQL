@@ -29,7 +29,7 @@ class PoP_AddHighlights_Module_Processor_CustomSidebarDataloads extends PoP_Modu
                 [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_HIGHLIGHT],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

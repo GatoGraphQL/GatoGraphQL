@@ -52,12 +52,12 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
             [self::class, self::MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_LIST],
             [self::class, self::MODULE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST],
             [self::class, self::MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST],
-            
+
             [self::class, self::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_DETAILS],
             [self::class, self::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_FULLVIEW],
             [self::class, self::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_THUMBNAIL],
             [self::class, self::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_LIST],
-            
+
             [self::class, self::MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_DETAILS],
             [self::class, self::MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_DETAILS],
             [self::class, self::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_DETAILS],
@@ -147,7 +147,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_LIST => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getSectionfilterModule(array $module)

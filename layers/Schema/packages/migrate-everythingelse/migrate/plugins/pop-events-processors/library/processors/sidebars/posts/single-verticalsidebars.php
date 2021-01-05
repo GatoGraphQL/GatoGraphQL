@@ -20,7 +20,7 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pro
             self::MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT => [GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::class, GD_EM_Module_Processor_CustomVerticalSingleSidebarInners::MODULE_VERTICALSIDEBARINNER_SINGLE_PASTEVENT],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

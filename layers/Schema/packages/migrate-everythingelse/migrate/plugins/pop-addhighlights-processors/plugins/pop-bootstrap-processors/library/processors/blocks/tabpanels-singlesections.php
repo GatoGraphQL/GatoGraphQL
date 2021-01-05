@@ -22,7 +22,7 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT => [PoP_AddHighlights_Module_Processor_SingleSectionTabPanelComponents::class, PoP_AddHighlights_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

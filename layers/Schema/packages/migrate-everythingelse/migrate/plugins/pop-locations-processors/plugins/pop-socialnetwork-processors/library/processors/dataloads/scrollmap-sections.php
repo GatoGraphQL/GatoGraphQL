@@ -50,7 +50,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
             self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

@@ -57,7 +57,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
             self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)
@@ -86,7 +86,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
                 $this->appendProp($module, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

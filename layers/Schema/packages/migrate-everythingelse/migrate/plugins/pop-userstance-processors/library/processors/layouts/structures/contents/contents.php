@@ -17,7 +17,7 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
         switch ($module[1]) {
             case self::MODULE_CONTENTLAYOUT_STANCES:
                 return [UserStance_Module_Processor_ContentMultipleInners::class, UserStance_Module_Processor_ContentMultipleInners::MODULE_LAYOUTCONTENTINNER_STANCES];
-            
+
             case self::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE:
                 return [UserStance_Module_Processor_ContentMultipleInners::class, UserStance_Module_Processor_ContentMultipleInners::MODULE_LAYOUTCONTENTINNER_STANCES_APPENDABLE];
         }
@@ -32,7 +32,7 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
             case self::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE:
                 return false;
         }
-    
+
         return parent::addFetchedData($module, $props);
     }
 
@@ -43,9 +43,9 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
                 $classes = array(
                     self::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE => GD_CLASS_STANCES,
                 );
-        
+
                 $this->setProp($module, $props, 'appendable', true);
-                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]]);
+                $this->setProp($module, $props, 'appendable-class', $classes[$module[1]] ?? null);
 
                 // Show the lazy loading spinner?
                 // if ($this->getProp($module, $props, 'show-lazyloading-spinner')) {

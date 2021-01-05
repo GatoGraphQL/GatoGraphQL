@@ -53,7 +53,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
             self::MODULE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_FULLUSER],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

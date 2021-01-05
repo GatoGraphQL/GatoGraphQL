@@ -21,7 +21,7 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
             self::MODULE_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -30,7 +30,7 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_THUMBNAIL],
@@ -68,7 +68,7 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

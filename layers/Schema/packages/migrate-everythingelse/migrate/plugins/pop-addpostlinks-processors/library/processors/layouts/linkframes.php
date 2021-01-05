@@ -18,7 +18,7 @@ class PoP_AddPostLinks_Module_Processor_LinkFrameLayouts extends PoP_AddPostLink
             self::MODULE_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE => [PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::class, PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::MODULE_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
             self::MODULE_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED => [PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::class, PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::MODULE_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
         );
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             return $layout;
         }
 

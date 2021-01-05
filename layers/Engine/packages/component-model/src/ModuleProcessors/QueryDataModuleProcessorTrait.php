@@ -83,7 +83,7 @@ trait QueryDataModuleProcessorTrait
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
         $this->activeDataloadQueryArgsFilteringModules[$cacheKey] = $this->activeDataloadQueryArgsFilteringModules[$cacheKey] ?? [];
-        if (!is_null($this->activeDataloadQueryArgsFilteringModules[$cacheKey][$module[1]])) {
+        if (!is_null($this->activeDataloadQueryArgsFilteringModules[$cacheKey][$module[1]] ?? null)) {
             return $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$module[1]];
         }
 

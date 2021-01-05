@@ -33,10 +33,10 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
 
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
-            
+
     //             return true;
     //     }
-        
+
     //     return parent::headerShowUrl($module);
     // }
 
@@ -47,7 +47,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL],
         );
 
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -62,7 +62,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 $ret .= 'btn btn-success btn-block btn-important';
                 break;
-                    
+
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
                 $ret .= 'btn btn-link';
                 break;
@@ -78,7 +78,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 return TranslationAPIFacade::getInstance()->__('Write a comment', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -89,7 +89,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 return 'addCommentURL';
         }
-        
+
         return parent::getUrlField($module);
     }
     public function getLinktarget(array $module, array &$props)
@@ -111,7 +111,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
                 $this->appendProp($module, $props, 'class', 'pop-hidden-print');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

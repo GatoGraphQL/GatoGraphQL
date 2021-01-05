@@ -44,10 +44,10 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
             self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL => [UserStance_Module_Processor_AuthorSectionTabPanelComponents::class, UserStance_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL],
             self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST => [UserStance_Module_Processor_AuthorSectionTabPanelComponents::class, UserStance_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORSTANCES_AGAINST],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -62,7 +62,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
             case self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORSTANCES_STANCE];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

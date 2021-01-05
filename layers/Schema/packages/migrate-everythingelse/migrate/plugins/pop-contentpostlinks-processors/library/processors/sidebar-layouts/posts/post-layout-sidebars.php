@@ -23,7 +23,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars extends PoP
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

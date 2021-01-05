@@ -8,7 +8,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Processor_DateRangeFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_EVENTSCOPE = 'filterinput-eventscope';
 
     public function getModulesToProcess(): array
@@ -23,7 +23,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         $filterInputs = [
             self::MODULE_FILTERINPUT_EVENTSCOPE => [PoP_Events_Module_Processor_FilterInputProcessor::class, PoP_Events_Module_Processor_FilterInputPrDATEsor::FILTERINPUT_EVENTSCOPE],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -32,7 +32,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     //         case self::MODULE_FILTERINPUT_EVENTSCOPE:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -42,7 +42,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
             case self::MODULE_FILTERINPUT_EVENTSCOPE:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -56,7 +56,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
                 );
                 return $names[$module[1]];
         }
-        
+
         return parent::getName($module);
     }
 
@@ -65,7 +65,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         $types = [
             self::MODULE_FILTERINPUT_EVENTSCOPE => SchemaDefinition::TYPE_DATE,
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -74,7 +74,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         $descriptions = [
             self::MODULE_FILTERINPUT_EVENTSCOPE => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

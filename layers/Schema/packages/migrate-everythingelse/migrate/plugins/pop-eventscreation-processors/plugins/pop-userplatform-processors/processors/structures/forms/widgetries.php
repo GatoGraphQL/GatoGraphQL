@@ -15,7 +15,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_FORM_EVENTDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
@@ -43,7 +43,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
             self::MODULE_WIDGET_FORM_EVENTDETAILS => TranslationAPIFacade::getInstance()->__('Event details', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
 
     public function getWidgetClass(array $module, array &$props)

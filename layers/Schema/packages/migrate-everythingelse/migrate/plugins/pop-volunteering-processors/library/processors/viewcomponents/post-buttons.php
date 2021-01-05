@@ -23,10 +23,10 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
     //         case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
-            
+
     //             return true;
     //     }
-        
+
     //     return parent::headerShowUrl($module);
     // }
 
@@ -37,7 +37,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL],
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -52,7 +52,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
                 $ret .= 'btn btn-info btn-block btn-important';
                 break;
-                    
+
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
                 $ret .= 'btn btn-info btn-block btn-important';
                 break;
@@ -73,7 +73,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
                 return TranslationAPIFacade::getInstance()->__('Volunteer!', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -85,7 +85,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
                 return 'volunteerURL';
         }
-        
+
         return parent::getUrlField($module);
     }
 

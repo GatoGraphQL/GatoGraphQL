@@ -30,10 +30,10 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
             self::MODULE_BLOCK_EVENTLINK_UPDATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENTLINK_UPDATE],
             self::MODULE_BLOCK_EVENTLINK_CREATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENTLINK_CREATE],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -66,7 +66,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

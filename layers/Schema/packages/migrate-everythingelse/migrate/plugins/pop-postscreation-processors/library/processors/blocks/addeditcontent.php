@@ -30,10 +30,10 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
             self::MODULE_BLOCK_POST_UPDATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_POST_UPDATE],
             self::MODULE_BLOCK_POST_CREATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_POST_CREATE],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -67,7 +67,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

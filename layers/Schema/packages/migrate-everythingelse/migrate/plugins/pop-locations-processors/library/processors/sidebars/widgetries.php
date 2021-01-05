@@ -17,17 +17,17 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_EM_WIDGET_POSTLOCATIONSMAP:
                 $ret[] = [GD_EM_Module_Processor_LocationMapConditionWrappers::class, GD_EM_Module_Processor_LocationMapConditionWrappers::MODULE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP];
                 break;
-            
+
             case self::MODULE_EM_WIDGET_USERLOCATIONSMAP:
                 $ret[] = [GD_EM_Module_Processor_LocationMapConditionWrappers::class, GD_EM_Module_Processor_LocationMapConditionWrappers::MODULE_EM_LAYOUTWRAPPER_USERLOCATIONSMAP];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -38,7 +38,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
             self::MODULE_EM_WIDGET_USERLOCATIONSMAP => TranslationAPIFacade::getInstance()->__('Location(s)', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -47,7 +47,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
             self::MODULE_EM_WIDGET_USERLOCATIONSMAP => 'fa-map-marker',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
     public function getBodyClass(array $module, array &$props)
     {

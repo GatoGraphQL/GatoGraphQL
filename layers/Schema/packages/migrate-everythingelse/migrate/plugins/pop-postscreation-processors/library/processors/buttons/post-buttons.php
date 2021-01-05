@@ -17,7 +17,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
         $buttoninners = array(
             self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::class, PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_CONTENTPOSTLINK_CREATE],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -55,10 +55,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
         $titles = array(
             self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -67,10 +67,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
         $fields = array(
             self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => 'addContentPostLinkURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
-        
+
         return parent::getUrlField($module);
     }
 }

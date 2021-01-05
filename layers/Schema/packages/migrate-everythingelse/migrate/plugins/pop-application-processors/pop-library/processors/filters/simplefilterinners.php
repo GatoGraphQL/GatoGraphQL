@@ -174,7 +174,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     //         self::MODULE_SIMPLEFILTERINNER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //         self::MODULE_SIMPLEFILTERINNER_TAGCONTENT => POP_FILTER_TAGCONTENT,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
 

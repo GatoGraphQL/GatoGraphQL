@@ -30,7 +30,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
             self::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_SectionTabPanelComponents::class, UserStance_URE_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_BYINDIVIDUALS],
             self::MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_SectionTabPanelComponents::class, UserStance_URE_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_BYORGANIZATIONS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -55,7 +55,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
             case self::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_AUTHORROLE];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

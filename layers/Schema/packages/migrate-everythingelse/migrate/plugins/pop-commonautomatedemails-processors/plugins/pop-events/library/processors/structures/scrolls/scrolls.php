@@ -7,7 +7,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
     public const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_FULLVIEW = 'scroll-automatedemails-events-fullview';
     public const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL = 'scroll-automatedemails-events-thumbnail';
     public const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST = 'scroll-automatedemails-events-list';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -30,7 +30,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
             self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -39,7 +39,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL],

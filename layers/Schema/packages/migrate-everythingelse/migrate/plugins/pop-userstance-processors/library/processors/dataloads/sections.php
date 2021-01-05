@@ -239,20 +239,20 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         $inner_modules = array(
 
             /*********************************************
-         * Typeaheads
-         *********************************************/
+             * Typeaheads
+             *********************************************/
             // Straight to the layout
             self::MODULE_DATALOAD_STANCES_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Common blocks (Home/Page/Author/Single)
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Common blocks (Home/Page/Author/Single)
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
             self::MODULE_DATALOAD_STANCES_SCROLL_NAVIGATOR => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_NAVIGATOR],
             self::MODULE_DATALOAD_STANCES_SCROLL_ADDONS => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_ADDONS],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Home/Page blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Home/Page blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
             self::MODULE_DATALOAD_STANCES_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_FULLVIEW],
             self::MODULE_DATALOAD_STANCES_SCROLL_THUMBNAIL => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_THUMBNAIL],
             self::MODULE_DATALOAD_STANCES_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_LIST],
@@ -294,8 +294,8 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_LIST],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Single blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Single blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
             self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW],
             self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_SCROLL_THUMBNAIL => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_THUMBNAIL],
@@ -311,8 +311,8 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_LIST],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Author blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Author blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
             self::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORSTANCES_FULLVIEW],
             self::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_THUMBNAIL => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORSTANCES_THUMBNAIL],
             self::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORSTANCES_LIST],
@@ -327,8 +327,8 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORSTANCES_LIST],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Tag blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Tag blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
             self::MODULE_DATALOAD_TAGSTANCES_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_FULLVIEW],
             self::MODULE_DATALOAD_TAGSTANCES_SCROLL_THUMBNAIL => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_THUMBNAIL],
@@ -344,14 +344,14 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_TAGSTANCES_AGAINST_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_LIST],
 
             /*********************************************
-         * Post Carousels
-         *********************************************/
+            * Post Carousels
+            *********************************************/
 
             self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::MODULE_CAROUSEL_AUTHORSTANCES],
             self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::MODULE_CAROUSEL_TAGSTANCES],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -714,7 +714,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                     self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
                     self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
                 );
-                if ($cat = $cats[$module[1]]) {
+                if ($cat = $cats[$module[1]] ?? null) {
                     $ret['tax-query'][] = [
                         'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
                         'terms'    => $cat,

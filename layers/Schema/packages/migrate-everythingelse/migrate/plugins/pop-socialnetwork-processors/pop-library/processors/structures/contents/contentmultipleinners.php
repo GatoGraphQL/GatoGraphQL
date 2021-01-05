@@ -39,12 +39,12 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
                 $ret[] = [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_UPVOTEPOST_STYLES];
                 $ret[] = [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_UNDODOWNVOTEPOST_STYLES];
                 break;
-                
+
             case self::MODULE_CONTENTINNER_DOWNVOTESPOSTS:
                 $ret[] = [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_DOWNVOTEPOST_STYLES];
                 $ret[] = [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_UNDOUPVOTEPOST_STYLES];
                 break;
-            
+
             default:
                 $layouts = array(
                     self::MODULE_CONTENTINNER_FOLLOWSUSERS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_FOLLOWUSER_STYLES],
@@ -58,7 +58,7 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
                     // self::MODULE_CONTENTINNER_UPVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_UPVOTEPOST_STYLES],
                     // self::MODULE_CONTENTINNER_DOWNVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_DOWNVOTEPOST_STYLES],
                 );
-                if ($layout = $layouts[$module[1]]) {
+                if ($layout = $layouts[$module[1]] ?? null) {
                     $ret[] = $layout;
                 }
                 break;

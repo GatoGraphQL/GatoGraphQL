@@ -24,7 +24,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
         $filterInputs = [
             self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => [PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::class, PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor::FILTERINPUT_VOLUNTEERSNEEDED],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -72,7 +72,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
         $types = [
             self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_BOOL),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -81,7 +81,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
         $descriptions = [
             self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

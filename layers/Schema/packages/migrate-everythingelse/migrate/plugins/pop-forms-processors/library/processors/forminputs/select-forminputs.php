@@ -8,7 +8,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_SelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_ORDERUSER = 'filterinput-order-user';
     public const MODULE_FILTERINPUT_ORDERPOST = 'filterinput-order-post';
     public const MODULE_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
@@ -32,7 +32,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             self::MODULE_FILTERINPUT_ORDERTAG => [\PoP\Engine\FilterInputProcessor::class, \PoP\Engine\FilterInputProcessor::FILTERINPUT_ORDER],
             self::MODULE_FILTERINPUT_ORDERCOMMENT => [\PoP\Engine\FilterInputProcessor::class, \PoP\Engine\FilterInputProcessor::FILTERINPUT_ORDER],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -43,7 +43,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     //         case self::MODULE_FILTERINPUT_ORDERTAG:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -56,7 +56,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             case self::MODULE_FILTERINPUT_ORDERCOMMENT:
                 return TranslationAPIFacade::getInstance()->__('Order by', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -75,7 +75,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             case self::MODULE_FILTERINPUT_ORDERCOMMENT:
                 return GD_FormInput_OrderComment::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -89,7 +89,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
                 // Add a nice name, so that the URL params when filtering make sense
                 return 'order';
         }
-        
+
         return parent::getName($module);
     }
 
@@ -101,7 +101,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             self::MODULE_FILTERINPUT_ORDERTAG => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_ORDERCOMMENT => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -113,7 +113,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             self::MODULE_FILTERINPUT_ORDERTAG => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERCOMMENT => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

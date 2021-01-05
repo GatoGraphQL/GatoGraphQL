@@ -35,7 +35,7 @@ class GD_AAL_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
             self::MODULE_SCROLLINNER_NOTIFICATIONS_DETAILS => [PoP_Module_Processor_PreviewNotificationLayouts::class, PoP_Module_Processor_PreviewNotificationLayouts::MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS],
             self::MODULE_SCROLLINNER_NOTIFICATIONS_LIST => [PoP_Module_Processor_PreviewNotificationLayouts::class, PoP_Module_Processor_PreviewNotificationLayouts::MODULE_LAYOUT_PREVIEWNOTIFICATION_LIST],
         );
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

@@ -48,10 +48,10 @@ class PoP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
             self::MODULE_BLOCK_TABPANEL_AUTHORSUBSCRIBEDTOTAGS => [PoP_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORSUBSCRIBEDTOTAGS],
             self::MODULE_BLOCK_TABPANEL_AUTHORRECOMMENDEDPOSTS => [PoP_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORRECOMMENDEDPOSTS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-        
+
         return $ret;
     }
 
@@ -74,7 +74,7 @@ class PoP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
             case self::MODULE_BLOCK_TABPANEL_AUTHORSUBSCRIBEDTOTAGS:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

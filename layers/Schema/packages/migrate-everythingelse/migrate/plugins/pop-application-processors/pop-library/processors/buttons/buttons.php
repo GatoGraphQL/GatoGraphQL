@@ -20,7 +20,7 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
             self::MODULE_BUTTON_ADDONSPOSTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT],
             self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -33,7 +33,7 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
             self::MODULE_BUTTON_ADDONSPOSTEDIT => 'editURL',
             self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => 'editURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
 
@@ -46,10 +46,10 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
             self::MODULE_BUTTON_ADDONSPOSTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
             self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -65,7 +65,7 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 }
                 break;
         }
-        
+
         return parent::getLinktarget($module, $props);
     }
 

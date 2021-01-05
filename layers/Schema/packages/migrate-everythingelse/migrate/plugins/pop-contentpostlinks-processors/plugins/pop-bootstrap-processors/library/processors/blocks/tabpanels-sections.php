@@ -18,10 +18,10 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks extends PoP_Mo
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_LINKS => [PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents::class, PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_LINKS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-        
+
         return $ret;
     }
 
@@ -41,7 +41,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks extends PoP_Mo
             case self::MODULE_BLOCK_TABPANEL_LINKS:
                 return [PoP_ContentPostLinks_Module_Processor_CustomFilters::class, PoP_ContentPostLinks_Module_Processor_CustomFilters::MODULE_FILTER_LINKS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

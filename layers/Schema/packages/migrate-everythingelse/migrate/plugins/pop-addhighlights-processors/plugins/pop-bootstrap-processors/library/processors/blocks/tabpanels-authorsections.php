@@ -32,10 +32,10 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelBlocks extends PoP
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_AUTHORHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORHIGHLIGHTS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-        
+
         return $ret;
     }
 
@@ -45,7 +45,7 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelBlocks extends PoP
             case self::MODULE_BLOCK_TABPANEL_AUTHORHIGHLIGHTS:
                 return [PoP_AddHighlights_Module_Processor_CustomFilters::class, PoP_AddHighlights_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORHIGHLIGHTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

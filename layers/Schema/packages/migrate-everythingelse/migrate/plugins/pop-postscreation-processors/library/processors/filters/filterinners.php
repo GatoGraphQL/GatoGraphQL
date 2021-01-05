@@ -28,15 +28,15 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
             ],
         ];
         // Add the link access filter
-        if ($inputmodules[$module[1]] && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputmodules[$module[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
 
             array_splice(
-                $ret, 
+                $ret,
                 array_search(
-                    [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH], 
+                    [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
                     $ret
-                ), 
-                0, 
+                ),
+                0,
                 [
                     [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_LINKACCESS],
                 ]
@@ -54,16 +54,16 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINNER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

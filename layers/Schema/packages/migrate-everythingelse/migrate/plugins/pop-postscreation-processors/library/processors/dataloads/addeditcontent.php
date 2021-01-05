@@ -43,7 +43,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
             self::MODULE_DATALOAD_POST_UPDATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::MODULE_FORM_POST],
             self::MODULE_DATALOAD_POST_CREATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::MODULE_FORM_POST],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
 

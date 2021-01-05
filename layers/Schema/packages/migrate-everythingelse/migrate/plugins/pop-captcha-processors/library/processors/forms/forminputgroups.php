@@ -18,7 +18,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
             case self::MODULE_FORMINPUTGROUP_CAPTCHA:
                 return 'input';
         }
-        
+
         return parent::getComponentSubname($module);
     }
 
@@ -28,10 +28,10 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
             self::MODULE_FORMINPUTGROUP_CAPTCHA => [PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -44,7 +44,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -71,12 +71,12 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
                 if (!PoP_FormUtils::useLoggedinuserData()) {
                     $this->appendProp($module, $props, 'class', 'visible-always');
                 }
-                
+
                 $placeholder = TranslationAPIFacade::getInstance()->__('Type captcha here...', 'pop-coreprocessors');
                 $this->setProp($this->getComponentSubmodule($module), $props, 'placeholder', $placeholder);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

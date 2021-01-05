@@ -32,7 +32,7 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
             self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE => GD_AVATAR_SIZE_150,
         );
 
-        if ($avatar = $avatars[$module[1]]) {
+        if ($avatar = $avatars[$module[1]] ?? null) {
             return $avatar;
         }
 

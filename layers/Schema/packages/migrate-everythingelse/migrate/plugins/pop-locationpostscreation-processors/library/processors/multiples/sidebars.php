@@ -18,7 +18,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
         $blocks = array(
             self::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR => [PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR],
         );
-        if ($block = $blocks[$module[1]]) {
+        if ($block = $blocks[$module[1]] ?? null) {
             $ret[] = $block;
         }
 
@@ -31,7 +31,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
             case self::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREEN_MYCONTENT;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -41,7 +41,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
             case self::MODULE_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

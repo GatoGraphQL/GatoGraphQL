@@ -43,7 +43,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
             self::MODULE_DATALOAD_LOCATIONPOST_UPDATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostForms::class, GD_Custom_EM_Module_Processor_CreateUpdatePostForms::MODULE_FORM_LOCATIONPOST],
             self::MODULE_DATALOAD_LOCATIONPOST_CREATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostForms::class, GD_Custom_EM_Module_Processor_CreateUpdatePostForms::MODULE_FORM_LOCATIONPOST],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
 

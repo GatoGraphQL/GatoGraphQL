@@ -37,7 +37,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
             self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST => [GD_AAL_Module_Processor_CustomScrolls::class, GD_AAL_Module_Processor_CustomScrolls::MODULE_SCROLL_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inner_modules[$module[1]]) {
+        if ($inner = $inner_modules[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -47,7 +47,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
@@ -58,7 +58,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
                 $this->addJsmethod($ret, 'refetchBlockOnUserLoggedInOut');
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -75,14 +75,14 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         } elseif (in_array($module, $lists)) {
             $format = POP_FORMAT_LIST;
         }
-    
+
         return $format ?? parent::getFormat($module);
     }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
@@ -91,7 +91,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
                 $notifications_query_args = array(
                     'limit' => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 2,
                 );
-                
+
                 $ret = array_merge(
                     $ret,
                     $notifications_query_args
@@ -120,7 +120,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 return GD_DataLoad_QueryInputOutputHandler_NotificationList::class;
         }
-        
+
         return parent::getQueryInputOutputHandlerClass($module);
     }
 
@@ -134,7 +134,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
 
         return parent::getTypeResolverClass($module);
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -143,7 +143,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('notifications', 'pop-notifications-processors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -61,7 +61,7 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     //         self::MODULE_SIMPLEFILTERINNER_AUTHORHIGHLIGHTS => POP_FILTER_AUTHORHIGHLIGHTS,
     //         self::MODULE_SIMPLEFILTERINNER_MYHIGHLIGHTS => POP_FILTER_MYHIGHLIGHTS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
 

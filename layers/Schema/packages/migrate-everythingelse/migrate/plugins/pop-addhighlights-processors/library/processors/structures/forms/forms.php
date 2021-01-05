@@ -17,7 +17,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostForms extends PoP_Modul
             self::MODULE_FORM_HIGHLIGHT => [PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_HIGHLIGHT],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

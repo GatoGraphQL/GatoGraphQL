@@ -17,11 +17,11 @@ class PoP_LocationPostsCreation_Module_Processor_ButtonInners extends PoP_Module
             $routes = array(
                 self::MODULE_BUTTONINNER_LOCATIONPOST_CREATE => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
             );
-            if ($route = $routes[$module[1]]) {
+            if ($route = $routes[$module[1]] ?? null) {
                 return 'fa-fw '.getRouteIcon($route, false);
             }
         }
-        
+
         return parent::getFontawesome($module, $props);
     }
 
@@ -30,10 +30,10 @@ class PoP_LocationPostsCreation_Module_Processor_ButtonInners extends PoP_Module
         $titles = array(
             self::MODULE_BUTTONINNER_LOCATIONPOST_CREATE => PoP_LocationPosts_PostNameUtils::getNameUc(),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getBtnTitle($module);
     }
 }

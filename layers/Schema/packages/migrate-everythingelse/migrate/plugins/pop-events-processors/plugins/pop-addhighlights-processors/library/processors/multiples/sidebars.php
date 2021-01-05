@@ -49,10 +49,10 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
             self::MODULE_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
             self::MODULE_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -63,7 +63,7 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
             case self::MODULE_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

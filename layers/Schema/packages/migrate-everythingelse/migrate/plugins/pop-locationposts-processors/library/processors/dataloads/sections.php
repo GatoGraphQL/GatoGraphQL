@@ -80,25 +80,25 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
         $inner_modules = array(
 
             /*********************************************
-         * Typeaheads
-         *********************************************/
+             * Typeaheads
+             *********************************************/
             // Straight to the layout
             self::MODULE_DATALOAD_LOCATIONPOSTS_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
 
             /*********************************************
-         * Post Scrolls
-         *********************************************/
+             * Post Scrolls
+             *********************************************/
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Common blocks (Home/Page/Author/Single)
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Common blocks (Home/Page/Author/Single)
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_NAVIGATOR],
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_ADDONS],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Home/Page blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Home/Page blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_DETAILS],
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
@@ -107,8 +107,8 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_LIST],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Author blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Author blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
             self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_DETAILS],
             self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
@@ -117,8 +117,8 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_LIST],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-        * Tag blocks
-        *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+            * Tag blocks
+            *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
             self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_DETAILS],
             self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
@@ -127,7 +127,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array

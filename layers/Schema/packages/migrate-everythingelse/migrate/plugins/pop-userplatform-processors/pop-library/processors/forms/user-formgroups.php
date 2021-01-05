@@ -39,7 +39,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
                 $ret = '<i class="fa fa-fw fa-home"></i>'.$ret;
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -58,10 +58,10 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
             self::MODULE_FORMINPUTGROUP_CUU_DESCRIPTION => [PoP_Module_Processor_CreateUpdateUserTextareaFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextareaFormInputs::MODULE_FORMINPUT_CUU_DESCRIPTION],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -71,7 +71,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
             case self::MODULE_FORMINPUTGROUP_CUU_EMAIL:
                 return TranslationAPIFacade::getInstance()->__('Please be careful to fill-in the email properly! It will not only appear in the profile page, but also be used by our system to send you notifications.', 'pop-coreprocessors');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 
@@ -82,11 +82,11 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         $placeholders = array(
             self::MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL => 'https://...',
         );
-        if ($placeholder = $placeholders[$module[1]]) {
+        if ($placeholder = $placeholders[$module[1]] ?? null) {
             $component = $this->getComponentSubmodule($module);
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

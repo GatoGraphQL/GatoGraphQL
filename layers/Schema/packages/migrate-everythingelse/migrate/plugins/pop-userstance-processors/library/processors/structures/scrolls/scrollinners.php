@@ -78,7 +78,7 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
             self::MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW => [UserStance_Module_Processor_CustomFullViewLayouts::class, UserStance_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_STANCE],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

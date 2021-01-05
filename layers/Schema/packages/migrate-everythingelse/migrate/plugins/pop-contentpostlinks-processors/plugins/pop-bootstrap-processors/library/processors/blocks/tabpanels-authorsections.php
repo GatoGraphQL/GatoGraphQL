@@ -32,10 +32,10 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks extends 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORLINKS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-        
+
         return $ret;
     }
 
@@ -45,7 +45,7 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks extends 
             case self::MODULE_BLOCK_TABPANEL_AUTHORLINKS:
                 return [PoP_ContentPostLinks_Module_Processor_CustomFilters::class, PoP_ContentPostLinks_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORLINKS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

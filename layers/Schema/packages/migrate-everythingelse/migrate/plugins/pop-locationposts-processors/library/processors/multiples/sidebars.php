@@ -37,14 +37,14 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
                     $ret
                 );
                 break;
-            
+
             default:
                 $inners = array(
                     self::MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR],
                     self::MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_TAGLOCATIONPOSTS_SIDEBAR],
                     self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR => [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR],
                 );
-                if ($inner = $inners[$module[1]]) {
+                if ($inner = $inners[$module[1]] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -68,7 +68,7 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
             case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
                 return POP_SCREEN_SINGLE;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -83,7 +83,7 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
             case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
-        
+
         return parent::getScreengroup($module);
     }
 

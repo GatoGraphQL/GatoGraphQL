@@ -20,10 +20,10 @@ class PoPCore_GenericForms_Module_Processor_SocialMediaPostWrappers extends PoP_
             self::MODULE_POSTSOCIALMEDIA_VOLUNTEERPOSTWRAPPER => [PoPCore_GenericForms_Module_Processor_SocialMedia::class, PoPCore_GenericForms_Module_Processor_SocialMedia::MODULE_POSTSOCIALMEDIA_VOLUNTEER],
         );
 
-        if ($socialmedia = $socialmedias[$module[1]]) {
+        if ($socialmedia = $socialmedias[$module[1]] ?? null) {
             return $socialmedia;
         }
-    
+
         return parent::getSocialmediaModule($module);
     }
 }

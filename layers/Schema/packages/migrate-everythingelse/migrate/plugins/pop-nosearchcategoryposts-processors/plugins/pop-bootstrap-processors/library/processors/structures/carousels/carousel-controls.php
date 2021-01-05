@@ -333,7 +333,7 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
             self::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS18,
             self::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteTitle($route);
         }
 
@@ -410,13 +410,13 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
             self::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS18,
             self::MODULE_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($route = $routes[$module[1]]) {
+        if ($route = $routes[$module[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
-        } elseif ($route = $authorroutes[$module[1]]) {
+        } elseif ($route = $authorroutes[$module[1]] ?? null) {
             $author = $vars['routing-state']['queried-object-id'];
             $url = $cmsusersapi->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
-        } elseif ($route = $tagroutes[$module[1]]) {
+        } elseif ($route = $tagroutes[$module[1]] ?? null) {
             $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
             return RequestUtils::addRoute($url, $route);
         }

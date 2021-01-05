@@ -88,10 +88,10 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
             self::MODULE_FORMINPUTGROUP_ADDITIONALMESSAGE => [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_ADDITIONALMESSAGE],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -104,7 +104,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -138,7 +138,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
                 $this->setProp($this->getComponentSubmodule($module), $props, 'placeholder', $placeholder);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

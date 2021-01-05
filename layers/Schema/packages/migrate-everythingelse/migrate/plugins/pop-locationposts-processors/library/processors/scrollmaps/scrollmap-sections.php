@@ -47,7 +47,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
             self::MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_HORIZONTALMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getMapDirection(array $module, array &$props)

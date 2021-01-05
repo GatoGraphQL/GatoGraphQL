@@ -16,12 +16,12 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
     public function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
-                
+
         $blocks = array(
             self::MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR => [PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR],
             self::MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR => [PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR],
         );
-        if ($block = $blocks[$module[1]]) {
+        if ($block = $blocks[$module[1]] ?? null) {
             $ret[] = $block;
         }
 
@@ -34,10 +34,10 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
             self::MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR => POP_SCREEN_MYCONTENT,
             self::MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR => POP_SCREEN_MYCONTENT,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -48,7 +48,7 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
             case self::MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
-        
+
         return parent::getScreengroup($module);
     }
 }

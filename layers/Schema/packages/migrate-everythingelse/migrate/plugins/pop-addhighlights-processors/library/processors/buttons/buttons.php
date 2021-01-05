@@ -20,7 +20,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             self::MODULE_BUTTON_HIGHLIGHTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT],
             self::MODULE_BUTTON_HIGHLIGHTVIEW => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTVIEW],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -33,7 +33,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             self::MODULE_BUTTON_HIGHLIGHTEDIT => 'editURL',
             // self::MODULE_BUTTON_HIGHLIGHTVIEW => 'highlightedPostURL',
         );
-        if ($field = $fields[$module[1]]) {
+        if ($field = $fields[$module[1]] ?? null) {
             return $field;
         }
 
@@ -46,10 +46,10 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             self::MODULE_BUTTON_HIGHLIGHTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
             self::MODULE_BUTTON_HIGHLIGHTVIEW => TranslationAPIFacade::getInstance()->__('View', 'poptheme-wassup'),
         );
-        if ($title = $titles[$module[1]]) {
+        if ($title = $titles[$module[1]] ?? null) {
             return $title;
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -59,7 +59,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             case self::MODULE_BUTTON_HIGHLIGHTEDIT:
                 return POP_TARGET_ADDONS;
         }
-        
+
         return parent::getLinktarget($module, $props);
     }
 

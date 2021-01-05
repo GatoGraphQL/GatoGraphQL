@@ -12,7 +12,7 @@ class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_Ins
             [self::class, self::MODULE_INSTANTANEOUSFILTER_POSTSECTIONS],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -20,10 +20,10 @@ class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_Ins
             self::MODULE_INSTANTANEOUSFILTER_POSTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::MODULE_INSTANTANEOUSFILTERINNER_POSTSECTIONS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

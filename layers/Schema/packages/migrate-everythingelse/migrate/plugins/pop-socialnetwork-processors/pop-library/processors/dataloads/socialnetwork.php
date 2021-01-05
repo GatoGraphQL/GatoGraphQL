@@ -90,7 +90,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::MODULE_DATALOAD_UPVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_UPVOTESPOSTS],
             self::MODULE_DATALOAD_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::MODULE_CONTENT_DOWNVOTESPOSTS],
         );
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 
@@ -113,7 +113,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::MODULE_DATALOAD_DOWNVOTESPOSTS => GD_METAKEY_PROFILE_DOWNVOTESPOSTS,
         ];
 
-        if ($metaKey = $metaKeys[$module[1]]) {
+        if ($metaKey = $metaKeys[$module[1]] ?? null) {
             $userID = $vars['global-userstate']['current-user-id'];
             return \PoPSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }

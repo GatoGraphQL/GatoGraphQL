@@ -17,7 +17,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostForms extends PoP_Module_Pro
             self::MODULE_FORM_LOCATIONPOST => [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_LOCATIONPOST],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -35,7 +35,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostForms extends PoP_Module_Pro
                 $this->appendProp($module, $props, 'class', $form_row_classs);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

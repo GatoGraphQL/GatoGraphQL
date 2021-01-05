@@ -53,7 +53,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
@@ -61,10 +61,10 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
     //         self::MODULE_FILTERINNER_AUTHORLOCATIONPOSTS => POP_FILTER_AUTHORLOCATIONPOSTS,
     //         self::MODULE_FILTERINNER_TAGLOCATIONPOSTS => POP_FILTER_TAGLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

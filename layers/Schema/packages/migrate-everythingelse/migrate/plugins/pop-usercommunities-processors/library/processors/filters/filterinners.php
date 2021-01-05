@@ -44,17 +44,17 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINNER_MYMEMBERS => POP_FILTER_MYMEMBERS,
     //         self::MODULE_FILTERINNER_COMMUNITIES => POP_FILTER_COMMUNITIES,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

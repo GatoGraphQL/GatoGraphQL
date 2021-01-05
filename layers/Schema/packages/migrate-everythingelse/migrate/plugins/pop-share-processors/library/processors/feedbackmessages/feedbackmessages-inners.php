@@ -19,7 +19,7 @@ class PoP_Share_Module_Processor_FeedbackMessageInners extends PoP_Module_Proces
             self::MODULE_FEEDBACKMESSAGEINNER_SHAREBYEMAIL => [PoP_Share_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_Share_Module_Processor_FeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SHAREBYEMAIL],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

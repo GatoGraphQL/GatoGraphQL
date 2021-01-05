@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             self::MODULE_SCROLL_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -36,7 +36,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $details = array(
             [self::class, self::MODULE_SCROLL_ORGANIZATIONS_DETAILS],
@@ -54,7 +54,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             $extra_class = 'details';
         }
         $this->appendProp($module, $props, 'class', $extra_class);
-        
+
         parent::initModelProps($module, $props);
     }
 }

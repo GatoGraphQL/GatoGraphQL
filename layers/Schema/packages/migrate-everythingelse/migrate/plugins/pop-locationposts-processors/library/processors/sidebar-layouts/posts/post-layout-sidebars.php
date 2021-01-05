@@ -12,7 +12,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LOCATIONPOST],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST],
-            
+
         );
     }
 
@@ -24,7 +24,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST => [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

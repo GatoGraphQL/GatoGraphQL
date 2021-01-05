@@ -50,7 +50,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
             self::MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_EVENTS_HORIZONTALMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function isUserMap(array $module)

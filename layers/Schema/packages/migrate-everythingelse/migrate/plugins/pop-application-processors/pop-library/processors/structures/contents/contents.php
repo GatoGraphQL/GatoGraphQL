@@ -27,7 +27,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             self::MODULE_CONTENT_PAGECONTENT_PRETTYPRINT => [PoP_Module_Processor_MultipleContentInners::class, PoP_Module_Processor_MultipleContentInners::MODULE_CONTENTINNER_PAGECONTENT],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-    
+
         switch ($module[1]) {
             case self::MODULE_CONTENT_PAGECONTENT_PRETTYPRINT:
                 $this->addJsmethod($ret, 'prettyPrint');
@@ -68,7 +68,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
                 $this->appendProp($module, $props, 'class', 'content-single');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -60,7 +60,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
             self::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getTitle(array $module, array &$props)
@@ -74,7 +74,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
             case self::MODULE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle();
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -92,20 +92,20 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
             case self::MODULE_BLOCK_TAGEVENTS_SCROLLMAP:
             case self::MODULE_BLOCK_TAGPASTEVENTS_SCROLLMAP:
                 return [PoP_Events_Module_Processor_CustomControlGroups::class, PoP_Events_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKTAGEVENTLIST];
-            
+
             case self::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKMAPPOSTLIST];
-            
+
             case self::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST];
-            
+
             case self::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST];
 
             case self::MODULE_BLOCK_SEARCHUSERS_SCROLLMAP:
             case self::MODULE_BLOCK_USERS_SCROLLMAP:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKUSERLIST];
-        
+
             case self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP:
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKMAPUSERLIST];
         }

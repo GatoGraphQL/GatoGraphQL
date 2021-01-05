@@ -23,7 +23,7 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_CATEGORIES:
                 $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::MODULE_LAYOUTWRAPPER_CATEGORIES];
@@ -37,7 +37,7 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
             case self::MODULE_WIDGETCOMPACT_HIGHLIGHTINFO:
                 $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_WIDGETPUBLISHED];
                 break;
-                
+
             case self::MODULE_WIDGETCOMPACT_POSTINFO:
                 $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::MODULE_LAYOUT_WIDGETPUBLISHED];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
@@ -62,7 +62,7 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
             self::MODULE_WIDGETCOMPACT_POSTINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -75,7 +75,7 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
             self::MODULE_WIDGETCOMPACT_POSTINFO => 'fa-circle',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
 
     public function getBodyClass(array $module, array &$props)

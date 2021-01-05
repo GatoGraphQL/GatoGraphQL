@@ -21,10 +21,10 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
             self::MODULE_BLOCK_TABPANEL_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::class, PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_HIGHLIGHTS],
             self::MODULE_BLOCK_TABPANEL_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::class, PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYHIGHLIGHTS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-        
+
         return $ret;
     }
 
@@ -33,7 +33,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_HIGHLIGHTS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
-            
+
             case self::MODULE_BLOCK_TABPANEL_MYHIGHLIGHTS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST];
         }
@@ -50,7 +50,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
             case self::MODULE_BLOCK_TABPANEL_MYHIGHLIGHTS:
                 return [PoP_AddHighlights_Module_Processor_CustomFilters::class, PoP_AddHighlights_Module_Processor_CustomFilters::MODULE_FILTER_MYHIGHLIGHTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

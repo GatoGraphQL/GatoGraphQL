@@ -29,7 +29,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessages extends PoP_Module_Proc
             self::MODULE_FEEDBACKMESSAGE_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserFeedbackMessageInners::class, GD_UserLogin_Module_Processor_UserFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

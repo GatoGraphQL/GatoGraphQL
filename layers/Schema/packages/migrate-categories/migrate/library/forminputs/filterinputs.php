@@ -23,7 +23,7 @@ class PoP_Categories_Module_Processor_FilterInputs extends \PoP\ComponentModel\A
         $filterInputs = [
             self::MODULE_FILTERINPUT_SEARCH => [\PoP\Engine\FilterInputProcessor::class, \PoP\Engine\FilterInputProcessor::FILTERINPUT_SEARCH],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     public function getName(array $module)
@@ -45,7 +45,7 @@ class PoP_Categories_Module_Processor_FilterInputs extends \PoP\ComponentModel\A
         $types = [
             self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -54,7 +54,7 @@ class PoP_Categories_Module_Processor_FilterInputs extends \PoP\ComponentModel\A
         $descriptions = [
             self::MODULE_FILTERINPUT_SEARCH => $translationAPI->__('Search for categories containing the given string', 'pop-categories'),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

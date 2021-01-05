@@ -7,7 +7,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
     use QueriedDBObjectModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
     public const MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
 
@@ -27,21 +27,21 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
         $vertical = ($orientation == 'vertical');
 
         $block_inners = array(
-            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION => $vertical ? 
-                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_ORGANIZATION] : 
+            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION => $vertical ?
+                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_ORGANIZATION] :
                 [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
-            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL => $vertical ? 
-                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL] : 
+            self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL => $vertical ?
+                [GD_URE_Module_Processor_CustomVerticalAuthorSidebars::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebars::MODULE_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL] :
                 [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
         );
 
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
-    
+
     // public function getNature(array $module)
     // {
     //     switch ($module[1]) {
@@ -49,7 +49,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     //         case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
     //             return UserRouteNatures::USER;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
@@ -58,9 +58,9 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);                
+                return $this->getQueriedDBObjectID($module, $props, $data_properties);
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
@@ -72,7 +72,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return UserTypeResolver::class;
         }
-        
+
         return parent::getTypeResolverClass($module);
     }
 }

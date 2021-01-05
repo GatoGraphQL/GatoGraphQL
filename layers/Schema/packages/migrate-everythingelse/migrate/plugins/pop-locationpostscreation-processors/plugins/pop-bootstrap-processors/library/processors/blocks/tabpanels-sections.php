@@ -18,7 +18,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends Po
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS => [PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYLOCATIONPOSTS],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -41,7 +41,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends Po
             case self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS:
                 return [GD_Custom_EM_Module_Processor_CustomFilters::class, GD_Custom_EM_Module_Processor_CustomFilters::MODULE_FILTER_MYLOCATIONPOSTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

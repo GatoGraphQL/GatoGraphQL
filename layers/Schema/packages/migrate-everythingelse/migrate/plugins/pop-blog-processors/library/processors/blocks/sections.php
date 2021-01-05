@@ -251,7 +251,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_USERS_CAROUSEL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_CAROUSEL],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getSectionfilterModule(array $module)

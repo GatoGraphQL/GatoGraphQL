@@ -9,7 +9,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
     public const MODULE_FORMINPUTGROUP_CUP_LINKEDIN = 'forminputgroup-cup-linkedin';
     public const MODULE_FORMINPUTGROUP_CUP_YOUTUBE = 'forminputgroup-cup-youtube';
     public const MODULE_FORMINPUTGROUP_CUP_INSTAGRAM = 'forminputgroup-cup-instagram';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -34,14 +34,14 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             self::MODULE_FORMINPUTGROUP_CUP_INSTAGRAM => 'fa-instagram',
         );
 
-        if ($icon = $icons[$module[1]]) {
+        if ($icon = $icons[$module[1]] ?? null) {
             $ret = sprintf(
                 '<i class="fa fa-fw %s"></i>%s',
                 $icon,
                 $ret
             );
         }
-        
+
         return $ret;
     }
 
@@ -56,10 +56,10 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             self::MODULE_FORMINPUTGROUP_CUP_INSTAGRAM => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::MODULE_FORMINPUT_CUP_INSTAGRAM],
         );
 
-        if ($component = $components[$module[1]]) {
+        if ($component = $components[$module[1]] ?? null) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -75,11 +75,11 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             self::MODULE_FORMINPUTGROUP_CUP_YOUTUBE => 'https://www.youtube.com/...',
             self::MODULE_FORMINPUTGROUP_CUP_INSTAGRAM => 'https://www.instagram.com/...',
         );
-        if ($placeholder = $placeholders[$module[1]]) {
+        if ($placeholder = $placeholders[$module[1]] ?? null) {
             $component = $this->getComponentSubmodule($module);
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

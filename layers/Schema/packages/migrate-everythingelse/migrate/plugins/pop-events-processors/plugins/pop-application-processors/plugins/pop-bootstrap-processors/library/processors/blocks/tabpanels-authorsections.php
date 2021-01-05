@@ -40,13 +40,13 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORPASTEVENTS],
             self::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHOREVENTSCALENDAR],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
-    
+
     public function getDelegatorfilterSubmodule(array $module)
     {
         switch ($module[1]) {
@@ -57,7 +57,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_AUTHOREVENTSCALENDAR];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 
@@ -69,7 +69,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
                 case self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;
-            
+
                 case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTS:
                     $daterange_class = 'daterange-future opens-right';
                     break;

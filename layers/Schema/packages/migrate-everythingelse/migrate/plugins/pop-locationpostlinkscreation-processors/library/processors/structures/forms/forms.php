@@ -17,7 +17,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
             GD_Custom_EM_Module_Processor_CreateUpdatePostForms::MODULE_FORM_LOCATIONPOSTLINK => [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_LOCATIONPOSTLINK],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -35,7 +35,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
                 $this->appendProp($module, $props, 'class', $form_row_classs);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

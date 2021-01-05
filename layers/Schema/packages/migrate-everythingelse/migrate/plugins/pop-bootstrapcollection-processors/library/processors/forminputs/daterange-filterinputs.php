@@ -23,7 +23,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
         $filterInputs = [
             self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [\PoPSchema\CustomPosts\FilterInputProcessor::class, \PoPSchema\CustomPosts\FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -65,7 +65,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
         $types = [
             self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => SchemaDefinition::TYPE_DATE,
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -74,7 +74,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
         $descriptions = [
             self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

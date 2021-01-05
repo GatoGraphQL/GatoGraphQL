@@ -26,7 +26,7 @@ class PoPVP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor
             [self::class, self::MODULE_DELEGATORFILTER_TAGSTANCES_STANCE],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -41,10 +41,10 @@ class PoPVP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor
             self::MODULE_DELEGATORFILTER_TAGSTANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_STANCES_STANCE],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

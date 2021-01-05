@@ -8,7 +8,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
     public const MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL = 'layout-usersidebar-horizontal-individual';
     public const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION = 'layout-usersidebar-compacthorizontal-organization';
     public const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL = 'layout-usersidebar-compacthorizontal-individual';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
             self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

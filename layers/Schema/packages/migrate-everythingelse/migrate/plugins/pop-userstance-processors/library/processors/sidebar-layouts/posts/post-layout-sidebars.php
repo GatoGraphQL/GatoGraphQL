@@ -12,7 +12,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE],
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE],
-            
+
         );
     }
 
@@ -24,7 +24,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
         );
 
-        if ($inner = $sidebarinners[$module[1]]) {
+        if ($inner = $sidebarinners[$module[1]] ?? null) {
             return $inner;
         }
 

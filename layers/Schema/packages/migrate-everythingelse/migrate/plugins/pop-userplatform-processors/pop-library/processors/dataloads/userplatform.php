@@ -107,7 +107,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
             self::MODULE_DATALOAD_INVITENEWUSERS => [PoP_Module_Processor_UserForms::class, PoP_Module_Processor_UserForms::MODULE_FORM_INVITENEWUSERS],
         );
 
-        if ($inner = $inner_modules[$module[1]]) {
+        if ($inner = $inner_modules[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

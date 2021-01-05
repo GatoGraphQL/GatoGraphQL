@@ -84,7 +84,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                 $ret[] = $filters[$module[1]];
                 $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR];
                 break;
-            
+
             default:
                 $inners = array(
                     self::MODULE_MULTIPLE_SECTION_CONTENT_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
@@ -100,7 +100,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                     self::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_POST_SIDEBAR],
                     self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
                 );
-                if ($inner = $inners[$module[1]]) {
+                if ($inner = $inners[$module[1]] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -134,10 +134,10 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
             self::MODULE_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR => POP_SCREEN_SINGLEUSERS,
             self::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR => POP_SCREEN_HOMESECTION,
         );
-        if ($screen = $screens[$module[1]]) {
+        if ($screen = $screens[$module[1]] ?? null) {
             return $screen;
         }
-        
+
         return parent::getScreen($module);
     }
 
@@ -169,7 +169,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
             case self::MODULE_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
-        
+
         return parent::getScreengroup($module);
     }
 

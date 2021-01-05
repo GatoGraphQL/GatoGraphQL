@@ -38,7 +38,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
     }
 
     // function getRelevantRoute(array $module, array &$props) {
-        
+
     //     $routes = array(
     //         self::MODULE_MULTIPLE_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
     //         self::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT => POP_CONTENTCREATION_ROUTE_ADDCONTENT,
@@ -66,7 +66,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             self::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS => [PoP_Module_Processor_CustomMenuDataloads::class, PoP_Module_Processor_CustomMenuDataloads::MODULE_DATALOAD_MENU_BODY_MYSECTIONS],
             self::MODULE_MULTIPLE_MENU_BODY_ABOUT => [PoP_Module_Processor_CustomMenuDataloads::class, PoP_Module_Processor_CustomMenuDataloads::MODULE_DATALOAD_MENU_BODY_ABOUT],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -102,7 +102,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -118,7 +118,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
 
         return $ret;
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -131,7 +131,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
                 $this->appendProp($module, $props, 'class', 'multiple-menu-home-usernotloggedin');
                 break;
         }
-    
+
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN:
             case self::MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN:
@@ -141,7 +141,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             case self::MODULE_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN:
                 $this->appendProp([PoP_Module_Processor_IndentMenuLayouts::class, PoP_Module_Processor_IndentMenuLayouts::MODULE_LAYOUT_MENU_INDENT], $props, 'class', 'nav nav-condensed');
                 break;
-            
+
             case self::MODULE_MULTIPLE_MENU_SIDE_SECTIONS:
             case self::MODULE_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET:
             case self::MODULE_MULTIPLE_MENU_SIDE_MYSECTIONS:
@@ -159,7 +159,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
                 $this->appendProp($module, $props, 'class', 'side-sections-menu');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

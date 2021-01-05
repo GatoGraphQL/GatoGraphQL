@@ -31,7 +31,7 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
             self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -41,7 +41,7 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
             case self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_MYSTANCES];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 

@@ -24,10 +24,10 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
             self::MODULE_BLOCK_TABPANEL_PASTEVENTS => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_PASTEVENTS],
             self::MODULE_BLOCK_TABPANEL_EVENTSCALENDAR => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_EVENTSCALENDAR],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -55,7 +55,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
             case self::MODULE_BLOCK_TABPANEL_EVENTSCALENDAR:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_EVENTSCALENDAR];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 
@@ -67,7 +67,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                 case self::MODULE_BLOCK_TABPANEL_PASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;
-            
+
                 case self::MODULE_BLOCK_TABPANEL_EVENTS:
                     $daterange_class = 'daterange-future opens-right';
                     break;

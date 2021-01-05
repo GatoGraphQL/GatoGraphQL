@@ -18,7 +18,7 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
             self::MODULE_FORM_FLAG => [PoP_ContentCreation_Module_Processor_GFFormInners::class, PoP_ContentCreation_Module_Processor_GFFormInners::MODULE_FORMINNER_FLAG],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -37,7 +37,7 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
                 $this->setProp($module, $props, 'description', $description);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

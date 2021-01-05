@@ -75,7 +75,7 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
             self::MODULE_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_ScrollInners::class, PoP_CategoryPosts_Module_Processor_ScrollInners::MODULE_SCROLLINNER_CATEGORYPOSTS19_SIMPLEVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -84,7 +84,7 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $simpleviews = array(
             [self::class, self::MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],
@@ -108,13 +108,13 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
             [self::class, self::MODULE_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW],
             [self::class, self::MODULE_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW],
         );
-        
+
         $extra_class = '';
         if (in_array($module, $simpleviews)) {
             $extra_class = 'simpleview';
         }
         $this->appendProp($module, $props, 'class', $extra_class);
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -21,7 +21,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGET_STANCETARGET:
                 $ret[] = [PoP_Module_Processor_StanceTargetSubcomponentLayouts::class, PoP_Module_Processor_StanceTargetSubcomponentLayouts::MODULE_LAYOUT_STANCETARGET_ADDONS];
@@ -36,7 +36,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
                 $ret[] = [PoP_Module_Processor_StanceReferencesFramesLayouts::class, PoP_Module_Processor_StanceReferencesFramesLayouts::MODULE_LAYOUT_STANCES_APPENDTOSCRIPT];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -53,7 +53,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
             self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS => $stances,
         );
 
-        return $titles[$module[1]];
+        return $titles[$module[1]] ?? null;
     }
     public function getFontawesome(array $module, array &$props)
     {
@@ -64,7 +64,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
             self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS => 'fa-commenting-o',
         );
 
-        return $fontawesomes[$module[1]];
+        return $fontawesomes[$module[1]] ?? null;
     }
     public function getBodyClass(array $module, array &$props)
     {

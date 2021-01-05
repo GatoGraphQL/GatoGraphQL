@@ -75,7 +75,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
             self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS18],
             self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -136,7 +136,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
             case self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS19:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_CATEGORYPOSTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

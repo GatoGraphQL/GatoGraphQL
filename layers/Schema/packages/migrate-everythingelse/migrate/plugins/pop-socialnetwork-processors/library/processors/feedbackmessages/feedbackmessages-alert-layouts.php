@@ -17,7 +17,7 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts extends PoP
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageLayouts::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER],
         );
 
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             return $layout;
         }
 

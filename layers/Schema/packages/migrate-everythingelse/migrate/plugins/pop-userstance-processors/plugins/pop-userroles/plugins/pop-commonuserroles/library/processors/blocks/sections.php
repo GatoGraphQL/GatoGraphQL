@@ -55,7 +55,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
             self::MODULE_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

@@ -14,7 +14,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
             [self::class, self::MODULE_FILTER_MYHIGHLIGHTS],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -23,10 +23,10 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
             self::MODULE_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_MYHIGHLIGHTS],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 }

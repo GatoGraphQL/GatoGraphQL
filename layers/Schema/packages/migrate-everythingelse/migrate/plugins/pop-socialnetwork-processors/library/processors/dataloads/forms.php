@@ -51,7 +51,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
         $actionexecuters = array(
             self::MODULE_DATALOAD_CONTACTUSER => ContactUserMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$module[1]]) {
+        if ($actionexecuter = $actionexecuters[$module[1]] ?? null) {
             return $actionexecuter;
         }
 

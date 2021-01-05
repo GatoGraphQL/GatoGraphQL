@@ -20,10 +20,10 @@ class GD_EM_Module_Processor_Maps extends GD_EM_Module_Processor_MapsBase
             self::MODULE_EM_MAP_USER => [GD_EM_Module_Processor_MapInners::class, GD_EM_Module_Processor_MapInners::MODULE_EM_MAPINNER_USER],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-        
+
         return parent::getInnerSubmodule($module);
     }
 }

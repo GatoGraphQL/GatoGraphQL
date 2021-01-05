@@ -1606,7 +1606,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_CATEGORYPOSTS17_SCROLL_ADDONS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_ADDONS],
             self::MODULE_BLOCK_CATEGORYPOSTS18_SCROLL_ADDONS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_ADDONS],
             self::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_ADDONS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_ADDONS],
-            
+
             self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_DETAILS],
             self::MODULE_BLOCK_CATEGORYPOSTS01_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_DETAILS],
             self::MODULE_BLOCK_CATEGORYPOSTS02_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_DETAILS],
@@ -1627,7 +1627,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_CATEGORYPOSTS17_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_DETAILS],
             self::MODULE_BLOCK_CATEGORYPOSTS18_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_DETAILS],
             self::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_DETAILS],
-            
+
             self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_CATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_CATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -1669,7 +1669,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_CATEGORYPOSTS17_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_CATEGORYPOSTS18_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_CATEGORYPOSTS01_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_CATEGORYPOSTS02_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -1690,7 +1690,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_CATEGORYPOSTS17_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_CATEGORYPOSTS18_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_THUMBNAIL],
-                        
+
             self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_LIST],
             self::MODULE_BLOCK_CATEGORYPOSTS01_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_LIST],
             self::MODULE_BLOCK_CATEGORYPOSTS02_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_LIST],
@@ -1732,7 +1732,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_CATEGORYPOSTS17_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_LINE],
             self::MODULE_BLOCK_CATEGORYPOSTS18_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_LINE],
             self::MODULE_BLOCK_CATEGORYPOSTS19_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_LINE],
-            
+
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_DETAILS],
@@ -1753,7 +1753,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS17_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_DETAILS],
-            
+
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -1795,7 +1795,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS17_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -1816,7 +1816,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS17_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_THUMBNAIL],
-            
+
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_LIST],
@@ -1837,7 +1837,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS17_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_LIST],
-            
+
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_LINE],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_LINE],
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_LINE],
@@ -1879,7 +1879,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS17_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_DETAILS],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS18_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_DETAILS],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_DETAILS => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_DETAILS],
-            
+
             self::MODULE_BLOCK_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -1921,7 +1921,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS17_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             self::MODULE_BLOCK_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -1942,7 +1942,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS17_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL],
-            
+
             self::MODULE_BLOCK_TAGCATEGORYPOSTS00_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS01_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS02_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST],
@@ -1963,7 +1963,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS17_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS18_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_LIST => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST],
-            
+
             self::MODULE_BLOCK_TAGCATEGORYPOSTS00_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LINE],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS01_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LINE],
             self::MODULE_BLOCK_TAGCATEGORYPOSTS02_SCROLL_LINE => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LINE],
@@ -2112,7 +2112,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)
@@ -2238,7 +2238,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 // case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS17_SCROLL_LINE:
                 // case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_LINE:
                 // case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_LINE:
-            
+
                 // Allow URE to add the ContentSource switch
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST];
 
@@ -3063,7 +3063,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 $this->appendProp($module, $props, 'class', 'pop-block-carousel block-posts-carousel');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

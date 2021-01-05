@@ -21,7 +21,7 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             self::MODULE_SCROLL_NOTIFICATIONS_LIST => [GD_AAL_Module_Processor_CustomScrollInners::class, GD_AAL_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -30,7 +30,7 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $lists = array(
             [self::class, self::MODULE_SCROLL_NOTIFICATIONS_LIST],
@@ -55,7 +55,7 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
                 $this->appendProp($module, $props, 'class', 'scroll-notifications');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

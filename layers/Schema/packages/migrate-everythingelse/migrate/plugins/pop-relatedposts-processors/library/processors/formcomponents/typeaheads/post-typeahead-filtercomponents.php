@@ -24,7 +24,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
         $filterInputs = [
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_ReferencesFilterInputProcessor::class, PoP_Module_Processor_ReferencesFilterInputProcessor::FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
         ];
-        return $filterInputs[$module[1]];
+        return $filterInputs[$module[1]] ?? null;
     }
 
     // public function isFiltercomponent(array $module)
@@ -74,7 +74,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
         $types = [
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
-        return $types[$module[1]];
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -83,7 +83,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
         $descriptions = [
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => $translationAPI->__('', ''),
         ];
-        return $descriptions[$module[1]];
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

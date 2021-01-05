@@ -30,7 +30,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
             self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_TAGS_LIST],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFormat(array $module): ?string
@@ -59,7 +59,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('tags', 'poptheme-wassup'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

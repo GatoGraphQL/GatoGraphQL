@@ -17,7 +17,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         $buttoninners = array(
             self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY => [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
         );
-        if ($buttoninner = $buttoninners[$module[1]]) {
+        if ($buttoninner = $buttoninners[$module[1]] ?? null) {
             return $buttoninner;
         }
 
@@ -30,7 +30,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('Comments, responses and highlights', 'poptheme-wassup');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -84,7 +84,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

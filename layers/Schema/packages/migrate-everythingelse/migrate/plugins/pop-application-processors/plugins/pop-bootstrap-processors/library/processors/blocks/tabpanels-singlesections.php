@@ -34,7 +34,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
             self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLEUPVOTEDBY],
             self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY => [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLEDOWNVOTEDBY],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 

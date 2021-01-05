@@ -39,16 +39,16 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINNER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
-        
+
     //     return parent::getFilter($module);
     // }
 }

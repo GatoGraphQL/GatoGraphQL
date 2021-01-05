@@ -73,13 +73,13 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
             self::MODULE_LAYOUT_DOWNVOTEPOST_HIDE_STYLES => GD_CLASS_DOWNVOTEPOST,
             self::MODULE_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES => GD_CLASS_UNDODOWNVOTEPOST,
         );
-        if ($target = $targets[$module[1]]) {
+        if ($target = $targets[$module[1]] ?? null) {
             return '.'.$target;
         }
 
         return parent::getElemTarget($module, $props);
     }
-    
+
     public function getElemStyles(array $module, array &$props)
     {
         switch ($module[1]) {

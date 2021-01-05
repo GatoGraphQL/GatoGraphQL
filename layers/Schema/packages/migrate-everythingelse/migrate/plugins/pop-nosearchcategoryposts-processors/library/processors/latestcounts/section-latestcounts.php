@@ -194,10 +194,10 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($cat = $cats[$module[1]]) {
+        if ($cat = $cats[$module[1]] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
-    
+
         return parent::getObjectNames($module, $props);
     }
 
@@ -265,10 +265,10 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($cat = $cats[$module[1]]) {
+        if ($cat = $cats[$module[1]] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
         }
-    
+
         return parent::getObjectNames($module, $props);
     }
 
@@ -297,7 +297,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS19:
                 return true;
         }
-    
+
         return parent::isAuthor($module, $props);
     }
 
@@ -326,7 +326,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19:
                 return true;
         }
-    
+
         return parent::isTag($module, $props);
     }
 
@@ -340,115 +340,115 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS00:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS00;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS10:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS10:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS10:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS10;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS01:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS01;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS11:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS11:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS11:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS11;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS02:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS02:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS02:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS02;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS12:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS12:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS12:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS12;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS03:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS03:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS03:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS03;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS13:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS13:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS13:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS13;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS04:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS04:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS04:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS04;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS14:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS14:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS14:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS14;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS05:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS05:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS05:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS05;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS15:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS15:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS15:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS15;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS06:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS06:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS06:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS06;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS16:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS16:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS16:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS16;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS07:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS07:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS07:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS07;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS17:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS17:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS17:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS17;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS08:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS08:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS08:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS08;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS18:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS18:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS09:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS09:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS09:
                 $ret[] = 'post-'.POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS09;
                 break;
-            
+
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS19:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS19:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19:
@@ -463,7 +463,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             $module,
             $props
         );
-    
+
         return $ret;
     }
 }

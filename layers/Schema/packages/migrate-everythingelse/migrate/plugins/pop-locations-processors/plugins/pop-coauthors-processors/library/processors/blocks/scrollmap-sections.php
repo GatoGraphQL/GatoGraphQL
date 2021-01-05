@@ -25,7 +25,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getTitle(array $module, array &$props)
@@ -34,7 +34,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
             case self::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleTitle();
         }
-        
+
         return parent::getTitle($module, $props);
     }
 

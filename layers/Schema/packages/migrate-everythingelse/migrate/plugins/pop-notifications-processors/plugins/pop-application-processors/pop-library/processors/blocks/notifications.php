@@ -36,7 +36,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
             self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST => [AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
         );
 
-        if ($inner = $inner_modules[$module[1]]) {
+        if ($inner = $inner_modules[$module[1]] ?? null) {
             $ret[] = $inner;
         }
 
@@ -65,7 +65,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST:
@@ -76,7 +76,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
                 $this->addJsmethod($ret, 'scrollTopOnUserLoggedInOut');
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -120,7 +120,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
 
         return parent::getControlgroupTopSubmodule($module);
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -131,7 +131,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
                 $this->appendProp($module, $props, 'class', 'block-notifications');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

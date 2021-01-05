@@ -44,7 +44,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
             [self::class, self::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT],
         );
     }
-    
+
     public function getInnerSubmodule(array $module)
     {
         $inners = array(
@@ -68,10 +68,10 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
             self::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_AUTHORCONTENT],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
-    
+
         return parent::getInnerSubmodule($module);
     }
 
@@ -85,7 +85,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
             case self::MODULE_DELEGATORFILTER_HOMECONTENT:
                 return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';
-            
+
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
             case self::MODULE_DELEGATORFILTER_AUTHORMAINCONTENT:
                 return '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';

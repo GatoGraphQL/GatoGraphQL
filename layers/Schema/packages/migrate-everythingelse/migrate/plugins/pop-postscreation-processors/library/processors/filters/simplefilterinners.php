@@ -28,7 +28,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
             ],
         ];
         // Add the link access filter
-        if ($inputmodules[$module[1]] && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputmodules[$module[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
             array_splice(
                 $ret,
                 array_search(
@@ -59,7 +59,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINNER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
-    //     if ($filter = $filters[$module[1]]) {
+    //     if ($filter = $filters[$module[1]] ?? null) {
     //         return $filter;
     //     }
 

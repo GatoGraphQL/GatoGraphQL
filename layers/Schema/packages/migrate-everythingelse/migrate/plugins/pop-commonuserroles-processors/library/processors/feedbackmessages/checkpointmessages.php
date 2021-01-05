@@ -20,7 +20,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages extends PoP_Mo
             self::MODULE_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL => [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_PROFILEINDIVIDUAL],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 

@@ -26,7 +26,7 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
             self::MODULE_SCROLL_WHOWEARE_FULLVIEW => [GD_Custom_Module_Processor_CustomScrollInners::class, GD_Custom_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_WHOWEARE_FULLVIEW],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -42,13 +42,13 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
             case self::MODULE_SCROLL_WHOWEARE_FULLVIEW:
                 return null;
         }
-    
+
         return parent::getFetchmoreButtonSubmodule($module);
     }
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [self::class, self::MODULE_SCROLL_WHOWEARE_THUMBNAIL],
@@ -74,7 +74,7 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
             $extra_class = 'list';
         }
         $this->appendProp($module, $props, 'class', $extra_class);
-        
+
         parent::initModelProps($module, $props);
     }
 }

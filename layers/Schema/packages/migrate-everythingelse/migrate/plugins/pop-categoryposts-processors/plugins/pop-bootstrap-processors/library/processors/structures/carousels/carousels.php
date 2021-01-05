@@ -251,7 +251,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // switch ($module[1]) {
 
         //     case self::MODULE_CAROUSEL_CATEGORYPOSTS00:
@@ -381,7 +381,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
         // }
         $this->appendProp($module, $props, 'class', 'slide');
         $this->appendProp($module, $props, 'class', 'widget widget-info');
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -509,7 +509,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             self::MODULE_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::MODULE_CAROUSELINNER_CATEGORYPOSTS18_CONTENT],
             self::MODULE_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::MODULE_CAROUSELINNER_CATEGORYPOSTS19_CONTENT],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -774,7 +774,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             self::MODULE_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS18],
             self::MODULE_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS19],
         );
-        if ($control = $controls[$module[1]]) {
+        if ($control = $controls[$module[1]] ?? null) {
             return $control;
         }
 

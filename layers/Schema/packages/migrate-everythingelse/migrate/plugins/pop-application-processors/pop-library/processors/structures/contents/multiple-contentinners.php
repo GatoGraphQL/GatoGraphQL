@@ -18,7 +18,7 @@ class PoP_Module_Processor_MultipleContentInners extends PoP_Module_Processor_Co
         $layouts = array(
             self::MODULE_CONTENTINNER_PAGECONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_PAGE],
         );
-        if ($layout = $layouts[$module[1]]) {
+        if ($layout = $layouts[$module[1]] ?? null) {
             $ret[] = $layout;
         }
 

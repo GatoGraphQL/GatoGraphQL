@@ -30,7 +30,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
             self::MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST => [PoPTheme_Wassup_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
         );
 
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             return $inner;
         }
 
@@ -39,7 +39,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
 
     public function initModelProps(array $module, array &$props)
     {
-            
+
         // Extra classes
         $thumbnails = array(
             [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL],

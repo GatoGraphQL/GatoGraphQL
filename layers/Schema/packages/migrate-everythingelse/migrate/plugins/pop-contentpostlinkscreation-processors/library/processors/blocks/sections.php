@@ -33,7 +33,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks extends PoP_
             self::MODULE_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     protected function getControlgroupTopSubmodule(array $module)

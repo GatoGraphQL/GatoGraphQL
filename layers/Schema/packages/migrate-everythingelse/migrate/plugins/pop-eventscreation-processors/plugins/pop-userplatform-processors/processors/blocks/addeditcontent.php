@@ -30,10 +30,10 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_EVENT_UPDATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENT_UPDATE],
             self::MODULE_BLOCK_EVENT_CREATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_EVENT_CREATE],
         );
-        if ($block_inner = $block_inners[$module[1]]) {
+        if ($block_inner = $block_inners[$module[1]] ?? null) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -66,7 +66,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

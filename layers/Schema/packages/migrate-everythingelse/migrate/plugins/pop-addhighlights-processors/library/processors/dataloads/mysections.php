@@ -31,7 +31,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
             self::MODULE_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_HIGHLIGHTS_FULLVIEW],
         );
 
-        return $inner_modules[$module[1]];
+        return $inner_modules[$module[1]] ?? null;
     }
 
     public function getFilterSubmodule(array $module): ?array
@@ -41,7 +41,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_AddHighlights_Module_Processor_CustomFilters::class, PoP_AddHighlights_Module_Processor_CustomFilters::MODULE_FILTER_MYHIGHLIGHTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 

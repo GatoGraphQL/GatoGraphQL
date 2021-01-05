@@ -27,10 +27,10 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES_NEUTRAL => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES_NEUTRAL],
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES_AGAINST => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES_AGAINST],
         );
-        if ($inner = $inners[$module[1]]) {
+        if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -45,7 +45,7 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
             case self::MODULE_BLOCK_TABPANEL_TAGSTANCES_AGAINST:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_TAGSTANCES_STANCE];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }
