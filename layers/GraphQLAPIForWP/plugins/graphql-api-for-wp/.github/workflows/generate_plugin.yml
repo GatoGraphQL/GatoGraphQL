@@ -56,7 +56,7 @@ jobs:
       - name: Create artifact
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -X -r build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md ISSUE_TEMPLATE.md LICENSE.md PULL_REQUEST_TEMPLATE.md README.md rector.php *.dist composer.* "**/package-lock.json" build** dev-helpers** docs/images** tests** "**/tests**"
+          args: zip -X -r build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md ISSUE_TEMPLATE.md LICENSE.md PULL_REQUEST_TEMPLATE.md README.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" build** dev-helpers** docs/images** tests** "**/tests**"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
