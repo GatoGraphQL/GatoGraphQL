@@ -27,14 +27,13 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   run: composer install --no-progress --ansi
-            -   run: cd monorepo-builder && composer install --no-progress --ansi
+            -   uses: "ramsey/composer-install@v1"
 
             # get package json list
             -
                 id: output_data
                 run: |
-                    echo "::set-output name=matrix::$(monorepo-builder/vendor/bin/monorepo-builder package-entries-json)"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json)"
 
         # this step is needed, so the output gets to the next defined job
         outputs:

@@ -24,14 +24,13 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   run: composer install --no-progress --ansi
-            -   run: cd monorepo-builder && composer install --no-progress --ansi
+            -   uses: "ramsey/composer-install@v1"
 
             # get package json list
             -
                 id: output_data
                 run: |
-                    echo "::set-output name=matrix::$(monorepo-builder/vendor/bin/monorepo-builder package-entries-json)"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json)"
 
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
@@ -57,11 +56,9 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   uses: "ramsey/composer-install@v1"
 
-            -   run: composer install --no-progress --ansi
-            -   run: cd monorepo-builder && composer install --no-progress --ansi
-
-            -   run: monorepo-builder/vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package.path }}/composer.json --ansi
+            -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package.path }}/composer.json --ansi
 
             -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package.path }}
 

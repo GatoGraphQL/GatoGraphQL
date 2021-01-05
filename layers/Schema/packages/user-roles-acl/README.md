@@ -1,6 +1,6 @@
 # Access Control List for User Roles
 
-[![Build Status][ico-travis]][link-travis]
+<!-- [![Build Status][ico-travis]][link-travis] -->
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Software License][ico-license]](LICENSE.md)
 
