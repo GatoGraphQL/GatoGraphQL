@@ -8,6 +8,7 @@ on:
 
 jobs:
     provide_packages_json_tagged:
+        name: Provide data
         # see json juggling: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-6
         # see https://stackoverflow.com/a/62953566/1348344
         runs-on: ubuntu-latest
@@ -44,6 +45,8 @@ jobs:
             fail-fast: false
             matrix:
                 package: ${{fromJson(needs.provide_packages_json_tagged.outputs.matrix)}}
+
+        name: Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})
 
         steps:
             -
