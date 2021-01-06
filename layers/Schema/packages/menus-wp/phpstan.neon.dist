@@ -1,6 +1,6 @@
 includes:
     - %currentWorkingDirectory%/vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
-	level: 8
+	level: 0
 	paths:
 		- src
