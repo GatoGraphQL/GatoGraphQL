@@ -1,5 +1,12 @@
 #!/bin/bash
 ########################################################################
+#
+# Script to execute PHPStan on a series of packages
+# Provide the packages as the first argument to the script,
+# separated by a space:
+# scripts/phpstan.sh "package1 package2 package3"
+#
+########################################################################
 # Helper functions
 # ----------------------------------------------------------------------
 function fail {
@@ -14,7 +21,7 @@ set -e
 
 ########################################################################
 
-# VARIABLES
+# Variables
 PACKAGES="$1"
 if [ -z "$PACKAGES" ]; then
     fail "Please provide to packages to execute PHPStan, as first argument to the bash script"
