@@ -1,0 +1,52 @@
+name: PHP Coding Standards
+on:
+    push:
+        branches:
+            - master
+    pull_request: null
+
+jobs:
+    provide_data:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                uses: actions/checkout@v2
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   uses: "ramsey/composer-install@v1"
+
+            -   id: output_data
+                run: |
+                    echo "::set-output name=code_paths::$(vendor/bin/monorepo-builder package-code-paths-json)"
+
+        outputs:
+            code_paths: ${{ steps.output_data.outputs.code_paths }}
+
+    main:
+        needs: provide_data
+        name: Execute PHP Code Sniffer
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Set-up PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   name: Install Composer dependencies
+                uses: "ramsey/composer-install@v1"
+
+            -   name: Run PHP Code Sniffer
+                run: vendor/bin/phpcs -n ${{ join(fromJson(needs.provide_data.outputs.code_paths), " ") }}
+
