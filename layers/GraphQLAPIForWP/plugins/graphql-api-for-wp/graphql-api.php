@@ -49,8 +49,22 @@ define('GRAPHQL_API_URL', plugin_dir_url(__FILE__));
 define('GRAPHQL_API_BASE_NAME', plugin_basename(__FILE__)); // "graphql-api/graphql-api.php"
 define('GRAPHQL_API_PLUGIN_NAME', dirname(plugin_basename(__FILE__))); // "graphql-api"
 
+// Check Composer's autoload has been generated
+$autoloadFile = __DIR__ . '/vendor/autoload.php';
+if (!file_exists($autoloadFile)) {
+    \add_action('admin_notices', function () {
+        _e(sprintf(
+            '<div class="notice notice-error">' .
+                '<p>%s</p>' .
+            '</div>',
+            __('Dependencies for <strong>GraphQL API for WordPress</strong> are missing. Please install them by running <code>composer install</code> on the plugin\'s root folder. Until then, the plugin will be disabled.', 'graphql-api')
+        ));
+    });
+    return;
+}
+
 // Load Composer’s autoloader
-require_once(__DIR__ . '/vendor/autoload.php');
+require_once($autoloadFile);
 
 // Create and set-up the plugin instance
 (new \GraphQLAPI\GraphQLAPI\Plugin())->setup();
