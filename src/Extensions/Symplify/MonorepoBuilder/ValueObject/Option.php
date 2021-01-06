@@ -10,4 +10,8 @@ final class Option
      * @var string
      */
     public const PACKAGE_ORGANIZATIONS = 'package_organizations';
+    /**
+     * @var string
+     */
+    public const JSON = 'json';
 }
