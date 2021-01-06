@@ -61,7 +61,7 @@ jobs:
                     # ----------------------------------------------------------------------
                     
                     failed_packages=()
-                    packages=(${{ join(fromJson(needs.provide_data.outputs.packages).*.path, ' '))
+                    packages=(${{ join(fromJson(needs.provide_data.outputs.packages).*.path, ' ') }})
                     for package in "${packages[@]}"
                     do
                         vendor/bin/phpstan analyse $package/src $package/tests -c $package/phpstan.neon.dist
