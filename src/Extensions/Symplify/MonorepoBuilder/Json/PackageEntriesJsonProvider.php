@@ -30,7 +30,7 @@ final class PackageEntriesJsonProvider
     }
 
     /**
-     * @return array<string[]>
+     * @return array<array<string,string>>
      */
     public function providePackageEntries(): array
     {
