@@ -33,6 +33,8 @@ jobs:
         needs: provide_data
         name: Execute PHPStan
         runs-on: ubuntu-latest
+        env:
+            PHPSTAN_PACKAGES: ${{ join(fromJson(needs.provide_data.outputs.packages), ' ') }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -47,10 +49,6 @@ jobs:
 
             -   name: Install Composer dependencies
                 uses: "ramsey/composer-install@v1"
-
-            -   name: Set env
-                env:
-                    PHPSTAN_PACKAGES: ${{ join(fromJson(needs.provide_data.outputs.packages), ' ') }}
 
             -   name: Run PHPStan
                 run: ./.github/workflows/scripts/phpstan.sh $PHPSTAN_PACKAGES
