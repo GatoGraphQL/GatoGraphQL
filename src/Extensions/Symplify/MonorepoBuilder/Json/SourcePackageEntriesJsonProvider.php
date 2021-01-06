@@ -26,7 +26,7 @@ final class SourcePackageEntriesJsonProvider
      * Since a Package already has function `hasTests`, and since every
      * package that has tests/ also has src/, then using this function
      * already does the job.
-     * @return array<array<string,string>>
+     * @return string[]
      */
     public function provideSourcePackageEntries(): array
     {
@@ -37,11 +37,8 @@ final class SourcePackageEntriesJsonProvider
             }
         ));
         return array_map(
-            function (Package $package): array {
-                return [
-                    'name' => $package->getShortName(),
-                    'path' => $package->getRelativePath(),
-                ];
+            function (Package $package): string {
+                return $package->getRelativePath();
             },
             $packagesWithCode
         );

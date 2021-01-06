@@ -49,6 +49,6 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run PHPStan
-                run: ./.github/workflows/scripts/phpstan.sh "${{ join(fromJson(needs.provide_data.outputs.packages).*.path, ' ') }}"
+                run: ./.github/workflows/scripts/phpstan.sh "${{ join(fromJson(needs.provide_data.outputs.packages), ' ') }}"
                     
 
