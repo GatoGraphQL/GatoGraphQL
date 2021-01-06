@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageCodePathsJsonCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageCodePathsJsonProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
@@ -75,6 +77,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services
         ->set(PackageEntriesJsonProvider::class)
         ->set(PackageEntriesJsonCommand::class)
+        ->set(PackageCodePathsJsonProvider::class)
+        ->set(PackageCodePathsJsonCommand::class)
         ->set(SymlinkLocalPackageCommand::class);
 
     /** release workers - in order to execute */
