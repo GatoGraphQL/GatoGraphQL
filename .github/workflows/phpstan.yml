@@ -24,7 +24,7 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=packages::$(vendor/bin/monorepo-builder source-packages --json)"
+                    echo "::set-output name=packages::$(vendor/bin/monorepo-builder source-packages)"
 
         outputs:
             packages: ${{ steps.output_data.outputs.packages }}
@@ -34,7 +34,7 @@ jobs:
         name: Execute PHPStan
         runs-on: ubuntu-latest
         env:
-            PHPSTAN_PACKAGES: ${{ join(fromJson(needs.provide_data.outputs.packages), ' ') }}
+            PHPSTAN_PACKAGES: ${{ needs.provide_data.outputs.packages }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
