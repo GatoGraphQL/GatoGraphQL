@@ -7,7 +7,7 @@
 # but if "graphql-api/graphql-api-for-wp" is, then nothing else is tested,
 # since nobody else depends on this package
 ####################################################################
-name: Split Code Analisys (Tests, Coding Standards, Static Analysis)
+name: Split Tests
 
 on:
     push:
@@ -21,6 +21,7 @@ env:
 
 jobs:
     provide_packages_json:
+        name: Provide data
         # see json juggling: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-6
         runs-on: ubuntu-latest
         steps:
@@ -54,7 +55,7 @@ jobs:
             matrix:
                 package: ${{ fromJson(needs.provide_packages_json.outputs.matrix )}}
 
-        name: Split Tests of ${{ matrix.package.name }}
+        name: Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})
 
         steps:
             -   uses: actions/checkout@v2
@@ -75,8 +76,4 @@ jobs:
                 name: PHPUnit
                 working-directory: ${{ matrix.package.path }}
                 run: vendor/bin/phpunit
-
-            -
-                name: PHPStan
-                working-directory: ${{ matrix.package.path }}
-                run: vendor/bin/phpstan analyse -c phpstan.neon.dist
+                
