@@ -48,5 +48,5 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run PHP Code Sniffer
-                run: vendor/bin/phpcs -n ${{ join(fromJson(needs.provide_data.outputs.code_paths), " ") }}
+                run: vendor/bin/phpcs -n ${{ join(fromJson(needs.provide_data.outputs.code_paths), ' ') }}
 
