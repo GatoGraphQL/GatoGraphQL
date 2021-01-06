@@ -80,8 +80,3 @@ jobs:
                 name: PHPStan
                 working-directory: ${{ matrix.package.path }}
                 run: vendor/bin/phpstan analyse -c phpstan.neon.dist
-
-            -
-                name: PHP Code Sniffer
-                working-directory: ${{ matrix.package.path }}
-                run: vendor/bin/phpcs -n src/
