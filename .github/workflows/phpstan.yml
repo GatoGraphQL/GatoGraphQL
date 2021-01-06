@@ -70,6 +70,7 @@ jobs:
                         fi
                     done
                     if [ ${#failed_packages[@]} -gt 0 ]; then
-                        fail "PHPStan failed on packages: $(join_by " " ${failed_packages[@]})"
+                        package_list=$(join_by ", " ${failed_packages[@]})
+                        fail "PHPStan failed on packages: ${package_list}"
                     fi
 
