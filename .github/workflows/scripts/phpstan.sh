@@ -24,11 +24,6 @@ function note {
 }
 ########################################################################
 
-# Do not show errors! Or otherwise the script ends whenever PHPStan fails on any package
-set +e
-
-########################################################################
-
 # Variables
 PACKAGES="$1"
 if [ -z "$PACKAGES" ]; then
@@ -42,6 +37,8 @@ packages=($PACKAGES)
 for package in "${packages[@]}"
 do
     note "Executing tests for package '${package}'"
+    # Do not show errors! Or otherwise the script ends whenever PHPStan fails on any package
+    set +e
     vendor/bin/phpstan analyse $package/src $package/tests -c $package/phpstan.neon.dist --ansi
     if [ "$?" -gt 0 ]; then
         failed_packages+=($package)
