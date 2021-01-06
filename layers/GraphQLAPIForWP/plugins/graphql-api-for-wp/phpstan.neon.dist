@@ -1,5 +1,5 @@
 includes:
-    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+    - %currentWorkingDirectory%/vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
     # Errors in production (downgraded via Rector) may not show up in development. So avoid throwing errors
     reportUnmatchedIgnoredErrors: false
