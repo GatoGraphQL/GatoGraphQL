@@ -26,9 +26,10 @@ jobs:
                     echo "::set-output name=code_paths::$(vendor/bin/monorepo-builder package-code-paths-json)"
 
         outputs:
-            code_paths: ${{ steps.output_data.outputs.code_paths }}
+            code_paths: ${{ fromJson(steps.output_data.outputs.code_paths) }}
 
     main:
+        if: ${{ needs.provide_data.outputs.code_paths }}
         needs: provide_data
         name: Execute PHP Code Sniffer
         runs-on: ubuntu-latest
@@ -48,5 +49,5 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run PHP Code Sniffer
-                run: vendor/bin/phpcs -n ${{ join(fromJson(needs.provide_data.outputs.code_paths), ' ') }}
+                run: vendor/bin/phpcs -n ${{ join(needs.provide_data.outputs.code_paths, ' ') }}
 
