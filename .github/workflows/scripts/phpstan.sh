@@ -14,6 +14,13 @@ function fail {
     exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
 }
 function join_by { local d=$1; shift; local f=$1; shift; printf %s "$f" "${@/#/$d}"; }
+function note {
+    MESSAGE=$1;
+
+    printf "\n";
+    echo "[NOTE] $MESSAGE";
+    printf "\n";
+}
 ########################################################################
 
 # show errors
@@ -33,6 +40,7 @@ failed_packages=()
 packages=($PACKAGES)
 for package in "${packages[@]}"
 do
+    note "Executing tests for package '${package}'"
     vendor/bin/phpstan analyse $package/src $package/tests -c $package/phpstan.neon.dist
     if [ "$?" -gt 0 ]; then
         failed_packages+=($package)
