@@ -1,4 +1,4 @@
-name: Static analysis via PHPStan
+name: PHPStan
 on:
     push:
         branches:
