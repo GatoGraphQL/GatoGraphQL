@@ -7,7 +7,7 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\MonorepoBuilder\ValueObject\Package;
 
-final class SourcePackagesJsonProvider
+final class SourcePackagesProvider
 {
     /**
      * @var PackageProvider
