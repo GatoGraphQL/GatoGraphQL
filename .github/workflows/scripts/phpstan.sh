@@ -10,6 +10,7 @@
 # Helper functions
 # ----------------------------------------------------------------------
 function fail {
+    set -e
     printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
     exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
 }
@@ -21,6 +22,11 @@ function note {
     echo "[NOTE] $MESSAGE";
     printf "\n";
 }
+########################################################################
+
+# Do not show errors! Or otherwise the script ends whenever PHPStan fails on any package
+set +e
+
 ########################################################################
 
 # Variables
