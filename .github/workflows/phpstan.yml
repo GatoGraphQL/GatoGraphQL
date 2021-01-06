@@ -1,4 +1,4 @@
-name: PHP Coding Standards
+name: Static analysis via PHPStan
 on:
     push:
         branches:
@@ -24,15 +24,17 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=code_paths::$(vendor/bin/monorepo-builder package-code-paths-json)"
+                    echo "::set-output name=packages::$(vendor/bin/monorepo-builder source-packages-json)"
 
         outputs:
-            code_paths: ${{ steps.output_data.outputs.code_paths }}
+            packages: ${{ steps.output_data.outputs.packages }}
 
     main:
         needs: provide_data
-        name: Execute PHP Code Sniffer
+        name: Execute PHPStan
         runs-on: ubuntu-latest
+        env:
+            PHPSTAN_PACKAGES: ${{ join(fromJson(needs.provide_data.outputs.packages), ' ') }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -48,6 +50,7 @@ jobs:
             -   name: Install Composer dependencies
                 uses: "ramsey/composer-install@v1"
 
-            -   name: Run PHP Code Sniffer
-                run: vendor/bin/phpcs -n ${{ join(fromJson(needs.provide_data.outputs.code_paths), ' ') }}
+            -   name: Run PHPStan
+                run: ./.github/workflows/scripts/phpstan.sh "$PHPSTAN_PACKAGES"
+                    
 

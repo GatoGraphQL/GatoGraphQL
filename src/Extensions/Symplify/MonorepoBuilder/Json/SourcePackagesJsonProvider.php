@@ -7,7 +7,7 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\MonorepoBuilder\ValueObject\Package;
 
-final class PackageCodePathsJsonProvider
+final class SourcePackagesJsonProvider
 {
     /**
      * @var PackageProvider
@@ -28,21 +28,19 @@ final class PackageCodePathsJsonProvider
      * already does the job.
      * @return string[]
      */
-    public function providePackageCodePaths(): array
+    public function provideSourcePackages(): array
     {
-        $packageCodePaths = [];
         $packagesWithCode = array_values(array_filter(
             $this->packageProvider->provide(),
             function (Package $package): bool {
                 return $package->hasTests();
             }
         ));
-        foreach ($packagesWithCode as $package) {
-            $packageRelativePath = $package->getRelativePath();
-            $packageCodePaths[] = $packageRelativePath . DIRECTORY_SEPARATOR . 'src';
-            $packageCodePaths[] = $packageRelativePath . DIRECTORY_SEPARATOR . 'tests';
-        }
-
-        return $packageCodePaths;
+        return array_map(
+            function (Package $package): string {
+                return $package->getRelativePath();
+            },
+            $packagesWithCode
+        );
     }
 }

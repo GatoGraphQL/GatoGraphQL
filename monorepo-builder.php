@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageCodePathsJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SourcePackagesJsonCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageCodePathsJsonProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SourcePackagesJsonProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
@@ -79,6 +81,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set(PackageEntriesJsonCommand::class)
         ->set(PackageCodePathsJsonProvider::class)
         ->set(PackageCodePathsJsonCommand::class)
+        ->set(SourcePackagesJsonProvider::class)
+        ->set(SourcePackagesJsonCommand::class)
         ->set(SymlinkLocalPackageCommand::class);
 
     /** release workers - in order to execute */
