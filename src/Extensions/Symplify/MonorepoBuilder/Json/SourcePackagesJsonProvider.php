@@ -7,7 +7,7 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\MonorepoBuilder\ValueObject\Package;
 
-final class SourcePackageEntriesJsonProvider
+final class SourcePackagesJsonProvider
 {
     /**
      * @var PackageProvider
@@ -28,7 +28,7 @@ final class SourcePackageEntriesJsonProvider
      * already does the job.
      * @return string[]
      */
-    public function provideSourcePackageEntries(): array
+    public function provideSourcePackages(): array
     {
         $packagesWithCode = array_values(array_filter(
             $this->packageProvider->provide(),

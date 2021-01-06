@@ -24,7 +24,7 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=packages::$(vendor/bin/monorepo-builder source-package-entries-json)"
+                    echo "::set-output name=packages::$(vendor/bin/monorepo-builder source-packages-json)"
 
         outputs:
             packages: ${{ steps.output_data.outputs.packages }}

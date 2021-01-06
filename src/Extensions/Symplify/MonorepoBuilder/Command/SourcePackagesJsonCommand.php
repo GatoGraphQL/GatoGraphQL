@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 
 use Nette\Utils\Json;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SourcePackageEntriesJsonProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SourcePackagesJsonProvider;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
 
-final class SourcePackageEntriesJsonCommand extends AbstractSymplifyCommand
+final class SourcePackagesJsonCommand extends AbstractSymplifyCommand
 {
     /**
-     * @var SourcePackageEntriesJsonProvider
+     * @var SourcePackagesJsonProvider
      */
-    private $sourcePackageEntriesJsonProvider;
+    private $sourcePackagesJsonProvider;
 
-    public function __construct(SourcePackageEntriesJsonProvider $sourcePackageEntriesJsonProvider)
+    public function __construct(SourcePackagesJsonProvider $sourcePackagesJsonProvider)
     {
-        $this->sourcePackageEntriesJsonProvider = $sourcePackageEntriesJsonProvider;
+        $this->sourcePackagesJsonProvider = $sourcePackagesJsonProvider;
 
         parent::__construct();
     }
@@ -32,7 +32,7 @@ final class SourcePackageEntriesJsonCommand extends AbstractSymplifyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $sourcePackageEntries = $this->sourcePackageEntriesJsonProvider->provideSourcePackageEntries();
+        $sourcePackageEntries = $this->sourcePackagesJsonProvider->provideSourcePackages();
 
         // must be without spaces, otherwise it breaks GitHub Actions json
         $json = Json::encode($sourcePackageEntries);
