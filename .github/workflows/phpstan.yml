@@ -51,6 +51,6 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run PHPStan
-                run: ./.github/workflows/scripts/phpstan.sh $PHPSTAN_PACKAGES
+                run: ./.github/workflows/scripts/phpstan.sh "$PHPSTAN_PACKAGES"
                     
 
