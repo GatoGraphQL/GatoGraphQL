@@ -30,7 +30,6 @@ jobs:
             packages: ${{ steps.output_data.outputs.packages }}
 
     main:
-        if: ${{ fromJson(needs.provide_data.outputs.packages) }}
         needs: provide_data
         name: Execute PHP Code Sniffer
         runs-on: ubuntu-latest
