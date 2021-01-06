@@ -48,6 +48,6 @@ do
     fi
 done
 if [ ${#failed_packages[@]} -gt 0 ]; then
-    package_list=$(join_by "\n" ${failed_packages[@]})
-    fail "❌ PHPStan failed on packages:\n${package_list}"
+    package_list=$(join_by " " ${failed_packages[@]})
+    fail "❌ PHPStan failed on packages => ${package_list}"
 fi
