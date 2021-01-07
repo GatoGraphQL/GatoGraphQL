@@ -29,6 +29,24 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/wordpress/wordpress',
     ]);
 
+    // files to skip downgrading
+    $parameters->set(Option::SKIP, [
+        // All the "migrate" folders
+        __DIR__ . '/vendor/getpop/migrate-*',
+        __DIR__ . '/vendor/pop-schema/migrate-*',
+        __DIR__ . '/vendor/pop-sites-wassup/migrate-*',
+        // For local dependencies, skip the tests
+        __DIR__ . '/vendor/getpop/*/tests',
+        __DIR__ . '/vendor/pop-schema/*/tests',
+        __DIR__ . '/vendor/graphql-by-pop/*/tests',
+        // Individual classes that can be excluded because
+        // they are not used by Rector, and they use classes
+        // loaded with "require-dev" so it'd throw an error
+        __DIR__ . '/../../vendor/symfony/cache/DoctrineProvider.php',
+        __DIR__ . '/../../vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+        __DIR__ . '/../../vendor/symfony/string/Slugger/AsciiSlugger.php',
+    ]);
+
     /**
      * This constant is defined in wp-load.php, but never loaded.
      * It is read when resolving class WP_Upgrader in Plugin.php.
