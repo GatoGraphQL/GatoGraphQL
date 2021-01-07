@@ -7,7 +7,7 @@ on:
 
 jobs:
     provide_data:
-        name: Obtain list of package paths
+        name: Provide list of package paths
         runs-on: ubuntu-latest
         steps:
             -
