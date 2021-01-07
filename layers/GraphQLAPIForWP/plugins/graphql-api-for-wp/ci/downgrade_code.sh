@@ -80,5 +80,4 @@ composer install --no-progress --ansi
 # Execute the downgrade
 packages=$(join_by " " ${packages_to_downgrade[@]})
 paths=$(join_by " " ${package_paths[@]})
-note "Downgrading packages '${packages}' on paths '${paths}'"
 vendor/bin/rector process $paths --config=$rector_config --ansi
