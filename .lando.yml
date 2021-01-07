@@ -7,7 +7,7 @@ config:
   database: mariadb
   xdebug: false
   config:
-    php: lando/config/php.ini
+    php: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/config/php.ini
 services:
   database:
     portforward: true
